@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-StatsManager'>/**@class android.app.StatsManager
+</span>@extends java.lang.Object
+
+ API for statsd clients to send configurations and retrieve data.
+
+ @hide
+*/
+var StatsManager = {
+
+<span id='android-app-StatsManager-property-EXTRA_STATS_CONFIG_UID'>/** Long extra of uid that added the relevant stats config.
+</span>*/
+EXTRA_STATS_CONFIG_UID : &quot;android.app.extra.STATS_CONFIG_UID&quot;,
+<span id='android-app-StatsManager-property-EXTRA_STATS_CONFIG_KEY'>/** Long extra of the relevant stats config's configKey.
+</span>*/
+EXTRA_STATS_CONFIG_KEY : &quot;android.app.extra.STATS_CONFIG_KEY&quot;,
+<span id='android-app-StatsManager-property-EXTRA_STATS_SUBSCRIPTION_ID'>/** Long extra of the relevant statsd_config.proto's Subscription.id.
+</span>*/
+EXTRA_STATS_SUBSCRIPTION_ID : &quot;android.app.extra.STATS_SUBSCRIPTION_ID&quot;,
+<span id='android-app-StatsManager-property-EXTRA_STATS_SUBSCRIPTION_RULE_ID'>/** Long extra of the relevant statsd_config.proto's Subscription.rule_id.
+</span>*/
+EXTRA_STATS_SUBSCRIPTION_RULE_ID : &quot;android.app.extra.STATS_SUBSCRIPTION_RULE_ID&quot;,
+<span id='android-app-StatsManager-property-EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES'>/**   List&lt;String&gt; of the relevant statsd_config.proto's BroadcastSubscriberDetails.cookie.
+</span>   Obtain using {@link android.content.Intent#getStringArrayListExtra(String)}.
+*/
+EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES : &quot;android.app.extra.STATS_BROADCAST_SUBSCRIBER_COOKIES&quot;,
+<span id='android-app-StatsManager-property-EXTRA_STATS_DIMENSIONS_VALUE'>/** Extra of a {@link android.os.StatsDimensionsValue} representing sliced dimension value
+</span> information.
+*/
+EXTRA_STATS_DIMENSIONS_VALUE : &quot;android.app.extra.STATS_DIMENSIONS_VALUE&quot;,
+<span id='android-app-StatsManager-property-EXTRA_STATS_ACTIVE_CONFIG_KEYS'>/** Long array extra of the active configs for the uid that added those configs.
+</span>*/
+EXTRA_STATS_ACTIVE_CONFIG_KEYS : &quot;android.app.extra.STATS_ACTIVE_CONFIG_KEYS&quot;,
+<span id='android-app-StatsManager-property-ACTION_STATSD_STARTED'>/** Broadcast Action: Statsd has started.
+</span> Configurations and PendingIntents can now be sent to it.
+*/
+ACTION_STATSD_STARTED : &quot;android.app.action.STATSD_STARTED&quot;,
+<span id='android-app-StatsManager-method-addConfig'>/**Adds the given configuration and associates it with the given configKey. If a config with the
+</span> given configKey already exists for the caller's uid, it is replaced with the new one.
+@param {Number} configKey An arbitrary integer that allows clients to track the configuration.
+@param {Object {byte[]}} config    Wire-encoded StatsdConfig proto that specifies metrics (and all
+                  dependencies eg, conditions and matchers).
+@throws StatsUnavailableException if unsuccessful due to failing to connect to stats service
+@throws IllegalArgumentException if config is not a wire-encoded StatsdConfig proto
+*/
+addConfig : function(  ) {},
+
+<span id='android-app-StatsManager-method-addConfiguration'>/**
+</span>@deprecated Use {@link #addConfig(long, byte[])}
+*/
+addConfiguration : function(  ) {},
+
+<span id='android-app-StatsManager-method-removeConfig'>/**Remove a configuration from logging.
+</span>@param {Number} configKey Configuration key to remove.
+@throws StatsUnavailableException if unsuccessful due to failing to connect to stats service
+*/
+removeConfig : function(  ) {},
+
+<span id='android-app-StatsManager-method-removeConfiguration'>/**
+</span>@deprecated Use {@link #removeConfig(long)}
+*/
+removeConfiguration : function(  ) {},
+
+<span id='android-app-StatsManager-method-setBroadcastSubscriber'>/**Set the PendingIntent to be used when broadcasting subscriber information to the given
+</span> subscriberId within the given config.
+ &lt;p&gt;
+ Suppose that the calling uid has added a config with key configKey, and that in this config
+ it is specified that when a particular anomaly is detected, a broadcast should be sent to
+ a BroadcastSubscriber with id subscriberId. This function links the given pendingIntent with
+ that subscriberId (for that config), so that this pendingIntent is used to send the broadcast
+ when the anomaly is detected.
+ &lt;p&gt;
+ When statsd sends the broadcast, the PendingIntent will used to send an intent with
+ information of
+ {@link #EXTRA_STATS_CONFIG_UID},
+ {@link #EXTRA_STATS_CONFIG_KEY},
+ {@link #EXTRA_STATS_SUBSCRIPTION_ID},
+ {@link #EXTRA_STATS_SUBSCRIPTION_RULE_ID},
+ {@link #EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES}, and
+ {@link #EXTRA_STATS_DIMENSIONS_VALUE}.
+ &lt;p&gt;
+ This function can only be called by the owner (uid) of the config. It must be called each
+ time statsd starts. The config must have been added first (via {@link #addConfig}).
+@param {Object {PendingIntent}} pendingIntent the PendingIntent to use when broadcasting info to the subscriber
+                      associated with the given subscriberId. May be null, in which case
+                      it undoes any previous setting of this subscriberId.
+@param {Number} configKey     The integer naming the config to which this subscriber is attached.
+@param {Number} subscriberId  ID of the subscriber, as used in the config.
+@throws StatsUnavailableException if unsuccessful due to failing to connect to stats service
+*/
+setBroadcastSubscriber : function(  ) {},
+
+<span id='android-app-StatsManager-method-setBroadcastSubscriber'>/**
+</span>@deprecated Use {@link #setBroadcastSubscriber(PendingIntent, long, long)}
+*/
+setBroadcastSubscriber : function(  ) {},
+
+<span id='android-app-StatsManager-method-setFetchReportsOperation'>/**Registers the operation that is called to retrieve the metrics data. This must be called
+</span> each time statsd starts. The config must have been added first (via {@link #addConfig},
+ although addConfig could have been called on a previous boot). This operation allows
+ statsd to send metrics data whenever statsd determines that the metrics in memory are
+ approaching the memory limits. The fetch operation should call {@link #getReports} to fetch
+ the data, which also deletes the retrieved metrics from statsd's memory.
+@param {Object {PendingIntent}} pendingIntent the PendingIntent to use when broadcasting info to the subscriber
+                      associated with the given subscriberId. May be null, in which case
+                      it removes any associated pending intent with this configKey.
+@param {Number} configKey     The integer naming the config to which this operation is attached.
+@throws StatsUnavailableException if unsuccessful due to failing to connect to stats service
+*/
+setFetchReportsOperation : function(  ) {},
+
+<span id='android-app-StatsManager-method-setActiveConfigsChangedOperation'>/**Registers the operation that is called whenever there is a change in which configs are
+</span> active. This must be called each time statsd starts. This operation allows
+ statsd to inform clients that they should pull data of the configs that are currently
+ active. The activeConfigsChangedOperation should set periodic alarms to pull data of configs
+ that are active and stop pulling data of configs that are no longer active.
+@param {Object {PendingIntent}} pendingIntent the PendingIntent to use when broadcasting info to the subscriber
+                      associated with the given subscriberId. May be null, in which case
+                      it removes any associated pending intent for this client.
+@return {Number} A list of configs that are currently active for this client. If the pendingIntent is
+         null, this will be an empty list.
+@throws StatsUnavailableException if unsuccessful due to failing to connect to stats service
+*/
+setActiveConfigsChangedOperation : function(  ) {},
+
+<span id='android-app-StatsManager-method-setDataFetchOperation'>/**
+</span>@deprecated Use {@link #setFetchReportsOperation(PendingIntent, long)}
+*/
+setDataFetchOperation : function(  ) {},
+
+<span id='android-app-StatsManager-method-getReports'>/**Request the data collected for the given configKey.
+</span> This getter is destructive - it also clears the retrieved metrics from statsd's memory.
+@param {Number} configKey Configuration key to retrieve data from.
+@return {Number} Serialized ConfigMetricsReportList proto.
+@throws StatsUnavailableException if unsuccessful due to failing to connect to stats service
+*/
+getReports : function(  ) {},
+
+<span id='android-app-StatsManager-method-getData'>/**
+</span>@deprecated Use {@link #getReports(long)}
+*/
+getData : function(  ) {},
+
+<span id='android-app-StatsManager-method-getStatsMetadata'>/**Clients can request metadata for statsd. Will contain stats across all configurations but not
+</span> the actual metrics themselves (metrics must be collected via {@link #getReports}(long).
+ This getter is not destructive and will not reset any metrics/counters.
+@return {Number} Serialized StatsdStatsReport proto.
+@throws StatsUnavailableException if unsuccessful due to failing to connect to stats service
+*/
+getStatsMetadata : function(  ) {},
+
+<span id='android-app-StatsManager-method-getMetadata'>/**
+</span>@deprecated Use {@link #getStatsMetadata()}
+*/
+getMetadata : function(  ) {},
+
+<span id='android-app-StatsManager-method-getRegisteredExperimentIds'>/**Returns the experiments IDs registered with statsd, or an empty array if there aren't any.
+</span>@throws StatsUnavailableException if unsuccessful due to failing to connect to stats service
+*/
+getRegisteredExperimentIds : function(  ) {},
+
+<span id='android-app-StatsManager-method-setPullerCallback'>/**Registers a callback for an atom when that atom is to be pulled. The stats service will
+</span> invoke pullData in the callback when the stats service determines that this atom needs to be
+ pulled. Currently, this only works for atoms with tags above 100,000 that do not have a uid.
+@param {Number} atomTag   The tag of the atom for this puller callback. Must be at least 100000.
+@param {Object {IStatsPullerCallback}} callback  The callback to be invoked when the stats service pulls the atom.
+@throws StatsUnavailableException if unsuccessful due to failing to connect to stats service
+@hide 
+*/
+setPullerCallback : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

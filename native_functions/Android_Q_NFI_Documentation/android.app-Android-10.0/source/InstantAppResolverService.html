@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-InstantAppResolverService'>/**@class android.app.InstantAppResolverService
+</span>@extends android.app.Service
+
+ Base class for implementing the resolver service.
+ @hide
+*/
+var InstantAppResolverService = {
+
+<span id='android-app-InstantAppResolverService-property-EXTRA_RESOLVE_INFO'>/**@hide */
+</span>EXTRA_RESOLVE_INFO : &quot;android.app.extra.RESOLVE_INFO&quot;,
+<span id='android-app-InstantAppResolverService-property-EXTRA_SEQUENCE'>/**@hide */
+</span>EXTRA_SEQUENCE : &quot;android.app.extra.SEQUENCE&quot;,
+<span id='android-app-InstantAppResolverService-method-onGetInstantAppResolveInfo'>/**Called to retrieve resolve info for instant applications immediately.
+</span>@param {Object {int[]}} digestPrefix The hash prefix of the instant app's domain.
+@deprecated Should implement {@link #onGetInstantAppResolveInfo(Intent, int[], UserHandle,
+             String, InstantAppResolutionCallback)}.
+*/
+onGetInstantAppResolveInfo : function(  ) {},
+
+<span id='android-app-InstantAppResolverService-method-onGetInstantAppIntentFilter'>/**Called to retrieve intent filters for instant applications from potentially expensive
+</span> sources.
+@param {Object {int[]}} digestPrefix The hash prefix of the instant app's domain.
+@deprecated Should implement {@link #onGetInstantAppIntentFilter(Intent, int[], UserHandle,
+             String, InstantAppResolutionCallback)}.
+*/
+onGetInstantAppIntentFilter : function(  ) {},
+
+<span id='android-app-InstantAppResolverService-method-onGetInstantAppResolveInfo'>/**Called to retrieve resolve info for instant applications immediately. The response will be
+</span> ignored if not provided within a reasonable time. {@link InstantAppResolveInfo}s provided
+ in response to this method may be partial to request a second phase of resolution which will
+ result in a subsequent call to
+ {@link #onGetInstantAppIntentFilter(Intent, int[], String, android.app.InstantAppResolverService.InstantAppResolutionCallback)}
+@param {Object {Intent}} sanitizedIntent The sanitized {@link Intent} used for resolution. A sanitized Intent
+                        is an intent with potential PII removed from the original intent.
+                        Fields removed include extras and the host + path of the data, if
+                        defined.
+@param {Object {int[]}} hostDigestPrefix The hash prefix of the instant app's domain.
+@param {String} token A unique identifier that will be provided in calls to
+              {@link #onGetInstantAppIntentFilter(Intent, int[], String,
+              InstantAppResolutionCallback)}
+              and provided to the installer via {@link Intent#EXTRA_INSTANT_APP_TOKEN} to
+              tie a single launch together.
+@param {Object {InstantAppResolverService.InstantAppResolutionCallback}} callback The {@link InstantAppResolutionCallback} to provide results to.
+@see InstantAppResolveInfo
+@deprecated Should implement {@link #onGetInstantAppResolveInfo(Intent, int[], UserHandle,
+             String, InstantAppResolutionCallback)}.
+*/
+onGetInstantAppResolveInfo : function(  ) {},
+
+<span id='android-app-InstantAppResolverService-method-onGetInstantAppIntentFilter'>/**Called to retrieve intent filters for potentially matching instant applications. Unlike
+</span> {@link #onGetInstantAppResolveInfo(Intent, int[], String, android.app.InstantAppResolverService.InstantAppResolutionCallback)},
+ the response may take as long as necessary to respond. All {@link InstantAppResolveInfo}s
+ provided in response to this method must be completely populated.
+@param {Object {Intent}} sanitizedIntent The sanitized {@link Intent} used for resolution.
+@param {Object {int[]}} hostDigestPrefix The hash prefix of the instant app's domain or null if no host is
+                         defined.
+@param {String} token A unique identifier that was provided in
+              {@link #onGetInstantAppResolveInfo(Intent, int[], String,
+              InstantAppResolutionCallback)}
+              and provided to the currently visible installer via
+              {@link Intent#EXTRA_INSTANT_APP_TOKEN}.
+@param {Object {InstantAppResolverService.InstantAppResolutionCallback}} callback The {@link InstantAppResolutionCallback} to provide results to.
+@deprecated Should implement {@link #onGetInstantAppIntentFilter(Intent, int[], UserHandle,
+             String, InstantAppResolutionCallback)}.
+*/
+onGetInstantAppIntentFilter : function(  ) {},
+
+<span id='android-app-InstantAppResolverService-method-onGetInstantAppResolveInfo'>/**Called to retrieve resolve info for instant applications immediately. The response will be
+</span> ignored if not provided within a reasonable time. {@link InstantAppResolveInfo}s provided
+ in response to this method may be partial to request a second phase of resolution which will
+ result in a subsequent call to {@link #onGetInstantAppIntentFilter(Intent, int[], UserHandle,
+ String, android.app.InstantAppResolverService.InstantAppResolutionCallback)}
+@param {Object {Intent}} sanitizedIntent The sanitized {@link Intent} used for resolution. A sanitized Intent
+                        is an intent with potential PII removed from the original intent.
+                        Fields removed include extras and the host + path of the data, if
+                        defined.
+@param {Object {int[]}} hostDigestPrefix The hash prefix of the instant app's domain.
+@param {Object {UserHandle}} userHandle The user for which to resolve the instant app.
+@param {String} token A unique identifier that will be provided in calls to {@link
+              #onGetInstantAppIntentFilter(Intent, int[], UserHandle, String,
+              InstantAppResolutionCallback)} and provided to the installer via {@link
+              Intent#EXTRA_INSTANT_APP_TOKEN} to tie a single launch together.
+@param {Object {InstantAppResolverService.InstantAppResolutionCallback}} callback The {@link InstantAppResolutionCallback} to provide results to.
+@see InstantAppResolveInfo
+*/
+onGetInstantAppResolveInfo : function(  ) {},
+
+<span id='android-app-InstantAppResolverService-method-onGetInstantAppIntentFilter'>/**Called to retrieve intent filters for potentially matching instant applications. Unlike
+</span> {@link #onGetInstantAppResolveInfo(Intent, int[], UserHandle, String,
+ android.app.InstantAppResolverService.InstantAppResolutionCallback)}, the response may take as long as necessary to respond. All
+ {@link InstantAppResolveInfo}s provided in response to this method must be completely
+ populated.
+@param {Object {Intent}} sanitizedIntent The sanitized {@link Intent} used for resolution.
+@param {Object {int[]}} hostDigestPrefix The hash prefix of the instant app's domain or null if no host is
+                         defined.
+@param {Object {UserHandle}} userHandle The user for which to resolve the instant app.
+@param {String} token A unique identifier that was provided in {@link #onGetInstantAppResolveInfo(
+              Intent, int[], UserHandle, String, InstantAppResolutionCallback)} and provided
+              to the currently visible installer via {@link Intent#EXTRA_INSTANT_APP_TOKEN}.
+@param {Object {InstantAppResolverService.InstantAppResolutionCallback}} callback The {@link InstantAppResolutionCallback} to provide results to.
+*/
+onGetInstantAppIntentFilter : function(  ) {},
+
+<span id='android-app-InstantAppResolverService-method-attachBaseContext'>/**
+</span>*/
+attachBaseContext : function(  ) {},
+
+<span id='android-app-InstantAppResolverService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

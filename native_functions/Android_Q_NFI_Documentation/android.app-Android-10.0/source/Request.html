@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-DownloadManager-Request'>/**@class android.app.DownloadManager.Request
+</span>@extends java.lang.Object
+
+ This class contains all the information necessary to request a new download. The URI is the
+ only required parameter.
+
+ Note that the default download destination is a shared volume where the system might delete
+ your file if it needs to reclaim space for system use. If this is a problem, use a location
+ on external storage (see {@link #setDestinationUri}(Uri).
+*/
+var Request = {
+
+<span id='android-app-DownloadManager-Request-property-NETWORK_MOBILE'>/** Bit flag for {@link #setAllowedNetworkTypes} corresponding to
+</span> {@link ConnectivityManager#TYPE_MOBILE}.
+*/
+NETWORK_MOBILE : &quot;1&quot;,
+<span id='android-app-DownloadManager-Request-property-NETWORK_WIFI'>/** Bit flag for {@link #setAllowedNetworkTypes} corresponding to
+</span> {@link ConnectivityManager#TYPE_WIFI}.
+*/
+NETWORK_WIFI : &quot;2&quot;,
+<span id='android-app-DownloadManager-Request-property-NETWORK_BLUETOOTH'>/** Bit flag for {@link #setAllowedNetworkTypes} corresponding to
+</span> {@link ConnectivityManager#TYPE_BLUETOOTH}.
+ @hide
+*/
+NETWORK_BLUETOOTH : &quot;4&quot;,
+<span id='android-app-DownloadManager-Request-property-VISIBILITY_VISIBLE'>/** This download is visible but only shows in the notifications
+</span> while it's in progress.
+*/
+VISIBILITY_VISIBLE : &quot;0&quot;,
+<span id='android-app-DownloadManager-Request-property-VISIBILITY_VISIBLE_NOTIFY_COMPLETED'>/** This download is visible and shows in the notifications while
+</span> in progress and after completion.
+*/
+VISIBILITY_VISIBLE_NOTIFY_COMPLETED : &quot;1&quot;,
+<span id='android-app-DownloadManager-Request-property-VISIBILITY_HIDDEN'>/** This download doesn't show in the UI or in the notifications.
+</span>*/
+VISIBILITY_HIDDEN : &quot;2&quot;,
+<span id='android-app-DownloadManager-Request-property-VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION'>/** This download shows in the notifications after completion ONLY.
+</span> It is usuable only with
+ {@link android.app.DownloadManager#addCompletedDownload(String, String,
+ boolean, String, String, long, boolean)}.
+*/
+VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION : &quot;3&quot;,
+<span id='android-app-DownloadManager-Request-method-setDestinationUri'>/**Set the local destination for the downloaded file. Must be a file URI to a path on
+</span> external storage, and the calling application must have the WRITE_EXTERNAL_STORAGE
+ permission.
+ &lt;p&gt;
+ The downloaded file is not scanned by MediaScanner.
+ But it can be made scannable by calling {@link #allowScanningByMediaScanner}().
+ &lt;p&gt;
+ By default, downloads are saved to a generated filename in the shared download cache and
+ may be deleted by the system at any time to reclaim space.
+
+ &lt;p&gt; For applications targeting {@link android.os.Build.VERSION_CODES#Q} or above,
+ {@link android.Manifest.permission#WRITE_EXTERNAL_STORAGE WRITE EXTERNAL_STORAGE}
+ permission is not needed and the {@code uri} must refer to a path within the
+ directories owned by the application (e.g. {@link Context#getExternalFilesDir(String)})
+ or a path within the top-level Downloads directory (as returned by
+ {@link Environment#getExternalStoragePublicDirectory(String)} with
+ {@link Environment#DIRECTORY_DOWNLOADS}).
+@param {Object {Uri}} uri a file {@link Uri} indicating the destination for the downloaded file.
+@return {Object {android.app.DownloadManager.Request}} this object
+*/
+setDestinationUri : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setDestinationInExternalFilesDir'>/**Set the local destination for the downloaded file to a path within
+</span> the application's external files directory (as returned by
+ {@link Context#getExternalFilesDir(String)}.
+ &lt;p&gt;
+ The downloaded file is not scanned by MediaScanner. But it can be
+ made scannable by calling {@link #allowScanningByMediaScanner}().
+@param {Object {Context}} context the {@link Context} to use in determining the external
+            files directory
+@param {String} dirType the directory type to pass to
+            {@link Context#getExternalFilesDir(String)}
+@param {String} subPath the path within the external directory, including the
+            destination filename
+@return {Object {android.app.DownloadManager.Request}} this object
+@throws IllegalStateException If the external storage directory
+             cannot be found or created.
+*/
+setDestinationInExternalFilesDir : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setDestinationInExternalPublicDir'>/**Set the local destination for the downloaded file to a path within
+</span> the public external storage directory (as returned by
+ {@link Environment#getExternalStoragePublicDirectory(String)}).
+ &lt;p&gt;
+ The downloaded file is not scanned by MediaScanner. But it can be
+ made scannable by calling {@link #allowScanningByMediaScanner}().
+
+ &lt;p&gt; For applications targeting {@link android.os.Build.VERSION_CODES#Q} or above,
+ {@link android.Manifest.permission#WRITE_EXTERNAL_STORAGE WRITE_EXTERNAL_STORAGE}
+ permission is not needed and the {@code dirType} must be one of the known public
+ directories like {@link Environment#DIRECTORY_DOWNLOADS},
+ {@link Environment#DIRECTORY_PICTURES}, {@link Environment#DIRECTORY_MOVIES}, etc.
+@param {String} dirType the directory type to pass to {@link Environment#getExternalStoragePublicDirectory(String)}
+@param {String} subPath the path within the external directory, including the
+            destination filename
+@return {Object {android.app.DownloadManager.Request}} this object
+@throws IllegalStateException If the external storage directory
+             cannot be found or created.
+*/
+setDestinationInExternalPublicDir : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-allowScanningByMediaScanner'>/**If the file to be downloaded is to be scanned by MediaScanner, this method
+</span> should be called before {@link android.app.DownloadManager#enqueue(Request)} is called.
+@deprecated Starting in Q, this value is ignored. Files downloaded to
+ directories owned by applications (e.g. {@link Context#getExternalFilesDir(String)})
+ will not be scanned by MediaScanner and the rest will be scanned.
+*/
+allowScanningByMediaScanner : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-addRequestHeader'>/**Add an HTTP header to be included with the download request.  The header will be added to
+</span> the end of the list.
+@param {String} header HTTP header name
+@param {String} value header value
+@return {Object {android.app.DownloadManager.Request}} this object
+@see &lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2&quot;&gt;HTTP/1.1
+      Message Headers&lt;/a&gt;
+*/
+addRequestHeader : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setTitle'>/**Set the title of this download, to be displayed in notifications (if enabled).  If no
+</span> title is given, a default one will be assigned based on the download filename, once the
+ download starts.
+@return {Object {android.app.DownloadManager.Request}} this object
+*/
+setTitle : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setDescription'>/**Set a description of this download, to be displayed in notifications (if enabled)
+</span>@return {Object {android.app.DownloadManager.Request}} this object
+*/
+setDescription : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setMimeType'>/**Set the MIME content type of this download.  This will override the content type declared
+</span> in the server's response.
+@see &lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.7&quot;&gt;HTTP/1.1
+      Media Types&lt;/a&gt;
+@return {Object {android.app.DownloadManager.Request}} this object
+*/
+setMimeType : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setShowRunningNotification'>/**Control whether a system notification is posted by the download manager while this
+</span> download is running. If enabled, the download manager posts notifications about downloads
+ through the system {@link android.app.NotificationManager}. By default, a notification is
+ shown.
+
+ If set to false, this requires the permission
+ android.permission.DOWNLOAD_WITHOUT_NOTIFICATION.
+@param {Boolean} show whether the download manager should show a notification for this download.
+@return {Object {android.app.DownloadManager.Request}} this object
+@deprecated use {@link #setNotificationVisibility(int)}
+*/
+setShowRunningNotification : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setNotificationVisibility'>/**Control whether a system notification is posted by the download manager while this
+</span> download is running or when it is completed.
+ If enabled, the download manager posts notifications about downloads
+ through the system {@link android.app.NotificationManager}.
+ By default, a notification is shown only when the download is in progress.
+&lt;p&gt;
+ It can take the following values: {@link #VISIBILITY_HIDDEN},
+ {@link #VISIBILITY_VISIBLE},
+ {@link #VISIBILITY_VISIBLE_NOTIFY_COMPLETED}.
+&lt;p&gt;
+ If set to {@link #VISIBILITY_HIDDEN}, this requires the permission
+ android.permission.DOWNLOAD_WITHOUT_NOTIFICATION.
+@param {Number} visibility the visibility setting value
+@return {Object {android.app.DownloadManager.Request}} this object
+*/
+setNotificationVisibility : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setAllowedNetworkTypes'>/**Restrict the types of networks over which this download may proceed.
+</span> By default, all network types are allowed. Consider using
+ {@link #setAllowedOverMetered}(boolean) instead, since it's more
+ flexible.
+ &lt;p&gt;
+ As of {@link android.os.Build.VERSION_CODES#N}, setting only the
+ {@link #NETWORK_WIFI} flag here is equivalent to calling
+ {@link #setAllowedOverMetered}(boolean) with {@code false}.
+@param {Number} flags any combination of the NETWORK_* bit flags.
+@return {Object {android.app.DownloadManager.Request}} this object
+*/
+setAllowedNetworkTypes : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setAllowedOverRoaming'>/**Set whether this download may proceed over a roaming connection.  By default, roaming is
+</span> allowed.
+@param {Boolean} allowed whether to allow a roaming connection to be used
+@return {Object {android.app.DownloadManager.Request}} this object
+*/
+setAllowedOverRoaming : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setAllowedOverMetered'>/**Set whether this download may proceed over a metered network
+</span> connection. By default, metered networks are allowed.
+@see ConnectivityManager#isActiveNetworkMetered()
+*/
+setAllowedOverMetered : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setRequiresCharging'>/**Specify that to run this download, the device needs to be plugged in.
+</span> This defaults to false.
+@param {Boolean} requiresCharging Whether or not the device is plugged in.
+@see android.app.job.JobInfo.Builder#setRequiresCharging(boolean)
+*/
+setRequiresCharging : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setRequiresDeviceIdle'>/**Specify that to run, the download needs the device to be in idle
+</span> mode. This defaults to false.
+ &lt;p&gt;
+ Idle mode is a loose definition provided by the system, which means
+ that the device is not in use, and has not been in use for some time.
+@param {Boolean} requiresDeviceIdle Whether or not the device need be within an
+            idle maintenance window.
+@see android.app.job.JobInfo.Builder#setRequiresDeviceIdle(boolean)
+*/
+setRequiresDeviceIdle : function(  ) {},
+
+<span id='android-app-DownloadManager-Request-method-setVisibleInDownloadsUi'>/**Set whether this download should be displayed in the system's Downloads UI. True by
+</span> default.
+@param {Boolean} isVisible whether to display this download in the Downloads UI
+@return {Object {android.app.DownloadManager.Request}} this object
+@deprecated Starting in Q, this value is ignored. Only files downloaded to
+ public Downloads directory (as returned by
+ {@link Environment#getExternalStoragePublicDirectory(String)} with
+ {@link Environment#DIRECTORY_DOWNLOADS}) will be visible in system's Downloads UI
+ and the rest will not be visible.
+ (e.g. {@link Context#getExternalFilesDir(String)}) will not be visible.
+*/
+setVisibleInDownloadsUi : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

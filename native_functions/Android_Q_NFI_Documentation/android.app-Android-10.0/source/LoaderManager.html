@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-LoaderManager'>/**@class android.app.LoaderManager
+</span>@extends java.lang.Object
+
+ Interface associated with an {@link android.app.Activity} or {@link android.app.Fragment} for managing
+ one or more {@link android.content.Loader} instances associated with it.  This
+ helps an application manage longer-running operations in conjunction with the
+ Activity or Fragment lifecycle; the most common use of this is with a
+ {@link android.content.CursorLoader}, however applications are free to write
+ their own loaders for loading other types of data.
+
+ While the LoaderManager API was introduced in
+ {@link android.os.Build.VERSION_CODES#HONEYCOMB}, a version of the API
+ at is also available for use on older platforms through
+ {@link android.support.v4.app.FragmentActivity}.  See the blog post
+ &lt;a href=&quot;http://android-developers.blogspot.com/2011/03/fragments-for-all.html&quot;&gt;
+ Fragments For All&lt;/a&gt; for more details.
+
+ &lt;p&gt;As an example, here is the full implementation of a {@link android.app.Fragment}
+ that displays a {@link android.widget.ListView} containing the results of
+ a query against the contacts content provider.  It uses a
+ {@link android.content.CursorLoader} to manage the query on the provider.
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/LoaderCursor.java
+      fragment_cursor}
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using loaders, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/fundamentals/loaders.html&quot;&gt;Loaders&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ @deprecated Use the &lt;a href=&quot;{@docRoot}tools/extras/support-library.html&quot;&gt;Support Library&lt;/a&gt;
+      {@link android.support.v4.app.LoaderManager}
+*/
+var LoaderManager = {
+
+<span id='android-app-LoaderManager-method-initLoader'>/**Ensures a loader is initialized and active.  If the loader doesn't
+</span> already exist, one is created and (if the activity/fragment is currently
+ started) starts the loader.  Otherwise the last created
+ loader is re-used.
+
+ &lt;p&gt;In either case, the given callback is associated with the loader, and
+ will be called as the loader state changes.  If at the point of call
+ the caller is in its started state, and the requested loader
+ already exists and has generated its data, then
+ callback {@link android.app.LoaderManager.LoaderCallbacks#onLoadFinished} will
+ be called immediately (inside of this function), so you must be prepared
+ for this to happen.
+@param {Number} id A unique identifier for this loader.  Can be whatever you want.
+ Identifiers are scoped to a particular LoaderManager instance.
+@param {Object {Bundle}} args Optional arguments to supply to the loader at construction.
+ If a loader already exists (a new one does not need to be created), this
+ parameter will be ignored and the last arguments continue to be used.
+@param {Object {android.app.LoaderManager.LoaderCallbacks}} callback Interface the LoaderManager will call to report about
+ changes in the state of the loader.  Required.
+*/
+initLoader : function(  ) {},
+
+<span id='android-app-LoaderManager-method-restartLoader'>/**Starts a new or restarts an existing {@link android.content.Loader} in
+</span> this manager, registers the callbacks to it,
+ and (if the activity/fragment is currently started) starts loading it.
+ If a loader with the same id has previously been
+ started it will automatically be destroyed when the new loader completes
+ its work. The callback will be delivered before the old loader
+ is destroyed.
+@param {Number} id A unique identifier for this loader.  Can be whatever you want.
+ Identifiers are scoped to a particular LoaderManager instance.
+@param {Object {Bundle}} args Optional arguments to supply to the loader at construction.
+@param {Object {android.app.LoaderManager.LoaderCallbacks}} callback Interface the LoaderManager will call to report about
+ changes in the state of the loader.  Required.
+*/
+restartLoader : function(  ) {},
+
+<span id='android-app-LoaderManager-method-destroyLoader'>/**Stops and removes the loader with the given ID.  If this loader
+</span> had previously reported data to the client through
+ {@link android.app.LoaderManager.LoaderCallbacks#onLoadFinished(Loader, Object)}, a call
+ will be made to {@link android.app.LoaderManager.LoaderCallbacks#onLoaderReset(Loader)}.
+*/
+destroyLoader : function(  ) {},
+
+<span id='android-app-LoaderManager-method-getLoader'>/**Return the Loader with the given id or null if no matching Loader
+</span> is found.
+*/
+getLoader : function(  ) {},
+
+<span id='android-app-LoaderManager-method-dump'>/**Print the LoaderManager's state into the given stream.
+</span>@param {String} prefix Text to print at the front of each line.
+@param {Object {FileDescriptor}} fd The raw file descriptor that the dump is being sent to.
+@param {Object {PrintWriter}} writer A PrintWriter to which the dump is to be set.
+@param {Object {java.lang.String[]}} args Additional arguments to the dump request.
+*/
+dump : function(  ) {},
+
+<span id='android-app-LoaderManager-method-enableDebugLogging'>/**Control whether the framework's internal loader manager debugging
+</span> logs are turned on.  If enabled, you will see output in logcat as
+ the framework performs loader operations.
+*/
+enableDebugLogging : function(  ) {},
+
+<span id='android-app-LoaderManager-method-getFragmentHostCallback'>/**
+</span>@hide for internal testing only
+*/
+getFragmentHostCallback : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

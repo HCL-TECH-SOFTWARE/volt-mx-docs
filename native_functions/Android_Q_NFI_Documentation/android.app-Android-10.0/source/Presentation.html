@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-Presentation'>/**@class android.app.Presentation
+</span>@extends android.app.Dialog
+
+ Base class for presentations.
+ &lt;p&gt;
+ A presentation is a special kind of dialog whose purpose is to present
+ content on a secondary display.  A {@link android.app.Presentation} is associated with
+ the target {@link Display} at creation time and configures its context and
+ resource configuration according to the display's metrics.
+ &lt;/p&gt;&lt;p&gt;
+ Notably, the {@link Context} of a presentation is different from the context
+ of its containing {@link android.app.Activity}.  It is important to inflate the layout
+ of a presentation and load other resources using the presentation's own context
+ to ensure that assets of the correct size and density for the target display
+ are loaded.
+ &lt;/p&gt;&lt;p&gt;
+ A presentation is automatically canceled (see {@link android.app.Dialog#cancel()}) when
+ the display to which it is attached is removed.  An activity should take
+ care of pausing and resuming whatever content is playing within the presentation
+ whenever the activity itself is paused or resumed.
+ &lt;/p&gt;
+
+ &lt;h3&gt;Choosing a presentation display&lt;/h3&gt;
+ &lt;p&gt;
+ Before showing a {@link android.app.Presentation} it's important to choose the {@link Display}
+ on which it will appear.  Choosing a presentation display is sometimes difficult
+ because there may be multiple displays attached.  Rather than trying to guess
+ which display is best, an application should let the system choose a suitable
+ presentation display.
+ &lt;/p&gt;&lt;p&gt;
+ There are two main ways to choose a {@link Display}.
+ &lt;/p&gt;
+
+ &lt;h4&gt;Using the media router to choose a presentation display&lt;/h4&gt;
+ &lt;p&gt;
+ The easiest way to choose a presentation display is to use the
+ {@link android.media.MediaRouter MediaRouter} API.  The media router service keeps
+ track of which audio and video routes are available on the system.
+ The media router sends notifications whenever routes are selected or unselected
+ or when the preferred presentation display of a route changes.
+ So an application can simply watch for these notifications and show or dismiss
+ a presentation on the preferred presentation display automatically.
+ &lt;/p&gt;&lt;p&gt;
+ The preferred presentation display is the display that the media router recommends
+ that the application should use if it wants to show content on the secondary display.
+ Sometimes there may not be a preferred presentation display in which
+ case the application should show its content locally without using a presentation.
+ &lt;/p&gt;&lt;p&gt;
+ Here's how to use the media router to create and show a presentation on the preferred
+ presentation display using {@link android.media.MediaRouter.RouteInfo#getPresentationDisplay()}.
+ &lt;/p&gt;
+ &lt;pre&gt;
+ MediaRouter mediaRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
+ MediaRouter.RouteInfo route = mediaRouter.getSelectedRoute();
+ if (route != null) {
+     Display presentationDisplay = route.getPresentationDisplay();
+     if (presentationDisplay != null) {
+         Presentation presentation = new MyPresentation(context, presentationDisplay);
+         presentation.show();
+     }
+ }&lt;/pre&gt;
+ &lt;p&gt;
+ The following sample code from &lt;code&gt;ApiDemos&lt;/code&gt; demonstrates how to use the media
+ router to automatically switch between showing content in the main activity and showing
+ the content in a presentation when a presentation display is available.
+ &lt;/p&gt;
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/PresentationWithMediaRouterActivity.java
+      activity}
+
+ &lt;h4&gt;Using the display manager to choose a presentation display&lt;/h4&gt;
+ &lt;p&gt;
+ Another way to choose a presentation display is to use the {@link DisplayManager} API
+ directly.  The display manager service provides functions to enumerate and describe all
+ displays that are attached to the system including displays that may be used
+ for presentations.
+ &lt;/p&gt;&lt;p&gt;
+ The display manager keeps track of all displays in the system.  However, not all
+ displays are appropriate for showing presentations.  For example, if an activity
+ attempted to show a presentation on the main display it might obscure its own content
+ (it's like opening a dialog on top of your activity).
+ &lt;/p&gt;&lt;p&gt;
+ Here's how to identify suitable displays for showing presentations using
+ {@link DisplayManager#getDisplays(String)} and the
+ {@link DisplayManager#DISPLAY_CATEGORY_PRESENTATION} category.
+ &lt;/p&gt;
+ &lt;pre&gt;
+ DisplayManager displayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
+ Display[] presentationDisplays = displayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION);
+ if (presentationDisplays.length &gt; 0) {
+     // If there is more than one suitable presentation display, then we could consider
+     // giving the user a choice.  For this example, we simply choose the first display
+     // which is the one the system recommends as the preferred presentation display.
+     Display display = presentationDisplays[0];
+     Presentation presentation = new MyPresentation(context, presentationDisplay);
+     presentation.show();
+ }&lt;/pre&gt;
+ &lt;p&gt;
+ The following sample code from &lt;code&gt;ApiDemos&lt;/code&gt; demonstrates how to use the display
+ manager to enumerate displays and show content on multiple presentation displays
+ simultaneously.
+ &lt;/p&gt;
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/PresentationActivity.java
+      activity}
+
+ @see android.media.MediaRouter#ROUTE_TYPE_LIVE_VIDEO for information on about live
+ video routes and how to obtain the preferred presentation display for the
+ current media route.
+ @see DisplayManager for information on how to enumerate displays and receive
+ notifications when displays are added or removed.
+*/
+var Presentation = {
+
+<span id='android-app-Presentation-method-getDisplay'>/**Gets the {@link Display} that this presentation appears on.
+</span>@return {Object {android.view.Display}} The display.
+*/
+getDisplay : function(  ) {},
+
+<span id='android-app-Presentation-method-getResources'>/**Gets the {@link Resources} that should be used to inflate the layout of this presentation.
+</span> This resources object has been configured according to the metrics of the
+ display that the presentation appears on.
+@return {Object {android.content.res.Resources}} The presentation resources object.
+*/
+getResources : function(  ) {},
+
+<span id='android-app-Presentation-method-show'>/**Inherited from {@link android.app.Dialog#show}. Will throw
+</span> {@link android.view.WindowManager.InvalidDisplayException} if the specified secondary
+ {@link Display} can't be found.
+*/
+show : function(  ) {},
+
+<span id='android-app-Presentation-method-onDisplayRemoved'>/**Called by the system when the {@link Display} to which the presentation
+</span> is attached has been removed.
+
+ The system automatically calls {@link #cancel} to dismiss the presentation
+ after sending this event.
+@see #getDisplay
+*/
+onDisplayRemoved : function(  ) {},
+
+<span id='android-app-Presentation-method-onDisplayChanged'>/**Called by the system when the properties of the {@link Display} to which
+</span> the presentation is attached have changed.
+
+ If the display metrics have changed (for example, if the display has been
+ resized or rotated), then the system automatically calls
+ {@link #cancel} to dismiss the presentation.
+@see #getDisplay
+*/
+onDisplayChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-DownloadManager'>/**@class android.app.DownloadManager
+</span>@extends java.lang.Object
+
+ The download manager is a system service that handles long-running HTTP downloads. Clients may
+ request that a URI be downloaded to a particular destination file. The download manager will
+ conduct the download in the background, taking care of HTTP interactions and retrying downloads
+ after failures or across connectivity changes and system reboots.
+ &lt;p&gt;
+ Apps that request downloads through this API should register a broadcast receiver for
+ {@link #ACTION_NOTIFICATION_CLICKED} to appropriately handle when the user clicks on a running
+ download in a notification or from the downloads UI.
+ &lt;p&gt;
+ Note that the application must have the {@link android.Manifest.permission#INTERNET}
+ permission to use this class.
+*/
+var DownloadManager = {
+
+<span id='android-app-DownloadManager-property-COLUMN_ID'>/** An identifier for a particular download, unique across the system.  Clients use this ID to
+</span> make subsequent calls related to the download.
+*/
+COLUMN_ID : &quot;_id&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_TITLE'>/** The client-supplied title for this download.  This will be displayed in system notifications.
+</span> Defaults to the empty string.
+*/
+COLUMN_TITLE : &quot;title&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_DESCRIPTION'>/** The client-supplied description of this download.  This will be displayed in system
+</span> notifications.  Defaults to the empty string.
+*/
+COLUMN_DESCRIPTION : &quot;description&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_URI'>/** URI to be downloaded.
+</span>*/
+COLUMN_URI : &quot;uri&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_MEDIA_TYPE'>/** Internet Media Type of the downloaded file.  If no value is provided upon creation, this will
+</span> initially be null and will be filled in based on the server's response once the download has
+ started.
+
+ @see &lt;a href=&quot;http://www.ietf.org/rfc/rfc1590.txt&quot;&gt;RFC 1590, defining Media Types&lt;/a&gt;
+*/
+COLUMN_MEDIA_TYPE : &quot;media_type&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_TOTAL_SIZE_BYTES'>/** Total size of the download in bytes.  This will initially be -1 and will be filled in once
+</span> the download starts.
+*/
+COLUMN_TOTAL_SIZE_BYTES : &quot;total_size&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_LOCAL_URI'>/** Uri where downloaded file will be stored.  If a destination is supplied by client, that URI
+</span> will be used here.  Otherwise, the value will initially be null and will be filled in with a
+ generated URI once the download has started.
+*/
+COLUMN_LOCAL_URI : &quot;local_uri&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_LOCAL_FILENAME'>/** Path to the downloaded file on disk.
+</span> &lt;p&gt;
+ Note that apps may not have filesystem permissions to directly access
+ this path. Instead of trying to open this path directly, apps should use
+ {@link ContentResolver#openFileDescriptor(Uri, String)} to gain access.
+
+ @deprecated apps should transition to using
+             {@link ContentResolver#openFileDescriptor(Uri, String)}
+             instead.
+*/
+COLUMN_LOCAL_FILENAME : &quot;local_filename&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_STATUS'>/** Current status of the download, as one of the STATUS_* constants.
+</span>*/
+COLUMN_STATUS : &quot;status&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_REASON'>/** Provides more detail on the status of the download.  Its meaning depends on the value of
+</span> {@link #COLUMN_STATUS}.
+
+ When {@link #COLUMN_STATUS} is {@link #STATUS_FAILED}, this indicates the type of error that
+ occurred.  If an HTTP error occurred, this will hold the HTTP status code as defined in RFC
+ 2616.  Otherwise, it will hold one of the ERROR_* constants.
+
+ When {@link #COLUMN_STATUS} is {@link #STATUS_PAUSED}, this indicates why the download is
+ paused.  It will hold one of the PAUSED_* constants.
+
+ If {@link #COLUMN_STATUS} is neither {@link #STATUS_FAILED} nor {@link #STATUS_PAUSED}, this
+ column's value is undefined.
+
+ @see &lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1.1&quot;&gt;RFC 2616
+ status codes&lt;/a&gt;
+*/
+COLUMN_REASON : &quot;reason&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_BYTES_DOWNLOADED_SO_FAR'>/** Number of bytes download so far.
+</span>*/
+COLUMN_BYTES_DOWNLOADED_SO_FAR : &quot;bytes_so_far&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_LAST_MODIFIED_TIMESTAMP'>/** Timestamp when the download was last modified, in {@link System#currentTimeMillis
+</span> System.currentTimeMillis()} (wall clock time in UTC).
+*/
+COLUMN_LAST_MODIFIED_TIMESTAMP : &quot;last_modified_timestamp&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_MEDIAPROVIDER_URI'>/** The URI to the corresponding entry in MediaProvider for this downloaded entry. It is
+</span> used to delete the entries from MediaProvider database when it is deleted from the
+ downloaded list.
+*/
+COLUMN_MEDIAPROVIDER_URI : &quot;mediaprovider_uri&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_MEDIASTORE_URI'>/**@hide */
+</span>COLUMN_MEDIASTORE_URI : &quot;mediastore_uri&quot;,
+<span id='android-app-DownloadManager-property-COLUMN_ALLOW_WRITE'>/** @hide
+</span>*/
+COLUMN_ALLOW_WRITE : &quot;allow_write&quot;,
+<span id='android-app-DownloadManager-property-STATUS_PENDING'>/** Value of {@link #COLUMN_STATUS} when the download is waiting to start.
+</span>*/
+STATUS_PENDING : &quot;1&quot;,
+<span id='android-app-DownloadManager-property-STATUS_RUNNING'>/** Value of {@link #COLUMN_STATUS} when the download is currently running.
+</span>*/
+STATUS_RUNNING : &quot;2&quot;,
+<span id='android-app-DownloadManager-property-STATUS_PAUSED'>/** Value of {@link #COLUMN_STATUS} when the download is waiting to retry or resume.
+</span>*/
+STATUS_PAUSED : &quot;4&quot;,
+<span id='android-app-DownloadManager-property-STATUS_SUCCESSFUL'>/** Value of {@link #COLUMN_STATUS} when the download has successfully completed.
+</span>*/
+STATUS_SUCCESSFUL : &quot;8&quot;,
+<span id='android-app-DownloadManager-property-STATUS_FAILED'>/** Value of {@link #COLUMN_STATUS} when the download has failed (and will not be retried).
+</span>*/
+STATUS_FAILED : &quot;16&quot;,
+<span id='android-app-DownloadManager-property-ERROR_UNKNOWN'>/** Value of COLUMN_ERROR_CODE when the download has completed with an error that doesn't fit
+</span> under any other error code.
+*/
+ERROR_UNKNOWN : &quot;1000&quot;,
+<span id='android-app-DownloadManager-property-ERROR_FILE_ERROR'>/** Value of {@link #COLUMN_REASON} when a storage issue arises which doesn't fit under any
+</span> other error code. Use the more specific {@link #ERROR_INSUFFICIENT_SPACE} and
+ {@link #ERROR_DEVICE_NOT_FOUND} when appropriate.
+*/
+ERROR_FILE_ERROR : &quot;1001&quot;,
+<span id='android-app-DownloadManager-property-ERROR_UNHANDLED_HTTP_CODE'>/** Value of {@link #COLUMN_REASON} when an HTTP code was received that download manager
+</span> can't handle.
+*/
+ERROR_UNHANDLED_HTTP_CODE : &quot;1002&quot;,
+<span id='android-app-DownloadManager-property-ERROR_HTTP_DATA_ERROR'>/** Value of {@link #COLUMN_REASON} when an error receiving or processing data occurred at
+</span> the HTTP level.
+*/
+ERROR_HTTP_DATA_ERROR : &quot;1004&quot;,
+<span id='android-app-DownloadManager-property-ERROR_TOO_MANY_REDIRECTS'>/** Value of {@link #COLUMN_REASON} when there were too many redirects.
+</span>*/
+ERROR_TOO_MANY_REDIRECTS : &quot;1005&quot;,
+<span id='android-app-DownloadManager-property-ERROR_INSUFFICIENT_SPACE'>/** Value of {@link #COLUMN_REASON} when there was insufficient storage space. Typically,
+</span> this is because the SD card is full.
+*/
+ERROR_INSUFFICIENT_SPACE : &quot;1006&quot;,
+<span id='android-app-DownloadManager-property-ERROR_DEVICE_NOT_FOUND'>/** Value of {@link #COLUMN_REASON} when no external storage device was found. Typically,
+</span> this is because the SD card is not mounted.
+*/
+ERROR_DEVICE_NOT_FOUND : &quot;1007&quot;,
+<span id='android-app-DownloadManager-property-ERROR_CANNOT_RESUME'>/** Value of {@link #COLUMN_REASON} when some possibly transient error occurred but we can't
+</span> resume the download.
+*/
+ERROR_CANNOT_RESUME : &quot;1008&quot;,
+<span id='android-app-DownloadManager-property-ERROR_FILE_ALREADY_EXISTS'>/** Value of {@link #COLUMN_REASON} when the requested destination file already exists (the
+</span> download manager will not overwrite an existing file).
+*/
+ERROR_FILE_ALREADY_EXISTS : &quot;1009&quot;,
+<span id='android-app-DownloadManager-property-ERROR_BLOCKED'>/** Value of {@link #COLUMN_REASON} when the download has failed because of
+</span> {@link NetworkPolicyManager} controls on the requesting application.
+
+ @hide
+*/
+ERROR_BLOCKED : &quot;1010&quot;,
+<span id='android-app-DownloadManager-property-PAUSED_WAITING_TO_RETRY'>/** Value of {@link #COLUMN_REASON} when the download is paused because some network error
+</span> occurred and the download manager is waiting before retrying the request.
+*/
+PAUSED_WAITING_TO_RETRY : &quot;1&quot;,
+<span id='android-app-DownloadManager-property-PAUSED_WAITING_FOR_NETWORK'>/** Value of {@link #COLUMN_REASON} when the download is waiting for network connectivity to
+</span> proceed.
+*/
+PAUSED_WAITING_FOR_NETWORK : &quot;2&quot;,
+<span id='android-app-DownloadManager-property-PAUSED_QUEUED_FOR_WIFI'>/** Value of {@link #COLUMN_REASON} when the download exceeds a size limit for downloads over
+</span> the mobile network and the download manager is waiting for a Wi-Fi connection to proceed.
+*/
+PAUSED_QUEUED_FOR_WIFI : &quot;3&quot;,
+<span id='android-app-DownloadManager-property-PAUSED_UNKNOWN'>/** Value of {@link #COLUMN_REASON} when the download is paused for some other reason.
+</span>*/
+PAUSED_UNKNOWN : &quot;4&quot;,
+<span id='android-app-DownloadManager-property-ACTION_DOWNLOAD_COMPLETE'>/** Broadcast intent action sent by the download manager when a download completes.
+</span>*/
+ACTION_DOWNLOAD_COMPLETE : &quot;android.intent.action.DOWNLOAD_COMPLETE&quot;,
+<span id='android-app-DownloadManager-property-ACTION_NOTIFICATION_CLICKED'>/** Broadcast intent action sent by the download manager when the user clicks on a running
+</span> download, either from a system notification or from the downloads UI.
+*/
+ACTION_NOTIFICATION_CLICKED : &quot;android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED&quot;,
+<span id='android-app-DownloadManager-property-ACTION_VIEW_DOWNLOADS'>/** Intent action to launch an activity to display all downloads.
+</span>*/
+ACTION_VIEW_DOWNLOADS : &quot;android.intent.action.VIEW_DOWNLOADS&quot;,
+<span id='android-app-DownloadManager-property-INTENT_EXTRAS_SORT_BY_SIZE'>/** Intent extra included with {@link #ACTION_VIEW_DOWNLOADS} to start DownloadApp in
+</span> sort-by-size mode.
+*/
+INTENT_EXTRAS_SORT_BY_SIZE : &quot;android.app.DownloadManager.extra_sortBySize&quot;,
+<span id='android-app-DownloadManager-property-EXTRA_DOWNLOAD_ID'>/** Intent extra included with {@link #ACTION_DOWNLOAD_COMPLETE} intents, indicating the ID (as a
+</span> long) of the download that just completed.
+*/
+EXTRA_DOWNLOAD_ID : &quot;extra_download_id&quot;,
+<span id='android-app-DownloadManager-property-EXTRA_NOTIFICATION_CLICK_DOWNLOAD_IDS'>/** When clicks on multiple notifications are received, the following
+</span> provides an array of download ids corresponding to the download notification that was
+ clicked. It can be retrieved by the receiver of this
+ Intent using {@link android.content.Intent#getLongArrayExtra(String)}.
+*/
+EXTRA_NOTIFICATION_CLICK_DOWNLOAD_IDS : &quot;extra_click_download_ids&quot;,
+<span id='android-app-DownloadManager-property-ACTION_DOWNLOAD_COMPLETED'>/**{@hide} */
+</span>ACTION_DOWNLOAD_COMPLETED : &quot;android.intent.action.DOWNLOAD_COMPLETED&quot;,
+<span id='android-app-DownloadManager-property-UNDERLYING_COLUMNS'>/** columns to request from DownloadProvider.
+</span> @hide
+*/
+UNDERLYING_COLUMNS : &quot;null&quot;,
+<span id='android-app-DownloadManager-method-setAccessAllDownloads'>/**Makes this object access the download provider through /all_downloads URIs rather than
+</span> /my_downloads URIs, for clients that have permission to do so.
+@hide 
+*/
+setAccessAllDownloads : function(  ) {},
+
+<span id='android-app-DownloadManager-method-setAccessFilename'>/**{@hide}
+</span>*/
+setAccessFilename : function(  ) {},
+
+<span id='android-app-DownloadManager-method-enqueue'>/**Enqueue a new download.  The download will start automatically once the download manager is
+</span> ready to execute it and connectivity is available.
+@param {Object {DownloadManager.Request}} request the parameters specifying this download
+@return {Number} an ID for the download, unique across the system.  This ID is used to make future
+ calls related to this download.
+*/
+enqueue : function(  ) {},
+
+<span id='android-app-DownloadManager-method-markRowDeleted'>/**Marks the specified download as 'to be deleted'. This is done when a completed download
+</span> is to be removed but the row was stored without enough info to delete the corresponding
+ metadata from Mediaprovider database. Actual cleanup of this row is done in DownloadService.
+@param {Object {long[]}} ids the IDs of the downloads to be marked 'deleted'
+@return {Number} the number of downloads actually updated
+@hide 
+*/
+markRowDeleted : function(  ) {},
+
+<span id='android-app-DownloadManager-method-remove'>/**Cancel downloads and remove them from the download manager.  Each download will be stopped if
+</span> it was running, and it will no longer be accessible through the download manager.
+ If there is a downloaded file, partial or complete, it is deleted.
+@param {Object {long[]}} ids the IDs of the downloads to remove
+@return {Number} the number of downloads actually removed
+*/
+remove : function(  ) {},
+
+<span id='android-app-DownloadManager-method-query'>/**Query the download manager about downloads that have been requested.
+</span>@param {Object {DownloadManager.Query}} query parameters specifying filters for this query
+@return {Object {android.database.Cursor}} a Cursor over the result set of downloads, with columns consisting of all the
+ COLUMN_* constants.
+*/
+query : function(  ) {},
+
+<span id='android-app-DownloadManager-method-query'>/**
+</span>@hide 
+*/
+query : function(  ) {},
+
+<span id='android-app-DownloadManager-method-openDownloadedFile'>/**Open a downloaded file for reading.  The download must have completed.
+</span>@param {Number} id the ID of the download
+@return {Object {android.os.ParcelFileDescriptor}} a read-only {@link ParcelFileDescriptor}
+@throws FileNotFoundException if the destination file does not already exist
+*/
+openDownloadedFile : function(  ) {},
+
+<span id='android-app-DownloadManager-method-getUriForDownloadedFile'>/**Returns the {@link Uri} of the given downloaded file id, if the file is
+</span> downloaded successfully. Otherwise, null is returned.
+@param {Number} id the id of the downloaded file.
+@return {Object {android.net.Uri}} the {@link Uri} of the given downloaded file id, if download was
+         successful. null otherwise.
+*/
+getUriForDownloadedFile : function(  ) {},
+
+<span id='android-app-DownloadManager-method-getMimeTypeForDownloadedFile'>/**Returns the media type of the given downloaded file id, if the file was
+</span> downloaded successfully. Otherwise, null is returned.
+@param {Number} id the id of the downloaded file.
+@return {String} the media type of the given downloaded file id, if download was successful. null
+ otherwise.
+*/
+getMimeTypeForDownloadedFile : function(  ) {},
+
+<span id='android-app-DownloadManager-method-restartDownload'>/**Restart the given downloads, which must have already completed (successfully or not).  This
+</span> method will only work when called from within the download manager's process.
+@param {Object {long[]}} ids the IDs of the downloads
+@hide 
+*/
+restartDownload : function(  ) {},
+
+<span id='android-app-DownloadManager-method-forceDownload'>/**Force the given downloads to proceed even if their size is larger than
+</span> {@link #getMaxBytesOverMobile}(Context).
+@hide 
+*/
+forceDownload : function(  ) {},
+
+<span id='android-app-DownloadManager-method-getMaxBytesOverMobile'>/**Returns maximum size, in bytes, of downloads that may go over a mobile connection; or null if
+</span> there's no limit
+@param {Object {Context}} context the {@link Context} to use for accessing the {@link ContentResolver}
+@return {Number} maximum size, in bytes, of downloads that may go over a mobile connection; or null if
+ there's no limit
+*/
+getMaxBytesOverMobile : function(  ) {},
+
+<span id='android-app-DownloadManager-method-rename'>/**Rename the given download if the download has completed
+</span>@param {Object {Context}} context the {@link Context} to use in case need to update MediaProvider
+@param {Number} id the downloaded id
+@param {String} displayName the new name to rename to
+@return {Boolean} true if rename was successful, false otherwise
+@hide 
+*/
+rename : function(  ) {},
+
+<span id='android-app-DownloadManager-method-getRecommendedMaxBytesOverMobile'>/**Returns recommended maximum size, in bytes, of downloads that may go over a mobile
+</span> connection; or null if there's no recommended limit.  The user will have the option to bypass
+ this limit.
+@param {Object {Context}} context the {@link Context} to use for accessing the {@link ContentResolver}
+@return {Number} recommended maximum size, in bytes, of downloads that may go over a mobile
+ connection; or null if there's no recommended limit.
+*/
+getRecommendedMaxBytesOverMobile : function(  ) {},
+
+<span id='android-app-DownloadManager-method-isActiveNetworkExpensive'>/**{@hide}
+</span>*/
+isActiveNetworkExpensive : function(  ) {},
+
+<span id='android-app-DownloadManager-method-getActiveNetworkWarningBytes'>/**{@hide}
+</span>*/
+getActiveNetworkWarningBytes : function(  ) {},
+
+<span id='android-app-DownloadManager-method-addCompletedDownload'>/**Adds a file to the downloads database system, so it could appear in Downloads App
+</span> (and thus become eligible for management by the Downloads App).
+ &lt;p&gt;
+ It is helpful to make the file scannable by MediaScanner by setting the param
+ isMediaScannerScannable to true. It makes the file visible in media managing
+ applications such as Gallery App, which could be a useful purpose of using this API.
+
+ &lt;p&gt; For applications targeting {@link android.os.Build.VERSION_CODES#Q} or above,
+ {@code path} must be within directories owned by the application
+ {e.g. {@link Context#getExternalFilesDir(String)}} or if the application is running under
+ the legacy storage model (see
+ {@link android.R.styleable#AndroidManifestApplication_requestLegacyExternalStorage
+ android:requestLegacyExternalStorage}), {@code path} can also be within the top-level
+ Downloads directory (as returned by
+ {@link Environment#getExternalStoragePublicDirectory(String)} with
+ {@link Environment#DIRECTORY_DOWNLOADS}).
+@param {String} title the title that would appear for this file in Downloads App.
+@param {String} description the description that would appear for this file in Downloads App.
+@param {Boolean} isMediaScannerScannable true if the file is to be scanned by MediaScanner. Files
+ scanned by MediaScanner appear in the applications used to view media (for example,
+ Gallery app).
+@param {String} mimeType mimetype of the file.
+@param {String} path absolute pathname to the file. The file should be world-readable, so that it can
+ be managed by the Downloads App and any other app that is used to read it (for example,
+ Gallery app to display the file, if the file contents represent a video/image).
+@param {Number} length length of the downloaded file
+@param {Boolean} showNotification true if a notification is to be sent, false otherwise
+@return {Number} an ID for the download entry added to the downloads app, unique across the system
+ This ID is used to make future calls related to this download.
+@deprecated Apps should instead contribute files to
+ {@link android.provider.MediaStore.Downloads} collection to make them available to user
+ as part of Downloads.
+*/
+addCompletedDownload : function(  ) {},
+
+<span id='android-app-DownloadManager-method-addCompletedDownload'>/**Adds a file to the downloads database system, so it could appear in Downloads App
+</span> (and thus become eligible for management by the Downloads App).
+ &lt;p&gt;
+ It is helpful to make the file scannable by MediaScanner by setting the param
+ isMediaScannerScannable to true. It makes the file visible in media managing
+ applications such as Gallery App, which could be a useful purpose of using this API.
+
+ &lt;p&gt; For applications targeting {@link android.os.Build.VERSION_CODES#Q} or above,
+ {@code path} must be within directories owned by the application
+ {e.g. {@link Context#getExternalFilesDir(String)}} or if the application is running under
+ the legacy storage model (see
+ {@link android.R.styleable#AndroidManifestApplication_requestLegacyExternalStorage
+ android:requestLegacyExternalStorage}), {@code path} can also be within the top-level
+ Downloads directory (as returned by
+ {@link Environment#getExternalStoragePublicDirectory(String)} with
+ {@link Environment#DIRECTORY_DOWNLOADS}).
+@param {String} title the title that would appear for this file in Downloads App.
+@param {String} description the description that would appear for this file in Downloads App.
+@param {Boolean} isMediaScannerScannable true if the file is to be scanned by MediaScanner. Files
+ scanned by MediaScanner appear in the applications used to view media (for example,
+ Gallery app).
+@param {String} mimeType mimetype of the file.
+@param {String} path absolute pathname to the file. The file should be world-readable, so that it can
+ be managed by the Downloads App and any other app that is used to read it (for example,
+ Gallery app to display the file, if the file contents represent a video/image).
+@param {Number} length length of the downloaded file
+@param {Boolean} showNotification true if a notification is to be sent, false otherwise
+@param {Object {Uri}} uri the original HTTP URI of the download
+@param {Object {Uri}} referer the HTTP Referer for the download
+@return {Number} an ID for the download entry added to the downloads app, unique across the system
+ This ID is used to make future calls related to this download.
+@deprecated Apps should instead contribute files to
+ {@link android.provider.MediaStore.Downloads} collection to make them available to user
+ as part of Downloads.
+*/
+addCompletedDownload : function(  ) {},
+
+<span id='android-app-DownloadManager-method-addCompletedDownload'>/**&lt;p&gt; For applications targeting {@link android.os.Build.VERSION_CODES#Q} or above,
+</span> {@code path} must be within directories owned by the application
+ {e.g. {@link Context#getExternalFilesDir(String)}} or if the application is running under
+ the legacy storage model (see
+ {@link android.R.styleable#AndroidManifestApplication_requestLegacyExternalStorage
+ android:requestLegacyExternalStorage}), {@code path} can also be within the top-level
+ Downloads directory (as returned by
+ {@link Environment#getExternalStoragePublicDirectory(String)} with
+ {@link Environment#DIRECTORY_DOWNLOADS}).
+@deprecated Apps should instead contribute files to
+ {@link android.provider.MediaStore.Downloads} collection to make them available to user
+ as part of Downloads.
+
+ {@hide}
+*/
+addCompletedDownload : function(  ) {},
+
+<span id='android-app-DownloadManager-method-addCompletedDownload'>/**&lt;p&gt; For applications targeting {@link android.os.Build.VERSION_CODES#Q} or above,
+</span> {@code path} must be within directories owned by the application
+ {e.g. {@link Context#getExternalFilesDir(String)}} or if the application is running under
+ the legacy storage model (see
+ {@link android.R.styleable#AndroidManifestApplication_requestLegacyExternalStorage
+ android:requestLegacyExternalStorage}), {@code path} can also be within the top-level
+ Downloads directory (as returned by
+ {@link Environment#getExternalStoragePublicDirectory(String)} with
+ {@link Environment#DIRECTORY_DOWNLOADS}).
+
+ {@hide}
+@deprecated Apps should instead contribute files to
+ {@link android.provider.MediaStore.Downloads} collection to make them available to user
+ as part of Downloads.
+*/
+addCompletedDownload : function(  ) {},
+
+<span id='android-app-DownloadManager-method-getDownloadUri'>/**Get the DownloadProvider URI for the download with the given ID.
+</span>@hide 
+*/
+getDownloadUri : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

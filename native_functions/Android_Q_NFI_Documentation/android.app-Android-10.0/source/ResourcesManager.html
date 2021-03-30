@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-ResourcesManager'>/**@class android.app.ResourcesManager
+</span>@extends java.lang.Object
+
+@hide */
+var ResourcesManager = {
+
+<span id='android-app-ResourcesManager-method-getInstance'>/**
+</span>*/
+getInstance : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-invalidatePath'>/**Invalidate and destroy any resources that reference content under the
+</span> given filesystem path. Typically used when unmounting a storage device to
+ try as hard as possible to release any open FDs.
+*/
+invalidatePath : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-getConfiguration'>/**
+</span>*/
+getConfiguration : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-applyCompatConfigurationLocked'>/**
+</span>*/
+applyCompatConfigurationLocked : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-getAdjustedDisplay'>/**Returns an adjusted {@link Display} object based on the inputs or null if display isn't
+</span> available.
+@param {Number} displayId display Id.
+@param {Object {Resources}} resources The {@link Resources} backing the display adjustments.
+*/
+getAdjustedDisplay : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-dump'>/**
+</span>@hide 
+*/
+dump : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-createBaseActivityResources'>/**Creates base resources for an Activity. Calls to
+</span> {@link #getResources(IBinder, String, String[], String[], String[], int, Configuration,
+ CompatibilityInfo, ClassLoader)} with the same activityToken will have their override
+ configurations merged with the one specified here.
+@param {Object {IBinder}} activityToken Represents an Activity.
+@param {String} resDir The base resource path. Can be null (only framework resources will be loaded).
+@param {Object {java.lang.String[]}} splitResDirs An array of split resource paths. Can be null.
+@param {Object {java.lang.String[]}} overlayDirs An array of overlay paths. Can be null.
+@param {Object {java.lang.String[]}} libDirs An array of resource library paths. Can be null.
+@param {Number} displayId The ID of the display for which to create the resources.
+@param {Object {Configuration}} overrideConfig The configuration to apply on top of the base configuration. Can be
+                       null. This provides the base override for this Activity.
+@param {Object {CompatibilityInfo}} compatInfo The compatibility settings to use. Cannot be null. A default to use is
+                   {@link CompatibilityInfo#DEFAULT_COMPATIBILITY_INFO}.
+@param {Object {ClassLoader}} classLoader The class loader to use when inflating Resources. If null, the
+                    {@link ClassLoader#getSystemClassLoader()} is used.
+@return {Object {android.content.res.Resources}} a Resources object from which to access resources.
+*/
+createBaseActivityResources : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-getResources'>/**Gets or creates a new Resources object associated with the IBinder token. References returned
+</span> by this method live as long as the Activity, meaning they can be cached and used by the
+ Activity even after a configuration change. If any other parameter is changed
+ (resDir, splitResDirs, overrideConfig) for a given Activity, the same Resources object
+ is updated and handed back to the caller. However, changing the class loader will result in a
+ new Resources object.
+ &lt;p/&gt;
+ If activityToken is null, a cached Resources object will be returned if it matches the
+ input parameters. Otherwise a new Resources object that satisfies these parameters is
+ returned.
+@param {Object {IBinder}} activityToken Represents an Activity. If null, global resources are assumed.
+@param {String} resDir The base resource path. Can be null (only framework resources will be loaded).
+@param {Object {java.lang.String[]}} splitResDirs An array of split resource paths. Can be null.
+@param {Object {java.lang.String[]}} overlayDirs An array of overlay paths. Can be null.
+@param {Object {java.lang.String[]}} libDirs An array of resource library paths. Can be null.
+@param {Number} displayId The ID of the display for which to create the resources.
+@param {Object {Configuration}} overrideConfig The configuration to apply on top of the base configuration. Can be
+ null. Mostly used with Activities that are in multi-window which may override width and
+ height properties from the base config.
+@param {Object {CompatibilityInfo}} compatInfo The compatibility settings to use. Cannot be null. A default to use is
+ {@link CompatibilityInfo#DEFAULT_COMPATIBILITY_INFO}.
+@param {Object {ClassLoader}} classLoader The class loader to use when inflating Resources. If null, the
+ {@link ClassLoader#getSystemClassLoader()} is used.
+@return {Object {android.content.res.Resources}} a Resources object from which to access resources.
+*/
+getResources : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-updateResourcesForActivity'>/**Updates an Activity's Resources object with overrideConfig. The Resources object
+</span> that was previously returned by
+ {@link #getResources(IBinder, String, String[], String[], String[], int, Configuration,
+ CompatibilityInfo, ClassLoader)} is
+ still valid and will have the updated configuration.
+@param {Object {IBinder}} activityToken The Activity token.
+@param {Object {Configuration}} overrideConfig The configuration override to update.
+@param {Number} displayId Id of the display where activity currently resides.
+@param {Boolean} movedToDifferentDisplay Indicates if the activity was moved to different display.
+*/
+updateResourcesForActivity : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-applyConfigurationToResourcesLocked'>/**
+</span>*/
+applyConfigurationToResourcesLocked : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-appendLibAssetForMainAssetPath'>/**Appends the library asset path to any ResourcesImpl object that contains the main
+</span> assetPath.
+@param {String} assetPath The main asset path for which to add the library asset path.
+@param {String} libAsset The library asset path to add.
+*/
+appendLibAssetForMainAssetPath : function(  ) {},
+
+<span id='android-app-ResourcesManager-method-appendLibAssetsForMainAssetPath'>/**Appends the library asset paths to any ResourcesImpl object that contains the main
+</span> assetPath.
+@param {String} assetPath The main asset path for which to add the library asset path.
+@param {Object {java.lang.String[]}} libAssets The library asset paths to add.
+*/
+appendLibAssetsForMainAssetPath : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

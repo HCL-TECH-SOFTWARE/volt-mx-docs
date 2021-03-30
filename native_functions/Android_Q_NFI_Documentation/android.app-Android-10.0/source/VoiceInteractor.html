@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-VoiceInteractor'>/**@class android.app.VoiceInteractor
+</span>@extends java.lang.Object
+
+ Interface for an {@link android.app.Activity} to interact with the user through voice.  Use
+ {@link android.app.Activity#getVoiceInteractor() Activity.getVoiceInteractor}
+ to retrieve the interface, if the activity is currently involved in a voice interaction.
+
+ &lt;p&gt;The voice interactor revolves around submitting voice interaction requests to the
+ back-end voice interaction service that is working with the user.  These requests are
+ submitted with {@link #submitRequest}, providing a new instance of a
+ {@link android.app.DownloadManager.Request} subclass describing the type of operation to perform -- currently the
+ possible requests are {@link android.app.VoiceInteractor.ConfirmationRequest} and {@link android.app.VoiceInteractor.CommandRequest}.
+
+ &lt;p&gt;Once a request is submitted, the voice system will process it and eventually deliver
+ the result to the request object.  The application can cancel a pending request at any
+ time.
+
+ &lt;p&gt;The VoiceInteractor is integrated with Activity's state saving mechanism, so that
+ if an activity is being restarted with retained state, it will retain the current
+ VoiceInteractor and any outstanding requests.  Because of this, you should always use
+ {@link android.app.DownloadManager.Request#getActivity() android.app.DownloadManager.Request.getActivity} to get back to the activity of a
+ request, rather than holding on to the activity instance yourself, either explicitly
+ or implicitly through a non-static inner class.
+*/
+var VoiceInteractor = {
+
+<span id='android-app-VoiceInteractor-property-KEY_CANCELLATION_SIGNAL'>/**@hide */
+</span>KEY_CANCELLATION_SIGNAL : &quot;key_cancellation_signal&quot;,
+<span id='android-app-VoiceInteractor-property-KEY_KILL_SIGNAL'>/**@hide */
+</span>KEY_KILL_SIGNAL : &quot;key_kill_signal&quot;,
+<span id='android-app-VoiceInteractor-method-submitRequest'>/**
+</span>*/
+submitRequest : function(  ) {},
+
+<span id='android-app-VoiceInteractor-method-submitRequest'>/**Submit a new {@link android.app.DownloadManager.Request} to the voice interaction service.  The request must be
+</span> one of the available subclasses -- {@link android.app.VoiceInteractor.ConfirmationRequest}, {@link android.app.VoiceInteractor.PickOptionRequest},
+ {@link android.app.VoiceInteractor.CompleteVoiceRequest}, {@link android.app.VoiceInteractor.AbortVoiceRequest}, or {@link android.app.VoiceInteractor.CommandRequest}.
+@param {Object {VoiceInteractor.Request}} request The desired request to submit.
+@param {String} name An optional name for this request, or null. This can be used later with
+ {@link #getActiveRequests} and {@link #getActiveRequest} to find the request.
+@return {Boolean} Returns true of the request was successfully submitted, else false.
+*/
+submitRequest : function(  ) {},
+
+<span id='android-app-VoiceInteractor-method-getActiveRequests'>/**Return all currently active requests.
+</span>*/
+getActiveRequests : function(  ) {},
+
+<span id='android-app-VoiceInteractor-method-getActiveRequest'>/**Return any currently active request that was submitted with the given name.
+</span>@param {String} name The name used to submit the request, as per
+ {@link #submitRequest(android.app.VoiceInteractor.Request, String)}.
+@return {Object {android.app.VoiceInteractor.Request}} Returns the active request with that name, or null if there was none.
+*/
+getActiveRequest : function(  ) {},
+
+<span id='android-app-VoiceInteractor-method-supportsCommands'>/**Queries the supported commands available from the VoiceInteractionService.
+</span> The command is a string that describes the generic operation to be performed.
+ An example might be &quot;org.example.commands.PICK_DATE&quot; to ask the user to pick
+ a date.  (Note: This is not an actual working example.)
+@param {Object {java.lang.String[]}} commands The array of commands to query for support.
+@return {Boolean} Array of booleans indicating whether each command is supported or not.
+*/
+supportsCommands : function(  ) {},
+
+<span id='android-app-VoiceInteractor-method-isDestroyed'>/**
+</span>@return {Boolean} whether the voice interactor is destroyed. You should not interact
+ with a destroyed voice interactor.
+*/
+isDestroyed : function(  ) {},
+
+<span id='android-app-VoiceInteractor-method-registerOnDestroyedCallback'>/**Registers a callback to be called when the VoiceInteractor is destroyed.
+</span>@param {Object {Executor}} executor Executor on which to run the callback.
+@param {Object {Runnable}} callback The callback to run.
+@return {Boolean} whether the callback was registered.
+*/
+registerOnDestroyedCallback : function(  ) {},
+
+<span id='android-app-VoiceInteractor-method-unregisterOnDestroyedCallback'>/**Unregisters a previously registered onDestroy callback
+</span>@param {Object {Runnable}} callback The callback to remove.
+@return {Boolean} whether the callback was unregistered.
+*/
+unregisterOnDestroyedCallback : function(  ) {},
+
+<span id='android-app-VoiceInteractor-method-notifyDirectActionsChanged'>/**Notifies the assist framework that the direct actions supported by the app changed.
+</span>*/
+notifyDirectActionsChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

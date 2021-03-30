@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-admin-SecurityLog'>/**@class android.app.admin.SecurityLog
+</span>@extends java.lang.Object
+
+ Definitions for working with security logs.
+
+ &lt;p&gt;Device owner apps can control the logging with
+ {@link android.app.admin.DevicePolicyManager#setSecurityLoggingEnabled}. When security logs are enabled, device
+ owner apps receive periodic callbacks from {@link android.app.admin.DeviceAdminReceiver#onSecurityLogsAvailable},
+ at which time new batch of logs can be collected via
+ {@link android.app.admin.DevicePolicyManager#retrieveSecurityLogs}. {@link android.app.admin.SecurityLog.SecurityEvent} describes the type and
+ format of security logs being collected.
+*/
+var SecurityLog = {
+
+<span id='android-app-admin-SecurityLog-property-TAG_ADB_SHELL_INTERACTIVE'>/** Indicates that an ADB interactive shell was opened via &quot;adb shell&quot;.
+</span> There is no extra payload in the log event.
+*/
+TAG_ADB_SHELL_INTERACTIVE : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_ADB_SHELL_CMD'>/** Indicates that a shell command was issued over ADB via {@code adb shell &lt;command&gt;}
+</span> The log entry contains a {@code String} payload containing the shell command, accessible
+ via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}.
+*/
+TAG_ADB_SHELL_CMD : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_SYNC_RECV_FILE'>/** Indicates that a file was pulled from the device via the adb daemon, for example via
+</span> {@code adb pull}. The log entry contains a {@code String} payload containing the path of the
+ pulled file on the device, accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}.
+*/
+TAG_SYNC_RECV_FILE : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_SYNC_SEND_FILE'>/** Indicates that a file was pushed to the device via the adb daemon, for example via
+</span> {@code adb push}. The log entry contains a {@code String} payload containing the destination
+ path of the pushed file, accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}.
+*/
+TAG_SYNC_SEND_FILE : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_APP_PROCESS_START'>/** Indicates that an app process was started. The log entry contains the following
+</span> information about the process encapsulated in an {@link Object} array, accessible via
+ {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] process name ({@code String})
+ &lt;li&gt; [1] exact start time in milliseconds according to {@code System.currentTimeMillis()}
+      ({@code Long})
+ &lt;li&gt; [2] app uid ({@code Integer})
+ &lt;li&gt; [3] app pid ({@code Integer})
+ &lt;li&gt; [4] seinfo tag ({@code String})
+ &lt;li&gt; [5] SHA-256 hash of the base APK in hexadecimal ({@code String})
+*/
+TAG_APP_PROCESS_START : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_KEYGUARD_DISMISSED'>/** Indicates that keyguard has been dismissed. This event is only logged if the device
+</span> has a secure keyguard. It is logged regardless of how keyguard is dismissed, including
+ via PIN/pattern/password, biometrics or via a trust agent.
+ There is no extra payload in the log event.
+ @see #TAG_KEYGUARD_DISMISS_AUTH_ATTEMPT
+*/
+TAG_KEYGUARD_DISMISSED : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_KEYGUARD_DISMISS_AUTH_ATTEMPT'>/** Indicates that there has been an authentication attempt to dismiss the keyguard. The log
+</span> entry contains the following information about the attempt encapsulated in an {@link Object}
+ array, accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] attempt result ({@code Integer}, 1 for successful, 0 for unsuccessful)
+ &lt;li&gt; [1] strength of authentication method ({@code Integer}, 1 if strong authentication
+      method was used, 0 otherwise)
+*/
+TAG_KEYGUARD_DISMISS_AUTH_ATTEMPT : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_KEYGUARD_SECURED'>/** Indicates that the device has been locked, either by the user or by a timeout. There is no
+</span> extra payload in the log event.
+*/
+TAG_KEYGUARD_SECURED : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_OS_STARTUP'>/** Indicates that the Android OS has started. The log entry contains the following information
+</span> about the startup time software integrity check encapsulated in an {@link Object} array,
+ accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] Verified Boot state ({@code String})
+ &lt;li&gt; [1] dm-verity mode ({@code String}).
+ &lt;p&gt;Verified Boot state can be one of the following:
+ &lt;li&gt; {@code green} indicates that there is a full chain of trust extending from the
+ bootloader to verified partitions including the bootloader, boot partition, and all verified
+ partitions.
+ &lt;li&gt; {@code yellow} indicates that the boot partition has been verified using the embedded
+ certificate and the signature is valid.
+ &lt;li&gt; {@code orange} indicates that the device may be freely modified. Device integrity is
+ left to the user to verify out-of-band.
+ &lt;p&gt;dm-verity mode can be one of the following:
+ &lt;li&gt; {@code enforcing} indicates that the device will be restarted when corruption is
+ detected.
+ &lt;li&gt; {@code eio} indicates that an I/O error will be returned for an attempt to read
+ corrupted data blocks.
+ For details see Verified Boot documentation.
+*/
+TAG_OS_STARTUP : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_OS_SHUTDOWN'>/** Indicates that the Android OS has shutdown. There is no extra payload in the log event.
+</span>*/
+TAG_OS_SHUTDOWN : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_LOGGING_STARTED'>/** Indicates start-up of audit logging. There is no extra payload in the log event.
+</span>*/
+TAG_LOGGING_STARTED : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_LOGGING_STOPPED'>/** Indicates shutdown of audit logging. There is no extra payload in the log event.
+</span>*/
+TAG_LOGGING_STOPPED : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_MEDIA_MOUNT'>/** Indicates that removable media has been mounted on the device. The log entry contains the
+</span> following information about the event, encapsulated in an {@link Object} array and
+ accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] mount point ({@code String})
+ &lt;li&gt; [1] volume label ({@code String}).
+*/
+TAG_MEDIA_MOUNT : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_MEDIA_UNMOUNT'>/** Indicates that removable media was unmounted from the device. The log entry contains the
+</span> following information about the event, encapsulated in an {@link Object} array and
+ accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] mount point ({@code String})
+ &lt;li&gt; [1] volume label ({@code String}).
+*/
+TAG_MEDIA_UNMOUNT : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_LOG_BUFFER_SIZE_CRITICAL'>/** Indicates that the audit log buffer has reached 90% of its capacity. There is no extra
+</span> payload in the log event.
+*/
+TAG_LOG_BUFFER_SIZE_CRITICAL : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_PASSWORD_EXPIRATION_SET'>/** Indicates that an admin has set a password expiration timeout. The log entry contains the
+</span> following information about the event, encapsulated in an {@link Object} array and accessible
+ via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] admin package name ({@code String})
+ &lt;li&gt; [1] admin user ID ({@code Integer})
+ &lt;li&gt; [2] target user ID ({@code Integer})
+ &lt;li&gt; [3] new password expiration timeout in milliseconds ({@code Long}).
+ @see DevicePolicyManager#setPasswordExpirationTimeout(ComponentName, long)
+*/
+TAG_PASSWORD_EXPIRATION_SET : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_PASSWORD_COMPLEXITY_SET'>/** Indicates that an admin has set a requirement for password complexity. The log entry contains
+</span> the following information about the event, encapsulated in an {@link Object} array and
+ accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] admin package name ({@code String})
+ &lt;li&gt; [1] admin user ID ({@code Integer})
+ &lt;li&gt; [2] target user ID ({@code Integer})
+ &lt;li&gt; [3] minimum password length ({@code Integer})
+ &lt;li&gt; [4] password quality constraint ({@code Integer})
+ &lt;li&gt; [5] minimum number of letters ({@code Integer})
+ &lt;li&gt; [6] minimum number of non-letters ({@code Integer})
+ &lt;li&gt; [7] minimum number of digits ({@code Integer})
+ &lt;li&gt; [8] minimum number of uppercase letters ({@code Integer})
+ &lt;li&gt; [9] minimum number of lowercase letters ({@code Integer})
+ &lt;li&gt; [10] minimum number of symbols ({@code Integer})
+
+ @see DevicePolicyManager#setPasswordMinimumLength(ComponentName, int)
+ @see DevicePolicyManager#setPasswordQuality(ComponentName, int)
+ @see DevicePolicyManager#setPasswordMinimumLetters(ComponentName, int)
+ @see DevicePolicyManager#setPasswordMinimumNonLetter(ComponentName, int)
+ @see DevicePolicyManager#setPasswordMinimumLowerCase(ComponentName, int)
+ @see DevicePolicyManager#setPasswordMinimumUpperCase(ComponentName, int)
+ @see DevicePolicyManager#setPasswordMinimumNumeric(ComponentName, int)
+ @see DevicePolicyManager#setPasswordMinimumSymbols(ComponentName, int)
+*/
+TAG_PASSWORD_COMPLEXITY_SET : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_PASSWORD_HISTORY_LENGTH_SET'>/** Indicates that an admin has set a password history length. The log entry contains the
+</span> following information about the event encapsulated in an {@link Object} array, accessible
+ via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] admin package name ({@code String})
+ &lt;li&gt; [1] admin user ID ({@code Integer})
+ &lt;li&gt; [2] target user ID ({@code Integer})
+ &lt;li&gt; [3] new password history length value ({@code Integer})
+ @see DevicePolicyManager#setPasswordHistoryLength(ComponentName, int)
+*/
+TAG_PASSWORD_HISTORY_LENGTH_SET : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_MAX_SCREEN_LOCK_TIMEOUT_SET'>/** Indicates that an admin has set a maximum screen lock timeout. The log entry contains the
+</span> following information about the event encapsulated in an {@link Object} array, accessible
+ via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] admin package name ({@code String})
+ &lt;li&gt; [1] admin user ID ({@code Integer})
+ &lt;li&gt; [2] target user ID ({@code Integer})
+ &lt;li&gt; [3] new screen lock timeout in milliseconds ({@code Long})
+ @see DevicePolicyManager#setMaximumTimeToLock(ComponentName, long)
+*/
+TAG_MAX_SCREEN_LOCK_TIMEOUT_SET : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_MAX_PASSWORD_ATTEMPTS_SET'>/** Indicates that an admin has set a maximum number of failed password attempts before wiping
+</span> data. The log entry contains the following information about the event encapsulated in an
+ {@link Object} array, accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] admin package name ({@code String})
+ &lt;li&gt; [1] admin user ID ({@code Integer})
+ &lt;li&gt; [2] target user ID ({@code Integer})
+ &lt;li&gt; [3] new maximum number of failed password attempts ({@code Integer})
+ @see DevicePolicyManager#setMaximumFailedPasswordsForWipe(ComponentName, int)
+*/
+TAG_MAX_PASSWORD_ATTEMPTS_SET : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_KEYGUARD_DISABLED_FEATURES_SET'>/** Indicates that an admin has set disabled keyguard features. The log entry contains the
+</span> following information about the event encapsulated in an {@link Object} array, accessible via
+ {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] admin package name ({@code String})
+ &lt;li&gt; [1] admin user ID ({@code Integer})
+ &lt;li&gt; [2] target user ID ({@code Integer})
+ &lt;li&gt; [3] disabled keyguard feature mask ({@code Integer}).
+ @see DevicePolicyManager#setKeyguardDisabledFeatures(ComponentName, int)
+*/
+TAG_KEYGUARD_DISABLED_FEATURES_SET : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_REMOTE_LOCK'>/** Indicates that an admin remotely locked the device or profile. The log entry contains the
+</span> following information about the event encapsulated in an {@link Object} array, accessible via
+ {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] admin package name ({@code String}),
+ &lt;li&gt; [1] admin user ID ({@code Integer}).
+ &lt;li&gt; [2] target user ID ({@code Integer})
+*/
+TAG_REMOTE_LOCK : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_WIPE_FAILURE'>/** Indicates a failure to wipe device or user data. There is no extra payload in the log event.
+</span>*/
+TAG_WIPE_FAILURE : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_KEY_GENERATED'>/** Indicates that an authentication key was generated. The log entry contains the following
+</span> information about the event, encapsulated in an {@link Object} array and accessible via
+ {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] result ({@code Integer}, 0 if operation failed, 1 if succeeded)
+ &lt;li&gt; [1] alias of the key ({@code String})
+ &lt;li&gt; [2] requesting process uid ({@code Integer}).
+*/
+TAG_KEY_GENERATED : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_KEY_IMPORT'>/** Indicates that a cryptographic key was imported. The log entry contains the following
+</span> information about the event, encapsulated in an {@link Object} array and accessible via
+ {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] result ({@code Integer}, 0 if operation failed, 1 if succeeded)
+ &lt;li&gt; [1] alias of the key ({@code String})
+ &lt;li&gt; [2] requesting process uid ({@code Integer}).
+*/
+TAG_KEY_IMPORT : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_KEY_DESTRUCTION'>/** Indicates that a cryptographic key was destroyed. The log entry contains the following
+</span> information about the event, encapsulated in an {@link Object} array and accessible via
+ {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] result ({@code Integer}, 0 if operation failed, 1 if succeeded)
+ &lt;li&gt; [1] alias of the key ({@code String})
+ &lt;li&gt; [2] requesting process uid ({@code Integer}).
+*/
+TAG_KEY_DESTRUCTION : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_CERT_AUTHORITY_INSTALLED'>/** Indicates that a new root certificate has been installed into system's trusted credential
+</span> storage. The log entry contains the following information about the event, encapsulated in an
+ {@link Object} array and accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] result ({@code Integer}, 0 if operation failed, 1 if succeeded)
+ &lt;li&gt; [1] subject of the certificate ({@code String}).
+*/
+TAG_CERT_AUTHORITY_INSTALLED : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_CERT_AUTHORITY_REMOVED'>/** Indicates that a new root certificate has been removed from system's trusted credential
+</span> storage. The log entry contains the following information about the event, encapsulated in an
+ {@link Object} array and accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] result ({@code Integer}, 0 if operation failed, 1 if succeeded)
+ &lt;li&gt; [1] subject of the certificate ({@code String}).
+*/
+TAG_CERT_AUTHORITY_REMOVED : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_USER_RESTRICTION_ADDED'>/** Indicates that an admin has set a user restriction. The log entry contains the following
+</span> information about the event, encapsulated in an {@link Object} array and accessible via
+ {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] admin package name ({@code String})
+ &lt;li&gt; [1] admin user ID ({@code Integer})
+ &lt;li&gt; [2] user restriction ({@code String})
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+*/
+TAG_USER_RESTRICTION_ADDED : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_USER_RESTRICTION_REMOVED'>/** Indicates that an admin has removed a user restriction. The log entry contains the following
+</span> information about the event, encapsulated in an {@link Object} array and accessible via
+ {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] admin package name ({@code String})
+ &lt;li&gt; [1] admin user ID ({@code Integer})
+ &lt;li&gt; [2] user restriction ({@code String})
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+*/
+TAG_USER_RESTRICTION_REMOVED : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_CRYPTO_SELF_TEST_COMPLETED'>/** Indicates that cryptographic functionality self test has completed. The log entry contains an
+</span> {@code Integer} payload, indicating the result of the test (0 if the test failed, 1 if
+ succeeded) and accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}.
+*/
+TAG_CRYPTO_SELF_TEST_COMPLETED : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_KEY_INTEGRITY_VIOLATION'>/** Indicates a failed cryptographic key integrity check. The log entry contains the following
+</span> information about the event, encapsulated in an {@link Object} array and accessible via
+ {@link android.app.admin.SecurityLog.SecurityEvent#getData()}:
+ &lt;li&gt; [0] alias of the key ({@code String})
+ &lt;li&gt; [1] owner application uid ({@code Integer}).
+*/
+TAG_KEY_INTEGRITY_VIOLATION : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-TAG_CERT_VALIDATION_FAILURE'>/** Indicates a failure to validate X.509v3 certificate. The log entry contains a {@code String}
+</span> payload indicating the failure reason, accessible via {@link android.app.admin.SecurityLog.SecurityEvent#getData()}.
+*/
+TAG_CERT_VALIDATION_FAILURE : &quot;null&quot;,
+<span id='android-app-admin-SecurityLog-property-LEVEL_INFO'>/** Event severity level indicating that the event corresponds to normal workflow.
+</span>*/
+LEVEL_INFO : &quot;1&quot;,
+<span id='android-app-admin-SecurityLog-property-LEVEL_WARNING'>/** Event severity level indicating that the event may require admin attention.
+</span>*/
+LEVEL_WARNING : &quot;2&quot;,
+<span id='android-app-admin-SecurityLog-property-LEVEL_ERROR'>/** Event severity level indicating that the event requires urgent admin action.
+</span>*/
+LEVEL_ERROR : &quot;3&quot;,
+<span id='android-app-admin-SecurityLog-method-isLoggingEnabled'>/**Returns if security logging is enabled. Log producers should only write new logs if this is
+</span> true. Under the hood this is the logical AND of whether device owner exists and whether
+ it enables logging by setting the system property {@link #PROPERTY_LOGGING_ENABLED}.
+@hide 
+*/
+isLoggingEnabled : function(  ) {},
+
+<span id='android-app-admin-SecurityLog-method-setLoggingEnabledProperty'>/**
+</span>@hide 
+*/
+setLoggingEnabledProperty : function(  ) {},
+
+<span id='android-app-admin-SecurityLog-method-getLoggingEnabledProperty'>/**
+</span>@hide 
+*/
+getLoggingEnabledProperty : function(  ) {},
+
+<span id='android-app-admin-SecurityLog-method-readEvents'>/**Retrieve all security logs and return immediately.
+</span>@hide 
+*/
+readEvents : function(  ) {},
+
+<span id='android-app-admin-SecurityLog-method-readEventsSince'>/**Retrieve all security logs since the given timestamp in nanoseconds and return immediately.
+</span>@hide 
+*/
+readEventsSince : function(  ) {},
+
+<span id='android-app-admin-SecurityLog-method-readPreviousEvents'>/**Retrieve all security logs before the last reboot. May return corrupted data due to
+</span> unreliable pstore.
+@hide 
+*/
+readPreviousEvents : function(  ) {},
+
+<span id='android-app-admin-SecurityLog-method-readEventsOnWrapping'>/**Retrieve all security logs whose timestamp is equal to or greater than the given timestamp in
+</span> nanoseconds. This method will block until either the last log earlier than the given
+ timestamp is about to be pruned, or after a 2-hour timeout has passed.
+@hide 
+*/
+readEventsOnWrapping : function(  ) {},
+
+<span id='android-app-admin-SecurityLog-method-writeEvent'>/**Write a log entry to the underlying storage, with a string payload.
+</span>@hide 
+*/
+writeEvent : function(  ) {},
+
+<span id='android-app-admin-SecurityLog-method-writeEvent'>/**Write a log entry to the underlying storage, with several payloads.
+</span> Supported types of payload are: integer, long, float, string plus array of supported types.
+@hide 
+*/
+writeEvent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

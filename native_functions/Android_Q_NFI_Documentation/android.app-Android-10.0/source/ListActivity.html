@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-ListActivity'>/**@class android.app.ListActivity
+</span>@extends android.app.Activity
+
+ An activity that displays a list of items by binding to a data source such as
+ an array or Cursor, and exposes event handlers when the user selects an item.
+ &lt;p&gt;
+ ListActivity hosts a {@link android.widget.ListView ListView} object that can
+ be bound to different data sources, typically either an array or a Cursor
+ holding query results. Binding, screen layout, and row layout are discussed
+ in the following sections.
+ &lt;p&gt;
+ &lt;strong&gt;Screen Layout&lt;/strong&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ ListActivity has a default layout that consists of a single, full-screen list
+ in the center of the screen. However, if you desire, you can customize the
+ screen layout by setting your own view layout with setContentView() in
+ onCreate(). To do this, your own view MUST contain a ListView object with the
+ id &quot;@android:id/list&quot; (or {@link android.R.id#list} if it's in code)
+ &lt;p&gt;
+ Optionally, your custom view can contain another view object of any type to
+ display when the list view is empty. This &quot;empty list&quot; notifier must have an
+ id &quot;android:id/empty&quot;. Note that when an empty view is present, the list view
+ will be hidden when there is no data to display.
+ &lt;p&gt;
+ The following code demonstrates an (ugly) custom screen layout. It has a list
+ with a green background, and an alternate red &quot;no data&quot; message.
+ &lt;/p&gt;
+
+ &lt;pre&gt;
+ &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
+ &amp;lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+         android:orientation=&amp;quot;vertical&amp;quot;
+         android:layout_width=&amp;quot;match_parent&amp;quot;
+         android:layout_height=&amp;quot;match_parent&amp;quot;
+         android:paddingLeft=&amp;quot;8dp&amp;quot;
+         android:paddingRight=&amp;quot;8dp&amp;quot;&amp;gt;
+
+     &amp;lt;ListView android:id=&amp;quot;@android:id/list&amp;quot;
+               android:layout_width=&amp;quot;match_parent&amp;quot;
+               android:layout_height=&amp;quot;match_parent&amp;quot;
+               android:background=&amp;quot;#00FF00&amp;quot;
+               android:layout_weight=&amp;quot;1&amp;quot;
+               android:drawSelectorOnTop=&amp;quot;false&amp;quot;/&amp;gt;
+
+     &amp;lt;TextView android:id=&amp;quot;@android:id/empty&amp;quot;
+               android:layout_width=&amp;quot;match_parent&amp;quot;
+               android:layout_height=&amp;quot;match_parent&amp;quot;
+               android:background=&amp;quot;#FF0000&amp;quot;
+               android:text=&amp;quot;No data&amp;quot;/&amp;gt;
+ &amp;lt;/LinearLayout&amp;gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ &lt;strong&gt;Row Layout&lt;/strong&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ You can specify the layout of individual rows in the list. You do this by
+ specifying a layout resource in the ListAdapter object hosted by the activity
+ (the ListAdapter binds the ListView to the data; more on this later).
+ &lt;p&gt;
+ A ListAdapter constructor takes a parameter that specifies a layout resource
+ for each row. It also has two additional parameters that let you specify
+ which data field to associate with which object in the row layout resource.
+ These two parameters are typically parallel arrays.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Android provides some standard row layout resources. These are in the
+ {@link android.R.layout} class, and have names such as simple_list_item_1,
+ simple_list_item_2, and two_line_list_item. The following layout XML is the
+ source for the resource two_line_list_item, which displays two data
+ fields,one above the other, for each list row.
+ &lt;/p&gt;
+
+ &lt;pre&gt;
+ &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
+ &amp;lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+     android:layout_width=&amp;quot;match_parent&amp;quot;
+     android:layout_height=&amp;quot;wrap_content&amp;quot;
+     android:orientation=&amp;quot;vertical&amp;quot;&amp;gt;
+
+     &amp;lt;TextView android:id=&amp;quot;@+id/text1&amp;quot;
+         android:textSize=&amp;quot;16sp&amp;quot;
+         android:textStyle=&amp;quot;bold&amp;quot;
+         android:layout_width=&amp;quot;match_parent&amp;quot;
+         android:layout_height=&amp;quot;wrap_content&amp;quot;/&amp;gt;
+
+     &amp;lt;TextView android:id=&amp;quot;@+id/text2&amp;quot;
+         android:textSize=&amp;quot;16sp&amp;quot;
+         android:layout_width=&amp;quot;match_parent&amp;quot;
+         android:layout_height=&amp;quot;wrap_content&amp;quot;/&amp;gt;
+ &amp;lt;/LinearLayout&amp;gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ You must identify the data bound to each TextView object in this layout. The
+ syntax for this is discussed in the next section.
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Binding to Data&lt;/strong&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ You bind the ListActivity's ListView object to data using a class that
+ implements the {@link android.widget.ListAdapter ListAdapter} interface.
+ Android provides two standard list adapters:
+ {@link android.widget.SimpleAdapter SimpleAdapter} for static data (Maps),
+ and {@link android.widget.SimpleCursorAdapter SimpleCursorAdapter} for Cursor
+ query results.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The following code from a custom ListActivity demonstrates querying the
+ Contacts provider for all contacts, then binding the Name and Company fields
+ to a two line row layout in the activity's ListView.
+ &lt;/p&gt;
+
+ &lt;pre&gt;
+ public class MyListAdapter extends ListActivity {
+
+     &amp;#064;Override
+     protected void onCreate(Bundle savedInstanceState){
+         super.onCreate(savedInstanceState);
+
+         // We'll define a custom screen layout here (the one shown above), but
+         // typically, you could just use the standard ListActivity layout.
+         setContentView(R.layout.custom_list_activity_view);
+
+         // Query for all people contacts using the {@link android.provider.Contacts.People} convenience class.
+         // Put a managed wrapper around the retrieved cursor so we don't have to worry about
+         // requerying or closing it as the activity changes state.
+         mCursor = this.getContentResolver().query(People.CONTENT_URI, null, null, null, null);
+         startManagingCursor(mCursor);
+
+         // Now create a new list adapter bound to the cursor.
+         // SimpleListAdapter is designed for binding to a Cursor.
+         ListAdapter adapter = new SimpleCursorAdapter(
+                 this, // Context.
+                 android.R.layout.two_line_list_item,  // Specify the row template to use (here, two columns bound to the two retrieved cursor
+ rows).
+                 mCursor,                                              // Pass in the cursor to bind to.
+                 new String[] {People.NAME, People.COMPANY},           // Array of cursor columns to bind to.
+                 new int[] {android.R.id.text1, android.R.id.text2});  // Parallel array of which template objects to bind to those columns.
+
+         // Bind to our new adapter.
+         setListAdapter(adapter);
+     }
+ }
+ &lt;/pre&gt;
+
+ @see #setListAdapter
+ @see android.widget.ListView
+*/
+var ListActivity = {
+
+<span id='android-app-ListActivity-method-onContentChanged'>/**Updates the screen state (current list and other views) when the
+</span> content changes.
+@see Activity#onContentChanged()
+*/
+onContentChanged : function(  ) {},
+
+<span id='android-app-ListActivity-method-setListAdapter'>/**Provide the cursor for the list view.
+</span>*/
+setListAdapter : function(  ) {},
+
+<span id='android-app-ListActivity-method-setSelection'>/**Set the currently selected list item to the specified
+</span> position with the adapter's data
+@param {Number} position
+*/
+setSelection : function(  ) {},
+
+<span id='android-app-ListActivity-method-getSelectedItemPosition'>/**Get the position of the currently selected list item.
+</span>*/
+getSelectedItemPosition : function(  ) {},
+
+<span id='android-app-ListActivity-method-getSelectedItemId'>/**Get the cursor row ID of the currently selected list item.
+</span>*/
+getSelectedItemId : function(  ) {},
+
+<span id='android-app-ListActivity-method-getListView'>/**Get the activity's list view widget.
+</span>*/
+getListView : function(  ) {},
+
+<span id='android-app-ListActivity-method-getListAdapter'>/**Get the ListAdapter associated with this activity's ListView.
+</span>*/
+getListAdapter : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

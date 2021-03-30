@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-admin-DeviceAdminInfo'>/**@class android.app.admin.DeviceAdminInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class is used to specify meta information of a device administrator
+ component.
+*/
+var DeviceAdminInfo = {
+
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_DEVICE_OWNER'>/** A type of policy that this device admin can use: device owner meta-policy
+</span> for an admin that is designated as owner of the device.
+
+ @hide
+*/
+USES_POLICY_DEVICE_OWNER : &quot;-2&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_PROFILE_OWNER'>/** A type of policy that this device admin can use: profile owner meta-policy
+</span> for admins that have been installed as owner of some user profile.
+
+ @hide
+*/
+USES_POLICY_PROFILE_OWNER : &quot;-1&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_LIMIT_PASSWORD'>/** A type of policy that this device admin can use: limit the passwords
+</span> that the user can select, via {@link android.app.admin.DevicePolicyManager#setPasswordQuality}
+ and {@link android.app.admin.DevicePolicyManager#setPasswordMinimumLength}.
+
+ &lt;p&gt;To control this policy, the device admin must be a device owner or profile owner,
+ and must have a &quot;limit-password&quot; tag in the &quot;uses-policies&quot; section of its meta-data.
+ If used by a device owner, the policy only affects the primary user and its profiles,
+ but not any secondary users on the device.
+*/
+USES_POLICY_LIMIT_PASSWORD : &quot;0&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_WATCH_LOGIN'>/** A type of policy that this device admin can use: able to watch login
+</span> attempts from the user, via {@link android.app.admin.DeviceAdminReceiver#ACTION_PASSWORD_FAILED},
+ {@link android.app.admin.DeviceAdminReceiver#ACTION_PASSWORD_SUCCEEDED}, and
+ {@link android.app.admin.DevicePolicyManager#getCurrentFailedPasswordAttempts}.
+
+ &lt;p&gt;To control this policy, the device admin must have a &quot;watch-login&quot;
+ tag in the &quot;uses-policies&quot; section of its meta-data.
+*/
+USES_POLICY_WATCH_LOGIN : &quot;1&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_RESET_PASSWORD'>/** A type of policy that this device admin can use: able to reset the
+</span> user's password via
+ {@link android.app.admin.DevicePolicyManager#resetPassword}.
+
+ &lt;p&gt;To control this policy, the device admin must have a &quot;reset-password&quot;
+ tag in the &quot;uses-policies&quot; section of its meta-data.
+*/
+USES_POLICY_RESET_PASSWORD : &quot;2&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_FORCE_LOCK'>/** A type of policy that this device admin can use: able to force the device
+</span> to lock via{@link android.app.admin.DevicePolicyManager#lockNow} or limit the
+ maximum lock timeout for the device via
+ {@link android.app.admin.DevicePolicyManager#setMaximumTimeToLock}.
+
+ &lt;p&gt;To control this policy, the device admin must have a &quot;force-lock&quot;
+ tag in the &quot;uses-policies&quot; section of its meta-data.
+*/
+USES_POLICY_FORCE_LOCK : &quot;3&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_WIPE_DATA'>/** A type of policy that this device admin can use: able to factory
+</span> reset the device, erasing all of the user's data, via
+ {@link android.app.admin.DevicePolicyManager#wipeData}.
+
+ &lt;p&gt;To control this policy, the device admin must have a &quot;wipe-data&quot;
+ tag in the &quot;uses-policies&quot; section of its meta-data.
+*/
+USES_POLICY_WIPE_DATA : &quot;4&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_SETS_GLOBAL_PROXY'>/** A type of policy that this device admin can use: able to specify the
+</span> device Global Proxy, via {@link android.app.admin.DevicePolicyManager#setGlobalProxy}.
+
+ &lt;p&gt;To control this policy, the device admin must have a &quot;set-global-proxy&quot;
+ tag in the &quot;uses-policies&quot; section of its meta-data.
+ @hide
+*/
+USES_POLICY_SETS_GLOBAL_PROXY : &quot;5&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_EXPIRE_PASSWORD'>/** A type of policy that this device admin can use: force the user to
+</span> change their password after an administrator-defined time limit.
+
+ &lt;p&gt;To control this policy, the device admin must be a device owner or profile owner,
+ and must have an &quot;expire-password&quot; tag in the &quot;uses-policies&quot; section of its meta-data.
+ If used by a device owner, the policy only affects the primary user and its profiles,
+ but not any secondary users on the device.
+*/
+USES_POLICY_EXPIRE_PASSWORD : &quot;6&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_ENCRYPTED_STORAGE'>/** A type of policy that this device admin can use: require encryption of stored data.
+</span>
+ &lt;p&gt;To control this policy, the device admin must have a &quot;encrypted-storage&quot;
+ tag in the &quot;uses-policies&quot; section of its meta-data.
+*/
+USES_ENCRYPTED_STORAGE : &quot;7&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_DISABLE_CAMERA'>/** A type of policy that this device admin can use: disables use of all device cameras.
+</span>
+ &lt;p&gt;To control this policy, the device admin must be a device owner or profile owner,
+ and must have a &quot;disable-camera&quot; tag in the &quot;uses-policies&quot; section of its meta-data.
+ If used by a device owner, the policy affects all users on the device.
+*/
+USES_POLICY_DISABLE_CAMERA : &quot;8&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-USES_POLICY_DISABLE_KEYGUARD_FEATURES'>/** A type of policy that this device admin can use: disables use of keyguard features.
+</span>
+ &lt;p&gt;To control this policy, the device admin must be a device owner or profile owner,
+ and must have a &quot;disable-keyguard-features&quot; tag in the &quot;uses-policies&quot; section of its
+ meta-data.  If used by a device owner, the policy only affects the primary user and
+ its profiles, but not any secondary users on the device.
+*/
+USES_POLICY_DISABLE_KEYGUARD_FEATURES : &quot;9&quot;,
+<span id='android-app-admin-DeviceAdminInfo-property-CREATOR'>/** Used to make this class parcelable.
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-app-admin-DeviceAdminInfo-method-getPackageName'>/**Return the .apk package that implements this device admin.
+</span>*/
+getPackageName : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-getReceiverName'>/**Return the class name of the receiver component that implements
+</span> this device admin.
+*/
+getReceiverName : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-getActivityInfo'>/**Return the raw information about the receiver implementing this
+</span> device admin.  Do not modify the returned object.
+*/
+getActivityInfo : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-getComponent'>/**Return the component of the receiver that implements this device admin.
+</span>*/
+getComponent : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-loadLabel'>/**Load the user-displayed label for this device admin.
+</span>@param {Object {PackageManager}} pm Supply a PackageManager used to load the device admin's
+ resources.
+*/
+loadLabel : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-loadDescription'>/**Load user-visible description associated with this device admin.
+</span>@param {Object {PackageManager}} pm Supply a PackageManager used to load the device admin's
+ resources.
+*/
+loadDescription : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-loadIcon'>/**Load the user-displayed icon for this device admin.
+</span>@param {Object {PackageManager}} pm Supply a PackageManager used to load the device admin's
+ resources.
+*/
+loadIcon : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-isVisible'>/**Returns whether this device admin would like to be visible to the
+</span> user, even when it is not enabled.
+*/
+isVisible : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-usesPolicy'>/**Return true if the device admin has requested that it be able to use
+</span> the given policy control.  The possible policy identifier inputs are:
+ {@link #USES_POLICY_LIMIT_PASSWORD}, {@link #USES_POLICY_WATCH_LOGIN},
+ {@link #USES_POLICY_RESET_PASSWORD}, {@link #USES_POLICY_FORCE_LOCK},
+ {@link #USES_POLICY_WIPE_DATA},
+ {@link #USES_POLICY_EXPIRE_PASSWORD}, {@link #USES_ENCRYPTED_STORAGE},
+ {@link #USES_POLICY_DISABLE_CAMERA}.
+*/
+usesPolicy : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-getTagForPolicy'>/**Return the XML tag name for the given policy identifier.  Valid identifiers
+</span> are as per {@link #usesPolicy}(int).  If the given identifier is not
+ known, null is returned.
+*/
+getTagForPolicy : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-supportsTransferOwnership'>/**Return true if this administrator can be a target in an ownership transfer.
+</span>*/
+supportsTransferOwnership : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-getUsedPolicies'>/**
+</span>@hide 
+*/
+getUsedPolicies : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-writePoliciesToXml'>/**
+</span>@hide 
+*/
+writePoliciesToXml : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-readPoliciesFromXml'>/**
+</span>@hide 
+*/
+readPoliciesFromXml : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-writeToParcel'>/**Used to package this object into a {@link Parcel}.
+</span>@param {Object {Parcel}} dest The {@link Parcel} to be written.
+@param {Number} flags The flags used for parceling.
+*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-accounts-AbstractAccountAuthenticator'>/**@class android.accounts.AbstractAccountAuthenticator
+</span>@extends java.lang.Object
+
+ Abstract base class for creating AccountAuthenticators.
+ In order to be an authenticator one must extend this class, provide implementations for the
+ abstract methods, and write a service that returns the result of {@link #getIBinder}()
+ in the service's {@link android.app.Service#onBind(android.content.Intent)} when invoked
+ with an intent with action {@link android.accounts.AccountManager#ACTION_AUTHENTICATOR_INTENT}. This service
+ must specify the following intent filter and metadata tags in its AndroidManifest.xml file
+ &lt;pre&gt;
+   &amp;lt;intent-filter&amp;gt;
+     &amp;lt;action android:name=&quot;android.accounts.AccountAuthenticator&quot; /&amp;gt;
+   &amp;lt;/intent-filter&amp;gt;
+   &amp;lt;meta-data android:name=&quot;android.accounts.AccountAuthenticator&quot;
+             android:resource=&quot;@xml/authenticator&quot; /&amp;gt;
+ &lt;/pre&gt;
+ The &lt;code&gt;android:resource&lt;/code&gt; attribute must point to a resource that looks like:
+ &lt;pre&gt;
+ &amp;lt;account-authenticator xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:accountType=&quot;typeOfAuthenticator&quot;
+    android:icon=&quot;@drawable/icon&quot;
+    android:smallIcon=&quot;@drawable/miniIcon&quot;
+    android:label=&quot;@string/label&quot;
+    android:accountPreferences=&quot;@xml/account_preferences&quot;
+ /&amp;gt;
+ &lt;/pre&gt;
+ Replace the icons and labels with your own resources. The &lt;code&gt;android:accountType&lt;/code&gt;
+ attribute must be a string that uniquely identifies your authenticator and will be the same
+ string that user will use when making calls on the {@link android.accounts.AccountManager} and it also
+ corresponds to {@link android.accounts.Account#type} for your accounts. One user of the android:icon is the
+ &quot;Account &amp; Sync&quot; settings page and one user of the android:smallIcon is the Contact Application's
+ tab panels.
+ &lt;p&gt;
+ The preferences attribute points to a PreferenceScreen xml hierarchy that contains
+ a list of PreferenceScreens that can be invoked to manage the authenticator. An example is:
+ &lt;pre&gt;
+ &amp;lt;PreferenceScreen xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&amp;gt;
+    &amp;lt;PreferenceCategory android:title=&quot;@string/title_fmt&quot; /&amp;gt;
+    &amp;lt;PreferenceScreen
+         android:key=&quot;key1&quot;
+         android:title=&quot;@string/key1_action&quot;
+         android:summary=&quot;@string/key1_summary&quot;&amp;gt;
+         &amp;lt;intent
+             android:action=&quot;key1.ACTION&quot;
+             android:targetPackage=&quot;key1.package&quot;
+             android:targetClass=&quot;key1.class&quot; /&amp;gt;
+     &amp;lt;/PreferenceScreen&amp;gt;
+ &amp;lt;/PreferenceScreen&amp;gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ The standard pattern for implementing any of the abstract methods is the following:
+ &lt;ul&gt;
+ &lt;li&gt; If the supplied arguments are enough for the authenticator to fully satisfy the request
+ then it will do so and return a {@link Bundle} that contains the results.
+ &lt;li&gt; If the authenticator needs information from the user to satisfy the request then it
+ will create an {@link Intent} to an activity that will prompt the user for the information
+ and then carry out the request. This intent must be returned in a Bundle as key
+ {@link android.accounts.AccountManager#KEY_INTENT}.
+ &lt;p&gt;
+ The activity needs to return the final result when it is complete so the Intent should contain
+ the {@link android.accounts.AccountAuthenticatorResponse} as {@link android.accounts.AccountManager#KEY_ACCOUNT_MANAGER_RESPONSE}.
+ The activity must then call {@link android.accounts.AccountAuthenticatorResponse#onResult} or
+ {@link android.accounts.AccountAuthenticatorResponse#onError} when it is complete.
+ &lt;li&gt; If the authenticator cannot synchronously process the request and return a result then it
+ may choose to return null and then use the AccountManagerResponse to send the result
+ when it has completed the request.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ The following descriptions of each of the abstract authenticator methods will not describe the
+ possible asynchronous nature of the request handling and will instead just describe the input
+ parameters and the expected result.
+ &lt;p&gt;
+ When writing an activity to satisfy these requests one must pass in the AccountManagerResponse
+ and return the result via that response when the activity finishes (or whenever else  the
+ activity author deems it is the correct time to respond).
+ The {@link android.accounts.AccountAuthenticatorActivity} handles this, so one may wish to extend that when
+ writing activities to handle these requests.
+*/
+var AbstractAccountAuthenticator = {
+
+<span id='android-accounts-AbstractAccountAuthenticator-property-KEY_CUSTOM_TOKEN_EXPIRY'>/** Bundle key used for the {@code long} expiration time (in millis from the unix epoch) of the
+</span> associated auth token.
+
+ @see #getAuthToken
+*/
+KEY_CUSTOM_TOKEN_EXPIRY : &quot;android.accounts.expiry&quot;,
+<span id='android-accounts-AbstractAccountAuthenticator-method-getIBinder'>/**
+</span>@return {Object {android.os.IBinder}} the IBinder for the AccountAuthenticator
+*/
+getIBinder : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-editProperties'>/**Returns a Bundle that contains the Intent of the activity that can be used to edit the
+</span> properties. In order to indicate success the activity should call response.setResult()
+ with a non-null Bundle.
+@param {Object {AccountAuthenticatorResponse}} response used to set the result for the request. If the Constants.INTENT_KEY
+   is set in the bundle then this response field is to be used for sending future
+   results if and when the Intent is started.
+@param {String} accountType the AccountType whose properties are to be edited.
+@return {Object {android.os.Bundle}} a Bundle containing the result or the Intent to start to continue the request.
+   If this is null then the request is considered to still be active and the result should
+   sent later using response.
+*/
+editProperties : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-addAccount'>/**Adds an account of the specified accountType.
+</span>@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never be null
+@param {String} accountType the type of account to add, will never be null
+@param {String} authTokenType the type of auth token to retrieve after adding the account, may be null
+@param {Object {java.lang.String[]}} requiredFeatures a String array of authenticator-specific features that the added
+ account must support, may be null
+@param {Object {Bundle}} options a Bundle of authenticator-specific options. It always contains
+ {@link AccountManager#KEY_CALLER_PID} and {@link AccountManager#KEY_CALLER_UID}
+ fields which will let authenticator know the identity of the caller.
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the response. The result
+ will contain either:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AccountManager#KEY_INTENT}, or
+ &lt;li&gt; {@link AccountManager#KEY_ACCOUNT_NAME} and {@link AccountManager#KEY_ACCOUNT_TYPE} of
+ the account that was added, or
+ &lt;li&gt; {@link AccountManager#KEY_ERROR_CODE} and {@link AccountManager#KEY_ERROR_MESSAGE} to
+ indicate an error
+ &lt;/ul&gt;
+@throws NetworkErrorException if the authenticator could not honor the request due to a
+ network error
+*/
+addAccount : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-confirmCredentials'>/**Checks that the user knows the credentials of an account.
+</span>@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never be null
+@param {Object {Account}} account the account whose credentials are to be checked, will never be null
+@param {Object {Bundle}} options a Bundle of authenticator-specific options, may be null
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the response. The result
+ will contain either:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AccountManager#KEY_INTENT}, or
+ &lt;li&gt; {@link AccountManager#KEY_BOOLEAN_RESULT}, true if the check succeeded, false otherwise
+ &lt;li&gt; {@link AccountManager#KEY_ERROR_CODE} and {@link AccountManager#KEY_ERROR_MESSAGE} to
+ indicate an error
+ &lt;/ul&gt;
+@throws NetworkErrorException if the authenticator could not honor the request due to a
+ network error
+*/
+confirmCredentials : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-getAuthToken'>/**Gets an authtoken for an account.
+</span>
+ If not {@code null}, the resultant {@link Bundle} will contain different sets of keys
+ depending on whether a token was successfully issued and, if not, whether one
+ could be issued via some {@link android.app.Activity}.
+ &lt;p&gt;
+ If a token cannot be provided without some additional activity, the Bundle should contain
+ {@link android.accounts.AccountManager#KEY_INTENT} with an associated {@link Intent}. On the other hand, if
+ there is no such activity, then a Bundle containing
+ {@link android.accounts.AccountManager#KEY_ERROR_CODE} and {@link android.accounts.AccountManager#KEY_ERROR_MESSAGE} should be
+ returned.
+ &lt;p&gt;
+ If a token can be successfully issued, the implementation should return the
+ {@link android.accounts.AccountManager#KEY_ACCOUNT_NAME} and {@link android.accounts.AccountManager#KEY_ACCOUNT_TYPE} of the
+ account associated with the token as well as the {@link android.accounts.AccountManager#KEY_AUTHTOKEN}. In
+ addition {@link android.accounts.AbstractAccountAuthenticator} implementations that declare themselves
+ {@code android:customTokens=true} may also provide a non-negative {@link #KEY_CUSTOM_TOKEN_EXPIRY} long value containing the expiration timestamp of the expiration
+ time (in millis since the unix epoch), tokens will be cached in memory based on
+ application's packageName/signature for however long that was specified.
+ &lt;p&gt;
+ Implementers should assume that tokens will be cached on the basis of account and
+ authTokenType. The system may ignore the contents of the supplied options Bundle when
+ determining to re-use a cached token. Furthermore, implementers should assume a supplied
+ expiration time will be treated as non-binding advice.
+ &lt;p&gt;
+ Finally, note that for {@code android:customTokens=false} authenticators, tokens are cached
+ indefinitely until some client calls {@link android.accounts.AccountManager#invalidateAuthToken(String,String)}.
+@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never be null
+@param {Object {Account}} account the account whose credentials are to be retrieved, will never be null
+@param {String} authTokenType the type of auth token to retrieve, will never be null
+@param {Object {Bundle}} options a Bundle of authenticator-specific options. It always contains
+ {@link AccountManager#KEY_CALLER_PID} and {@link AccountManager#KEY_CALLER_UID}
+ fields which will let authenticator know the identity of the caller.
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the response.
+@throws NetworkErrorException if the authenticator could not honor the request due to a
+ network error
+*/
+getAuthToken : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-getAuthTokenLabel'>/**Ask the authenticator for a localized label for the given authTokenType.
+</span>@param {String} authTokenType the authTokenType whose label is to be returned, will never be null
+@return {String} the localized label of the auth token type, may be null if the type isn't known
+*/
+getAuthTokenLabel : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-updateCredentials'>/**Update the locally stored credentials for an account.
+</span>@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never be null
+@param {Object {Account}} account the account whose credentials are to be updated, will never be null
+@param {String} authTokenType the type of auth token to retrieve after updating the credentials,
+ may be null
+@param {Object {Bundle}} options a Bundle of authenticator-specific options, may be null
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the response. The result
+ will contain either:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AccountManager#KEY_INTENT}, or
+ &lt;li&gt; {@link AccountManager#KEY_ACCOUNT_NAME} and {@link AccountManager#KEY_ACCOUNT_TYPE} of
+ the account whose credentials were updated, or
+ &lt;li&gt; {@link AccountManager#KEY_ERROR_CODE} and {@link AccountManager#KEY_ERROR_MESSAGE} to
+ indicate an error
+ &lt;/ul&gt;
+@throws NetworkErrorException if the authenticator could not honor the request due to a
+ network error
+*/
+updateCredentials : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-hasFeatures'>/**Checks if the account supports all the specified authenticator specific features.
+</span>@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never be null
+@param {Object {Account}} account the account to check, will never be null
+@param {Object {java.lang.String[]}} features an array of features to check, will never be null
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the response. The result
+ will contain either:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AccountManager#KEY_INTENT}, or
+ &lt;li&gt; {@link AccountManager#KEY_BOOLEAN_RESULT}, true if the account has all the features,
+ false otherwise
+ &lt;li&gt; {@link AccountManager#KEY_ERROR_CODE} and {@link AccountManager#KEY_ERROR_MESSAGE} to
+ indicate an error
+ &lt;/ul&gt;
+@throws NetworkErrorException if the authenticator could not honor the request due to a
+ network error
+*/
+hasFeatures : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-getAccountRemovalAllowed'>/**Checks if the removal of this account is allowed.
+</span>@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never be null
+@param {Object {Account}} account the account to check, will never be null
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the response. The result
+ will contain either:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AccountManager#KEY_INTENT}, or
+ &lt;li&gt; {@link AccountManager#KEY_BOOLEAN_RESULT}, true if the removal of the account is
+ allowed, false otherwise
+ &lt;li&gt; {@link AccountManager#KEY_ERROR_CODE} and {@link AccountManager#KEY_ERROR_MESSAGE} to
+ indicate an error
+ &lt;/ul&gt;
+@throws NetworkErrorException if the authenticator could not honor the request due to a
+ network error
+*/
+getAccountRemovalAllowed : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-getAccountCredentialsForCloning'>/**Returns a Bundle that contains whatever is required to clone the account on a different
+</span> user. The Bundle is passed to the authenticator instance in the target user via
+ {@link #addandroid.accounts.AccountFromCredentials(android.accounts.AccountAuthenticatorResponse, android.accounts.Account, Bundle)}.
+ The default implementation returns null, indicating that cloning is not supported.
+@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never be null
+@param {Object {Account}} account the account to clone, will never be null
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the response.
+@throws NetworkErrorException
+@see #addAccountFromCredentials(AccountAuthenticatorResponse, Account, Bundle)
+*/
+getAccountCredentialsForCloning : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-addAccountFromCredentials'>/**Creates an account based on credentials provided by the authenticator instance of another
+</span> user on the device, who has chosen to share the account with this user.
+@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never be null
+@param {Object {Account}} account the account to clone, will never be null
+@param {Object {Bundle}} accountCredentials the Bundle containing the required credentials to create the
+ account. Contents of the Bundle are only meaningful to the authenticator. This Bundle is
+ provided by {@link #getAccountCredentialsForCloning(AccountAuthenticatorResponse, Account)}.
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the response.
+@throws NetworkErrorException
+@see #getAccountCredentialsForCloning(AccountAuthenticatorResponse, Account)
+*/
+addAccountFromCredentials : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-startAddAccountSession'>/**Starts the add account session to authenticate user to an account of the
+</span> specified accountType. No file I/O should be performed in this call.
+ Account should be added to device only when {@link #finishSession} is
+ called after this.
+ &lt;p&gt;
+ Note: when overriding this method, {@link #finishSession} should be
+ overridden too.
+ &lt;/p&gt;
+@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never
+            be null
+@param {String} accountType the type of account to authenticate with, will never
+            be null
+@param {String} authTokenType the type of auth token to retrieve after
+            authenticating with the account, may be null
+@param {Object {java.lang.String[]}} requiredFeatures a String array of authenticator-specific features
+            that the account authenticated with must support, may be null
+@param {Object {Bundle}} options a Bundle of authenticator-specific options, may be null
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the
+         response. The result will contain either:
+         &lt;ul&gt;
+         &lt;li&gt;{@link AccountManager#KEY_INTENT}, or
+         &lt;li&gt;{@link AccountManager#KEY_ACCOUNT_SESSION_BUNDLE} for adding
+         the account to device later, and if account is authenticated,
+         optional {@link AccountManager#KEY_PASSWORD} and
+         {@link AccountManager#KEY_ACCOUNT_STATUS_TOKEN} for checking the
+         status of the account, or
+         &lt;li&gt;{@link AccountManager#KEY_ERROR_CODE} and
+         {@link AccountManager#KEY_ERROR_MESSAGE} to indicate an error
+         &lt;/ul&gt;
+@throws NetworkErrorException if the authenticator could not honor the
+             request due to a network error
+@see #finishSession(AccountAuthenticatorResponse, String, Bundle)
+*/
+startAddAccountSession : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-startUpdateCredentialsSession'>/**Asks user to re-authenticate for an account but defers updating the
+</span> locally stored credentials. No file I/O should be performed in this call.
+ Local credentials should be updated only when {@link #finishSession} is
+ called after this.
+ &lt;p&gt;
+ Note: when overriding this method, {@link #finishSession} should be
+ overridden too.
+ &lt;/p&gt;
+@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never
+            be null
+@param {Object {Account}} account the account whose credentials are to be updated, will
+            never be null
+@param {String} authTokenType the type of auth token to retrieve after updating
+            the credentials, may be null
+@param {Object {Bundle}} options a Bundle of authenticator-specific options, may be null
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the
+         response. The result will contain either:
+         &lt;ul&gt;
+         &lt;li&gt;{@link AccountManager#KEY_INTENT}, or
+         &lt;li&gt;{@link AccountManager#KEY_ACCOUNT_SESSION_BUNDLE} for
+         updating the locally stored credentials later, and if account is
+         re-authenticated, optional {@link AccountManager#KEY_PASSWORD}
+         and {@link AccountManager#KEY_ACCOUNT_STATUS_TOKEN} for checking
+         the status of the account later, or
+         &lt;li&gt;{@link AccountManager#KEY_ERROR_CODE} and
+         {@link AccountManager#KEY_ERROR_MESSAGE} to indicate an error
+         &lt;/ul&gt;
+@throws NetworkErrorException if the authenticator could not honor the
+             request due to a network error
+@see #finishSession(AccountAuthenticatorResponse, String, Bundle)
+*/
+startUpdateCredentialsSession : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-finishSession'>/**Finishes the session started by #startAddAccountSession or
+</span> #startUpdateCredentials by installing the account to device with
+ AccountManager, or updating the local credentials. File I/O may be
+ performed in this call.
+ &lt;p&gt;
+ Note: when overriding this method, {@link #startAddAccountSession} and
+ {@link #startUpdateCredentialsSession} should be overridden too.
+ &lt;/p&gt;
+@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never
+            be null
+@param {String} accountType the type of account to authenticate with, will never
+            be null
+@param {Object {Bundle}} sessionBundle a bundle of session data created by
+            {@link #startAddAccountSession} used for adding account to
+            device, or by {@link #startUpdateCredentialsSession} used for
+            updating local credentials.
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the
+         response. The result will contain either:
+         &lt;ul&gt;
+         &lt;li&gt;{@link AccountManager#KEY_INTENT}, or
+         &lt;li&gt;{@link AccountManager#KEY_ACCOUNT_NAME} and
+         {@link AccountManager#KEY_ACCOUNT_TYPE} of the account that was
+         added or local credentials were updated, and optional
+         {@link AccountManager#KEY_ACCOUNT_STATUS_TOKEN} for checking
+         the status of the account later, or
+         &lt;li&gt;{@link AccountManager#KEY_ERROR_CODE} and
+         {@link AccountManager#KEY_ERROR_MESSAGE} to indicate an error
+         &lt;/ul&gt;
+@throws NetworkErrorException if the authenticator could not honor the request due to a
+             network error
+@see #startAddAccountSession and #startUpdateCredentialsSession
+*/
+finishSession : function(  ) {},
+
+<span id='android-accounts-AbstractAccountAuthenticator-method-isCredentialsUpdateSuggested'>/**Checks if update of the account credentials is suggested.
+</span>@param {Object {AccountAuthenticatorResponse}} response to send the result back to the AccountManager, will never be null.
+@param {Object {Account}} account the account to check, will never be null
+@param {String} statusToken a String of token which can be used to check the status of locally
+            stored credentials and if update of credentials is suggested
+@return {Object {android.os.Bundle}} a Bundle result or null if the result is to be returned via the response. The result
+         will contain either:
+         &lt;ul&gt;
+         &lt;li&gt;{@link AccountManager#KEY_BOOLEAN_RESULT}, true if update of account's
+         credentials is suggested, false otherwise
+         &lt;li&gt;{@link AccountManager#KEY_ERROR_CODE} and
+         {@link AccountManager#KEY_ERROR_MESSAGE} to indicate an error
+         &lt;/ul&gt;
+@throws NetworkErrorException if the authenticator could not honor the request due to a
+             network error
+*/
+isCredentialsUpdateSuggested : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

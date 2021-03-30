@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-RemoteInput'>/**@class android.app.RemoteInput
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A {@code RemoteInput} object specifies input to be collected from a user to be passed along with
+ an intent inside a {@link android.app.PendingIntent} that is sent.
+ Always use {@link android.app.RemoteInput.Builder} to create instances of this class.
+ &lt;p class=&quot;note&quot;&gt; See
+ &lt;a href=&quot;{@docRoot}guide/topics/ui/notifiers/notifications.html#direct&quot;&gt;Replying
+ to notifications&lt;/a&gt; for more information on how to use this class.
+
+ &lt;p&gt;The following example adds a {@code RemoteInput} to a {@link android.app.Notification.Action},
+ sets the result key as {@code quick_reply}, and sets the label as {@code Quick reply}.
+ Users are prompted to input a response when they trigger the action. The results are sent along
+ with the intent and can be retrieved with the result key (provided to the {@link android.app.AlertDialog.Builder}
+ constructor) from the Bundle returned by {@link #getResultsFromIntent}.
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ public static final String KEY_QUICK_REPLY_TEXT = &quot;quick_reply&quot;;
+ Notification.Action action = new Notification.Action.Builder(
+         R.drawable.reply, &amp;quot;Reply&amp;quot;, actionIntent)
+         &lt;b&gt;.addRemoteInput(new RemoteInput.Builder(KEY_QUICK_REPLY_TEXT)
+                 .setLabel(&quot;Quick reply&quot;).build()&lt;/b&gt;)
+         .build();&lt;/pre&gt;
+
+ &lt;p&gt;When the {@link android.app.PendingIntent} is fired, the intent inside will contain the
+ input results if collected. To access these results, use the {@link #getResultsFromIntent}
+ function. The result values will present under the result key passed to the {@link android.app.AlertDialog.Builder}
+ constructor.
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ public static final String KEY_QUICK_REPLY_TEXT = &quot;quick_reply&quot;;
+ Bundle results = RemoteInput.getResultsFromIntent(intent);
+ if (results != null) {
+     CharSequence quickReplyResult = results.getCharSequence(KEY_QUICK_REPLY_TEXT);
+ }&lt;/pre&gt;
+*/
+var RemoteInput = {
+
+<span id='android-app-RemoteInput-property-RESULTS_CLIP_LABEL'>/**Label used to denote the clip data type used for remote input transport */
+</span>RESULTS_CLIP_LABEL : &quot;android.remoteinput.results&quot;,
+<span id='android-app-RemoteInput-property-EXTRA_RESULTS_DATA'>/**Extra added to a clip data intent object to hold the text results bundle. */
+</span>EXTRA_RESULTS_DATA : &quot;android.remoteinput.resultsData&quot;,
+<span id='android-app-RemoteInput-property-SOURCE_FREE_FORM_INPUT'>/**The user manually entered the data. */
+</span>SOURCE_FREE_FORM_INPUT : &quot;0&quot;,
+<span id='android-app-RemoteInput-property-SOURCE_CHOICE'>/**The user selected one of the choices from {@link #getChoices}. */
+</span>SOURCE_CHOICE : &quot;1&quot;,
+<span id='android-app-RemoteInput-property-EDIT_CHOICES_BEFORE_SENDING_AUTO'>/**The platform will determine whether choices will be edited before being sent to the app. */
+</span>EDIT_CHOICES_BEFORE_SENDING_AUTO : &quot;0&quot;,
+<span id='android-app-RemoteInput-property-EDIT_CHOICES_BEFORE_SENDING_DISABLED'>/**Tapping on a choice should send the input immediately, without letting the user edit it. */
+</span>EDIT_CHOICES_BEFORE_SENDING_DISABLED : &quot;1&quot;,
+<span id='android-app-RemoteInput-property-EDIT_CHOICES_BEFORE_SENDING_ENABLED'>/**Tapping on a choice should let the user edit the input before it is sent to the app. */
+</span>EDIT_CHOICES_BEFORE_SENDING_ENABLED : &quot;2&quot;,
+<span id='android-app-RemoteInput-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-RemoteInput-method-getResultKey'>/**Get the key that the result of this input will be set in from the Bundle returned by
+</span> {@link #getResultsFromIntent} when the {@link android.app.PendingIntent} is sent.
+*/
+getResultKey : function(  ) {},
+
+<span id='android-app-RemoteInput-method-getLabel'>/**Get the label to display to users when collecting this input.
+</span>*/
+getLabel : function(  ) {},
+
+<span id='android-app-RemoteInput-method-getChoices'>/**Get possible input choices. This can be {@code null} if there are no choices to present.
+</span>*/
+getChoices : function(  ) {},
+
+<span id='android-app-RemoteInput-method-getAllowedDataTypes'>/**Get possible non-textual inputs that are accepted.
+</span> This can be {@code null} if the input does not accept non-textual values.
+ See {@link android.app.AlertDialog.Builder#setAllowDataType}.
+*/
+getAllowedDataTypes : function(  ) {},
+
+<span id='android-app-RemoteInput-method-isDataOnly'>/**Returns true if the input only accepts data, meaning {@link #getAllowFreeFormInput}
+</span> is false, {@link #getChoices} is null or empty, and {@link #getAllowedDataTypes} is
+ non-null and not empty.
+*/
+isDataOnly : function(  ) {},
+
+<span id='android-app-RemoteInput-method-getAllowFreeFormInput'>/**Get whether or not users can provide an arbitrary value for
+</span> input. If you set this to {@code false}, users must select one of the
+ choices in {@link #getChoices}. An {@link IllegalArgumentException} is thrown
+ if you set this to false and {@link #getChoices} returns {@code null} or empty.
+*/
+getAllowFreeFormInput : function(  ) {},
+
+<span id='android-app-RemoteInput-method-getEditChoicesBeforeSending'>/**Gets whether tapping on a choice should let the user edit the input before it is sent to the
+</span> app.
+*/
+getEditChoicesBeforeSending : function(  ) {},
+
+<span id='android-app-RemoteInput-method-getExtras'>/**Get additional metadata carried around with this remote input.
+</span>*/
+getExtras : function(  ) {},
+
+<span id='android-app-RemoteInput-method-getDataResultsFromIntent'>/**Similar as {@link #getResultsFromIntent} but retrieves data results for a
+</span> specific RemoteInput result. To retrieve a value use:
+ &lt;pre&gt;
+ {@code
+ Map&lt;String, Uri&gt; results =
+     RemoteInput.getDataResultsFromIntent(intent, REMOTE_INPUT_KEY);
+ if (results != null) {
+   Uri data = results.get(MIME_TYPE_OF_INTEREST);
+ }
+ }
+ &lt;/pre&gt;
+@param {Object {Intent}} intent The intent object that fired in response to an action or content intent
+               which also had one or more remote input requested.
+@param {String} remoteInputResultKey The result key for the RemoteInput you want results for.
+*/
+getDataResultsFromIntent : function(  ) {},
+
+<span id='android-app-RemoteInput-method-getResultsFromIntent'>/**Get the remote input text results bundle from an intent. The returned Bundle will
+</span> contain a key/value for every result key populated with text by remote input collector.
+ Use the {@link Bundle#getCharSequence(String)} method to retrieve a value. For non-text
+ results use {@link #getDataResultsFromIntent}.
+@param {Object {Intent}} intent The intent object that fired in response to an action or content intent
+               which also had one or more remote input requested.
+*/
+getResultsFromIntent : function(  ) {},
+
+<span id='android-app-RemoteInput-method-addResultsToIntent'>/**Populate an intent object with the text results gathered from remote input. This method
+</span> should only be called by remote input collection services when sending results to a
+ pending intent.
+@param {Object {android.app.RemoteInput[]}} remoteInputs The remote inputs for which results are being provided
+@param {Object {Intent}} intent The intent to add remote inputs to. The {@link ClipData}
+               field of the intent will be modified to contain the results.
+@param {Object {Bundle}} results A bundle holding the remote input results. This bundle should
+                be populated with keys matching the result keys specified in
+                {@code remoteInputs} with values being the CharSequence results per key.
+*/
+addResultsToIntent : function(  ) {},
+
+<span id='android-app-RemoteInput-method-addDataResultToIntent'>/**Same as {@link #addResultsToIntent} but for setting data results. This is used
+</span> for inputs that accept non-textual results (see {@link android.app.AlertDialog.Builder#setAllowDataType}).
+ Only one result can be provided for every mime type accepted by the RemoteInput.
+ If multiple inputs of the same mime type are expected then multiple RemoteInputs
+ should be used.
+@param {Object {RemoteInput}} remoteInput The remote input for which results are being provided
+@param {Object {Intent}} intent The intent to add remote input results to. The {@link ClipData}
+               field of the intent will be modified to contain the results.
+@param {Object {java.util.Map}} results A map of mime type to the Uri result for that mime type.
+*/
+addDataResultToIntent : function(  ) {},
+
+<span id='android-app-RemoteInput-method-setResultsSource'>/**Set the source of the RemoteInput results. This method should only be called by remote
+</span> input collection services (e.g.
+ {@link android.service.notification.NotificationListenerService})
+ when sending results to a pending intent.
+@param {Object {Intent}} intent The intent to add remote input source to. The {@link ClipData}
+               field of the intent will be modified to contain the source.
+@param {Number} source The source of the results.
+@param intent The intent to add remote input source to. The {@link ClipData}
+               field of the intent will be modified to contain the source.
+@param source The source of the results.
+*/
+setResultsSource : function(  ) {},
+
+<span id='android-app-RemoteInput-method-getResultsSource'>/**Get the source of the RemoteInput results.
+</span>@param {Object {Intent}} intent The intent object that fired in response to an action or content intent
+               which also had one or more remote input requested.
+@see #SOURCE_CHOICE
+@param intent The intent object that fired in response to an action or content intent
+               which also had one or more remote input requested.
+@return {Number} The source of the results. If no source was set, {@link #SOURCE_FREE_FORM_INPUT} will
+ be returned.
+*/
+getResultsSource : function(  ) {},
+
+<span id='android-app-RemoteInput-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-RemoteInput-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

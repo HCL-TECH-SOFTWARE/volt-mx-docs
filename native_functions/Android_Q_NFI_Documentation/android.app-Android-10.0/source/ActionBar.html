@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-ActionBar'>/**@class android.app.ActionBar
+</span>@extends java.lang.Object
+
+ A primary toolbar within the activity that may display the activity title, application-level
+ navigation affordances, and other interactive items.
+
+ &lt;p&gt;Beginning with Android 3.0 (API level 11), the action bar appears at the top of an
+ activity's window when the activity uses the system's {@link android.R.style#Theme_Holo Holo} theme (or one of its descendant themes), which is the default.
+ You may otherwise add the action bar by calling {@link android.view.Window#requestFeature requestFeature(FEATURE_ACTION_BAR)} or by declaring it in a
+ custom theme with the {@link android.R.styleable#Theme_windowActionBar windowActionBar} property.
+ &lt;/p&gt;
+
+ &lt;p&gt;Beginning with Android L (API level 21), the action bar may be represented by any
+ Toolbar widget within the application layout. The application may signal to the Activity
+ which Toolbar should be treated as the Activity's action bar. Activities that use this
+ feature should use one of the supplied &lt;code&gt;.NoActionBar&lt;/code&gt; themes, set the
+ {@link android.R.styleable#Theme_windowActionBar windowActionBar} attribute to &lt;code&gt;false&lt;/code&gt;
+ or otherwise not request the window feature.&lt;/p&gt;
+
+ &lt;p&gt;By adjusting the window features requested by the theme and the layouts used for
+ an Activity's content view, an app can use the standard system action bar on older platform
+ releases and the newer inline toolbars on newer platform releases. The &lt;code&gt;ActionBar&lt;/code&gt;
+ object obtained from the Activity can be used to control either configuration transparently.&lt;/p&gt;
+
+ &lt;p&gt;When using the Holo themes the action bar shows the application icon on
+ the left, followed by the activity title. If your activity has an options menu, you can make
+ select items accessible directly from the action bar as &quot;action items&quot;. You can also
+ modify various characteristics of the action bar or remove it completely.&lt;/p&gt;
+
+ &lt;p&gt;When using the Material themes (default in API 21 or newer) the navigation button
+ (formerly &quot;Home&quot;) takes over the space previously occupied by the application icon.
+ Apps wishing to express a stronger branding should use their brand colors heavily
+ in the action bar and other application chrome or use a {@link #setLogo(int) logo}
+ in place of their standard title text.&lt;/p&gt;
+
+ &lt;p&gt;From your activity, you can retrieve an instance of {@link android.app.ActionBar} by calling {@link android.app.Activity#getActionBar getActionBar()}.&lt;/p&gt;
+
+ &lt;p&gt;In some cases, the action bar may be overlayed by another bar that enables contextual actions,
+ using an {@link android.view.ActionMode}. For example, when the user selects one or more items in
+ your activity, you can enable an action mode that offers actions specific to the selected
+ items, with a UI that temporarily replaces the action bar. Although the UI may occupy the
+ same space, the {@link android.view.ActionMode} APIs are distinct and independent from those for
+ {@link android.app.ActionBar}.&lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For information about how to use the action bar, including how to add action items, navigation
+ modes and more, read the &lt;a href=&quot;{@docRoot}guide/topics/ui/actionbar.html&quot;&gt;Action
+ Bar&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var ActionBar = {
+
+<span id='android-app-ActionBar-property-NAVIGATION_MODE_STANDARD'>/** Standard navigation mode. Consists of either a logo or icon
+</span> and title text with an optional subtitle. Clicking any of these elements
+ will dispatch onOptionsItemSelected to the host Activity with
+ a MenuItem with item ID android.R.id.home.
+
+ @deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+NAVIGATION_MODE_STANDARD : &quot;0&quot;,
+<span id='android-app-ActionBar-property-NAVIGATION_MODE_LIST'>/** List navigation mode. Instead of static title text this mode
+</span> presents a list menu for navigation within the activity.
+ e.g. this might be presented to the user as a dropdown list.
+
+ @deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+NAVIGATION_MODE_LIST : &quot;1&quot;,
+<span id='android-app-ActionBar-property-NAVIGATION_MODE_TABS'>/** Tab navigation mode. Instead of static title text this mode
+</span> presents a series of tabs for navigation within the activity.
+
+ @deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+NAVIGATION_MODE_TABS : &quot;2&quot;,
+<span id='android-app-ActionBar-property-DISPLAY_USE_LOGO'>/** Use logo instead of icon if available. This flag will cause appropriate
+</span> navigation modes to use a wider logo in place of the standard icon.
+
+ @see #setDisplayOptions(int)
+ @see #setDisplayOptions(int, int)
+*/
+DISPLAY_USE_LOGO : &quot;1&quot;,
+<span id='android-app-ActionBar-property-DISPLAY_SHOW_HOME'>/** Show 'home' elements in this action bar, leaving more space for other
+</span> navigation elements. This includes logo and icon.
+
+ @see #setDisplayOptions(int)
+ @see #setDisplayOptions(int, int)
+*/
+DISPLAY_SHOW_HOME : &quot;2&quot;,
+<span id='android-app-ActionBar-property-DISPLAY_HOME_AS_UP'>/** Display the 'home' element such that it appears as an 'up' affordance.
+</span> e.g. show an arrow to the left indicating the action that will be taken.
+
+ Set this flag if selecting the 'home' button in the action bar to return
+ up by a single level in your UI rather than back to the top level or front page.
+
+ &lt;p&gt;Setting this option will implicitly enable interaction with the home/up
+ button. See {@link #setHomeButtonEnabled}(boolean).
+
+ @see #setDisplayOptions(int)
+ @see #setDisplayOptions(int, int)
+*/
+DISPLAY_HOME_AS_UP : &quot;4&quot;,
+<span id='android-app-ActionBar-property-DISPLAY_SHOW_TITLE'>/** Show the activity title and subtitle, if present.
+</span>
+ @see #setTitle(CharSequence)
+ @see #setTitle(int)
+ @see #setSubtitle(CharSequence)
+ @see #setSubtitle(int)
+ @see #setDisplayOptions(int)
+ @see #setDisplayOptions(int, int)
+*/
+DISPLAY_SHOW_TITLE : &quot;8&quot;,
+<span id='android-app-ActionBar-property-DISPLAY_SHOW_CUSTOM'>/** Show the custom view if one has been set.
+</span> @see #setCustomView(View)
+ @see #setDisplayOptions(int)
+ @see #setDisplayOptions(int, int)
+*/
+DISPLAY_SHOW_CUSTOM : &quot;16&quot;,
+<span id='android-app-ActionBar-property-DISPLAY_TITLE_MULTIPLE_LINES'>/** Allow the title to wrap onto multiple lines if space is available
+</span> @hide pending API approval
+*/
+DISPLAY_TITLE_MULTIPLE_LINES : &quot;32&quot;,
+<span id='android-app-ActionBar-method-setCustomView'>/**Set the action bar into custom navigation mode, supplying a view
+</span> for custom navigation.
+
+ Custom navigation views appear between the application icon and
+ any action buttons and may use any space available there. Common
+ use cases for custom navigation views might include an auto-suggesting
+ address bar for a browser or other navigation mechanisms that do not
+ translate well to provided navigation modes.
+@param {Object {View}} view Custom navigation view to place in the ActionBar.
+*/
+setCustomView : function(  ) {},
+
+<span id='android-app-ActionBar-method-setCustomView'>/**Set the action bar into custom navigation mode, supplying a view
+</span> for custom navigation.
+ 
+ &lt;p&gt;Custom navigation views appear between the application icon and
+ any action buttons and may use any space available there. Common
+ use cases for custom navigation views might include an auto-suggesting
+ address bar for a browser or other navigation mechanisms that do not
+ translate well to provided navigation modes.&lt;/p&gt;
+
+ &lt;p&gt;The display option {@link #DISPLAY_SHOW_CUSTOM} must be set for
+ the custom view to be displayed.&lt;/p&gt;
+@param {Object {View}} view Custom navigation view to place in the ActionBar.
+@param {Object {ActionBar.LayoutParams}} layoutParams How this custom view should layout in the bar.
+@see #setDisplayOptions(int, int)
+*/
+setCustomView : function(  ) {},
+
+<span id='android-app-ActionBar-method-setCustomView'>/**Set the action bar into custom navigation mode, supplying a view
+</span> for custom navigation.
+
+ &lt;p&gt;Custom navigation views appear between the application icon and
+ any action buttons and may use any space available there. Common
+ use cases for custom navigation views might include an auto-suggesting
+ address bar for a browser or other navigation mechanisms that do not
+ translate well to provided navigation modes.&lt;/p&gt;
+
+ &lt;p&gt;The display option {@link #DISPLAY_SHOW_CUSTOM} must be set for
+ the custom view to be displayed.&lt;/p&gt;
+@param {Number} resId Resource ID of a layout to inflate into the ActionBar.
+@see #setDisplayOptions(int, int)
+*/
+setCustomView : function(  ) {},
+
+<span id='android-app-ActionBar-method-setIcon'>/**Set the icon to display in the 'home' section of the action bar.
+</span> The action bar will use an icon specified by its style or the
+ activity icon by default.
+
+ Whether the home section shows an icon or logo is controlled
+ by the display option {@link #DISPLAY_USE_LOGO}.
+@param {Number} resId Resource ID of a drawable to show as an icon.
+@see #setDisplayUseLogoEnabled(boolean)
+@see #setDisplayShowHomeEnabled(boolean)
+*/
+setIcon : function(  ) {},
+
+<span id='android-app-ActionBar-method-setIcon'>/**Set the icon to display in the 'home' section of the action bar.
+</span> The action bar will use an icon specified by its style or the
+ activity icon by default.
+
+ Whether the home section shows an icon or logo is controlled
+ by the display option {@link #DISPLAY_USE_LOGO}.
+@param {Object {Drawable}} icon Drawable to show as an icon.
+@see #setDisplayUseLogoEnabled(boolean)
+@see #setDisplayShowHomeEnabled(boolean)
+*/
+setIcon : function(  ) {},
+
+<span id='android-app-ActionBar-method-setLogo'>/**Set the logo to display in the 'home' section of the action bar.
+</span> The action bar will use a logo specified by its style or the
+ activity logo by default.
+
+ Whether the home section shows an icon or logo is controlled
+ by the display option {@link #DISPLAY_USE_LOGO}.
+@param {Number} resId Resource ID of a drawable to show as a logo.
+@see #setDisplayUseLogoEnabled(boolean)
+@see #setDisplayShowHomeEnabled(boolean)
+*/
+setLogo : function(  ) {},
+
+<span id='android-app-ActionBar-method-setLogo'>/**Set the logo to display in the 'home' section of the action bar.
+</span> The action bar will use a logo specified by its style or the
+ activity logo by default.
+
+ Whether the home section shows an icon or logo is controlled
+ by the display option {@link #DISPLAY_USE_LOGO}.
+@param {Object {Drawable}} logo Drawable to show as a logo.
+@see #setDisplayUseLogoEnabled(boolean)
+@see #setDisplayShowHomeEnabled(boolean)
+*/
+setLogo : function(  ) {},
+
+<span id='android-app-ActionBar-method-setListNavigationCallbacks'>/**Set the adapter and navigation callback for list navigation mode.
+</span>
+ The supplied adapter will provide views for the expanded list as well as
+ the currently selected item. (These may be displayed differently.)
+
+ The supplied OnNavigationListener will alert the application when the user
+ changes the current list selection.
+@param {Object {SpinnerAdapter}} adapter An adapter that will provide views both to display
+                the current navigation selection and populate views
+                within the dropdown navigation menu.
+@param {Object {ActionBar.OnNavigationListener}} callback An OnNavigationListener that will receive events when the user
+                 selects a navigation item.
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+setListNavigationCallbacks : function(  ) {},
+
+<span id='android-app-ActionBar-method-setSelectedNavigationItem'>/**Set the selected navigation item in list or tabbed navigation modes.
+</span>@param {Number} position Position of the item to select.
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+setSelectedNavigationItem : function(  ) {},
+
+<span id='android-app-ActionBar-method-getSelectedNavigationIndex'>/**Get the position of the selected navigation item in list or tabbed navigation modes.
+</span>@return {Number} Position of the selected item.
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+getSelectedNavigationIndex : function(  ) {},
+
+<span id='android-app-ActionBar-method-getNavigationItemCount'>/**Get the number of navigation items present in the current navigation mode.
+</span>@return {Number} Number of navigation items.
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+getNavigationItemCount : function(  ) {},
+
+<span id='android-app-ActionBar-method-setTitle'>/**Set the action bar's title. This will only be displayed if
+</span> {@link #DISPLAY_SHOW_TITLE} is set.
+@param {Object {CharSequence}} title Title to set
+@see #setTitle(int)
+@see #setDisplayOptions(int, int)
+*/
+setTitle : function(  ) {},
+
+<span id='android-app-ActionBar-method-setTitle'>/**Set the action bar's title. This will only be displayed if
+</span> {@link #DISPLAY_SHOW_TITLE} is set.
+@param {Number} resId Resource ID of title string to set
+@see #setTitle(CharSequence)
+@see #setDisplayOptions(int, int)
+*/
+setTitle : function(  ) {},
+
+<span id='android-app-ActionBar-method-setSubtitle'>/**Set the action bar's subtitle. This will only be displayed if
+</span> {@link #DISPLAY_SHOW_TITLE} is set. Set to null to disable the
+ subtitle entirely.
+@param {Object {CharSequence}} subtitle Subtitle to set
+@see #setSubtitle(int)
+@see #setDisplayOptions(int, int)
+*/
+setSubtitle : function(  ) {},
+
+<span id='android-app-ActionBar-method-setSubtitle'>/**Set the action bar's subtitle. This will only be displayed if
+</span> {@link #DISPLAY_SHOW_TITLE} is set.
+@param {Number} resId Resource ID of subtitle string to set
+@see #setSubtitle(CharSequence)
+@see #setDisplayOptions(int, int)
+*/
+setSubtitle : function(  ) {},
+
+<span id='android-app-ActionBar-method-setDisplayOptions'>/**Set display options. This changes all display option bits at once. To change
+</span> a limited subset of display options, see {@link #setDisplayOptions(int, int)}.
+@param {Number} options A combination of the bits defined by the DISPLAY_ constants
+                defined in ActionBar.
+*/
+setDisplayOptions : function(  ) {},
+
+<span id='android-app-ActionBar-method-setDisplayOptions'>/**Set selected display options. Only the options specified by mask will be changed.
+</span> To change all display option bits at once, see {@link #setDisplayOptions}(int).
+ 
+ &lt;p&gt;Example: setDisplayOptions(0, DISPLAY_SHOW_HOME) will disable the
+ {@link #DISPLAY_SHOW_HOME} option.
+ setDisplayOptions(DISPLAY_SHOW_HOME, DISPLAY_SHOW_HOME | DISPLAY_USE_LOGO)
+ will enable {@link #DISPLAY_SHOW_HOME} and disable {@link #DISPLAY_USE_LOGO}.
+@param {Number} options A combination of the bits defined by the DISPLAY_ constants
+                defined in ActionBar.
+@param {Number} mask A bit mask declaring which display options should be changed.
+*/
+setDisplayOptions : function(  ) {},
+
+<span id='android-app-ActionBar-method-setDisplayUseLogoEnabled'>/**Set whether to display the activity logo rather than the activity icon.
+</span> A logo is often a wider, more detailed image.
+
+ &lt;p&gt;To set several display options at once, see the setDisplayOptions methods.
+@param {Boolean} useLogo true to use the activity logo, false to use the activity icon.
+@see #setDisplayOptions(int)
+@see #setDisplayOptions(int, int)
+*/
+setDisplayUseLogoEnabled : function(  ) {},
+
+<span id='android-app-ActionBar-method-setDisplayShowHomeEnabled'>/**Set whether to include the application home affordance in the action bar.
+</span> Home is presented as either an activity icon or logo.
+
+ &lt;p&gt;To set several display options at once, see the setDisplayOptions methods.
+@param {Boolean} showHome true to show home, false otherwise.
+@see #setDisplayOptions(int)
+@see #setDisplayOptions(int, int)
+*/
+setDisplayShowHomeEnabled : function(  ) {},
+
+<span id='android-app-ActionBar-method-setDisplayHomeAsUpEnabled'>/**Set whether home should be displayed as an &quot;up&quot; affordance.
+</span> Set this to true if selecting &quot;home&quot; returns up by a single level in your UI
+ rather than back to the top level or front page.
+
+ &lt;p&gt;To set several display options at once, see the setDisplayOptions methods.
+@param {Boolean} showHomeAsUp true to show the user that selecting home will return one
+                     level up rather than to the top level of the app.
+@see #setDisplayOptions(int)
+@see #setDisplayOptions(int, int)
+*/
+setDisplayHomeAsUpEnabled : function(  ) {},
+
+<span id='android-app-ActionBar-method-setDisplayShowTitleEnabled'>/**Set whether an activity title/subtitle should be displayed.
+</span>
+ &lt;p&gt;To set several display options at once, see the setDisplayOptions methods.
+@param {Boolean} showTitle true to display a title/subtitle if present.
+@see #setDisplayOptions(int)
+@see #setDisplayOptions(int, int)
+*/
+setDisplayShowTitleEnabled : function(  ) {},
+
+<span id='android-app-ActionBar-method-setDisplayShowCustomEnabled'>/**Set whether a custom view should be displayed, if set.
+</span>
+ &lt;p&gt;To set several display options at once, see the setDisplayOptions methods.
+@param {Boolean} showCustom true if the currently set custom view should be displayed, false otherwise.
+@see #setDisplayOptions(int)
+@see #setDisplayOptions(int, int)
+*/
+setDisplayShowCustomEnabled : function(  ) {},
+
+<span id='android-app-ActionBar-method-setBackgroundDrawable'>/**Set the ActionBar's background. This will be used for the primary
+</span> action bar.
+@param {Object {Drawable}} d Background drawable
+@see #setStackedBackgroundDrawable(Drawable)
+@see #setSplitBackgroundDrawable(Drawable)
+*/
+setBackgroundDrawable : function(  ) {},
+
+<span id='android-app-ActionBar-method-setStackedBackgroundDrawable'>/**Set the ActionBar's stacked background. This will appear
+</span> in the second row/stacked bar on some devices and configurations.
+@param {Object {Drawable}} d Background drawable for the stacked row
+*/
+setStackedBackgroundDrawable : function(  ) {},
+
+<span id='android-app-ActionBar-method-setSplitBackgroundDrawable'>/**Set the ActionBar's split background. This will appear in
+</span> the split action bar containing menu-provided action buttons
+ on some devices and configurations.
+ &lt;p&gt;You can enable split action bar with {@link android.R.attr#uiOptions}
+@param {Object {Drawable}} d Background drawable for the split bar
+*/
+setSplitBackgroundDrawable : function(  ) {},
+
+<span id='android-app-ActionBar-method-getCustomView'>/**
+</span>@return {Object {android.view.View}} The current custom view.
+*/
+getCustomView : function(  ) {},
+
+<span id='android-app-ActionBar-method-getTitle'>/**Returns the current ActionBar title in standard mode.
+</span> Returns null if {@link #getNavigationMode}() would not return
+ {@link #NAVIGATION_MODE_STANDARD}.
+@return {Object {java.lang.CharSequence}} The current ActionBar title or null.
+*/
+getTitle : function(  ) {},
+
+<span id='android-app-ActionBar-method-getSubtitle'>/**Returns the current ActionBar subtitle in standard mode.
+</span> Returns null if {@link #getNavigationMode}() would not return
+ {@link #NAVIGATION_MODE_STANDARD}.
+@return {Object {java.lang.CharSequence}} The current ActionBar subtitle or null.
+*/
+getSubtitle : function(  ) {},
+
+<span id='android-app-ActionBar-method-getNavigationMode'>/**Returns the current navigation mode. The result will be one of:
+</span> &lt;ul&gt;
+ &lt;li&gt;{@link #NAVIGATION_MODE_STANDARD}&lt;/li&gt;
+ &lt;li&gt;{@link #NAVIGATION_MODE_LIST}&lt;/li&gt;
+ &lt;li&gt;{@link #NAVIGATION_MODE_TABS}&lt;/li&gt;
+ &lt;/ul&gt;
+@return {Number} The current navigation mode.
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+getNavigationMode : function(  ) {},
+
+<span id='android-app-ActionBar-method-setNavigationMode'>/**Set the current navigation mode.
+</span>@param {Number} mode The new mode to set.
+@see #NAVIGATION_MODE_STANDARD
+@see #NAVIGATION_MODE_LIST
+@see #NAVIGATION_MODE_TABS
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+setNavigationMode : function(  ) {},
+
+<span id='android-app-ActionBar-method-getDisplayOptions'>/**
+</span>@return {Number} The current set of display options.
+*/
+getDisplayOptions : function(  ) {},
+
+<span id='android-app-ActionBar-method-newTab'>/**Create and return a new {@link android.app.ActionBar.Tab}.
+</span> This tab will not be included in the action bar until it is added.
+
+ &lt;p&gt;Very often tabs will be used to switch between {@link android.app.Fragment}
+ objects.  Here is a typical implementation of such tabs:&lt;/p&gt;
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/FragmentTabs.java
+      complete}
+@return {Object {android.app.ActionBar.Tab}} A new Tab
+@see #addTab(Tab)
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+newTab : function(  ) {},
+
+<span id='android-app-ActionBar-method-addTab'>/**Add a tab for use in tabbed navigation mode. The tab will be added at the end of the list.
+</span> If this is the first tab to be added it will become the selected tab.
+@param {Object {ActionBar.Tab}} tab Tab to add
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+addTab : function(  ) {},
+
+<span id='android-app-ActionBar-method-addTab'>/**Add a tab for use in tabbed navigation mode. The tab will be added at the end of the list.
+</span>@param {Object {ActionBar.Tab}} tab Tab to add
+@param {Boolean} setSelected True if the added tab should become the selected tab.
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+addTab : function(  ) {},
+
+<span id='android-app-ActionBar-method-addTab'>/**Add a tab for use in tabbed navigation mode. The tab will be inserted at
+</span> &lt;code&gt;position&lt;/code&gt;. If this is the first tab to be added it will become
+ the selected tab.
+@param {Object {ActionBar.Tab}} tab The tab to add
+@param {Number} position The new position of the tab
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+addTab : function(  ) {},
+
+<span id='android-app-ActionBar-method-addTab'>/**Add a tab for use in tabbed navigation mode. The tab will be insterted at
+</span> &lt;code&gt;position&lt;/code&gt;.
+@param {Object {ActionBar.Tab}} tab The tab to add
+@param {Number} position The new position of the tab
+@param {Boolean} setSelected True if the added tab should become the selected tab.
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+addTab : function(  ) {},
+
+<span id='android-app-ActionBar-method-removeTab'>/**Remove a tab from the action bar. If the removed tab was selected it will be deselected
+</span> and another tab will be selected if present.
+@param {Object {ActionBar.Tab}} tab The tab to remove
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+removeTab : function(  ) {},
+
+<span id='android-app-ActionBar-method-removeTabAt'>/**Remove a tab from the action bar. If the removed tab was selected it will be deselected
+</span> and another tab will be selected if present.
+@param {Number} position Position of the tab to remove
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+removeTabAt : function(  ) {},
+
+<span id='android-app-ActionBar-method-removeAllTabs'>/**Remove all tabs from the action bar and deselect the current tab.
+</span>@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+removeAllTabs : function(  ) {},
+
+<span id='android-app-ActionBar-method-selectTab'>/**Select the specified tab. If it is not a child of this action bar it will be added.
+</span>
+ &lt;p&gt;Note: If you want to select by index, use {@link #setSelectedNavigationItem}(int).&lt;/p&gt;
+@param {Object {ActionBar.Tab}} tab Tab to select
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+selectTab : function(  ) {},
+
+<span id='android-app-ActionBar-method-getSelectedTab'>/**Returns the currently selected tab if in tabbed navigation mode and there is at least
+</span> one tab present.
+@return {Object {android.app.ActionBar.Tab}} The currently selected tab or null
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+getSelectedTab : function(  ) {},
+
+<span id='android-app-ActionBar-method-getTabAt'>/**Returns the tab at the specified index.
+</span>@param {Number} index Index value in the range 0-get
+@return {Object {android.app.ActionBar.Tab}} 
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+getTabAt : function(  ) {},
+
+<span id='android-app-ActionBar-method-getTabCount'>/**Returns the number of tabs currently registered with the action bar.
+</span>@return {Number} Tab count
+@deprecated Action bar navigation modes are deprecated and not supported by inline
+ toolbar action bars. Consider using other
+ &lt;a href=&quot;http://developer.android.com/design/patterns/navigation.html&quot;&gt;common
+ navigation patterns&lt;/a&gt; instead.
+*/
+getTabCount : function(  ) {},
+
+<span id='android-app-ActionBar-method-getHeight'>/**Retrieve the current height of the ActionBar.
+</span>@return {Number} The ActionBar's height
+*/
+getHeight : function(  ) {},
+
+<span id='android-app-ActionBar-method-show'>/**Show the ActionBar if it is not currently showing.
+</span> If the window hosting the ActionBar does not have the feature
+ {@link Window#FEATURE_ACTION_BAR_OVERLAY} it will resize application
+ content to fit the new space available.
+
+ &lt;p&gt;If you are hiding the ActionBar through
+ {@link View#SYSTEM_UI_FLAG_FULLSCREEN View.SYSTEM_UI_FLAG_FULLSCREEN},
+ you should not call this function directly.
+*/
+show : function(  ) {},
+
+<span id='android-app-ActionBar-method-hide'>/**Hide the ActionBar if it is currently showing.
+</span> If the window hosting the ActionBar does not have the feature
+ {@link Window#FEATURE_ACTION_BAR_OVERLAY} it will resize application
+ content to fit the new space available.
+
+ &lt;p&gt;Instead of calling this function directly, you can also cause an
+ ActionBar using the overlay feature to hide through
+ {@link View#SYSTEM_UI_FLAG_FULLSCREEN View.SYSTEM_UI_FLAG_FULLSCREEN}.
+ Hiding the ActionBar through this system UI flag allows you to more
+ seamlessly hide it in conjunction with other screen decorations.
+*/
+hide : function(  ) {},
+
+<span id='android-app-ActionBar-method-isShowing'>/**
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if the ActionBar is showing, &lt;code&gt;false&lt;/code&gt; otherwise.
+*/
+isShowing : function(  ) {},
+
+<span id='android-app-ActionBar-method-addOnMenuVisibilityListener'>/**Add a listener that will respond to menu visibility change events.
+</span>@param {Object {ActionBar.OnMenuVisibilityListener}} listener The new listener to add
+*/
+addOnMenuVisibilityListener : function(  ) {},
+
+<span id='android-app-ActionBar-method-removeOnMenuVisibilityListener'>/**Remove a menu visibility listener. This listener will no longer receive menu
+</span> visibility change events.
+@param {Object {ActionBar.OnMenuVisibilityListener}} listener A listener to remove that was previously added
+*/
+removeOnMenuVisibilityListener : function(  ) {},
+
+<span id='android-app-ActionBar-method-setHomeButtonEnabled'>/**Enable or disable the &quot;home&quot; button in the corner of the action bar. (Note that this
+</span> is the application home/up affordance on the action bar, not the systemwide home
+ button.)
+
+ &lt;p&gt;This defaults to true for packages targeting &amp;lt; API 14. For packages targeting
+ API 14 or greater, the application should call this method to enable interaction
+ with the home/up affordance.
+
+ &lt;p&gt;Setting the {@link #DISPLAY_HOME_AS_UP} display option will automatically enable
+ the home button.
+@param {Boolean} enabled true to enable the home button, false to disable the home button.
+*/
+setHomeButtonEnabled : function(  ) {},
+
+<span id='android-app-ActionBar-method-getThemedContext'>/**Returns a {@link Context} with an appropriate theme for creating views that
+</span> will appear in the action bar. If you are inflating or instantiating custom views
+ that will appear in an action bar, you should use the Context returned by this method.
+ (This includes adapters used for list navigation mode.)
+ This will ensure that views contrast properly against the action bar.
+@return {Object {android.content.Context}} A themed Context for creating views
+*/
+getThemedContext : function(  ) {},
+
+<span id='android-app-ActionBar-method-isTitleTruncated'>/**Returns true if the Title field has been truncated during layout for lack
+</span> of available space.
+@return {Boolean} true if the Title field has been truncated
+@hide pending API approval
+*/
+isTitleTruncated : function(  ) {},
+
+<span id='android-app-ActionBar-method-setHomeAsUpIndicator'>/**Set an alternate drawable to display next to the icon/logo/title
+</span> when {@link #DISPLAY_HOME_AS_UP} is enabled. This can be useful if you are using
+ this mode to display an alternate selection for up navigation, such as a sliding drawer.
+
+ &lt;p&gt;If you pass &lt;code&gt;null&lt;/code&gt; to this method, the default drawable from the theme
+ will be used.&lt;/p&gt;
+
+ &lt;p&gt;If you implement alternate or intermediate behavior around Up, you should also
+ call {@link #setHomeActionContentDescription(int) setHomeActionContentDescription()}
+ to provide a correct description of the action for accessibility support.&lt;/p&gt;
+@param {Object {Drawable}} indicator A drawable to use for the up indicator, or null to use the theme's default
+@see #setDisplayOptions(int, int)
+@see #setDisplayHomeAsUpEnabled(boolean)
+@see #setHomeActionContentDescription(int)
+*/
+setHomeAsUpIndicator : function(  ) {},
+
+<span id='android-app-ActionBar-method-setHomeAsUpIndicator'>/**Set an alternate drawable to display next to the icon/logo/title
+</span> when {@link #DISPLAY_HOME_AS_UP} is enabled. This can be useful if you are using
+ this mode to display an alternate selection for up navigation, such as a sliding drawer.
+
+ &lt;p&gt;If you pass &lt;code&gt;0&lt;/code&gt; to this method, the default drawable from the theme
+ will be used.&lt;/p&gt;
+
+ &lt;p&gt;If you implement alternate or intermediate behavior around Up, you should also
+ call {@link #setHomeActionContentDescription(int) setHomeActionContentDescription()}
+ to provide a correct description of the action for accessibility support.&lt;/p&gt;
+@param {Number} resId Resource ID of a drawable to use for the up indicator, or null
+              to use the theme's default
+@see #setDisplayOptions(int, int)
+@see #setDisplayHomeAsUpEnabled(boolean)
+@see #setHomeActionContentDescription(int)
+*/
+setHomeAsUpIndicator : function(  ) {},
+
+<span id='android-app-ActionBar-method-setHomeActionContentDescription'>/**Set an alternate description for the Home/Up action, when enabled.
+</span>
+ &lt;p&gt;This description is commonly used for accessibility/screen readers when
+ the Home action is enabled. (See {@link #setDisplayHomeAsUpEnabled}(boolean).)
+ Examples of this are, &quot;Navigate Home&quot; or &quot;Navigate Up&quot; depending on the
+ {@link #DISPLAY_HOME_AS_UP} display option. If you have changed the home-as-up
+ indicator using {@link #setHomeAsUpIndicator}(int) to indicate more specific
+ functionality such as a sliding drawer, you should also set this to accurately
+ describe the action.&lt;/p&gt;
+
+ &lt;p&gt;Setting this to &lt;code&gt;null&lt;/code&gt; will use the system default description.&lt;/p&gt;
+@param {Object {CharSequence}} description New description for the Home action when enabled
+@see #setHomeAsUpIndicator(int)
+@see #setHomeAsUpIndicator(android.graphics.drawable.Drawable)
+*/
+setHomeActionContentDescription : function(  ) {},
+
+<span id='android-app-ActionBar-method-setHomeActionContentDescription'>/**Set an alternate description for the Home/Up action, when enabled.
+</span>
+ &lt;p&gt;This description is commonly used for accessibility/screen readers when
+ the Home action is enabled. (See {@link #setDisplayHomeAsUpEnabled}(boolean).)
+ Examples of this are, &quot;Navigate Home&quot; or &quot;Navigate Up&quot; depending on the
+ {@link #DISPLAY_HOME_AS_UP} display option. If you have changed the home-as-up
+ indicator using {@link #setHomeAsUpIndicator}(int) to indicate more specific
+ functionality such as a sliding drawer, you should also set this to accurately
+ describe the action.&lt;/p&gt;
+
+ &lt;p&gt;Setting this to &lt;code&gt;0&lt;/code&gt; will use the system default description.&lt;/p&gt;
+@param {Number} resId Resource ID of a string to use as the new description
+              for the Home action when enabled
+@see #setHomeAsUpIndicator(int)
+@see #setHomeAsUpIndicator(android.graphics.drawable.Drawable)
+*/
+setHomeActionContentDescription : function(  ) {},
+
+<span id='android-app-ActionBar-method-setHideOnContentScrollEnabled'>/**Enable hiding the action bar on content scroll.
+</span>
+ &lt;p&gt;If enabled, the action bar will scroll out of sight along with a
+ {@link View#setNestedScrollingEnabled(boolean) nested scrolling child} view's content.
+ The action bar must be in {@link Window#FEATURE_ACTION_BAR_OVERLAY overlay mode}
+ to enable hiding on content scroll.&lt;/p&gt;
+
+ &lt;p&gt;When partially scrolled off screen the action bar is considered
+ {@link #hide() hidden}. A call to {@link #show() show} will cause it to return to full view.
+ &lt;/p&gt;
+@param {Boolean} hideOnContentScroll true to enable hiding on content scroll.
+*/
+setHideOnContentScrollEnabled : function(  ) {},
+
+<span id='android-app-ActionBar-method-isHideOnContentScrollEnabled'>/**Return whether the action bar is configured to scroll out of sight along with
+</span> a {@link View#setNestedScrollingEnabled(boolean) nested scrolling child}.
+@return {Boolean} true if hide-on-content-scroll is enabled
+@see #setHideOnContentScrollEnabled(boolean)
+*/
+isHideOnContentScrollEnabled : function(  ) {},
+
+<span id='android-app-ActionBar-method-getHideOffset'>/**Return the current vertical offset of the action bar.
+</span>
+ &lt;p&gt;The action bar's current hide offset is the distance that the action bar is currently
+ scrolled offscreen in pixels. The valid range is 0 (fully visible) to the action bar's
+ current measured {@link #getHeight() height} (fully invisible).&lt;/p&gt;
+@return {Number} The action bar's offset toward its fully hidden state in pixels
+*/
+getHideOffset : function(  ) {},
+
+<span id='android-app-ActionBar-method-setHideOffset'>/**Set the current hide offset of the action bar.
+</span>
+ &lt;p&gt;The action bar's current hide offset is the distance that the action bar is currently
+ scrolled offscreen in pixels. The valid range is 0 (fully visible) to the action bar's
+ current measured {@link #getHeight() height} (fully invisible).&lt;/p&gt;
+@param {Number} offset The action bar's offset toward its fully hidden state in pixels.
+*/
+setHideOffset : function(  ) {},
+
+<span id='android-app-ActionBar-method-setElevation'>/**Set the Z-axis elevation of the action bar in pixels.
+</span>
+ &lt;p&gt;The action bar's elevation is the distance it is placed from its parent surface. Higher
+ values are closer to the user.&lt;/p&gt;
+@param {Number} elevation Elevation value in pixels
+*/
+setElevation : function(  ) {},
+
+<span id='android-app-ActionBar-method-getElevation'>/**Get the Z-axis elevation of the action bar in pixels.
+</span>
+ &lt;p&gt;The action bar's elevation is the distance it is placed from its parent surface. Higher
+ values are closer to the user.&lt;/p&gt;
+@return {Number} Elevation value in pixels
+*/
+getElevation : function(  ) {},
+
+<span id='android-app-ActionBar-method-setDefaultDisplayHomeAsUpEnabled'>/**
+</span>@hide 
+*/
+setDefaultDisplayHomeAsUpEnabled : function(  ) {},
+
+<span id='android-app-ActionBar-method-setShowHideAnimationEnabled'>/**
+</span>@hide 
+*/
+setShowHideAnimationEnabled : function(  ) {},
+
+<span id='android-app-ActionBar-method-onConfigurationChanged'>/**
+</span>@hide 
+*/
+onConfigurationChanged : function(  ) {},
+
+<span id='android-app-ActionBar-method-dispatchMenuVisibilityChanged'>/**
+</span>@hide 
+*/
+dispatchMenuVisibilityChanged : function(  ) {},
+
+<span id='android-app-ActionBar-method-startActionMode'>/**
+</span>@hide 
+*/
+startActionMode : function(  ) {},
+
+<span id='android-app-ActionBar-method-openOptionsMenu'>/**
+</span>@hide 
+*/
+openOptionsMenu : function(  ) {},
+
+<span id='android-app-ActionBar-method-closeOptionsMenu'>/**
+</span>@hide 
+*/
+closeOptionsMenu : function(  ) {},
+
+<span id='android-app-ActionBar-method-invalidateOptionsMenu'>/**
+</span>@hide 
+*/
+invalidateOptionsMenu : function(  ) {},
+
+<span id='android-app-ActionBar-method-onMenuKeyEvent'>/**
+</span>@hide 
+*/
+onMenuKeyEvent : function(  ) {},
+
+<span id='android-app-ActionBar-method-onKeyShortcut'>/**
+</span>@hide 
+*/
+onKeyShortcut : function(  ) {},
+
+<span id='android-app-ActionBar-method-collapseActionView'>/**
+</span>@hide 
+*/
+collapseActionView : function(  ) {},
+
+<span id='android-app-ActionBar-method-setWindowTitle'>/**
+</span>@hide 
+*/
+setWindowTitle : function(  ) {},
+
+<span id='android-app-ActionBar-method-onDestroy'>/**
+</span>@hide 
+*/
+onDestroy : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

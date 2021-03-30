@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-FragmentManager'>/**@class android.app.FragmentManager
+</span>@extends java.lang.Object
+
+ Interface for interacting with {@link android.app.Fragment} objects inside of an
+ {@link android.app.Activity}
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using fragments, read the
+ &lt;a href=&quot;{@docRoot}guide/components/fragments.html&quot;&gt;Fragments&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ While the FragmentManager API was introduced in
+ {@link android.os.Build.VERSION_CODES#HONEYCOMB}, a version of the API
+ at is also available for use on older platforms through
+ {@link android.support.v4.app.FragmentActivity}.  See the blog post
+ &lt;a href=&quot;http://android-developers.blogspot.com/2011/03/fragments-for-all.html&quot;&gt;
+ Fragments For All&lt;/a&gt; for more details.
+
+ @deprecated Use the &lt;a href=&quot;{@docRoot}tools/extras/support-library.html&quot;&gt;Support Library&lt;/a&gt;
+      {@link android.support.v4.app.FragmentManager} for consistent behavior across all devices
+      and access to &lt;a href=&quot;{@docRoot}topic/libraries/architecture/lifecycle.html&quot;&gt;Lifecycle&lt;/a&gt;.
+*/
+var FragmentManager = {
+
+<span id='android-app-FragmentManager-property-POP_BACK_STACK_INCLUSIVE'>/** Flag for {@link #popBackStack(String, int)}
+</span> and {@link #popBackStack(int, int)}: If set, and the name or ID of
+ a back stack entry has been supplied, then all matching entries will
+ be consumed until one that doesn't match is found or the bottom of
+ the stack is reached.  Otherwise, all entries up to but not including that entry
+ will be removed.
+*/
+POP_BACK_STACK_INCLUSIVE : &quot;1&quot;,
+<span id='android-app-FragmentManager-method-beginTransaction'>/**Start a series of edit operations on the Fragments associated with
+</span> this FragmentManager.
+ 
+ &lt;p&gt;Note: A fragment transaction can only be created/committed prior
+ to an activity saving its state.  If you try to commit a transaction
+ after {@link android.app.Activity#onSaveInstanceState android.app.Activity.onSaveInstanceState()}
+ (and prior to a following {@link android.app.Activity#onStart android.app.Activity.onStart}
+ or {@link android.app.Activity#onResume android.app.Activity.onResume()}, you will get an error.
+ This is because the framework takes care of saving your current fragments
+ in the state, and if changes are made after the state is saved then they
+ will be lost.&lt;/p&gt;
+*/
+beginTransaction : function(  ) {},
+
+<span id='android-app-FragmentManager-method-openTransaction'>/**
+</span>@hide -- remove once prebuilts are in.
+*/
+openTransaction : function(  ) {},
+
+<span id='android-app-FragmentManager-method-executePendingTransactions'>/**After a {@link android.app.FragmentTransaction} is committed with
+</span> {@link android.app.FragmentTransaction#commit android.app.FragmentTransaction.commit()}, it
+ is scheduled to be executed asynchronously on the process's main thread.
+ If you want to immediately executing any such pending operations, you
+ can call this function (only from the main thread) to do so.  Note that
+ all callbacks and other related behavior will be done from within this
+ call, so be careful about where this is called from.
+ &lt;p&gt;
+ This also forces the start of any postponed Transactions where
+ {@link android.app.Fragment#postponeEnterTransition()} has been called.
+@return {Boolean} Returns true if there were any pending transactions to be
+ executed.
+*/
+executePendingTransactions : function(  ) {},
+
+<span id='android-app-FragmentManager-method-findFragmentById'>/**Finds a fragment that was identified by the given id either when inflated
+</span> from XML or as the container ID when added in a transaction.  This first
+ searches through fragments that are currently added to the manager's
+ activity; if no such fragment is found, then all fragments currently
+ on the back stack associated with this ID are searched.
+@return {Object {android.app.Fragment}} The fragment if found or null otherwise.
+*/
+findFragmentById : function(  ) {},
+
+<span id='android-app-FragmentManager-method-findFragmentByTag'>/**Finds a fragment that was identified by the given tag either when inflated
+</span> from XML or as supplied when added in a transaction.  This first
+ searches through fragments that are currently added to the manager's
+ activity; if no such fragment is found, then all fragments currently
+ on the back stack are searched.
+@return {Object {android.app.Fragment}} The fragment if found or null otherwise.
+*/
+findFragmentByTag : function(  ) {},
+
+<span id='android-app-FragmentManager-method-popBackStack'>/**Pop the top state off the back stack.  This function is asynchronous -- it
+</span> enqueues the request to pop, but the action will not be performed until the
+ application returns to its event loop.
+*/
+popBackStack : function(  ) {},
+
+<span id='android-app-FragmentManager-method-popBackStackImmediate'>/**Like {@link #popBackStack}(), but performs the operation immediately
+</span> inside of the call.  This is like calling {@link #executePendingTransactions}()
+ afterwards without forcing the start of postponed Transactions.
+@return {Boolean} Returns true if there was something popped, else false.
+*/
+popBackStackImmediate : function(  ) {},
+
+<span id='android-app-FragmentManager-method-popBackStack'>/**Pop the last fragment transition from the manager's fragment
+</span> back stack.  If there is nothing to pop, false is returned.
+ This function is asynchronous -- it enqueues the
+ request to pop, but the action will not be performed until the application
+ returns to its event loop.
+@param {String} name If non-null, this is the name of a previous back state
+ to look for; if found, all states up to that state will be popped.  The
+ {@link #POP_BACK_STACK_INCLUSIVE} flag can be used to control whether
+ the named state itself is popped. If null, only the top state is popped.
+@param {Number} flags Either 0 or {@link #POP_BACK_STACK_INCLUSIVE}.
+*/
+popBackStack : function(  ) {},
+
+<span id='android-app-FragmentManager-method-popBackStackImmediate'>/**Like {@link #popBackStack(String, int)}, but performs the operation immediately
+</span> inside of the call.  This is like calling {@link #executePendingTransactions}()
+ afterwards without forcing the start of postponed Transactions.
+@return {Boolean} Returns true if there was something popped, else false.
+*/
+popBackStackImmediate : function(  ) {},
+
+<span id='android-app-FragmentManager-method-popBackStack'>/**Pop all back stack states up to the one with the given identifier.
+</span> This function is asynchronous -- it enqueues the
+ request to pop, but the action will not be performed until the application
+ returns to its event loop.
+@param {Number} id Identifier of the stated to be popped. If no identifier exists,
+ false is returned.
+ The identifier is the number returned by
+ {@link FragmentTransaction#commit() FragmentTransaction.commit()}.  The
+ {@link #POP_BACK_STACK_INCLUSIVE} flag can be used to control whether
+ the named state itself is popped.
+@param {Number} flags Either 0 or {@link #POP_BACK_STACK_INCLUSIVE}.
+*/
+popBackStack : function(  ) {},
+
+<span id='android-app-FragmentManager-method-popBackStackImmediate'>/**Like {@link #popBackStack(int, int)}, but performs the operation immediately
+</span> inside of the call.  This is like calling {@link #executePendingTransactions}()
+ afterwards without forcing the start of postponed Transactions.
+@return {Boolean} Returns true if there was something popped, else false.
+*/
+popBackStackImmediate : function(  ) {},
+
+<span id='android-app-FragmentManager-method-getBackStackEntryCount'>/**Return the number of entries currently in the back stack.
+</span>*/
+getBackStackEntryCount : function(  ) {},
+
+<span id='android-app-FragmentManager-method-getBackStackEntryAt'>/**Return the BackStackEntry at index &lt;var&gt;index&lt;/var&gt; in the back stack;
+</span> where the item on the bottom of the stack has index 0.
+*/
+getBackStackEntryAt : function(  ) {},
+
+<span id='android-app-FragmentManager-method-addOnBackStackChangedListener'>/**Add a new listener for changes to the fragment back stack.
+</span>*/
+addOnBackStackChangedListener : function(  ) {},
+
+<span id='android-app-FragmentManager-method-removeOnBackStackChangedListener'>/**Remove a listener that was previously added with
+</span> {@link #addOnBackStackChangedListener}(OnBackStackChangedListener).
+*/
+removeOnBackStackChangedListener : function(  ) {},
+
+<span id='android-app-FragmentManager-method-putFragment'>/**Put a reference to a fragment in a Bundle.  This Bundle can be
+</span> persisted as saved state, and when later restoring
+ {@link #getFragment(Bundle, String)} will return the current
+ instance of the same fragment.
+@param {Object {Bundle}} bundle The bundle in which to put the fragment reference.
+@param {String} key The name of the entry in the bundle.
+@param {Object {Fragment}} fragment The Fragment whose reference is to be stored.
+*/
+putFragment : function(  ) {},
+
+<span id='android-app-FragmentManager-method-getFragment'>/**Retrieve the current Fragment instance for a reference previously
+</span> placed with {@link #putandroid.app.Fragment(Bundle, String, android.app.Fragment)}.
+@param {Object {Bundle}} bundle The bundle from which to retrieve the fragment reference.
+@param {String} key The name of the entry in the bundle.
+@return {Object {android.app.Fragment}} Returns the current Fragment instance that is associated with
+ the given reference.
+*/
+getFragment : function(  ) {},
+
+<span id='android-app-FragmentManager-method-getFragments'>/**Get a list of all fragments that are currently added to the FragmentManager.
+</span> This may include those that are hidden as well as those that are shown.
+ This will not include any fragments only in the back stack, or fragments that
+ are detached or removed.
+ &lt;p&gt;
+ The order of the fragments in the list is the order in which they were
+ added or attached.
+@return {Object {java.util.List}} A list of all fragments that are added to the FragmentManager.
+*/
+getFragments : function(  ) {},
+
+<span id='android-app-FragmentManager-method-saveFragmentInstanceState'>/**Save the current instance state of the given Fragment.  This can be
+</span> used later when creating a new instance of the Fragment and adding
+ it to the fragment manager, to have it create itself to match the
+ current state returned here.  Note that there are limits on how
+ this can be used:
+
+ &lt;ul&gt;
+ &lt;li&gt;The Fragment must currently be attached to the FragmentManager.
+ &lt;li&gt;A new Fragment created using this saved state must be the same class
+ type as the Fragment it was created from.
+ &lt;li&gt;The saved state can not contain dependencies on other fragments --
+ that is it can't use {@link #putandroid.app.Fragment(Bundle, String, android.app.Fragment)} to
+ store a fragment reference because that reference may not be valid when
+ this saved state is later used.  Likewise the Fragment's target and
+ result code are not included in this state.
+ &lt;/ul&gt;
+@param {Object {Fragment}} f The Fragment whose state is to be saved.
+@return {Object {android.app.Fragment.SavedState}} The generated state.  This will be null if there was no
+ interesting state created by the fragment.
+*/
+saveFragmentInstanceState : function(  ) {},
+
+<span id='android-app-FragmentManager-method-isDestroyed'>/**Returns true if the final {@link android.app.Activity#onDestroy() android.app.Activity.onDestroy()}
+</span> call has been made on the FragmentManager's Activity, so this instance is now dead.
+*/
+isDestroyed : function(  ) {},
+
+<span id='android-app-FragmentManager-method-registerFragmentLifecycleCallbacks'>/**Registers a {@link android.app.FragmentManager.FragmentLifecycleCallbacks} to listen to fragment lifecycle events
+</span> happening in this FragmentManager. All registered callbacks will be automatically
+ unregistered when this FragmentManager is destroyed.
+@param {Object {FragmentManager.FragmentLifecycleCallbacks}} cb Callbacks to register
+@param {Boolean} recursive true to automatically register this callback for all child FragmentManagers
+*/
+registerFragmentLifecycleCallbacks : function(  ) {},
+
+<span id='android-app-FragmentManager-method-unregisterFragmentLifecycleCallbacks'>/**Unregisters a previously registered {@link android.app.FragmentManager.FragmentLifecycleCallbacks}. If the callback
+</span> was not previously registered this call has no effect. All registered callbacks will be
+ automatically unregistered when this FragmentManager is destroyed.
+@param {Object {FragmentManager.FragmentLifecycleCallbacks}} cb Callbacks to unregister
+*/
+unregisterFragmentLifecycleCallbacks : function(  ) {},
+
+<span id='android-app-FragmentManager-method-getPrimaryNavigationFragment'>/**Return the currently active primary navigation fragment for this FragmentManager.
+</span>
+ &lt;p&gt;The primary navigation fragment's
+ {@link Fragment#getChildandroid.app.FragmentManager() child android.app.FragmentManager} will be called first
+ to process delegated navigation actions such as {@link #popBackStack}() if no ID
+ or transaction name is provided to pop to.&lt;/p&gt;
+@return {Object {android.app.Fragment}} the fragment designated as the primary navigation fragment
+*/
+getPrimaryNavigationFragment : function(  ) {},
+
+<span id='android-app-FragmentManager-method-dump'>/**Print the FragmentManager's state into the given stream.
+</span>@param {String} prefix Text to print at the front of each line.
+@param {Object {FileDescriptor}} fd The raw file descriptor that the dump is being sent to.
+@param {Object {PrintWriter}} writer A PrintWriter to which the dump is to be set.
+@param {Object {java.lang.String[]}} args Additional arguments to the dump request.
+*/
+dump : function(  ) {},
+
+<span id='android-app-FragmentManager-method-enableDebugLogging'>/**Control whether the framework's internal fragment manager debugging
+</span> logs are turned on.  If enabled, you will see output in logcat as
+ the framework performs fragment operations.
+*/
+enableDebugLogging : function(  ) {},
+
+<span id='android-app-FragmentManager-method-invalidateOptionsMenu'>/**Invalidate the attached activity's options menu as necessary.
+</span> This may end up being deferred until we move to the resumed state.
+*/
+invalidateOptionsMenu : function(  ) {},
+
+<span id='android-app-FragmentManager-method-isStateSaved'>/**Returns {@code true} if the FragmentManager's state has already been saved
+</span> by its host. Any operations that would change saved state should not be performed
+ if this method returns true. For example, any popBackStack() method, such as
+ {@link #popBackStackImmediate}() or any FragmentTransaction using
+ {@link android.app.FragmentTransaction#commit()} instead of
+ {@link android.app.FragmentTransaction#commitAllowingStateLoss()} will change
+ the state and will result in an error.
+@return {Boolean} true if this FragmentManager's state has already been saved by its host
+*/
+isStateSaved : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

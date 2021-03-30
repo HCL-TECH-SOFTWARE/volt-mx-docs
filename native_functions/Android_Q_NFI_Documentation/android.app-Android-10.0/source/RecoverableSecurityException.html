@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-RecoverableSecurityException'>/**@class android.app.RecoverableSecurityException
+</span> implements android.os.Parcelable
+
+@extends java.lang.SecurityException
+
+ Specialization of {@link SecurityException} that contains additional
+ information about how to involve the end user to recover from the exception.
+ &lt;p&gt;
+ This exception is only appropriate where there is a concrete action the user
+ can take to recover and make forward progress, such as confirming or entering
+ authentication credentials, or granting access.
+ &lt;p&gt;
+ If the receiving app is actively involved with the user, it should present
+ the contained recovery details to help the user make forward progress.
+ &lt;p class=&quot;note&quot;&gt;
+ Note: legacy code that receives this exception may treat it as a general
+ {@link SecurityException}, and thus there is no guarantee that the messages
+ contained will be shown to the end user.
+*/
+var RecoverableSecurityException = {
+
+<span id='android-app-RecoverableSecurityException-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-RecoverableSecurityException-method-getUserMessage'>/**Return short message describing the issue for end user audiences, which
+</span> may be shown in a notification or dialog.
+*/
+getUserMessage : function(  ) {},
+
+<span id='android-app-RecoverableSecurityException-method-getUserAction'>/**Return primary action that will initiate the recovery.
+</span>*/
+getUserAction : function(  ) {},
+
+<span id='android-app-RecoverableSecurityException-method-showAsNotification'>/**Convenience method that will show a very simple notification populated
+</span> with the details from this exception.
+ &lt;p&gt;
+ If you want more flexibility over retrying your original operation once
+ the user action has finished, consider presenting your own UI that uses
+ {@link android.app.Activity#startIntentSenderForResult} to launch the
+ {@link android.app.PendingIntent#getIntentSender()} from {@link #getUserAction}()
+ when requested. If the result of that activity is
+ {@link android.app.Activity#RESULT_OK}, you should consider retrying.
+ &lt;p&gt;
+ This method will only display the most recent exception from any single
+ remote UID; notifications from older exceptions will always be replaced.
+@param {Object {Context}} channelId the {@link NotificationChannel} to use, which must have
+            been already created using
+            {@link NotificationManager#createNotificationChannel}.
+@hide 
+*/
+showAsNotification : function(  ) {},
+
+<span id='android-app-RecoverableSecurityException-method-showAsDialog'>/**Convenience method that will show a very simple dialog populated with the
+</span> details from this exception.
+ &lt;p&gt;
+ If you want more flexibility over retrying your original operation once
+ the user action has finished, consider presenting your own UI that uses
+ {@link android.app.Activity#startIntentSenderForResult} to launch the
+ {@link android.app.PendingIntent#getIntentSender()} from {@link #getUserAction}()
+ when requested. If the result of that activity is
+ {@link android.app.Activity#RESULT_OK}, you should consider retrying.
+ &lt;p&gt;
+ This method will only display the most recent exception from any single
+ remote UID; dialogs from older exceptions will always be replaced.
+@hide 
+*/
+showAsDialog : function(  ) {},
+
+<span id='android-app-RecoverableSecurityException-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-RecoverableSecurityException-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

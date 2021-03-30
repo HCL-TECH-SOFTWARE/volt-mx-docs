@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-SharedElementCallback'>/**@class android.app.SharedElementCallback
+</span>@extends java.lang.Object
+
+ Listener provided in
+ {@link android.app.Activity#setEnterSharedElementCallback(SharedElementCallback)} and
+ {@link android.app.Activity#setExitSharedElementCallback(SharedElementCallback)} as well as
+ {@link android.app.Fragment#setEnterSharedElementCallback(SharedElementCallback)} and
+ {@link android.app.Fragment#setExitSharedElementCallback(SharedElementCallback)}
+ to monitor the Shared element transitions. The events can be used to customize Activity
+ and Fragment Transition behavior.
+*/
+var SharedElementCallback = {
+
+<span id='android-app-SharedElementCallback-method-onSharedElementStart'>/**In Activity Transitions, onSharedElementStart is called immediately before
+</span> capturing the start of the shared element state on enter and reenter transitions and
+ immediately before capturing the end of the shared element state for exit and return
+ transitions.
+ &lt;p&gt;
+ In Fragment Transitions, onSharedElementStart is called immediately before capturing the
+ start state of all shared element transitions.
+ &lt;p&gt;
+ This call can be used to adjust the transition start state by modifying the shared
+ element Views. Note that no layout step will be executed between onSharedElementStart
+ and the transition state capture.
+ &lt;p&gt;
+ For Activity Transitions, any changes made in {@link #onSharedElementEnd(List, List, List)}
+ that are not updated during by layout should be corrected in onSharedElementStart for exit and
+ return transitions. For example, rotation or scale will not be affected by layout and
+ if changed in {@link #onSharedElementEnd(List, List, List)}, it will also have to be reset
+ in onSharedElementStart again to correct the end state.
+@param {Object {java.util.List}} sharedElementNames The names of the shared elements that were accepted into
+                           the View hierarchy.
+@param {Object {java.util.List}} sharedElements The shared elements that are part of the View hierarchy.
+@param {Object {java.util.List}} sharedElementSnapshots The Views containing snap shots of the shared element
+                               from the launching Window. These elements will not
+                               be part of the scene, but will be positioned relative
+                               to the Window decor View. This list is null for Fragment
+                               Transitions.
+*/
+onSharedElementStart : function(  ) {},
+
+<span id='android-app-SharedElementCallback-method-onSharedElementEnd'>/**In Activity Transitions, onSharedElementEnd is called immediately before
+</span> capturing the end of the shared element state on enter and reenter transitions and
+ immediately before capturing the start of the shared element state for exit and return
+ transitions.
+ &lt;p&gt;
+ In Fragment Transitions, onSharedElementEnd is called immediately before capturing the
+ end state of all shared element transitions.
+ &lt;p&gt;
+ This call can be used to adjust the transition end state by modifying the shared
+ element Views. Note that no layout step will be executed between onSharedElementEnd
+ and the transition state capture.
+ &lt;p&gt;
+ Any changes made in {@link #onSharedElementStart(List, List, List)} that are not updated
+ during layout should be corrected in onSharedElementEnd. For example, rotation or scale
+ will not be affected by layout and if changed in
+ {@link #onSharedElementStart(List, List, List)}, it will also have to be reset in
+ onSharedElementEnd again to correct the end state.
+@param {Object {java.util.List}} sharedElementNames The names of the shared elements that were accepted into
+                           the View hierarchy.
+@param {Object {java.util.List}} sharedElements The shared elements that are part of the View hierarchy.
+@param {Object {java.util.List}} sharedElementSnapshots The Views containing snap shots of the shared element
+                               from the launching Window. These elements will not
+                               be part of the scene, but will be positioned relative
+                               to the Window decor View. This list will be null for
+                               Fragment Transitions.
+*/
+onSharedElementEnd : function(  ) {},
+
+<span id='android-app-SharedElementCallback-method-onRejectSharedElements'>/**Called after {@link #onMapSharedElements(java.util.List, java.util.Map)} when
+</span> transferring shared elements in. Any shared elements that have no mapping will be in
+ &lt;var&gt;rejectedSharedElements&lt;/var&gt;. The elements remaining in
+ &lt;var&gt;rejectedSharedElements&lt;/var&gt; will be transitioned out of the Scene. If a
+ View is removed from &lt;var&gt;rejectedSharedElements&lt;/var&gt;, it must be handled by the
+ &lt;code&gt;SharedElementCallback&lt;/code&gt;.
+ &lt;p&gt;
+ Views in rejectedSharedElements will have their position and size set to the
+ position of the calling shared element, relative to the Window decor View and contain
+ snapshots of the View from the calling Activity or Fragment. This
+ view may be safely added to the decor View's overlay to remain in position.
+ &lt;/p&gt;
+ &lt;p&gt;This method is not called for Fragment Transitions. All rejected shared elements
+ will be handled by the exit transition.&lt;/p&gt;
+@param {Object {java.util.List}} rejectedSharedElements Views containing visual information of shared elements
+                               that are not part of the entering scene. These Views
+                               are positioned relative to the Window decor View. A
+                               View removed from this list will not be transitioned
+                               automatically.
+*/
+onRejectSharedElements : function(  ) {},
+
+<span id='android-app-SharedElementCallback-method-onMapSharedElements'>/**Lets the SharedElementCallback adjust the mapping of shared element names to
+</span> Views.
+@param {Object {java.util.List}} names The names of all shared elements transferred from the calling Activity
+              or Fragment in the order they were provided.
+@param {Object {java.util.Map}} sharedElements The mapping of shared element names to Views. The best guess
+                       will be filled into sharedElements based on the transitionNames.
+*/
+onMapSharedElements : function(  ) {},
+
+<span id='android-app-SharedElementCallback-method-onCaptureSharedElementSnapshot'>/**Creates a snapshot of a shared element to be used by the remote Activity and reconstituted
+</span> with {@link #onCreateSnapshotView(android.content.Context, android.os.Parcelable)}. A
+ null return value will mean that the remote Activity will have a null snapshot View in
+ {@link #onSharedElementStart(java.util.List, java.util.List, java.util.List)} and
+ {@link #onSharedElementEnd(java.util.List, java.util.List, java.util.List)}.
+
+ &lt;p&gt;This is not called for Fragment Transitions.&lt;/p&gt;
+@param {Object {View}} sharedElement The shared element View to create a snapshot for.
+@param {Object {Matrix}} viewToGlobalMatrix A matrix containing a transform from the view to the screen
+                           coordinates.
+@param {Object {RectF}} screenBounds The bounds of shared element in screen coordinate space. This is
+                     the bounds of the view with the viewToGlobalMatrix applied.
+@return {Object {android.os.Parcelable}} A snapshot to send to the remote Activity to be reconstituted with
+ {@link #onCreateSnapshotView(android.content.Context, android.os.Parcelable)} and passed
+ into {@link #onSharedElementStart(java.util.List, java.util.List, java.util.List)} and
+ {@link #onSharedElementEnd(java.util.List, java.util.List, java.util.List)}.
+*/
+onCaptureSharedElementSnapshot : function(  ) {},
+
+<span id='android-app-SharedElementCallback-method-onCreateSnapshotView'>/**Reconstitutes a snapshot View from a Parcelable returned in
+</span> {@link #onCaptureSharedElementSnapshot(android.view.View, android.graphics.Matrix,
+ android.graphics.RectF)} to be used in {@link #onSharedElementStart(java.util.List,
+ java.util.List, java.util.List)} and {@link #onSharedElementEnd(java.util.List,
+ java.util.List, java.util.List)}. The returned View will be sized and positioned after
+ this call so that it is ready to be added to the decor View's overlay.
+
+ &lt;p&gt;This is not called for Fragment Transitions.&lt;/p&gt;
+@param {Object {Context}} context The Context used to create the snapshot View.
+@param {Object {Parcelable}} snapshot The Parcelable returned by {@link #onCaptureSharedElementSnapshot(
+ android.view.View, android.graphics.Matrix, android.graphics.RectF)}.
+@return {Object {android.view.View}} A View to be sent in {@link #onSharedElementStart(java.util.List, java.util.List,
+ java.util.List)} and {@link #onSharedElementEnd(java.util.List, java.util.List,
+ java.util.List)}. A null value will produce a null snapshot value for those two methods.
+*/
+onCreateSnapshotView : function(  ) {},
+
+<span id='android-app-SharedElementCallback-method-onSharedElementsArrived'>/**Called during an Activity Transition when the shared elements have arrived at the
+</span> final location and are ready to be transferred. This method is called for both the
+ source and destination Activities.
+ &lt;p&gt;
+ When the shared elements are ready to be transferred,
+ {@link android.app.SharedElementCallback.OnSharedElementsReadyListener#onSharedElementsReady()}
+ must be called to trigger the transfer.
+ &lt;p&gt;
+ The default behavior is to trigger the transfer immediately.
+@param {Object {java.util.List}} sharedElementNames The names of the shared elements that are being transferred..
+@param {Object {java.util.List}} sharedElements The shared elements that are part of the View hierarchy.
+@param {Object {SharedElementCallback.OnSharedElementsReadyListener}} listener The listener to call when the shared elements are ready to be hidden
+                 in the source Activity or shown in the destination Activity.
+*/
+onSharedElementsArrived : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

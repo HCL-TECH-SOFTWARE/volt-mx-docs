@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-ActivityThread'>/**@class android.app.ActivityThread
+</span>@extends android.app.ClientTransactionHandler
+
+ This manages the execution of the main thread in an
+ application process, scheduling and executing activities,
+ broadcasts, and other operations on it as the activity
+ manager requests.
+
+ {@hide}
+*/
+var ActivityThread = {
+
+<span id='android-app-ActivityThread-property-TAG'>/**@hide */
+</span>TAG : &quot;ActivityThread&quot;,
+<span id='android-app-ActivityThread-property-DEBUG_BROADCAST'>/**@hide */
+</span>DEBUG_BROADCAST : &quot;false&quot;,
+<span id='android-app-ActivityThread-property-DEBUG_CONFIGURATION'>/***/
+</span>DEBUG_CONFIGURATION : &quot;false&quot;,
+<span id='android-app-ActivityThread-property-DEBUG_MEMORY_TRIM'>/***/
+</span>DEBUG_MEMORY_TRIM : &quot;false&quot;,
+<span id='android-app-ActivityThread-property-DEBUG_ORDER'>/***/
+</span>DEBUG_ORDER : &quot;false&quot;,
+<span id='android-app-ActivityThread-property-SERVICE_DONE_EXECUTING_ANON'>/**Type for IActivityManager.serviceDoneExecuting: anonymous operation */
+</span>SERVICE_DONE_EXECUTING_ANON : &quot;0&quot;,
+<span id='android-app-ActivityThread-property-SERVICE_DONE_EXECUTING_START'>/**Type for IActivityManager.serviceDoneExecuting: done with an onStart call */
+</span>SERVICE_DONE_EXECUTING_START : &quot;1&quot;,
+<span id='android-app-ActivityThread-property-SERVICE_DONE_EXECUTING_STOP'>/**Type for IActivityManager.serviceDoneExecuting: done stopping (destroying) service */
+</span>SERVICE_DONE_EXECUTING_STOP : &quot;2&quot;,
+<span id='android-app-ActivityThread-property-INVALID_PROC_STATE_SEQ'>/** Denotes an invalid sequence number corresponding to a process state change.
+</span>*/
+INVALID_PROC_STATE_SEQ : &quot;-1&quot;,
+<span id='android-app-ActivityThread-property-PROC_START_SEQ_IDENT'>/** Identifier for the sequence no. associated with this process start. It will be provided
+</span> as one of the arguments when the process starts.
+*/
+PROC_START_SEQ_IDENT : &quot;seq=&quot;,
+<span id='android-app-ActivityThread-method-currentActivityThread'>/**
+</span>*/
+currentActivityThread : function(  ) {},
+
+<span id='android-app-ActivityThread-method-isSystem'>/**
+</span>*/
+isSystem : function(  ) {},
+
+<span id='android-app-ActivityThread-method-currentOpPackageName'>/**
+</span>*/
+currentOpPackageName : function(  ) {},
+
+<span id='android-app-ActivityThread-method-currentPackageName'>/**
+</span>*/
+currentPackageName : function(  ) {},
+
+<span id='android-app-ActivityThread-method-currentProcessName'>/**
+</span>*/
+currentProcessName : function(  ) {},
+
+<span id='android-app-ActivityThread-method-currentApplication'>/**
+</span>*/
+currentApplication : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getPackageManager'>/**
+</span>*/
+getPackageManager : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getPackageInfo'>/**
+</span>*/
+getPackageInfo : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getPackageInfo'>/**
+</span>*/
+getPackageInfo : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getPackageInfo'>/**
+</span>*/
+getPackageInfo : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getPackageInfoNoCheck'>/**
+</span>*/
+getPackageInfoNoCheck : function(  ) {},
+
+<span id='android-app-ActivityThread-method-peekPackageInfo'>/**
+</span>*/
+peekPackageInfo : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getApplicationThread'>/**
+</span>*/
+getApplicationThread : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getInstrumentation'>/**
+</span>*/
+getInstrumentation : function(  ) {},
+
+<span id='android-app-ActivityThread-method-isProfiling'>/**
+</span>*/
+isProfiling : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getProfileFilePath'>/**
+</span>*/
+getProfileFilePath : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getLooper'>/**
+</span>*/
+getLooper : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getExecutor'>/**
+</span>*/
+getExecutor : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getApplication'>/**
+</span>*/
+getApplication : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getProcessName'>/**
+</span>*/
+getProcessName : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getSystemContext'>/**
+</span>*/
+getSystemContext : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getSystemUiContext'>/**
+</span>*/
+getSystemUiContext : function(  ) {},
+
+<span id='android-app-ActivityThread-method-createSystemUiContext'>/**Create the context instance base on system resources &amp; display information which used for UI.
+</span>@param {Number} displayId The ID of the display where the UI is shown.
+@see ContextImpl#createSystemUiContext(ContextImpl, int)
+*/
+createSystemUiContext : function(  ) {},
+
+<span id='android-app-ActivityThread-method-installSystemApplicationInfo'>/**
+</span>*/
+installSystemApplicationInfo : function(  ) {},
+
+<span id='android-app-ActivityThread-method-dumpMemInfoTable'>/**
+</span>*/
+dumpMemInfoTable : function(  ) {},
+
+<span id='android-app-ActivityThread-method-dumpMemInfoTable'>/**Dump mem info data to proto.
+</span>*/
+dumpMemInfoTable : function(  ) {},
+
+<span id='android-app-ActivityThread-method-registerOnActivityPausedListener'>/**
+</span>*/
+registerOnActivityPausedListener : function(  ) {},
+
+<span id='android-app-ActivityThread-method-unregisterOnActivityPausedListener'>/**
+</span>*/
+unregisterOnActivityPausedListener : function(  ) {},
+
+<span id='android-app-ActivityThread-method-resolveActivityInfo'>/**
+</span>*/
+resolveActivityInfo : function(  ) {},
+
+<span id='android-app-ActivityThread-method-startActivityNow'>/**
+</span>*/
+startActivityNow : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getActivity'>/**
+</span>*/
+getActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getActivityClient'>/**
+</span>*/
+getActivityClient : function(  ) {},
+
+<span id='android-app-ActivityThread-method-updatePendingConfiguration'>/**
+</span>*/
+updatePendingConfiguration : function(  ) {},
+
+<span id='android-app-ActivityThread-method-updateProcessState'>/**
+</span>*/
+updateProcessState : function(  ) {},
+
+<span id='android-app-ActivityThread-method-countLaunchingActivities'>/**
+</span>*/
+countLaunchingActivities : function(  ) {},
+
+<span id='android-app-ActivityThread-method-sendActivityResult'>/**
+</span>*/
+sendActivityResult : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleStartActivity'>/**
+</span>*/
+handleStartActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleLaunchActivity'>/**Extended implementation of activity launch. Used when server requests a launch or relaunch.
+</span>*/
+handleLaunchActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleNewIntent'>/**
+</span>*/
+handleNewIntent : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleRequestAssistContextExtras'>/**
+</span>*/
+handleRequestAssistContextExtras : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleTranslucentConversionComplete'>/**
+</span>*/
+handleTranslucentConversionComplete : function(  ) {},
+
+<span id='android-app-ActivityThread-method-onNewActivityOptions'>/**
+</span>*/
+onNewActivityOptions : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleInstallProvider'>/**
+</span>*/
+handleInstallProvider : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleMultiWindowModeChanged'>/**
+</span>*/
+handleMultiWindowModeChanged : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handlePictureInPictureModeChanged'>/**
+</span>*/
+handlePictureInPictureModeChanged : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getIntentBeingBroadcast'>/**Return the Intent that's currently being handled by a
+</span> BroadcastReceiver on this thread, or null if none.
+@hide 
+*/
+getIntentBeingBroadcast : function(  ) {},
+
+<span id='android-app-ActivityThread-method-performResumeActivity'>/**Resume the activity.
+</span>@param {Object {IBinder}} token Target activity token.
+@param {Boolean} finalStateRequest Flag indicating if this is part of final state resolution for a
+                          transaction.
+@param {String} reason Reason for performing the action.
+@return {Object {android.app.ActivityThread.ActivityClientRecord}} The {@link ActivityClientRecord} that was resumed, {@code null} otherwise.
+*/
+performResumeActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleResumeActivity'>/**
+</span>*/
+handleResumeActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleTopResumedActivityChanged'>/**
+</span>*/
+handleTopResumedActivityChanged : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handlePauseActivity'>/**
+</span>*/
+handlePauseActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleStopActivity'>/**
+</span>*/
+handleStopActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-reportStop'>/**Schedule the call to tell the activity manager we have stopped.  We don't do this
+</span> immediately, because we want to have a chance for any other pending work (in particular
+ memory trim requests) to complete before you tell the activity manager to proceed and allow
+ us to go fully into the background.
+*/
+reportStop : function(  ) {},
+
+<span id='android-app-ActivityThread-method-performRestartActivity'>/**
+</span>*/
+performRestartActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleWindowVisibility'>/**
+</span>*/
+handleWindowVisibility : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleSendResult'>/**
+</span>*/
+handleSendResult : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getActivitiesToBeDestroyed'>/**
+</span>*/
+getActivitiesToBeDestroyed : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleDestroyActivity'>/**
+</span>*/
+handleDestroyActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-prepareRelaunchActivity'>/**
+</span>*/
+prepareRelaunchActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleRelaunchActivity'>/**
+</span>*/
+handleRelaunchActivity : function(  ) {},
+
+<span id='android-app-ActivityThread-method-reportRelaunch'>/**
+</span>*/
+reportRelaunch : function(  ) {},
+
+<span id='android-app-ActivityThread-method-applyConfigurationToResources'>/**
+</span>*/
+applyConfigurationToResources : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleConfigurationChanged'>/**
+</span>*/
+handleConfigurationChanged : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleSystemApplicationInfoChanged'>/**Updates the application info.
+</span>
+ This only works in the system process. Must be called on the main thread.
+*/
+handleSystemApplicationInfoChanged : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleApplicationInfoChanged'>/**
+</span>*/
+handleApplicationInfoChanged : function(  ) {},
+
+<span id='android-app-ActivityThread-method-updatePendingActivityConfiguration'>/**
+</span>*/
+updatePendingActivityConfiguration : function(  ) {},
+
+<span id='android-app-ActivityThread-method-handleActivityConfigurationChanged'>/**Handle new activity configuration and/or move to a different display.
+</span>@param {Object {IBinder}} activityToken Target activity token.
+@param {Object {Configuration}} overrideConfig Activity override config.
+@param {Number} displayId Id of the display where activity was moved to, -1 if there was no move and
+                  value didn't change.
+*/
+handleActivityConfigurationChanged : function(  ) {},
+
+<span id='android-app-ActivityThread-method-stopProfiling'>/**Public entrypoint to stop profiling. This is required to end profiling when the app crashes,
+</span> so that profiler data won't be lost.
+@hide 
+*/
+stopProfiling : function(  ) {},
+
+<span id='android-app-ActivityThread-method-acquireProvider'>/**
+</span>*/
+acquireProvider : function(  ) {},
+
+<span id='android-app-ActivityThread-method-acquireExistingProvider'>/**
+</span>*/
+acquireExistingProvider : function(  ) {},
+
+<span id='android-app-ActivityThread-method-releaseProvider'>/**
+</span>*/
+releaseProvider : function(  ) {},
+
+<span id='android-app-ActivityThread-method-systemMain'>/**
+</span>*/
+systemMain : function(  ) {},
+
+<span id='android-app-ActivityThread-method-updateHttpProxy'>/**
+</span>*/
+updateHttpProxy : function(  ) {},
+
+<span id='android-app-ActivityThread-method-installSystemProviders'>/**
+</span>*/
+installSystemProviders : function(  ) {},
+
+<span id='android-app-ActivityThread-method-getIntCoreSetting'>/**
+</span>*/
+getIntCoreSetting : function(  ) {},
+
+<span id='android-app-ActivityThread-method-main'>/**
+</span>*/
+main : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

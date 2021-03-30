@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-AlarmManager'>/**@class android.app.AlarmManager
+</span>@extends java.lang.Object
+
+ This class provides access to the system alarm services.  These allow you
+ to schedule your application to be run at some point in the future.  When
+ an alarm goes off, the {@link Intent} that had been registered for it
+ is broadcast by the system, automatically starting the target application
+ if it is not already running.  Registered alarms are retained while the
+ device is asleep (and can optionally wake the device up if they go off
+ during that time), but will be cleared if it is turned off and rebooted.
+
+ &lt;p&gt;The Alarm Manager holds a CPU wake lock as long as the alarm receiver's
+ onReceive() method is executing. This guarantees that the phone will not sleep
+ until you have finished handling the broadcast. Once onReceive() returns, the
+ Alarm Manager releases this wake lock. This means that the phone will in some
+ cases sleep as soon as your onReceive() method completes.  If your alarm receiver
+ called {@link android.content.Context#startService Context.startService()}, it
+ is possible that the phone will sleep before the requested service is launched.
+ To prevent this, your BroadcastReceiver and Service will need to implement a
+ separate wake lock policy to ensure that the phone continues running until the
+ service becomes available.
+
+ &lt;p&gt;&lt;b&gt;Note: The Alarm Manager is intended for cases where you want to have
+ your application code run at a specific time, even if your application is
+ not currently running.  For normal timing operations (ticks, timeouts,
+ etc) it is easier and much more efficient to use
+ {@link android.os.Handler}.&lt;/b&gt;
+
+ &lt;p class=&quot;caution&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Beginning with API 19
+ ({@link android.os.Build.VERSION_CODES#KITKAT}) alarm delivery is inexact:
+ the OS will shift alarms in order to minimize wakeups and battery use.  There are
+ new APIs to support applications which need strict delivery guarantees; see
+ {@link #setWindow(int, long, long, android.app.PendingIntent)} and
+ {@link #setExact(int, long, android.app.PendingIntent)}.  Applications whose {@code targetSdkVersion}
+ is earlier than API 19 will continue to see the previous behavior in which all
+ alarms are delivered exactly when requested.
+*/
+var AlarmManager = {
+
+<span id='android-app-AlarmManager-property-RTC_WAKEUP'>/** Alarm time in {@link System#currentTimeMillis System.currentTimeMillis()}
+</span> (wall clock time in UTC), which will wake up the device when
+ it goes off.
+*/
+RTC_WAKEUP : &quot;0&quot;,
+<span id='android-app-AlarmManager-property-RTC'>/** Alarm time in {@link System#currentTimeMillis System.currentTimeMillis()}
+</span> (wall clock time in UTC).  This alarm does not wake the
+ device up; if it goes off while the device is asleep, it will not be
+ delivered until the next time the device wakes up.
+*/
+RTC : &quot;1&quot;,
+<span id='android-app-AlarmManager-property-ELAPSED_REALTIME_WAKEUP'>/** Alarm time in {@link android.os.SystemClock#elapsedRealtime
+</span> SystemClock.elapsedRealtime()} (time since boot, including sleep),
+ which will wake up the device when it goes off.
+*/
+ELAPSED_REALTIME_WAKEUP : &quot;2&quot;,
+<span id='android-app-AlarmManager-property-ELAPSED_REALTIME'>/** Alarm time in {@link android.os.SystemClock#elapsedRealtime
+</span> SystemClock.elapsedRealtime()} (time since boot, including sleep).
+ This alarm does not wake the device up; if it goes off while the device
+ is asleep, it will not be delivered until the next time the device
+ wakes up.
+*/
+ELAPSED_REALTIME : &quot;3&quot;,
+<span id='android-app-AlarmManager-property-ACTION_NEXT_ALARM_CLOCK_CHANGED'>/** Broadcast Action: Sent after the value returned by
+</span> {@link #getNextAlarmClock}() has changed.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent by the system.
+ It is only sent to registered receivers.&lt;/p&gt;
+*/
+ACTION_NEXT_ALARM_CLOCK_CHANGED : &quot;android.app.action.NEXT_ALARM_CLOCK_CHANGED&quot;,
+<span id='android-app-AlarmManager-property-WINDOW_EXACT'>/**@hide */
+</span>WINDOW_EXACT : &quot;0&quot;,
+<span id='android-app-AlarmManager-property-WINDOW_HEURISTIC'>/**@hide */
+</span>WINDOW_HEURISTIC : &quot;-1&quot;,
+<span id='android-app-AlarmManager-property-FLAG_STANDALONE'>/** Flag for alarms: this is to be a stand-alone alarm, that should not be batched with
+</span> other alarms.
+ @hide
+*/
+FLAG_STANDALONE : &quot;1&quot;,
+<span id='android-app-AlarmManager-property-FLAG_WAKE_FROM_IDLE'>/** Flag for alarms: this alarm would like to wake the device even if it is idle.  This
+</span> is, for example, an alarm for an alarm clock.
+ @hide
+*/
+FLAG_WAKE_FROM_IDLE : &quot;2&quot;,
+<span id='android-app-AlarmManager-property-FLAG_ALLOW_WHILE_IDLE'>/** Flag for alarms: this alarm would like to still execute even if the device is
+</span> idle.  This won't bring the device out of idle, just allow this specific alarm to
+ run.  Note that this means the actual time this alarm goes off can be inconsistent
+ with the time of non-allow-while-idle alarms (it could go earlier than the time
+ requested by another alarm).
+
+ @hide
+*/
+FLAG_ALLOW_WHILE_IDLE : &quot;4&quot;,
+<span id='android-app-AlarmManager-property-FLAG_ALLOW_WHILE_IDLE_UNRESTRICTED'>/** Flag for alarms: same as {@link #FLAG_ALLOW_WHILE_IDLE}, but doesn't have restrictions
+</span> on how frequently it can be scheduled.  Only available (and automatically applied) to
+ system alarms.
+
+ @hide
+*/
+FLAG_ALLOW_WHILE_IDLE_UNRESTRICTED : &quot;8&quot;,
+<span id='android-app-AlarmManager-property-FLAG_IDLE_UNTIL'>/** Flag for alarms: this alarm marks the point where we would like to come out of idle
+</span> mode.  It may be moved by the alarm manager to match the first wake-from-idle alarm.
+ Scheduling an alarm with this flag puts the alarm manager in to idle mode, where it
+ avoids scheduling any further alarms until the marker alarm is executed.
+ @hide
+*/
+FLAG_IDLE_UNTIL : &quot;16&quot;,
+<span id='android-app-AlarmManager-property-INTERVAL_FIFTEEN_MINUTES'>/** Available inexact recurrence interval recognized by
+</span> {@link #setInexactRepeating(int, long, long, android.app.PendingIntent)}
+ when running on Android prior to API 19.
+*/
+INTERVAL_FIFTEEN_MINUTES : &quot;900000&quot;,
+<span id='android-app-AlarmManager-property-INTERVAL_HALF_HOUR'>/** Available inexact recurrence interval recognized by
+</span> {@link #setInexactRepeating(int, long, long, android.app.PendingIntent)}
+ when running on Android prior to API 19.
+*/
+INTERVAL_HALF_HOUR : &quot;1800000&quot;,
+<span id='android-app-AlarmManager-property-INTERVAL_HOUR'>/** Available inexact recurrence interval recognized by
+</span> {@link #setInexactRepeating(int, long, long, android.app.PendingIntent)}
+ when running on Android prior to API 19.
+*/
+INTERVAL_HOUR : &quot;3600000&quot;,
+<span id='android-app-AlarmManager-property-INTERVAL_HALF_DAY'>/** Available inexact recurrence interval recognized by
+</span> {@link #setInexactRepeating(int, long, long, android.app.PendingIntent)}
+ when running on Android prior to API 19.
+*/
+INTERVAL_HALF_DAY : &quot;43200000&quot;,
+<span id='android-app-AlarmManager-property-INTERVAL_DAY'>/** Available inexact recurrence interval recognized by
+</span> {@link #setInexactRepeating(int, long, long, android.app.PendingIntent)}
+ when running on Android prior to API 19.
+*/
+INTERVAL_DAY : &quot;86400000&quot;,
+<span id='android-app-AlarmManager-method-set'>/**&lt;p&gt;Schedule an alarm.  &lt;b&gt;Note: for timing operations (ticks, timeouts,
+</span> etc) it is easier and much more efficient to use {@link android.os.Handler}.&lt;/b&gt;
+ If there is already an alarm scheduled for the same IntentSender, that previous
+ alarm will first be canceled.
+
+ &lt;p&gt;If the stated trigger time is in the past, the alarm will be triggered
+ immediately.  If there is already an alarm for this Intent
+ scheduled (with the equality of two intents being defined by
+ {@link Intent#filterEquals}), then it will be removed and replaced by
+ this one.
+
+ &lt;p&gt;
+ The alarm is an Intent broadcast that goes to a broadcast receiver that
+ you registered with {@link android.content.Context#registerReceiver}
+ or through the &amp;lt;receiver&amp;gt; tag in an AndroidManifest.xml file.
+
+ &lt;p&gt;
+ Alarm intents are delivered with a data extra of type int called
+ {@link Intent#EXTRA_ALARM_COUNT Intent.EXTRA_ALARM_COUNT} that indicates
+ how many past alarm events have been accumulated into this intent
+ broadcast.  Recurring alarms that have gone undelivered because the
+ phone was asleep may have a count greater than one when delivered.
+
+ &lt;div class=&quot;note&quot;&gt;
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; Beginning in API 19, the trigger time passed to this method
+ is treated as inexact: the alarm will not be delivered before this time, but
+ may be deferred and delivered some time later.  The OS will use
+ this policy in order to &quot;batch&quot; alarms together across the entire system,
+ minimizing the number of times the device needs to &quot;wake up&quot; and minimizing
+ battery use.  In general, alarms scheduled in the near future will not
+ be deferred as long as alarms scheduled far in the future.
+
+ &lt;p&gt;
+ With the new batching policy, delivery ordering guarantees are not as
+ strong as they were previously.  If the application sets multiple alarms,
+ it is possible that these alarms' &lt;em&gt;actual&lt;/em&gt; delivery ordering may not match
+ the order of their &lt;em&gt;requested&lt;/em&gt; delivery times.  If your application has
+ strong ordering requirements there are other APIs that you can use to get
+ the necessary behavior; see {@link #setWindow(int, long, long, android.app.PendingIntent)}
+ and {@link #setExact(int, long, android.app.PendingIntent)}.
+
+ &lt;p&gt;
+ Applications whose {@code targetSdkVersion} is before API 19 will
+ continue to get the previous alarm behavior: all of their scheduled alarms
+ will be treated as exact.
+ &lt;/div&gt;
+@param {Number} type type of alarm.
+@param {Number} triggerAtMillis time in milliseconds that the alarm should go
+ off, using the appropriate clock (depending on the alarm type).
+@param {Object {PendingIntent}} operation Action to perform when the alarm goes off;
+ typically comes from {@link PendingIntent#getBroadcast
+ IntentSender.getBroadcast()}.
+@see android.os.Handler
+@see #setExact
+@see #setRepeating
+@see #setWindow
+@see #cancel
+@see android.content.Context#sendBroadcast
+@see android.content.Context#registerReceiver
+@see android.content.Intent#filterEquals
+@see #ELAPSED_REALTIME
+@see #ELAPSED_REALTIME_WAKEUP
+@see #RTC
+@see #RTC_WAKEUP
+*/
+set : function(  ) {},
+
+<span id='android-app-AlarmManager-method-set'>/**Direct callback version of {@link #set(int, long, android.app.PendingIntent)}.  Rather than
+</span> supplying a PendingIntent to be sent when the alarm time is reached, this variant
+ supplies an {@link android.app.AlarmManager.OnAlarmListener} instance that will be invoked at that time.
+ &lt;p&gt;
+ The OnAlarmListener's {@link android.app.AlarmManager.OnAlarmListener#onAlarm() onAlarm()} method will be
+ invoked via the specified target Handler, or on the application's main looper
+ if {@code null} is passed as the {@code targetHandler} parameter.
+@param {Number} type type of alarm.
+@param {Number} triggerAtMillis time in milliseconds that the alarm should go
+         off, using the appropriate clock (depending on the alarm type).
+@param {String} tag string describing the alarm, used for logging and battery-use
+         attribution
+@param {Object {AlarmManager.OnAlarmListener}} listener {@link OnAlarmListener} instance whose
+         {@link OnAlarmListener#onAlarm() onAlarm()} method will be
+         called when the alarm time is reached.  A given OnAlarmListener instance can
+         only be the target of a single pending alarm, just as a given PendingIntent
+         can only be used with one alarm at a time.
+@param {Object {Handler}} targetHandler {@link Handler} on which to execute the listener's onAlarm()
+         callback, or {@code null} to run that callback on the main looper.
+*/
+set : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setRepeating'>/**Schedule a repeating alarm.  &lt;b&gt;Note: for timing operations (ticks,
+</span> timeouts, etc) it is easier and much more efficient to use
+ {@link android.os.Handler}.&lt;/b&gt;  If there is already an alarm scheduled
+ for the same IntentSender, it will first be canceled.
+
+ &lt;p&gt;Like {@link #set}, except you can also supply a period at which
+ the alarm will automatically repeat.  This alarm continues
+ repeating until explicitly removed with {@link #cancel}.  If the stated
+ trigger time is in the past, the alarm will be triggered immediately, with an
+ alarm count depending on how far in the past the trigger time is relative
+ to the repeat interval.
+
+ &lt;p&gt;If an alarm is delayed (by system sleep, for example, for non
+ _WAKEUP alarm types), a skipped repeat will be delivered as soon as
+ possible.  After that, future alarms will be delivered according to the
+ original schedule; they do not drift over time.  For example, if you have
+ set a recurring alarm for the top of every hour but the phone was asleep
+ from 7:45 until 8:45, an alarm will be sent as soon as the phone awakens,
+ then the next alarm will be sent at 9:00.
+
+ &lt;p&gt;If your application wants to allow the delivery times to drift in
+ order to guarantee that at least a certain time interval always elapses
+ between alarms, then the approach to take is to use one-time alarms,
+ scheduling the next one yourself when handling each alarm delivery.
+
+ &lt;p class=&quot;note&quot;&gt;
+ &lt;b&gt;Note:&lt;/b&gt; as of API 19, all repeating alarms are inexact.  If your
+ application needs precise delivery times then it must use one-time
+ exact alarms, rescheduling each time as described above. Legacy applications
+ whose {@code targetSdkVersion} is earlier than API 19 will continue to have all
+ of their alarms, including repeating alarms, treated as exact.
+@param {Number} type type of alarm.
+@param {Number} triggerAtMillis time in milliseconds that the alarm should first
+ go off, using the appropriate clock (depending on the alarm type).
+@param {Number} intervalMillis interval in milliseconds between subsequent repeats
+ of the alarm.
+@param {Object {PendingIntent}} operation Action to perform when the alarm goes off;
+ typically comes from {@link PendingIntent#getBroadcast
+ IntentSender.getBroadcast()}.
+@see android.os.Handler
+@see #set
+@see #setExact
+@see #setWindow
+@see #cancel
+@see android.content.Context#sendBroadcast
+@see android.content.Context#registerReceiver
+@see android.content.Intent#filterEquals
+@see #ELAPSED_REALTIME
+@see #ELAPSED_REALTIME_WAKEUP
+@see #RTC
+@see #RTC_WAKEUP
+*/
+setRepeating : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setWindow'>/**Schedule an alarm to be delivered within a given window of time.  This method
+</span> is similar to {@link #set(int, long, android.app.PendingIntent)}, but allows the
+ application to precisely control the degree to which its delivery might be
+ adjusted by the OS. This method allows an application to take advantage of the
+ battery optimizations that arise from delivery batching even when it has
+ modest timeliness requirements for its alarms.
+
+ &lt;p&gt;
+ This method can also be used to achieve strict ordering guarantees among
+ multiple alarms by ensuring that the windows requested for each alarm do
+ not intersect.
+
+ &lt;p&gt;
+ When precise delivery is not required, applications should use the standard
+ {@link #set(int, long, android.app.PendingIntent)} method.  This will give the OS the most
+ flexibility to minimize wakeups and battery use.  For alarms that must be delivered
+ at precisely-specified times with no acceptable variation, applications can use
+ {@link #setExact(int, long, android.app.PendingIntent)}.
+@param {Number} type type of alarm.
+@param {Number} windowStartMillis The earliest time, in milliseconds, that the alarm should
+        be delivered, expressed in the appropriate clock's units (depending on the alarm
+        type).
+@param {Number} windowLengthMillis The length of the requested delivery window,
+        in milliseconds.  The alarm will be delivered no later than this many
+        milliseconds after {@code windowStartMillis}.  Note that this parameter
+        is a &lt;i&gt;duration,&lt;/i&gt; not the timestamp of the end of the window.
+@param {Object {PendingIntent}} operation Action to perform when the alarm goes off;
+        typically comes from {@link PendingIntent#getBroadcast
+        IntentSender.getBroadcast()}.
+@see #set
+@see #setExact
+@see #setRepeating
+@see #cancel
+@see android.content.Context#sendBroadcast
+@see android.content.Context#registerReceiver
+@see android.content.Intent#filterEquals
+@see #ELAPSED_REALTIME
+@see #ELAPSED_REALTIME_WAKEUP
+@see #RTC
+@see #RTC_WAKEUP
+*/
+setWindow : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setWindow'>/**Direct callback version of {@link #setWindow(int, long, long, android.app.PendingIntent)}.  Rather
+</span> than supplying a PendingIntent to be sent when the alarm time is reached, this variant
+ supplies an {@link android.app.AlarmManager.OnAlarmListener} instance that will be invoked at that time.
+ &lt;p&gt;
+ The OnAlarmListener {@link android.app.AlarmManager.OnAlarmListener#onAlarm() onAlarm()} method will be
+ invoked via the specified target Handler, or on the application's main looper
+ if {@code null} is passed as the {@code targetHandler} parameter.
+*/
+setWindow : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setExact'>/**Schedule an alarm to be delivered precisely at the stated time.
+</span>
+ &lt;p&gt;
+ This method is like {@link #set(int, long, android.app.PendingIntent)}, but does not permit
+ the OS to adjust the delivery time.  The alarm will be delivered as nearly as
+ possible to the requested trigger time.
+
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; only alarms for which there is a strong demand for exact-time
+ delivery (such as an alarm clock ringing at the requested time) should be
+ scheduled as exact.  Applications are strongly discouraged from using exact
+ alarms unnecessarily as they reduce the OS's ability to minimize battery use.
+@param {Number} type type of alarm.
+@param {Number} triggerAtMillis time in milliseconds that the alarm should go
+        off, using the appropriate clock (depending on the alarm type).
+@param {Object {PendingIntent}} operation Action to perform when the alarm goes off;
+        typically comes from {@link PendingIntent#getBroadcast
+        IntentSender.getBroadcast()}.
+@see #set
+@see #setRepeating
+@see #setWindow
+@see #cancel
+@see android.content.Context#sendBroadcast
+@see android.content.Context#registerReceiver
+@see android.content.Intent#filterEquals
+@see #ELAPSED_REALTIME
+@see #ELAPSED_REALTIME_WAKEUP
+@see #RTC
+@see #RTC_WAKEUP
+*/
+setExact : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setExact'>/**Direct callback version of {@link #setExact(int, long, android.app.PendingIntent)}.  Rather
+</span> than supplying a PendingIntent to be sent when the alarm time is reached, this variant
+ supplies an {@link android.app.AlarmManager.OnAlarmListener} instance that will be invoked at that time.
+ &lt;p&gt;
+ The OnAlarmListener's {@link android.app.AlarmManager.OnAlarmListener#onAlarm() onAlarm()} method will be
+ invoked via the specified target Handler, or on the application's main looper
+ if {@code null} is passed as the {@code targetHandler} parameter.
+*/
+setExact : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setIdleUntil'>/**Schedule an idle-until alarm, which will keep the alarm manager idle until
+</span> the given time.
+@hide 
+*/
+setIdleUntil : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setAlarmClock'>/**Schedule an alarm that represents an alarm clock, which will be used to notify the user
+</span> when it goes off.  The expectation is that when this alarm triggers, the application will
+ further wake up the device to tell the user about the alarm -- turning on the screen,
+ playing a sound, vibrating, etc.  As such, the system will typically also use the
+ information supplied here to tell the user about this upcoming alarm if appropriate.
+
+ &lt;p&gt;Due to the nature of this kind of alarm, similar to {@link #setExactAndAllowWhileIdle},
+ these alarms will be allowed to trigger even if the system is in a low-power idle
+ (a.k.a. doze) mode.  The system may also do some prep-work when it sees that such an
+ alarm coming up, to reduce the amount of background work that could happen if this
+ causes the device to fully wake up -- this is to avoid situations such as a large number
+ of devices having an alarm set at the same time in the morning, all waking up at that
+ time and suddenly swamping the network with pending background work.  As such, these
+ types of alarms can be extremely expensive on battery use and should only be used for
+ their intended purpose.&lt;/p&gt;
+
+ &lt;p&gt;
+ This method is like {@link #setExact(int, long, android.app.PendingIntent)}, but implies
+ {@link #RTC_WAKEUP}.
+@param {Object {AlarmManager.AlarmClockInfo}} info
+@param {Object {PendingIntent}} operation Action to perform when the alarm goes off;
+        typically comes from {@link PendingIntent#getBroadcast
+        IntentSender.getBroadcast()}.
+@see #set
+@see #setRepeating
+@see #setWindow
+@see #setExact
+@see #cancel
+@see #getNextAlarmClock()
+@see android.content.Context#sendBroadcast
+@see android.content.Context#registerReceiver
+@see android.content.Intent#filterEquals
+*/
+setAlarmClock : function(  ) {},
+
+<span id='android-app-AlarmManager-method-set'>/**
+</span>@hide 
+*/
+set : function(  ) {},
+
+<span id='android-app-AlarmManager-method-set'>/**Direct callback version of {@link #set(int, long, long, long, android.app.PendingIntent, WorkSource)}.
+</span> Note that repeating alarms must use the PendingIntent variant, not an OnAlarmListener.
+ &lt;p&gt;
+ The OnAlarmListener's {@link android.app.AlarmManager.OnAlarmListener#onAlarm() onAlarm()} method will be
+ invoked via the specified target Handler, or on the application's main looper
+ if {@code null} is passed as the {@code targetHandler} parameter.
+@hide 
+*/
+set : function(  ) {},
+
+<span id='android-app-AlarmManager-method-set'>/**Direct callback version of {@link #set(int, long, long, long, android.app.PendingIntent, WorkSource)}.
+</span> Note that repeating alarms must use the PendingIntent variant, not an OnAlarmListener.
+ &lt;p&gt;
+ The OnAlarmListener's {@link android.app.AlarmManager.OnAlarmListener#onAlarm() onAlarm()} method will be
+ invoked via the specified target Handler, or on the application's main looper
+ if {@code null} is passed as the {@code targetHandler} parameter.
+@hide 
+*/
+set : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setInexactRepeating'>/**Schedule a repeating alarm that has inexact trigger time requirements;
+</span> for example, an alarm that repeats every hour, but not necessarily at
+ the top of every hour.  These alarms are more power-efficient than
+ the strict recurrences traditionally supplied by {@link #setRepeating}, since the
+ system can adjust alarms' delivery times to cause them to fire simultaneously,
+ avoiding waking the device from sleep more than necessary.
+
+ &lt;p&gt;Your alarm's first trigger will not be before the requested time,
+ but it might not occur for almost a full interval after that time.  In
+ addition, while the overall period of the repeating alarm will be as
+ requested, the time between any two successive firings of the alarm
+ may vary.  If your application demands very low jitter, use
+ one-shot alarms with an appropriate window instead; see {@link #setWindow(int, long, long, android.app.PendingIntent)} and
+ {@link #setExact(int, long, android.app.PendingIntent)}.
+
+ &lt;p class=&quot;note&quot;&gt;
+ As of API 19, all repeating alarms are inexact.  Because this method has
+ been available since API 3, your application can safely call it and be
+ assured that it will get similar behavior on both current and older versions
+ of Android.
+@param {Number} type type of alarm.
+@param {Number} triggerAtMillis time in milliseconds that the alarm should first
+ go off, using the appropriate clock (depending on the alarm type).  This
+ is inexact: the alarm will not fire before this time, but there may be a
+ delay of almost an entire alarm interval before the first invocation of
+ the alarm.
+@param {Number} intervalMillis interval in milliseconds between subsequent repeats
+ of the alarm.  Prior to API 19, if this is one of INTERVAL_FIFTEEN_MINUTES,
+ INTERVAL_HALF_HOUR, INTERVAL_HOUR, INTERVAL_HALF_DAY, or INTERVAL_DAY
+ then the alarm will be phase-aligned with other alarms to reduce the
+ number of wakeups.  Otherwise, the alarm will be set as though the
+ application had called {@link #setRepeating}.  As of API 19, all repeating
+ alarms will be inexact and subject to batching with other alarms regardless
+ of their stated repeat interval.
+@param {Object {PendingIntent}} operation Action to perform when the alarm goes off;
+ typically comes from {@link PendingIntent#getBroadcast
+ IntentSender.getBroadcast()}.
+@see android.os.Handler
+@see #set
+@see #cancel
+@see android.content.Context#sendBroadcast
+@see android.content.Context#registerReceiver
+@see android.content.Intent#filterEquals
+@see #ELAPSED_REALTIME
+@see #ELAPSED_REALTIME_WAKEUP
+@see #RTC
+@see #RTC_WAKEUP
+@see #INTERVAL_FIFTEEN_MINUTES
+@see #INTERVAL_HALF_HOUR
+@see #INTERVAL_HOUR
+@see #INTERVAL_HALF_DAY
+@see #INTERVAL_DAY
+*/
+setInexactRepeating : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setAndAllowWhileIdle'>/**Like {@link #set(int, long, android.app.PendingIntent)}, but this alarm will be allowed to execute
+</span> even when the system is in low-power idle (a.k.a. doze) modes.  This type of alarm must
+ &lt;b&gt;only&lt;/b&gt; be used for situations where it is actually required that the alarm go off while
+ in idle -- a reasonable example would be for a calendar notification that should make a
+ sound so the user is aware of it.  When the alarm is dispatched, the app will also be
+ added to the system's temporary whitelist for approximately 10 seconds to allow that
+ application to acquire further wake locks in which to complete its work.&lt;/p&gt;
+
+ &lt;p&gt;These alarms can significantly impact the power use
+ of the device when idle (and thus cause significant battery blame to the app scheduling
+ them), so they should be used with care.  To reduce abuse, there are restrictions on how
+ frequently these alarms will go off for a particular application.
+ Under normal system operation, it will not dispatch these
+ alarms more than about every minute (at which point every such pending alarm is
+ dispatched); when in low-power idle modes this duration may be significantly longer,
+ such as 15 minutes.&lt;/p&gt;
+
+ &lt;p&gt;Unlike other alarms, the system is free to reschedule this type of alarm to happen
+ out of order with any other alarms, even those from the same app.  This will clearly happen
+ when the device is idle (since this alarm can go off while idle, when any other alarms
+ from the app will be held until later), but may also happen even when not idle.&lt;/p&gt;
+
+ &lt;p&gt;Regardless of the app's target SDK version, this call always allows batching of the
+ alarm.&lt;/p&gt;
+@param {Number} type type of alarm.
+@param {Number} triggerAtMillis time in milliseconds that the alarm should go
+ off, using the appropriate clock (depending on the alarm type).
+@param {Object {PendingIntent}} operation Action to perform when the alarm goes off;
+ typically comes from {@link PendingIntent#getBroadcast
+ IntentSender.getBroadcast()}.
+@see #set(int, long, PendingIntent)
+@see #setExactAndAllowWhileIdle
+@see #cancel
+@see android.content.Context#sendBroadcast
+@see android.content.Context#registerReceiver
+@see android.content.Intent#filterEquals
+@see #ELAPSED_REALTIME
+@see #ELAPSED_REALTIME_WAKEUP
+@see #RTC
+@see #RTC_WAKEUP
+*/
+setAndAllowWhileIdle : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setExactAndAllowWhileIdle'>/**Like {@link #setExact(int, long, android.app.PendingIntent)}, but this alarm will be allowed to execute
+</span> even when the system is in low-power idle modes.  If you don't need exact scheduling of
+ the alarm but still need to execute while idle, consider using
+ {@link #setAndAllowWhileIdle}.  This type of alarm must &lt;b&gt;only&lt;/b&gt;
+ be used for situations where it is actually required that the alarm go off while in
+ idle -- a reasonable example would be for a calendar notification that should make a
+ sound so the user is aware of it.  When the alarm is dispatched, the app will also be
+ added to the system's temporary whitelist for approximately 10 seconds to allow that
+ application to acquire further wake locks in which to complete its work.&lt;/p&gt;
+
+ &lt;p&gt;These alarms can significantly impact the power use
+ of the device when idle (and thus cause significant battery blame to the app scheduling
+ them), so they should be used with care.  To reduce abuse, there are restrictions on how
+ frequently these alarms will go off for a particular application.
+ Under normal system operation, it will not dispatch these
+ alarms more than about every minute (at which point every such pending alarm is
+ dispatched); when in low-power idle modes this duration may be significantly longer,
+ such as 15 minutes.&lt;/p&gt;
+
+ &lt;p&gt;Unlike other alarms, the system is free to reschedule this type of alarm to happen
+ out of order with any other alarms, even those from the same app.  This will clearly happen
+ when the device is idle (since this alarm can go off while idle, when any other alarms
+ from the app will be held until later), but may also happen even when not idle.
+ Note that the OS will allow itself more flexibility for scheduling these alarms than
+ regular exact alarms, since the application has opted into this behavior.  When the
+ device is idle it may take even more liberties with scheduling in order to optimize
+ for battery life.&lt;/p&gt;
+@param {Number} type type of alarm.
+@param {Number} triggerAtMillis time in milliseconds that the alarm should go
+        off, using the appropriate clock (depending on the alarm type).
+@param {Object {PendingIntent}} operation Action to perform when the alarm goes off;
+        typically comes from {@link PendingIntent#getBroadcast
+        IntentSender.getBroadcast()}.
+@see #set
+@see #setRepeating
+@see #setWindow
+@see #cancel
+@see android.content.Context#sendBroadcast
+@see android.content.Context#registerReceiver
+@see android.content.Intent#filterEquals
+@see #ELAPSED_REALTIME
+@see #ELAPSED_REALTIME_WAKEUP
+@see #RTC
+@see #RTC_WAKEUP
+*/
+setExactAndAllowWhileIdle : function(  ) {},
+
+<span id='android-app-AlarmManager-method-cancel'>/**Remove any alarms with a matching {@link Intent}.
+</span> Any alarm, of any type, whose Intent matches this one (as defined by
+ {@link Intent#filterEquals}), will be canceled.
+@param {Object {PendingIntent}} operation IntentSender which matches a previously added
+ IntentSender. This parameter must not be {@code null}.
+@see #set
+*/
+cancel : function(  ) {},
+
+<span id='android-app-AlarmManager-method-cancel'>/**Remove any alarm scheduled to be delivered to the given {@link android.app.AlarmManager.OnAlarmListener}.
+</span>@param {Object {AlarmManager.OnAlarmListener}} listener OnAlarmListener instance that is the target of a currently-set alarm.
+*/
+cancel : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setTime'>/**Set the system wall clock time.
+</span> Requires the permission android.permission.SET_TIME.
+@param {Number} millis time in milliseconds since the Epoch
+*/
+setTime : function(  ) {},
+
+<span id='android-app-AlarmManager-method-setTimeZone'>/**Sets the system's persistent default time zone. This is the time zone for all apps, even
+</span> after a reboot. Use {@link java.util.TimeZone#setDefault} if you just want to change the
+ time zone within your app, and even then prefer to pass an explicit
+ {@link java.util.TimeZone} to APIs that require it rather than changing the time zone for
+ all threads.
+
+ &lt;p&gt; On android M and above, it is an error to pass in a non-Olson timezone to this
+ function. Note that this is a bad idea on all Android releases because POSIX and
+ the {@code TimeZone} class have opposite interpretations of {@code '+'} and {@code '-'}
+ in the same non-Olson ID.
+@param {String} timeZone one of the Olson ids from the list returned by
+     {@link java.util.TimeZone#getAvailableIDs}
+*/
+setTimeZone : function(  ) {},
+
+<span id='android-app-AlarmManager-method-getNextWakeFromIdleTime'>/**
+</span>@hide 
+*/
+getNextWakeFromIdleTime : function(  ) {},
+
+<span id='android-app-AlarmManager-method-getNextAlarmClock'>/**Gets information about the next alarm clock currently scheduled.
+</span>
+ The alarm clocks considered are those scheduled by any application
+ using the {@link #setAlarmClock} method.
+@return {Object {android.app.AlarmManager.AlarmClockInfo}} An {@link AlarmClockInfo} object describing the next upcoming alarm
+   clock event that will occur.  If there are no alarm clock events currently
+   scheduled, this method will return {@code null}.
+@see #setAlarmClock
+@see AlarmClockInfo
+@see #ACTION_NEXT_ALARM_CLOCK_CHANGED
+*/
+getNextAlarmClock : function(  ) {},
+
+<span id='android-app-AlarmManager-method-getNextAlarmClock'>/**Gets information about the next alarm clock currently scheduled.
+</span>
+ The alarm clocks considered are those scheduled by any application
+ using the {@link #setAlarmClock} method within the given user.
+@return {Object {android.app.AlarmManager.AlarmClockInfo}} An {@link AlarmClockInfo} object describing the next upcoming alarm
+   clock event that will occur within the given user.  If there are no alarm clock
+   events currently scheduled in that user, this method will return {@code null}.
+@see #setAlarmClock
+@see AlarmClockInfo
+@see #ACTION_NEXT_ALARM_CLOCK_CHANGED
+@hide 
+*/
+getNextAlarmClock : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

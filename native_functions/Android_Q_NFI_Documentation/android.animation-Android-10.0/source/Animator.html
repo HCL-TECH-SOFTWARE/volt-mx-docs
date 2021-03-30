@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-animation-Animator'>/**@class android.animation.Animator
+</span> implements java.lang.Cloneable
+
+@extends java.lang.Object
+
+ This is the superclass for classes which provide basic support for animations which can be
+ started, ended, and have &lt;code&gt;AnimatorListeners&lt;/code&gt; added to them.
+*/
+var Animator = {
+
+<span id='android-animation-Animator-property-DURATION_INFINITE'>/** The value used to indicate infinite duration (e.g. when Animators repeat infinitely).
+</span>*/
+DURATION_INFINITE : &quot;-1&quot;,
+<span id='android-animation-Animator-method-start'>/**Starts this animation. If the animation has a nonzero startDelay, the animation will start
+</span> running after that delay elapses. A non-delayed animation will have its initial
+ value(s) set immediately, followed by calls to
+ {@link android.animation.Animator.AnimatorListener#onAnimationStart(Animator)} for any listeners of this animator.
+
+ &lt;p&gt;The animation started by calling this method will be run on the thread that called
+ this method. This thread should have a Looper on it (a runtime exception will be thrown if
+ this is not the case). Also, if the animation will animate
+ properties of objects in the view hierarchy, then the calling thread should be the UI
+ thread for that view hierarchy.&lt;/p&gt;
+*/
+start : function(  ) {},
+
+<span id='android-animation-Animator-method-cancel'>/**Cancels the animation. Unlike {@link #end}(), &lt;code&gt;cancel()&lt;/code&gt; causes the animation to
+</span> stop in its tracks, sending an
+ {@link android.animation.Animator.AnimatorListener#onAnimationCancel(Animator)} to
+ its listeners, followed by an
+ {@link android.animation.Animator.AnimatorListener#onAnimationEnd(Animator)} message.
+
+ &lt;p&gt;This method must be called on the thread that is running the animation.&lt;/p&gt;
+*/
+cancel : function(  ) {},
+
+<span id='android-animation-Animator-method-end'>/**Ends the animation. This causes the animation to assign the end value of the property being
+</span> animated, then calling the
+ {@link android.animation.Animator.AnimatorListener#onAnimationEnd(Animator)} method on
+ its listeners.
+
+ &lt;p&gt;This method must be called on the thread that is running the animation.&lt;/p&gt;
+*/
+end : function(  ) {},
+
+<span id='android-animation-Animator-method-pause'>/**Pauses a running animation. This method should only be called on the same thread on
+</span> which the animation was started. If the animation has not yet been {@link #isStarted() started} or has since ended, then the call is ignored. Paused
+ animations can be resumed by calling {@link #resume}().
+@see #resume()
+@see #isPaused()
+@see AnimatorPauseListener
+*/
+pause : function(  ) {},
+
+<span id='android-animation-Animator-method-resume'>/**Resumes a paused animation, causing the animator to pick up where it left off
+</span> when it was paused. This method should only be called on the same thread on
+ which the animation was started. Calls to resume() on an animator that is
+ not currently paused will be ignored.
+@see #pause()
+@see #isPaused()
+@see AnimatorPauseListener
+*/
+resume : function(  ) {},
+
+<span id='android-animation-Animator-method-isPaused'>/**Returns whether this animator is currently in a paused state.
+</span>@return {Boolean} True if the animator is currently paused, false otherwise.
+@see #pause()
+@see #resume()
+*/
+isPaused : function(  ) {},
+
+<span id='android-animation-Animator-method-getStartDelay'>/**The amount of time, in milliseconds, to delay processing the animation
+</span> after {@link #start}() is called.
+@return {Number} the number of milliseconds to delay running the animation
+*/
+getStartDelay : function(  ) {},
+
+<span id='android-animation-Animator-method-setStartDelay'>/**The amount of time, in milliseconds, to delay processing the animation
+</span> after {@link #start}() is called.
+@param {Number} startDelay The amount of the delay, in milliseconds
+*/
+setStartDelay : function(  ) {},
+
+<span id='android-animation-Animator-method-setDuration'>/**Sets the duration of the animation.
+</span>@param {Number} duration The length of the animation, in milliseconds.
+*/
+setDuration : function(  ) {},
+
+<span id='android-animation-Animator-method-getDuration'>/**Gets the duration of the animation.
+</span>@return {Number} The length of the animation, in milliseconds.
+*/
+getDuration : function(  ) {},
+
+<span id='android-animation-Animator-method-getTotalDuration'>/**Gets the total duration of the animation, accounting for animation sequences, start delay,
+</span> and repeating. Return {@link #DURATION_INFINITE} if the duration is infinite.
+@return {Number} Total time an animation takes to finish, starting from the time {@link #start()}
+          is called. {@link #DURATION_INFINITE} will be returned if the animation or any
+          child animation repeats infinite times.
+*/
+getTotalDuration : function(  ) {},
+
+<span id='android-animation-Animator-method-setInterpolator'>/**The time interpolator used in calculating the elapsed fraction of the
+</span> animation. The interpolator determines whether the animation runs with
+ linear or non-linear motion, such as acceleration and deceleration. The
+ default value is {@link android.view.animation.AccelerateDecelerateInterpolator}.
+@param {Object {TimeInterpolator}} value the interpolator to be used by this animation
+*/
+setInterpolator : function(  ) {},
+
+<span id='android-animation-Animator-method-getInterpolator'>/**Returns the timing interpolator that this animation uses.
+</span>@return {Object {android.animation.TimeInterpolator}} The timing interpolator for this animation.
+*/
+getInterpolator : function(  ) {},
+
+<span id='android-animation-Animator-method-isRunning'>/**Returns whether this Animator is currently running (having been started and gone past any
+</span> initial startDelay period and not yet ended).
+@return {Boolean} Whether the Animator is running.
+*/
+isRunning : function(  ) {},
+
+<span id='android-animation-Animator-method-isStarted'>/**Returns whether this Animator has been started and not yet ended. For reusable
+</span> Animators (which most Animators are, apart from the one-shot animator produced by
+ {@link android.view.ViewAnimationUtils#createCircularReveal(
+ android.view.View, int, int, float, float) createCircularReveal()}),
+ this state is a superset of {@link #isRunning}(), because an Animator with a
+ nonzero {@link #getStartDelay() startDelay} will return true for {@link #isStarted}() during
+ the delay phase, whereas {@link #isRunning}() will return true only after the delay phase
+ is complete. Non-reusable animators will always return true after they have been
+ started, because they cannot return to a non-started state.
+@return {Boolean} Whether the Animator has been started and not yet ended.
+*/
+isStarted : function(  ) {},
+
+<span id='android-animation-Animator-method-addListener'>/**Adds a listener to the set of listeners that are sent events through the life of an
+</span> animation, such as start, repeat, and end.
+@param {Object {Animator.AnimatorListener}} listener the listener to be added to the current set of listeners for this animation.
+*/
+addListener : function(  ) {},
+
+<span id='android-animation-Animator-method-removeListener'>/**Removes a listener from the set listening to this animation.
+</span>@param {Object {Animator.AnimatorListener}} listener the listener to be removed from the current set of listeners for this
+                 animation.
+*/
+removeListener : function(  ) {},
+
+<span id='android-animation-Animator-method-getListeners'>/**Gets the set of {@link android.animation.Animator.AnimatorListener} objects that are currently
+</span> listening for events on this &lt;code&gt;Animator&lt;/code&gt; object.
+@return {Object {java.util.ArrayList}} ArrayList&lt;AnimatorListener&gt; The set of listeners.
+*/
+getListeners : function(  ) {},
+
+<span id='android-animation-Animator-method-addPauseListener'>/**Adds a pause listener to this animator.
+</span>@param {Object {Animator.AnimatorPauseListener}} listener the listener to be added to the current set of pause listeners
+ for this animation.
+*/
+addPauseListener : function(  ) {},
+
+<span id='android-animation-Animator-method-removePauseListener'>/**Removes a pause listener from the set listening to this animation.
+</span>@param {Object {Animator.AnimatorPauseListener}} listener the listener to be removed from the current set of pause
+ listeners for this animation.
+*/
+removePauseListener : function(  ) {},
+
+<span id='android-animation-Animator-method-removeAllListeners'>/**Removes all {@link #addListener(android.animation.Animator.AnimatorListener) listeners}
+</span> and {@link #addPauseListener(android.animation.Animator.AnimatorPauseListener)
+ pauseListeners} from this object.
+*/
+removeAllListeners : function(  ) {},
+
+<span id='android-animation-Animator-method-getChangingConfigurations'>/**Return a mask of the configuration parameters for which this animator may change, requiring
+</span> that it should be re-created from Resources. The default implementation returns whatever
+ value was provided through setChangingConfigurations(int) or 0 by default.
+@return {Number} Returns a mask of the changing configuration parameters, as defined by
+ {@link android.content.pm.ActivityInfo}.
+@see android.content.pm.ActivityInfo
+@hide 
+*/
+getChangingConfigurations : function(  ) {},
+
+<span id='android-animation-Animator-method-setChangingConfigurations'>/**Set a mask of the configuration parameters for which this animator may change, requiring
+</span> that it be re-created from resource.
+@param {Number} configs A mask of the changing configuration parameters, as
+ defined by {@link android.content.pm.ActivityInfo}.
+@see android.content.pm.ActivityInfo
+@hide 
+*/
+setChangingConfigurations : function(  ) {},
+
+<span id='android-animation-Animator-method-appendChangingConfigurations'>/**Sets the changing configurations value to the union of the current changing configurations
+</span> and the provided configs.
+ This method is called while loading the animator.
+@hide 
+*/
+appendChangingConfigurations : function(  ) {},
+
+<span id='android-animation-Animator-method-createConstantState'>/**Return a {@link android.content.res.ConstantState} instance that holds the shared state of
+</span> this Animator.
+ &lt;p&gt;
+ This constant state is used to create new instances of this animator when needed, instead
+ of re-loading it from resources. Default implementation creates a new
+ {@link android.animation.AnimatorConstantState}. You can override this method to provide your custom logic or
+ return null if you don't want this animator to be cached.
+@return {Object {android.content.res.ConstantState}} The ConfigurationBoundResourceCache.BaseConstantState associated to this Animator.
+@see android.content.res.ConstantState
+@see #clone()
+@hide 
+*/
+createConstantState : function(  ) {},
+
+<span id='android-animation-Animator-method-clone'>/**
+</span>*/
+clone : function(  ) {},
+
+<span id='android-animation-Animator-method-setupStartValues'>/**This method tells the object to use appropriate information to extract
+</span> starting values for the animation. For example, a AnimatorSet object will pass
+ this call to its child objects to tell them to set up the values. A
+ ObjectAnimator object will use the information it has about its target object
+ and PropertyValuesHolder objects to get the start values for its properties.
+ A ValueAnimator object will ignore the request since it does not have enough
+ information (such as a target object) to gather these values.
+*/
+setupStartValues : function(  ) {},
+
+<span id='android-animation-Animator-method-setupEndValues'>/**This method tells the object to use appropriate information to extract
+</span> ending values for the animation. For example, a AnimatorSet object will pass
+ this call to its child objects to tell them to set up the values. A
+ ObjectAnimator object will use the information it has about its target object
+ and PropertyValuesHolder objects to get the start values for its properties.
+ A ValueAnimator object will ignore the request since it does not have enough
+ information (such as a target object) to gather these values.
+*/
+setupEndValues : function(  ) {},
+
+<span id='android-animation-Animator-method-setTarget'>/**Sets the target object whose property will be animated by this animation. Not all subclasses
+</span> operate on target objects (for example, {@link android.animation.ValueAnimator}, but this method
+ is on the superclass for the convenience of dealing generically with those subclasses
+ that do handle targets.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; The target is stored as a weak reference internally to avoid leaking
+ resources by having animators directly reference old targets. Therefore, you should
+ ensure that animator targets always have a hard reference elsewhere.
+@param {Object {Object}} target The object being animated
+*/
+setTarget : function(  ) {},
+
+<span id='android-animation-Animator-method-canReverse'>/**
+</span>@hide 
+*/
+canReverse : function(  ) {},
+
+<span id='android-animation-Animator-method-reverse'>/**
+</span>@hide 
+*/
+reverse : function(  ) {},
+
+<span id='android-animation-Animator-method-setAllowRunningAsynchronously'>/**&lt;p&gt;Whether or not the Animator is allowed to run asynchronously off of
+</span> the UI thread. This is a hint that informs the Animator that it is
+ OK to run the animation off-thread, however the Animator may decide
+ that it must run the animation on the UI thread anyway.
+
+ &lt;p&gt;Regardless of whether or not the animation runs asynchronously, all
+ listener callbacks will be called on the UI thread.&lt;/p&gt;
+
+ &lt;p&gt;To be able to use this hint the following must be true:&lt;/p&gt;
+ &lt;ol&gt;
+ &lt;li&gt;The animator is immutable while {@link #isStarted}() is true. Requests
+    to change duration, delay, etc... may be ignored.&lt;/li&gt;
+ &lt;li&gt;Lifecycle callback events may be asynchronous. Events such as
+    {@link android.animation.Animator.android.animation.AnimatorListener#onAnimationEnd(android.animation.Animator)} or
+    {@link android.animation.Animator.android.animation.AnimatorListener#onAnimationRepeat(android.animation.Animator)} may end up delayed
+    as they must be posted back to the UI thread, and any actions performed
+    by those callbacks (such as starting new animations) will not happen
+    in the same frame.&lt;/li&gt;
+ &lt;li&gt;State change requests ({@link #cancel}(), {@link #end}(), {@link #reverse}(), etc...)
+    may be asynchronous. It is guaranteed that all state changes that are
+    performed on the UI thread in the same frame will be applied as a single
+    atomic update, however that frame may be the current frame,
+    the next frame, or some future frame. This will also impact the observed
+    state of the Animator. For example, {@link #isStarted}() may still return true
+    after a call to {@link #end}(). Using the lifecycle callbacks is preferred over
+    queries to {@link #isStarted}(), {@link #isRunning}(), and {@link #isPaused}()
+    for this reason.&lt;/li&gt;
+ &lt;/ol&gt;
+@hide 
+*/
+setAllowRunningAsynchronously : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

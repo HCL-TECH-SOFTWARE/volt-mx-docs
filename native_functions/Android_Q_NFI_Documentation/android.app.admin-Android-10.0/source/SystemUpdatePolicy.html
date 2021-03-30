@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-admin-SystemUpdatePolicy'>/**@class android.app.admin.SystemUpdatePolicy
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Determines when over-the-air system updates are installed on a device. Only a device policy
+ controller (DPC) running in device owner mode can set an update policy for the device—by calling
+ the {@code DevicePolicyManager} method
+ {@link android.app.admin.DevicePolicyManager#setSystemUpdatePolicy setSystemUpdatePolicy()}. An update
+ policy affects the pending system update (if there is one) and any future updates for the device.
+
+ &lt;p&gt;If a policy is set on a device, the system doesn't notify the user about updates.&lt;/p&gt;
+ &lt;h3&gt;Example&lt;/h3&gt;
+
+ &lt;p&gt;The example below shows how a DPC might set a maintenance window for system updates:&lt;/p&gt;
+ &lt;pre&gt;&lt;code&gt;
+ private final MAINTENANCE_WINDOW_START = 1380; // 11pm
+ private final MAINTENANCE_WINDOW_END = 120; // 2am
+
+ // ...
+
+ // Create the system update policy
+ SystemUpdatePolicy policy = SystemUpdatePolicy.createWindowedInstallPolicy(
+     MAINTENANCE_WINDOW_START, MAINTENANCE_WINDOW_END);
+
+ // Get a DevicePolicyManager instance to set the policy on the device
+ DevicePolicyManager dpm =
+     (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+ ComponentName adminComponent = getComponentName(context);
+ dpm.setSystemUpdatePolicy(adminComponent, policy);
+ &lt;/code&gt;&lt;/pre&gt;
+
+ &lt;h3&gt;Developer guide&lt;/h3&gt;
+ To learn more, read &lt;a href=&quot;{@docRoot}work/dpc/system-updates&quot;&gt;Manage system updates&lt;/a&gt;.
+
+ @see DevicePolicyManager#setSystemUpdatePolicy
+ @see DevicePolicyManager#getSystemUpdatePolicy
+*/
+var SystemUpdatePolicy = {
+
+<span id='android-app-admin-SystemUpdatePolicy-property-TYPE_INSTALL_AUTOMATIC'>/** Installs system updates (without user interaction) as soon as they become available. Setting
+</span> this policy type immediately installs any pending updates that might be postponed or waiting
+ for a maintenance window.
+*/
+TYPE_INSTALL_AUTOMATIC : &quot;1&quot;,
+<span id='android-app-admin-SystemUpdatePolicy-property-TYPE_INSTALL_WINDOWED'>/** Installs system updates (without user interaction) during a daily maintenance window. Set the
+</span> start and end of the daily maintenance window, as minutes of the day, when creating a new
+ {@code TYPE_INSTALL_WINDOWED} policy. See
+ {@link #createWindowedInstallPolicy createWindowedInstallPolicy()}.
+
+ &lt;p&gt;No connectivity, not enough disk space, or a low battery are typical reasons Android might
+ not install a system update in the daily maintenance window. After 30 days trying to install
+ an update in the maintenance window (regardless of policy changes in this period), the system
+ prompts the device user to install the update.
+*/
+TYPE_INSTALL_WINDOWED : &quot;2&quot;,
+<span id='android-app-admin-SystemUpdatePolicy-property-TYPE_POSTPONE'>/** Postpones the installation of system updates for 30 days. After the 30-day period has ended,
+</span> the system prompts the device user to install the update.
+
+ &lt;p&gt;The system limits each update to one 30-day postponement. The period begins when the
+ system first postpones the update and setting new {@code TYPE_POSTPONE} policies won’t extend
+ the period. If, after 30 days the update isn’t installed (through policy changes), the system
+ prompts the user to install the update.
+
+ &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Device manufacturers or carriers might choose to exempt important
+ security updates from a postponement policy. Exempted updates notify the device user when
+ they become available.
+*/
+TYPE_POSTPONE : &quot;3&quot;,
+<span id='android-app-admin-SystemUpdatePolicy-property-TYPE_PAUSE'>/** Incoming system updates (including security updates) should be blocked. This flag is not
+</span> exposed to third-party apps (and any attempt to set it will raise exceptions). This is used
+ to represent the current installation option type to the privileged system update clients,
+ for example to indicate OTA freeze is currently in place or when system is outside a daily
+ maintenance window.
+
+ @see InstallationOption
+ @hide
+*/
+TYPE_PAUSE : &quot;4&quot;,
+<span id='android-app-admin-SystemUpdatePolicy-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-admin-SystemUpdatePolicy-method-createAutomaticInstallPolicy'>/**Create a policy object and set it to install update automatically as soon as one is
+</span> available.
+@see #TYPE_INSTALL_AUTOMATIC
+*/
+createAutomaticInstallPolicy : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-createWindowedInstallPolicy'>/**Create a policy object and set it to: new system update will only be installed automatically
+</span> when the system clock is inside a daily maintenance window. If the start and end times are
+ the same, the window is considered to include the &lt;i&gt;whole 24 hours&lt;/i&gt;. That is, updates can
+ install at any time. If start time is later than end time, the window is considered spanning
+ midnight (i.e. the end time denotes a time on the next day). The maintenance window will last
+ for 30 days for any given update, after which the window will no longer be effective and
+ the pending update will be made available for manual installation as if no system update
+ policy were set on the device. See {@link #TYPE_INSTALL_WINDOWED} for the details of this
+ policy's behavior.
+@param {Number} startTime the start of the maintenance window, measured as the number of minutes from
+            midnight in the device's local time. Must be in the range of [0, 1440).
+@param {Number} endTime the end of the maintenance window, measured as the number of minutes from
+            midnight in the device's local time. Must be in the range of [0, 1440).
+@throws IllegalArgumentException If the {@code startTime} or {@code endTime} isn't in the
+            accepted range.
+@return {Object {android.app.admin.SystemUpdatePolicy}} The configured policy.
+@see #TYPE_INSTALL_WINDOWED
+*/
+createWindowedInstallPolicy : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-createPostponeInstallPolicy'>/**Create a policy object and set it to block installation for a maximum period of 30 days.
+</span> To learn more about this policy's behavior, see {@link #TYPE_POSTPONE}.
+
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt; security updates (e.g. monthly security patches) will &lt;i&gt;not&lt;/i&gt; be affected
+ by this policy.
+@see #TYPE_POSTPONE
+*/
+createPostponeInstallPolicy : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-getPolicyType'>/**Returns the type of system update policy, or -1 if no policy has been set.
+</span>@return {Number} The policy type or -1 if the type isn't set.
+*/
+getPolicyType : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-getInstallWindowStart'>/**Get the start of the maintenance window.
+</span>@return {Number} the start of the maintenance window measured as the number of minutes from midnight,
+ or -1 if the policy does not have a maintenance window.
+*/
+getInstallWindowStart : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-getInstallWindowEnd'>/**Get the end of the maintenance window.
+</span>@return {Number} the end of the maintenance window measured as the number of minutes from midnight,
+ or -1 if the policy does not have a maintenance window.
+*/
+getInstallWindowEnd : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-isValid'>/**Return if this object represents a valid policy with:
+</span> 1. Correct type
+ 2. Valid maintenance window if applicable
+ 3. Valid freeze periods
+@hide 
+*/
+isValid : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-validateType'>/**Validate the type and maintenance window (if applicable) of this policy object,
+</span> throws {@link IllegalArgumentException} if it's invalid.
+@hide 
+*/
+validateType : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-setFreezePeriods'>/**Configure a list of freeze periods on top of the current policy. When the device's clock is
+</span> within any of the freeze periods, all incoming system updates including security patches will
+ be blocked and cannot be installed. When the device is outside the freeze periods, the normal
+ policy behavior will apply.
+ &lt;p&gt;
+ Each individual freeze period is allowed to be at most 90 days long, and adjacent freeze
+ periods need to be at least 60 days apart. Also, the list of freeze periods should not
+ contain duplicates or overlap with each other. If any of these conditions is not met, a
+ {@link android.app.admin.SystemUpdatePolicy.ValidationFailedException} will be thrown.
+ &lt;p&gt;
+ Handling of leap year: we ignore leap years in freeze period calculations, in particular,
+ &lt;ul&gt;
+ &lt;li&gt;When a freeze period is defined, February 29th is disregarded so even though a freeze
+ period can be specified to start or end on February 29th, it will be treated as if the period
+ started or ended on February 28th.&lt;/li&gt;
+ &lt;li&gt;When applying freeze period behavior to the device, a system clock of February 29th is
+ treated as if it were February 28th&lt;/li&gt;
+ &lt;li&gt;When calculating the number of days of a freeze period or separation between two freeze
+ periods, February 29th is also ignored and not counted as one day.&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Object {java.util.List}} freezePeriods the list of freeze periods
+@throws ValidationFailedException if the supplied freeze periods do not meet the
+         requirement set above
+@return {Object {android.app.admin.SystemUpdatePolicy}} this instance
+*/
+setFreezePeriods : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-getFreezePeriods'>/**Returns the list of freeze periods previously set on this system update policy object.
+</span>@return {Object {java.util.List}} the list of freeze periods, or an empty list if none was set.
+*/
+getFreezePeriods : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-getCurrentFreezePeriod'>/**Returns the real calendar dates of the current freeze period, or null if the device
+</span> is not in a freeze period at the moment.
+@hide 
+*/
+getCurrentFreezePeriod : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-validateFreezePeriods'>/**
+</span>@hide 
+*/
+validateFreezePeriods : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-validateAgainstPreviousFreezePeriod'>/**
+</span>@hide 
+*/
+validateAgainstPreviousFreezePeriod : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-getInstallationOptionAt'>/**Returns the installation option at the specified time, under the current
+</span> {@code SystemUpdatePolicy} object. This is a convenience method for system update clients
+ so they can instantiate this policy at any given time and find out what to do with incoming
+ system updates, without the need of examining the overall policy structure.
+
+ Normally the system update clients will query the current installation option by calling this
+ method with the current timestamp, and act on the returned option until its effective time
+ lapses. It can then query the latest option using a new timestamp. It should also listen
+ for {@code DevicePolicyManager#ACTION_SYSTEM_UPDATE_POLICY_CHANGED} broadcast, in case the
+ whole policy is updated.
+@param {Number} when At what time the intallation option is being queried, specified in number of
+           milliseonds since the epoch.
+@see InstallationOption
+@hide 
+*/
+getInstallationOptionAt : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-restoreFromXml'>/**Restore a previously saved SystemUpdatePolicy from XML. No need to validate
+</span> the reconstructed policy since the XML is supposed to be created by the
+ system server from a validated policy object previously.
+@hide 
+*/
+restoreFromXml : function(  ) {},
+
+<span id='android-app-admin-SystemUpdatePolicy-method-saveToXml'>/**
+</span>@hide 
+*/
+saveToXml : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

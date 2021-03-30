@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-TaskStackBuilder'>/**@class android.app.TaskStackBuilder
+</span>@extends java.lang.Object
+
+ Utility class for constructing synthetic back stacks for cross-task navigation
+ on Android 3.0 and newer.
+
+ &lt;p&gt;In API level 11 (Android 3.0/Honeycomb) the recommended conventions for
+ app navigation using the back key changed. The back key's behavior is local
+ to the current task and does not capture navigation across different tasks.
+ Navigating across tasks and easily reaching the previous task is accomplished
+ through the &quot;recents&quot; UI, accessible through the software-provided Recents key
+ on the navigation or system bar. On devices with the older hardware button configuration
+ the recents UI can be accessed with a long press on the Home key.&lt;/p&gt;
+
+ &lt;p&gt;When crossing from one task stack to another post-Android 3.0,
+ the application should synthesize a back stack/history for the new task so that
+ the user may navigate out of the new task and back to the Launcher by repeated
+ presses of the back key. Back key presses should not navigate across task stacks.&lt;/p&gt;
+
+ &lt;p&gt;TaskStackBuilder provides a way to obey the correct conventions
+ around cross-task navigation.&lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;About Navigation&lt;/h3&gt;
+ For more detailed information about tasks, the back stack, and navigation design guidelines,
+ please read
+ &lt;a href=&quot;{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html&quot;&gt;Tasks and Back Stack&lt;/a&gt;
+ from the developer guide and &lt;a href=&quot;{@docRoot}design/patterns/navigation.html&quot;&gt;Navigation&lt;/a&gt;
+ from the design guide.
+ &lt;/div&gt;
+*/
+var TaskStackBuilder = {
+
+<span id='android-app-TaskStackBuilder-method-create'>/**Return a new TaskStackBuilder for launching a fresh task stack consisting
+</span> of a series of activities.
+@param {Object {Context}} context The context that will launch the new task stack or generate a PendingIntent
+@return {Object {android.app.TaskStackBuilder}} A new TaskStackBuilder
+*/
+create : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-addNextIntent'>/**Add a new Intent to the task stack. The most recently added Intent will invoke
+</span> the Activity at the top of the final task stack.
+@param {Object {Intent}} nextIntent Intent for the next Activity in the synthesized task stack
+@return {Object {android.app.TaskStackBuilder}} This TaskStackBuilder for method chaining
+*/
+addNextIntent : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-addNextIntentWithParentStack'>/**Add a new Intent with the resolved chain of parents for the target activity to
+</span> the task stack.
+
+ &lt;p&gt;This is equivalent to calling {@link #addParentStack(ComponentName) addParentStack}
+ with the resolved ComponentName of nextIntent (if it can be resolved), followed by
+ {@link #addNextIntent(Intent) addNextIntent} with nextIntent.&lt;/p&gt;
+@param {Object {Intent}} nextIntent Intent for the topmost Activity in the synthesized task stack.
+                   Its chain of parents as specified in the manifest will be added.
+@return {Object {android.app.TaskStackBuilder}} This TaskStackBuilder for method chaining.
+*/
+addNextIntentWithParentStack : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-addParentStack'>/**Add the activity parent chain as specified by the
+</span> {@link android.app.Activity#getParentandroid.app.ActivityIntent() getParentandroid.app.ActivityIntent()} method of the activity
+ specified and the {@link android.R.attr#parentActivityName parentActivityName} attributes
+ of each successive activity (or activity-alias) element in the application's manifest
+ to the task stack builder.
+@param {Object {Activity}} sourceActivity All parents of this activity will be added
+@return {Object {android.app.TaskStackBuilder}} This TaskStackBuilder for method chaining
+*/
+addParentStack : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-addParentStack'>/**Add the activity parent chain as specified by the
+</span> {@link android.R.attr#parentActivityName parentActivityName} attribute of the activity
+ (or activity-alias) element in the application's manifest to the task stack builder.
+@param {Object {java.lang.Class}} sourceActivityClass All parents of this activity will be added
+@return {Object {android.app.TaskStackBuilder}} This TaskStackBuilder for method chaining
+*/
+addParentStack : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-addParentStack'>/**Add the activity parent chain as specified by the
+</span> {@link android.R.attr#parentActivityName parentActivityName} attribute of the activity
+ (or activity-alias) element in the application's manifest to the task stack builder.
+@param {Object {ComponentName}} sourceActivityName Must specify an Activity component. All parents of
+                           this activity will be added
+@return {Object {android.app.TaskStackBuilder}} This TaskStackBuilder for method chaining
+*/
+addParentStack : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-getIntentCount'>/**
+</span>@return {Number} the number of intents added so far.
+*/
+getIntentCount : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-editIntentAt'>/**Return the intent at the specified index for modification.
+</span> Useful if you need to modify the flags or extras of an intent that was previously added,
+ for example with {@link #addParentStack}(Activity).
+@param {Number} index Index from 0-getIntentCount()
+@return {Object {android.content.Intent}} the intent at position index
+*/
+editIntentAt : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-startActivities'>/**Start the task stack constructed by this builder.
+</span>*/
+startActivities : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-startActivities'>/**Start the task stack constructed by this builder.
+</span>@hide 
+*/
+startActivities : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-startActivities'>/**Start the task stack constructed by this builder.
+</span>@param {Object {Bundle}} options Additional options for how the Activity should be started.
+ See {@link android.content.Context#startActivity(Intent, Bundle)}
+ Context.startActivity(Intent, Bundle)} for more details.
+*/
+startActivities : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-getPendingIntent'>/**Obtain a {@link android.app.PendingIntent} for launching the task constructed by this builder so far.
+</span>@param {Number} requestCode Private request code for the sender
+@param {Number} flags May be {@link PendingIntent#FLAG_ONE_SHOT},
+              {@link PendingIntent#FLAG_NO_CREATE}, {@link PendingIntent#FLAG_CANCEL_CURRENT},
+              {@link PendingIntent#FLAG_UPDATE_CURRENT}, or any of the flags supported by
+              {@link Intent#fillIn(Intent, int)} to control which unspecified parts of the
+              intent that can be supplied when the actual send happens.
+@return {Object {android.app.PendingIntent}} The obtained PendingIntent
+*/
+getPendingIntent : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-getPendingIntent'>/**Obtain a {@link android.app.PendingIntent} for launching the task constructed by this builder so far.
+</span>@param {Number} requestCode Private request code for the sender
+@param {Number} flags May be {@link PendingIntent#FLAG_ONE_SHOT},
+              {@link PendingIntent#FLAG_NO_CREATE}, {@link PendingIntent#FLAG_CANCEL_CURRENT},
+              {@link PendingIntent#FLAG_UPDATE_CURRENT}, or any of the flags supported by
+              {@link Intent#fillIn(Intent, int)} to control which unspecified parts of the
+              intent that can be supplied when the actual send happens.
+@param {Object {Bundle}} options Additional options for how the Activity should be started.
+ See {@link android.content.Context#startActivity(Intent, Bundle)}
+ Context.startActivity(Intent, Bundle)} for more details.
+@return {Object {android.app.PendingIntent}} The obtained PendingIntent
+*/
+getPendingIntent : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-getPendingIntent'>/**
+</span>@hide 
+*/
+getPendingIntent : function(  ) {},
+
+<span id='android-app-TaskStackBuilder-method-getIntents'>/**Return an array containing the intents added to this builder. The intent at the
+</span> root of the task stack will appear as the first item in the array and the
+ intent at the top of the stack will appear as the last item.
+@return {Object {android.content.Intent}} An array containing the intents added to this builder.
+*/
+getIntents : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

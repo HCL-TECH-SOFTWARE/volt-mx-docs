@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-IntentService'>/**@class android.app.IntentService
+</span>@extends android.app.Service
+
+ IntentService is a base class for {@link android.app.Service}s that handle asynchronous
+ requests (expressed as {@link Intent}s) on demand.  Clients send requests
+ through {@link android.content.Context#startService(Intent)} calls; the
+ service is started as needed, handles each Intent in turn using a worker
+ thread, and stops itself when it runs out of work.
+
+ &lt;p&gt;This &quot;work queue processor&quot; pattern is commonly used to offload tasks
+ from an application's main thread.  The IntentService class exists to
+ simplify this pattern and take care of the mechanics.  To use it, extend
+ IntentService and implement {@link #onHandleIntent}(Intent).  IntentService
+ will receive the Intents, launch a worker thread, and stop the service as
+ appropriate.
+
+ &lt;p&gt;All requests are handled on a single worker thread -- they may take as
+ long as necessary (and will not block the application's main loop), but
+ only one request will be processed at a time.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;b&gt;Note:&lt;/b&gt; IntentService is subject to all the
+ &lt;a href=&quot;/preview/features/background.html&quot;&gt;background execution limits&lt;/a&gt;
+ imposed with Android 8.0 (API level 26). In most cases, you are better off
+ using {@link android.support.v4.app.JobIntentService}, which uses jobs
+ instead of services when running on Android 8.0 or higher.
+ &lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For a detailed discussion about how to create services, read the
+ &lt;a href=&quot;{@docRoot}guide/components/services.html&quot;&gt;Services&lt;/a&gt; developer
+ guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ @see android.support.v4.app.JobIntentService
+ @see android.os.AsyncTask
+*/
+var IntentService = {
+
+<span id='android-app-IntentService-method-setIntentRedelivery'>/**Sets intent redelivery preferences.  Usually called from the constructor
+</span> with your preferred semantics.
+
+ &lt;p&gt;If enabled is true,
+ {@link #onStartCommand(Intent, int, int)} will return
+ {@link android.app.Service#START_REDELIVER_INTENT}, so if this process dies before
+ {@link #onHandleIntent}(Intent) returns, the process will be restarted
+ and the intent redelivered.  If multiple Intents have been sent, only
+ the most recent one is guaranteed to be redelivered.
+
+ &lt;p&gt;If enabled is false (the default),
+ {@link #onStartCommand(Intent, int, int)} will return
+ {@link android.app.Service#START_NOT_STICKY}, and if the process dies, the Intent
+ dies along with it.
+*/
+setIntentRedelivery : function(  ) {},
+
+<span id='android-app-IntentService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-app-IntentService-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='android-app-IntentService-method-onStartCommand'>/**You should not override this method for your IntentService. Instead,
+</span> override {@link #onHandleIntent}, which the system calls when the IntentService
+ receives a start request.
+@see android.app.Service#onStartCommand
+*/
+onStartCommand : function(  ) {},
+
+<span id='android-app-IntentService-method-onDestroy'>/**
+</span>*/
+onDestroy : function(  ) {},
+
+<span id='android-app-IntentService-method-onBind'>/**Unless you provide binding for your service, you don't need to implement this
+</span> method, because the default implementation returns null.
+@see android.app.Service#onBind
+*/
+onBind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

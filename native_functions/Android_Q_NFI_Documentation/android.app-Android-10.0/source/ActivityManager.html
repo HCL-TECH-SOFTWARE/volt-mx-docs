@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-ActivityManager'>/**@class android.app.ActivityManager
+</span>@extends java.lang.Object
+
+ &lt;p&gt;
+ This class gives information about, and interacts
+ with, activities, services, and the containing
+ process.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ A number of the methods in this class are for
+ debugging or informational purposes and they should
+ not be used to affect any runtime behavior of
+ your app. These methods are called out as such in
+ the method level documentation.
+ &lt;/p&gt;
+
+&lt;p&gt;
+ Most application developers should not have the need to
+ use this class, most of whose methods are for specialized
+ use cases. However, a few methods are more broadly applicable.
+ For instance, {@link android.app.ActivityManager#isLowRamDevice() isLowRamDevice()}
+ enables your app to detect whether it is running on a low-memory device,
+ and behave accordingly.
+ {@link android.app.ActivityManager#clearApplicationUserData() clearApplicationUserData()}
+ is for apps with reset-data functionality.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ In some special use cases, where an app interacts with
+ its Task stack, the app may use the
+ {@link android.app.ActivityManager.AppTask} and
+ {@link android.app.ActivityManager.RecentTaskInfo} inner
+ classes. However, in general, the methods in this class should
+ be used for testing and debugging purposes only.
+ &lt;/p&gt;
+*/
+var ActivityManager = {
+
+<span id='android-app-ActivityManager-property-INSTR_FLAG_DISABLE_HIDDEN_API_CHECKS'>/** Disable hidden API checks for the newly started instrumentation.
+</span> @hide
+*/
+INSTR_FLAG_DISABLE_HIDDEN_API_CHECKS : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-INSTR_FLAG_MOUNT_EXTERNAL_STORAGE_FULL'>/** Mount full external storage for the newly started instrumentation.
+</span> @hide
+*/
+INSTR_FLAG_MOUNT_EXTERNAL_STORAGE_FULL : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-BUGREPORT_OPTION_FULL'>/** Takes a bugreport without user interference (and hence causing less
+</span> interference to the system), but includes all sections.
+ @hide
+*/
+BUGREPORT_OPTION_FULL : &quot;0&quot;,
+<span id='android-app-ActivityManager-property-BUGREPORT_OPTION_INTERACTIVE'>/** Allows user to monitor progress and enter additional data; might not include all
+</span> sections.
+ @hide
+*/
+BUGREPORT_OPTION_INTERACTIVE : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-BUGREPORT_OPTION_REMOTE'>/** Takes a bugreport requested remotely by administrator of the Device Owner app,
+</span> not the device's user.
+ @hide
+*/
+BUGREPORT_OPTION_REMOTE : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-BUGREPORT_OPTION_WEAR'>/** Takes a bugreport on a wearable device.
+</span> @hide
+*/
+BUGREPORT_OPTION_WEAR : &quot;3&quot;,
+<span id='android-app-ActivityManager-property-BUGREPORT_OPTION_TELEPHONY'>/** Takes a lightweight version of bugreport that only includes a few, urgent sections
+</span> used to report telephony bugs.
+ @hide
+*/
+BUGREPORT_OPTION_TELEPHONY : &quot;4&quot;,
+<span id='android-app-ActivityManager-property-BUGREPORT_OPTION_WIFI'>/** Takes a lightweight bugreport that only includes a few sections related to Wifi.
+</span> @hide
+*/
+BUGREPORT_OPTION_WIFI : &quot;5&quot;,
+<span id='android-app-ActivityManager-property-META_HOME_ALTERNATE'>/** &lt;a href=&quot;{@docRoot}guide/topics/manifest/meta-data-element.html&quot;&gt;{@code
+</span> &lt;meta-data&gt;}&lt;/a&gt; name for a 'home' Activity that declares a package that is to be
+ uninstalled in lieu of the declaring one.  The package named here must be
+ signed with the same certificate as the one declaring the {@code &lt;meta-data&gt;}.
+*/
+META_HOME_ALTERNATE : &quot;android.app.home.alternate&quot;,
+<span id='android-app-ActivityManager-property-START_VOICE_HIDDEN_SESSION'>/** Result for IActivityManager.startVoiceActivity: active session is currently hidden.
+</span> @hide
+*/
+START_VOICE_HIDDEN_SESSION : &quot;-100&quot;,
+<span id='android-app-ActivityManager-property-START_VOICE_NOT_ACTIVE_SESSION'>/** Result for IActivityManager.startVoiceActivity: active session does not match
+</span> the requesting token.
+ @hide
+*/
+START_VOICE_NOT_ACTIVE_SESSION : &quot;-99&quot;,
+<span id='android-app-ActivityManager-property-START_NOT_CURRENT_USER_ACTIVITY'>/** Result for IActivityManager.startActivity: trying to start a background user
+</span> activity that shouldn't be displayed for all users.
+ @hide
+*/
+START_NOT_CURRENT_USER_ACTIVITY : &quot;-98&quot;,
+<span id='android-app-ActivityManager-property-START_NOT_VOICE_COMPATIBLE'>/** Result for IActivityManager.startActivity: trying to start an activity under voice
+</span> control when that activity does not support the VOICE category.
+ @hide
+*/
+START_NOT_VOICE_COMPATIBLE : &quot;-97&quot;,
+<span id='android-app-ActivityManager-property-START_CANCELED'>/** Result for IActivityManager.startActivity: an error where the
+</span> start had to be canceled.
+ @hide
+*/
+START_CANCELED : &quot;-96&quot;,
+<span id='android-app-ActivityManager-property-START_NOT_ACTIVITY'>/** Result for IActivityManager.startActivity: an error where the
+</span> thing being started is not an activity.
+ @hide
+*/
+START_NOT_ACTIVITY : &quot;-95&quot;,
+<span id='android-app-ActivityManager-property-START_PERMISSION_DENIED'>/** Result for IActivityManager.startActivity: an error where the
+</span> caller does not have permission to start the activity.
+ @hide
+*/
+START_PERMISSION_DENIED : &quot;-94&quot;,
+<span id='android-app-ActivityManager-property-START_FORWARD_AND_REQUEST_CONFLICT'>/** Result for IActivityManager.startActivity: an error where the
+</span> caller has requested both to forward a result and to receive
+ a result.
+ @hide
+*/
+START_FORWARD_AND_REQUEST_CONFLICT : &quot;-93&quot;,
+<span id='android-app-ActivityManager-property-START_CLASS_NOT_FOUND'>/** Result for IActivityManager.startActivity: an error where the
+</span> requested class is not found.
+ @hide
+*/
+START_CLASS_NOT_FOUND : &quot;-92&quot;,
+<span id='android-app-ActivityManager-property-START_INTENT_NOT_RESOLVED'>/** Result for IActivityManager.startActivity: an error where the
+</span> given Intent could not be resolved to an activity.
+ @hide
+*/
+START_INTENT_NOT_RESOLVED : &quot;-91&quot;,
+<span id='android-app-ActivityManager-property-START_ASSISTANT_HIDDEN_SESSION'>/** Result for IActivityManager.startAssistantActivity: active session is currently hidden.
+</span> @hide
+*/
+START_ASSISTANT_HIDDEN_SESSION : &quot;-90&quot;,
+<span id='android-app-ActivityManager-property-START_ASSISTANT_NOT_ACTIVE_SESSION'>/** Result for IActivityManager.startAssistantActivity: active session does not match
+</span> the requesting token.
+ @hide
+*/
+START_ASSISTANT_NOT_ACTIVE_SESSION : &quot;-89&quot;,
+<span id='android-app-ActivityManager-property-START_SUCCESS'>/** Result for IActivityManaqer.startActivity: the activity was started
+</span> successfully as normal.
+ @hide
+*/
+START_SUCCESS : &quot;0&quot;,
+<span id='android-app-ActivityManager-property-START_RETURN_INTENT_TO_CALLER'>/** Result for IActivityManaqer.startActivity: the caller asked that the Intent not
+</span> be executed if it is the recipient, and that is indeed the case.
+ @hide
+*/
+START_RETURN_INTENT_TO_CALLER : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-START_TASK_TO_FRONT'>/** Result for IActivityManaqer.startActivity: activity wasn't really started, but
+</span> a task was simply brought to the foreground.
+ @hide
+*/
+START_TASK_TO_FRONT : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-START_DELIVERED_TO_TOP'>/** Result for IActivityManaqer.startActivity: activity wasn't really started, but
+</span> the given Intent was given to the existing top activity.
+ @hide
+*/
+START_DELIVERED_TO_TOP : &quot;3&quot;,
+<span id='android-app-ActivityManager-property-START_SWITCHES_CANCELED'>/** Result for IActivityManaqer.startActivity: request was canceled because
+</span> app switches are temporarily canceled to ensure the user's last request
+ (such as pressing home) is performed.
+ @hide
+*/
+START_SWITCHES_CANCELED : &quot;100&quot;,
+<span id='android-app-ActivityManager-property-START_RETURN_LOCK_TASK_MODE_VIOLATION'>/** Result for IActivityManaqer.startActivity: a new activity was attempted to be started
+</span> while in Lock Task Mode.
+ @hide
+*/
+START_RETURN_LOCK_TASK_MODE_VIOLATION : &quot;101&quot;,
+<span id='android-app-ActivityManager-property-START_ABORTED'>/** Result for IActivityManaqer.startActivity: a new activity start was aborted. Never returned
+</span> externally.
+ @hide
+*/
+START_ABORTED : &quot;102&quot;,
+<span id='android-app-ActivityManager-property-START_FLAG_ONLY_IF_NEEDED'>/** Flag for IActivityManaqer.startActivity: do special start mode where
+</span> a new activity is launched only if it is needed.
+ @hide
+*/
+START_FLAG_ONLY_IF_NEEDED : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-START_FLAG_DEBUG'>/** Flag for IActivityManaqer.startActivity: launch the app for
+</span> debugging.
+ @hide
+*/
+START_FLAG_DEBUG : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-START_FLAG_TRACK_ALLOCATION'>/** Flag for IActivityManaqer.startActivity: launch the app for
+</span> allocation tracking.
+ @hide
+*/
+START_FLAG_TRACK_ALLOCATION : &quot;4&quot;,
+<span id='android-app-ActivityManager-property-START_FLAG_NATIVE_DEBUGGING'>/** Flag for IActivityManaqer.startActivity: launch the app with
+</span> native debugging support.
+ @hide
+*/
+START_FLAG_NATIVE_DEBUGGING : &quot;8&quot;,
+<span id='android-app-ActivityManager-property-BROADCAST_SUCCESS'>/** Result for IActivityManaqer.broadcastIntent: success!
+</span> @hide
+*/
+BROADCAST_SUCCESS : &quot;0&quot;,
+<span id='android-app-ActivityManager-property-BROADCAST_STICKY_CANT_HAVE_PERMISSION'>/** Result for IActivityManaqer.broadcastIntent: attempt to broadcast
+</span> a sticky intent without appropriate permission.
+ @hide
+*/
+BROADCAST_STICKY_CANT_HAVE_PERMISSION : &quot;-1&quot;,
+<span id='android-app-ActivityManager-property-BROADCAST_FAILED_USER_STOPPED'>/** Result for IActivityManager.broadcastIntent: trying to send a broadcast
+</span> to a stopped user. Fail.
+ @hide
+*/
+BROADCAST_FAILED_USER_STOPPED : &quot;-2&quot;,
+<span id='android-app-ActivityManager-property-INTENT_SENDER_BROADCAST'>/** Type for IActivityManaqer.getIntentSender: this PendingIntent is
+</span> for a sendBroadcast operation.
+ @hide
+*/
+INTENT_SENDER_BROADCAST : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-INTENT_SENDER_ACTIVITY'>/** Type for IActivityManaqer.getIntentSender: this PendingIntent is
+</span> for a startActivity operation.
+ @hide
+*/
+INTENT_SENDER_ACTIVITY : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-INTENT_SENDER_ACTIVITY_RESULT'>/** Type for IActivityManaqer.getIntentSender: this PendingIntent is
+</span> for an activity result operation.
+ @hide
+*/
+INTENT_SENDER_ACTIVITY_RESULT : &quot;3&quot;,
+<span id='android-app-ActivityManager-property-INTENT_SENDER_SERVICE'>/** Type for IActivityManaqer.getIntentSender: this PendingIntent is
+</span> for a startService operation.
+ @hide
+*/
+INTENT_SENDER_SERVICE : &quot;4&quot;,
+<span id='android-app-ActivityManager-property-INTENT_SENDER_FOREGROUND_SERVICE'>/** Type for IActivityManaqer.getIntentSender: this PendingIntent is
+</span> for a startForegroundService operation.
+ @hide
+*/
+INTENT_SENDER_FOREGROUND_SERVICE : &quot;5&quot;,
+<span id='android-app-ActivityManager-property-USER_OP_SUCCESS'>/**@hide User operation call: success! */
+</span>USER_OP_SUCCESS : &quot;0&quot;,
+<span id='android-app-ActivityManager-property-USER_OP_UNKNOWN_USER'>/**@hide User operation call: given user id is not known. */
+</span>USER_OP_UNKNOWN_USER : &quot;-1&quot;,
+<span id='android-app-ActivityManager-property-USER_OP_IS_CURRENT'>/**@hide User operation call: given user id is the current user, can't be stopped. */
+</span>USER_OP_IS_CURRENT : &quot;-2&quot;,
+<span id='android-app-ActivityManager-property-USER_OP_ERROR_IS_SYSTEM'>/**@hide User operation call: system user can't be stopped. */
+</span>USER_OP_ERROR_IS_SYSTEM : &quot;-3&quot;,
+<span id='android-app-ActivityManager-property-USER_OP_ERROR_RELATED_USERS_CANNOT_STOP'>/**@hide User operation call: one of related users cannot be stopped. */
+</span>USER_OP_ERROR_RELATED_USERS_CANNOT_STOP : &quot;-4&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_UNKNOWN'>/**@hide Not a real process state. */
+</span>PROCESS_STATE_UNKNOWN : &quot;-1&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_PERSISTENT'>/**@hide Process is a persistent system process. */
+</span>PROCESS_STATE_PERSISTENT : &quot;0&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_PERSISTENT_UI'>/**@hide Process is a persistent system process and is doing UI. */
+</span>PROCESS_STATE_PERSISTENT_UI : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_TOP'>/**@hide Process is hosting the current top activities.  Note that this covers
+</span> all activities that are visible to the user. */
+PROCESS_STATE_TOP : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_FOREGROUND_SERVICE_LOCATION'>/**@hide Process is hosting a foreground service with location type. */
+</span>PROCESS_STATE_FOREGROUND_SERVICE_LOCATION : &quot;3&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_BOUND_TOP'>/**@hide Process is bound to a TOP app. This is ranked below SERVICE_LOCATION so that
+</span> it doesn't get the capability of location access while-in-use. */
+PROCESS_STATE_BOUND_TOP : &quot;4&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_FOREGROUND_SERVICE'>/**@hide Process is hosting a foreground service. */
+</span>PROCESS_STATE_FOREGROUND_SERVICE : &quot;5&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_BOUND_FOREGROUND_SERVICE'>/**@hide Process is hosting a foreground service due to a system binding. */
+</span>PROCESS_STATE_BOUND_FOREGROUND_SERVICE : &quot;6&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_IMPORTANT_FOREGROUND'>/**@hide Process is important to the user, and something they are aware of. */
+</span>PROCESS_STATE_IMPORTANT_FOREGROUND : &quot;7&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_IMPORTANT_BACKGROUND'>/**@hide Process is important to the user, but not something they are aware of. */
+</span>PROCESS_STATE_IMPORTANT_BACKGROUND : &quot;8&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_TRANSIENT_BACKGROUND'>/**@hide Process is in the background transient so we will try to keep running. */
+</span>PROCESS_STATE_TRANSIENT_BACKGROUND : &quot;9&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_BACKUP'>/**@hide Process is in the background running a backup/restore operation. */
+</span>PROCESS_STATE_BACKUP : &quot;10&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_SERVICE'>/**@hide Process is in the background running a service.  Unlike oom_adj, this level
+</span> is used for both the normal running in background state and the executing
+ operations state. */
+PROCESS_STATE_SERVICE : &quot;11&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_RECEIVER'>/**@hide Process is in the background running a receiver.   Note that from the
+</span> perspective of oom_adj, receivers run at a higher foreground level, but for our
+ prioritization here that is not necessary and putting them below services means
+ many fewer changes in some process states as they receive broadcasts. */
+PROCESS_STATE_RECEIVER : &quot;12&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_TOP_SLEEPING'>/**@hide Same as {@link #PROCESS_STATE_TOP} but while device is sleeping. */
+</span>PROCESS_STATE_TOP_SLEEPING : &quot;13&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_HEAVY_WEIGHT'>/**@hide Process is in the background, but it can't restore its state so we want
+</span> to try to avoid killing it. */
+PROCESS_STATE_HEAVY_WEIGHT : &quot;14&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_HOME'>/**@hide Process is in the background but hosts the home activity. */
+</span>PROCESS_STATE_HOME : &quot;15&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_LAST_ACTIVITY'>/**@hide Process is in the background but hosts the last shown activity. */
+</span>PROCESS_STATE_LAST_ACTIVITY : &quot;16&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_CACHED_ACTIVITY'>/**@hide Process is being cached for later use and contains activities. */
+</span>PROCESS_STATE_CACHED_ACTIVITY : &quot;17&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_CACHED_ACTIVITY_CLIENT'>/**@hide Process is being cached for later use and is a client of another cached
+</span> process that contains activities. */
+PROCESS_STATE_CACHED_ACTIVITY_CLIENT : &quot;18&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_CACHED_RECENT'>/**@hide Process is being cached for later use and has an activity that corresponds
+</span> to an existing recent task. */
+PROCESS_STATE_CACHED_RECENT : &quot;19&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_CACHED_EMPTY'>/**@hide Process is being cached for later use and is empty. */
+</span>PROCESS_STATE_CACHED_EMPTY : &quot;20&quot;,
+<span id='android-app-ActivityManager-property-PROCESS_STATE_NONEXISTENT'>/**@hide Process does not exist. */
+</span>PROCESS_STATE_NONEXISTENT : &quot;21&quot;,
+<span id='android-app-ActivityManager-property-MIN_PROCESS_STATE'>/**@hide The lowest process state number */
+</span>MIN_PROCESS_STATE : &quot;0&quot;,
+<span id='android-app-ActivityManager-property-MAX_PROCESS_STATE'>/**@hide The highest process state number */
+</span>MAX_PROCESS_STATE : &quot;21&quot;,
+<span id='android-app-ActivityManager-property-ASSIST_CONTEXT_BASIC'>/**@hide requestType for assist context: only basic information. */
+</span>ASSIST_CONTEXT_BASIC : &quot;0&quot;,
+<span id='android-app-ActivityManager-property-ASSIST_CONTEXT_FULL'>/**@hide requestType for assist context: generate full AssistStructure. */
+</span>ASSIST_CONTEXT_FULL : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-ASSIST_CONTEXT_AUTOFILL'>/**@hide requestType for assist context: generate full AssistStructure for autofill. */
+</span>ASSIST_CONTEXT_AUTOFILL : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-UID_OBSERVER_PROCSTATE'>/**@hide Flag for registerUidObserver: report changes in process state. */
+</span>UID_OBSERVER_PROCSTATE : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-UID_OBSERVER_GONE'>/**@hide Flag for registerUidObserver: report uid gone. */
+</span>UID_OBSERVER_GONE : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-UID_OBSERVER_IDLE'>/**@hide Flag for registerUidObserver: report uid has become idle. */
+</span>UID_OBSERVER_IDLE : &quot;4&quot;,
+<span id='android-app-ActivityManager-property-UID_OBSERVER_ACTIVE'>/**@hide Flag for registerUidObserver: report uid has become active. */
+</span>UID_OBSERVER_ACTIVE : &quot;8&quot;,
+<span id='android-app-ActivityManager-property-UID_OBSERVER_CACHED'>/**@hide Flag for registerUidObserver: report uid cached state has changed. */
+</span>UID_OBSERVER_CACHED : &quot;16&quot;,
+<span id='android-app-ActivityManager-property-APP_START_MODE_NORMAL'>/**@hide Mode for {@link IActivityManager#isAppStartModeDisabled}: normal free-to-run operation. */
+</span>APP_START_MODE_NORMAL : &quot;0&quot;,
+<span id='android-app-ActivityManager-property-APP_START_MODE_DELAYED'>/**@hide Mode for {@link IActivityManager#isAppStartModeDisabled}: delay running until later. */
+</span>APP_START_MODE_DELAYED : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-APP_START_MODE_DELAYED_RIGID'>/**@hide Mode for {@link IActivityManager#isAppStartModeDisabled}: delay running until later, with
+</span> rigid errors (throwing exception). */
+APP_START_MODE_DELAYED_RIGID : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-APP_START_MODE_DISABLED'>/**@hide Mode for {@link IActivityManager#isAppStartModeDisabled}: disable/cancel pending
+</span> launches; this is the mode for ephemeral apps. */
+APP_START_MODE_DISABLED : &quot;3&quot;,
+<span id='android-app-ActivityManager-property-LOCK_TASK_MODE_NONE'>/** Lock task mode is not active.
+</span>*/
+LOCK_TASK_MODE_NONE : &quot;0&quot;,
+<span id='android-app-ActivityManager-property-LOCK_TASK_MODE_LOCKED'>/** Full lock task mode is active.
+</span>*/
+LOCK_TASK_MODE_LOCKED : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-LOCK_TASK_MODE_PINNED'>/** App pinning mode is active.
+</span>*/
+LOCK_TASK_MODE_PINNED : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-COMPAT_MODE_ALWAYS'>/** Screen compatibility mode: the application most always run in
+</span> compatibility mode.
+ @hide
+*/
+COMPAT_MODE_ALWAYS : &quot;-1&quot;,
+<span id='android-app-ActivityManager-property-COMPAT_MODE_NEVER'>/** Screen compatibility mode: the application can never run in
+</span> compatibility mode.
+ @hide
+*/
+COMPAT_MODE_NEVER : &quot;-2&quot;,
+<span id='android-app-ActivityManager-property-COMPAT_MODE_UNKNOWN'>/** Screen compatibility mode: unknown.
+</span> @hide
+*/
+COMPAT_MODE_UNKNOWN : &quot;-3&quot;,
+<span id='android-app-ActivityManager-property-COMPAT_MODE_DISABLED'>/** Screen compatibility mode: the application currently has compatibility
+</span> mode disabled.
+ @hide
+*/
+COMPAT_MODE_DISABLED : &quot;0&quot;,
+<span id='android-app-ActivityManager-property-COMPAT_MODE_ENABLED'>/** Screen compatibility mode: the application currently has compatibility
+</span> mode enabled.
+ @hide
+*/
+COMPAT_MODE_ENABLED : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-COMPAT_MODE_TOGGLE'>/** Screen compatibility mode: request to toggle the application's
+</span> compatibility mode.
+ @hide
+*/
+COMPAT_MODE_TOGGLE : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-RECENT_WITH_EXCLUDED'>/** Flag for use with {@link #getRecentTasks}: return all tasks, even those
+</span> that have set their
+ {@link android.content.Intent#FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS} flag.
+*/
+RECENT_WITH_EXCLUDED : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-RECENT_IGNORE_UNAVAILABLE'>/** Provides a list that does not contain any
+</span> recent tasks that currently are not available to the user.
+*/
+RECENT_IGNORE_UNAVAILABLE : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-MOVE_TASK_WITH_HOME'>/** Flag for {@link #moveTaskToFront(int, int)}: also move the &quot;home&quot;
+</span> activity along with the task, so it is positioned immediately behind
+ the task.
+*/
+MOVE_TASK_WITH_HOME : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-MOVE_TASK_NO_USER_ACTION'>/** Flag for {@link #moveTaskToFront(int, int)}: don't count this as a
+</span> user-instigated action, so the current activity will not receive a
+ hint that the user is leaving.
+*/
+MOVE_TASK_NO_USER_ACTION : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-FLAG_OR_STOPPED'>/**{@hide} */
+</span>FLAG_OR_STOPPED : &quot;1&quot;,
+<span id='android-app-ActivityManager-property-FLAG_AND_LOCKED'>/**{@hide} */
+</span>FLAG_AND_LOCKED : &quot;2&quot;,
+<span id='android-app-ActivityManager-property-FLAG_AND_UNLOCKED'>/**{@hide} */
+</span>FLAG_AND_UNLOCKED : &quot;4&quot;,
+<span id='android-app-ActivityManager-property-FLAG_AND_UNLOCKING_OR_UNLOCKED'>/**{@hide} */
+</span>FLAG_AND_UNLOCKING_OR_UNLOCKED : &quot;8&quot;,
+<span id='android-app-ActivityManager-property-ACTION_REPORT_HEAP_LIMIT'>/** Action an app can implement to handle reports from {@link #setWatchHeapLimit}(long).
+</span> If your package has an activity handling this action, it will be launched with the
+ heap data provided to it the same way as {@link Intent#ACTION_SEND}.  Note that to
+ match the activty must support this action and a MIME type of &quot;*&amp;#47;*&quot;.
+*/
+ACTION_REPORT_HEAP_LIMIT : &quot;android.app.action.REPORT_HEAP_LIMIT&quot;,
+<span id='android-app-ActivityManager-method-processStateAmToProto'>/**Maps ActivityManager.PROCESS_STATE_ values to enums.proto ProcessStateEnum value.
+</span>@param {Number} amInt a process state of the form ActivityManager.PROCESS_STATE_
+@return {Number} the value of the corresponding enums.proto ProcessStateEnum value.
+@hide 
+*/
+processStateAmToProto : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isProcStateBackground'>/**
+</span>@hide Should this process state be considered a background state?
+*/
+isProcStateBackground : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isForegroundService'>/**
+</span>@hide Is this a foreground service type?
+*/
+isForegroundService : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isStartResultSuccessful'>/**Returns whether the launch was successful.
+</span>@hide 
+*/
+isStartResultSuccessful : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isStartResultFatalError'>/**Returns whether the launch result was a fatal error.
+</span>@hide 
+*/
+isStartResultFatalError : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getFrontActivityScreenCompatMode'>/**
+</span>@hide 
+*/
+getFrontActivityScreenCompatMode : function(  ) {},
+
+<span id='android-app-ActivityManager-method-setFrontActivityScreenCompatMode'>/**
+</span>@hide 
+*/
+setFrontActivityScreenCompatMode : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getPackageScreenCompatMode'>/**
+</span>@hide 
+*/
+getPackageScreenCompatMode : function(  ) {},
+
+<span id='android-app-ActivityManager-method-setPackageScreenCompatMode'>/**
+</span>@hide 
+*/
+setPackageScreenCompatMode : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getPackageAskScreenCompat'>/**
+</span>@hide 
+*/
+getPackageAskScreenCompat : function(  ) {},
+
+<span id='android-app-ActivityManager-method-setPackageAskScreenCompat'>/**
+</span>@hide 
+*/
+setPackageAskScreenCompat : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getMemoryClass'>/**Return the approximate per-application memory class of the current
+</span> device.  This gives you an idea of how hard a memory limit you should
+ impose on your application to let the overall system work best.  The
+ returned value is in megabytes; the baseline Android memory class is
+ 16 (which happens to be the Java heap limit of those devices); some
+ devices with more memory may return 24 or even higher numbers.
+*/
+getMemoryClass : function(  ) {},
+
+<span id='android-app-ActivityManager-method-staticGetMemoryClass'>/**
+</span>@hide 
+*/
+staticGetMemoryClass : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getLargeMemoryClass'>/**Return the approximate per-application memory class of the current
+</span> device when an application is running with a large heap.  This is the
+ space available for memory-intensive applications; most applications
+ should not need this amount of memory, and should instead stay with the
+ {@link #getMemoryClass}() limit.  The returned value is in megabytes.
+ This may be the same size as {@link #getMemoryClass}() on memory
+ constrained devices, or it may be significantly larger on devices with
+ a large amount of available RAM.
+
+ &lt;p&gt;This is the size of the application's Dalvik heap if it has
+ specified &lt;code&gt;android:largeHeap=&quot;true&quot;&lt;/code&gt; in its manifest.
+*/
+getLargeMemoryClass : function(  ) {},
+
+<span id='android-app-ActivityManager-method-staticGetLargeMemoryClass'>/**
+</span>@hide 
+*/
+staticGetLargeMemoryClass : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isLowRamDevice'>/**Returns true if this is a low-RAM device.  Exactly whether a device is low-RAM
+</span> is ultimately up to the device configuration, but currently it generally means
+ something with 1GB or less of RAM.  This is mostly intended to be used by apps
+ to determine whether they should turn off certain features that require more RAM.
+*/
+isLowRamDevice : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isLowRamDeviceStatic'>/**
+</span>@hide 
+*/
+isLowRamDeviceStatic : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isSmallBatteryDevice'>/**Returns true if this is a small battery device. Exactly whether a device is considered to be
+</span> small battery is ultimately up to the device configuration, but currently it generally means
+ something in the class of a device with 1000 mAh or less. This is mostly intended to be used
+ to determine whether certain features should be altered to account for a drastically smaller
+ battery.
+@hide 
+*/
+isSmallBatteryDevice : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isHighEndGfx'>/**Used by persistent processes to determine if they are running on a
+</span> higher-end device so should be okay using hardware drawing acceleration
+ (which tends to consume a lot more RAM).
+@hide 
+*/
+isHighEndGfx : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getTotalRam'>/**Return the total number of bytes of RAM this device has.
+</span>@hide 
+*/
+getTotalRam : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getMaxRecentTasksStatic'>/**TODO(b/80414790): Remove once no longer on hiddenapi-light-greylist.txt
+</span>@hide 
+@deprecated Use {@link ActivityTaskManager#getMaxRecentTasksStatic()}
+*/
+getMaxRecentTasksStatic : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getMaxNumPictureInPictureActions'>/**
+</span>@removed 
+*/
+getMaxNumPictureInPictureActions : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getRecentTasks'>/**&lt;p&gt;&lt;/p&gt;Return a list of the tasks that the user has recently launched, with
+</span> the most recent being first and older ones after in order.
+
+ &lt;p&gt;&lt;b&gt;Note: this method is only intended for debugging and presenting
+ task management user interfaces&lt;/b&gt;.  This should never be used for
+ core logic in an application, such as deciding between different
+ behaviors based on the information found here.  Such uses are
+ &lt;em&gt;not&lt;/em&gt; supported, and will likely break in the future.  For
+ example, if multiple applications can be actively running at the
+ same time, assumptions made about the meaning of the data here for
+ purposes of control flow will be incorrect.&lt;/p&gt;
+@param {Number} maxNum The maximum number of entries to return in the list.  The
+ actual number returned may be smaller, depending on how many tasks the
+ user has started and the maximum number the system can remember.
+@param {Number} flags Information about what to return.  May be any combination
+ of {@link #RECENT_WITH_EXCLUDED} and {@link #RECENT_IGNORE_UNAVAILABLE}.
+@param flags Information about what to return.  May be any combination
+ of {@link #RECENT_WITH_EXCLUDED} and {@link #RECENT_IGNORE_UNAVAILABLE}.
+@return {Object {java.util.List}} Returns a list of RecentTaskInfo records describing each of
+ the recent tasks.
+*/
+getRecentTasks : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getAppTasks'>/**Get the list of tasks associated with the calling application.
+</span>@return {Object {java.util.List}} The list of tasks associated with the application making this call.
+@throws SecurityException
+*/
+getAppTasks : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getAppTaskThumbnailSize'>/**Return the current design dimensions for {@link android.app.ActivityManager.AppTask} thumbnails, for use
+</span> with {@link #addAppTask}.
+*/
+getAppTaskThumbnailSize : function(  ) {},
+
+<span id='android-app-ActivityManager-method-addAppTask'>/**Add a new {@link android.app.ActivityManager.AppTask} for the calling application.  This will create a new
+</span> recents entry that is added to the &lt;b&gt;end&lt;/b&gt; of all existing recents.
+@param {Object {Activity}} activity The activity that is adding the entry.   This is used to help determine
+ the context that the new recents entry will be in.
+@param {Object {Intent}} intent The Intent that describes the recents entry.  This is the same Intent that
+ you would have used to launch the activity for it.  In generally you will want to set
+ both {@link Intent#FLAG_ACTIVITY_NEW_DOCUMENT} and
+ {@link Intent#FLAG_ACTIVITY_RETAIN_IN_RECENTS}; the latter is required since this recents
+ entry will exist without an activity, so it doesn't make sense to not retain it when
+ its activity disappears.  The given Intent here also must have an explicit ComponentName
+ set on it.
+@param {Object {ActivityManager.TaskDescription}} description Optional additional description information.
+@param {Object {Bitmap}} thumbnail Thumbnail to use for the recents entry.  Should be the size given by
+ {@link #getAppTaskThumbnailSize()}.  If the bitmap is not that exact size, it will be
+ recreated in your process, probably in a way you don't like, before the recents entry
+ is added.
+@return {Number} Returns the task id of the newly added app task, or -1 if the add failed.  The
+ most likely cause of failure is that there is no more room for more tasks for your app.
+*/
+addAppTask : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getRunningTasks'>/**Return a list of the tasks that are currently running, with
+</span> the most recent being first and older ones after in order.  Note that
+ &quot;running&quot; does not mean any of the task's code is currently loaded or
+ activity -- the task may have been frozen by the system, so that it
+ can be restarted in its previous state when next brought to the
+ foreground.
+
+ &lt;p&gt;&lt;b&gt;Note: this method is only intended for debugging and presenting
+ task management user interfaces&lt;/b&gt;.  This should never be used for
+ core logic in an application, such as deciding between different
+ behaviors based on the information found here.  Such uses are
+ &lt;em&gt;not&lt;/em&gt; supported, and will likely break in the future.  For
+ example, if multiple applications can be actively running at the
+ same time, assumptions made about the meaning of the data here for
+ purposes of control flow will be incorrect.&lt;/p&gt;
+@param {Number} maxNum The maximum number of entries to return in the list.  The
+ actual number returned may be smaller, depending on how many tasks the
+ user has started.
+@param maxNum The maximum number of entries to return in the list.  The
+ actual number returned may be smaller, depending on how many tasks the
+ user has started.
+@return {Object {java.util.List}} Returns a list of RunningTaskInfo records describing each of
+ the running tasks.
+*/
+getRunningTasks : function(  ) {},
+
+<span id='android-app-ActivityManager-method-moveTaskToFront'>/**Equivalent to calling {@link #moveTaskToFront(int, int, Bundle)}
+</span> with a null options argument.
+@param {Number} taskId The identifier of the task to be moved, as found in
+ {@link RunningTaskInfo} or {@link RecentTaskInfo}.
+@param {Number} flags Additional operational flags.
+*/
+moveTaskToFront : function(  ) {},
+
+<span id='android-app-ActivityManager-method-moveTaskToFront'>/**Ask that the task associated with a given task ID be moved to the
+</span> front of the stack, so it is now visible to the user.
+@param {Number} taskId The identifier of the task to be moved, as found in
+ {@link RunningTaskInfo} or {@link RecentTaskInfo}.
+@param {Number} flags Additional operational flags.
+@param {Object {Bundle}} options Additional options for the operation, either null or
+ as per {@link Context#startActivity(Intent, android.os.Bundle)
+ Context.startActivity(Intent, Bundle)}.
+*/
+moveTaskToFront : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isActivityStartAllowedOnDisplay'>/**Check if the context is allowed to start an activity on specified display. Some launch
+</span> restrictions may apply to secondary displays that are private, virtual, or owned by the
+ system, in which case an activity start may throw a {@link SecurityException}. Call this
+ method prior to starting an activity on a secondary display to check if the current context
+ has access to it.
+@param {Object {Context}} context Source context, from which an activity will be started.
+@param {Number} displayId Target display id.
+@param {Object {Intent}} intent Intent used to launch an activity.
+@param context Source context, from which an activity will be started.
+@param displayId Target display id.
+@param intent Intent used to launch an activity.
+@return {Boolean} {@code true} if a call to start an activity on the target display is allowed for the
+ provided context and no {@link SecurityException} will be thrown, {@code false} otherwise.
+*/
+isActivityStartAllowedOnDisplay : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getRunningServices'>/**Return a list of the services that are currently running.
+</span>
+ &lt;p&gt;&lt;b&gt;Note: this method is only intended for debugging or implementing
+ service management type user interfaces.&lt;/b&gt;&lt;/p&gt;
+@param {Number} maxNum The maximum number of entries to return in the list.  The
+ actual number returned may be smaller, depending on how many services
+ are running.
+@param maxNum The maximum number of entries to return in the list.  The
+ actual number returned may be smaller, depending on how many services
+ are running.
+@return {Object {java.util.List}} Returns a list of RunningServiceInfo records describing each of
+ the running tasks.
+*/
+getRunningServices : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getRunningServiceControlPanel'>/**Returns a PendingIntent you can start to show a control panel for the
+</span> given running service.  If the service does not have a control panel,
+ null is returned.
+*/
+getRunningServiceControlPanel : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getMemoryInfo'>/**Return general information about the memory state of the system.  This
+</span> can be used to help decide how to manage your own memory, though note
+ that polling is not recommended and
+ {@link android.content.ComponentCallbacks2#onTrimMemory(int)
+ ComponentCallbacks2.onTrimMemory(int)} is the preferred way to do this.
+ Also see {@link #getMyMemoryState} for how to retrieve the current trim
+ level of your process as needed, which gives a better hint for how to
+ manage its memory.
+*/
+getMemoryInfo : function(  ) {},
+
+<span id='android-app-ActivityManager-method-clearApplicationUserData'>/**
+</span>@hide 
+*/
+clearApplicationUserData : function(  ) {},
+
+<span id='android-app-ActivityManager-method-clearApplicationUserData'>/**Permits an application to erase its own data from disk.  This is equivalent to
+</span> the user choosing to clear the app's data from within the device settings UI.  It
+ erases all dynamic data associated with the app -- its private data and data in its
+ private area on external storage -- but does not remove the installed application
+ itself, nor any OBB files. It also revokes all runtime permissions that the app has acquired,
+ clears all notifications and removes all Uri grants related to this application.
+@return {Boolean} {@code true} if the application successfully requested that the application's
+     data be erased; {@code false} otherwise.
+*/
+clearApplicationUserData : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getGrantedUriPermissions'>/**Permits an application to get the persistent URI permissions granted to another.
+</span>
+ &lt;p&gt;Typically called by Settings or DocumentsUI, requires
+ {@code GET_APP_GRANTED_URI_PERMISSIONS}.
+@param {String} packageName application to look for the granted permissions, or {@code null} to get
+ granted permissions for all applications
+@return {Object {android.content.pm.ParceledListSlice}} list of granted URI permissions
+@hide 
+@deprecated use {@link UriGrantsManager#getGrantedUriPermissions(String)} instead.
+*/
+getGrantedUriPermissions : function(  ) {},
+
+<span id='android-app-ActivityManager-method-clearGrantedUriPermissions'>/**Permits an application to clear the persistent URI permissions granted to another.
+</span>
+ &lt;p&gt;Typically called by Settings, requires {@code CLEAR_APP_GRANTED_URI_PERMISSIONS}.
+@param {String} packageName application to clear its granted permissions
+@hide 
+@deprecated use {@link UriGrantsManager#clearGrantedUriPermissions(String)} instead.
+*/
+clearGrantedUriPermissions : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getProcessesInErrorState'>/**Returns a list of any processes that are currently in an error condition.  The result
+</span> will be null if all processes are running properly at this time.
+@return {Object {java.util.List}} Returns a list of ProcessErrorStateInfo records, or null if there are no
+ current error conditions (it will not return an empty list).  This list ordering is not
+ specified.
+*/
+getProcessesInErrorState : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getRunningExternalApplications'>/**Returns a list of application processes installed on external media
+</span> that are running on the device.
+
+ &lt;p&gt;&lt;b&gt;Note: this method is only intended for debugging or building
+ a user-facing process management UI.&lt;/b&gt;&lt;/p&gt;
+@return {Object {java.util.List}} Returns a list of ApplicationInfo records, or null if none
+ This list ordering is not specified.
+@hide 
+*/
+getRunningExternalApplications : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isBackgroundRestricted'>/**Query whether the user has enabled background restrictions for this app.
+</span>
+ &lt;p&gt; The user may chose to do this, if they see that an app is consuming an unreasonable
+ amount of battery while in the background. &lt;/p&gt;
+
+ &lt;p&gt; If true, any work that the app tries to do will be aggressively restricted while it is in
+ the background. At a minimum, jobs and alarms will not execute and foreground services
+ cannot be started unless an app activity is in the foreground. &lt;/p&gt;
+
+ &lt;p&gt;&lt;b&gt; Note that these restrictions stay in effect even when the device is charging.&lt;/b&gt;&lt;/p&gt;
+@return {Boolean} true if user has enforced background restrictions for this app, false otherwise.
+*/
+isBackgroundRestricted : function(  ) {},
+
+<span id='android-app-ActivityManager-method-setProcessMemoryTrimLevel'>/**Sets the memory trim mode for a process and schedules a memory trim operation.
+</span>
+ &lt;p&gt;&lt;b&gt;Note: this method is only intended for testing framework.&lt;/b&gt;&lt;/p&gt;
+@return {Boolean} Returns true if successful.
+@hide 
+*/
+setProcessMemoryTrimLevel : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getRunningAppProcesses'>/**Returns a list of application processes that are running on the device.
+</span>
+ &lt;p&gt;&lt;b&gt;Note: this method is only intended for debugging or building
+ a user-facing process management UI.&lt;/b&gt;&lt;/p&gt;
+@return {Object {java.util.List}} Returns a list of RunningAppProcessInfo records, or null if there are no
+ running processes (it will not return an empty list).  This list ordering is not
+ specified.
+*/
+getRunningAppProcesses : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getPackageImportance'>/**Return the importance of a given package name, based on the processes that are
+</span> currently running.  The return value is one of the importance constants defined
+ in {@link android.app.ActivityManager.RunningAppProcessInfo}, giving you the highest importance of all the
+ processes that this package has code running inside of.  If there are no processes
+ running its code, {@link android.app.ActivityManager.RunningAppProcessInfo#IMPORTANCE_GONE} is returned.
+@hide 
+*/
+getPackageImportance : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getUidImportance'>/**Return the importance of a given uid, based on the processes that are
+</span> currently running.  The return value is one of the importance constants defined
+ in {@link android.app.ActivityManager.RunningAppProcessInfo}, giving you the highest importance of all the
+ processes that this uid has running.  If there are no processes
+ running its code, {@link android.app.ActivityManager.RunningAppProcessInfo#IMPORTANCE_GONE} is returned.
+@hide 
+*/
+getUidImportance : function(  ) {},
+
+<span id='android-app-ActivityManager-method-addOnUidImportanceListener'>/**Start monitoring changes to the imoportance of uids running in the system.
+</span>@param {Object {ActivityManager.OnUidImportanceListener}} listener The listener callback that will receive change reports.
+@param {Number} importanceCutpoint The level of importance in which the caller is interested
+ in differences.  For example, if {@link RunningAppProcessInfo#IMPORTANCE_PERCEPTIBLE}
+ is used here, you will receive a call each time a uids importance transitions between
+ being &lt;= {@link RunningAppProcessInfo#IMPORTANCE_PERCEPTIBLE} and
+ &gt; {@link RunningAppProcessInfo#IMPORTANCE_PERCEPTIBLE}.
+
+ &lt;p&gt;The caller must hold the {@link android.Manifest.permission#PACKAGE_USAGE_STATS}
+ permission to use this feature.&lt;/p&gt;
+@throws IllegalArgumentException If the listener is already registered.
+@throws SecurityException If the caller does not hold
+ {@link android.Manifest.permission#PACKAGE_USAGE_STATS}.
+@hide 
+*/
+addOnUidImportanceListener : function(  ) {},
+
+<span id='android-app-ActivityManager-method-removeOnUidImportanceListener'>/**Remove an importance listener that was previously registered with
+</span> {@link #addOnUidImportanceListener}.
+@throws IllegalArgumentException If the listener is not registered.
+@hide 
+*/
+removeOnUidImportanceListener : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getMyMemoryState'>/**Return global memory state information for the calling process.  This
+</span> does not fill in all fields of the {@link android.app.ActivityManager.RunningAppProcessInfo}.  The
+ only fields that will be filled in are
+ {@link android.app.ActivityManager.RunningAppProcessInfo#pid},
+ {@link android.app.ActivityManager.RunningAppProcessInfo#uid},
+ {@link android.app.ActivityManager.RunningAppProcessInfo#lastTrimLevel},
+ {@link android.app.ActivityManager.RunningAppProcessInfo#importance},
+ {@link android.app.ActivityManager.RunningAppProcessInfo#lru}, and
+ {@link android.app.ActivityManager.RunningAppProcessInfo#importanceReasonCode}.
+*/
+getMyMemoryState : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getProcessMemoryInfo'>/**Return information about the memory usage of one or more processes.
+</span>
+ &lt;p&gt;&lt;b&gt;Note: this method is only intended for debugging or building
+ a user-facing process management UI.&lt;/b&gt;&lt;/p&gt;
+
+ &lt;p&gt;As of {@link android.os.Build.VERSION_CODES#Q Android Q}, for regular apps this method
+ will only return information about the memory info for the processes running as the
+ caller's uid; no other process memory info is available and will be zero.
+ Also of {@link android.os.Build.VERSION_CODES#Q Android Q} the sample rate allowed
+ by this API is significantly limited, if called faster the limit you will receive the
+ same data as the previous call.&lt;/p&gt;
+@param {Object {int[]}} pids The pids of the processes whose memory usage is to be
+ retrieved.
+@return {Object {android.os.Debug.MemoryInfo}} Returns an array of memory information, one for each
+ requested pid.
+*/
+getProcessMemoryInfo : function(  ) {},
+
+<span id='android-app-ActivityManager-method-restartPackage'>/**
+</span>@deprecated This is now just a wrapper for
+ {@link #killBackgroundProcesses(String)}; the previous behavior here
+ is no longer available to applications because it allows them to
+ break other applications by removing their alarms, stopping their
+ services, etc.
+*/
+restartPackage : function(  ) {},
+
+<span id='android-app-ActivityManager-method-killBackgroundProcesses'>/**Have the system immediately kill all background processes associated
+</span> with the given package.  This is the same as the kernel killing those
+ processes to reclaim memory; the system will take care of restarting
+ these processes in the future as needed.
+@param {String} packageName The name of the package whose processes are to
+ be killed.
+*/
+killBackgroundProcesses : function(  ) {},
+
+<span id='android-app-ActivityManager-method-killUid'>/**Kills the specified UID.
+</span>@param {Number} uid The UID to kill.
+@param {String} reason The reason for the kill.
+@hide 
+*/
+killUid : function(  ) {},
+
+<span id='android-app-ActivityManager-method-forceStopPackageAsUser'>/**Have the system perform a force stop of everything associated with
+</span> the given application package.  All processes that share its uid
+ will be killed, all services it has running stopped, all activities
+ removed, etc.  In addition, a {@link Intent#ACTION_PACKAGE_RESTARTED}
+ broadcast will be sent, so that any of its registered alarms can
+ be stopped, notifications removed, etc.
+
+ &lt;p&gt;You must hold the permission
+ {@link android.Manifest.permission#FORCE_STOP_PACKAGES} to be able to
+ call this method.
+@param {String} packageName The name of the package to be stopped.
+@param {Number} userId The user for which the running package is to be stopped.
+@hide This is not available to third party applications due to
+ it allowing them to break other applications by stopping their
+ services, removing their alarms, etc.
+*/
+forceStopPackageAsUser : function(  ) {},
+
+<span id='android-app-ActivityManager-method-forceStopPackage'>/**
+</span>@see #forceStopPackageAsUser(String, int)
+@hide 
+*/
+forceStopPackage : function(  ) {},
+
+<span id='android-app-ActivityManager-method-setDeviceLocales'>/**Sets the current locales of the device. Calling app must have the permission
+</span> {@code android.permission.CHANGE_CONFIGURATION} and
+ {@code android.permission.WRITE_SETTINGS}.
+@hide 
+*/
+setDeviceLocales : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getSupportedLocales'>/**Returns a list of supported locales by this system. It includes all locales that are
+</span> selectable by the user, potentially including locales that the framework does not have
+ translated resources for. To get locales that the framework has translated resources for, use
+ {@code Resources.getSystem().getAssets().getLocales()} instead.
+@hide 
+*/
+getSupportedLocales : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getDeviceConfigurationInfo'>/**Get the device configuration attributes.
+</span>*/
+getDeviceConfigurationInfo : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getLauncherLargeIconDensity'>/**Get the preferred density of icons for the launcher. This is used when
+</span> custom drawables are created (e.g., for shortcuts).
+@return {Number} density in terms of DPI
+*/
+getLauncherLargeIconDensity : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getLauncherLargeIconSize'>/**Get the preferred launcher icon size. This is used when custom drawables
+</span> are created (e.g., for shortcuts).
+@return {Number} dimensions of square icons in terms of pixels
+*/
+getLauncherLargeIconSize : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isUserAMonkey'>/**Returns &quot;true&quot; if the user interface is currently being messed with
+</span> by a monkey.
+*/
+isUserAMonkey : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isRunningInTestHarness'>/**Returns &quot;true&quot; if device is running in a test harness.
+</span>@deprecated this method is false for all user builds. Users looking to check if their device
+ is running in a device farm should see {@link #isRunningInUserTestHarness()}.
+*/
+isRunningInTestHarness : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isRunningInUserTestHarness'>/**Returns &quot;true&quot; if the device is running in Test Harness Mode.
+</span>
+ &lt;p&gt;Test Harness Mode is a feature that allows devices to run without human interaction in a
+ device farm/testing harness (such as Firebase Test Lab). You should check this method if you
+ want your app to behave differently when running in a test harness to skip setup screens that
+ would impede UI testing. e.g. a keyboard application that has a full screen setup page for
+ the first time it is launched.
+
+ &lt;p&gt;Note that you should &lt;em&gt;not&lt;/em&gt; use this to determine whether or not your app is running
+ an instrumentation test, as it is not set for a standard device running a test.
+*/
+isRunningInUserTestHarness : function(  ) {},
+
+<span id='android-app-ActivityManager-method-alwaysShowUnsupportedCompileSdkWarning'>/**Unsupported compiled sdk warning should always be shown for the intput activity
+</span> even in cases where the system would normally not show the warning. E.g. when running in a
+ test harness.
+@param {Object {ComponentName}} activity The component name of the activity to always show the warning for.
+@hide 
+*/
+alwaysShowUnsupportedCompileSdkWarning : function(  ) {},
+
+<span id='android-app-ActivityManager-method-checkComponentPermission'>/**
+</span>@hide 
+*/
+checkComponentPermission : function(  ) {},
+
+<span id='android-app-ActivityManager-method-checkUidPermission'>/**
+</span>@hide 
+*/
+checkUidPermission : function(  ) {},
+
+<span id='android-app-ActivityManager-method-handleIncomingUser'>/**
+</span>@param {Number} callingPid The pid of the incoming call, as per Binder.getCallingPid().
+@param {Number} callingUid The uid of the incoming call, as per Binder.getCallingUid().
+@param {Number} userId The user id argument supplied by the caller -- this is the user
+ they want to run as.
+@param {Boolean} allowAll If true, we will allow USER_ALL.  This means you must be prepared
+ to get a USER_ALL returned and deal with it correctly.  If false,
+ an exception will be thrown if USER_ALL is supplied.
+@param {Boolean} requireFull If true, the caller must hold
+ {@link android.Manifest.permission#INTERACT_ACROSS_USERS_FULL} to be able to run as a
+ different user than their current process; otherwise they must hold
+ {@link android.Manifest.permission#INTERACT_ACROSS_USERS}.
+@param {String} name Optional textual name of the incoming call; only for generating error messages.
+@param {String} callerPackage Optional package name of caller; only for error messages.
+@param callerPackage Optional package name of caller; only for error messages.
+@return {Number} Returns the user ID that the call should run as.  Will always be a concrete
+ user number, unless &lt;var&gt;allowAll&lt;/var&gt; is true in which case it could also be
+ USER_ALL.
+*/
+handleIncomingUser : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getCurrentUser'>/**Gets the userId of the current foreground user. Requires system permissions.
+</span>@hide 
+*/
+getCurrentUser : function(  ) {},
+
+<span id='android-app-ActivityManager-method-switchUser'>/**
+</span>@param {Number} userid the user's id. Zero indicates the default user.
+@hide 
+*/
+switchUser : function(  ) {},
+
+<span id='android-app-ActivityManager-method-switchUser'>/**Returns whether switching to provided user was successful.
+</span>@param {Object {UserHandle}} user the user to switch to.
+@throws IllegalArgumentException if the user is null.
+@hide 
+*/
+switchUser : function(  ) {},
+
+<span id='android-app-ActivityManager-method-logoutCurrentUser'>/**Logs out current current foreground user by switching to the system user and stopping the
+</span> user being switched from.
+@hide 
+*/
+logoutCurrentUser : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isUserRunning'>/**Return whether the given user is actively running.  This means that
+</span> the user is in the &quot;started&quot; state, not &quot;stopped&quot; -- it is currently
+ allowed to run code through scheduled alarms, receiving broadcasts,
+ etc.  A started user may be either the current foreground user or a
+ background user; the result here does not distinguish between the two.
+@param {Number} userId the user's id. Zero indicates the default user.
+@hide 
+*/
+isUserRunning : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isVrModePackageEnabled'>/**{@hide}
+</span>*/
+isVrModePackageEnabled : function(  ) {},
+
+<span id='android-app-ActivityManager-method-dumpPackageState'>/**Perform a system dump of various state associated with the given application
+</span> package name.  This call blocks while the dump is being performed, so should
+ not be done on a UI thread.  The data will be written to the given file
+ descriptor as text.
+@param {Object {FileDescriptor}} fd The file descriptor that the dump should be written to.  The file
+ descriptor is &lt;em&gt;not&lt;/em&gt; closed by this function; the caller continues to
+ own it.
+@param {String} packageName The name of the package that is to be dumped.
+*/
+dumpPackageState : function(  ) {},
+
+<span id='android-app-ActivityManager-method-dumpPackageStateStatic'>/**
+</span>@hide 
+*/
+dumpPackageStateStatic : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isSystemReady'>/**
+</span>@hide 
+*/
+isSystemReady : function(  ) {},
+
+<span id='android-app-ActivityManager-method-broadcastStickyIntent'>/**
+</span>@hide 
+*/
+broadcastStickyIntent : function(  ) {},
+
+<span id='android-app-ActivityManager-method-broadcastStickyIntent'>/**Convenience for sending a sticky broadcast.  For internal use only.
+</span>@hide 
+*/
+broadcastStickyIntent : function(  ) {},
+
+<span id='android-app-ActivityManager-method-resumeAppSwitches'>/**
+</span>@hide 
+*/
+resumeAppSwitches : function(  ) {},
+
+<span id='android-app-ActivityManager-method-noteWakeupAlarm'>/**
+</span>@hide 
+*/
+noteWakeupAlarm : function(  ) {},
+
+<span id='android-app-ActivityManager-method-noteAlarmStart'>/**
+</span>@hide 
+*/
+noteAlarmStart : function(  ) {},
+
+<span id='android-app-ActivityManager-method-noteAlarmFinish'>/**
+</span>@hide 
+*/
+noteAlarmFinish : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getService'>/**
+</span>@hide 
+*/
+getService : function(  ) {},
+
+<span id='android-app-ActivityManager-method-setWatchHeapLimit'>/**Request that the system start watching for the calling process to exceed a pss
+</span> size as given here.  Once called, the system will look for any occasions where it
+ sees the associated process with a larger pss size and, when this happens, automatically
+ pull a heap dump from it and allow the user to share the data.  Note that this request
+ continues running even if the process is killed and restarted.  To remove the watch,
+ use {@link #clearWatchHeapLimit}().
+
+ &lt;p&gt;This API only works if the calling process has been marked as
+ {@link android.app.ApplicationInfo#FLAG_DEBUGGABLE} or this is running on a debuggable
+ (userdebug or eng) build.&lt;/p&gt;
+
+ &lt;p&gt;Callers can optionally implement {@link #ACTION_REPORT_HEAP_LIMIT} to directly
+ handle heap limit reports themselves.&lt;/p&gt;
+@param {Number} pssSize The size in bytes to set the limit at.
+*/
+setWatchHeapLimit : function(  ) {},
+
+<span id='android-app-ActivityManager-method-clearWatchHeapLimit'>/**Clear a heap watch limit previously set by {@link #setWatchHeapLimit}(long).
+</span>*/
+clearWatchHeapLimit : function(  ) {},
+
+<span id='android-app-ActivityManager-method-isInLockTaskMode'>/**Return whether currently in lock task mode.  When in this mode
+</span> no new tasks can be created or switched to.
+@see Activity#startLockTask()
+@deprecated Use {@link #getLockTaskModeState} instead.
+*/
+isInLockTaskMode : function(  ) {},
+
+<span id='android-app-ActivityManager-method-getLockTaskModeState'>/**Return the current state of task locking. The three possible outcomes
+</span> are {@link #LOCK_TASK_MODE_NONE}, {@link #LOCK_TASK_MODE_LOCKED}
+ and {@link #LOCK_TASK_MODE_PINNED}.
+@see Activity#startLockTask()
+*/
+getLockTaskModeState : function(  ) {},
+
+<span id='android-app-ActivityManager-method-setVrThread'>/**Enable more aggressive scheduling for latency-sensitive low-runtime VR threads. Only one
+</span> thread can be a VR thread in a process at a time, and that thread may be subject to
+ restrictions on the amount of time it can run.
+
+ If persistent VR mode is set, whatever thread has been granted aggressive scheduling via this
+ method will return to normal operation, and calling this method will do nothing while
+ persistent VR mode is enabled.
+
+ To reset the VR thread for an application, a tid of 0 can be passed.
+@param {Number} tid tid of the VR thread
+@param tid tid of the VR thread
+*/
+setVrThread : function(  ) {},
+
+<span id='android-app-ActivityManager-method-setPersistentVrThread'>/**Enable more aggressive scheduling for latency-sensitive low-runtime VR threads that persist
+</span> beyond a single process. Only one thread can be a
+ persistent VR thread at a time, and that thread may be subject to restrictions on the amount
+ of time it can run. Calling this method will disable aggressive scheduling for non-persistent
+ VR threads set via {@link #setVrThread}. If persistent VR mode is disabled then the
+ persistent VR thread loses its new scheduling priority; this method must be called again to
+ set the persistent thread.
+
+ To reset the persistent VR thread, a tid of 0 can be passed.
+@param {Number} tid tid of the VR thread
+@param tid tid of the VR thread
+@hide 
+*/
+setPersistentVrThread : function(  ) {},
+
+<span id='android-app-ActivityManager-method-scheduleApplicationInfoChanged'>/**
+</span>@hide 
+*/
+scheduleApplicationInfoChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

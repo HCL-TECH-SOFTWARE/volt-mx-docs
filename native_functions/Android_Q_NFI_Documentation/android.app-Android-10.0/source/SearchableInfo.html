@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-SearchableInfo'>/**@class android.app.SearchableInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Searchability meta-data for an activity. Only applications that search other applications
+ should need to use this class.
+ See &lt;a href=&quot;{@docRoot}guide/topics/search/searchable-config.html&quot;&gt;Searchable Configuration&lt;/a&gt;
+ for more information about declaring searchability meta-data for your application.
+
+ @see SearchManager#getSearchableInfo(ComponentName)
+ @see SearchManager#getSearchablesInGlobalSearch()
+*/
+var SearchableInfo = {
+
+<span id='android-app-SearchableInfo-property-CREATOR'>/** Support for parcelable and aidl operations.
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-app-SearchableInfo-method-getSuggestAuthority'>/**Gets the search suggestion content provider authority.
+</span>@return {String} The search suggestions authority, or {@code null} if not set.
+@see android.R.styleable#Searchable_searchSuggestAuthority
+*/
+getSuggestAuthority : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getSuggestPackage'>/**Gets the name of the package where the suggestion provider lives,
+</span> or {@code null}.
+*/
+getSuggestPackage : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getSearchActivity'>/**Gets the component name of the searchable activity.
+</span>@return {Object {android.content.ComponentName}} A component name, never {@code null}.
+*/
+getSearchActivity : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-useBadgeLabel'>/**Checks whether the badge should be a text label.
+</span>@see android.R.styleable#Searchable_searchMode
+@hide This feature is deprecated, no need to add it to the API.
+*/
+useBadgeLabel : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-useBadgeIcon'>/**Checks whether the badge should be an icon.
+</span>@see android.R.styleable#Searchable_searchMode
+@hide This feature is deprecated, no need to add it to the API.
+*/
+useBadgeIcon : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-shouldRewriteQueryFromData'>/**Checks whether the text in the query field should come from the suggestion intent data.
+</span>@see android.R.styleable#Searchable_searchMode
+*/
+shouldRewriteQueryFromData : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-shouldRewriteQueryFromText'>/**Checks whether the text in the query field should come from the suggestion title.
+</span>@see android.R.styleable#Searchable_searchMode
+*/
+shouldRewriteQueryFromText : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getSettingsDescriptionId'>/**Gets the resource id of the description string to use for this source in system search
+</span> settings, or {@code 0} if none has been specified.
+@see android.R.styleable#Searchable_searchSettingsDescription
+*/
+getSettingsDescriptionId : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getSuggestPath'>/**Gets the content provider path for obtaining search suggestions.
+</span>@return {String} The suggestion path, or {@code null} if not set.
+@see android.R.styleable#Searchable_searchSuggestPath
+*/
+getSuggestPath : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getSuggestSelection'>/**Gets the selection for obtaining search suggestions.
+</span>@see android.R.styleable#Searchable_searchSuggestSelection
+*/
+getSuggestSelection : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getSuggestIntentAction'>/**Gets the optional intent action for use with these suggestions. This is
+</span> useful if all intents will have the same action
+ (e.g. {@link android.content.Intent#ACTION_VIEW})
+
+ This can be overriden in any given suggestion using the column
+ {@link android.app.SearchManager#SUGGEST_COLUMN_INTENT_ACTION}.
+@return {String} The default intent action, or {@code null} if not set.
+@see android.R.styleable#Searchable_searchSuggestIntentAction
+*/
+getSuggestIntentAction : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getSuggestIntentData'>/**Gets the optional intent data for use with these suggestions.  This is
+</span> useful if all intents will have similar data URIs,
+ but you'll likely need to provide a specific ID as well via the column
+ {@link android.app.SearchManager#SUGGEST_COLUMN_INTENT_DATA_ID}, which will be appended to the
+ intent data URI.
+ 
+ This can be overriden in any given suggestion using the column
+ {@link android.app.SearchManager#SUGGEST_COLUMN_INTENT_DATA}.
+@return {String} The default intent data, or {@code null} if not set.
+@see android.R.styleable#Searchable_searchSuggestIntentData
+*/
+getSuggestIntentData : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getSuggestThreshold'>/**Gets the suggestion threshold.
+</span>@return {Number} The suggestion threshold, or {@code 0} if not set.
+@see android.R.styleable#Searchable_searchSuggestThreshold
+*/
+getSuggestThreshold : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getActivityContext'>/**Get the context for the searchable activity.
+</span>@param {Object {Context}} context You need to supply a context to start with
+@return {Object {android.content.Context}} Returns a context related to the searchable activity
+@hide 
+*/
+getActivityContext : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getProviderContext'>/**Get the context for the suggestions provider.
+</span>@param {Object {Context}} context You need to supply a context to start with
+@param {Object {Context}} activityContext If we can determine that the provider and the activity are the
+        same, we'll just return this one.
+@return {Object {android.content.Context}} Returns a context related to the suggestion provider
+@hide 
+*/
+getProviderContext : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-findActionKey'>/**If any action keys were defined for this searchable activity, look up and return.
+</span>@param {Number} keyCode The key that was pressed
+@return {Object {android.app.SearchableInfo.ActionKeyInfo}} Returns the action key info, or {@code null} if none defined.
+@hide ActionKeyInfo is hidden
+*/
+findActionKey : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getActivityMetaData'>/**Gets search information for the given activity.
+</span>@param {Object {Context}} context Context to use for reading activity resources.
+@param {Object {ActivityInfo}} activityInfo Activity to get search information from.
+@return {Object {android.app.SearchableInfo}} Search information about the given activity, or {@code null} if
+         the activity has no or invalid searchability meta-data.
+@hide For use by SearchManagerService.
+*/
+getActivityMetaData : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getLabelId'>/**Gets the &quot;label&quot; (user-visible name) of this searchable context. This must be
+</span> read using the searchable Activity's resources.
+@return {Number} A resource id, or {@code 0} if no label was specified.
+@see android.R.styleable#Searchable_label
+@hide deprecated functionality
+*/
+getLabelId : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getHintId'>/**Gets the resource id of the hint text. This must be
+</span> read using the searchable Activity's resources.
+@return {Number} A resource id, or {@code 0} if no hint was specified.
+@see android.R.styleable#Searchable_hint
+*/
+getHintId : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getIconId'>/**Gets the icon id specified by the Searchable_icon meta-data entry. This must be
+</span> read using the searchable Activity's resources.
+@return {Number} A resource id, or {@code 0} if no icon was specified.
+@see android.R.styleable#Searchable_icon
+@hide deprecated functionality
+*/
+getIconId : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getVoiceSearchEnabled'>/**Checks if the searchable activity wants the voice search button to be shown.
+</span>@see android.R.styleable#Searchable_voiceSearchMode
+*/
+getVoiceSearchEnabled : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getVoiceSearchLaunchWebSearch'>/**Checks if voice search should start web search.
+</span>@see android.R.styleable#Searchable_voiceSearchMode
+*/
+getVoiceSearchLaunchWebSearch : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getVoiceSearchLaunchRecognizer'>/**Checks if voice search should start in-app search.
+</span>@see android.R.styleable#Searchable_voiceSearchMode
+*/
+getVoiceSearchLaunchRecognizer : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getVoiceLanguageModeId'>/**Gets the resource id of the voice search language model string.
+</span>@return {Number} A resource id, or {@code 0} if no language model was specified.
+@see android.R.styleable#Searchable_voiceLanguageModel
+*/
+getVoiceLanguageModeId : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getVoicePromptTextId'>/**Gets the resource id of the voice prompt text string.
+</span>@return {Number} A resource id, or {@code 0} if no voice prompt text was specified.
+@see android.R.styleable#Searchable_voicePromptText
+*/
+getVoicePromptTextId : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getVoiceLanguageId'>/**Gets the resource id of the spoken language to recognize in voice search.
+</span>@return {Number} A resource id, or {@code 0} if no language was specified.
+@see android.R.styleable#Searchable_voiceLanguage
+*/
+getVoiceLanguageId : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getVoiceMaxResults'>/**The maximum number of voice recognition results to return.
+</span>@return {Number} the max results count, if specified in the searchable
+         activity's metadata, or {@code 0} if not specified.
+@see android.R.styleable#Searchable_voiceMaxResults
+*/
+getVoiceMaxResults : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getSearchButtonText'>/**Gets the resource id of replacement text for the &quot;Search&quot; button.
+</span>@return {Number} A resource id, or {@code 0} if no replacement text was specified.
+@see android.R.styleable#Searchable_searchButtonText
+@hide This feature is deprecated, no need to add it to the API.
+*/
+getSearchButtonText : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getInputType'>/**Gets the input type as specified in the searchable attributes. This will default to
+</span> {@link InputType#TYPE_CLASS_TEXT} if not specified (which is appropriate
+ for free text input).
+@return {Number} the input type
+@see android.R.styleable#Searchable_inputType
+*/
+getInputType : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-getImeOptions'>/**Gets the input method options specified in the searchable attributes.
+</span> This will default to {@link EditorInfo#IME_ACTION_GO} if not specified (which is
+ appropriate for a search box).
+@return {Number} the input type
+@see android.R.styleable#Searchable_imeOptions
+*/
+getImeOptions : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-shouldIncludeInGlobalSearch'>/**Checks whether the searchable should be included in global search.
+</span>@return {Boolean} The value of the {@link android.R.styleable#Searchable_includeInGlobalSearch}
+         attribute, or {@code false} if the attribute is not set.
+@see android.R.styleable#Searchable_includeInGlobalSearch
+*/
+shouldIncludeInGlobalSearch : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-queryAfterZeroResults'>/**Checks whether this searchable activity should be queried for suggestions if a prefix
+</span> of the query has returned no results.
+@see android.R.styleable#Searchable_queryAfterZeroResults
+*/
+queryAfterZeroResults : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-autoUrlDetect'>/**Checks whether this searchable activity has auto URL detection turned on.
+</span>@see android.R.styleable#Searchable_autoUrlDetect
+*/
+autoUrlDetect : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-SearchableInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

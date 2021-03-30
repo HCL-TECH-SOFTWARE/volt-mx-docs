@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-Notification'>/**@class android.app.Notification
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class that represents how a persistent notification is to be presented to
+ the user using the {@link android.app.NotificationManager}.
+
+ &lt;p&gt;The {@link android.app.Notification.Builder android.app.Notification.Builder} has been added to make it
+ easier to construct Notifications.&lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For a guide to creating notifications, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/ui/notifiers/notifications.html&quot;&gt;Status Bar Notifications&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var Notification = {
+
+<span id='android-app-Notification-property-INTENT_CATEGORY_NOTIFICATION_PREFERENCES'>/** An activity that provides a user interface for adjusting notification preferences for its
+</span> containing application.
+*/
+INTENT_CATEGORY_NOTIFICATION_PREFERENCES : &quot;android.intent.category.NOTIFICATION_PREFERENCES&quot;,
+<span id='android-app-Notification-property-EXTRA_CHANNEL_ID'>/** Optional extra for {@link #INTENT_CATEGORY_NOTIFICATION_PREFERENCES}. If provided, will
+</span> contain a {@link android.app.NotificationChannel#getId() channel id} that can be used to narrow down
+ what settings should be shown in the target app.
+*/
+EXTRA_CHANNEL_ID : &quot;android.intent.extra.CHANNEL_ID&quot;,
+<span id='android-app-Notification-property-EXTRA_CHANNEL_GROUP_ID'>/** Optional extra for {@link #INTENT_CATEGORY_NOTIFICATION_PREFERENCES}. If provided, will
+</span> contain a {@link android.app.NotificationChannelGroup#getId() group id} that can be used to narrow down
+ what settings should be shown in the target app.
+*/
+EXTRA_CHANNEL_GROUP_ID : &quot;android.intent.extra.CHANNEL_GROUP_ID&quot;,
+<span id='android-app-Notification-property-EXTRA_NOTIFICATION_TAG'>/** Optional extra for {@link #INTENT_CATEGORY_NOTIFICATION_PREFERENCES}. If provided, will
+</span> contain the tag provided to {@link android.app.NotificationManager#notify(String, int, android.app.Notification)}
+ that can be used to narrow down what settings should be shown in the target app.
+*/
+EXTRA_NOTIFICATION_TAG : &quot;android.intent.extra.NOTIFICATION_TAG&quot;,
+<span id='android-app-Notification-property-EXTRA_NOTIFICATION_ID'>/** Optional extra for {@link #INTENT_CATEGORY_NOTIFICATION_PREFERENCES}. If provided, will
+</span> contain the id provided to {@link android.app.NotificationManager#notify(String, int, android.app.Notification)}
+ that can be used to narrow down what settings should be shown in the target app.
+*/
+EXTRA_NOTIFICATION_ID : &quot;android.intent.extra.NOTIFICATION_ID&quot;,
+<span id='android-app-Notification-property-DEFAULT_ALL'>/** Use all default values (where applicable).
+</span>*/
+DEFAULT_ALL : &quot;-1&quot;,
+<span id='android-app-Notification-property-DEFAULT_SOUND'>/** Use the default notification sound. This will ignore any given
+</span> {@link #sound}.
+
+ &lt;p&gt;
+ A notification that is noisy is more likely to be presented as a heads-up notification.
+ &lt;/p&gt;
+
+ @see #defaults
+*/
+DEFAULT_SOUND : &quot;1&quot;,
+<span id='android-app-Notification-property-DEFAULT_VIBRATE'>/** Use the default notification vibrate. This will ignore any given
+</span> {@link #vibrate}. Using phone vibration requires the
+ {@link android.Manifest.permission#VIBRATE VIBRATE} permission.
+
+ &lt;p&gt;
+ A notification that vibrates is more likely to be presented as a heads-up notification.
+ &lt;/p&gt;
+
+ @see #defaults
+*/
+DEFAULT_VIBRATE : &quot;2&quot;,
+<span id='android-app-Notification-property-DEFAULT_LIGHTS'>/** Use the default notification lights. This will ignore the
+</span> {@link #FLAG_SHOW_LIGHTS} bit, and {@link #ledARGB}, {@link #ledOffMS}, or
+ {@link #ledOnMS}.
+
+ @see #defaults
+*/
+DEFAULT_LIGHTS : &quot;4&quot;,
+<span id='android-app-Notification-property-MAX_ACTION_BUTTONS'>/** Maximum number of (generic) action buttons in a notification (contextual action buttons are
+</span> handled separately).
+ @hide
+*/
+MAX_ACTION_BUTTONS : &quot;3&quot;,
+<span id='android-app-Notification-property-EXTRA_REMOTE_INPUT_DRAFT'>/** If the notification contained an unsent draft for a RemoteInput when the user clicked on it,
+</span> we're adding the draft as a String extra to the {@link #contentIntent} using this key.
+
+ &lt;p&gt;Apps may use this extra to prepopulate text fields in the app, where the user usually
+ sends messages.&lt;/p&gt;
+*/
+EXTRA_REMOTE_INPUT_DRAFT : &quot;android.remoteInputDraft&quot;,
+<span id='android-app-Notification-property-when'>/** A timestamp related to this notification, in milliseconds since the epoch.
+</span>
+ Default value: {@link System#currentTimeMillis() Now}.
+
+ Choose a timestamp that will be most relevant to the user. For most finite events, this
+ corresponds to the time the event happened (or will happen, in the case of events that have
+ yet to occur but about which the user is being informed). Indefinite events should be
+ timestamped according to when the activity began.
+
+ Some examples:
+
+ &lt;ul&gt;
+   &lt;li&gt;Notification of a new chat message should be stamped when the message was received.&lt;/li&gt;
+   &lt;li&gt;Notification of an ongoing file download (with a progress bar, for example) should be stamped when the download started.&lt;/li&gt;
+   &lt;li&gt;Notification of a completed file download should be stamped when the download finished.&lt;/li&gt;
+   &lt;li&gt;Notification of an upcoming meeting should be stamped with the time the meeting will begin (that is, in the future).&lt;/li&gt;
+   &lt;li&gt;Notification of an ongoing stopwatch (increasing timer) should be stamped with the watch's start time.
+   &lt;li&gt;Notification of an ongoing countdown timer should be stamped with the timer's end time.
+ &lt;/ul&gt;
+
+ For apps targeting {@link android.os.Build.VERSION_CODES#N} and above, this time is not shown
+ anymore by default and must be opted into by using
+ {@link android.app.Notification.Builder#setShowWhen(boolean)}
+*/
+when : &quot;null&quot;,
+<span id='android-app-Notification-property-icon'>/** The resource id of a drawable to use as the icon in the status bar.
+</span>
+ @deprecated Use {@link android.app.AlertDialog.Builder#setSmallIcon(Icon)} instead.
+*/
+icon : &quot;null&quot;,
+<span id='android-app-Notification-property-iconLevel'>/** If the icon in the status bar is to have more than one level, you can set this.  Otherwise,
+</span> leave it at its default value of 0.
+
+ @see android.widget.ImageView#setImageLevel
+ @see android.graphics.drawable.Drawable#setLevel
+*/
+iconLevel : &quot;null&quot;,
+<span id='android-app-Notification-property-number'>/** The number of events that this notification represents. For example, in a new mail
+</span> notification, this could be the number of unread messages.
+
+ The system may or may not use this field to modify the appearance of the notification.
+ Starting with {@link android.os.Build.VERSION_CODES#O}, the number may be displayed as a
+ badge icon in Launchers that support badging.
+*/
+number : &quot;null&quot;,
+<span id='android-app-Notification-property-contentIntent'>/** The intent to execute when the expanded status entry is clicked.  If
+</span> this is an activity, it must include the
+ {@link android.content.Intent#FLAG_ACTIVITY_NEW_TASK} flag, which requires
+ that you take care of task management as described in the
+ &lt;a href=&quot;{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html&quot;&gt;Tasks and Back
+ Stack&lt;/a&gt; document.  In particular, make sure to read the notification section
+ &lt;a href=&quot;{@docRoot}guide/topics/ui/notifiers/notifications.html#HandlingNotifications&quot;&gt;Handling
+ Notifications&lt;/a&gt; for the correct ways to launch an application from a
+ notification.
+*/
+contentIntent : &quot;null&quot;,
+<span id='android-app-Notification-property-deleteIntent'>/** The intent to execute when the notification is explicitly dismissed by the user, either with
+</span> the &quot;Clear All&quot; button or by swiping it away individually.
+
+ This probably shouldn't be launching an activity since several of those will be sent
+ at the same time.
+*/
+deleteIntent : &quot;null&quot;,
+<span id='android-app-Notification-property-fullScreenIntent'>/** An intent to launch instead of posting the notification to the status bar.
+</span>
+ &lt;p&gt;
+ The system UI may choose to display a heads-up notification, instead of
+ launching this intent, while the user is using the device.
+ &lt;/p&gt;
+
+ @see Notification.Builder#setFullScreenIntent
+*/
+fullScreenIntent : &quot;null&quot;,
+<span id='android-app-Notification-property-tickerText'>/** Text that summarizes this notification for accessibility services.
+</span>
+ As of the L release, this text is no longer shown on screen, but it is still useful to
+ accessibility services (where it serves as an audible announcement of the notification's
+ appearance).
+
+ @see #tickerView
+*/
+tickerText : &quot;null&quot;,
+<span id='android-app-Notification-property-tickerView'>/** Formerly, a view showing the {@link #tickerText}.
+</span>
+ No longer displayed in the status bar as of API 21.
+*/
+tickerView : &quot;null&quot;,
+<span id='android-app-Notification-property-contentView'>/** The view that will represent this notification in the notification list (which is pulled
+</span> down from the status bar).
+
+ As of N, this field may be null. The notification view is determined by the inputs
+ to {@link android.app.Notification.Builder}; a custom RemoteViews can optionally be
+ supplied with {@link android.app.Notification.Builder#setCustomContentView(RemoteViews)}.
+*/
+contentView : &quot;null&quot;,
+<span id='android-app-Notification-property-bigContentView'>/** A large-format version of {@link #contentView}, giving the Notification an
+</span> opportunity to show more detail. The system UI may choose to show this
+ instead of the normal content view at its discretion.
+
+ As of N, this field may be null. The expanded notification view is determined by the
+ inputs to {@link android.app.Notification.Builder}; a custom RemoteViews can optionally be
+ supplied with {@link android.app.Notification.Builder#setCustomBigContentView(RemoteViews)}.
+*/
+bigContentView : &quot;null&quot;,
+<span id='android-app-Notification-property-headsUpContentView'>/** A medium-format version of {@link #contentView}, providing the Notification an
+</span> opportunity to add action buttons to contentView. At its discretion, the system UI may
+ choose to show this as a heads-up notification, which will pop up so the user can see
+ it without leaving their current activity.
+
+ As of N, this field may be null. The heads-up notification view is determined by the
+ inputs to {@link android.app.Notification.Builder}; a custom RemoteViews can optionally be
+ supplied with {@link android.app.Notification.Builder#setCustomHeadsUpContentView(RemoteViews)}.
+*/
+headsUpContentView : &quot;null&quot;,
+<span id='android-app-Notification-property-largeIcon'>/** A large bitmap to be shown in the notification content area.
+</span>
+ @deprecated Use {@link android.app.AlertDialog.Builder#setLargeIcon(Icon)} instead.
+*/
+largeIcon : &quot;null&quot;,
+<span id='android-app-Notification-property-sound'>/** The sound to play.
+</span>
+ &lt;p&gt;
+ A notification that is noisy is more likely to be presented as a heads-up notification.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ To play the default notification sound, see {@link #defaults}.
+ &lt;/p&gt;
+ @deprecated use {@link android.app.NotificationChannel#getSound()}.
+*/
+sound : &quot;null&quot;,
+<span id='android-app-Notification-property-STREAM_DEFAULT'>/** Use this constant as the value for audioStreamType to request that
+</span> the default stream type for notifications be used.  Currently the
+ default stream type is {@link AudioManager#STREAM_NOTIFICATION}.
+
+ @deprecated Use {@link android.app.NotificationChannel#getAudioAttributes()} instead.
+*/
+STREAM_DEFAULT : &quot;-1&quot;,
+<span id='android-app-Notification-property-audioStreamType'>/** The audio stream type to use when playing the sound.
+</span> Should be one of the STREAM_ constants from
+ {@link android.media.AudioManager}.
+
+ @deprecated Use {@link #audioAttributes} instead.
+*/
+audioStreamType : &quot;null&quot;,
+<span id='android-app-Notification-property-AUDIO_ATTRIBUTES_DEFAULT'>/** The default value of {@link #audioAttributes}.
+</span>*/
+AUDIO_ATTRIBUTES_DEFAULT : &quot;null&quot;,
+<span id='android-app-Notification-property-audioAttributes'>/** The {@link AudioAttributes audio attributes} to use when playing the sound.
+</span>
+ @deprecated use {@link android.app.NotificationChannel#getAudioAttributes()} instead.
+*/
+audioAttributes : &quot;null&quot;,
+<span id='android-app-Notification-property-vibrate'>/** The pattern with which to vibrate.
+</span>
+ &lt;p&gt;
+ To vibrate the default pattern, see {@link #defaults}.
+ &lt;/p&gt;
+
+ @see android.os.Vibrator#vibrate(long[],int)
+ @deprecated use {@link android.app.NotificationChannel#getVibrationPattern()}.
+*/
+vibrate : &quot;null&quot;,
+<span id='android-app-Notification-property-ledARGB'>/** The color of the led.  The hardware will do its best approximation.
+</span>
+ @see #FLAG_SHOW_LIGHTS
+ @see #flags
+ @deprecated use {@link android.app.NotificationChannel#shouldShowLights()}.
+*/
+ledARGB : &quot;null&quot;,
+<span id='android-app-Notification-property-ledOnMS'>/** The number of milliseconds for the LED to be on while it's flashing.
+</span> The hardware will do its best approximation.
+
+ @see #FLAG_SHOW_LIGHTS
+ @see #flags
+ @deprecated use {@link android.app.NotificationChannel#shouldShowLights()}.
+*/
+ledOnMS : &quot;null&quot;,
+<span id='android-app-Notification-property-ledOffMS'>/** The number of milliseconds for the LED to be off while it's flashing.
+</span> The hardware will do its best approximation.
+
+ @see #FLAG_SHOW_LIGHTS
+ @see #flags
+
+ @deprecated use {@link android.app.NotificationChannel#shouldShowLights()}.
+*/
+ledOffMS : &quot;null&quot;,
+<span id='android-app-Notification-property-defaults'>/** Specifies which values should be taken from the defaults.
+</span> &lt;p&gt;
+ To set, OR the desired from {@link #DEFAULT_SOUND},
+ {@link #DEFAULT_VIBRATE}, {@link #DEFAULT_LIGHTS}. For all default
+ values, use {@link #DEFAULT_ALL}.
+ &lt;/p&gt;
+
+ @deprecated use {@link android.app.NotificationChannel#getSound()} and
+ {@link android.app.NotificationChannel#shouldShowLights()} and
+ {@link android.app.NotificationChannel#shouldVibrate()}.
+*/
+defaults : &quot;null&quot;,
+<span id='android-app-Notification-property-FLAG_SHOW_LIGHTS'>/** Bit to be bitwise-ored into the {@link #flags} field that should be
+</span> set if you want the LED on for this notification.
+ &lt;ul&gt;
+ &lt;li&gt;To turn the LED off, pass 0 in the alpha channel for colorARGB
+      or 0 for both ledOnMS and ledOffMS.&lt;/li&gt;
+ &lt;li&gt;To turn the LED on, pass 1 for ledOnMS and 0 for ledOffMS.&lt;/li&gt;
+ &lt;li&gt;To flash the LED, pass the number of milliseconds that it should
+      be on and off to ledOnMS and ledOffMS.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Since hardware varies, you are not guaranteed that any of the values
+ you pass are honored exactly.  Use the system defaults if possible
+ because they will be set to values that work on any given hardware.
+ &lt;p&gt;
+ The alpha channel must be set for forward compatibility.
+
+ @deprecated use {@link android.app.NotificationChannel#shouldShowLights()}.
+*/
+FLAG_SHOW_LIGHTS : &quot;1&quot;,
+<span id='android-app-Notification-property-FLAG_ONGOING_EVENT'>/** Bit to be bitwise-ored into the {@link #flags} field that should be
+</span> set if this notification is in reference to something that is ongoing,
+ like a phone call.  It should not be set if this notification is in
+ reference to something that happened at a particular point in time,
+ like a missed phone call.
+*/
+FLAG_ONGOING_EVENT : &quot;2&quot;,
+<span id='android-app-Notification-property-FLAG_INSISTENT'>/** Bit to be bitwise-ored into the {@link #flags} field that if set,
+</span> the audio will be repeated until the notification is
+ cancelled or the notification window is opened.
+*/
+FLAG_INSISTENT : &quot;4&quot;,
+<span id='android-app-Notification-property-FLAG_ONLY_ALERT_ONCE'>/** Bit to be bitwise-ored into the {@link #flags} field that should be
+</span> set if you would only like the sound, vibrate and ticker to be played
+ if the notification was not already showing.
+*/
+FLAG_ONLY_ALERT_ONCE : &quot;8&quot;,
+<span id='android-app-Notification-property-FLAG_AUTO_CANCEL'>/** Bit to be bitwise-ored into the {@link #flags} field that should be
+</span> set if the notification should be canceled when it is clicked by the
+ user.
+*/
+FLAG_AUTO_CANCEL : &quot;16&quot;,
+<span id='android-app-Notification-property-FLAG_NO_CLEAR'>/** Bit to be bitwise-ored into the {@link #flags} field that should be
+</span> set if the notification should not be canceled when the user clicks
+ the Clear all button.
+*/
+FLAG_NO_CLEAR : &quot;32&quot;,
+<span id='android-app-Notification-property-FLAG_FOREGROUND_SERVICE'>/** Bit to be bitwise-ored into the {@link #flags} field that should be
+</span> set if this notification represents a currently running service.  This
+ will normally be set for you by {@link android.app.Service#startForeground}.
+*/
+FLAG_FOREGROUND_SERVICE : &quot;64&quot;,
+<span id='android-app-Notification-property-FLAG_HIGH_PRIORITY'>/** Obsolete flag indicating high-priority notifications; use the priority field instead.
+</span>
+ @deprecated Use {@link #priority} with a positive value.
+*/
+FLAG_HIGH_PRIORITY : &quot;128&quot;,
+<span id='android-app-Notification-property-FLAG_LOCAL_ONLY'>/** Bit to be bitswise-ored into the {@link #flags} field that should be
+</span> set if this notification is relevant to the current device only
+ and it is not recommended that it bridge to other devices.
+*/
+FLAG_LOCAL_ONLY : &quot;256&quot;,
+<span id='android-app-Notification-property-FLAG_GROUP_SUMMARY'>/** Bit to be bitswise-ored into the {@link #flags} field that should be
+</span> set if this notification is the group summary for a group of notifications.
+ Grouped notifications may display in a cluster or stack on devices which
+ support such rendering. Requires a group key also be set using {@link android.app.AlertDialog.Builder#setGroup}.
+*/
+FLAG_GROUP_SUMMARY : &quot;512&quot;,
+<span id='android-app-Notification-property-FLAG_AUTOGROUP_SUMMARY'>/** Bit to be bitswise-ored into the {@link #flags} field that should be
+</span> set if this notification is the group summary for an auto-group of notifications.
+
+ @hide
+*/
+FLAG_AUTOGROUP_SUMMARY : &quot;1024&quot;,
+<span id='android-app-Notification-property-FLAG_CAN_COLORIZE'>/** @hide
+</span>*/
+FLAG_CAN_COLORIZE : &quot;2048&quot;,
+<span id='android-app-Notification-property-FLAG_BUBBLE'>/** Bit to be bitswised-ored into the {@link #flags} field that should be
+</span> set by the system if this notification is showing as a bubble.
+
+ Applications cannot set this flag directly; they should instead call
+ {@link android.app.Notification.Builder#setBubbleMetadata(BubbleMetadata)} to
+ request that a notification be displayed as a bubble, and then check
+ this flag to see whether that request was honored by the system.
+*/
+FLAG_BUBBLE : &quot;4096&quot;,
+<span id='android-app-Notification-property-flags'>/***/
+</span>flags : &quot;null&quot;,
+<span id='android-app-Notification-property-PRIORITY_DEFAULT'>/** Default notification {@link #priority}. If your application does not prioritize its own
+</span> notifications, use this value for all notifications.
+
+ @deprecated use {@link android.app.NotificationManager#IMPORTANCE_DEFAULT} instead.
+*/
+PRIORITY_DEFAULT : &quot;0&quot;,
+<span id='android-app-Notification-property-PRIORITY_LOW'>/** Lower {@link #priority}, for items that are less important. The UI may choose to show these
+</span> items smaller, or at a different position in the list, compared with your app's
+ {@link #PRIORITY_DEFAULT} items.
+
+ @deprecated use {@link android.app.NotificationManager#IMPORTANCE_LOW} instead.
+*/
+PRIORITY_LOW : &quot;-1&quot;,
+<span id='android-app-Notification-property-PRIORITY_MIN'>/** Lowest {@link #priority}; these items might not be shown to the user except under special
+</span> circumstances, such as detailed notification logs.
+
+ @deprecated use {@link android.app.NotificationManager#IMPORTANCE_MIN} instead.
+*/
+PRIORITY_MIN : &quot;-2&quot;,
+<span id='android-app-Notification-property-PRIORITY_HIGH'>/** Higher {@link #priority}, for more important notifications or alerts. The UI may choose to
+</span> show these items larger, or at a different position in notification lists, compared with
+ your app's {@link #PRIORITY_DEFAULT} items.
+
+ @deprecated use {@link android.app.NotificationManager#IMPORTANCE_HIGH} instead.
+*/
+PRIORITY_HIGH : &quot;1&quot;,
+<span id='android-app-Notification-property-PRIORITY_MAX'>/** Highest {@link #priority}, for your application's most important items that require the
+</span> user's prompt attention or input.
+
+ @deprecated use {@link android.app.NotificationManager#IMPORTANCE_HIGH} instead.
+*/
+PRIORITY_MAX : &quot;2&quot;,
+<span id='android-app-Notification-property-priority'>/** Relative priority for this notification.
+</span>
+ Priority is an indication of how much of the user's valuable attention should be consumed by
+ this notification. Low-priority notifications may be hidden from the user in certain
+ situations, while the user might be interrupted for a higher-priority notification. The
+ system will make a determination about how to interpret this priority when presenting
+ the notification.
+
+ &lt;p&gt;
+ A notification that is at least {@link #PRIORITY_HIGH} is more likely to be presented
+ as a heads-up notification.
+ &lt;/p&gt;
+
+ @deprecated use {@link android.app.NotificationChannel#getImportance()} instead.
+*/
+priority : &quot;null&quot;,
+<span id='android-app-Notification-property-color'>/** Accent color (an ARGB integer like the constants in {@link android.graphics.Color})
+</span> to be applied by the standard Style templates when presenting this notification.
+
+ The current template design constructs a colorful header image by overlaying the
+ {@link #icon} image (stenciled in white) atop a field of this color. Alpha components are
+ ignored.
+*/
+color : &quot;null&quot;,
+<span id='android-app-Notification-property-COLOR_DEFAULT'>/** Special value of {@link #color} telling the system not to decorate this notification with
+</span> any special color but instead use default colors when presenting this notification.
+*/
+COLOR_DEFAULT : &quot;0&quot;,
+<span id='android-app-Notification-property-COLOR_INVALID'>/** Special value of {@link #color} used as a place holder for an invalid color.
+</span> @hide
+*/
+COLOR_INVALID : &quot;1&quot;,
+<span id='android-app-Notification-property-visibility'>/** Sphere of visibility of this notification, which affects how and when the SystemUI reveals
+</span> the notification's presence and contents in untrusted situations (namely, on the secure
+ lockscreen).
+
+ The default level, {@link #VISIBILITY_PRIVATE}, behaves exactly as notifications have always
+ done on Android: The notification's {@link #icon} and {@link #tickerText} (if available) are
+ shown in all situations, but the contents are only available if the device is unlocked for
+ the appropriate user.
+
+ A more permissive policy can be expressed by {@link #VISIBILITY_PUBLIC}; such a notification
+ can be read even in an &quot;insecure&quot; context (that is, above a secure lockscreen).
+ To modify the public version of this notification—for example, to redact some portions—see
+ {@link android.app.AlertDialog.Builder#setPublicVersion(Notification)}.
+
+ Finally, a notification can be made {@link #VISIBILITY_SECRET}, which will suppress its icon
+ and ticker until the user has bypassed the lockscreen.
+*/
+visibility : &quot;null&quot;,
+<span id='android-app-Notification-property-VISIBILITY_PUBLIC'>/** Notification visibility: Show this notification in its entirety on all lockscreens.
+</span>
+ {@see #visibility}
+*/
+VISIBILITY_PUBLIC : &quot;1&quot;,
+<span id='android-app-Notification-property-VISIBILITY_PRIVATE'>/** Notification visibility: Show this notification on all lockscreens, but conceal sensitive or
+</span> private information on secure lockscreens.
+
+ {@see #visibility}
+*/
+VISIBILITY_PRIVATE : &quot;0&quot;,
+<span id='android-app-Notification-property-VISIBILITY_SECRET'>/** Notification visibility: Do not reveal any part of this notification on a secure lockscreen.
+</span>
+ {@see #visibility}
+*/
+VISIBILITY_SECRET : &quot;-1&quot;,
+<span id='android-app-Notification-property-CATEGORY_CALL'>/** Notification category: incoming call (voice or video) or similar synchronous communication request.
+</span>*/
+CATEGORY_CALL : &quot;call&quot;,
+<span id='android-app-Notification-property-CATEGORY_NAVIGATION'>/** Notification category: map turn-by-turn navigation.
+</span>*/
+CATEGORY_NAVIGATION : &quot;navigation&quot;,
+<span id='android-app-Notification-property-CATEGORY_MESSAGE'>/** Notification category: incoming direct message (SMS, instant message, etc.).
+</span>*/
+CATEGORY_MESSAGE : &quot;msg&quot;,
+<span id='android-app-Notification-property-CATEGORY_EMAIL'>/** Notification category: asynchronous bulk message (email).
+</span>*/
+CATEGORY_EMAIL : &quot;email&quot;,
+<span id='android-app-Notification-property-CATEGORY_EVENT'>/** Notification category: calendar event.
+</span>*/
+CATEGORY_EVENT : &quot;event&quot;,
+<span id='android-app-Notification-property-CATEGORY_PROMO'>/** Notification category: promotion or advertisement.
+</span>*/
+CATEGORY_PROMO : &quot;promo&quot;,
+<span id='android-app-Notification-property-CATEGORY_ALARM'>/** Notification category: alarm or timer.
+</span>*/
+CATEGORY_ALARM : &quot;alarm&quot;,
+<span id='android-app-Notification-property-CATEGORY_PROGRESS'>/** Notification category: progress of a long-running background operation.
+</span>*/
+CATEGORY_PROGRESS : &quot;progress&quot;,
+<span id='android-app-Notification-property-CATEGORY_SOCIAL'>/** Notification category: social network or sharing update.
+</span>*/
+CATEGORY_SOCIAL : &quot;social&quot;,
+<span id='android-app-Notification-property-CATEGORY_ERROR'>/** Notification category: error in background operation or authentication status.
+</span>*/
+CATEGORY_ERROR : &quot;err&quot;,
+<span id='android-app-Notification-property-CATEGORY_TRANSPORT'>/** Notification category: media transport control for playback.
+</span>*/
+CATEGORY_TRANSPORT : &quot;transport&quot;,
+<span id='android-app-Notification-property-CATEGORY_SYSTEM'>/** Notification category: system or device status update.  Reserved for system use.
+</span>*/
+CATEGORY_SYSTEM : &quot;sys&quot;,
+<span id='android-app-Notification-property-CATEGORY_SERVICE'>/** Notification category: indication of running background service.
+</span>*/
+CATEGORY_SERVICE : &quot;service&quot;,
+<span id='android-app-Notification-property-CATEGORY_RECOMMENDATION'>/** Notification category: a specific, timely recommendation for a single thing.
+</span> For example, a news app might want to recommend a news story it believes the user will
+ want to read next.
+*/
+CATEGORY_RECOMMENDATION : &quot;recommendation&quot;,
+<span id='android-app-Notification-property-CATEGORY_STATUS'>/** Notification category: ongoing information about device or contextual status.
+</span>*/
+CATEGORY_STATUS : &quot;status&quot;,
+<span id='android-app-Notification-property-CATEGORY_REMINDER'>/** Notification category: user-scheduled reminder.
+</span>*/
+CATEGORY_REMINDER : &quot;reminder&quot;,
+<span id='android-app-Notification-property-CATEGORY_CAR_EMERGENCY'>/** Notification category: extreme car emergencies.
+</span> @hide
+*/
+CATEGORY_CAR_EMERGENCY : &quot;car_emergency&quot;,
+<span id='android-app-Notification-property-CATEGORY_CAR_WARNING'>/** Notification category: car warnings.
+</span> @hide
+*/
+CATEGORY_CAR_WARNING : &quot;car_warning&quot;,
+<span id='android-app-Notification-property-CATEGORY_CAR_INFORMATION'>/** Notification category: general car system information.
+</span> @hide
+*/
+CATEGORY_CAR_INFORMATION : &quot;car_information&quot;,
+<span id='android-app-Notification-property-category'>/** One of the predefined notification categories (see the &lt;code&gt;CATEGORY_*&lt;/code&gt; constants)
+</span> that best describes this Notification.  May be used by the system for ranking and filtering.
+*/
+category : &quot;null&quot;,
+<span id='android-app-Notification-property-extras'>/** Additional semantic data to be carried around with this Notification.
+</span> &lt;p&gt;
+ The extras keys defined here are intended to capture the original inputs to {@link android.app.AlertDialog.Builder}
+ APIs, and are intended to be used by
+ {@link android.service.notification.NotificationListenerService} implementations to extract
+ detailed information from notification objects.
+*/
+extras : &quot;null&quot;,
+<span id='android-app-Notification-property-allPendingIntents'>/** All pending intents in the notification as the system needs to be able to access them but
+</span> touching the extras bundle in the system process is not safe because the bundle may contain
+ custom parcelable objects.
+
+ @hide
+*/
+allPendingIntents : &quot;null&quot;,
+<span id='android-app-Notification-property-processWhitelistToken'>/** Must be set by a process to start associating tokens with Notification objects
+</span> coming in to it.  This is set by NotificationManagerService.
+
+ @hide
+*/
+processWhitelistToken : &quot;null&quot;,
+<span id='android-app-Notification-property-EXTRA_TITLE'>/** {@link #extras} key: this is the title of the notification,
+</span> as supplied to {@link android.app.AlertDialog.Builder#setContentTitle(CharSequence)}.
+*/
+EXTRA_TITLE : &quot;android.title&quot;,
+<span id='android-app-Notification-property-EXTRA_TITLE_BIG'>/** {@link #extras} key: this is the title of the notification when shown in expanded form,
+</span> e.g. as supplied to {@link android.app.Notification.BigTextStyle#setBigContentTitle(CharSequence)}.
+*/
+EXTRA_TITLE_BIG : &quot;android.title.big&quot;,
+<span id='android-app-Notification-property-EXTRA_TEXT'>/** {@link #extras} key: this is the main text payload, as supplied to
+</span> {@link android.app.AlertDialog.Builder#setContentText(CharSequence)}.
+*/
+EXTRA_TEXT : &quot;android.text&quot;,
+<span id='android-app-Notification-property-EXTRA_SUB_TEXT'>/** {@link #extras} key: this is a third line of text, as supplied to
+</span> {@link android.app.AlertDialog.Builder#setSubText(CharSequence)}.
+*/
+EXTRA_SUB_TEXT : &quot;android.subText&quot;,
+<span id='android-app-Notification-property-EXTRA_REMOTE_INPUT_HISTORY'>/** {@link #extras} key: this is the remote input history, as supplied to
+</span> {@link android.app.AlertDialog.Builder#setRemoteInputHistory(CharSequence[])}.
+
+ Apps can fill this through {@link android.app.AlertDialog.Builder#setRemoteInputHistory(CharSequence[])}
+ with the most recent inputs that have been sent through a {@link android.app.RemoteInput} of this
+ Notification and are expected to clear it once the it is no longer relevant (e.g. for chat
+ notifications once the other party has responded).
+
+ The extra with this key is of type CharSequence[] and contains the most recent entry at
+ the 0 index, the second most recent at the 1 index, etc.
+
+ @see Builder#setRemoteInputHistory(CharSequence[])
+*/
+EXTRA_REMOTE_INPUT_HISTORY : &quot;android.remoteInputHistory&quot;,
+<span id='android-app-Notification-property-EXTRA_SHOW_REMOTE_INPUT_SPINNER'>/** {@link #extras} key: boolean as supplied to
+</span> {@link android.app.AlertDialog.Builder#setShowRemoteInputSpinner(boolean)}.
+
+ If set to true, then the view displaying the remote input history from
+ {@link android.app.AlertDialog.Builder#setRemoteInputHistory(CharSequence[])} will have a progress spinner.
+
+ @see Builder#setShowRemoteInputSpinner(boolean)
+ @hide
+*/
+EXTRA_SHOW_REMOTE_INPUT_SPINNER : &quot;android.remoteInputSpinner&quot;,
+<span id='android-app-Notification-property-EXTRA_HIDE_SMART_REPLIES'>/** {@link #extras} key: boolean as supplied to
+</span> {@link android.app.AlertDialog.Builder#setHideSmartReplies(boolean)}.
+
+ If set to true, then any smart reply buttons will be hidden.
+
+ @see Builder#setHideSmartReplies(boolean)
+ @hide
+*/
+EXTRA_HIDE_SMART_REPLIES : &quot;android.hideSmartReplies&quot;,
+<span id='android-app-Notification-property-EXTRA_INFO_TEXT'>/** {@link #extras} key: this is a small piece of additional text as supplied to
+</span> {@link android.app.AlertDialog.Builder#setContentInfo(CharSequence)}.
+*/
+EXTRA_INFO_TEXT : &quot;android.infoText&quot;,
+<span id='android-app-Notification-property-EXTRA_SUMMARY_TEXT'>/** {@link #extras} key: this is a line of summary information intended to be shown
+</span> alongside expanded notifications, as supplied to (e.g.)
+ {@link android.app.Notification.BigTextStyle#setSummaryText(CharSequence)}.
+*/
+EXTRA_SUMMARY_TEXT : &quot;android.summaryText&quot;,
+<span id='android-app-Notification-property-EXTRA_BIG_TEXT'>/** {@link #extras} key: this is the longer text shown in the big form of a
+</span> {@link android.app.Notification.BigTextStyle} notification, as supplied to
+ {@link android.app.Notification.BigTextStyle#bigText(CharSequence)}.
+*/
+EXTRA_BIG_TEXT : &quot;android.bigText&quot;,
+<span id='android-app-Notification-property-EXTRA_SMALL_ICON'>/** {@link #extras} key: this is the resource ID of the notification's main small icon, as
+</span> supplied to {@link android.app.AlertDialog.Builder#setSmallIcon(int)}.
+
+ @deprecated Use {@link #getSmallIcon}(), which supports a wider variety of icon sources.
+*/
+EXTRA_SMALL_ICON : &quot;android.icon&quot;,
+<span id='android-app-Notification-property-EXTRA_LARGE_ICON'>/** {@link #extras} key: this is a bitmap to be used instead of the small icon when showing the
+</span> notification payload, as
+ supplied to {@link android.app.AlertDialog.Builder#setLargeIcon(android.graphics.Bitmap)}.
+
+ @deprecated Use {@link #getLargeIcon}(), which supports a wider variety of icon sources.
+*/
+EXTRA_LARGE_ICON : &quot;android.largeIcon&quot;,
+<span id='android-app-Notification-property-EXTRA_LARGE_ICON_BIG'>/** {@link #extras} key: this is a bitmap to be used instead of the one from
+</span> {@link android.app.AlertDialog.Builder#setLargeIcon(android.graphics.Bitmap)} when the notification is
+ shown in its expanded form, as supplied to
+ {@link android.app.Notification.BigPictureStyle#bigLargeIcon(android.graphics.Bitmap)}.
+*/
+EXTRA_LARGE_ICON_BIG : &quot;android.largeIcon.big&quot;,
+<span id='android-app-Notification-property-EXTRA_PROGRESS'>/** {@link #extras} key: this is the progress value supplied to
+</span> {@link android.app.AlertDialog.Builder#setProgress(int, int, boolean)}.
+*/
+EXTRA_PROGRESS : &quot;android.progress&quot;,
+<span id='android-app-Notification-property-EXTRA_PROGRESS_MAX'>/** {@link #extras} key: this is the maximum value supplied to
+</span> {@link android.app.AlertDialog.Builder#setProgress(int, int, boolean)}.
+*/
+EXTRA_PROGRESS_MAX : &quot;android.progressMax&quot;,
+<span id='android-app-Notification-property-EXTRA_PROGRESS_INDETERMINATE'>/** {@link #extras} key: whether the progress bar is indeterminate, supplied to
+</span> {@link android.app.AlertDialog.Builder#setProgress(int, int, boolean)}.
+*/
+EXTRA_PROGRESS_INDETERMINATE : &quot;android.progressIndeterminate&quot;,
+<span id='android-app-Notification-property-EXTRA_SHOW_CHRONOMETER'>/** {@link #extras} key: whether {@link #when} should be shown as a count-up timer (specifically
+</span> a {@link android.widget.Chronometer}) instead of a timestamp, as supplied to
+ {@link android.app.AlertDialog.Builder#setUsesChronometer(boolean)}.
+*/
+EXTRA_SHOW_CHRONOMETER : &quot;android.showChronometer&quot;,
+<span id='android-app-Notification-property-EXTRA_CHRONOMETER_COUNT_DOWN'>/** {@link #extras} key: whether the chronometer set on the notification should count down
+</span> instead of counting up. Is only relevant if key {@link #EXTRA_SHOW_CHRONOMETER} is present.
+ This extra is a boolean. The default is false.
+*/
+EXTRA_CHRONOMETER_COUNT_DOWN : &quot;android.chronometerCountDown&quot;,
+<span id='android-app-Notification-property-EXTRA_SHOW_WHEN'>/** {@link #extras} key: whether {@link #when} should be shown,
+</span> as supplied to {@link android.app.AlertDialog.Builder#setShowWhen(boolean)}.
+*/
+EXTRA_SHOW_WHEN : &quot;android.showWhen&quot;,
+<span id='android-app-Notification-property-EXTRA_PICTURE'>/** {@link #extras} key: this is a bitmap to be shown in {@link android.app.Notification.BigPictureStyle} expanded
+</span> notifications, supplied to {@link android.app.Notification.BigPictureStyle#bigPicture(android.graphics.Bitmap)}.
+*/
+EXTRA_PICTURE : &quot;android.picture&quot;,
+<span id='android-app-Notification-property-EXTRA_TEXT_LINES'>/** {@link #extras} key: An array of CharSequences to show in {@link android.app.Notification.InboxStyle} expanded
+</span> notifications, each of which was supplied to {@link android.app.Notification.InboxStyle#addLine(CharSequence)}.
+*/
+EXTRA_TEXT_LINES : &quot;android.textLines&quot;,
+<span id='android-app-Notification-property-EXTRA_TEMPLATE'>/** {@link #extras} key: A string representing the name of the specific
+</span> {@link android.app.Notification.Style} used to create this notification.
+*/
+EXTRA_TEMPLATE : &quot;android.template&quot;,
+<span id='android-app-Notification-property-EXTRA_PEOPLE'>/** {@link #extras} key: A String array containing the people that this notification relates to,
+</span> each of which was supplied to {@link android.app.AlertDialog.Builder#addPerson(String)}.
+
+ @deprecated the actual objects are now in {@link #EXTRA_PEOPLE_LIST}
+*/
+EXTRA_PEOPLE : &quot;android.people&quot;,
+<span id='android-app-Notification-property-EXTRA_PEOPLE_LIST'>/** {@link #extras} key: An arrayList of {@link android.app.Person} objects containing the people that
+</span> this notification relates to.
+*/
+EXTRA_PEOPLE_LIST : &quot;android.people.list&quot;,
+<span id='android-app-Notification-property-EXTRA_ALLOW_DURING_SETUP'>/** Allow certain system-generated notifications to appear before the device is provisioned.
+</span> Only available to notifications coming from the android package.
+ @hide
+*/
+EXTRA_ALLOW_DURING_SETUP : &quot;android.allowDuringSetup&quot;,
+<span id='android-app-Notification-property-EXTRA_BACKGROUND_IMAGE_URI'>/** {@link #extras} key:
+</span> flat {@link String} representation of a {@link android.content.ContentUris content URI}
+ pointing to an image that can be displayed in the background when the notification is
+ selected. Used on television platforms. The URI must point to an image stream suitable for
+ passing into {@link android.graphics.BitmapFactory#decodeStream(java.io.InputStream)
+ BitmapFactory.decodeStream}; all other content types will be ignored.
+*/
+EXTRA_BACKGROUND_IMAGE_URI : &quot;android.backgroundImageUri&quot;,
+<span id='android-app-Notification-property-EXTRA_MEDIA_SESSION'>/** {@link #extras} key: A
+</span> {@link android.media.session.MediaSession.Token} associated with a
+ {@link android.app.Notification.MediaStyle} notification.
+*/
+EXTRA_MEDIA_SESSION : &quot;android.mediaSession&quot;,
+<span id='android-app-Notification-property-EXTRA_COMPACT_ACTIONS'>/** {@link #extras} key: the indices of actions to be shown in the compact view,
+</span> as supplied to (e.g.) {@link android.app.Notification.MediaStyle#setShowActionsInCompactView(int...)}.
+*/
+EXTRA_COMPACT_ACTIONS : &quot;android.compactActions&quot;,
+<span id='android-app-Notification-property-EXTRA_SELF_DISPLAY_NAME'>/** {@link #extras} key: the username to be displayed for all messages sent by the user including
+</span> direct replies
+ {@link android.app.Notification.MessagingStyle} notification. This extra is a
+ {@link CharSequence}
+
+ @deprecated use {@link #EXTRA_MESSAGING_PERSON}
+*/
+EXTRA_SELF_DISPLAY_NAME : &quot;android.selfDisplayName&quot;,
+<span id='android-app-Notification-property-EXTRA_MESSAGING_PERSON'>/** {@link #extras} key: the person to be displayed for all messages sent by the user including
+</span> direct replies
+ {@link android.app.Notification.MessagingStyle} notification. This extra is a
+ {@link android.app.Person}
+*/
+EXTRA_MESSAGING_PERSON : &quot;android.messagingUser&quot;,
+<span id='android-app-Notification-property-EXTRA_CONVERSATION_TITLE'>/** {@link #extras} key: a {@link CharSequence} to be displayed as the title to a conversation
+</span> represented by a {@link android.app.Notification.MessagingStyle}
+*/
+EXTRA_CONVERSATION_TITLE : &quot;android.conversationTitle&quot;,
+<span id='android-app-Notification-property-EXTRA_MESSAGES'>/** {@link #extras} key: an array of {@link android.app.Notification.MessagingStyle.Message}
+</span> bundles provided by a
+ {@link android.app.Notification.MessagingStyle} notification. This extra is a parcelable
+ array of bundles.
+*/
+EXTRA_MESSAGES : &quot;android.messages&quot;,
+<span id='android-app-Notification-property-EXTRA_HISTORIC_MESSAGES'>/** {@link #extras} key: an array of
+</span> {@link android.app.Notification.MessagingStyle#addHistoricMessage historic}
+ {@link android.app.Notification.MessagingStyle.Message} bundles provided by a
+ {@link android.app.Notification.MessagingStyle} notification. This extra is a parcelable
+ array of bundles.
+*/
+EXTRA_HISTORIC_MESSAGES : &quot;android.messages.historic&quot;,
+<span id='android-app-Notification-property-EXTRA_IS_GROUP_CONVERSATION'>/** {@link #extras} key: whether the {@link android.app.Notification.MessagingStyle} notification
+</span> represents a group conversation.
+*/
+EXTRA_IS_GROUP_CONVERSATION : &quot;android.isGroupConversation&quot;,
+<span id='android-app-Notification-property-EXTRA_COLORIZED'>/** {@link #extras} key: whether the notification should be colorized as
+</span> supplied to {@link android.app.AlertDialog.Builder#setColorized(boolean)}.
+*/
+EXTRA_COLORIZED : &quot;android.colorized&quot;,
+<span id='android-app-Notification-property-EXTRA_BUILDER_APPLICATION_INFO'>/** @hide
+</span>*/
+EXTRA_BUILDER_APPLICATION_INFO : &quot;android.appInfo&quot;,
+<span id='android-app-Notification-property-EXTRA_CONTAINS_CUSTOM_VIEW'>/** @hide
+</span>*/
+EXTRA_CONTAINS_CUSTOM_VIEW : &quot;android.contains.customView&quot;,
+<span id='android-app-Notification-property-EXTRA_REDUCED_IMAGES'>/** @hide
+</span>*/
+EXTRA_REDUCED_IMAGES : &quot;android.reduced.images&quot;,
+<span id='android-app-Notification-property-EXTRA_AUDIO_CONTENTS_URI'>/** {@link #extras} key: the audio contents of this notification.
+</span>
+ This is for use when rendering the notification on an audio-focused interface;
+ the audio contents are a complete sound sample that contains the contents/body of the
+ notification. This may be used in substitute of a Text-to-Speech reading of the
+ notification. For example if the notification represents a voice message this should point
+ to the audio of that message.
+
+ The data stored under this key should be a String representation of a Uri that contains the
+ audio contents in one of the following formats: WAV, PCM 16-bit, AMR-WB.
+
+ This extra is unnecessary if you are using {@code MessagingStyle} since each {@code Message}
+ has a field for holding data URI. That field can be used for audio.
+ See {@code Message#setData}.
+
+ Example usage:
+ &lt;pre&gt;
+ {@code
+ Notification.Builder myBuilder = (build your Notification as normal);
+ myBuilder.getExtras().putString(EXTRA_AUDIO_CONTENTS_URI, myAudioUri.toString());
+ }
+ &lt;/pre&gt;
+*/
+EXTRA_AUDIO_CONTENTS_URI : &quot;android.audioContents&quot;,
+<span id='android-app-Notification-property-EXTRA_SUBSTITUTE_APP_NAME'>/**@hide */
+</span>EXTRA_SUBSTITUTE_APP_NAME : &quot;android.substName&quot;,
+<span id='android-app-Notification-property-EXTRA_FOREGROUND_APPS'>/** This is set on the notifications shown by system_server about apps running foreground
+</span> services. It indicates that the notification should be shown
+ only if any of the given apps do not already have a properly tagged
+ {@link #FLAG_FOREGROUND_SERVICE} notification currently visible to the user.
+ This is a string array of all package names of the apps.
+ @hide
+*/
+EXTRA_FOREGROUND_APPS : &quot;android.foregroundApps&quot;,
+<span id='android-app-Notification-property-GROUP_ALERT_ALL'>/** Constant for {@link android.app.AlertDialog.Builder#setGroupAlertBehavior(int)}, meaning that all notifications in a
+</span> group with sound or vibration ought to make sound or vibrate (respectively), so this
+ notification will not be muted when it is in a group.
+*/
+GROUP_ALERT_ALL : &quot;0&quot;,
+<span id='android-app-Notification-property-GROUP_ALERT_SUMMARY'>/** Constant for {@link android.app.AlertDialog.Builder#setGroupAlertBehavior(int)}, meaning that all children
+</span> notification in a group should be silenced (no sound or vibration) even if they are posted
+ to a {@link android.app.NotificationChannel} that has sound and/or vibration. Use this constant to
+ mute this notification if this notification is a group child. This must be applied to all
+ children notifications you want to mute.
+
+ &lt;p&gt; For example, you might want to use this constant if you post a number of children
+ notifications at once (say, after a periodic sync), and only need to notify the user
+ audibly once.
+*/
+GROUP_ALERT_SUMMARY : &quot;1&quot;,
+<span id='android-app-Notification-property-GROUP_ALERT_CHILDREN'>/** Constant for {@link android.app.AlertDialog.Builder#setGroupAlertBehavior(int)}, meaning that the summary
+</span> notification in a group should be silenced (no sound or vibration) even if they are
+ posted to a {@link android.app.NotificationChannel} that has sound and/or vibration. Use this constant
+ to mute this notification if this notification is a group summary.
+
+ &lt;p&gt;For example, you might want to use this constant if only the children notifications
+ in your group have content and the summary is only used to visually group notifications
+ rather than to alert the user that new information is available.
+*/
+GROUP_ALERT_CHILDREN : &quot;2&quot;,
+<span id='android-app-Notification-property-BADGE_ICON_NONE'>/** If this notification is being shown as a badge, always show as a number.
+</span>*/
+BADGE_ICON_NONE : &quot;0&quot;,
+<span id='android-app-Notification-property-BADGE_ICON_SMALL'>/** If this notification is being shown as a badge, use the {@link #getSmallIcon}() to
+</span> represent this notification.
+*/
+BADGE_ICON_SMALL : &quot;1&quot;,
+<span id='android-app-Notification-property-BADGE_ICON_LARGE'>/** If this notification is being shown as a badge, use the {@link #getLargeIcon}() to
+</span> represent this notification.
+*/
+BADGE_ICON_LARGE : &quot;2&quot;,
+<span id='android-app-Notification-property-actions'>/** Array of all {@link android.app.Notification.Action} structures attached to this notification by
+</span> {@link android.app.AlertDialog.Builder#addAction(int, CharSequence, PendingIntent)}. Mostly useful for instances of
+ {@link android.service.notification.NotificationListenerService} that provide an alternative
+ interface for invoking actions.
+*/
+actions : &quot;null&quot;,
+<span id='android-app-Notification-property-publicVersion'>/** Replacement version of this notification whose content will be shown
+</span> in an insecure context such as atop a secure keyguard. See {@link #visibility}
+ and {@link #VISIBILITY_PUBLIC}.
+*/
+publicVersion : &quot;null&quot;,
+<span id='android-app-Notification-property-CREATOR'>/** Parcelable.Creator that instantiates Notification objects
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-app-Notification-method-getGroup'>/**Get the key used to group this notification into a cluster or stack
+</span> with other notifications on devices which support such rendering.
+*/
+getGroup : function(  ) {},
+
+<span id='android-app-Notification-method-getSortKey'>/**Get a sort key that orders this notification among other notifications from the
+</span> same package. This can be useful if an external sort was already applied and an app
+ would like to preserve this. Notifications will be sorted lexicographically using this
+ value, although providing different priorities in addition to providing sort key may
+ cause this value to be ignored.
+
+ &lt;p&gt;This sort key can also be used to order members of a notification group. See
+ {@link android.app.AlertDialog.Builder#setGroup}.
+@see String#compareTo(String)
+*/
+getSortKey : function(  ) {},
+
+<span id='android-app-Notification-method-clone'>/**
+</span>*/
+clone : function(  ) {},
+
+<span id='android-app-Notification-method-cloneInto'>/**Copy all (or if heavy is false, all except Bitmaps and RemoteViews) members
+</span> of this into that.
+@hide 
+*/
+cloneInto : function(  ) {},
+
+<span id='android-app-Notification-method-visitUris'>/**Note all {@link Uri} that are referenced internally, with the expectation
+</span> that Uri permission grants will need to be issued to ensure the recipient
+ of this object is able to render its contents.
+@hide 
+*/
+visitUris : function(  ) {},
+
+<span id='android-app-Notification-method-lightenPayload'>/**Removes heavyweight parts of the Notification object for archival or for sending to
+</span> listeners when the full contents are not necessary.
+@hide 
+*/
+lightenPayload : function(  ) {},
+
+<span id='android-app-Notification-method-safeCharSequence'>/**Make sure this CharSequence is safe to put into a bundle, which basically
+</span> means it had better not be some custom Parcelable implementation.
+@hide 
+*/
+safeCharSequence : function(  ) {},
+
+<span id='android-app-Notification-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-Notification-method-writeToParcel'>/**Flatten this notification into a parcel.
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-Notification-method-areActionsVisiblyDifferent'>/**
+</span>@hide 
+*/
+areActionsVisiblyDifferent : function(  ) {},
+
+<span id='android-app-Notification-method-areStyledNotificationsVisiblyDifferent'>/**
+</span>@hide 
+*/
+areStyledNotificationsVisiblyDifferent : function(  ) {},
+
+<span id='android-app-Notification-method-areRemoteViewsChanged'>/**
+</span>@hide 
+*/
+areRemoteViewsChanged : function(  ) {},
+
+<span id='android-app-Notification-method-setLatestEventInfo'>/**Sets the {@link #contentView} field to be a view with the standard &quot;Latest Event&quot;
+</span> layout.
+
+ &lt;p&gt;Uses the {@link #icon} and {@link #when} fields to set the icon and time fields
+ in the view.&lt;/p&gt;
+@param {Object {Context}} context       The context for your application / activity.
+@param {Object {CharSequence}} contentTitle The title that goes in the expanded entry.
+@param {Object {CharSequence}} contentText  The text that goes in the expanded entry.
+@param {Object {PendingIntent}} contentIntent The intent to launch when the user clicks the expanded notification.
+ If this is an activity, it must include the
+ {@link android.content.Intent#FLAG_ACTIVITY_NEW_TASK} flag, which requires
+ that you take care of task management as described in the
+ &lt;a href=&quot;{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html&quot;&gt;Tasks and Back
+ Stack&lt;/a&gt; document.
+@deprecated Use {@link Builder} instead.
+@removed 
+*/
+setLatestEventInfo : function(  ) {},
+
+<span id='android-app-Notification-method-addFieldsFromContext'>/**
+</span>@hide 
+*/
+addFieldsFromContext : function(  ) {},
+
+<span id='android-app-Notification-method-addFieldsFromContext'>/**
+</span>@hide 
+*/
+addFieldsFromContext : function(  ) {},
+
+<span id='android-app-Notification-method-writeToProto'>/**
+</span>@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-app-Notification-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-app-Notification-method-visibilityToString'>/**{@hide}
+</span>*/
+visibilityToString : function(  ) {},
+
+<span id='android-app-Notification-method-priorityToString'>/**{@hide}
+</span>*/
+priorityToString : function(  ) {},
+
+<span id='android-app-Notification-method-hasCompletedProgress'>/**
+</span>@hide 
+*/
+hasCompletedProgress : function(  ) {},
+
+<span id='android-app-Notification-method-getChannel'>/**
+</span>@removed 
+*/
+getChannel : function(  ) {},
+
+<span id='android-app-Notification-method-getChannelId'>/**Returns the id of the channel this notification posts to.
+</span>*/
+getChannelId : function(  ) {},
+
+<span id='android-app-Notification-method-getTimeout'>/**
+</span>@removed 
+*/
+getTimeout : function(  ) {},
+
+<span id='android-app-Notification-method-getTimeoutAfter'>/**Returns the duration from posting after which this notification should be canceled by the
+</span> system, if it's not canceled already.
+*/
+getTimeoutAfter : function(  ) {},
+
+<span id='android-app-Notification-method-getBadgeIconType'>/**Returns what icon should be shown for this notification if it is being displayed in a
+</span> Launcher that supports badging. Will be one of {@link #BADGE_ICON_NONE},
+ {@link #BADGE_ICON_SMALL}, or {@link #BADGE_ICON_LARGE}.
+*/
+getBadgeIconType : function(  ) {},
+
+<span id='android-app-Notification-method-getShortcutId'>/**Returns the {@link ShortcutInfo#getId() id} that this notification supersedes, if any.
+</span>
+ &lt;p&gt;Used by some Launchers that display notification content to hide shortcuts that duplicate
+ notifications.
+*/
+getShortcutId : function(  ) {},
+
+<span id='android-app-Notification-method-getLocusId'>/**Gets the {@link LocusId} associated with this notification.
+</span>
+ &lt;p&gt;Used by the Android system to correlate objects (such as
+ {@link ShortcutInfo} and {@link ContentCaptureContext}).
+*/
+getLocusId : function(  ) {},
+
+<span id='android-app-Notification-method-getSettingsText'>/**Returns the settings text provided to {@link android.app.AlertDialog.Builder#setSettingsText(CharSequence)}.
+</span>*/
+getSettingsText : function(  ) {},
+
+<span id='android-app-Notification-method-getGroupAlertBehavior'>/**Returns which type of notifications in a group are responsible for audibly alerting the
+</span> user. See {@link #GROUP_ALERT_ALL}, {@link #GROUP_ALERT_CHILDREN},
+ {@link #GROUP_ALERT_SUMMARY}.
+*/
+getGroupAlertBehavior : function(  ) {},
+
+<span id='android-app-Notification-method-getBubbleMetadata'>/**Returns the bubble metadata that will be used to display app content in a floating window
+</span> over the existing foreground activity.
+*/
+getBubbleMetadata : function(  ) {},
+
+<span id='android-app-Notification-method-getAllowSystemGeneratedContextualActions'>/**Returns whether the platform is allowed (by the app developer) to generate contextual actions
+</span> for this notification.
+*/
+getAllowSystemGeneratedContextualActions : function(  ) {},
+
+<span id='android-app-Notification-method-getSmallIcon'>/**The small icon representing this notification in the status bar and content view.
+</span>@return {Object {android.graphics.drawable.Icon}} the small icon representing this notification.
+@see Builder#getSmallIcon()
+@see Builder#setSmallIcon(Icon)
+*/
+getSmallIcon : function(  ) {},
+
+<span id='android-app-Notification-method-setSmallIcon'>/**Used when notifying to clean up legacy small icons.
+</span>@hide 
+*/
+setSmallIcon : function(  ) {},
+
+<span id='android-app-Notification-method-getLargeIcon'>/**The large icon shown in this notification's content view.
+</span>@see Builder#getLargeIcon()
+@see Builder#setLargeIcon(Icon)
+*/
+getLargeIcon : function(  ) {},
+
+<span id='android-app-Notification-method-isGroupSummary'>/**
+</span>@hide 
+*/
+isGroupSummary : function(  ) {},
+
+<span id='android-app-Notification-method-isGroupChild'>/**
+</span>@hide 
+*/
+isGroupChild : function(  ) {},
+
+<span id='android-app-Notification-method-suppressAlertingDueToGrouping'>/**
+</span>@hide 
+*/
+suppressAlertingDueToGrouping : function(  ) {},
+
+<span id='android-app-Notification-method-findRemoteInputActionPair'>/**Finds and returns a remote input and its corresponding action.
+</span>@param {Boolean} requiresFreeform requires the remoteinput to allow freeform or not.
+@return {Object {android.util.Pair}} the result pair, {@code null} if no result is found.
+@hide 
+*/
+findRemoteInputActionPair : function(  ) {},
+
+<span id='android-app-Notification-method-getContextualActions'>/**Returns the actions that are contextual out of the actions in this notification.
+</span>@hide 
+*/
+getContextualActions : function(  ) {},
+
+<span id='android-app-Notification-method-isForegroundService'>/**
+</span>@return {Boolean} whether this notification is a foreground service notification
+@hide 
+*/
+isForegroundService : function(  ) {},
+
+<span id='android-app-Notification-method-hasMediaSession'>/**
+</span>@return {Boolean} whether this notification has a media session attached
+@hide 
+*/
+hasMediaSession : function(  ) {},
+
+<span id='android-app-Notification-method-getNotificationStyle'>/**
+</span>@return {Object {java.lang.Class}} the style class of this notification
+@hide 
+*/
+getNotificationStyle : function(  ) {},
+
+<span id='android-app-Notification-method-isColorized'>/**
+</span>@return {Boolean} true if this notification is colorized.
+@hide 
+*/
+isColorized : function(  ) {},
+
+<span id='android-app-Notification-method-isColorizedMedia'>/**
+</span>@return {Boolean} true if this notification is colorized and it is a media notification
+@hide 
+*/
+isColorizedMedia : function(  ) {},
+
+<span id='android-app-Notification-method-isMediaNotification'>/**
+</span>@return {Boolean} true if this is a media notification
+@hide 
+*/
+isMediaNotification : function(  ) {},
+
+<span id='android-app-Notification-method-isBubbleNotification'>/**
+</span>@return {Boolean} true if this notification is showing as a bubble
+@hide 
+*/
+isBubbleNotification : function(  ) {},
+
+<span id='android-app-Notification-method-showsTime'>/**
+</span>@return {Boolean} true if the notification will show the time; false otherwise
+@hide 
+*/
+showsTime : function(  ) {},
+
+<span id='android-app-Notification-method-showsChronometer'>/**
+</span>@return {Boolean} true if the notification will show a chronometer; false otherwise
+@hide 
+*/
+showsChronometer : function(  ) {},
+
+<span id='android-app-Notification-method-getNotificationStyleClass'>/**
+</span>@removed 
+*/
+getNotificationStyleClass : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

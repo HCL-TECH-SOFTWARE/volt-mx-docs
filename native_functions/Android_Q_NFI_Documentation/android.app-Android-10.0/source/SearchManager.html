@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-SearchManager'>/**@class android.app.SearchManager
+</span> implements android.content.DialogInterface.OnDismissListener
+
+ implements android.content.DialogInterface.OnCancelListener
+
+@extends java.lang.Object
+
+ This class provides access to the system search services.
+
+ &lt;p&gt;In practice, you won't interact with this class directly, as search
+ services are provided through methods in {@link android.app.Activity Activity}
+ and the {@link android.content.Intent#ACTION_SEARCH ACTION_SEARCH}
+ {@link android.content.Intent Intent}.
+
+ &lt;p&gt;
+ {@link Configuration#UI_MODE_TYPE_WATCH} does not support this system service.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using the search dialog and adding search
+ suggestions in your application, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/search/index.html&quot;&gt;Search&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var SearchManager = {
+
+<span id='android-app-SearchManager-property-MENU_KEY'>/** This is a shortcut definition for the default menu key to use for invoking search.
+</span>
+ See Menu.Item.setAlphabeticShortcut() for more information.
+*/
+MENU_KEY : &quot;115&quot;,
+<span id='android-app-SearchManager-property-MENU_KEYCODE'>/** This is a shortcut definition for the default menu key to use for invoking search.
+</span>
+ See Menu.Item.setAlphabeticShortcut() for more information.
+*/
+MENU_KEYCODE : &quot;47&quot;,
+<span id='android-app-SearchManager-property-QUERY'>/** Intent extra data key: Use this key with
+</span> {@link android.content.Intent#getStringExtra
+  content.Intent.getStringExtra()}
+ to obtain the query string from Intent.ACTION_SEARCH.
+*/
+QUERY : &quot;query&quot;,
+<span id='android-app-SearchManager-property-USER_QUERY'>/** Intent extra data key: Use this key with
+</span> {@link android.content.Intent#getStringExtra
+  content.Intent.getStringExtra()}
+ to obtain the query string typed in by the user.
+ This may be different from the value of {@link #QUERY}
+ if the intent is the result of selecting a suggestion.
+ In that case, {@link #QUERY} will contain the value of
+ {@link #SUGGEST_COLUMN_QUERY} for the suggestion, and
+ {@link #USER_QUERY} will contain the string typed by the
+ user.
+*/
+USER_QUERY : &quot;user_query&quot;,
+<span id='android-app-SearchManager-property-APP_DATA'>/** Intent extra data key: Use this key with Intent.ACTION_SEARCH and
+</span> {@link android.content.Intent#getBundleExtra
+  content.Intent.getBundleExtra()}
+ to obtain any additional app-specific data that was inserted by the
+ activity that launched the search.
+*/
+APP_DATA : &quot;app_data&quot;,
+<span id='android-app-SearchManager-property-SEARCH_MODE'>/** Intent extra data key: Use {@link android.content.Intent#getBundleExtra
+</span> content.Intent.getBundleExtra(SEARCH_MODE)} to get the search mode used
+ to launch the intent.
+ The only current value for this is {@link #MODE_GLOBAL_SEARCH_SUGGESTION}.
+
+ @hide
+*/
+SEARCH_MODE : &quot;search_mode&quot;,
+<span id='android-app-SearchManager-property-ACTION_KEY'>/** Intent extra data key: Use this key with Intent.ACTION_SEARCH and
+</span> {@link android.content.Intent#getIntExtra content.Intent.getIntExtra()}
+ to obtain the keycode that the user used to trigger this query.  It will be zero if the
+ user simply pressed the &quot;GO&quot; button on the search UI.  This is primarily used in conjunction
+ with the keycode attribute in the actionkey element of your searchable.xml configuration
+ file.
+*/
+ACTION_KEY : &quot;action_key&quot;,
+<span id='android-app-SearchManager-property-EXTRA_DATA_KEY'>/** Intent extra data key: This key will be used for the extra populated by the
+</span> {@link #SUGGEST_COLUMN_INTENT_EXTRA_DATA} column.
+*/
+EXTRA_DATA_KEY : &quot;intent_extra_data_key&quot;,
+<span id='android-app-SearchManager-property-EXTRA_SELECT_QUERY'>/** Boolean extra data key for {@link #INTENT_ACTION_GLOBAL_SEARCH} intents. If {@code true},
+</span> the initial query should be selected when the global search activity is started, so
+ that the user can easily replace it with another query.
+*/
+EXTRA_SELECT_QUERY : &quot;select_query&quot;,
+<span id='android-app-SearchManager-property-EXTRA_NEW_SEARCH'>/** Boolean extra data key for {@link Intent#ACTION_WEB_SEARCH} intents.  If {@code true},
+</span> this search should open a new browser window, rather than using an existing one.
+*/
+EXTRA_NEW_SEARCH : &quot;new_search&quot;,
+<span id='android-app-SearchManager-property-EXTRA_WEB_SEARCH_PENDINGINTENT'>/** Extra data key for {@link Intent#ACTION_WEB_SEARCH}. If set, the value must be a
+</span> {@link android.app.PendingIntent}. The search activity handling the {@link Intent#ACTION_WEB_SEARCH}
+ intent will fill in and launch the pending intent. The data URI will be filled in with an
+ http or https URI, and {@link android.provider.Browser#EXTRA_HEADERS} may be filled in.
+*/
+EXTRA_WEB_SEARCH_PENDINGINTENT : &quot;web_search_pendingintent&quot;,
+<span id='android-app-SearchManager-property-CURSOR_EXTRA_KEY_IN_PROGRESS'>/** Boolean extra data key for a suggestion provider to return in {@link Cursor#getExtras} to
+</span> indicate that the search is not complete yet. This can be used by the search UI
+ to indicate that a search is in progress. The suggestion provider can return partial results
+ this way and send a change notification on the cursor when more results are available.
+*/
+CURSOR_EXTRA_KEY_IN_PROGRESS : &quot;in_progress&quot;,
+<span id='android-app-SearchManager-property-ACTION_MSG'>/** Intent extra data key: Use this key with Intent.ACTION_SEARCH and
+</span> {@link android.content.Intent#getStringExtra content.Intent.getStringExtra()}
+ to obtain the action message that was defined for a particular search action key and/or
+ suggestion.  It will be null if the search was launched by typing &quot;enter&quot;, touching the
+ &quot;GO&quot; button, or other means not involving any action key.
+*/
+ACTION_MSG : &quot;action_msg&quot;,
+<span id='android-app-SearchManager-property-FLAG_QUERY_REFINEMENT'>/** Flag to specify that the entry can be used for query refinement, i.e., the query text
+</span> in the search field can be replaced with the text in this entry, when a query refinement
+ icon is clicked. The suggestion list should show such a clickable icon beside the entry.
+ &lt;p&gt;Use this flag as a bit-field for {@link #SUGGEST_COLUMN_FLAGS}.
+*/
+FLAG_QUERY_REFINEMENT : &quot;1&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_URI_PATH_QUERY'>/** Uri path for queried suggestions data.  This is the path that the search manager
+</span> will use when querying your content provider for suggestions data based on user input
+ (e.g. looking for partial matches).
+ Typically you'll use this with a URI matcher.
+*/
+SUGGEST_URI_PATH_QUERY : &quot;search_suggest_query&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_MIME_TYPE'>/** MIME type for suggestions data.  You'll use this in your suggestions content provider
+</span> in the getType() function.
+*/
+SUGGEST_MIME_TYPE : &quot;vnd.android.cursor.dir/vnd.android.search.suggest&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_URI_PATH_SHORTCUT'>/** Uri path for shortcut validation.  This is the path that the search manager will use when
+</span> querying your content provider to refresh a shortcutted suggestion result and to check if it
+ is still valid.  When asked, a source may return an up to date result, or no result.  No
+ result indicates the shortcut refers to a no longer valid sugggestion.
+
+ @see #SUGGEST_COLUMN_SHORTCUT_ID
+*/
+SUGGEST_URI_PATH_SHORTCUT : &quot;search_suggest_shortcut&quot;,
+<span id='android-app-SearchManager-property-SHORTCUT_MIME_TYPE'>/** MIME type for shortcut validation.  You'll use this in your suggestions content provider
+</span> in the getType() function.
+*/
+SHORTCUT_MIME_TYPE : &quot;vnd.android.cursor.item/vnd.android.search.suggest&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_FORMAT'>/** Column name for suggestions cursor.  &lt;i&gt;Unused - can be null or column can be omitted.&lt;/i&gt;
+</span>*/
+SUGGEST_COLUMN_FORMAT : &quot;suggest_format&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_TEXT_1'>/** Column name for suggestions cursor.  &lt;i&gt;Required.&lt;/i&gt;  This is the primary line of text that
+</span> will be presented to the user as the suggestion.
+*/
+SUGGEST_COLUMN_TEXT_1 : &quot;suggest_text_1&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_TEXT_2'>/** Column name for suggestions cursor.  &lt;i&gt;Optional.&lt;/i&gt;  If your cursor includes this column,
+</span>  then all suggestions will be provided in a two-line format.  The second line of text is in
+  a much smaller appearance.
+*/
+SUGGEST_COLUMN_TEXT_2 : &quot;suggest_text_2&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_TEXT_2_URL'>/** Column name for suggestions cursor.  &lt;i&gt;Optional.&lt;/i&gt; This is a URL that will be shown
+</span> as the second line of text instead of {@link #SUGGEST_COLUMN_TEXT_2}. This is a separate
+ column so that the search UI knows to display the text as a URL, e.g. by using a different
+ color. If this column is absent, or has the value {@code null},
+ {@link #SUGGEST_COLUMN_TEXT_2} will be used instead.
+*/
+SUGGEST_COLUMN_TEXT_2_URL : &quot;suggest_text_2_url&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_ICON_1'>/** Column name for suggestions cursor.  &lt;i&gt;Optional.&lt;/i&gt;  If your cursor includes this column,
+</span>  then all suggestions will be provided in a format that includes space for two small icons,
+  one at the left and one at the right of each suggestion.  The data in the column must
+  be a resource ID of a drawable, or a URI in one of the following formats:
+
+ &lt;ul&gt;
+ &lt;li&gt;content ({@link android.content.ContentResolver#SCHEME_CONTENT})&lt;/li&gt;
+ &lt;li&gt;android.resource ({@link android.content.ContentResolver#SCHEME_ANDROID_RESOURCE})&lt;/li&gt;
+ &lt;li&gt;file ({@link android.content.ContentResolver#SCHEME_FILE})&lt;/li&gt;
+ &lt;/ul&gt;
+
+ See {@link android.content.ContentResolver#openAssetFileDescriptor(Uri, String)}
+ for more information on these schemes.
+*/
+SUGGEST_COLUMN_ICON_1 : &quot;suggest_icon_1&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_ICON_2'>/** Column name for suggestions cursor.  &lt;i&gt;Optional.&lt;/i&gt;  If your cursor includes this column,
+</span>  then all suggestions will be provided in a format that includes space for two small icons,
+  one at the left and one at the right of each suggestion.  The data in the column must
+  be a resource ID of a drawable, or a URI in one of the following formats:
+
+ &lt;ul&gt;
+ &lt;li&gt;content ({@link android.content.ContentResolver#SCHEME_CONTENT})&lt;/li&gt;
+ &lt;li&gt;android.resource ({@link android.content.ContentResolver#SCHEME_ANDROID_RESOURCE})&lt;/li&gt;
+ &lt;li&gt;file ({@link android.content.ContentResolver#SCHEME_FILE})&lt;/li&gt;
+ &lt;/ul&gt;
+
+ See {@link android.content.ContentResolver#openAssetFileDescriptor(Uri, String)}
+ for more information on these schemes.
+*/
+SUGGEST_COLUMN_ICON_2 : &quot;suggest_icon_2&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_RESULT_CARD_IMAGE'>/** Column name for suggestions cursor.  &lt;i&gt;Optional.&lt;/i&gt;  If your cursor includes this column,
+</span> then the image will be displayed when forming the suggestion. The suggested dimension for
+ the image is 270x400 px for portrait mode and 400x225 px for landscape mode. The data in the
+ column must be a resource ID of a drawable, or a URI in one of the following formats:
+
+ &lt;ul&gt;
+ &lt;li&gt;content ({@link android.content.ContentResolver#SCHEME_CONTENT})&lt;/li&gt;
+ &lt;li&gt;android.resource ({@link android.content.ContentResolver#SCHEME_ANDROID_RESOURCE})&lt;/li&gt;
+ &lt;li&gt;file ({@link android.content.ContentResolver#SCHEME_FILE})&lt;/li&gt;
+ &lt;/ul&gt;
+
+ See {@link android.content.ContentResolver#openAssetFileDescriptor(Uri, String)}
+ for more information on these schemes.
+*/
+SUGGEST_COLUMN_RESULT_CARD_IMAGE : &quot;suggest_result_card_image&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_INTENT_ACTION'>/** Column name for suggestions cursor.  &lt;i&gt;Optional.&lt;/i&gt;  If this column exists &lt;i&gt;and&lt;/i&gt;
+</span> this element exists at the given row, this is the action that will be used when
+ forming the suggestion's intent.  If the element is not provided, the action will be taken
+ from the android:searchSuggestIntentAction field in your XML metadata.  &lt;i&gt;At least one of
+ these must be present for the suggestion to generate an intent.&lt;/i&gt;  Note:  If your action is
+ the same for all suggestions, it is more efficient to specify it using XML metadata and omit
+ it from the cursor.
+*/
+SUGGEST_COLUMN_INTENT_ACTION : &quot;suggest_intent_action&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_INTENT_DATA'>/** Column name for suggestions cursor.  &lt;i&gt;Optional.&lt;/i&gt;  If this column exists &lt;i&gt;and&lt;/i&gt;
+</span> this element exists at the given row, this is the data that will be used when
+ forming the suggestion's intent.  If the element is not provided, the data will be taken
+ from the android:searchSuggestIntentData field in your XML metadata.  If neither source
+ is provided, the Intent's data field will be null.  Note:  If your data is
+ the same for all suggestions, or can be described using a constant part and a specific ID,
+ it is more efficient to specify it using XML metadata and omit it from the cursor.
+*/
+SUGGEST_COLUMN_INTENT_DATA : &quot;suggest_intent_data&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_INTENT_EXTRA_DATA'>/** Column name for suggestions cursor.  &lt;i&gt;Optional.&lt;/i&gt;  If this column exists &lt;i&gt;and&lt;/i&gt;
+</span> this element exists at the given row, this is the data that will be used when
+ forming the suggestion's intent. If not provided, the Intent's extra data field will be null.
+ This column allows suggestions to provide additional arbitrary data which will be included as
+ an extra under the key {@link #EXTRA_DATA_KEY}.
+*/
+SUGGEST_COLUMN_INTENT_EXTRA_DATA : &quot;suggest_intent_extra_data&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_INTENT_DATA_ID'>/** Column name for suggestions cursor.  &lt;i&gt;Optional.&lt;/i&gt;  If this column exists &lt;i&gt;and&lt;/i&gt;
+</span> this element exists at the given row, then &quot;/&quot; and this value will be appended to the data
+ field in the Intent.  This should only be used if the data field has already been set to an
+ appropriate base string.
+*/
+SUGGEST_COLUMN_INTENT_DATA_ID : &quot;suggest_intent_data_id&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_QUERY'>/** Column name for suggestions cursor.  &lt;i&gt;Required if action is
+</span> {@link android.content.Intent#ACTION_SEARCH ACTION_SEARCH}, optional otherwise.&lt;/i&gt;  If this
+ column exists &lt;i&gt;and&lt;/i&gt; this element exists at the given row, this is the data that will be
+ used when forming the suggestion's query.
+*/
+SUGGEST_COLUMN_QUERY : &quot;suggest_intent_query&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_SHORTCUT_ID'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  This column is used to indicate whether
+</span> a search suggestion should be stored as a shortcut, and whether it should be refreshed.  If
+ missing, the result will be stored as a shortcut and never validated.  If set to
+ {@link #SUGGEST_NEVER_MAKE_SHORTCUT}, the result will not be stored as a shortcut.
+ Otherwise, the shortcut id will be used to check back for an up to date suggestion using
+ {@link #SUGGEST_URI_PATH_SHORTCUT}.
+*/
+SUGGEST_COLUMN_SHORTCUT_ID : &quot;suggest_shortcut_id&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_SPINNER_WHILE_REFRESHING'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt; This column is used to specify
+</span> that a spinner should be shown in lieu of an icon2 while the shortcut of this suggestion
+ is being refreshed.
+*/
+SUGGEST_COLUMN_SPINNER_WHILE_REFRESHING : &quot;suggest_spinner_while_refreshing&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_CONTENT_TYPE'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content is media type, you
+</span> should provide this column so search app could understand more about your content. The data
+ in the column must specify the MIME type of the content.
+*/
+SUGGEST_COLUMN_CONTENT_TYPE : &quot;suggest_content_type&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_IS_LIVE'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content is media type, you
+</span> should provide this column to specify whether your content is live media such as live video
+ or live audio. The value in the column is of integer type with value of either 0 indicating
+ non-live content or 1 indicating live content.
+*/
+SUGGEST_COLUMN_IS_LIVE : &quot;suggest_is_live&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_VIDEO_WIDTH'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content is video, you should
+</span> provide this column to specify the number of vertical lines. The data in the column is of
+ integer type.
+*/
+SUGGEST_COLUMN_VIDEO_WIDTH : &quot;suggest_video_width&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_VIDEO_HEIGHT'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content is video, you should
+</span> provide this column to specify the number of horizontal lines. The data in the column is of
+ integer type.
+*/
+SUGGEST_COLUMN_VIDEO_HEIGHT : &quot;suggest_video_height&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_AUDIO_CHANNEL_CONFIG'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content contains audio, you
+</span> should provide this column to specify the audio channel configuration. The data in the
+ column is string with format like &quot;channels.subchannels&quot; such as &quot;1.0&quot; or &quot;5.1&quot;.
+*/
+SUGGEST_COLUMN_AUDIO_CHANNEL_CONFIG : &quot;suggest_audio_channel_config&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_PURCHASE_PRICE'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content is purchasable, you
+</span> should provide this column to specify the displayable string representation of the purchase
+ price of your content including the currency and the amount. If it's free, you should
+ provide localized string to specify that it's free. This column can be omitted if the content
+ is not applicable to purchase.
+*/
+SUGGEST_COLUMN_PURCHASE_PRICE : &quot;suggest_purchase_price&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_RENTAL_PRICE'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content is rentable, you
+</span> should provide this column to specify the displayable string representation of the rental
+ price of your content including the currency and the amount. If it's free, you should
+ provide localized string to specify that it's free. This column can be omitted if the
+ content is not applicable to rent.
+*/
+SUGGEST_COLUMN_RENTAL_PRICE : &quot;suggest_rental_price&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_RATING_STYLE'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content has a rating, you
+</span> should provide this column to specify the rating style of your content. The data in the
+ column must be one of the constant values specified in {@link android.media.Rating}
+*/
+SUGGEST_COLUMN_RATING_STYLE : &quot;suggest_rating_style&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_RATING_SCORE'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content has a rating, you
+</span> should provide this column to specify the rating score of your content. The data in the
+ column is of float type. See {@link android.media.Rating} about valid rating scores for each
+ rating style.
+*/
+SUGGEST_COLUMN_RATING_SCORE : &quot;suggest_rating_score&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_PRODUCTION_YEAR'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content is video or audio and
+</span> has a known production year, you should provide this column to specify the production year
+ of your content. The data in the column is of integer type.
+*/
+SUGGEST_COLUMN_PRODUCTION_YEAR : &quot;suggest_production_year&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_DURATION'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt;  If your content is video or audio, you
+</span> should provide this column to specify the duration of your content in milliseconds. The data
+ in the column is of long type.
+*/
+SUGGEST_COLUMN_DURATION : &quot;suggest_duration&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_FLAGS'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt; This column is used to specify
+</span> additional flags per item. Multiple flags can be specified.
+ &lt;p&gt;
+ Must be one of {@link #FLAG_QUERY_REFINEMENT} or 0 to indicate no flags.
+ &lt;/p&gt;
+*/
+SUGGEST_COLUMN_FLAGS : &quot;suggest_flags&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_COLUMN_LAST_ACCESS_HINT'>/** Column name for suggestions cursor. &lt;i&gt;Optional.&lt;/i&gt; This column may be
+</span> used to specify the time in {@link System#currentTimeMillis
+ System.currentTImeMillis()} (wall time in UTC) when an item was last
+ accessed within the results-providing application. If set, this may be
+ used to show more-recently-used items first.
+*/
+SUGGEST_COLUMN_LAST_ACCESS_HINT : &quot;suggest_last_access_hint&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_NEVER_MAKE_SHORTCUT'>/** Column value for suggestion column {@link #SUGGEST_COLUMN_SHORTCUT_ID} when a suggestion
+</span> should not be stored as a shortcut in global search.
+*/
+SUGGEST_NEVER_MAKE_SHORTCUT : &quot;_-1&quot;,
+<span id='android-app-SearchManager-property-SUGGEST_PARAMETER_LIMIT'>/** Query parameter added to suggestion queries to limit the number of suggestions returned.
+</span> This limit is only advisory and suggestion providers may chose to ignore it.
+*/
+SUGGEST_PARAMETER_LIMIT : &quot;limit&quot;,
+<span id='android-app-SearchManager-property-INTENT_ACTION_GLOBAL_SEARCH'>/** Intent action for starting the global search activity.
+</span> The global search provider should handle this intent.
+
+ Supported extra data keys: {@link #QUERY},
+ {@link #EXTRA_SELECT_QUERY},
+ {@link #APP_DATA}.
+*/
+INTENT_ACTION_GLOBAL_SEARCH : &quot;android.search.action.GLOBAL_SEARCH&quot;,
+<span id='android-app-SearchManager-property-INTENT_ACTION_SEARCH_SETTINGS'>/** Intent action for starting the global search settings activity.
+</span> The global search provider should handle this intent.
+*/
+INTENT_ACTION_SEARCH_SETTINGS : &quot;android.search.action.SEARCH_SETTINGS&quot;,
+<span id='android-app-SearchManager-property-INTENT_ACTION_WEB_SEARCH_SETTINGS'>/** Intent action for starting a web search provider's settings activity.
+</span> Web search providers should handle this intent if they have provider-specific
+ settings to implement.
+*/
+INTENT_ACTION_WEB_SEARCH_SETTINGS : &quot;android.search.action.WEB_SEARCH_SETTINGS&quot;,
+<span id='android-app-SearchManager-property-INTENT_ACTION_SEARCHABLES_CHANGED'>/** Intent action broadcasted to inform that the searchables list or default have changed.
+</span> Components should handle this intent if they cache any searchable data and wish to stay
+ up to date on changes.
+*/
+INTENT_ACTION_SEARCHABLES_CHANGED : &quot;android.search.action.SEARCHABLES_CHANGED&quot;,
+<span id='android-app-SearchManager-property-INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED'>/** Intent action to be broadcast to inform that the global search provider
+</span> has changed.
+*/
+INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED : &quot;android.search.action.GLOBAL_SEARCH_ACTIVITY_CHANGED&quot;,
+<span id='android-app-SearchManager-property-INTENT_ACTION_SEARCH_SETTINGS_CHANGED'>/** Intent action broadcasted to inform that the search settings have changed in some way.
+</span> Either searchables have been enabled or disabled, or a different web search provider
+ has been chosen.
+*/
+INTENT_ACTION_SEARCH_SETTINGS_CHANGED : &quot;android.search.action.SETTINGS_CHANGED&quot;,
+<span id='android-app-SearchManager-property-CONTEXT_IS_VOICE'>/** This means that context is voice, and therefore the SearchDialog should
+</span> continue showing the microphone until the user indicates that he/she does
+ not want to re-speak (e.g. by typing).
+
+ @hide
+*/
+CONTEXT_IS_VOICE : &quot;android.search.CONTEXT_IS_VOICE&quot;,
+<span id='android-app-SearchManager-property-DISABLE_VOICE_SEARCH'>/** This means that the voice icon should not be shown at all, because the
+</span> current search engine does not support voice search.
+ @hide
+*/
+DISABLE_VOICE_SEARCH : &quot;android.search.DISABLE_VOICE_SEARCH&quot;,
+<span id='android-app-SearchManager-method-startSearch'>/**Launch search UI.
+</span>
+ &lt;p&gt;The search manager will open a search widget in an overlapping
+ window, and the underlying activity may be obscured.  The search
+ entry state will remain in effect until one of the following events:
+ &lt;ul&gt;
+ &lt;li&gt;The user completes the search.  In most cases this will launch
+ a search intent.&lt;/li&gt;
+ &lt;li&gt;The user uses the back, home, or other keys to exit the search.&lt;/li&gt;
+ &lt;li&gt;The application calls the {@link #stopSearch}
+ method, which will hide the search window and return focus to the
+ activity from which it was launched.&lt;/li&gt;
+
+ &lt;p&gt;Most applications will &lt;i&gt;not&lt;/i&gt; use this interface to invoke search.
+ The primary method for invoking search is to call
+ {@link android.app.Activity#onSearchRequested Activity.onSearchRequested()} or
+ {@link android.app.Activity#startSearch Activity.startSearch()}.
+@param {String} initialQuery A search string can be pre-entered here, but this
+ is typically null or empty.
+@param {Boolean} selectInitialQuery If true, the initial query will be preselected, which means that
+ any further typing will replace it.  This is useful for cases where an entire pre-formed
+ query is being inserted.  If false, the selection point will be placed at the end of the
+ inserted query.  This is useful when the inserted query is text that the user entered,
+ and the user would expect to be able to keep typing.  &lt;i&gt;This parameter is only meaningful
+ if initialQuery is a non-empty string.&lt;/i&gt;
+@param {Object {ComponentName}} launchActivity The ComponentName of the activity that has launched this search.
+@param {Object {Bundle}} appSearchData An application can insert application-specific
+ context here, in order to improve quality or specificity of its own
+ searches.  This data will be returned with SEARCH intent(s).  Null if
+ no extra data is required.
+@param {Boolean} globalSearch If false, this will only launch the search that has been specifically
+ defined by the application (which is usually defined as a local search).  If no default
+ search is defined in the current application or activity, global search will be launched.
+ If true, this will always launch a platform-global (e.g. web-based) search instead.
+@see android.app.Activity#onSearchRequested
+@see #stopSearch
+*/
+startSearch : function(  ) {},
+
+<span id='android-app-SearchManager-method-startSearch'>/**As {@link #startSearch(String, boolean, ComponentName, Bundle, boolean)} but including
+</span> source bounds for the global search intent.
+@hide 
+*/
+startSearch : function(  ) {},
+
+<span id='android-app-SearchManager-method-getGlobalSearchActivities'>/**Returns a list of installed apps that handle the global search
+</span> intent.
+@hide 
+*/
+getGlobalSearchActivities : function(  ) {},
+
+<span id='android-app-SearchManager-method-getGlobalSearchActivity'>/**Gets the name of the global search activity.
+</span>*/
+getGlobalSearchActivity : function(  ) {},
+
+<span id='android-app-SearchManager-method-getWebSearchActivity'>/**Gets the name of the web search activity.
+</span>@return {Object {android.content.ComponentName}} The name of the default activity for web searches. This activity
+         can be used to get web search suggestions. Returns {@code null} if
+         there is no default web search activity.
+@hide 
+*/
+getWebSearchActivity : function(  ) {},
+
+<span id='android-app-SearchManager-method-triggerSearch'>/**Similar to {@link #startSearch} but actually fires off the search query after invoking
+</span> the search dialog.  Made available for testing purposes.
+@param {String} query The query to trigger.  If empty, request will be ignored.
+@param {Object {ComponentName}} launchActivity The ComponentName of the activity that has launched this search.
+@param {Object {Bundle}} appSearchData An application can insert application-specific
+ context here, in order to improve quality or specificity of its own
+ searches.  This data will be returned with SEARCH intent(s).  Null if
+ no extra data is required.
+@see #startSearch
+*/
+triggerSearch : function(  ) {},
+
+<span id='android-app-SearchManager-method-stopSearch'>/**Terminate search UI.
+</span>
+ &lt;p&gt;Typically the user will terminate the search UI by launching a
+ search or by canceling.  This function allows the underlying application
+ or activity to cancel the search prematurely (for any reason).
+
+ &lt;p&gt;This function can be safely called at any time (even if no search is active.)
+
+ &lt;p&gt;{@link Configuration#UI_MODE_TYPE_TELEVISION} does not support this method.
+@see #startSearch
+*/
+stopSearch : function(  ) {},
+
+<span id='android-app-SearchManager-method-isVisible'>/**Determine if the Search UI is currently displayed.
+</span>
+ This is provided primarily for application test purposes.
+@return {Boolean} Returns true if the search UI is currently displayed.
+@hide 
+*/
+isVisible : function(  ) {},
+
+<span id='android-app-SearchManager-method-setOnDismissListener'>/**Set or clear the callback that will be invoked whenever the search UI is dismissed.
+</span>
+ &lt;p&gt;{@link Configuration#UI_MODE_TYPE_TELEVISION} does not support this method.
+@param {Object {SearchManager.OnDismissListener}} listener The {@link OnDismissListener} to use, or null.
+*/
+setOnDismissListener : function(  ) {},
+
+<span id='android-app-SearchManager-method-setOnCancelListener'>/**Set or clear the callback that will be invoked whenever the search UI is canceled.
+</span>
+ &lt;p&gt;{@link Configuration#UI_MODE_TYPE_TELEVISION} does not support this method.
+@param {Object {SearchManager.OnCancelListener}} listener The {@link OnCancelListener} to use, or null.
+*/
+setOnCancelListener : function(  ) {},
+
+<span id='android-app-SearchManager-method-onCancel'>/**
+</span>@deprecated This method is an obsolete internal implementation detail. Do not use.
+*/
+onCancel : function(  ) {},
+
+<span id='android-app-SearchManager-method-onDismiss'>/**
+</span>@deprecated This method is an obsolete internal implementation detail. Do not use.
+*/
+onDismiss : function(  ) {},
+
+<span id='android-app-SearchManager-method-getSearchableInfo'>/**Gets information about a searchable activity.
+</span>@param {Object {ComponentName}} componentName The activity to get searchable information for.
+@return {Object {android.app.SearchableInfo}} Searchable information, or &lt;code&gt;null&lt;/code&gt; if the activity does not
+         exist, or is not searchable.
+*/
+getSearchableInfo : function(  ) {},
+
+<span id='android-app-SearchManager-method-getSuggestions'>/**Gets a cursor with search suggestions.
+</span>@param {Object {SearchableInfo}} searchable Information about how to get the suggestions.
+@param {String} query The search text entered (so far).
+@return {Object {android.database.Cursor}} a cursor with suggestions, or &lt;code&gt;null&lt;/null&gt; the suggestion query failed.
+@hide because SearchableInfo is not part of the API.
+*/
+getSuggestions : function(  ) {},
+
+<span id='android-app-SearchManager-method-getSuggestions'>/**Gets a cursor with search suggestions.
+</span>@param {Object {SearchableInfo}} searchable Information about how to get the suggestions.
+@param {String} query The search text entered (so far).
+@param {Number} limit The query limit to pass to the suggestion provider. This is advisory,
+        the returned cursor may contain more rows. Pass {@code -1} for no limit.
+@return {Object {android.database.Cursor}} a cursor with suggestions, or &lt;code&gt;null&lt;/null&gt; the suggestion query failed.
+@hide because SearchableInfo is not part of the API.
+*/
+getSuggestions : function(  ) {},
+
+<span id='android-app-SearchManager-method-getSearchablesInGlobalSearch'>/**Returns a list of the searchable activities that can be included in global search.
+</span>@return {Object {java.util.List}} a list containing searchable information for all searchable activities
+         that have the &lt;code&gt;android:includeInGlobalSearch&lt;/code&gt; attribute set
+         in their searchable meta-data.
+*/
+getSearchablesInGlobalSearch : function(  ) {},
+
+<span id='android-app-SearchManager-method-getAssistIntent'>/**Gets an intent for launching installed assistant activity, or null if not available.
+</span>@return {Object {android.content.Intent}} The assist intent.
+@hide 
+*/
+getAssistIntent : function(  ) {},
+
+<span id='android-app-SearchManager-method-launchAssist'>/**Starts the assistant.
+</span>@param {Object {Bundle}} args the args to pass to the assistant
+@hide 
+*/
+launchAssist : function(  ) {},
+
+<span id='android-app-SearchManager-method-launchLegacyAssist'>/**Starts the legacy assistant (i.e. the {@link Intent#ACTION_ASSIST}).
+</span>@param {String} args the args to pass to the assistant
+@hide 
+*/
+launchLegacyAssist : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

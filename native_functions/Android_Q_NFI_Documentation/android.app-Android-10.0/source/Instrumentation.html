@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-Instrumentation'>/**@class android.app.Instrumentation
+</span>@extends java.lang.Object
+
+ Base class for implementing application instrumentation code.  When running
+ with instrumentation turned on, this class will be instantiated for you
+ before any of the application code, allowing you to monitor all of the
+ interaction the system has with the application.  An Instrumentation
+ implementation is described to the system through an AndroidManifest.xml's
+ &amp;lt;instrumentation&amp;gt; tag.
+*/
+var Instrumentation = {
+
+<span id='android-app-Instrumentation-property-REPORT_KEY_IDENTIFIER'>/** If included in the status or final bundle sent to an IInstrumentationWatcher, this key 
+</span> identifies the class that is writing the report.  This can be used to provide more structured
+ logging or reporting capabilities in the IInstrumentationWatcher.
+*/
+REPORT_KEY_IDENTIFIER : &quot;id&quot;,
+<span id='android-app-Instrumentation-property-REPORT_KEY_STREAMRESULT'>/** If included in the status or final bundle sent to an IInstrumentationWatcher, this key 
+</span> identifies a string which can simply be printed to the output stream.  Using these streams
+ provides a &quot;pretty printer&quot; version of the status &amp; final packets.  Any bundles including 
+ this key should also include the complete set of raw key/value pairs, so that the
+ instrumentation can also be launched, and results collected, by an automated system.
+*/
+REPORT_KEY_STREAMRESULT : &quot;stream&quot;,
+<span id='android-app-Instrumentation-method-onCreate'>/**Called when the instrumentation is starting, before any application code
+</span> has been loaded.  Usually this will be implemented to simply call
+ {@link #start} to begin the instrumentation thread, which will then
+ continue execution in {@link #onStart}.
+ 
+ &lt;p&gt;If you do not need your own thread -- that is you are writing your
+ instrumentation to be completely asynchronous (returning to the event
+ loop so that the application can run), you can simply begin your
+ instrumentation here, for example call {@link Context#startActivity} to
+ begin the appropriate first activity of the application.
+@param {Object {Bundle}} arguments Any additional arguments that were supplied when the 
+                  instrumentation was started.
+*/
+onCreate : function(  ) {},
+
+<span id='android-app-Instrumentation-method-start'>/**Create and start a new thread in which to run instrumentation.  This new
+</span> thread will call to {@link #onStart} where you can implement the
+ instrumentation.
+*/
+start : function(  ) {},
+
+<span id='android-app-Instrumentation-method-onStart'>/**Method where the instrumentation thread enters execution.  This allows
+</span> you to run your instrumentation code in a separate thread than the
+ application, so that it can perform blocking operation such as
+ {@link #sendKeySync} or {@link #startActivitySync}.
+ 
+ &lt;p&gt;You will typically want to call finish() when this function is done,
+ to end your instrumentation.
+*/
+onStart : function(  ) {},
+
+<span id='android-app-Instrumentation-method-onException'>/**This is called whenever the system captures an unhandled exception that
+</span> was thrown by the application.  The default implementation simply
+ returns false, allowing normal system handling of the exception to take
+ place.
+@param {Object {Object}} obj The client object that generated the exception.  May be an
+            Application, Activity, BroadcastReceiver, Service, or null.
+@param {Object {Throwable}} e The exception that was thrown.
+@return {Boolean} To allow normal system exception process to occur, return false.
+         If true is returned, the system will proceed as if the exception
+         didn't happen.
+*/
+onException : function(  ) {},
+
+<span id='android-app-Instrumentation-method-sendStatus'>/**Provide a status report about the application.
+</span>@param {Number} resultCode Current success/failure of instrumentation.
+@param {Object {Bundle}} results Any results to send back to the code that started the instrumentation.
+*/
+sendStatus : function(  ) {},
+
+<span id='android-app-Instrumentation-method-addResults'>/**Report some results in the middle of instrumentation execution.  Later results (including
+</span> those provided by {@link #finish}) will be combined with {@link Bundle#putAll}.
+*/
+addResults : function(  ) {},
+
+<span id='android-app-Instrumentation-method-finish'>/**Terminate instrumentation of the application.  This will cause the
+</span> application process to exit, removing this instrumentation from the next
+ time the application is started.  If multiple processes are currently running
+ for this instrumentation, all of those processes will be killed.
+@param {Number} resultCode Overall success/failure of instrumentation.
+@param {Object {Bundle}} results Any results to send back to the code that started the 
+                instrumentation.
+*/
+finish : function(  ) {},
+
+<span id='android-app-Instrumentation-method-setAutomaticPerformanceSnapshots'>/**
+</span>*/
+setAutomaticPerformanceSnapshots : function(  ) {},
+
+<span id='android-app-Instrumentation-method-startPerformanceSnapshot'>/**
+</span>*/
+startPerformanceSnapshot : function(  ) {},
+
+<span id='android-app-Instrumentation-method-endPerformanceSnapshot'>/**
+</span>*/
+endPerformanceSnapshot : function(  ) {},
+
+<span id='android-app-Instrumentation-method-onDestroy'>/**Called when the instrumented application is stopping, after all of the
+</span> normal application cleanup has occurred.
+*/
+onDestroy : function(  ) {},
+
+<span id='android-app-Instrumentation-method-getContext'>/**Return the Context of this instrumentation's package.  Note that this is
+</span> often different than the Context of the application being
+ instrumentated, since the instrumentation code often lives is a
+ different package than that of the application it is running against.
+ See {@link #getTargetContext} to retrieve a Context for the target
+ application.
+@return {Object {android.content.Context}} The instrumentation's package context.
+@see #getTargetContext
+*/
+getContext : function(  ) {},
+
+<span id='android-app-Instrumentation-method-getComponentName'>/**Returns complete component name of this instrumentation.
+</span>@return {Object {android.content.ComponentName}} Returns the complete component name for this instrumentation.
+*/
+getComponentName : function(  ) {},
+
+<span id='android-app-Instrumentation-method-getTargetContext'>/**Return a Context for the target application being instrumented.  Note
+</span> that this is often different than the Context of the instrumentation
+ code, since the instrumentation code often lives is a different package
+ than that of the application it is running against. See
+ {@link #getContext} to retrieve a Context for the instrumentation code.
+@return {Object {android.content.Context}} A Context in the target application.
+@see #getContext
+*/
+getTargetContext : function(  ) {},
+
+<span id='android-app-Instrumentation-method-getProcessName'>/**Return the name of the process this instrumentation is running in.  Note this should
+</span> only be used for testing and debugging.  If you are thinking about using this to,
+ for example, conditionalize what is initialized in an Application class, it is strongly
+ recommended to instead use lazy initialization (such as a getter for the state that
+ only creates it when requested).  This can greatly reduce the work your process does
+ when created for secondary things, such as to receive a broadcast.
+*/
+getProcessName : function(  ) {},
+
+<span id='android-app-Instrumentation-method-isProfiling'>/**Check whether this instrumentation was started with profiling enabled.
+</span>@return {Boolean} Returns true if profiling was enabled when starting, else false.
+*/
+isProfiling : function(  ) {},
+
+<span id='android-app-Instrumentation-method-startProfiling'>/**This method will start profiling if isProfiling() returns true. You should
+</span> only call this method if you set the handleProfiling attribute in the 
+ manifest file for this Instrumentation to true.
+*/
+startProfiling : function(  ) {},
+
+<span id='android-app-Instrumentation-method-stopProfiling'>/**Stops profiling if isProfiling() returns true.
+</span>*/
+stopProfiling : function(  ) {},
+
+<span id='android-app-Instrumentation-method-setInTouchMode'>/**Force the global system in or out of touch mode.  This can be used if
+</span> your instrumentation relies on the UI being in one more or the other
+ when it starts.
+@param {Boolean} inTouch Set to true to be in touch mode, false to be in
+ focus mode.
+*/
+setInTouchMode : function(  ) {},
+
+<span id='android-app-Instrumentation-method-waitForIdle'>/**Schedule a callback for when the application's main thread goes idle
+</span> (has no more events to process).
+@param {Object {Runnable}} recipient Called the next time the thread's message queue is
+                  idle.
+*/
+waitForIdle : function(  ) {},
+
+<span id='android-app-Instrumentation-method-waitForIdleSync'>/**Synchronously wait for the application to be idle.  Can not be called
+</span> from the main application thread -- use {@link #start} to execute
+ instrumentation in its own thread.
+*/
+waitForIdleSync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-onEnterAnimationComplete'>/**
+</span>@hide 
+*/
+onEnterAnimationComplete : function(  ) {},
+
+<span id='android-app-Instrumentation-method-runOnMainSync'>/**Execute a call on the application's main thread, blocking until it is
+</span> complete.  Useful for doing things that are not thread-safe, such as
+ looking at or modifying the view hierarchy.
+@param {Object {Runnable}} runner The code to run on the main thread.
+*/
+runOnMainSync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-startActivitySync'>/**Start a new activity and wait for it to begin running before returning.
+</span> In addition to being synchronous, this method as some semantic
+ differences from the standard {@link Context#startActivity} call: the
+ activity component is resolved before talking with the activity manager
+ (its class name is specified in the Intent that this method ultimately
+ starts), and it does not allow you to start activities that run in a
+ different process.  In addition, if the given Intent resolves to
+ multiple activities, instead of displaying a dialog for the user to
+ select an activity, an exception will be thrown.
+
+ &lt;p&gt;The function returns as soon as the activity goes idle following the
+ call to its {@link android.app.Activity#onCreate}.  Generally this means it has gone
+ through the full initialization including {@link android.app.Activity#onResume} and
+ drawn and displayed its initial window.
+@param {Object {Intent}} intent Description of the activity to start.
+@see Context#startActivity
+@see #startActivitySync(Intent, Bundle)
+*/
+startActivitySync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-startActivitySync'>/**Start a new activity and wait for it to begin running before returning.
+</span> In addition to being synchronous, this method as some semantic
+ differences from the standard {@link Context#startActivity} call: the
+ activity component is resolved before talking with the activity manager
+ (its class name is specified in the Intent that this method ultimately
+ starts), and it does not allow you to start activities that run in a
+ different process.  In addition, if the given Intent resolves to
+ multiple activities, instead of displaying a dialog for the user to
+ select an activity, an exception will be thrown.
+
+ &lt;p&gt;The function returns as soon as the activity goes idle following the
+ call to its {@link android.app.Activity#onCreate}.  Generally this means it has gone
+ through the full initialization including {@link android.app.Activity#onResume} and
+ drawn and displayed its initial window.
+@param {Object {Intent}} intent Description of the activity to start.
+@param {Object {Bundle}} options Additional options for how the Activity should be started.
+ May be null if there are no options.  See {@link android.app.ActivityOptions}
+ for how to build the Bundle supplied here; there are no supported definitions
+ for building it manually.
+@see Context#startActivity(Intent, Bundle)
+*/
+startActivitySync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-addMonitor'>/**Add a new {@link android.app.ActivityMonitor} that will be checked whenever an 
+</span> activity is started.  The monitor is added 
+ after any existing ones; the monitor will be hit only if none of the 
+ existing monitors can themselves handle the Intent.
+@param {Object {Instrumentation.ActivityMonitor}} monitor The new ActivityMonitor to see.
+@see #addMonitor(IntentFilter, ActivityResult, boolean)
+@see #checkMonitorHit
+*/
+addMonitor : function(  ) {},
+
+<span id='android-app-Instrumentation-method-addMonitor'>/**A convenience wrapper for {@link #addMonitor}(ActivityMonitor) that 
+</span> creates an intent filter matching {@link android.app.ActivityMonitor} for you and 
+ returns it.
+@param {Object {IntentFilter}} filter The set of intents this monitor is responsible for.
+@param {Object {Instrumentation.ActivityResult}} result A canned result to return if the monitor is hit; can 
+               be null.
+@param {Boolean} block Controls whether the monitor should block the activity 
+              start (returning its canned result) or let the call
+              proceed.
+@return {Object {android.app.Instrumentation.ActivityMonitor}} The newly created and added activity monitor.
+@see #addMonitor(ActivityMonitor)
+@see #checkMonitorHit
+*/
+addMonitor : function(  ) {},
+
+<span id='android-app-Instrumentation-method-addMonitor'>/**A convenience wrapper for {@link #addMonitor}(ActivityMonitor) that 
+</span> creates a class matching {@link android.app.ActivityMonitor} for you and returns it.
+@param {String} cls The activity class this monitor is responsible for.
+@param {Object {Instrumentation.ActivityResult}} result A canned result to return if the monitor is hit; can 
+               be null.
+@param {Boolean} block Controls whether the monitor should block the activity 
+              start (returning its canned result) or let the call
+              proceed.
+@return {Object {android.app.Instrumentation.ActivityMonitor}} The newly created and added activity monitor.
+@see #addMonitor(ActivityMonitor)
+@see #checkMonitorHit
+*/
+addMonitor : function(  ) {},
+
+<span id='android-app-Instrumentation-method-checkMonitorHit'>/**Test whether an existing {@link android.app.ActivityMonitor} has been hit.  If the 
+</span> monitor has been hit at least &lt;var&gt;minHits&lt;/var&gt; times, then it will be 
+ removed from the activity monitor list and true returned.  Otherwise it 
+ is left as-is and false is returned.
+@param {Object {Instrumentation.ActivityMonitor}} monitor The ActivityMonitor to check.
+@param {Number} minHits The minimum number of hits required.
+@return {Boolean} True if the hit count has been reached, else false.
+@see #addMonitor
+*/
+checkMonitorHit : function(  ) {},
+
+<span id='android-app-Instrumentation-method-waitForMonitor'>/**Wait for an existing {@link android.app.ActivityMonitor} to be hit.  Once the 
+</span> monitor has been hit, it is removed from the activity monitor list and 
+ the first created Activity object that matched it is returned.
+@param {Object {Instrumentation.ActivityMonitor}} monitor The ActivityMonitor to wait for.
+@return {Object {android.app.Activity}} The Activity object that matched the monitor.
+*/
+waitForMonitor : function(  ) {},
+
+<span id='android-app-Instrumentation-method-waitForMonitorWithTimeout'>/**Wait for an existing {@link android.app.ActivityMonitor} to be hit till the timeout
+</span> expires.  Once the monitor has been hit, it is removed from the activity 
+ monitor list and the first created Activity object that matched it is 
+ returned.  If the timeout expires, a null object is returned.
+@param {Object {Instrumentation.ActivityMonitor}} monitor The ActivityMonitor to wait for.
+@param {Number} timeOut The timeout value in milliseconds.
+@return {Object {android.app.Activity}} The Activity object that matched the monitor.
+*/
+waitForMonitorWithTimeout : function(  ) {},
+
+<span id='android-app-Instrumentation-method-removeMonitor'>/**Remove an {@link android.app.ActivityMonitor} that was previously added with 
+</span> {@link #addMonitor}.
+@param {Object {Instrumentation.ActivityMonitor}} monitor The monitor to remove.
+@see #addMonitor
+*/
+removeMonitor : function(  ) {},
+
+<span id='android-app-Instrumentation-method-invokeMenuActionSync'>/**Execute a particular menu item.
+</span>@param {Object {Activity}} targetActivity The activity in question.
+@param {Number} id The identifier associated with the menu item.
+@param {Number} flag Additional flags, if any.
+@return {Boolean} Whether the invocation was successful (for example, it could be
+         false if item is disabled).
+*/
+invokeMenuActionSync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-invokeContextMenuAction'>/**Show the context menu for the currently focused view and executes a
+</span> particular context menu item.
+@param {Object {Activity}} targetActivity The activity in question.
+@param {Number} id The identifier associated with the context menu item.
+@param {Number} flag Additional flags, if any.
+@return {Boolean} Whether the invocation was successful (for example, it could be
+         false if item is disabled).
+*/
+invokeContextMenuAction : function(  ) {},
+
+<span id='android-app-Instrumentation-method-sendStringSync'>/**Sends the key events corresponding to the text to the app being
+</span> instrumented.
+@param {String} text The text to be sent.
+*/
+sendStringSync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-sendKeySync'>/**Send a key event to the currently focused window/view and wait for it to
+</span> be processed.  Finished at some point after the recipient has returned
+ from its event processing, though it may &lt;em&gt;not&lt;/em&gt; have completely
+ finished reacting from the event -- for example, if it needs to update
+ its display as a result, it may still be in the process of doing that.
+@param {Object {KeyEvent}} event The event to send to the current focus.
+*/
+sendKeySync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-sendKeyDownUpSync'>/**Sends an up and down key event sync to the currently focused window.
+</span>@param {Number} key The integer keycode for the event.
+*/
+sendKeyDownUpSync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-sendCharacterSync'>/**Higher-level method for sending both the down and up key events for a
+</span> particular character key code.  Equivalent to creating both KeyEvent
+ objects by hand and calling {@link #sendKeySync}.  The event appears
+ as if it came from keyboard 0, the built in one.
+@param {Number} keyCode The key code of the character to send.
+*/
+sendCharacterSync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-sendPointerSync'>/**Dispatch a pointer event. Finished at some point after the recipient has
+</span> returned from its event processing, though it may &lt;em&gt;not&lt;/em&gt; have
+ completely finished reacting from the event -- for example, if it needs
+ to update its display as a result, it may still be in the process of
+ doing that.
+@param {Object {MotionEvent}} event A motion event describing the pointer action.  (As noted in 
+ {@link MotionEvent#obtain(long, long, int, float, float, int)}, be sure to use 
+ {@link SystemClock#uptimeMillis()} as the timebase.
+*/
+sendPointerSync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-sendTrackballEventSync'>/**Dispatch a trackball event. Finished at some point after the recipient has
+</span> returned from its event processing, though it may &lt;em&gt;not&lt;/em&gt; have
+ completely finished reacting from the event -- for example, if it needs
+ to update its display as a result, it may still be in the process of
+ doing that.
+@param {Object {MotionEvent}} event A motion event describing the trackball action.  (As noted in 
+ {@link MotionEvent#obtain(long, long, int, float, float, int)}, be sure to use 
+ {@link SystemClock#uptimeMillis()} as the timebase.
+*/
+sendTrackballEventSync : function(  ) {},
+
+<span id='android-app-Instrumentation-method-newApplication'>/**Perform instantiation of the process's {@link android.app.Application} object.  The
+</span> default implementation provides the normal system behavior.
+@param {Object {ClassLoader}} cl The ClassLoader with which to instantiate the object.
+@param {String} className The name of the class implementing the Application
+                  object.
+@param {Object {Context}} context The context to initialize the application with
+@return {Object {android.app.Application}} The newly instantiated Application object.
+*/
+newApplication : function(  ) {},
+
+<span id='android-app-Instrumentation-method-newApplication'>/**Perform instantiation of the process's {@link android.app.Application} object.  The
+</span> default implementation provides the normal system behavior.
+@param {Object {java.lang.Class}} clazz The class used to create an Application object from.
+@param {Object {Context}} context The context to initialize the application with
+@return {Object {android.app.Application}} The newly instantiated Application object.
+*/
+newApplication : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callApplicationOnCreate'>/**Perform calling of the application's {@link android.app.Application#onCreate}
+</span> method.  The default implementation simply calls through to that method.
+
+ &lt;p&gt;Note: This method will be called immediately after {@link #onCreate}(Bundle).
+ Often instrumentation tests start their test thread in onCreate(); you
+ need to be careful of races between these.  (Well between it and
+ everything else, but let's start here.)
+@param {Object {Application}} app The application being created.
+*/
+callApplicationOnCreate : function(  ) {},
+
+<span id='android-app-Instrumentation-method-newActivity'>/**Perform instantiation of an {@link android.app.Activity} object.  This method is intended for use with
+</span> unit tests, such as android.test.ActivityUnitTestCase.  The activity will be useable
+ locally but will be missing some of the linkages necessary for use within the system.
+@param {Object {java.lang.Class}} clazz The Class of the desired Activity
+@param {Object {Context}} context The base context for the activity to use
+@param {Object {IBinder}} token The token for this activity to communicate with
+@param {Object {Application}} application The application object (if any)
+@param {Object {Intent}} intent The intent that started this Activity
+@param {Object {ActivityInfo}} info ActivityInfo from the manifest
+@param {Object {CharSequence}} title The title, typically retrieved from the ActivityInfo record
+@param {Object {Activity}} parent The parent Activity (if any)
+@param {String} id The embedded Id (if any)
+@param {Object {Object}} lastNonConfigurationInstance Arbitrary object that will be
+ available via {@link Activity#getLastNonConfigurationInstance()
+ Activity.getLastNonConfigurationInstance()}.
+@return {Object {android.app.Activity}} Returns the instantiated activity
+@throws InstantiationException
+@throws IllegalAccessException
+*/
+newActivity : function(  ) {},
+
+<span id='android-app-Instrumentation-method-newActivity'>/**Perform instantiation of the process's {@link android.app.Activity} object.  The
+</span> default implementation provides the normal system behavior.
+@param {Object {ClassLoader}} cl The ClassLoader with which to instantiate the object.
+@param {String} className The name of the class implementing the Activity
+                  object.
+@param {Object {Intent}} intent The Intent object that specified the activity class being
+               instantiated.
+@return {Object {android.app.Activity}} The newly instantiated Activity object.
+*/
+newActivity : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnCreate'>/**Perform calling of an activity's {@link android.app.Activity#onCreate}
+</span> method.  The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being created.
+@param {Object {Bundle}} icicle The previously frozen state (or null) to pass through to onCreate().
+*/
+callActivityOnCreate : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnCreate'>/**Perform calling of an activity's {@link android.app.Activity#onCreate}
+</span> method.  The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being created.
+@param {Object {Bundle}} icicle The previously frozen state (or null) to pass through to
+@param {Object {PersistableBundle}} persistentState The previously persisted state (or null)
+*/
+callActivityOnCreate : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnDestroy'>/**
+</span>*/
+callActivityOnDestroy : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnRestoreInstanceState'>/**Perform calling of an activity's {@link android.app.Activity#onRestoreInstanceState}
+</span> method.  The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being restored.
+@param {Object {Bundle}} savedInstanceState The previously saved state being restored.
+*/
+callActivityOnRestoreInstanceState : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnRestoreInstanceState'>/**Perform calling of an activity's {@link android.app.Activity#onRestoreInstanceState}
+</span> method.  The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being restored.
+@param {Object {Bundle}} savedInstanceState The previously saved state being restored (or null).
+@param {Object {PersistableBundle}} persistentState The previously persisted state (or null)
+*/
+callActivityOnRestoreInstanceState : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnPostCreate'>/**Perform calling of an activity's {@link android.app.Activity#onPostCreate} method.
+</span> The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being created.
+@param {Object {Bundle}} savedInstanceState The previously saved state (or null) to pass through to
+               onPostCreate().
+*/
+callActivityOnPostCreate : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnPostCreate'>/**Perform calling of an activity's {@link android.app.Activity#onPostCreate} method.
+</span> The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being created.
+@param {Object {Bundle}} savedInstanceState The previously frozen state (or null) to pass through to
+               onPostCreate().
+@param {Object {PersistableBundle}} persistentState The previously persisted state (or null)
+*/
+callActivityOnPostCreate : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnNewIntent'>/**Perform calling of an activity's {@link android.app.Activity#onNewIntent}
+</span> method.  The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity receiving a new Intent.
+@param {Object {Intent}} intent The new intent being received.
+*/
+callActivityOnNewIntent : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnNewIntent'>/**
+</span>@hide 
+*/
+callActivityOnNewIntent : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnStart'>/**Perform calling of an activity's {@link android.app.Activity#onStart}
+</span> method.  The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being started.
+*/
+callActivityOnStart : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnRestart'>/**Perform calling of an activity's {@link android.app.Activity#onRestart}
+</span> method.  The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being restarted.
+*/
+callActivityOnRestart : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnResume'>/**Perform calling of an activity's {@link android.app.Activity#onResume} method.  The
+</span> default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being resumed.
+*/
+callActivityOnResume : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnStop'>/**Perform calling of an activity's {@link android.app.Activity#onStop}
+</span> method.  The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being stopped.
+*/
+callActivityOnStop : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnSaveInstanceState'>/**Perform calling of an activity's {@link android.app.Activity#onSaveInstanceState}
+</span> method.  The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being saved.
+@param {Object {Bundle}} outState The bundle to pass to the call.
+*/
+callActivityOnSaveInstanceState : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnSaveInstanceState'>/**Perform calling of an activity's {@link android.app.Activity#onSaveInstanceState}
+</span> method.  The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being saved.
+@param {Object {Bundle}} outState The bundle to pass to the call.
+@param {Object {PersistableBundle}} outPersistentState The persistent bundle to pass to the call.
+*/
+callActivityOnSaveInstanceState : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnPause'>/**Perform calling of an activity's {@link android.app.Activity#onPause} method.  The
+</span> default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being paused.
+*/
+callActivityOnPause : function(  ) {},
+
+<span id='android-app-Instrumentation-method-callActivityOnUserLeaving'>/**Perform calling of an activity's {@link android.app.Activity#onUserLeaveHint} method.
+</span> The default implementation simply calls through to that method.
+@param {Object {Activity}} activity The activity being notified that the user has navigated away
+*/
+callActivityOnUserLeaving : function(  ) {},
+
+<span id='android-app-Instrumentation-method-startAllocCounting'>/**
+</span>*/
+startAllocCounting : function(  ) {},
+
+<span id='android-app-Instrumentation-method-stopAllocCounting'>/**
+</span>*/
+stopAllocCounting : function(  ) {},
+
+<span id='android-app-Instrumentation-method-getAllocCounts'>/**Returns a bundle with the current results from the allocation counting.
+</span>*/
+getAllocCounts : function(  ) {},
+
+<span id='android-app-Instrumentation-method-getBinderCounts'>/**Returns a bundle with the counts for various binder counts for this process. Currently the only two that are
+</span> reported are the number of send and the number of received transactions.
+*/
+getBinderCounts : function(  ) {},
+
+<span id='android-app-Instrumentation-method-execStartActivity'>/**Execute a startActivity call made by the application.  The default 
+</span> implementation takes care of updating any active {@link android.app.ActivityMonitor}
+ objects and dispatches this call to the system activity manager; you can
+ override this to watch for the application to start an activity, and 
+ modify what happens when it does. 
+
+ &lt;p&gt;This method returns an {@link android.app.ActivityResult} object, which you can 
+ use when intercepting application calls to avoid performing the start 
+ activity action but still return the result the application is 
+ expecting.  To do this, override this method to catch the call to start 
+ activity so that it returns a new ActivityResult containing the results 
+ you would like the application to see, and don't call up to the super 
+ class.  Note that an application is only expecting a result if 
+ &lt;var&gt;requestCode&lt;/var&gt; is &amp;gt;= 0.
+
+ &lt;p&gt;This method throws {@link android.content.ActivityNotFoundException}
+ if there was no Activity found to run the given Intent.
+@param {Object {Context}} who The Context from which the activity is being started.
+@param {Object {IBinder}} contextThread The main thread of the Context from which the activity
+                      is being started.
+@param {Object {IBinder}} token Internal token identifying to the system who is starting 
+              the activity; may be null.
+@param {Object {Activity}} target Which activity is performing the start (and thus receiving 
+               any result); may be null if this call is not being made
+               from an activity.
+@param {Object {Intent}} intent The actual Intent to start.
+@param {Number} requestCode Identifier for this request's result; less than zero 
+                    if the caller is not expecting a result.
+@param {Object {Bundle}} options Addition options.
+@return {Object {android.app.Instrumentation.ActivityResult}} To force the return of a particular result, return an 
+         ActivityResult object containing the desired data; otherwise
+         return null.  The default implementation always returns null.
+@throws android.content.ActivityNotFoundException
+@see Activity#startActivity(Intent)
+@see Activity#startActivityForResult(Intent, int)
+@see Activity#startActivityFromChild
+
+ {@hide}
+*/
+execStartActivity : function(  ) {},
+
+<span id='android-app-Instrumentation-method-execStartActivities'>/**Like {@link #execStartandroid.app.Activity(Context, IBinder, IBinder, android.app.Activity, Intent, int, Bundle)},
+</span> but accepts an array of activities to be started.  Note that active
+ {@link android.app.ActivityMonitor} objects only match against the first activity in
+ the array.
+
+ {@hide}
+*/
+execStartActivities : function(  ) {},
+
+<span id='android-app-Instrumentation-method-execStartActivitiesAsUser'>/**Like {@link #execStartandroid.app.Activity(Context, IBinder, IBinder, android.app.Activity, Intent, int, Bundle)},
+</span> but accepts an array of activities to be started.  Note that active
+ {@link android.app.ActivityMonitor} objects only match against the first activity in
+ the array.
+@return {Number} The corresponding flag {@link ActivityManager#START_CANCELED},
+         {@link ActivityManager#START_SUCCESS} etc. indicating whether the launch was
+         successful.
+
+ {@hide}
+*/
+execStartActivitiesAsUser : function(  ) {},
+
+<span id='android-app-Instrumentation-method-execStartActivity'>/**Like {@link #execStartActivity(android.content.Context, android.os.IBinder,
+</span> android.os.IBinder, String, android.content.Intent, int, android.os.Bundle)},
+ but for calls from a {@link android.app.Fragment}.
+@param {Object {Context}} who The Context from which the activity is being started.
+@param {Object {IBinder}} contextThread The main thread of the Context from which the activity
+                      is being started.
+@param {Object {IBinder}} token Internal token identifying to the system who is starting 
+              the activity; may be null.
+@param {String} target Which element is performing the start (and thus receiving 
+               any result).
+@param {Object {Intent}} intent The actual Intent to start.
+@param {Number} requestCode Identifier for this request's result; less than zero 
+                    if the caller is not expecting a result.
+@return {Object {android.app.Instrumentation.ActivityResult}} To force the return of a particular result, return an 
+         ActivityResult object containing the desired data; otherwise
+         return null.  The default implementation always returns null.
+@throws android.content.ActivityNotFoundException
+@see Activity#startActivity(Intent)
+@see Activity#startActivityForResult(Intent, int)
+@see Activity#startActivityFromChild
+ 
+ {@hide}
+*/
+execStartActivity : function(  ) {},
+
+<span id='android-app-Instrumentation-method-execStartActivity'>/**Like {@link #execStartandroid.app.Activity(Context, IBinder, IBinder, android.app.Activity, Intent, int, Bundle)},
+</span> but for starting as a particular user.
+@param {Object {Context}} who The Context from which the activity is being started.
+@param {Object {IBinder}} contextThread The main thread of the Context from which the activity
+                      is being started.
+@param {Object {IBinder}} token Internal token identifying to the system who is starting
+              the activity; may be null.
+@param {String} target Which fragment is performing the start (and thus receiving
+               any result).
+@param {Object {Intent}} intent The actual Intent to start.
+@param {Number} requestCode Identifier for this request's result; less than zero
+                    if the caller is not expecting a result.
+@return {Object {android.app.Instrumentation.ActivityResult}} To force the return of a particular result, return an
+         ActivityResult object containing the desired data; otherwise
+         return null.  The default implementation always returns null.
+@throws android.content.ActivityNotFoundException
+@see Activity#startActivity(Intent)
+@see Activity#startActivityForResult(Intent, int)
+@see Activity#startActivityFromChild
+
+ {@hide}
+*/
+execStartActivity : function(  ) {},
+
+<span id='android-app-Instrumentation-method-execStartActivityAsCaller'>/**Special version!
+</span>@hide 
+*/
+execStartActivityAsCaller : function(  ) {},
+
+<span id='android-app-Instrumentation-method-execStartActivityFromAppTask'>/**Special version!
+</span>@hide 
+*/
+execStartActivityFromAppTask : function(  ) {},
+
+<span id='android-app-Instrumentation-method-checkStartActivityResult'>/**
+</span>@hide 
+*/
+checkStartActivityResult : function(  ) {},
+
+<span id='android-app-Instrumentation-method-getUiAutomation'>/**Gets the {@link android.app.UiAutomation} instance with no flags set.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; The APIs exposed via the returned {@link android.app.UiAutomation}
+ work across application boundaries while the APIs exposed by the instrumentation
+ do not. For example, {@link android.app.Instrumentation#sendPointerSync(MotionEvent)} will
+ not allow you to inject the event in an app different from the instrumentation
+ target, while {@link android.app.UiAutomation#injectInputEvent(android.view.InputEvent, boolean)}
+ will work regardless of the current application.
+ &lt;/p&gt;
+ &lt;p&gt;
+ A typical test case should be using either the {@link android.app.UiAutomation} or
+ {@link android.app.Instrumentation} APIs. Using both APIs at the same time is not
+ a mistake by itself but a client has to be aware of the APIs limitations.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Equivalent to {@code getUiAutomation(0)}. If a {@link android.app.UiAutomation} exists with different
+ flags, the flags on that instance will be changed, and then it will be returned.
+ &lt;/p&gt;
+@return {Object {android.app.UiAutomation}} The UI automation instance.
+@see UiAutomation
+*/
+getUiAutomation : function(  ) {},
+
+<span id='android-app-Instrumentation-method-getUiAutomation'>/**Gets the {@link android.app.UiAutomation} instance with flags set.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; The APIs exposed via the returned {@link android.app.UiAutomation}
+ work across application boundaries while the APIs exposed by the instrumentation
+ do not. For example, {@link android.app.Instrumentation#sendPointerSync(MotionEvent)} will
+ not allow you to inject the event in an app different from the instrumentation
+ target, while {@link android.app.UiAutomation#injectInputEvent(android.view.InputEvent, boolean)}
+ will work regardless of the current application.
+ &lt;/p&gt;
+ &lt;p&gt;
+ A typical test case should be using either the {@link android.app.UiAutomation} or
+ {@link android.app.Instrumentation} APIs. Using both APIs at the same time is not
+ a mistake by itself but a client has to be aware of the APIs limitations.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If a {@link android.app.UiAutomation} exists with different flags, the flags on that instance will be
+ changed, and then it will be returned.
+ &lt;/p&gt;
+@param {Number} flags The flags to be passed to the UiAutomation, for example
+        {@link UiAutomation#FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES}.
+@return {Object {android.app.UiAutomation}} The UI automation instance.
+@see UiAutomation
+*/
+getUiAutomation : function(  ) {},
+
+<span id='android-app-Instrumentation-method-acquireLooperManager'>/**Takes control of the execution of messages on the specified looper until
+</span> {@link TestLooperManager#release} is called.
+*/
+acquireLooperManager : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

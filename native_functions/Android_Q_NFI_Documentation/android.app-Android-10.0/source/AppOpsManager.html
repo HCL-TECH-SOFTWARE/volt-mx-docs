@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-AppOpsManager'>/**@class android.app.AppOpsManager
+</span>@extends java.lang.Object
+
+ API for interacting with &quot;application operation&quot; tracking.
+
+ &lt;p&gt;This API is not generally intended for third party application developers; most
+ features are only available to system applications.
+*/
+var AppOpsManager = {
+
+<span id='android-app-AppOpsManager-property-HISTORICAL_MODE_DISABLED'>/** Mode in which app op history is completely disabled.
+</span> @hide
+*/
+HISTORICAL_MODE_DISABLED : &quot;0&quot;,
+<span id='android-app-AppOpsManager-property-HISTORICAL_MODE_ENABLED_ACTIVE'>/** Mode in which app op history is enabled and app ops performed by apps would
+</span> be tracked. This is the mode in which the feature is completely enabled.
+ @hide
+*/
+HISTORICAL_MODE_ENABLED_ACTIVE : &quot;1&quot;,
+<span id='android-app-AppOpsManager-property-HISTORICAL_MODE_ENABLED_PASSIVE'>/** Mode in which app op history is enabled but app ops performed by apps would
+</span> not be tracked and the only way to add ops to the history is via explicit calls
+ to dedicated APIs. This mode is useful for testing to allow full control of
+ the historical content.
+ @hide
+*/
+HISTORICAL_MODE_ENABLED_PASSIVE : &quot;2&quot;,
+<span id='android-app-AppOpsManager-property-MODE_ALLOWED'>/** Result from {@link #checkOp}, {@link #noteOp}, {@link #startOp}: the given caller is
+</span> allowed to perform the given operation.
+*/
+MODE_ALLOWED : &quot;0&quot;,
+<span id='android-app-AppOpsManager-property-MODE_IGNORED'>/** Result from {@link #checkOp}, {@link #noteOp}, {@link #startOp}: the given caller is
+</span> not allowed to perform the given operation, and this attempt should
+ &lt;em&gt;silently fail&lt;/em&gt; (it should not cause the app to crash).
+*/
+MODE_IGNORED : &quot;1&quot;,
+<span id='android-app-AppOpsManager-property-MODE_ERRORED'>/** Result from {@link #checkOpNoThrow}, {@link #noteOpNoThrow}, {@link #startOpNoThrow}: the
+</span> given caller is not allowed to perform the given operation, and this attempt should
+ cause it to have a fatal error, typically a {@link SecurityException}.
+*/
+MODE_ERRORED : &quot;2&quot;,
+<span id='android-app-AppOpsManager-property-MODE_DEFAULT'>/** Result from {@link #checkOp}, {@link #noteOp}, {@link #startOp}: the given caller should
+</span> use its default security check.  This mode is not normally used; it should only be used
+ with appop permissions, and callers must explicitly check for it and deal with it.
+*/
+MODE_DEFAULT : &quot;3&quot;,
+<span id='android-app-AppOpsManager-property-MODE_FOREGROUND'>/** Special mode that means &quot;allow only when app is in foreground.&quot;  This is &lt;b&gt;not&lt;/b&gt;
+</span> returned from {@link #unsafeCheckOp}, {@link #noteOp}, {@link #startOp}.  Rather,
+ {@link #unsafeCheckOp} will always return {@link #MODE_ALLOWED} (because it is always
+ possible for it to be ultimately allowed, depending on the app's background state),
+ and {@link #noteOp} and {@link #startOp} will return {@link #MODE_ALLOWED} when the app
+ being checked is currently in the foreground, otherwise {@link #MODE_IGNORED}.
+
+ &lt;p&gt;The only place you will this normally see this value is through
+ {@link #unsafeCheckOpRaw}, which returns the actual raw mode of the op.  Note that because
+ you can't know the current state of the app being checked (and it can change at any
+ point), you can only treat the result here as an indication that it will vary between
+ {@link #MODE_ALLOWED} and {@link #MODE_IGNORED} depending on changes in the background
+ state of the app.  You thus must always use {@link #noteOp} or {@link #startOp} to do
+ the actual check for access to the op.&lt;/p&gt;
+*/
+MODE_FOREGROUND : &quot;4&quot;,
+<span id='android-app-AppOpsManager-property-WATCH_FOREGROUND_CHANGES'>/** Flag for {@link #startWatchingMode(String, String, int, android.app.AppOpsManager.OnOpChangedListener)}:
+</span> Also get reports if the foreground state of an op's uid changes.  This only works
+ when watching a particular op, not when watching a package.
+*/
+WATCH_FOREGROUND_CHANGES : &quot;1&quot;,
+<span id='android-app-AppOpsManager-property-MODE_NAMES'>/** @hide
+</span>*/
+MODE_NAMES : &quot;null&quot;,
+<span id='android-app-AppOpsManager-property-UID_STATE_PERSISTENT'>/** Uid state: The UID is a foreground persistent app. The lower the UID
+</span> state the more important the UID is for the user.
+ @hide
+*/
+UID_STATE_PERSISTENT : &quot;100&quot;,
+<span id='android-app-AppOpsManager-property-UID_STATE_TOP'>/** Uid state: The UID is top foreground app. The lower the UID
+</span> state the more important the UID is for the user.
+ @hide
+*/
+UID_STATE_TOP : &quot;200&quot;,
+<span id='android-app-AppOpsManager-property-UID_STATE_FOREGROUND_SERVICE_LOCATION'>/** Uid state: The UID is running a foreground service of location type.
+</span> The lower the UID state the more important the UID is for the user.
+ @hide
+*/
+UID_STATE_FOREGROUND_SERVICE_LOCATION : &quot;300&quot;,
+<span id='android-app-AppOpsManager-property-UID_STATE_FOREGROUND_SERVICE'>/** Uid state: The UID is running a foreground service. The lower the UID
+</span> state the more important the UID is for the user.
+ @hide
+*/
+UID_STATE_FOREGROUND_SERVICE : &quot;400&quot;,
+<span id='android-app-AppOpsManager-property-UID_STATE_MAX_LAST_NON_RESTRICTED'>/** The max, which is min priority, UID state for which any app op
+</span> would be considered as performed in the foreground.
+ @hide
+*/
+UID_STATE_MAX_LAST_NON_RESTRICTED : &quot;400&quot;,
+<span id='android-app-AppOpsManager-property-UID_STATE_FOREGROUND'>/** Uid state: The UID is a foreground app. The lower the UID
+</span> state the more important the UID is for the user.
+ @hide
+*/
+UID_STATE_FOREGROUND : &quot;500&quot;,
+<span id='android-app-AppOpsManager-property-UID_STATE_BACKGROUND'>/** Uid state: The UID is a background app. The lower the UID
+</span> state the more important the UID is for the user.
+ @hide
+*/
+UID_STATE_BACKGROUND : &quot;600&quot;,
+<span id='android-app-AppOpsManager-property-UID_STATE_CACHED'>/** Uid state: The UID is a cached app. The lower the UID
+</span> state the more important the UID is for the user.
+ @hide
+*/
+UID_STATE_CACHED : &quot;700&quot;,
+<span id='android-app-AppOpsManager-property-MAX_PRIORITY_UID_STATE'>/** Uid state: The UID state with the highest priority.
+</span> @hide
+*/
+MAX_PRIORITY_UID_STATE : &quot;100&quot;,
+<span id='android-app-AppOpsManager-property-MIN_PRIORITY_UID_STATE'>/** Uid state: The UID state with the lowest priority.
+</span> @hide
+*/
+MIN_PRIORITY_UID_STATE : &quot;700&quot;,
+<span id='android-app-AppOpsManager-property-UID_STATES'>/**@hide Note: Keep these sorted */
+</span>UID_STATES : &quot;null&quot;,
+<span id='android-app-AppOpsManager-property-OP_FLAG_SELF'>/** Flag: non proxy operations. These are operations
+</span> performed on behalf of the app itself and not on behalf of
+ another one.
+
+ @hide
+*/
+OP_FLAG_SELF : &quot;1&quot;,
+<span id='android-app-AppOpsManager-property-OP_FLAG_TRUSTED_PROXY'>/** Flag: trusted proxy operations. These are operations
+</span> performed on behalf of another app by a trusted app.
+ Which is work a trusted app blames on another app.
+
+ @hide
+*/
+OP_FLAG_TRUSTED_PROXY : &quot;2&quot;,
+<span id='android-app-AppOpsManager-property-OP_FLAG_UNTRUSTED_PROXY'>/** Flag: untrusted proxy operations. These are operations
+</span> performed on behalf of another app by an untrusted app.
+ Which is work an untrusted app blames on another app.
+
+ @hide
+*/
+OP_FLAG_UNTRUSTED_PROXY : &quot;4&quot;,
+<span id='android-app-AppOpsManager-property-OP_FLAG_TRUSTED_PROXIED'>/** Flag: trusted proxied operations. These are operations
+</span> performed by a trusted other app on behalf of an app.
+ Which is work an app was blamed for by a trusted app.
+
+ @hide
+*/
+OP_FLAG_TRUSTED_PROXIED : &quot;8&quot;,
+<span id='android-app-AppOpsManager-property-OP_FLAG_UNTRUSTED_PROXIED'>/** Flag: untrusted proxied operations. These are operations
+</span> performed by an untrusted other app on behalf of an app.
+ Which is work an app was blamed for by an untrusted app.
+
+ @hide
+*/
+OP_FLAG_UNTRUSTED_PROXIED : &quot;16&quot;,
+<span id='android-app-AppOpsManager-property-OP_FLAGS_ALL'>/** Flags: all operations. These include operations matched
+</span> by {@link #OP_FLAG_SELF}, {@link #OP_FLAG_TRUSTED_PROXIED},
+ {@link #OP_FLAG_UNTRUSTED_PROXIED}, {@link #OP_FLAG_TRUSTED_PROXIED},
+ {@link #OP_FLAG_UNTRUSTED_PROXIED}.
+
+ @hide
+*/
+OP_FLAGS_ALL : &quot;31&quot;,
+<span id='android-app-AppOpsManager-property-OP_FLAGS_ALL_TRUSTED'>/** Flags: all trusted operations which is ones either the app did {@link #OP_FLAG_SELF},
+</span> or it was blamed for by a trusted app {@link #OP_FLAG_TRUSTED_PROXIED}, or ones the
+ app if untrusted blamed on other apps {@link #OP_FLAG_UNTRUSTED_PROXY}.
+
+ @hide
+*/
+OP_FLAGS_ALL_TRUSTED : &quot;13&quot;,
+<span id='android-app-AppOpsManager-property-OP_NONE'>/**@hide No operation specified. */
+</span>OP_NONE : &quot;-1&quot;,
+<span id='android-app-AppOpsManager-property-OP_COARSE_LOCATION'>/**@hide Access to coarse location information. */
+</span>OP_COARSE_LOCATION : &quot;0&quot;,
+<span id='android-app-AppOpsManager-property-OP_FINE_LOCATION'>/**@hide Access to fine location information. */
+</span>OP_FINE_LOCATION : &quot;1&quot;,
+<span id='android-app-AppOpsManager-property-OP_GPS'>/**@hide Causing GPS to run. */
+</span>OP_GPS : &quot;2&quot;,
+<span id='android-app-AppOpsManager-property-OP_VIBRATE'>/**@hide */
+</span>OP_VIBRATE : &quot;3&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_CONTACTS'>/**@hide */
+</span>OP_READ_CONTACTS : &quot;4&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_CONTACTS'>/**@hide */
+</span>OP_WRITE_CONTACTS : &quot;5&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_CALL_LOG'>/**@hide */
+</span>OP_READ_CALL_LOG : &quot;6&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_CALL_LOG'>/**@hide */
+</span>OP_WRITE_CALL_LOG : &quot;7&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_CALENDAR'>/**@hide */
+</span>OP_READ_CALENDAR : &quot;8&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_CALENDAR'>/**@hide */
+</span>OP_WRITE_CALENDAR : &quot;9&quot;,
+<span id='android-app-AppOpsManager-property-OP_WIFI_SCAN'>/**@hide */
+</span>OP_WIFI_SCAN : &quot;10&quot;,
+<span id='android-app-AppOpsManager-property-OP_POST_NOTIFICATION'>/**@hide */
+</span>OP_POST_NOTIFICATION : &quot;11&quot;,
+<span id='android-app-AppOpsManager-property-OP_NEIGHBORING_CELLS'>/**@hide */
+</span>OP_NEIGHBORING_CELLS : &quot;12&quot;,
+<span id='android-app-AppOpsManager-property-OP_CALL_PHONE'>/**@hide */
+</span>OP_CALL_PHONE : &quot;13&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_SMS'>/**@hide */
+</span>OP_READ_SMS : &quot;14&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_SMS'>/**@hide */
+</span>OP_WRITE_SMS : &quot;15&quot;,
+<span id='android-app-AppOpsManager-property-OP_RECEIVE_SMS'>/**@hide */
+</span>OP_RECEIVE_SMS : &quot;16&quot;,
+<span id='android-app-AppOpsManager-property-OP_RECEIVE_EMERGECY_SMS'>/**@hide */
+</span>OP_RECEIVE_EMERGECY_SMS : &quot;17&quot;,
+<span id='android-app-AppOpsManager-property-OP_RECEIVE_MMS'>/**@hide */
+</span>OP_RECEIVE_MMS : &quot;18&quot;,
+<span id='android-app-AppOpsManager-property-OP_RECEIVE_WAP_PUSH'>/**@hide */
+</span>OP_RECEIVE_WAP_PUSH : &quot;19&quot;,
+<span id='android-app-AppOpsManager-property-OP_SEND_SMS'>/**@hide */
+</span>OP_SEND_SMS : &quot;20&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_ICC_SMS'>/**@hide */
+</span>OP_READ_ICC_SMS : &quot;21&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_ICC_SMS'>/**@hide */
+</span>OP_WRITE_ICC_SMS : &quot;22&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_SETTINGS'>/**@hide */
+</span>OP_WRITE_SETTINGS : &quot;23&quot;,
+<span id='android-app-AppOpsManager-property-OP_SYSTEM_ALERT_WINDOW'>/**@hide Required to draw on top of other apps. */
+</span>OP_SYSTEM_ALERT_WINDOW : &quot;24&quot;,
+<span id='android-app-AppOpsManager-property-OP_ACCESS_NOTIFICATIONS'>/**@hide */
+</span>OP_ACCESS_NOTIFICATIONS : &quot;25&quot;,
+<span id='android-app-AppOpsManager-property-OP_CAMERA'>/**@hide */
+</span>OP_CAMERA : &quot;26&quot;,
+<span id='android-app-AppOpsManager-property-OP_RECORD_AUDIO'>/**@hide */
+</span>OP_RECORD_AUDIO : &quot;27&quot;,
+<span id='android-app-AppOpsManager-property-OP_PLAY_AUDIO'>/**@hide */
+</span>OP_PLAY_AUDIO : &quot;28&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_CLIPBOARD'>/**@hide */
+</span>OP_READ_CLIPBOARD : &quot;29&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_CLIPBOARD'>/**@hide */
+</span>OP_WRITE_CLIPBOARD : &quot;30&quot;,
+<span id='android-app-AppOpsManager-property-OP_TAKE_MEDIA_BUTTONS'>/**@hide */
+</span>OP_TAKE_MEDIA_BUTTONS : &quot;31&quot;,
+<span id='android-app-AppOpsManager-property-OP_TAKE_AUDIO_FOCUS'>/**@hide */
+</span>OP_TAKE_AUDIO_FOCUS : &quot;32&quot;,
+<span id='android-app-AppOpsManager-property-OP_AUDIO_MASTER_VOLUME'>/**@hide */
+</span>OP_AUDIO_MASTER_VOLUME : &quot;33&quot;,
+<span id='android-app-AppOpsManager-property-OP_AUDIO_VOICE_VOLUME'>/**@hide */
+</span>OP_AUDIO_VOICE_VOLUME : &quot;34&quot;,
+<span id='android-app-AppOpsManager-property-OP_AUDIO_RING_VOLUME'>/**@hide */
+</span>OP_AUDIO_RING_VOLUME : &quot;35&quot;,
+<span id='android-app-AppOpsManager-property-OP_AUDIO_MEDIA_VOLUME'>/**@hide */
+</span>OP_AUDIO_MEDIA_VOLUME : &quot;36&quot;,
+<span id='android-app-AppOpsManager-property-OP_AUDIO_ALARM_VOLUME'>/**@hide */
+</span>OP_AUDIO_ALARM_VOLUME : &quot;37&quot;,
+<span id='android-app-AppOpsManager-property-OP_AUDIO_NOTIFICATION_VOLUME'>/**@hide */
+</span>OP_AUDIO_NOTIFICATION_VOLUME : &quot;38&quot;,
+<span id='android-app-AppOpsManager-property-OP_AUDIO_BLUETOOTH_VOLUME'>/**@hide */
+</span>OP_AUDIO_BLUETOOTH_VOLUME : &quot;39&quot;,
+<span id='android-app-AppOpsManager-property-OP_WAKE_LOCK'>/**@hide */
+</span>OP_WAKE_LOCK : &quot;40&quot;,
+<span id='android-app-AppOpsManager-property-OP_MONITOR_LOCATION'>/**@hide Continually monitoring location data. */
+</span>OP_MONITOR_LOCATION : &quot;41&quot;,
+<span id='android-app-AppOpsManager-property-OP_MONITOR_HIGH_POWER_LOCATION'>/**@hide Continually monitoring location data with a relatively high power request. */
+</span>OP_MONITOR_HIGH_POWER_LOCATION : &quot;42&quot;,
+<span id='android-app-AppOpsManager-property-OP_GET_USAGE_STATS'>/**@hide Retrieve current usage stats via {@link UsageStatsManager}. */
+</span>OP_GET_USAGE_STATS : &quot;43&quot;,
+<span id='android-app-AppOpsManager-property-OP_MUTE_MICROPHONE'>/**@hide */
+</span>OP_MUTE_MICROPHONE : &quot;44&quot;,
+<span id='android-app-AppOpsManager-property-OP_TOAST_WINDOW'>/**@hide */
+</span>OP_TOAST_WINDOW : &quot;45&quot;,
+<span id='android-app-AppOpsManager-property-OP_PROJECT_MEDIA'>/**@hide Capture the device's display contents and/or audio */
+</span>OP_PROJECT_MEDIA : &quot;46&quot;,
+<span id='android-app-AppOpsManager-property-OP_ACTIVATE_VPN'>/**@hide Activate a VPN connection without user intervention. */
+</span>OP_ACTIVATE_VPN : &quot;47&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_WALLPAPER'>/**@hide Access the WallpaperManagerAPI to write wallpapers. */
+</span>OP_WRITE_WALLPAPER : &quot;48&quot;,
+<span id='android-app-AppOpsManager-property-OP_ASSIST_STRUCTURE'>/**@hide Received the assist structure from an app. */
+</span>OP_ASSIST_STRUCTURE : &quot;49&quot;,
+<span id='android-app-AppOpsManager-property-OP_ASSIST_SCREENSHOT'>/**@hide Received a screenshot from assist. */
+</span>OP_ASSIST_SCREENSHOT : &quot;50&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_PHONE_STATE'>/**@hide Read the phone state. */
+</span>OP_READ_PHONE_STATE : &quot;51&quot;,
+<span id='android-app-AppOpsManager-property-OP_ADD_VOICEMAIL'>/**@hide Add voicemail messages to the voicemail content provider. */
+</span>OP_ADD_VOICEMAIL : &quot;52&quot;,
+<span id='android-app-AppOpsManager-property-OP_USE_SIP'>/**@hide Access APIs for SIP calling over VOIP or WiFi. */
+</span>OP_USE_SIP : &quot;53&quot;,
+<span id='android-app-AppOpsManager-property-OP_PROCESS_OUTGOING_CALLS'>/**@hide Intercept outgoing calls. */
+</span>OP_PROCESS_OUTGOING_CALLS : &quot;54&quot;,
+<span id='android-app-AppOpsManager-property-OP_USE_FINGERPRINT'>/**@hide User the fingerprint API. */
+</span>OP_USE_FINGERPRINT : &quot;55&quot;,
+<span id='android-app-AppOpsManager-property-OP_BODY_SENSORS'>/**@hide Access to body sensors such as heart rate, etc. */
+</span>OP_BODY_SENSORS : &quot;56&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_CELL_BROADCASTS'>/**@hide Read previously received cell broadcast messages. */
+</span>OP_READ_CELL_BROADCASTS : &quot;57&quot;,
+<span id='android-app-AppOpsManager-property-OP_MOCK_LOCATION'>/**@hide Inject mock location into the system. */
+</span>OP_MOCK_LOCATION : &quot;58&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_EXTERNAL_STORAGE'>/**@hide Read external storage. */
+</span>OP_READ_EXTERNAL_STORAGE : &quot;59&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_EXTERNAL_STORAGE'>/**@hide Write external storage. */
+</span>OP_WRITE_EXTERNAL_STORAGE : &quot;60&quot;,
+<span id='android-app-AppOpsManager-property-OP_TURN_SCREEN_ON'>/**@hide Turned on the screen. */
+</span>OP_TURN_SCREEN_ON : &quot;61&quot;,
+<span id='android-app-AppOpsManager-property-OP_GET_ACCOUNTS'>/**@hide Get device accounts. */
+</span>OP_GET_ACCOUNTS : &quot;62&quot;,
+<span id='android-app-AppOpsManager-property-OP_RUN_IN_BACKGROUND'>/**@hide Control whether an application is allowed to run in the background. */
+</span>OP_RUN_IN_BACKGROUND : &quot;63&quot;,
+<span id='android-app-AppOpsManager-property-OP_AUDIO_ACCESSIBILITY_VOLUME'>/**@hide */
+</span>OP_AUDIO_ACCESSIBILITY_VOLUME : &quot;64&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_PHONE_NUMBERS'>/**@hide Read the phone number. */
+</span>OP_READ_PHONE_NUMBERS : &quot;65&quot;,
+<span id='android-app-AppOpsManager-property-OP_REQUEST_INSTALL_PACKAGES'>/**@hide Request package installs through package installer */
+</span>OP_REQUEST_INSTALL_PACKAGES : &quot;66&quot;,
+<span id='android-app-AppOpsManager-property-OP_PICTURE_IN_PICTURE'>/**@hide Enter picture-in-picture. */
+</span>OP_PICTURE_IN_PICTURE : &quot;67&quot;,
+<span id='android-app-AppOpsManager-property-OP_INSTANT_APP_START_FOREGROUND'>/**@hide Instant app start foreground service. */
+</span>OP_INSTANT_APP_START_FOREGROUND : &quot;68&quot;,
+<span id='android-app-AppOpsManager-property-OP_ANSWER_PHONE_CALLS'>/**@hide Answer incoming phone calls */
+</span>OP_ANSWER_PHONE_CALLS : &quot;69&quot;,
+<span id='android-app-AppOpsManager-property-OP_RUN_ANY_IN_BACKGROUND'>/**@hide Run jobs when in background */
+</span>OP_RUN_ANY_IN_BACKGROUND : &quot;70&quot;,
+<span id='android-app-AppOpsManager-property-OP_CHANGE_WIFI_STATE'>/**@hide Change Wi-Fi connectivity state */
+</span>OP_CHANGE_WIFI_STATE : &quot;71&quot;,
+<span id='android-app-AppOpsManager-property-OP_REQUEST_DELETE_PACKAGES'>/**@hide Request package deletion through package installer */
+</span>OP_REQUEST_DELETE_PACKAGES : &quot;72&quot;,
+<span id='android-app-AppOpsManager-property-OP_BIND_ACCESSIBILITY_SERVICE'>/**@hide Bind an accessibility service. */
+</span>OP_BIND_ACCESSIBILITY_SERVICE : &quot;73&quot;,
+<span id='android-app-AppOpsManager-property-OP_ACCEPT_HANDOVER'>/**@hide Continue handover of a call from another app */
+</span>OP_ACCEPT_HANDOVER : &quot;74&quot;,
+<span id='android-app-AppOpsManager-property-OP_MANAGE_IPSEC_TUNNELS'>/**@hide Create and Manage IPsec Tunnels */
+</span>OP_MANAGE_IPSEC_TUNNELS : &quot;75&quot;,
+<span id='android-app-AppOpsManager-property-OP_START_FOREGROUND'>/**@hide Any app start foreground service. */
+</span>OP_START_FOREGROUND : &quot;76&quot;,
+<span id='android-app-AppOpsManager-property-OP_BLUETOOTH_SCAN'>/**@hide */
+</span>OP_BLUETOOTH_SCAN : &quot;77&quot;,
+<span id='android-app-AppOpsManager-property-OP_USE_BIOMETRIC'>/**@hide Use the BiometricPrompt/BiometricManager APIs. */
+</span>OP_USE_BIOMETRIC : &quot;78&quot;,
+<span id='android-app-AppOpsManager-property-OP_ACTIVITY_RECOGNITION'>/**@hide Physical activity recognition. */
+</span>OP_ACTIVITY_RECOGNITION : &quot;79&quot;,
+<span id='android-app-AppOpsManager-property-OP_SMS_FINANCIAL_TRANSACTIONS'>/**@hide Financial app sms read. */
+</span>OP_SMS_FINANCIAL_TRANSACTIONS : &quot;80&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_MEDIA_AUDIO'>/**@hide Read media of audio type. */
+</span>OP_READ_MEDIA_AUDIO : &quot;81&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_MEDIA_AUDIO'>/**@hide Write media of audio type. */
+</span>OP_WRITE_MEDIA_AUDIO : &quot;82&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_MEDIA_VIDEO'>/**@hide Read media of video type. */
+</span>OP_READ_MEDIA_VIDEO : &quot;83&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_MEDIA_VIDEO'>/**@hide Write media of video type. */
+</span>OP_WRITE_MEDIA_VIDEO : &quot;84&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_MEDIA_IMAGES'>/**@hide Read media of image type. */
+</span>OP_READ_MEDIA_IMAGES : &quot;85&quot;,
+<span id='android-app-AppOpsManager-property-OP_WRITE_MEDIA_IMAGES'>/**@hide Write media of image type. */
+</span>OP_WRITE_MEDIA_IMAGES : &quot;86&quot;,
+<span id='android-app-AppOpsManager-property-OP_LEGACY_STORAGE'>/**@hide Has a legacy (non-isolated) view of storage. */
+</span>OP_LEGACY_STORAGE : &quot;87&quot;,
+<span id='android-app-AppOpsManager-property-OP_ACCESS_ACCESSIBILITY'>/**@hide Accessing accessibility features */
+</span>OP_ACCESS_ACCESSIBILITY : &quot;88&quot;,
+<span id='android-app-AppOpsManager-property-OP_READ_DEVICE_IDENTIFIERS'>/**@hide Read the device identifiers (IMEI / MEID, IMSI, SIM / Build serial) */
+</span>OP_READ_DEVICE_IDENTIFIERS : &quot;89&quot;,
+<span id='android-app-AppOpsManager-property-_NUM_OP'>/**@hide */
+</span>_NUM_OP : &quot;90&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_COARSE_LOCATION'>/**Access to coarse location information. */
+</span>OPSTR_COARSE_LOCATION : &quot;android:coarse_location&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_FINE_LOCATION'>/**Access to fine location information. */
+</span>OPSTR_FINE_LOCATION : &quot;android:fine_location&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_MONITOR_LOCATION'>/**Continually monitoring location data. */
+</span>OPSTR_MONITOR_LOCATION : &quot;android:monitor_location&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_MONITOR_HIGH_POWER_LOCATION'>/**Continually monitoring location data with a relatively high power request. */
+</span>OPSTR_MONITOR_HIGH_POWER_LOCATION : &quot;android:monitor_location_high_power&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_GET_USAGE_STATS'>/**Access to {@link android.app.usage.UsageStatsManager}. */
+</span>OPSTR_GET_USAGE_STATS : &quot;android:get_usage_stats&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_ACTIVATE_VPN'>/**Activate a VPN connection without user intervention. @hide */
+</span>OPSTR_ACTIVATE_VPN : &quot;android:activate_vpn&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_CONTACTS'>/**Allows an application to read the user's contacts data. */
+</span>OPSTR_READ_CONTACTS : &quot;android:read_contacts&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_CONTACTS'>/**Allows an application to write to the user's contacts data. */
+</span>OPSTR_WRITE_CONTACTS : &quot;android:write_contacts&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_CALL_LOG'>/**Allows an application to read the user's call log. */
+</span>OPSTR_READ_CALL_LOG : &quot;android:read_call_log&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_CALL_LOG'>/**Allows an application to write to the user's call log. */
+</span>OPSTR_WRITE_CALL_LOG : &quot;android:write_call_log&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_CALENDAR'>/**Allows an application to read the user's calendar data. */
+</span>OPSTR_READ_CALENDAR : &quot;android:read_calendar&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_CALENDAR'>/**Allows an application to write to the user's calendar data. */
+</span>OPSTR_WRITE_CALENDAR : &quot;android:write_calendar&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_CALL_PHONE'>/**Allows an application to initiate a phone call. */
+</span>OPSTR_CALL_PHONE : &quot;android:call_phone&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_SMS'>/**Allows an application to read SMS messages. */
+</span>OPSTR_READ_SMS : &quot;android:read_sms&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_RECEIVE_SMS'>/**Allows an application to receive SMS messages. */
+</span>OPSTR_RECEIVE_SMS : &quot;android:receive_sms&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_RECEIVE_MMS'>/**Allows an application to receive MMS messages. */
+</span>OPSTR_RECEIVE_MMS : &quot;android:receive_mms&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_RECEIVE_WAP_PUSH'>/**Allows an application to receive WAP push messages. */
+</span>OPSTR_RECEIVE_WAP_PUSH : &quot;android:receive_wap_push&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_SEND_SMS'>/**Allows an application to send SMS messages. */
+</span>OPSTR_SEND_SMS : &quot;android:send_sms&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_CAMERA'>/**Required to be able to access the camera device. */
+</span>OPSTR_CAMERA : &quot;android:camera&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_RECORD_AUDIO'>/**Required to be able to access the microphone device. */
+</span>OPSTR_RECORD_AUDIO : &quot;android:record_audio&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_PHONE_STATE'>/**Required to access phone state related information. */
+</span>OPSTR_READ_PHONE_STATE : &quot;android:read_phone_state&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_ADD_VOICEMAIL'>/**Required to access phone state related information. */
+</span>OPSTR_ADD_VOICEMAIL : &quot;android:add_voicemail&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_USE_SIP'>/**Access APIs for SIP calling over VOIP or WiFi */
+</span>OPSTR_USE_SIP : &quot;android:use_sip&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_PROCESS_OUTGOING_CALLS'>/**Access APIs for diverting outgoing calls */
+</span>OPSTR_PROCESS_OUTGOING_CALLS : &quot;android:process_outgoing_calls&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_USE_FINGERPRINT'>/**Use the fingerprint API. */
+</span>OPSTR_USE_FINGERPRINT : &quot;android:use_fingerprint&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_BODY_SENSORS'>/**Access to body sensors such as heart rate, etc. */
+</span>OPSTR_BODY_SENSORS : &quot;android:body_sensors&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_CELL_BROADCASTS'>/**Read previously received cell broadcast messages. */
+</span>OPSTR_READ_CELL_BROADCASTS : &quot;android:read_cell_broadcasts&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_MOCK_LOCATION'>/**Inject mock location into the system. */
+</span>OPSTR_MOCK_LOCATION : &quot;android:mock_location&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_EXTERNAL_STORAGE'>/**Read external storage. */
+</span>OPSTR_READ_EXTERNAL_STORAGE : &quot;android:read_external_storage&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_EXTERNAL_STORAGE'>/**Write external storage. */
+</span>OPSTR_WRITE_EXTERNAL_STORAGE : &quot;android:write_external_storage&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_SYSTEM_ALERT_WINDOW'>/**Required to draw on top of other apps. */
+</span>OPSTR_SYSTEM_ALERT_WINDOW : &quot;android:system_alert_window&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_SETTINGS'>/**Required to write/modify/update system settingss. */
+</span>OPSTR_WRITE_SETTINGS : &quot;android:write_settings&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_GET_ACCOUNTS'>/**@hide Get device accounts. */
+</span>OPSTR_GET_ACCOUNTS : &quot;android:get_accounts&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_PHONE_NUMBERS'>/***/
+</span>OPSTR_READ_PHONE_NUMBERS : &quot;android:read_phone_numbers&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_PICTURE_IN_PICTURE'>/**Access to picture-in-picture. */
+</span>OPSTR_PICTURE_IN_PICTURE : &quot;android:picture_in_picture&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_INSTANT_APP_START_FOREGROUND'>/**@hide */
+</span>OPSTR_INSTANT_APP_START_FOREGROUND : &quot;android:instant_app_start_foreground&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_ANSWER_PHONE_CALLS'>/**Answer incoming phone calls */
+</span>OPSTR_ANSWER_PHONE_CALLS : &quot;android:answer_phone_calls&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_ACCEPT_HANDOVER'>/** Accept call handover
+</span> @hide
+*/
+OPSTR_ACCEPT_HANDOVER : &quot;android:accept_handover&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_GPS'>/**@hide */
+</span>OPSTR_GPS : &quot;android:gps&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_VIBRATE'>/**@hide */
+</span>OPSTR_VIBRATE : &quot;android:vibrate&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WIFI_SCAN'>/**@hide */
+</span>OPSTR_WIFI_SCAN : &quot;android:wifi_scan&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_POST_NOTIFICATION'>/**@hide */
+</span>OPSTR_POST_NOTIFICATION : &quot;android:post_notification&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_NEIGHBORING_CELLS'>/**@hide */
+</span>OPSTR_NEIGHBORING_CELLS : &quot;android:neighboring_cells&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_SMS'>/**@hide */
+</span>OPSTR_WRITE_SMS : &quot;android:write_sms&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_RECEIVE_EMERGENCY_BROADCAST'>/**@hide */
+</span>OPSTR_RECEIVE_EMERGENCY_BROADCAST : &quot;android:receive_emergency_broadcast&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_ICC_SMS'>/**@hide */
+</span>OPSTR_READ_ICC_SMS : &quot;android:read_icc_sms&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_ICC_SMS'>/**@hide */
+</span>OPSTR_WRITE_ICC_SMS : &quot;android:write_icc_sms&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_ACCESS_NOTIFICATIONS'>/**@hide */
+</span>OPSTR_ACCESS_NOTIFICATIONS : &quot;android:access_notifications&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_PLAY_AUDIO'>/**@hide */
+</span>OPSTR_PLAY_AUDIO : &quot;android:play_audio&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_CLIPBOARD'>/**@hide */
+</span>OPSTR_READ_CLIPBOARD : &quot;android:read_clipboard&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_CLIPBOARD'>/**@hide */
+</span>OPSTR_WRITE_CLIPBOARD : &quot;android:write_clipboard&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_TAKE_MEDIA_BUTTONS'>/**@hide */
+</span>OPSTR_TAKE_MEDIA_BUTTONS : &quot;android:take_media_buttons&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_TAKE_AUDIO_FOCUS'>/**@hide */
+</span>OPSTR_TAKE_AUDIO_FOCUS : &quot;android:take_audio_focus&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_AUDIO_MASTER_VOLUME'>/**@hide */
+</span>OPSTR_AUDIO_MASTER_VOLUME : &quot;android:audio_master_volume&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_AUDIO_VOICE_VOLUME'>/**@hide */
+</span>OPSTR_AUDIO_VOICE_VOLUME : &quot;android:audio_voice_volume&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_AUDIO_RING_VOLUME'>/**@hide */
+</span>OPSTR_AUDIO_RING_VOLUME : &quot;android:audio_ring_volume&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_AUDIO_MEDIA_VOLUME'>/**@hide */
+</span>OPSTR_AUDIO_MEDIA_VOLUME : &quot;android:audio_media_volume&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_AUDIO_ALARM_VOLUME'>/**@hide */
+</span>OPSTR_AUDIO_ALARM_VOLUME : &quot;android:audio_alarm_volume&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_AUDIO_NOTIFICATION_VOLUME'>/**@hide */
+</span>OPSTR_AUDIO_NOTIFICATION_VOLUME : &quot;android:audio_notification_volume&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_AUDIO_BLUETOOTH_VOLUME'>/**@hide */
+</span>OPSTR_AUDIO_BLUETOOTH_VOLUME : &quot;android:audio_bluetooth_volume&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WAKE_LOCK'>/**@hide */
+</span>OPSTR_WAKE_LOCK : &quot;android:wake_lock&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_MUTE_MICROPHONE'>/**@hide */
+</span>OPSTR_MUTE_MICROPHONE : &quot;android:mute_microphone&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_TOAST_WINDOW'>/**@hide */
+</span>OPSTR_TOAST_WINDOW : &quot;android:toast_window&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_PROJECT_MEDIA'>/**@hide */
+</span>OPSTR_PROJECT_MEDIA : &quot;android:project_media&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_WALLPAPER'>/**@hide */
+</span>OPSTR_WRITE_WALLPAPER : &quot;android:write_wallpaper&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_ASSIST_STRUCTURE'>/**@hide */
+</span>OPSTR_ASSIST_STRUCTURE : &quot;android:assist_structure&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_ASSIST_SCREENSHOT'>/**@hide */
+</span>OPSTR_ASSIST_SCREENSHOT : &quot;android:assist_screenshot&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_TURN_SCREEN_ON'>/**@hide */
+</span>OPSTR_TURN_SCREEN_ON : &quot;android:turn_screen_on&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_RUN_IN_BACKGROUND'>/**@hide */
+</span>OPSTR_RUN_IN_BACKGROUND : &quot;android:run_in_background&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_AUDIO_ACCESSIBILITY_VOLUME'>/**@hide */
+</span>OPSTR_AUDIO_ACCESSIBILITY_VOLUME : &quot;android:audio_accessibility_volume&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_REQUEST_INSTALL_PACKAGES'>/**@hide */
+</span>OPSTR_REQUEST_INSTALL_PACKAGES : &quot;android:request_install_packages&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_RUN_ANY_IN_BACKGROUND'>/**@hide */
+</span>OPSTR_RUN_ANY_IN_BACKGROUND : &quot;android:run_any_in_background&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_CHANGE_WIFI_STATE'>/**@hide */
+</span>OPSTR_CHANGE_WIFI_STATE : &quot;android:change_wifi_state&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_REQUEST_DELETE_PACKAGES'>/**@hide */
+</span>OPSTR_REQUEST_DELETE_PACKAGES : &quot;android:request_delete_packages&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_BIND_ACCESSIBILITY_SERVICE'>/**@hide */
+</span>OPSTR_BIND_ACCESSIBILITY_SERVICE : &quot;android:bind_accessibility_service&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_MANAGE_IPSEC_TUNNELS'>/**@hide */
+</span>OPSTR_MANAGE_IPSEC_TUNNELS : &quot;android:manage_ipsec_tunnels&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_START_FOREGROUND'>/**@hide */
+</span>OPSTR_START_FOREGROUND : &quot;android:start_foreground&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_BLUETOOTH_SCAN'>/**@hide */
+</span>OPSTR_BLUETOOTH_SCAN : &quot;android:bluetooth_scan&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_USE_BIOMETRIC'>/**@hide Use the BiometricPrompt/BiometricManager APIs. */
+</span>OPSTR_USE_BIOMETRIC : &quot;android:use_biometric&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_ACTIVITY_RECOGNITION'>/**@hide Recognize physical activity. */
+</span>OPSTR_ACTIVITY_RECOGNITION : &quot;android:activity_recognition&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_SMS_FINANCIAL_TRANSACTIONS'>/**@hide Financial app read sms. */
+</span>OPSTR_SMS_FINANCIAL_TRANSACTIONS : &quot;android:sms_financial_transactions&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_MEDIA_AUDIO'>/**@hide Read media of audio type. */
+</span>OPSTR_READ_MEDIA_AUDIO : &quot;android:read_media_audio&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_MEDIA_AUDIO'>/**@hide Write media of audio type. */
+</span>OPSTR_WRITE_MEDIA_AUDIO : &quot;android:write_media_audio&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_MEDIA_VIDEO'>/**@hide Read media of video type. */
+</span>OPSTR_READ_MEDIA_VIDEO : &quot;android:read_media_video&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_MEDIA_VIDEO'>/**@hide Write media of video type. */
+</span>OPSTR_WRITE_MEDIA_VIDEO : &quot;android:write_media_video&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_MEDIA_IMAGES'>/**@hide Read media of image type. */
+</span>OPSTR_READ_MEDIA_IMAGES : &quot;android:read_media_images&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_WRITE_MEDIA_IMAGES'>/**@hide Write media of image type. */
+</span>OPSTR_WRITE_MEDIA_IMAGES : &quot;android:write_media_images&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_LEGACY_STORAGE'>/**@hide Has a legacy (non-isolated) view of storage. */
+</span>OPSTR_LEGACY_STORAGE : &quot;android:legacy_storage&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_ACCESS_ACCESSIBILITY'>/**@hide Interact with accessibility. */
+</span>OPSTR_ACCESS_ACCESSIBILITY : &quot;android:access_accessibility&quot;,
+<span id='android-app-AppOpsManager-property-OPSTR_READ_DEVICE_IDENTIFIERS'>/**@hide Read device identifiers */
+</span>OPSTR_READ_DEVICE_IDENTIFIERS : &quot;android:read_device_identifiers&quot;,
+<span id='android-app-AppOpsManager-property-KEY_HISTORICAL_OPS'>/**@hide */
+</span>KEY_HISTORICAL_OPS : &quot;historical_ops&quot;,
+<span id='android-app-AppOpsManager-method-resolveFirstUnrestrictedUidState'>/**Resolves the first unrestricted state given an app op. Location is
+</span> special as we want to allow its access only if a dedicated location
+ foreground service is running. For other ops we consider any foreground
+ service as a foreground state.
+@param {Number} op The op to resolve.
+@return {Number} The last restricted UID state.
+@hide 
+*/
+resolveFirstUnrestrictedUidState : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-resolveLastRestrictedUidState'>/**Resolves the last restricted state given an app op. Location is
+</span> special as we want to allow its access only if a dedicated location
+ foreground service is running. For other ops we consider any foreground
+ service as a foreground state.
+@param {Number} op The op to resolve.
+@return {Number} The last restricted UID state.
+@hide 
+*/
+resolveLastRestrictedUidState : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getUidStateName'>/**
+</span>@hide 
+*/
+getUidStateName : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getFlagName'>/**
+</span>@hide 
+*/
+getFlagName : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-keyToString'>/**
+</span>@hide 
+*/
+keyToString : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-makeKey'>/**
+</span>@hide 
+*/
+makeKey : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-extractUidStateFromKey'>/**
+</span>@hide 
+*/
+extractUidStateFromKey : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-extractFlagsFromKey'>/**
+</span>@hide 
+*/
+extractFlagsFromKey : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-flagsToString'>/**
+</span>@hide 
+*/
+flagsToString : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-opToSwitch'>/**Retrieve the op switch that controls the given operation.
+</span>@hide 
+*/
+opToSwitch : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-opToName'>/**Retrieve a non-localized name for the operation, for debugging output.
+</span>@hide 
+*/
+opToName : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-opToPublicName'>/**Retrieve a non-localized public name for the operation.
+</span>@hide 
+*/
+opToPublicName : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-strDebugOpToOp'>/**
+</span>@hide 
+*/
+strDebugOpToOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-opToPermission'>/**Retrieve the permission associated with an operation, or null if there is not one.
+</span>@hide 
+*/
+opToPermission : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-opToPermission'>/**Retrieve the permission associated with an operation, or null if there is not one.
+</span>@param {String} op The operation name.
+@hide 
+*/
+opToPermission : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-opToRestriction'>/**Retrieve the user restriction associated with an operation, or null if there is not one.
+</span>@hide 
+*/
+opToRestriction : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-permissionToOpCode'>/**Retrieve the app op code for a permission, or null if there is not one.
+</span> This API is intended to be used for mapping runtime or appop permissions
+ to the corresponding app op.
+@hide 
+*/
+permissionToOpCode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-opAllowSystemBypassRestriction'>/**Retrieve whether the op allows the system (and system ui) to
+</span> bypass the user restriction.
+@hide 
+*/
+opAllowSystemBypassRestriction : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-opToDefaultMode'>/**Retrieve the default mode for the operation.
+</span>@hide 
+*/
+opToDefaultMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-opToDefaultMode'>/**Retrieve the default mode for the app op.
+</span>@param {String} appOp The app op name
+@return {Number} the default mode for the app op
+@hide 
+*/
+opToDefaultMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-modeToName'>/**Retrieve the human readable mode.
+</span>@hide 
+*/
+modeToName : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-opAllowsReset'>/**Retrieve whether the op allows itself to be reset.
+</span>@hide 
+*/
+opAllowsReset : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getPackagesForOps'>/**Retrieve current operation state for all applications.
+</span>
+ The mode of the ops returned are set for the package but may not reflect their effective
+ state due to UID policy or because it's controlled by a different master op.
+
+ Use {@link #unsafeCheckOp(String, int, String)}} or {@link #noteOp(String, int, String)}
+ if the effective mode is needed.
+@param {Object {java.lang.String[]}} ops The set of operations you are interested in, or null if you want all of them.
+@hide 
+*/
+getPackagesForOps : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getPackagesForOps'>/**Retrieve current operation state for all applications.
+</span>
+ The mode of the ops returned are set for the package but may not reflect their effective
+ state due to UID policy or because it's controlled by a different master op.
+
+ Use {@link #unsafeCheckOp(String, int, String)}} or {@link #noteOp(String, int, String)}
+ if the effective mode is needed.
+@param {Object {int[]}} ops The set of operations you are interested in, or null if you want all of them.
+@hide 
+*/
+getPackagesForOps : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getOpsForPackage'>/**Retrieve current operation state for one application.
+</span>
+ The mode of the ops returned are set for the package but may not reflect their effective
+ state due to UID policy or because it's controlled by a different master op.
+
+ Use {@link #unsafeCheckOp(String, int, String)}} or {@link #noteOp(String, int, String)}
+ if the effective mode is needed.
+@param {Number} uid The uid of the application of interest.
+@param {String} packageName The name of the application of interest.
+@param {Object {int[]}} ops The set of operations you are interested in, or null if you want all of them.
+@deprecated The int op codes are not stable and you should use the string based op
+ names which are stable and namespaced. Use
+ {@link #getOpsForPackage(int, String, String...)})}.
+@hide 
+@removed 
+*/
+getOpsForPackage : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getOpsForPackage'>/**Retrieve current operation state for one application. The UID and the
+</span> package must match.
+
+ The mode of the ops returned are set for the package but may not reflect their effective
+ state due to UID policy or because it's controlled by a different master op.
+
+ Use {@link #unsafeCheckOp(String, int, String)}} or {@link #noteOp(String, int, String)}
+ if the effective mode is needed.
+@param {Number} uid The uid of the application of interest.
+@param {String} packageName The name of the application of interest.
+@param {Object {java.lang.String[]}} ops The set of operations you are interested in, or null if you want all of them.
+@hide 
+*/
+getOpsForPackage : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getHistoricalOps'>/**Retrieve historical app op stats for a period.
+</span>@param {Object {AppOpsManager.HistoricalOpsRequest}} request A request object describing the data being queried for.
+@param {Object {Executor}} executor Executor on which to run the callback. If &lt;code&gt;null&lt;/code&gt;
+     the callback is executed on the default executor running on the main thread.
+@param {Object {java.util.function.Consumer}} callback Callback on which to deliver the result.
+@throws IllegalArgumentException If any of the argument contracts is violated.
+@hide 
+*/
+getHistoricalOps : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getHistoricalOpsFromDiskRaw'>/**Retrieve historical app op stats for a period.
+</span>  &lt;p&gt;
+  This method queries only the on disk state and the returned ops are raw,
+  which is their times are relative to the history start as opposed to the
+  epoch start.
+@param {Object {AppOpsManager.HistoricalOpsRequest}} request A request object describing the data being queried for.
+@param {Object {Executor}} executor Executor on which to run the callback. If &lt;code&gt;null&lt;/code&gt;
+     the callback is executed on the default executor running on the main thread.
+@param {Object {java.util.function.Consumer}} callback Callback on which to deliver the result.
+@throws IllegalArgumentException If any of the argument contracts is violated.
+@hide 
+*/
+getHistoricalOpsFromDiskRaw : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-reloadNonHistoricalState'>/**Reloads the non historical state to allow testing the read/write path.
+</span>@hide 
+*/
+reloadNonHistoricalState : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-setUidMode'>/**Sets given app op in the specified mode for app ops in the UID.
+</span> This applies to all apps currently in the UID or installed in
+ this UID in the future.
+@param {Number} code The app op.
+@param {Number} uid The UID for which to set the app.
+@param {Number} mode The app op mode to set.
+@hide 
+*/
+setUidMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-setUidMode'>/**Sets given app op in the specified mode for app ops in the UID.
+</span> This applies to all apps currently in the UID or installed in
+ this UID in the future.
+@param {String} appOp The app op.
+@param {Number} uid The UID for which to set the app.
+@param {Number} mode The app op mode to set.
+@hide 
+*/
+setUidMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-setUserRestriction'>/**
+</span>@hide 
+*/
+setUserRestriction : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-setUserRestriction'>/**
+</span>@hide 
+*/
+setUserRestriction : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-setUserRestrictionForUser'>/**
+</span>@hide 
+*/
+setUserRestrictionForUser : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-setMode'>/**
+</span>@hide 
+*/
+setMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-setMode'>/**Change the operating mode for the given op in the given app package.  You must pass
+</span> in both the uid and name of the application whose mode is being modified; if these
+ do not match, the modification will not be applied.
+@param {String} op The operation to modify.  One of the OPSTR_* constants.
+@param {Number} uid The user id of the application whose mode will be changed.
+@param {String} packageName The name of the application package name whose mode will
+ be changed.
+@hide 
+*/
+setMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-setRestriction'>/**Set a non-persisted restriction on an audio operation at a stream-level.
+</span> Restrictions are temporary additional constraints imposed on top of the persisted rules
+ defined by {@link #setMode}.
+@param {Number} code The operation to restrict.
+@param {Number} usage The {@link android.media.AudioAttributes} usage value.
+@param {Number} mode The restriction mode (MODE_IGNORED,MODE_ERRORED) or MODE_ALLOWED to unrestrict.
+@param {Object {java.lang.String[]}} exceptionPackages Optional list of packages to exclude from the restriction.
+@hide 
+*/
+setRestriction : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-resetAllModes'>/**
+</span>@hide 
+*/
+resetAllModes : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-permissionToOp'>/**Gets the app op name associated with a given permission.
+</span> The app op name is one of the public constants defined
+ in this class such as {@link #OPSTR_COARSE_LOCATION}.
+ This API is intended to be used for mapping runtime
+ permissions to the corresponding app op.
+@param {String} permission The permission.
+@return {String} The app op associated with the permission or null.
+*/
+permissionToOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startWatchingMode'>/**Monitor for changes to the operating mode for the given op in the given app package.
+</span> You can watch op changes only for your UID.
+@param {String} op The operation to monitor, one of OPSTR_*.
+@param {String} packageName The name of the application to monitor.
+@param {Object {AppOpsManager.OnOpChangedListener}} callback Where to report changes.
+*/
+startWatchingMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startWatchingMode'>/**Monitor for changes to the operating mode for the given op in the given app package.
+</span> You can watch op changes only for your UID.
+@param {String} op The operation to monitor, one of OPSTR_*.
+@param {String} packageName The name of the application to monitor.
+@param {Number} flags Option flags: any combination of {@link #WATCH_FOREGROUND_CHANGES} or 0.
+@param {Object {AppOpsManager.OnOpChangedListener}} callback Where to report changes.
+*/
+startWatchingMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startWatchingMode'>/**Monitor for changes to the operating mode for the given op in the given app package.
+</span>
+ &lt;p&gt; If you don't hold the {@link android.Manifest.permission#WATCH_APPOPS} permission
+ you can watch changes only for your UID.
+@param {Number} op The operation to monitor, one of OP_*.
+@param {String} packageName The name of the application to monitor.
+@param {Object {AppOpsManager.OnOpChangedListener}} callback Where to report changes.
+@hide 
+*/
+startWatchingMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startWatchingMode'>/**Monitor for changes to the operating mode for the given op in the given app package.
+</span>
+ &lt;p&gt; If you don't hold the {@link android.Manifest.permission#WATCH_APPOPS} permission
+ you can watch changes only for your UID.
+@param {Number} op The operation to monitor, one of OP_*.
+@param {String} packageName The name of the application to monitor.
+@param {Number} flags Option flags: any combination of {@link #WATCH_FOREGROUND_CHANGES} or 0.
+@param {Object {AppOpsManager.OnOpChangedListener}} callback Where to report changes.
+@hide 
+*/
+startWatchingMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-stopWatchingMode'>/**Stop monitoring that was previously started with {@link #startWatchingMode}.  All
+</span> monitoring associated with this callback will be removed.
+*/
+stopWatchingMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startWatchingActive'>/**Start watching for changes to the active state of app ops. An app op may be
+</span> long running and it has a clear start and stop delimiters. If an op is being
+ started or stopped by any package you will get a callback. To change the
+ watched ops for a registered callback you need to unregister and register it
+ again.
+
+ &lt;p&gt; If you don't hold the {@link android.Manifest.permission#WATCH_APPOPS} permission
+ you can watch changes only for your UID.
+@param {Object {int[]}} ops The ops to watch.
+@param {Object {AppOpsManager.OnOpActiveChangedListener}} callback Where to report changes.
+@see #isOperationActive(int, int, String)
+@see #stopWatchingActive(OnOpActiveChangedListener)
+@see #startOp(int, int, String)
+@see #finishOp(int, int, String)
+@hide 
+*/
+startWatchingActive : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-stopWatchingActive'>/**Stop watching for changes to the active state of an app op. An app op may be
+</span> long running and it has a clear start and stop delimiters. Unregistering a
+ non-registered callback has no effect.
+@see #isOperationActive#(int, int, String)
+@see #startWatchingActive(int[], OnOpActiveChangedListener)
+@see #startOp(int, int, String)
+@see #finishOp(int, int, String)
+@hide 
+*/
+stopWatchingActive : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startWatchingNoted'>/**Start watching for noted app ops. An app op may be immediate or long running.
+</span> Immediate ops are noted while long running ones are started and stopped. This
+ method allows registering a listener to be notified when an app op is noted. If
+ an op is being noted by any package you will get a callback. To change the
+ watched ops for a registered callback you need to unregister and register it again.
+
+ &lt;p&gt; If you don't hold the {@link android.Manifest.permission#WATCH_APPOPS} permission
+ you can watch changes only for your UID.
+@param {Object {int[]}} ops The ops to watch.
+@param {Object {AppOpsManager.OnOpNotedListener}} callback Where to report changes.
+@see #startWatchingActive(int[], OnOpActiveChangedListener)
+@see #stopWatchingNoted(OnOpNotedListener)
+@see #noteOp(String, int, String)
+@hide 
+*/
+startWatchingNoted : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-stopWatchingNoted'>/**Stop watching for noted app ops. An app op may be immediate or long running.
+</span> Unregistering a non-registered callback has no effect.
+@see #startWatchingNoted(int[], OnOpNotedListener)
+@see #noteOp(String, int, String)
+@hide 
+*/
+stopWatchingNoted : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-strOpToOp'>/**{@hide}
+</span>*/
+strOpToOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-unsafeCheckOp'>/**Do a quick check for whether an application might be able to perform an operation.
+</span> This is &lt;em&gt;not&lt;/em&gt; a security check; you must use {@link #noteOp(String, int, String)}
+ or {@link #startOp(String, int, String)} for your actual security checks, which also
+ ensure that the given uid and package name are consistent.  This function can just be
+ used for a quick check to see if an operation has been disabled for the application,
+ as an early reject of some work.  This does not modify the time stamp or other data
+ about the operation.
+
+ &lt;p&gt;Important things this will not do (which you need to ultimate use
+ {@link #noteOp(String, int, String)} or {@link #startOp(String, int, String)} to cover):&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;Verifying the uid and package are consistent, so callers can't spoof
+     their identity.&lt;/li&gt;
+     &lt;li&gt;Taking into account the current foreground/background state of the
+     app; apps whose mode varies by this state will always be reported
+     as {@link #MODE_ALLOWED}.&lt;/li&gt;
+ &lt;/ul&gt;
+@param {String} op The operation to check.  One of the OPSTR_* constants.
+@param {Number} uid The user id of the application attempting to perform the operation.
+@param {String} packageName The name of the application attempting to perform the operation.
+@return {Number} Returns {@link #MODE_ALLOWED} if the operation is allowed, or
+ {@link #MODE_IGNORED} if it is not allowed and should be silently ignored (without
+ causing the app to crash).
+@throws SecurityException If the app has been configured to crash on this op.
+*/
+unsafeCheckOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-checkOp'>/**
+</span>@deprecated Renamed to {@link #unsafeCheckOp(String, int, String)}.
+*/
+checkOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-unsafeCheckOpNoThrow'>/**Like {@link #checkOp} but instead of throwing a {@link SecurityException} it
+</span> returns {@link #MODE_ERRORED}.
+*/
+unsafeCheckOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-checkOpNoThrow'>/**
+</span>@deprecated Renamed to {@link #unsafeCheckOpNoThrow(String, int, String)}.
+*/
+checkOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-unsafeCheckOpRaw'>/**Like {@link #checkOp} but returns the &lt;em&gt;raw&lt;/em&gt; mode associated with the op.
+</span> Does not throw a security exception, does not translate {@link #MODE_FOREGROUND}.
+*/
+unsafeCheckOpRaw : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-unsafeCheckOpRawNoThrow'>/**Like {@link #unsafeCheckOpNoThrow(String, int, String)} but returns the &lt;em&gt;raw&lt;/em&gt;
+</span> mode associated with the op. Does not throw a security exception, does not translate
+ {@link #MODE_FOREGROUND}.
+*/
+unsafeCheckOpRawNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteOp'>/**Make note of an application performing an operation.  Note that you must pass
+</span> in both the uid and name of the application to be checked; this function will verify
+ that these two match, and if not, return {@link #MODE_IGNORED}.  If this call
+ succeeds, the last execution time of the operation for this app will be updated to
+ the current time.
+@param {String} op The operation to note.  One of the OPSTR_* constants.
+@param {Number} uid The user id of the application attempting to perform the operation.
+@param {String} packageName The name of the application attempting to perform the operation.
+@return {Number} Returns {@link #MODE_ALLOWED} if the operation is allowed, or
+ {@link #MODE_IGNORED} if it is not allowed and should be silently ignored (without
+ causing the app to crash).
+@throws SecurityException If the app has been configured to crash on this op.
+*/
+noteOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteOpNoThrow'>/**Like {@link #noteOp} but instead of throwing a {@link SecurityException} it
+</span> returns {@link #MODE_ERRORED}.
+*/
+noteOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteProxyOp'>/**Make note of an application performing an operation on behalf of another
+</span> application when handling an IPC. Note that you must pass the package name
+ of the application that is being proxied while its UID will be inferred from
+ the IPC state; this function will verify that the calling uid and proxied
+ package name match, and if not, return {@link #MODE_IGNORED}. If this call
+ succeeds, the last execution time of the operation for the proxied app and
+ your app will be updated to the current time.
+@param {String} op The operation to note.  One of the OPSTR_* constants.
+@param {String} proxiedPackageName The name of the application calling into the proxy application.
+@return {Number} Returns {@link #MODE_ALLOWED} if the operation is allowed, or
+ {@link #MODE_IGNORED} if it is not allowed and should be silently ignored (without
+ causing the app to crash).
+@throws SecurityException If the app has been configured to crash on this op.
+*/
+noteProxyOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteProxyOpNoThrow'>/**Like {@link #noteProxyOp(String, String)} but instead
+</span> of throwing a {@link SecurityException} it returns {@link #MODE_ERRORED}.
+
+ &lt;p&gt;This API requires the package with the {@code proxiedPackageName} to belongs to
+ {@link Binder#getCallingUid()}.
+*/
+noteProxyOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteProxyOpNoThrow'>/**Like {@link #noteProxyOpNoThrow(String, String)} but allows to specify the proxied uid.
+</span>
+ &lt;p&gt;This API requires package with the {@code proxiedPackageName} to belong to
+ {@code proxiedUid}.
+@param {String} op The op to note
+@param {String} proxiedPackageName The package to note the op for or {@code null} if the op should be
+                           noted for the &quot;android&quot; package
+@param {Number} proxiedUid The uid the package belongs to
+*/
+noteProxyOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startOp'>/**Report that an application has started executing a long-running operation.  Note that you
+</span> must pass in both the uid and name of the application to be checked; this function will
+ verify that these two match, and if not, return {@link #MODE_IGNORED}.  If this call
+ succeeds, the last execution time of the operation for this app will be updated to
+ the current time and the operation will be marked as &quot;running&quot;.  In this case you must
+ later call {@link #finishOp(String, int, String)} to report when the application is no
+ longer performing the operation.
+@param {String} op The operation to start.  One of the OPSTR_* constants.
+@param {Number} uid The user id of the application attempting to perform the operation.
+@param {String} packageName The name of the application attempting to perform the operation.
+@return {Number} Returns {@link #MODE_ALLOWED} if the operation is allowed, or
+ {@link #MODE_IGNORED} if it is not allowed and should be silently ignored (without
+ causing the app to crash).
+@throws SecurityException If the app has been configured to crash on this op.
+*/
+startOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startOpNoThrow'>/**Like {@link #startOp} but instead of throwing a {@link SecurityException} it
+</span> returns {@link #MODE_ERRORED}.
+*/
+startOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-finishOp'>/**Report that an application is no longer performing an operation that had previously
+</span> been started with {@link #startOp(String, int, String)}.  There is no validation of input
+ or result; the parameters supplied here must be the exact same ones previously passed
+ in when starting the operation.
+*/
+finishOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-checkOp'>/**Do a quick check for whether an application might be able to perform an operation.
+</span> This is &lt;em&gt;not&lt;/em&gt; a security check; you must use {@link #noteOp(int, int, String)}
+ or {@link #startOp(int, int, String)} for your actual security checks, which also
+ ensure that the given uid and package name are consistent.  This function can just be
+ used for a quick check to see if an operation has been disabled for the application,
+ as an early reject of some work.  This does not modify the time stamp or other data
+ about the operation.
+
+ &lt;p&gt;Important things this will not do (which you need to ultimate use
+ {@link #noteOp(int, int, String)} or {@link #startOp(int, int, String)} to cover):&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;Verifying the uid and package are consistent, so callers can't spoof
+     their identity.&lt;/li&gt;
+     &lt;li&gt;Taking into account the current foreground/background state of the
+     app; apps whose mode varies by this state will always be reported
+     as {@link #MODE_ALLOWED}.&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} op The operation to check.  One of the OP_* constants.
+@param {Number} uid The user id of the application attempting to perform the operation.
+@param {String} packageName The name of the application attempting to perform the operation.
+@return {Number} Returns {@link #MODE_ALLOWED} if the operation is allowed, or
+ {@link #MODE_IGNORED} if it is not allowed and should be silently ignored (without
+ causing the app to crash).
+@throws SecurityException If the app has been configured to crash on this op.
+@hide 
+*/
+checkOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-checkOpNoThrow'>/**Like {@link #checkOp} but instead of throwing a {@link SecurityException} it
+</span> returns {@link #MODE_ERRORED}.
+@hide 
+*/
+checkOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-checkPackage'>/**Do a quick check to validate if a package name belongs to a UID.
+</span>@throws SecurityException if the package name doesn't belong to the given
+             UID, or if ownership cannot be verified.
+*/
+checkPackage : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-checkAudioOp'>/**Like {@link #checkOp} but at a stream-level for audio operations.
+</span>@hide 
+*/
+checkAudioOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-checkAudioOpNoThrow'>/**Like {@link #checkAudioOp} but instead of throwing a {@link SecurityException} it
+</span> returns {@link #MODE_ERRORED}.
+@hide 
+*/
+checkAudioOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteOp'>/**Make note of an application performing an operation.  Note that you must pass
+</span> in both the uid and name of the application to be checked; this function will verify
+ that these two match, and if not, return {@link #MODE_IGNORED}.  If this call
+ succeeds, the last execution time of the operation for this app will be updated to
+ the current time.
+@param {Number} op The operation to note.  One of the OP_* constants.
+@param {Number} uid The user id of the application attempting to perform the operation.
+@param {String} packageName The name of the application attempting to perform the operation.
+@return {Number} Returns {@link #MODE_ALLOWED} if the operation is allowed, or
+ {@link #MODE_IGNORED} if it is not allowed and should be silently ignored (without
+ causing the app to crash).
+@throws SecurityException If the app has been configured to crash on this op.
+@hide 
+*/
+noteOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteProxyOp'>/**Make note of an application performing an operation on behalf of another
+</span> application when handling an IPC. Note that you must pass the package name
+ of the application that is being proxied while its UID will be inferred from
+ the IPC state; this function will verify that the calling uid and proxied
+ package name match, and if not, return {@link #MODE_IGNORED}. If this call
+ succeeds, the last execution time of the operation for the proxied app and
+ your app will be updated to the current time.
+@param {Number} op The operation to note. One of the OPSTR_* constants.
+@param {String} proxiedPackageName The name of the application calling into the proxy application.
+@return {Number} Returns {@link #MODE_ALLOWED} if the operation is allowed, or
+ {@link #MODE_IGNORED} if it is not allowed and should be silently ignored (without
+ causing the app to crash).
+@throws SecurityException If the proxy or proxied app has been configured to
+ crash on this op.
+@hide 
+*/
+noteProxyOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteProxyOpNoThrow'>/**Like {@link #noteProxyOp(int, String)} but instead
+</span> of throwing a {@link SecurityException} it returns {@link #MODE_ERRORED}.
+@hide 
+*/
+noteProxyOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteProxyOpNoThrow'>/**Like {@link #noteProxyOp(int, String)} but instead
+</span> of throwing a {@link SecurityException} it returns {@link #MODE_ERRORED}.
+
+ &lt;p&gt;This API requires the package with {@code proxiedPackageName} to belongs to
+ {@link Binder#getCallingUid()}.
+@hide 
+*/
+noteProxyOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteOpNoThrow'>/**Like {@link #noteOp} but instead of throwing a {@link SecurityException} it
+</span> returns {@link #MODE_ERRORED}.
+@hide 
+*/
+noteOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-noteOp'>/**
+</span>@hide 
+*/
+noteOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getToken'>/**
+</span>@hide 
+*/
+getToken : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startOp'>/**
+</span>@hide 
+*/
+startOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startOp'>/**Report that an application has started executing a long-running operation.  Note that you
+</span> must pass in both the uid and name of the application to be checked; this function will
+ verify that these two match, and if not, return {@link #MODE_IGNORED}.  If this call
+ succeeds, the last execution time of the operation for this app will be updated to
+ the current time and the operation will be marked as &quot;running&quot;.  In this case you must
+ later call {@link #finishOp(int, int, String)} to report when the application is no
+ longer performing the operation.
+@param {Number} op The operation to start.  One of the OP_* constants.
+@param {Number} uid The user id of the application attempting to perform the operation.
+@param {String} packageName The name of the application attempting to perform the operation.
+@return {Number} Returns {@link #MODE_ALLOWED} if the operation is allowed, or
+ {@link #MODE_IGNORED} if it is not allowed and should be silently ignored (without
+ causing the app to crash).
+@throws SecurityException If the app has been configured to crash on this op.
+@hide 
+*/
+startOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startOp'>/**Report that an application has started executing a long-running operation. Similar
+</span> to {@link #startOp(String, int, String) except that if the mode is {@link #MODE_DEFAULT}
+ the operation should succeed since the caller has performed its standard permission
+ checks which passed and would perform the protected operation for this mode.
+@param {Number} op The operation to start.  One of the OP_* constants.
+@param {Number} uid The user id of the application attempting to perform the operation.
+@param {String} packageName The name of the application attempting to perform the operation.
+@param {Boolean} startIfModeDefault Whether to start if mode is {@link #MODE_DEFAULT}.
+@param startIfModeDefault Whether to start if mode is {@link #MODE_DEFAULT}.
+@throws SecurityException If the app has been configured to crash on this op or
+ the package is not in the passed in UID.
+@hide 
+*/
+startOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startOpNoThrow'>/**Like {@link #startOp} but instead of throwing a {@link SecurityException} it
+</span> returns {@link #MODE_ERRORED}.
+@hide 
+*/
+startOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-startOpNoThrow'>/**Like {@link #startOp(int, int, String, boolean)} but instead of throwing a
+</span> {@link SecurityException} it returns {@link #MODE_ERRORED}.
+@param {Number} op The operation to start.  One of the OP_* constants.
+@param {Number} uid The user id of the application attempting to perform the operation.
+@param {String} packageName The name of the application attempting to perform the operation.
+@param {Boolean} startIfModeDefault Whether to start if mode is {@link #MODE_DEFAULT}.
+@param startIfModeDefault Whether to start if mode is {@link #MODE_DEFAULT}.
+@hide 
+*/
+startOpNoThrow : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-finishOp'>/**Report that an application is no longer performing an operation that had previously
+</span> been started with {@link #startOp(int, int, String)}.  There is no validation of input
+ or result; the parameters supplied here must be the exact same ones previously passed
+ in when starting the operation.
+@hide 
+*/
+finishOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-finishOp'>/**
+</span>@hide 
+*/
+finishOp : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-isOperationActive'>/**Checks whether the given op for a UID and package is active.
+</span>
+ &lt;p&gt; If you don't hold the {@link android.Manifest.permission#WATCH_APPOPS} permission
+ you can query only for your UID.
+@see #startWatchingActive(int[], OnOpActiveChangedListener)
+@see #stopWatchingMode(OnOpChangedListener)
+@see #finishOp(int)
+@see #startOp(int)
+@hide 
+*/
+isOperationActive : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-setHistoryParameters'>/**Configures the app ops persistence for testing.
+</span>@param {Number} mode The mode in which the historical registry operates.
+@param {Number} baseSnapshotInterval The base interval on which we would be persisting a snapshot of
+   the historical data. The history is recursive where every subsequent step encompasses
+   {@code compressionStep} longer interval with {@code compressionStep} distance between
+    snapshots.
+@param {Number} compressionStep The compression step in every iteration.
+@see #HISTORICAL_MODE_DISABLED
+@see #HISTORICAL_MODE_ENABLED_ACTIVE
+@see #HISTORICAL_MODE_ENABLED_PASSIVE
+@hide 
+*/
+setHistoryParameters : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-offsetHistory'>/**Offsets the history by the given duration.
+</span>@param {Number} offsetMillis The offset duration.
+@hide 
+*/
+offsetHistory : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-addHistoricalOps'>/**Adds ops to the history directly. This could be useful for testing especially
+</span> when the historical registry operates in {@link #HISTORICAL_MODE_ENABLED_PASSIVE}
+ mode.
+@param {Object {AppOpsManager.HistoricalOps}} ops The ops to add to the history.
+@see #setHistoryParameters(int, long, int)
+@see #HISTORICAL_MODE_ENABLED_PASSIVE
+@hide 
+*/
+addHistoricalOps : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-resetHistoryParameters'>/**Resets the app ops persistence for testing.
+</span>@see #setHistoryParameters(int, long, int)
+@hide 
+*/
+resetHistoryParameters : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-clearHistory'>/**Clears all app ops history.
+</span>@hide 
+*/
+clearHistory : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getOpStrs'>/**Returns all supported operation names.
+</span>@hide 
+*/
+getOpStrs : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-getNumOps'>/**
+</span>@return {Number} number of App ops
+@hide 
+*/
+getNumOps : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-uidStateToString'>/**
+</span>@hide 
+*/
+uidStateToString : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-parseHistoricalMode'>/**
+</span>@hide 
+*/
+parseHistoricalMode : function(  ) {},
+
+<span id='android-app-AppOpsManager-method-historicalModeToString'>/**
+</span>@hide 
+*/
+historicalModeToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

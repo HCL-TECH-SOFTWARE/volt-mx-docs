@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-accessibilityservice-AccessibilityService'>/**@class android.accessibilityservice.AccessibilityService
+</span>@extends android.app.Service
+
+ Accessibility services should only be used to assist users with disabilities in using
+ Android devices and apps. They run in the background and receive callbacks by the system
+ when {@link AccessibilityEvent}s are fired. Such events denote some state transition
+ in the user interface, for example, the focus has changed, a button has been clicked,
+ etc. Such a service can optionally request the capability for querying the content
+ of the active window. Development of an accessibility service requires extending this
+ class and implementing its abstract methods.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about creating AccessibilityServices, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/ui/accessibility/index.html&quot;&gt;Accessibility&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ &lt;h3&gt;Lifecycle&lt;/h3&gt;
+ &lt;p&gt;
+ The lifecycle of an accessibility service is managed exclusively by the system and
+ follows the established service life cycle. Starting an accessibility service is triggered
+ exclusively by the user explicitly turning the service on in device settings. After the system
+ binds to a service, it calls {@link android.accessibilityservice.AccessibilityService#onServiceConnected()}. This method can
+ be overridden by clients that want to perform post binding setup.
+ &lt;/p&gt;
+ &lt;p&gt;
+ An accessibility service stops either when the user turns it off in device settings or when
+ it calls {@link android.accessibilityservice.AccessibilityService#disableSelf()}.
+ &lt;/p&gt;
+ &lt;h3&gt;Declaration&lt;/h3&gt;
+ &lt;p&gt;
+ An accessibility is declared as any other service in an AndroidManifest.xml, but it
+ must do two things:
+ &lt;ul&gt;
+     &lt;ol&gt;
+         Specify that it handles the &quot;android.accessibilityservice.AccessibilityService&quot;
+         {@link android.content.Intent}.
+     &lt;/ol&gt;
+     &lt;ol&gt;
+         Request the {@link android.Manifest.permission#BIND_ACCESSIBILITY_SERVICE} permission to
+         ensure that only the system can bind to it.
+     &lt;/ol&gt;
+ &lt;/ul&gt;
+ If either of these items is missing, the system will ignore the accessibility service.
+ Following is an example declaration:
+ &lt;/p&gt;
+ &lt;pre&gt; &amp;lt;service android:name=&quot;.MyAccessibilityService&quot;
+         android:permission=&quot;android.permission.BIND_ACCESSIBILITY_SERVICE&quot;&amp;gt;
+     &amp;lt;intent-filter&amp;gt;
+         &amp;lt;action android:name=&quot;android.accessibilityservice.AccessibilityService&quot; /&amp;gt;
+     &amp;lt;/intent-filter&amp;gt;
+     . . .
+ &amp;lt;/service&amp;gt;&lt;/pre&gt;
+ &lt;h3&gt;Configuration&lt;/h3&gt;
+ &lt;p&gt;
+ An accessibility service can be configured to receive specific types of accessibility events,
+ listen only to specific packages, get events from each type only once in a given time frame,
+ retrieve window content, specify a settings activity, etc.
+ &lt;/p&gt;
+ &lt;p&gt;
+ There are two approaches for configuring an accessibility service:
+ &lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;
+ Providing a {@link #SERVICE_META_DATA meta-data} entry in the manifest when declaring
+ the service. A service declaration with a meta-data tag is presented below:
+ &lt;pre&gt; &amp;lt;service android:name=&quot;.MyAccessibilityService&quot;&amp;gt;
+     &amp;lt;intent-filter&amp;gt;
+         &amp;lt;action android:name=&quot;android.accessibilityservice.AccessibilityService&quot; /&amp;gt;
+     &amp;lt;/intent-filter&amp;gt;
+     &amp;lt;meta-data android:name=&quot;android.accessibilityservice&quot; android:resource=&quot;@xml/accessibilityservice&quot; /&amp;gt;
+ &amp;lt;/service&amp;gt;&lt;/pre&gt;
+ &lt;p class=&quot;note&quot;&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; This approach enables setting all properties.
+ &lt;/p&gt;
+ &lt;p&gt;
+ For more details refer to {@link #SERVICE_META_DATA} and
+ &lt;code&gt;&amp;lt;{@link android.R.styleable#AccessibilityService accessibility-service}&amp;gt;&lt;/code&gt;.
+ &lt;/p&gt;
+ &lt;/li&gt;
+ &lt;li&gt;
+ Calling {@link android.accessibilityservice.AccessibilityService#setServiceInfo(android.accessibilityservice.AccessibilityServiceInfo)}. Note
+ that this method can be called any time to dynamically change the service configuration.
+ &lt;p class=&quot;note&quot;&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; This approach enables setting only dynamically configurable properties:
+ {@link android.accessibilityservice.AccessibilityServiceInfo#eventTypes},
+ {@link android.accessibilityservice.AccessibilityServiceInfo#feedbackType},
+ {@link android.accessibilityservice.AccessibilityServiceInfo#flags},
+ {@link android.accessibilityservice.AccessibilityServiceInfo#notificationTimeout},
+ {@link android.accessibilityservice.AccessibilityServiceInfo#packageNames}
+ &lt;/p&gt;
+ &lt;p&gt;
+ For more details refer to {@link android.accessibilityservice.AccessibilityServiceInfo}.
+ &lt;/p&gt;
+ &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;h3&gt;Retrieving window content&lt;/h3&gt;
+ &lt;p&gt;
+ A service can specify in its declaration that it can retrieve window
+ content which is represented as a tree of {@link AccessibilityWindowInfo} and
+ {@link AccessibilityNodeInfo} objects. Note that
+ declaring this capability requires that the service declares its configuration via
+ an XML resource referenced by {@link #SERVICE_META_DATA}.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Window content may be retrieved with
+ {@link AccessibilityEvent#getSource() AccessibilityEvent.getSource()},
+ {@link android.accessibilityservice.AccessibilityService#findFocus(int)},
+ {@link android.accessibilityservice.AccessibilityService#getWindows()}, or
+ {@link android.accessibilityservice.AccessibilityService#getRootInActiveWindow()}.
+ &lt;/p&gt;
+ &lt;p class=&quot;note&quot;&gt;
+ &lt;strong&gt;Note&lt;/strong&gt; An accessibility service may have requested to be notified for
+ a subset of the event types, and thus be unaware when the node hierarchy has changed. It is also
+ possible for a node to contain outdated information because the window content may change at any
+ time.
+ &lt;/p&gt;
+ &lt;h3&gt;Notification strategy&lt;/h3&gt;
+ &lt;p&gt;
+ All accessibility services are notified of all events they have requested, regardless of their
+ feedback type.
+ &lt;/p&gt;
+ &lt;p class=&quot;note&quot;&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; The event notification timeout is useful to avoid propagating
+ events to the client too frequently since this is accomplished via an expensive
+ interprocess call. One can think of the timeout as a criteria to determine when
+ event generation has settled down.&lt;/p&gt;
+ &lt;h3&gt;Event types&lt;/h3&gt;
+ &lt;ul&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_CLICKED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_LONG_CLICKED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_FOCUSED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_SELECTED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_TEXT_CHANGED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_WINDOW_STATE_CHANGED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_NOTIFICATION_STATE_CHANGED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_TOUCH_EXPLORATION_GESTURE_START}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_TOUCH_EXPLORATION_GESTURE_END}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_HOVER_ENTER}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_HOVER_EXIT}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_SCROLLED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_TEXT_SELECTION_CHANGED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_WINDOW_CONTENT_CHANGED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_ANNOUNCEMENT}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_GESTURE_DETECTION_START}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_GESTURE_DETECTION_END}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_TOUCH_INTERACTION_START}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_TOUCH_INTERACTION_END}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_ACCESSIBILITY_FOCUSED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_WINDOWS_CHANGED}&lt;/li&gt;
+ &lt;li&gt;{@link AccessibilityEvent#TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;h3&gt;Feedback types&lt;/h3&gt;
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.accessibilityservice.AccessibilityServiceInfo#FEEDBACK_AUDIBLE}&lt;/li&gt;
+ &lt;li&gt;{@link android.accessibilityservice.AccessibilityServiceInfo#FEEDBACK_HAPTIC}&lt;/li&gt;
+ &lt;li&gt;{@link android.accessibilityservice.AccessibilityServiceInfo#FEEDBACK_AUDIBLE}&lt;/li&gt;
+ &lt;li&gt;{@link android.accessibilityservice.AccessibilityServiceInfo#FEEDBACK_VISUAL}&lt;/li&gt;
+ &lt;li&gt;{@link android.accessibilityservice.AccessibilityServiceInfo#FEEDBACK_GENERIC}&lt;/li&gt;
+ &lt;li&gt;{@link android.accessibilityservice.AccessibilityServiceInfo#FEEDBACK_BRAILLE}&lt;/li&gt;
+ &lt;/ul&gt;
+ @see AccessibilityEvent
+ @see AccessibilityServiceInfo
+ @see android.view.accessibility.AccessibilityManager
+*/
+var AccessibilityService = {
+
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_UP'>/** The user has performed a swipe up gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_UP : &quot;1&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_DOWN'>/** The user has performed a swipe down gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_DOWN : &quot;2&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_LEFT'>/** The user has performed a swipe left gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_LEFT : &quot;3&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_RIGHT'>/** The user has performed a swipe right gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_RIGHT : &quot;4&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_LEFT_AND_RIGHT'>/** The user has performed a swipe left and right gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_LEFT_AND_RIGHT : &quot;5&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_RIGHT_AND_LEFT'>/** The user has performed a swipe right and left gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_RIGHT_AND_LEFT : &quot;6&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_UP_AND_DOWN'>/** The user has performed a swipe up and down gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_UP_AND_DOWN : &quot;7&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_DOWN_AND_UP'>/** The user has performed a swipe down and up gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_DOWN_AND_UP : &quot;8&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_LEFT_AND_UP'>/** The user has performed a left and up gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_LEFT_AND_UP : &quot;9&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_LEFT_AND_DOWN'>/** The user has performed a left and down gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_LEFT_AND_DOWN : &quot;10&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_RIGHT_AND_UP'>/** The user has performed a right and up gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_RIGHT_AND_UP : &quot;11&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_RIGHT_AND_DOWN'>/** The user has performed a right and down gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_RIGHT_AND_DOWN : &quot;12&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_UP_AND_LEFT'>/** The user has performed an up and left gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_UP_AND_LEFT : &quot;13&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_UP_AND_RIGHT'>/** The user has performed an up and right gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_UP_AND_RIGHT : &quot;14&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_DOWN_AND_LEFT'>/** The user has performed an down and left gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_DOWN_AND_LEFT : &quot;15&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GESTURE_SWIPE_DOWN_AND_RIGHT'>/** The user has performed an down and right gesture on the touch screen.
+</span>*/
+GESTURE_SWIPE_DOWN_AND_RIGHT : &quot;16&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.accessibilityservice.AccessibilityService&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-SERVICE_META_DATA'>/** Name under which an AccessibilityService component publishes information
+</span> about itself. This meta-data must reference an XML resource containing an
+ &lt;code&gt;&amp;lt;{@link android.R.styleable#AccessibilityService accessibility-service}&amp;gt;&lt;/code&gt;
+ tag. This is a a sample XML file configuring an accessibility service:
+ &lt;pre&gt; &amp;lt;accessibility-service
+     android:accessibilityEventTypes=&quot;typeViewClicked|typeViewFocused&quot;
+     android:packageNames=&quot;foo.bar, foo.baz&quot;
+     android:accessibilityFeedbackType=&quot;feedbackSpoken&quot;
+     android:notificationTimeout=&quot;100&quot;
+     android:accessibilityFlags=&quot;flagDefault&quot;
+     android:settingsActivity=&quot;foo.bar.TestBackActivity&quot;
+     android:canRetrieveWindowContent=&quot;true&quot;
+     android:canRequestTouchExplorationMode=&quot;true&quot;
+     . . .
+ /&amp;gt;&lt;/pre&gt;
+*/
+SERVICE_META_DATA : &quot;android.accessibilityservice&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GLOBAL_ACTION_BACK'>/** Action to go back.
+</span>*/
+GLOBAL_ACTION_BACK : &quot;1&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GLOBAL_ACTION_HOME'>/** Action to go home.
+</span>*/
+GLOBAL_ACTION_HOME : &quot;2&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GLOBAL_ACTION_RECENTS'>/** Action to toggle showing the overview of recent apps. Will fail on platforms that don't
+</span> show recent apps.
+*/
+GLOBAL_ACTION_RECENTS : &quot;3&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GLOBAL_ACTION_NOTIFICATIONS'>/** Action to open the notifications.
+</span>*/
+GLOBAL_ACTION_NOTIFICATIONS : &quot;4&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GLOBAL_ACTION_QUICK_SETTINGS'>/** Action to open the quick settings.
+</span>*/
+GLOBAL_ACTION_QUICK_SETTINGS : &quot;5&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GLOBAL_ACTION_POWER_DIALOG'>/** Action to open the power long-press dialog.
+</span>*/
+GLOBAL_ACTION_POWER_DIALOG : &quot;6&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GLOBAL_ACTION_TOGGLE_SPLIT_SCREEN'>/** Action to toggle docking the current app's window
+</span>*/
+GLOBAL_ACTION_TOGGLE_SPLIT_SCREEN : &quot;7&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GLOBAL_ACTION_LOCK_SCREEN'>/** Action to lock the screen
+</span>*/
+GLOBAL_ACTION_LOCK_SCREEN : &quot;8&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-GLOBAL_ACTION_TAKE_SCREENSHOT'>/** Action to take a screenshot
+</span>*/
+GLOBAL_ACTION_TAKE_SCREENSHOT : &quot;9&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-SHOW_MODE_AUTO'>/** Allow the system to control when the soft keyboard is shown.
+</span> @see SoftKeyboardController
+*/
+SHOW_MODE_AUTO : &quot;0&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-SHOW_MODE_HIDDEN'>/** Never show the soft keyboard.
+</span> @see SoftKeyboardController
+*/
+SHOW_MODE_HIDDEN : &quot;1&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-SHOW_MODE_IGNORE_HARD_KEYBOARD'>/** Allow the soft keyboard to be shown, even if a hard keyboard is connected
+</span> @see SoftKeyboardController
+*/
+SHOW_MODE_IGNORE_HARD_KEYBOARD : &quot;2&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-SHOW_MODE_MASK'>/** Mask used to cover the show modes supported in public API
+</span> @hide
+*/
+SHOW_MODE_MASK : &quot;3&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-SHOW_MODE_HARD_KEYBOARD_ORIGINAL_VALUE'>/** Bit used to hold the old value of the hard IME setting to restore when a service is shut
+</span> down.
+ @hide
+*/
+SHOW_MODE_HARD_KEYBOARD_ORIGINAL_VALUE : &quot;536870912&quot;,
+<span id='android-accessibilityservice-AccessibilityService-property-SHOW_MODE_HARD_KEYBOARD_OVERRIDDEN'>/** Bit for show mode setting to indicate that the user has overridden the hard keyboard
+</span> behavior.
+ @hide
+*/
+SHOW_MODE_HARD_KEYBOARD_OVERRIDDEN : &quot;1073741824&quot;,
+<span id='android-accessibilityservice-AccessibilityService-method-onAccessibilityEvent'>/**Callback for {@link android.view.accessibility.AccessibilityEvent}s.
+</span>@param {Object {AccessibilityEvent}} event The new event. This event is owned by the caller and cannot be used after
+ this method returns. Services wishing to use the event after this method returns should
+ make a copy.
+*/
+onAccessibilityEvent : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-onInterrupt'>/**Callback for interrupting the accessibility feedback.
+</span>*/
+onInterrupt : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-getWindows'>/**Gets the windows on the screen. This method returns only the windows
+</span> that a sighted user can interact with, as opposed to all windows.
+ For example, if there is a modal dialog shown and the user cannot touch
+ anything behind it, then only the modal window will be reported
+ (assuming it is the top one). For convenience the returned windows
+ are ordered in a descending layer order, which is the windows that
+ are on top are reported first. Since the user can always
+ interact with the window that has input focus by typing, the focused
+ window is always returned (even if covered by a modal window).
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In order to access the windows your service has
+ to declare the capability to retrieve window content by setting the
+ {@link android.R.styleable#AccessibilityService_canRetrieveWindowContent}
+ property in its meta-data. For details refer to {@link #SERVICE_META_DATA}.
+ Also the service has to opt-in to retrieve the interactive windows by
+ setting the {@link android.accessibilityservice.AccessibilityServiceInfo#FLAG_RETRIEVE_INTERACTIVE_WINDOWS}
+ flag.
+ &lt;/p&gt;
+@return {Object {java.util.List}} The windows if there are windows and the service is can retrieve
+         them, otherwise an empty list.
+*/
+getWindows : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-getRootInActiveWindow'>/**Gets the root node in the currently active window if this service
+</span> can retrieve window content. The active window is the one that the user
+ is currently touching or the window with input focus, if the user is not
+ touching any window.
+ &lt;p&gt;
+ The currently active window is defined as the window that most recently fired one
+ of the following events:
+ {@link AccessibilityEvent#TYPE_WINDOW_STATE_CHANGED},
+ {@link AccessibilityEvent#TYPE_VIEW_HOVER_ENTER},
+ {@link AccessibilityEvent#TYPE_VIEW_HOVER_EXIT}.
+ In other words, the last window shown that also has input focus.
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In order to access the root node your service has
+ to declare the capability to retrieve window content by setting the
+ {@link android.R.styleable#AccessibilityService_canRetrieveWindowContent}
+ property in its meta-data. For details refer to {@link #SERVICE_META_DATA}.
+ &lt;/p&gt;
+@return {Object {android.view.accessibility.AccessibilityNodeInfo}} The root node if this service can retrieve window content.
+*/
+getRootInActiveWindow : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-disableSelf'>/**Disables the service. After calling this method, the service will be disabled and settings
+</span> will show that it is turned off.
+*/
+disableSelf : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-getMagnificationController'>/**Returns the magnification controller, which may be used to query and
+</span> modify the state of display magnification.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In order to control magnification, your service
+ must declare the capability by setting the
+ {@link android.R.styleable#AccessibilityService_canControlMagnification}
+ property in its meta-data. For more information, see
+ {@link #SERVICE_META_DATA}.
+@return {Object {android.accessibilityservice.AccessibilityService.MagnificationController}} the magnification controller
+*/
+getMagnificationController : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-getMagnificationController'>/**Returns the magnification controller of specified logical display, which may be used to
+</span> query and modify the state of display magnification.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In order to control magnification, your service
+ must declare the capability by setting the
+ {@link android.R.styleable#AccessibilityService_canControlMagnification}
+ property in its meta-data. For more information, see
+ {@link #SERVICE_META_DATA}.
+@param {Number} displayId The logic display id, use {@link Display#DEFAULT_DISPLAY} for
+                  default display.
+@return {Object {android.accessibilityservice.AccessibilityService.MagnificationController}} the magnification controller
+@hide 
+*/
+getMagnificationController : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-getFingerprintGestureController'>/**Get the controller for fingerprint gestures. This feature requires {@link android.accessibilityservice.AccessibilityServiceInfo#CAPABILITY_CAN_REQUEST_FINGERPRINT_GESTURES}.
+</span>
+&lt;strong&gt;Note: &lt;/strong&gt; The service must be connected before this method is called.
+@return {Object {android.accessibilityservice.FingerprintGestureController}} The controller for fingerprint gestures, or {@code null} if gestures are unavailable.
+*/
+getFingerprintGestureController : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-dispatchGesture'>/**Dispatch a gesture to the touch screen. Any gestures currently in progress, whether from
+</span> the user, this service, or another service, will be cancelled.
+ &lt;p&gt;
+ The gesture will be dispatched as if it were performed directly on the screen by a user, so
+ the events may be affected by features such as magnification and explore by touch.
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In order to dispatch gestures, your service
+ must declare the capability by setting the
+ {@link android.R.styleable#AccessibilityService_canPerformGestures}
+ property in its meta-data. For more information, see
+ {@link #SERVICE_META_DATA}.
+ &lt;/p&gt;
+@param {Object {GestureDescription}} gesture The gesture to dispatch
+@param {Object {AccessibilityService.GestureResultCallback}} callback The object to call back when the status of the gesture is known. If
+ {@code null}, no status is reported.
+@param {Object {Handler}} handler The handler on which to call back the {@code callback} object. If
+ {@code null}, the object is called back on the service's main thread.
+@return {Boolean} {@code true} if the gesture is dispatched, {@code false} if not.
+*/
+dispatchGesture : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-getSoftKeyboardController'>/**Returns the soft keyboard controller, which may be used to query and modify the soft keyboard
+</span> show mode.
+@return {Object {android.accessibilityservice.AccessibilityService.SoftKeyboardController}} the soft keyboard controller
+*/
+getSoftKeyboardController : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-getAccessibilityButtonController'>/**Returns the controller for the accessibility button within the system's navigation area.
+</span> This instance may be used to query the accessibility button's state and register listeners
+ for interactions with and state changes for the accessibility button when
+ {@link android.accessibilityservice.AccessibilityServiceInfo#FLAG_REQUEST_ACCESSIBILITY_BUTTON} is set.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Not all devices are capable of displaying the accessibility button
+ within a navigation area, and as such, use of this class should be considered only as an
+ optional feature or shortcut on supported device implementations.
+ &lt;/p&gt;
+@return {Object {android.accessibilityservice.AccessibilityButtonController}} the accessibility button controller for this {@link AccessibilityService}
+*/
+getAccessibilityButtonController : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-performGlobalAction'>/**Performs a global action. Such an action can be performed
+</span> at any moment regardless of the current application or user
+ location in that application. For example going back, going
+ home, opening recents, etc.
+@param {Number} action The action to perform.
+@return {Boolean} Whether the action was successfully performed.
+@see #GLOBAL_ACTION_BACK
+@see #GLOBAL_ACTION_HOME
+@see #GLOBAL_ACTION_NOTIFICATIONS
+@see #GLOBAL_ACTION_RECENTS
+*/
+performGlobalAction : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-findFocus'>/**Find the view that has the specified focus type. The search is performed
+</span> across all windows.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In order to access the windows your service has
+ to declare the capability to retrieve window content by setting the
+ {@link android.R.styleable#AccessibilityService_canRetrieveWindowContent}
+ property in its meta-data. For details refer to {@link #SERVICE_META_DATA}.
+ Also the service has to opt-in to retrieve the interactive windows by
+ setting the {@link android.accessibilityservice.AccessibilityServiceInfo#FLAG_RETRIEVE_INTERACTIVE_WINDOWS}
+ flag. Otherwise, the search will be performed only in the active window.
+ &lt;/p&gt;
+@param {Number} focus The focus to find. One of {@link AccessibilityNodeInfo#FOCUS_INPUT} or
+         {@link AccessibilityNodeInfo#FOCUS_ACCESSIBILITY}.
+@return {Object {android.view.accessibility.AccessibilityNodeInfo}} The node info of the focused view or null.
+@see AccessibilityNodeInfo#FOCUS_INPUT
+@see AccessibilityNodeInfo#FOCUS_ACCESSIBILITY
+*/
+findFocus : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-getServiceInfo'>/**Gets the an {@link android.accessibilityservice.AccessibilityServiceInfo} describing this
+</span> {@link android.accessibilityservice.AccessibilityService}. This method is useful if one wants
+ to change some of the dynamically configurable properties at
+ runtime.
+@return {Object {android.accessibilityservice.AccessibilityServiceInfo}} The accessibility service info.
+@see AccessibilityServiceInfo
+*/
+getServiceInfo : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-setServiceInfo'>/**Sets the {@link android.accessibilityservice.AccessibilityServiceInfo} that describes this service.
+</span> &lt;p&gt;
+ Note: You can call this method any time but the info will be picked up after
+       the system has bound to this service and when this method is called thereafter.
+@param {Object {AccessibilityServiceInfo}} info The info.
+*/
+setServiceInfo : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-getSystemService'>/**
+</span>*/
+getSystemService : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-method-onBind'>/**Implement to return the implementation of the internal accessibility
+</span> service interface.
+*/
+onBind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

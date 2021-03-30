@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-animation-AnimatorSet-Builder'>/**@class android.animation.AnimatorSet.Builder
+</span>@extends java.lang.Object
+
+ The &lt;code&gt;Builder&lt;/code&gt; object is a utility class to facilitate adding animations to a
+ &lt;code&gt;AnimatorSet&lt;/code&gt; along with the relationships between the various animations. The
+ intention of the &lt;code&gt;Builder&lt;/code&gt; methods, along with the {@link android.animation.AnimatorSet#play(Animator) play()} method of &lt;code&gt;AnimatorSet&lt;/code&gt; is to make it possible
+ to express the dependency relationships of animations in a natural way. Developers can also
+ use the {@link android.animation.AnimatorSet#playTogether(Animator[]) playTogether()} and {@link android.animation.AnimatorSet#playSequentially(Animator[]) playSequentially()} methods if these suit the need,
+ but it might be easier in some situations to express the AnimatorSet of animations in pairs.
+ &lt;p/&gt;
+ &lt;p&gt;The &lt;code&gt;Builder&lt;/code&gt; object cannot be constructed directly, but is rather constructed
+ internally via a call to {@link android.animation.AnimatorSet#play(Animator)}.&lt;/p&gt;
+ &lt;p/&gt;
+ &lt;p&gt;For example, this sets up a AnimatorSet to play anim1 and anim2 at the same time, anim3 to
+ play when anim2 finishes, and anim4 to play when anim3 finishes:&lt;/p&gt;
+ &lt;pre&gt;
+     AnimatorSet s = new AnimatorSet();
+     s.play(anim1).with(anim2);
+     s.play(anim2).before(anim3);
+     s.play(anim4).after(anim3);
+ &lt;/pre&gt;
+ &lt;p/&gt;
+ &lt;p&gt;Note in the example that both {@link android.animation.AnimatorSet.Builder#before(Animator)} and {@link android.animation.AnimatorSet.Builder#after(Animator)} are used. These are just different ways of expressing the same
+ relationship and are provided to make it easier to say things in a way that is more natural,
+ depending on the situation.&lt;/p&gt;
+ &lt;p/&gt;
+ &lt;p&gt;It is possible to make several calls into the same &lt;code&gt;Builder&lt;/code&gt; object to express
+ multiple relationships. However, note that it is only the animation passed into the initial
+ {@link android.animation.AnimatorSet#play(Animator)} method that is the dependency in any of the successive
+ calls to the &lt;code&gt;Builder&lt;/code&gt; object. For example, the following code starts both anim2
+ and anim3 when anim1 ends; there is no direct dependency relationship between anim2 and
+ anim3:
+ &lt;pre&gt;
+   AnimatorSet s = new AnimatorSet();
+   s.play(anim1).before(anim2).before(anim3);
+ &lt;/pre&gt;
+ If the desired result is to play anim1 then anim2 then anim3, this code expresses the
+ relationship correctly:&lt;/p&gt;
+ &lt;pre&gt;
+   AnimatorSet s = new AnimatorSet();
+   s.play(anim1).before(anim2);
+   s.play(anim2).before(anim3);
+ &lt;/pre&gt;
+ &lt;p/&gt;
+ &lt;p&gt;Note that it is possible to express relationships that cannot be resolved and will not
+ result in sensible results. For example, &lt;code&gt;play(anim1).after(anim1)&lt;/code&gt; makes no
+ sense. In general, circular dependencies like this one (or more indirect ones where a depends
+ on b, which depends on c, which depends on a) should be avoided. Only create AnimatorSets
+ that can boil down to a simple, one-way relationship of animations starting with, before, and
+ after other, different, animations.&lt;/p&gt;
+*/
+var Builder = {
+
+<span id='android-animation-AnimatorSet-Builder-method-with'>/**Sets up the given animation to play at the same time as the animation supplied in the
+</span> {@link android.animation.AnimatorSet#play(Animator)} call that created this &lt;code&gt;Builder&lt;/code&gt; object.
+@param {Object {Animator}} anim The animation that will play when the animation supplied to the
+ {@link AnimatorSet#play(Animator)} method starts.
+*/
+with : function(  ) {},
+
+<span id='android-animation-AnimatorSet-Builder-method-before'>/**Sets up the given animation to play when the animation supplied in the
+</span> {@link android.animation.AnimatorSet#play(Animator)} call that created this &lt;code&gt;Builder&lt;/code&gt; object
+ ends.
+@param {Object {Animator}} anim The animation that will play when the animation supplied to the
+ {@link AnimatorSet#play(Animator)} method ends.
+*/
+before : function(  ) {},
+
+<span id='android-animation-AnimatorSet-Builder-method-after'>/**Sets up the given animation to play when the animation supplied in the
+</span> {@link android.animation.AnimatorSet#play(Animator)} call that created this &lt;code&gt;Builder&lt;/code&gt; object
+ to start when the animation supplied in this method call ends.
+@param {Object {Animator}} anim The animation whose end will cause the animation supplied to the
+ {@link AnimatorSet#play(Animator)} method to play.
+*/
+after : function(  ) {},
+
+<span id='android-animation-AnimatorSet-Builder-method-after'>/**Sets up the animation supplied in the
+</span> {@link android.animation.AnimatorSet#play(Animator)} call that created this &lt;code&gt;Builder&lt;/code&gt; object
+ to play when the given amount of time elapses.
+@param {Number} delay The number of milliseconds that should elapse before the
+ animation starts.
+*/
+after : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-ExpandableListActivity'>/**@class android.app.ExpandableListActivity
+</span> implements android.view.View.OnCreateContextMenuListener
+
+ implements android.widget.ExpandableListView.OnChildClickListener
+
+ implements android.widget.ExpandableListView.OnGroupCollapseListener
+
+ implements android.widget.ExpandableListView.OnGroupExpandListener
+
+@extends android.app.Activity
+
+ An activity that displays an expandable list of items by binding to a data
+ source implementing the ExpandableListAdapter, and exposes event handlers
+ when the user selects an item.
+ &lt;p&gt;
+ ExpandableListActivity hosts a
+ {@link android.widget.ExpandableListView ExpandableListView} object that can
+ be bound to different data sources that provide a two-levels of data (the
+ top-level is group, and below each group are children). Binding, screen
+ layout, and row layout are discussed in the following sections.
+ &lt;p&gt;
+ &lt;strong&gt;Screen Layout&lt;/strong&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ ExpandableListActivity has a default layout that consists of a single,
+ full-screen, centered expandable list. However, if you desire, you can
+ customize the screen layout by setting your own view layout with
+ setContentView() in onCreate(). To do this, your own view MUST contain an
+ ExpandableListView object with the id &quot;@android:id/list&quot; (or
+ {@link android.R.id#list} if it's in code)
+ &lt;p&gt;
+ Optionally, your custom view can contain another view object of any type to
+ display when the list view is empty. This &quot;empty list&quot; notifier must have an
+ id &quot;android:empty&quot;. Note that when an empty view is present, the expandable
+ list view will be hidden when there is no data to display.
+ &lt;p&gt;
+ The following code demonstrates an (ugly) custom screen layout. It has a list
+ with a green background, and an alternate red &quot;no data&quot; message.
+ &lt;/p&gt;
+ 
+ &lt;pre&gt;
+ &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+ &amp;lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+         android:orientation=&amp;quot;vertical&amp;quot;
+         android:layout_width=&amp;quot;match_parent&amp;quot; 
+         android:layout_height=&amp;quot;match_parent&amp;quot;
+         android:paddingLeft=&amp;quot;8dp&amp;quot;
+         android:paddingRight=&amp;quot;8dp&amp;quot;&amp;gt;
+ 
+     &amp;lt;ExpandableListView android:id=&amp;quot;@id/android:list&amp;quot;
+               android:layout_width=&amp;quot;match_parent&amp;quot; 
+               android:layout_height=&amp;quot;match_parent&amp;quot;
+               android:background=&amp;quot;#00FF00&amp;quot;
+               android:layout_weight=&amp;quot;1&amp;quot;
+               android:drawSelectorOnTop=&amp;quot;false&amp;quot;/&amp;gt;
+ 
+     &amp;lt;TextView android:id=&amp;quot;@id/android:empty&amp;quot;
+               android:layout_width=&amp;quot;match_parent&amp;quot; 
+               android:layout_height=&amp;quot;match_parent&amp;quot;
+               android:background=&amp;quot;#FF0000&amp;quot;
+               android:text=&amp;quot;No data&amp;quot;/&amp;gt;
+ &amp;lt;/LinearLayout&amp;gt;
+ &lt;/pre&gt;
+ 
+ &lt;p&gt;
+ &lt;strong&gt;Row Layout&lt;/strong&gt;
+ &lt;/p&gt;
+ The {@link ExpandableListAdapter} set in the {@link android.app.ExpandableListActivity}
+ via {@link #setListAdapter}(ExpandableListAdapter) provides the {@link View}s
+ for each row. This adapter has separate methods for providing the group
+ {@link View}s and child {@link View}s. There are a couple provided
+ {@link ExpandableListAdapter}s that simplify use of adapters:
+ {@link SimpleCursorTreeAdapter} and {@link SimpleExpandableListAdapter}.
+ &lt;p&gt;
+ With these, you can specify the layout of individual rows for groups and
+ children in the list. These constructor takes a few parameters that specify
+ layout resources for groups and children. It also has additional parameters
+ that let you specify which data field to associate with which object in the
+ row layout resource. The {@link SimpleCursorTreeAdapter} fetches data from
+ {@link Cursor}s and the {@link SimpleExpandableListAdapter} fetches data
+ from {@link List}s of {@link Map}s.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Android provides some standard row layout resources. These are in the
+ {@link android.R.layout} class, and have names such as simple_list_item_1,
+ simple_list_item_2, and two_line_list_item. The following layout XML is the
+ source for the resource two_line_list_item, which displays two data
+ fields,one above the other, for each list row.
+ &lt;/p&gt;
+ 
+ &lt;pre&gt;
+ &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
+ &amp;lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+     android:layout_width=&amp;quot;match_parent&amp;quot;
+     android:layout_height=&amp;quot;wrap_content&amp;quot;
+     android:orientation=&amp;quot;vertical&amp;quot;&amp;gt;
+ 
+     &amp;lt;TextView android:id=&amp;quot;@+id/text1&amp;quot;
+         android:textSize=&amp;quot;16sp&amp;quot;
+         android:textStyle=&amp;quot;bold&amp;quot;
+         android:layout_width=&amp;quot;match_parent&amp;quot;
+         android:layout_height=&amp;quot;wrap_content&amp;quot;/&amp;gt;
+ 
+     &amp;lt;TextView android:id=&amp;quot;@+id/text2&amp;quot;
+         android:textSize=&amp;quot;16sp&amp;quot;
+         android:layout_width=&amp;quot;match_parent&amp;quot;
+         android:layout_height=&amp;quot;wrap_content&amp;quot;/&amp;gt;
+ &amp;lt;/LinearLayout&amp;gt;
+ &lt;/pre&gt;
+ 
+ &lt;p&gt;
+ You must identify the data bound to each TextView object in this layout. The
+ syntax for this is discussed in the next section.
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Binding to Data&lt;/strong&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ You bind the ExpandableListActivity's ExpandableListView object to data using
+ a class that implements the
+ {@link android.widget.ExpandableListAdapter ExpandableListAdapter} interface.
+ Android provides two standard list adapters:
+ {@link android.widget.SimpleExpandableListAdapter SimpleExpandableListAdapter}
+ for static data (Maps), and
+ {@link android.widget.SimpleCursorTreeAdapter SimpleCursorTreeAdapter} for
+ Cursor query results.
+ &lt;/p&gt;
+ 
+ @see #setListAdapter
+ @see android.widget.ExpandableListView
+*/
+var ExpandableListActivity = {
+
+<span id='android-app-ExpandableListActivity-method-onCreateContextMenu'>/**Override this to populate the context menu when an item is long pressed. menuInfo
+</span> will contain an {@link android.widget.ExpandableListView.ExpandableListContextMenuInfo}
+ whose packedPosition is a packed position
+ that should be used with {@link ExpandableListView#getPackedPositionType(long)} and
+ the other similar methods.
+ &lt;p&gt;
+ {@inheritDoc}
+*/
+onCreateContextMenu : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-onChildClick'>/**Override this for receiving callbacks when a child has been clicked.
+</span> &lt;p&gt;
+ {@inheritDoc}
+*/
+onChildClick : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-onGroupCollapse'>/**Override this for receiving callbacks when a group has been collapsed.
+</span>*/
+onGroupCollapse : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-onGroupExpand'>/**Override this for receiving callbacks when a group has been expanded.
+</span>*/
+onGroupExpand : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-onContentChanged'>/**Updates the screen state (current list and other views) when the
+</span> content changes.
+@see Activity#onContentChanged()
+*/
+onContentChanged : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-setListAdapter'>/**Provide the adapter for the expandable list.
+</span>*/
+setListAdapter : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-getExpandableListView'>/**Get the activity's expandable list view widget.  This can be used to get the selection,
+</span> set the selection, and many other useful functions.
+@see ExpandableListView
+*/
+getExpandableListView : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-getExpandableListAdapter'>/**Get the ExpandableListAdapter associated with this activity's
+</span> ExpandableListView.
+*/
+getExpandableListAdapter : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-getSelectedId'>/**Gets the ID of the currently selected group or child.
+</span>@return {Number} The ID of the currently selected group or child.
+*/
+getSelectedId : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-getSelectedPosition'>/**Gets the position (in packed position representation) of the currently
+</span> selected group or child. Use
+ {@link ExpandableListView#getPackedPositionType},
+ {@link ExpandableListView#getPackedPositionGroup}, and
+ {@link ExpandableListView#getPackedPositionChild} to unpack the returned
+ packed position.
+@return {Number} A packed position representation containing the currently
+         selected group or child's position and type.
+*/
+getSelectedPosition : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-setSelectedChild'>/**Sets the selection to the specified child. If the child is in a collapsed
+</span> group, the group will only be expanded and child subsequently selected if
+ shouldExpandGroup is set to true, otherwise the method will return false.
+@param {Number} groupPosition The position of the group that contains the child.
+@param {Number} childPosition The position of the child within the group.
+@param {Boolean} shouldExpandGroup Whether the child's group should be expanded if
+            it is collapsed.
+@return {Boolean} Whether the selection was successfully set on the child.
+*/
+setSelectedChild : function(  ) {},
+
+<span id='android-app-ExpandableListActivity-method-setSelectedGroup'>/**Sets the selection to the specified group.
+</span>@param {Number} groupPosition The position of the group that should be selected.
+*/
+setSelectedGroup : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

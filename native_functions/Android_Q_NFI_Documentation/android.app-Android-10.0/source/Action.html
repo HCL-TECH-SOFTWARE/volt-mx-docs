@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-Notification-Action'>/**@class android.app.Notification.Action
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Structure to encapsulate a named action that can be shown as part of this notification.
+ It must include an icon, a label, and a {@link android.app.PendingIntent} to be fired when the action is
+ selected by the user.
+ &lt;p&gt;
+ Apps should use {@link android.app.Notification.Builder#addAction(int, CharSequence, PendingIntent)}
+ or {@link android.app.Notification.Builder#addAction(android.app.Notification.Action)}
+ to attach actions.
+*/
+var Action = {
+
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_NONE'>/** {@link }: No semantic action defined.
+</span>*/
+SEMANTIC_ACTION_NONE : &quot;0&quot;,
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_REPLY'>/** {@code SemanticAction}: Reply to a conversation, chat, group, or wherever replies
+</span> may be appropriate.
+*/
+SEMANTIC_ACTION_REPLY : &quot;1&quot;,
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_MARK_AS_READ'>/** {@code SemanticAction}: Mark content as read.
+</span>*/
+SEMANTIC_ACTION_MARK_AS_READ : &quot;2&quot;,
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_MARK_AS_UNREAD'>/** {@code SemanticAction}: Mark content as unread.
+</span>*/
+SEMANTIC_ACTION_MARK_AS_UNREAD : &quot;3&quot;,
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_DELETE'>/** {@code SemanticAction}: Delete the content associated with the notification. This
+</span> could mean deleting an email, message, etc.
+*/
+SEMANTIC_ACTION_DELETE : &quot;4&quot;,
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_ARCHIVE'>/** {@code SemanticAction}: Archive the content associated with the notification. This
+</span> could mean archiving an email, message, etc.
+*/
+SEMANTIC_ACTION_ARCHIVE : &quot;5&quot;,
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_MUTE'>/** {@code SemanticAction}: Mute the content associated with the notification. This could
+</span> mean silencing a conversation or currently playing media.
+*/
+SEMANTIC_ACTION_MUTE : &quot;6&quot;,
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_UNMUTE'>/** {@code SemanticAction}: Unmute the content associated with the notification. This could
+</span> mean un-silencing a conversation or currently playing media.
+*/
+SEMANTIC_ACTION_UNMUTE : &quot;7&quot;,
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_THUMBS_UP'>/** {@code SemanticAction}: Mark content with a thumbs up.
+</span>*/
+SEMANTIC_ACTION_THUMBS_UP : &quot;8&quot;,
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_THUMBS_DOWN'>/** {@code SemanticAction}: Mark content with a thumbs down.
+</span>*/
+SEMANTIC_ACTION_THUMBS_DOWN : &quot;9&quot;,
+<span id='android-app-Notification-Action-property-SEMANTIC_ACTION_CALL'>/** {@code SemanticAction}: Call a contact, group, etc.
+</span>*/
+SEMANTIC_ACTION_CALL : &quot;10&quot;,
+<span id='android-app-Notification-Action-property-icon'>/** Small icon representing the action.
+</span>
+ @deprecated Use {@link android.app.Notification.Action#getIcon()} instead.
+*/
+icon : &quot;null&quot;,
+<span id='android-app-Notification-Action-property-title'>/** Title of the action.
+</span>*/
+title : &quot;null&quot;,
+<span id='android-app-Notification-Action-property-actionIntent'>/** Intent to send when the user invokes this action. May be null, in which case the action
+</span> may be rendered in a disabled presentation by the system UI.
+*/
+actionIntent : &quot;null&quot;,
+<span id='android-app-Notification-Action-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-Notification-Action-method-getIcon'>/**Return an icon representing the action.
+</span>*/
+getIcon : function(  ) {},
+
+<span id='android-app-Notification-Action-method-getExtras'>/**Get additional metadata carried around with this Action.
+</span>*/
+getExtras : function(  ) {},
+
+<span id='android-app-Notification-Action-method-getAllowGeneratedReplies'>/**Return whether the platform should automatically generate possible replies for this
+</span> {@link android.app.Notification.Action}
+*/
+getAllowGeneratedReplies : function(  ) {},
+
+<span id='android-app-Notification-Action-method-getRemoteInputs'>/**Get the list of inputs to be collected from the user when this action is sent.
+</span> May return null if no remote inputs were added. Only returns inputs which accept
+ a text input. For inputs which only accept data use {@link #getDataOnlyRemoteInputs}.
+*/
+getRemoteInputs : function(  ) {},
+
+<span id='android-app-Notification-Action-method-getSemanticAction'>/**Returns the {@code SemanticAction} associated with this {@link android.app.Notification.Action}. A
+</span> {@code SemanticAction} denotes what an {@link android.app.Notification.Action}'s {@link android.app.PendingIntent} will do
+ (eg. reply, mark as read, delete, etc).
+*/
+getSemanticAction : function(  ) {},
+
+<span id='android-app-Notification-Action-method-isContextual'>/**Returns whether this is a contextual Action, i.e. whether the action is dependent on the
+</span> notification message body. An example of a contextual action could be an action opening a
+ map application with an address shown in the notification.
+*/
+isContextual : function(  ) {},
+
+<span id='android-app-Notification-Action-method-getDataOnlyRemoteInputs'>/**Get the list of inputs to be collected from the user that ONLY accept data when this
+</span> action is sent. These remote inputs are guaranteed to return true on a call to
+ {@link android.app.RemoteInput#isDataOnly}.
+
+ Returns null if there are no data-only remote inputs.
+
+ This method exists so that legacy RemoteInput collectors that pre-date the addition
+ of non-textual RemoteInputs do not access these remote inputs.
+*/
+getDataOnlyRemoteInputs : function(  ) {},
+
+<span id='android-app-Notification-Action-method-clone'>/**
+</span>*/
+clone : function(  ) {},
+
+<span id='android-app-Notification-Action-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-Notification-Action-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

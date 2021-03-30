@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-Notification-MessagingStyle'>/**@class android.app.Notification.MessagingStyle
+</span>@extends android.app.Notification.Style
+
+ Helper class for generating large-format notifications that include multiple back-and-forth
+ messages of varying types between any number of people.
+
+ &lt;p&gt;
+ If the platform does not provide large-format notifications, this method has no effect. The
+ user will always see the normal notification view.
+
+ &lt;p&gt;
+ If the app is targeting Android P and above, it is required to use the {@link android.app.Person}
+ class in order to get an optimal rendering of the notification and its avatars. For
+ conversations involving multiple people, the app should also make sure that it marks the
+ conversation as a group with {@link #setGroupConversation}(boolean).
+
+ &lt;p&gt;
+ This class is a &quot;rebuilder&quot;: It attaches to a Builder object and modifies its behavior.
+ Here's an example of how this may be used:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+
+ Person user = new Person.Builder().setIcon(userIcon).setName(userName).build();
+ MessagingStyle style = new MessagingStyle(user)
+      .addMessage(messages[1].getText(), messages[1].getTime(), messages[1].getPerson())
+      .addMessage(messages[2].getText(), messages[2].getTime(), messages[2].getPerson())
+      .setGroupConversation(hasMultiplePeople());
+
+ Notification noti = new Notification.Builder()
+     .setContentTitle(&amp;quot;2 new messages with &amp;quot; + sender.toString())
+     .setContentText(subject)
+     .setSmallIcon(R.drawable.new_message)
+     .setLargeIcon(aBitmap)
+     .setStyle(style)
+     .build();
+ &lt;/pre&gt;
+*/
+var MessagingStyle = {
+
+<span id='android-app-Notification-MessagingStyle-property-MAXIMUM_RETAINED_MESSAGES'>/** The maximum number of messages that will be retained in the Notification itself (the
+</span> number displayed is up to the platform).
+*/
+MAXIMUM_RETAINED_MESSAGES : &quot;25&quot;,
+<span id='android-app-Notification-MessagingStyle-method-validate'>/**Validate that this style was properly composed. This is called at build time.
+</span>@hide 
+*/
+validate : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-getHeadsUpStatusBarText'>/**
+</span>@return {Object {java.lang.CharSequence}} the text that should be displayed in the statusBar when heads upped.
+ If {@code null} is returned, the default implementation will be used.
+@hide 
+*/
+getHeadsUpStatusBarText : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-getUser'>/**
+</span>@return {Object {android.app.Person}} the user to be displayed for any replies sent by the user
+*/
+getUser : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-getUserDisplayName'>/**Returns the name to be displayed for any replies sent by the user
+</span>@deprecated use {@link #getUser()} instead
+*/
+getUserDisplayName : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-setConversationTitle'>/**Sets the title to be displayed on this conversation. May be set to {@code null}.
+</span>
+ &lt;p&gt;This API's behavior was changed in SDK version {@link Build.VERSION_CODES#P}. If your
+ application's target version is less than {@link Build.VERSION_CODES#P}, setting a
+ conversation title to a non-null value will make {@link #isGroupConversation}() return
+ {@code true} and passing {@code null} will make it return {@code false}. In
+ {@link Build.VERSION_CODES#P} and beyond, use {@link #setGroupConversation}(boolean)
+ to set group conversation status.
+@param {Object {CharSequence}} conversationTitle Title displayed for this conversation
+@return {Object {android.app.Notification.MessagingStyle}} this object for method chaining
+*/
+setConversationTitle : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-getConversationTitle'>/**Return the title to be displayed on this conversation. May return {@code null}.
+</span>*/
+getConversationTitle : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-addMessage'>/**Adds a message for display by this notification. Convenience call for a simple
+</span> {@link android.app.MessagingStyle.Message} in {@link #addMessage(Notification.MessagingStyle.Message)}.
+@param {Object {CharSequence}} text A {@link CharSequence} to be displayed as the message content
+@param {Number} timestamp Time at which the message arrived
+@param {Object {CharSequence}} sender A {@link CharSequence} to be used for displaying the name of the
+ sender. Should be &lt;code&gt;null&lt;/code&gt; for messages by the current user, in which case
+ the platform will insert {@link #getUserDisplayName()}.
+ Should be unique amongst all individuals in the conversation, and should be
+ consistent during re-posts of the notification.
+@see Message#Notification.MessagingStyle.Message(CharSequence, long, CharSequence)
+@return {Object {android.app.Notification.MessagingStyle}} this object for method chaining
+@deprecated use {@link #addMessage(CharSequence, long, Person)}
+*/
+addMessage : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-addMessage'>/**Adds a message for display by this notification. Convenience call for a simple
+</span> {@link android.app.MessagingStyle.Message} in {@link #addMessage(Notification.MessagingStyle.Message)}.
+@param {Object {CharSequence}} text A {@link CharSequence} to be displayed as the message content
+@param {Number} timestamp Time at which the message arrived
+@param {Object {Person}} sender The {@link Person} who sent the message.
+ Should be &lt;code&gt;null&lt;/code&gt; for messages by the current user, in which case
+ the platform will insert the user set in {@code MessagingStyle(Person)}.
+@see Message#Notification.MessagingStyle.Message(CharSequence, long, CharSequence)
+@return {Object {android.app.Notification.MessagingStyle}} this object for method chaining
+*/
+addMessage : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-addMessage'>/**Adds a {@link android.app.MessagingStyle.Message} for display in this notification.
+</span>
+ &lt;p&gt;The messages should be added in chronologic order, i.e. the oldest first,
+ the newest last.
+@param {Object {Notification.MessagingStyle.Message}} message The {@link Message} to be displayed
+@return {Object {android.app.Notification.MessagingStyle}} this object for method chaining
+*/
+addMessage : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-addHistoricMessage'>/**Adds a {@link android.app.MessagingStyle.Message} for historic context in this notification.
+</span>
+ &lt;p&gt;Messages should be added as historic if they are not the main subject of the
+ notification but may give context to a conversation. The system may choose to present
+ them only when relevant, e.g. when replying to a message through a {@link android.app.RemoteInput}.
+
+ &lt;p&gt;The messages should be added in chronologic order, i.e. the oldest first,
+ the newest last.
+@param {Object {Notification.MessagingStyle.Message}} message The historic {@link Message} to be added
+@return {Object {android.app.Notification.MessagingStyle}} this object for method chaining
+*/
+addHistoricMessage : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-getMessages'>/**Gets the list of {@code Message} objects that represent the notification
+</span>*/
+getMessages : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-getHistoricMessages'>/**Gets the list of historic {@code Message}s in the notification.
+</span>*/
+getHistoricMessages : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-setGroupConversation'>/**Sets whether this conversation notification represents a group. If the app is targeting
+</span> Android P, this is required if the app wants to display the largeIcon set with
+ {@link android.app.Notification.Builder#setLargeIcon(Bitmap)}, otherwise it will be hidden.
+@param {Boolean} isGroupConversation {@code true} if the conversation represents a group,
+ {@code false} otherwise.
+@return {Object {android.app.Notification.MessagingStyle}} this object for method chaining
+*/
+setGroupConversation : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-isGroupConversation'>/**Returns {@code true} if this notification represents a group conversation, otherwise
+</span> {@code false}.
+
+ &lt;p&gt; If the application that generated this {@link android.app.Notification.MessagingStyle} targets an SDK version
+ less than {@link Build.VERSION_CODES#P}, this method becomes dependent on whether or
+ not the conversation title is set; returning {@code true} if the conversation title is
+ a non-null value, or {@code false} otherwise. From {@link Build.VERSION_CODES#P} forward,
+ this method returns what's set by {@link #setGroupConversation}(boolean) allowing for
+ named, non-group conversations.
+@see #setConversationTitle(CharSequence)
+*/
+isGroupConversation : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-addExtras'>/**
+</span>@hide 
+*/
+addExtras : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-makeContentView'>/**
+</span>@hide 
+*/
+makeContentView : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-areNotificationsVisiblyDifferent'>/**
+</span>@hide Spans are ignored when comparing text for visual difference.
+*/
+areNotificationsVisiblyDifferent : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-findLatestIncomingMessage'>/**
+</span>@hide 
+*/
+findLatestIncomingMessage : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-makeBigContentView'>/**
+</span>@hide 
+*/
+makeBigContentView : function(  ) {},
+
+<span id='android-app-Notification-MessagingStyle-method-makeHeadsUpContentView'>/**
+</span>@hide 
+*/
+makeHeadsUpContentView : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

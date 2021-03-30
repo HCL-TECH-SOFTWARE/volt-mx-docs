@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-WallpaperInfo'>/**@class android.app.WallpaperInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class is used to specify meta information of a wallpaper service.
+*/
+var WallpaperInfo = {
+
+<span id='android-app-WallpaperInfo-property-CREATOR'>/** Used to make this class parcelable.
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-app-WallpaperInfo-method-getPackageName'>/**Return the .apk package that implements this wallpaper.
+</span>*/
+getPackageName : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-getServiceName'>/**Return the class name of the service component that implements
+</span> this wallpaper.
+*/
+getServiceName : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-getServiceInfo'>/**Return the raw information about the Service implementing this
+</span> wallpaper.  Do not modify the returned object.
+*/
+getServiceInfo : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-getComponent'>/**Return the component of the service that implements this wallpaper.
+</span>*/
+getComponent : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-loadLabel'>/**Load the user-displayed label for this wallpaper.
+</span>@param {Object {PackageManager}} pm Supply a PackageManager used to load the wallpaper's
+ resources.
+*/
+loadLabel : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-loadIcon'>/**Load the user-displayed icon for this wallpaper.
+</span>@param {Object {PackageManager}} pm Supply a PackageManager used to load the wallpaper's
+ resources.
+*/
+loadIcon : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-loadThumbnail'>/**Load the thumbnail image for this wallpaper.
+</span>@param {Object {PackageManager}} pm Supply a PackageManager used to load the wallpaper's
+ resources.
+*/
+loadThumbnail : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-loadAuthor'>/**Return a string indicating the author(s) of this wallpaper.
+</span>*/
+loadAuthor : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-loadDescription'>/**Return a brief summary of this wallpaper's behavior.
+</span>*/
+loadDescription : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-loadContextUri'>/**Returns an URI that specifies a link for further context about this wallpaper.
+</span>@param {Object {PackageManager}} pm An instance of {@link PackageManager} to retrieve the URI.
+@return {Object {android.net.Uri}} The URI.
+*/
+loadContextUri : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-loadContextDescription'>/**Retrieves a title of the URI that specifies a link for further context about this wallpaper.
+</span>@param {Object {PackageManager}} pm An instance of {@link PackageManager} to retrieve the title.
+@return {Object {java.lang.CharSequence}} The title.
+*/
+loadContextDescription : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-getShowMetadataInPreview'>/**Queries whether any metadata should be shown when previewing the wallpaper. If this value is
+</span> set to true, any component that shows a preview of this live wallpaper should also show
+ accompanying information like {@link #loadLabel},
+ {@link #loadDescription}, {@link #loadAuthor} and
+ {@link #loadContextDescription}(PackageManager), so the user gets to know further information
+ about this wallpaper.
+@return {Boolean} Whether any metadata should be shown when previewing the wallpaper.
+*/
+getShowMetadataInPreview : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-supportsAmbientMode'>/**Returns whether a wallpaper was optimized or not for ambient mode and can be drawn in there.
+</span>@see WallpaperService.Engine#onAmbientModeChanged(boolean, boolean)
+@see WallpaperService.Engine#isInAmbientMode()
+@return {Boolean} {@code true} if wallpaper can draw when in ambient mode.
+@hide 
+*/
+supportsAmbientMode : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-getSettingsActivity'>/**Return the class name of an activity that provides a settings UI for
+</span> the wallpaper.  You can launch this activity be starting it with
+ an {@link android.content.Intent} whose action is MAIN and with an
+ explicit {@link android.content.ComponentName}
+ composed of {@link #getPackageName} and the class name returned here.
+ 
+ &lt;p&gt;{@code null} will be returned if there is no settings activity associated
+ with the wallpaper.
+*/
+getSettingsActivity : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-getSettingsSliceUri'>/**Returns an URI that provides a settings {@link Slice} for this wallpaper.
+</span> The wallpaper should implement a SliceProvider associated with this URI.
+ The system will display the Slice in the customization section while previewing the live
+ wallpaper. Because this URI is accessible to other apps, it is recommended to protect it
+ with the android.permission.BIND_WALLPAPER permission.
+
+ &lt;p&gt;{@code null} will be returned if there is no settings Slice URI associated
+ with the wallpaper.
+@return {Object {android.net.Uri}} The URI.
+*/
+getSettingsSliceUri : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-supportsMultipleDisplays'>/**Returns whether this wallpaper service can support multiple engines to render on each surface
+</span> independently. An example use case is a multi-display set-up where the wallpaper service can
+ render surfaces to each of the connected displays.
+ &lt;p&gt;
+ This corresponds to the value {@link android.R.styleable#Wallpaper_supportsMultipleDisplays}
+ in the XML description of the wallpaper.
+ &lt;p&gt;
+ The default value is {@code false}.
+@see WallpaperService#onCreateEngine()
+@see WallpaperService.Engine#onCreate(SurfaceHolder)
+@return {Boolean} {@code true} if multiple engines can render independently on each surface.
+@attr ref android.R.styleable#Wallpaper_supportsMultipleDisplays
+*/
+supportsMultipleDisplays : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-writeToParcel'>/**Used to package this object into a {@link Parcel}.
+</span>@param {Object {Parcel}} dest The {@link Parcel} to be written.
+@param {Number} flags The flags used for parceling.
+*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-WallpaperInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

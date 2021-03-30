@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-admin-DeviceAdminReceiver'>/**@class android.app.admin.DeviceAdminReceiver
+</span>@extends android.content.BroadcastReceiver
+
+ Base class for implementing a device administration component.  This
+ class provides a convenience for interpreting the raw intent actions
+ that are sent by the system.
+
+ &lt;p&gt;The callback methods, like the base
+ {@link BroadcastReceiver#onReceive(Context, Intent) BroadcastReceiver.onReceive()}
+ method, happen on the main thread of the process.  Thus long running
+ operations must be done on another thread.  Note that because a receiver
+ is done once returning from its receive function, such long-running operations
+ should probably be done in a {@link Service}.
+
+ &lt;p&gt;When publishing your DeviceAdmin subclass as a receiver, it must
+ handle {@link #ACTION_DEVICE_ADMIN_ENABLED} and require the
+ {@link android.Manifest.permission#BIND_DEVICE_ADMIN} permission.  A typical
+ manifest entry would look like:&lt;/p&gt;
+
+ {@sample development/samples/ApiDemos/AndroidManifest.xml device_admin_declaration}
+
+ &lt;p&gt;The meta-data referenced here provides addition information specific
+ to the device administrator, as parsed by the {@link android.app.admin.DeviceAdminInfo} class.
+ A typical file would be:&lt;/p&gt;
+
+ {@sample development/samples/ApiDemos/res/xml/device_admin_sample.xml meta_data}
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about device administration, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/admin/device-admin.html&quot;&gt;Device Administration&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var DeviceAdminReceiver = {
+
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_DEVICE_ADMIN_ENABLED'>/** This is the primary action that a device administrator must implement to be
+</span> allowed to manage a device.  This will be set to the receiver
+ when the user enables it for administration.  You will generally
+ handle this in {@link android.app.admin.DeviceAdminReceiver#onEnabled(Context, Intent)}.  To be
+ supported, the receiver must also require the
+ {@link android.Manifest.permission#BIND_DEVICE_ADMIN} permission so
+ that other applications can not abuse it.
+*/
+ACTION_DEVICE_ADMIN_ENABLED : &quot;android.app.action.DEVICE_ADMIN_ENABLED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_DEVICE_ADMIN_DISABLE_REQUESTED'>/** Action sent to a device administrator when the user has requested to
+</span> disable it, but before this has actually been done.  This gives you
+ a chance to supply a message to the user about the impact of
+ disabling your admin, by setting the extra field
+ {@link #EXTRA_DISABLE_WARNING} in the result Intent.  If not set,
+ no warning will be displayed.  If set, the given text will be shown
+ to the user before they disable your admin.
+*/
+ACTION_DEVICE_ADMIN_DISABLE_REQUESTED : &quot;android.app.action.DEVICE_ADMIN_DISABLE_REQUESTED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_DISABLE_WARNING'>/** A CharSequence that can be shown to the user informing them of the
+</span> impact of disabling your admin.
+
+ @see #ACTION_DEVICE_ADMIN_DISABLE_REQUESTED
+*/
+EXTRA_DISABLE_WARNING : &quot;android.app.extra.DISABLE_WARNING&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_DEVICE_ADMIN_DISABLED'>/** Action sent to a device administrator when the user has disabled
+</span> it.  Upon return, the application no longer has access to the
+ protected device policy manager APIs.  You will generally
+ handle this in {@link android.app.admin.DeviceAdminReceiver#onDisabled(Context, Intent)}.  Note
+ that this action will be
+ sent the receiver regardless of whether it is explicitly listed in
+ its intent filter.
+*/
+ACTION_DEVICE_ADMIN_DISABLED : &quot;android.app.action.DEVICE_ADMIN_DISABLED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_PASSWORD_CHANGED'>/** Action sent to a device administrator when the user has changed the password of their device
+</span> or profile challenge.  You can at this point check the characteristics
+ of the new password with {@link android.app.admin.DevicePolicyManager#isActivePasswordSufficient()
+ android.app.admin.DevicePolicyManager.isActivePasswordSufficient()}.
+ You will generally
+ handle this in {@link android.app.admin.DeviceAdminReceiver#onPasswordChanged(Context, Intent, UserHandle)}.
+
+ &lt;p&gt;The calling device admin must have requested
+ {@link android.app.admin.DeviceAdminInfo#USES_POLICY_LIMIT_PASSWORD} to receive
+ this broadcast.
+*/
+ACTION_PASSWORD_CHANGED : &quot;android.app.action.ACTION_PASSWORD_CHANGED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_PASSWORD_FAILED'>/** Action sent to a device administrator when the user has entered an incorrect device
+</span> or profile challenge password.  You can at this point check the
+ number of failed password attempts there have been with
+ {@link android.app.admin.DevicePolicyManager#getCurrentFailedPasswordAttempts
+ android.app.admin.DevicePolicyManager.getCurrentFailedPasswordAttempts()}.  You will generally
+ handle this in {@link android.app.admin.DeviceAdminReceiver#onPasswordFailed(Context, Intent, UserHandle)}.
+
+ &lt;p&gt;The calling device admin must have requested
+ {@link android.app.admin.DeviceAdminInfo#USES_POLICY_WATCH_LOGIN} to receive
+ this broadcast.
+*/
+ACTION_PASSWORD_FAILED : &quot;android.app.action.ACTION_PASSWORD_FAILED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_PASSWORD_SUCCEEDED'>/** Action sent to a device administrator when the user has successfully entered their device
+</span> or profile challenge password, after failing one or more times.  You will generally
+ handle this in {@link android.app.admin.DeviceAdminReceiver#onPasswordSucceeded(Context, Intent, UserHandle)}.
+
+ &lt;p&gt;The calling device admin must have requested
+ {@link android.app.admin.DeviceAdminInfo#USES_POLICY_WATCH_LOGIN} to receive
+ this broadcast.
+*/
+ACTION_PASSWORD_SUCCEEDED : &quot;android.app.action.ACTION_PASSWORD_SUCCEEDED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_PASSWORD_EXPIRING'>/** Action periodically sent to a device administrator when the device or profile challenge
+</span> password is expiring.  You will generally
+ handle this in {@link android.app.admin.DeviceAdminReceiver#onPasswordExpiring(Context, Intent, UserHandle)}.
+
+ &lt;p&gt;The calling device admin must have requested
+ {@link android.app.admin.DeviceAdminInfo#USES_POLICY_EXPIRE_PASSWORD} to receive
+ this broadcast.
+*/
+ACTION_PASSWORD_EXPIRING : &quot;android.app.action.ACTION_PASSWORD_EXPIRING&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_LOCK_TASK_ENTERING'>/** Action sent to a device administrator to notify that the device is entering
+</span> lock task mode.  The extra {@link #EXTRA_LOCK_TASK_PACKAGE}
+ will describe the package using lock task mode.
+
+ &lt;p&gt;The calling device admin must be the device owner or profile
+ owner to receive this broadcast.
+
+ @see DevicePolicyManager#isLockTaskPermitted(String)
+*/
+ACTION_LOCK_TASK_ENTERING : &quot;android.app.action.LOCK_TASK_ENTERING&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_LOCK_TASK_EXITING'>/** Action sent to a device administrator to notify that the device is exiting
+</span> lock task mode.
+
+ &lt;p&gt;The calling device admin must be the device owner or profile
+ owner to receive this broadcast.
+
+ @see DevicePolicyManager#isLockTaskPermitted(String)
+*/
+ACTION_LOCK_TASK_EXITING : &quot;android.app.action.LOCK_TASK_EXITING&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_LOCK_TASK_PACKAGE'>/** A string containing the name of the package entering lock task mode.
+</span>
+ @see #ACTION_LOCK_TASK_ENTERING
+*/
+EXTRA_LOCK_TASK_PACKAGE : &quot;android.app.extra.LOCK_TASK_PACKAGE&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_PROFILE_PROVISIONING_COMPLETE'>/** Broadcast Action: This broadcast is sent to indicate that provisioning of a managed profile
+</span> or managed device has completed successfully.
+
+ &lt;p&gt;The broadcast is limited to the profile that will be managed by the application that
+ requested provisioning. In the device owner case the profile is the primary user.
+ The broadcast will also be limited to the {@link android.app.admin.DeviceAdminReceiver} component
+ specified in the original intent or NFC bump that started the provisioning process
+ (see {@link android.app.admin.DevicePolicyManager#ACTION_PROVISION_MANAGED_PROFILE
+ android.app.admin.DevicePolicyManager.ACTION_PROVISION_MANAGED_PROFILE}).
+
+ &lt;p&gt;A device admin application which listens to this intent can find out if the device was
+ provisioned for the device owner or profile owner case by calling respectively
+ {@link android.app.admin.DevicePolicyManager#isDeviceOwnerApp} and
+ {@link android.app.admin.DevicePolicyManager#isProfileOwnerApp}. You will generally handle
+ this in {@link android.app.admin.DeviceAdminReceiver#onProfileProvisioningComplete}.
+
+ @see DevicePolicyManager#ACTION_PROVISIONING_SUCCESSFUL
+*/
+ACTION_PROFILE_PROVISIONING_COMPLETE : &quot;android.app.action.PROFILE_PROVISIONING_COMPLETE&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_BUGREPORT_SHARING_DECLINED'>/** Action sent to a device administrator to notify that the device user
+</span> has declined sharing a bugreport.
+
+ &lt;p&gt;The calling device admin must be the device owner to receive this broadcast.
+ @see DevicePolicyManager#requestBugreport
+ @hide
+*/
+ACTION_BUGREPORT_SHARING_DECLINED : &quot;android.app.action.BUGREPORT_SHARING_DECLINED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_BUGREPORT_FAILED'>/** Action sent to a device administrator to notify that the collection of a bugreport
+</span> has failed.
+
+ &lt;p&gt;The calling device admin must be the device owner to receive this broadcast.
+ @see DevicePolicyManager#requestBugreport
+ @hide
+*/
+ACTION_BUGREPORT_FAILED : &quot;android.app.action.BUGREPORT_FAILED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_BUGREPORT_SHARE'>/** Action sent to a device administrator to share the bugreport.
+</span>
+ &lt;p&gt;The calling device admin must be the device owner to receive this broadcast.
+ @see DevicePolicyManager#requestBugreport
+ @hide
+*/
+ACTION_BUGREPORT_SHARE : &quot;android.app.action.BUGREPORT_SHARE&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_SECURITY_LOGS_AVAILABLE'>/** Broadcast action: notify that a new batch of security logs is ready to be collected.
+</span> @hide
+*/
+ACTION_SECURITY_LOGS_AVAILABLE : &quot;android.app.action.SECURITY_LOGS_AVAILABLE&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_NETWORK_LOGS_AVAILABLE'>/** Broadcast action: notify that a new batch of network logs is ready to be collected.
+</span> @see DeviceAdminReceiver#onNetworkLogsAvailable
+ @see DelegatedAdminReceiver#onNetworkLogsAvailable
+*/
+ACTION_NETWORK_LOGS_AVAILABLE : &quot;android.app.action.NETWORK_LOGS_AVAILABLE&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_NETWORK_LOGS_TOKEN'>/** A {@code long} containing a token of the current batch of network logs, that has to be used
+</span> to retrieve the batch of logs by the device owner.
+
+ @see #ACTION_NETWORK_LOGS_AVAILABLE
+ @see DevicePolicyManager#retrieveNetworkLogs
+ @hide
+*/
+EXTRA_NETWORK_LOGS_TOKEN : &quot;android.app.extra.EXTRA_NETWORK_LOGS_TOKEN&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_NETWORK_LOGS_COUNT'>/** An {@code int} count representing a total count of network logs inside the current batch of
+</span> network logs.
+
+ @see #ACTION_NETWORK_LOGS_AVAILABLE
+ @hide
+*/
+EXTRA_NETWORK_LOGS_COUNT : &quot;android.app.extra.EXTRA_NETWORK_LOGS_COUNT&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_USER_ADDED'>/** Broadcast action: notify the device owner that a user or profile has been added.
+</span> Carries an extra {@link Intent#EXTRA_USER} that has the {@link UserHandle} of
+ the new user.
+ @hide
+*/
+ACTION_USER_ADDED : &quot;android.app.action.USER_ADDED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_USER_REMOVED'>/** Broadcast action: notify the device owner that a user or profile has been removed.
+</span> Carries an extra {@link Intent#EXTRA_USER} that has the {@link UserHandle} of
+ the user.
+ @hide
+*/
+ACTION_USER_REMOVED : &quot;android.app.action.USER_REMOVED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_USER_STARTED'>/** Broadcast action: notify the device owner that a user or profile has been started.
+</span> Carries an extra {@link Intent#EXTRA_USER} that has the {@link UserHandle} of
+ the user.
+ @hide
+*/
+ACTION_USER_STARTED : &quot;android.app.action.USER_STARTED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_USER_STOPPED'>/** Broadcast action: notify the device owner that a user or profile has been stopped.
+</span> Carries an extra {@link Intent#EXTRA_USER} that has the {@link UserHandle} of
+ the user.
+ @hide
+*/
+ACTION_USER_STOPPED : &quot;android.app.action.USER_STOPPED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_USER_SWITCHED'>/** Broadcast action: notify the device owner that a user or profile has been switched to.
+</span> Carries an extra {@link Intent#EXTRA_USER} that has the {@link UserHandle} of
+ the user.
+ @hide
+*/
+ACTION_USER_SWITCHED : &quot;android.app.action.USER_SWITCHED&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_BUGREPORT_HASH'>/** A string containing the SHA-256 hash of the bugreport file.
+</span>
+ @see #ACTION_BUGREPORT_SHARE
+ @hide
+*/
+EXTRA_BUGREPORT_HASH : &quot;android.app.extra.BUGREPORT_HASH&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_BUGREPORT_FAILURE_REASON'>/** An {@code int} failure code representing the reason of the bugreport failure. One of
+</span> {@link #BUGREPORT_FAILURE_FAILED_COMPLETING}
+ or {@link #BUGREPORT_FAILURE_FILE_NO_LONGER_AVAILABLE}
+
+ @see #ACTION_BUGREPORT_FAILED
+ @hide
+*/
+EXTRA_BUGREPORT_FAILURE_REASON : &quot;android.app.extra.BUGREPORT_FAILURE_REASON&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-BUGREPORT_FAILURE_FAILED_COMPLETING'>/** Bugreport completion process failed.
+</span>
+ &lt;p&gt;If this error code is received, the requesting of bugreport can be retried.
+ @see DevicePolicyManager#requestBugreport
+*/
+BUGREPORT_FAILURE_FAILED_COMPLETING : &quot;0&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-BUGREPORT_FAILURE_FILE_NO_LONGER_AVAILABLE'>/** Bugreport has been created, but is no longer available for collection.
+</span>
+ &lt;p&gt;This error likely occurs because the user of the device hasn't consented to share
+ the bugreport for a long period after its creation.
+
+ &lt;p&gt;If this error code is received, the requesting of bugreport can be retried.
+ @see DevicePolicyManager#requestBugreport
+*/
+BUGREPORT_FAILURE_FILE_NO_LONGER_AVAILABLE : &quot;1&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_CHOOSE_PRIVATE_KEY_ALIAS'>/** Broadcast action: notify that some app is attempting to choose a KeyChain key.
+</span> @see DeviceAdminReceiver#onChoosePrivateKeyAlias
+ @see DelegatedAdminReceiver#onChoosePrivateKeyAlias
+*/
+ACTION_CHOOSE_PRIVATE_KEY_ALIAS : &quot;android.app.action.CHOOSE_PRIVATE_KEY_ALIAS&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_CHOOSE_PRIVATE_KEY_SENDER_UID'>/**@hide */
+</span>EXTRA_CHOOSE_PRIVATE_KEY_SENDER_UID : &quot;android.app.extra.CHOOSE_PRIVATE_KEY_SENDER_UID&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_CHOOSE_PRIVATE_KEY_URI'>/**@hide */
+</span>EXTRA_CHOOSE_PRIVATE_KEY_URI : &quot;android.app.extra.CHOOSE_PRIVATE_KEY_URI&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_CHOOSE_PRIVATE_KEY_ALIAS'>/**@hide */
+</span>EXTRA_CHOOSE_PRIVATE_KEY_ALIAS : &quot;android.app.extra.CHOOSE_PRIVATE_KEY_ALIAS&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_CHOOSE_PRIVATE_KEY_RESPONSE'>/**@hide */
+</span>EXTRA_CHOOSE_PRIVATE_KEY_RESPONSE : &quot;android.app.extra.CHOOSE_PRIVATE_KEY_RESPONSE&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_NOTIFY_PENDING_SYSTEM_UPDATE'>/** Broadcast action: notify device owner that there is a pending system update.
+</span> @hide
+*/
+ACTION_NOTIFY_PENDING_SYSTEM_UPDATE : &quot;android.app.action.NOTIFY_PENDING_SYSTEM_UPDATE&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_SYSTEM_UPDATE_RECEIVED_TIME'>/** A long type extra for {@link #onSystemUpdatePending} recording the system time as given by
+</span> {@link System#currentTimeMillis()} when the current pending system update is first available.
+ @hide
+*/
+EXTRA_SYSTEM_UPDATE_RECEIVED_TIME : &quot;android.app.extra.SYSTEM_UPDATE_RECEIVED_TIME&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-DEVICE_ADMIN_META_DATA'>/** Name under which a DevicePolicy component publishes information
+</span> about itself.  This meta-data must reference an XML resource containing
+ a device-admin tag.
+*/
+DEVICE_ADMIN_META_DATA : &quot;android.app.device_admin&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_TRANSFER_OWNERSHIP_COMPLETE'>/** Broadcast action: notify the newly transferred administrator that the transfer
+</span> from the original administrator was successful.
+
+ @hide
+*/
+ACTION_TRANSFER_OWNERSHIP_COMPLETE : &quot;android.app.action.TRANSFER_OWNERSHIP_COMPLETE&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-ACTION_AFFILIATED_PROFILE_TRANSFER_OWNERSHIP_COMPLETE'>/** Broadcast action: notify the device owner that the ownership of one of its affiliated
+</span> profiles is transferred.
+
+ @hide
+*/
+ACTION_AFFILIATED_PROFILE_TRANSFER_OWNERSHIP_COMPLETE : &quot;android.app.action.AFFILIATED_PROFILE_TRANSFER_OWNERSHIP_COMPLETE&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-property-EXTRA_TRANSFER_OWNERSHIP_ADMIN_EXTRAS_BUNDLE'>/** A {@link android.os.Parcelable} extra of type {@link android.os.PersistableBundle} that
+</span> allows a mobile device management application to pass data to the management application
+ instance after owner transfer.
+
+ &lt;p&gt;If the transfer is successful, the new owner receives the data in
+ {@link android.app.admin.DeviceAdminReceiver#onTransferOwnershipComplete(Context, PersistableBundle)}.
+ The bundle is not changed during the ownership transfer.
+
+ @see DevicePolicyManager#transferOwnership(ComponentName, ComponentName, PersistableBundle)
+*/
+EXTRA_TRANSFER_OWNERSHIP_ADMIN_EXTRAS_BUNDLE : &quot;android.app.extra.TRANSFER_OWNERSHIP_ADMIN_EXTRAS_BUNDLE&quot;,
+<span id='android-app-admin-DeviceAdminReceiver-method-getManager'>/**Retrieve the DevicePolicyManager interface for this administrator to work
+</span> with the system.
+*/
+getManager : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-getWho'>/**Retrieve the ComponentName describing who this device administrator is, for
+</span> use in {@link android.app.admin.DevicePolicyManager} APIs that require the administrator to
+ identify itself.
+*/
+getWho : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onEnabled'>/**Called after the administrator is first enabled, as a result of
+</span> receiving {@link #ACTION_DEVICE_ADMIN_ENABLED}.  At this point you
+ can use {@link android.app.admin.DevicePolicyManager} to set your desired policies.
+
+ &lt;p&gt; If the admin is activated by a device owner, then the intent
+ may contain private extras that are relevant to user setup.
+ {@see DevicePolicyManager#createAndManageUser(ComponentName, String, ComponentName,
+      PersistableBundle, int)}
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+*/
+onEnabled : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onDisableRequested'>/**Called when the user has asked to disable the administrator, as a result of
+</span> receiving {@link #ACTION_DEVICE_ADMIN_DISABLE_REQUESTED}, giving you
+ a chance to present a warning message to them.  The message is returned
+ as the result; if null is returned (the default implementation), no
+ message will be displayed.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@return {Object {java.lang.CharSequence}} Return the warning message to display to the user before
+ being disabled; if null is returned, no message is displayed.
+*/
+onDisableRequested : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onDisabled'>/**Called prior to the administrator being disabled, as a result of
+</span> receiving {@link #ACTION_DEVICE_ADMIN_DISABLED}.  Upon return, you
+ can no longer use the protected parts of the {@link android.app.admin.DevicePolicyManager}
+ API.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+*/
+onDisabled : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onPasswordChanged'>/**Called after the user has changed their device or profile challenge password, as a result of
+</span> receiving {@link #ACTION_PASSWORD_CHANGED}.  At this point you
+ can use {@link android.app.admin.DevicePolicyManager#getPasswordQuality(android.content.ComponentName)}
+ to retrieve the active password characteristics.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@deprecated From {@link android.os.Build.VERSION_CODES#O}, use
+             {@link #onPasswordChanged(Context, Intent, UserHandle)} instead.
+*/
+onPasswordChanged : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onPasswordChanged'>/**Called after the user has changed their device or profile challenge password, as a result of
+</span> receiving {@link #ACTION_PASSWORD_CHANGED}.  At this point you
+ can use {@link android.app.admin.DevicePolicyManager#getPasswordQuality(android.content.ComponentName)}
+ to retrieve the active password characteristics.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Object {UserHandle}} user The user or profile for whom the password changed. To see whether this
+        user is the current profile or a parent user, check for equality with
+        {@link Process#myUserHandle}.
+*/
+onPasswordChanged : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onPasswordFailed'>/**Called after the user has failed at entering their device or profile challenge password,
+</span> as a result of receiving {@link #ACTION_PASSWORD_FAILED}.  At this point you can use
+ {@link android.app.admin.DevicePolicyManager#getCurrentFailedPasswordAttempts()} to retrieve the number of
+ failed password attempts.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@deprecated From {@link android.os.Build.VERSION_CODES#O}, use
+             {@link #onPasswordFailed(Context, Intent, UserHandle)} instead.
+*/
+onPasswordFailed : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onPasswordFailed'>/**Called after the user has failed at entering their device or profile challenge password,
+</span> as a result of receiving {@link #ACTION_PASSWORD_FAILED}.  At this point you can use
+ {@link android.app.admin.DevicePolicyManager#getCurrentFailedPasswordAttempts()} to retrieve the number of
+ failed password attempts.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Object {UserHandle}} user The user or profile for whom the password check failed. To see whether this
+        user is the current profile or a parent user, check for equality with
+        {@link Process#myUserHandle}.
+*/
+onPasswordFailed : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onPasswordSucceeded'>/**Called after the user has succeeded at entering their device or profile challenge password,
+</span> as a result of receiving {@link #ACTION_PASSWORD_SUCCEEDED}.  This will
+ only be received the first time they succeed after having previously
+ failed.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@deprecated From {@link android.os.Build.VERSION_CODES#O}, use
+             {@link #onPasswordSucceeded(Context, Intent, UserHandle)} instead.
+*/
+onPasswordSucceeded : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onPasswordSucceeded'>/**Called after the user has succeeded at entering their device or profile challenge password,
+</span> as a result of receiving {@link #ACTION_PASSWORD_SUCCEEDED}.  This will
+ only be received the first time they succeed after having previously
+ failed.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Object {UserHandle}} user The user of profile for whom the password check succeeded.  To see whether this
+        user is the current profile or a parent user, check for equality with
+        {@link Process#myUserHandle}.
+*/
+onPasswordSucceeded : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onPasswordExpiring'>/**Called periodically when the device or profile challenge password is about to expire
+</span> or has expired.  It will typically be called at these times: on device boot, once per day
+ before the password expires, and at the time when the password expires.
+
+ &lt;p&gt;If the password is not updated by the user, this method will continue to be called
+ once per day until the password is changed or the device admin disables password expiration.
+
+ &lt;p&gt;The admin will typically post a notification requesting the user to change their password
+ in response to this call. The actual password expiration time can be obtained by calling
+ {@link android.app.admin.DevicePolicyManager#getPasswordExpiration(ComponentName) }
+
+ &lt;p&gt;The admin should be sure to take down any notifications it posted in response to this call
+ when it receives {@link android.app.admin.DeviceAdminReceiver#onPasswordChanged(Context, Intent) }.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@deprecated From {@link android.os.Build.VERSION_CODES#O}, use
+             {@link #onPasswordExpiring(Context, Intent, UserHandle)} instead.
+*/
+onPasswordExpiring : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onPasswordExpiring'>/**Called periodically when the device or profile challenge password is about to expire
+</span> or has expired.  It will typically be called at these times: on device boot, once per day
+ before the password expires, and at the time when the password expires.
+
+ &lt;p&gt;If the password is not updated by the user, this method will continue to be called
+ once per day until the password is changed or the device admin disables password expiration.
+
+ &lt;p&gt;The admin will typically post a notification requesting the user to change their password
+ in response to this call. The actual password expiration time can be obtained by calling
+ {@link android.app.admin.DevicePolicyManager#getPasswordExpiration(ComponentName) }
+
+ &lt;p&gt;The admin should be sure to take down any notifications it posted in response to this call
+ when it receives {@link android.app.admin.DeviceAdminReceiver#onPasswordChanged(Context, Intent, UserHandle) }.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Object {UserHandle}} user The user or profile for whom the password is expiring. To see whether this
+        user is the current profile or a parent user, check for equality with
+        {@link Process#myUserHandle}.
+*/
+onPasswordExpiring : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onProfileProvisioningComplete'>/**Called when provisioning of a managed profile or managed device has completed successfully.
+</span>
+ &lt;p&gt; As a prerequisite for the execution of this callback the {@link android.app.admin.DeviceAdminReceiver} has
+ to declare an intent filter for {@link #ACTION_PROFILE_PROVISIONING_COMPLETE}.
+ Its component must also be specified in the {@link android.app.admin.DevicePolicyManager#EXTRA_DEVICE_ADMIN}
+ of the {@link android.app.admin.DevicePolicyManager#ACTION_PROVISION_MANAGED_PROFILE} intent that started the
+ managed provisioning.
+
+ &lt;p&gt;When provisioning of a managed profile is complete, the managed profile is hidden until
+ the profile owner calls {@link android.app.admin.DevicePolicyManager#setProfileEnabled(ComponentName admin)}.
+ Typically a profile owner will enable the profile when it has finished any additional setup
+ such as adding an account by using the {@link AccountManager} and calling APIs to bring the
+ profile into the desired state.
+
+ &lt;p&gt; Note that provisioning completes without waiting for any server interactions, so the
+ profile owner needs to wait for data to be available if required (e.g. Android device IDs or
+ other data that is set as a result of server interactions).
+
+ &lt;p&gt;From version {@link android.os.Build.VERSION_CODES#O}, when managed provisioning has
+ completed, along with this callback the activity intent
+ {@link android.app.admin.DevicePolicyManager#ACTION_PROVISIONING_SUCCESSFUL} will also be sent to the same
+ application.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+*/
+onProfileProvisioningComplete : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onReadyForUserInitialization'>/**Called during provisioning of a managed device to allow the device initializer to perform
+</span> user setup steps.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@deprecated Do not use
+*/
+onReadyForUserInitialization : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onLockTaskModeEntering'>/**Called when a device is entering lock task mode.
+</span>@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {String} pkg The authorized package using lock task mode.
+*/
+onLockTaskModeEntering : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onLockTaskModeExiting'>/**Called when a device is exiting lock task mode.
+</span>@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+*/
+onLockTaskModeExiting : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onChoosePrivateKeyAlias'>/**Allows this receiver to select the alias for a private key and certificate pair for
+</span> authentication. If this method returns null, the default {@link android.app.Activity} will be
+ shown that lets the user pick a private key and certificate pair.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Number} uid The uid of the app asking for the private key and certificate pair.
+@param {Object {Uri}} uri The URI to authenticate, may be null.
+@param {String} alias The alias preselected by the client, or null.
+@return {String} The private key alias to return and grant access to.
+@see KeyChain#choosePrivateKeyAlias
+*/
+onChoosePrivateKeyAlias : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onSystemUpdatePending'>/**Called when the information about a pending system update is available.
+</span>
+ &lt;p&gt;Allows the receiver to be notified when information about a pending system update is
+ available from the system update service. The same pending system update can trigger multiple
+ calls to this method, so it is necessary to examine the incoming parameters for details about
+ the update.
+
+ &lt;p&gt;This callback is only applicable to device owners and profile owners.
+
+ &lt;p&gt;To get further information about a pending system update (for example, whether or not the
+ update is a security patch), the device owner or profile owner can call
+ {@link android.app.admin.DevicePolicyManager#getPendingSystemUpdate}.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Number} receivedTime The time as given by {@link System#currentTimeMillis()} indicating when
+        the current pending update was first available. -1 if no pending update is available.
+@see DevicePolicyManager#getPendingSystemUpdate
+*/
+onSystemUpdatePending : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onBugreportSharingDeclined'>/**Called when sharing a bugreport has been cancelled by the user of the device.
+</span>
+ &lt;p&gt;This callback is only applicable to device owners.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@see DevicePolicyManager#requestBugreport
+*/
+onBugreportSharingDeclined : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onBugreportShared'>/**Called when the bugreport has been shared with the device administrator app.
+</span>
+ &lt;p&gt;This callback is only applicable to device owners.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}. Contains the URI of
+ the bugreport file (with MIME type &quot;application/vnd.android.bugreport&quot;), that can be accessed
+ by calling {@link Intent#getData()}
+@param {String} bugreportHash SHA-256 hash of the bugreport file.
+@see DevicePolicyManager#requestBugreport
+*/
+onBugreportShared : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onBugreportFailed'>/**Called when the bugreport collection flow has failed.
+</span>
+ &lt;p&gt;This callback is only applicable to device owners.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Number} failureCode int containing failure code. One of
+ {@link #BUGREPORT_FAILURE_FAILED_COMPLETING}
+ or {@link #BUGREPORT_FAILURE_FILE_NO_LONGER_AVAILABLE}
+@see DevicePolicyManager#requestBugreport
+*/
+onBugreportFailed : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onSecurityLogsAvailable'>/**Called when a new batch of security logs can be retrieved.
+</span>
+ &lt;p&gt;If a secondary user or profile is created, this callback won't be received until all users
+ become affiliated again (even if security logging is enabled).
+ See {@link android.app.admin.DevicePolicyManager#setAffiliationIds}
+
+ &lt;p&gt;This callback will be re-triggered if the logs are not retrieved.
+
+ &lt;p&gt;This callback is only applicable to device owners.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@see DevicePolicyManager#retrieveSecurityLogs(ComponentName)
+*/
+onSecurityLogsAvailable : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onNetworkLogsAvailable'>/**Called each time a new batch of network logs can be retrieved. This callback method will only
+</span> ever be called when network logging is enabled. The logs can only be retrieved while network
+ logging is enabled.
+
+ &lt;p&gt;If a secondary user or profile is created, this callback won't be received until all users
+ become affiliated again (even if network logging is enabled). It will also no longer be
+ possible to retrieve the network logs batch with the most recent {@code batchToken} provided
+ by this callback. See {@link android.app.admin.DevicePolicyManager#setAffiliationIds}.
+
+ &lt;p&gt;This callback is only applicable to device owners.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Number} batchToken The token representing the current batch of network logs.
+@param {Number} networkLogsCount The total count of events in the current batch of network logs.
+@see DevicePolicyManager#retrieveNetworkLogs
+*/
+onNetworkLogsAvailable : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onUserAdded'>/**Called when a user or profile is created.
+</span>
+ &lt;p&gt;This callback is only applicable to device owners.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Object {UserHandle}} newUser The {@link UserHandle} of the user that has just been added.
+*/
+onUserAdded : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onUserRemoved'>/**Called when a user or profile is removed.
+</span>
+ &lt;p&gt;This callback is only applicable to device owners.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Object {UserHandle}} removedUser The {@link UserHandle} of the user that has just been removed.
+*/
+onUserRemoved : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onUserStarted'>/**Called when a user or profile is started.
+</span>
+ &lt;p&gt;This callback is only applicable to device owners.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Object {UserHandle}} startedUser The {@link UserHandle} of the user that has just been started.
+*/
+onUserStarted : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onUserStopped'>/**Called when a user or profile is stopped.
+</span>
+ &lt;p&gt;This callback is only applicable to device owners.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Object {UserHandle}} stoppedUser The {@link UserHandle} of the user that has just been stopped.
+*/
+onUserStopped : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onUserSwitched'>/**Called when a user or profile is switched to.
+</span>
+ &lt;p&gt;This callback is only applicable to device owners.
+@param {Object {Context}} context The running context as per {@link #onReceive}.
+@param {Object {Intent}} intent The received intent as per {@link #onReceive}.
+@param {Object {UserHandle}} switchedUser The {@link UserHandle} of the user that has just been switched to.
+*/
+onUserSwitched : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onTransferOwnershipComplete'>/**Called on the newly assigned owner (either device owner or profile owner) when the ownership
+</span> transfer has completed successfully.
+
+ &lt;p&gt; The {@code bundle} parameter allows the original owner to pass data
+ to the new one.
+@param {Object {Context}} context the running context as per {@link #onReceive}
+@param {Object {PersistableBundle}} bundle the data to be passed to the new owner
+*/
+onTransferOwnershipComplete : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onTransferAffiliatedProfileOwnershipComplete'>/**Called on the device owner when the ownership of one of its affiliated profiles is
+</span> transferred.
+
+ &lt;p&gt;This can be used when transferring both device and profile ownership when using
+ work profile on a fully managed device. The process would look like this:
+ &lt;ol&gt;
+ &lt;li&gt;Transfer profile ownership&lt;/li&gt;
+ &lt;li&gt;The device owner gets notified with this callback&lt;/li&gt;
+ &lt;li&gt;Transfer device ownership&lt;/li&gt;
+ &lt;li&gt;Both profile and device ownerships have been transferred&lt;/li&gt;
+ &lt;/ol&gt;
+@param {Object {Context}} context the running context as per {@link #onReceive}
+@param {Object {UserHandle}} user the {@link UserHandle} of the affiliated user
+@see DevicePolicyManager#transferOwnership(ComponentName, ComponentName, PersistableBundle)
+*/
+onTransferAffiliatedProfileOwnershipComplete : function(  ) {},
+
+<span id='android-app-admin-DeviceAdminReceiver-method-onReceive'>/**Intercept standard device administrator broadcasts.  Implementations
+</span> should not override this method; it is better to implement the
+ convenience callbacks for each action.
+*/
+onReceive : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

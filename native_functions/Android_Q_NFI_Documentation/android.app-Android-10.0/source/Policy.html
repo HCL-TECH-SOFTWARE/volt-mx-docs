@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-NotificationManager-Policy'>/**@class android.app.NotificationManager.Policy
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Notification policy configuration.  Represents user-preferences for notification
+ filtering.
+*/
+var Policy = {
+
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_CATEGORY_REMINDERS'>/**Reminder notifications are prioritized. */
+</span>PRIORITY_CATEGORY_REMINDERS : &quot;1&quot;,
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_CATEGORY_EVENTS'>/**Event notifications are prioritized. */
+</span>PRIORITY_CATEGORY_EVENTS : &quot;2&quot;,
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_CATEGORY_MESSAGES'>/**Message notifications are prioritized. */
+</span>PRIORITY_CATEGORY_MESSAGES : &quot;4&quot;,
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_CATEGORY_CALLS'>/**Calls are prioritized. */
+</span>PRIORITY_CATEGORY_CALLS : &quot;8&quot;,
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_CATEGORY_REPEAT_CALLERS'>/**Calls from repeat callers are prioritized. */
+</span>PRIORITY_CATEGORY_REPEAT_CALLERS : &quot;16&quot;,
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_CATEGORY_ALARMS'>/**Alarms are prioritized */
+</span>PRIORITY_CATEGORY_ALARMS : &quot;32&quot;,
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_CATEGORY_MEDIA'>/**Media, game, voice navigation are prioritized */
+</span>PRIORITY_CATEGORY_MEDIA : &quot;64&quot;,
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_CATEGORY_SYSTEM'>/**System (catch-all for non-never suppressible sounds) are prioritized */
+</span>PRIORITY_CATEGORY_SYSTEM : &quot;128&quot;,
+<span id='android-app-NotificationManager-Policy-property-ALL_PRIORITY_CATEGORIES'>/** @hide
+</span>*/
+ALL_PRIORITY_CATEGORIES : &quot;null&quot;,
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_SENDERS_ANY'>/**Any sender is prioritized. */
+</span>PRIORITY_SENDERS_ANY : &quot;0&quot;,
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_SENDERS_CONTACTS'>/**Saved contacts are prioritized. */
+</span>PRIORITY_SENDERS_CONTACTS : &quot;1&quot;,
+<span id='android-app-NotificationManager-Policy-property-PRIORITY_SENDERS_STARRED'>/**Only starred contacts are prioritized. */
+</span>PRIORITY_SENDERS_STARRED : &quot;2&quot;,
+<span id='android-app-NotificationManager-Policy-property-priorityCategories'>/**Notification categories to prioritize. Bitmask of PRIORITY_CATEGORY_* constants. */
+</span>priorityCategories : &quot;null&quot;,
+<span id='android-app-NotificationManager-Policy-property-priorityCallSenders'>/**Notification senders to prioritize for calls. One of:
+</span> PRIORITY_SENDERS_ANY, PRIORITY_SENDERS_CONTACTS, PRIORITY_SENDERS_STARRED */
+priorityCallSenders : &quot;null&quot;,
+<span id='android-app-NotificationManager-Policy-property-priorityMessageSenders'>/**Notification senders to prioritize for messages. One of:
+</span> PRIORITY_SENDERS_ANY, PRIORITY_SENDERS_CONTACTS, PRIORITY_SENDERS_STARRED */
+priorityMessageSenders : &quot;null&quot;,
+<span id='android-app-NotificationManager-Policy-property-SUPPRESSED_EFFECTS_UNSET'>/** @hide
+</span>*/
+SUPPRESSED_EFFECTS_UNSET : &quot;-1&quot;,
+<span id='android-app-NotificationManager-Policy-property-SUPPRESSED_EFFECT_SCREEN_OFF'>/** Whether notifications suppressed by DND should not interrupt visually (e.g. with
+</span> notification lights or by turning the screen on) when the screen is off.
+
+ @deprecated use {@link #SUPPRESSED_EFFECT_FULL_SCREEN_INTENT} and
+ {@link #SUPPRESSED_EFFECT_AMBIENT} and {@link #SUPPRESSED_EFFECT_LIGHTS} individually.
+*/
+SUPPRESSED_EFFECT_SCREEN_OFF : &quot;1&quot;,
+<span id='android-app-NotificationManager-Policy-property-SUPPRESSED_EFFECT_SCREEN_ON'>/** Whether notifications suppressed by DND should not interrupt visually when the screen
+</span> is on (e.g. by peeking onto the screen).
+
+ @deprecated use {@link #SUPPRESSED_EFFECT_PEEK}.
+*/
+SUPPRESSED_EFFECT_SCREEN_ON : &quot;2&quot;,
+<span id='android-app-NotificationManager-Policy-property-SUPPRESSED_EFFECT_FULL_SCREEN_INTENT'>/** Whether {@link android.app.Notification#fullScreenIntent full screen intents} from
+</span> notifications intercepted by DND are blocked.
+*/
+SUPPRESSED_EFFECT_FULL_SCREEN_INTENT : &quot;4&quot;,
+<span id='android-app-NotificationManager-Policy-property-SUPPRESSED_EFFECT_LIGHTS'>/** Whether {@link android.app.NotificationChannel#shouldShowLights() notification lights} from
+</span> notifications intercepted by DND are blocked.
+*/
+SUPPRESSED_EFFECT_LIGHTS : &quot;8&quot;,
+<span id='android-app-NotificationManager-Policy-property-SUPPRESSED_EFFECT_PEEK'>/** Whether notifications intercepted by DND are prevented from peeking.
+</span>*/
+SUPPRESSED_EFFECT_PEEK : &quot;16&quot;,
+<span id='android-app-NotificationManager-Policy-property-SUPPRESSED_EFFECT_STATUS_BAR'>/** Whether notifications intercepted by DND are prevented from appearing in the status bar,
+</span> on devices that support status bars.
+*/
+SUPPRESSED_EFFECT_STATUS_BAR : &quot;32&quot;,
+<span id='android-app-NotificationManager-Policy-property-SUPPRESSED_EFFECT_BADGE'>/** Whether {@link android.app.NotificationChannel#canShowBadge() badges} from
+</span> notifications intercepted by DND are blocked on devices that support badging.
+*/
+SUPPRESSED_EFFECT_BADGE : &quot;64&quot;,
+<span id='android-app-NotificationManager-Policy-property-SUPPRESSED_EFFECT_AMBIENT'>/** Whether notification intercepted by DND are prevented from appearing on ambient displays
+</span> on devices that support ambient display.
+*/
+SUPPRESSED_EFFECT_AMBIENT : &quot;128&quot;,
+<span id='android-app-NotificationManager-Policy-property-SUPPRESSED_EFFECT_NOTIFICATION_LIST'>/** Whether notification intercepted by DND are prevented from appearing in notification
+</span> list views like the notification shade or lockscreen on devices that support those
+ views.
+*/
+SUPPRESSED_EFFECT_NOTIFICATION_LIST : &quot;256&quot;,
+<span id='android-app-NotificationManager-Policy-property-suppressedVisualEffects'>/** Visual effects to suppress for a notification that is filtered by Do Not Disturb mode.
+</span> Bitmask of SUPPRESSED_EFFECT_* constants.
+*/
+suppressedVisualEffects : &quot;null&quot;,
+<span id='android-app-NotificationManager-Policy-property-STATE_CHANNELS_BYPASSING_DND'>/** @hide
+</span>*/
+STATE_CHANNELS_BYPASSING_DND : &quot;1&quot;,
+<span id='android-app-NotificationManager-Policy-property-STATE_UNSET'>/** @hide
+</span>*/
+STATE_UNSET : &quot;-1&quot;,
+<span id='android-app-NotificationManager-Policy-property-state'>/** Notification state information that is necessary to determine Do Not Disturb behavior.
+</span> Bitmask of STATE_* constants.
+ @hide
+*/
+state : &quot;null&quot;,
+<span id='android-app-NotificationManager-Policy-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-NotificationManager-Policy-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-writeToProto'>/**
+</span>@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-getAllSuppressedVisualEffects'>/**
+</span>@hide 
+*/
+getAllSuppressedVisualEffects : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-areAllVisualEffectsSuppressed'>/**
+</span>@hide 
+*/
+areAllVisualEffectsSuppressed : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-suppressedEffectsToString'>/**
+</span>*/
+suppressedEffectsToString : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-priorityCategoriesToString'>/**
+</span>*/
+priorityCategoriesToString : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-prioritySendersToString'>/**
+</span>*/
+prioritySendersToString : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-allowAlarms'>/**
+</span>@hide 
+*/
+allowAlarms : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-allowMedia'>/**
+</span>@hide 
+*/
+allowMedia : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-allowSystem'>/**
+</span>@hide 
+*/
+allowSystem : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-allowRepeatCallers'>/**
+</span>@hide 
+*/
+allowRepeatCallers : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-allowCalls'>/**
+</span>@hide 
+*/
+allowCalls : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-allowMessages'>/**
+</span>@hide 
+*/
+allowMessages : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-allowEvents'>/**
+</span>@hide 
+*/
+allowEvents : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-allowReminders'>/**
+</span>@hide 
+*/
+allowReminders : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-allowCallsFrom'>/**
+</span>@hide 
+*/
+allowCallsFrom : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-allowMessagesFrom'>/**
+</span>@hide 
+*/
+allowMessagesFrom : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-showFullScreenIntents'>/**
+</span>@hide 
+*/
+showFullScreenIntents : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-showLights'>/**
+</span>@hide 
+*/
+showLights : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-showPeeking'>/**
+</span>@hide 
+*/
+showPeeking : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-showStatusBarIcons'>/**
+</span>@hide 
+*/
+showStatusBarIcons : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-showAmbient'>/**
+</span>@hide 
+*/
+showAmbient : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-showBadges'>/**
+</span>@hide 
+*/
+showBadges : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-showInNotificationList'>/**
+</span>@hide 
+*/
+showInNotificationList : function(  ) {},
+
+<span id='android-app-NotificationManager-Policy-method-copy'>/**returns a deep copy of this policy
+</span>@hide 
+*/
+copy : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

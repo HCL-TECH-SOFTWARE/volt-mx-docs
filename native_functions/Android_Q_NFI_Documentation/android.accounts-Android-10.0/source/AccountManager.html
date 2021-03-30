@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-accounts-AccountManager'>/**@class android.accounts.AccountManager
+</span>@extends java.lang.Object
+
+ This class provides access to a centralized registry of the user's
+ online accounts.  The user enters credentials (username and password) once
+ per account, granting applications access to online resources with
+ &quot;one-click&quot; approval.
+
+ &lt;p&gt;Different online services have different ways of handling accounts and
+ authentication, so the account manager uses pluggable &lt;em&gt;authenticator&lt;/em&gt;
+ modules for different &lt;em&gt;account types&lt;/em&gt;.  Authenticators (which may be
+ written by third parties) handle the actual details of validating account
+ credentials and storing account information.  For example, Google, Facebook,
+ and Microsoft Exchange each have their own authenticator.
+
+ &lt;p&gt;Many servers support some notion of an &lt;em&gt;authentication token&lt;/em&gt;,
+ which can be used to authenticate a request to the server without sending
+ the user's actual password.  (Auth tokens are normally created with a
+ separate request which does include the user's credentials.)  AccountManager
+ can generate auth tokens for applications, so the application doesn't need to
+ handle passwords directly.  Auth tokens are normally reusable and cached by
+ AccountManager, but must be refreshed periodically.  It's the responsibility
+ of applications to &lt;em&gt;invalidate&lt;/em&gt; auth tokens when they stop working so
+ the AccountManager knows it needs to regenerate them.
+
+ &lt;p&gt;Applications accessing a server normally go through these steps:
+
+ &lt;ul&gt;
+ &lt;li&gt;Get an instance of AccountManager using {@link #get}(Context).
+
+ &lt;li&gt;List the available accounts using {@link #getAccountsByType} or
+ {@link #getAccountsByTypeAndFeatures}.  Normally applications will only
+ be interested in accounts with one particular &lt;em&gt;type&lt;/em&gt;, which
+ identifies the authenticator.  Account &lt;em&gt;features&lt;/em&gt; are used to
+ identify particular account subtypes and capabilities.  Both the account
+ type and features are authenticator-specific strings, and must be known by
+ the application in coordination with its preferred authenticators.
+
+ &lt;li&gt;Select one or more of the available accounts, possibly by asking the
+ user for their preference.  If no suitable accounts are available,
+ {@link #addAccount} may be called to prompt the user to create an
+ account of the appropriate type.
+
+ &lt;li&gt;&lt;b&gt;Important:&lt;/b&gt; If the application is using a previously remembered
+ account selection, it must make sure the account is still in the list
+ of accounts returned by {@link #getAccountsByType}.  Requesting an auth token
+ for an account no longer on the device results in an undefined failure.
+
+ &lt;li&gt;Request an auth token for the selected account(s) using one of the
+ {@link #getAuthToken} methods or related helpers.  Refer to the description
+ of each method for exact usage and error handling details.
+
+ &lt;li&gt;Make the request using the auth token.  The form of the auth token,
+ the format of the request, and the protocol used are all specific to the
+ service you are accessing.  The application may use whatever network and
+ protocol libraries are useful.
+
+ &lt;li&gt;&lt;b&gt;Important:&lt;/b&gt; If the request fails with an authentication error,
+ it could be that a cached auth token is stale and no longer honored by
+ the server.  The application must call {@link #invalidateAuthToken} to remove
+ the token from the cache, otherwise requests will continue failing!  After
+ invalidating the auth token, immediately go back to the &quot;Request an auth
+ token&quot; step above.  If the process fails the second time, then it can be
+ treated as a &quot;genuine&quot; authentication failure and the user notified or other
+ appropriate actions taken.
+ &lt;/ul&gt;
+
+ &lt;p&gt;Some AccountManager methods may need to interact with the user to
+ prompt for credentials, present options, or ask the user to add an account.
+ The caller may choose whether to allow AccountManager to directly launch the
+ necessary user interface and wait for the user, or to return an Intent which
+ the caller may use to launch the interface, or (in some cases) to install a
+ notification which the user can select at any time to launch the interface.
+ To have AccountManager launch the interface directly, the caller must supply
+ the current foreground {@link Activity} context.
+
+ &lt;p&gt;Many AccountManager methods take {@link android.accounts.AccountManagerCallback} and
+ {@link Handler} as parameters.  These methods return immediately and
+ run asynchronously. If a callback is provided then
+ {@link android.accounts.AccountManagerCallback#run} will be invoked on the Handler's
+ thread when the request completes, successfully or not.
+ The result is retrieved by calling {@link android.accounts.AccountManagerFuture#getResult()}
+ on the {@link android.accounts.AccountManagerFuture} returned by the method (and also passed
+ to the callback).  This method waits for the operation to complete (if
+ necessary) and either returns the result or throws an exception if an error
+ occurred during the operation.  To make the request synchronously, call
+ {@link android.accounts.AccountManagerFuture#getResult()} immediately on receiving the
+ future from the method; no callback need be supplied.
+
+ &lt;p&gt;Requests which may block, including
+ {@link android.accounts.AccountManagerFuture#getResult()}, must never be called on
+ the application's main event thread.  These operations throw
+ {@link IllegalStateException} if they are used on the main thread.
+*/
+var AccountManager = {
+
+<span id='android-accounts-AccountManager-property-ERROR_CODE_REMOTE_EXCEPTION'>/***/
+</span>ERROR_CODE_REMOTE_EXCEPTION : &quot;1&quot;,
+<span id='android-accounts-AccountManager-property-ERROR_CODE_NETWORK_ERROR'>/***/
+</span>ERROR_CODE_NETWORK_ERROR : &quot;3&quot;,
+<span id='android-accounts-AccountManager-property-ERROR_CODE_CANCELED'>/***/
+</span>ERROR_CODE_CANCELED : &quot;4&quot;,
+<span id='android-accounts-AccountManager-property-ERROR_CODE_INVALID_RESPONSE'>/***/
+</span>ERROR_CODE_INVALID_RESPONSE : &quot;5&quot;,
+<span id='android-accounts-AccountManager-property-ERROR_CODE_UNSUPPORTED_OPERATION'>/***/
+</span>ERROR_CODE_UNSUPPORTED_OPERATION : &quot;6&quot;,
+<span id='android-accounts-AccountManager-property-ERROR_CODE_BAD_ARGUMENTS'>/***/
+</span>ERROR_CODE_BAD_ARGUMENTS : &quot;7&quot;,
+<span id='android-accounts-AccountManager-property-ERROR_CODE_BAD_REQUEST'>/***/
+</span>ERROR_CODE_BAD_REQUEST : &quot;8&quot;,
+<span id='android-accounts-AccountManager-property-ERROR_CODE_BAD_AUTHENTICATION'>/***/
+</span>ERROR_CODE_BAD_AUTHENTICATION : &quot;9&quot;,
+<span id='android-accounts-AccountManager-property-ERROR_CODE_USER_RESTRICTED'>/**@hide */
+</span>ERROR_CODE_USER_RESTRICTED : &quot;100&quot;,
+<span id='android-accounts-AccountManager-property-ERROR_CODE_MANAGEMENT_DISABLED_FOR_ACCOUNT_TYPE'>/**@hide */
+</span>ERROR_CODE_MANAGEMENT_DISABLED_FOR_ACCOUNT_TYPE : &quot;101&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ACCOUNT_NAME'>/** Bundle key used for the {@link String} account name in results
+</span> from methods which return information about a particular account.
+*/
+KEY_ACCOUNT_NAME : &quot;authAccount&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ACCOUNT_TYPE'>/** Bundle key used for the {@link String} account type in results
+</span> from methods which return information about a particular account.
+*/
+KEY_ACCOUNT_TYPE : &quot;accountType&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ACCOUNT_ACCESS_ID'>/** Bundle key used for the account access id used for noting the
+</span> account was accessed when unmarshaled from a parcel.
+
+ @hide
+*/
+KEY_ACCOUNT_ACCESS_ID : &quot;accountAccessId&quot;,
+<span id='android-accounts-AccountManager-property-KEY_AUTHTOKEN'>/** Bundle key used for the auth token value in results
+</span> from {@link #getAuthToken} and friends.
+*/
+KEY_AUTHTOKEN : &quot;authtoken&quot;,
+<span id='android-accounts-AccountManager-property-KEY_INTENT'>/** Bundle key used for an {@link Intent} in results from methods that
+</span> may require the caller to interact with the user.  The Intent can
+ be used to start the corresponding user interface activity.
+*/
+KEY_INTENT : &quot;intent&quot;,
+<span id='android-accounts-AccountManager-property-KEY_PASSWORD'>/** Bundle key used to supply the password directly in options to
+</span> {@link #confirmCredentials}, rather than prompting the user with
+ the standard password prompt.
+*/
+KEY_PASSWORD : &quot;password&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ACCOUNTS'>/***/
+</span>KEY_ACCOUNTS : &quot;accounts&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ACCOUNT_AUTHENTICATOR_RESPONSE'>/***/
+</span>KEY_ACCOUNT_AUTHENTICATOR_RESPONSE : &quot;accountAuthenticatorResponse&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ACCOUNT_MANAGER_RESPONSE'>/***/
+</span>KEY_ACCOUNT_MANAGER_RESPONSE : &quot;accountManagerResponse&quot;,
+<span id='android-accounts-AccountManager-property-KEY_AUTHENTICATOR_TYPES'>/***/
+</span>KEY_AUTHENTICATOR_TYPES : &quot;authenticator_types&quot;,
+<span id='android-accounts-AccountManager-property-KEY_AUTH_FAILED_MESSAGE'>/***/
+</span>KEY_AUTH_FAILED_MESSAGE : &quot;authFailedMessage&quot;,
+<span id='android-accounts-AccountManager-property-KEY_AUTH_TOKEN_LABEL'>/***/
+</span>KEY_AUTH_TOKEN_LABEL : &quot;authTokenLabelKey&quot;,
+<span id='android-accounts-AccountManager-property-KEY_BOOLEAN_RESULT'>/***/
+</span>KEY_BOOLEAN_RESULT : &quot;booleanResult&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ERROR_CODE'>/***/
+</span>KEY_ERROR_CODE : &quot;errorCode&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ERROR_MESSAGE'>/***/
+</span>KEY_ERROR_MESSAGE : &quot;errorMessage&quot;,
+<span id='android-accounts-AccountManager-property-KEY_USERDATA'>/***/
+</span>KEY_USERDATA : &quot;userdata&quot;,
+<span id='android-accounts-AccountManager-property-KEY_LAST_AUTHENTICATED_TIME'>/** Bundle key used to supply the last time the credentials of the account
+</span> were authenticated successfully. Time is specified in milliseconds since
+ epoch. Associated time is updated on successful authentication of account
+ on adding account, confirming credentials, or updating credentials.
+*/
+KEY_LAST_AUTHENTICATED_TIME : &quot;lastAuthenticatedTime&quot;,
+<span id='android-accounts-AccountManager-property-KEY_CALLER_UID'>/** The UID of caller app.
+</span>*/
+KEY_CALLER_UID : &quot;callerUid&quot;,
+<span id='android-accounts-AccountManager-property-KEY_CALLER_PID'>/** The process id of caller app.
+</span>*/
+KEY_CALLER_PID : &quot;callerPid&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ANDROID_PACKAGE_NAME'>/** The Android package of the caller will be set in the options bundle by the
+</span> {@link android.accounts.AccountManager} and will be passed to the AccountManagerService and
+ to the AccountAuthenticators. The uid of the caller will be known by the
+ AccountManagerService as well as the AccountAuthenticators so they will be able to
+ verify that the package is consistent with the uid (a uid might be shared by many
+ packages).
+*/
+KEY_ANDROID_PACKAGE_NAME : &quot;androidPackageName&quot;,
+<span id='android-accounts-AccountManager-property-KEY_NOTIFY_ON_FAILURE'>/** Boolean, if set and 'customTokens' the authenticator is responsible for
+</span> notifications.
+ @hide
+*/
+KEY_NOTIFY_ON_FAILURE : &quot;notifyOnAuthFailure&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ACCOUNT_SESSION_BUNDLE'>/** Bundle key used for a {@link Bundle} in result from
+</span> {@link #startAddAccountSession} and friends which returns session data
+ for installing an account later.
+*/
+KEY_ACCOUNT_SESSION_BUNDLE : &quot;accountSessionBundle&quot;,
+<span id='android-accounts-AccountManager-property-KEY_ACCOUNT_STATUS_TOKEN'>/** Bundle key used for the {@link String} account status token in result
+</span> from {@link #startAddAccountSession} and friends which returns
+ information about a particular account.
+*/
+KEY_ACCOUNT_STATUS_TOKEN : &quot;accountStatusToken&quot;,
+<span id='android-accounts-AccountManager-property-ACTION_AUTHENTICATOR_INTENT'>/***/
+</span>ACTION_AUTHENTICATOR_INTENT : &quot;android.accounts.AccountAuthenticator&quot;,
+<span id='android-accounts-AccountManager-property-AUTHENTICATOR_META_DATA_NAME'>/***/
+</span>AUTHENTICATOR_META_DATA_NAME : &quot;android.accounts.AccountAuthenticator&quot;,
+<span id='android-accounts-AccountManager-property-AUTHENTICATOR_ATTRIBUTES_NAME'>/***/
+</span>AUTHENTICATOR_ATTRIBUTES_NAME : &quot;account-authenticator&quot;,
+<span id='android-accounts-AccountManager-property-VISIBILITY_UNDEFINED'>/** Account visibility was not set. Default visibility value will be used.
+</span> See {@link #PACKAGE_NAME_KEY_LEGACY_VISIBLE}, {@link #PACKAGE_NAME_KEY_LEGACY_NOT_VISIBLE}
+*/
+VISIBILITY_UNDEFINED : &quot;0&quot;,
+<span id='android-accounts-AccountManager-property-VISIBILITY_VISIBLE'>/** Account is always visible to given application and only authenticator can revoke visibility.
+</span>*/
+VISIBILITY_VISIBLE : &quot;1&quot;,
+<span id='android-accounts-AccountManager-property-VISIBILITY_USER_MANAGED_VISIBLE'>/** Account is visible to given application, but user can revoke visibility.
+</span>*/
+VISIBILITY_USER_MANAGED_VISIBLE : &quot;2&quot;,
+<span id='android-accounts-AccountManager-property-VISIBILITY_NOT_VISIBLE'>/** Account is not visible to given application and only authenticator can grant visibility.
+</span>*/
+VISIBILITY_NOT_VISIBLE : &quot;3&quot;,
+<span id='android-accounts-AccountManager-property-VISIBILITY_USER_MANAGED_NOT_VISIBLE'>/** Account is not visible to given application, but user can reveal it, for example, using
+</span> {@link #newChooseAccountIntent(Account, List, String[], String, String, String[], Bundle)}
+*/
+VISIBILITY_USER_MANAGED_NOT_VISIBLE : &quot;4&quot;,
+<span id='android-accounts-AccountManager-property-ACCOUNT_ACCESS_TOKEN_TYPE'>/** Token type for the special case where a UID has access only to an account
+</span> but no authenticator specific auth token types.
+
+ @hide
+*/
+ACCOUNT_ACCESS_TOKEN_TYPE : &quot;com.android.AccountManager.ACCOUNT_ACCESS_TOKEN_TYPE&quot;,
+<span id='android-accounts-AccountManager-property-LOGIN_ACCOUNTS_CHANGED_ACTION'>/** Action sent as a broadcast Intent by the AccountsService when accounts are added, accounts
+</span> are removed, or an account's credentials (saved password, etc) are changed.
+
+ @see #addOnAccountsUpdatedListener
+ @see #ACTION_ACCOUNT_REMOVED
+
+ @deprecated use {@link #addOnAccountsUpdatedListener} to get account updates in runtime.
+*/
+LOGIN_ACCOUNTS_CHANGED_ACTION : &quot;android.accounts.LOGIN_ACCOUNTS_CHANGED&quot;,
+<span id='android-accounts-AccountManager-property-ACTION_ACCOUNT_REMOVED'>/** Action sent as a broadcast Intent by the AccountsService when any account is removed
+</span> or renamed. Only applications which were able to see the account will receive the intent.
+ Intent extra will include the following fields:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #KEY_ACCOUNT_NAME} - the name of the removed account
+ &lt;li&gt; {@link #KEY_ACCOUNT_TYPE} - the type of the account
+ &lt;/ul&gt;
+*/
+ACTION_ACCOUNT_REMOVED : &quot;android.accounts.action.ACCOUNT_REMOVED&quot;,
+<span id='android-accounts-AccountManager-property-ACTION_VISIBLE_ACCOUNTS_CHANGED'>/** Action sent as a broadcast Intent to specific package by the AccountsService
+</span> when account visibility or account's credentials (saved password, etc) are changed.
+
+ @see #addOnAccountsUpdatedListener
+
+ @hide
+*/
+ACTION_VISIBLE_ACCOUNTS_CHANGED : &quot;android.accounts.action.VISIBLE_ACCOUNTS_CHANGED&quot;,
+<span id='android-accounts-AccountManager-property-PACKAGE_NAME_KEY_LEGACY_VISIBLE'>/** Key to set visibility for applications which satisfy one of the following conditions:
+</span> &lt;ul&gt;
+ &lt;li&gt;Target API level below {@link android.os.Build.VERSION_CODES#O} and have
+ deprecated {@link android.Manifest.permission#GET_ACCOUNTS} permission.
+ &lt;/li&gt;
+ &lt;li&gt; Have {@link android.Manifest.permission#GET_ACCOUNTS_PRIVILEGED} permission. &lt;/li&gt;
+ &lt;li&gt; Have the same signature as authenticator. &lt;/li&gt;
+ &lt;li&gt; Have {@link android.Manifest.permission#READ_CONTACTS} permission and
+ account type may be associated with contacts data - (verified by
+ {@link android.Manifest.permission#WRITE_CONTACTS} permission check for the authenticator).
+ &lt;/li&gt;
+ &lt;/ul&gt;
+ See {@link #getAccountVisibility}. If the value was not set by authenticator
+ {@link #VISIBILITY_USER_MANAGED_VISIBLE} is used.
+*/
+PACKAGE_NAME_KEY_LEGACY_VISIBLE : &quot;android:accounts:key_legacy_visible&quot;,
+<span id='android-accounts-AccountManager-property-PACKAGE_NAME_KEY_LEGACY_NOT_VISIBLE'>/** Key to set default visibility for applications which don't satisfy conditions in
+</span> {@link #PACKAGE_NAME_KEY_LEGACY_VISIBLE}. If the value was not set by authenticator
+ {@link #VISIBILITY_USER_MANAGED_NOT_VISIBLE} is used.
+*/
+PACKAGE_NAME_KEY_LEGACY_NOT_VISIBLE : &quot;android:accounts:key_legacy_not_visible&quot;,
+<span id='android-accounts-AccountManager-method-sanitizeResult'>/**
+</span>@hide for internal use only
+*/
+sanitizeResult : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-get'>/**Gets an AccountManager instance associated with a Context.
+</span> The {@link Context} will be used as long as the AccountManager is
+ active, so make sure to use a {@link Context} whose lifetime is
+ commensurate with any listeners registered to
+ {@link #addOnAccountsUpdatedListener} or similar methods.
+
+ &lt;p&gt;It is safe to call this method from the main thread.
+
+ &lt;p&gt;No permission is required to call this method.
+@param {Object {Context}} context The {@link Context} to use when necessary
+@return {Object {android.accounts.AccountManager}} An {@link AccountManager} instance
+*/
+get : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getPassword'>/**Gets the saved password associated with the account. This is intended for authenticators and
+</span> related code; applications should get an auth token instead.
+
+ &lt;p&gt;
+ It is safe to call this method from the main thread.
+
+ &lt;p&gt;
+ This method requires the caller to have a signature match with the authenticator that owns
+ the specified account.
+
+ &lt;p&gt;
+ &lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level
+ {@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1} and before, AUTHENTICATE_ACCOUNTS
+ permission is needed for those platforms. See docs for this function in API level
+ {@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1}.
+@param {Object {Account}} account The account to query for a password. Must not be {@code null}.
+@return {String} The account's password, null if none or if the account doesn't exist
+*/
+getPassword : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getUserData'>/**Gets the user data named by &quot;key&quot; associated with the account. This is intended for
+</span> authenticators and related code to store arbitrary metadata along with accounts. The meaning
+ of the keys and values is up to the authenticator for the account.
+
+ &lt;p&gt;
+ It is safe to call this method from the main thread.
+
+ &lt;p&gt;
+ This method requires the caller to have a signature match with the authenticator that owns
+ the specified account.
+
+ &lt;p&gt;
+ &lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level
+ {@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1} and before, AUTHENTICATE_ACCOUNTS
+ permission is needed for those platforms. See docs for this function in API level
+ {@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1}.
+@param {Object {Account}} account The account to query for user data
+@return {String} The user data, null if the account, key doesn't exist, or the user is locked
+*/
+getUserData : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAuthenticatorTypes'>/**Lists the currently registered authenticators.
+</span>
+ &lt;p&gt;It is safe to call this method from the main thread.
+
+ &lt;p&gt;No permission is required to call this method.
+@return {Object {android.accounts.AuthenticatorDescription}} An array of {@link AuthenticatorDescription} for every
+     authenticator known to the AccountManager service.  Empty (never
+     null) if no authenticators are known.
+*/
+getAuthenticatorTypes : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAuthenticatorTypesAsUser'>/**
+</span>@hide Lists the currently registered authenticators for a given user id.
+
+ &lt;p&gt;It is safe to call this method from the main thread.
+
+ &lt;p&gt;The caller has to be in the same user or have the permission
+ {@link android.Manifest.permission#INTERACT_ACROSS_USERS_FULL}.
+@return {Object {android.accounts.AuthenticatorDescription}} An array of {@link AuthenticatorDescription} for every
+     authenticator known to the AccountManager service.  Empty (never
+     null) if no authenticators are known.
+*/
+getAuthenticatorTypesAsUser : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAccounts'>/**Lists all accounts visible to the caller regardless of type. Equivalent to
+</span> getAccountsByType(null). These accounts may be visible because the user granted access to the
+ account, or the AbstractAcccountAuthenticator managing the account did so or because the
+ client shares a signature with the managing AbstractAccountAuthenticator.
+
+ &lt;p&gt;
+ It is safe to call this method from the main thread.
+@return {Object {android.accounts.Account}} An array of {@link Account}, one for each account. Empty (never null) if no accounts
+         have been added.
+*/
+getAccounts : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAccountsAsUser'>/**
+</span>@hide Lists all accounts visible to caller regardless of type for a given user id. Equivalent to
+ getAccountsByType(null).
+
+ &lt;p&gt;
+ It is safe to call this method from the main thread.
+@return {Object {android.accounts.Account}} An array of {@link Account}, one for each account. Empty (never null) if no accounts
+         have been added.
+*/
+getAccountsAsUser : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAccountsForPackage'>/**
+</span>@param {String} packageName package name of the calling app.
+@param {Number} uid the uid of the calling app.
+@param uid the uid of the calling app.
+@return {Object {android.accounts.Account}} the accounts that are available to this package and user.
+*/
+getAccountsForPackage : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAccountsByTypeForPackage'>/**Returns the accounts visible to the specified package in an environment where some apps are
+</span> not authorized to view all accounts. This method can only be called by system apps and
+ authenticators managing the type.
+ Beginning API level {@link android.os.Build.VERSION_CODES#O} it also return accounts
+ which user can make visible to the application (see {@link #VISIBILITY_USER_MANAGED_VISIBLE}).
+@param {String} type The type of accounts to return, null to retrieve all accounts
+@param {String} packageName The package name of the app for which the accounts are to be returned
+@return {Object {android.accounts.Account}} An array of {@link Account}, one per matching account. Empty (never null) if no
+         accounts of the specified type can be accessed by the package.
+*/
+getAccountsByTypeForPackage : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAccountsByType'>/**Lists all accounts of particular type visible to the caller. These accounts may be visible
+</span> because the user granted access to the account, or the AbstractAcccountAuthenticator managing
+ the account did so or because the client shares a signature with the managing
+ AbstractAccountAuthenticator.
+
+ &lt;p&gt;
+ The account type is a string token corresponding to the authenticator and useful domain of
+ the account. For example, there are types corresponding to Google and Facebook. The exact
+ string token to use will be published somewhere associated with the authenticator in
+ question.
+
+ &lt;p&gt;
+ It is safe to call this method from the main thread.
+
+ &lt;p&gt;
+ Caller targeting API level {@link android.os.Build.VERSION_CODES#O} and above, will get list
+ of accounts made visible to it by user
+ (see {@link #newChooseAccountIntent(Account, List, String[], String,
+ String, String[], Bundle)}) or AbstractAcccountAuthenticator
+ using {@link #setAccountVisibility}.
+ {@link android.Manifest.permission#GET_ACCOUNTS} permission is not used.
+
+ &lt;p&gt;
+ Caller targeting API level below {@link android.os.Build.VERSION_CODES#O} that have not been
+ granted the {@link android.Manifest.permission#GET_ACCOUNTS} permission, will only see those
+ accounts managed by AbstractAccountAuthenticators whose signature matches the client.
+
+ &lt;p&gt;
+ &lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level
+ {@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1} and before,
+ {@link android.Manifest.permission#GET_ACCOUNTS} permission is
+ needed for those platforms, irrespective of uid or signature match. See docs for this
+ function in API level {@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1}.
+@param {String} type The type of accounts to return, null to retrieve all accounts
+@return {Object {android.accounts.Account}} An array of {@link Account}, one per matching account. Empty (never null) if no
+         accounts of the specified type have been added.
+*/
+getAccountsByType : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAccountsByTypeAsUser'>/**
+</span>@hide Same as {@link #getAccountsByType(String)} but for a specific user.
+*/
+getAccountsByTypeAsUser : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-updateAppPermission'>/**Change whether or not an app (identified by its uid) is allowed to retrieve an authToken
+</span> for an account.
+ &lt;p&gt;
+ This is only meant to be used by system activities and is not in the SDK.
+@param {Object {Account}} account The account whose permissions are being modified
+@param {String} authTokenType The type of token whose permissions are being modified
+@param {Number} uid The uid that identifies the app which is being granted or revoked permission.
+@param {Boolean} value true is permission is being granted, false for revoked
+@hide 
+*/
+updateAppPermission : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAuthTokenLabel'>/**Get the user-friendly label associated with an authenticator's auth token.
+</span>@param {String} accountType the type of the authenticator. must not be null.
+@param {String} authTokenType the token type. must not be null.
+@param {Object {android.accounts.AccountManagerCallback}} callback callback to invoke when the result is available. may be null.
+@param {Object {Handler}} handler the handler on which to invoke the callback, or null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} a future containing the label string
+@hide 
+*/
+getAuthTokenLabel : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-hasFeatures'>/**Finds out whether a particular account has all the specified features. Account features are
+</span> authenticator-specific string tokens identifying boolean account properties. For example,
+ features are used to tell whether Google accounts have a particular service (such as Google
+ Calendar or Google Talk) enabled. The feature names and their meanings are published
+ somewhere associated with the authenticator in question.
+
+ &lt;p&gt;
+ This method may be called from any thread, but the returned {@link android.accounts.AccountManagerFuture} must
+ not be used on the main thread.
+
+ &lt;p&gt;
+ If caller target API level is below {@link android.os.Build.VERSION_CODES#O}, it is
+ required to hold the permission {@link android.Manifest.permission#GET_ACCOUNTS} or have a
+ signature match with the AbstractAccountAuthenticator that manages the account.
+@param {Object {Account}} account The {@link Account} to test
+@param {Object {java.lang.String[]}} features An array of the account features to check
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes, null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread, null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Boolean, true if the account
+         exists and has all of the specified features.
+*/
+hasFeatures : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAccountsByTypeAndFeatures'>/**Lists all accounts of a type which have certain features. The account type identifies the
+</span> authenticator (see {@link #getAccountsByType}). Account features are authenticator-specific
+ string tokens identifying boolean account properties (see {@link #hasFeatures}).
+
+ &lt;p&gt;
+ Unlike {@link #getAccountsByType}, this method calls the authenticator, which may contact the
+ server or do other work to check account features, so the method returns an
+ {@link android.accounts.AccountManagerFuture}.
+
+ &lt;p&gt;
+ This method may be called from any thread, but the returned {@link android.accounts.AccountManagerFuture} must
+ not be used on the main thread.
+
+ &lt;p&gt;
+ Caller targeting API level {@link android.os.Build.VERSION_CODES#O} and above, will get list
+ of accounts made visible to it by user
+ (see {@link #newChooseAccountIntent(Account, List, String[], String,
+ String, String[], Bundle)}) or AbstractAcccountAuthenticator
+ using {@link #setAccountVisibility}.
+ {@link android.Manifest.permission#GET_ACCOUNTS} permission is not used.
+
+ &lt;p&gt;
+ Caller targeting API level below {@link android.os.Build.VERSION_CODES#O} that have not been
+ granted the {@link android.Manifest.permission#GET_ACCOUNTS} permission, will only see those
+ accounts managed by AbstractAccountAuthenticators whose signature matches the client.
+ &lt;p&gt;
+ &lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level
+ {@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1} and before,
+ {@link android.Manifest.permission#GET_ACCOUNTS} permission is
+ needed for those platforms, irrespective of uid or signature match. See docs for this
+ function in API level {@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1}.
+@param {String} type The type of accounts to return, must not be null
+@param {Object {java.lang.String[]}} features An array of the account features to require, may be null or empty *
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes, null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread, null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to an array of {@link Account}, one
+         per account of the specified type which matches the requested features.
+*/
+getAccountsByTypeAndFeatures : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-addAccountExplicitly'>/**Adds an account directly to the AccountManager. Normally used by sign-up
+</span> wizards associated with authenticators, not directly by applications.
+ &lt;p&gt;Calling this method does not update the last authenticated timestamp,
+ referred by {@link #KEY_LAST_AUTHENTICATED_TIME}. To update it, call
+ {@link #notifyAccountAuthenticated}(Account) after getting success.
+ However, if this method is called when it is triggered by addAccount() or
+ addAccountAsUser() or similar functions, then there is no need to update
+ timestamp manually as it is updated automatically by framework on
+ successful completion of the mentioned functions.
+ &lt;p&gt;It is safe to call this method from the main thread.
+ &lt;p&gt;This method requires the caller to have a signature match with the
+ authenticator that owns the specified account.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ AUTHENTICATE_ACCOUNTS permission is needed for those platforms. See docs
+ for this function in API level 22.
+@param {Object {Account}} account The {@link Account} to add
+@param {String} password The password to associate with the account, null for none
+@param {Object {Bundle}} userdata String values to use for the account's userdata, null for
+            none
+@return {Boolean} True if the account was successfully added, false if the account
+         already exists, the account is null, the user is locked, or another error occurs.
+*/
+addAccountExplicitly : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-addAccountExplicitly'>/**Adds an account directly to the AccountManager. Additionally it specifies Account visibility
+</span> for given list of packages.
+ &lt;p&gt;
+ Normally used by sign-up wizards associated with authenticators, not directly by
+ applications.
+ &lt;p&gt;
+ Calling this method does not update the last authenticated timestamp, referred by
+ {@link #KEY_LAST_AUTHENTICATED_TIME}. To update it, call
+ {@link #notifyAccountAuthenticated}(Account) after getting success.
+ &lt;p&gt;
+ It is safe to call this method from the main thread.
+ &lt;p&gt;
+ This method requires the caller to have a signature match with the authenticator that owns
+ the specified account.
+@param {Object {Account}} account The {@link Account} to add
+@param {String} password The password to associate with the account, null for none
+@param {Object {Bundle}} extras String values to use for the account's userdata, null for none
+@param {Object {java.util.Map}} visibility Map from packageName to visibility values which will be set before account
+        is added. See {@link #getAccountVisibility} for possible values.
+@return {Boolean} True if the account was successfully added, false if the account already exists, the
+         account is null, or another error occurs.
+*/
+addAccountExplicitly : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getPackagesAndVisibilityForAccount'>/**Returns package names and visibility which were explicitly set for given account.
+</span> &lt;p&gt;
+ This method requires the caller to have a signature match with the authenticator that owns
+ the specified account.
+@param {Object {Account}} account The account for which visibility data should be returned
+@return {Object {java.util.Map}} Map from package names to visibility for given account
+*/
+getPackagesAndVisibilityForAccount : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAccountsAndVisibilityForPackage'>/**Gets all accounts of given type and their visibility for specific package. This method
+</span> requires the caller to have a signature match with the authenticator that manages
+ accountType. It is a helper method which combines calls to {@link #getAccountsByType} by
+ authenticator and {@link #getAccountVisibility} for every returned account.
+
+ &lt;p&gt;
+@param {String} packageName Package name
+@param {String} accountType {@link Account} type
+@return {Object {java.util.Map}} Map with visibility for all accounts of given type
+ See {@link #getAccountVisibility} for possible values
+*/
+getAccountsAndVisibilityForPackage : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-setAccountVisibility'>/**Set visibility value of given account to certain package.
+</span> Package name must match installed application, or be equal to
+ {@link #PACKAGE_NAME_KEY_LEGACY_VISIBLE} or {@link #PACKAGE_NAME_KEY_LEGACY_NOT_VISIBLE}.
+ &lt;p&gt;
+ Possible visibility values:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #VISIBILITY_UNDEFINED}&lt;/li&gt;
+ &lt;li&gt;{@link #VISIBILITY_VISIBLE}&lt;/li&gt;
+ &lt;li&gt;{@link #VISIBILITY_USER_MANAGED_VISIBLE}&lt;/li&gt;
+ &lt;li&gt;{@link #VISIBILITY_NOT_VISIBLE}
+ &lt;li&gt;{@link #VISIBILITY_USER_MANAGED_NOT_VISIBLE}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ This method requires the caller to have a signature match with the authenticator that owns
+ the specified account.
+@param {Object {Account}} account {@link Account} to update visibility
+@param {String} packageName Package name of the application to modify account visibility
+@param {Number} visibility New visibility value
+@return {Boolean} True, if visibility value was successfully updated.
+*/
+setAccountVisibility : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAccountVisibility'>/**Get visibility of certain account for given application. Possible returned values are:
+</span> &lt;ul&gt;
+ &lt;li&gt;{@link #VISIBILITY_VISIBLE}&lt;/li&gt;
+ &lt;li&gt;{@link #VISIBILITY_USER_MANAGED_VISIBLE}&lt;/li&gt;
+ &lt;li&gt;{@link #VISIBILITY_NOT_VISIBLE}
+ &lt;li&gt;{@link #VISIBILITY_USER_MANAGED_NOT_VISIBLE}&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;
+ This method requires the caller to have a signature match with the authenticator that owns
+ the specified account.
+@param {Object {Account}} account {@link Account} to get visibility
+@param {String} packageName Package name of the application to get account visibility
+@return {Number} int Visibility of given account.
+*/
+getAccountVisibility : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-notifyAccountAuthenticated'>/**Notifies the system that the account has just been authenticated. This
+</span> information may be used by other applications to verify the account. This
+ should be called only when the user has entered correct credentials for
+ the account.
+ &lt;p&gt;
+ It is not safe to call this method from the main thread. As such, call it
+ from another thread.
+ &lt;p&gt;This method requires the caller to have a signature match with the
+ authenticator that owns the specified account.
+@param {Object {Account}} account The {@link Account} to be updated.
+@return {Boolean} boolean {@code true} if the authentication of the account has been successfully
+         acknowledged. Otherwise {@code false}.
+*/
+notifyAccountAuthenticated : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-renameAccount'>/**Rename the specified {@link android.accounts.Account}.  This is equivalent to removing
+</span> the existing account and adding a new renamed account with the old
+ account's user data.
+
+ &lt;p&gt;It is safe to call this method from the main thread.
+
+ &lt;p&gt;This method requires the caller to have a signature match with the
+ authenticator that manages the specified account.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ AUTHENTICATE_ACCOUNTS permission and same UID as account's authenticator
+ is needed for those platforms. See docs for this function in API level 22.
+@param {Object {Account}} account The {@link Account} to rename
+@param {String} newName String name to be associated with the account.
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes, null for
+     no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread, null for
+     the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to the Account
+     after the name change. If successful the account's name will be the
+     specified new name.
+*/
+renameAccount : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getPreviousName'>/**Gets the previous name associated with the account or {@code null}, if
+</span> none. This is intended so that clients of
+ {@link android.accounts.OnAccountsUpdateListener} can determine if an
+ authenticator has renamed an account.
+
+ &lt;p&gt;It is safe to call this method from the main thread.
+@param {Object {Account}} account The account to query for a previous name.
+@return {String} The account's previous name, null if the account has never been
+         renamed.
+*/
+getPreviousName : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-removeAccount'>/**Removes an account from the AccountManager.  Does nothing if the account
+</span> does not exist.  Does not delete the account from the server.
+ The authenticator may have its own policies preventing account
+ deletion, in which case the account will not be deleted.
+
+ &lt;p&gt;This method requires the caller to have a signature match with the
+ authenticator that manages the specified account.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ MANAGE_ACCOUNTS permission is needed for those platforms. See docs for
+ this function in API level 22.
+@param {Object {Account}} account The {@link Account} to remove
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes,
+     null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread,
+     null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Boolean,
+     true if the account has been successfully removed
+@deprecated use
+     {@link #removeAccount(Account, Activity, AccountManagerCallback, Handler)}
+     instead
+*/
+removeAccount : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-removeAccount'>/**Removes an account from the AccountManager. Does nothing if the account
+</span> does not exist.  Does not delete the account from the server.
+ The authenticator may have its own policies preventing account
+ deletion, in which case the account will not be deleted.
+
+ &lt;p&gt;This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+
+ &lt;p&gt;This method requires the caller to have a signature match with the
+ authenticator that manages the specified account.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ MANAGE_ACCOUNTS permission is needed for those platforms. See docs for
+ this function in API level 22.
+@param {Object {Account}} account The {@link Account} to remove
+@param {Object {Activity}} activity The {@link Activity} context to use for launching a new
+     authenticator-defined sub-Activity to prompt the user to delete an
+     account; used only to call startActivity(); if null, the prompt
+     will not be launched directly, but the {@link Intent} may be
+     returned to the caller instead
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes,
+     null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread,
+     null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle with
+     {@link #KEY_BOOLEAN_RESULT} if activity was specified and an account
+     was removed or if active. If no activity was specified, the returned
+     Bundle contains only {@link #KEY_INTENT} with the {@link Intent}
+     needed to launch the actual account removal process, if authenticator
+     needs the activity launch. If an error occurred,
+     {@link AccountManagerFuture#getResult()} throws:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AuthenticatorException} if no authenticator was registered for
+      this account type or the authenticator failed to respond
+ &lt;li&gt; {@link OperationCanceledException} if the operation was canceled for
+      any reason, including the user canceling the creation process or
+      adding accounts (of this type) has been disabled by policy
+ &lt;/ul&gt;
+*/
+removeAccount : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-removeAccountAsUser'>/**
+</span>@see #removeAccount(Account, AccountManagerCallback, Handler)
+@hide 
+@deprecated use
+     {@link #removeAccountAsUser(Account, Activity, AccountManagerCallback, Handler)}
+     instead
+*/
+removeAccountAsUser : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-removeAccountAsUser'>/**
+</span>@see #removeAccount(Account, Activity, AccountManagerCallback, Handler)
+@hide 
+*/
+removeAccountAsUser : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-removeAccountExplicitly'>/**Removes an account directly. Normally used by authenticators, not
+</span> directly by applications. Does not delete the account from the server.
+ The authenticator may have its own policies preventing account deletion,
+ in which case the account will not be deleted.
+ &lt;p&gt;
+ It is safe to call this method from the main thread.
+ &lt;p&gt;This method requires the caller to have a signature match with the
+ authenticator that manages the specified account.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ AUTHENTICATE_ACCOUNTS permission and same UID as account's authenticator
+ is needed for those platforms. See docs for this function in API level 22.
+@param {Object {Account}} account The {@link Account} to delete.
+@return {Boolean} True if the account was successfully deleted, false if the
+         account did not exist, the account is null, or another error
+         occurs.
+*/
+removeAccountExplicitly : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-invalidateAuthToken'>/**Removes an auth token from the AccountManager's cache.  Does nothing if
+</span> the auth token is not currently in the cache.  Applications must call this
+ method when the auth token is found to have expired or otherwise become
+ invalid for authenticating requests.  The AccountManager does not validate
+ or expire cached auth tokens otherwise.
+
+ &lt;p&gt;It is safe to call this method from the main thread.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ MANAGE_ACCOUNTS or USE_CREDENTIALS permission is needed for those
+ platforms. See docs for this function in API level 22.
+@param {String} accountType The account type of the auth token to invalidate, must not be null
+@param {String} authToken The auth token to invalidate, may be null
+*/
+invalidateAuthToken : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-peekAuthToken'>/**Gets an auth token from the AccountManager's cache.  If no auth
+</span> token is cached for this account, null will be returned -- a new
+ auth token will not be generated, and the server will not be contacted.
+ Intended for use by the authenticator, not directly by applications.
+
+ &lt;p&gt;It is safe to call this method from the main thread.
+
+ &lt;p&gt;This method requires the caller to have a signature match with the
+ authenticator that manages the specified account.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ AUTHENTICATE_ACCOUNTS permission and same UID as account's authenticator
+ is needed for those platforms. See docs for this function in API level 22.
+@param {Object {Account}} account The account for which an auth token is to be fetched. Cannot be {@code null}.
+@param {String} authTokenType The type of auth token to fetch. Cannot be {@code null}.
+@return {String} The cached auth token for this account and type, or null if
+     no auth token is cached, the account does not exist, or the user is locked
+@see #getAuthToken
+*/
+peekAuthToken : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-setPassword'>/**Sets or forgets a saved password. This modifies the local copy of the
+</span> password used to automatically authenticate the user; it does not change
+ the user's account password on the server. Intended for use by the
+ authenticator, not directly by applications.
+ &lt;p&gt;Calling this method does not update the last authenticated timestamp,
+ referred by {@link #KEY_LAST_AUTHENTICATED_TIME}. To update it, call
+ {@link #notifyAccountAuthenticated}(Account) after getting success.
+ &lt;p&gt;It is safe to call this method from the main thread.
+ &lt;p&gt;This method requires the caller to have a signature match with the
+ authenticator that manages the specified account.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ AUTHENTICATE_ACCOUNTS permission and same UID as account's authenticator
+ is needed for those platforms. See docs for this function in API level 22.
+@param {Object {Account}} account The account whose password is to be set. Cannot be
+            {@code null}.
+@param {String} password The password to set, null to clear the password
+*/
+setPassword : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-clearPassword'>/**Forgets a saved password.  This erases the local copy of the password;
+</span> it does not change the user's account password on the server.
+ Has the same effect as setPassword(account, null) but requires fewer
+ permissions, and may be used by applications or management interfaces
+ to &quot;sign out&quot; from an account.
+
+ &lt;p&gt;This method only successfully clear the account's password when the
+ caller has the same signature as the authenticator that owns the
+ specified account. Otherwise, this method will silently fail.
+
+ &lt;p&gt;It is safe to call this method from the main thread.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ MANAGE_ACCOUNTS permission is needed for those platforms. See docs for
+ this function in API level 22.
+@param {Object {Account}} account The account whose password to clear
+*/
+clearPassword : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-setUserData'>/**Sets one userdata key for an account. Intended by use for the
+</span> authenticator to stash state for itself, not directly by applications.
+ The meaning of the keys and values is up to the authenticator.
+
+ &lt;p&gt;It is safe to call this method from the main thread.
+
+ &lt;p&gt;This method requires the caller to have a signature match with the
+ authenticator that manages the specified account.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ AUTHENTICATE_ACCOUNTS permission and same UID as account's authenticator
+ is needed for those platforms. See docs for this function in API level 22.
+@param {Object {Account}} account Account whose user data is to be set. Must not be {@code null}.
+@param {String} key String user data key to set.  Must not be null
+@param {String} value String value to set, {@code null} to clear this user data key
+*/
+setUserData : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-setAuthToken'>/**Adds an auth token to the AccountManager cache for an account.
+</span> If the account does not exist then this call has no effect.
+ Replaces any previous auth token for this account and auth token type.
+ Intended for use by the authenticator, not directly by applications.
+
+ &lt;p&gt;It is safe to call this method from the main thread.
+
+ &lt;p&gt;This method requires the caller to have a signature match with the
+ authenticator that manages the specified account.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ AUTHENTICATE_ACCOUNTS permission and same UID as account's authenticator
+ is needed for those platforms. See docs for this function in API level 22.
+@param {Object {Account}} account The account to set an auth token for
+@param {String} authTokenType The type of the auth token, see {#getAuthToken}
+@param {String} authToken The auth token to add to the cache
+*/
+setAuthToken : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-blockingGetAuthToken'>/**This convenience helper synchronously gets an auth token with
+</span> {@link #getAuthToken(android.accounts.Account, String, boolean, android.accounts.AccountManagerCallback, Handler)}.
+
+ &lt;p&gt;This method may block while a network request completes, and must
+ never be made from the main thread.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ USE_CREDENTIALS permission is needed for those platforms. See docs for
+ this function in API level 22.
+@param {Object {Account}} account The account to fetch an auth token for
+@param {String} authTokenType The auth token type, see {@link #getAuthToken getAuthToken()}
+@param {Boolean} notifyAuthFailure If true, display a notification and return null
+     if authentication fails; if false, prompt and wait for the user to
+     re-enter correct credentials before returning
+@return {String} An auth token of the specified type for this account, or null
+     if authentication fails or none can be fetched.
+@throws AuthenticatorException if the authenticator failed to respond
+@throws OperationCanceledException if the request was canceled for any
+     reason, including the user canceling a credential request
+@throws java.io.IOException if the authenticator experienced an I/O problem
+     creating a new auth token, usually because of network trouble
+*/
+blockingGetAuthToken : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAuthToken'>/**Gets an auth token of the specified type for a particular account,
+</span> prompting the user for credentials if necessary.  This method is
+ intended for applications running in the foreground where it makes
+ sense to ask the user directly for a password.
+
+ &lt;p&gt;If a previously generated auth token is cached for this account and
+ type, then it is returned.  Otherwise, if a saved password is
+ available, it is sent to the server to generate a new auth token.
+ Otherwise, the user is prompted to enter a password.
+
+ &lt;p&gt;Some authenticators have auth token &lt;em&gt;types&lt;/em&gt;, whose value
+ is authenticator-dependent.  Some services use different token types to
+ access different functionality -- for example, Google uses different auth
+ tokens to access Gmail and Google Calendar for the same account.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ USE_CREDENTIALS permission is needed for those platforms. See docs for
+ this function in API level 22.
+
+ &lt;p&gt;This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+@param {Object {Account}} account The account to fetch an auth token for
+@param {String} authTokenType The auth token type, an authenticator-dependent
+     string token, must not be null
+@param {Object {Bundle}} options Authenticator-specific options for the request,
+     may be null or empty
+@param {Object {Activity}} activity The {@link Activity} context to use for launching a new
+     authenticator-defined sub-Activity to prompt the user for a password
+     if necessary; used only to call startActivity(); must not be null.
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes,
+     null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread,
+     null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle with
+     at least the following fields:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #KEY_ACCOUNT_NAME} - the name of the account you supplied
+ &lt;li&gt; {@link #KEY_ACCOUNT_TYPE} - the type of the account
+ &lt;li&gt; {@link #KEY_AUTHTOKEN} - the auth token you wanted
+ &lt;/ul&gt;
+
+ (Other authenticator-specific values may be returned.)  If an auth token
+ could not be fetched, {@link AccountManagerFuture#getResult()} throws:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AuthenticatorException} if the authenticator failed to respond
+ &lt;li&gt; {@link OperationCanceledException} if the operation is canceled for
+      any reason, incluidng the user canceling a credential request
+ &lt;li&gt; {@link IOException} if the authenticator experienced an I/O problem
+      creating a new auth token, usually because of network trouble
+ &lt;/ul&gt;
+ If the account is no longer present on the device, the return value is
+ authenticator-dependent.  The caller should verify the validity of the
+ account before requesting an auth token.
+*/
+getAuthToken : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAuthToken'>/**Gets an auth token of the specified type for a particular account,
+</span> optionally raising a notification if the user must enter credentials.
+ This method is intended for background tasks and services where the
+ user should not be immediately interrupted with a password prompt.
+
+ &lt;p&gt;If a previously generated auth token is cached for this account and
+ type, then it is returned.  Otherwise, if a saved password is
+ available, it is sent to the server to generate a new auth token.
+ Otherwise, an {@link Intent} is returned which, when started, will
+ prompt the user for a password.  If the notifyAuthFailure parameter is
+ set, a status bar notification is also created with the same Intent,
+ alerting the user that they need to enter a password at some point.
+
+ &lt;p&gt;In that case, you may need to wait until the user responds, which
+ could take hours or days or forever.  When the user does respond and
+ supply a new password, the account manager will broadcast the
+ {@link #LOGIN_ACCOUNTS_CHANGED_ACTION} Intent and
+ notify {@link android.accounts.OnAccountsUpdateListener} which applications can
+ use to try again.
+
+ &lt;p&gt;If notifyAuthFailure is not set, it is the application's
+ responsibility to launch the returned Intent at some point.
+ Either way, the result from this call will not wait for user action.
+
+ &lt;p&gt;Some authenticators have auth token &lt;em&gt;types&lt;/em&gt;, whose value
+ is authenticator-dependent.  Some services use different token types to
+ access different functionality -- for example, Google uses different auth
+ tokens to access Gmail and Google Calendar for the same account.
+
+ &lt;p&gt;This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+@param {Object {Account}} account The account to fetch an auth token for
+@param {String} authTokenType The auth token type, an authenticator-dependent
+     string token, must not be null
+@param {Boolean} notifyAuthFailure True to add a notification to prompt the
+     user for a password if necessary, false to leave that to the caller
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes,
+     null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread,
+     null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle with
+     at least the following fields on success:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #KEY_ACCOUNT_NAME} - the name of the account you supplied
+ &lt;li&gt; {@link #KEY_ACCOUNT_TYPE} - the type of the account
+ &lt;li&gt; {@link #KEY_AUTHTOKEN} - the auth token you wanted
+ &lt;/ul&gt;
+
+ (Other authenticator-specific values may be returned.)  If the user
+ must enter credentials, the returned Bundle contains only
+ {@link #KEY_INTENT} with the {@link Intent} needed to launch a prompt.
+
+ If an error occurred, {@link AccountManagerFuture#getResult()} throws:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AuthenticatorException} if the authenticator failed to respond
+ &lt;li&gt; {@link OperationCanceledException} if the operation is canceled for
+      any reason, incluidng the user canceling a credential request
+ &lt;li&gt; {@link IOException} if the authenticator experienced an I/O problem
+      creating a new auth token, usually because of network trouble
+ &lt;/ul&gt;
+ If the account is no longer present on the device, the return value is
+ authenticator-dependent.  The caller should verify the validity of the
+ account before requesting an auth token.
+@deprecated use {@link #getAuthToken(Account, String, android.os.Bundle,
+ boolean, AccountManagerCallback, android.os.Handler)} instead
+*/
+getAuthToken : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAuthToken'>/**Gets an auth token of the specified type for a particular account,
+</span> optionally raising a notification if the user must enter credentials.
+ This method is intended for background tasks and services where the
+ user should not be immediately interrupted with a password prompt.
+
+ &lt;p&gt;If a previously generated auth token is cached for this account and
+ type, then it is returned.  Otherwise, if a saved password is
+ available, it is sent to the server to generate a new auth token.
+ Otherwise, an {@link Intent} is returned which, when started, will
+ prompt the user for a password.  If the notifyAuthFailure parameter is
+ set, a status bar notification is also created with the same Intent,
+ alerting the user that they need to enter a password at some point.
+
+ &lt;p&gt;In that case, you may need to wait until the user responds, which
+ could take hours or days or forever.  When the user does respond and
+ supply a new password, the account manager will broadcast the
+ {@link #LOGIN_ACCOUNTS_CHANGED_ACTION} Intent and
+ notify {@link android.accounts.OnAccountsUpdateListener} which applications can
+ use to try again.
+
+ &lt;p&gt;If notifyAuthFailure is not set, it is the application's
+ responsibility to launch the returned Intent at some point.
+ Either way, the result from this call will not wait for user action.
+
+ &lt;p&gt;Some authenticators have auth token &lt;em&gt;types&lt;/em&gt;, whose value
+ is authenticator-dependent.  Some services use different token types to
+ access different functionality -- for example, Google uses different auth
+ tokens to access Gmail and Google Calendar for the same account.
+
+ &lt;p&gt;This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ USE_CREDENTIALS permission is needed for those platforms. See docs for
+ this function in API level 22.
+@param {Object {Account}} account The account to fetch an auth token for
+@param {String} authTokenType The auth token type, an authenticator-dependent
+     string token, must not be null
+@param {Object {Bundle}} options Authenticator-specific options for the request,
+     may be null or empty
+@param {Boolean} notifyAuthFailure True to add a notification to prompt the
+     user for a password if necessary, false to leave that to the caller
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes,
+     null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread,
+     null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle with
+     at least the following fields on success:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #KEY_ACCOUNT_NAME} - the name of the account you supplied
+ &lt;li&gt; {@link #KEY_ACCOUNT_TYPE} - the type of the account
+ &lt;li&gt; {@link #KEY_AUTHTOKEN} - the auth token you wanted
+ &lt;/ul&gt;
+
+ (Other authenticator-specific values may be returned.)  If the user
+ must enter credentials, the returned Bundle contains only
+ {@link #KEY_INTENT} with the {@link Intent} needed to launch a prompt.
+
+ If an error occurred, {@link AccountManagerFuture#getResult()} throws:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AuthenticatorException} if the authenticator failed to respond
+ &lt;li&gt; {@link OperationCanceledException} if the operation is canceled for
+      any reason, incluidng the user canceling a credential request
+ &lt;li&gt; {@link IOException} if the authenticator experienced an I/O problem
+      creating a new auth token, usually because of network trouble
+ &lt;/ul&gt;
+ If the account is no longer present on the device, the return value is
+ authenticator-dependent.  The caller should verify the validity of the
+ account before requesting an auth token.
+*/
+getAuthToken : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-addAccount'>/**Asks the user to add an account of a specified type.  The authenticator
+</span> for this account type processes this request with the appropriate user
+ interface.  If the user does elect to create a new account, the account
+ name is returned.
+
+ &lt;p&gt;This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ MANAGE_ACCOUNTS permission is needed for those platforms. See docs for
+ this function in API level 22.
+@param {String} accountType The type of account to add; must not be null
+@param {String} authTokenType The type of auth token (see {@link #getAuthToken})
+     this account will need to be able to generate, null for none
+@param {Object {java.lang.String[]}} requiredFeatures The features (see {@link #hasFeatures}) this
+     account must have, null for none
+@param {Object {Bundle}} addAccountOptions Authenticator-specific options for the request,
+     may be null or empty
+@param {Object {Activity}} activity The {@link Activity} context to use for launching a new
+     authenticator-defined sub-Activity to prompt the user to create an
+     account; used only to call startActivity(); if null, the prompt
+     will not be launched directly, but the necessary {@link Intent}
+     will be returned to the caller instead
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes,
+     null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread,
+     null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle with
+     these fields if activity was specified and an account was created:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #KEY_ACCOUNT_NAME} - the name of the account created
+ &lt;li&gt; {@link #KEY_ACCOUNT_TYPE} - the type of the account
+ &lt;/ul&gt;
+
+ If no activity was specified, the returned Bundle contains only
+ {@link #KEY_INTENT} with the {@link Intent} needed to launch the
+ actual account creation process.  If an error occurred,
+ {@link AccountManagerFuture#getResult()} throws:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AuthenticatorException} if no authenticator was registered for
+      this account type or the authenticator failed to respond
+ &lt;li&gt; {@link OperationCanceledException} if the operation was canceled for
+      any reason, including the user canceling the creation process or adding accounts
+      (of this type) has been disabled by policy
+ &lt;li&gt; {@link IOException} if the authenticator experienced an I/O problem
+      creating a new account, usually because of network trouble
+ &lt;/ul&gt;
+*/
+addAccount : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-addAccountAsUser'>/**
+</span>@see #addAccount(String, String, String[], Bundle, Activity, AccountManagerCallback, Handler)
+@hide 
+*/
+addAccountAsUser : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-addSharedAccountsFromParentUser'>/**Adds shared accounts from a parent user to a secondary user. Adding the shared account
+</span> doesn't take effect immediately. When the target user starts up, any pending shared accounts
+ are attempted to be copied to the target user from the primary via calls to the
+ authenticator.
+@param {Object {UserHandle}} parentUser parent user
+@param {Object {UserHandle}} user target user
+@hide 
+*/
+addSharedAccountsFromParentUser : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-copyAccountToUser'>/**Copies an account from one user to another user.
+</span>@param {Object {Account}} account the account to copy
+@param {Object {UserHandle}} fromUser the user to copy the account from
+@param {Object {UserHandle}} toUser the target user
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes,
+     null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread,
+     null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Boolean indicated wether it
+ succeeded.
+@hide 
+*/
+copyAccountToUser : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-removeSharedAccount'>/**
+</span>@param {Object {Account}} account the account to remove
+@param {Object {UserHandle}} user the user to remove the account from
+@param user the user to remove the account from
+@return {Boolean} 
+*/
+removeSharedAccount : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getSharedAccounts'>/**
+</span>@param {Object {UserHandle}} user
+@param user
+@return {Object {android.accounts.Account}} 
+*/
+getSharedAccounts : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-confirmCredentials'>/**Confirms that the user knows the password for an account to make extra
+</span> sure they are the owner of the account.  The user-entered password can
+ be supplied directly, otherwise the authenticator for this account type
+ prompts the user with the appropriate interface.  This method is
+ intended for applications which want extra assurance; for example, the
+ phone lock screen uses this to let the user unlock the phone with an
+ account password if they forget the lock pattern.
+
+ &lt;p&gt;If the user-entered password matches a saved password for this
+ account, the request is considered valid; otherwise the authenticator
+ verifies the password (usually by contacting the server).
+
+ &lt;p&gt;This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ MANAGE_ACCOUNTS permission is needed for those platforms. See docs
+ for this function in API level 22.
+@param {Object {Account}} account The account to confirm password knowledge for
+@param {Object {Bundle}} options Authenticator-specific options for the request;
+     if the {@link #KEY_PASSWORD} string field is present, the
+     authenticator may use it directly rather than prompting the user;
+     may be null or empty
+@param {Object {Activity}} activity The {@link Activity} context to use for launching a new
+     authenticator-defined sub-Activity to prompt the user to enter a
+     password; used only to call startActivity(); if null, the prompt
+     will not be launched directly, but the necessary {@link Intent}
+     will be returned to the caller instead
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes,
+     null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread,
+     null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle
+     with these fields if activity or password was supplied and
+     the account was successfully verified:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #KEY_ACCOUNT_NAME} - the name of the account verified
+ &lt;li&gt; {@link #KEY_ACCOUNT_TYPE} - the type of the account
+ &lt;li&gt; {@link #KEY_BOOLEAN_RESULT} - true to indicate success
+ &lt;/ul&gt;
+
+ If no activity or password was specified, the returned Bundle contains
+ {@link #KEY_INTENT} with the {@link Intent} needed to launch the
+ password prompt.
+
+ &lt;p&gt;Also the returning Bundle may contain {@link
+ #KEY_LAST_AUTHENTICATED_TIME} indicating the last time the
+ credential was validated/created.
+
+ If an error occurred,{@link AccountManagerFuture#getResult()} throws:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AuthenticatorException} if the authenticator failed to respond
+ &lt;li&gt; {@link OperationCanceledException} if the operation was canceled for
+      any reason, including the user canceling the password prompt
+ &lt;li&gt; {@link IOException} if the authenticator experienced an I/O problem
+      verifying the password, usually because of network trouble
+ &lt;/ul&gt;
+*/
+confirmCredentials : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-confirmCredentialsAsUser'>/**
+</span>@hide Same as {@link #confirmCredentials(Account, Bundle, Activity, AccountManagerCallback, Handler)}
+ but for the specified user.
+*/
+confirmCredentialsAsUser : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-updateCredentials'>/**Asks the user to enter a new password for an account, updating the
+</span> saved credentials for the account.  Normally this happens automatically
+ when the server rejects credentials during an auth token fetch, but this
+ can be invoked directly to ensure we have the correct credentials stored.
+
+ &lt;p&gt;This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ MANAGE_ACCOUNTS permission is needed for those platforms. See docs for
+ this function in API level 22.
+@param {Object {Account}} account The account to update credentials for
+@param {String} authTokenType The credentials entered must allow an auth token
+     of this type to be created (but no actual auth token is returned);
+     may be null
+@param {Object {Bundle}} options Authenticator-specific options for the request;
+     may be null or empty
+@param {Object {Activity}} activity The {@link Activity} context to use for launching a new
+     authenticator-defined sub-Activity to prompt the user to enter a
+     password; used only to call startActivity(); if null, the prompt
+     will not be launched directly, but the necessary {@link Intent}
+     will be returned to the caller instead
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes,
+     null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread,
+     null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle
+     with these fields if an activity was supplied and the account
+     credentials were successfully updated:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #KEY_ACCOUNT_NAME} - the name of the account
+ &lt;li&gt; {@link #KEY_ACCOUNT_TYPE} - the type of the account
+ &lt;/ul&gt;
+
+ If no activity was specified, the returned Bundle contains
+ {@link #KEY_INTENT} with the {@link Intent} needed to launch the
+ password prompt. If an error occurred,
+ {@link AccountManagerFuture#getResult()} throws:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AuthenticatorException} if the authenticator failed to respond
+ &lt;li&gt; {@link OperationCanceledException} if the operation was canceled for
+      any reason, including the user canceling the password prompt
+ &lt;li&gt; {@link IOException} if the authenticator experienced an I/O problem
+      verifying the password, usually because of network trouble
+ &lt;/ul&gt;
+*/
+updateCredentials : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-editProperties'>/**Offers the user an opportunity to change an authenticator's settings.
+</span> These properties are for the authenticator in general, not a particular
+ account.  Not all authenticators support this method.
+
+ &lt;p&gt;This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+
+ &lt;p&gt;This method requires the caller to have the same signature as the
+ authenticator associated with the specified account type.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before,
+ MANAGE_ACCOUNTS permission is needed for those platforms. See docs
+ for this function in API level 22.
+@param {String} accountType The account type associated with the authenticator
+     to adjust
+@param {Object {Activity}} activity The {@link Activity} context to use for launching a new
+     authenticator-defined sub-Activity to adjust authenticator settings;
+     used only to call startActivity(); if null, the settings dialog will
+     not be launched directly, but the necessary {@link Intent} will be
+     returned to the caller instead
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes,
+     null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread,
+     null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle
+     which is empty if properties were edited successfully, or
+     if no activity was specified, contains only {@link #KEY_INTENT}
+     needed to launch the authenticator's settings dialog.
+     If an error occurred, {@link AccountManagerFuture#getResult()}
+     throws:
+ &lt;ul&gt;
+ &lt;li&gt; {@link AuthenticatorException} if no authenticator was registered for
+      this account type or the authenticator failed to respond
+ &lt;li&gt; {@link OperationCanceledException} if the operation was canceled for
+      any reason, including the user canceling the settings dialog
+ &lt;li&gt; {@link IOException} if the authenticator experienced an I/O problem
+      updating settings, usually because of network trouble
+ &lt;/ul&gt;
+*/
+editProperties : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-someUserHasAccount'>/**
+</span>@param {Object {Account}} account The account to check for existence.
+@param account The account to check for existence.
+@return {Boolean} whether any user has this account
+*/
+someUserHasAccount : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-getAuthTokenByFeatures'>/**This convenience helper combines the functionality of {@link #getAccountsByTypeAndFeatures},
+</span> {@link #getAuthToken}, and {@link #addAccount}.
+
+ &lt;p&gt;
+ This method gets a list of the accounts matching specific type and feature set which are
+ visible to the caller (see {@link #getAccountsByType} for details);
+ if there is exactly one already visible account, it is used; if there are some
+ accounts for which user grant visibility, the user is prompted to pick one; if there are
+ none, the user is prompted to add one. Finally, an auth token is acquired for the chosen
+ account.
+
+ &lt;p&gt;
+ This method may be called from any thread, but the returned {@link android.accounts.AccountManagerFuture} must
+ not be used on the main thread.
+
+ &lt;p&gt;
+ &lt;b&gt;NOTE:&lt;/b&gt; If targeting your app to work on API level 22 and before, MANAGE_ACCOUNTS
+ permission is needed for those platforms. See docs for this function in API level 22.
+@param {String} accountType The account type required (see {@link #getAccountsByType}), must not be
+        null
+@param {String} authTokenType The desired auth token type (see {@link #getAuthToken}), must not be
+        null
+@param {Object {java.lang.String[]}} features Required features for the account (see
+        {@link #getAccountsByTypeAndFeatures}), may be null or empty
+@param {Object {Activity}} activity The {@link Activity} context to use for launching new sub-Activities to
+        prompt to add an account, select an account, and/or enter a password, as necessary;
+        used only to call startActivity(); should not be null
+@param {Object {Bundle}} addAccountOptions Authenticator-specific options to use for adding new accounts; may
+        be null or empty
+@param {Object {Bundle}} getAuthTokenOptions Authenticator-specific options to use for getting auth tokens; may
+        be null or empty
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes, null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread, null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle with at least the
+         following fields:
+         &lt;ul&gt;
+         &lt;li&gt;{@link #KEY_ACCOUNT_NAME} - the name of the account
+         &lt;li&gt;{@link #KEY_ACCOUNT_TYPE} - the type of the account
+         &lt;li&gt;{@link #KEY_AUTHTOKEN} - the auth token you wanted
+         &lt;/ul&gt;
+
+         If an error occurred, {@link AccountManagerFuture#getResult()} throws:
+         &lt;ul&gt;
+         &lt;li&gt;{@link AuthenticatorException} if no authenticator was registered for this
+         account type or the authenticator failed to respond
+         &lt;li&gt;{@link OperationCanceledException} if the operation was canceled for any reason,
+         including the user canceling any operation
+         &lt;li&gt;{@link IOException} if the authenticator experienced an I/O problem updating
+         settings, usually because of network trouble
+         &lt;/ul&gt;
+*/
+getAuthTokenByFeatures : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-newChooseAccountIntent'>/**Deprecated in favor of {@link #newChooseAccountIntent(Account, List, String[], String,
+</span> String, String[], Bundle)}.
+
+ Returns an intent to an {@link Activity} that prompts the user to choose from a list of
+ accounts.
+ The caller will then typically start the activity by calling
+ &lt;code&gt;startActivityForResult(intent, ...);&lt;/code&gt;.
+ &lt;p&gt;
+ On success the activity returns a Bundle with the account name and type specified using
+ keys {@link #KEY_ACCOUNT_NAME} and {@link #KEY_ACCOUNT_TYPE}.
+ Chosen account is marked as {@link #VISIBILITY_USER_MANAGED_VISIBLE} to the caller
+ (see {@link #setAccountVisibility}) and will be returned to it in consequent
+ {@link #getAccountsByType}) calls.
+ &lt;p&gt;
+ The most common case is to call this with one account type, e.g.:
+ &lt;p&gt;
+ &lt;pre&gt;  newChooseAccountIntent(null, null, new String[]{&quot;com.google&quot;}, false, null,
+ null, null, null);&lt;/pre&gt;
+@param {Object {Account}} selectedAccount if specified, indicates that the {@link Account} is the currently
+ selected one, according to the caller's definition of selected.
+@param {Object {java.util.ArrayList}} allowableAccounts an optional {@link List} of accounts that are allowed to be
+ shown. If not specified then this field will not limit the displayed accounts.
+@param {Object {java.lang.String[]}} allowableAccountTypes an optional string array of account types. These are used
+ both to filter the shown accounts and to filter the list of account types that are shown
+ when adding an account. If not specified then this field will not limit the displayed
+ account types when adding an account.
+@param {Boolean} alwaysPromptForAccount boolean that is ignored.
+@param {String} descriptionOverrideText if non-null this string is used as the description in the
+ accounts chooser screen rather than the default
+@param {String} addAccountAuthTokenType this string is passed as the {@link #addAccount}
+ authTokenType parameter
+@param {Object {java.lang.String[]}} addAccountRequiredFeatures this string array is passed as the {@link #addAccount}
+ requiredFeatures parameter
+@param {Object {Bundle}} addAccountOptions This {@link Bundle} is passed as the {@link #addAccount} options
+ parameter
+@return {Object {android.content.Intent}} an {@link Intent} that can be used to launch the ChooseAccount activity flow.
+*/
+newChooseAccountIntent : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-newChooseAccountIntent'>/**Returns an intent to an {@link Activity} that prompts the user to choose from a list of
+</span> accounts.
+ The caller will then typically start the activity by calling
+ &lt;code&gt;startActivityForResult(intent, ...);&lt;/code&gt;.
+ &lt;p&gt;
+ On success the activity returns a Bundle with the account name and type specified using
+ keys {@link #KEY_ACCOUNT_NAME} and {@link #KEY_ACCOUNT_TYPE}.
+ Chosen account is marked as {@link #VISIBILITY_USER_MANAGED_VISIBLE} to the caller
+ (see {@link #setAccountVisibility}) and will be returned to it in consequent
+ {@link #getAccountsByType}) calls.
+ &lt;p&gt;
+ The most common case is to call this with one account type, e.g.:
+ &lt;p&gt;
+ &lt;pre&gt;  newChooseAccountIntent(null, null, new String[]{&quot;com.google&quot;}, null, null, null,
+ null);&lt;/pre&gt;
+@param {Object {Account}} selectedAccount if specified, indicates that the {@link Account} is the currently
+ selected one, according to the caller's definition of selected.
+@param {Object {java.util.List}} allowableAccounts an optional {@link List} of accounts that are allowed to be
+ shown. If not specified then this field will not limit the displayed accounts.
+@param {Object {java.lang.String[]}} allowableAccountTypes an optional string array of account types. These are used
+ both to filter the shown accounts and to filter the list of account types that are shown
+ when adding an account. If not specified then this field will not limit the displayed
+ account types when adding an account.
+@param {String} descriptionOverrideText if non-null this string is used as the description in the
+ accounts chooser screen rather than the default
+@param {String} addAccountAuthTokenType this string is passed as the {@link #addAccount}
+ authTokenType parameter
+@param {Object {java.lang.String[]}} addAccountRequiredFeatures this string array is passed as the {@link #addAccount}
+ requiredFeatures parameter
+@param {Object {Bundle}} addAccountOptions This {@link Bundle} is passed as the {@link #addAccount} options
+ parameter
+@return {Object {android.content.Intent}} an {@link Intent} that can be used to launch the ChooseAccount activity flow.
+*/
+newChooseAccountIntent : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-addOnAccountsUpdatedListener'>/**Adds an {@link android.accounts.OnAccountsUpdateListener} to this instance of the {@link android.accounts.AccountManager}. This
+</span> listener will be notified whenever user or AbstractAcccountAuthenticator made changes to
+ accounts of any type related to the caller. This method is equivalent to
+ addOnAccountsUpdatedListener(listener, handler, updateImmediately, null)
+@see #addOnAccountsUpdatedListener(OnAccountsUpdateListener, Handler, boolean,
+      String[])
+*/
+addOnAccountsUpdatedListener : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-addOnAccountsUpdatedListener'>/**Adds an {@link android.accounts.OnAccountsUpdateListener} to this instance of the {@link android.accounts.AccountManager}. This
+</span> listener will be notified whenever user or AbstractAcccountAuthenticator made changes to
+ accounts of given types related to the caller -
+ either list of accounts returned by {@link #getAccounts}()
+ was changed, or new account was added for which user can grant access to the caller.
+ &lt;p&gt;
+ As long as this listener is present, the AccountManager instance will not be
+ garbage-collected, and neither will the {@link Context} used to retrieve it, which may be a
+ large Activity instance. To avoid memory leaks, you must remove this listener before then.
+ Normally listeners are added in an Activity or Service's {@link Activity#onCreate} and
+ removed in {@link Activity#onDestroy}.
+ &lt;p&gt;
+ It is safe to call this method from the main thread.
+@param {Object {OnAccountsUpdateListener}} listener The listener to send notifications to
+@param {Object {Handler}} handler {@link Handler} identifying the thread to use for notifications, null for the
+        main thread
+@param {Boolean} updateImmediately If true, the listener will be invoked (on the handler thread) right
+        away with the current account list
+@param {Object {java.lang.String[]}} accountTypes If set, only changes to accounts of given types will be reported.
+@throws IllegalArgumentException if listener is null
+@throws IllegalStateException if listener was already added
+*/
+addOnAccountsUpdatedListener : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-removeOnAccountsUpdatedListener'>/**Removes an {@link android.accounts.OnAccountsUpdateListener} previously registered with
+</span> {@link #addOnAccountsUpdatedListener}.  The listener will no longer
+ receive notifications of account changes.
+
+ &lt;p&gt;It is safe to call this method from the main thread.
+
+ &lt;p&gt;No permission is required to call this method.
+@param {Object {OnAccountsUpdateListener}} listener The previously added listener to remove
+@throws IllegalArgumentException if listener is null
+@throws IllegalStateException if listener was not already added
+*/
+removeOnAccountsUpdatedListener : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-startAddAccountSession'>/**Asks the user to authenticate with an account of a specified type. The
+</span> authenticator for this account type processes this request with the
+ appropriate user interface. If the user does elect to authenticate with a
+ new account, a bundle of session data for installing the account later is
+ returned with optional account password and account status token.
+ &lt;p&gt;
+ This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+ &lt;p&gt;
+ &lt;p&gt;
+ &lt;b&gt;NOTE:&lt;/b&gt; The account will not be installed to the device by calling
+ this api alone. #finishSession should be called after this to install the
+ account on device.
+@param {String} accountType The type of account to add; must not be null
+@param {String} authTokenType The type of auth token (see {@link #getAuthToken})
+            this account will need to be able to generate, null for none
+@param {Object {java.lang.String[]}} requiredFeatures The features (see {@link #hasFeatures}) this
+            account must have, null for none
+@param {Object {Bundle}} options Authenticator-specific options for the request, may be
+            null or empty
+@param {Object {Activity}} activity The {@link Activity} context to use for launching a new
+            authenticator-defined sub-Activity to prompt the user to
+            create an account; used only to call startActivity(); if null,
+            the prompt will not be launched directly, but the necessary
+            {@link Intent} will be returned to the caller instead
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes, null for
+            no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread, null for
+            the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle with
+         these fields if activity was specified and user was authenticated
+         with an account:
+         &lt;ul&gt;
+         &lt;li&gt;{@link #KEY_ACCOUNT_SESSION_BUNDLE} - encrypted Bundle for
+         adding the the to the device later.
+         &lt;li&gt;{@link #KEY_ACCOUNT_STATUS_TOKEN} - optional, token to check
+         status of the account
+         &lt;/ul&gt;
+         If no activity was specified, the returned Bundle contains only
+         {@link #KEY_INTENT} with the {@link Intent} needed to launch the
+         actual account creation process. If authenticator doesn't support
+         this method, the returned Bundle contains only
+         {@link #KEY_ACCOUNT_SESSION_BUNDLE} with encrypted
+         {@code options} needed to add account later. If an error
+         occurred, {@link AccountManagerFuture#getResult()} throws:
+         &lt;ul&gt;
+         &lt;li&gt;{@link AuthenticatorException} if no authenticator was
+         registered for this account type or the authenticator failed to
+         respond
+         &lt;li&gt;{@link OperationCanceledException} if the operation was
+         canceled for any reason, including the user canceling the
+         creation process or adding accounts (of this type) has been
+         disabled by policy
+         &lt;li&gt;{@link IOException} if the authenticator experienced an I/O
+         problem creating a new account, usually because of network
+         trouble
+         &lt;/ul&gt;
+@see #finishSession
+*/
+startAddAccountSession : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-startUpdateCredentialsSession'>/**Asks the user to enter a new password for the account but not updating the
+</span> saved credentials for the account until {@link #finishSession} is called.
+ &lt;p&gt;
+ This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+ &lt;p&gt;
+ &lt;b&gt;NOTE:&lt;/b&gt; The saved credentials for the account alone will not be
+ updated by calling this API alone. #finishSession should be called after
+ this to update local credentials
+@param {Object {Account}} account The account to update credentials for
+@param {String} authTokenType The credentials entered must allow an auth token of
+            this type to be created (but no actual auth token is
+            returned); may be null
+@param {Object {Bundle}} options Authenticator-specific options for the request; may be
+            null or empty
+@param {Object {Activity}} activity The {@link Activity} context to use for launching a new
+            authenticator-defined sub-Activity to prompt the user to enter
+            a password; used only to call startActivity(); if null, the
+            prompt will not be launched directly, but the necessary
+            {@link Intent} will be returned to the caller instead
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes, null for
+            no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread, null for
+            the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle with
+         these fields if an activity was supplied and user was
+         successfully re-authenticated to the account:
+         &lt;ul&gt;
+         &lt;li&gt;{@link #KEY_ACCOUNT_SESSION_BUNDLE} - encrypted Bundle for
+         updating the local credentials on device later.
+         &lt;li&gt;{@link #KEY_ACCOUNT_STATUS_TOKEN} - optional, token to check
+         status of the account
+         &lt;/ul&gt;
+         If no activity was specified, the returned Bundle contains
+         {@link #KEY_INTENT} with the {@link Intent} needed to launch the
+         password prompt. If an error occurred,
+         {@link AccountManagerFuture#getResult()} throws:
+         &lt;ul&gt;
+         &lt;li&gt;{@link AuthenticatorException} if the authenticator failed to
+         respond
+         &lt;li&gt;{@link OperationCanceledException} if the operation was
+         canceled for any reason, including the user canceling the
+         password prompt
+         &lt;li&gt;{@link IOException} if the authenticator experienced an I/O
+         problem verifying the password, usually because of network
+         trouble
+         &lt;/ul&gt;
+@see #finishSession
+*/
+startUpdateCredentialsSession : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-finishSession'>/**Finishes the session started by {@link #startAddAccountSession} or
+</span> {@link #startUpdateCredentialsSession}. This will either add the account
+ to AccountManager or update the local credentials stored.
+ &lt;p&gt;
+ This method may be called from any thread, but the returned
+ {@link android.accounts.AccountManagerFuture} must not be used on the main thread.
+@param {Object {Bundle}} sessionBundle a {@link Bundle} created by {@link #startAddAccountSession} or
+            {@link #startUpdateCredentialsSession}
+@param {Object {Activity}} activity The {@link Activity} context to use for launching a new
+            authenticator-defined sub-Activity to prompt the user to
+            create an account or reauthenticate existing account; used
+            only to call startActivity(); if null, the prompt will not
+            be launched directly, but the necessary {@link Intent} will
+            be returned to the caller instead
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes, null for
+            no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread, null for
+            the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Bundle with
+         these fields if an activity was supplied and an account was added
+         to device or local credentials were updated::
+         &lt;ul&gt;
+         &lt;li&gt;{@link #KEY_ACCOUNT_NAME} - the name of the account created
+         &lt;li&gt;{@link #KEY_ACCOUNT_TYPE} - the type of the account
+         &lt;li&gt;{@link #KEY_ACCOUNT_STATUS_TOKEN} - optional, token to check
+         status of the account
+         &lt;/ul&gt;
+         If no activity was specified and additional information is needed
+         from user, the returned Bundle may contains only
+         {@link #KEY_INTENT} with the {@link Intent} needed to launch the
+         actual account creation process. If an error occurred,
+         {@link AccountManagerFuture#getResult()} throws:
+         &lt;ul&gt;
+         &lt;li&gt;{@link AuthenticatorException} if no authenticator was
+         registered for this account type or the authenticator failed to
+         respond
+         &lt;li&gt;{@link OperationCanceledException} if the operation was
+         canceled for any reason, including the user canceling the
+         creation process or adding accounts (of this type) has been
+         disabled by policy
+         &lt;li&gt;{@link IOException} if the authenticator experienced an I/O
+         problem creating a new account, usually because of network
+         trouble
+         &lt;/ul&gt;
+@see #startAddAccountSession and #startUpdateCredentialsSession
+*/
+finishSession : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-finishSessionAsUser'>/**
+</span>@see #finishSession
+@hide 
+*/
+finishSessionAsUser : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-isCredentialsUpdateSuggested'>/**Checks whether {@link #updateCredentials} or {@link #startUpdateCredentialsSession} should be
+</span> called with respect to the specified account.
+ &lt;p&gt;
+ This method may be called from any thread, but the returned {@link android.accounts.AccountManagerFuture} must
+ not be used on the main thread.
+@param {Object {Account}} account The {@link Account} to be checked whether {@link #updateCredentials} or
+ {@link #startUpdateCredentialsSession} should be called
+@param {String} statusToken a String of token to check account staus
+@param {Object {android.accounts.AccountManagerCallback}} callback Callback to invoke when the request completes, null for no callback
+@param {Object {Handler}} handler {@link Handler} identifying the callback thread, null for the main thread
+@return {Object {android.accounts.AccountManagerFuture}} An {@link AccountManagerFuture} which resolves to a Boolean, true if the credentials
+         of the account should be updated.
+*/
+isCredentialsUpdateSuggested : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-hasAccountAccess'>/**Gets whether a given package under a user has access to an account.
+</span> Can be called only from the system UID.
+@param {Object {Account}} account The account for which to check.
+@param {String} packageName The package for which to check.
+@param {Object {UserHandle}} userHandle The user for which to check.
+@return {Boolean} True if the package can access the account.
+@hide 
+*/
+hasAccountAccess : function(  ) {},
+
+<span id='android-accounts-AccountManager-method-createRequestAccountAccessIntentSenderAsUser'>/**Creates an intent to request access to a given account for a UID.
+</span> The returned intent should be stated for a result where {@link Activity#RESULT_OK} result means access was granted whereas {@link Activity#RESULT_CANCELED} result means access wasn't granted. Can
+ be called only from the system UID.
+@param {Object {Account}} account The account for which to request.
+@param {String} packageName The package name which to request.
+@param {Object {UserHandle}} userHandle The user for which to request.
+@return {Object {android.content.IntentSender}} The intent to request account access or null if the package
+     doesn't exist.
+@hide 
+*/
+createRequestAccountAccessIntentSenderAsUser : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

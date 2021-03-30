@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-ActivityTaskManager'>/**@class android.app.ActivityTaskManager
+</span>@extends java.lang.Object
+
+ This class gives information about, and interacts with activities and their containers like task,
+ stacks, and displays.
+
+ @hide
+*/
+var ActivityTaskManager = {
+
+<span id='android-app-ActivityTaskManager-property-INVALID_STACK_ID'>/**Invalid stack ID. */
+</span>INVALID_STACK_ID : &quot;-1&quot;,
+<span id='android-app-ActivityTaskManager-property-INVALID_TASK_ID'>/** Invalid task ID.
+</span> @hide
+*/
+INVALID_TASK_ID : &quot;-1&quot;,
+<span id='android-app-ActivityTaskManager-property-SPLIT_SCREEN_CREATE_MODE_TOP_OR_LEFT'>/** Parameter to {@link IActivityTaskManager#setTaskWindowingModeSplitScreenPrimary} which
+</span> specifies the position of the created docked stack at the top half of the screen if
+ in portrait mode or at the left half of the screen if in landscape mode.
+*/
+SPLIT_SCREEN_CREATE_MODE_TOP_OR_LEFT : &quot;0&quot;,
+<span id='android-app-ActivityTaskManager-property-SPLIT_SCREEN_CREATE_MODE_BOTTOM_OR_RIGHT'>/** Parameter to {@link IActivityTaskManager#setTaskWindowingModeSplitScreenPrimary} which
+</span> specifies the position of the created docked stack at the bottom half of the screen if
+ in portrait mode or at the right half of the screen if in landscape mode.
+*/
+SPLIT_SCREEN_CREATE_MODE_BOTTOM_OR_RIGHT : &quot;1&quot;,
+<span id='android-app-ActivityTaskManager-property-RESIZE_MODE_SYSTEM'>/** Input parameter to {@link IActivityTaskManager#resizeTask} which indicates
+</span> that the resize doesn't need to preserve the window, and can be skipped if bounds
+ is unchanged. This mode is used by window manager in most cases.
+ @hide
+*/
+RESIZE_MODE_SYSTEM : &quot;0&quot;,
+<span id='android-app-ActivityTaskManager-property-RESIZE_MODE_PRESERVE_WINDOW'>/** Input parameter to {@link IActivityTaskManager#resizeTask} which indicates
+</span> that the resize should preserve the window if possible.
+ @hide
+*/
+RESIZE_MODE_PRESERVE_WINDOW : &quot;1&quot;,
+<span id='android-app-ActivityTaskManager-property-RESIZE_MODE_USER'>/** Input parameter to {@link IActivityTaskManager#resizeTask} used when the
+</span> resize is due to a drag action.
+ @hide
+*/
+RESIZE_MODE_USER : &quot;1&quot;,
+<span id='android-app-ActivityTaskManager-property-RESIZE_MODE_SYSTEM_SCREEN_ROTATION'>/** Input parameter to {@link IActivityTaskManager#resizeTask} used by window
+</span> manager during a screen rotation.
+ @hide
+*/
+RESIZE_MODE_SYSTEM_SCREEN_ROTATION : &quot;1&quot;,
+<span id='android-app-ActivityTaskManager-property-RESIZE_MODE_FORCED'>/** Input parameter to {@link IActivityTaskManager#resizeTask} which indicates
+</span> that the resize should be performed even if the bounds appears unchanged.
+ @hide
+*/
+RESIZE_MODE_FORCED : &quot;2&quot;,
+<span id='android-app-ActivityTaskManager-property-RESIZE_MODE_USER_FORCED'>/** Input parameter to {@link IActivityTaskManager#resizeTask} which indicates
+</span> that the resize should preserve the window if possible, and should not be skipped
+ even if the bounds is unchanged. Usually used to force a resizing when a drag action
+ is ending.
+ @hide
+*/
+RESIZE_MODE_USER_FORCED : &quot;3&quot;,
+<span id='android-app-ActivityTaskManager-property-EXTRA_PERMISSION_TOKEN'>/** Extra included on intents that are delegating the call to
+</span> ActivityManager#startActivityAsCaller to another app.  This token is necessary for that call
+ to succeed.  Type is IBinder.
+ @hide
+*/
+EXTRA_PERMISSION_TOKEN : &quot;android.app.extra.PERMISSION_TOKEN&quot;,
+<span id='android-app-ActivityTaskManager-property-EXTRA_OPTIONS'>/** Extra included on intents that contain an EXTRA_INTENT, with options that the contained
+</span> intent may want to be started with.  Type is Bundle.
+ TODO: remove once the ChooserActivity moves to systemui
+ @hide
+*/
+EXTRA_OPTIONS : &quot;android.app.extra.OPTIONS&quot;,
+<span id='android-app-ActivityTaskManager-property-EXTRA_IGNORE_TARGET_SECURITY'>/** Extra included on intents that contain an EXTRA_INTENT, use this boolean value for the
+</span> parameter of the same name when starting the contained intent.
+ TODO: remove once the ChooserActivity moves to systemui
+ @hide
+*/
+EXTRA_IGNORE_TARGET_SECURITY : &quot;android.app.extra.EXTRA_IGNORE_TARGET_SECURITY&quot;,
+<span id='android-app-ActivityTaskManager-method-getService'>/**
+</span>@hide 
+*/
+getService : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-setTaskWindowingMode'>/**Sets the windowing mode for a specific task. Only works on tasks of type
+</span> {@link android.app.WindowConfiguration.WindowConfiguration#ACTIVITY_TYPE_STANDARD}
+@param {Number} taskId The id of the task to set the windowing mode for.
+@param {Number} windowingMode The windowing mode to set for the task.
+@param {Boolean} toTop If the task should be moved to the top once the windowing mode changes.
+*/
+setTaskWindowingMode : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-setTaskWindowingModeSplitScreenPrimary'>/**Moves the input task to the primary-split-screen stack.
+</span>@param {Number} taskId Id of task to move.
+@param {Number} createMode The mode the primary split screen stack should be created in if it doesn't
+                   exist already. See
+                   {@link ActivityTaskManager#SPLIT_SCREEN_CREATE_MODE_TOP_OR_LEFT}
+                   and
+                   {@link android.app.ActivityManager
+                        #SPLIT_SCREEN_CREATE_MODE_BOTTOM_OR_RIGHT}
+@param {Boolean} toTop If the task and stack should be moved to the top.
+@param {Boolean} animate Whether we should play an animation for the moving the task
+@param {Object {Rect}} initialBounds If the primary stack gets created, it will use these bounds for the
+                      docked stack. Pass {@code null} to use default bounds.
+@param {Boolean} showRecents If the recents activity should be shown on the other side of the task
+                    going into split-screen mode.
+*/
+setTaskWindowingModeSplitScreenPrimary : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-resizeStack'>/**Resizes the input stack id to the given bounds.
+</span>@param {Number} stackId Id of the stack to resize.
+@param {Object {Rect}} bounds Bounds to resize the stack to or {@code null} for fullscreen.
+*/
+resizeStack : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-removeStacksInWindowingModes'>/**Removes stacks in the windowing modes from the system if they are of activity type
+</span> ACTIVITY_TYPE_STANDARD or ACTIVITY_TYPE_UNDEFINED
+*/
+removeStacksInWindowingModes : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-removeStacksWithActivityTypes'>/**Removes stack of the activity types from the system.
+</span>*/
+removeStacksWithActivityTypes : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-removeAllVisibleRecentTasks'>/**Removes all visible recent tasks from the system.
+</span>@hide 
+*/
+removeAllVisibleRecentTasks : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-getMaxRecentTasksStatic'>/**Return the maximum number of recents entries that we will maintain and show.
+</span>@hide 
+*/
+getMaxRecentTasksStatic : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-getDefaultAppRecentsLimitStatic'>/**Return the default limit on the number of recents that an app can make.
+</span>@hide 
+*/
+getDefaultAppRecentsLimitStatic : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-getMaxAppRecentsLimitStatic'>/**Return the maximum limit on the number of recents that an app can make.
+</span>@hide 
+*/
+getMaxAppRecentsLimitStatic : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-supportsMultiWindow'>/**Returns true if the system supports at least one form of multi-window.
+</span> E.g. freeform, split-screen, picture-in-picture.
+*/
+supportsMultiWindow : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-supportsSplitScreenMultiWindow'>/**Returns true if the system supports split screen multi-window.
+</span>*/
+supportsSplitScreenMultiWindow : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-moveTopActivityToPinnedStack'>/**Moves the top activity in the input stackId to the pinned stack.
+</span>@param {Number} stackId Id of stack to move the top activity to pinned stack.
+@param {Object {Rect}} bounds Bounds to use for pinned stack.
+@return {Boolean} True if the top activity of stack was successfully moved to the pinned stack.
+*/
+moveTopActivityToPinnedStack : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-startSystemLockTaskMode'>/**Start to enter lock task mode for given task by system(UI).
+</span>@param {Number} taskId Id of task to lock.
+*/
+startSystemLockTaskMode : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-stopSystemLockTaskMode'>/**Stop lock task mode by system(UI).
+</span>*/
+stopSystemLockTaskMode : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-moveTaskToStack'>/**Move task to stack with given id.
+</span>@param {Number} taskId Id of the task to move.
+@param {Number} stackId Id of the stack for task moving.
+@param {Boolean} toTop Whether the given task should shown to top of stack.
+*/
+moveTaskToStack : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-resizeStack'>/**Resize the input stack id to the given bounds with animate setting.
+</span>@param {Number} stackId Id of the stack to resize.
+@param {Object {Rect}} bounds Bounds to resize the stack to or {@code null} for fullscreen.
+@param {Boolean} animate Whether we should play an animation for resizing stack.
+*/
+resizeStack : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-resizeTask'>/**Resize task to given bounds.
+</span>@param {Number} taskId Id of task to resize.
+@param {Object {Rect}} bounds Bounds to resize task.
+*/
+resizeTask : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-resizeDockedStack'>/**Resize docked stack &amp; its task to given stack &amp; task bounds.
+</span>@param {Object {Rect}} stackBounds Bounds to resize stack.
+@param {Object {Rect}} taskBounds Bounds to resize task.
+*/
+resizeDockedStack : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-listAllStacks'>/**List all activity stacks information.
+</span>*/
+listAllStacks : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-clearLaunchParamsForPackages'>/**Clears launch params for the given package.
+</span>@param {Object {java.util.List}} packageNames the names of the packages of which the launch params are to be cleared
+*/
+clearLaunchParamsForPackages : function(  ) {},
+
+<span id='android-app-ActivityTaskManager-method-setDisplayToSingleTaskInstance'>/**Makes the display with the given id a single task instance display. I.e the display can only
+</span> contain one task.
+*/
+setDisplayToSingleTaskInstance : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-animation-LayoutTransition'>/**@class android.animation.LayoutTransition
+</span>@extends java.lang.Object
+
+ This class enables automatic animations on layout changes in ViewGroup objects. To enable
+ transitions for a layout container, create a LayoutTransition object and set it on any
+ ViewGroup by calling {@link ViewGroup#setLayoutTransition(LayoutTransition)}. This will cause
+ default animations to run whenever items are added to or removed from that container. To specify
+ custom animations, use the {@link android.animation.LayoutTransition#setAnimator(int, Animator)
+ setAnimator()} method.
+
+ &lt;p&gt;One of the core concepts of these transition animations is that there are two types of
+ changes that cause the transition and four different animations that run because of
+ those changes. The changes that trigger the transition are items being added to a container
+ (referred to as an &quot;appearing&quot; transition) or removed from a container (also known as
+ &quot;disappearing&quot;). Setting the visibility of views (between GONE and VISIBLE) will trigger
+ the same add/remove logic. The animations that run due to those events are one that animates
+ items being added, one that animates items being removed, and two that animate the other
+ items in the container that change due to the add/remove occurrence. Users of
+ the transition may want different animations for the changing items depending on whether
+ they are changing due to an appearing or disappearing event, so there is one animation for
+ each of these variations of the changing event. Most of the API of this class is concerned
+ with setting up the basic properties of the animations used in these four situations,
+ or with setting up custom animations for any or all of the four.&lt;/p&gt;
+
+ &lt;p&gt;By default, the DISAPPEARING animation begins immediately, as does the CHANGE_APPEARING
+ animation. The other animations begin after a delay that is set to the default duration
+ of the animations. This behavior facilitates a sequence of animations in transitions as
+ follows: when an item is being added to a layout, the other children of that container will
+ move first (thus creating space for the new item), then the appearing animation will run to
+ animate the item being added. Conversely, when an item is removed from a container, the
+ animation to remove it will run first, then the animations of the other children in the
+ layout will run (closing the gap created in the layout when the item was removed). If this
+ default choreography behavior is not desired, the {@link #setDuration(int, long)} and
+ {@link #setStartDelay(int, long)} of any or all of the animations can be changed as
+ appropriate. Keep in mind, however, that if you start an APPEARING animation before a
+ DISAPPEARING animation is completed, the DISAPPEARING animation stops, and any effects from
+ the DISAPPEARING animation are reverted. If you instead start a DISAPPEARING animation
+ before an APPEARING animation is completed, a similar set of effects occurs for the
+ APPEARING animation.&lt;/p&gt;
+
+ &lt;p&gt;The animations specified for the transition, both the defaults and any custom animations
+ set on the transition object, are templates only. That is, these animations exist to hold the
+ basic animation properties, such as the duration, start delay, and properties being animated.
+ But the actual target object, as well as the start and end values for those properties, are
+ set automatically in the process of setting up the transition each time it runs. Each of the
+ animations is cloned from the original copy and the clone is then populated with the dynamic
+ values of the target being animated (such as one of the items in a layout container that is
+ moving as a result of the layout event) as well as the values that are changing (such as the
+ position and size of that object). The actual values that are pushed to each animation
+ depends on what properties are specified for the animation. For example, the default
+ CHANGE_APPEARING animation animates the &lt;code&gt;left&lt;/code&gt;, &lt;code&gt;top&lt;/code&gt;, &lt;code&gt;right&lt;/code&gt;,
+ &lt;code&gt;bottom&lt;/code&gt;, &lt;code&gt;scrollX&lt;/code&gt;, and &lt;code&gt;scrollY&lt;/code&gt; properties.
+ Values for these properties are updated with the pre- and post-layout
+ values when the transition begins. Custom animations will be similarly populated with
+ the target and values being animated, assuming they use ObjectAnimator objects with
+ property names that are known on the target object.&lt;/p&gt;
+
+ &lt;p&gt;This class, and the associated XML flag for containers, animateLayoutChanges=&quot;true&quot;,
+ provides a simple utility meant for automating changes in straightforward situations.
+ Using LayoutTransition at multiple levels of a nested view hierarchy may not work due to the
+ interrelationship of the various levels of layout. Also, a container that is being scrolled
+ at the same time as items are being added or removed is probably not a good candidate for
+ this utility, because the before/after locations calculated by LayoutTransition
+ may not match the actual locations when the animations finish due to the container
+ being scrolled as the animations are running. You can work around that
+ particular issue by disabling the 'changing' animations by setting the CHANGE_APPEARING
+ and CHANGE_DISAPPEARING animations to null, and setting the startDelay of the
+ other animations appropriately.&lt;/p&gt;
+*/
+var LayoutTransition = {
+
+<span id='android-animation-LayoutTransition-property-CHANGE_APPEARING'>/** A flag indicating the animation that runs on those items that are changing
+</span> due to a new item appearing in the container.
+*/
+CHANGE_APPEARING : &quot;0&quot;,
+<span id='android-animation-LayoutTransition-property-CHANGE_DISAPPEARING'>/** A flag indicating the animation that runs on those items that are changing
+</span> due to an item disappearing from the container.
+*/
+CHANGE_DISAPPEARING : &quot;1&quot;,
+<span id='android-animation-LayoutTransition-property-APPEARING'>/** A flag indicating the animation that runs on those items that are appearing
+</span> in the container.
+*/
+APPEARING : &quot;2&quot;,
+<span id='android-animation-LayoutTransition-property-DISAPPEARING'>/** A flag indicating the animation that runs on those items that are disappearing
+</span> from the container.
+*/
+DISAPPEARING : &quot;3&quot;,
+<span id='android-animation-LayoutTransition-property-CHANGING'>/** A flag indicating the animation that runs on those items that are changing
+</span> due to a layout change not caused by items being added to or removed
+ from the container. This transition type is not enabled by default; it can be
+ enabled via {@link #enableTransitionType}(int).
+*/
+CHANGING : &quot;4&quot;,
+<span id='android-animation-LayoutTransition-method-setDuration'>/**Sets the duration to be used by all animations of this transition object. If you want to
+</span> set the duration of just one of the animations in particular, use the
+ {@link #setDuration(int, long)} method.
+@param {Number} duration The length of time, in milliseconds, that the transition animations
+ should last.
+*/
+setDuration : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-enableTransitionType'>/**Enables the specified transitionType for this LayoutTransition object.
+</span> By default, a LayoutTransition listens for changes in children being
+ added/remove/hidden/shown in the container, and runs the animations associated with
+ those events. That is, all transition types besides {@link #CHANGING} are enabled by default.
+ You can also enable {@link #CHANGING} animations by calling this method with the
+ {@link #CHANGING} transitionType.
+@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}.
+*/
+enableTransitionType : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-disableTransitionType'>/**Disables the specified transitionType for this LayoutTransition object.
+</span> By default, all transition types except {@link #CHANGING} are enabled.
+@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}.
+*/
+disableTransitionType : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-isTransitionTypeEnabled'>/**Returns whether the specified transitionType is enabled for this LayoutTransition object.
+</span> By default, all transition types except {@link #CHANGING} are enabled.
+@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}.
+@return {Boolean} true if the specified transitionType is currently enabled, false otherwise.
+*/
+isTransitionTypeEnabled : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-setStartDelay'>/**Sets the start delay on one of the animation objects used by this transition. The
+</span> &lt;code&gt;transitionType&lt;/code&gt; parameter determines the animation whose start delay
+ is being set.
+@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}, which determines
+ the animation whose start delay is being set.
+@param {Number} delay The length of time, in milliseconds, to delay before starting the animation.
+@see Animator#setStartDelay(long)
+*/
+setStartDelay : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-getStartDelay'>/**Gets the start delay on one of the animation objects used by this transition. The
+</span> &lt;code&gt;transitionType&lt;/code&gt; parameter determines the animation whose start delay
+ is returned.
+@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}, which determines
+ the animation whose start delay is returned.
+@return {Number} long The start delay of the specified animation.
+@see Animator#getStartDelay()
+*/
+getStartDelay : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-setDuration'>/**Sets the duration on one of the animation objects used by this transition. The
+</span> &lt;code&gt;transitionType&lt;/code&gt; parameter determines the animation whose duration
+ is being set.
+@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}, which determines
+ the animation whose duration is being set.
+@param {Number} duration The length of time, in milliseconds, that the specified animation should run.
+@see Animator#setDuration(long)
+*/
+setDuration : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-getDuration'>/**Gets the duration on one of the animation objects used by this transition. The
+</span> &lt;code&gt;transitionType&lt;/code&gt; parameter determines the animation whose duration
+ is returned.
+@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}, which determines
+ the animation whose duration is returned.
+@return {Number} long The duration of the specified animation.
+@see Animator#getDuration()
+*/
+getDuration : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-setStagger'>/**Sets the length of time to delay between starting each animation during one of the
+</span> change animations.
+@param {Number} transitionType A value of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING}, or
+ {@link #CHANGING}.
+@param {Number} duration The length of time, in milliseconds, to delay before launching the next
+ animation in the sequence.
+*/
+setStagger : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-getStagger'>/**Gets the length of time to delay between starting each animation during one of the
+</span> change animations.
+@param {Number} transitionType A value of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING}, or
+ {@link #CHANGING}.
+@return {Number} long The length of time, in milliseconds, to delay before launching the next
+ animation in the sequence.
+*/
+getStagger : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-setInterpolator'>/**Sets the interpolator on one of the animation objects used by this transition. The
+</span> &lt;code&gt;transitionType&lt;/code&gt; parameter determines the animation whose interpolator
+ is being set.
+@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}, which determines
+ the animation whose interpolator is being set.
+@param {Object {TimeInterpolator}} interpolator The interpolator that the specified animation should use.
+@see Animator#setInterpolator(TimeInterpolator)
+*/
+setInterpolator : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-getInterpolator'>/**Gets the interpolator on one of the animation objects used by this transition. The
+</span> &lt;code&gt;transitionType&lt;/code&gt; parameter determines the animation whose interpolator
+ is returned.
+@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}, which determines
+ the animation whose interpolator is being returned.
+@return {Object {android.animation.TimeInterpolator}} TimeInterpolator The interpolator that the specified animation uses.
+@see Animator#setInterpolator(TimeInterpolator)
+*/
+getInterpolator : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-setAnimator'>/**Sets the animation used during one of the transition types that may run. Any
+</span> Animator object can be used, but to be most useful in the context of layout
+ transitions, the animation should either be a ObjectAnimator or a AnimatorSet
+ of animations including PropertyAnimators. Also, these ObjectAnimator objects
+ should be able to get and set values on their target objects automatically. For
+ example, a ObjectAnimator that animates the property &quot;left&quot; is able to set and get the
+ &lt;code&gt;left&lt;/code&gt; property from the View objects being animated by the layout
+ transition. The transition works by setting target objects and properties
+ dynamically, according to the pre- and post-layoout values of those objects, so
+ having animations that can handle those properties appropriately will work best
+ for custom animation. The dynamic setting of values is only the case for the
+ CHANGE animations; the APPEARING and DISAPPEARING animations are simply run with
+ the values they have.
+
+ &lt;p&gt;It is also worth noting that any and all animations (and their underlying
+ PropertyValuesHolder objects) will have their start and end values set according
+ to the pre- and post-layout values. So, for example, a custom animation on &quot;alpha&quot;
+ as the CHANGE_APPEARING animation will inherit the real value of alpha on the target
+ object (presumably 1) as its starting and ending value when the animation begins.
+ Animations which need to use values at the beginning and end that may not match the
+ values queried when the transition begins may need to use a different mechanism
+ than a standard ObjectAnimator object.&lt;/p&gt;
+@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}, which determines the
+ animation whose animator is being set.
+@param {Object {Animator}} animator The animation being assigned. A value of &lt;code&gt;null&lt;/code&gt; means that no
+ animation will be run for the specified transitionType.
+*/
+setAnimator : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-getAnimator'>/**Gets the animation used during one of the transition types that may run.
+</span>@param {Number} transitionType One of {@link #CHANGE_APPEARING}, {@link #CHANGE_DISAPPEARING},
+ {@link #CHANGING}, {@link #APPEARING}, or {@link #DISAPPEARING}, which determines
+ the animation whose animator is being returned.
+@return {Object {android.animation.Animator}} Animator The animation being used for the given transition type.
+@see #setAnimator(int, Animator)
+*/
+getAnimator : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-setAnimateParentHierarchy'>/**This flag controls whether CHANGE_APPEARING or CHANGE_DISAPPEARING animations will
+</span> cause the default changing animation to be run on the parent hierarchy as well. This allows
+ containers of transitioning views to also transition, which may be necessary in situations
+ where the containers bounds change between the before/after states and may clip their
+ children during the transition animations. For example, layouts with wrap_content will
+ adjust their bounds according to the dimensions of their children.
+
+ &lt;p&gt;The default changing transitions animate the bounds and scroll positions of the
+ target views. These are the animations that will run on the parent hierarchy, not
+ the custom animations that happen to be set on the transition. This allows custom
+ behavior for the children of the transitioning container, but uses standard behavior
+ of resizing/rescrolling on any changing parents.
+@param {Boolean} animateParentHierarchy A boolean value indicating whether the parents of
+ transitioning views should also be animated during the transition. Default value is true.
+*/
+setAnimateParentHierarchy : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-startChangingAnimations'>/**Starts the animations set up for a CHANGING transition. We separate the setup of these
+</span> animations from actually starting them, to avoid side-effects that starting the animations
+ may have on the properties of the affected objects. After setup, we tell the affected parent
+ that this transition should be started. The parent informs its ViewAncestor, which then
+ starts the transition after the current layout/measurement phase, just prior to drawing
+ the view hierarchy.
+@hide 
+*/
+startChangingAnimations : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-endChangingAnimations'>/**Ends the animations that are set up for a CHANGING transition. This is a variant of
+</span> startChangingAnimations() which is called when the window the transition is playing in
+ is not visible. We need to make sure the animations put their targets in their end states
+ and that the transition finishes to remove any mid-process state (such as isRunning()).
+@hide 
+*/
+endChangingAnimations : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-isChangingLayout'>/**Returns true if animations are running which animate layout-related properties. This
+</span> essentially means that either CHANGE_APPEARING or CHANGE_DISAPPEARING animations
+ are running, since these animations operate on layout-related properties.
+@return {Boolean} true if CHANGE_APPEARING or CHANGE_DISAPPEARING animations are currently
+ running.
+*/
+isChangingLayout : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-isRunning'>/**Returns true if any of the animations in this transition are currently running.
+</span>@return {Boolean} true if any animations in the transition are running.
+*/
+isRunning : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-cancel'>/**Cancels the currently running transition. Note that we cancel() the changing animations
+</span> but end() the visibility animations. This is because this method is currently called
+ in the context of starting a new transition, so we want to move things from their mid-
+ transition positions, but we want them to have their end-transition visibility.
+@hide 
+*/
+cancel : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-cancel'>/**Cancels the specified type of transition. Note that we cancel() the changing animations
+</span> but end() the visibility animations. This is because this method is currently called
+ in the context of starting a new transition, so we want to move things from their mid-
+ transition positions, but we want them to have their end-transition visibility.
+@hide 
+*/
+cancel : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-layoutChange'>/**This method is called by ViewGroup when there is a call to layout() on the container
+</span> with this LayoutTransition. If the CHANGING transition is enabled and if there is no other
+ transition currently running on the container, then this call runs a CHANGING transition.
+ The transition does not start immediately; it just sets up the mechanism to run if any
+ of the children of the container change their layout parameters (similar to
+ the CHANGE_APPEARING and CHANGE_DISAPPEARING transitions).
+@param {Object {ViewGroup}} parent The ViewGroup whose layout() method has been called.
+@hide 
+*/
+layoutChange : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-addChild'>/**This method is called by ViewGroup when a child view is about to be added to the
+</span> container. This callback starts the process of a transition; we grab the starting
+ values, listen for changes to all of the children of the container, and start appropriate
+ animations.
+@param {Object {ViewGroup}} parent The ViewGroup to which the View is being added.
+@param {Object {View}} child The View being added to the ViewGroup.
+*/
+addChild : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-showChild'>/**
+</span>@deprecated Use {@link #showChild(android.view.ViewGroup, android.view.View, int)}.
+*/
+showChild : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-showChild'>/**This method is called by ViewGroup when a child view is about to be made visible in the
+</span> container. This callback starts the process of a transition; we grab the starting
+ values, listen for changes to all of the children of the container, and start appropriate
+ animations.
+@param {Object {ViewGroup}} parent The ViewGroup in which the View is being made visible.
+@param {Object {View}} child The View being made visible.
+@param {Number} oldVisibility The previous visibility value of the child View, either
+ {@link View#GONE} or {@link View#INVISIBLE}.
+*/
+showChild : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-removeChild'>/**This method is called by ViewGroup when a child view is about to be removed from the
+</span> container. This callback starts the process of a transition; we grab the starting
+ values, listen for changes to all of the children of the container, and start appropriate
+ animations.
+@param {Object {ViewGroup}} parent The ViewGroup from which the View is being removed.
+@param {Object {View}} child The View being removed from the ViewGroup.
+*/
+removeChild : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-hideChild'>/**
+</span>@deprecated Use {@link #hideChild(android.view.ViewGroup, android.view.View, int)}.
+*/
+hideChild : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-hideChild'>/**This method is called by ViewGroup when a child view is about to be hidden in
+</span> container. This callback starts the process of a transition; we grab the starting
+ values, listen for changes to all of the children of the container, and start appropriate
+ animations.
+@param {Object {ViewGroup}} parent The parent ViewGroup of the View being hidden.
+@param {Object {View}} child The View being hidden.
+@param {Number} newVisibility The new visibility value of the child View, either
+ {@link View#GONE} or {@link View#INVISIBLE}.
+*/
+hideChild : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-addTransitionListener'>/**Add a listener that will be called when the bounds of the view change due to
+</span> layout processing.
+@param {Object {LayoutTransition.TransitionListener}} listener The listener that will be called when layout bounds change.
+*/
+addTransitionListener : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-removeTransitionListener'>/**Remove a listener for layout changes.
+</span>@param {Object {LayoutTransition.TransitionListener}} listener The listener for layout bounds change.
+*/
+removeTransitionListener : function(  ) {},
+
+<span id='android-animation-LayoutTransition-method-getTransitionListeners'>/**Gets the current list of listeners for layout changes.
+</span>@return {Object {java.util.List}} 
+*/
+getTransitionListeners : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

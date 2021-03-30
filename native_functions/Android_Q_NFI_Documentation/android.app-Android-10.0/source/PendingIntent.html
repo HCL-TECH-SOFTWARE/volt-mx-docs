@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-PendingIntent'>/**@class android.app.PendingIntent
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A description of an Intent and target action to perform with it.  Instances
+ of this class are created with {@link #getActivity}, {@link #getActivities},
+ {@link #getBroadcast}, and {@link #getService}; the returned object can be
+ handed to other applications so that they can perform the action you
+ described on your behalf at a later time.
+
+ &lt;p&gt;By giving a PendingIntent to another application,
+ you are granting it the right to perform the operation you have specified
+ as if the other application was yourself (with the same permissions and
+ identity).  As such, you should be careful about how you build the PendingIntent:
+ almost always, for example, the base Intent you supply should have the component
+ name explicitly set to one of your own components, to ensure it is ultimately
+ sent there and nowhere else.
+
+ &lt;p&gt;A PendingIntent itself is simply a reference to a token maintained by
+ the system describing the original data used to retrieve it.  This means
+ that, even if its owning application's process is killed, the
+ PendingIntent itself will remain usable from other processes that
+ have been given it.  If the creating application later re-retrieves the
+ same kind of PendingIntent (same operation, same Intent action, data,
+ categories, and components, and same flags), it will receive a PendingIntent
+ representing the same token if that is still valid, and can thus call
+ {@link #cancel} to remove it.
+
+ &lt;p&gt;Because of this behavior, it is important to know when two Intents
+ are considered to be the same for purposes of retrieving a PendingIntent.
+ A common mistake people make is to create multiple PendingIntent objects
+ with Intents that only vary in their &quot;extra&quot; contents, expecting to get
+ a different PendingIntent each time.  This does &lt;em&gt;not&lt;/em&gt; happen.  The
+ parts of the Intent that are used for matching are the same ones defined
+ by {@link Intent#filterEquals(Intent) Intent.filterEquals}.  If you use two
+ Intent objects that are equivalent as per
+ {@link Intent#filterEquals(Intent) Intent.filterEquals}, then you will get
+ the same PendingIntent for both of them.
+
+ &lt;p&gt;There are two typical ways to deal with this.
+
+ &lt;p&gt;If you truly need multiple distinct PendingIntent objects active at
+ the same time (such as to use as two notifications that are both shown
+ at the same time), then you will need to ensure there is something that
+ is different about them to associate them with different PendingIntents.
+ This may be any of the Intent attributes considered by
+ {@link Intent#filterEquals(Intent) Intent.filterEquals}, or different
+ request code integers supplied to {@link #getActivity}, {@link #getActivities},
+ {@link #getBroadcast}, or {@link #getService}.
+
+ &lt;p&gt;If you only need one PendingIntent active at a time for any of the
+ Intents you will use, then you can alternatively use the flags
+ {@link #FLAG_CANCEL_CURRENT} or {@link #FLAG_UPDATE_CURRENT} to either
+ cancel or modify whatever current PendingIntent is associated with the
+ Intent you are supplying.
+*/
+var PendingIntent = {
+
+<span id='android-app-PendingIntent-property-FLAG_ONE_SHOT'>/** Flag indicating that this PendingIntent can be used only once.
+</span> For use with {@link #getActivity}, {@link #getBroadcast}, and
+ {@link #getService}. &lt;p&gt;If set, after
+ {@link #send}() is called on it, it will be automatically
+ canceled for you and any future attempt to send through it will fail.
+*/
+FLAG_ONE_SHOT : &quot;1073741824&quot;,
+<span id='android-app-PendingIntent-property-FLAG_NO_CREATE'>/** Flag indicating that if the described PendingIntent does not
+</span> already exist, then simply return null instead of creating it.
+ For use with {@link #getActivity}, {@link #getBroadcast}, and
+ {@link #getService}.
+*/
+FLAG_NO_CREATE : &quot;536870912&quot;,
+<span id='android-app-PendingIntent-property-FLAG_CANCEL_CURRENT'>/** Flag indicating that if the described PendingIntent already exists,
+</span> the current one should be canceled before generating a new one.
+ For use with {@link #getActivity}, {@link #getBroadcast}, and
+ {@link #getService}. &lt;p&gt;You can use
+ this to retrieve a new PendingIntent when you are only changing the
+ extra data in the Intent; by canceling the previous pending intent,
+ this ensures that only entities given the new data will be able to
+ launch it.  If this assurance is not an issue, consider
+ {@link #FLAG_UPDATE_CURRENT}.
+*/
+FLAG_CANCEL_CURRENT : &quot;268435456&quot;,
+<span id='android-app-PendingIntent-property-FLAG_UPDATE_CURRENT'>/** Flag indicating that if the described PendingIntent already exists,
+</span> then keep it but replace its extra data with what is in this new
+ Intent. For use with {@link #getActivity}, {@link #getBroadcast}, and
+ {@link #getService}. &lt;p&gt;This can be used if you are creating intents where only the
+ extras change, and don't care that any entities that received your
+ previous PendingIntent will be able to launch it with your new
+ extras even if they are not explicitly given to it.
+*/
+FLAG_UPDATE_CURRENT : &quot;134217728&quot;,
+<span id='android-app-PendingIntent-property-FLAG_IMMUTABLE'>/** Flag indicating that the created PendingIntent should be immutable.
+</span> This means that the additional intent argument passed to the send
+ methods to fill in unpopulated properties of this intent will be
+ ignored.
+*/
+FLAG_IMMUTABLE : &quot;67108864&quot;,
+<span id='android-app-PendingIntent-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-PendingIntent-method-setOnMarshaledListener'>/**Registers an listener for pending intents being written to a parcel.
+</span>@param {Object {PendingIntent.OnMarshaledListener}} listener The listener, null to clear.
+@hide 
+*/
+setOnMarshaledListener : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getActivity'>/**Retrieve a PendingIntent that will start a new activity, like calling
+</span> {@link Context#startActivity(Intent) Context.startActivity(Intent)}.
+ Note that the activity will be started outside of the context of an
+ existing activity, so you must use the {@link Intent#FLAG_ACTIVITY_NEW_TASK
+ Intent.FLAG_ACTIVITY_NEW_TASK} launch flag in the Intent.
+
+ &lt;p class=&quot;note&quot;&gt;For security reasons, the {@link android.content.Intent}
+ you supply here should almost always be an &lt;em&gt;explicit intent&lt;/em&gt;,
+ that is specify an explicit component to be delivered to through
+ {@link Intent#setClass(android.content.Context, Class) Intent.setClass}&lt;/p&gt;
+@param {Object {Context}} context The Context in which this PendingIntent should start
+ the activity.
+@param {Number} requestCode Private request code for the sender
+@param {Object {Intent}} intent Intent of the activity to be launched.
+@param {Number} flags May be {@link #FLAG_ONE_SHOT}, {@link #FLAG_NO_CREATE},
+ {@link #FLAG_CANCEL_CURRENT}, {@link #FLAG_UPDATE_CURRENT},
+ or any of the flags as supported by
+ {@link Intent#fillIn Intent.fillIn()} to control which unspecified parts
+ of the intent that can be supplied when the actual send happens.
+@return {Object {android.app.PendingIntent}} Returns an existing or new PendingIntent matching the given
+ parameters.  May return null only if {@link #FLAG_NO_CREATE} has been
+ supplied.
+*/
+getActivity : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getActivity'>/**Retrieve a PendingIntent that will start a new activity, like calling
+</span> {@link Context#startActivity(Intent) Context.startActivity(Intent)}.
+ Note that the activity will be started outside of the context of an
+ existing activity, so you must use the {@link Intent#FLAG_ACTIVITY_NEW_TASK
+ Intent.FLAG_ACTIVITY_NEW_TASK} launch flag in the Intent.
+
+ &lt;p class=&quot;note&quot;&gt;For security reasons, the {@link android.content.Intent}
+ you supply here should almost always be an &lt;em&gt;explicit intent&lt;/em&gt;,
+ that is specify an explicit component to be delivered to through
+ {@link Intent#setClass(android.content.Context, Class) Intent.setClass}&lt;/p&gt;
+@param {Object {Context}} context The Context in which this PendingIntent should start
+ the activity.
+@param {Number} requestCode Private request code for the sender
+@param {Object {Intent}} intent Intent of the activity to be launched.
+@param {Number} flags May be {@link #FLAG_ONE_SHOT}, {@link #FLAG_NO_CREATE},
+ {@link #FLAG_CANCEL_CURRENT}, {@link #FLAG_UPDATE_CURRENT},
+ or any of the flags as supported by
+ {@link Intent#fillIn Intent.fillIn()} to control which unspecified parts
+ of the intent that can be supplied when the actual send happens.
+@param {Object {Bundle}} options Additional options for how the Activity should be started.
+ May be null if there are no options.
+@return {Object {android.app.PendingIntent}} Returns an existing or new PendingIntent matching the given
+ parameters.  May return null only if {@link #FLAG_NO_CREATE} has been
+ supplied.
+*/
+getActivity : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getActivityAsUser'>/**
+</span>@hide Note that UserHandle.CURRENT will be interpreted at the time the
+ activity is started, not when the pending intent is created.
+*/
+getActivityAsUser : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getActivities'>/**Like {@link #getActivity(Context, int, Intent, int)}, but allows an
+</span> array of Intents to be supplied.  The last Intent in the array is
+ taken as the primary key for the PendingIntent, like the single Intent
+ given to {@link #getActivity(Context, int, Intent, int)}.  Upon sending
+ the resulting PendingIntent, all of the Intents are started in the same
+ way as they would be by passing them to {@link Context#startActivities(Intent[])}.
+
+ &lt;p class=&quot;note&quot;&gt;
+ The &lt;em&gt;first&lt;/em&gt; intent in the array will be started outside of the context of an
+ existing activity, so you must use the {@link Intent#FLAG_ACTIVITY_NEW_TASK
+ Intent.FLAG_ACTIVITY_NEW_TASK} launch flag in the Intent.  (Activities after
+ the first in the array are started in the context of the previous activity
+ in the array, so FLAG_ACTIVITY_NEW_TASK is not needed nor desired for them.)
+ &lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;
+ The &lt;em&gt;last&lt;/em&gt; intent in the array represents the key for the
+ PendingIntent.  In other words, it is the significant element for matching
+ (as done with the single intent given to {@link #getActivity(Context, int, Intent, int)},
+ its content will be the subject of replacement by
+ {@link #send(Context, int, Intent)} and {@link #FLAG_UPDATE_CURRENT}, etc.
+ This is because it is the most specific of the supplied intents, and the
+ UI the user actually sees when the intents are started.
+ &lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;For security reasons, the {@link android.content.Intent} objects
+ you supply here should almost always be &lt;em&gt;explicit intents&lt;/em&gt;,
+ that is specify an explicit component to be delivered to through
+ {@link Intent#setClass(android.content.Context, Class) Intent.setClass}&lt;/p&gt;
+@param {Object {Context}} context The Context in which this PendingIntent should start
+ the activity.
+@param {Number} requestCode Private request code for the sender
+@param {Object {android.content.Intent[]}} intents Array of Intents of the activities to be launched.
+@param {Number} flags May be {@link #FLAG_ONE_SHOT}, {@link #FLAG_NO_CREATE},
+ {@link #FLAG_CANCEL_CURRENT}, {@link #FLAG_UPDATE_CURRENT},
+ or any of the flags as supported by
+ {@link Intent#fillIn Intent.fillIn()} to control which unspecified parts
+ of the intent that can be supplied when the actual send happens.
+@return {Object {android.app.PendingIntent}} Returns an existing or new PendingIntent matching the given
+ parameters.  May return null only if {@link #FLAG_NO_CREATE} has been
+ supplied.
+*/
+getActivities : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getActivities'>/**Like {@link #getActivity(Context, int, Intent, int)}, but allows an
+</span> array of Intents to be supplied.  The last Intent in the array is
+ taken as the primary key for the PendingIntent, like the single Intent
+ given to {@link #getActivity(Context, int, Intent, int)}.  Upon sending
+ the resulting PendingIntent, all of the Intents are started in the same
+ way as they would be by passing them to {@link Context#startActivities(Intent[])}.
+
+ &lt;p class=&quot;note&quot;&gt;
+ The &lt;em&gt;first&lt;/em&gt; intent in the array will be started outside of the context of an
+ existing activity, so you must use the {@link Intent#FLAG_ACTIVITY_NEW_TASK
+ Intent.FLAG_ACTIVITY_NEW_TASK} launch flag in the Intent.  (Activities after
+ the first in the array are started in the context of the previous activity
+ in the array, so FLAG_ACTIVITY_NEW_TASK is not needed nor desired for them.)
+ &lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;
+ The &lt;em&gt;last&lt;/em&gt; intent in the array represents the key for the
+ PendingIntent.  In other words, it is the significant element for matching
+ (as done with the single intent given to {@link #getActivity(Context, int, Intent, int)},
+ its content will be the subject of replacement by
+ {@link #send(Context, int, Intent)} and {@link #FLAG_UPDATE_CURRENT}, etc.
+ This is because it is the most specific of the supplied intents, and the
+ UI the user actually sees when the intents are started.
+ &lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;For security reasons, the {@link android.content.Intent} objects
+ you supply here should almost always be &lt;em&gt;explicit intents&lt;/em&gt;,
+ that is specify an explicit component to be delivered to through
+ {@link Intent#setClass(android.content.Context, Class) Intent.setClass}&lt;/p&gt;
+@param {Object {Context}} context The Context in which this PendingIntent should start
+ the activity.
+@param {Number} requestCode Private request code for the sender
+@param {Object {android.content.Intent[]}} intents Array of Intents of the activities to be launched.
+@param {Number} flags May be {@link #FLAG_ONE_SHOT}, {@link #FLAG_NO_CREATE},
+ {@link #FLAG_CANCEL_CURRENT}, {@link #FLAG_UPDATE_CURRENT},
+ {@link #FLAG_IMMUTABLE} or any of the flags as supported by
+ {@link Intent#fillIn Intent.fillIn()} to control which unspecified parts
+ of the intent that can be supplied when the actual send happens.
+@return {Object {android.app.PendingIntent}} Returns an existing or new PendingIntent matching the given
+ parameters.  May return null only if {@link #FLAG_NO_CREATE} has been
+ supplied.
+*/
+getActivities : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getActivitiesAsUser'>/**
+</span>@hide Note that UserHandle.CURRENT will be interpreted at the time the
+ activity is started, not when the pending intent is created.
+*/
+getActivitiesAsUser : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getBroadcast'>/**Retrieve a PendingIntent that will perform a broadcast, like calling
+</span> {@link Context#sendBroadcast(Intent) Context.sendBroadcast()}.
+
+ &lt;p class=&quot;note&quot;&gt;For security reasons, the {@link android.content.Intent}
+ you supply here should almost always be an &lt;em&gt;explicit intent&lt;/em&gt;,
+ that is specify an explicit component to be delivered to through
+ {@link Intent#setClass(android.content.Context, Class) Intent.setClass}&lt;/p&gt;
+@param {Object {Context}} context The Context in which this PendingIntent should perform
+ the broadcast.
+@param {Number} requestCode Private request code for the sender
+@param {Object {Intent}} intent The Intent to be broadcast.
+@param {Number} flags May be {@link #FLAG_ONE_SHOT}, {@link #FLAG_NO_CREATE},
+ {@link #FLAG_CANCEL_CURRENT}, {@link #FLAG_UPDATE_CURRENT},
+ {@link #FLAG_IMMUTABLE} or any of the flags as supported by
+ {@link Intent#fillIn Intent.fillIn()} to control which unspecified parts
+ of the intent that can be supplied when the actual send happens.
+@return {Object {android.app.PendingIntent}} Returns an existing or new PendingIntent matching the given
+ parameters.  May return null only if {@link #FLAG_NO_CREATE} has been
+ supplied.
+*/
+getBroadcast : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getBroadcastAsUser'>/**
+</span>@hide Note that UserHandle.CURRENT will be interpreted at the time the
+ broadcast is sent, not when the pending intent is created.
+*/
+getBroadcastAsUser : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getService'>/**Retrieve a PendingIntent that will start a service, like calling
+</span> {@link Context#startService Context.startService()}.  The start
+ arguments given to the service will come from the extras of the Intent.
+
+ &lt;p class=&quot;note&quot;&gt;For security reasons, the {@link android.content.Intent}
+ you supply here should almost always be an &lt;em&gt;explicit intent&lt;/em&gt;,
+ that is specify an explicit component to be delivered to through
+ {@link Intent#setClass(android.content.Context, Class) Intent.setClass}&lt;/p&gt;
+@param {Object {Context}} context The Context in which this PendingIntent should start
+ the service.
+@param {Number} requestCode Private request code for the sender
+@param {Object {Intent}} intent An Intent describing the service to be started.
+@param {Number} flags May be {@link #FLAG_ONE_SHOT}, {@link #FLAG_NO_CREATE},
+ {@link #FLAG_CANCEL_CURRENT}, {@link #FLAG_UPDATE_CURRENT},
+ {@link #FLAG_IMMUTABLE} or any of the flags as supported by
+ {@link Intent#fillIn Intent.fillIn()} to control which unspecified parts
+ of the intent that can be supplied when the actual send happens.
+@return {Object {android.app.PendingIntent}} Returns an existing or new PendingIntent matching the given
+ parameters.  May return null only if {@link #FLAG_NO_CREATE} has been
+ supplied.
+*/
+getService : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getForegroundService'>/**Retrieve a PendingIntent that will start a foreground service, like calling
+</span> {@link Context#startForegroundService Context.startForegroundService()}.  The start
+ arguments given to the service will come from the extras of the Intent.
+
+ &lt;p class=&quot;note&quot;&gt;For security reasons, the {@link android.content.Intent}
+ you supply here should almost always be an &lt;em&gt;explicit intent&lt;/em&gt;,
+ that is specify an explicit component to be delivered to through
+ {@link Intent#setClass(android.content.Context, Class) Intent.setClass}&lt;/p&gt;
+@param {Object {Context}} context The Context in which this PendingIntent should start
+ the service.
+@param {Number} requestCode Private request code for the sender
+@param {Object {Intent}} intent An Intent describing the service to be started.
+@param {Number} flags May be {@link #FLAG_ONE_SHOT}, {@link #FLAG_NO_CREATE},
+ {@link #FLAG_CANCEL_CURRENT}, {@link #FLAG_UPDATE_CURRENT},
+ {@link #FLAG_IMMUTABLE} or any of the flags as supported by
+ {@link Intent#fillIn Intent.fillIn()} to control which unspecified parts
+ of the intent that can be supplied when the actual send happens.
+@return {Object {android.app.PendingIntent}} Returns an existing or new PendingIntent matching the given
+ parameters.  May return null only if {@link #FLAG_NO_CREATE} has been
+ supplied.
+*/
+getForegroundService : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getIntentSender'>/**Retrieve a IntentSender object that wraps the existing sender of the PendingIntent
+</span>@return {Object {android.content.IntentSender}} Returns a IntentSender object that wraps the sender of PendingIntent
+*/
+getIntentSender : function(  ) {},
+
+<span id='android-app-PendingIntent-method-cancel'>/**Cancel a currently active PendingIntent.  Only the original application
+</span> owning a PendingIntent can cancel it.
+*/
+cancel : function(  ) {},
+
+<span id='android-app-PendingIntent-method-send'>/**Perform the operation associated with this PendingIntent.
+</span>@see #send(Context, int, Intent, android.app.PendingIntent.OnFinished, Handler)
+@throws CanceledException Throws CanceledException if the PendingIntent
+ is no longer allowing more intents to be sent through it.
+*/
+send : function(  ) {},
+
+<span id='android-app-PendingIntent-method-send'>/**Perform the operation associated with this PendingIntent.
+</span>@param {Number} code Result code to supply back to the PendingIntent's target.
+@see #send(Context, int, Intent, android.app.PendingIntent.OnFinished, Handler)
+@throws CanceledException Throws CanceledException if the PendingIntent
+ is no longer allowing more intents to be sent through it.
+*/
+send : function(  ) {},
+
+<span id='android-app-PendingIntent-method-send'>/**Perform the operation associated with this PendingIntent, allowing the
+</span> caller to specify information about the Intent to use.
+@param {Object {Context}} context The Context of the caller.
+@param {Number} code Result code to supply back to the PendingIntent's target.
+@param {Object {Intent}} intent Additional Intent data.  See {@link Intent#fillIn
+ Intent.fillIn()} for information on how this is applied to the
+ original Intent. If flag {@link #FLAG_IMMUTABLE} was set when this
+ pending intent was created, this argument will be ignored.
+@see #send(Context, int, Intent, android.app.PendingIntent.OnFinished, Handler)
+@throws CanceledException Throws CanceledException if the PendingIntent
+ is no longer allowing more intents to be sent through it.
+*/
+send : function(  ) {},
+
+<span id='android-app-PendingIntent-method-send'>/**Perform the operation associated with this PendingIntent, allowing the
+</span> caller to be notified when the send has completed.
+@param {Number} code Result code to supply back to the PendingIntent's target.
+@param {Object {PendingIntent.OnFinished}} onFinished The object to call back on when the send has
+ completed, or null for no callback.
+@param {Object {Handler}} handler Handler identifying the thread on which the callback
+ should happen.  If null, the callback will happen from the thread
+ pool of the process.
+@see #send(Context, int, Intent, android.app.PendingIntent.OnFinished, Handler)
+@throws CanceledException Throws CanceledException if the PendingIntent
+ is no longer allowing more intents to be sent through it.
+*/
+send : function(  ) {},
+
+<span id='android-app-PendingIntent-method-send'>/**Perform the operation associated with this PendingIntent, allowing the
+</span> caller to specify information about the Intent to use and be notified
+ when the send has completed.
+
+ &lt;p&gt;For the intent parameter, a PendingIntent
+ often has restrictions on which fields can be supplied here, based on
+ how the PendingIntent was retrieved in {@link #getActivity},
+ {@link #getBroadcast}, or {@link #getService}.
+@param {Object {Context}} context The Context of the caller.  This may be null if
+ &lt;var&gt;intent&lt;/var&gt; is also null.
+@param {Number} code Result code to supply back to the PendingIntent's target.
+@param {Object {Intent}} intent Additional Intent data.  See {@link Intent#fillIn
+ Intent.fillIn()} for information on how this is applied to the
+ original Intent.  Use null to not modify the original Intent.
+ If flag {@link #FLAG_IMMUTABLE} was set when this pending intent was
+ created, this argument will be ignored.
+@param {Object {PendingIntent.OnFinished}} onFinished The object to call back on when the send has
+ completed, or null for no callback.
+@param {Object {Handler}} handler Handler identifying the thread on which the callback
+ should happen.  If null, the callback will happen from the thread
+ pool of the process.
+@see #send()
+@see #send(int)
+@see #send(Context, int, Intent)
+@see #send(int, android.app.PendingIntent.OnFinished, Handler)
+@see #send(Context, int, Intent, OnFinished, Handler, String)
+@throws CanceledException Throws CanceledException if the PendingIntent
+ is no longer allowing more intents to be sent through it.
+*/
+send : function(  ) {},
+
+<span id='android-app-PendingIntent-method-send'>/**Perform the operation associated with this PendingIntent, allowing the
+</span> caller to specify information about the Intent to use and be notified
+ when the send has completed.
+
+ &lt;p&gt;For the intent parameter, a PendingIntent
+ often has restrictions on which fields can be supplied here, based on
+ how the PendingIntent was retrieved in {@link #getActivity},
+ {@link #getBroadcast}, or {@link #getService}.
+@param {Object {Context}} context The Context of the caller.  This may be null if
+ &lt;var&gt;intent&lt;/var&gt; is also null.
+@param {Number} code Result code to supply back to the PendingIntent's target.
+@param {Object {Intent}} intent Additional Intent data.  See {@link Intent#fillIn
+ Intent.fillIn()} for information on how this is applied to the
+ original Intent.  Use null to not modify the original Intent.
+ If flag {@link #FLAG_IMMUTABLE} was set when this pending intent was
+ created, this argument will be ignored.
+@param {Object {PendingIntent.OnFinished}} onFinished The object to call back on when the send has
+ completed, or null for no callback.
+@param {Object {Handler}} handler Handler identifying the thread on which the callback
+ should happen.  If null, the callback will happen from the thread
+ pool of the process.
+@param {String} requiredPermission Name of permission that a recipient of the PendingIntent
+ is required to hold.  This is only valid for broadcast intents, and
+ corresponds to the permission argument in
+ {@link Context#sendBroadcast(Intent, String) Context.sendOrderedBroadcast(Intent, String)}.
+ If null, no permission is required.
+@see #send()
+@see #send(int)
+@see #send(Context, int, Intent)
+@see #send(int, android.app.PendingIntent.OnFinished, Handler)
+@see #send(Context, int, Intent, OnFinished, Handler)
+@throws CanceledException Throws CanceledException if the PendingIntent
+ is no longer allowing more intents to be sent through it.
+*/
+send : function(  ) {},
+
+<span id='android-app-PendingIntent-method-send'>/**Perform the operation associated with this PendingIntent, allowing the
+</span> caller to specify information about the Intent to use and be notified
+ when the send has completed.
+
+ &lt;p&gt;For the intent parameter, a PendingIntent
+ often has restrictions on which fields can be supplied here, based on
+ how the PendingIntent was retrieved in {@link #getActivity},
+ {@link #getBroadcast}, or {@link #getService}.
+@param {Object {Context}} context The Context of the caller.  This may be null if
+ &lt;var&gt;intent&lt;/var&gt; is also null.
+@param {Number} code Result code to supply back to the PendingIntent's target.
+@param {Object {Intent}} intent Additional Intent data.  See {@link Intent#fillIn
+ Intent.fillIn()} for information on how this is applied to the
+ original Intent.  Use null to not modify the original Intent.
+ If flag {@link #FLAG_IMMUTABLE} was set when this pending intent was
+ created, this argument will be ignored.
+@param {Object {PendingIntent.OnFinished}} onFinished The object to call back on when the send has
+ completed, or null for no callback.
+@param {Object {Handler}} handler Handler identifying the thread on which the callback
+ should happen.  If null, the callback will happen from the thread
+ pool of the process.
+@param {String} requiredPermission Name of permission that a recipient of the PendingIntent
+ is required to hold.  This is only valid for broadcast intents, and
+ corresponds to the permission argument in
+ {@link Context#sendBroadcast(Intent, String) Context.sendOrderedBroadcast(Intent, String)}.
+ If null, no permission is required.
+@param {Object {Bundle}} options Additional options the caller would like to provide to modify the sending
+ behavior.  May be built from an {@link ActivityOptions} to apply to an activity start.
+@see #send()
+@see #send(int)
+@see #send(Context, int, Intent)
+@see #send(int, android.app.PendingIntent.OnFinished, Handler)
+@see #send(Context, int, Intent, OnFinished, Handler)
+@throws CanceledException Throws CanceledException if the PendingIntent
+ is no longer allowing more intents to be sent through it.
+*/
+send : function(  ) {},
+
+<span id='android-app-PendingIntent-method-sendAndReturnResult'>/**Like {@link #send}, but returns the result
+</span>@hide 
+*/
+sendAndReturnResult : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getTargetPackage'>/**
+</span>@deprecated Renamed to {@link #getCreatorPackage()}.
+*/
+getTargetPackage : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getCreatorPackage'>/**Return the package name of the application that created this
+</span> PendingIntent, that is the identity under which you will actually be
+ sending the Intent.  The returned string is supplied by the system, so
+ that an application can not spoof its package.
+
+ &lt;p class=&quot;note&quot;&gt;Be careful about how you use this.  All this tells you is
+ who created the PendingIntent.  It does &lt;strong&gt;not&lt;/strong&gt; tell you who
+ handed the PendingIntent to you: that is, PendingIntent objects are intended to be
+ passed between applications, so the PendingIntent you receive from an application
+ could actually be one it received from another application, meaning the result
+ you get here will identify the original application.  Because of this, you should
+ only use this information to identify who you expect to be interacting with
+ through a {@link #send} call, not who gave you the PendingIntent.&lt;/p&gt;
+@return {String} The package name of the PendingIntent, or null if there is
+ none associated with it.
+*/
+getCreatorPackage : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getCreatorUid'>/**Return the uid of the application that created this
+</span> PendingIntent, that is the identity under which you will actually be
+ sending the Intent.  The returned integer is supplied by the system, so
+ that an application can not spoof its uid.
+
+ &lt;p class=&quot;note&quot;&gt;Be careful about how you use this.  All this tells you is
+ who created the PendingIntent.  It does &lt;strong&gt;not&lt;/strong&gt; tell you who
+ handed the PendingIntent to you: that is, PendingIntent objects are intended to be
+ passed between applications, so the PendingIntent you receive from an application
+ could actually be one it received from another application, meaning the result
+ you get here will identify the original application.  Because of this, you should
+ only use this information to identify who you expect to be interacting with
+ through a {@link #send} call, not who gave you the PendingIntent.&lt;/p&gt;
+@return {Number} The uid of the PendingIntent, or -1 if there is
+ none associated with it.
+*/
+getCreatorUid : function(  ) {},
+
+<span id='android-app-PendingIntent-method-registerCancelListener'>/**Register a listener to when this pendingIntent is cancelled. There are no guarantees on which
+</span> thread a listener will be called and it's up to the caller to synchronize. This may
+ trigger a synchronous binder call so should therefore usually be called on a background
+ thread.
+@hide 
+*/
+registerCancelListener : function(  ) {},
+
+<span id='android-app-PendingIntent-method-unregisterCancelListener'>/**Un-register a listener to when this pendingIntent is cancelled.
+</span>@hide 
+*/
+unregisterCancelListener : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getCreatorUserHandle'>/**Return the user handle of the application that created this
+</span> PendingIntent, that is the user under which you will actually be
+ sending the Intent.  The returned UserHandle is supplied by the system, so
+ that an application can not spoof its user.  See
+ {@link android.os.Process#myUserHandle() Process.myUserHandle()} for
+ more explanation of user handles.
+
+ &lt;p class=&quot;note&quot;&gt;Be careful about how you use this.  All this tells you is
+ who created the PendingIntent.  It does &lt;strong&gt;not&lt;/strong&gt; tell you who
+ handed the PendingIntent to you: that is, PendingIntent objects are intended to be
+ passed between applications, so the PendingIntent you receive from an application
+ could actually be one it received from another application, meaning the result
+ you get here will identify the original application.  Because of this, you should
+ only use this information to identify who you expect to be interacting with
+ through a {@link #send} call, not who gave you the PendingIntent.&lt;/p&gt;
+@return {Object {android.os.UserHandle}} The user handle of the PendingIntent, or null if there is
+ none associated with it.
+*/
+getCreatorUserHandle : function(  ) {},
+
+<span id='android-app-PendingIntent-method-isTargetedToPackage'>/**
+</span>@hide Check to verify that this PendingIntent targets a specific package.
+*/
+isTargetedToPackage : function(  ) {},
+
+<span id='android-app-PendingIntent-method-isActivity'>/**
+</span>@hide Check whether this PendingIntent will launch an Activity.
+*/
+isActivity : function(  ) {},
+
+<span id='android-app-PendingIntent-method-isForegroundService'>/**
+</span>@hide Check whether this PendingIntent will launch a foreground service
+*/
+isForegroundService : function(  ) {},
+
+<span id='android-app-PendingIntent-method-isBroadcast'>/**
+</span>@hide Check whether this PendingIntent will launch an Activity.
+*/
+isBroadcast : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getIntent'>/**
+</span>@hide Return the Intent of this PendingIntent.
+*/
+getIntent : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getTag'>/**
+</span>@hide Return descriptive tag for this PendingIntent.
+*/
+getTag : function(  ) {},
+
+<span id='android-app-PendingIntent-method-equals'>/**Comparison operator on two PendingIntent objects, such that true
+</span> is returned then they both represent the same operation from the
+ same package.  This allows you to use {@link #getActivity},
+ {@link #getBroadcast}, or {@link #getService} multiple times (even
+ across a process being killed), resulting in different PendingIntent
+ objects but whose equals() method identifies them as being the same
+ operation.
+*/
+equals : function(  ) {},
+
+<span id='android-app-PendingIntent-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-app-PendingIntent-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-app-PendingIntent-method-writeToProto'>/**
+</span>@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-app-PendingIntent-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-PendingIntent-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-PendingIntent-method-writePendingIntentOrNullToParcel'>/**Convenience function for writing either a PendingIntent or null pointer to
+</span> a Parcel.  You must use this with {@link #readPendingIntentOrNullFromParcel}
+ for later reading it.
+@param {Object {PendingIntent}} sender The PendingIntent to write, or null.
+@param {Object {Parcel}} out Where to write the PendingIntent.
+*/
+writePendingIntentOrNullToParcel : function(  ) {},
+
+<span id='android-app-PendingIntent-method-readPendingIntentOrNullFromParcel'>/**Convenience function for reading either a PendingIntent or null pointer from
+</span> a Parcel.  You must have previously written the PendingIntent with
+ {@link #writePendingIntentOrNullToParcel}.
+@param {Object {Parcel}} in The Parcel containing the written PendingIntent.
+@return {Object {android.app.PendingIntent}} Returns the PendingIntent read from the Parcel, or null if null had
+ been written.
+*/
+readPendingIntentOrNullFromParcel : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getTarget'>/**
+</span>@hide 
+*/
+getTarget : function(  ) {},
+
+<span id='android-app-PendingIntent-method-getWhitelistToken'>/**
+</span>@hide 
+*/
+getWhitelistToken : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

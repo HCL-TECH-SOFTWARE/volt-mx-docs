@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-Dialog'>/**@class android.app.Dialog
+</span> implements android.content.DialogInterface
+
+ implements android.view.Window.Callback
+
+ implements android.view.KeyEvent.Callback
+
+ implements android.view.View.OnCreateContextMenuListener
+
+ implements android.view.Window.OnWindowDismissedCallback
+
+@extends java.lang.Object
+
+ Base class for Dialogs.
+ 
+ &lt;p&gt;Note: Activities provide a facility to manage the creation, saving and
+ restoring of dialogs. See {@link android.app.Activity#onCreateDialog(int)},
+ {@link android.app.Activity#onPrepareDialog(int, Dialog)},
+ {@link android.app.Activity#showDialog(int)}, and {@link android.app.Activity#dismissDialog(int)}. If
+ these methods are used, {@link #getOwnerActivity}() will return the Activity
+ that managed this dialog.
+ 
+ &lt;p&gt;Often you will want to have a Dialog display on top of the current
+ input method, because there is no reason for it to accept text.  You can
+ do this by setting the {@link WindowManager.LayoutParams#FLAG_ALT_FOCUSABLE_IM
+ WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM} window flag (assuming
+ your Dialog takes input focus, as it the default) with the following code:
+ 
+ &lt;pre&gt;
+ getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
+         WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);&lt;/pre&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about creating dialogs, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/ui/dialogs.html&quot;&gt;Dialogs&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var Dialog = {
+
+<span id='android-app-Dialog-method-getContext'>/**Retrieve the Context this Dialog is running in.
+</span>@return {Object {android.content.Context}} Context The Context used by the Dialog.
+*/
+getContext : function(  ) {},
+
+<span id='android-app-Dialog-method-getActionBar'>/**Retrieve the {@link android.app.ActionBar} attached to this dialog, if present.
+</span>@return {Object {android.app.ActionBar}} The ActionBar attached to the dialog or null if no ActionBar is present.
+*/
+getActionBar : function(  ) {},
+
+<span id='android-app-Dialog-method-setOwnerActivity'>/**Sets the Activity that owns this dialog. An example use: This Dialog will
+</span> use the suggested volume control stream of the Activity.
+@param {Object {Activity}} activity The Activity that owns this dialog.
+*/
+setOwnerActivity : function(  ) {},
+
+<span id='android-app-Dialog-method-getOwnerActivity'>/**Returns the Activity that owns this Dialog. For example, if
+</span> {@link android.app.Activity#showDialog(int)} is used to show this Dialog, that
+ Activity will be the owner (by default). Depending on how this dialog was
+ created, this may return null.
+@return {Object {android.app.Activity}} The Activity that owns this Dialog.
+*/
+getOwnerActivity : function(  ) {},
+
+<span id='android-app-Dialog-method-isShowing'>/**
+</span>@return {Boolean} Whether the dialog is currently showing.
+*/
+isShowing : function(  ) {},
+
+<span id='android-app-Dialog-method-create'>/**Forces immediate creation of the dialog.
+</span> &lt;p&gt;
+ Note that you should not override this method to perform dialog creation.
+ Rather, override {@link #onCreate}(Bundle).
+*/
+create : function(  ) {},
+
+<span id='android-app-Dialog-method-show'>/**Start the dialog and display it on screen.  The window is placed in the
+</span> application layer and opaque.  Note that you should not override this
+ method to do initialization when the dialog is shown, instead implement
+ that in {@link #onStart}.
+*/
+show : function(  ) {},
+
+<span id='android-app-Dialog-method-hide'>/**Hide the dialog, but do not dismiss it.
+</span>*/
+hide : function(  ) {},
+
+<span id='android-app-Dialog-method-dismiss'>/**Dismiss this dialog, removing it from the screen. This method can be
+</span> invoked safely from any thread.  Note that you should not override this
+ method to do cleanup when the dialog is dismissed, instead implement
+ that in {@link #onStop}.
+*/
+dismiss : function(  ) {},
+
+<span id='android-app-Dialog-method-onSaveInstanceState'>/**Saves the state of the dialog into a bundle.
+</span>
+ The default implementation saves the state of its view hierarchy, so you'll
+ likely want to call through to super if you override this to save additional
+ state.
+@return {Object {android.os.Bundle}} A bundle with the state of the dialog.
+*/
+onSaveInstanceState : function(  ) {},
+
+<span id='android-app-Dialog-method-onRestoreInstanceState'>/**Restore the state of the dialog from a previously saved bundle.
+</span>
+ The default implementation restores the state of the dialog's view
+ hierarchy that was saved in the default implementation of {@link #onSaveInstanceState}(),
+ so be sure to call through to super when overriding unless you want to
+ do all restoring of state yourself.
+@param {Object {Bundle}} savedInstanceState The state of the dialog previously saved by
+     {@link #onSaveInstanceState()}.
+*/
+onRestoreInstanceState : function(  ) {},
+
+<span id='android-app-Dialog-method-getWindow'>/**Retrieve the current Window for the activity.  This can be used to
+</span> directly access parts of the Window API that are not available
+ through Activity/Screen.
+@return {Object {android.view.Window}} Window The current window, or null if the activity is not
+         visual.
+*/
+getWindow : function(  ) {},
+
+<span id='android-app-Dialog-method-getCurrentFocus'>/**Call {@link android.view.Window#getCurrentFocus} on the
+</span> Window if this Activity to return the currently focused view.
+@return {Object {android.view.View}} View The current View with focus or null.
+@see #getWindow
+@see android.view.Window#getCurrentFocus
+*/
+getCurrentFocus : function(  ) {},
+
+<span id='android-app-Dialog-method-findViewById'>/**Finds the first descendant view with the given ID or {@code null} if the
+</span> ID is invalid (&lt; 0), there is no matching view in the hierarchy, or the
+ dialog has not yet been fully created (for example, via {@link #show}()
+ or {@link #create}()).
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In most cases -- depending on compiler support --
+ the resulting view is automatically cast to the target class type. If
+ the target class type is unconstrained, an explicit cast may be
+ necessary.
+@param {Number} id the ID to search for
+@return {Object {android.view.View}} a view with given ID if found, or {@code null} otherwise
+@see View#findViewById(int)
+@see Dialog#requireViewById(int)
+*/
+findViewById : function(  ) {},
+
+<span id='android-app-Dialog-method-requireViewById'>/**Finds the first descendant view with the given ID or throws an IllegalArgumentException if
+</span> the ID is invalid (&lt; 0), there is no matching view in the hierarchy, or the dialog has not
+ yet been fully created (for example, via {@link #show}() or {@link #create}()).
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In most cases -- depending on compiler support --
+ the resulting view is automatically cast to the target class type. If
+ the target class type is unconstrained, an explicit cast may be
+ necessary.
+@param {Number} id the ID to search for
+@return {Object {android.view.View}} a view with given ID
+@see View#requireViewById(int)
+@see Dialog#findViewById(int)
+*/
+requireViewById : function(  ) {},
+
+<span id='android-app-Dialog-method-setContentView'>/**Set the screen content from a layout resource.  The resource will be
+</span> inflated, adding all top-level views to the screen.
+@param {Number} layoutResID Resource ID to be inflated.
+*/
+setContentView : function(  ) {},
+
+<span id='android-app-Dialog-method-setContentView'>/**Set the screen content to an explicit view.  This view is placed
+</span> directly into the screen's view hierarchy.  It can itself be a complex
+ view hierarchy.
+@param {Object {View}} view The desired content to display.
+*/
+setContentView : function(  ) {},
+
+<span id='android-app-Dialog-method-setContentView'>/**Set the screen content to an explicit view.  This view is placed
+</span> directly into the screen's view hierarchy.  It can itself be a complex
+ view hierarchy.
+@param {Object {View}} view The desired content to display.
+@param {Object {ViewGroup.LayoutParams}} params Layout parameters for the view.
+*/
+setContentView : function(  ) {},
+
+<span id='android-app-Dialog-method-addContentView'>/**Add an additional content view to the screen.  Added after any existing
+</span> ones in the screen -- existing views are NOT removed.
+@param {Object {View}} view The desired content to display.
+@param {Object {ViewGroup.LayoutParams}} params Layout parameters for the view.
+*/
+addContentView : function(  ) {},
+
+<span id='android-app-Dialog-method-setTitle'>/**Set the title text for this dialog's window.
+</span>@param {Object {CharSequence}} title The new text to display in the title.
+*/
+setTitle : function(  ) {},
+
+<span id='android-app-Dialog-method-setTitle'>/**Set the title text for this dialog's window. The text is retrieved
+</span> from the resources with the supplied identifier.
+@param {Number} titleId the title's text resource identifier
+*/
+setTitle : function(  ) {},
+
+<span id='android-app-Dialog-method-onKeyDown'>/**A key was pressed down.
+</span> &lt;p&gt;
+ If the focused view didn't want this event, this method is called.
+ &lt;p&gt;
+ Default implementation consumes {@link KeyEvent#KEYCODE_BACK KEYCODE_BACK}
+ and, as of {@link android.os.Build.VERSION_CODES#P P}, {@link KeyEvent#KEYCODE_ESCAPE
+ KEYCODE_ESCAPE} to later handle them in {@link #onKeyUp}.
+@see #onKeyUp
+@see android.view.KeyEvent
+*/
+onKeyDown : function(  ) {},
+
+<span id='android-app-Dialog-method-onKeyLongPress'>/**Default implementation of {@link KeyEvent.Callback#onKeyLongPress(int, KeyEvent)
+</span> KeyEvent.Callback.onKeyLongPress()}: always returns false (doesn't handle
+ the event).
+*/
+onKeyLongPress : function(  ) {},
+
+<span id='android-app-Dialog-method-onKeyUp'>/**A key was released.
+</span> &lt;p&gt;
+ Default implementation consumes {@link KeyEvent#KEYCODE_BACK KEYCODE_BACK}
+ and, as of {@link android.os.Build.VERSION_CODES#P P}, {@link KeyEvent#KEYCODE_ESCAPE
+ KEYCODE_ESCAPE} to close the dialog.
+@see #onKeyDown
+@see android.view.KeyEvent
+*/
+onKeyUp : function(  ) {},
+
+<span id='android-app-Dialog-method-onKeyMultiple'>/**Default implementation of {@link KeyEvent.Callback#onKeyMultiple(int, int, KeyEvent)
+</span> KeyEvent.Callback.onKeyMultiple()}: always returns false (doesn't handle
+ the event).
+*/
+onKeyMultiple : function(  ) {},
+
+<span id='android-app-Dialog-method-onBackPressed'>/**Called when the dialog has detected the user's press of the back
+</span> key.  The default implementation simply cancels the dialog (only if
+ it is cancelable), but you can override this to do whatever you want.
+*/
+onBackPressed : function(  ) {},
+
+<span id='android-app-Dialog-method-onKeyShortcut'>/**Called when a key shortcut event is not handled by any of the views in the Dialog.
+</span> Override this method to implement global key shortcuts for the Dialog.
+ Key shortcuts can also be implemented by setting the
+ {@link MenuItem#setShortcut(char, char) shortcut} property of menu items.
+@param {Number} keyCode The value in event.getKeyCode().
+@param {Object {KeyEvent}} event Description of the key event.
+@return {Boolean} True if the key shortcut was handled.
+*/
+onKeyShortcut : function(  ) {},
+
+<span id='android-app-Dialog-method-onTouchEvent'>/**Called when a touch screen event was not handled by any of the views
+</span> under it. This is most useful to process touch events that happen outside
+ of your window bounds, where there is no view to receive it.
+@param {Object {MotionEvent}} event The touch screen event being processed.
+@return {Boolean} Return true if you have consumed the event, false if you haven't.
+         The default implementation will cancel the dialog when a touch
+         happens outside of the window bounds.
+*/
+onTouchEvent : function(  ) {},
+
+<span id='android-app-Dialog-method-onTrackballEvent'>/**Called when the trackball was moved and not handled by any of the
+</span> views inside of the activity.  So, for example, if the trackball moves
+ while focus is on a button, you will receive a call here because
+ buttons do not normally do anything with trackball events.  The call
+ here happens &lt;em&gt;before&lt;/em&gt; trackball movements are converted to
+ DPAD key events, which then get sent back to the view hierarchy, and
+ will be processed at the point for things like focus navigation.
+@param {Object {MotionEvent}} event The trackball event being processed.
+@return {Boolean} Return true if you have consumed the event, false if you haven't.
+ The default implementation always returns false.
+*/
+onTrackballEvent : function(  ) {},
+
+<span id='android-app-Dialog-method-onGenericMotionEvent'>/**Called when a generic motion event was not handled by any of the
+</span> views inside of the dialog.
+ &lt;p&gt;
+ Generic motion events describe joystick movements, mouse hovers, track pad
+ touches, scroll wheel movements and other input events.  The
+ {@link MotionEvent#getSource() source} of the motion event specifies
+ the class of input that was received.  Implementations of this method
+ must examine the bits in the source before processing the event.
+ The following code example shows how this is done.
+ &lt;/p&gt;&lt;p&gt;
+ Generic motion events with source class
+ {@link android.view.InputDevice#SOURCE_CLASS_POINTER}
+ are delivered to the view under the pointer.  All other generic motion events are
+ delivered to the focused view.
+ &lt;/p&gt;&lt;p&gt;
+ See {@link View#onGenericMotionEvent(MotionEvent)} for an example of how to
+ handle this event.
+ &lt;/p&gt;
+@param {Object {MotionEvent}} event The generic motion event being processed.
+@return {Boolean} Return true if you have consumed the event, false if you haven't.
+ The default implementation always returns false.
+*/
+onGenericMotionEvent : function(  ) {},
+
+<span id='android-app-Dialog-method-onWindowAttributesChanged'>/**
+</span>*/
+onWindowAttributesChanged : function(  ) {},
+
+<span id='android-app-Dialog-method-onContentChanged'>/**
+</span>*/
+onContentChanged : function(  ) {},
+
+<span id='android-app-Dialog-method-onWindowFocusChanged'>/**
+</span>*/
+onWindowFocusChanged : function(  ) {},
+
+<span id='android-app-Dialog-method-onAttachedToWindow'>/**
+</span>*/
+onAttachedToWindow : function(  ) {},
+
+<span id='android-app-Dialog-method-onDetachedFromWindow'>/**
+</span>*/
+onDetachedFromWindow : function(  ) {},
+
+<span id='android-app-Dialog-method-onWindowDismissed'>/**
+</span>@hide 
+*/
+onWindowDismissed : function(  ) {},
+
+<span id='android-app-Dialog-method-dispatchKeyEvent'>/**Called to process key events.  You can override this to intercept all
+</span> key events before they are dispatched to the window.  Be sure to call
+ this implementation for key events that should be handled normally.
+@param {Object {KeyEvent}} event The key event.
+@return {Boolean} boolean Return true if this event was consumed.
+*/
+dispatchKeyEvent : function(  ) {},
+
+<span id='android-app-Dialog-method-dispatchKeyShortcutEvent'>/**Called to process a key shortcut event.
+</span> You can override this to intercept all key shortcut events before they are
+ dispatched to the window.  Be sure to call this implementation for key shortcut
+ events that should be handled normally.
+@param {Object {KeyEvent}} event The key shortcut event.
+@return {Boolean} True if this event was consumed.
+*/
+dispatchKeyShortcutEvent : function(  ) {},
+
+<span id='android-app-Dialog-method-dispatchTouchEvent'>/**Called to process touch screen events.  You can override this to
+</span> intercept all touch screen events before they are dispatched to the
+ window.  Be sure to call this implementation for touch screen events
+ that should be handled normally.
+@param {Object {MotionEvent}} ev The touch screen event.
+@return {Boolean} boolean Return true if this event was consumed.
+*/
+dispatchTouchEvent : function(  ) {},
+
+<span id='android-app-Dialog-method-dispatchTrackballEvent'>/**Called to process trackball events.  You can override this to
+</span> intercept all trackball events before they are dispatched to the
+ window.  Be sure to call this implementation for trackball events
+ that should be handled normally.
+@param {Object {MotionEvent}} ev The trackball event.
+@return {Boolean} boolean Return true if this event was consumed.
+*/
+dispatchTrackballEvent : function(  ) {},
+
+<span id='android-app-Dialog-method-dispatchGenericMotionEvent'>/**Called to process generic motion events.  You can override this to
+</span> intercept all generic motion events before they are dispatched to the
+ window.  Be sure to call this implementation for generic motion events
+ that should be handled normally.
+@param {Object {MotionEvent}} ev The generic motion event.
+@return {Boolean} boolean Return true if this event was consumed.
+*/
+dispatchGenericMotionEvent : function(  ) {},
+
+<span id='android-app-Dialog-method-dispatchPopulateAccessibilityEvent'>/**
+</span>*/
+dispatchPopulateAccessibilityEvent : function(  ) {},
+
+<span id='android-app-Dialog-method-onCreatePanelView'>/**
+</span>@see Activity#onCreatePanelView(int)
+*/
+onCreatePanelView : function(  ) {},
+
+<span id='android-app-Dialog-method-onCreatePanelMenu'>/**
+</span>@see Activity#onCreatePanelMenu(int, Menu)
+*/
+onCreatePanelMenu : function(  ) {},
+
+<span id='android-app-Dialog-method-onPreparePanel'>/**
+</span>@see Activity#onPreparePanel(int, View, Menu)
+*/
+onPreparePanel : function(  ) {},
+
+<span id='android-app-Dialog-method-onMenuOpened'>/**
+</span>@see Activity#onMenuOpened(int, Menu)
+*/
+onMenuOpened : function(  ) {},
+
+<span id='android-app-Dialog-method-onMenuItemSelected'>/**
+</span>@see Activity#onMenuItemSelected(int, MenuItem)
+*/
+onMenuItemSelected : function(  ) {},
+
+<span id='android-app-Dialog-method-onPanelClosed'>/**
+</span>@see Activity#onPanelClosed(int, Menu)
+*/
+onPanelClosed : function(  ) {},
+
+<span id='android-app-Dialog-method-onCreateOptionsMenu'>/**It is usually safe to proxy this call to the owner activity's
+</span> {@link android.app.Activity#onCreateOptionsMenu(Menu)} if the client desires the same
+ menu for this Dialog.
+@see Activity#onCreateOptionsMenu(Menu)
+@see #getOwnerActivity()
+*/
+onCreateOptionsMenu : function(  ) {},
+
+<span id='android-app-Dialog-method-onPrepareOptionsMenu'>/**It is usually safe to proxy this call to the owner activity's
+</span> {@link android.app.Activity#onPrepareOptionsMenu(Menu)} if the client desires the
+ same menu for this Dialog.
+@see Activity#onPrepareOptionsMenu(Menu)
+@see #getOwnerActivity()
+*/
+onPrepareOptionsMenu : function(  ) {},
+
+<span id='android-app-Dialog-method-onOptionsItemSelected'>/**
+</span>@see Activity#onOptionsItemSelected(MenuItem)
+*/
+onOptionsItemSelected : function(  ) {},
+
+<span id='android-app-Dialog-method-onOptionsMenuClosed'>/**
+</span>@see Activity#onOptionsMenuClosed(Menu)
+*/
+onOptionsMenuClosed : function(  ) {},
+
+<span id='android-app-Dialog-method-openOptionsMenu'>/**
+</span>@see Activity#openOptionsMenu()
+*/
+openOptionsMenu : function(  ) {},
+
+<span id='android-app-Dialog-method-closeOptionsMenu'>/**
+</span>@see Activity#closeOptionsMenu()
+*/
+closeOptionsMenu : function(  ) {},
+
+<span id='android-app-Dialog-method-invalidateOptionsMenu'>/**
+</span>@see Activity#invalidateOptionsMenu()
+*/
+invalidateOptionsMenu : function(  ) {},
+
+<span id='android-app-Dialog-method-onCreateContextMenu'>/**
+</span>@see Activity#onCreateContextMenu(ContextMenu, View, ContextMenuInfo)
+*/
+onCreateContextMenu : function(  ) {},
+
+<span id='android-app-Dialog-method-registerForContextMenu'>/**
+</span>@see Activity#registerForContextMenu(View)
+*/
+registerForContextMenu : function(  ) {},
+
+<span id='android-app-Dialog-method-unregisterForContextMenu'>/**
+</span>@see Activity#unregisterForContextMenu(View)
+*/
+unregisterForContextMenu : function(  ) {},
+
+<span id='android-app-Dialog-method-openContextMenu'>/**
+</span>@see Activity#openContextMenu(View)
+*/
+openContextMenu : function(  ) {},
+
+<span id='android-app-Dialog-method-onContextItemSelected'>/**
+</span>@see Activity#onContextItemSelected(MenuItem)
+*/
+onContextItemSelected : function(  ) {},
+
+<span id='android-app-Dialog-method-onContextMenuClosed'>/**
+</span>@see Activity#onContextMenuClosed(Menu)
+*/
+onContextMenuClosed : function(  ) {},
+
+<span id='android-app-Dialog-method-onSearchRequested'>/**This hook is called when the user signals the desire to start a search.
+</span>*/
+onSearchRequested : function(  ) {},
+
+<span id='android-app-Dialog-method-onSearchRequested'>/**This hook is called when the user signals the desire to start a search.
+</span>*/
+onSearchRequested : function(  ) {},
+
+<span id='android-app-Dialog-method-getSearchEvent'>/**During the onSearchRequested() callbacks, this function will return the
+</span> {@link SearchEvent} that triggered the callback, if it exists.
+@return {Object {android.view.SearchEvent}} SearchEvent The SearchEvent that triggered the {@link
+                    #onSearchRequested} callback.
+*/
+getSearchEvent : function(  ) {},
+
+<span id='android-app-Dialog-method-onWindowStartingActionMode'>/**
+</span>*/
+onWindowStartingActionMode : function(  ) {},
+
+<span id='android-app-Dialog-method-onWindowStartingActionMode'>/**
+</span>*/
+onWindowStartingActionMode : function(  ) {},
+
+<span id='android-app-Dialog-method-onActionModeStarted'>/**{@inheritDoc}
+</span>
+ Note that if you override this method you should always call through
+ to the superclass implementation by calling super.onActionModeStarted(mode).
+*/
+onActionModeStarted : function(  ) {},
+
+<span id='android-app-Dialog-method-onActionModeFinished'>/**{@inheritDoc}
+</span>
+ Note that if you override this method you should always call through
+ to the superclass implementation by calling super.onActionModeFinished(mode).
+*/
+onActionModeFinished : function(  ) {},
+
+<span id='android-app-Dialog-method-takeKeyEvents'>/**Request that key events come to this dialog. Use this if your
+</span> dialog has no views with focus, but the dialog still wants
+ a chance to process key events.
+@param {Boolean} get true if the dialog should receive key events, false otherwise
+@see android.view.Window#takeKeyEvents
+*/
+takeKeyEvents : function(  ) {},
+
+<span id='android-app-Dialog-method-requestWindowFeature'>/**Enable extended window features.  This is a convenience for calling
+</span> {@link android.view.Window#requestFeature getWindow().requestFeature()}.
+@param {Number} featureId The desired feature as defined in
+                  {@link android.view.Window}.
+@return {Boolean} Returns true if the requested feature is supported and now
+         enabled.
+@see android.view.Window#requestFeature
+*/
+requestWindowFeature : function(  ) {},
+
+<span id='android-app-Dialog-method-setFeatureDrawableResource'>/**Convenience for calling
+</span> {@link android.view.Window#setFeatureDrawableResource}.
+*/
+setFeatureDrawableResource : function(  ) {},
+
+<span id='android-app-Dialog-method-setFeatureDrawableUri'>/**Convenience for calling
+</span> {@link android.view.Window#setFeatureDrawableUri}.
+*/
+setFeatureDrawableUri : function(  ) {},
+
+<span id='android-app-Dialog-method-setFeatureDrawable'>/**Convenience for calling
+</span> {@link android.view.Window#setFeatureDrawable(int, Drawable)}.
+*/
+setFeatureDrawable : function(  ) {},
+
+<span id='android-app-Dialog-method-setFeatureDrawableAlpha'>/**Convenience for calling
+</span> {@link android.view.Window#setFeatureDrawableAlpha}.
+*/
+setFeatureDrawableAlpha : function(  ) {},
+
+<span id='android-app-Dialog-method-getLayoutInflater'>/**
+</span>*/
+getLayoutInflater : function(  ) {},
+
+<span id='android-app-Dialog-method-setCancelable'>/**Sets whether this dialog is cancelable with the
+</span> {@link KeyEvent#KEYCODE_BACK BACK} key.
+*/
+setCancelable : function(  ) {},
+
+<span id='android-app-Dialog-method-setCanceledOnTouchOutside'>/**Sets whether this dialog is canceled when touched outside the window's
+</span> bounds. If setting to true, the dialog is set to be cancelable if not
+ already set.
+@param {Boolean} cancel Whether the dialog should be canceled when touched outside
+            the window.
+*/
+setCanceledOnTouchOutside : function(  ) {},
+
+<span id='android-app-Dialog-method-cancel'>/**Cancel the dialog.  This is essentially the same as calling {@link #dismiss}(), but it will
+</span> also call your {@link android.app.DialogInterface.OnCancelListener} (if registered).
+*/
+cancel : function(  ) {},
+
+<span id='android-app-Dialog-method-setOnCancelListener'>/**Set a listener to be invoked when the dialog is canceled.
+</span>
+ &lt;p&gt;This will only be invoked when the dialog is canceled.
+ Cancel events alone will not capture all ways that
+ the dialog might be dismissed. If the creator needs
+ to know when a dialog is dismissed in general, use
+ {@link #setOnDismissListener}.&lt;/p&gt;
+@param {Object {DialogInterface.OnCancelListener}} listener The {@link DialogInterface.OnCancelListener} to use.
+*/
+setOnCancelListener : function(  ) {},
+
+<span id='android-app-Dialog-method-setCancelMessage'>/**Set a message to be sent when the dialog is canceled.
+</span>@param {Object {Message}} msg The msg to send when the dialog is canceled.
+@see #setOnCancelListener(android.content.DialogInterface.OnCancelListener)
+*/
+setCancelMessage : function(  ) {},
+
+<span id='android-app-Dialog-method-setOnDismissListener'>/**Set a listener to be invoked when the dialog is dismissed.
+</span>@param {Object {DialogInterface.OnDismissListener}} listener The {@link DialogInterface.OnDismissListener} to use.
+*/
+setOnDismissListener : function(  ) {},
+
+<span id='android-app-Dialog-method-setOnShowListener'>/**Sets a listener to be invoked when the dialog is shown.
+</span>@param {Object {DialogInterface.OnShowListener}} listener The {@link DialogInterface.OnShowListener} to use.
+*/
+setOnShowListener : function(  ) {},
+
+<span id='android-app-Dialog-method-setDismissMessage'>/**Set a message to be sent when the dialog is dismissed.
+</span>@param {Object {Message}} msg The msg to send when the dialog is dismissed.
+*/
+setDismissMessage : function(  ) {},
+
+<span id='android-app-Dialog-method-takeCancelAndDismissListeners'>/**
+</span>@hide 
+*/
+takeCancelAndDismissListeners : function(  ) {},
+
+<span id='android-app-Dialog-method-setVolumeControlStream'>/**By default, this will use the owner Activity's suggested stream type.
+</span>@see Activity#setVolumeControlStream(int)
+@see #setOwnerActivity(Activity)
+*/
+setVolumeControlStream : function(  ) {},
+
+<span id='android-app-Dialog-method-getVolumeControlStream'>/**
+</span>@see Activity#getVolumeControlStream()
+*/
+getVolumeControlStream : function(  ) {},
+
+<span id='android-app-Dialog-method-setOnKeyListener'>/**Sets the callback that will be called if a key is dispatched to the dialog.
+</span>*/
+setOnKeyListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-annotation-UnsupportedAppUsage'>/**@class android.annotation.UnsupportedAppUsage
+</span> implements java.lang.annotation.Annotation
+
+ Indicates that this non-SDK interface is used by apps. A non-SDK interface is a
+ class member (field or method) that is not part of the public SDK. Since the
+ member is not part of the SDK, usage by apps is not supported.
+
+ &lt;h2&gt;If you are an Android App developer&lt;/h2&gt;
+
+ This annotation indicates that you may be able to access the member, but that
+ this access is discouraged and not supported by Android. If there is a value
+ for {@link #maxTargetSdk}() on the annotation, access will be restricted based
+ on the {@code targetSdkVersion} value set in your manifest.
+
+ &lt;p&gt;Fields and methods annotated with this are likely to be restricted, changed
+ or removed in future Android releases. If you rely on these members for
+ functionality that is not otherwise supported by Android, consider filing a
+ &lt;a href=&quot;http://g.co/dev/appcompat&quot;&gt;feature request&lt;/a&gt;.
+
+ &lt;h2&gt;If you are an Android OS developer&lt;/h2&gt;
+
+ This annotation acts as a heads up that changing a given method or field
+ may affect apps, potentially breaking them when the next Android version is
+ released. In some cases, for members that are heavily used, this annotation
+ may imply restrictions on changes to the member.
+
+ &lt;p&gt;This annotation also results in access to the member being permitted by the
+ runtime, with a warning being generated in debug builds. Which apps can access
+ the member is determined by the value of {@link #maxTargetSdk}().
+
+ &lt;p&gt;For more details, see go/UnsupportedAppUsage.
+
+ {@hide}
+*/
+var UnsupportedAppUsage = {
+
+<span id='android-annotation-UnsupportedAppUsage-method-trackingBug'>/**Associates a bug tracking the work to add a public alternative to this API. Optional.
+</span>@return {Number} ID of the associated tracking bug
+*/
+trackingBug : function(  ) {},
+
+<span id='android-annotation-UnsupportedAppUsage-method-maxTargetSdk'>/**Indicates that usage of this API is limited to apps based on their target SDK version.
+</span>
+ &lt;p&gt;Access to the API is allowed if the targetSdkVersion in the apps manifest is no greater
+ than this value. Access checks are performed at runtime.
+
+ &lt;p&gt;This is used to give app developers a grace period to migrate off a non-SDK interface.
+ When making Android version N, existing APIs can have a maxTargetSdk of N-1 added to them.
+ Developers must then migrate off the API when their app is updated in future, but it will
+ continue working in the meantime.
+
+ &lt;p&gt;Possible values are:
+ &lt;ul&gt;
+     &lt;li&gt;
+         {@link android.os.Build.VERSION_CODES#O} or {@link android.os.Build.VERSION_CODES#P},
+         to limit access to apps targeting these SDKs (or earlier).
+     &lt;/li&gt;
+     &lt;li&gt;
+         absent (default value) - All apps can access this API, but doing so may result in
+         warnings in the log, UI warnings (on developer builds) and/or strictmode violations.
+         The API is likely to be further restricted in future.
+     &lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ Note, if this is set to {@link android.os.Build.VERSION_CODES#O}, apps targeting O
+ maintenance releases will also be allowed to use the API, and similarly for any future
+ maintenance releases of P.
+@return {Number} The maximum value for an apps targetSdkVersion in order to access this API.
+*/
+maxTargetSdk : function(  ) {},
+
+<span id='android-annotation-UnsupportedAppUsage-method-expectedSignature'>/**For debug use only. The expected dex signature to be generated for this API, used to verify
+</span> parts of the build process.
+@return {String} A dex API signature.
+*/
+expectedSignature : function(  ) {},
+
+<span id='android-annotation-UnsupportedAppUsage-method-implicitMember'>/**The signature of an implicit (not present in the source) member that forms part of the
+</span> hiddenapi.
+
+ &lt;p&gt;Allows access to non-SDK API elements that are not represented in the input source to be
+ managed.
+
+ &lt;p&gt;This must only be used when applying the annotation to a type, using it in any other
+ situation is an error.
+@return {String} A dex API signature.
+*/
+implicitMember : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

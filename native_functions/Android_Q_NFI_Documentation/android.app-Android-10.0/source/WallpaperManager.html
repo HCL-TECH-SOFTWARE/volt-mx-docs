@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-WallpaperManager'>/**@class android.app.WallpaperManager
+</span>@extends java.lang.Object
+
+ Provides access to the system wallpaper. With WallpaperManager, you can
+ get the current wallpaper, get the desired dimensions for the wallpaper, set
+ the wallpaper, and more.
+
+ &lt;p&gt; An app can check whether wallpapers are supported for the current user, by calling
+ {@link #isWallpaperSupported}(), and whether setting of wallpapers is allowed, by calling
+ {@link #isSetWallpaperAllowed}().
+*/
+var WallpaperManager = {
+
+<span id='android-app-WallpaperManager-property-ACTION_CROP_AND_SET_WALLPAPER'>/** Activity Action: Show settings for choosing wallpaper. Do not use directly to construct
+</span> an intent; instead, use {@link #getCropAndSetWallpaperIntent}.
+ &lt;p&gt;Input:  {@link Intent#getData} is the URI of the image to crop and set as wallpaper.
+ &lt;p&gt;Output: RESULT_OK if user decided to crop/set the wallpaper, RESULT_CANCEL otherwise
+ Activities that support this intent should specify a MIME filter of &quot;image/*&quot;
+*/
+ACTION_CROP_AND_SET_WALLPAPER : &quot;android.service.wallpaper.CROP_AND_SET_WALLPAPER&quot;,
+<span id='android-app-WallpaperManager-property-ACTION_LIVE_WALLPAPER_CHOOSER'>/** Launch an activity for the user to pick the current global live
+</span> wallpaper.
+*/
+ACTION_LIVE_WALLPAPER_CHOOSER : &quot;android.service.wallpaper.LIVE_WALLPAPER_CHOOSER&quot;,
+<span id='android-app-WallpaperManager-property-ACTION_CHANGE_LIVE_WALLPAPER'>/** Directly launch live wallpaper preview, allowing the user to immediately
+</span> confirm to switch to a specific live wallpaper.  You must specify
+ {@link #EXTRA_LIVE_WALLPAPER_COMPONENT} with the ComponentName of
+ a live wallpaper component that is to be shown.
+*/
+ACTION_CHANGE_LIVE_WALLPAPER : &quot;android.service.wallpaper.CHANGE_LIVE_WALLPAPER&quot;,
+<span id='android-app-WallpaperManager-property-EXTRA_LIVE_WALLPAPER_COMPONENT'>/** Extra in {@link #ACTION_CHANGE_LIVE_WALLPAPER} that specifies the
+</span> ComponentName of a live wallpaper that should be shown as a preview,
+ for the user to confirm.
+*/
+EXTRA_LIVE_WALLPAPER_COMPONENT : &quot;android.service.wallpaper.extra.LIVE_WALLPAPER_COMPONENT&quot;,
+<span id='android-app-WallpaperManager-property-WALLPAPER_PREVIEW_META_DATA'>/** Manifest entry for activities that respond to {@link Intent#ACTION_SET_WALLPAPER}
+</span> which allows them to provide a custom large icon associated with this action.
+*/
+WALLPAPER_PREVIEW_META_DATA : &quot;android.wallpaper.preview&quot;,
+<span id='android-app-WallpaperManager-property-COMMAND_TAP'>/** Command for {@link #sendWallpaperCommand}: reported by the wallpaper
+</span> host when the user taps on an empty area (not performing an action
+ in the host).  The x and y arguments are the location of the tap in
+ screen coordinates.
+*/
+COMMAND_TAP : &quot;android.wallpaper.tap&quot;,
+<span id='android-app-WallpaperManager-property-COMMAND_SECONDARY_TAP'>/** Command for {@link #sendWallpaperCommand}: reported by the wallpaper
+</span> host when the user releases a secondary pointer on an empty area
+ (not performing an action in the host).  The x and y arguments are
+ the location of the secondary tap in screen coordinates.
+*/
+COMMAND_SECONDARY_TAP : &quot;android.wallpaper.secondaryTap&quot;,
+<span id='android-app-WallpaperManager-property-COMMAND_DROP'>/** Command for {@link #sendWallpaperCommand}: reported by the wallpaper
+</span> host when the user drops an object into an area of the host.  The x
+ and y arguments are the location of the drop.
+*/
+COMMAND_DROP : &quot;android.home.drop&quot;,
+<span id='android-app-WallpaperManager-property-EXTRA_NEW_WALLPAPER_ID'>/** Extra passed back from setWallpaper() giving the new wallpaper's assigned ID.
+</span> @hide
+*/
+EXTRA_NEW_WALLPAPER_ID : &quot;android.service.wallpaper.extra.ID&quot;,
+<span id='android-app-WallpaperManager-property-FLAG_SYSTEM'>/** Flag: set or retrieve the general system wallpaper.
+</span>*/
+FLAG_SYSTEM : &quot;1&quot;,
+<span id='android-app-WallpaperManager-property-FLAG_LOCK'>/** Flag: set or retrieve the lock-screen-specific wallpaper.
+</span>*/
+FLAG_LOCK : &quot;2&quot;,
+<span id='android-app-WallpaperManager-method-getInstance'>/**Retrieve a WallpaperManager associated with the given Context.
+</span>*/
+getInstance : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getIWallpaperManager'>/**
+</span>@hide 
+*/
+getIWallpaperManager : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getDrawable'>/**Retrieve the current system wallpaper; if
+</span> no wallpaper is set, the system built-in static wallpaper is returned.
+ This is returned as an
+ abstract Drawable that you can install in a View to display whatever
+ wallpaper the user has currently set.
+ &lt;p&gt;
+ This method can return null if there is no system wallpaper available, if
+ wallpapers are not supported in the current user, or if the calling app is not
+ permitted to access the system wallpaper.
+@return {Object {android.graphics.drawable.Drawable}} Returns a Drawable object that will draw the system wallpaper,
+     or {@code null} if no system wallpaper exists or if the calling application
+     is not able to access the wallpaper.
+*/
+getDrawable : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getBuiltInDrawable'>/**Obtain a drawable for the built-in static system wallpaper.
+</span>*/
+getBuiltInDrawable : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getBuiltInDrawable'>/**Obtain a drawable for the specified built-in static system wallpaper.
+</span>@param {Number} which The {@code FLAG_*} identifier of a valid wallpaper type.  Throws
+     IllegalArgumentException if an invalid wallpaper is requested.
+@return {Object {android.graphics.drawable.Drawable}} A Drawable presenting the specified wallpaper image, or {@code null}
+     if no built-in default image for that wallpaper type exists.
+*/
+getBuiltInDrawable : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getBuiltInDrawable'>/**Returns a drawable for the system built-in static wallpaper. Based on the parameters, the
+</span> drawable can be cropped and scaled
+@param {Number} outWidth The width of the returned drawable
+@param {Number} outWidth The height of the returned drawable
+@param {Boolean} scaleToFit If true, scale the wallpaper down rather than just cropping it
+@param {Number} horizontalAlignment A float value between 0 and 1 specifying where to crop the image;
+        0 for left-aligned, 0.5 for horizontal center-aligned, and 1 for right-aligned
+@param {Number} verticalAlignment A float value between 0 and 1 specifying where to crop the image;
+        0 for top-aligned, 0.5 for vertical center-aligned, and 1 for bottom-aligned
+@return {Object {android.graphics.drawable.Drawable}} A Drawable presenting the built-in default system wallpaper image,
+        or {@code null} if no such default image is defined on this device.
+*/
+getBuiltInDrawable : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getBuiltInDrawable'>/**Returns a drawable for the built-in static wallpaper of the specified type.  Based on the
+</span> parameters, the drawable can be cropped and scaled.
+@param {Number} outWidth The width of the returned drawable
+@param {Number} outWidth The height of the returned drawable
+@param {Boolean} scaleToFit If true, scale the wallpaper down rather than just cropping it
+@param {Number} horizontalAlignment A float value between 0 and 1 specifying where to crop the image;
+        0 for left-aligned, 0.5 for horizontal center-aligned, and 1 for right-aligned
+@param {Number} verticalAlignment A float value between 0 and 1 specifying where to crop the image;
+        0 for top-aligned, 0.5 for vertical center-aligned, and 1 for bottom-aligned
+@param {Number} which The {@code FLAG_*} identifier of a valid wallpaper type.  Throws
+     IllegalArgumentException if an invalid wallpaper is requested.
+@return {Object {android.graphics.drawable.Drawable}} A Drawable presenting the built-in default wallpaper image of the given type,
+        or {@code null} if no default image of that type is defined on this device.
+*/
+getBuiltInDrawable : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-peekDrawable'>/**Retrieve the current system wallpaper; if there is no wallpaper set,
+</span> a null pointer is returned. This is returned as an
+ abstract Drawable that you can install in a View to display whatever
+ wallpaper the user has currently set.
+@return {Object {android.graphics.drawable.Drawable}} Returns a Drawable object that will draw the wallpaper or a
+ null pointer if these is none.
+*/
+peekDrawable : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getFastDrawable'>/**Like {@link #getDrawable}(), but the returned Drawable has a number
+</span> of limitations to reduce its overhead as much as possible. It will
+ never scale the wallpaper (only centering it if the requested bounds
+ do match the bitmap bounds, which should not be typical), doesn't
+ allow setting an alpha, color filter, or other attributes, etc.  The
+ bounds of the returned drawable will be initialized to the same bounds
+ as the wallpaper, so normally you will not need to touch it.  The
+ drawable also assumes that it will be used in a context running in
+ the same density as the screen (not in density compatibility mode).
+@return {Object {android.graphics.drawable.Drawable}} Returns a Drawable object that will draw the wallpaper.
+*/
+getFastDrawable : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-peekFastDrawable'>/**Like {@link #getFastDrawable}(), but if there is no wallpaper set,
+</span> a null pointer is returned.
+@return {Object {android.graphics.drawable.Drawable}} Returns an optimized Drawable object that will draw the
+ wallpaper or a null pointer if these is none.
+*/
+peekFastDrawable : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getBitmap'>/**Like {@link #getDrawable}() but returns a Bitmap with default {@link Bitmap.Config}.
+</span>@hide 
+*/
+getBitmap : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getBitmap'>/**Like {@link #getDrawable}() but returns a Bitmap.
+</span>@param {Boolean} hardware Asks for a hardware backed bitmap.
+@see Bitmap.Config#HARDWARE
+@hide 
+*/
+getBitmap : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getBitmapAsUser'>/**Like {@link #getDrawable}() but returns a Bitmap for the provided user.
+</span>@hide 
+*/
+getBitmapAsUser : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getWallpaperFile'>/**Get an open, readable file descriptor to the given wallpaper image file.
+</span> The caller is responsible for closing the file descriptor when done ingesting the file.
+
+ &lt;p&gt;If no lock-specific wallpaper has been configured for the given user, then
+ this method will return {@code null} when requesting {@link #FLAG_LOCK} rather than
+ returning the system wallpaper's image file.
+@param {Number} which The wallpaper whose image file is to be retrieved.  Must be a single
+     defined kind of wallpaper, either {@link #FLAG_SYSTEM} or
+     {@link #FLAG_LOCK}.
+@return {Object {android.os.ParcelFileDescriptor}} An open, readable file desriptor to the requested wallpaper image file;
+     or {@code null} if no such wallpaper is configured or if the calling app does
+     not have permission to read the current wallpaper.
+@see #FLAG_LOCK
+@see #FLAG_SYSTEM
+*/
+getWallpaperFile : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-addOnColorsChangedListener'>/**Registers a listener to get notified when the wallpaper colors change.
+</span>@param {Object {WallpaperManager.OnColorsChangedListener}} listener A listener to register
+@param {Object {Handler}} handler Where to call it from. Will be called from the main thread
+                if null.
+*/
+addOnColorsChangedListener : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-addOnColorsChangedListener'>/**Registers a listener to get notified when the wallpaper colors change
+</span>@param {Object {WallpaperManager.OnColorsChangedListener}} listener A listener to register
+@param {Object {Handler}} handler Where to call it from. Will be called from the main thread
+                if null.
+@param {Number} userId Owner of the wallpaper or UserHandle.USER_ALL.
+@hide 
+*/
+addOnColorsChangedListener : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-removeOnColorsChangedListener'>/**Stop listening to color updates.
+</span>@param {Object {WallpaperManager.OnColorsChangedListener}} callback A callback to unsubscribe.
+*/
+removeOnColorsChangedListener : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-removeOnColorsChangedListener'>/**Stop listening to color updates.
+</span>@param {Object {WallpaperManager.OnColorsChangedListener}} callback A callback to unsubscribe.
+@param {Number} userId Owner of the wallpaper or UserHandle.USER_ALL.
+@hide 
+*/
+removeOnColorsChangedListener : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getWallpaperColors'>/**Get the primary colors of a wallpaper.
+</span>
+ &lt;p&gt;This method can return {@code null} when:
+ &lt;ul&gt;
+ &lt;li&gt;Colors are still being processed by the system.&lt;/li&gt;
+ &lt;li&gt;The user has chosen to use a live wallpaper:  live wallpapers might not
+ implement
+ {@link android.service.wallpaper.WallpaperService.Engine#onComputeColors()
+     WallpaperService.Engine#onComputeColors()}.&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} which Wallpaper type. Must be either {@link #FLAG_SYSTEM} or
+     {@link #FLAG_LOCK}.
+@return {Object {android.app.WallpaperColors}} Current {@link WallpaperColors} or null if colors are unknown.
+@see #addOnColorsChangedListener(OnColorsChangedListener, Handler)
+*/
+getWallpaperColors : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getWallpaperColors'>/**Get the primary colors of the wallpaper configured in the given user.
+</span>@param {Number} which wallpaper type. Must be either {@link #FLAG_SYSTEM} or
+     {@link #FLAG_LOCK}
+@param {Number} userId Owner of the wallpaper.
+@return {Object {android.app.WallpaperColors}} {@link WallpaperColors} or null if colors are unknown.
+@hide 
+*/
+getWallpaperColors : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getWallpaperFile'>/**Version of {@link #getWallpaperFile}(int) that can access the wallpaper data
+</span> for a given user.  The caller must hold the INTERACT_ACROSS_USERS_FULL
+ permission to access another user's wallpaper data.
+@param {Number} which The wallpaper whose image file is to be retrieved.  Must be a single
+     defined kind of wallpaper, either {@link #FLAG_SYSTEM} or
+     {@link #FLAG_LOCK}.
+@param {Number} userId The user or profile whose imagery is to be retrieved
+@see #FLAG_LOCK
+@see #FLAG_SYSTEM
+@hide 
+*/
+getWallpaperFile : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-forgetLoadedWallpaper'>/**Remove all internal references to the last loaded wallpaper.  Useful
+</span> for apps that want to reduce memory usage when they only temporarily
+ need to have the wallpaper.  After calling, the next request for the
+ wallpaper will require reloading it again from disk.
+*/
+forgetLoadedWallpaper : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getWallpaperInfo'>/**Returns the information about the wallpaper if the current wallpaper is
+</span> a live wallpaper component. Otherwise, if the wallpaper is a static image,
+ this returns null.
+*/
+getWallpaperInfo : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getWallpaperInfo'>/**Returns the information about the wallpaper if the current wallpaper is
+</span> a live wallpaper component. Otherwise, if the wallpaper is a static image,
+ this returns null.
+@param {Number} userId Owner of the wallpaper.
+@hide 
+*/
+getWallpaperInfo : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getWallpaperId'>/**Get the ID of the current wallpaper of the given kind.  If there is no
+</span> such wallpaper configured, returns a negative number.
+
+ &lt;p&gt;Every time the wallpaper image is set, a new ID is assigned to it.
+ This method allows the caller to determine whether the wallpaper imagery
+ has changed, regardless of how that change happened.
+@param {Number} which The wallpaper whose ID is to be returned.  Must be a single
+     defined kind of wallpaper, either {@link #FLAG_SYSTEM} or
+     {@link #FLAG_LOCK}.
+@return {Number} The positive numeric ID of the current wallpaper of the given kind,
+     or a negative value if no such wallpaper is configured.
+*/
+getWallpaperId : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getWallpaperIdForUser'>/**Get the ID of the given user's current wallpaper of the given kind.  If there
+</span> is no such wallpaper configured, returns a negative number.
+@hide 
+*/
+getWallpaperIdForUser : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getCropAndSetWallpaperIntent'>/**Gets an Intent that will launch an activity that crops the given
+</span> image and sets the device's wallpaper. If there is a default HOME activity
+ that supports cropping wallpapers, it will be preferred as the default.
+ Use this method instead of directly creating a {@link #ACTION_CROP_AND_SET_WALLPAPER}
+ intent.
+@param {Object {Uri}} imageUri The image URI that will be set in the intent. The must be a content
+                 URI and its provider must resolve its type to &quot;image/*&quot;
+@throws IllegalArgumentException if the URI is not a content URI or its MIME type is
+         not &quot;image/*&quot;
+*/
+getCropAndSetWallpaperIntent : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setResource'>/**Change the current system wallpaper to the bitmap in the given resource.
+</span> The resource is opened as a raw data stream and copied into the
+ wallpaper; it must be a valid PNG or JPEG image.  On success, the intent
+ {@link Intent#ACTION_WALLPAPER_CHANGED} is broadcast.
+
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#SET_WALLPAPER}.
+@param {Number} resid The resource ID of the bitmap to be used as the wallpaper image
+@throws IOException If an error occurs reverting to the built-in
+ wallpaper.
+*/
+setResource : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setResource'>/**Version of {@link #setResource}(int) that allows the caller to specify which
+</span> of the supported wallpaper categories to set.
+@param {Number} resid The resource ID of the bitmap to be used as the wallpaper image
+@param {Number} which Flags indicating which wallpaper(s) to configure with the new imagery
+@see #FLAG_LOCK
+@see #FLAG_SYSTEM
+@return {Number} An integer ID assigned to the newly active wallpaper; or zero on failure.
+@throws IOException
+*/
+setResource : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setBitmap'>/**Change the current system wallpaper to a bitmap.  The given bitmap is
+</span> converted to a PNG and stored as the wallpaper.  On success, the intent
+ {@link Intent#ACTION_WALLPAPER_CHANGED} is broadcast.
+
+ &lt;p&gt;This method is equivalent to calling
+ {@link #setBitmap(Bitmap, Rect, boolean)} and passing {@code null} for the
+ {@code visibleCrop} rectangle and {@code true} for the {@code allowBackup}
+ parameter.
+
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#SET_WALLPAPER}.
+@param {Object {Bitmap}} bitmap The bitmap to be used as the new system wallpaper.
+@throws IOException If an error occurs when attempting to set the wallpaper
+     to the provided image.
+*/
+setBitmap : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setBitmap'>/**Change the current system wallpaper to a bitmap, specifying a hint about
+</span> which subrectangle of the full image is to be visible.  The OS will then
+ try to best present the given portion of the full image as the static system
+ wallpaper image.  On success, the intent
+ {@link Intent#ACTION_WALLPAPER_CHANGED} is broadcast.
+
+ &lt;p&gt;Passing {@code null} as the {@code visibleHint} parameter is equivalent to
+ passing (0, 0, {@code fullImage.getWidth()}, {@code fullImage.getHeight()}).
+
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#SET_WALLPAPER}.
+@param {Object {Bitmap}} fullImage A bitmap that will supply the wallpaper imagery.
+@param {Object {Rect}} visibleCropHint The rectangular subregion of {@code fullImage} that should be
+     displayed as wallpaper.  Passing {@code null} for this parameter means that
+     the full image should be displayed if possible given the image's and device's
+     aspect ratios, etc.
+@param {Boolean} allowBackup {@code true} if the OS is permitted to back up this wallpaper
+     image for restore to a future device; {@code false} otherwise.
+@return {Number} An integer ID assigned to the newly active wallpaper; or zero on failure.
+@throws IOException If an error occurs when attempting to set the wallpaper
+     to the provided image.
+@throws IllegalArgumentException If the {@code visibleCropHint} rectangle is
+     empty or invalid.
+*/
+setBitmap : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setBitmap'>/**Version of {@link #setBitmap(Bitmap, Rect, boolean)} that allows the caller
+</span> to specify which of the supported wallpaper categories to set.
+@param {Object {Bitmap}} fullImage A bitmap that will supply the wallpaper imagery.
+@param {Object {Rect}} visibleCropHint The rectangular subregion of {@code fullImage} that should be
+     displayed as wallpaper.  Passing {@code null} for this parameter means that
+     the full image should be displayed if possible given the image's and device's
+     aspect ratios, etc.
+@param {Boolean} allowBackup {@code true} if the OS is permitted to back up this wallpaper
+     image for restore to a future device; {@code false} otherwise.
+@param {Number} which Flags indicating which wallpaper(s) to configure with the new imagery.
+@see #FLAG_LOCK
+@see #FLAG_SYSTEM
+@return {Number} An integer ID assigned to the newly active wallpaper; or zero on failure.
+@throws IOException
+*/
+setBitmap : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setBitmap'>/**Like {@link #setBitmap(Bitmap, Rect, boolean, int)}, but allows to pass in an explicit user
+</span> id. If the user id doesn't match the user id the process is running under, calling this
+ requires permission {@link android.Manifest.permission#INTERACT_ACROSS_USERS_FULL}.
+@hide 
+*/
+setBitmap : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setStream'>/**Change the current system wallpaper to a specific byte stream.  The
+</span> give InputStream is copied into persistent storage and will now be
+ used as the wallpaper.  Currently it must be either a JPEG or PNG
+ image.  On success, the intent {@link Intent#ACTION_WALLPAPER_CHANGED}
+ is broadcast.
+
+ &lt;p&gt;This method is equivalent to calling
+ {@link #setStream(InputStream, Rect, boolean)} and passing {@code null} for the
+ {@code visibleCrop} rectangle and {@code true} for the {@code allowBackup}
+ parameter.
+
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#SET_WALLPAPER}.
+@param {Object {InputStream}} bitmapData A stream containing the raw data to install as a wallpaper.  This
+     data can be in any format handled by {@link BitmapRegionDecoder}.
+@throws IOException If an error occurs when attempting to set the wallpaper
+     based on the provided image data.
+*/
+setStream : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setStream'>/**Change the current system wallpaper to a specific byte stream, specifying a
+</span> hint about which subrectangle of the full image is to be visible.  The OS will
+ then try to best present the given portion of the full image as the static system
+ wallpaper image.  The data from the given InputStream is copied into persistent
+ storage and will then be used as the system wallpaper.  Currently the data must
+ be either a JPEG or PNG image.  On success, the intent
+ {@link Intent#ACTION_WALLPAPER_CHANGED} is broadcast.
+
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#SET_WALLPAPER}.
+@param {Object {InputStream}} bitmapData A stream containing the raw data to install as a wallpaper.  This
+     data can be in any format handled by {@link BitmapRegionDecoder}.
+@param {Object {Rect}} visibleCropHint The rectangular subregion of the streamed image that should be
+     displayed as wallpaper.  Passing {@code null} for this parameter means that
+     the full image should be displayed if possible given the image's and device's
+     aspect ratios, etc.
+@param {Boolean} allowBackup {@code true} if the OS is permitted to back up this wallpaper
+     image for restore to a future device; {@code false} otherwise.
+@return {Number} An integer ID assigned to the newly active wallpaper; or zero on failure.
+@see #getWallpaperId(int)
+@throws IOException If an error occurs when attempting to set the wallpaper
+     based on the provided image data.
+@throws IllegalArgumentException If the {@code visibleCropHint} rectangle is
+     empty or invalid.
+*/
+setStream : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setStream'>/**Version of {@link #setStream(InputStream, Rect, boolean)} that allows the caller
+</span> to specify which of the supported wallpaper categories to set.
+@param {Object {InputStream}} bitmapData A stream containing the raw data to install as a wallpaper.  This
+     data can be in any format handled by {@link BitmapRegionDecoder}.
+@param {Object {Rect}} visibleCropHint The rectangular subregion of the streamed image that should be
+     displayed as wallpaper.  Passing {@code null} for this parameter means that
+     the full image should be displayed if possible given the image's and device's
+     aspect ratios, etc.
+@param {Boolean} allowBackup {@code true} if the OS is permitted to back up this wallpaper
+     image for restore to a future device; {@code false} otherwise.
+@param {Number} which Flags indicating which wallpaper(s) to configure with the new imagery.
+@return {Number} An integer ID assigned to the newly active wallpaper; or zero on failure.
+@see #getWallpaperId(int)
+@see #FLAG_LOCK
+@see #FLAG_SYSTEM
+@throws IOException
+*/
+setStream : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-hasResourceWallpaper'>/**Return whether any users are currently set to use the wallpaper
+</span> with the given resource ID.  That is, their wallpaper has been
+ set through {@link #setResource}(int) with the same resource id.
+*/
+hasResourceWallpaper : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getDesiredMinimumWidth'>/**Returns the desired minimum width for the wallpaper. Callers of
+</span> {@link #setBitmap(android.graphics.Bitmap)} or
+ {@link #setStream(java.io.InputStream)} should check this value
+ beforehand to make sure the supplied wallpaper respects the desired
+ minimum width.
+
+ If the returned value is &lt;= 0, the caller should use the width of
+ the default display instead.
+@return {Number} The desired minimum width for the wallpaper. This value should
+ be honored by applications that set the wallpaper but it is not
+ mandatory.
+*/
+getDesiredMinimumWidth : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getDesiredMinimumHeight'>/**Returns the desired minimum height for the wallpaper. Callers of
+</span> {@link #setBitmap(android.graphics.Bitmap)} or
+ {@link #setStream(java.io.InputStream)} should check this value
+ beforehand to make sure the supplied wallpaper respects the desired
+ minimum height.
+
+ If the returned value is &lt;= 0, the caller should use the height of
+ the default display instead.
+@return {Number} The desired minimum height for the wallpaper. This value should
+ be honored by applications that set the wallpaper but it is not
+ mandatory.
+*/
+getDesiredMinimumHeight : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-suggestDesiredDimensions'>/**For use only by the current home application, to specify the size of
+</span> wallpaper it would like to use.  This allows such applications to have
+ a virtual wallpaper that is larger than the physical screen, matching
+ the size of their workspace.
+
+ &lt;p&gt;Note developers, who don't seem to be reading this.  This is
+ for &lt;em&gt;home apps&lt;/em&gt; to tell what size wallpaper they would like.
+ Nobody else should be calling this!  Certainly not other non-home
+ apps that change the wallpaper.  Those apps are supposed to
+ &lt;b&gt;retrieve&lt;/b&gt; the suggested size so they can construct a wallpaper
+ that matches it.
+
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#SET_WALLPAPER_HINTS}.
+@param {Number} minimumWidth Desired minimum width
+@param {Number} minimumHeight Desired minimum height
+*/
+suggestDesiredDimensions : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setDisplayPadding'>/**Specify extra padding that the wallpaper should have outside of the display.
+</span> That is, the given padding supplies additional pixels the wallpaper should extend
+ outside of the display itself.
+
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#SET_WALLPAPER_HINTS}.
+@param {Object {Rect}} padding The number of pixels the wallpaper should extend beyond the display,
+ on its left, top, right, and bottom sides.
+*/
+setDisplayPadding : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setDisplayOffset'>/**Apply a raw offset to the wallpaper window.  Should only be used in
+</span> combination with {@link #setDisplayPadding(android.graphics.Rect)} when you
+ have ensured that the wallpaper will extend outside of the display area so that
+ it can be moved without leaving part of the display uncovered.
+@param {Object {IBinder}} x The offset, in pixels, to apply to the left edge.
+@param {Number} y The offset, in pixels, to apply to the top edge.
+@hide 
+*/
+setDisplayOffset : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-clearWallpaper'>/**Reset all wallpaper to the factory default.
+</span>
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#SET_WALLPAPER}.
+*/
+clearWallpaper : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-clearWallpaper'>/**Clear the wallpaper for a specific user.  The caller must hold the
+</span> INTERACT_ACROSS_USERS_FULL permission to clear another user's
+ wallpaper, and must hold the SET_WALLPAPER permission in all
+ circumstances.
+@hide 
+*/
+clearWallpaper : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setWallpaperComponent'>/**Set the live wallpaper.
+</span>@hide 
+*/
+setWallpaperComponent : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setWallpaperComponent'>/**Set the live wallpaper.
+</span>
+ This can only be called by packages with android.permission.SET_WALLPAPER_COMPONENT
+ permission. The caller must hold the INTERACT_ACROSS_USERS_FULL permission to change
+ another user's wallpaper.
+@hide 
+*/
+setWallpaperComponent : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setWallpaperOffsets'>/**Set the display position of the current wallpaper within any larger space, when
+</span> that wallpaper is visible behind the given window.  The X and Y offsets
+ are floating point numbers ranging from 0 to 1, representing where the
+ wallpaper should be positioned within the screen space.  These only
+ make sense when the wallpaper is larger than the display.
+@param {Object {IBinder}} windowToken The window who these offsets should be associated
+ with, as returned by {@link android.view.View#getWindowToken()
+ View.getWindowToken()}.
+@param {Number} xOffset The offset along the X dimension, from 0 to 1.
+@param {Number} yOffset The offset along the Y dimension, from 0 to 1.
+*/
+setWallpaperOffsets : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setWallpaperOffsetSteps'>/**For applications that use multiple virtual screens showing a wallpaper,
+</span> specify the step size between virtual screens. For example, if the
+ launcher has 3 virtual screens, it would specify an xStep of 0.5,
+ since the X offset for those screens are 0.0, 0.5 and 1.0
+@param {Number} xStep The X offset delta from one screen to the next one
+@param {Number} yStep The Y offset delta from one screen to the next one
+*/
+setWallpaperOffsetSteps : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-sendWallpaperCommand'>/**Send an arbitrary command to the current active wallpaper.
+</span>@param {Object {IBinder}} windowToken The window who these offsets should be associated
+ with, as returned by {@link android.view.View#getWindowToken()
+ View.getWindowToken()}.
+@param {String} action Name of the command to perform.  This must be a scoped
+ name to avoid collisions, such as &quot;com.mycompany.wallpaper.DOIT&quot;.
+@param {Number} x Arbitrary integer argument based on command.
+@param {Number} y Arbitrary integer argument based on command.
+@param {Number} z Arbitrary integer argument based on command.
+@param {Object {Bundle}} extras Optional additional information for the command, or null.
+*/
+sendWallpaperCommand : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-isWallpaperSupported'>/**Returns whether wallpapers are supported for the calling user. If this function returns
+</span> {@code false}, any attempts to changing the wallpaper will have no effect,
+ and any attempt to obtain of the wallpaper will return {@code null}.
+*/
+isWallpaperSupported : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-isSetWallpaperAllowed'>/**Returns whether the calling package is allowed to set the wallpaper for the calling user.
+</span> If this function returns {@code false}, any attempts to change the wallpaper will have
+ no effect. Always returns {@code true} for device owner and profile owner.
+@see android.os.UserManager#DISALLOW_SET_WALLPAPER
+*/
+isSetWallpaperAllowed : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-clearWallpaperOffsets'>/**Clear the offsets previously associated with this window through
+</span> {@link #setWallpaperOffsets(IBinder, float, float)}.  This reverts
+ the window to its default state, where it does not cause the wallpaper
+ to scroll from whatever its last offsets were.
+@param {Object {IBinder}} windowToken The window who these offsets should be associated
+ with, as returned by {@link android.view.View#getWindowToken()
+ View.getWindowToken()}.
+*/
+clearWallpaperOffsets : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-clear'>/**Remove any currently set system wallpaper, reverting to the system's built-in
+</span> wallpaper. On success, the intent {@link Intent#ACTION_WALLPAPER_CHANGED}
+ is broadcast.
+
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#SET_WALLPAPER}.
+@throws IOException If an error occurs reverting to the built-in
+ wallpaper.
+*/
+clear : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-clear'>/**Remove one or more currently set wallpapers, reverting to the system default
+</span> display for each one.  If {@link #FLAG_SYSTEM} is set in the {@code which}
+ parameter, the intent {@link Intent#ACTION_WALLPAPER_CHANGED} will be broadcast
+ upon success.
+@param {Number} which A bitwise combination of {@link #FLAG_SYSTEM} or
+   {@link #FLAG_LOCK}
+@throws IOException If an error occurs reverting to the built-in wallpaper.
+*/
+clear : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-openDefaultWallpaper'>/**Open stream representing the default static image wallpaper.
+</span>
+ If the device defines no default wallpaper of the requested kind,
+ {@code null} is returned.
+@hide 
+*/
+openDefaultWallpaper : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-getDefaultWallpaperComponent'>/**Return {@link ComponentName} of the default live wallpaper, or
+</span> {@code null} if none is defined.
+@hide 
+*/
+getDefaultWallpaperComponent : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-setLockWallpaperCallback'>/**Register a callback for lock wallpaper observation. Only the OS may use this.
+</span>@return {Boolean} true on success; false on error.
+@hide 
+*/
+setLockWallpaperCallback : function(  ) {},
+
+<span id='android-app-WallpaperManager-method-isWallpaperBackupEligible'>/**Is the current system wallpaper eligible for backup?
+</span>
+ Only the OS itself may use this method.
+@hide 
+*/
+isWallpaperBackupEligible : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

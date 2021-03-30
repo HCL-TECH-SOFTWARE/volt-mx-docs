@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-AppComponentFactory'>/**@class android.app.AppComponentFactory
+</span>@extends java.lang.Object
+
+ Interface used to control the instantiation of manifest elements.
+
+ @see #instantiateApplication
+ @see #instantiateActivity
+ @see #instantiateClassLoader
+ @see #instantiateService
+ @see #instantiateReceiver
+ @see #instantiateProvider
+*/
+var AppComponentFactory = {
+
+<span id='android-app-AppComponentFactory-property-DEFAULT'>/** @hide
+</span>*/
+DEFAULT : &quot;null&quot;,
+<span id='android-app-AppComponentFactory-method-instantiateClassLoader'>/**Selects the class loader which will be used by the platform to instantiate app components.
+</span> &lt;p&gt;
+ The default implementation of this method returns the {@code cl} parameter unchanged.
+ Applications can override this method to set up a custom class loader or a custom class
+ loader hierarchy and return it to the platform.
+ &lt;p&gt;
+ The method is a hook invoked before any application components are instantiated or the
+ application Context is initialized. It is intended to allow the application's classes to
+ be loaded from a different source than the base/split APK(s).
+ &lt;p&gt;
+ The default class loader {@code cl} is created by the platform and used to load the
+ application's base or split APK(s). Its parent is typically the boot class loader, unless
+ running under instrumentation. Its classname is configurable using the
+ {@link android.R.attr#classLoader} manifest attribute.
+@param {Object {ClassLoader}} cl        The default class loader created by the platform.
+@param {Object {ApplicationInfo}} aInfo     Information about the application being loaded.
+*/
+instantiateClassLoader : function(  ) {},
+
+<span id='android-app-AppComponentFactory-method-instantiateApplication'>/**Allows application to override the creation of the application object. This can be used to
+</span> perform things such as dependency injection or class loader changes to these
+ classes.
+ &lt;p&gt;
+ This method is only intended to provide a hook for instantiation. It does not provide
+ earlier access to the Application object. The returned object will not be initialized
+ as a Context yet and should not be used to interact with other android APIs.
+@param {Object {ClassLoader}} cl        The default classloader to use for instantiation.
+@param {String} className The class to be instantiated.
+*/
+instantiateApplication : function(  ) {},
+
+<span id='android-app-AppComponentFactory-method-instantiateActivity'>/**Allows application to override the creation of activities. This can be used to
+</span> perform things such as dependency injection or class loader changes to these
+ classes.
+ &lt;p&gt;
+ This method is only intended to provide a hook for instantiation. It does not provide
+ earlier access to the Activity object. The returned object will not be initialized
+ as a Context yet and should not be used to interact with other android APIs.
+@param {Object {ClassLoader}} cl        The default classloader to use for instantiation.
+@param {String} className The class to be instantiated.
+@param {Object {Intent}} intent    Intent creating the class.
+*/
+instantiateActivity : function(  ) {},
+
+<span id='android-app-AppComponentFactory-method-instantiateReceiver'>/**Allows application to override the creation of receivers. This can be used to
+</span> perform things such as dependency injection or class loader changes to these
+ classes.
+@param {Object {ClassLoader}} cl        The default classloader to use for instantiation.
+@param {String} className The class to be instantiated.
+@param {Object {Intent}} intent    Intent creating the class.
+*/
+instantiateReceiver : function(  ) {},
+
+<span id='android-app-AppComponentFactory-method-instantiateService'>/**Allows application to override the creation of services. This can be used to
+</span> perform things such as dependency injection or class loader changes to these
+ classes.
+ &lt;p&gt;
+ This method is only intended to provide a hook for instantiation. It does not provide
+ earlier access to the Service object. The returned object will not be initialized
+ as a Context yet and should not be used to interact with other android APIs.
+@param {Object {ClassLoader}} cl        The default classloader to use for instantiation.
+@param {String} className The class to be instantiated.
+@param {Object {Intent}} intent    Intent creating the class.
+*/
+instantiateService : function(  ) {},
+
+<span id='android-app-AppComponentFactory-method-instantiateProvider'>/**Allows application to override the creation of providers. This can be used to
+</span> perform things such as dependency injection or class loader changes to these
+ classes.
+ &lt;p&gt;
+ This method is only intended to provide a hook for instantiation. It does not provide
+ earlier access to the ContentProvider object. The returned object will not be initialized
+ with a Context yet and should not be used to interact with other android APIs.
+@param {Object {ClassLoader}} cl        The default classloader to use for instantiation.
+@param {String} className The class to be instantiated.
+*/
+instantiateProvider : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

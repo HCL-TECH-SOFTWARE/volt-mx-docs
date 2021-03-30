@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-UiModeManager'>/**@class android.app.UiModeManager
+</span>@extends java.lang.Object
+
+ This class provides access to the system uimode services.  These services
+ allow applications to control UI modes of the device.
+ It provides functionality to disable the car mode and it gives access to the
+ night mode settings.
+ 
+ &lt;p&gt;These facilities are built on top of the underlying
+ {@link android.content.Intent#ACTION_DOCK_EVENT} broadcasts that are sent when the user
+ physical places the device into and out of a dock.  When that happens,
+ the UiModeManager switches the system {@link android.content.res.Configuration}
+ to the appropriate UI mode, sends broadcasts about the mode switch, and
+ starts the corresponding mode activity if appropriate.  See the
+ broadcasts {@link #ACTION_ENTER_CAR_MODE} and
+ {@link #ACTION_ENTER_DESK_MODE} for more information.
+ 
+ &lt;p&gt;In addition, the user may manually switch the system to car mode without
+ physically being in a dock.  While in car mode -- whether by manual action
+ from the user or being physically placed in a dock -- a notification is
+ displayed allowing the user to exit dock mode.  Thus the dock mode
+ represented here may be different than the current state of the underlying
+ dock event broadcast.
+*/
+var UiModeManager = {
+
+<span id='android-app-UiModeManager-property-ACTION_ENTER_CAR_MODE'>/** Broadcast sent when the device's UI has switched to car mode, either
+</span> by being placed in a car dock or explicit action of the user.  After
+ sending the broadcast, the system will start the intent
+ {@link android.content.Intent#ACTION_MAIN} with category
+ {@link android.content.Intent#CATEGORY_CAR_DOCK}
+ to display the car UI, which typically what an application would
+ implement to provide their own interface.  However, applications can
+ also monitor this Intent in order to be informed of mode changes or
+ prevent the normal car UI from being displayed by setting the result
+ of the broadcast to {@link android.app.Activity#RESULT_CANCELED}.
+*/
+ACTION_ENTER_CAR_MODE : &quot;null&quot;,
+<span id='android-app-UiModeManager-property-ACTION_EXIT_CAR_MODE'>/** Broadcast sent when the device's UI has switch away from car mode back
+</span> to normal mode.  Typically used by a car mode app, to dismiss itself
+ when the user exits car mode.
+*/
+ACTION_EXIT_CAR_MODE : &quot;null&quot;,
+<span id='android-app-UiModeManager-property-ACTION_ENTER_DESK_MODE'>/** Broadcast sent when the device's UI has switched to desk mode,
+</span> by being placed in a desk dock.  After
+ sending the broadcast, the system will start the intent
+ {@link android.content.Intent#ACTION_MAIN} with category
+ {@link android.content.Intent#CATEGORY_DESK_DOCK}
+ to display the desk UI, which typically what an application would
+ implement to provide their own interface.  However, applications can
+ also monitor this Intent in order to be informed of mode changes or
+ prevent the normal desk UI from being displayed by setting the result
+ of the broadcast to {@link android.app.Activity#RESULT_CANCELED}.
+*/
+ACTION_ENTER_DESK_MODE : &quot;null&quot;,
+<span id='android-app-UiModeManager-property-ACTION_EXIT_DESK_MODE'>/** Broadcast sent when the device's UI has switched away from desk mode back
+</span> to normal mode.  Typically used by a desk mode app, to dismiss itself
+ when the user exits desk mode.
+*/
+ACTION_EXIT_DESK_MODE : &quot;null&quot;,
+<span id='android-app-UiModeManager-property-MODE_NIGHT_AUTO'>/** Constant for {@link #setNightMode}(int) and {@link #getNightMode}():
+</span> automatically switch night mode on and off based on the time.
+*/
+MODE_NIGHT_AUTO : &quot;0&quot;,
+<span id='android-app-UiModeManager-property-MODE_NIGHT_NO'>/** Constant for {@link #setNightMode}(int) and {@link #getNightMode}():
+</span> never run in night mode.
+*/
+MODE_NIGHT_NO : &quot;1&quot;,
+<span id='android-app-UiModeManager-property-MODE_NIGHT_YES'>/** Constant for {@link #setNightMode}(int) and {@link #getNightMode}():
+</span> always run in night mode.
+*/
+MODE_NIGHT_YES : &quot;2&quot;,
+<span id='android-app-UiModeManager-property-ENABLE_CAR_MODE_GO_CAR_HOME'>/** Flag for use with {@link #enableCarMode}(int): go to the car
+</span> home activity as part of the enable.  Enabling this way ensures
+ a clean transition between the current activity (in non-car-mode) and
+ the car home activity that will serve as home while in car mode.  This
+ will switch to the car home activity even if we are already in car mode.
+*/
+ENABLE_CAR_MODE_GO_CAR_HOME : &quot;1&quot;,
+<span id='android-app-UiModeManager-property-ENABLE_CAR_MODE_ALLOW_SLEEP'>/** Flag for use with {@link #enableCarMode}(int): allow sleep mode while in car mode.
+</span> By default, when this flag is not set, the system may hold a full wake lock to keep the
+ screen turned on and prevent the system from entering sleep mode while in car mode.
+ Setting this flag disables such behavior and the system may enter sleep mode
+ if there is no other user activity and no other wake lock held.
+ Setting this flag can be relevant for a car dock application that does not require the
+ screen kept on.
+*/
+ENABLE_CAR_MODE_ALLOW_SLEEP : &quot;2&quot;,
+<span id='android-app-UiModeManager-property-DISABLE_CAR_MODE_GO_HOME'>/** Flag for use with {@link #disableCarMode}(int): go to the normal
+</span> home activity as part of the disable.  Disabling this way ensures
+ a clean transition between the current activity (in car mode) and
+ the original home activity (which was typically last running without
+ being in car mode).
+*/
+DISABLE_CAR_MODE_GO_HOME : &quot;1&quot;,
+<span id='android-app-UiModeManager-method-enableCarMode'>/**Force device into car mode, like it had been placed in the car dock.
+</span> This will cause the device to switch to the car home UI as part of
+ the mode switch.
+@param {Number} flags Must be 0.
+*/
+enableCarMode : function(  ) {},
+
+<span id='android-app-UiModeManager-method-disableCarMode'>/**Turn off special mode if currently in car mode.
+</span>@param {Number} flags May be 0 or {@link #DISABLE_CAR_MODE_GO_HOME}.
+*/
+disableCarMode : function(  ) {},
+
+<span id='android-app-UiModeManager-method-getCurrentModeType'>/**Return the current running mode type.  May be one of
+</span> {@link Configuration#UI_MODE_TYPE_NORMAL Configuration.UI_MODE_TYPE_NORMAL},
+ {@link Configuration#UI_MODE_TYPE_DESK Configuration.UI_MODE_TYPE_DESK},
+ {@link Configuration#UI_MODE_TYPE_CAR Configuration.UI_MODE_TYPE_CAR},
+ {@link Configuration#UI_MODE_TYPE_TELEVISION Configuration.UI_MODE_TYPE_TELEVISION},
+ {@link Configuration#UI_MODE_TYPE_APPLIANCE Configuration.UI_MODE_TYPE_APPLIANCE},
+ {@link Configuration#UI_MODE_TYPE_WATCH Configuration.UI_MODE_TYPE_WATCH}, or
+ {@link Configuration#UI_MODE_TYPE_VR_HEADSET Configuration.UI_MODE_TYPE_VR_HEADSET}.
+*/
+getCurrentModeType : function(  ) {},
+
+<span id='android-app-UiModeManager-method-setNightMode'>/**Sets the system-wide night mode.
+</span> &lt;p&gt;
+ The mode can be one of:
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;{@link #MODE_NIGHT_NO}&lt;em&gt; sets the device into
+       {@code notnight} mode&lt;/li&gt;
+   &lt;li&gt;&lt;em&gt;{@link #MODE_NIGHT_YES}&lt;/em&gt; sets the device into
+       {@code night} mode&lt;/li&gt;
+   &lt;li&gt;&lt;em&gt;{@link #MODE_NIGHT_AUTO}&lt;/em&gt; automatically switches between
+       {@code night} and {@code notnight} based on the device's current
+       location and certain other sensors&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; On API 22 and below, changes to the night mode
+ are only effective when the {@link Configuration#UI_MODE_TYPE_CAR car}
+ or {@link Configuration#UI_MODE_TYPE_DESK desk} mode is enabled on a
+ device. On API 23 through API 28, changes to night mode are always effective.
+ &lt;p&gt;
+ Starting in API 29, when the device is in car mode and this method is called, night mode
+ will change, but the new setting is not persisted and the previously persisted setting
+ will be restored when the device exits car mode.
+ &lt;p&gt;
+ Changes to night mode take effect globally and will result in a configuration change
+ (and potentially an Activity lifecycle event) being applied to all running apps.
+ Developers interested in an app-local implementation of night mode should consider using
+ {@link android.support.v7.app.AppCompatDelegate#setDefaultNightMode(int)} to manage the
+ -night qualifier locally.
+@param {Number} mode the night mode to set
+@see #getNightMode()
+*/
+setNightMode : function(  ) {},
+
+<span id='android-app-UiModeManager-method-getNightMode'>/**Returns the currently configured night mode.
+</span> &lt;p&gt;
+ May be one of:
+ &lt;ul&gt;
+   &lt;li&gt;{@link #MODE_NIGHT_NO}&lt;/li&gt;
+   &lt;li&gt;{@link #MODE_NIGHT_YES}&lt;/li&gt;
+   &lt;li&gt;{@link #MODE_NIGHT_AUTO}&lt;/li&gt;
+   &lt;li&gt;{@code -1} on error&lt;/li&gt;
+ &lt;/ul&gt;
+@return {Number} the current night mode, or {@code -1} on error
+@see #setNightMode(int)
+*/
+getNightMode : function(  ) {},
+
+<span id='android-app-UiModeManager-method-isUiModeLocked'>/**
+</span>@return {Boolean} If UI mode is locked or not. When UI mode is locked, calls to change UI mode
+         like {@link #enableCarMode(int)} will silently fail.
+@hide 
+*/
+isUiModeLocked : function(  ) {},
+
+<span id='android-app-UiModeManager-method-isNightModeLocked'>/**Returns whether night mode is locked or not.
+</span> &lt;p&gt;
+ When night mode is locked, only privileged system components may change
+ night mode and calls from non-privileged applications to change night
+ mode will fail silently.
+@return {Boolean} {@code true} if night mode is locked or {@code false} otherwise
+@hide 
+*/
+isNightModeLocked : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

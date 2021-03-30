@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-UiAutomation'>/**@class android.app.UiAutomation
+</span>@extends java.lang.Object
+
+ Class for interacting with the device's UI by simulation user actions and
+ introspection of the screen content. It relies on the platform accessibility
+ APIs to introspect the screen and to perform some actions on the remote view
+ tree. It also allows injecting of arbitrary raw input events simulating user
+ interaction with keyboards and touch devices. One can think of a UiAutomation
+ as a special type of {@link android.accessibilityservice.AccessibilityService}
+ which does not provide hooks for the service life cycle and exposes other
+ APIs that are useful for UI test automation.
+ &lt;p&gt;
+ The APIs exposed by this class are low-level to maximize flexibility when
+ developing UI test automation tools and libraries. Generally, a UiAutomation
+ client should be using a higher-level library or implement high-level functions.
+ For example, performing a tap on the screen requires construction and injecting
+ of a touch down and up events which have to be delivered to the system by a
+ call to {@link #injectInputEvent(InputEvent, boolean)}.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The APIs exposed by this class operate across applications enabling a client
+ to write tests that cover use cases spanning over multiple applications. For
+ example, going to the settings application to change a setting and then
+ interacting with another application whose behavior depends on that setting.
+ &lt;/p&gt;
+*/
+var UiAutomation = {
+
+<span id='android-app-UiAutomation-property-ROTATION_UNFREEZE'>/**Rotation constant: Unfreeze rotation (rotating the device changes its rotation state). */
+</span>ROTATION_UNFREEZE : &quot;-2&quot;,
+<span id='android-app-UiAutomation-property-ROTATION_FREEZE_CURRENT'>/**Rotation constant: Freeze rotation to its current state. */
+</span>ROTATION_FREEZE_CURRENT : &quot;-1&quot;,
+<span id='android-app-UiAutomation-property-ROTATION_FREEZE_0'>/**Rotation constant: Freeze rotation to 0 degrees (natural orientation) */
+</span>ROTATION_FREEZE_0 : &quot;0&quot;,
+<span id='android-app-UiAutomation-property-ROTATION_FREEZE_90'>/**Rotation constant: Freeze rotation to 90 degrees . */
+</span>ROTATION_FREEZE_90 : &quot;1&quot;,
+<span id='android-app-UiAutomation-property-ROTATION_FREEZE_180'>/**Rotation constant: Freeze rotation to 180 degrees . */
+</span>ROTATION_FREEZE_180 : &quot;2&quot;,
+<span id='android-app-UiAutomation-property-ROTATION_FREEZE_270'>/**Rotation constant: Freeze rotation to 270 degrees . */
+</span>ROTATION_FREEZE_270 : &quot;3&quot;,
+<span id='android-app-UiAutomation-property-FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES'>/** UiAutomation supresses accessibility services by default. This flag specifies that
+</span> existing accessibility services should continue to run, and that new ones may start.
+ This flag is set when obtaining the UiAutomation from
+ {@link android.app.Instrumentation#getUiAutomation(int)}.
+*/
+FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES : &quot;1&quot;,
+<span id='android-app-UiAutomation-method-connect'>/**Connects this UiAutomation to the accessibility introspection APIs with default flags.
+</span>@hide 
+*/
+connect : function(  ) {},
+
+<span id='android-app-UiAutomation-method-connect'>/**Connects this UiAutomation to the accessibility introspection APIs.
+</span>@param {Number} flags Any flags to apply to the automation as it gets connected
+@hide 
+*/
+connect : function(  ) {},
+
+<span id='android-app-UiAutomation-method-getFlags'>/**Get the flags used to connect the service.
+</span>@return {Number} The flags used to connect
+@hide 
+*/
+getFlags : function(  ) {},
+
+<span id='android-app-UiAutomation-method-disconnect'>/**Disconnects this UiAutomation from the accessibility introspection APIs.
+</span>@hide 
+*/
+disconnect : function(  ) {},
+
+<span id='android-app-UiAutomation-method-getConnectionId'>/**The id of the {@link IAccessibilityInteractionConnection} for querying
+</span> the screen content. This is here for legacy purposes since some tools use
+ hidden APIs to introspect the screen.
+@hide 
+*/
+getConnectionId : function(  ) {},
+
+<span id='android-app-UiAutomation-method-isDestroyed'>/**Reports if the object has been destroyed
+</span>@return {Boolean} {code true} if the object has been destroyed.
+@hide 
+*/
+isDestroyed : function(  ) {},
+
+<span id='android-app-UiAutomation-method-setOnAccessibilityEventListener'>/**Sets a callback for observing the stream of {@link AccessibilityEvent}s.
+</span> The callbacks are delivered on the main application thread.
+@param {Object {UiAutomation.OnAccessibilityEventListener}} listener The callback.
+*/
+setOnAccessibilityEventListener : function(  ) {},
+
+<span id='android-app-UiAutomation-method-destroy'>/**Destroy this UiAutomation. After calling this method, attempting to use the object will
+</span> result in errors.
+@hide 
+*/
+destroy : function(  ) {},
+
+<span id='android-app-UiAutomation-method-adoptShellPermissionIdentity'>/**Adopt the permission identity of the shell UID for all permissions. This allows
+</span> you to call APIs protected permissions which normal apps cannot hold but are
+ granted to the shell UID. If you already adopted all shell permissions by calling
+ this method or {@link #adoptShellPermissionIdentity(String...)} a subsequent call
+ would be a no-op. Note that your permission state becomes that of the shell UID
+ and it is not a combination of your and the shell UID permissions.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;strong/&gt; Calling this method adopts all shell permissions and overrides
+ any subset of adopted permissions via {@link #adoptShellPermissionIdentity(String...)}.
+@see #adoptShellPermissionIdentity(String...)
+@see #dropShellPermissionIdentity()
+*/
+adoptShellPermissionIdentity : function(  ) {},
+
+<span id='android-app-UiAutomation-method-adoptShellPermissionIdentity'>/**Adopt the permission identity of the shell UID only for the provided permissions.
+</span> This allows you to call APIs protected permissions which normal apps cannot hold
+ but are granted to the shell UID. If you already adopted the specified shell
+ permissions by calling this method or {@link #adoptShellPermissionIdentity}() a
+ subsequent call would be a no-op. Note that your permission state becomes that of the
+ shell UID and it is not a combination of your and the shell UID permissions.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;strong/&gt; Calling this method adopts only the specified shell permissions
+ and overrides all adopted permissions via {@link #adoptShellPermissionIdentity}().
+@param {Object {java.lang.String[]}} permissions The permissions to adopt or &lt;code&gt;null&lt;/code&gt; to adopt all.
+@see #adoptShellPermissionIdentity()
+@see #dropShellPermissionIdentity()
+*/
+adoptShellPermissionIdentity : function(  ) {},
+
+<span id='android-app-UiAutomation-method-dropShellPermissionIdentity'>/**Drop the shell permission identity adopted by a previous call to
+</span> {@link #adoptShellPermissionIdentity}(). If you did not adopt the shell permission
+ identity this method would be a no-op.
+@see #adoptShellPermissionIdentity()
+*/
+dropShellPermissionIdentity : function(  ) {},
+
+<span id='android-app-UiAutomation-method-performGlobalAction'>/**Performs a global action. Such an action can be performed at any moment
+</span> regardless of the current application or user location in that application.
+ For example going back, going home, opening recents, etc.
+@param {Number} action The action to perform.
+@return {Boolean} Whether the action was successfully performed.
+@see android.accessibilityservice.AccessibilityService#GLOBAL_ACTION_BACK
+@see android.accessibilityservice.AccessibilityService#GLOBAL_ACTION_HOME
+@see android.accessibilityservice.AccessibilityService#GLOBAL_ACTION_NOTIFICATIONS
+@see android.accessibilityservice.AccessibilityService#GLOBAL_ACTION_RECENTS
+*/
+performGlobalAction : function(  ) {},
+
+<span id='android-app-UiAutomation-method-findFocus'>/**Find the view that has the specified focus type. The search is performed
+</span> across all windows.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In order to access the windows you have to opt-in
+ to retrieve the interactive windows by setting the
+ {@link AccessibilityServiceInfo#FLAG_RETRIEVE_INTERACTIVE_WINDOWS} flag.
+ Otherwise, the search will be performed only in the active window.
+ &lt;/p&gt;
+@param {Number} focus The focus to find. One of {@link AccessibilityNodeInfo#FOCUS_INPUT} or
+         {@link AccessibilityNodeInfo#FOCUS_ACCESSIBILITY}.
+@return {Object {android.view.accessibility.AccessibilityNodeInfo}} The node info of the focused view or null.
+@see AccessibilityNodeInfo#FOCUS_INPUT
+@see AccessibilityNodeInfo#FOCUS_ACCESSIBILITY
+*/
+findFocus : function(  ) {},
+
+<span id='android-app-UiAutomation-method-getServiceInfo'>/**Gets the an {@link AccessibilityServiceInfo} describing this UiAutomation.
+</span> This method is useful if one wants to change some of the dynamically
+ configurable properties at runtime.
+@return {Object {android.accessibilityservice.AccessibilityServiceInfo}} The accessibility service info.
+@see AccessibilityServiceInfo
+*/
+getServiceInfo : function(  ) {},
+
+<span id='android-app-UiAutomation-method-setServiceInfo'>/**Sets the {@link AccessibilityServiceInfo} that describes how this
+</span> UiAutomation will be handled by the platform accessibility layer.
+@param {Object {AccessibilityServiceInfo}} info The info.
+@see AccessibilityServiceInfo
+*/
+setServiceInfo : function(  ) {},
+
+<span id='android-app-UiAutomation-method-getWindows'>/**Gets the windows on the screen. This method returns only the windows
+</span> that a sighted user can interact with, as opposed to all windows.
+ For example, if there is a modal dialog shown and the user cannot touch
+ anything behind it, then only the modal window will be reported
+ (assuming it is the top one). For convenience the returned windows
+ are ordered in a descending layer order, which is the windows that
+ are higher in the Z-order are reported first.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In order to access the windows you have to opt-in
+ to retrieve the interactive windows by setting the
+ {@link AccessibilityServiceInfo#FLAG_RETRIEVE_INTERACTIVE_WINDOWS} flag.
+ &lt;/p&gt;
+@return {Object {java.util.List}} The windows if there are windows such, otherwise an empty list.
+*/
+getWindows : function(  ) {},
+
+<span id='android-app-UiAutomation-method-getRootInActiveWindow'>/**Gets the root {@link AccessibilityNodeInfo} in the active window.
+</span>@return {Object {android.view.accessibility.AccessibilityNodeInfo}} The root info.
+*/
+getRootInActiveWindow : function(  ) {},
+
+<span id='android-app-UiAutomation-method-injectInputEvent'>/**A method for injecting an arbitrary input event.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; It is caller's responsibility to recycle the event.
+ &lt;/p&gt;
+@param {Object {InputEvent}} event The event to inject.
+@param {Boolean} sync Whether to inject the event synchronously.
+@return {Boolean} Whether event injection succeeded.
+*/
+injectInputEvent : function(  ) {},
+
+<span id='android-app-UiAutomation-method-syncInputTransactions'>/**A request for WindowManagerService to wait until all animations have completed and input
+</span> information has been sent from WindowManager to native InputManager.
+@hide 
+*/
+syncInputTransactions : function(  ) {},
+
+<span id='android-app-UiAutomation-method-setRotation'>/**Sets the device rotation. A client can freeze the rotation in
+</span> desired state or freeze the rotation to its current state or
+ unfreeze the rotation (rotating the device changes its rotation
+ state).
+@param {Number} rotation The desired rotation.
+@return {Boolean} Whether the rotation was set successfully.
+@see #ROTATION_FREEZE_0
+@see #ROTATION_FREEZE_90
+@see #ROTATION_FREEZE_180
+@see #ROTATION_FREEZE_270
+@see #ROTATION_FREEZE_CURRENT
+@see #ROTATION_UNFREEZE
+*/
+setRotation : function(  ) {},
+
+<span id='android-app-UiAutomation-method-executeAndWaitForEvent'>/**Executes a command and waits for a specific accessibility event up to a
+</span> given wait timeout. To detect a sequence of events one can implement a
+ filter that keeps track of seen events of the expected sequence and
+ returns true after the last event of that sequence is received.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; It is caller's responsibility to recycle the returned event.
+ &lt;/p&gt;
+@param {Object {Runnable}} command The command to execute.
+@param {Object {UiAutomation.AccessibilityEventFilter}} filter Filter that recognizes the expected event.
+@param {Number} timeoutMillis The wait timeout in milliseconds.
+@throws TimeoutException If the expected event is not received within the timeout.
+*/
+executeAndWaitForEvent : function(  ) {},
+
+<span id='android-app-UiAutomation-method-waitForIdle'>/**Waits for the accessibility event stream to become idle, which is not to
+</span> have received an accessibility event within &lt;code&gt;idleTimeoutMillis&lt;/code&gt;.
+ The total time spent to wait for an idle accessibility event stream is bounded
+ by the &lt;code&gt;globalTimeoutMillis&lt;/code&gt;.
+@param {Number} idleTimeoutMillis The timeout in milliseconds between two events
+            to consider the device idle.
+@param {Number} globalTimeoutMillis The maximal global timeout in milliseconds in
+            which to wait for an idle state.
+@throws TimeoutException If no idle state was detected within
+            &lt;code&gt;globalTimeoutMillis.&lt;/code&gt;
+*/
+waitForIdle : function(  ) {},
+
+<span id='android-app-UiAutomation-method-takeScreenshot'>/**Takes a screenshot.
+</span>@return {Object {android.graphics.Bitmap}} The screenshot bitmap on success, null otherwise.
+*/
+takeScreenshot : function(  ) {},
+
+<span id='android-app-UiAutomation-method-setRunAsMonkey'>/**Sets whether this UiAutomation to run in a &quot;monkey&quot; mode. Applications can query whether
+</span> they are executed in a &quot;monkey&quot; mode, i.e. run by a test framework, and avoid doing
+ potentially undesirable actions such as calling 911 or posting on public forums etc.
+@param {Boolean} enable whether to run in a &quot;monkey&quot; mode or not. Default is not.
+@see ActivityManager#isUserAMonkey()
+*/
+setRunAsMonkey : function(  ) {},
+
+<span id='android-app-UiAutomation-method-clearWindowContentFrameStats'>/**Clears the frame statistics for the content of a given window. These
+</span> statistics contain information about the most recently rendered content
+ frames.
+@param {Number} windowId The window id.
+@return {Boolean} Whether the window is present and its frame statistics
+         were cleared.
+@see android.view.WindowContentFrameStats
+@see #getWindowContentFrameStats(int)
+@see #getWindows()
+@see AccessibilityWindowInfo#getId() AccessibilityWindowInfo.getId()
+*/
+clearWindowContentFrameStats : function(  ) {},
+
+<span id='android-app-UiAutomation-method-getWindowContentFrameStats'>/**Gets the frame statistics for a given window. These statistics contain
+</span> information about the most recently rendered content frames.
+ &lt;p&gt;
+ A typical usage requires clearing the window frame statistics via {@link #clearWindowContentFrameStats}(int) followed by an interaction with the UI and
+ finally getting the window frame statistics via calling this method.
+ &lt;/p&gt;
+ &lt;pre&gt;
+ // Assume we have at least one window.
+ final int windowId = getWindows().get(0).getId();
+
+ // Start with a clean slate.
+ uiAutimation.clearWindowContentFrameStats(windowId);
+
+ // Do stuff with the UI.
+
+ // Get the frame statistics.
+ WindowContentFrameStats stats = uiAutomation.getWindowContentFrameStats(windowId);
+ &lt;/pre&gt;
+@param {Number} windowId The window id.
+@return {Object {android.view.WindowContentFrameStats}} The window frame statistics, or null if the window is not present.
+@see android.view.WindowContentFrameStats
+@see #clearWindowContentFrameStats(int)
+@see #getWindows()
+@see AccessibilityWindowInfo#getId() AccessibilityWindowInfo.getId()
+*/
+getWindowContentFrameStats : function(  ) {},
+
+<span id='android-app-UiAutomation-method-clearWindowAnimationFrameStats'>/**Clears the window animation rendering statistics. These statistics contain
+</span> information about the most recently rendered window animation frames, i.e.
+ for window transition animations.
+@see android.view.WindowAnimationFrameStats
+@see #getWindowAnimationFrameStats()
+@see android.R.styleable#WindowAnimation
+*/
+clearWindowAnimationFrameStats : function(  ) {},
+
+<span id='android-app-UiAutomation-method-getWindowAnimationFrameStats'>/**Gets the window animation frame statistics. These statistics contain
+</span> information about the most recently rendered window animation frames, i.e.
+ for window transition animations.
+
+ &lt;p&gt;
+ A typical usage requires clearing the window animation frame statistics via
+ {@link #clearWindowAnimationFrameStats}() followed by an interaction that causes
+ a window transition which uses a window animation and finally getting the window
+ animation frame statistics by calling this method.
+ &lt;/p&gt;
+ &lt;pre&gt;
+ // Start with a clean slate.
+ uiAutimation.clearWindowAnimationFrameStats();
+
+ // Do stuff to trigger a window transition.
+
+ // Get the frame statistics.
+ WindowAnimationFrameStats stats = uiAutomation.getWindowAnimationFrameStats();
+ &lt;/pre&gt;
+@return {Object {android.view.WindowAnimationFrameStats}} The window animation frame statistics.
+@see android.view.WindowAnimationFrameStats
+@see #clearWindowAnimationFrameStats()
+@see android.R.styleable#WindowAnimation
+*/
+getWindowAnimationFrameStats : function(  ) {},
+
+<span id='android-app-UiAutomation-method-grantRuntimePermission'>/**Grants a runtime permission to a package.
+</span>@param {String} packageName The package to which to grant.
+@param {String} permission The permission to grant.
+@throws SecurityException if unable to grant the permission.
+*/
+grantRuntimePermission : function(  ) {},
+
+<span id='android-app-UiAutomation-method-grantRuntimePermission'>/**
+</span>@deprecated replaced by
+             {@link #grantRuntimePermissionAsUser(String, String, UserHandle)}.
+@hide 
+*/
+grantRuntimePermission : function(  ) {},
+
+<span id='android-app-UiAutomation-method-grantRuntimePermissionAsUser'>/**Grants a runtime permission to a package for a user.
+</span>@param {String} packageName The package to which to grant.
+@param {String} permission The permission to grant.
+@throws SecurityException if unable to grant the permission.
+*/
+grantRuntimePermissionAsUser : function(  ) {},
+
+<span id='android-app-UiAutomation-method-revokeRuntimePermission'>/**Revokes a runtime permission from a package.
+</span>@param {String} packageName The package to which to grant.
+@param {String} permission The permission to grant.
+@throws SecurityException if unable to revoke the permission.
+*/
+revokeRuntimePermission : function(  ) {},
+
+<span id='android-app-UiAutomation-method-revokeRuntimePermission'>/**
+</span>@deprecated replaced by
+             {@link #revokeRuntimePermissionAsUser(String, String, UserHandle)}.
+@hide 
+*/
+revokeRuntimePermission : function(  ) {},
+
+<span id='android-app-UiAutomation-method-revokeRuntimePermissionAsUser'>/**Revokes a runtime permission from a package.
+</span>@param {String} packageName The package to which to grant.
+@param {String} permission The permission to grant.
+@throws SecurityException if unable to revoke the permission.
+*/
+revokeRuntimePermissionAsUser : function(  ) {},
+
+<span id='android-app-UiAutomation-method-executeShellCommand'>/**Executes a shell command. This method returns a file descriptor that points
+</span> to the standard output stream. The command execution is similar to running
+ &quot;adb shell &lt;command&gt;&quot; from a host connected to the device.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; It is your responsibility to close the returned file
+ descriptor once you are done reading.
+ &lt;/p&gt;
+@param {String} command The command to execute.
+@return {Object {android.os.ParcelFileDescriptor}} A file descriptor to the standard output stream.
+@see #adoptShellPermissionIdentity()
+*/
+executeShellCommand : function(  ) {},
+
+<span id='android-app-UiAutomation-method-executeShellCommandRw'>/**Executes a shell command. This method returns two file descriptors,
+</span> one that points to the standard output stream (element at index 0), and one that points
+ to the standard input stream (element at index 1). The command execution is similar
+ to running &quot;adb shell &lt;command&gt;&quot; from a host connected to the device.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; It is your responsibility to close the returned file
+ descriptors once you are done reading/writing.
+ &lt;/p&gt;
+@param {String} command The command to execute.
+@return {Object {android.os.ParcelFileDescriptor}} File descriptors (out, in) to the standard output/input streams.
+@hide 
+*/
+executeShellCommandRw : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

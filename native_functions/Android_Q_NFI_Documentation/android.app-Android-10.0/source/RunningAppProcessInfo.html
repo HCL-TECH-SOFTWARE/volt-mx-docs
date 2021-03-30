@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-ActivityManager-RunningAppProcessInfo'>/**@class android.app.ActivityManager.RunningAppProcessInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Information you can retrieve about a running process.
+*/
+var RunningAppProcessInfo = {
+
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-processName'>/** The name of the process that this object is associated with
+</span>*/
+processName : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-pid'>/** The pid of this process; 0 if none
+</span>*/
+pid : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-uid'>/** The user id of this process.
+</span>*/
+uid : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-pkgList'>/** All packages that have been loaded into the process.
+</span>*/
+pkgList : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-FLAG_CANT_SAVE_STATE'>/** Constant for {@link #flags}: this is an app that is unable to
+</span> correctly save its state when going to the background,
+ so it can not be killed while in the background.
+ @hide
+*/
+FLAG_CANT_SAVE_STATE : &quot;1&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-FLAG_PERSISTENT'>/** Constant for {@link #flags}: this process is associated with a
+</span> persistent system app.
+ @hide
+*/
+FLAG_PERSISTENT : &quot;2&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-FLAG_HAS_ACTIVITIES'>/** Constant for {@link #flags}: this process is associated with a
+</span> persistent system app.
+ @hide
+*/
+FLAG_HAS_ACTIVITIES : &quot;4&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-flags'>/** Flags of information.  May be any of
+</span> {@link #FLAG_CANT_SAVE_STATE}.
+ @hide
+*/
+flags : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-lastTrimLevel'>/** Last memory trim level reported to the process: corresponds to
+</span> the values supplied to {@link android.content.ComponentCallbacks2#onTrimMemory(int)
+ ComponentCallbacks2.onTrimMemory(int)}.
+*/
+lastTrimLevel : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_FOREGROUND'>/** Constant for {@link #importance}: This process is running the
+</span> foreground UI; that is, it is the thing currently at the top of the screen
+ that the user is interacting with.
+*/
+IMPORTANCE_FOREGROUND : &quot;100&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_FOREGROUND_SERVICE'>/** Constant for {@link #importance}: This process is running a foreground
+</span> service, for example to perform music playback even while the user is
+ not immediately in the app.  This generally indicates that the process
+ is doing something the user actively cares about.
+*/
+IMPORTANCE_FOREGROUND_SERVICE : &quot;125&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_TOP_SLEEPING_PRE_28'>/** @deprecated Pre-{@link android.os.Build.VERSION_CODES#P} version of
+</span> {@link #IMPORTANCE_TOP_SLEEPING}.  As of Android
+ {@link android.os.Build.VERSION_CODES#P}, this is considered much less
+ important since we want to reduce what apps can do when the screen is off.
+*/
+IMPORTANCE_TOP_SLEEPING_PRE_28 : &quot;150&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_VISIBLE'>/** Constant for {@link #importance}: This process is running something
+</span> that is actively visible to the user, though not in the immediate
+ foreground.  This may be running a window that is behind the current
+ foreground (so paused and with its state saved, not interacting with
+ the user, but visible to them to some degree); it may also be running
+ other services under the system's control that it inconsiders important.
+*/
+IMPORTANCE_VISIBLE : &quot;200&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_PERCEPTIBLE_PRE_26'>/** Constant for {@link #importance}: {@link #IMPORTANCE_PERCEPTIBLE} had this wrong value
+</span> before {@link Build.VERSION_CODES#O}.  Since the {@link Build.VERSION_CODES#O} SDK,
+ the value of {@link #IMPORTANCE_PERCEPTIBLE} has been fixed.
+
+ &lt;p&gt;The system will return this value instead of {@link #IMPORTANCE_PERCEPTIBLE}
+ on Android versions below {@link Build.VERSION_CODES#O}.
+
+ &lt;p&gt;On Android version {@link Build.VERSION_CODES#O} and later, this value will still be
+ returned for apps with the target API level below {@link Build.VERSION_CODES#O}.
+ For apps targeting version {@link Build.VERSION_CODES#O} and later,
+ the correct value {@link #IMPORTANCE_PERCEPTIBLE} will be returned.
+*/
+IMPORTANCE_PERCEPTIBLE_PRE_26 : &quot;130&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_PERCEPTIBLE'>/** Constant for {@link #importance}: This process is not something the user
+</span> is directly aware of, but is otherwise perceptible to them to some degree.
+*/
+IMPORTANCE_PERCEPTIBLE : &quot;230&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_CANT_SAVE_STATE_PRE_26'>/** Constant for {@link #importance}: {@link #IMPORTANCE_CANT_SAVE_STATE} had
+</span> this wrong value
+ before {@link Build.VERSION_CODES#O}.  Since the {@link Build.VERSION_CODES#O} SDK,
+ the value of {@link #IMPORTANCE_CANT_SAVE_STATE} has been fixed.
+
+ &lt;p&gt;The system will return this value instead of {@link #IMPORTANCE_CANT_SAVE_STATE}
+ on Android versions below {@link Build.VERSION_CODES#O}.
+
+ &lt;p&gt;On Android version {@link Build.VERSION_CODES#O} after, this value will still be
+ returned for apps with the target API level below {@link Build.VERSION_CODES#O}.
+ For apps targeting version {@link Build.VERSION_CODES#O} and later,
+ the correct value {@link #IMPORTANCE_CANT_SAVE_STATE} will be returned.
+
+ @hide
+*/
+IMPORTANCE_CANT_SAVE_STATE_PRE_26 : &quot;170&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_SERVICE'>/** Constant for {@link #importance}: This process is contains services
+</span> that should remain running.  These are background services apps have
+ started, not something the user is aware of, so they may be killed by
+ the system relatively freely (though it is generally desired that they
+ stay running as long as they want to).
+*/
+IMPORTANCE_SERVICE : &quot;300&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_TOP_SLEEPING'>/** Constant for {@link #importance}: This process is running the foreground
+</span> UI, but the device is asleep so it is not visible to the user.  Though the
+ system will try hard to keep its process from being killed, in all other
+ ways we consider it a kind of cached process, with the limitations that go
+ along with that state: network access, running background services, etc.
+*/
+IMPORTANCE_TOP_SLEEPING : &quot;325&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_CANT_SAVE_STATE'>/** Constant for {@link #importance}: This process is running an
+</span> application that can not save its state, and thus can't be killed
+ while in the background.  This will be used with apps that have
+ {@link android.R.attr#cantSaveState} set on their application tag.
+*/
+IMPORTANCE_CANT_SAVE_STATE : &quot;350&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_CACHED'>/** Constant for {@link #importance}: This process process contains
+</span> cached code that is expendable, not actively running any app components
+ we care about.
+*/
+IMPORTANCE_CACHED : &quot;400&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_BACKGROUND'>/** @deprecated Renamed to {@link #IMPORTANCE_CACHED}.
+</span>*/
+IMPORTANCE_BACKGROUND : &quot;400&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_EMPTY'>/** Constant for {@link #importance}: This process is empty of any
+</span> actively running code.
+ @deprecated This value is no longer reported, use {@link #IMPORTANCE_CACHED} instead.
+*/
+IMPORTANCE_EMPTY : &quot;500&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-IMPORTANCE_GONE'>/** Constant for {@link #importance}: This process does not exist.
+</span>*/
+IMPORTANCE_GONE : &quot;1000&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-importance'>/** The relative importance level that the system places on this process.
+</span> These constants are numbered so that &quot;more important&quot; values are
+ always smaller than &quot;less important&quot; values.
+*/
+importance : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-lru'>/** An additional ordering within a particular {@link #importance}
+</span> category, providing finer-grained information about the relative
+ utility of processes within a category.  This number means nothing
+ except that a smaller values are more recently used (and thus
+ more important).  Currently an LRU value is only maintained for
+ the {@link #IMPORTANCE_CACHED} category, though others may
+ be maintained in the future.
+*/
+lru : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-REASON_UNKNOWN'>/** Constant for {@link #importanceReasonCode}: nothing special has
+</span> been specified for the reason for this level.
+*/
+REASON_UNKNOWN : &quot;0&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-REASON_PROVIDER_IN_USE'>/** Constant for {@link #importanceReasonCode}: one of the application's
+</span> content providers is being used by another process.  The pid of
+ the client process is in {@link #importanceReasonPid} and the
+ target provider in this process is in
+ {@link #importanceReasonComponent}.
+*/
+REASON_PROVIDER_IN_USE : &quot;1&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-REASON_SERVICE_IN_USE'>/** Constant for {@link #importanceReasonCode}: one of the application's
+</span> content providers is being used by another process.  The pid of
+ the client process is in {@link #importanceReasonPid} and the
+ target provider in this process is in
+ {@link #importanceReasonComponent}.
+*/
+REASON_SERVICE_IN_USE : &quot;2&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-importanceReasonCode'>/** The reason for {@link #importance}, if any.
+</span>*/
+importanceReasonCode : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-importanceReasonPid'>/** For the specified values of {@link #importanceReasonCode}, this
+</span> is the process ID of the other process that is a client of this
+ process.  This will be 0 if no other process is using this one.
+*/
+importanceReasonPid : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-importanceReasonComponent'>/** For the specified values of {@link #importanceReasonCode}, this
+</span> is the name of the component that is being used in this process.
+*/
+importanceReasonComponent : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-importanceReasonImportance'>/** When {@link #importanceReasonPid} is non-0, this is the importance
+</span> of the other pid. @hide
+*/
+importanceReasonImportance : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-processState'>/** Current process state, as per PROCESS_STATE_* constants.
+</span> @hide
+*/
+processState : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-isFocused'>/** Whether the app is focused in multi-window environment.
+</span> @hide
+*/
+isFocused : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-lastActivityTime'>/** Copy of {@link com.android.server.am.ProcessRecord#lastActivityTime} of the process.
+</span> @hide
+*/
+lastActivityTime : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-ActivityManager-RunningAppProcessInfo-method-procStateToImportance'>/**Convert a proc state to the correspondent IMPORTANCE_* constant.  If the return value
+</span> will be passed to a client, use {@link #procStateToImportanceForClient}.
+@hide 
+*/
+procStateToImportance : function(  ) {},
+
+<span id='android-app-ActivityManager-RunningAppProcessInfo-method-procStateToImportanceForClient'>/**Convert a proc state to the correspondent IMPORTANCE_* constant for a client represented
+</span> by a given {@link Context}, with converting {@link #IMPORTANCE_PERCEPTIBLE}
+ and {@link #IMPORTANCE_CANT_SAVE_STATE} to the corresponding &quot;wrong&quot; value if the
+ client's target SDK &lt; {@link VERSION_CODES#O}.
+@hide 
+*/
+procStateToImportanceForClient : function(  ) {},
+
+<span id='android-app-ActivityManager-RunningAppProcessInfo-method-procStateToImportanceForTargetSdk'>/**See {@link #procStateToImportanceForClient}.
+</span>@hide 
+*/
+procStateToImportanceForTargetSdk : function(  ) {},
+
+<span id='android-app-ActivityManager-RunningAppProcessInfo-method-importanceToProcState'>/**
+</span>@hide 
+*/
+importanceToProcState : function(  ) {},
+
+<span id='android-app-ActivityManager-RunningAppProcessInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-ActivityManager-RunningAppProcessInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-ActivityManager-RunningAppProcessInfo-method-readFromParcel'>/**
+</span>*/
+readFromParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

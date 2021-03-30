@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-DialogFragment'>/**@class android.app.DialogFragment
+</span> implements android.content.DialogInterface.OnCancelListener
+
+ implements android.content.DialogInterface.OnDismissListener
+
+@extends android.app.Fragment
+
+ A fragment that displays a dialog window, floating on top of its
+ activity's window.  This fragment contains a Dialog object, which it
+ displays as appropriate based on the fragment's state.  Control of
+ the dialog (deciding when to show, hide, dismiss it) should be done through
+ the API here, not with direct calls on the dialog.
+
+ &lt;p&gt;Implementations should override this class and implement
+ {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)} to supply the
+ content of the dialog.  Alternatively, they can override
+ {@link #onCreateDialog}(Bundle) to create an entirely custom dialog, such
+ as an AlertDialog, with its own content.
+
+ &lt;p&gt;Topics covered here:
+ &lt;ol&gt;
+ &lt;li&gt;&lt;a href=&quot;#Lifecycle&quot;&gt;Lifecycle&lt;/a&gt;
+ &lt;li&gt;&lt;a href=&quot;#BasicDialog&quot;&gt;Basic Dialog&lt;/a&gt;
+ &lt;li&gt;&lt;a href=&quot;#AlertDialog&quot;&gt;Alert Dialog&lt;/a&gt;
+ &lt;li&gt;&lt;a href=&quot;#DialogOrEmbed&quot;&gt;Selecting Between Dialog or Embedding&lt;/a&gt;
+ &lt;/ol&gt;
+
+ &lt;a name=&quot;Lifecycle&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Lifecycle&lt;/h3&gt;
+
+ &lt;p&gt;DialogFragment does various things to keep the fragment's lifecycle
+ driving it, instead of the Dialog.  Note that dialogs are generally
+ autonomous entities -- they are their own window, receiving their own
+ input events, and often deciding on their own when to disappear (by
+ receiving a back key event or the user clicking on a button).
+
+ &lt;p&gt;DialogFragment needs to ensure that what is happening with the Fragment
+ and Dialog states remains consistent.  To do this, it watches for dismiss
+ events from the dialog and takes care of removing its own state when they
+ happen.  This means you should use {@link #show(FragmentManager, String)}
+ or {@link #show(FragmentTransaction, String)} to add an instance of
+ DialogFragment to your UI, as these keep track of how DialogFragment should
+ remove itself when the dialog is dismissed.
+
+ &lt;a name=&quot;BasicDialog&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Basic Dialog&lt;/h3&gt;
+
+ &lt;p&gt;The simplest use of DialogFragment is as a floating container for the
+ fragment's view hierarchy.  A simple implementation may look like this:
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/FragmentDialog.java
+      dialog}
+
+ &lt;p&gt;An example showDialog() method on the Activity could be:
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/FragmentDialog.java
+      add_dialog}
+
+ &lt;p&gt;This removes any currently shown dialog, creates a new DialogFragment
+ with an argument, and shows it as a new state on the back stack.  When the
+ transaction is popped, the current DialogFragment and its Dialog will be
+ destroyed, and the previous one (if any) re-shown.  Note that in this case
+ DialogFragment will take care of popping the transaction of the Dialog
+ is dismissed separately from it.
+
+ &lt;a name=&quot;AlertDialog&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Alert Dialog&lt;/h3&gt;
+
+ &lt;p&gt;Instead of (or in addition to) implementing {@link #onCreateView} to
+ generate the view hierarchy inside of a dialog, you may implement
+ {@link #onCreateDialog}(Bundle) to create your own custom Dialog object.
+
+ &lt;p&gt;This is most useful for creating an {@link android.app.AlertDialog}, allowing you
+ to display standard alerts to the user that are managed by a fragment.
+ A simple example implementation of this is:
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/FragmentAlertDialog.java
+      dialog}
+
+ &lt;p&gt;The activity creating this fragment may have the following methods to
+ show the dialog and receive results from it:
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/FragmentAlertDialog.java
+      activity}
+
+ &lt;p&gt;Note that in this case the fragment is not placed on the back stack, it
+ is just added as an indefinitely running fragment.  Because dialogs normally
+ are modal, this will still operate as a back stack, since the dialog will
+ capture user input until it is dismissed.  When it is dismissed, DialogFragment
+ will take care of removing itself from its fragment manager.
+
+ &lt;a name=&quot;DialogOrEmbed&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Selecting Between Dialog or Embedding&lt;/h3&gt;
+
+ &lt;p&gt;A DialogFragment can still optionally be used as a normal fragment, if
+ desired.  This is useful if you have a fragment that in some cases should
+ be shown as a dialog and others embedded in a larger UI.  This behavior
+ will normally be automatically selected for you based on how you are using
+ the fragment, but can be customized with {@link #setShowsDialog}(boolean).
+
+ &lt;p&gt;For example, here is a simple dialog fragment:
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/FragmentDialogOrActivity.java
+      dialog}
+
+ &lt;p&gt;An instance of this fragment can be created and shown as a dialog:
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/FragmentDialogOrActivity.java
+      show_dialog}
+
+ &lt;p&gt;It can also be added as content in a view hierarchy:
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/FragmentDialogOrActivity.java
+      embed}
+
+ @deprecated Use the &lt;a href=&quot;{@docRoot}tools/extras/support-library.html&quot;&gt;Support Library&lt;/a&gt;
+      {@link android.support.v4.app.DialogFragment} for consistent behavior across all devices
+      and access to &lt;a href=&quot;{@docRoot}topic/libraries/architecture/lifecycle.html&quot;&gt;Lifecycle&lt;/a&gt;.
+*/
+var DialogFragment = {
+
+<span id='android-app-DialogFragment-property-STYLE_NORMAL'>/** Style for {@link #setStyle(int, int)}: a basic,
+</span> normal dialog.
+*/
+STYLE_NORMAL : &quot;0&quot;,
+<span id='android-app-DialogFragment-property-STYLE_NO_TITLE'>/** Style for {@link #setStyle(int, int)}: don't include
+</span> a title area.
+*/
+STYLE_NO_TITLE : &quot;1&quot;,
+<span id='android-app-DialogFragment-property-STYLE_NO_FRAME'>/** Style for {@link #setStyle(int, int)}: don't draw
+</span> any frame at all; the view hierarchy returned by {@link #onCreateView}
+ is entirely responsible for drawing the dialog.
+*/
+STYLE_NO_FRAME : &quot;2&quot;,
+<span id='android-app-DialogFragment-property-STYLE_NO_INPUT'>/** Style for {@link #setStyle(int, int)}: like
+</span> {@link #STYLE_NO_FRAME}, but also disables all input to the dialog.
+ The user can not touch it, and its window will not receive input focus.
+*/
+STYLE_NO_INPUT : &quot;3&quot;,
+<span id='android-app-DialogFragment-method-setStyle'>/**Call to customize the basic appearance and behavior of the
+</span> fragment's dialog.  This can be used for some common dialog behaviors,
+ taking care of selecting flags, theme, and other options for you.  The
+ same effect can be achieve by manually setting Dialog and Window
+ attributes yourself.  Calling this after the fragment's Dialog is
+ created will have no effect.
+@param {Number} style Selects a standard style: may be {@link #STYLE_NORMAL},
+ {@link #STYLE_NO_TITLE}, {@link #STYLE_NO_FRAME}, or
+ {@link #STYLE_NO_INPUT}.
+@param {Number} theme Optional custom theme.  If 0, an appropriate theme (based
+ on the style) will be selected for you.
+*/
+setStyle : function(  ) {},
+
+<span id='android-app-DialogFragment-method-show'>/**Display the dialog, adding the fragment to the given FragmentManager.  This
+</span> is a convenience for explicitly creating a transaction, adding the
+ fragment to it with the given tag, and committing it.  This does
+ &lt;em&gt;not&lt;/em&gt; add the transaction to the back stack.  When the fragment
+ is dismissed, a new transaction will be executed to remove it from
+ the activity.
+@param {Object {FragmentManager}} manager The FragmentManager this fragment will be added to.
+@param {String} tag The tag for this fragment, as per
+ {@link FragmentTransaction#add(Fragment, String) FragmentTransaction.add}.
+*/
+show : function(  ) {},
+
+<span id='android-app-DialogFragment-method-showAllowingStateLoss'>/**{@hide}
+</span>*/
+showAllowingStateLoss : function(  ) {},
+
+<span id='android-app-DialogFragment-method-show'>/**Display the dialog, adding the fragment using an existing transaction
+</span> and then committing the transaction.
+@param {Object {FragmentTransaction}} transaction An existing transaction in which to add the fragment.
+@param {String} tag The tag for this fragment, as per
+ {@link FragmentTransaction#add(Fragment, String) FragmentTransaction.add}.
+@return {Number} Returns the identifier of the committed transaction, as per
+ {@link FragmentTransaction#commit() FragmentTransaction.commit()}.
+*/
+show : function(  ) {},
+
+<span id='android-app-DialogFragment-method-dismiss'>/**Dismiss the fragment and its dialog.  If the fragment was added to the
+</span> back stack, all back stack state up to and including this entry will
+ be popped.  Otherwise, a new transaction will be committed to remove
+ the fragment.
+*/
+dismiss : function(  ) {},
+
+<span id='android-app-DialogFragment-method-dismissAllowingStateLoss'>/**Version of {@link #dismiss}() that uses
+</span> {@link android.app.FragmentTransaction#commitAllowingStateLoss()
+ android.app.FragmentTransaction.commitAllowingStateLoss()}.  See linked
+ documentation for further details.
+*/
+dismissAllowingStateLoss : function(  ) {},
+
+<span id='android-app-DialogFragment-method-getDialog'>/**
+</span>*/
+getDialog : function(  ) {},
+
+<span id='android-app-DialogFragment-method-getTheme'>/**
+</span>*/
+getTheme : function(  ) {},
+
+<span id='android-app-DialogFragment-method-setCancelable'>/**Control whether the shown Dialog is cancelable.  Use this instead of
+</span> directly calling {@link android.app.Dialog#setCancelable(boolean)
+ android.app.Dialog.setCancelable(boolean)}, because DialogFragment needs to change
+ its behavior based on this.
+@param {Boolean} cancelable If true, the dialog is cancelable.  The default
+ is true.
+*/
+setCancelable : function(  ) {},
+
+<span id='android-app-DialogFragment-method-isCancelable'>/**Return the current value of {@link #setCancelable}(boolean).
+</span>*/
+isCancelable : function(  ) {},
+
+<span id='android-app-DialogFragment-method-setShowsDialog'>/**Controls whether this fragment should be shown in a dialog.  If not
+</span> set, no Dialog will be created in {@link #onActivityCreated}(Bundle),
+ and the fragment's view hierarchy will thus not be added to it.  This
+ allows you to instead use it as a normal fragment (embedded inside of
+ its activity).
+
+ &lt;p&gt;This is normally set for you based on whether the fragment is
+ associated with a container view ID passed to
+ {@link android.app.FragmentTransaction#add(int, Fragment) android.app.FragmentTransaction.add(int, Fragment)}.
+ If the fragment was added with a container, setShowsDialog will be
+ initialized to false; otherwise, it will be true.
+@param {Boolean} showsDialog If true, the fragment will be displayed in a Dialog.
+ If false, no Dialog will be created and the fragment's view hierarchly
+ left undisturbed.
+*/
+setShowsDialog : function(  ) {},
+
+<span id='android-app-DialogFragment-method-getShowsDialog'>/**Return the current value of {@link #setShowsDialog}(boolean).
+</span>*/
+getShowsDialog : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onAttach'>/**
+</span>*/
+onAttach : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onDetach'>/**
+</span>*/
+onDetach : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onGetLayoutInflater'>/**
+</span>@hide 
+*/
+onGetLayoutInflater : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onCreateDialog'>/**Override to build your own custom Dialog container.  This is typically
+</span> used to show an AlertDialog instead of a generic Dialog; when doing so,
+ {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)} does not need
+ to be implemented since the AlertDialog takes care of its own content.
+ 
+ &lt;p&gt;This method will be called after {@link #onCreate}(Bundle) and
+ before {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.  The
+ default implementation simply instantiates and returns a {@link android.app.Dialog}
+ class.
+ 
+ &lt;p&gt;&lt;em&gt;Note: DialogFragment own the {@link android.app.Dialog#setOnCancelListener
+ android.app.Dialog.setOnCancelListener} and {@link android.app.Dialog#setOnDismissListener
+ android.app.Dialog.setOnDismissListener} callbacks.  You must not set them yourself.&lt;/em&gt;
+ To find out about these events, override {@link #onCancel}(DialogInterface)
+ and {@link #onDismiss}(DialogInterface).&lt;/p&gt;
+@param {Object {Bundle}} savedInstanceState The last saved instance state of the Fragment,
+ or null if this is a freshly created Fragment.
+@return {Object {android.app.Dialog}} Return a new Dialog instance to be displayed by the Fragment.
+*/
+onCreateDialog : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onCancel'>/**
+</span>*/
+onCancel : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onDismiss'>/**
+</span>*/
+onDismiss : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onActivityCreated'>/**
+</span>*/
+onActivityCreated : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onSaveInstanceState'>/**
+</span>*/
+onSaveInstanceState : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onStop'>/**
+</span>*/
+onStop : function(  ) {},
+
+<span id='android-app-DialogFragment-method-onDestroyView'>/**Remove dialog.
+</span>*/
+onDestroyView : function(  ) {},
+
+<span id='android-app-DialogFragment-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-accessibilityservice-AccessibilityService-MagnificationController'>/**@class android.accessibilityservice.AccessibilityService.MagnificationController
+</span>@extends java.lang.Object
+
+ Used to control and query the state of display magnification.
+*/
+var MagnificationController = {
+
+<span id='android-accessibilityservice-AccessibilityService-MagnificationController-method-addListener'>/**Adds the specified change listener to the list of magnification
+</span> change listeners. The callback will occur on the service's main
+ thread.
+@param {Object {AccessibilityService.MagnificationController.OnMagnificationChangedListener}} listener the listener to add, must be non-{@code null}
+*/
+addListener : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-MagnificationController-method-addListener'>/**Adds the specified change listener to the list of magnification
+</span> change listeners. The callback will occur on the specified
+ {@link Handler}'s thread, or on the service's main thread if the
+ handler is {@code null}.
+@param {Object {AccessibilityService.MagnificationController.OnMagnificationChangedListener}} listener the listener to add, must be non-null
+@param {Object {Handler}} handler the handler on which the callback should execute, or
+        {@code null} to execute on the service's main thread
+*/
+addListener : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-MagnificationController-method-removeListener'>/**Removes the specified change listener from the list of magnification change listeners.
+</span>@param {Object {AccessibilityService.MagnificationController.OnMagnificationChangedListener}} listener the listener to remove, must be non-null
+@return {Boolean} {@code true} if the listener was removed, {@code false} otherwise
+*/
+removeListener : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-MagnificationController-method-getScale'>/**Returns the current magnification scale.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; If the service is not yet connected (e.g.
+ {@link android.accessibilityservice.AccessibilityService#onServiceConnected()} has not yet been
+ called) or the service has been disconnected, this method will
+ return a default value of {@code 1.0f}.
+@return {Number} the current magnification scale
+*/
+getScale : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-MagnificationController-method-getCenterX'>/**Returns the unscaled screen-relative X coordinate of the focal
+</span> center of the magnified region. This is the point around which
+ zooming occurs and is guaranteed to lie within the magnified
+ region.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; If the service is not yet connected (e.g.
+ {@link android.accessibilityservice.AccessibilityService#onServiceConnected()} has not yet been
+ called) or the service has been disconnected, this method will
+ return a default value of {@code 0.0f}.
+@return {Number} the unscaled screen-relative X coordinate of the center of
+         the magnified region
+*/
+getCenterX : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-MagnificationController-method-getCenterY'>/**Returns the unscaled screen-relative Y coordinate of the focal
+</span> center of the magnified region. This is the point around which
+ zooming occurs and is guaranteed to lie within the magnified
+ region.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; If the service is not yet connected (e.g.
+ {@link android.accessibilityservice.AccessibilityService#onServiceConnected()} has not yet been
+ called) or the service has been disconnected, this method will
+ return a default value of {@code 0.0f}.
+@return {Number} the unscaled screen-relative Y coordinate of the center of
+         the magnified region
+*/
+getCenterY : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-MagnificationController-method-getMagnificationRegion'>/**Returns the region of the screen currently active for magnification. Changes to
+</span> magnification scale and center only affect this portion of the screen. The rest of the
+ screen, for example input methods, cannot be magnified. This region is relative to the
+ unscaled screen and is independent of the scale and center point.
+ &lt;p&gt;
+ The returned region will be empty if magnification is not active. Magnification is active
+ if magnification gestures are enabled or if a service is running that can control
+ magnification.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; If the service is not yet connected (e.g.
+ {@link android.accessibilityservice.AccessibilityService#onServiceConnected()} has not yet been
+ called) or the service has been disconnected, this method will
+ return an empty region.
+@return {Object {android.graphics.Region}} the region of the screen currently active for magnification, or an empty region
+ if magnification is not active.
+*/
+getMagnificationRegion : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-MagnificationController-method-reset'>/**Resets magnification scale and center to their default (e.g. no
+</span> magnification) values.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; If the service is not yet connected (e.g.
+ {@link android.accessibilityservice.AccessibilityService#onServiceConnected()} has not yet been
+ called) or the service has been disconnected, this method will have
+ no effect and return {@code false}.
+@param {Boolean} animate {@code true} to animate from the current scale and
+                center or {@code false} to reset the scale and center
+                immediately
+@return {Boolean} {@code true} on success, {@code false} on failure
+*/
+reset : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-MagnificationController-method-setScale'>/**Sets the magnification scale.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; If the service is not yet connected (e.g.
+ {@link android.accessibilityservice.AccessibilityService#onServiceConnected()} has not yet been
+ called) or the service has been disconnected, this method will have
+ no effect and return {@code false}.
+@param {Number} scale the magnification scale to set, must be &gt;= 1 and &lt;= 8
+@param {Boolean} animate {@code true} to animate from the current scale or
+                {@code false} to set the scale immediately
+@return {Boolean} {@code true} on success, {@code false} on failure
+*/
+setScale : function(  ) {},
+
+<span id='android-accessibilityservice-AccessibilityService-MagnificationController-method-setCenter'>/**Sets the center of the magnified viewport.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; If the service is not yet connected (e.g.
+ {@link android.accessibilityservice.AccessibilityService#onServiceConnected()} has not yet been
+ called) or the service has been disconnected, this method will have
+ no effect and return {@code false}.
+@param {Number} centerX the unscaled screen-relative X coordinate on which to
+                center the viewport
+@param {Number} centerY the unscaled screen-relative Y coordinate on which to
+                center the viewport
+@param {Boolean} animate {@code true} to animate from the current viewport
+                center or {@code false} to set the center immediately
+@return {Boolean} {@code true} on success, {@code false} on failure
+*/
+setCenter : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

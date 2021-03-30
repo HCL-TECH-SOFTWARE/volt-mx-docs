@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-WindowConfiguration'>/**@class android.app.WindowConfiguration
+</span> implements android.os.Parcelable
+
+ implements java.lang.Comparable
+
+@extends java.lang.Object
+
+ Class that contains windowing configuration/state for other objects that contain windows directly
+ or indirectly. E.g. Activities, Task, Displays, ...
+ The test class is {@link com.android.server.wm.WindowConfigurationTests} which must be kept
+ up-to-date and ran anytime changes are made to this class.
+ @hide
+*/
+var WindowConfiguration = {
+
+<span id='android-app-WindowConfiguration-property-ROTATION_UNDEFINED'>/**Rotation is not defined, use the parent containers rotation. */
+</span>ROTATION_UNDEFINED : &quot;-1&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOWING_MODE_UNDEFINED'>/**Windowing mode is currently not defined. */
+</span>WINDOWING_MODE_UNDEFINED : &quot;0&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOWING_MODE_FULLSCREEN'>/**Occupies the full area of the screen or the parent container. */
+</span>WINDOWING_MODE_FULLSCREEN : &quot;1&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOWING_MODE_PINNED'>/**Always on-top (always visible). of other siblings in its parent container. */
+</span>WINDOWING_MODE_PINNED : &quot;2&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOWING_MODE_SPLIT_SCREEN_PRIMARY'>/**The primary container driving the screen to be in split-screen mode. */
+</span>WINDOWING_MODE_SPLIT_SCREEN_PRIMARY : &quot;3&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOWING_MODE_SPLIT_SCREEN_SECONDARY'>/** The containers adjacent to the {@link #WINDOWING_MODE_SPLIT_SCREEN_PRIMARY} container in
+</span> split-screen mode.
+ NOTE: Containers launched with the windowing mode with APIs like
+ {@link android.app.ActivityOptions#setLaunchWindowingMode(int)} will be launched in
+ {@link #WINDOWING_MODE_FULLSCREEN} if the display isn't currently in split-screen windowing
+ mode
+ @see #WINDOWING_MODE_FULLSCREEN_OR_SPLIT_SCREEN_SECONDARY
+*/
+WINDOWING_MODE_SPLIT_SCREEN_SECONDARY : &quot;4&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOWING_MODE_FULLSCREEN_OR_SPLIT_SCREEN_SECONDARY'>/** Alias for {@link #WINDOWING_MODE_SPLIT_SCREEN_SECONDARY} that makes it clear that the usage
+</span> points for APIs like {@link android.app.ActivityOptions#setLaunchWindowingMode(int)} that the container
+ will launch into fullscreen or split-screen secondary depending on if the device is currently
+ in fullscreen mode or split-screen mode.
+*/
+WINDOWING_MODE_FULLSCREEN_OR_SPLIT_SCREEN_SECONDARY : &quot;4&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOWING_MODE_FREEFORM'>/**Can be freely resized within its parent container. */
+</span>WINDOWING_MODE_FREEFORM : &quot;5&quot;,
+<span id='android-app-WindowConfiguration-property-ACTIVITY_TYPE_UNDEFINED'>/**Activity type is currently not defined. */
+</span>ACTIVITY_TYPE_UNDEFINED : &quot;0&quot;,
+<span id='android-app-WindowConfiguration-property-ACTIVITY_TYPE_STANDARD'>/**Standard activity type. Nothing special about the activity... */
+</span>ACTIVITY_TYPE_STANDARD : &quot;1&quot;,
+<span id='android-app-WindowConfiguration-property-ACTIVITY_TYPE_HOME'>/**Home/Launcher activity type. */
+</span>ACTIVITY_TYPE_HOME : &quot;2&quot;,
+<span id='android-app-WindowConfiguration-property-ACTIVITY_TYPE_RECENTS'>/**Recents/Overview activity type. There is only one activity with this type in the system. */
+</span>ACTIVITY_TYPE_RECENTS : &quot;3&quot;,
+<span id='android-app-WindowConfiguration-property-ACTIVITY_TYPE_ASSISTANT'>/**Assistant activity type. */
+</span>ACTIVITY_TYPE_ASSISTANT : &quot;4&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOW_CONFIG_BOUNDS'>/**Bit that indicates that the {@link #mBounds} changed.
+</span> @hide */
+WINDOW_CONFIG_BOUNDS : &quot;1&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOW_CONFIG_APP_BOUNDS'>/**Bit that indicates that the {@link #mAppBounds} changed.
+</span> @hide */
+WINDOW_CONFIG_APP_BOUNDS : &quot;2&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOW_CONFIG_WINDOWING_MODE'>/**Bit that indicates that the {@link #mWindowingMode} changed.
+</span> @hide */
+WINDOW_CONFIG_WINDOWING_MODE : &quot;4&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOW_CONFIG_ACTIVITY_TYPE'>/**Bit that indicates that the {@link #mActivityType} changed.
+</span> @hide */
+WINDOW_CONFIG_ACTIVITY_TYPE : &quot;8&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOW_CONFIG_ALWAYS_ON_TOP'>/**Bit that indicates that the {@link #mAlwaysOnTop} changed.
+</span> @hide */
+WINDOW_CONFIG_ALWAYS_ON_TOP : &quot;16&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOW_CONFIG_ROTATION'>/**Bit that indicates that the {@link #mRotation} changed.
+</span> @hide */
+WINDOW_CONFIG_ROTATION : &quot;32&quot;,
+<span id='android-app-WindowConfiguration-property-WINDOW_CONFIG_DISPLAY_WINDOWING_MODE'>/**Bit that indicates that the {@link #mDisplayWindowingMode} changed.
+</span> @hide */
+WINDOW_CONFIG_DISPLAY_WINDOWING_MODE : &quot;64&quot;,
+<span id='android-app-WindowConfiguration-property-PINNED_WINDOWING_MODE_ELEVATION_IN_DIP'>/**@hide */
+</span>PINNED_WINDOWING_MODE_ELEVATION_IN_DIP : &quot;5&quot;,
+<span id='android-app-WindowConfiguration-property-CREATOR'>/**@hide */
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-WindowConfiguration-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-setBounds'>/**Sets the bounds to the provided {@link Rect}.
+</span>@param {Object {Rect}} rect the new bounds value.
+*/
+setBounds : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-setAppBounds'>/**Set {@link #mAppBounds} to the input Rect.
+</span>@param {Object {Rect}} rect The rect value to set {@link #mAppBounds} to.
+@see #getAppBounds()
+*/
+setAppBounds : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-setAlwaysOnTop'>/**Sets whether this window should be always on top.
+</span>@param {Boolean} alwaysOnTop {@code true} to set window always on top, otherwise {@code false}
+@hide 
+*/
+setAlwaysOnTop : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-setAppBounds'>/**
+</span>@see #setAppBounds(Rect)
+@see #getAppBounds()
+@hide 
+*/
+setAppBounds : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-getAppBounds'>/**
+</span>@see #setAppBounds(Rect)
+*/
+getAppBounds : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-getBounds'>/**
+</span>@see #setBounds(Rect)
+*/
+getBounds : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-getRotation'>/**
+</span>*/
+getRotation : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-setRotation'>/**
+</span>*/
+setRotation : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-setWindowingMode'>/**
+</span>*/
+setWindowingMode : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-getWindowingMode'>/**
+</span>*/
+getWindowingMode : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-setDisplayWindowingMode'>/**
+</span>@hide 
+*/
+setDisplayWindowingMode : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-setActivityType'>/**
+</span>*/
+setActivityType : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-getActivityType'>/**
+</span>*/
+getActivityType : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-setTo'>/**
+</span>*/
+setTo : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-unset'>/**Set this object to completely undefined.
+</span>@hide 
+*/
+unset : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-setToDefaults'>/**
+</span>@hide 
+*/
+setToDefaults : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-updateFrom'>/**Copies the fields from delta into this Configuration object, keeping
+</span> track of which ones have changed. Any undefined fields in {@code delta}
+ are ignored and not copied in to the current Configuration.
+@return {Number} a bit mask of the changed fields, as per {@link #diff}
+@hide 
+*/
+updateFrom : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-diff'>/**Return a bit mask of the differences between this Configuration object and the given one.
+</span> Does not change the values of either. Any undefined fields in &lt;var&gt;other&lt;/var&gt; are ignored.
+@param {Object {WindowConfiguration}} other The configuration to diff against.
+@param {Boolean} compareUndefined If undefined values should be compared.
+@return {Number} Returns a bit mask indicating which configuration
+ values has changed, containing any combination of {@link WindowConfig} flags.
+@see Configuration#diff(Configuration)
+@hide 
+*/
+diff : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-compareTo'>/**
+</span>*/
+compareTo : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-equals'>/**
+</span>@hide 
+*/
+equals : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-hashCode'>/**
+</span>@hide 
+*/
+hashCode : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-toString'>/**
+</span>@hide 
+*/
+toString : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-writeToProto'>/**Write to a protocol buffer output stream.
+</span> Protocol buffer message definition at {@link android.app.WindowConfigurationProto}
+@param {Object {ProtoOutputStream}} protoOutputStream Stream to write the WindowConfiguration object to.
+@param {Number} fieldId           Field Id of the WindowConfiguration as defined in the parent message
+@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-readFromProto'>/**Read from a protocol buffer input stream.
+</span> Protocol buffer message definition at {@link android.app.WindowConfigurationProto}
+@param {Object {ProtoInputStream}} proto   Stream to read the WindowConfiguration object from.
+@param {Number} fieldId Field Id of the WindowConfiguration as defined in the parent message
+@hide 
+*/
+readFromProto : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-hasWindowShadow'>/**Returns true if the activities associated with this window configuration display a shadow
+</span> around their border.
+@hide 
+*/
+hasWindowShadow : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-hasWindowDecorCaption'>/**Returns true if the activities associated with this window configuration display a decor
+</span> view.
+@hide 
+*/
+hasWindowDecorCaption : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-canResizeTask'>/**Returns true if the tasks associated with this window configuration can be resized
+</span> independently of their parent container.
+@hide 
+*/
+canResizeTask : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-persistTaskBounds'>/**Returns true if the task bounds should persist across power cycles.
+</span>@hide 
+*/
+persistTaskBounds : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-tasksAreFloating'>/**Returns true if the tasks associated with this window configuration are floating.
+</span> Floating tasks are laid out differently as they are allowed to extend past the display bounds
+ without overscan insets.
+@hide 
+*/
+tasksAreFloating : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-isFloating'>/**Returns true if the windowingMode represents a floating window.
+</span>@hide 
+*/
+isFloating : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-isSplitScreenWindowingMode'>/**Returns true if the windowingMode represents a split window.
+</span>@hide 
+*/
+isSplitScreenWindowingMode : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-canReceiveKeys'>/**Returns true if the windows associated with this window configuration can receive input keys.
+</span>@hide 
+*/
+canReceiveKeys : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-isAlwaysOnTop'>/**Returns true if the container associated with this window configuration is always-on-top of
+</span> its siblings.
+@hide 
+*/
+isAlwaysOnTop : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-keepVisibleDeadAppWindowOnScreen'>/**Returns true if any visible windows belonging to apps with this window configuration should
+</span> be kept on screen when the app is killed due to something like the low memory killer.
+@hide 
+*/
+keepVisibleDeadAppWindowOnScreen : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-useWindowFrameForBackdrop'>/**Returns true if the backdrop on the client side should match the frame of the window.
+</span> Returns false, if the backdrop should be fullscreen.
+@hide 
+*/
+useWindowFrameForBackdrop : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-windowsAreScaleable'>/**Returns true if this container may be scaled without resizing, and windows within may need
+</span> to be configured as such.
+@hide 
+*/
+windowsAreScaleable : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-hasMovementAnimations'>/**Returns true if windows in this container should be given move animations by default.
+</span>@hide 
+*/
+hasMovementAnimations : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-supportSplitScreenWindowingMode'>/**Returns true if this container can be put in either
+</span> {@link #WINDOWING_MODE_SPLIT_SCREEN_PRIMARY} or
+ {@link #WINDOWING_MODE_SPLIT_SCREEN_SECONDARY} windowing modes based on its current state.
+@hide 
+*/
+supportSplitScreenWindowingMode : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-supportSplitScreenWindowingMode'>/**
+</span>@hide 
+*/
+supportSplitScreenWindowingMode : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-windowingModeToString'>/**
+</span>@hide 
+*/
+windowingModeToString : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-activityTypeToString'>/**
+</span>@hide 
+*/
+activityTypeToString : function(  ) {},
+
+<span id='android-app-WindowConfiguration-method-alwaysOnTopToString'>/**
+</span>@hide 
+*/
+alwaysOnTopToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

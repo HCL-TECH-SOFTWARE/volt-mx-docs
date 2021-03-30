@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-Instrumentation-ActivityMonitor'>/**@class android.app.Instrumentation.ActivityMonitor
+</span>@extends java.lang.Object
+
+ Information about a particular kind of Intent that is being monitored.
+ An instance of this class is added to the 
+ current instrumentation through {@link #addMonitor}; after being added, 
+ when a new activity is being started the monitor will be checked and, if 
+ matching, its hit count updated and (optionally) the call stopped and a 
+ canned result returned.
+ 
+ &lt;p&gt;An ActivityMonitor can also be used to look for the creation of an
+ activity, through the {@link #waitForActivity} method.  This will return
+ after a matching activity has been created with that activity object.
+*/
+var ActivityMonitor = {
+
+<span id='android-app-Instrumentation-ActivityMonitor-method-getFilter'>/**Retrieve the filter associated with this ActivityMonitor.
+</span>*/
+getFilter : function(  ) {},
+
+<span id='android-app-Instrumentation-ActivityMonitor-method-getResult'>/**Retrieve the result associated with this ActivityMonitor, or null if 
+</span> none.
+*/
+getResult : function(  ) {},
+
+<span id='android-app-Instrumentation-ActivityMonitor-method-isBlocking'>/**Check whether this monitor blocks activity starts (not allowing the 
+</span> actual activity to run) or allows them to execute normally.
+*/
+isBlocking : function(  ) {},
+
+<span id='android-app-Instrumentation-ActivityMonitor-method-getHits'>/**Retrieve the number of times the monitor has been hit so far.
+</span>*/
+getHits : function(  ) {},
+
+<span id='android-app-Instrumentation-ActivityMonitor-method-getLastActivity'>/**Retrieve the most recent activity class that was seen by this 
+</span> monitor.
+*/
+getLastActivity : function(  ) {},
+
+<span id='android-app-Instrumentation-ActivityMonitor-method-waitForActivity'>/**Block until an Activity is created that matches this monitor, 
+</span> returning the resulting activity.
+@return {Object {android.app.Activity}} Activity
+*/
+waitForActivity : function(  ) {},
+
+<span id='android-app-Instrumentation-ActivityMonitor-method-waitForActivityWithTimeout'>/**Block until an Activity is created that matches this monitor, 
+</span> returning the resulting activity or till the timeOut period expires.
+ If the timeOut expires before the activity is started, return null.
+@param {Number} timeOut Time to wait in milliseconds before the activity is created.
+@return {Object {android.app.Activity}} Activity
+*/
+waitForActivityWithTimeout : function(  ) {},
+
+<span id='android-app-Instrumentation-ActivityMonitor-method-onStartActivity'>/**Used for intercepting any started activity.
+</span>
+ &lt;p&gt; A non-null return value here will be considered a hit for this monitor.
+ By default this will return {@code null} and subclasses can override this to return
+ a non-null value if the intent needs to be intercepted.
+
+ &lt;p&gt; Whenever a new activity is started, this method will be called on instances created
+ using {@link #Instrumentation.ActivityMonitor()} to check if there is a match. In case
+ of a match, the activity start will be blocked and the returned result will be used.
+@param {Object {Intent}} intent The intent used for starting the activity.
+@return {Object {android.app.Instrumentation.ActivityResult}} The {@link ActivityResult} that needs to be used in case of a match.
+*/
+onStartActivity : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-annotation-RequiresPermission'>/**@class android.annotation.RequiresPermission
+</span> implements java.lang.annotation.Annotation
+
+ Denotes that the annotated element requires (or may require) one or more permissions.
+ &lt;p/&gt;
+ Example of requiring a single permission:
+ &lt;pre&gt;{@code
+   {@literal @}RequiresPermission(Manifest.permission.SET_WALLPAPER)
+   public abstract void setWallpaper(Bitmap bitmap) throws IOException;
+
+   {@literal @}RequiresPermission(ACCESS_COARSE_LOCATION)
+   public abstract Location getLastKnownLocation(String provider);
+ }&lt;/pre&gt;
+ Example of requiring at least one permission from a set:
+ &lt;pre&gt;{@code
+   {@literal @}RequiresPermission(anyOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
+   public abstract Location getLastKnownLocation(String provider);
+ }&lt;/pre&gt;
+ Example of requiring multiple permissions:
+ &lt;pre&gt;{@code
+   {@literal @}RequiresPermission(allOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
+   public abstract Location getLastKnownLocation(String provider);
+ }&lt;/pre&gt;
+ Example of requiring separate read and write permissions for a content provider:
+ &lt;pre&gt;{@code
+   {@literal @}RequiresPermission.Read(@RequiresPermission(READ_HISTORY_BOOKMARKS))
+   {@literal @}RequiresPermission.Write(@RequiresPermission(WRITE_HISTORY_BOOKMARKS))
+   public static final Uri BOOKMARKS_URI = Uri.parse(&quot;content://browser/bookmarks&quot;);
+ }&lt;/pre&gt;
+ &lt;p&gt;
+ When specified on a parameter, the annotation indicates that the method requires
+ a permission which depends on the value of the parameter. For example, consider
+ {@link android.app.Activity#startActivity(Intent)}:
+ &lt;pre&gt;{@code
+   public void startActivity(@RequiresPermission Intent intent) { ... }
+ }&lt;/pre&gt;
+ Notice how there are no actual permission names listed in the annotation. The actual
+ permissions required will depend on the particular intent passed in. For example,
+ the code may look like this:
+ &lt;pre&gt;{@code
+   Intent intent = new Intent(Intent.ACTION_CALL);
+   startActivity(intent);
+ }&lt;/pre&gt;
+ and the actual permission requirement for this particular intent is described on
+ the Intent name itself:
+ &lt;pre&gt;{@code
+   {@literal @}RequiresPermission(Manifest.permission.CALL_PHONE)
+   public static final String ACTION_CALL = &quot;android.intent.action.CALL&quot;;
+ }&lt;/pre&gt;
+
+ @hide
+*/
+var RequiresPermission = {
+
+<span id='android-annotation-RequiresPermission-method-value'>/**The name of the permission that is required, if precisely one permission
+</span> is required. If more than one permission is required, specify either
+ {@link #allOf}() or {@link #anyOf}() instead.
+ &lt;p&gt;
+ If specified, {@link #anyOf}() and {@link #allOf}() must both be null.
+*/
+value : function(  ) {},
+
+<span id='android-annotation-RequiresPermission-method-allOf'>/**Specifies a list of permission names that are all required.
+</span> &lt;p&gt;
+ If specified, {@link #anyOf}() and {@link #value}() must both be null.
+*/
+allOf : function(  ) {},
+
+<span id='android-annotation-RequiresPermission-method-anyOf'>/**Specifies a list of permission names where at least one is required
+</span> &lt;p&gt;
+ If specified, {@link #allOf}() and {@link #value}() must both be null.
+*/
+anyOf : function(  ) {},
+
+<span id='android-annotation-RequiresPermission-method-conditional'>/**If true, the permission may not be required in all cases (e.g. it may only be
+</span> enforced on certain platforms, or for certain call parameters, etc.
+*/
+conditional : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-ActivityOptions'>/**@class android.app.ActivityOptions
+</span>@extends java.lang.Object
+
+ Helper class for building an options Bundle that can be used with
+ {@link android.content.Context#startActivity(android.content.Intent, android.os.Bundle)
+ Context.startActivity(Intent, Bundle)} and related methods.
+*/
+var ActivityOptions = {
+
+<span id='android-app-ActivityOptions-property-EXTRA_USAGE_TIME_REPORT'>/** A long in the extras delivered by {@link #requestUsageTimeReport} that contains
+</span> the total time (in ms) the user spent in the app flow.
+*/
+EXTRA_USAGE_TIME_REPORT : &quot;android.activity.usage_time&quot;,
+<span id='android-app-ActivityOptions-property-EXTRA_USAGE_TIME_REPORT_PACKAGES'>/** A Bundle in the extras delivered by {@link #requestUsageTimeReport} that contains
+</span> detailed information about the time spent in each package associated with the app;
+ each key is a package name, whose value is a long containing the time (in ms).
+*/
+EXTRA_USAGE_TIME_REPORT_PACKAGES : &quot;android.usage_time_packages&quot;,
+<span id='android-app-ActivityOptions-property-KEY_PACKAGE_NAME'>/** The package name that created the options.
+</span> @hide
+*/
+KEY_PACKAGE_NAME : &quot;android:activity.packageName&quot;,
+<span id='android-app-ActivityOptions-property-KEY_LAUNCH_BOUNDS'>/** The bounds (window size) that the activity should be launched in. Set to null explicitly for
+</span> full screen. If the key is not found, previous bounds will be preserved.
+ NOTE: This value is ignored on devices that don't have
+ {@link android.content.pm.PackageManager#FEATURE_FREEFORM_WINDOW_MANAGEMENT} or
+ {@link android.content.pm.PackageManager#FEATURE_PICTURE_IN_PICTURE} enabled.
+ @hide
+*/
+KEY_LAUNCH_BOUNDS : &quot;android:activity.launchBounds&quot;,
+<span id='android-app-ActivityOptions-property-KEY_ANIM_TYPE'>/** Type of animation that arguments specify.
+</span> @hide
+*/
+KEY_ANIM_TYPE : &quot;android:activity.animType&quot;,
+<span id='android-app-ActivityOptions-property-KEY_ANIM_ENTER_RES_ID'>/** Custom enter animation resource ID.
+</span> @hide
+*/
+KEY_ANIM_ENTER_RES_ID : &quot;android:activity.animEnterRes&quot;,
+<span id='android-app-ActivityOptions-property-KEY_ANIM_EXIT_RES_ID'>/** Custom exit animation resource ID.
+</span> @hide
+*/
+KEY_ANIM_EXIT_RES_ID : &quot;android:activity.animExitRes&quot;,
+<span id='android-app-ActivityOptions-property-KEY_ANIM_IN_PLACE_RES_ID'>/** Custom in-place animation resource ID.
+</span> @hide
+*/
+KEY_ANIM_IN_PLACE_RES_ID : &quot;android:activity.animInPlaceRes&quot;,
+<span id='android-app-ActivityOptions-property-KEY_ANIM_THUMBNAIL'>/** Bitmap for thumbnail animation.
+</span> @hide
+*/
+KEY_ANIM_THUMBNAIL : &quot;android:activity.animThumbnail&quot;,
+<span id='android-app-ActivityOptions-property-KEY_ANIM_START_X'>/** Start X position of thumbnail animation.
+</span> @hide
+*/
+KEY_ANIM_START_X : &quot;android:activity.animStartX&quot;,
+<span id='android-app-ActivityOptions-property-KEY_ANIM_START_Y'>/** Start Y position of thumbnail animation.
+</span> @hide
+*/
+KEY_ANIM_START_Y : &quot;android:activity.animStartY&quot;,
+<span id='android-app-ActivityOptions-property-KEY_ANIM_WIDTH'>/** Initial width of the animation.
+</span> @hide
+*/
+KEY_ANIM_WIDTH : &quot;android:activity.animWidth&quot;,
+<span id='android-app-ActivityOptions-property-KEY_ANIM_HEIGHT'>/** Initial height of the animation.
+</span> @hide
+*/
+KEY_ANIM_HEIGHT : &quot;android:activity.animHeight&quot;,
+<span id='android-app-ActivityOptions-property-KEY_ANIM_START_LISTENER'>/** Callback for when animation is started.
+</span> @hide
+*/
+KEY_ANIM_START_LISTENER : &quot;android:activity.animStartListener&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_NONE'>/**@hide */
+</span>ANIM_NONE : &quot;0&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_CUSTOM'>/**@hide */
+</span>ANIM_CUSTOM : &quot;1&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_SCALE_UP'>/**@hide */
+</span>ANIM_SCALE_UP : &quot;2&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_THUMBNAIL_SCALE_UP'>/**@hide */
+</span>ANIM_THUMBNAIL_SCALE_UP : &quot;3&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_THUMBNAIL_SCALE_DOWN'>/**@hide */
+</span>ANIM_THUMBNAIL_SCALE_DOWN : &quot;4&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_SCENE_TRANSITION'>/**@hide */
+</span>ANIM_SCENE_TRANSITION : &quot;5&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_DEFAULT'>/**@hide */
+</span>ANIM_DEFAULT : &quot;6&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_LAUNCH_TASK_BEHIND'>/**@hide */
+</span>ANIM_LAUNCH_TASK_BEHIND : &quot;7&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_THUMBNAIL_ASPECT_SCALE_UP'>/**@hide */
+</span>ANIM_THUMBNAIL_ASPECT_SCALE_UP : &quot;8&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_THUMBNAIL_ASPECT_SCALE_DOWN'>/**@hide */
+</span>ANIM_THUMBNAIL_ASPECT_SCALE_DOWN : &quot;9&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_CUSTOM_IN_PLACE'>/**@hide */
+</span>ANIM_CUSTOM_IN_PLACE : &quot;10&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_CLIP_REVEAL'>/**@hide */
+</span>ANIM_CLIP_REVEAL : &quot;11&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_OPEN_CROSS_PROFILE_APPS'>/**@hide */
+</span>ANIM_OPEN_CROSS_PROFILE_APPS : &quot;12&quot;,
+<span id='android-app-ActivityOptions-property-ANIM_REMOTE_ANIMATION'>/**@hide */
+</span>ANIM_REMOTE_ANIMATION : &quot;13&quot;,
+<span id='android-app-ActivityOptions-method-makeCustomAnimation'>/**Create an ActivityOptions specifying a custom animation to run when
+</span> the activity is displayed.
+@param {Object {Context}} context Who is defining this.  This is the application that the
+ animation resources will be loaded from.
+@param {Number} enterResId A resource ID of the animation resource to use for
+ the incoming activity.  Use 0 for no animation.
+@param {Number} exitResId A resource ID of the animation resource to use for
+ the outgoing activity.  Use 0 for no animation.
+@return {Object {android.app.ActivityOptions}} Returns a new ActivityOptions object that you can use to
+ supply these options as the options Bundle when starting an activity.
+*/
+makeCustomAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeCustomAnimation'>/**Create an ActivityOptions specifying a custom animation to run when
+</span> the activity is displayed.
+@param {Object {Context}} context Who is defining this.  This is the application that the
+ animation resources will be loaded from.
+@param {Number} enterResId A resource ID of the animation resource to use for
+ the incoming activity.  Use 0 for no animation.
+@param {Number} exitResId A resource ID of the animation resource to use for
+ the outgoing activity.  Use 0 for no animation.
+@param {Object {Handler}} handler If &lt;var&gt;listener&lt;/var&gt; is non-null this must be a valid
+ Handler on which to dispatch the callback; otherwise it should be null.
+@param {Object {ActivityOptions.OnAnimationStartedListener}} listener Optional OnAnimationStartedListener to find out when the
+ requested animation has started running.  If for some reason the animation
+ is not executed, the callback will happen immediately.
+@return {Object {android.app.ActivityOptions}} Returns a new ActivityOptions object that you can use to
+ supply these options as the options Bundle when starting an activity.
+@hide 
+*/
+makeCustomAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeCustomInPlaceAnimation'>/**Creates an ActivityOptions specifying a custom animation to run in place on an existing
+</span> activity.
+@param {Object {Context}} context Who is defining this.  This is the application that the
+ animation resources will be loaded from.
+@param {Number} animId A resource ID of the animation resource to use for
+ the incoming activity.
+@return {Object {android.app.ActivityOptions}} Returns a new ActivityOptions object that you can use to
+ supply these options as the options Bundle when running an in-place animation.
+@hide 
+*/
+makeCustomInPlaceAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeScaleUpAnimation'>/**Create an ActivityOptions specifying an animation where the new
+</span> activity is scaled from a small originating area of the screen to
+ its final full representation.
+
+ &lt;p&gt;If the Intent this is being used with has not set its
+ {@link android.content.Intent#setSourceBounds Intent.setSourceBounds},
+ those bounds will be filled in for you based on the initial
+ bounds passed in here.
+@param {Object {View}} source The View that the new activity is animating from.  This
+ defines the coordinate space for &lt;var&gt;startX&lt;/var&gt; and &lt;var&gt;startY&lt;/var&gt;.
+@param {Number} startX The x starting location of the new activity, relative to &lt;var&gt;source&lt;/var&gt;.
+@param {Number} startY The y starting location of the activity, relative to &lt;var&gt;source&lt;/var&gt;.
+@param {Number} width The initial width of the new activity.
+@param {Number} height The initial height of the new activity.
+@return {Object {android.app.ActivityOptions}} Returns a new ActivityOptions object that you can use to
+ supply these options as the options Bundle when starting an activity.
+*/
+makeScaleUpAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeClipRevealAnimation'>/**Create an ActivityOptions specifying an animation where the new
+</span> activity is revealed from a small originating area of the screen to
+ its final full representation.
+@param {Object {View}} source The View that the new activity is animating from.  This
+ defines the coordinate space for &lt;var&gt;startX&lt;/var&gt; and &lt;var&gt;startY&lt;/var&gt;.
+@param {Number} startX The x starting location of the new activity, relative to &lt;var&gt;source&lt;/var&gt;.
+@param {Number} startY The y starting location of the activity, relative to &lt;var&gt;source&lt;/var&gt;.
+@param {Number} width The initial width of the new activity.
+@param {Number} height The initial height of the new activity.
+@return {Object {android.app.ActivityOptions}} Returns a new ActivityOptions object that you can use to
+ supply these options as the options Bundle when starting an activity.
+*/
+makeClipRevealAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeOpenCrossProfileAppsAnimation'>/**Creates an {@link android.app.ActivityOptions} object specifying an animation where the new activity
+</span> is started in another user profile by calling {@link android.content.pm.crossprofile.CrossProfileApps#startMainActivity(ComponentName, UserHandle)
+ }.
+@hide 
+*/
+makeOpenCrossProfileAppsAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeThumbnailScaleUpAnimation'>/**Create an ActivityOptions specifying an animation where a thumbnail
+</span> is scaled from a given position to the new activity window that is
+ being started.
+
+ &lt;p&gt;If the Intent this is being used with has not set its
+ {@link android.content.Intent#setSourceBounds Intent.setSourceBounds},
+ those bounds will be filled in for you based on the initial
+ thumbnail location and size provided here.
+@param {Object {View}} source The View that this thumbnail is animating from.  This
+ defines the coordinate space for &lt;var&gt;startX&lt;/var&gt; and &lt;var&gt;startY&lt;/var&gt;.
+@param {Object {Bitmap}} thumbnail The bitmap that will be shown as the initial thumbnail
+ of the animation.
+@param {Number} startX The x starting location of the bitmap, relative to &lt;var&gt;source&lt;/var&gt;.
+@param {Number} startY The y starting location of the bitmap, relative to &lt;var&gt;source&lt;/var&gt;.
+@return {Object {android.app.ActivityOptions}} Returns a new ActivityOptions object that you can use to
+ supply these options as the options Bundle when starting an activity.
+*/
+makeThumbnailScaleUpAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeMultiThumbFutureAspectScaleAnimation'>/**Create an ActivityOptions specifying an animation where a list of activity windows and
+</span> thumbnails are aspect scaled to/from a new location.
+@hide 
+*/
+makeMultiThumbFutureAspectScaleAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeThumbnailAspectScaleDownAnimation'>/**Create an ActivityOptions specifying an animation where the new activity
+</span> window and a thumbnail is aspect-scaled to a new location.
+@param {Object {View}} source The View that this thumbnail is animating to.  This
+ defines the coordinate space for &lt;var&gt;startX&lt;/var&gt; and &lt;var&gt;startY&lt;/var&gt;.
+@param {Object {Bitmap}} thumbnail The bitmap that will be shown as the final thumbnail
+ of the animation.
+@param {Number} startX The x end location of the bitmap, relative to &lt;var&gt;source&lt;/var&gt;.
+@param {Number} startY The y end location of the bitmap, relative to &lt;var&gt;source&lt;/var&gt;.
+@param {Number} handler If &lt;var&gt;listener&lt;/var&gt; is non-null this must be a valid
+ Handler on which to dispatch the callback; otherwise it should be null.
+@param {Number} listener Optional OnAnimationStartedListener to find out when the
+ requested animation has started running.  If for some reason the animation
+ is not executed, the callback will happen immediately.
+@return {Object {android.app.ActivityOptions}} Returns a new ActivityOptions object that you can use to
+ supply these options as the options Bundle when starting an activity.
+@hide 
+*/
+makeThumbnailAspectScaleDownAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeThumbnailAspectScaleDownAnimation'>/**
+</span>@hide 
+*/
+makeThumbnailAspectScaleDownAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeSceneTransitionAnimation'>/**Create an ActivityOptions to transition between Activities using cross-Activity scene
+</span> animations. This method carries the position of one shared element to the started Activity.
+ The position of &lt;code&gt;sharedElement&lt;/code&gt; will be used as the epicenter for the
+ exit Transition. The position of the shared element in the launched Activity will be the
+ epicenter of its entering Transition.
+
+ &lt;p&gt;This requires {@link android.view.Window#FEATURE_ACTIVITY_TRANSITIONS} to be
+ enabled on the calling Activity to cause an exit transition. The same must be in
+ the called Activity to get an entering transition.&lt;/p&gt;
+@param {Object {Activity}} activity The Activity whose window contains the shared elements.
+@param {Object {View}} sharedElement The View to transition to the started Activity.
+@param {String} sharedElementName The shared element name as used in the target Activity. This
+                          must not be null.
+@return {Object {android.app.ActivityOptions}} Returns a new ActivityOptions object that you can use to
+         supply these options as the options Bundle when starting an activity.
+@see android.transition.Transition#setEpicenterCallback(
+          android.transition.Transition.EpicenterCallback)
+*/
+makeSceneTransitionAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeSceneTransitionAnimation'>/**Create an ActivityOptions to transition between Activities using cross-Activity scene
+</span> animations. This method carries the position of multiple shared elements to the started
+ Activity. The position of the first element in sharedElements
+ will be used as the epicenter for the exit Transition. The position of the associated
+ shared element in the launched Activity will be the epicenter of its entering Transition.
+
+ &lt;p&gt;This requires {@link android.view.Window#FEATURE_ACTIVITY_TRANSITIONS} to be
+ enabled on the calling Activity to cause an exit transition. The same must be in
+ the called Activity to get an entering transition.&lt;/p&gt;
+@param {Object {Activity}} activity The Activity whose window contains the shared elements.
+@param {Object {android.util.Pair[]}} sharedElements The names of the shared elements to transfer to the called
+                       Activity and their associated Views. The Views must each have
+                       a unique shared element name.
+@return {Object {android.app.ActivityOptions}} Returns a new ActivityOptions object that you can use to
+         supply these options as the options Bundle when starting an activity.
+@see android.transition.Transition#setEpicenterCallback(
+          android.transition.Transition.EpicenterCallback)
+*/
+makeSceneTransitionAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-startSharedElementAnimation'>/**Call this immediately prior to startActivity to begin a shared element transition
+</span> from a non-Activity. The window must support Window.FEATURE_ACTIVITY_TRANSITIONS.
+ The exit transition will start immediately and the shared element transition will
+ start once the launched Activity's shared element is ready.
+ &lt;p&gt;
+ When all transitions have completed and the shared element has been transfered,
+ the window's decor View will have its visibility set to View.GONE.
+@hide 
+*/
+startSharedElementAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-stopSharedElementAnimation'>/**This method should be called when the {@link #startSharedElementAnimation(Window, Pair[])}
+</span> animation must be stopped and the Views reset. This can happen if there was an error
+ from startActivity or a springboard activity and the animation should stop and reset.
+@hide 
+*/
+stopSharedElementAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeTaskLaunchBehind'>/**If set along with Intent.FLAG_ACTIVITY_NEW_DOCUMENT then the task being launched will not be
+</span> presented to the user but will instead be only available through the recents task list.
+ In addition, the new task wil be affiliated with the launching activity's task.
+ Affiliated tasks are grouped together in the recents task list.
+
+ &lt;p&gt;This behavior is not supported for activities with {@link android.R.styleable#AndroidManifestActivity_launchMode launchMode} values of
+ &lt;code&gt;singleInstance&lt;/code&gt; or &lt;code&gt;singleTask&lt;/code&gt;.
+*/
+makeTaskLaunchBehind : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeBasic'>/**Create a basic ActivityOptions that has no special animation associated with it.
+</span> Other options can still be set.
+*/
+makeBasic : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-makeRemoteAnimation'>/**Create an {@link android.app.ActivityOptions} instance that lets the application control the entire
+</span> animation using a {@link RemoteAnimationAdapter}.
+@hide 
+*/
+makeRemoteAnimation : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getLaunchTaskBehind'>/**
+</span>@hide 
+*/
+getLaunchTaskBehind : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setLaunchBounds'>/**Sets the bounds (window size and position) that the activity should be launched in.
+</span> Rect position should be provided in pixels and in screen coordinates.
+ Set to {@code null} to explicitly launch fullscreen.
+ &lt;p&gt;
+ &lt;strong&gt;NOTE:&lt;/strong&gt; This value is ignored on devices that don't have
+ {@link android.content.pm.PackageManager#FEATURE_FREEFORM_WINDOW_MANAGEMENT} or
+ {@link android.content.pm.PackageManager#FEATURE_PICTURE_IN_PICTURE} enabled.
+@param {Object {Rect}} screenSpacePixelRect launch bounds or {@code null} for fullscreen
+@return {Object {android.app.ActivityOptions}} {@code this} {@link ActivityOptions} instance
+*/
+setLaunchBounds : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getPackageName'>/**
+</span>@hide 
+*/
+getPackageName : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getLaunchBounds'>/**Returns the bounds that should be used to launch the activity.
+</span>@see #setLaunchBounds(Rect)
+@return {Object {android.graphics.Rect}} Bounds used to launch the activity.
+*/
+getLaunchBounds : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getAnimationType'>/**
+</span>@hide 
+*/
+getAnimationType : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getCustomEnterResId'>/**
+</span>@hide 
+*/
+getCustomEnterResId : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getCustomExitResId'>/**
+</span>@hide 
+*/
+getCustomExitResId : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getCustomInPlaceResId'>/**
+</span>@hide 
+*/
+getCustomInPlaceResId : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getThumbnail'>/**The thumbnail is copied into a hardware bitmap when it is bundled and sent to the system, so
+</span> it should always be backed by a GraphicBuffer on the other end.
+@hide 
+*/
+getThumbnail : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getStartX'>/**
+</span>@hide 
+*/
+getStartX : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getStartY'>/**
+</span>@hide 
+*/
+getStartY : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getWidth'>/**
+</span>@hide 
+*/
+getWidth : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getHeight'>/**
+</span>@hide 
+*/
+getHeight : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getOnAnimationStartListener'>/**
+</span>@hide 
+*/
+getOnAnimationStartListener : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getAnimationFinishedListener'>/**
+</span>@hide 
+*/
+getAnimationFinishedListener : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getExitCoordinatorKey'>/**
+</span>@hide 
+*/
+getExitCoordinatorKey : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-abort'>/**
+</span>@hide 
+*/
+abort : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-isReturning'>/**
+</span>@hide 
+*/
+isReturning : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getSharedElementNames'>/**
+</span>@hide 
+*/
+getSharedElementNames : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getResultReceiver'>/**
+</span>@hide 
+*/
+getResultReceiver : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getResultCode'>/**
+</span>@hide 
+*/
+getResultCode : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getResultData'>/**
+</span>@hide 
+*/
+getResultData : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getUsageTimeReport'>/**
+</span>@hide 
+*/
+getUsageTimeReport : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getAnimSpecs'>/**
+</span>@hide 
+*/
+getAnimSpecs : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getSpecsFuture'>/**
+</span>@hide 
+*/
+getSpecsFuture : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getRemoteAnimationAdapter'>/**
+</span>@hide 
+*/
+getRemoteAnimationAdapter : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setRemoteAnimationAdapter'>/**
+</span>@hide 
+*/
+setRemoteAnimationAdapter : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-fromBundle'>/**
+</span>@hide 
+*/
+fromBundle : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-abort'>/**
+</span>@hide 
+*/
+abort : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getLockTaskMode'>/**Gets whether the activity is to be launched into LockTask mode.
+</span>@return {Boolean} {@code true} if the activity is to be launched into LockTask mode.
+@see Activity#startLockTask()
+@see android.app.admin.DevicePolicyManager#setLockTaskPackages(ComponentName, String[])
+*/
+getLockTaskMode : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setLockTaskEnabled'>/**Sets whether the activity is to be launched into LockTask mode.
+</span>
+ Use this option to start an activity in LockTask mode. Note that only apps permitted by
+ {@link android.app.admin.DevicePolicyManager} can run in LockTask mode. Therefore, if
+ {@link android.app.admin.DevicePolicyManager#isLockTaskPermitted(String)} returns
+ {@code false} for the package of the target activity, a {@link SecurityException} will be
+ thrown during {@link Context#startActivity(Intent, Bundle)}. This method doesn't affect
+ activities that are already running — relaunch the activity to run in lock task mode.
+
+ Defaults to {@code false} if not set.
+@param {Boolean} lockTaskMode {@code true} if the activity is to be launched into LockTask mode.
+@return {Object {android.app.ActivityOptions}} {@code this} {@link ActivityOptions} instance.
+@see Activity#startLockTask()
+@see android.app.admin.DevicePolicyManager#setLockTaskPackages(ComponentName, String[])
+*/
+setLockTaskEnabled : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getLaunchDisplayId'>/**Gets the id of the display where activity should be launched.
+</span>@return {Number} The id of the display where activity should be launched,
+         {@link android.view.Display#INVALID_DISPLAY} if not set.
+@see #setLaunchDisplayId(int)
+*/
+getLaunchDisplayId : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setLaunchDisplayId'>/**Sets the id of the display where activity should be launched.
+</span> An app can launch activities on public displays or private displays that are owned by the app
+ or where an app already has activities. Otherwise, trying to launch on a private display
+ or providing an invalid display id will result in an exception.
+ &lt;p&gt;
+ Setting launch display id will be ignored on devices that don't have
+ {@link android.content.pm.PackageManager#FEATURE_ACTIVITIES_ON_SECONDARY_DISPLAYS}.
+@param {Number} launchDisplayId The id of the display where the activity should be launched.
+@return {Object {android.app.ActivityOptions}} {@code this} {@link ActivityOptions} instance.
+*/
+setLaunchDisplayId : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getLaunchWindowingMode'>/**
+</span>@hide 
+*/
+getLaunchWindowingMode : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setLaunchWindowingMode'>/**Sets the windowing mode the activity should launch into. If the input windowing mode is
+</span> {@link android.app.WindowConfiguration#WINDOWING_MODE_SPLIT_SCREEN_SECONDARY} and the device
+ isn't currently in split-screen windowing mode, then the activity will be launched in
+ {@link android.app.WindowConfiguration#WINDOWING_MODE_FULLSCREEN} windowing mode. For clarity
+ on this you can use
+ {@link android.app.WindowConfiguration#WINDOWING_MODE_FULLSCREEN_OR_SPLIT_SCREEN_SECONDARY}
+@hide 
+*/
+setLaunchWindowingMode : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getLaunchActivityType'>/**
+</span>@hide 
+*/
+getLaunchActivityType : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setLaunchActivityType'>/**
+</span>@hide 
+*/
+setLaunchActivityType : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setLaunchTaskId'>/**Sets the task the activity will be launched in.
+</span>@hide 
+*/
+setLaunchTaskId : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getLaunchTaskId'>/**
+</span>@hide 
+*/
+getLaunchTaskId : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setPendingIntentLaunchFlags'>/**Specifies intent flags to be applied for any activity started from a PendingIntent.
+</span>@hide 
+*/
+setPendingIntentLaunchFlags : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getPendingIntentLaunchFlags'>/**
+</span>@hide 
+*/
+getPendingIntentLaunchFlags : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setTaskOverlay'>/**Set's whether the activity launched with this option should be a task overlay. That is the
+</span> activity will always be the top activity of the task.  If {@param canResume} is true, then
+ the task will also not be moved to the front of the stack.
+@hide 
+*/
+setTaskOverlay : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getTaskOverlay'>/**
+</span>@hide 
+*/
+getTaskOverlay : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-canTaskOverlayResume'>/**
+</span>@hide 
+*/
+canTaskOverlayResume : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setAvoidMoveToFront'>/**Sets whether the activity launched should not cause the activity stack it is contained in to
+</span> be moved to the front as a part of launching.
+@hide 
+*/
+setAvoidMoveToFront : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getAvoidMoveToFront'>/**
+</span>@return {Boolean} whether the activity launch should prevent moving the associated activity stack to
+         the front.
+@hide 
+*/
+getAvoidMoveToFront : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setFreezeRecentTasksReordering'>/**Sets whether the launch of this activity should freeze the recent task list reordering until
+</span> the next user interaction or timeout. This flag is only applied when starting an activity
+ in recents.
+@hide 
+*/
+setFreezeRecentTasksReordering : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-freezeRecentTasksReordering'>/**
+</span>@return {Boolean} whether the launch of this activity should freeze the recent task list reordering
+@hide 
+*/
+freezeRecentTasksReordering : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getSplitScreenCreateMode'>/**
+</span>@hide 
+*/
+getSplitScreenCreateMode : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setSplitScreenCreateMode'>/**
+</span>@hide 
+*/
+setSplitScreenCreateMode : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setDisallowEnterPictureInPictureWhileLaunching'>/**
+</span>@hide 
+*/
+setDisallowEnterPictureInPictureWhileLaunching : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-disallowEnterPictureInPictureWhileLaunching'>/**
+</span>@hide 
+*/
+disallowEnterPictureInPictureWhileLaunching : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-update'>/**Update the current values in this ActivityOptions from those supplied
+</span> in &lt;var&gt;otherOptions&lt;/var&gt;.  Any values
+ defined in &lt;var&gt;otherOptions&lt;/var&gt; replace those in the base options.
+*/
+update : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-toBundle'>/**Returns the created options as a Bundle, which can be passed to
+</span> {@link android.content.Context#startActivity(android.content.Intent, android.os.Bundle)
+ Context.startActivity(Intent, Bundle)} and related methods.
+ Note that the returned Bundle is still owned by the ActivityOptions
+ object; you must not modify it, but can supply it to the startActivity
+ methods that take an options Bundle.
+*/
+toBundle : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-requestUsageTimeReport'>/**Ask the system track that time the user spends in the app being launched, and
+</span> report it back once done.  The report will be sent to the given receiver, with
+ the extras {@link #EXTRA_USAGE_TIME_REPORT} and {@link #EXTRA_USAGE_TIME_REPORT_PACKAGES}
+ filled in.
+
+ &lt;p&gt;The time interval tracked is from launching this activity until the user leaves
+ that activity's flow.  They are considered to stay in the flow as long as
+ new activities are being launched or returned to from the original flow,
+ even if this crosses package or task boundaries.  For example, if the originator
+ starts an activity to view an image, and while there the user selects to share,
+ which launches their email app in a new task, and they complete the share, the
+ time during that entire operation will be included until they finally hit back from
+ the original image viewer activity.&lt;/p&gt;
+
+ &lt;p&gt;The user is considered to complete a flow once they switch to another
+ activity that is not part of the tracked flow.  This may happen, for example, by
+ using the notification shade, launcher, or recents to launch or switch to another
+ app.  Simply going in to these navigation elements does not break the flow (although
+ the launcher and recents stops time tracking of the session); it is the act of
+ going somewhere else that completes the tracking.&lt;/p&gt;
+@param {Object {PendingIntent}} receiver A broadcast receiver that willl receive the report.
+*/
+requestUsageTimeReport : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-forTargetActivity'>/**Return the filtered options only meant to be seen by the target activity itself
+</span>@hide 
+*/
+forTargetActivity : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-getRotationAnimationHint'>/**Returns the rotation animation set by {@link setRotationAnimationHint} or -1
+</span> if unspecified.
+@hide 
+*/
+getRotationAnimationHint : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setRotationAnimationHint'>/**Set a rotation animation to be used if launching the activity
+</span> triggers an orientation change, or -1 to clear. See
+ {@link android.view.WindowManager.LayoutParams} for rotation
+ animation values.
+@hide 
+*/
+setRotationAnimationHint : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-popAppVerificationBundle'>/**Pop the extra verification bundle for the installer.
+</span> This removes the bundle from the ActivityOptions to make sure the installer bundle
+ is only available once.
+@hide 
+*/
+popAppVerificationBundle : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-setAppVerificationBundle'>/**Set the {@link Bundle} that is provided to the app installer for additional verification
+</span> if the call to {@link Context#startActivity} results in an app being installed.
+
+ This Bundle is not provided to any other app besides the installer.
+*/
+setAppVerificationBundle : function(  ) {},
+
+<span id='android-app-ActivityOptions-method-toString'>/**
+</span>@hide 
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

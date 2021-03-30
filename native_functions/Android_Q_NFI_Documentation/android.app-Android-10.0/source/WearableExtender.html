@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-Notification-WearableExtender'>/**@class android.app.Notification.WearableExtender
+</span> implements android.app.Notification.Extender
+
+@extends java.lang.Object
+
+ Helper class to add wearable extensions to notifications.
+ &lt;p class=&quot;note&quot;&gt; See
+ &lt;a href=&quot;{@docRoot}wear/notifications/creating.html&quot;&gt;Creating Notifications
+ for Android Wear&lt;/a&gt; for more information on how to use this class.
+ &lt;p&gt;
+ To create a notification with wearable extensions:
+ &lt;ol&gt;
+   &lt;li&gt;Create a {@link android.app.Notification.Builder}, setting any desired
+   properties.
+   &lt;li&gt;Create a {@link android.app.Notification.WearableExtender}.
+   &lt;li&gt;Set wearable-specific properties using the
+   {@code add} and {@code set} methods of {@link android.app.Notification.WearableExtender}.
+   &lt;li&gt;Call {@link android.app.Notification.Builder#extend} to apply the extensions to a
+   notification.
+   &lt;li&gt;Post the notification to the notification system with the
+   {@code NotificationManager.notify(...)} methods.
+ &lt;/ol&gt;
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ Notification notif = new Notification.Builder(mContext)
+         .setContentTitle(&amp;quot;New mail from &amp;quot; + sender.toString())
+         .setContentText(subject)
+         .setSmallIcon(R.drawable.new_mail)
+         .extend(new Notification.WearableExtender()
+                 .setContentIcon(R.drawable.new_mail))
+         .build();
+ NotificationManager notificationManger =
+         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+ notificationManger.notify(0, notif);&lt;/pre&gt;
+
+ &lt;p&gt;Wearable extensions can be accessed on an existing notification by using the
+ {@code WearableExtender(Notification)} constructor,
+ and then using the {@code get} methods to access values.
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ Notification.WearableExtender wearableExtender = new Notification.WearableExtender(
+         notification);
+ List&amp;lt;Notification&amp;gt; pages = wearableExtender.getPages();&lt;/pre&gt;
+*/
+var WearableExtender = {
+
+<span id='android-app-Notification-WearableExtender-property-UNSET_ACTION_INDEX'>/** Sentinel value for an action index that is unset.
+</span>*/
+UNSET_ACTION_INDEX : &quot;-1&quot;,
+<span id='android-app-Notification-WearableExtender-property-SIZE_DEFAULT'>/** Size value for use with {@link #setCustomSizePreset} to show this notification with
+</span> default sizing.
+ &lt;p&gt;For custom display notifications created using {@link #setDisplayIntent},
+ the default is {@link #SIZE_MEDIUM}. All other notifications size automatically based
+ on their content.
+
+ @deprecated Display intents are no longer supported.
+*/
+SIZE_DEFAULT : &quot;0&quot;,
+<span id='android-app-Notification-WearableExtender-property-SIZE_XSMALL'>/** Size value for use with {@link #setCustomSizePreset} to show this notification
+</span> with an extra small size.
+ &lt;p&gt;This value is only applicable for custom display notifications created using
+ {@link #setDisplayIntent}.
+
+ @deprecated Display intents are no longer supported.
+*/
+SIZE_XSMALL : &quot;1&quot;,
+<span id='android-app-Notification-WearableExtender-property-SIZE_SMALL'>/** Size value for use with {@link #setCustomSizePreset} to show this notification
+</span> with a small size.
+ &lt;p&gt;This value is only applicable for custom display notifications created using
+ {@link #setDisplayIntent}.
+
+ @deprecated Display intents are no longer supported.
+*/
+SIZE_SMALL : &quot;2&quot;,
+<span id='android-app-Notification-WearableExtender-property-SIZE_MEDIUM'>/** Size value for use with {@link #setCustomSizePreset} to show this notification
+</span> with a medium size.
+ &lt;p&gt;This value is only applicable for custom display notifications created using
+ {@link #setDisplayIntent}.
+
+ @deprecated Display intents are no longer supported.
+*/
+SIZE_MEDIUM : &quot;3&quot;,
+<span id='android-app-Notification-WearableExtender-property-SIZE_LARGE'>/** Size value for use with {@link #setCustomSizePreset} to show this notification
+</span> with a large size.
+ &lt;p&gt;This value is only applicable for custom display notifications created using
+ {@link #setDisplayIntent}.
+
+ @deprecated Display intents are no longer supported.
+*/
+SIZE_LARGE : &quot;4&quot;,
+<span id='android-app-Notification-WearableExtender-property-SIZE_FULL_SCREEN'>/** Size value for use with {@link #setCustomSizePreset} to show this notification
+</span> full screen.
+ &lt;p&gt;This value is only applicable for custom display notifications created using
+ {@link #setDisplayIntent}.
+
+ @deprecated Display intents are no longer supported.
+*/
+SIZE_FULL_SCREEN : &quot;5&quot;,
+<span id='android-app-Notification-WearableExtender-property-SCREEN_TIMEOUT_SHORT'>/** Sentinel value for use with {@link #setHintScreenTimeout} to keep the screen on for a
+</span> short amount of time when this notification is displayed on the screen. This
+ is the default value.
+
+ @deprecated This feature is no longer supported.
+*/
+SCREEN_TIMEOUT_SHORT : &quot;0&quot;,
+<span id='android-app-Notification-WearableExtender-property-SCREEN_TIMEOUT_LONG'>/** Sentinel value for use with {@link #setHintScreenTimeout} to keep the screen on
+</span> for a longer amount of time when this notification is displayed on the screen.
+
+ @deprecated This feature is no longer supported.
+*/
+SCREEN_TIMEOUT_LONG : &quot;-1&quot;,
+<span id='android-app-Notification-WearableExtender-method-extend'>/**Apply wearable extensions to a notification that is being built. This is typically
+</span> called by the {@link android.app.Notification.Builder#extend} method of
+ {@link android.app.Notification.Builder}.
+*/
+extend : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-clone'>/**
+</span>*/
+clone : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-addAction'>/**Add a wearable action to this notification.
+</span>
+ &lt;p&gt;When wearable actions are added using this method, the set of actions that
+ show on a wearable device splits from devices that only show actions added
+ using {@link android.app.Notification.Builder#addAction}. This allows for customization
+ of which actions display on different devices.
+@param {Object {Notification.Action}} action the action to add to this notification
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+@see android.app.Notification.Action
+*/
+addAction : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-addActions'>/**Adds wearable actions to this notification.
+</span>
+ &lt;p&gt;When wearable actions are added using this method, the set of actions that
+ show on a wearable device splits from devices that only show actions added
+ using {@link android.app.Notification.Builder#addAction}. This allows for customization
+ of which actions display on different devices.
+@param {Object {java.util.List}} actions the actions to add to this notification
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+@see android.app.Notification.Action
+*/
+addActions : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-clearActions'>/**Clear all wearable actions present on this builder.
+</span>@return {Object {android.app.Notification.WearableExtender}} this object for method chaining.
+@see #addAction
+*/
+clearActions : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getActions'>/**Get the wearable actions present on this notification.
+</span>*/
+getActions : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setDisplayIntent'>/**Set an intent to launch inside of an activity view when displaying
+</span> this notification. The {@link android.app.PendingIntent} provided should be for an activity.
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ Intent displayIntent = new Intent(context, MyDisplayActivity.class);
+ PendingIntent displayPendingIntent = PendingIntent.getActivity(context,
+         0, displayIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+ Notification notif = new Notification.Builder(context)
+         .extend(new Notification.WearableExtender()
+                 .setDisplayIntent(displayPendingIntent)
+                 .setCustomSizePreset(Notification.WearableExtender.SIZE_MEDIUM))
+         .build();&lt;/pre&gt;
+
+ &lt;p&gt;The activity to launch needs to allow embedding, must be exported, and
+ should have an empty task affinity. It is also recommended to use the device
+ default light theme.
+
+ &lt;p&gt;Example AndroidManifest.xml entry:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ &amp;lt;activity android:name=&amp;quot;com.example.MyDisplayActivity&amp;quot;
+     android:exported=&amp;quot;true&amp;quot;
+     android:allowEmbedded=&amp;quot;true&amp;quot;
+     android:taskAffinity=&amp;quot;&amp;quot;
+     android:theme=&amp;quot;@android:style/Theme.DeviceDefault.Light&amp;quot; /&amp;gt;&lt;/pre&gt;
+@param {Object {PendingIntent}} intent the {@link PendingIntent} for an activity
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+@see android.app.Notification.WearableExtender#getDisplayIntent
+@deprecated Display intents are no longer supported.
+*/
+setDisplayIntent : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getDisplayIntent'>/**Get the intent to launch inside of an activity view when displaying this
+</span> notification. This {@code PendingIntent} should be for an activity.
+@deprecated Display intents are no longer supported.
+*/
+getDisplayIntent : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-addPage'>/**Add an additional page of content to display with this notification. The current
+</span> notification forms the first page, and pages added using this function form
+ subsequent pages. This field can be used to separate a notification into multiple
+ sections.
+@param {Object {Notification}} page the notification to add as another page
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+@see android.app.Notification.WearableExtender#getPages
+@deprecated Multiple content pages are no longer supported.
+*/
+addPage : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-addPages'>/**Add additional pages of content to display with this notification. The current
+</span> notification forms the first page, and pages added using this function form
+ subsequent pages. This field can be used to separate a notification into multiple
+ sections.
+@param {Object {java.util.List}} pages a list of notifications
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+@see android.app.Notification.WearableExtender#getPages
+@deprecated Multiple content pages are no longer supported.
+*/
+addPages : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-clearPages'>/**Clear all additional pages present on this builder.
+</span>@return {Object {android.app.Notification.WearableExtender}} this object for method chaining.
+@see #addPage
+@deprecated Multiple content pages are no longer supported.
+*/
+clearPages : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getPages'>/**Get the array of additional pages of content for displaying this notification. The
+</span> current notification forms the first page, and elements within this array form
+ subsequent pages. This field can be used to separate a notification into multiple
+ sections.
+@return {Object {java.util.List}} the pages for this notification
+@deprecated Multiple content pages are no longer supported.
+*/
+getPages : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setBackground'>/**Set a background image to be displayed behind the notification content.
+</span> Contrary to the {@link android.app.Notification.BigPictureStyle}, this background
+ will work with any notification style.
+@param {Object {Bitmap}} background the background bitmap
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+@see android.app.Notification.WearableExtender#getBackground
+@deprecated Background images are no longer supported.
+*/
+setBackground : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getBackground'>/**Get a background image to be displayed behind the notification content.
+</span> Contrary to the {@link android.app.Notification.BigPictureStyle}, this background
+ will work with any notification style.
+@return {Object {android.graphics.Bitmap}} the background image
+@see android.app.Notification.WearableExtender#setBackground
+@deprecated Background images are no longer supported.
+*/
+getBackground : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setContentIcon'>/**Set an icon that goes with the content of this notification.
+</span>*/
+setContentIcon : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getContentIcon'>/**Get an icon that goes with the content of this notification.
+</span>*/
+getContentIcon : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setContentIconGravity'>/**Set the gravity that the content icon should have within the notification display.
+</span> Supported values include {@link android.view.Gravity#START} and
+ {@link android.view.Gravity#END}. The default value is {@link android.view.Gravity#END}.
+@see #setContentIcon
+*/
+setContentIconGravity : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getContentIconGravity'>/**Get the gravity that the content icon should have within the notification display.
+</span> Supported values include {@link android.view.Gravity#START} and
+ {@link android.view.Gravity#END}. The default value is {@link android.view.Gravity#END}.
+@see #getContentIcon
+*/
+getContentIconGravity : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setContentAction'>/**Set an action from this notification's actions as the primary action. If the action has a
+</span> {@link android.app.RemoteInput} associated with it, shortcuts to the options for that input are shown
+ directly on the notification.
+@param {Number} actionIndex The index of the primary action.
+                    If wearable actions were added to the main notification, this index
+                    will apply to that list, otherwise it will apply to the regular
+                    actions list.
+*/
+setContentAction : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getContentAction'>/**Get the index of the notification action, if any, that was specified as the primary
+</span> action.
+
+ &lt;p&gt;If wearable specific actions were added to the main notification, this index will
+ apply to that list, otherwise it will apply to the regular actions list.
+@return {Number} the action index or {@link #UNSET_ACTION_INDEX} if no action was selected.
+*/
+getContentAction : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setGravity'>/**Set the gravity that this notification should have within the available viewport space.
+</span> Supported values include {@link android.view.Gravity#TOP},
+ {@link android.view.Gravity#CENTER_VERTICAL} and {@link android.view.Gravity#BOTTOM}.
+ The default value is {@link android.view.Gravity#BOTTOM}.
+*/
+setGravity : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getGravity'>/**Get the gravity that this notification should have within the available viewport space.
+</span> Supported values include {@link android.view.Gravity#TOP},
+ {@link android.view.Gravity#CENTER_VERTICAL} and {@link android.view.Gravity#BOTTOM}.
+ The default value is {@link android.view.Gravity#BOTTOM}.
+*/
+getGravity : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setCustomSizePreset'>/**Set the custom size preset for the display of this notification out of the available
+</span> presets found in {@link android.app.Notification.WearableExtender}, e.g.
+ {@link #SIZE_LARGE}.
+ &lt;p&gt;Some custom size presets are only applicable for custom display notifications created
+ using {@link android.app.Notification.WearableExtender#setDisplayIntent}. Check the
+ documentation for the preset in question. See also
+ {@link #setCustomContentHeight} and {@link #getCustomSizePreset}.
+*/
+setCustomSizePreset : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getCustomSizePreset'>/**Get the custom size preset for the display of this notification out of the available
+</span> presets found in {@link android.app.Notification.WearableExtender}, e.g.
+ {@link #SIZE_LARGE}.
+ &lt;p&gt;Some custom size presets are only applicable for custom display notifications created
+ using {@link #setDisplayIntent}. Check the documentation for the preset in question.
+ See also {@link #setCustomContentHeight} and {@link #setCustomSizePreset}.
+*/
+getCustomSizePreset : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setCustomContentHeight'>/**Set the custom height in pixels for the display of this notification's content.
+</span> &lt;p&gt;This option is only available for custom display notifications created
+ using {@link android.app.Notification.WearableExtender#setDisplayIntent}. See also
+ {@link android.app.Notification.WearableExtender#setCustomSizePreset} and
+ {@link #getCustomContentHeight}.
+*/
+setCustomContentHeight : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getCustomContentHeight'>/**Get the custom height in pixels for the display of this notification's content.
+</span> &lt;p&gt;This option is only available for custom display notifications created
+ using {@link #setDisplayIntent}. See also {@link #setCustomSizePreset} and
+ {@link #setCustomContentHeight}.
+*/
+getCustomContentHeight : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setStartScrollBottom'>/**Set whether the scrolling position for the contents of this notification should start
+</span> at the bottom of the contents instead of the top when the contents are too long to
+ display within the screen.  Default is false (start scroll at the top).
+*/
+setStartScrollBottom : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getStartScrollBottom'>/**Get whether the scrolling position for the contents of this notification should start
+</span> at the bottom of the contents instead of the top when the contents are too long to
+ display within the screen. Default is false (start scroll at the top).
+*/
+getStartScrollBottom : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setContentIntentAvailableOffline'>/**Set whether the content intent is available when the wearable device is not connected
+</span> to a companion device.  The user can still trigger this intent when the wearable device
+ is offline, but a visual hint will indicate that the content intent may not be available.
+ Defaults to true.
+*/
+setContentIntentAvailableOffline : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getContentIntentAvailableOffline'>/**Get whether the content intent is available when the wearable device is not connected
+</span> to a companion device.  The user can still trigger this intent when the wearable device
+ is offline, but a visual hint will indicate that the content intent may not be available.
+ Defaults to true.
+*/
+getContentIntentAvailableOffline : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setHintHideIcon'>/**Set a hint that this notification's icon should not be displayed.
+</span>@param {Boolean} hintHideIcon {@code true} to hide the icon, {@code false} otherwise.
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+*/
+setHintHideIcon : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getHintHideIcon'>/**Get a hint that this notification's icon should not be displayed.
+</span>@return {Boolean} {@code true} if this icon should not be displayed, false otherwise.
+ The default value is {@code false} if this was never set.
+*/
+getHintHideIcon : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setHintShowBackgroundOnly'>/**Set a visual hint that only the background image of this notification should be
+</span> displayed, and other semantic content should be hidden. This hint is only applicable
+ to sub-pages added using {@link #addPage}.
+*/
+setHintShowBackgroundOnly : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getHintShowBackgroundOnly'>/**Get a visual hint that only the background image of this notification should be
+</span> displayed, and other semantic content should be hidden. This hint is only applicable
+ to sub-pages added using {@link android.app.Notification.WearableExtender#addPage}.
+*/
+getHintShowBackgroundOnly : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setHintAvoidBackgroundClipping'>/**Set a hint that this notification's background should not be clipped if possible,
+</span> and should instead be resized to fully display on the screen, retaining the aspect
+ ratio of the image. This can be useful for images like barcodes or qr codes.
+@param {Boolean} hintAvoidBackgroundClipping {@code true} to avoid clipping if possible.
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+*/
+setHintAvoidBackgroundClipping : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getHintAvoidBackgroundClipping'>/**Get a hint that this notification's background should not be clipped if possible,
+</span> and should instead be resized to fully display on the screen, retaining the aspect
+ ratio of the image. This can be useful for images like barcodes or qr codes.
+@return {Boolean} {@code true} if it's ok if the background is clipped on the screen, false
+ otherwise. The default value is {@code false} if this was never set.
+*/
+getHintAvoidBackgroundClipping : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setHintScreenTimeout'>/**Set a hint that the screen should remain on for at least this duration when
+</span> this notification is displayed on the screen.
+@param {Number} timeout The requested screen timeout in milliseconds. Can also be either
+     {@link #SCREEN_TIMEOUT_SHORT} or {@link #SCREEN_TIMEOUT_LONG}.
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+*/
+setHintScreenTimeout : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getHintScreenTimeout'>/**Get the duration, in milliseconds, that the screen should remain on for
+</span> when this notification is displayed.
+@return {Number} the duration in milliseconds if &gt; 0, or either one of the sentinel values
+     {@link #SCREEN_TIMEOUT_SHORT} or {@link #SCREEN_TIMEOUT_LONG}.
+*/
+getHintScreenTimeout : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setHintAmbientBigPicture'>/**Set a hint that this notification's {@link android.app.Notification.BigPictureStyle} (if present) should be
+</span> converted to low-bit and displayed in ambient mode, especially useful for barcodes and
+ qr codes, as well as other simple black-and-white tickets.
+@param {Boolean} hintAmbientBigPicture {@code true} to enable converstion and ambient.
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+@deprecated This feature is no longer supported.
+*/
+setHintAmbientBigPicture : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getHintAmbientBigPicture'>/**Get a hint that this notification's {@link android.app.Notification.BigPictureStyle} (if present) should be
+</span> converted to low-bit and displayed in ambient mode, especially useful for barcodes and
+ qr codes, as well as other simple black-and-white tickets.
+@return {Boolean} {@code true} if it should be displayed in ambient, false otherwise
+ otherwise. The default value is {@code false} if this was never set.
+@deprecated This feature is no longer supported.
+*/
+getHintAmbientBigPicture : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setHintContentIntentLaunchesActivity'>/**Set a hint that this notification's content intent will launch an {@link android.app.Activity}
+</span> directly, telling the platform that it can generate the appropriate transitions.
+@param {Boolean} hintContentIntentLaunchesActivity {@code true} if the content intent will launch
+ an activity and transitions should be generated, false otherwise.
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+*/
+setHintContentIntentLaunchesActivity : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getHintContentIntentLaunchesActivity'>/**Get a hint that this notification's content intent will launch an {@link android.app.Activity}
+</span> directly, telling the platform that it can generate the appropriate transitions
+@return {Boolean} {@code true} if the content intent will launch an activity and transitions should
+ be generated, false otherwise. The default value is {@code false} if this was never set.
+*/
+getHintContentIntentLaunchesActivity : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setDismissalId'>/**Sets the dismissal id for this notification. If a notification is posted with a
+</span> dismissal id, then when that notification is canceled, notifications on other wearables
+ and the paired Android phone having that same dismissal id will also be canceled. See
+ &lt;a href=&quot;{@docRoot}wear/notifications/index.html&quot;&gt;Adding Wearable Features to
+ Notifications&lt;/a&gt; for more information.
+@param {String} dismissalId the dismissal id of the notification.
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+*/
+setDismissalId : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getDismissalId'>/**Returns the dismissal id of the notification.
+</span>@return {String} the dismissal id of the notification or null if it has not been set.
+*/
+getDismissalId : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-setBridgeTag'>/**Sets a bridge tag for this notification. A bridge tag can be set for notifications
+</span> posted from a phone to provide finer-grained control on what notifications are bridged
+ to wearables. See &lt;a href=&quot;{@docRoot}wear/notifications/index.html&quot;&gt;Adding Wearable
+ Features to Notifications&lt;/a&gt; for more information.
+@param {String} bridgeTag the bridge tag of the notification.
+@return {Object {android.app.Notification.WearableExtender}} this object for method chaining
+*/
+setBridgeTag : function(  ) {},
+
+<span id='android-app-Notification-WearableExtender-method-getBridgeTag'>/**Returns the bridge tag of the notification.
+</span>@return {String} the bridge tag or null if not present.
+*/
+getBridgeTag : function(  ) {},
+
+
+};</pre>
+</body>
+</html>
