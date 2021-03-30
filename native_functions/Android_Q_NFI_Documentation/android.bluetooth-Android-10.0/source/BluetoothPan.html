@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothPan'>/**@class android.bluetooth.BluetoothPan
+</span> implements android.bluetooth.BluetoothProfile
+
+@extends java.lang.Object
+
+ This class provides the APIs to control the Bluetooth Pan
+ Profile.
+
+ &lt;p&gt;BluetoothPan is a proxy object for controlling the Bluetooth
+ Service via IPC. Use {@link android.bluetooth.BluetoothAdapter#getProfileProxy} to get
+ the BluetoothPan proxy object.
+
+ &lt;p&gt;Each method is protected with its appropriate permission.
+
+ @hide
+*/
+var BluetoothPan = {
+
+<span id='android-bluetooth-BluetoothPan-property-ACTION_CONNECTION_STATE_CHANGED'>/** Intent used to broadcast the change in connection state of the Pan
+</span> profile.
+
+ &lt;p&gt;This intent will have 4 extras:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_STATE} - The current state of the profile. &lt;/li&gt;
+ &lt;li&gt; {@link #EXTRA_PREVIOUS_STATE}- The previous state of the profile.&lt;/li&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device. &lt;/li&gt;
+ &lt;li&gt; {@link #EXTRA_LOCAL_ROLE} - Which local role the remote device is
+ bound to. &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} can be any of
+ {@link #STATE_DISCONNECTED}, {@link #STATE_CONNECTING},
+ {@link #STATE_CONNECTED}, {@link #STATE_DISCONNECTING}.
+
+ &lt;p&gt; {@link #EXTRA_LOCAL_ROLE} can be one of {@link #LOCAL_NAP_ROLE} or
+ {@link #LOCAL_PANU_ROLE}
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+*/
+ACTION_CONNECTION_STATE_CHANGED : &quot;android.bluetooth.pan.profile.action.CONNECTION_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothPan-property-EXTRA_LOCAL_ROLE'>/** Extra for {@link #ACTION_CONNECTION_STATE_CHANGED} intent
+</span> The local role of the PAN profile that the remote device is bound to.
+ It can be one of {@link #LOCAL_NAP_ROLE} or {@link #LOCAL_PANU_ROLE}.
+*/
+EXTRA_LOCAL_ROLE : &quot;android.bluetooth.pan.extra.LOCAL_ROLE&quot;,
+<span id='android-bluetooth-BluetoothPan-property-PAN_ROLE_NONE'>/***/
+</span>PAN_ROLE_NONE : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothPan-property-LOCAL_NAP_ROLE'>/** The local device is acting as a Network Access Point.
+</span>*/
+LOCAL_NAP_ROLE : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothPan-property-REMOTE_NAP_ROLE'>/***/
+</span>REMOTE_NAP_ROLE : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothPan-property-LOCAL_PANU_ROLE'>/** The local device is acting as a PAN User.
+</span>*/
+LOCAL_PANU_ROLE : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothPan-property-REMOTE_PANU_ROLE'>/***/
+</span>REMOTE_PANU_ROLE : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothPan-property-PAN_DISCONNECT_FAILED_NOT_CONNECTED'>/** Return codes for the connect and disconnect Bluez / Dbus calls.
+</span>
+ @hide
+*/
+PAN_DISCONNECT_FAILED_NOT_CONNECTED : &quot;1000&quot;,
+<span id='android-bluetooth-BluetoothPan-property-PAN_CONNECT_FAILED_ALREADY_CONNECTED'>/** @hide
+</span>*/
+PAN_CONNECT_FAILED_ALREADY_CONNECTED : &quot;1001&quot;,
+<span id='android-bluetooth-BluetoothPan-property-PAN_CONNECT_FAILED_ATTEMPT_FAILED'>/** @hide
+</span>*/
+PAN_CONNECT_FAILED_ATTEMPT_FAILED : &quot;1002&quot;,
+<span id='android-bluetooth-BluetoothPan-property-PAN_OPERATION_GENERIC_FAILURE'>/** @hide
+</span>*/
+PAN_OPERATION_GENERIC_FAILURE : &quot;1003&quot;,
+<span id='android-bluetooth-BluetoothPan-property-PAN_OPERATION_SUCCESS'>/** @hide
+</span>*/
+PAN_OPERATION_SUCCESS : &quot;1004&quot;,
+<span id='android-bluetooth-BluetoothPan-method-connect'>/**Initiate connection to a profile of the remote bluetooth device.
+</span>
+ &lt;p&gt; This API returns false in scenarios like the profile on the
+ device is already connected or Bluetooth is not turned on.
+ When this API returns true, it is guaranteed that
+ connection state intent for the profile will be broadcasted with
+ the state. Users can get the connection state of the profile
+ from this intent.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+connect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothPan-method-disconnect'>/**Initiate disconnection from a profile
+</span>
+ &lt;p&gt; This API will return false in scenarios like the profile on the
+ Bluetooth device is not in connected state etc. When this API returns,
+ true, it is guaranteed that the connection state change
+ intent will be broadcasted with the state. Users can get the
+ disconnection state of the profile from this intent.
+
+ &lt;p&gt; If the disconnection is initiated by a remote device, the state
+ will transition from {@link #STATE_CONNECTED} to
+ {@link #STATE_DISCONNECTED}. If the disconnect is initiated by the
+ host (local) device the state will transition from
+ {@link #STATE_CONNECTED} to state {@link #STATE_DISCONNECTING} to
+ state {@link #STATE_DISCONNECTED}. The transition to
+ {@link #STATE_DISCONNECTING} can be used to distinguish between the
+ two scenarios.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+disconnect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothPan-method-getConnectedDevices'>/**{@inheritDoc}
+</span>*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothPan-method-getDevicesMatchingConnectionStates'>/**{@inheritDoc}
+</span>*/
+getDevicesMatchingConnectionStates : function(  ) {},
+
+<span id='android-bluetooth-BluetoothPan-method-getConnectionState'>/**{@inheritDoc}
+</span>*/
+getConnectionState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothPan-method-setBluetoothTethering'>/**
+</span>*/
+setBluetoothTethering : function(  ) {},
+
+<span id='android-bluetooth-BluetoothPan-method-isTetheringOn'>/**
+</span>*/
+isTetheringOn : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

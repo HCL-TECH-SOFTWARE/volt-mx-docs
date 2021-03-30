@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothGattCharacteristic'>/**@class android.bluetooth.BluetoothGattCharacteristic
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Represents a Bluetooth GATT Characteristic
+
+ &lt;p&gt;A GATT characteristic is a basic data element used to construct a GATT service,
+ {@link android.bluetooth.BluetoothGattService}. The characteristic contains a value as well as
+ additional information and optional GATT descriptors, {@link android.bluetooth.BluetoothGattDescriptor}.
+*/
+var BluetoothGattCharacteristic = {
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PROPERTY_BROADCAST'>/** Characteristic proprty: Characteristic is broadcastable.
+</span>*/
+PROPERTY_BROADCAST : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PROPERTY_READ'>/** Characteristic property: Characteristic is readable.
+</span>*/
+PROPERTY_READ : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PROPERTY_WRITE_NO_RESPONSE'>/** Characteristic property: Characteristic can be written without response.
+</span>*/
+PROPERTY_WRITE_NO_RESPONSE : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PROPERTY_WRITE'>/** Characteristic property: Characteristic can be written.
+</span>*/
+PROPERTY_WRITE : &quot;8&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PROPERTY_NOTIFY'>/** Characteristic property: Characteristic supports notification
+</span>*/
+PROPERTY_NOTIFY : &quot;16&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PROPERTY_INDICATE'>/** Characteristic property: Characteristic supports indication
+</span>*/
+PROPERTY_INDICATE : &quot;32&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PROPERTY_SIGNED_WRITE'>/** Characteristic property: Characteristic supports write with signature
+</span>*/
+PROPERTY_SIGNED_WRITE : &quot;64&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PROPERTY_EXTENDED_PROPS'>/** Characteristic property: Characteristic has extended properties
+</span>*/
+PROPERTY_EXTENDED_PROPS : &quot;128&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PERMISSION_READ'>/** Characteristic read permission
+</span>*/
+PERMISSION_READ : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PERMISSION_READ_ENCRYPTED'>/** Characteristic permission: Allow encrypted read operations
+</span>*/
+PERMISSION_READ_ENCRYPTED : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PERMISSION_READ_ENCRYPTED_MITM'>/** Characteristic permission: Allow reading with man-in-the-middle protection
+</span>*/
+PERMISSION_READ_ENCRYPTED_MITM : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PERMISSION_WRITE'>/** Characteristic write permission
+</span>*/
+PERMISSION_WRITE : &quot;16&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PERMISSION_WRITE_ENCRYPTED'>/** Characteristic permission: Allow encrypted writes
+</span>*/
+PERMISSION_WRITE_ENCRYPTED : &quot;32&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PERMISSION_WRITE_ENCRYPTED_MITM'>/** Characteristic permission: Allow encrypted writes with man-in-the-middle
+</span> protection
+*/
+PERMISSION_WRITE_ENCRYPTED_MITM : &quot;64&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PERMISSION_WRITE_SIGNED'>/** Characteristic permission: Allow signed write operations
+</span>*/
+PERMISSION_WRITE_SIGNED : &quot;128&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-PERMISSION_WRITE_SIGNED_MITM'>/** Characteristic permission: Allow signed write operations with
+</span> man-in-the-middle protection
+*/
+PERMISSION_WRITE_SIGNED_MITM : &quot;256&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-WRITE_TYPE_DEFAULT'>/** Write characteristic, requesting acknoledgement by the remote device
+</span>*/
+WRITE_TYPE_DEFAULT : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-WRITE_TYPE_NO_RESPONSE'>/** Write characteristic without requiring a response by the remote device
+</span>*/
+WRITE_TYPE_NO_RESPONSE : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-WRITE_TYPE_SIGNED'>/** Write characteristic including authentication signature
+</span>*/
+WRITE_TYPE_SIGNED : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-FORMAT_UINT8'>/** Characteristic value format type uint8
+</span>*/
+FORMAT_UINT8 : &quot;17&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-FORMAT_UINT16'>/** Characteristic value format type uint16
+</span>*/
+FORMAT_UINT16 : &quot;18&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-FORMAT_UINT32'>/** Characteristic value format type uint32
+</span>*/
+FORMAT_UINT32 : &quot;20&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-FORMAT_SINT8'>/** Characteristic value format type sint8
+</span>*/
+FORMAT_SINT8 : &quot;33&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-FORMAT_SINT16'>/** Characteristic value format type sint16
+</span>*/
+FORMAT_SINT16 : &quot;34&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-FORMAT_SINT32'>/** Characteristic value format type sint32
+</span>*/
+FORMAT_SINT32 : &quot;36&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-FORMAT_SFLOAT'>/** Characteristic value format type sfloat (16-bit float)
+</span>*/
+FORMAT_SFLOAT : &quot;50&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-FORMAT_FLOAT'>/** Characteristic value format type float (32-bit float)
+</span>*/
+FORMAT_FLOAT : &quot;52&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getKeySize'>/**Returns the desired key size.
+</span>@hide 
+*/
+getKeySize : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-addDescriptor'>/**Adds a descriptor to this characteristic.
+</span> &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothGattDescriptor}} descriptor Descriptor to be added to this characteristic.
+@return {Boolean} true, if the descriptor was added to the characteristic
+*/
+addDescriptor : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getService'>/**Returns the service this characteristic belongs to.
+</span>@return {Object {android.bluetooth.BluetoothGattService}} The asscociated service
+*/
+getService : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getUuid'>/**Returns the UUID of this characteristic
+</span>@return {Object {java.util.UUID}} UUID of this characteristic
+*/
+getUuid : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getInstanceId'>/**Returns the instance ID for this characteristic.
+</span>
+ &lt;p&gt;If a remote device offers multiple characteristics with the same UUID,
+ the instance ID is used to distuinguish between characteristics.
+@return {Number} Instance ID of this characteristic
+*/
+getInstanceId : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-setInstanceId'>/**Force the instance ID.
+</span>@hide 
+*/
+setInstanceId : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getProperties'>/**Returns the properties of this characteristic.
+</span>
+ &lt;p&gt;The properties contain a bit mask of property flags indicating
+ the features of this characteristic.
+@return {Number} Properties of this characteristic
+*/
+getProperties : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getPermissions'>/**Returns the permissions for this characteristic.
+</span>@return {Number} Permissions of this characteristic
+*/
+getPermissions : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getWriteType'>/**Gets the write type for this characteristic.
+</span>@return {Number} Write type for this characteristic
+*/
+getWriteType : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-setWriteType'>/**Set the write type for this characteristic
+</span>
+ &lt;p&gt;Setting the write type of a characteristic determines how the
+ {@link android.bluetooth.BluetoothGatt#writeCharacteristic} function write this
+ characteristic.
+@param {Number} writeType The write type to for this characteristic. Can be one of: {@link
+ #WRITE_TYPE_DEFAULT}, {@link #WRITE_TYPE_NO_RESPONSE} or {@link #WRITE_TYPE_SIGNED}.
+*/
+setWriteType : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-setKeySize'>/**Set the desired key size.
+</span>@hide 
+*/
+setKeySize : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getDescriptors'>/**Returns a list of descriptors for this characteristic.
+</span>@return {Object {java.util.List}} Descriptors for this characteristic
+*/
+getDescriptors : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getDescriptor'>/**Returns a descriptor with a given UUID out of the list of
+</span> descriptors for this characteristic.
+@return {Object {android.bluetooth.BluetoothGattDescriptor}} GATT descriptor object or null if no descriptor with the given UUID was found.
+*/
+getDescriptor : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getValue'>/**Get the stored value for this characteristic.
+</span>
+ &lt;p&gt;This function returns the stored value for this characteristic as
+ retrieved by calling {@link android.bluetooth.BluetoothGatt#readCharacteristic}. The cached
+ value of the characteristic is updated as a result of a read characteristic
+ operation or if a characteristic update notification has been received.
+@return {Number} Cached value of the characteristic
+*/
+getValue : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getIntValue'>/**Return the stored value of this characteristic.
+</span>
+ &lt;p&gt;The formatType parameter determines how the characteristic value
+ is to be interpreted. For example, settting formatType to
+ {@link #FORMAT_UINT16} specifies that the first two bytes of the
+ characteristic value at the given offset are interpreted to generate the
+ return value.
+@param {Number} formatType The format type used to interpret the characteristic value.
+@param {Number} offset Offset at which the integer value can be found.
+@return {Number} Cached value of the characteristic or null of offset exceeds value size.
+*/
+getIntValue : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getFloatValue'>/**Return the stored value of this characteristic.
+</span> &lt;p&gt;See {@link #getValue} for details.
+@param {Number} formatType The format type used to interpret the characteristic value.
+@param {Number} offset Offset at which the float value can be found.
+@return {Number} Cached value of the characteristic at a given offset or null if the requested offset
+ exceeds the value size.
+*/
+getFloatValue : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-getStringValue'>/**Return the stored value of this characteristic.
+</span> &lt;p&gt;See {@link #getValue} for details.
+@param {Number} offset Offset at which the string value can be found.
+@return {String} Cached value of the characteristic
+*/
+getStringValue : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-setValue'>/**Updates the locally stored value of this characteristic.
+</span>
+ &lt;p&gt;This function modifies the locally stored cached value of this
+ characteristic. To send the value to the remote device, call
+ {@link android.bluetooth.BluetoothGatt#writeCharacteristic} to send the value to the
+ remote device.
+@param {Object {byte[]}} value New value for this characteristic
+@return {Boolean} true if the locally stored value has been set, false if the requested value could not
+ be stored locally.
+*/
+setValue : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-setValue'>/**Set the locally stored value of this characteristic.
+</span> &lt;p&gt;See {@link #setValue(byte[])} for details.
+@param {Number} value New value for this characteristic
+@param {Number} formatType Integer format type used to transform the value parameter
+@param {Number} offset Offset at which the value should be placed
+@return {Boolean} true if the locally stored value has been set
+*/
+setValue : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-setValue'>/**Set the locally stored value of this characteristic.
+</span> &lt;p&gt;See {@link #setValue(byte[])} for details.
+@param {Number} mantissa Mantissa for this characteristic
+@param {Number} exponent exponent value for this characteristic
+@param {Number} formatType Float format type used to transform the value parameter
+@param {Number} offset Offset at which the value should be placed
+@return {Boolean} true if the locally stored value has been set
+*/
+setValue : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattCharacteristic-method-setValue'>/**Set the locally stored value of this characteristic.
+</span> &lt;p&gt;See {@link #setValue(byte[])} for details.
+@param {String} value New value for this characteristic
+@return {Boolean} true if the locally stored value has been set
+*/
+setValue : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothHearingAid'>/**@class android.bluetooth.BluetoothHearingAid
+</span> implements android.bluetooth.BluetoothProfile
+
+@extends java.lang.Object
+
+ This class provides the public APIs to control the Hearing Aid profile.
+
+ &lt;p&gt;BluetoothHearingAid is a proxy object for controlling the Bluetooth Hearing Aid
+ Service via IPC. Use {@link android.bluetooth.BluetoothAdapter#getProfileProxy} to get
+ the BluetoothHearingAid proxy object.
+
+ &lt;p&gt; Android only supports one set of connected Bluetooth Hearing Aid device at a time. Each
+ method is protected with its appropriate permission.
+*/
+var BluetoothHearingAid = {
+
+<span id='android-bluetooth-BluetoothHearingAid-property-ACTION_CONNECTION_STATE_CHANGED'>/** Intent used to broadcast the change in connection state of the Hearing Aid
+</span> profile. Please note that in the binaural case, there will be two different LE devices for
+ the left and right side and each device will have their own connection state changes.S
+
+ &lt;p&gt;This intent will have 3 extras:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_STATE} - The current state of the profile. &lt;/li&gt;
+ &lt;li&gt; {@link #EXTRA_PREVIOUS_STATE}- The previous state of the profile.&lt;/li&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device. &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} can be any of
+ {@link #STATE_DISCONNECTED}, {@link #STATE_CONNECTING},
+ {@link #STATE_CONNECTED}, {@link #STATE_DISCONNECTING}.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+*/
+ACTION_CONNECTION_STATE_CHANGED : &quot;android.bluetooth.hearingaid.profile.action.CONNECTION_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothHearingAid-property-ACTION_ACTIVE_DEVICE_CHANGED'>/** Intent used to broadcast the selection of a connected device as active.
+</span>
+ &lt;p&gt;This intent will have one extra:
+ &lt;ul&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device. It can
+ be null if no device is active. &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+
+ @hide
+*/
+ACTION_ACTIVE_DEVICE_CHANGED : &quot;android.bluetooth.hearingaid.profile.action.ACTIVE_DEVICE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothHearingAid-property-SIDE_LEFT'>/** This device represents Left Hearing Aid.
+</span>
+ @hide
+*/
+SIDE_LEFT : &quot;null&quot;,
+<span id='android-bluetooth-BluetoothHearingAid-property-SIDE_RIGHT'>/** This device represents Right Hearing Aid.
+</span>
+ @hide
+*/
+SIDE_RIGHT : &quot;null&quot;,
+<span id='android-bluetooth-BluetoothHearingAid-property-MODE_MONAURAL'>/** This device is Monaural.
+</span>
+ @hide
+*/
+MODE_MONAURAL : &quot;null&quot;,
+<span id='android-bluetooth-BluetoothHearingAid-property-MODE_BINAURAL'>/** This device is Binaural (should receive only left or right audio).
+</span>
+ @hide
+*/
+MODE_BINAURAL : &quot;null&quot;,
+<span id='android-bluetooth-BluetoothHearingAid-property-HI_SYNC_ID_INVALID'>/** Indicates the HiSyncID could not be read and is unavailable.
+</span>
+ @hide
+*/
+HI_SYNC_ID_INVALID : &quot;null&quot;,
+<span id='android-bluetooth-BluetoothHearingAid-method-connect'>/**Initiate connection to a profile of the remote bluetooth device.
+</span>
+ &lt;p&gt; This API returns false in scenarios like the profile on the
+ device is already connected or Bluetooth is not turned on.
+ When this API returns true, it is guaranteed that
+ connection state intent for the profile will be broadcasted with
+ the state. Users can get the connection state of the profile
+ from this intent.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+connect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-disconnect'>/**Initiate disconnection from a profile
+</span>
+ &lt;p&gt; This API will return false in scenarios like the profile on the
+ Bluetooth device is not in connected state etc. When this API returns,
+ true, it is guaranteed that the connection state change
+ intent will be broadcasted with the state. Users can get the
+ disconnection state of the profile from this intent.
+
+ &lt;p&gt; If the disconnection is initiated by a remote device, the state
+ will transition from {@link #STATE_CONNECTED} to
+ {@link #STATE_DISCONNECTED}. If the disconnect is initiated by the
+ host (local) device the state will transition from
+ {@link #STATE_CONNECTED} to state {@link #STATE_DISCONNECTING} to
+ state {@link #STATE_DISCONNECTED}. The transition to
+ {@link #STATE_DISCONNECTING} can be used to distinguish between the
+ two scenarios.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+disconnect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-getConnectedDevices'>/**{@inheritDoc}
+</span>*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-getDevicesMatchingConnectionStates'>/**{@inheritDoc}
+</span>*/
+getDevicesMatchingConnectionStates : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-getConnectionState'>/**{@inheritDoc}
+</span>*/
+getConnectionState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-setActiveDevice'>/**Select a connected device as active.
+</span>
+ The active device selection is per profile. An active device's
+ purpose is profile-specific. For example, Hearing Aid audio
+ streaming is to the active Hearing Aid device. If a remote device
+ is not connected, it cannot be selected as active.
+
+ &lt;p&gt; This API returns false in scenarios like the profile on the
+ device is not connected or Bluetooth is not turned on.
+ When this API returns true, it is guaranteed that the
+ {@link #ACTION_ACTIVE_DEVICE_CHANGED} intent will be broadcasted
+ with the active device.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device the remote Bluetooth device. Could be null to clear
+ the active device and stop streaming audio to a Bluetooth device.
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+setActiveDevice : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-getActiveDevices'>/**Get the connected physical Hearing Aid devices that are active
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH}
+ permission.
+@return {Object {java.util.List}} the list of active devices. The first element is the left active
+ device; the second element is the right active device. If either or both side
+ is not active, it will be null on that position. Returns empty list on error.
+@hide 
+*/
+getActiveDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-setPriority'>/**Set priority of the profile
+</span>
+ &lt;p&gt; The device should already be paired.
+ Priority can be one of {@link #PRIORITY_ON} orgetBluetoothManager
+ {@link #PRIORITY_OFF},
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Paired bluetooth device
+@param {Number} priority
+@return {Boolean} true if priority is set, false on error
+@hide 
+*/
+setPriority : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-getPriority'>/**Get the priority of the profile.
+</span>
+ &lt;p&gt; The priority can be any of:
+ {@link #PRIORITY_AUTO_CONNECT}, {@link #PRIORITY_OFF},
+ {@link #PRIORITY_ON}, {@link #PRIORITY_UNDEFINED}
+@param {Object {BluetoothDevice}} device Bluetooth device
+@return {Number} priority of the device
+@hide 
+*/
+getPriority : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-stateToString'>/**Helper for converting a state to a string.
+</span>
+ For debug use only - strings are not internationalized.
+@hide 
+*/
+stateToString : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-getVolume'>/**Get the volume of the device.
+</span>
+ &lt;p&gt; The volume is between -128 dB (mute) to 0 dB.
+@return {Number} volume of the hearing aid device.
+@hide 
+*/
+getVolume : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-adjustVolume'>/**Tells remote device to adjust volume. Uses the following values:
+</span> &lt;ul&gt;
+ &lt;li&gt;{@link AudioManager#ADJUST_LOWER}&lt;/li&gt;
+ &lt;li&gt;{@link AudioManager#ADJUST_RAISE}&lt;/li&gt;
+ &lt;li&gt;{@link AudioManager#ADJUST_MUTE}&lt;/li&gt;
+ &lt;li&gt;{@link AudioManager#ADJUST_UNMUTE}&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} direction One of the supported adjust values.
+@hide 
+*/
+adjustVolume : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-setVolume'>/**Tells remote device to set an absolute volume.
+</span>@param {Number} volume Absolute volume to be set on remote
+@hide 
+*/
+setVolume : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-getHiSyncId'>/**Get the CustomerId of the device.
+</span>@param {Object {BluetoothDevice}} device Bluetooth device
+@return {Number} the CustomerId of the device
+@hide 
+*/
+getHiSyncId : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-getDeviceSide'>/**Get the side of the device.
+</span>@param {Object {BluetoothDevice}} device Bluetooth device.
+@return {Number} SIDE_LEFT or SIDE_RIGHT
+@hide 
+*/
+getDeviceSide : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHearingAid-method-getDeviceMode'>/**Get the mode of the device.
+</span>@param {Object {BluetoothDevice}} device Bluetooth device
+@return {Number} MODE_MONAURAL or MODE_BINAURAL
+@hide 
+*/
+getDeviceMode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

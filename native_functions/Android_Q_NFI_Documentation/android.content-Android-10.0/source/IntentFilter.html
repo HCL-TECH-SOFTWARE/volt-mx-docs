@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-IntentFilter'>/**@class android.content.IntentFilter
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Structured description of Intent values to be matched.  An IntentFilter can
+ match against actions, categories, and data (either via its type, scheme,
+ and/or path) in an Intent.  It also includes a &quot;priority&quot; value which is
+ used to order multiple matching filters.
+
+ &lt;p&gt;IntentFilter objects are often created in XML as part of a package's
+ {@link android.R.styleable#AndroidManifest AndroidManifest.xml} file,
+ using {@link android.R.styleable#AndroidManifestIntentFilter intent-filter}
+ tags.
+
+ &lt;p&gt;There are three Intent characteristics you can filter on: the
+ &lt;em&gt;action&lt;/em&gt;, &lt;em&gt;data&lt;/em&gt;, and &lt;em&gt;categories&lt;/em&gt;.  For each of these
+ characteristics you can provide
+ multiple possible matching values (via {@link #addAction},
+ {@link #addDataType}, {@link #addDataScheme}, {@link #addDataSchemeSpecificPart},
+ {@link #addDataAuthority}, {@link #addDataPath}, and {@link #addCategory}, respectively).
+ For actions, the field
+ will not be tested if no values have been given (treating it as a wildcard);
+ if no data characteristics are specified, however, then the filter will
+ only match intents that contain no data.
+
+ &lt;p&gt;The data characteristic is
+ itself divided into three attributes: type, scheme, authority, and path.
+ Any that are
+ specified must match the contents of the Intent.  If you specify a scheme
+ but no type, only Intent that does not have a type (such as mailto:) will
+ match; a content: URI will never match because they always have a MIME type
+ that is supplied by their content provider.  Specifying a type with no scheme
+ has somewhat special meaning: it will match either an Intent with no URI
+ field, or an Intent with a content: or file: URI.  If you specify neither,
+ then only an Intent with no data or type will match.  To specify an authority,
+ you must also specify one or more schemes that it is associated with.
+ To specify a path, you also must specify both one or more authorities and
+ one or more schemes it is associated with.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For information about how to create and resolve intents, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/intents/intents-filters.html&quot;&gt;Intents and Intent Filters&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ &lt;h3&gt;Filter Rules&lt;/h3&gt;
+ &lt;p&gt;A match is based on the following rules.  Note that
+ for an IntentFilter to match an Intent, three conditions must hold:
+ the &lt;strong&gt;action&lt;/strong&gt; and &lt;strong&gt;category&lt;/strong&gt; must match, and
+ the data (both the &lt;strong&gt;data type&lt;/strong&gt; and
+ &lt;strong&gt;data scheme+authority+path&lt;/strong&gt; if specified) must match
+ (see {@link #match(ContentResolver, android.content.Intent, boolean, String)} for more details
+ on how the data fields match).
+
+ &lt;p&gt;&lt;strong&gt;Action&lt;/strong&gt; matches if any of the given values match the
+ Intent action; if the filter specifies no actions, then it will only match
+ Intents that do not contain an action.
+
+ &lt;p&gt;&lt;strong&gt;Data Type&lt;/strong&gt; matches if any of the given values match the
+ Intent type.  The Intent
+ type is determined by calling {@link android.content.Intent#resolveType}.  A wildcard can be
+ used for the MIME sub-type, in both the Intent and IntentFilter, so that the
+ type &quot;audio/*&quot; will match &quot;audio/mpeg&quot;, &quot;audio/aiff&quot;, &quot;audio/*&quot;, etc.
+ &lt;em&gt;Note that MIME type matching here is &lt;b&gt;case sensitive&lt;/b&gt;, unlike
+ formal RFC MIME types!&lt;/em&gt;  You should thus always use lower case letters
+ for your MIME types.
+
+ &lt;p&gt;&lt;strong&gt;Data Scheme&lt;/strong&gt; matches if any of the given values match the
+ Intent data's scheme.
+ The Intent scheme is determined by calling {@link android.content.Intent#getData}
+ and {@link android.net.Uri#getScheme} on that URI.
+ &lt;em&gt;Note that scheme matching here is &lt;b&gt;case sensitive&lt;/b&gt;, unlike
+ formal RFC schemes!&lt;/em&gt;  You should thus always use lower case letters
+ for your schemes.
+
+ &lt;p&gt;&lt;strong&gt;Data Scheme Specific Part&lt;/strong&gt; matches if any of the given values match
+ the Intent's data scheme specific part &lt;em&gt;and&lt;/em&gt; one of the data schemes in the filter
+ has matched the Intent, &lt;em&gt;or&lt;/em&gt; no scheme specific parts were supplied in the filter.
+ The Intent scheme specific part is determined by calling
+ {@link android.content.Intent#getData} and {@link android.net.Uri#getSchemeSpecificPart} on that URI.
+ &lt;em&gt;Note that scheme specific part matching is &lt;b&gt;case sensitive&lt;/b&gt;.&lt;/em&gt;
+
+ &lt;p&gt;&lt;strong&gt;Data Authority&lt;/strong&gt; matches if any of the given values match
+ the Intent's data authority &lt;em&gt;and&lt;/em&gt; one of the data schemes in the filter
+ has matched the Intent, &lt;em&gt;or&lt;/em&gt; no authorities were supplied in the filter.
+ The Intent authority is determined by calling
+ {@link android.content.Intent#getData} and {@link android.net.Uri#getAuthority} on that URI.
+ &lt;em&gt;Note that authority matching here is &lt;b&gt;case sensitive&lt;/b&gt;, unlike
+ formal RFC host names!&lt;/em&gt;  You should thus always use lower case letters
+ for your authority.
+
+ &lt;p&gt;&lt;strong&gt;Data Path&lt;/strong&gt; matches if any of the given values match the
+ Intent's data path &lt;em&gt;and&lt;/em&gt; both a scheme and authority in the filter
+ has matched against the Intent, &lt;em&gt;or&lt;/em&gt; no paths were supplied in the
+ filter.  The Intent authority is determined by calling
+ {@link android.content.Intent#getData} and {@link android.net.Uri#getPath} on that URI.
+
+ &lt;p&gt;&lt;strong&gt;Categories&lt;/strong&gt; match if &lt;em&gt;all&lt;/em&gt; of the categories in
+ the Intent match categories given in the filter.  Extra categories in the
+ filter that are not in the Intent will not cause the match to fail.  Note
+ that unlike the action, an IntentFilter with no categories
+ will only match an Intent that does not have any categories.
+*/
+var IntentFilter = {
+
+<span id='android-content-IntentFilter-property-SYSTEM_HIGH_PRIORITY'>/** The filter {@link #setPriority} value at which system high-priority
+</span> receivers are placed; that is, receivers that should execute before
+ application code. Applications should never use filters with this or
+ higher priorities.
+
+ @see #setPriority
+*/
+SYSTEM_HIGH_PRIORITY : &quot;1000&quot;,
+<span id='android-content-IntentFilter-property-SYSTEM_LOW_PRIORITY'>/** The filter {@link #setPriority} value at which system low-priority
+</span> receivers are placed; that is, receivers that should execute after
+ application code. Applications should never use filters with this or
+ lower priorities.
+
+ @see #setPriority
+*/
+SYSTEM_LOW_PRIORITY : &quot;-1000&quot;,
+<span id='android-content-IntentFilter-property-MATCH_CATEGORY_MASK'>/** The part of a match constant that describes the category of match
+</span> that occurred.  May be either {@link #MATCH_CATEGORY_EMPTY},
+ {@link #MATCH_CATEGORY_SCHEME}, {@link #MATCH_CATEGORY_SCHEME_SPECIFIC_PART},
+ {@link #MATCH_CATEGORY_HOST}, {@link #MATCH_CATEGORY_PORT},
+ {@link #MATCH_CATEGORY_PATH}, or {@link #MATCH_CATEGORY_TYPE}.  Higher
+ values indicate a better match.
+*/
+MATCH_CATEGORY_MASK : &quot;268369920&quot;,
+<span id='android-content-IntentFilter-property-MATCH_ADJUSTMENT_MASK'>/** The part of a match constant that applies a quality adjustment to the
+</span> basic category of match.  The value {@link #MATCH_ADJUSTMENT_NORMAL}
+ is no adjustment; higher numbers than that improve the quality, while
+ lower numbers reduce it.
+*/
+MATCH_ADJUSTMENT_MASK : &quot;65535&quot;,
+<span id='android-content-IntentFilter-property-MATCH_ADJUSTMENT_NORMAL'>/** Quality adjustment applied to the category of match that signifies
+</span> the default, base value; higher numbers improve the quality while
+ lower numbers reduce it.
+*/
+MATCH_ADJUSTMENT_NORMAL : &quot;32768&quot;,
+<span id='android-content-IntentFilter-property-MATCH_CATEGORY_EMPTY'>/** The filter matched an intent that had no data specified.
+</span>*/
+MATCH_CATEGORY_EMPTY : &quot;1048576&quot;,
+<span id='android-content-IntentFilter-property-MATCH_CATEGORY_SCHEME'>/** The filter matched an intent with the same data URI scheme.
+</span>*/
+MATCH_CATEGORY_SCHEME : &quot;2097152&quot;,
+<span id='android-content-IntentFilter-property-MATCH_CATEGORY_HOST'>/** The filter matched an intent with the same data URI scheme and
+</span> authority host.
+*/
+MATCH_CATEGORY_HOST : &quot;3145728&quot;,
+<span id='android-content-IntentFilter-property-MATCH_CATEGORY_PORT'>/** The filter matched an intent with the same data URI scheme and
+</span> authority host and port.
+*/
+MATCH_CATEGORY_PORT : &quot;4194304&quot;,
+<span id='android-content-IntentFilter-property-MATCH_CATEGORY_PATH'>/** The filter matched an intent with the same data URI scheme,
+</span> authority, and path.
+*/
+MATCH_CATEGORY_PATH : &quot;5242880&quot;,
+<span id='android-content-IntentFilter-property-MATCH_CATEGORY_SCHEME_SPECIFIC_PART'>/** The filter matched an intent with the same data URI scheme and
+</span> scheme specific part.
+*/
+MATCH_CATEGORY_SCHEME_SPECIFIC_PART : &quot;5767168&quot;,
+<span id='android-content-IntentFilter-property-MATCH_CATEGORY_TYPE'>/** The filter matched an intent with the same data MIME type.
+</span>*/
+MATCH_CATEGORY_TYPE : &quot;6291456&quot;,
+<span id='android-content-IntentFilter-property-NO_MATCH_TYPE'>/** The filter didn't match due to different MIME types.
+</span>*/
+NO_MATCH_TYPE : &quot;-1&quot;,
+<span id='android-content-IntentFilter-property-NO_MATCH_DATA'>/** The filter didn't match due to different data URIs.
+</span>*/
+NO_MATCH_DATA : &quot;-2&quot;,
+<span id='android-content-IntentFilter-property-NO_MATCH_ACTION'>/** The filter didn't match due to different actions.
+</span>*/
+NO_MATCH_ACTION : &quot;-3&quot;,
+<span id='android-content-IntentFilter-property-NO_MATCH_CATEGORY'>/** The filter didn't match because it required one or more categories
+</span> that were not in the Intent.
+*/
+NO_MATCH_CATEGORY : &quot;-4&quot;,
+<span id='android-content-IntentFilter-property-SCHEME_HTTP'>/** HTTP scheme.
+</span>
+ @see #addDataScheme(String)
+ @hide
+*/
+SCHEME_HTTP : &quot;http&quot;,
+<span id='android-content-IntentFilter-property-SCHEME_HTTPS'>/** HTTPS scheme.
+</span>
+ @see #addDataScheme(String)
+ @hide
+*/
+SCHEME_HTTPS : &quot;https&quot;,
+<span id='android-content-IntentFilter-property-VISIBILITY_NONE'>/**@hide */
+</span>VISIBILITY_NONE : &quot;0&quot;,
+<span id='android-content-IntentFilter-property-VISIBILITY_EXPLICIT'>/**@hide */
+</span>VISIBILITY_EXPLICIT : &quot;1&quot;,
+<span id='android-content-IntentFilter-property-VISIBILITY_IMPLICIT'>/**@hide */
+</span>VISIBILITY_IMPLICIT : &quot;2&quot;,
+<span id='android-content-IntentFilter-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-IntentFilter-method-create'>/**Create a new IntentFilter instance with a specified action and MIME
+</span> type, where you know the MIME type is correctly formatted.  This catches
+ the {@link android.content.IntentFilter.MalformedMimeTypeException} exception that the constructor
+ can call and turns it into a runtime exception.
+@param {String} action The action to match, such as Intent.ACTION_VIEW.
+@param {String} dataType The type to match, such as &quot;vnd.android.cursor.dir/person&quot;.
+@return {Object {android.content.IntentFilter}} A new IntentFilter for the given action and type.
+@see #IntentFilter(String, String)
+*/
+create : function(  ) {},
+
+<span id='android-content-IntentFilter-method-setPriority'>/**Modify priority of this filter.  This only affects receiver filters.
+</span> The priority of activity filters are set in XML and cannot be changed
+ programmatically. The default priority is 0. Positive values will be
+ before the default, lower values will be after it. Applications should
+ use a value that is larger than {@link #SYSTEM_LOW_PRIORITY} and
+ smaller than {@link #SYSTEM_HIGH_PRIORITY} .
+@param {Number} priority The new priority value.
+@see #getPriority
+@see #SYSTEM_LOW_PRIORITY
+@see #SYSTEM_HIGH_PRIORITY
+*/
+setPriority : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getPriority'>/**Return the priority of this filter.
+</span>@return {Number} The priority of the filter.
+@see #setPriority
+*/
+getPriority : function(  ) {},
+
+<span id='android-content-IntentFilter-method-setOrder'>/**
+</span>@hide 
+*/
+setOrder : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getOrder'>/**
+</span>@hide 
+*/
+getOrder : function(  ) {},
+
+<span id='android-content-IntentFilter-method-setAutoVerify'>/**Set whether this filter will needs to be automatically verified against its data URIs or not.
+</span> The default is false.
+
+ The verification would need to happen only and only if the Intent action is
+ {@link android.content.Intent#ACTION_VIEW} and the Intent category is
+ {@link android.content.Intent#CATEGORY_BROWSABLE} and the Intent data scheme
+ is &quot;http&quot; or &quot;https&quot;.
+
+ True means that the filter will need to use its data URIs to be verified.
+@param {Boolean} autoVerify The new autoVerify value.
+@see #getAutoVerify()
+@see #addAction(String)
+@see #getAction(int)
+@see #addCategory(String)
+@see #getCategory(int)
+@see #addDataScheme(String)
+@see #getDataScheme(int)
+@hide 
+*/
+setAutoVerify : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getAutoVerify'>/**Return if this filter will needs to be automatically verified again its data URIs or not.
+</span>@return {Boolean} True if the filter will needs to be automatically verified. False otherwise.
+@see #setAutoVerify(boolean)
+@hide 
+*/
+getAutoVerify : function(  ) {},
+
+<span id='android-content-IntentFilter-method-handleAllWebDataURI'>/**Return if this filter handle all HTTP or HTTPS data URI or not.  This is the
+</span> core check for whether a given activity qualifies as a &quot;browser&quot;.
+@return {Boolean} True if the filter handle all HTTP or HTTPS data URI. False otherwise.
+
+ This will check if:
+
+ - either the Intent category is {@link android.content.Intent#CATEGORY_APP_BROWSER}
+ - either the Intent action is {@link android.content.Intent#ACTION_VIEW} and
+ the Intent category is {@link android.content.Intent#CATEGORY_BROWSABLE} and the Intent
+ data scheme is &quot;http&quot; or &quot;https&quot; and that there is no specific host defined.
+@hide 
+*/
+handleAllWebDataURI : function(  ) {},
+
+<span id='android-content-IntentFilter-method-handlesWebUris'>/**Return if this filter handles HTTP or HTTPS data URIs.
+</span>@param {Boolean} onlyWebSchemes When true, requires that the intent filter declare
+     that it handles *only* http: or https: schemes.  This is a requirement for
+     the intent filter's domain linkage being verifiable.
+@param onlyWebSchemes When true, requires that the intent filter declare
+     that it handles *only* http: or https: schemes.  This is a requirement for
+     the intent filter's domain linkage being verifiable.
+@hide 
+*/
+handlesWebUris : function(  ) {},
+
+<span id='android-content-IntentFilter-method-needsVerification'>/**Return if this filter needs to be automatically verified again its data URIs or not.
+</span>@return {Boolean} True if the filter needs to be automatically verified. False otherwise.
+
+ This will check if if the Intent action is {@link android.content.Intent#ACTION_VIEW} and
+ the Intent category is {@link android.content.Intent#CATEGORY_BROWSABLE} and the Intent
+ data scheme is &quot;http&quot; or &quot;https&quot;.
+@see #setAutoVerify(boolean)
+@hide 
+*/
+needsVerification : function(  ) {},
+
+<span id='android-content-IntentFilter-method-isVerified'>/**Return if this filter has been verified
+</span>@return {Boolean} true if the filter has been verified or if autoVerify is false.
+@hide 
+*/
+isVerified : function(  ) {},
+
+<span id='android-content-IntentFilter-method-setVerified'>/**Set if this filter has been verified
+</span>@param {Boolean} verified true if this filter has been verified. False otherwise.
+@hide 
+*/
+setVerified : function(  ) {},
+
+<span id='android-content-IntentFilter-method-setVisibilityToInstantApp'>/**
+</span>@hide 
+*/
+setVisibilityToInstantApp : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getVisibilityToInstantApp'>/**
+</span>@hide 
+*/
+getVisibilityToInstantApp : function(  ) {},
+
+<span id='android-content-IntentFilter-method-isVisibleToInstantApp'>/**
+</span>@hide 
+*/
+isVisibleToInstantApp : function(  ) {},
+
+<span id='android-content-IntentFilter-method-isExplicitlyVisibleToInstantApp'>/**
+</span>@hide 
+*/
+isExplicitlyVisibleToInstantApp : function(  ) {},
+
+<span id='android-content-IntentFilter-method-isImplicitlyVisibleToInstantApp'>/**
+</span>@hide 
+*/
+isImplicitlyVisibleToInstantApp : function(  ) {},
+
+<span id='android-content-IntentFilter-method-addAction'>/**Add a new Intent action to match against.  If any actions are included
+</span> in the filter, then an Intent's action must be one of those values for
+ it to match.  If no actions are included, the Intent action is ignored.
+@param {String} action Name of the action to match, such as Intent.ACTION_VIEW.
+*/
+addAction : function(  ) {},
+
+<span id='android-content-IntentFilter-method-countActions'>/**Return the number of actions in the filter.
+</span>*/
+countActions : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getAction'>/**Return an action in the filter.
+</span>*/
+getAction : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasAction'>/**Is the given action included in the filter?  Note that if the filter
+</span> does not include any actions, false will &lt;em&gt;always&lt;/em&gt; be returned.
+@param {String} action The action to look for.
+@return {Boolean} True if the action is explicitly mentioned in the filter.
+*/
+hasAction : function(  ) {},
+
+<span id='android-content-IntentFilter-method-matchAction'>/**Match this filter against an Intent's action.  If the filter does not
+</span> specify any actions, the match will always fail.
+@param {String} action The desired action to look for.
+@return {Boolean} True if the action is listed in the filter.
+*/
+matchAction : function(  ) {},
+
+<span id='android-content-IntentFilter-method-actionsIterator'>/**Return an iterator over the filter's actions.  If there are no actions,
+</span> returns null.
+*/
+actionsIterator : function(  ) {},
+
+<span id='android-content-IntentFilter-method-addDataType'>/**Add a new Intent data type to match against.  If any types are
+</span> included in the filter, then an Intent's data must be &lt;em&gt;either&lt;/em&gt;
+ one of these types &lt;em&gt;or&lt;/em&gt; a matching scheme.  If no data types
+ are included, then an Intent will only match if it specifies no data.
+
+ &lt;p&gt;&lt;em&gt;Note: MIME type matching in the Android framework is
+ case-sensitive, unlike formal RFC MIME types.  As a result,
+ you should always write your MIME types with lower case letters,
+ and any MIME types you receive from outside of Android should be
+ converted to lower case before supplying them here.&lt;/em&gt;&lt;/p&gt;
+
+ &lt;p&gt;Throws {@link android.content.IntentFilter.MalformedMimeTypeException} if the given MIME type is
+ not syntactically correct.
+@param {String} type Name of the data type to match, such as &quot;vnd.android.cursor.dir/person&quot;.
+@see #matchData
+*/
+addDataType : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasDataType'>/**Is the given data type included in the filter?  Note that if the filter
+</span> does not include any type, false will &lt;em&gt;always&lt;/em&gt; be returned.
+@param {String} type The data type to look for.
+@return {Boolean} True if the type is explicitly mentioned in the filter.
+*/
+hasDataType : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasExactDataType'>/**
+</span>@hide 
+*/
+hasExactDataType : function(  ) {},
+
+<span id='android-content-IntentFilter-method-countDataTypes'>/**Return the number of data types in the filter.
+</span>*/
+countDataTypes : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getDataType'>/**Return a data type in the filter.
+</span>*/
+getDataType : function(  ) {},
+
+<span id='android-content-IntentFilter-method-typesIterator'>/**Return an iterator over the filter's data types.
+</span>*/
+typesIterator : function(  ) {},
+
+<span id='android-content-IntentFilter-method-addDataScheme'>/**Add a new Intent data scheme to match against.  If any schemes are
+</span> included in the filter, then an Intent's data must be &lt;em&gt;either&lt;/em&gt;
+ one of these schemes &lt;em&gt;or&lt;/em&gt; a matching data type.  If no schemes
+ are included, then an Intent will match only if it includes no data.
+
+ &lt;p&gt;&lt;em&gt;Note: scheme matching in the Android framework is
+ case-sensitive, unlike formal RFC schemes.  As a result,
+ you should always write your schemes with lower case letters,
+ and any schemes you receive from outside of Android should be
+ converted to lower case before supplying them here.&lt;/em&gt;&lt;/p&gt;
+@param {String} scheme Name of the scheme to match, such as &quot;http&quot;.
+@see #matchData
+*/
+addDataScheme : function(  ) {},
+
+<span id='android-content-IntentFilter-method-countDataSchemes'>/**Return the number of data schemes in the filter.
+</span>*/
+countDataSchemes : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getDataScheme'>/**Return a data scheme in the filter.
+</span>*/
+getDataScheme : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasDataScheme'>/**Is the given data scheme included in the filter?  Note that if the
+</span> filter does not include any scheme, false will &lt;em&gt;always&lt;/em&gt; be
+ returned.
+@param {String} scheme The data scheme to look for.
+@return {Boolean} True if the scheme is explicitly mentioned in the filter.
+*/
+hasDataScheme : function(  ) {},
+
+<span id='android-content-IntentFilter-method-schemesIterator'>/**Return an iterator over the filter's data schemes.
+</span>*/
+schemesIterator : function(  ) {},
+
+<span id='android-content-IntentFilter-method-addDataSchemeSpecificPart'>/**Add a new Intent data &quot;scheme specific part&quot; to match against.  The filter must
+</span> include one or more schemes (via {@link #addDataScheme}) for the
+ scheme specific part to be considered.  If any scheme specific parts are
+ included in the filter, then an Intent's data must match one of
+ them.  If no scheme specific parts are included, then only the scheme must match.
+
+ &lt;p&gt;The &quot;scheme specific part&quot; that this matches against is the string returned
+ by {@link android.net.Uri#getSchemeSpecificPart() Uri.getSchemeSpecificPart}.
+ For Uris that contain a path, this kind of matching is not generally of interest,
+ since {@link #addDataAuthority(String, String)} and
+ {@link #addDataPath(String, int)} can provide a better mechanism for matching
+ them.  However, for Uris that do not contain a path, the authority and path
+ are empty, so this is the only way to match against the non-scheme part.&lt;/p&gt;
+@param {String} ssp Either a raw string that must exactly match the scheme specific part
+ path, or a simple pattern, depending on &lt;var&gt;type&lt;/var&gt;.
+@param {Number} type Determines how &lt;var&gt;ssp&lt;/var&gt; will be compared to
+ determine a match: either {@link PatternMatcher#PATTERN_LITERAL},
+ {@link PatternMatcher#PATTERN_PREFIX}, or
+ {@link PatternMatcher#PATTERN_SIMPLE_GLOB}.
+@see #matchData
+@see #addDataScheme
+*/
+addDataSchemeSpecificPart : function(  ) {},
+
+<span id='android-content-IntentFilter-method-addDataSchemeSpecificPart'>/**
+</span>@hide 
+*/
+addDataSchemeSpecificPart : function(  ) {},
+
+<span id='android-content-IntentFilter-method-countDataSchemeSpecificParts'>/**Return the number of data scheme specific parts in the filter.
+</span>*/
+countDataSchemeSpecificParts : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getDataSchemeSpecificPart'>/**Return a data scheme specific part in the filter.
+</span>*/
+getDataSchemeSpecificPart : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasDataSchemeSpecificPart'>/**Is the given data scheme specific part included in the filter?  Note that if the
+</span> filter does not include any scheme specific parts, false will &lt;em&gt;always&lt;/em&gt; be
+ returned.
+@param {String} data The scheme specific part that is being looked for.
+@return {Boolean} Returns true if the data string matches a scheme specific part listed in the
+         filter.
+*/
+hasDataSchemeSpecificPart : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasDataSchemeSpecificPart'>/**
+</span>@hide 
+*/
+hasDataSchemeSpecificPart : function(  ) {},
+
+<span id='android-content-IntentFilter-method-schemeSpecificPartsIterator'>/**Return an iterator over the filter's data scheme specific parts.
+</span>*/
+schemeSpecificPartsIterator : function(  ) {},
+
+<span id='android-content-IntentFilter-method-addDataAuthority'>/**Add a new Intent data authority to match against.  The filter must
+</span> include one or more schemes (via {@link #addDataScheme}) for the
+ authority to be considered.  If any authorities are
+ included in the filter, then an Intent's data must match one of
+ them.  If no authorities are included, then only the scheme must match.
+
+ &lt;p&gt;&lt;em&gt;Note: host name in the Android framework is
+ case-sensitive, unlike formal RFC host names.  As a result,
+ you should always write your host names with lower case letters,
+ and any host names you receive from outside of Android should be
+ converted to lower case before supplying them here.&lt;/em&gt;&lt;/p&gt;
+@param {String} host The host part of the authority to match.  May start with a
+             single '*' to wildcard the front of the host name.
+@param {String} port Optional port part of the authority to match.  If null, any
+             port is allowed.
+@see #matchData
+@see #addDataScheme
+*/
+addDataAuthority : function(  ) {},
+
+<span id='android-content-IntentFilter-method-addDataAuthority'>/**
+</span>@hide 
+*/
+addDataAuthority : function(  ) {},
+
+<span id='android-content-IntentFilter-method-countDataAuthorities'>/**Return the number of data authorities in the filter.
+</span>*/
+countDataAuthorities : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getDataAuthority'>/**Return a data authority in the filter.
+</span>*/
+getDataAuthority : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasDataAuthority'>/**Is the given data authority included in the filter?  Note that if the
+</span> filter does not include any authorities, false will &lt;em&gt;always&lt;/em&gt; be
+ returned.
+@param {Object {Uri}} data The data whose authority is being looked for.
+@return {Boolean} Returns true if the data string matches an authority listed in the
+         filter.
+*/
+hasDataAuthority : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasDataAuthority'>/**
+</span>@hide 
+*/
+hasDataAuthority : function(  ) {},
+
+<span id='android-content-IntentFilter-method-authoritiesIterator'>/**Return an iterator over the filter's data authorities.
+</span>*/
+authoritiesIterator : function(  ) {},
+
+<span id='android-content-IntentFilter-method-addDataPath'>/**Add a new Intent data path to match against.  The filter must
+</span> include one or more schemes (via {@link #addDataScheme}) &lt;em&gt;and&lt;/em&gt;
+ one or more authorities (via {@link #addDataAuthority}) for the
+ path to be considered.  If any paths are
+ included in the filter, then an Intent's data must match one of
+ them.  If no paths are included, then only the scheme/authority must
+ match.
+
+ &lt;p&gt;The path given here can either be a literal that must directly
+ match or match against a prefix, or it can be a simple globbing pattern.
+ If the latter, you can use '*' anywhere in the pattern to match zero
+ or more instances of the previous character, '.' as a wildcard to match
+ any character, and '\' to escape the next character.
+@param {String} path Either a raw string that must exactly match the file
+ path, or a simple pattern, depending on &lt;var&gt;type&lt;/var&gt;.
+@param {Number} type Determines how &lt;var&gt;path&lt;/var&gt; will be compared to
+ determine a match: either {@link PatternMatcher#PATTERN_LITERAL},
+ {@link PatternMatcher#PATTERN_PREFIX}, or
+ {@link PatternMatcher#PATTERN_SIMPLE_GLOB}.
+@see #matchData
+@see #addDataScheme
+@see #addDataAuthority
+*/
+addDataPath : function(  ) {},
+
+<span id='android-content-IntentFilter-method-addDataPath'>/**
+</span>@hide 
+*/
+addDataPath : function(  ) {},
+
+<span id='android-content-IntentFilter-method-countDataPaths'>/**Return the number of data paths in the filter.
+</span>*/
+countDataPaths : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getDataPath'>/**Return a data path in the filter.
+</span>*/
+getDataPath : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasDataPath'>/**Is the given data path included in the filter?  Note that if the
+</span> filter does not include any paths, false will &lt;em&gt;always&lt;/em&gt; be
+ returned.
+@param {String} data The data path to look for.  This is without the scheme
+             prefix.
+@return {Boolean} True if the data string matches a path listed in the
+         filter.
+*/
+hasDataPath : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasDataPath'>/**
+</span>@hide 
+*/
+hasDataPath : function(  ) {},
+
+<span id='android-content-IntentFilter-method-pathsIterator'>/**Return an iterator over the filter's data paths.
+</span>*/
+pathsIterator : function(  ) {},
+
+<span id='android-content-IntentFilter-method-matchDataAuthority'>/**Match this intent filter against the given Intent data.  This ignores
+</span> the data scheme -- unlike {@link #matchData}, the authority will match
+ regardless of whether there is a matching scheme.
+@param {Object {Uri}} data The data whose authority is being looked for.
+@return {Number} Returns either {@link #MATCH_CATEGORY_HOST},
+ {@link #MATCH_CATEGORY_PORT}, {@link #NO_MATCH_DATA}.
+*/
+matchDataAuthority : function(  ) {},
+
+<span id='android-content-IntentFilter-method-matchData'>/**Match this filter against an Intent's data (type, scheme and path). If
+</span> the filter does not specify any types and does not specify any
+ schemes/paths, the match will only succeed if the intent does not
+ also specify a type or data.  If the filter does not specify any schemes,
+ it will implicitly match intents with no scheme, or the schemes &quot;content:&quot;
+ or &quot;file:&quot; (basically performing a MIME-type only match).  If the filter
+ does not specify any MIME types, the Intent also must not specify a MIME
+ type.
+
+ &lt;p&gt;Be aware that to match against an authority, you must also specify a base
+ scheme the authority is in.  To match against a data path, both a scheme
+ and authority must be specified.  If the filter does not specify any
+ types or schemes that it matches against, it is considered to be empty
+ (any authority or data path given is ignored, as if it were empty as
+ well).
+
+ &lt;p&gt;&lt;em&gt;Note: MIME type, Uri scheme, and host name matching in the
+ Android framework is case-sensitive, unlike the formal RFC definitions.
+ As a result, you should always write these elements with lower case letters,
+ and normalize any MIME types or Uris you receive from
+ outside of Android to ensure these elements are lower case before
+ supplying them here.&lt;/em&gt;&lt;/p&gt;
+@param {String} type The desired data type to look for, as returned by
+             Intent.resolveType().
+@param {String} scheme The desired data scheme to look for, as returned by
+               Intent.getScheme().
+@param {Object {Uri}} data The full data string to match against, as supplied in
+             Intent.data.
+@return {Number} Returns either a valid match constant (a combination of
+ {@link #MATCH_CATEGORY_MASK} and {@link #MATCH_ADJUSTMENT_MASK}),
+ or one of the error codes {@link #NO_MATCH_TYPE} if the type didn't match
+ or {@link #NO_MATCH_DATA} if the scheme/path didn't match.
+@see #match
+*/
+matchData : function(  ) {},
+
+<span id='android-content-IntentFilter-method-addCategory'>/**Add a new Intent category to match against.  The semantics of
+</span> categories is the opposite of actions -- an Intent includes the
+ categories that it requires, all of which must be included in the
+ filter in order to match.  In other words, adding a category to the
+ filter has no impact on matching unless that category is specified in
+ the intent.
+@param {String} category Name of category to match, such as Intent.CATEGORY_EMBED.
+*/
+addCategory : function(  ) {},
+
+<span id='android-content-IntentFilter-method-countCategories'>/**Return the number of categories in the filter.
+</span>*/
+countCategories : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getCategory'>/**Return a category in the filter.
+</span>*/
+getCategory : function(  ) {},
+
+<span id='android-content-IntentFilter-method-hasCategory'>/**Is the given category included in the filter?
+</span>@param {String} category The category that the filter supports.
+@return {Boolean} True if the category is explicitly mentioned in the filter.
+*/
+hasCategory : function(  ) {},
+
+<span id='android-content-IntentFilter-method-categoriesIterator'>/**Return an iterator over the filter's categories.
+</span>@return {Object {java.util.Iterator}} Iterator if this filter has categories or {@code null} if none.
+*/
+categoriesIterator : function(  ) {},
+
+<span id='android-content-IntentFilter-method-matchCategories'>/**Match this filter against an Intent's categories.  Each category in
+</span> the Intent must be specified by the filter; if any are not in the
+ filter, the match fails.
+@param {Object {java.util.Set}} categories The categories included in the intent, as returned by
+                   Intent.getCategories().
+@return {String} If all categories match (success), null; else the name of the
+         first category that didn't match.
+*/
+matchCategories : function(  ) {},
+
+<span id='android-content-IntentFilter-method-match'>/**Test whether this filter matches the given &lt;var&gt;intent&lt;/var&gt;.
+</span>@param {Object {ContentResolver}} intent The Intent to compare against.
+@param {Object {Intent}} resolve If true, the intent's type will be resolved by calling
+                Intent.resolveType(); otherwise a simple match against
+                Intent.type will be performed.
+@param {Boolean} logTag Tag to use in debugging messages.
+@return {Number} Returns either a valid match constant (a combination of
+ {@link #MATCH_CATEGORY_MASK} and {@link #MATCH_ADJUSTMENT_MASK}),
+ or one of the error codes {@link #NO_MATCH_TYPE} if the type didn't match,
+ {@link #NO_MATCH_DATA} if the scheme/path didn't match,
+ {@link #NO_MATCH_ACTION} if the action didn't match, or
+ {@link #NO_MATCH_CATEGORY} if one or more categories didn't match.
+@see #match(String, String, String, android.net.Uri , Set, String)
+*/
+match : function(  ) {},
+
+<span id='android-content-IntentFilter-method-match'>/**Test whether this filter matches the given intent data.  A match is
+</span> only successful if the actions and categories in the Intent match
+ against the filter, as described in {@link android.content.IntentFilter}; in that case,
+ the match result returned will be as per {@link #matchData}.
+@param {String} action The intent action to match against (Intent.getAction).
+@param {String} type The intent type to match against (Intent.resolveType()).
+@param {String} scheme The data scheme to match against (Intent.getScheme()).
+@param {Object {Uri}} data The data URI to match against (Intent.getData()).
+@param {Object {java.util.Set}} categories The categories to match against
+                   (Intent.getCategories()).
+@param {String} logTag Tag to use in debugging messages.
+@return {Number} Returns either a valid match constant (a combination of
+ {@link #MATCH_CATEGORY_MASK} and {@link #MATCH_ADJUSTMENT_MASK}),
+ or one of the error codes {@link #NO_MATCH_TYPE} if the type didn't match,
+ {@link #NO_MATCH_DATA} if the scheme/path didn't match,
+ {@link #NO_MATCH_ACTION} if the action didn't match, or
+ {@link #NO_MATCH_CATEGORY} if one or more categories didn't match.
+@see #matchData
+@see Intent#getAction
+@see Intent#resolveType
+@see Intent#getScheme
+@see Intent#getData
+@see Intent#getCategories
+*/
+match : function(  ) {},
+
+<span id='android-content-IntentFilter-method-writeToXml'>/**Write the contents of the IntentFilter as an XML stream.
+</span>*/
+writeToXml : function(  ) {},
+
+<span id='android-content-IntentFilter-method-readFromXml'>/**
+</span>*/
+readFromXml : function(  ) {},
+
+<span id='android-content-IntentFilter-method-writeToProto'>/**
+</span>@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-content-IntentFilter-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-content-IntentFilter-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-IntentFilter-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-IntentFilter-method-debugCheck'>/**For debugging -- perform a check on the filter, return true if it passed
+</span> or false if it failed.
+
+ {@hide}
+*/
+debugCheck : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getHostsList'>/**
+</span>@hide 
+*/
+getHostsList : function(  ) {},
+
+<span id='android-content-IntentFilter-method-getHosts'>/**
+</span>@hide 
+*/
+getHosts : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-SharedPreferences'>/**@class android.content.SharedPreferences
+</span> Interface for accessing and modifying preference data returned by {@link android.content.Context#getSharedPreferences}.  For any particular set of preferences,
+ there is a single instance of this class that all clients share.
+ Modifications to the preferences must go through an {@link android.content.SharedPreferences.Editor} object
+ to ensure the preference values remain in a consistent state and control
+ when they are committed to storage.  Objects that are returned from the
+ various &lt;code&gt;get&lt;/code&gt; methods must be treated as immutable by the application.
+
+ &lt;p&gt;Note: This class provides strong consistency guarantees. It is using expensive operations
+ which might slow down an app. Frequently changing properties or properties where loss can be
+ tolerated should use other mechanisms. For more details read the comments on
+ {@link android.content.SharedPreferences.Editor#commit()} and {@link android.content.SharedPreferences.Editor#apply()}.
+
+ &lt;p&gt;&lt;em&gt;Note: This class does not support use across multiple processes.&lt;/em&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using SharedPreferences, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/data/data-storage.html#pref&quot;&gt;Data Storage&lt;/a&gt;
+ developer guide.&lt;/p&gt;&lt;/div&gt;
+
+ @see Context#getSharedPreferences
+*/
+var SharedPreferences = {
+
+<span id='android-content-SharedPreferences-method-getAll'>/**Retrieve all values from the preferences.
+</span>
+ &lt;p&gt;Note that you &lt;em&gt;must not&lt;/em&gt; modify the collection returned
+ by this method, or alter any of its contents.  The consistency of your
+ stored data is not guaranteed if you do.
+@return {Object {java.util.Map}} Returns a map containing a list of pairs key/value representing
+ the preferences.
+@throws NullPointerException
+*/
+getAll : function(  ) {},
+
+<span id='android-content-SharedPreferences-method-getString'>/**Retrieve a String value from the preferences.
+</span>@param {String} key The name of the preference to retrieve.
+@param {String} defValue Value to return if this preference does not exist.
+@return {String} Returns the preference value if it exists, or defValue.  Throws
+ ClassCastException if there is a preference with this name that is not
+ a String.
+@throws ClassCastException
+*/
+getString : function(  ) {},
+
+<span id='android-content-SharedPreferences-method-getStringSet'>/**Retrieve a set of String values from the preferences.
+</span> 
+ &lt;p&gt;Note that you &lt;em&gt;must not&lt;/em&gt; modify the set instance returned
+ by this call.  The consistency of the stored data is not guaranteed
+ if you do, nor is your ability to modify the instance at all.
+@param {String} key The name of the preference to retrieve.
+@param {Object {java.util.Set}} defValues Values to return if this preference does not exist.
+@return {Object {java.util.Set}} Returns the preference values if they exist, or defValues.
+ Throws ClassCastException if there is a preference with this name
+ that is not a Set.
+@throws ClassCastException
+*/
+getStringSet : function(  ) {},
+
+<span id='android-content-SharedPreferences-method-getInt'>/**Retrieve an int value from the preferences.
+</span>@param {String} key The name of the preference to retrieve.
+@param {Number} defValue Value to return if this preference does not exist.
+@return {Number} Returns the preference value if it exists, or defValue.  Throws
+ ClassCastException if there is a preference with this name that is not
+ an int.
+@throws ClassCastException
+*/
+getInt : function(  ) {},
+
+<span id='android-content-SharedPreferences-method-getLong'>/**Retrieve a long value from the preferences.
+</span>@param {String} key The name of the preference to retrieve.
+@param {Number} defValue Value to return if this preference does not exist.
+@return {Number} Returns the preference value if it exists, or defValue.  Throws
+ ClassCastException if there is a preference with this name that is not
+ a long.
+@throws ClassCastException
+*/
+getLong : function(  ) {},
+
+<span id='android-content-SharedPreferences-method-getFloat'>/**Retrieve a float value from the preferences.
+</span>@param {String} key The name of the preference to retrieve.
+@param {Number} defValue Value to return if this preference does not exist.
+@return {Number} Returns the preference value if it exists, or defValue.  Throws
+ ClassCastException if there is a preference with this name that is not
+ a float.
+@throws ClassCastException
+*/
+getFloat : function(  ) {},
+
+<span id='android-content-SharedPreferences-method-getBoolean'>/**Retrieve a boolean value from the preferences.
+</span>@param {String} key The name of the preference to retrieve.
+@param {Boolean} defValue Value to return if this preference does not exist.
+@return {Boolean} Returns the preference value if it exists, or defValue.  Throws
+ ClassCastException if there is a preference with this name that is not
+ a boolean.
+@throws ClassCastException
+*/
+getBoolean : function(  ) {},
+
+<span id='android-content-SharedPreferences-method-contains'>/**Checks whether the preferences contains a preference.
+</span>@param {String} key The name of the preference to check.
+@return {Boolean} Returns true if the preference exists in the preferences,
+         otherwise false.
+*/
+contains : function(  ) {},
+
+<span id='android-content-SharedPreferences-method-edit'>/**Create a new Editor for these preferences, through which you can make
+</span> modifications to the data in the preferences and atomically commit those
+ changes back to the SharedPreferences object.
+ 
+ &lt;p&gt;Note that you &lt;em&gt;must&lt;/em&gt; call {@link android.content.SharedPreferences.Editor#commit} to have any
+ changes you perform in the Editor actually show up in the
+ SharedPreferences.
+@return {Object {android.content.SharedPreferences.Editor}} Returns a new instance of the {@link Editor} interface, allowing
+ you to modify the values in this SharedPreferences object.
+*/
+edit : function(  ) {},
+
+<span id='android-content-SharedPreferences-method-registerOnSharedPreferenceChangeListener'>/**Registers a callback to be invoked when a change happens to a preference.
+</span>
+ &lt;p class=&quot;caution&quot;&gt;&lt;strong&gt;Caution:&lt;/strong&gt; The preference manager does
+ not currently store a strong reference to the listener. You must store a
+ strong reference to the listener, or it will be susceptible to garbage
+ collection. We recommend you keep a reference to the listener in the
+ instance data of an object that will exist as long as you need the
+ listener.&lt;/p&gt;
+@param {Object {SharedPreferences.OnSharedPreferenceChangeListener}} listener The callback that will run.
+@see #unregisterOnSharedPreferenceChangeListener
+*/
+registerOnSharedPreferenceChangeListener : function(  ) {},
+
+<span id='android-content-SharedPreferences-method-unregisterOnSharedPreferenceChangeListener'>/**Unregisters a previous callback.
+</span>@param {Object {SharedPreferences.OnSharedPreferenceChangeListener}} listener The callback that should be unregistered.
+@see #registerOnSharedPreferenceChangeListener
+*/
+unregisterOnSharedPreferenceChangeListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

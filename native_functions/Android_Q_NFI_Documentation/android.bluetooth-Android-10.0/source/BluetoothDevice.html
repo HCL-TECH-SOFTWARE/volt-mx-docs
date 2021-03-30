@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothDevice'>/**@class android.bluetooth.BluetoothDevice
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Represents a remote Bluetooth device. A {@link android.bluetooth.BluetoothDevice} lets you
+ create a connection with the respective device or query information about
+ it, such as the name, address, class, and bonding state.
+
+ &lt;p&gt;This class is really just a thin wrapper for a Bluetooth hardware
+ address. Objects of this class are immutable. Operations on this class
+ are performed on the remote Bluetooth hardware address, using the
+ {@link android.bluetooth.BluetoothAdapter} that was used to create this {@link android.bluetooth.BluetoothDevice}.
+
+ &lt;p&gt;To get a {@link android.bluetooth.BluetoothDevice}, use
+ {@link android.bluetooth.BluetoothAdapter#getRemoteDevice(String)
+ android.bluetooth.BluetoothAdapter.getRemoteDevice(String)} to create one representing a device
+ of a known MAC address (which you can get through device discovery with
+ {@link android.bluetooth.BluetoothAdapter}) or get one from the set of bonded devices
+ returned by {@link android.bluetooth.BluetoothAdapter#getBondedDevices()
+ android.bluetooth.BluetoothAdapter.getBondedDevices()}. You can then open a
+ {@link android.bluetooth.BluetoothSocket} for communication with the remote device, using
+ {@link #createRfcommSocketToServiceRecord}(UUID) over Bluetooth BR/EDR or using
+ {@link #createL2capChannel(int)} over Bluetooth LE.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+ Requires the {@link android.Manifest.permission#BLUETOOTH} permission.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;
+ For more information about using Bluetooth, read the &lt;a href=
+ &quot;{@docRoot}guide/topics/connectivity/bluetooth.html&quot;&gt;Bluetooth&lt;/a&gt; developer
+ guide.
+ &lt;/p&gt;
+ &lt;/div&gt;
+
+ {@see BluetoothAdapter}
+ {@see BluetoothSocket}
+*/
+var BluetoothDevice = {
+
+<span id='android-bluetooth-BluetoothDevice-property-ERROR'>/** Sentinel error value for this class. Guaranteed to not equal any other
+</span> integer constant in this class. Provided as a convenience for functions
+ that require a sentinel error value, for example:
+ &lt;p&gt;&lt;code&gt;Intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
+ BluetoothDevice.ERROR)&lt;/code&gt;
+*/
+ERROR : &quot;-2147483648&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_FOUND'>/** Broadcast Action: Remote device discovered.
+</span> &lt;p&gt;Sent when a remote device is found during discovery.
+ &lt;p&gt;Always contains the extra fields {@link #EXTRA_DEVICE} and {@link #EXTRA_CLASS}. Can contain the extra fields {@link #EXTRA_NAME} and/or
+ {@link #EXTRA_RSSI} if they are available.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} and
+ {@link android.Manifest.permission#ACCESS_COARSE_LOCATION} to receive.
+*/
+ACTION_FOUND : &quot;android.bluetooth.device.action.FOUND&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_CLASS_CHANGED'>/** Broadcast Action: Bluetooth class of a remote device has changed.
+</span> &lt;p&gt;Always contains the extra fields {@link #EXTRA_DEVICE} and {@link #EXTRA_CLASS}.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} to receive.
+ {@see BluetoothClass}
+*/
+ACTION_CLASS_CHANGED : &quot;android.bluetooth.device.action.CLASS_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_ACL_CONNECTED'>/** Broadcast Action: Indicates a low level (ACL) connection has been
+</span> established with a remote device.
+ &lt;p&gt;Always contains the extra field {@link #EXTRA_DEVICE}.
+ &lt;p&gt;ACL connections are managed automatically by the Android Bluetooth
+ stack.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} to receive.
+*/
+ACTION_ACL_CONNECTED : &quot;android.bluetooth.device.action.ACL_CONNECTED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_ACL_DISCONNECT_REQUESTED'>/** Broadcast Action: Indicates that a low level (ACL) disconnection has
+</span> been requested for a remote device, and it will soon be disconnected.
+ &lt;p&gt;This is useful for graceful disconnection. Applications should use
+ this intent as a hint to immediately terminate higher level connections
+ (RFCOMM, L2CAP, or profile connections) to the remote device.
+ &lt;p&gt;Always contains the extra field {@link #EXTRA_DEVICE}.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} to receive.
+*/
+ACTION_ACL_DISCONNECT_REQUESTED : &quot;android.bluetooth.device.action.ACL_DISCONNECT_REQUESTED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_ACL_DISCONNECTED'>/** Broadcast Action: Indicates a low level (ACL) disconnection from a
+</span> remote device.
+ &lt;p&gt;Always contains the extra field {@link #EXTRA_DEVICE}.
+ &lt;p&gt;ACL connections are managed automatically by the Android Bluetooth
+ stack.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} to receive.
+*/
+ACTION_ACL_DISCONNECTED : &quot;android.bluetooth.device.action.ACL_DISCONNECTED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_NAME_CHANGED'>/** Broadcast Action: Indicates the friendly name of a remote device has
+</span> been retrieved for the first time, or changed since the last retrieval.
+ &lt;p&gt;Always contains the extra fields {@link #EXTRA_DEVICE} and {@link #EXTRA_NAME}.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} to receive.
+*/
+ACTION_NAME_CHANGED : &quot;android.bluetooth.device.action.NAME_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_ALIAS_CHANGED'>/** Broadcast Action: Indicates the alias of a remote device has been
+</span> changed.
+ &lt;p&gt;Always contains the extra field {@link #EXTRA_DEVICE}.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} to receive.
+
+ @hide
+*/
+ACTION_ALIAS_CHANGED : &quot;android.bluetooth.device.action.ALIAS_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_BOND_STATE_CHANGED'>/** Broadcast Action: Indicates a change in the bond state of a remote
+</span> device. For example, if a device is bonded (paired).
+ &lt;p&gt;Always contains the extra fields {@link #EXTRA_DEVICE}, {@link #EXTRA_BOND_STATE} and {@link #EXTRA_PREVIOUS_BOND_STATE}.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} to receive.
+*/
+ACTION_BOND_STATE_CHANGED : &quot;android.bluetooth.device.action.BOND_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_BATTERY_LEVEL_CHANGED'>/** Broadcast Action: Indicates the battery level of a remote device has
+</span> been retrieved for the first time, or changed since the last retrieval
+ &lt;p&gt;Always contains the extra fields {@link #EXTRA_DEVICE} and {@link #EXTRA_BATTERY_LEVEL}.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} to receive.
+
+ @hide
+*/
+ACTION_BATTERY_LEVEL_CHANGED : &quot;android.bluetooth.device.action.BATTERY_LEVEL_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_BATTERY_LEVEL'>/** Used as an Integer extra field in {@link #ACTION_BATTERY_LEVEL_CHANGED}
+</span> intent. It contains the most recently retrieved battery level information
+ ranging from 0% to 100% for a remote device, {@link #BATTERY_LEVEL_UNKNOWN}
+ when the valid is unknown or there is an error
+
+ @hide
+*/
+EXTRA_BATTERY_LEVEL : &quot;android.bluetooth.device.extra.BATTERY_LEVEL&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-BATTERY_LEVEL_UNKNOWN'>/** Used as the unknown value for {@link #EXTRA_BATTERY_LEVEL} and {@link #getBatteryLevel}()
+</span>
+ @hide
+*/
+BATTERY_LEVEL_UNKNOWN : &quot;-1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_DEVICE'>/** Used as a Parcelable {@link android.bluetooth.BluetoothDevice} extra field in every intent
+</span> broadcast by this class. It contains the {@link android.bluetooth.BluetoothDevice} that
+ the intent applies to.
+*/
+EXTRA_DEVICE : &quot;android.bluetooth.device.extra.DEVICE&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_NAME'>/** Used as a String extra field in {@link #ACTION_NAME_CHANGED} and {@link #ACTION_FOUND} intents. It contains the friendly Bluetooth name.
+</span>*/
+EXTRA_NAME : &quot;android.bluetooth.device.extra.NAME&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_RSSI'>/** Used as an optional short extra field in {@link #ACTION_FOUND} intents.
+</span> Contains the RSSI value of the remote device as reported by the
+ Bluetooth hardware.
+*/
+EXTRA_RSSI : &quot;android.bluetooth.device.extra.RSSI&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_CLASS'>/** Used as a Parcelable {@link android.bluetooth.BluetoothClass} extra field in {@link #ACTION_FOUND} and {@link #ACTION_CLASS_CHANGED} intents.
+</span>*/
+EXTRA_CLASS : &quot;android.bluetooth.device.extra.CLASS&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_BOND_STATE'>/** Used as an int extra field in {@link #ACTION_BOND_STATE_CHANGED} intents.
+</span> Contains the bond state of the remote device.
+ &lt;p&gt;Possible values are:
+ {@link #BOND_NONE},
+ {@link #BOND_BONDING},
+ {@link #BOND_BONDED}.
+*/
+EXTRA_BOND_STATE : &quot;android.bluetooth.device.extra.BOND_STATE&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_PREVIOUS_BOND_STATE'>/** Used as an int extra field in {@link #ACTION_BOND_STATE_CHANGED} intents.
+</span> Contains the previous bond state of the remote device.
+ &lt;p&gt;Possible values are:
+ {@link #BOND_NONE},
+ {@link #BOND_BONDING},
+ {@link #BOND_BONDED}.
+*/
+EXTRA_PREVIOUS_BOND_STATE : &quot;android.bluetooth.device.extra.PREVIOUS_BOND_STATE&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-BOND_NONE'>/** Indicates the remote device is not bonded (paired).
+</span> &lt;p&gt;There is no shared link key with the remote device, so communication
+ (if it is allowed at all) will be unauthenticated and unencrypted.
+*/
+BOND_NONE : &quot;10&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-BOND_BONDING'>/** Indicates bonding (pairing) is in progress with the remote device.
+</span>*/
+BOND_BONDING : &quot;11&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-BOND_BONDED'>/** Indicates the remote device is bonded (paired).
+</span> &lt;p&gt;A shared link keys exists locally for the remote device, so
+ communication can be authenticated and encrypted.
+ &lt;p&gt;&lt;i&gt;Being bonded (paired) with a remote device does not necessarily
+ mean the device is currently connected. It just means that the pending
+ procedure was completed at some earlier time, and the link key is still
+ stored locally, ready to use on the next connection.
+ &lt;/i&gt;
+*/
+BOND_BONDED : &quot;12&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_REASON'>/** Used as an int extra field in {@link #ACTION_PAIRING_REQUEST}
+</span> intents for unbond reason.
+
+ @hide
+*/
+EXTRA_REASON : &quot;android.bluetooth.device.extra.REASON&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_PAIRING_VARIANT'>/** Used as an int extra field in {@link #ACTION_PAIRING_REQUEST}
+</span> intents to indicate pairing method used. Possible values are:
+ {@link #PAIRING_VARIANT_PIN},
+ {@link #PAIRING_VARIANT_PASSKEY_CONFIRMATION},
+*/
+EXTRA_PAIRING_VARIANT : &quot;android.bluetooth.device.extra.PAIRING_VARIANT&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_PAIRING_KEY'>/** Used as an int extra field in {@link #ACTION_PAIRING_REQUEST}
+</span> intents as the value of passkey.
+*/
+EXTRA_PAIRING_KEY : &quot;android.bluetooth.device.extra.PAIRING_KEY&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-DEVICE_TYPE_UNKNOWN'>/** Bluetooth device type, Unknown
+</span>*/
+DEVICE_TYPE_UNKNOWN : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-DEVICE_TYPE_CLASSIC'>/** Bluetooth device type, Classic - BR/EDR devices
+</span>*/
+DEVICE_TYPE_CLASSIC : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-DEVICE_TYPE_LE'>/** Bluetooth device type, Low Energy - LE-only
+</span>*/
+DEVICE_TYPE_LE : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-DEVICE_TYPE_DUAL'>/** Bluetooth device type, Dual Mode - BR/EDR/LE
+</span>*/
+DEVICE_TYPE_DUAL : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_SDP_RECORD'>/**@hide */
+</span>ACTION_SDP_RECORD : &quot;android.bluetooth.device.action.SDP_RECORD&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_MAX_LENGTH'>/** Maximum length of a metadata entry, this is to avoid exploding Bluetooth
+</span> disk usage
+ @hide
+*/
+METADATA_MAX_LENGTH : &quot;2048&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_MANUFACTURER_NAME'>/** Manufacturer name of this Bluetooth device
+</span> Data type should be {@String} as {@link Byte} array.
+ @hide
+*/
+METADATA_MANUFACTURER_NAME : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_MODEL_NAME'>/** Model name of this Bluetooth device
+</span> Data type should be {@String} as {@link Byte} array.
+ @hide
+*/
+METADATA_MODEL_NAME : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_SOFTWARE_VERSION'>/** Software version of this Bluetooth device
+</span> Data type should be {@String} as {@link Byte} array.
+ @hide
+*/
+METADATA_SOFTWARE_VERSION : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_HARDWARE_VERSION'>/** Hardware version of this Bluetooth device
+</span> Data type should be {@String} as {@link Byte} array.
+ @hide
+*/
+METADATA_HARDWARE_VERSION : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_COMPANION_APP'>/** Package name of the companion app, if any
+</span> Data type should be {@String} as {@link Byte} array.
+ @hide
+*/
+METADATA_COMPANION_APP : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_MAIN_ICON'>/** URI to the main icon shown on the settings UI
+</span> Data type should be {@link Byte} array.
+ @hide
+*/
+METADATA_MAIN_ICON : &quot;5&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_IS_UNTETHERED_HEADSET'>/** Whether this device is an untethered headset with left, right and case
+</span> Data type should be {@String} as {@link Byte} array.
+ @hide
+*/
+METADATA_IS_UNTETHERED_HEADSET : &quot;6&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_UNTETHERED_LEFT_ICON'>/** URI to icon of the left headset
+</span> Data type should be {@link Byte} array.
+ @hide
+*/
+METADATA_UNTETHERED_LEFT_ICON : &quot;7&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_UNTETHERED_RIGHT_ICON'>/** URI to icon of the right headset
+</span> Data type should be {@link Byte} array.
+ @hide
+*/
+METADATA_UNTETHERED_RIGHT_ICON : &quot;8&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_UNTETHERED_CASE_ICON'>/** URI to icon of the headset charging case
+</span> Data type should be {@link Byte} array.
+ @hide
+*/
+METADATA_UNTETHERED_CASE_ICON : &quot;9&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_UNTETHERED_LEFT_BATTERY'>/** Battery level of left headset
+</span> Data type should be {@String} 0-100 as {@link Byte} array, otherwise
+ as invalid.
+ @hide
+*/
+METADATA_UNTETHERED_LEFT_BATTERY : &quot;10&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_UNTETHERED_RIGHT_BATTERY'>/** Battery level of rigth headset
+</span> Data type should be {@String} 0-100 as {@link Byte} array, otherwise
+ as invalid.
+ @hide
+*/
+METADATA_UNTETHERED_RIGHT_BATTERY : &quot;11&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_UNTETHERED_CASE_BATTERY'>/** Battery level of the headset charging case
+</span> Data type should be {@String} 0-100 as {@link Byte} array, otherwise
+ as invalid.
+ @hide
+*/
+METADATA_UNTETHERED_CASE_BATTERY : &quot;12&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_UNTETHERED_LEFT_CHARGING'>/** Whether the left headset is charging
+</span> Data type should be {@String} as {@link Byte} array.
+ @hide
+*/
+METADATA_UNTETHERED_LEFT_CHARGING : &quot;13&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_UNTETHERED_RIGHT_CHARGING'>/** Whether the right headset is charging
+</span> Data type should be {@String} as {@link Byte} array.
+ @hide
+*/
+METADATA_UNTETHERED_RIGHT_CHARGING : &quot;14&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_UNTETHERED_CASE_CHARGING'>/** Whether the headset charging case is charging
+</span> Data type should be {@String} as {@link Byte} array.
+ @hide
+*/
+METADATA_UNTETHERED_CASE_CHARGING : &quot;15&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-METADATA_ENHANCED_SETTINGS_UI_URI'>/** URI to the enhanced settings UI slice
+</span> Data type should be {@String} as {@link Byte} array, null means
+ the UI does not exist.
+ @hide
+*/
+METADATA_ENHANCED_SETTINGS_UI_URI : &quot;16&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_UUID'>/** Broadcast Action: This intent is used to broadcast the {@link UUID}
+</span> wrapped as a {@link android.os.ParcelUuid} of the remote device after it
+ has been fetched. This intent is sent only when the UUIDs of the remote
+ device are requested to be fetched using Service Discovery Protocol
+ &lt;p&gt; Always contains the extra field {@link #EXTRA_DEVICE}
+ &lt;p&gt; Always contains the extra field {@link #EXTRA_UUID}
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN} to receive.
+*/
+ACTION_UUID : &quot;android.bluetooth.device.action.UUID&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_MAS_INSTANCE'>/**@hide */
+</span>ACTION_MAS_INSTANCE : &quot;android.bluetooth.device.action.MAS_INSTANCE&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_NAME_FAILED'>/** Broadcast Action: Indicates a failure to retrieve the name of a remote
+</span> device.
+ &lt;p&gt;Always contains the extra field {@link #EXTRA_DEVICE}.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} to receive.
+
+ @hide
+*/
+ACTION_NAME_FAILED : &quot;android.bluetooth.device.action.NAME_FAILED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_PAIRING_REQUEST'>/** Broadcast Action: This intent is used to broadcast PAIRING REQUEST
+</span> &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN} to
+ receive.
+*/
+ACTION_PAIRING_REQUEST : &quot;android.bluetooth.device.action.PAIRING_REQUEST&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_PAIRING_CANCEL'>/**@hide */
+</span>ACTION_PAIRING_CANCEL : &quot;android.bluetooth.device.action.PAIRING_CANCEL&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_CONNECTION_ACCESS_REQUEST'>/**@hide */
+</span>ACTION_CONNECTION_ACCESS_REQUEST : &quot;android.bluetooth.device.action.CONNECTION_ACCESS_REQUEST&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_CONNECTION_ACCESS_REPLY'>/**@hide */
+</span>ACTION_CONNECTION_ACCESS_REPLY : &quot;android.bluetooth.device.action.CONNECTION_ACCESS_REPLY&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_CONNECTION_ACCESS_CANCEL'>/**@hide */
+</span>ACTION_CONNECTION_ACCESS_CANCEL : &quot;android.bluetooth.device.action.CONNECTION_ACCESS_CANCEL&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACTION_SILENCE_MODE_CHANGED'>/** Intent to broadcast silence mode changed.
+</span> Alway contains the extra field {@link #EXTRA_DEVICE}
+
+ @hide
+*/
+ACTION_SILENCE_MODE_CHANGED : &quot;android.bluetooth.device.action.SILENCE_MODE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_ACCESS_REQUEST_TYPE'>/** Used as an extra field in {@link #ACTION_CONNECTION_ACCESS_REQUEST} intent.
+</span>
+ @hide
+*/
+EXTRA_ACCESS_REQUEST_TYPE : &quot;android.bluetooth.device.extra.ACCESS_REQUEST_TYPE&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-REQUEST_TYPE_PROFILE_CONNECTION'>/**@hide */
+</span>REQUEST_TYPE_PROFILE_CONNECTION : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-REQUEST_TYPE_PHONEBOOK_ACCESS'>/**@hide */
+</span>REQUEST_TYPE_PHONEBOOK_ACCESS : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-REQUEST_TYPE_MESSAGE_ACCESS'>/**@hide */
+</span>REQUEST_TYPE_MESSAGE_ACCESS : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-REQUEST_TYPE_SIM_ACCESS'>/**@hide */
+</span>REQUEST_TYPE_SIM_ACCESS : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_PACKAGE_NAME'>/** Used as an extra field in {@link #ACTION_CONNECTION_ACCESS_REQUEST} intents,
+</span> Contains package name to return reply intent to.
+
+ @hide
+*/
+EXTRA_PACKAGE_NAME : &quot;android.bluetooth.device.extra.PACKAGE_NAME&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_CLASS_NAME'>/** Used as an extra field in {@link #ACTION_CONNECTION_ACCESS_REQUEST} intents,
+</span> Contains class name to return reply intent to.
+
+ @hide
+*/
+EXTRA_CLASS_NAME : &quot;android.bluetooth.device.extra.CLASS_NAME&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_CONNECTION_ACCESS_RESULT'>/** Used as an extra field in {@link #ACTION_CONNECTION_ACCESS_REPLY} intent.
+</span>
+ @hide
+*/
+EXTRA_CONNECTION_ACCESS_RESULT : &quot;android.bluetooth.device.extra.CONNECTION_ACCESS_RESULT&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-CONNECTION_ACCESS_YES'>/**@hide */
+</span>CONNECTION_ACCESS_YES : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-CONNECTION_ACCESS_NO'>/**@hide */
+</span>CONNECTION_ACCESS_NO : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_ALWAYS_ALLOWED'>/** Used as an extra field in {@link #ACTION_CONNECTION_ACCESS_REPLY} intents,
+</span> Contains boolean to indicate if the allowed response is once-for-all so that
+ next request will be granted without asking user again.
+
+ @hide
+*/
+EXTRA_ALWAYS_ALLOWED : &quot;android.bluetooth.device.extra.ALWAYS_ALLOWED&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-BOND_SUCCESS'>/** A bond attempt succeeded
+</span>
+ @hide
+*/
+BOND_SUCCESS : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-UNBOND_REASON_AUTH_FAILED'>/** A bond attempt failed because pins did not match, or remote device did
+</span> not respond to pin request in time
+
+ @hide
+*/
+UNBOND_REASON_AUTH_FAILED : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-UNBOND_REASON_AUTH_REJECTED'>/** A bond attempt failed because the other side explicitly rejected
+</span> bonding
+
+ @hide
+*/
+UNBOND_REASON_AUTH_REJECTED : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-UNBOND_REASON_AUTH_CANCELED'>/** A bond attempt failed because we canceled the bonding process
+</span>
+ @hide
+*/
+UNBOND_REASON_AUTH_CANCELED : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-UNBOND_REASON_REMOTE_DEVICE_DOWN'>/** A bond attempt failed because we could not contact the remote device
+</span>
+ @hide
+*/
+UNBOND_REASON_REMOTE_DEVICE_DOWN : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-UNBOND_REASON_DISCOVERY_IN_PROGRESS'>/** A bond attempt failed because a discovery is in progress
+</span>
+ @hide
+*/
+UNBOND_REASON_DISCOVERY_IN_PROGRESS : &quot;5&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-UNBOND_REASON_AUTH_TIMEOUT'>/** A bond attempt failed because of authentication timeout
+</span>
+ @hide
+*/
+UNBOND_REASON_AUTH_TIMEOUT : &quot;6&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-UNBOND_REASON_REPEATED_ATTEMPTS'>/** A bond attempt failed because of repeated attempts
+</span>
+ @hide
+*/
+UNBOND_REASON_REPEATED_ATTEMPTS : &quot;7&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-UNBOND_REASON_REMOTE_AUTH_CANCELED'>/** A bond attempt failed because we received an Authentication Cancel
+</span> by remote end
+
+ @hide
+*/
+UNBOND_REASON_REMOTE_AUTH_CANCELED : &quot;8&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-UNBOND_REASON_REMOVED'>/** An existing bond was explicitly revoked
+</span>
+ @hide
+*/
+UNBOND_REASON_REMOVED : &quot;9&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PAIRING_VARIANT_PIN'>/** The user will be prompted to enter a pin or
+</span> an app will enter a pin for user.
+*/
+PAIRING_VARIANT_PIN : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PAIRING_VARIANT_PASSKEY'>/** The user will be prompted to enter a passkey
+</span>
+ @hide
+*/
+PAIRING_VARIANT_PASSKEY : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PAIRING_VARIANT_PASSKEY_CONFIRMATION'>/** The user will be prompted to confirm the passkey displayed on the screen or
+</span> an app will confirm the passkey for the user.
+*/
+PAIRING_VARIANT_PASSKEY_CONFIRMATION : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PAIRING_VARIANT_CONSENT'>/** The user will be prompted to accept or deny the incoming pairing request
+</span>
+ @hide
+*/
+PAIRING_VARIANT_CONSENT : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PAIRING_VARIANT_DISPLAY_PASSKEY'>/** The user will be prompted to enter the passkey displayed on remote device
+</span> This is used for Bluetooth 2.1 pairing.
+
+ @hide
+*/
+PAIRING_VARIANT_DISPLAY_PASSKEY : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PAIRING_VARIANT_DISPLAY_PIN'>/** The user will be prompted to enter the PIN displayed on remote device.
+</span> This is used for Bluetooth 2.0 pairing.
+
+ @hide
+*/
+PAIRING_VARIANT_DISPLAY_PIN : &quot;5&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PAIRING_VARIANT_OOB_CONSENT'>/** The user will be prompted to accept or deny the OOB pairing request
+</span>
+ @hide
+*/
+PAIRING_VARIANT_OOB_CONSENT : &quot;6&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PAIRING_VARIANT_PIN_16_DIGITS'>/** The user will be prompted to enter a 16 digit pin or
+</span> an app will enter a 16 digit pin for user.
+
+ @hide
+*/
+PAIRING_VARIANT_PIN_16_DIGITS : &quot;7&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_UUID'>/** Used as an extra field in {@link #ACTION_UUID} intents,
+</span> Contains the {@link android.os.ParcelUuid}s of the remote device which
+ is a parcelable version of {@link UUID}.
+*/
+EXTRA_UUID : &quot;android.bluetooth.device.extra.UUID&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_SDP_RECORD'>/**@hide */
+</span>EXTRA_SDP_RECORD : &quot;android.bluetooth.device.extra.SDP_RECORD&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_SDP_SEARCH_STATUS'>/**@hide */
+</span>EXTRA_SDP_SEARCH_STATUS : &quot;android.bluetooth.device.extra.SDP_SEARCH_STATUS&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACCESS_UNKNOWN'>/** For {@link #getPhonebookAccessPermission}, {@link #setPhonebookAccessPermission},
+</span> {@link #getMessageAccessPermission} and {@link #setMessageAccessPermission}.
+
+ @hide
+*/
+ACCESS_UNKNOWN : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACCESS_ALLOWED'>/** For {@link #getPhonebookAccessPermission}, {@link #setPhonebookAccessPermission},
+</span> {@link #getMessageAccessPermission} and {@link #setMessageAccessPermission}.
+
+ @hide
+*/
+ACCESS_ALLOWED : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-ACCESS_REJECTED'>/** For {@link #getPhonebookAccessPermission}, {@link #setPhonebookAccessPermission},
+</span> {@link #getMessageAccessPermission} and {@link #setMessageAccessPermission}.
+
+ @hide
+*/
+ACCESS_REJECTED : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-TRANSPORT_AUTO'>/** No preference of physical transport for GATT connections to remote dual-mode devices
+</span>*/
+TRANSPORT_AUTO : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-TRANSPORT_BREDR'>/** Prefer BR/EDR transport for GATT connections to remote dual-mode devices
+</span>*/
+TRANSPORT_BREDR : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-TRANSPORT_LE'>/** Prefer LE transport for GATT connections to remote dual-mode devices
+</span>*/
+TRANSPORT_LE : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PHY_LE_1M'>/** Bluetooth LE 1M PHY. Used to refer to LE 1M Physical Channel for advertising, scanning or
+</span> connection.
+*/
+PHY_LE_1M : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PHY_LE_2M'>/** Bluetooth LE 2M PHY. Used to refer to LE 2M Physical Channel for advertising, scanning or
+</span> connection.
+*/
+PHY_LE_2M : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PHY_LE_CODED'>/** Bluetooth LE Coded PHY. Used to refer to LE Coded Physical Channel for advertising, scanning
+</span> or connection.
+*/
+PHY_LE_CODED : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PHY_LE_1M_MASK'>/** Bluetooth LE 1M PHY mask. Used to specify LE 1M Physical Channel as one of many available
+</span> options in a bitmask.
+*/
+PHY_LE_1M_MASK : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PHY_LE_2M_MASK'>/** Bluetooth LE 2M PHY mask. Used to specify LE 2M Physical Channel as one of many available
+</span> options in a bitmask.
+*/
+PHY_LE_2M_MASK : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PHY_LE_CODED_MASK'>/** Bluetooth LE Coded PHY mask. Used to specify LE Coded Physical Channel as one of many
+</span> available options in a bitmask.
+*/
+PHY_LE_CODED_MASK : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PHY_OPTION_NO_PREFERRED'>/** No preferred coding when transmitting on the LE Coded PHY.
+</span>*/
+PHY_OPTION_NO_PREFERRED : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PHY_OPTION_S2'>/** Prefer the S=2 coding to be used when transmitting on the LE Coded PHY.
+</span>*/
+PHY_OPTION_S2 : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-PHY_OPTION_S8'>/** Prefer the S=8 coding to be used when transmitting on the LE Coded PHY.
+</span>*/
+PHY_OPTION_S8 : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-EXTRA_MAS_INSTANCE'>/**@hide */
+</span>EXTRA_MAS_INSTANCE : &quot;android.bluetooth.device.extra.MAS_INSTANCE&quot;,
+<span id='android-bluetooth-BluetoothDevice-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-bluetooth-BluetoothDevice-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-toString'>/**Returns a string representation of this BluetoothDevice.
+</span> &lt;p&gt;Currently this is the Bluetooth hardware address, for example
+ &quot;00:11:22:AA:BB:CC&quot;. However, you should always use {@link #getAddress}
+ if you explicitly require the Bluetooth hardware address in case the
+ {@link #toString} representation changes in the future.
+@return {String} string representation of this BluetoothDevice
+*/
+toString : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getAddress'>/**Returns the hardware address of this BluetoothDevice.
+</span> &lt;p&gt; For example, &quot;00:11:22:AA:BB:CC&quot;.
+@return {String} Bluetooth hardware address as string
+*/
+getAddress : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getName'>/**Get the friendly Bluetooth name of the remote device.
+</span>
+ &lt;p&gt;The local adapter will automatically retrieve remote names when
+ performing a device scan, and will cache them. This method just returns
+ the name for this device from the cache.
+@return {String} the Bluetooth name, or null if there was a problem.
+*/
+getName : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getType'>/**Get the Bluetooth device type of the remote device.
+</span>@return {Number} the device type {@link #DEVICE_TYPE_CLASSIC}, {@link #DEVICE_TYPE_LE} {@link
+ #DEVICE_TYPE_DUAL}. {@link #DEVICE_TYPE_UNKNOWN} if it's not available
+*/
+getType : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getAlias'>/**Get the Bluetooth alias of the remote device.
+</span> &lt;p&gt;Alias is the locally modified name of a remote device.
+@return {String} the Bluetooth alias, or null if no alias or there was a problem
+@hide 
+*/
+getAlias : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setAlias'>/**Set the Bluetooth alias of the remote device.
+</span> &lt;p&gt;Alias is the locally modified name of a remote device.
+ &lt;p&gt;This methoid overwrites the alias. The changed
+ alias is saved in the local storage so that the change
+ is preserved over power cycle.
+@return {Boolean} true on success, false on error
+@hide 
+*/
+setAlias : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getAliasName'>/**Get the Bluetooth alias of the remote device.
+</span> If Alias is null, get the Bluetooth name instead.
+@return {String} the Bluetooth alias, or null if no alias or there was a problem
+@hide 
+@see #getAlias()
+@see #getName()
+*/
+getAliasName : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getBatteryLevel'>/**Get the most recent identified battery level of this Bluetooth device
+</span> &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH}
+@return {Number} Battery level in percents from 0 to 100, or {@link #BATTERY_LEVEL_UNKNOWN} if
+ Bluetooth is disabled, or device is disconnected, or does not have any battery reporting
+ service, or return value is invalid
+@hide 
+*/
+getBatteryLevel : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createBond'>/**Start the bonding (pairing) process with the remote device.
+</span> &lt;p&gt;This is an asynchronous call, it will return immediately. Register
+ for {@link #ACTION_BOND_STATE_CHANGED} intents to be notified when
+ the bonding process completes, and its result.
+ &lt;p&gt;Android system services will handle the necessary user interactions
+ to confirm and complete the bonding process.
+@return {Boolean} false on immediate error, true if bonding will begin
+*/
+createBond : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createBond'>/**Start the bonding (pairing) process with the remote device using the
+</span> specified transport.
+
+ &lt;p&gt;This is an asynchronous call, it will return immediately. Register
+ for {@link #ACTION_BOND_STATE_CHANGED} intents to be notified when
+ the bonding process completes, and its result.
+ &lt;p&gt;Android system services will handle the necessary user interactions
+ to confirm and complete the bonding process.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}.
+@param {Number} transport The transport to use for the pairing procedure.
+@return {Boolean} false on immediate error, true if bonding will begin
+@throws IllegalArgumentException if an invalid transport was specified
+@hide 
+*/
+createBond : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createBondOutOfBand'>/**Start the bonding (pairing) process with the remote device using the
+</span> Out Of Band mechanism.
+
+ &lt;p&gt;This is an asynchronous call, it will return immediately. Register
+ for {@link #ACTION_BOND_STATE_CHANGED} intents to be notified when
+ the bonding process completes, and its result.
+
+ &lt;p&gt;Android system services will handle the necessary user interactions
+ to confirm and complete the bonding process.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}.
+@param {Number} transport - Transport to use
+@param {Object {OobData}} oobData - Out Of Band data
+@return {Boolean} false on immediate error, true if bonding will begin
+@hide 
+*/
+createBondOutOfBand : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-isBondingInitiatedLocally'>/**
+</span>@hide 
+*/
+isBondingInitiatedLocally : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setDeviceOutOfBandData'>/**Set the Out Of Band data for a remote device to be used later
+</span> in the pairing mechanism. Users can obtain this data through other
+ trusted channels
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}.
+@param {Object {byte[]}} hash Simple Secure pairing hash
+@param {Object {byte[]}} randomizer The random key obtained using OOB
+@return {Boolean} false on error; true otherwise
+@hide 
+*/
+setDeviceOutOfBandData : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-cancelBondProcess'>/**Cancel an in-progress bonding request started with {@link #createBond}.
+</span> &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}.
+@return {Boolean} true on success, false on error
+@hide 
+*/
+cancelBondProcess : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-removeBond'>/**Remove bond (pairing) with the remote device.
+</span> &lt;p&gt;Delete the link key associated with the remote device, and
+ immediately terminate connections to that device that require
+ authentication and encryption.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}.
+@return {Boolean} true on success, false on error
+@hide 
+*/
+removeBond : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getBondState'>/**Get the bond state of the remote device.
+</span> &lt;p&gt;Possible values for the bond state are:
+ {@link #BOND_NONE},
+ {@link #BOND_BONDING},
+ {@link #BOND_BONDED}.
+@return {Number} the bond state
+*/
+getBondState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-isConnected'>/**Returns whether there is an open connection to this device.
+</span> &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH}.
+@return {Boolean} True if there is at least one open connection to this device.
+@hide 
+*/
+isConnected : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-isEncrypted'>/**Returns whether there is an open connection to this device
+</span> that has been encrypted.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH}.
+@return {Boolean} True if there is at least one encrypted connection to this device.
+@hide 
+*/
+isEncrypted : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getBluetoothClass'>/**Get the Bluetooth class of the remote device.
+</span>@return {Object {android.bluetooth.BluetoothClass}} Bluetooth class object, or null on error
+*/
+getBluetoothClass : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getUuids'>/**Returns the supported features (UUIDs) of the remote device.
+</span>
+ &lt;p&gt;This method does not start a service discovery procedure to retrieve the UUIDs
+ from the remote device. Instead, the local cached copy of the service
+ UUIDs are returned.
+ &lt;p&gt;Use {@link #fetchUuidsWithSdp} if fresh UUIDs are desired.
+@return {Object {android.os.ParcelUuid}} the supported features (UUIDs) of the remote device, or null on error
+*/
+getUuids : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-fetchUuidsWithSdp'>/**Perform a service discovery on the remote device to get the UUIDs supported.
+</span>
+ &lt;p&gt;This API is asynchronous and {@link #ACTION_UUID} intent is sent,
+ with the UUIDs supported by the remote end. If there is an error
+ in getting the SDP records or if the process takes a long time,
+ {@link #ACTION_UUID} intent is sent with the UUIDs that is currently
+ present in the cache. Clients should use the {@link #getUuids} to get UUIDs
+ if service discovery is not to be performed.
+@return {Boolean} False if the sanity check fails, True if the process of initiating an ACL connection
+ to the remote device was started.
+*/
+fetchUuidsWithSdp : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-sdpSearch'>/**
+</span>@hide 
+*/
+sdpSearch : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setPin'>/**Set the pin during pairing when the pairing method is {@link #PAIRING_VARIANT_PIN}
+</span> &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}.
+@return {Boolean} true pin has been set false for error
+*/
+setPin : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setPasskey'>/**
+</span>@hide 
+*/
+setPasskey : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setPairingConfirmation'>/**Confirm passkey for {@link #PAIRING_VARIANT_PASSKEY_CONFIRMATION} pairing.
+</span>@return {Boolean} true confirmation has been sent out false for error
+*/
+setPairingConfirmation : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setRemoteOutOfBandData'>/**
+</span>@hide 
+*/
+setRemoteOutOfBandData : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-cancelPairingUserInput'>/**
+</span>@hide 
+*/
+cancelPairingUserInput : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-isBluetoothDock'>/**
+</span>@hide 
+*/
+isBluetoothDock : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getPhonebookAccessPermission'>/**Requires {@link android.Manifest.permission#BLUETOOTH}.
+</span>@return {Number} Whether the phonebook access is allowed to this device. Can be {@link
+ #ACCESS_UNKNOWN}, {@link #ACCESS_ALLOWED} or {@link #ACCESS_REJECTED}.
+@hide 
+*/
+getPhonebookAccessPermission : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setSilenceMode'>/**Sets whether the {@link android.bluetooth.BluetoothDevice} enters silence mode. Audio will not
+</span> be routed to the {@link android.bluetooth.BluetoothDevice} if set to {@code true}.
+
+ When the {@link android.bluetooth.BluetoothDevice} enters silence mode, and the {@link android.bluetooth.BluetoothDevice}
+ is an active device (for A2DP or HFP), the active device for that profile
+ will be set to null.
+ If the {@link android.bluetooth.BluetoothDevice} exits silence mode while the A2DP or HFP
+ active device is null, the {@link android.bluetooth.BluetoothDevice} will be set as the
+ active device for that profile.
+ If the {@link android.bluetooth.BluetoothDevice} is disconnected, it exits silence mode.
+ If the {@link android.bluetooth.BluetoothDevice} is set as the active device for A2DP or
+ HFP, while silence mode is enabled, then the device will exit silence mode.
+ If the {@link android.bluetooth.BluetoothDevice} is in silence mode, AVRCP position change
+ event and HFP AG indicators will be disabled.
+ If the {@link android.bluetooth.BluetoothDevice} is not connected with A2DP or HFP, it cannot
+ enter silence mode.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#BLUETOOTH_PRIVILEGED}.
+@param {Boolean} silence true to enter silence mode, false to exit
+@return {Boolean} true on success, false on error.
+@throws IllegalStateException if Bluetooth is not turned ON.
+@hide 
+*/
+setSilenceMode : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-isInSilenceMode'>/**Check whether the {@link android.bluetooth.BluetoothDevice} is in silence mode
+</span>
+ &lt;p&gt; Requires {@link android.Manifest.permission#BLUETOOTH_PRIVILEGED}.
+@return {Boolean} true on device in silence mode, otherwise false.
+@throws IllegalStateException if Bluetooth is not turned ON.
+@hide 
+*/
+isInSilenceMode : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setPhonebookAccessPermission'>/**Sets whether the phonebook access is allowed to this device.
+</span> &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_PRIVILEGED}.
+@param {Number} value Can be {@link #ACCESS_UNKNOWN}, {@link #ACCESS_ALLOWED} or {@link
+ #ACCESS_REJECTED}.
+@return {Boolean} Whether the value has been successfully set.
+@hide 
+*/
+setPhonebookAccessPermission : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getMessageAccessPermission'>/**Requires {@link android.Manifest.permission#BLUETOOTH}.
+</span>@return {Number} Whether the message access is allowed to this device. Can be {@link #ACCESS_UNKNOWN},
+ {@link #ACCESS_ALLOWED} or {@link #ACCESS_REJECTED}.
+@hide 
+*/
+getMessageAccessPermission : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setMessageAccessPermission'>/**Sets whether the message access is allowed to this device.
+</span> &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_PRIVILEGED}.
+@param {Number} value Can be {@link #ACCESS_UNKNOWN}, {@link #ACCESS_ALLOWED} or {@link
+ #ACCESS_REJECTED}.
+@return {Boolean} Whether the value has been successfully set.
+@hide 
+*/
+setMessageAccessPermission : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getSimAccessPermission'>/**Requires {@link android.Manifest.permission#BLUETOOTH}.
+</span>@return {Number} Whether the Sim access is allowed to this device. Can be {@link #ACCESS_UNKNOWN},
+ {@link #ACCESS_ALLOWED} or {@link #ACCESS_REJECTED}.
+@hide 
+*/
+getSimAccessPermission : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setSimAccessPermission'>/**Sets whether the Sim access is allowed to this device.
+</span> &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_PRIVILEGED}.
+@param {Number} value Can be {@link #ACCESS_UNKNOWN}, {@link #ACCESS_ALLOWED} or {@link
+ #ACCESS_REJECTED}.
+@return {Boolean} Whether the value has been successfully set.
+@hide 
+*/
+setSimAccessPermission : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createRfcommSocket'>/**Create an RFCOMM {@link android.bluetooth.BluetoothSocket} ready to start a secure
+</span> outgoing connection to this remote device on given channel.
+ &lt;p&gt;The remote device will be authenticated and communication on this
+ socket will be encrypted.
+ &lt;p&gt; Use this socket only if an authenticated socket link is possible.
+ Authentication refers to the authentication of the link key to
+ prevent man-in-the-middle type of attacks.
+ For example, for Bluetooth 2.1 devices, if any of the devices does not
+ have an input and output capability or just has the ability to
+ display a numeric key, a secure socket connection is not possible.
+ In such a case, use {@link createInsecureRfcommSocket}.
+ For more details, refer to the Security Model section 5.2 (vol 3) of
+ Bluetooth Core Specification version 2.1 + EDR.
+ &lt;p&gt;Use {@link android.bluetooth.BluetoothSocket#connect} to initiate the outgoing
+ connection.
+ &lt;p&gt;Valid RFCOMM channels are in range 1 to 30.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH}
+@param {Number} channel RFCOMM channel to connect to
+@return {Object {android.bluetooth.BluetoothSocket}} a RFCOMM BluetoothServerSocket ready for an outgoing connection
+@throws IOException on error, for example Bluetooth not available, or insufficient
+ permissions
+@hide 
+*/
+createRfcommSocket : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createL2capSocket'>/**Create an L2cap {@link android.bluetooth.BluetoothSocket} ready to start a secure
+</span> outgoing connection to this remote device on given channel.
+ &lt;p&gt;The remote device will be authenticated and communication on this
+ socket will be encrypted.
+ &lt;p&gt; Use this socket only if an authenticated socket link is possible.
+ Authentication refers to the authentication of the link key to
+ prevent man-in-the-middle type of attacks.
+ For example, for Bluetooth 2.1 devices, if any of the devices does not
+ have an input and output capability or just has the ability to
+ display a numeric key, a secure socket connection is not possible.
+ In such a case, use {@link createInsecureRfcommSocket}.
+ For more details, refer to the Security Model section 5.2 (vol 3) of
+ Bluetooth Core Specification version 2.1 + EDR.
+ &lt;p&gt;Use {@link android.bluetooth.BluetoothSocket#connect} to initiate the outgoing
+ connection.
+ &lt;p&gt;Valid L2CAP PSM channels are in range 1 to 2^16.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH}
+@param {Number} channel L2cap PSM/channel to connect to
+@return {Object {android.bluetooth.BluetoothSocket}} a RFCOMM BluetoothServerSocket ready for an outgoing connection
+@throws IOException on error, for example Bluetooth not available, or insufficient
+ permissions
+@hide 
+*/
+createL2capSocket : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createInsecureL2capSocket'>/**Create an L2cap {@link android.bluetooth.BluetoothSocket} ready to start an insecure
+</span> outgoing connection to this remote device on given channel.
+ &lt;p&gt;The remote device will be not authenticated and communication on this
+ socket will not be encrypted.
+ &lt;p&gt;Use {@link android.bluetooth.BluetoothSocket#connect} to initiate the outgoing
+ connection.
+ &lt;p&gt;Valid L2CAP PSM channels are in range 1 to 2^16.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH}
+@param {Number} channel L2cap PSM/channel to connect to
+@return {Object {android.bluetooth.BluetoothSocket}} a RFCOMM BluetoothServerSocket ready for an outgoing connection
+@throws IOException on error, for example Bluetooth not available, or insufficient
+ permissions
+@hide 
+*/
+createInsecureL2capSocket : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createRfcommSocketToServiceRecord'>/**Create an RFCOMM {@link android.bluetooth.BluetoothSocket} ready to start a secure
+</span> outgoing connection to this remote device using SDP lookup of uuid.
+ &lt;p&gt;This is designed to be used with {@link android.bluetooth.BluetoothAdapter#listenUsingRfcommWithServiceRecord} for peer-peer
+ Bluetooth applications.
+ &lt;p&gt;Use {@link android.bluetooth.BluetoothSocket#connect} to initiate the outgoing
+ connection. This will also perform an SDP lookup of the given uuid to
+ determine which channel to connect to.
+ &lt;p&gt;The remote device will be authenticated and communication on this
+ socket will be encrypted.
+ &lt;p&gt; Use this socket only if an authenticated socket link is possible.
+ Authentication refers to the authentication of the link key to
+ prevent man-in-the-middle type of attacks.
+ For example, for Bluetooth 2.1 devices, if any of the devices does not
+ have an input and output capability or just has the ability to
+ display a numeric key, a secure socket connection is not possible.
+ In such a case, use {@link #createInsecureRfcommSocketToServiceRecord}.
+ For more details, refer to the Security Model section 5.2 (vol 3) of
+ Bluetooth Core Specification version 2.1 + EDR.
+ &lt;p&gt;Hint: If you are connecting to a Bluetooth serial board then try
+ using the well-known SPP UUID 00001101-0000-1000-8000-00805F9B34FB.
+ However if you are connecting to an Android peer then please generate
+ your own unique UUID.
+@param {Object {UUID}} uuid service record uuid to lookup RFCOMM channel
+@return {Object {android.bluetooth.BluetoothSocket}} a RFCOMM BluetoothServerSocket ready for an outgoing connection
+@throws IOException on error, for example Bluetooth not available, or insufficient
+ permissions
+*/
+createRfcommSocketToServiceRecord : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createInsecureRfcommSocketToServiceRecord'>/**Create an RFCOMM {@link android.bluetooth.BluetoothSocket} socket ready to start an insecure
+</span> outgoing connection to this remote device using SDP lookup of uuid.
+ &lt;p&gt; The communication channel will not have an authenticated link key
+ i.e it will be subject to man-in-the-middle attacks. For Bluetooth 2.1
+ devices, the link key will be encrypted, as encryption is mandatory.
+ For legacy devices (pre Bluetooth 2.1 devices) the link key will
+ be not be encrypted. Use {@link #createRfcommSocketToServiceRecord} if an
+ encrypted and authenticated communication channel is desired.
+ &lt;p&gt;This is designed to be used with {@link android.bluetooth.BluetoothAdapter#listenUsingInsecureRfcommWithServiceRecord} for peer-peer
+ Bluetooth applications.
+ &lt;p&gt;Use {@link android.bluetooth.BluetoothSocket#connect} to initiate the outgoing
+ connection. This will also perform an SDP lookup of the given uuid to
+ determine which channel to connect to.
+ &lt;p&gt;The remote device will be authenticated and communication on this
+ socket will be encrypted.
+ &lt;p&gt;Hint: If you are connecting to a Bluetooth serial board then try
+ using the well-known SPP UUID 00001101-0000-1000-8000-00805F9B34FB.
+ However if you are connecting to an Android peer then please generate
+ your own unique UUID.
+@param {Object {UUID}} uuid service record uuid to lookup RFCOMM channel
+@return {Object {android.bluetooth.BluetoothSocket}} a RFCOMM BluetoothServerSocket ready for an outgoing connection
+@throws IOException on error, for example Bluetooth not available, or insufficient
+ permissions
+*/
+createInsecureRfcommSocketToServiceRecord : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createInsecureRfcommSocket'>/**Construct an insecure RFCOMM socket ready to start an outgoing
+</span> connection.
+ Call #connect on the returned #BluetoothSocket to begin the connection.
+ The remote device will not be authenticated and communication on this
+ socket will not be encrypted.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+@param {Number} port remote port
+@return {Object {android.bluetooth.BluetoothSocket}} An RFCOMM BluetoothSocket
+@throws IOException On error, for example Bluetooth not available, or insufficient
+ permissions.
+@hide 
+*/
+createInsecureRfcommSocket : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createScoSocket'>/**Construct a SCO socket ready to start an outgoing connection.
+</span> Call #connect on the returned #BluetoothSocket to begin the connection.
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+@return {Object {android.bluetooth.BluetoothSocket}} a SCO BluetoothSocket
+@throws IOException on error, for example Bluetooth not available, or insufficient
+ permissions.
+@hide 
+*/
+createScoSocket : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-convertPinToBytes'>/**Check that a pin is valid and convert to byte array.
+</span>
+ Bluetooth pin's are 1 to 16 bytes of UTF-8 characters.
+@param {String} pin pin as java String
+@return {Number} the pin code as a UTF-8 byte array, or null if it is an invalid Bluetooth pin.
+@hide 
+*/
+convertPinToBytes : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-connectGatt'>/**Connect to GATT Server hosted by this device. Caller acts as GATT client.
+</span> The callback is used to deliver results to Caller, such as connection status as well
+ as any further GATT client operations.
+ The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct
+ GATT client operations.
+@param {Object {Context}} callback GATT callback handler that will receive asynchronous callbacks.
+@param {Boolean} autoConnect Whether to directly connect to the remote device (false) or to
+ automatically connect as soon as the remote device becomes available (true).
+@throws IllegalArgumentException if callback is null
+*/
+connectGatt : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-connectGatt'>/**Connect to GATT Server hosted by this device. Caller acts as GATT client.
+</span> The callback is used to deliver results to Caller, such as connection status as well
+ as any further GATT client operations.
+ The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct
+ GATT client operations.
+@param {Object {Context}} callback GATT callback handler that will receive asynchronous callbacks.
+@param {Boolean} autoConnect Whether to directly connect to the remote device (false) or to
+ automatically connect as soon as the remote device becomes available (true).
+@param {Object {BluetoothGattCallback}} transport preferred transport for GATT connections to remote dual-mode devices {@link
+ BluetoothDevice#TRANSPORT_AUTO} or {@link BluetoothDevice#TRANSPORT_BREDR} or {@link
+ BluetoothDevice#TRANSPORT_LE}
+@throws IllegalArgumentException if callback is null
+*/
+connectGatt : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-connectGatt'>/**Connect to GATT Server hosted by this device. Caller acts as GATT client.
+</span> The callback is used to deliver results to Caller, such as connection status as well
+ as any further GATT client operations.
+ The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct
+ GATT client operations.
+@param {Object {Context}} callback GATT callback handler that will receive asynchronous callbacks.
+@param {Boolean} autoConnect Whether to directly connect to the remote device (false) or to
+ automatically connect as soon as the remote device becomes available (true).
+@param {Object {BluetoothGattCallback}} transport preferred transport for GATT connections to remote dual-mode devices {@link
+ BluetoothDevice#TRANSPORT_AUTO} or {@link BluetoothDevice#TRANSPORT_BREDR} or {@link
+ BluetoothDevice#TRANSPORT_LE}
+@param {Number} phy preferred PHY for connections to remote LE device. Bitwise OR of any of {@link
+ BluetoothDevice#PHY_LE_1M_MASK}, {@link BluetoothDevice#PHY_LE_2M_MASK}, and {@link
+ BluetoothDevice#PHY_LE_CODED_MASK}. This option does not take effect if {@code autoConnect}
+ is set to true.
+@throws NullPointerException if callback is null
+*/
+connectGatt : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-connectGatt'>/**Connect to GATT Server hosted by this device. Caller acts as GATT client.
+</span> The callback is used to deliver results to Caller, such as connection status as well
+ as any further GATT client operations.
+ The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct
+ GATT client operations.
+@param {Object {Context}} callback GATT callback handler that will receive asynchronous callbacks.
+@param {Boolean} autoConnect Whether to directly connect to the remote device (false) or to
+ automatically connect as soon as the remote device becomes available (true).
+@param {Object {BluetoothGattCallback}} transport preferred transport for GATT connections to remote dual-mode devices {@link
+ BluetoothDevice#TRANSPORT_AUTO} or {@link BluetoothDevice#TRANSPORT_BREDR} or {@link
+ BluetoothDevice#TRANSPORT_LE}
+@param {Number} phy preferred PHY for connections to remote LE device. Bitwise OR of any of {@link
+ BluetoothDevice#PHY_LE_1M_MASK}, {@link BluetoothDevice#PHY_LE_2M_MASK}, an d{@link
+ BluetoothDevice#PHY_LE_CODED_MASK}. This option does not take effect if {@code autoConnect}
+ is set to true.
+@param {Number} handler The handler to use for the callback. If {@code null}, callbacks will happen on
+ an un-specified background thread.
+@throws NullPointerException if callback is null
+*/
+connectGatt : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-connectGatt'>/**Connect to GATT Server hosted by this device. Caller acts as GATT client.
+</span> The callback is used to deliver results to Caller, such as connection status as well
+ as any further GATT client operations.
+ The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct
+ GATT client operations.
+@param {Object {Context}} callback GATT callback handler that will receive asynchronous callbacks.
+@param {Boolean} autoConnect Whether to directly connect to the remote device (false) or to
+ automatically connect as soon as the remote device becomes available (true).
+@param {Object {BluetoothGattCallback}} transport preferred transport for GATT connections to remote dual-mode devices {@link
+ BluetoothDevice#TRANSPORT_AUTO} or {@link BluetoothDevice#TRANSPORT_BREDR} or {@link
+ BluetoothDevice#TRANSPORT_LE}
+@param {Number} opportunistic Whether this GATT client is opportunistic. An opportunistic GATT client
+ does not hold a GATT connection. It automatically disconnects when no other GATT connections
+ are active for the remote device.
+@param {Boolean} phy preferred PHY for connections to remote LE device. Bitwise OR of any of {@link
+ BluetoothDevice#PHY_LE_1M_MASK}, {@link BluetoothDevice#PHY_LE_2M_MASK}, an d{@link
+ BluetoothDevice#PHY_LE_CODED_MASK}. This option does not take effect if {@code autoConnect}
+ is set to true.
+@param {Number} handler The handler to use for the callback. If {@code null}, callbacks will happen on
+ an un-specified background thread.
+@return {Object {android.bluetooth.BluetoothGatt}} A BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client
+ operations.
+@hide 
+*/
+connectGatt : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createL2capChannel'>/**Create a Bluetooth L2CAP Connection-oriented Channel (CoC) {@link android.bluetooth.BluetoothSocket} that can
+</span> be used to start a secure outgoing connection to the remote device with the same dynamic
+ protocol/service multiplexer (PSM) value. The supported Bluetooth transport is LE only.
+ &lt;p&gt;This is designed to be used with {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()} for
+ peer-peer Bluetooth applications.
+ &lt;p&gt;Use {@link android.bluetooth.BluetoothSocket#connect} to initiate the outgoing connection.
+ &lt;p&gt;Application using this API is responsible for obtaining PSM value from remote device.
+ &lt;p&gt;The remote device will be authenticated and communication on this socket will be
+ encrypted.
+ &lt;p&gt; Use this socket if an authenticated socket link is possible. Authentication refers
+ to the authentication of the link key to prevent man-in-the-middle type of attacks.
+@param {Number} psm dynamic PSM value from remote device
+@return {Object {android.bluetooth.BluetoothSocket}} a CoC #BluetoothSocket ready for an outgoing connection
+@throws IOException on error, for example Bluetooth not available, or insufficient
+ permissions
+*/
+createL2capChannel : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createL2capCocSocket'>/**TODO: Remove this hidden method once all the SL4A and other tests are updated to use the new
+</span> API name, createL2capChannel.
+@hide 
+*/
+createL2capCocSocket : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createInsecureL2capChannel'>/**Create a Bluetooth L2CAP Connection-oriented Channel (CoC) {@link android.bluetooth.BluetoothSocket} that can
+</span> be used to start a secure outgoing connection to the remote device with the same dynamic
+ protocol/service multiplexer (PSM) value. The supported Bluetooth transport is LE only.
+ &lt;p&gt;This is designed to be used with {@link android.bluetooth.BluetoothAdapter#listenUsingInsecureL2capChannel()} for peer-peer Bluetooth applications.
+ &lt;p&gt;Use {@link android.bluetooth.BluetoothSocket#connect} to initiate the outgoing connection.
+ &lt;p&gt;Application using this API is responsible for obtaining PSM value from remote device.
+ &lt;p&gt; The communication channel may not have an authenticated link key, i.e. it may be subject
+ to man-in-the-middle attacks. Use {@link #createL2capChannel(int)} if an encrypted and
+ authenticated communication channel is possible.
+@param {Number} psm dynamic PSM value from remote device
+@return {Object {android.bluetooth.BluetoothSocket}} a CoC #BluetoothSocket ready for an outgoing connection
+@throws IOException on error, for example Bluetooth not available, or insufficient
+ permissions
+*/
+createInsecureL2capChannel : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-createInsecureL2capCocSocket'>/**TODO: Remove this hidden method once all the SL4A and other tests are updated to use the new
+</span> API name, createInsecureL2capChannel.
+@hide 
+*/
+createInsecureL2capCocSocket : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-setMetadata'>/**Set a keyed metadata of this {@link android.bluetooth.BluetoothDevice} to a
+</span> {@link String} value.
+ Only bonded devices's metadata will be persisted across Bluetooth
+ restart.
+ Metadata will be removed when the device's bond state is moved to
+ {@link #BOND_NONE}.
+@param {Number} key must be within the list of BluetoothDevice.METADATA_*
+@param {Object {byte[]}} value a byte array data to set for key. Must be less than
+ {@link BluetoothAdapter#METADATA_MAX_LENGTH} characters in length
+@return {Boolean} true on success, false on error
+@hide 
+*/
+setMetadata : function(  ) {},
+
+<span id='android-bluetooth-BluetoothDevice-method-getMetadata'>/**Get a keyed metadata for this {@link android.bluetooth.BluetoothDevice} as {@link String}
+</span>@param {Number} key must be within the list of BluetoothDevice.METADATA_*
+@return {Number} Metadata of the key as byte array, null on error or not found
+@hide 
+*/
+getMetadata : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

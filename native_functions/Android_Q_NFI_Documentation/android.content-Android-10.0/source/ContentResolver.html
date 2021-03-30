@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-ContentResolver'>/**@class android.content.ContentResolver
+</span> implements android.content.ContentInterface
+
+@extends java.lang.Object
+
+ This class provides applications access to the content model.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using a ContentResolver with content providers, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/providers/content-providers.html&quot;&gt;Content Providers&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var ContentResolver = {
+
+<span id='android-content-ContentResolver-property-DEPRECATE_DATA_COLUMNS'>/** Enables logic that supports deprecation of {@code _data} columns,
+</span> typically by replacing values with fake paths that the OS then offers to
+ redirect to {@link #openFileDescriptor(Uri, String)}, which developers
+ should be using directly.
+
+ @hide
+*/
+DEPRECATE_DATA_COLUMNS : &quot;null&quot;,
+<span id='android-content-ContentResolver-property-DEPRECATE_DATA_PREFIX'>/** Special filesystem path prefix which indicates that a path should be
+</span> treated as a {@code content://} {@link Uri} when
+ {@link #DEPRECATE_DATA_COLUMNS} is enabled.
+ &lt;p&gt;
+ The remainder of the path after this prefix is a
+ {@link Uri#getSchemeSpecificPart()} value, which includes authority, path
+ segments, and query parameters.
+
+ @hide
+*/
+DEPRECATE_DATA_PREFIX : &quot;/mnt/content/&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_ACCOUNT'>/** @deprecated instead use
+</span> {@link #requestSync(android.accounts.Account, String, android.os.Bundle)}
+*/
+SYNC_EXTRAS_ACCOUNT : &quot;account&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_EXPEDITED'>/** If this extra is set to true, the sync request will be scheduled
+</span> at the front of the sync request queue and without any delay
+*/
+SYNC_EXTRAS_EXPEDITED : &quot;expedited&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_REQUIRE_CHARGING'>/** If this extra is set to true, the sync request will be scheduled
+</span> only when the device is plugged in. This is equivalent to calling
+ setRequiresCharging(true) on {@link android.content.SyncRequest}.
+*/
+SYNC_EXTRAS_REQUIRE_CHARGING : &quot;require_charging&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_FORCE'>/** @deprecated instead use
+</span> {@link #SYNC_EXTRAS_MANUAL}
+*/
+SYNC_EXTRAS_FORCE : &quot;force&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_IGNORE_SETTINGS'>/** If this extra is set to true then the sync settings (like getSyncAutomatically())
+</span> are ignored by the sync scheduler.
+*/
+SYNC_EXTRAS_IGNORE_SETTINGS : &quot;ignore_settings&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_IGNORE_BACKOFF'>/** If this extra is set to true then any backoffs for the initial attempt (e.g. due to retries)
+</span> are ignored by the sync scheduler. If this request fails and gets rescheduled then the
+ retries will still honor the backoff.
+*/
+SYNC_EXTRAS_IGNORE_BACKOFF : &quot;ignore_backoff&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_DO_NOT_RETRY'>/** If this extra is set to true then the request will not be retried if it fails.
+</span>*/
+SYNC_EXTRAS_DO_NOT_RETRY : &quot;do_not_retry&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_MANUAL'>/** Setting this extra is the equivalent of setting both {@link #SYNC_EXTRAS_IGNORE_SETTINGS}
+</span> and {@link #SYNC_EXTRAS_IGNORE_BACKOFF}
+*/
+SYNC_EXTRAS_MANUAL : &quot;force&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_UPLOAD'>/** Indicates that this sync is intended to only upload local changes to the server.
+</span> For example, this will be set to true if the sync is initiated by a call to
+ {@link android.content.ContentResolver#notifyChange(android.net.Uri, android.database.ContentObserver, boolean)}
+*/
+SYNC_EXTRAS_UPLOAD : &quot;upload&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_OVERRIDE_TOO_MANY_DELETIONS'>/** Indicates that the sync adapter should proceed with the delete operations,
+</span> even if it determines that there are too many.
+ See {@link android.content.SyncResult#tooManyDeletions}
+*/
+SYNC_EXTRAS_OVERRIDE_TOO_MANY_DELETIONS : &quot;deletions_override&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_DISCARD_LOCAL_DELETIONS'>/** Indicates that the sync adapter should not proceed with the delete operations,
+</span> if it determines that there are too many.
+ See {@link android.content.SyncResult#tooManyDeletions}
+*/
+SYNC_EXTRAS_DISCARD_LOCAL_DELETIONS : &quot;discard_deletions&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_EXPECTED_UPLOAD'>/**{@hide} User-specified flag for expected upload size. */
+</span>SYNC_EXTRAS_EXPECTED_UPLOAD : &quot;expected_upload&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_EXPECTED_DOWNLOAD'>/**{@hide} User-specified flag for expected download size. */
+</span>SYNC_EXTRAS_EXPECTED_DOWNLOAD : &quot;expected_download&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_PRIORITY'>/**{@hide} Priority of this sync with respect to other syncs scheduled for this application. */
+</span>SYNC_EXTRAS_PRIORITY : &quot;sync_priority&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_DISALLOW_METERED'>/**{@hide} Flag to allow sync to occur on metered network. */
+</span>SYNC_EXTRAS_DISALLOW_METERED : &quot;allow_metered&quot;,
+<span id='android-content-ContentResolver-property-SYNC_VIRTUAL_EXTRAS_EXEMPTION_FLAG'>/** {@hide} Integer extra containing a SyncExemption flag.
+</span>
+ Only the system and the shell user can set it.
+
+ This extra is &quot;virtual&quot;. Once passed to the system server, it'll be removed from the bundle.
+*/
+SYNC_VIRTUAL_EXTRAS_EXEMPTION_FLAG : &quot;v_exemption&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXTRAS_INITIALIZE'>/** Set by the SyncManager to request that the SyncAdapter initialize itself for
+</span> the given account/authority pair. One required initialization step is to
+ ensure that {@link #setIsSyncable(android.accounts.Account, String, int)} has been
+ called with a &gt;= 0 value. When this flag is set the SyncAdapter does not need to
+ do a full sync, though it is allowed to do so.
+*/
+SYNC_EXTRAS_INITIALIZE : &quot;initialize&quot;,
+<span id='android-content-ContentResolver-property-ACTION_SYNC_CONN_STATUS_CHANGED'>/**@hide */
+</span>ACTION_SYNC_CONN_STATUS_CHANGED : &quot;null&quot;,
+<span id='android-content-ContentResolver-property-SCHEME_CONTENT'>/***/
+</span>SCHEME_CONTENT : &quot;content&quot;,
+<span id='android-content-ContentResolver-property-SCHEME_ANDROID_RESOURCE'>/***/
+</span>SCHEME_ANDROID_RESOURCE : &quot;android.resource&quot;,
+<span id='android-content-ContentResolver-property-SCHEME_FILE'>/***/
+</span>SCHEME_FILE : &quot;file&quot;,
+<span id='android-content-ContentResolver-property-EXTRA_SIZE'>/** An extra {@link Point} describing the optimal size for a requested image
+</span> resource, in pixels. If a provider has multiple sizes of the image, it
+ should return the image closest to this size.
+
+ @see #openTypedAssetFileDescriptor(Uri, String, Bundle)
+ @see #openTypedAssetFileDescriptor(Uri, String, Bundle,
+      CancellationSignal)
+*/
+EXTRA_SIZE : &quot;android.content.extra.SIZE&quot;,
+<span id='android-content-ContentResolver-property-EXTRA_REFRESH_SUPPORTED'>/** An extra boolean describing whether a particular provider supports refresh
+</span> or not. If a provider supports refresh, it should include this key in its
+ returned Cursor as part of its query call.
+
+*/
+EXTRA_REFRESH_SUPPORTED : &quot;android.content.extra.REFRESH_SUPPORTED&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_SQL_SELECTION'>/** Key for an SQL style selection string that may be present in the query Bundle argument
+</span> passed to {@link android.content.ContentProvider#query(Uri, String[], Bundle, CancellationSignal)}
+ when called by a legacy client.
+
+ &lt;p&gt;Clients should never include user supplied values directly in the selection string,
+ as this presents an avenue for SQL injection attacks. In lieu of this, a client
+ should use standard placeholder notation to represent values in a selection string,
+ then supply a corresponding value in {@value #QUERY_ARG_SQL_SELECTION_ARGS}.
+
+ &lt;p&gt;&lt;b&gt;Apps targeting {@link android.os.Build.VERSION_CODES#O} or higher are strongly
+ encourage to use structured query arguments in lieu of opaque SQL query clauses.&lt;/b&gt;
+
+ @see #QUERY_ARG_SORT_COLUMNS
+ @see #QUERY_ARG_SORT_DIRECTION
+ @see #QUERY_ARG_SORT_COLLATION
+*/
+QUERY_ARG_SQL_SELECTION : &quot;android:query-arg-sql-selection&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_SQL_SELECTION_ARGS'>/** Key for SQL selection string arguments list.
+</span>
+ &lt;p&gt;Clients should never include user supplied values directly in the selection string,
+ as this presents an avenue for SQL injection attacks. In lieu of this, a client
+ should use standard placeholder notation to represent values in a selection string,
+ then supply a corresponding value in {@value #QUERY_ARG_SQL_SELECTION_ARGS}.
+
+ &lt;p&gt;&lt;b&gt;Apps targeting {@link android.os.Build.VERSION_CODES#O} or higher are strongly
+ encourage to use structured query arguments in lieu of opaque SQL query clauses.&lt;/b&gt;
+
+ @see #QUERY_ARG_SORT_COLUMNS
+ @see #QUERY_ARG_SORT_DIRECTION
+ @see #QUERY_ARG_SORT_COLLATION
+*/
+QUERY_ARG_SQL_SELECTION_ARGS : &quot;android:query-arg-sql-selection-args&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_SQL_SORT_ORDER'>/** Key for an SQL style sort string that may be present in the query Bundle argument
+</span> passed to {@link android.content.ContentProvider#query(Uri, String[], Bundle, CancellationSignal)}
+ when called by a legacy client.
+
+ &lt;p&gt;&lt;b&gt;Apps targeting {@link android.os.Build.VERSION_CODES#O} or higher are strongly
+ encourage to use structured query arguments in lieu of opaque SQL query clauses.&lt;/b&gt;
+
+ @see #QUERY_ARG_SORT_COLUMNS
+ @see #QUERY_ARG_SORT_DIRECTION
+ @see #QUERY_ARG_SORT_COLLATION
+*/
+QUERY_ARG_SQL_SORT_ORDER : &quot;android:query-arg-sql-sort-order&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_SQL_GROUP_BY'>/**{@hide} */
+</span>QUERY_ARG_SQL_GROUP_BY : &quot;android:query-arg-sql-group-by&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_SQL_HAVING'>/**{@hide} */
+</span>QUERY_ARG_SQL_HAVING : &quot;android:query-arg-sql-having&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_SQL_LIMIT'>/**{@hide} */
+</span>QUERY_ARG_SQL_LIMIT : &quot;android:query-arg-sql-limit&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_SORT_COLUMNS'>/** Specifies the list of columns against which to sort results. When first column values
+</span> are identical, records are then sorted based on second column values, and so on.
+
+ &lt;p&gt;Columns present in this list must also be included in the projection
+ supplied to {@link android.content.ContentResolver#query(Uri, String[], Bundle, CancellationSignal)}.
+
+ &lt;p&gt;Apps targeting {@link android.os.Build.VERSION_CODES#O} or higher:
+
+ &lt;li&gt;{@link android.content.ContentProvider} implementations: When preparing data in
+ {@link android.content.ContentProvider#query(Uri, String[], Bundle, CancellationSignal)}, if sort columns
+ is reflected in the returned Cursor, it is  strongly recommended that
+ {@link #QUERY_ARG_SORT_COLUMNS} then be included in the array of honored arguments
+ reflected in {@link Cursor} extras {@link Bundle} under {@link #EXTRA_HONORED_ARGS}.
+
+ &lt;li&gt;When querying a provider, where no QUERY_ARG_SQL* otherwise exists in the
+ arguments {@link Bundle}, the Content framework will attempt to synthesize
+ an QUERY_ARG_SQL* argument using the corresponding QUERY_ARG_SORT* values.
+*/
+QUERY_ARG_SORT_COLUMNS : &quot;android:query-arg-sort-columns&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_SORT_DIRECTION'>/** Specifies desired sort order. When unspecified a provider may provide a default
+</span> sort direction, or choose to return unsorted results.
+
+ &lt;p&gt;Apps targeting {@link android.os.Build.VERSION_CODES#O} or higher:
+
+ &lt;li&gt;{@link android.content.ContentProvider} implementations: When preparing data in
+ {@link android.content.ContentProvider#query(Uri, String[], Bundle, CancellationSignal)}, if sort direction
+ is reflected in the returned Cursor, it is  strongly recommended that
+ {@link #QUERY_ARG_SORT_DIRECTION} then be included in the array of honored arguments
+ reflected in {@link Cursor} extras {@link Bundle} under {@link #EXTRA_HONORED_ARGS}.
+
+ &lt;li&gt;When querying a provider, where no QUERY_ARG_SQL* otherwise exists in the
+ arguments {@link Bundle}, the Content framework will attempt to synthesize
+ a QUERY_ARG_SQL* argument using the corresponding QUERY_ARG_SORT* values.
+
+ @see #QUERY_SORT_DIRECTION_ASCENDING
+ @see #QUERY_SORT_DIRECTION_DESCENDING
+*/
+QUERY_ARG_SORT_DIRECTION : &quot;android:query-arg-sort-direction&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_SORT_COLLATION'>/** Allows client to specify a hint to the provider declaring which collation
+</span> to use when sorting text values.
+
+ &lt;p&gt;Providers may support custom collators. When specifying a custom collator
+ the value is determined by the Provider.
+
+ &lt;li&gt;{@link android.content.ContentProvider} implementations: When preparing data in
+ {@link android.content.ContentProvider#query(Uri, String[], Bundle, CancellationSignal)}, if sort collation
+ is reflected in the returned Cursor, it is  strongly recommended that
+ {@link #QUERY_ARG_SORT_COLLATION} then be included in the array of honored arguments
+ reflected in {@link Cursor} extras {@link Bundle} under {@link #EXTRA_HONORED_ARGS}.
+
+ &lt;li&gt;When querying a provider, where no QUERY_ARG_SQL* otherwise exists in the
+ arguments {@link Bundle}, the Content framework will attempt to synthesize
+ a QUERY_ARG_SQL* argument using the corresponding QUERY_ARG_SORT* values.
+
+ @see java.text.Collator#PRIMARY
+ @see java.text.Collator#SECONDARY
+ @see java.text.Collator#TERTIARY
+ @see java.text.Collator#IDENTICAL
+*/
+QUERY_ARG_SORT_COLLATION : &quot;android:query-arg-sort-collation&quot;,
+<span id='android-content-ContentResolver-property-EXTRA_HONORED_ARGS'>/** Allows provider to report back to client which query keys are honored in a Cursor.
+</span>
+ &lt;p&gt;Key identifying a {@code String[]} containing all QUERY_ARG_SORT* arguments
+ honored by the provider. Include this in {@link Cursor} extras {@link Bundle}
+ when any QUERY_ARG_SORT* value was honored during the preparation of the
+ results {@link Cursor}.
+
+ &lt;p&gt;If present, ALL honored arguments are enumerated in this extra’s payload.
+
+ @see #QUERY_ARG_SORT_COLUMNS
+ @see #QUERY_ARG_SORT_DIRECTION
+ @see #QUERY_ARG_SORT_COLLATION
+*/
+EXTRA_HONORED_ARGS : &quot;android.content.extra.HONORED_ARGS&quot;,
+<span id='android-content-ContentResolver-property-QUERY_SORT_DIRECTION_ASCENDING'>/***/
+</span>QUERY_SORT_DIRECTION_ASCENDING : &quot;0&quot;,
+<span id='android-content-ContentResolver-property-QUERY_SORT_DIRECTION_DESCENDING'>/***/
+</span>QUERY_SORT_DIRECTION_DESCENDING : &quot;1&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_OFFSET'>/** Specifies the offset row index within a Cursor.
+</span>*/
+QUERY_ARG_OFFSET : &quot;android:query-arg-offset&quot;,
+<span id='android-content-ContentResolver-property-QUERY_ARG_LIMIT'>/** Specifies the max number of rows to include in a Cursor.
+</span>*/
+QUERY_ARG_LIMIT : &quot;android:query-arg-limit&quot;,
+<span id='android-content-ContentResolver-property-EXTRA_TOTAL_COUNT'>/** Added to {@link Cursor} extras {@link Bundle} to indicate total row count of
+</span> recordset when paging is supported. Providers must include this when
+ implementing paging support.
+
+ &lt;p&gt;A provider may return -1 that row count of the recordset is unknown.
+
+ &lt;p&gt;Providers having returned -1 in a previous query are recommended to
+ send content change notification once (if) full recordset size becomes
+ known.
+*/
+EXTRA_TOTAL_COUNT : &quot;android.content.extra.TOTAL_COUNT&quot;,
+<span id='android-content-ContentResolver-property-CURSOR_ITEM_BASE_TYPE'>/** This is the Android platform's base MIME type for a content: URI
+</span> containing a Cursor of a single item.  Applications should use this
+ as the base type along with their own sub-type of their content: URIs
+ that represent a particular item.  For example, hypothetical IMAP email
+ client may have a URI
+ &lt;code&gt;content://com.company.provider.imap/inbox/1&lt;/code&gt; for a particular
+ message in the inbox, whose MIME type would be reported as
+ &lt;code&gt;CURSOR_ITEM_BASE_TYPE + &quot;/vnd.company.imap-msg&quot;&lt;/code&gt;
+
+ &lt;p&gt;Compare with {@link #CURSOR_DIR_BASE_TYPE}.
+*/
+CURSOR_ITEM_BASE_TYPE : &quot;vnd.android.cursor.item&quot;,
+<span id='android-content-ContentResolver-property-CURSOR_DIR_BASE_TYPE'>/** This is the Android platform's base MIME type for a content: URI
+</span> containing a Cursor of zero or more items.  Applications should use this
+ as the base type along with their own sub-type of their content: URIs
+ that represent a directory of items.  For example, hypothetical IMAP email
+ client may have a URI
+ &lt;code&gt;content://com.company.provider.imap/inbox&lt;/code&gt; for all of the
+ messages in its inbox, whose MIME type would be reported as
+ &lt;code&gt;CURSOR_DIR_BASE_TYPE + &quot;/vnd.company.imap-msg&quot;&lt;/code&gt;
+
+ &lt;p&gt;Note how the base MIME type varies between this and
+ {@link #CURSOR_ITEM_BASE_TYPE} depending on whether there is
+ one single item or multiple items in the data set, while the sub-type
+ remains the same because in either case the data structure contained
+ in the cursor is the same.
+*/
+CURSOR_DIR_BASE_TYPE : &quot;vnd.android.cursor.dir&quot;,
+<span id='android-content-ContentResolver-property-ANY_CURSOR_ITEM_TYPE'>/** This is the Android platform's generic MIME type to match any MIME
+</span> type of the form &quot;{@link #CURSOR_ITEM_BASE_TYPE}/{@code SUB_TYPE}&quot;.
+ {@code SUB_TYPE} is the sub-type of the application-dependent
+ content, e.g., &quot;audio&quot;, &quot;video&quot;, &quot;playlist&quot;.
+*/
+ANY_CURSOR_ITEM_TYPE : &quot;vnd.android.cursor.item/*&quot;,
+<span id='android-content-ContentResolver-property-MIME_TYPE_DEFAULT'>/** Default MIME type for files whose type is otherwise unknown.
+</span> @hide
+*/
+MIME_TYPE_DEFAULT : &quot;application/octet-stream&quot;,
+<span id='android-content-ContentResolver-property-SYNC_ERROR_SYNC_ALREADY_IN_PROGRESS'>/**@hide */
+</span>SYNC_ERROR_SYNC_ALREADY_IN_PROGRESS : &quot;1&quot;,
+<span id='android-content-ContentResolver-property-SYNC_ERROR_AUTHENTICATION'>/**@hide */
+</span>SYNC_ERROR_AUTHENTICATION : &quot;2&quot;,
+<span id='android-content-ContentResolver-property-SYNC_ERROR_IO'>/**@hide */
+</span>SYNC_ERROR_IO : &quot;3&quot;,
+<span id='android-content-ContentResolver-property-SYNC_ERROR_PARSE'>/**@hide */
+</span>SYNC_ERROR_PARSE : &quot;4&quot;,
+<span id='android-content-ContentResolver-property-SYNC_ERROR_CONFLICT'>/**@hide */
+</span>SYNC_ERROR_CONFLICT : &quot;5&quot;,
+<span id='android-content-ContentResolver-property-SYNC_ERROR_TOO_MANY_DELETIONS'>/**@hide */
+</span>SYNC_ERROR_TOO_MANY_DELETIONS : &quot;6&quot;,
+<span id='android-content-ContentResolver-property-SYNC_ERROR_TOO_MANY_RETRIES'>/**@hide */
+</span>SYNC_ERROR_TOO_MANY_RETRIES : &quot;7&quot;,
+<span id='android-content-ContentResolver-property-SYNC_ERROR_INTERNAL'>/**@hide */
+</span>SYNC_ERROR_INTERNAL : &quot;8&quot;,
+<span id='android-content-ContentResolver-property-SYNC_OBSERVER_TYPE_SETTINGS'>/***/
+</span>SYNC_OBSERVER_TYPE_SETTINGS : &quot;1&quot;,
+<span id='android-content-ContentResolver-property-SYNC_OBSERVER_TYPE_PENDING'>/***/
+</span>SYNC_OBSERVER_TYPE_PENDING : &quot;2&quot;,
+<span id='android-content-ContentResolver-property-SYNC_OBSERVER_TYPE_ACTIVE'>/***/
+</span>SYNC_OBSERVER_TYPE_ACTIVE : &quot;4&quot;,
+<span id='android-content-ContentResolver-property-SYNC_OBSERVER_TYPE_STATUS'>/**@hide */
+</span>SYNC_OBSERVER_TYPE_STATUS : &quot;8&quot;,
+<span id='android-content-ContentResolver-property-SYNC_OBSERVER_TYPE_ALL'>/**@hide */
+</span>SYNC_OBSERVER_TYPE_ALL : &quot;2147483647&quot;,
+<span id='android-content-ContentResolver-property-NOTIFY_SYNC_TO_NETWORK'>/** Flag for {@link #notifyChange(Uri, ContentObserver, int)}: attempt to sync the change
+</span> to the network.
+*/
+NOTIFY_SYNC_TO_NETWORK : &quot;1&quot;,
+<span id='android-content-ContentResolver-property-NOTIFY_SKIP_NOTIFY_FOR_DESCENDANTS'>/** Flag for {@link #notifyChange(Uri, ContentObserver, int)}: if set, this notification
+</span> will be skipped if it is being delivered to the root URI of a ContentObserver that is
+ using &quot;notify for descendants.&quot;  The purpose of this is to allow the provide to send
+ a general notification of &quot;something under X&quot; changed that observers of that specific
+ URI can receive, while also sending a specific URI under X.  It would use this flag
+ when sending the former, so that observers of &quot;X and descendants&quot; only see the latter.
+*/
+NOTIFY_SKIP_NOTIFY_FOR_DESCENDANTS : &quot;2&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXEMPTION_NONE'>/** No exception, throttled by app standby normally.
+</span> @hide
+*/
+SYNC_EXEMPTION_NONE : &quot;0&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXEMPTION_PROMOTE_BUCKET'>/** Exemption given to a sync request made by a foreground app (including
+</span> PROCESS_STATE_IMPORTANT_FOREGROUND).
+
+ At the schedule time, we promote the sync adapter app for a higher bucket:
+ - If the device is not dozing (so the sync will start right away)
+   promote to ACTIVE for 1 hour.
+ - If the device is dozing (so the sync *won't* start right away),
+ promote to WORKING_SET for 4 hours, so it'll get a higher chance to be started once the
+ device comes out of doze.
+ - When the sync actually starts, we promote the sync adapter app to ACTIVE for 10 minutes,
+ so it can schedule and start more syncs without getting throttled, even when the first
+ operation was canceled and now we're retrying.
+
+
+ @hide
+*/
+SYNC_EXEMPTION_PROMOTE_BUCKET : &quot;1&quot;,
+<span id='android-content-ContentResolver-property-SYNC_EXEMPTION_PROMOTE_BUCKET_WITH_TEMP'>/** In addition to {@link #SYNC_EXEMPTION_PROMOTE_BUCKET}, we put the sync adapter app in the
+</span> temp whitelist for 10 minutes, so that even RARE apps can run syncs right away.
+ @hide
+*/
+SYNC_EXEMPTION_PROMOTE_BUCKET_WITH_TEMP : &quot;2&quot;,
+<span id='android-content-ContentResolver-property-CONTENT_SERVICE_NAME'>/**@hide */
+</span>CONTENT_SERVICE_NAME : &quot;content&quot;,
+<span id='android-content-ContentResolver-method-syncErrorToString'>/**
+</span>@hide 
+*/
+syncErrorToString : function(  ) {},
+
+<span id='android-content-ContentResolver-method-syncErrorStringToInt'>/**
+</span>@hide 
+*/
+syncErrorStringToInt : function(  ) {},
+
+<span id='android-content-ContentResolver-method-wrap'>/**{@hide}
+</span>*/
+wrap : function(  ) {},
+
+<span id='android-content-ContentResolver-method-wrap'>/**Create a {@link android.content.ContentResolver} instance that redirects all its methods
+</span> to the given {@link android.content.ContentProvider}.
+*/
+wrap : function(  ) {},
+
+<span id='android-content-ContentResolver-method-wrap'>/**Create a {@link android.content.ContentResolver} instance that redirects all its methods
+</span> to the given {@link android.content.ContentProviderClient}.
+*/
+wrap : function(  ) {},
+
+<span id='android-content-ContentResolver-method-releaseProvider'>/**
+</span>@hide 
+*/
+releaseProvider : function(  ) {},
+
+<span id='android-content-ContentResolver-method-releaseUnstableProvider'>/**
+</span>@hide 
+*/
+releaseUnstableProvider : function(  ) {},
+
+<span id='android-content-ContentResolver-method-unstableProviderDied'>/**
+</span>@hide 
+*/
+unstableProviderDied : function(  ) {},
+
+<span id='android-content-ContentResolver-method-appNotRespondingViaProvider'>/**
+</span>@hide 
+*/
+appNotRespondingViaProvider : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getType'>/**Return the MIME type of the given content URL.
+</span>@param {Object {Uri}} url A Uri identifying content (either a list or specific type),
+ using the content:// scheme.
+@return {String} A MIME type for the content, or null if the URL is invalid or the type is unknown
+*/
+getType : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getStreamTypes'>/**Query for the possible MIME types for the representations the given
+</span> content URL can be returned when opened as as stream with
+ {@link #openTypedAssetFileDescriptor}.  Note that the types here are
+ not necessarily a superset of the type returned by {@link #getType} --
+ many content providers cannot return a raw stream for the structured
+ data that they contain.
+@param {Object {Uri}} url A Uri identifying content (either a list or specific type),
+ using the content:// scheme.
+@param {String} mimeTypeFilter The desired MIME type.  This may be a pattern,
+ such as *&amp;#47;*, to query for all available MIME types that match the
+ pattern.
+@return {String} Returns an array of MIME type strings for all available
+ data streams that match the given mimeTypeFilter.  If there are none,
+ null is returned.
+*/
+getStreamTypes : function(  ) {},
+
+<span id='android-content-ContentResolver-method-query'>/**Query the given URI, returning a {@link Cursor} over the result set.
+</span> &lt;p&gt;
+ For best performance, the caller should follow these guidelines:
+ &lt;ul&gt;
+ &lt;li&gt;Provide an explicit projection, to prevent
+ reading data from storage that aren't going to be used.&lt;/li&gt;
+ &lt;li&gt;Use question mark parameter markers such as 'phone=?' instead of
+ explicit values in the {@code selection} parameter, so that queries
+ that differ only by those values will be recognized as the same
+ for caching purposes.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+@param {Object {Uri}} uri The URI, using the content:// scheme, for the content to
+         retrieve.
+@param {Object {java.lang.String[]}} projection A list of which columns to return. Passing null will
+         return all columns, which is inefficient.
+@param {String} selection A filter declaring which rows to return, formatted as an
+         SQL WHERE clause (excluding the WHERE itself). Passing null will
+         return all rows for the given URI.
+@param {Object {java.lang.String[]}} selectionArgs You may include ?s in selection, which will be
+         replaced by the values from selectionArgs, in the order that they
+         appear in the selection. The values will be bound as Strings.
+@param {String} sortOrder How to order the rows, formatted as an SQL ORDER BY
+         clause (excluding the ORDER BY itself). Passing null will use the
+         default sort order, which may be unordered.
+@return {Object {android.database.Cursor}} A Cursor object, which is positioned before the first entry. May return
+         &lt;code&gt;null&lt;/code&gt; if the underlying content provider returns &lt;code&gt;null&lt;/code&gt;,
+         or if it crashes.
+@see Cursor
+*/
+query : function(  ) {},
+
+<span id='android-content-ContentResolver-method-query'>/**Query the given URI, returning a {@link Cursor} over the result set
+</span> with optional support for cancellation.
+ &lt;p&gt;
+ For best performance, the caller should follow these guidelines:
+ &lt;ul&gt;
+ &lt;li&gt;Provide an explicit projection, to prevent
+ reading data from storage that aren't going to be used.&lt;/li&gt;
+ &lt;li&gt;Use question mark parameter markers such as 'phone=?' instead of
+ explicit values in the {@code selection} parameter, so that queries
+ that differ only by those values will be recognized as the same
+ for caching purposes.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+@param {Object {Uri}} uri The URI, using the content:// scheme, for the content to
+         retrieve.
+@param {Object {java.lang.String[]}} projection A list of which columns to return. Passing null will
+         return all columns, which is inefficient.
+@param {String} selection A filter declaring which rows to return, formatted as an
+         SQL WHERE clause (excluding the WHERE itself). Passing null will
+         return all rows for the given URI.
+@param {Object {java.lang.String[]}} selectionArgs You may include ?s in selection, which will be
+         replaced by the values from selectionArgs, in the order that they
+         appear in the selection. The values will be bound as Strings.
+@param {String} sortOrder How to order the rows, formatted as an SQL ORDER BY
+         clause (excluding the ORDER BY itself). Passing null will use the
+         default sort order, which may be unordered.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+ If the operation is canceled, then {@link OperationCanceledException} will be thrown
+ when the query is executed.
+@return {Object {android.database.Cursor}} A Cursor object, which is positioned before the first entry. May return
+         &lt;code&gt;null&lt;/code&gt; if the underlying content provider returns &lt;code&gt;null&lt;/code&gt;,
+         or if it crashes.
+@see Cursor
+*/
+query : function(  ) {},
+
+<span id='android-content-ContentResolver-method-query'>/**Query the given URI, returning a {@link Cursor} over the result set
+</span> with support for cancellation.
+
+ &lt;p&gt;For best performance, the caller should follow these guidelines:
+
+ &lt;li&gt;Provide an explicit projection, to prevent reading data from storage
+ that aren't going to be used.
+
+ Provider must identify which QUERY_ARG_SORT* arguments were honored during
+ the preparation of the result set by including the respective argument keys
+ in the {@link Cursor} extras {@link Bundle}. See {@link #EXTRA_HONORED_ARGS}
+ for details.
+@param {Object {Uri}} uri The URI, using the content:// scheme, for the content to
+         retrieve.
+@param {Object {java.lang.String[]}} projection A list of which columns to return. Passing null will
+         return all columns, which is inefficient.
+@param {Object {Bundle}} queryArgs A Bundle containing any arguments to the query.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+ If the operation is canceled, then {@link OperationCanceledException} will be thrown
+ when the query is executed.
+@param projection A list of which columns to return. Passing null will
+         return all columns, which is inefficient.
+@param queryArgs A Bundle containing any arguments to the query.
+@param cancellationSignal A signal to cancel the operation in progress, or null if none.
+ If the operation is canceled, then {@link OperationCanceledException} will be thrown
+ when the query is executed.
+@return {Object {android.database.Cursor}} A Cursor object, which is positioned before the first entry. May return
+         &lt;code&gt;null&lt;/code&gt; if the underlying content provider returns &lt;code&gt;null&lt;/code&gt;,
+         or if it crashes.
+@see Cursor
+*/
+query : function(  ) {},
+
+<span id='android-content-ContentResolver-method-canonicalizeOrElse'>/**{@hide}
+</span>*/
+canonicalizeOrElse : function(  ) {},
+
+<span id='android-content-ContentResolver-method-canonicalize'>/**Transform the given &lt;var&gt;url&lt;/var&gt; to a canonical representation of
+</span> its referenced resource, which can be used across devices, persisted,
+ backed up and restored, etc.  The returned Uri is still a fully capable
+ Uri for use with its content provider, allowing you to do all of the
+ same content provider operations as with the original Uri --
+ {@link #query}, {@link #openInputStream(android.net.Uri)}, etc.  The
+ only difference in behavior between the original and new Uris is that
+ the content provider may need to do some additional work at each call
+ using it to resolve it to the correct resource, especially if the
+ canonical Uri has been moved to a different environment.
+
+ &lt;p&gt;If you are moving a canonical Uri between environments, you should
+ perform another call to {@link #canonicalize} with that original Uri to
+ re-canonicalize it for the current environment.  Alternatively, you may
+ want to use {@link #uncanonicalize} to transform it to a non-canonical
+ Uri that works only in the current environment but potentially more
+ efficiently than the canonical representation.&lt;/p&gt;
+@param {Object {Uri}} url The {@link Uri} that is to be transformed to a canonical
+ representation.  Like all resolver calls, the input can be either
+ a non-canonical or canonical Uri.
+@return {Object {android.net.Uri}} Returns the official canonical representation of &lt;var&gt;url&lt;/var&gt;,
+ or null if the content provider does not support a canonical representation
+ of the given Uri.  Many providers may not support canonicalization of some
+ or all of their Uris.
+@see #uncanonicalize
+*/
+canonicalize : function(  ) {},
+
+<span id='android-content-ContentResolver-method-uncanonicalize'>/**Given a canonical Uri previously generated by {@link #canonicalize}, convert
+</span> it to its local non-canonical form.  This can be useful in some cases where
+ you know that you will only be using the Uri in the current environment and
+ want to avoid any possible overhead when using it with the content
+ provider or want to verify that the referenced data exists at all in the
+ new environment.
+@param {Object {Uri}} url The canonical {@link Uri} that is to be convered back to its
+ non-canonical form.
+@return {Object {android.net.Uri}} Returns the non-canonical representation of &lt;var&gt;url&lt;/var&gt;.  This will
+ return null if data identified by the canonical Uri can not be found in
+ the current environment; callers must always check for null and deal with
+ that by appropriately falling back to an alternative.
+@see #canonicalize
+*/
+uncanonicalize : function(  ) {},
+
+<span id='android-content-ContentResolver-method-refresh'>/**This allows clients to request an explicit refresh of content identified by {@code uri}.
+</span> &lt;p&gt;
+ Client code should only invoke this method when there is a strong indication (such as a user
+ initiated pull to refresh gesture) that the content is stale.
+ &lt;p&gt;
+@param {Object {Uri}} url The Uri identifying the data to refresh.
+@param {Object {Bundle}} args Additional options from the client. The definitions of these are specific to the
+            content provider being called.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or {@code null} if
+            none. For example, if you called refresh on a particular uri, you should call
+            {@link CancellationSignal#throwIfCanceled()} to check whether the client has
+            canceled the refresh request.
+@return {Boolean} true if the provider actually tried refreshing.
+*/
+refresh : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openInputStream'>/**Open a stream on to the content associated with a content URI.  If there
+</span> is no data associated with the URI, FileNotFoundException is thrown.
+
+ &lt;h5&gt;Accepts the following URI schemes:&lt;/h5&gt;
+ &lt;ul&gt;
+ &lt;li&gt;content ({@link #SCHEME_CONTENT})&lt;/li&gt;
+ &lt;li&gt;android.resource ({@link #SCHEME_ANDROID_RESOURCE})&lt;/li&gt;
+ &lt;li&gt;file ({@link #SCHEME_FILE})&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;See {@link #openAssetFileDescriptor(Uri, String)} for more information
+ on these schemes.
+@param {Object {Uri}} uri The desired URI.
+@return {Object {java.io.InputStream}} InputStream
+@throws FileNotFoundException if the provided URI could not be opened.
+@see #openAssetFileDescriptor(Uri, String)
+*/
+openInputStream : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openOutputStream'>/**Synonym for {@link #openOutputStream(Uri, String)
+</span> openOutputStream(uri, &quot;w&quot;)}.
+@throws FileNotFoundException if the provided URI could not be opened.
+*/
+openOutputStream : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openOutputStream'>/**Open a stream on to the content associated with a content URI.  If there
+</span> is no data associated with the URI, FileNotFoundException is thrown.
+
+ &lt;h5&gt;Accepts the following URI schemes:&lt;/h5&gt;
+ &lt;ul&gt;
+ &lt;li&gt;content ({@link #SCHEME_CONTENT})&lt;/li&gt;
+ &lt;li&gt;file ({@link #SCHEME_FILE})&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;See {@link #openAssetFileDescriptor(Uri, String)} for more information
+ on these schemes.
+@param {Object {Uri}} uri The desired URI.
+@param {String} mode May be &quot;w&quot;, &quot;wa&quot;, &quot;rw&quot;, or &quot;rwt&quot;.
+@return {Object {java.io.OutputStream}} OutputStream
+@throws FileNotFoundException if the provided URI could not be opened.
+@see #openAssetFileDescriptor(Uri, String)
+*/
+openOutputStream : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openFile'>/**
+</span>*/
+openFile : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openFileDescriptor'>/**Open a raw file descriptor to access data under a URI.  This
+</span> is like {@link #openAssetFileDescriptor(Uri, String)}, but uses the
+ underlying {@link android.content.ContentProvider#openFile}
+ android.content.ContentProvider.openFile()} method, so will &lt;em&gt;not&lt;/em&gt; work with
+ providers that return sub-sections of files.  If at all possible,
+ you should use {@link #openAssetFileDescriptor(Uri, String)}.  You
+ will receive a FileNotFoundException exception if the provider returns a
+ sub-section of a file.
+
+ &lt;h5&gt;Accepts the following URI schemes:&lt;/h5&gt;
+ &lt;ul&gt;
+ &lt;li&gt;content ({@link #SCHEME_CONTENT})&lt;/li&gt;
+ &lt;li&gt;file ({@link #SCHEME_FILE})&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;See {@link #openAssetFileDescriptor(Uri, String)} for more information
+ on these schemes.
+ &lt;p&gt;
+ If opening with the exclusive &quot;r&quot; or &quot;w&quot; modes, the returned
+ ParcelFileDescriptor could be a pipe or socket pair to enable streaming
+ of data. Opening with the &quot;rw&quot; mode implies a file on disk that supports
+ seeking. If possible, always use an exclusive mode to give the underlying
+ {@link android.content.ContentProvider} the most flexibility.
+ &lt;p&gt;
+ If you are writing a file, and need to communicate an error to the
+ provider, use {@link ParcelFileDescriptor#closeWithError(String)}.
+@param {Object {Uri}} uri The desired URI to open.
+@param {String} mode The file mode to use, as per {@link ContentProvider#openFile
+ ContentProvider.openFile}.
+@return {Object {android.os.ParcelFileDescriptor}} Returns a new ParcelFileDescriptor pointing to the file.  You
+ own this descriptor and are responsible for closing it when done.
+@throws FileNotFoundException Throws FileNotFoundException if no
+ file exists under the URI or the mode is invalid.
+@see #openAssetFileDescriptor(Uri, String)
+*/
+openFileDescriptor : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openFileDescriptor'>/**Open a raw file descriptor to access data under a URI.  This
+</span> is like {@link #openAssetFileDescriptor(Uri, String)}, but uses the
+ underlying {@link android.content.ContentProvider#openFile}
+ android.content.ContentProvider.openFile()} method, so will &lt;em&gt;not&lt;/em&gt; work with
+ providers that return sub-sections of files.  If at all possible,
+ you should use {@link #openAssetFileDescriptor(Uri, String)}.  You
+ will receive a FileNotFoundException exception if the provider returns a
+ sub-section of a file.
+
+ &lt;h5&gt;Accepts the following URI schemes:&lt;/h5&gt;
+ &lt;ul&gt;
+ &lt;li&gt;content ({@link #SCHEME_CONTENT})&lt;/li&gt;
+ &lt;li&gt;file ({@link #SCHEME_FILE})&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;See {@link #openAssetFileDescriptor(Uri, String)} for more information
+ on these schemes.
+ &lt;p&gt;
+ If opening with the exclusive &quot;r&quot; or &quot;w&quot; modes, the returned
+ ParcelFileDescriptor could be a pipe or socket pair to enable streaming
+ of data. Opening with the &quot;rw&quot; mode implies a file on disk that supports
+ seeking. If possible, always use an exclusive mode to give the underlying
+ {@link android.content.ContentProvider} the most flexibility.
+ &lt;p&gt;
+ If you are writing a file, and need to communicate an error to the
+ provider, use {@link ParcelFileDescriptor#closeWithError(String)}.
+@param {Object {Uri}} uri The desired URI to open.
+@param {String} mode The file mode to use, as per {@link ContentProvider#openFile
+ ContentProvider.openFile}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress,
+         or null if none. If the operation is canceled, then
+         {@link OperationCanceledException} will be thrown.
+@return {Object {android.os.ParcelFileDescriptor}} Returns a new ParcelFileDescriptor pointing to the file.  You
+ own this descriptor and are responsible for closing it when done.
+@throws FileNotFoundException Throws FileNotFoundException if no
+ file exists under the URI or the mode is invalid.
+@see #openAssetFileDescriptor(Uri, String)
+*/
+openFileDescriptor : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openAssetFile'>/**
+</span>*/
+openAssetFile : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openAssetFileDescriptor'>/**Open a raw file descriptor to access data under a URI.  This
+</span> interacts with the underlying {@link android.content.ContentProvider#openAssetFile}
+ method of the provider associated with the given URI, to retrieve any file stored there.
+
+ &lt;h5&gt;Accepts the following URI schemes:&lt;/h5&gt;
+ &lt;ul&gt;
+ &lt;li&gt;content ({@link #SCHEME_CONTENT})&lt;/li&gt;
+ &lt;li&gt;android.resource ({@link #SCHEME_ANDROID_RESOURCE})&lt;/li&gt;
+ &lt;li&gt;file ({@link #SCHEME_FILE})&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;h5&gt;The android.resource ({@link #SCHEME_ANDROID_RESOURCE}) Scheme&lt;/h5&gt;
+ &lt;p&gt;
+ A Uri object can be used to reference a resource in an APK file.  The
+ Uri should be one of the following formats:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;code&gt;android.resource://package_name/id_number&lt;/code&gt;&lt;br/&gt;
+ &lt;code&gt;package_name&lt;/code&gt; is your package name as listed in your AndroidManifest.xml.
+ For example &lt;code&gt;com.example.myapp&lt;/code&gt;&lt;br/&gt;
+ &lt;code&gt;id_number&lt;/code&gt; is the int form of the ID.&lt;br/&gt;
+ The easiest way to construct this form is
+ &lt;pre&gt;Uri uri = Uri.parse(&quot;android.resource://com.example.myapp/&quot; + R.raw.my_resource&quot;);&lt;/pre&gt;
+ &lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;android.resource://package_name/type/name&lt;/code&gt;&lt;br/&gt;
+ &lt;code&gt;package_name&lt;/code&gt; is your package name as listed in your AndroidManifest.xml.
+ For example &lt;code&gt;com.example.myapp&lt;/code&gt;&lt;br/&gt;
+ &lt;code&gt;type&lt;/code&gt; is the string form of the resource type.  For example, &lt;code&gt;raw&lt;/code&gt;
+ or &lt;code&gt;drawable&lt;/code&gt;.
+ &lt;code&gt;name&lt;/code&gt; is the string form of the resource name.  That is, whatever the file
+ name was in your res directory, without the type extension.
+ The easiest way to construct this form is
+ &lt;pre&gt;Uri uri = Uri.parse(&quot;android.resource://com.example.myapp/raw/my_resource&quot;);&lt;/pre&gt;
+ &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Note that if this function is called for read-only input (mode is &quot;r&quot;)
+ on a content: URI, it will instead call {@link #openTypedAssetFileDescriptor}
+ for you with a MIME type of &quot;*&amp;#47;*&quot;.  This allows such callers to benefit
+ from any built-in data conversion that a provider implements.
+@param {Object {Uri}} uri The desired URI to open.
+@param {String} mode The file mode to use, as per {@link ContentProvider#openAssetFile
+ ContentProvider.openAssetFile}.
+@return {Object {android.content.res.AssetFileDescriptor}} Returns a new ParcelFileDescriptor pointing to the file.  You
+ own this descriptor and are responsible for closing it when done.
+@throws FileNotFoundException Throws FileNotFoundException of no
+ file exists under the URI or the mode is invalid.
+*/
+openAssetFileDescriptor : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openAssetFileDescriptor'>/**Open a raw file descriptor to access data under a URI.  This
+</span> interacts with the underlying {@link android.content.ContentProvider#openAssetFile}
+ method of the provider associated with the given URI, to retrieve any file stored there.
+
+ &lt;h5&gt;Accepts the following URI schemes:&lt;/h5&gt;
+ &lt;ul&gt;
+ &lt;li&gt;content ({@link #SCHEME_CONTENT})&lt;/li&gt;
+ &lt;li&gt;android.resource ({@link #SCHEME_ANDROID_RESOURCE})&lt;/li&gt;
+ &lt;li&gt;file ({@link #SCHEME_FILE})&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;h5&gt;The android.resource ({@link #SCHEME_ANDROID_RESOURCE}) Scheme&lt;/h5&gt;
+ &lt;p&gt;
+ A Uri object can be used to reference a resource in an APK file.  The
+ Uri should be one of the following formats:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;code&gt;android.resource://package_name/id_number&lt;/code&gt;&lt;br/&gt;
+ &lt;code&gt;package_name&lt;/code&gt; is your package name as listed in your AndroidManifest.xml.
+ For example &lt;code&gt;com.example.myapp&lt;/code&gt;&lt;br/&gt;
+ &lt;code&gt;id_number&lt;/code&gt; is the int form of the ID.&lt;br/&gt;
+ The easiest way to construct this form is
+ &lt;pre&gt;Uri uri = Uri.parse(&quot;android.resource://com.example.myapp/&quot; + R.raw.my_resource&quot;);&lt;/pre&gt;
+ &lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;android.resource://package_name/type/name&lt;/code&gt;&lt;br/&gt;
+ &lt;code&gt;package_name&lt;/code&gt; is your package name as listed in your AndroidManifest.xml.
+ For example &lt;code&gt;com.example.myapp&lt;/code&gt;&lt;br/&gt;
+ &lt;code&gt;type&lt;/code&gt; is the string form of the resource type.  For example, &lt;code&gt;raw&lt;/code&gt;
+ or &lt;code&gt;drawable&lt;/code&gt;.
+ &lt;code&gt;name&lt;/code&gt; is the string form of the resource name.  That is, whatever the file
+ name was in your res directory, without the type extension.
+ The easiest way to construct this form is
+ &lt;pre&gt;Uri uri = Uri.parse(&quot;android.resource://com.example.myapp/raw/my_resource&quot;);&lt;/pre&gt;
+ &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Note that if this function is called for read-only input (mode is &quot;r&quot;)
+ on a content: URI, it will instead call {@link #openTypedAssetFileDescriptor}
+ for you with a MIME type of &quot;*&amp;#47;*&quot;.  This allows such callers to benefit
+ from any built-in data conversion that a provider implements.
+@param {Object {Uri}} uri The desired URI to open.
+@param {String} mode The file mode to use, as per {@link ContentProvider#openAssetFile
+ ContentProvider.openAssetFile}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if
+            none. If the operation is canceled, then
+            {@link OperationCanceledException} will be thrown.
+@return {Object {android.content.res.AssetFileDescriptor}} Returns a new ParcelFileDescriptor pointing to the file.  You
+ own this descriptor and are responsible for closing it when done.
+@throws FileNotFoundException Throws FileNotFoundException of no
+ file exists under the URI or the mode is invalid.
+*/
+openAssetFileDescriptor : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openTypedAssetFile'>/**
+</span>*/
+openTypedAssetFile : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openTypedAssetFileDescriptor'>/**Open a raw file descriptor to access (potentially type transformed)
+</span> data from a &quot;content:&quot; URI.  This interacts with the underlying
+ {@link android.content.ContentProvider#openTypedAssetFile} method of the provider
+ associated with the given URI, to retrieve retrieve any appropriate
+ data stream for the data stored there.
+
+ &lt;p&gt;Unlike {@link #openAssetFileDescriptor}, this function only works
+ with &quot;content:&quot; URIs, because content providers are the only facility
+ with an associated MIME type to ensure that the returned data stream
+ is of the desired type.
+
+ &lt;p&gt;All text/* streams are encoded in UTF-8.
+@param {Object {Uri}} uri The desired URI to open.
+@param {String} mimeType The desired MIME type of the returned data.  This can
+ be a pattern such as *&amp;#47;*, which will allow the content provider to
+ select a type, though there is no way for you to determine what type
+ it is returning.
+@param {Object {Bundle}} opts Additional provider-dependent options.
+@return {Object {android.content.res.AssetFileDescriptor}} Returns a new ParcelFileDescriptor from which you can read the
+ data stream from the provider.  Note that this may be a pipe, meaning
+ you can't seek in it.  The only seek you should do is if the
+ AssetFileDescriptor contains an offset, to move to that offset before
+ reading.  You own this descriptor and are responsible for closing it when done.
+@throws FileNotFoundException Throws FileNotFoundException of no
+ data of the desired type exists under the URI.
+*/
+openTypedAssetFileDescriptor : function(  ) {},
+
+<span id='android-content-ContentResolver-method-openTypedAssetFileDescriptor'>/**Open a raw file descriptor to access (potentially type transformed)
+</span> data from a &quot;content:&quot; URI.  This interacts with the underlying
+ {@link android.content.ContentProvider#openTypedAssetFile} method of the provider
+ associated with the given URI, to retrieve retrieve any appropriate
+ data stream for the data stored there.
+
+ &lt;p&gt;Unlike {@link #openAssetFileDescriptor}, this function only works
+ with &quot;content:&quot; URIs, because content providers are the only facility
+ with an associated MIME type to ensure that the returned data stream
+ is of the desired type.
+
+ &lt;p&gt;All text/* streams are encoded in UTF-8.
+@param {Object {Uri}} uri The desired URI to open.
+@param {String} mimeType The desired MIME type of the returned data.  This can
+ be a pattern such as *&amp;#47;*, which will allow the content provider to
+ select a type, though there is no way for you to determine what type
+ it is returning.
+@param {Object {Bundle}} opts Additional provider-dependent options.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress,
+         or null if none. If the operation is canceled, then
+         {@link OperationCanceledException} will be thrown.
+@return {Object {android.content.res.AssetFileDescriptor}} Returns a new ParcelFileDescriptor from which you can read the
+ data stream from the provider.  Note that this may be a pipe, meaning
+ you can't seek in it.  The only seek you should do is if the
+ AssetFileDescriptor contains an offset, to move to that offset before
+ reading.  You own this descriptor and are responsible for closing it when done.
+@throws FileNotFoundException Throws FileNotFoundException of no
+ data of the desired type exists under the URI.
+*/
+openTypedAssetFileDescriptor : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getResourceId'>/**Resolves an android.resource URI to a {@link Resources} and a resource id.
+</span>@hide 
+*/
+getResourceId : function(  ) {},
+
+<span id='android-content-ContentResolver-method-insert'>/**Inserts a row into a table at the given URL.
+</span>
+ If the content provider supports transactions the insertion will be atomic.
+@param {Object {Uri}} url The URL of the table to insert into.
+@param {Object {ContentValues}} values The initial values for the newly inserted row. The key is the column name for
+               the field. Passing an empty ContentValues will create an empty row.
+@return {Object {android.net.Uri}} the URL of the newly created row. May return &lt;code&gt;null&lt;/code&gt; if the underlying
+         content provider returns &lt;code&gt;null&lt;/code&gt;, or if it crashes.
+*/
+insert : function(  ) {},
+
+<span id='android-content-ContentResolver-method-applyBatch'>/**Applies each of the {@link android.content.ContentProviderOperation} objects and returns an array
+</span> of their results. Passes through OperationApplicationException, which may be thrown
+ by the call to {@link android.content.ContentProviderOperation#apply}.
+ If all the applications succeed then a {@link android.content.ContentProviderResult} array with the
+ same number of elements as the operations will be returned. It is implementation-specific
+ how many, if any, operations will have been successfully applied if a call to
+ apply results in a {@link android.content.OperationApplicationException}.
+@param {String} authority the authority of the ContentProvider to which this batch should be applied
+@param {Object {java.util.ArrayList}} operations the operations to apply
+@return {Object {android.content.ContentProviderResult}} the results of the applications
+@throws OperationApplicationException thrown if an application fails.
+ See {@link ContentProviderOperation#apply} for more information.
+@throws RemoteException thrown if a RemoteException is encountered while attempting
+   to communicate with a remote provider.
+*/
+applyBatch : function(  ) {},
+
+<span id='android-content-ContentResolver-method-bulkInsert'>/**Inserts multiple rows into a table at the given URL.
+</span>
+ This function make no guarantees about the atomicity of the insertions.
+@param {Object {Uri}} url The URL of the table to insert into.
+@param {Object {android.content.ContentValues[]}} values The initial values for the newly inserted rows. The key is the column name for
+               the field. Passing null will create an empty row.
+@return {Number} the number of newly created rows.
+*/
+bulkInsert : function(  ) {},
+
+<span id='android-content-ContentResolver-method-delete'>/**Deletes row(s) specified by a content URI.
+</span>
+ If the content provider supports transactions, the deletion will be atomic.
+@param {Object {Uri}} url The URL of the row to delete.
+@param {String} where A filter to apply to rows before deleting, formatted as an SQL WHERE clause
+                    (excluding the WHERE itself).
+@return {Number} The number of rows deleted.
+*/
+delete : function(  ) {},
+
+<span id='android-content-ContentResolver-method-update'>/**Update row(s) in a content URI.
+</span>
+ If the content provider supports transactions the update will be atomic.
+@param {Object {Uri}} uri The URI to modify.
+@param {Object {ContentValues}} values The new field values. The key is the column name for the field.
+                     A null value will remove an existing field value.
+@param {String} where A filter to apply to rows before updating, formatted as an SQL WHERE clause
+                    (excluding the WHERE itself).
+@return {Number} the number of rows updated.
+@throws NullPointerException if uri or values are null
+*/
+update : function(  ) {},
+
+<span id='android-content-ContentResolver-method-call'>/**Call a provider-defined method.  This can be used to implement
+</span> read or write interfaces which are cheaper than using a Cursor and/or
+ do not fit into the traditional table model.
+@param {Object {Uri}} method provider-defined method name to call.  Opaque to
+   framework, but must be non-null.
+@param {String} arg provider-defined String argument.  May be null.
+@param {String} extras provider-defined Bundle argument.  May be null.
+@return {Object {android.os.Bundle}} a result Bundle, possibly null.  Will be null if the ContentProvider
+   does not implement call.
+@throws NullPointerException if uri or method is null
+@throws IllegalArgumentException if uri is not known
+*/
+call : function(  ) {},
+
+<span id='android-content-ContentResolver-method-call'>/**
+</span>*/
+call : function(  ) {},
+
+<span id='android-content-ContentResolver-method-acquireProvider'>/**Returns the content provider for the given content URI.
+</span>@param {Object {Uri}} uri The URI to a content provider
+@return {Object {android.content.IContentProvider}} The ContentProvider for the given URI, or null if no content provider is found.
+@hide 
+*/
+acquireProvider : function(  ) {},
+
+<span id='android-content-ContentResolver-method-acquireExistingProvider'>/**Returns the content provider for the given content URI if the process
+</span> already has a reference on it.
+@param {Object {Uri}} uri The URI to a content provider
+@return {Object {android.content.IContentProvider}} The ContentProvider for the given URI, or null if no content provider is found.
+@hide 
+*/
+acquireExistingProvider : function(  ) {},
+
+<span id='android-content-ContentResolver-method-acquireProvider'>/**
+</span>@hide 
+*/
+acquireProvider : function(  ) {},
+
+<span id='android-content-ContentResolver-method-acquireUnstableProvider'>/**Returns the content provider for the given content URI.
+</span>@param {Object {Uri}} uri The URI to a content provider
+@return {Object {android.content.IContentProvider}} The ContentProvider for the given URI, or null if no content provider is found.
+@hide 
+*/
+acquireUnstableProvider : function(  ) {},
+
+<span id='android-content-ContentResolver-method-acquireUnstableProvider'>/**
+</span>@hide 
+*/
+acquireUnstableProvider : function(  ) {},
+
+<span id='android-content-ContentResolver-method-acquireContentProviderClient'>/**Returns a {@link android.content.ContentProviderClient} that is associated with the {@link android.content.ContentProvider}
+</span> that services the content at uri, starting the provider if necessary. Returns
+ null if there is no provider associated wih the uri. The caller must indicate that they are
+ done with the provider by calling {@link android.content.ContentProviderClient#release} which will allow
+ the system to release the provider if it determines that there is no other reason for
+ keeping it active.
+@param {Object {Uri}} uri specifies which provider should be acquired
+@return {Object {android.content.ContentProviderClient}} a {@link ContentProviderClient} that is associated with the {@link ContentProvider}
+ that services the content at uri or null if there isn't one.
+*/
+acquireContentProviderClient : function(  ) {},
+
+<span id='android-content-ContentResolver-method-acquireContentProviderClient'>/**Returns a {@link android.content.ContentProviderClient} that is associated with the {@link android.content.ContentProvider}
+</span> with the authority of name, starting the provider if necessary. Returns
+ null if there is no provider associated wih the uri. The caller must indicate that they are
+ done with the provider by calling {@link android.content.ContentProviderClient#release} which will allow
+ the system to release the provider if it determines that there is no other reason for
+ keeping it active.
+@param {String} name specifies which provider should be acquired
+@return {Object {android.content.ContentProviderClient}} a {@link ContentProviderClient} that is associated with the {@link ContentProvider}
+ with the authority of name or null if there isn't one.
+*/
+acquireContentProviderClient : function(  ) {},
+
+<span id='android-content-ContentResolver-method-acquireUnstableContentProviderClient'>/**Like {@link #acquireContentProviderClient}(Uri), but for use when you do
+</span> not trust the stability of the target content provider.  This turns off
+ the mechanism in the platform clean up processes that are dependent on
+ a content provider if that content provider's process goes away.  Normally
+ you can safely assume that once you have acquired a provider, you can freely
+ use it as needed and it won't disappear, even if your process is in the
+ background.  If using this method, you need to take care to deal with any
+ failures when communicating with the provider, and be sure to close it
+ so that it can be re-opened later.  In particular, catching a
+ {@link android.os.DeadObjectException} from the calls there will let you
+ know that the content provider has gone away; at that point the current
+ ContentProviderClient object is invalid, and you should release it.  You
+ can acquire a new one if you would like to try to restart the provider
+ and perform new operations on it.
+*/
+acquireUnstableContentProviderClient : function(  ) {},
+
+<span id='android-content-ContentResolver-method-acquireUnstableContentProviderClient'>/**Like {@link #acquireContentProviderClient}(String), but for use when you do
+</span> not trust the stability of the target content provider.  This turns off
+ the mechanism in the platform clean up processes that are dependent on
+ a content provider if that content provider's process goes away.  Normally
+ you can safely assume that once you have acquired a provider, you can freely
+ use it as needed and it won't disappear, even if your process is in the
+ background.  If using this method, you need to take care to deal with any
+ failures when communicating with the provider, and be sure to close it
+ so that it can be re-opened later.  In particular, catching a
+ {@link android.os.DeadObjectException} from the calls there will let you
+ know that the content provider has gone away; at that point the current
+ ContentProviderClient object is invalid, and you should release it.  You
+ can acquire a new one if you would like to try to restart the provider
+ and perform new operations on it.
+*/
+acquireUnstableContentProviderClient : function(  ) {},
+
+<span id='android-content-ContentResolver-method-registerContentObserver'>/**Register an observer class that gets callbacks when data identified by a
+</span> given content URI changes.
+ &lt;p&gt;
+ Starting in {@link android.os.Build.VERSION_CODES#O}, all content
+ notifications must be backed by a valid {@link android.content.ContentProvider}.
+@param {Object {Uri}} uri The URI to watch for changes. This can be a specific row URI,
+            or a base URI for a whole class of content.
+@param {Boolean} notifyForDescendants When false, the observer will be notified
+            whenever a change occurs to the exact URI specified by
+            &lt;code&gt;uri&lt;/code&gt; or to one of the URI's ancestors in the path
+            hierarchy. When true, the observer will also be notified
+            whenever a change occurs to the URI's descendants in the path
+            hierarchy.
+@param {Object {ContentObserver}} observer The object that receives callbacks when changes occur.
+@see #unregisterContentObserver
+*/
+registerContentObserver : function(  ) {},
+
+<span id='android-content-ContentResolver-method-registerContentObserver'>/**
+</span>@hide - designated user version
+*/
+registerContentObserver : function(  ) {},
+
+<span id='android-content-ContentResolver-method-unregisterContentObserver'>/**Unregisters a change observer.
+</span>@param {Object {ContentObserver}} observer The previously registered observer that is no longer needed.
+@see #registerContentObserver
+*/
+unregisterContentObserver : function(  ) {},
+
+<span id='android-content-ContentResolver-method-notifyChange'>/**Notify registered observers that a row was updated and attempt to sync
+</span> changes to the network.
+ &lt;p&gt;
+ To observe events sent through this call, use
+ {@link #registerContentObserver(Uri, boolean, ContentObserver)}.
+ &lt;p&gt;
+ Starting in {@link android.os.Build.VERSION_CODES#O}, all content
+ notifications must be backed by a valid {@link android.content.ContentProvider}.
+@param {Object {Uri}} uri The uri of the content that was changed.
+@param {Object {ContentObserver}} observer The observer that originated the change, may be
+            &lt;code&gt;null&lt;/null&gt;. The observer that originated the change
+            will only receive the notification if it has requested to
+            receive self-change notifications by implementing
+            {@link ContentObserver#deliverSelfNotifications()} to return
+            true.
+*/
+notifyChange : function(  ) {},
+
+<span id='android-content-ContentResolver-method-notifyChange'>/**Notify registered observers that a row was updated.
+</span> &lt;p&gt;
+ To observe events sent through this call, use
+ {@link #registerContentObserver(Uri, boolean, ContentObserver)}.
+ &lt;p&gt;
+ If syncToNetwork is true, this will attempt to schedule a local sync
+ using the sync adapter that's registered for the authority of the
+ provided uri. No account will be passed to the sync adapter, so all
+ matching accounts will be synchronized.
+ &lt;p&gt;
+ Starting in {@link android.os.Build.VERSION_CODES#O}, all content
+ notifications must be backed by a valid {@link android.content.ContentProvider}.
+@param {Object {Uri}} uri The uri of the content that was changed.
+@param {Object {ContentObserver}} observer The observer that originated the change, may be
+            &lt;code&gt;null&lt;/null&gt;. The observer that originated the change
+            will only receive the notification if it has requested to
+            receive self-change notifications by implementing
+            {@link ContentObserver#deliverSelfNotifications()} to return
+            true.
+@param {Boolean} syncToNetwork If true, same as {@link #NOTIFY_SYNC_TO_NETWORK}.
+@see #requestSync(android.accounts.Account, String, android.os.Bundle)
+*/
+notifyChange : function(  ) {},
+
+<span id='android-content-ContentResolver-method-notifyChange'>/**Notify registered observers that a row was updated.
+</span> &lt;p&gt;
+ To observe events sent through this call, use
+ {@link #registerContentObserver(Uri, boolean, ContentObserver)}.
+ &lt;p&gt;
+ If syncToNetwork is true, this will attempt to schedule a local sync
+ using the sync adapter that's registered for the authority of the
+ provided uri. No account will be passed to the sync adapter, so all
+ matching accounts will be synchronized.
+ &lt;p&gt;
+ Starting in {@link android.os.Build.VERSION_CODES#O}, all content
+ notifications must be backed by a valid {@link android.content.ContentProvider}.
+@param {Object {Uri}} uri The uri of the content that was changed.
+@param {Object {ContentObserver}} observer The observer that originated the change, may be
+            &lt;code&gt;null&lt;/null&gt;. The observer that originated the change
+            will only receive the notification if it has requested to
+            receive self-change notifications by implementing
+            {@link ContentObserver#deliverSelfNotifications()} to return
+            true.
+@param {Number} flags Additional flags: {@link #NOTIFY_SYNC_TO_NETWORK}.
+@see #requestSync(android.accounts.Account, String, android.os.Bundle)
+*/
+notifyChange : function(  ) {},
+
+<span id='android-content-ContentResolver-method-notifyChange'>/**Notify registered observers within the designated user(s) that a row was updated.
+</span>@hide 
+*/
+notifyChange : function(  ) {},
+
+<span id='android-content-ContentResolver-method-notifyChange'>/**Notify registered observers within the designated user(s) that a row was updated.
+</span>@hide 
+*/
+notifyChange : function(  ) {},
+
+<span id='android-content-ContentResolver-method-takePersistableUriPermission'>/**Take a persistable URI permission grant that has been offered. Once
+</span> taken, the permission grant will be remembered across device reboots.
+ Only URI permissions granted with
+ {@link android.content.Intent#FLAG_GRANT_PERSISTABLE_URI_PERMISSION} can be persisted. If
+ the grant has already been persisted, taking it again will touch
+ {@link android.content.UriPermission#getPersistedTime()}.
+@see #getPersistedUriPermissions()
+*/
+takePersistableUriPermission : function(  ) {},
+
+<span id='android-content-ContentResolver-method-takePersistableUriPermission'>/**
+</span>@hide 
+*/
+takePersistableUriPermission : function(  ) {},
+
+<span id='android-content-ContentResolver-method-releasePersistableUriPermission'>/**Relinquish a persisted URI permission grant. The URI must have been
+</span> previously made persistent with
+ {@link #takePersistableUriPermission(Uri, int)}. Any non-persistent
+ grants to the calling package will remain intact.
+@see #getPersistedUriPermissions()
+*/
+releasePersistableUriPermission : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getPersistedUriPermissions'>/**Return list of all URI permission grants that have been persisted by the
+</span> calling app. That is, the returned permissions have been granted
+ &lt;em&gt;to&lt;/em&gt; the calling app. Only persistable grants taken with
+ {@link #takePersistableUriPermission(Uri, int)} are returned.
+ &lt;p&gt;Note: Some of the returned URIs may not be usable until after the user is unlocked.
+@see #takePersistableUriPermission(Uri, int)
+@see #releasePersistableUriPermission(Uri, int)
+*/
+getPersistedUriPermissions : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getOutgoingPersistedUriPermissions'>/**Return list of all persisted URI permission grants that are hosted by the
+</span> calling app. That is, the returned permissions have been granted
+ &lt;em&gt;from&lt;/em&gt; the calling app. Only grants taken with
+ {@link #takePersistableUriPermission(Uri, int)} are returned.
+ &lt;p&gt;Note: Some of the returned URIs may not be usable until after the user is unlocked.
+*/
+getOutgoingPersistedUriPermissions : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getOutgoingUriPermissions'>/**
+</span>@hide 
+*/
+getOutgoingUriPermissions : function(  ) {},
+
+<span id='android-content-ContentResolver-method-startSync'>/**Start an asynchronous sync operation. If you want to monitor the progress
+</span> of the sync you may register a SyncObserver. Only values of the following
+ types may be used in the extras bundle:
+ &lt;ul&gt;
+ &lt;li&gt;Integer&lt;/li&gt;
+ &lt;li&gt;Long&lt;/li&gt;
+ &lt;li&gt;Boolean&lt;/li&gt;
+ &lt;li&gt;Float&lt;/li&gt;
+ &lt;li&gt;Double&lt;/li&gt;
+ &lt;li&gt;String&lt;/li&gt;
+ &lt;li&gt;Account&lt;/li&gt;
+ &lt;li&gt;null&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Object {Uri}} uri the uri of the provider to sync or null to sync all providers.
+@param {Object {Bundle}} extras any extras to pass to the SyncAdapter.
+@deprecated instead use
+ {@link #requestSync(android.accounts.Account, String, android.os.Bundle)}
+*/
+startSync : function(  ) {},
+
+<span id='android-content-ContentResolver-method-requestSync'>/**Start an asynchronous sync operation. If you want to monitor the progress
+</span> of the sync you may register a SyncObserver. Only values of the following
+ types may be used in the extras bundle:
+ &lt;ul&gt;
+ &lt;li&gt;Integer&lt;/li&gt;
+ &lt;li&gt;Long&lt;/li&gt;
+ &lt;li&gt;Boolean&lt;/li&gt;
+ &lt;li&gt;Float&lt;/li&gt;
+ &lt;li&gt;Double&lt;/li&gt;
+ &lt;li&gt;String&lt;/li&gt;
+ &lt;li&gt;Account&lt;/li&gt;
+ &lt;li&gt;null&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Object {Account}} account which account should be synced
+@param {String} authority which authority should be synced
+@param {Object {Bundle}} extras any extras to pass to the SyncAdapter.
+*/
+requestSync : function(  ) {},
+
+<span id='android-content-ContentResolver-method-requestSyncAsUser'>/**
+</span>@see #requestSync(Account, String, Bundle)
+@hide 
+*/
+requestSyncAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-requestSync'>/**Register a sync with the SyncManager. These requests are built using the
+</span> {@link android.content.SyncRequest.Builder}.
+*/
+requestSync : function(  ) {},
+
+<span id='android-content-ContentResolver-method-validateSyncExtrasBundle'>/**Check that only values of the following types are in the Bundle:
+</span> &lt;ul&gt;
+ &lt;li&gt;Integer&lt;/li&gt;
+ &lt;li&gt;Long&lt;/li&gt;
+ &lt;li&gt;Boolean&lt;/li&gt;
+ &lt;li&gt;Float&lt;/li&gt;
+ &lt;li&gt;Double&lt;/li&gt;
+ &lt;li&gt;String&lt;/li&gt;
+ &lt;li&gt;Account&lt;/li&gt;
+ &lt;li&gt;null&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Object {Bundle}} extras the Bundle to check
+*/
+validateSyncExtrasBundle : function(  ) {},
+
+<span id='android-content-ContentResolver-method-cancelSync'>/**Cancel any active or pending syncs that match the Uri. If the uri is null then
+</span> all syncs will be canceled.
+@param {Object {Uri}} uri the uri of the provider to sync or null to sync all providers.
+@deprecated instead use {@link #cancelSync(android.accounts.Account, String)}
+*/
+cancelSync : function(  ) {},
+
+<span id='android-content-ContentResolver-method-cancelSync'>/**Cancel any active or pending syncs that match account and authority. The account and
+</span> authority can each independently be set to null, which means that syncs with any account
+ or authority, respectively, will match.
+@param {Object {Account}} account filters the syncs that match by this account
+@param {String} authority filters the syncs that match by this authority
+*/
+cancelSync : function(  ) {},
+
+<span id='android-content-ContentResolver-method-cancelSyncAsUser'>/**
+</span>@see #cancelSync(Account, String)
+@hide 
+*/
+cancelSyncAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getSyncAdapterTypes'>/**Get information about the SyncAdapters that are known to the system.
+</span>@return {Object {android.content.SyncAdapterType}} an array of SyncAdapters that have registered with the system
+*/
+getSyncAdapterTypes : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getSyncAdapterTypesAsUser'>/**
+</span>@see #getSyncAdapterTypes()
+@hide 
+*/
+getSyncAdapterTypesAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getSyncAdapterPackagesForAuthorityAsUser'>/**
+</span>@hide Returns the package names of syncadapters that match a given user and authority.
+*/
+getSyncAdapterPackagesForAuthorityAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getSyncAutomatically'>/**Check if the provider should be synced when a network tickle is received
+</span> &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#READ_SYNC_SETTINGS}.
+@param {Object {Account}} account the account whose setting we are querying
+@param {String} authority the provider whose setting we are querying
+@return {Boolean} true if the provider should be synced when a network tickle is received
+*/
+getSyncAutomatically : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getSyncAutomaticallyAsUser'>/**
+</span>@see #getSyncAutomatically(Account, String)
+@hide 
+*/
+getSyncAutomaticallyAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-setSyncAutomatically'>/**Set whether or not the provider is synced when it receives a network tickle.
+</span> &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#WRITE_SYNC_SETTINGS}.
+@param {Object {Account}} account the account whose setting we are querying
+@param {String} authority the provider whose behavior is being controlled
+@param {Boolean} sync true if the provider should be synced when tickles are received for it
+*/
+setSyncAutomatically : function(  ) {},
+
+<span id='android-content-ContentResolver-method-setSyncAutomaticallyAsUser'>/**
+</span>@see #setSyncAutomatically(Account, String, boolean)
+@hide 
+*/
+setSyncAutomaticallyAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-addPeriodicSync'>/**Specifies that a sync should be requested with the specified the account, authority,
+</span> and extras at the given frequency. If there is already another periodic sync scheduled
+ with the account, authority and extras then a new periodic sync won't be added, instead
+ the frequency of the previous one will be updated.
+ &lt;p&gt;
+ These periodic syncs honor the &quot;syncAutomatically&quot; and &quot;masterSyncAutomatically&quot; settings.
+ Although these sync are scheduled at the specified frequency, it may take longer for it to
+ actually be started if other syncs are ahead of it in the sync operation queue. This means
+ that the actual start time may drift.
+ &lt;p&gt;
+ Periodic syncs are not allowed to have any of {@link #SYNC_EXTRAS_DO_NOT_RETRY},
+ {@link #SYNC_EXTRAS_IGNORE_BACKOFF}, {@link #SYNC_EXTRAS_IGNORE_SETTINGS},
+ {@link #SYNC_EXTRAS_INITIALIZE}, {@link #SYNC_EXTRAS_FORCE},
+ {@link #SYNC_EXTRAS_EXPEDITED}, {@link #SYNC_EXTRAS_MANUAL} set to true.
+ If any are supplied then an {@link IllegalArgumentException} will be thrown.
+
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#WRITE_SYNC_SETTINGS}.
+ &lt;p&gt;The bundle for a periodic sync can be queried by applications with the correct
+ permissions using
+ {@link android.content.ContentResolver#getPeriodicSyncs(Account account, String provider)}, so no
+ sensitive data should be transferred here.
+@param {Object {Account}} account the account to specify in the sync
+@param {String} authority the provider to specify in the sync request
+@param {Object {Bundle}} extras extra parameters to go along with the sync request
+@param {Number} pollFrequency how frequently the sync should be performed, in seconds.
+ On Android API level 24 and above, a minmam interval of 15 minutes is enforced.
+ On previous versions, the minimum interval is 1 hour.
+@throws IllegalArgumentException if an illegal extra was set or if any of the parameters
+ are null.
+*/
+addPeriodicSync : function(  ) {},
+
+<span id='android-content-ContentResolver-method-invalidPeriodicExtras'>/**{@hide}
+</span> Helper function to throw an &lt;code&gt;IllegalArgumentException&lt;/code&gt; if any illegal
+ extras were set for a periodic sync.
+@param {Object {Bundle}} extras bundle to validate.
+*/
+invalidPeriodicExtras : function(  ) {},
+
+<span id='android-content-ContentResolver-method-removePeriodicSync'>/**Remove a periodic sync. Has no affect if account, authority and extras don't match
+</span> an existing periodic sync.
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#WRITE_SYNC_SETTINGS}.
+@param {Object {Account}} account the account of the periodic sync to remove
+@param {String} authority the provider of the periodic sync to remove
+@param {Object {Bundle}} extras the extras of the periodic sync to remove
+*/
+removePeriodicSync : function(  ) {},
+
+<span id='android-content-ContentResolver-method-cancelSync'>/**Remove the specified sync. This will cancel any pending or active syncs. If the request is
+</span> for a periodic sync, this call will remove any future occurrences.
+ &lt;p&gt;
+     If a periodic sync is specified, the caller must hold the permission
+     {@link android.Manifest.permission#WRITE_SYNC_SETTINGS}.
+&lt;/p&gt;
+ It is possible to cancel a sync using a SyncRequest object that is not the same object
+ with which you requested the sync. Do so by building a SyncRequest with the same
+ adapter, frequency, &lt;b&gt;and&lt;/b&gt; extras bundle.
+@param {Object {SyncRequest}} request SyncRequest object containing information about sync to cancel.
+*/
+cancelSync : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getPeriodicSyncs'>/**Get the list of information about the periodic syncs for the given account and authority.
+</span> &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#READ_SYNC_SETTINGS}.
+@param {Object {Account}} account the account whose periodic syncs we are querying
+@param {String} authority the provider whose periodic syncs we are querying
+@return {Object {java.util.List}} a list of PeriodicSync objects. This list may be empty but will never be null.
+*/
+getPeriodicSyncs : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getIsSyncable'>/**Check if this account/provider is syncable.
+</span> &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#READ_SYNC_SETTINGS}.
+@return {Number} &gt;0 if it is syncable, 0 if not, and &lt;0 if the state isn't known yet.
+*/
+getIsSyncable : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getIsSyncableAsUser'>/**
+</span>@see #getIsSyncable(Account, String)
+@hide 
+*/
+getIsSyncableAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-setIsSyncable'>/**Set whether this account/provider is syncable.
+</span> &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#WRITE_SYNC_SETTINGS}.
+@param {Object {Account}} syncable &gt;0 denotes syncable, 0 means not syncable, &lt;0 means unknown
+*/
+setIsSyncable : function(  ) {},
+
+<span id='android-content-ContentResolver-method-setIsSyncableAsUser'>/**
+</span>@see #setIsSyncable(Account, String, int)
+@hide 
+*/
+setIsSyncableAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getMasterSyncAutomatically'>/**Gets the master auto-sync setting that applies to all the providers and accounts.
+</span> If this is false then the per-provider auto-sync setting is ignored.
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#READ_SYNC_SETTINGS}.
+@return {Boolean} the master auto-sync setting that applies to all the providers and accounts
+*/
+getMasterSyncAutomatically : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getMasterSyncAutomaticallyAsUser'>/**
+</span>@see #getMasterSyncAutomatically()
+@hide 
+*/
+getMasterSyncAutomaticallyAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-setMasterSyncAutomatically'>/**Sets the master auto-sync setting that applies to all the providers and accounts.
+</span> If this is false then the per-provider auto-sync setting is ignored.
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#WRITE_SYNC_SETTINGS}.
+@param {Boolean} sync the master auto-sync setting that applies to all the providers and accounts
+*/
+setMasterSyncAutomatically : function(  ) {},
+
+<span id='android-content-ContentResolver-method-setMasterSyncAutomaticallyAsUser'>/**
+</span>@see #setMasterSyncAutomatically(boolean)
+@hide 
+*/
+setMasterSyncAutomaticallyAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-isSyncActive'>/**Returns true if there is currently a sync operation for the given account or authority
+</span> actively being processed.
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#READ_SYNC_STATS}.
+@param {Object {Account}} account the account whose setting we are querying
+@param {String} authority the provider whose behavior is being queried
+@return {Boolean} true if a sync is active for the given account or authority.
+*/
+isSyncActive : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getCurrentSync'>/**If a sync is active returns the information about it, otherwise returns null.
+</span> &lt;p&gt;
+ This method requires the caller to hold the permission
+ {@link android.Manifest.permission#READ_SYNC_STATS}.
+ &lt;p&gt;
+@return {Object {android.content.SyncInfo}} the SyncInfo for the currently active sync or null if one is not active.
+@deprecated Since multiple concurrent syncs are now supported you should use
+ {@link #getCurrentSyncs()} to get the accurate list of current syncs.
+ This method returns the first item from the list of current syncs
+ or null if there are none.
+*/
+getCurrentSync : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getCurrentSyncs'>/**Returns a list with information about all the active syncs. This list will be empty
+</span> if there are no active syncs.
+ &lt;p&gt;
+ This method requires the caller to hold the permission
+ {@link android.Manifest.permission#READ_SYNC_STATS}.
+ &lt;p&gt;
+@return {Object {java.util.List}} a List of SyncInfo objects for the currently active syncs.
+*/
+getCurrentSyncs : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getCurrentSyncsAsUser'>/**
+</span>@see #getCurrentSyncs()
+@hide 
+*/
+getCurrentSyncsAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getSyncStatus'>/**Returns the status that matches the authority.
+</span>@param {Object {Account}} account the account whose setting we are querying
+@param {String} authority the provider whose behavior is being queried
+@return {Object {android.content.SyncStatusInfo}} the SyncStatusInfo for the authority, or null if none exists
+@hide 
+*/
+getSyncStatus : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getSyncStatusAsUser'>/**
+</span>@see #getSyncStatus(Account, String)
+@hide 
+*/
+getSyncStatusAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-isSyncPending'>/**Return true if the pending status is true of any matching authorities.
+</span> &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#READ_SYNC_STATS}.
+@param {Object {Account}} account the account whose setting we are querying
+@param {String} authority the provider whose behavior is being queried
+@return {Boolean} true if there is a pending sync with the matching account and authority
+*/
+isSyncPending : function(  ) {},
+
+<span id='android-content-ContentResolver-method-isSyncPendingAsUser'>/**
+</span>@see #requestSync(Account, String, Bundle)
+@hide 
+*/
+isSyncPendingAsUser : function(  ) {},
+
+<span id='android-content-ContentResolver-method-addStatusChangeListener'>/**Request notifications when the different aspects of the SyncManager change. The
+</span> different items that can be requested are:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #SYNC_OBSERVER_TYPE_PENDING}
+ &lt;li&gt; {@link #SYNC_OBSERVER_TYPE_ACTIVE}
+ &lt;li&gt; {@link #SYNC_OBSERVER_TYPE_SETTINGS}
+ &lt;/ul&gt;
+ The caller can set one or more of the status types in the mask for any
+ given listener registration.
+@param {Number} mask the status change types that will cause the callback to be invoked
+@param {Object {SyncStatusObserver}} callback observer to be invoked when the status changes
+@return {Object {java.lang.Object}} a handle that can be used to remove the listener at a later time
+*/
+addStatusChangeListener : function(  ) {},
+
+<span id='android-content-ContentResolver-method-removeStatusChangeListener'>/**Remove a previously registered status change listener.
+</span>@param {Object {Object}} handle the handle that was returned by {@link #addStatusChangeListener}
+*/
+removeStatusChangeListener : function(  ) {},
+
+<span id='android-content-ContentResolver-method-putCache'>/**Store the given {@link Bundle} as a long-lived cached object within the
+</span> system. This can be useful to avoid expensive re-parsing when apps are
+ restarted multiple times on low-RAM devices.
+ &lt;p&gt;
+ The {@link Bundle} is automatically invalidated when a
+ {@link #notifyChange(Uri, ContentObserver)} event applies to the key.
+@hide 
+*/
+putCache : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getCache'>/**Retrieve the last {@link Bundle} stored as a long-lived cached object
+</span> within the system.
+@return {Object {android.os.Bundle}} {@code null} if no cached object has been stored, or if the
+         stored object has been invalidated due to a
+         {@link #notifyChange(Uri, ContentObserver)} event.
+@hide 
+*/
+getCache : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getTargetSdkVersion'>/**{@hide}
+</span>*/
+getTargetSdkVersion : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getContentService'>/**
+</span>@hide 
+*/
+getContentService : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getPackageName'>/**
+</span>@hide 
+*/
+getPackageName : function(  ) {},
+
+<span id='android-content-ContentResolver-method-resolveUserId'>/**
+</span>@hide 
+*/
+resolveUserId : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getUserId'>/**
+</span>@hide 
+*/
+getUserId : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getTypeDrawable'>/**{@hide}
+</span>*/
+getTypeDrawable : function(  ) {},
+
+<span id='android-content-ContentResolver-method-getTypeInfo'>/**Return a detailed description of the given MIME type, including an icon
+</span> and label that describe the type.
+@param {String} mimeType Valid, concrete MIME type.
+*/
+getTypeInfo : function(  ) {},
+
+<span id='android-content-ContentResolver-method-createSqlQueryBundle'>/**
+</span>@hide 
+*/
+createSqlQueryBundle : function(  ) {},
+
+<span id='android-content-ContentResolver-method-createSqlSortClause'>/**Returns structured sort args formatted as an SQL sort clause.
+</span>
+ NOTE: Collator clauses are suitable for use with non text fields. We might
+ choose to omit any collation clause since we don't know the underlying
+ type of data to be collated. Imperical testing shows that sqlite3 doesn't
+ appear to care much about the presence of collate clauses in queries
+ when ordering by numeric fields. For this reason we include collate
+ clause unilaterally when {@link #QUERY_ARG_SORT_COLLATION} is present
+ in query args bundle.
+
+ TODO: Would be nice to explicitly validate that colums referenced in
+ {@link #QUERY_ARG_SORT_COLUMNS} are present in the associated projection.
+@hide 
+*/
+createSqlSortClause : function(  ) {},
+
+<span id='android-content-ContentResolver-method-loadThumbnail'>/**Convenience method that efficiently loads a visual thumbnail for the
+</span> given {@link Uri}. Internally calls
+ {@link android.content.ContentProvider#openTypedAssetFile} on the remote provider, but
+ also defensively resizes any returned content to match the requested
+ target size.
+@param {Object {Uri}} uri The item that should be visualized as a thumbnail.
+@param {Object {Size}} size The target area on the screen where this thumbnail will be
+            shown. This is passed to the provider as {@link #EXTRA_SIZE}
+            to help it avoid downloading or generating heavy resources.
+@param {Object {CancellationSignal}} signal A signal to cancel the operation in progress.
+@return {Object {android.graphics.Bitmap}} Valid {@link Bitmap} which is a visual thumbnail.
+@throws IOException If any trouble was encountered while generating or
+             loading the thumbnail, or if
+             {@link CancellationSignal#cancel()} was invoked.
+*/
+loadThumbnail : function(  ) {},
+
+<span id='android-content-ContentResolver-method-loadThumbnail'>/**{@hide}
+</span>*/
+loadThumbnail : function(  ) {},
+
+<span id='android-content-ContentResolver-method-onDbCorruption'>/**{@hide}
+</span>*/
+onDbCorruption : function(  ) {},
+
+<span id='android-content-ContentResolver-method-translateDeprecatedDataPath'>/**{@hide}
+</span>*/
+translateDeprecatedDataPath : function(  ) {},
+
+<span id='android-content-ContentResolver-method-translateDeprecatedDataPath'>/**{@hide}
+</span>*/
+translateDeprecatedDataPath : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

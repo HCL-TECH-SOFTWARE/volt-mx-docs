@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-UndoManager'>/**@class android.content.UndoManager
+</span>@extends java.lang.Object
+
+ Top-level class for managing and interacting with the global undo state for
+ a document or application.  This class supports both undo and redo and has
+ helpers for merging undoable operations together as they are performed.
+
+ &lt;p&gt;A single undoable operation is represented by {@link android.content.UndoOperation} which
+ apps implement to define their undo/redo behavior.  The UndoManager keeps
+ a stack of undo states; each state can have one or more undo operations
+ inside of it.&lt;/p&gt;
+
+ &lt;p&gt;Updates to the stack must be done inside of a {@link #beginUpdate}/{@link #endUpdate}()
+ pair.  During this time you can add new operations to the stack with
+ {@link #addOperation}, retrieve and modify existing operations with
+ {@link #getLastOperation}, control the label shown to the user for this operation
+ with {@link #setUndoLabel} and {@link #suggestUndoLabel}, etc.&lt;/p&gt;
+
+ &lt;p&gt;Every {link UndoOperation} is associated with an {@link android.content.UndoOwner}, which identifies
+ the data it belongs to.  The owner is used to indicate how operations are dependent
+ on each other -- operations with the same owner are dependent on others with the
+ same owner.  For example, you may have a document with multiple embedded objects.  If the
+ document itself and each embedded object use different owners, then you
+ can provide undo semantics appropriate to the user's context: while within
+ an embedded object, only edits to that object are seen and the user can
+ undo/redo them without needing to impact edits in other objects; while
+ within the larger document, all edits can be seen and the user must
+ undo/redo them as a single stream.&lt;/p&gt;
+
+ @hide
+*/
+var UndoManager = {
+
+<span id='android-content-UndoManager-property-MERGE_MODE_NONE'>/** Never merge with the last undo state.
+</span>*/
+MERGE_MODE_NONE : &quot;0&quot;,
+<span id='android-content-UndoManager-property-MERGE_MODE_UNIQUE'>/** Allow merge with the last undo state only if it contains
+</span> operations with the caller's owner.
+*/
+MERGE_MODE_UNIQUE : &quot;1&quot;,
+<span id='android-content-UndoManager-property-MERGE_MODE_ANY'>/** Always allow merge with the last undo state, if possible.
+</span>*/
+MERGE_MODE_ANY : &quot;2&quot;,
+<span id='android-content-UndoManager-method-getOwner'>/**
+</span>*/
+getOwner : function(  ) {},
+
+<span id='android-content-UndoManager-method-saveInstanceState'>/**Flatten the current undo state into a Parcel object, which can later be restored
+</span> with {@link #restoreInstanceState(android.os.Parcel, java.lang.ClassLoader)}.
+*/
+saveInstanceState : function(  ) {},
+
+<span id='android-content-UndoManager-method-restoreInstanceState'>/**Restore an undo state previously created with {@link #saveInstanceState}(Parcel).  This
+</span> will restore the UndoManager's state to almost exactly what it was at the point it had
+ been previously saved; the only information not restored is the data object
+ associated with each {@link android.content.UndoOwner}, which requires separate calls to
+ {@link #getOwner(String, Object)} to re-associate the owner with its data.
+*/
+restoreInstanceState : function(  ) {},
+
+<span id='android-content-UndoManager-method-setHistorySize'>/**Set the maximum number of undo states that will be retained.
+</span>*/
+setHistorySize : function(  ) {},
+
+<span id='android-content-UndoManager-method-getHistorySize'>/**Return the current maximum number of undo states.
+</span>*/
+getHistorySize : function(  ) {},
+
+<span id='android-content-UndoManager-method-undo'>/**Perform undo of last/top &lt;var&gt;count&lt;/var&gt; undo states.  The states impacted
+</span> by this can be limited through &lt;var&gt;owners&lt;/var&gt;.
+@param {Object {android.content.UndoOwner[]}} owners Optional set of owners that should be impacted.  If null, all
+ undo states will be visible and available for undo.  If non-null, only those
+ states that contain one of the owners specified here will be visible.
+@param {Number} count Number of undo states to pop.
+@return {Number} Returns the number of undo states that were actually popped.
+*/
+undo : function(  ) {},
+
+<span id='android-content-UndoManager-method-redo'>/**Perform redo of last/top &lt;var&gt;count&lt;/var&gt; undo states in the transient redo stack.
+</span> The states impacted by this can be limited through &lt;var&gt;owners&lt;/var&gt;.
+@param {Object {android.content.UndoOwner[]}} owners Optional set of owners that should be impacted.  If null, all
+ undo states will be visible and available for undo.  If non-null, only those
+ states that contain one of the owners specified here will be visible.
+@param {Number} count Number of undo states to pop.
+@return {Number} Returns the number of undo states that were actually redone.
+*/
+redo : function(  ) {},
+
+<span id='android-content-UndoManager-method-isInUndo'>/**Returns true if we are currently inside of an undo/redo operation.  This is
+</span> useful for editors to know whether they should be generating new undo state
+ when they see edit operations happening.
+*/
+isInUndo : function(  ) {},
+
+<span id='android-content-UndoManager-method-forgetUndos'>/**
+</span>*/
+forgetUndos : function(  ) {},
+
+<span id='android-content-UndoManager-method-forgetRedos'>/**
+</span>*/
+forgetRedos : function(  ) {},
+
+<span id='android-content-UndoManager-method-countUndos'>/**Return the number of undo states on the undo stack.
+</span>@param {Object {android.content.UndoOwner[]}} owners If non-null, only those states containing an operation with one of
+ the owners supplied here will be counted.
+*/
+countUndos : function(  ) {},
+
+<span id='android-content-UndoManager-method-countRedos'>/**Return the number of redo states on the undo stack.
+</span>@param {Object {android.content.UndoOwner[]}} owners If non-null, only those states containing an operation with one of
+ the owners supplied here will be counted.
+*/
+countRedos : function(  ) {},
+
+<span id='android-content-UndoManager-method-getUndoLabel'>/**Return the user-visible label for the top undo state on the stack.
+</span>@param {Object {android.content.UndoOwner[]}} owners If non-null, will select the top-most undo state containing an
+ operation with one of the owners supplied here.
+*/
+getUndoLabel : function(  ) {},
+
+<span id='android-content-UndoManager-method-getRedoLabel'>/**Return the user-visible label for the top redo state on the stack.
+</span>@param {Object {android.content.UndoOwner[]}} owners If non-null, will select the top-most undo state containing an
+ operation with one of the owners supplied here.
+*/
+getRedoLabel : function(  ) {},
+
+<span id='android-content-UndoManager-method-beginUpdate'>/**Start creating a new undo state.  Multiple calls to this function will nest until
+</span> they are all matched by a later call to {@link #endUpdate}.
+@param {Object {CharSequence}} label Optional user-visible label for this new undo state.
+*/
+beginUpdate : function(  ) {},
+
+<span id='android-content-UndoManager-method-isInUpdate'>/**Returns true if currently inside of a {@link #beginUpdate}.
+</span>*/
+isInUpdate : function(  ) {},
+
+<span id='android-content-UndoManager-method-setUndoLabel'>/**Forcibly set a new for the new undo state being built within a {@link #beginUpdate}.
+</span> Any existing label will be replaced with this one.
+*/
+setUndoLabel : function(  ) {},
+
+<span id='android-content-UndoManager-method-suggestUndoLabel'>/**Set a new for the new undo state being built within a {@link #beginUpdate}, but
+</span> only if there is not a label currently set for it.
+*/
+suggestUndoLabel : function(  ) {},
+
+<span id='android-content-UndoManager-method-getUpdateNestingLevel'>/**Return the number of times {@link #beginUpdate} has been called without a matching
+</span> {@link #endUpdate} call.
+*/
+getUpdateNestingLevel : function(  ) {},
+
+<span id='android-content-UndoManager-method-hasOperation'>/**Check whether there is an {@link android.content.UndoOperation} in the current {@link #beginUpdate}
+</span> undo state.
+@param {Object {UndoOwner}} owner Optional owner of the operation to look for.  If null, will succeed
+ if there is any operation; if non-null, will only succeed if there is an operation
+ with the given owner.
+@return {Boolean} Returns true if there is a matching operation in the current undo state.
+*/
+hasOperation : function(  ) {},
+
+<span id='android-content-UndoManager-method-getLastOperation'>/**Return the most recent {@link android.content.UndoOperation} that was added to the update.
+</span>@param {Number} mergeMode May be either {@link #MERGE_MODE_NONE} or {@link #MERGE_MODE_ANY}.
+*/
+getLastOperation : function(  ) {},
+
+<span id='android-content-UndoManager-method-getLastOperation'>/**Return the most recent {@link android.content.UndoOperation} that was added to the update and
+</span> has the given owner.
+@param {Object {UndoOwner}} owner Optional owner of last operation to retrieve.  If null, the last
+ operation regardless of owner will be retrieved; if non-null, the last operation
+ matching the given owner will be retrieved.
+@param {Number} mergeMode May be either {@link #MERGE_MODE_NONE}, {@link #MERGE_MODE_UNIQUE},
+ or {@link #MERGE_MODE_ANY}.
+*/
+getLastOperation : function(  ) {},
+
+<span id='android-content-UndoManager-method-getLastOperation'>/**Return the most recent {@link android.content.UndoOperation} that was added to the update and
+</span> has the given owner.
+@param {Object {java.lang.Class}} clazz Optional class of the last operation to retrieve.  If null, the
+ last operation regardless of class will be retrieved; if non-null, the last
+ operation whose class is the same as the given class will be retrieved.
+@param {Object {UndoOwner}} owner Optional owner of last operation to retrieve.  If null, the last
+ operation regardless of owner will be retrieved; if non-null, the last operation
+ matching the given owner will be retrieved.
+@param {Number} mergeMode May be either {@link #MERGE_MODE_NONE}, {@link #MERGE_MODE_UNIQUE},
+ or {@link #MERGE_MODE_ANY}.
+*/
+getLastOperation : function(  ) {},
+
+<span id='android-content-UndoManager-method-addOperation'>/**Add a new UndoOperation to the current update.
+</span>@param {Object {android.content.UndoOperation}} op The new operation to add.
+@param {Number} mergeMode May be either {@link #MERGE_MODE_NONE}, {@link #MERGE_MODE_UNIQUE},
+ or {@link #MERGE_MODE_ANY}.
+*/
+addOperation : function(  ) {},
+
+<span id='android-content-UndoManager-method-endUpdate'>/**Finish the creation of an undo state, matching a previous call to
+</span> {@link #beginUpdate}.
+*/
+endUpdate : function(  ) {},
+
+<span id='android-content-UndoManager-method-commitState'>/**Commit the last finished undo state.  This undo state can no longer be
+</span> modified with further {@link #MERGE_MODE_UNIQUE} or
+ {@link #MERGE_MODE_ANY} merge modes.  If called while inside of an update,
+ this will push any changes in the current update on to the undo stack
+ and result with a fresh undo state, behaving as if {@link #endUpdate}()
+ had been called enough to unwind the current update, then the last state
+ committed, and {@link #beginUpdate} called to restore the update nesting.
+@param {Object {UndoOwner}} owner The optional owner to determine whether to perform the commit.
+ If this is non-null, the commit will only execute if the current top undo
+ state contains an operation with the given owner.
+@return {Number} Returns an integer identifier for the committed undo state, which
+ can later be used to try to uncommit the state to perform further edits on it.
+*/
+commitState : function(  ) {},
+
+<span id='android-content-UndoManager-method-uncommitState'>/**Attempt to undo a previous call to {@link #commitState}.  This will work
+</span> if the undo state at the top of the stack has the given id, and has not been
+ involved in an undo operation.  Otherwise false is returned.
+@param {Number} commitId The identifier for the state to be uncommitted, as returned
+ by {@link #commitState}.
+@param {Object {UndoOwner}} owner Optional owner that must appear in the committed state.
+@return {Boolean} Returns true if the uncommit is successful, else false.
+*/
+uncommitState : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

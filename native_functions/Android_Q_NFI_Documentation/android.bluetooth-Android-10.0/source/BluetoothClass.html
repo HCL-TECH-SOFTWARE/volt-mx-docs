@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothClass'>/**@class android.bluetooth.BluetoothClass
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Represents a Bluetooth class, which describes general characteristics
+ and capabilities of a device. For example, a Bluetooth class will
+ specify the general device type such as a phone, a computer, or
+ headset, and whether it's capable of services such as audio or telephony.
+
+ &lt;p&gt;Every Bluetooth class is composed of zero or more service classes, and
+ exactly one device class. The device class is further broken down into major
+ and minor device class components.
+
+ &lt;p&gt;{@link android.bluetooth.BluetoothClass} is useful as a hint to roughly describe a device
+ (for example to show an icon in the UI), but does not reliably describe which
+ Bluetooth profiles or services are actually supported by a device. Accurate
+ service discovery is done through SDP requests, which are automatically
+ performed when creating an RFCOMM socket with {@link android.bluetooth.BluetoothDevice#createRfcommSocketToServiceRecord} and {@link android.bluetooth.BluetoothAdapter#listenUsingRfcommWithServiceRecord}&lt;/p&gt;
+
+ &lt;p&gt;Use {@link android.bluetooth.BluetoothDevice#getBluetoothClass} to retrieve the class for
+ a remote device.
+
+ &lt;!--
+ The Bluetooth class is a 32 bit field. The format of these bits is defined at
+ http://www.bluetooth.org/Technical/AssignedNumbers/baseband.htm
+ (login required). This class contains that 32 bit field, and provides
+ constants and methods to determine which Service Class(es) and Device Class
+ are encoded in that field.
+ --&gt;
+*/
+var BluetoothClass = {
+
+<span id='android-bluetooth-BluetoothClass-property-ERROR'>/** Legacy error value. Applications should use null instead.
+</span>
+ @hide
+*/
+ERROR : &quot;-16777216&quot;,
+<span id='android-bluetooth-BluetoothClass-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-bluetooth-BluetoothClass-property-PROFILE_HEADSET'>/**@hide */
+</span>PROFILE_HEADSET : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothClass-property-PROFILE_A2DP'>/**@hide */
+</span>PROFILE_A2DP : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothClass-property-PROFILE_OPP'>/**@hide */
+</span>PROFILE_OPP : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothClass-property-PROFILE_HID'>/**@hide */
+</span>PROFILE_HID : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothClass-property-PROFILE_PANU'>/**@hide */
+</span>PROFILE_PANU : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothClass-property-PROFILE_NAP'>/**@hide */
+</span>PROFILE_NAP : &quot;5&quot;,
+<span id='android-bluetooth-BluetoothClass-property-PROFILE_A2DP_SINK'>/**@hide */
+</span>PROFILE_A2DP_SINK : &quot;6&quot;,
+<span id='android-bluetooth-BluetoothClass-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-bluetooth-BluetoothClass-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-bluetooth-BluetoothClass-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-bluetooth-BluetoothClass-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-bluetooth-BluetoothClass-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-bluetooth-BluetoothClass-method-hasService'>/**Return true if the specified service class is supported by this
+</span> {@link android.bluetooth.BluetoothClass}.
+ &lt;p&gt;Valid service classes are the public constants in
+ {@link android.bluetooth.BluetoothClass.Service}. For example, {@link android.bluetooth.BluetoothClass.Service#AUDIO}.
+@param {Number} service valid service class
+@return {Boolean} true if the service class is supported
+*/
+hasService : function(  ) {},
+
+<span id='android-bluetooth-BluetoothClass-method-getMajorDeviceClass'>/**Return the major device class component of this {@link android.bluetooth.BluetoothClass}.
+</span> &lt;p&gt;Values returned from this function can be compared with the
+ public constants in {@link android.bluetooth.BluetoothClass.Device.Major} to determine
+ which major class is encoded in this Bluetooth class.
+@return {Number} major device class component
+*/
+getMajorDeviceClass : function(  ) {},
+
+<span id='android-bluetooth-BluetoothClass-method-getDeviceClass'>/**Return the (major and minor) device class component of this
+</span> {@link android.bluetooth.BluetoothClass}.
+ &lt;p&gt;Values returned from this function can be compared with the
+ public constants in {@link android.bluetooth.BluetoothClass.Device} to determine which
+ device class is encoded in this Bluetooth class.
+@return {Number} device class component
+*/
+getDeviceClass : function(  ) {},
+
+<span id='android-bluetooth-BluetoothClass-method-getClassOfDevice'>/**Return the Bluetooth Class of Device (CoD) value including the
+</span> {@link android.bluetooth.BluetoothClass.Service}, {@link android.bluetooth.BluetoothClass.Device.Major} and
+ minor device fields.
+
+ &lt;p&gt;This value is an integer representation of Bluetooth CoD as in
+ Bluetooth specification.
+@see &lt;a href=&quot;Bluetooth CoD&quot;&gt;https://www.bluetooth.com/specifications/assigned-numbers/baseband&lt;/a&gt;
+@hide 
+*/
+getClassOfDevice : function(  ) {},
+
+<span id='android-bluetooth-BluetoothClass-method-getClassOfDeviceBytes'>/**Return the Bluetooth Class of Device (CoD) value including the
+</span> {@link android.bluetooth.BluetoothClass.Service}, {@link android.bluetooth.BluetoothClass.Device.Major} and
+ minor device fields.
+
+ &lt;p&gt;This value is a byte array representation of Bluetooth CoD as in
+ Bluetooth specification.
+
+ &lt;p&gt;Bluetooth COD information is 3 bytes, but stored as an int. Hence the
+ MSB is useless and needs to be thrown away. The lower 3 bytes are
+ converted into a byte array MSB to LSB. Hence, using BIG_ENDIAN.
+@see &lt;a href=&quot;Bluetooth CoD&quot;&gt;https://www.bluetooth.com/specifications/assigned-numbers/baseband&lt;/a&gt;
+@hide 
+*/
+getClassOfDeviceBytes : function(  ) {},
+
+<span id='android-bluetooth-BluetoothClass-method-doesClassMatch'>/**Check class bits for possible bluetooth profile support.
+</span> This is a simple heuristic that tries to guess if a device with the
+ given class bits might support specified profile. It is not accurate for all
+ devices. It tries to err on the side of false positives.
+@param {Number} profile The profile to be checked
+@return {Boolean} True if this device might support specified profile.
+@hide 
+*/
+doesClassMatch : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

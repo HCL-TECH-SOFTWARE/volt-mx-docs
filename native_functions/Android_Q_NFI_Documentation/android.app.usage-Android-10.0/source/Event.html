@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-usage-UsageEvents-Event'>/**@class android.app.usage.UsageEvents.Event
+</span>@extends java.lang.Object
+
+ An event representing a state change for a component.
+*/
+var Event = {
+
+<span id='android-app-usage-UsageEvents-Event-property-NONE'>/** No event type.
+</span>*/
+NONE : &quot;0&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-DEVICE_EVENT_PACKAGE_NAME'>/** A device level event like {@link #DEVICE_SHUTDOWN} does not have package name, but some
+</span> user code always expect a non-null {@link #mPackage} for every event. Use
+ {@link #DEVICE_EVENT_PACKAGE_NAME} as packageName for these device level events.
+ @hide
+*/
+DEVICE_EVENT_PACKAGE_NAME : &quot;android&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-MOVE_TO_FOREGROUND'>/** @deprecated by {@link #ACTIVITY_RESUMED}
+</span>*/
+MOVE_TO_FOREGROUND : &quot;1&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-ACTIVITY_RESUMED'>/** An event type denoting that an {@link android.app.Activity} moved to the foreground.
+</span> This event has a package name and class name associated with it and can be retrieved
+ using {@link #getPackageName}() and {@link #getClassName}().
+ If a package has multiple activities, this event is reported for each activity that moves
+ to foreground.
+ This event is corresponding to {@link android.app.Activity#onResume()} of the
+ activity's lifecycle.
+*/
+ACTIVITY_RESUMED : &quot;1&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-MOVE_TO_BACKGROUND'>/** @deprecated by {@link #ACTIVITY_PAUSED}
+</span>*/
+MOVE_TO_BACKGROUND : &quot;2&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-ACTIVITY_PAUSED'>/** An event type denoting that an {@link android.app.Activity} moved to the background.
+</span> This event has a package name and class name associated with it and can be retrieved
+ using {@link #getPackageName}() and {@link #getClassName}().
+ If a package has multiple activities, this event is reported for each activity that moves
+ to background.
+ This event is corresponding to {@link android.app.Activity#onPause()} of the activity's
+ lifecycle.
+*/
+ACTIVITY_PAUSED : &quot;2&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-END_OF_DAY'>/** An event type denoting that a component was in the foreground when the stats
+</span> rolled-over. This is effectively treated as a {@link #ACTIVITY_PAUSED}.
+ {@hide}
+*/
+END_OF_DAY : &quot;3&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-CONTINUE_PREVIOUS_DAY'>/** An event type denoting that a component was in the foreground the previous day.
+</span> This is effectively treated as a {@link #ACTIVITY_RESUMED}.
+ {@hide}
+*/
+CONTINUE_PREVIOUS_DAY : &quot;4&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-CONFIGURATION_CHANGE'>/** An event type denoting that the device configuration has changed.
+</span>*/
+CONFIGURATION_CHANGE : &quot;5&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-SYSTEM_INTERACTION'>/** An event type denoting that a package was interacted with in some way by the system.
+</span> @hide
+*/
+SYSTEM_INTERACTION : &quot;6&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-USER_INTERACTION'>/** An event type denoting that a package was interacted with in some way by the user.
+</span>*/
+USER_INTERACTION : &quot;7&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-SHORTCUT_INVOCATION'>/** An event type denoting that an action equivalent to a ShortcutInfo is taken by the user.
+</span>
+ @see android.content.pm.ShortcutManager#reportShortcutUsed(String)
+*/
+SHORTCUT_INVOCATION : &quot;8&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-CHOOSER_ACTION'>/** An event type denoting that a package was selected by the user for ChooserActivity.
+</span> @hide
+*/
+CHOOSER_ACTION : &quot;9&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-NOTIFICATION_SEEN'>/** An event type denoting that a notification was viewed by the user.
+</span> @hide
+*/
+NOTIFICATION_SEEN : &quot;10&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-STANDBY_BUCKET_CHANGED'>/** An event type denoting a change in App Standby Bucket. The new bucket can be
+</span> retrieved by calling {@link #getAppStandbyBucket}().
+
+ @see UsageStatsManager#getAppStandbyBucket()
+*/
+STANDBY_BUCKET_CHANGED : &quot;11&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-NOTIFICATION_INTERRUPTION'>/** An event type denoting that an app posted an interruptive notification. Visual and
+</span> audible interruptions are included.
+ @hide
+*/
+NOTIFICATION_INTERRUPTION : &quot;12&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-SLICE_PINNED_PRIV'>/** A Slice was pinned by the default launcher or the default assistant.
+</span> @hide
+*/
+SLICE_PINNED_PRIV : &quot;13&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-SLICE_PINNED'>/** A Slice was pinned by an app.
+</span> @hide
+*/
+SLICE_PINNED : &quot;14&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-SCREEN_INTERACTIVE'>/** An event type denoting that the screen has gone in to an interactive state (turned
+</span> on for full user interaction, not ambient display or other non-interactive state).
+*/
+SCREEN_INTERACTIVE : &quot;15&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-SCREEN_NON_INTERACTIVE'>/** An event type denoting that the screen has gone in to a non-interactive state
+</span> (completely turned off or turned on only in a non-interactive state like ambient
+ display).
+*/
+SCREEN_NON_INTERACTIVE : &quot;16&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-KEYGUARD_SHOWN'>/** An event type denoting that the screen's keyguard has been shown, whether or not
+</span> the screen is off.
+*/
+KEYGUARD_SHOWN : &quot;17&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-KEYGUARD_HIDDEN'>/** An event type denoting that the screen's keyguard has been hidden.  This typically
+</span> happens when the user unlocks their phone after turning it on.
+*/
+KEYGUARD_HIDDEN : &quot;18&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-FOREGROUND_SERVICE_START'>/** An event type denoting start of a foreground service.
+</span> This event has a package name and class name associated with it and can be retrieved
+ using {@link #getPackageName}() and {@link #getClassName}().
+ If a package has multiple foreground services, this event is reported for each service
+ that is started.
+*/
+FOREGROUND_SERVICE_START : &quot;19&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-FOREGROUND_SERVICE_STOP'>/** An event type denoting stop of a foreground service.
+</span> This event has a package name and class name associated with it and can be retrieved
+ using {@link #getPackageName}() and {@link #getClassName}().
+ If a package has multiple foreground services, this event is reported for each service
+ that is stopped.
+*/
+FOREGROUND_SERVICE_STOP : &quot;20&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-CONTINUING_FOREGROUND_SERVICE'>/** An event type denoting that a foreground service is at started state at beginning of a
+</span> time interval.
+ This is effectively treated as a {@link #FOREGROUND_SERVICE_START}.
+ {@hide}
+*/
+CONTINUING_FOREGROUND_SERVICE : &quot;21&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-ROLLOVER_FOREGROUND_SERVICE'>/** An event type denoting that a foreground service is at started state when the stats
+</span> rolled-over at the end of a time interval.
+ {@hide}
+*/
+ROLLOVER_FOREGROUND_SERVICE : &quot;22&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-ACTIVITY_STOPPED'>/** An activity becomes invisible on the UI, corresponding to
+</span> {@link android.app.Activity#onStop()} of the activity's lifecycle.
+*/
+ACTIVITY_STOPPED : &quot;23&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-ACTIVITY_DESTROYED'>/** An activity object is destroyed, corresponding to
+</span> {@link android.app.Activity#onDestroy()} of the activity's lifecycle.
+ {@hide}
+*/
+ACTIVITY_DESTROYED : &quot;24&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-FLUSH_TO_DISK'>/** The event type demoting that a flush of UsageStatsDatabase to file system. Before the
+</span> flush all usage stats need to be updated to latest timestamp to make sure the most
+ up to date stats are persisted.
+ @hide
+*/
+FLUSH_TO_DISK : &quot;25&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-DEVICE_SHUTDOWN'>/** An event type denoting that the Android runtime underwent a shutdown process.
+</span> A DEVICE_SHUTDOWN event should be treated as if all started activities and foreground
+ services are now stopped and no explicit {@link #ACTIVITY_STOPPED} and
+ {@link #FOREGROUND_SERVICE_STOP} events will be generated for them.
+
+ &lt;p&gt;The DEVICE_SHUTDOWN timestamp is actually the last time UsageStats database is
+ persisted before the actual shutdown. Events (if there are any) between this timestamp
+ and the actual shutdown is not persisted in the database. So any open events without
+ matching close events between DEVICE_SHUTDOWN and {@link #DEVICE_STARTUP} should be
+ ignored because the closing time is unknown.&lt;/p&gt;
+*/
+DEVICE_SHUTDOWN : &quot;26&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-DEVICE_STARTUP'>/** An event type denoting that the Android runtime started up. This could be after a
+</span> shutdown or a runtime restart. Any open events without matching close events between
+ {@link #DEVICE_SHUTDOWN} and DEVICE_STARTUP should be ignored because the closing time is
+ unknown.
+*/
+DEVICE_STARTUP : &quot;27&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-MAX_EVENT_TYPE'>/** Keep in sync with the greatest event type value.
+</span> @hide
+*/
+MAX_EVENT_TYPE : &quot;27&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-FLAG_IS_PACKAGE_INSTANT_APP'>/**@hide */
+</span>FLAG_IS_PACKAGE_INSTANT_APP : &quot;1&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-VALID_FLAG_BITS'>/** Bitwise OR all valid flag constants to create this constant.
+</span> @hide
+*/
+VALID_FLAG_BITS : &quot;1&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mPackage'>/** {@hide}
+</span>*/
+mPackage : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mClass'>/** {@hide}
+</span>*/
+mClass : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mInstanceId'>/** {@hide}
+</span>*/
+mInstanceId : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mTaskRootPackage'>/** {@hide}
+</span>*/
+mTaskRootPackage : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mTaskRootClass'>/** {@hide}
+</span>*/
+mTaskRootClass : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mTimeStamp'>/** {@hide}
+</span>*/
+mTimeStamp : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mEventType'>/** {@hide}
+</span>*/
+mEventType : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mConfiguration'>/** Only present for {@link #CONFIGURATION_CHANGE} event types.
+</span> {@hide}
+*/
+mConfiguration : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mShortcutId'>/** ID of the shortcut.
+</span> Only present for {@link #SHORTCUT_INVOCATION} event types.
+ {@hide}
+*/
+mShortcutId : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mAction'>/** Action type passed to ChooserActivity
+</span> Only present for {@link #CHOOSER_ACTION} event types.
+ {@hide}
+*/
+mAction : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mContentType'>/** Content type passed to ChooserActivity.
+</span> Only present for {@link #CHOOSER_ACTION} event types.
+ {@hide}
+*/
+mContentType : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mContentAnnotations'>/** Content annotations passed to ChooserActivity.
+</span> Only present for {@link #CHOOSER_ACTION} event types.
+ {@hide}
+*/
+mContentAnnotations : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mBucketAndReason'>/** The app standby bucket assigned and reason. Bucket is the high order 16 bits, reason
+</span> is the low order 16 bits.
+ Only present for {@link #STANDBY_BUCKET_CHANGED} event types
+ {@hide}
+*/
+mBucketAndReason : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mNotificationChannelId'>/** The id of the {@link android.app.NotificationChannel} to which an interruptive
+</span> notification was posted.
+ Only present for {@link #NOTIFICATION_INTERRUPTION} event types.
+ {@hide}
+*/
+mNotificationChannelId : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-property-mFlags'>/**@hide */
+</span>mFlags : &quot;null&quot;,
+<span id='android-app-usage-UsageEvents-Event-method-getPackageName'>/**The package name of the source of this event.
+</span>*/
+getPackageName : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-isInstantApp'>/**Indicates whether it is an instant app.
+</span>@hide 
+*/
+isInstantApp : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getClassName'>/**The class name of the source of this event. This may be null for
+</span> certain events.
+*/
+getClassName : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getInstanceId'>/**An activity can be instantiated multiple times, this is the unique activity instance ID.
+</span>  For non-activity class, instance ID is always zero.
+@hide 
+*/
+getInstanceId : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getTaskRootPackageName'>/**The package name of the task root when this event was reported.
+</span> Or {@code null} for queries from apps without {@link android.Manifest.permission#PACKAGE_USAGE_STATS}
+@hide 
+*/
+getTaskRootPackageName : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getTaskRootClassName'>/**The class name of the task root when this event was reported.
+</span> Or {@code null} for queries from apps without {@link android.Manifest.permission#PACKAGE_USAGE_STATS}
+@hide 
+*/
+getTaskRootClassName : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getTimeStamp'>/**The time at which this event occurred, measured in milliseconds since the epoch.
+</span> &lt;p/&gt;
+ See {@link System#currentTimeMillis()}.
+*/
+getTimeStamp : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getEventType'>/**The event type.
+</span>@see #ACTIVITY_PAUSED
+@see #ACTIVITY_RESUMED
+@see #CONFIGURATION_CHANGE
+@see #USER_INTERACTION
+@see #STANDBY_BUCKET_CHANGED
+@see #FOREGROUND_SERVICE_START
+@see #FOREGROUND_SERVICE_STOP
+@see #ACTIVITY_STOPPED
+*/
+getEventType : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getConfiguration'>/**Returns a {@link Configuration} for this event if the event is of type
+</span> {@link #CONFIGURATION_CHANGE}, otherwise it returns null.
+*/
+getConfiguration : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getShortcutId'>/**Returns the ID of a {@link android.content.pm.ShortcutInfo} for this event
+</span> if the event is of type {@link #SHORTCUT_INVOCATION}, otherwise it returns null.
+@see android.content.pm.ShortcutManager#reportShortcutUsed(String)
+*/
+getShortcutId : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getStandbyBucket'>/**Returns the standby bucket of the app, if the event is of type
+</span> {@link #STANDBY_BUCKET_CHANGED}, otherwise returns 0.
+@return {Number} the standby bucket associated with the event.
+@hide 
+*/
+getStandbyBucket : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getAppStandbyBucket'>/**Returns the standby bucket of the app, if the event is of type
+</span> {@link #STANDBY_BUCKET_CHANGED}, otherwise returns 0.
+@return {Number} the standby bucket associated with the event.
+*/
+getAppStandbyBucket : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getStandbyReason'>/**Returns the reason for the bucketing, if the event is of type
+</span> {@link #STANDBY_BUCKET_CHANGED}, otherwise returns 0. Reason values include
+ the main reason which is one of REASON_MAIN_*, OR'ed with REASON_SUB_*, if there
+ are sub-reasons for the main reason, such as REASON_SUB_USAGE_* when the main reason
+ is REASON_MAIN_USAGE.
+@hide 
+*/
+getStandbyReason : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getNotificationChannelId'>/**Returns the ID of the {@link android.app.NotificationChannel} for this event if the
+</span> event is of type {@link #NOTIFICATION_INTERRUPTION}, otherwise it returns null;
+@hide 
+*/
+getNotificationChannelId : function(  ) {},
+
+<span id='android-app-usage-UsageEvents-Event-method-getObfuscatedIfInstantApp'>/**
+</span>@hide 
+*/
+getObfuscatedIfInstantApp : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

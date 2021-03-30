@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-le-ScanSettings'>/**@class android.bluetooth.le.ScanSettings
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Bluetooth LE scan settings are passed to {@link android.bluetooth.le.BluetoothLeScanner#startScan} to define the
+ parameters for the scan.
+*/
+var ScanSettings = {
+
+<span id='android-bluetooth-le-ScanSettings-property-SCAN_MODE_OPPORTUNISTIC'>/** A special Bluetooth LE scan mode. Applications using this scan mode will passively listen for
+</span> other scan results without starting BLE scans themselves.
+*/
+SCAN_MODE_OPPORTUNISTIC : &quot;-1&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-SCAN_MODE_LOW_POWER'>/** Perform Bluetooth LE scan in low power mode. This is the default scan mode as it consumes the
+</span> least power. This mode is enforced if the scanning application is not in foreground.
+*/
+SCAN_MODE_LOW_POWER : &quot;0&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-SCAN_MODE_BALANCED'>/** Perform Bluetooth LE scan in balanced power mode. Scan results are returned at a rate that
+</span> provides a good trade-off between scan frequency and power consumption.
+*/
+SCAN_MODE_BALANCED : &quot;1&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-SCAN_MODE_LOW_LATENCY'>/** Scan using highest duty cycle. It's recommended to only use this mode when the application is
+</span> running in the foreground.
+*/
+SCAN_MODE_LOW_LATENCY : &quot;2&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-CALLBACK_TYPE_ALL_MATCHES'>/** Trigger a callback for every Bluetooth advertisement found that matches the filter criteria.
+</span> If no filter is active, all advertisement packets are reported.
+*/
+CALLBACK_TYPE_ALL_MATCHES : &quot;1&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-CALLBACK_TYPE_FIRST_MATCH'>/** A result callback is only triggered for the first advertisement packet received that matches
+</span> the filter criteria.
+*/
+CALLBACK_TYPE_FIRST_MATCH : &quot;2&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-CALLBACK_TYPE_MATCH_LOST'>/** Receive a callback when advertisements are no longer received from a device that has been
+</span> previously reported by a first match callback.
+*/
+CALLBACK_TYPE_MATCH_LOST : &quot;4&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-MATCH_NUM_ONE_ADVERTISEMENT'>/** Match one advertisement per filter
+</span>*/
+MATCH_NUM_ONE_ADVERTISEMENT : &quot;1&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-MATCH_NUM_FEW_ADVERTISEMENT'>/** Match few advertisement per filter, depends on current capability and availibility of
+</span> the resources in hw
+*/
+MATCH_NUM_FEW_ADVERTISEMENT : &quot;2&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-MATCH_NUM_MAX_ADVERTISEMENT'>/** Match as many advertisement per filter as hw could allow, depends on current
+</span> capability and availibility of the resources in hw
+*/
+MATCH_NUM_MAX_ADVERTISEMENT : &quot;3&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-MATCH_MODE_AGGRESSIVE'>/** In Aggressive mode, hw will determine a match sooner even with feeble signal strength
+</span> and few number of sightings/match in a duration.
+*/
+MATCH_MODE_AGGRESSIVE : &quot;1&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-MATCH_MODE_STICKY'>/** For sticky mode, higher threshold of signal strength and sightings is required
+</span> before reporting by hw
+*/
+MATCH_MODE_STICKY : &quot;2&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-SCAN_RESULT_TYPE_FULL'>/** Request full scan results which contain the device, rssi, advertising data, scan response
+</span> as well as the scan timestamp.
+
+ @hide
+*/
+SCAN_RESULT_TYPE_FULL : &quot;0&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-SCAN_RESULT_TYPE_ABBREVIATED'>/** Request abbreviated scan results which contain the device, rssi and scan timestamp.
+</span> &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; It is possible for an application to get more scan results than it asked for, if
+ there are multiple apps using this type.
+
+ @hide
+*/
+SCAN_RESULT_TYPE_ABBREVIATED : &quot;1&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-PHY_LE_ALL_SUPPORTED'>/** Use all supported PHYs for scanning.
+</span> This will check the controller capabilities, and start
+ the scan on 1Mbit and LE Coded PHYs if supported, or on
+ the 1Mbit PHY only.
+*/
+PHY_LE_ALL_SUPPORTED : &quot;255&quot;,
+<span id='android-bluetooth-le-ScanSettings-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-bluetooth-le-ScanSettings-method-getScanMode'>/**
+</span>*/
+getScanMode : function(  ) {},
+
+<span id='android-bluetooth-le-ScanSettings-method-getCallbackType'>/**
+</span>*/
+getCallbackType : function(  ) {},
+
+<span id='android-bluetooth-le-ScanSettings-method-getScanResultType'>/**
+</span>*/
+getScanResultType : function(  ) {},
+
+<span id='android-bluetooth-le-ScanSettings-method-getMatchMode'>/**
+</span>@hide 
+*/
+getMatchMode : function(  ) {},
+
+<span id='android-bluetooth-le-ScanSettings-method-getNumOfMatches'>/**
+</span>@hide 
+*/
+getNumOfMatches : function(  ) {},
+
+<span id='android-bluetooth-le-ScanSettings-method-getLegacy'>/**Returns whether only legacy advertisements will be returned.
+</span> Legacy advertisements include advertisements as specified
+ by the Bluetooth core specification 4.2 and below.
+*/
+getLegacy : function(  ) {},
+
+<span id='android-bluetooth-le-ScanSettings-method-getPhy'>/**Returns the physical layer used during a scan.
+</span>*/
+getPhy : function(  ) {},
+
+<span id='android-bluetooth-le-ScanSettings-method-getReportDelayMillis'>/**Returns report delay timestamp based on the device clock.
+</span>*/
+getReportDelayMillis : function(  ) {},
+
+<span id='android-bluetooth-le-ScanSettings-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-bluetooth-le-ScanSettings-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

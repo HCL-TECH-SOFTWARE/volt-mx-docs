@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-ServiceConnection'>/**@class android.content.ServiceConnection
+</span> Interface for monitoring the state of an application service.  See
+ {@link android.app.Service} and
+ {@link android.content.Context#bindService android.content.Context.bindService()} for more information.
+ &lt;p&gt;Like many callbacks from the system, the methods on this class are called
+ from the main thread of your process.
+*/
+var ServiceConnection = {
+
+<span id='android-content-ServiceConnection-method-onServiceConnected'>/**Called when a connection to the Service has been established, with
+</span> the {@link android.os.IBinder} of the communication channel to the
+ Service.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;b&gt;Note:&lt;/b&gt; If the system has started to bind your
+ client app to a service, it's possible that your app will never receive
+ this callback. Your app won't receive a callback if there's an issue with
+ the service, such as the service crashing while being created.
+@param {Object {ComponentName}} name The concrete component name of the service that has
+ been connected.
+@param {Object {IBinder}} service The IBinder of the Service's communication channel,
+ which you can now make calls on.
+*/
+onServiceConnected : function(  ) {},
+
+<span id='android-content-ServiceConnection-method-onServiceDisconnected'>/**Called when a connection to the Service has been lost.  This typically
+</span> happens when the process hosting the service has crashed or been killed.
+ This does &lt;em&gt;not&lt;/em&gt; remove the ServiceConnection itself -- this
+ binding to the service will remain active, and you will receive a call
+ to {@link #onServiceConnected} when the Service is next running.
+@param {Object {ComponentName}} name The concrete component name of the service whose
+ connection has been lost.
+*/
+onServiceDisconnected : function(  ) {},
+
+<span id='android-content-ServiceConnection-method-onBindingDied'>/**Called when the binding to this connection is dead.  This means the
+</span> interface will never receive another connection.  The application will
+ need to unbind and rebind the connection to activate it again.  This may
+ happen, for example, if the application hosting the service it is bound to
+ has been updated.
+@param {Object {ComponentName}} name The concrete component name of the service whose
+ connection is dead.
+*/
+onBindingDied : function(  ) {},
+
+<span id='android-content-ServiceConnection-method-onNullBinding'>/**Called when the service being bound has returned {@code null} from its
+</span> {@link android.app.Service#onBind(Intent) onBind()} method.  This indicates
+ that the attempting service binding represented by this ServiceConnection
+ will never become usable.
+
+ &lt;p class=&quot;note&quot;&gt;The app which requested the binding must still call
+ {@link android.content.Context#unbindService(ServiceConnection)} to release the tracking
+ resources associated with this ServiceConnection even if this callback was
+ invoked following {@link android.content.Context#bindService android.content.Context.bindService() bindService()}.
+@param {Object {ComponentName}} name The concrete component name of the service whose binding
+     has been rejected by the Service implementation.
+*/
+onNullBinding : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

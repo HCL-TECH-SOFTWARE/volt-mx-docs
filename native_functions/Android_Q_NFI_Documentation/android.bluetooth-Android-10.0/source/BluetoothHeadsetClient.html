@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothHeadsetClient'>/**@class android.bluetooth.BluetoothHeadsetClient
+</span> implements android.bluetooth.BluetoothProfile
+
+@extends java.lang.Object
+
+ Public API to control Hands Free Profile (HFP role only).
+ &lt;p&gt;
+ This class defines methods that shall be used by application to manage profile
+ connection, calls states and calls actions.
+ &lt;p&gt;
+
+ @hide
+*/
+var BluetoothHeadsetClient = {
+
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_CONNECTION_STATE_CHANGED'>/** Intent sent whenever connection to remote changes.
+</span>
+ &lt;p&gt;It includes two extras:
+ &lt;code&gt;BluetoothProfile.EXTRA_PREVIOUS_STATE&lt;/code&gt;
+ and &lt;code&gt;BluetoothProfile.EXTRA_STATE&lt;/code&gt;, which
+ are mandatory.
+ &lt;p&gt;There are also non mandatory feature extras:
+ {@link #EXTRA_AG_FEATURE_3WAY_CALLING},
+ {@link #EXTRA_AG_FEATURE_VOICE_RECOGNITION},
+ {@link #EXTRA_AG_FEATURE_ATTACH_NUMBER_TO_VT},
+ {@link #EXTRA_AG_FEATURE_REJECT_CALL},
+ {@link #EXTRA_AG_FEATURE_ECC},
+ {@link #EXTRA_AG_FEATURE_RESPONSE_AND_HOLD},
+ {@link #EXTRA_AG_FEATURE_ACCEPT_HELD_OR_WAITING_CALL},
+ {@link #EXTRA_AG_FEATURE_RELEASE_HELD_OR_WAITING_CALL},
+ {@link #EXTRA_AG_FEATURE_RELEASE_AND_ACCEPT},
+ {@link #EXTRA_AG_FEATURE_MERGE},
+ {@link #EXTRA_AG_FEATURE_MERGE_AND_DETACH},
+ sent as boolean values only when &lt;code&gt;EXTRA_STATE&lt;/code&gt;
+ is set to &lt;code&gt;STATE_CONNECTED&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;p&gt;Note that features supported by AG are being sent as
+ booleans with value &lt;code&gt;true&lt;/code&gt;,
+ and not supported ones are &lt;strong&gt;not&lt;/strong&gt; being sent at all.&lt;/p&gt;
+*/
+ACTION_CONNECTION_STATE_CHANGED : &quot;android.bluetooth.headsetclient.profile.action.CONNECTION_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_AUDIO_STATE_CHANGED'>/** Intent sent whenever audio state changes.
+</span>
+ &lt;p&gt;It includes two mandatory extras:
+ {@link android.bluetooth.BluetoothProfile#EXTRA_STATE},
+ {@link android.bluetooth.BluetoothProfile#EXTRA_PREVIOUS_STATE},
+ with possible values:
+ {@link #STATE_AUDIO_CONNECTING},
+ {@link #STATE_AUDIO_CONNECTED},
+ {@link #STATE_AUDIO_DISCONNECTED}&lt;/p&gt;
+ &lt;p&gt;When &lt;code&gt;EXTRA_STATE&lt;/code&gt; is set
+ to &lt;/code&gt;STATE_AUDIO_CONNECTED&lt;/code&gt;,
+ it also includes {@link #EXTRA_AUDIO_WBS}
+ indicating wide band speech support.&lt;/p&gt;
+*/
+ACTION_AUDIO_STATE_CHANGED : &quot;android.bluetooth.headsetclient.profile.action.AUDIO_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_AG_EVENT'>/** Intent sending updates of the Audio Gateway state.
+</span> Each extra is being sent only when value it
+ represents has been changed recently on AG.
+ &lt;p&gt;It can contain one or more of the following extras:
+ {@link #EXTRA_NETWORK_STATUS},
+ {@link #EXTRA_NETWORK_SIGNAL_STRENGTH},
+ {@link #EXTRA_NETWORK_ROAMING},
+ {@link #EXTRA_BATTERY_LEVEL},
+ {@link #EXTRA_OPERATOR_NAME},
+ {@link #EXTRA_VOICE_RECOGNITION},
+ {@link #EXTRA_IN_BAND_RING}&lt;/p&gt;
+*/
+ACTION_AG_EVENT : &quot;android.bluetooth.headsetclient.profile.action.AG_EVENT&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_CALL_CHANGED'>/** Intent sent whenever state of a call changes.
+</span>
+ &lt;p&gt;It includes:
+ {@link #EXTRA_CALL},
+ with value of {@link android.bluetooth.BluetoothHeadsetClientCall} instance,
+ representing actual call state.&lt;/p&gt;
+*/
+ACTION_CALL_CHANGED : &quot;android.bluetooth.headsetclient.profile.action.AG_CALL_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_RESULT'>/** Intent that notifies about the result of the last issued action.
+</span> Please note that not every action results in explicit action result code being sent.
+ Instead other notifications about new Audio Gateway state might be sent,
+ like &lt;code&gt;ACTION_AG_EVENT&lt;/code&gt; with &lt;code&gt;EXTRA_VOICE_RECOGNITION&lt;/code&gt; value
+ when for example user started voice recognition from HF unit.
+*/
+ACTION_RESULT : &quot;android.bluetooth.headsetclient.profile.action.RESULT&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_LAST_VTAG'>/** Intent that notifies about the number attached to the last voice tag
+</span> recorded on AG.
+
+ &lt;p&gt;It contains:
+ {@link #EXTRA_NUMBER},
+ with a &lt;code&gt;String&lt;/code&gt; value representing phone number.&lt;/p&gt;
+*/
+ACTION_LAST_VTAG : &quot;android.bluetooth.headsetclient.profile.action.LAST_VTAG&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-STATE_AUDIO_DISCONNECTED'>/***/
+</span>STATE_AUDIO_DISCONNECTED : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-STATE_AUDIO_CONNECTING'>/***/
+</span>STATE_AUDIO_CONNECTING : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-STATE_AUDIO_CONNECTED'>/***/
+</span>STATE_AUDIO_CONNECTED : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AUDIO_WBS'>/** Extra with information if connected audio is WBS.
+</span> &lt;p&gt;Possible values: &lt;code&gt;true&lt;/code&gt;,
+ &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
+*/
+EXTRA_AUDIO_WBS : &quot;android.bluetooth.headsetclient.extra.AUDIO_WBS&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_NETWORK_STATUS'>/** Extra for AG_EVENT indicates network status.
+</span> &lt;p&gt;Value: 0 - network unavailable,
+ 1 - network available &lt;/p&gt;
+*/
+EXTRA_NETWORK_STATUS : &quot;android.bluetooth.headsetclient.extra.NETWORK_STATUS&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_NETWORK_SIGNAL_STRENGTH'>/** Extra for AG_EVENT intent indicates network signal strength.
+</span> &lt;p&gt;Value: &lt;code&gt;Integer&lt;/code&gt; representing signal strength.&lt;/p&gt;
+*/
+EXTRA_NETWORK_SIGNAL_STRENGTH : &quot;android.bluetooth.headsetclient.extra.NETWORK_SIGNAL_STRENGTH&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_NETWORK_ROAMING'>/** Extra for AG_EVENT intent indicates roaming state.
+</span> &lt;p&gt;Value: 0 - no roaming
+ 1 - active roaming&lt;/p&gt;
+*/
+EXTRA_NETWORK_ROAMING : &quot;android.bluetooth.headsetclient.extra.NETWORK_ROAMING&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_BATTERY_LEVEL'>/** Extra for AG_EVENT intent indicates the battery level.
+</span> &lt;p&gt;Value: &lt;code&gt;Integer&lt;/code&gt; representing signal strength.&lt;/p&gt;
+*/
+EXTRA_BATTERY_LEVEL : &quot;android.bluetooth.headsetclient.extra.BATTERY_LEVEL&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_OPERATOR_NAME'>/** Extra for AG_EVENT intent indicates operator name.
+</span> &lt;p&gt;Value: &lt;code&gt;String&lt;/code&gt; representing operator name.&lt;/p&gt;
+*/
+EXTRA_OPERATOR_NAME : &quot;android.bluetooth.headsetclient.extra.OPERATOR_NAME&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_VOICE_RECOGNITION'>/** Extra for AG_EVENT intent indicates voice recognition state.
+</span> &lt;p&gt;Value:
+ 0 - voice recognition stopped,
+ 1 - voice recognition started.&lt;/p&gt;
+*/
+EXTRA_VOICE_RECOGNITION : &quot;android.bluetooth.headsetclient.extra.VOICE_RECOGNITION&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_IN_BAND_RING'>/** Extra for AG_EVENT intent indicates in band ring state.
+</span> &lt;p&gt;Value:
+ 0 - in band ring tone not supported, or
+ 1 - in band ring tone supported.&lt;/p&gt;
+*/
+EXTRA_IN_BAND_RING : &quot;android.bluetooth.headsetclient.extra.IN_BAND_RING&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_SUBSCRIBER_INFO'>/** Extra for AG_EVENT intent indicates subscriber info.
+</span> &lt;p&gt;Value: &lt;code&gt;String&lt;/code&gt; containing subscriber information.&lt;/p&gt;
+*/
+EXTRA_SUBSCRIBER_INFO : &quot;android.bluetooth.headsetclient.extra.SUBSCRIBER_INFO&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_CALL'>/** Extra for AG_CALL_CHANGED intent indicates the
+</span> {@link android.bluetooth.BluetoothHeadsetClientCall} object that has changed.
+*/
+EXTRA_CALL : &quot;android.bluetooth.headsetclient.extra.CALL&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_NUMBER'>/** Extra for ACTION_LAST_VTAG intent.
+</span> &lt;p&gt;Value: &lt;code&gt;String&lt;/code&gt; representing phone number
+ corresponding to last voice tag recorded on AG&lt;/p&gt;
+*/
+EXTRA_NUMBER : &quot;android.bluetooth.headsetclient.extra.NUMBER&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_RESULT_CODE'>/** Extra for ACTION_RESULT intent that shows the result code of
+</span> last issued action.
+ &lt;p&gt;Possible results:
+ {@link #ACTION_RESULT_OK},
+ {@link #ACTION_RESULT_ERROR},
+ {@link #ACTION_RESULT_ERROR_NO_CARRIER},
+ {@link #ACTION_RESULT_ERROR_BUSY},
+ {@link #ACTION_RESULT_ERROR_NO_ANSWER},
+ {@link #ACTION_RESULT_ERROR_DELAYED},
+ {@link #ACTION_RESULT_ERROR_BLACKLISTED},
+ {@link #ACTION_RESULT_ERROR_CME}&lt;/p&gt;
+*/
+EXTRA_RESULT_CODE : &quot;android.bluetooth.headsetclient.extra.RESULT_CODE&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_CME_CODE'>/** Extra for ACTION_RESULT intent that shows the extended result code of
+</span> last issued action.
+ &lt;p&gt;Value: &lt;code&gt;Integer&lt;/code&gt; - error code.&lt;/p&gt;
+*/
+EXTRA_CME_CODE : &quot;android.bluetooth.headsetclient.extra.CME_CODE&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_3WAY_CALLING'>/** AG feature: three way calling.
+</span>*/
+EXTRA_AG_FEATURE_3WAY_CALLING : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_3WAY_CALLING&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_VOICE_RECOGNITION'>/** AG feature: voice recognition.
+</span>*/
+EXTRA_AG_FEATURE_VOICE_RECOGNITION : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_VOICE_RECOGNITION&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_ATTACH_NUMBER_TO_VT'>/** AG feature: fetching phone number for voice tagging procedure.
+</span>*/
+EXTRA_AG_FEATURE_ATTACH_NUMBER_TO_VT : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_ATTACH_NUMBER_TO_VT&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_REJECT_CALL'>/** AG feature: ability to reject incoming call.
+</span>*/
+EXTRA_AG_FEATURE_REJECT_CALL : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_REJECT_CALL&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_ECC'>/** AG feature: enhanced call handling (terminate specific call, private consultation).
+</span>*/
+EXTRA_AG_FEATURE_ECC : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_ECC&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_RESPONSE_AND_HOLD'>/** AG feature: response and hold.
+</span>*/
+EXTRA_AG_FEATURE_RESPONSE_AND_HOLD : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_RESPONSE_AND_HOLD&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_ACCEPT_HELD_OR_WAITING_CALL'>/** AG call handling feature: accept held or waiting call in three way calling scenarios.
+</span>*/
+EXTRA_AG_FEATURE_ACCEPT_HELD_OR_WAITING_CALL : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_ACCEPT_HELD_OR_WAITING_CALL&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_RELEASE_HELD_OR_WAITING_CALL'>/** AG call handling feature: release held or waiting call in three way calling scenarios.
+</span>*/
+EXTRA_AG_FEATURE_RELEASE_HELD_OR_WAITING_CALL : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_RELEASE_HELD_OR_WAITING_CALL&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_RELEASE_AND_ACCEPT'>/** AG call handling feature: release active call and accept held or waiting call in three way
+</span> calling scenarios.
+*/
+EXTRA_AG_FEATURE_RELEASE_AND_ACCEPT : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_RELEASE_AND_ACCEPT&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_MERGE'>/** AG call handling feature: merge two calls, held and active - multi party conference mode.
+</span>*/
+EXTRA_AG_FEATURE_MERGE : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_MERGE&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-EXTRA_AG_FEATURE_MERGE_AND_DETACH'>/** AG call handling feature: merge calls and disconnect from multi party
+</span> conversation leaving peers connected to each other.
+ Note that this feature needs to be supported by mobile network operator
+ as it requires connection and billing transfer.
+*/
+EXTRA_AG_FEATURE_MERGE_AND_DETACH : &quot;android.bluetooth.headsetclient.extra.EXTRA_AG_FEATURE_MERGE_AND_DETACH&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_RESULT_OK'>/***/
+</span>ACTION_RESULT_OK : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_RESULT_ERROR'>/***/
+</span>ACTION_RESULT_ERROR : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_RESULT_ERROR_NO_CARRIER'>/***/
+</span>ACTION_RESULT_ERROR_NO_CARRIER : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_RESULT_ERROR_BUSY'>/***/
+</span>ACTION_RESULT_ERROR_BUSY : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_RESULT_ERROR_NO_ANSWER'>/***/
+</span>ACTION_RESULT_ERROR_NO_ANSWER : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_RESULT_ERROR_DELAYED'>/***/
+</span>ACTION_RESULT_ERROR_DELAYED : &quot;5&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_RESULT_ERROR_BLACKLISTED'>/***/
+</span>ACTION_RESULT_ERROR_BLACKLISTED : &quot;6&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-ACTION_RESULT_ERROR_CME'>/***/
+</span>ACTION_RESULT_ERROR_CME : &quot;7&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_PHONE_FAILURE'>/***/
+</span>CME_PHONE_FAILURE : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_NO_CONNECTION_TO_PHONE'>/***/
+</span>CME_NO_CONNECTION_TO_PHONE : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_OPERATION_NOT_ALLOWED'>/***/
+</span>CME_OPERATION_NOT_ALLOWED : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_OPERATION_NOT_SUPPORTED'>/***/
+</span>CME_OPERATION_NOT_SUPPORTED : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_PHSIM_PIN_REQUIRED'>/***/
+</span>CME_PHSIM_PIN_REQUIRED : &quot;5&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_PHFSIM_PIN_REQUIRED'>/***/
+</span>CME_PHFSIM_PIN_REQUIRED : &quot;6&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_PHFSIM_PUK_REQUIRED'>/***/
+</span>CME_PHFSIM_PUK_REQUIRED : &quot;7&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SIM_NOT_INSERTED'>/***/
+</span>CME_SIM_NOT_INSERTED : &quot;10&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SIM_PIN_REQUIRED'>/***/
+</span>CME_SIM_PIN_REQUIRED : &quot;11&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SIM_PUK_REQUIRED'>/***/
+</span>CME_SIM_PUK_REQUIRED : &quot;12&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SIM_FAILURE'>/***/
+</span>CME_SIM_FAILURE : &quot;13&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SIM_BUSY'>/***/
+</span>CME_SIM_BUSY : &quot;14&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SIM_WRONG'>/***/
+</span>CME_SIM_WRONG : &quot;15&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_INCORRECT_PASSWORD'>/***/
+</span>CME_INCORRECT_PASSWORD : &quot;16&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SIM_PIN2_REQUIRED'>/***/
+</span>CME_SIM_PIN2_REQUIRED : &quot;17&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SIM_PUK2_REQUIRED'>/***/
+</span>CME_SIM_PUK2_REQUIRED : &quot;18&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_MEMORY_FULL'>/***/
+</span>CME_MEMORY_FULL : &quot;20&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_INVALID_INDEX'>/***/
+</span>CME_INVALID_INDEX : &quot;21&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_NOT_FOUND'>/***/
+</span>CME_NOT_FOUND : &quot;22&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_MEMORY_FAILURE'>/***/
+</span>CME_MEMORY_FAILURE : &quot;23&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_TEXT_STRING_TOO_LONG'>/***/
+</span>CME_TEXT_STRING_TOO_LONG : &quot;24&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_INVALID_CHARACTER_IN_TEXT_STRING'>/***/
+</span>CME_INVALID_CHARACTER_IN_TEXT_STRING : &quot;25&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_DIAL_STRING_TOO_LONG'>/***/
+</span>CME_DIAL_STRING_TOO_LONG : &quot;26&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_INVALID_CHARACTER_IN_DIAL_STRING'>/***/
+</span>CME_INVALID_CHARACTER_IN_DIAL_STRING : &quot;27&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_NO_NETWORK_SERVICE'>/***/
+</span>CME_NO_NETWORK_SERVICE : &quot;30&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_NETWORK_TIMEOUT'>/***/
+</span>CME_NETWORK_TIMEOUT : &quot;31&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_EMERGENCY_SERVICE_ONLY'>/***/
+</span>CME_EMERGENCY_SERVICE_ONLY : &quot;32&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_NO_SIMULTANOUS_VOIP_CS_CALLS'>/***/
+</span>CME_NO_SIMULTANOUS_VOIP_CS_CALLS : &quot;33&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_NOT_SUPPORTED_FOR_VOIP'>/***/
+</span>CME_NOT_SUPPORTED_FOR_VOIP : &quot;34&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SIP_RESPONSE_CODE'>/***/
+</span>CME_SIP_RESPONSE_CODE : &quot;35&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_NETWORK_PERSONALIZATION_PIN_REQUIRED'>/***/
+</span>CME_NETWORK_PERSONALIZATION_PIN_REQUIRED : &quot;40&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_NETWORK_PERSONALIZATION_PUK_REQUIRED'>/***/
+</span>CME_NETWORK_PERSONALIZATION_PUK_REQUIRED : &quot;41&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_NETWORK_SUBSET_PERSONALIZATION_PIN_REQUIRED'>/***/
+</span>CME_NETWORK_SUBSET_PERSONALIZATION_PIN_REQUIRED : &quot;42&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_NETWORK_SUBSET_PERSONALIZATION_PUK_REQUIRED'>/***/
+</span>CME_NETWORK_SUBSET_PERSONALIZATION_PUK_REQUIRED : &quot;43&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SERVICE_PROVIDER_PERSONALIZATION_PIN_REQUIRED'>/***/
+</span>CME_SERVICE_PROVIDER_PERSONALIZATION_PIN_REQUIRED : &quot;44&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_SERVICE_PROVIDER_PERSONALIZATION_PUK_REQUIRED'>/***/
+</span>CME_SERVICE_PROVIDER_PERSONALIZATION_PUK_REQUIRED : &quot;45&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_CORPORATE_PERSONALIZATION_PIN_REQUIRED'>/***/
+</span>CME_CORPORATE_PERSONALIZATION_PIN_REQUIRED : &quot;46&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_CORPORATE_PERSONALIZATION_PUK_REQUIRED'>/***/
+</span>CME_CORPORATE_PERSONALIZATION_PUK_REQUIRED : &quot;47&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_HIDDEN_KEY_REQUIRED'>/***/
+</span>CME_HIDDEN_KEY_REQUIRED : &quot;48&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_EAP_NOT_SUPPORTED'>/***/
+</span>CME_EAP_NOT_SUPPORTED : &quot;49&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CME_INCORRECT_PARAMETERS'>/***/
+</span>CME_INCORRECT_PARAMETERS : &quot;50&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CALL_ACCEPT_NONE'>/***/
+</span>CALL_ACCEPT_NONE : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CALL_ACCEPT_HOLD'>/***/
+</span>CALL_ACCEPT_HOLD : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-property-CALL_ACCEPT_TERMINATE'>/***/
+</span>CALL_ACCEPT_TERMINATE : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothHeadsetClient-method-connect'>/**Connects to remote device.
+</span>
+ Currently, the system supports only 1 connection. So, in case of the
+ second connection, this implementation will disconnect already connected
+ device automatically and will process the new one.
+@param {Object {BluetoothDevice}} device a remote device we want connect to
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_CONNECTION_STATE_CHANGED} intent.
+*/
+connect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-disconnect'>/**Disconnects remote device
+</span>@param {Object {BluetoothDevice}} device a remote device we want disconnect
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_CONNECTION_STATE_CHANGED} intent.
+*/
+disconnect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-getConnectedDevices'>/**Return the list of connected remote devices
+</span>@return {Object {java.util.List}} list of connected devices; empty list if nothing is connected.
+*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-getDevicesMatchingConnectionStates'>/**Returns list of remote devices in a particular state
+</span>@param {Object {int[]}} states collection of states
+@return {Object {java.util.List}} list of devices that state matches the states listed in &lt;code&gt;states&lt;/code&gt;; empty
+ list if nothing matches the &lt;code&gt;states&lt;/code&gt;
+*/
+getDevicesMatchingConnectionStates : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-getConnectionState'>/**Returns state of the &lt;code&gt;device&lt;/code&gt;
+</span>@param {Object {BluetoothDevice}} device a remote device
+@return {Number} the state of connection of the device
+*/
+getConnectionState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-setPriority'>/**Set priority of the profile
+</span>
+ The device should already be paired.
+*/
+setPriority : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-getPriority'>/**Get the priority of the profile.
+</span>*/
+getPriority : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-startVoiceRecognition'>/**Starts voice recognition.
+</span>@param {Object {BluetoothDevice}} device remote device
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_AG_EVENT} intent.
+
+ &lt;p&gt;Feature required for successful execution is being reported by: {@link
+ #EXTRA_AG_FEATURE_VOICE_RECOGNITION}. This method invocation will fail silently when feature
+ is not supported.&lt;/p&gt;
+*/
+startVoiceRecognition : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-stopVoiceRecognition'>/**Stops voice recognition.
+</span>@param {Object {BluetoothDevice}} device remote device
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_AG_EVENT} intent.
+
+ &lt;p&gt;Feature required for successful execution is being reported by: {@link
+ #EXTRA_AG_FEATURE_VOICE_RECOGNITION}. This method invocation will fail silently when feature
+ is not supported.&lt;/p&gt;
+*/
+stopVoiceRecognition : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-getCurrentCalls'>/**Returns list of all calls in any state.
+</span>@param {Object {BluetoothDevice}} device remote device
+@return {Object {java.util.List}} list of calls; empty list if none call exists
+*/
+getCurrentCalls : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-getCurrentAgEvents'>/**Returns list of current values of AG indicators.
+</span>@param {Object {BluetoothDevice}} device remote device
+@return {Object {android.os.Bundle}} bundle of AG  indicators; null if device is not in CONNECTED state
+*/
+getCurrentAgEvents : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-acceptCall'>/**Accepts a call
+</span>@param {Object {BluetoothDevice}} device remote device
+@param {Number} flag action policy while accepting a call. Possible values {@link #CALL_ACCEPT_NONE},
+ {@link #CALL_ACCEPT_HOLD}, {@link #CALL_ACCEPT_TERMINATE}
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_CALL_CHANGED} intent.
+*/
+acceptCall : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-holdCall'>/**Holds a call.
+</span>@param {Object {BluetoothDevice}} device remote device
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_CALL_CHANGED} intent.
+*/
+holdCall : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-rejectCall'>/**Rejects a call.
+</span>@param {Object {BluetoothDevice}} device remote device
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_CALL_CHANGED} intent.
+
+ &lt;p&gt;Feature required for successful execution is being reported by: {@link
+ #EXTRA_AG_FEATURE_REJECT_CALL}. This method invocation will fail silently when feature is not
+ supported.&lt;/p&gt;
+*/
+rejectCall : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-terminateCall'>/**Terminates a specified call.
+</span>
+ Works only when Extended Call Control is supported by Audio Gateway.
+@param {Object {BluetoothDevice}} device remote device
+@param {Object {BluetoothHeadsetClientCall}} call Handle of call obtained in {@link #dial(BluetoothDevice, String)} or obtained via
+ {@link #ACTION_CALL_CHANGED}. {@code call} may be null in which case we will hangup all active
+ calls.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_CALL_CHANGED} intent.
+
+ &lt;p&gt;Feature required for successful execution is being reported by: {@link
+ #EXTRA_AG_FEATURE_ECC}. This method invocation will fail silently when feature is not
+ supported.&lt;/p&gt;
+*/
+terminateCall : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-enterPrivateMode'>/**Enters private mode with a specified call.
+</span>
+ Works only when Extended Call Control is supported by Audio Gateway.
+@param {Object {BluetoothDevice}} device remote device
+@param {Number} index index of the call to connect in private mode
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_CALL_CHANGED} intent.
+
+ &lt;p&gt;Feature required for successful execution is being reported by: {@link
+ #EXTRA_AG_FEATURE_ECC}. This method invocation will fail silently when feature is not
+ supported.&lt;/p&gt;
+*/
+enterPrivateMode : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-explicitCallTransfer'>/**Performs explicit call transfer.
+</span>
+ That means connect other calls and disconnect.
+@param {Object {BluetoothDevice}} device remote device
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_CALL_CHANGED} intent.
+
+ &lt;p&gt;Feature required for successful execution is being reported by: {@link
+ #EXTRA_AG_FEATURE_MERGE_AND_DETACH}. This method invocation will fail silently when feature
+ is not supported.&lt;/p&gt;
+*/
+explicitCallTransfer : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-dial'>/**Places a call with specified number.
+</span>@param {Object {BluetoothDevice}} device remote device
+@param {String} number valid phone number
+@return {Object {android.bluetooth.BluetoothHeadsetClientCall}} &lt;code&gt;{@link BluetoothHeadsetClientCall} call&lt;/code&gt; if command has been issued
+ successfully; &lt;code&gt;{@link null}&lt;/code&gt; otherwise; upon completion HFP sends {@link
+ #ACTION_CALL_CHANGED} intent in case of success; {@link #ACTION_RESULT} is sent otherwise;
+*/
+dial : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-sendDTMF'>/**Sends DTMF code.
+</span>
+ Possible code values : 0,1,2,3,4,5,6,7,8,9,A,B,C,D,*,#
+@param {Object {BluetoothDevice}} device remote device
+@param {Number} code ASCII code
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_RESULT} intent;
+*/
+sendDTMF : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-getLastVoiceTagNumber'>/**Get a number corresponding to last voice tag recorded on AG.
+</span>@param {Object {BluetoothDevice}} device remote device
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_LAST_VTAG} or {@link #ACTION_RESULT}
+ intent;
+
+ &lt;p&gt;Feature required for successful execution is being reported by: {@link
+ #EXTRA_AG_FEATURE_ATTACH_NUMBER_TO_VT}. This method invocation will fail silently when
+ feature is not supported.&lt;/p&gt;
+*/
+getLastVoiceTagNumber : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-getAudioState'>/**Returns current audio state of Audio Gateway.
+</span>
+ Note: This is an internal function and shouldn't be exposed
+*/
+getAudioState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-setAudioRouteAllowed'>/**Sets whether audio routing is allowed.
+</span>@param {Object {BluetoothDevice}} device remote device
+@param {Boolean} allowed if routing is allowed to the device Note: This is an internal function and
+ shouldn't be exposed
+*/
+setAudioRouteAllowed : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-getAudioRouteAllowed'>/**Returns whether audio routing is allowed.
+</span>@param {Object {BluetoothDevice}} device remote device
+@return {Boolean} whether the command succeeded Note: This is an internal function and shouldn't be
+ exposed
+*/
+getAudioRouteAllowed : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-connectAudio'>/**Initiates a connection of audio channel.
+</span>
+ It setup SCO channel with remote connected Handsfree AG device.
+@param {Object {BluetoothDevice}} device remote device
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_AUDIO_STATE_CHANGED} intent;
+*/
+connectAudio : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-disconnectAudio'>/**Disconnects audio channel.
+</span>
+ It tears down the SCO channel from remote AG device.
+@param {Object {BluetoothDevice}} device remote device
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if command has been issued successfully; &lt;code&gt;false&lt;/code&gt;
+ otherwise; upon completion HFP sends {@link #ACTION_AUDIO_STATE_CHANGED} intent;
+*/
+disconnectAudio : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHeadsetClient-method-getCurrentAgFeatures'>/**Get Audio Gateway features
+</span>@param {Object {BluetoothDevice}} device remote device
+@return {Object {android.os.Bundle}} bundle of AG features; null if no service or AG not connected
+*/
+getCurrentAgFeatures : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

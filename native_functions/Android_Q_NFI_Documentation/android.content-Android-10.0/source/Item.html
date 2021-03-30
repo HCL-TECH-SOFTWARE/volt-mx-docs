@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-ClipData-Item'>/**@class android.content.ClipData.Item
+</span>@extends java.lang.Object
+
+ Description of a single item in a ClipData.
+
+ &lt;p&gt;The types than an individual item can currently contain are:&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt; Text: a basic string of text.  This is actually a CharSequence,
+ so it can be formatted text supported by corresponding Android built-in
+ style spans.  (Custom application spans are not supported and will be
+ stripped when transporting through the clipboard.)
+ &lt;li&gt; Intent: an arbitrary Intent object.  A typical use is the shortcut
+ to create when pasting a clipped item on to the home screen.
+ &lt;li&gt; Uri: a URI reference.  This may be any URI (such as an http: URI
+ representing a bookmark), however it is often a content: URI.  Using
+ content provider references as clips like this allows an application to
+ share complex or large clips through the standard content provider
+ facilities.
+ &lt;/ul&gt;
+*/
+var Item = {
+
+<span id='android-content-ClipData-Item-method-getText'>/**Retrieve the raw text contained in this Item.
+</span>*/
+getText : function(  ) {},
+
+<span id='android-content-ClipData-Item-method-getHtmlText'>/**Retrieve the raw HTML text contained in this Item.
+</span>*/
+getHtmlText : function(  ) {},
+
+<span id='android-content-ClipData-Item-method-getIntent'>/**Retrieve the raw Intent contained in this Item.
+</span>*/
+getIntent : function(  ) {},
+
+<span id='android-content-ClipData-Item-method-getUri'>/**Retrieve the raw URI contained in this Item.
+</span>*/
+getUri : function(  ) {},
+
+<span id='android-content-ClipData-Item-method-coerceToText'>/**Turn this item into text, regardless of the type of data it
+</span> actually contains.
+
+ &lt;p&gt;The algorithm for deciding what text to return is:
+ &lt;ul&gt;
+ &lt;li&gt; If {@link #getText} is non-null, return that.
+ &lt;li&gt; If {@link #getUri} is non-null, try to retrieve its data
+ as a text stream from its content provider.  If this succeeds, copy
+ the text into a String and return it.  If it is not a content: URI or
+ the content provider does not supply a text representation, return
+ the raw URI as a string.
+ &lt;li&gt; If {@link #getIntent} is non-null, convert that to an intent:
+ URI and return it.
+ &lt;li&gt; Otherwise, return an empty string.
+ &lt;/ul&gt;
+@param {Object {Context}} context The caller's Context, from which its ContentResolver
+ and other things can be retrieved.
+@return {Object {java.lang.CharSequence}} Returns the item's textual representation.
+*/
+coerceToText : function(  ) {},
+
+<span id='android-content-ClipData-Item-method-coerceToStyledText'>/**Like {@link #coerceToHtmlText}(Context), but any text that would
+</span> be returned as HTML formatting will be returned as text with
+ style spans.
+@param {Object {Context}} context The caller's Context, from which its ContentResolver
+ and other things can be retrieved.
+@return {Object {java.lang.CharSequence}} Returns the item's textual representation.
+*/
+coerceToStyledText : function(  ) {},
+
+<span id='android-content-ClipData-Item-method-coerceToHtmlText'>/**Turn this item into HTML text, regardless of the type of data it
+</span> actually contains.
+
+ &lt;p&gt;The algorithm for deciding what text to return is:
+ &lt;ul&gt;
+ &lt;li&gt; If {@link #getHtmlText} is non-null, return that.
+ &lt;li&gt; If {@link #getText} is non-null, return that, converting to
+ valid HTML text.  If this text contains style spans,
+ {@link Html#toHtml(Spanned) Html.toHtml(Spanned)} is used to
+ convert them to HTML formatting.
+ &lt;li&gt; If {@link #getUri} is non-null, try to retrieve its data
+ as a text stream from its content provider.  If the provider can
+ supply text/html data, that will be preferred and returned as-is.
+ Otherwise, any text/* data will be returned and escaped to HTML.
+ If it is not a content: URI or the content provider does not supply
+ a text representation, HTML text containing a link to the URI
+ will be returned.
+ &lt;li&gt; If {@link #getIntent} is non-null, convert that to an intent:
+ URI and return as an HTML link.
+ &lt;li&gt; Otherwise, return an empty string.
+ &lt;/ul&gt;
+@param {Object {Context}} context The caller's Context, from which its ContentResolver
+ and other things can be retrieved.
+@return {String} Returns the item's representation as HTML text.
+*/
+coerceToHtmlText : function(  ) {},
+
+<span id='android-content-ClipData-Item-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-ClipData-Item-method-toShortString'>/**
+</span>@hide 
+*/
+toShortString : function(  ) {},
+
+<span id='android-content-ClipData-Item-method-toShortSummaryString'>/**
+</span>@hide 
+*/
+toShortSummaryString : function(  ) {},
+
+<span id='android-content-ClipData-Item-method-writeToProto'>/**
+</span>@hide 
+*/
+writeToProto : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

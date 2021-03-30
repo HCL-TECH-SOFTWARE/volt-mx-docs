@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-Loader'>/**@class android.content.Loader
+</span>@extends java.lang.Object
+
+ A class that performs asynchronous loading of data. While Loaders are active
+ they should monitor the source of their data and deliver new results when the contents
+ change.  See {@link android.app.LoaderManager} for more detail.
+
+ &lt;p&gt;&lt;b&gt;Note on threading:&lt;/b&gt; Clients of loaders should as a rule perform
+ any calls on to a Loader from the main thread of their process (that is,
+ the thread the Activity callbacks and other things occur on).  Subclasses
+ of Loader (such as {@link android.content.AsyncTaskLoader}) will often perform their work
+ in a separate thread, but when delivering their results this too should
+ be done on the main thread.&lt;/p&gt;
+
+ &lt;p&gt;Subclasses generally must implement at least {@link #onStartLoading}(),
+ {@link #onStopLoading}(), {@link #onForceLoad}(), and {@link #onReset}().&lt;/p&gt;
+
+ &lt;p&gt;Most implementations should not derive directly from this class, but
+ instead inherit from {@link android.content.AsyncTaskLoader}.&lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using loaders, read the
+ &lt;a href=&quot;{@docRoot}guide/components/loaders.html&quot;&gt;Loaders&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ @param &lt;D&gt; The result returned when the load is complete
+
+ @deprecated Use the &lt;a href=&quot;{@docRoot}tools/extras/support-library.html&quot;&gt;Support Library&lt;/a&gt;
+      {@link android.support.v4.content.Loader}
+*/
+var Loader = {
+
+<span id='android-content-Loader-method-deliverResult'>/**Sends the result of the load to the registered listener. Should only be called by subclasses.
+</span>
+ Must be called from the process's main thread.
+@param {Object {Object}} data the result of the load
+*/
+deliverResult : function(  ) {},
+
+<span id='android-content-Loader-method-deliverCancellation'>/**Informs the registered {@link android.content.Loader.OnLoadCanceledListener} that the load has been canceled.
+</span> Should only be called by subclasses.
+
+ Must be called from the process's main thread.
+*/
+deliverCancellation : function(  ) {},
+
+<span id='android-content-Loader-method-getContext'>/**
+</span>@return {Object {android.content.Context}} an application context retrieved from the Context passed to the constructor.
+*/
+getContext : function(  ) {},
+
+<span id='android-content-Loader-method-getId'>/**
+</span>@return {Number} the ID of this loader
+*/
+getId : function(  ) {},
+
+<span id='android-content-Loader-method-registerListener'>/**Registers a class that will receive callbacks when a load is complete.
+</span> The callback will be called on the process's main thread so it's safe to
+ pass the results to widgets.
+
+ &lt;p&gt;Must be called from the process's main thread.
+*/
+registerListener : function(  ) {},
+
+<span id='android-content-Loader-method-unregisterListener'>/**Remove a listener that was previously added with {@link #registerListener}.
+</span>
+ Must be called from the process's main thread.
+*/
+unregisterListener : function(  ) {},
+
+<span id='android-content-Loader-method-registerOnLoadCanceledListener'>/**Registers a listener that will receive callbacks when a load is canceled.
+</span> The callback will be called on the process's main thread so it's safe to
+ pass the results to widgets.
+
+ Must be called from the process's main thread.
+@param {Object {android.content.Loader.OnLoadCanceledListener}} listener The listener to register.
+*/
+registerOnLoadCanceledListener : function(  ) {},
+
+<span id='android-content-Loader-method-unregisterOnLoadCanceledListener'>/**Unregisters a listener that was previously added with
+</span> {@link #registerOnLoadCanceledListener}.
+
+ Must be called from the process's main thread.
+@param {Object {android.content.Loader.OnLoadCanceledListener}} listener The listener to unregister.
+*/
+unregisterOnLoadCanceledListener : function(  ) {},
+
+<span id='android-content-Loader-method-isStarted'>/**Return whether this load has been started.  That is, its {@link #startLoading}()
+</span> has been called and no calls to {@link #stopLoading}() or
+ {@link #reset}() have yet been made.
+*/
+isStarted : function(  ) {},
+
+<span id='android-content-Loader-method-isAbandoned'>/**Return whether this loader has been abandoned.  In this state, the
+</span> loader &lt;em&gt;must not&lt;/em&gt; report any new data, and &lt;em&gt;must&lt;/em&gt; keep
+ its last reported data valid until it is finally reset.
+*/
+isAbandoned : function(  ) {},
+
+<span id='android-content-Loader-method-isReset'>/**Return whether this load has been reset.  That is, either the loader
+</span> has not yet been started for the first time, or its {@link #reset}()
+ has been called.
+*/
+isReset : function(  ) {},
+
+<span id='android-content-Loader-method-startLoading'>/**This function will normally be called for you automatically by
+</span> {@link android.app.LoaderManager} when the associated fragment/activity
+ is being started.  When using a Loader with {@link android.app.LoaderManager},
+ you &lt;em&gt;must not&lt;/em&gt; call this method yourself, or you will conflict
+ with its management of the Loader.
+
+ Starts an asynchronous load of the Loader's data. When the result
+ is ready the callbacks will be called on the process's main thread.
+ If a previous load has been completed and is still valid
+ the result may be passed to the callbacks immediately.
+ The loader will monitor the source of
+ the data set and may deliver future callbacks if the source changes.
+ Calling {@link #stopLoading} will stop the delivery of callbacks.
+
+ &lt;p&gt;This updates the Loader's internal state so that
+ {@link #isStarted}() and {@link #isReset}() will return the correct
+ values, and then calls the implementation's {@link #onStartLoading}().
+
+ &lt;p&gt;Must be called from the process's main thread.
+*/
+startLoading : function(  ) {},
+
+<span id='android-content-Loader-method-cancelLoad'>/**Attempt to cancel the current load task.
+</span> Must be called on the main thread of the process.
+
+ &lt;p&gt;Cancellation is not an immediate operation, since the load is performed
+ in a background thread.  If there is currently a load in progress, this
+ method requests that the load be canceled, and notes this is the case;
+ once the background thread has completed its work its remaining state
+ will be cleared.  If another load request comes in during this time,
+ it will be held until the canceled load is complete.
+@return {Boolean} Returns &lt;tt&gt;false&lt;/tt&gt; if the task could not be canceled,
+ typically because it has already completed normally, or
+ because {@link #startLoading()} hasn't been called; returns
+ &lt;tt&gt;true&lt;/tt&gt; otherwise.  When &lt;tt&gt;true&lt;/tt&gt; is returned, the task
+ is still running and the {@link OnLoadCanceledListener} will be called
+ when the task completes.
+*/
+cancelLoad : function(  ) {},
+
+<span id='android-content-Loader-method-forceLoad'>/**Force an asynchronous load. Unlike {@link #startLoading}() this will ignore a previously
+</span> loaded data set and load a new one.  This simply calls through to the
+ implementation's {@link #onForceLoad}().  You generally should only call this
+ when the loader is started -- that is, {@link #isStarted}() returns true.
+
+ &lt;p&gt;Must be called from the process's main thread.
+*/
+forceLoad : function(  ) {},
+
+<span id='android-content-Loader-method-stopLoading'>/**This function will normally be called for you automatically by
+</span> {@link android.app.LoaderManager} when the associated fragment/activity
+ is being stopped.  When using a Loader with {@link android.app.LoaderManager},
+ you &lt;em&gt;must not&lt;/em&gt; call this method yourself, or you will conflict
+ with its management of the Loader.
+
+ &lt;p&gt;Stops delivery of updates until the next time {@link #startLoading}() is called.
+ Implementations should &lt;em&gt;not&lt;/em&gt; invalidate their data at this point --
+ clients are still free to use the last data the loader reported.  They will,
+ however, typically stop reporting new data if the data changes; they can
+ still monitor for changes, but must not report them to the client until and
+ if {@link #startLoading}() is later called.
+
+ &lt;p&gt;This updates the Loader's internal state so that
+ {@link #isStarted}() will return the correct
+ value, and then calls the implementation's {@link #onStopLoading}().
+
+ &lt;p&gt;Must be called from the process's main thread.
+*/
+stopLoading : function(  ) {},
+
+<span id='android-content-Loader-method-abandon'>/**This function will normally be called for you automatically by
+</span> {@link android.app.LoaderManager} when restarting a Loader.  When using
+ a Loader with {@link android.app.LoaderManager},
+ you &lt;em&gt;must not&lt;/em&gt; call this method yourself, or you will conflict
+ with its management of the Loader.
+
+ Tell the Loader that it is being abandoned.  This is called prior
+ to {@link #reset} to have it retain its current data but not report
+ any new data.
+*/
+abandon : function(  ) {},
+
+<span id='android-content-Loader-method-reset'>/**This function will normally be called for you automatically by
+</span> {@link android.app.LoaderManager} when destroying a Loader.  When using
+ a Loader with {@link android.app.LoaderManager},
+ you &lt;em&gt;must not&lt;/em&gt; call this method yourself, or you will conflict
+ with its management of the Loader.
+
+ Resets the state of the Loader.  The Loader should at this point free
+ all of its resources, since it may never be called again; however, its
+ {@link #startLoading}() may later be called at which point it must be
+ able to start running again.
+
+ &lt;p&gt;This updates the Loader's internal state so that
+ {@link #isStarted}() and {@link #isReset}() will return the correct
+ values, and then calls the implementation's {@link #onReset}().
+
+ &lt;p&gt;Must be called from the process's main thread.
+*/
+reset : function(  ) {},
+
+<span id='android-content-Loader-method-takeContentChanged'>/**Take the current flag indicating whether the loader's content had
+</span> changed while it was stopped.  If it had, true is returned and the
+ flag is cleared.
+*/
+takeContentChanged : function(  ) {},
+
+<span id='android-content-Loader-method-commitContentChanged'>/**Commit that you have actually fully processed a content change that
+</span> was returned by {@link #takeContentChanged}.  This is for use with
+ {@link #rollbackContentChanged}() to handle situations where a load
+ is cancelled.  Call this when you have completely processed a load
+ without it being cancelled.
+*/
+commitContentChanged : function(  ) {},
+
+<span id='android-content-Loader-method-rollbackContentChanged'>/**Report that you have abandoned the processing of a content change that
+</span> was returned by {@link #takeContentChanged}() and would like to rollback
+ to the state where there is again a pending content change.  This is
+ to handle the case where a data load due to a content change has been
+ canceled before its data was delivered back to the loader.
+*/
+rollbackContentChanged : function(  ) {},
+
+<span id='android-content-Loader-method-onContentChanged'>/**Called when {@link android.content.Loader.ForceLoadContentObserver} detects a change.  The
+</span> default implementation checks to see if the loader is currently started;
+ if so, it simply calls {@link #forceLoad}(); otherwise, it sets a flag
+ so that {@link #takeContentChanged}() returns true.
+
+ &lt;p&gt;Must be called from the process's main thread.
+*/
+onContentChanged : function(  ) {},
+
+<span id='android-content-Loader-method-dataToString'>/**For debugging, converts an instance of the Loader's data class to
+</span> a string that can be printed.  Must handle a null data.
+*/
+dataToString : function(  ) {},
+
+<span id='android-content-Loader-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-Loader-method-dump'>/**Print the Loader's state into the given stream.
+</span>@param {String} prefix Text to print at the front of each line.
+@param {Object {FileDescriptor}} fd The raw file descriptor that the dump is being sent to.
+@param {Object {PrintWriter}} writer A PrintWriter to which the dump is to be set.
+@param {Object {java.lang.String[]}} args Additional arguments to the dump request.
+*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

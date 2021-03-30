@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-ClipData'>/**@class android.content.ClipData
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Representation of a clipped data on the clipboard.
+
+ &lt;p&gt;ClipData is a complex type containing one or more Item instances,
+ each of which can hold one or more representations of an item of data.
+ For display to the user, it also has a label.&lt;/p&gt;
+
+ &lt;p&gt;A ClipData contains a {@link android.content.ClipDescription}, which describes
+ important meta-data about the clip.  In particular, its
+ {@link android.content.ClipDescription#getMimeType(int) getDescription().getMimeType(int)}
+ must return correct MIME type(s) describing the data in the clip.  For help
+ in correctly constructing a clip with the correct MIME type, use
+ {@link #newPlainText(CharSequence, CharSequence)},
+ {@link #newUri(ContentResolver, CharSequence, Uri)}, and
+ {@link #newandroid.content.Intent(CharSequence, android.content.Intent)}.
+
+ &lt;p&gt;Each Item instance can be one of three main classes of data: a simple
+ CharSequence of text, a single Intent object, or a Uri.  See {@link android.content.ClipData.Item}
+ for more details.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using the clipboard framework, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/clipboard/copy-paste.html&quot;&gt;Copy and Paste&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ &lt;a name=&quot;ImplementingPaste&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Implementing Paste or Drop&lt;/h3&gt;
+
+ &lt;p&gt;To implement a paste or drop of a ClipData object into an application,
+ the application must correctly interpret the data for its use.  If the {@link android.content.ClipData.Item}
+ it contains is simple text or an Intent, there is little to be done: text
+ can only be interpreted as text, and an Intent will typically be used for
+ creating shortcuts (such as placing icons on the home screen) or other
+ actions.
+
+ &lt;p&gt;If all you want is the textual representation of the clipped data, you
+ can use the convenience method {@link android.content.ClipData.Item#coerceToText android.content.ClipData.Item.coerceToText}.
+ In this case there is generally no need to worry about the MIME types
+ reported by {@link android.content.ClipDescription#getMimeType(int) getDescription().getMimeType(int)},
+ since any clip item can always be converted to a string.
+
+ &lt;p&gt;More complicated exchanges will be done through URIs, in particular
+ &quot;content:&quot; URIs.  A content URI allows the recipient of a ClipData item
+ to interact closely with the ContentProvider holding the data in order to
+ negotiate the transfer of that data.  The clip must also be filled in with
+ the available MIME types; {@link #newUri(ContentResolver, CharSequence, Uri)}
+ will take care of correctly doing this.
+
+ &lt;p&gt;For example, here is the paste function of a simple NotePad application.
+ When retrieving the data from the clipboard, it can do either two things:
+ if the clipboard contains a URI reference to an existing note, it copies
+ the entire structure of the note into a new note; otherwise, it simply
+ coerces the clip into text and uses that as the new note's contents.
+
+ {@sample development/samples/NotePad/src/com/example/android/notepad/NoteEditor.java
+      paste}
+
+ &lt;p&gt;In many cases an application can paste various types of streams of data.  For
+ example, an e-mail application may want to allow the user to paste an image
+ or other binary data as an attachment.  This is accomplished through the
+ ContentResolver {@link android.content.ContentResolver#getStreamTypes(Uri, String)} and
+ {@link android.content.ContentResolver#openTypedAssetFileDescriptor(Uri, String, android.os.Bundle)}
+ methods.  These allow a client to discover the type(s) of data that a particular
+ content URI can make available as a stream and retrieve the stream of data.
+
+ &lt;p&gt;For example, the implementation of {@link android.content.ClipData.Item#coerceToText android.content.ClipData.Item.coerceToText}
+ itself uses this to try to retrieve a URI clip as a stream of text:
+
+ {@sample frameworks/base/core/java/android/content/ClipData.java coerceToText}
+
+ &lt;a name=&quot;ImplementingCopy&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Implementing Copy or Drag&lt;/h3&gt;
+
+ &lt;p&gt;To be the source of a clip, the application must construct a ClipData
+ object that any recipient can interpret best for their context.  If the clip
+ is to contain a simple text, Intent, or URI, this is easy: an {@link android.content.ClipData.Item}
+ containing the appropriate data type can be constructed and used.
+
+ &lt;p&gt;More complicated data types require the implementation of support in
+ a ContentProvider for describing and generating the data for the recipient.
+ A common scenario is one where an application places on the clipboard the
+ content: URI of an object that the user has copied, with the data at that
+ URI consisting of a complicated structure that only other applications with
+ direct knowledge of the structure can use.
+
+ &lt;p&gt;For applications that do not have intrinsic knowledge of the data structure,
+ the content provider holding it can make the data available as an arbitrary
+ number of types of data streams.  This is done by implementing the
+ ContentProvider {@link android.content.ContentProvider#getStreamTypes(Uri, String)} and
+ {@link android.content.ContentProvider#openTypedAssetFile(Uri, String, android.os.Bundle)}
+ methods.
+
+ &lt;p&gt;Going back to our simple NotePad application, this is the implementation
+ it may have to convert a single note URI (consisting of a title and the note
+ text) into a stream of plain text data.
+
+ {@sample development/samples/NotePad/src/com/example/android/notepad/NotePadProvider.java
+      stream}
+
+ &lt;p&gt;The copy operation in our NotePad application is now just a simple matter
+ of making a clip containing the URI of the note being copied:
+
+ {@sample development/samples/NotePad/src/com/example/android/notepad/NotesList.java
+      copy}
+
+ &lt;p&gt;Note if a paste operation needs this clip as text (for example to paste
+ into an editor), then {@link android.content.ClipData.Item#coerceToText(Context)} will ask the content
+ provider for the clip URI as text and successfully paste the entire note.
+*/
+var ClipData = {
+
+<span id='android-content-ClipData-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-ClipData-method-newPlainText'>/**Create a new ClipData holding data of the type
+</span> {@link android.content.ClipDescription#MIMETYPE_TEXT_PLAIN}.
+@param {Object {CharSequence}} label User-visible label for the clip data.
+@param {Object {CharSequence}} text The actual text in the clip.
+@return {Object {android.content.ClipData}} Returns a new ClipData containing the specified data.
+*/
+newPlainText : function(  ) {},
+
+<span id='android-content-ClipData-method-newHtmlText'>/**Create a new ClipData holding data of the type
+</span> {@link android.content.ClipDescription#MIMETYPE_TEXT_HTML}.
+@param {Object {CharSequence}} label User-visible label for the clip data.
+@param {Object {CharSequence}} text The text of clip as plain text, for receivers that don't
+ handle HTML.  This is required.
+@param {String} htmlText The actual HTML text in the clip.
+@return {Object {android.content.ClipData}} Returns a new ClipData containing the specified data.
+*/
+newHtmlText : function(  ) {},
+
+<span id='android-content-ClipData-method-newIntent'>/**Create a new ClipData holding an Intent with MIME type
+</span> {@link android.content.ClipDescription#MIMETYPE_TEXT_INTENT}.
+@param {Object {CharSequence}} label User-visible label for the clip data.
+@param {Object {Intent}} intent The actual Intent in the clip.
+@return {Object {android.content.ClipData}} Returns a new ClipData containing the specified data.
+*/
+newIntent : function(  ) {},
+
+<span id='android-content-ClipData-method-newUri'>/**Create a new ClipData holding a URI.  If the URI is a content: URI,
+</span> this will query the content provider for the MIME type of its data and
+ use that as the MIME type.  Otherwise, it will use the MIME type
+ {@link android.content.ClipDescription#MIMETYPE_TEXT_URILIST}.
+@param {Object {ContentResolver}} resolver ContentResolver used to get information about the URI.
+@param {Object {CharSequence}} label User-visible label for the clip data.
+@param {Object {Uri}} uri The URI in the clip.
+@return {Object {android.content.ClipData}} Returns a new ClipData containing the specified data.
+*/
+newUri : function(  ) {},
+
+<span id='android-content-ClipData-method-newRawUri'>/**Create a new ClipData holding an URI with MIME type
+</span> {@link android.content.ClipDescription#MIMETYPE_TEXT_URILIST}.
+ Unlike {@link #newUri(ContentResolver, CharSequence, Uri)}, nothing
+ is inferred about the URI -- if it is a content: URI holding a bitmap,
+ the reported type will still be uri-list.  Use this with care!
+@param {Object {CharSequence}} label User-visible label for the clip data.
+@param {Object {Uri}} uri The URI in the clip.
+@return {Object {android.content.ClipData}} Returns a new ClipData containing the specified data.
+*/
+newRawUri : function(  ) {},
+
+<span id='android-content-ClipData-method-getDescription'>/**Return the {@link android.content.ClipDescription} associated with this data, describing
+</span> what it contains.
+*/
+getDescription : function(  ) {},
+
+<span id='android-content-ClipData-method-addItem'>/**Add a new Item to the overall ClipData container.
+</span> &lt;p&gt; This method will &lt;em&gt;not&lt;/em&gt; update the list of available MIME types in the
+ {@link android.content.ClipDescription}. It should be used only when adding items which do not add new
+ MIME types to this clip. If this is not the case, use {@link #addandroid.content.ClipData.Item(ContentResolver, android.content.ClipData.Item)}
+ or call {@link #ClipData(CharSequence, String[], android.content.ClipData.Item)} with a complete list of MIME types.
+@param {Object {ClipData.Item}} item Item to be added.
+*/
+addItem : function(  ) {},
+
+<span id='android-content-ClipData-method-addItem'>/**
+</span>@removed use #addItem(ContentResolver, Item) instead
+*/
+addItem : function(  ) {},
+
+<span id='android-content-ClipData-method-addItem'>/**Add a new Item to the overall ClipData container.
+</span> &lt;p&gt; Unlike {@link #addItem}(Item), this method will update the list of available MIME types
+ in the {@link android.content.ClipDescription}.
+@param {Object {ContentResolver}} resolver ContentResolver used to get information about the URI possibly contained in
+ the item.
+@param {Object {ClipData.Item}} item Item to be added.
+*/
+addItem : function(  ) {},
+
+<span id='android-content-ClipData-method-getIcon'>/**
+</span>@hide 
+*/
+getIcon : function(  ) {},
+
+<span id='android-content-ClipData-method-getItemCount'>/**Return the number of items in the clip data.
+</span>*/
+getItemCount : function(  ) {},
+
+<span id='android-content-ClipData-method-getItemAt'>/**Return a single item inside of the clip data.  The index can range
+</span> from 0 to {@link #getItemCount}()-1.
+*/
+getItemAt : function(  ) {},
+
+<span id='android-content-ClipData-method-setItemAt'>/**
+</span>@hide 
+*/
+setItemAt : function(  ) {},
+
+<span id='android-content-ClipData-method-prepareToLeaveProcess'>/**Prepare this {@link android.content.ClipData} to leave an app process.
+</span>@hide 
+*/
+prepareToLeaveProcess : function(  ) {},
+
+<span id='android-content-ClipData-method-prepareToLeaveProcess'>/**Prepare this {@link android.content.ClipData} to leave an app process.
+</span>@hide 
+*/
+prepareToLeaveProcess : function(  ) {},
+
+<span id='android-content-ClipData-method-prepareToEnterProcess'>/**{@hide}
+</span>*/
+prepareToEnterProcess : function(  ) {},
+
+<span id='android-content-ClipData-method-fixUris'>/**
+</span>@hide 
+*/
+fixUris : function(  ) {},
+
+<span id='android-content-ClipData-method-fixUrisLight'>/**Only fixing the data field of the intents
+</span>@hide 
+*/
+fixUrisLight : function(  ) {},
+
+<span id='android-content-ClipData-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-ClipData-method-toShortString'>/**
+</span>@hide 
+*/
+toShortString : function(  ) {},
+
+<span id='android-content-ClipData-method-toShortStringShortItems'>/**
+</span>@hide 
+*/
+toShortStringShortItems : function(  ) {},
+
+<span id='android-content-ClipData-method-writeToProto'>/**
+</span>@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-content-ClipData-method-collectUris'>/**
+</span>@hide 
+*/
+collectUris : function(  ) {},
+
+<span id='android-content-ClipData-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-ClipData-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

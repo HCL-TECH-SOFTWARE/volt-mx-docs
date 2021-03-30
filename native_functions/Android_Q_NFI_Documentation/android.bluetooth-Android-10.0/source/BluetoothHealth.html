@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothHealth'>/**@class android.bluetooth.BluetoothHealth
+</span> implements android.bluetooth.BluetoothProfile
+
+@extends java.lang.Object
+
+ Public API for Bluetooth Health Profile.
+
+ &lt;p&gt;BluetoothHealth is a proxy object for controlling the Bluetooth
+ Service via IPC.
+
+ &lt;p&gt; How to connect to a health device which is acting in the source role.
+ &lt;li&gt; Use {@link android.bluetooth.BluetoothAdapter#getProfileProxy} to get
+ the BluetoothHealth proxy object. &lt;/li&gt;
+ &lt;li&gt; Create an {@link android.bluetooth.BluetoothHealth} callback and call
+ {@link #registerSinkAppConfiguration} to register an application
+ configuration &lt;/li&gt;
+ &lt;li&gt; Pair with the remote device. This currently needs to be done manually
+ from Bluetooth Settings &lt;/li&gt;
+ &lt;li&gt; Connect to a health device using {@link #connectChannelToSource}. Some
+ devices will connect the channel automatically. The {@link android.bluetooth.BluetoothHealth}
+ callback will inform the application of channel state change. &lt;/li&gt;
+ &lt;li&gt; Use the file descriptor provided with a connected channel to read and
+ write data to the health channel. &lt;/li&gt;
+ &lt;li&gt; The received data needs to be interpreted using a health manager which
+ implements the IEEE 11073-xxxxx specifications.
+ &lt;li&gt; When done, close the health channel by calling {@link #disconnectChannel}
+ and unregister the application configuration calling
+ {@link #unregisterAppConfiguration}
+
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New apps
+ should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+var BluetoothHealth = {
+
+<span id='android-bluetooth-BluetoothHealth-property-SOURCE_ROLE'>/** Health Profile Source Role - the health device.
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+SOURCE_ROLE : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-SINK_ROLE'>/** Health Profile Sink Role the device talking to the health device.
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+SINK_ROLE : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-CHANNEL_TYPE_RELIABLE'>/** Health Profile - Channel Type used - Reliable
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+CHANNEL_TYPE_RELIABLE : &quot;10&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-CHANNEL_TYPE_STREAMING'>/** Health Profile - Channel Type used - Streaming
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+CHANNEL_TYPE_STREAMING : &quot;11&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-STATE_CHANNEL_DISCONNECTED'>/**Health Channel Connection State - Disconnected
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+STATE_CHANNEL_DISCONNECTED : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-STATE_CHANNEL_CONNECTING'>/**Health Channel Connection State - Connecting
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+STATE_CHANNEL_CONNECTING : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-STATE_CHANNEL_CONNECTED'>/**Health Channel Connection State - Connected
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+STATE_CHANNEL_CONNECTED : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-STATE_CHANNEL_DISCONNECTING'>/**Health Channel Connection State - Disconnecting
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+STATE_CHANNEL_DISCONNECTING : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-APP_CONFIG_REGISTRATION_SUCCESS'>/**Health App Configuration registration success
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+APP_CONFIG_REGISTRATION_SUCCESS : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-APP_CONFIG_REGISTRATION_FAILURE'>/**Health App Configuration registration failure
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+APP_CONFIG_REGISTRATION_FAILURE : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-APP_CONFIG_UNREGISTRATION_SUCCESS'>/**Health App Configuration un-registration success
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+APP_CONFIG_UNREGISTRATION_SUCCESS : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothHealth-property-APP_CONFIG_UNREGISTRATION_FAILURE'>/**Health App Configuration un-registration failure
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+APP_CONFIG_UNREGISTRATION_FAILURE : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothHealth-method-registerSinkAppConfiguration'>/**Register an application configuration that acts as a Health SINK.
+</span> This is the configuration that will be used to communicate with health devices
+ which will act as the {@link #SOURCE_ROLE}. This is an asynchronous call and so
+ the callback is used to notify success or failure if the function returns true.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {String} name The friendly name associated with the application or configuration.
+@param {Number} dataType The dataType of the Source role of Health Profile to which the sink wants to
+ connect to.
+@param {Object {BluetoothHealthCallback}} callback A callback to indicate success or failure of the registration and all
+ operations done on this application configuration.
+@return {Boolean} If true, callback will be called.
+@deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link BluetoothGatt},
+ {@link BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link BluetoothDevice#createL2capChannel(int)}
+*/
+registerSinkAppConfiguration : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHealth-method-unregisterAppConfiguration'>/**Unregister an application configuration that has been registered using
+</span> {@link #registerSinkAppConfiguration}
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothHealthAppConfiguration}} config The health app configuration
+@return {Boolean} Success or failure.
+@deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link BluetoothGatt},
+ {@link BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link BluetoothDevice#createL2capChannel(int)}
+*/
+unregisterAppConfiguration : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHealth-method-connectChannelToSource'>/**Connect to a health device which has the {@link #SOURCE_ROLE}.
+</span> This is an asynchronous call. If this function returns true, the callback
+ associated with the application configuration will be called.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} device The remote Bluetooth device.
+@param {Object {BluetoothHealthAppConfiguration}} config The application configuration which has been registered using {@link
+ #registerSinkAppConfiguration(String, int, BluetoothHealthCallback) }
+@return {Boolean} If true, the callback associated with the application config will be called.
+@deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link BluetoothGatt},
+ {@link BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link BluetoothDevice#createL2capChannel(int)}
+*/
+connectChannelToSource : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHealth-method-disconnectChannel'>/**Disconnect a connected health channel.
+</span> This is an asynchronous call. If this function returns true, the callback
+ associated with the application configuration will be called.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} device The remote Bluetooth device.
+@param {Object {BluetoothHealthAppConfiguration}} config The application configuration which has been registered using {@link
+ #registerSinkAppConfiguration(String, int, BluetoothHealthCallback) }
+@param {Number} channelId The channel id associated with the channel
+@return {Boolean} If true, the callback associated with the application config will be called.
+@deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link BluetoothGatt},
+ {@link BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link BluetoothDevice#createL2capChannel(int)}
+*/
+disconnectChannel : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHealth-method-getMainChannelFd'>/**Get the file descriptor of the main channel associated with the remote device
+</span> and application configuration.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+
+ &lt;p&gt; Its the responsibility of the caller to close the ParcelFileDescriptor
+ when done.
+@param {Object {BluetoothDevice}} device The remote Bluetooth health device
+@param {Object {BluetoothHealthAppConfiguration}} config The application configuration
+@return {Object {android.os.ParcelFileDescriptor}} null on failure, ParcelFileDescriptor on success.
+@deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link BluetoothGatt},
+ {@link BluetoothAdapter#listenUsingL2capChannel()(int)}, or
+ {@link BluetoothDevice#createL2capChannel(int)}
+*/
+getMainChannelFd : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHealth-method-getConnectionState'>/**Get the current connection state of the profile.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+
+ This is not specific to any application configuration but represents the connection
+ state of the local Bluetooth adapter with the remote device. This can be used
+ by applications like status bar which would just like to know the state of the
+ local adapter.
+@param {Object {BluetoothDevice}} device Remote bluetooth device.
+@return {Number} State of the profile connection. One of {@link #STATE_CONNECTED}, {@link
+ #STATE_CONNECTING}, {@link #STATE_DISCONNECTED}, {@link #STATE_DISCONNECTING}
+*/
+getConnectionState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHealth-method-getConnectedDevices'>/**Get connected devices for the health profile.
+</span>
+ &lt;p&gt; Return the set of devices which are in state {@link #STATE_CONNECTED}
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+
+ This is not specific to any application configuration but represents the connection
+ state of the local Bluetooth adapter for this profile. This can be used
+ by applications like status bar which would just like to know the state of the
+ local adapter.
+@return {Object {java.util.List}} List of devices. The list will be empty on error.
+*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHealth-method-getDevicesMatchingConnectionStates'>/**Get a list of devices that match any of the given connection
+</span> states.
+
+ &lt;p&gt; If none of the devices match any of the given states,
+ an empty list will be returned.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+ This is not specific to any application configuration but represents the connection
+ state of the local Bluetooth adapter for this profile. This can be used
+ by applications like status bar which would just like to know the state of the
+ local adapter.
+@param {Object {int[]}} states Array of states. States can be one of {@link #STATE_CONNECTED}, {@link
+ #STATE_CONNECTING}, {@link #STATE_DISCONNECTED}, {@link #STATE_DISCONNECTING},
+@return {Object {java.util.List}} List of devices. The list will be empty on error.
+*/
+getDevicesMatchingConnectionStates : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

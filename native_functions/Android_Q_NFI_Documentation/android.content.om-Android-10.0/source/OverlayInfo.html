@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-om-OverlayInfo'>/**@class android.content.om.OverlayInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Immutable overlay information about a package. All PackageInfos that
+ represent an overlay package will have a corresponding OverlayInfo.
+
+ @hide
+*/
+var OverlayInfo = {
+
+<span id='android-content-om-OverlayInfo-property-STATE_UNKNOWN'>/** An internal state used as the initial state of an overlay. OverlayInfo
+</span> objects exposed outside the {@link com.android.server.om.OverlayManagerService} should never have this
+ state.
+
+ @hide
+*/
+STATE_UNKNOWN : &quot;-1&quot;,
+<span id='android-content-om-OverlayInfo-property-STATE_MISSING_TARGET'>/** The target package of the overlay is not installed. The overlay cannot be enabled.
+</span>
+ @hide
+*/
+STATE_MISSING_TARGET : &quot;0&quot;,
+<span id='android-content-om-OverlayInfo-property-STATE_NO_IDMAP'>/** Creation of idmap file failed (e.g. no matching resources). The overlay
+</span> cannot be enabled.
+
+ @hide
+*/
+STATE_NO_IDMAP : &quot;1&quot;,
+<span id='android-content-om-OverlayInfo-property-STATE_DISABLED'>/** The overlay is currently disabled. It can be enabled.
+</span>
+ @see IOverlayManager#setEnabled
+ @hide
+*/
+STATE_DISABLED : &quot;2&quot;,
+<span id='android-content-om-OverlayInfo-property-STATE_ENABLED'>/** The overlay is currently enabled. It can be disabled.
+</span>
+ @see IOverlayManager#setEnabled
+ @hide
+*/
+STATE_ENABLED : &quot;3&quot;,
+<span id='android-content-om-OverlayInfo-property-STATE_TARGET_IS_BEING_REPLACED'>/** The target package is currently being upgraded or downgraded; the state
+</span> will change once the package installation has finished.
+ @hide
+
+ @deprecated No longer used. Caused invalid transitions from enabled -&gt; upgrading -&gt; enabled,
+ where an update is propagated when nothing has changed. Can occur during --dont-kill
+ installs when code and resources are hot swapped and the Activity should not be relaunched.
+ In all other cases, the process and therefore Activity is killed, so the state loop is
+ irrelevant.
+*/
+STATE_TARGET_IS_BEING_REPLACED : &quot;4&quot;,
+<span id='android-content-om-OverlayInfo-property-STATE_OVERLAY_IS_BEING_REPLACED'>/** The overlay package is currently being upgraded or downgraded; the state
+</span> will change once the package installation has finished.
+ @hide
+*/
+STATE_OVERLAY_IS_BEING_REPLACED : &quot;5&quot;,
+<span id='android-content-om-OverlayInfo-property-STATE_ENABLED_STATIC'>/** The overlay package is currently enabled because it is marked as
+</span> 'static'. It cannot be disabled but will change state if for instance
+ its target is uninstalled.
+ @hide
+*/
+STATE_ENABLED_STATIC : &quot;6&quot;,
+<span id='android-content-om-OverlayInfo-property-CATEGORY_THEME'>/** Overlay category: theme.
+</span> &lt;p&gt;
+ Change how Android (including the status bar, dialogs, ...) looks.
+
+ @hide
+*/
+CATEGORY_THEME : &quot;android.theme&quot;,
+<span id='android-content-om-OverlayInfo-property-packageName'>/** Package name of the overlay package
+</span>
+ @hide
+*/
+packageName : &quot;null&quot;,
+<span id='android-content-om-OverlayInfo-property-targetPackageName'>/** Package name of the target package
+</span>
+ @hide
+*/
+targetPackageName : &quot;null&quot;,
+<span id='android-content-om-OverlayInfo-property-targetOverlayableName'>/** Name of the target overlayable declaration.
+</span>
+ @hide
+*/
+targetOverlayableName : &quot;null&quot;,
+<span id='android-content-om-OverlayInfo-property-category'>/** Category of the overlay package
+</span>
+ @hide
+*/
+category : &quot;null&quot;,
+<span id='android-content-om-OverlayInfo-property-baseCodePath'>/** Full path to the base APK for this overlay package
+</span> @hide
+*/
+baseCodePath : &quot;null&quot;,
+<span id='android-content-om-OverlayInfo-property-state'>/** The state of this OverlayInfo as defined by the STATE_* constants in this class.
+</span> @hide
+*/
+state : &quot;null&quot;,
+<span id='android-content-om-OverlayInfo-property-userId'>/** User handle for which this overlay applies
+</span> @hide
+*/
+userId : &quot;null&quot;,
+<span id='android-content-om-OverlayInfo-property-priority'>/** Priority as read from the manifest. Used if isStatic is true. Not
+</span> intended to be exposed to 3rd party.
+
+ @hide
+*/
+priority : &quot;null&quot;,
+<span id='android-content-om-OverlayInfo-property-isStatic'>/** isStatic as read from the manifest. If true, the overlay is
+</span> unconditionally loaded and cannot be unloaded. Not intended to be
+ exposed to 3rd party.
+
+ @hide
+*/
+isStatic : &quot;null&quot;,
+<span id='android-content-om-OverlayInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-om-OverlayInfo-method-getPackageName'>/**Returns package name of the current overlay.
+</span>@hide 
+*/
+getPackageName : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-getTargetPackageName'>/**Returns the target package name of the current overlay.
+</span>@hide 
+*/
+getTargetPackageName : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-getCategory'>/**Returns the category of the current overlay.
+</span>@hide\ 
+*/
+getCategory : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-getUserId'>/**Returns user handle for which this overlay applies to.
+</span>@hide 
+*/
+getUserId : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-getTargetOverlayableName'>/**Returns name of the target overlayable declaration.
+</span>@hide 
+*/
+getTargetOverlayableName : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-isEnabled'>/**Return true if this overlay is enabled, i.e. should be used to overlay
+</span> the resources in the target package.
+
+ Disabled overlay packages are installed but are currently not in use.
+@return {Boolean} true if the overlay is enabled, else false.
+@hide 
+*/
+isEnabled : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-stateToString'>/**Translate a state to a human readable string. Only intended for
+</span> debugging purposes.
+@return {String} a human readable String representing the state.
+@hide 
+*/
+stateToString : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-content-om-OverlayInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

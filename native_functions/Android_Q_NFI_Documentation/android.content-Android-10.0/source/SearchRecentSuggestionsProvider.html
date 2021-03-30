@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-SearchRecentSuggestionsProvider'>/**@class android.content.SearchRecentSuggestionsProvider
+</span>@extends android.content.ContentProvider
+
+ This superclass can be used to create a simple search suggestions provider for your application.
+ It creates suggestions (as the user types) based on recent queries and/or recent views.
+ 
+ &lt;p&gt;In order to use this class, you must do the following.
+ 
+ &lt;ul&gt;
+ &lt;li&gt;Implement and test query search, as described in {@link android.app.SearchManager}.  (This
+ provider will send any suggested queries via the standard 
+ {@link android.content.Intent#ACTION_SEARCH ACTION_SEARCH} Intent, which you'll already
+ support once you have implemented and tested basic searchability.)&lt;/li&gt;
+ &lt;li&gt;Create a Content Provider within your application by extending 
+ {@link android.content.SearchRecentSuggestionsProvider}.  The class you create will be
+ very simple - typically, it will have only a constructor.  But the constructor has a very 
+ important responsibility:  When it calls {@link #setupSuggestions(String, int)}, it
+ &lt;i&gt;configures&lt;/i&gt; the provider to match the requirements of your searchable activity.&lt;/li&gt;
+ &lt;li&gt;Create a manifest entry describing your provider.  Typically this would be as simple
+ as adding the following lines:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     &amp;lt;!-- Content provider for search suggestions --&amp;gt;
+     &amp;lt;provider android:name=&quot;YourSuggestionProviderClass&quot;
+               android:authorities=&quot;your.suggestion.authority&quot; /&amp;gt;&lt;/pre&gt;
+ &lt;/li&gt;
+ &lt;li&gt;Please note that you &lt;i&gt;do not&lt;/i&gt; instantiate this content provider directly from within
+ your code.  This is done automatically by the system Content Resolver, when the search dialog
+ looks for suggestions.&lt;/li&gt;
+ &lt;li&gt;In order for the Content Resolver to do this, you must update your searchable activity's 
+ XML configuration file with information about your content provider.  The following additions 
+ are usually sufficient:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     android:searchSuggestAuthority=&quot;your.suggestion.authority&quot;
+     android:searchSuggestSelection=&quot; ? &quot;&lt;/pre&gt;
+ &lt;/li&gt;
+ &lt;li&gt;In your searchable activities, capture any user-generated queries and record them
+ for future searches by calling {@link android.provider.SearchRecentSuggestions#saveRecentQuery
+ SearchRecentSuggestions.saveRecentQuery()}.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For information about using search suggestions in your application, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/search/index.html&quot;&gt;Search&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+ 
+ @see android.provider.SearchRecentSuggestions
+*/
+var SearchRecentSuggestionsProvider = {
+
+<span id='android-content-SearchRecentSuggestionsProvider-property-DATABASE_MODE_QUERIES'>/** This mode bit configures the database to record recent queries.  &lt;i&gt;required&lt;/i&gt;
+</span> 
+ @see #setupSuggestions(String, int)
+*/
+DATABASE_MODE_QUERIES : &quot;1&quot;,
+<span id='android-content-SearchRecentSuggestionsProvider-property-DATABASE_MODE_2LINES'>/** This mode bit configures the database to include a 2nd annotation line with each entry.
+</span> &lt;i&gt;optional&lt;/i&gt;
+ 
+ @see #setupSuggestions(String, int)
+*/
+DATABASE_MODE_2LINES : &quot;2&quot;,
+<span id='android-content-SearchRecentSuggestionsProvider-method-delete'>/**This method is provided for use by the ContentResolver.  Do not override, or directly
+</span> call from your own code.
+*/
+delete : function(  ) {},
+
+<span id='android-content-SearchRecentSuggestionsProvider-method-getType'>/**This method is provided for use by the ContentResolver.  Do not override, or directly
+</span> call from your own code.
+*/
+getType : function(  ) {},
+
+<span id='android-content-SearchRecentSuggestionsProvider-method-insert'>/**This method is provided for use by the ContentResolver.  Do not override, or directly
+</span> call from your own code.
+*/
+insert : function(  ) {},
+
+<span id='android-content-SearchRecentSuggestionsProvider-method-onCreate'>/**This method is provided for use by the ContentResolver.  Do not override, or directly
+</span> call from your own code.
+*/
+onCreate : function(  ) {},
+
+<span id='android-content-SearchRecentSuggestionsProvider-method-query'>/**This method is provided for use by the ContentResolver.  Do not override, or directly
+</span> call from your own code.
+*/
+query : function(  ) {},
+
+<span id='android-content-SearchRecentSuggestionsProvider-method-update'>/**This method is provided for use by the ContentResolver.  Do not override, or directly
+</span> call from your own code.
+*/
+update : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

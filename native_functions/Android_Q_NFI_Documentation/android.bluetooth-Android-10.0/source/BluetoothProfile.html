@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothProfile'>/**@class android.bluetooth.BluetoothProfile
+</span> Public APIs for the Bluetooth Profiles.
+
+ &lt;p&gt; Clients should call {@link android.bluetooth.BluetoothAdapter#getProfileProxy},
+ to get the Profile Proxy. Each public profile implements this
+ interface.
+*/
+var BluetoothProfile = {
+
+<span id='android-bluetooth-BluetoothProfile-property-EXTRA_STATE'>/** Extra for the connection state intents of the individual profiles.
+</span>
+ This extra represents the current connection state of the profile of the
+ Bluetooth device.
+*/
+EXTRA_STATE : &quot;android.bluetooth.profile.extra.STATE&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-EXTRA_PREVIOUS_STATE'>/** Extra for the connection state intents of the individual profiles.
+</span>
+ This extra represents the previous connection state of the profile of the
+ Bluetooth device.
+*/
+EXTRA_PREVIOUS_STATE : &quot;android.bluetooth.profile.extra.PREVIOUS_STATE&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-STATE_DISCONNECTED'>/**The profile is in disconnected state */
+</span>STATE_DISCONNECTED : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-STATE_CONNECTING'>/**The profile is in connecting state */
+</span>STATE_CONNECTING : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-STATE_CONNECTED'>/**The profile is in connected state */
+</span>STATE_CONNECTED : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-STATE_DISCONNECTING'>/**The profile is in disconnecting state */
+</span>STATE_DISCONNECTING : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-HEADSET'>/** Headset and Handsfree profile
+</span>*/
+HEADSET : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-A2DP'>/** A2DP profile.
+</span>*/
+A2DP : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-HEALTH'>/** Health Profile
+</span>
+ @deprecated Health Device Profile (HDP) and MCAP protocol are no longer used. New
+ apps should use Bluetooth Low Energy based solutions such as {@link android.bluetooth.BluetoothGatt},
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()}, or
+ {@link android.bluetooth.BluetoothDevice#createL2capChannel(int)}
+*/
+HEALTH : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-HID_HOST'>/** HID Host
+</span>
+ @hide
+*/
+HID_HOST : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-PAN'>/** PAN Profile
+</span>
+ @hide
+*/
+PAN : &quot;5&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-PBAP'>/** PBAP
+</span>
+ @hide
+*/
+PBAP : &quot;6&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-GATT'>/** GATT
+</span>*/
+GATT : &quot;7&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-GATT_SERVER'>/** GATT_SERVER
+</span>*/
+GATT_SERVER : &quot;8&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-MAP'>/** MAP Profile
+</span>
+ @hide
+*/
+MAP : &quot;9&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-SAP'>/***/
+</span>SAP : &quot;10&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-A2DP_SINK'>/** A2DP Sink Profile
+</span>
+ @hide
+*/
+A2DP_SINK : &quot;11&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-AVRCP_CONTROLLER'>/** AVRCP Controller Profile
+</span>
+ @hide
+*/
+AVRCP_CONTROLLER : &quot;12&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-AVRCP'>/** AVRCP Target Profile
+</span>
+ @hide
+*/
+AVRCP : &quot;13&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-HEADSET_CLIENT'>/** Headset Client - HFP HF Role
+</span>
+ @hide
+*/
+HEADSET_CLIENT : &quot;16&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-PBAP_CLIENT'>/** PBAP Client
+</span>
+ @hide
+*/
+PBAP_CLIENT : &quot;17&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-MAP_CLIENT'>/** MAP Messaging Client Equipment (MCE)
+</span>
+ @hide
+*/
+MAP_CLIENT : &quot;18&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-HID_DEVICE'>/** HID Device
+</span>*/
+HID_DEVICE : &quot;19&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-OPP'>/** Object Push Profile (OPP)
+</span>
+ @hide
+*/
+OPP : &quot;20&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-HEARING_AID'>/** Hearing Aid Device
+</span>
+*/
+HEARING_AID : &quot;21&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-MAX_PROFILE_ID'>/** Max profile ID. This value should be updated whenever a new profile is added to match
+</span> the largest value assigned to a profile.
+
+ @hide
+*/
+MAX_PROFILE_ID : &quot;21&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-PRIORITY_AUTO_CONNECT'>/** Default priority for devices that we try to auto-connect to and
+</span> and allow incoming connections for the profile
+
+ @hide
+*/
+PRIORITY_AUTO_CONNECT : &quot;1000&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-PRIORITY_ON'>/** Default priority for devices that allow incoming
+</span> and outgoing connections for the profile
+
+ @hide
+*/
+PRIORITY_ON : &quot;100&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-PRIORITY_OFF'>/** Default priority for devices that does not allow incoming
+</span> connections and outgoing connections for the profile.
+
+ @hide
+*/
+PRIORITY_OFF : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothProfile-property-PRIORITY_UNDEFINED'>/** Default priority when not set or when the device is unpaired
+</span>
+ @hide
+*/
+PRIORITY_UNDEFINED : &quot;-1&quot;,
+<span id='android-bluetooth-BluetoothProfile-method-getConnectedDevices'>/**Get connected devices for this specific profile.
+</span>
+ &lt;p&gt; Return the set of devices which are in state {@link #STATE_CONNECTED}
+@return {Object {java.util.List}} List of devices. The list will be empty on error.
+*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothProfile-method-getDevicesMatchingConnectionStates'>/**Get a list of devices that match any of the given connection
+</span> states.
+
+ &lt;p&gt; If none of the devices match any of the given states,
+ an empty list will be returned.
+@param {Object {int[]}} states Array of states. States can be one of {@link #STATE_CONNECTED}, {@link
+ #STATE_CONNECTING}, {@link #STATE_DISCONNECTED}, {@link #STATE_DISCONNECTING},
+@return {Object {java.util.List}} List of devices. The list will be empty on error.
+*/
+getDevicesMatchingConnectionStates : function(  ) {},
+
+<span id='android-bluetooth-BluetoothProfile-method-getConnectionState'>/**Get the current connection state of the profile
+</span>@param {Object {BluetoothDevice}} device Remote bluetooth device.
+@return {Number} State of the profile connection. One of {@link #STATE_CONNECTED}, {@link
+ #STATE_CONNECTING}, {@link #STATE_DISCONNECTED}, {@link #STATE_DISCONNECTING}
+*/
+getConnectionState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothProfile-method-getConnectionStateName'>/**Convert an integer value of connection state into human readable string
+</span>@param {Number} connectionState - One of {@link #STATE_DISCONNECTED}, {@link #STATE_CONNECTING},
+ {@link #STATE_CONNECTED}, or {@link #STATE_DISCONNECTED}
+@return {String} a string representation of the connection state, STATE_UNKNOWN if the state
+ is not defined
+@hide 
+*/
+getConnectionStateName : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

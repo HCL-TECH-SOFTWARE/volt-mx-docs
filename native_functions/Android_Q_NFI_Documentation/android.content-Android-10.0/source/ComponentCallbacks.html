@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-ComponentCallbacks'>/**@class android.content.ComponentCallbacks
+</span> The set of callback APIs that are common to all application components
+ ({@link android.app.Activity}, {@link android.app.Service},
+ {@link android.content.ContentProvider}, and {@link android.app.Application}).
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; You should also implement the {@link android.content.ComponentCallbacks2} interface, which provides the {@link android.content.ComponentCallbacks2#onTrimMemory} callback to help your app manage its memory usage more
+ effectively.&lt;/p&gt;
+*/
+var ComponentCallbacks = {
+
+<span id='android-content-ComponentCallbacks-method-onConfigurationChanged'>/**Called by the system when the device configuration changes while your
+</span> component is running.  Note that, unlike activities, other components
+ are never restarted when a configuration changes: they must always deal
+ with the results of the change, such as by re-retrieving resources.
+
+ &lt;p&gt;At the time that this function has been called, your Resources
+ object will have been updated to return resource values matching the
+ new configuration.
+
+ &lt;p&gt;For more information, read &lt;a href=&quot;{@docRoot}guide/topics/resources/runtime-changes.html&quot;
+ &gt;Handling Runtime Changes&lt;/a&gt;.
+@param {Object {Configuration}} newConfig The new device configuration.
+*/
+onConfigurationChanged : function(  ) {},
+
+<span id='android-content-ComponentCallbacks-method-onLowMemory'>/**This is called when the overall system is running low on memory, and
+</span> actively running processes should trim their memory usage.  While
+ the exact point at which this will be called is not defined, generally
+ it will happen when all background process have been killed.
+ That is, before reaching the point of killing processes hosting
+ service and foreground UI that we would like to avoid killing.
+
+ &lt;p&gt;You should implement this method to release
+ any caches or other unnecessary resources you may be holding on to.
+ The system will perform a garbage collection for you after returning from this method.
+ &lt;p&gt;Preferably, you should implement {@link android.content.ComponentCallbacks2#onTrimMemory} from
+ {@link android.content.ComponentCallbacks2} to incrementally unload your resources based on various
+ levels of memory demands.  That API is available for API level 14 and higher, so you should
+ only use this {@link #onLowMemory} method as a fallback for older versions, which can be
+ treated the same as {@link android.content.ComponentCallbacks2#onTrimMemory} with the {@link android.content.ComponentCallbacks2#TRIM_MEMORY_COMPLETE} level.&lt;/p&gt;
+*/
+onLowMemory : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

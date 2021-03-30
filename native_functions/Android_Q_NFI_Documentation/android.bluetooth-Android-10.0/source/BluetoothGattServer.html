@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothGattServer'>/**@class android.bluetooth.BluetoothGattServer
+</span> implements android.bluetooth.BluetoothProfile
+
+@extends java.lang.Object
+
+ Public API for the Bluetooth GATT Profile server role.
+
+ &lt;p&gt;This class provides Bluetooth GATT server role functionality,
+ allowing applications to create Bluetooth Smart services and
+ characteristics.
+
+ &lt;p&gt;BluetoothGattServer is a proxy object for controlling the Bluetooth Service
+ via IPC.  Use {@link android.bluetooth.BluetoothManager#openGattServer} to get an instance
+ of this class.
+*/
+var BluetoothGattServer = {
+
+<span id='android-bluetooth-BluetoothGattServer-method-close'>/**Close this GATT server instance.
+</span>
+ Application should call this method as early as possible after it is done with
+ this GATT server.
+*/
+close : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-connect'>/**Initiate a connection to a Bluetooth GATT capable device.
+</span>
+ &lt;p&gt;The connection may not be established right away, but will be
+ completed when the remote device is available. A
+ {@link android.bluetooth.BluetoothGattServerCallback#onConnectionStateChange} callback will be
+ invoked when the connection state changes as a result of this function.
+
+ &lt;p&gt;The autoConnect parameter determines whether to actively connect to
+ the remote device, or rather passively scan and finalize the connection
+ when the remote device is in range/available. Generally, the first ever
+ connection to a device should be direct (autoConnect set to false) and
+ subsequent connections to known devices should be invoked with the
+ autoConnect parameter set to true.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} autoConnect Whether to directly connect to the remote device (false) or to
+ automatically connect as soon as the remote device becomes available (true).
+@return {Boolean} true, if the connection attempt was initiated successfully
+*/
+connect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-cancelConnection'>/**Disconnects an established connection, or cancels a connection attempt
+</span> currently in progress.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} device Remote device
+*/
+cancelConnection : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-setPreferredPhy'>/**Set the preferred connection PHY for this app. Please note that this is just a
+</span> recommendation, whether the PHY change will happen depends on other applications peferences,
+ local and remote controller capabilities. Controller can override these settings. &lt;p&gt; {@link android.bluetooth.BluetoothGattServerCallback#onPhyUpdate} will be triggered as a result of this call, even if
+ no PHY change happens. It is also triggered when remote device updates the PHY.
+@param {Object {BluetoothDevice}} device The remote device to send this response to
+@param {Number} txPhy preferred transmitter PHY. Bitwise OR of any of {@link
+ BluetoothDevice#PHY_LE_1M_MASK}, {@link BluetoothDevice#PHY_LE_2M_MASK}, and {@link
+ BluetoothDevice#PHY_LE_CODED_MASK}.
+@param {Number} rxPhy preferred receiver PHY. Bitwise OR of any of {@link
+ BluetoothDevice#PHY_LE_1M_MASK}, {@link BluetoothDevice#PHY_LE_2M_MASK}, and {@link
+ BluetoothDevice#PHY_LE_CODED_MASK}.
+@param {Number} phyOptions preferred coding to use when transmitting on the LE Coded PHY. Can be one
+ of {@link BluetoothDevice#PHY_OPTION_NO_PREFERRED}, {@link BluetoothDevice#PHY_OPTION_S2} or
+ {@link BluetoothDevice#PHY_OPTION_S8}
+*/
+setPreferredPhy : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-readPhy'>/**Read the current transmitter PHY and receiver PHY of the connection. The values are returned
+</span> in {@link android.bluetooth.BluetoothGattServerCallback#onPhyRead}
+@param {Object {BluetoothDevice}} device The remote device to send this response to
+*/
+readPhy : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-sendResponse'>/**Send a response to a read or write request to a remote device.
+</span>
+ &lt;p&gt;This function must be invoked in when a remote read/write request
+ is received by one of these callback methods:
+
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.bluetooth.BluetoothGattServerCallback#onCharacteristicReadRequest}
+ &lt;li&gt;{@link android.bluetooth.BluetoothGattServerCallback#onCharacteristicWriteRequest}
+ &lt;li&gt;{@link android.bluetooth.BluetoothGattServerCallback#onDescriptorReadRequest}
+ &lt;li&gt;{@link android.bluetooth.BluetoothGattServerCallback#onDescriptorWriteRequest}
+ &lt;/ul&gt;
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} device The remote device to send this response to
+@param {Number} requestId The ID of the request that was received with the callback
+@param {Number} status The status of the request to be sent to the remote devices
+@param {Number} offset Value offset for partial read/write response
+@param {Object {byte[]}} value The value of the attribute that was read/written (optional)
+*/
+sendResponse : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-notifyCharacteristicChanged'>/**Send a notification or indication that a local characteristic has been
+</span> updated.
+
+ &lt;p&gt;A notification or indication is sent to the remote device to signal
+ that the characteristic has been updated. This function should be invoked
+ for every client that requests notifications/indications by writing
+ to the &quot;Client Configuration&quot; descriptor for the given characteristic.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} device The remote device to receive the notification/indication
+@param {Object {BluetoothGattCharacteristic}} characteristic The local characteristic that has been updated
+@param {Boolean} confirm true to request confirmation from the client (indication), false to send a
+ notification
+@return {Boolean} true, if the notification has been triggered successfully
+@throws IllegalArgumentException
+*/
+notifyCharacteristicChanged : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-addService'>/**Add a service to the list of services to be hosted.
+</span>
+ &lt;p&gt;Once a service has been addded to the list, the service and its
+ included characteristics will be provided by the local device.
+
+ &lt;p&gt;If the local device has already exposed services when this function
+ is called, a service update notification will be sent to all clients.
+
+ &lt;p&gt;The {@link android.bluetooth.BluetoothGattServerCallback#onServiceAdded} callback will indicate
+ whether this service has been added successfully. Do not add another service
+ before this callback.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothGattService}} service Service to be added to the list of services provided by this device.
+@return {Boolean} true, if the request to add service has been initiated
+*/
+addService : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-removeService'>/**Removes a service from the list of services to be provided.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothGattService}} service Service to be removed.
+@return {Boolean} true, if the service has been removed
+*/
+removeService : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-clearServices'>/**Remove all services from the list of provided services.
+</span> &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+*/
+clearServices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-getServices'>/**Returns a list of GATT services offered by this device.
+</span>
+ &lt;p&gt;An application must call {@link #addService} to add a serice to the
+ list of services offered by this device.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@return {Object {java.util.List}} List of services. Returns an empty list if no services have been added yet.
+*/
+getServices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-getService'>/**Returns a {@link android.bluetooth.BluetoothGattService} from the list of services offered
+</span> by this device.
+
+ &lt;p&gt;If multiple instances of the same service (as identified by UUID)
+ exist, the first instance of the service is returned.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {UUID}} uuid UUID of the requested service
+@return {Object {android.bluetooth.BluetoothGattService}} BluetoothGattService if supported, or null if the requested service is not offered by
+ this device.
+*/
+getService : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-getConnectionState'>/**Not supported - please use {@link android.bluetooth.BluetoothManager#getConnectedDevices(int)}
+</span> with {@link android.bluetooth.BluetoothProfile#GATT} as argument
+@throws UnsupportedOperationException
+*/
+getConnectionState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-getConnectedDevices'>/**Not supported - please use {@link android.bluetooth.BluetoothManager#getConnectedDevices(int)}
+</span> with {@link android.bluetooth.BluetoothProfile#GATT} as argument
+@throws UnsupportedOperationException
+*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServer-method-getDevicesMatchingConnectionStates'>/**Not supported - please use
+</span> {@link android.bluetooth.BluetoothManager#getDevicesMatchingConnectionStates(int, int[])}
+ with {@link android.bluetooth.BluetoothProfile#GATT} as first argument
+@throws UnsupportedOperationException
+*/
+getDevicesMatchingConnectionStates : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

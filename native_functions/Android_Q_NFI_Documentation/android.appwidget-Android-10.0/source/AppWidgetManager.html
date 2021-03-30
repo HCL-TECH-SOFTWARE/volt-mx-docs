@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-appwidget-AppWidgetManager'>/**@class android.appwidget.AppWidgetManager
+</span>@extends java.lang.Object
+
+ Updates AppWidget state; gets information about installed AppWidget providers and other
+ AppWidget related state.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about creating app widgets, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/appwidgets/index.html&quot;&gt;App Widgets&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var AppWidgetManager = {
+
+<span id='android-appwidget-AppWidgetManager-property-ACTION_APPWIDGET_PICK'>/** Activity action to launch from your {@link android.appwidget.AppWidgetHost} activity when you want to
+</span> pick an AppWidget to display.  The AppWidget picker activity will be launched.
+ &lt;p&gt;
+ You must supply the following extras:
+ &lt;table&gt;
+   &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_ID}&lt;/td&gt;
+     &lt;td&gt;A newly allocated appWidgetId, which will be bound to the AppWidget provider
+         once the user has selected one.&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;
+ The system will respond with an onActivityResult call with the following extras in
+ the intent:
+ &lt;table&gt;
+   &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_ID}&lt;/td&gt;
+     &lt;td&gt;The appWidgetId that you supplied in the original intent.&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;p&gt;
+ When you receive the result from the AppWidget pick activity, if the resultCode is
+ {@link android.app.Activity#RESULT_OK}, an AppWidget has been selected.  You should then
+ check the AppWidgetProviderInfo for the returned AppWidget, and if it has one, launch its
+ configuration activity.  If {@link android.app.Activity#RESULT_CANCELED} is returned, you
+ should delete the appWidgetId.
+
+ @see #ACTION_APPWIDGET_CONFIGURE
+*/
+ACTION_APPWIDGET_PICK : &quot;android.appwidget.action.APPWIDGET_PICK&quot;,
+<span id='android-appwidget-AppWidgetManager-property-ACTION_KEYGUARD_APPWIDGET_PICK'>/** Similar to ACTION_APPWIDGET_PICK, but used from keyguard
+</span> @hide
+*/
+ACTION_KEYGUARD_APPWIDGET_PICK : &quot;android.appwidget.action.KEYGUARD_APPWIDGET_PICK&quot;,
+<span id='android-appwidget-AppWidgetManager-property-ACTION_APPWIDGET_BIND'>/** Activity action to launch from your {@link android.appwidget.AppWidgetHost} activity when you want to bind
+</span> an AppWidget to display and bindAppWidgetIdIfAllowed returns false.
+ &lt;p&gt;
+ You must supply the following extras:
+ &lt;table&gt;
+   &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_ID}&lt;/td&gt;
+     &lt;td&gt;A newly allocated appWidgetId, which will be bound to the AppWidget provider
+         you provide.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_PROVIDER}&lt;/td&gt;
+     &lt;td&gt;The BroadcastReceiver that will be the AppWidget provider for this AppWidget.
+     &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_PROVIDER_PROFILE}&lt;/td&gt;
+     &lt;td&gt;An optional handle to a user profile under which runs the provider
+     for this AppWidget.
+     &lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;
+ The system will respond with an onActivityResult call with the following extras in
+ the intent:
+ &lt;table&gt;
+   &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_ID}&lt;/td&gt;
+     &lt;td&gt;The appWidgetId that you supplied in the original intent.&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;p&gt;
+ When you receive the result from the AppWidget bind activity, if the resultCode is
+ {@link android.app.Activity#RESULT_OK}, the AppWidget has been bound.  You should then
+ check the AppWidgetProviderInfo for the returned AppWidget, and if it has one, launch its
+ configuration activity.  If {@link android.app.Activity#RESULT_CANCELED} is returned, you
+ should delete the appWidgetId.
+
+ @see #ACTION_APPWIDGET_CONFIGURE
+
+*/
+ACTION_APPWIDGET_BIND : &quot;android.appwidget.action.APPWIDGET_BIND&quot;,
+<span id='android-appwidget-AppWidgetManager-property-ACTION_APPWIDGET_CONFIGURE'>/** Sent when it is time to configure your AppWidget while it is being added to a host.
+</span> This action is not sent as a broadcast to the AppWidget provider, but as a startActivity
+ to the activity specified in the {@link android.appwidget.AppWidgetProviderInfo android.appwidget.AppWidgetProviderInfo
+ meta-data}.
+
+ &lt;p&gt;
+ The intent will contain the following extras:
+ &lt;table&gt;
+   &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_ID}&lt;/td&gt;
+     &lt;td&gt;The appWidgetId to configure.&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;If you return {@link android.app.Activity#RESULT_OK} using
+ {@link android.app.Activity#setResult Activity.setResult()}, the AppWidget will be added,
+ and you will receive an {@link #ACTION_APPWIDGET_UPDATE} broadcast for this AppWidget.
+ If you return {@link android.app.Activity#RESULT_CANCELED}, the host will cancel the add
+ and not display this AppWidget, and you will receive a {@link #ACTION_APPWIDGET_DELETED}
+ broadcast.
+*/
+ACTION_APPWIDGET_CONFIGURE : &quot;android.appwidget.action.APPWIDGET_CONFIGURE&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_APPWIDGET_ID'>/** An intent extra that contains one appWidgetId.
+</span> &lt;p&gt;
+ The value will be an int that can be retrieved like this:
+ {@sample frameworks/base/tests/appwidgets/AppWidgetHostTest/src/com/android/tests/appwidgethost/AppWidgetHostActivity.java getExtra_EXTRA_APPWIDGET_ID}
+*/
+EXTRA_APPWIDGET_ID : &quot;appWidgetId&quot;,
+<span id='android-appwidget-AppWidgetManager-property-OPTION_APPWIDGET_MIN_WIDTH'>/** A bundle extra that contains the lower bound on the current width, in dips, of a widget instance.
+</span>*/
+OPTION_APPWIDGET_MIN_WIDTH : &quot;appWidgetMinWidth&quot;,
+<span id='android-appwidget-AppWidgetManager-property-OPTION_APPWIDGET_MIN_HEIGHT'>/** A bundle extra that contains the lower bound on the current height, in dips, of a widget instance.
+</span>*/
+OPTION_APPWIDGET_MIN_HEIGHT : &quot;appWidgetMinHeight&quot;,
+<span id='android-appwidget-AppWidgetManager-property-OPTION_APPWIDGET_MAX_WIDTH'>/** A bundle extra that contains the upper bound on the current width, in dips, of a widget instance.
+</span>*/
+OPTION_APPWIDGET_MAX_WIDTH : &quot;appWidgetMaxWidth&quot;,
+<span id='android-appwidget-AppWidgetManager-property-OPTION_APPWIDGET_MAX_HEIGHT'>/** A bundle extra that contains the upper bound on the current width, in dips, of a widget instance.
+</span>*/
+OPTION_APPWIDGET_MAX_HEIGHT : &quot;appWidgetMaxHeight&quot;,
+<span id='android-appwidget-AppWidgetManager-property-OPTION_APPWIDGET_HOST_CATEGORY'>/** A bundle extra that hints to the AppWidgetProvider the category of host that owns this
+</span> this widget. Can have the value {@link android.appwidget.AppWidgetProviderInfo#WIDGET_CATEGORY_HOME_SCREEN} or {@link android.appwidget.AppWidgetProviderInfo#WIDGET_CATEGORY_KEYGUARD} or {@link android.appwidget.AppWidgetProviderInfo#WIDGET_CATEGORY_SEARCHBOX}.
+*/
+OPTION_APPWIDGET_HOST_CATEGORY : &quot;appWidgetCategory&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_APPWIDGET_OPTIONS'>/** An intent extra which points to a bundle of extra information for a particular widget id.
+</span> In particular this bundle can contain {@link #OPTION_APPWIDGET_MIN_WIDTH},
+ {@link #OPTION_APPWIDGET_MIN_HEIGHT}, {@link #OPTION_APPWIDGET_MAX_WIDTH},
+ {@link #OPTION_APPWIDGET_MAX_HEIGHT}.
+*/
+EXTRA_APPWIDGET_OPTIONS : &quot;appWidgetOptions&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_APPWIDGET_IDS'>/** An intent extra that contains multiple appWidgetIds.
+</span> &lt;p&gt;
+ The value will be an int array that can be retrieved like this:
+ {@sample frameworks/base/tests/appwidgets/AppWidgetHostTest/src/com/android/tests/appwidgethost/TestAppWidgetProvider.java getExtra_EXTRA_APPWIDGET_IDS}
+*/
+EXTRA_APPWIDGET_IDS : &quot;appWidgetIds&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_APPWIDGET_PROVIDER'>/** An intent extra that contains the component name of a AppWidget provider.
+</span> &lt;p&gt;
+ The value will be an {@link android.content.ComponentName}.
+*/
+EXTRA_APPWIDGET_PROVIDER : &quot;appWidgetProvider&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_APPWIDGET_PROVIDER_PROFILE'>/** An intent extra that contains the user handle of the profile under
+</span> which an AppWidget provider is registered.
+ &lt;p&gt;
+ The value will be a {@link android.os.UserHandle}.
+*/
+EXTRA_APPWIDGET_PROVIDER_PROFILE : &quot;appWidgetProviderProfile&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_CUSTOM_INFO'>/** An intent extra to pass to the AppWidget picker containing a {@link java.util.List} of
+</span> {@link android.appwidget.AppWidgetProviderInfo} objects to mix in to the list of AppWidgets that are
+ installed.  (This is how the launcher shows the search widget).
+*/
+EXTRA_CUSTOM_INFO : &quot;customInfo&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_HOST_ID'>/** An intent extra attached to the {@link #ACTION_APPWIDGET_HOST_RESTORED} broadcast,
+</span> indicating the integer ID of the host whose widgets have just been restored.
+*/
+EXTRA_HOST_ID : &quot;hostId&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_CUSTOM_EXTRAS'>/** An intent extra to pass to the AppWidget picker containing a {@link java.util.List} of
+</span> {@link android.os.Bundle} objects to mix in to the list of AppWidgets that are
+ installed.  It will be added to the extras object on the {@link android.content.Intent}
+ that is returned from the picker activity.
+
+ {@more}
+*/
+EXTRA_CUSTOM_EXTRAS : &quot;customExtras&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_CATEGORY_FILTER'>/** An intent extra to pass to the AppWidget picker which allows the picker to filter
+</span> the list based on the {@link android.appwidget.AppWidgetProviderInfo#widgetCategory}.
+
+ @hide
+*/
+EXTRA_CATEGORY_FILTER : &quot;categoryFilter&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_CUSTOM_SORT'>/** An intent extra to pass to the AppWidget picker to specify whether or not to sort
+</span> the list of caller-specified extra AppWidgets along with the rest of the AppWidgets
+ @hide
+*/
+EXTRA_CUSTOM_SORT : &quot;customSort&quot;,
+<span id='android-appwidget-AppWidgetManager-property-INVALID_APPWIDGET_ID'>/** A sentinel value that the AppWidget manager will never return as a appWidgetId.
+</span>*/
+INVALID_APPWIDGET_ID : &quot;0&quot;,
+<span id='android-appwidget-AppWidgetManager-property-ACTION_APPWIDGET_UPDATE'>/** Sent when it is time to update your AppWidget.
+</span>
+ &lt;p&gt;This may be sent in response to a new instance for this AppWidget provider having
+ been instantiated, the requested {@link android.appwidget.AppWidgetProviderInfo#updatePeriodMillis update interval}
+ having lapsed, or the system booting.
+
+ &lt;p&gt;
+ The intent will contain the following extras:
+ &lt;table&gt;
+   &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_IDS}&lt;/td&gt;
+     &lt;td&gt;The appWidgetIds to update.  This may be all of the AppWidgets created for this
+     provider, or just a subset.  The system tries to send updates for as few AppWidget
+     instances as possible.&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/table&gt;
+
+ @see AppWidgetProvider#onUpdate AppWidgetProvider.onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
+*/
+ACTION_APPWIDGET_UPDATE : &quot;android.appwidget.action.APPWIDGET_UPDATE&quot;,
+<span id='android-appwidget-AppWidgetManager-property-ACTION_APPWIDGET_OPTIONS_CHANGED'>/** Sent when the custom extras for an AppWidget change.
+</span>
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+
+ @see AppWidgetProvider#onAppWidgetOptionsChanged
+      AppWidgetProvider.onAppWidgetOptionsChanged(Context context,
+      AppWidgetManager appWidgetManager, int appWidgetId, Bundle newExtras)
+*/
+ACTION_APPWIDGET_OPTIONS_CHANGED : &quot;android.appwidget.action.APPWIDGET_UPDATE_OPTIONS&quot;,
+<span id='android-appwidget-AppWidgetManager-property-ACTION_APPWIDGET_DELETED'>/** Sent when an instance of an AppWidget is deleted from its host.
+</span>
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+
+ @see AppWidgetProvider#onDeleted AppWidgetProvider.onDeleted(Context context, int[] appWidgetIds)
+*/
+ACTION_APPWIDGET_DELETED : &quot;android.appwidget.action.APPWIDGET_DELETED&quot;,
+<span id='android-appwidget-AppWidgetManager-property-ACTION_APPWIDGET_DISABLED'>/** Sent when the last AppWidget of this provider is removed from the last host.
+</span>
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+
+ @see AppWidgetProvider#onEnabled AppWidgetProvider.onDisabled(Context context)
+*/
+ACTION_APPWIDGET_DISABLED : &quot;android.appwidget.action.APPWIDGET_DISABLED&quot;,
+<span id='android-appwidget-AppWidgetManager-property-ACTION_APPWIDGET_ENABLED'>/** Sent when an instance of an AppWidget is added to a host for the first time.
+</span> This broadcast is sent at boot time if there is a AppWidgetHost installed with
+ an instance for this provider.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+
+ @see AppWidgetProvider#onEnabled AppWidgetProvider.onEnabled(Context context)
+*/
+ACTION_APPWIDGET_ENABLED : &quot;android.appwidget.action.APPWIDGET_ENABLED&quot;,
+<span id='android-appwidget-AppWidgetManager-property-ACTION_APPWIDGET_RESTORED'>/** Sent to an {@link android.appwidget.AppWidgetProvider} after AppWidget state related to that provider has
+</span> been restored from backup. The intent contains information about how to translate AppWidget
+ ids from the restored data to their new equivalents.
+
+ &lt;p&gt;The intent will contain the following extras:
+
+ &lt;table&gt;
+   &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_OLD_IDS}&lt;/td&gt;
+     &lt;td&gt;The set of appWidgetIds represented in a restored backup that have been successfully
+     incorporated into the current environment.  This may be all of the AppWidgets known
+     to this application, or just a subset.  Each entry in this array of appWidgetIds has
+     a corresponding entry in the {@link #EXTRA_APPWIDGET_IDS} extra.&lt;/td&gt;
+  &lt;/tr&gt;
+   &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_IDS}&lt;/td&gt;
+     &lt;td&gt;The set of appWidgetIds now valid for this application.  The app should look at
+     its restored widget configuration and translate each appWidgetId in the
+     {@link #EXTRA_APPWIDGET_OLD_IDS} array to its new value found at the corresponding
+     index within this array.&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+
+ @see #ACTION_APPWIDGET_HOST_RESTORED
+*/
+ACTION_APPWIDGET_RESTORED : &quot;android.appwidget.action.APPWIDGET_RESTORED&quot;,
+<span id='android-appwidget-AppWidgetManager-property-ACTION_APPWIDGET_HOST_RESTORED'>/** Sent to widget hosts after AppWidget state related to the host has been restored from
+</span> backup. The intent contains information about how to translate AppWidget ids from the
+ restored data to their new equivalents.  If an application maintains multiple separate
+ widget host instances, it will receive this broadcast separately for each one.
+
+ &lt;p&gt;The intent will contain the following extras:
+
+ &lt;table&gt;
+   &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_OLD_IDS}&lt;/td&gt;
+     &lt;td&gt;The set of appWidgetIds represented in a restored backup that have been successfully
+     incorporated into the current environment.  This may be all of the AppWidgets known
+     to this application, or just a subset.  Each entry in this array of appWidgetIds has
+     a corresponding entry in the {@link #EXTRA_APPWIDGET_IDS} extra.&lt;/td&gt;
+  &lt;/tr&gt;
+   &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_APPWIDGET_IDS}&lt;/td&gt;
+     &lt;td&gt;The set of appWidgetIds now valid for this application.  The app should look at
+     its restored widget configuration and translate each appWidgetId in the
+     {@link #EXTRA_APPWIDGET_OLD_IDS} array to its new value found at the corresponding
+     index within this array.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+     &lt;td&gt;{@link #EXTRA_HOST_ID}&lt;/td&gt;
+     &lt;td&gt;The integer ID of the widget host instance whose state has just been restored.&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+
+ @see #ACTION_APPWIDGET_RESTORED
+*/
+ACTION_APPWIDGET_HOST_RESTORED : &quot;android.appwidget.action.APPWIDGET_HOST_RESTORED&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_APPWIDGET_OLD_IDS'>/** An intent extra that contains multiple appWidgetIds.  These are id values as
+</span> they were provided to the application during a recent restore from backup.  It is
+ attached to the {@link #ACTION_APPWIDGET_RESTORED} broadcast intent.
+
+ &lt;p&gt;
+ The value will be an int array that can be retrieved like this:
+ {@sample frameworks/base/tests/appwidgets/AppWidgetHostTest/src/com/android/tests/appwidgethost/TestAppWidgetProvider.java getExtra_EXTRA_APPWIDGET_IDS}
+*/
+EXTRA_APPWIDGET_OLD_IDS : &quot;appWidgetOldIds&quot;,
+<span id='android-appwidget-AppWidgetManager-property-EXTRA_APPWIDGET_PREVIEW'>/** An extra that can be passed to
+</span> {@link #requestPinAppWidget(ComponentName, Bundle, PendingIntent)}. This would allow the
+ launcher app to present a custom preview to the user.
+
+ &lt;p&gt;
+ The value should be a {@link RemoteViews} similar to what is used with
+ {@link #updateAppWidget} calls.
+*/
+EXTRA_APPWIDGET_PREVIEW : &quot;appWidgetPreview&quot;,
+<span id='android-appwidget-AppWidgetManager-property-META_DATA_APPWIDGET_PROVIDER'>/** Field for the manifest meta-data tag.
+</span>
+ @see AppWidgetProviderInfo
+*/
+META_DATA_APPWIDGET_PROVIDER : &quot;android.appwidget.provider&quot;,
+<span id='android-appwidget-AppWidgetManager-method-getInstance'>/**Get the AppWidgetManager instance to use for the supplied {@link android.content.Context
+</span> Context} object.
+*/
+getInstance : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-updateAppWidget'>/**Set the RemoteViews to use for the specified appWidgetIds.
+</span> &lt;p&gt;
+ Note that the RemoteViews parameter will be cached by the AppWidgetService, and hence should
+ contain a complete representation of the widget. For performing partial widget updates, see
+ {@link #partiallyUpdateAppWidget(int[], RemoteViews)}.
+
+ &lt;p&gt;
+ It is okay to call this method both inside an {@link #ACTION_APPWIDGET_UPDATE} broadcast,
+ and outside of the handler.
+ This method will only work when called from the uid that owns the AppWidget provider.
+
+ &lt;p&gt;
+ The total Bitmap memory used by the RemoteViews object cannot exceed that required to
+ fill the screen 1.5 times, ie. (screen width x screen height x 4 x 1.5) bytes.
+@param {Object {int[]}} appWidgetIds The AppWidget instances for which to set the RemoteViews.
+@param {Object {RemoteViews}} views The RemoteViews object to show.
+*/
+updateAppWidget : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-updateAppWidgetOptions'>/**Update the extras for a given widget instance.
+</span> &lt;p&gt;
+ The extras can be used to embed additional information about this widget to be accessed
+ by the associated widget's AppWidgetProvider.
+@param {Number} appWidgetId The AppWidget instances for which to set the RemoteViews.
+@param {Object {Bundle}} options The options to associate with this widget
+@param options The options to associate with this widget
+*/
+updateAppWidgetOptions : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-getAppWidgetOptions'>/**Get the extras associated with a given widget instance.
+</span> &lt;p&gt;
+ The extras can be used to embed additional information about this widget to be accessed
+ by the associated widget's AppWidgetProvider.
+@param {Number} appWidgetId The AppWidget instances for which to set the RemoteViews.
+@param appWidgetId The AppWidget instances for which to set the RemoteViews.
+@return {Object {android.os.Bundle}} The options associated with the given widget instance.
+*/
+getAppWidgetOptions : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-updateAppWidget'>/**Set the RemoteViews to use for the specified appWidgetId.
+</span> &lt;p&gt;
+ Note that the RemoteViews parameter will be cached by the AppWidgetService, and hence should
+ contain a complete representation of the widget. For performing partial widget updates, see
+ {@link #partiallyUpdateAppWidget(int, RemoteViews)}.
+
+ &lt;p&gt;
+ It is okay to call this method both inside an {@link #ACTION_APPWIDGET_UPDATE} broadcast,
+ and outside of the handler.
+ This method will only work when called from the uid that owns the AppWidget provider.
+
+ &lt;p&gt;
+ The total Bitmap memory used by the RemoteViews object cannot exceed that required to
+ fill the screen 1.5 times, ie. (screen width x screen height x 4 x 1.5) bytes.
+@param {Number} appWidgetId      The AppWidget instance for which to set the RemoteViews.
+@param {Object {RemoteViews}} views         The RemoteViews object to show.
+*/
+updateAppWidget : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-partiallyUpdateAppWidget'>/**Perform an incremental update or command on the widget(s) specified by appWidgetIds.
+</span> &lt;p&gt;
+ This update  differs from {@link #updateAppWidget(int[], RemoteViews)} in that the
+ RemoteViews object which is passed is understood to be an incomplete representation of the
+ widget, and hence does not replace the cached representation of the widget. As of API
+ level 17, the new properties set within the views objects will be appended to the cached
+ representation of the widget, and hence will persist.
+
+ Use with {@link RemoteViews#showNext(int)}, {@link RemoteViews#showPrevious(int)},
+ {@link RemoteViews#setScrollPosition(int, int)} and similar commands.
+
+ &lt;p&gt;
+ It is okay to call this method both inside an {@link #ACTION_APPWIDGET_UPDATE} broadcast,
+ and outside of the handler.
+ This method will only work when called from the uid that owns the AppWidget provider.
+
+ &lt;p&gt;
+ This method will be ignored if a widget has not received a full update via
+ {@link #updateAppWidget(int[], RemoteViews)}.
+@param {Object {int[]}} appWidgetIds     The AppWidget instances for which to set the RemoteViews.
+@param {Object {RemoteViews}} views            The RemoteViews object containing the incremental update / command.
+*/
+partiallyUpdateAppWidget : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-partiallyUpdateAppWidget'>/**Perform an incremental update or command on the widget specified by appWidgetId.
+</span> &lt;p&gt;
+ This update  differs from {@link #updateAppWidget(int, RemoteViews)} in that the RemoteViews
+ object which is passed is understood to be an incomplete representation of the widget, and
+ hence is not cached by the AppWidgetService. Note that because these updates are not cached,
+ any state that they modify that is not restored by restoreInstanceState will not persist in
+ the case that the widgets are restored using the cached version in AppWidgetService.
+
+ Use with {@link RemoteViews#showNext(int)}, {@link RemoteViews#showPrevious(int)},
+ {@link RemoteViews#setScrollPosition(int, int)} and similar commands.
+
+ &lt;p&gt;
+ It is okay to call this method both inside an {@link #ACTION_APPWIDGET_UPDATE} broadcast,
+ and outside of the handler.
+ This method will only work when called from the uid that owns the AppWidget provider.
+
+ &lt;p&gt;
+ This method will be ignored if a widget has not received a full update via
+ {@link #updateAppWidget(int[], RemoteViews)}.
+@param {Number} appWidgetId      The AppWidget instance for which to set the RemoteViews.
+@param {Object {RemoteViews}} views            The RemoteViews object containing the incremental update / command.
+*/
+partiallyUpdateAppWidget : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-updateAppWidget'>/**Set the RemoteViews to use for all AppWidget instances for the supplied AppWidget provider.
+</span>
+ &lt;p&gt;
+ It is okay to call this method both inside an {@link #ACTION_APPWIDGET_UPDATE} broadcast,
+ and outside of the handler.
+ This method will only work when called from the uid that owns the AppWidget provider.
+@param {Object {ComponentName}} provider      The {@link ComponentName} for the {@link
+ android.content.BroadcastReceiver BroadcastReceiver} provider
+                      for your AppWidget.
+@param {Object {RemoteViews}} views         The RemoteViews object to show.
+*/
+updateAppWidget : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-updateAppWidgetProviderInfo'>/**Updates the info for the supplied AppWidget provider. Apps can use this to change the default
+</span> behavior of the widget based on the state of the app (for e.g., if the user is logged in
+ or not). Calling this API completely replaces the previous definition.
+
+ &lt;p&gt;
+ The manifest entry of the provider should contain an additional meta-data tag similar to
+ {@link #META_DATA_APPWIDGET_PROVIDER} which should point to any alternative definitions for
+ the provider.
+
+ &lt;p&gt;
+ This is persisted across device reboots and app updates. If this meta-data key is not
+ present in the manifest entry, the info reverts to default.
+@param {Object {ComponentName}} provider {@link ComponentName} for the {@link
+    android.content.BroadcastReceiver BroadcastReceiver} provider for your AppWidget.
+@param {String} metaDataKey key for the meta-data tag pointing to the new provider info. Use null
+    to reset any previously set info.
+*/
+updateAppWidgetProviderInfo : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-notifyAppWidgetViewDataChanged'>/**Notifies the specified collection view in all the specified AppWidget instances
+</span> to invalidate their data.
+@param {Object {int[]}} appWidgetIds  The AppWidget instances to notify of view data changes.
+@param {Number} viewId        The collection view id.
+*/
+notifyAppWidgetViewDataChanged : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-notifyAppWidgetViewDataChanged'>/**Notifies the specified collection view in the specified AppWidget instance
+</span> to invalidate its data.
+@param {Number} appWidgetId  The AppWidget instance to notify of view data changes.
+@param {Number} viewId       The collection view id.
+*/
+notifyAppWidgetViewDataChanged : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-getInstalledProvidersForProfile'>/**Gets the AppWidget providers for the given user profile. User profile can only
+</span> be the current user or a profile of the current user. For example, the current
+ user may have a corporate profile. In this case the parent user profile has a
+ child profile, the corporate one.
+@param {Object {UserHandle}} profile The profile for which to get providers. Passing null is equivalent
+        to querying for only the calling user.
+@return {Object {java.util.List}} The installed providers, or an empty list if none are found for the given user.
+@see android.os.Process#myUserHandle()
+@see android.os.UserManager#getUserProfiles()
+*/
+getInstalledProvidersForProfile : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-getInstalledProvidersForPackage'>/**Gets the AppWidget providers for the given package and user profile. User
+</span> profile can only be the current user or a profile of the current user. For
+ example, the current user may have a corporate profile. In this case the
+ parent user profile has a child profile, the corporate one.
+@param {String} packageName The package for which to get providers. If null, this method is
+        equivalent to {@link #getInstalledProvidersForProfile(UserHandle)}.
+@param {Object {UserHandle}} profile The profile for which to get providers. Passing null is equivalent
+        to querying for only the calling user.
+@return {Object {java.util.List}} The installed providers, or an empty list if none are found for the given
+         package and user.
+@throws NullPointerException if the provided package name is null
+@see android.os.Process#myUserHandle()
+@see android.os.UserManager#getUserProfiles()
+*/
+getInstalledProvidersForPackage : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-getInstalledProviders'>/**Return a list of the AppWidget providers that are currently installed.
+</span>*/
+getInstalledProviders : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-getInstalledProviders'>/**Gets the AppWidget providers for the current user.
+</span>@param {Number} categoryFilter Will only return providers which register as any of the specified
+        specified categories. See {@link AppWidgetProviderInfo#widgetCategory}.
+@return {Object {java.util.List}} The intalled providers.
+@see android.os.Process#myUserHandle()
+@see android.os.UserManager#getUserProfiles()
+@hide 
+*/
+getInstalledProviders : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-getInstalledProvidersForProfile'>/**Gets the AppWidget providers for the given user profile. User profile can only
+</span> be the current user or a profile of the current user. For example, the current
+ user may have a corporate profile. In this case the parent user profile has a
+ child profile, the corporate one.
+@param {Number} categoryFilter Will only return providers which register as any of the specified
+        specified categories. See {@link AppWidgetProviderInfo#widgetCategory}.
+@param {Object {UserHandle}} profile A profile of the current user which to be queried. The user
+        is itself also a profile. If null, the providers only for the current user
+        are returned.
+@param {String} packageName If specified, will only return providers from the given package.
+@return {Object {java.util.List}} The intalled providers.
+@see android.os.Process#myUserHandle()
+@see android.os.UserManager#getUserProfiles()
+@hide 
+*/
+getInstalledProvidersForProfile : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-getAppWidgetInfo'>/**Get the available info about the AppWidget.
+</span>@return {Object {android.appwidget.AppWidgetProviderInfo}} A appWidgetId.  If the appWidgetId has not been bound to a provider yet, or
+ you don't have access to that appWidgetId, null is returned.
+*/
+getAppWidgetInfo : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-bindAppWidgetId'>/**Set the component for a given appWidgetId.
+</span>
+ &lt;p class=&quot;note&quot;&gt;You need the BIND_APPWIDGET permission or the user must have enabled binding
+         widgets always for your component. This method is used by the AppWidget picker and
+         should not be used by other apps.
+@param {Number} appWidgetId     The AppWidget instance for which to set the RemoteViews.
+@param {Object {ComponentName}} provider      The {@link android.content.BroadcastReceiver} that will be the AppWidget
+                      provider for this AppWidget.
+@hide 
+*/
+bindAppWidgetId : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-bindAppWidgetId'>/**Set the component for a given appWidgetId.
+</span>
+ &lt;p class=&quot;note&quot;&gt;You need the BIND_APPWIDGET permission or the user must have enabled binding
+         widgets always for your component. This method is used by the AppWidget picker and
+         should not be used by other apps.
+@param {Number} appWidgetId     The AppWidget instance for which to set the RemoteViews.
+@param {Object {ComponentName}} provider      The {@link android.content.BroadcastReceiver} that will be the AppWidget
+                      provider for this AppWidget.
+@param {Object {Bundle}} options       Bundle containing options for the AppWidget. See also
+                      {@link #updateAppWidgetOptions(int, Bundle)}
+@hide 
+*/
+bindAppWidgetId : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-bindAppWidgetIdIfAllowed'>/**Set the component for a given appWidgetId.
+</span>
+ &lt;p class=&quot;note&quot;&gt;You need the BIND_APPWIDGET permission or the user must have enabled binding
+         widgets always for your component. Should be used by apps that host widgets; if this
+         method returns false, call {@link #ACTION_APPWIDGET_BIND} to request permission to
+         bind
+@param {Number} appWidgetId   The AppWidget id under which to bind the provider.
+@param {Object {ComponentName}} provider      The {@link android.content.BroadcastReceiver} that will be the AppWidget
+                      provider for this AppWidget.
+@return {Boolean} true if this component has permission to bind the AppWidget
+*/
+bindAppWidgetIdIfAllowed : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-bindAppWidgetIdIfAllowed'>/**Set the component for a given appWidgetId.
+</span>
+ &lt;p class=&quot;note&quot;&gt;You need the BIND_APPWIDGET permission or the user must have enabled binding
+         widgets always for your component. Should be used by apps that host widgets; if this
+         method returns false, call {@link #ACTION_APPWIDGET_BIND} to request permission to
+         bind
+@param {Number} appWidgetId The AppWidget id under which to bind the provider.
+@param {Object {ComponentName}} provider      The {@link android.content.BroadcastReceiver} that will be the AppWidget
+                      provider for this AppWidget.
+@param {Object {Bundle}} options       Bundle containing options for the AppWidget. See also
+                      {@link #updateAppWidgetOptions(int, Bundle)}
+@return {Boolean} true if this component has permission to bind the AppWidget
+*/
+bindAppWidgetIdIfAllowed : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-bindAppWidgetIdIfAllowed'>/**Set the provider for a given appWidgetId if the caller has a permission.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; You need the {@link android.Manifest.permission#BIND_APPWIDGET}
+ permission or the user must have enabled binding widgets always for your component.
+ Should be used by apps that host widgets. If this method returns false, call {@link #ACTION_APPWIDGET_BIND} to request permission to bind.
+ &lt;/p&gt;
+@param {Number} appWidgetId The AppWidget id under which to bind the provider.
+@param {Object {UserHandle}} user The user id in which the provider resides.
+@param {Object {ComponentName}} provider The component name of the provider.
+@param {Object {Bundle}} options An optional Bundle containing options for the AppWidget.
+@return {Boolean} true if this component has permission to bind the AppWidget
+*/
+bindAppWidgetIdIfAllowed : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-hasBindAppWidgetPermission'>/**Query if a given package was granted permission by the user to bind app widgets
+</span>
+ &lt;p class=&quot;note&quot;&gt;You need the MODIFY_APPWIDGET_BIND_PERMISSIONS permission
+@param {String} packageName The package for which the permission is being queried
+@param {Number} userId The user id of the user under which the package runs.
+@return {Boolean} true if the package was granted permission by the user to bind app widgets
+@hide 
+*/
+hasBindAppWidgetPermission : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-hasBindAppWidgetPermission'>/**Query if a given package was granted permission by the user to bind app widgets
+</span>
+ &lt;p class=&quot;note&quot;&gt;You need the MODIFY_APPWIDGET_BIND_PERMISSIONS permission
+@param {String} packageName        The package for which the permission is being queried
+@return {Boolean} true if the package was granted permission by the user to bind app widgets
+@hide 
+*/
+hasBindAppWidgetPermission : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-setBindAppWidgetPermission'>/**Changes any user-granted permission for the given package to bind app widgets
+</span>
+ &lt;p class=&quot;note&quot;&gt;You need the MODIFY_APPWIDGET_BIND_PERMISSIONS permission
+@param {String} packageName The package whose permission is being changed
+@param {Boolean} permission Whether to give the package permission to bind widgets
+@hide 
+*/
+setBindAppWidgetPermission : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-setBindAppWidgetPermission'>/**Changes any user-granted permission for the given package to bind app widgets
+</span>
+ &lt;p class=&quot;note&quot;&gt;You need the MODIFY_APPWIDGET_BIND_PERMISSIONS permission
+@param {String} packageName The package whose permission is being changed
+@param {Number} userId The user under which the package is running.
+@param {Boolean} permission Whether to give the package permission to bind widgets
+@hide 
+*/
+setBindAppWidgetPermission : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-bindRemoteViewsService'>/**Binds the RemoteViewsService for a given appWidgetId and intent.
+</span>
+ The appWidgetId specified must already be bound to the calling AppWidgetHost via
+ {@link android.appwidget.AppWidgetManager#bindAppWidgetId AppWidgetManager.bindAppWidgetId()}.
+@param {Object {Context}} appWidgetId   The AppWidget instance for which to bind the RemoteViewsService.
+@param {Number} intent        The intent of the service which will be providing the data to the
+                      RemoteViewsAdapter.
+@param {Object {Intent}} connection    The callback interface to be notified when a connection is made or lost.
+@param {Object {IServiceConnection}} flags         Flags used for binding to the service
+@see Context#getServiceDispatcher(ServiceConnection, Handler, int)
+@hide 
+*/
+bindRemoteViewsService : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-getAppWidgetIds'>/**Get the list of appWidgetIds that have been bound to the given AppWidget
+</span> provider.
+@param {Object {ComponentName}} provider The {@link android.content.BroadcastReceiver} that is the
+            AppWidget provider to find appWidgetIds for.
+*/
+getAppWidgetIds : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-isBoundWidgetPackage'>/**
+</span>@hide 
+*/
+isBoundWidgetPackage : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-isRequestPinAppWidgetSupported'>/**Return {@code TRUE} if the default launcher supports
+</span> {@link #requestPinAppWidget(ComponentName, Bundle, PendingIntent)}
+*/
+isRequestPinAppWidgetSupported : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-requestPinAppWidget'>/**Only used during development. Can be deleted before release.
+</span>@hide 
+*/
+requestPinAppWidget : function(  ) {},
+
+<span id='android-appwidget-AppWidgetManager-method-requestPinAppWidget'>/**Request to pin an app widget on the current launcher. It's up to the launcher to accept this
+</span> request (optionally showing a user confirmation). If the request is accepted, the caller will
+ get a confirmation with extra {@link #EXTRA_APPWIDGET_ID}.
+
+ &lt;p&gt;When a request is denied by the user, the caller app will not get any response.
+
+ &lt;p&gt;Only apps with a foreground activity or a foreground service can call it.  Otherwise
+ it'll throw {@link IllegalStateException}.
+
+ &lt;p&gt;It's up to the launcher how to handle previous pending requests when the same package
+ calls this API multiple times in a row.  It may ignore the previous requests,
+ for example.
+
+ &lt;p&gt;Launcher will not show the configuration activity associated with the provider in this
+ case. The app could either show the configuration activity as a response to the callback,
+ or show if before calling the API (various configurations can be encapsulated in
+ {@code successCallback} to avoid persisting them before the widgetId is known).
+@param {Object {ComponentName}} provider The {@link ComponentName} for the {@link
+    android.content.BroadcastReceiver BroadcastReceiver} provider for your AppWidget.
+@param {Object {Bundle}} extras In not null, this is passed to the launcher app. For eg {@link
+    #EXTRA_APPWIDGET_PREVIEW} can be used for a custom preview.
+@param {Object {PendingIntent}} successCallback If not null, this intent will be sent when the widget is created.
+@return {Boolean} {@code TRUE} if the launcher supports this feature. Note the API will return without
+    waiting for the user to respond, so getting {@code TRUE} from this API does *not* mean
+    the shortcut is pinned. {@code FALSE} if the launcher doesn't support this feature.
+@see android.content.pm.ShortcutManager#isRequestPinShortcutSupported()
+@see android.content.pm.ShortcutManager#requestPinShortcut(ShortcutInfo, IntentSender)
+@see #isRequestPinAppWidgetSupported()
+@throws IllegalStateException The caller doesn't have a foreground activity or a foreground
+ service or when the user is locked.
+*/
+requestPinAppWidget : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

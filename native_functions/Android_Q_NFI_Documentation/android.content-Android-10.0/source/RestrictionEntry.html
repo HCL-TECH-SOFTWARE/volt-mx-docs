@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-RestrictionEntry'>/**@class android.content.RestrictionEntry
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Applications can expose restrictions for a restricted user on a
+ multiuser device. The administrator can configure these restrictions that will then be
+ applied to the restricted user. Each RestrictionsEntry is one configurable restriction.
+ &lt;p/&gt;
+ Any application that chooses to expose such restrictions does so by implementing a
+ receiver that handles the {@link android.content.Intent#ACTION_GET_RESTRICTION_ENTRIES} action.
+ The receiver then returns a result bundle that contains an entry called &quot;restrictions&quot;, whose
+ value is an ArrayList&lt;RestrictionsEntry&gt;.
+*/
+var RestrictionEntry = {
+
+<span id='android-content-RestrictionEntry-property-TYPE_NULL'>/** Hidden restriction type. Use this type for information that needs to be transferred
+</span> across but shouldn't be presented to the user in the UI. Stores a single String value.
+*/
+TYPE_NULL : &quot;0&quot;,
+<span id='android-content-RestrictionEntry-property-TYPE_BOOLEAN'>/** Restriction of type &quot;bool&quot;. Use this for storing a boolean value, typically presented as
+</span> a checkbox in the UI.
+*/
+TYPE_BOOLEAN : &quot;1&quot;,
+<span id='android-content-RestrictionEntry-property-TYPE_CHOICE'>/** Restriction of type &quot;choice&quot;. Use this for storing a string value, typically presented as
+</span> a single-select list. Call {@link #setChoiceEntries(String[])} and
+ {@link #setChoiceValues(String[])} to set the localized list entries to present to the user
+ and the corresponding values, respectively.
+*/
+TYPE_CHOICE : &quot;2&quot;,
+<span id='android-content-RestrictionEntry-property-TYPE_CHOICE_LEVEL'>/** Internal restriction type. Use this for storing a string value, typically presented as
+</span> a single-select list. Call {@link #setChoiceEntries(String[])} and
+ {@link #setChoiceValues(String[])} to set the localized list entries to present to the user
+ and the corresponding values, respectively.
+ The presentation could imply that values in lower array indices are included when a
+ particular value is chosen.
+ @hide
+*/
+TYPE_CHOICE_LEVEL : &quot;3&quot;,
+<span id='android-content-RestrictionEntry-property-TYPE_MULTI_SELECT'>/** Restriction of type &quot;multi-select&quot;. Use this for presenting a multi-select list where more
+</span> than one entry can be selected, such as for choosing specific titles to white-list.
+ Call {@link #setChoiceEntries(String[])} and
+ {@link #setChoiceValues(String[])} to set the localized list entries to present to the user
+ and the corresponding values, respectively.
+ Use {@link #getAllSelectedStrings}() and {@link #setAllSelectedStrings(String[])} to
+ manipulate the selections.
+*/
+TYPE_MULTI_SELECT : &quot;4&quot;,
+<span id='android-content-RestrictionEntry-property-TYPE_INTEGER'>/** Restriction of type &quot;integer&quot;. Use this for storing an integer value. The range of values
+</span> is from {@link Integer#MIN_VALUE} to {@link Integer#MAX_VALUE}.
+*/
+TYPE_INTEGER : &quot;5&quot;,
+<span id='android-content-RestrictionEntry-property-TYPE_STRING'>/** Restriction of type &quot;string&quot;. Use this for storing a string value.
+</span> @see #setSelectedString
+ @see #getSelectedString
+*/
+TYPE_STRING : &quot;6&quot;,
+<span id='android-content-RestrictionEntry-property-TYPE_BUNDLE'>/** Restriction of type &quot;bundle&quot;. Use this for storing {@link android.os.Bundle bundles} of
+</span> restrictions
+*/
+TYPE_BUNDLE : &quot;7&quot;,
+<span id='android-content-RestrictionEntry-property-TYPE_BUNDLE_ARRAY'>/** Restriction of type &quot;bundle_array&quot;. Use this for storing arrays of
+</span> {@link android.os.Bundle bundles} of restrictions
+*/
+TYPE_BUNDLE_ARRAY : &quot;8&quot;,
+<span id='android-content-RestrictionEntry-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-RestrictionEntry-method-createBundleEntry'>/**Creates an entry of type {@link #TYPE_BUNDLE}.
+</span>@param {String} key the unique key for this restriction
+@param {Object {android.content.RestrictionEntry[]}} restrictionEntries array of nested restriction entries.
+@return {Object {android.content.RestrictionEntry}} the newly created restriction
+*/
+createBundleEntry : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-createBundleArrayEntry'>/**Creates an entry of type {@link #TYPE_BUNDLE_ARRAY}.
+</span>@param {String} key the unique key for this restriction
+@param {Object {android.content.RestrictionEntry[]}} restrictionEntries array of nested restriction entries. The array may only contain
+ elements of type {@link #TYPE_BUNDLE bundle}.
+@return {Object {android.content.RestrictionEntry}} the newly created restriction
+*/
+createBundleArrayEntry : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setType'>/**Sets the type for this restriction.
+</span>@param {Number} type the type for this restriction.
+*/
+setType : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getType'>/**Returns the type for this restriction.
+</span>@return {Number} the type for this restriction
+*/
+getType : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getSelectedString'>/**Returns the currently selected string value.
+</span>@return {String} the currently selected value, which can be null for types that aren't for holding
+ single string values.
+*/
+getSelectedString : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getAllSelectedStrings'>/**Returns the list of currently selected values.
+</span>@return {String} the list of current selections, if type is {@link #TYPE_MULTI_SELECT},
+  null otherwise.
+*/
+getAllSelectedStrings : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getSelectedState'>/**Returns the current selected state for an entry of type {@link #TYPE_BOOLEAN}.
+</span>@return {Boolean} the current selected state of the entry.
+*/
+getSelectedState : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getIntValue'>/**Returns the value of the entry as an integer when the type is {@link #TYPE_INTEGER}.
+</span>@return {Number} the integer value of the entry.
+*/
+getIntValue : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setIntValue'>/**Sets the integer value of the entry when the type is {@link #TYPE_INTEGER}.
+</span>@param {Number} value the integer value to set.
+*/
+setIntValue : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setSelectedString'>/**Sets the string value to use as the selected value for this restriction. This value will
+</span> be persisted by the system for later use by the application.
+@param {String} selectedString the string value to select.
+*/
+setSelectedString : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setSelectedState'>/**Sets the current selected state for an entry of type {@link #TYPE_BOOLEAN}. This value will
+</span> be persisted by the system for later use by the application.
+@param {Boolean} state the current selected state
+*/
+setSelectedState : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setAllSelectedStrings'>/**Sets the current list of selected values for an entry of type {@link #TYPE_MULTI_SELECT}.
+</span> These values will be persisted by the system for later use by the application.
+@param {Object {java.lang.String[]}} allSelectedStrings the current list of selected values.
+*/
+setAllSelectedStrings : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setChoiceValues'>/**Sets a list of string values that can be selected by the user. If no user-visible entries
+</span> are set by a call to {@link #setChoiceEntries(String[])}, these values will be the ones
+ shown to the user. Values will be chosen from this list as the user's selection and the
+ selected values can be retrieved by a call to {@link #getAllSelectedStrings}(), or
+ {@link #getSelectedString}(), depending on whether it is a multi-select type or choice type.
+ This method is not relevant for types other than
+ {@link #TYPE_CHOICE}, and {@link #TYPE_MULTI_SELECT}.
+@param {Object {java.lang.String[]}} choiceValues an array of Strings which will be the selected values for the user's
+ selections.
+@see #getChoiceValues()
+@see #getAllSelectedStrings()
+*/
+setChoiceValues : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setChoiceValues'>/**Sets a list of string values that can be selected by the user, similar to
+</span> {@link #setChoiceValues(String[])}.
+@param {Object {Context}} context the application context for retrieving the resources.
+@param {Number} stringArrayResId the resource id for a string array containing the possible values.
+@see #setChoiceValues(String[])
+*/
+setChoiceValues : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getRestrictions'>/**Returns array of possible restriction entries that this entry may contain.
+</span>*/
+getRestrictions : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setRestrictions'>/**Sets an array of possible restriction entries, that this entry may contain.
+</span> &lt;p&gt;This method is only relevant for types {@link #TYPE_BUNDLE} and
+ {@link #TYPE_BUNDLE_ARRAY}
+*/
+setRestrictions : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getChoiceValues'>/**Returns the list of possible string values set earlier.
+</span>@return {String} the list of possible values.
+*/
+getChoiceValues : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setChoiceEntries'>/**Sets a list of strings that will be presented as choices to the user. When the
+</span> user selects one or more of these choices, the corresponding value from the possible values
+ are stored as the selected strings. The size of this array must match the size of the array
+ set in {@link #setChoiceValues(String[])}. This method is not relevant for types other
+ than {@link #TYPE_CHOICE}, and {@link #TYPE_MULTI_SELECT}.
+@param {Object {java.lang.String[]}} choiceEntries the list of user-visible choices.
+@see #setChoiceValues(String[])
+*/
+setChoiceEntries : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setChoiceEntries'>/**Sets a list of strings that will be presented as choices to the user. This is similar to
+</span> {@link #setChoiceEntries(String[])}.
+@param {Object {Context}} context the application context, used for retrieving the resources.
+@param {Number} stringArrayResId the resource id of a string array containing the possible entries.
+*/
+setChoiceEntries : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getChoiceEntries'>/**Returns the list of strings, set earlier, that will be presented as choices to the user.
+</span>@return {String} the list of choices presented to the user.
+*/
+getChoiceEntries : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getDescription'>/**Returns the provided user-visible description of the entry, if any.
+</span>@return {String} the user-visible description, null if none was set earlier.
+*/
+getDescription : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setDescription'>/**Sets the user-visible description of the entry, as a possible sub-text for the title.
+</span> You can use this to describe the entry in more detail or to display the current state of
+ the restriction.
+@param {String} description the user-visible description string.
+*/
+setDescription : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getKey'>/**This is the unique key for the restriction entry.
+</span>@return {String} the key for the restriction.
+*/
+getKey : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-getTitle'>/**Returns the user-visible title for the entry, if any.
+</span>@return {String} the user-visible title for the entry, null if none was set earlier.
+*/
+getTitle : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-setTitle'>/**Sets the user-visible title for the entry.
+</span>@param {String} title the user-visible title for the entry.
+*/
+setTitle : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-RestrictionEntry-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-usage-UsageStatsManager'>/**@class android.app.usage.UsageStatsManager
+</span>@extends java.lang.Object
+
+ Provides access to device usage history and statistics. Usage data is aggregated into
+ time intervals: days, weeks, months, and years.
+ &lt;p /&gt;
+ When requesting usage data since a particular time, the request might look something like this:
+ &lt;pre&gt;
+ PAST                   REQUEST_TIME                    TODAY                   FUTURE
+ ————————————————————————————||———————————————————————————¦-----------------------|
+                        YEAR ||                           ¦                       |
+ ————————————————————————————||———————————————————————————¦-----------------------|
+  MONTH            |         ||                MONTH      ¦                       |
+ ——————————————————|—————————||———————————————————————————¦-----------------------|
+   |      WEEK     |     WEEK||    |     WEEK     |     WE¦EK     |      WEEK     |
+ ————————————————————————————||———————————————————|———————¦-----------------------|
+                             ||           |DAY|DAY|DAY|DAY¦DAY|DAY|DAY|DAY|DAY|DAY|
+ ————————————————————————————||———————————————————————————¦-----------------------|
+ &lt;/pre&gt;
+ A request for data in the middle of a time interval will include that interval.
+ &lt;p/&gt;
+ &lt;b&gt;NOTE:&lt;/b&gt; Most methods on this API require the permission
+ android.permission.PACKAGE_USAGE_STATS. However, declaring the permission implies intention to
+ use the API and the user of the device still needs to grant permission through the Settings
+ application.
+ See {@link android.provider.Settings#ACTION_USAGE_ACCESS_SETTINGS}.
+ Methods which only return the information for the calling package do not require this permission.
+ E.g. {@link #getAppStandbyBucket}() and {@link #queryEventsForSelf(long, long)}.
+*/
+var UsageStatsManager = {
+
+<span id='android-app-usage-UsageStatsManager-property-INTERVAL_DAILY'>/** An interval type that spans a day. See {@link #queryUsageStats(int, long, long)}.
+</span>*/
+INTERVAL_DAILY : &quot;0&quot;,
+<span id='android-app-usage-UsageStatsManager-property-INTERVAL_WEEKLY'>/** An interval type that spans a week. See {@link #queryUsageStats(int, long, long)}.
+</span>*/
+INTERVAL_WEEKLY : &quot;1&quot;,
+<span id='android-app-usage-UsageStatsManager-property-INTERVAL_MONTHLY'>/** An interval type that spans a month. See {@link #queryUsageStats(int, long, long)}.
+</span>*/
+INTERVAL_MONTHLY : &quot;2&quot;,
+<span id='android-app-usage-UsageStatsManager-property-INTERVAL_YEARLY'>/** An interval type that spans a year. See {@link #queryUsageStats(int, long, long)}.
+</span>*/
+INTERVAL_YEARLY : &quot;3&quot;,
+<span id='android-app-usage-UsageStatsManager-property-INTERVAL_BEST'>/** An interval type that will use the best fit interval for the given time range.
+</span> See {@link #queryUsageStats(int, long, long)}.
+*/
+INTERVAL_BEST : &quot;4&quot;,
+<span id='android-app-usage-UsageStatsManager-property-INTERVAL_COUNT'>/** The number of available intervals. Does not include {@link #INTERVAL_BEST}, since it
+</span> is a pseudo interval (it actually selects a real interval).
+ {@hide}
+*/
+INTERVAL_COUNT : &quot;4&quot;,
+<span id='android-app-usage-UsageStatsManager-property-STANDBY_BUCKET_EXEMPTED'>/** The app is whitelisted for some reason and the bucket cannot be changed.
+</span> {@hide}
+*/
+STANDBY_BUCKET_EXEMPTED : &quot;5&quot;,
+<span id='android-app-usage-UsageStatsManager-property-STANDBY_BUCKET_ACTIVE'>/** The app was used very recently, currently in use or likely to be used very soon. Standby
+</span> bucket values that are &amp;le; {@link #STANDBY_BUCKET_ACTIVE} will not be throttled by the
+ system while they are in this bucket. Buckets &amp;gt; {@link #STANDBY_BUCKET_ACTIVE} will most
+ likely be restricted in some way. For instance, jobs and alarms may be deferred.
+ @see #getAppStandbyBucket()
+*/
+STANDBY_BUCKET_ACTIVE : &quot;10&quot;,
+<span id='android-app-usage-UsageStatsManager-property-STANDBY_BUCKET_WORKING_SET'>/** The app was used recently and/or likely to be used in the next few hours. Restrictions will
+</span> apply to these apps, such as deferral of jobs and alarms.
+ @see #getAppStandbyBucket()
+*/
+STANDBY_BUCKET_WORKING_SET : &quot;20&quot;,
+<span id='android-app-usage-UsageStatsManager-property-STANDBY_BUCKET_FREQUENT'>/** The app was used in the last few days and/or likely to be used in the next few days.
+</span> Restrictions will apply to these apps, such as deferral of jobs and alarms. The delays may be
+ greater than for apps in higher buckets (lower bucket value). Bucket values &amp;gt;
+ {@link #STANDBY_BUCKET_FREQUENT} may additionally have network access limited.
+ @see #getAppStandbyBucket()
+*/
+STANDBY_BUCKET_FREQUENT : &quot;30&quot;,
+<span id='android-app-usage-UsageStatsManager-property-STANDBY_BUCKET_RARE'>/** The app has not be used for several days and/or is unlikely to be used for several days.
+</span> Apps in this bucket will have the most restrictions, including network restrictions, except
+ during certain short periods (at a minimum, once a day) when they are allowed to execute
+ jobs, access the network, etc.
+ @see #getAppStandbyBucket()
+*/
+STANDBY_BUCKET_RARE : &quot;40&quot;,
+<span id='android-app-usage-UsageStatsManager-property-STANDBY_BUCKET_NEVER'>/** The app has never been used.
+</span> {@hide}
+*/
+STANDBY_BUCKET_NEVER : &quot;50&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_MAIN_MASK'>/**@hide */
+</span>REASON_MAIN_MASK : &quot;65280&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_MAIN_DEFAULT'>/**@hide */
+</span>REASON_MAIN_DEFAULT : &quot;256&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_MAIN_TIMEOUT'>/**@hide */
+</span>REASON_MAIN_TIMEOUT : &quot;512&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_MAIN_USAGE'>/**@hide */
+</span>REASON_MAIN_USAGE : &quot;768&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_MAIN_FORCED'>/**@hide */
+</span>REASON_MAIN_FORCED : &quot;1024&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_MAIN_PREDICTED'>/**@hide */
+</span>REASON_MAIN_PREDICTED : &quot;1280&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_MASK'>/**@hide */
+</span>REASON_SUB_MASK : &quot;255&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_SYSTEM_INTERACTION'>/**@hide */
+</span>REASON_SUB_USAGE_SYSTEM_INTERACTION : &quot;1&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_NOTIFICATION_SEEN'>/**@hide */
+</span>REASON_SUB_USAGE_NOTIFICATION_SEEN : &quot;2&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_USER_INTERACTION'>/**@hide */
+</span>REASON_SUB_USAGE_USER_INTERACTION : &quot;3&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_MOVE_TO_FOREGROUND'>/**@hide */
+</span>REASON_SUB_USAGE_MOVE_TO_FOREGROUND : &quot;4&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_MOVE_TO_BACKGROUND'>/**@hide */
+</span>REASON_SUB_USAGE_MOVE_TO_BACKGROUND : &quot;5&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_SYSTEM_UPDATE'>/**@hide */
+</span>REASON_SUB_USAGE_SYSTEM_UPDATE : &quot;6&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_ACTIVE_TIMEOUT'>/**@hide */
+</span>REASON_SUB_USAGE_ACTIVE_TIMEOUT : &quot;7&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_SYNC_ADAPTER'>/**@hide */
+</span>REASON_SUB_USAGE_SYNC_ADAPTER : &quot;8&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_SLICE_PINNED'>/**@hide */
+</span>REASON_SUB_USAGE_SLICE_PINNED : &quot;9&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_SLICE_PINNED_PRIV'>/**@hide */
+</span>REASON_SUB_USAGE_SLICE_PINNED_PRIV : &quot;10&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_EXEMPTED_SYNC_SCHEDULED_NON_DOZE'>/**@hide */
+</span>REASON_SUB_USAGE_EXEMPTED_SYNC_SCHEDULED_NON_DOZE : &quot;11&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_EXEMPTED_SYNC_SCHEDULED_DOZE'>/**@hide */
+</span>REASON_SUB_USAGE_EXEMPTED_SYNC_SCHEDULED_DOZE : &quot;12&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_EXEMPTED_SYNC_START'>/**@hide */
+</span>REASON_SUB_USAGE_EXEMPTED_SYNC_START : &quot;13&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_UNEXEMPTED_SYNC_SCHEDULED'>/**@hide */
+</span>REASON_SUB_USAGE_UNEXEMPTED_SYNC_SCHEDULED : &quot;14&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_USAGE_FOREGROUND_SERVICE_START'>/**@hide */
+</span>REASON_SUB_USAGE_FOREGROUND_SERVICE_START : &quot;15&quot;,
+<span id='android-app-usage-UsageStatsManager-property-REASON_SUB_PREDICTED_RESTORED'>/**@hide */
+</span>REASON_SUB_PREDICTED_RESTORED : &quot;1&quot;,
+<span id='android-app-usage-UsageStatsManager-property-EXTRA_OBSERVER_ID'>/** Observer id of the registered observer for the group of packages that reached the usage
+</span> time limit. Included as an extra in the PendingIntent that was registered.
+ @hide
+*/
+EXTRA_OBSERVER_ID : &quot;android.app.usage.extra.OBSERVER_ID&quot;,
+<span id='android-app-usage-UsageStatsManager-property-EXTRA_TIME_LIMIT'>/** Original time limit in milliseconds specified by the registered observer for the group of
+</span> packages that reached the usage time limit. Included as an extra in the PendingIntent that
+ was registered.
+ @hide
+*/
+EXTRA_TIME_LIMIT : &quot;android.app.usage.extra.TIME_LIMIT&quot;,
+<span id='android-app-usage-UsageStatsManager-property-EXTRA_TIME_USED'>/** Actual usage time in milliseconds for the group of packages that reached the specified time
+</span> limit. Included as an extra in the PendingIntent that was registered.
+ @hide
+*/
+EXTRA_TIME_USED : &quot;android.app.usage.extra.TIME_USED&quot;,
+<span id='android-app-usage-UsageStatsManager-property-USAGE_SOURCE_TASK_ROOT_ACTIVITY'>/** App usage observers will consider the task root package the source of usage.
+</span> @hide
+*/
+USAGE_SOURCE_TASK_ROOT_ACTIVITY : &quot;1&quot;,
+<span id='android-app-usage-UsageStatsManager-property-USAGE_SOURCE_CURRENT_ACTIVITY'>/** App usage observers will consider the visible activity's package the source of usage.
+</span> @hide
+*/
+USAGE_SOURCE_CURRENT_ACTIVITY : &quot;2&quot;,
+<span id='android-app-usage-UsageStatsManager-method-queryUsageStats'>/**Gets application usage stats for the given time range, aggregated by the specified interval.
+</span>
+ &lt;p&gt;
+ The returned list will contain one or more {@link android.app.usage.UsageStats} objects for each package, with
+ usage data that covers at least the given time range.
+ Note: The begin and end times of the time range may be expanded to the nearest whole interval
+ period.
+ &lt;/p&gt;
+
+ &lt;p&gt; The caller must have {@link android.Manifest.permission#PACKAGE_USAGE_STATS} &lt;/p&gt;
+@param {Number} intervalType The time interval by which the stats are aggregated.
+@param {Number} beginTime The inclusive beginning of the range of stats to include in the results.
+                  Defined in terms of &quot;Unix time&quot;, see
+                  {@link java.lang.System#currentTimeMillis}.
+@param {Number} endTime The exclusive end of the range of stats to include in the results. Defined
+                in terms of &quot;Unix time&quot;, see {@link java.lang.System#currentTimeMillis}.
+@return {Object {java.util.List}} A list of {@link UsageStats}
+@see #INTERVAL_DAILY
+@see #INTERVAL_WEEKLY
+@see #INTERVAL_MONTHLY
+@see #INTERVAL_YEARLY
+@see #INTERVAL_BEST
+*/
+queryUsageStats : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-queryConfigurations'>/**Gets the hardware configurations the device was in for the given time range, aggregated by
+</span> the specified interval. The results are ordered as in
+ {@link #queryUsageStats(int, long, long)}.
+ &lt;p&gt; The caller must have {@link android.Manifest.permission#PACKAGE_USAGE_STATS} &lt;/p&gt;
+@param {Number} intervalType The time interval by which the stats are aggregated.
+@param {Number} beginTime The inclusive beginning of the range of stats to include in the results.
+                  Defined in terms of &quot;Unix time&quot;, see
+                  {@link java.lang.System#currentTimeMillis}.
+@param {Number} endTime The exclusive end of the range of stats to include in the results. Defined
+                in terms of &quot;Unix time&quot;, see {@link java.lang.System#currentTimeMillis}.
+@return {Object {java.util.List}} A list of {@link ConfigurationStats}
+*/
+queryConfigurations : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-queryEventStats'>/**Gets aggregated event stats for the given time range, aggregated by the specified interval.
+</span> &lt;p&gt;The returned list will contain a {@link android.app.usage.EventStats} object for each event type that
+ is being aggregated and has data for an interval that is a subset of the time range given.
+
+ &lt;p&gt;The current event types that will be aggregated here are:&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;{@link android.app.usage.UsageEvents.Event#SCREEN_INTERACTIVE}&lt;/li&gt;
+     &lt;li&gt;{@link android.app.usage.UsageEvents.Event#SCREEN_NON_INTERACTIVE}&lt;/li&gt;
+     &lt;li&gt;{@link android.app.usage.UsageEvents.Event#KEYGUARD_SHOWN}&lt;/li&gt;
+     &lt;li&gt;{@link android.app.usage.UsageEvents.Event#KEYGUARD_HIDDEN}&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt; The caller must have {@link android.Manifest.permission#PACKAGE_USAGE_STATS} &lt;/p&gt;
+@param {Number} intervalType The time interval by which the stats are aggregated.
+@param {Number} beginTime The inclusive beginning of the range of stats to include in the results.
+                  Defined in terms of &quot;Unix time&quot;, see
+                  {@link java.lang.System#currentTimeMillis}.
+@param {Number} endTime The exclusive end of the range of stats to include in the results. Defined
+                in terms of &quot;Unix time&quot;, see {@link java.lang.System#currentTimeMillis}.
+@return {Object {java.util.List}} A list of {@link EventStats}
+@see #INTERVAL_DAILY
+@see #INTERVAL_WEEKLY
+@see #INTERVAL_MONTHLY
+@see #INTERVAL_YEARLY
+@see #INTERVAL_BEST
+*/
+queryEventStats : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-queryEvents'>/**Query for events in the given time range. Events are only kept by the system for a few
+</span> days.
+ &lt;p&gt; The caller must have {@link android.Manifest.permission#PACKAGE_USAGE_STATS} &lt;/p&gt;
+@param {Number} beginTime The inclusive beginning of the range of events to include in the results.
+                 Defined in terms of &quot;Unix time&quot;, see
+                 {@link java.lang.System#currentTimeMillis}.
+@param {Number} endTime The exclusive end of the range of events to include in the results. Defined
+               in terms of &quot;Unix time&quot;, see {@link java.lang.System#currentTimeMillis}.
+@return {Object {android.app.usage.UsageEvents}} A {@link UsageEvents}.
+*/
+queryEvents : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-queryEventsForSelf'>/**Like {@link #queryEvents(long, long)}, but only returns events for the calling package.
+</span>@param {Number} beginTime The inclusive beginning of the range of events to include in the results.
+                 Defined in terms of &quot;Unix time&quot;, see
+                 {@link java.lang.System#currentTimeMillis}.
+@param {Number} endTime The exclusive end of the range of events to include in the results. Defined
+               in terms of &quot;Unix time&quot;, see {@link java.lang.System#currentTimeMillis}.
+@return {Object {android.app.usage.UsageEvents}} A {@link UsageEvents} object.
+@see #queryEvents(long, long)
+*/
+queryEventsForSelf : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-queryAndAggregateUsageStats'>/**A convenience method that queries for all stats in the given range (using the best interval
+</span> for that range), merges the resulting data, and keys it by package name.
+ See {@link #queryUsageStats(int, long, long)}.
+ &lt;p&gt; The caller must have {@link android.Manifest.permission#PACKAGE_USAGE_STATS} &lt;/p&gt;
+@param {Number} beginTime The inclusive beginning of the range of stats to include in the results.
+                  Defined in terms of &quot;Unix time&quot;, see
+                  {@link java.lang.System#currentTimeMillis}.
+@param {Number} endTime The exclusive end of the range of stats to include in the results. Defined
+                in terms of &quot;Unix time&quot;, see {@link java.lang.System#currentTimeMillis}.
+@return {Object {java.util.Map}} A {@link java.util.Map} keyed by package name
+*/
+queryAndAggregateUsageStats : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-isAppInactive'>/**Returns whether the specified app is currently considered inactive. This will be true if the
+</span> app hasn't been used directly or indirectly for a period of time defined by the system. This
+ could be of the order of several hours or days.
+@param {String} packageName The package name of the app to query
+@return {Boolean} whether the app is currently considered inactive
+*/
+isAppInactive : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-setAppInactive'>/**{@hide}
+</span>*/
+setAppInactive : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-getAppStandbyBucket'>/**Returns the current standby bucket of the calling app. The system determines the standby
+</span> state of the app based on app usage patterns. Standby buckets determine how much an app will
+ be restricted from running background tasks such as jobs and alarms.
+ &lt;p&gt;Restrictions increase progressively from {@link #STANDBY_BUCKET_ACTIVE} to
+ {@link #STANDBY_BUCKET_RARE}, with {@link #STANDBY_BUCKET_ACTIVE} being the least
+ restrictive. The battery level of the device might also affect the restrictions.
+ &lt;p&gt;Apps in buckets &amp;le; {@link #STANDBY_BUCKET_ACTIVE} have no standby restrictions imposed.
+ Apps in buckets &amp;gt; {@link #STANDBY_BUCKET_FREQUENT} may have network access restricted when
+ running in the background.
+ &lt;p&gt;The standby state of an app can change at any time either due to a user interaction or a
+ system interaction or some algorithm determining that the app can be restricted for a period
+ of time before the user has a need for it.
+ &lt;p&gt;You can also query the recent history of standby bucket changes by calling
+ {@link #queryEventsForSelf(long, long)} and searching for
+ {@link android.app.usage.UsageEvents.Event#STANDBY_BUCKET_CHANGED}.
+@return {Number} the current standby bucket of the calling app. One of STANDBY_BUCKET_* constants.
+*/
+getAppStandbyBucket : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-getAppStandbyBucket'>/**{@hide}
+</span> Returns the current standby bucket of the specified app. The caller must hold the permission
+ android.permission.PACKAGE_USAGE_STATS.
+@param {String} packageName the package for which to fetch the current standby bucket.
+*/
+getAppStandbyBucket : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-setAppStandbyBucket'>/**{@hide}
+</span> Changes an app's standby bucket to the provided value. The caller can only set the standby
+ bucket for a different app than itself.
+@param {String} packageName the package name of the app to set the bucket for. A SecurityException
+                    will be thrown if the package name is that of the caller.
+@param {Number} bucket the standby bucket to set it to, which should be one of STANDBY_BUCKET_*.
+               Setting a standby bucket outside of the range of STANDBY_BUCKET_ACTIVE to
+               STANDBY_BUCKET_NEVER will result in a SecurityException.
+*/
+setAppStandbyBucket : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-getAppStandbyBuckets'>/**{@hide}
+</span> Returns the current standby bucket of every app that has a bucket assigned to it.
+ The caller must hold the permission android.permission.PACKAGE_USAGE_STATS. The key of the
+ returned Map is the package name and the value is the bucket assigned to the package.
+@see #getAppStandbyBucket()
+*/
+getAppStandbyBuckets : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-setAppStandbyBuckets'>/**{@hide}
+</span> Changes the app standby bucket for multiple apps at once. The Map is keyed by the package
+ name and the value is one of STANDBY_BUCKET_*.
+@param {Object {java.util.Map}} appBuckets a map of package name to bucket value.
+*/
+setAppStandbyBuckets : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-registerAppUsageObserver'>/**
+</span>@param {Number} observerId A unique id associated with the group of apps to be monitored. There can
+                  be multiple groups with common packages and different time limits.
+@param {Object {java.lang.String[]}} observedEntities The list of packages and token to observe for usage time. Cannot be
+                         null and must include at least one package or token.
+@param {Number} timeLimit The total time the set of apps can be in the foreground before the
+                  callbackIntent is delivered. Must be at least one minute.
+@param {Object {TimeUnit}} timeUnit The unit for time specified in {@code timeLimit}. Cannot be null.
+@param {Object {PendingIntent}} callbackIntent The PendingIntent that will be dispatched when the usage limit is
+                       exceeded by the group of apps. The delivered Intent will also contain
+                       the extras {@link #EXTRA_OBSERVER_ID}, {@link #EXTRA_TIME_LIMIT} and
+                       {@link #EXTRA_TIME_USED}. Cannot be null.
+@param callbackIntent The PendingIntent that will be dispatched when the usage limit is
+                       exceeded by the group of apps. The delivered Intent will also contain
+                       the extras {@link #EXTRA_OBSERVER_ID}, {@link #EXTRA_TIME_LIMIT} and
+                       {@link #EXTRA_TIME_USED}. Cannot be null.
+@throws SecurityException if the caller doesn't have the OBSERVE_APP_USAGE permission and
+                           is not the profile owner of this user.
+*/
+registerAppUsageObserver : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-unregisterAppUsageObserver'>/**
+</span>@param {Number} observerId The id of the observer that was previously registered.
+@param observerId The id of the observer that was previously registered.
+@throws SecurityException if the caller doesn't have the OBSERVE_APP_USAGE permission and is
+                           not the profile owner of this user.
+*/
+unregisterAppUsageObserver : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-registerUsageSessionObserver'>/**Register a usage session observer that receives a callback on the provided {@code
+</span> limitReachedCallbackIntent} when the sum of usages of apps and tokens in the {@code
+ observed} array exceeds the {@code timeLimit} specified within a usage session. The
+ structure of a token is a String with the reporting packages' name and a token the
+ reporting app will use, separated by the forward slash character.
+ Example: com.reporting.package/5OM3*0P4QU3-7OK3N
+ After the {@code timeLimit} has been reached, the usage session observer will receive a
+ callback on the provided {@code sessionEndCallbackIntent} when the usage session ends.
+ Registering another session observer against a {@code sessionObserverId} that has already
+ been registered will override the previous session observer.
+@param {Number} sessionObserverId A unique id associated with the group of apps to be
+                          monitored. There can be multiple groups with common
+                          packages and different time limits.
+@param {Object {java.lang.String[]}} observedEntities The list of packages and token to observe for usage time. Cannot be
+                         null and must include at least one package or token.
+@param {Object {Duration}} timeLimit The total time the set of apps can be used continuously before the {@code
+                  limitReachedCallbackIntent} is delivered. Must be at least one minute.
+@param {Object {Duration}} sessionThresholdTime The time that can take place between usage sessions before the
+                             next session is considered a new session. Must be non-negative.
+@param {Object {PendingIntent}} limitReachedCallbackIntent The {@link PendingIntent} that will be dispatched when the
+                                   usage limit is exceeded by the group of apps. The
+                                   delivered Intent will also contain the extras {@link
+                                   #EXTRA_OBSERVER_ID}, {@link #EXTRA_TIME_LIMIT} and {@link
+                                   #EXTRA_TIME_USED}. Cannot be null.
+@param {Object {PendingIntent}} sessionEndCallbackIntent The {@link PendingIntent}  that will be dispatched when the
+                                 session has ended after the usage limit has been exceeded.
+                                 The session is considered at its end after the {@code
+                                 observed} usage has stopped and an additional {@code
+                                 sessionThresholdTime} has passed. The delivered Intent will
+                                 also contain the extras {@link #EXTRA_OBSERVER_ID} and {@link
+                                 #EXTRA_TIME_USED}. Can be null.
+@throws SecurityException if the caller doesn't have the OBSERVE_APP_USAGE permission and
+                           is not the profile owner of this user.
+@hide 
+*/
+registerUsageSessionObserver : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-unregisterUsageSessionObserver'>/**Unregister the usage session observer specified by the {@code sessionObserverId}. This will
+</span> only apply to any app session observer registered by this application. Unregistering an
+ observer that was already unregistered or never registered will have no effect.
+@param {Number} sessionObserverId The id of the observer that was previously registered.
+@throws SecurityException if the caller doesn't have the OBSERVE_APP_USAGE permission and
+                           is not the profile owner of this user.
+@hide 
+*/
+unregisterUsageSessionObserver : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-registerAppUsageLimitObserver'>/**Register a usage limit observer that receives a callback on the provided intent when the
+</span> sum of usages of apps and tokens in the provided {@code observedEntities} array exceeds the
+ {@code timeLimit} specified. The structure of a token is a {@link String} with the reporting
+ package's name and a token that the calling app will use, separated by the forward slash
+ character. Example: com.reporting.package/5OM3*0P4QU3-7OK3N
+ &lt;p&gt;
+ Registering an {@code observerId} that was already registered will override the previous one.
+ No more than 1000 unique {@code observerId} may be registered by a single uid
+ at any one time.
+ A limit is not cleared when the usage time is exceeded. It needs to be unregistered via
+ {@link #unregisterAppUsageLimitObserver}.
+ &lt;p&gt;
+ Note: usage limits are not persisted in the system and are cleared on reboots. Callers
+ must reset any limits that they need on reboots.
+ &lt;p&gt;
+ This method is similar to {@link #registerAppUsageObserver}, but the usage limit set here
+ will be visible to the launcher so that it can report the limit to the user and how much
+ of it is remaining.
+@param {Number} observerId A unique id associated with the group of apps to be monitored. There can
+                   be multiple groups with common packages and different time limits.
+@param {Object {java.lang.String[]}} observedEntities The list of packages and token to observe for usage time. Cannot be
+                         null and must include at least one package or token.
+@param {Object {Duration}} timeLimit The total time the set of apps can be in the foreground before the
+                  {@code callbackIntent} is delivered. Must be at least one minute.
+@param {Object {Duration}} timeUsed The time that has already been used by the set of apps in
+                 {@code observedEntities}. Note: a time used equal to or greater than
+                 {@code timeLimit} can be set to indicate that the user has already exhausted
+                 the limit for a group, in which case, the given {@code callbackIntent} will
+                 be ignored.
+@param {Object {PendingIntent}} callbackIntent The PendingIntent that will be dispatched when the usage limit is
+                       exceeded by the group of apps. The delivered Intent will also contain
+                       the extras {@link #EXTRA_OBSERVER_ID}, {@link #EXTRA_TIME_LIMIT} and
+                       {@link #EXTRA_TIME_USED}. Cannot be {@code null} unless the observer is
+                       being registered with a {@code timeUsed} equal to or greater than
+                       {@code timeLimit}.
+@param callbackIntent The PendingIntent that will be dispatched when the usage limit is
+                       exceeded by the group of apps. The delivered Intent will also contain
+                       the extras {@link #EXTRA_OBSERVER_ID}, {@link #EXTRA_TIME_LIMIT} and
+                       {@link #EXTRA_TIME_USED}. Cannot be {@code null} unless the observer is
+                       being registered with a {@code timeUsed} equal to or greater than
+                       {@code timeLimit}.
+@throws SecurityException if the caller doesn't have both SUSPEND_APPS and OBSERVE_APP_USAGE
+                           permissions.
+@hide 
+*/
+registerAppUsageLimitObserver : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-unregisterAppUsageLimitObserver'>/**Unregister the app usage limit observer specified by the {@code observerId}.
+</span> This will only apply to any observer registered by this application. Unregistering
+ an observer that was already unregistered or never registered will have no effect.
+@param {Number} observerId The id of the observer that was previously registered.
+@throws SecurityException if the caller doesn't have both SUSPEND_APPS and OBSERVE_APP_USAGE
+                           permissions.
+@hide 
+*/
+unregisterAppUsageLimitObserver : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-reportUsageStart'>/**Report usage associated with a particular {@code token} has started. Tokens are app defined
+</span> strings used to represent usage of in-app features. Apps with the {@link android.Manifest.permission#OBSERVE_APP_USAGE} permission can register time limit observers
+ to monitor the usage of a token. In app usage can only associated with an {@code activity}
+ and usage will be considered stopped if the activity stops or crashes.
+@param {Object {Activity}} activity The activity {@code token} is associated with.
+@param {String} token The token to report usage against.
+@see #registerAppUsageLimitObserver
+@param activity The activity {@code token} is associated with.
+@param token The token to report usage against.
+@hide 
+*/
+reportUsageStart : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-reportUsageStart'>/**Report usage associated with a particular {@code token} had started some amount of time in
+</span> the past. Tokens are app defined strings used to represent usage of in-app features. Apps
+ with the {@link android.Manifest.permission#OBSERVE_APP_USAGE} permission can register time
+ limit observers to monitor the usage of a token. In app usage can only associated with an
+ {@code activity} and usage will be considered stopped if the activity stops or crashes.
+@param {Object {Activity}} activity The activity {@code token} is associated with.
+@param {String} token The token to report usage against.
+@param {Number} timeAgoMs How long ago the start of usage took place
+@param activity The activity {@code token} is associated with.
+@param token The token to report usage against.
+@param timeAgoMs How long ago the start of usage took place
+@hide 
+*/
+reportUsageStart : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-reportUsageStop'>/**Report the usage associated with a particular {@code token} has stopped.
+</span>@param {Object {Activity}} activity The activity {@code token} is associated with.
+@param {String} token The token to report usage against.
+@hide 
+*/
+reportUsageStop : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-getUsageSource'>/**Get what App Usage Observers will consider the source of usage for an activity. Usage Source
+</span> is decided at boot and will not change until next boot.
+@see #USAGE_SOURCE_TASK_ROOT_ACTIVITY
+@see #USAGE_SOURCE_CURRENT_ACTIVITY
+@throws SecurityException if the caller doesn't have the OBSERVE_APP_USAGE permission and
+                           is not the profile owner of this user.
+@hide 
+*/
+getUsageSource : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-forceUsageSourceSettingRead'>/**Force the Usage Source be reread from global settings.
+</span>@hide 
+*/
+forceUsageSourceSettingRead : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-reasonToString'>/**
+</span>@hide 
+*/
+reasonToString : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-usageSourceToString'>/**
+</span>@hide 
+*/
+usageSourceToString : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-whitelistAppTemporarily'>/**{@hide}
+</span> Temporarily whitelist the specified app for a short duration. This is to allow an app
+ receiving a high priority message to be able to access the network and acquire wakelocks
+ even if the device is in power-save mode or the app is currently considered inactive.
+@param {String} packageName The package name of the app to whitelist.
+@param {Number} duration Duration to whitelist the app for, in milliseconds. It is recommended that
+ this be limited to 10s of seconds. Requested duration will be clamped to a few minutes.
+@param {Object {UserHandle}} user The user for whom the package should be whitelisted. Passing in a user that is
+ not the same as the caller's process will require the INTERACT_ACROSS_USERS permission.
+@see #isAppInactive(String)
+*/
+whitelistAppTemporarily : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-onCarrierPrivilegedAppsChanged'>/**Inform usage stats that the carrier privileged apps access rules have changed.
+</span>@hide 
+*/
+onCarrierPrivilegedAppsChanged : function(  ) {},
+
+<span id='android-app-usage-UsageStatsManager-method-reportChooserSelection'>/**Reports a Chooser action to the UsageStatsManager.
+</span>@param {String} packageName The package name of the app that is selected.
+@param {Number} userId The user id of who makes the selection.
+@param {String} contentType The type of the content, e.g., Image, Video, App.
+@param {Object {java.lang.String[]}} annotations The annotations of the content, e.g., Game, Selfie.
+@param {String} action The action type of Intent that invokes ChooserActivity.
+ {@link UsageEvents}
+@hide 
+*/
+reportChooserSelection : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

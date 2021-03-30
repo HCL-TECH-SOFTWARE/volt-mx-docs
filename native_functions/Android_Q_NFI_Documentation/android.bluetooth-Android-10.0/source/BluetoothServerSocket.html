@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothServerSocket'>/**@class android.bluetooth.BluetoothServerSocket
+</span> implements java.io.Closeable
+
+@extends java.lang.Object
+
+ A listening Bluetooth socket.
+
+ &lt;p&gt;The interface for Bluetooth Sockets is similar to that of TCP sockets:
+ {@link java.net.Socket} and {@link java.net.ServerSocket}. On the server
+ side, use a {@link android.bluetooth.BluetoothServerSocket} to create a listening server
+ socket. When a connection is accepted by the {@link android.bluetooth.BluetoothServerSocket},
+ it will return a new {@link android.bluetooth.BluetoothSocket} to manage the connection.
+ On the client side, use a single {@link android.bluetooth.BluetoothSocket} to both initiate
+ an outgoing connection and to manage the connection.
+
+ &lt;p&gt;For Bluetooth BR/EDR, the most common type of socket is RFCOMM, which is the type supported by
+ the Android APIs. RFCOMM is a connection-oriented, streaming transport over Bluetooth BR/EDR. It
+ is also known as the Serial Port Profile (SPP). To create a listening
+ {@link android.bluetooth.BluetoothServerSocket} that's ready for incoming Bluetooth BR/EDR connections, use {@link android.bluetooth.BluetoothAdapter#listenUsingRfcommWithServiceRecord
+ android.bluetooth.BluetoothAdapter.listenUsingRfcommWithServiceRecord()}.
+
+ &lt;p&gt;For Bluetooth LE, the socket uses LE Connection-oriented Channel (CoC). LE CoC is a
+ connection-oriented, streaming transport over Bluetooth LE and has a credit-based flow control.
+ Correspondingly, use {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel
+ android.bluetooth.BluetoothAdapter.listenUsingL2capChannel()} to create a listening {@link android.bluetooth.BluetoothServerSocket}
+ that's ready for incoming Bluetooth LE CoC connections. For LE CoC, you can use {@link #getPsm}()
+ to get the protocol/service multiplexer (PSM) value that the peer needs to use to connect to your
+ socket.
+
+ &lt;p&gt; After the listening {@link android.bluetooth.BluetoothServerSocket} is created, call {@link #accept}() to
+ listen for incoming connection requests. This call will block until a connection is established,
+ at which point, it will return a {@link android.bluetooth.BluetoothSocket} to manage the connection. Once the
+ {@link android.bluetooth.BluetoothSocket} is acquired, it's a good idea to call {@link #close}() on the {@link android.bluetooth.BluetoothServerSocket} when it's no longer needed for accepting
+ connections. Closing the {@link android.bluetooth.BluetoothServerSocket} will &lt;em&gt;not&lt;/em&gt; close the returned
+ {@link android.bluetooth.BluetoothSocket}.
+
+ &lt;p&gt;{@link android.bluetooth.BluetoothServerSocket} is thread
+ safe. In particular, {@link #close} will always immediately abort ongoing
+ operations and close the server socket.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+ Requires the {@link android.Manifest.permission#BLUETOOTH} permission.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using Bluetooth, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/connectivity/bluetooth.html&quot;&gt;Bluetooth&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ {@see BluetoothSocket}
+*/
+var BluetoothServerSocket = {
+
+<span id='android-bluetooth-BluetoothServerSocket-method-accept'>/**Block until a connection is established.
+</span> &lt;p&gt;Returns a connected {@link android.bluetooth.BluetoothSocket} on successful connection.
+ &lt;p&gt;Once this call returns, it can be called again to accept subsequent
+ incoming connections.
+ &lt;p&gt;{@link #close} can be used to abort this call from another thread.
+@return {Object {android.bluetooth.BluetoothSocket}} a connected {@link BluetoothSocket}
+@throws IOException on error, for example this call was aborted, or timeout
+*/
+accept : function(  ) {},
+
+<span id='android-bluetooth-BluetoothServerSocket-method-accept'>/**Block until a connection is established, with timeout.
+</span> &lt;p&gt;Returns a connected {@link android.bluetooth.BluetoothSocket} on successful connection.
+ &lt;p&gt;Once this call returns, it can be called again to accept subsequent
+ incoming connections.
+ &lt;p&gt;{@link #close} can be used to abort this call from another thread.
+@return {Object {android.bluetooth.BluetoothSocket}} a connected {@link BluetoothSocket}
+@throws IOException on error, for example this call was aborted, or timeout
+*/
+accept : function(  ) {},
+
+<span id='android-bluetooth-BluetoothServerSocket-method-close'>/**Immediately close this socket, and release all associated resources.
+</span> &lt;p&gt;Causes blocked calls on this socket in other threads to immediately
+ throw an IOException.
+ &lt;p&gt;Closing the {@link android.bluetooth.BluetoothServerSocket} will &lt;em&gt;not&lt;/em&gt;
+ close any {@link android.bluetooth.BluetoothSocket} received from {@link #accept}().
+*/
+close : function(  ) {},
+
+<span id='android-bluetooth-BluetoothServerSocket-method-getChannel'>/**Returns the channel on which this socket is bound.
+</span>@hide 
+*/
+getChannel : function(  ) {},
+
+<span id='android-bluetooth-BluetoothServerSocket-method-getPsm'>/**Returns the assigned dynamic protocol/service multiplexer (PSM) value for the listening L2CAP
+</span> Connection-oriented Channel (CoC) server socket. This server socket must be returned by the
+ {@link android.bluetooth.BluetoothAdapter#listenUsingL2capChannel()} or {@link android.bluetooth.BluetoothAdapter#listenUsingInsecureL2capChannel()}. The returned value is undefined if this
+ method is called on non-L2CAP server sockets.
+@return {Number} the assigned PSM or LE_PSM value depending on transport
+*/
+getPsm : function(  ) {},
+
+<span id='android-bluetooth-BluetoothServerSocket-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

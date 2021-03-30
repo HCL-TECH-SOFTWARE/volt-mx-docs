@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothSocket'>/**@class android.bluetooth.BluetoothSocket
+</span> implements java.io.Closeable
+
+@extends java.lang.Object
+
+ A connected or connecting Bluetooth socket.
+
+ &lt;p&gt;The interface for Bluetooth Sockets is similar to that of TCP sockets:
+ {@link java.net.Socket} and {@link java.net.ServerSocket}. On the server
+ side, use a {@link android.bluetooth.BluetoothServerSocket} to create a listening server
+ socket. When a connection is accepted by the {@link android.bluetooth.BluetoothServerSocket},
+ it will return a new {@link android.bluetooth.BluetoothSocket} to manage the connection.
+ On the client side, use a single {@link android.bluetooth.BluetoothSocket} to both initiate
+ an outgoing connection and to manage the connection.
+
+ &lt;p&gt;The most common type of Bluetooth socket is RFCOMM, which is the type
+ supported by the Android APIs. RFCOMM is a connection-oriented, streaming
+ transport over Bluetooth. It is also known as the Serial Port Profile (SPP).
+
+ &lt;p&gt;To create a {@link android.bluetooth.BluetoothSocket} for connecting to a known device, use
+ {@link android.bluetooth.BluetoothDevice#createRfcommSocketToServiceRecord
+ android.bluetooth.BluetoothDevice.createRfcommSocketToServiceRecord()}.
+ Then call {@link #connect}() to attempt a connection to the remote device.
+ This call will block until a connection is established or the connection
+ fails.
+
+ &lt;p&gt;To create a {@link android.bluetooth.BluetoothSocket} as a server (or &quot;host&quot;), see the
+ {@link android.bluetooth.BluetoothServerSocket} documentation.
+
+ &lt;p&gt;Once the socket is connected, whether initiated as a client or accepted
+ as a server, open the IO streams by calling {@link #getInputStream} and
+ {@link #getOutputStream} in order to retrieve {@link java.io.InputStream}
+ and {@link java.io.OutputStream} objects, respectively, which are
+ automatically connected to the socket.
+
+ &lt;p&gt;{@link android.bluetooth.BluetoothSocket} is thread
+ safe. In particular, {@link #close} will always immediately abort ongoing
+ operations and close the socket.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+ Requires the {@link android.Manifest.permission#BLUETOOTH} permission.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using Bluetooth, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/connectivity/bluetooth.html&quot;&gt;Bluetooth&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ {@see BluetoothServerSocket}
+ {@see java.io.InputStream}
+ {@see java.io.OutputStream}
+*/
+var BluetoothSocket = {
+
+<span id='android-bluetooth-BluetoothSocket-property-MAX_RFCOMM_CHANNEL'>/**@hide */
+</span>MAX_RFCOMM_CHANNEL : &quot;30&quot;,
+<span id='android-bluetooth-BluetoothSocket-property-TYPE_RFCOMM'>/**RFCOMM socket */
+</span>TYPE_RFCOMM : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothSocket-property-TYPE_SCO'>/**SCO socket */
+</span>TYPE_SCO : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothSocket-property-TYPE_L2CAP'>/**L2CAP socket */
+</span>TYPE_L2CAP : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothSocket-property-TYPE_L2CAP_BREDR'>/**L2CAP socket on BR/EDR transport
+</span> @hide
+*/
+TYPE_L2CAP_BREDR : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothSocket-property-TYPE_L2CAP_LE'>/**L2CAP socket on LE transport
+</span> @hide
+*/
+TYPE_L2CAP_LE : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothSocket-method-getRemoteDevice'>/**Get the remote device this socket is connecting, or connected, to.
+</span>@return {Object {android.bluetooth.BluetoothDevice}} remote device
+*/
+getRemoteDevice : function(  ) {},
+
+<span id='android-bluetooth-BluetoothSocket-method-getInputStream'>/**Get the input stream associated with this socket.
+</span> &lt;p&gt;The input stream will be returned even if the socket is not yet
+ connected, but operations on that stream will throw IOException until
+ the associated socket is connected.
+@return {Object {java.io.InputStream}} InputStream
+*/
+getInputStream : function(  ) {},
+
+<span id='android-bluetooth-BluetoothSocket-method-getOutputStream'>/**Get the output stream associated with this socket.
+</span> &lt;p&gt;The output stream will be returned even if the socket is not yet
+ connected, but operations on that stream will throw IOException until
+ the associated socket is connected.
+@return {Object {java.io.OutputStream}} OutputStream
+*/
+getOutputStream : function(  ) {},
+
+<span id='android-bluetooth-BluetoothSocket-method-isConnected'>/**Get the connection status of this socket, ie, whether there is an active connection with
+</span> remote device.
+@return {Boolean} true if connected false if not connected
+*/
+isConnected : function(  ) {},
+
+<span id='android-bluetooth-BluetoothSocket-method-connect'>/**Attempt to connect to a remote device.
+</span> &lt;p&gt;This method will block until a connection is made or the connection
+ fails. If this method returns without an exception then this socket
+ is now connected.
+ &lt;p&gt;Creating new connections to
+ remote Bluetooth devices should not be attempted while device discovery
+ is in progress. Device discovery is a heavyweight procedure on the
+ Bluetooth adapter and will significantly slow a device connection.
+ Use {@link android.bluetooth.BluetoothAdapter#cancelDiscovery()} to cancel an ongoing
+ discovery. Discovery is not managed by the Activity,
+ but is run as a system service, so an application should always call
+ {@link android.bluetooth.BluetoothAdapter#cancelDiscovery()} even if it
+ did not directly request a discovery, just to be sure.
+ &lt;p&gt;{@link #close} can be used to abort this call from another thread.
+@throws IOException on error, for example connection failure
+*/
+connect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothSocket-method-close'>/**
+</span>*/
+close : function(  ) {},
+
+<span id='android-bluetooth-BluetoothSocket-method-getMaxTransmitPacketSize'>/**Get the maximum supported Transmit packet size for the underlying transport.
+</span> Use this to optimize the writes done to the output socket, to avoid sending
+ half full packets.
+@return {Number} the maximum supported Transmit packet size for the underlying transport.
+*/
+getMaxTransmitPacketSize : function(  ) {},
+
+<span id='android-bluetooth-BluetoothSocket-method-getMaxReceivePacketSize'>/**Get the maximum supported Receive packet size for the underlying transport.
+</span> Use this to optimize the reads done on the input stream, as any call to read
+ will return a maximum of this amount of bytes - or for some transports a
+ multiple of this value.
+@return {Number} the maximum supported Receive packet size for the underlying transport.
+*/
+getMaxReceivePacketSize : function(  ) {},
+
+<span id='android-bluetooth-BluetoothSocket-method-getConnectionType'>/**Get the type of the underlying connection.
+</span>@return {Number} one of {@link #TYPE_RFCOMM}, {@link #TYPE_SCO} or {@link #TYPE_L2CAP}
+*/
+getConnectionType : function(  ) {},
+
+<span id='android-bluetooth-BluetoothSocket-method-setExcludeSdp'>/**Change if a SDP entry should be automatically created.
+</span> Must be called before calling .bind, for the call to have any effect.
+@param {Boolean} excludeSdp &lt;li&gt;TRUE - do not auto generate SDP record. &lt;li&gt;FALSE - default - auto
+ generate SPP SDP record.
+@hide 
+*/
+setExcludeSdp : function(  ) {},
+
+<span id='android-bluetooth-BluetoothSocket-method-requestMaximumTxDataLength'>/**Set the LE Transmit Data Length to be the maximum that the BT Controller is capable of. This
+</span> parameter is used by the BT Controller to set the maximum transmission packet size on this
+ connection. This function is currently used for testing only.
+@hide 
+*/
+requestMaximumTxDataLength : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

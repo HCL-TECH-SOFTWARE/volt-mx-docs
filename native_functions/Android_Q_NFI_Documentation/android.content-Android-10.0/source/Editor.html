@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-SharedPreferences-Editor'>/**@class android.content.SharedPreferences.Editor
+</span> Interface used for modifying values in a {@link android.content.SharedPreferences}
+ object.  All changes you make in an editor are batched, and not copied
+ back to the original {@link android.content.SharedPreferences} until you call {@link #commit}
+ or {@link #apply}
+*/
+var Editor = {
+
+<span id='android-content-SharedPreferences-Editor-method-putString'>/**Set a String value in the preferences editor, to be written back once
+</span> {@link #commit} or {@link #apply} are called.
+@param {String} key The name of the preference to modify.
+@param {String} value The new value for the preference.  Passing {@code null}
+    for this argument is equivalent to calling {@link #remove(String)} with
+    this key.
+@return {Object {android.content.SharedPreferences.Editor}} Returns a reference to the same Editor object, so you can
+ chain put calls together.
+*/
+putString : function(  ) {},
+
+<span id='android-content-SharedPreferences-Editor-method-putStringSet'>/**Set a set of String values in the preferences editor, to be written
+</span> back once {@link #commit} or {@link #apply} is called.
+@param {String} key The name of the preference to modify.
+@param {Object {java.util.Set}} values The set of new values for the preference.  Passing {@code null}
+    for this argument is equivalent to calling {@link #remove(String)} with
+    this key.
+@return {Object {android.content.SharedPreferences.Editor}} Returns a reference to the same Editor object, so you can
+ chain put calls together.
+*/
+putStringSet : function(  ) {},
+
+<span id='android-content-SharedPreferences-Editor-method-putInt'>/**Set an int value in the preferences editor, to be written back once
+</span> {@link #commit} or {@link #apply} are called.
+@param {String} key The name of the preference to modify.
+@param {Number} value The new value for the preference.
+@return {Object {android.content.SharedPreferences.Editor}} Returns a reference to the same Editor object, so you can
+ chain put calls together.
+*/
+putInt : function(  ) {},
+
+<span id='android-content-SharedPreferences-Editor-method-putLong'>/**Set a long value in the preferences editor, to be written back once
+</span> {@link #commit} or {@link #apply} are called.
+@param {String} key The name of the preference to modify.
+@param {Number} value The new value for the preference.
+@return {Object {android.content.SharedPreferences.Editor}} Returns a reference to the same Editor object, so you can
+ chain put calls together.
+*/
+putLong : function(  ) {},
+
+<span id='android-content-SharedPreferences-Editor-method-putFloat'>/**Set a float value in the preferences editor, to be written back once
+</span> {@link #commit} or {@link #apply} are called.
+@param {String} key The name of the preference to modify.
+@param {Number} value The new value for the preference.
+@return {Object {android.content.SharedPreferences.Editor}} Returns a reference to the same Editor object, so you can
+ chain put calls together.
+*/
+putFloat : function(  ) {},
+
+<span id='android-content-SharedPreferences-Editor-method-putBoolean'>/**Set a boolean value in the preferences editor, to be written back
+</span> once {@link #commit} or {@link #apply} are called.
+@param {String} key The name of the preference to modify.
+@param {Boolean} value The new value for the preference.
+@return {Object {android.content.SharedPreferences.Editor}} Returns a reference to the same Editor object, so you can
+ chain put calls together.
+*/
+putBoolean : function(  ) {},
+
+<span id='android-content-SharedPreferences-Editor-method-remove'>/**Mark in the editor that a preference value should be removed, which
+</span> will be done in the actual preferences once {@link #commit} is
+ called.
+ 
+ &lt;p&gt;Note that when committing back to the preferences, all removals
+ are done first, regardless of whether you called remove before
+ or after put methods on this editor.
+@param {String} key The name of the preference to remove.
+@return {Object {android.content.SharedPreferences.Editor}} Returns a reference to the same Editor object, so you can
+ chain put calls together.
+*/
+remove : function(  ) {},
+
+<span id='android-content-SharedPreferences-Editor-method-clear'>/**Mark in the editor to remove &lt;em&gt;all&lt;/em&gt; values from the
+</span> preferences.  Once commit is called, the only remaining preferences
+ will be any that you have defined in this editor.
+ 
+ &lt;p&gt;Note that when committing back to the preferences, the clear
+ is done first, regardless of whether you called clear before
+ or after put methods on this editor.
+@return {Object {android.content.SharedPreferences.Editor}} Returns a reference to the same Editor object, so you can
+ chain put calls together.
+*/
+clear : function(  ) {},
+
+<span id='android-content-SharedPreferences-Editor-method-commit'>/**Commit your preferences changes back from this Editor to the
+</span> {@link android.content.SharedPreferences} object it is editing.  This atomically
+ performs the requested modifications, replacing whatever is currently
+ in the SharedPreferences.
+
+ &lt;p&gt;Note that when two editors are modifying preferences at the same
+ time, the last one to call commit wins.
+
+ &lt;p&gt;If you don't care about the return value and you're
+ using this from your application's main thread, consider
+ using {@link #apply} instead.
+@return {Boolean} Returns true if the new values were successfully written
+ to persistent storage.
+*/
+commit : function(  ) {},
+
+<span id='android-content-SharedPreferences-Editor-method-apply'>/**Commit your preferences changes back from this Editor to the
+</span> {@link android.content.SharedPreferences} object it is editing.  This atomically
+ performs the requested modifications, replacing whatever is currently
+ in the SharedPreferences.
+
+ &lt;p&gt;Note that when two editors are modifying preferences at the same
+ time, the last one to call apply wins.
+
+ &lt;p&gt;Unlike {@link #commit}, which writes its preferences out
+ to persistent storage synchronously, {@link #apply}
+ commits its changes to the in-memory
+ {@link android.content.SharedPreferences} immediately but starts an
+ asynchronous commit to disk and you won't be notified of
+ any failures.  If another editor on this
+ {@link android.content.SharedPreferences} does a regular {@link #commit}
+ while a {@link #apply} is still outstanding, the
+ {@link #commit} will block until all async commits are
+ completed as well as the commit itself.
+
+ &lt;p&gt;As {@link android.content.SharedPreferences} instances are singletons within
+ a process, it's safe to replace any instance of {@link #commit} with
+ {@link #apply} if you were already ignoring the return value.
+
+ &lt;p&gt;You don't need to worry about Android component
+ lifecycles and their interaction with &lt;code&gt;apply()&lt;/code&gt;
+ writing to disk.  The framework makes sure in-flight disk
+ writes from &lt;code&gt;apply()&lt;/code&gt; complete before switching
+ states.
+
+ &lt;p class='note'&gt;The SharedPreferences.Editor interface
+ isn't expected to be implemented directly.  However, if you
+ previously did implement it and are now getting errors
+ about missing &lt;code&gt;apply()&lt;/code&gt;, you can simply call
+ {@link #commit} from &lt;code&gt;apply()&lt;/code&gt;.
+*/
+apply : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

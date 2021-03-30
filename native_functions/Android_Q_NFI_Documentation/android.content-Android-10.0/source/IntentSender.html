@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-IntentSender'>/**@class android.content.IntentSender
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A description of an Intent and target action to perform with it.
+ The returned object can be
+ handed to other applications so that they can perform the action you
+ described on your behalf at a later time.
+
+ &lt;p&gt;By giving a IntentSender to another application,
+ you are granting it the right to perform the operation you have specified
+ as if the other application was yourself (with the same permissions and
+ identity).  As such, you should be careful about how you build the IntentSender:
+ often, for example, the base Intent you supply will have the component
+ name explicitly set to one of your own components, to ensure it is ultimately
+ sent there and nowhere else.
+
+ &lt;p&gt;A IntentSender itself is simply a reference to a token maintained by
+ the system describing the original data used to retrieve it.  This means
+ that, even if its owning application's process is killed, the
+ IntentSender itself will remain usable from other processes that
+ have been given it.  If the creating application later re-retrieves the
+ same kind of IntentSender (same operation, same Intent action, data,
+ categories, and components, and same flags), it will receive a IntentSender
+ representing the same token if that is still valid.
+
+ &lt;p&gt;Instances of this class can not be made directly, but rather must be
+ created from an existing {@link android.app.PendingIntent} with
+ {@link android.app.PendingIntent#getIntentSender() PendingIntent.getIntentSender()}.
+*/
+var IntentSender = {
+
+<span id='android-content-IntentSender-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-IntentSender-method-sendIntent'>/**Perform the operation associated with this IntentSender, allowing the
+</span> caller to specify information about the Intent to use and be notified
+ when the send has completed.
+@param {Object {Context}} context The Context of the caller.  This may be null if
+ &lt;var&gt;intent&lt;/var&gt; is also null.
+@param {Number} code Result code to supply back to the IntentSender's target.
+@param {Object {Intent}} intent Additional Intent data.  See {@link Intent#fillIn
+ Intent.fillIn()} for information on how this is applied to the
+ original Intent.  Use null to not modify the original Intent.
+@param {Object {IntentSender.OnFinished}} onFinished The object to call back on when the send has
+ completed, or null for no callback.
+@param {Object {Handler}} handler Handler identifying the thread on which the callback
+ should happen.  If null, the callback will happen from the thread
+ pool of the process.
+@throws SendIntentException Throws CanceledIntentException if the IntentSender
+ is no longer allowing more intents to be sent through it.
+*/
+sendIntent : function(  ) {},
+
+<span id='android-content-IntentSender-method-sendIntent'>/**Perform the operation associated with this IntentSender, allowing the
+</span> caller to specify information about the Intent to use and be notified
+ when the send has completed.
+@param {Object {Context}} context The Context of the caller.  This may be null if
+ &lt;var&gt;intent&lt;/var&gt; is also null.
+@param {Number} code Result code to supply back to the IntentSender's target.
+@param {Object {Intent}} intent Additional Intent data.  See {@link Intent#fillIn
+ Intent.fillIn()} for information on how this is applied to the
+ original Intent.  Use null to not modify the original Intent.
+@param {Object {IntentSender.OnFinished}} onFinished The object to call back on when the send has
+ completed, or null for no callback.
+@param {Object {Handler}} handler Handler identifying the thread on which the callback
+ should happen.  If null, the callback will happen from the thread
+ pool of the process.
+@param {String} requiredPermission Name of permission that a recipient of the PendingIntent
+ is required to hold.  This is only valid for broadcast intents, and
+ corresponds to the permission argument in
+ {@link Context#sendBroadcast(Intent, String) Context.sendOrderedBroadcast(Intent, String)}.
+ If null, no permission is required.
+@throws SendIntentException Throws CanceledIntentException if the IntentSender
+ is no longer allowing more intents to be sent through it.
+*/
+sendIntent : function(  ) {},
+
+<span id='android-content-IntentSender-method-getTargetPackage'>/**
+</span>@deprecated Renamed to {@link #getCreatorPackage()}.
+*/
+getTargetPackage : function(  ) {},
+
+<span id='android-content-IntentSender-method-getCreatorPackage'>/**Return the package name of the application that created this
+</span> IntentSender, that is the identity under which you will actually be
+ sending the Intent.  The returned string is supplied by the system, so
+ that an application can not spoof its package.
+@return {String} The package name of the PendingIntent, or null if there is
+ none associated with it.
+*/
+getCreatorPackage : function(  ) {},
+
+<span id='android-content-IntentSender-method-getCreatorUid'>/**Return the uid of the application that created this
+</span> PendingIntent, that is the identity under which you will actually be
+ sending the Intent.  The returned integer is supplied by the system, so
+ that an application can not spoof its uid.
+@return {Number} The uid of the PendingIntent, or -1 if there is
+ none associated with it.
+*/
+getCreatorUid : function(  ) {},
+
+<span id='android-content-IntentSender-method-getCreatorUserHandle'>/**Return the user handle of the application that created this
+</span> PendingIntent, that is the user under which you will actually be
+ sending the Intent.  The returned UserHandle is supplied by the system, so
+ that an application can not spoof its user.  See
+ {@link android.os.Process#myUserHandle() Process.myUserHandle()} for
+ more explanation of user handles.
+@return {Object {android.os.UserHandle}} The user handle of the PendingIntent, or null if there is
+ none associated with it.
+*/
+getCreatorUserHandle : function(  ) {},
+
+<span id='android-content-IntentSender-method-equals'>/**Comparison operator on two IntentSender objects, such that true
+</span> is returned then they both represent the same operation from the
+ same package.
+*/
+equals : function(  ) {},
+
+<span id='android-content-IntentSender-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-content-IntentSender-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-IntentSender-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-IntentSender-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-IntentSender-method-writeIntentSenderOrNullToParcel'>/**Convenience function for writing either a IntentSender or null pointer to
+</span> a Parcel.  You must use this with {@link #readIntentSenderOrNullFromParcel}
+ for later reading it.
+@param {Object {IntentSender}} sender The IntentSender to write, or null.
+@param {Object {Parcel}} out Where to write the IntentSender.
+*/
+writeIntentSenderOrNullToParcel : function(  ) {},
+
+<span id='android-content-IntentSender-method-readIntentSenderOrNullFromParcel'>/**Convenience function for reading either a Messenger or null pointer from
+</span> a Parcel.  You must have previously written the Messenger with
+ {@link #writeIntentSenderOrNullToParcel}.
+@param {Object {Parcel}} in The Parcel containing the written Messenger.
+@return {Object {android.content.IntentSender}} Returns the Messenger read from the Parcel, or null if null had
+ been written.
+*/
+readIntentSenderOrNullFromParcel : function(  ) {},
+
+<span id='android-content-IntentSender-method-getTarget'>/**
+</span>@hide 
+*/
+getTarget : function(  ) {},
+
+<span id='android-content-IntentSender-method-getWhitelistToken'>/**
+</span>@hide 
+*/
+getWhitelistToken : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

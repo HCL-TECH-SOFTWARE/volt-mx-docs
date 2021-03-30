@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-usage-StorageStatsManager'>/**@class android.app.usage.StorageStatsManager
+</span>@extends java.lang.Object
+
+ Access to detailed storage statistics. This provides a summary of how apps,
+ users, and external/shared storage is utilizing disk space.
+ &lt;p class=&quot;note&quot;&gt;
+ Note: no permissions are required when calling these APIs for your own
+ package or UID. However, requesting details for any other package requires
+ the {@code android.Manifest.permission#PACKAGE_USAGE_STATS} permission, which
+ is a system-level permission that will not be granted to normal apps.
+ Declaring that permission expresses your intention to use this API and an end
+ user can then choose to grant this permission through the Settings
+ application.
+ &lt;/p&gt;
+*/
+var StorageStatsManager = {
+
+<span id='android-app-usage-StorageStatsManager-method-isQuotaSupported'>/**{@hide}
+</span>*/
+isQuotaSupported : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-isQuotaSupported'>/**
+</span>@removed 
+*/
+isQuotaSupported : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-isReservedSupported'>/**{@hide}
+</span>*/
+isReservedSupported : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-getTotalBytes'>/**Return the total size of the underlying physical media that is hosting
+</span> this storage volume.
+ &lt;p&gt;
+ This value is best suited for visual display to end users, since it's
+ designed to reflect the total storage size advertised in a retail
+ environment.
+ &lt;p&gt;
+ Apps making logical decisions about disk space should always use
+ {@link File#getTotalSpace()} instead of this value.
+@param {Object {UUID}} storageUuid the UUID of the storage volume you're interested in,
+            such as {@link StorageManager#UUID_DEFAULT}.
+@throws IOException when the storage device isn't present.
+*/
+getTotalBytes : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-getTotalBytes'>/**
+</span>@removed 
+*/
+getTotalBytes : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-getFreeBytes'>/**Return the free space on the requested storage volume.
+</span> &lt;p&gt;
+ This value is best suited for visual display to end users, since it's
+ designed to reflect both unused space &lt;em&gt;and&lt;/em&gt; and cached space that
+ could be reclaimed by the system.
+ &lt;p&gt;
+ Apps making logical decisions about disk space should always use
+ {@link StorageManager#getAllocatableBytes(UUID)} instead of this value.
+@param {Object {UUID}} storageUuid the UUID of the storage volume you're interested in,
+            such as {@link StorageManager#UUID_DEFAULT}.
+@throws IOException when the storage device isn't present.
+*/
+getFreeBytes : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-getFreeBytes'>/**
+</span>@removed 
+*/
+getFreeBytes : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-getCacheBytes'>/**{@hide}
+</span>*/
+getCacheBytes : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-getCacheBytes'>/**{@hide}
+</span>*/
+getCacheBytes : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-queryStatsForPackage'>/**Return storage statistics for a specific package on the requested storage
+</span> volume.
+ &lt;p class=&quot;note&quot;&gt;
+ Note: no permissions are required when calling this API for your own
+ package. However, requesting details for any other package requires the
+ {@code android.Manifest.permission#PACKAGE_USAGE_STATS} permission, which
+ is a system-level permission that will not be granted to normal apps.
+ Declaring that permission expresses your intention to use this API and an
+ end user can then choose to grant this permission through the Settings
+ application.
+ &lt;/p&gt;
+ &lt;p class=&quot;note&quot;&gt;
+ Note: if the requested package uses the {@code android:sharedUserId}
+ manifest feature, this call will be forced into a slower manual
+ calculation path. If possible, consider always using
+ {@link #queryStatsForUid(UUID, int)}, which is typically faster.
+ &lt;/p&gt;
+@param {Object {UUID}} storageUuid the UUID of the storage volume you're interested in,
+            such as {@link StorageManager#UUID_DEFAULT}.
+@param {String} packageName the package name you're interested in.
+@param {Object {UserHandle}} user the user you're interested in.
+@throws PackageManager.NameNotFoundException when the requested package
+             name isn't installed for the requested user.
+@throws IOException when the storage device isn't present.
+@see ApplicationInfo#storageUuid
+@see PackageInfo#packageName
+*/
+queryStatsForPackage : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-queryStatsForPackage'>/**
+</span>@removed 
+*/
+queryStatsForPackage : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-queryStatsForUid'>/**Return storage statistics for a specific UID on the requested storage
+</span> volume.
+ &lt;p class=&quot;note&quot;&gt;
+ Note: no permissions are required when calling this API for your own UID.
+ However, requesting details for any other UID requires the
+ {@code android.Manifest.permission#PACKAGE_USAGE_STATS} permission, which
+ is a system-level permission that will not be granted to normal apps.
+ Declaring that permission expresses your intention to use this API and an
+ end user can then choose to grant this permission through the Settings
+ application.
+ &lt;/p&gt;
+@param {Object {UUID}} storageUuid the UUID of the storage volume you're interested in,
+            such as {@link StorageManager#UUID_DEFAULT}.
+@param {Number} uid the UID you're interested in.
+@throws IOException when the storage device isn't present.
+@see ApplicationInfo#storageUuid
+@see ApplicationInfo#uid
+*/
+queryStatsForUid : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-queryStatsForUid'>/**
+</span>@removed 
+*/
+queryStatsForUid : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-queryStatsForUser'>/**Return storage statistics for a specific {@link UserHandle} on the
+</span> requested storage volume.
+ &lt;p class=&quot;note&quot;&gt;
+ Note: this API requires the
+ {@code android.Manifest.permission#PACKAGE_USAGE_STATS} permission, which
+ is a system-level permission that will not be granted to normal apps.
+ Declaring that permission expresses your intention to use this API and an
+ end user can then choose to grant this permission through the Settings
+ application.
+ &lt;/p&gt;
+@param {Object {UUID}} storageUuid the UUID of the storage volume you're interested in,
+            such as {@link StorageManager#UUID_DEFAULT}.
+@param {Object {UserHandle}} user the user you're interested in.
+@throws IOException when the storage device isn't present.
+@see android.os.Process#myUserHandle()
+*/
+queryStatsForUser : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-queryStatsForUser'>/**
+</span>@removed 
+*/
+queryStatsForUser : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-queryExternalStatsForUser'>/**Return shared/external storage statistics for a specific
+</span> {@link UserHandle} on the requested storage volume.
+ &lt;p class=&quot;note&quot;&gt;
+ Note: this API requires the
+ {@code android.Manifest.permission#PACKAGE_USAGE_STATS} permission, which
+ is a system-level permission that will not be granted to normal apps.
+ Declaring that permission expresses your intention to use this API and an
+ end user can then choose to grant this permission through the Settings
+ application.
+ &lt;/p&gt;
+@param {Object {UUID}} storageUuid the UUID of the storage volume you're interested in,
+            such as {@link StorageManager#UUID_DEFAULT}.
+@throws IOException when the storage device isn't present.
+@see android.os.Process#myUserHandle()
+*/
+queryExternalStatsForUser : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-queryExternalStatsForUser'>/**
+</span>@removed 
+*/
+queryExternalStatsForUser : function(  ) {},
+
+<span id='android-app-usage-StorageStatsManager-method-getCacheQuotaBytes'>/**{@hide}
+</span>*/
+getCacheQuotaBytes : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

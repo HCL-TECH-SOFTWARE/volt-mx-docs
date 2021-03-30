@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothHidDevice-Callback'>/**@class android.bluetooth.BluetoothHidDevice.Callback
+</span>@extends java.lang.Object
+
+ The template class that applications use to call callback functions on events from the HID
+ host. Callback functions are wrapped in this class and registered to the Android system
+ during app registration.
+*/
+var Callback = {
+
+<span id='android-bluetooth-BluetoothHidDevice-Callback-method-onAppStatusChanged'>/**Callback called when application registration state changes. Usually it's called due to
+</span> either {@link android.bluetooth.BluetoothHidDevice#registerApp (String, String, String, byte, byte[],
+ Executor, Callback)} or {@link android.bluetooth.BluetoothHidDevice#unregisterApp()} , but can be also
+ unsolicited in case e.g. Bluetooth was turned off in which case application is
+ unregistered automatically.
+@param {Object {BluetoothDevice}} pluggedDevice {@link BluetoothDevice} object which represents host that currently
+     has Virtual Cable established with device. Only valid when application is registered,
+     can be &lt;code&gt;null&lt;/code&gt;.
+@param {Boolean} registered &lt;code&gt;true&lt;/code&gt; if application is registered, &lt;code&gt;false&lt;/code&gt;
+     otherwise.
+*/
+onAppStatusChanged : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-Callback-method-onConnectionStateChanged'>/**Callback called when connection state with remote host was changed. Application can
+</span> assume than Virtual Cable is established when called with {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} &lt;code&gt;state&lt;/code&gt;.
+@param {Object {BluetoothDevice}} device {@link BluetoothDevice} object representing host device which connection
+     state was changed.
+@param {Number} state Connection state as defined in {@link BluetoothProfile}.
+*/
+onConnectionStateChanged : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-Callback-method-onGetReport'>/**Callback called when GET_REPORT is received from remote host. Should be replied by
+</span> application using {@link android.bluetooth.BluetoothHidDevice#replyReport(BluetoothDevice, byte, byte,
+ byte[])}.
+@param {Object {BluetoothDevice}} type Requested Report Type.
+@param {Number} id Requested Report Id, can be 0 if no Report Id are defined in descriptor.
+@param {Number} bufferSize Requested buffer size, application shall respond with at least given
+     number of bytes.
+*/
+onGetReport : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-Callback-method-onSetReport'>/**Callback called when SET_REPORT is received from remote host. In case received data are
+</span> invalid, application shall respond with {@link android.bluetooth.BluetoothHidDevice#reportError(BluetoothDevice, byte)}.
+@param {Object {BluetoothDevice}} type Report Type.
+@param {Number} id Report Id.
+@param {Number} data Report data.
+*/
+onSetReport : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-Callback-method-onSetProtocol'>/**Callback called when SET_PROTOCOL is received from remote host. Application shall use
+</span> this information to send only reports valid for given protocol mode. By default, {@link android.bluetooth.BluetoothHidDevice#PROTOCOL_REPORT_MODE} shall be assumed.
+@param {Object {BluetoothDevice}} protocol Protocol Mode.
+*/
+onSetProtocol : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-Callback-method-onInterruptData'>/**Callback called when report data is received over interrupt channel. Report Type is
+</span> assumed to be {@link android.bluetooth.BluetoothHidDevice#REPORT_TYPE_OUTPUT}.
+@param {Object {BluetoothDevice}} reportId Report Id.
+@param {Number} data Report data.
+*/
+onInterruptData : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-Callback-method-onVirtualCableUnplug'>/**Callback called when Virtual Cable is removed. After this callback is received connection
+</span> will be disconnected automatically.
+*/
+onVirtualCableUnplug : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

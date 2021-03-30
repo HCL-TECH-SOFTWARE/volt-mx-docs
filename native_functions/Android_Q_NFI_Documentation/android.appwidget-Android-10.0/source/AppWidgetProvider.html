@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-appwidget-AppWidgetProvider'>/**@class android.appwidget.AppWidgetProvider
+</span>@extends android.content.BroadcastReceiver
+
+ A convenience class to aid in implementing an AppWidget provider.
+ Everything you can do with AppWidgetProvider, you can do with a regular {@link BroadcastReceiver}.
+ AppWidgetProvider merely parses the relevant fields out of the Intent that is received in
+ {@link #onReceive(Context,Intent) onReceive(Context,Intent)}, and calls hook methods
+ with the received extras.
+
+ &lt;p&gt;Extend this class and override one or more of the {@link #onUpdate}, {@link #onDeleted},
+ {@link #onEnabled} or {@link #onDisabled} methods to implement your own AppWidget functionality.
+ &lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about how to write an app widget provider, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/appwidgets/index.html#AppWidgetProvider&quot;&gt;App Widgets&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var AppWidgetProvider = {
+
+<span id='android-appwidget-AppWidgetProvider-method-onReceive'>/**Implements {@link BroadcastReceiver#onReceive} to dispatch calls to the various
+</span> other methods on AppWidgetProvider.
+@param {Object {Context}} context The Context in which the receiver is running.
+@param {Object {Intent}} intent The Intent being received.
+*/
+onReceive : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProvider-method-onUpdate'>/**Called in response to the {@link android.appwidget.AppWidgetManager#ACTION_APPWIDGET_UPDATE} and
+</span> {@link android.appwidget.AppWidgetManager#ACTION_APPWIDGET_RESTORED} broadcasts when this AppWidget
+ provider is being asked to provide {@link android.widget.RemoteViews RemoteViews}
+ for a set of AppWidgets.  Override this method to implement your own AppWidget functionality.
+
+ {@more}
+@param {Object {Context}} context   The {@link android.content.Context Context} in which this receiver is
+                  running.
+@param {Object {AppWidgetManager}} appWidgetManager A {@link AppWidgetManager} object you can call {@link
+                  AppWidgetManager#updateAppWidget} on.
+@param {Object {int[]}} appWidgetIds The appWidgetIds for which an update is needed.  Note that this
+                  may be all of the AppWidget instances for this provider, or just
+                  a subset of them.
+@see AppWidgetManager#ACTION_APPWIDGET_UPDATE
+*/
+onUpdate : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProvider-method-onAppWidgetOptionsChanged'>/**Called in response to the {@link android.appwidget.AppWidgetManager#ACTION_APPWIDGET_OPTIONS_CHANGED}
+</span> broadcast when this widget has been layed out at a new size.
+
+ {@more}
+@param {Object {Context}} context   The {@link android.content.Context Context} in which this receiver is
+                  running.
+@param {Object {AppWidgetManager}} appWidgetManager A {@link AppWidgetManager} object you can call {@link
+                  AppWidgetManager#updateAppWidget} on.
+@param {Number} appWidgetId The appWidgetId of the widget whose size changed.
+@param {Object {Bundle}} newOptions The appWidgetId of the widget whose size changed.
+@see AppWidgetManager#ACTION_APPWIDGET_OPTIONS_CHANGED
+*/
+onAppWidgetOptionsChanged : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProvider-method-onDeleted'>/**Called in response to the {@link android.appwidget.AppWidgetManager#ACTION_APPWIDGET_DELETED} broadcast when
+</span> one or more AppWidget instances have been deleted.  Override this method to implement
+ your own AppWidget functionality.
+
+ {@more}
+@param {Object {Context}} context   The {@link android.content.Context Context} in which this receiver is
+                  running.
+@param {Object {int[]}} appWidgetIds The appWidgetIds that have been deleted from their host.
+@see AppWidgetManager#ACTION_APPWIDGET_DELETED
+*/
+onDeleted : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProvider-method-onEnabled'>/**Called in response to the {@link android.appwidget.AppWidgetManager#ACTION_APPWIDGET_ENABLED} broadcast when
+</span> the a AppWidget for this provider is instantiated.  Override this method to implement your
+ own AppWidget functionality.
+
+ {@more}
+ When the last AppWidget for this provider is deleted,
+ {@link android.appwidget.AppWidgetManager#ACTION_APPWIDGET_DISABLED} is sent by the AppWidget manager, and
+ {@link #onDisabled} is called.  If after that, an AppWidget for this provider is created
+ again, onEnabled() will be called again.
+@param {Object {Context}} context   The {@link android.content.Context Context} in which this receiver is
+                  running.
+@see AppWidgetManager#ACTION_APPWIDGET_ENABLED
+*/
+onEnabled : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProvider-method-onDisabled'>/**Called in response to the {@link android.appwidget.AppWidgetManager#ACTION_APPWIDGET_DISABLED} broadcast, which
+</span> is sent when the last AppWidget instance for this provider is deleted.  Override this method
+ to implement your own AppWidget functionality.
+
+ {@more}
+@param {Object {Context}} context   The {@link android.content.Context Context} in which this receiver is
+                  running.
+@see AppWidgetManager#ACTION_APPWIDGET_DISABLED
+*/
+onDisabled : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProvider-method-onRestored'>/**Called in response to the {@link android.appwidget.AppWidgetManager#ACTION_APPWIDGET_RESTORED} broadcast
+</span> when instances of this AppWidget provider have been restored from backup.  If your
+ provider maintains any persistent data about its widget instances, override this method
+ to remap the old AppWidgetIds to the new values and update any other app state that may
+ be relevant.
+
+ &lt;p&gt;This callback will be followed immediately by a call to {@link #onUpdate} so your
+ provider can immediately generate new RemoteViews suitable for its newly-restored set
+ of instances.
+
+ {@more}
+@param {Object {Context}} context
+@param {Object {int[]}} oldWidgetIds
+@param {Object {int[]}} newWidgetIds
+*/
+onRestored : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

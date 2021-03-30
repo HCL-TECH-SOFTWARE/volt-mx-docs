@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothHidHost'>/**@class android.bluetooth.BluetoothHidHost
+</span> implements android.bluetooth.BluetoothProfile
+
+@extends java.lang.Object
+
+ This class provides the public APIs to control the Bluetooth Input
+ Device Profile.
+
+ &lt;p&gt;BluetoothHidHost is a proxy object for controlling the Bluetooth
+ Service via IPC. Use {@link android.bluetooth.BluetoothAdapter#getProfileProxy} to get
+ the BluetoothHidHost proxy object.
+
+ &lt;p&gt;Each method is protected with its appropriate permission.
+
+ @hide
+*/
+var BluetoothHidHost = {
+
+<span id='android-bluetooth-BluetoothHidHost-property-ACTION_CONNECTION_STATE_CHANGED'>/** Intent used to broadcast the change in connection state of the Input
+</span> Device profile.
+
+ &lt;p&gt;This intent will have 3 extras:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_STATE} - The current state of the profile. &lt;/li&gt;
+ &lt;li&gt; {@link #EXTRA_PREVIOUS_STATE}- The previous state of the profile.&lt;/li&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device. &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} can be any of
+ {@link #STATE_DISCONNECTED}, {@link #STATE_CONNECTING},
+ {@link #STATE_CONNECTED}, {@link #STATE_DISCONNECTING}.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+*/
+ACTION_CONNECTION_STATE_CHANGED : &quot;android.bluetooth.input.profile.action.CONNECTION_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-ACTION_PROTOCOL_MODE_CHANGED'>/** @hide
+</span>*/
+ACTION_PROTOCOL_MODE_CHANGED : &quot;android.bluetooth.input.profile.action.PROTOCOL_MODE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-ACTION_HANDSHAKE'>/** @hide
+</span>*/
+ACTION_HANDSHAKE : &quot;android.bluetooth.input.profile.action.HANDSHAKE&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-ACTION_REPORT'>/** @hide
+</span>*/
+ACTION_REPORT : &quot;android.bluetooth.input.profile.action.REPORT&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-ACTION_VIRTUAL_UNPLUG_STATUS'>/** @hide
+</span>*/
+ACTION_VIRTUAL_UNPLUG_STATUS : &quot;android.bluetooth.input.profile.action.VIRTUAL_UNPLUG_STATUS&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-ACTION_IDLE_TIME_CHANGED'>/** @hide
+</span>*/
+ACTION_IDLE_TIME_CHANGED : &quot;android.bluetooth.input.profile.action.IDLE_TIME_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-INPUT_DISCONNECT_FAILED_NOT_CONNECTED'>/** Return codes for the connect and disconnect Bluez / Dbus calls.
+</span>
+ @hide
+*/
+INPUT_DISCONNECT_FAILED_NOT_CONNECTED : &quot;5000&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-INPUT_CONNECT_FAILED_ALREADY_CONNECTED'>/** @hide
+</span>*/
+INPUT_CONNECT_FAILED_ALREADY_CONNECTED : &quot;5001&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-INPUT_CONNECT_FAILED_ATTEMPT_FAILED'>/** @hide
+</span>*/
+INPUT_CONNECT_FAILED_ATTEMPT_FAILED : &quot;5002&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-INPUT_OPERATION_GENERIC_FAILURE'>/** @hide
+</span>*/
+INPUT_OPERATION_GENERIC_FAILURE : &quot;5003&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-INPUT_OPERATION_SUCCESS'>/** @hide
+</span>*/
+INPUT_OPERATION_SUCCESS : &quot;5004&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-PROTOCOL_REPORT_MODE'>/** @hide
+</span>*/
+PROTOCOL_REPORT_MODE : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-PROTOCOL_BOOT_MODE'>/** @hide
+</span>*/
+PROTOCOL_BOOT_MODE : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-PROTOCOL_UNSUPPORTED_MODE'>/** @hide
+</span>*/
+PROTOCOL_UNSUPPORTED_MODE : &quot;255&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-REPORT_TYPE_INPUT'>/** @hide
+</span>*/
+REPORT_TYPE_INPUT : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-REPORT_TYPE_OUTPUT'>/** @hide
+</span>*/
+REPORT_TYPE_OUTPUT : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-REPORT_TYPE_FEATURE'>/** @hide
+</span>*/
+REPORT_TYPE_FEATURE : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-VIRTUAL_UNPLUG_STATUS_SUCCESS'>/** @hide
+</span>*/
+VIRTUAL_UNPLUG_STATUS_SUCCESS : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-VIRTUAL_UNPLUG_STATUS_FAIL'>/** @hide
+</span>*/
+VIRTUAL_UNPLUG_STATUS_FAIL : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-EXTRA_PROTOCOL_MODE'>/** @hide
+</span>*/
+EXTRA_PROTOCOL_MODE : &quot;android.bluetooth.BluetoothHidHost.extra.PROTOCOL_MODE&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-EXTRA_REPORT_TYPE'>/** @hide
+</span>*/
+EXTRA_REPORT_TYPE : &quot;android.bluetooth.BluetoothHidHost.extra.REPORT_TYPE&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-EXTRA_REPORT_ID'>/** @hide
+</span>*/
+EXTRA_REPORT_ID : &quot;android.bluetooth.BluetoothHidHost.extra.REPORT_ID&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-EXTRA_REPORT_BUFFER_SIZE'>/** @hide
+</span>*/
+EXTRA_REPORT_BUFFER_SIZE : &quot;android.bluetooth.BluetoothHidHost.extra.REPORT_BUFFER_SIZE&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-EXTRA_REPORT'>/** @hide
+</span>*/
+EXTRA_REPORT : &quot;android.bluetooth.BluetoothHidHost.extra.REPORT&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-EXTRA_STATUS'>/** @hide
+</span>*/
+EXTRA_STATUS : &quot;android.bluetooth.BluetoothHidHost.extra.STATUS&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-EXTRA_VIRTUAL_UNPLUG_STATUS'>/** @hide
+</span>*/
+EXTRA_VIRTUAL_UNPLUG_STATUS : &quot;android.bluetooth.BluetoothHidHost.extra.VIRTUAL_UNPLUG_STATUS&quot;,
+<span id='android-bluetooth-BluetoothHidHost-property-EXTRA_IDLE_TIME'>/** @hide
+</span>*/
+EXTRA_IDLE_TIME : &quot;android.bluetooth.BluetoothHidHost.extra.IDLE_TIME&quot;,
+<span id='android-bluetooth-BluetoothHidHost-method-connect'>/**Initiate connection to a profile of the remote bluetooth device.
+</span>
+ &lt;p&gt; The system supports connection to multiple input devices.
+
+ &lt;p&gt; This API returns false in scenarios like the profile on the
+ device is already connected or Bluetooth is not turned on.
+ When this API returns true, it is guaranteed that
+ connection state intent for the profile will be broadcasted with
+ the state. Users can get the connection state of the profile
+ from this intent.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+connect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-disconnect'>/**Initiate disconnection from a profile
+</span>
+ &lt;p&gt; This API will return false in scenarios like the profile on the
+ Bluetooth device is not in connected state etc. When this API returns,
+ true, it is guaranteed that the connection state change
+ intent will be broadcasted with the state. Users can get the
+ disconnection state of the profile from this intent.
+
+ &lt;p&gt; If the disconnection is initiated by a remote device, the state
+ will transition from {@link #STATE_CONNECTED} to
+ {@link #STATE_DISCONNECTED}. If the disconnect is initiated by the
+ host (local) device the state will transition from
+ {@link #STATE_CONNECTED} to state {@link #STATE_DISCONNECTING} to
+ state {@link #STATE_DISCONNECTED}. The transition to
+ {@link #STATE_DISCONNECTING} can be used to distinguish between the
+ two scenarios.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+disconnect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-getConnectedDevices'>/**{@inheritDoc}
+</span>*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-getDevicesMatchingConnectionStates'>/**{@inheritDoc}
+</span>*/
+getDevicesMatchingConnectionStates : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-getConnectionState'>/**{@inheritDoc}
+</span>*/
+getConnectionState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-setPriority'>/**Set priority of the profile
+</span>
+ &lt;p&gt; The device should already be paired.
+ Priority can be one of {@link #PRIORITY_ON} or
+ {@link #PRIORITY_OFF},
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Paired bluetooth device
+@param {Number} priority
+@return {Boolean} true if priority is set, false on error
+@hide 
+*/
+setPriority : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-getPriority'>/**Get the priority of the profile.
+</span>
+ &lt;p&gt; The priority can be any of:
+ {@link #PRIORITY_AUTO_CONNECT}, {@link #PRIORITY_OFF},
+ {@link #PRIORITY_ON}, {@link #PRIORITY_UNDEFINED}
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} device Bluetooth device
+@return {Number} priority of the device
+@hide 
+*/
+getPriority : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-virtualUnplug'>/**Initiate virtual unplug for a HID input device.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN} permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+virtualUnplug : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-getProtocolMode'>/**Send Get_Protocol_Mode command to the connected HID input device.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN} permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+getProtocolMode : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-setProtocolMode'>/**Send Set_Protocol_Mode command to the connected HID input device.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN} permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+setProtocolMode : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-getReport'>/**Send Get_Report command to the connected HID input device.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN} permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@param {Number} reportType Report type
+@param {Number} reportId Report ID
+@param {Number} bufferSize Report receiving buffer size
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+getReport : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-setReport'>/**Send Set_Report command to the connected HID input device.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN} permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@param {Number} reportType Report type
+@param {String} report Report receiving buffer size
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+setReport : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-sendData'>/**Send Send_Data command to the connected HID input device.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN} permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@param {String} report Report to send
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+sendData : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-getIdleTime'>/**Send Get_Idle_Time command to the connected HID input device.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN} permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+getIdleTime : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidHost-method-setIdleTime'>/**Send Set_Idle_Time command to the connected HID input device.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN} permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@param {Number} idleTime Idle time to be set on HID Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+setIdleTime : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

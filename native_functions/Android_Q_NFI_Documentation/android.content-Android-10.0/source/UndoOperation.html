@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-UndoOperation'>/**@class android.content.UndoOperation
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A single undoable operation.  You must subclass this to implement the state
+ and behavior for your operation.  Instances of this class are placed and
+ managed in an {@link android.content.UndoManager}.
+
+ @hide
+*/
+var UndoOperation = {
+
+<span id='android-content-UndoOperation-method-getOwner'>/**Owning object as given to {@link #UndoOperation}(UndoOwner).
+</span>*/
+getOwner : function(  ) {},
+
+<span id='android-content-UndoOperation-method-getOwnerData'>/**Synonym for {@link #getOwner}().{@link android.content.UndoOwner#getData()}.
+</span>*/
+getOwnerData : function(  ) {},
+
+<span id='android-content-UndoOperation-method-matchOwner'>/**Return true if this undo operation is a member of the given owner.
+</span> The default implementation is &lt;code&gt;owner == getOwner()&lt;/code&gt;.  You
+ can override this to provide more sophisticated dependencies between
+ owners.
+*/
+matchOwner : function(  ) {},
+
+<span id='android-content-UndoOperation-method-hasData'>/**Return true if this operation actually contains modification data.  The
+</span> default implementation always returns true.  If you return false, the
+ operation will be dropped when the final undo state is being built.
+*/
+hasData : function(  ) {},
+
+<span id='android-content-UndoOperation-method-allowMerge'>/**Return true if this operation can be merged with a later operation.
+</span> The default implementation always returns true.
+*/
+allowMerge : function(  ) {},
+
+<span id='android-content-UndoOperation-method-commit'>/**Called when this undo state is being committed to the undo stack.
+</span> The implementation should perform the initial edits and save any state that
+ may be needed to undo them.
+*/
+commit : function(  ) {},
+
+<span id='android-content-UndoOperation-method-undo'>/**Called when this undo state is being popped off the undo stack (in to
+</span> the temporary redo stack).  The implementation should remove the original
+ edits and thus restore the target object to its prior value.
+*/
+undo : function(  ) {},
+
+<span id='android-content-UndoOperation-method-redo'>/**Called when this undo state is being pushed back from the transient
+</span> redo stack to the main undo stack.  The implementation should re-apply
+ the edits that were previously removed by {@link #undo}.
+*/
+redo : function(  ) {},
+
+<span id='android-content-UndoOperation-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

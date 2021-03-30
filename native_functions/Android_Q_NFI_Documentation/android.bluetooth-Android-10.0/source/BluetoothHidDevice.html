@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothHidDevice'>/**@class android.bluetooth.BluetoothHidDevice
+</span> implements android.bluetooth.BluetoothProfile
+
+@extends java.lang.Object
+
+ Provides the public APIs to control the Bluetooth HID Device profile.
+
+ &lt;p&gt;BluetoothHidDevice is a proxy object for controlling the Bluetooth HID Device Service via IPC.
+ Use {@link android.bluetooth.BluetoothAdapter#getProfileProxy} to get the BluetoothHidDevice proxy object.
+*/
+var BluetoothHidDevice = {
+
+<span id='android-bluetooth-BluetoothHidDevice-property-ACTION_CONNECTION_STATE_CHANGED'>/** Intent used to broadcast the change in connection state of the Input Host profile.
+</span>
+ &lt;p&gt;This intent will have 3 extras:
+
+ &lt;ul&gt;
+   &lt;li&gt;{@link #EXTRA_STATE} - The current state of the profile.
+   &lt;li&gt;{@link #EXTRA_PREVIOUS_STATE}- The previous state of the profile.
+   &lt;li&gt;{@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device.
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} can be any of {@link #STATE_DISCONNECTED}, {@link #STATE_CONNECTING}, {@link #STATE_CONNECTED}, {@link #STATE_DISCONNECTING}.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to receive.
+*/
+ACTION_CONNECTION_STATE_CHANGED : &quot;android.bluetooth.hiddevice.profile.action.CONNECTION_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS1_NONE'>/** Constant representing unspecified HID device subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS1_NONE : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS1_KEYBOARD'>/** Constant representing keyboard subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS1_KEYBOARD : &quot;64&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS1_MOUSE'>/** Constant representing mouse subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS1_MOUSE : &quot;-128&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS1_COMBO'>/** Constant representing combo keyboard and mouse subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS1_COMBO : &quot;-64&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS2_UNCATEGORIZED'>/** Constant representing uncategorized HID device subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS2_UNCATEGORIZED : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS2_JOYSTICK'>/** Constant representing joystick subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS2_JOYSTICK : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS2_GAMEPAD'>/** Constant representing gamepad subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS2_GAMEPAD : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS2_REMOTE_CONTROL'>/** Constant representing remote control subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS2_REMOTE_CONTROL : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS2_SENSING_DEVICE'>/** Constant representing sensing device subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS2_SENSING_DEVICE : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS2_DIGITIZER_TABLET'>/** Constant representing digitizer tablet subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS2_DIGITIZER_TABLET : &quot;5&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-SUBCLASS2_CARD_READER'>/** Constant representing card reader subclass.
+</span>
+ @see #registerApp (BluetoothHidDeviceAppQosSettings, BluetoothHidDeviceAppQosSettings,
+     BluetoothHidDeviceAppQosSettings, Executor, Callback)
+*/
+SUBCLASS2_CARD_READER : &quot;6&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-REPORT_TYPE_INPUT'>/** Constant representing HID Input Report type.
+</span>
+ @see Callback#onGetReport(BluetoothDevice, byte, byte, int)
+ @see Callback#onSetReport(BluetoothDevice, byte, byte, byte[])
+ @see Callback#onInterruptData(BluetoothDevice, byte, byte[])
+*/
+REPORT_TYPE_INPUT : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-REPORT_TYPE_OUTPUT'>/** Constant representing HID Output Report type.
+</span>
+ @see Callback#onGetReport(BluetoothDevice, byte, byte, int)
+ @see Callback#onSetReport(BluetoothDevice, byte, byte, byte[])
+ @see Callback#onInterruptData(BluetoothDevice, byte, byte[])
+*/
+REPORT_TYPE_OUTPUT : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-REPORT_TYPE_FEATURE'>/** Constant representing HID Feature Report type.
+</span>
+ @see Callback#onGetReport(BluetoothDevice, byte, byte, int)
+ @see Callback#onSetReport(BluetoothDevice, byte, byte, byte[])
+ @see Callback#onInterruptData(BluetoothDevice, byte, byte[])
+*/
+REPORT_TYPE_FEATURE : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-ERROR_RSP_SUCCESS'>/** Constant representing success response for Set Report.
+</span>
+ @see Callback#onSetReport(BluetoothDevice, byte, byte, byte[])
+*/
+ERROR_RSP_SUCCESS : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-ERROR_RSP_NOT_READY'>/** Constant representing error response for Set Report due to &quot;not ready&quot;.
+</span>
+ @see Callback#onSetReport(BluetoothDevice, byte, byte, byte[])
+*/
+ERROR_RSP_NOT_READY : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-ERROR_RSP_INVALID_RPT_ID'>/** Constant representing error response for Set Report due to &quot;invalid report ID&quot;.
+</span>
+ @see Callback#onSetReport(BluetoothDevice, byte, byte, byte[])
+*/
+ERROR_RSP_INVALID_RPT_ID : &quot;2&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-ERROR_RSP_UNSUPPORTED_REQ'>/** Constant representing error response for Set Report due to &quot;unsupported request&quot;.
+</span>
+ @see Callback#onSetReport(BluetoothDevice, byte, byte, byte[])
+*/
+ERROR_RSP_UNSUPPORTED_REQ : &quot;3&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-ERROR_RSP_INVALID_PARAM'>/** Constant representing error response for Set Report due to &quot;invalid parameter&quot;.
+</span>
+ @see Callback#onSetReport(BluetoothDevice, byte, byte, byte[])
+*/
+ERROR_RSP_INVALID_PARAM : &quot;4&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-ERROR_RSP_UNKNOWN'>/** Constant representing error response for Set Report with unknown reason.
+</span>
+ @see Callback#onSetReport(BluetoothDevice, byte, byte, byte[])
+*/
+ERROR_RSP_UNKNOWN : &quot;14&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-PROTOCOL_BOOT_MODE'>/** Constant representing boot protocol mode used set by host. Default is always {@link #PROTOCOL_REPORT_MODE} unless notified otherwise.
+</span>
+ @see Callback#onSetProtocol(BluetoothDevice, byte)
+*/
+PROTOCOL_BOOT_MODE : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-property-PROTOCOL_REPORT_MODE'>/** Constant representing report protocol mode used set by host. Default is always {@link #PROTOCOL_REPORT_MODE} unless notified otherwise.
+</span>
+ @see Callback#onSetProtocol(BluetoothDevice, byte)
+*/
+PROTOCOL_REPORT_MODE : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothHidDevice-method-getConnectedDevices'>/**{@inheritDoc}
+</span>*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-method-getDevicesMatchingConnectionStates'>/**{@inheritDoc}
+</span>*/
+getDevicesMatchingConnectionStates : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-method-getConnectionState'>/**{@inheritDoc}
+</span>*/
+getConnectionState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-method-registerApp'>/**Registers application to be used for HID device. Connections to HID Device are only possible
+</span> when application is registered. Only one application can be registered at one time. When an
+ application is registered, the HID Host service will be disabled until it is unregistered.
+ When no longer used, application should be unregistered using {@link #unregisterApp}(). The
+ app will be automatically unregistered if it is not foreground. The registration status
+ should be tracked by the application by handling callback from Callback#onAppStatusChanged.
+ The app registration status is not related to the return value of this method.
+@param {Object {BluetoothHidDeviceAppSdpSettings}} sdp {@link BluetoothHidDeviceAppSdpSettings} object of HID Device SDP record. The HID
+     Device SDP record is required.
+@param {Object {BluetoothHidDeviceAppQosSettings}} inQos {@link BluetoothHidDeviceAppQosSettings} object of Incoming QoS Settings. The
+     Incoming QoS Settings is not required. Use null or default
+     BluetoothHidDeviceAppQosSettings.Builder for default values.
+@param {Object {BluetoothHidDeviceAppQosSettings}} outQos {@link BluetoothHidDeviceAppQosSettings} object of Outgoing QoS Settings. The
+     Outgoing QoS Settings is not required. Use null or default
+     BluetoothHidDeviceAppQosSettings.Builder for default values.
+@param {Object {Executor}} executor {@link Executor} object on which callback will be executed. The Executor
+     object is required.
+@param {Object {BluetoothHidDevice.Callback}} callback {@link Callback} object to which callback messages will be sent. The Callback
+     object is required.
+@return {Boolean} true if the command is successfully sent; otherwise false.
+*/
+registerApp : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-method-unregisterApp'>/**Unregisters application. Active connection will be disconnected and no new connections will
+</span> be allowed until registered again using {@link #registerApp
+ (android.bluetooth.BluetoothHidDeviceAppQosSettings, android.bluetooth.BluetoothHidDeviceAppQosSettings,
+ android.bluetooth.BluetoothHidDeviceAppQosSettings, Executor, Callback)}. The registration status should be
+ tracked by the application by handling callback from Callback#onAppStatusChanged. The app
+ registration status is not related to the return value of this method.
+@return {Boolean} true if the command is successfully sent; otherwise false.
+*/
+unregisterApp : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-method-sendReport'>/**Sends report to remote host using interrupt channel.
+</span>@param {Object {BluetoothDevice}} id Report Id, as defined in descriptor. Can be 0 in case Report Id are not defined in
+     descriptor.
+@param {Number} data Report data, not including Report Id.
+@return {Boolean} true if the command is successfully sent; otherwise false.
+*/
+sendReport : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-method-replyReport'>/**Sends report to remote host as reply for GET_REPORT request from {@link android.bluetooth.BluetoothHidDevice.Callback#onGetReport(BluetoothDevice, byte, byte, int)}.
+</span>@param {Object {BluetoothDevice}} type Report Type, as in request.
+@param {Number} id Report Id, as in request.
+@param {Number} data Report data, not including Report Id.
+@return {Boolean} true if the command is successfully sent; otherwise false.
+*/
+replyReport : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-method-reportError'>/**Sends error handshake message as reply for invalid SET_REPORT request from {@link android.bluetooth.BluetoothHidDevice.Callback#onSetReport(BluetoothDevice, byte, byte, byte[])}.
+</span>@param {Object {BluetoothDevice}} error Error to be sent for SET_REPORT via HANDSHAKE.
+@return {Boolean} true if the command is successfully sent; otherwise false.
+*/
+reportError : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-method-getUserAppName'>/**Gets the application name of the current HidDeviceService user.
+</span>@return {String} the current user name, or empty string if cannot get the name
+ {@hide}
+*/
+getUserAppName : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-method-connect'>/**Initiates connection to host which is currently paired with this device. If the application
+</span> is not registered, #connect(BluetoothDevice) will fail. The connection state should be
+ tracked by the application by handling callback from Callback#onConnectionStateChanged. The
+ connection state is not related to the return value of this method.
+@return {Boolean} true if the command is successfully sent; otherwise false.
+*/
+connect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothHidDevice-method-disconnect'>/**Disconnects from currently connected host. The connection state should be tracked by the
+</span> application by handling callback from Callback#onConnectionStateChanged. The connection state
+ is not related to the return value of this method.
+@return {Boolean} true if the command is successfully sent; otherwise false.
+*/
+disconnect : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

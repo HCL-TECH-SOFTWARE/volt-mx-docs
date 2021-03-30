@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-AsyncTaskLoader'>/**@class android.content.AsyncTaskLoader
+</span>@extends android.content.Loader
+
+ Abstract Loader that provides an {@link AsyncTask} to do the work.  See
+ {@link android.content.Loader} and {@link android.app.LoaderManager} for more details.
+
+ &lt;p&gt;Here is an example implementation of an AsyncTaskLoader subclass that
+ loads the currently installed applications from the package manager.  This
+ implementation takes care of retrieving the application labels and sorting
+ its result set from them, monitoring for changes to the installed
+ applications, and rebuilding the list when a change in configuration requires
+ this (such as a locale change).
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/LoaderCustom.java
+      loader}
+
+ &lt;p&gt;An example implementation of a fragment that uses the above loader to show
+ the currently installed applications in a list is below.
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/LoaderCustom.java
+      fragment}
+
+ @param &lt;D&gt; the data type to be loaded.
+
+ @deprecated Use the &lt;a href=&quot;{@docRoot}tools/extras/support-library.html&quot;&gt;Support Library&lt;/a&gt;
+      {@link android.support.v4.content.AsyncTaskLoader}
+*/
+var AsyncTaskLoader = {
+
+<span id='android-content-AsyncTaskLoader-method-setUpdateThrottle'>/**Set amount to throttle updates by.  This is the minimum time from
+</span> when the last {@link #loadInBackground}() call has completed until
+ a new load is scheduled.
+@param {Number} delayMS Amount of delay, in milliseconds.
+*/
+setUpdateThrottle : function(  ) {},
+
+<span id='android-content-AsyncTaskLoader-method-onCanceled'>/**Called if the task was canceled before it was completed.  Gives the class a chance
+</span> to clean up post-cancellation and to properly dispose of the result.
+@param {Object {Object}} data The value that was returned by {@link #loadInBackground}, or null
+ if the task threw {@link OperationCanceledException}.
+*/
+onCanceled : function(  ) {},
+
+<span id='android-content-AsyncTaskLoader-method-loadInBackground'>/**Called on a worker thread to perform the actual load and to return
+</span> the result of the load operation.
+
+ Implementations should not deliver the result directly, but should return them
+ from this method, which will eventually end up calling {@link #deliverResult} on
+ the UI thread.  If implementations need to process the results on the UI thread
+ they may override {@link #deliverResult} and do so there.
+
+ To support cancellation, this method should periodically check the value of
+ {@link #isLoadInBackgroundCanceled} and terminate when it returns true.
+ Subclasses may also override {@link #cancelLoadInBackground} to interrupt the load
+ directly instead of polling {@link #isLoadInBackgroundCanceled}.
+
+ When the load is canceled, this method may either return normally or throw
+ {@link OperationCanceledException}.  In either case, the {@link android.content.Loader} will
+ call {@link #onCanceled} to perform post-cancellation cleanup and to dispose of the
+ result object, if any.
+@return {Object {java.lang.Object}} The result of the load operation.
+@throws OperationCanceledException if the load is canceled during execution.
+@see #isLoadInBackgroundCanceled
+@see #cancelLoadInBackground
+@see #onCanceled
+*/
+loadInBackground : function(  ) {},
+
+<span id='android-content-AsyncTaskLoader-method-cancelLoadInBackground'>/**Called on the main thread to abort a load in progress.
+</span>
+ Override this method to abort the current invocation of {@link #loadInBackground}
+ that is running in the background on a worker thread.
+
+ This method should do nothing if {@link #loadInBackground} has not started
+ running or if it has already finished.
+@see #loadInBackground
+*/
+cancelLoadInBackground : function(  ) {},
+
+<span id='android-content-AsyncTaskLoader-method-isLoadInBackgroundCanceled'>/**Returns true if the current invocation of {@link #loadInBackground} is being canceled.
+</span>@return {Boolean} True if the current invocation of {@link #loadInBackground} is being canceled.
+@see #loadInBackground
+*/
+isLoadInBackgroundCanceled : function(  ) {},
+
+<span id='android-content-AsyncTaskLoader-method-waitForLoader'>/**Locks the current thread until the loader completes the current load
+</span> operation. Returns immediately if there is no load operation running.
+ Should not be called from the UI thread: calling it from the UI
+ thread would cause a deadlock.
+ &lt;p&gt;
+ Use for testing only.  &lt;b&gt;Never&lt;/b&gt; call this from a UI thread.
+@hide 
+*/
+waitForLoader : function(  ) {},
+
+<span id='android-content-AsyncTaskLoader-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-RestrictionsManager'>/**@class android.content.RestrictionsManager
+</span>@extends java.lang.Object
+
+ Provides a mechanism for apps to query restrictions imposed by an entity that
+ manages the user. Apps can also send permission requests to a local or remote
+ device administrator to override default app-specific restrictions or any other
+ operation that needs explicit authorization from the administrator.
+ &lt;p&gt;
+ Apps can expose a set of restrictions via an XML file specified in the manifest.
+ &lt;p&gt;
+ If the user has an active Restrictions Provider, dynamic requests can be made in
+ addition to the statically imposed restrictions. Dynamic requests are app-specific
+ and can be expressed via a predefined set of request types.
+ &lt;p&gt;
+ The RestrictionsManager forwards the dynamic requests to the active
+ Restrictions Provider. The Restrictions Provider can respond back to requests by calling
+ {@link #notifyPermissionResponse(String, PersistableBundle)}, when
+ a response is received from the administrator of the device or user.
+ The response is relayed back to the application via a protected broadcast,
+ {@link #ACTION_PERMISSION_RESPONSE_RECEIVED}.
+ &lt;p&gt;
+ Static restrictions are specified by an XML file referenced by a meta-data attribute
+ in the manifest. This enables applications as well as any web administration consoles
+ to be able to read the list of available restrictions from the apk.
+ &lt;p&gt;
+ The syntax of the XML format is as follows:
+ &lt;pre&gt;
+ &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
+ &amp;lt;restrictions xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &amp;gt;
+     &amp;lt;restriction
+         android:key=&quot;string&quot;
+         android:title=&quot;string resource&quot;
+         android:restrictionType=[&quot;bool&quot; | &quot;string&quot; | &quot;integer&quot;
+                                         | &quot;choice&quot; | &quot;multi-select&quot; | &quot;hidden&quot;
+                                         | &quot;bundle&quot; | &quot;bundle_array&quot;]
+         android:description=&quot;string resource&quot;
+         android:entries=&quot;string-array resource&quot;
+         android:entryValues=&quot;string-array resource&quot;
+         android:defaultValue=&quot;reference&quot; &amp;gt;
+             &amp;lt;restriction ... /&amp;gt;
+             ...
+     &amp;lt;/restriction&amp;gt;
+     &amp;lt;restriction ... /&amp;gt;
+     ...
+ &amp;lt;/restrictions&amp;gt;
+ &lt;/pre&gt;
+ &lt;p&gt;
+ The attributes for each restriction depend on the restriction type.
+ &lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;code&gt;key&lt;/code&gt;, &lt;code&gt;title&lt;/code&gt; and &lt;code&gt;restrictionType&lt;/code&gt; are mandatory.&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;entries&lt;/code&gt; and &lt;code&gt;entryValues&lt;/code&gt; are required if &lt;code&gt;restrictionType
+ &lt;/code&gt; is &lt;code&gt;choice&lt;/code&gt; or &lt;code&gt;multi-select&lt;/code&gt;.&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;defaultValue&lt;/code&gt; is optional and its type depends on the
+ &lt;code&gt;restrictionType&lt;/code&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;hidden&lt;/code&gt; type must have a &lt;code&gt;defaultValue&lt;/code&gt; and will
+ not be shown to the administrator. It can be used to pass along data that cannot be modified,
+ such as a version code.&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;description&lt;/code&gt; is meant to describe the restriction in more detail to the
+ administrator controlling the values, if the title is not sufficient.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Only restrictions of type {@code bundle} and {@code bundle_array} can have one or multiple nested
+ restriction elements.
+ &lt;p&gt;
+ In your manifest's &lt;code&gt;application&lt;/code&gt; section, add the meta-data tag to point to
+ the restrictions XML file as shown below:
+ &lt;pre&gt;
+ &amp;lt;application ... &amp;gt;
+     &amp;lt;meta-data android:name=&quot;android.content.APP_RESTRICTIONS&quot;
+                   android:resource=&quot;@xml/app_restrictions&quot; /&amp;gt;
+     ...
+ &amp;lt;/application&amp;gt;
+ &lt;/pre&gt;
+
+ @see RestrictionEntry
+ @see RestrictionsReceiver
+ @see DevicePolicyManager#setRestrictionsProvider(ComponentName, ComponentName)
+ @see DevicePolicyManager#setApplicationRestrictions(ComponentName, String, Bundle)
+*/
+var RestrictionsManager = {
+
+<span id='android-content-RestrictionsManager-property-ACTION_PERMISSION_RESPONSE_RECEIVED'>/** Broadcast intent delivered when a response is received for a permission request. The
+</span> application should not interrupt the user by coming to the foreground if it isn't
+ currently in the foreground. It can either post a notification informing
+ the user of the response or wait until the next time the user launches the app.
+ &lt;p&gt;
+ For instance, if the user requested permission to make an in-app purchase,
+ the app can post a notification that the request had been approved or denied.
+ &lt;p&gt;
+ The broadcast Intent carries the following extra:
+ {@link #EXTRA_RESPONSE_BUNDLE}.
+*/
+ACTION_PERMISSION_RESPONSE_RECEIVED : &quot;android.content.action.PERMISSION_RESPONSE_RECEIVED&quot;,
+<span id='android-content-RestrictionsManager-property-ACTION_REQUEST_PERMISSION'>/** Broadcast intent sent to the Restrictions Provider to handle a permission request from
+</span> an app. It will have the following extras: {@link #EXTRA_PACKAGE_NAME},
+ {@link #EXTRA_REQUEST_TYPE}, {@link #EXTRA_REQUEST_ID} and {@link #EXTRA_REQUEST_BUNDLE}.
+ The Restrictions Provider will handle the request and respond back to the
+ RestrictionsManager, when a response is available, by calling
+ {@link #notifyPermissionResponse}.
+ &lt;p&gt;
+ The BroadcastReceiver must require the {@link android.Manifest.permission#BIND_DEVICE_ADMIN}
+ permission to ensure that only the system can send the broadcast.
+*/
+ACTION_REQUEST_PERMISSION : &quot;android.content.action.REQUEST_PERMISSION&quot;,
+<span id='android-content-RestrictionsManager-property-ACTION_REQUEST_LOCAL_APPROVAL'>/** Activity intent that is optionally implemented by the Restrictions Provider package
+</span> to challenge for an administrator PIN or password locally on the device. Apps will
+ call this intent using {@link Activity#startActivityForResult}. On a successful
+ response, {@link Activity#onActivityResult} will return a resultCode of
+ {@link Activity#RESULT_OK}.
+ &lt;p&gt;
+ The intent must contain {@link #EXTRA_REQUEST_BUNDLE} as an extra and the bundle must
+ contain at least {@link #REQUEST_KEY_MESSAGE} for the activity to display.
+ &lt;p&gt;
+ @see #createLocalApprovalIntent()
+*/
+ACTION_REQUEST_LOCAL_APPROVAL : &quot;android.content.action.REQUEST_LOCAL_APPROVAL&quot;,
+<span id='android-content-RestrictionsManager-property-EXTRA_PACKAGE_NAME'>/** The package name of the application making the request.
+</span> &lt;p&gt;
+ Type: String
+*/
+EXTRA_PACKAGE_NAME : &quot;android.content.extra.PACKAGE_NAME&quot;,
+<span id='android-content-RestrictionsManager-property-EXTRA_REQUEST_TYPE'>/** The request type passed in the {@link #ACTION_REQUEST_PERMISSION} broadcast.
+</span> &lt;p&gt;
+ Type: String
+*/
+EXTRA_REQUEST_TYPE : &quot;android.content.extra.REQUEST_TYPE&quot;,
+<span id='android-content-RestrictionsManager-property-EXTRA_REQUEST_ID'>/** The request ID passed in the {@link #ACTION_REQUEST_PERMISSION} broadcast.
+</span> &lt;p&gt;
+ Type: String
+*/
+EXTRA_REQUEST_ID : &quot;android.content.extra.REQUEST_ID&quot;,
+<span id='android-content-RestrictionsManager-property-EXTRA_REQUEST_BUNDLE'>/** The request bundle passed in the {@link #ACTION_REQUEST_PERMISSION} broadcast.
+</span> &lt;p&gt;
+ Type: {@link PersistableBundle}
+*/
+EXTRA_REQUEST_BUNDLE : &quot;android.content.extra.REQUEST_BUNDLE&quot;,
+<span id='android-content-RestrictionsManager-property-EXTRA_RESPONSE_BUNDLE'>/** Contains a response from the administrator for specific request.
+</span> The bundle contains the following information, at least:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #REQUEST_KEY_ID}: The request ID.&lt;/li&gt;
+ &lt;li&gt;{@link #RESPONSE_KEY_RESULT}: The response result.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Type: {@link PersistableBundle}
+*/
+EXTRA_RESPONSE_BUNDLE : &quot;android.content.extra.RESPONSE_BUNDLE&quot;,
+<span id='android-content-RestrictionsManager-property-REQUEST_TYPE_APPROVAL'>/** Request type for a simple question, with a possible title and icon.
+</span> &lt;p&gt;
+ Required keys are: {@link #REQUEST_KEY_MESSAGE}
+ &lt;p&gt;
+ Optional keys are
+ {@link #REQUEST_KEY_DATA}, {@link #REQUEST_KEY_ICON}, {@link #REQUEST_KEY_TITLE},
+ {@link #REQUEST_KEY_APPROVE_LABEL} and {@link #REQUEST_KEY_DENY_LABEL}.
+*/
+REQUEST_TYPE_APPROVAL : &quot;android.request.type.approval&quot;,
+<span id='android-content-RestrictionsManager-property-REQUEST_KEY_ID'>/** Key for request ID contained in the request bundle.
+</span> &lt;p&gt;
+ App-generated request ID to identify the specific request when receiving
+ a response. This value is returned in the {@link #EXTRA_RESPONSE_BUNDLE}.
+ &lt;p&gt;
+ Type: String
+*/
+REQUEST_KEY_ID : &quot;android.request.id&quot;,
+<span id='android-content-RestrictionsManager-property-REQUEST_KEY_DATA'>/** Key for request data contained in the request bundle.
+</span> &lt;p&gt;
+ Optional, typically used to identify the specific data that is being referred to,
+ such as the unique identifier for a movie or book. This is not used for display
+ purposes and is more like a cookie. This value is returned in the
+ {@link #EXTRA_RESPONSE_BUNDLE}.
+ &lt;p&gt;
+ Type: String
+*/
+REQUEST_KEY_DATA : &quot;android.request.data&quot;,
+<span id='android-content-RestrictionsManager-property-REQUEST_KEY_TITLE'>/** Key for request title contained in the request bundle.
+</span> &lt;p&gt;
+ Optional, typically used as the title of any notification or dialog presented
+ to the administrator who approves the request.
+ &lt;p&gt;
+ Type: String
+*/
+REQUEST_KEY_TITLE : &quot;android.request.title&quot;,
+<span id='android-content-RestrictionsManager-property-REQUEST_KEY_MESSAGE'>/** Key for request message contained in the request bundle.
+</span> &lt;p&gt;
+ Required, shown as the actual message in a notification or dialog presented
+ to the administrator who approves the request.
+ &lt;p&gt;
+ Type: String
+*/
+REQUEST_KEY_MESSAGE : &quot;android.request.mesg&quot;,
+<span id='android-content-RestrictionsManager-property-REQUEST_KEY_ICON'>/** Key for request icon contained in the request bundle.
+</span> &lt;p&gt;
+ Optional, shown alongside the request message presented to the administrator
+ who approves the request. The content must be a compressed image such as a
+ PNG or JPEG, as a byte array.
+ &lt;p&gt;
+ Type: byte[]
+*/
+REQUEST_KEY_ICON : &quot;android.request.icon&quot;,
+<span id='android-content-RestrictionsManager-property-REQUEST_KEY_APPROVE_LABEL'>/** Key for request approval button label contained in the request bundle.
+</span> &lt;p&gt;
+ Optional, may be shown as a label on the positive button in a dialog or
+ notification presented to the administrator who approves the request.
+ &lt;p&gt;
+ Type: String
+*/
+REQUEST_KEY_APPROVE_LABEL : &quot;android.request.approve_label&quot;,
+<span id='android-content-RestrictionsManager-property-REQUEST_KEY_DENY_LABEL'>/** Key for request rejection button label contained in the request bundle.
+</span> &lt;p&gt;
+ Optional, may be shown as a label on the negative button in a dialog or
+ notification presented to the administrator who approves the request.
+ &lt;p&gt;
+ Type: String
+*/
+REQUEST_KEY_DENY_LABEL : &quot;android.request.deny_label&quot;,
+<span id='android-content-RestrictionsManager-property-REQUEST_KEY_NEW_REQUEST'>/** Key for issuing a new request, contained in the request bundle. If this is set to true,
+</span> the Restrictions Provider must make a new request. If it is false or not specified, then
+ the Restrictions Provider can return a cached response that has the same requestId, if
+ available. If there's no cached response, it will issue a new one to the administrator.
+ &lt;p&gt;
+ Type: boolean
+*/
+REQUEST_KEY_NEW_REQUEST : &quot;android.request.new_request&quot;,
+<span id='android-content-RestrictionsManager-property-RESPONSE_KEY_RESULT'>/** Key for the response result in the response bundle sent to the application, for a permission
+</span> request. It indicates the status of the request. In some cases an additional message might
+ be available in {@link #RESPONSE_KEY_MESSAGE}, to be displayed to the user.
+ &lt;p&gt;
+ Type: int
+ &lt;p&gt;
+ Possible values: {@link #RESULT_APPROVED}, {@link #RESULT_DENIED},
+ {@link #RESULT_NO_RESPONSE}, {@link #RESULT_UNKNOWN_REQUEST} or
+ {@link #RESULT_ERROR}.
+*/
+RESPONSE_KEY_RESULT : &quot;android.response.result&quot;,
+<span id='android-content-RestrictionsManager-property-RESULT_APPROVED'>/** Response result value indicating that the request was approved.
+</span>*/
+RESULT_APPROVED : &quot;1&quot;,
+<span id='android-content-RestrictionsManager-property-RESULT_DENIED'>/** Response result value indicating that the request was denied.
+</span>*/
+RESULT_DENIED : &quot;2&quot;,
+<span id='android-content-RestrictionsManager-property-RESULT_NO_RESPONSE'>/** Response result value indicating that the request has not received a response yet.
+</span>*/
+RESULT_NO_RESPONSE : &quot;3&quot;,
+<span id='android-content-RestrictionsManager-property-RESULT_UNKNOWN_REQUEST'>/** Response result value indicating that the request is unknown, when it's not a new
+</span> request.
+*/
+RESULT_UNKNOWN_REQUEST : &quot;4&quot;,
+<span id='android-content-RestrictionsManager-property-RESULT_ERROR'>/** Response result value indicating an error condition. Additional error code might be available
+</span> in the response bundle, for the key {@link #RESPONSE_KEY_ERROR_CODE}. There might also be
+ an associated error message in the response bundle, for the key
+ {@link #RESPONSE_KEY_MESSAGE}.
+*/
+RESULT_ERROR : &quot;5&quot;,
+<span id='android-content-RestrictionsManager-property-RESULT_ERROR_BAD_REQUEST'>/** Error code indicating that there was a problem with the request.
+</span> &lt;p&gt;
+ Stored in {@link #RESPONSE_KEY_ERROR_CODE} field in the response bundle.
+*/
+RESULT_ERROR_BAD_REQUEST : &quot;1&quot;,
+<span id='android-content-RestrictionsManager-property-RESULT_ERROR_NETWORK'>/** Error code indicating that there was a problem with the network.
+</span> &lt;p&gt;
+ Stored in {@link #RESPONSE_KEY_ERROR_CODE} field in the response bundle.
+*/
+RESULT_ERROR_NETWORK : &quot;2&quot;,
+<span id='android-content-RestrictionsManager-property-RESULT_ERROR_INTERNAL'>/** Error code indicating that there was an internal error.
+</span> &lt;p&gt;
+ Stored in {@link #RESPONSE_KEY_ERROR_CODE} field in the response bundle.
+*/
+RESULT_ERROR_INTERNAL : &quot;3&quot;,
+<span id='android-content-RestrictionsManager-property-RESPONSE_KEY_ERROR_CODE'>/** Key for the optional error code in the response bundle sent to the application.
+</span> &lt;p&gt;
+ Type: int
+ &lt;p&gt;
+ Possible values: {@link #RESULT_ERROR_BAD_REQUEST}, {@link #RESULT_ERROR_NETWORK} or
+ {@link #RESULT_ERROR_INTERNAL}.
+*/
+RESPONSE_KEY_ERROR_CODE : &quot;android.response.errorcode&quot;,
+<span id='android-content-RestrictionsManager-property-RESPONSE_KEY_MESSAGE'>/** Key for the optional message in the response bundle sent to the application.
+</span> &lt;p&gt;
+ Type: String
+*/
+RESPONSE_KEY_MESSAGE : &quot;android.response.msg&quot;,
+<span id='android-content-RestrictionsManager-property-RESPONSE_KEY_RESPONSE_TIMESTAMP'>/** Key for the optional timestamp of when the administrator responded to the permission
+</span> request. It is an represented in milliseconds since January 1, 1970 00:00:00.0 UTC.
+ &lt;p&gt;
+ Type: long
+*/
+RESPONSE_KEY_RESPONSE_TIMESTAMP : &quot;android.response.timestamp&quot;,
+<span id='android-content-RestrictionsManager-property-META_DATA_APP_RESTRICTIONS'>/** Name of the meta-data entry in the manifest that points to the XML file containing the
+</span> application's available restrictions.
+ @see #getManifestRestrictions(String)
+*/
+META_DATA_APP_RESTRICTIONS : &quot;android.content.APP_RESTRICTIONS&quot;,
+<span id='android-content-RestrictionsManager-method-getApplicationRestrictions'>/**Returns any available set of application-specific restrictions applicable
+</span> to this application.
+@return {Object {android.os.Bundle}} the application restrictions as a Bundle. Returns null if there
+ are no restrictions.
+*/
+getApplicationRestrictions : function(  ) {},
+
+<span id='android-content-RestrictionsManager-method-hasRestrictionsProvider'>/**Called by an application to check if there is an active Restrictions Provider. If
+</span> there isn't, {@link #requestPermission(String, String, PersistableBundle)} is not available.
+@return {Boolean} whether there is an active Restrictions Provider.
+*/
+hasRestrictionsProvider : function(  ) {},
+
+<span id='android-content-RestrictionsManager-method-requestPermission'>/**Called by an application to request permission for an operation. The contents of the
+</span> request are passed in a Bundle that contains several pieces of data depending on the
+ chosen request type.
+@param {String} requestType The type of request. The type could be one of the
+ predefined types specified here or a custom type that the specific
+ Restrictions Provider might understand. For custom types, the type name should be
+ namespaced to avoid collisions with predefined types and types specified by
+ other Restrictions Providers.
+@param {String} requestId A unique id generated by the app that contains sufficient information
+ to identify the parameters of the request when it receives the id in the response.
+@param {Object {PersistableBundle}} request A PersistableBundle containing the data corresponding to the specified request
+ type. The keys for the data in the bundle depend on the request type.
+@throws IllegalArgumentException if any of the required parameters are missing.
+*/
+requestPermission : function(  ) {},
+
+<span id='android-content-RestrictionsManager-method-createLocalApprovalIntent'>/**
+</span>*/
+createLocalApprovalIntent : function(  ) {},
+
+<span id='android-content-RestrictionsManager-method-notifyPermissionResponse'>/**Called by the Restrictions Provider to deliver a response to an application.
+</span>@param {String} packageName the application to deliver the response to. Cannot be null.
+@param {Object {PersistableBundle}} response the bundle containing the response status, request ID and other information.
+                 Cannot be null.
+@throws IllegalArgumentException if any of the required parameters are missing.
+*/
+notifyPermissionResponse : function(  ) {},
+
+<span id='android-content-RestrictionsManager-method-getManifestRestrictions'>/**Parse and return the list of restrictions defined in the manifest for the specified
+</span> package, if any.
+@param {String} packageName The application for which to fetch the restrictions list.
+@return {Object {java.util.List}} The list of RestrictionEntry objects created from the XML file specified
+ in the manifest, or null if none was specified.
+*/
+getManifestRestrictions : function(  ) {},
+
+<span id='android-content-RestrictionsManager-method-convertRestrictionsToBundle'>/**Converts a list of restrictions to the corresponding bundle, using the following mapping:
+</span> &lt;table&gt;
+     &lt;tr&gt;&lt;th&gt;RestrictionEntry&lt;/th&gt;&lt;th&gt;Bundle&lt;/th&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;{@link android.content.RestrictionEntry#TYPE_BOOLEAN}&lt;/td&gt;&lt;td&gt;{@link Bundle#putBoolean}&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;{@link android.content.RestrictionEntry#TYPE_CHOICE},
+     {@link android.content.RestrictionEntry#TYPE_MULTI_SELECT}&lt;/td&gt;
+     &lt;td&gt;{@link Bundle#putStringArray}&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;{@link android.content.RestrictionEntry#TYPE_INTEGER}&lt;/td&gt;&lt;td&gt;{@link Bundle#putInt}&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;{@link android.content.RestrictionEntry#TYPE_STRING}&lt;/td&gt;&lt;td&gt;{@link Bundle#putString}&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;{@link android.content.RestrictionEntry#TYPE_BUNDLE}&lt;/td&gt;&lt;td&gt;{@link Bundle#putBundle}&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;{@link android.content.RestrictionEntry#TYPE_BUNDLE_ARRAY}&lt;/td&gt;
+     &lt;td&gt;{@link Bundle#putParcelableArray}&lt;/td&gt;&lt;/tr&gt;
+ &lt;/table&gt;
+@param {Object {java.util.List}} entries list of restrictions
+*/
+convertRestrictionsToBundle : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

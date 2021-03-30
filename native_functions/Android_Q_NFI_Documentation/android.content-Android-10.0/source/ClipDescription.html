@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-ClipDescription'>/**@class android.content.ClipDescription
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Meta-data describing the contents of a {@link android.content.ClipData}.  Provides enough
+ information to know if you can handle the ClipData, but not the data
+ itself.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using the clipboard framework, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/clipboard/copy-paste.html&quot;&gt;Copy and Paste&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var ClipDescription = {
+
+<span id='android-content-ClipDescription-property-MIMETYPE_TEXT_PLAIN'>/** The MIME type for a clip holding plain text.
+</span>*/
+MIMETYPE_TEXT_PLAIN : &quot;text/plain&quot;,
+<span id='android-content-ClipDescription-property-MIMETYPE_TEXT_HTML'>/** The MIME type for a clip holding HTML text.
+</span>*/
+MIMETYPE_TEXT_HTML : &quot;text/html&quot;,
+<span id='android-content-ClipDescription-property-MIMETYPE_TEXT_URILIST'>/** The MIME type for a clip holding one or more URIs.  This should be
+</span> used for URIs that are meaningful to a user (such as an http: URI).
+ It should &lt;em&gt;not&lt;/em&gt; be used for a content: URI that references some
+ other piece of data; in that case the MIME type should be the type
+ of the referenced data.
+*/
+MIMETYPE_TEXT_URILIST : &quot;text/uri-list&quot;,
+<span id='android-content-ClipDescription-property-MIMETYPE_TEXT_INTENT'>/** The MIME type for a clip holding an Intent.
+</span>*/
+MIMETYPE_TEXT_INTENT : &quot;text/vnd.android.intent&quot;,
+<span id='android-content-ClipDescription-property-EXTRA_TARGET_COMPONENT_NAME'>/** The name of the extra used to define a component name when copying/dragging
+</span> an app icon from Launcher.
+ &lt;p&gt;
+ Type: String
+ &lt;/p&gt;
+ &lt;p&gt;
+ Use {@link android.content.ComponentName#unflattenFromString(String)}
+ and {@link android.content.ComponentName#flattenToString()} to convert the extra value
+ to/from {@link android.content.ComponentName}.
+ &lt;/p&gt;
+ @hide
+*/
+EXTRA_TARGET_COMPONENT_NAME : &quot;android.content.extra.TARGET_COMPONENT_NAME&quot;,
+<span id='android-content-ClipDescription-property-EXTRA_USER_SERIAL_NUMBER'>/** The name of the extra used to define a user serial number when copying/dragging
+</span> an app icon from Launcher.
+ &lt;p&gt;
+ Type: long
+ &lt;/p&gt;
+ @hide
+*/
+EXTRA_USER_SERIAL_NUMBER : &quot;android.content.extra.USER_SERIAL_NUMBER&quot;,
+<span id='android-content-ClipDescription-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-ClipDescription-method-compareMimeTypes'>/**Helper to compare two MIME types, where one may be a pattern.
+</span>@param {String} concreteType A fully-specified MIME type.
+@param {String} desiredType A desired MIME type that may be a pattern such as *&amp;#47;*.
+@return {Boolean} Returns true if the two MIME types match.
+*/
+compareMimeTypes : function(  ) {},
+
+<span id='android-content-ClipDescription-method-setTimestamp'>/**Used for setting the timestamp at which the associated {@link android.content.ClipData} is copied to
+</span> global clipboard.
+@param {Number} timeStamp at which the associated {@link ClipData} is copied to clipboard in
+                  {@link System#currentTimeMillis()} time base.
+@hide 
+*/
+setTimestamp : function(  ) {},
+
+<span id='android-content-ClipDescription-method-getTimestamp'>/**Return the timestamp at which the associated {@link android.content.ClipData} is copied to global clipboard
+</span> in the {@link System#currentTimeMillis()} time base.
+@return {Number} timestamp at which the associated {@link ClipData} is copied to global clipboard
+         or {@code 0} if it is not copied to clipboard.
+*/
+getTimestamp : function(  ) {},
+
+<span id='android-content-ClipDescription-method-getLabel'>/**Return the label for this clip.
+</span>*/
+getLabel : function(  ) {},
+
+<span id='android-content-ClipDescription-method-hasMimeType'>/**Check whether the clip description contains the given MIME type.
+</span>@param {String} mimeType The desired MIME type.  May be a pattern.
+@return {Boolean} Returns true if one of the MIME types in the clip description
+ matches the desired MIME type, else false.
+*/
+hasMimeType : function(  ) {},
+
+<span id='android-content-ClipDescription-method-filterMimeTypes'>/**Filter the clip description MIME types by the given MIME type.  Returns
+</span> all MIME types in the clip that match the given MIME type.
+@param {String} mimeType The desired MIME type.  May be a pattern.
+@return {String} Returns an array of all matching MIME types.  If there are no
+ matching MIME types, null is returned.
+*/
+filterMimeTypes : function(  ) {},
+
+<span id='android-content-ClipDescription-method-getMimeTypeCount'>/**Return the number of MIME types the clip is available in.
+</span>*/
+getMimeTypeCount : function(  ) {},
+
+<span id='android-content-ClipDescription-method-getMimeType'>/**Return one of the possible clip MIME types.
+</span>*/
+getMimeType : function(  ) {},
+
+<span id='android-content-ClipDescription-method-getExtras'>/**Retrieve extended data from the clip description.
+</span>@return {Object {android.os.PersistableBundle}} the bundle containing extended data previously set with
+ {@link #setExtras(PersistableBundle)}, or null if no extras have been set.
+@see #setExtras(PersistableBundle)
+*/
+getExtras : function(  ) {},
+
+<span id='android-content-ClipDescription-method-setExtras'>/**Add extended data to the clip description.
+</span>@see #getExtras()
+*/
+setExtras : function(  ) {},
+
+<span id='android-content-ClipDescription-method-validate'>/**
+</span>@hide 
+*/
+validate : function(  ) {},
+
+<span id='android-content-ClipDescription-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-ClipDescription-method-toShortString'>/**
+</span>@hide 
+*/
+toShortString : function(  ) {},
+
+<span id='android-content-ClipDescription-method-toShortStringTypesOnly'>/**
+</span>@hide 
+*/
+toShortStringTypesOnly : function(  ) {},
+
+<span id='android-content-ClipDescription-method-writeToProto'>/**
+</span>@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-content-ClipDescription-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-ClipDescription-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

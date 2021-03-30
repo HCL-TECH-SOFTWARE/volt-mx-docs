@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-usage-UsageStats'>/**@class android.app.usage.UsageStats
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Contains usage statistics for an app package for a specific
+ time range.
+*/
+var UsageStats = {
+
+<span id='android-app-usage-UsageStats-property-mPackageName'>/** {@hide}
+</span>*/
+mPackageName : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mBeginTimeStamp'>/** {@hide}
+</span>*/
+mBeginTimeStamp : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mEndTimeStamp'>/** {@hide}
+</span>*/
+mEndTimeStamp : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mLastTimeUsed'>/** Last time an activity is at foreground (have focus), this is corresponding to
+</span> {@link android.app.usage.UsageEvents.Event#ACTIVITY_RESUMED} event.
+ {@hide}
+*/
+mLastTimeUsed : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mLastTimeVisible'>/** Last time an activity is visible.
+</span> @hide
+*/
+mLastTimeVisible : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mTotalTimeInForeground'>/** Total time this package's activity is in foreground.
+</span> {@hide}
+*/
+mTotalTimeInForeground : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mTotalTimeVisible'>/** Total time this package's activity is visible.
+</span> {@hide}
+*/
+mTotalTimeVisible : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mLastTimeForegroundServiceUsed'>/** Last time foreground service is started.
+</span> {@hide}
+*/
+mLastTimeForegroundServiceUsed : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mTotalTimeForegroundServiceUsed'>/** Total time this package's foreground service is started.
+</span> {@hide}
+*/
+mTotalTimeForegroundServiceUsed : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mLaunchCount'>/** {@hide}
+</span>*/
+mLaunchCount : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mAppLaunchCount'>/** {@hide}
+</span>*/
+mAppLaunchCount : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mLastEvent'>/**Last activity ACTIVITY_RESUMED or ACTIVITY_PAUSED event.
+</span> {@hide}
+ @deprecated use {@link #mActivities} instead.
+*/
+mLastEvent : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mActivities'>/** Key is instanceId of the activity (ActivityRecode appToken hashCode)..
+</span> Value is this activity's last event, one of ACTIVITY_RESUMED, ACTIVITY_PAUSED or
+ ACTIVITY_STOPPED.
+ {@hide}
+*/
+mActivities : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mForegroundServices'>/** If a foreground service is started, it has one entry in this map.
+</span> When a foreground service is stopped, it is removed from this set.
+ Key is foreground service class name.
+ Value is the foreground service's last event, it is FOREGROUND_SERVICE_START.
+ {@hide}
+*/
+mForegroundServices : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-mChooserCounts'>/** {@hide}
+</span>*/
+mChooserCounts : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-usage-UsageStats-method-getObfuscatedForInstantApp'>/**{@hide}
+</span>*/
+getObfuscatedForInstantApp : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-getPackageName'>/**
+</span>*/
+getPackageName : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-getFirstTimeStamp'>/**Get the beginning of the time range this {@link android.app.usage.UsageStats} represents,
+</span> measured in milliseconds since the epoch.
+ &lt;p/&gt;
+ See {@link System#currentTimeMillis()}.
+*/
+getFirstTimeStamp : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-getLastTimeStamp'>/**Get the end of the time range this {@link android.app.usage.UsageStats} represents,
+</span> measured in milliseconds since the epoch.
+ &lt;p/&gt;
+ See {@link System#currentTimeMillis()}.
+*/
+getLastTimeStamp : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-getLastTimeUsed'>/**Get the last time this package's activity was used, measured in milliseconds since the epoch.
+</span> &lt;p/&gt;
+ See {@link System#currentTimeMillis()}.
+*/
+getLastTimeUsed : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-getLastTimeVisible'>/**Get the last time this package's activity is visible in the UI, measured in milliseconds
+</span> since the epoch.
+*/
+getLastTimeVisible : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-getTotalTimeInForeground'>/**Get the total time this package spent in the foreground, measured in milliseconds.
+</span>*/
+getTotalTimeInForeground : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-getTotalTimeVisible'>/**Get the total time this package's activity is visible in the UI, measured in milliseconds.
+</span>*/
+getTotalTimeVisible : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-getLastTimeForegroundServiceUsed'>/**Get the last time this package's foreground service was used, measured in milliseconds since
+</span> the epoch.
+ &lt;p/&gt;
+ See {@link System#currentTimeMillis()}.
+*/
+getLastTimeForegroundServiceUsed : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-getTotalTimeForegroundServiceUsed'>/**Get the total time this package's foreground services are started, measured in milliseconds.
+</span>*/
+getTotalTimeForegroundServiceUsed : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-getAppLaunchCount'>/**Returns the number of times the app was launched as an activity from outside of the app.
+</span> Excludes intra-app activity transitions.
+@hide 
+*/
+getAppLaunchCount : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-add'>/**Add the statistics from the right {@link android.app.usage.UsageStats} to the left. The package name for
+</span> both {@link android.app.usage.UsageStats} objects must be the same.
+@param {Object {UsageStats}} right The {@link UsageStats} object to merge into this one.
+@throws java.lang.IllegalArgumentException if the package names of the two
+         {@link UsageStats} objects are different.
+*/
+add : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-update'>/**Update the UsageStats by a activity or foreground service event.
+</span>@param {String} className class name of a activity or foreground service, could be null to if this
+                  is sent to all activities/services in this package.
+@param {Number} timeStamp Epoch timestamp in milliseconds.
+@param {Number} eventType event type as in {@link UsageEvents.Event}
+@param {Number} instanceId if className is an activity, the hashCode of ActivityRecord's appToken.
+                 if className is not an activity, instanceId is not used.
+@hide 
+*/
+update : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-usage-UsageStats-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

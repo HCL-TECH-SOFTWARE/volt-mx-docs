@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-AbstractThreadedSyncAdapter'>/**@class android.content.AbstractThreadedSyncAdapter
+</span>@extends java.lang.Object
+
+ An abstract implementation of a SyncAdapter that spawns a thread to invoke a sync operation.
+ If a sync operation is already in progress when a sync request is received, an error will be
+ returned to the new request and the existing request will be allowed to continue.
+ However if there is no sync in progress then a thread will be spawned and {@link #onPerformSync}
+ will be invoked on that thread.
+ &lt;p&gt;
+ Syncs can be cancelled at any time by the framework. For example a sync that was not
+ user-initiated and lasts longer than 30 minutes will be considered timed-out and cancelled.
+ Similarly the framework will attempt to determine whether or not an adapter is making progress
+ by monitoring its network activity over the course of a minute. If the network traffic over this
+ window is close enough to zero the sync will be cancelled. You can also request the sync be
+ cancelled via {@link android.content.ContentResolver#cancelSync(Account, String)} or
+ {@link android.content.ContentResolver#cancelSync(SyncRequest)}.
+ &lt;p&gt;
+ A sync is cancelled by issuing a {@link Thread#interrupt()} on the syncing thread. &lt;strong&gt;Either
+ your code in {@link #onPerformSync(Account, Bundle, String, ContentProviderClient, android.content.SyncResult)}
+ must check {@link Thread#interrupted()}, or you you must override one of
+ {@link #onSyncCanceled}(Thread)/{@link #onSyncCanceled}()&lt;/strong&gt; (depending on whether or not
+ your adapter supports syncing of multiple accounts in parallel). If your adapter does not
+ respect the cancel issued by the framework you run the risk of your app's entire process being
+ killed.
+ &lt;p&gt;
+ In order to be a sync adapter one must extend this class, provide implementations for the
+ abstract methods and write a service that returns the result of {@link #getSyncAdapterBinder}()
+ in the service's {@link android.app.Service#onBind(android.content.Intent)} when invoked
+ with an intent with action &lt;code&gt;android.content.SyncAdapter&lt;/code&gt;. This service
+ must specify the following intent filter and metadata tags in its AndroidManifest.xml file
+ &lt;pre&gt;
+   &amp;lt;intent-filter&amp;gt;
+     &amp;lt;action android:name=&quot;android.content.SyncAdapter&quot; /&amp;gt;
+   &amp;lt;/intent-filter&amp;gt;
+   &amp;lt;meta-data android:name=&quot;android.content.SyncAdapter&quot;
+             android:resource=&quot;@xml/syncadapter&quot; /&amp;gt;
+ &lt;/pre&gt;
+ The &lt;code&gt;android:resource&lt;/code&gt; attribute must point to a resource that looks like:
+ &lt;pre&gt;
+ &amp;lt;sync-adapter xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:contentAuthority=&quot;authority&quot;
+    android:accountType=&quot;accountType&quot;
+    android:userVisible=&quot;true|false&quot;
+    android:supportsUploading=&quot;true|false&quot;
+    android:allowParallelSyncs=&quot;true|false&quot;
+    android:isAlwaysSyncable=&quot;true|false&quot;
+    android:syncAdapterSettingsAction=&quot;ACTION_OF_SETTINGS_ACTIVITY&quot;
+ /&amp;gt;
+ &lt;/pre&gt;
+ &lt;ul&gt;
+ &lt;li&gt;The &lt;code&gt;android:contentAuthority&lt;/code&gt; and &lt;code&gt;android:accountType&lt;/code&gt; attributes
+ indicate which content authority and for which account types this sync adapter serves.
+ &lt;li&gt;&lt;code&gt;android:userVisible&lt;/code&gt; defaults to true and controls whether or not this sync
+ adapter shows up in the Sync Settings screen.
+ &lt;li&gt;&lt;code&gt;android:supportsUploading&lt;/code&gt; defaults
+ to true and if true an upload-only sync will be requested for all syncadapters associated
+ with an authority whenever that authority's content provider does a
+ {@link android.content.ContentResolver#notifyChange(android.net.Uri, android.database.ContentObserver, boolean)}
+ with syncToNetwork set to true.
+ &lt;li&gt;&lt;code&gt;android:allowParallelSyncs&lt;/code&gt; defaults to false and if true indicates that
+ the sync adapter can handle syncs for multiple accounts at the same time. Otherwise
+ the SyncManager will wait until the sync adapter is not in use before requesting that
+ it sync an account's data.
+ &lt;li&gt;&lt;code&gt;android:isAlwaysSyncable&lt;/code&gt; defaults to false and if true tells the SyncManager
+ to initialize the isSyncable state to 1 for that sync adapter for each account that is added.
+ &lt;li&gt;&lt;code&gt;android:syncAdapterSettingsAction&lt;/code&gt; defaults to null and if supplied it
+ specifies an Intent action of an activity that can be used to adjust the sync adapter's
+ sync settings. The activity must live in the same package as the sync adapter.
+ &lt;/ul&gt;
+*/
+var AbstractThreadedSyncAdapter = {
+
+<span id='android-content-AbstractThreadedSyncAdapter-property-LOG_SYNC_DETAILS'>/** Kernel event log tag.  Also listed in data/etc/event-log-tags.
+</span> @deprecated Private constant.  May go away in the next release.
+*/
+LOG_SYNC_DETAILS : &quot;2743&quot;,
+<span id='android-content-AbstractThreadedSyncAdapter-method-getContext'>/**
+</span>*/
+getContext : function(  ) {},
+
+<span id='android-content-AbstractThreadedSyncAdapter-method-getSyncAdapterBinder'>/**
+</span>@return {Object {android.os.IBinder}} a reference to the IBinder of the SyncAdapter service.
+*/
+getSyncAdapterBinder : function(  ) {},
+
+<span id='android-content-AbstractThreadedSyncAdapter-method-onUnsyncableAccount'>/**Allows to defer syncing until all accounts are properly set up.
+</span>
+ &lt;p&gt;Called when a account / authority pair
+ &lt;ul&gt;
+ &lt;li&gt;that can be handled by this adapter&lt;/li&gt;
+ &lt;li&gt;{@link android.content.ContentResolver#requestSync(SyncRequest) is synced}&lt;/li&gt;
+ &lt;li&gt;and the account/provider {@link android.content.ContentResolver#getIsSyncable(Account, String) has
+ unknown state (&lt;0)}.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;This might be called on a different service connection as {@link #onPerformSync}.
+
+ &lt;p&gt;The system expects this method to immediately return. If the call stalls the system
+ behaves as if this method returned {@code true}. If it is required to perform a longer task
+ (such as interacting with the user), return {@code false} and proceed in a difference
+ context, such as an {@link android.app.Activity}, or foreground service. The sync can then be
+ rescheduled once the account becomes syncable.
+@return {Boolean} If {@code false} syncing is deferred. Returns {@code true} by default, i.e. by
+         default syncing starts immediately.
+*/
+onUnsyncableAccount : function(  ) {},
+
+<span id='android-content-AbstractThreadedSyncAdapter-method-onPerformSync'>/**Perform a sync for this account. SyncAdapter-specific parameters may
+</span> be specified in extras, which is guaranteed to not be null. Invocations
+ of this method are guaranteed to be serialized.
+@param {Object {Account}} account the account that should be synced
+@param {Object {Bundle}} extras SyncAdapter-specific parameters
+@param {String} authority the authority of this sync request
+@param {Object {ContentProviderClient}} provider a ContentProviderClient that points to the ContentProvider for this
+   authority
+@param {Object {SyncResult}} syncResult SyncAdapter-specific parameters
+*/
+onPerformSync : function(  ) {},
+
+<span id='android-content-AbstractThreadedSyncAdapter-method-onSecurityException'>/**Report that there was a security exception when opening the content provider
+</span> prior to calling {@link #onPerformSync}.  This will be treated as a sync
+ database failure.
+@param {Object {Account}} account the account that attempted to sync
+@param {Object {Bundle}} extras SyncAdapter-specific parameters
+@param {String} authority the authority of the failed sync request
+@param {Object {SyncResult}} syncResult SyncAdapter-specific parameters
+*/
+onSecurityException : function(  ) {},
+
+<span id='android-content-AbstractThreadedSyncAdapter-method-onSyncCanceled'>/**Indicates that a sync operation has been canceled. This will be invoked on a separate
+</span> thread than the sync thread and so you must consider the multi-threaded implications
+ of the work that you do in this method.
+ &lt;p&gt;
+ This will only be invoked when the SyncAdapter indicates that it doesn't support
+ parallel syncs.
+*/
+onSyncCanceled : function(  ) {},
+
+<span id='android-content-AbstractThreadedSyncAdapter-method-onSyncCanceled'>/**Indicates that a sync operation has been canceled. This will be invoked on a separate
+</span> thread than the sync thread and so you must consider the multi-threaded implications
+ of the work that you do in this method.
+ &lt;p&gt;
+ This will only be invoked when the SyncAdapter indicates that it does support
+ parallel syncs.
+@param {Object {Thread}} thread the Thread of the sync that is to be canceled.
+*/
+onSyncCanceled : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

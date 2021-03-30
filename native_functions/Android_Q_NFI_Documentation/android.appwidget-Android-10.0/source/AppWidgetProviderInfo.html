@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-appwidget-AppWidgetProviderInfo'>/**@class android.appwidget.AppWidgetProviderInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Describes the meta data for an installed AppWidget provider.  The fields in this class
+ correspond to the fields in the &lt;code&gt;&amp;lt;appwidget-provider&amp;gt;&lt;/code&gt; xml tag.
+*/
+var AppWidgetProviderInfo = {
+
+<span id='android-appwidget-AppWidgetProviderInfo-property-RESIZE_NONE'>/** Widget is not resizable.
+</span>*/
+RESIZE_NONE : &quot;0&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-RESIZE_HORIZONTAL'>/** Widget is resizable in the horizontal axis only.
+</span>*/
+RESIZE_HORIZONTAL : &quot;1&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-RESIZE_VERTICAL'>/** Widget is resizable in the vertical axis only.
+</span>*/
+RESIZE_VERTICAL : &quot;2&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-RESIZE_BOTH'>/** Widget is resizable in both the horizontal and vertical axes.
+</span>*/
+RESIZE_BOTH : &quot;3&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-WIDGET_CATEGORY_HOME_SCREEN'>/** Indicates that the widget can be displayed on the home screen. This is the default value.
+</span>*/
+WIDGET_CATEGORY_HOME_SCREEN : &quot;1&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-WIDGET_CATEGORY_KEYGUARD'>/** Indicates that the widget can be displayed on the keyguard.
+</span>*/
+WIDGET_CATEGORY_KEYGUARD : &quot;2&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-WIDGET_CATEGORY_SEARCHBOX'>/** Indicates that the widget can be displayed within a space reserved for the search box.
+</span>*/
+WIDGET_CATEGORY_SEARCHBOX : &quot;4&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-WIDGET_FEATURE_RECONFIGURABLE'>/** The widget can be reconfigured anytime after it is bound by starting the
+</span> {@link #configure} activity.
+
+ @see #widgetFeatures
+*/
+WIDGET_FEATURE_RECONFIGURABLE : &quot;1&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-WIDGET_FEATURE_HIDE_FROM_PICKER'>/** The widget is added directly by the app, and the host may hide this widget when providing
+</span> the user with the list of available widgets to choose from.
+
+ @see AppWidgetManager#requestPinAppWidget(ComponentName, Bundle, PendingIntent)
+ @see #widgetFeatures
+*/
+WIDGET_FEATURE_HIDE_FROM_PICKER : &quot;2&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-provider'>/** Identity of this AppWidget component.  This component should be a {@link android.content.BroadcastReceiver}, and it will be sent the AppWidget intents
+</span> {@link android.appwidget as described in the AppWidget package documentation}.
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:name&lt;/code&gt; attribute in
+ the &lt;code&gt;&amp;lt;receiver&amp;gt;&lt;/code&gt; element in the AndroidManifest.xml file.
+*/
+provider : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-minWidth'>/** The default height of the widget when added to a host, in dp. The widget will get
+</span> at least this width, and will often be given more, depending on the host.
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:minWidth&lt;/code&gt; attribute in
+ the AppWidget meta-data file.
+*/
+minWidth : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-minHeight'>/** The default height of the widget when added to a host, in dp. The widget will get
+</span> at least this height, and will often be given more, depending on the host.
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:minHeight&lt;/code&gt; attribute in
+ the AppWidget meta-data file.
+*/
+minHeight : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-minResizeWidth'>/** Minimum width (in dp) which the widget can be resized to. This field has no effect if it
+</span> is greater than minWidth or if horizontal resizing isn't enabled (see {@link #resizeMode}).
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:minResizeWidth&lt;/code&gt; attribute in
+ the AppWidget meta-data file.
+*/
+minResizeWidth : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-minResizeHeight'>/** Minimum height (in dp) which the widget can be resized to. This field has no effect if it
+</span> is greater than minHeight or if vertical resizing isn't enabled (see {@link #resizeMode}).
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:minResizeHeight&lt;/code&gt; attribute in
+ the AppWidget meta-data file.
+*/
+minResizeHeight : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-updatePeriodMillis'>/** How often, in milliseconds, that this AppWidget wants to be updated.
+</span> The AppWidget manager may place a limit on how often a AppWidget is updated.
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:updatePeriodMillis&lt;/code&gt; attribute in
+ the AppWidget meta-data file.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;b&gt;Note:&lt;/b&gt; Updates requested with &lt;code&gt;updatePeriodMillis&lt;/code&gt;
+ will not be delivered more than once every 30 minutes.&lt;/p&gt;
+*/
+updatePeriodMillis : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-initialLayout'>/** The resource id of the initial layout for this AppWidget.  This should be
+</span> displayed until the RemoteViews for the AppWidget is available.
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:initialLayout&lt;/code&gt; attribute in
+ the AppWidget meta-data file.
+*/
+initialLayout : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-initialKeyguardLayout'>/** The resource id of the initial layout for this AppWidget when it is displayed on keyguard.
+</span> This parameter only needs to be provided if the widget can be displayed on the keyguard,
+ see {@link #widgetCategory}.
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:initialKeyguardLayout&lt;/code&gt; attribute in
+ the AppWidget meta-data file.
+*/
+initialKeyguardLayout : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-configure'>/** The activity to launch that will configure the AppWidget.
+</span>
+ &lt;p&gt;This class name of field corresponds to the &lt;code&gt;android:configure&lt;/code&gt; attribute in
+ the AppWidget meta-data file.  The package name always corresponds to the package containing
+ the AppWidget provider.
+*/
+configure : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-label'>/** The label to display to the user in the AppWidget picker.
+</span>
+ @deprecated Use {@link #loadLabel(android.content.pm.PackageManager)}.
+*/
+label : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-icon'>/** The icon to display for this AppWidget in the AppWidget picker. If not supplied in the
+</span> xml, the application icon will be used.
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:icon&lt;/code&gt; attribute in
+ the &lt;code&gt;&amp;lt;receiver&amp;gt;&lt;/code&gt; element in the AndroidManifest.xml file.
+*/
+icon : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-autoAdvanceViewId'>/** The view id of the AppWidget subview which should be auto-advanced by the widget's host.
+</span>
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:autoAdvanceViewId&lt;/code&gt; attribute in
+ the AppWidget meta-data file.
+*/
+autoAdvanceViewId : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-previewImage'>/** A preview of what the AppWidget will look like after it's configured.
+</span> If not supplied, the AppWidget's icon will be used.
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:previewImage&lt;/code&gt; attribute in
+ the &lt;code&gt;&amp;lt;receiver&amp;gt;&lt;/code&gt; element in the AndroidManifest.xml file.
+*/
+previewImage : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-resizeMode'>/** The rules by which a widget can be resized. See {@link #RESIZE_NONE},
+</span> {@link #RESIZE_NONE}, {@link #RESIZE_HORIZONTAL},
+ {@link #RESIZE_VERTICAL}, {@link #RESIZE_BOTH}.
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;android:resizeMode&lt;/code&gt; attribute in
+ the AppWidget meta-data file.
+*/
+resizeMode : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-widgetCategory'>/** Determines whether this widget can be displayed on the home screen, the keyguard, or both.
+</span> A widget which is displayed on both needs to ensure that it follows the design guidelines
+ for both widget classes. This can be achieved by querying the AppWidget options in its
+ widget provider's update method.
+
+ &lt;p&gt;This field corresponds to the &lt;code&gt;widgetCategory&lt;/code&gt; attribute in
+ the AppWidget meta-data file.
+*/
+widgetCategory : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-widgetFeatures'>/** Flags indicating various features supported by the widget. These are hints to the widget
+</span> host, and do not actually change the behavior of the widget.
+
+ @see #WIDGET_FEATURE_RECONFIGURABLE
+ @see #WIDGET_FEATURE_HIDE_FROM_PICKER
+*/
+widgetFeatures : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-providerInfo'>/**@hide */
+</span>providerInfo : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-property-CREATOR'>/** Parcelable.Creator that instantiates AppWidgetProviderInfo objects
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-appwidget-AppWidgetProviderInfo-method-loadLabel'>/**Loads the localized label to display to the user in the AppWidget picker.
+</span>@param {Object {PackageManager}} packageManager Package manager instance for loading resources.
+@return {String} The label for the current locale.
+*/
+loadLabel : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProviderInfo-method-loadIcon'>/**Loads the icon to display for this AppWidget in the AppWidget picker. If not
+</span> supplied in the xml, the application icon will be used. A client can optionally
+ provide a desired density such as {@link android.util.DisplayMetrics#DENSITY_LOW}
+ {@link android.util.DisplayMetrics#DENSITY_MEDIUM}, etc. If no density is
+ provided, the density of the current display will be used.
+ &lt;p&gt;
+ The loaded icon corresponds to the &lt;code&gt;android:icon&lt;/code&gt; attribute in
+ the &lt;code&gt;&amp;lt;receiver&amp;gt;&lt;/code&gt; element in the AndroidManifest.xml file.
+ &lt;/p&gt;
+@param {Object {Context}} context Context for accessing resources.
+@param {Number} density The optional desired density as per
+         {@link android.util.DisplayMetrics#densityDpi}.
+@return {Object {android.graphics.drawable.Drawable}} The provider icon.
+*/
+loadIcon : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProviderInfo-method-loadPreviewImage'>/**Loads a preview of what the AppWidget will look like after it's configured.
+</span> A client can optionally provide a desired density such as
+ {@link android.util.DisplayMetrics#DENSITY_LOW}
+ {@link android.util.DisplayMetrics#DENSITY_MEDIUM}, etc. If no density is
+ provided, the density of the current display will be used.
+ &lt;p&gt;
+ The loaded image corresponds to the &lt;code&gt;android:previewImage&lt;/code&gt; attribute
+ in the &lt;code&gt;&amp;lt;receiver&amp;gt;&lt;/code&gt; element in the AndroidManifest.xml file.
+ &lt;/p&gt;
+@param {Object {Context}} context Context for accessing resources.
+@param {Number} density The optional desired density as per
+         {@link android.util.DisplayMetrics#densityDpi}.
+@return {Object {android.graphics.drawable.Drawable}} The widget preview image or null if preview image is not available.
+*/
+loadPreviewImage : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProviderInfo-method-getProfile'>/**Gets the user profile in which the provider resides.
+</span>@return {Object {android.os.UserHandle}} The hosting user profile.
+*/
+getProfile : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProviderInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProviderInfo-method-clone'>/**
+</span>*/
+clone : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProviderInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProviderInfo-method-updateDimensions'>/**
+</span>@hide 
+*/
+updateDimensions : function(  ) {},
+
+<span id='android-appwidget-AppWidgetProviderInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

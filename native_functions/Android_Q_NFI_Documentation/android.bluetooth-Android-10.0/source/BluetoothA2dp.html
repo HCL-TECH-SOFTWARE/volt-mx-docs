@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothA2dp'>/**@class android.bluetooth.BluetoothA2dp
+</span> implements android.bluetooth.BluetoothProfile
+
+@extends java.lang.Object
+
+ This class provides the public APIs to control the Bluetooth A2DP
+ profile.
+
+ &lt;p&gt;BluetoothA2dp is a proxy object for controlling the Bluetooth A2DP
+ Service via IPC. Use {@link android.bluetooth.BluetoothAdapter#getProfileProxy} to get
+ the BluetoothA2dp proxy object.
+
+ &lt;p&gt; Android only supports one connected Bluetooth A2dp device at a time.
+ Each method is protected with its appropriate permission.
+*/
+var BluetoothA2dp = {
+
+<span id='android-bluetooth-BluetoothA2dp-property-ACTION_CONNECTION_STATE_CHANGED'>/** Intent used to broadcast the change in connection state of the A2DP
+</span> profile.
+
+ &lt;p&gt;This intent will have 3 extras:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_STATE} - The current state of the profile. &lt;/li&gt;
+ &lt;li&gt; {@link #EXTRA_PREVIOUS_STATE}- The previous state of the profile.&lt;/li&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device. &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} can be any of
+ {@link #STATE_DISCONNECTED}, {@link #STATE_CONNECTING},
+ {@link #STATE_CONNECTED}, {@link #STATE_DISCONNECTING}.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+*/
+ACTION_CONNECTION_STATE_CHANGED : &quot;android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-ACTION_PLAYING_STATE_CHANGED'>/** Intent used to broadcast the change in the Playing state of the A2DP
+</span> profile.
+
+ &lt;p&gt;This intent will have 3 extras:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_STATE} - The current state of the profile. &lt;/li&gt;
+ &lt;li&gt; {@link #EXTRA_PREVIOUS_STATE}- The previous state of the profile. &lt;/li&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device. &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} can be any of
+ {@link #STATE_PLAYING}, {@link #STATE_NOT_PLAYING},
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+*/
+ACTION_PLAYING_STATE_CHANGED : &quot;android.bluetooth.a2dp.profile.action.PLAYING_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-ACTION_AVRCP_CONNECTION_STATE_CHANGED'>/**@hide */
+</span>ACTION_AVRCP_CONNECTION_STATE_CHANGED : &quot;android.bluetooth.a2dp.profile.action.AVRCP_CONNECTION_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-ACTION_ACTIVE_DEVICE_CHANGED'>/** Intent used to broadcast the selection of a connected device as active.
+</span>
+ &lt;p&gt;This intent will have one extra:
+ &lt;ul&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device. It can
+ be null if no device is active. &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+
+ @hide
+*/
+ACTION_ACTIVE_DEVICE_CHANGED : &quot;android.bluetooth.a2dp.profile.action.ACTIVE_DEVICE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-ACTION_CODEC_CONFIG_CHANGED'>/** Intent used to broadcast the change in the Audio Codec state of the
+</span> A2DP Source profile.
+
+ &lt;p&gt;This intent will have 2 extras:
+ &lt;ul&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothCodecStatus#EXTRA_CODEC_STATUS} - The codec status. &lt;/li&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device if the device is currently
+ connected, otherwise it is not included.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+
+ @hide
+*/
+ACTION_CODEC_CONFIG_CHANGED : &quot;android.bluetooth.a2dp.profile.action.CODEC_CONFIG_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-STATE_PLAYING'>/** A2DP sink device is streaming music. This state can be one of
+</span> {@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} of
+ {@link #ACTION_PLAYING_STATE_CHANGED} intent.
+*/
+STATE_PLAYING : &quot;10&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-STATE_NOT_PLAYING'>/** A2DP sink device is NOT streaming music. This state can be one of
+</span> {@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} of
+ {@link #ACTION_PLAYING_STATE_CHANGED} intent.
+*/
+STATE_NOT_PLAYING : &quot;11&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-OPTIONAL_CODECS_SUPPORT_UNKNOWN'>/** We don't have a stored preference for whether or not the given A2DP sink device supports
+</span> optional codecs.
+
+ @hide
+*/
+OPTIONAL_CODECS_SUPPORT_UNKNOWN : &quot;-1&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-OPTIONAL_CODECS_NOT_SUPPORTED'>/** The given A2DP sink device does not support optional codecs.
+</span>
+ @hide
+*/
+OPTIONAL_CODECS_NOT_SUPPORTED : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-OPTIONAL_CODECS_SUPPORTED'>/** The given A2DP sink device does support optional codecs.
+</span>
+ @hide
+*/
+OPTIONAL_CODECS_SUPPORTED : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-OPTIONAL_CODECS_PREF_UNKNOWN'>/** We don't have a stored preference for whether optional codecs should be enabled or disabled
+</span> for the given A2DP device.
+
+ @hide
+*/
+OPTIONAL_CODECS_PREF_UNKNOWN : &quot;-1&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-OPTIONAL_CODECS_PREF_DISABLED'>/** Optional codecs should be disabled for the given A2DP device.
+</span>
+ @hide
+*/
+OPTIONAL_CODECS_PREF_DISABLED : &quot;0&quot;,
+<span id='android-bluetooth-BluetoothA2dp-property-OPTIONAL_CODECS_PREF_ENABLED'>/** Optional codecs should be enabled for the given A2DP device.
+</span>
+ @hide
+*/
+OPTIONAL_CODECS_PREF_ENABLED : &quot;1&quot;,
+<span id='android-bluetooth-BluetoothA2dp-method-finalize'>/**
+</span>*/
+finalize : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-connect'>/**Initiate connection to a profile of the remote Bluetooth device.
+</span>
+ &lt;p&gt; This API returns false in scenarios like the profile on the
+ device is already connected or Bluetooth is not turned on.
+ When this API returns true, it is guaranteed that
+ connection state intent for the profile will be broadcasted with
+ the state. Users can get the connection state of the profile
+ from this intent.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+connect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-disconnect'>/**Initiate disconnection from a profile
+</span>
+ &lt;p&gt; This API will return false in scenarios like the profile on the
+ Bluetooth device is not in connected state etc. When this API returns,
+ true, it is guaranteed that the connection state change
+ intent will be broadcasted with the state. Users can get the
+ disconnection state of the profile from this intent.
+
+ &lt;p&gt; If the disconnection is initiated by a remote device, the state
+ will transition from {@link #STATE_CONNECTED} to
+ {@link #STATE_DISCONNECTED}. If the disconnect is initiated by the
+ host (local) device the state will transition from
+ {@link #STATE_CONNECTED} to state {@link #STATE_DISCONNECTING} to
+ state {@link #STATE_DISCONNECTED}. The transition to
+ {@link #STATE_DISCONNECTING} can be used to distinguish between the
+ two scenarios.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+disconnect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-getConnectedDevices'>/**{@inheritDoc}
+</span>*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-getDevicesMatchingConnectionStates'>/**{@inheritDoc}
+</span>*/
+getDevicesMatchingConnectionStates : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-getConnectionState'>/**{@inheritDoc}
+</span>*/
+getConnectionState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-setActiveDevice'>/**Select a connected device as active.
+</span>
+ The active device selection is per profile. An active device's
+ purpose is profile-specific. For example, A2DP audio streaming
+ is to the active A2DP Sink device. If a remote device is not
+ connected, it cannot be selected as active.
+
+ &lt;p&gt; This API returns false in scenarios like the profile on the
+ device is not connected or Bluetooth is not turned on.
+ When this API returns true, it is guaranteed that the
+ {@link #ACTION_ACTIVE_DEVICE_CHANGED} intent will be broadcasted
+ with the active device.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device the remote Bluetooth device. Could be null to clear
+ the active device and stop streaming audio to a Bluetooth device.
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+setActiveDevice : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-getActiveDevice'>/**Get the connected device that is active.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH}
+ permission.
+@return {Object {android.bluetooth.BluetoothDevice}} the connected device that is active or null if no device
+ is active
+@hide 
+*/
+getActiveDevice : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-setPriority'>/**Set priority of the profile
+</span>
+ &lt;p&gt; The device should already be paired.
+ Priority can be one of {@link #PRIORITY_ON} orgetBluetoothManager
+ {@link #PRIORITY_OFF},
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Paired bluetooth device
+@param {Number} priority
+@return {Boolean} true if priority is set, false on error
+@hide 
+*/
+setPriority : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-getPriority'>/**Get the priority of the profile.
+</span>
+ &lt;p&gt; The priority can be any of:
+ {@link #PRIORITY_AUTO_CONNECT}, {@link #PRIORITY_OFF},
+ {@link #PRIORITY_ON}, {@link #PRIORITY_UNDEFINED}
+@param {Object {BluetoothDevice}} device Bluetooth device
+@return {Number} priority of the device
+@hide 
+*/
+getPriority : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-isAvrcpAbsoluteVolumeSupported'>/**Checks if Avrcp device supports the absolute volume feature.
+</span>@return {Boolean} true if device supports absolute volume
+@hide 
+*/
+isAvrcpAbsoluteVolumeSupported : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-setAvrcpAbsoluteVolume'>/**Tells remote device to set an absolute volume. Only if absolute volume is supported
+</span>@param {Number} volume Absolute volume to be set on AVRCP side
+@hide 
+*/
+setAvrcpAbsoluteVolume : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-isA2dpPlaying'>/**Check if A2DP profile is streaming music.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} device BluetoothDevice device
+*/
+isA2dpPlaying : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-shouldSendVolumeKeys'>/**This function checks if the remote device is an AVCRP
+</span> target and thus whether we should send volume keys
+ changes or not.
+@hide 
+*/
+shouldSendVolumeKeys : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-getCodecStatus'>/**Gets the current codec status (configuration and capability).
+</span>@param {Object {BluetoothDevice}} device the remote Bluetooth device. If null, use the current
+ active A2DP Bluetooth device.
+@return {Object {android.bluetooth.BluetoothCodecStatus}} the current codec status
+@hide 
+*/
+getCodecStatus : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-setCodecConfigPreference'>/**Sets the codec configuration preference.
+</span>@param {Object {BluetoothDevice}} device the remote Bluetooth device. If null, use the current
+ active A2DP Bluetooth device.
+@param {Object {BluetoothCodecConfig}} codecConfig the codec configuration preference
+@hide 
+*/
+setCodecConfigPreference : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-enableOptionalCodecs'>/**Enables the optional codecs.
+</span>@param {Object {BluetoothDevice}} device the remote Bluetooth device. If null, use the currect
+ active A2DP Bluetooth device.
+@hide 
+*/
+enableOptionalCodecs : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-disableOptionalCodecs'>/**Disables the optional codecs.
+</span>@param {Object {BluetoothDevice}} device the remote Bluetooth device. If null, use the currect
+ active A2DP Bluetooth device.
+@hide 
+*/
+disableOptionalCodecs : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-supportsOptionalCodecs'>/**Returns whether this device supports optional codecs.
+</span>@param {Object {BluetoothDevice}} device The device to check
+@return {Number} one of OPTIONAL_CODECS_SUPPORT_UNKNOWN, OPTIONAL_CODECS_NOT_SUPPORTED, or
+ OPTIONAL_CODECS_SUPPORTED.
+@hide 
+*/
+supportsOptionalCodecs : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-getOptionalCodecsEnabled'>/**Returns whether this device should have optional codecs enabled.
+</span>@param {Object {BluetoothDevice}} device The device in question.
+@return {Number} one of OPTIONAL_CODECS_PREF_UNKNOWN, OPTIONAL_CODECS_PREF_ENABLED, or
+ OPTIONAL_CODECS_PREF_DISABLED.
+@hide 
+*/
+getOptionalCodecsEnabled : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-setOptionalCodecsEnabled'>/**Sets a persistent preference for whether a given device should have optional codecs enabled.
+</span>@param {Object {BluetoothDevice}} device The device to set this preference for.
+@param {Number} value Whether the optional codecs should be enabled for this device.  This should be
+ one of OPTIONAL_CODECS_PREF_UNKNOWN, OPTIONAL_CODECS_PREF_ENABLED, or
+ OPTIONAL_CODECS_PREF_DISABLED.
+@hide 
+*/
+setOptionalCodecsEnabled : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dp-method-stateToString'>/**Helper for converting a state to a string.
+</span>
+ For debug use only - strings are not internationalized.
+@hide 
+*/
+stateToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

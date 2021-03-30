@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothGattServerCallback'>/**@class android.bluetooth.BluetoothGattServerCallback
+</span>@extends java.lang.Object
+
+ This abstract class is used to implement {@link android.bluetooth.BluetoothGattServer} callbacks.
+*/
+var BluetoothGattServerCallback = {
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onConnectionStateChange'>/**Callback indicating when a remote device has been connected or disconnected.
+</span>@param {Object {BluetoothDevice}} device Remote device that has been connected or disconnected.
+@param {Number} status Status of the connect or disconnect operation.
+@param {Number} newState Returns the new connection state. Can be one of {@link
+ BluetoothProfile#STATE_DISCONNECTED} or {@link BluetoothProfile#STATE_CONNECTED}
+*/
+onConnectionStateChange : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onServiceAdded'>/**Indicates whether a local service has been added successfully.
+</span>@param {Number} status Returns {@link BluetoothGatt#GATT_SUCCESS} if the service was added
+ successfully.
+@param {Object {BluetoothGattService}} service The service that has been added
+*/
+onServiceAdded : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onCharacteristicReadRequest'>/**A remote client has requested to read a local characteristic.
+</span>
+ &lt;p&gt;An application must call {@link android.bluetooth.BluetoothGattServer#sendResponse}
+ to complete the request.
+@param {Object {BluetoothDevice}} device The remote device that has requested the read operation
+@param {Number} requestId The Id of the request
+@param {Number} offset Offset into the value of the characteristic
+@param {Object {BluetoothGattCharacteristic}} characteristic Characteristic to be read
+*/
+onCharacteristicReadRequest : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onCharacteristicWriteRequest'>/**A remote client has requested to write to a local characteristic.
+</span>
+ &lt;p&gt;An application must call {@link android.bluetooth.BluetoothGattServer#sendResponse}
+ to complete the request.
+@param {Object {BluetoothDevice}} device The remote device that has requested the write operation
+@param {Number} requestId The Id of the request
+@param {Object {BluetoothGattCharacteristic}} characteristic Characteristic to be written to.
+@param {Boolean} preparedWrite true, if this write operation should be queued for later execution.
+@param {Boolean} responseNeeded true, if the remote device requires a response
+@param {Number} offset The offset given for the value
+@param {Object {byte[]}} value The value the client wants to assign to the characteristic
+*/
+onCharacteristicWriteRequest : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onDescriptorReadRequest'>/**A remote client has requested to read a local descriptor.
+</span>
+ &lt;p&gt;An application must call {@link android.bluetooth.BluetoothGattServer#sendResponse}
+ to complete the request.
+@param {Object {BluetoothDevice}} device The remote device that has requested the read operation
+@param {Number} requestId The Id of the request
+@param {Number} offset Offset into the value of the characteristic
+@param {Object {BluetoothGattDescriptor}} descriptor Descriptor to be read
+*/
+onDescriptorReadRequest : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onDescriptorWriteRequest'>/**A remote client has requested to write to a local descriptor.
+</span>
+ &lt;p&gt;An application must call {@link android.bluetooth.BluetoothGattServer#sendResponse}
+ to complete the request.
+@param {Object {BluetoothDevice}} device The remote device that has requested the write operation
+@param {Number} requestId The Id of the request
+@param {Object {BluetoothGattDescriptor}} descriptor Descriptor to be written to.
+@param {Boolean} preparedWrite true, if this write operation should be queued for later execution.
+@param {Boolean} responseNeeded true, if the remote device requires a response
+@param {Number} offset The offset given for the value
+@param {Object {byte[]}} value The value the client wants to assign to the descriptor
+*/
+onDescriptorWriteRequest : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onExecuteWrite'>/**Execute all pending write operations for this device.
+</span>
+ &lt;p&gt;An application must call {@link android.bluetooth.BluetoothGattServer#sendResponse}
+ to complete the request.
+@param {Object {BluetoothDevice}} device The remote device that has requested the write operations
+@param {Number} requestId The Id of the request
+@param {Boolean} execute Whether the pending writes should be executed (true) or cancelled (false)
+*/
+onExecuteWrite : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onNotificationSent'>/**Callback invoked when a notification or indication has been sent to
+</span> a remote device.
+
+ &lt;p&gt;When multiple notifications are to be sent, an application must
+ wait for this callback to be received before sending additional
+ notifications.
+@param {Object {BluetoothDevice}} device The remote device the notification has been sent to
+@param {Number} status {@link BluetoothGatt#GATT_SUCCESS} if the operation was successful
+*/
+onNotificationSent : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onMtuChanged'>/**Callback indicating the MTU for a given device connection has changed.
+</span>
+ &lt;p&gt;This callback will be invoked if a remote client has requested to change
+ the MTU for a given connection.
+@param {Object {BluetoothDevice}} device The remote device that requested the MTU change
+@param {Number} mtu The new MTU size
+*/
+onMtuChanged : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onPhyUpdate'>/**Callback triggered as result of {@link android.bluetooth.BluetoothGattServer#setPreferredPhy}, or as a result
+</span> of remote device changing the PHY.
+@param {Object {BluetoothDevice}} device The remote device
+@param {Number} txPhy the transmitter PHY in use. One of {@link BluetoothDevice#PHY_LE_1M}, {@link
+ BluetoothDevice#PHY_LE_2M}, and {@link BluetoothDevice#PHY_LE_CODED}
+@param {Number} rxPhy the receiver PHY in use. One of {@link BluetoothDevice#PHY_LE_1M}, {@link
+ BluetoothDevice#PHY_LE_2M}, and {@link BluetoothDevice#PHY_LE_CODED}
+@param {Number} status Status of the PHY update operation. {@link BluetoothGatt#GATT_SUCCESS} if the
+ operation succeeds.
+*/
+onPhyUpdate : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onPhyRead'>/**Callback triggered as result of {@link android.bluetooth.BluetoothGattServer#readPhy}
+</span>@param {Object {BluetoothDevice}} device The remote device that requested the PHY read
+@param {Number} txPhy the transmitter PHY in use. One of {@link BluetoothDevice#PHY_LE_1M}, {@link
+ BluetoothDevice#PHY_LE_2M}, and {@link BluetoothDevice#PHY_LE_CODED}
+@param {Number} rxPhy the receiver PHY in use. One of {@link BluetoothDevice#PHY_LE_1M}, {@link
+ BluetoothDevice#PHY_LE_2M}, and {@link BluetoothDevice#PHY_LE_CODED}
+@param {Number} status Status of the PHY read operation. {@link BluetoothGatt#GATT_SUCCESS} if the
+ operation succeeds.
+*/
+onPhyRead : function(  ) {},
+
+<span id='android-bluetooth-BluetoothGattServerCallback-method-onConnectionUpdated'>/**Callback indicating the connection parameters were updated.
+</span>@param {Object {BluetoothDevice}} device The remote device involved
+@param {Number} interval Connection interval used on this connection, 1.25ms unit. Valid range is from
+ 6 (7.5ms) to 3200 (4000ms).
+@param {Number} latency Slave latency for the connection in number of connection events. Valid range
+ is from 0 to 499
+@param {Number} timeout Supervision timeout for this connection, in 10ms unit. Valid range is from 10
+ (0.1s) to 3200 (32s)
+@param {Number} status {@link BluetoothGatt#GATT_SUCCESS} if the connection has been updated
+ successfully
+@hide 
+*/
+onConnectionUpdated : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

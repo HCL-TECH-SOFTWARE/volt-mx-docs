@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-bluetooth-BluetoothA2dpSink'>/**@class android.bluetooth.BluetoothA2dpSink
+</span> implements android.bluetooth.BluetoothProfile
+
+@extends java.lang.Object
+
+ This class provides the public APIs to control the Bluetooth A2DP Sink
+ profile.
+
+ &lt;p&gt;BluetoothA2dpSink is a proxy object for controlling the Bluetooth A2DP Sink
+ Service via IPC. Use {@link android.bluetooth.BluetoothAdapter#getProfileProxy} to get
+ the BluetoothA2dpSink proxy object.
+
+ @hide
+*/
+var BluetoothA2dpSink = {
+
+<span id='android-bluetooth-BluetoothA2dpSink-property-ACTION_CONNECTION_STATE_CHANGED'>/** Intent used to broadcast the change in connection state of the A2DP Sink
+</span> profile.
+
+ &lt;p&gt;This intent will have 3 extras:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_STATE} - The current state of the profile. &lt;/li&gt;
+ &lt;li&gt; {@link #EXTRA_PREVIOUS_STATE}- The previous state of the profile.&lt;/li&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device. &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} can be any of
+ {@link #STATE_DISCONNECTED}, {@link #STATE_CONNECTING},
+ {@link #STATE_CONNECTED}, {@link #STATE_DISCONNECTING}.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+*/
+ACTION_CONNECTION_STATE_CHANGED : &quot;android.bluetooth.a2dp-sink.profile.action.CONNECTION_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothA2dpSink-property-ACTION_PLAYING_STATE_CHANGED'>/** Intent used to broadcast the change in the Playing state of the A2DP Sink
+</span> profile.
+
+ &lt;p&gt;This intent will have 3 extras:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_STATE} - The current state of the profile. &lt;/li&gt;
+ &lt;li&gt; {@link #EXTRA_PREVIOUS_STATE}- The previous state of the profile. &lt;/li&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device. &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} can be any of
+ {@link #STATE_PLAYING}, {@link #STATE_NOT_PLAYING},
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+*/
+ACTION_PLAYING_STATE_CHANGED : &quot;android.bluetooth.a2dp-sink.profile.action.PLAYING_STATE_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothA2dpSink-property-STATE_PLAYING'>/** A2DP sink device is streaming music. This state can be one of
+</span> {@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} of
+ {@link #ACTION_PLAYING_STATE_CHANGED} intent.
+*/
+STATE_PLAYING : &quot;10&quot;,
+<span id='android-bluetooth-BluetoothA2dpSink-property-STATE_NOT_PLAYING'>/** A2DP sink device is NOT streaming music. This state can be one of
+</span> {@link #EXTRA_STATE} or {@link #EXTRA_PREVIOUS_STATE} of
+ {@link #ACTION_PLAYING_STATE_CHANGED} intent.
+*/
+STATE_NOT_PLAYING : &quot;11&quot;,
+<span id='android-bluetooth-BluetoothA2dpSink-property-ACTION_AUDIO_CONFIG_CHANGED'>/** Intent used to broadcast the change in the Playing state of the A2DP Sink
+</span> profile.
+
+ &lt;p&gt;This intent will have 3 extras:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_AUDIO_CONFIG} - The audio configuration for the remote device. &lt;/li&gt;
+ &lt;li&gt; {@link android.bluetooth.BluetoothDevice#EXTRA_DEVICE} - The remote device. &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission to
+ receive.
+*/
+ACTION_AUDIO_CONFIG_CHANGED : &quot;android.bluetooth.a2dp-sink.profile.action.AUDIO_CONFIG_CHANGED&quot;,
+<span id='android-bluetooth-BluetoothA2dpSink-property-EXTRA_AUDIO_CONFIG'>/** Extra for the {@link #ACTION_AUDIO_CONFIG_CHANGED} intent.
+</span>
+ This extra represents the current audio configuration of the A2DP source device.
+ {@see BluetoothAudioConfig}
+*/
+EXTRA_AUDIO_CONFIG : &quot;android.bluetooth.a2dp-sink.profile.extra.AUDIO_CONFIG&quot;,
+<span id='android-bluetooth-BluetoothA2dpSink-method-finalize'>/**
+</span>*/
+finalize : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dpSink-method-connect'>/**Initiate connection to a profile of the remote bluetooth device.
+</span>
+ &lt;p&gt; Currently, the system supports only 1 connection to the
+ A2DP profile. The API will automatically disconnect connected
+ devices before connecting.
+
+ &lt;p&gt; This API returns false in scenarios like the profile on the
+ device is already connected or Bluetooth is not turned on.
+ When this API returns true, it is guaranteed that
+ connection state intent for the profile will be broadcasted with
+ the state. Users can get the connection state of the profile
+ from this intent.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+connect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dpSink-method-disconnect'>/**Initiate disconnection from a profile
+</span>
+ &lt;p&gt; This API will return false in scenarios like the profile on the
+ Bluetooth device is not in connected state etc. When this API returns,
+ true, it is guaranteed that the connection state change
+ intent will be broadcasted with the state. Users can get the
+ disconnection state of the profile from this intent.
+
+ &lt;p&gt; If the disconnection is initiated by a remote device, the state
+ will transition from {@link #STATE_CONNECTED} to
+ {@link #STATE_DISCONNECTED}. If the disconnect is initiated by the
+ host (local) device the state will transition from
+ {@link #STATE_CONNECTED} to state {@link #STATE_DISCONNECTING} to
+ state {@link #STATE_DISCONNECTED}. The transition to
+ {@link #STATE_DISCONNECTING} can be used to distinguish between the
+ two scenarios.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Remote Bluetooth Device
+@return {Boolean} false on immediate error, true otherwise
+@hide 
+*/
+disconnect : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dpSink-method-getConnectedDevices'>/**{@inheritDoc}
+</span>*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dpSink-method-getDevicesMatchingConnectionStates'>/**{@inheritDoc}
+</span>*/
+getDevicesMatchingConnectionStates : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dpSink-method-getConnectionState'>/**{@inheritDoc}
+</span>*/
+getConnectionState : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dpSink-method-getAudioConfig'>/**Get the current audio configuration for the A2DP source device,
+</span> or null if the device has no audio configuration
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} device Remote bluetooth device.
+@return {Object {android.bluetooth.BluetoothAudioConfig}} audio configuration for the device, or null
+
+ {@see BluetoothAudioConfig}
+*/
+getAudioConfig : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dpSink-method-setPriority'>/**Set priority of the profile
+</span>
+ &lt;p&gt; The device should already be paired.
+ Priority can be one of {@link #PRIORITY_ON} orgetBluetoothManager
+ {@link #PRIORITY_OFF},
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH_ADMIN}
+ permission.
+@param {Object {BluetoothDevice}} device Paired bluetooth device
+@param {Number} priority
+@return {Boolean} true if priority is set, false on error
+@hide 
+*/
+setPriority : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dpSink-method-getPriority'>/**Get the priority of the profile.
+</span>
+ &lt;p&gt; The priority can be any of:
+ {@link #PRIORITY_AUTO_CONNECT}, {@link #PRIORITY_OFF},
+ {@link #PRIORITY_ON}, {@link #PRIORITY_UNDEFINED}
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} device Bluetooth device
+@return {Number} priority of the device
+@hide 
+*/
+getPriority : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dpSink-method-isA2dpPlaying'>/**Check if A2DP profile is streaming music.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#BLUETOOTH} permission.
+@param {Object {BluetoothDevice}} device BluetoothDevice device
+*/
+isA2dpPlaying : function(  ) {},
+
+<span id='android-bluetooth-BluetoothA2dpSink-method-stateToString'>/**Helper for converting a state to a string.
+</span>
+ For debug use only - strings are not internationalized.
+@hide 
+*/
+stateToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>
