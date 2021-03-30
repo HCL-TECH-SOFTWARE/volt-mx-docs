@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-shell-BugreportProgressService'>/**@class com.android.shell.BugreportProgressService
+</span>@extends android.app.Service
+
+ Service used to keep progress of bugreport processes ({@code dumpstate}).
+ &lt;p&gt;
+ The workflow is:
+ &lt;ol&gt;
+ &lt;li&gt;When {@code dumpstate} starts, it sends a {@code BUGREPORT_STARTED} with a sequential id,
+ its pid, and the estimated total effort.
+ &lt;li&gt;{@link com.android.shell.BugreportReceiver} receives the intent and delegates it to this service.
+ &lt;li&gt;Upon start, this service:
+ &lt;ol&gt;
+ &lt;li&gt;Issues a system notification so user can watch the progresss (which is 0% initially).
+ &lt;li&gt;Polls the {@link SystemProperties} for updates on the {@code dumpstate} progress.
+ &lt;li&gt;If the progress changed, it updates the system notification.
+ &lt;/ol&gt;
+ &lt;li&gt;As {@code dumpstate} progresses, it updates the system property.
+ &lt;li&gt;When {@code dumpstate} finishes, it sends a {@code BUGREPORT_FINISHED} intent.
+ &lt;li&gt;{@link com.android.shell.BugreportReceiver} receives the intent and delegates it to this service, which in
+ turn:
+ &lt;ol&gt;
+ &lt;li&gt;Updates the system notification so user can share the bugreport.
+ &lt;li&gt;Stops monitoring that {@code dumpstate} process.
+ &lt;li&gt;Stops itself if it doesn't have any process left to monitor.
+ &lt;/ol&gt;
+ &lt;/ol&gt;
+
+ TODO: There are multiple threads involved.  Add synchronization accordingly.
+*/
+var BugreportProgressService = {
+
+<span id='com-android-shell-BugreportProgressService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='com-android-shell-BugreportProgressService-method-onStartCommand'>/**
+</span>*/
+onStartCommand : function(  ) {},
+
+<span id='com-android-shell-BugreportProgressService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='com-android-shell-BugreportProgressService-method-onDestroy'>/**
+</span>*/
+onDestroy : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

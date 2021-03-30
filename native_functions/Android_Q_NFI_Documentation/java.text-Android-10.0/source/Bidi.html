@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-text-Bidi'>/**@class java.text.Bidi
+</span>@extends java.lang.Object
+
+ This class implements the Unicode Bidirectional Algorithm.
+ &lt;p&gt;
+ A Bidi object provides information on the bidirectional reordering of the text
+ used to create it.  This is required, for example, to properly display Arabic
+ or Hebrew text.  These languages are inherently mixed directional, as they order
+ numbers from left-to-right while ordering most other text from right-to-left.
+ &lt;p&gt;
+ Once created, a Bidi object can be queried to see if the text it represents is
+ all left-to-right or all right-to-left.  Such objects are very lightweight and
+ this text is relatively easy to process.
+ &lt;p&gt;
+ If there are multiple runs of text, information about the runs can be accessed
+ by indexing to get the start, limit, and level of a run.  The level represents
+ both the direction and the 'nesting level' of a directional run.  Odd levels
+ are right-to-left, while even levels are left-to-right.  So for example level
+ 0 represents left-to-right text, while level 1 represents right-to-left text, and
+ level 2 represents left-to-right text embedded in a right-to-left run.
+
+ @since 1.4
+*/
+var Bidi = {
+
+<span id='java-text-Bidi-property-DIRECTION_LEFT_TO_RIGHT'>/**Constant indicating base direction is left-to-right. */
+</span>DIRECTION_LEFT_TO_RIGHT : &quot;0&quot;,
+<span id='java-text-Bidi-property-DIRECTION_RIGHT_TO_LEFT'>/**Constant indicating base direction is right-to-left. */
+</span>DIRECTION_RIGHT_TO_LEFT : &quot;1&quot;,
+<span id='java-text-Bidi-property-DIRECTION_DEFAULT_LEFT_TO_RIGHT'>/** Constant indicating that the base direction depends on the first strong
+</span> directional character in the text according to the Unicode
+ Bidirectional Algorithm.  If no strong directional character is present,
+ the base direction is left-to-right.
+*/
+DIRECTION_DEFAULT_LEFT_TO_RIGHT : &quot;-2&quot;,
+<span id='java-text-Bidi-property-DIRECTION_DEFAULT_RIGHT_TO_LEFT'>/** Constant indicating that the base direction depends on the first strong
+</span> directional character in the text according to the Unicode
+ Bidirectional Algorithm.  If no strong directional character is present,
+ the base direction is right-to-left.
+*/
+DIRECTION_DEFAULT_RIGHT_TO_LEFT : &quot;-1&quot;,
+<span id='java-text-Bidi-method-createLineBidi'>/**Create a Bidi object representing the bidi information on a line of text within
+</span> the paragraph represented by the current Bidi.  This call is not required if the
+ entire paragraph fits on one line.
+@param {Number} lineStart the offset from the start of the paragraph to the start of the line.
+@param {Number} lineLimit the offset from the start of the paragraph to the limit of the line.
+@return {Object {java.text.Bidi}} a {@code Bidi} object
+*/
+createLineBidi : function(  ) {},
+
+<span id='java-text-Bidi-method-isMixed'>/**Return true if the line is not left-to-right or right-to-left.  This means it either has mixed runs of left-to-right
+</span> and right-to-left text, or the base direction differs from the direction of the only run of text.
+@return {Boolean} true if the line is not left-to-right or right-to-left.
+*/
+isMixed : function(  ) {},
+
+<span id='java-text-Bidi-method-isLeftToRight'>/**Return true if the line is all left-to-right text and the base direction is left-to-right.
+</span>@return {Boolean} true if the line is all left-to-right text and the base direction is left-to-right
+*/
+isLeftToRight : function(  ) {},
+
+<span id='java-text-Bidi-method-isRightToLeft'>/**Return true if the line is all right-to-left text, and the base direction is right-to-left.
+</span>@return {Boolean} true if the line is all right-to-left text, and the base direction is right-to-left
+*/
+isRightToLeft : function(  ) {},
+
+<span id='java-text-Bidi-method-getLength'>/**Return the length of text in the line.
+</span>@return {Number} the length of text in the line
+*/
+getLength : function(  ) {},
+
+<span id='java-text-Bidi-method-baseIsLeftToRight'>/**Return true if the base direction is left-to-right.
+</span>@return {Boolean} true if the base direction is left-to-right
+*/
+baseIsLeftToRight : function(  ) {},
+
+<span id='java-text-Bidi-method-getBaseLevel'>/**Return the base level (0 if left-to-right, 1 if right-to-left).
+</span>@return {Number} the base level
+*/
+getBaseLevel : function(  ) {},
+
+<span id='java-text-Bidi-method-getLevelAt'>/**Return the resolved level of the character at offset.  If offset is
+</span> {@literal &lt;} 0 or &amp;ge; the length of the line, return the base direction
+ level.
+@param {Number} offset the index of the character for which to return the level
+@return {Number} the resolved level of the character at offset
+*/
+getLevelAt : function(  ) {},
+
+<span id='java-text-Bidi-method-getRunCount'>/**Return the number of level runs.
+</span>@return {Number} the number of level runs
+*/
+getRunCount : function(  ) {},
+
+<span id='java-text-Bidi-method-getRunLevel'>/**Return the level of the nth logical run in this line.
+</span>@param {Number} run the index of the run, between 0 and &lt;code&gt;getRunCount()&lt;/code&gt;
+@return {Number} the level of the run
+*/
+getRunLevel : function(  ) {},
+
+<span id='java-text-Bidi-method-getRunStart'>/**Return the index of the character at the start of the nth logical run in this line, as
+</span> an offset from the start of the line.
+@param {Number} run the index of the run, between 0 and &lt;code&gt;getRunCount()&lt;/code&gt;
+@return {Number} the start of the run
+*/
+getRunStart : function(  ) {},
+
+<span id='java-text-Bidi-method-getRunLimit'>/**Return the index of the character past the end of the nth logical run in this line, as
+</span> an offset from the start of the line.  For example, this will return the length
+ of the line for the last run on the line.
+@param {Number} run the index of the run, between 0 and &lt;code&gt;getRunCount()&lt;/code&gt;
+@return {Number} limit the limit of the run
+*/
+getRunLimit : function(  ) {},
+
+<span id='java-text-Bidi-method-requiresBidi'>/**Return true if the specified text requires bidi analysis.  If this returns false,
+</span> the text will display left-to-right.  Clients can then avoid constructing a Bidi object.
+ Text in the Arabic Presentation Forms area of Unicode is presumed to already be shaped
+ and ordered for display, and so will not cause this function to return true.
+@param {Object {char[]}} text the text containing the characters to test
+@param {Number} start the start of the range of characters to test
+@param {Number} limit the limit of the range of characters to test
+@return {Boolean} true if the range of characters requires bidi analysis
+*/
+requiresBidi : function(  ) {},
+
+<span id='java-text-Bidi-method-reorderVisually'>/**Reorder the objects in the array into visual order based on their levels.
+</span> This is a utility function to use when you have a collection of objects
+ representing runs of text in logical order, each run containing text
+ at a single level.  The elements at &lt;code&gt;index&lt;/code&gt; from
+ &lt;code&gt;objectStart&lt;/code&gt; up to &lt;code&gt;objectStart + count&lt;/code&gt;
+ in the objects array will be reordered into visual order assuming
+ each run of text has the level indicated by the corresponding element
+ in the levels array (at &lt;code&gt;index - objectStart + levelStart&lt;/code&gt;).
+@param {Object {byte[]}} levels an array representing the bidi level of each object
+@param {Number} levelStart the start position in the levels array
+@param {Object {java.lang.Object[]}} objects the array of objects to be reordered into visual order
+@param {Number} objectStart the start position in the objects array
+@param {Number} count the number of objects to reorder
+*/
+reorderVisually : function(  ) {},
+
+<span id='java-text-Bidi-method-toString'>/**Display the bidi internal state, used in debugging.
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

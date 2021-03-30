@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-text-Format'>/**@class java.text.Format
+</span> implements java.io.Serializable
+
+ implements java.lang.Cloneable
+
+@extends java.lang.Object
+
+ &lt;code&gt;Format&lt;/code&gt; is an abstract base class for formatting locale-sensitive
+ information such as dates, messages, and numbers.
+
+ &lt;p&gt;
+ &lt;code&gt;Format&lt;/code&gt; defines the programming interface for formatting
+ locale-sensitive objects into &lt;code&gt;String&lt;/code&gt;s (the
+ &lt;code&gt;format&lt;/code&gt; method) and for parsing &lt;code&gt;String&lt;/code&gt;s back
+ into objects (the &lt;code&gt;parseObject&lt;/code&gt; method).
+
+ &lt;p&gt;
+ Generally, a format's &lt;code&gt;parseObject&lt;/code&gt; method must be able to parse
+ any string formatted by its &lt;code&gt;format&lt;/code&gt; method. However, there may
+ be exceptional cases where this is not possible. For example, a
+ &lt;code&gt;format&lt;/code&gt; method might create two adjacent integer numbers with
+ no separator in between, and in this case the &lt;code&gt;parseObject&lt;/code&gt; could
+ not tell which digits belong to which number.
+
+ &lt;h3&gt;Subclassing&lt;/h3&gt;
+
+ &lt;p&gt;
+ The Java Platform provides three specialized subclasses of &lt;code&gt;Format&lt;/code&gt;--
+ &lt;code&gt;DateFormat&lt;/code&gt;, &lt;code&gt;MessageFormat&lt;/code&gt;, and
+ &lt;code&gt;NumberFormat&lt;/code&gt;--for formatting dates, messages, and numbers,
+ respectively.
+ &lt;p&gt;
+ Concrete subclasses must implement three methods:
+ &lt;ol&gt;
+ &lt;li&gt; &lt;code&gt;format(Object obj, StringBuffer toAppendTo, FieldPosition pos)&lt;/code&gt;
+ &lt;li&gt; &lt;code&gt;formatToCharacterIterator(Object obj)&lt;/code&gt;
+ &lt;li&gt; &lt;code&gt;parseObject(String source, ParsePosition pos)&lt;/code&gt;
+ &lt;/ol&gt;
+ These general methods allow polymorphic parsing and formatting of objects
+ and are used, for example, by &lt;code&gt;MessageFormat&lt;/code&gt;.
+ Subclasses often also provide additional &lt;code&gt;format&lt;/code&gt; methods for
+ specific input types as well as &lt;code&gt;parse&lt;/code&gt; methods for specific
+ result types. Any &lt;code&gt;parse&lt;/code&gt; method that does not take a
+ &lt;code&gt;ParsePosition&lt;/code&gt; argument should throw &lt;code&gt;ParseException&lt;/code&gt;
+ when no text in the required format is at the beginning of the input text.
+
+ &lt;p&gt;
+ Most subclasses will also implement the following factory methods:
+ &lt;ol&gt;
+ &lt;li&gt;
+ &lt;code&gt;getInstance&lt;/code&gt; for getting a useful format object appropriate
+ for the current locale
+ &lt;li&gt;
+ &lt;code&gt;getInstance(Locale)&lt;/code&gt; for getting a useful format
+ object appropriate for the specified locale
+ &lt;/ol&gt;
+ In addition, some subclasses may also implement other
+ &lt;code&gt;getXxxxInstance&lt;/code&gt; methods for more specialized control. For
+ example, the &lt;code&gt;NumberFormat&lt;/code&gt; class provides
+ &lt;code&gt;getPercentInstance&lt;/code&gt; and &lt;code&gt;getCurrencyInstance&lt;/code&gt;
+ methods for getting specialized number formatters.
+
+ &lt;p&gt;
+ Subclasses of &lt;code&gt;Format&lt;/code&gt; that allow programmers to create objects
+ for locales (with &lt;code&gt;getInstance(Locale)&lt;/code&gt; for example)
+ must also implement the following class method:
+ &lt;blockquote&gt;
+ &lt;pre&gt;
+ public static Locale[] getAvailableLocales()
+ &lt;/pre&gt;
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;
+ And finally subclasses may define a set of constants to identify the various
+ fields in the formatted output. These constants are used to create a FieldPosition
+ object which identifies what information is contained in the field and its
+ position in the formatted result. These constants should be named
+ &lt;code&gt;&lt;em&gt;item&lt;/em&gt;_FIELD&lt;/code&gt; where &lt;code&gt;&lt;em&gt;item&lt;/em&gt;&lt;/code&gt; identifies
+ the field. For examples of these constants, see &lt;code&gt;ERA_FIELD&lt;/code&gt; and its
+ friends in {@link java.text.DateFormat}.
+
+ &lt;h4&gt;&lt;a name=&quot;synchronization&quot;&gt;Synchronization&lt;/a&gt;&lt;/h4&gt;
+
+ &lt;p&gt;
+ Formats are generally not synchronized.
+ It is recommended to create separate format instances for each thread.
+ If multiple threads access a format concurrently, it must be synchronized
+ externally.
+
+ @see          java.text.ParsePosition
+ @see          java.text.FieldPosition
+ @see          java.text.NumberFormat
+ @see          java.text.DateFormat
+ @see          java.text.MessageFormat
+ @author       Mark Davis
+*/
+var Format = {
+
+<span id='java-text-Format-method-format'>/**Formats an object to produce a string. This is equivalent to
+</span> &lt;blockquote&gt;
+ {@link #format(Object, StringBuffer, java.text.DateFormat.FieldPosition) format}&lt;code&gt;(obj,
+         new StringBuffer(), new FieldPosition(0)).toString();&lt;/code&gt;
+ &lt;/blockquote&gt;
+@param {Object {Object}} obj    The object to format
+@return {String} Formatted string.
+@exception IllegalArgumentException if the Format cannot format the given
+            object
+*/
+format : function(  ) {},
+
+<span id='java-text-Format-method-format'>/**Formats an object and appends the resulting text to a given string
+</span> buffer.
+ If the &lt;code&gt;pos&lt;/code&gt; argument identifies a field used by the format,
+ then its indices are set to the beginning and end of the first such
+ field encountered.
+@param {Object {Object}} obj    The object to format
+@param {Object {StringBuffer}} toAppendTo    where the text is to be appended
+@param {Object {FieldPosition}} pos    A &lt;code&gt;FieldPosition&lt;/code&gt; identifying a field
+               in the formatted text
+@return {Object {java.lang.StringBuffer}} the string buffer passed in as &lt;code&gt;toAppendTo&lt;/code&gt;,
+               with formatted text appended
+@exception NullPointerException if &lt;code&gt;toAppendTo&lt;/code&gt; or
+            &lt;code&gt;pos&lt;/code&gt; is null
+@exception IllegalArgumentException if the Format cannot format the given
+            object
+*/
+format : function(  ) {},
+
+<span id='java-text-Format-method-formatToCharacterIterator'>/**Formats an Object producing an &lt;code&gt;AttributedCharacterIterator&lt;/code&gt;.
+</span> You can use the returned &lt;code&gt;AttributedCharacterIterator&lt;/code&gt;
+ to build the resulting String, as well as to determine information
+ about the resulting String.
+ &lt;p&gt;
+ Each attribute key of the AttributedCharacterIterator will be of type
+ &lt;code&gt;Field&lt;/code&gt;. It is up to each &lt;code&gt;Format&lt;/code&gt; implementation
+ to define what the legal values are for each attribute in the
+ &lt;code&gt;AttributedCharacterIterator&lt;/code&gt;, but typically the attribute
+ key is also used as the attribute value.
+ &lt;p&gt;The default implementation creates an
+ &lt;code&gt;AttributedCharacterIterator&lt;/code&gt; with no attributes. Subclasses
+ that support fields should override this and create an
+ &lt;code&gt;AttributedCharacterIterator&lt;/code&gt; with meaningful attributes.
+@param {Object {Object}} obj The object to format
+@exception IllegalArgumentException when the Format cannot format the
+            given object.
+@param obj The object to format
+@return {Object {java.text.AttributedCharacterIterator}} AttributedCharacterIterator describing the formatted value.
+@since 1.4
+*/
+formatToCharacterIterator : function(  ) {},
+
+<span id='java-text-Format-method-parseObject'>/**Parses text from a string to produce an object.
+</span> &lt;p&gt;
+ The method attempts to parse text starting at the index given by
+ &lt;code&gt;pos&lt;/code&gt;.
+ If parsing succeeds, then the index of &lt;code&gt;pos&lt;/code&gt; is updated
+ to the index after the last character used (parsing does not necessarily
+ use all characters up to the end of the string), and the parsed
+ object is returned. The updated &lt;code&gt;pos&lt;/code&gt; can be used to
+ indicate the starting point for the next call to this method.
+ If an error occurs, then the index of &lt;code&gt;pos&lt;/code&gt; is not
+ changed, the error index of &lt;code&gt;pos&lt;/code&gt; is set to the index of
+ the character where the error occurred, and null is returned.
+@param {String} source A &lt;code&gt;String&lt;/code&gt;, part of which should be parsed.
+@param {Object {ParsePosition}} pos A &lt;code&gt;ParsePosition&lt;/code&gt; object with index and error
+            index information as described above.
+@return {Object {java.lang.Object}} An &lt;code&gt;Object&lt;/code&gt; parsed from the string. In case of
+         error, returns null.
+@exception NullPointerException if &lt;code&gt;pos&lt;/code&gt; is null.
+*/
+parseObject : function(  ) {},
+
+<span id='java-text-Format-method-parseObject'>/**Parses text from the beginning of the given string to produce an object.
+</span> The method may not use the entire text of the given string.
+@param {String} source A &lt;code&gt;String&lt;/code&gt; whose beginning should be parsed.
+@return {Object {java.lang.Object}} An &lt;code&gt;Object&lt;/code&gt; parsed from the string.
+@exception ParseException if the beginning of the specified string
+            cannot be parsed.
+*/
+parseObject : function(  ) {},
+
+<span id='java-text-Format-method-clone'>/**Creates and returns a copy of this object.
+</span>@return {Object {java.lang.Object}} a clone of this instance.
+*/
+clone : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiVendorHal'>/**@class com.android.server.wifi.WifiVendorHal
+</span>@extends java.lang.Object
+
+ Vendor HAL via HIDL
+*/
+var WifiVendorHal = {
+
+<span id='com-android-server-wifi-WifiVendorHal-property-sLock'>/***/
+</span>sLock : &quot;null&quot;,
+<span id='com-android-server-wifi-WifiVendorHal-method-enableVerboseLogging'>/**Enables or disables verbose logging
+</span>@param {Boolean} verbose - with the obvious interpretation
+*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-initialize'>/**Initialize the Hal device manager and register for status callbacks.
+</span>@param {Object {WifiNative.VendorHalDeathEventHandler}} handler Handler to notify if the vendor HAL dies.
+@return {Boolean} true on success, false otherwise.
+*/
+initialize : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-registerRadioModeChangeHandler'>/**Register to listen for radio mode change events from the HAL.
+</span>@param {Object {WifiNative.VendorHalRadioModeChangeEventHandler}} handler Handler to notify when the vendor HAL detects a radio mode change.
+*/
+registerRadioModeChangeHandler : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-isVendorHalSupported'>/**Returns whether the vendor HAL is supported on this device or not.
+</span>*/
+isVendorHalSupported : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-startVendorHalAp'>/**Bring up the HIDL Vendor HAL and configure for AP (Access Point) mode
+</span>@return {Boolean} true for success
+*/
+startVendorHalAp : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-startVendorHalSta'>/**Bring up the HIDL Vendor HAL and configure for STA (Station) mode
+</span>@return {Boolean} true for success
+*/
+startVendorHalSta : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-startVendorHal'>/**Bring up the HIDL Vendor HAL.
+</span>@return {Boolean} true on success, false otherwise.
+*/
+startVendorHal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-createStaIface'>/**Create a STA iface using {@link com.android.server.wifi.HalDeviceManager}.
+</span>@param {Boolean} lowPrioritySta The requested STA has a low request priority (lower probability of
+                       getting created, higher probability of getting destroyed).
+@param {Object {HalDeviceManager.InterfaceDestroyedListener}} destroyedListener Listener to be invoked when the interface is destroyed.
+@return {String} iface name on success, null otherwise.
+*/
+createStaIface : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-removeStaIface'>/**Remove a STA iface using {@link com.android.server.wifi.HalDeviceManager}.
+</span>@param {String} ifaceName Name of the interface being removed.
+@return {Boolean} true on success, false otherwise.
+*/
+removeStaIface : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-createApIface'>/**Create a AP iface using {@link com.android.server.wifi.HalDeviceManager}.
+</span>@param {Object {HalDeviceManager.InterfaceDestroyedListener}} destroyedListener Listener to be invoked when the interface is destroyed.
+@return {String} iface name on success, null otherwise.
+*/
+createApIface : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-removeApIface'>/**Remove an AP iface using {@link com.android.server.wifi.HalDeviceManager}.
+</span>@param {String} ifaceName Name of the interface being removed.
+@return {Boolean} true on success, false otherwise.
+*/
+removeApIface : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-stopVendorHal'>/**Stops the HAL
+</span>*/
+stopVendorHal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-isHalStarted'>/**Tests whether the HAL is started and atleast one iface is up.
+</span>*/
+isHalStarted : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getBgScanCapabilities'>/**Gets the scan capabilities
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {WifiNative.ScanCapabilities}} capabilities object to be filled in
+@return {Boolean} true for success, false for failure
+*/
+getBgScanCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-startBgScan'>/**Starts a background scan
+</span>
+ Any ongoing scan will be stopped first
+@param {String} ifaceName    Name of the interface.
+@param {Object {WifiNative.ScanSettings}} settings     to control the scan
+@param {Object {WifiNative.ScanEventHandler}} eventHandler to call with the results
+@return {Boolean} true for success
+*/
+startBgScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-stopBgScan'>/**Stops any ongoing backgound scan
+</span>@param {String} ifaceName Name of the interface.
+*/
+stopBgScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-pauseBgScan'>/**Pauses an ongoing backgound scan
+</span>@param {String} ifaceName Name of the interface.
+*/
+pauseBgScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-restartBgScan'>/**Restarts a paused background scan
+</span>@param {String} ifaceName Name of the interface.
+*/
+restartBgScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getBgScanResults'>/**Gets the latest scan results received from the HIDL interface callback.
+</span> TODO(b/35754840): This hop to fetch scan results after callback is unnecessary. Refactor
+ WifiScanner to use the scan results from the callback.
+@param {String} ifaceName Name of the interface.
+*/
+getBgScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getWifiLinkLayerStats'>/**Get the link layer statistics
+</span>
+ Note - we always enable link layer stats on a STA interface.
+@param {String} ifaceName Name of the interface.
+@return {Object {com.android.server.wifi.WifiLinkLayerStats}} the statistics, or null if unable to do so
+*/
+getWifiLinkLayerStats : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getSupportedFeatureSet'>/**Get the supported features
+</span>
+ The result may differ depending on the mode (STA or AP)
+@param {String} ifaceName Name of the interface.
+@return {Number} bitmask defined by WifiManager.WIFI_FEATURE_*
+*/
+getSupportedFeatureSet : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-setScanningMacOui'>/**Set the MAC OUI during scanning.
+</span> &lt;p&gt;
+ An OUI {Organizationally Unique Identifier} is a 24-bit number that
+ uniquely identifies a vendor or manufacturer.
+@param {String} ifaceName Name of the interface.
+@param {Object {byte[]}} oui
+@return {Boolean} true for success
+*/
+setScanningMacOui : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-setMacAddress'>/**Set Mac address on the given interface
+</span>@param {String} ifaceName Name of the interface
+@param {Object {MacAddress}} mac MAC address to change into
+@return {Boolean} true for success
+*/
+setMacAddress : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getFactoryMacAddress'>/**Get factory MAC address of the given interface
+</span>@param {String} ifaceName Name of the interface
+@return {Object {android.net.MacAddress}} factory MAC address of the interface or null.
+*/
+getFactoryMacAddress : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getApfCapabilities'>/**Get the APF (Android Packet Filter) capabilities of the device
+</span>@param {String} ifaceName Name of the interface.
+@return {Object {android.net.apf.ApfCapabilities}} APF capabilities object.
+*/
+getApfCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-installPacketFilter'>/**Installs an APF program on this iface, replacing any existing program.
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {byte[]}} filter is the android packet filter program
+@return {Boolean} true for success
+*/
+installPacketFilter : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-readPacketFilter'>/**Reads the APF program and data buffer on this iface.
+</span>@param {String} ifaceName Name of the interface
+@return {Number} the buffer returned by the driver, or null in case of an error
+*/
+readPacketFilter : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-setCountryCodeHal'>/**Set country code for this AP iface.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} countryCode - two-letter country code (as ISO 3166)
+@return {Boolean} true for success
+*/
+setCountryCodeHal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-setLoggingEventHandler'>/**Registers the logger callback and enables alerts.
+</span> Ring buffer data collection is only triggered when |startLoggingRingBuffer| is invoked.
+*/
+setLoggingEventHandler : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-resetLogHandler'>/**Stops all logging and resets the logger callback.
+</span> This stops both the alerts and ring buffer data collection.
+ Existing log handler is cleared.
+*/
+resetLogHandler : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-startLoggingRingBuffer'>/**Control debug data collection
+</span>@param {Number} verboseLevel       0 to 3, inclusive. 0 stops logging.
+@param {Number} flags              Ignored.
+@param {Number} maxIntervalInSec   Maximum interval between reports; ignore if 0.
+@param {Number} minDataSizeInBytes Minimum data size in buffer for report; ignore if 0.
+@param {String} ringName           Name of the ring for which data collection is to start.
+@return {Boolean} true for success
+*/
+startLoggingRingBuffer : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getSupportedLoggerFeatureSet'>/**Pointlessly fail
+</span>@return {Number} -1
+*/
+getSupportedLoggerFeatureSet : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getDriverVersion'>/**Vendor-provided wifi driver version string
+</span>*/
+getDriverVersion : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getFirmwareVersion'>/**Vendor-provided wifi firmware version string
+</span>*/
+getFirmwareVersion : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getRingBufferStatus'>/**API to get the status of all ring buffers supported by driver
+</span>*/
+getRingBufferStatus : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getRingBufferData'>/**Indicates to driver that all the data has to be uploaded urgently
+</span>*/
+getRingBufferData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-flushRingBufferData'>/**request hal to flush ring buffers to files
+</span>*/
+flushRingBufferData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getFwMemoryDump'>/**Request vendor debug info from the firmware
+</span>*/
+getFwMemoryDump : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getDriverStateDump'>/**Request vendor debug info from the driver
+</span>*/
+getDriverStateDump : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-startPktFateMonitoring'>/**Start packet fate monitoring
+</span> &lt;p&gt;
+ Once started, monitoring remains active until HAL is unloaded.
+@param {String} ifaceName Name of the interface.
+@return {Boolean} true for success
+*/
+startPktFateMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getTxPktFates'>/**Retrieve fates of outbound packets
+</span> &lt;p&gt;
+ Reports the outbound frames for the most recent association (space allowing).
+@param {String} ifaceName Name of the interface.
+@param {Object {com.android.server.wifi.WifiNative.TxFateReport[]}} reportBufs
+@return {Boolean} true for success
+*/
+getTxPktFates : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getRxPktFates'>/**Retrieve fates of inbound packets
+</span> &lt;p&gt;
+ Reports the inbound frames for the most recent association (space allowing).
+@param {String} ifaceName Name of the interface.
+@param {Object {com.android.server.wifi.WifiNative.RxFateReport[]}} reportBufs
+@return {Boolean} true for success
+*/
+getRxPktFates : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-startSendingOffloadedPacket'>/**Start sending the specified keep alive packets periodically.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} slot
+@param {Object {byte[]}} srcMac
+@param {Object {byte[]}} dstMac
+@param {Object {byte[]}} keepAlivePacket
+@param {Number} protocol
+@param {Number} periodInMs
+@return {Number} 0 for success, -1 for error
+*/
+startSendingOffloadedPacket : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-stopSendingOffloadedPacket'>/**Stop sending the specified keep alive packets.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} slot id - same as startSendingOffloadedPacket call.
+@return {Number} 0 for success, -1 for error
+*/
+stopSendingOffloadedPacket : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-startRssiMonitoring'>/**Start RSSI monitoring on the currently connected access point.
+</span>@param {String} ifaceName        Name of the interface.
+@param {Number} maxRssi          Maximum RSSI threshold.
+@param {Number} minRssi          Minimum RSSI threshold.
+@param {Object {WifiNative.WifiRssiEventHandler}} rssiEventHandler Called when RSSI goes above maxRssi or below minRssi
+@return {Number} 0 for success, -1 for failure
+*/
+startRssiMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-stopRssiMonitoring'>/**Stop RSSI monitoring
+</span>@param {String} ifaceName Name of the interface.
+@return {Number} 0 for success, -1 for failure
+*/
+stopRssiMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getWlanWakeReasonCount'>/**Fetch the host wakeup reasons stats from wlan driver.
+</span>@return {Object {com.android.server.wifi.WlanWakeReasonAndCounts}} the |WlanWakeReasonAndCounts| from the wlan driver, or null on failure.
+*/
+getWlanWakeReasonCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-configureNeighborDiscoveryOffload'>/**Enable/Disable Neighbour discovery offload functionality in the firmware.
+</span>@param {String} ifaceName Name of the interface.
+@param {Boolean} enabled true to enable, false to disable.
+@return {Boolean} true for success, false for failure
+*/
+configureNeighborDiscoveryOffload : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-getRoamingCapabilities'>/**Query the firmware roaming capabilities.
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {WifiNative.RoamingCapabilities}} capabilities object to be filled in
+@return {Boolean} true for success; false for failure
+*/
+getRoamingCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-enableFirmwareRoaming'>/**Enable/disable firmware roaming.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} state the intended roaming state
+@return {Number} SET_FIRMWARE_ROAMING_SUCCESS, SET_FIRMWARE_ROAMING_FAILURE,
+         or SET_FIRMWARE_ROAMING_BUSY
+*/
+enableFirmwareRoaming : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-configureRoaming'>/**Set firmware roaming configurations.
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {WifiNative.RoamingConfig}} config new roaming configuration object
+@return {Boolean} true for success; false for failure
+*/
+configureRoaming : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-selectTxPowerScenario'>/**Select one of the pre-configured TX power level scenarios or reset it back to normal.
+</span> Primarily used for meeting SAR requirements during voice calls.
+
+ Note: If it was found out that the scenario to be reported is the same as last reported one,
+       then exit with success.
+       This is to handle the case when some HAL versions deal with different inputs equally,
+       in that case, we should not call the hal unless there is a change in scenario.
+ Note: It is assumed that this method is only called if SAR is enabled. The logic of whether
+       to call it or not resides in SarManager class.
+ Note: This method is called whether SAR sensor is supported or not. The passed SarInfo object
+       contains a flag to indicate the SAR sensor support.
+@param {Object {SarInfo}} sarInfo The collection of inputs to select the SAR scenario.
+@return {Boolean} true for success; false for failure or if the HAL version does not support this API.
+*/
+selectTxPowerScenario : function(  ) {},
+
+<span id='com-android-server-wifi-WifiVendorHal-method-setLowLatencyMode'>/**Enable/Disable low-latency mode
+</span>@param {Boolean} enabled true to enable low-latency mode, false to disable it
+*/
+setLowLatencyMode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

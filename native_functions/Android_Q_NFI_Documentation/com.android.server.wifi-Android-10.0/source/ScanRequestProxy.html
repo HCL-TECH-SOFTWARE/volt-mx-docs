@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-ScanRequestProxy'>/**@class com.android.server.wifi.ScanRequestProxy
+</span>@extends java.lang.Object
+
+ This class manages all scan requests originating from external apps using the
+ {@link WifiManager#startScan()}.
+
+ This class is responsible for:
+ a) Enable/Disable scanning based on the request from {@link com.android.server.wifi.ActiveModeWarden}.
+ a) Forwarding scan requests from {@link WifiManager#startScan()} to
+ {@link WifiScanner#startScan(WifiScanner.ScanSettings, WifiScanner.ScanListener)}.
+ Will essentially proxy scan requests from WifiService to WifiScanningService.
+ b) Cache the results of these scan requests and return them when
+ {@link WifiManager#getScanResults()} is invoked.
+ c) Will send out the {@link WifiManager#SCAN_RESULTS_AVAILABLE_ACTION} broadcast when new
+ scan results are available.
+ d) Throttle scan requests from non-setting apps:
+  a) Each foreground app can request a max of
+   {@link #SCAN_REQUEST_THROTTLE_MAX_IN_TIME_WINDOW_FG_APPS} scan every
+   {@link #SCAN_REQUEST_THROTTLE_TIME_WINDOW_FG_APPS_MS}.
+  b) Background apps combined can request 1 scan every
+   {@link #SCAN_REQUEST_THROTTLE_INTERVAL_BG_APPS_MS}.
+ Note: This class is not thread-safe. It needs to be invoked from ClientModeImpl thread only.
+*/
+var ScanRequestProxy = {
+
+<span id='com-android-server-wifi-ScanRequestProxy-property-SCAN_REQUEST_THROTTLE_TIME_WINDOW_FG_APPS_MS'>/***/
+</span>SCAN_REQUEST_THROTTLE_TIME_WINDOW_FG_APPS_MS : &quot;120000&quot;,
+<span id='com-android-server-wifi-ScanRequestProxy-property-SCAN_REQUEST_THROTTLE_MAX_IN_TIME_WINDOW_FG_APPS'>/***/
+</span>SCAN_REQUEST_THROTTLE_MAX_IN_TIME_WINDOW_FG_APPS : &quot;4&quot;,
+<span id='com-android-server-wifi-ScanRequestProxy-property-SCAN_REQUEST_THROTTLE_INTERVAL_BG_APPS_MS'>/***/
+</span>SCAN_REQUEST_THROTTLE_INTERVAL_BG_APPS_MS : &quot;1800000&quot;,
+<span id='com-android-server-wifi-ScanRequestProxy-method-enableVerboseLogging'>/**Enable verbose logging.
+</span>*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-ScanRequestProxy-method-enableScanning'>/**Enable/disable scanning.
+</span>@param {Boolean} enable true to enable, false to disable.
+@param {Boolean} enableScanningForHiddenNetworks true to enable scanning for hidden networks,
+                                        false to disable.
+*/
+enableScanning : function(  ) {},
+
+<span id='com-android-server-wifi-ScanRequestProxy-method-startScan'>/**Initiate a wifi scan.
+</span>@param {Number} callingUid The uid initiating the wifi scan. Blame will be given to this uid.
+@return {Boolean} true if the scan request was placed or a scan is already ongoing, false otherwise.
+*/
+startScan : function(  ) {},
+
+<span id='com-android-server-wifi-ScanRequestProxy-method-getScanResults'>/**Return the results of the most recent access point scan, in the form of
+</span> a list of {@link ScanResult} objects.
+@return {Object {java.util.List}} the list of results
+*/
+getScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-ScanRequestProxy-method-clearScanRequestTimestampsForApp'>/**Clear any scan timestamps being stored for the app.
+</span>@param {String} uid Uid of the package.
+@param {Number} packageName Name of the package.
+*/
+clearScanRequestTimestampsForApp : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

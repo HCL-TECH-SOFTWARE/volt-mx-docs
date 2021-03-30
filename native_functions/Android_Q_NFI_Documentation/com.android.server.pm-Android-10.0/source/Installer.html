@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-pm-Installer'>/**@class com.android.server.pm.Installer
+</span>@extends com.android.server.SystemService
+
+*/
+var Installer = {
+
+<span id='com-android-server-pm-Installer-property-DEXOPT_PUBLIC'>/**Application should be visible to everyone */
+</span>DEXOPT_PUBLIC : &quot;2&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_DEBUGGABLE'>/**Application wants to allow debugging of its code */
+</span>DEXOPT_DEBUGGABLE : &quot;4&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_BOOTCOMPLETE'>/**The system boot has finished */
+</span>DEXOPT_BOOTCOMPLETE : &quot;8&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_PROFILE_GUIDED'>/**Hint that the dexopt type is profile-guided. */
+</span>DEXOPT_PROFILE_GUIDED : &quot;16&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_SECONDARY_DEX'>/**The compilation is for a secondary dex file. */
+</span>DEXOPT_SECONDARY_DEX : &quot;32&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_FORCE'>/**Ignore the result of dexoptNeeded and force compilation. */
+</span>DEXOPT_FORCE : &quot;64&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_STORAGE_CE'>/**Indicates that the dex file passed to dexopt in on CE storage. */
+</span>DEXOPT_STORAGE_CE : &quot;128&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_STORAGE_DE'>/**Indicates that the dex file passed to dexopt in on DE storage. */
+</span>DEXOPT_STORAGE_DE : &quot;256&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_IDLE_BACKGROUND_JOB'>/**Indicates that dexopt is invoked from the background service. */
+</span>DEXOPT_IDLE_BACKGROUND_JOB : &quot;512&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_ENABLE_HIDDEN_API_CHECKS'>/**Indicates that dexopt should restrict access to private APIs. */
+</span>DEXOPT_ENABLE_HIDDEN_API_CHECKS : &quot;1024&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_GENERATE_COMPACT_DEX'>/**Indicates that dexopt should convert to CompactDex. */
+</span>DEXOPT_GENERATE_COMPACT_DEX : &quot;2048&quot;,
+<span id='com-android-server-pm-Installer-property-DEXOPT_GENERATE_APP_IMAGE'>/**Indicates that dexopt should generate an app image */
+</span>DEXOPT_GENERATE_APP_IMAGE : &quot;4096&quot;,
+<span id='com-android-server-pm-Installer-property-FLAG_STORAGE_DE'>/***/
+</span>FLAG_STORAGE_DE : &quot;null&quot;,
+<span id='com-android-server-pm-Installer-property-FLAG_STORAGE_CE'>/***/
+</span>FLAG_STORAGE_CE : &quot;null&quot;,
+<span id='com-android-server-pm-Installer-property-FLAG_STORAGE_EXTERNAL'>/***/
+</span>FLAG_STORAGE_EXTERNAL : &quot;null&quot;,
+<span id='com-android-server-pm-Installer-property-FLAG_CLEAR_CACHE_ONLY'>/***/
+</span>FLAG_CLEAR_CACHE_ONLY : &quot;null&quot;,
+<span id='com-android-server-pm-Installer-property-FLAG_CLEAR_CODE_CACHE_ONLY'>/***/
+</span>FLAG_CLEAR_CODE_CACHE_ONLY : &quot;null&quot;,
+<span id='com-android-server-pm-Installer-property-FLAG_FREE_CACHE_V2'>/***/
+</span>FLAG_FREE_CACHE_V2 : &quot;null&quot;,
+<span id='com-android-server-pm-Installer-property-FLAG_FREE_CACHE_V2_DEFY_QUOTA'>/***/
+</span>FLAG_FREE_CACHE_V2_DEFY_QUOTA : &quot;null&quot;,
+<span id='com-android-server-pm-Installer-property-FLAG_FREE_CACHE_NOOP'>/***/
+</span>FLAG_FREE_CACHE_NOOP : &quot;null&quot;,
+<span id='com-android-server-pm-Installer-property-FLAG_USE_QUOTA'>/***/
+</span>FLAG_USE_QUOTA : &quot;null&quot;,
+<span id='com-android-server-pm-Installer-property-FLAG_FORCE'>/***/
+</span>FLAG_FORCE : &quot;null&quot;,
+<span id='com-android-server-pm-Installer-method-setWarnIfHeld'>/**Yell loudly if someone tries making future calls while holding a lock on
+</span> the given object.
+*/
+setWarnIfHeld : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-createAppData'>/**
+</span>*/
+createAppData : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-restoreconAppData'>/**
+</span>*/
+restoreconAppData : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-migrateAppData'>/**
+</span>*/
+migrateAppData : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-clearAppData'>/**
+</span>*/
+clearAppData : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-destroyAppData'>/**
+</span>*/
+destroyAppData : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-fixupAppData'>/**
+</span>*/
+fixupAppData : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-moveCompleteApp'>/**
+</span>*/
+moveCompleteApp : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-getAppSize'>/**
+</span>*/
+getAppSize : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-getUserSize'>/**
+</span>*/
+getUserSize : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-getExternalSize'>/**
+</span>*/
+getExternalSize : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-setAppQuota'>/**
+</span>*/
+setAppQuota : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-dexopt'>/**
+</span>*/
+dexopt : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-mergeProfiles'>/**
+</span>*/
+mergeProfiles : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-dumpProfiles'>/**
+</span>*/
+dumpProfiles : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-copySystemProfile'>/**
+</span>*/
+copySystemProfile : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-idmap'>/**
+</span>*/
+idmap : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-removeIdmap'>/**
+</span>*/
+removeIdmap : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-rmdex'>/**
+</span>*/
+rmdex : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-rmPackageDir'>/**
+</span>*/
+rmPackageDir : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-clearAppProfiles'>/**
+</span>*/
+clearAppProfiles : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-destroyAppProfiles'>/**
+</span>*/
+destroyAppProfiles : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-createUserData'>/**
+</span>*/
+createUserData : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-destroyUserData'>/**
+</span>*/
+destroyUserData : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-markBootComplete'>/**
+</span>*/
+markBootComplete : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-freeCache'>/**
+</span>*/
+freeCache : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-linkNativeLibraryDirectory'>/**Links the 32 bit native library directory in an application's data
+</span> directory to the real location for backward compatibility. Note that no
+ such symlink is created for 64 bit shared libraries.
+*/
+linkNativeLibraryDirectory : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-createOatDir'>/**
+</span>*/
+createOatDir : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-linkFile'>/**
+</span>*/
+linkFile : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-moveAb'>/**
+</span>*/
+moveAb : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-deleteOdex'>/**
+</span>*/
+deleteOdex : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-installApkVerity'>/**
+</span>*/
+installApkVerity : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-assertFsverityRootHashMatches'>/**
+</span>*/
+assertFsverityRootHashMatches : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-reconcileSecondaryDexFile'>/**
+</span>*/
+reconcileSecondaryDexFile : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-hashSecondaryDexFile'>/**
+</span>*/
+hashSecondaryDexFile : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-createProfileSnapshot'>/**
+</span>*/
+createProfileSnapshot : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-destroyProfileSnapshot'>/**
+</span>*/
+destroyProfileSnapshot : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-invalidateMounts'>/**
+</span>*/
+invalidateMounts : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-isQuotaSupported'>/**
+</span>*/
+isQuotaSupported : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-prepareAppProfile'>/**
+</span>*/
+prepareAppProfile : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-snapshotAppData'>/**Snapshots user data of the given package.
+</span>@param {String} pkg name of the package to snapshot user data for.
+@param {Number} userId id of the user whose data to snapshot.
+@param {Number} snapshotId id of this snapshot.
+@param {Number} storageFlags flags controlling which data (CE or DE) to snapshot.
+@return {Number} inode of the snapshot of users CE package data, or {@code 0} if a remote calls
+  shouldn't be continued. See {@link #checkBeforeRemote}.
+@throws InstallerException if failed to snapshot user data.
+*/
+snapshotAppData : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-restoreAppDataSnapshot'>/**Restores user data snapshot of the given package.
+</span>@param {String} pkg name of the package to restore user data for.
+@param {Number} appId id of the package to restore user data for.
+@param {String} userId id of the user whose data to restore.
+@param {Number} snapshotId id of the snapshot to restore.
+@param {Number} storageFlags flags controlling which data (CE or DE) to restore.
+@return {Boolean} {@code true} if user data restore was successful, or {@code false} if a remote call
+  shouldn't be continued. See {@link #checkBeforeRemote}.
+@throws InstallerException if failed to restore user data.
+*/
+restoreAppDataSnapshot : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-destroyAppDataSnapshot'>/**Deletes user data snapshot of the given package.
+</span>@param {String} pkg name of the package to delete user data snapshot for.
+@param {Number} userId id of the user whose user data snapshot to delete.
+@param {Number} ceSnapshotInode inode of CE user data snapshot.
+@param {Number} snapshotId id of the snapshot to delete.
+@param {Number} storageFlags flags controlling which user data snapshot (CE or DE) to delete.
+@return {Boolean} {@code true} if user data snapshot was successfully deleted, or {@code false} if a
+  remote call shouldn't be continued. See {@link #checkBeforeRemote}.
+@throws InstallerException if failed to delete user data snapshot.
+*/
+destroyAppDataSnapshot : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-migrateLegacyObbData'>/**Migrates obb data from its legacy location {@code /data/media/obb} to
+</span> {@code /data/media/0/Android/obb}. This call is idempotent and a fast no-op if data has
+ already been migrated.
+@throws InstallerException if an error occurs.
+*/
+migrateLegacyObbData : function(  ) {},
+
+<span id='com-android-server-pm-Installer-method-compileLayouts'>/**
+</span>*/
+compileLayouts : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

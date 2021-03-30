@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-file-attribute-FileOwnerAttributeView'>/**@class java.nio.file.attribute.FileOwnerAttributeView
+</span> implements java.nio.file.attribute.FileAttributeView
+
+ A file attribute view that supports reading or updating the owner of a file.
+ This file attribute view is intended for file system implementations that
+ support a file attribute that represents an identity that is the owner of
+ the file. Often the owner of a file is the identity of the entity that
+ created the file.
+
+ &lt;p&gt; The {@link #getOwner getOwner} or {@link #setOwner setOwner} methods may
+ be used to read or update the owner of the file.
+
+ &lt;p&gt; The {@link java.nio.file.Files#getAttribute getAttribute} and
+ {@link java.nio.file.Files#setAttribute setAttribute} methods may also be
+ used to read or update the owner. In that case, the owner attribute is
+ identified by the name {@code &quot;owner&quot;}, and the value of the attribute is
+ a {@link java.nio.file.attribute.UserPrincipal}.
+
+ @since 1.7
+*/
+var FileOwnerAttributeView = {
+
+<span id='java-nio-file-attribute-FileOwnerAttributeView-method-name'>/**Returns the name of the attribute view. Attribute views of this type
+</span> have the name {@code &quot;owner&quot;}.
+*/
+name : function(  ) {},
+
+<span id='java-nio-file-attribute-FileOwnerAttributeView-method-getOwner'>/**Read the file owner.
+</span>
+ &lt;p&gt; It it implementation specific if the file owner can be a {@link java.nio.file.attribute.GroupPrincipal group}.
+@return {Object {java.nio.file.attribute.UserPrincipal}} the file owner
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, a security manager is
+          installed, and it denies {@link
+          RuntimePermission}&lt;tt&gt;(&quot;accessUserInformation&quot;)&lt;/tt&gt; or its
+          {@link SecurityManager#checkRead(String) checkRead} method
+          denies read access to the file.
+*/
+getOwner : function(  ) {},
+
+<span id='java-nio-file-attribute-FileOwnerAttributeView-method-setOwner'>/**Updates the file owner.
+</span>
+ &lt;p&gt; It it implementation specific if the file owner can be a {@link java.nio.file.attribute.GroupPrincipal group}. To ensure consistent and correct behavior
+ across platforms it is recommended that this method should only be used
+ to set the file owner to a user principal that is not a group.
+@param {Object {UserPrincipal}} owner
+          the new file owner
+@throws IOException
+          if an I/O error occurs, or the {@code owner} parameter is a
+          group and this implementation does not support setting the owner
+          to a group
+@throws SecurityException
+          In the case of the default provider, a security manager is
+          installed, and it denies {@link
+          RuntimePermission}&lt;tt&gt;(&quot;accessUserInformation&quot;)&lt;/tt&gt; or its
+          {@link SecurityManager#checkWrite(String) checkWrite} method
+          denies write access to the file.
+*/
+setOwner : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

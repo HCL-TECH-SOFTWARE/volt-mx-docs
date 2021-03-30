@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xml-sax-ext-DeclHandler'>/**@class org.xml.sax.ext.DeclHandler
+</span> SAX2 extension handler for DTD declaration events.
+
+ &lt;blockquote&gt;
+ &lt;em&gt;This module, both source code and documentation, is in the
+ Public Domain, and comes with &lt;strong&gt;NO WARRANTY&lt;/strong&gt;.&lt;/em&gt;
+ See &lt;a href='http://www.saxproject.org'&gt;http://www.saxproject.org&lt;/a&gt;
+ for further information.
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;This is an optional extension handler for SAX2 to provide more
+ complete information about DTD declarations in an XML document.
+ XML readers are not required to recognize this handler, and it
+ is not part of core-only SAX2 distributions.&lt;/p&gt;
+
+ &lt;p&gt;Note that data-related DTD declarations (unparsed entities and
+ notations) are already reported through the {@link org.xml.sax.DTDHandler DTDHandler} interface.&lt;/p&gt;
+
+ &lt;p&gt;If you are using the declaration handler together with a lexical
+ handler, all of the events will occur between the
+ {@link org.xml.sax.ext.LexicalHandler#startDTD startDTD} and the
+ {@link org.xml.sax.ext.LexicalHandler#endDTD endDTD} events.&lt;/p&gt;
+
+ &lt;p&gt;To set the DeclHandler for an XML reader, use the
+ {@link org.xml.sax.XMLReader#setProperty setProperty} method
+ with the property name
+ &lt;code&gt;http://xml.org/sax/properties/declaration-handler&lt;/code&gt;
+ and an object implementing this interface (or null) as the value.
+ If the reader does not report declaration events, it will throw a
+ {@link org.xml.sax.SAXNotRecognizedException SAXNotRecognizedException}
+ when you attempt to register the handler.&lt;/p&gt;
+
+ @since SAX 2.0 (extensions 1.0)
+ @author David Megginson
+ @version 2.0.1 (sax2r2)
+*/
+var DeclHandler = {
+
+<span id='org-xml-sax-ext-DeclHandler-method-elementDecl'>/**Report an element type declaration.
+</span>
+ &lt;p&gt;The content model will consist of the string &quot;EMPTY&quot;, the
+ string &quot;ANY&quot;, or a parenthesised group, optionally followed
+ by an occurrence indicator.  The model will be normalized so
+ that all parameter entities are fully resolved and all whitespace
+ is removed,and will include the enclosing parentheses.  Other
+ normalization (such as removing redundant parentheses or
+ simplifying occurrence indicators) is at the discretion of the
+ parser.&lt;/p&gt;
+@param {String} name The element type name.
+@param {String} model The content model as a normalized string.
+@exception SAXException The application may raise an exception.
+*/
+elementDecl : function(  ) {},
+
+<span id='org-xml-sax-ext-DeclHandler-method-attributeDecl'>/**Report an attribute type declaration.
+</span>
+ &lt;p&gt;Only the effective (first) declaration for an attribute will
+ be reported.  The type will be one of the strings &quot;CDATA&quot;,
+ &quot;ID&quot;, &quot;IDREF&quot;, &quot;IDREFS&quot;, &quot;NMTOKEN&quot;, &quot;NMTOKENS&quot;, &quot;ENTITY&quot;,
+ &quot;ENTITIES&quot;, a parenthesized token group with
+ the separator &quot;|&quot; and all whitespace removed, or the word
+ &quot;NOTATION&quot; followed by a space followed by a parenthesized
+ token group with all whitespace removed.&lt;/p&gt;
+
+ &lt;p&gt;The value will be the value as reported to applications,
+ appropriately normalized and with entity and character
+ references expanded.  &lt;/p&gt;
+@param {String} eName The name of the associated element.
+@param {String} aName The name of the attribute.
+@param {String} type A string representing the attribute type.
+@param {String} mode A string representing the attribute defaulting mode
+        (&quot;#IMPLIED&quot;, &quot;#REQUIRED&quot;, or &quot;#FIXED&quot;) or null if
+        none of these applies.
+@param {String} value A string representing the attribute's default value,
+        or null if there is none.
+@exception SAXException The application may raise an exception.
+*/
+attributeDecl : function(  ) {},
+
+<span id='org-xml-sax-ext-DeclHandler-method-internalEntityDecl'>/**Report an internal entity declaration.
+</span>
+ &lt;p&gt;Only the effective (first) declaration for each entity
+ will be reported.  All parameter entities in the value
+ will be expanded, but general entities will not.&lt;/p&gt;
+@param {String} name The name of the entity.  If it is a parameter
+        entity, the name will begin with '%'.
+@param {String} value The replacement text of the entity.
+@exception SAXException The application may raise an exception.
+@see #externalEntityDecl
+@see org.xml.sax.DTDHandler#unparsedEntityDecl
+*/
+internalEntityDecl : function(  ) {},
+
+<span id='org-xml-sax-ext-DeclHandler-method-externalEntityDecl'>/**Report a parsed external entity declaration.
+</span>
+ &lt;p&gt;Only the effective (first) declaration for each entity
+ will be reported.&lt;/p&gt;
+
+ &lt;p&gt;If the system identifier is a URL, the parser must resolve it
+ fully before passing it to the application.&lt;/p&gt;
+@param {String} name The name of the entity.  If it is a parameter
+        entity, the name will begin with '%'.
+@param {String} publicId The entity's public identifier, or null if none
+        was given.
+@param {String} systemId The entity's system identifier.
+@exception SAXException The application may raise an exception.
+@see #internalEntityDecl
+@see org.xml.sax.DTDHandler#unparsedEntityDecl
+*/
+externalEntityDecl : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

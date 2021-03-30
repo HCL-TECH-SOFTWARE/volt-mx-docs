@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-URLClassLoader'>/**@class java.net.URLClassLoader
+</span> implements java.io.Closeable
+
+@extends java.security.SecureClassLoader
+
+ This class loader is used to load classes and resources from a search
+ path of URLs referring to both JAR files and directories. Any URL that
+ ends with a '/' is assumed to refer to a directory. Otherwise, the URL
+ is assumed to refer to a JAR file which will be opened as needed.
+ &lt;p&gt;
+ The AccessControlContext of the thread that created the instance of
+ URLClassLoader will be used when subsequently loading classes and
+ resources.
+ &lt;p&gt;
+ The classes that are loaded are by default granted permission only to
+ access the URLs specified when the URLClassLoader was created.
+
+ @author  David Connelly
+ @since   1.2
+*/
+var URLClassLoader = {
+
+<span id='java-net-URLClassLoader-method-getResourceAsStream'>/**Returns an input stream for reading the specified resource.
+</span> If this loader is closed, then any resources opened by this method
+ will be closed.
+
+ &lt;p&gt; The search order is described in the documentation for {@link #getResource}(String).  &lt;/p&gt;
+@param {String} name
+         The resource name
+@return {Object {java.io.InputStream}} An input stream for reading the resource, or {@code null}
+          if the resource could not be found
+@since 1.7
+*/
+getResourceAsStream : function(  ) {},
+
+<span id='java-net-URLClassLoader-method-close'>/**Closes this URLClassLoader, so that it can no longer be used to load
+</span> new classes or resources that are defined by this loader.
+ Classes and resources defined by any of this loader's parents in the
+ delegation hierarchy are still accessible. Also, any classes or resources
+ that are already loaded, are still accessible.
+ &lt;p&gt;
+ In the case of jar: and file: URLs, it also closes any files
+ that were opened by it. If another thread is loading a
+ class when the {@code close} method is invoked, then the result of
+ that load is undefined.
+ &lt;p&gt;
+ The method makes a best effort attempt to close all opened files,
+ by catching {@link IOException}s internally. Unchecked exceptions
+ and errors are not caught. Calling close on an already closed
+ loader has no effect.
+ &lt;p&gt;
+@exception IOException if closing any file opened by this class loader
+ resulted in an IOException. Any such exceptions are caught internally.
+ If only one is caught, then it is re-thrown. If more than one exception
+ is caught, then the second and following exceptions are added
+ as suppressed exceptions of the first one caught, which is then re-thrown.
+@exception SecurityException if a security manager is set, and it denies
+   {@link RuntimePermission}{@code (&quot;closeClassLoader&quot;)}
+@since 1.7
+*/
+close : function(  ) {},
+
+<span id='java-net-URLClassLoader-method-getURLs'>/**Returns the search path of URLs for loading classes and resources.
+</span> This includes the original list of URLs specified to the constructor,
+ along with any URLs subsequently appended by the addURL() method.
+@return {Object {java.net.URL}} the search path of URLs for loading classes and resources.
+*/
+getURLs : function(  ) {},
+
+<span id='java-net-URLClassLoader-method-findResource'>/**Finds the resource with the specified name on the URL search path.
+</span>@param {String} name the name of the resource
+@return {Object {java.net.URL}} a {@code URL} for the resource, or {@code null}
+ if the resource could not be found, or if the loader is closed.
+*/
+findResource : function(  ) {},
+
+<span id='java-net-URLClassLoader-method-findResources'>/**Returns an Enumeration of URLs representing all of the resources
+</span> on the URL search path having the specified name.
+@param {String} name the resource name
+@exception IOException if an I/O exception occurs
+@return {Object {java.util.Enumeration}} an {@code Enumeration} of {@code URL}s
+         If the loader is closed, the Enumeration will be empty.
+*/
+findResources : function(  ) {},
+
+<span id='java-net-URLClassLoader-method-newInstance'>/**Creates a new instance of URLClassLoader for the specified
+</span> URLs and parent class loader. If a security manager is
+ installed, the {@code loadClass} method of the URLClassLoader
+ returned by this method will invoke the
+ {@code SecurityManager.checkPackageAccess} method before
+ loading the class.
+@param {Object {java.net.URL[]}} urls the URLs to search for classes and resources
+@param {Object {ClassLoader}} parent the parent class loader for delegation
+@exception NullPointerException if {@code urls} is {@code null}.
+@return {Object {java.net.URLClassLoader}} the resulting class loader
+*/
+newInstance : function(  ) {},
+
+<span id='java-net-URLClassLoader-method-newInstance'>/**Creates a new instance of URLClassLoader for the specified
+</span> URLs and default parent class loader. If a security manager is
+ installed, the {@code loadClass} method of the URLClassLoader
+ returned by this method will invoke the
+ {@code SecurityManager.checkPackageAccess} before
+ loading the class.
+@param {Object {java.net.URL[]}} urls the URLs to search for classes and resources
+@exception NullPointerException if {@code urls} is {@code null}.
+@return {Object {java.net.URLClassLoader}} the resulting class loader
+*/
+newInstance : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

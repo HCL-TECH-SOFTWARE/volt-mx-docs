@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-logging-Handler'>/**@class java.util.logging.Handler
+</span>@extends java.lang.Object
+
+ A &lt;tt&gt;Handler&lt;/tt&gt; object takes log messages from a &lt;tt&gt;Logger&lt;/tt&gt; and
+ exports them.  It might for example, write them to a console
+ or write them to a file, or send them to a network logging service,
+ or forward them to an OS log, or whatever.
+ &lt;p&gt;
+ A &lt;tt&gt;Handler&lt;/tt&gt; can be disabled by doing a &lt;tt&gt;setLevel(Level.OFF)&lt;/tt&gt;
+ and can  be re-enabled by doing a &lt;tt&gt;setLevel&lt;/tt&gt; with an appropriate level.
+ &lt;p&gt;
+ &lt;tt&gt;Handler&lt;/tt&gt; classes typically use &lt;tt&gt;LogManager&lt;/tt&gt; properties to set
+ default values for the &lt;tt&gt;Handler&lt;/tt&gt;'s &lt;tt&gt;Filter&lt;/tt&gt;, &lt;tt&gt;Formatter&lt;/tt&gt;,
+ and &lt;tt&gt;Level&lt;/tt&gt;.  See the specific documentation for each concrete
+ &lt;tt&gt;Handler&lt;/tt&gt; class.
+
+
+ @since 1.4
+*/
+var Handler = {
+
+<span id='java-util-logging-Handler-method-publish'>/**Publish a &lt;tt&gt;LogRecord&lt;/tt&gt;.
+</span> &lt;p&gt;
+ The logging request was made initially to a &lt;tt&gt;Logger&lt;/tt&gt; object,
+ which initialized the &lt;tt&gt;LogRecord&lt;/tt&gt; and forwarded it here.
+ &lt;p&gt;
+ The &lt;tt&gt;Handler&lt;/tt&gt;  is responsible for formatting the message, when and
+ if necessary.  The formatting should include localization.
+@param {Object {LogRecord}} record  description of the log event. A null record is
+                 silently ignored and is not published
+*/
+publish : function(  ) {},
+
+<span id='java-util-logging-Handler-method-flush'>/**Flush any buffered output.
+</span>*/
+flush : function(  ) {},
+
+<span id='java-util-logging-Handler-method-close'>/**Close the &lt;tt&gt;Handler&lt;/tt&gt; and free all associated resources.
+</span> &lt;p&gt;
+ The close method will perform a &lt;tt&gt;flush&lt;/tt&gt; and then close the
+ &lt;tt&gt;Handler&lt;/tt&gt;.   After close has been called this &lt;tt&gt;Handler&lt;/tt&gt;
+ should no longer be used.  Method calls may either be silently
+ ignored or may throw runtime exceptions.
+@exception SecurityException  if a security manager exists and if
+             the caller does not have &lt;tt&gt;LoggingPermission(&quot;control&quot;)&lt;/tt&gt;.
+*/
+close : function(  ) {},
+
+<span id='java-util-logging-Handler-method-setFormatter'>/**Set a &lt;tt&gt;Formatter&lt;/tt&gt;.  This &lt;tt&gt;Formatter&lt;/tt&gt; will be used
+</span> to format &lt;tt&gt;LogRecords&lt;/tt&gt; for this &lt;tt&gt;Handler&lt;/tt&gt;.
+ &lt;p&gt;
+ Some &lt;tt&gt;Handlers&lt;/tt&gt; may not use &lt;tt&gt;Formatters&lt;/tt&gt;, in
+ which case the &lt;tt&gt;Formatter&lt;/tt&gt; will be remembered, but not used.
+ &lt;p&gt;
+@param {Object {Formatter}} newFormatter the &lt;tt&gt;Formatter&lt;/tt&gt; to use (may not be null)
+@exception SecurityException  if a security manager exists and if
+             the caller does not have &lt;tt&gt;LoggingPermission(&quot;control&quot;)&lt;/tt&gt;.
+*/
+setFormatter : function(  ) {},
+
+<span id='java-util-logging-Handler-method-getFormatter'>/**Return the &lt;tt&gt;Formatter&lt;/tt&gt; for this &lt;tt&gt;Handler&lt;/tt&gt;.
+</span>@return {Object {java.util.logging.Formatter}} the &lt;tt&gt;Formatter&lt;/tt&gt; (may be null).
+*/
+getFormatter : function(  ) {},
+
+<span id='java-util-logging-Handler-method-setEncoding'>/**Set the character encoding used by this &lt;tt&gt;Handler&lt;/tt&gt;.
+</span> &lt;p&gt;
+ The encoding should be set before any &lt;tt&gt;LogRecords&lt;/tt&gt; are written
+ to the &lt;tt&gt;Handler&lt;/tt&gt;.
+@param {String} encoding  The name of a supported character encoding.
+        May be null, to indicate the default platform encoding.
+@exception SecurityException  if a security manager exists and if
+             the caller does not have &lt;tt&gt;LoggingPermission(&quot;control&quot;)&lt;/tt&gt;.
+@exception UnsupportedEncodingException if the named encoding is
+          not supported.
+*/
+setEncoding : function(  ) {},
+
+<span id='java-util-logging-Handler-method-getEncoding'>/**Return the character encoding for this &lt;tt&gt;Handler&lt;/tt&gt;.
+</span>@return {String} The encoding name.  May be null, which indicates the
+          default encoding should be used.
+*/
+getEncoding : function(  ) {},
+
+<span id='java-util-logging-Handler-method-setFilter'>/**Set a &lt;tt&gt;Filter&lt;/tt&gt; to control output on this &lt;tt&gt;Handler&lt;/tt&gt;.
+</span> &lt;P&gt;
+ For each call of &lt;tt&gt;publish&lt;/tt&gt; the &lt;tt&gt;Handler&lt;/tt&gt; will call
+ this &lt;tt&gt;Filter&lt;/tt&gt; (if it is non-null) to check if the
+ &lt;tt&gt;LogRecord&lt;/tt&gt; should be published or discarded.
+@param {Object {Filter}} newFilter  a &lt;tt&gt;Filter&lt;/tt&gt; object (may be null)
+@exception SecurityException  if a security manager exists and if
+             the caller does not have &lt;tt&gt;LoggingPermission(&quot;control&quot;)&lt;/tt&gt;.
+*/
+setFilter : function(  ) {},
+
+<span id='java-util-logging-Handler-method-getFilter'>/**Get the current &lt;tt&gt;Filter&lt;/tt&gt; for this &lt;tt&gt;Handler&lt;/tt&gt;.
+</span>@return {Object {java.util.logging.Filter}} a &lt;tt&gt;Filter&lt;/tt&gt; object (may be null)
+*/
+getFilter : function(  ) {},
+
+<span id='java-util-logging-Handler-method-setErrorManager'>/**Define an ErrorManager for this Handler.
+</span> &lt;p&gt;
+ The ErrorManager's &quot;error&quot; method will be invoked if any
+ errors occur while using this Handler.
+@param {Object {ErrorManager}} em  the new ErrorManager
+@exception SecurityException  if a security manager exists and if
+             the caller does not have &lt;tt&gt;LoggingPermission(&quot;control&quot;)&lt;/tt&gt;.
+*/
+setErrorManager : function(  ) {},
+
+<span id='java-util-logging-Handler-method-getErrorManager'>/**Retrieves the ErrorManager for this Handler.
+</span>@return {Object {java.util.logging.ErrorManager}} the ErrorManager for this Handler
+@exception SecurityException  if a security manager exists and if
+             the caller does not have &lt;tt&gt;LoggingPermission(&quot;control&quot;)&lt;/tt&gt;.
+*/
+getErrorManager : function(  ) {},
+
+<span id='java-util-logging-Handler-method-setLevel'>/**Set the log level specifying which message levels will be
+</span> logged by this &lt;tt&gt;Handler&lt;/tt&gt;.  Message levels lower than this
+ value will be discarded.
+ &lt;p&gt;
+ The intention is to allow developers to turn on voluminous
+ logging, but to limit the messages that are sent to certain
+ &lt;tt&gt;Handlers&lt;/tt&gt;.
+@param {Object {Level}} newLevel   the new value for the log level
+@exception SecurityException  if a security manager exists and if
+             the caller does not have &lt;tt&gt;LoggingPermission(&quot;control&quot;)&lt;/tt&gt;.
+*/
+setLevel : function(  ) {},
+
+<span id='java-util-logging-Handler-method-getLevel'>/**Get the log level specifying which messages will be
+</span> logged by this &lt;tt&gt;Handler&lt;/tt&gt;.  Message levels lower
+ than this level will be discarded.
+@return {Object {java.util.logging.Level}} the level of messages being logged.
+*/
+getLevel : function(  ) {},
+
+<span id='java-util-logging-Handler-method-isLoggable'>/**Check if this &lt;tt&gt;Handler&lt;/tt&gt; would actually log a given &lt;tt&gt;LogRecord&lt;/tt&gt;.
+</span> &lt;p&gt;
+ This method checks if the &lt;tt&gt;LogRecord&lt;/tt&gt; has an appropriate
+ &lt;tt&gt;Level&lt;/tt&gt; and  whether it satisfies any &lt;tt&gt;Filter&lt;/tt&gt;.  It also
+ may make other &lt;tt&gt;Handler&lt;/tt&gt; specific checks that might prevent a
+ handler from logging the &lt;tt&gt;LogRecord&lt;/tt&gt;. It will return false if
+ the &lt;tt&gt;LogRecord&lt;/tt&gt; is null.
+ &lt;p&gt;
+@param {Object {LogRecord}} record  a &lt;tt&gt;LogRecord&lt;/tt&gt;
+@return {Boolean} true if the &lt;tt&gt;LogRecord&lt;/tt&gt; would be logged.
+*/
+isLoggable : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

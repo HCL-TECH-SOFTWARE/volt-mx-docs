@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-KeyPairGeneratorSpi'>/**@class java.security.KeyPairGeneratorSpi
+</span>@extends java.lang.Object
+
+ &lt;p&gt; This class defines the &lt;i&gt;Service Provider Interface&lt;/i&gt; (&lt;b&gt;SPI&lt;/b&gt;)
+ for the {@code KeyPairGenerator} class, which is used to generate
+ pairs of public and private keys.
+
+ &lt;p&gt; All the abstract methods in this class must be implemented by each
+ cryptographic service provider who wishes to supply the implementation
+ of a key pair generator for a particular algorithm.
+
+ &lt;p&gt; In case the client does not explicitly initialize the KeyPairGenerator
+ (via a call to an {@code initialize} method), each provider must
+ supply (and document) a default initialization.
+ For example, the &lt;i&gt;Sun&lt;/i&gt; provider uses a default modulus size (keysize)
+ of 1024 bits.
+
+ @author Benjamin Renaud
+
+
+ @see KeyPairGenerator
+ @see java.security.spec.AlgorithmParameterSpec
+*/
+var KeyPairGeneratorSpi = {
+
+<span id='java-security-KeyPairGeneratorSpi-method-initialize'>/**Initializes the key pair generator for a certain keysize, using
+</span> the default parameter set.
+@param {Number} keysize the keysize. This is an
+ algorithm-specific metric, such as modulus length, specified in
+ number of bits.
+@param {Object {SecureRandom}} random the source of randomness for this generator.
+@exception InvalidParameterException if the {@code keysize} is not
+ supported by this KeyPairGeneratorSpi object.
+*/
+initialize : function(  ) {},
+
+<span id='java-security-KeyPairGeneratorSpi-method-initialize'>/**Initializes the key pair generator using the specified parameter
+</span> set and user-provided source of randomness.
+
+ &lt;p&gt;This concrete method has been added to this previously-defined
+ abstract class. (For backwards compatibility, it cannot be abstract.)
+ It may be overridden by a provider to initialize the key pair
+ generator. Such an override
+ is expected to throw an InvalidAlgorithmParameterException if
+ a parameter is inappropriate for this key pair generator.
+ If this method is not overridden, it always throws an
+ UnsupportedOperationException.
+@param {Object {AlgorithmParameterSpec}} params the parameter set used to generate the keys.
+@param {Object {SecureRandom}} random the source of randomness for this generator.
+@exception InvalidAlgorithmParameterException if the given parameters
+ are inappropriate for this key pair generator.
+@since 1.2
+*/
+initialize : function(  ) {},
+
+<span id='java-security-KeyPairGeneratorSpi-method-generateKeyPair'>/**Generates a key pair. Unless an initialization method is called
+</span> using a KeyPairGenerator interface, algorithm-specific defaults
+ will be used. This will generate a new key pair every time it
+ is called.
+@return {Object {java.security.KeyPair}} the newly generated {@code KeyPair}
+*/
+generateKeyPair : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

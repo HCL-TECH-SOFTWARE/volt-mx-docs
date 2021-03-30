@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-sun-net-ssl-internal-ssl-X509ExtendedTrustManager'>/**@class com.sun.net.ssl.internal.ssl.X509ExtendedTrustManager
+</span> implements javax.net.ssl.X509TrustManager
+
+@extends java.lang.Object
+
+ Instance of this class is an extension of &lt;code&gt;X509TrustManager&lt;/code&gt;.
+ &lt;p&gt;
+ Note that this class is referenced by the Deploy workspace. Any updates
+ must make sure that they do not cause any breakage there.
+ &lt;p&gt;
+ It takes the responsiblity of checking the peer identity with its
+ principal declared in the cerificate.
+ &lt;p&gt;
+ The class provides an alternative to &lt;code&gt;HostnameVerifer&lt;/code&gt;.
+ If application customizes its &lt;code&gt;HostnameVerifer&lt;/code&gt; for
+ &lt;code&gt;HttpsURLConnection&lt;/code&gt;, the peer identity will be checked
+ by the customized &lt;code&gt;HostnameVerifer&lt;/code&gt;; otherwise, it will
+ be checked by the extended trust manager.
+ &lt;p&gt;
+ RFC2830 defines the server identification specification for &quot;LDAP&quot;
+ algorithm. RFC2818 defines both the server identification and the
+ client identification specification for &quot;HTTPS&quot; algorithm.
+
+ @see X509TrustManager
+ @see HostnameVerifier
+
+ @since 1.6
+ @author Xuelei Fan
+*/
+var X509ExtendedTrustManager = {
+
+<span id='com-sun-net-ssl-internal-ssl-X509ExtendedTrustManager-method-checkClientTrusted'>/**Given the partial or complete certificate chain provided by the
+</span> peer, check its identity and build a certificate path to a trusted
+ root, return if it can be validated and is trusted for client SSL
+ authentication based on the authentication type.
+ &lt;p&gt;
+ The authentication type is determined by the actual certificate
+ used. For instance, if RSAPublicKey is used, the authType
+ should be &quot;RSA&quot;. Checking is case-sensitive.
+ &lt;p&gt;
+ The algorithm parameter specifies the client identification protocol
+ to use. If the algorithm and the peer hostname are available, the
+ peer hostname is checked against the peer's identity presented in
+ the X509 certificate, in order to prevent masquerade attacks.
+@param {Object {java.security.cert.X509Certificate[]}} chain the peer certificate chain
+@param {String} authType the authentication type based on the client certificate
+@param {String} hostname the peer hostname
+@param {String} algorithm the identification algorithm
+@throws IllegalArgumentException if null or zero-length chain
+         is passed in for the chain parameter or if null or zero-length
+         string is passed in for the  authType parameter
+@throws CertificateException if the certificate chain is not trusted
+         by this TrustManager.
+*/
+checkClientTrusted : function(  ) {},
+
+<span id='com-sun-net-ssl-internal-ssl-X509ExtendedTrustManager-method-checkServerTrusted'>/**Given the partial or complete certificate chain provided by the
+</span> peer, check its identity and build a certificate path to a trusted
+ root, return if it can be validated and is trusted for server SSL
+ authentication based on the authentication type.
+ &lt;p&gt;
+ The authentication type is the key exchange algorithm portion
+ of the cipher suites represented as a String, such as &quot;RSA&quot;,
+ &quot;DHE_DSS&quot;. Checking is case-sensitive.
+ &lt;p&gt;
+ The algorithm parameter specifies the server identification protocol
+ to use. If the algorithm and the peer hostname are available, the
+ peer hostname is checked against the peer's identity presented in
+ the X509 certificate, in order to prevent masquerade attacks.
+@param {Object {java.security.cert.X509Certificate[]}} chain the peer certificate chain
+@param {String} authType the key exchange algorithm used
+@param {String} hostname the peer hostname
+@param {String} algorithm the identification algorithm
+@throws IllegalArgumentException if null or zero-length chain
+         is passed in for the chain parameter or if null or zero-length
+         string is passed in for the  authType parameter
+@throws CertificateException if the certificate chain is not trusted
+         by this TrustManager.
+*/
+checkServerTrusted : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

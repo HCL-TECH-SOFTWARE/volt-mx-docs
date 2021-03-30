@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiConfigManager'>/**@class com.android.server.wifi.WifiConfigManager
+</span>@extends java.lang.Object
+
+ This class provides the APIs to manage configured Wi-Fi networks.
+ It deals with the following:
+ - Maintaining a list of configured networks for quick access.
+ - Persisting the configurations to store when required.
+ - Supporting WifiManager Public API calls:
+   &gt; addOrUpdateNetwork()
+   &gt; removeNetwork()
+   &gt; enableNetwork()
+   &gt; disableNetwork()
+ - Handle user switching on multi-user devices.
+
+ All network configurations retrieved from this class are copies of the original configuration
+ stored in the internal database. So, any updates to the retrieved configuration object are
+ meaningless and will not be reflected in the original database.
+ This is done on purpose to ensure that only WifiConfigManager can modify configurations stored
+ in the internal database. Any configuration updates should be triggered with appropriate helper
+ methods of this class using the configuration's unique networkId.
+
+ NOTE: These API's are not thread safe and should only be used from ClientModeImpl thread.
+*/
+var WifiConfigManager = {
+
+<span id='com-android-server-wifi-WifiConfigManager-property-PASSWORD_MASK'>/** String used to mask passwords to public interface.
+</span>*/
+PASSWORD_MASK : &quot;*&quot;,
+<span id='com-android-server-wifi-WifiConfigManager-property-SYSUI_PACKAGE_NAME'>/** Package name for SysUI. This is used to lookup the UID of SysUI which is used to allow
+</span> Quick settings to modify network configurations.
+*/
+SYSUI_PACKAGE_NAME : &quot;com.android.systemui&quot;,
+<span id='com-android-server-wifi-WifiConfigManager-property-NETWORK_SELECTION_DISABLE_THRESHOLD'>/** Network Selection disable reason thresholds. These numbers are used to debounce network
+</span> failures before we disable them.
+ These are indexed using the disable reason constants defined in
+ {@link android.net.wifi.WifiConfiguration.NetworkSelectionStatus}.
+*/
+NETWORK_SELECTION_DISABLE_THRESHOLD : &quot;null&quot;,
+<span id='com-android-server-wifi-WifiConfigManager-property-NETWORK_SELECTION_DISABLE_TIMEOUT_MS'>/** Network Selection disable timeout for each kind of error. After the timeout milliseconds,
+</span> enable the network again.
+ These are indexed using the disable reason constants defined in
+ {@link android.net.wifi.WifiConfiguration.NetworkSelectionStatus}.
+*/
+NETWORK_SELECTION_DISABLE_TIMEOUT_MS : &quot;null&quot;,
+<span id='com-android-server-wifi-WifiConfigManager-property-SCAN_CACHE_ENTRIES_MAX_SIZE'>/** Max size of scan details to cache in {@link #mScanDetailCaches}.
+</span>*/
+SCAN_CACHE_ENTRIES_MAX_SIZE : &quot;192&quot;,
+<span id='com-android-server-wifi-WifiConfigManager-property-SCAN_CACHE_ENTRIES_TRIM_SIZE'>/** Once the size of the scan details in the cache {@link #mScanDetailCaches} exceeds
+</span> {@link #SCAN_CACHE_ENTRIES_MAX_SIZE}, trim it down to this value so that we have some
+ buffer time before the next eviction.
+*/
+SCAN_CACHE_ENTRIES_TRIM_SIZE : &quot;128&quot;,
+<span id='com-android-server-wifi-WifiConfigManager-property-LINK_CONFIGURATION_MAX_SCAN_CACHE_ENTRIES'>/** Link networks only if they have less than this number of scan cache entries.
+</span>*/
+LINK_CONFIGURATION_MAX_SCAN_CACHE_ENTRIES : &quot;6&quot;,
+<span id='com-android-server-wifi-WifiConfigManager-property-LINK_CONFIGURATION_BSSID_MATCH_LENGTH'>/** Link networks only if the bssid in scan results for the networks match in the first
+</span> 16 ASCII chars in the bssid string. For example = &quot;af:de:56;34:15:7&quot;
+*/
+LINK_CONFIGURATION_BSSID_MATCH_LENGTH : &quot;16&quot;,
+<span id='com-android-server-wifi-WifiConfigManager-property-MAX_PNO_SCAN_FREQUENCY_AGE_MS'>/** Maximum age of frequencies last seen to be included in pno scans. (30 days)
+</span>*/
+MAX_PNO_SCAN_FREQUENCY_AGE_MS : &quot;2592000000&quot;,
+<span id='com-android-server-wifi-WifiConfigManager-property-DELETED_EPHEMERAL_SSID_EXPIRY_MS'>/** Expiration timeout for deleted ephemeral ssids. (1 day)
+</span>*/
+DELETED_EPHEMERAL_SSID_EXPIRY_MS : &quot;86400000&quot;,
+<span id='com-android-server-wifi-WifiConfigManager-method-createDebugTimeStampString'>/**Construct the string to be put in the |creationTime| &amp; |updateTime| elements of
+</span> WifiConfiguration from the provided wall clock millis.
+@param {Number} wallClockMillis Time in milliseconds to be converted to string.
+*/
+createDebugTimeStampString : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-enableVerboseLogging'>/**Enable/disable verbose logging in WifiConfigManager &amp; its helper classes.
+</span>*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getConfiguredNetworks'>/**Retrieves the list of all configured networks with passwords masked.
+</span>@return {Object {java.util.List}} List of WifiConfiguration objects representing the networks.
+*/
+getConfiguredNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getConfiguredNetworksWithPasswords'>/**Retrieves the list of all configured networks with the passwords in plaintext.
+</span>
+ WARNING: Don't use this to pass network configurations to external apps. Should only be
+ sent to system apps/wifi stack, when there is a need for passwords in plaintext.
+ TODO: Need to understand the current use case of this API.
+@return {Object {java.util.List}} List of WifiConfiguration objects representing the networks.
+*/
+getConfiguredNetworksWithPasswords : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getSavedNetworks'>/**Retrieves the list of all configured networks with the passwords masked.
+</span>@return {Object {java.util.List}} List of WifiConfiguration objects representing the networks.
+*/
+getSavedNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getConfiguredNetwork'>/**Retrieves the configured network corresponding to the provided networkId with password
+</span> masked.
+@param {Number} networkId networkId of the requested network.
+@return {Object {android.net.wifi.WifiConfiguration}} WifiConfiguration object if found, null otherwise.
+*/
+getConfiguredNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getConfiguredNetwork'>/**Retrieves the configured network corresponding to the provided config key with password
+</span> masked.
+@param {String} configKey configKey of the requested network.
+@return {Object {android.net.wifi.WifiConfiguration}} WifiConfiguration object if found, null otherwise.
+*/
+getConfiguredNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getConfiguredNetworkWithPassword'>/**Retrieves the configured network corresponding to the provided networkId with password
+</span> in plaintext.
+
+ WARNING: Don't use this to pass network configurations to external apps. Should only be
+ sent to system apps/wifi stack, when there is a need for passwords in plaintext.
+@param {Number} networkId networkId of the requested network.
+@return {Object {android.net.wifi.WifiConfiguration}} WifiConfiguration object if found, null otherwise.
+*/
+getConfiguredNetworkWithPassword : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getConfiguredNetworkWithoutMasking'>/**Retrieves the configured network corresponding to the provided networkId
+</span> without any masking.
+
+ WARNING: Don't use this to pass network configurations except in the wifi stack, when
+ there is a need for passwords and randomized MAC address.
+@param {Number} networkId networkId of the requested network.
+@return {Object {android.net.wifi.WifiConfiguration}} Copy of WifiConfiguration object if found, null otherwise.
+*/
+getConfiguredNetworkWithoutMasking : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-addOrUpdateNetwork'>/**Add a network or update a network configuration to our database.
+</span> If the supplied networkId is INVALID_NETWORK_ID, we create a new empty
+ network configuration. Otherwise, the networkId should refer to an existing configuration.
+@param {Object {WifiConfiguration}} config provided WifiConfiguration object.
+@param {Number} uid UID of the app requesting the network addition/modification.
+@param {String} packageName Package name of the app requesting the network addition/modification.
+@return {Object {com.android.server.wifi.NetworkUpdateResult}} NetworkUpdateResult object representing status of the update.
+*/
+addOrUpdateNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-addOrUpdateNetwork'>/**Add a network or update a network configuration to our database.
+</span> If the supplied networkId is INVALID_NETWORK_ID, we create a new empty
+ network configuration. Otherwise, the networkId should refer to an existing configuration.
+@param {Object {WifiConfiguration}} config provided WifiConfiguration object.
+@param {Number} uid    UID of the app requesting the network addition/modification.
+@return {Object {com.android.server.wifi.NetworkUpdateResult}} NetworkUpdateResult object representing status of the update.
+*/
+addOrUpdateNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-removeNetwork'>/**Removes the specified network configuration from our database.
+</span>@param {Number} networkId network ID of the provided network.
+@param {Number} uid       UID of the app requesting the network deletion.
+@return {Boolean} true if successful, false otherwise.
+*/
+removeNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-removeNetworksForApp'>/**Remove all networks associated with an application.
+</span>@param {Object {ApplicationInfo}} app Application info of the package of networks to remove.
+@return {Object {java.util.Set}} the {@link Set} of networks that were removed by this call. Networks which matched
+         but failed to remove are omitted from this set.
+*/
+removeNetworksForApp : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-removeAllEphemeralOrPasspointConfiguredNetworks'>/**Iterates through the internal list of configured networks and removes any ephemeral or
+</span> passpoint network configurations which are transient in nature.
+@return {Boolean} true if a network was removed, false otherwise.
+*/
+removeAllEphemeralOrPasspointConfiguredNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-removePasspointConfiguredNetwork'>/**Removes the passpoint network configuration matched with {@code fqdn} provided.
+</span>@param {String} fqdn Fully Qualified Domain Name to remove.
+@return {Boolean} true if a network was removed, false otherwise.
+*/
+removePasspointConfiguredNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-updateNetworkSelectionStatus'>/**Update a network's status (both internal and public) according to the update reason and
+</span> its current state.
+
+ Each network has 2 status:
+ 1. NetworkSelectionStatus: This is internal selection status of the network. This is used
+ for temporarily disabling a network for Network Selector.
+ 2. Status: This is the exposed status for a network. This is mostly set by
+ the public API's {@link WifiManager#enableNetwork(int, boolean)} &amp;
+ {@link WifiManager#disableNetwork(int)}.
+@param {Number} networkId network ID of the network that needs the update.
+@param {Number} reason    reason to update the network.
+@return {Boolean} true if the input configuration has been updated, false otherwise.
+*/
+updateNetworkSelectionStatus : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-updateNetworkNotRecommended'>/**Update whether a network is currently not recommended by {@link RecommendedNetworkEvaluator}.
+</span>@param {Number} networkId network ID of the network to be updated
+@param {Boolean} notRecommended whether this network is not recommended
+@return {Boolean} true if the network is updated, false otherwise
+*/
+updateNetworkNotRecommended : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-tryEnableNetwork'>/**Attempt to re-enable a network for network selection, if this network was either:
+</span> a) Previously temporarily disabled, but its disable timeout has expired, or
+ b) Previously disabled because of a user switch, but is now visible to the current
+ user.
+@param {Number} networkId the id of the network to be checked for possible unblock (due to timeout)
+@return {Boolean} true if the network identified by {@param networkId} was re-enabled for qualified
+ network selection, false otherwise.
+*/
+tryEnableNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-enableNetwork'>/**Enable a network using the public {@link WifiManager#enableNetwork(int, boolean)} API.
+</span>@param {Number} networkId     network ID of the network that needs the update.
+@param {Boolean} disableOthers Whether to disable all other networks or not. This is used to indicate
+                      that the app requested connection to a specific network.
+@param {Number} uid           uid of the app requesting the update.
+@return {Boolean} true if it succeeds, false otherwise
+*/
+enableNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-disableNetwork'>/**Disable a network using the public {@link WifiManager#disableNetwork(int)} API.
+</span>@param {Number} networkId network ID of the network that needs the update.
+@param {Number} uid       uid of the app requesting the update.
+@return {Boolean} true if it succeeds, false otherwise
+*/
+disableNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-updateLastConnectUid'>/**Updates the last connected UID for the provided configuration.
+</span>@param {Number} networkId network ID corresponding to the network.
+@param {Number} uid       uid of the app requesting the connection.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+updateLastConnectUid : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-updateNetworkAfterConnect'>/**Updates a network configuration after a successful connection to it.
+</span>
+ This method updates the following WifiConfiguration elements:
+ 1. Set the |lastConnected| timestamp.
+ 2. Increment |numAssociation| counter.
+ 3. Clear the disable reason counters in the associated |NetworkSelectionStatus|.
+ 4. Set the hasEverConnected| flag in the associated |NetworkSelectionStatus|.
+ 5. Sets the status of network as |CURRENT|.
+@param {Number} networkId network ID corresponding to the network.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+updateNetworkAfterConnect : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-updateNetworkAfterDisconnect'>/**Updates a network configuration after disconnection from it.
+</span>
+ This method updates the following WifiConfiguration elements:
+ 1. Set the |lastDisConnected| timestamp.
+ 2. Sets the status of network back to |ENABLED|.
+@param {Number} networkId network ID corresponding to the network.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+updateNetworkAfterDisconnect : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-setNetworkDefaultGwMacAddress'>/**Set default GW MAC address for the provided network.
+</span>@param {Number} networkId network ID corresponding to the network.
+@param {String} macAddress MAC address of the gateway to be set.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+setNetworkDefaultGwMacAddress : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-setNetworkRandomizedMacAddress'>/**Set randomized MAC address for the provided network.
+</span>@param {Number} networkId network ID corresponding to the network.
+@param {Object {MacAddress}} macAddress Randomized MAC address to be used for network connection.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+setNetworkRandomizedMacAddress : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-clearNetworkCandidateScanResult'>/**Clear the {@link NetworkSelectionStatus#mCandidate},
+</span> {@link NetworkSelectionStatus#mCandidateScore} &amp;
+ {@link NetworkSelectionStatus#mSeenInLastQualifiedNetworkSelection} for the provided network.
+
+ This is invoked by Network Selector at the start of every selection procedure to clear all
+ configured networks' scan-result-candidates.
+@param {Number} networkId network ID corresponding to the network.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+clearNetworkCandidateScanResult : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-setNetworkCandidateScanResult'>/**Set the {@link NetworkSelectionStatus#mCandidate},
+</span> {@link NetworkSelectionStatus#mCandidateScore} &amp;
+ {@link NetworkSelectionStatus#mSeenInLastQualifiedNetworkSelection} for the provided network.
+
+ This is invoked by Network Selector when it sees a network during network selection procedure
+ to set the scan result candidate.
+@param {Number} networkId  network ID corresponding to the network.
+@param {Object {ScanResult}} scanResult Candidate ScanResult associated with this network.
+@param {Number} score      Score assigned to the candidate.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+setNetworkCandidateScanResult : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-clearNetworkConnectChoice'>/**Clear the {@link NetworkSelectionStatus#mConnectChoice} &amp;
+</span> {@link NetworkSelectionStatus#mConnectChoiceTimestamp} for the provided network.
+@param {Number} networkId network ID corresponding to the network.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+clearNetworkConnectChoice : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-setNetworkConnectChoice'>/**Set the {@link NetworkSelectionStatus#mConnectChoice} &amp;
+</span> {@link NetworkSelectionStatus#mConnectChoiceTimestamp} for the provided network.
+
+ This is invoked by Network Selector when the user overrides the currently connected network
+ choice.
+@param {Number} networkId              network ID corresponding to the network.
+@param {String} connectChoiceConfigKey ConfigKey corresponding to the network which was chosen over
+                               this network.
+@param {Number} timestamp              timestamp at which the choice was made.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+setNetworkConnectChoice : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-incrementNetworkNoInternetAccessReports'>/**Increments the number of no internet access reports in the provided network.
+</span>@param {Number} networkId network ID corresponding to the network.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+incrementNetworkNoInternetAccessReports : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-setNetworkValidatedInternetAccess'>/**Sets the internet access is validated or not in the provided network.
+</span>@param {Number} networkId network ID corresponding to the network.
+@param {Boolean} validated Whether access is validated or not.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+setNetworkValidatedInternetAccess : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-setNetworkNoInternetAccessExpected'>/**Sets whether the internet access is expected or not in the provided network.
+</span>@param {Number} networkId network ID corresponding to the network.
+@param {Boolean} expected  Whether access is expected or not.
+@return {Boolean} true if the network was found, false otherwise.
+*/
+setNetworkNoInternetAccessExpected : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getLastSelectedNetwork'>/**Retrieve the network Id corresponding to the last network that was explicitly selected by
+</span> an app/user.
+@return {Number} network Id corresponding to the last selected network.
+*/
+getLastSelectedNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getLastSelectedNetworkConfigKey'>/**Retrieve the configKey corresponding to the last network that was explicitly selected by
+</span> an app/user.
+@return {String} network Id corresponding to the last selected network.
+*/
+getLastSelectedNetworkConfigKey : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getLastSelectedTimeStamp'>/**Retrieve the time stamp at which a network was explicitly selected by an app/user.
+</span>@return {Number} timestamp in milliseconds from boot when this was set.
+*/
+getLastSelectedTimeStamp : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getScanDetailCacheForNetwork'>/**Helper method to get the scan detail cache entry {@link #mScanDetailCaches} for the provided
+</span> network.
+@param {Number} networkId network ID corresponding to the network.
+@return {Object {com.android.server.wifi.ScanDetailCache}} existing {@link ScanDetailCache} entry if one exists or null.
+*/
+getScanDetailCacheForNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getConfiguredNetworkForScanDetail'>/**Retrieves a configured network corresponding to the provided scan detail if one exists.
+</span>@param {Object {ScanDetail}} scanDetail ScanDetail instance  to use for looking up the network.
+@return {Object {android.net.wifi.WifiConfiguration}} WifiConfiguration object representing the network corresponding to the scanDetail,
+ null if none exists.
+*/
+getConfiguredNetworkForScanDetail : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-getConfiguredNetworkForScanDetailAndCache'>/**Retrieves a configured network corresponding to the provided scan detail if one exists and
+</span> caches the provided |scanDetail| into the corresponding scan detail cache entry
+ {@link #mScanDetailCaches} for the retrieved network.
+@param {Object {ScanDetail}} scanDetail input a scanDetail from the scan result
+@return {Object {android.net.wifi.WifiConfiguration}} WifiConfiguration object representing the network corresponding to the scanDetail,
+ null if none exists.
+*/
+getConfiguredNetworkForScanDetailAndCache : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-updateScanDetailCacheFromWifiInfo'>/**Update the scan detail cache associated with current connected network with latest
+</span> RSSI value in the provided WifiInfo.
+ This is invoked when we get an RSSI poll update after connection.
+@param {Object {WifiInfo}} info WifiInfo instance pointing to the current connected network.
+*/
+updateScanDetailCacheFromWifiInfo : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-updateScanDetailForNetwork'>/**Save the ScanDetail to the ScanDetailCache of the given network.  This is used
+</span> by {@link com.android.server.wifi.hotspot2.PasspointNetworkEvaluator} for caching
+ ScanDetail for newly created {@link WifiConfiguration} for Passpoint network.
+@param {Number} networkId The ID of the network to save ScanDetail to
+@param {Object {ScanDetail}} scanDetail The ScanDetail to cache
+*/
+updateScanDetailForNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-fetchChannelSetForNetworkForPartialScan'>/**Retrieve a set of channels on which AP's for the provided network was seen using the
+</span> internal ScanResult's cache {@link #mScanDetailCaches}. This is used for initiating partial
+ scans for the currently connected network.
+@param {Number} networkId       network ID corresponding to the network.
+@param {Number} ageInMillis     only consider scan details whose timestamps are earlier than this value.
+@param {Number} homeChannelFreq frequency of the currently connected network.
+@return {Object {java.util.Set}} Set containing the frequencies on which this network was found, null if the network
+ was not found or there are no associated scan details in the cache.
+*/
+fetchChannelSetForNetworkForPartialScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-retrievePnoNetworkList'>/**Retrieves a list of all the saved networks before enabling disconnected/connected PNO.
+</span>
+ PNO network list sent to the firmware has limited size. If there are a lot of saved
+ networks, this list will be truncated and we might end up not sending the networks
+ with the highest chance of connecting to the firmware.
+ So, re-sort the network list based on the frequency of connection to those networks
+ and whether it was last seen in the scan results.
+@return {Object {java.util.List}} list of networks in the order of priority.
+*/
+retrievePnoNetworkList : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-retrieveHiddenNetworkList'>/**Retrieves a list of all the saved hidden networks for scans.
+</span>
+ Hidden network list sent to the firmware has limited size. If there are a lot of saved
+ networks, this list will be truncated and we might end up not sending the networks
+ with the highest chance of connecting to the firmware.
+ So, re-sort the network list based on the frequency of connection to those networks
+ and whether it was last seen in the scan results.
+@return {Object {java.util.List}} list of networks in the order of priority.
+*/
+retrieveHiddenNetworkList : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-wasEphemeralNetworkDeleted'>/**Check if the provided ephemeral network was deleted by the user or not. This call also clears
+</span> the SSID from the deleted ephemeral network map, if the duration has expired the
+ timeout specified by {@link #DELETED_EPHEMERAL_SSID_EXPIRY_MS}.
+@param {String} ssid caller must ensure that the SSID passed thru this API match
+             the WifiConfiguration.SSID rules, and thus be surrounded by quotes.
+@return {Boolean} true if network was deleted, false otherwise.
+*/
+wasEphemeralNetworkDeleted : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-disableEphemeralNetwork'>/**Disable an ephemeral or Passpoint SSID for the purpose of network selection.
+</span>
+ The network will be re-enabled when:
+ a) The user creates a network for that SSID and then forgets.
+ b) The time specified by {@link #DELETED_EPHEMERAL_SSID_EXPIRY_MS} expires after the disable.
+@param {String} ssid caller must ensure that the SSID passed thru this API match
+             the WifiConfiguration.SSID rules, and thus be surrounded by quotes.
+@return {Object {android.net.wifi.WifiConfiguration}} the {@link WifiConfiguration} corresponding to this SSID, if any, so that we can
+ disconnect if this is the current network.
+*/
+disableEphemeralNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-clearDeletedEphemeralNetworks'>/**Clear all deleted ephemeral networks.
+</span>*/
+clearDeletedEphemeralNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-resetSimNetworks'>/**Resets all sim networks state.
+</span>*/
+resetSimNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-handleUserSwitch'>/**Handles the switch to a different foreground user:
+</span> - Flush the current state to the old user's store file.
+ - Switch the user specific store file.
+ - Reload the networks from the store files (shared &amp; user).
+ - Write the store files to move any user specific private networks from shared store to user
+   store.
+
+ Need to be called when {@link com.android.server.SystemService#onSwitchUser(int)} is invoked.
+@param {Number} userId The identifier of the new foreground user, after the switch.
+@return {Object {java.util.Set}} List of network ID's of all the private networks of the old user which will be
+ removed from memory.
+*/
+handleUserSwitch : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-handleUserUnlock'>/**Handles the unlock of foreground user. This maybe needed to read the store file if the user's
+</span> CE storage is not visible when {@link #handleUserSwitch}(int) is invoked.
+
+ Need to be called when {@link com.android.server.SystemService#onUnlockUser(int)} is invoked.
+@param {Number} userId The identifier of the user that unlocked.
+*/
+handleUserUnlock : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-handleUserStop'>/**Handles the stop of foreground user. This is needed to write the store file to flush
+</span> out any pending data before the user's CE store storage is unavailable.
+
+ Need to be called when {@link com.android.server.SystemService#onStopUser(int)} is invoked.
+@param {Number} userId The identifier of the user that stopped.
+*/
+handleUserStop : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-loadFromStore'>/**Read the config store and load the in-memory lists from the store data retrieved and sends
+</span> out the networks changed broadcast.
+
+ This reads all the network configurations from:
+ 1. Shared WifiConfigStore.xml
+ 2. User WifiConfigStore.xml
+@return {Boolean} true on success or not needed (fresh install), false otherwise.
+*/
+loadFromStore : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-saveToStore'>/**Save the current snapshot of the in-memory lists to the config store.
+</span>@param {Boolean} forceWrite Whether the write needs to be forced or not.
+@return {Boolean} Whether the write was successful or not, this is applicable only for force writes.
+*/
+saveToStore : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-dump'>/**Dump the local log buffer and other internal state of WifiConfigManager.
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-setOnSavedNetworkUpdateListener'>/**Set the saved network update event listener
+</span>*/
+setOnSavedNetworkUpdateListener : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-setRecentFailureAssociationStatus'>/**Set extra failure reason for given config. Used to surface extra failure details to the UI
+</span>@param {Number} netId The network ID of the config to set the extra failure reason for
+@param {Number} reason the WifiConfiguration.ExtraFailureReason failure code representing the most
+               recent failure reason
+*/
+setRecentFailureAssociationStatus : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigManager-method-clearRecentFailureReason'>/**
+</span>@param {Number} netId The network ID of the config to clear the extra failure reason from
+*/
+clearRecentFailureReason : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

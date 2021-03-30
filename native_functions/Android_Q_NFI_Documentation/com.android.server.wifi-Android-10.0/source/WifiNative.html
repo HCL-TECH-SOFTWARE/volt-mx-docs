@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiNative'>/**@class com.android.server.wifi.WifiNative
+</span>@extends java.lang.Object
+
+ Native calls for bring up/shut down of the supplicant daemon and for
+ sending requests to the supplicant daemon
+
+ {@hide}
+*/
+var WifiNative = {
+
+<span id='com-android-server-wifi-WifiNative-property-SEND_MGMT_FRAME_ERROR_UNKNOWN'>/** Unknown error occurred during call to
+</span> {@link #sendMgmtFrame(String, byte[], com.android.server.wifi.WifiNative.SendMgmtFrameCallback, int) sendMgmtFrame()}.
+*/
+SEND_MGMT_FRAME_ERROR_UNKNOWN : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SEND_MGMT_FRAME_ERROR_MCS_UNSUPPORTED'>/** Specifying the MCS rate in
+</span> {@link #sendMgmtFrame(String, byte[], com.android.server.wifi.WifiNative.SendMgmtFrameCallback, int) sendMgmtFrame()} is not
+ supported by this device.
+*/
+SEND_MGMT_FRAME_ERROR_MCS_UNSUPPORTED : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SEND_MGMT_FRAME_ERROR_NO_ACK'>/** Driver reported that no ACK was received for the frame transmitted using
+</span> {@link #sendMgmtFrame(String, byte[], com.android.server.wifi.WifiNative.SendMgmtFrameCallback, int) sendMgmtFrame()}.
+*/
+SEND_MGMT_FRAME_ERROR_NO_ACK : &quot;3&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SEND_MGMT_FRAME_ERROR_TIMEOUT'>/** Error code for when the driver fails to report on the status of the frame sent by
+</span> {@link #sendMgmtFrame(String, byte[], com.android.server.wifi.WifiNative.SendMgmtFrameCallback, int) sendMgmtFrame()}
+ after {@link com.android.server.wifi.WificondControl#SEND_MGMT_FRAME_TIMEOUT_MS} milliseconds.
+*/
+SEND_MGMT_FRAME_ERROR_TIMEOUT : &quot;4&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SEND_MGMT_FRAME_ERROR_ALREADY_STARTED'>/** An existing call to
+</span> {@link #sendMgmtFrame(String, byte[], com.android.server.wifi.WifiNative.SendMgmtFrameCallback, int) sendMgmtFrame()}
+ is in progress. Another frame cannot be sent until the first call completes.
+*/
+SEND_MGMT_FRAME_ERROR_ALREADY_STARTED : &quot;5&quot;,
+<span id='com-android-server-wifi-WifiNative-property-RX_FILTER_TYPE_V4_MULTICAST'>/***/
+</span>RX_FILTER_TYPE_V4_MULTICAST : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiNative-property-RX_FILTER_TYPE_V6_MULTICAST'>/***/
+</span>RX_FILTER_TYPE_V6_MULTICAST : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiNative-property-BLUETOOTH_COEXISTENCE_MODE_ENABLED'>/***/
+</span>BLUETOOTH_COEXISTENCE_MODE_ENABLED : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiNative-property-BLUETOOTH_COEXISTENCE_MODE_DISABLED'>/***/
+</span>BLUETOOTH_COEXISTENCE_MODE_DISABLED : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiNative-property-BLUETOOTH_COEXISTENCE_MODE_SENSE'>/***/
+</span>BLUETOOTH_COEXISTENCE_MODE_SENSE : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SIM_AUTH_RESP_TYPE_GSM_AUTH'>/** Sim auth response types.
+</span>*/
+SIM_AUTH_RESP_TYPE_GSM_AUTH : &quot;GSM-AUTH&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SIM_AUTH_RESP_TYPE_UMTS_AUTH'>/***/
+</span>SIM_AUTH_RESP_TYPE_UMTS_AUTH : &quot;UMTS-AUTH&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SIM_AUTH_RESP_TYPE_UMTS_AUTS'>/***/
+</span>SIM_AUTH_RESP_TYPE_UMTS_AUTS : &quot;UMTS-AUTS&quot;,
+<span id='com-android-server-wifi-WifiNative-property-EAP_SIM_NOT_SUBSCRIBED'>/** EAP-SIM Error Codes
+</span>*/
+EAP_SIM_NOT_SUBSCRIBED : &quot;1031&quot;,
+<span id='com-android-server-wifi-WifiNative-property-EAP_SIM_VENDOR_SPECIFIC_CERT_EXPIRED'>/***/
+</span>EAP_SIM_VENDOR_SPECIFIC_CERT_EXPIRED : &quot;16385&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SCAN_TYPE_LOW_LATENCY'>/***/
+</span>SCAN_TYPE_LOW_LATENCY : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SCAN_TYPE_LOW_POWER'>/***/
+</span>SCAN_TYPE_LOW_POWER : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SCAN_TYPE_HIGH_ACCURACY'>/***/
+</span>SCAN_TYPE_HIGH_ACCURACY : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiNative-property-WIFI_SCAN_RESULTS_AVAILABLE'>/***/
+</span>WIFI_SCAN_RESULTS_AVAILABLE : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiNative-property-WIFI_SCAN_THRESHOLD_NUM_SCANS'>/***/
+</span>WIFI_SCAN_THRESHOLD_NUM_SCANS : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiNative-property-WIFI_SCAN_THRESHOLD_PERCENT'>/***/
+</span>WIFI_SCAN_THRESHOLD_PERCENT : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiNative-property-WIFI_SCAN_FAILED'>/***/
+</span>WIFI_SCAN_FAILED : &quot;3&quot;,
+<span id='com-android-server-wifi-WifiNative-property-DISABLE_FIRMWARE_ROAMING'>/** Macros for controlling firmware roaming.
+</span>*/
+DISABLE_FIRMWARE_ROAMING : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiNative-property-ENABLE_FIRMWARE_ROAMING'>/***/
+</span>ENABLE_FIRMWARE_ROAMING : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SET_FIRMWARE_ROAMING_SUCCESS'>/** Indicates success for enableFirmwareRoaming
+</span>*/
+SET_FIRMWARE_ROAMING_SUCCESS : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SET_FIRMWARE_ROAMING_FAILURE'>/** Indicates failure for enableFirmwareRoaming
+</span>*/
+SET_FIRMWARE_ROAMING_FAILURE : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiNative-property-SET_FIRMWARE_ROAMING_BUSY'>/** Indicates temporary failure for enableFirmwareRoaming - try again later
+</span>*/
+SET_FIRMWARE_ROAMING_BUSY : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiNative-method-enableVerboseLogging'>/**Enable verbose logging for all sub modules.
+</span>*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-initialize'>/**Initialize the native modules.
+</span>@return {Boolean} true on success, false otherwise.
+*/
+initialize : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-registerStatusListener'>/**Register a StatusListener to get notified about any status changes from the native daemons.
+</span>
+ It is safe to re-register the same callback object - duplicates are detected and only a
+ single copy kept.
+@param {Object {WifiNative.StatusListener}} listener StatusListener listener object.
+*/
+registerStatusListener : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setupInterfaceForClientInConnectivityMode'>/**Setup an interface for client mode (for connectivity) operations.
+</span>
+ This method configures an interface in STA mode in all the native daemons
+ (wificond, wpa_supplicant &amp; vendor HAL).
+@param {Object {WifiNative.InterfaceCallback}} interfaceCallback Associated callback for notifying status changes for the iface.
+@return {String} Returns the name of the allocated interface, will be null on failure.
+*/
+setupInterfaceForClientInConnectivityMode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setupInterfaceForClientInScanMode'>/**Setup an interface for client mode (for scan) operations.
+</span>
+ This method configures an interface in STA mode in the native daemons
+ (wificond, vendor HAL).
+@param {Object {WifiNative.InterfaceCallback}} interfaceCallback Associated callback for notifying status changes for the iface.
+@return {String} Returns the name of the allocated interface, will be null on failure.
+*/
+setupInterfaceForClientInScanMode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setupInterfaceForSoftApMode'>/**Setup an interface for Soft AP mode operations.
+</span>
+ This method configures an interface in AP mode in all the native daemons
+ (wificond, wpa_supplicant &amp; vendor HAL).
+@param {Object {WifiNative.InterfaceCallback}} interfaceCallback Associated callback for notifying status changes for the iface.
+@return {String} Returns the name of the allocated interface, will be null on failure.
+*/
+setupInterfaceForSoftApMode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-isInterfaceUp'>/**Check if the interface is up or down.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if iface is up, false if it's down or on error.
+*/
+isInterfaceUp : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-teardownInterface'>/**Teardown an interface in Client/AP mode.
+</span>
+ This method tears down the associated interface from all the native daemons
+ (wificond, wpa_supplicant &amp; vendor HAL).
+ Also, brings down the HAL, supplicant or hostapd as necessary.
+@param {String} ifaceName Name of the interface.
+*/
+teardownInterface : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-teardownAllInterfaces'>/**Teardown all the active interfaces.
+</span>
+ This method tears down the associated interfaces from all the native daemons
+ (wificond, wpa_supplicant &amp; vendor HAL).
+ Also, brings down the HAL, supplicant or hostapd as necessary.
+*/
+teardownAllInterfaces : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getClientInterfaceName'>/**Get name of the client interface.
+</span>
+ This is mainly used by external modules that needs to perform some
+ client operations on the STA interface.
+
+ TODO(b/70932231): This may need to be reworked once we start supporting STA + STA.
+@return {String} Interface name of any active client interface, null if no active client interface
+ exist.
+ Return Values for the different scenarios are listed below:
+ a) When there are no client interfaces, returns null.
+ b) when there is 1 client interface, returns the name of that interface.
+ c) When there are 2 or more client interface, returns the name of any client interface.
+*/
+getClientInterfaceName : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getSoftApInterfaceName'>/**Get name of the softap interface.
+</span>
+ This is mainly used by external modules that needs to perform some
+ operations on the AP interface.
+
+ TODO(b/70932231): This may need to be reworked once we start supporting AP + AP.
+@return {String} Interface name of any active softap interface, null if no active softap interface
+ exist.
+ Return Values for the different scenarios are listed below:
+ a) When there are no softap interfaces, returns null.
+ b) when there is 1 softap interface, returns the name of that interface.
+ c) When there are 2 or more softap interface, returns the name of any softap interface.
+*/
+getSoftApInterfaceName : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-signalPoll'>/**Request signal polling to wificond.
+</span>@param {String} ifaceName Name of the interface.
+ Returns an SignalPollResult object.
+ Returns null on failure.
+*/
+signalPoll : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getTxPacketCounters'>/**Fetch TX packet counters on current connection from wificond.
+</span>@param {String} ifaceName Name of the interface.
+ Returns an TxPacketCounters object.
+ Returns null on failure.
+*/
+getTxPacketCounters : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getChannelsForBand'>/**Query the list of valid frequencies for the provided band.
+</span> The result depends on the on the country code that has been set.
+@param {Number} band as specified by one of the WifiScanner.WIFI_BAND_* constants.
+ The following bands are supported:
+ WifiScanner.WIFI_BAND_24_GHZ
+ WifiScanner.WIFI_BAND_5_GHZ
+ WifiScanner.WIFI_BAND_5_GHZ_DFS_ONLY
+@return {Number} frequencies vector of valid frequencies (MHz), or null for error.
+@throws IllegalArgumentException if band is not recognized.
+*/
+getChannelsForBand : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-scan'>/**Start a scan using wificond for the given parameters.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} scanType Type of scan to perform. One of {@link ScanSettings#SCAN_TYPE_LOW_LATENCY},
+ {@link ScanSettings#SCAN_TYPE_LOW_POWER} or {@link ScanSettings#SCAN_TYPE_HIGH_ACCURACY}.
+@param {Object {java.util.Set}} freqs list of frequencies to scan for, if null scan all supported channels.
+@param {Object {java.util.List}} hiddenNetworkSSIDs List of hidden networks to be scanned for.
+@return {Boolean} Returns true on success.
+*/
+scan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getScanResults'>/**Fetch the latest scan result from kernel via wificond.
+</span>@param {String} ifaceName Name of the interface.
+@return {Object {java.util.ArrayList}} Returns an ArrayList of ScanDetail.
+ Returns an empty ArrayList on failure.
+*/
+getScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getPnoScanResults'>/**Fetch the latest scan result from kernel via wificond.
+</span>@param {String} ifaceName Name of the interface.
+@return {Object {java.util.ArrayList}} Returns an ArrayList of ScanDetail.
+ Returns an empty ArrayList on failure.
+*/
+getPnoScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startPnoScan'>/**Start PNO scan.
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {WifiNative.PnoSettings}} pnoSettings Pno scan configuration.
+@return {Boolean} true on success.
+*/
+startPnoScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-stopPnoScan'>/**Stop PNO scan.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true on success.
+*/
+stopPnoScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-sendMgmtFrame'>/**Sends an arbitrary 802.11 management frame on the current channel.
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {byte[]}} frame Bytes of the 802.11 management frame to be sent, including the header, but not
+              including the frame check sequence (FCS).
+@param {Object {WifiNative.SendMgmtFrameCallback}} callback A callback triggered when the transmitted frame is ACKed or the transmission
+                 fails.
+@param {Number} mcs The MCS index that the frame will be sent at. If mcs &lt; 0, the driver will select
+            the rate automatically. If the device does not support sending the frame at a
+            specified MCS rate, the transmission will be aborted and
+            {@link SendMgmtFrameCallback#onFailure(int)} will be called with reason
+            {@link #SEND_MGMT_FRAME_ERROR_MCS_UNSUPPORTED}.
+*/
+sendMgmtFrame : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-probeLink'>/**Sends a probe request to the AP and waits for a response in order to determine whether
+</span> there is connectivity between the device and AP.
+@param {String} ifaceName Name of the interface.
+@param {Object {MacAddress}} receiverMac the MAC address of the AP that the probe request will be sent to.
+@param {Object {WifiNative.SendMgmtFrameCallback}} callback callback triggered when the probe was ACKed by the AP, or when
+                an error occurs after the link probe was started.
+@param {Number} mcs The MCS index that this probe will be sent at. If mcs &lt; 0, the driver will select
+            the rate automatically. If the device does not support sending the frame at a
+            specified MCS rate, the transmission will be aborted and
+            {@link SendMgmtFrameCallback#onFailure(int)} will be called with reason
+            {@link #SEND_MGMT_FRAME_ERROR_MCS_UNSUPPORTED}.
+*/
+probeLink : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startSoftAp'>/**Start Soft AP operation using the provided configuration.
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {WifiConfiguration}} config Configuration to use for the soft ap created.
+@param {Object {WifiNative.SoftApListener}} listener Callback for AP events.
+@return {Boolean} true on success, false otherwise.
+*/
+startSoftAp : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setMacAddress'>/**Set MAC address of the given interface
+</span>@param {String} interfaceName Name of the interface
+@param {Object {MacAddress}} mac Mac address to change into
+@return {Boolean} true on success
+*/
+setMacAddress : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getFactoryMacAddress'>/**Get the factory MAC address of the given interface
+</span>@param {String} interfaceName Name of the interface.
+@return {Object {android.net.MacAddress}} factory MAC address, or null on a failed call or if feature is unavailable.
+*/
+getFactoryMacAddress : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setSupplicantLogLevel'>/**Set supplicant log level
+</span>@param {Boolean} turnOnVerbose Whether to turn on verbose logging or not.
+*/
+setSupplicantLogLevel : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-reconnect'>/**Trigger a reconnection if the iface is disconnected.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+reconnect : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-reassociate'>/**Trigger a reassociation even if the iface is currently connected.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+reassociate : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-disconnect'>/**Trigger a disconnection from the currently connected network.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+disconnect : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getMacAddress'>/**Makes a callback to HIDL to getMacAddress from supplicant
+</span>@param {String} ifaceName Name of the interface.
+@return {String} string containing the MAC address, or null on a failed call
+*/
+getMacAddress : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startFilteringMulticastV4Packets'>/**Start filtering out Multicast V4 packets
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} {@code true} if the operation succeeded, {@code false} otherwise
+
+ Multicast filtering rules work as follows:
+
+ The driver can filter multicast (v4 and/or v6) and broadcast packets when in
+ a power optimized mode (typically when screen goes off).
+
+ In order to prevent the driver from filtering the multicast/broadcast packets, we have to
+ add a DRIVER RXFILTER-ADD rule followed by DRIVER RXFILTER-START to make the rule effective
+
+ DRIVER RXFILTER-ADD Num
+   where Num = 0 - Unicast, 1 - Broadcast, 2 - Mutil4 or 3 - Multi6
+
+ and DRIVER RXFILTER-START
+ In order to stop the usage of these rules, we do
+
+ DRIVER RXFILTER-STOP
+ DRIVER RXFILTER-REMOVE Num
+   where Num is as described for RXFILTER-ADD
+
+ The  SETSUSPENDOPT driver command overrides the filtering rules
+*/
+startFilteringMulticastV4Packets : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-stopFilteringMulticastV4Packets'>/**Stop filtering out Multicast V4 packets.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} {@code true} if the operation succeeded, {@code false} otherwise
+*/
+stopFilteringMulticastV4Packets : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startFilteringMulticastV6Packets'>/**Start filtering out Multicast V6 packets
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} {@code true} if the operation succeeded, {@code false} otherwise
+*/
+startFilteringMulticastV6Packets : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-stopFilteringMulticastV6Packets'>/**Stop filtering out Multicast V6 packets.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} {@code true} if the operation succeeded, {@code false} otherwise
+*/
+stopFilteringMulticastV6Packets : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setBluetoothCoexistenceMode'>/**Sets the bluetooth coexistence mode.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} mode One of {@link #BLUETOOTH_COEXISTENCE_MODE_DISABLED},
+            {@link #BLUETOOTH_COEXISTENCE_MODE_ENABLED}, or
+            {@link #BLUETOOTH_COEXISTENCE_MODE_SENSE}.
+@return {Boolean} Whether the mode was successfully set.
+*/
+setBluetoothCoexistenceMode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setBluetoothCoexistenceScanMode'>/**Enable or disable Bluetooth coexistence scan mode. When this mode is on,
+</span> some of the low-level scan parameters used by the driver are changed to
+ reduce interference with A2DP streaming.
+@param {String} ifaceName Name of the interface.
+@param {Boolean} setCoexScanMode whether to enable or disable this mode
+@return {Boolean} {@code true} if the command succeeded, {@code false} otherwise.
+*/
+setBluetoothCoexistenceScanMode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setSuspendOptimizations'>/**Enable or disable suspend mode optimizations.
+</span>@param {String} ifaceName Name of the interface.
+@param {Boolean} enabled true to enable, false otherwise.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setSuspendOptimizations : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setCountryCode'>/**Set country code.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} countryCode 2 byte ASCII string. For ex: US, CA.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setCountryCode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startTdls'>/**Initiate TDLS discover and setup or teardown with the specified peer.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} macAddr MAC Address of the peer.
+@param {Boolean} enable true to start discovery and setup, false to teardown.
+*/
+startTdls : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startWpsPbc'>/**Start WPS pin display operation with the specified peer.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssid BSSID of the peer.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+startWpsPbc : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startWpsPinKeypad'>/**Start WPS pin keypad operation with the specified pin.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} pin Pin to be used.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+startWpsPinKeypad : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startWpsPinDisplay'>/**Start WPS pin display operation with the specified peer.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssid BSSID of the peer.
+@return {String} new pin generated on success, null otherwise.
+*/
+startWpsPinDisplay : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setExternalSim'>/**Sets whether to use external sim for SIM/USIM processing.
+</span>@param {String} ifaceName Name of the interface.
+@param {Boolean} external true to enable, false otherwise.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setExternalSim : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-simAuthResponse'>/**Send the sim auth response for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} type |GSM-AUTH|, |UMTS-AUTH| or |UMTS-AUTS|.
+@param {String} response Response params.
+@return {Boolean} true if succeeds, false otherwise.
+*/
+simAuthResponse : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-simAuthFailedResponse'>/**Send the eap sim gsm auth failure for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if succeeds, false otherwise.
+*/
+simAuthFailedResponse : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-umtsAuthFailedResponse'>/**Send the eap sim umts auth failure for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if succeeds, false otherwise.
+*/
+umtsAuthFailedResponse : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-simIdentityResponse'>/**Send the eap identity response for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} unencryptedResponse String to send.
+@param {String} encryptedResponse String to send.
+@return {Boolean} true if succeeds, false otherwise.
+*/
+simIdentityResponse : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getEapAnonymousIdentity'>/**This get anonymous identity from supplicant and returns it as a string.
+</span>@param {String} ifaceName Name of the interface.
+@return {String} anonymous identity string if succeeds, null otherwise.
+*/
+getEapAnonymousIdentity : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startWpsRegistrar'>/**Start WPS pin registrar operation with the specified peer and pin.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssid BSSID of the peer.
+@param {String} pin Pin to be used.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+startWpsRegistrar : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-cancelWps'>/**Cancels any ongoing WPS requests.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+cancelWps : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setDeviceName'>/**Set WPS device name.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} name String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setDeviceName : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setDeviceType'>/**Set WPS device type.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} type Type specified as a string. Used format: &lt;categ&gt;-&lt;OUI&gt;-&lt;subcateg&gt;
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setDeviceType : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setConfigMethods'>/**Set WPS config methods
+</span>@param {String} cfg List of config methods.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setConfigMethods : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setManufacturer'>/**Set WPS manufacturer.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} value String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setManufacturer : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setModelName'>/**Set WPS model name.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} value String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setModelName : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setModelNumber'>/**Set WPS model number.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} value String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setModelNumber : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setSerialNumber'>/**Set WPS serial number.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} value String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setSerialNumber : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setPowerSave'>/**Enable or disable power save mode.
+</span>@param {String} ifaceName Name of the interface.
+@param {Boolean} enabled true to enable, false to disable.
+*/
+setPowerSave : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setLowLatencyMode'>/**Enable or disable low latency mode.
+</span>@param {Boolean} enabled true to enable, false to disable.
+@return {Boolean} true on success, false on failure
+*/
+setLowLatencyMode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setConcurrencyPriority'>/**Set concurrency priority between P2P &amp; STA operations.
+</span>@param {Boolean} isStaHigherPriority Set to true to prefer STA over P2P during concurrency operations,
+                            false otherwise.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setConcurrencyPriority : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-enableStaAutoReconnect'>/**Enable/Disable auto reconnect functionality in wpa_supplicant.
+</span>@param {String} ifaceName Name of the interface.
+@param {Boolean} enable true to enable auto reconnecting, false to disable.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+enableStaAutoReconnect : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-migrateNetworksFromSupplicant'>/**Migrate all the configured networks from wpa_supplicant.
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {java.util.Map}} configs       Map of configuration key to configuration objects corresponding to all
+                      the networks.
+@param {Object {android.util.SparseArray}} networkExtras Map of extra configuration parameters stored in wpa_supplicant.conf
+@return {Boolean} Max priority of all the configs.
+*/
+migrateNetworksFromSupplicant : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-connectToNetwork'>/**Add the provided network configuration to wpa_supplicant and initiate connection to it.
+</span> This method does the following:
+ 1. Abort any ongoing scan to unblock the connection request.
+ 2. Remove any existing network in wpa_supplicant(This implicitly triggers disconnect).
+ 3. Add a new network to wpa_supplicant.
+ 4. Save the provided configuration to wpa_supplicant.
+ 5. Select the new network in wpa_supplicant.
+ 6. Triggers reconnect command to wpa_supplicant.
+@param {String} ifaceName Name of the interface.
+@param {Object {WifiConfiguration}} configuration WifiConfiguration parameters for the provided network.
+@return {Boolean} {@code true} if it succeeds, {@code false} otherwise
+*/
+connectToNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-roamToNetwork'>/**Initiates roaming to the already configured network in wpa_supplicant. If the network
+</span> configuration provided does not match the already configured network, then this triggers
+ a new connection attempt (instead of roam).
+ 1. Abort any ongoing scan to unblock the roam request.
+ 2. First check if we're attempting to connect to the same network as we currently have
+ configured.
+ 3. Set the new bssid for the network in wpa_supplicant.
+ 4. Triggers reassociate command to wpa_supplicant.
+@param {String} ifaceName Name of the interface.
+@param {Object {WifiConfiguration}} configuration WifiConfiguration parameters for the provided network.
+@return {Boolean} {@code true} if it succeeds, {@code false} otherwise
+*/
+roamToNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-removeAllNetworks'>/**Remove all the networks.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} {@code true} if it succeeds, {@code false} otherwise
+*/
+removeAllNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setConfiguredNetworkBSSID'>/**Set the BSSID for the currently configured network in wpa_supplicant.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if successful, false otherwise.
+*/
+setConfiguredNetworkBSSID : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-requestAnqp'>/**Initiate ANQP query.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssid BSSID of the AP to be queried
+@param {Object {java.util.Set}} anqpIds Set of anqp IDs.
+@param {Object {java.util.Set}} hs20Subtypes Set of HS20 subtypes.
+@return {Boolean} true on success, false otherwise.
+*/
+requestAnqp : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-requestIcon'>/**Request a passpoint icon file |filename| from the specified AP |bssid|.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssid BSSID of the AP
+@param {String} fileName name of the icon file
+@return {Boolean} true if request is sent successfully, false otherwise
+*/
+requestIcon : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getCurrentNetworkWpsNfcConfigurationToken'>/**Get the currently configured network's WPS NFC token.
+</span>@param {String} ifaceName Name of the interface.
+@return {String} Hex string corresponding to the WPS NFC token.
+*/
+getCurrentNetworkWpsNfcConfigurationToken : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-removeNetworkIfCurrent'>/**Remove the request |networkId| from supplicant if it's the current network,
+</span> if the current configured network matches |networkId|.
+@param {String} ifaceName Name of the interface.
+@param {Number} networkId network id of the network to be removed from supplicant.
+*/
+removeNetworkIfCurrent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-addDppPeerUri'>/**Adds a DPP peer URI to the URI list.
+</span>@param {String} ifaceName Interface name
+@param {String} uri Bootstrap (URI) string (e.g. DPP:....)
+@return {Number} ID, or -1 for failure
+*/
+addDppPeerUri : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-removeDppUri'>/**Removes a DPP URI to the URI list given an ID.
+</span>@param {String} ifaceName Interface name
+@param {Number} bootstrapId Bootstrap (URI) ID
+@return {Boolean} true when operation is successful, or false for failure
+*/
+removeDppUri : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-stopDppInitiator'>/**Stops/aborts DPP Initiator request
+</span>@param {String} ifaceName Interface name
+@return {Boolean} true when operation is successful, or false for failure
+*/
+stopDppInitiator : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startDppConfiguratorInitiator'>/**Starts DPP Configurator-Initiator request
+</span>@param {String} ifaceName Interface name
+@param {Number} peerBootstrapId Peer's bootstrap (URI) ID
+@param {Number} ownBootstrapId Own bootstrap (URI) ID - Optional, 0 for none
+@param {String} ssid SSID of the selected network
+@param {String} password Password of the selected network, or
+@param {String} psk PSK of the selected network in hexadecimal representation
+@param {Number} netRole The network role of the enrollee (STA or AP)
+@param {Number} securityAkm Security AKM to use: PSK, SAE
+@return {Boolean} true when operation is successful, or false for failure
+*/
+startDppConfiguratorInitiator : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startDppEnrolleeInitiator'>/**Starts DPP Enrollee-Initiator request
+</span>@param {String} ifaceName Interface name
+@param {Number} peerBootstrapId Peer's bootstrap (URI) ID
+@param {Number} ownBootstrapId Own bootstrap (URI) ID - Optional, 0 for none
+@return {Boolean} true when operation is successful, or false for failure
+*/
+startDppEnrolleeInitiator : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-registerDppEventCallback'>/**Registers DPP event callbacks.
+</span>@param {Object {WifiNative.DppEventCallback}} dppEventCallback Callback object.
+*/
+registerDppEventCallback : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-isHalStarted'>/**Tests whether the HAL is running or not
+</span>*/
+isHalStarted : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getBgScanCapabilities'>/**Gets the scan capabilities
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {WifiNative.ScanCapabilities}} capabilities object to be filled in
+@return {Boolean} true for success. false for failure
+*/
+getBgScanCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startBgScan'>/**Starts a background scan.
+</span> Any ongoing scan will be stopped first
+@param {String} ifaceName Name of the interface.
+@param {Object {WifiNative.ScanSettings}} settings     to control the scan
+@param {Object {WifiNative.ScanEventHandler}} eventHandler to call with the results
+@return {Boolean} true for success
+*/
+startBgScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-stopBgScan'>/**Stops any ongoing backgound scan
+</span>@param {String} ifaceName Name of the interface.
+*/
+stopBgScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-pauseBgScan'>/**Pauses an ongoing backgound scan
+</span>@param {String} ifaceName Name of the interface.
+*/
+pauseBgScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-restartBgScan'>/**Restarts a paused scan
+</span>@param {String} ifaceName Name of the interface.
+*/
+restartBgScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getBgScanResults'>/**Gets the latest scan results received.
+</span>@param {String} ifaceName Name of the interface.
+*/
+getBgScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getWifiLinkLayerStats'>/**Gets the latest link layer stats
+</span>@param {String} ifaceName Name of the interface.
+*/
+getWifiLinkLayerStats : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getSupportedFeatureSet'>/**Get the supported features
+</span>@param {String} ifaceName Name of the interface.
+@return {Number} bitmask defined by WifiManager.WIFI_FEATURE_*
+*/
+getSupportedFeatureSet : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setScanningMacOui'>/**Set the MAC OUI during scanning.
+</span> An OUI {Organizationally Unique Identifier} is a 24-bit number that
+ uniquely identifies a vendor or manufacturer.
+@param {String} ifaceName Name of the interface.
+@param {Object {byte[]}} oui OUI to set.
+@return {Boolean} true for success
+*/
+setScanningMacOui : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getApfCapabilities'>/**Get the APF (Android Packet Filter) capabilities of the device
+</span>@param {String} ifaceName Name of the interface.
+*/
+getApfCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-installPacketFilter'>/**Installs an APF program on this iface, replacing any existing program.
+</span>@param {String} ifaceName Name of the interface
+@param {Object {byte[]}} filter is the android packet filter program
+@return {Boolean} true for success
+*/
+installPacketFilter : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-readPacketFilter'>/**Reads the APF program and data buffer for this iface.
+</span>@param {String} ifaceName Name of the interface
+@return {Number} the buffer returned by the driver, or null in case of an error
+*/
+readPacketFilter : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setCountryCodeHal'>/**Set country code for this AP iface.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} countryCode - two-letter country code (as ISO 3166)
+@return {Boolean} true for success
+*/
+setCountryCodeHal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-setLoggingEventHandler'>/**Registers the logger callback and enables alerts.
+</span> Ring buffer data collection is only triggered when |startLoggingRingBuffer| is invoked.
+@param {Object {WifiNative.WifiLoggerEventHandler}} handler Callback to be invoked.
+@return {Boolean} true on success, false otherwise.
+*/
+setLoggingEventHandler : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startLoggingRingBuffer'>/**Control debug data collection
+</span>@param {Number} verboseLevel 0 to 3, inclusive. 0 stops logging.
+@param {Number} flags        Ignored.
+@param {Number} maxInterval  Maximum interval between reports; ignore if 0.
+@param {Number} minDataSize  Minimum data size in buffer for report; ignore if 0.
+@param {String} ringName     Name of the ring for which data collection is to start.
+@return {Boolean} true for success, false otherwise.
+*/
+startLoggingRingBuffer : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getSupportedLoggerFeatureSet'>/**Logger features exposed.
+</span> This is a no-op now, will always return -1.
+@return {Number} true on success, false otherwise.
+*/
+getSupportedLoggerFeatureSet : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-resetLogHandler'>/**Stops all logging and resets the logger callback.
+</span> This stops both the alerts and ring buffer data collection.
+@return {Boolean} true on success, false otherwise.
+*/
+resetLogHandler : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getDriverVersion'>/**Vendor-provided wifi driver version string
+</span>@return {String} String returned from the HAL.
+*/
+getDriverVersion : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getFirmwareVersion'>/**Vendor-provided wifi firmware version string
+</span>@return {String} String returned from the HAL.
+*/
+getFirmwareVersion : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getRingBufferStatus'>/**API to get the status of all ring buffers supported by driver
+</span>*/
+getRingBufferStatus : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getRingBufferData'>/**Indicates to driver that all the data has to be uploaded urgently
+</span>@param {String} ringName Name of the ring buffer requested.
+@return {Boolean} true on success, false otherwise.
+*/
+getRingBufferData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-flushRingBufferData'>/**Request hal to flush ring buffers to files
+</span>@return {Boolean} true on success, false otherwise.
+*/
+flushRingBufferData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getFwMemoryDump'>/**Request vendor debug info from the firmware
+</span>@return {Number} Raw data obtained from the HAL.
+*/
+getFwMemoryDump : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getDriverStateDump'>/**Request vendor debug info from the driver
+</span>@return {Number} Raw data obtained from the HAL.
+*/
+getDriverStateDump : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startPktFateMonitoring'>/**Ask the HAL to enable packet fate monitoring. Fails unless HAL is started.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true for success, false otherwise.
+*/
+startPktFateMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getTxPktFates'>/**Fetch the most recent TX packet fates from the HAL. Fails unless HAL is started.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true for success, false otherwise.
+*/
+getTxPktFates : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getRxPktFates'>/**Fetch the most recent RX packet fates from the HAL. Fails unless HAL is started.
+</span>@param {String} ifaceName Name of the interface.
+*/
+getRxPktFates : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getTxPackets'>/**Get the tx packet counts for the interface.
+</span>@param {String} ifaceName Name of the interface.
+@return {Number} tx packet counts
+*/
+getTxPackets : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getRxPackets'>/**Get the rx packet counts for the interface.
+</span>@param {String} ifaceName Name of the interface
+@return {Number} rx packet counts
+*/
+getRxPackets : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startSendingOffloadedPacket'>/**Start sending the specified keep alive packets periodically.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} slot Integer used to identify each request.
+@param {Object {byte[]}} dstMac Destination MAC Address
+@param {Object {byte[]}} packet Raw packet contents to send.
+@param {Number} protocol The ethernet protocol type
+@param {Number} period Period to use for sending these packets.
+@return {Number} 0 for success, -1 for error
+*/
+startSendingOffloadedPacket : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-stopSendingOffloadedPacket'>/**Stop sending the specified keep alive packets.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} slot id - same as startSendingOffloadedPacket call.
+@return {Number} 0 for success, -1 for error
+*/
+stopSendingOffloadedPacket : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-startRssiMonitoring'>/**Start RSSI monitoring on the currently connected access point.
+</span>@param {String} ifaceName        Name of the interface.
+@param {Number} maxRssi          Maximum RSSI threshold.
+@param {Number} minRssi          Minimum RSSI threshold.
+@param {Object {WifiNative.WifiRssiEventHandler}} rssiEventHandler Called when RSSI goes above maxRssi or below minRssi
+@return {Number} 0 for success, -1 for failure
+*/
+startRssiMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-stopRssiMonitoring'>/**Stop RSSI monitoring on the currently connected access point.
+</span>@param {String} ifaceName Name of the interface.
+@return {Number} 0 for success, -1 for failure
+*/
+stopRssiMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getWlanWakeReasonCount'>/**Fetch the host wakeup reasons stats from wlan driver.
+</span>@return {Object {com.android.server.wifi.WlanWakeReasonAndCounts}} the |WlanWakeReasonAndCounts| object retrieved from the wlan driver.
+*/
+getWlanWakeReasonCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-configureNeighborDiscoveryOffload'>/**Enable/Disable Neighbour discovery offload functionality in the firmware.
+</span>@param {String} ifaceName Name of the interface.
+@param {Boolean} enabled true to enable, false to disable.
+@return {Boolean} true for success, false otherwise.
+*/
+configureNeighborDiscoveryOffload : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-getRoamingCapabilities'>/**Query the firmware roaming capabilities.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true for success, false otherwise.
+*/
+getRoamingCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-enableFirmwareRoaming'>/**Enable/disable firmware roaming.
+</span>@param {String} ifaceName Name of the interface.
+@return {Number} SET_FIRMWARE_ROAMING_SUCCESS, SET_FIRMWARE_ROAMING_FAILURE,
+         or SET_FIRMWARE_ROAMING_BUSY
+*/
+enableFirmwareRoaming : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-configureRoaming'>/**Set firmware roaming configurations.
+</span>@param {String} ifaceName Name of the interface.
+*/
+configureRoaming : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-resetRoamingConfiguration'>/**Reset firmware roaming configuration.
+</span>@param {String} ifaceName Name of the interface.
+*/
+resetRoamingConfiguration : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-selectTxPowerScenario'>/**Select one of the pre-configured transmit power level scenarios or reset it back to normal.
+</span> Primarily used for meeting SAR requirements.
+@param {Object {SarInfo}} sarInfo The collection of inputs used to select the SAR scenario.
+@return {Boolean} true for success; false for failure or if the HAL version does not support this API.
+*/
+selectTxPowerScenario : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNative-method-readKernelLog'>/**Fetches the latest kernel logs.
+</span>*/
+readKernelLog : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

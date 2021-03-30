@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-spi-AbstractInterruptibleChannel'>/**@class java.nio.channels.spi.AbstractInterruptibleChannel
+</span> implements java.nio.channels.Channel
+
+ implements java.nio.channels.InterruptibleChannel
+
+@extends java.lang.Object
+
+ Base implementation class for interruptible channels.
+
+ &lt;p&gt; This class encapsulates the low-level machinery required to implement
+ the asynchronous closing and interruption of channels.  A concrete channel
+ class must invoke the {@link #begin begin} and {@link #end end} methods
+ before and after, respectively, invoking an I/O operation that might block
+ indefinitely.  In order to ensure that the {@link #end end} method is always
+ invoked, these methods should be used within a
+ &lt;tt&gt;try&lt;/tt&gt;&amp;nbsp;...&amp;nbsp;&lt;tt&gt;finally&lt;/tt&gt; block:
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ boolean completed = false;
+ try {
+     begin();
+     completed = ...;    // Perform blocking I/O operation
+     return ...;         // Return result
+ } finally {
+     end(completed);
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt; The &lt;tt&gt;completed&lt;/tt&gt; argument to the {@link #end end} method tells
+ whether or not the I/O operation actually completed, that is, whether it had
+ any effect that would be visible to the invoker.  In the case of an
+ operation that reads bytes, for example, this argument should be
+ &lt;tt&gt;true&lt;/tt&gt; if, and only if, some bytes were actually transferred into the
+ invoker's target buffer.
+
+ &lt;p&gt; A concrete channel class must also implement the {@link #implCloseChannel implCloseChannel} method in such a way that if it is
+ invoked while another thread is blocked in a native I/O operation upon the
+ channel then that operation will immediately return, either by throwing an
+ exception or by returning normally.  If a thread is interrupted or the
+ channel upon which it is blocked is asynchronously closed then the channel's
+ {@link #end end} method will throw the appropriate exception.
+
+ &lt;p&gt; This class performs the synchronization required to implement the {@link java.nio.channels.Channel} specification.  Implementations of the {@link #implCloseChannel implCloseChannel} method need not synchronize against
+ other threads that might be attempting to close the channel.  &lt;/p&gt;
+
+
+ @author Mark Reinhold
+ @author JSR-51 Expert Group
+ @since 1.4
+*/
+var AbstractInterruptibleChannel = {
+
+<span id='java-nio-channels-spi-AbstractInterruptibleChannel-method-close'>/**Closes this channel.
+</span>
+ &lt;p&gt; If the channel has already been closed then this method returns
+ immediately.  Otherwise it marks the channel as closed and then invokes
+ the {@link #implCloseChannel implCloseChannel} method in order to
+ complete the close operation.  &lt;/p&gt;
+@throws IOException
+          If an I/O error occurs
+*/
+close : function(  ) {},
+
+<span id='java-nio-channels-spi-AbstractInterruptibleChannel-method-isOpen'>/**
+</span>*/
+isOpen : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

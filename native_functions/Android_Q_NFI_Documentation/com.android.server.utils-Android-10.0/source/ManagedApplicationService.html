@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-utils-ManagedApplicationService'>/**@class com.android.server.utils.ManagedApplicationService
+</span>@extends java.lang.Object
+
+ Manages the lifecycle of an application-provided service bound from system server.
+
+ @hide
+*/
+var ManagedApplicationService = {
+
+<span id='com-android-server-utils-ManagedApplicationService-property-RETRY_FOREVER'>/** Attempt to reconnect service forever if an onBindingDied or onServiceDisconnected event
+</span> is received.
+*/
+RETRY_FOREVER : &quot;1&quot;,
+<span id='com-android-server-utils-ManagedApplicationService-property-RETRY_NEVER'>/** Never attempt to reconnect the service - a single onBindingDied or onServiceDisconnected
+</span> event will cause this to fully unbind the service and never attempt to reconnect.
+*/
+RETRY_NEVER : &quot;2&quot;,
+<span id='com-android-server-utils-ManagedApplicationService-property-RETRY_BEST_EFFORT'>/** Attempt to reconnect the service until the maximum number of retries is reached, then stop.
+</span>
+ The first retry will occur MIN_RETRY_DURATION_MS after the disconnection, and each
+ subsequent retry will occur after 2x the duration used for the previous retry up to the
+ MAX_RETRY_DURATION_MS duration.
+
+ In this case, retries mean a full unbindService/bindService pair to handle cases when the
+ usual service re-connection logic in ActiveServices has very high backoff times or when the
+ serviceconnection has fully died due to a package update or similar.
+*/
+RETRY_BEST_EFFORT : &quot;3&quot;,
+<span id='com-android-server-utils-ManagedApplicationService-method-build'>/**Create a new ManagedApplicationService object but do not yet bind to the user service.
+</span>@param {Object {Context}} context a Context to use for binding the application service.
+@param {Object {ComponentName}} component the {@link ComponentName} of the application service to bind.
+@param {Number} userId the user ID of user to bind the application service as.
+@param {Number} clientLabel the resource ID of a label displayed to the user indicating the
+      binding service, or 0 if none is desired.
+@param {String} settingsAction an action that can be used to open the Settings UI to enable/disable
+      binding to these services, or null if none is desired.
+@param {Object {ManagedApplicationService.BinderChecker}} binderChecker an interface used to validate the returned binder object, or null if
+      this interface is unchecked.
+@param {Boolean} isImportant bind the user service with BIND_IMPORTANT.
+@param {Number} retryType reconnect behavior to have when bound service is disconnected.
+@param {Object {Handler}} handler the Handler to use for retries and delivering EventCallbacks.
+@param {Object {ManagedApplicationService.EventCallback}} eventCallback a callback used to deliver disconnection events, or null if you
+      don't care.
+@return {Object {com.android.server.utils.ManagedApplicationService}} a ManagedApplicationService instance.
+*/
+build : function(  ) {},
+
+<span id='com-android-server-utils-ManagedApplicationService-method-getUserId'>/**
+</span>@return {Number} the user ID of the user that owns the bound service.
+*/
+getUserId : function(  ) {},
+
+<span id='com-android-server-utils-ManagedApplicationService-method-getComponent'>/**
+</span>@return {Object {android.content.ComponentName}} the component of the bound service.
+*/
+getComponent : function(  ) {},
+
+<span id='com-android-server-utils-ManagedApplicationService-method-disconnectIfNotMatching'>/**Asynchronously unbind from the application service if the bound service component and user
+</span> does not match the given signature.
+@param {Object {ComponentName}} componentName the component that must match.
+@param {Number} userId the user ID that must match.
+@return {Boolean} {@code true} if not matching.
+*/
+disconnectIfNotMatching : function(  ) {},
+
+<span id='com-android-server-utils-ManagedApplicationService-method-sendEvent'>/**Send an event to run as soon as the binder interface is available.
+</span>@param {Object {ManagedApplicationService.PendingEvent}} event a {@link PendingEvent} to send.
+*/
+sendEvent : function(  ) {},
+
+<span id='com-android-server-utils-ManagedApplicationService-method-disconnect'>/**Asynchronously unbind from the application service if bound.
+</span>*/
+disconnect : function(  ) {},
+
+<span id='com-android-server-utils-ManagedApplicationService-method-connect'>/**Asynchronously bind to the application service if not bound.
+</span>*/
+connect : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

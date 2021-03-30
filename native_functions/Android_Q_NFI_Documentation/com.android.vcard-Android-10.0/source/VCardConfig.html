@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-vcard-VCardConfig'>/**@class com.android.vcard.VCardConfig
+</span>@extends java.lang.Object
+
+ The class representing VCard related configurations. Useful static methods are not in this class
+ but in VCardUtils.
+*/
+var VCardConfig = {
+
+<span id='com-android-vcard-VCardConfig-property-DEFAULT_INTERMEDIATE_CHARSET'>/** &lt;p&gt;
+</span> The charset used during import.
+ &lt;/p&gt;
+ &lt;p&gt;
+ We cannot determine which charset should be used to interpret lines in vCard,
+ while Java requires us to specify it when InputStream is used.
+ We need to rely on the mechanism due to some performance reason.
+ &lt;/p&gt;
+ &lt;p&gt;
+ In order to avoid &quot;misinterpretation&quot; of charset and lose any data in vCard,
+ &quot;ISO-8859-1&quot; is first used for reading the stream.
+ When a charset is specified in a property (with &quot;CHARSET=...&quot; parameter),
+ the string is decoded to raw bytes and encoded into the specific charset,
+ &lt;/p&gt;
+ &lt;p&gt;
+ Unicode specification there's a one to one mapping between each byte in ISO-8859-1
+ and a codepoint, and Java specification requires runtime must have the charset.
+ Thus, ISO-8859-1 is one effective mapping for intermediate mapping.
+ &lt;/p&gt;
+*/
+DEFAULT_INTERMEDIATE_CHARSET : &quot;ISO-8859-1&quot;,
+<span id='com-android-vcard-VCardConfig-property-DEFAULT_IMPORT_CHARSET'>/** The charset used when there's no information affbout what charset should be used to
+</span> encode the binary given from vCard.
+*/
+DEFAULT_IMPORT_CHARSET : &quot;UTF-8&quot;,
+<span id='com-android-vcard-VCardConfig-property-DEFAULT_EXPORT_CHARSET'>/***/
+</span>DEFAULT_EXPORT_CHARSET : &quot;UTF-8&quot;,
+<span id='com-android-vcard-VCardConfig-property-VERSION_21'>/** Do not use statically like &quot;version == VERSION_V21&quot;
+</span>*/
+VERSION_21 : &quot;0&quot;,
+<span id='com-android-vcard-VCardConfig-property-VERSION_30'>/***/
+</span>VERSION_30 : &quot;1&quot;,
+<span id='com-android-vcard-VCardConfig-property-VERSION_40'>/***/
+</span>VERSION_40 : &quot;2&quot;,
+<span id='com-android-vcard-VCardConfig-property-VERSION_MASK'>/***/
+</span>VERSION_MASK : &quot;3&quot;,
+<span id='com-android-vcard-VCardConfig-property-NAME_ORDER_DEFAULT'>/***/
+</span>NAME_ORDER_DEFAULT : &quot;0&quot;,
+<span id='com-android-vcard-VCardConfig-property-NAME_ORDER_EUROPE'>/***/
+</span>NAME_ORDER_EUROPE : &quot;4&quot;,
+<span id='com-android-vcard-VCardConfig-property-NAME_ORDER_JAPANESE'>/***/
+</span>NAME_ORDER_JAPANESE : &quot;8&quot;,
+<span id='com-android-vcard-VCardConfig-property-FLAG_REFRAIN_QP_TO_NAME_PROPERTIES'>/** &lt;p&gt;
+</span> The flag indicating the vCard composer does &quot;NOT&quot; use Quoted-Printable toward &quot;primary&quot;
+ properties even though it is required by vCard 2.1 (QP is prohibited in vCard 3.0).
+ &lt;/p&gt;
+ &lt;p&gt;
+ We actually cannot define what is the &quot;primary&quot; property. Note that this is NOT defined
+ in vCard specification either. Also be aware that it is NOT related to &quot;primary&quot; notion
+ used in {@link android.provider.ContactsContract}.
+ This notion is just for vCard composition in Android.
+ &lt;/p&gt;
+ &lt;p&gt;
+ We added this Android-specific notion since some (incomplete) vCard exporters for vCard 2.1
+ do NOT use Quoted-Printable encoding toward some properties related names like &quot;N&quot;, &quot;FN&quot;, etc.
+ even when their values contain non-ascii or/and CR/LF, while they use the encoding in the
+ other properties like &quot;ADR&quot;, &quot;ORG&quot;, etc.
+ &lt;p&gt;
+ We are afraid of the case where some vCard importer also forget handling QP presuming QP is
+ not used in such fields.
+ &lt;/p&gt;
+ &lt;p&gt;
+ This flag is useful when some target importer you are going to focus on does not accept
+ such properties with Quoted-Printable encoding.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Again, we should not use this flag at all for complying vCard 2.1 spec.
+ &lt;/p&gt;
+ &lt;p&gt;
+ In vCard 3.0, Quoted-Printable is explicitly &quot;prohibitted&quot;, so we don't need to care this
+ kind of problem (hopefully).
+ &lt;/p&gt;
+ @hide
+*/
+FLAG_REFRAIN_QP_TO_NAME_PROPERTIES : &quot;268435456&quot;,
+<span id='com-android-vcard-VCardConfig-property-FLAG_CONVERT_PHONETIC_NAME_STRINGS'>/** &lt;p&gt;
+</span> The flag indicating that phonetic name related fields must be converted to
+ appropriate form. Note that &quot;appropriate&quot; is not defined in any vCard specification.
+ This is Android-specific.
+ &lt;/p&gt;
+ &lt;p&gt;
+ One typical (and currently sole) example where we need this flag is the time when
+ we need to emit Japanese phonetic names into vCard entries. The property values
+ should be encoded into half-width katakana when the target importer is Japanese mobile
+ phones', which are probably not able to parse full-width hiragana/katakana for
+ historical reasons, while the vCard importers embedded to softwares for PC should be
+ able to parse them as we expect.
+ &lt;/p&gt;
+*/
+FLAG_CONVERT_PHONETIC_NAME_STRINGS : &quot;134217728&quot;,
+<span id='com-android-vcard-VCardConfig-property-FLAG_APPEND_TYPE_PARAM'>/** &lt;p&gt;
+</span> The flag indicating the vCard composer &quot;for 2.1&quot; emits &quot;TYPE=&quot; string toward TYPE params
+ every time possible. The default behavior does not emit it and is valid in the spec.
+ In vCrad 3.0, this flag is unnecessary, since &quot;TYPE=&quot; is MUST in vCard 3.0 specification.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Detail:
+ How more than one TYPE fields are expressed is different between vCard 2.1 and vCard 3.0.
+ &lt;/p&gt;
+ &lt;p&gt;
+ e.g.
+ &lt;/p&gt;
+ &lt;ol&gt;
+ &lt;li&gt;Probably valid in both vCard 2.1 and vCard 3.0: &quot;ADR;TYPE=DOM;TYPE=HOME:...&quot;&lt;/li&gt;
+ &lt;li&gt;Valid in vCard 2.1 but not in vCard 3.0: &quot;ADR;DOM;HOME:...&quot;&lt;/li&gt;
+ &lt;li&gt;Valid in vCard 3.0 but not in vCard 2.1: &quot;ADR;TYPE=DOM,HOME:...&quot;&lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;p&gt;
+ If you are targeting to the importer which cannot accept TYPE params without &quot;TYPE=&quot;
+ strings (which should be rare though), please use this flag.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Example usage:
+ &lt;pre class=&quot;prettyprint&quot;&gt;int type = (VCARD_TYPE_V21_GENERIC | FLAG_APPEND_TYPE_PARAM);&lt;/pre&gt;
+ &lt;/p&gt;
+*/
+FLAG_APPEND_TYPE_PARAM : &quot;67108864&quot;,
+<span id='com-android-vcard-VCardConfig-property-FLAG_REFRAIN_PHONE_NUMBER_FORMATTING'>/** &lt;p&gt;
+</span> The flag indicating the vCard composer does touch nothing toward phone number Strings
+ but leave it as is.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The vCard specifications mention nothing toward phone numbers, while some devices
+ do (wrongly, but with innevitable reasons).
+ For example, there's a possibility Japanese mobile phones are expected to have
+ just numbers, hypens, plus, etc. but not usual alphabets, while US mobile phones
+ should get such characters. To make exported vCard simple for external parsers,
+ we have used {@link PhoneNumberUtils#formatNumber(String)} during export, and
+ removed unnecessary characters inside the number (e.g. &quot;111-222-3333 (Miami)&quot;
+ becomes &quot;111-222-3333&quot;).
+ Unfortunate side effect of that use was some control characters used in the other
+ areas may be badly affected by the formatting.
+ &lt;/p&gt;
+ &lt;p&gt;
+ This flag disables that formatting, affecting both importer and exporter.
+ If the user is aware of some side effects due to the implicit formatting, use this flag.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Caution: this flag will be removed in the future, replaced by some richer functionality.
+ &lt;/p&gt;
+*/
+FLAG_REFRAIN_PHONE_NUMBER_FORMATTING : &quot;33554432&quot;,
+<span id='com-android-vcard-VCardConfig-property-FLAG_REFRAIN_IMAGE_EXPORT'>/** &lt;P&gt;
+</span> The flag asking exporter to refrain image export.
+ &lt;/P&gt;
+ @hide will be deleted in the near future.
+*/
+FLAG_REFRAIN_IMAGE_EXPORT : &quot;8388608&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_UNKNOWN'>/** &lt;p&gt;
+</span> The type indicating nothing. Used by {@link com.android.vcard.VCardSourceDetector} when it
+ was not able to guess the exact vCard type.
+ &lt;/p&gt;
+*/
+VCARD_TYPE_UNKNOWN : &quot;0&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_V21_GENERIC'>/** &lt;p&gt;
+</span> Generic vCard format with the vCard 2.1. When composing a vCard entry,
+ the US convension will be used toward formatting some values.
+ &lt;/p&gt;
+ &lt;p&gt;
+ e.g. The order of the display name would be &quot;Prefix Given Middle Family Suffix&quot;,
+ while it should be &quot;Prefix Family Middle Given Suffix&quot; in Japan for example.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Uses UTF-8 for the charset as a charset for exporting. Note that old vCard importer
+ outside Android cannot accept it since vCard 2.1 specifically does not allow
+ that charset, while we need to use it to support various languages around the world.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If you want to use alternative charset, you should notify the charset to the other
+ compontent to be used.
+ &lt;/p&gt;
+*/
+VCARD_TYPE_V21_GENERIC : &quot;-1073741824&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_V30_GENERIC'>/** &lt;p&gt;
+</span> General vCard format with the version 3.0. Uses UTF-8 for the charset.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Not fully ready yet. Use with caution when you use this.
+ &lt;/p&gt;
+*/
+VCARD_TYPE_V30_GENERIC : &quot;-1073741823&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_V40_GENERIC'>/** General vCard format with the version 4.0.
+</span> @hide vCard 4.0 is not published yet.
+*/
+VCARD_TYPE_V40_GENERIC : &quot;-1073741822&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_V21_EUROPE'>/** &lt;p&gt;
+</span> General vCard format for the vCard 2.1 with some Europe convension. Uses Utf-8.
+ Currently, only name order is considered (&quot;Prefix Middle Given Family Suffix&quot;)
+ &lt;/p&gt;
+*/
+VCARD_TYPE_V21_EUROPE : &quot;-1073741820&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_V30_EUROPE'>/** &lt;p&gt;
+</span> General vCard format with the version 3.0 with some Europe convension. Uses UTF-8.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Not ready yet. Use with caution when you use this.
+ &lt;/p&gt;
+*/
+VCARD_TYPE_V30_EUROPE : &quot;-1073741819&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_V21_JAPANESE'>/** &lt;p&gt;
+</span> The vCard 2.1 format for miscellaneous Japanese devices, using UTF-8 as default charset.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Not ready yet. Use with caution when you use this.
+ &lt;/p&gt;
+*/
+VCARD_TYPE_V21_JAPANESE : &quot;-1073741816&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_V30_JAPANESE'>/** &lt;p&gt;
+</span> The vCard 3.0 format for miscellaneous Japanese devices, using UTF-8 as default charset.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Not ready yet. Use with caution when you use this.
+ &lt;/p&gt;
+*/
+VCARD_TYPE_V30_JAPANESE : &quot;-1073741815&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_V21_JAPANESE_MOBILE'>/** &lt;p&gt;
+</span> The vCard 2.1 based format which (partially) considers the convention in Japanese
+ mobile phones, where phonetic names are translated to half-width katakana if
+ possible, etc. It would be better to use Shift_JIS as a charset for maximum
+ compatibility.
+ &lt;/p&gt;
+ @hide Should not be available world wide.
+*/
+VCARD_TYPE_V21_JAPANESE_MOBILE : &quot;402653192&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_DOCOMO'>/** &lt;p&gt;
+</span> The vCard format used in DoCoMo, which is one of Japanese mobile phone careers.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Base version is vCard 2.1, but the data has several DoCoMo-specific convensions.
+ No Android-specific property nor defact property is included. The &quot;Primary&quot; properties
+ are NOT encoded to Quoted-Printable.
+ &lt;/p&gt;
+ @hide Should not be available world wide.
+*/
+VCARD_TYPE_DOCOMO : &quot;939524104&quot;,
+<span id='com-android-vcard-VCardConfig-property-VCARD_TYPE_DEFAULT'>/***/
+</span>VCARD_TYPE_DEFAULT : &quot;null&quot;,
+<span id='com-android-vcard-VCardConfig-method-getVCardTypeFromString'>/**
+</span>*/
+getVCardTypeFromString : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-isVersion21'>/**
+</span>*/
+isVersion21 : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-isVersion30'>/**
+</span>*/
+isVersion30 : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-isVersion40'>/**
+</span>*/
+isVersion40 : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-shouldUseQuotedPrintable'>/**
+</span>*/
+shouldUseQuotedPrintable : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-getNameOrderType'>/**
+</span>*/
+getNameOrderType : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-usesAndroidSpecificProperty'>/**
+</span>*/
+usesAndroidSpecificProperty : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-usesDefactProperty'>/**
+</span>*/
+usesDefactProperty : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-showPerformanceLog'>/**
+</span>*/
+showPerformanceLog : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-shouldRefrainQPToNameProperties'>/**
+</span>*/
+shouldRefrainQPToNameProperties : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-appendTypeParamName'>/**
+</span>*/
+appendTypeParamName : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-isJapaneseDevice'>/**
+</span>@return {Boolean} true if the device is Japanese and some Japanese convension is
+ applied to creating &quot;formatted&quot; something like FORMATTED_ADDRESS.
+*/
+isJapaneseDevice : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-needsToConvertPhoneticString'>/**
+</span>*/
+needsToConvertPhoneticString : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-onlyOneNoteFieldIsAvailable'>/**
+</span>*/
+onlyOneNoteFieldIsAvailable : function(  ) {},
+
+<span id='com-android-vcard-VCardConfig-method-isDoCoMo'>/**
+</span>*/
+isDoCoMo : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-temporal-TemporalUnit'>/**@class java.time.temporal.TemporalUnit
+</span> A unit of date-time, such as Days or Hours.
+ &lt;p&gt;
+ Measurement of time is built on units, such as years, months, days, hours, minutes and seconds.
+ Implementations of this interface represent those units.
+ &lt;p&gt;
+ An instance of this interface represents the unit itself, rather than an amount of the unit.
+ See {@link Period} for a class that represents an amount in terms of the common units.
+ &lt;p&gt;
+ The most commonly used units are defined in {@link java.time.temporal.ChronoUnit}.
+ Further units are supplied in {@link java.time.temporal.IsoFields}.
+ Units can also be written by application code by implementing this interface.
+ &lt;p&gt;
+ The unit works using double dispatch. Client code calls methods on a date-time like
+ {@code LocalDateTime} which check if the unit is a {@code ChronoUnit}.
+ If it is, then the date-time must handle it.
+ Otherwise, the method call is re-dispatched to the matching method in this interface.
+
+ @implSpec
+ This interface must be implemented with care to ensure other classes operate correctly.
+ All implementations that can be instantiated must be final, immutable and thread-safe.
+ It is recommended to use an enum where possible.
+
+ @since 1.8
+*/
+var TemporalUnit = {
+
+<span id='java-time-temporal-TemporalUnit-method-getDuration'>/**Gets the duration of this unit, which may be an estimate.
+</span> &lt;p&gt;
+ All units return a duration measured in standard nanoseconds from this method.
+ The duration will be positive and non-zero.
+ For example, an hour has a duration of {@code 60 * 60 * 1,000,000,000ns}.
+ &lt;p&gt;
+ Some units may return an accurate duration while others return an estimate.
+ For example, days have an estimated duration due to the possibility of
+ daylight saving time changes.
+ To determine if the duration is an estimate, use {@link #isDurationEstimated}().
+@return {Object {java.time.Duration}} the duration of this unit, which may be an estimate, not null
+*/
+getDuration : function(  ) {},
+
+<span id='java-time-temporal-TemporalUnit-method-isDurationEstimated'>/**Checks if the duration of the unit is an estimate.
+</span> &lt;p&gt;
+ All units have a duration, however the duration is not always accurate.
+ For example, days have an estimated duration due to the possibility of
+ daylight saving time changes.
+ This method returns true if the duration is an estimate and false if it is
+ accurate. Note that accurate/estimated ignores leap seconds.
+@return {Boolean} true if the duration is estimated, false if accurate
+*/
+isDurationEstimated : function(  ) {},
+
+<span id='java-time-temporal-TemporalUnit-method-isDateBased'>/**Checks if this unit represents a component of a date.
+</span> &lt;p&gt;
+ A date is time-based if it can be used to imply meaning from a date.
+ It must have a {@linkplain #getDuration() duration} that is an integral
+ multiple of the length of a standard day.
+ Note that it is valid for both {@code isDateBased()} and {@code isTimeBased()}
+ to return false, such as when representing a unit like 36 hours.
+@return {Boolean} true if this unit is a component of a date
+*/
+isDateBased : function(  ) {},
+
+<span id='java-time-temporal-TemporalUnit-method-isTimeBased'>/**Checks if this unit represents a component of a time.
+</span> &lt;p&gt;
+ A unit is time-based if it can be used to imply meaning from a time.
+ It must have a {@linkplain #getDuration() duration} that divides into
+ the length of a standard day without remainder.
+ Note that it is valid for both {@code isDateBased()} and {@code isTimeBased()}
+ to return false, such as when representing a unit like 36 hours.
+@return {Boolean} true if this unit is a component of a time
+*/
+isTimeBased : function(  ) {},
+
+<span id='java-time-temporal-TemporalUnit-method-isSupportedBy'>/**Checks if this unit is supported by the specified temporal object.
+</span> &lt;p&gt;
+ This checks that the implementing date-time can add/subtract this unit.
+ This can be used to avoid throwing an exception.
+ &lt;p&gt;
+ This default implementation derives the value using
+ {@link Temporal#plus(long, java.time.temporal.TemporalUnit)}.
+@param {Object {Temporal}} temporal  the temporal object to check, not null
+@return {Boolean} true if the unit is supported
+*/
+isSupportedBy : function(  ) {},
+
+<span id='java-time-temporal-TemporalUnit-method-addTo'>/**Returns a copy of the specified temporal object with the specified period added.
+</span> &lt;p&gt;
+ The period added is a multiple of this unit. For example, this method
+ could be used to add &quot;3 days&quot; to a date by calling this method on the
+ instance representing &quot;days&quot;, passing the date and the period &quot;3&quot;.
+ The period to be added may be negative, which is equivalent to subtraction.
+ &lt;p&gt;
+ There are two equivalent ways of using this method.
+ The first is to invoke this method directly.
+ The second is to use {@link Temporal#plus(long, java.time.temporal.TemporalUnit)}:
+ &lt;pre&gt;
+   // these two lines are equivalent, but the second approach is recommended
+   temporal = thisUnit.addTo(temporal);
+   temporal = temporal.plus(thisUnit);
+ &lt;/pre&gt;
+ It is recommended to use the second approach, {@code plus(TemporalUnit)},
+ as it is a lot clearer to read in code.
+ &lt;p&gt;
+ Implementations should perform any queries or calculations using the units
+ available in {@link java.time.temporal.ChronoUnit} or the fields available in {@link java.time.temporal.ChronoField}.
+ If the unit is not supported an {@code UnsupportedTemporalTypeException} must be thrown.
+ &lt;p&gt;
+ Implementations must not alter the specified temporal object.
+ Instead, an adjusted copy of the original must be returned.
+ This provides equivalent, safe behavior for immutable and mutable implementations.
+@param {Object {Temporal}} temporal  the temporal object to adjust, not null
+@param {Number} amount  the amount of this unit to add, positive or negative
+@param amount  the amount of this unit to add, positive or negative
+@return {Object {java.time.temporal.Temporal}} the adjusted temporal object, not null
+@throws DateTimeException if the amount cannot be added
+@throws UnsupportedTemporalTypeException if the unit is not supported by the temporal
+*/
+addTo : function(  ) {},
+
+<span id='java-time-temporal-TemporalUnit-method-between'>/**Calculates the amount of time between two temporal objects.
+</span> &lt;p&gt;
+ This calculates the amount in terms of this unit. The start and end
+ points are supplied as temporal objects and must be of compatible types.
+ The implementation will convert the second type to be an instance of the
+ first type before the calculating the amount.
+ The result will be negative if the end is before the start.
+ For example, the amount in hours between two temporal objects can be
+ calculated using {@code HOURS.between(startTime, endTime)}.
+ &lt;p&gt;
+ The calculation returns a whole number, representing the number of
+ complete units between the two temporals.
+ For example, the amount in hours between the times 11:30 and 13:29
+ will only be one hour as it is one minute short of two hours.
+ &lt;p&gt;
+ There are two equivalent ways of using this method.
+ The first is to invoke this method directly.
+ The second is to use {@link Temporal#until(Temporal, java.time.temporal.TemporalUnit)}:
+ &lt;pre&gt;
+   // these two lines are equivalent
+   between = thisUnit.between(start, end);
+   between = start.until(end, thisUnit);
+ &lt;/pre&gt;
+ The choice should be made based on which makes the code more readable.
+ &lt;p&gt;
+ For example, this method allows the number of days between two dates to
+ be calculated:
+ &lt;pre&gt;
+  long daysBetween = DAYS.between(start, end);
+  // or alternatively
+  long daysBetween = start.until(end, DAYS);
+ &lt;/pre&gt;
+ &lt;p&gt;
+ Implementations should perform any queries or calculations using the units
+ available in {@link java.time.temporal.ChronoUnit} or the fields available in {@link java.time.temporal.ChronoField}.
+ If the unit is not supported an {@code UnsupportedTemporalTypeException} must be thrown.
+ Implementations must not alter the specified temporal objects.
+@param {Object {Temporal}} temporal1Inclusive  the base temporal object, not null
+@param {Object {Temporal}} temporal2Exclusive  the other temporal object, exclusive, not null
+@param temporal2Exclusive  the other temporal object, exclusive, not null
+@return {Number} the amount of time between temporal1Inclusive and temporal2Exclusive
+  in terms of this unit; positive if temporal2Exclusive is later than
+  temporal1Inclusive, negative if earlier
+@throws DateTimeException if the amount cannot be calculated, or the end
+  temporal cannot be converted to the same type as the start temporal
+@throws UnsupportedTemporalTypeException if the unit is not supported by the temporal
+@throws ArithmeticException if numeric overflow occurs
+*/
+between : function(  ) {},
+
+<span id='java-time-temporal-TemporalUnit-method-toString'>/**Gets a descriptive name for the unit.
+</span> &lt;p&gt;
+ This should be in the plural and upper-first camel case, such as 'Days' or 'Minutes'.
+@return {String} the name of this unit, not null
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

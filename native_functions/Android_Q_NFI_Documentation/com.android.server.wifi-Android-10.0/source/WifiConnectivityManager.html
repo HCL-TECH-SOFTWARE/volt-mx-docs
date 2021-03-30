@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiConnectivityManager'>/**@class com.android.server.wifi.WifiConnectivityManager
+</span>@extends java.lang.Object
+
+ This class manages all the connectivity related scanning activities.
+
+ When the screen is turned on or off, WiFi is connected or disconnected,
+ or on-demand, a scan is initiatiated and the scan results are passed
+ to WifiNetworkSelector for it to make a recommendation on which network
+ to connect to.
+*/
+var WifiConnectivityManager = {
+
+<span id='com-android-server-wifi-WifiConnectivityManager-property-WATCHDOG_TIMER_TAG'>/***/
+</span>WATCHDOG_TIMER_TAG : &quot;WifiConnectivityManager Schedule Watchdog Timer&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-PERIODIC_SCAN_TIMER_TAG'>/***/
+</span>PERIODIC_SCAN_TIMER_TAG : &quot;WifiConnectivityManager Schedule Periodic Scan Timer&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-RESTART_SINGLE_SCAN_TIMER_TAG'>/***/
+</span>RESTART_SINGLE_SCAN_TIMER_TAG : &quot;WifiConnectivityManager Restart Single Scan&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-RESTART_CONNECTIVITY_SCAN_TIMER_TAG'>/***/
+</span>RESTART_CONNECTIVITY_SCAN_TIMER_TAG : &quot;WifiConnectivityManager Restart Scan&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-PERIODIC_SCAN_INTERVAL_MS'>/***/
+</span>PERIODIC_SCAN_INTERVAL_MS : &quot;20000&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-MAX_PERIODIC_SCAN_INTERVAL_MS'>/***/
+</span>MAX_PERIODIC_SCAN_INTERVAL_MS : &quot;160000&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-MAX_SCAN_RESTART_ALLOWED'>/***/
+</span>MAX_SCAN_RESTART_ALLOWED : &quot;5&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-MAX_CONNECTION_ATTEMPTS_TIME_INTERVAL_MS'>/***/
+</span>MAX_CONNECTION_ATTEMPTS_TIME_INTERVAL_MS : &quot;240000&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-MAX_CONNECTION_ATTEMPTS_RATE'>/***/
+</span>MAX_CONNECTION_ATTEMPTS_RATE : &quot;6&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-WIFI_STATE_UNKNOWN'>/***/
+</span>WIFI_STATE_UNKNOWN : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-WIFI_STATE_CONNECTED'>/***/
+</span>WIFI_STATE_CONNECTED : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-WIFI_STATE_DISCONNECTED'>/***/
+</span>WIFI_STATE_DISCONNECTED : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-WIFI_STATE_TRANSITIONING'>/***/
+</span>WIFI_STATE_TRANSITIONING : &quot;3&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-BSSID_BLACKLIST_THRESHOLD'>/***/
+</span>BSSID_BLACKLIST_THRESHOLD : &quot;3&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-BSSID_BLACKLIST_EXPIRE_TIME_MS'>/***/
+</span>BSSID_BLACKLIST_EXPIRE_TIME_MS : &quot;300000&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-property-REASON_CODE_AP_UNABLE_TO_HANDLE_NEW_STA'>/***/
+</span>REASON_CODE_AP_UNABLE_TO_HANDLE_NEW_STA : &quot;17&quot;,
+<span id='com-android-server-wifi-WifiConnectivityManager-method-setDeviceMobilityState'>/**Alters the PNO scan interval based on the current device mobility state.
+</span> If the device is stationary, it will likely not find many new Wifi networks. Thus, increase
+ the interval between scans. Decrease the interval between scans if the device begins to move
+ again.
+@param {Number} newState the new device mobility state
+*/
+setDeviceMobilityState : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-handleScreenStateChanged'>/**Handler for screen state (on/off) changes
+</span>*/
+handleScreenStateChanged : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-handleConnectionStateChanged'>/**Handler for WiFi state (connected/disconnected) changes
+</span>*/
+handleConnectionStateChanged : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-handleConnectionAttemptEnded'>/**Handler when a WiFi connection attempt ended.
+</span>@param {Number} failureCode {@link WifiMetrics.ConnectionEvent} failure code.
+*/
+handleConnectionAttemptEnded : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-setTrustedConnectionAllowed'>/**Triggered when {@link com.android.server.wifi.WifiNetworkFactory} has a pending general network request.
+</span>*/
+setTrustedConnectionAllowed : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-setUntrustedConnectionAllowed'>/**Triggered when {@link com.android.server.wifi.UntrustedWifiNetworkFactory} has a pending ephemeral network request.
+</span>*/
+setUntrustedConnectionAllowed : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-setSpecificNetworkRequestInProgress'>/**Triggered when {@link com.android.server.wifi.WifiNetworkFactory} is processing a specific network request.
+</span>*/
+setSpecificNetworkRequestInProgress : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-setUserConnectChoice'>/**Handler when user specifies a particular network to connect to
+</span>*/
+setUserConnectChoice : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-prepareForForcedConnection'>/**Handler to prepare for connection to a user or app specified network
+</span>*/
+prepareForForcedConnection : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-forceConnectivityScan'>/**Handler for on-demand connectivity scan
+</span>*/
+forceConnectivityScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-trackBssid'>/**Track whether a BSSID should be enabled or disabled for WifiNetworkSelector
+</span>@param {String} bssid the bssid to be enabled/disabled
+@param {Boolean} enable -- true enable the bssid
+               -- false disable the bssid
+@param {Number} reasonCode enable/disable reason code
+@return {Boolean} true if blacklist is updated; false otherwise
+*/
+trackBssid : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-isBssidDisabled'>/**Check whether a bssid is disabled
+</span>*/
+isBssidDisabled : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-setWifiEnabled'>/**Inform WiFi is enabled for connection or not
+</span>*/
+setWifiEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-enable'>/**Turn on/off the WifiConnectivityManager at runtime
+</span>*/
+enable : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConnectivityManager-method-dump'>/**Dump the local logs.
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

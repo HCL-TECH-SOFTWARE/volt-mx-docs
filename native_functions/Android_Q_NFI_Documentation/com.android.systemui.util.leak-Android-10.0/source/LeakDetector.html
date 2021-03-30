@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-util-leak-LeakDetector'>/**@class com.android.systemui.util.leak.LeakDetector
+</span> implements com.android.systemui.Dumpable
+
+@extends java.lang.Object
+
+ Detects leaks.
+*/
+var LeakDetector = {
+
+<span id='com-android-systemui-util-leak-LeakDetector-property-ENABLED'>/***/
+</span>ENABLED : &quot;null&quot;,
+<span id='com-android-systemui-util-leak-LeakDetector-method-trackInstance'>/**Tracks an instance that has a high leak risk (i.e. has complex ownership and references
+</span> a large amount of memory).
+
+ The LeakDetector will monitor and keep weak references to such instances, dump statistics
+ about them in a bugreport, and in the future dump the heap if their count starts growing
+ unreasonably.
+
+ This should be called when the instance is first constructed.
+*/
+trackInstance : function(  ) {},
+
+<span id='com-android-systemui-util-leak-LeakDetector-method-trackCollection'>/**Tracks a collection that is at risk of leaking large objects, e.g. a collection of
+</span> dynamically registered listeners.
+
+ The LeakDetector will monitor and keep weak references to such collections, dump
+ statistics about them in a bugreport, and in the future dump the heap if their size starts
+ growing unreasonably.
+
+ This should be called whenever the collection grows.
+@param {Object {java.util.Collection}} tag A tag for labeling the collection in a bugreport
+*/
+trackCollection : function(  ) {},
+
+<span id='com-android-systemui-util-leak-LeakDetector-method-trackGarbage'>/**Tracks an instance that should become garbage soon.
+</span>
+ The LeakDetector will monitor and keep weak references to such garbage, dump
+ statistics about them in a bugreport, and in the future dump the heap if it is not
+ collected reasonably soon.
+
+ This should be called when the last strong reference to the instance is dropped.
+*/
+trackGarbage : function(  ) {},
+
+<span id='com-android-systemui-util-leak-LeakDetector-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-systemui-util-leak-LeakDetector-method-create'>/**
+</span>*/
+create : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

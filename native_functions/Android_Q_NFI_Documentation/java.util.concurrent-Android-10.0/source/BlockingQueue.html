@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-BlockingQueue'>/**@class java.util.concurrent.BlockingQueue
+</span> implements java.util.Queue
+
+ A {@link java.util.Queue} that additionally supports operations
+ that wait for the queue to become non-empty when retrieving an
+ element, and wait for space to become available in the queue when
+ storing an element.
+
+ &lt;p&gt;{@code BlockingQueue} methods come in four forms, with different ways
+ of handling operations that cannot be satisfied immediately, but may be
+ satisfied at some point in the future:
+ one throws an exception, the second returns a special value (either
+ {@code null} or {@code false}, depending on the operation), the third
+ blocks the current thread indefinitely until the operation can succeed,
+ and the fourth blocks for only a given maximum time limit before giving
+ up.  These methods are summarized in the following table:
+
+ &lt;table BORDER CELLPADDING=3 CELLSPACING=1&gt;
+ &lt;caption&gt;Summary of BlockingQueue methods&lt;/caption&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td ALIGN=CENTER&gt;&lt;em&gt;Throws exception&lt;/em&gt;&lt;/td&gt;
+    &lt;td ALIGN=CENTER&gt;&lt;em&gt;Special value&lt;/em&gt;&lt;/td&gt;
+    &lt;td ALIGN=CENTER&gt;&lt;em&gt;Blocks&lt;/em&gt;&lt;/td&gt;
+    &lt;td ALIGN=CENTER&gt;&lt;em&gt;Times out&lt;/em&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;b&gt;Insert&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt;{@link #add add(e)}&lt;/td&gt;
+    &lt;td&gt;{@link #offer offer(e)}&lt;/td&gt;
+    &lt;td&gt;{@link #put put(e)}&lt;/td&gt;
+    &lt;td&gt;{@link #offer(Object, long, java.util.concurrent.TimeUnit) offer(e, time, unit)}&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;b&gt;Remove&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt;{@link #remove remove()}&lt;/td&gt;
+    &lt;td&gt;{@link #poll poll()}&lt;/td&gt;
+    &lt;td&gt;{@link #take take()}&lt;/td&gt;
+    &lt;td&gt;{@link #poll(long, java.util.concurrent.TimeUnit) poll(time, unit)}&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;b&gt;Examine&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt;{@link #element element()}&lt;/td&gt;
+    &lt;td&gt;{@link #peek peek()}&lt;/td&gt;
+    &lt;td&gt;&lt;em&gt;not applicable&lt;/em&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;em&gt;not applicable&lt;/em&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;A {@code BlockingQueue} does not accept {@code null} elements.
+ Implementations throw {@code NullPointerException} on attempts
+ to {@code add}, {@code put} or {@code offer} a {@code null}.  A
+ {@code null} is used as a sentinel value to indicate failure of
+ {@code poll} operations.
+
+ &lt;p&gt;A {@code BlockingQueue} may be capacity bounded. At any given
+ time it may have a {@code remainingCapacity} beyond which no
+ additional elements can be {@code put} without blocking.
+ A {@code BlockingQueue} without any intrinsic capacity constraints always
+ reports a remaining capacity of {@code Integer.MAX_VALUE}.
+
+ &lt;p&gt;{@code BlockingQueue} implementations are designed to be used
+ primarily for producer-consumer queues, but additionally support
+ the {@link java.util.Collection} interface.  So, for example, it is
+ possible to remove an arbitrary element from a queue using
+ {@code remove(x)}. However, such operations are in general
+ &lt;em&gt;not&lt;/em&gt; performed very efficiently, and are intended for only
+ occasional use, such as when a queued message is cancelled.
+
+ &lt;p&gt;{@code BlockingQueue} implementations are thread-safe.  All
+ queuing methods achieve their effects atomically using internal
+ locks or other forms of concurrency control. However, the
+ &lt;em&gt;bulk&lt;/em&gt; Collection operations {@code addAll},
+ {@code containsAll}, {@code retainAll} and {@code removeAll} are
+ &lt;em&gt;not&lt;/em&gt; necessarily performed atomically unless specified
+ otherwise in an implementation. So it is possible, for example, for
+ {@code addAll(c)} to fail (throwing an exception) after adding
+ only some of the elements in {@code c}.
+
+ &lt;p&gt;A {@code BlockingQueue} does &lt;em&gt;not&lt;/em&gt; intrinsically support
+ any kind of &amp;quot;close&amp;quot; or &amp;quot;shutdown&amp;quot; operation to
+ indicate that no more items will be added.  The needs and usage of
+ such features tend to be implementation-dependent. For example, a
+ common tactic is for producers to insert special
+ &lt;em&gt;end-of-stream&lt;/em&gt; or &lt;em&gt;poison&lt;/em&gt; objects, that are
+ interpreted accordingly when taken by consumers.
+
+ &lt;p&gt;
+ Usage example, based on a typical producer-consumer scenario.
+ Note that a {@code BlockingQueue} can safely be used with multiple
+ producers and multiple consumers.
+ &lt;pre&gt; {@code
+ class Producer implements Runnable {
+   private final BlockingQueue queue;
+   Producer(BlockingQueue q) { queue = q; }
+   public void run() {
+     try {
+       while (true) { queue.put(produce()); }
+     } catch (InterruptedException ex) { ... handle ...}
+   }
+   Object produce() { ... }
+ }
+
+ class Consumer implements Runnable {
+   private final BlockingQueue queue;
+   Consumer(BlockingQueue q) { queue = q; }
+   public void run() {
+     try {
+       while (true) { consume(queue.take()); }
+     } catch (InterruptedException ex) { ... handle ...}
+   }
+   void consume(Object x) { ... }
+ }
+
+ class Setup {
+   void main() {
+     BlockingQueue q = new SomeQueueImplementation();
+     Producer p = new Producer(q);
+     Consumer c1 = new Consumer(q);
+     Consumer c2 = new Consumer(q);
+     new Thread(p).start();
+     new Thread(c1).start();
+     new Thread(c2).start();
+   }
+ }}&lt;/pre&gt;
+
+ &lt;p&gt;Memory consistency effects: As with other concurrent
+ collections, actions in a thread prior to placing an object into a
+ {@code BlockingQueue}
+ &lt;a href=&quot;package-summary.html#MemoryVisibility&quot;&gt;&lt;i&gt;happen-before&lt;/i&gt;&lt;/a&gt;
+ actions subsequent to the access or removal of that element from
+ the {@code BlockingQueue} in another thread.
+
+ @since 1.5
+ @author Doug Lea
+ @param &lt;E&gt; the type of elements held in this queue
+*/
+var BlockingQueue = {
+
+<span id='java-util-concurrent-BlockingQueue-method-add'>/**Inserts the specified element into this queue if it is possible to do
+</span> so immediately without violating capacity restrictions, returning
+ {@code true} upon success and throwing an
+ {@code IllegalStateException} if no space is currently available.
+ When using a capacity-restricted queue, it is generally preferable to
+ use {@link #offer(Object) offer}.
+@param {Object {Object}} e the element to add
+@return {Boolean} {@code true} (as specified by {@link Collection#add})
+@throws IllegalStateException if the element cannot be added at this
+         time due to capacity restrictions
+@throws ClassCastException if the class of the specified element
+         prevents it from being added to this queue
+@throws NullPointerException if the specified element is null
+@throws IllegalArgumentException if some property of the specified
+         element prevents it from being added to this queue
+*/
+add : function(  ) {},
+
+<span id='java-util-concurrent-BlockingQueue-method-offer'>/**Inserts the specified element into this queue if it is possible to do
+</span> so immediately without violating capacity restrictions, returning
+ {@code true} upon success and {@code false} if no space is currently
+ available.  When using a capacity-restricted queue, this method is
+ generally preferable to {@link #add}, which can fail to insert an
+ element only by throwing an exception.
+@param {Object {Object}} e the element to add
+@return {Boolean} {@code true} if the element was added to this queue, else
+         {@code false}
+@throws ClassCastException if the class of the specified element
+         prevents it from being added to this queue
+@throws NullPointerException if the specified element is null
+@throws IllegalArgumentException if some property of the specified
+         element prevents it from being added to this queue
+*/
+offer : function(  ) {},
+
+<span id='java-util-concurrent-BlockingQueue-method-put'>/**Inserts the specified element into this queue, waiting if necessary
+</span> for space to become available.
+@param {Object {Object}} e the element to add
+@throws InterruptedException if interrupted while waiting
+@throws ClassCastException if the class of the specified element
+         prevents it from being added to this queue
+@throws NullPointerException if the specified element is null
+@throws IllegalArgumentException if some property of the specified
+         element prevents it from being added to this queue
+*/
+put : function(  ) {},
+
+<span id='java-util-concurrent-BlockingQueue-method-offer'>/**Inserts the specified element into this queue, waiting up to the
+</span> specified wait time if necessary for space to become available.
+@param {Object {Object}} e the element to add
+@param {Number} timeout how long to wait before giving up, in units of
+        {@code unit}
+@param {Object {TimeUnit}} unit a {@code TimeUnit} determining how to interpret the
+        {@code timeout} parameter
+@return {Boolean} {@code true} if successful, or {@code false} if
+         the specified waiting time elapses before space is available
+@throws InterruptedException if interrupted while waiting
+@throws ClassCastException if the class of the specified element
+         prevents it from being added to this queue
+@throws NullPointerException if the specified element is null
+@throws IllegalArgumentException if some property of the specified
+         element prevents it from being added to this queue
+*/
+offer : function(  ) {},
+
+<span id='java-util-concurrent-BlockingQueue-method-take'>/**Retrieves and removes the head of this queue, waiting if necessary
+</span> until an element becomes available.
+@return {Object {java.lang.Object}} the head of this queue
+@throws InterruptedException if interrupted while waiting
+*/
+take : function(  ) {},
+
+<span id='java-util-concurrent-BlockingQueue-method-poll'>/**Retrieves and removes the head of this queue, waiting up to the
+</span> specified wait time if necessary for an element to become available.
+@param {Number} timeout how long to wait before giving up, in units of
+        {@code unit}
+@param {Object {TimeUnit}} unit a {@code TimeUnit} determining how to interpret the
+        {@code timeout} parameter
+@return {Object {java.lang.Object}} the head of this queue, or {@code null} if the
+         specified waiting time elapses before an element is available
+@throws InterruptedException if interrupted while waiting
+*/
+poll : function(  ) {},
+
+<span id='java-util-concurrent-BlockingQueue-method-remainingCapacity'>/**Returns the number of additional elements that this queue can ideally
+</span> (in the absence of memory or resource constraints) accept without
+ blocking, or {@code Integer.MAX_VALUE} if there is no intrinsic
+ limit.
+
+ &lt;p&gt;Note that you &lt;em&gt;cannot&lt;/em&gt; always tell if an attempt to insert
+ an element will succeed by inspecting {@code remainingCapacity}
+ because it may be the case that another thread is about to
+ insert or remove an element.
+@return {Number} the remaining capacity
+*/
+remainingCapacity : function(  ) {},
+
+<span id='java-util-concurrent-BlockingQueue-method-remove'>/**Removes a single instance of the specified element from this queue,
+</span> if it is present.  More formally, removes an element {@code e} such
+ that {@code o.equals(e)}, if this queue contains one or more such
+ elements.
+ Returns {@code true} if this queue contained the specified element
+ (or equivalently, if this queue changed as a result of the call).
+@param {Object {Object}} o element to be removed from this queue, if present
+@return {Boolean} {@code true} if this queue changed as a result of the call
+@throws ClassCastException if the class of the specified element
+         is incompatible with this queue
+ (&lt;a href=&quot;../Collection.html#optional-restrictions&quot;&gt;optional&lt;/a&gt;)
+@throws NullPointerException if the specified element is null
+ (&lt;a href=&quot;../Collection.html#optional-restrictions&quot;&gt;optional&lt;/a&gt;)
+*/
+remove : function(  ) {},
+
+<span id='java-util-concurrent-BlockingQueue-method-contains'>/**Returns {@code true} if this queue contains the specified element.
+</span> More formally, returns {@code true} if and only if this queue contains
+ at least one element {@code e} such that {@code o.equals(e)}.
+@param {Object {Object}} o object to be checked for containment in this queue
+@return {Boolean} {@code true} if this queue contains the specified element
+@throws ClassCastException if the class of the specified element
+         is incompatible with this queue
+ (&lt;a href=&quot;../Collection.html#optional-restrictions&quot;&gt;optional&lt;/a&gt;)
+@throws NullPointerException if the specified element is null
+ (&lt;a href=&quot;../Collection.html#optional-restrictions&quot;&gt;optional&lt;/a&gt;)
+*/
+contains : function(  ) {},
+
+<span id='java-util-concurrent-BlockingQueue-method-drainTo'>/**Removes all available elements from this queue and adds them
+</span> to the given collection.  This operation may be more
+ efficient than repeatedly polling this queue.  A failure
+ encountered while attempting to add elements to
+ collection {@code c} may result in elements being in neither,
+ either or both collections when the associated exception is
+ thrown.  Attempts to drain a queue to itself result in
+ {@code IllegalArgumentException}. Further, the behavior of
+ this operation is undefined if the specified collection is
+ modified while the operation is in progress.
+@param {Object {java.util.Collection}} c the collection to transfer elements into
+@return {Number} the number of elements transferred
+@throws UnsupportedOperationException if addition of elements
+         is not supported by the specified collection
+@throws ClassCastException if the class of an element of this queue
+         prevents it from being added to the specified collection
+@throws NullPointerException if the specified collection is null
+@throws IllegalArgumentException if the specified collection is this
+         queue, or some property of an element of this queue prevents
+         it from being added to the specified collection
+*/
+drainTo : function(  ) {},
+
+<span id='java-util-concurrent-BlockingQueue-method-drainTo'>/**Removes at most the given number of available elements from
+</span> this queue and adds them to the given collection.  A failure
+ encountered while attempting to add elements to
+ collection {@code c} may result in elements being in neither,
+ either or both collections when the associated exception is
+ thrown.  Attempts to drain a queue to itself result in
+ {@code IllegalArgumentException}. Further, the behavior of
+ this operation is undefined if the specified collection is
+ modified while the operation is in progress.
+@param {Object {java.util.Collection}} c the collection to transfer elements into
+@param {Number} maxElements the maximum number of elements to transfer
+@return {Number} the number of elements transferred
+@throws UnsupportedOperationException if addition of elements
+         is not supported by the specified collection
+@throws ClassCastException if the class of an element of this queue
+         prevents it from being added to the specified collection
+@throws NullPointerException if the specified collection is null
+@throws IllegalArgumentException if the specified collection is this
+         queue, or some property of an element of this queue prevents
+         it from being added to the specified collection
+*/
+drainTo : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-io-PushbackInputStream'>/**@class java.io.PushbackInputStream
+</span>@extends java.io.FilterInputStream
+
+ A &lt;code&gt;PushbackInputStream&lt;/code&gt; adds
+ functionality to another input stream, namely
+ the  ability to &quot;push back&quot; or &quot;unread&quot;
+ one byte. This is useful in situations where
+ it is  convenient for a fragment of code
+ to read an indefinite number of data bytes
+ that  are delimited by a particular byte
+ value; after reading the terminating byte,
+ the  code fragment can &quot;unread&quot; it, so that
+ the next read operation on the input stream
+ will reread the byte that was pushed back.
+ For example, bytes representing the  characters
+ constituting an identifier might be terminated
+ by a byte representing an  operator character;
+ a method whose job is to read just an identifier
+ can read until it  sees the operator and
+ then push the operator back to be re-read.
+
+ @author  David Connelly
+ @author  Jonathan Payne
+ @since   JDK1.0
+*/
+var PushbackInputStream = {
+
+<span id='java-io-PushbackInputStream-method-read'>/**Reads the next byte of data from this input stream. The value
+</span> byte is returned as an &lt;code&gt;int&lt;/code&gt; in the range
+ &lt;code&gt;0&lt;/code&gt; to &lt;code&gt;255&lt;/code&gt;. If no byte is available
+ because the end of the stream has been reached, the value
+ &lt;code&gt;-1&lt;/code&gt; is returned. This method blocks until input data
+ is available, the end of the stream is detected, or an exception
+ is thrown.
+
+ &lt;p&gt; This method returns the most recently pushed-back byte, if there is
+ one, and otherwise calls the &lt;code&gt;read&lt;/code&gt; method of its underlying
+ input stream and returns whatever value that method returns.
+@return {Number} the next byte of data, or &lt;code&gt;-1&lt;/code&gt; if the end of the
+             stream has been reached.
+@exception IOException  if this input stream has been closed by
+             invoking its {@link #close()} method,
+             or an I/O error occurs.
+@see java.io.InputStream#read()
+*/
+read : function(  ) {},
+
+<span id='java-io-PushbackInputStream-method-read'>/**Reads up to &lt;code&gt;len&lt;/code&gt; bytes of data from this input stream into
+</span> an array of bytes.  This method first reads any pushed-back bytes; after
+ that, if fewer than &lt;code&gt;len&lt;/code&gt; bytes have been read then it
+ reads from the underlying input stream. If &lt;code&gt;len&lt;/code&gt; is not zero, the method
+ blocks until at least 1 byte of input is available; otherwise, no
+ bytes are read and &lt;code&gt;0&lt;/code&gt; is returned.
+@param {Object {byte[]}} b     the buffer into which the data is read.
+@param {Number} off   the start offset in the destination array &lt;code&gt;b&lt;/code&gt;
+@param {Number} len   the maximum number of bytes read.
+@return {Number} the total number of bytes read into the buffer, or
+             &lt;code&gt;-1&lt;/code&gt; if there is no more data because the end of
+             the stream has been reached.
+@exception NullPointerException If &lt;code&gt;b&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+@exception IndexOutOfBoundsException If &lt;code&gt;off&lt;/code&gt; is negative,
+ &lt;code&gt;len&lt;/code&gt; is negative, or &lt;code&gt;len&lt;/code&gt; is greater than
+ &lt;code&gt;b.length - off&lt;/code&gt;
+@exception IOException  if this input stream has been closed by
+             invoking its {@link #close()} method,
+             or an I/O error occurs.
+@see java.io.InputStream#read(byte[], int, int)
+*/
+read : function(  ) {},
+
+<span id='java-io-PushbackInputStream-method-unread'>/**Pushes back a byte by copying it to the front of the pushback buffer.
+</span> After this method returns, the next byte to be read will have the value
+ &lt;code&gt;(byte)b&lt;/code&gt;.
+@param {Number} b   the &lt;code&gt;int&lt;/code&gt; value whose low-order
+                  byte is to be pushed back.
+@exception IOException If there is not enough room in the pushback
+            buffer for the byte, or this input stream has been closed by
+            invoking its {@link #close()} method.
+*/
+unread : function(  ) {},
+
+<span id='java-io-PushbackInputStream-method-unread'>/**Pushes back a portion of an array of bytes by copying it to the front
+</span> of the pushback buffer.  After this method returns, the next byte to be
+ read will have the value &lt;code&gt;b[off]&lt;/code&gt;, the byte after that will
+ have the value &lt;code&gt;b[off+1]&lt;/code&gt;, and so forth.
+@param {Object {byte[]}} b the byte array to push back.
+@param {Number} off the start offset of the data.
+@param {Number} len the number of bytes to push back.
+@exception IOException If there is not enough room in the pushback
+            buffer for the specified number of bytes,
+            or this input stream has been closed by
+            invoking its {@link #close()} method.
+@since JDK1.1
+*/
+unread : function(  ) {},
+
+<span id='java-io-PushbackInputStream-method-unread'>/**Pushes back an array of bytes by copying it to the front of the
+</span> pushback buffer.  After this method returns, the next byte to be read
+ will have the value &lt;code&gt;b[0]&lt;/code&gt;, the byte after that will have the
+ value &lt;code&gt;b[1]&lt;/code&gt;, and so forth.
+@param {Object {byte[]}} b the byte array to push back
+@exception IOException If there is not enough room in the pushback
+            buffer for the specified number of bytes,
+            or this input stream has been closed by
+            invoking its {@link #close()} method.
+@since JDK1.1
+*/
+unread : function(  ) {},
+
+<span id='java-io-PushbackInputStream-method-available'>/**Returns an estimate of the number of bytes that can be read (or
+</span> skipped over) from this input stream without blocking by the next
+ invocation of a method for this input stream. The next invocation might be
+ the same thread or another thread.  A single read or skip of this
+ many bytes will not block, but may read or skip fewer bytes.
+
+ &lt;p&gt; The method returns the sum of the number of bytes that have been
+ pushed back and the value returned by {@link java.io.FilterInputStream#available available}.
+@return {Number} the number of bytes that can be read (or skipped over) from
+             the input stream without blocking.
+@exception IOException  if this input stream has been closed by
+             invoking its {@link #close()} method,
+             or an I/O error occurs.
+@see java.io.FilterInputStream#in
+@see java.io.InputStream#available()
+*/
+available : function(  ) {},
+
+<span id='java-io-PushbackInputStream-method-skip'>/**Skips over and discards &lt;code&gt;n&lt;/code&gt; bytes of data from this
+</span> input stream. The &lt;code&gt;skip&lt;/code&gt; method may, for a variety of
+ reasons, end up skipping over some smaller number of bytes,
+ possibly zero.  If &lt;code&gt;n&lt;/code&gt; is negative, no bytes are skipped.
+
+ &lt;p&gt; The &lt;code&gt;skip&lt;/code&gt; method of &lt;code&gt;PushbackInputStream&lt;/code&gt;
+ first skips over the bytes in the pushback buffer, if any.  It then
+ calls the &lt;code&gt;skip&lt;/code&gt; method of the underlying input stream if
+ more bytes need to be skipped.  The actual number of bytes skipped
+ is returned.
+@param {Number} n  {@inheritDoc}
+@return {Number} {@inheritDoc}
+@exception IOException  if the stream does not support seek,
+            or the stream has been closed by
+            invoking its {@link #close()} method,
+            or an I/O error occurs.
+@see java.io.FilterInputStream#in
+@see java.io.InputStream#skip(long n)
+@since 1.2
+*/
+skip : function(  ) {},
+
+<span id='java-io-PushbackInputStream-method-markSupported'>/**Tests if this input stream supports the &lt;code&gt;mark&lt;/code&gt; and
+</span> &lt;code&gt;reset&lt;/code&gt; methods, which it does not.
+@return {Boolean} &lt;code&gt;false&lt;/code&gt;, since this class does not support the
+           &lt;code&gt;mark&lt;/code&gt; and &lt;code&gt;reset&lt;/code&gt; methods.
+@see java.io.InputStream#mark(int)
+@see java.io.InputStream#reset()
+*/
+markSupported : function(  ) {},
+
+<span id='java-io-PushbackInputStream-method-mark'>/**Marks the current position in this input stream.
+</span>
+ &lt;p&gt; The &lt;code&gt;mark&lt;/code&gt; method of &lt;code&gt;PushbackInputStream&lt;/code&gt;
+ does nothing.
+@param {Number} readlimit   the maximum limit of bytes that can be read before
+                      the mark position becomes invalid.
+@see java.io.InputStream#reset()
+*/
+mark : function(  ) {},
+
+<span id='java-io-PushbackInputStream-method-reset'>/**Repositions this stream to the position at the time the
+</span> &lt;code&gt;mark&lt;/code&gt; method was last called on this input stream.
+
+ &lt;p&gt; The method &lt;code&gt;reset&lt;/code&gt; for class
+ &lt;code&gt;PushbackInputStream&lt;/code&gt; does nothing except throw an
+ &lt;code&gt;IOException&lt;/code&gt;.
+@exception IOException  if this method is invoked.
+@see java.io.InputStream#mark(int)
+@see java.io.IOException
+*/
+reset : function(  ) {},
+
+<span id='java-io-PushbackInputStream-method-close'>/**Closes this input stream and releases any system resources
+</span> associated with the stream.
+ Once the stream has been closed, further read(), unread(),
+ available(), reset(), or skip() invocations will throw an IOException.
+ Closing a previously closed stream has no effect.
+@exception IOException  if an I/O error occurs.
+*/
+close : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

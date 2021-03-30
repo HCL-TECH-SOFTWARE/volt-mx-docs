@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-transform-Transformer'>/**@class javax.xml.transform.Transformer
+</span>@extends java.lang.Object
+
+ An instance of this abstract class can transform a
+ source tree into a result tree.
+
+ &lt;p&gt;An instance of this class can be obtained with the
+ {@link javax.xml.transform.TransformerFactory#newTransformer javax.xml.transform.TransformerFactory.newTransformer}
+ method. This instance may then be used to process XML from a
+ variety of sources and write the transformation output to a
+ variety of sinks.&lt;/p&gt;
+
+ &lt;p&gt;An object of this class may not be used in multiple threads
+ running concurrently.  Different Transformers may be used
+ concurrently by different threads.&lt;/p&gt;
+
+ &lt;p&gt;A &lt;code&gt;Transformer&lt;/code&gt; may be used multiple times.  Parameters and
+ output properties are preserved across transformations.&lt;/p&gt;
+
+ @author &lt;a href=&quot;Jeff.Suttor@Sun.com&quot;&gt;Jeff Suttor&lt;/a&gt;
+ @version $Revision: 570103 $, $Date: 2007-08-27 06:24:55 -0700 (Mon, 27 Aug 2007) $
+*/
+var Transformer = {
+
+<span id='javax-xml-transform-Transformer-method-reset'>/**&lt;p&gt;Reset this &lt;code&gt;Transformer&lt;/code&gt; to its original configuration.&lt;/p&gt;
+</span>
+ &lt;p&gt;&lt;code&gt;Transformer&lt;/code&gt; is reset to the same state as when it was created with
+ {@link javax.xml.transform.TransformerFactory#newTransformer()},
+ {@link javax.xml.transform.TransformerFactory#newTransformer(Source source)} or
+ {@link javax.xml.transform.Templates#newTransformer()}.
+ &lt;code&gt;reset()&lt;/code&gt; is designed to allow the reuse of existing &lt;code&gt;Transformer&lt;/code&gt;s
+ thus saving resources associated with the creation of new &lt;code&gt;Transformer&lt;/code&gt;s.&lt;/p&gt;
+
+ &lt;p&gt;The reset &lt;code&gt;Transformer&lt;/code&gt; is not guaranteed to have the same {@link javax.xml.transform.URIResolver}
+ or {@link javax.xml.transform.ErrorListener} &lt;code&gt;Object&lt;/code&gt;s, e.g. {@link Object#equals(Object obj)}.
+ It is guaranteed to have a functionally equal &lt;code&gt;URIResolver&lt;/code&gt;
+ and &lt;code&gt;ErrorListener&lt;/code&gt;.&lt;/p&gt;
+@since 1.5
+*/
+reset : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-transform'>/**&lt;p&gt;Transform the XML &lt;code&gt;Source&lt;/code&gt; to a &lt;code&gt;Result&lt;/code&gt;.
+</span> Specific transformation behavior is determined by the settings of the
+ &lt;code&gt;TransformerFactory&lt;/code&gt; in effect when the
+ &lt;code&gt;Transformer&lt;/code&gt; was instantiated and any modifications made to
+ the &lt;code&gt;Transformer&lt;/code&gt; instance.&lt;/p&gt;
+
+ &lt;p&gt;An empty &lt;code&gt;Source&lt;/code&gt; is represented as an empty document
+ as constructed by {@link javax.xml.parsers.DocumentBuilder#newDocument()}.
+ The result of transforming an empty &lt;code&gt;Source&lt;/code&gt; depends on
+ the transformation behavior; it is not always an empty
+ &lt;code&gt;Result&lt;/code&gt;.&lt;/p&gt;
+@param {Object {Source}} xmlSource The XML input to transform.
+@param {Object {Result}} outputTarget The &lt;code&gt;Result&lt;/code&gt; of transforming the
+   &lt;code&gt;xmlSource&lt;/code&gt;.
+@throws TransformerException If an unrecoverable error occurs
+   during the course of the transformation.
+*/
+transform : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-setParameter'>/**Add a parameter for the transformation.
+</span>
+ &lt;p&gt;Pass a qualified name as a two-part string, the namespace URI
+ enclosed in curly braces ({}), followed by the local name. If the
+ name has a null URL, the String only contain the local name. An
+ application can safely check for a non-null URI by testing to see if the
+ first character of the name is a '{' character.&lt;/p&gt;
+ &lt;p&gt;For example, if a URI and local name were obtained from an element
+ defined with &amp;lt;xyz:foo
+ xmlns:xyz=&quot;http://xyz.foo.com/yada/baz.html&quot;/&amp;gt;,
+ then the qualified name would be &quot;{http://xyz.foo.com/yada/baz.html}foo&quot;.
+ Note that no prefix is used.&lt;/p&gt;
+@param {String} name The name of the parameter, which may begin with a
+ namespace URI in curly braces ({}).
+@param {Object {Object}} value The value object.  This can be any valid Java object. It is
+ up to the processor to provide the proper object coercion or to simply
+ pass the object on for use in an extension.
+@throws NullPointerException If value is null.
+*/
+setParameter : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-getParameter'>/**Get a parameter that was explicitly set with setParameter.
+</span>
+ &lt;p&gt;This method does not return a default parameter value, which
+ cannot be determined until the node context is evaluated during
+ the transformation process.
+@param {String} name of &lt;code&gt;Object&lt;/code&gt; to get
+@return {Object {java.lang.Object}} A parameter that has been set with setParameter.
+*/
+getParameter : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-clearParameters'>/**Clear all parameters set with setParameter.
+</span>*/
+clearParameters : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-setURIResolver'>/**Set an object that will be used to resolve URIs used in
+</span> document().
+
+ &lt;p&gt;If the resolver argument is null, the URIResolver value will
+ be cleared and the transformer will no longer have a resolver.&lt;/p&gt;
+@param {Object {URIResolver}} resolver An object that implements the URIResolver interface,
+ or null.
+*/
+setURIResolver : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-getURIResolver'>/**Get an object that will be used to resolve URIs used in
+</span> document().
+@return {Object {javax.xml.transform.URIResolver}} An object that implements the URIResolver interface,
+ or null.
+*/
+getURIResolver : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-setOutputProperties'>/**Set the output properties for the transformation.  These
+</span> properties will override properties set in the Templates
+ with xsl:output.
+
+ &lt;p&gt;If argument to this function is null, any properties
+ previously set are removed, and the value will revert to the value
+ defined in the templates object.&lt;/p&gt;
+
+ &lt;p&gt;Pass a qualified property key name as a two-part string, the namespace
+ URI enclosed in curly braces ({}), followed by the local name. If the
+ name has a null URL, the String only contain the local name. An
+ application can safely check for a non-null URI by testing to see if the
+ first character of the name is a '{' character.&lt;/p&gt;
+ &lt;p&gt;For example, if a URI and local name were obtained from an element
+ defined with &amp;lt;xyz:foo
+ xmlns:xyz=&quot;http://xyz.foo.com/yada/baz.html&quot;/&amp;gt;,
+ then the qualified name would be &quot;{http://xyz.foo.com/yada/baz.html}foo&quot;.
+ Note that no prefix is used.&lt;/p&gt;
+ An &lt;code&gt;IllegalArgumentException&lt;/code&gt; is thrown  if any of the
+ argument keys are not recognized and are not namespace qualified.
+@param {Object {Properties}} oformat A set of output properties that will be
+ used to override any of the same properties in affect
+ for the transformation.
+@see javax.xml.transform.OutputKeys
+@see java.util.Properties
+*/
+setOutputProperties : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-getOutputProperties'>/**&lt;p&gt;Get a copy of the output properties for the transformation.&lt;/p&gt;
+</span>
+ &lt;p&gt;The properties returned should contain properties set by the user,
+ and properties set by the stylesheet, and these properties
+ are &quot;defaulted&quot; by default properties specified by
+ &lt;a href=&quot;http://www.w3.org/TR/xslt#output&quot;&gt;section 16 of the
+ XSL Transformations (XSLT) W3C Recommendation&lt;/a&gt;.  The properties that
+ were specifically set by the user or the stylesheet should be in the base
+ Properties list, while the XSLT default properties that were not
+ specifically set should be the default Properties list.  Thus,
+ getOutputProperties().getProperty(String key) will obtain any
+ property in that was set by {@link #setOutputProperty},
+ {@link #setOutputProperties}, in the stylesheet, &lt;em&gt;or&lt;/em&gt; the default
+ properties, while
+ getOutputProperties().get(String key) will only retrieve properties
+ that were explicitly set by {@link #setOutputProperty},
+ {@link #setOutputProperties}, or in the stylesheet.&lt;/p&gt;
+
+ &lt;p&gt;Note that mutation of the Properties object returned will not
+ effect the properties that the transformer contains.&lt;/p&gt;
+
+ &lt;p&gt;If any of the argument keys are not recognized and are not
+ namespace qualified, the property will be ignored and not returned.
+ In other words the behavior is not orthogonal with
+ {@link #setOutputProperties setOutputProperties}.&lt;/p&gt;
+@return {Object {java.util.Properties}} A copy of the set of output properties in effect for
+   the next transformation.
+@see javax.xml.transform.OutputKeys
+@see java.util.Properties
+@see &lt;a href=&quot;http://www.w3.org/TR/xslt#output&quot;&gt;
+   XSL Transformations (XSLT) Version 1.0&lt;/a&gt;
+*/
+getOutputProperties : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-setOutputProperty'>/**Set an output property that will be in effect for the
+</span> transformation.
+
+ &lt;p&gt;Pass a qualified property name as a two-part string, the namespace URI
+ enclosed in curly braces ({}), followed by the local name. If the
+ name has a null URL, the String only contain the local name. An
+ application can safely check for a non-null URI by testing to see if the
+ first character of the name is a '{' character.&lt;/p&gt;
+ &lt;p&gt;For example, if a URI and local name were obtained from an element
+ defined with &amp;lt;xyz:foo
+ xmlns:xyz=&quot;http://xyz.foo.com/yada/baz.html&quot;/&amp;gt;,
+ then the qualified name would be &quot;{http://xyz.foo.com/yada/baz.html}foo&quot;.
+ Note that no prefix is used.&lt;/p&gt;
+
+ &lt;p&gt;The Properties object that was passed to {@link #setOutputProperties}
+ won't be effected by calling this method.&lt;/p&gt;
+@param {String} name A non-null String that specifies an output
+ property name, which may be namespace qualified.
+@param {String} value The non-null string value of the output property.
+@throws IllegalArgumentException If the property is not supported, and is
+ not qualified with a namespace.
+@see javax.xml.transform.OutputKeys
+*/
+setOutputProperty : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-getOutputProperty'>/**Get an output property that is in effect for the
+</span> transformer.  The property specified may be a property
+ that was set with setOutputProperty, or it may be a
+ property specified in the stylesheet.
+@param {String} name A non-null String that specifies an output
+ property name, which may be namespace qualified.
+@return {String} The string value of the output property, or null
+ if no property was found.
+@throws IllegalArgumentException If the property is not supported.
+@see javax.xml.transform.OutputKeys
+*/
+getOutputProperty : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-setErrorListener'>/**Set the error event listener in effect for the transformation.
+</span>@param {Object {ErrorListener}} listener The new error listener.
+@throws IllegalArgumentException if listener is null.
+*/
+setErrorListener : function(  ) {},
+
+<span id='javax-xml-transform-Transformer-method-getErrorListener'>/**Get the error event handler in effect for the transformation.
+</span> Implementations must provide a default error listener.
+@return {Object {javax.xml.transform.ErrorListener}} The current error handler, which should never be null.
+*/
+getErrorListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

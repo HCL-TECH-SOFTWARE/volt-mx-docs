@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xml-sax-Parser'>/**@class org.xml.sax.Parser
+</span> Basic interface for SAX (Simple API for XML) parsers.
+
+ &lt;blockquote&gt;
+ &lt;em&gt;This module, both source code and documentation, is in the
+ Public Domain, and comes with &lt;strong&gt;NO WARRANTY&lt;/strong&gt;.&lt;/em&gt;
+ See &lt;a href='http://www.saxproject.org'&gt;http://www.saxproject.org&lt;/a&gt;
+ for further information.
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;This was the main event supplier interface for SAX1; it has
+ been replaced in SAX2 by {@link org.xml.sax.XMLReader XMLReader},
+ which includes Namespace support and sophisticated configurability
+ and extensibility.&lt;/p&gt;
+
+ &lt;p&gt;All SAX1 parsers must implement this basic interface: it allows
+ applications to register handlers for different types of events
+ and to initiate a parse from a URI, or a character stream.&lt;/p&gt;
+
+ &lt;p&gt;All SAX1 parsers must also implement a zero-argument constructor
+ (though other constructors are also allowed).&lt;/p&gt;
+
+ &lt;p&gt;SAX1 parsers are reusable but not re-entrant: the application
+ may reuse a parser object (possibly with a different input source)
+ once the first parse has completed successfully, but it may not
+ invoke the parse() methods recursively within a parse.&lt;/p&gt;
+
+ @deprecated This interface has been replaced by the SAX2
+             {@link org.xml.sax.XMLReader XMLReader}
+             interface, which includes Namespace support.
+ @since SAX 1.0
+ @author David Megginson
+ @version 2.0.1 (sax2r2)
+ @see org.xml.sax.EntityResolver
+ @see org.xml.sax.DTDHandler
+ @see org.xml.sax.DocumentHandler
+ @see org.xml.sax.ErrorHandler
+ @see org.xml.sax.HandlerBase
+ @see org.xml.sax.InputSource
+*/
+var Parser = {
+
+<span id='org-xml-sax-Parser-method-setLocale'>/**Allow an application to request a locale for errors and warnings.
+</span>
+ &lt;p&gt;SAX parsers are not required to provide localisation for errors
+ and warnings; if they cannot support the requested locale,
+ however, they must throw a SAX exception.  Applications may
+ not request a locale change in the middle of a parse.&lt;/p&gt;
+@param {Object {Locale}} locale A Java Locale object.
+@exception org.xml.sax.SAXException Throws an exception
+            (using the previous or default locale) if the
+            requested locale is not supported.
+@see org.xml.sax.SAXException
+@see org.xml.sax.SAXParseException
+*/
+setLocale : function(  ) {},
+
+<span id='org-xml-sax-Parser-method-setEntityResolver'>/**Allow an application to register a custom entity resolver.
+</span>
+ &lt;p&gt;If the application does not register an entity resolver, the
+ SAX parser will resolve system identifiers and open connections
+ to entities itself (this is the default behaviour implemented in
+ HandlerBase).&lt;/p&gt;
+
+ &lt;p&gt;Applications may register a new or different entity resolver
+ in the middle of a parse, and the SAX parser must begin using
+ the new resolver immediately.&lt;/p&gt;
+@param {Object {EntityResolver}} resolver The object for resolving entities.
+@see EntityResolver
+@see HandlerBase
+*/
+setEntityResolver : function(  ) {},
+
+<span id='org-xml-sax-Parser-method-setDTDHandler'>/**Allow an application to register a DTD event handler.
+</span>
+ &lt;p&gt;If the application does not register a DTD handler, all DTD
+ events reported by the SAX parser will be silently
+ ignored (this is the default behaviour implemented by
+ HandlerBase).&lt;/p&gt;
+
+ &lt;p&gt;Applications may register a new or different
+ handler in the middle of a parse, and the SAX parser must
+ begin using the new handler immediately.&lt;/p&gt;
+@param {Object {DTDHandler}} handler The DTD handler.
+@see DTDHandler
+@see HandlerBase
+*/
+setDTDHandler : function(  ) {},
+
+<span id='org-xml-sax-Parser-method-setDocumentHandler'>/**Allow an application to register a document event handler.
+</span>
+ &lt;p&gt;If the application does not register a document handler, all
+ document events reported by the SAX parser will be silently
+ ignored (this is the default behaviour implemented by
+ HandlerBase).&lt;/p&gt;
+
+ &lt;p&gt;Applications may register a new or different handler in the
+ middle of a parse, and the SAX parser must begin using the new
+ handler immediately.&lt;/p&gt;
+@param {Object {DocumentHandler}} handler The document handler.
+@see DocumentHandler
+@see HandlerBase
+*/
+setDocumentHandler : function(  ) {},
+
+<span id='org-xml-sax-Parser-method-setErrorHandler'>/**Allow an application to register an error event handler.
+</span>
+ &lt;p&gt;If the application does not register an error event handler,
+ all error events reported by the SAX parser will be silently
+ ignored, except for fatalError, which will throw a SAXException
+ (this is the default behaviour implemented by HandlerBase).&lt;/p&gt;
+
+ &lt;p&gt;Applications may register a new or different handler in the
+ middle of a parse, and the SAX parser must begin using the new
+ handler immediately.&lt;/p&gt;
+@param {Object {ErrorHandler}} handler The error handler.
+@see ErrorHandler
+@see SAXException
+@see HandlerBase
+*/
+setErrorHandler : function(  ) {},
+
+<span id='org-xml-sax-Parser-method-parse'>/**Parse an XML document.
+</span>
+ &lt;p&gt;The application can use this method to instruct the SAX parser
+ to begin parsing an XML document from any valid input
+ source (a character stream, a byte stream, or a URI).&lt;/p&gt;
+
+ &lt;p&gt;Applications may not invoke this method while a parse is in
+ progress (they should create a new Parser instead for each
+ additional XML document).  Once a parse is complete, an
+ application may reuse the same Parser object, possibly with a
+ different input source.&lt;/p&gt;
+@param {Object {InputSource}} source The input source for the top-level of the
+        XML document.
+@exception org.xml.sax.SAXException Any SAX exception, possibly
+            wrapping another exception.
+@exception java.io.IOException An IO exception from the parser,
+            possibly from a byte stream or character stream
+            supplied by the application.
+@see org.xml.sax.InputSource
+@see #parse(java.lang.String)
+@see #setEntityResolver
+@see #setDTDHandler
+@see #setDocumentHandler
+@see #setErrorHandler
+*/
+parse : function(  ) {},
+
+<span id='org-xml-sax-Parser-method-parse'>/**Parse an XML document from a system identifier (URI).
+</span>
+ &lt;p&gt;This method is a shortcut for the common case of reading a
+ document from a system identifier.  It is the exact
+ equivalent of the following:&lt;/p&gt;
+
+ &lt;pre&gt;
+ parse(new InputSource(systemId));
+ &lt;/pre&gt;
+
+ &lt;p&gt;If the system identifier is a URL, it must be fully resolved
+ by the application before it is passed to the parser.&lt;/p&gt;
+@param {String} systemId The system identifier (URI).
+@exception org.xml.sax.SAXException Any SAX exception, possibly
+            wrapping another exception.
+@exception java.io.IOException An IO exception from the parser,
+            possibly from a byte stream or character stream
+            supplied by the application.
+@see #parse(org.xml.sax.InputSource)
+*/
+parse : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

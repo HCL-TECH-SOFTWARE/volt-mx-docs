@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiMetrics'>/**@class com.android.server.wifi.WifiMetrics
+</span>@extends java.lang.Object
+
+ Provides storage for wireless connectivity metrics, as they are generated.
+ Metrics logged by this class include:
+   Aggregated connection stats (num of connections, num of failures, ...)
+   Discrete connection event stats (time, duration, failure codes, ...)
+   Router details (technology type, authentication type, ...)
+   Scan stats
+*/
+var WifiMetrics = {
+
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_RSSI_DELTA'>/***/
+</span>MAX_RSSI_DELTA : &quot;127&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MIN_RSSI_DELTA'>/***/
+</span>MIN_RSSI_DELTA : &quot;-127&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MIN_LINK_SPEED_MBPS'>/**Minimum link speed (Mbps) to count for link_speed_counts */
+</span>MIN_LINK_SPEED_MBPS : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-TIMEOUT_RSSI_DELTA_MILLIS'>/**Maximum time period between ScanResult and RSSI poll to generate rssi delta datapoint */
+</span>TIMEOUT_RSSI_DELTA_MILLIS : &quot;3000&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_CONNECTABLE_SSID_NETWORK_BUCKET'>/***/
+</span>MAX_CONNECTABLE_SSID_NETWORK_BUCKET : &quot;20&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_CONNECTABLE_BSSID_NETWORK_BUCKET'>/***/
+</span>MAX_CONNECTABLE_BSSID_NETWORK_BUCKET : &quot;50&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_TOTAL_SCAN_RESULT_SSIDS_BUCKET'>/***/
+</span>MAX_TOTAL_SCAN_RESULT_SSIDS_BUCKET : &quot;100&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_TOTAL_SCAN_RESULTS_BUCKET'>/***/
+</span>MAX_TOTAL_SCAN_RESULTS_BUCKET : &quot;250&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_TOTAL_PASSPOINT_APS_BUCKET'>/***/
+</span>MAX_TOTAL_PASSPOINT_APS_BUCKET : &quot;50&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_TOTAL_PASSPOINT_UNIQUE_ESS_BUCKET'>/***/
+</span>MAX_TOTAL_PASSPOINT_UNIQUE_ESS_BUCKET : &quot;20&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_PASSPOINT_APS_PER_UNIQUE_ESS_BUCKET'>/***/
+</span>MAX_PASSPOINT_APS_PER_UNIQUE_ESS_BUCKET : &quot;50&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_TOTAL_80211MC_APS_BUCKET'>/***/
+</span>MAX_TOTAL_80211MC_APS_BUCKET : &quot;20&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_UNUSABLE_EVENTS'>/***/
+</span>MAX_UNUSABLE_EVENTS : &quot;20&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MIN_DATA_STALL_WAIT_MS'>/***/
+</span>MIN_DATA_STALL_WAIT_MS : &quot;120000&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_WIFI_USABILITY_STATS_ENTRIES_LIST_SIZE'>/***/
+</span>MAX_WIFI_USABILITY_STATS_ENTRIES_LIST_SIZE : &quot;40&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_WIFI_USABILITY_STATS_LIST_SIZE_PER_TYPE'>/***/
+</span>MAX_WIFI_USABILITY_STATS_LIST_SIZE_PER_TYPE : &quot;10&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_WIFI_USABILITY_STATS_PER_TYPE_TO_UPLOAD'>/***/
+</span>MAX_WIFI_USABILITY_STATS_PER_TYPE_TO_UPLOAD : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-NUM_WIFI_USABILITY_STATS_ENTRIES_PER_WIFI_GOOD'>/***/
+</span>NUM_WIFI_USABILITY_STATS_ENTRIES_PER_WIFI_GOOD : &quot;100&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MIN_WIFI_GOOD_USABILITY_STATS_PERIOD_MS'>/***/
+</span>MIN_WIFI_GOOD_USABILITY_STATS_PERIOD_MS : &quot;3600000&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MIN_SCORE_BREACH_TO_GOOD_STATS_WAIT_TIME_MS'>/***/
+</span>MIN_SCORE_BREACH_TO_GOOD_STATS_WAIT_TIME_MS : &quot;60000&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-VALIDITY_PERIOD_OF_SCORE_BREACH_LOW_MS'>/***/
+</span>VALIDITY_PERIOD_OF_SCORE_BREACH_LOW_MS : &quot;90000&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-MAX_STA_EVENTS'>/***/
+</span>MAX_STA_EVENTS : &quot;768&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-PROTO_DUMP_ARG'>/***/
+</span>PROTO_DUMP_ARG : &quot;wifiMetricsProto&quot;,
+<span id='com-android-server-wifi-WifiMetrics-property-CLEAN_DUMP_ARG'>/***/
+</span>CLEAN_DUMP_ARG : &quot;clean&quot;,
+<span id='com-android-server-wifi-WifiMetrics-method-loadSettings'>/**Load setting values related to metrics logging.
+</span>*/
+loadSettings : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setScoringParams'>/**Sets internal ScoringParams member
+</span>*/
+setScoringParams : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setWifiConfigManager'>/**Sets internal WifiConfigManager member
+</span>*/
+setWifiConfigManager : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setWifiNetworkSelector'>/**Sets internal WifiNetworkSelector member
+</span>*/
+setWifiNetworkSelector : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setPasspointManager'>/**Sets internal PasspointManager member
+</span>*/
+setPasspointManager : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setWifiDataStall'>/**Sets internal WifiDataStall member
+</span>*/
+setWifiDataStall : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWifiLinkLayerUsageStats'>/**Increment cumulative counters for link layer stats.
+</span>@param {Object {WifiLinkLayerStats}} newStats
+*/
+incrementWifiLinkLayerUsageStats : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementPnoScanStartAttempCount'>/**Increment total number of attempts to start a pno scan
+</span>*/
+incrementPnoScanStartAttempCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementPnoScanFailedCount'>/**Increment total number of attempts with pno scan failed
+</span>*/
+incrementPnoScanFailedCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementPnoScanStartedOverOffloadCount'>/**Increment number of pno scans started successfully over offload
+</span>*/
+incrementPnoScanStartedOverOffloadCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementPnoScanFailedOverOffloadCount'>/**Increment number of pno scans failed over offload
+</span>*/
+incrementPnoScanFailedOverOffloadCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementPnoFoundNetworkEventCount'>/**Increment number of times pno scan found a result
+</span>*/
+incrementPnoFoundNetworkEventCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWpsAttemptCount'>/**Increment total number of wps connection attempts
+</span>*/
+incrementWpsAttemptCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWpsSuccessCount'>/**Increment total number of wps connection success
+</span>*/
+incrementWpsSuccessCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWpsStartFailureCount'>/**Increment total number of wps failure on start
+</span>*/
+incrementWpsStartFailureCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWpsOverlapFailureCount'>/**Increment total number of wps overlap failure
+</span>*/
+incrementWpsOverlapFailureCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWpsTimeoutFailureCount'>/**Increment total number of wps timeout failure
+</span>*/
+incrementWpsTimeoutFailureCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWpsOtherConnectionFailureCount'>/**Increment total number of other wps failure during connection
+</span>*/
+incrementWpsOtherConnectionFailureCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWpsSupplicantFailureCount'>/**Increment total number of supplicant failure after wps
+</span>*/
+incrementWpsSupplicantFailureCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWpsCancellationCount'>/**Increment total number of wps cancellation
+</span>*/
+incrementWpsCancellationCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-startConnectionEvent'>/**Create a new connection event. Call when wifi attempts to make a new network connection
+</span> If there is a current 'un-ended' connection event, it will be ended with UNKNOWN connectivity
+ failure code.
+ Gathers and sets the RouterFingerPrint data as well
+@param {Object {WifiConfiguration}} config WifiConfiguration of the config used for the current connection attempt
+@param {String} roamType Roam type that caused connection attempt, see WifiMetricsProto.WifiLog.ROAM_X
+*/
+startConnectionEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setConnectionEventRoamType'>/**set the RoamType of the current ConnectionEvent (if any)
+</span>*/
+setConnectionEventRoamType : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setConnectionScanDetail'>/**Set AP related metrics from ScanDetail
+</span>*/
+setConnectionScanDetail : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-endConnectionEvent'>/**End a Connection event record. Call when wifi connection attempt succeeds or fails.
+</span> If a Connection event has not been started and is active when .end is called, a new one is
+ created with zero duration.
+@param {Number} level2FailureCode Level 2 failure code returned by supplicant
+@param {Number} connectivityFailureCode WifiMetricsProto.ConnectionEvent.HLF_X
+@param {Number} level2FailureReason Breakdown of level2FailureCode with more detailed reason
+*/
+endConnectionEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNonEmptyScanResultCount'>/**Increment Non Empty Scan Results count
+</span>*/
+incrementNonEmptyScanResultCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementEmptyScanResultCount'>/**Increment Empty Scan Results count
+</span>*/
+incrementEmptyScanResultCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementBackgroundScanCount'>/**Increment background scan count
+</span>*/
+incrementBackgroundScanCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-getBackgroundScanCount'>/**Get Background scan count
+</span>*/
+getBackgroundScanCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementOneshotScanCount'>/**Increment oneshot scan count, and the associated WifiSystemScanStateCount entry
+</span>*/
+incrementOneshotScanCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementOneshotScanWithDfsCount'>/**Increment the count of oneshot scans that include DFS channels.
+</span>*/
+incrementOneshotScanWithDfsCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementConnectivityOneshotScanCount'>/**Increment connectivity oneshot scan count.
+</span>*/
+incrementConnectivityOneshotScanCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-getOneshotScanCount'>/**Get oneshot scan count
+</span>*/
+getOneshotScanCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-getConnectivityOneshotScanCount'>/**Get connectivity oneshot scan count
+</span>*/
+getConnectivityOneshotScanCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-getOneshotScanWithDfsCount'>/**Get the count of oneshot scan requests that included DFS channels.
+</span>*/
+getOneshotScanWithDfsCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementExternalAppOneshotScanRequestsCount'>/**Increment oneshot scan count for external apps.
+</span>*/
+incrementExternalAppOneshotScanRequestsCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementExternalForegroundAppOneshotScanRequestsThrottledCount'>/**Increment oneshot scan throttle count for external foreground apps.
+</span>*/
+incrementExternalForegroundAppOneshotScanRequestsThrottledCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementExternalBackgroundAppOneshotScanRequestsThrottledCount'>/**Increment oneshot scan throttle count for external background apps.
+</span>*/
+incrementExternalBackgroundAppOneshotScanRequestsThrottledCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementScanReturnEntry'>/**Increment count of scan return code occurrence
+</span>@param {Number} scanReturnCode Return code from scan attempt WifiMetricsProto.WifiLog.SCAN_X
+*/
+incrementScanReturnEntry : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-getScanReturnEntry'>/**Get the count of this scanReturnCode
+</span>@param {Number} scanReturnCode that we are getting the count for
+*/
+getScanReturnEntry : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWifiSystemScanStateCount'>/**Increments the count of scans initiated by each wifi state, accounts for screenOn/Off
+</span>@param {Number} state State of the system when scan was initiated, see WifiMetricsProto.WifiLog.WIFI_X
+@param {Boolean} screenOn Is the screen on
+*/
+incrementWifiSystemScanStateCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-getSystemStateCount'>/**Get the count of this system State Entry
+</span>*/
+getSystemStateCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumLastResortWatchdogTriggers'>/**Increment number of times the Watchdog of Last Resort triggered, resetting the wifi stack
+</span>*/
+incrementNumLastResortWatchdogTriggers : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addCountToNumLastResortWatchdogBadAssociationNetworksTotal'>/**
+</span>@param {Number} count number of networks over bad association threshold when watchdog triggered
+*/
+addCountToNumLastResortWatchdogBadAssociationNetworksTotal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addCountToNumLastResortWatchdogBadAuthenticationNetworksTotal'>/**
+</span>@param {Number} count number of networks over bad authentication threshold when watchdog triggered
+*/
+addCountToNumLastResortWatchdogBadAuthenticationNetworksTotal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addCountToNumLastResortWatchdogBadDhcpNetworksTotal'>/**
+</span>@param {Number} count number of networks over bad dhcp threshold when watchdog triggered
+*/
+addCountToNumLastResortWatchdogBadDhcpNetworksTotal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addCountToNumLastResortWatchdogBadOtherNetworksTotal'>/**
+</span>@param {Number} count number of networks over bad other threshold when watchdog triggered
+*/
+addCountToNumLastResortWatchdogBadOtherNetworksTotal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addCountToNumLastResortWatchdogAvailableNetworksTotal'>/**
+</span>@param {Number} count number of networks seen when watchdog triggered
+*/
+addCountToNumLastResortWatchdogAvailableNetworksTotal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumLastResortWatchdogTriggersWithBadAssociation'>/**Increment count of triggers with atleast one bad association network
+</span>*/
+incrementNumLastResortWatchdogTriggersWithBadAssociation : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumLastResortWatchdogTriggersWithBadAuthentication'>/**Increment count of triggers with atleast one bad authentication network
+</span>*/
+incrementNumLastResortWatchdogTriggersWithBadAuthentication : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumLastResortWatchdogTriggersWithBadDhcp'>/**Increment count of triggers with atleast one bad dhcp network
+</span>*/
+incrementNumLastResortWatchdogTriggersWithBadDhcp : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumLastResortWatchdogTriggersWithBadOther'>/**Increment count of triggers with atleast one bad other network
+</span>*/
+incrementNumLastResortWatchdogTriggersWithBadOther : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumConnectivityWatchdogPnoGood'>/**Increment number of times connectivity watchdog confirmed pno is working
+</span>*/
+incrementNumConnectivityWatchdogPnoGood : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumConnectivityWatchdogPnoBad'>/**Increment number of times connectivity watchdog found pno not working
+</span>*/
+incrementNumConnectivityWatchdogPnoBad : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumConnectivityWatchdogBackgroundGood'>/**Increment number of times connectivity watchdog confirmed background scan is working
+</span>*/
+incrementNumConnectivityWatchdogBackgroundGood : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumConnectivityWatchdogBackgroundBad'>/**Increment number of times connectivity watchdog found background scan not working
+</span>*/
+incrementNumConnectivityWatchdogBackgroundBad : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-handlePollResult'>/**Increment various poll related metrics, and cache performance data for StaEvent logging
+</span>*/
+handlePollResult : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementRssiPollRssiCount'>/**Increment occurence count of RSSI level from RSSI poll for the given frequency.
+</span>@param {Number} frequency (MHz)
+@param {Number} rssi
+*/
+incrementRssiPollRssiCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementLinkSpeedCount'>/**Increment occurrence count of link speed.
+</span> Ignores link speed values that are lower than MIN_LINK_SPEED_MBPS
+ and rssi values outside the bounds of [MIN_RSSI_POLL, MAX_RSSI_POLL]
+*/
+incrementLinkSpeedCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumLastResortWatchdogSuccesses'>/**Increment count of Watchdog successes.
+</span>*/
+incrementNumLastResortWatchdogSuccesses : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWatchdogTotalConnectionFailureCountAfterTrigger'>/**Increment the count of network connection failures that happened after watchdog has been
+</span> triggered.
+*/
+incrementWatchdogTotalConnectionFailureCountAfterTrigger : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setWatchdogSuccessTimeDurationMs'>/**Sets the time taken for wifi to connect after a watchdog triggers a restart.
+</span>@param {Number} milliseconds
+*/
+setWatchdogSuccessTimeDurationMs : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-countScanResults'>/**Counts all the different types of networks seen in a set of scan results
+</span>*/
+countScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWifiScoreCount'>/**Increments occurence of a particular wifi score calculated
+</span> in WifiScoreReport by current connected network. Scores are bounded
+ within  [MIN_WIFI_SCORE, MAX_WIFI_SCORE] to limit size of SparseArray.
+
+ Also records events when the current score breaches significant thresholds.
+*/
+incrementWifiScoreCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementSoftApStartResult'>/**Increments occurence of the results from attempting to start SoftAp.
+</span> Maps the |result| and WifiManager |failureCode| constant to proto defined SoftApStartResult
+ codes.
+*/
+incrementSoftApStartResult : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addSoftApUpChangedEvent'>/**Adds a record indicating the current up state of soft AP
+</span>*/
+addSoftApUpChangedEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addSoftApNumAssociatedStationsChangedEvent'>/**Adds a record for current number of associated stations to soft AP
+</span>*/
+addSoftApNumAssociatedStationsChangedEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addSoftApChannelSwitchedEvent'>/**Updates current soft AP events with channel info
+</span>*/
+addSoftApChannelSwitchedEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumHalCrashes'>/**Increment number of times the HAL crashed.
+</span>*/
+incrementNumHalCrashes : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumWificondCrashes'>/**Increment number of times the Wificond crashed.
+</span>*/
+incrementNumWificondCrashes : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumSupplicantCrashes'>/**Increment number of times the supplicant crashed.
+</span>*/
+incrementNumSupplicantCrashes : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumHostapdCrashes'>/**Increment number of times the hostapd crashed.
+</span>*/
+incrementNumHostapdCrashes : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumSetupClientInterfaceFailureDueToHal'>/**Increment number of times the wifi on failed due to an error in HAL.
+</span>*/
+incrementNumSetupClientInterfaceFailureDueToHal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumSetupClientInterfaceFailureDueToWificond'>/**Increment number of times the wifi on failed due to an error in wificond.
+</span>*/
+incrementNumSetupClientInterfaceFailureDueToWificond : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumSetupClientInterfaceFailureDueToSupplicant'>/**Increment number of times the wifi on failed due to an error in supplicant.
+</span>*/
+incrementNumSetupClientInterfaceFailureDueToSupplicant : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumSetupSoftApInterfaceFailureDueToHal'>/**Increment number of times the SoftAp on failed due to an error in HAL.
+</span>*/
+incrementNumSetupSoftApInterfaceFailureDueToHal : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumSetupSoftApInterfaceFailureDueToWificond'>/**Increment number of times the SoftAp on failed due to an error in wificond.
+</span>*/
+incrementNumSetupSoftApInterfaceFailureDueToWificond : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumSetupSoftApInterfaceFailureDueToHostapd'>/**Increment number of times the SoftAp on failed due to an error in hostapd.
+</span>*/
+incrementNumSetupSoftApInterfaceFailureDueToHostapd : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumClientInterfaceDown'>/**Increment number of times we got client interface down.
+</span>*/
+incrementNumClientInterfaceDown : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumSoftApInterfaceDown'>/**Increment number of times we got client interface down.
+</span>*/
+incrementNumSoftApInterfaceDown : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumPasspointProviderInstallation'>/**Increment number of times Passpoint provider being installed.
+</span>*/
+incrementNumPasspointProviderInstallation : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumPasspointProviderInstallSuccess'>/**Increment number of times Passpoint provider is installed successfully.
+</span>*/
+incrementNumPasspointProviderInstallSuccess : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumPasspointProviderUninstallation'>/**Increment number of times Passpoint provider being uninstalled.
+</span>*/
+incrementNumPasspointProviderUninstallation : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumPasspointProviderUninstallSuccess'>/**Increment number of times Passpoint provider is uninstalled successfully.
+</span>*/
+incrementNumPasspointProviderUninstallSuccess : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumRadioModeChangeToMcc'>/**Increment number of times we detected a radio mode change to MCC.
+</span>*/
+incrementNumRadioModeChangeToMcc : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumRadioModeChangeToScc'>/**Increment number of times we detected a radio mode change to SCC.
+</span>*/
+incrementNumRadioModeChangeToScc : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumRadioModeChangeToSbs'>/**Increment number of times we detected a radio mode change to SBS.
+</span>*/
+incrementNumRadioModeChangeToSbs : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumRadioModeChangeToDbs'>/**Increment number of times we detected a radio mode change to DBS.
+</span>*/
+incrementNumRadioModeChangeToDbs : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumSoftApUserBandPreferenceUnsatisfied'>/**Increment number of times we detected a channel did not satisfy user band preference.
+</span>*/
+incrementNumSoftApUserBandPreferenceUnsatisfied : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumSarSensorRegistrationFailures'>/**Increment the failure count of SAR sensor listener registration
+</span>*/
+incrementNumSarSensorRegistrationFailures : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementAvailableNetworksHistograms'>/**Increment N-Way network selection decision histograms:
+</span> Counts the size of various sets of scanDetails within a scan, and increment the occurrence
+ of that size for the associated histogram. There are ten histograms generated for each
+ combination of: {SSID, BSSID} *{Total, Saved, Open, Saved_or_Open, Passpoint}
+ Only performs this count if isFullBand is true, otherwise, increments the partial scan count
+*/
+incrementAvailableNetworksHistograms : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementConnectToNetworkNotification'>/**Increments the occurence of a &quot;Connect to Network&quot; notification.
+</span>*/
+incrementConnectToNetworkNotification : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementConnectToNetworkNotificationAction'>/**Increments the occurence of an &quot;Connect to Network&quot; notification user action.
+</span>*/
+incrementConnectToNetworkNotificationAction : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setNetworkRecommenderBlacklistSize'>/**Sets the number of SSIDs blacklisted from recommendation by the open network notification
+</span> recommender.
+*/
+setNetworkRecommenderBlacklistSize : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setIsWifiNetworksAvailableNotificationEnabled'>/**Sets if the available network notification feature is enabled.
+</span>*/
+setIsWifiNetworksAvailableNotificationEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumNetworkRecommendationUpdates'>/**Increments the occurence of connection attempts that were initiated unsuccessfully
+</span>*/
+incrementNumNetworkRecommendationUpdates : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumNetworkConnectMessageFailedToSend'>/**Increments the occurence of connection attempts that were initiated unsuccessfully
+</span>*/
+incrementNumNetworkConnectMessageFailedToSend : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setIsMacRandomizationOn'>/**Sets if Connected MAC Randomization feature is enabled
+</span>*/
+setIsMacRandomizationOn : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logFirmwareAlert'>/**Log firmware alert related metrics
+</span>*/
+logFirmwareAlert : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-dump'>/**Dump all WifiMetrics. Collects some metrics from ConfigStore, Settings and WifiManager
+</span> at this time.
+@param {Object {FileDescriptor}} fd unused
+@param {Object {PrintWriter}} pw PrintWriter for writing dump to
+@param {Object {java.lang.String[]}} args [wifiMetricsProto [clean]]
+*/
+dump : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-updateSavedNetworks'>/**Update various counts of saved network types
+</span>@param {Object {java.util.List}} networks List of WifiConfigurations representing all saved networks, must not be null
+*/
+updateSavedNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-updateSavedPasspointProfiles'>/**Update metrics for saved Passpoint profiles.
+</span>@param {Number} numSavedProfiles The number of saved Passpoint profiles
+@param {Number} numConnectedProfiles The number of saved Passpoint profiles that have ever resulted
+                             in a successful network connection
+*/
+updateSavedPasspointProfiles : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-updateSavedPasspointProfilesInfo'>/**Update number of times for type of saved Passpoint profile.
+</span>@param {Object {java.util.Map}} providers Passpoint providers installed on the device.
+*/
+updateSavedPasspointProfilesInfo : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setScreenState'>/**Set screen state (On/Off)
+</span>*/
+setScreenState : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setWifiState'>/**Set wifi state (WIFI_UNKNOWN, WIFI_DISABLED, WIFI_DISCONNECTED, WIFI_ASSOCIATED)
+</span>*/
+setWifiState : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logStaEvent'>/**Log a StaEvent from ClientModeImpl. The StaEvent must not be one of the supplicant
+</span> generated event types, which are logged through 'sendMessage'
+@param {Number} type StaEvent.EventType describing the event
+*/
+logStaEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logStaEvent'>/**Log a StaEvent from ClientModeImpl. The StaEvent must not be one of the supplicant
+</span> generated event types, which are logged through 'sendMessage'
+@param {Number} type StaEvent.EventType describing the event
+@param {Object {WifiConfiguration}} config WifiConfiguration for a framework initiated connection attempt
+*/
+logStaEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logStaEvent'>/**Log a StaEvent from ClientModeImpl. The StaEvent must not be one of the supplicant
+</span> generated event types, which are logged through 'sendMessage'
+@param {Number} type StaEvent.EventType describing the event
+@param {Number} frameworkDisconnectReason StaEvent.FrameworkDisconnectReason explaining why framework
+                                  initiated a FRAMEWORK_DISCONNECT
+*/
+logStaEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logStaEvent'>/**Log a StaEvent from ClientModeImpl. The StaEvent must not be one of the supplicant
+</span> generated event types, which are logged through 'sendMessage'
+@param {Number} type StaEvent.EventType describing the event
+@param {Number} frameworkDisconnectReason StaEvent.FrameworkDisconnectReason explaining why framework
+                                  initiated a FRAMEWORK_DISCONNECT
+@param {Object {WifiConfiguration}} config WifiConfiguration for a framework initiated connection attempt
+*/
+logStaEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-getHandler'>/**
+</span>*/
+getHandler : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-getWifiAwareMetrics'>/**
+</span>*/
+getWifiAwareMetrics : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-getWakeupMetrics'>/**
+</span>*/
+getWakeupMetrics : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-getRttMetrics'>/**
+</span>*/
+getRttMetrics : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-supplicantStateToBit'>/**Converts a SupplicantState value to a single bit, with position defined by
+</span> {@code StaEvent.SupplicantState}
+*/
+supplicantStateToBit : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-staEventToString'>/**Returns a human readable string from a Sta Event. Only adds information relevant to the event
+</span> type.
+*/
+staEventToString : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-updateWifiIsUnusableLinkLayerStats'>/**Update the difference between the last two WifiLinkLayerStats for WifiIsUnusableEvent
+</span>*/
+updateWifiIsUnusableLinkLayerStats : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-resetWifiIsUnusableLinkLayerStats'>/**Clear the saved difference between the last two WifiLinkLayerStats
+</span>*/
+resetWifiIsUnusableLinkLayerStats : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logWifiIsUnusableEvent'>/**Log a WifiIsUnusableEvent
+</span>@param {Number} triggerType WifiIsUnusableEvent.type describing the event
+*/
+logWifiIsUnusableEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logWifiIsUnusableEvent'>/**Log a WifiIsUnusableEvent
+</span>@param {Number} triggerType WifiIsUnusableEvent.type describing the event
+@param {Number} firmwareAlertCode WifiIsUnusableEvent.firmwareAlertCode for firmware alert code
+*/
+logWifiIsUnusableEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setWifiIsUnusableLoggingEnabled'>/**Sets whether or not WifiIsUnusableEvent is logged in metrics
+</span>*/
+setWifiIsUnusableLoggingEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setLinkSpeedCountsLoggingEnabled'>/**Sets whether or not LinkSpeedCounts is logged in metrics
+</span>*/
+setLinkSpeedCountsLoggingEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setWifiDataStallMinTxBad'>/**Sets the minimum number of txBad to trigger a data stall
+</span>*/
+setWifiDataStallMinTxBad : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setWifiDataStallMinRxWithoutTx'>/**Sets the minimum number of txSuccess to trigger a data stall
+</span> when rxSuccess is 0
+*/
+setWifiDataStallMinRxWithoutTx : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-updateWifiUsabilityStatsEntries'>/**Extract data from |info| and |stats| to build a WifiUsabilityStatsEntry and then adds it
+</span> into an internal ring buffer.
+@param {Object {WifiInfo}} info
+@param {Object {WifiLinkLayerStats}} stats
+*/
+updateWifiUsabilityStatsEntries : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addToWifiUsabilityStatsList'>/**Label the current snapshot of WifiUsabilityStatsEntrys and save the labeled data in memory.
+</span>@param {Number} label WifiUsabilityStats.LABEL_GOOD or WifiUsabilityStats.LABEL_BAD
+@param {Number} triggerType what event triggers WifiUsabilityStats
+@param {Number} firmwareAlertCode the firmware alert code when the stats was triggered by a
+        firmware alert
+*/
+addToWifiUsabilityStatsList : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-enterDeviceMobilityState'>/**Reports that the device entered a new mobility state.
+</span>@param {Number} newState the new device mobility state.
+*/
+enterDeviceMobilityState : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logPnoScanStart'>/**Logs the start of a PNO scan.
+</span>*/
+logPnoScanStart : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logPnoScanStop'>/**Logs the end of a PNO scan. This is attributed to the current device mobility state, as
+</span> logged by {@link #enterDeviceMobilityState}(int). Thus, if the mobility state changes during
+ a PNO scan, one should call {@link #logPnoScanStop}(), {@link #enterDeviceMobilityState}(int)
+ , then {@link #logPnoScanStart}() so that the portion of PNO scan before the mobility state
+ change can be correctly attributed to the previous mobility state.
+*/
+logPnoScanStop : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addOnWifiUsabilityListener'>/**Add a new listener for Wi-Fi usability stats handling.
+</span>*/
+addOnWifiUsabilityListener : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-removeOnWifiUsabilityListener'>/**Remove an existing listener for Wi-Fi usability stats handling.
+</span>*/
+removeOnWifiUsabilityListener : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementWifiUsabilityScoreCount'>/**Updates the Wi-Fi usability score and increments occurence of a particular Wifi usability
+</span> score passed in from outside framework. Scores are bounded within
+ [MIN_WIFI_USABILITY_SCORE, MAX_WIFI_USABILITY_SCORE].
+
+ Also records events when the Wifi usability score breaches significant thresholds.
+@param {Number} seqNum Sequence number of the Wi-Fi usability score.
+@param {Number} score The Wi-Fi usability score.
+@param {Number} predictionHorizonSec Prediction horizon of the Wi-Fi usability score.
+*/
+incrementWifiUsabilityScoreCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logLinkProbeSuccess'>/**Reports stats for a successful link probe.
+</span>@param {Number} timeSinceLastTxSuccessMs At {@code startTimestampMs}, the number of milliseconds since
+                                 the last Tx success (according to
+                                 {@link WifiInfo#txSuccess}).
+@param {Number} rssi The Rx RSSI at {@code startTimestampMs}.
+@param {Number} linkSpeed The Tx link speed in Mbps at {@code startTimestampMs}.
+@param {Number} elapsedTimeMs The number of milliseconds between when the command to transmit the
+                      probe was sent to the driver and when the driver responded that the
+                      probe was ACKed. Note: this number should be correlated with the number
+                      of retries that the driver attempted before the probe was ACKed.
+*/
+logLinkProbeSuccess : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logLinkProbeFailure'>/**Reports stats for an unsuccessful link probe.
+</span>@param {Number} timeSinceLastTxSuccessMs At {@code startTimestampMs}, the number of milliseconds since
+                                 the last Tx success (according to
+                                 {@link WifiInfo#txSuccess}).
+@param {Number} rssi The Rx RSSI at {@code startTimestampMs}.
+@param {Number} linkSpeed The Tx link speed in Mbps at {@code startTimestampMs}.
+@param {Number} reason The error code for the failure. See {@link WifiNative.SendMgmtFrameError}.
+*/
+logLinkProbeFailure : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementLinkProbeExperimentProbeCount'>/**Increments the number of probes triggered by the experiment `experimentId`.
+</span>*/
+incrementLinkProbeExperimentProbeCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-noteWifiConfigStoreReadDuration'>/**Update wifi config store read duration.
+</span>@param {Number} timeMs Time it took to complete the operation, in milliseconds
+*/
+noteWifiConfigStoreReadDuration : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-noteWifiConfigStoreWriteDuration'>/**Update wifi config store write duration.
+</span>@param {Number} timeMs Time it took to complete the operation, in milliseconds
+*/
+noteWifiConfigStoreWriteDuration : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-logNetworkSelectionDecision'>/**Logs the decision of a network selection algorithm when compared against another network
+</span> selection algorithm.
+@param {Number} experiment1Id ID of one experiment
+@param {Number} experiment2Id ID of the other experiment
+@param {Boolean} isSameDecision did the 2 experiments make the same decision?
+@param {Number} numNetworkChoices the number of non-null network choices there were, where the null
+                          choice is not selecting any network
+*/
+logNetworkSelectionDecision : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNetworkRequestApiNumRequest'>/**Increment number of network request API usage stats
+</span>*/
+incrementNetworkRequestApiNumRequest : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNetworkRequestApiMatchSizeHistogram'>/**Add to the network request API match size histogram
+</span>*/
+incrementNetworkRequestApiMatchSizeHistogram : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNetworkRequestApiNumConnectSuccess'>/**Increment number of connection success via network request API
+</span>*/
+incrementNetworkRequestApiNumConnectSuccess : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNetworkRequestApiNumUserApprovalBypass'>/**Increment number of requests that bypassed user approval via network request API
+</span>*/
+incrementNetworkRequestApiNumUserApprovalBypass : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNetworkRequestApiNumUserReject'>/**Increment number of requests that user rejected via network request API
+</span>*/
+incrementNetworkRequestApiNumUserReject : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNetworkRequestApiNumApps'>/**Increment number of requests from unique apps via network request API
+</span>*/
+incrementNetworkRequestApiNumApps : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNetworkSuggestionApiNumModification'>/**Increment number of network suggestion API modification by app stats
+</span>*/
+incrementNetworkSuggestionApiNumModification : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNetworkSuggestionApiNumConnectSuccess'>/**Increment number of connection success via network suggestion API
+</span>*/
+incrementNetworkSuggestionApiNumConnectSuccess : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNetworkSuggestionApiNumConnectFailure'>/**Increment number of connection failure via network suggestion API
+</span>*/
+incrementNetworkSuggestionApiNumConnectFailure : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-noteNetworkSuggestionApiListSizeHistogram'>/**Clear and set the latest network suggestion API max list size histogram
+</span>*/
+noteNetworkSuggestionApiListSizeHistogram : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setNominatorForNetwork'>/**Sets the nominator for a network (i.e. which entity made the suggestion to connect)
+</span>@param {Number} networkId the ID of the network, from its {@link WifiConfiguration}
+@param {Number} nominatorId the entity that made the suggestion to connect to this network,
+                    from {@link WifiMetricsProto.ConnectionEvent.ConnectionNominator}
+*/
+setNominatorForNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-setNetworkSelectorExperimentId'>/**Sets the numeric CandidateScorer id.
+</span>*/
+setNetworkSelectorExperimentId : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addWifiLockAcqSession'>/**Add a WifiLock acqusition session
+</span>*/
+addWifiLockAcqSession : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-addWifiLockActiveSession'>/**Add a WifiLock active session
+</span>*/
+addWifiLockActiveSession : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumAddOrUpdateNetworkCalls'>/**Increments metrics counting number of addOrUpdateNetwork calls.
+</span>*/
+incrementNumAddOrUpdateNetworkCalls : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumEnableNetworkCalls'>/**Increments metrics counting number of enableNetwork calls.
+</span>*/
+incrementNumEnableNetworkCalls : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementNumWifiToggles'>/**Add to WifiToggleStats
+</span>*/
+incrementNumWifiToggles : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementPasspointProvisionFailure'>/**Increment number of passpoint provision failure
+</span>@param {Number} failureCode indicates error condition
+*/
+incrementPasspointProvisionFailure : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMetrics-method-incrementPasspointProvisionSuccess'>/**Increment number of passpoint provision success
+</span>*/
+incrementPasspointProvisionSuccess : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

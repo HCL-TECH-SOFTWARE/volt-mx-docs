@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-file-WatchKey'>/**@class java.nio.file.WatchKey
+</span> A token representing the registration of a {@link java.nio.file.Watchable watchable} object
+ with a {@link java.nio.file.WatchService}.
+
+ &lt;p&gt; A watch key is created when a watchable object is registered with a watch
+ service. The key remains {@link #isValid valid} until:
+ &lt;ol&gt;
+   &lt;li&gt; It is cancelled, explicitly, by invoking its {@link #cancel cancel}
+     method, or&lt;/li&gt;
+   &lt;li&gt; Cancelled implicitly, because the object is no longer accessible,
+     or &lt;/li&gt;
+   &lt;li&gt; By {@link java.nio.file.WatchService#close closing} the watch service. &lt;/li&gt;
+ &lt;/ol&gt;
+
+ &lt;p&gt; A watch key has a state. When initially created the key is said to be
+ &lt;em&gt;ready&lt;/em&gt;. When an event is detected then the key is &lt;em&gt;signalled&lt;/em&gt;
+ and queued so that it can be retrieved by invoking the watch service's {@link java.nio.file.WatchService#poll() poll} or {@link java.nio.file.WatchService#take() take} methods. Once
+ signalled, a key remains in this state until its {@link #reset reset} method
+ is invoked to return the key to the ready state. Events detected while the
+ key is in the signalled state are queued but do not cause the key to be
+ re-queued for retrieval from the watch service. Events are retrieved by
+ invoking the key's {@link #pollEvents pollEvents} method. This method
+ retrieves and removes all events accumulated for the object. When initially
+ created, a watch key has no pending events. Typically events are retrieved
+ when the key is in the signalled state leading to the following idiom:
+
+ &lt;pre&gt;
+     for (;;) {
+         // retrieve key
+         WatchKey key = watcher.take();
+
+         // process events
+         for (WatchEvent&amp;lt;?&amp;gt; event: key.pollEvents()) {
+             :
+         }
+
+         // reset the key
+         boolean valid = key.reset();
+         if (!valid) {
+             // object no longer registered
+         }
+     }
+ &lt;/pre&gt;
+
+ &lt;p&gt; Watch keys are safe for use by multiple concurrent threads. Where there
+ are several threads retrieving signalled keys from a watch service then care
+ should be taken to ensure that the {@code reset} method is only invoked after
+ the events for the object have been processed. This ensures that one thread
+ is processing the events for an object at any time.
+
+ @since 1.7
+*/
+var WatchKey = {
+
+<span id='java-nio-file-WatchKey-method-isValid'>/**Tells whether or not this watch key is valid.
+</span>
+ &lt;p&gt; A watch key is valid upon creation and remains until it is cancelled,
+ or its watch service is closed.
+@return {Boolean} {@code true} if, and only if, this watch key is valid
+*/
+isValid : function(  ) {},
+
+<span id='java-nio-file-WatchKey-method-pollEvents'>/**Retrieves and removes all pending events for this watch key, returning
+</span> a {@code List} of the events that were retrieved.
+
+ &lt;p&gt; Note that this method does not wait if there are no events pending.
+@return {Object {java.util.List}} the list of the events retrieved; may be empty
+*/
+pollEvents : function(  ) {},
+
+<span id='java-nio-file-WatchKey-method-reset'>/**Resets this watch key.
+</span>
+ &lt;p&gt; If this watch key has been cancelled or this watch key is already in
+ the ready state then invoking this method has no effect. Otherwise
+ if there are pending events for the object then this watch key is
+ immediately re-queued to the watch service. If there are no pending
+ events then the watch key is put into the ready state and will remain in
+ that state until an event is detected or the watch key is cancelled.
+@return {Boolean} {@code true} if the watch key is valid and has been reset, and
+          {@code false} if the watch key could not be reset because it is
+          no longer {@link #isValid valid}
+*/
+reset : function(  ) {},
+
+<span id='java-nio-file-WatchKey-method-cancel'>/**Cancels the registration with the watch service. Upon return the watch key
+</span> will be invalid. If the watch key is enqueued, waiting to be retrieved
+ from the watch service, then it will remain in the queue until it is
+ removed. Pending events, if any, remain pending and may be retrieved by
+ invoking the {@link #pollEvents pollEvents} method after the key is
+ cancelled.
+
+ &lt;p&gt; If this watch key has already been cancelled then invoking this
+ method has no effect.  Once cancelled, a watch key remains forever invalid.
+*/
+cancel : function(  ) {},
+
+<span id='java-nio-file-WatchKey-method-watchable'>/**Returns the object for which this watch key was created. This method will
+</span> continue to return the object even after the key is cancelled.
+
+ &lt;p&gt; As the {@code WatchService} is intended to map directly on to the
+ native file event notification facility (where available) then many of
+ details on how registered objects are watched is highly implementation
+ specific. When watching a directory for changes for example, and the
+ directory is moved or renamed in the file system, there is no guarantee
+ that the watch key will be cancelled and so the object returned by this
+ method may no longer be a valid path to the directory.
+@return {Object {java.nio.file.Watchable}} the object for which this watch key was created
+*/
+watchable : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

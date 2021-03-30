@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-logging-SimpleFormatter'>/**@class java.util.logging.SimpleFormatter
+</span>@extends java.util.logging.Formatter
+
+ Print a brief summary of the {@code LogRecord} in a human readable
+ format.  The summary will typically be 1 or 2 lines.
+
+ &lt;p&gt;
+ &lt;a name=&quot;formatting&quot;&gt;
+ &lt;b&gt;Configuration:&lt;/b&gt;&lt;/a&gt;
+ The {@code SimpleFormatter} is initialized with the
+ &lt;a href=&quot;../Formatter.html#syntax&quot;&gt;format string&lt;/a&gt;
+ specified in the {@code java.util.logging.SimpleFormatter.format}
+ property to {@linkplain #format format} the log messages.
+ This property can be defined
+ in the {@linkplain java.util.logging.LogManager#getProperty logging properties}
+ configuration file
+ or as a system property.  If this property is set in both
+ the logging properties and system properties,
+ the format string specified in the system property will be used.
+ If this property is not defined or the given format string
+ is {@linkplain java.util.IllegalFormatException illegal},
+ the default format is implementation-specific.
+
+ @since 1.4
+ @see java.util.Formatter
+*/
+var SimpleFormatter = {
+
+<span id='java-util-logging-SimpleFormatter-method-format'>/**Format the given LogRecord.
+</span> &lt;p&gt;
+ The formatting can be customized by specifying the
+ &lt;a href=&quot;../Formatter.html#syntax&quot;&gt;format string&lt;/a&gt;
+ in the &lt;a href=&quot;#formatting&quot;&gt;
+ {@code java.util.logging.SimpleFormatter.format}&lt;/a&gt; property.
+ The given {@code LogRecord} will be formatted as if by calling:
+ &lt;pre&gt;
+    {@link String#format String.format}(format, date, source, logger, level, message, thrown);
+ &lt;/pre&gt;
+ where the arguments are:&lt;br&gt;
+ &lt;ol&gt;
+ &lt;li&gt;{@code format} - the {@link java.util.Formatter
+     java.util.Formatter} format string specified in the
+     {@code java.util.logging.SimpleFormatter.format} property
+     or the default format.&lt;/li&gt;
+ &lt;li&gt;{@code date} - a {@link Date} object representing
+     {@linkplain java.util.logging.LogRecord#getMillis event time} of the log record.&lt;/li&gt;
+ &lt;li&gt;{@code source} - a string representing the caller, if available;
+     otherwise, the logger's name.&lt;/li&gt;
+ &lt;li&gt;{@code logger} - the logger's name.&lt;/li&gt;
+ &lt;li&gt;{@code level} - the {@linkplain java.util.logging.Level#getLocalizedName
+     log level}.&lt;/li&gt;
+ &lt;li&gt;{@code message} - the formatted log message
+     returned from the {@link java.util.logging.Formatter#formatMessage(LogRecord)}
+     method.  It uses {@link java.text.MessageFormat java.text}
+     formatting and does not use the {@code java.util.Formatter
+     format} argument.&lt;/li&gt;
+ &lt;li&gt;{@code thrown} - a string representing
+     the {@linkplain java.util.logging.LogRecord#getThrown throwable}
+     associated with the log record and its backtrace
+     beginning with a newline character, if any;
+     otherwise, an empty string.&lt;/li&gt;
+ &lt;/ol&gt;
+
+ &lt;p&gt;Some example formats:&lt;br&gt;
+ &lt;ul&gt;
+ &lt;li&gt; {@code java.util.logging.SimpleFormatter.format=&quot;%4$s: %5$s [%1$tc]%n&quot;}
+     &lt;p&gt;This prints 1 line with the log level ({@code 4$}),
+     the log message ({@code 5$}) and the timestamp ({@code 1$}) in
+     a square bracket.
+     &lt;pre&gt;
+     WARNING: warning message [Tue Mar 22 13:11:31 PDT 2011]
+     &lt;/pre&gt;&lt;/li&gt;
+ &lt;li&gt; {@code java.util.logging.SimpleFormatter.format=&quot;%1$tc %2$s%n%4$s: %5$s%6$s%n&quot;}
+     &lt;p&gt;This prints 2 lines where the first line includes
+     the timestamp ({@code 1$}) and the source ({@code 2$});
+     the second line includes the log level ({@code 4$}) and
+     the log message ({@code 5$}) followed with the throwable
+     and its backtrace ({@code 6$}), if any:
+     &lt;pre&gt;
+     Tue Mar 22 13:11:31 PDT 2011 MyClass fatal
+     SEVERE: several message with an exception
+     java.lang.IllegalArgumentException: invalid argument
+             at MyClass.mash(MyClass.java:9)
+             at MyClass.crunch(MyClass.java:6)
+             at MyClass.main(MyClass.java:3)
+     &lt;/pre&gt;&lt;/li&gt;
+ &lt;li&gt; {@code java.util.logging.SimpleFormatter.format=&quot;%1$tb %1$td, %1$tY %1$tl:%1$tM:%1$tS %1$Tp %2$s%n%4$s: %5$s%n&quot;}
+      &lt;p&gt;This prints 2 lines similar to the example above
+         with a different date/time formatting and does not print
+         the throwable and its backtrace:
+     &lt;pre&gt;
+     Mar 22, 2011 1:11:31 PM MyClass fatal
+     SEVERE: several message with an exception
+     &lt;/pre&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;This method can also be overridden in a subclass.
+ It is recommended to use the {@link java.util.logging.Formatter#formatMessage}
+ convenience method to localize and format the message field.
+@param {Object {LogRecord}} record the log record to be formatted.
+@return {String} a formatted log record
+*/
+format : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

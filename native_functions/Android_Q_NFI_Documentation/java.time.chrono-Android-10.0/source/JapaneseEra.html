@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-chrono-JapaneseEra'>/**@class java.time.chrono.JapaneseEra
+</span> implements java.time.chrono.Era
+
+ implements java.io.Serializable
+
+@extends java.lang.Object
+
+ An era in the Japanese Imperial calendar system.
+ &lt;p&gt;
+ The Japanese government defines the official name and start date of
+ each era. Eras are consecutive and their date ranges do not overlap,
+ so the end date of one era is always the day before the start date
+ of the next era.
+ &lt;p&gt;
+ The Java SE Platform supports all eras defined by the Japanese government,
+ beginning with the Meiji era. Each era is identified in the Platform by an
+ integer value and a name. The {@link #of}(int) and {@link #valueOf}(String)
+ methods may be used to obtain a singleton instance of JapaneseEra for each
+ era. The {@link #values}() method returns the singleton instances of all
+ supported eras.
+ &lt;p&gt;
+ For convenience, this class declares a number of public static final fields
+ that refer to singleton instances returned by the values() method.
+
+ @apiNote
+ The fields declared in this class may evolve over time, in line with the
+ results of the {@link #values}() method. However, there is not necessarily
+ a 1:1 correspondence between the fields and the singleton instances.
+
+ @apiNote
+ The Japanese government may announce a new era and define its start
+ date but not its official name. In this scenario, the singleton instance
+ that represents the new era may return a name that is not stable until
+ the official name is defined. Developers should exercise caution when
+ relying on the name returned by any singleton instance that does not
+ correspond to a public static final field.
+
+ @implSpec
+ This class is immutable and thread-safe.
+
+ @since 1.8
+*/
+var JapaneseEra = {
+
+<span id='java-time-chrono-JapaneseEra-property-MEIJI'>/** The singleton instance for the 'Meiji' era (1868-01-01 - 1912-07-29)
+</span> which has the value -1.
+*/
+MEIJI : &quot;null&quot;,
+<span id='java-time-chrono-JapaneseEra-property-TAISHO'>/** The singleton instance for the 'Taisho' era (1912-07-30 - 1926-12-24)
+</span> which has the value 0.
+*/
+TAISHO : &quot;null&quot;,
+<span id='java-time-chrono-JapaneseEra-property-SHOWA'>/** The singleton instance for the 'Showa' era (1926-12-25 - 1989-01-07)
+</span> which has the value 1.
+*/
+SHOWA : &quot;null&quot;,
+<span id='java-time-chrono-JapaneseEra-property-HEISEI'>/** The singleton instance for the 'Heisei' era (1989-01-08 - 2019-04-30)
+</span> which has the value 2.
+*/
+HEISEI : &quot;null&quot;,
+<span id='java-time-chrono-JapaneseEra-method-of'>/**Obtains an instance of {@code JapaneseEra} from an {@code int} value.
+</span> &lt;ul&gt;
+ &lt;li&gt;The value {@code 1} is associated with the 'Showa' era, because
+ it contains 1970-01-01 (ISO calendar system).&lt;/li&gt;
+ &lt;li&gt;The values {@code -1} and {@code 0} are associated with two earlier
+ eras, Meiji and Taisho, respectively.&lt;/li&gt;
+ &lt;li&gt;A value greater than {@code 1} is associated with a later era,
+ beginning with Heisei ({@code 2}).&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Every instance of {@code JapaneseEra} that is returned from the {@link #values}()
+ method has an int value (available via {@link java.time.chrono.Era#getValue()} which is
+ accepted by this method.
+@param {Number} japaneseEra  the era to represent
+@return {Object {java.time.chrono.JapaneseEra}} the {@code JapaneseEra} singleton, not null
+@throws DateTimeException if the value is invalid
+*/
+of : function(  ) {},
+
+<span id='java-time-chrono-JapaneseEra-method-valueOf'>/**Returns the {@code JapaneseEra} with the name.
+</span> &lt;p&gt;
+ The string must match exactly the name of the era.
+ (Extraneous whitespace characters are not permitted.)
+@param {String} japaneseEra  the japaneseEra name; non-null
+@return {Object {java.time.chrono.JapaneseEra}} the {@code JapaneseEra} singleton, never null
+@throws IllegalArgumentException if there is not JapaneseEra with the specified name
+*/
+valueOf : function(  ) {},
+
+<span id='java-time-chrono-JapaneseEra-method-values'>/**Returns an array of JapaneseEras.
+</span> &lt;p&gt;
+ This method may be used to iterate over the JapaneseEras as follows:
+ &lt;pre&gt;
+ for (JapaneseEra c : JapaneseEra.values())
+     System.out.println(c);
+ &lt;/pre&gt;
+@return {Object {java.time.chrono.JapaneseEra}} an array of JapaneseEras
+*/
+values : function(  ) {},
+
+<span id='java-time-chrono-JapaneseEra-method-getDisplayName'>/**{@inheritDoc}
+</span>@param {Object {TextStyle}} style {@inheritDoc}
+@param {Object {Locale}} locale {@inheritDoc}
+*/
+getDisplayName : function(  ) {},
+
+<span id='java-time-chrono-JapaneseEra-method-getValue'>/**Gets the numeric era {@code int} value.
+</span> &lt;p&gt;
+ The {@link #SHOWA} era that contains 1970-01-01 (ISO calendar system) has the value 1.
+ Later eras are numbered from 2 ({@link #HEISEI}).
+ Earlier eras are numbered 0 ({@link #TAISHO}), -1 ({@link #MEIJI})).
+@return {Number} the era value
+*/
+getValue : function(  ) {},
+
+<span id='java-time-chrono-JapaneseEra-method-range'>/**Gets the range of valid values for the specified field.
+</span> &lt;p&gt;
+ The range object expresses the minimum and maximum valid values for a field.
+ This era is used to enhance the accuracy of the returned range.
+ If it is not possible to return the range, because the field is not supported
+ or for some other reason, an exception is thrown.
+ &lt;p&gt;
+ If the field is a {@link ChronoField} then the query is implemented here.
+ The {@code ERA} field returns the range.
+ All other {@code ChronoField} instances will throw an {@code UnsupportedTemporalTypeException}.
+ &lt;p&gt;
+ If the field is not a {@code ChronoField}, then the result of this method
+ is obtained by invoking {@code TemporalField.rangeRefinedBy(TemporalAccessor)}
+ passing {@code this} as the argument.
+ Whether the range can be obtained is determined by the field.
+ &lt;p&gt;
+ The range of valid Japanese eras can change over time due to the nature
+ of the Japanese calendar system.
+@param {Object {TemporalField}} field  the field to query the range for, not null
+@return {Object {java.time.temporal.ValueRange}} the range of valid values for the field, not null
+@throws DateTimeException if the range for the field cannot be obtained
+@throws UnsupportedTemporalTypeException if the unit is not supported
+*/
+range : function(  ) {},
+
+<span id='java-time-chrono-JapaneseEra-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

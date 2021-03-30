@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-om-OverlayManagerService'>/**@class com.android.server.om.OverlayManagerService
+</span>@extends com.android.server.SystemService
+
+ Service to manage asset overlays.
+
+ &lt;p&gt;Asset overlays are additional resources that come from apks loaded
+ alongside the system and app apks. This service, the OverlayManagerService
+ (OMS), tracks which installed overlays to use and provides methods to change
+ this. Changes propagate to running applications as part of the Activity
+ lifecycle. This allows Activities to reread their resources at a well
+ defined point.&lt;/p&gt;
+
+ &lt;p&gt;By itself, the OMS will not change what overlays should be active.
+ Instead, it is only responsible for making sure that overlays *can* be used
+ from a technical and security point of view and to activate overlays in
+ response to external requests. The responsibility to toggle overlays on and
+ off lies within components that implement different use-cases such as themes
+ or dynamic customization.&lt;/p&gt;
+
+ &lt;p&gt;The OMS receives input from three sources:&lt;/p&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;Callbacks from the SystemService class, specifically when the
+     Android framework is booting and when the end user switches Android
+     users.&lt;/li&gt;
+
+     &lt;li&gt;Intents from the PackageManagerService (PMS). Overlays are regular
+     apks, and whenever a package is installed (or removed, or has a
+     component enabled or disabled), the PMS broadcasts this as an intent.
+     When the OMS receives one of these intents, it updates its internal
+     representation of the available overlays and, if there was a visible
+     change, triggers an asset refresh in the affected apps.&lt;/li&gt;
+
+     &lt;li&gt;External requests via the {@link IOverlayManager AIDL interface}.
+     The interface allows clients to read information about the currently
+     available overlays, change whether an overlay should be used or not, and
+     change the relative order in which overlay packages are loaded.
+     Read-access is granted if the request targets the same Android user as
+     the caller runs as, or if the caller holds the
+     INTERACT_ACROSS_USERS_FULL permission. Write-access is granted if the
+     caller is granted read-access and additionaly holds the
+     CHANGE_OVERLAY_PACKAGES permission.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The AIDL interface works with String package names, int user IDs, and
+ {@link OverlayInfo} objects. OverlayInfo instances are used to track a
+ specific pair of target and overlay packages and include information such as
+ the current state of the overlay. OverlayInfo objects are immutable.&lt;/p&gt;
+
+ &lt;p&gt;Internally, OverlayInfo objects are maintained by the
+ OverlayManagerSettings class. The OMS and its helper classes are notified of
+ changes to the settings by the OverlayManagerSettings.ChangeListener
+ callback interface. The file /data/system/overlays.xml is used to persist
+ the settings.&lt;/p&gt;
+
+ &lt;p&gt;Creation and deletion of idmap files are handled by the IdmapManager
+ class.&lt;/p&gt;
+
+ &lt;p&gt;The following is an overview of OMS and its related classes. Note how box
+ (2) does the heavy lifting, box (1) interacts with the Android framework,
+ and box (3) replaces box (1) during unit testing.&lt;/p&gt;
+
+ &lt;pre&gt;
+         Android framework
+            |         ^
+      . . . | . . . . | . . . .
+     .      |         |       .
+     .    AIDL,   broadcasts  .
+     .   intents      |       .
+     .      |         |       . . . . . . . . . . . .
+     .      v         |       .                     .
+     .  OverlayManagerService . OverlayManagerTests .
+     .                  \     .     /               .
+     . (1)               \    .    /            (3) .
+      . . . . . . . . . . \ . . . / . . . . . . . . .
+     .                     \     /              .
+     . (2)                  \   /               .
+     .           OverlayManagerServiceImpl      .
+     .                  |            |          .
+     .                  |            |          .
+     . OverlayManagerSettings     IdmapManager  .
+     .                                          .
+     . . . .  . . . . . . . . . . . . . . . . . .
+ &lt;/pre&gt;
+
+ &lt;p&gt;To test the OMS, execute:
+ &lt;code&gt;
+ atest FrameworksServicesTests:com.android.server.om  # internal tests
+ atest OverlayDeviceTests OverlayHostTests            # public API tests
+ &lt;/code&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;Finally, here is a list of keywords used in the OMS context.&lt;/p&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;&lt;b&gt;target [package]&lt;/b&gt; -- A regular apk that may have its resource
+     pool extended  by zero or more overlay packages.&lt;/li&gt;
+
+     &lt;li&gt;&lt;b&gt;overlay [package]&lt;/b&gt; -- An apk that provides additional
+     resources to another apk.&lt;/li&gt;
+
+     &lt;li&gt;&lt;b&gt;OMS&lt;/b&gt; -- The OverlayManagerService, i.e. this class.&lt;/li&gt;
+
+     &lt;li&gt;&lt;b&gt;approved&lt;/b&gt; -- An overlay is approved if the OMS has verified
+     that it can be used technically speaking (its target package is
+     installed, at least one resource name in both packages match, the
+     idmap was created, etc) and that it is secure to do so. External
+     clients can not change this state.&lt;/li&gt;
+
+     &lt;li&gt;&lt;b&gt;not approved&lt;/b&gt; -- The opposite of approved.&lt;/li&gt;
+
+     &lt;li&gt;&lt;b&gt;enabled&lt;/b&gt; -- An overlay currently in active use and thus part
+     of resource lookups. This requires the overlay to be approved. Only
+     external clients can change this state.&lt;/li&gt;
+
+     &lt;li&gt;&lt;b&gt;disabled&lt;/b&gt; -- The opposite of enabled.&lt;/li&gt;
+
+     &lt;li&gt;&lt;b&gt;idmap&lt;/b&gt; -- A mapping of resource IDs between target and overlay
+     used during resource lookup. Also the name of the binary that creates
+     the mapping.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+var OverlayManagerService = {
+
+<span id='com-android-server-om-OverlayManagerService-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='com-android-server-om-OverlayManagerService-method-onSwitchUser'>/**
+</span>*/
+onSwitchUser : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

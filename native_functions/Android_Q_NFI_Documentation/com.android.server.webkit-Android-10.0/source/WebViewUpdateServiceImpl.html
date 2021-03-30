@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-webkit-WebViewUpdateServiceImpl'>/**@class com.android.server.webkit.WebViewUpdateServiceImpl
+</span>@extends java.lang.Object
+
+ Implementation of the WebViewUpdateService.
+ This class doesn't depend on the android system like the actual Service does and can be used
+ directly by tests (as long as they implement a SystemInterface).
+
+ This class keeps track of and prepares the current WebView implementation, and needs to keep
+ track of a couple of different things such as what package is used as WebView implementation.
+
+ The public methods in this class are accessed from WebViewUpdateService either on the UI thread
+ or on one of multiple Binder threads. The WebView preparation code shares state between threads
+ meaning that code that chooses a new WebView implementation or checks which implementation is
+ being used needs to hold a lock.
+
+ The WebViewUpdateService can be accessed in a couple of different ways.
+ 1. It is started from the SystemServer at boot - at that point we just initiate some state such
+ as the WebView preparation class.
+ 2. The SystemServer calls WebViewUpdateService.prepareWebViewInSystemServer. This happens at boot
+ and the WebViewUpdateService should not have been accessed before this call. In this call we
+ migrate away from the old fallback logic if necessary and then choose WebView implementation for
+ the first time.
+ 3. The update service listens for Intents related to package installs and removals. These intents
+ are received and processed on the UI thread. Each intent can result in changing WebView
+ implementation.
+ 4. The update service can be reached through Binder calls which are handled on specific binder
+ threads. These calls can be made from any process. Generally they are used for changing WebView
+ implementation (from Settings), getting information about the current WebView implementation (for
+ loading WebView into an app process), or notifying the service about Relro creation being
+ completed.
+
+ @hide
+*/
+var WebViewUpdateServiceImpl = {
+
+
+};</pre>
+</body>
+</html>

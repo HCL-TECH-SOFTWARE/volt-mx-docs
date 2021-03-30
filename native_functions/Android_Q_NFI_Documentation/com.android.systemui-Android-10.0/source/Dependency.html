@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-Dependency'>/**@class com.android.systemui.Dependency
+</span>@extends com.android.systemui.SystemUI
+
+ Class to handle ugly dependencies throughout sysui until we determine the
+ long-term dependency injection solution.
+
+ Classes added here should be things that are expected to live the lifetime of sysui,
+ and are generally applicable to many parts of sysui. They will be lazily
+ initialized to ensure they aren't created on form factors that don't need them
+ (e.g. HotspotController on TV). Despite being lazily initialized, it is expected
+ that all dependencies will be gotten during sysui startup, and not during runtime
+ to avoid jank.
+
+ All classes used here are expected to manage their own lifecycle, meaning if
+ they have no clients they should not have any registered resources like bound
+ services, registered receivers, etc.
+*/
+var Dependency = {
+
+<span id='com-android-systemui-Dependency-property-BG_LOOPER_NAME'>/** Key for getting a background Looper for background work.
+</span>*/
+BG_LOOPER_NAME : &quot;background_looper&quot;,
+<span id='com-android-systemui-Dependency-property-BG_HANDLER_NAME'>/** Key for getting a background Handler for background work.
+</span>*/
+BG_HANDLER_NAME : &quot;background_handler&quot;,
+<span id='com-android-systemui-Dependency-property-TIME_TICK_HANDLER_NAME'>/** Key for getting a Handler for receiving time tick broadcasts on.
+</span>*/
+TIME_TICK_HANDLER_NAME : &quot;time_tick_handler&quot;,
+<span id='com-android-systemui-Dependency-property-MAIN_HANDLER_NAME'>/** Generic handler on the main thread.
+</span>*/
+MAIN_HANDLER_NAME : &quot;main_handler&quot;,
+<span id='com-android-systemui-Dependency-property-LEAK_REPORT_EMAIL_NAME'>/** An email address to send memory leak reports to by default.
+</span>*/
+LEAK_REPORT_EMAIL_NAME : &quot;leak_report_email&quot;,
+<span id='com-android-systemui-Dependency-property-ALLOW_NOTIFICATION_LONG_PRESS_NAME'>/** Whether this platform supports long-pressing notifications to show notification channel
+</span> settings.
+*/
+ALLOW_NOTIFICATION_LONG_PRESS_NAME : &quot;allow_notif_longpress&quot;,
+<span id='com-android-systemui-Dependency-property-BG_LOOPER'>/** Key for getting a background Looper for background work.
+</span>*/
+BG_LOOPER : &quot;null&quot;,
+<span id='com-android-systemui-Dependency-property-BG_HANDLER'>/** Key for getting a background Handler for background work.
+</span>*/
+BG_HANDLER : &quot;null&quot;,
+<span id='com-android-systemui-Dependency-property-TIME_TICK_HANDLER'>/** Key for getting a Handler for receiving time tick broadcasts on.
+</span>*/
+TIME_TICK_HANDLER : &quot;null&quot;,
+<span id='com-android-systemui-Dependency-property-MAIN_HANDLER'>/** Generic handler on the main thread.
+</span>*/
+MAIN_HANDLER : &quot;null&quot;,
+<span id='com-android-systemui-Dependency-property-LEAK_REPORT_EMAIL'>/** An email address to send memory leak reports to by default.
+</span>*/
+LEAK_REPORT_EMAIL : &quot;null&quot;,
+<span id='com-android-systemui-Dependency-method-start'>/**
+</span>*/
+start : function(  ) {},
+
+<span id='com-android-systemui-Dependency-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-systemui-Dependency-method-initDependencies'>/**Used in separate processes (like tuner settings) to init the dependencies.
+</span>*/
+initDependencies : function(  ) {},
+
+<span id='com-android-systemui-Dependency-method-clearDependencies'>/**Used in separate process teardown to ensure the context isn't leaked.
+</span>
+ TODO: Remove once PreferenceFragment doesn't reference getActivity()
+ anymore and these context hacks are no longer needed.
+*/
+clearDependencies : function(  ) {},
+
+<span id='com-android-systemui-Dependency-method-destroy'>/**Checks to see if a dependency is instantiated, if it is it removes it from
+</span> the cache and calls the destroy callback.
+*/
+destroy : function(  ) {},
+
+<span id='com-android-systemui-Dependency-method-get'>/**
+</span>@deprecated see docs/dagger.md
+*/
+get : function(  ) {},
+
+<span id='com-android-systemui-Dependency-method-get'>/**
+</span>@deprecated see docs/dagger.md
+*/
+get : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

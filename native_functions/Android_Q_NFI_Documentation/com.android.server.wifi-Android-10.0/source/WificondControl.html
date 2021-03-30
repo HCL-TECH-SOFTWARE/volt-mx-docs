@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WificondControl'>/**@class com.android.server.wifi.WificondControl
+</span> implements android.os.IBinder.DeathRecipient
+
+@extends java.lang.Object
+
+ This class provides methods for WifiNative to send control commands to wificond.
+ NOTE: This class should only be used from WifiNative.
+*/
+var WificondControl = {
+
+<span id='com-android-server-wifi-WificondControl-property-SEND_MGMT_FRAME_TIMEOUT_MS'>/** The {@link #sendMgmtFrame(String, byte[], com.android.server.wifi.WifiNative.SendMgmtFrameCallback, int) sendMgmtFrame()}
+</span> timeout, in milliseconds, after which
+ {@link com.android.server.wifi.WifiNative.SendMgmtFrameCallback#onFailure(int)} will be called with reason
+ {@link com.android.server.wifi.WifiNative#SEND_MGMT_FRAME_ERROR_TIMEOUT}.
+*/
+SEND_MGMT_FRAME_TIMEOUT_MS : &quot;1000&quot;,
+<span id='com-android-server-wifi-WificondControl-property-SCAN_TYPE_SINGLE_SCAN'>/***/
+</span>SCAN_TYPE_SINGLE_SCAN : &quot;0&quot;,
+<span id='com-android-server-wifi-WificondControl-property-SCAN_TYPE_PNO_SCAN'>/***/
+</span>SCAN_TYPE_PNO_SCAN : &quot;1&quot;,
+<span id='com-android-server-wifi-WificondControl-method-binderDied'>/**Called by the binder subsystem upon remote object death.
+</span> Invoke all the register death handlers and clear state.
+*/
+binderDied : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-enableVerboseLogging'>/**Enable or disable verbose logging of WificondControl.
+</span>@param {Boolean} enable True to enable verbose logging. False to disable verbose logging.
+*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-initialize'>/**Initializes wificond &amp; registers a death notification for wificond.
+</span> This method clears any existing state in wificond daemon.
+@return {Boolean} Returns true on success.
+*/
+initialize : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-setupInterfaceForClientMode'>/**Setup interface for client mode via wificond.
+</span>@return {Object {IClientInterface}} An IClientInterface as wificond client interface binder handler.
+ Returns null on failure.
+*/
+setupInterfaceForClientMode : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-tearDownClientInterface'>/**Teardown a specific STA interface configured in wificond.
+</span>@return {Boolean} Returns true on success.
+*/
+tearDownClientInterface : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-setupInterfaceForSoftApMode'>/**Setup interface for softAp mode via wificond.
+</span>@return {Object {IApInterface}} An IApInterface as wificond Ap interface binder handler.
+ Returns null on failure.
+*/
+setupInterfaceForSoftApMode : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-tearDownSoftApInterface'>/**Teardown a specific AP interface configured in wificond.
+</span>@return {Boolean} Returns true on success.
+*/
+tearDownSoftApInterface : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-tearDownInterfaces'>/**Teardown all interfaces configured in wificond.
+</span>@return {Boolean} Returns true on success.
+*/
+tearDownInterfaces : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-signalPoll'>/**Request signal polling to wificond.
+</span>@param {String} ifaceName Name of the interface.
+ Returns an SignalPollResult object.
+ Returns null on failure.
+*/
+signalPoll : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-getTxPacketCounters'>/**Fetch TX packet counters on current connection from wificond.
+</span>@param {String} ifaceName Name of the interface.
+ Returns an TxPacketCounters object.
+ Returns null on failure.
+*/
+getTxPacketCounters : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-getScanResults'>/**Fetch the latest scan result from kernel via wificond.
+</span>@param {String} ifaceName Name of the interface.
+@return {Object {java.util.ArrayList}} Returns an ArrayList of ScanDetail.
+ Returns an empty ArrayList on failure.
+*/
+getScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-scan'>/**Start a scan using wificond for the given parameters.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} scanType Type of scan to perform.
+@param {Object {java.util.Set}} freqs list of frequencies to scan for, if null scan all supported channels.
+@param {Object {java.util.List}} hiddenNetworkSSIDs List of hidden networks to be scanned for.
+@return {Boolean} Returns true on success.
+*/
+scan : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-startPnoScan'>/**Start PNO scan.
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {WifiNative.PnoSettings}} pnoSettings Pno scan configuration.
+@return {Boolean} true on success.
+*/
+startPnoScan : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-stopPnoScan'>/**Stop PNO scan.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true on success.
+*/
+stopPnoScan : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-abortScan'>/**Abort ongoing single scan.
+</span>@param {String} ifaceName Name of the interface.
+*/
+abortScan : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-getChannelsForBand'>/**Query the list of valid frequencies for the provided band.
+</span> The result depends on the on the country code that has been set.
+@param {Number} band as specified by one of the WifiScanner.WIFI_BAND_* constants.
+ The following bands are supported:
+ WifiScanner.WIFI_BAND_24_GHZ
+ WifiScanner.WIFI_BAND_5_GHZ
+ WifiScanner.WIFI_BAND_5_GHZ_DFS_ONLY
+@return {Number} frequencies vector of valid frequencies (MHz), or null for error.
+@throws IllegalArgumentException if band is not recognized.
+*/
+getChannelsForBand : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-registerApListener'>/**Register the provided listener for SoftAp events.
+</span>@param {String} ifaceName Name of the interface.
+@param {Object {WifiNative.SoftApListener}} listener Callback for AP events.
+@return {Boolean} true on success, false otherwise.
+*/
+registerApListener : function(  ) {},
+
+<span id='com-android-server-wifi-WificondControl-method-sendMgmtFrame'>/**See {@link WifiNative#sendMgmtFrame(String, byte[], com.android.server.wifi.WifiNative.SendMgmtFrameCallback, int)}
+</span>*/
+sendMgmtFrame : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

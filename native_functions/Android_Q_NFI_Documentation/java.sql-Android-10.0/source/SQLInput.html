@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-sql-SQLInput'>/**@class java.sql.SQLInput
+</span> An input stream that contains a stream of values representing an
+ instance of an SQL structured type or an SQL distinct type.
+ This interface, used only for custom mapping, is used by the driver
+ behind the scenes, and a programmer never directly invokes
+ &lt;code&gt;SQLInput&lt;/code&gt; methods. The &lt;i&gt;reader&lt;/i&gt; methods
+ (&lt;code&gt;readLong&lt;/code&gt;, &lt;code&gt;readBytes&lt;/code&gt;, and so on)
+ provide a way  for an implementation of the &lt;code&gt;SQLData&lt;/code&gt;
+  interface to read the values in an &lt;code&gt;SQLInput&lt;/code&gt; object.
+  And as described in &lt;code&gt;SQLData&lt;/code&gt;, calls to reader methods must
+ be made in the order that their corresponding attributes appear in the
+ SQL definition of the type.
+ The method &lt;code&gt;wasNull&lt;/code&gt; is used to determine whether
+ the last value read was SQL &lt;code&gt;NULL&lt;/code&gt;.
+ &lt;P&gt;When the method &lt;code&gt;getObject&lt;/code&gt; is called with an
+ object of a class implementing the interface &lt;code&gt;SQLData&lt;/code&gt;,
+ the JDBC driver calls the method &lt;code&gt;SQLData.getSQLType&lt;/code&gt;
+ to determine the SQL type of the user-defined type (UDT)
+ being custom mapped. The driver
+ creates an instance of &lt;code&gt;SQLInput&lt;/code&gt;, populating it with the
+ attributes of the UDT.  The driver then passes the input
+ stream to the method &lt;code&gt;SQLData.readSQL&lt;/code&gt;, which in turn
+ calls the &lt;code&gt;SQLInput&lt;/code&gt; reader methods
+ in its implementation for reading the
+ attributes from the input stream.
+ @since 1.2
+*/
+var SQLInput = {
+
+<span id='java-sql-SQLInput-method-readString'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;String&lt;/code&gt;
+</span> in the Java programming language.
+@return {String} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;null&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readString : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readBoolean'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;boolean&lt;/code&gt;
+</span> in the Java programming language.
+@return {Boolean} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;false&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readBoolean : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readByte'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;byte&lt;/code&gt;
+</span> in the Java programming language.
+@return {Number} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;0&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readByte : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readShort'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;short&lt;/code&gt;
+</span> in the Java programming language.
+@return {Number} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;0&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readShort : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readInt'>/**Reads the next attribute in the stream and returns it as an &lt;code&gt;int&lt;/code&gt;
+</span> in the Java programming language.
+@return {Number} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;0&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readInt : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readLong'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;long&lt;/code&gt;
+</span> in the Java programming language.
+@return {Number} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;0&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readLong : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readFloat'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;float&lt;/code&gt;
+</span> in the Java programming language.
+@return {Number} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;0&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readFloat : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readDouble'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;double&lt;/code&gt;
+</span> in the Java programming language.
+@return {Number} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;0&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readDouble : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readBigDecimal'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;java.math.BigDecimal&lt;/code&gt;
+</span> object in the Java programming language.
+@return {Object {java.math.BigDecimal}} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;null&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readBigDecimal : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readBytes'>/**Reads the next attribute in the stream and returns it as an array of bytes
+</span> in the Java programming language.
+@return {Number} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;null&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readBytes : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readDate'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;java.sql.Date&lt;/code&gt; object.
+</span>@return {Object {java.sql.Date}} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;null&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readDate : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readTime'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;java.sql.Time&lt;/code&gt; object.
+</span>@return {Object {java.sql.Time}} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;null&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readTime : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readTimestamp'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;java.sql.Timestamp&lt;/code&gt; object.
+</span>@return {Object {java.sql.Timestamp}} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;null&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readTimestamp : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readCharacterStream'>/**Reads the next attribute in the stream and returns it as a stream of Unicode characters.
+</span>@return {Object {java.io.Reader}} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;null&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readCharacterStream : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readAsciiStream'>/**Reads the next attribute in the stream and returns it as a stream of ASCII characters.
+</span>@return {Object {java.io.InputStream}} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;null&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readAsciiStream : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readBinaryStream'>/**Reads the next attribute in the stream and returns it as a stream of uninterpreted
+</span> bytes.
+@return {Object {java.io.InputStream}} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;null&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readBinaryStream : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readObject'>/**Reads the datum at the head of the stream and returns it as an
+</span> &lt;code&gt;Object&lt;/code&gt; in the Java programming language.  The
+ actual type of the object returned is determined by the default type
+ mapping, and any customizations present in this stream's type map.
+
+ &lt;P&gt;A type map is registered with the stream by the JDBC driver before the
+ stream is passed to the application.
+
+ &lt;P&gt;When the datum at the head of the stream is an SQL &lt;code&gt;NULL&lt;/code&gt;,
+ the method returns &lt;code&gt;null&lt;/code&gt;.  If the datum is an SQL structured or distinct
+ type, it determines the SQL type of the datum at the head of the stream.
+ If the stream's type map has an entry for that SQL type, the driver
+ constructs an object of the appropriate class and calls the method
+ &lt;code&gt;SQLData.readSQL&lt;/code&gt; on that object, which reads additional data from the
+ stream, using the protocol described for that method.
+@return {Object {java.lang.Object}} the datum at the head of the stream as an &lt;code&gt;Object&lt;/code&gt; in the
+ Java programming language;&lt;code&gt;null&lt;/code&gt; if the datum is SQL &lt;code&gt;NULL&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readObject : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readRef'>/**Reads an SQL &lt;code&gt;REF&lt;/code&gt; value from the stream and returns it as a
+</span> &lt;code&gt;Ref&lt;/code&gt; object in the Java programming language.
+@return {Object {java.sql.Ref}} a &lt;code&gt;Ref&lt;/code&gt; object representing the SQL &lt;code&gt;REF&lt;/code&gt; value
+ at the head of the stream; &lt;code&gt;null&lt;/code&gt; if the value read is
+ SQL &lt;code&gt;NULL&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readRef : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readBlob'>/**Reads an SQL &lt;code&gt;BLOB&lt;/code&gt; value from the stream and returns it as a
+</span> &lt;code&gt;Blob&lt;/code&gt; object in the Java programming language.
+@return {Object {java.sql.Blob}} a &lt;code&gt;Blob&lt;/code&gt; object representing data of the SQL &lt;code&gt;BLOB&lt;/code&gt; value
+ at the head of the stream; &lt;code&gt;null&lt;/code&gt; if the value read is
+ SQL &lt;code&gt;NULL&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readBlob : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readClob'>/**Reads an SQL &lt;code&gt;CLOB&lt;/code&gt; value from the stream and returns it as a
+</span> &lt;code&gt;Clob&lt;/code&gt; object in the Java programming language.
+@return {Object {java.sql.Clob}} a &lt;code&gt;Clob&lt;/code&gt; object representing data of the SQL &lt;code&gt;CLOB&lt;/code&gt; value
+ at the head of the stream; &lt;code&gt;null&lt;/code&gt; if the value read is
+ SQL &lt;code&gt;NULL&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readClob : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readArray'>/**Reads an SQL &lt;code&gt;ARRAY&lt;/code&gt; value from the stream and returns it as an
+</span> &lt;code&gt;Array&lt;/code&gt; object in the Java programming language.
+@return {Object {java.sql.Array}} an &lt;code&gt;Array&lt;/code&gt; object representing data of the SQL
+ &lt;code&gt;ARRAY&lt;/code&gt; value at the head of the stream; &lt;code&gt;null&lt;/code&gt;
+ if the value read is SQL &lt;code&gt;NULL&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+readArray : function(  ) {},
+
+<span id='java-sql-SQLInput-method-wasNull'>/**Retrieves whether the last value read was SQL &lt;code&gt;NULL&lt;/code&gt;.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if the most recently read SQL value was SQL
+ &lt;code&gt;NULL&lt;/code&gt;; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+wasNull : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readURL'>/**Reads an SQL &lt;code&gt;DATALINK&lt;/code&gt; value from the stream and returns it as a
+</span> &lt;code&gt;java.net.URL&lt;/code&gt; object in the Java programming language.
+@return {Object {java.net.URL}} a &lt;code&gt;java.net.URL&lt;/code&gt; object.
+@exception SQLException if a database access error occurs,
+            or if a URL is malformed
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.4
+*/
+readURL : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readNClob'>/**Reads an SQL &lt;code&gt;NCLOB&lt;/code&gt; value from the stream and returns it as a
+</span> &lt;code&gt;NClob&lt;/code&gt; object in the Java programming language.
+@return {Object {java.sql.NClob}} a &lt;code&gt;NClob&lt;/code&gt; object representing data of the SQL &lt;code&gt;NCLOB&lt;/code&gt; value
+ at the head of the stream; &lt;code&gt;null&lt;/code&gt; if the value read is
+ SQL &lt;code&gt;NULL&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.6
+*/
+readNClob : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readNString'>/**Reads the next attribute in the stream and returns it as a &lt;code&gt;String&lt;/code&gt;
+</span> in the Java programming language. It is intended for use when
+ accessing  &lt;code&gt;NCHAR&lt;/code&gt;,&lt;code&gt;NVARCHAR&lt;/code&gt;
+ and &lt;code&gt;LONGNVARCHAR&lt;/code&gt; columns.
+@return {String} the attribute; if the value is SQL &lt;code&gt;NULL&lt;/code&gt;, returns &lt;code&gt;null&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.6
+*/
+readNString : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readSQLXML'>/**Reads an SQL &lt;code&gt;XML&lt;/code&gt; value from the stream and returns it as a
+</span> &lt;code&gt;SQLXML&lt;/code&gt; object in the Java programming language.
+@return {Object {java.sql.SQLXML}} a &lt;code&gt;SQLXML&lt;/code&gt; object representing data of the SQL &lt;code&gt;XML&lt;/code&gt; value
+ at the head of the stream; &lt;code&gt;null&lt;/code&gt; if the value read is
+ SQL &lt;code&gt;NULL&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.6
+*/
+readSQLXML : function(  ) {},
+
+<span id='java-sql-SQLInput-method-readRowId'>/**Reads an SQL &lt;code&gt;ROWID&lt;/code&gt; value from the stream and returns it as a
+</span> &lt;code&gt;RowId&lt;/code&gt; object in the Java programming language.
+@return {Object {java.sql.RowId}} a &lt;code&gt;RowId&lt;/code&gt; object representing data of the SQL &lt;code&gt;ROWID&lt;/code&gt; value
+ at the head of the stream; &lt;code&gt;null&lt;/code&gt; if the value read is
+ SQL &lt;code&gt;NULL&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.6
+*/
+readRowId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

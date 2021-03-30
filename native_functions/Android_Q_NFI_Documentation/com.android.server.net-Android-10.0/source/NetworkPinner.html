@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-net-NetworkPinner'>/**@class com.android.server.net.NetworkPinner
+</span>@extends android.net.ConnectivityManager.NetworkCallback
+
+ A class that pins a process to the first network that satisfies a particular NetworkRequest.
+
+ We use this to maintain compatibility with pre-M apps that call WifiManager.enableNetwork()
+ to connect to a Wi-Fi network that has no Internet access, and then assume that they will be
+ able to use that network because it's the system default.
+
+ In order to maintain compatibility with apps that call setProcessDefaultNetwork themselves,
+ we try not to set the default network unless they have already done so, and we try not to
+ clear the default network unless we set it ourselves.
+
+ This should maintain behaviour that's compatible with L, which would pin the whole system to
+ any wifi network that was created via enableNetwork(..., true) until that network
+ disconnected.
+
+ Note that while this hack allows network traffic to flow, it is quite limited. For example:
+
+ 1. setProcessDefaultNetwork only affects this process, so:
+    - Any subprocesses spawned by this process will not be pinned to Wi-Fi.
+    - If this app relies on any other apps on the device also being on Wi-Fi, that won't work
+      either, because other apps on the device will not be pinned.
+ 2. The behaviour of other APIs is not modified. For example:
+    - getActiveNetworkInfo will return the system default network, not Wi-Fi.
+    - There will be no CONNECTIVITY_ACTION broadcasts about TYPE_WIFI.
+    - getProcessDefaultNetwork will not return null, so if any apps are relying on that, they
+      will be surprised as well.
+
+ This class is a per-process singleton because the process default network is a per-process
+ singleton.
+
+*/
+var NetworkPinner = {
+
+<span id='com-android-server-net-NetworkPinner-method-pin'>/**
+</span>*/
+pin : function(  ) {},
+
+<span id='com-android-server-net-NetworkPinner-method-unpin'>/**
+</span>*/
+unpin : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

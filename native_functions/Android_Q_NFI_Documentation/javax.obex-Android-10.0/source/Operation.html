@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-obex-Operation'>/**@class javax.obex.Operation
+</span> The &lt;code&gt;Operation&lt;/code&gt; interface provides ways to manipulate a single
+ OBEX PUT or GET operation. The implementation of this interface sends OBEX
+ packets as they are built. If during the operation the peer in the operation
+ ends the operation, an &lt;code&gt;IOException&lt;/code&gt; is thrown on the next read
+ from the input stream, write to the output stream, or call to
+ &lt;code&gt;sendHeaders()&lt;/code&gt;.
+ &lt;P&gt;
+ &lt;STRONG&gt;Definition of methods inherited from &lt;code&gt;ContentConnection&lt;/code&gt;
+ &lt;/STRONG&gt;
+ &lt;P&gt;
+ &lt;code&gt;getEncoding()&lt;/code&gt; will always return &lt;code&gt;null&lt;/code&gt;. &lt;BR&gt;
+ &lt;code&gt;getLength()&lt;/code&gt; will return the length specified by the OBEX Length
+ header or -1 if the OBEX Length header was not included. &lt;BR&gt;
+ &lt;code&gt;getType()&lt;/code&gt; will return the value specified in the OBEX Type
+ header or &lt;code&gt;null&lt;/code&gt; if the OBEX Type header was not included.&lt;BR&gt;
+ &lt;P&gt;
+ &lt;STRONG&gt;How Headers are Handled&lt;/STRONG&gt;
+ &lt;P&gt;
+ As headers are received, they may be retrieved through the
+ &lt;code&gt;getReceivedHeaders()&lt;/code&gt; method. If new headers are set during the
+ operation, the new headers will be sent during the next packet exchange.
+ &lt;P&gt;
+ &lt;STRONG&gt;PUT example&lt;/STRONG&gt;
+ &lt;P&gt;
+ &lt;PRE&gt;
+ void putObjectViaOBEX(ClientSession conn, HeaderSet head, byte[] obj) throws IOException {
+     // Include the length header
+     head.setHeader(head.LENGTH, new Long(obj.length));
+     // Initiate the PUT request
+     Operation op = conn.put(head);
+     // Open the output stream to put the object to it
+     DataOutputStream out = op.openDataOutputStream();
+     // Send the object to the server
+     out.write(obj);
+     // End the transaction
+     out.close();
+     op.close();
+ }
+ &lt;/PRE&gt;
+ &lt;P&gt;
+ &lt;STRONG&gt;GET example&lt;/STRONG&gt;
+ &lt;P&gt;
+ &lt;PRE&gt;
+ byte[] getObjectViaOBEX(ClientSession conn, HeaderSet head) throws IOException {
+     // Send the initial GET request to the server
+     Operation op = conn.get(head);
+     // Retrieve the length of the object being sent back
+     int length = op.getLength();
+     // Create space for the object
+     byte[] obj = new byte[length];
+     // Get the object from the input stream
+     DataInputStream in = trans.openDataInputStream();
+     in.read(obj);
+     // End the transaction
+     in.close();
+     op.close();
+     return obj;
+ }
+ &lt;/PRE&gt;
+
+ &lt;H3&gt;Client PUT Operation Flow&lt;/H3&gt; For PUT operations, a call to
+ &lt;code&gt;close()&lt;/code&gt; the &lt;code&gt;OutputStream&lt;/code&gt; returned from
+ &lt;code&gt;openOutputStream()&lt;/code&gt; or &lt;code&gt;openDataOutputStream()&lt;/code&gt; will
+ signal that the request is done. (In OBEX terms, the End-Of-Body header
+ should be sent and the final bit in the request will be set.) At this point,
+ the reply from the server may begin to be processed. A call to
+ &lt;code&gt;getResponseCode()&lt;/code&gt; will do an implicit close on the
+ &lt;code&gt;OutputStream&lt;/code&gt; and therefore signal that the request is done.
+ &lt;H3&gt;Client GET Operation Flow&lt;/H3&gt; For GET operation, a call to
+ &lt;code&gt;openInputStream()&lt;/code&gt; or &lt;code&gt;openDataInputStream()&lt;/code&gt; will
+ signal that the request is done. (In OBEX terms, the final bit in the request
+ will be set.) A call to &lt;code&gt;getResponseCode()&lt;/code&gt; will cause an implicit
+ close on the &lt;code&gt;InputStream&lt;/code&gt;. No further data may be read at this
+ point.
+ @hide
+*/
+var Operation = {
+
+<span id='javax-obex-Operation-method-abort'>/**Sends an ABORT message to the server. By calling this method, the
+</span> corresponding input and output streams will be closed along with this
+ object. No headers are sent in the abort request. This will end the
+ operation since &lt;code&gt;close()&lt;/code&gt; will be called by this method.
+@throws IOException if the transaction has already ended or if an OBEX
+         server calls this method
+*/
+abort : function(  ) {},
+
+<span id='javax-obex-Operation-method-getReceivedHeader'>/**Returns the headers that have been received during the operation.
+</span> Modifying the object returned has no effect on the headers that are sent
+ or retrieved.
+@return {Object {javax.obex.HeaderSet}} the headers received during this &lt;code&gt;Operation&lt;/code&gt;
+@throws IOException if this &lt;code&gt;Operation&lt;/code&gt; has been closed
+*/
+getReceivedHeader : function(  ) {},
+
+<span id='javax-obex-Operation-method-sendHeaders'>/**Specifies the headers that should be sent in the next OBEX message that
+</span> is sent.
+@param {Object {HeaderSet}} headers the headers to send in the next message
+@throws IOException if this &lt;code&gt;Operation&lt;/code&gt; has been closed or the
+         transaction has ended and no further messages will be exchanged
+@throws IllegalArgumentException if &lt;code&gt;headers&lt;/code&gt; was not created
+         by a call to &lt;code&gt;ServerRequestHandler.createHeaderSet()&lt;/code&gt;
+         or &lt;code&gt;ClientSession.createHeaderSet()&lt;/code&gt;
+@throws NullPointerException if &lt;code&gt;headers&lt;/code&gt; if &lt;code&gt;null&lt;/code&gt;
+*/
+sendHeaders : function(  ) {},
+
+<span id='javax-obex-Operation-method-getResponseCode'>/**Returns the response code received from the server. Response codes are
+</span> defined in the &lt;code&gt;ResponseCodes&lt;/code&gt; class.
+@see ResponseCodes
+@return {Number} the response code retrieved from the server
+@throws IOException if an error occurred in the transport layer during
+         the transaction; if this object was created by an OBEX server
+*/
+getResponseCode : function(  ) {},
+
+<span id='javax-obex-Operation-method-getEncoding'>/**
+</span>*/
+getEncoding : function(  ) {},
+
+<span id='javax-obex-Operation-method-getLength'>/**
+</span>*/
+getLength : function(  ) {},
+
+<span id='javax-obex-Operation-method-getHeaderLength'>/**
+</span>*/
+getHeaderLength : function(  ) {},
+
+<span id='javax-obex-Operation-method-getType'>/**
+</span>*/
+getType : function(  ) {},
+
+<span id='javax-obex-Operation-method-openInputStream'>/**
+</span>*/
+openInputStream : function(  ) {},
+
+<span id='javax-obex-Operation-method-openDataInputStream'>/**
+</span>*/
+openDataInputStream : function(  ) {},
+
+<span id='javax-obex-Operation-method-openOutputStream'>/**
+</span>*/
+openOutputStream : function(  ) {},
+
+<span id='javax-obex-Operation-method-openDataOutputStream'>/**
+</span>*/
+openDataOutputStream : function(  ) {},
+
+<span id='javax-obex-Operation-method-close'>/**
+</span>*/
+close : function(  ) {},
+
+<span id='javax-obex-Operation-method-getMaxPacketSize'>/**
+</span>*/
+getMaxPacketSize : function(  ) {},
+
+<span id='javax-obex-Operation-method-noBodyHeader'>/**
+</span>*/
+noBodyHeader : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

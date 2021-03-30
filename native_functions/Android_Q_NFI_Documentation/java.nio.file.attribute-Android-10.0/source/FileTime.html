@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-file-attribute-FileTime'>/**@class java.nio.file.attribute.FileTime
+</span> implements java.lang.Comparable
+
+@extends java.lang.Object
+
+ Represents the value of a file's time stamp attribute. For example, it may
+ represent the time that the file was last
+ {@link java.nio.file.attribute.BasicFileAttributes#lastModifiedTime() modified},
+ {@link java.nio.file.attribute.BasicFileAttributes#lastAccessTime() accessed},
+ or {@link java.nio.file.attribute.BasicFileAttributes#creationTime() created}.
+
+ &lt;p&gt; Instances of this class are immutable.
+
+ @since 1.7
+ @see java.nio.file.Files#setLastModifiedTime
+ @see java.nio.file.Files#getLastModifiedTime
+*/
+var FileTime = {
+
+<span id='java-nio-file-attribute-FileTime-method-from'>/**Returns a {@code FileTime} representing a value at the given unit of
+</span> granularity.
+@param {Number} value
+          the value since the epoch (1970-01-01T00:00:00Z); can be
+          negative
+@param {Object {TimeUnit}} unit
+          the unit of granularity to interpret the value
+@return {Object {java.nio.file.attribute.FileTime}} a {@code FileTime} representing the given value
+*/
+from : function(  ) {},
+
+<span id='java-nio-file-attribute-FileTime-method-fromMillis'>/**Returns a {@code FileTime} representing the given value in milliseconds.
+</span>@param {Number} value
+          the value, in milliseconds, since the epoch
+          (1970-01-01T00:00:00Z); can be negative
+@return {Object {java.nio.file.attribute.FileTime}} a {@code FileTime} representing the given value
+*/
+fromMillis : function(  ) {},
+
+<span id='java-nio-file-attribute-FileTime-method-from'>/**Returns a {@code FileTime} representing the same point of time value
+</span> on the time-line as the provided {@code Instant} object.
+@param {Object {Instant}} instant
+          the instant to convert
+@return {Object {java.nio.file.attribute.FileTime}} a {@code FileTime} representing the same point on the time-line
+          as the provided instant
+@since 1.8
+*/
+from : function(  ) {},
+
+<span id='java-nio-file-attribute-FileTime-method-to'>/**Returns the value at the given unit of granularity.
+</span>
+ &lt;p&gt; Conversion from a coarser granularity that would numerically overflow
+ saturate to {@code Long.MIN_VALUE} if negative or {@code Long.MAX_VALUE}
+ if positive.
+@param {Object {TimeUnit}} unit
+          the unit of granularity for the return value
+@return {Number} value in the given unit of granularity, since the epoch
+          since the epoch (1970-01-01T00:00:00Z); can be negative
+*/
+to : function(  ) {},
+
+<span id='java-nio-file-attribute-FileTime-method-toMillis'>/**Returns the value in milliseconds.
+</span>
+ &lt;p&gt; Conversion from a coarser granularity that would numerically overflow
+ saturate to {@code Long.MIN_VALUE} if negative or {@code Long.MAX_VALUE}
+ if positive.
+@return {Number} the value in milliseconds, since the epoch (1970-01-01T00:00:00Z)
+*/
+toMillis : function(  ) {},
+
+<span id='java-nio-file-attribute-FileTime-method-toInstant'>/**Converts this {@code FileTime} object to an {@code Instant}.
+</span>
+ &lt;p&gt; The conversion creates an {@code Instant} that represents the
+ same point on the time-line as this {@code FileTime}.
+
+ &lt;p&gt; {@code FileTime} can store points on the time-line further in the
+ future and further in the past than {@code Instant}. Conversion
+ from such further time points saturates to {@link Instant#MIN} if
+ earlier than {@code Instant.MIN} or {@link Instant#MAX} if later
+ than {@code Instant.MAX}.
+@return {Object {java.time.Instant}} an instant representing the same point on the time-line as
+          this {@code FileTime} object
+@since 1.8
+*/
+toInstant : function(  ) {},
+
+<span id='java-nio-file-attribute-FileTime-method-equals'>/**Tests this {@code FileTime} for equality with the given object.
+</span>
+ &lt;p&gt; The result is {@code true} if and only if the argument is not {@code
+ null} and is a {@code FileTime} that represents the same time. This
+ method satisfies the general contract of the {@code Object.equals} method.
+@param {Object {Object}} obj
+          the object to compare with
+@return {Boolean} {@code true} if, and only if, the given object is a {@code
+          FileTime} that represents the same time
+*/
+equals : function(  ) {},
+
+<span id='java-nio-file-attribute-FileTime-method-hashCode'>/**Computes a hash code for this file time.
+</span>
+ &lt;p&gt; The hash code is based upon the value represented, and satisfies the
+ general contract of the {@link Object#hashCode} method.
+@return {Number} the hash-code value
+*/
+hashCode : function(  ) {},
+
+<span id='java-nio-file-attribute-FileTime-method-compareTo'>/**Compares the value of two {@code FileTime} objects for order.
+</span>@param {Object {FileTime}} other
+          the other {@code FileTime} to be compared
+@return {Number} {@code 0} if this {@code FileTime} is equal to {@code other}, a
+          value less than 0 if this {@code FileTime} represents a time
+          that is before {@code other}, and a value greater than 0 if this
+          {@code FileTime} represents a time that is after {@code other}
+*/
+compareTo : function(  ) {},
+
+<span id='java-nio-file-attribute-FileTime-method-toString'>/**Returns the string representation of this {@code FileTime}. The string
+</span> is returned in the &lt;a
+ href=&quot;http://www.w3.org/TR/NOTE-datetime&quot;&gt;ISO&amp;nbsp;8601&lt;/a&gt; format:
+ &lt;pre&gt;
+     YYYY-MM-DDThh:mm:ss[.s+]Z
+ &lt;/pre&gt;
+ where &quot;{@code [.s+]}&quot; represents a dot followed by one of more digits
+ for the decimal fraction of a second. It is only present when the decimal
+ fraction of a second is not zero. For example, {@code
+ FileTime.fromMillis(1234567890000L).toString()} yields {@code
+ &quot;2009-02-13T23:31:30Z&quot;}, and {@code FileTime.fromMillis(1234567890123L).toString()}
+ yields {@code &quot;2009-02-13T23:31:30.123Z&quot;}.
+
+ &lt;p&gt; A {@code FileTime} is primarily intended to represent the value of a
+ file's time stamp. Where used to represent &lt;i&gt;extreme values&lt;/i&gt;, where
+ the year is less than &quot;{@code 0001}&quot; or greater than &quot;{@code 9999}&quot; then
+ this method deviates from ISO 8601 in the same manner as the
+ &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#deviantformats&quot;&gt;XML Schema
+ language&lt;/a&gt;. That is, the year may be expanded to more than four digits
+ and may be negative-signed. If more than four digits then leading zeros
+ are not present. The year before &quot;{@code 0001}&quot; is &quot;{@code -0001}&quot;.
+@return {String} the string representation of this file time
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

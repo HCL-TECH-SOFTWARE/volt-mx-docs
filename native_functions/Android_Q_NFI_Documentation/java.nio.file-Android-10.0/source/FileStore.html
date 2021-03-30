@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-file-FileStore'>/**@class java.nio.file.FileStore
+</span>@extends java.lang.Object
+
+ Storage for files. A {@code FileStore} represents a storage pool, device,
+ partition, volume, concrete file system or other implementation specific means
+ of file storage. The {@code FileStore} for where a file is stored is obtained
+ by invoking the {@link java.nio.file.Files#getFileStore getFileStore} method, or all file
+ stores can be enumerated by invoking the {@link java.nio.file.FileSystem#getFileStores
+ getFileStores} method.
+
+ &lt;p&gt; In addition to the methods defined by this class, a file store may support
+ one or more {@link java.nio.file.FileStoreAttributeView java.nio.file.FileStoreAttributeView} classes
+ that provide a read-only or updatable view of a set of file store attributes.
+
+ @since 1.7
+*/
+var FileStore = {
+
+<span id='java-nio-file-FileStore-method-name'>/**Returns the name of this file store. The format of the name is highly
+</span> implementation specific. It will typically be the name of the storage
+ pool or volume.
+
+ &lt;p&gt; The string returned by this method may differ from the string
+ returned by the {@link Object#toString() toString} method.
+@return {String} the name of this file store
+*/
+name : function(  ) {},
+
+<span id='java-nio-file-FileStore-method-type'>/**Returns the &lt;em&gt;type&lt;/em&gt; of this file store. The format of the string
+</span> returned by this method is highly implementation specific. It may
+ indicate, for example, the format used or if the file store is local
+ or remote.
+@return {String} a string representing the type of this file store
+*/
+type : function(  ) {},
+
+<span id='java-nio-file-FileStore-method-isReadOnly'>/**Tells whether this file store is read-only. A file store is read-only if
+</span> it does not support write operations or other changes to files. Any
+ attempt to create a file, open an existing file for writing etc. causes
+ an {@code IOException} to be thrown.
+@return {Boolean} {@code true} if, and only if, this file store is read-only
+*/
+isReadOnly : function(  ) {},
+
+<span id='java-nio-file-FileStore-method-getTotalSpace'>/**Returns the size, in bytes, of the file store.
+</span>@return {Number} the size of the file store, in bytes
+@throws IOException
+          if an I/O error occurs
+*/
+getTotalSpace : function(  ) {},
+
+<span id='java-nio-file-FileStore-method-getUsableSpace'>/**Returns the number of bytes available to this Java virtual machine on the
+</span> file store.
+
+ &lt;p&gt; The returned number of available bytes is a hint, but not a
+ guarantee, that it is possible to use most or any of these bytes.  The
+ number of usable bytes is most likely to be accurate immediately
+ after the space attributes are obtained. It is likely to be made inaccurate
+ by any external I/O operations including those made on the system outside
+ of this Java virtual machine.
+@return {Number} the number of bytes available
+@throws IOException
+          if an I/O error occurs
+*/
+getUsableSpace : function(  ) {},
+
+<span id='java-nio-file-FileStore-method-getUnallocatedSpace'>/**Returns the number of unallocated bytes in the file store.
+</span>
+ &lt;p&gt; The returned number of unallocated bytes is a hint, but not a
+ guarantee, that it is possible to use most or any of these bytes.  The
+ number of unallocated bytes is most likely to be accurate immediately
+ after the space attributes are obtained. It is likely to be
+ made inaccurate by any external I/O operations including those made on
+ the system outside of this virtual machine.
+@return {Number} the number of unallocated bytes
+@throws IOException
+          if an I/O error occurs
+*/
+getUnallocatedSpace : function(  ) {},
+
+<span id='java-nio-file-FileStore-method-supportsFileAttributeView'>/**Tells whether or not this file store supports the file attributes
+</span> identified by the given file attribute view.
+
+ &lt;p&gt; Invoking this method to test if the file store supports {@link BasicFileAttributeView} will always return {@code true}. In the case of
+ the default provider, this method cannot guarantee to give the correct
+ result when the file store is not a local storage device. The reasons for
+ this are implementation specific and therefore unspecified.
+@param {Object {java.lang.Class}} type
+          the file attribute view type
+@return {Boolean} {@code true} if, and only if, the file attribute view is
+          supported
+*/
+supportsFileAttributeView : function(  ) {},
+
+<span id='java-nio-file-FileStore-method-supportsFileAttributeView'>/**Tells whether or not this file store supports the file attributes
+</span> identified by the given file attribute view.
+
+ &lt;p&gt; Invoking this method to test if the file store supports {@link BasicFileAttributeView}, identified by the name &quot;{@code basic}&quot; will
+ always return {@code true}. In the case of the default provider, this
+ method cannot guarantee to give the correct result when the file store is
+ not a local storage device. The reasons for this are implementation
+ specific and therefore unspecified.
+@param {String} name
+          the {@link FileAttributeView#name name} of file attribute view
+@return {Boolean} {@code true} if, and only if, the file attribute view is
+          supported
+*/
+supportsFileAttributeView : function(  ) {},
+
+<span id='java-nio-file-FileStore-method-getFileStoreAttributeView'>/**Returns a {@code FileStoreAttributeView} of the given type.
+</span>
+ &lt;p&gt; This method is intended to be used where the file store attribute
+ view defines type-safe methods to read or update the file store attributes.
+ The {@code type} parameter is the type of the attribute view required and
+ the method returns an instance of that type if supported.
+@param {Object {java.lang.Class}} type
+          the {@code Class} object corresponding to the attribute view
+@param type
+          the {@code Class} object corresponding to the attribute view
+@return {Object {java.nio.file.attribute.FileStoreAttributeView}} a file store attribute view of the specified type or
+          {@code null} if the attribute view is not available
+*/
+getFileStoreAttributeView : function(  ) {},
+
+<span id='java-nio-file-FileStore-method-getAttribute'>/**Reads the value of a file store attribute.
+</span>
+ &lt;p&gt; The {@code attribute} parameter identifies the attribute to be read
+ and takes the form:
+ &lt;blockquote&gt;
+ &lt;i&gt;view-name&lt;/i&gt;&lt;b&gt;:&lt;/b&gt;&lt;i&gt;attribute-name&lt;/i&gt;
+ &lt;/blockquote&gt;
+ where the character {@code ':'} stands for itself.
+
+ &lt;p&gt; &lt;i&gt;view-name&lt;/i&gt; is the {@link java.nio.file.FileStoreAttributeView#name name} of
+ a {@link java.nio.file.FileStore AttributeView} that identifies a set of file attributes.
+ &lt;i&gt;attribute-name&lt;/i&gt; is the name of the attribute.
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ Suppose we want to know if ZFS compression is enabled (assuming the &quot;zfs&quot;
+ view is supported):
+ &lt;pre&gt;
+    boolean compression = (Boolean)fs.getAttribute(&quot;zfs:compression&quot;);
+ &lt;/pre&gt;
+@param {String} attribute
+          the attribute to read
+@return {Object {java.lang.Object}} the attribute value; {@code null} may be a valid valid for some
+          attributes
+@throws UnsupportedOperationException
+          if the attribute view is not available or it does not support
+          reading the attribute
+@throws IOException
+          if an I/O error occurs
+*/
+getAttribute : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

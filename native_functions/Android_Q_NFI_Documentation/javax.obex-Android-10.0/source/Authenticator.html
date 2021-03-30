@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-obex-Authenticator'>/**@class javax.obex.Authenticator
+</span> This interface provides a way to respond to authentication challenge and
+ authentication response headers. When a client or server receives an
+ authentication challenge or authentication response header, the
+ &lt;code&gt;onAuthenticationChallenge()&lt;/code&gt; or
+ &lt;code&gt;onAuthenticationResponse()&lt;/code&gt; will be called, respectively, by the
+ implementation.
+ &lt;P&gt;
+ For more information on how the authentication procedure works in OBEX,
+ please review the IrOBEX specification at &lt;A
+ HREF=&quot;http://www.irda.org&quot;&gt;http://www.irda.org&lt;/A&gt;.
+ &lt;P&gt;
+ &lt;STRONG&gt;Authentication Challenges&lt;/STRONG&gt;
+ &lt;P&gt;
+ When a client or server receives an authentication challenge header, the
+ &lt;code&gt;onAuthenticationChallenge()&lt;/code&gt; method will be invoked by the OBEX
+ API implementation. The application will then return the user name (if
+ needed) and password via a &lt;code&gt;PasswordAuthentication&lt;/code&gt; object. The
+ password in this object is not sent in the authentication response. Instead,
+ the 16-byte challenge received in the authentication challenge is combined
+ with the password returned from the &lt;code&gt;onAuthenticationChallenge()&lt;/code&gt;
+ method and passed through the MD5 hash algorithm. The resulting value is sent
+ in the authentication response along with the user name if it was provided.
+ &lt;P&gt;
+ &lt;STRONG&gt;Authentication Responses&lt;/STRONG&gt;
+ &lt;P&gt;
+ When a client or server receives an authentication response header, the
+ &lt;code&gt;onAuthenticationResponse()&lt;/code&gt; method is invoked by the API
+ implementation with the user name received in the authentication response
+ header. (The user name will be &lt;code&gt;null&lt;/code&gt; if no user name was provided
+ in the authentication response header.) The application must determine the
+ correct password. This value should be returned from the
+ &lt;code&gt;onAuthenticationResponse()&lt;/code&gt; method. If the authentication request
+ should fail without the implementation checking the password,
+ &lt;code&gt;null&lt;/code&gt; should be returned by the application. (This is needed for
+ reasons like not recognizing the user name, etc.) If the returned value is
+ not &lt;code&gt;null&lt;/code&gt;, the OBEX API implementation will combine the password
+ returned from the &lt;code&gt;onAuthenticationResponse()&lt;/code&gt; method and
+ challenge sent via the authentication challenge, apply the MD5 hash
+ algorithm, and compare the result to the response hash received in the
+ authentication response header. If the values are not equal, an
+ &lt;code&gt;IOException&lt;/code&gt; will be thrown if the client requested
+ authentication. If the server requested authentication, the
+ &lt;code&gt;onAuthenticationFailure()&lt;/code&gt; method will be called on the
+ &lt;code&gt;ServerRequestHandler&lt;/code&gt; that failed authentication. The connection
+ is &lt;B&gt;not&lt;/B&gt; closed if authentication failed.
+ @hide
+*/
+var Authenticator = {
+
+<span id='javax-obex-Authenticator-method-onAuthenticationChallenge'>/**Called when a client or a server receives an authentication challenge
+</span> header. It should respond to the challenge with a
+ &lt;code&gt;PasswordAuthentication&lt;/code&gt; that contains the correct user name
+ and password for the challenge.
+@param {String} description the description of which user name and password should
+        be used; if no description is provided in the authentication
+        challenge or the description is encoded in an encoding scheme that
+        is not supported, an empty string will be provided
+@param {Boolean} isUserIdRequired &lt;code&gt;true&lt;/code&gt; if the user ID is required;
+        &lt;code&gt;false&lt;/code&gt; if the user ID is not required
+@param {Boolean} isFullAccess &lt;code&gt;true&lt;/code&gt; if full access to the server will
+        be granted; &lt;code&gt;false&lt;/code&gt; if read only access will be granted
+@return {Object {javax.obex.PasswordAuthentication}} a &lt;code&gt;PasswordAuthentication&lt;/code&gt; object containing the user
+         name and password used for authentication
+*/
+onAuthenticationChallenge : function(  ) {},
+
+<span id='javax-obex-Authenticator-method-onAuthenticationResponse'>/**Called when a client or server receives an authentication response
+</span> header. This method will provide the user name and expect the correct
+ password to be returned.
+@param {Object {byte[]}} userName the user name provided in the authentication response; may
+        be &lt;code&gt;null&lt;/code&gt;
+@return {Number} the correct password for the user name provided; if
+         &lt;code&gt;null&lt;/code&gt; is returned then the authentication request
+         failed
+*/
+onAuthenticationResponse : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

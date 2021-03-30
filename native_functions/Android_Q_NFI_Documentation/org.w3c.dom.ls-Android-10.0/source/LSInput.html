@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-w3c-dom-ls-LSInput'>/**@class org.w3c.dom.ls.LSInput
+</span>  This interface represents an input source for data.
+ &lt;p&gt; This interface allows an application to encapsulate information about
+ an input source in a single object, which may include a public
+ identifier, a system identifier, a byte stream (possibly with a specified
+ encoding), a base URI, and/or a character stream.
+ &lt;p&gt; The exact definitions of a byte stream and a character stream are
+ binding dependent.
+ &lt;p&gt; The application is expected to provide objects that implement this
+ interface whenever such objects are needed. The application can either
+ provide its own objects that implement this interface, or it can use the
+ generic factory method &lt;code&gt;DOMImplementationLS.createLSInput()&lt;/code&gt;
+ to create objects that implement this interface.
+ &lt;p&gt; The &lt;code&gt;LSParser&lt;/code&gt; will use the &lt;code&gt;LSInput&lt;/code&gt; object to
+ determine how to read data. The &lt;code&gt;LSParser&lt;/code&gt; will look at the
+ different inputs specified in the &lt;code&gt;LSInput&lt;/code&gt; in the following
+ order to know which one to read from, the first one that is not null and
+ not an empty string will be used:
+ &lt;ol&gt;
+ &lt;li&gt; &lt;code&gt;LSInput.characterStream&lt;/code&gt;
+ &lt;/li&gt;
+ &lt;li&gt;
+ &lt;code&gt;LSInput.byteStream&lt;/code&gt;
+ &lt;/li&gt;
+ &lt;li&gt; &lt;code&gt;LSInput.stringData&lt;/code&gt;
+ &lt;/li&gt;
+ &lt;li&gt;
+ &lt;code&gt;LSInput.systemId&lt;/code&gt;
+ &lt;/li&gt;
+ &lt;li&gt; &lt;code&gt;LSInput.publicId&lt;/code&gt;
+ &lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;p&gt; If all inputs are null, the &lt;code&gt;LSParser&lt;/code&gt; will report a
+ &lt;code&gt;DOMError&lt;/code&gt; with its &lt;code&gt;DOMError.type&lt;/code&gt; set to
+ &lt;code&gt;&quot;no-input-specified&quot;&lt;/code&gt; and its &lt;code&gt;DOMError.severity&lt;/code&gt;
+ set to &lt;code&gt;DOMError.SEVERITY_FATAL_ERROR&lt;/code&gt;.
+ &lt;p&gt; &lt;code&gt;LSInput&lt;/code&gt; objects belong to the application. The DOM
+ implementation will never modify them (though it may make copies and
+ modify the copies, if necessary).
+ &lt;p&gt;See also the &lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407'&gt;Document Object Model (DOM) Level 3 Load
+and Save Specification&lt;/a&gt;.
+*/
+var LSInput = {
+
+<span id='org-w3c-dom-ls-LSInput-method-getCharacterStream'>/**An attribute of a language and binding dependent type that represents
+</span> a stream of 16-bit units. The application must encode the stream
+ using UTF-16 (defined in [Unicode] and in [ISO/IEC 10646]). It is not a requirement to have an XML declaration when
+ using character streams. If an XML declaration is present, the value
+ of the encoding attribute will be ignored.
+*/
+getCharacterStream : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-setCharacterStream'>/**An attribute of a language and binding dependent type that represents
+</span> a stream of 16-bit units. The application must encode the stream
+ using UTF-16 (defined in [Unicode] and in [ISO/IEC 10646]). It is not a requirement to have an XML declaration when
+ using character streams. If an XML declaration is present, the value
+ of the encoding attribute will be ignored.
+*/
+setCharacterStream : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-getByteStream'>/**An attribute of a language and binding dependent type that represents
+</span> a stream of bytes.
+ &lt;br&gt; If the application knows the character encoding of the byte
+ stream, it should set the encoding attribute. Setting the encoding in
+ this way will override any encoding specified in an XML declaration
+ in the data.
+*/
+getByteStream : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-setByteStream'>/**An attribute of a language and binding dependent type that represents
+</span> a stream of bytes.
+ &lt;br&gt; If the application knows the character encoding of the byte
+ stream, it should set the encoding attribute. Setting the encoding in
+ this way will override any encoding specified in an XML declaration
+ in the data.
+*/
+setByteStream : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-getStringData'>/**String data to parse. If provided, this will always be treated as a
+</span> sequence of 16-bit units (UTF-16 encoded characters). It is not a
+ requirement to have an XML declaration when using
+ &lt;code&gt;stringData&lt;/code&gt;. If an XML declaration is present, the value
+ of the encoding attribute will be ignored.
+*/
+getStringData : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-setStringData'>/**String data to parse. If provided, this will always be treated as a
+</span> sequence of 16-bit units (UTF-16 encoded characters). It is not a
+ requirement to have an XML declaration when using
+ &lt;code&gt;stringData&lt;/code&gt;. If an XML declaration is present, the value
+ of the encoding attribute will be ignored.
+*/
+setStringData : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-getSystemId'>/**The system identifier, a URI reference [&lt;a href='http://www.ietf.org/rfc/rfc2396.txt'&gt;IETF RFC 2396&lt;/a&gt;], for this
+</span> input source. The system identifier is optional if there is a byte
+ stream, a character stream, or string data. It is still useful to
+ provide one, since the application will use it to resolve any
+ relative URIs and can include it in error messages and warnings. (The
+ LSParser will only attempt to fetch the resource identified by the
+ URI reference if there is no other input available in the input
+ source.)
+ &lt;br&gt; If the application knows the character encoding of the object
+ pointed to by the system identifier, it can set the encoding using
+ the &lt;code&gt;encoding&lt;/code&gt; attribute.
+ &lt;br&gt; If the specified system ID is a relative URI reference (see
+ section 5 in [&lt;a href='http://www.ietf.org/rfc/rfc2396.txt'&gt;IETF RFC 2396&lt;/a&gt;]), the DOM
+ implementation will attempt to resolve the relative URI with the
+ &lt;code&gt;baseURI&lt;/code&gt; as the base, if that fails, the behavior is
+ implementation dependent.
+*/
+getSystemId : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-setSystemId'>/**The system identifier, a URI reference [&lt;a href='http://www.ietf.org/rfc/rfc2396.txt'&gt;IETF RFC 2396&lt;/a&gt;], for this
+</span> input source. The system identifier is optional if there is a byte
+ stream, a character stream, or string data. It is still useful to
+ provide one, since the application will use it to resolve any
+ relative URIs and can include it in error messages and warnings. (The
+ LSParser will only attempt to fetch the resource identified by the
+ URI reference if there is no other input available in the input
+ source.)
+ &lt;br&gt; If the application knows the character encoding of the object
+ pointed to by the system identifier, it can set the encoding using
+ the &lt;code&gt;encoding&lt;/code&gt; attribute.
+ &lt;br&gt; If the specified system ID is a relative URI reference (see
+ section 5 in [&lt;a href='http://www.ietf.org/rfc/rfc2396.txt'&gt;IETF RFC 2396&lt;/a&gt;]), the DOM
+ implementation will attempt to resolve the relative URI with the
+ &lt;code&gt;baseURI&lt;/code&gt; as the base, if that fails, the behavior is
+ implementation dependent.
+*/
+setSystemId : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-getPublicId'>/**The public identifier for this input source. This may be mapped to an
+</span> input source using an implementation dependent mechanism (such as
+ catalogues or other mappings). The public identifier, if specified,
+ may also be reported as part of the location information when errors
+ are reported.
+*/
+getPublicId : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-setPublicId'>/**The public identifier for this input source. This may be mapped to an
+</span> input source using an implementation dependent mechanism (such as
+ catalogues or other mappings). The public identifier, if specified,
+ may also be reported as part of the location information when errors
+ are reported.
+*/
+setPublicId : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-getBaseURI'>/**The base URI to be used (see section 5.1.4 in [&lt;a href='http://www.ietf.org/rfc/rfc2396.txt'&gt;IETF RFC 2396&lt;/a&gt;]) for
+</span> resolving a relative &lt;code&gt;systemId&lt;/code&gt; to an absolute URI.
+ &lt;br&gt; If, when used, the base URI is itself a relative URI, an empty
+ string, or null, the behavior is implementation dependent.
+*/
+getBaseURI : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-setBaseURI'>/**The base URI to be used (see section 5.1.4 in [&lt;a href='http://www.ietf.org/rfc/rfc2396.txt'&gt;IETF RFC 2396&lt;/a&gt;]) for
+</span> resolving a relative &lt;code&gt;systemId&lt;/code&gt; to an absolute URI.
+ &lt;br&gt; If, when used, the base URI is itself a relative URI, an empty
+ string, or null, the behavior is implementation dependent.
+*/
+setBaseURI : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-getEncoding'>/**The character encoding, if known. The encoding must be a string
+</span> acceptable for an XML encoding declaration ([&lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204'&gt;XML 1.0&lt;/a&gt;] section
+ 4.3.3 &quot;Character Encoding in Entities&quot;).
+ &lt;br&gt; This attribute has no effect when the application provides a
+ character stream or string data. For other sources of input, an
+ encoding specified by means of this attribute will override any
+ encoding specified in the XML declaration or the Text declaration, or
+ an encoding obtained from a higher level protocol, such as HTTP [&lt;a href='http://www.ietf.org/rfc/rfc2616.txt'&gt;IETF RFC 2616&lt;/a&gt;].
+*/
+getEncoding : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-setEncoding'>/**The character encoding, if known. The encoding must be a string
+</span> acceptable for an XML encoding declaration ([&lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204'&gt;XML 1.0&lt;/a&gt;] section
+ 4.3.3 &quot;Character Encoding in Entities&quot;).
+ &lt;br&gt; This attribute has no effect when the application provides a
+ character stream or string data. For other sources of input, an
+ encoding specified by means of this attribute will override any
+ encoding specified in the XML declaration or the Text declaration, or
+ an encoding obtained from a higher level protocol, such as HTTP [&lt;a href='http://www.ietf.org/rfc/rfc2616.txt'&gt;IETF RFC 2616&lt;/a&gt;].
+*/
+setEncoding : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-getCertifiedText'>/**If set to true, assume that the input is certified (see section 2.13
+</span> in [&lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/'&gt;XML 1.1&lt;/a&gt;]) when
+ parsing [&lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/'&gt;XML 1.1&lt;/a&gt;].
+*/
+getCertifiedText : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSInput-method-setCertifiedText'>/**If set to true, assume that the input is certified (see section 2.13
+</span> in [&lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/'&gt;XML 1.1&lt;/a&gt;]) when
+ parsing [&lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/'&gt;XML 1.1&lt;/a&gt;].
+*/
+setCertifiedText : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

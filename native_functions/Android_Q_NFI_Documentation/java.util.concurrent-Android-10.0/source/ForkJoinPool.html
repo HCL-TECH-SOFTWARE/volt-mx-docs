@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-ForkJoinPool'>/**@class java.util.concurrent.ForkJoinPool
+</span>@extends java.util.concurrent.AbstractExecutorService
+
+ An {@link java.util.concurrent.ExecutorService} for running {@link java.util.concurrent.ForkJoinTask}s.
+ A {@code ForkJoinPool} provides the entry point for submissions
+ from non-{@code ForkJoinTask} clients, as well as management and
+ monitoring operations.
+
+ &lt;p&gt;A {@code ForkJoinPool} differs from other kinds of {@link java.util.concurrent.ExecutorService} mainly by virtue of employing
+ &lt;em&gt;work-stealing&lt;/em&gt;: all threads in the pool attempt to find and
+ execute tasks submitted to the pool and/or created by other active
+ tasks (eventually blocking waiting for work if none exist). This
+ enables efficient processing when most tasks spawn other subtasks
+ (as do most {@code ForkJoinTask}s), as well as when many small
+ tasks are submitted to the pool from external clients.  Especially
+ when setting &lt;em&gt;asyncMode&lt;/em&gt; to true in constructors, {@code
+ ForkJoinPool}s may also be appropriate for use with event-style
+ tasks that are never joined.
+
+ &lt;p&gt;A static {@link #commonPool}() is available and appropriate for
+ most applications. The common pool is used by any ForkJoinTask that
+ is not explicitly submitted to a specified pool. Using the common
+ pool normally reduces resource usage (its threads are slowly
+ reclaimed during periods of non-use, and reinstated upon subsequent
+ use).
+
+ &lt;p&gt;For applications that require separate or custom pools, a {@code
+ ForkJoinPool} may be constructed with a given target parallelism
+ level; by default, equal to the number of available processors.
+ The pool attempts to maintain enough active (or available) threads
+ by dynamically adding, suspending, or resuming internal worker
+ threads, even if some tasks are stalled waiting to join others.
+ However, no such adjustments are guaranteed in the face of blocked
+ I/O or other unmanaged synchronization. The nested {@link java.util.concurrent.ForkJoinPool.ManagedBlocker} interface enables extension of the kinds of
+ synchronization accommodated.
+
+ &lt;p&gt;In addition to execution and lifecycle control methods, this
+ class provides status check methods (for example
+ {@link #getStealCount}) that are intended to aid in developing,
+ tuning, and monitoring fork/join applications. Also, method
+ {@link #toString} returns indications of pool state in a
+ convenient form for informal monitoring.
+
+ &lt;p&gt;As is the case with other ExecutorServices, there are three
+ main task execution methods summarized in the following table.
+ These are designed to be used primarily by clients not already
+ engaged in fork/join computations in the current pool.  The main
+ forms of these methods accept instances of {@code ForkJoinTask},
+ but overloaded forms also allow mixed execution of plain {@code
+ Runnable}- or {@code Callable}- based activities as well.  However,
+ tasks that are already executing in a pool should normally instead
+ use the within-computation forms listed in the table unless using
+ async event-style tasks that are not usually joined, in which case
+ there is little difference among choice of methods.
+
+ &lt;table BORDER CELLPADDING=3 CELLSPACING=1&gt;
+ &lt;caption&gt;Summary of task execution methods&lt;/caption&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td ALIGN=CENTER&gt; &lt;b&gt;Call from non-fork/join clients&lt;/b&gt;&lt;/td&gt;
+    &lt;td ALIGN=CENTER&gt; &lt;b&gt;Call from within fork/join computations&lt;/b&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; &lt;b&gt;Arrange async execution&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt; {@link #execute}(ForkJoinTask)&lt;/td&gt;
+    &lt;td&gt; {@link java.util.concurrent.ForkJoinTask#fork}&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; &lt;b&gt;Await and obtain result&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt; {@link #invoke}(ForkJoinTask)&lt;/td&gt;
+    &lt;td&gt; {@link java.util.concurrent.ForkJoinTask#invoke}&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; &lt;b&gt;Arrange exec and obtain Future&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt; {@link #submit}(ForkJoinTask)&lt;/td&gt;
+    &lt;td&gt; {@link java.util.concurrent.ForkJoinTask#fork} (ForkJoinTasks &lt;em&gt;are&lt;/em&gt; Futures)&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;The common pool is by default constructed with default
+ parameters, but these may be controlled by setting three
+ {@linkplain System#getProperty system properties}:
+ &lt;ul&gt;
+ &lt;li&gt;{@code java.util.concurrent.ForkJoinPool.common.parallelism}
+ - the parallelism level, a non-negative integer
+ &lt;li&gt;{@code java.util.concurrent.ForkJoinPool.common.threadFactory}
+ - the class name of a {@link java.util.concurrent.ForkJoinPool.ForkJoinWorkerThreadFactory}
+ &lt;li&gt;{@code java.util.concurrent.ForkJoinPool.common.exceptionHandler}
+ - the class name of a {@link UncaughtExceptionHandler}
+ &lt;li&gt;{@code java.util.concurrent.ForkJoinPool.common.maximumSpares}
+ - the maximum number of allowed extra threads to maintain target
+ parallelism (default 256).
+ &lt;/ul&gt;
+ If a {@link SecurityManager} is present and no factory is
+ specified, then the default pool uses a factory supplying
+ threads that have no {@link Permissions} enabled.
+ The system class loader is used to load these classes.
+ Upon any error in establishing these settings, default parameters
+ are used. It is possible to disable or limit the use of threads in
+ the common pool by setting the parallelism property to zero, and/or
+ using a factory that may return {@code null}. However doing so may
+ cause unjoined tasks to never be executed.
+
+ &lt;p&gt;&lt;b&gt;Implementation notes&lt;/b&gt;: This implementation restricts the
+ maximum number of running threads to 32767. Attempts to create
+ pools with greater than the maximum number result in
+ {@code IllegalArgumentException}.
+
+ &lt;p&gt;This implementation rejects submitted tasks (that is, by throwing
+ {@link java.util.concurrent.RejectedExecutionException}) only when the pool is shut down
+ or internal resources have been exhausted.
+
+ @since 1.7
+ @author Doug Lea
+*/
+var ForkJoinPool = {
+
+<span id='java-util-concurrent-ForkJoinPool-property-defaultForkJoinWorkerThreadFactory'>/** Creates a new ForkJoinWorkerThread. This factory is used unless
+</span> overridden in ForkJoinPool constructors.
+*/
+defaultForkJoinWorkerThreadFactory : &quot;null&quot;,
+<span id='java-util-concurrent-ForkJoinPool-method-commonPool'>/**Returns the common pool instance. This pool is statically
+</span> constructed; its run state is unaffected by attempts to {@link #shutdown} or {@link #shutdownNow}. However this pool and any
+ ongoing processing are automatically terminated upon program
+ {@link System#exit}.  Any program that relies on asynchronous
+ task processing to complete before program termination should
+ invoke {@code commonPool().}{@link #awaitQuiescence awaitQuiescence},
+ before exit.
+@return {Object {java.util.concurrent.ForkJoinPool}} the common pool instance
+@since 1.8
+*/
+commonPool : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-invoke'>/**Performs the given task, returning its result upon completion.
+</span> If the computation encounters an unchecked Exception or Error,
+ it is rethrown as the outcome of this invocation.  Rethrown
+ exceptions behave in the same way as regular exceptions, but,
+ when possible, contain stack traces (as displayed for example
+ using {@code ex.printStackTrace()}) of both the current thread
+ as well as the thread actually encountering the exception;
+ minimally only the latter.
+@param {Object {java.util.concurrent.ForkJoinTask}} task the task
+@param &lt;T&gt; the type of the task's result
+@return {Object {java.lang.Object}} the task's result
+@throws NullPointerException if the task is null
+@throws RejectedExecutionException if the task cannot be
+         scheduled for execution
+*/
+invoke : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-execute'>/**Arranges for (asynchronous) execution of the given task.
+</span>@param {Object {java.util.concurrent.ForkJoinTask}} task the task
+@throws NullPointerException if the task is null
+@throws RejectedExecutionException if the task cannot be
+         scheduled for execution
+*/
+execute : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-execute'>/**
+</span>@throws NullPointerException if the task is null
+@throws RejectedExecutionException if the task cannot be
+         scheduled for execution
+*/
+execute : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-submit'>/**Submits a ForkJoinTask for execution.
+</span>@param {Object {java.util.concurrent.ForkJoinTask}} task the task to submit
+@param &lt;T&gt; the type of the task's result
+@return {Object {java.util.concurrent.ForkJoinTask}} the task
+@throws NullPointerException if the task is null
+@throws RejectedExecutionException if the task cannot be
+         scheduled for execution
+*/
+submit : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-submit'>/**
+</span>@throws NullPointerException if the task is null
+@throws RejectedExecutionException if the task cannot be
+         scheduled for execution
+*/
+submit : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-submit'>/**
+</span>@throws NullPointerException if the task is null
+@throws RejectedExecutionException if the task cannot be
+         scheduled for execution
+*/
+submit : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-submit'>/**
+</span>@throws NullPointerException if the task is null
+@throws RejectedExecutionException if the task cannot be
+         scheduled for execution
+*/
+submit : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-invokeAll'>/**
+</span>@throws NullPointerException       {@inheritDoc}
+@throws RejectedExecutionException {@inheritDoc}
+*/
+invokeAll : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getFactory'>/**Returns the factory used for constructing new workers.
+</span>@return {Object {java.util.concurrent.ForkJoinPool.ForkJoinWorkerThreadFactory}} the factory used for constructing new workers
+*/
+getFactory : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getUncaughtExceptionHandler'>/**Returns the handler for internal worker threads that terminate
+</span> due to unrecoverable errors encountered while executing tasks.
+@return {Object {java.lang.Thread.UncaughtExceptionHandler}} the handler, or {@code null} if none
+*/
+getUncaughtExceptionHandler : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getParallelism'>/**Returns the targeted parallelism level of this pool.
+</span>@return {Number} the targeted parallelism level of this pool
+*/
+getParallelism : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getCommonPoolParallelism'>/**Returns the targeted parallelism level of the common pool.
+</span>@return {Number} the targeted parallelism level of the common pool
+@since 1.8
+*/
+getCommonPoolParallelism : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getPoolSize'>/**Returns the number of worker threads that have started but not
+</span> yet terminated.  The result returned by this method may differ
+ from {@link #getParallelism} when threads are created to
+ maintain parallelism when others are cooperatively blocked.
+@return {Number} the number of worker threads
+*/
+getPoolSize : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getAsyncMode'>/**Returns {@code true} if this pool uses local first-in-first-out
+</span> scheduling mode for forked tasks that are never joined.
+@return {Boolean} {@code true} if this pool uses async mode
+*/
+getAsyncMode : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getRunningThreadCount'>/**Returns an estimate of the number of worker threads that are
+</span> not blocked waiting to join tasks or for other managed
+ synchronization. This method may overestimate the
+ number of running threads.
+@return {Number} the number of worker threads
+*/
+getRunningThreadCount : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getActiveThreadCount'>/**Returns an estimate of the number of threads that are currently
+</span> stealing or executing tasks. This method may overestimate the
+ number of active threads.
+@return {Number} the number of active threads
+*/
+getActiveThreadCount : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-isQuiescent'>/**Returns {@code true} if all worker threads are currently idle.
+</span> An idle worker is one that cannot obtain a task to execute
+ because none are available to steal from other threads, and
+ there are no pending submissions to the pool. This method is
+ conservative; it might not return {@code true} immediately upon
+ idleness of all threads, but will eventually become true if
+ threads remain inactive.
+@return {Boolean} {@code true} if all threads are currently idle
+*/
+isQuiescent : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getStealCount'>/**Returns an estimate of the total number of tasks stolen from
+</span> one thread's work queue by another. The reported value
+ underestimates the actual total number of steals when the pool
+ is not quiescent. This value may be useful for monitoring and
+ tuning fork/join programs: in general, steal counts should be
+ high enough to keep threads busy, but low enough to avoid
+ overhead and contention across threads.
+@return {Number} the number of steals
+*/
+getStealCount : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getQueuedTaskCount'>/**Returns an estimate of the total number of tasks currently held
+</span> in queues by worker threads (but not including tasks submitted
+ to the pool that have not begun executing). This value is only
+ an approximation, obtained by iterating across all threads in
+ the pool. This method may be useful for tuning task
+ granularities.
+@return {Number} the number of queued tasks
+*/
+getQueuedTaskCount : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-getQueuedSubmissionCount'>/**Returns an estimate of the number of tasks submitted to this
+</span> pool that have not yet begun executing.  This method may take
+ time proportional to the number of submissions.
+@return {Number} the number of queued submissions
+*/
+getQueuedSubmissionCount : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-hasQueuedSubmissions'>/**Returns {@code true} if there are any tasks submitted to this
+</span> pool that have not yet begun executing.
+@return {Boolean} {@code true} if there are any queued submissions
+*/
+hasQueuedSubmissions : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-toString'>/**Returns a string identifying this pool, as well as its state,
+</span> including indications of run state, parallelism level, and
+ worker and task counts.
+@return {String} a string identifying this pool, as well as its state
+*/
+toString : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-shutdown'>/**Possibly initiates an orderly shutdown in which previously
+</span> submitted tasks are executed, but no new tasks will be
+ accepted. Invocation has no effect on execution state if this
+ is the {@link #commonPool}(), and no additional effect if
+ already shut down.  Tasks that are in the process of being
+ submitted concurrently during the course of this method may or
+ may not be rejected.
+@throws SecurityException if a security manager exists and
+         the caller is not permitted to modify threads
+         because it does not hold {@link
+         java.lang.RuntimePermission}{@code (&quot;modifyThread&quot;)}
+*/
+shutdown : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-shutdownNow'>/**Possibly attempts to cancel and/or stop all tasks, and reject
+</span> all subsequently submitted tasks.  Invocation has no effect on
+ execution state if this is the {@link #commonPool}(), and no
+ additional effect if already shut down. Otherwise, tasks that
+ are in the process of being submitted or executed concurrently
+ during the course of this method may or may not be
+ rejected. This method cancels both existing and unexecuted
+ tasks, in order to permit termination in the presence of task
+ dependencies. So the method always returns an empty list
+ (unlike the case for some other Executors).
+@return {Object {java.util.List}} an empty list
+@throws SecurityException if a security manager exists and
+         the caller is not permitted to modify threads
+         because it does not hold {@link
+         java.lang.RuntimePermission}{@code (&quot;modifyThread&quot;)}
+*/
+shutdownNow : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-isTerminated'>/**Returns {@code true} if all tasks have completed following shut down.
+</span>@return {Boolean} {@code true} if all tasks have completed following shut down
+*/
+isTerminated : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-isTerminating'>/**Returns {@code true} if the process of termination has
+</span> commenced but not yet completed.  This method may be useful for
+ debugging. A return of {@code true} reported a sufficient
+ period after shutdown may indicate that submitted tasks have
+ ignored or suppressed interruption, or are waiting for I/O,
+ causing this executor not to properly terminate. (See the
+ advisory notes for class {@link java.util.concurrent.ForkJoinTask} stating that
+ tasks should not normally entail blocking operations.  But if
+ they do, they must abort them on interrupt.)
+@return {Boolean} {@code true} if terminating but not yet terminated
+*/
+isTerminating : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-isShutdown'>/**Returns {@code true} if this pool has been shut down.
+</span>@return {Boolean} {@code true} if this pool has been shut down
+*/
+isShutdown : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-awaitTermination'>/**Blocks until all tasks have completed execution after a
+</span> shutdown request, or the timeout occurs, or the current thread
+ is interrupted, whichever happens first. Because the {@link #commonPool}() never terminates until program shutdown, when
+ applied to the common pool, this method is equivalent to {@link #awaitQuiescence(long, java.util.concurrent.TimeUnit)} but always returns {@code false}.
+@param {Number} timeout the maximum time to wait
+@param {Object {TimeUnit}} unit the time unit of the timeout argument
+@return {Boolean} {@code true} if this executor terminated and
+         {@code false} if the timeout elapsed before termination
+@throws InterruptedException if interrupted while waiting
+*/
+awaitTermination : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-awaitQuiescence'>/**If called by a ForkJoinTask operating in this pool, equivalent
+</span> in effect to {@link java.util.concurrent.ForkJoinTask#helpQuiesce}. Otherwise,
+ waits and/or attempts to assist performing tasks until this
+ pool {@link #isQuiescent} or the indicated timeout elapses.
+@param {Number} timeout the maximum time to wait
+@param {Object {TimeUnit}} unit the time unit of the timeout argument
+@return {Boolean} {@code true} if quiescent; {@code false} if the
+ timeout elapsed.
+*/
+awaitQuiescence : function(  ) {},
+
+<span id='java-util-concurrent-ForkJoinPool-method-managedBlock'>/**Runs the given possibly blocking task.  When {@linkplain
+</span> java.util.concurrent.ForkJoinTask#inForkJoinPool() running in a ForkJoinPool}, this
+ method possibly arranges for a spare thread to be activated if
+ necessary to ensure sufficient parallelism while the current
+ thread is blocked in {@link java.util.concurrent.ForkJoinPool.ManagedBlocker#block blocker.block()}.
+
+ &lt;p&gt;This method repeatedly calls {@code blocker.isReleasable()} and
+ {@code blocker.block()} until either method returns {@code true}.
+ Every call to {@code blocker.block()} is preceded by a call to
+ {@code blocker.isReleasable()} that returned {@code false}.
+
+ &lt;p&gt;If not running in a ForkJoinPool, this method is
+ behaviorally equivalent to
+ &lt;pre&gt; {@code
+ while (!blocker.isReleasable())
+   if (blocker.block())
+     break;}&lt;/pre&gt;
+
+ If running in a ForkJoinPool, the pool may first be expanded to
+ ensure sufficient parallelism available during the call to
+ {@code blocker.block()}.
+@param {Object {ForkJoinPool.ManagedBlocker}} blocker the blocker task
+@throws InterruptedException if {@code blocker.block()} did so
+*/
+managedBlock : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

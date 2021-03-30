@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-HttpCookie'>/**@class java.net.HttpCookie
+</span> implements java.lang.Cloneable
+
+@extends java.lang.Object
+
+ An HttpCookie object represents an HTTP cookie, which carries state
+ information between server and user agent. Cookie is widely adopted
+ to create stateful sessions.
+
+ &lt;p&gt; There are 3 HTTP cookie specifications:
+ &lt;blockquote&gt;
+   Netscape draft&lt;br&gt;
+   RFC 2109 - &lt;a href=&quot;http://www.ietf.org/rfc/rfc2109.txt&quot;&gt;
+ &lt;i&gt;http://www.ietf.org/rfc/rfc2109.txt&lt;/i&gt;&lt;/a&gt;&lt;br&gt;
+   RFC 2965 - &lt;a href=&quot;http://www.ietf.org/rfc/rfc2965.txt&quot;&gt;
+ &lt;i&gt;http://www.ietf.org/rfc/rfc2965.txt&lt;/i&gt;&lt;/a&gt;
+ &lt;/blockquote&gt;
+
+ &lt;p&gt; HttpCookie class can accept all these 3 forms of syntax.
+
+ @author Edward Wang
+ @since 1.6
+*/
+var HttpCookie = {
+
+<span id='java-net-HttpCookie-method-parse'>/**Constructs cookies from set-cookie or set-cookie2 header string.
+</span> RFC 2965 section 3.2.2 set-cookie2 syntax indicates that one header line
+ may contain more than one cookie definitions, so this is a static
+ utility method instead of another constructor.
+@param {String} header
+         a {@code String} specifying the set-cookie header. The header
+         should start with &quot;set-cookie&quot;, or &quot;set-cookie2&quot; token; or it
+         should have no leading token at all.
+@return {Object {java.util.List}} a List of cookie parsed from header line string
+@throws IllegalArgumentException
+          if header string violates the cookie specification's syntax or
+          the cookie name contains illegal characters.
+@throws NullPointerException
+          if the header string is {@code null}
+*/
+parse : function(  ) {},
+
+<span id='java-net-HttpCookie-method-hasExpired'>/**Reports whether this HTTP cookie has expired or not.
+</span>@return {Boolean} {@code true} to indicate this HTTP cookie has expired;
+          otherwise, {@code false}
+*/
+hasExpired : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setComment'>/**Specifies a comment that describes a cookie's purpose.
+</span> The comment is useful if the browser presents the cookie
+ to the user. Comments are not supported by Netscape Version 0 cookies.
+@param {String} purpose
+         a {@code String} specifying the comment to display to the user
+@see #getComment
+*/
+setComment : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getComment'>/**Returns the comment describing the purpose of this cookie, or
+</span> {@code null} if the cookie has no comment.
+@return {String} a {@code String} containing the comment, or {@code null} if none
+@see #setComment
+*/
+getComment : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setCommentURL'>/**Specifies a comment URL that describes a cookie's purpose.
+</span> The comment URL is useful if the browser presents the cookie
+ to the user. Comment URL is RFC 2965 only.
+@param {String} purpose
+         a {@code String} specifying the comment URL to display to the user
+@see #getCommentURL
+*/
+setCommentURL : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getCommentURL'>/**Returns the comment URL describing the purpose of this cookie, or
+</span> {@code null} if the cookie has no comment URL.
+@return {String} a {@code String} containing the comment URL, or {@code null}
+          if none
+@see #setCommentURL
+*/
+getCommentURL : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setDiscard'>/**Specify whether user agent should discard the cookie unconditionally.
+</span> This is RFC 2965 only attribute.
+@param {Boolean} discard
+         {@code true} indicates to discard cookie unconditionally
+@see #getDiscard
+*/
+setDiscard : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getDiscard'>/**Returns the discard attribute of the cookie
+</span>@return {Boolean} a {@code boolean} to represent this cookie's discard attribute
+@see #setDiscard
+*/
+getDiscard : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setPortlist'>/**Specify the portlist of the cookie, which restricts the port(s)
+</span> to which a cookie may be sent back in a Cookie header.
+@param {String} ports
+         a {@code String} specify the port list, which is comma separated
+         series of digits
+@see #getPortlist
+*/
+setPortlist : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getPortlist'>/**Returns the port list attribute of the cookie
+</span>@return {String} a {@code String} contains the port list or {@code null} if none
+@see #setPortlist
+*/
+getPortlist : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setDomain'>/**Specifies the domain within which this cookie should be presented.
+</span>
+ &lt;p&gt; The form of the domain name is specified by RFC 2965. A domain
+ name begins with a dot ({@code .foo.com}) and means that
+ the cookie is visible to servers in a specified Domain Name System
+ (DNS) zone (for example, {@code www.foo.com}, but not
+ {@code a.b.foo.com}). By default, cookies are only returned
+ to the server that sent them.
+@param {String} pattern
+         a {@code String} containing the domain name within which this
+         cookie is visible; form is according to RFC 2965
+@see #getDomain
+*/
+setDomain : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getDomain'>/**Returns the domain name set for this cookie. The form of the domain name
+</span> is set by RFC 2965.
+@return {String} a {@code String} containing the domain name
+@see #setDomain
+*/
+getDomain : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setMaxAge'>/**Sets the maximum age of the cookie in seconds.
+</span>
+ &lt;p&gt; A positive value indicates that the cookie will expire
+ after that many seconds have passed. Note that the value is
+ the &lt;i&gt;maximum&lt;/i&gt; age when the cookie will expire, not the cookie's
+ current age.
+
+ &lt;p&gt; A negative value means that the cookie is not stored persistently
+ and will be deleted when the Web browser exits. A zero value causes the
+ cookie to be deleted.
+@param {Number} expiry
+         an integer specifying the maximum age of the cookie in seconds;
+         if zero, the cookie should be discarded immediately; otherwise,
+         the cookie's max age is unspecified.
+@see #getMaxAge
+*/
+setMaxAge : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getMaxAge'>/**Returns the maximum age of the cookie, specified in seconds. By default,
+</span> {@code -1} indicating the cookie will persist until browser shutdown.
+@return {Number} an integer specifying the maximum age of the cookie in seconds
+@see #setMaxAge
+*/
+getMaxAge : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setPath'>/**Specifies a path for the cookie to which the client should return
+</span> the cookie.
+
+ &lt;p&gt; The cookie is visible to all the pages in the directory
+ you specify, and all the pages in that directory's subdirectories.
+ A cookie's path must include the servlet that set the cookie,
+ for example, &lt;i&gt;/catalog&lt;/i&gt;, which makes the cookie
+ visible to all directories on the server under &lt;i&gt;/catalog&lt;/i&gt;.
+
+ &lt;p&gt; Consult RFC 2965 (available on the Internet) for more
+ information on setting path names for cookies.
+@param {String} uri
+         a {@code String} specifying a path
+@see #getPath
+*/
+setPath : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getPath'>/**Returns the path on the server to which the browser returns this cookie.
+</span> The cookie is visible to all subpaths on the server.
+@return {String} a {@code String} specifying a path that contains a servlet name,
+          for example, &lt;i&gt;/catalog&lt;/i&gt;
+@see #setPath
+*/
+getPath : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setSecure'>/**Indicates whether the cookie should only be sent using a secure protocol,
+</span> such as HTTPS or SSL.
+
+ &lt;p&gt; The default value is {@code false}.
+@param {Boolean} flag
+         If {@code true}, the cookie can only be sent over a secure
+         protocol like HTTPS. If {@code false}, it can be sent over
+         any protocol.
+@see #getSecure
+*/
+setSecure : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getSecure'>/**Returns {@code true} if sending this cookie should be restricted to a
+</span> secure protocol, or {@code false} if the it can be sent using any
+ protocol.
+@return {Boolean} {@code false} if the cookie can be sent over any standard
+          protocol; otherwise, {@code true}
+@see #setSecure
+*/
+getSecure : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getName'>/**Returns the name of the cookie. The name cannot be changed after
+</span> creation.
+@return {String} a {@code String} specifying the cookie's name
+*/
+getName : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setValue'>/**Assigns a new value to a cookie after the cookie is created.
+</span> If you use a binary value, you may want to use BASE64 encoding.
+
+ &lt;p&gt; With Version 0 cookies, values should not contain white space,
+ brackets, parentheses, equals signs, commas, double quotes, slashes,
+ question marks, at signs, colons, and semicolons. Empty values may not
+ behave the same way on all browsers.
+@param {String} newValue
+         a {@code String} specifying the new value
+@see #getValue
+*/
+setValue : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getValue'>/**Returns the value of the cookie.
+</span>@return {String} a {@code String} containing the cookie's present value
+@see #setValue
+*/
+getValue : function(  ) {},
+
+<span id='java-net-HttpCookie-method-getVersion'>/**Returns the version of the protocol this cookie complies with. Version 1
+</span> complies with RFC 2965/2109, and version 0 complies with the original
+ cookie specification drafted by Netscape. Cookies provided by a browser
+ use and identify the browser's cookie version.
+@return {Number} 0 if the cookie complies with the original Netscape
+          specification; 1 if the cookie complies with RFC 2965/2109
+@see #setVersion
+*/
+getVersion : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setVersion'>/**Sets the version of the cookie protocol this cookie complies
+</span> with. Version 0 complies with the original Netscape cookie
+ specification. Version 1 complies with RFC 2965/2109.
+@param {Number} v
+         0 if the cookie should comply with the original Netscape
+         specification; 1 if the cookie should comply with RFC 2965/2109
+@throws IllegalArgumentException
+          if {@code v} is neither 0 nor 1
+@see #getVersion
+*/
+setVersion : function(  ) {},
+
+<span id='java-net-HttpCookie-method-isHttpOnly'>/**Returns {@code true} if this cookie contains the &lt;i&gt;HttpOnly&lt;/i&gt;
+</span> attribute. This means that the cookie should not be accessible to
+ scripting engines, like javascript.
+@return {Boolean} {@code true} if this cookie should be considered HTTPOnly
+@see #setHttpOnly(boolean)
+*/
+isHttpOnly : function(  ) {},
+
+<span id='java-net-HttpCookie-method-setHttpOnly'>/**Indicates whether the cookie should be considered HTTP Only. If set to
+</span> {@code true} it means the cookie should not be accessible to scripting
+ engines like javascript.
+@param {Boolean} httpOnly
+         if {@code true} make the cookie HTTP only, i.e. only visible as
+         part of an HTTP request.
+@see #isHttpOnly()
+*/
+setHttpOnly : function(  ) {},
+
+<span id='java-net-HttpCookie-method-domainMatches'>/**The utility method to check whether a host name is in a domain or not.
+</span>
+ &lt;p&gt; This concept is described in the cookie specification.
+ To understand the concept, some terminologies need to be defined first:
+ &lt;blockquote&gt;
+ effective host name = hostname if host name contains dot&lt;br&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;or = hostname.local if not
+ &lt;/blockquote&gt;
+ &lt;p&gt;Host A's name domain-matches host B's if:
+ &lt;blockquote&gt;&lt;ul&gt;
+   &lt;li&gt;their host name strings string-compare equal; or&lt;/li&gt;
+   &lt;li&gt;A is a HDN string and has the form NB, where N is a non-empty
+   name string, B has the form .B', and B' is a HDN string.  (So,
+   x.y.com domain-matches .Y.com but not Y.com.)&lt;/li&gt;
+ &lt;/ul&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;A host isn't in a domain (RFC 2965 sec. 3.3.2) if:
+ &lt;blockquote&gt;&lt;ul&gt;
+   &lt;li&gt;The value for the Domain attribute contains no embedded dots,
+   and the value is not .local.&lt;/li&gt;
+   &lt;li&gt;The effective host name that derives from the request-host does
+   not domain-match the Domain attribute.&lt;/li&gt;
+   &lt;li&gt;The request-host is a HDN (not IP address) and has the form HD,
+   where D is the value of the Domain attribute, and H is a string
+   that contains one or more dots.&lt;/li&gt;
+ &lt;/ul&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;Examples:
+ &lt;blockquote&gt;&lt;ul&gt;
+   &lt;li&gt;A Set-Cookie2 from request-host y.x.foo.com for Domain=.foo.com
+   would be rejected, because H is y.x and contains a dot.&lt;/li&gt;
+   &lt;li&gt;A Set-Cookie2 from request-host x.foo.com for Domain=.foo.com
+   would be accepted.&lt;/li&gt;
+   &lt;li&gt;A Set-Cookie2 with Domain=.com or Domain=.com., will always be
+   rejected, because there is no embedded dot.&lt;/li&gt;
+   &lt;li&gt;A Set-Cookie2 from request-host example for Domain=.local will
+   be accepted, because the effective host name for the request-
+   host is example.local, and example.local domain-matches .local.&lt;/li&gt;
+ &lt;/ul&gt;&lt;/blockquote&gt;
+@param {String} domain
+         the domain name to check host name with
+@param {String} host
+         the host name in question
+@return {Boolean} {@code true} if they domain-matches; {@code false} if not
+*/
+domainMatches : function(  ) {},
+
+<span id='java-net-HttpCookie-method-toString'>/**Constructs a cookie header string representation of this cookie,
+</span> which is in the format defined by corresponding cookie specification,
+ but without the leading &quot;Cookie:&quot; token.
+@return {String} a string form of the cookie. The string has the defined format
+*/
+toString : function(  ) {},
+
+<span id='java-net-HttpCookie-method-equals'>/**Test the equality of two HTTP cookies.
+</span>
+ &lt;p&gt; The result is {@code true} only if two cookies come from same domain
+ (case-insensitive), have same name (case-insensitive), and have same path
+ (case-sensitive).
+@return {Boolean} {@code true} if two HTTP cookies equal to each other;
+          otherwise, {@code false}
+*/
+equals : function(  ) {},
+
+<span id='java-net-HttpCookie-method-hashCode'>/**Returns the hash code of this HTTP cookie. The result is the sum of
+</span> hash code value of three significant components of this cookie: name,
+ domain, and path. That is, the hash code is the value of the expression:
+ &lt;blockquote&gt;
+ getName().toLowerCase().hashCode()&lt;br&gt;
+ + getDomain().toLowerCase().hashCode()&lt;br&gt;
+ + getPath().hashCode()
+ &lt;/blockquote&gt;
+@return {Number} this HTTP cookie's hash code
+*/
+hashCode : function(  ) {},
+
+<span id='java-net-HttpCookie-method-clone'>/**Create and return a copy of this object.
+</span>@return {Object {java.lang.Object}} a clone of this HTTP cookie
+*/
+clone : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiConfigurationUtil'>/**@class com.android.server.wifi.WifiConfigurationUtil
+</span>@extends java.lang.Object
+
+ WifiConfiguration utility for any {@link android.net.wifi.WifiConfiguration} related operations.
+ Currently contains:
+   &gt; Helper method to check if the WifiConfiguration object is visible to the provided users.
+   &gt; Helper methods to identify the encryption of a WifiConfiguration object.
+*/
+var WifiConfigurationUtil = {
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-property-PASSWORD_MASK'>/***/
+</span>PASSWORD_MASK : &quot;*&quot;,
+<span id='com-android-server-wifi-WifiConfigurationUtil-property-VALIDATE_FOR_ADD'>/** Enums to specify if the provided config is being validated for add or update.
+</span>*/
+VALIDATE_FOR_ADD : &quot;true&quot;,
+<span id='com-android-server-wifi-WifiConfigurationUtil-property-VALIDATE_FOR_UPDATE'>/***/
+</span>VALIDATE_FOR_UPDATE : &quot;false&quot;,
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-isVisibleToAnyProfile'>/**Check whether a network configuration is visible to a user or any of its managed profiles.
+</span>@param {Object {WifiConfiguration}} config   the network configuration whose visibility should be checked
+@param {Object {java.util.List}} profiles the user IDs of the user itself and all its managed profiles (can be obtained
+                 via {@link android.os.UserManager#getProfiles})
+@return {Boolean} whether the network configuration is visible to the user or any of its managed
+ profiles
+*/
+isVisibleToAnyProfile : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-doesUidBelongToAnyProfile'>/**Check whether a uid belong to a user or any of its managed profiles.
+</span>@param {Number} uid      uid of the app.
+@param {Object {java.util.List}} profiles the user IDs of the user itself and all its managed profiles (can be obtained
+                 via {@link android.os.UserManager#getProfiles})
+@return {Boolean} whether the uid belongs to the user or any of its managed profiles.
+*/
+doesUidBelongToAnyProfile : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-hasAnyValidWepKey'>/**Checks if the provided |wepKeys| array contains any non-null value;
+</span>*/
+hasAnyValidWepKey : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-isConfigForPskNetwork'>/**Helper method to check if the provided |config| corresponds to a PSK network or not.
+</span>*/
+isConfigForPskNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-isConfigForSaeNetwork'>/**Helper method to check if the provided |config| corresponds to an SAE network or not.
+</span>*/
+isConfigForSaeNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-isConfigForOweNetwork'>/**Helper method to check if the provided |config| corresponds to an OWE network or not.
+</span>*/
+isConfigForOweNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-isConfigForEapNetwork'>/**Helper method to check if the provided |config| corresponds to a EAP network or not.
+</span>*/
+isConfigForEapNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-isConfigForEapSuiteBNetwork'>/**Helper method to check if the provided |config| corresponds to a EAP Suite-B network or not.
+</span>*/
+isConfigForEapSuiteBNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-isConfigForWepNetwork'>/**Helper method to check if the provided |config| corresponds to a WEP network or not.
+</span>*/
+isConfigForWepNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-isConfigForOpenNetwork'>/**Helper method to check if the provided |config| corresponds to an open or enhanced
+</span> open network, or not.
+*/
+isConfigForOpenNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-hasIpChanged'>/**Compare existing and new WifiConfiguration objects after a network update and return if
+</span> IP parameters have changed or not.
+@param {Object {WifiConfiguration}} existingConfig Existing WifiConfiguration object corresponding to the network.
+@param {Object {WifiConfiguration}} newConfig      New WifiConfiguration object corresponding to the network.
+@return {Boolean} true if IP parameters have changed, false otherwise.
+*/
+hasIpChanged : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-hasProxyChanged'>/**Compare existing and new WifiConfiguration objects after a network update and return if
+</span> proxy parameters have changed or not.
+@param {Object {WifiConfiguration}} existingConfig Existing WifiConfiguration object corresponding to the network.
+@param {Object {WifiConfiguration}} newConfig      New WifiConfiguration object corresponding to the network.
+@return {Boolean} true if proxy parameters have changed, false if no existing config and proxy settings
+ are NONE, false otherwise.
+*/
+hasProxyChanged : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-hasMacRandomizationSettingsChanged'>/**Compare existing and new WifiConfiguration objects after a network update and return if
+</span> MAC randomization setting has changed or not.
+@param {Object {WifiConfiguration}} existingConfig Existing WifiConfiguration object corresponding to the network.
+@param {Object {WifiConfiguration}} newConfig      New WifiConfiguration object corresponding to the network.
+@return {Boolean} true if MAC randomization setting setting changed or the existing confiuration is
+ null and the newConfig is setting macRandomizationSetting to the default value.
+*/
+hasMacRandomizationSettingsChanged : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-hasEnterpriseConfigChanged'>/**Compare existing and new WifiEnterpriseConfig objects after a network update and return if
+</span> credential parameters have changed or not.
+@param {Object {WifiEnterpriseConfig}} existingEnterpriseConfig Existing WifiConfiguration object corresponding to the
+                                 network.
+@param {Object {WifiEnterpriseConfig}} newEnterpriseConfig      New WifiConfiguration object corresponding to the network.
+@return {Boolean} true if credentials have changed, false otherwise.
+*/
+hasEnterpriseConfigChanged : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-hasCredentialChanged'>/**Compare existing and new WifiConfiguration objects after a network update and return if
+</span> credential parameters have changed or not.
+@param {Object {WifiConfiguration}} existingConfig Existing WifiConfiguration object corresponding to the network.
+@param {Object {WifiConfiguration}} newConfig      New WifiConfiguration object corresponding to the network.
+@return {Boolean} true if credentials have changed, false otherwise.
+*/
+hasCredentialChanged : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-validate'>/**Validate the configuration received from an external application.
+</span>
+ This method checks for the following parameters:
+ 1. {@link WifiConfiguration#SSID}
+ 2. {@link WifiConfiguration#BSSID}
+ 3. {@link WifiConfiguration#preSharedKey}
+ 4. {@link WifiConfiguration#allowedKeyManagement}
+ 5. {@link WifiConfiguration#allowedProtocols}
+ 6. {@link WifiConfiguration#allowedAuthAlgorithms}
+ 7. {@link WifiConfiguration#allowedGroupCiphers}
+ 8. {@link WifiConfiguration#allowedPairwiseCiphers}
+ 9. {@link WifiConfiguration#getIpConfiguration()}
+@param {Object {WifiConfiguration}} config {@link WifiConfiguration} received from an external application.
+@param {Boolean} isAdd {@link #VALIDATE_FOR_ADD} to indicate a network config received for an add,
+              {@link #VALIDATE_FOR_UPDATE} for a network config received for an update.
+              These 2 cases need to be handled differently because the config received for an
+              update could contain only the fields that are being changed.
+@return {Boolean} true if the parameters are valid, false otherwise.
+*/
+validate : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-validateNetworkSpecifier'>/**Validate the configuration received from an external application inside
+</span> {@link WifiNetworkSpecifier}.
+
+ This method checks for the following parameters:
+ 1. {@link WifiNetworkSpecifier#ssidPatternMatcher}
+ 2. {@link WifiNetworkSpecifier#bssidPatternMatcher}
+ 3. {@link WifiConfiguration#SSID}
+ 4. {@link WifiConfiguration#BSSID}
+ 5. {@link WifiConfiguration#preSharedKey}
+ 6. {@link WifiConfiguration#allowedKeyManagement}
+ 7. {@link WifiConfiguration#allowedProtocols}
+ 8. {@link WifiConfiguration#allowedAuthAlgorithms}
+ 9. {@link WifiConfiguration#allowedGroupCiphers}
+ 10. {@link WifiConfiguration#allowedPairwiseCiphers}
+ 11. {@link WifiConfiguration#getIpConfiguration()}
+@param {Object {WifiNetworkSpecifier}} specifier Instance of {@link WifiNetworkSpecifier}.
+@return {Boolean} true if the parameters are valid, false otherwise.
+*/
+validateNetworkSpecifier : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-isSameNetwork'>/**Check if the provided two networks are the same.
+</span> Note: This does not check if network selection BSSID's are the same.
+@param {Object {WifiConfiguration}} config  Configuration corresponding to a network.
+@param {Object {WifiConfiguration}} config1 Configuration corresponding to another network.
+@return {Boolean} true if |config| and |config1| are the same network.
+         false otherwise.
+*/
+isSameNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigurationUtil-method-createPnoNetwork'>/**Create a PnoNetwork object from the provided WifiConfiguration.
+</span>@param {Object {WifiConfiguration}} config      Configuration corresponding to the network.
+@return {Object {android.net.wifi.WifiScanner.PnoSettings.PnoNetwork}} PnoNetwork object corresponding to the network.
+*/
+createPnoNetwork : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-usb-descriptors-ByteStream'>/**@class com.android.server.usb.descriptors.ByteStream
+</span>@extends java.lang.Object
+
+ @hide
+ A stream interface wrapping a byte array. Very much like a java.io.ByteArrayInputStream
+ but with the capability to &quot;back up&quot; in situations where the parser discovers that a
+ UsbDescriptor has overrun its length.
+*/
+var ByteStream = {
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-resetReadCount'>/**Resets the running count of bytes read so that later we can see how much more has been read.
+</span>*/
+resetReadCount : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-getReadCount'>/**Retrieves the running count of bytes read from the stream.
+</span>*/
+getReadCount : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-peekByte'>/**
+</span>@return {Number} The value of the next byte in the stream without advancing the stream.
+ Does not affect the running count as the byte hasn't been &quot;consumed&quot;.
+@throws IndexOutOfBoundsException
+*/
+peekByte : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-getByte'>/**
+</span>@return {Number} the next byte from the stream and advances the stream and the read count. Note
+ that this is a signed byte (as is the case of byte in Java). The user may need to understand
+ from context if it should be interpreted as an unsigned value.
+@throws IndexOutOfBoundsException
+*/
+getByte : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-getUnsignedByte'>/**
+</span>@return {Number} the next byte from the stream and advances the stream and the read count. Note
+ that this is an unsigned byte encoded in a Java int.
+@throws IndexOutOfBoundsException
+*/
+getUnsignedByte : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-unpackUsbShort'>/**Reads 2 bytes in *little endian format* from the stream and composes a 16-bit integer.
+</span> As we are storing the 2-byte value in a 4-byte integer, the upper 2 bytes are always
+ 0, essentially making the returned value *unsigned*.
+@return {Number} The 16-bit integer (packed into the lower 2 bytes of an int) encoded by the
+ next 2 bytes in the stream.
+@throws IndexOutOfBoundsException
+*/
+unpackUsbShort : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-unpackUsbTriple'>/**Reads 3 bytes in *little endian format* from the stream and composes a 24-bit integer.
+</span> As we are storing the 3-byte value in a 4-byte integer, the upper byte is always
+ 0, essentially making the returned value *unsigned*.
+@return {Number} The 24-bit integer (packed into the lower 3 bytes of an int) encoded by the
+ next 3 bytes in the stream.
+@throws IndexOutOfBoundsException
+*/
+unpackUsbTriple : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-unpackUsbInt'>/**Reads 4 bytes in *little endian format* from the stream and composes a 32-bit integer.
+</span>@return {Number} The 32-bit integer encoded by the next 4 bytes in the stream.
+@throws IndexOutOfBoundsException
+*/
+unpackUsbInt : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-advance'>/**Advances the logical position in the stream. Affects the running count also.
+</span>@param {Number} numBytes The number of bytes to advance.
+@throws IndexOutOfBoundsException
+@throws IllegalArgumentException
+*/
+advance : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-reverse'>/**Reverse the logical position in the stream. Affects the running count also.
+</span>@param {Number} numBytes The (positive) number of bytes to reverse.
+@throws IndexOutOfBoundsException
+@throws IllegalArgumentException
+*/
+reverse : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-ByteStream-method-available'>/**
+</span>@return {Number} The number of bytes available to be read in the stream.
+*/
+available : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

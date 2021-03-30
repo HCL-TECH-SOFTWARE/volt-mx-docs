@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-statementservice-retriever-AbstractStatementRetriever'>/**@class com.android.statementservice.retriever.AbstractStatementRetriever
+</span>@extends java.lang.Object
+
+ Retrieves the statements made by assets. This class is the entry point of the package.
+ &lt;p&gt;
+ An asset is an identifiable and addressable online entity that typically
+ provides some service or content. Examples of assets are websites, Android
+ apps, Twitter feeds, and Plus Pages.
+ &lt;p&gt;
+ Ownership of an asset is defined by being able to control it and speak for it.
+ An asset owner may establish a relationship between the asset and another
+ asset by making a statement about an intended relationship between the two.
+ An example of a relationship is permission delegation. For example, the owner
+ of a website (the webmaster) may delegate the ability the handle URLs to a
+ particular mobile app. Relationships are considered public information.
+ &lt;p&gt;
+ A particular kind of relationship (like permission delegation) defines a binary
+ relation on assets. The relation is not symmetric or transitive, nor is it
+ antisymmetric or anti-transitive.
+ &lt;p&gt;
+ A statement S(r, a, b) is an assertion that the relation r holds for the
+ ordered pair of assets (a, b). For example, taking r = &quot;delegates permission
+ to view user's location&quot;, a = New York Times mobile app,
+ b = nytimes.com website, S(r, a, b) would be an assertion that &quot;the New York
+ Times mobile app delegates its ability to use the user's location to the
+ nytimes.com website&quot;.
+ &lt;p&gt;
+ A statement S(r, a, b) is considered &lt;b&gt;reliable&lt;/b&gt; if we have confidence that
+ the statement is true; the exact criterion depends on the kind of statement,
+ since some kinds of statements may be true on their face whereas others may
+ require multiple parties to agree.
+ &lt;p&gt;
+ For example, to get the statements made by www.example.com use:
+ &lt;pre&gt;
+ result = retrieveStatements(AssetFactory.create(
+     &quot;{\&quot;namespace\&quot;: \&quot;web\&quot;, \&quot;site\&quot;: \&quot;https://www.google.com\&quot;}&quot;))
+ &lt;/pre&gt;
+ {@code result} will contain the statements and the expiration time of this result. The statements
+ are considered reliable until the expiration time.
+*/
+var AbstractStatementRetriever = {
+
+<span id='com-android-statementservice-retriever-AbstractStatementRetriever-method-retrieveStatements'>/**Returns the statements made by the {@code source} asset with ttl.
+</span>@throws AssociationServiceException if the asset namespace is not supported.
+*/
+retrieveStatements : function(  ) {},
+
+<span id='com-android-statementservice-retriever-AbstractStatementRetriever-method-createDirectRetriever'>/**Creates a new StatementRetriever that directly retrieves statements from the asset.
+</span>
+ &lt;p&gt; For web assets, {@link com.android.statementservice.retriever.AbstractStatementRetriever} will try to retrieve the statement
+ file from URL: {@code [webAsset.site]/.well-known/assetlinks.json&quot;} where {@code
+ [webAsset.site]} is in the form {@code http{s}://[hostname]:[optional_port]}. The file
+ should contain one JSON array of statements.
+
+ &lt;p&gt; For Android assets, {@link com.android.statementservice.retriever.AbstractStatementRetriever} will try to retrieve the statement
+ from the AndroidManifest.xml. The developer should add a {@code meta-data} tag under
+ {@code application} tag where attribute {@code android:name} equals &quot;associated_assets&quot;
+ and {@code android:recourse} points to a string array resource. Each entry in the string
+ array should contain exactly one statement in JSON format. Note that this implementation
+ can only return statements made by installed apps.
+*/
+createDirectRetriever : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

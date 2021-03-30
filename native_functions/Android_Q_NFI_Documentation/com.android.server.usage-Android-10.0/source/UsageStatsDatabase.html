@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-usage-UsageStatsDatabase'>/**@class com.android.server.usage.UsageStatsDatabase
+</span>@extends java.lang.Object
+
+ Provides an interface to query for UsageStat data from a Protocol Buffer database.
+
+ Prior to version 4, UsageStatsDatabase used XML to store Usage Stats data to disk.
+ When the UsageStatsDatabase version is upgraded, the files on disk are migrated to the new
+ version on init. The steps of migration are as follows:
+ 1) Check if version upgrade breadcrumb exists on disk, if so skip to step 4.
+ 2) Move current files to a timestamped backup directory.
+ 3) Write a temporary breadcrumb file with some info about the backup directory.
+ 4) Deserialize the backup files in the timestamped backup folder referenced by the breadcrumb.
+ 5) Reserialize the data read from the file with the new version format and replace the old files
+ 6) Repeat Step 3 and 4 for each file in the backup folder.
+ 7) Update the version file with the new version and build fingerprint.
+ 8) Delete the time stamped backup folder (unless flagged to be kept).
+ 9) Delete the breadcrumb file.
+
+ Performing the upgrade steps in this order, protects against unexpected shutdowns mid upgrade
+
+ The backup directory will contain directories with timestamp names. If the upgrade breadcrumb
+ exists on disk, it will contain a timestamp which will match one of the backup directories. The
+ breadcrumb will also contain a version number which will denote how the files in the backup
+ directory should be deserialized.
+*/
+var UsageStatsDatabase = {
+
+<span id='com-android-server-usage-UsageStatsDatabase-property-BACKUP_VERSION'>/** Current version of the backup schema
+</span>
+ @hide
+*/
+BACKUP_VERSION : &quot;4&quot;,
+<span id='com-android-server-usage-UsageStatsDatabase-method-init'>/**Initialize any directories required and index what stats are available.
+</span>*/
+init : function(  ) {},
+
+<span id='com-android-server-usage-UsageStatsDatabase-method-checkinDailyFiles'>/**Calls {@link com.android.server.usage.UsageStatsDatabase.CheckinAction#checkin(IntervalStats)} on the given {@link com.android.server.usage.UsageStatsDatabase.CheckinAction}
+</span> for all {@link com.android.server.usage.IntervalStats} that haven't been checked-in.
+ If any of the calls to {@link com.android.server.usage.UsageStatsDatabase.CheckinAction#checkin(IntervalStats)} returns false or throws
+ an exception, the check-in will be aborted.
+@param {Object {UsageStatsDatabase.CheckinAction}} checkinAction The callback to run when checking-in {@link IntervalStats}.
+@return {Boolean} true if the check-in succeeded.
+*/
+checkinDailyFiles : function(  ) {},
+
+<span id='com-android-server-usage-UsageStatsDatabase-method-onTimeChanged'>/**
+</span>*/
+onTimeChanged : function(  ) {},
+
+<span id='com-android-server-usage-UsageStatsDatabase-method-getLatestUsageStats'>/**Get the latest stats that exist for this interval type.
+</span>*/
+getLatestUsageStats : function(  ) {},
+
+<span id='com-android-server-usage-UsageStatsDatabase-method-queryUsageStats'>/**Find all {@link com.android.server.usage.IntervalStats} for the given range and interval type.
+</span>*/
+queryUsageStats : function(  ) {},
+
+<span id='com-android-server-usage-UsageStatsDatabase-method-findBestFitBucket'>/**Find the interval that best matches this range.
+</span>
+ TODO(adamlesinski): Use endTimeStamp in best fit calculation.
+*/
+findBestFitBucket : function(  ) {},
+
+<span id='com-android-server-usage-UsageStatsDatabase-method-prune'>/**Remove any usage stat files that are too old.
+</span>*/
+prune : function(  ) {},
+
+<span id='com-android-server-usage-UsageStatsDatabase-method-putUsageStats'>/**Update the stats in the database. They may not be written to disk immediately.
+</span>*/
+putUsageStats : function(  ) {},
+
+<span id='com-android-server-usage-UsageStatsDatabase-method-getBackupPayload'>/**
+</span>@hide 
+*/
+getBackupPayload : function(  ) {},
+
+<span id='com-android-server-usage-UsageStatsDatabase-method-applyRestoredPayload'>/**
+</span>@hide 
+*/
+applyRestoredPayload : function(  ) {},
+
+<span id='com-android-server-usage-UsageStatsDatabase-method-dump'>/**print total number and list of stats files for each interval type.
+</span>@param {Object {IndentingPrintWriter}} pw
+*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

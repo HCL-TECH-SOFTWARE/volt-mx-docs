@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-temporal-WeekFields'>/**@class java.time.temporal.WeekFields
+</span> implements java.io.Serializable
+
+@extends java.lang.Object
+
+ Localized definitions of the day-of-week, week-of-month and week-of-year fields.
+ &lt;p&gt;
+ A standard week is seven days long, but cultures have different definitions for some
+ other aspects of a week. This class represents the definition of the week, for the
+ purpose of providing {@link java.time.temporal.TemporalField} instances.
+ &lt;p&gt;
+ WeekFields provides five fields,
+ {@link #dayOfWeek}(), {@link #weekOfMonth}(), {@link #weekOfYear}(),
+ {@link #weekOfWeekBasedYear}(), and {@link #weekBasedYear}()
+ that provide access to the values from any {@linkplain java.time.temporal.Temporal temporal object}.
+ &lt;p&gt;
+ The computations for day-of-week, week-of-month, and week-of-year are based
+ on the  {@linkplain java.time.temporal.ChronoField#YEAR proleptic-year},
+ {@linkplain java.time.temporal.ChronoField#MONTH_OF_YEAR month-of-year},
+ {@linkplain java.time.temporal.ChronoField#DAY_OF_MONTH day-of-month}, and
+ {@linkplain java.time.temporal.ChronoField#DAY_OF_WEEK ISO day-of-week} which are based on the
+ {@linkplain java.time.temporal.ChronoField#EPOCH_DAY epoch-day} and the chronology.
+ The values may not be aligned with the {@linkplain java.time.temporal.ChronoField#YEAR_OF_ERA year-of-Era}
+ depending on the Chronology.
+ &lt;p&gt;A week is defined by:
+ &lt;ul&gt;
+ &lt;li&gt;The first day-of-week.
+ For example, the ISO-8601 standard considers Monday to be the first day-of-week.
+ &lt;li&gt;The minimal number of days in the first week.
+ For example, the ISO-8601 standard counts the first week as needing at least 4 days.
+ &lt;/ul&gt;
+ Together these two values allow a year or month to be divided into weeks.
+
+ &lt;h3&gt;Week of Month&lt;/h3&gt;
+ One field is used: week-of-month.
+ The calculation ensures that weeks never overlap a month boundary.
+ The month is divided into periods where each period starts on the defined first day-of-week.
+ The earliest period is referred to as week 0 if it has less than the minimal number of days
+ and week 1 if it has at least the minimal number of days.
+
+ &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;3&quot; border=&quot;0&quot; style=&quot;text-align: left; width: 50%;&quot;&gt;
+ &lt;caption&gt;Examples of WeekFields&lt;/caption&gt;
+ &lt;tr&gt;&lt;th&gt;Date&lt;/th&gt;&lt;td&gt;Day-of-week&lt;/td&gt;
+  &lt;td&gt;First day: Monday&lt;br&gt;Minimal days: 4&lt;/td&gt;&lt;td&gt;First day: Monday&lt;br&gt;Minimal days: 5&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;2008-12-31&lt;/th&gt;&lt;td&gt;Wednesday&lt;/td&gt;
+  &lt;td&gt;Week 5 of December 2008&lt;/td&gt;&lt;td&gt;Week 5 of December 2008&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;2009-01-01&lt;/th&gt;&lt;td&gt;Thursday&lt;/td&gt;
+  &lt;td&gt;Week 1 of January 2009&lt;/td&gt;&lt;td&gt;Week 0 of January 2009&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;2009-01-04&lt;/th&gt;&lt;td&gt;Sunday&lt;/td&gt;
+  &lt;td&gt;Week 1 of January 2009&lt;/td&gt;&lt;td&gt;Week 0 of January 2009&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;2009-01-05&lt;/th&gt;&lt;td&gt;Monday&lt;/td&gt;
+  &lt;td&gt;Week 2 of January 2009&lt;/td&gt;&lt;td&gt;Week 1 of January 2009&lt;/td&gt;&lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;h3&gt;Week of Year&lt;/h3&gt;
+ One field is used: week-of-year.
+ The calculation ensures that weeks never overlap a year boundary.
+ The year is divided into periods where each period starts on the defined first day-of-week.
+ The earliest period is referred to as week 0 if it has less than the minimal number of days
+ and week 1 if it has at least the minimal number of days.
+
+ &lt;h3&gt;Week Based Year&lt;/h3&gt;
+ Two fields are used for week-based-year, one for the
+ {@link #weekOfWeekBasedYear() week-of-week-based-year} and one for
+ {@link #weekBasedYear() week-based-year}.  In a week-based-year, each week
+ belongs to only a single year.  Week 1 of a year is the first week that
+ starts on the first day-of-week and has at least the minimum number of days.
+ The first and last weeks of a year may contain days from the
+ previous calendar year or next calendar year respectively.
+
+ &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;3&quot; border=&quot;0&quot; style=&quot;text-align: left; width: 50%;&quot;&gt;
+ &lt;caption&gt;Examples of WeekFields for week-based-year&lt;/caption&gt;
+ &lt;tr&gt;&lt;th&gt;Date&lt;/th&gt;&lt;td&gt;Day-of-week&lt;/td&gt;
+  &lt;td&gt;First day: Monday&lt;br&gt;Minimal days: 4&lt;/td&gt;&lt;td&gt;First day: Monday&lt;br&gt;Minimal days: 5&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;2008-12-31&lt;/th&gt;&lt;td&gt;Wednesday&lt;/td&gt;
+  &lt;td&gt;Week 1 of 2009&lt;/td&gt;&lt;td&gt;Week 53 of 2008&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;2009-01-01&lt;/th&gt;&lt;td&gt;Thursday&lt;/td&gt;
+  &lt;td&gt;Week 1 of 2009&lt;/td&gt;&lt;td&gt;Week 53 of 2008&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;2009-01-04&lt;/th&gt;&lt;td&gt;Sunday&lt;/td&gt;
+  &lt;td&gt;Week 1 of 2009&lt;/td&gt;&lt;td&gt;Week 53 of 2008&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;2009-01-05&lt;/th&gt;&lt;td&gt;Monday&lt;/td&gt;
+  &lt;td&gt;Week 2 of 2009&lt;/td&gt;&lt;td&gt;Week 1 of 2009&lt;/td&gt;&lt;/tr&gt;
+ &lt;/table&gt;
+
+ @implSpec
+ This class is immutable and thread-safe.
+
+ @since 1.8
+*/
+var WeekFields = {
+
+<span id='java-time-temporal-WeekFields-property-ISO'>/** The ISO-8601 definition, where a week starts on Monday and the first week
+</span> has a minimum of 4 days.
+ &lt;p&gt;
+ The ISO-8601 standard defines a calendar system based on weeks.
+ It uses the week-based-year and week-of-week-based-year concepts to split
+ up the passage of days instead of the standard year/month/day.
+ &lt;p&gt;
+ Note that the first week may start in the previous calendar year.
+ Note also that the first few days of a calendar year may be in the
+ week-based-year corresponding to the previous calendar year.
+*/
+ISO : &quot;null&quot;,
+<span id='java-time-temporal-WeekFields-property-SUNDAY_START'>/** The common definition of a week that starts on Sunday and the first week
+</span> has a minimum of 1 day.
+ &lt;p&gt;
+ Defined as starting on Sunday and with a minimum of 1 day in the month.
+ This week definition is in use in the US and other European countries.
+*/
+SUNDAY_START : &quot;null&quot;,
+<span id='java-time-temporal-WeekFields-property-WEEK_BASED_YEARS'>/** The unit that represents week-based-years for the purpose of addition and subtraction.
+</span> &lt;p&gt;
+ This allows a number of week-based-years to be added to, or subtracted from, a date.
+ The unit is equal to either 52 or 53 weeks.
+ The estimated duration of a week-based-year is the same as that of a standard ISO
+ year at {@code 365.2425 Days}.
+ &lt;p&gt;
+ The rules for addition add the number of week-based-years to the existing value
+ for the week-based-year field retaining the week-of-week-based-year
+ and day-of-week, unless the week number it too large for the target year.
+ In that case, the week is set to the last week of the year
+ with the same day-of-week.
+ &lt;p&gt;
+ This unit is an immutable and thread-safe singleton.
+*/
+WEEK_BASED_YEARS : &quot;null&quot;,
+<span id='java-time-temporal-WeekFields-method-of'>/**Obtains an instance of {@code WeekFields} appropriate for a locale.
+</span> &lt;p&gt;
+ This will look up appropriate values from the provider of localization data.
+@param {Object {Locale}} locale  the locale to use, not null
+@return {Object {java.time.temporal.WeekFields}} the week-definition, not null
+*/
+of : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-of'>/**Obtains an instance of {@code WeekFields} from the first day-of-week and minimal days.
+</span> &lt;p&gt;
+ The first day-of-week defines the ISO {@code DayOfWeek} that is day 1 of the week.
+ The minimal number of days in the first week defines how many days must be present
+ in a month or year, starting from the first day-of-week, before the week is counted
+ as the first week. A value of 1 will count the first day of the month or year as part
+ of the first week, whereas a value of 7 will require the whole seven days to be in
+ the new month or year.
+ &lt;p&gt;
+ WeekFields instances are singletons; for each unique combination
+ of {@code firstDayOfWeek} and {@code minimalDaysInFirstWeek} the
+ the same instance will be returned.
+@param {Object {DayOfWeek}} firstDayOfWeek  the first day of the week, not null
+@param {Number} minimalDaysInFirstWeek  the minimal number of days in the first week, from 1 to 7
+@return {Object {java.time.temporal.WeekFields}} the week-definition, not null
+@throws IllegalArgumentException if the minimal days value is less than one
+      or greater than 7
+*/
+of : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-getFirstDayOfWeek'>/**Gets the first day-of-week.
+</span> &lt;p&gt;
+ The first day-of-week varies by culture.
+ For example, the US uses Sunday, while France and the ISO-8601 standard use Monday.
+ This method returns the first day using the standard {@code DayOfWeek} enum.
+@return {Object {java.time.DayOfWeek}} the first day-of-week, not null
+*/
+getFirstDayOfWeek : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-getMinimalDaysInFirstWeek'>/**Gets the minimal number of days in the first week.
+</span> &lt;p&gt;
+ The number of days considered to define the first week of a month or year
+ varies by culture.
+ For example, the ISO-8601 requires 4 days (more than half a week) to
+ be present before counting the first week.
+@return {Number} the minimal number of days in the first week of a month or year, from 1 to 7
+*/
+getMinimalDaysInFirstWeek : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-dayOfWeek'>/**Returns a field to access the day of week based on this {@code WeekFields}.
+</span> &lt;p&gt;
+ This is similar to {@link java.time.temporal.ChronoField#DAY_OF_WEEK} but uses values for
+ the day-of-week based on this {@code WeekFields}.
+ The days are numbered from 1 to 7 where the
+ {@link #getFirstDayOfWeek() first day-of-week} is assigned the value 1.
+ &lt;p&gt;
+ For example, if the first day-of-week is Sunday, then that will have the
+ value 1, with other days ranging from Monday as 2 to Saturday as 7.
+ &lt;p&gt;
+ In the resolving phase of parsing, a localized day-of-week will be converted
+ to a standardized {@code ChronoField} day-of-week.
+ The day-of-week must be in the valid range 1 to 7.
+ Other fields in this class build dates using the standardized day-of-week.
+@return {Object {java.time.temporal.TemporalField}} a field providing access to the day-of-week with localized numbering, not null
+*/
+dayOfWeek : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-weekOfMonth'>/**Returns a field to access the week of month based on this {@code WeekFields}.
+</span> &lt;p&gt;
+ This represents the concept of the count of weeks within the month where weeks
+ start on a fixed day-of-week, such as Monday.
+ This field is typically used with {@link java.time.temporal.WeekFields#dayOfWeek()}.
+ &lt;p&gt;
+ Week one (1) is the week starting on the {@link java.time.temporal.WeekFields#getFirstDayOfWeek}
+ where there are at least {@link java.time.temporal.WeekFields#getMinimalDaysInFirstWeek()} days in the month.
+ Thus, week one may start up to {@code minDays} days before the start of the month.
+ If the first week starts after the start of the month then the period before is week zero (0).
+ &lt;p&gt;
+ For example:&lt;br&gt;
+ - if the 1st day of the month is a Monday, week one starts on the 1st and there is no week zero&lt;br&gt;
+ - if the 2nd day of the month is a Monday, week one starts on the 2nd and the 1st is in week zero&lt;br&gt;
+ - if the 4th day of the month is a Monday, week one starts on the 4th and the 1st to 3rd is in week zero&lt;br&gt;
+ - if the 5th day of the month is a Monday, week two starts on the 5th and the 1st to 4th is in week one&lt;br&gt;
+ &lt;p&gt;
+ This field can be used with any calendar system.
+ &lt;p&gt;
+ In the resolving phase of parsing, a date can be created from a year,
+ week-of-month, month-of-year and day-of-week.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#STRICT strict mode}, all four fields are
+ validated against their range of valid values. The week-of-month field
+ is validated to ensure that the resulting month is the month requested.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#SMART smart mode}, all four fields are
+ validated against their range of valid values. The week-of-month field
+ is validated from 0 to 6, meaning that the resulting date can be in a
+ different month to that specified.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#LENIENT lenient mode}, the year and day-of-week
+ are validated against the range of valid values. The resulting date is calculated
+ equivalent to the following four stage approach.
+ First, create a date on the first day of the first week of January in the requested year.
+ Then take the month-of-year, subtract one, and add the amount in months to the date.
+ Then take the week-of-month, subtract one, and add the amount in weeks to the date.
+ Finally, adjust to the correct day-of-week within the localized week.
+@return {Object {java.time.temporal.TemporalField}} a field providing access to the week-of-month, not null
+*/
+weekOfMonth : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-weekOfYear'>/**Returns a field to access the week of year based on this {@code WeekFields}.
+</span> &lt;p&gt;
+ This represents the concept of the count of weeks within the year where weeks
+ start on a fixed day-of-week, such as Monday.
+ This field is typically used with {@link java.time.temporal.WeekFields#dayOfWeek()}.
+ &lt;p&gt;
+ Week one(1) is the week starting on the {@link java.time.temporal.WeekFields#getFirstDayOfWeek}
+ where there are at least {@link java.time.temporal.WeekFields#getMinimalDaysInFirstWeek()} days in the year.
+ Thus, week one may start up to {@code minDays} days before the start of the year.
+ If the first week starts after the start of the year then the period before is week zero (0).
+ &lt;p&gt;
+ For example:&lt;br&gt;
+ - if the 1st day of the year is a Monday, week one starts on the 1st and there is no week zero&lt;br&gt;
+ - if the 2nd day of the year is a Monday, week one starts on the 2nd and the 1st is in week zero&lt;br&gt;
+ - if the 4th day of the year is a Monday, week one starts on the 4th and the 1st to 3rd is in week zero&lt;br&gt;
+ - if the 5th day of the year is a Monday, week two starts on the 5th and the 1st to 4th is in week one&lt;br&gt;
+ &lt;p&gt;
+ This field can be used with any calendar system.
+ &lt;p&gt;
+ In the resolving phase of parsing, a date can be created from a year,
+ week-of-year and day-of-week.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#STRICT strict mode}, all three fields are
+ validated against their range of valid values. The week-of-year field
+ is validated to ensure that the resulting year is the year requested.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#SMART smart mode}, all three fields are
+ validated against their range of valid values. The week-of-year field
+ is validated from 0 to 54, meaning that the resulting date can be in a
+ different year to that specified.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#LENIENT lenient mode}, the year and day-of-week
+ are validated against the range of valid values. The resulting date is calculated
+ equivalent to the following three stage approach.
+ First, create a date on the first day of the first week in the requested year.
+ Then take the week-of-year, subtract one, and add the amount in weeks to the date.
+ Finally, adjust to the correct day-of-week within the localized week.
+@return {Object {java.time.temporal.TemporalField}} a field providing access to the week-of-year, not null
+*/
+weekOfYear : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-weekOfWeekBasedYear'>/**Returns a field to access the week of a week-based-year based on this {@code WeekFields}.
+</span> &lt;p&gt;
+ This represents the concept of the count of weeks within the year where weeks
+ start on a fixed day-of-week, such as Monday and each week belongs to exactly one year.
+ This field is typically used with {@link java.time.temporal.WeekFields#dayOfWeek()} and
+ {@link java.time.temporal.WeekFields#weekBasedYear()}.
+ &lt;p&gt;
+ Week one(1) is the week starting on the {@link java.time.temporal.WeekFields#getFirstDayOfWeek}
+ where there are at least {@link java.time.temporal.WeekFields#getMinimalDaysInFirstWeek()} days in the year.
+ If the first week starts after the start of the year then the period before
+ is in the last week of the previous year.
+ &lt;p&gt;
+ For example:&lt;br&gt;
+ - if the 1st day of the year is a Monday, week one starts on the 1st&lt;br&gt;
+ - if the 2nd day of the year is a Monday, week one starts on the 2nd and
+   the 1st is in the last week of the previous year&lt;br&gt;
+ - if the 4th day of the year is a Monday, week one starts on the 4th and
+   the 1st to 3rd is in the last week of the previous year&lt;br&gt;
+ - if the 5th day of the year is a Monday, week two starts on the 5th and
+   the 1st to 4th is in week one&lt;br&gt;
+ &lt;p&gt;
+ This field can be used with any calendar system.
+ &lt;p&gt;
+ In the resolving phase of parsing, a date can be created from a week-based-year,
+ week-of-year and day-of-week.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#STRICT strict mode}, all three fields are
+ validated against their range of valid values. The week-of-year field
+ is validated to ensure that the resulting week-based-year is the
+ week-based-year requested.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#SMART smart mode}, all three fields are
+ validated against their range of valid values. The week-of-week-based-year field
+ is validated from 1 to 53, meaning that the resulting date can be in the
+ following week-based-year to that specified.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#LENIENT lenient mode}, the year and day-of-week
+ are validated against the range of valid values. The resulting date is calculated
+ equivalent to the following three stage approach.
+ First, create a date on the first day of the first week in the requested week-based-year.
+ Then take the week-of-week-based-year, subtract one, and add the amount in weeks to the date.
+ Finally, adjust to the correct day-of-week within the localized week.
+@return {Object {java.time.temporal.TemporalField}} a field providing access to the week-of-week-based-year, not null
+*/
+weekOfWeekBasedYear : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-weekBasedYear'>/**Returns a field to access the year of a week-based-year based on this {@code WeekFields}.
+</span> &lt;p&gt;
+ This represents the concept of the year where weeks start on a fixed day-of-week,
+ such as Monday and each week belongs to exactly one year.
+ This field is typically used with {@link java.time.temporal.WeekFields#dayOfWeek()} and
+ {@link java.time.temporal.WeekFields#weekOfWeekBasedYear()}.
+ &lt;p&gt;
+ Week one(1) is the week starting on the {@link java.time.temporal.WeekFields#getFirstDayOfWeek}
+ where there are at least {@link java.time.temporal.WeekFields#getMinimalDaysInFirstWeek()} days in the year.
+ Thus, week one may start before the start of the year.
+ If the first week starts after the start of the year then the period before
+ is in the last week of the previous year.
+ &lt;p&gt;
+ This field can be used with any calendar system.
+ &lt;p&gt;
+ In the resolving phase of parsing, a date can be created from a week-based-year,
+ week-of-year and day-of-week.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#STRICT strict mode}, all three fields are
+ validated against their range of valid values. The week-of-year field
+ is validated to ensure that the resulting week-based-year is the
+ week-based-year requested.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#SMART smart mode}, all three fields are
+ validated against their range of valid values. The week-of-week-based-year field
+ is validated from 1 to 53, meaning that the resulting date can be in the
+ following week-based-year to that specified.
+ &lt;p&gt;
+ In {@linkplain ResolverStyle#LENIENT lenient mode}, the year and day-of-week
+ are validated against the range of valid values. The resulting date is calculated
+ equivalent to the following three stage approach.
+ First, create a date on the first day of the first week in the requested week-based-year.
+ Then take the week-of-week-based-year, subtract one, and add the amount in weeks to the date.
+ Finally, adjust to the correct day-of-week within the localized week.
+@return {Object {java.time.temporal.TemporalField}} a field providing access to the week-based-year, not null
+*/
+weekBasedYear : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-equals'>/**Checks if this {@code WeekFields} is equal to the specified object.
+</span> &lt;p&gt;
+ The comparison is based on the entire state of the rules, which is
+ the first day-of-week and minimal days.
+@param {Object {Object}} object  the other rules to compare to, null returns false
+@return {Boolean} true if this is equal to the specified rules
+*/
+equals : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-hashCode'>/**A hash code for this {@code WeekFields}.
+</span>@return {Number} a suitable hash code
+*/
+hashCode : function(  ) {},
+
+<span id='java-time-temporal-WeekFields-method-toString'>/**A string representation of this {@code WeekFields} instance.
+</span>@return {String} the string representation, not null
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

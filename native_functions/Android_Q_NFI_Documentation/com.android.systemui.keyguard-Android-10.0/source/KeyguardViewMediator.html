@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-keyguard-KeyguardViewMediator'>/**@class com.android.systemui.keyguard.KeyguardViewMediator
+</span>@extends com.android.systemui.SystemUI
+
+ Mediates requests related to the keyguard.  This includes queries about the
+ state of the keyguard, power management events that effect whether the keyguard
+ should be shown or reset, callbacks to the phone window manager to notify
+ it of when the keyguard is showing, and events from the keyguard view itself
+ stating that the keyguard was succesfully unlocked.
+
+ Note that the keyguard view is shown when the screen is off (as appropriate)
+ so that once the screen comes on, it will be ready immediately.
+
+ Example queries about the keyguard:
+ - is {movement, key} one that should wake the keygaurd?
+ - is the keyguard showing?
+ - are input events restricted due to the state of the keyguard?
+
+ Callbacks to the phone window manager:
+ - the keyguard is showing
+
+ Example external events that translate to keyguard view changes:
+ - screen turned off -&gt; reset the keyguard, and show it so it will be ready
+   next time the screen turns on
+ - keyboard is slid open -&gt; if the keyguard is not secure, hide it
+
+ Events from the keyguard view:
+ - user succesfully unlocked keyguard -&gt; hide keyguard view, and no longer
+   restrict input events.
+
+ Note: in addition to normal power managment events that effect the state of
+ whether the keyguard should be showing, external apps and services may request
+ that the keyguard be disabled via {@link #setKeyguardEnabled}(boolean).  When
+ false, this will override all other conditions for turning on the keyguard.
+
+ Threading and synchronization:
+ This class is created by the initialization routine of the {@link WindowManagerPolicyConstants},
+ and runs on its thread.  The keyguard UI is created from that thread in the
+ constructor of this class.  The apis may be called from other threads, including the
+ {@link com.android.server.input.InputManagerService}'s and {@link android.view.WindowManager}'s.
+ Therefore, methods on this class are synchronized, and any action that is pointed
+ directly to the keyguard UI is posted to a {@link android.os.Handler} to ensure it is taken on the UI
+ thread of the keyguard.
+*/
+var KeyguardViewMediator = {
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-property-AWAKE_INTERVAL_DEFAULT_MS'>/** The default amount of time we stay awake (used for all key input)
+</span>*/
+AWAKE_INTERVAL_DEFAULT_MS : &quot;10000&quot;,
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-property-OPTION_FORCE_SHOW'>/** Boolean option for doKeyguardLocked/doKeyguardTimeout which, when set to true, forces the
+</span> keyguard to show even if it is disabled for the current user.
+*/
+OPTION_FORCE_SHOW : &quot;force_show&quot;,
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-userActivity'>/**
+</span>*/
+userActivity : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-start'>/**
+</span>*/
+start : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onSystemReady'>/**Let us know that the system is ready after startup.
+</span>*/
+onSystemReady : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onStartedGoingToSleep'>/**Called to let us know the screen was turned off.
+</span>@param {Number} why either {@link WindowManagerPolicyConstants#OFF_BECAUSE_OF_USER} or
+   {@link WindowManagerPolicyConstants#OFF_BECAUSE_OF_TIMEOUT}.
+*/
+onStartedGoingToSleep : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onFinishedGoingToSleep'>/**
+</span>*/
+onFinishedGoingToSleep : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onStartedWakingUp'>/**Let's us know when the device is waking up.
+</span>*/
+onStartedWakingUp : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onScreenTurningOn'>/**
+</span>*/
+onScreenTurningOn : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onScreenTurnedOn'>/**
+</span>*/
+onScreenTurnedOn : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onScreenTurnedOff'>/**
+</span>*/
+onScreenTurnedOff : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onDreamingStarted'>/**A dream started.  We should lock after the usual screen-off lock timeout but only
+</span> if there is a secure lock pattern.
+*/
+onDreamingStarted : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onDreamingStopped'>/**A dream stopped.
+</span>*/
+onDreamingStopped : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-setKeyguardEnabled'>/**Same semantics as {@link WindowManagerPolicyConstants#enableKeyguard}; provide
+</span> a way for external stuff to override normal keyguard behavior.  For instance
+ the phone app disables the keyguard when it receives incoming calls.
+*/
+setKeyguardEnabled : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-verifyUnlock'>/**
+</span>@see android.app.KeyguardManager#exitKeyguardSecurely
+*/
+verifyUnlock : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-isShowingAndNotOccluded'>/**Is the keyguard currently showing and not being force hidden?
+</span>*/
+isShowingAndNotOccluded : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-setOccluded'>/**Notify us when the keyguard is occluded by another window
+</span>*/
+setOccluded : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-isHiding'>/**
+</span>*/
+isHiding : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-doKeyguardTimeout'>/**Used by PhoneWindowManager to enable the keyguard due to a user activity timeout.
+</span> This must be safe to call from any thread and with any window manager locks held.
+*/
+doKeyguardTimeout : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-isInputRestricted'>/**Given the state of the keyguard, is the input restricted?
+</span> Input is restricted when the keyguard is showing, or when the keyguard
+ was suppressed by an app that disabled the keyguard or we haven't been provisioned yet.
+*/
+isInputRestricted : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-dismiss'>/**
+</span>*/
+dismiss : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-isSecure'>/**
+</span>*/
+isSecure : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-isSecure'>/**
+</span>*/
+isSecure : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-setSwitchingUser'>/**
+</span>*/
+setSwitchingUser : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-setCurrentUser'>/**Update the newUserId. Call while holding WindowManagerService lock.
+</span> NOTE: Should only be called by KeyguardViewMediator in response to the user id changing.
+@param {Number} newUserId The id of the incoming user.
+*/
+setCurrentUser : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-keyguardDone'>/**
+</span>*/
+keyguardDone : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onBootCompleted'>/**
+</span>*/
+onBootCompleted : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onWakeAndUnlocking'>/**
+</span>*/
+onWakeAndUnlocking : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-registerStatusBar'>/**
+</span>*/
+registerStatusBar : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-startKeyguardExitAnimation'>/**
+</span>*/
+startKeyguardExitAnimation : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-onShortPowerPressedGoHome'>/**
+</span>*/
+onShortPowerPressedGoHome : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-getViewMediatorCallback'>/**
+</span>*/
+getViewMediatorCallback : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-getLockPatternUtils'>/**
+</span>*/
+getLockPatternUtils : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-setAodShowing'>/**
+</span>@param {Boolean} aodShowing true when AOD - or ambient mode - is showing.
+*/
+setAodShowing : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-setPulsing'>/**
+</span>@param {Boolean} pulsing true when device temporarily wakes up to display an incoming notification.
+*/
+setPulsing : function(  ) {},
+
+<span id='com-android-systemui-keyguard-KeyguardViewMediator-method-addStateMonitorCallback'>/**
+</span>*/
+addStateMonitorCallback : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

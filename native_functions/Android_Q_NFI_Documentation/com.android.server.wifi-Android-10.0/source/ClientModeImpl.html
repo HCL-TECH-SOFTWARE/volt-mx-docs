@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-ClientModeImpl'>/**@class com.android.server.wifi.ClientModeImpl
+</span>@extends com.android.internal.util.StateMachine
+
+ Implementation of ClientMode.  Event handling for Client mode logic is done here,
+ and all changes in connectivity state are initiated here.
+
+ @hide
+*/
+var ClientModeImpl = {
+
+<span id='com-android-server-wifi-ClientModeImpl-property-NUM_LOG_RECS_NORMAL'>/***/
+</span>NUM_LOG_RECS_NORMAL : &quot;100&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-property-NUM_LOG_RECS_VERBOSE_LOW_MEMORY'>/***/
+</span>NUM_LOG_RECS_VERBOSE_LOW_MEMORY : &quot;200&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-property-NUM_LOG_RECS_VERBOSE'>/***/
+</span>NUM_LOG_RECS_VERBOSE : &quot;3000&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-property-SUPPLICANT_BSSID_ANY'>/** Value to set in wpa_supplicant &quot;bssid&quot; field when we don't want to restrict connection to
+</span> a specific AP.
+*/
+SUPPLICANT_BSSID_ANY : &quot;any&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-property-CONNECT_MODE'>/***/
+</span>CONNECT_MODE : &quot;1&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-property-SCAN_ONLY_MODE'>/***/
+</span>SCAN_ONLY_MODE : &quot;2&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-property-SCAN_ONLY_WITH_WIFI_OFF_MODE'>/***/
+</span>SCAN_ONLY_WITH_WIFI_OFF_MODE : &quot;3&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-property-DISABLED_MODE'>/***/
+</span>DISABLED_MODE : &quot;4&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-property-LAST_SELECTED_NETWORK_EXPIRATION_AGE_MILLIS'>/** Time window in milliseconds for which we send
+</span> {@link NetworkAgent#explicitlySelected(boolean, boolean)}
+ after connecting to the network which the user last selected.
+*/
+LAST_SELECTED_NETWORK_EXPIRATION_AGE_MILLIS : &quot;30000&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-property-WIFI_WORK_SOURCE'>/** Work source to use to blame usage on the WiFi service
+</span>*/
+WIFI_WORK_SOURCE : &quot;null&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-property-DIAGS_CONNECT_TIMEOUT_MILLIS'>/***/
+</span>DIAGS_CONNECT_TIMEOUT_MILLIS : &quot;60000&quot;,
+<span id='com-android-server-wifi-ClientModeImpl-method-getWifiScoreReport'>/**
+</span>*/
+getWifiScoreReport : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-clearTargetBssid'>/**Method to clear {@link #mTargetRoamBSSID} and reset the the current connected network's
+</span> bssid in wpa_supplicant after a roam/connect attempt.
+*/
+clearTargetBssid : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-start'>/**
+</span>*/
+start : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-enableVerboseLogging'>/**Method to update logging level in wifi service related classes.
+</span>@param {Number} verbose int logging level to use
+*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-getMessenger'>/**Retrieve a Messenger for the ClientModeImpl Handler
+</span>@return {Object {android.os.Messenger}} Messenger
+*/
+getMessenger : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-setWifiStateForApiCalls'>/**Temporary method that allows the active ClientModeManager to set the wifi state that is
+</span> retrieved by API calls. This will be removed when WifiServiceImpl no longer directly calls
+ this class (b/31479117).
+@param {Number} newState new state to set, invalid states are ignored.
+*/
+setWifiStateForApiCalls : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetWifiState'>/**Method used by WifiServiceImpl to get the current state of Wifi (in client mode) for API
+</span> calls.  This will be removed when WifiService no longer directly calls this class
+ (b/31479117).
+*/
+syncGetWifiState : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetWifiStateByName'>/**Converts the current wifi state to a printable form.
+</span>*/
+syncGetWifiStateByName : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-isConnected'>/**
+</span>*/
+isConnected : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-isDisconnected'>/**
+</span>*/
+isDisconnected : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-isSupplicantTransientState'>/**Method checking if supplicant is in a transient state
+</span>@return {Boolean} boolean true if in transient state
+*/
+isSupplicantTransientState : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncRequestConnectionInfo'>/**Get status information for the current connection, if any.
+</span>@return {Object {android.net.wifi.WifiInfo}} a {@link WifiInfo} object containing information about the current connection
+*/
+syncRequestConnectionInfo : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-getWifiInfo'>/**Method to retrieve the current WifiInfo
+</span>@returns WifiInfo
+*/
+getWifiInfo : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetDhcpResults'>/**Blocking call to get the current DHCP results
+</span>@return {Object {android.net.DhcpResults}} DhcpResults current results
+*/
+syncGetDhcpResults : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-handleIfaceDestroyed'>/**When the underlying interface is destroyed, we must immediately tell connectivity service to
+</span> mark network agent as disconnected and stop the ip client.
+*/
+handleIfaceDestroyed : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-setOperationalMode'>/**TODO: doc
+</span>*/
+setOperationalMode : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-takeBugReport'>/**Initiates a system-level bugreport, in a non-blocking fashion.
+</span>*/
+takeBugReport : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncQueryPasspointIcon'>/**Blocking method to retrieve the passpoint icon.
+</span>@param {Object {AsyncChannel}} channel AsyncChannel for the response
+@param {Number} bssid representation of the bssid as a long
+@param {String} fileName name of the file
+@return {Boolean} boolean returning the result of the call
+*/
+syncQueryPasspointIcon : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-matchProviderWithCurrentNetwork'>/**Blocking method to match the provider with the current network
+</span>@param {Object {AsyncChannel}} channel AsyncChannel to use for the response
+@param {String} fqdn
+@return {Number} int returns message result
+*/
+matchProviderWithCurrentNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-deauthenticateNetwork'>/**Deauthenticate and set the re-authentication hold off time for the current network
+</span>@param {Object {AsyncChannel}} holdoff hold off time in milliseconds
+@param {Number} ess set if the hold off pertains to an ESS rather than a BSS
+*/
+deauthenticateNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-disableEphemeralNetwork'>/**Method to disable an ephemeral config for an ssid
+</span>@param {String} ssid network name to disable
+*/
+disableEphemeralNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-disconnectCommand'>/**Disconnect from Access Point
+</span>*/
+disconnectCommand : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-disconnectCommand'>/**Method to trigger a disconnect.
+</span>@param {Number} uid UID of requesting caller
+@param {Number} reason disconnect reason
+*/
+disconnectCommand : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-reconnectCommand'>/**Initiate a reconnection to AP
+</span>*/
+reconnectCommand : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-reassociateCommand'>/**Initiate a re-association to AP
+</span>*/
+reassociateCommand : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncAddOrUpdateNetwork'>/**Add a network synchronously
+</span>@return {Number} network id of the new network
+*/
+syncAddOrUpdateNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetConfiguredNetworks'>/**Get configured networks synchronously
+</span>@param {Number} channel
+@return {Object {java.util.List}} 
+*/
+syncGetConfiguredNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetPrivilegedConfiguredNetwork'>/**Blocking call to get the current WifiConfiguration by a privileged caller so private data,
+</span> like the password, is not redacted.
+@param {Object {AsyncChannel}} channel AsyncChannel to use for the response
+@return {Object {java.util.List}} List list of configured networks configs
+*/
+syncGetPrivilegedConfiguredNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetMatchingOsuProviders'>/**Retrieve a list of {@link OsuProvider} associated with the given list of ScanResult
+</span> synchronously.
+@param {Object {java.util.List}} scanResults a list of ScanResult that has Passpoint APs.
+@param {Object {AsyncChannel}} channel     Channel for communicating with the state machine
+@return {Object {java.util.Map}} Map that consists of {@link OsuProvider} and a matching list of {@link ScanResult}.
+*/
+syncGetMatchingOsuProviders : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetMatchingPasspointConfigsForOsuProviders'>/**Returns the matching Passpoint configurations for given OSU(Online Sign-Up) Providers
+</span>@param {Object {java.util.List}} osuProviders a list of {@link OsuProvider}
+@param {Object {AsyncChannel}} channel  AsyncChannel to use for the response
+@return {Object {java.util.Map}} Map that consists of {@link OsuProvider} and matching {@link PasspointConfiguration}.
+*/
+syncGetMatchingPasspointConfigsForOsuProviders : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetWifiConfigsForPasspointProfiles'>/**Returns the corresponding wifi configurations for given FQDN (Fully Qualified Domain Name)
+</span> list.
+
+ An empty list will be returned when no match is found.
+@param {Object {java.util.List}} fqdnList a list of FQDN
+@param {Object {AsyncChannel}} channel  AsyncChannel to use for the response
+@return {Object {java.util.List}} List of {@link WifiConfiguration} converted from
+ {@link com.android.server.wifi.hotspot2.PasspointProvider}
+*/
+syncGetWifiConfigsForPasspointProfiles : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncAddOrUpdatePasspointConfig'>/**Add or update a Passpoint configuration synchronously.
+</span>@param {Object {AsyncChannel}} channel Channel for communicating with the state machine
+@param {Object {PasspointConfiguration}} config The configuration to add or update
+@param {Number} packageName Package name of the app adding/updating {@code config}.
+@return {Boolean} true on success
+*/
+syncAddOrUpdatePasspointConfig : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncRemovePasspointConfig'>/**Remove a Passpoint configuration synchronously.
+</span>@param {Object {AsyncChannel}} channel Channel for communicating with the state machine
+@param {String} fqdn The FQDN of the Passpoint configuration to remove
+@return {Boolean} true on success
+*/
+syncRemovePasspointConfig : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetPasspointConfigs'>/**Get the list of installed Passpoint configurations synchronously.
+</span>@param {Object {AsyncChannel}} channel Channel for communicating with the state machine
+@return {Object {java.util.List}} List of {@link PasspointConfiguration}
+*/
+syncGetPasspointConfigs : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncStartSubscriptionProvisioning'>/**Start subscription provisioning synchronously
+</span>@param {Number} provider {@link OsuProvider} the provider to provision with
+@param {Object {OsuProvider}} callback {@link IProvisioningCallback} callback for provisioning status
+@return {Boolean} boolean true indicates provisioning was started, false otherwise
+*/
+syncStartSubscriptionProvisioning : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetSupportedFeatures'>/**Get the supported feature set synchronously
+</span>*/
+syncGetSupportedFeatures : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncGetLinkLayerStats'>/**Get link layers stats for adapter synchronously
+</span>*/
+syncGetLinkLayerStats : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncRemoveNetwork'>/**Delete a network
+</span>@param {Object {AsyncChannel}} networkId id of the network to be removed
+*/
+syncRemoveNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncEnableNetwork'>/**Enable a network
+</span>@param {Object {AsyncChannel}} netId         network id of the network
+@param {Number} disableOthers true, if all other networks have to be disabled
+@return {Boolean} {@code true} if the operation succeeds, {@code false} otherwise
+*/
+syncEnableNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncDisableNetwork'>/**Disable a network
+</span>@param {Object {AsyncChannel}} netId network id of the network
+@return {Boolean} {@code true} if the operation succeeds, {@code false} otherwise
+*/
+syncDisableNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-enableRssiPolling'>/**Method to enable/disable RSSI polling
+</span>@param {Boolean} enabled boolean idicating if polling should start
+*/
+enableRssiPolling : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-setHighPerfModeEnabled'>/**Set high performance mode of operation.
+</span> Enabling would set active power mode and disable suspend optimizations;
+ disabling would set auto power mode and enable suspend optimizations
+@param {Boolean} enable true if enable, false otherwise
+*/
+setHighPerfModeEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-resetSimAuthNetworks'>/**reset cached SIM credential data
+</span>*/
+resetSimAuthNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-getCurrentNetwork'>/**Get Network object of current wifi network
+</span>@return {Object {android.net.Network}} Network object of current wifi network
+*/
+getCurrentNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-enableTdls'>/**Enable TDLS for a specific MAC address
+</span>*/
+enableTdls : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-sendBluetoothAdapterStateChange'>/**Send a message indicating bluetooth adapter connection state changed
+</span>*/
+sendBluetoothAdapterStateChange : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-removeAppConfigs'>/**Send a message indicating a package has been uninstalled.
+</span>*/
+removeAppConfigs : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-removeUserConfigs'>/**Send a message indicating a user has been removed.
+</span>*/
+removeUserConfigs : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-updateBatteryWorkSource'>/**Update the BatteryStats WorkSource.
+</span>*/
+updateBatteryWorkSource : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-dumpIpClient'>/**Trigger dump on the class IpClient object.
+</span>*/
+dumpIpClient : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-handleBootCompleted'>/**Trigger message to handle boot completed event.
+</span>*/
+handleBootCompleted : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-handleUserSwitch'>/**Trigger message to handle user switch event.
+</span>*/
+handleUserSwitch : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-handleUserUnlock'>/**Trigger message to handle user unlock event.
+</span>*/
+handleUserUnlock : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-handleUserStop'>/**Trigger message to handle user stop event.
+</span>*/
+handleUserStop : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-setPowerSave'>/**Set power save mode
+</span>@param {Boolean} ps true to enable power save (default behavior)
+           false to disable power save.
+@return {Boolean} true for success, false for failure
+*/
+setPowerSave : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-setLowLatencyMode'>/**Set low latency mode
+</span>@param {Boolean} enabled true to enable low latency
+                false to disable low latency (default behavior).
+@return {Boolean} true for success, false for failure
+*/
+setLowLatencyMode : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-isConnectedMacRandomizationEnabled'>/**Helper method to check if Connected MAC Randomization is supported - onDown events are
+</span> skipped if this feature is enabled (b/72459123).
+@return {Boolean} boolean true if Connected MAC randomization is supported, false otherwise
+*/
+isConnectedMacRandomizationEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-failureDetected'>/**Helper method allowing ClientModeManager to report an error (interface went down) and trigger
+</span> recovery.
+@param {Number} reason int indicating the SelfRecovery failure type.
+*/
+failureDetected : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-getCurrentWifiConfiguration'>/**Returns WifiConfiguration object corresponding to the currently connected network, null if
+</span> not connected.
+*/
+getCurrentWifiConfiguration : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-updateCapabilities'>/**Method to update network capabilities from the current WifiConfiguration.
+</span>*/
+updateCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-updateLinkLayerStatsRssiAndScoreReport'>/**Fetches link stats and updates Wifi Score Report.
+</span>*/
+updateLinkLayerStatsRssiAndScoreReport : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-shouldEvaluateWhetherToSendExplicitlySelected'>/**Helper function to check if we need to invoke
+</span> {@link NetworkAgent#explicitlySelected(boolean, boolean)} to indicate that we connected to a
+ network which the user just chose
+ (i.e less than {@link #LAST_SELECTED_NETWORK_EXPIRATION_AGE_MILLIS) before).
+*/
+shouldEvaluateWhetherToSendExplicitlySelected : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-startConnectToNetwork'>/**Automatically connect to the network specified
+</span>@param {Number} networkId ID of the network to connect to
+@param {Number} uid UID of the app triggering the connection.
+@param {String} bssid BSSID of the network
+*/
+startConnectToNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-startRoamToNetwork'>/**Automatically roam to the network specified
+</span>@param {Number} networkId ID of the network to roam to
+@param {Object {ScanResult}} scanResult scan result which identifies the network to roam to
+*/
+startRoamToNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-enableWifiConnectivityManager'>/**Dynamically turn on/off WifiConnectivityManager
+</span>@param {Boolean} enabled true-enable; false-disable
+*/
+enableWifiConnectivityManager : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-updateWifiMetrics'>/**Update WifiMetrics before dumping
+</span>*/
+updateWifiMetrics : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-getIpReachabilityDisconnectEnabled'>/**Returns whether CMD_IP_REACHABILITY_LOST events should trigger disconnects.
+</span>*/
+getIpReachabilityDisconnectEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-setIpReachabilityDisconnectEnabled'>/**Sets whether CMD_IP_REACHABILITY_LOST events should trigger disconnects.
+</span>*/
+setIpReachabilityDisconnectEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-syncInitialize'>/**Sends a message to initialize the ClientModeImpl.
+</span>@return {Boolean} true if succeeded, false otherwise.
+*/
+syncInitialize : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-addNetworkRequestMatchCallback'>/**Add a network request match callback to {@link com.android.server.wifi.WifiNetworkFactory}.
+</span>*/
+addNetworkRequestMatchCallback : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-removeNetworkRequestMatchCallback'>/**Remove a network request match callback from {@link com.android.server.wifi.WifiNetworkFactory}.
+</span>*/
+removeNetworkRequestMatchCallback : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-removeNetworkRequestUserApprovedAccessPointsForApp'>/**Remove all approved access points from {@link com.android.server.wifi.WifiNetworkFactory} for the provided package.
+</span>*/
+removeNetworkRequestUserApprovedAccessPointsForApp : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-clearNetworkRequestUserApprovedAccessPoints'>/**Clear all approved access points from {@link com.android.server.wifi.WifiNetworkFactory}.
+</span>*/
+clearNetworkRequestUserApprovedAccessPoints : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-getFactoryMacAddress'>/**Gets the factory MAC address of wlan0 (station interface).
+</span>@return {String} String representation of the factory MAC address.
+*/
+getFactoryMacAddress : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-setDeviceMobilityState'>/**Sets the current device mobility state.
+</span>@param {Number} state the new device mobility state
+*/
+setDeviceMobilityState : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-updateWifiUsabilityScore'>/**Updates the Wi-Fi usability score.
+</span>@param {Number} seqNum Sequence number of the Wi-Fi usability score.
+@param {Number} score The Wi-Fi usability score.
+@param {Number} predictionHorizonSec Prediction horizon of the Wi-Fi usability score.
+*/
+updateWifiUsabilityScore : function(  ) {},
+
+<span id='com-android-server-wifi-ClientModeImpl-method-probeLink'>/**Sends a link probe.
+</span>*/
+probeLink : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

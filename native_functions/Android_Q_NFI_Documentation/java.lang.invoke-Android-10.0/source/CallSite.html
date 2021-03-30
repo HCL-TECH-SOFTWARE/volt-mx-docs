@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-invoke-CallSite'>/**@class java.lang.invoke.CallSite
+</span>@extends java.lang.Object
+
+ A {@code CallSite} is a holder for a variable {@link java.lang.invoke.MethodHandle},
+ which is called its {@code target}.
+ An {@code invokedynamic} instruction linked to a {@code CallSite} delegates
+ all calls to the site's current target.
+ A {@code CallSite} may be associated with several {@code invokedynamic}
+ instructions, or it may be &quot;free floating&quot;, associated with none.
+ In any case, it may be invoked through an associated method handle
+ called its {@linkplain #dynamicInvoker dynamic invoker}.
+ &lt;p&gt;
+ {@code CallSite} is an abstract class which does not allow
+ direct subclassing by users.  It has three immediate,
+ concrete subclasses that may be either instantiated or subclassed.
+ &lt;ul&gt;
+ &lt;li&gt;If a mutable target is not required, an {@code invokedynamic} instruction
+ may be permanently bound by means of a {@linkplain java.lang.invoke.Transformers.ConstantCallSite constant call site}.
+ &lt;li&gt;If a mutable target is required which has volatile variable semantics,
+ because updates to the target must be immediately and reliably witnessed by other threads,
+ a {@linkplain java.lang.invoke.VolatileCallSite volatile call site} may be used.
+ &lt;li&gt;Otherwise, if a mutable target is required,
+ a {@linkplain java.lang.invoke.MutableCallSite mutable call site} may be used.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ A non-constant call site may be &lt;em&gt;relinked&lt;/em&gt; by changing its target.
+ The new target must have the same {@linkplain java.lang.invoke.MethodHandle#type() type}
+ as the previous target.
+ Thus, though a call site can be relinked to a series of
+ successive targets, it cannot change its type.
+ &lt;p&gt;
+ Here is a sample use of call sites and bootstrap methods which links every
+ dynamic call site to print its arguments:
+&lt;blockquote&gt;&lt;pre&gt;{@code
+static void test() throws Throwable {
+    // THE FOLLOWING LINE IS PSEUDOCODE FOR A JVM INSTRUCTION
+    InvokeDynamic[#bootstrapDynamic].baz(&quot;baz arg&quot;, 2, 3.14);
+}
+private static void printArgs(Object... args) {
+  System.out.println(java.util.Arrays.deepToString(args));
+}
+private static final MethodHandle printArgs;
+static {
+  MethodHandles.Lookup lookup = MethodHandles.lookup();
+  Class thisClass = lookup.lookupClass();  // (who am I?)
+  printArgs = lookup.findStatic(thisClass,
+      &quot;printArgs&quot;, MethodType.methodType(void.class, Object[].class));
+}
+private static CallSite bootstrapDynamic(MethodHandles.Lookup caller, String name, MethodType type) {
+  // ignore caller and name, but match the type:
+  return new ConstantCallSite(printArgs.asType(type));
+}
+}&lt;/pre&gt;&lt;/blockquote&gt;
+ @author John Rose, JSR 292 EG
+*/
+var CallSite = {
+
+<span id='java-lang-invoke-CallSite-method-type'>/**Returns the type of this call site's target.
+</span> Although targets may change, any call site's type is permanent, and can never change to an unequal type.
+ The {@code setTarget} method enforces this invariant by refusing any new target that does
+ not have the previous target's type.
+@return {Object {java.lang.invoke.MethodType}} the type of the current target, which is also the type of any future target
+*/
+type : function(  ) {},
+
+<span id='java-lang-invoke-CallSite-method-getTarget'>/**Returns the target method of the call site, according to the
+</span> behavior defined by this call site's specific class.
+ The immediate subclasses of {@code CallSite} document the
+ class-specific behaviors of this method.
+@return {Object {java.lang.invoke.MethodHandle}} the current linkage state of the call site, its target method handle
+@see ConstantCallSite
+@see VolatileCallSite
+@see #setTarget
+@see ConstantCallSite#getTarget
+@see MutableCallSite#getTarget
+@see VolatileCallSite#getTarget
+*/
+getTarget : function(  ) {},
+
+<span id='java-lang-invoke-CallSite-method-setTarget'>/**Updates the target method of this call site, according to the
+</span> behavior defined by this call site's specific class.
+ The immediate subclasses of {@code CallSite} document the
+ class-specific behaviors of this method.
+ &lt;p&gt;
+ The type of the new target must be {@linkplain java.lang.invoke.MethodType#equals equal to}
+ the type of the old target.
+@param {Object {MethodHandle}} newTarget the new target
+@throws NullPointerException if the proposed new target is null
+@throws WrongMethodTypeException if the proposed new target
+         has a method type that differs from the previous target
+@see CallSite#getTarget
+@see ConstantCallSite#setTarget
+@see MutableCallSite#setTarget
+@see VolatileCallSite#setTarget
+*/
+setTarget : function(  ) {},
+
+<span id='java-lang-invoke-CallSite-method-dynamicInvoker'>/**Produces a method handle equivalent to an invokedynamic instruction
+</span> which has been linked to this call site.
+ &lt;p&gt;
+ This method is equivalent to the following code:
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+ MethodHandle getTarget, invoker, result;
+ getTarget = MethodHandles.publicLookup().bind(this, &quot;getTarget&quot;, MethodType.methodType(MethodHandle.class));
+ invoker = MethodHandles.exactInvoker(this.type());
+ result = MethodHandles.foldArguments(invoker, getTarget)
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which always invokes this call site's current target
+*/
+dynamicInvoker : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

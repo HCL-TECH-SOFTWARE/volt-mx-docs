@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-logging-MemoryHandler'>/**@class java.util.logging.MemoryHandler
+</span>@extends java.util.logging.Handler
+
+ &lt;tt&gt;Handler&lt;/tt&gt; that buffers requests in a circular buffer in memory.
+ &lt;p&gt;
+ Normally this &lt;tt&gt;Handler&lt;/tt&gt; simply stores incoming &lt;tt&gt;LogRecords&lt;/tt&gt;
+ into its memory buffer and discards earlier records.  This buffering
+ is very cheap and avoids formatting costs.  On certain trigger
+ conditions, the &lt;tt&gt;MemoryHandler&lt;/tt&gt; will push out its current buffer
+ contents to a target &lt;tt&gt;Handler&lt;/tt&gt;, which will typically publish
+ them to the outside world.
+ &lt;p&gt;
+ There are three main models for triggering a push of the buffer:
+ &lt;ul&gt;
+ &lt;li&gt;
+ An incoming &lt;tt&gt;LogRecord&lt;/tt&gt; has a type that is greater than
+ a pre-defined level, the &lt;tt&gt;pushLevel&lt;/tt&gt;. &lt;/li&gt;
+ &lt;li&gt;
+ An external class calls the &lt;tt&gt;push&lt;/tt&gt; method explicitly. &lt;/li&gt;
+ &lt;li&gt;
+ A subclass overrides the &lt;tt&gt;log&lt;/tt&gt; method and scans each incoming
+ &lt;tt&gt;LogRecord&lt;/tt&gt; and calls &lt;tt&gt;push&lt;/tt&gt; if a record matches some
+ desired criteria. &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ &lt;b&gt;Configuration:&lt;/b&gt;
+ By default each &lt;tt&gt;MemoryHandler&lt;/tt&gt; is initialized using the following
+ &lt;tt&gt;LogManager&lt;/tt&gt; configuration properties where &lt;tt&gt;&amp;lt;handler-name&amp;gt;&lt;/tt&gt;
+ refers to the fully-qualified class name of the handler.
+ If properties are not defined
+ (or have invalid values) then the specified default values are used.
+ If no default value is defined then a RuntimeException is thrown.
+ &lt;ul&gt;
+ &lt;li&gt;   &amp;lt;handler-name&amp;gt;.level
+        specifies the level for the &lt;tt&gt;Handler&lt;/tt&gt;
+        (defaults to &lt;tt&gt;Level.ALL&lt;/tt&gt;). &lt;/li&gt;
+ &lt;li&gt;   &amp;lt;handler-name&amp;gt;.filter
+        specifies the name of a &lt;tt&gt;Filter&lt;/tt&gt; class to use
+        (defaults to no &lt;tt&gt;Filter&lt;/tt&gt;). &lt;/li&gt;
+ &lt;li&gt;   &amp;lt;handler-name&amp;gt;.size
+        defines the buffer size (defaults to 1000). &lt;/li&gt;
+ &lt;li&gt;   &amp;lt;handler-name&amp;gt;.push
+        defines the &lt;tt&gt;pushLevel&lt;/tt&gt; (defaults to &lt;tt&gt;level.SEVERE&lt;/tt&gt;). &lt;/li&gt;
+ &lt;li&gt;   &amp;lt;handler-name&amp;gt;.target
+        specifies the name of the target &lt;tt&gt;Handler &lt;/tt&gt; class.
+        (no default). &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ For example, the properties for {@code MemoryHandler} would be:
+ &lt;ul&gt;
+ &lt;li&gt;   java.util.logging.MemoryHandler.level=INFO &lt;/li&gt;
+ &lt;li&gt;   java.util.logging.MemoryHandler.formatter=java.util.logging.SimpleFormatter &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ For a custom handler, e.g. com.foo.MyHandler, the properties would be:
+ &lt;ul&gt;
+ &lt;li&gt;   com.foo.MyHandler.level=INFO &lt;/li&gt;
+ &lt;li&gt;   com.foo.MyHandler.formatter=java.util.logging.SimpleFormatter &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ @since 1.4
+*/
+var MemoryHandler = {
+
+<span id='java-util-logging-MemoryHandler-method-publish'>/**Store a &lt;tt&gt;LogRecord&lt;/tt&gt; in an internal buffer.
+</span> &lt;p&gt;
+ If there is a &lt;tt&gt;Filter&lt;/tt&gt;, its &lt;tt&gt;isLoggable&lt;/tt&gt;
+ method is called to check if the given log record is loggable.
+ If not we return.  Otherwise the given record is copied into
+ an internal circular buffer.  Then the record's level property is
+ compared with the &lt;tt&gt;pushLevel&lt;/tt&gt;. If the given level is
+ greater than or equal to the &lt;tt&gt;pushLevel&lt;/tt&gt; then &lt;tt&gt;push&lt;/tt&gt;
+ is called to write all buffered records to the target output
+ &lt;tt&gt;Handler&lt;/tt&gt;.
+@param {Object {LogRecord}} record  description of the log event. A null record is
+                 silently ignored and is not published
+*/
+publish : function(  ) {},
+
+<span id='java-util-logging-MemoryHandler-method-push'>/**Push any buffered output to the target &lt;tt&gt;Handler&lt;/tt&gt;.
+</span> &lt;p&gt;
+ The buffer is then cleared.
+*/
+push : function(  ) {},
+
+<span id='java-util-logging-MemoryHandler-method-flush'>/**Causes a flush on the target &lt;tt&gt;Handler&lt;/tt&gt;.
+</span> &lt;p&gt;
+ Note that the current contents of the &lt;tt&gt;MemoryHandler&lt;/tt&gt;
+ buffer are &lt;b&gt;not&lt;/b&gt; written out.  That requires a &quot;push&quot;.
+*/
+flush : function(  ) {},
+
+<span id='java-util-logging-MemoryHandler-method-close'>/**Close the &lt;tt&gt;Handler&lt;/tt&gt; and free all associated resources.
+</span> This will also close the target &lt;tt&gt;Handler&lt;/tt&gt;.
+@exception SecurityException  if a security manager exists and if
+             the caller does not have &lt;tt&gt;LoggingPermission(&quot;control&quot;)&lt;/tt&gt;.
+*/
+close : function(  ) {},
+
+<span id='java-util-logging-MemoryHandler-method-setPushLevel'>/**Set the &lt;tt&gt;pushLevel&lt;/tt&gt;.  After a &lt;tt&gt;LogRecord&lt;/tt&gt; is copied
+</span> into our internal buffer, if its level is greater than or equal to
+ the &lt;tt&gt;pushLevel&lt;/tt&gt;, then &lt;tt&gt;push&lt;/tt&gt; will be called.
+@param {Object {Level}} newLevel the new value of the &lt;tt&gt;pushLevel&lt;/tt&gt;
+@exception SecurityException  if a security manager exists and if
+             the caller does not have &lt;tt&gt;LoggingPermission(&quot;control&quot;)&lt;/tt&gt;.
+*/
+setPushLevel : function(  ) {},
+
+<span id='java-util-logging-MemoryHandler-method-getPushLevel'>/**Get the &lt;tt&gt;pushLevel&lt;/tt&gt;.
+</span>@return {Object {java.util.logging.Level}} the value of the &lt;tt&gt;pushLevel&lt;/tt&gt;
+*/
+getPushLevel : function(  ) {},
+
+<span id='java-util-logging-MemoryHandler-method-isLoggable'>/**Check if this &lt;tt&gt;Handler&lt;/tt&gt; would actually log a given
+</span> &lt;tt&gt;LogRecord&lt;/tt&gt; into its internal buffer.
+ &lt;p&gt;
+ This method checks if the &lt;tt&gt;LogRecord&lt;/tt&gt; has an appropriate level and
+ whether it satisfies any &lt;tt&gt;Filter&lt;/tt&gt;.  However it does &lt;b&gt;not&lt;/b&gt;
+ check whether the &lt;tt&gt;LogRecord&lt;/tt&gt; would result in a &quot;push&quot; of the
+ buffer contents. It will return false if the &lt;tt&gt;LogRecord&lt;/tt&gt; is null.
+ &lt;p&gt;
+@param {Object {LogRecord}} record  a &lt;tt&gt;LogRecord&lt;/tt&gt;
+@return {Boolean} true if the &lt;tt&gt;LogRecord&lt;/tt&gt; would be logged.
+*/
+isLoggable : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

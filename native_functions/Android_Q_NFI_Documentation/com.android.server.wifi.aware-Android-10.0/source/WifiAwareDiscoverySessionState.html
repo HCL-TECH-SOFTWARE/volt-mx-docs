@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState'>/**@class com.android.server.wifi.aware.WifiAwareDiscoverySessionState
+</span>@extends java.lang.Object
+
+ Manages the state of a single Aware discovery session (publish or subscribe).
+ Primary state consists of a callback through which session callbacks are
+ executed as well as state related to currently active discovery sessions:
+ publish/subscribe ID, and MAC address caching (hiding) from clients.
+*/
+var WifiAwareDiscoverySessionState = {
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-getSessionId'>/**
+</span>*/
+getSessionId : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-getPubSubId'>/**
+</span>*/
+getPubSubId : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-isPublishSession'>/**
+</span>*/
+isPublishSession : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-isRangingEnabled'>/**
+</span>*/
+isRangingEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-getCreationTime'>/**
+</span>*/
+getCreationTime : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-getCallback'>/**
+</span>*/
+getCallback : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-getPeerInfo'>/**Return the peer information of the specified peer ID - or a null if no such peer ID is
+</span> registered.
+*/
+getPeerInfo : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-terminate'>/**Destroy the current discovery session - stops publishing or subscribing
+</span> if currently active.
+*/
+terminate : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-isPubSubIdSession'>/**Indicates whether the publish/subscribe ID (a HAL ID) corresponds to this
+</span> session.
+@param {Number} pubSubId The publish/subscribe HAL ID to be tested.
+@return {Boolean} true if corresponds to this session, false otherwise.
+*/
+isPubSubIdSession : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-updatePublish'>/**Modify a publish discovery session.
+</span>@param {Number} transactionId Transaction ID for the transaction - used in the
+            async callback to match with the original request.
+@param {Object {PublishConfig}} config Configuration of the publish session.
+*/
+updatePublish : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-updateSubscribe'>/**Modify a subscribe discovery session.
+</span>@param {Number} transactionId Transaction ID for the transaction - used in the
+            async callback to match with the original request.
+@param {Object {SubscribeConfig}} config Configuration of the subscribe session.
+*/
+updateSubscribe : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-sendMessage'>/**Send a message to a peer which is part of a discovery session.
+</span>@param {Number} transactionId Transaction ID for the transaction - used in the
+            async callback to match with the original request.
+@param {Number} peerId ID of the peer. Obtained through previous communication (a
+            match indication).
+@param {Object {byte[]}} message Message byte array to send to the peer.
+@param {Number} messageId A message ID provided by caller to be used in any
+            callbacks related to the message (success/failure).
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-onMatch'>/**Callback from HAL when a discovery occurs - i.e. when a match to an
+</span> active subscription request or to a solicited publish request occurs.
+ Propagates to client if registered.
+@param {Number} requestorInstanceId The ID used to identify the peer in this
+            matched session.
+@param {Object {byte[]}} peerMac The MAC address of the peer. Never propagated to client
+            due to privacy concerns.
+@param {Object {byte[]}} serviceSpecificInfo Information from the discovery advertisement
+            (usually not used in the match decisions).
+@param {Object {byte[]}} matchFilter The filter from the discovery advertisement (which was
+            used in the match decision).
+@param {Number} rangingIndication Bit mask indicating the type of ranging event triggered.
+@param {Number} rangeMm The range to the peer in mm (valid if rangingIndication specifies ingress
+                or egress events - i.e. non-zero).
+*/
+onMatch : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-onMessageReceived'>/**Callback from HAL when a message is received from a peer in a discovery
+</span> session. Propagated to client if registered.
+@param {Number} requestorInstanceId An ID used to identify the peer.
+@param {Object {byte[]}} peerMac The MAC address of the peer sending the message. This
+            information is never propagated to the client due to privacy
+            concerns.
+@param {Object {byte[]}} message The received message.
+*/
+onMessageReceived : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareDiscoverySessionState-method-dump'>/**Dump the internal state of the class.
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

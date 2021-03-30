@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-w3c-dom-traversal-NodeFilter'>/**@class org.w3c.dom.traversal.NodeFilter
+</span> Filters are objects that know how to &quot;filter out&quot; nodes. If a
+ &lt;code&gt;NodeIterator&lt;/code&gt; or &lt;code&gt;TreeWalker&lt;/code&gt; is given a
+ &lt;code&gt;NodeFilter&lt;/code&gt;, it applies the filter before it returns the next
+ node. If the filter says to accept the node, the traversal logic returns
+ it; otherwise, traversal looks for the next node and pretends that the
+ node that was rejected was not there.
+ &lt;p&gt;The DOM does not provide any filters. &lt;code&gt;NodeFilter&lt;/code&gt; is just an
+ interface that users can implement to provide their own filters.
+ &lt;p&gt;&lt;code&gt;NodeFilters&lt;/code&gt; do not need to know how to traverse from node
+ to node, nor do they need to know anything about the data structure that
+ is being traversed. This makes it very easy to write filters, since the
+ only thing they have to know how to do is evaluate a single node. One
+ filter may be used with a number of different kinds of traversals,
+ encouraging code reuse.
+ &lt;p&gt;See also the &lt;a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113'&gt;Document Object Model (DOM) Level 2 Traversal and Range Specification&lt;/a&gt;.
+ @since DOM Level 2
+
+ @hide
+*/
+var NodeFilter = {
+
+<span id='org-w3c-dom-traversal-NodeFilter-property-FILTER_ACCEPT'>/** Accept the node. Navigation methods defined for
+</span> &lt;code&gt;NodeIterator&lt;/code&gt; or &lt;code&gt;TreeWalker&lt;/code&gt; will return this
+ node.
+*/
+FILTER_ACCEPT : &quot;1&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-FILTER_REJECT'>/** Reject the node. Navigation methods defined for
+</span> &lt;code&gt;NodeIterator&lt;/code&gt; or &lt;code&gt;TreeWalker&lt;/code&gt; will not return
+ this node. For &lt;code&gt;TreeWalker&lt;/code&gt;, the children of this node
+ will also be rejected. &lt;code&gt;NodeIterators&lt;/code&gt; treat this as a
+ synonym for &lt;code&gt;FILTER_SKIP&lt;/code&gt;.
+*/
+FILTER_REJECT : &quot;2&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-FILTER_SKIP'>/** Skip this single node. Navigation methods defined for
+</span> &lt;code&gt;NodeIterator&lt;/code&gt; or &lt;code&gt;TreeWalker&lt;/code&gt; will not return
+ this node. For both &lt;code&gt;NodeIterator&lt;/code&gt; and
+ &lt;code&gt;TreeWalker&lt;/code&gt;, the children of this node will still be
+ considered.
+*/
+FILTER_SKIP : &quot;3&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_ALL'>/** Show all &lt;code&gt;Nodes&lt;/code&gt;.
+</span>*/
+SHOW_ALL : &quot;-1&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_ELEMENT'>/** Show &lt;code&gt;Element&lt;/code&gt; nodes.
+</span>*/
+SHOW_ELEMENT : &quot;1&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_ATTRIBUTE'>/** Show &lt;code&gt;Attr&lt;/code&gt; nodes. This is meaningful only when creating an
+</span> &lt;code&gt;NodeIterator&lt;/code&gt; or &lt;code&gt;TreeWalker&lt;/code&gt; with an
+ attribute node as its &lt;code&gt;root&lt;/code&gt;; in this case, it means that
+ the attribute node will appear in the first position of the iteration
+ or traversal. Since attributes are never children of other nodes,
+ they do not appear when traversing over the document tree.
+*/
+SHOW_ATTRIBUTE : &quot;2&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_TEXT'>/** Show &lt;code&gt;Text&lt;/code&gt; nodes.
+</span>*/
+SHOW_TEXT : &quot;4&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_CDATA_SECTION'>/** Show &lt;code&gt;CDATASection&lt;/code&gt; nodes.
+</span>*/
+SHOW_CDATA_SECTION : &quot;8&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_ENTITY_REFERENCE'>/** Show &lt;code&gt;EntityReference&lt;/code&gt; nodes.
+</span>*/
+SHOW_ENTITY_REFERENCE : &quot;16&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_ENTITY'>/** Show &lt;code&gt;Entity&lt;/code&gt; nodes. This is meaningful only when creating
+</span> an &lt;code&gt;NodeIterator&lt;/code&gt; or &lt;code&gt;TreeWalker&lt;/code&gt; with an
+ &lt;code&gt;Entity&lt;/code&gt; node as its &lt;code&gt;root&lt;/code&gt;; in this case, it
+ means that the &lt;code&gt;Entity&lt;/code&gt; node will appear in the first
+ position of the traversal. Since entities are not part of the
+ document tree, they do not appear when traversing over the document
+ tree.
+*/
+SHOW_ENTITY : &quot;32&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_PROCESSING_INSTRUCTION'>/** Show &lt;code&gt;ProcessingInstruction&lt;/code&gt; nodes.
+</span>*/
+SHOW_PROCESSING_INSTRUCTION : &quot;64&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_COMMENT'>/** Show &lt;code&gt;Comment&lt;/code&gt; nodes.
+</span>*/
+SHOW_COMMENT : &quot;128&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_DOCUMENT'>/** Show &lt;code&gt;Document&lt;/code&gt; nodes.
+</span>*/
+SHOW_DOCUMENT : &quot;256&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_DOCUMENT_TYPE'>/** Show &lt;code&gt;DocumentType&lt;/code&gt; nodes.
+</span>*/
+SHOW_DOCUMENT_TYPE : &quot;512&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_DOCUMENT_FRAGMENT'>/** Show &lt;code&gt;DocumentFragment&lt;/code&gt; nodes.
+</span>*/
+SHOW_DOCUMENT_FRAGMENT : &quot;1024&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-property-SHOW_NOTATION'>/** Show &lt;code&gt;Notation&lt;/code&gt; nodes. This is meaningful only when creating
+</span> an &lt;code&gt;NodeIterator&lt;/code&gt; or &lt;code&gt;TreeWalker&lt;/code&gt; with a
+ &lt;code&gt;Notation&lt;/code&gt; node as its &lt;code&gt;root&lt;/code&gt;; in this case, it
+ means that the &lt;code&gt;Notation&lt;/code&gt; node will appear in the first
+ position of the traversal. Since notations are not part of the
+ document tree, they do not appear when traversing over the document
+ tree.
+*/
+SHOW_NOTATION : &quot;2048&quot;,
+<span id='org-w3c-dom-traversal-NodeFilter-method-acceptNode'>/**Test whether a specified node is visible in the logical view of a
+</span> &lt;code&gt;TreeWalker&lt;/code&gt; or &lt;code&gt;NodeIterator&lt;/code&gt;. This function
+ will be called by the implementation of &lt;code&gt;TreeWalker&lt;/code&gt; and
+ &lt;code&gt;NodeIterator&lt;/code&gt;; it is not normally called directly from
+ user code. (Though you could do so if you wanted to use the same
+ filter to guide your own application logic.)
+@param {Object {Node}} n The node to check to see if it passes the filter or not.
+@return {Number} A constant to determine whether the node is accepted,
+   rejected, or skipped, as defined above.
+*/
+acceptNode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

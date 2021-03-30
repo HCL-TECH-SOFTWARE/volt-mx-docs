@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-MulticastChannel'>/**@class java.nio.channels.MulticastChannel
+</span> implements java.nio.channels.NetworkChannel
+
+ A network channel that supports Internet Protocol (IP) multicasting.
+
+ &lt;p&gt; IP multicasting is the transmission of IP datagrams to members of
+ a &lt;em&gt;group&lt;/em&gt; that is zero or more hosts identified by a single destination
+ address.
+
+ &lt;p&gt; In the case of a channel to an {@link StandardProtocolFamily#INET IPv4} socket,
+ the underlying operating system supports &lt;a href=&quot;http://www.ietf.org/rfc/rfc2236.txt&quot;&gt;
+ &lt;i&gt;RFC&amp;nbsp;2236: Internet Group Management Protocol, Version 2 (IGMPv2)&lt;/i&gt;&lt;/a&gt;.
+ It may optionally support source filtering as specified by &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc3376.txt&quot;&gt; &lt;i&gt;RFC&amp;nbsp;3376: Internet Group
+ Management Protocol, Version 3 (IGMPv3)&lt;/i&gt;&lt;/a&gt;.
+ For channels to an {@link StandardProtocolFamily#INET6 IPv6} socket, the equivalent
+ standards are &lt;a href=&quot;http://www.ietf.org/rfc/rfc2710.txt&quot;&gt; &lt;i&gt;RFC&amp;nbsp;2710:
+ Multicast Listener Discovery (MLD) for IPv6&lt;/i&gt;&lt;/a&gt; and &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc3810.txt&quot;&gt; &lt;i&gt;RFC&amp;nbsp;3810: Multicast Listener
+ Discovery Version 2 (MLDv2) for IPv6&lt;/i&gt;&lt;/a&gt;.
+
+ &lt;p&gt; The {@link #join(InetAddress,NetworkInterface)} method is used to
+ join a group and receive all multicast datagrams sent to the group. A channel
+ may join several multicast groups and may join the same group on several
+ {@link NetworkInterface interfaces}. Membership is dropped by invoking the {@link java.nio.channels.MembershipKey#drop drop} method on the returned {@link java.nio.channels.MembershipKey}. If the
+ underlying platform supports source filtering then the {@link java.nio.channels.MembershipKey#block
+ block} and {@link java.nio.channels.MembershipKey#unblock unblock} methods can be used to block or
+ unblock multicast datagrams from particular source addresses.
+
+ &lt;p&gt; The {@link #join(InetAddress,NetworkInterface,InetAddress)} method
+ is used to begin receiving datagrams sent to a group whose source address matches
+ a given source address. This method throws {@link UnsupportedOperationException}
+ if the underlying platform does not support source filtering.  Membership is
+ &lt;em&gt;cumulative&lt;/em&gt; and this method may be invoked again with the same group
+ and interface to allow receiving datagrams from other source addresses. The
+ method returns a {@link java.nio.channels.MembershipKey} that represents membership to receive
+ datagrams from the given source address. Invoking the key's {@link java.nio.channels.MembershipKey#drop drop} method drops membership so that datagrams from the
+ source address can no longer be received.
+
+ &lt;h2&gt;Platform dependencies&lt;/h2&gt;
+
+ The multicast implementation is intended to map directly to the native
+ multicasting facility. Consequently, the following items should be considered
+ when developing an application that receives IP multicast datagrams:
+
+ &lt;ol&gt;
+
+ &lt;li&gt;&lt;p&gt; The creation of the channel should specify the {@link ProtocolFamily}
+ that corresponds to the address type of the multicast groups that the channel
+ will join. There is no guarantee that a channel to a socket in one protocol
+ family can join and receive multicast datagrams when the address of the
+ multicast group corresponds to another protocol family. For example, it is
+ implementation specific if a channel to an {@link StandardProtocolFamily#INET6 IPv6}
+ socket can join an {@link StandardProtocolFamily#INET IPv4} multicast group and receive
+ multicast datagrams sent to the group. &lt;/p&gt;&lt;/li&gt;
+
+ &lt;li&gt;&lt;p&gt; The channel's socket should be bound to the {@link InetAddress#isAnyLocalAddress wildcard} address. If the socket is bound to
+ a specific address, rather than the wildcard address then it is implementation
+ specific if multicast datagrams are received by the socket. &lt;/p&gt;&lt;/li&gt;
+
+ &lt;li&gt;&lt;p&gt; The {@link StandardSocketOptions#SO_REUSEADDR SO_REUSEADDR} option should be
+ enabled prior to {@link java.nio.channels.NetworkChannel#bind binding} the socket. This is
+ required to allow multiple members of the group to bind to the same
+ address. &lt;/p&gt;&lt;/li&gt;
+
+ &lt;/ol&gt;
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ &lt;pre&gt;
+     // join multicast group on this interface, and also use this
+     // interface for outgoing multicast datagrams
+     NetworkInterface ni = NetworkInterface.getByName(&quot;hme0&quot;);
+
+     DatagramChannel dc = DatagramChannel.open(StandardProtocolFamily.INET)
+         .setOption(StandardSocketOptions.SO_REUSEADDR, true)
+         .bind(new InetSocketAddress(5000))
+         .setOption(StandardSocketOptions.IP_MULTICAST_IF, ni);
+
+     InetAddress group = InetAddress.getByName(&quot;225.4.5.6&quot;);
+
+     MembershipKey key = dc.join(group, ni);
+ &lt;/pre&gt;
+
+ @since 1.7
+*/
+var MulticastChannel = {
+
+<span id='java-nio-channels-MulticastChannel-method-close'>/**Closes this channel.
+</span>
+ &lt;p&gt; If the channel is a member of a multicast group then the membership
+ is {@link java.nio.channels.MembershipKey#drop dropped}. Upon return, the {@link java.nio.channels.MembershipKey membership-key} will be {@link java.nio.channels.MembershipKey#isValid
+ invalid}.
+
+ &lt;p&gt; This method otherwise behaves exactly as specified by the {@link java.nio.channels.Channel} interface.
+@throws IOException
+          If an I/O error occurs
+*/
+close : function(  ) {},
+
+<span id='java-nio-channels-MulticastChannel-method-join'>/**Joins a multicast group to begin receiving all datagrams sent to the group,
+</span> returning a membership key.
+
+ &lt;p&gt; If this channel is currently a member of the group on the given
+ interface to receive all datagrams then the membership key, representing
+ that membership, is returned. Otherwise this channel joins the group and
+ the resulting new membership key is returned. The resulting membership key
+ is not {@link java.nio.channels.MembershipKey#sourceAddress source-specific}.
+
+ &lt;p&gt; A multicast channel may join several multicast groups, including
+ the same group on more than one interface. An implementation may impose a
+ limit on the number of groups that may be joined at the same time.
+@param {Object {InetAddress}} group
+          The multicast address to join
+@param {Object {NetworkInterface}} interf
+          The network interface on which to join the group
+@return {Object {java.nio.channels.MembershipKey}} The membership key
+@throws IllegalArgumentException
+          If the group parameter is not a {@link InetAddress#isMulticastAddress
+          multicast} address, or the group parameter is an address type
+          that is not supported by this channel
+@throws IllegalStateException
+          If the channel already has source-specific membership of the
+          group on the interface
+@throws UnsupportedOperationException
+          If the channel's socket is not an Internet Protocol socket
+@throws ClosedChannelException
+          If this channel is closed
+@throws IOException
+          If an I/O error occurs
+@throws SecurityException
+          If a security manager is set, and its
+          {@link SecurityManager#checkMulticast(InetAddress) checkMulticast}
+          method denies access to the multiast group
+*/
+join : function(  ) {},
+
+<span id='java-nio-channels-MulticastChannel-method-join'>/**Joins a multicast group to begin receiving datagrams sent to the group
+</span> from a given source address.
+
+ &lt;p&gt; If this channel is currently a member of the group on the given
+ interface to receive datagrams from the given source address then the
+ membership key, representing that membership, is returned. Otherwise this
+ channel joins the group and the resulting new membership key is returned.
+ The resulting membership key is {@link java.nio.channels.MembershipKey#sourceAddress
+ source-specific}.
+
+ &lt;p&gt; Membership is &lt;em&gt;cumulative&lt;/em&gt; and this method may be invoked
+ again with the same group and interface to allow receiving datagrams sent
+ by other source addresses to the group.
+@param {Object {InetAddress}} group
+          The multicast address to join
+@param {Object {NetworkInterface}} interf
+          The network interface on which to join the group
+@param {Object {InetAddress}} source
+          The source address
+@return {Object {java.nio.channels.MembershipKey}} The membership key
+@throws IllegalArgumentException
+          If the group parameter is not a {@link
+          InetAddress#isMulticastAddress multicast} address, the
+          source parameter is not a unicast address, the group
+          parameter is an address type that is not supported by this channel,
+          or the source parameter is not the same address type as the group
+@throws IllegalStateException
+          If the channel is currently a member of the group on the given
+          interface to receive all datagrams
+@throws UnsupportedOperationException
+          If the channel's socket is not an Internet Protocol socket or
+          source filtering is not supported
+@throws ClosedChannelException
+          If this channel is closed
+@throws IOException
+          If an I/O error occurs
+@throws SecurityException
+          If a security manager is set, and its
+          {@link SecurityManager#checkMulticast(InetAddress) checkMulticast}
+          method denies access to the multiast group
+*/
+join : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-recents-events-EventBus'>/**@class com.android.systemui.recents.events.EventBus
+</span>@extends java.lang.Object
+
+ A simple in-process event bus.  It is simple because we can make assumptions about the state of
+ SystemUI and Recent's lifecycle.
+
+ &lt;p&gt;
+ Currently, there is a single EventBus that handles {@link com.android.systemui.recents.events.EventBus.EventBus.com.android.systemui.recents.events.EventBus.Event}s for each subscriber
+ on the main application thread.  Publishers can send() events to synchronously call subscribers
+ of that event, or post() events to be processed in the next run of the {@link Looper}.
+
+ &lt;p&gt;
+ Subscribers must be registered with a particular EventBus before they will receive events, and
+ handler methods must match a specific signature.
+
+ &lt;p&gt;
+ Event method signature:&lt;ul&gt;
+ &lt;li&gt;Methods must be public final
+ &lt;li&gt;Methods must return void
+ &lt;li&gt;Methods must be called &quot;onBusEvent&quot;
+ &lt;li&gt;Methods must take one parameter, of class type deriving from {@link com.android.systemui.recents.events.EventBus.EventBus.com.android.systemui.recents.events.EventBus.Event}
+ &lt;/ul&gt;
+
+ &lt;/p&gt;
+ Each subscriber can be registered with a given priority (default 1), and events will be dispatch
+ in decreasing order of priority.  For subscribers with the same priority, events will be
+ dispatched by latest registration time to earliest.
+
+ &lt;p&gt;
+ Caveats:&lt;ul&gt;
+ &lt;li&gt;The EventBus keeps a {@link WeakReference} to the publisher to prevent memory leaks, so
+ there must be another strong reference to the publisher for it to not get garbage-collected and
+ continue receiving events.
+ &lt;li&gt;Because the event handlers are called back using reflection, the EventBus is not intended
+ for use in tight, performance criticial loops.  For most user input/system callback events, this
+ is generally of low enough frequency to use the EventBus.
+ &lt;li&gt;Because the event handlers are called back using reflection, there will often be no
+ references to them from actual code.  The proguard configuration will be need to be updated to
+ keep these extra methods:
+
+ -keepclassmembers class ** {
+ public void onBusEvent(**);
+ public void onInterprocessBusEvent(**);
+ }
+ -keepclassmembers class ** extends **.EventBus$InterprocessEvent {
+ public &lt;init&gt;(android.os.Bundle);
+ }
+
+ &lt;li&gt;Subscriber registration can be expensive depending on the subscriber's {@link Class}.  This
+ is only done once per class type, but if possible, it is best to pre-register an instance of
+ that class beforehand or when idle.
+ &lt;li&gt;Each event should be sent once.  Events may hold internal information about the current
+ dispatch, or may be queued to be dispatched on another thread (if posted from a non-main thread),
+ so it may be unsafe to edit, change, or re-send the event again.
+ &lt;li&gt;Events should follow a pattern of public-final POD (plain old data) objects, where they are
+ initialized by the constructor and read by each subscriber of that event.  Subscribers should
+ never alter events as they are processed, and this enforces that pattern.
+ &lt;/ul&gt;
+
+ &lt;p&gt;
+ Future optimizations:
+ &lt;li&gt;throw exception/log when a subscriber loses the reference
+ &lt;li&gt;trace cost per registration &amp; invocation
+ &lt;li&gt;trace cross-process invocation
+ &lt;li&gt;register(subscriber, Class&amp;lt;?&amp;gt;...) -- pass in exact class types you want registered
+ &lt;li&gt;setSubscriberEventHandlerPriority(subscriber, Class&lt;Event&gt;, priority)
+ &lt;li&gt;allow subscribers to implement interface, ie. EventBus.Subscriber, which lets then test a
+ message before invocation (ie. check if task id == this task id)
+ &lt;li&gt;add postOnce() which automatically debounces
+ &lt;li&gt;add postDelayed() which delays / postDelayedOnce() which delays and bounces
+ &lt;li&gt;consolidate register() and registerInterprocess()
+ &lt;li&gt;sendForResult&amp;lt;ReturnType&amp;gt;(Event) to send and get a result, but who will send the
+ result?
+ &lt;/p&gt;
+*/
+var EventBus = {
+
+<span id='com-android-systemui-recents-events-EventBus-method-getDefault'>/**
+</span>@return {Object {com.android.systemui.recents.events.EventBus}} the default event bus for the application's main thread.
+*/
+getDefault : function(  ) {},
+
+<span id='com-android-systemui-recents-events-EventBus-method-register'>/**Registers a subscriber to receive events with the default priority.
+</span>@param {Object {Object}} subscriber the subscriber to handle events.  If this is the first instance of the
+                   subscriber's class type that has been registered, the class's methods will
+                   be scanned for appropriate event handler methods.
+*/
+register : function(  ) {},
+
+<span id='com-android-systemui-recents-events-EventBus-method-register'>/**Registers a subscriber to receive events with the given priority.
+</span>@param {Object {Object}} subscriber the subscriber to handle events.  If this is the first instance of the
+                   subscriber's class type that has been registered, the class's methods will
+                   be scanned for appropriate event handler methods.
+@param {Number} priority the priority that this subscriber will receive events relative to other
+                 subscribers
+*/
+register : function(  ) {},
+
+<span id='com-android-systemui-recents-events-EventBus-method-unregister'>/**Remove all EventHandlers pointing to the specified subscriber.  This does not remove the
+</span> mapping of subscriber type to event handler method, in case new instances of this subscriber
+ are registered.
+*/
+unregister : function(  ) {},
+
+<span id='com-android-systemui-recents-events-EventBus-method-send'>/**Sends an event to the subscribers of the given event type immediately.  This can only be
+</span> called from the same thread as the EventBus's looper thread (for the default EventBus, this
+ is the main application thread).
+*/
+send : function(  ) {},
+
+<span id='com-android-systemui-recents-events-EventBus-method-post'>/**Post a message to the subscribers of the given event type.  The messages will be posted on
+</span> the EventBus's looper thread (for the default EventBus, this is the main application thread).
+*/
+post : function(  ) {},
+
+<span id='com-android-systemui-recents-events-EventBus-method-sendOntoMainThread'>/**If this method is called from the main thread, it will be handled directly. If this method
+</span> is not called from the main thread, it will be posted onto the main thread.
+*/
+sendOntoMainThread : function(  ) {},
+
+<span id='com-android-systemui-recents-events-EventBus-method-dump'>/**
+</span>@return {Object {void}} a dump of the current state of the EventBus
+*/
+dump : function(  ) {},
+
+<span id='com-android-systemui-recents-events-EventBus-method-dumpInternal'>/**
+</span>*/
+dumpInternal : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

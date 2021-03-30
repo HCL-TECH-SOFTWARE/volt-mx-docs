@@ -1,0 +1,2589 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-file-Files'>/**@class java.nio.file.Files
+</span>@extends java.lang.Object
+
+ This class consists exclusively of static methods that operate on files,
+ directories, or other types of files.
+
+ &lt;p&gt; In most cases, the methods defined here will delegate to the associated
+ file system provider to perform the file operations.
+
+ @since 1.7
+*/
+var Files = {
+
+<span id='java-nio-file-Files-method-newInputStream'>/**Opens a file, returning an input stream to read from the file. The stream
+</span> will not be buffered, and is not required to support the {@link InputStream#mark mark} or {@link InputStream#reset reset} methods. The
+ stream will be safe for access by multiple concurrent threads. Reading
+ commences at the beginning of the file. Whether the returned stream is
+ &lt;i&gt;asynchronously closeable&lt;/i&gt; and/or &lt;i&gt;interruptible&lt;/i&gt; is highly
+ file system provider specific and therefore not specified.
+
+ &lt;p&gt; The {@code options} parameter determines how the file is opened.
+ If no options are present then it is equivalent to opening the file with
+ the {@link java.nio.file.StandardOpenOption#READ READ} option. In addition to the {@code
+ READ} option, an implementation may also support additional implementation
+ specific options.
+@param {Object {Path}} path
+          the path to the file to open
+@param {Object {java.nio.file.OpenOption[]}} options
+          options specifying how the file is opened
+@return {Object {java.io.InputStream}} a new input stream
+@throws IllegalArgumentException
+          if an invalid combination of options is specified
+@throws UnsupportedOperationException
+          if an unsupported option is specified
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file.
+*/
+newInputStream : function(  ) {},
+
+<span id='java-nio-file-Files-method-newOutputStream'>/**Opens or creates a file, returning an output stream that may be used to
+</span> write bytes to the file. The resulting stream will not be buffered. The
+ stream will be safe for access by multiple concurrent threads. Whether
+ the returned stream is &lt;i&gt;asynchronously closeable&lt;/i&gt; and/or
+ &lt;i&gt;interruptible&lt;/i&gt; is highly file system provider specific and
+ therefore not specified.
+
+ &lt;p&gt; This method opens or creates a file in exactly the manner specified
+ by the {@link #newByteChannel(Path,Set,FileAttribute[]) newByteChannel}
+ method with the exception that the {@link java.nio.file.StandardOpenOption#READ READ}
+ option may not be present in the array of options. If no options are
+ present then this method works as if the {@link java.nio.file.StandardOpenOption#CREATE
+ CREATE}, {@link java.nio.file.StandardOpenOption#TRUNCATE_EXISTING TRUNCATE_EXISTING},
+ and {@link java.nio.file.StandardOpenOption#WRITE WRITE} options are present. In other
+ words, it opens the file for writing, creating the file if it doesn't
+ exist, or initially truncating an existing {@link #isRegularFile
+ regular-file} to a size of {@code 0} if it exists.
+
+ &lt;p&gt; &lt;b&gt;Usage Examples:&lt;/b&gt;
+ &lt;pre&gt;
+     Path path = ...
+
+     // truncate and overwrite an existing file, or create the file if
+     // it doesn't initially exist
+     OutputStream out = Files.newOutputStream(path);
+
+     // append to an existing file, fail if the file does not exist
+     out = Files.newOutputStream(path, APPEND);
+
+     // append to an existing file, create file if it doesn't initially exist
+     out = Files.newOutputStream(path, CREATE, APPEND);
+
+     // always create new file, failing if it already exists
+     out = Files.newOutputStream(path, CREATE_NEW);
+ &lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file to open or create
+@param {Object {java.nio.file.OpenOption[]}} options
+          options specifying how the file is opened
+@return {Object {java.io.OutputStream}} a new output stream
+@throws IllegalArgumentException
+          if {@code options} contains an invalid combination of options
+@throws UnsupportedOperationException
+          if an unsupported option is specified
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the file. The {@link
+          SecurityManager#checkDelete(String) checkDelete} method is
+          invoked to check delete access if the file is opened with the
+          {@code DELETE_ON_CLOSE} option.
+*/
+newOutputStream : function(  ) {},
+
+<span id='java-nio-file-Files-method-newByteChannel'>/**Opens or creates a file, returning a seekable byte channel to access the
+</span> file.
+
+ &lt;p&gt; The {@code options} parameter determines how the file is opened.
+ The {@link java.nio.file.StandardOpenOption#READ READ} and {@link java.nio.file.StandardOpenOption#WRITE WRITE} options determine if the file should be
+ opened for reading and/or writing. If neither option (or the {@link java.nio.file.StandardOpenOption#APPEND APPEND} option) is present then the file is
+ opened for reading. By default reading or writing commence at the
+ beginning of the file.
+
+ &lt;p&gt; In the addition to {@code READ} and {@code WRITE}, the following
+ options may be present:
+
+ &lt;table border=1 cellpadding=5 summary=&quot;Options&quot;&gt;
+ &lt;tr&gt; &lt;th&gt;Option&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@link java.nio.file.StandardOpenOption#APPEND APPEND} &lt;/td&gt;
+   &lt;td&gt; If this option is present then the file is opened for writing and
+     each invocation of the channel's {@code write} method first advances
+     the position to the end of the file and then writes the requested
+     data. Whether the advancement of the position and the writing of the
+     data are done in a single atomic operation is system-dependent and
+     therefore unspecified. This option may not be used in conjunction
+     with the {@code READ} or {@code TRUNCATE_EXISTING} options. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@link java.nio.file.StandardOpenOption#TRUNCATE_EXISTING TRUNCATE_EXISTING} &lt;/td&gt;
+   &lt;td&gt; If this option is present then the existing file is truncated to
+   a size of 0 bytes. This option is ignored when the file is opened only
+   for reading. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@link java.nio.file.StandardOpenOption#CREATE_NEW CREATE_NEW} &lt;/td&gt;
+   &lt;td&gt; If this option is present then a new file is created, failing if
+   the file already exists or is a symbolic link. When creating a file the
+   check for the existence of the file and the creation of the file if it
+   does not exist is atomic with respect to other file system operations.
+   This option is ignored when the file is opened only for reading. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td &gt; {@link java.nio.file.StandardOpenOption#CREATE CREATE} &lt;/td&gt;
+   &lt;td&gt; If this option is present then an existing file is opened if it
+   exists, otherwise a new file is created. This option is ignored if the
+   {@code CREATE_NEW} option is also present or the file is opened only
+   for reading. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td &gt; {@link java.nio.file.StandardOpenOption#DELETE_ON_CLOSE DELETE_ON_CLOSE} &lt;/td&gt;
+   &lt;td&gt; When this option is present then the implementation makes a
+   &lt;em&gt;best effort&lt;/em&gt; attempt to delete the file when closed by the
+   {@link SeekableByteChannel#close close} method. If the {@code close}
+   method is not invoked then a &lt;em&gt;best effort&lt;/em&gt; attempt is made to
+   delete the file when the Java virtual machine terminates. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt;{@link java.nio.file.StandardOpenOption#SPARSE SPARSE} &lt;/td&gt;
+   &lt;td&gt; When creating a new file this option is a &lt;em&gt;hint&lt;/em&gt; that the
+   new file will be sparse. This option is ignored when not creating
+   a new file. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@link java.nio.file.StandardOpenOption#SYNC SYNC} &lt;/td&gt;
+   &lt;td&gt; Requires that every update to the file's content or metadata be
+   written synchronously to the underlying storage device. (see &lt;a
+   href=&quot;package-summary.html#integrity&quot;&gt; Synchronized I/O file
+   integrity&lt;/a&gt;). &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@link java.nio.file.StandardOpenOption#DSYNC DSYNC} &lt;/td&gt;
+   &lt;td&gt; Requires that every update to the file's content be written
+   synchronously to the underlying storage device. (see &lt;a
+   href=&quot;package-summary.html#integrity&quot;&gt; Synchronized I/O file
+   integrity&lt;/a&gt;). &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt; An implementation may also support additional implementation specific
+ options.
+
+ &lt;p&gt; The {@code attrs} parameter is optional {@link FileAttribute
+ file-attributes} to set atomically when a new file is created.
+
+ &lt;p&gt; In the case of the default provider, the returned seekable byte channel
+ is a {@link java.nio.channels.FileChannel}.
+
+ &lt;p&gt; &lt;b&gt;Usage Examples:&lt;/b&gt;
+ &lt;pre&gt;
+     Path path = ...
+
+     // open file for reading
+     ReadableByteChannel rbc = Files.newByteChannel(path, EnumSet.of(READ)));
+
+     // open file for writing to the end of an existing file, creating
+     // the file if it doesn't already exist
+     WritableByteChannel wbc = Files.newByteChannel(path, EnumSet.of(CREATE,APPEND));
+
+     // create file with initial permissions, opening it for both reading and writing
+     {@code FileAttribute&lt;Set&lt;PosixFilePermission&gt;&gt; perms = ...}
+     SeekableByteChannel sbc = Files.newByteChannel(path, EnumSet.of(CREATE_NEW,READ,WRITE), perms);
+ &lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file to open or create
+@param {Object {java.util.Set}} options
+          options specifying how the file is opened
+@param {Object {java.nio.file.attribute.FileAttribute[]}} attrs
+          an optional list of file attributes to set atomically when
+          creating the file
+@return {Object {java.nio.channels.SeekableByteChannel}} a new seekable byte channel
+@throws IllegalArgumentException
+          if the set contains an invalid combination of options
+@throws UnsupportedOperationException
+          if an unsupported open option is specified or the array contains
+          attributes that cannot be set atomically when creating the file
+@throws FileAlreadyExistsException
+          if a file of that name already exists and the {@link
+          StandardOpenOption#CREATE_NEW CREATE_NEW} option is specified
+          &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the path if the file is
+          opened for reading. The {@link SecurityManager#checkWrite(String)
+          checkWrite} method is invoked to check write access to the path
+          if the file is opened for writing. The {@link
+          SecurityManager#checkDelete(String) checkDelete} method is
+          invoked to check delete access if the file is opened with the
+          {@code DELETE_ON_CLOSE} option.
+@see java.nio.channels.FileChannel#open(Path,Set,FileAttribute[])
+*/
+newByteChannel : function(  ) {},
+
+<span id='java-nio-file-Files-method-newByteChannel'>/**Opens or creates a file, returning a seekable byte channel to access the
+</span> file.
+
+ &lt;p&gt; This method opens or creates a file in exactly the manner specified
+ by the {@link #newByteChannel(Path,Set,FileAttribute[]) newByteChannel}
+ method.
+@param {Object {Path}} path
+          the path to the file to open or create
+@param {Object {java.nio.file.OpenOption[]}} options
+          options specifying how the file is opened
+@return {Object {java.nio.channels.SeekableByteChannel}} a new seekable byte channel
+@throws IllegalArgumentException
+          if the set contains an invalid combination of options
+@throws UnsupportedOperationException
+          if an unsupported open option is specified
+@throws FileAlreadyExistsException
+          if a file of that name already exists and the {@link
+          StandardOpenOption#CREATE_NEW CREATE_NEW} option is specified
+          &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the path if the file is
+          opened for reading. The {@link SecurityManager#checkWrite(String)
+          checkWrite} method is invoked to check write access to the path
+          if the file is opened for writing. The {@link
+          SecurityManager#checkDelete(String) checkDelete} method is
+          invoked to check delete access if the file is opened with the
+          {@code DELETE_ON_CLOSE} option.
+@see java.nio.channels.FileChannel#open(Path,OpenOption[])
+*/
+newByteChannel : function(  ) {},
+
+<span id='java-nio-file-Files-method-newDirectoryStream'>/**Opens a directory, returning a {@link java.nio.file.DirectoryStream} to iterate over
+</span> all entries in the directory. The elements returned by the directory
+ stream's {@link java.nio.file.DirectoryStream#iterator iterator} are of type {@code
+ Path}, each one representing an entry in the directory. The {@code Path}
+ objects are obtained as if by {@link java.nio.file.Path#resolve(java.nio.file.Path) resolving} the
+ name of the directory entry against {@code dir}.
+
+ &lt;p&gt; When not using the try-with-resources construct, then directory
+ stream's {@code close} method should be invoked after iteration is
+ completed so as to free any resources held for the open directory.
+
+ &lt;p&gt; When an implementation supports operations on entries in the
+ directory that execute in a race-free manner then the returned directory
+ stream is a {@link java.nio.file.SecureDirectoryStream}.
+@param {Object {Path}} dir
+          the path to the directory
+@return {Object {java.nio.file.DirectoryStream}} a new and open {@code DirectoryStream} object
+@throws NotDirectoryException
+          if the file could not otherwise be opened because it is not
+          a directory &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the directory.
+*/
+newDirectoryStream : function(  ) {},
+
+<span id='java-nio-file-Files-method-newDirectoryStream'>/**Opens a directory, returning a {@link java.nio.file.DirectoryStream} to iterate over
+</span> the entries in the directory. The elements returned by the directory
+ stream's {@link java.nio.file.DirectoryStream#iterator iterator} are of type {@code
+ Path}, each one representing an entry in the directory. The {@code Path}
+ objects are obtained as if by {@link java.nio.file.Path#resolve(java.nio.file.Path) resolving} the
+ name of the directory entry against {@code dir}. The entries returned by
+ the iterator are filtered by matching the {@code String} representation
+ of their file names against the given &lt;em&gt;globbing&lt;/em&gt; pattern.
+
+ &lt;p&gt; For example, suppose we want to iterate over the files ending with
+ &quot;.java&quot; in a directory:
+ &lt;pre&gt;
+     Path dir = ...
+     try (DirectoryStream&amp;lt;Path&amp;gt; stream = Files.newDirectoryStream(dir, &quot;*.java&quot;)) {
+         :
+     }
+ &lt;/pre&gt;
+
+ &lt;p&gt; The globbing pattern is specified by the {@link java.nio.file.FileSystem#getPathMatcher getPathMatcher} method.
+
+ &lt;p&gt; When not using the try-with-resources construct, then directory
+ stream's {@code close} method should be invoked after iteration is
+ completed so as to free any resources held for the open directory.
+
+ &lt;p&gt; When an implementation supports operations on entries in the
+ directory that execute in a race-free manner then the returned directory
+ stream is a {@link java.nio.file.SecureDirectoryStream}.
+@param {Object {Path}} dir
+          the path to the directory
+@param {String} glob
+          the glob pattern
+@return {Object {java.nio.file.DirectoryStream}} a new and open {@code DirectoryStream} object
+@throws java.util.regex.PatternSyntaxException
+          if the pattern is invalid
+@throws NotDirectoryException
+          if the file could not otherwise be opened because it is not
+          a directory &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the directory.
+*/
+newDirectoryStream : function(  ) {},
+
+<span id='java-nio-file-Files-method-newDirectoryStream'>/**Opens a directory, returning a {@link java.nio.file.DirectoryStream} to iterate over
+</span> the entries in the directory. The elements returned by the directory
+ stream's {@link java.nio.file.DirectoryStream#iterator iterator} are of type {@code
+ Path}, each one representing an entry in the directory. The {@code Path}
+ objects are obtained as if by {@link java.nio.file.Path#resolve(java.nio.file.Path) resolving} the
+ name of the directory entry against {@code dir}. The entries returned by
+ the iterator are filtered by the given {@link java.nio.file.DirectoryStream.Filter
+ filter}.
+
+ &lt;p&gt; When not using the try-with-resources construct, then directory
+ stream's {@code close} method should be invoked after iteration is
+ completed so as to free any resources held for the open directory.
+
+ &lt;p&gt; Where the filter terminates due to an uncaught error or runtime
+ exception then it is propagated to the {@link Iterator#hasNext()
+ hasNext} or {@link Iterator#next() next} method. Where an {@code
+ IOException} is thrown, it results in the {@code hasNext} or {@code
+ next} method throwing a {@link java.nio.file.DirectoryIteratorException} with the
+ {@code IOException} as the cause.
+
+ &lt;p&gt; When an implementation supports operations on entries in the
+ directory that execute in a race-free manner then the returned directory
+ stream is a {@link java.nio.file.SecureDirectoryStream}.
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ Suppose we want to iterate over the files in a directory that are
+ larger than 8K.
+ &lt;pre&gt;
+     DirectoryStream.Filter&amp;lt;Path&amp;gt; filter = new DirectoryStream.Filter&amp;lt;Path&amp;gt;() {
+         public boolean accept(Path file) throws IOException {
+             return (Files.size(file) &amp;gt; 8192L);
+         }
+     };
+     Path dir = ...
+     try (DirectoryStream&amp;lt;Path&amp;gt; stream = Files.newDirectoryStream(dir, filter)) {
+         :
+     }
+ &lt;/pre&gt;
+@param {Object {Path}} dir
+          the path to the directory
+@param {Object {java.nio.file.DirectoryStream.Filter}} filter
+          the directory stream filter
+@return {Object {java.nio.file.DirectoryStream}} a new and open {@code DirectoryStream} object
+@throws NotDirectoryException
+          if the file could not otherwise be opened because it is not
+          a directory &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the directory.
+*/
+newDirectoryStream : function(  ) {},
+
+<span id='java-nio-file-Files-method-createFile'>/**Creates a new and empty file, failing if the file already exists. The
+</span> check for the existence of the file and the creation of the new file if
+ it does not exist are a single operation that is atomic with respect to
+ all other filesystem activities that might affect the directory.
+
+ &lt;p&gt; The {@code attrs} parameter is optional {@link FileAttribute
+ file-attributes} to set atomically when creating the file. Each attribute
+ is identified by its {@link FileAttribute#name name}. If more than one
+ attribute of the same name is included in the array then all but the last
+ occurrence is ignored.
+@param {Object {Path}} path
+          the path to the file to create
+@param {Object {java.nio.file.attribute.FileAttribute[]}} attrs
+          an optional list of file attributes to set atomically when
+          creating the file
+@return {Object {java.nio.file.Path}} the file
+@throws UnsupportedOperationException
+          if the array contains an attribute that cannot be set atomically
+          when creating the file
+@throws FileAlreadyExistsException
+          if a file of that name already exists
+          &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs or the parent directory does not exist
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the new file.
+*/
+createFile : function(  ) {},
+
+<span id='java-nio-file-Files-method-createDirectory'>/**Creates a new directory. The check for the existence of the file and the
+</span> creation of the directory if it does not exist are a single operation
+ that is atomic with respect to all other filesystem activities that might
+ affect the directory. The {@link #createDirectories createDirectories}
+ method should be used where it is required to create all nonexistent
+ parent directories first.
+
+ &lt;p&gt; The {@code attrs} parameter is optional {@link FileAttribute
+ file-attributes} to set atomically when creating the directory. Each
+ attribute is identified by its {@link FileAttribute#name name}. If more
+ than one attribute of the same name is included in the array then all but
+ the last occurrence is ignored.
+@param {Object {Path}} dir
+          the directory to create
+@param {Object {java.nio.file.attribute.FileAttribute[]}} attrs
+          an optional list of file attributes to set atomically when
+          creating the directory
+@return {Object {java.nio.file.Path}} the directory
+@throws UnsupportedOperationException
+          if the array contains an attribute that cannot be set atomically
+          when creating the directory
+@throws FileAlreadyExistsException
+          if a directory could not otherwise be created because a file of
+          that name already exists &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs or the parent directory does not exist
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the new directory.
+*/
+createDirectory : function(  ) {},
+
+<span id='java-nio-file-Files-method-createDirectories'>/**Creates a directory by creating all nonexistent parent directories first.
+</span> Unlike the {@link #createDirectory createDirectory} method, an exception
+ is not thrown if the directory could not be created because it already
+ exists.
+
+ &lt;p&gt; The {@code attrs} parameter is optional {@link FileAttribute
+ file-attributes} to set atomically when creating the nonexistent
+ directories. Each file attribute is identified by its {@link FileAttribute#name name}. If more than one attribute of the same name is
+ included in the array then all but the last occurrence is ignored.
+
+ &lt;p&gt; If this method fails, then it may do so after creating some, but not
+ all, of the parent directories.
+@param {Object {Path}} dir
+          the directory to create
+@param {Object {java.nio.file.attribute.FileAttribute[]}} attrs
+          an optional list of file attributes to set atomically when
+          creating the directory
+@return {Object {java.nio.file.Path}} the directory
+@throws UnsupportedOperationException
+          if the array contains an attribute that cannot be set atomically
+          when creating the directory
+@throws FileAlreadyExistsException
+          if {@code dir} exists but is not a directory &lt;i&gt;(optional specific
+          exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          in the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked prior to attempting to create a directory and
+          its {@link SecurityManager#checkRead(String) checkRead} is
+          invoked for each parent directory that is checked. If {@code
+          dir} is not an absolute path then its {@link Path#toAbsolutePath
+          toAbsolutePath} may need to be invoked to get its absolute path.
+          This may invoke the security manager's {@link
+          SecurityManager#checkPropertyAccess(String) checkPropertyAccess}
+          method to check access to the system property {@code user.dir}
+*/
+createDirectories : function(  ) {},
+
+<span id='java-nio-file-Files-method-createTempFile'>/**Creates a new empty file in the specified directory, using the given
+</span> prefix and suffix strings to generate its name. The resulting
+ {@code Path} is associated with the same {@code FileSystem} as the given
+ directory.
+
+ &lt;p&gt; The details as to how the name of the file is constructed is
+ implementation dependent and therefore not specified. Where possible
+ the {@code prefix} and {@code suffix} are used to construct candidate
+ names in the same manner as the {@link java.io.File#createTempFile(String,String,File)} method.
+
+ &lt;p&gt; As with the {@code File.createTempFile} methods, this method is only
+ part of a temporary-file facility. Where used as a &lt;em&gt;work files&lt;/em&gt;,
+ the resulting file may be opened using the {@link java.nio.file.StandardOpenOption#DELETE_ON_CLOSE DELETE_ON_CLOSE} option so that the
+ file is deleted when the appropriate {@code close} method is invoked.
+ Alternatively, a {@link Runtime#addShutdownHook shutdown-hook}, or the
+ {@link java.io.File#deleteOnExit} mechanism may be used to delete the
+ file automatically.
+
+ &lt;p&gt; The {@code attrs} parameter is optional {@link FileAttribute
+ file-attributes} to set atomically when creating the file. Each attribute
+ is identified by its {@link FileAttribute#name name}. If more than one
+ attribute of the same name is included in the array then all but the last
+ occurrence is ignored. When no file attributes are specified, then the
+ resulting file may have more restrictive access permissions to files
+ created by the {@link java.io.File#createTempFile(String,String,File)}
+ method.
+@param {Object {Path}} dir
+          the path to directory in which to create the file
+@param {String} prefix
+          the prefix string to be used in generating the file's name;
+          may be {@code null}
+@param {String} suffix
+          the suffix string to be used in generating the file's name;
+          may be {@code null}, in which case &quot;{@code .tmp}&quot; is used
+@param {Object {java.nio.file.attribute.FileAttribute[]}} attrs
+          an optional list of file attributes to set atomically when
+          creating the file
+@return {Object {java.nio.file.Path}} the path to the newly created file that did not exist before
+          this method was invoked
+@throws IllegalArgumentException
+          if the prefix or suffix parameters cannot be used to generate
+          a candidate file name
+@throws UnsupportedOperationException
+          if the array contains an attribute that cannot be set atomically
+          when creating the directory
+@throws IOException
+          if an I/O error occurs or {@code dir} does not exist
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the file.
+*/
+createTempFile : function(  ) {},
+
+<span id='java-nio-file-Files-method-createTempFile'>/**Creates an empty file in the default temporary-file directory, using
+</span> the given prefix and suffix to generate its name. The resulting {@code
+ Path} is associated with the default {@code FileSystem}.
+
+ &lt;p&gt; This method works in exactly the manner specified by the
+ {@link #createTempFile(Path,String,String,FileAttribute[])} method for
+ the case that the {@code dir} parameter is the temporary-file directory.
+@param {String} prefix
+          the prefix string to be used in generating the file's name;
+          may be {@code null}
+@param {String} suffix
+          the suffix string to be used in generating the file's name;
+          may be {@code null}, in which case &quot;{@code .tmp}&quot; is used
+@param {Object {java.nio.file.attribute.FileAttribute[]}} attrs
+          an optional list of file attributes to set atomically when
+          creating the file
+@return {Object {java.nio.file.Path}} the path to the newly created file that did not exist before
+          this method was invoked
+@throws IllegalArgumentException
+          if the prefix or suffix parameters cannot be used to generate
+          a candidate file name
+@throws UnsupportedOperationException
+          if the array contains an attribute that cannot be set atomically
+          when creating the directory
+@throws IOException
+          if an I/O error occurs or the temporary-file directory does not
+          exist
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the file.
+*/
+createTempFile : function(  ) {},
+
+<span id='java-nio-file-Files-method-createTempDirectory'>/**Creates a new directory in the specified directory, using the given
+</span> prefix to generate its name.  The resulting {@code Path} is associated
+ with the same {@code FileSystem} as the given directory.
+
+ &lt;p&gt; The details as to how the name of the directory is constructed is
+ implementation dependent and therefore not specified. Where possible
+ the {@code prefix} is used to construct candidate names.
+
+ &lt;p&gt; As with the {@code createTempFile} methods, this method is only
+ part of a temporary-file facility. A {@link Runtime#addShutdownHook
+ shutdown-hook}, or the {@link java.io.File#deleteOnExit} mechanism may be
+ used to delete the directory automatically.
+
+ &lt;p&gt; The {@code attrs} parameter is optional {@link FileAttribute
+ file-attributes} to set atomically when creating the directory. Each
+ attribute is identified by its {@link FileAttribute#name name}. If more
+ than one attribute of the same name is included in the array then all but
+ the last occurrence is ignored.
+@param {Object {Path}} dir
+          the path to directory in which to create the directory
+@param {String} prefix
+          the prefix string to be used in generating the directory's name;
+          may be {@code null}
+@param {Object {java.nio.file.attribute.FileAttribute[]}} attrs
+          an optional list of file attributes to set atomically when
+          creating the directory
+@return {Object {java.nio.file.Path}} the path to the newly created directory that did not exist before
+          this method was invoked
+@throws IllegalArgumentException
+          if the prefix cannot be used to generate a candidate directory name
+@throws UnsupportedOperationException
+          if the array contains an attribute that cannot be set atomically
+          when creating the directory
+@throws IOException
+          if an I/O error occurs or {@code dir} does not exist
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access when creating the
+          directory.
+*/
+createTempDirectory : function(  ) {},
+
+<span id='java-nio-file-Files-method-createTempDirectory'>/**Creates a new directory in the default temporary-file directory, using
+</span> the given prefix to generate its name. The resulting {@code Path} is
+ associated with the default {@code FileSystem}.
+
+ &lt;p&gt; This method works in exactly the manner specified by {@link #createTempDirectory(Path,String,FileAttribute[])} method for the case
+ that the {@code dir} parameter is the temporary-file directory.
+@param {String} prefix
+          the prefix string to be used in generating the directory's name;
+          may be {@code null}
+@param {Object {java.nio.file.attribute.FileAttribute[]}} attrs
+          an optional list of file attributes to set atomically when
+          creating the directory
+@return {Object {java.nio.file.Path}} the path to the newly created directory that did not exist before
+          this method was invoked
+@throws IllegalArgumentException
+          if the prefix cannot be used to generate a candidate directory name
+@throws UnsupportedOperationException
+          if the array contains an attribute that cannot be set atomically
+          when creating the directory
+@throws IOException
+          if an I/O error occurs or the temporary-file directory does not
+          exist
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access when creating the
+          directory.
+*/
+createTempDirectory : function(  ) {},
+
+<span id='java-nio-file-Files-method-createSymbolicLink'>/**Creates a symbolic link to a target &lt;i&gt;(optional operation)&lt;/i&gt;.
+</span>
+ &lt;p&gt; The {@code target} parameter is the target of the link. It may be an
+ {@link java.nio.file.Path#isAbsolute absolute} or relative path and may not exist. When
+ the target is a relative path then file system operations on the resulting
+ link are relative to the path of the link.
+
+ &lt;p&gt; The {@code attrs} parameter is optional {@link FileAttribute
+ attributes} to set atomically when creating the link. Each attribute is
+ identified by its {@link FileAttribute#name name}. If more than one attribute
+ of the same name is included in the array then all but the last occurrence
+ is ignored.
+
+ &lt;p&gt; Where symbolic links are supported, but the underlying {@link java.nio.file.FileStore}
+ does not support symbolic links, then this may fail with an {@link IOException}. Additionally, some operating systems may require that the
+ Java virtual machine be started with implementation specific privileges to
+ create symbolic links, in which case this method may throw {@code IOException}.
+@param {Object {Path}} link
+          the path of the symbolic link to create
+@param {Object {Path}} target
+          the target of the symbolic link
+@param {Object {java.nio.file.attribute.FileAttribute[]}} attrs
+          the array of attributes to set atomically when creating the
+          symbolic link
+@return {Object {java.nio.file.Path}} the path to the symbolic link
+@throws UnsupportedOperationException
+          if the implementation does not support symbolic links or the
+          array contains an attribute that cannot be set atomically when
+          creating the symbolic link
+@throws FileAlreadyExistsException
+          if a file with the name already exists &lt;i&gt;(optional specific
+          exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager
+          is installed, it denies {@link LinkPermission}&lt;tt&gt;(&quot;symbolic&quot;)&lt;/tt&gt;
+          or its {@link SecurityManager#checkWrite(String) checkWrite}
+          method denies write access to the path of the symbolic link.
+*/
+createSymbolicLink : function(  ) {},
+
+<span id='java-nio-file-Files-method-createLink'>/**Creates a new link (directory entry) for an existing file &lt;i&gt;(optional
+</span> operation)&lt;/i&gt;.
+
+ &lt;p&gt; The {@code link} parameter locates the directory entry to create.
+ The {@code existing} parameter is the path to an existing file. This
+ method creates a new directory entry for the file so that it can be
+ accessed using {@code link} as the path. On some file systems this is
+ known as creating a &quot;hard link&quot;. Whether the file attributes are
+ maintained for the file or for each directory entry is file system
+ specific and therefore not specified. Typically, a file system requires
+ that all links (directory entries) for a file be on the same file system.
+ Furthermore, on some platforms, the Java virtual machine may require to
+ be started with implementation specific privileges to create hard links
+ or to create links to directories.
+@param {Object {Path}} link
+          the link (directory entry) to create
+@param {Object {Path}} existing
+          a path to an existing file
+@return {Object {java.nio.file.Path}} the path to the link (directory entry)
+@throws UnsupportedOperationException
+          if the implementation does not support adding an existing file
+          to a directory
+@throws FileAlreadyExistsException
+          if the entry could not otherwise be created because a file of
+          that name already exists &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager
+          is installed, it denies {@link LinkPermission}&lt;tt&gt;(&quot;hard&quot;)&lt;/tt&gt;
+          or its {@link SecurityManager#checkWrite(String) checkWrite}
+          method denies write access to either the link or the
+          existing file.
+*/
+createLink : function(  ) {},
+
+<span id='java-nio-file-Files-method-delete'>/**Deletes a file.
+</span>
+ &lt;p&gt; An implementation may require to examine the file to determine if the
+ file is a directory. Consequently this method may not be atomic with respect
+ to other file system operations.  If the file is a symbolic link then the
+ symbolic link itself, not the final target of the link, is deleted.
+
+ &lt;p&gt; If the file is a directory then the directory must be empty. In some
+ implementations a directory has entries for special files or links that
+ are created when the directory is created. In such implementations a
+ directory is considered empty when only the special entries exist.
+ This method can be used with the {@link #walkFileTree walkFileTree}
+ method to delete a directory and all entries in the directory, or an
+ entire &lt;i&gt;file-tree&lt;/i&gt; where required.
+
+ &lt;p&gt; On some operating systems it may not be possible to remove a file when
+ it is open and in use by this Java virtual machine or other programs.
+@param {Object {Path}} path
+          the path to the file to delete
+@throws NoSuchFileException
+          if the file does not exist &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws DirectoryNotEmptyException
+          if the file is a directory and could not otherwise be deleted
+          because the directory is not empty &lt;i&gt;(optional specific
+          exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkDelete(String)} method
+          is invoked to check delete access to the file
+*/
+delete : function(  ) {},
+
+<span id='java-nio-file-Files-method-deleteIfExists'>/**Deletes a file if it exists.
+</span>
+ &lt;p&gt; As with the {@link #delete(Path) delete(Path)} method, an
+ implementation may need to examine the file to determine if the file is a
+ directory. Consequently this method may not be atomic with respect to
+ other file system operations.  If the file is a symbolic link, then the
+ symbolic link itself, not the final target of the link, is deleted.
+
+ &lt;p&gt; If the file is a directory then the directory must be empty. In some
+ implementations a directory has entries for special files or links that
+ are created when the directory is created. In such implementations a
+ directory is considered empty when only the special entries exist.
+
+ &lt;p&gt; On some operating systems it may not be possible to remove a file when
+ it is open and in use by this Java virtual machine or other programs.
+@param {Object {Path}} path
+          the path to the file to delete
+@return {Boolean} {@code true} if the file was deleted by this method; {@code
+          false} if the file could not be deleted because it did not
+          exist
+@throws DirectoryNotEmptyException
+          if the file is a directory and could not otherwise be deleted
+          because the directory is not empty &lt;i&gt;(optional specific
+          exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkDelete(String)} method
+          is invoked to check delete access to the file.
+*/
+deleteIfExists : function(  ) {},
+
+<span id='java-nio-file-Files-method-copy'>/**Copy a file to a target file.
+</span>
+ &lt;p&gt; This method copies a file to the target file with the {@code
+ options} parameter specifying how the copy is performed. By default, the
+ copy fails if the target file already exists or is a symbolic link,
+ except if the source and target are the {@link #isSameFile same} file, in
+ which case the method completes without copying the file. File attributes
+ are not required to be copied to the target file. If symbolic links are
+ supported, and the file is a symbolic link, then the final target of the
+ link is copied. If the file is a directory then it creates an empty
+ directory in the target location (entries in the directory are not
+ copied). This method can be used with the {@link #walkFileTree
+ walkFileTree} method to copy a directory and all entries in the directory,
+ or an entire &lt;i&gt;file-tree&lt;/i&gt; where required.
+
+ &lt;p&gt; The {@code options} parameter may include any of the following:
+
+ &lt;table border=1 cellpadding=5 summary=&quot;&quot;&gt;
+ &lt;tr&gt; &lt;th&gt;Option&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@link java.nio.file.StandardCopyOption#REPLACE_EXISTING REPLACE_EXISTING} &lt;/td&gt;
+   &lt;td&gt; If the target file exists, then the target file is replaced if it
+     is not a non-empty directory. If the target file exists and is a
+     symbolic link, then the symbolic link itself, not the target of
+     the link, is replaced. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@link java.nio.file.StandardCopyOption#COPY_ATTRIBUTES COPY_ATTRIBUTES} &lt;/td&gt;
+   &lt;td&gt; Attempts to copy the file attributes associated with this file to
+     the target file. The exact file attributes that are copied is platform
+     and file system dependent and therefore unspecified. Minimally, the
+     {@link BasicFileAttributes#lastModifiedTime last-modified-time} is
+     copied to the target file if supported by both the source and target
+     file stores. Copying of file timestamps may result in precision
+     loss. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@link java.nio.file.LinkOption#NOFOLLOW_LINKS NOFOLLOW_LINKS} &lt;/td&gt;
+   &lt;td&gt; Symbolic links are not followed. If the file is a symbolic link,
+     then the symbolic link itself, not the target of the link, is copied.
+     It is implementation specific if file attributes can be copied to the
+     new link. In other words, the {@code COPY_ATTRIBUTES} option may be
+     ignored when copying a symbolic link. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt; An implementation of this interface may support additional
+ implementation specific options.
+
+ &lt;p&gt; Copying a file is not an atomic operation. If an {@link IOException}
+ is thrown, then it is possible that the target file is incomplete or some
+ of its file attributes have not been copied from the source file. When
+ the {@code REPLACE_EXISTING} option is specified and the target file
+ exists, then the target file is replaced. The check for the existence of
+ the file and the creation of the new file may not be atomic with respect
+ to other file system activities.
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ Suppose we want to copy a file into a directory, giving it the same file
+ name as the source file:
+ &lt;pre&gt;
+     Path source = ...
+     Path newdir = ...
+     Files.copy(source, newdir.resolve(source.getFileName());
+ &lt;/pre&gt;
+@param {Object {Path}} source
+          the path to the file to copy
+@param {Object {Path}} target
+          the path to the target file (may be associated with a different
+          provider to the source path)
+@param {Object {java.nio.file.CopyOption[]}} options
+          options specifying how the copy should be done
+@return {Object {java.nio.file.Path}} the path to the target file
+@throws UnsupportedOperationException
+          if the array contains a copy option that is not supported
+@throws FileAlreadyExistsException
+          if the target file exists but cannot be replaced because the
+          {@code REPLACE_EXISTING} option is not specified &lt;i&gt;(optional
+          specific exception)&lt;/i&gt;
+@throws DirectoryNotEmptyException
+          the {@code REPLACE_EXISTING} option is specified but the file
+          cannot be replaced because it is a non-empty directory
+          &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the source file, the
+          {@link SecurityManager#checkWrite(String) checkWrite} is invoked
+          to check write access to the target file. If a symbolic link is
+          copied the security manager is invoked to check {@link
+          LinkPermission}{@code (&quot;symbolic&quot;)}.
+*/
+copy : function(  ) {},
+
+<span id='java-nio-file-Files-method-move'>/**Move or rename a file to a target file.
+</span>
+ &lt;p&gt; By default, this method attempts to move the file to the target
+ file, failing if the target file exists except if the source and
+ target are the {@link #isSameFile same} file, in which case this method
+ has no effect. If the file is a symbolic link then the symbolic link
+ itself, not the target of the link, is moved. This method may be
+ invoked to move an empty directory. In some implementations a directory
+ has entries for special files or links that are created when the
+ directory is created. In such implementations a directory is considered
+ empty when only the special entries exist. When invoked to move a
+ directory that is not empty then the directory is moved if it does not
+ require moving the entries in the directory.  For example, renaming a
+ directory on the same {@link java.nio.file.FileStore} will usually not require moving
+ the entries in the directory. When moving a directory requires that its
+ entries be moved then this method fails (by throwing an {@code
+ IOException}). To move a &lt;i&gt;file tree&lt;/i&gt; may involve copying rather
+ than moving directories and this can be done using the {@link #copy copy} method in conjunction with the {@link #walkFileTree java.nio.file.Files.walkFileTree} utility method.
+
+ &lt;p&gt; The {@code options} parameter may include any of the following:
+
+ &lt;table border=1 cellpadding=5 summary=&quot;&quot;&gt;
+ &lt;tr&gt; &lt;th&gt;Option&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@link java.nio.file.StandardCopyOption#REPLACE_EXISTING REPLACE_EXISTING} &lt;/td&gt;
+   &lt;td&gt; If the target file exists, then the target file is replaced if it
+     is not a non-empty directory. If the target file exists and is a
+     symbolic link, then the symbolic link itself, not the target of
+     the link, is replaced. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@link java.nio.file.StandardCopyOption#ATOMIC_MOVE ATOMIC_MOVE} &lt;/td&gt;
+   &lt;td&gt; The move is performed as an atomic file system operation and all
+     other options are ignored. If the target file exists then it is
+     implementation specific if the existing file is replaced or this method
+     fails by throwing an {@link IOException}. If the move cannot be
+     performed as an atomic file system operation then {@link java.nio.file.AtomicMoveNotSupportedException} is thrown. This can arise, for
+     example, when the target location is on a different {@code FileStore}
+     and would require that the file be copied, or target location is
+     associated with a different provider to this object. &lt;/td&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt; An implementation of this interface may support additional
+ implementation specific options.
+
+ &lt;p&gt; Moving a file will copy the {@link BasicFileAttributes#lastModifiedTime last-modified-time} to the target
+ file if supported by both source and target file stores. Copying of file
+ timestamps may result in precision loss. An implementation may also
+ attempt to copy other file attributes but is not required to fail if the
+ file attributes cannot be copied. When the move is performed as
+ a non-atomic operation, and an {@code IOException} is thrown, then the
+ state of the files is not defined. The original file and the target file
+ may both exist, the target file may be incomplete or some of its file
+ attributes may not been copied from the original file.
+
+ &lt;p&gt; &lt;b&gt;Usage Examples:&lt;/b&gt;
+ Suppose we want to rename a file to &quot;newname&quot;, keeping the file in the
+ same directory:
+ &lt;pre&gt;
+     Path source = ...
+     Files.move(source, source.resolveSibling(&quot;newname&quot;));
+ &lt;/pre&gt;
+ Alternatively, suppose we want to move a file to new directory, keeping
+ the same file name, and replacing any existing file of that name in the
+ directory:
+ &lt;pre&gt;
+     Path source = ...
+     Path newdir = ...
+     Files.move(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
+ &lt;/pre&gt;
+@param {Object {Path}} source
+          the path to the file to move
+@param {Object {Path}} target
+          the path to the target file (may be associated with a different
+          provider to the source path)
+@param {Object {java.nio.file.CopyOption[]}} options
+          options specifying how the move should be done
+@return {Object {java.nio.file.Path}} the path to the target file
+@throws UnsupportedOperationException
+          if the array contains a copy option that is not supported
+@throws FileAlreadyExistsException
+          if the target file exists but cannot be replaced because the
+          {@code REPLACE_EXISTING} option is not specified &lt;i&gt;(optional
+          specific exception)&lt;/i&gt;
+@throws DirectoryNotEmptyException
+          the {@code REPLACE_EXISTING} option is specified but the file
+          cannot be replaced because it is a non-empty directory
+          &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws AtomicMoveNotSupportedException
+          if the options array contains the {@code ATOMIC_MOVE} option but
+          the file cannot be moved as an atomic file system operation.
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to both the source and
+          target file.
+*/
+move : function(  ) {},
+
+<span id='java-nio-file-Files-method-readSymbolicLink'>/**Reads the target of a symbolic link &lt;i&gt;(optional operation)&lt;/i&gt;.
+</span>
+ &lt;p&gt; If the file system supports &lt;a href=&quot;package-summary.html#links&quot;&gt;symbolic
+ links&lt;/a&gt; then this method is used to read the target of the link, failing
+ if the file is not a symbolic link. The target of the link need not exist.
+ The returned {@code Path} object will be associated with the same file
+ system as {@code link}.
+@param {Object {Path}} link
+          the path to the symbolic link
+@return {Object {java.nio.file.Path}} a {@code Path} object representing the target of the link
+@throws UnsupportedOperationException
+          if the implementation does not support symbolic links
+@throws NotLinkException
+          if the target could otherwise not be read because the file
+          is not a symbolic link &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager
+          is installed, it checks that {@code FilePermission} has been
+          granted with the &quot;{@code readlink}&quot; action to read the link.
+*/
+readSymbolicLink : function(  ) {},
+
+<span id='java-nio-file-Files-method-getFileStore'>/**Returns the {@link java.nio.file.FileStore} representing the file store where a file
+</span> is located.
+
+ &lt;p&gt; Once a reference to the {@code FileStore} is obtained it is
+ implementation specific if operations on the returned {@code FileStore},
+ or {@link java.nio.file.FileStoreAttributeView} objects obtained from it, continue
+ to depend on the existence of the file. In particular the behavior is not
+ defined for the case that the file is deleted or moved to a different
+ file store.
+@param {Object {Path}} path
+          the path to the file
+@return {Object {java.nio.file.FileStore}} the file store where the file is stored
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file, and in
+          addition it checks {@link RuntimePermission}&lt;tt&gt;
+          (&quot;getFileStoreAttributes&quot;)&lt;/tt&gt;
+*/
+getFileStore : function(  ) {},
+
+<span id='java-nio-file-Files-method-isSameFile'>/**Tests if two paths locate the same file.
+</span>
+ &lt;p&gt; If both {@code Path} objects are {@link java.nio.file.Path#equals(Object) equal}
+ then this method returns {@code true} without checking if the file exists.
+ If the two {@code Path} objects are associated with different providers
+ then this method returns {@code false}. Otherwise, this method checks if
+ both {@code Path} objects locate the same file, and depending on the
+ implementation, may require to open or access both files.
+
+ &lt;p&gt; If the file system and files remain static, then this method implements
+ an equivalence relation for non-null {@code Paths}.
+ &lt;ul&gt;
+ &lt;li&gt;It is &lt;i&gt;reflexive&lt;/i&gt;: for {@code Path} {@code f},
+     {@code isSameFile(f,f)} should return {@code true}.
+ &lt;li&gt;It is &lt;i&gt;symmetric&lt;/i&gt;: for two {@code Paths} {@code f} and {@code g},
+     {@code isSameFile(f,g)} will equal {@code isSameFile(g,f)}.
+ &lt;li&gt;It is &lt;i&gt;transitive&lt;/i&gt;: for three {@code Paths}
+     {@code f}, {@code g}, and {@code h}, if {@code isSameFile(f,g)} returns
+     {@code true} and {@code isSameFile(g,h)} returns {@code true}, then
+     {@code isSameFile(f,h)} will return return {@code true}.
+ &lt;/ul&gt;
+@param {Object {Path}} path
+          one path to the file
+@param {Object {Path}} path2
+          the other path
+@return {Boolean} {@code true} if, and only if, the two paths locate the same file
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to both files.
+@see java.nio.file.attribute.BasicFileAttributes#fileKey
+*/
+isSameFile : function(  ) {},
+
+<span id='java-nio-file-Files-method-isHidden'>/**Tells whether or not a file is considered &lt;em&gt;hidden&lt;/em&gt;. The exact
+</span> definition of hidden is platform or provider dependent. On UNIX for
+ example a file is considered to be hidden if its name begins with a
+ period character ('.'). On Windows a file is considered hidden if it
+ isn't a directory and the DOS {@link DosFileAttributes#isHidden hidden}
+ attribute is set.
+
+ &lt;p&gt; Depending on the implementation this method may require to access
+ the file system to determine if the file is considered hidden.
+@param {Object {Path}} path
+          the path to the file to test
+@return {Boolean} {@code true} if the file is considered hidden
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file.
+*/
+isHidden : function(  ) {},
+
+<span id='java-nio-file-Files-method-probeContentType'>/**Probes the content type of a file.
+</span>
+ &lt;p&gt; This method uses the installed {@link FileTypeDetector} implementations
+ to probe the given file to determine its content type. Each file type
+ detector's {@link FileTypeDetector#probeContentType probeContentType} is
+ invoked, in turn, to probe the file type. If the file is recognized then
+ the content type is returned. If the file is not recognized by any of the
+ installed file type detectors then a system-default file type detector is
+ invoked to guess the content type.
+
+ &lt;p&gt; A given invocation of the Java virtual machine maintains a system-wide
+ list of file type detectors. Installed file type detectors are loaded
+ using the service-provider loading facility defined by the {@link ServiceLoader}
+ class. Installed file type detectors are loaded using the system class
+ loader. If the system class loader cannot be found then the extension class
+ loader is used; If the extension class loader cannot be found then the
+ bootstrap class loader is used. File type detectors are typically installed
+ by placing them in a JAR file on the application class path or in the
+ extension directory, the JAR file contains a provider-configuration file
+ named {@code java.nio.file.spi.FileTypeDetector} in the resource directory
+ {@code META-INF/services}, and the file lists one or more fully-qualified
+ names of concrete subclass of {@code FileTypeDetector } that have a zero
+ argument constructor. If the process of locating or instantiating the
+ installed file type detectors fails then an unspecified error is thrown.
+ The ordering that installed providers are located is implementation
+ specific.
+
+ &lt;p&gt; The return value of this method is the string form of the value of a
+ Multipurpose Internet Mail Extension (MIME) content type as
+ defined by &lt;a href=&quot;http://www.ietf.org/rfc/rfc2045.txt&quot;&gt;&lt;i&gt;RFC&amp;nbsp;2045:
+ Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet
+ Message Bodies&lt;/i&gt;&lt;/a&gt;. The string is guaranteed to be parsable according
+ to the grammar in the RFC.
+@param {Object {Path}} path
+          the path to the file to probe
+@return {String} The content type of the file, or {@code null} if the content
+          type cannot be determined
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          If a security manager is installed and it denies an unspecified
+          permission required by a file type detector implementation.
+*/
+probeContentType : function(  ) {},
+
+<span id='java-nio-file-Files-method-getFileAttributeView'>/**Returns a file attribute view of a given type.
+</span>
+ &lt;p&gt; A file attribute view provides a read-only or updatable view of a
+ set of file attributes. This method is intended to be used where the file
+ attribute view defines type-safe methods to read or update the file
+ attributes. The {@code type} parameter is the type of the attribute view
+ required and the method returns an instance of that type if supported.
+ The {@link BasicFileAttributeView} type supports access to the basic
+ attributes of a file. Invoking this method to select a file attribute
+ view of that type will always return an instance of that class.
+
+ &lt;p&gt; The {@code options} array may be used to indicate how symbolic links
+ are handled by the resulting file attribute view for the case that the
+ file is a symbolic link. By default, symbolic links are followed. If the
+ option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS NOFOLLOW_LINKS} is present then
+ symbolic links are not followed. This option is ignored by implementations
+ that do not support symbolic links.
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ Suppose we want read or set a file's ACL, if supported:
+ &lt;pre&gt;
+     Path path = ...
+     AclFileAttributeView view = Files.getFileAttributeView(path, AclFileAttributeView.class);
+     if (view != null) {
+         List&amp;lt;AclEntry&amp;gt; acl = view.getAcl();
+         :
+     }
+ &lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@param {Object {java.lang.Class}} type
+          the {@code Class} object corresponding to the file attribute view
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@param options
+          options indicating how symbolic links are handled
+@return {Object {java.nio.file.attribute.FileAttributeView}} a file attribute view of the specified type, or {@code null} if
+          the attribute view type is not available
+*/
+getFileAttributeView : function(  ) {},
+
+<span id='java-nio-file-Files-method-readAttributes'>/**Reads a file's attributes as a bulk operation.
+</span>
+ &lt;p&gt; The {@code type} parameter is the type of the attributes required
+ and this method returns an instance of that type if supported. All
+ implementations support a basic set of file attributes and so invoking
+ this method with a  {@code type} parameter of {@code
+ BasicFileAttributes.class} will not throw {@code
+ UnsupportedOperationException}.
+
+ &lt;p&gt; The {@code options} array may be used to indicate how symbolic links
+ are handled for the case that the file is a symbolic link. By default,
+ symbolic links are followed and the file attribute of the final target
+ of the link is read. If the option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS
+ NOFOLLOW_LINKS} is present then symbolic links are not followed.
+
+ &lt;p&gt; It is implementation specific if all file attributes are read as an
+ atomic operation with respect to other file system operations.
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ Suppose we want to read a file's attributes in bulk:
+ &lt;pre&gt;
+    Path path = ...
+    BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
+ &lt;/pre&gt;
+ Alternatively, suppose we want to read file's POSIX attributes without
+ following symbolic links:
+ &lt;pre&gt;
+    PosixFileAttributes attrs = Files.readAttributes(path, PosixFileAttributes.class, NOFOLLOW_LINKS);
+ &lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@param {Object {java.lang.Class}} type
+          the {@code Class} of the file attributes required
+          to read
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@param options
+          options indicating how symbolic links are handled
+@return {Object {java.nio.file.attribute.BasicFileAttributes}} the file attributes
+@throws UnsupportedOperationException
+          if an attributes of the given type are not supported
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, a security manager is
+          installed, its {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file. If this
+          method is invoked to read security sensitive attributes then the
+          security manager may be invoke to check for additional permissions.
+*/
+readAttributes : function(  ) {},
+
+<span id='java-nio-file-Files-method-setAttribute'>/**Sets the value of a file attribute.
+</span>
+ &lt;p&gt; The {@code attribute} parameter identifies the attribute to be set
+ and takes the form:
+ &lt;blockquote&gt;
+ [&lt;i&gt;view-name&lt;/i&gt;&lt;b&gt;:&lt;/b&gt;]&lt;i&gt;attribute-name&lt;/i&gt;
+ &lt;/blockquote&gt;
+ where square brackets [...] delineate an optional component and the
+ character {@code ':'} stands for itself.
+
+ &lt;p&gt; &lt;i&gt;view-name&lt;/i&gt; is the {@link FileAttributeView#name name} of a {@link FileAttributeView} that identifies a set of file attributes. If not
+ specified then it defaults to {@code &quot;basic&quot;}, the name of the file
+ attribute view that identifies the basic set of file attributes common to
+ many file systems. &lt;i&gt;attribute-name&lt;/i&gt; is the name of the attribute
+ within the set.
+
+ &lt;p&gt; The {@code options} array may be used to indicate how symbolic links
+ are handled for the case that the file is a symbolic link. By default,
+ symbolic links are followed and the file attribute of the final target
+ of the link is set. If the option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS
+ NOFOLLOW_LINKS} is present then symbolic links are not followed.
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ Suppose we want to set the DOS &quot;hidden&quot; attribute:
+ &lt;pre&gt;
+    Path path = ...
+    Files.setAttribute(path, &quot;dos:hidden&quot;, true);
+ &lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@param {String} attribute
+          the attribute to set
+@param {Object {Object}} value
+          the attribute value
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@return {Object {java.nio.file.Path}} the {@code path} parameter
+@throws UnsupportedOperationException
+          if the attribute view is not available
+@throws IllegalArgumentException
+          if the attribute name is not specified, or is not recognized, or
+          the attribute value is of the correct type but has an
+          inappropriate value
+@throws ClassCastException
+          if the attribute value is not of the expected type or is a
+          collection containing elements that are not of the expected
+          type
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, its {@link SecurityManager#checkWrite(String) checkWrite}
+          method denies write access to the file. If this method is invoked
+          to set security sensitive attributes then the security manager
+          may be invoked to check for additional permissions.
+*/
+setAttribute : function(  ) {},
+
+<span id='java-nio-file-Files-method-getAttribute'>/**Reads the value of a file attribute.
+</span>
+ &lt;p&gt; The {@code attribute} parameter identifies the attribute to be read
+ and takes the form:
+ &lt;blockquote&gt;
+ [&lt;i&gt;view-name&lt;/i&gt;&lt;b&gt;:&lt;/b&gt;]&lt;i&gt;attribute-name&lt;/i&gt;
+ &lt;/blockquote&gt;
+ where square brackets [...] delineate an optional component and the
+ character {@code ':'} stands for itself.
+
+ &lt;p&gt; &lt;i&gt;view-name&lt;/i&gt; is the {@link FileAttributeView#name name} of a {@link FileAttributeView} that identifies a set of file attributes. If not
+ specified then it defaults to {@code &quot;basic&quot;}, the name of the file
+ attribute view that identifies the basic set of file attributes common to
+ many file systems. &lt;i&gt;attribute-name&lt;/i&gt; is the name of the attribute.
+
+ &lt;p&gt; The {@code options} array may be used to indicate how symbolic links
+ are handled for the case that the file is a symbolic link. By default,
+ symbolic links are followed and the file attribute of the final target
+ of the link is read. If the option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS
+ NOFOLLOW_LINKS} is present then symbolic links are not followed.
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ Suppose we require the user ID of the file owner on a system that
+ supports a &quot;{@code unix}&quot; view:
+ &lt;pre&gt;
+    Path path = ...
+    int uid = (Integer)Files.getAttribute(path, &quot;unix:uid&quot;);
+ &lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@param {String} attribute
+          the attribute to read
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@return {Object {java.lang.Object}} the attribute value
+@throws UnsupportedOperationException
+          if the attribute view is not available
+@throws IllegalArgumentException
+          if the attribute name is not specified or is not recognized
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, its {@link SecurityManager#checkRead(String) checkRead}
+          method denies read access to the file. If this method is invoked
+          to read security sensitive attributes then the security manager
+          may be invoked to check for additional permissions.
+*/
+getAttribute : function(  ) {},
+
+<span id='java-nio-file-Files-method-readAttributes'>/**Reads a set of file attributes as a bulk operation.
+</span>
+ &lt;p&gt; The {@code attributes} parameter identifies the attributes to be read
+ and takes the form:
+ &lt;blockquote&gt;
+ [&lt;i&gt;view-name&lt;/i&gt;&lt;b&gt;:&lt;/b&gt;]&lt;i&gt;attribute-list&lt;/i&gt;
+ &lt;/blockquote&gt;
+ where square brackets [...] delineate an optional component and the
+ character {@code ':'} stands for itself.
+
+ &lt;p&gt; &lt;i&gt;view-name&lt;/i&gt; is the {@link FileAttributeView#name name} of a {@link FileAttributeView} that identifies a set of file attributes. If not
+ specified then it defaults to {@code &quot;basic&quot;}, the name of the file
+ attribute view that identifies the basic set of file attributes common to
+ many file systems.
+
+ &lt;p&gt; The &lt;i&gt;attribute-list&lt;/i&gt; component is a comma separated list of
+ zero or more names of attributes to read. If the list contains the value
+ {@code &quot;*&quot;} then all attributes are read. Attributes that are not supported
+ are ignored and will not be present in the returned map. It is
+ implementation specific if all attributes are read as an atomic operation
+ with respect to other file system operations.
+
+ &lt;p&gt; The following examples demonstrate possible values for the {@code
+ attributes} parameter:
+
+ &lt;blockquote&gt;
+ &lt;table border=&quot;0&quot; summary=&quot;Possible values&quot;&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@code &quot;*&quot;} &lt;/td&gt;
+   &lt;td&gt; Read all {@link BasicFileAttributes basic-file-attributes}. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@code &quot;size,lastModifiedTime,lastAccessTime&quot;} &lt;/td&gt;
+   &lt;td&gt; Reads the file size, last modified time, and last access time
+     attributes. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@code &quot;posix:*&quot;} &lt;/td&gt;
+   &lt;td&gt; Read all {@link PosixFileAttributes POSIX-file-attributes}. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt; {@code &quot;posix:permissions,owner,size&quot;} &lt;/td&gt;
+   &lt;td&gt; Reads the POSX file permissions, owner, and file size. &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;/blockquote&gt;
+
+ &lt;p&gt; The {@code options} array may be used to indicate how symbolic links
+ are handled for the case that the file is a symbolic link. By default,
+ symbolic links are followed and the file attribute of the final target
+ of the link is read. If the option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS
+ NOFOLLOW_LINKS} is present then symbolic links are not followed.
+@param {Object {Path}} path
+          the path to the file
+@param {String} attributes
+          the attributes to read
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@return {Object {java.util.Map}} a map of the attributes returned; The map's keys are the
+          attribute names, its values are the attribute values
+@throws UnsupportedOperationException
+          if the attribute view is not available
+@throws IllegalArgumentException
+          if no attributes are specified or an unrecognized attributes is
+          specified
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, its {@link SecurityManager#checkRead(String) checkRead}
+          method denies read access to the file. If this method is invoked
+          to read security sensitive attributes then the security manager
+          may be invoke to check for additional permissions.
+*/
+readAttributes : function(  ) {},
+
+<span id='java-nio-file-Files-method-getPosixFilePermissions'>/**Returns a file's POSIX file permissions.
+</span>
+ &lt;p&gt; The {@code path} parameter is associated with a {@code FileSystem}
+ that supports the {@link PosixFileAttributeView}. This attribute view
+ provides access to file attributes commonly associated with files on file
+ systems used by operating systems that implement the Portable Operating
+ System Interface (POSIX) family of standards.
+
+ &lt;p&gt; The {@code options} array may be used to indicate how symbolic links
+ are handled for the case that the file is a symbolic link. By default,
+ symbolic links are followed and the file attribute of the final target
+ of the link is read. If the option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS
+ NOFOLLOW_LINKS} is present then symbolic links are not followed.
+@param {Object {Path}} path
+          the path to the file
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@return {Object {java.util.Set}} the file permissions
+@throws UnsupportedOperationException
+          if the associated file system does not support the {@code
+          PosixFileAttributeView}
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, a security manager is
+          installed, and it denies {@link RuntimePermission}&lt;tt&gt;(&quot;accessUserInformation&quot;)&lt;/tt&gt;
+          or its {@link SecurityManager#checkRead(String) checkRead} method
+          denies read access to the file.
+*/
+getPosixFilePermissions : function(  ) {},
+
+<span id='java-nio-file-Files-method-setPosixFilePermissions'>/**Sets a file's POSIX permissions.
+</span>
+ &lt;p&gt; The {@code path} parameter is associated with a {@code FileSystem}
+ that supports the {@link PosixFileAttributeView}. This attribute view
+ provides access to file attributes commonly associated with files on file
+ systems used by operating systems that implement the Portable Operating
+ System Interface (POSIX) family of standards.
+@param {Object {Path}} path
+          The path to the file
+@param {Object {java.util.Set}} perms
+          The new set of permissions
+@return {Object {java.nio.file.Path}} The path
+@throws UnsupportedOperationException
+          if the associated file system does not support the {@code
+          PosixFileAttributeView}
+@throws ClassCastException
+          if the sets contains elements that are not of type {@code
+          PosixFilePermission}
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, it denies {@link RuntimePermission}&lt;tt&gt;(&quot;accessUserInformation&quot;)&lt;/tt&gt;
+          or its {@link SecurityManager#checkWrite(String) checkWrite}
+          method denies write access to the file.
+*/
+setPosixFilePermissions : function(  ) {},
+
+<span id='java-nio-file-Files-method-getOwner'>/**Returns the owner of a file.
+</span>
+ &lt;p&gt; The {@code path} parameter is associated with a file system that
+ supports {@link FileOwnerAttributeView}. This file attribute view provides
+ access to a file attribute that is the owner of the file.
+@param {Object {Path}} path
+          The path to the file
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@return {Object {java.nio.file.attribute.UserPrincipal}} A user principal representing the owner of the file
+@throws UnsupportedOperationException
+          if the associated file system does not support the {@code
+          FileOwnerAttributeView}
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, it denies {@link RuntimePermission}&lt;tt&gt;(&quot;accessUserInformation&quot;)&lt;/tt&gt;
+          or its {@link SecurityManager#checkRead(String) checkRead} method
+          denies read access to the file.
+*/
+getOwner : function(  ) {},
+
+<span id='java-nio-file-Files-method-setOwner'>/**Updates the file owner.
+</span>
+ &lt;p&gt; The {@code path} parameter is associated with a file system that
+ supports {@link FileOwnerAttributeView}. This file attribute view provides
+ access to a file attribute that is the owner of the file.
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ Suppose we want to make &quot;joe&quot; the owner of a file:
+ &lt;pre&gt;
+     Path path = ...
+     UserPrincipalLookupService lookupService =
+         provider(path).getUserPrincipalLookupService();
+     UserPrincipal joe = lookupService.lookupPrincipalByName(&quot;joe&quot;);
+     Files.setOwner(path, joe);
+ &lt;/pre&gt;
+@param {Object {Path}} path
+          The path to the file
+@param {Object {UserPrincipal}} owner
+          The new file owner
+@return {Object {java.nio.file.Path}} The path
+@throws UnsupportedOperationException
+          if the associated file system does not support the {@code
+          FileOwnerAttributeView}
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, it denies {@link RuntimePermission}&lt;tt&gt;(&quot;accessUserInformation&quot;)&lt;/tt&gt;
+          or its {@link SecurityManager#checkWrite(String) checkWrite}
+          method denies write access to the file.
+@see FileSystem#getUserPrincipalLookupService
+@see java.nio.file.attribute.UserPrincipalLookupService
+*/
+setOwner : function(  ) {},
+
+<span id='java-nio-file-Files-method-isSymbolicLink'>/**Tests whether a file is a symbolic link.
+</span>
+ &lt;p&gt; Where it is required to distinguish an I/O exception from the case
+ that the file is not a symbolic link then the file attributes can be
+ read with the {@link #readAttributes(Path,Class,LinkOption[])
+ readAttributes} method and the file type tested with the {@link BasicFileAttributes#isSymbolicLink} method.
+@param {Object {Path}} path  The path to the file
+@return {Boolean} {@code true} if the file is a symbolic link; {@code false} if
+          the file does not exist, is not a symbolic link, or it cannot
+          be determined if the file is a symbolic link or not.
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, its {@link SecurityManager#checkRead(String) checkRead}
+          method denies read access to the file.
+*/
+isSymbolicLink : function(  ) {},
+
+<span id='java-nio-file-Files-method-isDirectory'>/**Tests whether a file is a directory.
+</span>
+ &lt;p&gt; The {@code options} array may be used to indicate how symbolic links
+ are handled for the case that the file is a symbolic link. By default,
+ symbolic links are followed and the file attribute of the final target
+ of the link is read. If the option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS
+ NOFOLLOW_LINKS} is present then symbolic links are not followed.
+
+ &lt;p&gt; Where it is required to distinguish an I/O exception from the case
+ that the file is not a directory then the file attributes can be
+ read with the {@link #readAttributes(Path,Class,LinkOption[])
+ readAttributes} method and the file type tested with the {@link BasicFileAttributes#isDirectory} method.
+@param {Object {Path}} path
+          the path to the file to test
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@return {Boolean} {@code true} if the file is a directory; {@code false} if
+          the file does not exist, is not a directory, or it cannot
+          be determined if the file is a directory or not.
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, its {@link SecurityManager#checkRead(String) checkRead}
+          method denies read access to the file.
+*/
+isDirectory : function(  ) {},
+
+<span id='java-nio-file-Files-method-isRegularFile'>/**Tests whether a file is a regular file with opaque content.
+</span>
+ &lt;p&gt; The {@code options} array may be used to indicate how symbolic links
+ are handled for the case that the file is a symbolic link. By default,
+ symbolic links are followed and the file attribute of the final target
+ of the link is read. If the option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS
+ NOFOLLOW_LINKS} is present then symbolic links are not followed.
+
+ &lt;p&gt; Where it is required to distinguish an I/O exception from the case
+ that the file is not a regular file then the file attributes can be
+ read with the {@link #readAttributes(Path,Class,LinkOption[])
+ readAttributes} method and the file type tested with the {@link BasicFileAttributes#isRegularFile} method.
+@param {Object {Path}} path
+          the path to the file
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@return {Boolean} {@code true} if the file is a regular file; {@code false} if
+          the file does not exist, is not a regular file, or it
+          cannot be determined if the file is a regular file or not.
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, its {@link SecurityManager#checkRead(String) checkRead}
+          method denies read access to the file.
+*/
+isRegularFile : function(  ) {},
+
+<span id='java-nio-file-Files-method-getLastModifiedTime'>/**Returns a file's last modified time.
+</span>
+ &lt;p&gt; The {@code options} array may be used to indicate how symbolic links
+ are handled for the case that the file is a symbolic link. By default,
+ symbolic links are followed and the file attribute of the final target
+ of the link is read. If the option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS
+ NOFOLLOW_LINKS} is present then symbolic links are not followed.
+@param {Object {Path}} path
+          the path to the file
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@return {Object {java.nio.file.attribute.FileTime}} a {@code FileTime} representing the time the file was last
+          modified, or an implementation specific default when a time
+          stamp to indicate the time of last modification is not supported
+          by the file system
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, its {@link SecurityManager#checkRead(String) checkRead}
+          method denies read access to the file.
+@see BasicFileAttributes#lastModifiedTime
+*/
+getLastModifiedTime : function(  ) {},
+
+<span id='java-nio-file-Files-method-setLastModifiedTime'>/**Updates a file's last modified time attribute. The file time is converted
+</span> to the epoch and precision supported by the file system. Converting from
+ finer to coarser granularities result in precision loss. The behavior of
+ this method when attempting to set the last modified time when it is not
+ supported by the file system or is outside the range supported by the
+ underlying file store is not defined. It may or not fail by throwing an
+ {@code IOException}.
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ Suppose we want to set the last modified time to the current time:
+ &lt;pre&gt;
+    Path path = ...
+    FileTime now = FileTime.fromMillis(System.currentTimeMillis());
+    Files.setLastModifiedTime(path, now);
+ &lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@param {Object {FileTime}} time
+          the new last modified time
+@return {Object {java.nio.file.Path}} the path
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, the security manager's {@link
+          SecurityManager#checkWrite(String) checkWrite} method is invoked
+          to check write access to file
+@see BasicFileAttributeView#setTimes
+*/
+setLastModifiedTime : function(  ) {},
+
+<span id='java-nio-file-Files-method-size'>/**Returns the size of a file (in bytes). The size may differ from the
+</span> actual size on the file system due to compression, support for sparse
+ files, or other reasons. The size of files that are not {@link #isRegularFile regular} files is implementation specific and
+ therefore unspecified.
+@param {Object {Path}} path
+          the path to the file
+@return {Number} the file size, in bytes
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, its {@link SecurityManager#checkRead(String) checkRead}
+          method denies read access to the file.
+@see BasicFileAttributes#size
+*/
+size : function(  ) {},
+
+<span id='java-nio-file-Files-method-exists'>/**Tests whether a file exists.
+</span>
+ &lt;p&gt; The {@code options} parameter may be used to indicate how symbolic links
+ are handled for the case that the file is a symbolic link. By default,
+ symbolic links are followed. If the option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS
+ NOFOLLOW_LINKS} is present then symbolic links are not followed.
+
+ &lt;p&gt; Note that the result of this method is immediately outdated. If this
+ method indicates the file exists then there is no guarantee that a
+ subsequence access will succeed. Care should be taken when using this
+ method in security sensitive applications.
+@param {Object {Path}} path
+          the path to the file to test
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+ .
+@return {Boolean} {@code true} if the file exists; {@code false} if the file does
+          not exist or its existence cannot be determined.
+@throws SecurityException
+          In the case of the default provider, the {@link
+          SecurityManager#checkRead(String)} is invoked to check
+          read access to the file.
+@see #notExists
+*/
+exists : function(  ) {},
+
+<span id='java-nio-file-Files-method-notExists'>/**Tests whether the file located by this path does not exist. This method
+</span> is intended for cases where it is required to take action when it can be
+ confirmed that a file does not exist.
+
+ &lt;p&gt; The {@code options} parameter may be used to indicate how symbolic links
+ are handled for the case that the file is a symbolic link. By default,
+ symbolic links are followed. If the option {@link java.nio.file.LinkOption#NOFOLLOW_LINKS
+ NOFOLLOW_LINKS} is present then symbolic links are not followed.
+
+ &lt;p&gt; Note that this method is not the complement of the {@link #exists
+ exists} method. Where it is not possible to determine if a file exists
+ or not then both methods return {@code false}. As with the {@code exists}
+ method, the result of this method is immediately outdated. If this
+ method indicates the file does exist then there is no guarantee that a
+ subsequence attempt to create the file will succeed. Care should be taken
+ when using this method in security sensitive applications.
+@param {Object {Path}} path
+          the path to the file to test
+@param {Object {java.nio.file.LinkOption[]}} options
+          options indicating how symbolic links are handled
+@return {Boolean} {@code true} if the file does not exist; {@code false} if the
+          file exists or its existence cannot be determined
+@throws SecurityException
+          In the case of the default provider, the {@link
+          SecurityManager#checkRead(String)} is invoked to check
+          read access to the file.
+*/
+notExists : function(  ) {},
+
+<span id='java-nio-file-Files-method-isReadable'>/**Tests whether a file is readable. This method checks that a file exists
+</span> and that this Java virtual machine has appropriate privileges that would
+ allow it open the file for reading. Depending on the implementation, this
+ method may require to read file permissions, access control lists, or
+ other file attributes in order to check the effective access to the file.
+ Consequently, this method may not be atomic with respect to other file
+ system operations.
+
+ &lt;p&gt; Note that the result of this method is immediately outdated, there is
+ no guarantee that a subsequent attempt to open the file for reading will
+ succeed (or even that it will access the same file). Care should be taken
+ when using this method in security sensitive applications.
+@param {Object {Path}} path
+          the path to the file to check
+@return {Boolean} {@code true} if the file exists and is readable; {@code false}
+          if the file does not exist, read access would be denied because
+          the Java virtual machine has insufficient privileges, or access
+          cannot be determined
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          is invoked to check read access to the file.
+*/
+isReadable : function(  ) {},
+
+<span id='java-nio-file-Files-method-isWritable'>/**Tests whether a file is writable. This method checks that a file exists
+</span> and that this Java virtual machine has appropriate privileges that would
+ allow it open the file for writing. Depending on the implementation, this
+ method may require to read file permissions, access control lists, or
+ other file attributes in order to check the effective access to the file.
+ Consequently, this method may not be atomic with respect to other file
+ system operations.
+
+ &lt;p&gt; Note that result of this method is immediately outdated, there is no
+ guarantee that a subsequent attempt to open the file for writing will
+ succeed (or even that it will access the same file). Care should be taken
+ when using this method in security sensitive applications.
+@param {Object {Path}} path
+          the path to the file to check
+@return {Boolean} {@code true} if the file exists and is writable; {@code false}
+          if the file does not exist, write access would be denied because
+          the Java virtual machine has insufficient privileges, or access
+          cannot be determined
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          is invoked to check write access to the file.
+*/
+isWritable : function(  ) {},
+
+<span id='java-nio-file-Files-method-isExecutable'>/**Tests whether a file is executable. This method checks that a file exists
+</span> and that this Java virtual machine has appropriate privileges to {@link Runtime#exec execute} the file. The semantics may differ when checking
+ access to a directory. For example, on UNIX systems, checking for
+ execute access checks that the Java virtual machine has permission to
+ search the directory in order to access file or subdirectories.
+
+ &lt;p&gt; Depending on the implementation, this method may require to read file
+ permissions, access control lists, or other file attributes in order to
+ check the effective access to the file. Consequently, this method may not
+ be atomic with respect to other file system operations.
+
+ &lt;p&gt; Note that the result of this method is immediately outdated, there is
+ no guarantee that a subsequent attempt to execute the file will succeed
+ (or even that it will access the same file). Care should be taken when
+ using this method in security sensitive applications.
+@param {Object {Path}} path
+          the path to the file to check
+@return {Boolean} {@code true} if the file exists and is executable; {@code false}
+          if the file does not exist, execute access would be denied because
+          the Java virtual machine has insufficient privileges, or access
+          cannot be determined
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkExec(String)
+          checkExec} is invoked to check execute access to the file.
+*/
+isExecutable : function(  ) {},
+
+<span id='java-nio-file-Files-method-walkFileTree'>/**Walks a file tree.
+</span>
+ &lt;p&gt; This method walks a file tree rooted at a given starting file. The
+ file tree traversal is &lt;em&gt;depth-first&lt;/em&gt; with the given {@link java.nio.file.FileVisitor} invoked for each file encountered. File tree traversal
+ completes when all accessible files in the tree have been visited, or a
+ visit method returns a result of {@link java.nio.file.FileVisitResult#TERMINATE
+ TERMINATE}. Where a visit method terminates due an {@code IOException},
+ an uncaught error, or runtime exception, then the traversal is terminated
+ and the error or exception is propagated to the caller of this method.
+
+ &lt;p&gt; For each file encountered this method attempts to read its {@link java.nio.file.attribute.BasicFileAttributes}. If the file is not a
+ directory then the {@link java.nio.file.FileVisitor#visitFile visitFile} method is
+ invoked with the file attributes. If the file attributes cannot be read,
+ due to an I/O exception, then the {@link java.nio.file.FileVisitor#visitFileFailed
+ visitFileFailed} method is invoked with the I/O exception.
+
+ &lt;p&gt; Where the file is a directory, and the directory could not be opened,
+ then the {@code visitFileFailed} method is invoked with the I/O exception,
+ after which, the file tree walk continues, by default, at the next
+ &lt;em&gt;sibling&lt;/em&gt; of the directory.
+
+ &lt;p&gt; Where the directory is opened successfully, then the entries in the
+ directory, and their &lt;em&gt;descendants&lt;/em&gt; are visited. When all entries
+ have been visited, or an I/O error occurs during iteration of the
+ directory, then the directory is closed and the visitor's {@link java.nio.file.FileVisitor#postVisitDirectory postVisitDirectory} method is invoked.
+ The file tree walk then continues, by default, at the next &lt;em&gt;sibling&lt;/em&gt;
+ of the directory.
+
+ &lt;p&gt; By default, symbolic links are not automatically followed by this
+ method. If the {@code options} parameter contains the {@link java.nio.file.FileVisitOption#FOLLOW_LINKS FOLLOW_LINKS} option then symbolic links are
+ followed. When following links, and the attributes of the target cannot
+ be read, then this method attempts to get the {@code BasicFileAttributes}
+ of the link. If they can be read then the {@code visitFile} method is
+ invoked with the attributes of the link (otherwise the {@code visitFileFailed}
+ method is invoked as specified above).
+
+ &lt;p&gt; If the {@code options} parameter contains the {@link java.nio.file.FileVisitOption#FOLLOW_LINKS FOLLOW_LINKS} option then this method keeps
+ track of directories visited so that cycles can be detected. A cycle
+ arises when there is an entry in a directory that is an ancestor of the
+ directory. Cycle detection is done by recording the {@link java.nio.file.attribute.BasicFileAttributes#fileKey file-key} of directories,
+ or if file keys are not available, by invoking the {@link #isSameFile
+ isSameFile} method to test if a directory is the same file as an
+ ancestor. When a cycle is detected it is treated as an I/O error, and the
+ {@link java.nio.file.FileVisitor#visitFileFailed visitFileFailed} method is invoked with
+ an instance of {@link java.nio.file.FileSystemLoopException}.
+
+ &lt;p&gt; The {@code maxDepth} parameter is the maximum number of levels of
+ directories to visit. A value of {@code 0} means that only the starting
+ file is visited, unless denied by the security manager. A value of
+ {@link Integer#MAX_VALUE MAX_VALUE} may be used to indicate that all
+ levels should be visited. The {@code visitFile} method is invoked for all
+ files, including directories, encountered at {@code maxDepth}, unless the
+ basic file attributes cannot be read, in which case the {@code
+ visitFileFailed} method is invoked.
+
+ &lt;p&gt; If a visitor returns a result of {@code null} then {@code
+ NullPointerException} is thrown.
+
+ &lt;p&gt; When a security manager is installed and it denies access to a file
+ (or directory), then it is ignored and the visitor is not invoked for
+ that file (or directory).
+@param {Object {Path}} start
+          the starting file
+@param {Object {java.util.Set}} options
+          options to configure the traversal
+@param {Number} maxDepth
+          the maximum number of directory levels to visit
+@param {Object {java.nio.file.FileVisitor}} visitor
+          the file visitor to invoke for each file
+@return {Object {java.nio.file.Path}} the starting file
+@throws IllegalArgumentException
+          if the {@code maxDepth} parameter is negative
+@throws SecurityException
+          If the security manager denies access to the starting file.
+          In the case of the default provider, the {@link
+          SecurityManager#checkRead(String) checkRead} method is invoked
+          to check read access to the directory.
+@throws IOException
+          if an I/O error is thrown by a visitor method
+*/
+walkFileTree : function(  ) {},
+
+<span id='java-nio-file-Files-method-walkFileTree'>/**Walks a file tree.
+</span>
+ &lt;p&gt; This method works as if invoking it were equivalent to evaluating the
+ expression:
+ &lt;blockquote&gt;&lt;pre&gt;
+ walkFileTree(start, EnumSet.noneOf(FileVisitOption.class), Integer.MAX_VALUE, visitor)
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ In other words, it does not follow symbolic links, and visits all levels
+ of the file tree.
+@param {Object {Path}} start
+          the starting file
+@param {Object {java.nio.file.FileVisitor}} visitor
+          the file visitor to invoke for each file
+@return {Object {java.nio.file.Path}} the starting file
+@throws SecurityException
+          If the security manager denies access to the starting file.
+          In the case of the default provider, the {@link
+          SecurityManager#checkRead(String) checkRead} method is invoked
+          to check read access to the directory.
+@throws IOException
+          if an I/O error is thrown by a visitor method
+*/
+walkFileTree : function(  ) {},
+
+<span id='java-nio-file-Files-method-newBufferedReader'>/**Opens a file for reading, returning a {@code BufferedReader} that may be
+</span> used to read text from the file in an efficient manner. Bytes from the
+ file are decoded into characters using the specified charset. Reading
+ commences at the beginning of the file.
+
+ &lt;p&gt; The {@code Reader} methods that read from the file throw {@code
+ IOException} if a malformed or unmappable byte sequence is read.
+@param {Object {Path}} path
+          the path to the file
+@param {Object {Charset}} cs
+          the charset to use for decoding
+@return {Object {java.io.BufferedReader}} a new buffered reader, with default buffer size, to read text
+          from the file
+@throws IOException
+          if an I/O error occurs opening the file
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file.
+@see #readAllLines
+*/
+newBufferedReader : function(  ) {},
+
+<span id='java-nio-file-Files-method-newBufferedReader'>/**Opens a file for reading, returning a {@code BufferedReader} to read text
+</span> from the file in an efficient manner. Bytes from the file are decoded into
+ characters using the {@link StandardCharsets#UTF_8 UTF-8} {@link Charset
+ charset}.
+
+ &lt;p&gt; This method works as if invoking it were equivalent to evaluating the
+ expression:
+ &lt;pre&gt;{@code
+ Files.newBufferedReader(path, StandardCharsets.UTF_8)
+ }&lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@return {Object {java.io.BufferedReader}} a new buffered reader, with default buffer size, to read text
+          from the file
+@throws IOException
+          if an I/O error occurs opening the file
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file.
+@since 1.8
+*/
+newBufferedReader : function(  ) {},
+
+<span id='java-nio-file-Files-method-newBufferedWriter'>/**Opens or creates a file for writing, returning a {@code BufferedWriter}
+</span> that may be used to write text to the file in an efficient manner.
+ The {@code options} parameter specifies how the the file is created or
+ opened. If no options are present then this method works as if the {@link java.nio.file.StandardOpenOption#CREATE CREATE}, {@link java.nio.file.StandardOpenOption#TRUNCATE_EXISTING TRUNCATE_EXISTING}, and {@link java.nio.file.StandardOpenOption#WRITE WRITE} options are present. In other words, it
+ opens the file for writing, creating the file if it doesn't exist, or
+ initially truncating an existing {@link #isRegularFile regular-file} to
+ a size of {@code 0} if it exists.
+
+ &lt;p&gt; The {@code Writer} methods to write text throw {@code IOException}
+ if the text cannot be encoded using the specified charset.
+@param {Object {Path}} path
+          the path to the file
+@param {Object {Charset}} cs
+          the charset to use for encoding
+@param {Object {java.nio.file.OpenOption[]}} options
+          options specifying how the file is opened
+@return {Object {java.io.BufferedWriter}} a new buffered writer, with default buffer size, to write text
+          to the file
+@throws IOException
+          if an I/O error occurs opening or creating the file
+@throws UnsupportedOperationException
+          if an unsupported option is specified
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the file.
+@see #write(Path,Iterable,Charset,OpenOption[])
+*/
+newBufferedWriter : function(  ) {},
+
+<span id='java-nio-file-Files-method-newBufferedWriter'>/**Opens or creates a file for writing, returning a {@code BufferedWriter}
+</span> to write text to the file in an efficient manner. The text is encoded
+ into bytes for writing using the {@link StandardCharsets#UTF_8 UTF-8}
+ {@link Charset charset}.
+
+ &lt;p&gt; This method works as if invoking it were equivalent to evaluating the
+ expression:
+ &lt;pre&gt;{@code
+ Files.newBufferedWriter(path, StandardCharsets.UTF_8, options)
+ }&lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@param {Object {java.nio.file.OpenOption[]}} options
+          options specifying how the file is opened
+@return {Object {java.io.BufferedWriter}} a new buffered writer, with default buffer size, to write text
+          to the file
+@throws IOException
+          if an I/O error occurs opening or creating the file
+@throws UnsupportedOperationException
+          if an unsupported option is specified
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the file.
+@since 1.8
+*/
+newBufferedWriter : function(  ) {},
+
+<span id='java-nio-file-Files-method-copy'>/**Copies all bytes from an input stream to a file. On return, the input
+</span> stream will be at end of stream.
+
+ &lt;p&gt; By default, the copy fails if the target file already exists or is a
+ symbolic link. If the {@link java.nio.file.StandardCopyOption#REPLACE_EXISTING
+ REPLACE_EXISTING} option is specified, and the target file already exists,
+ then it is replaced if it is not a non-empty directory. If the target
+ file exists and is a symbolic link, then the symbolic link is replaced.
+ In this release, the {@code REPLACE_EXISTING} option is the only option
+ required to be supported by this method. Additional options may be
+ supported in future releases.
+
+ &lt;p&gt;  If an I/O error occurs reading from the input stream or writing to
+ the file, then it may do so after the target file has been created and
+ after some bytes have been read or written. Consequently the input
+ stream may not be at end of stream and may be in an inconsistent state.
+ It is strongly recommended that the input stream be promptly closed if an
+ I/O error occurs.
+
+ &lt;p&gt; This method may block indefinitely reading from the input stream (or
+ writing to the file). The behavior for the case that the input stream is
+ &lt;i&gt;asynchronously closed&lt;/i&gt; or the thread interrupted during the copy is
+ highly input stream and file system provider specific and therefore not
+ specified.
+
+ &lt;p&gt; &lt;b&gt;Usage example&lt;/b&gt;: Suppose we want to capture a web page and save
+ it to a file:
+ &lt;pre&gt;
+     Path path = ...
+     URI u = URI.create(&quot;http://java.sun.com/&quot;);
+     try (InputStream in = u.toURL().openStream()) {
+         Files.copy(in, path);
+     }
+ &lt;/pre&gt;
+@param {Object {InputStream}} in
+          the input stream to read from
+@param {Object {Path}} target
+          the path to the file
+@param {Object {java.nio.file.CopyOption[]}} options
+          options specifying how the copy should be done
+@return {Number} the number of bytes read or written
+@throws IOException
+          if an I/O error occurs when reading or writing
+@throws FileAlreadyExistsException
+          if the target file exists but cannot be replaced because the
+          {@code REPLACE_EXISTING} option is not specified &lt;i&gt;(optional
+          specific exception)&lt;/i&gt;
+@throws DirectoryNotEmptyException
+          the {@code REPLACE_EXISTING} option is specified but the file
+          cannot be replaced because it is a non-empty directory
+          &lt;i&gt;(optional specific exception)&lt;/i&gt;     *
+@throws UnsupportedOperationException
+          if {@code options} contains a copy option that is not supported
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the file. Where the
+          {@code REPLACE_EXISTING} option is specified, the security
+          manager's {@link SecurityManager#checkDelete(String) checkDelete}
+          method is invoked to check that an existing file can be deleted.
+*/
+copy : function(  ) {},
+
+<span id='java-nio-file-Files-method-copy'>/**Copies all bytes from a file to an output stream.
+</span>
+ &lt;p&gt; If an I/O error occurs reading from the file or writing to the output
+ stream, then it may do so after some bytes have been read or written.
+ Consequently the output stream may be in an inconsistent state. It is
+ strongly recommended that the output stream be promptly closed if an I/O
+ error occurs.
+
+ &lt;p&gt; This method may block indefinitely writing to the output stream (or
+ reading from the file). The behavior for the case that the output stream
+ is &lt;i&gt;asynchronously closed&lt;/i&gt; or the thread interrupted during the copy
+ is highly output stream and file system provider specific and therefore
+ not specified.
+
+ &lt;p&gt; Note that if the given output stream is {@link java.io.Flushable}
+ then its {@link java.io.Flushable#flush flush} method may need to invoked
+ after this method completes so as to flush any buffered output.
+@param {Object {Path}} source
+          the  path to the file
+@param {Object {OutputStream}} out
+          the output stream to write to
+@return {Number} the number of bytes read or written
+@throws IOException
+          if an I/O error occurs when reading or writing
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file.
+*/
+copy : function(  ) {},
+
+<span id='java-nio-file-Files-method-readAllBytes'>/**Reads all the bytes from a file. The method ensures that the file is
+</span> closed when all bytes have been read or an I/O error, or other runtime
+ exception, is thrown.
+
+ &lt;p&gt; Note that this method is intended for simple cases where it is
+ convenient to read all bytes into a byte array. It is not intended for
+ reading in large files.
+@param {Object {Path}} path
+          the path to the file
+@return {Number} a byte array containing the bytes read from the file
+@throws IOException
+          if an I/O error occurs reading from the stream
+@throws OutOfMemoryError
+          if an array of the required size cannot be allocated, for
+          example the file is larger that {@code 2GB}
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file.
+*/
+readAllBytes : function(  ) {},
+
+<span id='java-nio-file-Files-method-readAllLines'>/**Read all lines from a file. This method ensures that the file is
+</span> closed when all bytes have been read or an I/O error, or other runtime
+ exception, is thrown. Bytes from the file are decoded into characters
+ using the specified charset.
+
+ &lt;p&gt; This method recognizes the following as line terminators:
+ &lt;ul&gt;
+   &lt;li&gt; &lt;code&gt;&amp;#92;u000D&lt;/code&gt; followed by &lt;code&gt;&amp;#92;u000A&lt;/code&gt;,
+     CARRIAGE RETURN followed by LINE FEED &lt;/li&gt;
+   &lt;li&gt; &lt;code&gt;&amp;#92;u000A&lt;/code&gt;, LINE FEED &lt;/li&gt;
+   &lt;li&gt; &lt;code&gt;&amp;#92;u000D&lt;/code&gt;, CARRIAGE RETURN &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt; Additional Unicode line terminators may be recognized in future
+ releases.
+
+ &lt;p&gt; Note that this method is intended for simple cases where it is
+ convenient to read all lines in a single operation. It is not intended
+ for reading in large files.
+@param {Object {Path}} path
+          the path to the file
+@param {Object {Charset}} cs
+          the charset to use for decoding
+@return {Object {java.util.List}} the lines from the file as a {@code List}; whether the {@code
+          List} is modifiable or not is implementation dependent and
+          therefore not specified
+@throws IOException
+          if an I/O error occurs reading from the file or a malformed or
+          unmappable byte sequence is read
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file.
+@see #newBufferedReader
+*/
+readAllLines : function(  ) {},
+
+<span id='java-nio-file-Files-method-readAllLines'>/**Read all lines from a file. Bytes from the file are decoded into characters
+</span> using the {@link StandardCharsets#UTF_8 UTF-8} {@link Charset charset}.
+
+ &lt;p&gt; This method works as if invoking it were equivalent to evaluating the
+ expression:
+ &lt;pre&gt;{@code
+ Files.readAllLines(path, StandardCharsets.UTF_8)
+ }&lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@return {Object {java.util.List}} the lines from the file as a {@code List}; whether the {@code
+          List} is modifiable or not is implementation dependent and
+          therefore not specified
+@throws IOException
+          if an I/O error occurs reading from the file or a malformed or
+          unmappable byte sequence is read
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file.
+@since 1.8
+*/
+readAllLines : function(  ) {},
+
+<span id='java-nio-file-Files-method-write'>/**Writes bytes to a file. The {@code options} parameter specifies how the
+</span> the file is created or opened. If no options are present then this method
+ works as if the {@link java.nio.file.StandardOpenOption#CREATE CREATE}, {@link java.nio.file.StandardOpenOption#TRUNCATE_EXISTING TRUNCATE_EXISTING}, and {@link java.nio.file.StandardOpenOption#WRITE WRITE} options are present. In other words, it
+ opens the file for writing, creating the file if it doesn't exist, or
+ initially truncating an existing {@link #isRegularFile regular-file} to
+ a size of {@code 0}. All bytes in the byte array are written to the file.
+ The method ensures that the file is closed when all bytes have been
+ written (or an I/O error or other runtime exception is thrown). If an I/O
+ error occurs then it may do so after the file has created or truncated,
+ or after some bytes have been written to the file.
+
+ &lt;p&gt; &lt;b&gt;Usage example&lt;/b&gt;: By default the method creates a new file or
+ overwrites an existing file. Suppose you instead want to append bytes
+ to an existing file:
+ &lt;pre&gt;
+     Path path = ...
+     byte[] bytes = ...
+     Files.write(path, bytes, StandardOpenOption.APPEND);
+ &lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@param {Object {byte[]}} bytes
+          the byte array with the bytes to write
+@param {Object {java.nio.file.OpenOption[]}} options
+          options specifying how the file is opened
+@return {Object {java.nio.file.Path}} the path
+@throws IOException
+          if an I/O error occurs writing to or creating the file
+@throws UnsupportedOperationException
+          if an unsupported option is specified
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the file.
+*/
+write : function(  ) {},
+
+<span id='java-nio-file-Files-method-write'>/**Write lines of text to a file. Each line is a char sequence and is
+</span> written to the file in sequence with each line terminated by the
+ platform's line separator, as defined by the system property {@code
+ line.separator}. Characters are encoded into bytes using the specified
+ charset.
+
+ &lt;p&gt; The {@code options} parameter specifies how the the file is created
+ or opened. If no options are present then this method works as if the
+ {@link java.nio.file.StandardOpenOption#CREATE CREATE}, {@link java.nio.file.StandardOpenOption#TRUNCATE_EXISTING TRUNCATE_EXISTING}, and {@link java.nio.file.StandardOpenOption#WRITE WRITE} options are present. In other words, it
+ opens the file for writing, creating the file if it doesn't exist, or
+ initially truncating an existing {@link #isRegularFile regular-file} to
+ a size of {@code 0}. The method ensures that the file is closed when all
+ lines have been written (or an I/O error or other runtime exception is
+ thrown). If an I/O error occurs then it may do so after the file has
+ created or truncated, or after some bytes have been written to the file.
+@param {Object {Path}} path
+          the path to the file
+@param {Object {java.lang.Iterable}} lines
+          an object to iterate over the char sequences
+@param {Object {Charset}} cs
+          the charset to use for encoding
+@param {Object {java.nio.file.OpenOption[]}} options
+          options specifying how the file is opened
+@return {Object {java.nio.file.Path}} the path
+@throws IOException
+          if an I/O error occurs writing to or creating the file, or the
+          text cannot be encoded using the specified charset
+@throws UnsupportedOperationException
+          if an unsupported option is specified
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the file.
+*/
+write : function(  ) {},
+
+<span id='java-nio-file-Files-method-write'>/**Write lines of text to a file. Characters are encoded into bytes using
+</span> the {@link StandardCharsets#UTF_8 UTF-8} {@link Charset charset}.
+
+ &lt;p&gt; This method works as if invoking it were equivalent to evaluating the
+ expression:
+ &lt;pre&gt;{@code
+ Files.write(path, lines, StandardCharsets.UTF_8, options);
+ }&lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@param {Object {java.lang.Iterable}} lines
+          an object to iterate over the char sequences
+@param {Object {java.nio.file.OpenOption[]}} options
+          options specifying how the file is opened
+@return {Object {java.nio.file.Path}} the path
+@throws IOException
+          if an I/O error occurs writing to or creating the file, or the
+          text cannot be encoded as {@code UTF-8}
+@throws UnsupportedOperationException
+          if an unsupported option is specified
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkWrite(String) checkWrite}
+          method is invoked to check write access to the file.
+@since 1.8
+*/
+write : function(  ) {},
+
+<span id='java-nio-file-Files-method-list'>/**Return a lazily populated {@code Stream}, the elements of
+</span> which are the entries in the directory.  The listing is not recursive.
+
+ &lt;p&gt; The elements of the stream are {@link java.nio.file.Path} objects that are
+ obtained as if by {@link java.nio.file.Path#resolve(java.nio.file.Path) resolving} the name of the
+ directory entry against {@code dir}. Some file systems maintain special
+ links to the directory itself and the directory's parent directory.
+ Entries representing these links are not included.
+
+ &lt;p&gt; The stream is &lt;i&gt;weakly consistent&lt;/i&gt;. It is thread safe but does
+ not freeze the directory while iterating, so it may (or may not)
+ reflect updates to the directory that occur after returning from this
+ method.
+
+ &lt;p&gt; The returned stream encapsulates a {@link java.nio.file.DirectoryStream}.
+ If timely disposal of file system resources is required, the
+ {@code try}-with-resources construct should be used to ensure that the
+ stream's {@link Stream#close close} method is invoked after the stream
+ operations are completed.
+
+ &lt;p&gt; Operating on a closed stream behaves as if the end of stream
+ has been reached. Due to read-ahead, one or more elements may be
+ returned after the stream has been closed.
+
+ &lt;p&gt; If an {@link IOException} is thrown when accessing the directory
+ after this method has returned, it is wrapped in an {@link UncheckedIOException} which will be thrown from the method that caused
+ the access to take place.
+@param {Object {Path}} dir  The path to the directory
+@return {Object {java.util.stream.Stream}} The {@code Stream} describing the content of the
+          directory
+@throws NotDirectoryException
+          if the file could not otherwise be opened because it is not
+          a directory &lt;i&gt;(optional specific exception)&lt;/i&gt;
+@throws IOException
+          if an I/O error occurs when opening the directory
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the directory.
+@see #newDirectoryStream(Path)
+@since 1.8
+*/
+list : function(  ) {},
+
+<span id='java-nio-file-Files-method-walk'>/**Return a {@code Stream} that is lazily populated with {@code
+</span> Path} by walking the file tree rooted at a given starting file.  The
+ file tree is traversed &lt;em&gt;depth-first&lt;/em&gt;, the elements in the stream
+ are {@link java.nio.file.Path} objects that are obtained as if by {@link java.nio.file.Path#resolve(java.nio.file.Path) resolving} the relative path against {@code start}.
+
+ &lt;p&gt; The {@code stream} walks the file tree as elements are consumed.
+ The {@code Stream} returned is guaranteed to have at least one
+ element, the starting file itself. For each file visited, the stream
+ attempts to read its {@link BasicFileAttributes}. If the file is a
+ directory and can be opened successfully, entries in the directory, and
+ their &lt;em&gt;descendants&lt;/em&gt; will follow the directory in the stream as
+ they are encountered. When all entries have been visited, then the
+ directory is closed. The file tree walk then continues at the next
+ &lt;em&gt;sibling&lt;/em&gt; of the directory.
+
+ &lt;p&gt; The stream is &lt;i&gt;weakly consistent&lt;/i&gt;. It does not freeze the
+ file tree while iterating, so it may (or may not) reflect updates to
+ the file tree that occur after returned from this method.
+
+ &lt;p&gt; By default, symbolic links are not automatically followed by this
+ method. If the {@code options} parameter contains the {@link java.nio.file.FileVisitOption#FOLLOW_LINKS FOLLOW_LINKS} option then symbolic links are
+ followed. When following links, and the attributes of the target cannot
+ be read, then this method attempts to get the {@code BasicFileAttributes}
+ of the link.
+
+ &lt;p&gt; If the {@code options} parameter contains the {@link java.nio.file.FileVisitOption#FOLLOW_LINKS FOLLOW_LINKS} option then the stream keeps
+ track of directories visited so that cycles can be detected. A cycle
+ arises when there is an entry in a directory that is an ancestor of the
+ directory. Cycle detection is done by recording the {@link java.nio.file.attribute.BasicFileAttributes#fileKey file-key} of directories,
+ or if file keys are not available, by invoking the {@link #isSameFile
+ isSameFile} method to test if a directory is the same file as an
+ ancestor. When a cycle is detected it is treated as an I/O error with
+ an instance of {@link java.nio.file.FileSystemLoopException}.
+
+ &lt;p&gt; The {@code maxDepth} parameter is the maximum number of levels of
+ directories to visit. A value of {@code 0} means that only the starting
+ file is visited, unless denied by the security manager. A value of
+ {@link Integer#MAX_VALUE MAX_VALUE} may be used to indicate that all
+ levels should be visited.
+
+ &lt;p&gt; When a security manager is installed and it denies access to a file
+ (or directory), then it is ignored and not included in the stream.
+
+ &lt;p&gt; The returned stream encapsulates one or more {@link java.nio.file.DirectoryStream}s.
+ If timely disposal of file system resources is required, the
+ {@code try}-with-resources construct should be used to ensure that the
+ stream's {@link Stream#close close} method is invoked after the stream
+ operations are completed.  Operating on a closed stream will result in an
+ {@link java.lang.IllegalStateException}.
+
+ &lt;p&gt; If an {@link IOException} is thrown when accessing the directory
+ after this method has returned, it is wrapped in an {@link UncheckedIOException} which will be thrown from the method that caused
+ the access to take place.
+@param {Object {Path}} start
+          the starting file
+@param {Number} maxDepth
+          the maximum number of directory levels to visit
+@param {Object {java.nio.file.FileVisitOption[]}} options
+          options to configure the traversal
+@return {Object {java.util.stream.Stream}} the {@link Stream} of {@link Path}
+@throws IllegalArgumentException
+          if the {@code maxDepth} parameter is negative
+@throws SecurityException
+          If the security manager denies access to the starting file.
+          In the case of the default provider, the {@link
+          SecurityManager#checkRead(String) checkRead} method is invoked
+          to check read access to the directory.
+@throws IOException
+          if an I/O error is thrown when accessing the starting file.
+@since 1.8
+*/
+walk : function(  ) {},
+
+<span id='java-nio-file-Files-method-walk'>/**Return a {@code Stream} that is lazily populated with {@code
+</span> Path} by walking the file tree rooted at a given starting file.  The
+ file tree is traversed &lt;em&gt;depth-first&lt;/em&gt;, the elements in the stream
+ are {@link java.nio.file.Path} objects that are obtained as if by {@link java.nio.file.Path#resolve(java.nio.file.Path) resolving} the relative path against {@code start}.
+
+ &lt;p&gt; This method works as if invoking it were equivalent to evaluating the
+ expression:
+ &lt;blockquote&gt;&lt;pre&gt;
+ walk(start, Integer.MAX_VALUE, options)
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ In other words, it visits all levels of the file tree.
+
+ &lt;p&gt; The returned stream encapsulates one or more {@link java.nio.file.DirectoryStream}s.
+ If timely disposal of file system resources is required, the
+ {@code try}-with-resources construct should be used to ensure that the
+ stream's {@link Stream#close close} method is invoked after the stream
+ operations are completed.  Operating on a closed stream will result in an
+ {@link java.lang.IllegalStateException}.
+@param {Object {Path}} start
+          the starting file
+@param {Object {java.nio.file.FileVisitOption[]}} options
+          options to configure the traversal
+@return {Object {java.util.stream.Stream}} the {@link Stream} of {@link Path}
+@throws SecurityException
+          If the security manager denies access to the starting file.
+          In the case of the default provider, the {@link
+          SecurityManager#checkRead(String) checkRead} method is invoked
+          to check read access to the directory.
+@throws IOException
+          if an I/O error is thrown when accessing the starting file.
+@see #walk(Path, int, FileVisitOption...)
+@since 1.8
+*/
+walk : function(  ) {},
+
+<span id='java-nio-file-Files-method-find'>/**Return a {@code Stream} that is lazily populated with {@code
+</span> Path} by searching for files in a file tree rooted at a given starting
+ file.
+
+ &lt;p&gt; This method walks the file tree in exactly the manner specified by
+ the {@link #walk walk} method. For each file encountered, the given
+ {@link BiPredicate} is invoked with its {@link java.nio.file.Path} and {@link BasicFileAttributes}. The {@code Path} object is obtained as if by
+ {@link java.nio.file.Path#resolve(java.nio.file.Path) resolving} the relative path against {@code
+ start} and is only included in the returned {@link Stream} if
+ the {@code BiPredicate} returns true. Compare to calling {@link java.util.stream.Stream#filter filter} on the {@code Stream}
+ returned by {@code walk} method, this method may be more efficient by
+ avoiding redundant retrieval of the {@code BasicFileAttributes}.
+
+ &lt;p&gt; The returned stream encapsulates one or more {@link java.nio.file.DirectoryStream}s.
+ If timely disposal of file system resources is required, the
+ {@code try}-with-resources construct should be used to ensure that the
+ stream's {@link Stream#close close} method is invoked after the stream
+ operations are completed.  Operating on a closed stream will result in an
+ {@link java.lang.IllegalStateException}.
+
+ &lt;p&gt; If an {@link IOException} is thrown when accessing the directory
+ after returned from this method, it is wrapped in an {@link UncheckedIOException} which will be thrown from the method that caused
+ the access to take place.
+@param {Object {Path}} start
+          the starting file
+@param {Number} maxDepth
+          the maximum number of directory levels to search
+@param {Object {java.util.function.BiPredicate}} matcher
+          the function used to decide whether a file should be included
+          in the returned stream
+@param {Object {java.nio.file.FileVisitOption[]}} options
+          options to configure the traversal
+@return {Object {java.util.stream.Stream}} the {@link Stream} of {@link Path}
+@throws IllegalArgumentException
+          if the {@code maxDepth} parameter is negative
+@throws SecurityException
+          If the security manager denies access to the starting file.
+          In the case of the default provider, the {@link
+          SecurityManager#checkRead(String) checkRead} method is invoked
+          to check read access to the directory.
+@throws IOException
+          if an I/O error is thrown when accessing the starting file.
+@see #walk(Path, int, FileVisitOption...)
+@since 1.8
+*/
+find : function(  ) {},
+
+<span id='java-nio-file-Files-method-lines'>/**Read all lines from a file as a {@code Stream}. Unlike {@link #readAllLines(Path, Charset) readAllLines}, this method does not read
+</span> all lines into a {@code List}, but instead populates lazily as the stream
+ is consumed.
+
+ &lt;p&gt; Bytes from the file are decoded into characters using the specified
+ charset and the same line terminators as specified by {@code
+ readAllLines} are supported.
+
+ &lt;p&gt; After this method returns, then any subsequent I/O exception that
+ occurs while reading from the file or when a malformed or unmappable byte
+ sequence is read, is wrapped in an {@link UncheckedIOException} that will
+ be thrown from the
+ {@link java.util.stream.Stream} method that caused the read to take
+ place. In case an {@code IOException} is thrown when closing the file,
+ it is also wrapped as an {@code UncheckedIOException}.
+
+ &lt;p&gt; The returned stream encapsulates a {@link Reader}.  If timely
+ disposal of file system resources is required, the try-with-resources
+ construct should be used to ensure that the stream's
+ {@link Stream#close close} method is invoked after the stream operations
+ are completed.
+@param {Object {Path}} path
+          the path to the file
+@param {Object {Charset}} cs
+          the charset to use for decoding
+@return {Object {java.util.stream.Stream}} the lines from the file as a {@code Stream}
+@throws IOException
+          if an I/O error occurs opening the file
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file.
+@see #readAllLines(Path, Charset)
+@see #newBufferedReader(Path, Charset)
+@see java.io.BufferedReader#lines()
+@since 1.8
+*/
+lines : function(  ) {},
+
+<span id='java-nio-file-Files-method-lines'>/**Read all lines from a file as a {@code Stream}. Bytes from the file are
+</span> decoded into characters using the {@link StandardCharsets#UTF_8 UTF-8}
+ {@link Charset charset}.
+
+ &lt;p&gt; This method works as if invoking it were equivalent to evaluating the
+ expression:
+ &lt;pre&gt;{@code
+ Files.lines(path, StandardCharsets.UTF_8)
+ }&lt;/pre&gt;
+@param {Object {Path}} path
+          the path to the file
+@return {Object {java.util.stream.Stream}} the lines from the file as a {@code Stream}
+@throws IOException
+          if an I/O error occurs opening the file
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, the {@link SecurityManager#checkRead(String) checkRead}
+          method is invoked to check read access to the file.
+@since 1.8
+*/
+lines : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

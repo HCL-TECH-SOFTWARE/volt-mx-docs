@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-ref-SoftReference'>/**@class java.lang.ref.SoftReference
+</span>@extends java.lang.ref.Reference
+
+ Soft reference objects, which are cleared at the discretion of the garbage
+ collector in response to memory demand.
+
+ &lt;p&gt; Suppose that the garbage collector determines at a certain point in time
+ that an object is &lt;a href=&quot;package-summary.html#reachability&quot;&gt;softly
+ reachable&lt;/a&gt;.  At that time it may choose to clear atomically all soft
+ references to that object and all soft references to any other
+ softly-reachable objects from which that object is reachable through a chain
+ of strong references.  At the same time or at some later time it will
+ enqueue those newly-cleared soft references that are registered with
+ reference queues.
+
+ &lt;p&gt; All soft references to softly-reachable objects are guaranteed to have
+ been cleared before the virtual machine throws an
+ &lt;code&gt;OutOfMemoryError&lt;/code&gt;.  Otherwise no constraints are placed upon the
+ time at which a soft reference will be cleared or the order in which a set
+ of such references to different objects will be cleared.  Virtual machine
+ implementations are, however, encouraged to bias against clearing
+ recently-created or recently-used soft references.
+
+ &lt;h3&gt;Avoid Soft References for Caching&lt;/h3&gt;
+ In practice, soft references are inefficient for caching. The runtime doesn't
+ have enough information on which references to clear and which to keep. Most
+ fatally, it doesn't know what to do when given the choice between clearing a
+ soft reference and growing the heap.
+
+ &lt;p&gt;The lack of information on the value to your application of each reference
+ limits the usefulness of soft references. References that are cleared too
+ early cause unnecessary work; those that are cleared too late waste memory.
+
+ &lt;p&gt;Most applications should use an {@code android.util.LruCache} instead of
+ soft references. LruCache has an effective eviction policy and lets the user
+ tune how much memory is allotted.
+
+ @author   Mark Reinhold
+ @since    1.2
+*/
+var SoftReference = {
+
+<span id='java-lang-ref-SoftReference-method-get'>/**Returns this reference object's referent.  If this reference object has
+</span> been cleared, either by the program or by the garbage collector, then
+ this method returns &lt;code&gt;null&lt;/code&gt;.
+@return {Object {java.lang.Object}} The object to which this reference refers, or
+           &lt;code&gt;null&lt;/code&gt; if this reference object has been cleared
+*/
+get : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-apache-http-conn-scheme-SocketFactory'>/**@class org.apache.http.conn.scheme.SocketFactory
+</span> A factory for creating and connecting sockets.
+ The factory encapsulates the logic for establishing a socket connection.
+ &lt;br/&gt;
+ Both {@link java.lang.Object#equals(java.lang.Object) Object.equals()}
+ and {@link java.lang.Object#hashCode() Object.hashCode()}
+ must be overridden for the correct operation of some connection managers.
+ 
+ @author &lt;a href=&quot;mailto:rolandw at apache.org&quot;&gt;Roland Weber&lt;/a&gt;
+ @author Michael Becke
+ @author &lt;a href=&quot;mailto:mbowler@GargoyleSoftware.com&quot;&gt;Mike Bowler&lt;/a&gt;
+
+ @deprecated Please use {@link java.net.URL#openConnection} instead.
+     Please visit &lt;a href=&quot;http://android-developers.blogspot.com/2011/09/androids-http-clients.html&quot;&gt;this webpage&lt;/a&gt;
+     for further details.
+*/
+var SocketFactory = {
+
+<span id='org-apache-http-conn-scheme-SocketFactory-method-createSocket'>/**Creates a new, unconnected socket.
+</span> The socket should subsequently be passed to
+ {@link #connectSocket connectSocket}.
+@return {Object {java.net.Socket}} a new socket
+@throws IOException if an I/O error occurs while creating the socket
+*/
+createSocket : function(  ) {},
+
+<span id='org-apache-http-conn-scheme-SocketFactory-method-connectSocket'>/**Connects a socket to the given host.
+</span>@param {Object {Socket}} sock      the socket to connect, as obtained from
+                  {@link #createSocket createSocket}.
+                  &lt;code&gt;null&lt;/code&gt; indicates that a new socket
+                  should be created and connected.
+@param {String} host      the host to connect to
+@param {Number} port      the port to connect to on the host
+@param {Object {InetAddress}} localAddress the local address to bind the socket to, or
+                  &lt;code&gt;null&lt;/code&gt; for any
+@param {Number} localPort the port on the local machine,
+                  0 or a negative number for any
+@param {Object {HttpParams}} params    additional {@link HttpParams parameters} for connecting
+@return {Object {java.net.Socket}} the connected socket. The returned object may be different
+          from the &lt;code&gt;sock&lt;/code&gt; argument if this factory supports
+          a layered protocol.
+@throws IOException if an I/O error occurs
+@throws UnknownHostException if the IP address of the target host
+          can not be determined
+@throws ConnectTimeoutException if the socket cannot be connected
+          within the time limit defined in the &lt;code&gt;params&lt;/code&gt;
+*/
+connectSocket : function(  ) {},
+
+<span id='org-apache-http-conn-scheme-SocketFactory-method-isSecure'>/**Checks whether a socket provides a secure connection.
+</span> The socket must be {@link #connectSocket connected}
+ by this factory.
+ The factory will &lt;i&gt;not&lt;/i&gt; perform I/O operations
+ in this method.
+ &lt;br/&gt;
+ As a rule of thumb, plain sockets are not secure and
+ TLS/SSL sockets are secure. However, there may be
+ application specific deviations. For example, a plain
+ socket to a host in the same intranet (&quot;trusted zone&quot;)
+ could be considered secure. On the other hand, a
+ TLS/SSL socket could be considered insecure based on
+ the cypher suite chosen for the connection.
+@param {Object {Socket}} sock      the connected socket to check
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if the connection of the socket
+          should be considered secure, or
+          &lt;code&gt;false&lt;/code&gt; if it should not
+@throws IllegalArgumentException
+  if the argument is invalid, for example because it is
+  not a connected socket or was created by a different
+  socket factory.
+  Note that socket factories are &lt;i&gt;not&lt;/i&gt; required to
+  check these conditions, they may simply return a default
+  value when called with an invalid socket argument.
+*/
+isSecure : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

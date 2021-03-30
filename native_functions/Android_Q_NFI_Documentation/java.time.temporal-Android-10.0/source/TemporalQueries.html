@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-temporal-TemporalQueries'>/**@class java.time.temporal.TemporalQueries
+</span>@extends java.lang.Object
+
+ Common implementations of {@code TemporalQuery}.
+ &lt;p&gt;
+ This class provides common implementations of {@link java.time.temporal.TemporalQuery}.
+ These are defined here as they must be constants, and the definition
+ of lambdas does not guarantee that. By assigning them once here,
+ they become 'normal' Java constants.
+ &lt;p&gt;
+ Queries are a key tool for extracting information from temporal objects.
+ They exist to externalize the process of querying, permitting different
+ approaches, as per the strategy design pattern.
+ Examples might be a query that checks if the date is the day before February 29th
+ in a leap year, or calculates the number of days to your next birthday.
+ &lt;p&gt;
+ The {@link java.time.temporal.TemporalField} interface provides another mechanism for querying
+ temporal objects. That interface is limited to returning a {@code long}.
+ By contrast, queries can return any type.
+ &lt;p&gt;
+ There are two equivalent ways of using a {@code TemporalQuery}.
+ The first is to invoke the method on this interface directly.
+ The second is to use {@link java.time.temporal.TemporalAccessor#query(TemporalQuery)}:
+ &lt;pre&gt;
+   // these two lines are equivalent, but the second approach is recommended
+   temporal = thisQuery.queryFrom(temporal);
+   temporal = temporal.query(thisQuery);
+ &lt;/pre&gt;
+ It is recommended to use the second approach, {@code query(TemporalQuery)},
+ as it is a lot clearer to read in code.
+ &lt;p&gt;
+ The most common implementations are method references, such as
+ {@code LocalDate::from} and {@code ZoneId::from}.
+ Additional common queries are provided to return:
+ &lt;ul&gt;
+ &lt;li&gt; a Chronology,
+ &lt;li&gt; a LocalDate,
+ &lt;li&gt; a LocalTime,
+ &lt;li&gt; a ZoneOffset,
+ &lt;li&gt; a precision,
+ &lt;li&gt; a zone, or
+ &lt;li&gt; a zoneId.
+ &lt;/ul&gt;
+
+ @since 1.8
+*/
+var TemporalQueries = {
+
+<span id='java-time-temporal-TemporalQueries-method-zoneId'>/**A strict query for the {@code ZoneId}.
+</span> &lt;p&gt;
+ This queries a {@code TemporalAccessor} for the zone.
+ The zone is only returned if the date-time conceptually contains a {@code ZoneId}.
+ It will not be returned if the date-time only conceptually has an {@code ZoneOffset}.
+ Thus a {@link java.time.ZonedDateTime} will return the result of {@code getZone()},
+ but an {@link java.time.OffsetDateTime} will return null.
+ &lt;p&gt;
+ In most cases, applications should use {@link #zone}() as this query is too strict.
+ &lt;p&gt;
+ The result from JDK classes implementing {@code TemporalAccessor} is as follows:&lt;br&gt;
+ {@code LocalDate} returns null&lt;br&gt;
+ {@code LocalTime} returns null&lt;br&gt;
+ {@code LocalDateTime} returns null&lt;br&gt;
+ {@code ZonedDateTime} returns the associated zone&lt;br&gt;
+ {@code OffsetTime} returns null&lt;br&gt;
+ {@code OffsetDateTime} returns null&lt;br&gt;
+ {@code ChronoLocalDate} returns null&lt;br&gt;
+ {@code ChronoLocalDateTime} returns null&lt;br&gt;
+ {@code ChronoZonedDateTime} returns the associated zone&lt;br&gt;
+ {@code Era} returns null&lt;br&gt;
+ {@code DayOfWeek} returns null&lt;br&gt;
+ {@code Month} returns null&lt;br&gt;
+ {@code Year} returns null&lt;br&gt;
+ {@code YearMonth} returns null&lt;br&gt;
+ {@code MonthDay} returns null&lt;br&gt;
+ {@code ZoneOffset} returns null&lt;br&gt;
+ {@code Instant} returns null&lt;br&gt;
+@return {Object {java.time.temporal.TemporalQuery}} a query that can obtain the zone ID of a temporal, not null
+*/
+zoneId : function(  ) {},
+
+<span id='java-time-temporal-TemporalQueries-method-chronology'>/**A query for the {@code Chronology}.
+</span> &lt;p&gt;
+ This queries a {@code TemporalAccessor} for the chronology.
+ If the target {@code TemporalAccessor} represents a date, or part of a date,
+ then it should return the chronology that the date is expressed in.
+ As a result of this definition, objects only representing time, such as
+ {@code LocalTime}, will return null.
+ &lt;p&gt;
+ The result from JDK classes implementing {@code TemporalAccessor} is as follows:&lt;br&gt;
+ {@code LocalDate} returns {@code IsoChronology.INSTANCE}&lt;br&gt;
+ {@code LocalTime} returns null (does not represent a date)&lt;br&gt;
+ {@code LocalDateTime} returns {@code IsoChronology.INSTANCE}&lt;br&gt;
+ {@code ZonedDateTime} returns {@code IsoChronology.INSTANCE}&lt;br&gt;
+ {@code OffsetTime} returns null (does not represent a date)&lt;br&gt;
+ {@code OffsetDateTime} returns {@code IsoChronology.INSTANCE}&lt;br&gt;
+ {@code ChronoLocalDate} returns the associated chronology&lt;br&gt;
+ {@code ChronoLocalDateTime} returns the associated chronology&lt;br&gt;
+ {@code ChronoZonedDateTime} returns the associated chronology&lt;br&gt;
+ {@code Era} returns the associated chronology&lt;br&gt;
+ {@code DayOfWeek} returns null (shared across chronologies)&lt;br&gt;
+ {@code Month} returns {@code IsoChronology.INSTANCE}&lt;br&gt;
+ {@code Year} returns {@code IsoChronology.INSTANCE}&lt;br&gt;
+ {@code YearMonth} returns {@code IsoChronology.INSTANCE}&lt;br&gt;
+ {@code MonthDay} returns null {@code IsoChronology.INSTANCE}&lt;br&gt;
+ {@code ZoneOffset} returns null (does not represent a date)&lt;br&gt;
+ {@code Instant} returns null (does not represent a date)&lt;br&gt;
+ &lt;p&gt;
+ The method {@link java.time.chrono.Chronology#from(TemporalAccessor)} can be used as a
+ {@code TemporalQuery} via a method reference, {@code Chronology::from}.
+ That method is equivalent to this query, except that it throws an
+ exception if a chronology cannot be obtained.
+@return {Object {java.time.temporal.TemporalQuery}} a query that can obtain the chronology of a temporal, not null
+*/
+chronology : function(  ) {},
+
+<span id='java-time-temporal-TemporalQueries-method-precision'>/**A query for the smallest supported unit.
+</span> &lt;p&gt;
+ This queries a {@code TemporalAccessor} for the time precision.
+ If the target {@code TemporalAccessor} represents a consistent or complete date-time,
+ date or time then this must return the smallest precision actually supported.
+ Note that fields such as {@code NANO_OF_DAY} and {@code NANO_OF_SECOND}
+ are defined to always return ignoring the precision, thus this is the only
+ way to find the actual smallest supported unit.
+ For example, were {@code GregorianCalendar} to implement {@code TemporalAccessor}
+ it would return a precision of {@code MILLIS}.
+ &lt;p&gt;
+ The result from JDK classes implementing {@code TemporalAccessor} is as follows:&lt;br&gt;
+ {@code LocalDate} returns {@code DAYS}&lt;br&gt;
+ {@code LocalTime} returns {@code NANOS}&lt;br&gt;
+ {@code LocalDateTime} returns {@code NANOS}&lt;br&gt;
+ {@code ZonedDateTime} returns {@code NANOS}&lt;br&gt;
+ {@code OffsetTime} returns {@code NANOS}&lt;br&gt;
+ {@code OffsetDateTime} returns {@code NANOS}&lt;br&gt;
+ {@code ChronoLocalDate} returns {@code DAYS}&lt;br&gt;
+ {@code ChronoLocalDateTime} returns {@code NANOS}&lt;br&gt;
+ {@code ChronoZonedDateTime} returns {@code NANOS}&lt;br&gt;
+ {@code Era} returns {@code ERAS}&lt;br&gt;
+ {@code DayOfWeek} returns {@code DAYS}&lt;br&gt;
+ {@code Month} returns {@code MONTHS}&lt;br&gt;
+ {@code Year} returns {@code YEARS}&lt;br&gt;
+ {@code YearMonth} returns {@code MONTHS}&lt;br&gt;
+ {@code MonthDay} returns null (does not represent a complete date or time)&lt;br&gt;
+ {@code ZoneOffset} returns null (does not represent a date or time)&lt;br&gt;
+ {@code Instant} returns {@code NANOS}&lt;br&gt;
+@return {Object {java.time.temporal.TemporalQuery}} a query that can obtain the precision of a temporal, not null
+*/
+precision : function(  ) {},
+
+<span id='java-time-temporal-TemporalQueries-method-zone'>/**A lenient query for the {@code ZoneId}, falling back to the {@code ZoneOffset}.
+</span> &lt;p&gt;
+ This queries a {@code TemporalAccessor} for the zone.
+ It first tries to obtain the zone, using {@link #zoneId}().
+ If that is not found it tries to obtain the {@link #offset}().
+ Thus a {@link java.time.ZonedDateTime} will return the result of {@code getZone()},
+ while an {@link java.time.OffsetDateTime} will return the result of {@code getOffset()}.
+ &lt;p&gt;
+ In most cases, applications should use this query rather than {@code #zoneId()}.
+ &lt;p&gt;
+ The method {@link ZoneId#from(TemporalAccessor)} can be used as a
+ {@code TemporalQuery} via a method reference, {@code ZoneId::from}.
+ That method is equivalent to this query, except that it throws an
+ exception if a zone cannot be obtained.
+@return {Object {java.time.temporal.TemporalQuery}} a query that can obtain the zone ID or offset of a temporal, not null
+*/
+zone : function(  ) {},
+
+<span id='java-time-temporal-TemporalQueries-method-offset'>/**A query for {@code ZoneOffset} returning null if not found.
+</span> &lt;p&gt;
+ This returns a {@code TemporalQuery} that can be used to query a temporal
+ object for the offset. The query will return null if the temporal
+ object cannot supply an offset.
+ &lt;p&gt;
+ The query implementation examines the {@link java.time.temporal.ChronoField#OFFSET_SECONDS OFFSET_SECONDS}
+ field and uses it to create a {@code ZoneOffset}.
+ &lt;p&gt;
+ The method {@link java.time.ZoneOffset#from(TemporalAccessor)} can be used as a
+ {@code TemporalQuery} via a method reference, {@code ZoneOffset::from}.
+ This query and {@code ZoneOffset::from} will return the same result if the
+ temporal object contains an offset. If the temporal object does not contain
+ an offset, then the method reference will throw an exception, whereas this
+ query will return null.
+@return {Object {java.time.temporal.TemporalQuery}} a query that can obtain the offset of a temporal, not null
+*/
+offset : function(  ) {},
+
+<span id='java-time-temporal-TemporalQueries-method-localDate'>/**A query for {@code LocalDate} returning null if not found.
+</span> &lt;p&gt;
+ This returns a {@code TemporalQuery} that can be used to query a temporal
+ object for the local date. The query will return null if the temporal
+ object cannot supply a local date.
+ &lt;p&gt;
+ The query implementation examines the {@link java.time.temporal.ChronoField#EPOCH_DAY EPOCH_DAY}
+ field and uses it to create a {@code LocalDate}.
+ &lt;p&gt;
+ The method {@link ZoneOffset#from(TemporalAccessor)} can be used as a
+ {@code TemporalQuery} via a method reference, {@code LocalDate::from}.
+ This query and {@code LocalDate::from} will return the same result if the
+ temporal object contains a date. If the temporal object does not contain
+ a date, then the method reference will throw an exception, whereas this
+ query will return null.
+@return {Object {java.time.temporal.TemporalQuery}} a query that can obtain the date of a temporal, not null
+*/
+localDate : function(  ) {},
+
+<span id='java-time-temporal-TemporalQueries-method-localTime'>/**A query for {@code LocalTime} returning null if not found.
+</span> &lt;p&gt;
+ This returns a {@code TemporalQuery} that can be used to query a temporal
+ object for the local time. The query will return null if the temporal
+ object cannot supply a local time.
+ &lt;p&gt;
+ The query implementation examines the {@link java.time.temporal.ChronoField#NANO_OF_DAY NANO_OF_DAY}
+ field and uses it to create a {@code LocalTime}.
+ &lt;p&gt;
+ The method {@link ZoneOffset#from(TemporalAccessor)} can be used as a
+ {@code TemporalQuery} via a method reference, {@code LocalTime::from}.
+ This query and {@code LocalTime::from} will return the same result if the
+ temporal object contains a time. If the temporal object does not contain
+ a time, then the method reference will throw an exception, whereas this
+ query will return null.
+@return {Object {java.time.temporal.TemporalQuery}} a query that can obtain the time of a temporal, not null
+*/
+localTime : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

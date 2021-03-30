@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-sql-Blob'>/**@class java.sql.Blob
+</span> The representation (mapping) in
+ the Java&lt;sup&gt;&lt;font size=-2&gt;TM&lt;/font&gt;&lt;/sup&gt; programming
+ language of an SQL
+ &lt;code&gt;BLOB&lt;/code&gt; value.  An SQL &lt;code&gt;BLOB&lt;/code&gt; is a built-in type
+ that stores a Binary Large Object as a column value in a row of
+ a database table. By default drivers implement &lt;code&gt;Blob&lt;/code&gt; using
+ an SQL &lt;code&gt;locator(BLOB)&lt;/code&gt;, which means that a
+ &lt;code&gt;Blob&lt;/code&gt; object contains a logical pointer to the
+ SQL &lt;code&gt;BLOB&lt;/code&gt; data rather than the data itself.
+ A &lt;code&gt;Blob&lt;/code&gt; object is valid for the duration of the
+ transaction in which is was created.
+
+ &lt;P&gt;Methods in the interfaces {@link java.sql.ResultSet},
+ {@link java.sql.CallableStatement}, and {@link java.sql.PreparedStatement}, such as
+ &lt;code&gt;getBlob&lt;/code&gt; and &lt;code&gt;setBlob&lt;/code&gt; allow a programmer to
+ access an SQL &lt;code&gt;BLOB&lt;/code&gt; value.
+ The &lt;code&gt;Blob&lt;/code&gt; interface provides methods for getting the
+ length of an SQL &lt;code&gt;BLOB&lt;/code&gt; (Binary Large Object) value,
+ for materializing a &lt;code&gt;BLOB&lt;/code&gt; value on the client, and for
+ determining the position of a pattern of bytes within a
+ &lt;code&gt;BLOB&lt;/code&gt; value. In addition, this interface has methods for updating
+ a &lt;code&gt;BLOB&lt;/code&gt; value.
+ &lt;p&gt;
+ All methods on the &lt;code&gt;Blob&lt;/code&gt; interface must be fully implemented if the
+ JDBC driver supports the data type.
+
+ @since 1.2
+*/
+var Blob = {
+
+<span id='java-sql-Blob-method-length'>/**Returns the number of bytes in the &lt;code&gt;BLOB&lt;/code&gt; value
+</span> designated by this &lt;code&gt;Blob&lt;/code&gt; object.
+@return {Number} length of the &lt;code&gt;BLOB&lt;/code&gt; in bytes
+@exception SQLException if there is an error accessing the
+ length of the &lt;code&gt;BLOB&lt;/code&gt;
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+length : function(  ) {},
+
+<span id='java-sql-Blob-method-getBytes'>/**Retrieves all or part of the &lt;code&gt;BLOB&lt;/code&gt;
+</span> value that this &lt;code&gt;Blob&lt;/code&gt; object represents, as an array of
+ bytes.  This &lt;code&gt;byte&lt;/code&gt; array contains up to &lt;code&gt;length&lt;/code&gt;
+ consecutive bytes starting at position &lt;code&gt;pos&lt;/code&gt;.
+@param {Number} pos the ordinal position of the first byte in the
+        &lt;code&gt;BLOB&lt;/code&gt; value to be extracted; the first byte is at
+        position 1
+@param {Number} length the number of consecutive bytes to be copied; the value
+ for length must be 0 or greater
+@return {Number} a byte array containing up to &lt;code&gt;length&lt;/code&gt;
+         consecutive bytes from the &lt;code&gt;BLOB&lt;/code&gt; value designated
+         by this &lt;code&gt;Blob&lt;/code&gt; object, starting with the
+         byte at position &lt;code&gt;pos&lt;/code&gt;
+@exception SQLException if there is an error accessing the
+            &lt;code&gt;BLOB&lt;/code&gt; value; if pos is less than 1 or length is
+ less than 0
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@see #setBytes
+@since 1.2
+*/
+getBytes : function(  ) {},
+
+<span id='java-sql-Blob-method-getBinaryStream'>/**Retrieves the &lt;code&gt;BLOB&lt;/code&gt; value designated by this
+</span> &lt;code&gt;Blob&lt;/code&gt; instance as a stream.
+@return {Object {java.io.InputStream}} a stream containing the &lt;code&gt;BLOB&lt;/code&gt; data
+@exception SQLException if there is an error accessing the
+            &lt;code&gt;BLOB&lt;/code&gt; value
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@see #setBinaryStream
+@since 1.2
+*/
+getBinaryStream : function(  ) {},
+
+<span id='java-sql-Blob-method-position'>/**Retrieves the byte position at which the specified byte array
+</span> &lt;code&gt;pattern&lt;/code&gt; begins within the &lt;code&gt;BLOB&lt;/code&gt;
+ value that this &lt;code&gt;Blob&lt;/code&gt; object represents.  The
+ search for &lt;code&gt;pattern&lt;/code&gt; begins at position
+ &lt;code&gt;start&lt;/code&gt;.
+@param {Object {byte[]}} pattern the byte array for which to search
+@param {Number} start the position at which to begin searching; the
+        first position is 1
+@return {Number} the position at which the pattern appears, else -1
+@exception SQLException if there is an error accessing the
+ &lt;code&gt;BLOB&lt;/code&gt; or if start is less than 1
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+position : function(  ) {},
+
+<span id='java-sql-Blob-method-position'>/**Retrieves the byte position in the &lt;code&gt;BLOB&lt;/code&gt; value
+</span> designated by this &lt;code&gt;Blob&lt;/code&gt; object at which
+ &lt;code&gt;pattern&lt;/code&gt; begins.  The search begins at position
+ &lt;code&gt;start&lt;/code&gt;.
+@param {Object {Blob}} pattern the &lt;code&gt;Blob&lt;/code&gt; object designating
+ the &lt;code&gt;BLOB&lt;/code&gt; value for which to search
+@param {Number} start the position in the &lt;code&gt;BLOB&lt;/code&gt; value
+        at which to begin searching; the first position is 1
+@return {Number} the position at which the pattern begins, else -1
+@exception SQLException if there is an error accessing the
+            &lt;code&gt;BLOB&lt;/code&gt; value or if start is less than 1
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+position : function(  ) {},
+
+<span id='java-sql-Blob-method-setBytes'>/**Writes the given array of bytes to the &lt;code&gt;BLOB&lt;/code&gt; value that
+</span> this &lt;code&gt;Blob&lt;/code&gt; object represents, starting at position
+ &lt;code&gt;pos&lt;/code&gt;, and returns the number of bytes written.
+ The array of bytes will overwrite the existing bytes
+ in the &lt;code&gt;Blob&lt;/code&gt; object starting at the position
+ &lt;code&gt;pos&lt;/code&gt;.  If the end of the &lt;code&gt;Blob&lt;/code&gt; value is reached
+ while writing the array of bytes, then the length of the &lt;code&gt;Blob&lt;/code&gt;
+ value will be increased to accomodate the extra bytes.
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; If the value specified for &lt;code&gt;pos&lt;/code&gt;
+ is greater then the length+1 of the &lt;code&gt;BLOB&lt;/code&gt; value then the
+ behavior is undefined. Some JDBC drivers may throw a
+ &lt;code&gt;SQLException&lt;/code&gt; while other drivers may support this
+ operation.
+@param {Number} pos the position in the &lt;code&gt;BLOB&lt;/code&gt; object at which
+        to start writing; the first position is 1
+@param {Object {byte[]}} bytes the array of bytes to be written to the &lt;code&gt;BLOB&lt;/code&gt;
+        value that this &lt;code&gt;Blob&lt;/code&gt; object represents
+@return {Number} the number of bytes written
+@exception SQLException if there is an error accessing the
+            &lt;code&gt;BLOB&lt;/code&gt; value or if pos is less than 1
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@see #getBytes
+@since 1.4
+*/
+setBytes : function(  ) {},
+
+<span id='java-sql-Blob-method-setBytes'>/**Writes all or part of the given &lt;code&gt;byte&lt;/code&gt; array to the
+</span> &lt;code&gt;BLOB&lt;/code&gt; value that this &lt;code&gt;Blob&lt;/code&gt; object represents
+ and returns the number of bytes written.
+ Writing starts at position &lt;code&gt;pos&lt;/code&gt; in the &lt;code&gt;BLOB&lt;/code&gt;
+ value; &lt;code&gt;len&lt;/code&gt; bytes from the given byte array are written.
+ The array of bytes will overwrite the existing bytes
+ in the &lt;code&gt;Blob&lt;/code&gt; object starting at the position
+ &lt;code&gt;pos&lt;/code&gt;.  If the end of the &lt;code&gt;Blob&lt;/code&gt; value is reached
+ while writing the array of bytes, then the length of the &lt;code&gt;Blob&lt;/code&gt;
+ value will be increased to accomodate the extra bytes.
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; If the value specified for &lt;code&gt;pos&lt;/code&gt;
+ is greater then the length+1 of the &lt;code&gt;BLOB&lt;/code&gt; value then the
+ behavior is undefined. Some JDBC drivers may throw a
+ &lt;code&gt;SQLException&lt;/code&gt; while other drivers may support this
+ operation.
+@param {Number} pos the position in the &lt;code&gt;BLOB&lt;/code&gt; object at which
+        to start writing; the first position is 1
+@param {Object {byte[]}} bytes the array of bytes to be written to this &lt;code&gt;BLOB&lt;/code&gt;
+        object
+@param {Number} offset the offset into the array &lt;code&gt;bytes&lt;/code&gt; at which
+        to start reading the bytes to be set
+@param {Number} len the number of bytes to be written to the &lt;code&gt;BLOB&lt;/code&gt;
+        value from the array of bytes &lt;code&gt;bytes&lt;/code&gt;
+@return {Number} the number of bytes written
+@exception SQLException if there is an error accessing the
+            &lt;code&gt;BLOB&lt;/code&gt; value or if pos is less than 1
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@see #getBytes
+@since 1.4
+*/
+setBytes : function(  ) {},
+
+<span id='java-sql-Blob-method-setBinaryStream'>/**Retrieves a stream that can be used to write to the &lt;code&gt;BLOB&lt;/code&gt;
+</span> value that this &lt;code&gt;Blob&lt;/code&gt; object represents.  The stream begins
+ at position &lt;code&gt;pos&lt;/code&gt;.
+ The  bytes written to the stream will overwrite the existing bytes
+ in the &lt;code&gt;Blob&lt;/code&gt; object starting at the position
+ &lt;code&gt;pos&lt;/code&gt;.  If the end of the &lt;code&gt;Blob&lt;/code&gt; value is reached
+ while writing to the stream, then the length of the &lt;code&gt;Blob&lt;/code&gt;
+ value will be increased to accomodate the extra bytes.
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; If the value specified for &lt;code&gt;pos&lt;/code&gt;
+ is greater then the length+1 of the &lt;code&gt;BLOB&lt;/code&gt; value then the
+ behavior is undefined. Some JDBC drivers may throw a
+ &lt;code&gt;SQLException&lt;/code&gt; while other drivers may support this
+ operation.
+@param {Number} pos the position in the &lt;code&gt;BLOB&lt;/code&gt; value at which
+        to start writing; the first position is 1
+@return {Object {java.io.OutputStream}} a &lt;code&gt;java.io.OutputStream&lt;/code&gt; object to which data can
+         be written
+@exception SQLException if there is an error accessing the
+            &lt;code&gt;BLOB&lt;/code&gt; value or if pos is less than 1
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@see #getBinaryStream
+@since 1.4
+*/
+setBinaryStream : function(  ) {},
+
+<span id='java-sql-Blob-method-truncate'>/**Truncates the &lt;code&gt;BLOB&lt;/code&gt; value that this &lt;code&gt;Blob&lt;/code&gt;
+</span> object represents to be &lt;code&gt;len&lt;/code&gt; bytes in length.
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; If the value specified for &lt;code&gt;pos&lt;/code&gt;
+ is greater then the length+1 of the &lt;code&gt;BLOB&lt;/code&gt; value then the
+ behavior is undefined. Some JDBC drivers may throw a
+ &lt;code&gt;SQLException&lt;/code&gt; while other drivers may support this
+ operation.
+@param {Number} len the length, in bytes, to which the &lt;code&gt;BLOB&lt;/code&gt; value
+        that this &lt;code&gt;Blob&lt;/code&gt; object represents should be truncated
+@exception SQLException if there is an error accessing the
+            &lt;code&gt;BLOB&lt;/code&gt; value or if len is less than 0
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.4
+*/
+truncate : function(  ) {},
+
+<span id='java-sql-Blob-method-free'>/**This method frees the &lt;code&gt;Blob&lt;/code&gt; object and releases the resources that
+</span> it holds. The object is invalid once the &lt;code&gt;free&lt;/code&gt;
+ method is called.
+&lt;p&gt;
+ After &lt;code&gt;free&lt;/code&gt; has been called, any attempt to invoke a
+ method other than &lt;code&gt;free&lt;/code&gt; will result in a &lt;code&gt;SQLException&lt;/code&gt;
+ being thrown.  If &lt;code&gt;free&lt;/code&gt; is called multiple times, the subsequent
+ calls to &lt;code&gt;free&lt;/code&gt; are treated as a no-op.
+&lt;p&gt;
+@throws SQLException if an error occurs releasing
+ the Blob's resources
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.6
+*/
+free : function(  ) {},
+
+<span id='java-sql-Blob-method-getBinaryStream'>/**Returns an &lt;code&gt;InputStream&lt;/code&gt; object that contains a partial &lt;code&gt;Blob&lt;/code&gt; value,
+</span> starting  with the byte specified by pos, which is length bytes in length.
+@param {Number} pos the offset to the first byte of the partial value to be retrieved.
+  The first byte in the &lt;code&gt;Blob&lt;/code&gt; is at position 1
+@param {Number} length the length in bytes of the partial value to be retrieved
+@return {Object {java.io.InputStream}} &lt;code&gt;InputStream&lt;/code&gt; through which the partial &lt;code&gt;Blob&lt;/code&gt; value can be read.
+@throws SQLException if pos is less than 1 or if pos is greater than the number of bytes
+ in the &lt;code&gt;Blob&lt;/code&gt; or if pos + length is greater than the number of bytes
+ in the &lt;code&gt;Blob&lt;/code&gt;
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.6
+*/
+getBinaryStream : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

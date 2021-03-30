@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-w3c-dom-ls-DOMImplementationLS'>/**@class org.w3c.dom.ls.DOMImplementationLS
+</span>  &lt;code&gt;DOMImplementationLS&lt;/code&gt; contains the factory methods for creating
+ Load and Save objects.
+ &lt;p&gt; The expectation is that an instance of the
+ &lt;code&gt;DOMImplementationLS&lt;/code&gt; interface can be obtained by using
+ binding-specific casting methods on an instance of the
+ &lt;code&gt;DOMImplementation&lt;/code&gt; interface or, if the &lt;code&gt;Document&lt;/code&gt;
+ supports the feature &lt;code&gt;&quot;Core&quot;&lt;/code&gt; version &lt;code&gt;&quot;3.0&quot;&lt;/code&gt;
+ defined in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ , by using the method &lt;code&gt;DOMImplementation.getFeature&lt;/code&gt; with
+ parameter values &lt;code&gt;&quot;LS&quot;&lt;/code&gt; (or &lt;code&gt;&quot;LS-Async&quot;&lt;/code&gt;) and
+ &lt;code&gt;&quot;3.0&quot;&lt;/code&gt; (respectively).
+ &lt;p&gt;See also the &lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407'&gt;Document Object Model (DOM) Level 3 Load
+and Save Specification&lt;/a&gt;.
+*/
+var DOMImplementationLS = {
+
+<span id='org-w3c-dom-ls-DOMImplementationLS-property-MODE_SYNCHRONOUS'>/** Create a synchronous &lt;code&gt;LSParser&lt;/code&gt;.
+</span>*/
+MODE_SYNCHRONOUS : &quot;1&quot;,
+<span id='org-w3c-dom-ls-DOMImplementationLS-property-MODE_ASYNCHRONOUS'>/** Create an asynchronous &lt;code&gt;LSParser&lt;/code&gt;.
+</span>*/
+MODE_ASYNCHRONOUS : &quot;2&quot;,
+<span id='org-w3c-dom-ls-DOMImplementationLS-method-createLSParser'>/**Create a new &lt;code&gt;LSParser&lt;/code&gt;. The newly constructed parser may
+</span> then be configured by means of its &lt;code&gt;DOMConfiguration&lt;/code&gt;
+ object, and used to parse documents by means of its &lt;code&gt;parse&lt;/code&gt;
+  method.
+@param {Number} mode  The &lt;code&gt;mode&lt;/code&gt; argument is either
+   &lt;code&gt;MODE_SYNCHRONOUS&lt;/code&gt; or &lt;code&gt;MODE_ASYNCHRONOUS&lt;/code&gt;, if
+   &lt;code&gt;mode&lt;/code&gt; is &lt;code&gt;MODE_SYNCHRONOUS&lt;/code&gt; then the
+   &lt;code&gt;LSParser&lt;/code&gt; that is created will operate in synchronous
+   mode, if it's &lt;code&gt;MODE_ASYNCHRONOUS&lt;/code&gt; then the
+   &lt;code&gt;LSParser&lt;/code&gt; that is created will operate in asynchronous
+   mode.
+@param {String} schemaType  An absolute URI representing the type of the schema
+   language used during the load of a &lt;code&gt;Document&lt;/code&gt; using the
+   newly created &lt;code&gt;LSParser&lt;/code&gt;. Note that no lexical checking
+   is done on the absolute URI. In order to create a
+   &lt;code&gt;LSParser&lt;/code&gt; for any kind of schema types (i.e. the
+   LSParser will be free to use any schema found), use the value
+   &lt;code&gt;null&lt;/code&gt;.
+ &lt;p &gt;&lt;b&gt;Note:&lt;/b&gt;    For W3C XML Schema [&lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/'&gt;XML Schema Part 1&lt;/a&gt;]
+   , applications must use the value
+   &lt;code&gt;&quot;http://www.w3.org/2001/XMLSchema&quot;&lt;/code&gt;. For XML DTD [&lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204'&gt;XML 1.0&lt;/a&gt;],
+   applications must use the value
+   &lt;code&gt;&quot;http://www.w3.org/TR/REC-xml&quot;&lt;/code&gt;. Other Schema languages
+   are outside the scope of the W3C and therefore should recommend an
+   absolute URI in order to use this method.
+@return {Object {org.w3c.dom.ls.LSParser}} The newly created &lt;code&gt;LSParser&lt;/code&gt; object. This
+   &lt;code&gt;LSParser&lt;/code&gt; is either synchronous or asynchronous
+   depending on the value of the &lt;code&gt;mode&lt;/code&gt; argument.
+ &lt;p &gt;&lt;b&gt;Note:&lt;/b&gt;    By default, the newly created &lt;code&gt;LSParser&lt;/code&gt;
+   does not contain a &lt;code&gt;DOMErrorHandler&lt;/code&gt;, i.e. the value of
+   the &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-error-handler'&gt;
+   error-handler&lt;/a&gt;&quot; configuration parameter is &lt;code&gt;null&lt;/code&gt;. However, implementations
+   may provide a default error handler at creation time. In that case,
+   the initial value of the &lt;code&gt;&quot;error-handler&quot;&lt;/code&gt; configuration
+   parameter on the new &lt;code&gt;LSParser&lt;/code&gt; object contains a
+   reference to the default error handler.
+@exception DOMException
+    NOT_SUPPORTED_ERR: Raised if the requested mode or schema type is
+   not supported.
+*/
+createLSParser : function(  ) {},
+
+<span id='org-w3c-dom-ls-DOMImplementationLS-method-createLSSerializer'>/**Create a new &lt;code&gt;LSSerializer&lt;/code&gt; object.
+</span>@return {Object {org.w3c.dom.ls.LSSerializer}} The newly created &lt;code&gt;LSSerializer&lt;/code&gt; object.
+ &lt;p &gt;&lt;b&gt;Note:&lt;/b&gt;    By default, the newly created
+   &lt;code&gt;LSSerializer&lt;/code&gt; has no &lt;code&gt;DOMErrorHandler&lt;/code&gt;, i.e.
+   the value of the &lt;code&gt;&quot;error-handler&quot;&lt;/code&gt; configuration
+   parameter is &lt;code&gt;null&lt;/code&gt;. However, implementations may
+   provide a default error handler at creation time. In that case, the
+   initial value of the &lt;code&gt;&quot;error-handler&quot;&lt;/code&gt; configuration
+   parameter on the new &lt;code&gt;LSSerializer&lt;/code&gt; object contains a
+   reference to the default error handler.
+*/
+createLSSerializer : function(  ) {},
+
+<span id='org-w3c-dom-ls-DOMImplementationLS-method-createLSInput'>/**Create a new empty input source object where
+</span> &lt;code&gt;LSInput.characterStream&lt;/code&gt;, &lt;code&gt;LSInput.byteStream&lt;/code&gt;
+ , &lt;code&gt;LSInput.stringData&lt;/code&gt; &lt;code&gt;LSInput.systemId&lt;/code&gt;,
+ &lt;code&gt;LSInput.publicId&lt;/code&gt;, &lt;code&gt;LSInput.baseURI&lt;/code&gt;, and
+ &lt;code&gt;LSInput.encoding&lt;/code&gt; are null, and
+ &lt;code&gt;LSInput.certifiedText&lt;/code&gt; is false.
+@return {Object {org.w3c.dom.ls.LSInput}} The newly created input object.
+*/
+createLSInput : function(  ) {},
+
+<span id='org-w3c-dom-ls-DOMImplementationLS-method-createLSOutput'>/**Create a new empty output destination object where
+</span> &lt;code&gt;LSOutput.characterStream&lt;/code&gt;,
+ &lt;code&gt;LSOutput.byteStream&lt;/code&gt;, &lt;code&gt;LSOutput.systemId&lt;/code&gt;,
+ &lt;code&gt;LSOutput.encoding&lt;/code&gt; are null.
+@return {Object {org.w3c.dom.ls.LSOutput}} The newly created output object.
+*/
+createLSOutput : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

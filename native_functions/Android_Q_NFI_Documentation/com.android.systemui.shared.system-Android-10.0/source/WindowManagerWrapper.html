@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-shared-system-WindowManagerWrapper'>/**@class com.android.systemui.shared.system.WindowManagerWrapper
+</span>@extends java.lang.Object
+
+*/
+var WindowManagerWrapper = {
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_UNSET'>/***/
+</span>TRANSIT_UNSET : &quot;-1&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_NONE'>/***/
+</span>TRANSIT_NONE : &quot;0&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_ACTIVITY_OPEN'>/***/
+</span>TRANSIT_ACTIVITY_OPEN : &quot;6&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_ACTIVITY_CLOSE'>/***/
+</span>TRANSIT_ACTIVITY_CLOSE : &quot;7&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_TASK_OPEN'>/***/
+</span>TRANSIT_TASK_OPEN : &quot;8&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_TASK_CLOSE'>/***/
+</span>TRANSIT_TASK_CLOSE : &quot;9&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_TASK_TO_FRONT'>/***/
+</span>TRANSIT_TASK_TO_FRONT : &quot;10&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_TASK_TO_BACK'>/***/
+</span>TRANSIT_TASK_TO_BACK : &quot;11&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_WALLPAPER_CLOSE'>/***/
+</span>TRANSIT_WALLPAPER_CLOSE : &quot;12&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_WALLPAPER_OPEN'>/***/
+</span>TRANSIT_WALLPAPER_OPEN : &quot;13&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_WALLPAPER_INTRA_OPEN'>/***/
+</span>TRANSIT_WALLPAPER_INTRA_OPEN : &quot;14&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_WALLPAPER_INTRA_CLOSE'>/***/
+</span>TRANSIT_WALLPAPER_INTRA_CLOSE : &quot;15&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_TASK_OPEN_BEHIND'>/***/
+</span>TRANSIT_TASK_OPEN_BEHIND : &quot;16&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_TASK_IN_PLACE'>/***/
+</span>TRANSIT_TASK_IN_PLACE : &quot;17&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_ACTIVITY_RELAUNCH'>/***/
+</span>TRANSIT_ACTIVITY_RELAUNCH : &quot;18&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_DOCK_TASK_FROM_RECENTS'>/***/
+</span>TRANSIT_DOCK_TASK_FROM_RECENTS : &quot;19&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_KEYGUARD_GOING_AWAY'>/***/
+</span>TRANSIT_KEYGUARD_GOING_AWAY : &quot;20&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_KEYGUARD_GOING_AWAY_ON_WALLPAPER'>/***/
+</span>TRANSIT_KEYGUARD_GOING_AWAY_ON_WALLPAPER : &quot;21&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_KEYGUARD_OCCLUDE'>/***/
+</span>TRANSIT_KEYGUARD_OCCLUDE : &quot;22&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-TRANSIT_KEYGUARD_UNOCCLUDE'>/***/
+</span>TRANSIT_KEYGUARD_UNOCCLUDE : &quot;23&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-NAV_BAR_POS_INVALID'>/***/
+</span>NAV_BAR_POS_INVALID : &quot;-1&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-NAV_BAR_POS_LEFT'>/***/
+</span>NAV_BAR_POS_LEFT : &quot;1&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-NAV_BAR_POS_RIGHT'>/***/
+</span>NAV_BAR_POS_RIGHT : &quot;2&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-NAV_BAR_POS_BOTTOM'>/***/
+</span>NAV_BAR_POS_BOTTOM : &quot;4&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-ACTIVITY_TYPE_STANDARD'>/***/
+</span>ACTIVITY_TYPE_STANDARD : &quot;1&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-WINDOWING_MODE_UNDEFINED'>/***/
+</span>WINDOWING_MODE_UNDEFINED : &quot;0&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-WINDOWING_MODE_FULLSCREEN'>/***/
+</span>WINDOWING_MODE_FULLSCREEN : &quot;1&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-WINDOWING_MODE_PINNED'>/***/
+</span>WINDOWING_MODE_PINNED : &quot;2&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-WINDOWING_MODE_SPLIT_SCREEN_PRIMARY'>/***/
+</span>WINDOWING_MODE_SPLIT_SCREEN_PRIMARY : &quot;3&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-WINDOWING_MODE_SPLIT_SCREEN_SECONDARY'>/***/
+</span>WINDOWING_MODE_SPLIT_SCREEN_SECONDARY : &quot;4&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-property-WINDOWING_MODE_FREEFORM'>/***/
+</span>WINDOWING_MODE_FREEFORM : &quot;5&quot;,
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-getInstance'>/**
+</span>*/
+getInstance : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-getStableInsets'>/**
+</span>@return {Object {void}} the stable insets for the primary display.
+*/
+getStableInsets : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-overridePendingAppTransitionMultiThumbFuture'>/**Overrides a pending app transition.
+</span>*/
+overridePendingAppTransitionMultiThumbFuture : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-overridePendingAppTransitionRemote'>/**
+</span>*/
+overridePendingAppTransitionRemote : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-setNavBarVirtualKeyHapticFeedbackEnabled'>/**Enable or disable haptic feedback on the navigation bar buttons.
+</span>*/
+setNavBarVirtualKeyHapticFeedbackEnabled : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-setShelfHeight'>/**
+</span>*/
+setShelfHeight : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-setRecentsVisibility'>/**
+</span>*/
+setRecentsVisibility : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-setPipVisibility'>/**
+</span>*/
+setPipVisibility : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-hasSoftNavigationBar'>/**
+</span>@param {Number} displayId the id of display to check if there is a software navigation bar.
+@return {Boolean} whether there is a soft nav bar on specific display.
+*/
+hasSoftNavigationBar : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-getNavBarPosition'>/**
+</span>@return {Number} The side of the screen where navigation bar is positioned.
+@see #NAV_BAR_POS_RIGHT
+@see #NAV_BAR_POS_LEFT
+@see #NAV_BAR_POS_BOTTOM
+@see #NAV_BAR_POS_INVALID
+*/
+getNavBarPosition : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-registerDockedStackListener'>/**Registers a docked stack listener with the system.
+</span>*/
+registerDockedStackListener : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-addPinnedStackListener'>/**Adds a pinned stack listener, which will receive updates from the window manager service
+</span> along with any other pinned stack listeners that were added via this method.
+*/
+addPinnedStackListener : function(  ) {},
+
+<span id='com-android-systemui-shared-system-WindowManagerWrapper-method-removePinnedStackListener'>/**Removes a pinned stack listener.
+</span>*/
+removePinnedStackListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

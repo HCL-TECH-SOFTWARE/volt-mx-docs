@@ -1,0 +1,3051 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-sql-DatabaseMetaData'>/**@class java.sql.DatabaseMetaData
+</span> implements java.sql.Wrapper
+
+ Comprehensive information about the database as a whole.
+ &lt;P&gt;
+ This interface is implemented by driver vendors to let users know the capabilities
+ of a Database Management System (DBMS) in combination with
+ the driver based on JDBC&lt;sup&gt;&lt;font size=-2&gt;TM&lt;/font&gt;&lt;/sup&gt; technology
+ (&quot;JDBC driver&quot;) that is used with it.  Different relational DBMSs often support
+ different features, implement features in different ways, and use different
+ data types.  In addition, a driver may implement a feature on top of what the
+ DBMS offers.  Information returned by methods in this interface applies
+ to the capabilities of a particular driver and a particular DBMS working
+ together. Note that as used in this documentation, the term &quot;database&quot; is
+ used generically to refer to both the driver and DBMS.
+ &lt;P&gt;
+ A user for this interface is commonly a tool that needs to discover how to
+ deal with the underlying DBMS.  This is especially true for applications
+ that are intended to be used with more than one DBMS. For example, a tool might use the method
+ &lt;code&gt;getTypeInfo&lt;/code&gt; to find out what data types can be used in a
+ &lt;code&gt;CREATE TABLE&lt;/code&gt; statement.  Or a user might call the method
+ &lt;code&gt;supportsCorrelatedSubqueries&lt;/code&gt; to see if it is possible to use
+ a correlated subquery or &lt;code&gt;supportsBatchUpdates&lt;/code&gt; to see if it is
+ possible to use batch updates.
+ &lt;P&gt;
+ Some &lt;code&gt;DatabaseMetaData&lt;/code&gt; methods return lists of information
+ in the form of &lt;code&gt;ResultSet&lt;/code&gt; objects.
+ Regular &lt;code&gt;ResultSet&lt;/code&gt; methods, such as
+ &lt;code&gt;getString&lt;/code&gt; and &lt;code&gt;getInt&lt;/code&gt;, can be used
+ to retrieve the data from these &lt;code&gt;ResultSet&lt;/code&gt; objects.  If
+ a given form of metadata is not available, an empty &lt;code&gt;ResultSet&lt;/code&gt;
+ will be returned. Additional columns beyond the columns defined to be
+ returned by the &lt;code&gt;ResultSet&lt;/code&gt; object for a given method
+ can be defined by the JDBC driver vendor and must be accessed
+ by their &lt;B&gt;column label&lt;/B&gt;.
+ &lt;P&gt;
+ Some &lt;code&gt;DatabaseMetaData&lt;/code&gt; methods take arguments that are
+ String patterns.  These arguments all have names such as fooPattern.
+ Within a pattern String, &quot;%&quot; means match any substring of 0 or more
+ characters, and &quot;_&quot; means match any one character. Only metadata
+ entries matching the search pattern are returned. If a search pattern
+ argument is set to &lt;code&gt;null&lt;/code&gt;, that argument's criterion will
+ be dropped from the search.
+ &lt;P&gt;
+*/
+var DatabaseMetaData = {
+
+<span id='java-sql-DatabaseMetaData-property-procedureResultUnknown'>/** Indicates that it is not known whether the procedure returns
+</span> a result.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;PROCEDURE_TYPE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getProcedures&lt;/code&gt;.
+*/
+procedureResultUnknown : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureNoResult'>/** Indicates that the procedure does not return a result.
+</span> &lt;P&gt;
+ A possible value for column &lt;code&gt;PROCEDURE_TYPE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getProcedures&lt;/code&gt;.
+*/
+procedureNoResult : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureReturnsResult'>/** Indicates that the procedure returns a result.
+</span> &lt;P&gt;
+ A possible value for column &lt;code&gt;PROCEDURE_TYPE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getProcedures&lt;/code&gt;.
+*/
+procedureReturnsResult : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureColumnUnknown'>/** Indicates that type of the column is unknown.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getProcedureColumns&lt;/code&gt;.
+*/
+procedureColumnUnknown : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureColumnIn'>/** Indicates that the column stores IN parameters.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getProcedureColumns&lt;/code&gt;.
+*/
+procedureColumnIn : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureColumnInOut'>/** Indicates that the column stores INOUT parameters.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getProcedureColumns&lt;/code&gt;.
+*/
+procedureColumnInOut : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureColumnOut'>/** Indicates that the column stores OUT parameters.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getProcedureColumns&lt;/code&gt;.
+*/
+procedureColumnOut : &quot;4&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureColumnReturn'>/** Indicates that the column stores return values.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getProcedureColumns&lt;/code&gt;.
+*/
+procedureColumnReturn : &quot;5&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureColumnResult'>/** Indicates that the column stores results.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getProcedureColumns&lt;/code&gt;.
+*/
+procedureColumnResult : &quot;3&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureNoNulls'>/** Indicates that &lt;code&gt;NULL&lt;/code&gt; values are not allowed.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getProcedureColumns&lt;/code&gt;.
+*/
+procedureNoNulls : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureNullable'>/** Indicates that &lt;code&gt;NULL&lt;/code&gt; values are allowed.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getProcedureColumns&lt;/code&gt;.
+*/
+procedureNullable : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-procedureNullableUnknown'>/** Indicates that whether &lt;code&gt;NULL&lt;/code&gt; values are allowed
+</span> is unknown.
+ &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getProcedureColumns&lt;/code&gt;.
+*/
+procedureNullableUnknown : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-columnNoNulls'>/** Indicates that the column might not allow &lt;code&gt;NULL&lt;/code&gt; values.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; returned by the method
+ &lt;code&gt;getColumns&lt;/code&gt;.
+*/
+columnNoNulls : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-columnNullable'>/** Indicates that the column definitely allows &lt;code&gt;NULL&lt;/code&gt; values.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; returned by the method
+ &lt;code&gt;getColumns&lt;/code&gt;.
+*/
+columnNullable : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-columnNullableUnknown'>/** Indicates that the nullability of columns is unknown.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; returned by the method
+ &lt;code&gt;getColumns&lt;/code&gt;.
+*/
+columnNullableUnknown : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-bestRowTemporary'>/** Indicates that the scope of the best row identifier is
+</span> very temporary, lasting only while the
+ row is being used.
+ &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;SCOPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getBestRowIdentifier&lt;/code&gt;.
+*/
+bestRowTemporary : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-bestRowTransaction'>/** Indicates that the scope of the best row identifier is
+</span> the remainder of the current transaction.
+ &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;SCOPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getBestRowIdentifier&lt;/code&gt;.
+*/
+bestRowTransaction : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-bestRowSession'>/** Indicates that the scope of the best row identifier is
+</span> the remainder of the current session.
+ &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;SCOPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getBestRowIdentifier&lt;/code&gt;.
+*/
+bestRowSession : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-bestRowUnknown'>/** Indicates that the best row identifier may or may not be a pseudo column.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;PSEUDO_COLUMN&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getBestRowIdentifier&lt;/code&gt;.
+*/
+bestRowUnknown : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-bestRowNotPseudo'>/** Indicates that the best row identifier is NOT a pseudo column.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;PSEUDO_COLUMN&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getBestRowIdentifier&lt;/code&gt;.
+*/
+bestRowNotPseudo : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-bestRowPseudo'>/** Indicates that the best row identifier is a pseudo column.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;PSEUDO_COLUMN&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getBestRowIdentifier&lt;/code&gt;.
+*/
+bestRowPseudo : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-versionColumnUnknown'>/** Indicates that this version column may or may not be a pseudo column.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;PSEUDO_COLUMN&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getVersionColumns&lt;/code&gt;.
+*/
+versionColumnUnknown : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-versionColumnNotPseudo'>/** Indicates that this version column is NOT a pseudo column.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;PSEUDO_COLUMN&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getVersionColumns&lt;/code&gt;.
+*/
+versionColumnNotPseudo : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-versionColumnPseudo'>/** Indicates that this version column is a pseudo column.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;PSEUDO_COLUMN&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getVersionColumns&lt;/code&gt;.
+*/
+versionColumnPseudo : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-importedKeyCascade'>/** For the column &lt;code&gt;UPDATE_RULE&lt;/code&gt;,
+</span> indicates that
+ when the primary key is updated, the foreign key (imported key)
+ is changed to agree with it.
+ For the column &lt;code&gt;DELETE_RULE&lt;/code&gt;,
+ it indicates that
+ when the primary key is deleted, rows that imported that key
+ are deleted.
+ &lt;P&gt;
+ A possible value for the columns &lt;code&gt;UPDATE_RULE&lt;/code&gt;
+ and &lt;code&gt;DELETE_RULE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; objects returned by the methods
+ &lt;code&gt;getImportedKeys&lt;/code&gt;,  &lt;code&gt;getExportedKeys&lt;/code&gt;,
+ and &lt;code&gt;getCrossReference&lt;/code&gt;.
+*/
+importedKeyCascade : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-importedKeyRestrict'>/** For the column &lt;code&gt;UPDATE_RULE&lt;/code&gt;, indicates that
+</span> a primary key may not be updated if it has been imported by
+ another table as a foreign key.
+ For the column &lt;code&gt;DELETE_RULE&lt;/code&gt;, indicates that
+ a primary key may not be deleted if it has been imported by
+ another table as a foreign key.
+ &lt;P&gt;
+ A possible value for the columns &lt;code&gt;UPDATE_RULE&lt;/code&gt;
+ and &lt;code&gt;DELETE_RULE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; objects returned by the methods
+ &lt;code&gt;getImportedKeys&lt;/code&gt;,  &lt;code&gt;getExportedKeys&lt;/code&gt;,
+ and &lt;code&gt;getCrossReference&lt;/code&gt;.
+*/
+importedKeyRestrict : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-importedKeySetNull'>/** For the columns &lt;code&gt;UPDATE_RULE&lt;/code&gt;
+</span> and &lt;code&gt;DELETE_RULE&lt;/code&gt;, indicates that
+ when the primary key is updated or deleted, the foreign key (imported key)
+ is changed to &lt;code&gt;NULL&lt;/code&gt;.
+ &lt;P&gt;
+ A possible value for the columns &lt;code&gt;UPDATE_RULE&lt;/code&gt;
+ and &lt;code&gt;DELETE_RULE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; objects returned by the methods
+ &lt;code&gt;getImportedKeys&lt;/code&gt;,  &lt;code&gt;getExportedKeys&lt;/code&gt;,
+ and &lt;code&gt;getCrossReference&lt;/code&gt;.
+*/
+importedKeySetNull : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-importedKeyNoAction'>/** For the columns &lt;code&gt;UPDATE_RULE&lt;/code&gt;
+</span> and &lt;code&gt;DELETE_RULE&lt;/code&gt;, indicates that
+ if the primary key has been imported, it cannot be updated or deleted.
+ &lt;P&gt;
+ A possible value for the columns &lt;code&gt;UPDATE_RULE&lt;/code&gt;
+ and &lt;code&gt;DELETE_RULE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; objects returned by the methods
+ &lt;code&gt;getImportedKeys&lt;/code&gt;,  &lt;code&gt;getExportedKeys&lt;/code&gt;,
+ and &lt;code&gt;getCrossReference&lt;/code&gt;.
+*/
+importedKeyNoAction : &quot;3&quot;,
+<span id='java-sql-DatabaseMetaData-property-importedKeySetDefault'>/** For the columns &lt;code&gt;UPDATE_RULE&lt;/code&gt;
+</span> and &lt;code&gt;DELETE_RULE&lt;/code&gt;, indicates that
+ if the primary key is updated or deleted, the foreign key (imported key)
+ is set to the default value.
+ &lt;P&gt;
+ A possible value for the columns &lt;code&gt;UPDATE_RULE&lt;/code&gt;
+ and &lt;code&gt;DELETE_RULE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; objects returned by the methods
+ &lt;code&gt;getImportedKeys&lt;/code&gt;,  &lt;code&gt;getExportedKeys&lt;/code&gt;,
+ and &lt;code&gt;getCrossReference&lt;/code&gt;.
+*/
+importedKeySetDefault : &quot;4&quot;,
+<span id='java-sql-DatabaseMetaData-property-importedKeyInitiallyDeferred'>/** Indicates deferrability.  See SQL-92 for a definition.
+</span> &lt;P&gt;
+ A possible value for the column &lt;code&gt;DEFERRABILITY&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; objects returned by the methods
+ &lt;code&gt;getImportedKeys&lt;/code&gt;,  &lt;code&gt;getExportedKeys&lt;/code&gt;,
+ and &lt;code&gt;getCrossReference&lt;/code&gt;.
+*/
+importedKeyInitiallyDeferred : &quot;5&quot;,
+<span id='java-sql-DatabaseMetaData-property-importedKeyInitiallyImmediate'>/** Indicates deferrability.  See SQL-92 for a definition.
+</span> &lt;P&gt;
+ A possible value for the column &lt;code&gt;DEFERRABILITY&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; objects returned by the methods
+ &lt;code&gt;getImportedKeys&lt;/code&gt;,  &lt;code&gt;getExportedKeys&lt;/code&gt;,
+ and &lt;code&gt;getCrossReference&lt;/code&gt;.
+*/
+importedKeyInitiallyImmediate : &quot;6&quot;,
+<span id='java-sql-DatabaseMetaData-property-importedKeyNotDeferrable'>/** Indicates deferrability.  See SQL-92 for a definition.
+</span> &lt;P&gt;
+ A possible value for the column &lt;code&gt;DEFERRABILITY&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; objects returned by the methods
+ &lt;code&gt;getImportedKeys&lt;/code&gt;,  &lt;code&gt;getExportedKeys&lt;/code&gt;,
+ and &lt;code&gt;getCrossReference&lt;/code&gt;.
+*/
+importedKeyNotDeferrable : &quot;7&quot;,
+<span id='java-sql-DatabaseMetaData-property-typeNoNulls'>/** Indicates that a &lt;code&gt;NULL&lt;/code&gt; value is NOT allowed for this
+</span> data type.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;NULLABLE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getTypeInfo&lt;/code&gt;.
+*/
+typeNoNulls : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-typeNullable'>/** Indicates that a &lt;code&gt;NULL&lt;/code&gt; value is allowed for this
+</span> data type.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;NULLABLE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getTypeInfo&lt;/code&gt;.
+*/
+typeNullable : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-typeNullableUnknown'>/** Indicates that it is not known whether a &lt;code&gt;NULL&lt;/code&gt; value
+</span> is allowed for this data type.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;NULLABLE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getTypeInfo&lt;/code&gt;.
+*/
+typeNullableUnknown : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-typePredNone'>/** Indicates that &lt;code&gt;WHERE&lt;/code&gt; search clauses are not supported
+</span> for this type.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;SEARCHABLE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getTypeInfo&lt;/code&gt;.
+*/
+typePredNone : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-typePredChar'>/** Indicates that the data type
+</span> can be only be used in &lt;code&gt;WHERE&lt;/code&gt; search clauses
+ that  use &lt;code&gt;LIKE&lt;/code&gt; predicates.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;SEARCHABLE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getTypeInfo&lt;/code&gt;.
+*/
+typePredChar : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-typePredBasic'>/** Indicates that the data type can be only be used in &lt;code&gt;WHERE&lt;/code&gt;
+</span> search clauses
+ that do not use &lt;code&gt;LIKE&lt;/code&gt; predicates.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;SEARCHABLE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getTypeInfo&lt;/code&gt;.
+*/
+typePredBasic : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-typeSearchable'>/** Indicates that all &lt;code&gt;WHERE&lt;/code&gt; search clauses can be
+</span> based on this type.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;SEARCHABLE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getTypeInfo&lt;/code&gt;.
+*/
+typeSearchable : &quot;3&quot;,
+<span id='java-sql-DatabaseMetaData-property-tableIndexStatistic'>/** Indicates that this column contains table statistics that
+</span> are returned in conjunction with a table's index descriptions.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;TYPE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getIndexInfo&lt;/code&gt;.
+*/
+tableIndexStatistic : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-tableIndexClustered'>/** Indicates that this table index is a clustered index.
+</span> &lt;P&gt;
+ A possible value for column &lt;code&gt;TYPE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getIndexInfo&lt;/code&gt;.
+*/
+tableIndexClustered : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-tableIndexHashed'>/** Indicates that this table index is a hashed index.
+</span> &lt;P&gt;
+ A possible value for column &lt;code&gt;TYPE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getIndexInfo&lt;/code&gt;.
+*/
+tableIndexHashed : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-tableIndexOther'>/** Indicates that this table index is not a clustered
+</span> index, a hashed index, or table statistics;
+ it is something other than these.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;TYPE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getIndexInfo&lt;/code&gt;.
+*/
+tableIndexOther : &quot;3&quot;,
+<span id='java-sql-DatabaseMetaData-property-attributeNoNulls'>/** Indicates that &lt;code&gt;NULL&lt;/code&gt; values might not be allowed.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;NULLABLE&lt;/code&gt; in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getAttributes&lt;/code&gt;.
+*/
+attributeNoNulls : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-attributeNullable'>/** Indicates that &lt;code&gt;NULL&lt;/code&gt; values are definitely allowed.
+</span> &lt;P&gt;
+ A possible value for the column &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getAttributes&lt;/code&gt;.
+*/
+attributeNullable : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-attributeNullableUnknown'>/** Indicates that whether &lt;code&gt;NULL&lt;/code&gt; values are allowed is not
+</span> known.
+ &lt;P&gt;
+ A possible value for the column &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getAttributes&lt;/code&gt;.
+*/
+attributeNullableUnknown : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-sqlStateXOpen'>/**  A possible return value for the method
+</span> &lt;code&gt;DatabaseMetaData.getSQLStateType&lt;/code&gt; which is used to indicate
+ whether the value returned by the method
+ &lt;code&gt;SQLException.getSQLState&lt;/code&gt; is an
+ X/Open (now know as Open Group) SQL CLI SQLSTATE value.
+ &lt;P&gt;
+ @since 1.4
+*/
+sqlStateXOpen : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-sqlStateSQL'>/**  A possible return value for the method
+</span> &lt;code&gt;DatabaseMetaData.getSQLStateType&lt;/code&gt; which is used to indicate
+ whether the value returned by the method
+ &lt;code&gt;SQLException.getSQLState&lt;/code&gt; is an SQLSTATE value.
+ &lt;P&gt;
+ @since 1.6
+*/
+sqlStateSQL : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-sqlStateSQL99'>/**  A possible return value for the method
+</span> &lt;code&gt;DatabaseMetaData.getSQLStateType&lt;/code&gt; which is used to indicate
+ whether the value returned by the method
+ &lt;code&gt;SQLException.getSQLState&lt;/code&gt; is an SQL99 SQLSTATE value.
+ &lt;P&gt;
+ &lt;b&gt;Note:&lt;/b&gt;This constant remains only for compatibility reasons. Developers
+ should use the constant &lt;code&gt;sqlStateSQL&lt;/code&gt; instead.
+
+ @since 1.4
+*/
+sqlStateSQL99 : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionColumnUnknown'>/** Indicates that type of the parameter or column is unknown.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getFunctionColumns&lt;/code&gt;.
+*/
+functionColumnUnknown : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionColumnIn'>/** Indicates that the parameter or column is an IN parameter.
+</span> &lt;P&gt;
+  A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getFunctionColumns&lt;/code&gt;.
+ @since 1.6
+*/
+functionColumnIn : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionColumnInOut'>/** Indicates that the parameter or column is an INOUT parameter.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getFunctionColumns&lt;/code&gt;.
+ @since 1.6
+*/
+functionColumnInOut : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionColumnOut'>/** Indicates that the parameter or column is an OUT parameter.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getFunctionColumns&lt;/code&gt;.
+ @since 1.6
+*/
+functionColumnOut : &quot;3&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionReturn'>/** Indicates that the parameter or column is a return value.
+</span> &lt;P&gt;
+  A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getFunctionColumns&lt;/code&gt;.
+ @since 1.6
+*/
+functionReturn : &quot;4&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionColumnResult'>/** Indicates that the parameter or column is a column in a result set.
+</span> &lt;P&gt;
+  A possible value for the column
+ &lt;code&gt;COLUMN_TYPE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt;
+ returned by the method &lt;code&gt;getFunctionColumns&lt;/code&gt;.
+ @since 1.6
+*/
+functionColumnResult : &quot;5&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionNoNulls'>/** Indicates that &lt;code&gt;NULL&lt;/code&gt; values are not allowed.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getFunctionColumns&lt;/code&gt;.
+ @since 1.6
+*/
+functionNoNulls : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionNullable'>/** Indicates that &lt;code&gt;NULL&lt;/code&gt; values are allowed.
+</span> &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getFunctionColumns&lt;/code&gt;.
+ @since 1.6
+*/
+functionNullable : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionNullableUnknown'>/** Indicates that whether &lt;code&gt;NULL&lt;/code&gt; values are allowed
+</span> is unknown.
+ &lt;P&gt;
+ A possible value for the column
+ &lt;code&gt;NULLABLE&lt;/code&gt;
+ in the &lt;code&gt;ResultSet&lt;/code&gt; object
+ returned by the method &lt;code&gt;getFunctionColumns&lt;/code&gt;.
+ @since 1.6
+*/
+functionNullableUnknown : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionResultUnknown'>/** Indicates that it is not known whether the function returns
+</span> a result or a table.
+ &lt;P&gt;
+ A possible value for column &lt;code&gt;FUNCTION_TYPE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getFunctions&lt;/code&gt;.
+ @since 1.6
+*/
+functionResultUnknown : &quot;0&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionNoTable'>/** Indicates that the function  does not return a table.
+</span> &lt;P&gt;
+ A possible value for column &lt;code&gt;FUNCTION_TYPE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getFunctions&lt;/code&gt;.
+ @since 1.6
+*/
+functionNoTable : &quot;1&quot;,
+<span id='java-sql-DatabaseMetaData-property-functionReturnsTable'>/** Indicates that the function  returns a table.
+</span> &lt;P&gt;
+ A possible value for column &lt;code&gt;FUNCTION_TYPE&lt;/code&gt; in the
+ &lt;code&gt;ResultSet&lt;/code&gt; object returned by the method
+ &lt;code&gt;getFunctions&lt;/code&gt;.
+ @since 1.6
+*/
+functionReturnsTable : &quot;2&quot;,
+<span id='java-sql-DatabaseMetaData-method-allProceduresAreCallable'>/**Retrieves whether the current user can call all the procedures
+</span> returned by the method &lt;code&gt;getProcedures&lt;/code&gt;.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+allProceduresAreCallable : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-allTablesAreSelectable'>/**Retrieves whether the current user can use all the tables returned
+</span> by the method &lt;code&gt;getTables&lt;/code&gt; in a &lt;code&gt;SELECT&lt;/code&gt;
+ statement.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+allTablesAreSelectable : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getURL'>/**Retrieves the URL for this DBMS.
+</span>@return {String} the URL for this DBMS or &lt;code&gt;null&lt;/code&gt; if it cannot be
+          generated
+@exception SQLException if a database access error occurs
+*/
+getURL : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getUserName'>/**Retrieves the user name as known to this database.
+</span>@return {String} the database user name
+@exception SQLException if a database access error occurs
+*/
+getUserName : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-isReadOnly'>/**Retrieves whether this database is in read-only mode.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+isReadOnly : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-nullsAreSortedHigh'>/**Retrieves whether &lt;code&gt;NULL&lt;/code&gt; values are sorted high.
+</span> Sorted high means that &lt;code&gt;NULL&lt;/code&gt; values
+ sort higher than any other value in a domain.  In an ascending order,
+ if this method returns &lt;code&gt;true&lt;/code&gt;,  &lt;code&gt;NULL&lt;/code&gt; values
+ will appear at the end. By contrast, the method
+ &lt;code&gt;nullsAreSortedAtEnd&lt;/code&gt; indicates whether &lt;code&gt;NULL&lt;/code&gt; values
+ are sorted at the end regardless of sort order.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+nullsAreSortedHigh : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-nullsAreSortedLow'>/**Retrieves whether &lt;code&gt;NULL&lt;/code&gt; values are sorted low.
+</span> Sorted low means that &lt;code&gt;NULL&lt;/code&gt; values
+ sort lower than any other value in a domain.  In an ascending order,
+ if this method returns &lt;code&gt;true&lt;/code&gt;,  &lt;code&gt;NULL&lt;/code&gt; values
+ will appear at the beginning. By contrast, the method
+ &lt;code&gt;nullsAreSortedAtStart&lt;/code&gt; indicates whether &lt;code&gt;NULL&lt;/code&gt; values
+ are sorted at the beginning regardless of sort order.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+nullsAreSortedLow : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-nullsAreSortedAtStart'>/**Retrieves whether &lt;code&gt;NULL&lt;/code&gt; values are sorted at the start regardless
+</span> of sort order.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+nullsAreSortedAtStart : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-nullsAreSortedAtEnd'>/**Retrieves whether &lt;code&gt;NULL&lt;/code&gt; values are sorted at the end regardless of
+</span> sort order.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+nullsAreSortedAtEnd : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getDatabaseProductName'>/**Retrieves the name of this database product.
+</span>@return {String} database product name
+@exception SQLException if a database access error occurs
+*/
+getDatabaseProductName : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getDatabaseProductVersion'>/**Retrieves the version number of this database product.
+</span>@return {String} database version number
+@exception SQLException if a database access error occurs
+*/
+getDatabaseProductVersion : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getDriverName'>/**Retrieves the name of this JDBC driver.
+</span>@return {String} JDBC driver name
+@exception SQLException if a database access error occurs
+*/
+getDriverName : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getDriverVersion'>/**Retrieves the version number of this JDBC driver as a &lt;code&gt;String&lt;/code&gt;.
+</span>@return {String} JDBC driver version
+@exception SQLException if a database access error occurs
+*/
+getDriverVersion : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getDriverMajorVersion'>/**Retrieves this JDBC driver's major version number.
+</span>@return {Number} JDBC driver major version
+*/
+getDriverMajorVersion : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getDriverMinorVersion'>/**Retrieves this JDBC driver's minor version number.
+</span>@return {Number} JDBC driver minor version number
+*/
+getDriverMinorVersion : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-usesLocalFiles'>/**Retrieves whether this database stores tables in a local file.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+usesLocalFiles : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-usesLocalFilePerTable'>/**Retrieves whether this database uses a file for each table.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this database uses a local file for each table;
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+usesLocalFilePerTable : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsMixedCaseIdentifiers'>/**Retrieves whether this database treats mixed case unquoted SQL identifiers as
+</span> case sensitive and as a result stores them in mixed case.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsMixedCaseIdentifiers : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-storesUpperCaseIdentifiers'>/**Retrieves whether this database treats mixed case unquoted SQL identifiers as
+</span> case insensitive and stores them in upper case.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+storesUpperCaseIdentifiers : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-storesLowerCaseIdentifiers'>/**Retrieves whether this database treats mixed case unquoted SQL identifiers as
+</span> case insensitive and stores them in lower case.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+storesLowerCaseIdentifiers : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-storesMixedCaseIdentifiers'>/**Retrieves whether this database treats mixed case unquoted SQL identifiers as
+</span> case insensitive and stores them in mixed case.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+storesMixedCaseIdentifiers : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsMixedCaseQuotedIdentifiers'>/**Retrieves whether this database treats mixed case quoted SQL identifiers as
+</span> case sensitive and as a result stores them in mixed case.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsMixedCaseQuotedIdentifiers : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-storesUpperCaseQuotedIdentifiers'>/**Retrieves whether this database treats mixed case quoted SQL identifiers as
+</span> case insensitive and stores them in upper case.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+storesUpperCaseQuotedIdentifiers : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-storesLowerCaseQuotedIdentifiers'>/**Retrieves whether this database treats mixed case quoted SQL identifiers as
+</span> case insensitive and stores them in lower case.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+storesLowerCaseQuotedIdentifiers : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-storesMixedCaseQuotedIdentifiers'>/**Retrieves whether this database treats mixed case quoted SQL identifiers as
+</span> case insensitive and stores them in mixed case.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+storesMixedCaseQuotedIdentifiers : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getIdentifierQuoteString'>/**Retrieves the string used to quote SQL identifiers.
+</span> This method returns a space &quot; &quot; if identifier quoting is not supported.
+@return {String} the quoting string or a space if quoting is not supported
+@exception SQLException if a database access error occurs
+*/
+getIdentifierQuoteString : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getSQLKeywords'>/**Retrieves a comma-separated list of all of this database's SQL keywords
+</span> that are NOT also SQL:2003 keywords.
+@return {String} the list of this database's keywords that are not also
+         SQL:2003 keywords
+@exception SQLException if a database access error occurs
+*/
+getSQLKeywords : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getNumericFunctions'>/**Retrieves a comma-separated list of math functions available with
+</span> this database.  These are the Open /Open CLI math function names used in
+ the JDBC function escape clause.
+@return {String} the list of math functions supported by this database
+@exception SQLException if a database access error occurs
+*/
+getNumericFunctions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getStringFunctions'>/**Retrieves a comma-separated list of string functions available with
+</span> this database.  These are the  Open Group CLI string function names used
+ in the JDBC function escape clause.
+@return {String} the list of string functions supported by this database
+@exception SQLException if a database access error occurs
+*/
+getStringFunctions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getSystemFunctions'>/**Retrieves a comma-separated list of system functions available with
+</span> this database.  These are the  Open Group CLI system function names used
+ in the JDBC function escape clause.
+@return {String} a list of system functions supported by this database
+@exception SQLException if a database access error occurs
+*/
+getSystemFunctions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getTimeDateFunctions'>/**Retrieves a comma-separated list of the time and date functions available
+</span> with this database.
+@return {String} the list of time and date functions supported by this database
+@exception SQLException if a database access error occurs
+*/
+getTimeDateFunctions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getSearchStringEscape'>/**Retrieves the string that can be used to escape wildcard characters.
+</span> This is the string that can be used to escape '_' or '%' in
+ the catalog search parameters that are a pattern (and therefore use one
+ of the wildcard characters).
+
+ &lt;P&gt;The '_' character represents any single character;
+ the '%' character represents any sequence of zero or
+ more characters.
+@return {String} the string used to escape wildcard characters
+@exception SQLException if a database access error occurs
+*/
+getSearchStringEscape : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getExtraNameCharacters'>/**Retrieves all the &quot;extra&quot; characters that can be used in unquoted
+</span> identifier names (those beyond a-z, A-Z, 0-9 and _).
+@return {String} the string containing the extra characters
+@exception SQLException if a database access error occurs
+*/
+getExtraNameCharacters : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsAlterTableWithAddColumn'>/**Retrieves whether this database supports &lt;code&gt;ALTER TABLE&lt;/code&gt;
+</span> with add column.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsAlterTableWithAddColumn : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsAlterTableWithDropColumn'>/**Retrieves whether this database supports &lt;code&gt;ALTER TABLE&lt;/code&gt;
+</span> with drop column.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsAlterTableWithDropColumn : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsColumnAliasing'>/**Retrieves whether this database supports column aliasing.
+</span>
+ &lt;P&gt;If so, the SQL AS clause can be used to provide names for
+ computed columns or to provide alias names for columns as
+ required.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsColumnAliasing : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-nullPlusNonNullIsNull'>/**Retrieves whether this database supports concatenations between
+</span> &lt;code&gt;NULL&lt;/code&gt; and non-&lt;code&gt;NULL&lt;/code&gt; values being
+ &lt;code&gt;NULL&lt;/code&gt;.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+nullPlusNonNullIsNull : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsConvert'>/**Retrieves whether this database supports the JDBC scalar function
+</span> &lt;code&gt;CONVERT&lt;/code&gt; for the conversion of one JDBC type to another.
+ The JDBC types are the generic SQL data types defined
+ in &lt;code&gt;java.sql.Types&lt;/code&gt;.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsConvert : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsConvert'>/**Retrieves whether this database supports the JDBC scalar function
+</span> &lt;code&gt;CONVERT&lt;/code&gt; for conversions between the JDBC types &lt;i&gt;fromType&lt;/i&gt;
+ and &lt;i&gt;toType&lt;/i&gt;.  The JDBC types are the generic SQL data types defined
+ in &lt;code&gt;java.sql.Types&lt;/code&gt;.
+@param {Number} fromType the type to convert from; one of the type codes from
+        the class &lt;code&gt;java.sql.Types&lt;/code&gt;
+@param {Number} toType the type to convert to; one of the type codes from
+        the class &lt;code&gt;java.sql.Types&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@see Types
+*/
+supportsConvert : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsTableCorrelationNames'>/**Retrieves whether this database supports table correlation names.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsTableCorrelationNames : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsDifferentTableCorrelationNames'>/**Retrieves whether, when table correlation names are supported, they
+</span> are restricted to being different from the names of the tables.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsDifferentTableCorrelationNames : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsExpressionsInOrderBy'>/**Retrieves whether this database supports expressions in
+</span> &lt;code&gt;ORDER BY&lt;/code&gt; lists.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsExpressionsInOrderBy : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsOrderByUnrelated'>/**Retrieves whether this database supports using a column that is
+</span> not in the &lt;code&gt;SELECT&lt;/code&gt; statement in an
+ &lt;code&gt;ORDER BY&lt;/code&gt; clause.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsOrderByUnrelated : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsGroupBy'>/**Retrieves whether this database supports some form of
+</span> &lt;code&gt;GROUP BY&lt;/code&gt; clause.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsGroupBy : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsGroupByUnrelated'>/**Retrieves whether this database supports using a column that is
+</span> not in the &lt;code&gt;SELECT&lt;/code&gt; statement in a
+ &lt;code&gt;GROUP BY&lt;/code&gt; clause.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsGroupByUnrelated : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsGroupByBeyondSelect'>/**Retrieves whether this database supports using columns not included in
+</span> the &lt;code&gt;SELECT&lt;/code&gt; statement in a &lt;code&gt;GROUP BY&lt;/code&gt; clause
+ provided that all of the columns in the &lt;code&gt;SELECT&lt;/code&gt; statement
+ are included in the &lt;code&gt;GROUP BY&lt;/code&gt; clause.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsGroupByBeyondSelect : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsLikeEscapeClause'>/**Retrieves whether this database supports specifying a
+</span> &lt;code&gt;LIKE&lt;/code&gt; escape clause.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsLikeEscapeClause : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsMultipleResultSets'>/**Retrieves whether this database supports getting multiple
+</span> &lt;code&gt;ResultSet&lt;/code&gt; objects from a single call to the
+ method &lt;code&gt;execute&lt;/code&gt;.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsMultipleResultSets : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsMultipleTransactions'>/**Retrieves whether this database allows having multiple
+</span> transactions open at once (on different connections).
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsMultipleTransactions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsNonNullableColumns'>/**Retrieves whether columns in this database may be defined as non-nullable.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsNonNullableColumns : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsMinimumSQLGrammar'>/**Retrieves whether this database supports the ODBC Minimum SQL grammar.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsMinimumSQLGrammar : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsCoreSQLGrammar'>/**Retrieves whether this database supports the ODBC Core SQL grammar.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsCoreSQLGrammar : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsExtendedSQLGrammar'>/**Retrieves whether this database supports the ODBC Extended SQL grammar.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsExtendedSQLGrammar : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsANSI92EntryLevelSQL'>/**Retrieves whether this database supports the ANSI92 entry level SQL
+</span> grammar.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsANSI92EntryLevelSQL : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsANSI92IntermediateSQL'>/**Retrieves whether this database supports the ANSI92 intermediate SQL grammar supported.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsANSI92IntermediateSQL : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsANSI92FullSQL'>/**Retrieves whether this database supports the ANSI92 full SQL grammar supported.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsANSI92FullSQL : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsIntegrityEnhancementFacility'>/**Retrieves whether this database supports the SQL Integrity
+</span> Enhancement Facility.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsIntegrityEnhancementFacility : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsOuterJoins'>/**Retrieves whether this database supports some form of outer join.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsOuterJoins : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsFullOuterJoins'>/**Retrieves whether this database supports full nested outer joins.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsFullOuterJoins : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsLimitedOuterJoins'>/**Retrieves whether this database provides limited support for outer
+</span> joins.  (This will be &lt;code&gt;true&lt;/code&gt; if the method
+ &lt;code&gt;supportsFullOuterJoins&lt;/code&gt; returns &lt;code&gt;true&lt;/code&gt;).
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsLimitedOuterJoins : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getSchemaTerm'>/**Retrieves the database vendor's preferred term for &quot;schema&quot;.
+</span>@return {String} the vendor term for &quot;schema&quot;
+@exception SQLException if a database access error occurs
+*/
+getSchemaTerm : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getProcedureTerm'>/**Retrieves the database vendor's preferred term for &quot;procedure&quot;.
+</span>@return {String} the vendor term for &quot;procedure&quot;
+@exception SQLException if a database access error occurs
+*/
+getProcedureTerm : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getCatalogTerm'>/**Retrieves the database vendor's preferred term for &quot;catalog&quot;.
+</span>@return {String} the vendor term for &quot;catalog&quot;
+@exception SQLException if a database access error occurs
+*/
+getCatalogTerm : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-isCatalogAtStart'>/**Retrieves whether a catalog appears at the start of a fully qualified
+</span> table name.  If not, the catalog appears at the end.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if the catalog name appears at the beginning
+         of a fully qualified table name; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+isCatalogAtStart : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getCatalogSeparator'>/**Retrieves the &lt;code&gt;String&lt;/code&gt; that this database uses as the
+</span> separator between a catalog and table name.
+@return {String} the separator string
+@exception SQLException if a database access error occurs
+*/
+getCatalogSeparator : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSchemasInDataManipulation'>/**Retrieves whether a schema name can be used in a data manipulation statement.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsSchemasInDataManipulation : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSchemasInProcedureCalls'>/**Retrieves whether a schema name can be used in a procedure call statement.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsSchemasInProcedureCalls : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSchemasInTableDefinitions'>/**Retrieves whether a schema name can be used in a table definition statement.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsSchemasInTableDefinitions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSchemasInIndexDefinitions'>/**Retrieves whether a schema name can be used in an index definition statement.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsSchemasInIndexDefinitions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSchemasInPrivilegeDefinitions'>/**Retrieves whether a schema name can be used in a privilege definition statement.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsSchemasInPrivilegeDefinitions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsCatalogsInDataManipulation'>/**Retrieves whether a catalog name can be used in a data manipulation statement.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsCatalogsInDataManipulation : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsCatalogsInProcedureCalls'>/**Retrieves whether a catalog name can be used in a procedure call statement.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsCatalogsInProcedureCalls : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsCatalogsInTableDefinitions'>/**Retrieves whether a catalog name can be used in a table definition statement.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsCatalogsInTableDefinitions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsCatalogsInIndexDefinitions'>/**Retrieves whether a catalog name can be used in an index definition statement.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsCatalogsInIndexDefinitions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsCatalogsInPrivilegeDefinitions'>/**Retrieves whether a catalog name can be used in a privilege definition statement.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsCatalogsInPrivilegeDefinitions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsPositionedDelete'>/**Retrieves whether this database supports positioned &lt;code&gt;DELETE&lt;/code&gt;
+</span> statements.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsPositionedDelete : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsPositionedUpdate'>/**Retrieves whether this database supports positioned &lt;code&gt;UPDATE&lt;/code&gt;
+</span> statements.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsPositionedUpdate : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSelectForUpdate'>/**Retrieves whether this database supports &lt;code&gt;SELECT FOR UPDATE&lt;/code&gt;
+</span> statements.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsSelectForUpdate : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsStoredProcedures'>/**Retrieves whether this database supports stored procedure calls
+</span> that use the stored procedure escape syntax.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsStoredProcedures : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSubqueriesInComparisons'>/**Retrieves whether this database supports subqueries in comparison
+</span> expressions.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsSubqueriesInComparisons : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSubqueriesInExists'>/**Retrieves whether this database supports subqueries in
+</span> &lt;code&gt;EXISTS&lt;/code&gt; expressions.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsSubqueriesInExists : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSubqueriesInIns'>/**Retrieves whether this database supports subqueries in
+</span> &lt;code&gt;IN&lt;/code&gt; expressions.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsSubqueriesInIns : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSubqueriesInQuantifieds'>/**Retrieves whether this database supports subqueries in quantified
+</span> expressions.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsSubqueriesInQuantifieds : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsCorrelatedSubqueries'>/**Retrieves whether this database supports correlated subqueries.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsCorrelatedSubqueries : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsUnion'>/**Retrieves whether this database supports SQL &lt;code&gt;UNION&lt;/code&gt;.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsUnion : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsUnionAll'>/**Retrieves whether this database supports SQL &lt;code&gt;UNION ALL&lt;/code&gt;.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsUnionAll : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsOpenCursorsAcrossCommit'>/**Retrieves whether this database supports keeping cursors open
+</span> across commits.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if cursors always remain open;
+       &lt;code&gt;false&lt;/code&gt; if they might not remain open
+@exception SQLException if a database access error occurs
+*/
+supportsOpenCursorsAcrossCommit : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsOpenCursorsAcrossRollback'>/**Retrieves whether this database supports keeping cursors open
+</span> across rollbacks.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if cursors always remain open;
+       &lt;code&gt;false&lt;/code&gt; if they might not remain open
+@exception SQLException if a database access error occurs
+*/
+supportsOpenCursorsAcrossRollback : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsOpenStatementsAcrossCommit'>/**Retrieves whether this database supports keeping statements open
+</span> across commits.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if statements always remain open;
+       &lt;code&gt;false&lt;/code&gt; if they might not remain open
+@exception SQLException if a database access error occurs
+*/
+supportsOpenStatementsAcrossCommit : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsOpenStatementsAcrossRollback'>/**Retrieves whether this database supports keeping statements open
+</span> across rollbacks.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if statements always remain open;
+       &lt;code&gt;false&lt;/code&gt; if they might not remain open
+@exception SQLException if a database access error occurs
+*/
+supportsOpenStatementsAcrossRollback : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxBinaryLiteralLength'>/**Retrieves the maximum number of hex characters this database allows in an
+</span> inline binary literal.
+@return {Number} max the maximum length (in hex characters) for a binary literal;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxBinaryLiteralLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxCharLiteralLength'>/**Retrieves the maximum number of characters this database allows
+</span> for a character literal.
+@return {Number} the maximum number of characters allowed for a character literal;
+      a result of zero means that there is no limit or the limit is
+      not known
+@exception SQLException if a database access error occurs
+*/
+getMaxCharLiteralLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxColumnNameLength'>/**Retrieves the maximum number of characters this database allows
+</span> for a column name.
+@return {Number} the maximum number of characters allowed for a column name;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxColumnNameLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxColumnsInGroupBy'>/**Retrieves the maximum number of columns this database allows in a
+</span> &lt;code&gt;GROUP BY&lt;/code&gt; clause.
+@return {Number} the maximum number of columns allowed;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxColumnsInGroupBy : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxColumnsInIndex'>/**Retrieves the maximum number of columns this database allows in an index.
+</span>@return {Number} the maximum number of columns allowed;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxColumnsInIndex : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxColumnsInOrderBy'>/**Retrieves the maximum number of columns this database allows in an
+</span> &lt;code&gt;ORDER BY&lt;/code&gt; clause.
+@return {Number} the maximum number of columns allowed;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxColumnsInOrderBy : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxColumnsInSelect'>/**Retrieves the maximum number of columns this database allows in a
+</span> &lt;code&gt;SELECT&lt;/code&gt; list.
+@return {Number} the maximum number of columns allowed;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxColumnsInSelect : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxColumnsInTable'>/**Retrieves the maximum number of columns this database allows in a table.
+</span>@return {Number} the maximum number of columns allowed;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxColumnsInTable : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxConnections'>/**Retrieves the maximum number of concurrent connections to this
+</span> database that are possible.
+@return {Number} the maximum number of active connections possible at one time;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxConnections : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxCursorNameLength'>/**Retrieves the maximum number of characters that this database allows in a
+</span> cursor name.
+@return {Number} the maximum number of characters allowed in a cursor name;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxCursorNameLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxIndexLength'>/**Retrieves the maximum number of bytes this database allows for an
+</span> index, including all of the parts of the index.
+@return {Number} the maximum number of bytes allowed; this limit includes the
+      composite of all the constituent parts of the index;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxIndexLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxSchemaNameLength'>/**Retrieves the maximum number of characters that this database allows in a
+</span> schema name.
+@return {Number} the maximum number of characters allowed in a schema name;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxSchemaNameLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxProcedureNameLength'>/**Retrieves the maximum number of characters that this database allows in a
+</span> procedure name.
+@return {Number} the maximum number of characters allowed in a procedure name;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxProcedureNameLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxCatalogNameLength'>/**Retrieves the maximum number of characters that this database allows in a
+</span> catalog name.
+@return {Number} the maximum number of characters allowed in a catalog name;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxCatalogNameLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxRowSize'>/**Retrieves the maximum number of bytes this database allows in
+</span> a single row.
+@return {Number} the maximum number of bytes allowed for a row; a result of
+         zero means that there is no limit or the limit is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxRowSize : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-doesMaxRowSizeIncludeBlobs'>/**Retrieves whether the return value for the method
+</span> &lt;code&gt;getMaxRowSize&lt;/code&gt; includes the SQL data types
+ &lt;code&gt;LONGVARCHAR&lt;/code&gt; and &lt;code&gt;LONGVARBINARY&lt;/code&gt;.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+doesMaxRowSizeIncludeBlobs : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxStatementLength'>/**Retrieves the maximum number of characters this database allows in
+</span> an SQL statement.
+@return {Number} the maximum number of characters allowed for an SQL statement;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxStatementLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxStatements'>/**Retrieves the maximum number of active statements to this database
+</span> that can be open at the same time.
+@return {Number} the maximum number of statements that can be open at one time;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxStatements : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxTableNameLength'>/**Retrieves the maximum number of characters this database allows in
+</span> a table name.
+@return {Number} the maximum number of characters allowed for a table name;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxTableNameLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxTablesInSelect'>/**Retrieves the maximum number of tables this database allows in a
+</span> &lt;code&gt;SELECT&lt;/code&gt; statement.
+@return {Number} the maximum number of tables allowed in a &lt;code&gt;SELECT&lt;/code&gt;
+         statement; a result of zero means that there is no limit or
+         the limit is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxTablesInSelect : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getMaxUserNameLength'>/**Retrieves the maximum number of characters this database allows in
+</span> a user name.
+@return {Number} the maximum number of characters allowed for a user name;
+      a result of zero means that there is no limit or the limit
+      is not known
+@exception SQLException if a database access error occurs
+*/
+getMaxUserNameLength : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getDefaultTransactionIsolation'>/**Retrieves this database's default transaction isolation level.  The
+</span> possible values are defined in &lt;code&gt;java.sql.Connection&lt;/code&gt;.
+@return {Number} the default isolation level
+@exception SQLException if a database access error occurs
+@see Connection
+*/
+getDefaultTransactionIsolation : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsTransactions'>/**Retrieves whether this database supports transactions. If not, invoking the
+</span> method &lt;code&gt;commit&lt;/code&gt; is a noop, and the isolation level is
+ &lt;code&gt;TRANSACTION_NONE&lt;/code&gt;.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if transactions are supported;
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsTransactions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsTransactionIsolationLevel'>/**Retrieves whether this database supports the given transaction isolation level.
+</span>@param {Number} level one of the transaction isolation levels defined in
+         &lt;code&gt;java.sql.Connection&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@see Connection
+*/
+supportsTransactionIsolationLevel : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsDataDefinitionAndDataManipulationTransactions'>/**Retrieves whether this database supports both data definition and
+</span> data manipulation statements within a transaction.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsDataDefinitionAndDataManipulationTransactions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsDataManipulationTransactionsOnly'>/**Retrieves whether this database supports only data manipulation
+</span> statements within a transaction.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+supportsDataManipulationTransactionsOnly : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-dataDefinitionCausesTransactionCommit'>/**Retrieves whether a data definition statement within a transaction forces
+</span> the transaction to commit.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+dataDefinitionCausesTransactionCommit : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-dataDefinitionIgnoredInTransactions'>/**Retrieves whether this database ignores a data definition statement
+</span> within a transaction.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+dataDefinitionIgnoredInTransactions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getProcedures'>/**Retrieves a description of the stored procedures available in the given
+</span> catalog.
+ &lt;P&gt;
+ Only procedure descriptions matching the schema and
+ procedure name criteria are returned.  They are ordered by
+ &lt;code&gt;PROCEDURE_CAT&lt;/code&gt;, &lt;code&gt;PROCEDURE_SCHEM&lt;/code&gt;,
+ &lt;code&gt;PROCEDURE_NAME&lt;/code&gt; and &lt;code&gt;SPECIFIC_ NAME&lt;/code&gt;.
+
+ &lt;P&gt;Each procedure description has the the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;PROCEDURE_CAT&lt;/B&gt; String =&gt; procedure catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PROCEDURE_SCHEM&lt;/B&gt; String =&gt; procedure schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PROCEDURE_NAME&lt;/B&gt; String =&gt; procedure name
+  &lt;LI&gt; reserved for future use
+  &lt;LI&gt; reserved for future use
+  &lt;LI&gt; reserved for future use
+  &lt;LI&gt;&lt;B&gt;REMARKS&lt;/B&gt; String =&gt; explanatory comment on the procedure
+  &lt;LI&gt;&lt;B&gt;PROCEDURE_TYPE&lt;/B&gt; short =&gt; kind of procedure:
+      &lt;UL&gt;
+      &lt;LI&gt; procedureResultUnknown - Cannot determine if  a return value
+       will be returned
+      &lt;LI&gt; procedureNoResult - Does not return a return value
+      &lt;LI&gt; procedureReturnsResult - Returns a return value
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;SPECIFIC_NAME&lt;/B&gt; String  =&gt; The name which uniquely identifies this
+ procedure within its schema.
+  &lt;/OL&gt;
+ &lt;p&gt;
+ A user may not have permissions to execute any of the procedures that are
+ returned by &lt;code&gt;getProcedures&lt;/code&gt;
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schemaPattern a schema name pattern; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} procedureNamePattern a procedure name pattern; must match the
+        procedure name as it is stored in the database
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is a procedure description
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+*/
+getProcedures : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getProcedureColumns'>/**Retrieves a description of the given catalog's stored procedure parameter
+</span> and result columns.
+
+ &lt;P&gt;Only descriptions matching the schema, procedure and
+ parameter name criteria are returned.  They are ordered by
+ PROCEDURE_CAT, PROCEDURE_SCHEM, PROCEDURE_NAME and SPECIFIC_NAME. Within this, the return value,
+ if any, is first. Next are the parameter descriptions in call
+ order. The column descriptions follow in column number order.
+
+ &lt;P&gt;Each row in the &lt;code&gt;ResultSet&lt;/code&gt; is a parameter description or
+ column description with the following fields:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;PROCEDURE_CAT&lt;/B&gt; String =&gt; procedure catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PROCEDURE_SCHEM&lt;/B&gt; String =&gt; procedure schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PROCEDURE_NAME&lt;/B&gt; String =&gt; procedure name
+  &lt;LI&gt;&lt;B&gt;COLUMN_NAME&lt;/B&gt; String =&gt; column/parameter name
+  &lt;LI&gt;&lt;B&gt;COLUMN_TYPE&lt;/B&gt; Short =&gt; kind of column/parameter:
+      &lt;UL&gt;
+      &lt;LI&gt; procedureColumnUnknown - nobody knows
+      &lt;LI&gt; procedureColumnIn - IN parameter
+      &lt;LI&gt; procedureColumnInOut - INOUT parameter
+      &lt;LI&gt; procedureColumnOut - OUT parameter
+      &lt;LI&gt; procedureColumnReturn - procedure return value
+      &lt;LI&gt; procedureColumnResult - result column in &lt;code&gt;ResultSet&lt;/code&gt;
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;DATA_TYPE&lt;/B&gt; int =&gt; SQL type from java.sql.Types
+  &lt;LI&gt;&lt;B&gt;TYPE_NAME&lt;/B&gt; String =&gt; SQL type name, for a UDT type the
+  type name is fully qualified
+  &lt;LI&gt;&lt;B&gt;PRECISION&lt;/B&gt; int =&gt; precision
+  &lt;LI&gt;&lt;B&gt;LENGTH&lt;/B&gt; int =&gt; length in bytes of data
+  &lt;LI&gt;&lt;B&gt;SCALE&lt;/B&gt; short =&gt; scale -  null is returned for data types where
+ SCALE is not applicable.
+  &lt;LI&gt;&lt;B&gt;RADIX&lt;/B&gt; short =&gt; radix
+  &lt;LI&gt;&lt;B&gt;NULLABLE&lt;/B&gt; short =&gt; can it contain NULL.
+      &lt;UL&gt;
+      &lt;LI&gt; procedureNoNulls - does not allow NULL values
+      &lt;LI&gt; procedureNullable - allows NULL values
+      &lt;LI&gt; procedureNullableUnknown - nullability unknown
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;REMARKS&lt;/B&gt; String =&gt; comment describing parameter/column
+  &lt;LI&gt;&lt;B&gt;COLUMN_DEF&lt;/B&gt; String =&gt; default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be &lt;code&gt;null&lt;/code&gt;)
+      &lt;UL&gt;
+      &lt;LI&gt; The string NULL (not enclosed in quotes) - if NULL was specified as the default value
+      &lt;LI&gt; TRUNCATE (not enclosed in quotes)        - if the specified default value cannot be represented without truncation
+      &lt;LI&gt; NULL                                     - if a default value was not specified
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;SQL_DATA_TYPE&lt;/B&gt; int  =&gt; reserved for future use
+  &lt;LI&gt;&lt;B&gt;SQL_DATETIME_SUB&lt;/B&gt; int  =&gt; reserved for future use
+  &lt;LI&gt;&lt;B&gt;CHAR_OCTET_LENGTH&lt;/B&gt; int  =&gt; the maximum length of binary and character based columns.  For any other datatype the returned value is a
+ NULL
+  &lt;LI&gt;&lt;B&gt;ORDINAL_POSITION&lt;/B&gt; int  =&gt; the ordinal position, starting from 1, for the input and output parameters for a procedure. A value of 0
+is returned if this row describes the procedure's return value.  For result set columns, it is the
+ordinal position of the column in the result set starting from 1.  If there are
+multiple result sets, the column ordinal positions are implementation
+ defined.
+  &lt;LI&gt;&lt;B&gt;IS_NULLABLE&lt;/B&gt; String  =&gt; ISO rules are used to determine the nullability for a column.
+       &lt;UL&gt;
+       &lt;LI&gt; YES           --- if the column can include NULLs
+       &lt;LI&gt; NO            --- if the column cannot include NULLs
+       &lt;LI&gt; empty string  --- if the nullability for the
+ column is unknown
+       &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;SPECIFIC_NAME&lt;/B&gt; String  =&gt; the name which uniquely identifies this procedure within its schema.
+  &lt;/OL&gt;
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; Some databases may not return the column
+ descriptions for a procedure.
+
+ &lt;p&gt;The PRECISION column represents the specified column size for the given column.
+ For numeric data, this is the maximum precision.  For character data, this is the length in characters.
+ For datetime datatypes, this is the length in characters of the String representation (assuming the
+ maximum allowed precision of the fractional seconds component). For binary data, this is the length in bytes.  For the ROWID datatype,
+ this is the length in bytes. Null is returned for data types where the
+ column size is not applicable.
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schemaPattern a schema name pattern; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} procedureNamePattern a procedure name pattern; must match the
+        procedure name as it is stored in the database
+@param {String} columnNamePattern a column name pattern; must match the column name
+        as it is stored in the database
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row describes a stored procedure parameter or
+      column
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+*/
+getProcedureColumns : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getTables'>/**Retrieves a description of the tables available in the given catalog.
+</span> Only table descriptions matching the catalog, schema, table
+ name and type criteria are returned.  They are ordered by
+ &lt;code&gt;TABLE_TYPE&lt;/code&gt;, &lt;code&gt;TABLE_CAT&lt;/code&gt;,
+ &lt;code&gt;TABLE_SCHEM&lt;/code&gt; and &lt;code&gt;TABLE_NAME&lt;/code&gt;.
+ &lt;P&gt;
+ Each table description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_CAT&lt;/B&gt; String =&gt; table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_SCHEM&lt;/B&gt; String =&gt; table schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_NAME&lt;/B&gt; String =&gt; table name
+  &lt;LI&gt;&lt;B&gt;TABLE_TYPE&lt;/B&gt; String =&gt; table type.  Typical types are &quot;TABLE&quot;,
+                  &quot;VIEW&quot;, &quot;SYSTEM TABLE&quot;, &quot;GLOBAL TEMPORARY&quot;,
+                  &quot;LOCAL TEMPORARY&quot;, &quot;ALIAS&quot;, &quot;SYNONYM&quot;.
+  &lt;LI&gt;&lt;B&gt;REMARKS&lt;/B&gt; String =&gt; explanatory comment on the table
+  &lt;LI&gt;&lt;B&gt;TYPE_CAT&lt;/B&gt; String =&gt; the types catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TYPE_SCHEM&lt;/B&gt; String =&gt; the types schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TYPE_NAME&lt;/B&gt; String =&gt; type name (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;SELF_REFERENCING_COL_NAME&lt;/B&gt; String =&gt; name of the designated
+                  &quot;identifier&quot; column of a typed table (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;REF_GENERATION&lt;/B&gt; String =&gt; specifies how values in
+                  SELF_REFERENCING_COL_NAME are created. Values are
+                  &quot;SYSTEM&quot;, &quot;USER&quot;, &quot;DERIVED&quot;. (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;/OL&gt;
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; Some databases may not return information for
+ all tables.
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schemaPattern a schema name pattern; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} tableNamePattern a table name pattern; must match the
+        table name as it is stored in the database
+@param {Object {java.lang.String[]}} types a list of table types, which must be from the list of table types
+         returned from {@link #getTableTypes},to include; &lt;code&gt;null&lt;/code&gt; returns
+ all types
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is a table description
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+*/
+getTables : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getSchemas'>/**Retrieves the schema names available in this database.  The results
+</span> are ordered by &lt;code&gt;TABLE_CATALOG&lt;/code&gt; and
+ &lt;code&gt;TABLE_SCHEM&lt;/code&gt;.
+
+ &lt;P&gt;The schema columns are:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_SCHEM&lt;/B&gt; String =&gt; schema name
+  &lt;LI&gt;&lt;B&gt;TABLE_CATALOG&lt;/B&gt; String =&gt; catalog name (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;/OL&gt;
+@return {Object {java.sql.ResultSet}} a &lt;code&gt;ResultSet&lt;/code&gt; object in which each row is a
+         schema description
+@exception SQLException if a database access error occurs
+*/
+getSchemas : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getCatalogs'>/**Retrieves the catalog names available in this database.  The results
+</span> are ordered by catalog name.
+
+ &lt;P&gt;The catalog column is:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_CAT&lt;/B&gt; String =&gt; catalog name
+  &lt;/OL&gt;
+@return {Object {java.sql.ResultSet}} a &lt;code&gt;ResultSet&lt;/code&gt; object in which each row has a
+         single &lt;code&gt;String&lt;/code&gt; column that is a catalog name
+@exception SQLException if a database access error occurs
+*/
+getCatalogs : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getTableTypes'>/**Retrieves the table types available in this database.  The results
+</span> are ordered by table type.
+
+ &lt;P&gt;The table type is:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_TYPE&lt;/B&gt; String =&gt; table type.  Typical types are &quot;TABLE&quot;,
+                  &quot;VIEW&quot;, &quot;SYSTEM TABLE&quot;, &quot;GLOBAL TEMPORARY&quot;,
+                  &quot;LOCAL TEMPORARY&quot;, &quot;ALIAS&quot;, &quot;SYNONYM&quot;.
+  &lt;/OL&gt;
+@return {Object {java.sql.ResultSet}} a &lt;code&gt;ResultSet&lt;/code&gt; object in which each row has a
+         single &lt;code&gt;String&lt;/code&gt; column that is a table type
+@exception SQLException if a database access error occurs
+*/
+getTableTypes : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getColumns'>/**Retrieves a description of table columns available in
+</span> the specified catalog.
+
+ &lt;P&gt;Only column descriptions matching the catalog, schema, table
+ and column name criteria are returned.  They are ordered by
+ &lt;code&gt;TABLE_CAT&lt;/code&gt;,&lt;code&gt;TABLE_SCHEM&lt;/code&gt;,
+ &lt;code&gt;TABLE_NAME&lt;/code&gt;, and &lt;code&gt;ORDINAL_POSITION&lt;/code&gt;.
+
+ &lt;P&gt;Each column description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_CAT&lt;/B&gt; String =&gt; table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_SCHEM&lt;/B&gt; String =&gt; table schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_NAME&lt;/B&gt; String =&gt; table name
+  &lt;LI&gt;&lt;B&gt;COLUMN_NAME&lt;/B&gt; String =&gt; column name
+  &lt;LI&gt;&lt;B&gt;DATA_TYPE&lt;/B&gt; int =&gt; SQL type from java.sql.Types
+  &lt;LI&gt;&lt;B&gt;TYPE_NAME&lt;/B&gt; String =&gt; Data source dependent type name,
+  for a UDT the type name is fully qualified
+  &lt;LI&gt;&lt;B&gt;COLUMN_SIZE&lt;/B&gt; int =&gt; column size.
+  &lt;LI&gt;&lt;B&gt;BUFFER_LENGTH&lt;/B&gt; is not used.
+  &lt;LI&gt;&lt;B&gt;DECIMAL_DIGITS&lt;/B&gt; int =&gt; the number of fractional digits. Null is returned for data types where
+ DECIMAL_DIGITS is not applicable.
+  &lt;LI&gt;&lt;B&gt;NUM_PREC_RADIX&lt;/B&gt; int =&gt; Radix (typically either 10 or 2)
+  &lt;LI&gt;&lt;B&gt;NULLABLE&lt;/B&gt; int =&gt; is NULL allowed.
+      &lt;UL&gt;
+      &lt;LI&gt; columnNoNulls - might not allow &lt;code&gt;NULL&lt;/code&gt; values
+      &lt;LI&gt; columnNullable - definitely allows &lt;code&gt;NULL&lt;/code&gt; values
+      &lt;LI&gt; columnNullableUnknown - nullability unknown
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;REMARKS&lt;/B&gt; String =&gt; comment describing column (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;COLUMN_DEF&lt;/B&gt; String =&gt; default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;SQL_DATA_TYPE&lt;/B&gt; int =&gt; unused
+  &lt;LI&gt;&lt;B&gt;SQL_DATETIME_SUB&lt;/B&gt; int =&gt; unused
+  &lt;LI&gt;&lt;B&gt;CHAR_OCTET_LENGTH&lt;/B&gt; int =&gt; for char types the
+       maximum number of bytes in the column
+  &lt;LI&gt;&lt;B&gt;ORDINAL_POSITION&lt;/B&gt; int =&gt; index of column in table
+      (starting at 1)
+  &lt;LI&gt;&lt;B&gt;IS_NULLABLE&lt;/B&gt; String  =&gt; ISO rules are used to determine the nullability for a column.
+       &lt;UL&gt;
+       &lt;LI&gt; YES           --- if the column can include NULLs
+       &lt;LI&gt; NO            --- if the column cannot include NULLs
+       &lt;LI&gt; empty string  --- if the nullability for the
+ column is unknown
+       &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;SCOPE_CATALOG&lt;/B&gt; String =&gt; catalog of table that is the scope
+      of a reference attribute (&lt;code&gt;null&lt;/code&gt; if DATA_TYPE isn't REF)
+  &lt;LI&gt;&lt;B&gt;SCOPE_SCHEMA&lt;/B&gt; String =&gt; schema of table that is the scope
+      of a reference attribute (&lt;code&gt;null&lt;/code&gt; if the DATA_TYPE isn't REF)
+  &lt;LI&gt;&lt;B&gt;SCOPE_TABLE&lt;/B&gt; String =&gt; table name that this the scope
+      of a reference attribute (&lt;code&gt;null&lt;/code&gt; if the DATA_TYPE isn't REF)
+  &lt;LI&gt;&lt;B&gt;SOURCE_DATA_TYPE&lt;/B&gt; short =&gt; source type of a distinct type or user-generated
+      Ref type, SQL type from java.sql.Types (&lt;code&gt;null&lt;/code&gt; if DATA_TYPE
+      isn't DISTINCT or user-generated REF)
+   &lt;LI&gt;&lt;B&gt;IS_AUTOINCREMENT&lt;/B&gt; String  =&gt; Indicates whether this column is auto incremented
+       &lt;UL&gt;
+       &lt;LI&gt; YES           --- if the column is auto incremented
+       &lt;LI&gt; NO            --- if the column is not auto incremented
+       &lt;LI&gt; empty string  --- if it cannot be determined whether the column is auto incremented
+       &lt;/UL&gt;
+   &lt;LI&gt;&lt;B&gt;IS_GENERATEDCOLUMN&lt;/B&gt; String  =&gt; Indicates whether this is a generated column
+       &lt;UL&gt;
+       &lt;LI&gt; YES           --- if this a generated column
+       &lt;LI&gt; NO            --- if this not a generated column
+       &lt;LI&gt; empty string  --- if it cannot be determined whether this is a generated column
+       &lt;/UL&gt;
+  &lt;/OL&gt;
+
+ &lt;p&gt;The COLUMN_SIZE column specifies the column size for the given column.
+ For numeric data, this is the maximum precision.  For character data, this is the length in characters.
+ For datetime datatypes, this is the length in characters of the String representation (assuming the
+ maximum allowed precision of the fractional seconds component). For binary data, this is the length in bytes.  For the ROWID datatype,
+ this is the length in bytes. Null is returned for data types where the
+ column size is not applicable.
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schemaPattern a schema name pattern; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} tableNamePattern a table name pattern; must match the
+        table name as it is stored in the database
+@param {String} columnNamePattern a column name pattern; must match the column
+        name as it is stored in the database
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is a column description
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+*/
+getColumns : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getColumnPrivileges'>/**Retrieves a description of the access rights for a table's columns.
+</span>
+ &lt;P&gt;Only privileges matching the column name criteria are
+ returned.  They are ordered by COLUMN_NAME and PRIVILEGE.
+
+ &lt;P&gt;Each privilige description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_CAT&lt;/B&gt; String =&gt; table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_SCHEM&lt;/B&gt; String =&gt; table schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_NAME&lt;/B&gt; String =&gt; table name
+  &lt;LI&gt;&lt;B&gt;COLUMN_NAME&lt;/B&gt; String =&gt; column name
+  &lt;LI&gt;&lt;B&gt;GRANTOR&lt;/B&gt; String =&gt; grantor of access (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;GRANTEE&lt;/B&gt; String =&gt; grantee of access
+  &lt;LI&gt;&lt;B&gt;PRIVILEGE&lt;/B&gt; String =&gt; name of access (SELECT,
+      INSERT, UPDATE, REFRENCES, ...)
+  &lt;LI&gt;&lt;B&gt;IS_GRANTABLE&lt;/B&gt; String =&gt; &quot;YES&quot; if grantee is permitted
+      to grant to others; &quot;NO&quot; if not; &lt;code&gt;null&lt;/code&gt; if unknown
+  &lt;/OL&gt;
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schema a schema name; must match the schema name as it is
+        stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} table a table name; must match the table name as it is
+        stored in the database
+@param {String} columnNamePattern a column name pattern; must match the column
+        name as it is stored in the database
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is a column privilege description
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+*/
+getColumnPrivileges : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getTablePrivileges'>/**Retrieves a description of the access rights for each table available
+</span> in a catalog. Note that a table privilege applies to one or
+ more columns in the table. It would be wrong to assume that
+ this privilege applies to all columns (this may be true for
+ some systems but is not true for all.)
+
+ &lt;P&gt;Only privileges matching the schema and table name
+ criteria are returned.  They are ordered by
+ &lt;code&gt;TABLE_CAT&lt;/code&gt;,
+ &lt;code&gt;TABLE_SCHEM&lt;/code&gt;, &lt;code&gt;TABLE_NAME&lt;/code&gt;,
+ and &lt;code&gt;PRIVILEGE&lt;/code&gt;.
+
+ &lt;P&gt;Each privilige description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_CAT&lt;/B&gt; String =&gt; table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_SCHEM&lt;/B&gt; String =&gt; table schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_NAME&lt;/B&gt; String =&gt; table name
+  &lt;LI&gt;&lt;B&gt;GRANTOR&lt;/B&gt; String =&gt; grantor of access (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;GRANTEE&lt;/B&gt; String =&gt; grantee of access
+  &lt;LI&gt;&lt;B&gt;PRIVILEGE&lt;/B&gt; String =&gt; name of access (SELECT,
+      INSERT, UPDATE, REFRENCES, ...)
+  &lt;LI&gt;&lt;B&gt;IS_GRANTABLE&lt;/B&gt; String =&gt; &quot;YES&quot; if grantee is permitted
+      to grant to others; &quot;NO&quot; if not; &lt;code&gt;null&lt;/code&gt; if unknown
+  &lt;/OL&gt;
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schemaPattern a schema name pattern; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} tableNamePattern a table name pattern; must match the
+        table name as it is stored in the database
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is a table privilege description
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+*/
+getTablePrivileges : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getBestRowIdentifier'>/**Retrieves a description of a table's optimal set of columns that
+</span> uniquely identifies a row. They are ordered by SCOPE.
+
+ &lt;P&gt;Each column description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;SCOPE&lt;/B&gt; short =&gt; actual scope of result
+      &lt;UL&gt;
+      &lt;LI&gt; bestRowTemporary - very temporary, while using row
+      &lt;LI&gt; bestRowTransaction - valid for remainder of current transaction
+      &lt;LI&gt; bestRowSession - valid for remainder of current session
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;COLUMN_NAME&lt;/B&gt; String =&gt; column name
+  &lt;LI&gt;&lt;B&gt;DATA_TYPE&lt;/B&gt; int =&gt; SQL data type from java.sql.Types
+  &lt;LI&gt;&lt;B&gt;TYPE_NAME&lt;/B&gt; String =&gt; Data source dependent type name,
+  for a UDT the type name is fully qualified
+  &lt;LI&gt;&lt;B&gt;COLUMN_SIZE&lt;/B&gt; int =&gt; precision
+  &lt;LI&gt;&lt;B&gt;BUFFER_LENGTH&lt;/B&gt; int =&gt; not used
+  &lt;LI&gt;&lt;B&gt;DECIMAL_DIGITS&lt;/B&gt; short  =&gt; scale - Null is returned for data types where
+ DECIMAL_DIGITS is not applicable.
+  &lt;LI&gt;&lt;B&gt;PSEUDO_COLUMN&lt;/B&gt; short =&gt; is this a pseudo column
+      like an Oracle ROWID
+      &lt;UL&gt;
+      &lt;LI&gt; bestRowUnknown - may or may not be pseudo column
+      &lt;LI&gt; bestRowNotPseudo - is NOT a pseudo column
+      &lt;LI&gt; bestRowPseudo - is a pseudo column
+      &lt;/UL&gt;
+  &lt;/OL&gt;
+
+ &lt;p&gt;The COLUMN_SIZE column represents the specified column size for the given column.
+ For numeric data, this is the maximum precision.  For character data, this is the length in characters.
+ For datetime datatypes, this is the length in characters of the String representation (assuming the
+ maximum allowed precision of the fractional seconds component). For binary data, this is the length in bytes.  For the ROWID datatype,
+ this is the length in bytes. Null is returned for data types where the
+ column size is not applicable.
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schema a schema name; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} table a table name; must match the table name as it is stored
+        in the database
+@param {Number} scope the scope of interest; use same values as SCOPE
+@param {Boolean} nullable include columns that are nullable.
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is a column description
+@exception SQLException if a database access error occurs
+*/
+getBestRowIdentifier : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getVersionColumns'>/**Retrieves a description of a table's columns that are automatically
+</span> updated when any value in a row is updated.  They are
+ unordered.
+
+ &lt;P&gt;Each column description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;SCOPE&lt;/B&gt; short =&gt; is not used
+  &lt;LI&gt;&lt;B&gt;COLUMN_NAME&lt;/B&gt; String =&gt; column name
+  &lt;LI&gt;&lt;B&gt;DATA_TYPE&lt;/B&gt; int =&gt; SQL data type from &lt;code&gt;java.sql.Types&lt;/code&gt;
+  &lt;LI&gt;&lt;B&gt;TYPE_NAME&lt;/B&gt; String =&gt; Data source-dependent type name
+  &lt;LI&gt;&lt;B&gt;COLUMN_SIZE&lt;/B&gt; int =&gt; precision
+  &lt;LI&gt;&lt;B&gt;BUFFER_LENGTH&lt;/B&gt; int =&gt; length of column value in bytes
+  &lt;LI&gt;&lt;B&gt;DECIMAL_DIGITS&lt;/B&gt; short  =&gt; scale - Null is returned for data types where
+ DECIMAL_DIGITS is not applicable.
+  &lt;LI&gt;&lt;B&gt;PSEUDO_COLUMN&lt;/B&gt; short =&gt; whether this is pseudo column
+      like an Oracle ROWID
+      &lt;UL&gt;
+      &lt;LI&gt; versionColumnUnknown - may or may not be pseudo column
+      &lt;LI&gt; versionColumnNotPseudo - is NOT a pseudo column
+      &lt;LI&gt; versionColumnPseudo - is a pseudo column
+      &lt;/UL&gt;
+  &lt;/OL&gt;
+
+ &lt;p&gt;The COLUMN_SIZE column represents the specified column size for the given column.
+ For numeric data, this is the maximum precision.  For character data, this is the length in characters.
+ For datetime datatypes, this is the length in characters of the String representation (assuming the
+ maximum allowed precision of the fractional seconds component). For binary data, this is the length in bytes.  For the ROWID datatype,
+ this is the length in bytes. Null is returned for data types where the
+ column size is not applicable.
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schema a schema name; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} table a table name; must match the table name as it is stored
+        in the database
+@return {Object {java.sql.ResultSet}} a &lt;code&gt;ResultSet&lt;/code&gt; object in which each row is a
+         column description
+@exception SQLException if a database access error occurs
+*/
+getVersionColumns : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getPrimaryKeys'>/**Retrieves a description of the given table's primary key columns.  They
+</span> are ordered by COLUMN_NAME.
+
+ &lt;P&gt;Each primary key column description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_CAT&lt;/B&gt; String =&gt; table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_SCHEM&lt;/B&gt; String =&gt; table schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_NAME&lt;/B&gt; String =&gt; table name
+  &lt;LI&gt;&lt;B&gt;COLUMN_NAME&lt;/B&gt; String =&gt; column name
+  &lt;LI&gt;&lt;B&gt;KEY_SEQ&lt;/B&gt; short =&gt; sequence number within primary key( a value
+  of 1 represents the first column of the primary key, a value of 2 would
+  represent the second column within the primary key).
+  &lt;LI&gt;&lt;B&gt;PK_NAME&lt;/B&gt; String =&gt; primary key name (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;/OL&gt;
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schema a schema name; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} table a table name; must match the table name as it is stored
+        in the database
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is a primary key column description
+@exception SQLException if a database access error occurs
+*/
+getPrimaryKeys : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getImportedKeys'>/**Retrieves a description of the primary key columns that are
+</span> referenced by the given table's foreign key columns (the primary keys
+ imported by a table).  They are ordered by PKTABLE_CAT,
+ PKTABLE_SCHEM, PKTABLE_NAME, and KEY_SEQ.
+
+ &lt;P&gt;Each primary key column description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;PKTABLE_CAT&lt;/B&gt; String =&gt; primary key table catalog
+      being imported (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PKTABLE_SCHEM&lt;/B&gt; String =&gt; primary key table schema
+      being imported (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PKTABLE_NAME&lt;/B&gt; String =&gt; primary key table name
+      being imported
+  &lt;LI&gt;&lt;B&gt;PKCOLUMN_NAME&lt;/B&gt; String =&gt; primary key column name
+      being imported
+  &lt;LI&gt;&lt;B&gt;FKTABLE_CAT&lt;/B&gt; String =&gt; foreign key table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;FKTABLE_SCHEM&lt;/B&gt; String =&gt; foreign key table schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;FKTABLE_NAME&lt;/B&gt; String =&gt; foreign key table name
+  &lt;LI&gt;&lt;B&gt;FKCOLUMN_NAME&lt;/B&gt; String =&gt; foreign key column name
+  &lt;LI&gt;&lt;B&gt;KEY_SEQ&lt;/B&gt; short =&gt; sequence number within a foreign key( a value
+  of 1 represents the first column of the foreign key, a value of 2 would
+  represent the second column within the foreign key).
+  &lt;LI&gt;&lt;B&gt;UPDATE_RULE&lt;/B&gt; short =&gt; What happens to a
+       foreign key when the primary key is updated:
+      &lt;UL&gt;
+      &lt;LI&gt; importedNoAction - do not allow update of primary
+               key if it has been imported
+      &lt;LI&gt; importedKeyCascade - change imported key to agree
+               with primary key update
+      &lt;LI&gt; importedKeySetNull - change imported key to &lt;code&gt;NULL&lt;/code&gt;
+               if its primary key has been updated
+      &lt;LI&gt; importedKeySetDefault - change imported key to default values
+               if its primary key has been updated
+      &lt;LI&gt; importedKeyRestrict - same as importedKeyNoAction
+                                 (for ODBC 2.x compatibility)
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;DELETE_RULE&lt;/B&gt; short =&gt; What happens to
+      the foreign key when primary is deleted.
+      &lt;UL&gt;
+      &lt;LI&gt; importedKeyNoAction - do not allow delete of primary
+               key if it has been imported
+      &lt;LI&gt; importedKeyCascade - delete rows that import a deleted key
+      &lt;LI&gt; importedKeySetNull - change imported key to NULL if
+               its primary key has been deleted
+      &lt;LI&gt; importedKeyRestrict - same as importedKeyNoAction
+                                 (for ODBC 2.x compatibility)
+      &lt;LI&gt; importedKeySetDefault - change imported key to default if
+               its primary key has been deleted
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;FK_NAME&lt;/B&gt; String =&gt; foreign key name (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PK_NAME&lt;/B&gt; String =&gt; primary key name (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;DEFERRABILITY&lt;/B&gt; short =&gt; can the evaluation of foreign key
+      constraints be deferred until commit
+      &lt;UL&gt;
+      &lt;LI&gt; importedKeyInitiallyDeferred - see SQL92 for definition
+      &lt;LI&gt; importedKeyInitiallyImmediate - see SQL92 for definition
+      &lt;LI&gt; importedKeyNotDeferrable - see SQL92 for definition
+      &lt;/UL&gt;
+  &lt;/OL&gt;
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schema a schema name; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} table a table name; must match the table name as it is stored
+        in the database
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is a primary key column description
+@exception SQLException if a database access error occurs
+@see #getExportedKeys
+*/
+getImportedKeys : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getExportedKeys'>/**Retrieves a description of the foreign key columns that reference the
+</span> given table's primary key columns (the foreign keys exported by a
+ table).  They are ordered by FKTABLE_CAT, FKTABLE_SCHEM,
+ FKTABLE_NAME, and KEY_SEQ.
+
+ &lt;P&gt;Each foreign key column description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;PKTABLE_CAT&lt;/B&gt; String =&gt; primary key table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PKTABLE_SCHEM&lt;/B&gt; String =&gt; primary key table schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PKTABLE_NAME&lt;/B&gt; String =&gt; primary key table name
+  &lt;LI&gt;&lt;B&gt;PKCOLUMN_NAME&lt;/B&gt; String =&gt; primary key column name
+  &lt;LI&gt;&lt;B&gt;FKTABLE_CAT&lt;/B&gt; String =&gt; foreign key table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+      being exported (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;FKTABLE_SCHEM&lt;/B&gt; String =&gt; foreign key table schema (may be &lt;code&gt;null&lt;/code&gt;)
+      being exported (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;FKTABLE_NAME&lt;/B&gt; String =&gt; foreign key table name
+      being exported
+  &lt;LI&gt;&lt;B&gt;FKCOLUMN_NAME&lt;/B&gt; String =&gt; foreign key column name
+      being exported
+  &lt;LI&gt;&lt;B&gt;KEY_SEQ&lt;/B&gt; short =&gt; sequence number within foreign key( a value
+  of 1 represents the first column of the foreign key, a value of 2 would
+  represent the second column within the foreign key).
+  &lt;LI&gt;&lt;B&gt;UPDATE_RULE&lt;/B&gt; short =&gt; What happens to
+       foreign key when primary is updated:
+      &lt;UL&gt;
+      &lt;LI&gt; importedNoAction - do not allow update of primary
+               key if it has been imported
+      &lt;LI&gt; importedKeyCascade - change imported key to agree
+               with primary key update
+      &lt;LI&gt; importedKeySetNull - change imported key to &lt;code&gt;NULL&lt;/code&gt; if
+               its primary key has been updated
+      &lt;LI&gt; importedKeySetDefault - change imported key to default values
+               if its primary key has been updated
+      &lt;LI&gt; importedKeyRestrict - same as importedKeyNoAction
+                                 (for ODBC 2.x compatibility)
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;DELETE_RULE&lt;/B&gt; short =&gt; What happens to
+      the foreign key when primary is deleted.
+      &lt;UL&gt;
+      &lt;LI&gt; importedKeyNoAction - do not allow delete of primary
+               key if it has been imported
+      &lt;LI&gt; importedKeyCascade - delete rows that import a deleted key
+      &lt;LI&gt; importedKeySetNull - change imported key to &lt;code&gt;NULL&lt;/code&gt; if
+               its primary key has been deleted
+      &lt;LI&gt; importedKeyRestrict - same as importedKeyNoAction
+                                 (for ODBC 2.x compatibility)
+      &lt;LI&gt; importedKeySetDefault - change imported key to default if
+               its primary key has been deleted
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;FK_NAME&lt;/B&gt; String =&gt; foreign key name (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PK_NAME&lt;/B&gt; String =&gt; primary key name (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;DEFERRABILITY&lt;/B&gt; short =&gt; can the evaluation of foreign key
+      constraints be deferred until commit
+      &lt;UL&gt;
+      &lt;LI&gt; importedKeyInitiallyDeferred - see SQL92 for definition
+      &lt;LI&gt; importedKeyInitiallyImmediate - see SQL92 for definition
+      &lt;LI&gt; importedKeyNotDeferrable - see SQL92 for definition
+      &lt;/UL&gt;
+  &lt;/OL&gt;
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in this database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schema a schema name; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} table a table name; must match the table name as it is stored
+        in this database
+@return {Object {java.sql.ResultSet}} a &lt;code&gt;ResultSet&lt;/code&gt; object in which each row is a
+         foreign key column description
+@exception SQLException if a database access error occurs
+@see #getImportedKeys
+*/
+getExportedKeys : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getCrossReference'>/**Retrieves a description of the foreign key columns in the given foreign key
+</span> table that reference the primary key or the columns representing a unique constraint of the  parent table (could be the same or a different table).
+ The number of columns returned from the parent table must match the number of
+ columns that make up the foreign key.  They
+ are ordered by FKTABLE_CAT, FKTABLE_SCHEM, FKTABLE_NAME, and
+ KEY_SEQ.
+
+ &lt;P&gt;Each foreign key column description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;PKTABLE_CAT&lt;/B&gt; String =&gt; parent key table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PKTABLE_SCHEM&lt;/B&gt; String =&gt; parent key table schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PKTABLE_NAME&lt;/B&gt; String =&gt; parent key table name
+  &lt;LI&gt;&lt;B&gt;PKCOLUMN_NAME&lt;/B&gt; String =&gt; parent key column name
+  &lt;LI&gt;&lt;B&gt;FKTABLE_CAT&lt;/B&gt; String =&gt; foreign key table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+      being exported (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;FKTABLE_SCHEM&lt;/B&gt; String =&gt; foreign key table schema (may be &lt;code&gt;null&lt;/code&gt;)
+      being exported (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;FKTABLE_NAME&lt;/B&gt; String =&gt; foreign key table name
+      being exported
+  &lt;LI&gt;&lt;B&gt;FKCOLUMN_NAME&lt;/B&gt; String =&gt; foreign key column name
+      being exported
+  &lt;LI&gt;&lt;B&gt;KEY_SEQ&lt;/B&gt; short =&gt; sequence number within foreign key( a value
+  of 1 represents the first column of the foreign key, a value of 2 would
+  represent the second column within the foreign key).
+  &lt;LI&gt;&lt;B&gt;UPDATE_RULE&lt;/B&gt; short =&gt; What happens to
+       foreign key when parent key is updated:
+      &lt;UL&gt;
+      &lt;LI&gt; importedNoAction - do not allow update of parent
+               key if it has been imported
+      &lt;LI&gt; importedKeyCascade - change imported key to agree
+               with parent key update
+      &lt;LI&gt; importedKeySetNull - change imported key to &lt;code&gt;NULL&lt;/code&gt; if
+               its parent key has been updated
+      &lt;LI&gt; importedKeySetDefault - change imported key to default values
+               if its parent key has been updated
+      &lt;LI&gt; importedKeyRestrict - same as importedKeyNoAction
+                                 (for ODBC 2.x compatibility)
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;DELETE_RULE&lt;/B&gt; short =&gt; What happens to
+      the foreign key when parent key is deleted.
+      &lt;UL&gt;
+      &lt;LI&gt; importedKeyNoAction - do not allow delete of parent
+               key if it has been imported
+      &lt;LI&gt; importedKeyCascade - delete rows that import a deleted key
+      &lt;LI&gt; importedKeySetNull - change imported key to &lt;code&gt;NULL&lt;/code&gt; if
+               its primary key has been deleted
+      &lt;LI&gt; importedKeyRestrict - same as importedKeyNoAction
+                                 (for ODBC 2.x compatibility)
+      &lt;LI&gt; importedKeySetDefault - change imported key to default if
+               its parent key has been deleted
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;FK_NAME&lt;/B&gt; String =&gt; foreign key name (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;PK_NAME&lt;/B&gt; String =&gt; parent key name (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;DEFERRABILITY&lt;/B&gt; short =&gt; can the evaluation of foreign key
+      constraints be deferred until commit
+      &lt;UL&gt;
+      &lt;LI&gt; importedKeyInitiallyDeferred - see SQL92 for definition
+      &lt;LI&gt; importedKeyInitiallyImmediate - see SQL92 for definition
+      &lt;LI&gt; importedKeyNotDeferrable - see SQL92 for definition
+      &lt;/UL&gt;
+  &lt;/OL&gt;
+@param {String} parentCatalog a catalog name; must match the catalog name
+ as it is stored in the database; &quot;&quot; retrieves those without a
+ catalog; &lt;code&gt;null&lt;/code&gt; means drop catalog name from the selection criteria
+@param {String} parentSchema a schema name; must match the schema name as
+ it is stored in the database; &quot;&quot; retrieves those without a schema;
+ &lt;code&gt;null&lt;/code&gt; means drop schema name from the selection criteria
+@param {String} parentTable the name of the table that exports the key; must match
+ the table name as it is stored in the database
+@param {String} foreignCatalog a catalog name; must match the catalog name as
+ it is stored in the database; &quot;&quot; retrieves those without a
+ catalog; &lt;code&gt;null&lt;/code&gt; means drop catalog name from the selection criteria
+@param {String} foreignSchema a schema name; must match the schema name as it
+ is stored in the database; &quot;&quot; retrieves those without a schema;
+ &lt;code&gt;null&lt;/code&gt; means drop schema name from the selection criteria
+@param {String} foreignTable the name of the table that imports the key; must match
+ the table name as it is stored in the database
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is a foreign key column description
+@exception SQLException if a database access error occurs
+@see #getImportedKeys
+*/
+getCrossReference : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getTypeInfo'>/**Retrieves a description of all the data types supported by
+</span> this database. They are ordered by DATA_TYPE and then by how
+ closely the data type maps to the corresponding JDBC SQL type.
+
+ &lt;P&gt;If the database supports SQL distinct types, then getTypeInfo() will return
+ a single row with a TYPE_NAME of DISTINCT and a DATA_TYPE of Types.DISTINCT.
+ If the database supports SQL structured types, then getTypeInfo() will return
+ a single row with a TYPE_NAME of STRUCT and a DATA_TYPE of Types.STRUCT.
+
+ &lt;P&gt;If SQL distinct or structured types are supported, then information on the
+ individual types may be obtained from the getUDTs() method.
+
+
+
+ &lt;P&gt;Each type description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TYPE_NAME&lt;/B&gt; String =&gt; Type name
+  &lt;LI&gt;&lt;B&gt;DATA_TYPE&lt;/B&gt; int =&gt; SQL data type from java.sql.Types
+  &lt;LI&gt;&lt;B&gt;PRECISION&lt;/B&gt; int =&gt; maximum precision
+  &lt;LI&gt;&lt;B&gt;LITERAL_PREFIX&lt;/B&gt; String =&gt; prefix used to quote a literal
+      (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;LITERAL_SUFFIX&lt;/B&gt; String =&gt; suffix used to quote a literal
+     (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;CREATE_PARAMS&lt;/B&gt; String =&gt; parameters used in creating
+      the type (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;NULLABLE&lt;/B&gt; short =&gt; can you use NULL for this type.
+      &lt;UL&gt;
+      &lt;LI&gt; typeNoNulls - does not allow NULL values
+      &lt;LI&gt; typeNullable - allows NULL values
+      &lt;LI&gt; typeNullableUnknown - nullability unknown
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;CASE_SENSITIVE&lt;/B&gt; boolean=&gt; is it case sensitive.
+  &lt;LI&gt;&lt;B&gt;SEARCHABLE&lt;/B&gt; short =&gt; can you use &quot;WHERE&quot; based on this type:
+      &lt;UL&gt;
+      &lt;LI&gt; typePredNone - No support
+      &lt;LI&gt; typePredChar - Only supported with WHERE .. LIKE
+      &lt;LI&gt; typePredBasic - Supported except for WHERE .. LIKE
+      &lt;LI&gt; typeSearchable - Supported for all WHERE ..
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;UNSIGNED_ATTRIBUTE&lt;/B&gt; boolean =&gt; is it unsigned.
+  &lt;LI&gt;&lt;B&gt;FIXED_PREC_SCALE&lt;/B&gt; boolean =&gt; can it be a money value.
+  &lt;LI&gt;&lt;B&gt;AUTO_INCREMENT&lt;/B&gt; boolean =&gt; can it be used for an
+      auto-increment value.
+  &lt;LI&gt;&lt;B&gt;LOCAL_TYPE_NAME&lt;/B&gt; String =&gt; localized version of type name
+      (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;MINIMUM_SCALE&lt;/B&gt; short =&gt; minimum scale supported
+  &lt;LI&gt;&lt;B&gt;MAXIMUM_SCALE&lt;/B&gt; short =&gt; maximum scale supported
+  &lt;LI&gt;&lt;B&gt;SQL_DATA_TYPE&lt;/B&gt; int =&gt; unused
+  &lt;LI&gt;&lt;B&gt;SQL_DATETIME_SUB&lt;/B&gt; int =&gt; unused
+  &lt;LI&gt;&lt;B&gt;NUM_PREC_RADIX&lt;/B&gt; int =&gt; usually 2 or 10
+  &lt;/OL&gt;
+
+ &lt;p&gt;The PRECISION column represents the maximum column size that the server supports for the given datatype.
+ For numeric data, this is the maximum precision.  For character data, this is the length in characters.
+ For datetime datatypes, this is the length in characters of the String representation (assuming the
+ maximum allowed precision of the fractional seconds component). For binary data, this is the length in bytes.  For the ROWID datatype,
+ this is the length in bytes. Null is returned for data types where the
+ column size is not applicable.
+@return {Object {java.sql.ResultSet}} a &lt;code&gt;ResultSet&lt;/code&gt; object in which each row is an SQL
+         type description
+@exception SQLException if a database access error occurs
+*/
+getTypeInfo : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getIndexInfo'>/**Retrieves a description of the given table's indices and statistics. They are
+</span> ordered by NON_UNIQUE, TYPE, INDEX_NAME, and ORDINAL_POSITION.
+
+ &lt;P&gt;Each index column description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_CAT&lt;/B&gt; String =&gt; table catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_SCHEM&lt;/B&gt; String =&gt; table schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_NAME&lt;/B&gt; String =&gt; table name
+  &lt;LI&gt;&lt;B&gt;NON_UNIQUE&lt;/B&gt; boolean =&gt; Can index values be non-unique.
+      false when TYPE is tableIndexStatistic
+  &lt;LI&gt;&lt;B&gt;INDEX_QUALIFIER&lt;/B&gt; String =&gt; index catalog (may be &lt;code&gt;null&lt;/code&gt;);
+      &lt;code&gt;null&lt;/code&gt; when TYPE is tableIndexStatistic
+  &lt;LI&gt;&lt;B&gt;INDEX_NAME&lt;/B&gt; String =&gt; index name; &lt;code&gt;null&lt;/code&gt; when TYPE is
+      tableIndexStatistic
+  &lt;LI&gt;&lt;B&gt;TYPE&lt;/B&gt; short =&gt; index type:
+      &lt;UL&gt;
+      &lt;LI&gt; tableIndexStatistic - this identifies table statistics that are
+           returned in conjuction with a table's index descriptions
+      &lt;LI&gt; tableIndexClustered - this is a clustered index
+      &lt;LI&gt; tableIndexHashed - this is a hashed index
+      &lt;LI&gt; tableIndexOther - this is some other style of index
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;ORDINAL_POSITION&lt;/B&gt; short =&gt; column sequence number
+      within index; zero when TYPE is tableIndexStatistic
+  &lt;LI&gt;&lt;B&gt;COLUMN_NAME&lt;/B&gt; String =&gt; column name; &lt;code&gt;null&lt;/code&gt; when TYPE is
+      tableIndexStatistic
+  &lt;LI&gt;&lt;B&gt;ASC_OR_DESC&lt;/B&gt; String =&gt; column sort sequence, &quot;A&quot; =&gt; ascending,
+      &quot;D&quot; =&gt; descending, may be &lt;code&gt;null&lt;/code&gt; if sort sequence is not supported;
+      &lt;code&gt;null&lt;/code&gt; when TYPE is tableIndexStatistic
+  &lt;LI&gt;&lt;B&gt;CARDINALITY&lt;/B&gt; int =&gt; When TYPE is tableIndexStatistic, then
+      this is the number of rows in the table; otherwise, it is the
+      number of unique values in the index.
+  &lt;LI&gt;&lt;B&gt;PAGES&lt;/B&gt; int =&gt; When TYPE is  tableIndexStatisic then
+      this is the number of pages used for the table, otherwise it
+      is the number of pages used for the current index.
+  &lt;LI&gt;&lt;B&gt;FILTER_CONDITION&lt;/B&gt; String =&gt; Filter condition, if any.
+      (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;/OL&gt;
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in this database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schema a schema name; must match the schema name
+        as it is stored in this database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} table a table name; must match the table name as it is stored
+        in this database
+@param {Boolean} unique when true, return only indices for unique values;
+     when false, return indices regardless of whether unique or not
+@param {Boolean} approximate when true, result is allowed to reflect approximate
+     or out of data values; when false, results are requested to be
+     accurate
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is an index column description
+@exception SQLException if a database access error occurs
+*/
+getIndexInfo : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsResultSetType'>/**Retrieves whether this database supports the given result set type.
+</span>@param {Number} type defined in &lt;code&gt;java.sql.ResultSet&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@see Connection
+@since 1.2
+*/
+supportsResultSetType : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsResultSetConcurrency'>/**Retrieves whether this database supports the given concurrency type
+</span> in combination with the given result set type.
+@param {Number} type defined in &lt;code&gt;java.sql.ResultSet&lt;/code&gt;
+@param {Number} concurrency type defined in &lt;code&gt;java.sql.ResultSet&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@see Connection
+@since 1.2
+*/
+supportsResultSetConcurrency : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-ownUpdatesAreVisible'>/**Retrieves whether for the given type of &lt;code&gt;ResultSet&lt;/code&gt; object,
+</span> the result set's own updates are visible.
+@param {Number} type the &lt;code&gt;ResultSet&lt;/code&gt; type; one of
+        &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+        &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+        &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if updates are visible for the given result set type;
+        &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+ownUpdatesAreVisible : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-ownDeletesAreVisible'>/**Retrieves whether a result set's own deletes are visible.
+</span>@param {Number} type the &lt;code&gt;ResultSet&lt;/code&gt; type; one of
+        &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+        &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+        &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if deletes are visible for the given result set type;
+        &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+ownDeletesAreVisible : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-ownInsertsAreVisible'>/**Retrieves whether a result set's own inserts are visible.
+</span>@param {Number} type the &lt;code&gt;ResultSet&lt;/code&gt; type; one of
+        &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+        &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+        &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if inserts are visible for the given result set type;
+        &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+ownInsertsAreVisible : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-othersUpdatesAreVisible'>/**Retrieves whether updates made by others are visible.
+</span>@param {Number} type the &lt;code&gt;ResultSet&lt;/code&gt; type; one of
+        &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+        &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+        &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if updates made by others
+        are visible for the given result set type;
+        &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+othersUpdatesAreVisible : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-othersDeletesAreVisible'>/**Retrieves whether deletes made by others are visible.
+</span>@param {Number} type the &lt;code&gt;ResultSet&lt;/code&gt; type; one of
+        &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+        &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+        &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if deletes made by others
+        are visible for the given result set type;
+        &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+othersDeletesAreVisible : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-othersInsertsAreVisible'>/**Retrieves whether inserts made by others are visible.
+</span>@param {Number} type the &lt;code&gt;ResultSet&lt;/code&gt; type; one of
+        &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+        &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+        &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if inserts made by others
+         are visible for the given result set type;
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+othersInsertsAreVisible : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-updatesAreDetected'>/**Retrieves whether or not a visible row update can be detected by
+</span> calling the method &lt;code&gt;ResultSet.rowUpdated&lt;/code&gt;.
+@param {Number} type the &lt;code&gt;ResultSet&lt;/code&gt; type; one of
+        &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+        &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+        &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if changes are detected by the result set type;
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+updatesAreDetected : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-deletesAreDetected'>/**Retrieves whether or not a visible row delete can be detected by
+</span> calling the method &lt;code&gt;ResultSet.rowDeleted&lt;/code&gt;.  If the method
+ &lt;code&gt;deletesAreDetected&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;, it means that
+ deleted rows are removed from the result set.
+@param {Number} type the &lt;code&gt;ResultSet&lt;/code&gt; type; one of
+        &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+        &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+        &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if deletes are detected by the given result set type;
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+deletesAreDetected : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-insertsAreDetected'>/**Retrieves whether or not a visible row insert can be detected
+</span> by calling the method &lt;code&gt;ResultSet.rowInserted&lt;/code&gt;.
+@param {Number} type the &lt;code&gt;ResultSet&lt;/code&gt; type; one of
+        &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+        &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+        &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if changes are detected by the specified result
+         set type; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+insertsAreDetected : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsBatchUpdates'>/**Retrieves whether this database supports batch updates.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this database supports batch upcates;
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+supportsBatchUpdates : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getUDTs'>/**Retrieves a description of the user-defined types (UDTs) defined
+</span> in a particular schema.  Schema-specific UDTs may have type
+ &lt;code&gt;JAVA_OBJECT&lt;/code&gt;, &lt;code&gt;STRUCT&lt;/code&gt;,
+ or &lt;code&gt;DISTINCT&lt;/code&gt;.
+
+ &lt;P&gt;Only types matching the catalog, schema, type name and type
+ criteria are returned.  They are ordered by &lt;code&gt;DATA_TYPE&lt;/code&gt;,
+ &lt;code&gt;TYPE_CAT&lt;/code&gt;, &lt;code&gt;TYPE_SCHEM&lt;/code&gt;  and
+ &lt;code&gt;TYPE_NAME&lt;/code&gt;.  The type name parameter may be a fully-qualified
+ name.  In this case, the catalog and schemaPattern parameters are
+ ignored.
+
+ &lt;P&gt;Each type description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TYPE_CAT&lt;/B&gt; String =&gt; the type's catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TYPE_SCHEM&lt;/B&gt; String =&gt; type's schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TYPE_NAME&lt;/B&gt; String =&gt; type name
+  &lt;LI&gt;&lt;B&gt;CLASS_NAME&lt;/B&gt; String =&gt; Java class name
+  &lt;LI&gt;&lt;B&gt;DATA_TYPE&lt;/B&gt; int =&gt; type value defined in java.sql.Types.
+     One of JAVA_OBJECT, STRUCT, or DISTINCT
+  &lt;LI&gt;&lt;B&gt;REMARKS&lt;/B&gt; String =&gt; explanatory comment on the type
+  &lt;LI&gt;&lt;B&gt;BASE_TYPE&lt;/B&gt; short =&gt; type code of the source type of a
+     DISTINCT type or the type that implements the user-generated
+     reference type of the SELF_REFERENCING_COLUMN of a structured
+     type as defined in java.sql.Types (&lt;code&gt;null&lt;/code&gt; if DATA_TYPE is not
+     DISTINCT or not STRUCT with REFERENCE_GENERATION = USER_DEFINED)
+  &lt;/OL&gt;
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; If the driver does not support UDTs, an empty
+ result set is returned.
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schemaPattern a schema pattern name; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} typeNamePattern a type name pattern; must match the type name
+        as it is stored in the database; may be a fully qualified name
+@param {Object {int[]}} types a list of user-defined types (JAVA_OBJECT,
+        STRUCT, or DISTINCT) to include; &lt;code&gt;null&lt;/code&gt; returns all types
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; object in which each row describes a UDT
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+@since 1.2
+*/
+getUDTs : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getConnection'>/**Retrieves the connection that produced this metadata object.
+</span> &lt;P&gt;
+@return {Object {java.sql.Connection}} the connection that produced this metadata object
+@exception SQLException if a database access error occurs
+@since 1.2
+*/
+getConnection : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsSavepoints'>/**Retrieves whether this database supports savepoints.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if savepoints are supported;
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+supportsSavepoints : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsNamedParameters'>/**Retrieves whether this database supports named parameters to callable
+</span> statements.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if named parameters are supported;
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+supportsNamedParameters : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsMultipleOpenResults'>/**Retrieves whether it is possible to have multiple &lt;code&gt;ResultSet&lt;/code&gt; objects
+</span> returned from a &lt;code&gt;CallableStatement&lt;/code&gt; object
+ simultaneously.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if a &lt;code&gt;CallableStatement&lt;/code&gt; object
+         can return multiple &lt;code&gt;ResultSet&lt;/code&gt; objects
+         simultaneously; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a datanase access error occurs
+@since 1.4
+*/
+supportsMultipleOpenResults : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsGetGeneratedKeys'>/**Retrieves whether auto-generated keys can be retrieved after
+</span> a statement has been executed
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if auto-generated keys can be retrieved
+         after a statement has executed; &lt;code&gt;false&lt;/code&gt; otherwise
+&lt;p&gt;If &lt;code&gt;true&lt;/code&gt; is returned, the JDBC driver must support the
+ returning of auto-generated keys for at least SQL INSERT statements
+&lt;p&gt;
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+supportsGetGeneratedKeys : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getSuperTypes'>/**Retrieves a description of the user-defined type (UDT) hierarchies defined in a
+</span> particular schema in this database. Only the immediate super type/
+ sub type relationship is modeled.
+ &lt;P&gt;
+ Only supertype information for UDTs matching the catalog,
+ schema, and type name is returned. The type name parameter
+ may be a fully-qualified name. When the UDT name supplied is a
+ fully-qualified name, the catalog and schemaPattern parameters are
+ ignored.
+ &lt;P&gt;
+ If a UDT does not have a direct super type, it is not listed here.
+ A row of the &lt;code&gt;ResultSet&lt;/code&gt; object returned by this method
+ describes the designated UDT and a direct supertype. A row has the following
+ columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TYPE_CAT&lt;/B&gt; String =&gt; the UDT's catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TYPE_SCHEM&lt;/B&gt; String =&gt; UDT's schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TYPE_NAME&lt;/B&gt; String =&gt; type name of the UDT
+  &lt;LI&gt;&lt;B&gt;SUPERTYPE_CAT&lt;/B&gt; String =&gt; the direct super type's catalog
+                           (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;SUPERTYPE_SCHEM&lt;/B&gt; String =&gt; the direct super type's schema
+                             (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;SUPERTYPE_NAME&lt;/B&gt; String =&gt; the direct super type's name
+  &lt;/OL&gt;
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; If the driver does not support type hierarchies, an
+ empty result set is returned.
+@param {String} catalog a catalog name; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means drop catalog name from the selection criteria
+@param {String} schemaPattern a schema name pattern; &quot;&quot; retrieves those
+        without a schema
+@param {String} typeNamePattern a UDT name pattern; may be a fully-qualified
+        name
+@return {Object {java.sql.ResultSet}} a &lt;code&gt;ResultSet&lt;/code&gt; object in which a row gives information
+         about the designated UDT
+@throws SQLException if a database access error occurs
+@see #getSearchStringEscape
+@since 1.4
+*/
+getSuperTypes : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getSuperTables'>/**Retrieves a description of the table hierarchies defined in a particular
+</span> schema in this database.
+
+ &lt;P&gt;Only supertable information for tables matching the catalog, schema
+ and table name are returned. The table name parameter may be a fully-
+ qualified name, in which case, the catalog and schemaPattern parameters
+ are ignored. If a table does not have a super table, it is not listed here.
+ Supertables have to be defined in the same catalog and schema as the
+ sub tables. Therefore, the type description does not need to include
+ this information for the supertable.
+
+ &lt;P&gt;Each type description has the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_CAT&lt;/B&gt; String =&gt; the type's catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_SCHEM&lt;/B&gt; String =&gt; type's schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TABLE_NAME&lt;/B&gt; String =&gt; type name
+  &lt;LI&gt;&lt;B&gt;SUPERTABLE_NAME&lt;/B&gt; String =&gt; the direct super type's name
+  &lt;/OL&gt;
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; If the driver does not support type hierarchies, an
+ empty result set is returned.
+@param {String} catalog a catalog name; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means drop catalog name from the selection criteria
+@param {String} schemaPattern a schema name pattern; &quot;&quot; retrieves those
+        without a schema
+@param {String} tableNamePattern a table name pattern; may be a fully-qualified
+        name
+@return {Object {java.sql.ResultSet}} a &lt;code&gt;ResultSet&lt;/code&gt; object in which each row is a type description
+@throws SQLException if a database access error occurs
+@see #getSearchStringEscape
+@since 1.4
+*/
+getSuperTables : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getAttributes'>/**Retrieves a description of the given attribute of the given type
+</span> for a user-defined type (UDT) that is available in the given schema
+ and catalog.
+ &lt;P&gt;
+ Descriptions are returned only for attributes of UDTs matching the
+ catalog, schema, type, and attribute name criteria. They are ordered by
+ &lt;code&gt;TYPE_CAT&lt;/code&gt;, &lt;code&gt;TYPE_SCHEM&lt;/code&gt;,
+ &lt;code&gt;TYPE_NAME&lt;/code&gt; and &lt;code&gt;ORDINAL_POSITION&lt;/code&gt;. This description
+ does not contain inherited attributes.
+ &lt;P&gt;
+ The &lt;code&gt;ResultSet&lt;/code&gt; object that is returned has the following
+ columns:
+ &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TYPE_CAT&lt;/B&gt; String =&gt; type catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TYPE_SCHEM&lt;/B&gt; String =&gt; type schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;TYPE_NAME&lt;/B&gt; String =&gt; type name
+  &lt;LI&gt;&lt;B&gt;ATTR_NAME&lt;/B&gt; String =&gt; attribute name
+  &lt;LI&gt;&lt;B&gt;DATA_TYPE&lt;/B&gt; int =&gt; attribute type SQL type from java.sql.Types
+  &lt;LI&gt;&lt;B&gt;ATTR_TYPE_NAME&lt;/B&gt; String =&gt; Data source dependent type name.
+  For a UDT, the type name is fully qualified. For a REF, the type name is
+  fully qualified and represents the target type of the reference type.
+  &lt;LI&gt;&lt;B&gt;ATTR_SIZE&lt;/B&gt; int =&gt; column size.  For char or date
+      types this is the maximum number of characters; for numeric or
+      decimal types this is precision.
+  &lt;LI&gt;&lt;B&gt;DECIMAL_DIGITS&lt;/B&gt; int =&gt; the number of fractional digits. Null is returned for data types where
+ DECIMAL_DIGITS is not applicable.
+  &lt;LI&gt;&lt;B&gt;NUM_PREC_RADIX&lt;/B&gt; int =&gt; Radix (typically either 10 or 2)
+  &lt;LI&gt;&lt;B&gt;NULLABLE&lt;/B&gt; int =&gt; whether NULL is allowed
+      &lt;UL&gt;
+      &lt;LI&gt; attributeNoNulls - might not allow NULL values
+      &lt;LI&gt; attributeNullable - definitely allows NULL values
+      &lt;LI&gt; attributeNullableUnknown - nullability unknown
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;REMARKS&lt;/B&gt; String =&gt; comment describing column (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;ATTR_DEF&lt;/B&gt; String =&gt; default value (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;SQL_DATA_TYPE&lt;/B&gt; int =&gt; unused
+  &lt;LI&gt;&lt;B&gt;SQL_DATETIME_SUB&lt;/B&gt; int =&gt; unused
+  &lt;LI&gt;&lt;B&gt;CHAR_OCTET_LENGTH&lt;/B&gt; int =&gt; for char types the
+       maximum number of bytes in the column
+  &lt;LI&gt;&lt;B&gt;ORDINAL_POSITION&lt;/B&gt; int =&gt; index of the attribute in the UDT
+      (starting at 1)
+  &lt;LI&gt;&lt;B&gt;IS_NULLABLE&lt;/B&gt; String  =&gt; ISO rules are used to determine
+ the nullability for a attribute.
+       &lt;UL&gt;
+       &lt;LI&gt; YES           --- if the attribute can include NULLs
+       &lt;LI&gt; NO            --- if the attribute cannot include NULLs
+       &lt;LI&gt; empty string  --- if the nullability for the
+ attribute is unknown
+       &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;SCOPE_CATALOG&lt;/B&gt; String =&gt; catalog of table that is the
+      scope of a reference attribute (&lt;code&gt;null&lt;/code&gt; if DATA_TYPE isn't REF)
+  &lt;LI&gt;&lt;B&gt;SCOPE_SCHEMA&lt;/B&gt; String =&gt; schema of table that is the
+      scope of a reference attribute (&lt;code&gt;null&lt;/code&gt; if DATA_TYPE isn't REF)
+  &lt;LI&gt;&lt;B&gt;SCOPE_TABLE&lt;/B&gt; String =&gt; table name that is the scope of a
+      reference attribute (&lt;code&gt;null&lt;/code&gt; if the DATA_TYPE isn't REF)
+ &lt;LI&gt;&lt;B&gt;SOURCE_DATA_TYPE&lt;/B&gt; short =&gt; source type of a distinct type or user-generated
+      Ref type,SQL type from java.sql.Types (&lt;code&gt;null&lt;/code&gt; if DATA_TYPE
+      isn't DISTINCT or user-generated REF)
+  &lt;/OL&gt;
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schemaPattern a schema name pattern; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} typeNamePattern a type name pattern; must match the
+        type name as it is stored in the database
+@param {String} attributeNamePattern an attribute name pattern; must match the attribute
+        name as it is declared in the database
+@return {Object {java.sql.ResultSet}} a &lt;code&gt;ResultSet&lt;/code&gt; object in which each row is an
+         attribute description
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+@since 1.4
+*/
+getAttributes : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsResultSetHoldability'>/**Retrieves whether this database supports the given result set holdability.
+</span>@param {Number} holdability one of the following constants:
+          &lt;code&gt;ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code&gt; or
+          &lt;code&gt;ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@see Connection
+@since 1.4
+*/
+supportsResultSetHoldability : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getResultSetHoldability'>/**Retrieves this database's default holdability for &lt;code&gt;ResultSet&lt;/code&gt;
+</span> objects.
+@return {Number} the default holdability; either
+         &lt;code&gt;ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code&gt; or
+         &lt;code&gt;ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getResultSetHoldability : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getDatabaseMajorVersion'>/**Retrieves the major version number of the underlying database.
+</span>@return {Number} the underlying database's major version
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getDatabaseMajorVersion : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getDatabaseMinorVersion'>/**Retrieves the minor version number of the underlying database.
+</span>@return {Number} underlying database's minor version
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getDatabaseMinorVersion : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getJDBCMajorVersion'>/**Retrieves the major JDBC version number for this
+</span> driver.
+@return {Number} JDBC version major number
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getJDBCMajorVersion : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getJDBCMinorVersion'>/**Retrieves the minor JDBC version number for this
+</span> driver.
+@return {Number} JDBC version minor number
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getJDBCMinorVersion : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getSQLStateType'>/**Indicates whether the SQLSTATE returned by &lt;code&gt;SQLException.getSQLState&lt;/code&gt;
+</span> is X/Open (now known as Open Group) SQL CLI or SQL:2003.
+@return {Number} the type of SQLSTATE; one of:
+        sqlStateXOpen or
+        sqlStateSQL
+@throws SQLException if a database access error occurs
+@since 1.4
+*/
+getSQLStateType : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-locatorsUpdateCopy'>/**Indicates whether updates made to a LOB are made on a copy or directly
+</span> to the LOB.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if updates are made to a copy of the LOB;
+         &lt;code&gt;false&lt;/code&gt; if updates are made directly to the LOB
+@throws SQLException if a database access error occurs
+@since 1.4
+*/
+locatorsUpdateCopy : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsStatementPooling'>/**Retrieves whether this database supports statement pooling.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@throws SQLException if a database access error occurs
+@since 1.4
+*/
+supportsStatementPooling : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getRowIdLifetime'>/**Indicates whether or not this data source supports the SQL &lt;code&gt;ROWID&lt;/code&gt; type,
+</span> and if so  the lifetime for which a &lt;code&gt;RowId&lt;/code&gt; object remains valid.
+ &lt;p&gt;
+ The returned int values have the following relationship:
+ &lt;pre&gt;
+     ROWID_UNSUPPORTED &lt; ROWID_VALID_OTHER &lt; ROWID_VALID_TRANSACTION
+         &lt; ROWID_VALID_SESSION &lt; ROWID_VALID_FOREVER
+ &lt;/pre&gt;
+ so conditional logic such as
+ &lt;pre&gt;
+     if (metadata.getRowIdLifetime() &gt; DatabaseMetaData.ROWID_VALID_TRANSACTION)
+ &lt;/pre&gt;
+ can be used. Valid Forever means valid across all Sessions, and valid for
+ a Session means valid across all its contained Transactions.
+@return {Object {java.sql.RowIdLifetime}} the status indicating the lifetime of a &lt;code&gt;RowId&lt;/code&gt;
+@throws SQLException if a database access error occurs
+@since 1.6
+*/
+getRowIdLifetime : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getSchemas'>/**Retrieves the schema names available in this database.  The results
+</span> are ordered by &lt;code&gt;TABLE_CATALOG&lt;/code&gt; and
+ &lt;code&gt;TABLE_SCHEM&lt;/code&gt;.
+
+ &lt;P&gt;The schema columns are:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;TABLE_SCHEM&lt;/B&gt; String =&gt; schema name
+  &lt;LI&gt;&lt;B&gt;TABLE_CATALOG&lt;/B&gt; String =&gt; catalog name (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;/OL&gt;
+@param {String} catalog a catalog name; must match the catalog name as it is stored
+ in the database;&quot;&quot; retrieves those without a catalog; null means catalog
+ name should not be used to narrow down the search.
+@param {String} schemaPattern a schema name; must match the schema name as it is
+ stored in the database; null means
+ schema name should not be used to narrow down the search.
+@return {Object {java.sql.ResultSet}} a &lt;code&gt;ResultSet&lt;/code&gt; object in which each row is a
+         schema description
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+@since 1.6
+*/
+getSchemas : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-supportsStoredFunctionsUsingCallSyntax'>/**Retrieves whether this database supports invoking user-defined or vendor functions
+</span> using the stored procedure escape syntax.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.6
+*/
+supportsStoredFunctionsUsingCallSyntax : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-autoCommitFailureClosesAllResultSets'>/**Retrieves whether a &lt;code&gt;SQLException&lt;/code&gt; while autoCommit is &lt;code&gt;true&lt;/code&gt; inidcates
+</span> that all open ResultSets are closed, even ones that are holdable.  When a &lt;code&gt;SQLException&lt;/code&gt; occurs while
+ autocommit is &lt;code&gt;true&lt;/code&gt;, it is vendor specific whether the JDBC driver responds with a commit operation, a
+ rollback operation, or by doing neither a commit nor a rollback.  A potential result of this difference
+ is in whether or not holdable ResultSets are closed.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.6
+*/
+autoCommitFailureClosesAllResultSets : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getClientInfoProperties'>/**Retrieves a list of the client info properties
+</span> that the driver supports.  The result set contains the following columns
+ &lt;p&gt;
+ &lt;ol&gt;
+ &lt;li&gt;&lt;b&gt;NAME&lt;/b&gt; String=&gt; The name of the client info property&lt;br&gt;
+ &lt;li&gt;&lt;b&gt;MAX_LEN&lt;/b&gt; int=&gt; The maximum length of the value for the property&lt;br&gt;
+ &lt;li&gt;&lt;b&gt;DEFAULT_VALUE&lt;/b&gt; String=&gt; The default value of the property&lt;br&gt;
+ &lt;li&gt;&lt;b&gt;DESCRIPTION&lt;/b&gt; String=&gt; A description of the property.  This will typically
+                                              contain information as to where this property is
+                                              stored in the database.
+ &lt;/ol&gt;
+ &lt;p&gt;
+ The &lt;code&gt;ResultSet&lt;/code&gt; is sorted by the NAME column
+ &lt;p&gt;
+@return {Object {java.sql.ResultSet}} A &lt;code&gt;ResultSet&lt;/code&gt; object; each row is a supported client info
+ property
+ &lt;p&gt;
+@exception SQLException if a database access error occurs
+ &lt;p&gt;
+@since 1.6
+*/
+getClientInfoProperties : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getFunctions'>/**Retrieves a description of the  system and user functions available
+</span> in the given catalog.
+ &lt;P&gt;
+ Only system and user function descriptions matching the schema and
+ function name criteria are returned.  They are ordered by
+ &lt;code&gt;FUNCTION_CAT&lt;/code&gt;, &lt;code&gt;FUNCTION_SCHEM&lt;/code&gt;,
+ &lt;code&gt;FUNCTION_NAME&lt;/code&gt; and
+ &lt;code&gt;SPECIFIC_ NAME&lt;/code&gt;.
+
+ &lt;P&gt;Each function description has the the following columns:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;FUNCTION_CAT&lt;/B&gt; String =&gt; function catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;FUNCTION_SCHEM&lt;/B&gt; String =&gt; function schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;FUNCTION_NAME&lt;/B&gt; String =&gt; function name.  This is the name
+ used to invoke the function
+  &lt;LI&gt;&lt;B&gt;REMARKS&lt;/B&gt; String =&gt; explanatory comment on the function
+ &lt;LI&gt;&lt;B&gt;FUNCTION_TYPE&lt;/B&gt; short =&gt; kind of function:
+      &lt;UL&gt;
+      &lt;LI&gt;functionResultUnknown - Cannot determine if a return value
+       or table will be returned
+      &lt;LI&gt; functionNoTable- Does not return a table
+      &lt;LI&gt; functionReturnsTable - Returns a table
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;SPECIFIC_NAME&lt;/B&gt; String  =&gt; the name which uniquely identifies
+  this function within its schema.  This is a user specified, or DBMS
+ generated, name that may be different then the &lt;code&gt;FUNCTION_NAME&lt;/code&gt;
+ for example with overload functions
+  &lt;/OL&gt;
+ &lt;p&gt;
+ A user may not have permission to execute any of the functions that are
+ returned by &lt;code&gt;getFunctions&lt;/code&gt;
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schemaPattern a schema name pattern; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} functionNamePattern a function name pattern; must match the
+        function name as it is stored in the database
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row is a function description
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+@since 1.6
+*/
+getFunctions : function(  ) {},
+
+<span id='java-sql-DatabaseMetaData-method-getFunctionColumns'>/**Retrieves a description of the given catalog's system or user
+</span> function parameters and return type.
+
+ &lt;P&gt;Only descriptions matching the schema,  function and
+ parameter name criteria are returned. They are ordered by
+ &lt;code&gt;FUNCTION_CAT&lt;/code&gt;, &lt;code&gt;FUNCTION_SCHEM&lt;/code&gt;,
+ &lt;code&gt;FUNCTION_NAME&lt;/code&gt; and
+ &lt;code&gt;SPECIFIC_ NAME&lt;/code&gt;. Within this, the return value,
+ if any, is first. Next are the parameter descriptions in call
+ order. The column descriptions follow in column number order.
+
+ &lt;P&gt;Each row in the &lt;code&gt;ResultSet&lt;/code&gt;
+ is a parameter description, column description or
+ return type description with the following fields:
+  &lt;OL&gt;
+  &lt;LI&gt;&lt;B&gt;FUNCTION_CAT&lt;/B&gt; String =&gt; function catalog (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;FUNCTION_SCHEM&lt;/B&gt; String =&gt; function schema (may be &lt;code&gt;null&lt;/code&gt;)
+  &lt;LI&gt;&lt;B&gt;FUNCTION_NAME&lt;/B&gt; String =&gt; function name.  This is the name
+ used to invoke the function
+  &lt;LI&gt;&lt;B&gt;COLUMN_NAME&lt;/B&gt; String =&gt; column/parameter name
+  &lt;LI&gt;&lt;B&gt;COLUMN_TYPE&lt;/B&gt; Short =&gt; kind of column/parameter:
+      &lt;UL&gt;
+      &lt;LI&gt; functionColumnUnknown - nobody knows
+      &lt;LI&gt; functionColumnIn - IN parameter
+      &lt;LI&gt; functionColumnInOut - INOUT parameter
+      &lt;LI&gt; functionColumnOut - OUT parameter
+      &lt;LI&gt; functionColumnReturn - function return value
+      &lt;LI&gt; functionColumnResult - Indicates that the parameter or column
+  is a column in the &lt;code&gt;ResultSet&lt;/code&gt;
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;DATA_TYPE&lt;/B&gt; int =&gt; SQL type from java.sql.Types
+  &lt;LI&gt;&lt;B&gt;TYPE_NAME&lt;/B&gt; String =&gt; SQL type name, for a UDT type the
+  type name is fully qualified
+  &lt;LI&gt;&lt;B&gt;PRECISION&lt;/B&gt; int =&gt; precision
+  &lt;LI&gt;&lt;B&gt;LENGTH&lt;/B&gt; int =&gt; length in bytes of data
+  &lt;LI&gt;&lt;B&gt;SCALE&lt;/B&gt; short =&gt; scale -  null is returned for data types where
+ SCALE is not applicable.
+  &lt;LI&gt;&lt;B&gt;RADIX&lt;/B&gt; short =&gt; radix
+  &lt;LI&gt;&lt;B&gt;NULLABLE&lt;/B&gt; short =&gt; can it contain NULL.
+      &lt;UL&gt;
+      &lt;LI&gt; functionNoNulls - does not allow NULL values
+      &lt;LI&gt; functionNullable - allows NULL values
+      &lt;LI&gt; functionNullableUnknown - nullability unknown
+      &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;REMARKS&lt;/B&gt; String =&gt; comment describing column/parameter
+  &lt;LI&gt;&lt;B&gt;CHAR_OCTET_LENGTH&lt;/B&gt; int  =&gt; the maximum length of binary
+ and character based parameters or columns.  For any other datatype the returned value
+ is a NULL
+  &lt;LI&gt;&lt;B&gt;ORDINAL_POSITION&lt;/B&gt; int  =&gt; the ordinal position, starting
+ from 1, for the input and output parameters. A value of 0
+ is returned if this row describes the function's return value.
+ For result set columns, it is the
+ ordinal position of the column in the result set starting from 1.
+  &lt;LI&gt;&lt;B&gt;IS_NULLABLE&lt;/B&gt; String  =&gt; ISO rules are used to determine
+ the nullability for a parameter or column.
+       &lt;UL&gt;
+       &lt;LI&gt; YES           --- if the parameter or column can include NULLs
+       &lt;LI&gt; NO            --- if the parameter or column  cannot include NULLs
+       &lt;LI&gt; empty string  --- if the nullability for the
+ parameter  or column is unknown
+       &lt;/UL&gt;
+  &lt;LI&gt;&lt;B&gt;SPECIFIC_NAME&lt;/B&gt; String  =&gt; the name which uniquely identifies
+ this function within its schema.  This is a user specified, or DBMS
+ generated, name that may be different then the &lt;code&gt;FUNCTION_NAME&lt;/code&gt;
+ for example with overload functions
+  &lt;/OL&gt;
+
+ &lt;p&gt;The PRECISION column represents the specified column size for the given
+ parameter or column.
+ For numeric data, this is the maximum precision.  For character data, this is the length in characters.
+ For datetime datatypes, this is the length in characters of the String representation (assuming the
+ maximum allowed precision of the fractional seconds component). For binary data, this is the length in bytes.  For the ROWID datatype,
+ this is the length in bytes. Null is returned for data types where the
+ column size is not applicable.
+@param {String} catalog a catalog name; must match the catalog name as it
+        is stored in the database; &quot;&quot; retrieves those without a catalog;
+        &lt;code&gt;null&lt;/code&gt; means that the catalog name should not be used to narrow
+        the search
+@param {String} schemaPattern a schema name pattern; must match the schema name
+        as it is stored in the database; &quot;&quot; retrieves those without a schema;
+        &lt;code&gt;null&lt;/code&gt; means that the schema name should not be used to narrow
+        the search
+@param {String} functionNamePattern a procedure name pattern; must match the
+        function name as it is stored in the database
+@param {String} columnNamePattern a parameter name pattern; must match the
+ parameter or column name as it is stored in the database
+@return {Object {java.sql.ResultSet}} &lt;code&gt;ResultSet&lt;/code&gt; - each row describes a
+ user function parameter, column  or return type
+@exception SQLException if a database access error occurs
+@see #getSearchStringEscape
+@since 1.6
+*/
+getFunctionColumns : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-settingslib-datetime-ZoneGetter'>/**@class com.android.settingslib.datetime.ZoneGetter
+</span>@extends java.lang.Object
+
+ ZoneGetter is the utility class to get time zone and zone list, and both of them have display
+ name in time zone. In this class, we will keep consistency about display names for all
+ the methods.
+
+ The display name chosen for each zone entry depends on whether the zone is one associated
+ with the country of the user's chosen locale. For &quot;local&quot; zones we prefer the &quot;long name&quot;
+ (e.g. &quot;Europe/London&quot; -&gt; &quot;British Summer Time&quot; for people in the UK). For &quot;non-local&quot;
+ zones we prefer the exemplar location (e.g. &quot;Europe/London&quot; -&gt; &quot;London&quot; for English
+ speakers from outside the UK). This heuristic is based on the fact that people are
+ typically familiar with their local timezones and exemplar locations don't always match
+ modern-day expectations for people living in the country covered. Large countries like
+ China that mostly use a single timezone (olson id: &quot;Asia/Shanghai&quot;) may not live near
+ &quot;Shanghai&quot; and prefer the long name over the exemplar location. The only time we don't
+ follow this policy for local zones is when Android supplies multiple olson IDs to choose
+ from and the use of a zone's long name leads to ambiguity. For example, at the time of
+ writing Android lists 5 olson ids for Australia which collapse to 2 different zone names
+ in winter but 4 different zone names in summer. The ambiguity leads to the users
+ selecting the wrong olson ids.
+
+*/
+var ZoneGetter = {
+
+<span id='com-android-settingslib-datetime-ZoneGetter-property-KEY_ID'>/***/
+</span>KEY_ID : &quot;id&quot;,
+<span id='com-android-settingslib-datetime-ZoneGetter-property-KEY_DISPLAYNAME'>/** @deprecated Use {@link #KEY_DISPLAY_LABEL} instead.
+</span>*/
+KEY_DISPLAYNAME : &quot;name&quot;,
+<span id='com-android-settingslib-datetime-ZoneGetter-property-KEY_DISPLAY_LABEL'>/***/
+</span>KEY_DISPLAY_LABEL : &quot;display_label&quot;,
+<span id='com-android-settingslib-datetime-ZoneGetter-property-KEY_GMT'>/** @deprecated Use {@link #KEY_OFFSET_LABEL} instead.
+</span>*/
+KEY_GMT : &quot;gmt&quot;,
+<span id='com-android-settingslib-datetime-ZoneGetter-property-KEY_OFFSET'>/***/
+</span>KEY_OFFSET : &quot;offset&quot;,
+<span id='com-android-settingslib-datetime-ZoneGetter-property-KEY_OFFSET_LABEL'>/***/
+</span>KEY_OFFSET_LABEL : &quot;offset_label&quot;,
+<span id='com-android-settingslib-datetime-ZoneGetter-method-getTimeZoneOffsetAndName'>/**
+</span>*/
+getTimeZoneOffsetAndName : function(  ) {},
+
+<span id='com-android-settingslib-datetime-ZoneGetter-method-getZonesList'>/**
+</span>*/
+getZonesList : function(  ) {},
+
+<span id='com-android-settingslib-datetime-ZoneGetter-method-getGmtOffsetText'>/**Get the GMT offset text label for the given time zone, in the format &quot;GMT-08:00&quot;. This will
+</span> also add TTS spans to give hints to the text-to-speech engine for the type of data it is.
+@param {Object {TimeZoneFormat}} tzFormatter The timezone formatter to use.
+@param {Object {Locale}} locale The locale which the string is displayed in. This should be the same as the
+               locale of the time zone formatter.
+@param {Object {TimeZone}} tz Time zone to get the GMT offset from.
+@param {Object {Date}} now The current time, used to tell whether daylight savings is active.
+@return {Object {java.lang.CharSequence}} A CharSequence suitable for display as the offset label of {@code tz}.
+*/
+getGmtOffsetText : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

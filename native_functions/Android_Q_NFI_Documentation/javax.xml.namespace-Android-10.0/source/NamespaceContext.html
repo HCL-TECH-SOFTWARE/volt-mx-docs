@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-namespace-NamespaceContext'>/**@class javax.xml.namespace.NamespaceContext
+</span> &lt;p&gt;Interface for read only XML Namespace context processing.&lt;/p&gt;
+
+ &lt;p&gt;An XML Namespace has the properties:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;Namespace URI:
+       Namespace name expressed as a URI to which the prefix is bound&lt;/li&gt;
+   &lt;li&gt;prefix: syntactically, this is the part of the attribute name
+       following the &lt;code&gt;XMLConstants.XMLNS_ATTRIBUTE&lt;/code&gt;
+       (&quot;xmlns&quot;) in the Namespace declaration&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt; example: &lt;code&gt;&amp;lt;element xmlns:prefix=&quot;http://Namespace-name-URI&quot;&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+ &lt;p&gt;All &lt;code&gt;get*(*)&lt;/code&gt; methods operate in the current scope
+ for Namespace URI and prefix resolution.&lt;/p&gt;
+
+ &lt;p&gt;Note that a Namespace URI can be bound to
+ &lt;strong&gt;multiple&lt;/strong&gt; prefixes in the current scope.  This can
+ occur when multiple &lt;code&gt;XMLConstants.XMLNS_ATTRIBUTE&lt;/code&gt;
+ (&quot;xmlns&quot;) Namespace declarations occur in the same Start-Tag and
+ refer to the same Namespace URI. e.g.&lt;br /&gt;
+ &lt;pre&gt;
+ &amp;lt;element xmlns:prefix1=&quot;http://Namespace-name-URI&quot;
+          xmlns:prefix2=&quot;http://Namespace-name-URI&quot;&amp;gt;
+ &lt;/pre&gt;
+ This can also occur when the same Namespace URI is used in multiple
+ &lt;code&gt;XMLConstants.XMLNS_ATTRIBUTE&lt;/code&gt; (&quot;xmlns&quot;) Namespace
+ declarations in the logical parent element hierarchy.  e.g.&lt;br /&gt;
+ &lt;pre&gt;
+ &amp;lt;parent xmlns:prefix1=&quot;http://Namespace-name-URI&quot;&gt;
+   &amp;lt;child xmlns:prefix2=&quot;http://Namespace-name-URI&quot;&amp;gt;
+     ...
+   &amp;lt;/child&amp;gt;
+ &amp;lt;/parent&amp;gt;
+ &lt;/pre&gt;&lt;/p&gt;
+
+ &lt;p&gt;A prefix can only be bound to a &lt;strong&gt;single&lt;/strong&gt;
+ Namespace URI in the current scope.&lt;/p&gt;
+
+ @author &lt;a href=&quot;mailto:Jeff.Suttor@Sun.com&quot;&gt;Jeff Suttor&lt;/a&gt;
+ @version $Revision: 446598 $, $Date: 2006-09-15 05:55:40 -0700 (Fri, 15 Sep 2006) $
+ @see javax.xml.XMLConstants javax.XMLConstants for declarations of common XML values
+ @see &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#QName&quot;&gt;XML Schema Part2: Datatypes&lt;/a&gt;
+ @see &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/#ns-qualnames&quot;&gt;Namespaces in XML&lt;/a&gt;
+ @see &lt;a href=&quot;http://www.w3.org/XML/xml-names-19990114-errata&quot;&gt;Namespaces in XML Errata&lt;/a&gt;
+ @since 1.5
+*/
+var NamespaceContext = {
+
+<span id='javax-xml-namespace-NamespaceContext-method-getNamespaceURI'>/**&lt;p&gt;Get Namespace URI bound to a prefix in the current scope.&lt;/p&gt;
+</span>
+ &lt;p&gt;When requesting a Namespace URI by prefix, the following
+ table describes the returned Namespace URI value for all
+ possible prefix values:&lt;/p&gt;
+
+ &lt;table border=&quot;2&quot; rules=&quot;all&quot; cellpadding=&quot;4&quot;&gt;
+   &lt;thead&gt;
+     &lt;tr&gt;
+       &lt;td align=&quot;center&quot; colspan=&quot;2&quot;&gt;
+         &lt;code&gt;getNamespaceURI(prefix)&lt;/code&gt;
+         return value for specified prefixes
+       &lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;prefix parameter&lt;/td&gt;
+       &lt;td&gt;Namespace URI return value&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;DEFAULT_NS_PREFIX&lt;/code&gt; (&quot;&quot;)&lt;/td&gt;
+       &lt;td&gt;default Namespace URI in the current scope or
+         &lt;code&gt;{@link javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI(&quot;&quot;)}&lt;/code&gt;
+         when there is no default Namespace URI in the current scope&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;bound prefix&lt;/td&gt;
+       &lt;td&gt;Namespace URI bound to prefix in current scope&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;unbound prefix&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;{@link javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI(&quot;&quot;)}&lt;/code&gt; &lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.XML_NS_PREFIX&lt;/code&gt; (&quot;xml&quot;)&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.XML_NS_URI&lt;/code&gt;
+           (&quot;http://www.w3.org/XML/1998/namespace&quot;)&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.XMLNS_ATTRIBUTE&lt;/code&gt; (&quot;xmlns&quot;)&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.XMLNS_ATTRIBUTE_NS_URI&lt;/code&gt;
+         (&quot;http://www.w3.org/2000/xmlns/&quot;)&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;null&lt;/code&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;IllegalArgumentException&lt;/code&gt; is thrown&lt;/td&gt;
+     &lt;/tr&gt;
+    &lt;/tbody&gt;
+ &lt;/table&gt;
+@param {String} prefix prefix to look up
+@return {String} Namespace URI bound to prefix in the current scope
+*/
+getNamespaceURI : function(  ) {},
+
+<span id='javax-xml-namespace-NamespaceContext-method-getPrefix'>/**&lt;p&gt;Get prefix bound to Namespace URI in the current scope.&lt;/p&gt;
+</span>
+ &lt;p&gt;To get all prefixes bound to a Namespace URI in the current
+ scope, use {@link #getPrefixes}(String namespaceURI).&lt;/p&gt;
+
+ &lt;p&gt;When requesting a prefix by Namespace URI, the following
+ table describes the returned prefix value for all Namespace URI
+ values:&lt;/p&gt;
+
+ &lt;table border=&quot;2&quot; rules=&quot;all&quot; cellpadding=&quot;4&quot;&gt;
+   &lt;thead&gt;
+     &lt;tr&gt;
+       &lt;td align=&quot;center&quot; colspan=&quot;2&quot;&gt;
+         &lt;code&gt;getPrefix(namespaceURI)&lt;/code&gt; return value for
+         specified Namespace URIs
+       &lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;Namespace URI parameter&lt;/td&gt;
+       &lt;td&gt;prefix value returned&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&amp;lt;default Namespace URI&amp;gt;&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.DEFAULT_NS_PREFIX&lt;/code&gt; (&quot;&quot;)
+       &lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;bound Namespace URI&lt;/td&gt;
+       &lt;td&gt;prefix bound to Namespace URI in the current scope,
+           if multiple prefixes are bound to the Namespace URI in
+           the current scope, a single arbitrary prefix, whose
+           choice is implementation dependent, is returned&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;unbound Namespace URI&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;null&lt;/code&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.XML_NS_URI&lt;/code&gt;
+           (&quot;http://www.w3.org/XML/1998/namespace&quot;)&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.XML_NS_PREFIX&lt;/code&gt; (&quot;xml&quot;)&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.XMLNS_ATTRIBUTE_NS_URI&lt;/code&gt;
+           (&quot;http://www.w3.org/2000/xmlns/&quot;)&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.XMLNS_ATTRIBUTE&lt;/code&gt; (&quot;xmlns&quot;)&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;null&lt;/code&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;IllegalArgumentException&lt;/code&gt; is thrown&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/tbody&gt;
+ &lt;/table&gt;
+@param {String} namespaceURI URI of Namespace to lookup
+@return {String} prefix bound to Namespace URI in current context
+*/
+getPrefix : function(  ) {},
+
+<span id='javax-xml-namespace-NamespaceContext-method-getPrefixes'>/**&lt;p&gt;Get all prefixes bound to a Namespace URI in the current
+</span> scope.&lt;/p&gt;
+
+ &lt;p&gt;An Iterator over String elements is returned in an arbitrary, &lt;strong&gt;implementation dependent&lt;/strong&gt;, order.&lt;/p&gt;
+
+ &lt;p&gt;&lt;strong&gt;The &lt;code&gt;Iterator&lt;/code&gt; is
+ &lt;em&gt;not&lt;/em&gt; modifiable.  e.g. the
+ &lt;code&gt;remove()&lt;/code&gt; method will throw
+ &lt;code&gt;UnsupportedOperationException&lt;/code&gt;.&lt;/strong&gt;&lt;/p&gt;
+
+ &lt;p&gt;When requesting prefixes by Namespace URI, the following
+ table describes the returned prefixes value for all Namespace
+ URI values:&lt;/p&gt;
+
+ &lt;table border=&quot;2&quot; rules=&quot;all&quot; cellpadding=&quot;4&quot;&gt;
+   &lt;thead&gt;
+     &lt;tr&gt;
+       &lt;td align=&quot;center&quot; colspan=&quot;2&quot;&gt;&lt;code&gt;
+         getPrefixes(namespaceURI)&lt;/code&gt; return value for
+         specified Namespace URIs&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;Namespace URI parameter&lt;/td&gt;
+       &lt;td&gt;prefixes value returned&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+     &lt;tr&gt;
+       &lt;td&gt;bound Namespace URI,
+         including the &amp;lt;default Namespace URI&amp;gt;&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;Iterator&lt;/code&gt; over prefixes bound to Namespace URI in
+         the current scope in an arbitrary, &lt;strong&gt;implementation dependent&lt;/strong&gt;,
+         order&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;unbound Namespace URI&lt;/td&gt;
+       &lt;td&gt;empty &lt;code&gt;Iterator&lt;/code&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.XML_NS_URI&lt;/code&gt;
+           (&quot;http://www.w3.org/XML/1998/namespace&quot;)&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;Iterator&lt;/code&gt; with one element set to
+         &lt;code&gt;XMLConstants.XML_NS_PREFIX&lt;/code&gt; (&quot;xml&quot;)&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;XMLConstants.XMLNS_ATTRIBUTE_NS_URI&lt;/code&gt;
+           (&quot;http://www.w3.org/2000/xmlns/&quot;)&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;Iterator&lt;/code&gt; with one element set to
+         &lt;code&gt;XMLConstants.XMLNS_ATTRIBUTE&lt;/code&gt; (&quot;xmlns&quot;)&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;null&lt;/code&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;code&gt;IllegalArgumentException&lt;/code&gt; is thrown&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/tbody&gt;
+ &lt;/table&gt;
+@param {String} namespaceURI URI of Namespace to lookup
+@return {Object {java.util.Iterator}} &lt;code&gt;Iterator&lt;/code&gt; for all prefixes bound to the
+ Namespace URI in the current scope
+*/
+getPrefixes : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

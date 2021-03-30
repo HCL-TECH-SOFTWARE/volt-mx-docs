@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-policy-PhoneWindowManager'>/**@class com.android.server.policy.PhoneWindowManager
+</span> implements com.android.server.policy.WindowManagerPolicy
+
+@extends java.lang.Object
+
+ WindowManagerPolicy implementation for the Android phone UI.  This
+ introduces a new method suffix, Lp, for an internal lock of the
+ PhoneWindowManager.  This is used to protect some internal state, and
+ can be acquired with either the Lw and Li lock held, so has the restrictions
+ of both of those when held.
+*/
+var PhoneWindowManager = {
+
+<span id='com-android-server-policy-PhoneWindowManager-property-SYSTEM_DIALOG_REASON_KEY'>/***/
+</span>SYSTEM_DIALOG_REASON_KEY : &quot;reason&quot;,
+<span id='com-android-server-policy-PhoneWindowManager-property-SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS'>/***/
+</span>SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS : &quot;globalactions&quot;,
+<span id='com-android-server-policy-PhoneWindowManager-property-SYSTEM_DIALOG_REASON_RECENT_APPS'>/***/
+</span>SYSTEM_DIALOG_REASON_RECENT_APPS : &quot;recentapps&quot;,
+<span id='com-android-server-policy-PhoneWindowManager-property-SYSTEM_DIALOG_REASON_HOME_KEY'>/***/
+</span>SYSTEM_DIALOG_REASON_HOME_KEY : &quot;homekey&quot;,
+<span id='com-android-server-policy-PhoneWindowManager-property-SYSTEM_DIALOG_REASON_ASSIST'>/***/
+</span>SYSTEM_DIALOG_REASON_ASSIST : &quot;assist&quot;,
+<span id='com-android-server-policy-PhoneWindowManager-property-SYSTEM_DIALOG_REASON_SCREENSHOT'>/***/
+</span>SYSTEM_DIALOG_REASON_SCREENSHOT : &quot;screenshot&quot;,
+<span id='com-android-server-policy-PhoneWindowManager-property-TOAST_WINDOW_TIMEOUT'>/**Amount of time (in milliseconds) a toast window can be shown. */
+</span>TOAST_WINDOW_TIMEOUT : &quot;3500&quot;,
+<span id='com-android-server-policy-PhoneWindowManager-method-showGlobalActions'>/**
+</span>*/
+showGlobalActions : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-isUserSetupComplete'>/**
+</span>*/
+isUserSetupComplete : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setDefaultDisplay'>/**
+</span>*/
+setDefaultDisplay : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-init'>/**{@inheritDoc}
+</span>*/
+init : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-updateSettings'>/**
+</span>*/
+updateSettings : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-checkAddPermission'>/**{@inheritDoc}
+</span>*/
+checkAddPermission : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-checkShowToOwnerOnly'>/**
+</span>*/
+checkShowToOwnerOnly : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-adjustConfigurationLw'>/**{@inheritDoc}
+</span>*/
+adjustConfigurationLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-getMaxWallpaperLayer'>/**
+</span>*/
+getMaxWallpaperLayer : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-isKeyguardHostWindow'>/**
+</span>*/
+isKeyguardHostWindow : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-canBeHiddenByKeyguardLw'>/**
+</span>*/
+canBeHiddenByKeyguardLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-addSplashScreen'>/**{@inheritDoc}
+</span>*/
+addSplashScreen : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-createHiddenByKeyguardExit'>/**
+</span>*/
+createHiddenByKeyguardExit : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-createKeyguardWallpaperExit'>/**
+</span>*/
+createKeyguardWallpaperExit : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-interceptKeyBeforeDispatching'>/**{@inheritDoc}
+</span>*/
+interceptKeyBeforeDispatching : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-dispatchUnhandledKey'>/**{@inheritDoc}
+</span>*/
+dispatchUnhandledKey : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setTopFocusedDisplay'>/**
+</span>*/
+setTopFocusedDisplay : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-registerDisplayFoldListener'>/**
+</span>*/
+registerDisplayFoldListener : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-unregisterDisplayFoldListener'>/**
+</span>*/
+unregisterDisplayFoldListener : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setOverrideFoldedArea'>/**
+</span>*/
+setOverrideFoldedArea : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-getFoldedArea'>/**
+</span>*/
+getFoldedArea : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-onDefaultDisplayFocusChangedLw'>/**
+</span>*/
+onDefaultDisplayFocusChangedLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-registerShortcutKey'>/**
+</span>*/
+registerShortcutKey : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-onKeyguardOccludedChangedLw'>/**
+</span>*/
+onKeyguardOccludedChangedLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-showRecentApps'>/**
+</span>*/
+showRecentApps : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setRecentsVisibilityLw'>/**
+</span>*/
+setRecentsVisibilityLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setPipVisibilityLw'>/**
+</span>*/
+setPipVisibilityLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setNavBarVirtualKeyHapticFeedbackEnabledLw'>/**
+</span>*/
+setNavBarVirtualKeyHapticFeedbackEnabledLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-applyKeyguardPolicyLw'>/**{@inheritDoc}
+</span>*/
+applyKeyguardPolicyLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setKeyguardCandidateLw'>/**{@inheritDoc}
+</span>*/
+setKeyguardCandidateLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-notifyLidSwitchChanged'>/**{@inheritDoc}
+</span>*/
+notifyLidSwitchChanged : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-notifyCameraLensCoverSwitchChanged'>/**
+</span>*/
+notifyCameraLensCoverSwitchChanged : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-interceptKeyBeforeQueueing'>/**{@inheritDoc}
+</span>*/
+interceptKeyBeforeQueueing : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-interceptMotionBeforeQueueingNonInteractive'>/**{@inheritDoc}
+</span>*/
+interceptMotionBeforeQueueingNonInteractive : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-startedGoingToSleep'>/**
+</span>*/
+startedGoingToSleep : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-finishedGoingToSleep'>/**
+</span>*/
+finishedGoingToSleep : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-startedWakingUp'>/**
+</span>*/
+startedWakingUp : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-finishedWakingUp'>/**
+</span>*/
+finishedWakingUp : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-screenTurnedOff'>/**
+</span>*/
+screenTurnedOff : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-screenTurningOn'>/**
+</span>*/
+screenTurningOn : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-screenTurnedOn'>/**
+</span>*/
+screenTurnedOn : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-screenTurningOff'>/**
+</span>*/
+screenTurningOff : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-isScreenOn'>/**
+</span>*/
+isScreenOn : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-okToAnimate'>/**
+</span>*/
+okToAnimate : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-enableKeyguard'>/**{@inheritDoc}
+</span>*/
+enableKeyguard : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-exitKeyguardSecurely'>/**{@inheritDoc}
+</span>*/
+exitKeyguardSecurely : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-isKeyguardShowingAndNotOccluded'>/**
+</span>*/
+isKeyguardShowingAndNotOccluded : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-isKeyguardTrustedLw'>/**
+</span>*/
+isKeyguardTrustedLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-isKeyguardLocked'>/**{@inheritDoc}
+</span>*/
+isKeyguardLocked : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-isKeyguardSecure'>/**{@inheritDoc}
+</span>*/
+isKeyguardSecure : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-isKeyguardOccluded'>/**{@inheritDoc}
+</span>*/
+isKeyguardOccluded : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-inKeyguardRestrictedKeyInputMode'>/**{@inheritDoc}
+</span>*/
+inKeyguardRestrictedKeyInputMode : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-dismissKeyguardLw'>/**
+</span>*/
+dismissKeyguardLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-isKeyguardDrawnLw'>/**
+</span>*/
+isKeyguardDrawnLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-startKeyguardExitAnimation'>/**
+</span>*/
+startKeyguardExitAnimation : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setSafeMode'>/**
+</span>*/
+setSafeMode : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-onSystemUiStarted'>/**
+</span>*/
+onSystemUiStarted : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-systemReady'>/**{@inheritDoc}
+</span>*/
+systemReady : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-systemBooted'>/**{@inheritDoc}
+</span>*/
+systemBooted : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-canDismissBootAnimation'>/**
+</span>*/
+canDismissBootAnimation : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-showBootMessage'>/**{@inheritDoc}
+</span>*/
+showBootMessage : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-hideBootMessages'>/**{@inheritDoc}
+</span>*/
+hideBootMessages : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-requestUserActivityNotification'>/**
+</span>*/
+requestUserActivityNotification : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-userActivity'>/**{@inheritDoc}
+</span>*/
+userActivity : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-lockNow'>/**
+</span>*/
+lockNow : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setAllowLockscreenWhenOn'>/**
+</span>*/
+setAllowLockscreenWhenOn : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-enableScreenAfterBoot'>/**{@inheritDoc}
+</span>*/
+enableScreenAfterBoot : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-getUiMode'>/**
+</span>*/
+getUiMode : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-performHapticFeedback'>/**
+</span>*/
+performHapticFeedback : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-keepScreenOnStartedLw'>/**
+</span>*/
+keepScreenOnStartedLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-keepScreenOnStoppedLw'>/**
+</span>*/
+keepScreenOnStoppedLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-hasNavigationBar'>/**
+</span>*/
+hasNavigationBar : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setDismissImeOnBackKeyPressed'>/**
+</span>*/
+setDismissImeOnBackKeyPressed : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setCurrentUserLw'>/**
+</span>*/
+setCurrentUserLw : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setSwitchingUser'>/**
+</span>*/
+setSwitchingUser : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-isTopLevelWindow'>/**
+</span>*/
+isTopLevelWindow : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-writeToProto'>/**
+</span>*/
+writeToProto : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-policy-PhoneWindowManager-method-setAodShowing'>/**
+</span>*/
+setAodShowing : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

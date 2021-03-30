@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-statementservice-retriever-AbstractAsset'>/**@class com.android.statementservice.retriever.AbstractAsset
+</span>@extends java.lang.Object
+
+ A handle representing the identity and address of some digital asset. An asset is an online
+ entity that typically provides some service or content. Examples of assets are websites, Android
+ apps, Twitter feeds, and Plus Pages.
+
+ &lt;p&gt; Asset can be represented by a JSON string. For example, the web site https://www.google.com
+ can be represented by
+ &lt;pre&gt;
+ {&quot;namespace&quot;: &quot;web&quot;, &quot;site&quot;: &quot;https://www.google.com&quot;}
+ &lt;/pre&gt;
+
+ &lt;p&gt; The Android app with package name com.google.test that is signed by a certificate with sha256
+ fingerprint 11:22:33 can be represented by
+ &lt;pre&gt;
+ {&quot;namespace&quot;: &quot;android_app&quot;,
+  &quot;package_name&quot;: &quot;com.google.test&quot;,
+  &quot;sha256_cert_fingerprints&quot;: [&quot;11:22:33&quot;]}
+ &lt;/pre&gt;
+
+ &lt;p&gt;Given a signed APK, Java 7's commandline keytool can compute the fingerprint using:
+ {@code keytool -list -printcert -jarfile signed_app.apk}
+*/
+var AbstractAsset = {
+
+<span id='com-android-statementservice-retriever-AbstractAsset-method-toJson'>/**Returns a JSON string representation of this asset. The strings returned by this function are
+</span> normalized -- they can be used for equality testing.
+*/
+toJson : function(  ) {},
+
+<span id='com-android-statementservice-retriever-AbstractAsset-method-lookupKey'>/**Returns a key that can be used by {@link com.android.statementservice.retriever.AbstractAssetMatcher} to lookup the asset.
+</span>
+ &lt;p&gt; An asset will match an {@code AssetMatcher} only if the value of this method is equal to
+ {@code AssetMatcher.getMatchedLookupKey()}.
+*/
+lookupKey : function(  ) {},
+
+<span id='com-android-statementservice-retriever-AbstractAsset-method-create'>/**Creates a new Asset from its JSON string representation.
+</span>@throws AssociationServiceException if the assetJson is not well formatted.
+*/
+create : function(  ) {},
+
+<span id='com-android-statementservice-retriever-AbstractAsset-method-followInsecureInclude'>/**If this is the source asset of a statement file, should the retriever follow
+</span> any insecure (non-HTTPS) include statements made by the asset.
+*/
+followInsecureInclude : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

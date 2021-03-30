@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-uiautomator-core-Tracer'>/**@class com.android.uiautomator.core.Tracer
+</span>@extends java.lang.Object
+
+ Class that creates traces of the calls to the UiAutomator API and outputs the
+ traces either to logcat or a logfile. Each public method in the UiAutomator
+ that needs to be traced should include a call to Tracer.trace in the
+ beginning. Tracing is turned off by defualt and needs to be enabled
+ explicitly.
+ @hide
+*/
+var Tracer = {
+
+<span id='com-android-uiautomator-core-Tracer-method-getInstance'>/**Returns a reference to an instance of the tracer. Useful to set the
+</span> parameters before the trace is collected.
+@return {Object {com.android.uiautomator.core.Tracer}} 
+*/
+getInstance : function(  ) {},
+
+<span id='com-android-uiautomator-core-Tracer-method-setOutputMode'>/**Sets where the trace output will go. Can be either be logcat or a file or
+</span> both. Setting this to NONE will turn off tracing.
+@param {Object {Tracer.Mode}} mode
+*/
+setOutputMode : function(  ) {},
+
+<span id='com-android-uiautomator-core-Tracer-method-setOutputFilename'>/**Sets the name of the log file where tracing output will be written if the
+</span> tracer is set to write to a file.
+@param {String} filename name of the log file.
+*/
+setOutputFilename : function(  ) {},
+
+<span id='com-android-uiautomator-core-Tracer-method-isTracingEnabled'>/**Queries whether the tracing is enabled.
+</span>@return {Boolean} true if tracing is enabled, false otherwise.
+*/
+isTracingEnabled : function(  ) {},
+
+<span id='com-android-uiautomator-core-Tracer-method-trace'>/**Public methods in the UiAutomator should call this function to generate a
+</span> trace. The trace will include the method thats is being called, it's
+ arguments and where in the user's code the method is called from. If a
+ public method is called internally from UIAutomator then this will not
+ output a trace entry. Only calls from outise the UiAutomator package will
+ produce output.
+
+ Special note about array arguments. You can safely pass arrays of reference types
+ to this function. Like String[] or Integer[]. The trace function will print their
+ contents by calling toString() on each of the elements. This will not work for
+ array of primitive types like int[] or float[]. Before passing them to this function
+ convert them to arrays of reference types manually. Example: convert int[] to Integer[].
+@param {Object {java.lang.Object[]}} arguments arguments of the method being traced.
+*/
+trace : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

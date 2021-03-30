@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-cert-CertPathValidatorSpi'>/**@class java.security.cert.CertPathValidatorSpi
+</span>@extends java.lang.Object
+
+
+ The &lt;i&gt;Service Provider Interface&lt;/i&gt; (&lt;b&gt;SPI&lt;/b&gt;)
+ for the {@link java.security.cert.CertPathValidator java.security.cert.CertPathValidator} class. All
+ {@code CertPathValidator} implementations must include a class (the
+ SPI class) that extends this class ({@code CertPathValidatorSpi})
+ and implements all of its methods. In general, instances of this class
+ should only be accessed through the {@code CertPathValidator} class.
+ For details, see the Java Cryptography Architecture.
+ &lt;p&gt;
+ &lt;b&gt;Concurrent Access&lt;/b&gt;
+ &lt;p&gt;
+ Instances of this class need not be protected against concurrent
+ access from multiple threads. Threads that need to access a single
+ {@code CertPathValidatorSpi} instance concurrently should synchronize
+ amongst themselves and provide the necessary locking before calling the
+ wrapping {@code CertPathValidator} object.
+ &lt;p&gt;
+ However, implementations of {@code CertPathValidatorSpi} may still
+ encounter concurrency issues, since multiple threads each
+ manipulating a different {@code CertPathValidatorSpi} instance need not
+ synchronize.
+
+ @since       1.4
+ @author      Yassir Elley
+*/
+var CertPathValidatorSpi = {
+
+<span id='java-security-cert-CertPathValidatorSpi-method-engineValidate'>/**Validates the specified certification path using the specified
+</span> algorithm parameter set.
+ &lt;p&gt;
+ The {@code CertPath} specified must be of a type that is
+ supported by the validation algorithm, otherwise an
+ {@code InvalidAlgorithmParameterException} will be thrown. For
+ example, a {@code CertPathValidator} that implements the PKIX
+ algorithm validates {@code CertPath} objects of type X.509.
+@param {Object {CertPath}} certPath the {@code CertPath} to be validated
+@param {Object {CertPathParameters}} params the algorithm parameters
+@return {Object {java.security.cert.CertPathValidatorResult}} the result of the validation algorithm
+@exception CertPathValidatorException if the {@code CertPath}
+ does not validate
+@exception InvalidAlgorithmParameterException if the specified
+ parameters or the type of the specified {@code CertPath} are
+ inappropriate for this {@code CertPathValidator}
+*/
+engineValidate : function(  ) {},
+
+<span id='java-security-cert-CertPathValidatorSpi-method-engineGetRevocationChecker'>/**Returns a {@code CertPathChecker} that this implementation uses to
+</span> check the revocation status of certificates. A PKIX implementation
+ returns objects of type {@code PKIXRevocationChecker}.
+
+ &lt;p&gt;The primary purpose of this method is to allow callers to specify
+ additional input parameters and options specific to revocation checking.
+ See the class description of {@code CertPathValidator} for an example.
+
+ &lt;p&gt;This method was added to version 1.8 of the Java Platform Standard
+ Edition. In order to maintain backwards compatibility with existing
+ service providers, this method cannot be abstract and by default throws
+ an {@code UnsupportedOperationException}.
+@return {Object {java.security.cert.CertPathChecker}} a {@code CertPathChecker} that this implementation uses to
+ check the revocation status of certificates
+@throws UnsupportedOperationException if this method is not supported
+@since 1.8
+*/
+engineGetRevocationChecker : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

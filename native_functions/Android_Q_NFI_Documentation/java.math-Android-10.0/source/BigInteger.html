@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-math-BigInteger'>/**@class java.math.BigInteger
+</span> implements java.lang.Comparable
+
+ implements java.io.Serializable
+
+@extends java.lang.Number
+
+ An immutable arbitrary-precision signed integer.
+
+ &lt;h3&gt;Fast Cryptography&lt;/h3&gt;
+ This implementation is efficient for operations traditionally used in
+ cryptography, such as the generation of large prime numbers and computation
+ of the modular inverse.
+
+ &lt;h3&gt;Slow Two's Complement Bitwise Operations&lt;/h3&gt;
+ This API includes operations for bitwise operations in two's complement
+ representation. Two's complement is not the internal representation used by
+ this implementation, so such methods may be inefficient. Use {@link java.util.BitSet} for high-performance bitwise operations on
+ arbitrarily-large sequences of bits.
+*/
+var BigInteger = {
+
+<span id='java-math-BigInteger-property-ZERO'>/**The {@code BigInteger} constant 0. */
+</span>ZERO : &quot;null&quot;,
+<span id='java-math-BigInteger-property-ONE'>/**The {@code BigInteger} constant 1. */
+</span>ONE : &quot;null&quot;,
+<span id='java-math-BigInteger-property-TEN'>/**The {@code BigInteger} constant 10. */
+</span>TEN : &quot;null&quot;,
+<span id='java-math-BigInteger-method-valueOf'>/**Returns a {@code BigInteger} whose value is equal to {@code value}.
+</span>*/
+valueOf : function(  ) {},
+
+<span id='java-math-BigInteger-method-toByteArray'>/**Returns the two's complement representation of this {@code BigInteger} in
+</span> a byte array.
+*/
+toByteArray : function(  ) {},
+
+<span id='java-math-BigInteger-method-abs'>/**Returns a {@code BigInteger} whose value is the absolute value of {@code
+</span> this}.
+*/
+abs : function(  ) {},
+
+<span id='java-math-BigInteger-method-negate'>/**Returns a {@code BigInteger} whose value is the {@code -this}.
+</span>*/
+negate : function(  ) {},
+
+<span id='java-math-BigInteger-method-add'>/**Returns a {@code BigInteger} whose value is {@code this + value}.
+</span>*/
+add : function(  ) {},
+
+<span id='java-math-BigInteger-method-subtract'>/**Returns a {@code BigInteger} whose value is {@code this - value}.
+</span>*/
+subtract : function(  ) {},
+
+<span id='java-math-BigInteger-method-signum'>/**Returns the sign of this {@code BigInteger}.
+</span>@return {Number} {@code -1} if {@code this &lt; 0}, {@code 0} if {@code this == 0},
+     {@code 1} if {@code this &gt; 0}.
+*/
+signum : function(  ) {},
+
+<span id='java-math-BigInteger-method-shiftRight'>/**Returns a {@code BigInteger} whose value is {@code this &gt;&gt; n}. For
+</span> negative arguments, the result is also negative. The shift distance may
+ be negative which means that {@code this} is shifted left.
+
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method on negative values is
+ not recommended as the current implementation is not efficient.
+@param {Number} n shift distance
+@return {Object {java.math.BigInteger}} {@code this &gt;&gt; n} if {@code n &gt;= 0}; {@code this &lt;&lt; (-n)}
+     otherwise
+*/
+shiftRight : function(  ) {},
+
+<span id='java-math-BigInteger-method-shiftLeft'>/**Returns a {@code BigInteger} whose value is {@code this &lt;&lt; n}. The
+</span> result is equivalent to {@code this * pow(2, n)} if n &gt;= 0. The shift
+ distance may be negative which means that {@code this} is shifted right.
+ The result then corresponds to {@code floor(this / pow(2, -n))}.
+
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method on negative values is
+ not recommended as the current implementation is not efficient.
+@param {Number} n shift distance.
+@return {Object {java.math.BigInteger}} {@code this &lt;&lt; n} if {@code n &gt;= 0}; {@code this &gt;&gt; (-n)}.
+     otherwise
+*/
+shiftLeft : function(  ) {},
+
+<span id='java-math-BigInteger-method-bitLength'>/**Returns the length of the value's two's complement representation without
+</span> leading zeros for positive numbers / without leading ones for negative
+ values.
+
+ &lt;p&gt;The two's complement representation of {@code this} will be at least
+ {@code bitLength() + 1} bits long.
+
+ &lt;p&gt;The value will fit into an {@code int} if {@code bitLength() &lt; 32} or
+ into a {@code long} if {@code bitLength() &lt; 64}.
+@return {Number} the length of the minimal two's complement representation for
+     {@code this} without the sign bit.
+*/
+bitLength : function(  ) {},
+
+<span id='java-math-BigInteger-method-testBit'>/**Tests whether the bit at position n in {@code this} is set. The result is
+</span> equivalent to {@code this &amp; pow(2, n) != 0}.
+
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended as
+ the current implementation is not efficient.
+@param {Number} n position where the bit in {@code this} has to be inspected.
+@throws ArithmeticException if {@code n &lt; 0}.
+*/
+testBit : function(  ) {},
+
+<span id='java-math-BigInteger-method-setBit'>/**Returns a {@code BigInteger} which has the same binary representation
+</span> as {@code this} but with the bit at position n set. The result is
+ equivalent to {@code this | pow(2, n)}.
+
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended as
+ the current implementation is not efficient.
+@param {Number} n position where the bit in {@code this} has to be set.
+@throws ArithmeticException if {@code n &lt; 0}.
+*/
+setBit : function(  ) {},
+
+<span id='java-math-BigInteger-method-clearBit'>/**Returns a {@code BigInteger} which has the same binary representation
+</span> as {@code this} but with the bit at position n cleared. The result is
+ equivalent to {@code this &amp; ~pow(2, n)}.
+
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended as
+ the current implementation is not efficient.
+@param {Number} n position where the bit in {@code this} has to be cleared.
+@throws ArithmeticException if {@code n &lt; 0}.
+*/
+clearBit : function(  ) {},
+
+<span id='java-math-BigInteger-method-flipBit'>/**Returns a {@code BigInteger} which has the same binary representation
+</span> as {@code this} but with the bit at position n flipped. The result is
+ equivalent to {@code this ^ pow(2, n)}.
+
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended as
+ the current implementation is not efficient.
+@param {Number} n position where the bit in {@code this} has to be flipped.
+@throws ArithmeticException if {@code n &lt; 0}.
+*/
+flipBit : function(  ) {},
+
+<span id='java-math-BigInteger-method-getLowestSetBit'>/**Returns the position of the lowest set bit in the two's complement
+</span> representation of this {@code BigInteger}. If all bits are zero (this==0)
+ then -1 is returned as result.
+
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended as
+ the current implementation is not efficient.
+*/
+getLowestSetBit : function(  ) {},
+
+<span id='java-math-BigInteger-method-bitCount'>/**Returns the number of bits in the two's complement representation of
+</span> {@code this} which differ from the sign bit. If {@code this} is negative,
+ the result is equivalent to the number of bits set in the two's
+ complement representation of {@code -this - 1}.
+
+ &lt;p&gt;Use {@code bitLength(0)} to find the length of the binary value in
+ bits.
+
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended as
+ the current implementation is not efficient.
+*/
+bitCount : function(  ) {},
+
+<span id='java-math-BigInteger-method-not'>/**Returns a {@code BigInteger} whose value is {@code ~this}. The result
+</span> of this operation is {@code -this-1}.
+
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended as
+ the current implementation is not efficient.
+*/
+not : function(  ) {},
+
+<span id='java-math-BigInteger-method-and'>/**Returns a {@code BigInteger} whose value is {@code this &amp; value}.
+</span>
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended
+ as the current implementation is not efficient.
+@param {Object {BigInteger}} value value to be and'ed with {@code this}.
+@throws NullPointerException if {@code value == null}.
+*/
+and : function(  ) {},
+
+<span id='java-math-BigInteger-method-or'>/**Returns a {@code BigInteger} whose value is {@code this | value}.
+</span>
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended as
+ the current implementation is not efficient.
+@param {Object {BigInteger}} value value to be or'ed with {@code this}.
+@throws NullPointerException if {@code value == null}.
+*/
+or : function(  ) {},
+
+<span id='java-math-BigInteger-method-xor'>/**Returns a {@code BigInteger} whose value is {@code this ^ value}.
+</span>
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended as
+ the current implementation is not efficient.
+@param {Object {BigInteger}} value value to be xor'ed with {@code this}
+@throws NullPointerException if {@code value == null}
+*/
+xor : function(  ) {},
+
+<span id='java-math-BigInteger-method-andNot'>/**Returns a {@code BigInteger} whose value is {@code this &amp; ~value}.
+</span> Evaluating {@code x.andNot(value)} returns the same result as {@code
+ x.and(value.not())}.
+
+ &lt;p&gt;&lt;b&gt;Implementation Note:&lt;/b&gt; Usage of this method is not recommended
+ as the current implementation is not efficient.
+@param {Object {BigInteger}} value value to be not'ed and then and'ed with {@code this}.
+@throws NullPointerException if {@code value == null}.
+*/
+andNot : function(  ) {},
+
+<span id='java-math-BigInteger-method-intValue'>/**Returns this {@code BigInteger} as an int value. If {@code this} is too
+</span> big to be represented as an int, then {@code this % (1 &lt;&lt; 32)} is
+ returned.
+*/
+intValue : function(  ) {},
+
+<span id='java-math-BigInteger-method-longValue'>/**Returns this {@code BigInteger} as a long value. If {@code this} is too
+</span> big to be represented as a long, then {@code this % pow(2, 64)} is
+ returned.
+*/
+longValue : function(  ) {},
+
+<span id='java-math-BigInteger-method-floatValue'>/**Returns this {@code BigInteger} as a float. If {@code this} is too big to
+</span> be represented as a float, then {@code Float.POSITIVE_INFINITY} or
+ {@code Float.NEGATIVE_INFINITY} is returned. Note that not all integers
+ in the range {@code [-Float.MAX_VALUE, Float.MAX_VALUE]} can be exactly
+ represented as a float.
+*/
+floatValue : function(  ) {},
+
+<span id='java-math-BigInteger-method-doubleValue'>/**Returns this {@code BigInteger} as a double. If {@code this} is too big
+</span> to be represented as a double, then {@code Double.POSITIVE_INFINITY} or
+ {@code Double.NEGATIVE_INFINITY} is returned. Note that not all integers
+ in the range {@code [-Double.MAX_VALUE, Double.MAX_VALUE]} can be exactly
+ represented as a double.
+*/
+doubleValue : function(  ) {},
+
+<span id='java-math-BigInteger-method-compareTo'>/**Compares this {@code BigInteger} with {@code value}. Returns {@code -1}
+</span> if {@code this &lt; value}, {@code 0} if {@code this == value} and {@code 1}
+ if {@code this &gt; value}, .
+@param {Object {BigInteger}} value value to be compared with {@code this}.
+@throws NullPointerException if {@code value == null}.
+*/
+compareTo : function(  ) {},
+
+<span id='java-math-BigInteger-method-min'>/**Returns the minimum of this {@code BigInteger} and {@code value}.
+</span>@param {Object {BigInteger}} value value to be used to compute the minimum with {@code this}.
+@throws NullPointerException if {@code value == null}.
+*/
+min : function(  ) {},
+
+<span id='java-math-BigInteger-method-max'>/**Returns the maximum of this {@code BigInteger} and {@code value}.
+</span>@param {Object {BigInteger}} value value to be used to compute the maximum with {@code this}
+@throws NullPointerException if {@code value == null}
+*/
+max : function(  ) {},
+
+<span id='java-math-BigInteger-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='java-math-BigInteger-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='java-math-BigInteger-method-toString'>/**Returns a string representation of this {@code BigInteger} in decimal
+</span> form.
+*/
+toString : function(  ) {},
+
+<span id='java-math-BigInteger-method-toString'>/**Returns a string containing a string representation of this {@code
+</span> BigInteger} with base radix. If {@code radix &lt; Character.MIN_RADIX} or
+ {@code radix &gt; Character.MAX_RADIX} then a decimal representation is
+ returned. The characters of the string representation are generated with
+ method {@code Character.forDigit}.
+@param {Number} radix base to be used for the string representation.
+*/
+toString : function(  ) {},
+
+<span id='java-math-BigInteger-method-gcd'>/**Returns a {@code BigInteger} whose value is greatest common divisor
+</span> of {@code this} and {@code value}. If {@code this == 0} and {@code
+ value == 0} then zero is returned, otherwise the result is positive.
+@param {Object {BigInteger}} value value with which the greatest common divisor is computed.
+@throws NullPointerException if {@code value == null}.
+*/
+gcd : function(  ) {},
+
+<span id='java-math-BigInteger-method-multiply'>/**Returns a {@code BigInteger} whose value is {@code this * value}.
+</span>@throws NullPointerException if {@code value == null}.
+*/
+multiply : function(  ) {},
+
+<span id='java-math-BigInteger-method-pow'>/**Returns a {@code BigInteger} whose value is {@code pow(this, exp)}.
+</span>@throws ArithmeticException if {@code exp &lt; 0}.
+*/
+pow : function(  ) {},
+
+<span id='java-math-BigInteger-method-divideAndRemainder'>/**Returns a two element {@code BigInteger} array containing
+</span> {@code this / divisor} at index 0 and {@code this % divisor} at index 1.
+@param {Object {BigInteger}} divisor value by which {@code this} is divided.
+@throws NullPointerException if {@code divisor == null}.
+@throws ArithmeticException if {@code divisor == 0}.
+@see #divide
+@see #remainder
+*/
+divideAndRemainder : function(  ) {},
+
+<span id='java-math-BigInteger-method-divide'>/**Returns a {@code BigInteger} whose value is {@code this / divisor}.
+</span>@param {Object {BigInteger}} divisor value by which {@code this} is divided.
+@return {Object {java.math.BigInteger}} {@code this / divisor}.
+@throws NullPointerException if {@code divisor == null}.
+@throws ArithmeticException if {@code divisor == 0}.
+*/
+divide : function(  ) {},
+
+<span id='java-math-BigInteger-method-remainder'>/**Returns a {@code BigInteger} whose value is {@code this % divisor}.
+</span> Regarding signs this methods has the same behavior as the % operator on
+ ints: the sign of the remainder is the same as the sign of this.
+@param {Object {BigInteger}} divisor value by which {@code this} is divided.
+@throws NullPointerException if {@code divisor == null}.
+@throws ArithmeticException if {@code divisor == 0}.
+*/
+remainder : function(  ) {},
+
+<span id='java-math-BigInteger-method-modInverse'>/**Returns a {@code BigInteger} whose value is {@code 1/this mod m}. The
+</span> modulus {@code m} must be positive. The result is guaranteed to be in the
+ interval {@code [0, m)} (0 inclusive, m exclusive). If {@code this} is
+ not relatively prime to m, then an exception is thrown.
+@param {Object {BigInteger}} m the modulus.
+@throws NullPointerException if {@code m == null}
+@throws ArithmeticException if {@code m &lt; 0 or} if {@code this} is not
+     relatively prime to {@code m}
+*/
+modInverse : function(  ) {},
+
+<span id='java-math-BigInteger-method-modPow'>/**Returns a {@code BigInteger} whose value is {@code
+</span> pow(this, exponent) mod modulus}. The modulus must be positive. The
+ result is guaranteed to be in the interval {@code [0, modulus)}.
+ If the exponent is negative, then
+ {@code pow(this.modInverse(modulus), -exponent) mod modulus} is computed.
+ The inverse of this only exists if {@code this} is relatively prime to the modulus,
+ otherwise an exception is thrown.
+@throws NullPointerException if {@code modulus == null} or {@code exponent == null}.
+@throws ArithmeticException if {@code modulus &lt; 0} or if {@code exponent &lt; 0} and
+     not relatively prime to {@code modulus}.
+*/
+modPow : function(  ) {},
+
+<span id='java-math-BigInteger-method-mod'>/**Returns a {@code BigInteger} whose value is {@code this mod m}. The
+</span> modulus {@code m} must be positive. The result is guaranteed to be in the
+ interval {@code [0, m)} (0 inclusive, m exclusive). The behavior of this
+ function is not equivalent to the behavior of the % operator defined for
+ the built-in {@code int}'s.
+@param {Object {BigInteger}} m the modulus.
+@return {Object {java.math.BigInteger}} {@code this mod m}.
+@throws NullPointerException if {@code m == null}.
+@throws ArithmeticException if {@code m &lt; 0}.
+*/
+mod : function(  ) {},
+
+<span id='java-math-BigInteger-method-isProbablePrime'>/**Tests whether this {@code BigInteger} is probably prime. If {@code true}
+</span> is returned, then this is prime with a probability greater than
+ {@code 1 - 1/2&lt;sup&gt;certainty&lt;/sup&gt;)}. If {@code false} is returned, then this
+ is definitely composite. If the argument {@code certainty} &lt;= 0, then
+ this method returns true.
+@param {Number} certainty tolerated primality uncertainty.
+@return {Boolean} {@code true}, if {@code this} is probably prime, {@code false}
+     otherwise.
+*/
+isProbablePrime : function(  ) {},
+
+<span id='java-math-BigInteger-method-nextProbablePrime'>/**Returns the smallest integer x &gt; {@code this} which is probably prime as
+</span> a {@code BigInteger} instance. The probability that the returned {@code
+ BigInteger} is prime is greater than {@code 1 - 1/2&lt;sup&gt;100&lt;/sup&gt;}.
+@return {Object {java.math.BigInteger}} smallest integer &gt; {@code this} which is probably prime.
+@throws ArithmeticException if {@code this &lt; 0}.
+*/
+nextProbablePrime : function(  ) {},
+
+<span id='java-math-BigInteger-method-probablePrime'>/**Returns a random positive {@code BigInteger} instance in the range {@code
+</span> [0, pow(2, bitLength)-1]} which is probably prime. The probability that
+ the returned {@code BigInteger} is prime is greater than {@code 1 - 1/2&lt;sup&gt;100&lt;/sup&gt;)}.
+@param {Number} bitLength length of the new {@code BigInteger} in bits.
+@return {Object {java.math.BigInteger}} probably prime random {@code BigInteger} instance.
+@throws IllegalArgumentException if {@code bitLength &lt; 2}.
+*/
+probablePrime : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

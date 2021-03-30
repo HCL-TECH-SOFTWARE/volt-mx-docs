@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wm-ConfigurationContainer'>/**@class com.android.server.wm.ConfigurationContainer
+</span>@extends java.lang.Object
+
+ Contains common logic for classes that have override configurations and are organized in a
+ hierarchy.
+*/
+var ConfigurationContainer = {
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getConfiguration'>/**Returns full configuration applied to this configuration container.
+</span> This method should be used for getting settings applied in each particular level of the
+ hierarchy.
+*/
+getConfiguration : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-onConfigurationChanged'>/**Notify that parent config changed and we need to update full configuration.
+</span>@see #mFullConfiguration
+*/
+onConfigurationChanged : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getRequestedOverrideConfiguration'>/**Returns requested override configuration applied to this configuration container.
+</span>*/
+getRequestedOverrideConfiguration : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-onRequestedOverrideConfigurationChanged'>/**Update override configuration and recalculate full config.
+</span>@see #mRequestedOverrideConfiguration
+@see #mFullConfiguration
+*/
+onRequestedOverrideConfigurationChanged : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getMergedOverrideConfiguration'>/**Get merged override configuration from the top of the hierarchy down to this particular
+</span> instance. This should be reported to client as override config.
+*/
+getMergedOverrideConfiguration : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-matchParentBounds'>/**Indicates whether this container has not requested any bounds different from its parent. In
+</span> this case, it will inherit the bounds of the first ancestor which specifies a bounds subject
+ to policy constraints.
+@return {Boolean} {@code true} if no explicit bounds have been requested at this container level.
+         {@code false} otherwise.
+*/
+matchParentBounds : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-equivalentRequestedOverrideBounds'>/**Returns whether the bounds specified are considered the same as the existing requested
+</span> override bounds. This is either when the two bounds are equal or the requested override
+ bounds are empty and the specified bounds is null.
+@return {Boolean} {@code true} if the bounds are equivalent, {@code false} otherwise
+*/
+equivalentRequestedOverrideBounds : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-equivalentBounds'>/**Returns whether the two bounds are equal to each other or are a combination of null or empty.
+</span>*/
+equivalentBounds : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getBounds'>/**Returns the effective bounds of this container, inheriting the first non-empty bounds set in
+</span> its ancestral hierarchy, including itself.
+@return {Object {android.graphics.Rect}} 
+*/
+getBounds : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getBounds'>/**
+</span>*/
+getBounds : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getPosition'>/**Sets {@code out} to the top-left corner of the bounds as returned by {@link #getBounds}().
+</span>*/
+getPosition : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getRequestedOverrideBounds'>/**Returns the bounds requested on this container. These may not be the actual bounds the
+</span> container ends up with due to policy constraints. The {@link Rect} handed back is
+ shared for all calls to this method and should not be modified.
+*/
+getRequestedOverrideBounds : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-hasOverrideBounds'>/**Returns {@code true} if the {@link WindowConfiguration} in the requested override
+</span> {@link Configuration} specifies bounds.
+*/
+hasOverrideBounds : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getRequestedOverrideBounds'>/**Sets the passed in {@link Rect} to the current bounds.
+</span>@see {@link #getRequestedOverrideBounds()}.
+*/
+getRequestedOverrideBounds : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-setBounds'>/**Sets the bounds at the current hierarchy level, overriding any bounds set on an ancestor.
+</span> This value will be reported when {@link #getBounds}() and
+ {@link #getRequestedOverrideBounds}(). If
+ an empty {@link Rect} or null is specified, this container will be considered to match its
+ parent bounds {@see #matchParentBounds} and will inherit bounds from its parent.
+@param {Object {Rect}} bounds The bounds defining the container size.
+@return {Number} a bitmask representing the types of changes made to the bounds.
+*/
+setBounds : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-setBounds'>/**
+</span>*/
+setBounds : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getWindowConfiguration'>/**
+</span>*/
+getWindowConfiguration : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getWindowingMode'>/**Returns the windowing mode the configuration container is currently in.
+</span>*/
+getWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getRequestedOverrideWindowingMode'>/**Returns the windowing mode override that is requested by this container.
+</span>*/
+getRequestedOverrideWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-setWindowingMode'>/**Sets the requested windowing mode override for the configuration container.
+</span>*/
+setWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-setAlwaysOnTop'>/**Sets the always on top flag for this configuration container.
+</span>  When you call this function, make sure that the following functions are called as well to
+  keep proper z-order.
+  - {@Link DisplayContent#positionStackAt(POSITION_TOP, TaskStack)};
+  - {@Link ActivityDisplay#positionChildAtTop(ActivityStack)};
+*/
+setAlwaysOnTop : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-inMultiWindowMode'>/**Returns true if this container is currently in multi-window mode. I.e. sharing the screen
+</span> with another activity.
+*/
+inMultiWindowMode : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-inSplitScreenWindowingMode'>/**Returns true if this container is currently in split-screen windowing mode.
+</span>*/
+inSplitScreenWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-inSplitScreenSecondaryWindowingMode'>/**Returns true if this container is currently in split-screen secondary windowing mode.
+</span>*/
+inSplitScreenSecondaryWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-inSplitScreenPrimaryWindowingMode'>/**
+</span>*/
+inSplitScreenPrimaryWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-supportsSplitScreenWindowingMode'>/**Returns true if this container can be put in either
+</span> {@link WindowConfiguration#WINDOWING_MODE_SPLIT_SCREEN_PRIMARY} or
+ {@link WindowConfiguration##WINDOWING_MODE_SPLIT_SCREEN_SECONDARY} windowing modes based on
+ its current state.
+*/
+supportsSplitScreenWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-inPinnedWindowingMode'>/**
+</span>*/
+inPinnedWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-inFreeformWindowingMode'>/**
+</span>*/
+inFreeformWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-getActivityType'>/**Returns the activity type associated with the the configuration container.
+</span>*/
+getActivityType : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-setActivityType'>/**Sets the activity type to associate with the configuration container.
+</span>*/
+setActivityType : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-isActivityTypeHome'>/**
+</span>*/
+isActivityTypeHome : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-isActivityTypeRecents'>/**
+</span>*/
+isActivityTypeRecents : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-isActivityTypeAssistant'>/**
+</span>*/
+isActivityTypeAssistant : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-isActivityTypeStandard'>/**
+</span>*/
+isActivityTypeStandard : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-isActivityTypeStandardOrUndefined'>/**
+</span>*/
+isActivityTypeStandardOrUndefined : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-hasCompatibleActivityType'>/**
+</span>*/
+hasCompatibleActivityType : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-isCompatible'>/**Returns true if this container is compatible with the input windowing mode and activity type.
+</span> The container is compatible:
+ - If {@param activityType} and {@param windowingMode} match this container activity type and
+ windowing mode.
+ - If {@param activityType} is {@link WindowConfiguration#ACTIVITY_TYPE_UNDEFINED} or
+ {@link WindowConfiguration#ACTIVITY_TYPE_STANDARD} and this containers activity type is also
+ standard or undefined and its windowing mode matches {@param windowingMode}.
+ - If {@param activityType} isn't {@link WindowConfiguration#ACTIVITY_TYPE_UNDEFINED} or
+ {@link WindowConfiguration#ACTIVITY_TYPE_STANDARD} or this containers activity type isn't
+ also standard or undefined and its activity type matches {@param activityType} regardless of
+ if {@param windowingMode} matches the containers windowing mode.
+*/
+isCompatible : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-registerConfigurationChangeListener'>/**
+</span>*/
+registerConfigurationChangeListener : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-unregisterConfigurationChangeListener'>/**
+</span>*/
+unregisterConfigurationChangeListener : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-dumpChildrenNames'>/**Dumps the names of this container children in the input print writer indenting each
+</span> level with the input prefix.
+*/
+dumpChildrenNames : function(  ) {},
+
+<span id='com-android-server-wm-ConfigurationContainer-method-isAlwaysOnTop'>/**
+</span>*/
+isAlwaysOnTop : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

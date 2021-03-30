@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-file-attribute-UserPrincipalLookupService'>/**@class java.nio.file.attribute.UserPrincipalLookupService
+</span>@extends java.lang.Object
+
+ An object to lookup user and group principals by name. A {@link java.nio.file.attribute.UserPrincipal}
+ represents an identity that may be used to determine access rights to objects
+ in a file system. A {@link java.nio.file.attribute.GroupPrincipal} represents a &lt;em&gt;group identity&lt;/em&gt;.
+ A {@code UserPrincipalLookupService} defines methods to lookup identities by
+ name or group name (which are typically user or account names). Whether names
+ and group names are case sensitive or not depends on the implementation.
+ The exact definition of a group is implementation specific but typically a
+ group represents an identity created for administrative purposes so as to
+ determine the access rights for the members of the group. In particular it is
+ implementation specific if the &lt;em&gt;namespace&lt;/em&gt; for names and groups is the
+ same or is distinct. To ensure consistent and correct behavior across
+ platforms it is recommended that this API be used as if the namespaces are
+ distinct. In other words, the {@link #lookupPrincipalByName
+ lookupPrincipalByName} should be used to lookup users, and {@link #lookupPrincipalByGroupName lookupPrincipalByGroupName} should be used to
+ lookup groups.
+
+ @since 1.7
+
+ @see java.nio.file.FileSystem#getUserPrincipalLookupService
+*/
+var UserPrincipalLookupService = {
+
+<span id='java-nio-file-attribute-UserPrincipalLookupService-method-lookupPrincipalByName'>/**Lookup a user principal by name.
+</span>@param {String} name
+          the string representation of the user principal to lookup
+@return {Object {java.nio.file.attribute.UserPrincipal}} a user principal
+@throws UserPrincipalNotFoundException
+          the principal does not exist
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, it checks {@link RuntimePermission}&lt;tt&gt;(&quot;lookupUserInformation&quot;)&lt;/tt&gt;
+*/
+lookupPrincipalByName : function(  ) {},
+
+<span id='java-nio-file-attribute-UserPrincipalLookupService-method-lookupPrincipalByGroupName'>/**Lookup a group principal by group name.
+</span>
+ &lt;p&gt; Where an implementation does not support any notion of group then
+ this method always throws {@link java.nio.file.attribute.UserPrincipalNotFoundException}. Where
+ the namespace for user accounts and groups is the same, then this method
+ is identical to invoking {@link #lookupPrincipalByName
+ lookupPrincipalByName}.
+@param {String} group
+          the string representation of the group to lookup
+@return {Object {java.nio.file.attribute.GroupPrincipal}} a group principal
+@throws UserPrincipalNotFoundException
+          the principal does not exist or is not a group
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, it checks {@link RuntimePermission}&lt;tt&gt;(&quot;lookupUserInformation&quot;)&lt;/tt&gt;
+*/
+lookupPrincipalByGroupName : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

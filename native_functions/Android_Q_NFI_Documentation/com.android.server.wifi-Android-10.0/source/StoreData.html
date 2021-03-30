@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiConfigStore-StoreData'>/**@class com.android.server.wifi.WifiConfigStore.StoreData
+</span> Interface to be implemented by a module that contained data in the config store file.
+
+ The module will be responsible for serializing/deserializing their own data.
+ Whenever {@link com.android.server.wifi.WifiConfigStore#read()} is invoked, all registered StoreData instances will
+ be notified that a read was performed via {@link com.android.server.wifi.WifiConfigStore.StoreData#deserializeData(
+ XmlPullParser, int)} regardless of whether there is any data for them or not in the
+ store file.
+
+ Note: StoreData clients that need a config store read to kick-off operations should wait
+ for the {@link com.android.server.wifi.WifiConfigStore.StoreData#deserializeData(XmlPullParser, int)} invocation.
+*/
+var StoreData = {
+
+<span id='com-android-server-wifi-WifiConfigStore-StoreData-method-serializeData'>/**Serialize a XML data block to the output stream.
+</span>@param {Object {XmlSerializer}} out The output stream to serialize the data to
+*/
+serializeData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-StoreData-method-deserializeData'>/**Deserialize a XML data block from the input stream.
+</span>@param {Object {XmlPullParser}} in The input stream to read the data from. This could be null if there is
+           nothing in the store.
+@param {Number} outerTagDepth The depth of the outer tag in the XML document
+ Note: This will be invoked every time a store file is read, even if there is nothing
+                      in the store for them.
+*/
+deserializeData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-StoreData-method-resetData'>/**Reset configuration data.
+</span>*/
+resetData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-StoreData-method-hasNewDataToSerialize'>/**Check if there is any new data to persist from the last write.
+</span>@return {Boolean} true if the module has new data to persist, false otherwise.
+*/
+hasNewDataToSerialize : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-StoreData-method-getName'>/**Return the name of this store data.  The data will be enclosed under this tag in
+</span> the XML block.
+@return {String} The name of the store data
+*/
+getName : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-StoreData-method-getStoreFileId'>/**File Id where this data needs to be written to.
+</span> This should be one of {@link #STORE_FILE_SHARED_GENERAL},
+ {@link #STORE_FILE_USER_GENERAL} or
+ {@link #STORE_FILE_USER_NETWORK_SUGGESTIONS}.
+
+ Note: For most uses, the shared or user general store is sufficient. Creating and
+ managing store files are expensive. Only use specific store files if you have a large
+ amount of data which may not need to be persisted frequently (or at least not as
+ frequently as the general store).
+@return {Number} Id of the file where this data needs to be persisted.
+*/
+getStoreFileId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

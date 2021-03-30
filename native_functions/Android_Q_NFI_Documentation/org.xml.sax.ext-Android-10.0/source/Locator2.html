@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xml-sax-ext-Locator2'>/**@class org.xml.sax.ext.Locator2
+</span> implements org.xml.sax.Locator
+
+ SAX2 extension to augment the entity information provided
+ though a {@link Locator}.
+ If an implementation supports this extension, the Locator
+ provided in {@link org.xml.sax.ContentHandler#setDocumentLocator
+ ContentHandler.setDocumentLocator() } will implement this
+ interface, and the
+ &lt;em&gt;http://xml.org/sax/features/use-locator2&lt;/em&gt; feature
+ flag will have the value &lt;em&gt;true&lt;/em&gt;.
+
+ &lt;blockquote&gt;
+ &lt;em&gt;This module, both source code and documentation, is in the
+ Public Domain, and comes with &lt;strong&gt;NO WARRANTY&lt;/strong&gt;.&lt;/em&gt;
+ &lt;/blockquote&gt;
+
+ &lt;p&gt; XMLReader implementations are not required to support this
+ information, and it is not part of core-only SAX2 distributions.&lt;/p&gt;
+
+ @since SAX 2.0 (extensions 1.1 alpha)
+ @author David Brownell
+ @version TBS
+*/
+var Locator2 = {
+
+<span id='org-xml-sax-ext-Locator2-method-getXMLVersion'>/**Returns the version of XML used for the entity.  This will
+</span> normally be the identifier from the current entity's
+ &lt;em&gt;&amp;lt;?xml&amp;nbsp;version='...'&amp;nbsp;...?&amp;gt;&lt;/em&gt; declaration,
+ or be defaulted by the parser.
+@return {String} Identifier for the XML version being used to interpret
+ the entity's text, or null if that information is not yet
+ available in the current parsing state.
+*/
+getXMLVersion : function(  ) {},
+
+<span id='org-xml-sax-ext-Locator2-method-getEncoding'>/**Returns the name of the character encoding for the entity.
+</span> If the encoding was declared externally (for example, in a MIME
+ Content-Type header), that will be the name returned.  Else if there
+ was an &lt;em&gt;&amp;lt;?xml&amp;nbsp;...encoding='...'?&amp;gt;&lt;/em&gt; declaration at
+ the start of the document, that encoding name will be returned.
+ Otherwise the encoding will been inferred (normally to be UTF-8, or
+ some UTF-16 variant), and that inferred name will be returned.
+
+ &lt;p&gt;When an {@link org.xml.sax.InputSource InputSource} is used
+ to provide an entity's character stream, this method returns the
+ encoding provided in that input stream.
+
+ &lt;p&gt; Note that some recent W3C specifications require that text
+ in some encodings be normalized, using Unicode Normalization
+ Form C, before processing.  Such normalization must be performed
+ by applications, and would normally be triggered based on the
+ value returned by this method.
+
+ &lt;p&gt; Encoding names may be those used by the underlying JVM,
+ and comparisons should be case-insensitive.
+@return {String} Name of the character encoding being used to interpret
+ * the entity's text, or null if this was not provided for a *
+ character stream passed through an InputSource or is otherwise
+ not yet available in the current parsing state.
+*/
+getEncoding : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

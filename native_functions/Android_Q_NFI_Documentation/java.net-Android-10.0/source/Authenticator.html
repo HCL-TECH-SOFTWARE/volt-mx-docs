@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-Authenticator'>/**@class java.net.Authenticator
+</span>@extends java.lang.Object
+
+ The class Authenticator represents an object that knows how to obtain
+ authentication for a network connection.  Usually, it will do this
+ by prompting the user for information.
+ &lt;p&gt;
+ Applications use this class by overriding {@link #getPasswordAuthentication}() in a sub-class. This method will
+ typically use the various getXXX() accessor methods to get information
+ about the entity requesting authentication. It must then acquire a
+ username and password either by interacting with the user or through
+ some other non-interactive means. The credentials are then returned
+ as a {@link java.net.PasswordAuthentication} return value.
+ &lt;p&gt;
+ An instance of this concrete sub-class is then registered
+ with the system by calling {@link #setDefault}(Authenticator).
+ When authentication is required, the system will invoke one of the
+ requestPasswordAuthentication() methods which in turn will call the
+ getPasswordAuthentication() method of the registered object.
+ &lt;p&gt;
+ All methods that request authentication have a default implementation
+ that fails.
+
+ @see java.net.Authenticator#setDefault(java.net.Authenticator)
+ @see java.net.Authenticator#getPasswordAuthentication()
+
+ @author  Bill Foote
+ @since   1.2
+*/
+var Authenticator = {
+
+<span id='java-net-Authenticator-method-setDefault'>/**Sets the authenticator that will be used by the networking code
+</span> when a proxy or an HTTP server asks for authentication.
+ &lt;p&gt;
+ First, if there is a security manager, its {@code checkPermission}
+ method is called with a
+ {@code NetPermission(&quot;setDefaultAuthenticator&quot;)} permission.
+ This may result in a java.lang.SecurityException.
+@param {Object {Authenticator}} a       The authenticator to be set. If a is {@code null} then
+                  any previously set authenticator is removed.
+@throws SecurityException
+        if a security manager exists and its
+        {@code checkPermission} method doesn't allow
+        setting the default authenticator.
+@see SecurityManager#checkPermission
+@see java.net.NetPermission
+*/
+setDefault : function(  ) {},
+
+<span id='java-net-Authenticator-method-requestPasswordAuthentication'>/**Ask the authenticator that has been registered with the system
+</span> for a password.
+ &lt;p&gt;
+ First, if there is a security manager, its {@code checkPermission}
+ method is called with a
+ {@code NetPermission(&quot;requestPasswordAuthentication&quot;)} permission.
+ This may result in a java.lang.SecurityException.
+@param {Object {InetAddress}} addr The InetAddress of the site requesting authorization,
+             or null if not known.
+@param {Number} port the port for the requested connection
+@param {String} protocol The protocol that's requesting the connection
+          ({@link java.net.Authenticator#getRequestingProtocol()})
+@param {String} prompt A prompt string for the user
+@param {String} scheme The authentication scheme
+@return {Object {java.net.PasswordAuthentication}} The username/password, or null if one can't be gotten.
+@throws SecurityException
+        if a security manager exists and its
+        {@code checkPermission} method doesn't allow
+        the password authentication request.
+@see SecurityManager#checkPermission
+@see java.net.NetPermission
+*/
+requestPasswordAuthentication : function(  ) {},
+
+<span id='java-net-Authenticator-method-requestPasswordAuthentication'>/**Ask the authenticator that has been registered with the system
+</span> for a password. This is the preferred method for requesting a password
+ because the hostname can be provided in cases where the InetAddress
+ is not available.
+ &lt;p&gt;
+ First, if there is a security manager, its {@code checkPermission}
+ method is called with a
+ {@code NetPermission(&quot;requestPasswordAuthentication&quot;)} permission.
+ This may result in a java.lang.SecurityException.
+@param {String} host The hostname of the site requesting authentication.
+@param {Object {InetAddress}} addr The InetAddress of the site requesting authentication,
+             or null if not known.
+@param {Number} port the port for the requested connection.
+@param {String} protocol The protocol that's requesting the connection
+          ({@link java.net.Authenticator#getRequestingProtocol()})
+@param {String} prompt A prompt string for the user which identifies the authentication realm.
+@param {String} scheme The authentication scheme
+@return {Object {java.net.PasswordAuthentication}} The username/password, or null if one can't be gotten.
+@throws SecurityException
+        if a security manager exists and its
+        {@code checkPermission} method doesn't allow
+        the password authentication request.
+@see SecurityManager#checkPermission
+@see java.net.NetPermission
+@since 1.4
+*/
+requestPasswordAuthentication : function(  ) {},
+
+<span id='java-net-Authenticator-method-requestPasswordAuthentication'>/**Ask the authenticator that has been registered with the system
+</span> for a password.
+ &lt;p&gt;
+ First, if there is a security manager, its {@code checkPermission}
+ method is called with a
+ {@code NetPermission(&quot;requestPasswordAuthentication&quot;)} permission.
+ This may result in a java.lang.SecurityException.
+@param {String} host The hostname of the site requesting authentication.
+@param {Object {InetAddress}} addr The InetAddress of the site requesting authorization,
+             or null if not known.
+@param {Number} port the port for the requested connection
+@param {String} protocol The protocol that's requesting the connection
+          ({@link java.net.Authenticator#getRequestingProtocol()})
+@param {String} prompt A prompt string for the user
+@param {String} scheme The authentication scheme
+@param {Object {URL}} url The requesting URL that caused the authentication
+@param {Object {Authenticator.RequestorType}} reqType The type (server or proxy) of the entity requesting
+              authentication.
+@return {Object {java.net.PasswordAuthentication}} The username/password, or null if one can't be gotten.
+@throws SecurityException
+        if a security manager exists and its
+        {@code checkPermission} method doesn't allow
+        the password authentication request.
+@see SecurityManager#checkPermission
+@see java.net.NetPermission
+@since 1.5
+*/
+requestPasswordAuthentication : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

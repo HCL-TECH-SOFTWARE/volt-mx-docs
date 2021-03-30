@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-CharBuffer'>/**@class java.nio.CharBuffer
+</span> implements java.lang.Comparable
+
+ implements java.lang.Appendable
+
+ implements java.lang.CharSequence
+
+ implements java.lang.Readable
+
+@extends java.nio.Buffer
+
+ A char buffer.
+
+ &lt;p&gt; This class defines four categories of operations upon
+ char buffers:
+
+ &lt;ul&gt;
+
+   &lt;li&gt;&lt;p&gt; Absolute and relative {@link #get() &lt;i&gt;get&lt;/i&gt;} and
+   {@link #put(char) &lt;i&gt;put&lt;/i&gt;} methods that read and write
+   single chars; &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; Relative {@link #get(char[]) &lt;i&gt;bulk get&lt;/i&gt;}
+   methods that transfer contiguous sequences of chars from this buffer
+   into an array; and&lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; Relative {@link #put(char[]) &lt;i&gt;bulk put&lt;/i&gt;}
+   methods that transfer contiguous sequences of chars from a
+   char array,&amp;#32;a&amp;#32;string, or some other char
+   buffer into this buffer;&amp;#32;and &lt;/p&gt;&lt;/li&gt;
+
+
+   &lt;li&gt;&lt;p&gt; Methods for {@link #compact compacting}, {@link #duplicate duplicating}, and {@link #slice slicing}
+   a char buffer.  &lt;/p&gt;&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ &lt;p&gt; Char buffers can be created either by {@link #allocate
+ &lt;i&gt;allocation&lt;/i&gt;}, which allocates space for the buffer's
+
+
+ content, by {@link #wrap(char[]) &lt;i&gt;wrapping&lt;/i&gt;} an existing
+ char array or&amp;#32;string into a buffer, or by creating a
+ &lt;a href=&quot;ByteBuffer.html#views&quot;&gt;&lt;i&gt;view&lt;/i&gt;&lt;/a&gt; of an existing byte buffer.
+
+
+
+
+ &lt;p&gt; Like a byte buffer, a char buffer is either &lt;a
+ href=&quot;ByteBuffer.html#direct&quot;&gt;&lt;i&gt;direct&lt;/i&gt; or &lt;i&gt;non-direct&lt;/i&gt;&lt;/a&gt;.  A
+ char buffer created via the &lt;tt&gt;wrap&lt;/tt&gt; methods of this class will
+ be non-direct.  A char buffer created as a view of a byte buffer will
+ be direct if, and only if, the byte buffer itself is direct.  Whether or not
+ a char buffer is direct may be determined by invoking the {@link #isDirect isDirect} method.  &lt;/p&gt;
+
+
+
+ &lt;p&gt; This class implements the {@link CharSequence} interface so that
+ character buffers may be used wherever character sequences are accepted, for
+ example in the regular-expression package &lt;tt&gt;{@link java.util.regex}&lt;/tt&gt;.
+ &lt;/p&gt;
+
+
+
+ &lt;p&gt; Methods in this class that do not otherwise have a value to return are
+ specified to return the buffer upon which they are invoked.  This allows
+ method invocations to be chained.
+
+
+ The sequence of statements
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ cb.put(&quot;text/&quot;);
+ cb.put(subtype);
+ cb.put(&quot;; charset=&quot;);
+ cb.put(enc);&lt;/pre&gt;&lt;/blockquote&gt;
+
+ can, for example, be replaced by the single statement
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ cb.put(&quot;text/&quot;).put(subtype).put(&quot;; charset=&quot;).put(enc);&lt;/pre&gt;&lt;/blockquote&gt;
+
+
+
+ @author Mark Reinhold
+ @author JSR-51 Expert Group
+ @since 1.4
+*/
+var CharBuffer = {
+
+<span id='java-nio-CharBuffer-method-allocate'>/**Allocates a new char buffer.
+</span>
+ &lt;p&gt; The new buffer's position will be zero, its limit will be its
+ capacity, its mark will be undefined, and each of its elements will be
+ initialized to zero.  It will have a {@link #array backing array},
+ and its {@link #arrayOffset array offset} will be zero.
+@param {Number} capacity
+         The new buffer's capacity, in chars
+@return {Object {java.nio.CharBuffer}} The new char buffer
+@throws IllegalArgumentException
+          If the &lt;tt&gt;capacity&lt;/tt&gt; is a negative integer
+*/
+allocate : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-wrap'>/**Wraps a char array into a buffer.
+</span>
+ &lt;p&gt; The new buffer will be backed by the given char array;
+ that is, modifications to the buffer will cause the array to be modified
+ and vice versa.  The new buffer's capacity will be
+ &lt;tt&gt;array.length&lt;/tt&gt;, its position will be &lt;tt&gt;offset&lt;/tt&gt;, its limit
+ will be &lt;tt&gt;offset + length&lt;/tt&gt;, and its mark will be undefined.  Its
+ {@link #array backing array} will be the given array, and
+ its {@link #arrayOffset array offset} will be zero.  &lt;/p&gt;
+@param {Object {char[]}} array
+         The array that will back the new buffer
+@param {Number} offset
+         The offset of the subarray to be used; must be non-negative and
+         no larger than &lt;tt&gt;array.length&lt;/tt&gt;.  The new buffer's position
+         will be set to this value.
+@param {Number} length
+         The length of the subarray to be used;
+         must be non-negative and no larger than
+         &lt;tt&gt;array.length - offset&lt;/tt&gt;.
+         The new buffer's limit will be set to &lt;tt&gt;offset + length&lt;/tt&gt;.
+@return {Object {java.nio.CharBuffer}} The new char buffer
+@throws IndexOutOfBoundsException
+          If the preconditions on the &lt;tt&gt;offset&lt;/tt&gt; and &lt;tt&gt;length&lt;/tt&gt;
+          parameters do not hold
+*/
+wrap : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-wrap'>/**Wraps a char array into a buffer.
+</span>
+ &lt;p&gt; The new buffer will be backed by the given char array;
+ that is, modifications to the buffer will cause the array to be modified
+ and vice versa.  The new buffer's capacity and limit will be
+ &lt;tt&gt;array.length&lt;/tt&gt;, its position will be zero, and its mark will be
+ undefined.  Its {@link #array backing array} will be the
+ given array, and its {@link #arrayOffset array offset&gt;} will
+ be zero.  &lt;/p&gt;
+@param {Object {char[]}} array
+         The array that will back this buffer
+@return {Object {java.nio.CharBuffer}} The new char buffer
+*/
+wrap : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-read'>/**Attempts to read characters into the specified character buffer.
+</span> The buffer is used as a repository of characters as-is: the only
+ changes made are the results of a put operation. No flipping or
+ rewinding of the buffer is performed.
+@param {Object {CharBuffer}} target the buffer to read characters into
+@return {Number} The number of characters added to the buffer, or
+         -1 if this source of characters is at its end
+@throws IOException if an I/O error occurs
+@throws NullPointerException if target is null
+@throws ReadOnlyBufferException if target is a read only buffer
+@since 1.5
+*/
+read : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-wrap'>/**Wraps a character sequence into a buffer.
+</span>
+ &lt;p&gt; The content of the new, read-only buffer will be the content of the
+ given character sequence.  The buffer's capacity will be
+ &lt;tt&gt;csq.length()&lt;/tt&gt;, its position will be &lt;tt&gt;start&lt;/tt&gt;, its limit
+ will be &lt;tt&gt;end&lt;/tt&gt;, and its mark will be undefined.  &lt;/p&gt;
+@param {Object {CharSequence}} csq
+         The character sequence from which the new character buffer is to
+         be created
+@param {Number} start
+         The index of the first character to be used;
+         must be non-negative and no larger than &lt;tt&gt;csq.length()&lt;/tt&gt;.
+         The new buffer's position will be set to this value.
+@param {Number} end
+         The index of the character following the last character to be
+         used; must be no smaller than &lt;tt&gt;start&lt;/tt&gt; and no larger
+         than &lt;tt&gt;csq.length()&lt;/tt&gt;.
+         The new buffer's limit will be set to this value.
+@return {Object {java.nio.CharBuffer}} The new character buffer
+@throws IndexOutOfBoundsException
+          If the preconditions on the &lt;tt&gt;start&lt;/tt&gt; and &lt;tt&gt;end&lt;/tt&gt;
+          parameters do not hold
+*/
+wrap : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-wrap'>/**Wraps a character sequence into a buffer.
+</span>
+ &lt;p&gt; The content of the new, read-only buffer will be the content of the
+ given character sequence.  The new buffer's capacity and limit will be
+ &lt;tt&gt;csq.length()&lt;/tt&gt;, its position will be zero, and its mark will be
+ undefined.  &lt;/p&gt;
+@param {Object {CharSequence}} csq
+         The character sequence from which the new character buffer is to
+         be created
+@return {Object {java.nio.CharBuffer}} The new character buffer
+*/
+wrap : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-slice'>/**Creates a new char buffer whose content is a shared subsequence of
+</span> this buffer's content.
+
+ &lt;p&gt; The content of the new buffer will start at this buffer's current
+ position.  Changes to this buffer's content will be visible in the new
+ buffer, and vice versa; the two buffers' position, limit, and mark
+ values will be independent.
+
+ &lt;p&gt; The new buffer's position will be zero, its capacity and its limit
+ will be the number of chars remaining in this buffer, and its mark
+ will be undefined.  The new buffer will be direct if, and only if, this
+ buffer is direct, and it will be read-only if, and only if, this buffer
+ is read-only.  &lt;/p&gt;
+@return {Object {java.nio.CharBuffer}} The new char buffer
+*/
+slice : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-duplicate'>/**Creates a new char buffer that shares this buffer's content.
+</span>
+ &lt;p&gt; The content of the new buffer will be that of this buffer.  Changes
+ to this buffer's content will be visible in the new buffer, and vice
+ versa; the two buffers' position, limit, and mark values will be
+ independent.
+
+ &lt;p&gt; The new buffer's capacity, limit, position, and mark values will be
+ identical to those of this buffer.  The new buffer will be direct if,
+ and only if, this buffer is direct, and it will be read-only if, and
+ only if, this buffer is read-only.  &lt;/p&gt;
+@return {Object {java.nio.CharBuffer}} The new char buffer
+*/
+duplicate : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-asReadOnlyBuffer'>/**Creates a new, read-only char buffer that shares this buffer's
+</span> content.
+
+ &lt;p&gt; The content of the new buffer will be that of this buffer.  Changes
+ to this buffer's content will be visible in the new buffer; the new
+ buffer itself, however, will be read-only and will not allow the shared
+ content to be modified.  The two buffers' position, limit, and mark
+ values will be independent.
+
+ &lt;p&gt; The new buffer's capacity, limit, position, and mark values will be
+ identical to those of this buffer.
+
+ &lt;p&gt; If this buffer is itself read-only then this method behaves in
+ exactly the same way as the {@link #duplicate duplicate} method.  &lt;/p&gt;
+@return {Object {java.nio.CharBuffer}} The new, read-only char buffer
+*/
+asReadOnlyBuffer : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-get'>/**Relative &lt;i&gt;get&lt;/i&gt; method.  Reads the char at this buffer's
+</span> current position, and then increments the position.
+@return {String} The char at the buffer's current position
+@throws BufferUnderflowException
+          If the buffer's current position is not smaller than its limit
+*/
+get : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-put'>/**Relative &lt;i&gt;put&lt;/i&gt; method&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+</span>
+ &lt;p&gt; Writes the given char into this buffer at the current
+ position, and then increments the position. &lt;/p&gt;
+@param {String} c
+         The char to be written
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferOverflowException
+          If this buffer's current position is not smaller than its limit
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+*/
+put : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-get'>/**Absolute &lt;i&gt;get&lt;/i&gt; method.  Reads the char at the given
+</span> index.
+@param {Number} index
+         The index from which the char will be read
+@return {String} The char at the given index
+@throws IndexOutOfBoundsException
+          If &lt;tt&gt;index&lt;/tt&gt; is negative
+          or not smaller than the buffer's limit
+*/
+get : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-put'>/**Absolute &lt;i&gt;put&lt;/i&gt; method&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+</span>
+ &lt;p&gt; Writes the given char into this buffer at the given
+ index. &lt;/p&gt;
+@param {Number} index
+         The index at which the char will be written
+@param {String} c
+         The char value to be written
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws IndexOutOfBoundsException
+          If &lt;tt&gt;index&lt;/tt&gt; is negative
+          or not smaller than the buffer's limit
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+*/
+put : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-get'>/**Relative bulk &lt;i&gt;get&lt;/i&gt; method.
+</span>
+ &lt;p&gt; This method transfers chars from this buffer into the given
+ destination array.  If there are fewer chars remaining in the
+ buffer than are required to satisfy the request, that is, if
+ &lt;tt&gt;length&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;remaining()&lt;/tt&gt;, then no
+ chars are transferred and a {@link java.nio.BufferUnderflowException} is
+ thrown.
+
+ &lt;p&gt; Otherwise, this method copies &lt;tt&gt;length&lt;/tt&gt; chars from this
+ buffer into the given array, starting at the current position of this
+ buffer and at the given offset in the array.  The position of this
+ buffer is then incremented by &lt;tt&gt;length&lt;/tt&gt;.
+
+ &lt;p&gt; In other words, an invocation of this method of the form
+ &lt;tt&gt;src.get(dst,&amp;nbsp;off,&amp;nbsp;len)&lt;/tt&gt; has exactly the same effect as
+ the loop
+
+ &lt;pre&gt;{@code
+     for (int i = off; i &lt; off + len; i++)
+         dst[i] = src.get();
+ }&lt;/pre&gt;
+
+ except that it first checks that there are sufficient chars in
+ this buffer and it is potentially much more efficient.
+@param {Object {char[]}} dst
+         The array into which chars are to be written
+@param {Number} offset
+         The offset within the array of the first char to be
+         written; must be non-negative and no larger than
+         &lt;tt&gt;dst.length&lt;/tt&gt;
+@param {Number} length
+         The maximum number of chars to be written to the given
+         array; must be non-negative and no larger than
+         &lt;tt&gt;dst.length - offset&lt;/tt&gt;
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferUnderflowException
+          If there are fewer than &lt;tt&gt;length&lt;/tt&gt; chars
+          remaining in this buffer
+@throws IndexOutOfBoundsException
+          If the preconditions on the &lt;tt&gt;offset&lt;/tt&gt; and &lt;tt&gt;length&lt;/tt&gt;
+          parameters do not hold
+*/
+get : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-get'>/**Relative bulk &lt;i&gt;get&lt;/i&gt; method.
+</span>
+ &lt;p&gt; This method transfers chars from this buffer into the given
+ destination array.  An invocation of this method of the form
+ &lt;tt&gt;src.get(a)&lt;/tt&gt; behaves in exactly the same way as the invocation
+
+ &lt;pre&gt;
+     src.get(a, 0, a.length) &lt;/pre&gt;
+@param {Object {char[]}} dst
+          The destination array
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferUnderflowException
+          If there are fewer than &lt;tt&gt;length&lt;/tt&gt; chars
+          remaining in this buffer
+*/
+get : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-put'>/**Relative bulk &lt;i&gt;put&lt;/i&gt; method&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+</span>
+ &lt;p&gt; This method transfers the chars remaining in the given source
+ buffer into this buffer.  If there are more chars remaining in the
+ source buffer than in this buffer, that is, if
+ &lt;tt&gt;src.remaining()&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;remaining()&lt;/tt&gt;,
+ then no chars are transferred and a {@link java.nio.BufferOverflowException} is thrown.
+
+ &lt;p&gt; Otherwise, this method copies
+ &lt;i&gt;n&lt;/i&gt;&amp;nbsp;=&amp;nbsp;&lt;tt&gt;src.remaining()&lt;/tt&gt; chars from the given
+ buffer into this buffer, starting at each buffer's current position.
+ The positions of both buffers are then incremented by &lt;i&gt;n&lt;/i&gt;.
+
+ &lt;p&gt; In other words, an invocation of this method of the form
+ &lt;tt&gt;dst.put(src)&lt;/tt&gt; has exactly the same effect as the loop
+
+ &lt;pre&gt;
+     while (src.hasRemaining())
+         dst.put(src.get()); &lt;/pre&gt;
+
+ except that it first checks that there is sufficient space in this
+ buffer and it is potentially much more efficient.
+@param {Object {CharBuffer}} src
+         The source buffer from which chars are to be read;
+         must not be this buffer
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferOverflowException
+          If there is insufficient space in this buffer
+          for the remaining chars in the source buffer
+@throws IllegalArgumentException
+          If the source buffer is this buffer
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+*/
+put : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-put'>/**Relative bulk &lt;i&gt;put&lt;/i&gt; method&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+</span>
+ &lt;p&gt; This method transfers chars into this buffer from the given
+ source array.  If there are more chars to be copied from the array
+ than remain in this buffer, that is, if
+ &lt;tt&gt;length&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;remaining()&lt;/tt&gt;, then no
+ chars are transferred and a {@link java.nio.BufferOverflowException} is
+ thrown.
+
+ &lt;p&gt; Otherwise, this method copies &lt;tt&gt;length&lt;/tt&gt; chars from the
+ given array into this buffer, starting at the given offset in the array
+ and at the current position of this buffer.  The position of this buffer
+ is then incremented by &lt;tt&gt;length&lt;/tt&gt;.
+
+ &lt;p&gt; In other words, an invocation of this method of the form
+ &lt;tt&gt;dst.put(src,&amp;nbsp;off,&amp;nbsp;len)&lt;/tt&gt; has exactly the same effect as
+ the loop
+
+ &lt;pre&gt;{@code
+     for (int i = off; i &lt; off + len; i++)
+         dst.put(a[i]);
+ }&lt;/pre&gt;
+
+ except that it first checks that there is sufficient space in this
+ buffer and it is potentially much more efficient.
+@param {Object {char[]}} src
+         The array from which chars are to be read
+@param {Number} offset
+         The offset within the array of the first char to be read;
+         must be non-negative and no larger than &lt;tt&gt;array.length&lt;/tt&gt;
+@param {Number} length
+         The number of chars to be read from the given array;
+         must be non-negative and no larger than
+         &lt;tt&gt;array.length - offset&lt;/tt&gt;
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferOverflowException
+          If there is insufficient space in this buffer
+@throws IndexOutOfBoundsException
+          If the preconditions on the &lt;tt&gt;offset&lt;/tt&gt; and &lt;tt&gt;length&lt;/tt&gt;
+          parameters do not hold
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+*/
+put : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-put'>/**Relative bulk &lt;i&gt;put&lt;/i&gt; method&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+</span>
+ &lt;p&gt; This method transfers the entire content of the given source
+ char array into this buffer.  An invocation of this method of the
+ form &lt;tt&gt;dst.put(a)&lt;/tt&gt; behaves in exactly the same way as the
+ invocation
+
+ &lt;pre&gt;
+     dst.put(a, 0, a.length) &lt;/pre&gt;
+@param {Object {char[]}} src
+          The source array
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferOverflowException
+          If there is insufficient space in this buffer
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+*/
+put : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-put'>/**Relative bulk &lt;i&gt;put&lt;/i&gt; method&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+</span>
+ &lt;p&gt; This method transfers chars from the given string into this
+ buffer.  If there are more chars to be copied from the string than
+ remain in this buffer, that is, if
+ &lt;tt&gt;end&amp;nbsp;-&amp;nbsp;start&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;remaining()&lt;/tt&gt;,
+ then no chars are transferred and a {@link java.nio.BufferOverflowException} is thrown.
+
+ &lt;p&gt; Otherwise, this method copies
+ &lt;i&gt;n&lt;/i&gt;&amp;nbsp;=&amp;nbsp;&lt;tt&gt;end&lt;/tt&gt;&amp;nbsp;-&amp;nbsp;&lt;tt&gt;start&lt;/tt&gt; chars
+ from the given string into this buffer, starting at the given
+ &lt;tt&gt;start&lt;/tt&gt; index and at the current position of this buffer.  The
+ position of this buffer is then incremented by &lt;i&gt;n&lt;/i&gt;.
+
+ &lt;p&gt; In other words, an invocation of this method of the form
+ &lt;tt&gt;dst.put(src,&amp;nbsp;start,&amp;nbsp;end)&lt;/tt&gt; has exactly the same effect
+ as the loop
+
+ &lt;pre&gt;{@code
+     for (int i = start; i &lt; end; i++)
+         dst.put(src.charAt(i));
+ }&lt;/pre&gt;
+
+ except that it first checks that there is sufficient space in this
+ buffer and it is potentially much more efficient.
+@param {String} src
+         The string from which chars are to be read
+@param {Number} start
+         The offset within the string of the first char to be read;
+         must be non-negative and no larger than
+         &lt;tt&gt;string.length()&lt;/tt&gt;
+@param {Number} end
+         The offset within the string of the last char to be read,
+         plus one; must be non-negative and no larger than
+         &lt;tt&gt;string.length()&lt;/tt&gt;
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferOverflowException
+          If there is insufficient space in this buffer
+@throws IndexOutOfBoundsException
+          If the preconditions on the &lt;tt&gt;start&lt;/tt&gt; and &lt;tt&gt;end&lt;/tt&gt;
+          parameters do not hold
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+*/
+put : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-put'>/**Relative bulk &lt;i&gt;put&lt;/i&gt; method&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+</span>
+ &lt;p&gt; This method transfers the entire content of the given source string
+ into this buffer.  An invocation of this method of the form
+ &lt;tt&gt;dst.put(s)&lt;/tt&gt; behaves in exactly the same way as the invocation
+
+ &lt;pre&gt;
+     dst.put(s, 0, s.length()) &lt;/pre&gt;
+@param {String} src
+          The source string
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferOverflowException
+          If there is insufficient space in this buffer
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+*/
+put : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-hasArray'>/**Tells whether or not this buffer is backed by an accessible char
+</span> array.
+
+ &lt;p&gt; If this method returns &lt;tt&gt;true&lt;/tt&gt; then the {@link #array() array}
+ and {@link #arrayOffset() arrayOffset} methods may safely be invoked.
+ &lt;/p&gt;
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if, and only if, this buffer
+          is backed by an array and is not read-only
+*/
+hasArray : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-array'>/**Returns the char array that backs this
+</span> buffer&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+
+ &lt;p&gt; Modifications to this buffer's content will cause the returned
+ array's content to be modified, and vice versa.
+
+ &lt;p&gt; Invoke the {@link #hasArray hasArray} method before invoking this
+ method in order to ensure that this buffer has an accessible backing
+ array.  &lt;/p&gt;
+@return {String} The array that backs this buffer
+@throws ReadOnlyBufferException
+          If this buffer is backed by an array but is read-only
+@throws UnsupportedOperationException
+          If this buffer is not backed by an accessible array
+*/
+array : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-arrayOffset'>/**Returns the offset within this buffer's backing array of the first
+</span> element of the buffer&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+
+ &lt;p&gt; If this buffer is backed by an array then buffer position &lt;i&gt;p&lt;/i&gt;
+ corresponds to array index &lt;i&gt;p&lt;/i&gt;&amp;nbsp;+&amp;nbsp;&lt;tt&gt;arrayOffset()&lt;/tt&gt;.
+
+ &lt;p&gt; Invoke the {@link #hasArray hasArray} method before invoking this
+ method in order to ensure that this buffer has an accessible backing
+ array.  &lt;/p&gt;
+@return {Number} The offset within this buffer's array
+          of the first element of the buffer
+@throws ReadOnlyBufferException
+          If this buffer is backed by an array but is read-only
+@throws UnsupportedOperationException
+          If this buffer is not backed by an accessible array
+*/
+arrayOffset : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-position'>/**
+</span>*/
+position : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-limit'>/**
+</span>*/
+limit : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-mark'>/**
+</span>*/
+mark : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-reset'>/**
+</span>*/
+reset : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-clear'>/**
+</span>*/
+clear : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-flip'>/**
+</span>*/
+flip : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-rewind'>/**
+</span>*/
+rewind : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-compact'>/**Compacts this buffer&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+</span>
+ &lt;p&gt; The chars between the buffer's current position and its limit,
+ if any, are copied to the beginning of the buffer.  That is, the
+ char at index &lt;i&gt;p&lt;/i&gt;&amp;nbsp;=&amp;nbsp;&lt;tt&gt;position()&lt;/tt&gt; is copied
+ to index zero, the char at index &lt;i&gt;p&lt;/i&gt;&amp;nbsp;+&amp;nbsp;1 is copied
+ to index one, and so forth until the char at index
+ &lt;tt&gt;limit()&lt;/tt&gt;&amp;nbsp;-&amp;nbsp;1 is copied to index
+ &lt;i&gt;n&lt;/i&gt;&amp;nbsp;=&amp;nbsp;&lt;tt&gt;limit()&lt;/tt&gt;&amp;nbsp;-&amp;nbsp;&lt;tt&gt;1&lt;/tt&gt;&amp;nbsp;-&amp;nbsp;&lt;i&gt;p&lt;/i&gt;.
+ The buffer's position is then set to &lt;i&gt;n+1&lt;/i&gt; and its limit is set to
+ its capacity.  The mark, if defined, is discarded.
+
+ &lt;p&gt; The buffer's position is set to the number of chars copied,
+ rather than to zero, so that an invocation of this method can be
+ followed immediately by an invocation of another relative &lt;i&gt;put&lt;/i&gt;
+ method. &lt;/p&gt;
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+*/
+compact : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-isDirect'>/**Tells whether or not this char buffer is direct.
+</span>@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if, and only if, this buffer is direct
+*/
+isDirect : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-hashCode'>/**Returns the current hash code of this buffer.
+</span>
+ &lt;p&gt; The hash code of a char buffer depends only upon its remaining
+ elements; that is, upon the elements from &lt;tt&gt;position()&lt;/tt&gt; up to, and
+ including, the element at &lt;tt&gt;limit()&lt;/tt&gt;&amp;nbsp;-&amp;nbsp;&lt;tt&gt;1&lt;/tt&gt;.
+
+ &lt;p&gt; Because buffer hash codes are content-dependent, it is inadvisable
+ to use buffers as keys in hash maps or similar data structures unless it
+ is known that their contents will not change.  &lt;/p&gt;
+@return {Number} The current hash code of this buffer
+*/
+hashCode : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-equals'>/**Tells whether or not this buffer is equal to another object.
+</span>
+ &lt;p&gt; Two char buffers are equal if, and only if,
+
+ &lt;ol&gt;
+
+   &lt;li&gt;&lt;p&gt; They have the same element type,  &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; They have the same number of remaining elements, and
+   &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; The two sequences of remaining elements, considered
+   independently of their starting positions, are pointwise equal.
+
+
+
+
+
+
+
+   &lt;/p&gt;&lt;/li&gt;
+
+ &lt;/ol&gt;
+
+ &lt;p&gt; A char buffer is not equal to any other type of object.  &lt;/p&gt;
+@param {Object {Object}} ob  The object to which this buffer is to be compared
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if, and only if, this buffer is equal to the
+           given object
+*/
+equals : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-compareTo'>/**Compares this buffer to another.
+</span>
+ &lt;p&gt; Two char buffers are compared by comparing their sequences of
+ remaining elements lexicographically, without regard to the starting
+ position of each sequence within its corresponding buffer.
+
+
+
+
+
+
+
+
+ Pairs of {@code char} elements are compared as if by invoking
+ {@link Character#compare(char,char)}.
+
+
+ &lt;p&gt; A char buffer is not comparable to any other type of object.
+@return {Number} A negative integer, zero, or a positive integer as this buffer
+          is less than, equal to, or greater than the given buffer
+*/
+compareTo : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-toString'>/**Returns a string containing the characters in this buffer.
+</span>
+ &lt;p&gt; The first character of the resulting string will be the character at
+ this buffer's position, while the last character will be the character
+ at index &lt;tt&gt;limit()&lt;/tt&gt;&amp;nbsp;-&amp;nbsp;1.  Invoking this method does not
+ change the buffer's position. &lt;/p&gt;
+@return {String} The specified string
+*/
+toString : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-length'>/**Returns the length of this character buffer.
+</span>
+ &lt;p&gt; When viewed as a character sequence, the length of a character
+ buffer is simply the number of characters between the position
+ (inclusive) and the limit (exclusive); that is, it is equivalent to
+ &lt;tt&gt;remaining()&lt;/tt&gt;. &lt;/p&gt;
+@return {Number} The length of this character buffer
+*/
+length : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-charAt'>/**Reads the character at the given index relative to the current
+</span> position.
+@param {Number} index
+         The index of the character to be read, relative to the position;
+         must be non-negative and smaller than &lt;tt&gt;remaining()&lt;/tt&gt;
+@return {String} The character at index
+          &lt;tt&gt;position()&amp;nbsp;+&amp;nbsp;index&lt;/tt&gt;
+@throws IndexOutOfBoundsException
+          If the preconditions on &lt;tt&gt;index&lt;/tt&gt; do not hold
+*/
+charAt : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-subSequence'>/**Creates a new character buffer that represents the specified subsequence
+</span> of this buffer, relative to the current position.
+
+ &lt;p&gt; The new buffer will share this buffer's content; that is, if the
+ content of this buffer is mutable then modifications to one buffer will
+ cause the other to be modified.  The new buffer's capacity will be that
+ of this buffer, its position will be
+ &lt;tt&gt;position()&lt;/tt&gt;&amp;nbsp;+&amp;nbsp;&lt;tt&gt;start&lt;/tt&gt;, and its limit will be
+ &lt;tt&gt;position()&lt;/tt&gt;&amp;nbsp;+&amp;nbsp;&lt;tt&gt;end&lt;/tt&gt;.  The new buffer will be
+ direct if, and only if, this buffer is direct, and it will be read-only
+ if, and only if, this buffer is read-only.  &lt;/p&gt;
+@param {Number} start
+         The index, relative to the current position, of the first
+         character in the subsequence; must be non-negative and no larger
+         than &lt;tt&gt;remaining()&lt;/tt&gt;
+@param {Number} end
+         The index, relative to the current position, of the character
+         following the last character in the subsequence; must be no
+         smaller than &lt;tt&gt;start&lt;/tt&gt; and no larger than
+         &lt;tt&gt;remaining()&lt;/tt&gt;
+@return {Object {java.nio.CharBuffer}} The new character buffer
+@throws IndexOutOfBoundsException
+          If the preconditions on &lt;tt&gt;start&lt;/tt&gt; and &lt;tt&gt;end&lt;/tt&gt;
+          do not hold
+*/
+subSequence : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-append'>/**Appends the specified character sequence  to this
+</span> buffer&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+
+ &lt;p&gt; An invocation of this method of the form &lt;tt&gt;dst.append(csq)&lt;/tt&gt;
+ behaves in exactly the same way as the invocation
+
+ &lt;pre&gt;
+     dst.put(csq.toString()) &lt;/pre&gt;
+
+ &lt;p&gt; Depending on the specification of &lt;tt&gt;toString&lt;/tt&gt; for the
+ character sequence &lt;tt&gt;csq&lt;/tt&gt;, the entire sequence may not be
+ appended.  For instance, invoking the {@link java.nio.CharBuffer#toString()
+ toString} method of a character buffer will return a subsequence whose
+ content depends upon the buffer's position and limit.
+@param {Object {CharSequence}} csq
+         The character sequence to append.  If &lt;tt&gt;csq&lt;/tt&gt; is
+         &lt;tt&gt;null&lt;/tt&gt;, then the four characters &lt;tt&gt;&quot;null&quot;&lt;/tt&gt; are
+         appended to this character buffer.
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferOverflowException
+          If there is insufficient space in this buffer
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+@since 1.5
+*/
+append : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-append'>/**Appends a subsequence of the  specified character sequence  to this
+</span> buffer&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+
+ &lt;p&gt; An invocation of this method of the form &lt;tt&gt;dst.append(csq, start,
+ end)&lt;/tt&gt; when &lt;tt&gt;csq&lt;/tt&gt; is not &lt;tt&gt;null&lt;/tt&gt;, behaves in exactly the
+ same way as the invocation
+
+ &lt;pre&gt;
+     dst.put(csq.subSequence(start, end).toString()) &lt;/pre&gt;
+@param {Object {CharSequence}} csq
+         The character sequence from which a subsequence will be
+         appended.  If &lt;tt&gt;csq&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;, then characters
+         will be appended as if &lt;tt&gt;csq&lt;/tt&gt; contained the four
+         characters &lt;tt&gt;&quot;null&quot;&lt;/tt&gt;.
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferOverflowException
+          If there is insufficient space in this buffer
+@throws IndexOutOfBoundsException
+          If &lt;tt&gt;start&lt;/tt&gt; or &lt;tt&gt;end&lt;/tt&gt; are negative, &lt;tt&gt;start&lt;/tt&gt;
+          is greater than &lt;tt&gt;end&lt;/tt&gt;, or &lt;tt&gt;end&lt;/tt&gt; is greater than
+          &lt;tt&gt;csq.length()&lt;/tt&gt;
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+@since 1.5
+*/
+append : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-append'>/**Appends the specified char  to this
+</span> buffer&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+
+ &lt;p&gt; An invocation of this method of the form &lt;tt&gt;dst.append(c)&lt;/tt&gt;
+ behaves in exactly the same way as the invocation
+
+ &lt;pre&gt;
+     dst.put(c) &lt;/pre&gt;
+@param {String} c
+         The 16-bit char to append
+@return {Object {java.nio.CharBuffer}} This buffer
+@throws BufferOverflowException
+          If there is insufficient space in this buffer
+@throws ReadOnlyBufferException
+          If this buffer is read-only
+@since 1.5
+*/
+append : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-order'>/**Retrieves this buffer's byte order.
+</span>
+ &lt;p&gt; The byte order of a char buffer created by allocation or by
+ wrapping an existing &lt;tt&gt;char&lt;/tt&gt; array is the {@link java.nio.ByteOrder#nativeOrder native order} of the underlying
+ hardware.  The byte order of a char buffer created as a &lt;a
+ href=&quot;ByteBuffer.html#views&quot;&gt;view&lt;/a&gt; of a byte buffer is that of the
+ byte buffer at the moment that the view is created.  &lt;/p&gt;
+@return {Object {java.nio.ByteOrder}} This buffer's byte order
+*/
+order : function(  ) {},
+
+<span id='java-nio-CharBuffer-method-chars'>/**
+</span>*/
+chars : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

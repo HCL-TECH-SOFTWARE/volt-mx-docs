@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiLastResortWatchdog'>/**@class com.android.server.wifi.WifiLastResortWatchdog
+</span>@extends java.lang.Object
+
+ This Class is a Work-In-Progress, intended behavior is as follows:
+ Essentially this class automates a user toggling 'Airplane Mode' when WiFi &quot;won't work&quot;.
+ IF each available saved network has failed connecting more times than the FAILURE_THRESHOLD
+ THEN Watchdog will restart Supplicant, wifi driver and return ClientModeImpl to InitialState.
+*/
+var WifiLastResortWatchdog = {
+
+<span id='com-android-server-wifi-WifiLastResortWatchdog-property-FAILURE_CODE_ASSOCIATION'>/** Association Failure code
+</span>*/
+FAILURE_CODE_ASSOCIATION : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiLastResortWatchdog-property-FAILURE_CODE_AUTHENTICATION'>/** Authentication Failure code
+</span>*/
+FAILURE_CODE_AUTHENTICATION : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiLastResortWatchdog-property-FAILURE_CODE_DHCP'>/** Dhcp Failure code
+</span>*/
+FAILURE_CODE_DHCP : &quot;3&quot;,
+<span id='com-android-server-wifi-WifiLastResortWatchdog-property-MAX_BSSID_AGE'>/** Maximum number of scan results received since we last saw a BSSID.
+</span> If it is not seen before this limit is reached, the network is culled
+*/
+MAX_BSSID_AGE : &quot;10&quot;,
+<span id='com-android-server-wifi-WifiLastResortWatchdog-property-BSSID_ANY'>/** BSSID used to increment failure counts against ALL bssids associated with a particular SSID
+</span>*/
+BSSID_ANY : &quot;any&quot;,
+<span id='com-android-server-wifi-WifiLastResortWatchdog-property-FAILURE_THRESHOLD'>/** Failure count that each available networks must meet to possibly trigger the Watchdog
+</span>*/
+FAILURE_THRESHOLD : &quot;7&quot;,
+<span id='com-android-server-wifi-WifiLastResortWatchdog-property-BUGREPORT_TITLE'>/***/
+</span>BUGREPORT_TITLE : &quot;Wifi watchdog triggered&quot;,
+<span id='com-android-server-wifi-WifiLastResortWatchdog-property-PROB_TAKE_BUGREPORT_DEFAULT'>/***/
+</span>PROB_TAKE_BUGREPORT_DEFAULT : &quot;1.0&quot;,
+<span id='com-android-server-wifi-WifiLastResortWatchdog-property-LAST_TRIGGER_TIMEOUT_MILLIS'>/***/
+</span>LAST_TRIGGER_TIMEOUT_MILLIS : &quot;7200000&quot;,
+<span id='com-android-server-wifi-WifiLastResortWatchdog-method-updateAvailableNetworks'>/**Refreshes recentAvailableNetworks with the latest available networks
+</span> Adds new networks, removes old ones that have timed out. Should be called after Wifi
+ framework decides what networks it is potentially connecting to.
+@param {Object {java.util.List}} availableNetworks ScanDetail &amp; Config list of potential connection
+ candidates
+*/
+updateAvailableNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLastResortWatchdog-method-noteConnectionFailureAndTriggerIfNeeded'>/**Increments the failure reason count for the given bssid. Performs a check to see if we have
+</span> exceeded a failure threshold for all available networks, and executes the last resort restart
+@param {String} bssid of the network that has failed connection, can be &quot;any&quot;
+@param {String} reason Message id from ClientModeImpl for this failure
+@return {Boolean} true if watchdog triggers, returned for test visibility
+*/
+noteConnectionFailureAndTriggerIfNeeded : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLastResortWatchdog-method-connectedStateTransition'>/**Handles transitions entering and exiting ClientModeImpl ConnectedState
+</span> Used to track wifistate, and perform watchdog count resetting
+@param {Boolean} isEntering true if called from ConnectedState.enter(), false for exit()
+*/
+connectedStateTransition : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLastResortWatchdog-method-shouldIgnoreBssidUpdate'>/**Helper function to check if we should ignore BSSID update.
+</span>@param {String} bssid BSSID of the access point
+@return {Boolean} true if we should ignore BSSID update
+*/
+shouldIgnoreBssidUpdate : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLastResortWatchdog-method-shouldIgnoreSsidUpdate'>/**Helper function to check if we should ignore SSID update.
+</span>@return {Boolean} true if should ignore SSID update
+*/
+shouldIgnoreSsidUpdate : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLastResortWatchdog-method-clearAllFailureCounts'>/**Clear failure counts for each network in recentAvailableNetworks
+</span>*/
+clearAllFailureCounts : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLastResortWatchdog-method-toString'>/**Prints all networks &amp; counts within mRecentAvailableNetworks to string
+</span>*/
+toString : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLastResortWatchdog-method-isOverFailureThreshold'>/**
+</span>@param {String} bssid bssid to check the failures for
+@return {Boolean} true if sum of failure count is over FAILURE_THRESHOLD
+*/
+isOverFailureThreshold : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLastResortWatchdog-method-getFailureCount'>/**Get the failure count for a specific bssid. This actually checks the ssid attached to the
+</span> BSSID and returns the SSID count
+@param {String} reason failure reason to get count for
+*/
+getFailureCount : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLastResortWatchdog-method-dump'>/**Dump the local log buffer and other internal state of WifiLastResortWatchdog.
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

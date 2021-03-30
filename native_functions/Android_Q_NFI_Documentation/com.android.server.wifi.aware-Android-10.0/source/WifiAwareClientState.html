@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-aware-WifiAwareClientState'>/**@class com.android.server.wifi.aware.WifiAwareClientState
+</span>@extends java.lang.Object
+
+ Manages the service-side Aware state of an individual &quot;client&quot;. A client
+ corresponds to a single instantiation of the WifiAwareManager - there could be
+ multiple ones per UID/process (each of which is a separate client with its
+ own session namespace). The client state is primarily: (1) callback (a
+ singleton per client) through which Aware-wide events are called, and (2) a set
+ of discovery sessions (publish and/or subscribe) which are created through
+ this client and whose lifetime is tied to the lifetime of the client.
+*/
+var WifiAwareClientState = {
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-destroy'>/**Destroy the current client - corresponds to a disconnect() request from
+</span> the client. Destroys all discovery sessions belonging to this client.
+*/
+destroy : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-getConfigRequest'>/**
+</span>*/
+getConfigRequest : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-getClientId'>/**
+</span>*/
+getClientId : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-getUid'>/**
+</span>*/
+getUid : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-getCallingPackage'>/**
+</span>*/
+getCallingPackage : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-getNotifyIdentityChange'>/**
+</span>*/
+getNotifyIdentityChange : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-getCreationTime'>/**
+</span>*/
+getCreationTime : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-getSessions'>/**
+</span>*/
+getSessions : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-getAwareSessionStateForPubSubId'>/**Searches the discovery sessions of this client and returns the one
+</span> corresponding to the publish/subscribe ID. Used on callbacks from HAL to
+ map callbacks to the correct discovery session.
+@param {Number} pubSubId The publish/subscribe match session ID.
+@return {Object {com.android.server.wifi.aware.WifiAwareDiscoverySessionState}} Aware session corresponding to the requested ID.
+*/
+getAwareSessionStateForPubSubId : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-addSession'>/**Add the session to the client database.
+</span>@param {Object {WifiAwareDiscoverySessionState}} session Session to be added.
+*/
+addSession : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-removeSession'>/**Remove the specified session from the client database - without doing a
+</span> terminate on the session. The assumption is that it is already
+ terminated.
+@param {Number} sessionId The session ID of the session to be removed.
+*/
+removeSession : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-terminateSession'>/**Destroy the discovery session: terminates discovery and frees up
+</span> resources.
+@param {Number} sessionId The session ID of the session to be destroyed.
+*/
+terminateSession : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-getSession'>/**Retrieve a session.
+</span>@param {Number} sessionId Session ID of the session to be retrieved.
+@return {Object {com.android.server.wifi.aware.WifiAwareDiscoverySessionState}} Session or null if there's no session corresponding to the
+         sessionId.
+*/
+getSession : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-onInterfaceAddressChange'>/**Called to dispatch the Aware interface address change to the client - as an
+</span> identity change (interface address information not propagated to client -
+ privacy concerns).
+@param {Object {byte[]}} mac The new MAC address of the discovery interface - optionally propagated to the
+            client.
+*/
+onInterfaceAddressChange : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-onClusterChange'>/**Called to dispatch the Aware cluster change (due to joining of a new
+</span> cluster or starting a cluster) to the client - as an identity change
+ (interface address information not propagated to client - privacy
+ concerns). Dispatched if the client registered for the identity changed
+ event.
+@param {Number} mac The cluster ID of the cluster started or joined.
+@param {Object {byte[]}} currentDiscoveryInterfaceMac The MAC address of the discovery interface.
+*/
+onClusterChange : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareClientState-method-dump'>/**Dump the internal state of the class.
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

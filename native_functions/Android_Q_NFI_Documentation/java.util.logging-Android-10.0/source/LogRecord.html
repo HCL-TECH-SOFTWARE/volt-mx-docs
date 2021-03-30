@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-logging-LogRecord'>/**@class java.util.logging.LogRecord
+</span> implements java.io.Serializable
+
+@extends java.lang.Object
+
+ LogRecord objects are used to pass logging requests between
+ the logging framework and individual log Handlers.
+ &lt;p&gt;
+ When a LogRecord is passed into the logging framework it
+ logically belongs to the framework and should no longer be
+ used or updated by the client application.
+ &lt;p&gt;
+ Note that if the client application has not specified an
+ explicit source method name and source class name, then the
+ LogRecord class will infer them automatically when they are
+ first accessed (due to a call on getSourceMethodName or
+ getSourceClassName) by analyzing the call stack.  Therefore,
+ if a logging Handler wants to pass off a LogRecord to another
+ thread, or to transmit it over RMI, and if it wishes to subsequently
+ obtain method name or class name information it should call
+ one of getSourceClassName or getSourceMethodName to force
+ the values to be filled in.
+ &lt;p&gt;
+ &lt;b&gt; Serialization notes:&lt;/b&gt;
+ &lt;ul&gt;
+ &lt;li&gt;The LogRecord class is serializable.
+
+ &lt;li&gt; Because objects in the parameters array may not be serializable,
+ during serialization all objects in the parameters array are
+ written as the corresponding Strings (using Object.toString).
+
+ &lt;li&gt; The ResourceBundle is not transmitted as part of the serialized
+ form, but the resource bundle name is, and the recipient object's
+ readObject method will attempt to locate a suitable resource bundle.
+
+ &lt;/ul&gt;
+
+ @since 1.4
+*/
+var LogRecord = {
+
+<span id='java-util-logging-LogRecord-method-getLoggerName'>/**Get the source Logger's name.
+</span>@return {String} source logger name (may be null)
+*/
+getLoggerName : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setLoggerName'>/**Set the source Logger's name.
+</span>@param {String} name   the source logger name (may be null)
+*/
+setLoggerName : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getResourceBundle'>/**Get the localization resource bundle
+</span> &lt;p&gt;
+ This is the ResourceBundle that should be used to localize
+ the message string before formatting it.  The result may
+ be null if the message is not localizable, or if no suitable
+ ResourceBundle is available.
+@return {Object {java.util.ResourceBundle}} the localization resource bundle
+*/
+getResourceBundle : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setResourceBundle'>/**Set the localization resource bundle.
+</span>@param {Object {ResourceBundle}} bundle  localization bundle (may be null)
+*/
+setResourceBundle : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getResourceBundleName'>/**Get the localization resource bundle name
+</span> &lt;p&gt;
+ This is the name for the ResourceBundle that should be
+ used to localize the message string before formatting it.
+ The result may be null if the message is not localizable.
+@return {String} the localization resource bundle name
+*/
+getResourceBundleName : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setResourceBundleName'>/**Set the localization resource bundle name.
+</span>@param {String} name  localization bundle name (may be null)
+*/
+setResourceBundleName : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getLevel'>/**Get the logging message level, for example Level.SEVERE.
+</span>@return {Object {java.util.logging.Level}} the logging message level
+*/
+getLevel : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setLevel'>/**Set the logging message level, for example Level.SEVERE.
+</span>@param {Object {Level}} level the logging message level
+*/
+setLevel : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getSequenceNumber'>/**Get the sequence number.
+</span> &lt;p&gt;
+ Sequence numbers are normally assigned in the LogRecord
+ constructor, which assigns unique sequence numbers to
+ each new LogRecord in increasing order.
+@return {Number} the sequence number
+*/
+getSequenceNumber : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setSequenceNumber'>/**Set the sequence number.
+</span> &lt;p&gt;
+ Sequence numbers are normally assigned in the LogRecord constructor,
+ so it should not normally be necessary to use this method.
+@param {Number} seq the sequence number
+*/
+setSequenceNumber : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getSourceClassName'>/**Get the  name of the class that (allegedly) issued the logging request.
+</span> &lt;p&gt;
+ Note that this sourceClassName is not verified and may be spoofed.
+ This information may either have been provided as part of the
+ logging call, or it may have been inferred automatically by the
+ logging framework.  In the latter case, the information may only
+ be approximate and may in fact describe an earlier call on the
+ stack frame.
+ &lt;p&gt;
+ May be null if no information could be obtained.
+@return {String} the source class name
+*/
+getSourceClassName : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setSourceClassName'>/**Set the name of the class that (allegedly) issued the logging request.
+</span>@param {String} sourceClassName the source class name (may be null)
+*/
+setSourceClassName : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getSourceMethodName'>/**Get the  name of the method that (allegedly) issued the logging request.
+</span> &lt;p&gt;
+ Note that this sourceMethodName is not verified and may be spoofed.
+ This information may either have been provided as part of the
+ logging call, or it may have been inferred automatically by the
+ logging framework.  In the latter case, the information may only
+ be approximate and may in fact describe an earlier call on the
+ stack frame.
+ &lt;p&gt;
+ May be null if no information could be obtained.
+@return {String} the source method name
+*/
+getSourceMethodName : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setSourceMethodName'>/**Set the name of the method that (allegedly) issued the logging request.
+</span>@param {String} sourceMethodName the source method name (may be null)
+*/
+setSourceMethodName : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getMessage'>/**Get the &quot;raw&quot; log message, before localization or formatting.
+</span> &lt;p&gt;
+ May be null, which is equivalent to the empty string &quot;&quot;.
+ &lt;p&gt;
+ This message may be either the final text or a localization key.
+ &lt;p&gt;
+ During formatting, if the source logger has a localization
+ ResourceBundle and if that ResourceBundle has an entry for
+ this message string, then the message string is replaced
+ with the localized value.
+@return {String} the raw message string
+*/
+getMessage : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setMessage'>/**Set the &quot;raw&quot; log message, before localization or formatting.
+</span>@param {String} message the raw message string (may be null)
+*/
+setMessage : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getParameters'>/**Get the parameters to the log message.
+</span>@return {Object {java.lang.Object}} the log message parameters.  May be null if
+                  there are no parameters.
+*/
+getParameters : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setParameters'>/**Set the parameters to the log message.
+</span>@param {Object {java.lang.Object[]}} parameters the log message parameters. (may be null)
+*/
+setParameters : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getThreadID'>/**Get an identifier for the thread where the message originated.
+</span> &lt;p&gt;
+ This is a thread identifier within the Java VM and may or
+ may not map to any operating system ID.
+@return {Number} thread ID
+*/
+getThreadID : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setThreadID'>/**Set an identifier for the thread where the message originated.
+</span>@param {Number} threadID  the thread ID
+*/
+setThreadID : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getMillis'>/**Get event time in milliseconds since 1970.
+</span>@return {Number} event time in millis since 1970
+*/
+getMillis : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setMillis'>/**Set event time.
+</span>@param {Number} millis event time in millis since 1970
+*/
+setMillis : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-getThrown'>/**Get any throwable associated with the log record.
+</span> &lt;p&gt;
+ If the event involved an exception, this will be the
+ exception object. Otherwise null.
+@return {Object {java.lang.Throwable}} a throwable
+*/
+getThrown : function(  ) {},
+
+<span id='java-util-logging-LogRecord-method-setThrown'>/**Set a throwable associated with the log event.
+</span>@param {Object {Throwable}} thrown  a throwable (may be null)
+*/
+setThrown : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

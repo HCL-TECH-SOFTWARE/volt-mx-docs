@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-AlgorithmConstraints'>/**@class java.security.AlgorithmConstraints
+</span> This interface specifies constraints for cryptographic algorithms,
+ keys (key sizes), and other algorithm parameters.
+ &lt;p&gt;
+ {@code AlgorithmConstraints} objects are immutable.  An implementation
+ of this interface should not provide methods that can change the state
+ of an instance once it has been created.
+ &lt;p&gt;
+ Note that {@code AlgorithmConstraints} can be used to represent the
+ restrictions described by the security properties
+ {@code jdk.certpath.disabledAlgorithms} and
+ {@code jdk.tls.disabledAlgorithms}, or could be used by a
+ concrete {@code PKIXCertPathChecker} to check whether a specified
+ certificate in the certification path contains the required algorithm
+ constraints.
+
+ @see javax.net.ssl.SSLParameters#getAlgorithmConstraints
+ @see javax.net.ssl.SSLParameters#setAlgorithmConstraints(AlgorithmConstraints)
+
+ @since 1.7
+*/
+var AlgorithmConstraints = {
+
+<span id='java-security-AlgorithmConstraints-method-permits'>/**Determines whether an algorithm is granted permission for the
+</span> specified cryptographic primitives.
+@param {Object {java.util.Set}} primitives a set of cryptographic primitives
+@param {String} algorithm the algorithm name
+@param {Object {AlgorithmParameters}} parameters the algorithm parameters, or null if no additional
+     parameters
+@return {Boolean} true if the algorithm is permitted and can be used for all
+     of the specified cryptographic primitives
+@throws IllegalArgumentException if primitives or algorithm is null
+     or empty
+*/
+permits : function(  ) {},
+
+<span id='java-security-AlgorithmConstraints-method-permits'>/**Determines whether a key is granted permission for the specified
+</span> cryptographic primitives.
+ &lt;p&gt;
+ This method is usually used to check key size and key usage.
+@param {Object {java.util.Set}} primitives a set of cryptographic primitives
+@param {Object {Key}} key the key
+@return {Boolean} true if the key can be used for all of the specified
+     cryptographic primitives
+@throws IllegalArgumentException if primitives is null or empty,
+     or the key is null
+*/
+permits : function(  ) {},
+
+<span id='java-security-AlgorithmConstraints-method-permits'>/**Determines whether an algorithm and the corresponding key are granted
+</span> permission for the specified cryptographic primitives.
+@param {Object {java.util.Set}} primitives a set of cryptographic primitives
+@param {String} algorithm the algorithm name
+@param {Object {Key}} key the key
+@param {Object {AlgorithmParameters}} parameters the algorithm parameters, or null if no additional
+     parameters
+@return {Boolean} true if the key and the algorithm can be used for all of the
+     specified cryptographic primitives
+@throws IllegalArgumentException if primitives or algorithm is null
+     or empty, or the key is null
+*/
+permits : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

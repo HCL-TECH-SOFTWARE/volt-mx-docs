@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-sql-Driver'>/**@class java.sql.Driver
+</span> The interface that every driver class must implement.
+ &lt;P&gt;The Java SQL framework allows for multiple database drivers.
+
+ &lt;P&gt;Each driver should supply a class that implements
+ the Driver interface.
+
+ &lt;P&gt;The DriverManager will try to load as many drivers as it can
+ find and then for any given connection request, it will ask each
+ driver in turn to try to connect to the target URL.
+
+ &lt;P&gt;It is strongly recommended that each Driver class should be
+ small and standalone so that the Driver class can be loaded and
+ queried without bringing in vast quantities of supporting code.
+
+ &lt;P&gt;When a Driver class is loaded, it should create an instance of
+ itself and register it with the DriverManager. This means that a
+ user can load and register a driver by calling
+ &lt;pre&gt;
+   &lt;code&gt;Class.forName(&quot;foo.bah.Driver&quot;)&lt;/code&gt;
+ &lt;/pre&gt;
+
+ @see DriverManager
+ @see Connection
+*/
+var Driver = {
+
+<span id='java-sql-Driver-method-connect'>/**Attempts to make a database connection to the given URL.
+</span> The driver should return &quot;null&quot; if it realizes it is the wrong kind
+ of driver to connect to the given URL.  This will be common, as when
+ the JDBC driver manager is asked to connect to a given URL it passes
+ the URL to each loaded driver in turn.
+
+ &lt;P&gt;The driver should throw an &lt;code&gt;SQLException&lt;/code&gt; if it is the right
+ driver to connect to the given URL but has trouble connecting to
+ the database.
+
+ &lt;P&gt;The &lt;code&gt;java.util.Properties&lt;/code&gt; argument can be used to pass
+ arbitrary string tag/value pairs as connection arguments.
+ Normally at least &quot;user&quot; and &quot;password&quot; properties should be
+ included in the &lt;code&gt;Properties&lt;/code&gt; object.
+@param {String} url the URL of the database to which to connect
+@param {Object {Properties}} info a list of arbitrary string tag/value pairs as
+ connection arguments. Normally at least a &quot;user&quot; and
+ &quot;password&quot; property should be included.
+@return {Object {java.sql.Connection}} a &lt;code&gt;Connection&lt;/code&gt; object that represents a
+         connection to the URL
+@exception SQLException if a database access error occurs
+*/
+connect : function(  ) {},
+
+<span id='java-sql-Driver-method-acceptsURL'>/**Retrieves whether the driver thinks that it can open a connection
+</span> to the given URL.  Typically drivers will return &lt;code&gt;true&lt;/code&gt; if they
+ understand the subprotocol specified in the URL and &lt;code&gt;false&lt;/code&gt; if
+ they do not.
+@param {String} url the URL of the database
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this driver understands the given URL;
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+*/
+acceptsURL : function(  ) {},
+
+<span id='java-sql-Driver-method-getPropertyInfo'>/**Gets information about the possible properties for this driver.
+</span> &lt;P&gt;
+ The &lt;code&gt;getPropertyInfo&lt;/code&gt; method is intended to allow a generic
+ GUI tool to discover what properties it should prompt
+ a human for in order to get
+ enough information to connect to a database.  Note that depending on
+ the values the human has supplied so far, additional values may become
+ necessary, so it may be necessary to iterate though several calls
+ to the &lt;code&gt;getPropertyInfo&lt;/code&gt; method.
+@param {String} url the URL of the database to which to connect
+@param {Object {Properties}} info a proposed list of tag/value pairs that will be sent on
+          connect open
+@return {Object {java.sql.DriverPropertyInfo}} an array of &lt;code&gt;DriverPropertyInfo&lt;/code&gt; objects describing
+          possible properties.  This array may be an empty array if
+          no properties are required.
+@exception SQLException if a database access error occurs
+*/
+getPropertyInfo : function(  ) {},
+
+<span id='java-sql-Driver-method-getMajorVersion'>/**Retrieves the driver's major version number. Initially this should be 1.
+</span>@return {Number} this driver's major version number
+*/
+getMajorVersion : function(  ) {},
+
+<span id='java-sql-Driver-method-getMinorVersion'>/**Gets the driver's minor version number. Initially this should be 0.
+</span>@return {Number} this driver's minor version number
+*/
+getMinorVersion : function(  ) {},
+
+<span id='java-sql-Driver-method-jdbcCompliant'>/**Reports whether this driver is a genuine JDBC
+</span> Compliant&lt;sup&gt;&lt;font size=-2&gt;TM&lt;/font&gt;&lt;/sup&gt; driver.
+ A driver may only report &lt;code&gt;true&lt;/code&gt; here if it passes the JDBC
+ compliance tests; otherwise it is required to return &lt;code&gt;false&lt;/code&gt;.
+ &lt;P&gt;
+ JDBC compliance requires full support for the JDBC API and full support
+ for SQL 92 Entry Level.  It is expected that JDBC compliant drivers will
+ be available for all the major commercial databases.
+ &lt;P&gt;
+ This method is not intended to encourage the development of non-JDBC
+ compliant drivers, but is a recognition of the fact that some vendors
+ are interested in using the JDBC API and framework for lightweight
+ databases that do not support full database functionality, or for
+ special databases such as document information retrieval where a SQL
+ implementation may not be feasible.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this driver is JDBC Compliant; &lt;code&gt;false&lt;/code&gt;
+         otherwise
+*/
+jdbcCompliant : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

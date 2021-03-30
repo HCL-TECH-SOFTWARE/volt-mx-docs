@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-signedconfig-SignedConfig'>/**@class com.android.server.signedconfig.SignedConfig
+</span>@extends java.lang.Object
+
+ Represents signed configuration.
+
+ &lt;p&gt;This configuration should only be used if the signature has already been verified.
+
+ This class also parses signed config from JSON. The format expected is:
+ &lt;pre&gt;
+ {
+   &quot;version&quot;: 1
+   &quot;config&quot;: [
+     {
+       &quot;min_sdk&quot;: 28,
+       &quot;max_sdk&quot;: 29,
+       &quot;values&quot;: {
+         &quot;key&quot;: &quot;value&quot;,
+         &quot;key2&quot;: &quot;value2&quot;
+         ...
+       }
+     },
+     ...
+   ],
+ }
+ &lt;/pre&gt;
+*/
+var SignedConfig = {
+
+<span id='com-android-server-signedconfig-SignedConfig-property-version'>/***/
+</span>version : &quot;null&quot;,
+<span id='com-android-server-signedconfig-SignedConfig-property-perSdkConfig'>/***/
+</span>perSdkConfig : &quot;null&quot;,
+<span id='com-android-server-signedconfig-SignedConfig-method-getMatchingConfig'>/**Find matching sdk config for a given SDK level.
+</span>@param {Number} sdkVersion SDK version of device.
+@return {Object {com.android.server.signedconfig.SignedConfig.PerSdkConfig}} Matching config, of {@code null} if there is none.
+*/
+getMatchingConfig : function(  ) {},
+
+<span id='com-android-server-signedconfig-SignedConfig-method-parse'>/**Parse configuration from an APK.
+</span>@param {String} config Config string as read from the APK metadata.
+@param {Object {java.util.Set}} allowedKeys Set of allowed keys in the config. Any key/value mapping for a key not in
+                    this set will result in an {@link InvalidConfigException} being thrown.
+@param {Object {java.util.Map}} keyValueMappers Mappings for values per key. The keys in the top level map should be
+                        a subset of {@code allowedKeys}. The keys in the inner map indicate
+                        the set of allowed values for that keys value. This map will be
+                        applied to the value in the configuration. This is intended to allow
+                        enum-like values to be encoded as strings in the configuration, and
+                        mapped back to integers when the configuration is parsed.
+
+                        &lt;p&gt;Any config key with a value that does not appear in the
+                        corresponding map will result in an {@link InvalidConfigException}
+                        being thrown.
+@return {Object {com.android.server.signedconfig.SignedConfig}} Parsed configuration.
+@throws InvalidConfigException If there's a problem parsing the config.
+*/
+parse : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

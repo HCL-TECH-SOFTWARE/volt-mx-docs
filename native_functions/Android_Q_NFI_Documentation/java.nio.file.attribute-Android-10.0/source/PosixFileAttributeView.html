@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-file-attribute-PosixFileAttributeView'>/**@class java.nio.file.attribute.PosixFileAttributeView
+</span> implements java.nio.file.attribute.BasicFileAttributeView
+
+ implements java.nio.file.attribute.FileOwnerAttributeView
+
+ A file attribute view that provides a view of the file attributes commonly
+ associated with files on file systems used by operating systems that implement
+ the Portable Operating System Interface (POSIX) family of standards.
+
+ &lt;p&gt; Operating systems that implement the &lt;a href=&quot;http://www.opengroup.org&quot;&gt;
+ POSIX&lt;/a&gt; family of standards commonly use file systems that have a
+ file &lt;em&gt;owner&lt;/em&gt;, &lt;em&gt;group-owner&lt;/em&gt;, and related &lt;em&gt;access
+ permissions&lt;/em&gt;. This file attribute view provides read and write access
+ to these attributes.
+
+ &lt;p&gt; The {@link #readAttributes() readAttributes} method is used to read the
+ file's attributes. The file {@link java.nio.file.attribute.PosixFileAttributes#owner() owner} is
+ represented by a {@link java.nio.file.attribute.UserPrincipal} that is the identity of the file owner
+ for the purposes of access control. The {@link java.nio.file.attribute.PosixFileAttributes#group()
+ group-owner}, represented by a {@link java.nio.file.attribute.GroupPrincipal}, is the identity of the
+ group owner, where a group is an identity created for administrative purposes
+ so as to determine the access rights for the members of the group.
+
+ &lt;p&gt; The {@link java.nio.file.attribute.PosixFileAttributes#permissions() permissions} attribute is a
+ set of access permissions. This file attribute view provides access to the nine
+ permission defined by the {@link java.nio.file.attribute.PosixFilePermission} class.
+ These nine permission bits determine the &lt;em&gt;read&lt;/em&gt;, &lt;em&gt;write&lt;/em&gt;, and
+ &lt;em&gt;execute&lt;/em&gt; access for the file owner, group, and others (others
+ meaning identities other than the owner and members of the group). Some
+ operating systems and file systems may provide additional permission bits
+ but access to these other bits is not defined by this class in this release.
+
+ &lt;p&gt; &lt;b&gt;Usage Example:&lt;/b&gt;
+ Suppose we need to print out the owner and access permissions of a file:
+ &lt;pre&gt;
+     Path file = ...
+     PosixFileAttributes attrs = Files.getFileAttributeView(file, PosixFileAttributeView.class)
+         .readAttributes();
+     System.out.format(&quot;%s %s%n&quot;,
+         attrs.owner().getName(),
+         PosixFilePermissions.toString(attrs.permissions()));
+ &lt;/pre&gt;
+
+ &lt;h2&gt; Dynamic Access &lt;/h2&gt;
+ &lt;p&gt; Where dynamic access to file attributes is required, the attributes
+ supported by this attribute view are as defined by {@link java.nio.file.attribute.BasicFileAttributeView} and {@link java.nio.file.attribute.FileOwnerAttributeView}, and in addition,
+ the following attributes are supported:
+ &lt;blockquote&gt;
+ &lt;table border=&quot;1&quot; cellpadding=&quot;8&quot; summary=&quot;Supported attributes&quot;&gt;
+   &lt;tr&gt;
+     &lt;th&gt; Name &lt;/th&gt;
+     &lt;th&gt; Type &lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;tr&gt;
+     &lt;td&gt; &quot;permissions&quot; &lt;/td&gt;
+     &lt;td&gt; {@link Set}&amp;lt;{@link java.nio.file.attribute.PosixFilePermission}&amp;gt; &lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+     &lt;td&gt; &quot;group&quot; &lt;/td&gt;
+     &lt;td&gt; {@link java.nio.file.attribute.GroupPrincipal} &lt;/td&gt;
+   &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;/blockquote&gt;
+
+ &lt;p&gt; The {@link Files#getAttribute getAttribute} method may be used to read
+ any of these attributes, or any of the attributes defined by {@link java.nio.file.attribute.BasicFileAttributeView} as if by invoking the {@link #readAttributes
+ readAttributes()} method.
+
+ &lt;p&gt; The {@link Files#setAttribute setAttribute} method may be used to update
+ the file's last modified time, last access time or create time attributes as
+ defined by {@link java.nio.file.attribute.BasicFileAttributeView}. It may also be used to update
+ the permissions, owner, or group-owner as if by invoking the {@link #setPermissions setPermissions}, {@link #setOwner setOwner}, and {@link #setGroup setGroup} methods respectively.
+
+ &lt;h2&gt; Setting Initial Permissions &lt;/h2&gt;
+ &lt;p&gt; Implementations supporting this attribute view may also support setting
+ the initial permissions when creating a file or directory. The
+ initial permissions are provided to the {@link Files#createFile createFile}
+ or {@link Files#createDirectory createDirectory} methods as a {@link java.nio.file.attribute.FileAttribute} with {@link java.nio.file.attribute.FileAttribute#name name} {@code &quot;posix:permissions&quot;}
+ and a {@link java.nio.file.attribute.FileAttribute#value value} that is the set of permissions. The
+ following example uses the {@link java.nio.file.attribute.PosixFilePermissions#asFileAttribute
+ asFileAttribute} method to construct a {@code FileAttribute} when creating a
+ file:
+
+ &lt;pre&gt;
+     Path path = ...
+     Set&amp;lt;PosixFilePermission&amp;gt; perms =
+         EnumSet.of(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ);
+     Files.createFile(path, PosixFilePermissions.asFileAttribute(perms));
+ &lt;/pre&gt;
+
+ &lt;p&gt; When the access permissions are set at file creation time then the actual
+ value of the permissions may differ that the value of the attribute object.
+ The reasons for this are implementation specific. On UNIX systems, for
+ example, a process has a &lt;em&gt;umask&lt;/em&gt; that impacts the permission bits
+ of newly created files. Where an implementation supports the setting of
+ the access permissions, and the underlying file system supports access
+ permissions, then it is required that the value of the actual access
+ permissions will be equal or less than the value of the attribute
+ provided to the {@link Files#createFile createFile} or {@link Files#createDirectory createDirectory} methods. In other words, the file may
+ be more secure than requested.
+
+ @since 1.7
+*/
+var PosixFileAttributeView = {
+
+<span id='java-nio-file-attribute-PosixFileAttributeView-method-name'>/**Returns the name of the attribute view. Attribute views of this type
+</span> have the name {@code &quot;posix&quot;}.
+*/
+name : function(  ) {},
+
+<span id='java-nio-file-attribute-PosixFileAttributeView-method-readAttributes'>/**
+</span>@throws IOException                {@inheritDoc}
+@throws SecurityException
+          In the case of the default provider, a security manager is
+          installed, and it denies {@link RuntimePermission}&lt;tt&gt;(&quot;accessUserInformation&quot;)&lt;/tt&gt;
+          or its {@link SecurityManager#checkRead(String) checkRead} method
+          denies read access to the file.
+*/
+readAttributes : function(  ) {},
+
+<span id='java-nio-file-attribute-PosixFileAttributeView-method-setPermissions'>/**Updates the file permissions.
+</span>@param {Object {java.util.Set}} perms
+          the new set of permissions
+@throws ClassCastException
+          if the sets contains elements that are not of type {@code
+          PosixFilePermission}
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, a security manager is
+          installed, and it denies {@link RuntimePermission}&lt;tt&gt;(&quot;accessUserInformation&quot;)&lt;/tt&gt;
+          or its {@link SecurityManager#checkWrite(String) checkWrite}
+          method denies write access to the file.
+*/
+setPermissions : function(  ) {},
+
+<span id='java-nio-file-attribute-PosixFileAttributeView-method-setGroup'>/**Updates the file group-owner.
+</span>@param {Object {GroupPrincipal}} group
+          the new file group-owner
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default provider, and a security manager is
+          installed, it denies {@link RuntimePermission}&lt;tt&gt;(&quot;accessUserInformation&quot;)&lt;/tt&gt;
+          or its {@link SecurityManager#checkWrite(String) checkWrite}
+          method denies write access to the file.
+*/
+setGroup : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

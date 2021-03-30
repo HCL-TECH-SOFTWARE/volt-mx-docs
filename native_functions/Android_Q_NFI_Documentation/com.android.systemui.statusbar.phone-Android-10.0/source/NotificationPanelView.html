@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-statusbar-phone-NotificationPanelView'>/**@class com.android.systemui.statusbar.phone.NotificationPanelView
+</span> implements com.android.systemui.statusbar.notification.row.ExpandableView.OnHeightChangedListener
+
+ implements android.view.View.OnClickListener
+
+ implements com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.OnOverscrollTopChangedListener
+
+ implements com.android.systemui.statusbar.phone.KeyguardAffordanceHelper.Callback
+
+ implements com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.OnEmptySpaceClickListener
+
+ implements com.android.systemui.statusbar.policy.OnHeadsUpChangedListener
+
+ implements com.android.systemui.plugins.qs.QS.HeightListener
+
+ implements com.android.systemui.statusbar.policy.ZenModeController.Callback
+
+ implements com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
+
+ implements com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
+
+ implements com.android.systemui.statusbar.notification.DynamicPrivacyController.Listener
+
+@extends com.android.systemui.statusbar.phone.PanelView
+
+*/
+var NotificationPanelView = {
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-property-FLING_EXPAND'>/** Fling expanding QS.
+</span>*/
+FLING_EXPAND : &quot;0&quot;,
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-property-FLING_COLLAPSE'>/** Fling collapsing QS, potentially stopping when QS becomes QQS.
+</span>*/
+FLING_COLLAPSE : &quot;1&quot;,
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-property-FLING_HIDE'>/** Fling until QS is completely hidden.
+</span>*/
+FLING_HIDE : &quot;2&quot;,
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-hasCustomClock'>/**Returns if there's a custom clock being presented.
+</span>*/
+hasCustomClock : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setLaunchAffordanceListener'>/**
+</span>@see #launchCamera(boolean, int)
+@see #setLaunchingAffordance(boolean)
+*/
+setLaunchAffordanceListener : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-updateResources'>/**
+</span>*/
+updateResources : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onDensityOrFontScaleChanged'>/**
+</span>*/
+onDensityOrFontScaleChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onThemeChanged'>/**
+</span>*/
+onThemeChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onOverlayChanged'>/**
+</span>*/
+onOverlayChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setKeyguardIndicationController'>/**
+</span>*/
+setKeyguardIndicationController : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-computeMaxKeyguardNotifications'>/**
+</span>@param {Number} maximum the maximum to return at most
+@return {Number} the maximum keyguard notifications that can fit on the screen
+*/
+computeMaxKeyguardNotifications : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-animateToFullShade'>/**
+</span>*/
+animateToFullShade : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setQsExpansionEnabled'>/**
+</span>*/
+setQsExpansionEnabled : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-resetViews'>/**
+</span>*/
+resetViews : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-collapse'>/**
+</span>*/
+collapse : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-closeQs'>/**
+</span>*/
+closeQs : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-animateCloseQs'>/**Animate QS closing by flinging it.
+</span> If QS is expanded, it will collapse into QQS and stop.
+@param {Boolean} animateAway Do not stop when QS becomes QQS. Fling until QS isn't visible anymore.
+*/
+animateCloseQs : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-expandWithQs'>/**
+</span>*/
+expandWithQs : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-expandWithoutQs'>/**
+</span>*/
+expandWithoutQs : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-fling'>/**
+</span>*/
+fling : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onInterceptTouchEvent'>/**
+</span>*/
+onInterceptTouchEvent : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onOverscrollTopChanged'>/**
+</span>*/
+onOverscrollTopChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-flingTopOverscroll'>/**
+</span>*/
+flingTopOverscroll : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onStateChanged'>/**
+</span>*/
+onStateChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-flingSettings'>/**
+</span>@see #flingSettings(float, int, Runnable, boolean)
+*/
+flingSettings : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-isInSettings'>/**
+</span>*/
+isInSettings : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-isExpanding'>/**
+</span>*/
+isExpanding : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-expand'>/**
+</span>*/
+expand : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onHeightChanged'>/**
+</span>*/
+onHeightChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onReset'>/**
+</span>*/
+onReset : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onQsHeightChanged'>/**
+</span>*/
+onQsHeightChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onApplyWindowInsets'>/**
+</span>*/
+onApplyWindowInsets : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onRtlPropertiesChanged'>/**
+</span>*/
+onRtlPropertiesChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onClick'>/**
+</span>*/
+onClick : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onAnimationToSideStarted'>/**
+</span>*/
+onAnimationToSideStarted : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onAnimationToSideEnded'>/**
+</span>*/
+onAnimationToSideEnded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-getMaxTranslationDistance'>/**
+</span>*/
+getMaxTranslationDistance : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onSwipingStarted'>/**
+</span>*/
+onSwipingStarted : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onSwipingAborted'>/**
+</span>*/
+onSwipingAborted : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onIconClicked'>/**
+</span>*/
+onIconClicked : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-getLeftIcon'>/**
+</span>*/
+getLeftIcon : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-getRightIcon'>/**
+</span>*/
+getRightIcon : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-getLeftPreview'>/**
+</span>*/
+getLeftPreview : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-getRightPreview'>/**
+</span>*/
+getRightPreview : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-getAffordanceFalsingFactor'>/**
+</span>*/
+getAffordanceFalsingFactor : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-needsAntiFalsing'>/**
+</span>*/
+needsAntiFalsing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-isQsExpanded'>/**
+</span>*/
+isQsExpanded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-isQsDetailShowing'>/**
+</span>*/
+isQsDetailShowing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-closeQsDetail'>/**
+</span>*/
+closeQsDetail : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-shouldDelayChildPressedState'>/**
+</span>*/
+shouldDelayChildPressedState : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-isLaunchTransitionFinished'>/**
+</span>*/
+isLaunchTransitionFinished : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-isLaunchTransitionRunning'>/**
+</span>*/
+isLaunchTransitionRunning : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setLaunchTransitionEndRunnable'>/**
+</span>*/
+setLaunchTransitionEndRunnable : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setEmptyDragAmount'>/**
+</span>*/
+setEmptyDragAmount : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-isDozing'>/**
+</span>*/
+isDozing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-showEmptyShadeView'>/**
+</span>*/
+showEmptyShadeView : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setQsScrimEnabled'>/**
+</span>*/
+setQsScrimEnabled : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setKeyguardUserSwitcher'>/**
+</span>*/
+setKeyguardUserSwitcher : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onScreenTurningOn'>/**
+</span>*/
+onScreenTurningOn : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onEmptySpaceClicked'>/**
+</span>*/
+onEmptySpaceClicked : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-getCurrentPanelAlpha'>/**
+</span>*/
+getCurrentPanelAlpha : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setPanelAlpha'>/**
+</span>*/
+setPanelAlpha : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setPanelAlphaInternal'>/**
+</span>*/
+setPanelAlphaInternal : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setPanelAlphaEndAction'>/**
+</span>*/
+setPanelAlphaEndAction : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onHeadsUpPinnedModeChanged'>/**
+</span>*/
+onHeadsUpPinnedModeChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setHeadsUpAnimatingAway'>/**
+</span>*/
+setHeadsUpAnimatingAway : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onHeadsUpPinned'>/**
+</span>*/
+onHeadsUpPinned : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onHeadsUpUnPinned'>/**
+</span>*/
+onHeadsUpUnPinned : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onHeadsUpStateChanged'>/**
+</span>*/
+onHeadsUpStateChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setHeadsUpManager'>/**
+</span>*/
+setHeadsUpManager : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setTrackedHeadsUp'>/**
+</span>*/
+setTrackedHeadsUp : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-isFullWidth'>/**
+</span>@return {Boolean} whether the notifications are displayed full width and don't have any margins on
+         the side.
+*/
+isFullWidth : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setPanelScrimMinFraction'>/**
+</span>*/
+setPanelScrimMinFraction : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-clearNotificationEffects'>/**
+</span>*/
+clearNotificationEffects : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-hasOverlappingRendering'>/**
+</span>*/
+hasOverlappingRendering : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-launchCamera'>/**
+</span>*/
+launchCamera : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onAffordanceLaunchEnded'>/**
+</span>*/
+onAffordanceLaunchEnded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-isLaunchingAffordanceWithPreview'>/**Return true when a bottom affordance is launching an occluded activity with a splash screen.
+</span>*/
+isLaunchingAffordanceWithPreview : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-canCameraGestureBeLaunched'>/**Whether the camera application can be launched for the camera launch gesture.
+</span>@param {Boolean} keyguardIsShowing whether keyguard is being shown
+*/
+canCameraGestureBeLaunched : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-hideStatusBarIconsWhenExpanded'>/**
+</span>*/
+hideStatusBarIconsWhenExpanded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setTouchAndAnimationDisabled'>/**
+</span>*/
+setTouchAndAnimationDisabled : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setDozing'>/**Sets the dozing state.
+</span>@param {Boolean} dozing {@code true} when dozing.
+@param {Boolean} animate if transition should be animated.
+@param {Object {PointF}} wakeUpTouchLocation touch event location - if woken up by SLPI sensor.
+*/
+setDozing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onDozeAmountChanged'>/**
+</span>*/
+onDozeAmountChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setPulsing'>/**
+</span>*/
+setPulsing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setAmbientIndicationBottomPadding'>/**
+</span>*/
+setAmbientIndicationBottomPadding : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-dozeTimeTick'>/**
+</span>*/
+dozeTimeTick : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setStatusAccessibilityImportance'>/**
+</span>*/
+setStatusAccessibilityImportance : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-getKeyguardBottomAreaView'>/**TODO: this should be removed.
+</span> It's not correct to pass this view forward because other classes will end up adding
+ children to it. Theme will be out of sync.
+@return {Object {com.android.systemui.statusbar.phone.KeyguardBottomAreaView}} bottom area view
+*/
+getKeyguardBottomAreaView : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setUserSetupComplete'>/**
+</span>*/
+setUserSetupComplete : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-applyExpandAnimationParams'>/**
+</span>*/
+applyExpandAnimationParams : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-addTrackingHeadsUpListener'>/**
+</span>*/
+addTrackingHeadsUpListener : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-removeTrackingHeadsUpListener'>/**
+</span>*/
+removeTrackingHeadsUpListener : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-addVerticalTranslationListener'>/**
+</span>*/
+addVerticalTranslationListener : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-removeVerticalTranslationListener'>/**
+</span>*/
+removeVerticalTranslationListener : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setHeadsUpAppearanceController'>/**
+</span>*/
+setHeadsUpAppearanceController : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onBouncerPreHideAnimation'>/**Starts the animation before we dismiss Keyguard, i.e. an disappearing animation on the
+</span> security view of the bouncer.
+*/
+onBouncerPreHideAnimation : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-blockExpansionForCurrentTouch'>/**Do not let the user drag the shade up and down for the current touch session.
+</span> This is necessary to avoid shade expansion while/after the bouncer is dismissed.
+*/
+blockExpansionForCurrentTouch : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-hasActiveClearableNotifications'>/**
+</span>*/
+hasActiveClearableNotifications : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onZenChanged'>/**
+</span>*/
+onZenChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-createRemoteInputDelegate'>/**
+</span>*/
+createRemoteInputDelegate : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-updateNotificationViews'>/**
+</span>*/
+updateNotificationViews : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onUpdateRowStates'>/**
+</span>*/
+onUpdateRowStates : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-hasPulsingNotifications'>/**
+</span>*/
+hasPulsingNotifications : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-isFullyDark'>/**
+</span>*/
+isFullyDark : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-getActivatedChild'>/**
+</span>*/
+getActivatedChild : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setActivatedChild'>/**
+</span>*/
+setActivatedChild : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-runAfterAnimationFinished'>/**
+</span>*/
+runAfterAnimationFinished : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-setScrollingEnabled'>/**
+</span>*/
+setScrollingEnabled : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-initDependencies'>/**
+</span>*/
+initDependencies : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-showTransientIndication'>/**
+</span>*/
+showTransientIndication : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-NotificationPanelView-method-onDynamicPrivacyChanged'>/**
+</span>*/
+onDynamicPrivacyChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

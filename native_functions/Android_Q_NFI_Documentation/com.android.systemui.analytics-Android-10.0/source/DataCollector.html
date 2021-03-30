@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-analytics-DataCollector'>/**@class com.android.systemui.analytics.DataCollector
+</span> implements android.hardware.SensorEventListener
+
+@extends java.lang.Object
+
+ Tracks touch, sensor and phone events when the lockscreen is on. If the phone is unlocked
+ the data containing these events is saved to a file. This data is collected
+ to analyze how a human interaction looks like.
+
+ A session starts when the screen is turned on.
+ A session ends when the screen is turned off or user unlocks the phone.
+*/
+var DataCollector = {
+
+<span id='com-android-systemui-analytics-DataCollector-property-DEBUG'>/***/
+</span>DEBUG : &quot;false&quot;,
+<span id='com-android-systemui-analytics-DataCollector-method-getInstance'>/**
+</span>*/
+getInstance : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-reportRejectedTouch'>/**
+</span>*/
+reportRejectedTouch : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onSensorChanged'>/**
+</span>*/
+onSensorChanged : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onAccuracyChanged'>/**
+</span>*/
+onAccuracyChanged : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-isEnabled'>/**
+</span>@return {Boolean} true if data is being collected - either for data gathering or creating a
+         rejected touch report.
+*/
+isEnabled : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-isUnlockingDisabled'>/**
+</span>*/
+isUnlockingDisabled : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-isEnabledFull'>/**
+</span>@return {Boolean} true if the full data set for data gathering should be collected - including
+         extensive sensor data, which is is not normally included with rejected touch reports.
+*/
+isEnabledFull : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onScreenTurningOn'>/**
+</span>*/
+onScreenTurningOn : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onScreenOnFromTouch'>/**
+</span>*/
+onScreenOnFromTouch : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onScreenOff'>/**
+</span>*/
+onScreenOff : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onSucccessfulUnlock'>/**
+</span>*/
+onSucccessfulUnlock : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onBouncerShown'>/**
+</span>*/
+onBouncerShown : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onBouncerHidden'>/**
+</span>*/
+onBouncerHidden : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onQsDown'>/**
+</span>*/
+onQsDown : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-setQsExpanded'>/**
+</span>*/
+setQsExpanded : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onTrackingStarted'>/**
+</span>*/
+onTrackingStarted : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onTrackingStopped'>/**
+</span>*/
+onTrackingStopped : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onNotificationActive'>/**
+</span>*/
+onNotificationActive : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onNotificationDoubleTap'>/**
+</span>*/
+onNotificationDoubleTap : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-setNotificationExpanded'>/**
+</span>*/
+setNotificationExpanded : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onNotificatonStartDraggingDown'>/**
+</span>*/
+onNotificatonStartDraggingDown : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onStartExpandingFromPulse'>/**
+</span>*/
+onStartExpandingFromPulse : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onExpansionFromPulseStopped'>/**
+</span>*/
+onExpansionFromPulseStopped : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onNotificatonStopDraggingDown'>/**
+</span>*/
+onNotificatonStopDraggingDown : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onNotificationDismissed'>/**
+</span>*/
+onNotificationDismissed : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onNotificatonStartDismissing'>/**
+</span>*/
+onNotificatonStartDismissing : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onNotificatonStopDismissing'>/**
+</span>*/
+onNotificatonStopDismissing : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onCameraOn'>/**
+</span>*/
+onCameraOn : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onLeftAffordanceOn'>/**
+</span>*/
+onLeftAffordanceOn : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onAffordanceSwipingStarted'>/**
+</span>*/
+onAffordanceSwipingStarted : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onAffordanceSwipingAborted'>/**
+</span>*/
+onAffordanceSwipingAborted : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onUnlockHintStarted'>/**
+</span>*/
+onUnlockHintStarted : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onCameraHintStarted'>/**
+</span>*/
+onCameraHintStarted : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onLeftAffordanceHintStarted'>/**
+</span>*/
+onLeftAffordanceHintStarted : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-isReportingEnabled'>/**
+</span>*/
+isReportingEnabled : function(  ) {},
+
+<span id='com-android-systemui-analytics-DataCollector-method-onFalsingSessionStarted'>/**
+</span>*/
+onFalsingSessionStarted : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

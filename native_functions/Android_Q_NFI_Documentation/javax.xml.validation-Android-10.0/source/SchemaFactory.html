@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-validation-SchemaFactory'>/**@class javax.xml.validation.SchemaFactory
+</span>@extends java.lang.Object
+
+ Factory that creates {@link javax.xml.validation.Schema} objects&amp;#x2E; Entry-point to
+ the validation API.
+
+ &lt;p&gt;
+ {@link javax.xml.validation.SchemaFactory} is a schema compiler. It reads external
+ representations of schemas and prepares them for validation.
+
+ &lt;p&gt;
+ The {@link javax.xml.validation.SchemaFactory} class is not thread-safe. In other words,
+ it is the application's responsibility to ensure that at most
+ one thread is using a {@link javax.xml.validation.SchemaFactory} object at any
+ given moment. Implementations are encouraged to mark methods
+ as &lt;tt&gt;synchronized&lt;/tt&gt; to protect themselves from broken clients.
+
+ &lt;p&gt;
+ {@link javax.xml.validation.SchemaFactory} is not re-entrant. While one of the
+ &lt;code&gt;newSchema&lt;/code&gt; methods is being invoked, applications
+ may not attempt to recursively invoke the &lt;code&gt;newSchema&lt;/code&gt; method,
+ even from the same thread.
+
+ &lt;h2&gt;&lt;a name=&quot;schemaLanguage&quot;&gt;&lt;/a&gt;Schema Language&lt;/h2&gt;
+ &lt;p&gt;
+ This spec uses a namespace URI to designate a schema language.
+ The following table shows the values defined by this specification.
+ &lt;p&gt;
+ To be compliant with the spec, the implementation
+ is only required to support W3C XML Schema 1.0. However,
+ if it chooses to support other schema languages listed here,
+ it must conform to the relevant behaviors described in this spec.
+
+ &lt;p&gt;
+ Schema languages not listed here are expected to
+ introduce their own URIs to represent themselves.
+ The {@link javax.xml.validation.SchemaFactory} class is capable of locating other
+ implementations for other schema languages at run-time.
+
+ &lt;p&gt;
+ Note that because the XML DTD is strongly tied to the parsing process
+ and has a significant effect on the parsing process, it is impossible
+ to define the DTD validation as a process independent from parsing.
+ For this reason, this specification does not define the semantics for
+ the XML DTD. This doesn't prohibit implementers from implementing it
+ in a way they see fit, but &lt;em&gt;users are warned that any DTD
+ validation implemented on this interface necessarily deviate from
+ the XML DTD semantics as defined in the XML 1.0&lt;/em&gt;.
+
+ &lt;table border=&quot;1&quot; cellpadding=&quot;2&quot;&gt;
+   &lt;thead&gt;
+     &lt;tr&gt;
+       &lt;th&gt;value&lt;/th&gt;
+       &lt;th&gt;language&lt;/th&gt;
+     &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+     &lt;tr&gt;
+       &lt;td&gt;{@link javax.xml.XMLConstants#W3C_XML_SCHEMA_NS_URI} (&quot;&lt;code&gt;http://www.w3.org/2001/XMLSchema&lt;/code&gt;&quot;)&lt;/td&gt;
+       &lt;td&gt;&lt;a href=&quot;http://www.w3.org/TR/xmlschema-1&quot;&gt;W3C XML Schema 1.0&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;{@link javax.xml.XMLConstants#RELAXNG_NS_URI} (&quot;&lt;code&gt;http://relaxng.org/ns/structure/1.0&lt;/code&gt;&quot;)&lt;/td&gt;
+       &lt;td&gt;&lt;a href=&quot;http://www.relaxng.org/&quot;&gt;RELAX NG 1.0&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ @author  &lt;a href=&quot;mailto:Kohsuke.Kawaguchi@Sun.com&quot;&gt;Kohsuke Kawaguchi&lt;/a&gt;
+ @version $Revision: 884952 $, $Date: 2009-11-27 10:55:08 -0800 (Fri, 27 Nov 2009) $
+ @since 1.5
+*/
+var SchemaFactory = {
+
+<span id='javax-xml-validation-SchemaFactory-method-newInstance'>/**&lt;p&gt;Lookup an implementation of the &lt;code&gt;SchemaFactory&lt;/code&gt; that supports the specified
+</span> schema language and return it.&lt;/p&gt;
+
+ &lt;p&gt;To find a &lt;code&gt;SchemaFactory&lt;/code&gt; object for a given schema language,
+ this method looks the following places in the following order
+ where &quot;the class loader&quot; refers to the context class loader:&lt;/p&gt;
+ &lt;ol&gt;
+  &lt;li&gt;
+     If the system property
+     &lt;code&gt;&quot;javax.xml.validation.SchemaFactory:&lt;i&gt;schemaLanguage&lt;/i&gt;&quot;&lt;/code&gt;
+     is present (where &lt;i&gt;schemaLanguage&lt;/i&gt; is the parameter
+     to this method), then its value is read
+     as a class name. The method will try to
+     create a new instance of this class by using the class loader,
+     and returns it if it is successfully created.
+   &lt;/li&gt;
+   &lt;li&gt;
+     &lt;code&gt;$java.home/lib/jaxp.properties&lt;/code&gt; is read and
+     the value associated with the key being the system property above
+     is looked for. If present, the value is processed just like above.
+   &lt;/li&gt;
+   &lt;li&gt;
+     &lt;p&gt;The class loader is asked for service provider provider-configuration files matching
+     &lt;code&gt;javax.xml.validation.SchemaFactory&lt;/code&gt; in the resource directory META-INF/services.
+     See the JAR File Specification for file format and parsing rules.
+     Each potential service provider is required to implement the method:&lt;/p&gt;
+     &lt;pre&gt;
+        {@link #isSchemaLanguageSupported}(String schemaLanguage)
+     &lt;/pre&gt;
+     The first service provider found in class loader order that supports the specified schema language is returned.
+   &lt;/li&gt;
+   &lt;li&gt;
+     Platform default &lt;code&gt;SchemaFactory&lt;/code&gt; is located
+     in a implementation specific way. There must be a platform default
+     &lt;code&gt;SchemaFactory&lt;/code&gt; for W3C XML Schema.
+   &lt;/li&gt;
+ &lt;/ol&gt;
+
+ &lt;p&gt;If everything fails, {@link IllegalArgumentException} will be thrown.&lt;/p&gt;
+
+ &lt;p&gt;&lt;strong&gt;Tip for Trouble-shooting:&lt;/strong&gt;&lt;/p&gt;
+ &lt;p&gt;See {@link java.util.Properties#load(java.io.InputStream)} for
+ exactly how a property file is parsed. In particular, colons ':'
+ need to be escaped in a property file, so make sure schema language
+ URIs are properly escaped in it. For example:&lt;/p&gt;
+ &lt;pre&gt;
+ http\://www.w3.org/2001/XMLSchema=org.acme.foo.XSSchemaFactory
+ &lt;/pre&gt;
+@param {String} schemaLanguage
+      Specifies the schema language which the returned
+      SchemaFactory will understand. See
+      &lt;a href=&quot;#schemaLanguage&quot;&gt;the list of available
+      schema languages&lt;/a&gt; for the possible values.
+@return {Object {javax.xml.validation.SchemaFactory}} New instance of a &lt;code&gt;SchemaFactory&lt;/code&gt;
+@throws IllegalArgumentException
+      If no implementation of the schema language is available.
+@throws NullPointerException
+      If the &lt;tt&gt;schemaLanguage&lt;/tt&gt; parameter is null.
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-newInstance'>/**Returns an instance of the named implementation of {@code SchemaFactory}.
+</span>@throws IllegalArgumentException if {@code factoryClassName} is not available, cannot be
+     instantiated, or doesn't support {@code schemaLanguage}.
+@since 1.6
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-isSchemaLanguageSupported'>/**&lt;p&gt;Is specified schema supported by this &lt;code&gt;SchemaFactory&lt;/code&gt;?&lt;/p&gt;
+</span>@param {String} schemaLanguage Specifies the schema language which the returned &lt;code&gt;SchemaFactory&lt;/code&gt; will understand.
+    &lt;code&gt;schemaLanguage&lt;/code&gt; must specify a &lt;a href=&quot;#schemaLanguage&quot;&gt;valid&lt;/a&gt; schema language.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if &lt;code&gt;SchemaFactory&lt;/code&gt; supports &lt;code&gt;schemaLanguage&lt;/code&gt;, else &lt;code&gt;false&lt;/code&gt;.
+@throws NullPointerException If &lt;code&gt;schemaLanguage&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+@throws IllegalArgumentException If &lt;code&gt;schemaLanguage.length() == 0&lt;/code&gt;
+   or &lt;code&gt;schemaLanguage&lt;/code&gt; does not specify a &lt;a href=&quot;#schemaLanguage&quot;&gt;valid&lt;/a&gt; schema language.
+*/
+isSchemaLanguageSupported : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-getFeature'>/**Look up the value of a feature flag.
+</span>
+ &lt;p&gt;The feature name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.SchemaFactory} to recognize a feature name but
+ temporarily be unable to return its value.
+
+ &lt;p&gt;Implementers are free (and encouraged) to invent their own features,
+ using names built on their own URIs.&lt;/p&gt;
+@param {String} name The feature name, which is a non-null fully-qualified URI.
+@return {Boolean} The current value of the feature (true or false).
+@exception org.xml.sax.SAXNotRecognizedException If the feature
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            {@link SchemaFactory} recognizes the feature name but
+            cannot determine its value at this time.
+@exception NullPointerException
+              if the name parameter is null.
+@see #setFeature(String, boolean)
+*/
+getFeature : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-setFeature'>/**Set the value of a feature flag.
+</span>
+ &lt;p&gt;
+ Feature can be used to control the way a {@link javax.xml.validation.SchemaFactory}
+ parses schemas, although {@link javax.xml.validation.SchemaFactory}s are not required
+ to recognize any specific feature names.&lt;/p&gt;
+
+ &lt;p&gt;The feature name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.SchemaFactory} to expose a feature value but
+ to be unable to change the current value.&lt;/p&gt;
+
+ &lt;p&gt;All implementations are required to support the {@link javax.xml.XMLConstants#FEATURE_SECURE_PROCESSING} feature.
+ When the feature is:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;
+     &lt;code&gt;true&lt;/code&gt;: the implementation will limit XML processing to conform to implementation limits.
+     Examples include entity expansion limits and XML Schema constructs that would consume large amounts of resources.
+     If XML processing is limited for security reasons, it will be reported via a call to the registered
+     {@link ErrorHandler#fatalError(org.xml.sax.SAXParseException)}.
+     See {@link #setErrorHandler}(ErrorHandler errorHandler).
+   &lt;/li&gt;
+   &lt;li&gt;
+     &lt;code&gt;false&lt;/code&gt;: the implementation will processing XML according to the XML specifications without
+     regard to possible implementation limits.
+   &lt;/li&gt;
+ &lt;/ul&gt;
+@param {String} name The feature name, which is a non-null fully-qualified URI.
+@param {Boolean} value The requested value of the feature (true or false).
+@exception org.xml.sax.SAXNotRecognizedException If the feature
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            {@link SchemaFactory} recognizes the feature name but
+            cannot set the requested value.
+@exception NullPointerException
+              if the name parameter is null.
+@see #getFeature(String)
+*/
+setFeature : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-setProperty'>/**Set the value of a property.
+</span>
+ &lt;p&gt;The property name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.SchemaFactory} to recognize a property name but
+ to be unable to change the current value.&lt;/p&gt;
+
+ &lt;p&gt;{@link javax.xml.validation.SchemaFactory}s are not required to recognize setting
+ any specific property names.&lt;/p&gt;
+@param {String} name The property name, which is a non-null fully-qualified URI.
+@param {Object {Object}} object The requested value for the property.
+@exception org.xml.sax.SAXNotRecognizedException If the property
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            {@link SchemaFactory} recognizes the property name but
+            cannot set the requested value.
+@exception NullPointerException
+              if the name parameter is null.
+*/
+setProperty : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-getProperty'>/**Look up the value of a property.
+</span>
+ &lt;p&gt;The property name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.SchemaFactory} to recognize a property name but
+ temporarily be unable to return its value.&lt;/p&gt;
+
+ &lt;p&gt;{@link javax.xml.validation.SchemaFactory}s are not required to recognize any specific
+ property names.&lt;/p&gt;
+
+ &lt;p&gt;Implementers are free (and encouraged) to invent their own properties,
+ using names built on their own URIs.&lt;/p&gt;
+@param {String} name The property name, which is a non-null fully-qualified URI.
+@return {Object {java.lang.Object}} The current value of the property.
+@exception org.xml.sax.SAXNotRecognizedException If the property
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            XMLReader recognizes the property name but
+            cannot determine its value at this time.
+@exception NullPointerException
+              if the name parameter is null.
+@see #setProperty(String, Object)
+*/
+getProperty : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-setErrorHandler'>/**Sets the {@link ErrorHandler} to receive errors encountered
+</span> during the &lt;code&gt;newSchema&lt;/code&gt; method invocation.
+
+ &lt;p&gt;
+ Error handler can be used to customize the error handling process
+ during schema parsing. When an {@link ErrorHandler} is set,
+ errors found during the parsing of schemas will be first sent
+ to the {@link ErrorHandler}.
+
+ &lt;p&gt;
+ The error handler can abort the parsing of a schema immediately
+ by throwing {@link SAXException} from the handler. Or for example
+ it can print an error to the screen and try to continue the
+ processing by returning normally from the {@link ErrorHandler}
+
+ &lt;p&gt;
+ If any {@link Throwable} (or instances of its derived classes)
+ is thrown from an {@link ErrorHandler},
+ the caller of the &lt;code&gt;newSchema&lt;/code&gt; method will be thrown
+ the same {@link Throwable} object.
+
+ &lt;p&gt;
+ {@link javax.xml.validation.SchemaFactory} is not allowed to
+ throw {@link SAXException} without first reporting it to
+ {@link ErrorHandler}.
+
+ &lt;p&gt;
+ Applications can call this method even during a {@link javax.xml.validation.Schema}
+ is being parsed.
+
+ &lt;p&gt;
+ When the {@link ErrorHandler} is null, the implementation will
+ behave as if the following {@link ErrorHandler} is set:
+ &lt;pre&gt;
+ class DraconianErrorHandler implements {@link ErrorHandler} {
+     public void fatalError( {@link org.xml.sax.SAXParseException} e ) throws {@link SAXException} {
+         throw e;
+     }
+     public void error( {@link org.xml.sax.SAXParseException} e ) throws {@link SAXException} {
+         throw e;
+     }
+     public void warning( {@link org.xml.sax.SAXParseException} e ) throws {@link SAXException} {
+         // noop
+     }
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ When a new {@link javax.xml.validation.SchemaFactory} object is created, initially
+ this field is set to null. This field will &lt;em&gt;NOT&lt;/em&gt; be
+ inherited to {@link javax.xml.validation.Schema}s, {@link javax.xml.validation.Validator}s, or
+ {@link javax.xml.validation.ValidatorHandler}s that are created from this {@link javax.xml.validation.SchemaFactory}.
+@param {Object {ErrorHandler}} errorHandler
+      A new error handler to be set. This parameter can be null.
+*/
+setErrorHandler : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-getErrorHandler'>/**Gets the current {@link ErrorHandler} set to this {@link javax.xml.validation.SchemaFactory}.
+</span>@return {Object {org.xml.sax.ErrorHandler}} This method returns the object that was last set through
+      the {@link #setErrorHandler(ErrorHandler)} method, or null
+      if that method has never been called since this {@link SchemaFactory}
+      has created.
+@see #setErrorHandler(ErrorHandler)
+*/
+getErrorHandler : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-setResourceResolver'>/**Sets the {@link LSResourceResolver} to customize
+</span> resource resolution when parsing schemas.
+
+ &lt;p&gt;
+ {@link javax.xml.validation.SchemaFactory} uses a {@link LSResourceResolver}
+ when it needs to locate external resources while parsing schemas,
+ although exactly what constitutes &quot;locating external resources&quot; is
+ up to each schema language. For example, for W3C XML Schema,
+ this includes files &lt;tt&gt;&amp;lt;include&gt;&lt;/tt&gt;d or &lt;tt&gt;&amp;lt;import&gt;&lt;/tt&gt;ed,
+ and DTD referenced from schema files, etc.
+
+ &lt;p&gt;
+ Applications can call this method even during a {@link javax.xml.validation.Schema}
+ is being parsed.
+
+ &lt;p&gt;
+ When the {@link LSResourceResolver} is null, the implementation will
+ behave as if the following {@link LSResourceResolver} is set:
+ &lt;pre&gt;
+ class DumbDOMResourceResolver implements {@link LSResourceResolver} {
+     public {@link org.w3c.dom.ls.LSInput} resolveResource(
+         String publicId, String systemId, String baseURI) {
+
+         return null; // always return null
+     }
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ If a {@link LSResourceResolver} throws a {@link RuntimeException}
+  (or instances of its derived classes),
+ then the {@link javax.xml.validation.SchemaFactory} will abort the parsing and
+ the caller of the &lt;code&gt;newSchema&lt;/code&gt; method will receive
+ the same {@link RuntimeException}.
+
+ &lt;p&gt;
+ When a new {@link javax.xml.validation.SchemaFactory} object is created, initially
+ this field is set to null.  This field will &lt;em&gt;NOT&lt;/em&gt; be
+ inherited to {@link javax.xml.validation.Schema}s, {@link javax.xml.validation.Validator}s, or
+ {@link javax.xml.validation.ValidatorHandler}s that are created from this {@link javax.xml.validation.SchemaFactory}.
+@param {Object {LSResourceResolver}} resourceResolver
+      A new resource resolver to be set. This parameter can be null.
+*/
+setResourceResolver : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-getResourceResolver'>/**Gets the current {@link LSResourceResolver} set to this {@link javax.xml.validation.SchemaFactory}.
+</span>@return {Object {org.w3c.dom.ls.LSResourceResolver}} This method returns the object that was last set through
+      the {@link #setResourceResolver(LSResourceResolver)} method, or null
+      if that method has never been called since this {@link SchemaFactory}
+      has created.
+@see #setErrorHandler(ErrorHandler)
+*/
+getResourceResolver : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-newSchema'>/**&lt;p&gt;Parses the specified source as a schema and returns it as a schema.&lt;/p&gt;
+</span>
+ &lt;p&gt;This is a convenience method for {@link #newSchema(Source[] schemas)}.&lt;/p&gt;
+@param {Object {Source}} schema Source that represents a schema.
+@return {Object {javax.xml.validation.Schema}} New &lt;code&gt;Schema&lt;/code&gt; from parsing &lt;code&gt;schema&lt;/code&gt;.
+@throws SAXException If a SAX error occurs during parsing.
+@throws NullPointerException if &lt;tt&gt;schema&lt;/tt&gt; is null.
+*/
+newSchema : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-newSchema'>/**&lt;p&gt;Parses the specified &lt;code&gt;File&lt;/code&gt; as a schema and returns it as a &lt;code&gt;Schema&lt;/code&gt;.&lt;/p&gt;
+</span>
+ &lt;p&gt;This is a convenience method for {@link #newSchema}(Source schema).&lt;/p&gt;
+@param {Object {File}} schema File that represents a schema.
+@return {Object {javax.xml.validation.Schema}} New &lt;code&gt;Schema&lt;/code&gt; from parsing &lt;code&gt;schema&lt;/code&gt;.
+@throws SAXException If a SAX error occurs during parsing.
+@throws NullPointerException if &lt;tt&gt;schema&lt;/tt&gt; is null.
+*/
+newSchema : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-newSchema'>/**&lt;p&gt;Parses the specified &lt;code&gt;URL&lt;/code&gt; as a schema and returns it as a &lt;code&gt;Schema&lt;/code&gt;.&lt;/p&gt;
+</span>
+ &lt;p&gt;This is a convenience method for {@link #newSchema}(Source schema).&lt;/p&gt;
+@param {Object {URL}} schema &lt;code&gt;URL&lt;/code&gt; that represents a schema.
+@return {Object {javax.xml.validation.Schema}} New &lt;code&gt;Schema&lt;/code&gt; from parsing &lt;code&gt;schema&lt;/code&gt;.
+@throws SAXException If a SAX error occurs during parsing.
+@throws NullPointerException if &lt;tt&gt;schema&lt;/tt&gt; is null.
+*/
+newSchema : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-newSchema'>/**Parses the specified source(s) as a schema and returns it as a schema.
+</span>
+ &lt;p&gt;
+ The callee will read all the {@link Source}s and combine them into a
+ single schema. The exact semantics of the combination depends on the schema
+ language that this {@link javax.xml.validation.SchemaFactory} object is created for.
+
+ &lt;p&gt;
+ When an {@link ErrorHandler} is set, the callee will report all the errors
+ found in sources to the handler. If the handler throws an exception, it will
+ abort the schema compilation and the same exception will be thrown from
+ this method. Also, after an error is reported to a handler, the callee is allowed
+ to abort the further processing by throwing it. If an error handler is not set,
+ the callee will throw the first error it finds in the sources.
+
+ &lt;h2&gt;W3C XML Schema 1.0&lt;/h2&gt;
+ &lt;p&gt;
+ The resulting schema contains components from the specified sources.
+ The same result would be achieved if all these sources were
+ imported, using appropriate values for schemaLocation and namespace,
+ into a single schema document with a different targetNamespace
+ and no components of its own, if the import elements were given
+ in the same order as the sources.  Section 4.2.3 of the XML Schema
+ recommendation describes the options processors have in this
+ regard.  While a processor should be consistent in its treatment of
+ JAXP schema sources and XML Schema imports, the behavior between
+ JAXP-compliant parsers may vary; in particular, parsers may choose
+ to ignore all but the first &amp;lt;import&gt; for a given namespace,
+ regardless of information provided in schemaLocation.
+
+ &lt;p&gt;
+ If the parsed set of schemas includes error(s) as
+ specified in the section 5.1 of the XML Schema spec, then
+ the error must be reported to the {@link ErrorHandler}.
+
+ &lt;h2&gt;RELAX NG&lt;/h2&gt;
+
+ &lt;p&gt;For RELAX NG, this method must throw {@link UnsupportedOperationException}
+ if &lt;tt&gt;schemas.length!=1&lt;/tt&gt;.
+@param {Object {javax.xml.transform.Source[]}} schemas
+      inputs to be parsed. {@link SchemaFactory} is required
+      to recognize {@link StreamSource},
+      {@link javax.xml.transform.sax.SAXSource},
+      and {@link javax.xml.transform.dom.DOMSource}.
+@return {Object {javax.xml.validation.Schema}} Always return a non-null valid {@link Schema} object.
+      Note that when an error has been reported, there is no
+      guarantee that the returned {@link Schema} object is
+      meaningful.
+@throws SAXException
+      If an error is found during processing the specified inputs.
+      When an {@link ErrorHandler} is set, errors are reported to
+      there first. See {@link #setErrorHandler(ErrorHandler)}.
+@throws NullPointerException
+      If the &lt;code&gt;schemas&lt;/code&gt; parameter itself is null or
+      any item in the array is null.
+@throws IllegalArgumentException
+      If any item in the array is not recognized by this method.
+@throws UnsupportedOperationException
+      If the schema language doesn't support this operation.
+*/
+newSchema : function(  ) {},
+
+<span id='javax-xml-validation-SchemaFactory-method-newSchema'>/**Creates a special {@link javax.xml.validation.Schema} object.
+</span>
+ &lt;p&gt;
+ The exact semantics of the returned {@link javax.xml.validation.Schema} object depends
+ on the schema language that this {@link javax.xml.validation.SchemaFactory} is created
+ for.
+
+ &lt;p&gt;
+ Also, implementations are allowed to use implementation-specific
+ property/feature to alter the semantics of this method.
+
+
+ &lt;h2&gt;W3C XML Schema 1.0&lt;/h2&gt;
+ &lt;p&gt;
+ For XML Schema, this method creates a {@link javax.xml.validation.Schema} object that
+ performs validation by using location hints specified in documents.
+
+ &lt;p&gt;
+ The returned {@link javax.xml.validation.Schema} object assumes that if documents
+ refer to the same URL in the schema location hints,
+ they will always resolve to the same schema document. This
+ assumption allows implementations to reuse parsed results of
+ schema documents so that multiple validations against the same
+ schema will run faster.
+
+ &lt;p&gt;
+ Note that the use of schema location hints introduces a
+ vulnerability to denial-of-service attacks.
+
+
+ &lt;h2&gt;RELAX NG&lt;/h2&gt;
+ &lt;p&gt;
+ RELAX NG does not support this operation.
+@return {Object {javax.xml.validation.Schema}} Always return non-null valid {@link Schema} object.
+@throws UnsupportedOperationException
+      If this operation is not supported by the callee.
+@throws SAXException
+      If this operation is supported but failed for some reason.
+*/
+newSchema : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

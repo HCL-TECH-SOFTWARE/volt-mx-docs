@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-Semaphore'>/**@class java.util.concurrent.Semaphore
+</span> implements java.io.Serializable
+
+@extends java.lang.Object
+
+ A counting semaphore.  Conceptually, a semaphore maintains a set of
+ permits.  Each {@link #acquire} blocks if necessary until a permit is
+ available, and then takes it.  Each {@link #release} adds a permit,
+ potentially releasing a blocking acquirer.
+ However, no actual permit objects are used; the {@code Semaphore} just
+ keeps a count of the number available and acts accordingly.
+
+ &lt;p&gt;Semaphores are often used to restrict the number of threads than can
+ access some (physical or logical) resource. For example, here is
+ a class that uses a semaphore to control access to a pool of items:
+ &lt;pre&gt; {@code
+ class Pool {
+   private static final int MAX_AVAILABLE = 100;
+   private final Semaphore available = new Semaphore(MAX_AVAILABLE, true);
+
+   public Object getItem() throws InterruptedException {
+     available.acquire();
+     return getNextAvailableItem();
+   }
+
+   public void putItem(Object x) {
+     if (markAsUnused(x))
+       available.release();
+   }
+
+   // Not a particularly efficient data structure; just for demo
+
+   protected Object[] items = ... whatever kinds of items being managed
+   protected boolean[] used = new boolean[MAX_AVAILABLE];
+
+   protected synchronized Object getNextAvailableItem() {
+     for (int i = 0; i &lt; MAX_AVAILABLE; ++i) {
+       if (!used[i]) {
+          used[i] = true;
+          return items[i];
+       }
+     }
+     return null; // not reached
+   }
+
+   protected synchronized boolean markAsUnused(Object item) {
+     for (int i = 0; i &lt; MAX_AVAILABLE; ++i) {
+       if (item == items[i]) {
+          if (used[i]) {
+            used[i] = false;
+            return true;
+          } else
+            return false;
+       }
+     }
+     return false;
+   }
+ }}&lt;/pre&gt;
+
+ &lt;p&gt;Before obtaining an item each thread must acquire a permit from
+ the semaphore, guaranteeing that an item is available for use. When
+ the thread has finished with the item it is returned back to the
+ pool and a permit is returned to the semaphore, allowing another
+ thread to acquire that item.  Note that no synchronization lock is
+ held when {@link #acquire} is called as that would prevent an item
+ from being returned to the pool.  The semaphore encapsulates the
+ synchronization needed to restrict access to the pool, separately
+ from any synchronization needed to maintain the consistency of the
+ pool itself.
+
+ &lt;p&gt;A semaphore initialized to one, and which is used such that it
+ only has at most one permit available, can serve as a mutual
+ exclusion lock.  This is more commonly known as a &lt;em&gt;binary
+ semaphore&lt;/em&gt;, because it only has two states: one permit
+ available, or zero permits available.  When used in this way, the
+ binary semaphore has the property (unlike many {@link java.util.concurrent.locks.Lock}
+ implementations), that the &amp;quot;lock&amp;quot; can be released by a
+ thread other than the owner (as semaphores have no notion of
+ ownership).  This can be useful in some specialized contexts, such
+ as deadlock recovery.
+
+ &lt;p&gt;The constructor for this class optionally accepts a
+ &lt;em&gt;fairness&lt;/em&gt; parameter. When set false, this class makes no
+ guarantees about the order in which threads acquire permits. In
+ particular, &lt;em&gt;barging&lt;/em&gt; is permitted, that is, a thread
+ invoking {@link #acquire} can be allocated a permit ahead of a
+ thread that has been waiting - logically the new thread places itself at
+ the head of the queue of waiting threads. When fairness is set true, the
+ semaphore guarantees that threads invoking any of the {@link #acquire() acquire} methods are selected to obtain permits in the order in
+ which their invocation of those methods was processed
+ (first-in-first-out; FIFO). Note that FIFO ordering necessarily
+ applies to specific internal points of execution within these
+ methods.  So, it is possible for one thread to invoke
+ {@code acquire} before another, but reach the ordering point after
+ the other, and similarly upon return from the method.
+ Also note that the untimed {@link #tryAcquire() tryAcquire} methods do not
+ honor the fairness setting, but will take any permits that are
+ available.
+
+ &lt;p&gt;Generally, semaphores used to control resource access should be
+ initialized as fair, to ensure that no thread is starved out from
+ accessing a resource. When using semaphores for other kinds of
+ synchronization control, the throughput advantages of non-fair
+ ordering often outweigh fairness considerations.
+
+ &lt;p&gt;This class also provides convenience methods to {@link #acquire(int) acquire} and {@link #release(int) release} multiple
+ permits at a time. These methods are generally more efficient and
+ effective than loops. However, they do not establish any preference
+ order. For example, if thread A invokes {@code s.acquire(3}) and
+ thread B invokes {@code s.acquire(2)}, and two permits become
+ available, then there is no guarantee that thread B will obtain
+ them unless its acquire came first and Semaphore {@code s} is in
+ fair mode.
+
+ &lt;p&gt;Memory consistency effects: Actions in a thread prior to calling
+ a &quot;release&quot; method such as {@code release()}
+ &lt;a href=&quot;package-summary.html#MemoryVisibility&quot;&gt;&lt;i&gt;happen-before&lt;/i&gt;&lt;/a&gt;
+ actions following a successful &quot;acquire&quot; method such as {@code acquire()}
+ in another thread.
+
+ @since 1.5
+ @author Doug Lea
+*/
+var Semaphore = {
+
+<span id='java-util-concurrent-Semaphore-method-acquire'>/**Acquires a permit from this semaphore, blocking until one is
+</span> available, or the thread is {@linkplain Thread#interrupt interrupted}.
+
+ &lt;p&gt;Acquires a permit, if one is available and returns immediately,
+ reducing the number of available permits by one.
+
+ &lt;p&gt;If no permit is available then the current thread becomes
+ disabled for thread scheduling purposes and lies dormant until
+ one of two things happens:
+ &lt;ul&gt;
+ &lt;li&gt;Some other thread invokes the {@link #release} method for this
+ semaphore and the current thread is next to be assigned a permit; or
+ &lt;li&gt;Some other thread {@linkplain Thread#interrupt interrupts}
+ the current thread.
+ &lt;/ul&gt;
+
+ &lt;p&gt;If the current thread:
+ &lt;ul&gt;
+ &lt;li&gt;has its interrupted status set on entry to this method; or
+ &lt;li&gt;is {@linkplain Thread#interrupt interrupted} while waiting
+ for a permit,
+ &lt;/ul&gt;
+ then {@link InterruptedException} is thrown and the current thread's
+ interrupted status is cleared.
+@throws InterruptedException if the current thread is interrupted
+*/
+acquire : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-acquireUninterruptibly'>/**Acquires a permit from this semaphore, blocking until one is
+</span> available.
+
+ &lt;p&gt;Acquires a permit, if one is available and returns immediately,
+ reducing the number of available permits by one.
+
+ &lt;p&gt;If no permit is available then the current thread becomes
+ disabled for thread scheduling purposes and lies dormant until
+ some other thread invokes the {@link #release} method for this
+ semaphore and the current thread is next to be assigned a permit.
+
+ &lt;p&gt;If the current thread is {@linkplain Thread#interrupt interrupted}
+ while waiting for a permit then it will continue to wait, but the
+ time at which the thread is assigned a permit may change compared to
+ the time it would have received the permit had no interruption
+ occurred.  When the thread does return from this method its interrupt
+ status will be set.
+*/
+acquireUninterruptibly : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-tryAcquire'>/**Acquires a permit from this semaphore, only if one is available at the
+</span> time of invocation.
+
+ &lt;p&gt;Acquires a permit, if one is available and returns immediately,
+ with the value {@code true},
+ reducing the number of available permits by one.
+
+ &lt;p&gt;If no permit is available then this method will return
+ immediately with the value {@code false}.
+
+ &lt;p&gt;Even when this semaphore has been set to use a
+ fair ordering policy, a call to {@code tryAcquire()} &lt;em&gt;will&lt;/em&gt;
+ immediately acquire a permit if one is available, whether or not
+ other threads are currently waiting.
+ This &amp;quot;barging&amp;quot; behavior can be useful in certain
+ circumstances, even though it breaks fairness. If you want to honor
+ the fairness setting, then use
+ {@link #tryAcquire(long, java.util.concurrent.TimeUnit) tryAcquire(0, java.util.concurrent.TimeUnit.SECONDS) }
+ which is almost equivalent (it also detects interruption).
+@return {Boolean} {@code true} if a permit was acquired and {@code false}
+         otherwise
+*/
+tryAcquire : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-tryAcquire'>/**Acquires a permit from this semaphore, if one becomes available
+</span> within the given waiting time and the current thread has not
+ been {@linkplain Thread#interrupt interrupted}.
+
+ &lt;p&gt;Acquires a permit, if one is available and returns immediately,
+ with the value {@code true},
+ reducing the number of available permits by one.
+
+ &lt;p&gt;If no permit is available then the current thread becomes
+ disabled for thread scheduling purposes and lies dormant until
+ one of three things happens:
+ &lt;ul&gt;
+ &lt;li&gt;Some other thread invokes the {@link #release} method for this
+ semaphore and the current thread is next to be assigned a permit; or
+ &lt;li&gt;Some other thread {@linkplain Thread#interrupt interrupts}
+ the current thread; or
+ &lt;li&gt;The specified waiting time elapses.
+ &lt;/ul&gt;
+
+ &lt;p&gt;If a permit is acquired then the value {@code true} is returned.
+
+ &lt;p&gt;If the current thread:
+ &lt;ul&gt;
+ &lt;li&gt;has its interrupted status set on entry to this method; or
+ &lt;li&gt;is {@linkplain Thread#interrupt interrupted} while waiting
+ to acquire a permit,
+ &lt;/ul&gt;
+ then {@link InterruptedException} is thrown and the current thread's
+ interrupted status is cleared.
+
+ &lt;p&gt;If the specified waiting time elapses then the value {@code false}
+ is returned.  If the time is less than or equal to zero, the method
+ will not wait at all.
+@param {Number} timeout the maximum time to wait for a permit
+@param {Object {TimeUnit}} unit the time unit of the {@code timeout} argument
+@return {Boolean} {@code true} if a permit was acquired and {@code false}
+         if the waiting time elapsed before a permit was acquired
+@throws InterruptedException if the current thread is interrupted
+*/
+tryAcquire : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-release'>/**Releases a permit, returning it to the semaphore.
+</span>
+ &lt;p&gt;Releases a permit, increasing the number of available permits by
+ one.  If any threads are trying to acquire a permit, then one is
+ selected and given the permit that was just released.  That thread
+ is (re)enabled for thread scheduling purposes.
+
+ &lt;p&gt;There is no requirement that a thread that releases a permit must
+ have acquired that permit by calling {@link #acquire}.
+ Correct usage of a semaphore is established by programming convention
+ in the application.
+*/
+release : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-acquire'>/**Acquires the given number of permits from this semaphore,
+</span> blocking until all are available,
+ or the thread is {@linkplain Thread#interrupt interrupted}.
+
+ &lt;p&gt;Acquires the given number of permits, if they are available,
+ and returns immediately, reducing the number of available permits
+ by the given amount. This method has the same effect as the
+ loop {@code for (int i = 0; i &lt; permits; ++i) acquire();} except
+ that it atomically acquires the permits all at once:
+
+ &lt;p&gt;If insufficient permits are available then the current thread becomes
+ disabled for thread scheduling purposes and lies dormant until
+ one of two things happens:
+ &lt;ul&gt;
+ &lt;li&gt;Some other thread invokes one of the {@link #release() release}
+ methods for this semaphore and the current thread is next to be assigned
+ permits and the number of available permits satisfies this request; or
+ &lt;li&gt;Some other thread {@linkplain Thread#interrupt interrupts}
+ the current thread.
+ &lt;/ul&gt;
+
+ &lt;p&gt;If the current thread:
+ &lt;ul&gt;
+ &lt;li&gt;has its interrupted status set on entry to this method; or
+ &lt;li&gt;is {@linkplain Thread#interrupt interrupted} while waiting
+ for a permit,
+ &lt;/ul&gt;
+ then {@link InterruptedException} is thrown and the current thread's
+ interrupted status is cleared.
+ Any permits that were to be assigned to this thread are instead
+ assigned to other threads trying to acquire permits, as if
+ permits had been made available by a call to {@link #release}().
+@param {Number} permits the number of permits to acquire
+@throws InterruptedException if the current thread is interrupted
+@throws IllegalArgumentException if {@code permits} is negative
+*/
+acquire : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-acquireUninterruptibly'>/**Acquires the given number of permits from this semaphore,
+</span> blocking until all are available.
+
+ &lt;p&gt;Acquires the given number of permits, if they are available,
+ and returns immediately, reducing the number of available permits
+ by the given amount. This method has the same effect as the
+ loop {@code for (int i = 0; i &lt; permits; ++i) acquireUninterruptibly();}
+ except that it atomically acquires the permits all at once:
+
+ &lt;p&gt;If insufficient permits are available then the current thread becomes
+ disabled for thread scheduling purposes and lies dormant until
+ some other thread invokes one of the {@link #release() release}
+ methods for this semaphore and the current thread is next to be assigned
+ permits and the number of available permits satisfies this request.
+
+ &lt;p&gt;If the current thread is {@linkplain Thread#interrupt interrupted}
+ while waiting for permits then it will continue to wait and its
+ position in the queue is not affected.  When the thread does return
+ from this method its interrupt status will be set.
+@param {Number} permits the number of permits to acquire
+@throws IllegalArgumentException if {@code permits} is negative
+*/
+acquireUninterruptibly : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-tryAcquire'>/**Acquires the given number of permits from this semaphore, only
+</span> if all are available at the time of invocation.
+
+ &lt;p&gt;Acquires the given number of permits, if they are available, and
+ returns immediately, with the value {@code true},
+ reducing the number of available permits by the given amount.
+
+ &lt;p&gt;If insufficient permits are available then this method will return
+ immediately with the value {@code false} and the number of available
+ permits is unchanged.
+
+ &lt;p&gt;Even when this semaphore has been set to use a fair ordering
+ policy, a call to {@code tryAcquire} &lt;em&gt;will&lt;/em&gt;
+ immediately acquire a permit if one is available, whether or
+ not other threads are currently waiting.  This
+ &amp;quot;barging&amp;quot; behavior can be useful in certain
+ circumstances, even though it breaks fairness. If you want to
+ honor the fairness setting, then use {@link #tryAcquire(int,
+ long, java.util.concurrent.TimeUnit) tryAcquire(permits, 0, java.util.concurrent.TimeUnit.SECONDS) }
+ which is almost equivalent (it also detects interruption).
+@param {Number} permits the number of permits to acquire
+@return {Boolean} {@code true} if the permits were acquired and
+         {@code false} otherwise
+@throws IllegalArgumentException if {@code permits} is negative
+*/
+tryAcquire : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-tryAcquire'>/**Acquires the given number of permits from this semaphore, if all
+</span> become available within the given waiting time and the current
+ thread has not been {@linkplain Thread#interrupt interrupted}.
+
+ &lt;p&gt;Acquires the given number of permits, if they are available and
+ returns immediately, with the value {@code true},
+ reducing the number of available permits by the given amount.
+
+ &lt;p&gt;If insufficient permits are available then
+ the current thread becomes disabled for thread scheduling
+ purposes and lies dormant until one of three things happens:
+ &lt;ul&gt;
+ &lt;li&gt;Some other thread invokes one of the {@link #release() release}
+ methods for this semaphore and the current thread is next to be assigned
+ permits and the number of available permits satisfies this request; or
+ &lt;li&gt;Some other thread {@linkplain Thread#interrupt interrupts}
+ the current thread; or
+ &lt;li&gt;The specified waiting time elapses.
+ &lt;/ul&gt;
+
+ &lt;p&gt;If the permits are acquired then the value {@code true} is returned.
+
+ &lt;p&gt;If the current thread:
+ &lt;ul&gt;
+ &lt;li&gt;has its interrupted status set on entry to this method; or
+ &lt;li&gt;is {@linkplain Thread#interrupt interrupted} while waiting
+ to acquire the permits,
+ &lt;/ul&gt;
+ then {@link InterruptedException} is thrown and the current thread's
+ interrupted status is cleared.
+ Any permits that were to be assigned to this thread, are instead
+ assigned to other threads trying to acquire permits, as if
+ the permits had been made available by a call to {@link #release}().
+
+ &lt;p&gt;If the specified waiting time elapses then the value {@code false}
+ is returned.  If the time is less than or equal to zero, the method
+ will not wait at all.  Any permits that were to be assigned to this
+ thread, are instead assigned to other threads trying to acquire
+ permits, as if the permits had been made available by a call to
+ {@link #release}().
+@param {Number} permits the number of permits to acquire
+@param {Number} timeout the maximum time to wait for the permits
+@param {Object {TimeUnit}} unit the time unit of the {@code timeout} argument
+@return {Boolean} {@code true} if all permits were acquired and {@code false}
+         if the waiting time elapsed before all permits were acquired
+@throws InterruptedException if the current thread is interrupted
+@throws IllegalArgumentException if {@code permits} is negative
+*/
+tryAcquire : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-release'>/**Releases the given number of permits, returning them to the semaphore.
+</span>
+ &lt;p&gt;Releases the given number of permits, increasing the number of
+ available permits by that amount.
+ If any threads are trying to acquire permits, then one thread
+ is selected and given the permits that were just released.
+ If the number of available permits satisfies that thread's request
+ then that thread is (re)enabled for thread scheduling purposes;
+ otherwise the thread will wait until sufficient permits are available.
+ If there are still permits available
+ after this thread's request has been satisfied, then those permits
+ are assigned in turn to other threads trying to acquire permits.
+
+ &lt;p&gt;There is no requirement that a thread that releases a permit must
+ have acquired that permit by calling {@link java.util.concurrent.Semaphore#acquire acquire}.
+ Correct usage of a semaphore is established by programming convention
+ in the application.
+@param {Number} permits the number of permits to release
+@throws IllegalArgumentException if {@code permits} is negative
+*/
+release : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-availablePermits'>/**Returns the current number of permits available in this semaphore.
+</span>
+ &lt;p&gt;This method is typically used for debugging and testing purposes.
+@return {Number} the number of permits available in this semaphore
+*/
+availablePermits : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-drainPermits'>/**Acquires and returns all permits that are immediately available.
+</span>@return {Number} the number of permits acquired
+*/
+drainPermits : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-isFair'>/**Returns {@code true} if this semaphore has fairness set true.
+</span>@return {Boolean} {@code true} if this semaphore has fairness set true
+*/
+isFair : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-hasQueuedThreads'>/**Queries whether any threads are waiting to acquire. Note that
+</span> because cancellations may occur at any time, a {@code true}
+ return does not guarantee that any other thread will ever
+ acquire.  This method is designed primarily for use in
+ monitoring of the system state.
+@return {Boolean} {@code true} if there may be other threads waiting to
+         acquire the lock
+*/
+hasQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-getQueueLength'>/**Returns an estimate of the number of threads waiting to acquire.
+</span> The value is only an estimate because the number of threads may
+ change dynamically while this method traverses internal data
+ structures.  This method is designed for use in monitoring
+ system state, not for synchronization control.
+@return {Number} the estimated number of threads waiting for this lock
+*/
+getQueueLength : function(  ) {},
+
+<span id='java-util-concurrent-Semaphore-method-toString'>/**Returns a string identifying this semaphore, as well as its state.
+</span> The state, in brackets, includes the String {@code &quot;Permits =&quot;}
+ followed by the number of permits.
+@return {String} a string identifying this semaphore, as well as its state
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

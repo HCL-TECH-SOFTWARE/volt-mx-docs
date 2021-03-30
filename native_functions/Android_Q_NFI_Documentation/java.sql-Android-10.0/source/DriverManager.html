@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-sql-DriverManager'>/**@class java.sql.DriverManager
+</span>@extends java.lang.Object
+
+ &lt;P&gt;The basic service for managing a set of JDBC drivers.&lt;br&gt;
+ &lt;B&gt;NOTE:&lt;/B&gt; The {@code DataSource} interface, new in the
+ JDBC 2.0 API, provides another way to connect to a data source.
+ The use of a &lt;code&gt;DataSource&lt;/code&gt; object is the preferred means of
+ connecting to a data source.
+
+ &lt;P&gt;As part of its initialization, the &lt;code&gt;DriverManager&lt;/code&gt; class will
+ attempt to load the driver classes referenced in the &quot;jdbc.drivers&quot;
+ system property. This allows a user to customize the JDBC Drivers
+ used by their applications. For example in your
+ ~/.hotjava/properties file you might specify:
+ &lt;pre&gt;
+ &lt;CODE&gt;jdbc.drivers=foo.bah.Driver:wombat.sql.Driver:bad.taste.ourDriver&lt;/CODE&gt;
+ &lt;/pre&gt;
+&lt;P&gt; The &lt;code&gt;DriverManager&lt;/code&gt; methods &lt;code&gt;getConnection&lt;/code&gt; and
+ &lt;code&gt;getDrivers&lt;/code&gt; have been enhanced to support the Java Standard Edition
+ &lt;a href=&quot;https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jar.html#Service%20Provider&quot;&gt;Service Provider&lt;/a&gt; mechanism. JDBC 4.0 Drivers must
+ include the file &lt;code&gt;META-INF/services/java.sql.Driver&lt;/code&gt;. This file contains the name of the JDBC drivers
+ implementation of &lt;code&gt;java.sql.Driver&lt;/code&gt;.  For example, to load the &lt;code&gt;my.sql.Driver&lt;/code&gt; class,
+ the &lt;code&gt;META-INF/services/java.sql.Driver&lt;/code&gt; file would contain the entry:
+ &lt;pre&gt;
+ &lt;code&gt;my.sql.Driver&lt;/code&gt;
+ &lt;/pre&gt;
+
+ &lt;P&gt;Applications no longer need to explictly load JDBC drivers using &lt;code&gt;Class.forName()&lt;/code&gt;. Existing programs
+ which currently load JDBC drivers using &lt;code&gt;Class.forName()&lt;/code&gt; will continue to work without
+ modification.
+
+ &lt;P&gt;When the method &lt;code&gt;getConnection&lt;/code&gt; is called,
+ the &lt;code&gt;DriverManager&lt;/code&gt; will attempt to
+ locate a suitable driver from amongst those loaded at
+ initialization and those loaded explicitly using the same classloader
+ as the current applet or application.
+
+ &lt;P&gt;
+ Starting with the Java 2 SDK, Standard Edition, version 1.3, a
+ logging stream can be set only if the proper
+ permission has been granted.  Normally this will be done with
+ the tool PolicyTool, which can be used to grant &lt;code&gt;permission
+ java.sql.SQLPermission &quot;setLog&quot;&lt;/code&gt;.
+ @see Driver
+ @see Connection
+*/
+var DriverManager = {
+
+<span id='java-sql-DriverManager-method-getLogWriter'>/**Retrieves the log writer.
+</span>
+ The &lt;code&gt;getLogWriter&lt;/code&gt; and &lt;code&gt;setLogWriter&lt;/code&gt;
+ methods should be used instead
+ of the &lt;code&gt;get/setlogStream&lt;/code&gt; methods, which are deprecated.
+@return {Object {java.io.PrintWriter}} a &lt;code&gt;java.io.PrintWriter&lt;/code&gt; object
+@see #setLogWriter
+@since 1.2
+*/
+getLogWriter : function(  ) {},
+
+<span id='java-sql-DriverManager-method-setLogWriter'>/**Sets the logging/tracing &lt;code&gt;PrintWriter&lt;/code&gt; object
+</span> that is used by the &lt;code&gt;DriverManager&lt;/code&gt; and all drivers.
+ &lt;P&gt;
+ There is a minor versioning problem created by the introduction
+ of the method &lt;code&gt;setLogWriter&lt;/code&gt;.  The
+ method &lt;code&gt;setLogWriter&lt;/code&gt; cannot create a &lt;code&gt;PrintStream&lt;/code&gt; object
+ that will be returned by &lt;code&gt;getLogStream&lt;/code&gt;---the Java platform does
+ not provide a backward conversion.  As a result, a new application
+ that uses &lt;code&gt;setLogWriter&lt;/code&gt; and also uses a JDBC 1.0 driver that uses
+ &lt;code&gt;getLogStream&lt;/code&gt; will likely not see debugging information written
+ by that driver.
+&lt;P&gt;
+ Starting with the Java 2 SDK, Standard Edition, version 1.3 release, this method checks
+ to see that there is an &lt;code&gt;SQLPermission&lt;/code&gt; object before setting
+ the logging stream.  If a &lt;code&gt;SecurityManager&lt;/code&gt; exists and its
+ &lt;code&gt;checkPermission&lt;/code&gt; method denies setting the log writer, this
+ method throws a &lt;code&gt;java.lang.SecurityException&lt;/code&gt;.
+@param {Object {PrintWriter}} out the new logging/tracing &lt;code&gt;PrintStream&lt;/code&gt; object;
+      &lt;code&gt;null&lt;/code&gt; to disable logging and tracing
+@throws SecurityException
+    if a security manager exists and its
+    &lt;code&gt;checkPermission&lt;/code&gt; method denies
+    setting the log writer
+@see SecurityManager#checkPermission
+@see #getLogWriter
+@since 1.2
+*/
+setLogWriter : function(  ) {},
+
+<span id='java-sql-DriverManager-method-getConnection'>/**Attempts to establish a connection to the given database URL.
+</span> The &lt;code&gt;DriverManager&lt;/code&gt; attempts to select an appropriate driver from
+ the set of registered JDBC drivers.
+@param {String} url a database url of the form
+ &lt;code&gt; jdbc:&lt;em&gt;subprotocol&lt;/em&gt;:&lt;em&gt;subname&lt;/em&gt;&lt;/code&gt;
+@param {Object {Properties}} info a list of arbitrary string tag/value pairs as
+ connection arguments; normally at least a &quot;user&quot; and
+ &quot;password&quot; property should be included
+@return {Object {java.sql.Connection}} a Connection to the URL
+@exception SQLException if a database access error occurs
+*/
+getConnection : function(  ) {},
+
+<span id='java-sql-DriverManager-method-getConnection'>/**Attempts to establish a connection to the given database URL.
+</span> The &lt;code&gt;DriverManager&lt;/code&gt; attempts to select an appropriate driver from
+ the set of registered JDBC drivers.
+@param {String} url a database url of the form
+ &lt;code&gt;jdbc:&lt;em&gt;subprotocol&lt;/em&gt;:&lt;em&gt;subname&lt;/em&gt;&lt;/code&gt;
+@param {String} user the database user on whose behalf the connection is being
+   made
+@param {String} password the user's password
+@return {Object {java.sql.Connection}} a connection to the URL
+@exception SQLException if a database access error occurs
+*/
+getConnection : function(  ) {},
+
+<span id='java-sql-DriverManager-method-getConnection'>/**Attempts to establish a connection to the given database URL.
+</span> The &lt;code&gt;DriverManager&lt;/code&gt; attempts to select an appropriate driver from
+ the set of registered JDBC drivers.
+@param {String} url a database url of the form
+  &lt;code&gt; jdbc:&lt;em&gt;subprotocol&lt;/em&gt;:&lt;em&gt;subname&lt;/em&gt;&lt;/code&gt;
+@return {Object {java.sql.Connection}} a connection to the URL
+@exception SQLException if a database access error occurs
+*/
+getConnection : function(  ) {},
+
+<span id='java-sql-DriverManager-method-getDriver'>/**Attempts to locate a driver that understands the given URL.
+</span> The &lt;code&gt;DriverManager&lt;/code&gt; attempts to select an appropriate driver from
+ the set of registered JDBC drivers.
+@param {String} url a database URL of the form
+     &lt;code&gt;jdbc:&lt;em&gt;subprotocol&lt;/em&gt;:&lt;em&gt;subname&lt;/em&gt;&lt;/code&gt;
+@return {Object {java.sql.Driver}} a &lt;code&gt;Driver&lt;/code&gt; object representing a driver
+ that can connect to the given URL
+@exception SQLException if a database access error occurs
+*/
+getDriver : function(  ) {},
+
+<span id='java-sql-DriverManager-method-registerDriver'>/**Registers the given driver with the &lt;code&gt;DriverManager&lt;/code&gt;.
+</span> A newly-loaded driver class should call
+ the method &lt;code&gt;registerDriver&lt;/code&gt; to make itself
+ known to the &lt;code&gt;DriverManager&lt;/code&gt;.
+@param {Object {Driver}} driver the new JDBC Driver that is to be registered with the
+               &lt;code&gt;DriverManager&lt;/code&gt;
+@exception SQLException if a database access error occurs
+*/
+registerDriver : function(  ) {},
+
+<span id='java-sql-DriverManager-method-deregisterDriver'>/**Drops a driver from the &lt;code&gt;DriverManager&lt;/code&gt;'s list.
+</span>  Applets can only deregister drivers from their own classloaders.
+@param {Object {Driver}} driver the JDBC Driver to drop
+@exception SQLException if a database access error occurs
+*/
+deregisterDriver : function(  ) {},
+
+<span id='java-sql-DriverManager-method-getDrivers'>/**Retrieves an Enumeration with all of the currently loaded JDBC drivers
+</span> to which the current caller has access.
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; The classname of a driver can be found using
+ &lt;CODE&gt;d.getClass().getName()&lt;/CODE&gt;
+@return {Object {java.util.Enumeration}} the list of JDBC Drivers loaded by the caller's class loader
+*/
+getDrivers : function(  ) {},
+
+<span id='java-sql-DriverManager-method-setLoginTimeout'>/**Sets the maximum time in seconds that a driver will wait
+</span> while attempting to connect to a database.
+@param {Number} seconds the login time limit in seconds; zero means there is no limit
+@see #getLoginTimeout
+*/
+setLoginTimeout : function(  ) {},
+
+<span id='java-sql-DriverManager-method-getLoginTimeout'>/**Gets the maximum time in seconds that a driver can wait
+</span> when attempting to log in to a database.
+@return {Number} the driver login time limit in seconds
+@see #setLoginTimeout
+*/
+getLoginTimeout : function(  ) {},
+
+<span id='java-sql-DriverManager-method-setLogStream'>/**Sets the logging/tracing PrintStream that is used
+</span> by the &lt;code&gt;DriverManager&lt;/code&gt;
+ and all drivers.
+&lt;P&gt;
+ In the Java 2 SDK, Standard Edition, version 1.3 release, this method checks
+ to see that there is an &lt;code&gt;SQLPermission&lt;/code&gt; object before setting
+ the logging stream.  If a &lt;code&gt;SecurityManager&lt;/code&gt; exists and its
+ &lt;code&gt;checkPermission&lt;/code&gt; method denies setting the log writer, this
+ method throws a &lt;code&gt;java.lang.SecurityException&lt;/code&gt;.
+@param {Object {PrintStream}} out the new logging/tracing PrintStream; to disable, set to &lt;code&gt;null&lt;/code&gt;
+@deprecated Use {@code setLogWriter} instead.
+@throws SecurityException if a security manager exists and its
+    &lt;code&gt;checkPermission&lt;/code&gt; method denies setting the log stream
+@see SecurityManager#checkPermission
+@see #getLogStream
+*/
+setLogStream : function(  ) {},
+
+<span id='java-sql-DriverManager-method-getLogStream'>/**Retrieves the logging/tracing PrintStream that is used by the &lt;code&gt;DriverManager&lt;/code&gt;
+</span> and all drivers.
+@return {Object {java.io.PrintStream}} the logging/tracing PrintStream; if disabled, is &lt;code&gt;null&lt;/code&gt;
+@deprecated Use {@code getLogWriter} instead.
+@see #setLogStream
+*/
+getLogStream : function(  ) {},
+
+<span id='java-sql-DriverManager-method-println'>/**Prints a message to the current JDBC log stream.
+</span>@param {String} message a log or tracing message
+*/
+println : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

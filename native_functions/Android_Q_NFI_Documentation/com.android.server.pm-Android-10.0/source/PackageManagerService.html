@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-pm-PackageManagerService'>/**@class com.android.server.pm.PackageManagerService
+</span> implements com.android.server.pm.PackageSender
+
+@extends IPackageManager.Stub
+
+ Keep track of all those APKs everywhere.
+ &lt;p&gt;
+ Internally there are two important locks:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #mPackages} is used to guard all in-memory parsed package details
+ and other related state. It is a fine-grained lock that should only be held
+ momentarily, as it's one of the most contended locks in the system.
+ &lt;li&gt;{@link #mInstallLock} is used to guard all {@code installd} access, whose
+ operations typically involve heavy lifting of application data on disk. Since
+ {@code installd} is single-threaded, and it's operations can often be slow,
+ this lock should never be acquired while already holding {@link #mPackages}.
+ Conversely, it's safe to acquire {@link #mPackages} momentarily while already
+ holding {@link #mInstallLock}.
+ &lt;/ul&gt;
+ Many internal methods rely on the caller to hold the appropriate locks, and
+ this contract is expressed through method name suffixes:
+ &lt;ul&gt;
+ &lt;li&gt;fooLI(): the caller must hold {@link #mInstallLock}
+ &lt;li&gt;fooLIF(): the caller must hold {@link #mInstallLock} and the package
+ being modified must be frozen
+ &lt;li&gt;fooLPr(): the caller must hold {@link #mPackages} for reading
+ &lt;li&gt;fooLPw(): the caller must hold {@link #mPackages} for writing
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Because this class is very central to the platform's security; please run all
+ CTS and unit tests whenever making modifications:
+
+ &lt;pre&gt;
+ $ runtest -c android.content.pm.PackageManagerTests frameworks-core
+ $ cts-tradefed run commandAndExit cts -m CtsAppSecurityHostTestCases
+ &lt;/pre&gt;
+*/
+var PackageManagerService = {
+
+<span id='com-android-server-pm-PackageManagerService-property-DEBUG_SETTINGS'>/***/
+</span>DEBUG_SETTINGS : &quot;false&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-DEBUG_INSTALL'>/***/
+</span>DEBUG_INSTALL : &quot;false&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-DEBUG_REMOVE'>/***/
+</span>DEBUG_REMOVE : &quot;false&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-DEBUG_PACKAGE_SCANNING'>/***/
+</span>DEBUG_PACKAGE_SCANNING : &quot;false&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-DEBUG_PERMISSIONS'>/***/
+</span>DEBUG_PERMISSIONS : &quot;false&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-DEBUG_COMPRESSION'>/***/
+</span>DEBUG_COMPRESSION : &quot;null&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-DEBUG_DEXOPT'>/***/
+</span>DEBUG_DEXOPT : &quot;false&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-COMPRESSED_EXTENSION'>/**Extension of the compressed packages */
+</span>COMPRESSED_EXTENSION : &quot;.gz&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-STUB_SUFFIX'>/**Suffix of stub packages on the system partition */
+</span>STUB_SUFFIX : &quot;-Stub&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-PLATFORM_PACKAGE_NAME'>/***/
+</span>PLATFORM_PACKAGE_NAME : &quot;android&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-REASON_UNKNOWN'>/***/
+</span>REASON_UNKNOWN : &quot;-1&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-REASON_FIRST_BOOT'>/***/
+</span>REASON_FIRST_BOOT : &quot;0&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-REASON_BOOT'>/***/
+</span>REASON_BOOT : &quot;1&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-REASON_INSTALL'>/***/
+</span>REASON_INSTALL : &quot;2&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-REASON_BACKGROUND_DEXOPT'>/***/
+</span>REASON_BACKGROUND_DEXOPT : &quot;3&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-REASON_AB_OTA'>/***/
+</span>REASON_AB_OTA : &quot;4&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-REASON_INACTIVE_PACKAGE_DOWNGRADE'>/***/
+</span>REASON_INACTIVE_PACKAGE_DOWNGRADE : &quot;5&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-REASON_SHARED'>/***/
+</span>REASON_SHARED : &quot;6&quot;,
+<span id='com-android-server-pm-PackageManagerService-property-REASON_LAST'>/***/
+</span>REASON_LAST : &quot;6&quot;,
+<span id='com-android-server-pm-PackageManagerService-method-notifyPackagesReplacedReceived'>/**
+</span>*/
+notifyPackagesReplacedReceived : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-main'>/**
+</span>*/
+main : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isFirstBoot'>/**
+</span>*/
+isFirstBoot : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isOnlyCoreApps'>/**
+</span>*/
+isOnlyCoreApps : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isDeviceUpgrading'>/**
+</span>*/
+isDeviceUpgrading : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstantAppResolverComponent'>/**
+</span>*/
+getInstantAppResolverComponent : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-onTransact'>/**
+</span>*/
+onTransact : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-checkPackageStartable'>/**
+</span>*/
+checkPackageStartable : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isPackageAvailable'>/**
+</span>*/
+isPackageAvailable : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPackageInfo'>/**
+</span>*/
+getPackageInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPackageInfoVersioned'>/**
+</span>*/
+getPackageInfoVersioned : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-currentToCanonicalPackageNames'>/**
+</span>*/
+currentToCanonicalPackageNames : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-canonicalToCurrentPackageNames'>/**
+</span>*/
+canonicalToCurrentPackageNames : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPackageUid'>/**
+</span>*/
+getPackageUid : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPackageGids'>/**
+</span>*/
+getPackageGids : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPermissionInfo'>/**
+</span>*/
+getPermissionInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-queryPermissionsByGroup'>/**
+</span>*/
+queryPermissionsByGroup : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPermissionGroupInfo'>/**
+</span>*/
+getPermissionGroupInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getAllPermissionGroups'>/**
+</span>*/
+getAllPermissionGroups : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getApplicationInfo'>/**
+</span>*/
+getApplicationInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-deletePreloadsFileCache'>/**
+</span>*/
+deletePreloadsFileCache : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-freeStorageAndNotify'>/**
+</span>*/
+freeStorageAndNotify : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-freeStorage'>/**
+</span>*/
+freeStorage : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-freeStorage'>/**Blocking call to clear various types of cached data across the system
+</span> until the requested bytes are available.
+*/
+freeStorage : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getActivityInfo'>/**
+</span>*/
+getActivityInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-activitySupportsIntent'>/**
+</span>*/
+activitySupportsIntent : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getReceiverInfo'>/**
+</span>*/
+getReceiverInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getSharedLibraries'>/**
+</span>*/
+getSharedLibraries : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getDeclaredSharedLibraries'>/**
+</span>*/
+getDeclaredSharedLibraries : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getServiceInfo'>/**
+</span>*/
+getServiceInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getProviderInfo'>/**
+</span>*/
+getProviderInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getModuleInfo'>/**
+</span>*/
+getModuleInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstalledModules'>/**
+</span>*/
+getInstalledModules : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getSystemSharedLibraryNames'>/**
+</span>*/
+getSystemSharedLibraryNames : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getServicesSystemSharedLibraryPackageName'>/**
+</span>*/
+getServicesSystemSharedLibraryPackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getSharedSystemSharedLibraryPackageName'>/**
+</span>*/
+getSharedSystemSharedLibraryPackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getChangedPackages'>/**
+</span>*/
+getChangedPackages : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getSystemAvailableFeatures'>/**
+</span>*/
+getSystemAvailableFeatures : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-hasSystemFeature'>/**
+</span>*/
+hasSystemFeature : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-checkPermission'>/**
+</span>*/
+checkPermission : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-checkUidPermission'>/**
+</span>*/
+checkUidPermission : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isPermissionRevokedByPolicy'>/**
+</span>*/
+isPermissionRevokedByPolicy : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPermissionControllerPackageName'>/**
+</span>*/
+getPermissionControllerPackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-addPermission'>/**
+</span>*/
+addPermission : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-addPermissionAsync'>/**
+</span>*/
+addPermissionAsync : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-removePermission'>/**
+</span>*/
+removePermission : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-grantRuntimePermission'>/**
+</span>*/
+grantRuntimePermission : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-revokeRuntimePermission'>/**
+</span>*/
+revokeRuntimePermission : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-resetRuntimePermissions'>/**
+</span>*/
+resetRuntimePermissions : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPermissionFlags'>/**
+</span>*/
+getPermissionFlags : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-updatePermissionFlags'>/**
+</span>*/
+updatePermissionFlags : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-updatePermissionFlagsForAllApps'>/**Update the permission flags for all packages and runtime permissions of a user in order
+</span> to allow device or profile owner to remove POLICY_FIXED.
+*/
+updatePermissionFlagsForAllApps : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getWhitelistedRestrictedPermissions'>/**
+</span>*/
+getWhitelistedRestrictedPermissions : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-addWhitelistedRestrictedPermission'>/**
+</span>*/
+addWhitelistedRestrictedPermission : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-removeWhitelistedRestrictedPermission'>/**
+</span>*/
+removeWhitelistedRestrictedPermission : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-shouldShowRequestPermissionRationale'>/**
+</span>*/
+shouldShowRequestPermissionRationale : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-addOnPermissionsChangeListener'>/**
+</span>*/
+addOnPermissionsChangeListener : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-removeOnPermissionsChangeListener'>/**
+</span>*/
+removeOnPermissionsChangeListener : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isProtectedBroadcast'>/**
+</span>*/
+isProtectedBroadcast : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-checkSignatures'>/**
+</span>*/
+checkSignatures : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-checkUidSignatures'>/**
+</span>*/
+checkUidSignatures : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-hasSigningCertificate'>/**
+</span>*/
+hasSigningCertificate : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-hasUidSigningCertificate'>/**
+</span>*/
+hasUidSigningCertificate : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getAllPackages'>/**
+</span>*/
+getAllPackages : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPackagesForUid'>/**&lt;em&gt;IMPORTANT:&lt;/em&gt; Not all packages returned by this method may be known
+</span> to the system. There are two conditions in which this may occur:
+ &lt;ol&gt;
+   &lt;li&gt;The package is on adoptable storage and the device has been removed&lt;/li&gt;
+   &lt;li&gt;The package is being removed and the internal structures are partially updated&lt;/li&gt;
+ &lt;/ol&gt;
+ The second is an artifact of the current data structures and should be fixed. See
+ b/111075456 for one such instance.
+*/
+getPackagesForUid : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getNameForUid'>/**
+</span>*/
+getNameForUid : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getNamesForUids'>/**
+</span>*/
+getNamesForUids : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getUidForSharedUser'>/**
+</span>*/
+getUidForSharedUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getFlagsForUid'>/**
+</span>*/
+getFlagsForUid : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPrivateFlagsForUid'>/**
+</span>*/
+getPrivateFlagsForUid : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isUidPrivileged'>/**
+</span>*/
+isUidPrivileged : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getAppOpPermissionPackages'>/**
+</span>*/
+getAppOpPermissionPackages : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-resolveIntent'>/**
+</span>*/
+resolveIntent : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-findPersistentPreferredActivity'>/**
+</span>*/
+findPersistentPreferredActivity : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setLastChosenActivity'>/**
+</span>*/
+setLastChosenActivity : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getLastChosenActivity'>/**
+</span>*/
+getLastChosenActivity : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-canForwardTo'>/**
+</span>*/
+canForwardTo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-queryIntentActivities'>/**
+</span>*/
+queryIntentActivities : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-queryIntentActivityOptions'>/**
+</span>*/
+queryIntentActivityOptions : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-queryIntentReceivers'>/**
+</span>*/
+queryIntentReceivers : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-resolveService'>/**
+</span>*/
+resolveService : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-queryIntentServices'>/**
+</span>*/
+queryIntentServices : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-queryIntentContentProviders'>/**
+</span>*/
+queryIntentContentProviders : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstalledPackages'>/**
+</span>*/
+getInstalledPackages : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPackagesHoldingPermissions'>/**
+</span>*/
+getPackagesHoldingPermissions : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstalledApplications'>/**
+</span>*/
+getInstalledApplications : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstantApps'>/**
+</span>*/
+getInstantApps : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isInstantApp'>/**
+</span>*/
+isInstantApp : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstantAppCookie'>/**
+</span>*/
+getInstantAppCookie : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setInstantAppCookie'>/**
+</span>*/
+setInstantAppCookie : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstantAppIcon'>/**
+</span>*/
+getInstantAppIcon : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPersistentApplications'>/**
+</span>*/
+getPersistentApplications : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-resolveContentProvider'>/**
+</span>*/
+resolveContentProvider : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-querySyncProviders'>/**
+</span>@deprecated 
+*/
+querySyncProviders : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-queryContentProviders'>/**
+</span>*/
+queryContentProviders : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstrumentationInfo'>/**
+</span>*/
+getInstrumentationInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-queryInstrumentation'>/**
+</span>*/
+queryInstrumentation : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-reportSettingsProblem'>/**
+</span>*/
+reportSettingsProblem : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-performFstrimIfNeeded'>/**
+</span>*/
+performFstrimIfNeeded : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-updatePackagesIfNeeded'>/**
+</span>*/
+updatePackagesIfNeeded : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-notifyPackageUse'>/**
+</span>*/
+notifyPackageUse : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getCheckPermissionDelegateLocked'>/**
+</span>*/
+getCheckPermissionDelegateLocked : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setCheckPermissionDelegateLocked'>/**
+</span>*/
+setCheckPermissionDelegateLocked : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-notifyDexLoad'>/**
+</span>*/
+notifyDexLoad : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-registerDexModule'>/**
+</span>*/
+registerDexModule : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-performDexOptMode'>/**Ask the package manager to perform a dex-opt with the given compiler filter.
+</span>
+ Note: exposed only for the shell command to allow moving packages explicitly to a
+       definite state.
+*/
+performDexOptMode : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-performDexOptSecondary'>/**Ask the package manager to perform a dex-opt with the given compiler filter on the
+</span> secondary dex files belonging to the given package.
+
+ Note: exposed only for the shell command to allow moving packages explicitly to a
+       definite state.
+*/
+performDexOptSecondary : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-compileLayouts'>/**Ask the package manager to compile layouts in the given package.
+</span>*/
+compileLayouts : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getOptimizablePackages'>/**
+</span>*/
+getOptimizablePackages : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-reconcileSecondaryDexFiles'>/**Reconcile the information we have about the secondary dex files belonging to
+</span> {@code packageName} and the actual dex files. For all dex files that were
+ deleted, update the internal records and delete the generated oat files.
+*/
+reconcileSecondaryDexFiles : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-runBackgroundDexoptJob'>/**Execute the background dexopt job immediately.
+</span>*/
+runBackgroundDexoptJob : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-shutdown'>/**
+</span>*/
+shutdown : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-dumpProfiles'>/**
+</span>*/
+dumpProfiles : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-forceDexOpt'>/**
+</span>*/
+forceDexOpt : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-sendPackageBroadcast'>/**
+</span>*/
+sendPackageBroadcast : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-notifyPackageAdded'>/**
+</span>*/
+notifyPackageAdded : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-notifyPackageChanged'>/**
+</span>*/
+notifyPackageChanged : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-notifyPackageRemoved'>/**
+</span>*/
+notifyPackageRemoved : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-sendPackageAddedForNewUsers'>/**
+</span>*/
+sendPackageAddedForNewUsers : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setApplicationHiddenSettingAsUser'>/**
+</span>*/
+setApplicationHiddenSettingAsUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setSystemAppHiddenUntilInstalled'>/**
+</span>*/
+setSystemAppHiddenUntilInstalled : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setSystemAppInstallState'>/**
+</span>*/
+setSystemAppInstallState : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getApplicationHiddenSettingAsUser'>/**Returns true if application is not found or there was an error. Otherwise it returns
+</span> the hidden state of the package for the given user.
+*/
+getApplicationHiddenSettingAsUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-installExistingPackageAsUser'>/**
+</span>@hide 
+*/
+installExistingPackageAsUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setDistractingPackageRestrictionsAsUser'>/**
+</span>*/
+setDistractingPackageRestrictionsAsUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setPackagesSuspendedAsUser'>/**
+</span>*/
+setPackagesSuspendedAsUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getSuspendedPackageAppExtras'>/**
+</span>*/
+getSuspendedPackageAppExtras : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isPackageSuspendedForUser'>/**
+</span>*/
+isPackageSuspendedForUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getUnsuspendablePackagesForUser'>/**
+</span>*/
+getUnsuspendablePackagesForUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-verifyPendingInstall'>/**
+</span>*/
+verifyPendingInstall : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-extendVerificationTimeout'>/**
+</span>*/
+extendVerificationTimeout : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-finishPackageInstall'>/**
+</span>*/
+finishPackageInstall : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-verifyIntentFilter'>/**
+</span>*/
+verifyIntentFilter : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getIntentVerificationStatus'>/**
+</span>*/
+getIntentVerificationStatus : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-updateIntentVerificationStatus'>/**
+</span>*/
+updateIntentVerificationStatus : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getIntentFilterVerifications'>/**
+</span>*/
+getIntentFilterVerifications : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getAllIntentFilters'>/**
+</span>*/
+getAllIntentFilters : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setDefaultBrowserPackageName'>/**
+</span>*/
+setDefaultBrowserPackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getDefaultBrowserPackageName'>/**
+</span>*/
+getDefaultBrowserPackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setInstallerPackageName'>/**
+</span>*/
+setInstallerPackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setApplicationCategoryHint'>/**
+</span>*/
+setApplicationCategoryHint : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-deletePackageAsUser'>/**
+</span>*/
+deletePackageAsUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-deletePackageVersioned'>/**
+</span>*/
+deletePackageVersioned : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isPackageDeviceAdminOnAnyUser'>/**
+</span>*/
+isPackageDeviceAdminOnAnyUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setBlockUninstallForUser'>/**
+</span>*/
+setBlockUninstallForUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getBlockUninstallForUser'>/**
+</span>*/
+getBlockUninstallForUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setRequiredForSystemUser'>/**
+</span>*/
+setRequiredForSystemUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-clearApplicationProfileData'>/**
+</span>*/
+clearApplicationProfileData : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-clearApplicationUserData'>/**
+</span>*/
+clearApplicationUserData : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-deleteApplicationCacheFiles'>/**
+</span>*/
+deleteApplicationCacheFiles : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-deleteApplicationCacheFilesAsUser'>/**
+</span>*/
+deleteApplicationCacheFilesAsUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPackageSizeInfo'>/**
+</span>*/
+getPackageSizeInfo : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-addPreferredActivity'>/**
+</span>*/
+addPreferredActivity : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-replacePreferredActivity'>/**
+</span>*/
+replacePreferredActivity : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-clearPackagePreferredActivities'>/**
+</span>*/
+clearPackagePreferredActivities : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-resetApplicationPreferences'>/**
+</span>*/
+resetApplicationPreferences : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPreferredActivities'>/**
+</span>*/
+getPreferredActivities : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-addPersistentPreferredActivity'>/**
+</span>*/
+addPersistentPreferredActivity : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-clearPackagePersistentPreferredActivities'>/**
+</span>*/
+clearPackagePersistentPreferredActivities : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPreferredActivityBackup'>/**Non-Binder method, support for the backup/restore mechanism: write the
+</span> full set of preferred activities in its canonical XML format.  Returns the
+ XML output as a byte array, or null if there is none.
+*/
+getPreferredActivityBackup : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-restorePreferredActivities'>/**
+</span>*/
+restorePreferredActivities : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getDefaultAppsBackup'>/**Non-Binder method, support for the backup/restore mechanism: write the
+</span> default browser (etc) settings in its canonical XML format.  Returns the default
+ browser XML representation as a byte array, or null if there is none.
+*/
+getDefaultAppsBackup : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-restoreDefaultApps'>/**
+</span>*/
+restoreDefaultApps : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getIntentFilterVerificationBackup'>/**
+</span>*/
+getIntentFilterVerificationBackup : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-restoreIntentFilterVerification'>/**
+</span>*/
+restoreIntentFilterVerification : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-addCrossProfileIntentFilter'>/**
+</span>*/
+addCrossProfileIntentFilter : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-clearCrossProfileIntentFilters'>/**
+</span>*/
+clearCrossProfileIntentFilters : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getHomeActivities'>/**
+</span>*/
+getHomeActivities : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-sendSessionUpdatedBroadcast'>/**Send a {@code PackageInstaller.ACTION_SESSION_UPDATED} broadcast intent, containing
+</span> the {@code sessionInfo} in the extra field {@code PackageInstaller.EXTRA_SESSION}.
+*/
+sendSessionUpdatedBroadcast : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-sendSessionCommitBroadcast'>/**
+</span>*/
+sendSessionCommitBroadcast : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setHomeActivity'>/**
+</span>*/
+setHomeActivity : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getSystemTextClassifierPackageName'>/**
+</span>*/
+getSystemTextClassifierPackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getAttentionServicePackageName'>/**
+</span>*/
+getAttentionServicePackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getWellbeingPackageName'>/**
+</span>*/
+getWellbeingPackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getAppPredictionServicePackageName'>/**
+</span>*/
+getAppPredictionServicePackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getSystemCaptionsServicePackageName'>/**
+</span>*/
+getSystemCaptionsServicePackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getIncidentReportApproverPackageName'>/**
+</span>*/
+getIncidentReportApproverPackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setApplicationEnabledSetting'>/**
+</span>*/
+setApplicationEnabledSetting : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setUpdateAvailable'>/**
+</span>*/
+setUpdateAvailable : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setComponentEnabledSetting'>/**
+</span>*/
+setComponentEnabledSetting : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-flushPackageRestrictionsAsUser'>/**
+</span>*/
+flushPackageRestrictionsAsUser : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setPackageStoppedState'>/**
+</span>*/
+setPackageStoppedState : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstallerPackageName'>/**
+</span>*/
+getInstallerPackageName : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isOrphaned'>/**
+</span>*/
+isOrphaned : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getApplicationEnabledSetting'>/**
+</span>*/
+getApplicationEnabledSetting : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getComponentEnabledSetting'>/**
+</span>*/
+getComponentEnabledSetting : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-enterSafeMode'>/**
+</span>*/
+enterSafeMode : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-systemReady'>/**
+</span>*/
+systemReady : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-waitForAppDataPrepared'>/**
+</span>*/
+waitForAppDataPrepared : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isSafeMode'>/**
+</span>*/
+isSafeMode : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-hasSystemUidErrors'>/**
+</span>*/
+hasSystemUidErrors : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-onShellCommand'>/**
+</span>*/
+onShellCommand : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-freezePackage'>/**
+</span>*/
+freezePackage : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-freezePackage'>/**
+</span>*/
+freezePackage : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-freezePackageForInstall'>/**
+</span>*/
+freezePackageForInstall : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-freezePackageForInstall'>/**
+</span>*/
+freezePackageForInstall : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-freezePackageForDelete'>/**
+</span>*/
+freezePackageForDelete : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-freezePackageForDelete'>/**
+</span>*/
+freezePackageForDelete : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-movePackage'>/**
+</span>*/
+movePackage : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-movePrimaryStorage'>/**
+</span>*/
+movePrimaryStorage : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getMoveStatus'>/**
+</span>*/
+getMoveStatus : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-registerMoveCallback'>/**
+</span>*/
+registerMoveCallback : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-unregisterMoveCallback'>/**
+</span>*/
+unregisterMoveCallback : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setInstallLocation'>/**
+</span>*/
+setInstallLocation : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstallLocation'>/**
+</span>*/
+getInstallLocation : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getVerifierDeviceIdentity'>/**
+</span>*/
+getVerifierDeviceIdentity : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setPermissionEnforced'>/**
+</span>*/
+setPermissionEnforced : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isPermissionEnforced'>/**
+</span>*/
+isPermissionEnforced : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isStorageLow'>/**
+</span>*/
+isStorageLow : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getPackageInstaller'>/**
+</span>*/
+getPackageInstaller : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getArtManager'>/**
+</span>*/
+getArtManager : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getKeySetByAlias'>/**
+</span>*/
+getKeySetByAlias : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getSigningKeySet'>/**
+</span>*/
+getSigningKeySet : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isPackageSignedByKeySet'>/**
+</span>*/
+isPackageSignedByKeySet : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isPackageSignedByKeySetExactly'>/**
+</span>*/
+isPackageSignedByKeySetExactly : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getRuntimePermissionsVersion'>/**
+</span>*/
+getRuntimePermissionsVersion : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setRuntimePermissionsVersion'>/**
+</span>*/
+setRuntimePermissionsVersion : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-grantDefaultPermissionsToEnabledCarrierApps'>/**
+</span>*/
+grantDefaultPermissionsToEnabledCarrierApps : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-grantDefaultPermissionsToEnabledImsServices'>/**
+</span>*/
+grantDefaultPermissionsToEnabledImsServices : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-grantDefaultPermissionsToEnabledTelephonyDataServices'>/**
+</span>*/
+grantDefaultPermissionsToEnabledTelephonyDataServices : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-revokeDefaultPermissionsFromDisabledTelephonyDataServices'>/**
+</span>*/
+revokeDefaultPermissionsFromDisabledTelephonyDataServices : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-grantDefaultPermissionsToActiveLuiApp'>/**
+</span>*/
+grantDefaultPermissionsToActiveLuiApp : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-revokeDefaultPermissionsFromLuiApps'>/**
+</span>*/
+revokeDefaultPermissionsFromLuiApps : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-logAppProcessStartIfNeeded'>/**Logs process start information (including base APK hash) to the security log.
+</span>@hide 
+*/
+logAppProcessStartIfNeeded : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getCompilerPackageStats'>/**
+</span>*/
+getCompilerPackageStats : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getOrCreateCompilerPackageStats'>/**
+</span>*/
+getOrCreateCompilerPackageStats : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getOrCreateCompilerPackageStats'>/**
+</span>*/
+getOrCreateCompilerPackageStats : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-deleteCompilerPackageStats'>/**
+</span>*/
+deleteCompilerPackageStats : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstallReason'>/**
+</span>*/
+getInstallReason : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-canRequestPackageInstalls'>/**
+</span>*/
+canRequestPackageInstalls : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstantAppResolverSettingsComponent'>/**
+</span>*/
+getInstantAppResolverSettingsComponent : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstantAppInstallerComponent'>/**
+</span>*/
+getInstantAppInstallerComponent : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getInstantAppAndroidId'>/**
+</span>*/
+getInstantAppAndroidId : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-setHarmfulAppWarning'>/**
+</span>*/
+setHarmfulAppWarning : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-getHarmfulAppWarning'>/**
+</span>*/
+getHarmfulAppWarning : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-isPackageStateProtected'>/**
+</span>*/
+isPackageStateProtected : function(  ) {},
+
+<span id='com-android-server-pm-PackageManagerService-method-sendDeviceCustomizationReadyBroadcast'>/**
+</span>*/
+sendDeviceCustomizationReadyBroadcast : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

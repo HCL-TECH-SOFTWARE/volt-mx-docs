@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-cert-X509CRLEntry'>/**@class java.security.cert.X509CRLEntry
+</span> implements java.security.cert.X509Extension
+
+@extends java.lang.Object
+
+ &lt;p&gt;Abstract class for a revoked certificate in a CRL (Certificate
+ Revocation List).
+
+ The ASN.1 definition for &lt;em&gt;revokedCertificates&lt;/em&gt; is:
+ &lt;pre&gt;
+ revokedCertificates    SEQUENCE OF SEQUENCE  {
+     userCertificate    CertificateSerialNumber,
+     revocationDate     ChoiceOfTime,
+     crlEntryExtensions Extensions OPTIONAL
+                        -- if present, must be v2
+ }  OPTIONAL
+
+ CertificateSerialNumber  ::=  INTEGER
+
+ Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
+
+ Extension  ::=  SEQUENCE  {
+     extnId        OBJECT IDENTIFIER,
+     critical      BOOLEAN DEFAULT FALSE,
+     extnValue     OCTET STRING
+                   -- contains a DER encoding of a value
+                   -- of the type registered for use with
+                   -- the extnId object identifier value
+ }
+ &lt;/pre&gt;
+
+ @see X509CRL
+ @see X509Extension
+
+ @author Hemma Prafullchandra
+*/
+var X509CRLEntry = {
+
+<span id='java-security-cert-X509CRLEntry-method-equals'>/**Compares this CRL entry for equality with the given
+</span> object. If the {@code other} object is an
+ {@code instanceof} {@code X509CRLEntry}, then
+ its encoded form (the inner SEQUENCE) is retrieved and compared
+ with the encoded form of this CRL entry.
+@param {Object {Object}} other the object to test for equality with this CRL entry.
+@return {Boolean} true iff the encoded forms of the two CRL entries
+ match, false otherwise.
+*/
+equals : function(  ) {},
+
+<span id='java-security-cert-X509CRLEntry-method-hashCode'>/**Returns a hashcode value for this CRL entry from its
+</span> encoded form.
+@return {Number} the hashcode value.
+*/
+hashCode : function(  ) {},
+
+<span id='java-security-cert-X509CRLEntry-method-getEncoded'>/**Returns the ASN.1 DER-encoded form of this CRL Entry,
+</span> that is the inner SEQUENCE.
+@return {Number} the encoded form of this certificate
+@exception CRLException if an encoding error occurs.
+*/
+getEncoded : function(  ) {},
+
+<span id='java-security-cert-X509CRLEntry-method-getSerialNumber'>/**Gets the serial number from this X509CRLEntry,
+</span> the &lt;em&gt;userCertificate&lt;/em&gt;.
+@return {Object {java.math.BigInteger}} the serial number.
+*/
+getSerialNumber : function(  ) {},
+
+<span id='java-security-cert-X509CRLEntry-method-getCertificateIssuer'>/**Get the issuer of the X509Certificate described by this entry. If
+</span> the certificate issuer is also the CRL issuer, this method returns
+ null.
+
+ &lt;p&gt;This method is used with indirect CRLs. The default implementation
+ always returns null. Subclasses that wish to support indirect CRLs
+ should override it.
+@return {Object {javax.security.auth.x500.X500Principal}} the issuer of the X509Certificate described by this entry
+ or null if it is issued by the CRL issuer.
+@since 1.5
+*/
+getCertificateIssuer : function(  ) {},
+
+<span id='java-security-cert-X509CRLEntry-method-getRevocationDate'>/**Gets the revocation date from this X509CRLEntry,
+</span> the &lt;em&gt;revocationDate&lt;/em&gt;.
+@return {Object {java.util.Date}} the revocation date.
+*/
+getRevocationDate : function(  ) {},
+
+<span id='java-security-cert-X509CRLEntry-method-hasExtensions'>/**Returns true if this CRL entry has extensions.
+</span>@return {Boolean} true if this entry has extensions, false otherwise.
+*/
+hasExtensions : function(  ) {},
+
+<span id='java-security-cert-X509CRLEntry-method-toString'>/**Returns a string representation of this CRL entry.
+</span>@return {String} a string representation of this CRL entry.
+*/
+toString : function(  ) {},
+
+<span id='java-security-cert-X509CRLEntry-method-getRevocationReason'>/**Returns the reason the certificate has been revoked, as specified
+</span> in the Reason Code extension of this CRL entry.
+@return {Object {java.security.cert.CRLReason}} the reason the certificate has been revoked, or
+    {@code null} if this CRL entry does not have
+    a Reason Code extension
+@since 1.7
+*/
+getRevocationReason : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

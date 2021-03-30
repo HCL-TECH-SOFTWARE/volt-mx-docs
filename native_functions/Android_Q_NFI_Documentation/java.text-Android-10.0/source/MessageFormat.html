@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-text-MessageFormat'>/**@class java.text.MessageFormat
+</span>@extends java.text.Format
+
+ &lt;code&gt;MessageFormat&lt;/code&gt; provides a means to produce concatenated
+ messages in a language-neutral way. Use this to construct messages
+ displayed for end users.
+
+ &lt;p&gt;
+ &lt;code&gt;MessageFormat&lt;/code&gt; takes a set of objects, formats them, then
+ inserts the formatted strings into the pattern at the appropriate places.
+
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt;
+ &lt;code&gt;MessageFormat&lt;/code&gt; differs from the other &lt;code&gt;Format&lt;/code&gt;
+ classes in that you create a &lt;code&gt;MessageFormat&lt;/code&gt; object with one
+ of its constructors (not with a &lt;code&gt;getInstance&lt;/code&gt; style factory
+ method). The factory methods aren't necessary because &lt;code&gt;MessageFormat&lt;/code&gt;
+ itself doesn't implement locale specific behavior. Any locale specific
+ behavior is defined by the pattern that you provide as well as the
+ subformats used for inserted arguments.
+
+ &lt;h3&gt;&lt;a name=&quot;patterns&quot;&gt;Patterns and Their Interpretation&lt;/a&gt;&lt;/h3&gt;
+
+ &lt;code&gt;MessageFormat&lt;/code&gt; uses patterns of the following form:
+ &lt;blockquote&gt;&lt;pre&gt;
+ &lt;i&gt;MessageFormatPattern:&lt;/i&gt;
+         &lt;i&gt;String&lt;/i&gt;
+         &lt;i&gt;MessageFormatPattern&lt;/i&gt; &lt;i&gt;FormatElement&lt;/i&gt; &lt;i&gt;String&lt;/i&gt;
+
+ &lt;i&gt;FormatElement:&lt;/i&gt;
+         { &lt;i&gt;ArgumentIndex&lt;/i&gt; }
+         { &lt;i&gt;ArgumentIndex&lt;/i&gt; , &lt;i&gt;FormatType&lt;/i&gt; }
+         { &lt;i&gt;ArgumentIndex&lt;/i&gt; , &lt;i&gt;FormatType&lt;/i&gt; , &lt;i&gt;FormatStyle&lt;/i&gt; }
+
+ &lt;i&gt;FormatType: one of &lt;/i&gt;
+         number date time choice
+
+ &lt;i&gt;FormatStyle:&lt;/i&gt;
+         short
+         medium
+         long
+         full
+         integer
+         currency
+         percent
+         &lt;i&gt;SubformatPattern&lt;/i&gt;
+ &lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;Within a &lt;i&gt;String&lt;/i&gt;, a pair of single quotes can be used to
+ quote any arbitrary characters except single quotes. For example,
+ pattern string &lt;code&gt;&quot;'{0}'&quot;&lt;/code&gt; represents string
+ &lt;code&gt;&quot;{0}&quot;&lt;/code&gt;, not a &lt;i&gt;FormatElement&lt;/i&gt;. A single quote itself
+ must be represented by doubled single quotes {@code ''} throughout a
+ &lt;i&gt;String&lt;/i&gt;.  For example, pattern string &lt;code&gt;&quot;'{''}'&quot;&lt;/code&gt; is
+ interpreted as a sequence of &lt;code&gt;'{&lt;/code&gt; (start of quoting and a
+ left curly brace), &lt;code&gt;''&lt;/code&gt; (a single quote), and
+ &lt;code&gt;}'&lt;/code&gt; (a right curly brace and end of quoting),
+ &lt;em&gt;not&lt;/em&gt; &lt;code&gt;'{'&lt;/code&gt; and &lt;code&gt;'}'&lt;/code&gt; (quoted left and
+ right curly braces): representing string &lt;code&gt;&quot;{'}&quot;&lt;/code&gt;,
+ &lt;em&gt;not&lt;/em&gt; &lt;code&gt;&quot;{}&quot;&lt;/code&gt;.
+
+ &lt;p&gt;A &lt;i&gt;SubformatPattern&lt;/i&gt; is interpreted by its corresponding
+ subformat, and subformat-dependent pattern rules apply. For example,
+ pattern string &lt;code&gt;&quot;{1,number,&lt;u&gt;$'#',##&lt;/u&gt;}&quot;&lt;/code&gt;
+ (&lt;i&gt;SubformatPattern&lt;/i&gt; with underline) will produce a number format
+ with the pound-sign quoted, with a result such as: {@code
+ &quot;$#31,45&quot;}. Refer to each {@code Format} subclass documentation for
+ details.
+
+ &lt;p&gt;Any unmatched quote is treated as closed at the end of the given
+ pattern. For example, pattern string {@code &quot;'{0}&quot;} is treated as
+ pattern {@code &quot;'{0}'&quot;}.
+
+ &lt;p&gt;Any curly braces within an unquoted pattern must be balanced. For
+ example, &lt;code&gt;&quot;ab {0} de&quot;&lt;/code&gt; and &lt;code&gt;&quot;ab '}' de&quot;&lt;/code&gt; are
+ valid patterns, but &lt;code&gt;&quot;ab {0'}' de&quot;&lt;/code&gt;, &lt;code&gt;&quot;ab } de&quot;&lt;/code&gt;
+ and &lt;code&gt;&quot;''{''&quot;&lt;/code&gt; are not.
+
+ &lt;dl&gt;&lt;dt&gt;&lt;b&gt;Warning:&lt;/b&gt;&lt;dd&gt;The rules for using quotes within message
+ format patterns unfortunately have shown to be somewhat confusing.
+ In particular, it isn't always obvious to localizers whether single
+ quotes need to be doubled or not. Make sure to inform localizers about
+ the rules, and tell them (for example, by using comments in resource
+ bundle source files) which strings will be processed by {@code MessageFormat}.
+ Note that localizers may need to use single quotes in translated
+ strings where the original version doesn't have them.
+ &lt;/dl&gt;
+ &lt;p&gt;
+ The &lt;i&gt;ArgumentIndex&lt;/i&gt; value is a non-negative integer written
+ using the digits {@code '0'} through {@code '9'}, and represents an index into the
+ {@code arguments} array passed to the {@code format} methods
+ or the result array returned by the {@code parse} methods.
+ &lt;p&gt;
+ The &lt;i&gt;FormatType&lt;/i&gt; and &lt;i&gt;FormatStyle&lt;/i&gt; values are used to create
+ a {@code Format} instance for the format element. The following
+ table shows how the values map to {@code Format} instances. Combinations not
+ shown in the table are illegal. A &lt;i&gt;SubformatPattern&lt;/i&gt; must
+ be a valid pattern string for the {@code Format} subclass used.
+
+ &lt;table border=1 summary=&quot;Shows how FormatType and FormatStyle values map to Format instances&quot;&gt;
+    &lt;tr&gt;
+       &lt;th id=&quot;ft&quot; class=&quot;TableHeadingColor&quot;&gt;FormatType
+       &lt;th id=&quot;fs&quot; class=&quot;TableHeadingColor&quot;&gt;FormatStyle
+       &lt;th id=&quot;sc&quot; class=&quot;TableHeadingColor&quot;&gt;Subformat Created
+    &lt;tr&gt;
+       &lt;td headers=&quot;ft&quot;&gt;&lt;i&gt;(none)&lt;/i&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;i&gt;(none)&lt;/i&gt;
+       &lt;td headers=&quot;sc&quot;&gt;&lt;code&gt;null&lt;/code&gt;
+    &lt;tr&gt;
+       &lt;td headers=&quot;ft&quot; rowspan=5&gt;&lt;code&gt;number&lt;/code&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;i&gt;(none)&lt;/i&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.NumberFormat#getInstance(Locale) java.text.NumberFormat.getInstance}{@code (getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;integer&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.NumberFormat#getIntegerInstance(Locale) java.text.NumberFormat.getIntegerInstance}{@code (getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;currency&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.NumberFormat#getCurrencyInstance(Locale) java.text.NumberFormat.getCurrencyInstance}{@code (getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;percent&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.NumberFormat#getPercentInstance(Locale) java.text.NumberFormat.getPercentInstance}{@code (getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;i&gt;SubformatPattern&lt;/i&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@code new} {@link java.text.DecimalFormat#java.text.DecimalFormat(String,java.text.DecimalFormatSymbols) java.text.DecimalFormat}{@code (subformatPattern,} {@link java.text.DecimalFormatSymbols#getInstance(Locale) java.text.DecimalFormatSymbols.getInstance}{@code (getLocale()))}
+    &lt;tr&gt;
+       &lt;td headers=&quot;ft&quot; rowspan=6&gt;&lt;code&gt;date&lt;/code&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;i&gt;(none)&lt;/i&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.DateFormat#getDateInstance(int,Locale) java.text.DateFormat.getDateInstance}{@code (}{@link java.text.DateFormat#DEFAULT}{@code , getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;short&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.DateFormat#getDateInstance(int,Locale) java.text.DateFormat.getDateInstance}{@code (}{@link java.text.DateFormat#SHORT}{@code , getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;medium&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.DateFormat#getDateInstance(int,Locale) java.text.DateFormat.getDateInstance}{@code (}{@link java.text.DateFormat#DEFAULT}{@code , getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;long&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.DateFormat#getDateInstance(int,Locale) java.text.DateFormat.getDateInstance}{@code (}{@link java.text.DateFormat#LONG}{@code , getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;full&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.DateFormat#getDateInstance(int,Locale) java.text.DateFormat.getDateInstance}{@code (}{@link java.text.DateFormat#FULL}{@code , getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;i&gt;SubformatPattern&lt;/i&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@code new} {@link java.text.SimpleDateFormat#java.text.SimpleDateFormat(String,Locale) java.text.SimpleDateFormat}{@code (subformatPattern, getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;ft&quot; rowspan=6&gt;&lt;code&gt;time&lt;/code&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;i&gt;(none)&lt;/i&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.DateFormat#getTimeInstance(int,Locale) java.text.DateFormat.getTimeInstance}{@code (}{@link java.text.DateFormat#DEFAULT}{@code , getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;short&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.DateFormat#getTimeInstance(int,Locale) java.text.DateFormat.getTimeInstance}{@code (}{@link java.text.DateFormat#SHORT}{@code , getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;medium&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.DateFormat#getTimeInstance(int,Locale) java.text.DateFormat.getTimeInstance}{@code (}{@link java.text.DateFormat#DEFAULT}{@code , getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;long&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.DateFormat#getTimeInstance(int,Locale) java.text.DateFormat.getTimeInstance}{@code (}{@link java.text.DateFormat#LONG}{@code , getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;code&gt;full&lt;/code&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@link java.text.DateFormat#getTimeInstance(int,Locale) java.text.DateFormat.getTimeInstance}{@code (}{@link java.text.DateFormat#FULL}{@code , getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;i&gt;SubformatPattern&lt;/i&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@code new} {@link java.text.SimpleDateFormat#java.text.SimpleDateFormat(String,Locale) java.text.SimpleDateFormat}{@code (subformatPattern, getLocale())}
+    &lt;tr&gt;
+       &lt;td headers=&quot;ft&quot;&gt;&lt;code&gt;choice&lt;/code&gt;
+       &lt;td headers=&quot;fs&quot;&gt;&lt;i&gt;SubformatPattern&lt;/i&gt;
+       &lt;td headers=&quot;sc&quot;&gt;{@code new} {@link java.text.ChoiceFormat#java.text.ChoiceFormat(String) java.text.ChoiceFormat}{@code (subformatPattern)}
+ &lt;/table&gt;
+
+ &lt;h4&gt;Usage Information&lt;/h4&gt;
+
+ &lt;p&gt;
+ Here are some examples of usage.
+ In real internationalized programs, the message format pattern and other
+ static strings will, of course, be obtained from resource bundles.
+ Other parameters will be dynamically determined at runtime.
+ &lt;p&gt;
+ The first example uses the static method &lt;code&gt;MessageFormat.format&lt;/code&gt;,
+ which internally creates a &lt;code&gt;MessageFormat&lt;/code&gt; for one-time use:
+ &lt;blockquote&gt;&lt;pre&gt;
+ int planet = 7;
+ String event = &quot;a disturbance in the Force&quot;;
+
+ String result = MessageFormat.format(
+     &quot;At {1,time} on {1,date}, there was {2} on planet {0,number,integer}.&quot;,
+     planet, new Date(), event);
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ The output is:
+ &lt;blockquote&gt;&lt;pre&gt;
+ At 12:30 PM on Jul 3, 2053, there was a disturbance in the Force on planet 7.
+ &lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;
+ The following example creates a &lt;code&gt;MessageFormat&lt;/code&gt; instance that
+ can be used repeatedly:
+ &lt;blockquote&gt;&lt;pre&gt;
+ int fileCount = 1273;
+ String diskName = &quot;MyDisk&quot;;
+ Object[] testArgs = {new Long(fileCount), diskName};
+
+ MessageFormat form = new MessageFormat(
+     &quot;The disk \&quot;{1}\&quot; contains {0} file(s).&quot;);
+
+ System.out.println(form.format(testArgs));
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ The output with different values for &lt;code&gt;fileCount&lt;/code&gt;:
+ &lt;blockquote&gt;&lt;pre&gt;
+ The disk &quot;MyDisk&quot; contains 0 file(s).
+ The disk &quot;MyDisk&quot; contains 1 file(s).
+ The disk &quot;MyDisk&quot; contains 1,273 file(s).
+ &lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;
+ For more sophisticated patterns, you can use a &lt;code&gt;ChoiceFormat&lt;/code&gt;
+ to produce correct forms for singular and plural:
+ &lt;blockquote&gt;&lt;pre&gt;
+ MessageFormat form = new MessageFormat(&quot;The disk \&quot;{1}\&quot; contains {0}.&quot;);
+ double[] filelimits = {0,1,2};
+ String[] filepart = {&quot;no files&quot;,&quot;one file&quot;,&quot;{0,number} files&quot;};
+ ChoiceFormat fileform = new ChoiceFormat(filelimits, filepart);
+ form.setFormatByArgumentIndex(0, fileform);
+
+ int fileCount = 1273;
+ String diskName = &quot;MyDisk&quot;;
+ Object[] testArgs = {new Long(fileCount), diskName};
+
+ System.out.println(form.format(testArgs));
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ The output with different values for &lt;code&gt;fileCount&lt;/code&gt;:
+ &lt;blockquote&gt;&lt;pre&gt;
+ The disk &quot;MyDisk&quot; contains no files.
+ The disk &quot;MyDisk&quot; contains one file.
+ The disk &quot;MyDisk&quot; contains 1,273 files.
+ &lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;
+ You can create the &lt;code&gt;ChoiceFormat&lt;/code&gt; programmatically, as in the
+ above example, or by using a pattern. See {@link java.text.ChoiceFormat}
+ for more information.
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+ form.applyPattern(
+    &quot;There {0,choice,0#are no files|1#is one file|1&lt;are {0,number,integer} files}.&quot;);
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; As we see above, the string produced
+ by a &lt;code&gt;ChoiceFormat&lt;/code&gt; in &lt;code&gt;MessageFormat&lt;/code&gt; is treated as special;
+ occurrences of '{' are used to indicate subformats, and cause recursion.
+ If you create both a &lt;code&gt;MessageFormat&lt;/code&gt; and &lt;code&gt;ChoiceFormat&lt;/code&gt;
+ programmatically (instead of using the string patterns), then be careful not to
+ produce a format that recurses on itself, which will cause an infinite loop.
+ &lt;p&gt;
+ When a single argument is parsed more than once in the string, the last match
+ will be the final result of the parsing.  For example,
+ &lt;blockquote&gt;&lt;pre&gt;
+ MessageFormat mf = new MessageFormat(&quot;{0,number,#.##}, {0,number,#.#}&quot;);
+ Object[] objs = {new Double(3.1415)};
+ String result = mf.format( objs );
+ // result now equals &quot;3.14, 3.1&quot;
+ objs = null;
+ objs = mf.parse(result, new ParsePosition(0));
+ // objs now equals {new Double(3.1)}
+ &lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;
+ Likewise, parsing with a {@code MessageFormat} object using patterns containing
+ multiple occurrences of the same argument would return the last match.  For
+ example,
+ &lt;blockquote&gt;&lt;pre&gt;
+ MessageFormat mf = new MessageFormat(&quot;{0}, {0}, {0}&quot;);
+ String forParsing = &quot;x, y, z&quot;;
+ Object[] objs = mf.parse(forParsing, new ParsePosition(0));
+ // result now equals {new String(&quot;z&quot;)}
+ &lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;h4&gt;&lt;a name=&quot;synchronization&quot;&gt;Synchronization&lt;/a&gt;&lt;/h4&gt;
+
+ &lt;p&gt;
+ Message formats are not synchronized.
+ It is recommended to create separate format instances for each thread.
+ If multiple threads access a format concurrently, it must be synchronized
+ externally.
+
+ @see          java.util.Locale
+ @see          Format
+ @see          NumberFormat
+ @see          DecimalFormat
+ @see          DecimalFormatSymbols
+ @see          ChoiceFormat
+ @see          DateFormat
+ @see          SimpleDateFormat
+
+ @author       Mark Davis
+*/
+var MessageFormat = {
+
+<span id='java-text-MessageFormat-method-setLocale'>/**Sets the locale to be used when creating or comparing subformats.
+</span> This affects subsequent calls
+ &lt;ul&gt;
+ &lt;li&gt;to the {@link #applyPattern applyPattern}
+     and {@link #toPattern toPattern} methods if format elements specify
+     a format type and therefore have the subformats created in the
+     &lt;code&gt;applyPattern&lt;/code&gt; method, as well as
+ &lt;li&gt;to the &lt;code&gt;format&lt;/code&gt; and
+     {@link #formatToCharacterIterator formatToCharacterIterator} methods
+     if format elements do not specify a format type and therefore have
+     the subformats created in the formatting methods.
+ &lt;/ul&gt;
+ Subformats that have already been created are not affected.
+@param {Object {Locale}} locale the locale to be used when creating or comparing subformats
+*/
+setLocale : function(  ) {},
+
+<span id='java-text-MessageFormat-method-getLocale'>/**Gets the locale that's used when creating or comparing subformats.
+</span>@return {Object {java.util.Locale}} the locale used when creating or comparing subformats
+*/
+getLocale : function(  ) {},
+
+<span id='java-text-MessageFormat-method-applyPattern'>/**Sets the pattern used by this message format.
+</span> The method parses the pattern and creates a list of subformats
+ for the format elements contained in it.
+ Patterns and their interpretation are specified in the
+ &lt;a href=&quot;#patterns&quot;&gt;class description&lt;/a&gt;.
+@param {String} pattern the pattern for this message format
+@exception IllegalArgumentException if the pattern is invalid
+*/
+applyPattern : function(  ) {},
+
+<span id='java-text-MessageFormat-method-toPattern'>/**Returns a pattern representing the current state of the message format.
+</span> The string is constructed from internal information and therefore
+ does not necessarily equal the previously applied pattern.
+@return {String} a pattern representing the current state of the message format
+*/
+toPattern : function(  ) {},
+
+<span id='java-text-MessageFormat-method-setFormatsByArgumentIndex'>/**Sets the formats to use for the values passed into
+</span> &lt;code&gt;format&lt;/code&gt; methods or returned from &lt;code&gt;parse&lt;/code&gt;
+ methods. The indices of elements in &lt;code&gt;newFormats&lt;/code&gt;
+ correspond to the argument indices used in the previously set
+ pattern string.
+ The order of formats in &lt;code&gt;newFormats&lt;/code&gt; thus corresponds to
+ the order of elements in the &lt;code&gt;arguments&lt;/code&gt; array passed
+ to the &lt;code&gt;format&lt;/code&gt; methods or the result array returned
+ by the &lt;code&gt;parse&lt;/code&gt; methods.
+ &lt;p&gt;
+ If an argument index is used for more than one format element
+ in the pattern string, then the corresponding new format is used
+ for all such format elements. If an argument index is not used
+ for any format element in the pattern string, then the
+ corresponding new format is ignored. If fewer formats are provided
+ than needed, then only the formats for argument indices less
+ than &lt;code&gt;newFormats.length&lt;/code&gt; are replaced.
+@param {Object {java.text.Format[]}} newFormats the new formats to use
+@exception NullPointerException if &lt;code&gt;newFormats&lt;/code&gt; is null
+@since 1.4
+*/
+setFormatsByArgumentIndex : function(  ) {},
+
+<span id='java-text-MessageFormat-method-setFormats'>/**Sets the formats to use for the format elements in the
+</span> previously set pattern string.
+ The order of formats in &lt;code&gt;newFormats&lt;/code&gt; corresponds to
+ the order of format elements in the pattern string.
+ &lt;p&gt;
+ If more formats are provided than needed by the pattern string,
+ the remaining ones are ignored. If fewer formats are provided
+ than needed, then only the first &lt;code&gt;newFormats.length&lt;/code&gt;
+ formats are replaced.
+ &lt;p&gt;
+ Since the order of format elements in a pattern string often
+ changes during localization, it is generally better to use the
+ {@link #setFormatsByArgumentIndex setFormatsByArgumentIndex}
+ method, which assumes an order of formats corresponding to the
+ order of elements in the &lt;code&gt;arguments&lt;/code&gt; array passed to
+ the &lt;code&gt;format&lt;/code&gt; methods or the result array returned by
+ the &lt;code&gt;parse&lt;/code&gt; methods.
+@param {Object {java.text.Format[]}} newFormats the new formats to use
+@exception NullPointerException if &lt;code&gt;newFormats&lt;/code&gt; is null
+*/
+setFormats : function(  ) {},
+
+<span id='java-text-MessageFormat-method-setFormatByArgumentIndex'>/**Sets the format to use for the format elements within the
+</span> previously set pattern string that use the given argument
+ index.
+ The argument index is part of the format element definition and
+ represents an index into the &lt;code&gt;arguments&lt;/code&gt; array passed
+ to the &lt;code&gt;format&lt;/code&gt; methods or the result array returned
+ by the &lt;code&gt;parse&lt;/code&gt; methods.
+ &lt;p&gt;
+ If the argument index is used for more than one format element
+ in the pattern string, then the new format is used for all such
+ format elements. If the argument index is not used for any format
+ element in the pattern string, then the new format is ignored.
+@param {Number} argumentIndex the argument index for which to use the new format
+@param {Object {Format}} newFormat the new format to use
+@since 1.4
+*/
+setFormatByArgumentIndex : function(  ) {},
+
+<span id='java-text-MessageFormat-method-setFormat'>/**Sets the format to use for the format element with the given
+</span> format element index within the previously set pattern string.
+ The format element index is the zero-based number of the format
+ element counting from the start of the pattern string.
+ &lt;p&gt;
+ Since the order of format elements in a pattern string often
+ changes during localization, it is generally better to use the
+ {@link #setFormatByArgumentIndex setFormatByArgumentIndex}
+ method, which accesses format elements based on the argument
+ index they specify.
+@param {Number} formatElementIndex the index of a format element within the pattern
+@param {Object {Format}} newFormat the format to use for the specified format element
+@exception ArrayIndexOutOfBoundsException if {@code formatElementIndex} is equal to or
+            larger than the number of format elements in the pattern string
+*/
+setFormat : function(  ) {},
+
+<span id='java-text-MessageFormat-method-getFormatsByArgumentIndex'>/**Gets the formats used for the values passed into
+</span> &lt;code&gt;format&lt;/code&gt; methods or returned from &lt;code&gt;parse&lt;/code&gt;
+ methods. The indices of elements in the returned array
+ correspond to the argument indices used in the previously set
+ pattern string.
+ The order of formats in the returned array thus corresponds to
+ the order of elements in the &lt;code&gt;arguments&lt;/code&gt; array passed
+ to the &lt;code&gt;format&lt;/code&gt; methods or the result array returned
+ by the &lt;code&gt;parse&lt;/code&gt; methods.
+ &lt;p&gt;
+ If an argument index is used for more than one format element
+ in the pattern string, then the format used for the last such
+ format element is returned in the array. If an argument index
+ is not used for any format element in the pattern string, then
+ null is returned in the array.
+@return {Object {java.text.Format}} the formats used for the arguments within the pattern
+@since 1.4
+*/
+getFormatsByArgumentIndex : function(  ) {},
+
+<span id='java-text-MessageFormat-method-getFormats'>/**Gets the formats used for the format elements in the
+</span> previously set pattern string.
+ The order of formats in the returned array corresponds to
+ the order of format elements in the pattern string.
+ &lt;p&gt;
+ Since the order of format elements in a pattern string often
+ changes during localization, it's generally better to use the
+ {@link #getFormatsByArgumentIndex getFormatsByArgumentIndex}
+ method, which assumes an order of formats corresponding to the
+ order of elements in the &lt;code&gt;arguments&lt;/code&gt; array passed to
+ the &lt;code&gt;format&lt;/code&gt; methods or the result array returned by
+ the &lt;code&gt;parse&lt;/code&gt; methods.
+@return {Object {java.text.Format}} the formats used for the format elements in the pattern
+*/
+getFormats : function(  ) {},
+
+<span id='java-text-MessageFormat-method-format'>/**Formats an array of objects and appends the &lt;code&gt;MessageFormat&lt;/code&gt;'s
+</span> pattern, with format elements replaced by the formatted objects, to the
+ provided &lt;code&gt;StringBuffer&lt;/code&gt;.
+ &lt;p&gt;
+ The text substituted for the individual format elements is derived from
+ the current subformat of the format element and the
+ &lt;code&gt;arguments&lt;/code&gt; element at the format element's argument index
+ as indicated by the first matching line of the following table. An
+ argument is &lt;i&gt;unavailable&lt;/i&gt; if &lt;code&gt;arguments&lt;/code&gt; is
+ &lt;code&gt;null&lt;/code&gt; or has fewer than argumentIndex+1 elements.
+
+ &lt;table border=1 summary=&quot;Examples of subformat,argument,and formatted text&quot;&gt;
+    &lt;tr&gt;
+       &lt;th&gt;Subformat
+       &lt;th&gt;Argument
+       &lt;th&gt;Formatted Text
+    &lt;tr&gt;
+       &lt;td&gt;&lt;i&gt;any&lt;/i&gt;
+       &lt;td&gt;&lt;i&gt;unavailable&lt;/i&gt;
+       &lt;td&gt;&lt;code&gt;&quot;{&quot; + argumentIndex + &quot;}&quot;&lt;/code&gt;
+    &lt;tr&gt;
+       &lt;td&gt;&lt;i&gt;any&lt;/i&gt;
+       &lt;td&gt;&lt;code&gt;null&lt;/code&gt;
+       &lt;td&gt;&lt;code&gt;&quot;null&quot;&lt;/code&gt;
+    &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;instanceof ChoiceFormat&lt;/code&gt;
+       &lt;td&gt;&lt;i&gt;any&lt;/i&gt;
+       &lt;td&gt;&lt;code&gt;subformat.format(argument).indexOf('{') &amp;gt;= 0 ?&lt;br&gt;
+           (new MessageFormat(subformat.format(argument), getLocale())).format(argument) :
+           subformat.format(argument)&lt;/code&gt;
+    &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;!= null&lt;/code&gt;
+       &lt;td&gt;&lt;i&gt;any&lt;/i&gt;
+       &lt;td&gt;&lt;code&gt;subformat.format(argument)&lt;/code&gt;
+    &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;null&lt;/code&gt;
+       &lt;td&gt;&lt;code&gt;instanceof Number&lt;/code&gt;
+       &lt;td&gt;&lt;code&gt;NumberFormat.getInstance(getLocale()).format(argument)&lt;/code&gt;
+    &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;null&lt;/code&gt;
+       &lt;td&gt;&lt;code&gt;instanceof Date&lt;/code&gt;
+       &lt;td&gt;&lt;code&gt;DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, getLocale()).format(argument)&lt;/code&gt;
+    &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;null&lt;/code&gt;
+       &lt;td&gt;&lt;code&gt;instanceof String&lt;/code&gt;
+       &lt;td&gt;&lt;code&gt;argument&lt;/code&gt;
+    &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;null&lt;/code&gt;
+       &lt;td&gt;&lt;i&gt;any&lt;/i&gt;
+       &lt;td&gt;&lt;code&gt;argument.toString()&lt;/code&gt;
+ &lt;/table&gt;
+ &lt;p&gt;
+ If &lt;code&gt;pos&lt;/code&gt; is non-null, and refers to
+ &lt;code&gt;Field.ARGUMENT&lt;/code&gt;, the location of the first formatted
+ string will be returned.
+@param {Object {java.lang.Object[]}} arguments an array of objects to be formatted and substituted.
+@param {Object {StringBuffer}} result where text is appended.
+@param {Object {FieldPosition}} pos On input: an alignment field, if desired.
+            On output: the offsets of the alignment field.
+@return {Object {java.lang.StringBuffer}} the string buffer passed in as {@code result}, with formatted
+ text appended
+@exception IllegalArgumentException if an argument in the
+            &lt;code&gt;arguments&lt;/code&gt; array is not of the type
+            expected by the format element(s) that use it.
+*/
+format : function(  ) {},
+
+<span id='java-text-MessageFormat-method-format'>/**Creates a MessageFormat with the given pattern and uses it
+</span> to format the given arguments. This is equivalent to
+ &lt;blockquote&gt;
+     &lt;code&gt;(new {@link #java.text.MessageFormat(String) java.text.MessageFormat}(pattern)).{@link #format(java.lang.Object[], java.lang.StringBuffer, java.text.FieldPosition) format}(arguments, new StringBuffer(), null).toString()&lt;/code&gt;
+ &lt;/blockquote&gt;
+@param {String} pattern   the pattern string
+@param {Object {java.lang.Object[]}} arguments object(s) to format
+@return {String} the formatted string
+@exception IllegalArgumentException if the pattern is invalid,
+            or if an argument in the &lt;code&gt;arguments&lt;/code&gt; array
+            is not of the type expected by the format element(s)
+            that use it.
+*/
+format : function(  ) {},
+
+<span id='java-text-MessageFormat-method-format'>/**Formats an array of objects and appends the &lt;code&gt;MessageFormat&lt;/code&gt;'s
+</span> pattern, with format elements replaced by the formatted objects, to the
+ provided &lt;code&gt;StringBuffer&lt;/code&gt;.
+ This is equivalent to
+ &lt;blockquote&gt;
+     &lt;code&gt;{@link #format(java.lang.Object[], java.lang.StringBuffer, java.text.FieldPosition) format}((Object[]) arguments, result, pos)&lt;/code&gt;
+ &lt;/blockquote&gt;
+@param {Object {Object}} arguments an array of objects to be formatted and substituted.
+@param {Object {StringBuffer}} result where text is appended.
+@param {Object {FieldPosition}} pos On input: an alignment field, if desired.
+            On output: the offsets of the alignment field.
+@exception IllegalArgumentException if an argument in the
+            &lt;code&gt;arguments&lt;/code&gt; array is not of the type
+            expected by the format element(s) that use it.
+*/
+format : function(  ) {},
+
+<span id='java-text-MessageFormat-method-formatToCharacterIterator'>/**Formats an array of objects and inserts them into the
+</span> &lt;code&gt;MessageFormat&lt;/code&gt;'s pattern, producing an
+ &lt;code&gt;AttributedCharacterIterator&lt;/code&gt;.
+ You can use the returned &lt;code&gt;AttributedCharacterIterator&lt;/code&gt;
+ to build the resulting String, as well as to determine information
+ about the resulting String.
+ &lt;p&gt;
+ The text of the returned &lt;code&gt;AttributedCharacterIterator&lt;/code&gt; is
+ the same that would be returned by
+ &lt;blockquote&gt;
+     &lt;code&gt;{@link #format(java.lang.Object[], java.lang.StringBuffer, java.text.FieldPosition) format}(arguments, new StringBuffer(), null).toString()&lt;/code&gt;
+ &lt;/blockquote&gt;
+ &lt;p&gt;
+ In addition, the &lt;code&gt;AttributedCharacterIterator&lt;/code&gt; contains at
+ least attributes indicating where text was generated from an
+ argument in the &lt;code&gt;arguments&lt;/code&gt; array. The keys of these attributes are of
+ type &lt;code&gt;MessageFormat.Field&lt;/code&gt;, their values are
+ &lt;code&gt;Integer&lt;/code&gt; objects indicating the index in the &lt;code&gt;arguments&lt;/code&gt;
+ array of the argument from which the text was generated.
+ &lt;p&gt;
+ The attributes/value from the underlying &lt;code&gt;Format&lt;/code&gt;
+ instances that &lt;code&gt;MessageFormat&lt;/code&gt; uses will also be
+ placed in the resulting &lt;code&gt;AttributedCharacterIterator&lt;/code&gt;.
+ This allows you to not only find where an argument is placed in the
+ resulting String, but also which fields it contains in turn.
+@param {Object {Object}} arguments an array of objects to be formatted and substituted.
+@return {Object {java.text.AttributedCharacterIterator}} AttributedCharacterIterator describing the formatted value.
+@exception NullPointerException if &lt;code&gt;arguments&lt;/code&gt; is null.
+@exception IllegalArgumentException if an argument in the
+            &lt;code&gt;arguments&lt;/code&gt; array is not of the type
+            expected by the format element(s) that use it.
+@since 1.4
+*/
+formatToCharacterIterator : function(  ) {},
+
+<span id='java-text-MessageFormat-method-parse'>/**Parses the string.
+</span>
+ &lt;p&gt;Caveats: The parse may fail in a number of circumstances.
+ For example:
+ &lt;ul&gt;
+ &lt;li&gt;If one of the arguments does not occur in the pattern.
+ &lt;li&gt;If the format of an argument loses information, such as
+     with a choice format where a large number formats to &quot;many&quot;.
+ &lt;li&gt;Does not yet handle recursion (where
+     the substituted strings contain {n} references.)
+ &lt;li&gt;Will not always find a match (or the correct match)
+     if some part of the parse is ambiguous.
+     For example, if the pattern &quot;{1},{2}&quot; is used with the
+     string arguments {&quot;a,b&quot;, &quot;c&quot;}, it will format as &quot;a,b,c&quot;.
+     When the result is parsed, it will return {&quot;a&quot;, &quot;b,c&quot;}.
+ &lt;li&gt;If a single argument is parsed more than once in the string,
+     then the later parse wins.
+ &lt;/ul&gt;
+ When the parse fails, use ParsePosition.getErrorIndex() to find out
+ where in the string the parsing failed.  The returned error
+ index is the starting offset of the sub-patterns that the string
+ is comparing with.  For example, if the parsing string &quot;AAA {0} BBB&quot;
+ is comparing against the pattern &quot;AAD {0} BBB&quot;, the error index is
+ 0. When an error occurs, the call to this method will return null.
+ If the source is null, return an empty array.
+@param {String} source the string to parse
+@param {Object {ParsePosition}} pos    the parse position
+@return {Object {java.lang.Object}} an array of parsed objects
+*/
+parse : function(  ) {},
+
+<span id='java-text-MessageFormat-method-parse'>/**Parses text from the beginning of the given string to produce an object
+</span> array.
+ The method may not use the entire text of the given string.
+ &lt;p&gt;
+ See the {@link #parse(String, java.text.ParsePosition)} method for more information
+ on message parsing.
+@param {String} source A &lt;code&gt;String&lt;/code&gt; whose beginning should be parsed.
+@return {Object {java.lang.Object}} An &lt;code&gt;Object&lt;/code&gt; array parsed from the string.
+@exception ParseException if the beginning of the specified string
+            cannot be parsed.
+*/
+parse : function(  ) {},
+
+<span id='java-text-MessageFormat-method-parseObject'>/**Parses text from a string to produce an object array.
+</span> &lt;p&gt;
+ The method attempts to parse text starting at the index given by
+ &lt;code&gt;pos&lt;/code&gt;.
+ If parsing succeeds, then the index of &lt;code&gt;pos&lt;/code&gt; is updated
+ to the index after the last character used (parsing does not necessarily
+ use all characters up to the end of the string), and the parsed
+ object array is returned. The updated &lt;code&gt;pos&lt;/code&gt; can be used to
+ indicate the starting point for the next call to this method.
+ If an error occurs, then the index of &lt;code&gt;pos&lt;/code&gt; is not
+ changed, the error index of &lt;code&gt;pos&lt;/code&gt; is set to the index of
+ the character where the error occurred, and null is returned.
+ &lt;p&gt;
+ See the {@link #parse(String, java.text.ParsePosition)} method for more information
+ on message parsing.
+@param {String} source A &lt;code&gt;String&lt;/code&gt;, part of which should be parsed.
+@param {Object {ParsePosition}} pos A &lt;code&gt;ParsePosition&lt;/code&gt; object with index and error
+            index information as described above.
+@return {Object {java.lang.Object}} An &lt;code&gt;Object&lt;/code&gt; array parsed from the string. In case of
+         error, returns null.
+@exception NullPointerException if &lt;code&gt;pos&lt;/code&gt; is null.
+*/
+parseObject : function(  ) {},
+
+<span id='java-text-MessageFormat-method-clone'>/**Creates and returns a copy of this object.
+</span>@return {Object {java.lang.Object}} a clone of this instance.
+*/
+clone : function(  ) {},
+
+<span id='java-text-MessageFormat-method-equals'>/**Equality comparison between two message format objects
+</span>*/
+equals : function(  ) {},
+
+<span id='java-text-MessageFormat-method-hashCode'>/**Generates a hash code for the message format object.
+</span>*/
+hashCode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

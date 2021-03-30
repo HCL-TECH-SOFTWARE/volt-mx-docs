@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xml-sax-helpers-XMLReaderFactory'>/**@class org.xml.sax.helpers.XMLReaderFactory
+</span>@extends java.lang.Object
+
+ Factory for creating an XML reader.
+
+ &lt;blockquote&gt;
+ &lt;em&gt;This module, both source code and documentation, is in the
+ Public Domain, and comes with &lt;strong&gt;NO WARRANTY&lt;/strong&gt;.&lt;/em&gt;
+ See &lt;a href='http://www.saxproject.org'&gt;http://www.saxproject.org&lt;/a&gt;
+ for further information.
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;This class contains static methods for creating an XML reader
+ from an explicit class name, or based on runtime defaults:&lt;/p&gt;
+
+ &lt;pre&gt;
+ try {
+   XMLReader myReader = XMLReaderFactory.createXMLReader();
+ } catch (SAXException e) {
+   System.err.println(e.getMessage());
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;&lt;strong&gt;Note to Distributions bundled with parsers:&lt;/strong&gt;
+ You should modify the implementation of the no-arguments
+ &lt;em&gt;createXMLReader&lt;/em&gt; to handle cases where the external
+ configuration mechanisms aren't set up.  That method should do its
+ best to return a parser when one is in the class path, even when
+ nothing bound its class name to &lt;code&gt;org.xml.sax.driver&lt;/code&gt; so
+ those configuration mechanisms would see it.&lt;/p&gt;
+
+ @since SAX 2.0
+ @author David Megginson, David Brownell
+ @version 2.0.1 (sax2r2)
+*/
+var XMLReaderFactory = {
+
+<span id='org-xml-sax-helpers-XMLReaderFactory-method-createXMLReader'>/**Attempt to create an XMLReader from system defaults.
+</span> In environments which can support it, the name of the XMLReader
+ class is determined by trying each these options in order, and
+ using the first one which succeeds:&lt;/p&gt; &lt;ul&gt;
+
+ &lt;li&gt;If the system property &lt;code&gt;org.xml.sax.driver&lt;/code&gt;
+ has a value, that is used as an XMLReader class name. &lt;/li&gt;
+
+ &lt;li&gt;The JAR &quot;Services API&quot; is used to look for a class name
+ in the &lt;em&gt;META-INF/services/org.xml.sax.driver&lt;/em&gt; file in
+ jarfiles available to the runtime.&lt;/li&gt;
+
+ &lt;li&gt; SAX parser distributions are strongly encouraged to provide
+ a default XMLReader class name that will take effect only when
+ previous options (on this list) are not successful.&lt;/li&gt;
+
+ &lt;li&gt;Finally, if {@link org.xml.sax.helpers.ParserFactory#makeParser()} can
+ return a system default SAX1 parser, that parser is wrapped in
+ a {@link org.xml.sax.helpers.ParserAdapter}.  (This is a migration aid for SAX1
+ environments, where the &lt;code&gt;org.xml.sax.parser&lt;/code&gt; system
+ property will often be usable.) &lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ &lt;p&gt; In environments such as small embedded systems, which can not
+ support that flexibility, other mechanisms to determine the default
+ may be used. &lt;/p&gt;
+
+ &lt;p&gt;Note that many Java environments allow system properties to be
+ initialized on a command line.  This means that &lt;em&gt;in most cases&lt;/em&gt;
+ setting a good value for that property ensures that calls to this
+ method will succeed, except when security policies intervene.
+ This will also maximize application portability to older SAX
+ environments, with less robust implementations of this method.
+ &lt;/p&gt;
+@return {Object {org.xml.sax.XMLReader}} A new XMLReader.
+@exception org.xml.sax.SAXException If no default XMLReader class
+            can be identified and instantiated.
+@see #createXMLReader(java.lang.String)
+*/
+createXMLReader : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLReaderFactory-method-createXMLReader'>/**Attempt to create an XML reader from a class name.
+</span>
+ &lt;p&gt;Given a class name, this method attempts to load
+ and instantiate the class as an XML reader.&lt;/p&gt;
+@param {String} className the name of the class that should be instantiated.
+
+ &lt;p&gt;Note that this method will not be usable in environments where
+ the caller (perhaps an applet) is not permitted to load classes
+ dynamically.&lt;/p&gt;
+@return {Object {org.xml.sax.XMLReader}} A new XML reader.
+@exception org.xml.sax.SAXException If the class cannot be
+            loaded, instantiated, and cast to XMLReader.
+@see #createXMLReader()
+*/
+createXMLReader : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

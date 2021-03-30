@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-locks-AbstractQueuedSynchronizer'>/**@class java.util.concurrent.locks.AbstractQueuedSynchronizer
+</span> implements java.io.Serializable
+
+@extends java.util.concurrent.locks.AbstractOwnableSynchronizer
+
+ Provides a framework for implementing blocking locks and related
+ synchronizers (semaphores, events, etc) that rely on
+ first-in-first-out (FIFO) wait queues.  This class is designed to
+ be a useful basis for most kinds of synchronizers that rely on a
+ single atomic {@code int} value to represent state. Subclasses
+ must define the protected methods that change this state, and which
+ define what that state means in terms of this object being acquired
+ or released.  Given these, the other methods in this class carry
+ out all queuing and blocking mechanics. Subclasses can maintain
+ other state fields, but only the atomically updated {@code int}
+ value manipulated using methods {@link #getState}, {@link #setState} and {@link #compareAndSetState} is tracked with respect
+ to synchronization.
+
+ &lt;p&gt;Subclasses should be defined as non-public internal helper
+ classes that are used to implement the synchronization properties
+ of their enclosing class.  Class
+ {@code AbstractQueuedSynchronizer} does not implement any
+ synchronization interface.  Instead it defines methods such as
+ {@link #acquireInterruptibly} that can be invoked as
+ appropriate by concrete locks and related synchronizers to
+ implement their public methods.
+
+ &lt;p&gt;This class supports either or both a default &lt;em&gt;exclusive&lt;/em&gt;
+ mode and a &lt;em&gt;shared&lt;/em&gt; mode. When acquired in exclusive mode,
+ attempted acquires by other threads cannot succeed. Shared mode
+ acquires by multiple threads may (but need not) succeed. This class
+ does not &amp;quot;understand&amp;quot; these differences except in the
+ mechanical sense that when a shared mode acquire succeeds, the next
+ waiting thread (if one exists) must also determine whether it can
+ acquire as well. Threads waiting in the different modes share the
+ same FIFO queue. Usually, implementation subclasses support only
+ one of these modes, but both can come into play for example in a
+ {@link java.util.concurrent.locks.ReadWriteLock}. Subclasses that support only exclusive or
+ only shared modes need not define the methods supporting the unused mode.
+
+ &lt;p&gt;This class defines a nested {@link java.util.concurrent.locks.ConditionObject} class that
+ can be used as a {@link java.util.concurrent.locks.Condition} implementation by subclasses
+ supporting exclusive mode for which method {@link #isHeldExclusively} reports whether synchronization is exclusively
+ held with respect to the current thread, method {@link #release}
+ invoked with the current {@link #getState} value fully releases
+ this object, and {@link #acquire}, given this saved state value,
+ eventually restores this object to its previous acquired state.  No
+ {@code AbstractQueuedSynchronizer} method otherwise creates such a
+ condition, so if this constraint cannot be met, do not use it.  The
+ behavior of {@link java.util.concurrent.locks.ConditionObject} depends of course on the
+ semantics of its synchronizer implementation.
+
+ &lt;p&gt;This class provides inspection, instrumentation, and monitoring
+ methods for the internal queue, as well as similar methods for
+ condition objects. These can be exported as desired into classes
+ using an {@code AbstractQueuedSynchronizer} for their
+ synchronization mechanics.
+
+ &lt;p&gt;Serialization of this class stores only the underlying atomic
+ integer maintaining state, so deserialized objects have empty
+ thread queues. Typical subclasses requiring serializability will
+ define a {@code readObject} method that restores this to a known
+ initial state upon deserialization.
+
+ &lt;h3&gt;Usage&lt;/h3&gt;
+
+ &lt;p&gt;To use this class as the basis of a synchronizer, redefine the
+ following methods, as applicable, by inspecting and/or modifying
+ the synchronization state using {@link #getState}, {@link #setState} and/or {@link #compareAndSetState}:
+
+ &lt;ul&gt;
+ &lt;li&gt;{@link #tryAcquire}
+ &lt;li&gt;{@link #tryRelease}
+ &lt;li&gt;{@link #tryAcquireShared}
+ &lt;li&gt;{@link #tryReleaseShared}
+ &lt;li&gt;{@link #isHeldExclusively}
+ &lt;/ul&gt;
+
+ Each of these methods by default throws {@link UnsupportedOperationException}.  Implementations of these methods
+ must be internally thread-safe, and should in general be short and
+ not block. Defining these methods is the &lt;em&gt;only&lt;/em&gt; supported
+ means of using this class. All other methods are declared
+ {@code final} because they cannot be independently varied.
+
+ &lt;p&gt;You may also find the inherited methods from {@link java.util.concurrent.locks.AbstractOwnableSynchronizer} useful to keep track of the thread
+ owning an exclusive synchronizer.  You are encouraged to use them
+ -- this enables monitoring and diagnostic tools to assist users in
+ determining which threads hold locks.
+
+ &lt;p&gt;Even though this class is based on an internal FIFO queue, it
+ does not automatically enforce FIFO acquisition policies.  The core
+ of exclusive synchronization takes the form:
+
+ &lt;pre&gt;
+ Acquire:
+     while (!tryAcquire(arg)) {
+        &lt;em&gt;enqueue thread if it is not already queued&lt;/em&gt;;
+        &lt;em&gt;possibly block current thread&lt;/em&gt;;
+     }
+
+ Release:
+     if (tryRelease(arg))
+        &lt;em&gt;unblock the first queued thread&lt;/em&gt;;
+ &lt;/pre&gt;
+
+ (Shared mode is similar but may involve cascading signals.)
+
+ &lt;p id=&quot;barging&quot;&gt;Because checks in acquire are invoked before
+ enqueuing, a newly acquiring thread may &lt;em&gt;barge&lt;/em&gt; ahead of
+ others that are blocked and queued.  However, you can, if desired,
+ define {@code tryAcquire} and/or {@code tryAcquireShared} to
+ disable barging by internally invoking one or more of the inspection
+ methods, thereby providing a &lt;em&gt;fair&lt;/em&gt; FIFO acquisition order.
+ In particular, most fair synchronizers can define {@code tryAcquire}
+ to return {@code false} if {@link #hasQueuedPredecessors} (a method
+ specifically designed to be used by fair synchronizers) returns
+ {@code true}.  Other variations are possible.
+
+ &lt;p&gt;Throughput and scalability are generally highest for the
+ default barging (also known as &lt;em&gt;greedy&lt;/em&gt;,
+ &lt;em&gt;renouncement&lt;/em&gt;, and &lt;em&gt;convoy-avoidance&lt;/em&gt;) strategy.
+ While this is not guaranteed to be fair or starvation-free, earlier
+ queued threads are allowed to recontend before later queued
+ threads, and each recontention has an unbiased chance to succeed
+ against incoming threads.  Also, while acquires do not
+ &amp;quot;spin&amp;quot; in the usual sense, they may perform multiple
+ invocations of {@code tryAcquire} interspersed with other
+ computations before blocking.  This gives most of the benefits of
+ spins when exclusive synchronization is only briefly held, without
+ most of the liabilities when it isn't. If so desired, you can
+ augment this by preceding calls to acquire methods with
+ &quot;fast-path&quot; checks, possibly prechecking {@link #hasContended}
+ and/or {@link #hasQueuedThreads} to only do so if the synchronizer
+ is likely not to be contended.
+
+ &lt;p&gt;This class provides an efficient and scalable basis for
+ synchronization in part by specializing its range of use to
+ synchronizers that can rely on {@code int} state, acquire, and
+ release parameters, and an internal FIFO wait queue. When this does
+ not suffice, you can build synchronizers from a lower level using
+ {@link java.util.concurrent.atomic atomic} classes, your own custom
+ {@link java.util.Queue} classes, and {@link java.util.concurrent.locks.LockSupport} blocking
+ support.
+
+ &lt;h3&gt;Usage Examples&lt;/h3&gt;
+
+ &lt;p&gt;Here is a non-reentrant mutual exclusion lock class that uses
+ the value zero to represent the unlocked state, and one to
+ represent the locked state. While a non-reentrant lock
+ does not strictly require recording of the current owner
+ thread, this class does so anyway to make usage easier to monitor.
+ It also supports conditions and exposes
+ one of the instrumentation methods:
+
+ &lt;pre&gt; {@code
+ class Mutex implements Lock, java.io.Serializable {
+
+   // Our internal helper class
+   private static class Sync extends AbstractQueuedSynchronizer {
+     // Reports whether in locked state
+     protected boolean isHeldExclusively() {
+       return getState() == 1;
+     }
+
+     // Acquires the lock if state is zero
+     public boolean tryAcquire(int acquires) {
+       assert acquires == 1; // Otherwise unused
+       if (compareAndSetState(0, 1)) {
+         setExclusiveOwnerThread(Thread.currentThread());
+         return true;
+       }
+       return false;
+     }
+
+     // Releases the lock by setting state to zero
+     protected boolean tryRelease(int releases) {
+       assert releases == 1; // Otherwise unused
+       if (getState() == 0) throw new IllegalMonitorStateException();
+       setExclusiveOwnerThread(null);
+       setState(0);
+       return true;
+     }
+
+     // Provides a Condition
+     Condition newCondition() { return new ConditionObject(); }
+
+     // Deserializes properly
+     private void readObject(ObjectInputStream s)
+         throws IOException, ClassNotFoundException {
+       s.defaultReadObject();
+       setState(0); // reset to unlocked state
+     }
+   }
+
+   // The sync object does all the hard work. We just forward to it.
+   private final Sync sync = new Sync();
+
+   public void lock()                { sync.acquire(1); }
+   public boolean tryLock()          { return sync.tryAcquire(1); }
+   public void unlock()              { sync.release(1); }
+   public Condition newCondition()   { return sync.newCondition(); }
+   public boolean isLocked()         { return sync.isHeldExclusively(); }
+   public boolean hasQueuedThreads() { return sync.hasQueuedThreads(); }
+   public void lockInterruptibly() throws InterruptedException {
+     sync.acquireInterruptibly(1);
+   }
+   public boolean tryLock(long timeout, TimeUnit unit)
+       throws InterruptedException {
+     return sync.tryAcquireNanos(1, unit.toNanos(timeout));
+   }
+ }}&lt;/pre&gt;
+
+ &lt;p&gt;Here is a latch class that is like a
+ {@link java.util.concurrent.CountDownLatch CountDownLatch}
+ except that it only requires a single {@code signal} to
+ fire. Because a latch is non-exclusive, it uses the {@code shared}
+ acquire and release methods.
+
+ &lt;pre&gt; {@code
+ class BooleanLatch {
+
+   private static class Sync extends AbstractQueuedSynchronizer {
+     boolean isSignalled() { return getState() != 0; }
+
+     protected int tryAcquireShared(int ignore) {
+       return isSignalled() ? 1 : -1;
+     }
+
+     protected boolean tryReleaseShared(int ignore) {
+       setState(1);
+       return true;
+     }
+   }
+
+   private final Sync sync = new Sync();
+   public boolean isSignalled() { return sync.isSignalled(); }
+   public void signal()         { sync.releaseShared(1); }
+   public void await() throws InterruptedException {
+     sync.acquireSharedInterruptibly(1);
+   }
+ }}&lt;/pre&gt;
+
+ @since 1.5
+ @author Doug Lea
+*/
+var AbstractQueuedSynchronizer = {
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-acquire'>/**Acquires in exclusive mode, ignoring interrupts.  Implemented
+</span> by invoking at least once {@link #tryAcquire},
+ returning on success.  Otherwise the thread is queued, possibly
+ repeatedly blocking and unblocking, invoking {@link #tryAcquire} until success.  This method can be used
+ to implement method {@link java.util.concurrent.locks.Lock#lock}.
+@param {Number} arg the acquire argument.  This value is conveyed to
+        {@link #tryAcquire} but is otherwise uninterpreted and
+        can represent anything you like.
+*/
+acquire : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-acquireInterruptibly'>/**Acquires in exclusive mode, aborting if interrupted.
+</span> Implemented by first checking interrupt status, then invoking
+ at least once {@link #tryAcquire}, returning on
+ success.  Otherwise the thread is queued, possibly repeatedly
+ blocking and unblocking, invoking {@link #tryAcquire}
+ until success or the thread is interrupted.  This method can be
+ used to implement method {@link java.util.concurrent.locks.Lock#lockInterruptibly}.
+@param {Number} arg the acquire argument.  This value is conveyed to
+        {@link #tryAcquire} but is otherwise uninterpreted and
+        can represent anything you like.
+@throws InterruptedException if the current thread is interrupted
+*/
+acquireInterruptibly : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-tryAcquireNanos'>/**Attempts to acquire in exclusive mode, aborting if interrupted,
+</span> and failing if the given timeout elapses.  Implemented by first
+ checking interrupt status, then invoking at least once {@link #tryAcquire}, returning on success.  Otherwise, the thread is
+ queued, possibly repeatedly blocking and unblocking, invoking
+ {@link #tryAcquire} until success or the thread is interrupted
+ or the timeout elapses.  This method can be used to implement
+ method {@link java.util.concurrent.locks.Lock#tryjava.util.concurrent.locks.Lock(long, TimeUnit)}.
+@param {Number} arg the acquire argument.  This value is conveyed to
+        {@link #tryAcquire} but is otherwise uninterpreted and
+        can represent anything you like.
+@param {Number} nanosTimeout the maximum number of nanoseconds to wait
+@return {Boolean} {@code true} if acquired; {@code false} if timed out
+@throws InterruptedException if the current thread is interrupted
+*/
+tryAcquireNanos : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-release'>/**Releases in exclusive mode.  Implemented by unblocking one or
+</span> more threads if {@link #tryRelease} returns true.
+ This method can be used to implement method {@link java.util.concurrent.locks.Lock#unlock}.
+@param {Number} arg the release argument.  This value is conveyed to
+        {@link #tryRelease} but is otherwise uninterpreted and
+        can represent anything you like.
+@return {Boolean} the value returned from {@link #tryRelease}
+*/
+release : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-acquireShared'>/**Acquires in shared mode, ignoring interrupts.  Implemented by
+</span> first invoking at least once {@link #tryAcquireShared},
+ returning on success.  Otherwise the thread is queued, possibly
+ repeatedly blocking and unblocking, invoking {@link #tryAcquireShared} until success.
+@param {Number} arg the acquire argument.  This value is conveyed to
+        {@link #tryAcquireShared} but is otherwise uninterpreted
+        and can represent anything you like.
+*/
+acquireShared : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-acquireSharedInterruptibly'>/**Acquires in shared mode, aborting if interrupted.  Implemented
+</span> by first checking interrupt status, then invoking at least once
+ {@link #tryAcquireShared}, returning on success.  Otherwise the
+ thread is queued, possibly repeatedly blocking and unblocking,
+ invoking {@link #tryAcquireShared} until success or the thread
+ is interrupted.
+@param {Number} arg the acquire argument.
+ This value is conveyed to {@link #tryAcquireShared} but is
+ otherwise uninterpreted and can represent anything
+ you like.
+@throws InterruptedException if the current thread is interrupted
+*/
+acquireSharedInterruptibly : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-tryAcquireSharedNanos'>/**Attempts to acquire in shared mode, aborting if interrupted, and
+</span> failing if the given timeout elapses.  Implemented by first
+ checking interrupt status, then invoking at least once {@link #tryAcquireShared}, returning on success.  Otherwise, the
+ thread is queued, possibly repeatedly blocking and unblocking,
+ invoking {@link #tryAcquireShared} until success or the thread
+ is interrupted or the timeout elapses.
+@param {Number} arg the acquire argument.  This value is conveyed to
+        {@link #tryAcquireShared} but is otherwise uninterpreted
+        and can represent anything you like.
+@param {Number} nanosTimeout the maximum number of nanoseconds to wait
+@return {Boolean} {@code true} if acquired; {@code false} if timed out
+@throws InterruptedException if the current thread is interrupted
+*/
+tryAcquireSharedNanos : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-releaseShared'>/**Releases in shared mode.  Implemented by unblocking one or more
+</span> threads if {@link #tryReleaseShared} returns true.
+@param {Number} arg the release argument.  This value is conveyed to
+        {@link #tryReleaseShared} but is otherwise uninterpreted
+        and can represent anything you like.
+@return {Boolean} the value returned from {@link #tryReleaseShared}
+*/
+releaseShared : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-hasQueuedThreads'>/**Queries whether any threads are waiting to acquire. Note that
+</span> because cancellations due to interrupts and timeouts may occur
+ at any time, a {@code true} return does not guarantee that any
+ other thread will ever acquire.
+
+ &lt;p&gt;In this implementation, this operation returns in
+ constant time.
+@return {Boolean} {@code true} if there may be other threads waiting to acquire
+*/
+hasQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-hasContended'>/**Queries whether any threads have ever contended to acquire this
+</span> synchronizer; that is, if an acquire method has ever blocked.
+
+ &lt;p&gt;In this implementation, this operation returns in
+ constant time.
+@return {Boolean} {@code true} if there has ever been contention
+*/
+hasContended : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-getFirstQueuedThread'>/**Returns the first (longest-waiting) thread in the queue, or
+</span> {@code null} if no threads are currently queued.
+
+ &lt;p&gt;In this implementation, this operation normally returns in
+ constant time, but may iterate upon contention if other threads are
+ concurrently modifying the queue.
+@return {Object {java.lang.Thread}} the first (longest-waiting) thread in the queue, or
+         {@code null} if no threads are currently queued
+*/
+getFirstQueuedThread : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-isQueued'>/**Returns true if the given thread is currently queued.
+</span>
+ &lt;p&gt;This implementation traverses the queue to determine
+ presence of the given thread.
+@param {Object {Thread}} thread the thread
+@return {Boolean} {@code true} if the given thread is on the queue
+@throws NullPointerException if the thread is null
+*/
+isQueued : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-hasQueuedPredecessors'>/**Queries whether any threads have been waiting to acquire longer
+</span> than the current thread.
+
+ &lt;p&gt;An invocation of this method is equivalent to (but may be
+ more efficient than):
+ &lt;pre&gt; {@code
+ getFirstQueuedThread() != Thread.currentThread()
+   &amp;&amp; hasQueuedThreads()}&lt;/pre&gt;
+
+ &lt;p&gt;Note that because cancellations due to interrupts and
+ timeouts may occur at any time, a {@code true} return does not
+ guarantee that some other thread will acquire before the current
+ thread.  Likewise, it is possible for another thread to win a
+ race to enqueue after this method has returned {@code false},
+ due to the queue being empty.
+
+ &lt;p&gt;This method is designed to be used by a fair synchronizer to
+ avoid &lt;a href=&quot;AbstractQueuedSynchronizer.html#barging&quot;&gt;barging&lt;/a&gt;.
+ Such a synchronizer's {@link #tryAcquire} method should return
+ {@code false}, and its {@link #tryAcquireShared} method should
+ return a negative value, if this method returns {@code true}
+ (unless this is a reentrant acquire).  For example, the {@code
+ tryAcquire} method for a fair, reentrant, exclusive mode
+ synchronizer might look like this:
+
+ &lt;pre&gt; {@code
+ protected boolean tryAcquire(int arg) {
+   if (isHeldExclusively()) {
+     // A reentrant acquire; increment hold count
+     return true;
+   } else if (hasQueuedPredecessors()) {
+     return false;
+   } else {
+     // try to acquire normally
+   }
+ }}&lt;/pre&gt;
+@return {Boolean} {@code true} if there is a queued thread preceding the
+         current thread, and {@code false} if the current thread
+         is at the head of the queue or the queue is empty
+@since 1.7
+*/
+hasQueuedPredecessors : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-getQueueLength'>/**Returns an estimate of the number of threads waiting to
+</span> acquire.  The value is only an estimate because the number of
+ threads may change dynamically while this method traverses
+ internal data structures.  This method is designed for use in
+ monitoring system state, not for synchronization control.
+@return {Number} the estimated number of threads waiting to acquire
+*/
+getQueueLength : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-getQueuedThreads'>/**Returns a collection containing threads that may be waiting to
+</span> acquire.  Because the actual set of threads may change
+ dynamically while constructing this result, the returned
+ collection is only a best-effort estimate.  The elements of the
+ returned collection are in no particular order.  This method is
+ designed to facilitate construction of subclasses that provide
+ more extensive monitoring facilities.
+@return {Object {java.util.Collection}} the collection of threads
+*/
+getQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-getExclusiveQueuedThreads'>/**Returns a collection containing threads that may be waiting to
+</span> acquire in exclusive mode. This has the same properties
+ as {@link #getQueuedThreads} except that it only returns
+ those threads waiting due to an exclusive acquire.
+@return {Object {java.util.Collection}} the collection of threads
+*/
+getExclusiveQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-getSharedQueuedThreads'>/**Returns a collection containing threads that may be waiting to
+</span> acquire in shared mode. This has the same properties
+ as {@link #getQueuedThreads} except that it only returns
+ those threads waiting due to a shared acquire.
+@return {Object {java.util.Collection}} the collection of threads
+*/
+getSharedQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-toString'>/**Returns a string identifying this synchronizer, as well as its state.
+</span> The state, in brackets, includes the String {@code &quot;State =&quot;}
+ followed by the current value of {@link #getState}, and either
+ {@code &quot;nonempty&quot;} or {@code &quot;empty&quot;} depending on whether the
+ queue is empty.
+@return {String} a string identifying this synchronizer, as well as its state
+*/
+toString : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-owns'>/**Queries whether the given ConditionObject
+</span> uses this synchronizer as its lock.
+@param {Object {AbstractQueuedSynchronizer.ConditionObject}} condition the condition
+@return {Boolean} {@code true} if owned
+@throws NullPointerException if the condition is null
+*/
+owns : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-hasWaiters'>/**Queries whether any threads are waiting on the given condition
+</span> associated with this synchronizer. Note that because timeouts
+ and interrupts may occur at any time, a {@code true} return
+ does not guarantee that a future {@code signal} will awaken
+ any threads.  This method is designed primarily for use in
+ monitoring of the system state.
+@param {Object {AbstractQueuedSynchronizer.ConditionObject}} condition the condition
+@return {Boolean} {@code true} if there are any waiting threads
+@throws IllegalMonitorStateException if exclusive synchronization
+         is not held
+@throws IllegalArgumentException if the given condition is
+         not associated with this synchronizer
+@throws NullPointerException if the condition is null
+*/
+hasWaiters : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-getWaitQueueLength'>/**Returns an estimate of the number of threads waiting on the
+</span> given condition associated with this synchronizer. Note that
+ because timeouts and interrupts may occur at any time, the
+ estimate serves only as an upper bound on the actual number of
+ waiters.  This method is designed for use in monitoring system
+ state, not for synchronization control.
+@param {Object {AbstractQueuedSynchronizer.ConditionObject}} condition the condition
+@return {Number} the estimated number of waiting threads
+@throws IllegalMonitorStateException if exclusive synchronization
+         is not held
+@throws IllegalArgumentException if the given condition is
+         not associated with this synchronizer
+@throws NullPointerException if the condition is null
+*/
+getWaitQueueLength : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedSynchronizer-method-getWaitingThreads'>/**Returns a collection containing those threads that may be
+</span> waiting on the given condition associated with this
+ synchronizer.  Because the actual set of threads may change
+ dynamically while constructing this result, the returned
+ collection is only a best-effort estimate. The elements of the
+ returned collection are in no particular order.
+@param {Object {AbstractQueuedSynchronizer.ConditionObject}} condition the condition
+@return {Object {java.util.Collection}} the collection of threads
+@throws IllegalMonitorStateException if exclusive synchronization
+         is not held
+@throws IllegalArgumentException if the given condition is
+         not associated with this synchronizer
+@throws NullPointerException if the condition is null
+*/
+getWaitingThreads : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

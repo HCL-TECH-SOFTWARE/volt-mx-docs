@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-p2p-WifiP2pNative'>/**@class com.android.server.wifi.p2p.WifiP2pNative
+</span>@extends java.lang.Object
+
+ Native calls for bring up/shut down of the supplicant daemon and for
+ sending requests to the supplicant daemon
+
+ {@hide}
+*/
+var WifiP2pNative = {
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-enableVerboseLogging'>/**Enable verbose logging for all sub modules.
+</span>*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-closeSupplicantConnection'>/**Close supplicant connection.
+</span>*/
+closeSupplicantConnection : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-isHalInterfaceSupported'>/**Returns whether HAL (HIDL) is supported on this device or not.
+</span>*/
+isHalInterfaceSupported : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-registerInterfaceAvailableListener'>/**Register for an interface available callbacks from HalDeviceManager.
+</span>@param {Object {HalDeviceManager.InterfaceAvailableForRequestListener}} listener callback to be invoked when the interface is available/not available.
+*/
+registerInterfaceAvailableListener : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setupInterface'>/**Setup Interface for P2p mode.
+</span>@param {Object {HalDeviceManager.InterfaceDestroyedListener}} destroyedListener Listener to be invoked when the interface is destroyed.
+@param {Object {Handler}} handler Handler to be used for invoking the destroyedListener.
+*/
+setupInterface : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-teardownInterface'>/**Teardown P2p interface.
+</span>*/
+teardownInterface : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setDeviceName'>/**Set WPS device name.
+</span>@param {String} name String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setDeviceName : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pListNetworks'>/**Populate list of available networks or update existing list.
+</span>@return {Boolean} true, if list has been modified.
+*/
+p2pListNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-startWpsPbc'>/**Initiate WPS Push Button setup.
+</span> The PBC operation requires that a button is also pressed at the
+ AP/Registrar at about the same time (2 minute window).
+@param {String} iface Group interface name to use.
+@param {String} bssid BSSID of the AP. Use zero'ed bssid to indicate wildcard.
+@return {Boolean} true, if operation was successful.
+*/
+startWpsPbc : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-startWpsPinKeypad'>/**Initiate WPS Pin Keypad setup.
+</span>@param {String} iface Group interface name to use.
+@param {String} pin 8 digit pin to be used.
+@return {Boolean} true, if operation was successful.
+*/
+startWpsPinKeypad : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-startWpsPinDisplay'>/**Initiate WPS Pin Display setup.
+</span>@param {String} iface Group interface name to use.
+@param {String} bssid BSSID of the AP. Use zero'ed bssid to indicate wildcard.
+@return {String} generated pin if operation was successful, null otherwise.
+*/
+startWpsPinDisplay : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-removeP2pNetwork'>/**Remove network with provided id.
+</span>@param {Number} netId Id of the network to lookup.
+@return {Boolean} true, if operation was successful.
+*/
+removeP2pNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setP2pDeviceName'>/**Set WPS device name.
+</span>@param {String} name String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setP2pDeviceName : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setP2pDeviceType'>/**Set WPS device type.
+</span>@param {String} type Type specified as a string. Used format: &lt;categ&gt;-&lt;OUI&gt;-&lt;subcateg&gt;
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setP2pDeviceType : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setConfigMethods'>/**Set WPS config methods
+</span>@param {String} cfg List of config methods.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setConfigMethods : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setP2pSsidPostfix'>/**Set the postfix to be used for P2P SSID's.
+</span>@param {String} postfix String to be appended to SSID.
+@return {Boolean} boolean value indicating whether operation was successful.
+*/
+setP2pSsidPostfix : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setP2pGroupIdle'>/**Set the Maximum idle time in seconds for P2P groups.
+</span> This value controls how long a P2P group is maintained after there
+ is no other members in the group. As a group owner, this means no
+ associated stations in the group. As a P2P client, this means no
+ group owner seen in scan results.
+@param {String} iface Group interface name to use.
+@param {Number} time Timeout value in seconds.
+@return {Boolean} boolean value indicating whether operation was successful.
+*/
+setP2pGroupIdle : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setP2pPowerSave'>/**Turn on/off power save mode for the interface.
+</span>@param {String} iface Group interface name to use.
+@param {Boolean} enabled Indicate if power save is to be turned on/off.
+@return {Boolean} boolean value indicating whether operation was successful.
+*/
+setP2pPowerSave : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setWfdEnable'>/**Enable/Disable Wifi Display.
+</span>@param {Boolean} enable true to enable, false to disable.
+@return {Boolean} true, if operation was successful.
+*/
+setWfdEnable : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setWfdDeviceInfo'>/**Set Wifi Display device info.
+</span>@param {String} hex WFD device info as described in section 5.1.2 of WFD technical
+        specification v1.0.0.
+@return {Boolean} true, if operation was successful.
+*/
+setWfdDeviceInfo : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pFind'>/**Initiate a P2P service discovery indefinitely.
+</span> Will trigger {@link com.android.server.wifi.p2p.WifiP2pMonitor#P2P_DEVICE_FOUND_EVENT} on finding devices.
+@return {Boolean} boolean value indicating whether operation was successful.
+*/
+p2pFind : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pFind'>/**Initiate a P2P service discovery with a (optional) timeout.
+</span>@param {Number} timeout Max time to be spent is peforming discovery.
+        Set to 0 to indefinely continue discovery untill and explicit
+        |stopFind| is sent.
+@return {Boolean} boolean value indicating whether operation was successful.
+*/
+p2pFind : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pStopFind'>/**Stop an ongoing P2P service discovery.
+</span>@return {Boolean} boolean value indicating whether operation was successful.
+*/
+p2pStopFind : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pExtListen'>/**Configure Extended Listen Timing.
+</span>
+ If enabled, listen state must be entered every |intervalInMillis| for at
+ least |periodInMillis|. Both values have acceptable range of 1-65535
+ (with interval obviously having to be larger than or equal to duration).
+ If the P2P module is not idle at the time the Extended Listen Timing
+ timeout occurs, the Listen State operation must be skipped.
+@param {Boolean} enable Enables or disables listening.
+@param {Number} period Period in milliseconds.
+@param {Number} interval Interval in milliseconds.
+@return {Boolean} true, if operation was successful.
+*/
+p2pExtListen : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pSetChannel'>/**Set P2P Listen channel.
+</span>
+ When specifying a social channel on the 2.4 GHz band (1/6/11) there is no
+ need to specify the operating class since it defaults to 81. When
+ specifying a social channel on the 60 GHz band (2), specify the 60 GHz
+ operating class (180).
+@param {Number} lc Wifi channel. eg, 1, 6, 11.
+@param {Number} oc Operating Class indicates the channel set of the AP
+        indicated by this BSSID
+@return {Boolean} true, if operation was successful.
+*/
+p2pSetChannel : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pFlush'>/**Flush P2P peer table and state.
+</span>@return {Boolean} boolean value indicating whether operation was successful.
+*/
+p2pFlush : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pConnect'>/**Start P2P group formation with a discovered P2P peer. This includes
+</span> optional group owner negotiation, group interface setup, provisioning,
+ and establishing data connection.
+@param {Object {WifiP2pConfig}} config Configuration to use to connect to remote device.
+@param {Boolean} joinExistingGroup Indicates that this is a command to join an
+        existing group as a client. It skips the group owner negotiation
+        part. This must send a Provision Discovery Request message to the
+        target group owner before associating for WPS provisioning.
+@return {String} String containing generated pin, if selected provision method
+        uses PIN.
+*/
+p2pConnect : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pCancelConnect'>/**Cancel an ongoing P2P group formation and joining-a-group related
+</span> operation. This operation unauthorizes the specific peer device (if any
+ had been authorized to start group formation), stops P2P find (if in
+ progress), stops pending operations for join-a-group, and removes the
+ P2P group interface (if one was used) that is in the WPS provisioning
+ step. If the WPS provisioning step has been completed, the group is not
+ terminated.
+@return {Boolean} boolean value indicating whether operation was successful.
+*/
+p2pCancelConnect : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pProvisionDiscovery'>/**Send P2P provision discovery request to the specified peer. The
+</span> parameters for this command are the P2P device address of the peer and the
+ desired configuration method.
+@param {Object {WifiP2pConfig}} config Config class describing peer setup.
+@return {Boolean} boolean value indicating whether operation was successful.
+*/
+p2pProvisionDiscovery : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pGroupAdd'>/**Set up a P2P group owner manually.
+</span> This is a helper method that invokes groupAdd(networkId, isPersistent) internally.
+@param {Boolean} persistent Used to request a persistent group to be formed.
+@return {Boolean} true, if operation was successful.
+*/
+p2pGroupAdd : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pGroupAdd'>/**Set up a P2P group owner manually (i.e., without group owner
+</span> negotiation with a specific peer). This is also known as autonomous
+ group owner.
+@param {Number} netId Used to specify the restart of a persistent group.
+@return {Boolean} true, if operation was successful.
+*/
+p2pGroupAdd : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pGroupAdd'>/**Set up a P2P group as Group Owner or join a group with a configuration.
+</span>@param {Object {WifiP2pConfig}} config Used to specify config for setting up a P2P group
+@return {Boolean} true, if operation was successful.
+*/
+p2pGroupAdd : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pGroupRemove'>/**Terminate a P2P group. If a new virtual network interface was used for
+</span> the group, it must also be removed. The network interface name of the
+ group interface is used as a parameter for this command.
+@param {String} iface Group interface name to use.
+@return {Boolean} true, if operation was successful.
+*/
+p2pGroupRemove : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pReject'>/**Reject connection attempt from a peer (specified with a device
+</span> address). This is a mechanism to reject a pending group owner negotiation
+ with a peer and request to automatically block any further connection or
+ discovery of the peer.
+@param {String} deviceAddress MAC address of the device to reject.
+@return {Boolean} boolean value indicating whether operation was successful.
+*/
+p2pReject : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pInvite'>/**Invite a device to a persistent group.
+</span> If the peer device is the group owner of the persistent group, the peer
+ parameter is not needed. Otherwise it is used to specify which
+ device to invite. |goDeviceAddress| parameter may be used to override
+ the group owner device address for Invitation Request should it not be
+ known for some reason (this should not be needed in most cases).
+@param {Object {WifiP2pGroup}} group Group object to use.
+@param {String} deviceAddress MAC address of the device to invite.
+@return {Boolean} boolean value indicating whether operation was successful.
+*/
+p2pInvite : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pReinvoke'>/**Reinvoke a device from a persistent group.
+</span>@param {Number} netId Used to specify the persistent group.
+@param {String} deviceAddress MAC address of the device to reinvoke.
+@return {Boolean} true, if operation was successful.
+*/
+p2pReinvoke : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pGetSsid'>/**Gets the operational SSID of the device.
+</span>@param {String} deviceAddress MAC address of the peer.
+@return {String} SSID of the device.
+*/
+p2pGetSsid : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pGetDeviceAddress'>/**Gets the MAC address of the device.
+</span>@return {String} MAC address of the device.
+*/
+p2pGetDeviceAddress : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-getGroupCapability'>/**Gets the capability of the group which the device is a
+</span> member of.
+@param {String} deviceAddress MAC address of the peer.
+@return {Number} combination of |GroupCapabilityMask| values.
+*/
+getGroupCapability : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pServiceAdd'>/**This command can be used to add a upnp/bonjour service.
+</span>@param {Object {WifiP2pServiceInfo}} servInfo List of service queries.
+@return {Boolean} true, if operation was successful.
+*/
+p2pServiceAdd : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pServiceDel'>/**This command can be used to remove a upnp/bonjour service.
+</span>@param {Object {WifiP2pServiceInfo}} servInfo List of service queries.
+@return {Boolean} true, if operation was successful.
+*/
+p2pServiceDel : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pServiceFlush'>/**This command can be used to flush all services from the
+</span> device.
+@return {Boolean} boolean value indicating whether operation was successful.
+*/
+p2pServiceFlush : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pServDiscReq'>/**Schedule a P2P service discovery request. The parameters for this command
+</span> are the device address of the peer device (or 00:00:00:00:00:00 for
+ wildcard query that is sent to every discovered P2P peer that supports
+ service discovery) and P2P Service Query TLV(s) as hexdump.
+@param {String} addr MAC address of the device to discover.
+@param {String} query Hex dump of the query data.
+@return {String} identifier Identifier for the request. Can be used to cancel the
+         request.
+*/
+p2pServDiscReq : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-p2pServDiscCancelReq'>/**Cancel a previous service discovery request.
+</span>@param {String} id Identifier for the request to cancel.
+@return {Boolean} true, if operation was successful.
+*/
+p2pServDiscCancelReq : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setMiracastMode'>/**Send driver command to set Miracast mode.
+</span>@param {Number} mode Mode of Miracast.
+        0 = disabled
+        1 = operating as source
+        2 = operating as sink
+*/
+setMiracastMode : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-getNfcHandoverRequest'>/**Get NFC handover request message.
+</span>@return {String} select message if created successfully, null otherwise.
+*/
+getNfcHandoverRequest : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-getNfcHandoverSelect'>/**Get NFC handover select message.
+</span>@return {String} select message if created successfully, null otherwise.
+*/
+getNfcHandoverSelect : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-initiatorReportNfcHandover'>/**Report NFC handover select message.
+</span>@return {Boolean} true if reported successfully, false otherwise.
+*/
+initiatorReportNfcHandover : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-responderReportNfcHandover'>/**Report NFC handover request message.
+</span>@return {Boolean} true if reported successfully, false otherwise.
+*/
+responderReportNfcHandover : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-getP2pClientList'>/**Set the client list for the provided network.
+</span>@param {Number} netId Id of the network.
+@return {String} Space separated list of clients if successfull, null otherwise.
+*/
+getP2pClientList : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setP2pClientList'>/**Set the client list for the provided network.
+</span>@param {Number} netId Id of the network.
+@param {String} list Space separated list of clients.
+@return {Boolean} true, if operation was successful.
+*/
+setP2pClientList : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-saveConfig'>/**Save the current configuration to p2p_supplicant.conf.
+</span>@return {Boolean} true on success, false otherwise.
+*/
+saveConfig : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-setMacRandomization'>/**Enable/Disable MAC randomization.
+</span>@param {Boolean} enable true to enable, false to disable.
+@return {Boolean} true, if operation was successful.
+*/
+setMacRandomization : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pNative-method-getSupportedFeatureSet'>/**Get the supported features
+</span>@param {String} ifaceName Name of the interface.
+@return {Number} bitmask defined by WifiManager.WIFI_FEATURE_*
+*/
+getSupportedFeatureSet : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

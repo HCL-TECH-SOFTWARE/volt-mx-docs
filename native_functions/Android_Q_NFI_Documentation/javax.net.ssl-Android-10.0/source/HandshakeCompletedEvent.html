@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-net-ssl-HandshakeCompletedEvent'>/**@class javax.net.ssl.HandshakeCompletedEvent
+</span>@extends java.util.EventObject
+
+ This event indicates that an SSL handshake completed on a given
+ SSL connection.  All of the core information about that handshake's
+ result is captured through an &quot;SSLSession&quot; object.  As a convenience,
+ this event class provides direct access to some important session
+ attributes.
+
+ &lt;P&gt; The source of this event is the SSLSocket on which handshaking
+ just completed.
+
+ @see SSLSocket
+ @see HandshakeCompletedListener
+ @see SSLSession
+
+ @since 1.4
+ @author David Brownell
+*/
+var HandshakeCompletedEvent = {
+
+<span id='javax-net-ssl-HandshakeCompletedEvent-method-getSession'>/**Returns the session that triggered this event.
+</span>@return {Object {javax.net.ssl.SSLSession}} the &lt;code&gt;SSLSession&lt;/code&gt; for this handshake
+*/
+getSession : function(  ) {},
+
+<span id='javax-net-ssl-HandshakeCompletedEvent-method-getCipherSuite'>/**Returns the cipher suite in use by the session which was produced
+</span> by the handshake.  (This is a convenience method for
+ getting the ciphersuite from the SSLsession.)
+@return {String} the name of the cipher suite negotiated during this session.
+*/
+getCipherSuite : function(  ) {},
+
+<span id='javax-net-ssl-HandshakeCompletedEvent-method-getLocalCertificates'>/**Returns the certificate(s) that were sent to the peer during
+</span> handshaking.
+ Note: This method is useful only when using certificate-based
+ cipher suites.
+
+ When multiple certificates are available for use in a
+ handshake, the implementation chooses what it considers the
+ &quot;best&quot; certificate chain available, and transmits that to
+ the other side.  This method allows the caller to know
+ which certificate chain was actually used.
+@return {Object {java.security.cert.Certificate}} an ordered array of certificates, with the local
+          certificate first followed by any
+          certificate authorities.  If no certificates were sent,
+          then null is returned.
+@see #getLocalPrincipal()
+*/
+getLocalCertificates : function(  ) {},
+
+<span id='javax-net-ssl-HandshakeCompletedEvent-method-getPeerCertificates'>/**Returns the identity of the peer which was established as part
+</span> of defining the session.
+ Note: This method can be used only when using certificate-based
+ cipher suites; using it with non-certificate-based cipher suites,
+ such as Kerberos, will throw an SSLPeerUnverifiedException.
+@return {Object {java.security.cert.Certificate}} an ordered array of the peer certificates,
+          with the peer's own certificate first followed by
+          any certificate authorities.
+@exception SSLPeerUnverifiedException if the peer is not verified.
+@see #getPeerPrincipal()
+*/
+getPeerCertificates : function(  ) {},
+
+<span id='javax-net-ssl-HandshakeCompletedEvent-method-getPeerCertificateChain'>/**Returns the identity of the peer which was identified as part
+</span> of defining the session.
+ Note: This method can be used only when using certificate-based
+ cipher suites; using it with non-certificate-based cipher suites,
+ such as Kerberos, will throw an SSLPeerUnverifiedException.
+
+ &lt;p&gt;&lt;em&gt;Note: this method exists for compatibility with previous
+ releases. New applications should use
+ {@link #getPeerCertificates} instead.&lt;/em&gt;&lt;/p&gt;
+@return {Object {javax.security.cert.X509Certificate}} an ordered array of peer X.509 certificates,
+          with the peer's own certificate first followed by any
+          certificate authorities.  (The certificates are in
+          the original JSSE
+          {@link javax.security.cert.X509Certificate} format).
+@exception SSLPeerUnverifiedException if the peer is not verified.
+@see #getPeerPrincipal()
+*/
+getPeerCertificateChain : function(  ) {},
+
+<span id='javax-net-ssl-HandshakeCompletedEvent-method-getPeerPrincipal'>/**Returns the identity of the peer which was established as part of
+</span> defining the session.
+@return {Object {java.security.Principal}} the peer's principal. Returns an X500Principal of the
+ end-entity certiticate for X509-based cipher suites, and
+ KerberosPrincipal for Kerberos cipher suites.
+@throws SSLPeerUnverifiedException if the peer's identity has not
+          been verified
+@see #getPeerCertificates()
+@see #getLocalPrincipal()
+@since 1.5
+*/
+getPeerPrincipal : function(  ) {},
+
+<span id='javax-net-ssl-HandshakeCompletedEvent-method-getLocalPrincipal'>/**Returns the principal that was sent to the peer during handshaking.
+</span>@return {Object {java.security.Principal}} the principal sent to the peer. Returns an X500Principal
+ of the end-entity certificate for X509-based cipher suites, and
+ KerberosPrincipal for Kerberos cipher suites. If no principal was
+ sent, then null is returned.
+@see #getLocalCertificates()
+@see #getPeerPrincipal()
+@since 1.5
+*/
+getLocalPrincipal : function(  ) {},
+
+<span id='javax-net-ssl-HandshakeCompletedEvent-method-getSocket'>/**Returns the socket which is the source of this event.
+</span> (This is a convenience function, to let applications
+ write code without type casts.)
+@return {Object {javax.net.ssl.SSLSocket}} the socket on which the connection was made.
+*/
+getSocket : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

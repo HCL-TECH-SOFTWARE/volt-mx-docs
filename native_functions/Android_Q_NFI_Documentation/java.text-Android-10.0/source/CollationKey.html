@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-text-CollationKey'>/**@class java.text.CollationKey
+</span> implements java.lang.Comparable
+
+@extends java.lang.Object
+
+ A &lt;code&gt;CollationKey&lt;/code&gt; represents a &lt;code&gt;String&lt;/code&gt; under the
+ rules of a specific &lt;code&gt;Collator&lt;/code&gt; object. Comparing two
+ &lt;code&gt;CollationKey&lt;/code&gt;s returns the relative order of the
+ &lt;code&gt;String&lt;/code&gt;s they represent. Using &lt;code&gt;CollationKey&lt;/code&gt;s
+ to compare &lt;code&gt;String&lt;/code&gt;s is generally faster than using
+ &lt;code&gt;Collator.compare&lt;/code&gt;. Thus, when the &lt;code&gt;String&lt;/code&gt;s
+ must be compared multiple times, for example when sorting a list
+ of &lt;code&gt;String&lt;/code&gt;s. It's more efficient to use &lt;code&gt;CollationKey&lt;/code&gt;s.
+
+ &lt;p&gt;
+ You can not create &lt;code&gt;CollationKey&lt;/code&gt;s directly. Rather,
+ generate them by calling &lt;code&gt;Collator.getCollationKey&lt;/code&gt;.
+ You can only compare &lt;code&gt;CollationKey&lt;/code&gt;s generated from
+ the same &lt;code&gt;Collator&lt;/code&gt; object.
+
+ &lt;p&gt;
+ Generating a &lt;code&gt;CollationKey&lt;/code&gt; for a &lt;code&gt;String&lt;/code&gt;
+ involves examining the entire &lt;code&gt;String&lt;/code&gt;
+ and converting it to series of bits that can be compared bitwise. This
+ allows fast comparisons once the keys are generated. The cost of generating
+ keys is recouped in faster comparisons when &lt;code&gt;String&lt;/code&gt;s need
+ to be compared many times. On the other hand, the result of a comparison
+ is often determined by the first couple of characters of each &lt;code&gt;String&lt;/code&gt;.
+ &lt;code&gt;Collator.compare&lt;/code&gt; examines only as many characters as it needs which
+ allows it to be faster when doing single comparisons.
+ &lt;p&gt;
+ The following example shows how &lt;code&gt;CollationKey&lt;/code&gt;s might be used
+ to sort a list of &lt;code&gt;String&lt;/code&gt;s.
+ &lt;blockquote&gt;
+ &lt;pre&gt;{@code
+ // Create an array of CollationKeys for the Strings to be sorted.
+ Collator myCollator = Collator.getInstance();
+ CollationKey[] keys = new CollationKey[3];
+ keys[0] = myCollator.getCollationKey(&quot;Tom&quot;);
+ keys[1] = myCollator.getCollationKey(&quot;Dick&quot;);
+ keys[2] = myCollator.getCollationKey(&quot;Harry&quot;);
+ sort(keys);
+
+ //...
+
+ // Inside body of sort routine, compare keys this way
+ if (keys[i].compareTo(keys[j]) &gt; 0)
+    // swap keys[i] and keys[j]
+
+ //...
+
+ // Finally, when we've returned from sort.
+ System.out.println(keys[0].getSourceString());
+ System.out.println(keys[1].getSourceString());
+ System.out.println(keys[2].getSourceString());
+ }&lt;/pre&gt;
+ &lt;/blockquote&gt;
+
+ @see          Collator
+ @see          RuleBasedCollator
+ @author       Helena Shih
+*/
+var CollationKey = {
+
+<span id='java-text-CollationKey-method-compareTo'>/**Compare this CollationKey to the target CollationKey. The collation rules of the
+</span> Collator object which created these keys are applied. &lt;strong&gt;Note:&lt;/strong&gt;
+ CollationKeys created by different Collators can not be compared.
+@param {Object {CollationKey}} target target CollationKey
+@return {Number} Returns an integer value. Value is less than zero if this is less
+ than target, value is zero if this and target are equal and value is greater than
+ zero if this is greater than target.
+@see java.text.Collator#compare
+*/
+compareTo : function(  ) {},
+
+<span id='java-text-CollationKey-method-getSourceString'>/**Returns the String that this CollationKey represents.
+</span>@return {String} the source string of this CollationKey
+*/
+getSourceString : function(  ) {},
+
+<span id='java-text-CollationKey-method-toByteArray'>/**Converts the CollationKey to a sequence of bits. If two CollationKeys
+</span> could be legitimately compared, then one could compare the byte arrays
+ for each of those keys to obtain the same result.  Byte arrays are
+ organized most significant byte first.
+@return {Number} a byte array representation of the CollationKey
+*/
+toByteArray : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

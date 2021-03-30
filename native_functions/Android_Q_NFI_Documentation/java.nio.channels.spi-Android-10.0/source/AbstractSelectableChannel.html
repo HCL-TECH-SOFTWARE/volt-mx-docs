@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-spi-AbstractSelectableChannel'>/**@class java.nio.channels.spi.AbstractSelectableChannel
+</span>@extends java.nio.channels.SelectableChannel
+
+ Base implementation class for selectable channels.
+
+ &lt;p&gt; This class defines methods that handle the mechanics of channel
+ registration, deregistration, and closing.  It maintains the current
+ blocking mode of this channel as well as its current set of selection keys.
+ It performs all of the synchronization required to implement the {@link java.nio.channels.SelectableChannel} specification.  Implementations of the
+ abstract protected methods defined in this class need not synchronize
+ against other threads that might be engaged in the same operations.  &lt;/p&gt;
+
+
+ @author Mark Reinhold
+ @author Mike McCloskey
+ @author JSR-51 Expert Group
+ @since 1.4
+*/
+var AbstractSelectableChannel = {
+
+<span id='java-nio-channels-spi-AbstractSelectableChannel-method-provider'>/**Returns the provider that created this channel.
+</span>@return {Object {java.nio.channels.spi.SelectorProvider}} The provider that created this channel
+*/
+provider : function(  ) {},
+
+<span id='java-nio-channels-spi-AbstractSelectableChannel-method-isRegistered'>/**
+</span>*/
+isRegistered : function(  ) {},
+
+<span id='java-nio-channels-spi-AbstractSelectableChannel-method-keyFor'>/**
+</span>*/
+keyFor : function(  ) {},
+
+<span id='java-nio-channels-spi-AbstractSelectableChannel-method-register'>/**Registers this channel with the given selector, returning a selection key.
+</span>
+ &lt;p&gt;  This method first verifies that this channel is open and that the
+ given initial interest set is valid.
+
+ &lt;p&gt; If this channel is already registered with the given selector then
+ the selection key representing that registration is returned after
+ setting its interest set to the given value.
+
+ &lt;p&gt; Otherwise this channel has not yet been registered with the given
+ selector, so the {@link java.nio.channels.spi.AbstractSelector#register register} method of
+ the selector is invoked while holding the appropriate locks.  The
+ resulting key is added to this channel's key set before being returned.
+ &lt;/p&gt;
+@throws ClosedSelectorException {@inheritDoc}
+@throws IllegalBlockingModeException {@inheritDoc}
+@throws IllegalSelectorException {@inheritDoc}
+@throws CancelledKeyException {@inheritDoc}
+@throws IllegalArgumentException {@inheritDoc}
+*/
+register : function(  ) {},
+
+<span id='java-nio-channels-spi-AbstractSelectableChannel-method-isBlocking'>/**
+</span>*/
+isBlocking : function(  ) {},
+
+<span id='java-nio-channels-spi-AbstractSelectableChannel-method-blockingLock'>/**
+</span>*/
+blockingLock : function(  ) {},
+
+<span id='java-nio-channels-spi-AbstractSelectableChannel-method-configureBlocking'>/**Adjusts this channel's blocking mode.
+</span>
+ &lt;p&gt; If the given blocking mode is different from the current blocking
+ mode then this method invokes the {@link #implConfigureBlocking
+ implConfigureBlocking} method, while holding the appropriate locks, in
+ order to change the mode.  &lt;/p&gt;
+*/
+configureBlocking : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-ScheduledThreadPoolExecutor'>/**@class java.util.concurrent.ScheduledThreadPoolExecutor
+</span> implements java.util.concurrent.ScheduledExecutorService
+
+@extends java.util.concurrent.ThreadPoolExecutor
+
+ A {@link java.util.concurrent.ThreadPoolExecutor} that can additionally schedule
+ commands to run after a given delay, or to execute periodically.
+ This class is preferable to {@link java.util.Timer} when multiple
+ worker threads are needed, or when the additional flexibility or
+ capabilities of {@link java.util.concurrent.ThreadPoolExecutor} (which this class
+ extends) are required.
+
+ &lt;p&gt;Delayed tasks execute no sooner than they are enabled, but
+ without any real-time guarantees about when, after they are
+ enabled, they will commence. Tasks scheduled for exactly the same
+ execution time are enabled in first-in-first-out (FIFO) order of
+ submission.
+
+ &lt;p&gt;When a submitted task is cancelled before it is run, execution
+ is suppressed.  By default, such a cancelled task is not
+ automatically removed from the work queue until its delay elapses.
+ While this enables further inspection and monitoring, it may also
+ cause unbounded retention of cancelled tasks.
+
+ &lt;p&gt;Successive executions of a periodic task scheduled via
+ {@link #scheduleAtFixedRate scheduleAtFixedRate} or
+ {@link #scheduleWithFixedDelay scheduleWithFixedDelay}
+ do not overlap. While different executions may be performed by
+ different threads, the effects of prior executions
+ &lt;a href=&quot;package-summary.html#MemoryVisibility&quot;&gt;&lt;i&gt;happen-before&lt;/i&gt;&lt;/a&gt;
+ those of subsequent ones.
+
+ &lt;p&gt;While this class inherits from {@link java.util.concurrent.ThreadPoolExecutor}, a few
+ of the inherited tuning methods are not useful for it. In
+ particular, because it acts as a fixed-sized pool using
+ {@code corePoolSize} threads and an unbounded queue, adjustments
+ to {@code maximumPoolSize} have no useful effect. Additionally, it
+ is almost never a good idea to set {@code corePoolSize} to zero or
+ use {@code allowCoreThreadTimeOut} because this may leave the pool
+ without threads to handle tasks once they become eligible to run.
+
+ &lt;p&gt;&lt;b&gt;Extension notes:&lt;/b&gt; This class overrides the
+ {@link java.util.concurrent.ThreadPoolExecutor#execute(Runnable) execute} and
+ {@link java.util.concurrent.AbstractExecutorService#submit(Runnable) submit}
+ methods to generate internal {@link java.util.concurrent.ScheduledFuture} objects to
+ control per-task delays and scheduling.  To preserve
+ functionality, any further overrides of these methods in
+ subclasses must invoke superclass versions, which effectively
+ disables additional task customization.  However, this class
+ provides alternative protected extension method
+ {@code decorateTask} (one version each for {@code Runnable} and
+ {@code Callable}) that can be used to customize the concrete task
+ types used to execute commands entered via {@code execute},
+ {@code submit}, {@code schedule}, {@code scheduleAtFixedRate},
+ and {@code scheduleWithFixedDelay}.  By default, a
+ {@code ScheduledThreadPoolExecutor} uses a task type extending
+ {@link java.util.concurrent.FutureTask}. However, this may be modified or replaced using
+ subclasses of the form:
+
+ &lt;pre&gt; {@code
+ public class CustomScheduledExecutor extends ScheduledThreadPoolExecutor {
+
+   static class CustomTask&lt;V&gt; implements RunnableScheduledFuture&lt;V&gt; { ... }
+
+   protected &lt;V&gt; RunnableScheduledFuture&lt;V&gt; decorateTask(
+                Runnable r, RunnableScheduledFuture&lt;V&gt; task) {
+       return new CustomTask&lt;V&gt;(r, task);
+   }
+
+   protected &lt;V&gt; RunnableScheduledFuture&lt;V&gt; decorateTask(
+                Callable&lt;V&gt; c, RunnableScheduledFuture&lt;V&gt; task) {
+       return new CustomTask&lt;V&gt;(c, task);
+   }
+   // ... add constructors, etc.
+ }}&lt;/pre&gt;
+
+ @since 1.5
+ @author Doug Lea
+*/
+var ScheduledThreadPoolExecutor = {
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-schedule'>/**
+</span>@throws RejectedExecutionException {@inheritDoc}
+@throws NullPointerException       {@inheritDoc}
+*/
+schedule : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-schedule'>/**
+</span>@throws RejectedExecutionException {@inheritDoc}
+@throws NullPointerException       {@inheritDoc}
+*/
+schedule : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-scheduleAtFixedRate'>/**
+</span>@throws RejectedExecutionException {@inheritDoc}
+@throws NullPointerException       {@inheritDoc}
+@throws IllegalArgumentException   {@inheritDoc}
+*/
+scheduleAtFixedRate : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-scheduleWithFixedDelay'>/**
+</span>@throws RejectedExecutionException {@inheritDoc}
+@throws NullPointerException       {@inheritDoc}
+@throws IllegalArgumentException   {@inheritDoc}
+*/
+scheduleWithFixedDelay : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-execute'>/**Executes {@code command} with zero required delay.
+</span> This has effect equivalent to
+ {@link #schedule(Runnable,long,TimeUnit) schedule(command, 0, anyUnit)}.
+ Note that inspections of the queue and of the list returned by
+ {@code shutdownNow} will access the zero-delayed
+ {@link java.util.concurrent.ScheduledFuture}, not the {@code command} itself.
+
+ &lt;p&gt;A consequence of the use of {@code ScheduledFuture} objects is
+ that {@link java.util.concurrent.ThreadPoolExecutor#afterExecute afterExecute} is always
+ called with a null second {@code Throwable} argument, even if the
+ {@code command} terminated abruptly.  Instead, the {@code Throwable}
+ thrown by such a task can be obtained via {@link java.util.concurrent.Future#get}.
+@throws RejectedExecutionException at discretion of
+         {@code RejectedExecutionHandler}, if the task
+         cannot be accepted for execution because the
+         executor has been shut down
+@throws NullPointerException {@inheritDoc}
+*/
+execute : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-submit'>/**
+</span>@throws RejectedExecutionException {@inheritDoc}
+@throws NullPointerException       {@inheritDoc}
+*/
+submit : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-submit'>/**
+</span>@throws RejectedExecutionException {@inheritDoc}
+@throws NullPointerException       {@inheritDoc}
+*/
+submit : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-submit'>/**
+</span>@throws RejectedExecutionException {@inheritDoc}
+@throws NullPointerException       {@inheritDoc}
+*/
+submit : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-setContinueExistingPeriodicTasksAfterShutdownPolicy'>/**Sets the policy on whether to continue executing existing
+</span> periodic tasks even when this executor has been {@code shutdown}.
+ In this case, these tasks will only terminate upon
+ {@code shutdownNow} or after setting the policy to
+ {@code false} when already shutdown.
+ This value is by default {@code false}.
+@param {Boolean} value if {@code true}, continue after shutdown, else don't
+@see #getContinueExistingPeriodicTasksAfterShutdownPolicy
+*/
+setContinueExistingPeriodicTasksAfterShutdownPolicy : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-getContinueExistingPeriodicTasksAfterShutdownPolicy'>/**Gets the policy on whether to continue executing existing
+</span> periodic tasks even when this executor has been {@code shutdown}.
+ In this case, these tasks will only terminate upon
+ {@code shutdownNow} or after setting the policy to
+ {@code false} when already shutdown.
+ This value is by default {@code false}.
+@return {Boolean} {@code true} if will continue after shutdown
+@see #setContinueExistingPeriodicTasksAfterShutdownPolicy
+*/
+getContinueExistingPeriodicTasksAfterShutdownPolicy : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-setExecuteExistingDelayedTasksAfterShutdownPolicy'>/**Sets the policy on whether to execute existing delayed
+</span> tasks even when this executor has been {@code shutdown}.
+ In this case, these tasks will only terminate upon
+ {@code shutdownNow}, or after setting the policy to
+ {@code false} when already shutdown.
+ This value is by default {@code true}.
+@param {Boolean} value if {@code true}, execute after shutdown, else don't
+@see #getExecuteExistingDelayedTasksAfterShutdownPolicy
+*/
+setExecuteExistingDelayedTasksAfterShutdownPolicy : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-getExecuteExistingDelayedTasksAfterShutdownPolicy'>/**Gets the policy on whether to execute existing delayed
+</span> tasks even when this executor has been {@code shutdown}.
+ In this case, these tasks will only terminate upon
+ {@code shutdownNow}, or after setting the policy to
+ {@code false} when already shutdown.
+ This value is by default {@code true}.
+@return {Boolean} {@code true} if will execute after shutdown
+@see #setExecuteExistingDelayedTasksAfterShutdownPolicy
+*/
+getExecuteExistingDelayedTasksAfterShutdownPolicy : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-setRemoveOnCancelPolicy'>/**Sets the policy on whether cancelled tasks should be immediately
+</span> removed from the work queue at time of cancellation.  This value is
+ by default {@code false}.
+@param {Boolean} value if {@code true}, remove on cancellation, else don't
+@see #getRemoveOnCancelPolicy
+@since 1.7
+*/
+setRemoveOnCancelPolicy : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-getRemoveOnCancelPolicy'>/**Gets the policy on whether cancelled tasks should be immediately
+</span> removed from the work queue at time of cancellation.  This value is
+ by default {@code false}.
+@return {Boolean} {@code true} if cancelled tasks are immediately removed
+         from the queue
+@see #setRemoveOnCancelPolicy
+@since 1.7
+*/
+getRemoveOnCancelPolicy : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-shutdown'>/**Initiates an orderly shutdown in which previously submitted
+</span> tasks are executed, but no new tasks will be accepted.
+ Invocation has no additional effect if already shut down.
+
+ &lt;p&gt;This method does not wait for previously submitted tasks to
+ complete execution.  Use {@link #awaitTermination awaitTermination}
+ to do that.
+
+ &lt;p&gt;If the {@code ExecuteExistingDelayedTasksAfterShutdownPolicy}
+ has been set {@code false}, existing delayed tasks whose delays
+ have not yet elapsed are cancelled.  And unless the {@code
+ ContinueExistingPeriodicTasksAfterShutdownPolicy} has been set
+ {@code true}, future executions of existing periodic tasks will
+ be cancelled.
+*/
+shutdown : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-shutdownNow'>/**Attempts to stop all actively executing tasks, halts the
+</span> processing of waiting tasks, and returns a list of the tasks
+ that were awaiting execution. These tasks are drained (removed)
+ from the task queue upon return from this method.
+
+ &lt;p&gt;This method does not wait for actively executing tasks to
+ terminate.  Use {@link #awaitTermination awaitTermination} to
+ do that.
+
+ &lt;p&gt;There are no guarantees beyond best-effort attempts to stop
+ processing actively executing tasks.  This implementation
+ interrupts tasks via {@link Thread#interrupt}; any task that
+ fails to respond to interrupts may never terminate.
+@return {Object {java.util.List}} list of tasks that never commenced execution.
+         Each element of this list is a {@link ScheduledFuture}.
+         For tasks submitted via one of the {@code schedule}
+         methods, the element will be identical to the returned
+         {@code ScheduledFuture}.  For tasks submitted using
+         {@link #execute execute}, the element will be a
+         zero-delay {@code ScheduledFuture}.
+*/
+shutdownNow : function(  ) {},
+
+<span id='java-util-concurrent-ScheduledThreadPoolExecutor-method-getQueue'>/**Returns the task queue used by this executor.  Access to the
+</span> task queue is intended primarily for debugging and monitoring.
+ This queue may be in active use.  Retrieving the task queue
+ does not prevent queued tasks from executing.
+
+ &lt;p&gt;Each element of this queue is a {@link java.util.concurrent.ScheduledFuture}.
+ For tasks submitted via one of the {@code schedule} methods, the
+ element will be identical to the returned {@code ScheduledFuture}.
+ For tasks submitted using {@link #execute execute}, the element
+ will be a zero-delay {@code ScheduledFuture}.
+
+ &lt;p&gt;Iteration over this queue is &lt;em&gt;not&lt;/em&gt; guaranteed to traverse
+ tasks in the order in which they will execute.
+@return {Object {java.util.concurrent.BlockingQueue}} the task queue
+*/
+getQueue : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

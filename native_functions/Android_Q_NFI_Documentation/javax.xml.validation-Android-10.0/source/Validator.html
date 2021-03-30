@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-validation-Validator'>/**@class javax.xml.validation.Validator
+</span>@extends java.lang.Object
+
+ &lt;p&gt;A processor that checks an XML document against {@link javax.xml.validation.Schema}.&lt;/p&gt;
+
+ &lt;p&gt;
+ A validator is a thread-unsafe and non-reentrant object.
+ In other words, it is the application's responsibility to make
+ sure that one {@link javax.xml.validation.Validator} object is not used from
+ more than one thread at any given time, and while the &lt;tt&gt;validate&lt;/tt&gt;
+ method is invoked, applications may not recursively call
+ the &lt;tt&gt;validate&lt;/tt&gt; method.
+ &lt;p&gt;
+
+ Note that while the {@link #validate(javax.xml.transform.Source)} and {@link #validate(javax.xml.transform.Source, javax.xml.transform.Result)}
+ methods take a {@link Source} instance, the &lt;code&gt;Source&lt;/code&gt;
+ instance must be a &lt;code&gt;SAXSource&lt;/code&gt;, &lt;code&gt;DOMSource&lt;/code&gt;, &lt;code&gt;StAXSource&lt;/code&gt; or &lt;code&gt;StreamSource&lt;/code&gt;.
+
+ @author  &lt;a href=&quot;mailto:Kohsuke.Kawaguchi@Sun.com&quot;&gt;Kohsuke Kawaguchi&lt;/a&gt;
+ @version $Revision: 888884 $, $Date: 2009-12-09 09:36:46 -0800 (Wed, 09 Dec 2009) $
+ @since 1.5
+*/
+var Validator = {
+
+<span id='javax-xml-validation-Validator-method-reset'>/**&lt;p&gt;Reset this &lt;code&gt;Validator&lt;/code&gt; to its original configuration.&lt;/p&gt;
+</span>
+ &lt;p&gt;&lt;code&gt;Validator&lt;/code&gt; is reset to the same state as when it was created with
+ {@link javax.xml.validation.Schema#newValidator()}.
+ &lt;code&gt;reset()&lt;/code&gt; is designed to allow the reuse of existing &lt;code&gt;Validator&lt;/code&gt;s
+ thus saving resources associated with the creation of new &lt;code&gt;Validator&lt;/code&gt;s.&lt;/p&gt;
+
+ &lt;p&gt;The reset &lt;code&gt;Validator&lt;/code&gt; is not guaranteed to have the same {@link LSResourceResolver} or {@link ErrorHandler}
+ &lt;code&gt;Object&lt;/code&gt;s, e.g. {@link Object#equals(Object obj)}.  It is guaranteed to have a functionally equal
+ &lt;code&gt;LSResourceResolver&lt;/code&gt; and &lt;code&gt;ErrorHandler&lt;/code&gt;.&lt;/p&gt;
+*/
+reset : function(  ) {},
+
+<span id='javax-xml-validation-Validator-method-validate'>/**Validates the specified input.
+</span>
+ &lt;p&gt;
+ This is just a convenience method of:
+ &lt;pre&gt;
+ validate(source,null);
+ &lt;/pre&gt;
+@see #setErrorHandler(ErrorHandler)
+*/
+validate : function(  ) {},
+
+<span id='javax-xml-validation-Validator-method-validate'>/**Validates the specified input and send the augmented validation
+</span> result to the specified output.
+
+ &lt;p&gt;
+ This method places the following restrictions on the types of
+ the {@link Source}/{@link Result} accepted.
+
+ &lt;h4&gt;{@link Source}/{@link Result} accepted:&lt;/h4&gt;
+ &lt;table border=1&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;/td&gt;
+   &lt;td&gt;{@link javax.xml.transform.sax.SAXSource}&lt;/td&gt;
+   &lt;td&gt;{@link javax.xml.transform.dom.DOMSource}&lt;/td&gt;
+   &lt;td&gt;{@link javax.xml.transform.stream.StreamSource}&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;tt&gt;null&lt;/tt&gt;&lt;/td&gt;
+   &lt;td&gt;OK&lt;/td&gt;
+   &lt;td&gt;OK&lt;/td&gt;
+   &lt;td&gt;OK&lt;/td&gt;
+   &lt;td&gt;OK&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;{@link javax.xml.transform.sax.SAXResult}&lt;/td&gt;
+   &lt;td&gt;OK&lt;/td&gt;
+   &lt;td&gt;Err&lt;/td&gt;
+   &lt;td&gt;Err&lt;/td&gt;
+   &lt;td&gt;Err&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;{@link javax.xml.transform.dom.DOMResult}&lt;/td&gt;
+   &lt;td&gt;Err&lt;/td&gt;
+   &lt;td&gt;OK&lt;/td&gt;
+   &lt;td&gt;Err&lt;/td&gt;
+   &lt;td&gt;Err&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;{@link javax.xml.transform.stream.StreamResult}&lt;/td&gt;
+   &lt;td&gt;Err&lt;/td&gt;
+   &lt;td&gt;Err&lt;/td&gt;
+   &lt;td&gt;Err&lt;/td&gt;
+   &lt;td&gt;OK&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;
+ To validate one {@link Source} into another kind of {@link Result}, use the identity transformer
+ (see {@link javax.xml.transform.TransformerFactory#newTransformer()}).
+
+ &lt;p&gt;
+ Errors found during the validation is sent to the specified
+ {@link ErrorHandler}.
+
+ &lt;p&gt;
+ If a document is valid, or if a document contains some errors
+ but none of them were fatal and the {@link ErrorHandler} didn't
+ throw any exception, then the method returns normally.
+@param {Object {Source}} source
+      XML to be validated. Must not be null.
+@param {Object {Result}} result
+      The {@link Result} object that receives (possibly augmented)
+      XML. This parameter can be null if the caller is not interested
+      in it.
+
+      Note that when a {@link javax.xml.transform.dom.DOMResult} is used,
+      a validator might just pass the same DOM node from
+      {@link javax.xml.transform.dom.DOMSource} to
+      {@link javax.xml.transform.dom.DOMResult}
+      (in which case &lt;tt&gt;source.getNode()==result.getNode()&lt;/tt&gt;),
+      it might copy the entire DOM tree, or it might alter the
+      node given by the source.
+@throws IllegalArgumentException
+      If the {@link Result} type doesn't match the {@link Source} type,
+      or if the specified source is not a
+      {@link javax.xml.transform.sax.SAXSource},
+      {@link javax.xml.transform.dom.DOMSource} or
+      {@link javax.xml.transform.stream.StreamSource}.
+@throws SAXException
+      If the {@link ErrorHandler} throws a {@link SAXException} or
+      if a fatal error is found and the {@link ErrorHandler} returns
+      normally.
+@throws IOException
+      If the validator is processing a
+      {@link javax.xml.transform.sax.SAXSource} and the
+      underlying {@link org.xml.sax.XMLReader} throws an
+      {@link IOException}.
+@throws NullPointerException
+      If the &lt;tt&gt;source&lt;/tt&gt; parameter is null.
+@see #validate(Source)
+*/
+validate : function(  ) {},
+
+<span id='javax-xml-validation-Validator-method-setErrorHandler'>/**Sets the {@link ErrorHandler} to receive errors encountered
+</span> during the &lt;code&gt;validate&lt;/code&gt; method invocation.
+
+ &lt;p&gt;
+ Error handler can be used to customize the error handling process
+ during a validation. When an {@link ErrorHandler} is set,
+ errors found during the validation will be first sent
+ to the {@link ErrorHandler}.
+
+ &lt;p&gt;
+ The error handler can abort further validation immediately
+ by throwing {@link SAXException} from the handler. Or for example
+ it can print an error to the screen and try to continue the
+ validation by returning normally from the {@link ErrorHandler}
+
+ &lt;p&gt;
+ If any {@link Throwable} is thrown from an {@link ErrorHandler},
+ the caller of the &lt;code&gt;validate&lt;/code&gt; method will be thrown
+ the same {@link Throwable} object.
+
+ &lt;p&gt;
+ {@link javax.xml.validation.Validator} is not allowed to
+ throw {@link SAXException} without first reporting it to
+ {@link ErrorHandler}.
+
+ &lt;p&gt;
+ When the {@link ErrorHandler} is null, the implementation will
+ behave as if the following {@link ErrorHandler} is set:
+ &lt;pre&gt;
+ class DraconianErrorHandler implements {@link ErrorHandler} {
+     public void fatalError( {@link org.xml.sax.SAXParseException} e ) throws {@link SAXException} {
+         throw e;
+     }
+     public void error( {@link org.xml.sax.SAXParseException} e ) throws {@link SAXException} {
+         throw e;
+     }
+     public void warning( {@link org.xml.sax.SAXParseException} e ) throws {@link SAXException} {
+         // noop
+     }
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ When a new {@link javax.xml.validation.Validator} object is created, initially
+ this field is set to null.
+@param {Object {ErrorHandler}} errorHandler
+      A new error handler to be set. This parameter can be null.
+*/
+setErrorHandler : function(  ) {},
+
+<span id='javax-xml-validation-Validator-method-getErrorHandler'>/**Gets the current {@link ErrorHandler} set to this {@link javax.xml.validation.Validator}.
+</span>@return {Object {org.xml.sax.ErrorHandler}} This method returns the object that was last set through
+      the {@link #setErrorHandler(ErrorHandler)} method, or null
+      if that method has never been called since this {@link Validator}
+      has created.
+@see #setErrorHandler(ErrorHandler)
+*/
+getErrorHandler : function(  ) {},
+
+<span id='javax-xml-validation-Validator-method-setResourceResolver'>/**Sets the {@link LSResourceResolver} to customize
+</span> resource resolution while in a validation episode.
+
+ &lt;p&gt;
+ {@link javax.xml.validation.Validator} uses a {@link LSResourceResolver}
+ when it needs to locate external resources while a validation,
+ although exactly what constitutes &quot;locating external resources&quot; is
+ up to each schema language.
+
+ &lt;p&gt;
+ When the {@link LSResourceResolver} is null, the implementation will
+ behave as if the following {@link LSResourceResolver} is set:
+ &lt;pre&gt;
+ class DumbLSResourceResolver implements {@link LSResourceResolver} {
+     public {@link org.w3c.dom.ls.LSInput} resolveResource(
+         String publicId, String systemId, String baseURI) {
+
+         return null; // always return null
+     }
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ If a {@link LSResourceResolver} throws a {@link RuntimeException}
+  (or instances of its derived classes),
+ then the {@link javax.xml.validation.Validator} will abort the parsing and
+ the caller of the &lt;code&gt;validate&lt;/code&gt; method will receive
+ the same {@link RuntimeException}.
+
+ &lt;p&gt;
+ When a new {@link javax.xml.validation.Validator} object is created, initially
+ this field is set to null.
+@param {Object {LSResourceResolver}} resourceResolver
+      A new resource resolver to be set. This parameter can be null.
+*/
+setResourceResolver : function(  ) {},
+
+<span id='javax-xml-validation-Validator-method-getResourceResolver'>/**Gets the current {@link LSResourceResolver} set to this {@link javax.xml.validation.Validator}.
+</span>@return {Object {org.w3c.dom.ls.LSResourceResolver}} This method returns the object that was last set through
+      the {@link #setResourceResolver(LSResourceResolver)} method, or null
+      if that method has never been called since this {@link Validator}
+      has created.
+@see #setErrorHandler(ErrorHandler)
+*/
+getResourceResolver : function(  ) {},
+
+<span id='javax-xml-validation-Validator-method-getFeature'>/**Look up the value of a feature flag.
+</span>
+ &lt;p&gt;The feature name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.Validator} to recognize a feature name but
+ temporarily be unable to return its value.
+ Some feature values may be available only in specific
+ contexts, such as before, during, or after a validation.
+
+ &lt;p&gt;Implementors are free (and encouraged) to invent their own features,
+ using names built on their own URIs.&lt;/p&gt;
+@param {String} name The feature name, which is a non-null fully-qualified URI.
+@return {Boolean} The current value of the feature (true or false).
+@exception org.xml.sax.SAXNotRecognizedException If the feature
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            {@link Validator} recognizes the feature name but
+            cannot determine its value at this time.
+@throws NullPointerException
+          When the name parameter is null.
+@see #setFeature(String, boolean)
+*/
+getFeature : function(  ) {},
+
+<span id='javax-xml-validation-Validator-method-setFeature'>/**Set the value of a feature flag.
+</span>
+ &lt;p&gt;
+ Feature can be used to control the way a {@link javax.xml.validation.Validator}
+ parses schemas, although {@link javax.xml.validation.Validator}s are not required
+ to recognize any specific property names.&lt;/p&gt;
+
+ &lt;p&gt;The feature name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.Validator} to expose a feature value but
+ to be unable to change the current value.
+ Some feature values may be immutable or mutable only
+ in specific contexts, such as before, during, or after
+ a validation.&lt;/p&gt;
+@param {String} name The feature name, which is a non-null fully-qualified URI.
+@param {Boolean} value The requested value of the feature (true or false).
+@exception org.xml.sax.SAXNotRecognizedException If the feature
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            {@link Validator} recognizes the feature name but
+            cannot set the requested value.
+@throws NullPointerException
+          When the name parameter is null.
+@see #getFeature(String)
+*/
+setFeature : function(  ) {},
+
+<span id='javax-xml-validation-Validator-method-setProperty'>/**Set the value of a property.
+</span>
+ &lt;p&gt;The property name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.Validator} to recognize a property name but
+ to be unable to change the current value.
+ Some property values may be immutable or mutable only
+ in specific contexts, such as before, during, or after
+ a validation.&lt;/p&gt;
+
+ &lt;p&gt;{@link javax.xml.validation.Validator}s are not required to recognize setting
+ any specific property names.&lt;/p&gt;
+@param {String} name The property name, which is a non-null fully-qualified URI.
+@param {Object {Object}} object The requested value for the property.
+@exception org.xml.sax.SAXNotRecognizedException If the property
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            {@link Validator} recognizes the property name but
+            cannot set the requested value.
+@throws NullPointerException
+          When the name parameter is null.
+*/
+setProperty : function(  ) {},
+
+<span id='javax-xml-validation-Validator-method-getProperty'>/**Look up the value of a property.
+</span>
+ &lt;p&gt;The property name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.Validator} to recognize a property name but
+ temporarily be unable to return its value.
+ Some property values may be available only in specific
+ contexts, such as before, during, or after a validation.&lt;/p&gt;
+
+ &lt;p&gt;{@link javax.xml.validation.Validator}s are not required to recognize any specific
+ property names.&lt;/p&gt;
+
+ &lt;p&gt;Implementors are free (and encouraged) to invent their own properties,
+ using names built on their own URIs.&lt;/p&gt;
+@param {String} name The property name, which is a non-null fully-qualified URI.
+@return {Object {java.lang.Object}} The current value of the property.
+@exception org.xml.sax.SAXNotRecognizedException If the property
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            XMLReader recognizes the property name but
+            cannot determine its value at this time.
+@throws NullPointerException
+          When the name parameter is null.
+@see #setProperty(String, Object)
+*/
+getProperty : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

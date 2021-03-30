@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-spi-AbstractSelector'>/**@class java.nio.channels.spi.AbstractSelector
+</span>@extends java.nio.channels.Selector
+
+ Base implementation class for selectors.
+
+ &lt;p&gt; This class encapsulates the low-level machinery required to implement
+ the interruption of selection operations.  A concrete selector class must
+ invoke the {@link #begin begin} and {@link #end end} methods before and
+ after, respectively, invoking an I/O operation that might block
+ indefinitely.  In order to ensure that the {@link #end end} method is always
+ invoked, these methods should be used within a
+ &lt;tt&gt;try&lt;/tt&gt;&amp;nbsp;...&amp;nbsp;&lt;tt&gt;finally&lt;/tt&gt; block:
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ try {
+     begin();
+     // Perform blocking I/O operation here
+     ...
+ } finally {
+     end();
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt; This class also defines methods for maintaining a selector's
+ cancelled-key set and for removing a key from its channel's key set, and
+ declares the abstract {@link #register register} method that is invoked by a
+ selectable channel's {@link java.nio.channels.spi.AbstractSelectableChannel#register register}
+ method in order to perform the actual work of registering a channel.  &lt;/p&gt;
+
+
+ @author Mark Reinhold
+ @author JSR-51 Expert Group
+ @since 1.4
+*/
+var AbstractSelector = {
+
+<span id='java-nio-channels-spi-AbstractSelector-method-close'>/**Closes this selector.
+</span>
+ &lt;p&gt; If the selector has already been closed then this method returns
+ immediately.  Otherwise it marks the selector as closed and then invokes
+ the {@link #implCloseSelector implCloseSelector} method in order to
+ complete the close operation.  &lt;/p&gt;
+@throws IOException
+          If an I/O error occurs
+*/
+close : function(  ) {},
+
+<span id='java-nio-channels-spi-AbstractSelector-method-isOpen'>/**
+</span>*/
+isOpen : function(  ) {},
+
+<span id='java-nio-channels-spi-AbstractSelector-method-provider'>/**Returns the provider that created this channel.
+</span>@return {Object {java.nio.channels.spi.SelectorProvider}} The provider that created this channel
+*/
+provider : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

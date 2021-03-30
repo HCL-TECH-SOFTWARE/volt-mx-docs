@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-io-FilterInputStream'>/**@class java.io.FilterInputStream
+</span>@extends java.io.InputStream
+
+ A &lt;code&gt;FilterInputStream&lt;/code&gt; contains
+ some other input stream, which it uses as
+ its  basic source of data, possibly transforming
+ the data along the way or providing  additional
+ functionality. The class &lt;code&gt;FilterInputStream&lt;/code&gt;
+ itself simply overrides all  methods of
+ &lt;code&gt;InputStream&lt;/code&gt; with versions that
+ pass all requests to the contained  input
+ stream. Subclasses of &lt;code&gt;FilterInputStream&lt;/code&gt;
+ may further override some of  these methods
+ and may also provide additional methods
+ and fields.
+
+ @author  Jonathan Payne
+ @since   JDK1.0
+*/
+var FilterInputStream = {
+
+<span id='java-io-FilterInputStream-method-read'>/**Reads the next byte of data from this input stream. The value
+</span> byte is returned as an &lt;code&gt;int&lt;/code&gt; in the range
+ &lt;code&gt;0&lt;/code&gt; to &lt;code&gt;255&lt;/code&gt;. If no byte is available
+ because the end of the stream has been reached, the value
+ &lt;code&gt;-1&lt;/code&gt; is returned. This method blocks until input data
+ is available, the end of the stream is detected, or an exception
+ is thrown.
+ &lt;p&gt;
+ This method
+ simply performs &lt;code&gt;in.read()&lt;/code&gt; and returns the result.
+@return {Number} the next byte of data, or &lt;code&gt;-1&lt;/code&gt; if the end of the
+             stream is reached.
+@exception IOException  if an I/O error occurs.
+@see java.io.FilterInputStream#in
+*/
+read : function(  ) {},
+
+<span id='java-io-FilterInputStream-method-read'>/**Reads up to &lt;code&gt;byte.length&lt;/code&gt; bytes of data from this
+</span> input stream into an array of bytes. This method blocks until some
+ input is available.
+ &lt;p&gt;
+ This method simply performs the call
+ &lt;code&gt;read(b, 0, b.length)&lt;/code&gt; and returns
+ the  result. It is important that it does
+ &lt;i&gt;not&lt;/i&gt; do &lt;code&gt;in.read(b)&lt;/code&gt; instead;
+ certain subclasses of  &lt;code&gt;FilterInputStream&lt;/code&gt;
+ depend on the implementation strategy actually
+ used.
+@param {Object {byte[]}} b   the buffer into which the data is read.
+@return {Number} the total number of bytes read into the buffer, or
+             &lt;code&gt;-1&lt;/code&gt; if there is no more data because the end of
+             the stream has been reached.
+@exception IOException  if an I/O error occurs.
+@see java.io.FilterInputStream#read(byte[], int, int)
+*/
+read : function(  ) {},
+
+<span id='java-io-FilterInputStream-method-read'>/**Reads up to &lt;code&gt;len&lt;/code&gt; bytes of data from this input stream
+</span> into an array of bytes. If &lt;code&gt;len&lt;/code&gt; is not zero, the method
+ blocks until some input is available; otherwise, no
+ bytes are read and &lt;code&gt;0&lt;/code&gt; is returned.
+ &lt;p&gt;
+ This method simply performs &lt;code&gt;in.read(b, off, len)&lt;/code&gt;
+ and returns the result.
+@param {Object {byte[]}} b     the buffer into which the data is read.
+@param {Number} off   the start offset in the destination array &lt;code&gt;b&lt;/code&gt;
+@param {Number} len   the maximum number of bytes read.
+@return {Number} the total number of bytes read into the buffer, or
+             &lt;code&gt;-1&lt;/code&gt; if there is no more data because the end of
+             the stream has been reached.
+@exception NullPointerException If &lt;code&gt;b&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+@exception IndexOutOfBoundsException If &lt;code&gt;off&lt;/code&gt; is negative,
+ &lt;code&gt;len&lt;/code&gt; is negative, or &lt;code&gt;len&lt;/code&gt; is greater than
+ &lt;code&gt;b.length - off&lt;/code&gt;
+@exception IOException  if an I/O error occurs.
+@see java.io.FilterInputStream#in
+*/
+read : function(  ) {},
+
+<span id='java-io-FilterInputStream-method-skip'>/**Skips over and discards &lt;code&gt;n&lt;/code&gt; bytes of data from the
+</span> input stream. The &lt;code&gt;skip&lt;/code&gt; method may, for a variety of
+ reasons, end up skipping over some smaller number of bytes,
+ possibly &lt;code&gt;0&lt;/code&gt;. The actual number of bytes skipped is
+ returned.
+ &lt;p&gt;
+ This method simply performs &lt;code&gt;in.skip(n)&lt;/code&gt;.
+@param {Number} n   the number of bytes to be skipped.
+@return {Number} the actual number of bytes skipped.
+@exception IOException  if the stream does not support seek,
+                          or if some other I/O error occurs.
+*/
+skip : function(  ) {},
+
+<span id='java-io-FilterInputStream-method-available'>/**Returns an estimate of the number of bytes that can be read (or
+</span> skipped over) from this input stream without blocking by the next
+ caller of a method for this input stream. The next caller might be
+ the same thread or another thread.  A single read or skip of this
+ many bytes will not block, but may read or skip fewer bytes.
+ &lt;p&gt;
+ This method returns the result of {@link #in in}.available().
+@return {Number} an estimate of the number of bytes that can be read (or skipped
+             over) from this input stream without blocking.
+@exception IOException  if an I/O error occurs.
+*/
+available : function(  ) {},
+
+<span id='java-io-FilterInputStream-method-close'>/**Closes this input stream and releases any system resources
+</span> associated with the stream.
+ This
+ method simply performs &lt;code&gt;in.close()&lt;/code&gt;.
+@exception IOException  if an I/O error occurs.
+@see java.io.FilterInputStream#in
+*/
+close : function(  ) {},
+
+<span id='java-io-FilterInputStream-method-mark'>/**Marks the current position in this input stream. A subsequent
+</span> call to the &lt;code&gt;reset&lt;/code&gt; method repositions this stream at
+ the last marked position so that subsequent reads re-read the same bytes.
+ &lt;p&gt;
+ The &lt;code&gt;readlimit&lt;/code&gt; argument tells this input stream to
+ allow that many bytes to be read before the mark position gets
+ invalidated.
+ &lt;p&gt;
+ This method simply performs &lt;code&gt;in.mark(readlimit)&lt;/code&gt;.
+@param {Number} readlimit   the maximum limit of bytes that can be read before
+                      the mark position becomes invalid.
+@see java.io.FilterInputStream#in
+@see java.io.FilterInputStream#reset()
+*/
+mark : function(  ) {},
+
+<span id='java-io-FilterInputStream-method-reset'>/**Repositions this stream to the position at the time the
+</span> &lt;code&gt;mark&lt;/code&gt; method was last called on this input stream.
+ &lt;p&gt;
+ This method
+ simply performs &lt;code&gt;in.reset()&lt;/code&gt;.
+ &lt;p&gt;
+ Stream marks are intended to be used in
+ situations where you need to read ahead a little to see what's in
+ the stream. Often this is most easily done by invoking some
+ general parser. If the stream is of the type handled by the
+ parse, it just chugs along happily. If the stream is not of
+ that type, the parser should toss an exception when it fails.
+ If this happens within readlimit bytes, it allows the outer
+ code to reset the stream and try another parser.
+@exception IOException  if the stream has not been marked or if the
+               mark has been invalidated.
+@see java.io.FilterInputStream#in
+@see java.io.FilterInputStream#mark(int)
+*/
+reset : function(  ) {},
+
+<span id='java-io-FilterInputStream-method-markSupported'>/**Tests if this input stream supports the &lt;code&gt;mark&lt;/code&gt;
+</span> and &lt;code&gt;reset&lt;/code&gt; methods.
+ This method
+ simply performs &lt;code&gt;in.markSupported()&lt;/code&gt;.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this stream type supports the
+          &lt;code&gt;mark&lt;/code&gt; and &lt;code&gt;reset&lt;/code&gt; method;
+          &lt;code&gt;false&lt;/code&gt; otherwise.
+@see java.io.FilterInputStream#in
+@see java.io.InputStream#mark(int)
+@see java.io.InputStream#reset()
+*/
+markSupported : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

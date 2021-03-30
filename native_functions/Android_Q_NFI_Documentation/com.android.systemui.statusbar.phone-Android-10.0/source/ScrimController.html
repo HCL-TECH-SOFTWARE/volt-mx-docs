@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-statusbar-phone-ScrimController'>/**@class com.android.systemui.statusbar.phone.ScrimController
+</span> implements android.view.ViewTreeObserver.OnPreDrawListener
+
+ implements com.android.internal.colorextraction.ColorExtractor.OnColorsChangedListener
+
+ implements com.android.systemui.Dumpable
+
+@extends java.lang.Object
+
+ Controls both the scrim behind the notifications and in front of the notifications (when a
+ security method gets shown).
+*/
+var ScrimController = {
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-property-ANIMATION_DURATION'>/** General scrim animation duration.
+</span>*/
+ANIMATION_DURATION : &quot;220&quot;,
+<span id='com-android-systemui-statusbar-phone-ScrimController-property-ANIMATION_DURATION_LONG'>/** Longer duration, currently only used when going to AOD.
+</span>*/
+ANIMATION_DURATION_LONG : &quot;1000&quot;,
+<span id='com-android-systemui-statusbar-phone-ScrimController-property-VISIBILITY_FULLY_TRANSPARENT'>/** When both scrims have 0 alpha.
+</span>*/
+VISIBILITY_FULLY_TRANSPARENT : &quot;0&quot;,
+<span id='com-android-systemui-statusbar-phone-ScrimController-property-VISIBILITY_SEMI_TRANSPARENT'>/** When scrims aren't transparent (alpha 0) but also not opaque (alpha 1.)
+</span>*/
+VISIBILITY_SEMI_TRANSPARENT : &quot;1&quot;,
+<span id='com-android-systemui-statusbar-phone-ScrimController-property-VISIBILITY_FULLY_OPAQUE'>/** When at least 1 scrim is fully opaque (alpha set to 1.)
+</span>*/
+VISIBILITY_FULLY_OPAQUE : &quot;2&quot;,
+<span id='com-android-systemui-statusbar-phone-ScrimController-property-GRADIENT_SCRIM_ALPHA'>/** Default alpha value for most scrims.
+</span>*/
+GRADIENT_SCRIM_ALPHA : &quot;0.2&quot;,
+<span id='com-android-systemui-statusbar-phone-ScrimController-property-WAKE_SENSOR_SCRIM_ALPHA'>/** Scrim opacity when the phone is about to wake-up.
+</span>*/
+WAKE_SENSOR_SCRIM_ALPHA : &quot;0.6&quot;,
+<span id='com-android-systemui-statusbar-phone-ScrimController-property-GRADIENT_SCRIM_ALPHA_BUSY'>/** A scrim varies its opacity based on a busyness factor, for example
+</span> how many notifications are currently visible.
+*/
+GRADIENT_SCRIM_ALPHA_BUSY : &quot;0.7&quot;,
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-transitionTo'>/**
+</span>*/
+transitionTo : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-transitionTo'>/**
+</span>*/
+transitionTo : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-getState'>/**
+</span>*/
+getState : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-onTrackingStarted'>/**
+</span>*/
+onTrackingStarted : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-onExpandingFinished'>/**
+</span>*/
+onExpandingFinished : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setPanelExpansion'>/**Current state of the shade expansion when pulling it from the top.
+</span> This value is 1 when on top of the keyguard and goes to 0 as the user drags up.
+
+ The expansion fraction is tied to the scrim opacity.
+@param {Number} fraction From 0 to 1 where 0 means collapsed and 1 expanded.
+*/
+setPanelExpansion : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setScrimBehindDrawable'>/**Sets the given drawable as the background of the scrim that shows up behind the
+</span> notifications.
+*/
+setScrimBehindDrawable : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setAodFrontScrimAlpha'>/**Sets the front scrim opacity in AOD so it's not as bright.
+</span> &lt;p&gt;
+ Displays usually don't support multiple dimming settings when in low power mode.
+ The workaround is to modify the front scrim opacity when in AOD, so it's not as
+ bright when you're at the movies or lying down on bed.
+ &lt;p&gt;
+ This value will be lost during transitions and only updated again after the the
+ device is dozing when the light sensor is on.
+*/
+setAodFrontScrimAlpha : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setWakeLockScreenSensorActive'>/**If the lock screen sensor is active.
+</span>*/
+setWakeLockScreenSensorActive : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-onPreDraw'>/**
+</span>*/
+onPreDraw : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-getBackgroundColor'>/**
+</span>*/
+getBackgroundColor : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setScrimBehindChangeRunnable'>/**
+</span>*/
+setScrimBehindChangeRunnable : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setCurrentUser'>/**
+</span>*/
+setCurrentUser : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-onColorsChanged'>/**
+</span>*/
+onColorsChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setWallpaperSupportsAmbientMode'>/**
+</span>*/
+setWallpaperSupportsAmbientMode : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-onScreenTurnedOn'>/**Interrupts blanking transitions once the display notifies that it's already on.
+</span>*/
+onScreenTurnedOn : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-onScreenTurnedOff'>/**
+</span>*/
+onScreenTurnedOff : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setExpansionAffectsAlpha'>/**
+</span>*/
+setExpansionAffectsAlpha : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setKeyguardOccluded'>/**
+</span>*/
+setKeyguardOccluded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setHasBackdrop'>/**
+</span>*/
+setHasBackdrop : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ScrimController-method-setLaunchingAffordanceWithPreview'>/**
+</span>*/
+setLaunchingAffordanceWithPreview : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

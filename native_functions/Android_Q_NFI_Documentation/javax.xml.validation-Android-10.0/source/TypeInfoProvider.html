@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-validation-TypeInfoProvider'>/**@class javax.xml.validation.TypeInfoProvider
+</span>@extends java.lang.Object
+
+ This class provides access to the type information determined
+ by {@link javax.xml.validation.ValidatorHandler}.
+
+ &lt;p&gt;
+ Some schema languages, such as W3C XML Schema, encourages a validator
+ to report the &quot;type&quot; it assigns to each attribute/element.
+ Those applications who wish to access this type information can invoke
+ methods defined on this &quot;interface&quot; to access such type information.
+
+ &lt;p&gt;
+ Implementation of this &quot;interface&quot; can be obtained through the
+ {@link javax.xml.validation.ValidatorHandler#getTypeInfoProvider()} method.
+
+ @author  &lt;a href=&quot;mailto:Kohsuke.Kawaguchi@Sun.com&quot;&gt;Kohsuke Kawaguchi&lt;/a&gt;
+ @version $Revision: 884939 $, $Date: 2009-11-27 10:20:46 -0800 (Fri, 27 Nov 2009) $
+ @see org.w3c.dom.TypeInfo
+ @since 1.5
+*/
+var TypeInfoProvider = {
+
+<span id='javax-xml-validation-TypeInfoProvider-method-getElementTypeInfo'>/**&lt;p&gt;Returns the immutable {@link TypeInfo} object for the current element.&lt;/p&gt;
+</span>
+ &lt;p&gt;
+ The method may only be called by the startElement and endElement event of
+ the {@link org.xml.sax.ContentHandler} that the application sets to the
+ {@link javax.xml.validation.ValidatorHandler}.&lt;/p&gt;
+@throws IllegalStateException
+      If this method is called from other {@link org.xml.sax.ContentHandler}
+      methods.
+@return {Object {org.w3c.dom.TypeInfo}} An immutable {@link TypeInfo} object that represents the
+      type of the current element.
+      Note that the caller can keep references to the obtained
+      {@link TypeInfo} longer than the callback scope.
+
+      Otherwise, this method returns
+      null if the validator is unable to
+      determine the type of the current element for some reason
+      (for example, if the validator is recovering from
+      an earlier error.)
+*/
+getElementTypeInfo : function(  ) {},
+
+<span id='javax-xml-validation-TypeInfoProvider-method-getAttributeTypeInfo'>/**Returns the immutable {@link TypeInfo} object for the specified
+</span> attribute of the current element.
+
+ &lt;p&gt;
+ The method may only be called by the startElement event of
+ the {@link org.xml.sax.ContentHandler} that the application sets to the
+ {@link javax.xml.validation.ValidatorHandler}.
+@param {Number} index
+      The index of the attribute. The same index for
+      the {@link org.xml.sax.Attributes} object passed to the
+      &lt;tt&gt;startElement&lt;/tt&gt; callback.
+@throws IndexOutOfBoundsException
+      If the index is invalid.
+@throws IllegalStateException
+      If this method is called from other {@link org.xml.sax.ContentHandler}
+      methods.
+@return {Object {org.w3c.dom.TypeInfo}} An immutable {@link TypeInfo} object that represents the
+      type of the specified attribute.
+      Note that the caller can keep references to the obtained
+      {@link TypeInfo} longer than the callback scope.
+
+      Otherwise, this method returns
+      null if the validator is unable to
+      determine the type.
+*/
+getAttributeTypeInfo : function(  ) {},
+
+<span id='javax-xml-validation-TypeInfoProvider-method-isIdAttribute'>/**Returns &lt;tt&gt;true&lt;/tt&gt; if the specified attribute is determined
+</span> to be ID.
+
+ &lt;p&gt;
+ Exactly how an attribute is &quot;determined to be ID&quot; is up to the
+ schema language. In case of W3C XML Schema, this means
+ that the actual type of the attribute is the built-in ID type
+ or its derived type.
+
+ &lt;p&gt;
+ A {@link javax.xml.parsers.DocumentBuilder} uses this information
+ to properly implement {@link org.w3c.dom.Attr#isId()}.
+
+ &lt;p&gt;
+ The method may only be called by the startElement event of
+ the {@link org.xml.sax.ContentHandler} that the application sets to the
+ {@link javax.xml.validation.ValidatorHandler}.
+@param {Number} index
+      The index of the attribute. The same index for
+      the {@link org.xml.sax.Attributes} object passed to the
+      &lt;tt&gt;startElement&lt;/tt&gt; callback.
+@throws IndexOutOfBoundsException
+      If the index is invalid.
+@throws IllegalStateException
+      If this method is called from other {@link org.xml.sax.ContentHandler}
+      methods.
+@return {Boolean} true
+      if the type of the specified attribute is ID.
+*/
+isIdAttribute : function(  ) {},
+
+<span id='javax-xml-validation-TypeInfoProvider-method-isSpecified'>/**Returns &lt;tt&gt;false&lt;/tt&gt; if the attribute was added by the validator.
+</span>
+ &lt;p&gt;
+ This method provides information necessary for
+ a {@link javax.xml.parsers.DocumentBuilder} to determine what
+ the DOM tree should return from the {@link org.w3c.dom.Attr#getSpecified()} method.
+
+ &lt;p&gt;
+ The method may only be called by the startElement event of
+ the {@link org.xml.sax.ContentHandler} that the application sets to the
+ {@link javax.xml.validation.ValidatorHandler}.
+
+ &lt;p&gt;
+ A general guideline for validators is to return true if
+ the attribute was originally present in the pipeline, and
+ false if it was added by the validator.
+@param {Number} index
+      The index of the attribute. The same index for
+      the {@link org.xml.sax.Attributes} object passed to the
+      &lt;tt&gt;startElement&lt;/tt&gt; callback.
+@throws IndexOutOfBoundsException
+      If the index is invalid.
+@throws IllegalStateException
+      If this method is called from other {@link org.xml.sax.ContentHandler}
+      methods.
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if the attribute was present before the validator
+      processes input. &lt;tt&gt;false&lt;/tt&gt; if the attribute was added
+      by the validator.
+*/
+isSpecified : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

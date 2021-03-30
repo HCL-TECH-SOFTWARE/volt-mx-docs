@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-SeekableByteChannel'>/**@class java.nio.channels.SeekableByteChannel
+</span> implements java.nio.channels.ByteChannel
+
+ A byte channel that maintains a current &lt;i&gt;position&lt;/i&gt; and allows the
+ position to be changed.
+
+ &lt;p&gt; A seekable byte channel is connected to an entity, typically a file,
+ that contains a variable-length sequence of bytes that can be read and
+ written. The current position can be {@link #position() &lt;i&gt;queried&lt;/i&gt;} and
+ {@link #position(long) &lt;i&gt;modified&lt;/i&gt;}. The channel also provides access to
+ the current &lt;i&gt;size&lt;/i&gt; of the entity to which the channel is connected. The
+ size increases when bytes are written beyond its current size; the size
+ decreases when it is {@link #truncate &lt;i&gt;truncated&lt;/i&gt;}.
+
+ &lt;p&gt; The {@link #position(long) position} and {@link #truncate truncate} methods
+ which do not otherwise have a value to return are specified to return the
+ channel upon which they are invoked. This allows method invocations to be
+ chained. Implementations of this interface should specialize the return type
+ so that method invocations on the implementation class can be chained.
+
+ @since 1.7
+ @see java.nio.file.Files#newByteChannel
+*/
+var SeekableByteChannel = {
+
+<span id='java-nio-channels-SeekableByteChannel-method-read'>/**Reads a sequence of bytes from this channel into the given buffer.
+</span>
+ &lt;p&gt; Bytes are read starting at this channel's current position, and
+ then the position is updated with the number of bytes actually read.
+ Otherwise this method behaves exactly as specified in the {@link java.nio.channels.ReadableByteChannel} interface.
+*/
+read : function(  ) {},
+
+<span id='java-nio-channels-SeekableByteChannel-method-write'>/**Writes a sequence of bytes to this channel from the given buffer.
+</span>
+ &lt;p&gt; Bytes are written starting at this channel's current position, unless
+ the channel is connected to an entity such as a file that is opened with
+ the {@link java.nio.file.StandardOpenOption#APPEND APPEND} option, in
+ which case the position is first advanced to the end. The entity to which
+ the channel is connected is grown, if necessary, to accommodate the
+ written bytes, and then the position is updated with the number of bytes
+ actually written. Otherwise this method behaves exactly as specified by
+ the {@link java.nio.channels.WritableByteChannel} interface.
+*/
+write : function(  ) {},
+
+<span id='java-nio-channels-SeekableByteChannel-method-position'>/**Returns this channel's position.
+</span>@return {Number} This channel's position,
+          a non-negative integer counting the number of bytes
+          from the beginning of the entity to the current position
+@throws ClosedChannelException
+          If this channel is closed
+@throws IOException
+          If some other I/O error occurs
+*/
+position : function(  ) {},
+
+<span id='java-nio-channels-SeekableByteChannel-method-position'>/**Sets this channel's position.
+</span>
+ &lt;p&gt; Setting the position to a value that is greater than the current size
+ is legal but does not change the size of the entity.  A later attempt to
+ read bytes at such a position will immediately return an end-of-file
+ indication.  A later attempt to write bytes at such a position will cause
+ the entity to grow to accommodate the new bytes; the values of any bytes
+ between the previous end-of-file and the newly-written bytes are
+ unspecified.
+
+ &lt;p&gt; Setting the channel's position is not recommended when connected to
+ an entity, typically a file, that is opened with the {@link java.nio.file.StandardOpenOption#APPEND APPEND} option. When opened for
+ append, the position is first advanced to the end before writing.
+@param {Number} newPosition
+         The new position, a non-negative integer counting
+         the number of bytes from the beginning of the entity
+@return {Object {java.nio.channels.SeekableByteChannel}} This channel
+@throws ClosedChannelException
+          If this channel is closed
+@throws IllegalArgumentException
+          If the new position is negative
+@throws IOException
+          If some other I/O error occurs
+*/
+position : function(  ) {},
+
+<span id='java-nio-channels-SeekableByteChannel-method-size'>/**Returns the current size of entity to which this channel is connected.
+</span>@return {Number} The current size, measured in bytes
+@throws ClosedChannelException
+          If this channel is closed
+@throws IOException
+          If some other I/O error occurs
+*/
+size : function(  ) {},
+
+<span id='java-nio-channels-SeekableByteChannel-method-truncate'>/**Truncates the entity, to which this channel is connected, to the given
+</span> size.
+
+ &lt;p&gt; If the given size is less than the current size then the entity is
+ truncated, discarding any bytes beyond the new end. If the given size is
+ greater than or equal to the current size then the entity is not modified.
+ In either case, if the current position is greater than the given size
+ then it is set to that size.
+
+ &lt;p&gt; An implementation of this interface may prohibit truncation when
+ connected to an entity, typically a file, opened with the {@link java.nio.file.StandardOpenOption#APPEND APPEND} option.
+@param {Number} size
+         The new size, a non-negative byte count
+@return {Object {java.nio.channels.SeekableByteChannel}} This channel
+@throws NonWritableChannelException
+          If this channel was not opened for writing
+@throws ClosedChannelException
+          If this channel is closed
+@throws IllegalArgumentException
+          If the new size is negative
+@throws IOException
+          If some other I/O error occurs
+*/
+truncate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

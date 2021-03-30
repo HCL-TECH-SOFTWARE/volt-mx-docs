@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-Channels'>/**@class java.nio.channels.Channels
+</span>@extends java.lang.Object
+
+ Utility methods for channels and streams.
+
+ &lt;p&gt; This class defines static methods that support the interoperation of the
+ stream classes of the &lt;tt&gt;{@link java.io}&lt;/tt&gt; package with the channel
+ classes of this package.  &lt;/p&gt;
+
+
+ @author Mark Reinhold
+ @author Mike McCloskey
+ @author JSR-51 Expert Group
+ @since 1.4
+*/
+var Channels = {
+
+<span id='java-nio-channels-Channels-method-newInputStream'>/**Constructs a stream that reads bytes from the given channel.
+</span>
+ &lt;p&gt; The &lt;tt&gt;read&lt;/tt&gt; methods of the resulting stream will throw an
+ {@link java.nio.channels.IllegalBlockingModeException} if invoked while the underlying
+ channel is in non-blocking mode.  The stream will not be buffered, and
+ it will not support the {@link InputStream#mark mark} or {@link InputStream#reset reset} methods.  The stream will be safe for access by
+ multiple concurrent threads.  Closing the stream will in turn cause the
+ channel to be closed.  &lt;/p&gt;
+@param {Object {ReadableByteChannel}} ch
+         The channel from which bytes will be read
+@return {Object {java.io.InputStream}} A new input stream
+*/
+newInputStream : function(  ) {},
+
+<span id='java-nio-channels-Channels-method-newOutputStream'>/**Constructs a stream that writes bytes to the given channel.
+</span>
+ &lt;p&gt; The &lt;tt&gt;write&lt;/tt&gt; methods of the resulting stream will throw an
+ {@link java.nio.channels.IllegalBlockingModeException} if invoked while the underlying
+ channel is in non-blocking mode.  The stream will not be buffered.  The
+ stream will be safe for access by multiple concurrent threads.  Closing
+ the stream will in turn cause the channel to be closed.  &lt;/p&gt;
+@param {Object {WritableByteChannel}} ch
+         The channel to which bytes will be written
+@return {Object {java.io.OutputStream}} A new output stream
+*/
+newOutputStream : function(  ) {},
+
+<span id='java-nio-channels-Channels-method-newInputStream'>/**Constructs a stream that reads bytes from the given channel.
+</span>
+ &lt;p&gt; The stream will not be buffered, and it will not support the {@link InputStream#mark mark} or {@link InputStream#reset reset} methods.  The
+ stream will be safe for access by multiple concurrent threads.  Closing
+ the stream will in turn cause the channel to be closed.  &lt;/p&gt;
+@param {Object {AsynchronousByteChannel}} ch
+         The channel from which bytes will be read
+@return {Object {java.io.InputStream}} A new input stream
+@since 1.7
+*/
+newInputStream : function(  ) {},
+
+<span id='java-nio-channels-Channels-method-newOutputStream'>/**Constructs a stream that writes bytes to the given channel.
+</span>
+ &lt;p&gt; The stream will not be buffered. The stream will be safe for access
+ by multiple concurrent threads.  Closing the stream will in turn cause
+ the channel to be closed.  &lt;/p&gt;
+@param {Object {AsynchronousByteChannel}} ch
+         The channel to which bytes will be written
+@return {Object {java.io.OutputStream}} A new output stream
+@since 1.7
+*/
+newOutputStream : function(  ) {},
+
+<span id='java-nio-channels-Channels-method-newChannel'>/**Constructs a channel that reads bytes from the given stream.
+</span>
+ &lt;p&gt; The resulting channel will not be buffered; it will simply redirect
+ its I/O operations to the given stream.  Closing the channel will in
+ turn cause the stream to be closed.  &lt;/p&gt;
+@param {Object {InputStream}} in
+         The stream from which bytes are to be read
+@return {Object {java.nio.channels.ReadableByteChannel}} A new readable byte channel
+*/
+newChannel : function(  ) {},
+
+<span id='java-nio-channels-Channels-method-newChannel'>/**Constructs a channel that writes bytes to the given stream.
+</span>
+ &lt;p&gt; The resulting channel will not be buffered; it will simply redirect
+ its I/O operations to the given stream.  Closing the channel will in
+ turn cause the stream to be closed.  &lt;/p&gt;
+@param {Object {OutputStream}} out
+         The stream to which bytes are to be written
+@return {Object {java.nio.channels.WritableByteChannel}} A new writable byte channel
+*/
+newChannel : function(  ) {},
+
+<span id='java-nio-channels-Channels-method-newReader'>/**Constructs a reader that decodes bytes from the given channel using the
+</span> given decoder.
+
+ &lt;p&gt; The resulting stream will contain an internal input buffer of at
+ least &lt;tt&gt;minBufferCap&lt;/tt&gt; bytes.  The stream's &lt;tt&gt;read&lt;/tt&gt; methods
+ will, as needed, fill the buffer by reading bytes from the underlying
+ channel; if the channel is in non-blocking mode when bytes are to be
+ read then an {@link java.nio.channels.IllegalBlockingModeException} will be thrown.  The
+ resulting stream will not otherwise be buffered, and it will not support
+ the {@link Reader#mark mark} or {@link Reader#reset reset} methods.
+ Closing the stream will in turn cause the channel to be closed.  &lt;/p&gt;
+@param {Object {ReadableByteChannel}} ch
+         The channel from which bytes will be read
+@param {Object {CharsetDecoder}} dec
+         The charset decoder to be used
+@param {Number} minBufferCap
+         The minimum capacity of the internal byte buffer,
+         or &lt;tt&gt;-1&lt;/tt&gt; if an implementation-dependent
+         default capacity is to be used
+@return {Object {java.io.Reader}} A new reader
+*/
+newReader : function(  ) {},
+
+<span id='java-nio-channels-Channels-method-newReader'>/**Constructs a reader that decodes bytes from the given channel according
+</span> to the named charset.
+
+ &lt;p&gt; An invocation of this method of the form
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ Channels.newReader(ch, csname)&lt;/pre&gt;&lt;/blockquote&gt;
+
+ behaves in exactly the same way as the expression
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ Channels.newReader(ch,
+                    Charset.forName(csName)
+                        .newDecoder(),
+                    -1);&lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {ReadableByteChannel}} ch
+         The channel from which bytes will be read
+@param {String} csName
+         The name of the charset to be used
+@return {Object {java.io.Reader}} A new reader
+@throws UnsupportedCharsetException
+          If no support for the named charset is available
+          in this instance of the Java virtual machine
+*/
+newReader : function(  ) {},
+
+<span id='java-nio-channels-Channels-method-newWriter'>/**Constructs a writer that encodes characters using the given encoder and
+</span> writes the resulting bytes to the given channel.
+
+ &lt;p&gt; The resulting stream will contain an internal output buffer of at
+ least &lt;tt&gt;minBufferCap&lt;/tt&gt; bytes.  The stream's &lt;tt&gt;write&lt;/tt&gt; methods
+ will, as needed, flush the buffer by writing bytes to the underlying
+ channel; if the channel is in non-blocking mode when bytes are to be
+ written then an {@link java.nio.channels.IllegalBlockingModeException} will be thrown.
+ The resulting stream will not otherwise be buffered.  Closing the stream
+ will in turn cause the channel to be closed.  &lt;/p&gt;
+@param {Object {WritableByteChannel}} ch
+         The channel to which bytes will be written
+@param {Object {CharsetEncoder}} enc
+         The charset encoder to be used
+@param {Number} minBufferCap
+         The minimum capacity of the internal byte buffer,
+         or &lt;tt&gt;-1&lt;/tt&gt; if an implementation-dependent
+         default capacity is to be used
+@return {Object {java.io.Writer}} A new writer
+*/
+newWriter : function(  ) {},
+
+<span id='java-nio-channels-Channels-method-newWriter'>/**Constructs a writer that encodes characters according to the named
+</span> charset and writes the resulting bytes to the given channel.
+
+ &lt;p&gt; An invocation of this method of the form
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ Channels.newWriter(ch, csname)&lt;/pre&gt;&lt;/blockquote&gt;
+
+ behaves in exactly the same way as the expression
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ Channels.newWriter(ch,
+                    Charset.forName(csName)
+                        .newEncoder(),
+                    -1);&lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {WritableByteChannel}} ch
+         The channel to which bytes will be written
+@param {String} csName
+         The name of the charset to be used
+@return {Object {java.io.Writer}} A new writer
+@throws UnsupportedCharsetException
+          If no support for the named charset is available
+          in this instance of the Java virtual machine
+*/
+newWriter : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

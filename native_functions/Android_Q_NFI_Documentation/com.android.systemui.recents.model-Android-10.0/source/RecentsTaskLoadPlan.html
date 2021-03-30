@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-recents-model-RecentsTaskLoadPlan'>/**@class com.android.systemui.recents.model.RecentsTaskLoadPlan
+</span>@extends java.lang.Object
+
+ This class stores the loading state as it goes through multiple stages of loading:
+   1) preloadRawTasks() will load the raw set of recents tasks from the system
+   2) preloadPlan() will construct a new task stack with all metadata and only icons and
+      thumbnails that are currently in the cache
+   3) executePlan() will actually load and fill in the icons and thumbnails according to the load
+      options specified, such that we can transition into the Recents activity seamlessly
+*/
+var RecentsTaskLoadPlan = {
+
+<span id='com-android-systemui-recents-model-RecentsTaskLoadPlan-method-preloadPlan'>/**Preloads the list of recent tasks from the system. After this call, the TaskStack will
+</span> have a list of all the recent tasks with their metadata, not including icons or
+ thumbnails which were not cached and have to be loaded.
+
+ The tasks will be ordered by:
+ - least-recent to most-recent stack tasks
+
+ Note: Do not lock, since this can be calling back to the loader, which separately also drives
+ this call (callers should synchronize on the loader before making this call).
+*/
+preloadPlan : function(  ) {},
+
+<span id='com-android-systemui-recents-model-RecentsTaskLoadPlan-method-executePlan'>/**Called to apply the actual loading based on the specified conditions.
+</span>
+ Note: Do not lock, since this can be calling back to the loader, which separately also drives
+ this call (callers should synchronize on the loader before making this call).
+*/
+executePlan : function(  ) {},
+
+<span id='com-android-systemui-recents-model-RecentsTaskLoadPlan-method-getTaskStack'>/**Returns the TaskStack from the preloaded list of recent tasks.
+</span>*/
+getTaskStack : function(  ) {},
+
+<span id='com-android-systemui-recents-model-RecentsTaskLoadPlan-method-hasTasks'>/**Returns whether there are any tasks in any stacks.
+</span>*/
+hasTasks : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

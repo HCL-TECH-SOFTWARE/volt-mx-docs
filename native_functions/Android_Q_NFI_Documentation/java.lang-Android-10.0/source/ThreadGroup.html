@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-ThreadGroup'>/**@class java.lang.ThreadGroup
+</span> implements java.lang.Thread.UncaughtExceptionHandler
+
+@extends java.lang.Object
+
+ A thread group represents a set of threads. In addition, a thread
+ group can also include other thread groups. The thread groups form
+ a tree in which every thread group except the initial thread group
+ has a parent.
+ &lt;p&gt;
+ A thread is allowed to access information about its own thread
+ group, but not to access information about its thread group's
+ parent thread group or any other thread groups.
+
+ @author  unascribed
+ @since   JDK1.0
+*/
+var ThreadGroup = {
+
+<span id='java-lang-ThreadGroup-method-getName'>/**Returns the name of this thread group.
+</span>@return {String} the name of this thread group.
+@since JDK1.0
+*/
+getName : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-getParent'>/**Returns the parent of this thread group.
+</span> &lt;p&gt;
+ First, if the parent is not &lt;code&gt;null&lt;/code&gt;, the
+ &lt;code&gt;checkAccess&lt;/code&gt; method of the parent thread group is
+ called with no arguments; this may result in a security exception.
+@return {Object {java.lang.ThreadGroup}} the parent of this thread group. The top-level thread group
+          is the only thread group whose parent is &lt;code&gt;null&lt;/code&gt;.
+@exception SecurityException  if the current thread cannot modify
+               this thread group.
+@see java.lang.ThreadGroup#checkAccess()
+@see java.lang.SecurityException
+@see java.lang.RuntimePermission
+@since JDK1.0
+*/
+getParent : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-getMaxPriority'>/**Returns the maximum priority of this thread group. Threads that are
+</span> part of this group cannot have a higher priority than the maximum
+ priority.
+@return {Number} the maximum priority that a thread in this thread group
+          can have.
+@see #setMaxPriority
+@since JDK1.0
+*/
+getMaxPriority : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-isDaemon'>/**Tests if this thread group is a daemon thread group. A
+</span> daemon thread group is automatically destroyed when its last
+ thread is stopped or its last thread group is destroyed.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this thread group is a daemon thread group;
+          &lt;code&gt;false&lt;/code&gt; otherwise.
+@since JDK1.0
+*/
+isDaemon : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-isDestroyed'>/**Tests if this thread group has been destroyed.
+</span>@return {Boolean} true if this object is destroyed
+@since JDK1.1
+*/
+isDestroyed : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-setDaemon'>/**Changes the daemon status of this thread group.
+</span> &lt;p&gt;
+ First, the &lt;code&gt;checkAccess&lt;/code&gt; method of this thread group is
+ called with no arguments; this may result in a security exception.
+ &lt;p&gt;
+ A daemon thread group is automatically destroyed when its last
+ thread is stopped or its last thread group is destroyed.
+@param {Boolean} daemon   if &lt;code&gt;true&lt;/code&gt;, marks this thread group as
+                      a daemon thread group; otherwise, marks this
+                      thread group as normal.
+@exception SecurityException  if the current thread cannot modify
+               this thread group.
+@see java.lang.SecurityException
+@see java.lang.ThreadGroup#checkAccess()
+@since JDK1.0
+*/
+setDaemon : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-setMaxPriority'>/**Sets the maximum priority of the group. Threads in the thread
+</span> group that already have a higher priority are not affected.
+ &lt;p&gt;
+ First, the &lt;code&gt;checkAccess&lt;/code&gt; method of this thread group is
+ called with no arguments; this may result in a security exception.
+ &lt;p&gt;
+ If the &lt;code&gt;pri&lt;/code&gt; argument is less than
+ {@link java.lang.Thread#MIN_PRIORITY} or greater than
+ {@link java.lang.Thread#MAX_PRIORITY}, it is clamped to those values.
+ &lt;p&gt;
+ Otherwise, the priority of this ThreadGroup object is set to the
+ smaller of the specified &lt;code&gt;pri&lt;/code&gt; and the maximum permitted
+ priority of the parent of this thread group. (If this thread group
+ is the system thread group, which has no parent, then its maximum
+ priority is simply set to &lt;code&gt;pri&lt;/code&gt;.) Then this method is
+ called recursively, with &lt;code&gt;pri&lt;/code&gt; as its argument, for
+ every thread group that belongs to this thread group.
+@param {Number} pri   the new priority of the thread group.
+@exception SecurityException  if the current thread cannot modify
+               this thread group.
+@see #getMaxPriority
+@see java.lang.SecurityException
+@see java.lang.ThreadGroup#checkAccess()
+@since JDK1.0
+*/
+setMaxPriority : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-parentOf'>/**Tests if this thread group is either the thread group
+</span> argument or one of its ancestor thread groups.
+@param {Object {ThreadGroup}} g   a thread group.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this thread group is the thread group
+          argument or one of its ancestor thread groups;
+          &lt;code&gt;false&lt;/code&gt; otherwise.
+@since JDK1.0
+*/
+parentOf : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-checkAccess'>/**Determines if the currently running thread has permission to
+</span> modify this thread group.
+ &lt;p&gt;
+ If there is a security manager, its &lt;code&gt;checkAccess&lt;/code&gt; method
+ is called with this thread group as its argument. This may result
+ in throwing a &lt;code&gt;SecurityException&lt;/code&gt;.
+@exception SecurityException  if the current thread is not allowed to
+               access this thread group.
+@see java.lang.SecurityManager#checkAccess(java.lang.ThreadGroup)
+@since JDK1.0
+*/
+checkAccess : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-activeCount'>/**Returns an estimate of the number of active threads in this thread
+</span> group and its subgroups. Recursively iterates over all subgroups in
+ this thread group.
+
+ &lt;p&gt; The value returned is only an estimate because the number of
+ threads may change dynamically while this method traverses internal
+ data structures, and might be affected by the presence of certain
+ system threads. This method is intended primarily for debugging
+ and monitoring purposes.
+@return {Number} an estimate of the number of active threads in this thread
+          group and in any other thread group that has this thread
+          group as an ancestor
+@since JDK1.0
+*/
+activeCount : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-enumerate'>/**Copies into the specified array every active thread in this
+</span> thread group and its subgroups.
+
+ &lt;p&gt; An invocation of this method behaves in exactly the same
+ way as the invocation
+
+ &lt;blockquote&gt;
+ {@linkplain #enumerate(Thread[], boolean) enumerate}{@code (list, true)}
+ &lt;/blockquote&gt;
+@param {Object {java.lang.Thread[]}} list
+         an array into which to put the list of threads
+@return {Number} the number of threads put into the array
+@throws SecurityException
+          if {@linkplain #checkAccess checkAccess} determines that
+          the current thread cannot access this thread group
+@since JDK1.0
+*/
+enumerate : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-enumerate'>/**Copies into the specified array every active thread in this
+</span> thread group. If {@code recurse} is {@code true},
+ this method recursively enumerates all subgroups of this
+ thread group and references to every active thread in these
+ subgroups are also included. If the array is too short to
+ hold all the threads, the extra threads are silently ignored.
+
+ &lt;p&gt; An application might use the {@linkplain #activeCount activeCount}
+ method to get an estimate of how big the array should be, however
+ &lt;i&gt;if the array is too short to hold all the threads, the extra threads
+ are silently ignored.&lt;/i&gt;  If it is critical to obtain every active
+ thread in this thread group, the caller should verify that the returned
+ int value is strictly less than the length of {@code list}.
+
+ &lt;p&gt; Due to the inherent race condition in this method, it is recommended
+ that the method only be used for debugging and monitoring purposes.
+@param {Object {java.lang.Thread[]}} list
+         an array into which to put the list of threads
+@param {Boolean} recurse
+         if {@code true}, recursively enumerate all subgroups of this
+         thread group
+@return {Number} the number of threads put into the array
+@throws SecurityException
+          if {@linkplain #checkAccess checkAccess} determines that
+          the current thread cannot access this thread group
+@since JDK1.0
+*/
+enumerate : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-activeGroupCount'>/**Returns an estimate of the number of active groups in this
+</span> thread group and its subgroups. Recursively iterates over
+ all subgroups in this thread group.
+
+ &lt;p&gt; The value returned is only an estimate because the number of
+ thread groups may change dynamically while this method traverses
+ internal data structures. This method is intended primarily for
+ debugging and monitoring purposes.
+@return {Number} the number of active thread groups with this thread group as
+          an ancestor
+@since JDK1.0
+*/
+activeGroupCount : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-enumerate'>/**Copies into the specified array references to every active
+</span> subgroup in this thread group and its subgroups.
+
+ &lt;p&gt; An invocation of this method behaves in exactly the same
+ way as the invocation
+
+ &lt;blockquote&gt;
+ {@linkplain #enumerate(ThreadGroup[], boolean) enumerate}{@code (list, true)}
+ &lt;/blockquote&gt;
+@param {Object {java.lang.ThreadGroup[]}} list
+         an array into which to put the list of thread groups
+@return {Number} the number of thread groups put into the array
+@throws SecurityException
+          if {@linkplain #checkAccess checkAccess} determines that
+          the current thread cannot access this thread group
+@since JDK1.0
+*/
+enumerate : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-enumerate'>/**Copies into the specified array references to every active
+</span> subgroup in this thread group. If {@code recurse} is
+ {@code true}, this method recursively enumerates all subgroups of this
+ thread group and references to every active thread group in these
+ subgroups are also included.
+
+ &lt;p&gt; An application might use the
+ {@linkplain #activeGroupCount activeGroupCount} method to
+ get an estimate of how big the array should be, however &lt;i&gt;if the
+ array is too short to hold all the thread groups, the extra thread
+ groups are silently ignored.&lt;/i&gt;  If it is critical to obtain every
+ active subgroup in this thread group, the caller should verify that
+ the returned int value is strictly less than the length of
+ {@code list}.
+
+ &lt;p&gt; Due to the inherent race condition in this method, it is recommended
+ that the method only be used for debugging and monitoring purposes.
+@param {Object {java.lang.ThreadGroup[]}} list
+         an array into which to put the list of thread groups
+@param {Boolean} recurse
+         if {@code true}, recursively enumerate all subgroups
+@return {Number} the number of thread groups put into the array
+@throws SecurityException
+          if {@linkplain #checkAccess checkAccess} determines that
+          the current thread cannot access this thread group
+@since JDK1.0
+*/
+enumerate : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-stop'>/**Stops all threads in this thread group.
+</span> &lt;p&gt;
+ First, the &lt;code&gt;checkAccess&lt;/code&gt; method of this thread group is
+ called with no arguments; this may result in a security exception.
+ &lt;p&gt;
+ This method then calls the &lt;code&gt;stop&lt;/code&gt; method on all the
+ threads in this thread group and in all of its subgroups.
+@exception SecurityException  if the current thread is not allowed
+               to access this thread group or any of the threads in
+               the thread group.
+@see java.lang.SecurityException
+@see java.lang.Thread#stop()
+@see java.lang.ThreadGroup#checkAccess()
+@since JDK1.0
+@deprecated This method is inherently unsafe.  See
+     {@link Thread#stop} for details.
+*/
+stop : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-interrupt'>/**Interrupts all threads in this thread group.
+</span> &lt;p&gt;
+ First, the &lt;code&gt;checkAccess&lt;/code&gt; method of this thread group is
+ called with no arguments; this may result in a security exception.
+ &lt;p&gt;
+ This method then calls the &lt;code&gt;interrupt&lt;/code&gt; method on all the
+ threads in this thread group and in all of its subgroups.
+@exception SecurityException  if the current thread is not allowed
+               to access this thread group or any of the threads in
+               the thread group.
+@see java.lang.Thread#interrupt()
+@see java.lang.SecurityException
+@see java.lang.ThreadGroup#checkAccess()
+@since 1.2
+*/
+interrupt : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-suspend'>/**Suspends all threads in this thread group.
+</span> &lt;p&gt;
+ First, the &lt;code&gt;checkAccess&lt;/code&gt; method of this thread group is
+ called with no arguments; this may result in a security exception.
+ &lt;p&gt;
+ This method then calls the &lt;code&gt;suspend&lt;/code&gt; method on all the
+ threads in this thread group and in all of its subgroups.
+@exception SecurityException  if the current thread is not allowed
+               to access this thread group or any of the threads in
+               the thread group.
+@see java.lang.Thread#suspend()
+@see java.lang.SecurityException
+@see java.lang.ThreadGroup#checkAccess()
+@since JDK1.0
+@deprecated This method is inherently deadlock-prone.  See
+     {@link Thread#suspend} for details.
+*/
+suspend : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-resume'>/**Resumes all threads in this thread group.
+</span> &lt;p&gt;
+ First, the &lt;code&gt;checkAccess&lt;/code&gt; method of this thread group is
+ called with no arguments; this may result in a security exception.
+ &lt;p&gt;
+ This method then calls the &lt;code&gt;resume&lt;/code&gt; method on all the
+ threads in this thread group and in all of its sub groups.
+@exception SecurityException  if the current thread is not allowed to
+               access this thread group or any of the threads in the
+               thread group.
+@see java.lang.SecurityException
+@see java.lang.Thread#resume()
+@see java.lang.ThreadGroup#checkAccess()
+@since JDK1.0
+@deprecated This method is used solely in conjunction with
+      &lt;tt&gt;Thread.suspend&lt;/tt&gt; and &lt;tt&gt;ThreadGroup.suspend&lt;/tt&gt;,
+       both of which have been deprecated, as they are inherently
+       deadlock-prone.  See {@link Thread#suspend} for details.
+*/
+resume : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-destroy'>/**Destroys this thread group and all of its subgroups. This thread
+</span> group must be empty, indicating that all threads that had been in
+ this thread group have since stopped.
+ &lt;p&gt;
+ First, the &lt;code&gt;checkAccess&lt;/code&gt; method of this thread group is
+ called with no arguments; this may result in a security exception.
+@exception IllegalThreadStateException  if the thread group is not
+               empty or if the thread group has already been destroyed.
+@exception SecurityException  if the current thread cannot modify this
+               thread group.
+@see java.lang.ThreadGroup#checkAccess()
+@since JDK1.0
+*/
+destroy : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-list'>/**Prints information about this thread group to the standard
+</span> output. This method is useful only for debugging.
+@since JDK1.0
+*/
+list : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-uncaughtException'>/**Called by the Java Virtual Machine when a thread in this
+</span> thread group stops because of an uncaught exception, and the thread
+ does not have a specific {@link java.lang.Thread.UncaughtExceptionHandler}
+ installed.
+ &lt;p&gt;
+ The &lt;code&gt;uncaughtException&lt;/code&gt; method of
+ &lt;code&gt;ThreadGroup&lt;/code&gt; does the following:
+ &lt;ul&gt;
+ &lt;li&gt;If this thread group has a parent thread group, the
+     &lt;code&gt;uncaughtException&lt;/code&gt; method of that parent is called
+     with the same two arguments.
+ &lt;li&gt;Otherwise, this method checks to see if there is a
+     {@linkplain java.lang.Thread#getDefaultUncaughtExceptionHandler default
+     uncaught exception handler} installed, and if so, its
+     &lt;code&gt;uncaughtException&lt;/code&gt; method is called with the same
+     two arguments.
+ &lt;li&gt;Otherwise, this method determines if the &lt;code&gt;Throwable&lt;/code&gt;
+     argument is an instance of {@link java.lang.ThreadDeath}. If so, nothing
+     special is done. Otherwise, a message containing the
+     thread's name, as returned from the thread's {@link java.lang.Thread#getName getName} method, and a stack backtrace,
+     using the &lt;code&gt;Throwable&lt;/code&gt;'s {@link java.lang.Throwable#printStackTrace printStackTrace} method, is
+     printed to the {@linkplain java.lang.System#err standard error stream}.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Applications can override this method in subclasses of
+ &lt;code&gt;ThreadGroup&lt;/code&gt; to provide alternative handling of
+ uncaught exceptions.
+@param {Object {Thread}} t   the thread that is about to exit.
+@param {Object {Throwable}} e   the uncaught exception.
+@since JDK1.0
+*/
+uncaughtException : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-allowThreadSuspension'>/**Used by VM to control lowmem implicit suspension.
+</span>@param {Boolean} b boolean to allow or disallow suspension
+@return {Boolean} true on success
+@since JDK1.1
+@deprecated The definition of this call depends on {@link #suspend},
+             which is deprecated.  Further, the behavior of this call
+             was never specified.
+*/
+allowThreadSuspension : function(  ) {},
+
+<span id='java-lang-ThreadGroup-method-toString'>/**Returns a string representation of this Thread group.
+</span>@return {String} a string representation of this thread group.
+@since JDK1.0
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

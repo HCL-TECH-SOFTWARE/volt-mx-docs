@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-settingslib-applications-ApplicationsState'>/**@class com.android.settingslib.applications.ApplicationsState
+</span>@extends java.lang.Object
+
+ Keeps track of information about all installed applications, lazy-loading
+ as needed.
+*/
+var ApplicationsState = {
+
+<span id='com-android-settingslib-applications-ApplicationsState-property-SIZE_UNKNOWN'>/***/
+</span>SIZE_UNKNOWN : &quot;-1&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-SIZE_INVALID'>/***/
+</span>SIZE_INVALID : &quot;-2&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FLAG_SESSION_REQUEST_HOME_APP'>/**Requests that the home app is loaded. */
+</span>FLAG_SESSION_REQUEST_HOME_APP : &quot;1&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FLAG_SESSION_REQUEST_ICONS'>/**Requests that icons are loaded. */
+</span>FLAG_SESSION_REQUEST_ICONS : &quot;2&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FLAG_SESSION_REQUEST_SIZES'>/**Requests that sizes are loaded. */
+</span>FLAG_SESSION_REQUEST_SIZES : &quot;4&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FLAG_SESSION_REQUEST_LAUNCHER'>/**Requests that launcher intents are resolved. */
+</span>FLAG_SESSION_REQUEST_LAUNCHER : &quot;8&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FLAG_SESSION_REQUEST_LEANBACK_LAUNCHER'>/**Requests that leanback launcher intents are resolved. */
+</span>FLAG_SESSION_REQUEST_LEANBACK_LAUNCHER : &quot;16&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-DEFAULT_SESSION_FLAGS'>/***/
+</span>DEFAULT_SESSION_FLAGS : &quot;15&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-ALPHA_COMPARATOR'>/** Compare by label, then package name, then uid.
+</span>*/
+ALPHA_COMPARATOR : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-SIZE_COMPARATOR'>/***/
+</span>SIZE_COMPARATOR : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-INTERNAL_SIZE_COMPARATOR'>/***/
+</span>INTERNAL_SIZE_COMPARATOR : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-EXTERNAL_SIZE_COMPARATOR'>/***/
+</span>EXTERNAL_SIZE_COMPARATOR : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_PERSONAL'>/***/
+</span>FILTER_PERSONAL : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_WITHOUT_DISABLED_UNTIL_USED'>/***/
+</span>FILTER_WITHOUT_DISABLED_UNTIL_USED : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_WORK'>/***/
+</span>FILTER_WORK : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_DOWNLOADED_AND_LAUNCHER'>/** Displays a combined list with &quot;downloaded&quot; and &quot;visible in launcher&quot; apps only.
+</span>*/
+FILTER_DOWNLOADED_AND_LAUNCHER : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_DOWNLOADED_AND_LAUNCHER_AND_INSTANT'>/** Displays a combined list with &quot;downloaded&quot; and &quot;visible in launcher&quot; apps only.
+</span>*/
+FILTER_DOWNLOADED_AND_LAUNCHER_AND_INSTANT : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_THIRD_PARTY'>/***/
+</span>FILTER_THIRD_PARTY : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_DISABLED'>/***/
+</span>FILTER_DISABLED : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_INSTANT'>/***/
+</span>FILTER_INSTANT : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_ALL_ENABLED'>/***/
+</span>FILTER_ALL_ENABLED : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_EVERYTHING'>/***/
+</span>FILTER_EVERYTHING : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_WITH_DOMAIN_URLS'>/***/
+</span>FILTER_WITH_DOMAIN_URLS : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_NOT_HIDE'>/***/
+</span>FILTER_NOT_HIDE : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_GAMES'>/***/
+</span>FILTER_GAMES : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_AUDIO'>/***/
+</span>FILTER_AUDIO : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_MOVIES'>/***/
+</span>FILTER_MOVIES : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_PHOTOS'>/***/
+</span>FILTER_PHOTOS : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-property-FILTER_OTHER_APPS'>/***/
+</span>FILTER_OTHER_APPS : &quot;null&quot;,
+<span id='com-android-settingslib-applications-ApplicationsState-method-getInstance'>/**
+</span>*/
+getInstance : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-getBackgroundLooper'>/**
+</span>*/
+getBackgroundLooper : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-newSession'>/**
+</span>*/
+newSession : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-newSession'>/**
+</span>*/
+newSession : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-haveDisabledApps'>/**
+</span>*/
+haveDisabledApps : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-haveInstantApps'>/**
+</span>*/
+haveInstantApps : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-getEntry'>/**
+</span>*/
+getEntry : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-ensureIcon'>/**
+</span>*/
+ensureIcon : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-requestSize'>/**
+</span>*/
+requestSize : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-removePackage'>/**
+</span>*/
+removePackage : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-invalidatePackage'>/**
+</span>*/
+invalidatePackage : function(  ) {},
+
+<span id='com-android-settingslib-applications-ApplicationsState-method-normalize'>/**
+</span>*/
+normalize : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

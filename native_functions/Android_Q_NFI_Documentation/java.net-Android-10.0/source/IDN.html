@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-IDN'>/**@class java.net.IDN
+</span>@extends java.lang.Object
+
+ Provides methods to convert internationalized domain names (IDNs) between
+ a normal Unicode representation and an ASCII Compatible Encoding (ACE) representation.
+ Internationalized domain names can use characters from the entire range of
+ Unicode, while traditional domain names are restricted to ASCII characters.
+ ACE is an encoding of Unicode strings that uses only ASCII characters and
+ can be used with software (such as the Domain Name System) that only
+ understands traditional domain names.
+
+ &lt;p&gt;Internationalized domain names are defined in &lt;a href=&quot;http://www.ietf.org/rfc/rfc3490.txt&quot;&gt;RFC 3490&lt;/a&gt;.
+ RFC 3490 defines two operations: ToASCII and ToUnicode. These 2 operations employ
+ &lt;a href=&quot;http://www.ietf.org/rfc/rfc3491.txt&quot;&gt;Nameprep&lt;/a&gt; algorithm, which is a
+ profile of &lt;a href=&quot;http://www.ietf.org/rfc/rfc3454.txt&quot;&gt;Stringprep&lt;/a&gt;, and
+ &lt;a href=&quot;http://www.ietf.org/rfc/rfc3492.txt&quot;&gt;Punycode&lt;/a&gt; algorithm to convert
+ domain name string back and forth.
+
+ &lt;p&gt;The behavior of aforementioned conversion process can be adjusted by various flags:
+   &lt;ul&gt;
+     &lt;li&gt;If the ALLOW_UNASSIGNED flag is used, the domain name string to be converted
+         can contain code points that are unassigned in Unicode 3.2, which is the
+         Unicode version on which IDN conversion is based. If the flag is not used,
+         the presence of such unassigned code points is treated as an error.
+     &lt;li&gt;If the USE_STD3_ASCII_RULES flag is used, ASCII strings are checked against &lt;a href=&quot;http://www.ietf.org/rfc/rfc1122.txt&quot;&gt;RFC 1122&lt;/a&gt; and &lt;a href=&quot;http://www.ietf.org/rfc/rfc1123.txt&quot;&gt;RFC 1123&lt;/a&gt;.
+         It is an error if they don't meet the requirements.
+   &lt;/ul&gt;
+ These flags can be logically OR'ed together.
+
+ &lt;p&gt;The security consideration is important with respect to internationalization
+ domain name support. For example, English domain names may be &lt;i&gt;homographed&lt;/i&gt;
+ - maliciously misspelled by substitution of non-Latin letters.
+ &lt;a href=&quot;http://www.unicode.org/reports/tr36/&quot;&gt;Unicode Technical Report #36&lt;/a&gt;
+ discusses security issues of IDN support as well as possible solutions.
+ Applications are responsible for taking adequate security measures when using
+ international domain names.
+
+ @author Edward Wang
+ @since 1.6
+
+*/
+var IDN = {
+
+<span id='java-net-IDN-property-ALLOW_UNASSIGNED'>/** Flag to allow processing of unassigned code points
+</span>*/
+ALLOW_UNASSIGNED : &quot;1&quot;,
+<span id='java-net-IDN-property-USE_STD3_ASCII_RULES'>/** Flag to turn on the check against STD-3 ASCII rules
+</span>*/
+USE_STD3_ASCII_RULES : &quot;2&quot;,
+<span id='java-net-IDN-method-toASCII'>/**Translates a string from Unicode to ASCII Compatible Encoding (ACE),
+</span> as defined by the ToASCII operation of &lt;a href=&quot;http://www.ietf.org/rfc/rfc3490.txt&quot;&gt;RFC 3490&lt;/a&gt;.
+
+ &lt;p&gt;ToASCII operation can fail. ToASCII fails if any step of it fails.
+ If ToASCII operation fails, an IllegalArgumentException will be thrown.
+ In this case, the input string should not be used in an internationalized domain name.
+
+ &lt;p&gt; A label is an individual part of a domain name. The original ToASCII operation,
+ as defined in RFC 3490, only operates on a single label. This method can handle
+ both label and entire domain name, by assuming that labels in a domain name are
+ always separated by dots. The following characters are recognized as dots:
+ &amp;#0092;u002E (full stop), &amp;#0092;u3002 (ideographic full stop), &amp;#0092;uFF0E (fullwidth full stop),
+ and &amp;#0092;uFF61 (halfwidth ideographic full stop). if dots are
+ used as label separators, this method also changes all of them to &amp;#0092;u002E (full stop)
+ in output translated string.
+@param {String} input     the string to be processed
+@param {Number} flag      process flag; can be 0 or any logical OR of possible flags
+@return {String} the translated {@code String}
+@throws IllegalArgumentException   if the input string doesn't conform to RFC 3490 specification
+*/
+toASCII : function(  ) {},
+
+<span id='java-net-IDN-method-toASCII'>/**Translates a string from Unicode to ASCII Compatible Encoding (ACE),
+</span> as defined by the ToASCII operation of &lt;a href=&quot;http://www.ietf.org/rfc/rfc3490.txt&quot;&gt;RFC 3490&lt;/a&gt;.
+
+ &lt;p&gt; This convenience method works as if by invoking the
+ two-argument counterpart as follows:
+ &lt;blockquote&gt;
+ {@link #toASCII(String, int) toASCII}(input,&amp;nbsp;0);
+ &lt;/blockquote&gt;
+@param {String} input     the string to be processed
+@return {String} the translated {@code String}
+@throws IllegalArgumentException   if the input string doesn't conform to RFC 3490 specification
+*/
+toASCII : function(  ) {},
+
+<span id='java-net-IDN-method-toUnicode'>/**Translates a string from ASCII Compatible Encoding (ACE) to Unicode,
+</span> as defined by the ToUnicode operation of &lt;a href=&quot;http://www.ietf.org/rfc/rfc3490.txt&quot;&gt;RFC 3490&lt;/a&gt;.
+
+ &lt;p&gt;ToUnicode never fails. In case of any error, the input string is returned unmodified.
+
+ &lt;p&gt; A label is an individual part of a domain name. The original ToUnicode operation,
+ as defined in RFC 3490, only operates on a single label. This method can handle
+ both label and entire domain name, by assuming that labels in a domain name are
+ always separated by dots. The following characters are recognized as dots:
+ &amp;#0092;u002E (full stop), &amp;#0092;u3002 (ideographic full stop), &amp;#0092;uFF0E (fullwidth full stop),
+ and &amp;#0092;uFF61 (halfwidth ideographic full stop).
+@param {String} input     the string to be processed
+@param {Number} flag      process flag; can be 0 or any logical OR of possible flags
+@return {String} the translated {@code String}
+*/
+toUnicode : function(  ) {},
+
+<span id='java-net-IDN-method-toUnicode'>/**Translates a string from ASCII Compatible Encoding (ACE) to Unicode,
+</span> as defined by the ToUnicode operation of &lt;a href=&quot;http://www.ietf.org/rfc/rfc3490.txt&quot;&gt;RFC 3490&lt;/a&gt;.
+
+ &lt;p&gt; This convenience method works as if by invoking the
+ two-argument counterpart as follows:
+ &lt;blockquote&gt;
+ {@link #toUnicode(String, int) toUnicode}(input,&amp;nbsp;0);
+ &lt;/blockquote&gt;
+@param {String} input     the string to be processed
+@return {String} the translated {@code String}
+*/
+toUnicode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

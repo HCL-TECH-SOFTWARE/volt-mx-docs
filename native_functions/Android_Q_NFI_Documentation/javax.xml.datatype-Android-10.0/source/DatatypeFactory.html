@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-datatype-DatatypeFactory'>/**@class javax.xml.datatype.DatatypeFactory
+</span>@extends java.lang.Object
+
+ &lt;p&gt;Factory that creates new &lt;code&gt;javax.xml.datatype&lt;/code&gt; &lt;code&gt;Object&lt;/code&gt;s that map XML to/from Java &lt;code&gt;Object&lt;/code&gt;s.&lt;/p&gt;
+
+ &lt;p id=&quot;DatatypeFactory.newInstance&quot;&gt;{@link #newInstance}() is used to create a new &lt;code&gt;DatatypeFactory&lt;/code&gt;.
+ The following implementation resolution mechanisms are used in the following order:&lt;/p&gt;
+ &lt;ol&gt;
+    &lt;li&gt;
+      If the system property specified by {@link #DATATYPEFACTORY_PROPERTY}, &quot;&lt;code&gt;javax.xml.datatype.DatatypeFactory&lt;/code&gt;&quot;,
+      exists, a class with the name of the property's value is instantiated.
+      Any Exception thrown during the instantiation process is wrapped as a {@link javax.xml.datatype.DatatypeConfigurationException}.
+    &lt;/li&gt;
+    &lt;li&gt;
+      If the file ${JAVA_HOME}/lib/jaxp.properties exists, it is loaded in a {@link java.util.Properties} &lt;code&gt;Object&lt;/code&gt;.
+      The &lt;code&gt;Properties&lt;/code&gt; &lt;code&gt;Object &lt;/code&gt; is then queried for the property as documented in the prior step
+      and processed as documented in the prior step.
+    &lt;/li&gt;
+    &lt;li&gt;
+      The services resolution mechanism is used, e.g. &lt;code&gt;META-INF/services/java.xml.datatype.DatatypeFactory&lt;/code&gt;.
+      Any Exception thrown during the instantiation process is wrapped as a {@link javax.xml.datatype.DatatypeConfigurationException}.
+    &lt;/li&gt;
+    &lt;li&gt;
+      The final mechanism is to attempt to instantiate the &lt;code&gt;Class&lt;/code&gt; specified by
+      {@link #DATATYPEFACTORY_IMPLEMENTATION_CLASS}, &quot;&lt;code&gt;javax.xml.datatype.DatatypeFactoryImpl&lt;/code&gt;&quot;.
+      Any Exception thrown during the instantiation process is wrapped as a {@link javax.xml.datatype.DatatypeConfigurationException}.
+    &lt;/li&gt;
+ &lt;/ol&gt;
+
+ &lt;p&gt;Note that you must supply your own implementation (such as Xerces); Android does not ship with a default implementation.
+
+ @author &lt;a href=&quot;mailto:Joseph.Fialli@Sun.COM&quot;&gt;Joseph Fialli&lt;/a&gt;
+ @author &lt;a href=&quot;mailto:Jeff.Suttor@Sun.com&quot;&gt;Jeff Suttor&lt;/a&gt;
+ @version $Revision: 884950 $, $Date: 2009-11-27 10:46:18 -0800 (Fri, 27 Nov 2009) $
+ @since 1.5
+*/
+var DatatypeFactory = {
+
+<span id='javax-xml-datatype-DatatypeFactory-property-DATATYPEFACTORY_PROPERTY'>/** &lt;p&gt;Default property name as defined in JSR 206: Java(TM) API for XML Processing (JAXP) 1.3.&lt;/p&gt;
+</span>
+ &lt;p&gt;Default value is &lt;code&gt;javax.xml.datatype.DatatypeFactory&lt;/code&gt;.&lt;/p&gt;
+*/
+DATATYPEFACTORY_PROPERTY : &quot;javax.xml.datatype.DatatypeFactory&quot;,
+<span id='javax-xml-datatype-DatatypeFactory-property-DATATYPEFACTORY_IMPLEMENTATION_CLASS'>/** &lt;p&gt;Default implementation class name as defined in JSR 206: Java(TM) API for XML Processing (JAXP) 1.3.&lt;/p&gt;
+</span>
+ &lt;p&gt;Default value is &lt;code&gt;org.apache.xerces.jaxp.datatype.DatatypeFactoryImpl&lt;/code&gt;.&lt;/p&gt;
+*/
+DATATYPEFACTORY_IMPLEMENTATION_CLASS : &quot;null&quot;,
+<span id='javax-xml-datatype-DatatypeFactory-method-newInstance'>/**&lt;p&gt;Obtain a new instance of a &lt;code&gt;DatatypeFactory&lt;/code&gt;.&lt;/p&gt;
+</span>
+ &lt;p&gt;The implementation resolution mechanisms are &lt;a href=&quot;#DatatypeFactory.newInstance&quot;&gt;defined&lt;/a&gt; in this
+ &lt;code&gt;Class&lt;/code&gt;'s documentation.&lt;/p&gt;
+ &lt;p&gt;Note that you must supply your own implementation (such as Xerces); Android does not ship with a default implementation.
+@return {Object {javax.xml.datatype.DatatypeFactory}} New instance of a &lt;code&gt;DocumentBuilderFactory&lt;/code&gt;
+@throws DatatypeConfigurationException If the implementation is not
+   available or cannot be instantiated.
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newInstance'>/**Returns an instance of the named implementation of {@code DatatypeFactory}.
+</span>@throws DatatypeConfigurationException if {@code factoryClassName} is not available or cannot
+     be instantiated.
+@since 1.6
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDuration'>/**&lt;p&gt;Obtain a new instance of a &lt;code&gt;Duration&lt;/code&gt;
+</span> specifying the &lt;code&gt;Duration&lt;/code&gt; as its string representation, &quot;PnYnMnDTnHnMnS&quot;,
+ as defined in XML Schema 1.0 section 3.2.6.1.&lt;/p&gt;
+
+ &lt;p&gt;XML Schema Part 2: Datatypes, 3.2.6 duration, defines &lt;code&gt;duration&lt;/code&gt; as:&lt;/p&gt;
+ &lt;blockquote&gt;
+ duration represents a duration of time.
+ The value space of duration is a six-dimensional space where the coordinates designate the
+ Gregorian year, month, day, hour, minute, and second components defined in Section 5.5.3.2 of [ISO 8601], respectively.
+ These components are ordered in their significance by their order of appearance i.e. as
+ year, month, day, hour, minute, and second.
+ &lt;/blockquote&gt;
+ &lt;p&gt;All six values are set and available from the created {@link javax.xml.datatype.Duration}&lt;/p&gt;
+
+ &lt;p&gt;The XML Schema specification states that values can be of an arbitrary size.
+ Implementations may chose not to or be incapable of supporting arbitrarily large and/or small values.
+ An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
+ if implementation capacities are exceeded.&lt;/p&gt;
+@param {String} lexicalRepresentation &lt;code&gt;String&lt;/code&gt; representation of a &lt;code&gt;Duration&lt;/code&gt;.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created from parsing the &lt;code&gt;lexicalRepresentation&lt;/code&gt;.
+@throws IllegalArgumentException If &lt;code&gt;lexicalRepresentation&lt;/code&gt; is not a valid representation of a &lt;code&gt;Duration&lt;/code&gt;.
+@throws UnsupportedOperationException If implementation cannot support requested values.
+@throws NullPointerException if &lt;code&gt;lexicalRepresentation&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+newDuration : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDuration'>/**&lt;p&gt;Obtain a new instance of a &lt;code&gt;Duration&lt;/code&gt;
+</span> specifying the &lt;code&gt;Duration&lt;/code&gt; as milliseconds.&lt;/p&gt;
+
+ &lt;p&gt;XML Schema Part 2: Datatypes, 3.2.6 duration, defines &lt;code&gt;duration&lt;/code&gt; as:&lt;/p&gt;
+ &lt;blockquote&gt;
+ duration represents a duration of time.
+ The value space of duration is a six-dimensional space where the coordinates designate the
+ Gregorian year, month, day, hour, minute, and second components defined in Section 5.5.3.2 of [ISO 8601], respectively.
+ These components are ordered in their significance by their order of appearance i.e. as
+ year, month, day, hour, minute, and second.
+ &lt;/blockquote&gt;
+ &lt;p&gt;All six values are set by computing their values from the specified milliseconds
+ and are available using the &lt;code&gt;get&lt;/code&gt; methods of  the created {@link javax.xml.datatype.Duration}.
+ The values conform to and are defined by:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;ISO 8601:2000(E) Section 5.5.3.2 Alternative format&lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#isoformats&quot;&gt;
+     W3C XML Schema 1.0 Part 2, Appendix D, ISO 8601 Date and Time Formats&lt;/a&gt;
+   &lt;/li&gt;
+   &lt;li&gt;{@link javax.xml.datatype.XMLGregorianCalendar}  Date/Time Datatype Field Mapping Between XML Schema 1.0 and Java Representation&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The default start instance is defined by {@link GregorianCalendar}'s use of the start of the epoch: i.e.,
+ {@link java.util.Calendar#YEAR} = 1970,
+ {@link java.util.Calendar#MONTH} = {@link java.util.Calendar#JANUARY},
+ {@link java.util.Calendar#DATE} = 1, etc.
+ This is important as there are variations in the Gregorian Calendar,
+ e.g. leap years have different days in the month = {@link java.util.Calendar#FEBRUARY}
+ so the result of {@link javax.xml.datatype.Duration#getMonths()} and {@link javax.xml.datatype.Duration#getDays()} can be influenced.&lt;/p&gt;
+@param {Number} durationInMilliSeconds Duration in milliseconds to create.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; representing &lt;code&gt;durationInMilliSeconds&lt;/code&gt;.
+*/
+newDuration : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDuration'>/**&lt;p&gt;Obtain a new instance of a &lt;code&gt;Duration&lt;/code&gt;
+</span> specifying the &lt;code&gt;Duration&lt;/code&gt; as isPositive, years, months, days, hours, minutes, seconds.&lt;/p&gt;
+
+ &lt;p&gt;The XML Schema specification states that values can be of an arbitrary size.
+ Implementations may chose not to or be incapable of supporting arbitrarily large and/or small values.
+ An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
+ if implementation capacities are exceeded.&lt;/p&gt;
+
+ &lt;p&gt;A &lt;code&gt;null&lt;/code&gt; value indicates that field is not set.&lt;/p&gt;
+@param {Boolean} isPositive Set to &lt;code&gt;false&lt;/code&gt; to create a negative duration. When the length
+   of the duration is zero, this parameter will be ignored.
+@param {Object {BigInteger}} years of this &lt;code&gt;Duration&lt;/code&gt;
+@param {Object {BigInteger}} months of this &lt;code&gt;Duration&lt;/code&gt;
+@param {Object {BigInteger}} days of this &lt;code&gt;Duration&lt;/code&gt;
+@param {Object {BigInteger}} hours of this &lt;code&gt;Duration&lt;/code&gt;
+@param {Object {BigInteger}} minutes of this &lt;code&gt;Duration&lt;/code&gt;
+@param {Object {BigDecimal}} seconds of this &lt;code&gt;Duration&lt;/code&gt;
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created from the specified values.
+@throws IllegalArgumentException If values are not a valid representation of a &lt;code&gt;Duration&lt;/code&gt;.
+@throws UnsupportedOperationException If implementation cannot support requested values.
+*/
+newDuration : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDuration'>/**&lt;p&gt;Obtain a new instance of a &lt;code&gt;Duration&lt;/code&gt;
+</span> specifying the &lt;code&gt;Duration&lt;/code&gt; as isPositive, years, months, days, hours, minutes, seconds.&lt;/p&gt;
+
+ &lt;p&gt;A {@link javax.xml.datatype.DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.&lt;/p&gt;
+@param {Boolean} isPositive Set to &lt;code&gt;false&lt;/code&gt; to create a negative duration. When the length
+   of the duration is zero, this parameter will be ignored.
+@param {Number} years of this &lt;code&gt;Duration&lt;/code&gt;
+@param {Number} months of this &lt;code&gt;Duration&lt;/code&gt;
+@param {Number} days of this &lt;code&gt;Duration&lt;/code&gt;
+@param {Number} hours of this &lt;code&gt;Duration&lt;/code&gt;
+@param {Number} minutes of this &lt;code&gt;Duration&lt;/code&gt;
+@param {Number} seconds of this &lt;code&gt;Duration&lt;/code&gt;
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created from the specified values.
+@throws IllegalArgumentException If values are not a valid representation of a &lt;code&gt;Duration&lt;/code&gt;.
+@see #newDuration(
+   boolean isPositive,
+   BigInteger years,
+   BigInteger months,
+   BigInteger days,
+   BigInteger hours,
+   BigInteger minutes,
+   BigDecimal seconds)
+*/
+newDuration : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDurationDayTime'>/**&lt;p&gt;Create a &lt;code&gt;Duration&lt;/code&gt; of type &lt;code&gt;xdt:dayTimeDuration&lt;/code&gt; by parsing its &lt;code&gt;String&lt;/code&gt; representation,
+</span> &quot;&lt;em&gt;PnDTnHnMnS&lt;/em&gt;&quot;, &lt;a href=&quot;http://www.w3.org/TR/xpath-datamodel#dt-dayTimeDuration&quot;&gt;
+   XQuery 1.0 and XPath 2.0 Data Model, xdt:dayTimeDuration&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;The datatype &lt;code&gt;xdt:dayTimeDuration&lt;/code&gt; is a subtype of &lt;code&gt;xs:duration&lt;/code&gt;
+ whose lexical representation contains only day, hour, minute, and second components.
+ This datatype resides in the namespace &lt;code&gt;http://www.w3.org/2003/11/xpath-datatypes&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;p&gt;All four values are set and available from the created {@link javax.xml.datatype.Duration}&lt;/p&gt;
+
+ &lt;p&gt;The XML Schema specification states that values can be of an arbitrary size.
+ Implementations may chose not to or be incapable of supporting arbitrarily large and/or small values.
+ An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
+ if implementation capacities are exceeded.&lt;/p&gt;
+@param {String} lexicalRepresentation Lexical representation of a duration.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created using the specified &lt;code&gt;lexicalRepresentation&lt;/code&gt;.
+@throws IllegalArgumentException If the given string does not conform to the aforementioned specification.
+@throws UnsupportedOperationException If implementation cannot support requested values.
+@throws NullPointerException If &lt;code&gt;lexicalRepresentation&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+newDurationDayTime : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDurationDayTime'>/**&lt;p&gt;Create a &lt;code&gt;Duration&lt;/code&gt; of type &lt;code&gt;xdt:dayTimeDuration&lt;/code&gt; using the specified milliseconds as defined in
+</span> &lt;a href=&quot;http://www.w3.org/TR/xpath-datamodel#dt-dayTimeDuration&quot;&gt;
+   XQuery 1.0 and XPath 2.0 Data Model, xdt:dayTimeDuration&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;The datatype &lt;code&gt;xdt:dayTimeDuration&lt;/code&gt; is a subtype of &lt;code&gt;xs:duration&lt;/code&gt;
+ whose lexical representation contains only day, hour, minute, and second components.
+ This datatype resides in the namespace &lt;code&gt;http://www.w3.org/2003/11/xpath-datatypes&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;p&gt;All four values are set by computing their values from the specified milliseconds
+ and are available using the &lt;code&gt;get&lt;/code&gt; methods of  the created {@link javax.xml.datatype.Duration}.
+ The values conform to and are defined by:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;ISO 8601:2000(E) Section 5.5.3.2 Alternative format&lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#isoformats&quot;&gt;
+     W3C XML Schema 1.0 Part 2, Appendix D, ISO 8601 Date and Time Formats&lt;/a&gt;
+   &lt;/li&gt;
+   &lt;li&gt;{@link javax.xml.datatype.XMLGregorianCalendar}  Date/Time Datatype Field Mapping Between XML Schema 1.0 and Java Representation&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The default start instance is defined by {@link GregorianCalendar}'s use of the start of the epoch: i.e.,
+ {@link java.util.Calendar#YEAR} = 1970,
+ {@link java.util.Calendar#MONTH} = {@link java.util.Calendar#JANUARY},
+ {@link java.util.Calendar#DATE} = 1, etc.
+ This is important as there are variations in the Gregorian Calendar,
+ e.g. leap years have different days in the month = {@link java.util.Calendar#FEBRUARY}
+ so the result of {@link javax.xml.datatype.Duration#getDays()} can be influenced.&lt;/p&gt;
+
+ &lt;p&gt;Any remaining milliseconds after determining the day, hour, minute and second are discarded.&lt;/p&gt;
+@param {Number} durationInMilliseconds Milliseconds of &lt;code&gt;Duration&lt;/code&gt; to create.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created with the specified &lt;code&gt;durationInMilliseconds&lt;/code&gt;.
+@see &lt;a href=&quot;http://www.w3.org/TR/xpath-datamodel#dt-dayTimeDuration&quot;&gt;
+   XQuery 1.0 and XPath 2.0 Data Model, xdt:dayTimeDuration&lt;/a&gt;
+*/
+newDurationDayTime : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDurationDayTime'>/**&lt;p&gt;Create a &lt;code&gt;Duration&lt;/code&gt; of type &lt;code&gt;xdt:dayTimeDuration&lt;/code&gt; using the specified
+</span> &lt;code&gt;day&lt;/code&gt;, &lt;code&gt;hour&lt;/code&gt;, &lt;code&gt;minute&lt;/code&gt; and &lt;code&gt;second&lt;/code&gt; as defined in
+ &lt;a href=&quot;http://www.w3.org/TR/xpath-datamodel#dt-dayTimeDuration&quot;&gt;
+   XQuery 1.0 and XPath 2.0 Data Model, xdt:dayTimeDuration&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;The datatype &lt;code&gt;xdt:dayTimeDuration&lt;/code&gt; is a subtype of &lt;code&gt;xs:duration&lt;/code&gt;
+ whose lexical representation contains only day, hour, minute, and second components.
+ This datatype resides in the namespace &lt;code&gt;http://www.w3.org/2003/11/xpath-datatypes&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;p&gt;The XML Schema specification states that values can be of an arbitrary size.
+ Implementations may chose not to or be incapable of supporting arbitrarily large and/or small values.
+ An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
+ if implementation capacities are exceeded.&lt;/p&gt;
+
+ &lt;p&gt;A &lt;code&gt;null&lt;/code&gt; value indicates that field is not set.&lt;/p&gt;
+@param {Boolean} isPositive Set to &lt;code&gt;false&lt;/code&gt; to create a negative duration. When the length
+   of the duration is zero, this parameter will be ignored.
+@param {Object {BigInteger}} day Day of &lt;code&gt;Duration&lt;/code&gt;.
+@param {Object {BigInteger}} hour Hour of &lt;code&gt;Duration&lt;/code&gt;.
+@param {Object {BigInteger}} minute Minute of &lt;code&gt;Duration&lt;/code&gt;.
+@param {Object {BigInteger}} second Second of &lt;code&gt;Duration&lt;/code&gt;.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created with the specified &lt;code&gt;day&lt;/code&gt;, &lt;code&gt;hour&lt;/code&gt;, &lt;code&gt;minute&lt;/code&gt;
+ and &lt;code&gt;second&lt;/code&gt;.
+@throws IllegalArgumentException If any values would create an invalid &lt;code&gt;Duration&lt;/code&gt;.
+@throws UnsupportedOperationException If implementation cannot support requested values.
+*/
+newDurationDayTime : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDurationDayTime'>/**&lt;p&gt;Create a &lt;code&gt;Duration&lt;/code&gt; of type &lt;code&gt;xdt:dayTimeDuration&lt;/code&gt; using the specified
+</span> &lt;code&gt;day&lt;/code&gt;, &lt;code&gt;hour&lt;/code&gt;, &lt;code&gt;minute&lt;/code&gt; and &lt;code&gt;second&lt;/code&gt; as defined in
+ &lt;a href=&quot;http://www.w3.org/TR/xpath-datamodel#dt-dayTimeDuration&quot;&gt;
+   XQuery 1.0 and XPath 2.0 Data Model, xdt:dayTimeDuration&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;The datatype &lt;code&gt;xdt:dayTimeDuration&lt;/code&gt; is a subtype of &lt;code&gt;xs:duration&lt;/code&gt;
+ whose lexical representation contains only day, hour, minute, and second components.
+ This datatype resides in the namespace &lt;code&gt;http://www.w3.org/2003/11/xpath-datatypes&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;p&gt;A {@link javax.xml.datatype.DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.&lt;/p&gt;
+@param {Boolean} isPositive Set to &lt;code&gt;false&lt;/code&gt; to create a negative duration. When the length
+   of the duration is zero, this parameter will be ignored.
+@param {Number} day Day of &lt;code&gt;Duration&lt;/code&gt;.
+@param {Number} hour Hour of &lt;code&gt;Duration&lt;/code&gt;.
+@param {Number} minute Minute of &lt;code&gt;Duration&lt;/code&gt;.
+@param {Number} second Second of &lt;code&gt;Duration&lt;/code&gt;.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created with the specified &lt;code&gt;day&lt;/code&gt;, &lt;code&gt;hour&lt;/code&gt;, &lt;code&gt;minute&lt;/code&gt;
+ and &lt;code&gt;second&lt;/code&gt;.
+@throws IllegalArgumentException If any values would create an invalid &lt;code&gt;Duration&lt;/code&gt;.
+*/
+newDurationDayTime : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDurationYearMonth'>/**&lt;p&gt;Create a &lt;code&gt;Duration&lt;/code&gt; of type &lt;code&gt;xdt:yearMonthDuration&lt;/code&gt; by parsing its &lt;code&gt;String&lt;/code&gt; representation,
+</span> &quot;&lt;em&gt;PnYnM&lt;/em&gt;&quot;, &lt;a href=&quot;http://www.w3.org/TR/xpath-datamodel#dt-yearMonthDuration&quot;&gt;
+   XQuery 1.0 and XPath 2.0 Data Model, xdt:yearMonthDuration&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;The datatype &lt;code&gt;xdt:yearMonthDuration&lt;/code&gt; is a subtype of &lt;code&gt;xs:duration&lt;/code&gt;
+ whose lexical representation contains only year and month components.
+ This datatype resides in the namespace {@link javax.xml.XMLConstants#W3C_XPATH_DATATYPE_NS_URI}.&lt;/p&gt;
+
+ &lt;p&gt;Both values are set and available from the created {@link javax.xml.datatype.Duration}&lt;/p&gt;
+
+ &lt;p&gt;The XML Schema specification states that values can be of an arbitrary size.
+ Implementations may chose not to or be incapable of supporting arbitrarily large and/or small values.
+ An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
+ if implementation capacities are exceeded.&lt;/p&gt;
+@param {String} lexicalRepresentation Lexical representation of a duration.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created using the specified &lt;code&gt;lexicalRepresentation&lt;/code&gt;.
+@throws IllegalArgumentException If the &lt;code&gt;lexicalRepresentation&lt;/code&gt; does not conform to the specification.
+@throws UnsupportedOperationException If implementation cannot support requested values.
+@throws NullPointerException If &lt;code&gt;lexicalRepresentation&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+newDurationYearMonth : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDurationYearMonth'>/**&lt;p&gt;Create a &lt;code&gt;Duration&lt;/code&gt; of type &lt;code&gt;xdt:yearMonthDuration&lt;/code&gt; using the specified milliseconds as defined in
+</span> &lt;a href=&quot;http://www.w3.org/TR/xpath-datamodel#dt-yearMonthDuration&quot;&gt;
+   XQuery 1.0 and XPath 2.0 Data Model, xdt:yearMonthDuration&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;The datatype &lt;code&gt;xdt:yearMonthDuration&lt;/code&gt; is a subtype of &lt;code&gt;xs:duration&lt;/code&gt;
+ whose lexical representation contains only year and month components.
+ This datatype resides in the namespace {@link javax.xml.XMLConstants#W3C_XPATH_DATATYPE_NS_URI}.&lt;/p&gt;
+
+ &lt;p&gt;Both values are set by computing their values from the specified milliseconds
+ and are available using the &lt;code&gt;get&lt;/code&gt; methods of  the created {@link javax.xml.datatype.Duration}.
+ The values conform to and are defined by:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;ISO 8601:2000(E) Section 5.5.3.2 Alternative format&lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#isoformats&quot;&gt;
+     W3C XML Schema 1.0 Part 2, Appendix D, ISO 8601 Date and Time Formats&lt;/a&gt;
+   &lt;/li&gt;
+   &lt;li&gt;{@link javax.xml.datatype.XMLGregorianCalendar}  Date/Time Datatype Field Mapping Between XML Schema 1.0 and Java Representation&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The default start instance is defined by {@link GregorianCalendar}'s use of the start of the epoch: i.e.,
+ {@link java.util.Calendar#YEAR} = 1970,
+ {@link java.util.Calendar#MONTH} = {@link java.util.Calendar#JANUARY},
+ {@link java.util.Calendar#DATE} = 1, etc.
+ This is important as there are variations in the Gregorian Calendar,
+ e.g. leap years have different days in the month = {@link java.util.Calendar#FEBRUARY}
+ so the result of {@link javax.xml.datatype.Duration#getMonths()} can be influenced.&lt;/p&gt;
+
+ &lt;p&gt;Any remaining milliseconds after determining the year and month are discarded.&lt;/p&gt;
+@param {Number} durationInMilliseconds Milliseconds of &lt;code&gt;Duration&lt;/code&gt; to create.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created using the specified &lt;code&gt;durationInMilliseconds&lt;/code&gt;.
+*/
+newDurationYearMonth : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDurationYearMonth'>/**&lt;p&gt;Create a &lt;code&gt;Duration&lt;/code&gt; of type &lt;code&gt;xdt:yearMonthDuration&lt;/code&gt; using the specified
+</span> &lt;code&gt;year&lt;/code&gt; and &lt;code&gt;month&lt;/code&gt; as defined in
+ &lt;a href=&quot;http://www.w3.org/TR/xpath-datamodel#dt-yearMonthyDuration&quot;&gt;
+   XQuery 1.0 and XPath 2.0 Data Model, xdt:yearMonthDuration&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;The XML Schema specification states that values can be of an arbitrary size.
+ Implementations may chose not to or be incapable of supporting arbitrarily large and/or small values.
+ An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
+ if implementation capacities are exceeded.&lt;/p&gt;
+
+ &lt;p&gt;A &lt;code&gt;null&lt;/code&gt; value indicates that field is not set.&lt;/p&gt;
+@param {Boolean} isPositive Set to &lt;code&gt;false&lt;/code&gt; to create a negative duration. When the length
+   of the duration is zero, this parameter will be ignored.
+@param {Object {BigInteger}} year Year of &lt;code&gt;Duration&lt;/code&gt;.
+@param {Object {BigInteger}} month Month of &lt;code&gt;Duration&lt;/code&gt;.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created using the specified &lt;code&gt;year&lt;/code&gt; and &lt;code&gt;month&lt;/code&gt;.
+@throws IllegalArgumentException If any values would create an invalid &lt;code&gt;Duration&lt;/code&gt;.
+@throws UnsupportedOperationException If implementation cannot support requested values.
+*/
+newDurationYearMonth : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newDurationYearMonth'>/**&lt;p&gt;Create a &lt;code&gt;Duration&lt;/code&gt; of type &lt;code&gt;xdt:yearMonthDuration&lt;/code&gt; using the specified
+</span> &lt;code&gt;year&lt;/code&gt; and &lt;code&gt;month&lt;/code&gt; as defined in
+ &lt;a href=&quot;http://www.w3.org/TR/xpath-datamodel#dt-yearMonthyDuration&quot;&gt;
+   XQuery 1.0 and XPath 2.0 Data Model, xdt:yearMonthDuration&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;A {@link javax.xml.datatype.DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.&lt;/p&gt;
+@param {Boolean} isPositive Set to &lt;code&gt;false&lt;/code&gt; to create a negative duration. When the length
+   of the duration is zero, this parameter will be ignored.
+@param {Number} year Year of &lt;code&gt;Duration&lt;/code&gt;.
+@param {Number} month Month of &lt;code&gt;Duration&lt;/code&gt;.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created using the specified &lt;code&gt;year&lt;/code&gt; and &lt;code&gt;month&lt;/code&gt;.
+@throws IllegalArgumentException If any values would create an invalid &lt;code&gt;Duration&lt;/code&gt;.
+*/
+newDurationYearMonth : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newXMLGregorianCalendar'>/**&lt;p&gt;Create a new instance of an &lt;code&gt;XMLGregorianCalendar&lt;/code&gt;.&lt;/p&gt;
+</span>
+ &lt;p&gt;All date/time datatype fields set to {@link javax.xml.datatype.DatatypeConstants#FIELD_UNDEFINED} or null.&lt;/p&gt;
+@return {Object {javax.xml.datatype.XMLGregorianCalendar}} New &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; with all date/time datatype fields set to
+   {@link DatatypeConstants#FIELD_UNDEFINED} or null.
+*/
+newXMLGregorianCalendar : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newXMLGregorianCalendar'>/**&lt;p&gt;Create a new XMLGregorianCalendar by parsing the String as a lexical representation.&lt;/p&gt;
+</span>
+ &lt;p&gt;Parsing the lexical string representation is defined in
+ &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#dateTime-order&quot;&gt;XML Schema 1.0 Part 2, Section 3.2.[7-14].1,
+ &lt;em&gt;Lexical Representation&lt;/em&gt;.&lt;/a&gt;&lt;/p&gt;
+
+ &lt;p&gt;The string representation may not have any leading and trailing whitespaces.&lt;/p&gt;
+
+ &lt;p&gt;The parsing is done field by field so that
+ the following holds for any lexically correct String x:&lt;/p&gt;
+ &lt;pre&gt;
+ newXMLGregorianCalendar(x).toXMLFormat().equals(x)
+ &lt;/pre&gt;
+ &lt;p&gt;Except for the noted lexical/canonical representation mismatches
+ listed in &lt;a href=&quot;http://www.w3.org/2001/05/xmlschema-errata#e2-45&quot;&gt;
+ XML Schema 1.0 errata, Section 3.2.7.2&lt;/a&gt;.&lt;/p&gt;
+@param {String} lexicalRepresentation Lexical representation of one the eight XML Schema date/time datatypes.
+@return {Object {javax.xml.datatype.XMLGregorianCalendar}} &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; created from the &lt;code&gt;lexicalRepresentation&lt;/code&gt;.
+@throws IllegalArgumentException If the &lt;code&gt;lexicalRepresentation&lt;/code&gt; is not a valid &lt;code&gt;XMLGregorianCalendar&lt;/code&gt;.
+@throws NullPointerException If &lt;code&gt;lexicalRepresentation&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+newXMLGregorianCalendar : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newXMLGregorianCalendar'>/**&lt;p&gt;Create an &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; from a {@link GregorianCalendar}.&lt;/p&gt;
+</span>
+ &lt;table border=&quot;2&quot; rules=&quot;all&quot; cellpadding=&quot;2&quot;&gt;
+   &lt;thead&gt;
+     &lt;tr&gt;
+       &lt;th align=&quot;center&quot; colspan=&quot;2&quot;&gt;
+          Field by Field Conversion from
+          {@link GregorianCalendar} to an {@link javax.xml.datatype.XMLGregorianCalendar}
+       &lt;/th&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+        &lt;th&gt;&lt;code&gt;java.util.GregorianCalendar&lt;/code&gt; field&lt;/th&gt;
+        &lt;th&gt;&lt;code&gt;javax.xml.datatype.XMLGregorianCalendar&lt;/code&gt; field&lt;/th&gt;
+     &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;ERA == GregorianCalendar.BC ? -YEAR : YEAR&lt;/code&gt;&lt;/td&gt;
+       &lt;td&gt;{@link javax.xml.datatype.XMLGregorianCalendar#setYear(int year)}&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;MONTH + 1&lt;/code&gt;&lt;/td&gt;
+       &lt;td&gt;{@link javax.xml.datatype.XMLGregorianCalendar#setMonth(int month)}&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;DAY_OF_MONTH&lt;/code&gt;&lt;/td&gt;
+       &lt;td&gt;{@link javax.xml.datatype.XMLGregorianCalendar#setDay(int day)}&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;code&gt;HOUR_OF_DAY, MINUTE, SECOND, MILLISECOND&lt;/code&gt;&lt;/td&gt;
+       &lt;td&gt;{@link javax.xml.datatype.XMLGregorianCalendar#setTime(int hour, int minute, int second, BigDecimal fractional)}&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;code&gt;(ZONE_OFFSET + DST_OFFSET) / (60*1000)&lt;/code&gt;&lt;br/&gt;
+         &lt;em&gt;(in minutes)&lt;/em&gt;
+       &lt;/td&gt;
+       &lt;td&gt;{@link javax.xml.datatype.XMLGregorianCalendar#setTimezone(int offset)}&lt;sup&gt;&lt;em&gt;*&lt;/em&gt;&lt;/sup&gt;
+       &lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/tbody&gt;
+ &lt;/table&gt;
+ &lt;p&gt;&lt;em&gt;*&lt;/em&gt;conversion loss of information. It is not possible to represent
+ a &lt;code&gt;java.util.GregorianCalendar&lt;/code&gt; daylight savings timezone id in the
+ XML Schema 1.0 date/time datatype representation.&lt;/p&gt;
+
+ &lt;p&gt;To compute the return value's &lt;code&gt;TimeZone&lt;/code&gt; field,
+ &lt;ul&gt;
+ &lt;li&gt;when &lt;code&gt;this.getTimezone() != FIELD_UNDEFINED&lt;/code&gt;,
+ create a &lt;code&gt;java.util.TimeZone&lt;/code&gt; with a custom timezone id
+ using the &lt;code&gt;this.getTimezone()&lt;/code&gt;.&lt;/li&gt;
+ &lt;li&gt;else use the &lt;code&gt;GregorianCalendar&lt;/code&gt; default timezone value
+ for the host is defined as specified by
+ &lt;code&gt;java.util.TimeZone.getDefault()&lt;/code&gt;.&lt;/li&gt;&lt;/p&gt;
+@param {Object {GregorianCalendar}} cal &lt;code&gt;java.util.GregorianCalendar&lt;/code&gt; used to create &lt;code&gt;XMLGregorianCalendar&lt;/code&gt;
+@return {Object {javax.xml.datatype.XMLGregorianCalendar}} &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; created from &lt;code&gt;java.util.GregorianCalendar&lt;/code&gt;
+@throws NullPointerException If &lt;code&gt;cal&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+newXMLGregorianCalendar : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newXMLGregorianCalendar'>/**&lt;p&gt;Constructor allowing for complete value spaces allowed by
+</span> W3C XML Schema 1.0 recommendation for xsd:dateTime and related
+ builtin datatypes. Note that &lt;code&gt;year&lt;/code&gt; parameter supports
+ arbitrarily large numbers and fractionalSecond has infinite
+ precision.&lt;/p&gt;
+
+ &lt;p&gt;A &lt;code&gt;null&lt;/code&gt; value indicates that field is not set.&lt;/p&gt;
+@param {Object {BigInteger}} year of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} month of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} day of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} hour of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} minute of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} second of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Object {BigDecimal}} fractionalSecond of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} timezone of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@return {Object {javax.xml.datatype.XMLGregorianCalendar}} &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; created from specified values.
+@throws IllegalArgumentException If any individual parameter's value is outside the maximum value constraint for the field
+   as determined by the Date/Time Data Mapping table in {@link XMLGregorianCalendar}
+   or if the composite values constitute an invalid &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; instance
+   as determined by {@link XMLGregorianCalendar#isValid()}.
+*/
+newXMLGregorianCalendar : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newXMLGregorianCalendar'>/**&lt;p&gt;Constructor of value spaces that a
+</span> &lt;code&gt;java.util.GregorianCalendar&lt;/code&gt; instance would need to convert to an
+ &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; instance.&lt;/p&gt;
+
+ &lt;p&gt;&lt;code&gt;XMLGregorianCalendar eon&lt;/code&gt; and
+ &lt;code&gt;fractionalSecond&lt;/code&gt; are set to &lt;code&gt;null&lt;/code&gt;&lt;/p&gt;
+
+ &lt;p&gt;A {@link javax.xml.datatype.DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.&lt;/p&gt;
+@param {Number} year of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} month of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} day of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} hour of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} minute of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} second of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} millisecond of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} timezone of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@return {Object {javax.xml.datatype.XMLGregorianCalendar}} &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; created from specified values.
+@throws IllegalArgumentException If any individual parameter's value is outside the maximum value constraint for the field
+   as determined by the Date/Time Data Mapping table in {@link XMLGregorianCalendar}
+   or if the composite values constitute an invalid &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; instance
+   as determined by {@link XMLGregorianCalendar#isValid()}.
+*/
+newXMLGregorianCalendar : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newXMLGregorianCalendarDate'>/**&lt;p&gt;Create a Java representation of XML Schema builtin datatype &lt;code&gt;date&lt;/code&gt; or &lt;code&gt;g*&lt;/code&gt;.&lt;/p&gt;
+</span>
+ &lt;p&gt;For example, an instance of &lt;code&gt;gYear&lt;/code&gt; can be created invoking this factory
+ with &lt;code&gt;month&lt;/code&gt; and &lt;code&gt;day&lt;/code&gt; parameters set to
+ {@link javax.xml.datatype.DatatypeConstants#FIELD_UNDEFINED}.&lt;/p&gt;
+
+ &lt;p&gt;A {@link javax.xml.datatype.DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.&lt;/p&gt;
+@param {Number} year of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} month of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} day of &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; to be created.
+@param {Number} timezone offset in minutes. {@link DatatypeConstants#FIELD_UNDEFINED} indicates optional field is not set.
+@return {Object {javax.xml.datatype.XMLGregorianCalendar}} &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; created from parameter values.
+@see DatatypeConstants#FIELD_UNDEFINED
+@throws IllegalArgumentException If any individual parameter's value is outside the maximum value constraint for the field
+   as determined by the Date/Time Data Mapping table in {@link XMLGregorianCalendar}
+   or if the composite values constitute an invalid &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; instance
+   as determined by {@link XMLGregorianCalendar#isValid()}.
+*/
+newXMLGregorianCalendarDate : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newXMLGregorianCalendarTime'>/**&lt;p&gt;Create a Java instance of XML Schema builtin datatype &lt;code&gt;time&lt;/code&gt;.&lt;/p&gt;
+</span>
+ &lt;p&gt;A {@link javax.xml.datatype.DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.&lt;/p&gt;
+@param {Number} hours number of hours
+@param {Number} minutes number of minutes
+@param {Number} seconds number of seconds
+@param {Number} timezone offset in minutes. {@link DatatypeConstants#FIELD_UNDEFINED} indicates optional field is not set.
+@return {Object {javax.xml.datatype.XMLGregorianCalendar}} &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; created from parameter values.
+@throws IllegalArgumentException If any individual parameter's value is outside the maximum value constraint for the field
+   as determined by the Date/Time Data Mapping table in {@link XMLGregorianCalendar}
+   or if the composite values constitute an invalid &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; instance
+   as determined by {@link XMLGregorianCalendar#isValid()}.
+@see DatatypeConstants#FIELD_UNDEFINED
+*/
+newXMLGregorianCalendarTime : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newXMLGregorianCalendarTime'>/**&lt;p&gt;Create a Java instance of XML Schema builtin datatype time.&lt;/p&gt;
+</span>
+ &lt;p&gt;A &lt;code&gt;null&lt;/code&gt; value indicates that field is not set.&lt;/p&gt;
+ &lt;p&gt;A {@link javax.xml.datatype.DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.&lt;/p&gt;
+@param {Number} hours number of hours
+@param {Number} minutes number of minutes
+@param {Number} seconds number of seconds
+@param {Object {BigDecimal}} fractionalSecond value of &lt;code&gt;null&lt;/code&gt; indicates that this optional field is not set.
+@param {Number} timezone offset in minutes. {@link DatatypeConstants#FIELD_UNDEFINED} indicates optional field is not set.
+@return {Object {javax.xml.datatype.XMLGregorianCalendar}} &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; created from parameter values.
+@see DatatypeConstants#FIELD_UNDEFINED
+@throws IllegalArgumentException If any individual parameter's value is outside the maximum value constraint for the field
+   as determined by the Date/Time Data Mapping table in {@link XMLGregorianCalendar}
+   or if the composite values constitute an invalid &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; instance
+   as determined by {@link XMLGregorianCalendar#isValid()}.
+*/
+newXMLGregorianCalendarTime : function(  ) {},
+
+<span id='javax-xml-datatype-DatatypeFactory-method-newXMLGregorianCalendarTime'>/**&lt;p&gt;Create a Java instance of XML Schema builtin datatype time.&lt;/p&gt;
+</span>
+ &lt;p&gt;A {@link javax.xml.datatype.DatatypeConstants#FIELD_UNDEFINED} value indicates that field is not set.&lt;/p&gt;
+@param {Number} hours number of hours
+@param {Number} minutes number of minutes
+@param {Number} seconds number of seconds
+@param {Number} milliseconds number of milliseconds
+@param {Number} timezone offset in minutes. {@link DatatypeConstants#FIELD_UNDEFINED} indicates optional field is not set.
+@return {Object {javax.xml.datatype.XMLGregorianCalendar}} &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; created from parameter values.
+@see DatatypeConstants#FIELD_UNDEFINED
+@throws IllegalArgumentException If any individual parameter's value is outside the maximum value constraint for the field
+   as determined by the Date/Time Data Mapping table in {@link XMLGregorianCalendar}
+   or if the composite values constitute an invalid &lt;code&gt;XMLGregorianCalendar&lt;/code&gt; instance
+   as determined by {@link XMLGregorianCalendar#isValid()}.
+*/
+newXMLGregorianCalendarTime : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

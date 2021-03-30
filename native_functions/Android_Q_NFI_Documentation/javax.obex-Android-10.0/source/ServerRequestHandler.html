@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-obex-ServerRequestHandler'>/**@class javax.obex.ServerRequestHandler
+</span>@extends java.lang.Object
+
+ The &lt;code&gt;ServerRequestHandler&lt;/code&gt; class defines an event listener that
+ will respond to OBEX requests made to the server.
+ &lt;P&gt;
+ The &lt;code&gt;onConnect()&lt;/code&gt;, &lt;code&gt;onSetPath()&lt;/code&gt;,
+ &lt;code&gt;onDelete()&lt;/code&gt;, &lt;code&gt;onGet()&lt;/code&gt;, and &lt;code&gt;onPut()&lt;/code&gt;
+ methods may return any response code defined in the
+ &lt;code&gt;ResponseCodes&lt;/code&gt; class except for &lt;code&gt;OBEX_HTTP_CONTINUE&lt;/code&gt;.
+ If &lt;code&gt;OBEX_HTTP_CONTINUE&lt;/code&gt; or a value not defined in the
+ &lt;code&gt;ResponseCodes&lt;/code&gt; class is returned, the server implementation will
+ send an &lt;code&gt;OBEX_HTTP_INTERNAL_ERROR&lt;/code&gt; response to the client.
+ &lt;P&gt;
+ &lt;STRONG&gt;Connection ID and Target Headers&lt;/STRONG&gt;
+ &lt;P&gt;
+ According to the IrOBEX specification, a packet may not contain a Connection
+ ID and Target header. Since the Connection ID header is managed by the
+ implementation, it will not send a Connection ID header, if a Connection ID
+ was specified, in a packet that has a Target header. In other words, if an
+ application adds a Target header to a &lt;code&gt;HeaderSet&lt;/code&gt; object used in
+ an OBEX operation and a Connection ID was specified, no Connection ID will be
+ sent in the packet containing the Target header.
+ &lt;P&gt;
+ &lt;STRONG&gt;CREATE-EMPTY Requests&lt;/STRONG&gt;
+ &lt;P&gt;
+ A CREATE-EMPTY request allows clients to create empty objects on the server.
+ When a CREATE-EMPTY request is received, the &lt;code&gt;onPut()&lt;/code&gt; method will
+ be called by the implementation. To differentiate between a normal PUT
+ request and a CREATE-EMPTY request, an application must open the
+ &lt;code&gt;InputStream&lt;/code&gt; from the &lt;code&gt;Operation&lt;/code&gt; object passed to the
+ &lt;code&gt;onPut()&lt;/code&gt; method. For a PUT request, the application will be able
+ to read Body data from this &lt;code&gt;InputStream&lt;/code&gt;. For a CREATE-EMPTY
+ request, there will be no Body data to read. Therefore, a call to
+ &lt;code&gt;InputStream.read()&lt;/code&gt; will return -1.
+ @hide
+*/
+var ServerRequestHandler = {
+
+<span id='javax-obex-ServerRequestHandler-method-setConnectionId'>/**Sets the connection ID header to include in the reply packets.
+</span>@param {Number} connectionId the connection ID to use; -1 if no connection ID
+        should be sent
+@throws IllegalArgumentException if &lt;code&gt;id&lt;/code&gt; is not in the range
+         -1 to 2&lt;sup&gt;32&lt;/sup&gt;-1
+*/
+setConnectionId : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-getConnectionId'>/**Retrieves the connection ID that is being used in the present connection.
+</span> This method will return -1 if no connection ID is being used.
+@return {Number} the connection id being used or -1 if no connection ID is being
+         used
+*/
+getConnectionId : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-onConnect'>/**Called when a CONNECT request is received.
+</span> &lt;P&gt;
+ If this method is not implemented by the class that extends this class,
+ &lt;code&gt;onConnect()&lt;/code&gt; will always return an &lt;code&gt;OBEX_HTTP_OK&lt;/code&gt;
+ response code.
+ &lt;P&gt;
+ The headers received in the request can be retrieved from the
+ &lt;code&gt;request&lt;/code&gt; argument. The headers that should be sent in the
+ reply must be specified in the &lt;code&gt;reply&lt;/code&gt; argument.
+@param {Object {HeaderSet}} request contains the headers sent by the client;
+        &lt;code&gt;request&lt;/code&gt; will never be &lt;code&gt;null&lt;/code&gt;
+@param {Object {HeaderSet}} reply the headers that should be sent in the reply;
+        &lt;code&gt;reply&lt;/code&gt; will never be &lt;code&gt;null&lt;/code&gt;
+@return {Number} a response code defined in &lt;code&gt;ResponseCodes&lt;/code&gt; that will
+         be returned to the client; if an invalid response code is
+         provided, the &lt;code&gt;OBEX_HTTP_INTERNAL_ERROR&lt;/code&gt; response code
+         will be used
+*/
+onConnect : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-onDisconnect'>/**Called when a DISCONNECT request is received.
+</span> &lt;P&gt;
+ The headers received in the request can be retrieved from the
+ &lt;code&gt;request&lt;/code&gt; argument. The headers that should be sent in the
+ reply must be specified in the &lt;code&gt;reply&lt;/code&gt; argument.
+@param {Object {HeaderSet}} request contains the headers sent by the client;
+        &lt;code&gt;request&lt;/code&gt; will never be &lt;code&gt;null&lt;/code&gt;
+@param {Object {HeaderSet}} reply the headers that should be sent in the reply;
+        &lt;code&gt;reply&lt;/code&gt; will never be &lt;code&gt;null&lt;/code&gt;
+*/
+onDisconnect : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-onSetPath'>/**Called when a SETPATH request is received.
+</span> &lt;P&gt;
+ If this method is not implemented by the class that extends this class,
+ &lt;code&gt;onSetPath()&lt;/code&gt; will always return an
+ &lt;code&gt;OBEX_HTTP_NOT_IMPLEMENTED&lt;/code&gt; response code.
+ &lt;P&gt;
+ The headers received in the request can be retrieved from the
+ &lt;code&gt;request&lt;/code&gt; argument. The headers that should be sent in the
+ reply must be specified in the &lt;code&gt;reply&lt;/code&gt; argument.
+@param {Object {HeaderSet}} request contains the headers sent by the client;
+        &lt;code&gt;request&lt;/code&gt; will never be &lt;code&gt;null&lt;/code&gt;
+@param {Object {HeaderSet}} reply the headers that should be sent in the reply;
+        &lt;code&gt;reply&lt;/code&gt; will never be &lt;code&gt;null&lt;/code&gt;
+@param {Boolean} backup &lt;code&gt;true&lt;/code&gt; if the client requests that the server
+        back up one directory before changing to the path described by
+        &lt;code&gt;name&lt;/code&gt;; &lt;code&gt;false&lt;/code&gt; to apply the request to the
+        present path
+@param {Boolean} create &lt;code&gt;true&lt;/code&gt; if the path should be created if it does
+        not already exist; &lt;code&gt;false&lt;/code&gt; if the path should not be
+        created if it does not exist and an error code should be returned
+@return {Number} a response code defined in &lt;code&gt;ResponseCodes&lt;/code&gt; that will
+         be returned to the client; if an invalid response code is
+         provided, the &lt;code&gt;OBEX_HTTP_INTERNAL_ERROR&lt;/code&gt; response code
+         will be used
+*/
+onSetPath : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-onDelete'>/**Called when a DELETE request is received.
+</span> &lt;P&gt;
+ If this method is not implemented by the class that extends this class,
+ &lt;code&gt;onDelete()&lt;/code&gt; will always return an
+ &lt;code&gt;OBEX_HTTP_NOT_IMPLEMENTED&lt;/code&gt; response code.
+ &lt;P&gt;
+ The headers received in the request can be retrieved from the
+ &lt;code&gt;request&lt;/code&gt; argument. The headers that should be sent in the
+ reply must be specified in the &lt;code&gt;reply&lt;/code&gt; argument.
+@param {Object {HeaderSet}} request contains the headers sent by the client;
+        &lt;code&gt;request&lt;/code&gt; will never be &lt;code&gt;null&lt;/code&gt;
+@param {Object {HeaderSet}} reply the headers that should be sent in the reply;
+        &lt;code&gt;reply&lt;/code&gt; will never be &lt;code&gt;null&lt;/code&gt;
+@return {Number} a response code defined in &lt;code&gt;ResponseCodes&lt;/code&gt; that will
+         be returned to the client; if an invalid response code is
+         provided, the &lt;code&gt;OBEX_HTTP_INTERNAL_ERROR&lt;/code&gt; response code
+         will be used
+*/
+onDelete : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-onAbort'>/**Called when a ABORT request is received.
+</span>*/
+onAbort : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-onPut'>/**Called when a PUT request is received.
+</span> &lt;P&gt;
+ If this method is not implemented by the class that extends this class,
+ &lt;code&gt;onPut()&lt;/code&gt; will always return an
+ &lt;code&gt;OBEX_HTTP_NOT_IMPLEMENTED&lt;/code&gt; response code.
+ &lt;P&gt;
+ If an ABORT request is received during the processing of a PUT request,
+ &lt;code&gt;op&lt;/code&gt; will be closed by the implementation.
+@param {Object {Operation}} operation contains the headers sent by the client and allows new
+        headers to be sent in the reply; &lt;code&gt;op&lt;/code&gt; will never be
+        &lt;code&gt;null&lt;/code&gt;
+@return {Number} a response code defined in &lt;code&gt;ResponseCodes&lt;/code&gt; that will
+         be returned to the client; if an invalid response code is
+         provided, the &lt;code&gt;OBEX_HTTP_INTERNAL_ERROR&lt;/code&gt; response code
+         will be used
+*/
+onPut : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-onGet'>/**Called when a GET request is received.
+</span> &lt;P&gt;
+ If this method is not implemented by the class that extends this class,
+ &lt;code&gt;onGet()&lt;/code&gt; will always return an
+ &lt;code&gt;OBEX_HTTP_NOT_IMPLEMENTED&lt;/code&gt; response code.
+ &lt;P&gt;
+ If an ABORT request is received during the processing of a GET request,
+ &lt;code&gt;op&lt;/code&gt; will be closed by the implementation.
+@param {Object {Operation}} operation contains the headers sent by the client and allows new
+        headers to be sent in the reply; &lt;code&gt;op&lt;/code&gt; will never be
+        &lt;code&gt;null&lt;/code&gt;
+@return {Number} a response code defined in &lt;code&gt;ResponseCodes&lt;/code&gt; that will
+         be returned to the client; if an invalid response code is
+         provided, the &lt;code&gt;OBEX_HTTP_INTERNAL_ERROR&lt;/code&gt; response code
+         will be used
+*/
+onGet : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-onAuthenticationFailure'>/**Called when this object attempts to authenticate a client and the
+</span> authentication request fails because the response digest in the
+ authentication response header was wrong.
+ &lt;P&gt;
+ If this method is not implemented by the class that extends this class,
+ this method will do nothing.
+@param {Object {byte[]}} userName the user name returned in the authentication response;
+        &lt;code&gt;null&lt;/code&gt; if no user name was provided in the response
+*/
+onAuthenticationFailure : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-updateStatus'>/**Called by ServerSession to update the status of current transaction
+</span> &lt;P&gt;
+ If this method is not implemented by the class that extends this class,
+ this method will do nothing.
+*/
+updateStatus : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-onClose'>/**Called when session is closed.
+</span> &lt;P&gt;
+ If this method is not implemented by the class that extends this class,
+ this method will do nothing.
+*/
+onClose : function(  ) {},
+
+<span id='javax-obex-ServerRequestHandler-method-isSrmSupported'>/**Override to add Single Response Mode support - e.g. if the supplied
+</span> transport is l2cap.
+@return {Boolean} True if SRM is supported, else False
+*/
+isSrmSupported : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

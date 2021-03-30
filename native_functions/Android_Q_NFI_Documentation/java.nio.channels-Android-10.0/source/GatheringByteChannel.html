@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-GatheringByteChannel'>/**@class java.nio.channels.GatheringByteChannel
+</span> implements java.nio.channels.WritableByteChannel
+
+ A channel that can write bytes from a sequence of buffers.
+
+ &lt;p&gt; A &lt;i&gt;gathering&lt;/i&gt; write operation writes, in a single invocation, a
+ sequence of bytes from one or more of a given sequence of buffers.
+ Gathering writes are often useful when implementing network protocols or
+ file formats that, for example, group data into segments consisting of one
+ or more fixed-length headers followed by a variable-length body.  Similar
+ &lt;i&gt;scattering&lt;/i&gt; read operations are defined in the {@link java.nio.channels.ScatteringByteChannel} interface.  &lt;/p&gt;
+
+
+ @author Mark Reinhold
+ @author JSR-51 Expert Group
+ @since 1.4
+*/
+var GatheringByteChannel = {
+
+<span id='java-nio-channels-GatheringByteChannel-method-write'>/**Writes a sequence of bytes to this channel from a subsequence of the
+</span> given buffers.
+
+ &lt;p&gt; An attempt is made to write up to &lt;i&gt;r&lt;/i&gt; bytes to this channel,
+ where &lt;i&gt;r&lt;/i&gt; is the total number of bytes remaining in the specified
+ subsequence of the given buffer array, that is,
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ srcs[offset].remaining()
+     + srcs[offset+1].remaining()
+     + ... + srcs[offset+length-1].remaining()&lt;/pre&gt;&lt;/blockquote&gt;
+
+ at the moment that this method is invoked.
+
+ &lt;p&gt; Suppose that a byte sequence of length &lt;i&gt;n&lt;/i&gt; is written, where
+ &lt;tt&gt;0&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;&amp;lt;=&lt;/tt&gt;&amp;nbsp;&lt;i&gt;n&lt;/i&gt;&amp;nbsp;&lt;tt&gt;&amp;lt;=&lt;/tt&gt;&amp;nbsp;&lt;i&gt;r&lt;/i&gt;.
+ Up to the first &lt;tt&gt;srcs[offset].remaining()&lt;/tt&gt; bytes of this sequence
+ are written from buffer &lt;tt&gt;srcs[offset]&lt;/tt&gt;, up to the next
+ &lt;tt&gt;srcs[offset+1].remaining()&lt;/tt&gt; bytes are written from buffer
+ &lt;tt&gt;srcs[offset+1]&lt;/tt&gt;, and so forth, until the entire byte sequence is
+ written.  As many bytes as possible are written from each buffer, hence
+ the final position of each updated buffer, except the last updated
+ buffer, is guaranteed to be equal to that buffer's limit.
+
+ &lt;p&gt; Unless otherwise specified, a write operation will return only after
+ writing all of the &lt;i&gt;r&lt;/i&gt; requested bytes.  Some types of channels,
+ depending upon their state, may write only some of the bytes or possibly
+ none at all.  A socket channel in non-blocking mode, for example, cannot
+ write any more bytes than are free in the socket's output buffer.
+
+ &lt;p&gt; This method may be invoked at any time.  If another thread has
+ already initiated a write operation upon this channel, however, then an
+ invocation of this method will block until the first operation is
+ complete. &lt;/p&gt;
+@param {Object {java.nio.ByteBuffer[]}} srcs
+         The buffers from which bytes are to be retrieved
+@param {Number} offset
+         The offset within the buffer array of the first buffer from
+         which bytes are to be retrieved; must be non-negative and no
+         larger than &lt;tt&gt;srcs.length&lt;/tt&gt;
+@param {Number} length
+         The maximum number of buffers to be accessed; must be
+         non-negative and no larger than
+         &lt;tt&gt;srcs.length&lt;/tt&gt;&amp;nbsp;-&amp;nbsp;&lt;tt&gt;offset&lt;/tt&gt;
+@return {Number} The number of bytes written, possibly zero
+@throws IndexOutOfBoundsException
+          If the preconditions on the &lt;tt&gt;offset&lt;/tt&gt; and &lt;tt&gt;length&lt;/tt&gt;
+          parameters do not hold
+@throws NonWritableChannelException
+          If this channel was not opened for writing
+@throws ClosedChannelException
+          If this channel is closed
+@throws AsynchronousCloseException
+          If another thread closes this channel
+          while the write operation is in progress
+@throws ClosedByInterruptException
+          If another thread interrupts the current thread
+          while the write operation is in progress, thereby
+          closing the channel and setting the current thread's
+          interrupt status
+@throws IOException
+          If some other I/O error occurs
+*/
+write : function(  ) {},
+
+<span id='java-nio-channels-GatheringByteChannel-method-write'>/**Writes a sequence of bytes to this channel from the given buffers.
+</span>
+ &lt;p&gt; An invocation of this method of the form &lt;tt&gt;c.write(srcs)&lt;/tt&gt;
+ behaves in exactly the same manner as the invocation
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ c.write(srcs, 0, srcs.length);&lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {java.nio.ByteBuffer[]}} srcs
+         The buffers from which bytes are to be retrieved
+@return {Number} The number of bytes written, possibly zero
+@throws NonWritableChannelException
+          If this channel was not opened for writing
+@throws ClosedChannelException
+          If this channel is closed
+@throws AsynchronousCloseException
+          If another thread closes this channel
+          while the write operation is in progress
+@throws ClosedByInterruptException
+          If another thread interrupts the current thread
+          while the write operation is in progress, thereby
+          closing the channel and setting the current thread's
+          interrupt status
+@throws IOException
+          If some other I/O error occurs
+*/
+write : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

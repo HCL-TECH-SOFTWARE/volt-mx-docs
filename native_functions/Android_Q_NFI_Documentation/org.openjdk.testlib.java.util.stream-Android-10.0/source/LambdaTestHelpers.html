@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers'>/**@class org.openjdk.testlib.java.util.stream.LambdaTestHelpers
+</span>@extends java.lang.Object
+
+ LambdaTestHelpers -- assertion methods and useful objects for lambda test cases
+*/
+var LambdaTestHelpers = {
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-LONG_STRING'>/***/
+</span>LONG_STRING : &quot;When in the Course of human events it becomes necessary for one people to dissolve the political bands which have connected them with another and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-bEmpty'>/***/
+</span>bEmpty : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-bIntEmpty'>/***/
+</span>bIntEmpty : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-bBiEmpty'>/***/
+</span>bBiEmpty : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-bHashCode'>/***/
+</span>bHashCode : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-bBiHashCode'>/***/
+</span>bBiHashCode : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-mZero'>/***/
+</span>mZero : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-mId'>/***/
+</span>mId : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-mDoubler'>/***/
+</span>mDoubler : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-mfId'>/***/
+</span>mfId : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-mfNull'>/***/
+</span>mfNull : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-mfLt'>/***/
+</span>mfLt : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-imDoubler'>/***/
+</span>imDoubler : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-lmDoubler'>/***/
+</span>lmDoubler : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-dmDoubler'>/***/
+</span>dmDoubler : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-pFalse'>/***/
+</span>pFalse : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-pTrue'>/***/
+</span>pTrue : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-pEven'>/***/
+</span>pEven : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-pOdd'>/***/
+</span>pOdd : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-ipFalse'>/***/
+</span>ipFalse : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-ipTrue'>/***/
+</span>ipTrue : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-ipEven'>/***/
+</span>ipEven : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-ipOdd'>/***/
+</span>ipOdd : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-lpFalse'>/***/
+</span>lpFalse : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-lpTrue'>/***/
+</span>lpTrue : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-lpEven'>/***/
+</span>lpEven : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-lpOdd'>/***/
+</span>lpOdd : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-dpFalse'>/***/
+</span>dpFalse : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-dpTrue'>/***/
+</span>dpTrue : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-dpEven'>/***/
+</span>dpEven : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-dpOdd'>/***/
+</span>dpOdd : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-rPlus'>/***/
+</span>rPlus : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-rMax'>/***/
+</span>rMax : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-rMin'>/***/
+</span>rMin : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-irPlus'>/***/
+</span>irPlus : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-irMax'>/***/
+</span>irMax : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-irMin'>/***/
+</span>irMin : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-irDoubler'>/***/
+</span>irDoubler : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-lrPlus'>/***/
+</span>lrPlus : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-drPlus'>/***/
+</span>drPlus : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-cInteger'>/***/
+</span>cInteger : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-bipFalse'>/***/
+</span>bipFalse : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-bipTrue'>/***/
+</span>bipTrue : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-bipBothEven'>/***/
+</span>bipBothEven : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-bipBothOdd'>/***/
+</span>bipBothOdd : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-bipSameString'>/***/
+</span>bipSameString : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-integerArrayGenerator'>/***/
+</span>integerArrayGenerator : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-objectArrayGenerator'>/***/
+</span>objectArrayGenerator : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-flattenChars'>/***/
+</span>flattenChars : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-property-flattenInt'>/***/
+</span>flattenInt : &quot;null&quot;,
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-forPredicate'>/**
+</span>*/
+forPredicate : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-identity'>/**
+</span>*/
+identity : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-compose'>/**
+</span>*/
+compose : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-empty'>/**
+</span>*/
+empty : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-countTo'>/**
+</span>*/
+countTo : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-range'>/**
+</span>*/
+range : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-repeat'>/**
+</span>*/
+repeat : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-asDoubles'>/**
+</span>*/
+asDoubles : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-asLongs'>/**
+</span>*/
+asLongs : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertCountSum'>/**
+</span>*/
+assertCountSum : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertCountSum'>/**
+</span>*/
+assertCountSum : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertCountSum'>/**
+</span>*/
+assertCountSum : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertConcat'>/**
+</span>*/
+assertConcat : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertSorted'>/**
+</span>*/
+assertSorted : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertSorted'>/**
+</span>*/
+assertSorted : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertSorted'>/**
+</span>*/
+assertSorted : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertSorted'>/**
+</span>*/
+assertSorted : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertUnique'>/**
+</span>*/
+assertUnique : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertUnique'>/**
+</span>*/
+assertUnique : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertContents'>/**
+</span>*/
+assertContents : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertContents'>/**
+</span>*/
+assertContents : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertContents'>/**
+</span>*/
+assertContents : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-toBoxingConsumer'>/**
+</span>*/
+toBoxingConsumer : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-toBoxedList'>/**Convert a spliterator to a list using forEach with an implementation of
+</span> {@link java.util.stream.LambdaTestHelpers.OmnivorousConsumer}.
+
+ This ensures equality comparisons for test results do not trip
+ the boxing trip-wires.
+*/
+toBoxedList : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-toBoxedMultiset'>/**
+</span>*/
+toBoxedMultiset : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertContentsEqual'>/**
+</span>*/
+assertContentsEqual : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertContentsUnordered'>/**
+</span>*/
+assertContentsUnordered : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-assertContentsUnordered'>/**
+</span>*/
+assertContentsUnordered : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-launderAssertion'>/**
+</span>*/
+launderAssertion : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-permuteStreamFunctions'>/**
+</span>*/
+permuteStreamFunctions : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-perm'>/**
+</span>*/
+perm : function(  ) {},
+
+<span id='org-openjdk-testlib-java-util-stream-LambdaTestHelpers-method-flagsToString'>/**
+</span>*/
+flagsToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

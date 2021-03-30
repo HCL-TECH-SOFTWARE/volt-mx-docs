@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-hotspot2-ServiceProviderVerifier'>/**@class com.android.server.wifi.hotspot2.ServiceProviderVerifier
+</span>@extends java.lang.Object
+
+ Utility class to validate a server X.509 Certificate of a service provider.
+*/
+var ServiceProviderVerifier = {
+
+<span id='com-android-server-wifi-hotspot2-ServiceProviderVerifier-property-ID_WFA_OID_HOTSPOT_FRIENDLYNAME'>/** The Operator Friendly Name shall be an {@code otherName} sequence for the subjectAltName.
+</span> If multiple Operator Friendly name values are required, then multiple {@code otherName}
+ fields shall be present in the OSU certificate.
+ The type-id of the {@code otherName} shall be an {@code ID_WFA_OID_HOTSPOT_FRIENDLYNAME}.
+ {@code ID_WFA_OID_HOTSPOT_FRIENDLYNAME} OBJECT IDENTIFIER ::= { 1.3.6.1.4.1.40808.1.1.1}
+ The {@code ID_WFA_OID_HOTSPOT_FRIENDLYNAME} contains only one language code and
+ friendly name for an operator and shall be encoded as an ASN.1 type UTF8String.
+ Refer to 7.3.2 section in Hotspot 2.0 R2 Technical_Specification document in detail.
+*/
+ID_WFA_OID_HOTSPOT_FRIENDLYNAME : &quot;1.3.6.1.4.1.40808.1.1.1&quot;,
+<span id='com-android-server-wifi-hotspot2-ServiceProviderVerifier-method-getProviderNames'>/**Extracts provider names from a certificate by parsing subjectAltName extensions field
+</span> as an otherName sequence, which contains
+ id-wfa-hotspot-friendlyName oid + UTF8String denoting the friendlyName in the format below
+ &lt;languageCode&gt;&lt;friendlyName&gt;
+ Note: Multiple language code will appear as additional UTF8 strings.
+ Note: Multiple friendly names will appear as multiple otherName sequences.
+@param {Object {X509Certificate}} providerCert the X509Certificate to be parsed
+@return {Object {java.util.List}} List of Pair representing {@Locale} and friendly Name for Operator found in the
+ certificate.
+*/
+getProviderNames : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-ServiceProviderVerifier-method-verifyCertFingerprint'>/**Verifies a SHA-256 fingerprint of a X.509 Certificate.
+</span>
+ The SHA-256 fingerprint is calculated over the X.509 ASN.1 DER encoded certificate.
+@param {Object {X509Certificate}} x509Cert              a server X.509 Certificate to verify
+@param {Object {byte[]}} certSHA256Fingerprint a SHA-256 hash value stored in PPS(PerProviderSubscription)
+                              MO(Management Object)
+                              SubscriptionUpdate/TrustRoot/CertSHA256Fingerprint for
+                              remediation server
+                              AAAServerTrustRoot/CertSHA256Fingerprint for AAA server
+                              PolicyUpdate/TrustRoot/CertSHA256Fingerprint for Policy Server
+@return {Boolean} {@code true} if the fingerprint of {@code x509Cert} is equal to {@code
+ certSHA256Fingerprint}, {@code false} otherwise.
+*/
+verifyCertFingerprint : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

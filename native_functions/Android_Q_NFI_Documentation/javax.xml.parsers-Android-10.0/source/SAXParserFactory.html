@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-parsers-SAXParserFactory'>/**@class javax.xml.parsers.SAXParserFactory
+</span>@extends java.lang.Object
+
+ Defines a factory API that enables applications to configure and
+ obtain a SAX based parser to parse XML documents.
+
+ @author &lt;a href=&quot;Jeff.Suttor@Sun.com&quot;&gt;Jeff Suttor&lt;/a&gt;
+ @version $Revision: 884950 $, $Date: 2009-11-27 10:46:18 -0800 (Fri, 27 Nov 2009) $
+*/
+var SAXParserFactory = {
+
+<span id='javax-xml-parsers-SAXParserFactory-method-newInstance'>/**Returns Android's implementation of {@code SAXParserFactory}. Unlike
+</span> other Java implementations, this method does not consult system
+ properties, property files, or the services API.
+@return {Object {javax.xml.parsers.SAXParserFactory}} a new SAXParserFactory.
+@exception FactoryConfigurationError never. Included for API
+     compatibility with other Java implementations.
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-newInstance'>/**Returns an instance of the named implementation of {@code SAXParserFactory}.
+</span>@throws FactoryConfigurationError if {@code factoryClassName} is not available or cannot be
+     instantiated.
+@since 1.6
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-newSAXParser'>/**&lt;p&gt;Creates a new instance of a SAXParser using the currently
+</span> configured factory parameters.&lt;/p&gt;
+@return {Object {javax.xml.parsers.SAXParser}} A new instance of a SAXParser.
+@exception ParserConfigurationException if a parser cannot
+   be created which satisfies the requested configuration.
+@exception SAXException for SAX errors.
+*/
+newSAXParser : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-setNamespaceAware'>/**Specifies that the parser produced by this code will
+</span> provide support for XML namespaces. By default the value of this is set
+ to &lt;code&gt;false&lt;/code&gt;.
+@param {Boolean} awareness true if the parser produced by this code will
+                  provide support for XML namespaces; false otherwise.
+*/
+setNamespaceAware : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-setValidating'>/**Specifies that the parser produced by this code will
+</span> validate documents as they are parsed. By default the value of this is
+ set to &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;
+ Note that &quot;the validation&quot; here means
+ &lt;a href=&quot;http://www.w3.org/TR/REC-xml#proc-types&quot;&gt;a validating
+ parser&lt;/a&gt; as defined in the XML recommendation.
+ In other words, it essentially just controls the DTD validation.
+ (except the legacy two properties defined in JAXP 1.2.
+ See &lt;a href=&quot;#validationCompatibility&quot;&gt;here&lt;/a&gt; for more details.)
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ To use modern schema languages such as W3C XML Schema or
+ RELAX NG instead of DTD, you can configure your parser to be
+ a non-validating parser by leaving the {@link #setValidating}(boolean)
+ method &lt;tt&gt;false&lt;/tt&gt;, then use the {@link #setSchema}(Schema)
+ method to associate a schema to a parser.
+ &lt;/p&gt;
+@param {Boolean} validating true if the parser produced by this code will
+                   validate documents as they are parsed; false otherwise.
+*/
+setValidating : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-isNamespaceAware'>/**Indicates whether or not the factory is configured to produce
+</span> parsers which are namespace aware.
+@return {Boolean} true if the factory is configured to produce
+         parsers which are namespace aware; false otherwise.
+*/
+isNamespaceAware : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-isValidating'>/**Indicates whether or not the factory is configured to produce
+</span> parsers which validate the XML content during parse.
+@return {Boolean} true if the factory is configured to produce parsers which validate
+         the XML content during parse; false otherwise.
+*/
+isValidating : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-setFeature'>/**&lt;p&gt;Sets the particular feature in the underlying implementation of
+</span> org.xml.sax.XMLReader.
+ A list of the core features and properties can be found at
+ &lt;a href=&quot;http://www.saxproject.org/&quot;&gt;http://www.saxproject.org/&lt;/a&gt;&lt;/p&gt;
+
+ &lt;p&gt;All implementations are required to support the {@link javax.xml.XMLConstants#FEATURE_SECURE_PROCESSING} feature.
+ When the feature is&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;
+     &lt;code&gt;true&lt;/code&gt;: the implementation will limit XML processing to conform to implementation limits.
+     Examples include entity expansion limits and XML Schema constructs that would consume large amounts of resources.
+     If XML processing is limited for security reasons, it will be reported via a call to the registered
+     {@link org.xml.sax.ErrorHandler#fatalError(SAXParseException exception)}.
+     See {@link javax.xml.parsers.SAXParser} &lt;code&gt;parse&lt;/code&gt; methods for handler specification.
+   &lt;/li&gt;
+   &lt;li&gt;
+     When the feature is &lt;code&gt;false&lt;/code&gt;, the implementation will processing XML according to the XML specifications without
+     regard to possible implementation limits.
+   &lt;/li&gt;
+ &lt;/ul&gt;
+@param {String} name The name of the feature to be set.
+@param {Boolean} value The value of the feature to be set.
+@exception ParserConfigurationException if a parser cannot
+     be created which satisfies the requested configuration.
+@exception SAXNotRecognizedException When the underlying XMLReader does
+            not recognize the property name.
+@exception SAXNotSupportedException When the underlying XMLReader
+            recognizes the property name but doesn't support the
+            property.
+@throws NullPointerException If the &lt;code&gt;name&lt;/code&gt; parameter is null.
+@see org.xml.sax.XMLReader#setFeature
+*/
+setFeature : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-getFeature'>/**&lt;p&gt;Returns the particular property requested for in the underlying
+</span> implementation of org.xml.sax.XMLReader.&lt;/p&gt;
+@param {String} name The name of the property to be retrieved.
+@return {Boolean} Value of the requested property.
+@exception ParserConfigurationException if a parser cannot be created which satisfies the requested configuration.
+@exception SAXNotRecognizedException When the underlying XMLReader does not recognize the property name.
+@exception SAXNotSupportedException When the underlying XMLReader recognizes the property name but doesn't support the property.
+@see org.xml.sax.XMLReader#getProperty
+*/
+getFeature : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-getSchema'>/**Gets the {@link Schema} object specified through
+</span> the {@link #setSchema}(Schema schema) method.
+@throws UnsupportedOperationException
+      For backward compatibility, when implementations for
+      earlier versions of JAXP is used, this exception will be
+      thrown.
+@return {Object {javax.xml.validation.Schema}} the {@link Schema} object that was last set through
+      the {@link #setSchema(Schema)} method, or null
+      if the method was not invoked since a {@link SAXParserFactory}
+      is created.
+@since 1.5
+*/
+getSchema : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-setSchema'>/**&lt;p&gt;Set the {@link Schema} to be used by parsers created
+</span> from this factory.&lt;/p&gt;
+
+ &lt;p&gt;When a {@link Schema} is non-null, a parser will use a validator
+ created from it to validate documents before it passes information
+ down to the application.&lt;/p&gt;
+
+ &lt;p&gt;When warnings/errors/fatal errors are found by the validator, the parser must
+ handle them as if those errors were found by the parser itself.
+ In other words, if the user-specified {@link org.xml.sax.ErrorHandler}
+ is set, it must receive those errors, and if not, they must be
+ treated according to the implementation specific
+ default error handling rules.
+
+ &lt;p&gt;A validator may modify the SAX event stream (for example by
+ adding default values that were missing in documents), and a parser
+ is responsible to make sure that the application will receive
+ those modified event stream.&lt;/p&gt;
+
+ &lt;p&gt;Initially, &lt;code&gt;null&lt;/code&gt; is set as the {@link Schema}.&lt;/p&gt;
+
+ &lt;p&gt;This processing will take effect even if
+ the {@link #isValidating}() method returns &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;It is an error to use
+ the &lt;code&gt;http://java.sun.com/xml/jaxp/properties/schemaSource&lt;/code&gt;
+ property and/or the &lt;code&gt;http://java.sun.com/xml/jaxp/properties/schemaLanguage&lt;/code&gt;
+ property in conjunction with a non-null {@link Schema} object.
+ Such configuration will cause a {@link SAXException}
+ exception when those properties are set on a {@link javax.xml.parsers.SAXParser}.&lt;/p&gt;
+
+ &lt;h4&gt;Note for implementors&lt;/h4&gt;
+ &lt;p&gt;
+ A parser must be able to work with any {@link Schema}
+ implementation. However, parsers and schemas are allowed
+ to use implementation-specific custom mechanisms
+ as long as they yield the result described in the specification.
+ &lt;/p&gt;
+@param {Object {Schema}} schema &lt;code&gt;Schema&lt;/code&gt; to use, &lt;code&gt;null&lt;/code&gt; to remove a schema.
+@throws UnsupportedOperationException
+      For backward compatibility, when implementations for
+      earlier versions of JAXP is used, this exception will be
+      thrown.
+@since 1.5
+*/
+setSchema : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-setXIncludeAware'>/**&lt;p&gt;Set state of XInclude processing.&lt;/p&gt;
+</span>
+ &lt;p&gt;If XInclude markup is found in the document instance, should it be
+ processed as specified in &lt;a href=&quot;http://www.w3.org/TR/xinclude/&quot;&gt;
+ XML Inclusions (XInclude) Version 1.0&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;XInclude processing defaults to &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
+@param {Boolean} state Set XInclude processing to &lt;code&gt;true&lt;/code&gt; or
+   &lt;code&gt;false&lt;/code&gt;
+@throws UnsupportedOperationException
+      For backward compatibility, when implementations for
+      earlier versions of JAXP is used, this exception will be
+      thrown.
+@since 1.5
+*/
+setXIncludeAware : function(  ) {},
+
+<span id='javax-xml-parsers-SAXParserFactory-method-isXIncludeAware'>/**&lt;p&gt;Get state of XInclude processing.&lt;/p&gt;
+</span>@return {Boolean} current state of XInclude processing
+@throws UnsupportedOperationException
+      For backward compatibility, when implementations for
+      earlier versions of JAXP is used, this exception will be
+      thrown.
+@since 1.5
+*/
+isXIncludeAware : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

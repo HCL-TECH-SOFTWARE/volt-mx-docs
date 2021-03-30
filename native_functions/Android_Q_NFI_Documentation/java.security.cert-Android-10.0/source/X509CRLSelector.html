@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-cert-X509CRLSelector'>/**@class java.security.cert.X509CRLSelector
+</span> implements java.security.cert.CRLSelector
+
+@extends java.lang.Object
+
+ A {@code CRLSelector} that selects {@code X509CRLs} that
+ match all specified criteria. This class is particularly useful when
+ selecting CRLs from a {@code CertStore} to check revocation status
+ of a particular certificate.
+ &lt;p&gt;
+ When first constructed, an {@code X509CRLSelector} has no criteria
+ enabled and each of the {@code get} methods return a default
+ value ({@code null}). Therefore, the {@link #match match} method
+ would return {@code true} for any {@code X509CRL}. Typically,
+ several criteria are enabled (by calling {@link #setIssuers setIssuers}
+ or {@link #setDateAndTime setDateAndTime}, for instance) and then the
+ {@code X509CRLSelector} is passed to
+ {@link java.security.cert.CertStore#getCRLs java.security.cert.CertStore.getCRLs} or some similar
+ method.
+ &lt;p&gt;
+ Please refer to &lt;a href=&quot;http://www.ietf.org/rfc/rfc3280.txt&quot;&gt;RFC 3280:
+ Internet X.509 Public Key Infrastructure Certificate and CRL Profile&lt;/a&gt;
+ for definitions of the X.509 CRL fields and extensions mentioned below.
+ &lt;p&gt;
+ &lt;b&gt;Concurrent Access&lt;/b&gt;
+ &lt;p&gt;
+ Unless otherwise specified, the methods defined in this class are not
+ thread-safe. Multiple threads that need to access a single
+ object concurrently should synchronize amongst themselves and
+ provide the necessary locking. Multiple threads each manipulating
+ separate objects need not synchronize.
+
+ @see CRLSelector
+ @see X509CRL
+
+ @since       1.4
+ @author      Steve Hanna
+*/
+var X509CRLSelector = {
+
+<span id='java-security-cert-X509CRLSelector-method-setIssuers'>/**Sets the issuerNames criterion. The issuer distinguished name in the
+</span> {@code X509CRL} must match at least one of the specified
+ distinguished names. If {@code null}, any issuer distinguished name
+ will do.
+ &lt;p&gt;
+ This method allows the caller to specify, with a single method call,
+ the complete set of issuer names which {@code X509CRLs} may contain.
+ The specified value replaces the previous value for the issuerNames
+ criterion.
+ &lt;p&gt;
+ The {@code names} parameter (if not {@code null}) is a
+ {@code Collection} of {@code X500Principal}s.
+ &lt;p&gt;
+ Note that the {@code names} parameter can contain duplicate
+ distinguished names, but they may be removed from the
+ {@code Collection} of names returned by the
+ {@link #getIssuers getIssuers} method.
+ &lt;p&gt;
+ Note that a copy is performed on the {@code Collection} to
+ protect against subsequent modifications.
+@param {Object {java.util.Collection}} issuers a {@code Collection} of X500Principals
+   (or {@code null})
+@see #getIssuers
+@since 1.5
+*/
+setIssuers : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-setIssuerNames'>/**&lt;strong&gt;Note:&lt;/strong&gt; use {@linkplain #setIssuers(Collection)} instead
+</span> or only specify the byte array form of distinguished names when using
+ this method. See {@link #addIssuerName}(String) for more information.
+ &lt;p&gt;
+ Sets the issuerNames criterion. The issuer distinguished name in the
+ {@code X509CRL} must match at least one of the specified
+ distinguished names. If {@code null}, any issuer distinguished name
+ will do.
+ &lt;p&gt;
+ This method allows the caller to specify, with a single method call,
+ the complete set of issuer names which {@code X509CRLs} may contain.
+ The specified value replaces the previous value for the issuerNames
+ criterion.
+ &lt;p&gt;
+ The {@code names} parameter (if not {@code null}) is a
+ {@code Collection} of names. Each name is a {@code String}
+ or a byte array representing a distinguished name (in
+ &lt;a href=&quot;http://www.ietf.org/rfc/rfc2253.txt&quot;&gt;RFC 2253&lt;/a&gt; or
+ ASN.1 DER encoded form, respectively). If {@code null} is supplied
+ as the value for this argument, no issuerNames check will be performed.
+ &lt;p&gt;
+ Note that the {@code names} parameter can contain duplicate
+ distinguished names, but they may be removed from the
+ {@code Collection} of names returned by the
+ {@link #getIssuerNames getIssuerNames} method.
+ &lt;p&gt;
+ If a name is specified as a byte array, it should contain a single DER
+ encoded distinguished name, as defined in X.501. The ASN.1 notation for
+ this structure is as follows.
+ &lt;pre&gt;{@code
+ Name ::= CHOICE {
+   RDNSequence }
+
+ RDNSequence ::= SEQUENCE OF RelativeDistinguishedName
+
+ RelativeDistinguishedName ::=
+   SET SIZE (1 .. MAX) OF AttributeTypeAndValue
+
+ AttributeTypeAndValue ::= SEQUENCE {
+   type     AttributeType,
+   value    AttributeValue }
+
+ AttributeType ::= OBJECT IDENTIFIER
+
+ AttributeValue ::= ANY DEFINED BY AttributeType
+ ....
+ DirectoryString ::= CHOICE {
+       teletexString           TeletexString (SIZE (1..MAX)),
+       printableString         PrintableString (SIZE (1..MAX)),
+       universalString         UniversalString (SIZE (1..MAX)),
+       utf8String              UTF8String (SIZE (1.. MAX)),
+       bmpString               BMPString (SIZE (1..MAX)) }
+ }&lt;/pre&gt;
+ &lt;p&gt;
+ Note that a deep copy is performed on the {@code Collection} to
+ protect against subsequent modifications.
+@param {Object {java.util.Collection}} names a {@code Collection} of names (or {@code null})
+@throws IOException if a parsing error occurs
+@see #getIssuerNames
+*/
+setIssuerNames : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-addIssuer'>/**Adds a name to the issuerNames criterion. The issuer distinguished
+</span> name in the {@code X509CRL} must match at least one of the specified
+ distinguished names.
+ &lt;p&gt;
+ This method allows the caller to add a name to the set of issuer names
+ which {@code X509CRLs} may contain. The specified name is added to
+ any previous value for the issuerNames criterion.
+ If the specified name is a duplicate, it may be ignored.
+@param {Object {X500Principal}} issuer the issuer as X500Principal
+@since 1.5
+*/
+addIssuer : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-addIssuerName'>/**&lt;strong&gt;Denigrated&lt;/strong&gt;, use
+</span> {@linkplain #addIssuer(X500Principal)} or
+ {@linkplain #addIssuerName(byte[])} instead. This method should not be
+ relied on as it can fail to match some CRLs because of a loss of
+ encoding information in the RFC 2253 String form of some distinguished
+ names.
+ &lt;p&gt;
+ Adds a name to the issuerNames criterion. The issuer distinguished
+ name in the {@code X509CRL} must match at least one of the specified
+ distinguished names.
+ &lt;p&gt;
+ This method allows the caller to add a name to the set of issuer names
+ which {@code X509CRLs} may contain. The specified name is added to
+ any previous value for the issuerNames criterion.
+ If the specified name is a duplicate, it may be ignored.
+@param {String} name the name in RFC 2253 form
+@throws IOException if a parsing error occurs
+*/
+addIssuerName : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-addIssuerName'>/**Adds a name to the issuerNames criterion. The issuer distinguished
+</span> name in the {@code X509CRL} must match at least one of the specified
+ distinguished names.
+ &lt;p&gt;
+ This method allows the caller to add a name to the set of issuer names
+ which {@code X509CRLs} may contain. The specified name is added to
+ any previous value for the issuerNames criterion. If the specified name
+ is a duplicate, it may be ignored.
+ If a name is specified as a byte array, it should contain a single DER
+ encoded distinguished name, as defined in X.501. The ASN.1 notation for
+ this structure is as follows.
+ &lt;p&gt;
+ The name is provided as a byte array. This byte array should contain
+ a single DER encoded distinguished name, as defined in X.501. The ASN.1
+ notation for this structure appears in the documentation for
+ {@link #setIssuerNames setIssuerNames(Collection names)}.
+ &lt;p&gt;
+ Note that the byte array supplied here is cloned to protect against
+ subsequent modifications.
+@param {Object {byte[]}} name a byte array containing the name in ASN.1 DER encoded form
+@throws IOException if a parsing error occurs
+*/
+addIssuerName : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-setMinCRLNumber'>/**Sets the minCRLNumber criterion. The {@code X509CRL} must have a
+</span> CRL number extension whose value is greater than or equal to the
+ specified value. If {@code null}, no minCRLNumber check will be
+ done.
+@param {Object {BigInteger}} minCRL the minimum CRL number accepted (or {@code null})
+*/
+setMinCRLNumber : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-setMaxCRLNumber'>/**Sets the maxCRLNumber criterion. The {@code X509CRL} must have a
+</span> CRL number extension whose value is less than or equal to the
+ specified value. If {@code null}, no maxCRLNumber check will be
+ done.
+@param {Object {BigInteger}} maxCRL the maximum CRL number accepted (or {@code null})
+*/
+setMaxCRLNumber : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-setDateAndTime'>/**Sets the dateAndTime criterion. The specified date must be
+</span> equal to or later than the value of the thisUpdate component
+ of the {@code X509CRL} and earlier than the value of the
+ nextUpdate component. There is no match if the {@code X509CRL}
+ does not contain a nextUpdate component.
+ If {@code null}, no dateAndTime check will be done.
+ &lt;p&gt;
+ Note that the {@code Date} supplied here is cloned to protect
+ against subsequent modifications.
+@param {Object {Date}} dateAndTime the {@code Date} to match against
+                    (or {@code null})
+@see #getDateAndTime
+*/
+setDateAndTime : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-setCertificateChecking'>/**Sets the certificate being checked. This is not a criterion. Rather,
+</span> it is optional information that may help a {@code CertStore}
+ find CRLs that would be relevant when checking revocation for the
+ specified certificate. If {@code null} is specified, then no
+ such optional information is provided.
+@param {Object {X509Certificate}} cert the {@code X509Certificate} being checked
+             (or {@code null})
+@see #getCertificateChecking
+*/
+setCertificateChecking : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-getIssuers'>/**Returns the issuerNames criterion. The issuer distinguished
+</span> name in the {@code X509CRL} must match at least one of the specified
+ distinguished names. If the value returned is {@code null}, any
+ issuer distinguished name will do.
+ &lt;p&gt;
+ If the value returned is not {@code null}, it is a
+ unmodifiable {@code Collection} of {@code X500Principal}s.
+@return {Object {java.util.Collection}} an unmodifiable {@code Collection} of names
+   (or {@code null})
+@see #setIssuers
+@since 1.5
+*/
+getIssuers : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-getIssuerNames'>/**Returns a copy of the issuerNames criterion. The issuer distinguished
+</span> name in the {@code X509CRL} must match at least one of the specified
+ distinguished names. If the value returned is {@code null}, any
+ issuer distinguished name will do.
+ &lt;p&gt;
+ If the value returned is not {@code null}, it is a
+ {@code Collection} of names. Each name is a {@code String}
+ or a byte array representing a distinguished name (in RFC 2253 or
+ ASN.1 DER encoded form, respectively).  Note that the
+ {@code Collection} returned may contain duplicate names.
+ &lt;p&gt;
+ If a name is specified as a byte array, it should contain a single DER
+ encoded distinguished name, as defined in X.501. The ASN.1 notation for
+ this structure is given in the documentation for
+ {@link #setIssuerNames setIssuerNames(Collection names)}.
+ &lt;p&gt;
+ Note that a deep copy is performed on the {@code Collection} to
+ protect against subsequent modifications.
+@return {Object {java.util.Collection}} a {@code Collection} of names (or {@code null})
+@see #setIssuerNames
+*/
+getIssuerNames : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-getMinCRL'>/**Returns the minCRLNumber criterion. The {@code X509CRL} must have a
+</span> CRL number extension whose value is greater than or equal to the
+ specified value. If {@code null}, no minCRLNumber check will be done.
+@return {Object {java.math.BigInteger}} the minimum CRL number accepted (or {@code null})
+*/
+getMinCRL : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-getMaxCRL'>/**Returns the maxCRLNumber criterion. The {@code X509CRL} must have a
+</span> CRL number extension whose value is less than or equal to the
+ specified value. If {@code null}, no maxCRLNumber check will be
+ done.
+@return {Object {java.math.BigInteger}} the maximum CRL number accepted (or {@code null})
+*/
+getMaxCRL : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-getDateAndTime'>/**Returns the dateAndTime criterion. The specified date must be
+</span> equal to or later than the value of the thisUpdate component
+ of the {@code X509CRL} and earlier than the value of the
+ nextUpdate component. There is no match if the
+ {@code X509CRL} does not contain a nextUpdate component.
+ If {@code null}, no dateAndTime check will be done.
+ &lt;p&gt;
+ Note that the {@code Date} returned is cloned to protect against
+ subsequent modifications.
+@return {Object {java.util.Date}} the {@code Date} to match against (or {@code null})
+@see #setDateAndTime
+*/
+getDateAndTime : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-getCertificateChecking'>/**Returns the certificate being checked. This is not a criterion. Rather,
+</span> it is optional information that may help a {@code CertStore}
+ find CRLs that would be relevant when checking revocation for the
+ specified certificate. If the value returned is {@code null}, then
+ no such optional information is provided.
+@return {Object {java.security.cert.X509Certificate}} the certificate being checked (or {@code null})
+@see #setCertificateChecking
+*/
+getCertificateChecking : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-toString'>/**Returns a printable representation of the {@code X509CRLSelector}.
+</span>@return {String} a {@code String} describing the contents of the
+         {@code X509CRLSelector}.
+*/
+toString : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-match'>/**Decides whether a {@code CRL} should be selected.
+</span>@param {Object {CRL}} crl the {@code CRL} to be checked
+@return {Boolean} {@code true} if the {@code CRL} should be selected,
+         {@code false} otherwise
+*/
+match : function(  ) {},
+
+<span id='java-security-cert-X509CRLSelector-method-clone'>/**Returns a copy of this object.
+</span>@return {Object {java.lang.Object}} the copy
+*/
+clone : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-transform-dom-DOMResult'>/**@class javax.xml.transform.dom.DOMResult
+</span> implements javax.xml.transform.Result
+
+@extends java.lang.Object
+
+ &lt;p&gt;Acts as a holder for a transformation result tree in the form of a Document Object Model (DOM) tree.&lt;/p&gt;
+
+ &lt;p&gt;If no output DOM source is set, the transformation will create a Document node as the holder for the result of the transformation,
+ which may be retrieved with {@link #getNode}().&lt;/p&gt;
+
+ @author &lt;a href=&quot;Jeff.Suttor@Sun.com&quot;&gt;Jeff Suttor&lt;/a&gt;
+ @version $Revision: 569995 $, $Date: 2007-08-26 21:31:06 -0700 (Sun, 26 Aug 2007) $
+*/
+var DOMResult = {
+
+<span id='javax-xml-transform-dom-DOMResult-property-FEATURE'>/**&lt;p&gt;If {@link javax.xml.transform.TransformerFactory#getFeature}
+</span> returns &lt;code&gt;true&lt;/code&gt; when passed this value as an argument,
+ the &lt;code&gt;Transformer&lt;/code&gt; supports &lt;code&gt;Result&lt;/code&gt; output of this type.&lt;/p&gt;
+*/
+FEATURE : &quot;http://javax.xml.transform.dom.DOMResult/feature&quot;,
+<span id='javax-xml-transform-dom-DOMResult-method-setNode'>/**&lt;p&gt;Set the node that will contain the result DOM tree.&lt;p&gt;
+</span>
+ &lt;p&gt;In practice, the node should be
+ a {@link org.w3c.dom.Document} node,
+ a {@link org.w3c.dom.DocumentFragment} node, or
+ a {@link org.w3c.dom.Element} node.
+ In other words, a node that accepts children.&lt;/p&gt;
+
+ &lt;p&gt;An &lt;code&gt;IllegalStateException&lt;/code&gt; is thrown if &lt;code&gt;nextSibling&lt;/code&gt; is not &lt;code&gt;null&lt;/code&gt; and
+ &lt;code&gt;node&lt;/code&gt; is not a parent of &lt;code&gt;nextSibling&lt;/code&gt;.
+ An &lt;code&gt;IllegalStateException&lt;/code&gt; is thrown if &lt;code&gt;node&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt; and
+ &lt;code&gt;nextSibling&lt;/code&gt; is not &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
+@param {Object {Node}} node The node to which the transformation will be appended.
+@throws IllegalStateException If &lt;code&gt;nextSibling&lt;/code&gt; is not &lt;code&gt;null&lt;/code&gt; and
+   &lt;code&gt;nextSibling&lt;/code&gt; is not a child of &lt;code&gt;node&lt;/code&gt;.
+@throws IllegalStateException If &lt;code&gt;node&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt; and
+   &lt;code&gt;nextSibling&lt;/code&gt; is not &lt;code&gt;null&lt;/code&gt;.
+*/
+setNode : function(  ) {},
+
+<span id='javax-xml-transform-dom-DOMResult-method-getNode'>/**&lt;p&gt;Get the node that will contain the result DOM tree.&lt;/p&gt;
+</span>
+ &lt;p&gt;If no node was set via
+ {@link #DOMResult}(Node node),
+ {@link #DOMResult(Node node, String systeId)},
+ {@link #DOMResult(Node node, Node nextSibling)},
+ {@link #DOMResult(Node node, Node nextSibling, String systemId)} or
+ {@link #setNode}(Node node),
+ then the node will be set by the transformation, and may be obtained from this method once the transformation is complete.
+ Calling this method before the transformation will return &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
+@return {Object {org.w3c.dom.Node}} The node to which the transformation will be appended.
+*/
+getNode : function(  ) {},
+
+<span id='javax-xml-transform-dom-DOMResult-method-setNextSibling'>/**&lt;p&gt;Set the child node before which the result nodes will be inserted.&lt;/p&gt;
+</span>
+ &lt;p&gt;Use &lt;code&gt;nextSibling&lt;/code&gt; to specify the child node
+ before which the result nodes should be inserted.
+ If &lt;code&gt;nextSibling&lt;/code&gt; is not a descendant of &lt;code&gt;node&lt;/code&gt;,
+ then an &lt;code&gt;IllegalArgumentException&lt;/code&gt; is thrown.
+ If &lt;code&gt;node&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt; and &lt;code&gt;nextSibling&lt;/code&gt; is not &lt;code&gt;null&lt;/code&gt;,
+ then an &lt;code&gt;IllegalStateException&lt;/code&gt; is thrown.
+ If &lt;code&gt;nextSibling&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;,
+ then the behavior is the same as calling {@link #DOMResult}(Node node),
+ i.e. append the result nodes as the last child of the specified &lt;code&gt;node&lt;/code&gt;.&lt;/p&gt;
+@param {Object {Node}} nextSibling The child node before which the result nodes will be inserted.
+@throws IllegalArgumentException If &lt;code&gt;nextSibling&lt;/code&gt; is not a descendant of &lt;code&gt;node&lt;/code&gt;.
+@throws IllegalStateException If &lt;code&gt;node&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt; and &lt;code&gt;nextSibling&lt;/code&gt; is not &lt;code&gt;null&lt;/code&gt;.
+@since 1.5
+*/
+setNextSibling : function(  ) {},
+
+<span id='javax-xml-transform-dom-DOMResult-method-getNextSibling'>/**&lt;p&gt;Get the child node before which the result nodes will be inserted.&lt;/p&gt;
+</span>
+ &lt;p&gt;If no node was set via
+ {@link #DOMResult(Node node, Node nextSibling)},
+ {@link #DOMResult(Node node, Node nextSibling, String systemId)} or
+ {@link #setNextSibling}(Node nextSibling),
+ then &lt;code&gt;null&lt;/code&gt; will be returned.&lt;/p&gt;
+@return {Object {org.w3c.dom.Node}} The child node before which the result nodes will be inserted.
+@since 1.5
+*/
+getNextSibling : function(  ) {},
+
+<span id='javax-xml-transform-dom-DOMResult-method-setSystemId'>/**&lt;p&gt;Set the systemId that may be used in association with the node.&lt;/p&gt;
+</span>@param {String} systemId The system identifier as a URI string.
+*/
+setSystemId : function(  ) {},
+
+<span id='javax-xml-transform-dom-DOMResult-method-getSystemId'>/**&lt;p&gt;Get the System Identifier.&lt;/p&gt;
+</span>
+ &lt;p&gt;If no System ID was set via
+ {@link #DOMResult(Node node, String systemId)},
+ {@link #DOMResult(Node node, Node nextSibling, String systemId)} or
+ {@link #setSystemId}(String systemId),
+ then &lt;code&gt;null&lt;/code&gt; will be returned.&lt;/p&gt;
+@return {String} The system identifier.
+*/
+getSystemId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

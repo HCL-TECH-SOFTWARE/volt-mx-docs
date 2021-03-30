@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-sql-Connection'>/**@class java.sql.Connection
+</span> implements java.sql.Wrapper
+
+ implements java.lang.AutoCloseable
+
+ &lt;P&gt;A connection (session) with a specific
+ database. SQL statements are executed and results are returned
+ within the context of a connection.
+ &lt;P&gt;
+ A &lt;code&gt;Connection&lt;/code&gt; object's database is able to provide information
+ describing its tables, its supported SQL grammar, its stored
+ procedures, the capabilities of this connection, and so on. This
+ information is obtained with the &lt;code&gt;getMetaData&lt;/code&gt; method.
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; When configuring a &lt;code&gt;Connection&lt;/code&gt;, JDBC applications
+  should use the appropriate &lt;code&gt;Connection&lt;/code&gt; method such as
+  &lt;code&gt;setAutoCommit&lt;/code&gt; or &lt;code&gt;setTransactionIsolation&lt;/code&gt;.
+  Applications should not invoke SQL commands directly to change the connection's
+   configuration when there is a JDBC method available.  By default a &lt;code&gt;Connection&lt;/code&gt; object is in
+ auto-commit mode, which means that it automatically commits changes
+ after executing each statement. If auto-commit mode has been
+ disabled, the method &lt;code&gt;commit&lt;/code&gt; must be called explicitly in
+ order to commit changes; otherwise, database changes will not be saved.
+ &lt;P&gt;
+ A new &lt;code&gt;Connection&lt;/code&gt; object created using the JDBC 2.1 core API
+ has an initially empty type map associated with it. A user may enter a
+ custom mapping for a UDT in this type map.
+ When a UDT is retrieved from a data source with the
+ method &lt;code&gt;ResultSet.getObject&lt;/code&gt;, the &lt;code&gt;getObject&lt;/code&gt; method
+ will check the connection's type map to see if there is an entry for that
+ UDT.  If so, the &lt;code&gt;getObject&lt;/code&gt; method will map the UDT to the
+ class indicated.  If there is no entry, the UDT will be mapped using the
+ standard mapping.
+ &lt;p&gt;
+ A user may create a new type map, which is a &lt;code&gt;java.util.Map&lt;/code&gt;
+ object, make an entry in it, and pass it to the &lt;code&gt;java.sql&lt;/code&gt;
+ methods that can perform custom mapping.  In this case, the method
+ will use the given type map instead of the one associated with
+ the connection.
+ &lt;p&gt;
+ For example, the following code fragment specifies that the SQL
+ type &lt;code&gt;ATHLETES&lt;/code&gt; will be mapped to the class
+ &lt;code&gt;Athletes&lt;/code&gt; in the Java programming language.
+ The code fragment retrieves the type map for the &lt;code&gt;Connection
+ &lt;/code&gt; object &lt;code&gt;con&lt;/code&gt;, inserts the entry into it, and then sets
+ the type map with the new entry as the connection's type map.
+ &lt;pre&gt;
+      java.util.Map map = con.getTypeMap();
+      map.put(&quot;mySchemaName.ATHLETES&quot;, Class.forName(&quot;Athletes&quot;));
+      con.setTypeMap(map);
+ &lt;/pre&gt;
+
+ @see DriverManager#getConnection
+ @see Statement
+ @see ResultSet
+ @see DatabaseMetaData
+*/
+var Connection = {
+
+<span id='java-sql-Connection-property-TRANSACTION_NONE'>/** A constant indicating that transactions are not supported.
+</span>*/
+TRANSACTION_NONE : &quot;0&quot;,
+<span id='java-sql-Connection-property-TRANSACTION_READ_UNCOMMITTED'>/** A constant indicating that
+</span> dirty reads, non-repeatable reads and phantom reads can occur.
+ This level allows a row changed by one transaction to be read
+ by another transaction before any changes in that row have been
+ committed (a &quot;dirty read&quot;).  If any of the changes are rolled back,
+ the second transaction will have retrieved an invalid row.
+*/
+TRANSACTION_READ_UNCOMMITTED : &quot;1&quot;,
+<span id='java-sql-Connection-property-TRANSACTION_READ_COMMITTED'>/** A constant indicating that
+</span> dirty reads are prevented; non-repeatable reads and phantom
+ reads can occur.  This level only prohibits a transaction
+ from reading a row with uncommitted changes in it.
+*/
+TRANSACTION_READ_COMMITTED : &quot;2&quot;,
+<span id='java-sql-Connection-property-TRANSACTION_REPEATABLE_READ'>/** A constant indicating that
+</span> dirty reads and non-repeatable reads are prevented; phantom
+ reads can occur.  This level prohibits a transaction from
+ reading a row with uncommitted changes in it, and it also
+ prohibits the situation where one transaction reads a row,
+ a second transaction alters the row, and the first transaction
+ rereads the row, getting different values the second time
+ (a &quot;non-repeatable read&quot;).
+*/
+TRANSACTION_REPEATABLE_READ : &quot;4&quot;,
+<span id='java-sql-Connection-property-TRANSACTION_SERIALIZABLE'>/** A constant indicating that
+</span> dirty reads, non-repeatable reads and phantom reads are prevented.
+ This level includes the prohibitions in
+ &lt;code&gt;TRANSACTION_REPEATABLE_READ&lt;/code&gt; and further prohibits the
+ situation where one transaction reads all rows that satisfy
+ a &lt;code&gt;WHERE&lt;/code&gt; condition, a second transaction inserts a row that
+ satisfies that &lt;code&gt;WHERE&lt;/code&gt; condition, and the first transaction
+ rereads for the same condition, retrieving the additional
+ &quot;phantom&quot; row in the second read.
+*/
+TRANSACTION_SERIALIZABLE : &quot;8&quot;,
+<span id='java-sql-Connection-method-createStatement'>/**Creates a &lt;code&gt;Statement&lt;/code&gt; object for sending
+</span> SQL statements to the database.
+ SQL statements without parameters are normally
+ executed using &lt;code&gt;Statement&lt;/code&gt; objects. If the same SQL statement
+ is executed many times, it may be more efficient to use a
+ &lt;code&gt;PreparedStatement&lt;/code&gt; object.
+ &lt;P&gt;
+ Result sets created using the returned &lt;code&gt;Statement&lt;/code&gt;
+ object will by default be type &lt;code&gt;TYPE_FORWARD_ONLY&lt;/code&gt;
+ and have a concurrency level of &lt;code&gt;CONCUR_READ_ONLY&lt;/code&gt;.
+ The holdability of the created result sets can be determined by
+ calling {@link #getHoldability}.
+@return {Object {java.sql.Statement}} a new default &lt;code&gt;Statement&lt;/code&gt; object
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+*/
+createStatement : function(  ) {},
+
+<span id='java-sql-Connection-method-prepareStatement'>/**Creates a &lt;code&gt;PreparedStatement&lt;/code&gt; object for sending
+</span> parameterized SQL statements to the database.
+ &lt;P&gt;
+ A SQL statement with or without IN parameters can be
+ pre-compiled and stored in a &lt;code&gt;PreparedStatement&lt;/code&gt; object. This
+ object can then be used to efficiently execute this statement
+ multiple times.
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; This method is optimized for handling
+ parametric SQL statements that benefit from precompilation. If
+ the driver supports precompilation,
+ the method &lt;code&gt;prepareStatement&lt;/code&gt; will send
+ the statement to the database for precompilation. Some drivers
+ may not support precompilation. In this case, the statement may
+ not be sent to the database until the &lt;code&gt;PreparedStatement&lt;/code&gt;
+ object is executed.  This has no direct effect on users; however, it does
+ affect which methods throw certain &lt;code&gt;SQLException&lt;/code&gt; objects.
+ &lt;P&gt;
+ Result sets created using the returned &lt;code&gt;PreparedStatement&lt;/code&gt;
+ object will by default be type &lt;code&gt;TYPE_FORWARD_ONLY&lt;/code&gt;
+ and have a concurrency level of &lt;code&gt;CONCUR_READ_ONLY&lt;/code&gt;.
+ The holdability of the created result sets can be determined by
+ calling {@link #getHoldability}.
+@param {String} sql an SQL statement that may contain one or more '?' IN
+ parameter placeholders
+@return {Object {java.sql.PreparedStatement}} a new default &lt;code&gt;PreparedStatement&lt;/code&gt; object containing the
+ pre-compiled SQL statement
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+*/
+prepareStatement : function(  ) {},
+
+<span id='java-sql-Connection-method-prepareCall'>/**Creates a &lt;code&gt;CallableStatement&lt;/code&gt; object for calling
+</span> database stored procedures.
+ The &lt;code&gt;CallableStatement&lt;/code&gt; object provides
+ methods for setting up its IN and OUT parameters, and
+ methods for executing the call to a stored procedure.
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; This method is optimized for handling stored
+ procedure call statements. Some drivers may send the call
+ statement to the database when the method &lt;code&gt;prepareCall&lt;/code&gt;
+ is done; others
+ may wait until the &lt;code&gt;CallableStatement&lt;/code&gt; object
+ is executed. This has no
+ direct effect on users; however, it does affect which method
+ throws certain SQLExceptions.
+ &lt;P&gt;
+ Result sets created using the returned &lt;code&gt;CallableStatement&lt;/code&gt;
+ object will by default be type &lt;code&gt;TYPE_FORWARD_ONLY&lt;/code&gt;
+ and have a concurrency level of &lt;code&gt;CONCUR_READ_ONLY&lt;/code&gt;.
+ The holdability of the created result sets can be determined by
+ calling {@link #getHoldability}.
+@param {String} sql an SQL statement that may contain one or more '?'
+ parameter placeholders. Typically this statement is specified using JDBC
+ call escape syntax.
+@return {Object {java.sql.CallableStatement}} a new default &lt;code&gt;CallableStatement&lt;/code&gt; object containing the
+ pre-compiled SQL statement
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+*/
+prepareCall : function(  ) {},
+
+<span id='java-sql-Connection-method-nativeSQL'>/**Converts the given SQL statement into the system's native SQL grammar.
+</span> A driver may convert the JDBC SQL grammar into its system's
+ native SQL grammar prior to sending it. This method returns the
+ native form of the statement that the driver would have sent.
+@param {String} sql an SQL statement that may contain one or more '?'
+ parameter placeholders
+@return {String} the native form of this statement
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+*/
+nativeSQL : function(  ) {},
+
+<span id='java-sql-Connection-method-setAutoCommit'>/**Sets this connection's auto-commit mode to the given state.
+</span> If a connection is in auto-commit mode, then all its SQL
+ statements will be executed and committed as individual
+ transactions.  Otherwise, its SQL statements are grouped into
+ transactions that are terminated by a call to either
+ the method &lt;code&gt;commit&lt;/code&gt; or the method &lt;code&gt;rollback&lt;/code&gt;.
+ By default, new connections are in auto-commit
+ mode.
+ &lt;P&gt;
+ The commit occurs when the statement completes. The time when the statement
+ completes depends on the type of SQL Statement:
+ &lt;ul&gt;
+ &lt;li&gt;For DML statements, such as Insert, Update or Delete, and DDL statements,
+ the statement is complete as soon as it has finished executing.
+ &lt;li&gt;For Select statements, the statement is complete when the associated result
+ set is closed.
+ &lt;li&gt;For &lt;code&gt;CallableStatement&lt;/code&gt; objects or for statements that return
+ multiple results, the statement is complete
+ when all of the associated result sets have been closed, and all update
+ counts and output parameters have been retrieved.
+&lt;/ul&gt;
+ &lt;P&gt;
+ &lt;B&gt;NOTE:&lt;/B&gt;  If this method is called during a transaction and the
+ auto-commit mode is changed, the transaction is committed.  If
+ &lt;code&gt;setAutoCommit&lt;/code&gt; is called and the auto-commit mode is
+ not changed, the call is a no-op.
+@param {Boolean} autoCommit &lt;code&gt;true&lt;/code&gt; to enable auto-commit mode;
+         &lt;code&gt;false&lt;/code&gt; to disable it
+@exception SQLException if a database access error occurs,
+  setAutoCommit(true) is called while participating in a distributed transaction,
+ or this method is called on a closed connection
+@see #getAutoCommit
+*/
+setAutoCommit : function(  ) {},
+
+<span id='java-sql-Connection-method-getAutoCommit'>/**Retrieves the current auto-commit mode for this &lt;code&gt;Connection&lt;/code&gt;
+</span> object.
+@return {Boolean} the current state of this &lt;code&gt;Connection&lt;/code&gt; object's
+         auto-commit mode
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+@see #setAutoCommit
+*/
+getAutoCommit : function(  ) {},
+
+<span id='java-sql-Connection-method-commit'>/**Makes all changes made since the previous
+</span> commit/rollback permanent and releases any database locks
+ currently held by this &lt;code&gt;Connection&lt;/code&gt; object.
+ This method should be
+ used only when auto-commit mode has been disabled.
+@exception SQLException if a database access error occurs,
+ this method is called while participating in a distributed transaction,
+ if this method is called on a closed conection or this
+            &lt;code&gt;Connection&lt;/code&gt; object is in auto-commit mode
+@see #setAutoCommit
+*/
+commit : function(  ) {},
+
+<span id='java-sql-Connection-method-rollback'>/**Undoes all changes made in the current transaction
+</span> and releases any database locks currently held
+ by this &lt;code&gt;Connection&lt;/code&gt; object. This method should be
+ used only when auto-commit mode has been disabled.
+@exception SQLException if a database access error occurs,
+ this method is called while participating in a distributed transaction,
+ this method is called on a closed connection or this
+            &lt;code&gt;Connection&lt;/code&gt; object is in auto-commit mode
+@see #setAutoCommit
+*/
+rollback : function(  ) {},
+
+<span id='java-sql-Connection-method-close'>/**Releases this &lt;code&gt;Connection&lt;/code&gt; object's database and JDBC resources
+</span> immediately instead of waiting for them to be automatically released.
+ &lt;P&gt;
+ Calling the method &lt;code&gt;close&lt;/code&gt; on a &lt;code&gt;Connection&lt;/code&gt;
+ object that is already closed is a no-op.
+ &lt;P&gt;
+ It is &lt;b&gt;strongly recommended&lt;/b&gt; that an application explicitly
+ commits or rolls back an active transaction prior to calling the
+ &lt;code&gt;close&lt;/code&gt; method.  If the &lt;code&gt;close&lt;/code&gt; method is called
+ and there is an active transaction, the results are implementation-defined.
+ &lt;P&gt;
+@exception SQLException SQLException if a database access error occurs
+*/
+close : function(  ) {},
+
+<span id='java-sql-Connection-method-isClosed'>/**Retrieves whether this &lt;code&gt;Connection&lt;/code&gt; object has been
+</span> closed.  A connection is closed if the method &lt;code&gt;close&lt;/code&gt;
+ has been called on it or if certain fatal errors have occurred.
+ This method is guaranteed to return &lt;code&gt;true&lt;/code&gt; only when
+ it is called after the method &lt;code&gt;Connection.close&lt;/code&gt; has
+ been called.
+ &lt;P&gt;
+ This method generally cannot be called to determine whether a
+ connection to a database is valid or invalid.  A typical client
+ can determine that a connection is invalid by catching any
+ exceptions that might be thrown when an operation is attempted.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this &lt;code&gt;Connection&lt;/code&gt; object
+         is closed; &lt;code&gt;false&lt;/code&gt; if it is still open
+@exception SQLException if a database access error occurs
+*/
+isClosed : function(  ) {},
+
+<span id='java-sql-Connection-method-getMetaData'>/**Retrieves a &lt;code&gt;DatabaseMetaData&lt;/code&gt; object that contains
+</span> metadata about the database to which this
+ &lt;code&gt;Connection&lt;/code&gt; object represents a connection.
+ The metadata includes information about the database's
+ tables, its supported SQL grammar, its stored
+ procedures, the capabilities of this connection, and so on.
+@return {Object {java.sql.DatabaseMetaData}} a &lt;code&gt;DatabaseMetaData&lt;/code&gt; object for this
+         &lt;code&gt;Connection&lt;/code&gt; object
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+*/
+getMetaData : function(  ) {},
+
+<span id='java-sql-Connection-method-setReadOnly'>/**Puts this connection in read-only mode as a hint to the driver to enable
+</span> database optimizations.
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; This method cannot be called during a transaction.
+@param {Boolean} readOnly &lt;code&gt;true&lt;/code&gt; enables read-only mode;
+        &lt;code&gt;false&lt;/code&gt; disables it
+@exception SQLException if a database access error occurs, this
+  method is called on a closed connection or this
+            method is called during a transaction
+*/
+setReadOnly : function(  ) {},
+
+<span id='java-sql-Connection-method-isReadOnly'>/**Retrieves whether this &lt;code&gt;Connection&lt;/code&gt;
+</span> object is in read-only mode.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this &lt;code&gt;Connection&lt;/code&gt; object
+         is read-only; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException SQLException if a database access error occurs
+ or this method is called on a closed connection
+*/
+isReadOnly : function(  ) {},
+
+<span id='java-sql-Connection-method-setCatalog'>/**Sets the given catalog name in order to select
+</span> a subspace of this &lt;code&gt;Connection&lt;/code&gt; object's database
+ in which to work.
+ &lt;P&gt;
+ If the driver does not support catalogs, it will
+ silently ignore this request.
+ &lt;p&gt;
+ Calling {@code setCatalog} has no effect on previously created or prepared
+ {@code Statement} objects. It is implementation defined whether a DBMS
+ prepare operation takes place immediately when the {@code Connection}
+ method {@code prepareStatement} or {@code prepareCall} is invoked.
+ For maximum portability, {@code setCatalog} should be called before a
+ {@code Statement} is created or prepared.
+@param {String} catalog the name of a catalog (subspace in this
+        &lt;code&gt;Connection&lt;/code&gt; object's database) in which to work
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+@see #getCatalog
+*/
+setCatalog : function(  ) {},
+
+<span id='java-sql-Connection-method-getCatalog'>/**Retrieves this &lt;code&gt;Connection&lt;/code&gt; object's current catalog name.
+</span>@return {String} the current catalog name or &lt;code&gt;null&lt;/code&gt; if there is none
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+@see #setCatalog
+*/
+getCatalog : function(  ) {},
+
+<span id='java-sql-Connection-method-setTransactionIsolation'>/**Attempts to change the transaction isolation level for this
+</span> &lt;code&gt;Connection&lt;/code&gt; object to the one given.
+ The constants defined in the interface &lt;code&gt;Connection&lt;/code&gt;
+ are the possible transaction isolation levels.
+ &lt;P&gt;
+ &lt;B&gt;Note:&lt;/B&gt; If this method is called during a transaction, the result
+ is implementation-defined.
+@param {Number} level one of the following &lt;code&gt;Connection&lt;/code&gt; constants:
+        &lt;code&gt;Connection.TRANSACTION_READ_UNCOMMITTED&lt;/code&gt;,
+        &lt;code&gt;Connection.TRANSACTION_READ_COMMITTED&lt;/code&gt;,
+        &lt;code&gt;Connection.TRANSACTION_REPEATABLE_READ&lt;/code&gt;, or
+        &lt;code&gt;Connection.TRANSACTION_SERIALIZABLE&lt;/code&gt;.
+        (Note that &lt;code&gt;Connection.TRANSACTION_NONE&lt;/code&gt; cannot be used
+        because it specifies that transactions are not supported.)
+@exception SQLException if a database access error occurs, this
+ method is called on a closed connection
+            or the given parameter is not one of the &lt;code&gt;Connection&lt;/code&gt;
+            constants
+@see DatabaseMetaData#supportsTransactionIsolationLevel
+@see #getTransactionIsolation
+*/
+setTransactionIsolation : function(  ) {},
+
+<span id='java-sql-Connection-method-getTransactionIsolation'>/**Retrieves this &lt;code&gt;Connection&lt;/code&gt; object's current
+</span> transaction isolation level.
+@return {Number} the current transaction isolation level, which will be one
+         of the following constants:
+        &lt;code&gt;Connection.TRANSACTION_READ_UNCOMMITTED&lt;/code&gt;,
+        &lt;code&gt;Connection.TRANSACTION_READ_COMMITTED&lt;/code&gt;,
+        &lt;code&gt;Connection.TRANSACTION_REPEATABLE_READ&lt;/code&gt;,
+        &lt;code&gt;Connection.TRANSACTION_SERIALIZABLE&lt;/code&gt;, or
+        &lt;code&gt;Connection.TRANSACTION_NONE&lt;/code&gt;.
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+@see #setTransactionIsolation
+*/
+getTransactionIsolation : function(  ) {},
+
+<span id='java-sql-Connection-method-getWarnings'>/**Retrieves the first warning reported by calls on this
+</span> &lt;code&gt;Connection&lt;/code&gt; object.  If there is more than one
+ warning, subsequent warnings will be chained to the first one
+ and can be retrieved by calling the method
+ &lt;code&gt;SQLWarning.getNextWarning&lt;/code&gt; on the warning
+ that was retrieved previously.
+ &lt;P&gt;
+ This method may not be
+ called on a closed connection; doing so will cause an
+ &lt;code&gt;SQLException&lt;/code&gt; to be thrown.
+
+ &lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; Subsequent warnings will be chained to this
+ SQLWarning.
+@return {Object {java.sql.SQLWarning}} the first &lt;code&gt;SQLWarning&lt;/code&gt; object or &lt;code&gt;null&lt;/code&gt;
+         if there are none
+@exception SQLException if a database access error occurs or
+            this method is called on a closed connection
+@see SQLWarning
+*/
+getWarnings : function(  ) {},
+
+<span id='java-sql-Connection-method-clearWarnings'>/**Clears all warnings reported for this &lt;code&gt;Connection&lt;/code&gt; object.
+</span> After a call to this method, the method &lt;code&gt;getWarnings&lt;/code&gt;
+ returns &lt;code&gt;null&lt;/code&gt; until a new warning is
+ reported for this &lt;code&gt;Connection&lt;/code&gt; object.
+@exception SQLException SQLException if a database access error occurs
+ or this method is called on a closed connection
+*/
+clearWarnings : function(  ) {},
+
+<span id='java-sql-Connection-method-createStatement'>/**Creates a &lt;code&gt;Statement&lt;/code&gt; object that will generate
+</span> &lt;code&gt;ResultSet&lt;/code&gt; objects with the given type and concurrency.
+ This method is the same as the &lt;code&gt;createStatement&lt;/code&gt; method
+ above, but it allows the default result set
+ type and concurrency to be overridden.
+ The holdability of the created result sets can be determined by
+ calling {@link #getHoldability}.
+@param {Number} resultSetType a result set type; one of
+        &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+        &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+        &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@param {Number} resultSetConcurrency a concurrency type; one of
+        &lt;code&gt;ResultSet.CONCUR_READ_ONLY&lt;/code&gt; or
+        &lt;code&gt;ResultSet.CONCUR_UPDATABLE&lt;/code&gt;
+@return {Object {java.sql.Statement}} a new &lt;code&gt;Statement&lt;/code&gt; object that will generate
+         &lt;code&gt;ResultSet&lt;/code&gt; objects with the given type and
+         concurrency
+@exception SQLException if a database access error occurs, this
+ method is called on a closed connection
+         or the given parameters are not &lt;code&gt;ResultSet&lt;/code&gt;
+         constants indicating type and concurrency
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method or this method is not supported for the specified result
+ set type and result set concurrency.
+@since 1.2
+*/
+createStatement : function(  ) {},
+
+<span id='java-sql-Connection-method-prepareStatement'>/**Creates a &lt;code&gt;PreparedStatement&lt;/code&gt; object that will generate
+</span> &lt;code&gt;ResultSet&lt;/code&gt; objects with the given type and concurrency.
+ This method is the same as the &lt;code&gt;prepareStatement&lt;/code&gt; method
+ above, but it allows the default result set
+ type and concurrency to be overridden.
+ The holdability of the created result sets can be determined by
+ calling {@link #getHoldability}.
+@param {String} sql a &lt;code&gt;String&lt;/code&gt; object that is the SQL statement to
+            be sent to the database; may contain one or more '?' IN
+            parameters
+@param {Number} resultSetType a result set type; one of
+         &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+         &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+         &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@param {Number} resultSetConcurrency a concurrency type; one of
+         &lt;code&gt;ResultSet.CONCUR_READ_ONLY&lt;/code&gt; or
+         &lt;code&gt;ResultSet.CONCUR_UPDATABLE&lt;/code&gt;
+@return {Object {java.sql.PreparedStatement}} a new PreparedStatement object containing the
+ pre-compiled SQL statement that will produce &lt;code&gt;ResultSet&lt;/code&gt;
+ objects with the given type and concurrency
+@exception SQLException if a database access error occurs, this
+ method is called on a closed connection
+         or the given parameters are not &lt;code&gt;ResultSet&lt;/code&gt;
+         constants indicating type and concurrency
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method or this method is not supported for the specified result
+ set type and result set concurrency.
+@since 1.2
+*/
+prepareStatement : function(  ) {},
+
+<span id='java-sql-Connection-method-prepareCall'>/**Creates a &lt;code&gt;CallableStatement&lt;/code&gt; object that will generate
+</span> &lt;code&gt;ResultSet&lt;/code&gt; objects with the given type and concurrency.
+ This method is the same as the &lt;code&gt;prepareCall&lt;/code&gt; method
+ above, but it allows the default result set
+ type and concurrency to be overridden.
+ The holdability of the created result sets can be determined by
+ calling {@link #getHoldability}.
+@param {String} sql a &lt;code&gt;String&lt;/code&gt; object that is the SQL statement to
+            be sent to the database; may contain on or more '?' parameters
+@param {Number} resultSetType a result set type; one of
+         &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+         &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+         &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@param {Number} resultSetConcurrency a concurrency type; one of
+         &lt;code&gt;ResultSet.CONCUR_READ_ONLY&lt;/code&gt; or
+         &lt;code&gt;ResultSet.CONCUR_UPDATABLE&lt;/code&gt;
+@return {Object {java.sql.CallableStatement}} a new &lt;code&gt;CallableStatement&lt;/code&gt; object containing the
+ pre-compiled SQL statement that will produce &lt;code&gt;ResultSet&lt;/code&gt;
+ objects with the given type and concurrency
+@exception SQLException if a database access error occurs, this method
+ is called on a closed connection
+         or the given parameters are not &lt;code&gt;ResultSet&lt;/code&gt;
+         constants indicating type and concurrency
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method or this method is not supported for the specified result
+ set type and result set concurrency.
+@since 1.2
+*/
+prepareCall : function(  ) {},
+
+<span id='java-sql-Connection-method-getTypeMap'>/**Retrieves the &lt;code&gt;Map&lt;/code&gt; object associated with this
+</span> &lt;code&gt;Connection&lt;/code&gt; object.
+ Unless the application has added an entry, the type map returned
+ will be empty.
+ &lt;p&gt;
+ You must invoke &lt;code&gt;setTypeMap&lt;/code&gt; after making changes to the
+ &lt;code&gt;Map&lt;/code&gt; object returned from
+  &lt;code&gt;getTypeMap&lt;/code&gt; as a JDBC driver may create an internal
+ copy of the &lt;code&gt;Map&lt;/code&gt; object passed to &lt;code&gt;setTypeMap&lt;/code&gt;:
+ &lt;p&gt;
+ &lt;pre&gt;
+      Map&amp;lt;String,Class&amp;lt;?&amp;gt;&amp;gt; myMap = con.getTypeMap();
+      myMap.put(&quot;mySchemaName.ATHLETES&quot;, Athletes.class);
+      con.setTypeMap(myMap);
+ &lt;/pre&gt;
+@return {Object {java.util.Map}} the &lt;code&gt;java.util.Map&lt;/code&gt; object associated
+         with this &lt;code&gt;Connection&lt;/code&gt; object
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+@see #setTypeMap
+*/
+getTypeMap : function(  ) {},
+
+<span id='java-sql-Connection-method-setTypeMap'>/**Installs the given &lt;code&gt;TypeMap&lt;/code&gt; object as the type map for
+</span> this &lt;code&gt;Connection&lt;/code&gt; object.  The type map will be used for the
+ custom mapping of SQL structured types and distinct types.
+&lt;p&gt;
+ You must set the the values for the &lt;code&gt;TypeMap&lt;/code&gt; prior to
+ callng &lt;code&gt;setMap&lt;/code&gt; as a JDBC driver may create an internal copy
+ of the &lt;code&gt;TypeMap&lt;/code&gt;:
+ &lt;p&gt;
+ &lt;pre&gt;
+      Map myMap&amp;lt;String,Class&amp;lt;?&amp;gt;&amp;gt; = new HashMap&amp;lt;String,Class&amp;lt;?&amp;gt;&amp;gt;();
+      myMap.put(&quot;mySchemaName.ATHLETES&quot;, Athletes.class);
+      con.setTypeMap(myMap);
+ &lt;/pre&gt;
+@param {Object {java.util.Map}} map the &lt;code&gt;java.util.Map&lt;/code&gt; object to install
+        as the replacement for this &lt;code&gt;Connection&lt;/code&gt;
+        object's default type map
+@exception SQLException if a database access error occurs, this
+ method is called on a closed connection or
+        the given parameter is not a &lt;code&gt;java.util.Map&lt;/code&gt;
+        object
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+@see #getTypeMap
+*/
+setTypeMap : function(  ) {},
+
+<span id='java-sql-Connection-method-setHoldability'>/**Changes the default holdability of &lt;code&gt;ResultSet&lt;/code&gt; objects
+</span> created using this &lt;code&gt;Connection&lt;/code&gt; object to the given
+ holdability.  The default holdability of &lt;code&gt;ResultSet&lt;/code&gt; objects
+ can be be determined by invoking
+ {@link java.sql.DatabaseMetaData#getResultSetHoldability}.
+@param {Number} holdability a &lt;code&gt;ResultSet&lt;/code&gt; holdability constant; one of
+        &lt;code&gt;ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code&gt; or
+        &lt;code&gt;ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code&gt;
+@throws SQLException if a database access occurs, this method is called
+ on a closed connection, or the given parameter
+         is not a &lt;code&gt;ResultSet&lt;/code&gt; constant indicating holdability
+@exception SQLFeatureNotSupportedException if the given holdability is not supported
+@see #getHoldability
+@see DatabaseMetaData#getResultSetHoldability
+@see ResultSet
+@since 1.4
+*/
+setHoldability : function(  ) {},
+
+<span id='java-sql-Connection-method-getHoldability'>/**Retrieves the current holdability of &lt;code&gt;ResultSet&lt;/code&gt; objects
+</span> created using this &lt;code&gt;Connection&lt;/code&gt; object.
+@return {Number} the holdability, one of
+        &lt;code&gt;ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code&gt; or
+        &lt;code&gt;ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code&gt;
+@throws SQLException if a database access error occurs
+ or this method is called on a closed connection
+@see #setHoldability
+@see DatabaseMetaData#getResultSetHoldability
+@see ResultSet
+@since 1.4
+*/
+getHoldability : function(  ) {},
+
+<span id='java-sql-Connection-method-setSavepoint'>/**Creates an unnamed savepoint in the current transaction and
+</span> returns the new &lt;code&gt;Savepoint&lt;/code&gt; object that represents it.
+
+&lt;p&gt; if setSavepoint is invoked outside of an active transaction, a transaction will be started at this newly created
+savepoint.
+@return {Object {java.sql.Savepoint}} the new &lt;code&gt;Savepoint&lt;/code&gt; object
+@exception SQLException if a database access error occurs,
+ this method is called while participating in a distributed transaction,
+ this method is called on a closed connection
+            or this &lt;code&gt;Connection&lt;/code&gt; object is currently in
+            auto-commit mode
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@see Savepoint
+@since 1.4
+*/
+setSavepoint : function(  ) {},
+
+<span id='java-sql-Connection-method-setSavepoint'>/**Creates a savepoint with the given name in the current transaction
+</span> and returns the new &lt;code&gt;Savepoint&lt;/code&gt; object that represents it.
+
+ &lt;p&gt; if setSavepoint is invoked outside of an active transaction, a transaction will be started at this newly created
+savepoint.
+@param {String} name a &lt;code&gt;String&lt;/code&gt; containing the name of the savepoint
+@return {Object {java.sql.Savepoint}} the new &lt;code&gt;Savepoint&lt;/code&gt; object
+@exception SQLException if a database access error occurs,
+ this method is called while participating in a distributed transaction,
+ this method is called on a closed connection
+            or this &lt;code&gt;Connection&lt;/code&gt; object is currently in
+            auto-commit mode
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@see Savepoint
+@since 1.4
+*/
+setSavepoint : function(  ) {},
+
+<span id='java-sql-Connection-method-rollback'>/**Undoes all changes made after the given &lt;code&gt;Savepoint&lt;/code&gt; object
+</span> was set.
+ &lt;P&gt;
+ This method should be used only when auto-commit has been disabled.
+@param {Object {Savepoint}} savepoint the &lt;code&gt;Savepoint&lt;/code&gt; object to roll back to
+@exception SQLException if a database access error occurs,
+ this method is called while participating in a distributed transaction,
+ this method is called on a closed connection,
+            the &lt;code&gt;Savepoint&lt;/code&gt; object is no longer valid,
+            or this &lt;code&gt;Connection&lt;/code&gt; object is currently in
+            auto-commit mode
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@see Savepoint
+@see #rollback
+@since 1.4
+*/
+rollback : function(  ) {},
+
+<span id='java-sql-Connection-method-releaseSavepoint'>/**Removes the specified &lt;code&gt;Savepoint&lt;/code&gt;  and subsequent &lt;code&gt;Savepoint&lt;/code&gt; objects from the current
+</span> transaction. Any reference to the savepoint after it have been removed
+ will cause an &lt;code&gt;SQLException&lt;/code&gt; to be thrown.
+@param {Object {Savepoint}} savepoint the &lt;code&gt;Savepoint&lt;/code&gt; object to be removed
+@exception SQLException if a database access error occurs, this
+  method is called on a closed connection or
+            the given &lt;code&gt;Savepoint&lt;/code&gt; object is not a valid
+            savepoint in the current transaction
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.4
+*/
+releaseSavepoint : function(  ) {},
+
+<span id='java-sql-Connection-method-createStatement'>/**Creates a &lt;code&gt;Statement&lt;/code&gt; object that will generate
+</span> &lt;code&gt;ResultSet&lt;/code&gt; objects with the given type, concurrency,
+ and holdability.
+ This method is the same as the &lt;code&gt;createStatement&lt;/code&gt; method
+ above, but it allows the default result set
+ type, concurrency, and holdability to be overridden.
+@param {Number} resultSetType one of the following &lt;code&gt;ResultSet&lt;/code&gt;
+        constants:
+         &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+         &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+         &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@param {Number} resultSetConcurrency one of the following &lt;code&gt;ResultSet&lt;/code&gt;
+        constants:
+         &lt;code&gt;ResultSet.CONCUR_READ_ONLY&lt;/code&gt; or
+         &lt;code&gt;ResultSet.CONCUR_UPDATABLE&lt;/code&gt;
+@param {Number} resultSetHoldability one of the following &lt;code&gt;ResultSet&lt;/code&gt;
+        constants:
+         &lt;code&gt;ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code&gt; or
+         &lt;code&gt;ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code&gt;
+@return {Object {java.sql.Statement}} a new &lt;code&gt;Statement&lt;/code&gt; object that will generate
+         &lt;code&gt;ResultSet&lt;/code&gt; objects with the given type,
+         concurrency, and holdability
+@exception SQLException if a database access error occurs, this
+ method is called on a closed connection
+            or the given parameters are not &lt;code&gt;ResultSet&lt;/code&gt;
+            constants indicating type, concurrency, and holdability
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method or this method is not supported for the specified result
+ set type, result set holdability and result set concurrency.
+@see ResultSet
+@since 1.4
+*/
+createStatement : function(  ) {},
+
+<span id='java-sql-Connection-method-prepareStatement'>/**Creates a &lt;code&gt;PreparedStatement&lt;/code&gt; object that will generate
+</span> &lt;code&gt;ResultSet&lt;/code&gt; objects with the given type, concurrency,
+ and holdability.
+ &lt;P&gt;
+ This method is the same as the &lt;code&gt;prepareStatement&lt;/code&gt; method
+ above, but it allows the default result set
+ type, concurrency, and holdability to be overridden.
+@param {String} sql a &lt;code&gt;String&lt;/code&gt; object that is the SQL statement to
+            be sent to the database; may contain one or more '?' IN
+            parameters
+@param {Number} resultSetType one of the following &lt;code&gt;ResultSet&lt;/code&gt;
+        constants:
+         &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+         &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+         &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@param {Number} resultSetConcurrency one of the following &lt;code&gt;ResultSet&lt;/code&gt;
+        constants:
+         &lt;code&gt;ResultSet.CONCUR_READ_ONLY&lt;/code&gt; or
+         &lt;code&gt;ResultSet.CONCUR_UPDATABLE&lt;/code&gt;
+@param {Number} resultSetHoldability one of the following &lt;code&gt;ResultSet&lt;/code&gt;
+        constants:
+         &lt;code&gt;ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code&gt; or
+         &lt;code&gt;ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code&gt;
+@return {Object {java.sql.PreparedStatement}} a new &lt;code&gt;PreparedStatement&lt;/code&gt; object, containing the
+         pre-compiled SQL statement, that will generate
+         &lt;code&gt;ResultSet&lt;/code&gt; objects with the given type,
+         concurrency, and holdability
+@exception SQLException if a database access error occurs, this
+ method is called on a closed connection
+            or the given parameters are not &lt;code&gt;ResultSet&lt;/code&gt;
+            constants indicating type, concurrency, and holdability
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method or this method is not supported for the specified result
+ set type, result set holdability and result set concurrency.
+@see ResultSet
+@since 1.4
+*/
+prepareStatement : function(  ) {},
+
+<span id='java-sql-Connection-method-prepareCall'>/**Creates a &lt;code&gt;CallableStatement&lt;/code&gt; object that will generate
+</span> &lt;code&gt;ResultSet&lt;/code&gt; objects with the given type and concurrency.
+ This method is the same as the &lt;code&gt;prepareCall&lt;/code&gt; method
+ above, but it allows the default result set
+ type, result set concurrency type and holdability to be overridden.
+@param {String} sql a &lt;code&gt;String&lt;/code&gt; object that is the SQL statement to
+            be sent to the database; may contain on or more '?' parameters
+@param {Number} resultSetType one of the following &lt;code&gt;ResultSet&lt;/code&gt;
+        constants:
+         &lt;code&gt;ResultSet.TYPE_FORWARD_ONLY&lt;/code&gt;,
+         &lt;code&gt;ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code&gt;, or
+         &lt;code&gt;ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code&gt;
+@param {Number} resultSetConcurrency one of the following &lt;code&gt;ResultSet&lt;/code&gt;
+        constants:
+         &lt;code&gt;ResultSet.CONCUR_READ_ONLY&lt;/code&gt; or
+         &lt;code&gt;ResultSet.CONCUR_UPDATABLE&lt;/code&gt;
+@param {Number} resultSetHoldability one of the following &lt;code&gt;ResultSet&lt;/code&gt;
+        constants:
+         &lt;code&gt;ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code&gt; or
+         &lt;code&gt;ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code&gt;
+@return {Object {java.sql.CallableStatement}} a new &lt;code&gt;CallableStatement&lt;/code&gt; object, containing the
+         pre-compiled SQL statement, that will generate
+         &lt;code&gt;ResultSet&lt;/code&gt; objects with the given type,
+         concurrency, and holdability
+@exception SQLException if a database access error occurs, this
+ method is called on a closed connection
+            or the given parameters are not &lt;code&gt;ResultSet&lt;/code&gt;
+            constants indicating type, concurrency, and holdability
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method or this method is not supported for the specified result
+ set type, result set holdability and result set concurrency.
+@see ResultSet
+@since 1.4
+*/
+prepareCall : function(  ) {},
+
+<span id='java-sql-Connection-method-prepareStatement'>/**Creates a default &lt;code&gt;PreparedStatement&lt;/code&gt; object that has
+</span> the capability to retrieve auto-generated keys. The given constant
+ tells the driver whether it should make auto-generated keys
+ available for retrieval.  This parameter is ignored if the SQL statement
+ is not an &lt;code&gt;INSERT&lt;/code&gt; statement, or an SQL statement able to return
+ auto-generated keys (the list of such statements is vendor-specific).
+ &lt;P&gt;
+ &lt;B&gt;Note:&lt;/B&gt; This method is optimized for handling
+ parametric SQL statements that benefit from precompilation. If
+ the driver supports precompilation,
+ the method &lt;code&gt;prepareStatement&lt;/code&gt; will send
+ the statement to the database for precompilation. Some drivers
+ may not support precompilation. In this case, the statement may
+ not be sent to the database until the &lt;code&gt;PreparedStatement&lt;/code&gt;
+ object is executed.  This has no direct effect on users; however, it does
+ affect which methods throw certain SQLExceptions.
+ &lt;P&gt;
+ Result sets created using the returned &lt;code&gt;PreparedStatement&lt;/code&gt;
+ object will by default be type &lt;code&gt;TYPE_FORWARD_ONLY&lt;/code&gt;
+ and have a concurrency level of &lt;code&gt;CONCUR_READ_ONLY&lt;/code&gt;.
+ The holdability of the created result sets can be determined by
+ calling {@link #getHoldability}.
+@param {String} sql an SQL statement that may contain one or more '?' IN
+        parameter placeholders
+@param {Number} autoGeneratedKeys a flag indicating whether auto-generated keys
+        should be returned; one of
+        &lt;code&gt;Statement.RETURN_GENERATED_KEYS&lt;/code&gt; or
+        &lt;code&gt;Statement.NO_GENERATED_KEYS&lt;/code&gt;
+@return {Object {java.sql.PreparedStatement}} a new &lt;code&gt;PreparedStatement&lt;/code&gt; object, containing the
+         pre-compiled SQL statement, that will have the capability of
+         returning auto-generated keys
+@exception SQLException if a database access error occurs, this
+  method is called on a closed connection
+         or the given parameter is not a &lt;code&gt;Statement&lt;/code&gt;
+         constant indicating whether auto-generated keys should be
+         returned
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method with a constant of Statement.RETURN_GENERATED_KEYS
+@since 1.4
+*/
+prepareStatement : function(  ) {},
+
+<span id='java-sql-Connection-method-prepareStatement'>/**Creates a default &lt;code&gt;PreparedStatement&lt;/code&gt; object capable
+</span> of returning the auto-generated keys designated by the given array.
+ This array contains the indexes of the columns in the target
+ table that contain the auto-generated keys that should be made
+ available.  The driver will ignore the array if the SQL statement
+ is not an &lt;code&gt;INSERT&lt;/code&gt; statement, or an SQL statement able to return
+ auto-generated keys (the list of such statements is vendor-specific).
+&lt;p&gt;
+ An SQL statement with or without IN parameters can be
+ pre-compiled and stored in a &lt;code&gt;PreparedStatement&lt;/code&gt; object. This
+ object can then be used to efficiently execute this statement
+ multiple times.
+ &lt;P&gt;
+ &lt;B&gt;Note:&lt;/B&gt; This method is optimized for handling
+ parametric SQL statements that benefit from precompilation. If
+ the driver supports precompilation,
+ the method &lt;code&gt;prepareStatement&lt;/code&gt; will send
+ the statement to the database for precompilation. Some drivers
+ may not support precompilation. In this case, the statement may
+ not be sent to the database until the &lt;code&gt;PreparedStatement&lt;/code&gt;
+ object is executed.  This has no direct effect on users; however, it does
+ affect which methods throw certain SQLExceptions.
+ &lt;P&gt;
+ Result sets created using the returned &lt;code&gt;PreparedStatement&lt;/code&gt;
+ object will by default be type &lt;code&gt;TYPE_FORWARD_ONLY&lt;/code&gt;
+ and have a concurrency level of &lt;code&gt;CONCUR_READ_ONLY&lt;/code&gt;.
+ The holdability of the created result sets can be determined by
+ calling {@link #getHoldability}.
+@param {String} sql an SQL statement that may contain one or more '?' IN
+        parameter placeholders
+@param {Object {int[]}} columnIndexes an array of column indexes indicating the columns
+        that should be returned from the inserted row or rows
+@return {Object {java.sql.PreparedStatement}} a new &lt;code&gt;PreparedStatement&lt;/code&gt; object, containing the
+         pre-compiled statement, that is capable of returning the
+         auto-generated keys designated by the given array of column
+         indexes
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.4
+*/
+prepareStatement : function(  ) {},
+
+<span id='java-sql-Connection-method-prepareStatement'>/**Creates a default &lt;code&gt;PreparedStatement&lt;/code&gt; object capable
+</span> of returning the auto-generated keys designated by the given array.
+ This array contains the names of the columns in the target
+ table that contain the auto-generated keys that should be returned.
+ The driver will ignore the array if the SQL statement
+ is not an &lt;code&gt;INSERT&lt;/code&gt; statement, or an SQL statement able to return
+ auto-generated keys (the list of such statements is vendor-specific).
+ &lt;P&gt;
+ An SQL statement with or without IN parameters can be
+ pre-compiled and stored in a &lt;code&gt;PreparedStatement&lt;/code&gt; object. This
+ object can then be used to efficiently execute this statement
+ multiple times.
+ &lt;P&gt;
+ &lt;B&gt;Note:&lt;/B&gt; This method is optimized for handling
+ parametric SQL statements that benefit from precompilation. If
+ the driver supports precompilation,
+ the method &lt;code&gt;prepareStatement&lt;/code&gt; will send
+ the statement to the database for precompilation. Some drivers
+ may not support precompilation. In this case, the statement may
+ not be sent to the database until the &lt;code&gt;PreparedStatement&lt;/code&gt;
+ object is executed.  This has no direct effect on users; however, it does
+ affect which methods throw certain SQLExceptions.
+ &lt;P&gt;
+ Result sets created using the returned &lt;code&gt;PreparedStatement&lt;/code&gt;
+ object will by default be type &lt;code&gt;TYPE_FORWARD_ONLY&lt;/code&gt;
+ and have a concurrency level of &lt;code&gt;CONCUR_READ_ONLY&lt;/code&gt;.
+ The holdability of the created result sets can be determined by
+ calling {@link #getHoldability}.
+@param {String} sql an SQL statement that may contain one or more '?' IN
+        parameter placeholders
+@param {Object {java.lang.String[]}} columnNames an array of column names indicating the columns
+        that should be returned from the inserted row or rows
+@return {Object {java.sql.PreparedStatement}} a new &lt;code&gt;PreparedStatement&lt;/code&gt; object, containing the
+         pre-compiled statement, that is capable of returning the
+         auto-generated keys designated by the given array of column
+         names
+@exception SQLException if a database access error occurs
+ or this method is called on a closed connection
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.4
+*/
+prepareStatement : function(  ) {},
+
+<span id='java-sql-Connection-method-createClob'>/**Constructs an object that implements the &lt;code&gt;Clob&lt;/code&gt; interface. The object
+</span> returned initially contains no data.  The &lt;code&gt;setAsciiStream&lt;/code&gt;,
+ &lt;code&gt;setCharacterStream&lt;/code&gt; and &lt;code&gt;setString&lt;/code&gt; methods of
+ the &lt;code&gt;Clob&lt;/code&gt; interface may be used to add data to the &lt;code&gt;Clob&lt;/code&gt;.
+@return {Object {java.sql.Clob}} An object that implements the &lt;code&gt;Clob&lt;/code&gt; interface
+@throws SQLException if an object that implements the
+ &lt;code&gt;Clob&lt;/code&gt; interface can not be constructed, this method is
+ called on a closed connection or a database access error occurs.
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this data type
+@since 1.6
+*/
+createClob : function(  ) {},
+
+<span id='java-sql-Connection-method-createBlob'>/**Constructs an object that implements the &lt;code&gt;Blob&lt;/code&gt; interface. The object
+</span> returned initially contains no data.  The &lt;code&gt;setBinaryStream&lt;/code&gt; and
+ &lt;code&gt;setBytes&lt;/code&gt; methods of the &lt;code&gt;Blob&lt;/code&gt; interface may be used to add data to
+ the &lt;code&gt;Blob&lt;/code&gt;.
+@return {Object {java.sql.Blob}} An object that implements the &lt;code&gt;Blob&lt;/code&gt; interface
+@throws SQLException if an object that implements the
+ &lt;code&gt;Blob&lt;/code&gt; interface can not be constructed, this method is
+ called on a closed connection or a database access error occurs.
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this data type
+@since 1.6
+*/
+createBlob : function(  ) {},
+
+<span id='java-sql-Connection-method-createNClob'>/**Constructs an object that implements the &lt;code&gt;NClob&lt;/code&gt; interface. The object
+</span> returned initially contains no data.  The &lt;code&gt;setAsciiStream&lt;/code&gt;,
+ &lt;code&gt;setCharacterStream&lt;/code&gt; and &lt;code&gt;setString&lt;/code&gt; methods of the &lt;code&gt;NClob&lt;/code&gt; interface may
+ be used to add data to the &lt;code&gt;NClob&lt;/code&gt;.
+@return {Object {java.sql.NClob}} An object that implements the &lt;code&gt;NClob&lt;/code&gt; interface
+@throws SQLException if an object that implements the
+ &lt;code&gt;NClob&lt;/code&gt; interface can not be constructed, this method is
+ called on a closed connection or a database access error occurs.
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this data type
+@since 1.6
+*/
+createNClob : function(  ) {},
+
+<span id='java-sql-Connection-method-createSQLXML'>/**Constructs an object that implements the &lt;code&gt;SQLXML&lt;/code&gt; interface. The object
+</span> returned initially contains no data. The &lt;code&gt;createXmlStreamWriter&lt;/code&gt; object and
+ &lt;code&gt;setString&lt;/code&gt; method of the &lt;code&gt;SQLXML&lt;/code&gt; interface may be used to add data to the &lt;code&gt;SQLXML&lt;/code&gt;
+ object.
+@return {Object {java.sql.SQLXML}} An object that implements the &lt;code&gt;SQLXML&lt;/code&gt; interface
+@throws SQLException if an object that implements the &lt;code&gt;SQLXML&lt;/code&gt; interface can not
+ be constructed, this method is
+ called on a closed connection or a database access error occurs.
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this data type
+@since 1.6
+*/
+createSQLXML : function(  ) {},
+
+<span id='java-sql-Connection-method-isValid'>/**Returns true if the connection has not been closed and is still valid.
+</span> The driver shall submit a query on the connection or use some other
+ mechanism that positively verifies the connection is still valid when
+ this method is called.
+ &lt;p&gt;
+ The query submitted by the driver to validate the connection shall be
+ executed in the context of the current transaction.
+@param {Number} timeout -             The time in seconds to wait for the database operation
+                                              used to validate the connection to complete.  If
+                                              the timeout period expires before the operation
+                                              completes, this method returns false.  A value of
+                                              0 indicates a timeout is not applied to the
+                                              database operation.
+ &lt;p&gt;
+@return {Boolean} true if the connection is valid, false otherwise
+@exception SQLException if the value supplied for &lt;code&gt;timeout&lt;/code&gt;
+ is less then 0
+@since 1.6
+ &lt;p&gt;
+@see java.sql.DatabaseMetaData#getClientInfoProperties
+*/
+isValid : function(  ) {},
+
+<span id='java-sql-Connection-method-setClientInfo'>/**Sets the value of the client info property specified by name to the
+</span> value specified by value.
+ &lt;p&gt;
+ Applications may use the &lt;code&gt;DatabaseMetaData.getClientInfoProperties&lt;/code&gt;
+ method to determine the client info properties supported by the driver
+ and the maximum length that may be specified for each property.
+ &lt;p&gt;
+ The driver stores the value specified in a suitable location in the
+ database.  For example in a special register, session parameter, or
+ system table column.  For efficiency the driver may defer setting the
+ value in the database until the next time a statement is executed or
+ prepared.  Other than storing the client information in the appropriate
+ place in the database, these methods shall not alter the behavior of
+ the connection in anyway.  The values supplied to these methods are
+ used for accounting, diagnostics and debugging purposes only.
+ &lt;p&gt;
+ The driver shall generate a warning if the client info name specified
+ is not recognized by the driver.
+ &lt;p&gt;
+ If the value specified to this method is greater than the maximum
+ length for the property the driver may either truncate the value and
+ generate a warning or generate a &lt;code&gt;SQLClientInfoException&lt;/code&gt;.  If the driver
+ generates a &lt;code&gt;SQLClientInfoException&lt;/code&gt;, the value specified was not set on the
+ connection.
+ &lt;p&gt;
+ The following are standard client info properties.  Drivers are not
+ required to support these properties however if the driver supports a
+ client info property that can be described by one of the standard
+ properties, the standard property name should be used.
+ &lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;ApplicationName  -       The name of the application currently utilizing
+                                                      the connection&lt;/li&gt;
+ &lt;li&gt;ClientUser               -       The name of the user that the application using
+                                                      the connection is performing work for.  This may
+                                                      not be the same as the user name that was used
+                                                      in establishing the connection.&lt;/li&gt;
+ &lt;li&gt;ClientHostname   -       The hostname of the computer the application
+                                                      using the connection is running on.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+@param {String} name          The name of the client info property to set
+@param {String} value         The value to set the client info property to.  If the
+                                      value is null, the current value of the specified
+                                      property is cleared.
+ &lt;p&gt;
+@throws SQLClientInfoException if the database server returns an error while
+                      setting the client info value on the database server or this method
+ is called on a closed connection
+ &lt;p&gt;
+@since 1.6
+*/
+setClientInfo : function(  ) {},
+
+<span id='java-sql-Connection-method-setClientInfo'>/**Sets the value of the connection's client info properties.  The
+</span> &lt;code&gt;Properties&lt;/code&gt; object contains the names and values of the client info
+ properties to be set.  The set of client info properties contained in
+ the properties list replaces the current set of client info properties
+ on the connection.  If a property that is currently set on the
+ connection is not present in the properties list, that property is
+ cleared.  Specifying an empty properties list will clear all of the
+ properties on the connection.  See &lt;code&gt;setClientInfo (String, String)&lt;/code&gt; for
+ more information.
+ &lt;p&gt;
+ If an error occurs in setting any of the client info properties, a
+ &lt;code&gt;SQLClientInfoException&lt;/code&gt; is thrown. The &lt;code&gt;SQLClientInfoException&lt;/code&gt;
+ contains information indicating which client info properties were not set.
+ The state of the client information is unknown because
+ some databases do not allow multiple client info properties to be set
+ atomically.  For those databases, one or more properties may have been
+ set before the error occurred.
+ &lt;p&gt;
+@param {Object {Properties}} properties                the list of client info properties to set
+ &lt;p&gt;
+@see java.sql.Connection#setClientInfo(String, String) setClientInfo(String, String)
+@since 1.6
+ &lt;p&gt;
+@throws SQLClientInfoException if the database server returns an error while
+                  setting the clientInfo values on the database server or this method
+ is called on a closed connection
+ &lt;p&gt;
+*/
+setClientInfo : function(  ) {},
+
+<span id='java-sql-Connection-method-getClientInfo'>/**Returns the value of the client info property specified by name.  This
+</span> method may return null if the specified client info property has not
+ been set and does not have a default value.  This method will also
+ return null if the specified client info property name is not supported
+ by the driver.
+ &lt;p&gt;
+ Applications may use the &lt;code&gt;DatabaseMetaData.getClientInfoProperties&lt;/code&gt;
+ method to determine the client info properties supported by the driver.
+ &lt;p&gt;
+@param {String} name          The name of the client info property to retrieve
+ &lt;p&gt;
+@return {String} The value of the client info property specified
+ &lt;p&gt;
+@throws SQLException         if the database server returns an error when
+                                                      fetching the client info value from the database
+or this method is called on a closed connection
+ &lt;p&gt;
+@since 1.6
+ &lt;p&gt;
+@see java.sql.DatabaseMetaData#getClientInfoProperties
+*/
+getClientInfo : function(  ) {},
+
+<span id='java-sql-Connection-method-getClientInfo'>/**Returns a list containing the name and current value of each client info
+</span> property supported by the driver.  The value of a client info property
+ may be null if the property has not been set and does not have a
+ default value.
+ &lt;p&gt;
+@return {Object {java.util.Properties}} A &lt;code&gt;Properties&lt;/code&gt; object that contains the name and current value of
+                      each of the client info properties supported by the driver.
+ &lt;p&gt;
+@throws SQLException if the database server returns an error when
+                      fetching the client info values from the database
+ or this method is called on a closed connection
+ &lt;p&gt;
+@since 1.6
+*/
+getClientInfo : function(  ) {},
+
+<span id='java-sql-Connection-method-createArrayOf'>/**Factory method for creating Array objects.
+</span>&lt;p&gt;
+ &lt;b&gt;Note: &lt;/b&gt;When &lt;code&gt;createArrayOf&lt;/code&gt; is used to create an array object
+ that maps to a primitive data type, then it is implementation-defined
+ whether the &lt;code&gt;Array&lt;/code&gt; object is an array of that primitive
+ data type or an array of &lt;code&gt;Object&lt;/code&gt;.
+ &lt;p&gt;
+ &lt;b&gt;Note: &lt;/b&gt;The JDBC driver is responsible for mapping the elements
+ &lt;code&gt;Object&lt;/code&gt; array to the default JDBC SQL type defined in
+ java.sql.Types for the given class of &lt;code&gt;Object&lt;/code&gt;. The default
+ mapping is specified in Appendix B of the JDBC specification.  If the
+ resulting JDBC type is not the appropriate type for the given typeName then
+ it is implementation defined whether an &lt;code&gt;SQLException&lt;/code&gt; is
+ thrown or the driver supports the resulting conversion.
+@param {String} typeName the SQL name of the type the elements of the array map to. The typeName is a
+ database-specific name which may be the name of a built-in type, a user-defined type or a standard  SQL type supported by this database. This
+  is the value returned by &lt;code&gt;Array.getBaseTypeName&lt;/code&gt;
+@param {Object {java.lang.Object[]}} elements the elements that populate the returned object
+@return {Object {java.sql.Array}} an Array object whose elements map to the specified SQL type
+@throws SQLException if a database error occurs, the JDBC type is not
+  appropriate for the typeName and the conversion is not supported, the typeName is null or this method is called on a closed connection
+@throws SQLFeatureNotSupportedException  if the JDBC driver does not support this data type
+@since 1.6
+*/
+createArrayOf : function(  ) {},
+
+<span id='java-sql-Connection-method-createStruct'>/**Factory method for creating Struct objects.
+</span>@param {String} typeName the SQL type name of the SQL structured type that this &lt;code&gt;Struct&lt;/code&gt;
+ object maps to. The typeName is the name of  a user-defined type that
+ has been defined for this database. It is the value returned by
+ &lt;code&gt;Struct.getSQLTypeName&lt;/code&gt;.
+@param {Object {java.lang.Object[]}} attributes the attributes that populate the returned object
+@return {Object {java.sql.Struct}} a Struct object that maps to the given SQL type and is populated with the given attributes
+@throws SQLException if a database error occurs, the typeName is null or this method is called on a closed connection
+@throws SQLFeatureNotSupportedException  if the JDBC driver does not support this data type
+@since 1.6
+*/
+createStruct : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

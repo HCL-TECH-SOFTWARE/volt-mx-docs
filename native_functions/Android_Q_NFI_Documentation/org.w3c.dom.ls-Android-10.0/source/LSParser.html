@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-w3c-dom-ls-LSParser'>/**@class org.w3c.dom.ls.LSParser
+</span>  An interface to an object that is able to build, or augment, a DOM tree
+ from various input sources.
+ &lt;p&gt; &lt;code&gt;LSParser&lt;/code&gt; provides an API for parsing XML and building the
+ corresponding DOM document structure. A &lt;code&gt;LSParser&lt;/code&gt; instance
+ can be obtained by invoking the
+ &lt;code&gt;DOMImplementationLS.createLSParser()&lt;/code&gt; method.
+ &lt;p&gt; As specified in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ , when a document is first made available via the LSParser:
+ &lt;ul&gt;
+ &lt;li&gt; there will
+ never be two adjacent nodes of type NODE_TEXT, and there will never be
+ empty text nodes.
+ &lt;/li&gt;
+ &lt;li&gt; it is expected that the &lt;code&gt;value&lt;/code&gt; and
+ &lt;code&gt;nodeValue&lt;/code&gt; attributes of an &lt;code&gt;Attr&lt;/code&gt; node initially
+ return the &lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204#AVNormalize'&gt;XML 1.0
+ normalized value&lt;/a&gt;. However, if the parameters &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-validate-if-schema'&gt;
+ validate-if-schema&lt;/a&gt;&quot; and &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-datatype-normalization'&gt;
+ datatype-normalization&lt;/a&gt;&quot; are set to &lt;code&gt;true&lt;/code&gt;, depending on the attribute normalization
+ used, the attribute values may differ from the ones obtained by the XML
+ 1.0 attribute normalization. If the parameters &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-datatype-normalization'&gt;
+ datatype-normalization&lt;/a&gt;&quot; is set to &lt;code&gt;false&lt;/code&gt;, the XML 1.0 attribute normalization is
+ guaranteed to occur, and if the attributes list does not contain
+ namespace declarations, the &lt;code&gt;attributes&lt;/code&gt; attribute on
+ &lt;code&gt;Element&lt;/code&gt; node represents the property &lt;b&gt;[attributes]&lt;/b&gt; defined in [&lt;a href='http://www.w3.org/TR/2004/REC-xml-infoset-20040204/'&gt;XML Information Set&lt;/a&gt;]
+ .
+ &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt; Asynchronous &lt;code&gt;LSParser&lt;/code&gt; objects are expected to also
+ implement the &lt;code&gt;events::EventTarget&lt;/code&gt; interface so that event
+ listeners can be registered on asynchronous &lt;code&gt;LSParser&lt;/code&gt;
+ objects.
+ &lt;p&gt; Events supported by asynchronous &lt;code&gt;LSParser&lt;/code&gt; objects are:
+ &lt;dl&gt;
+ &lt;dt&gt;load&lt;/dt&gt;
+ &lt;dd&gt;
+  The &lt;code&gt;LSParser&lt;/code&gt; finishes to load the document. See also the
+ definition of the &lt;code&gt;LSLoadEvent&lt;/code&gt; interface. &lt;/dd&gt;
+ &lt;dt&gt;progress&lt;/dt&gt;
+ &lt;dd&gt; The
+ &lt;code&gt;LSParser&lt;/code&gt; signals progress as data is parsed.  This
+ specification does not attempt to define exactly when progress events
+ should be dispatched. That is intentionally left as
+ implementation-dependent. Here is one example of how an application might
+ dispatch progress events: Once the parser starts receiving data, a
+ progress event is dispatched to indicate that the parsing starts. From
+ there on, a progress event is dispatched for every 4096 bytes of data
+ that is received and processed. This is only one example, though, and
+ implementations can choose to dispatch progress events at any time while
+ parsing, or not dispatch them at all.  See also the definition of the
+ &lt;code&gt;LSProgressEvent&lt;/code&gt; interface. &lt;/dd&gt;
+ &lt;/dl&gt;
+ &lt;p &gt;&lt;b&gt;Note:&lt;/b&gt;  All events defined in this specification use the
+ namespace URI &lt;code&gt;&quot;http://www.w3.org/2002/DOMLS&quot;&lt;/code&gt;.
+ &lt;p&gt; While parsing an input source, errors are reported to the application
+ through the error handler (&lt;code&gt;LSParser.domConfig&lt;/code&gt;'s &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-error-handler'&gt;
+ error-handler&lt;/a&gt;&quot; parameter). This specification does in no way try to define all possible
+ errors that can occur while parsing XML, or any other markup, but some
+ common error cases are defined. The types (&lt;code&gt;DOMError.type&lt;/code&gt;) of
+ errors and warnings defined by this specification are:
+ &lt;dl&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;check-character-normalization-failure&quot; [error]&lt;/code&gt; &lt;/dt&gt;
+ &lt;dd&gt; Raised if
+ the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-check-character-normalization'&gt;
+ check-character-normalization&lt;/a&gt;&quot; is set to true and a string is encountered that fails normalization
+ checking. &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;doctype-not-allowed&quot; [fatal]&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; Raised if the
+ configuration parameter &quot;disallow-doctype&quot; is set to &lt;code&gt;true&lt;/code&gt;
+ and a doctype is encountered. &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;no-input-specified&quot; [fatal]&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ Raised when loading a document and no input is specified in the
+ &lt;code&gt;LSInput&lt;/code&gt; object. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;pi-base-uri-not-preserved&quot; [warning]&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; Raised if a processing
+ instruction is encountered in a location where the base URI of the
+ processing instruction can not be preserved.  One example of a case where
+ this warning will be raised is if the configuration parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-entities'&gt;
+ entities&lt;/a&gt;&quot; is set to &lt;code&gt;false&lt;/code&gt; and the following XML file is parsed:
+ &lt;pre&gt;
+ &amp;lt;!DOCTYPE root [ &amp;lt;!ENTITY e SYSTEM 'subdir/myentity.ent' ]&amp;gt;
+ &amp;lt;root&amp;gt; &amp;amp;e; &amp;lt;/root&amp;gt;&lt;/pre&gt;
+  And &lt;code&gt;subdir/myentity.ent&lt;/code&gt;
+ contains:
+ &lt;pre&gt;&amp;lt;one&amp;gt; &amp;lt;two/&amp;gt; &amp;lt;/one&amp;gt; &amp;lt;?pi 3.14159?&amp;gt;
+ &amp;lt;more/&amp;gt;&lt;/pre&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;unbound-prefix-in-entity&quot; [warning]&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; An
+ implementation dependent warning that may be raised if the configuration
+ parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-namespaces'&gt;
+ namespaces&lt;/a&gt;&quot; is set to &lt;code&gt;true&lt;/code&gt; and an unbound namespace prefix is
+ encountered in an entity's replacement text. Raising this warning is not
+ enforced since some existing parsers may not recognize unbound namespace
+ prefixes in the replacement text of entities. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;unknown-character-denormalization&quot; [fatal]&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; Raised if the
+ configuration parameter &quot;ignore-unknown-character-denormalizations&quot; is
+ set to &lt;code&gt;false&lt;/code&gt; and a character is encountered for which the
+ processor cannot determine the normalization properties. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;unsupported-encoding&quot; [fatal]&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; Raised if an unsupported
+ encoding is encountered. &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;unsupported-media-type&quot; [fatal]&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ Raised if the configuration parameter &quot;supported-media-types-only&quot; is set
+ to &lt;code&gt;true&lt;/code&gt; and an unsupported media type is encountered. &lt;/dd&gt;
+ &lt;/dl&gt;
+ &lt;p&gt; In addition to raising the defined errors and warnings, implementations
+ are expected to raise implementation specific errors and warnings for any
+ other error and warning cases such as IO errors (file not found,
+ permission denied,...), XML well-formedness errors, and so on.
+ &lt;p&gt;See also the &lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407'&gt;Document Object Model (DOM) Level 3 Load
+and Save Specification&lt;/a&gt;.
+*/
+var LSParser = {
+
+<span id='org-w3c-dom-ls-LSParser-property-ACTION_APPEND_AS_CHILDREN'>/**  Append the result of the parse operation as children of the context
+</span> node. For this action to work, the context node must be an
+ &lt;code&gt;Element&lt;/code&gt; or a &lt;code&gt;DocumentFragment&lt;/code&gt;.
+*/
+ACTION_APPEND_AS_CHILDREN : &quot;1&quot;,
+<span id='org-w3c-dom-ls-LSParser-property-ACTION_REPLACE_CHILDREN'>/**  Replace all the children of the context node with the result of the
+</span> parse operation. For this action to work, the context node must be an
+ &lt;code&gt;Element&lt;/code&gt;, a &lt;code&gt;Document&lt;/code&gt;, or a
+ &lt;code&gt;DocumentFragment&lt;/code&gt;.
+*/
+ACTION_REPLACE_CHILDREN : &quot;2&quot;,
+<span id='org-w3c-dom-ls-LSParser-property-ACTION_INSERT_BEFORE'>/**  Insert the result of the parse operation as the immediately preceding
+</span> sibling of the context node. For this action to work the context
+ node's parent must be an &lt;code&gt;Element&lt;/code&gt; or a
+ &lt;code&gt;DocumentFragment&lt;/code&gt;.
+*/
+ACTION_INSERT_BEFORE : &quot;3&quot;,
+<span id='org-w3c-dom-ls-LSParser-property-ACTION_INSERT_AFTER'>/**  Insert the result of the parse operation as the immediately following
+</span> sibling of the context node. For this action to work the context
+ node's parent must be an &lt;code&gt;Element&lt;/code&gt; or a
+ &lt;code&gt;DocumentFragment&lt;/code&gt;.
+*/
+ACTION_INSERT_AFTER : &quot;4&quot;,
+<span id='org-w3c-dom-ls-LSParser-property-ACTION_REPLACE'>/**  Replace the context node with the result of the parse operation. For
+</span> this action to work, the context node must have a parent, and the
+ parent must be an &lt;code&gt;Element&lt;/code&gt; or a
+ &lt;code&gt;DocumentFragment&lt;/code&gt;.
+*/
+ACTION_REPLACE : &quot;5&quot;,
+<span id='org-w3c-dom-ls-LSParser-method-getDomConfig'>/**The &lt;code&gt;DOMConfiguration&lt;/code&gt; object used when parsing an input
+</span> source. This &lt;code&gt;DOMConfiguration&lt;/code&gt; is specific to the parse
+ operation. No parameter values from this &lt;code&gt;DOMConfiguration&lt;/code&gt;
+  object are passed automatically to the &lt;code&gt;DOMConfiguration&lt;/code&gt;
+ object on the &lt;code&gt;Document&lt;/code&gt; that is created, or used, by the
+ parse operation. The DOM application is responsible for passing any
+ needed parameter values from this &lt;code&gt;DOMConfiguration&lt;/code&gt;
+ object to the &lt;code&gt;DOMConfiguration&lt;/code&gt; object referenced by the
+ &lt;code&gt;Document&lt;/code&gt; object.
+ &lt;br&gt; In addition to the parameters recognized in on the &lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMConfiguration'&gt;
+ DOMConfiguration&lt;/a&gt; interface defined in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ , the &lt;code&gt;DOMConfiguration&lt;/code&gt; objects for &lt;code&gt;LSParser&lt;/code&gt;
+ add or modify the following parameters:
+ &lt;dl&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;charset-overrides-xml-encoding&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;true&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;optional&lt;/em&gt;] (&lt;em&gt;default&lt;/em&gt;) If a higher level protocol such as HTTP [&lt;a href='http://www.ietf.org/rfc/rfc2616.txt'&gt;IETF RFC 2616&lt;/a&gt;] provides an
+ indication of the character encoding of the input stream being
+ processed, that will override any encoding specified in the XML
+ declaration or the Text declaration (see also section 4.3.3,
+ &quot;Character Encoding in Entities&quot;, in [&lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204'&gt;XML 1.0&lt;/a&gt;]).
+ Explicitly setting an encoding in the &lt;code&gt;LSInput&lt;/code&gt; overrides
+ any encoding from the protocol. &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;false&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] The parser ignores any character set encoding information from
+ higher-level protocols. &lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;disallow-doctype&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;
+ &lt;code&gt;true&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;optional&lt;/em&gt;] Throw a fatal &lt;b&gt;&quot;doctype-not-allowed&quot;&lt;/b&gt; error if a doctype node is found while parsing the document. This is
+ useful when dealing with things like SOAP envelopes where doctype
+ nodes are not allowed. &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;false&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] (&lt;em&gt;default&lt;/em&gt;) Allow doctype nodes in the document. &lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;ignore-unknown-character-denormalizations&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;
+ &lt;code&gt;true&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] (&lt;em&gt;default&lt;/em&gt;) If, while verifying full normalization when [&lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/'&gt;XML 1.1&lt;/a&gt;] is
+ supported, a processor encounters characters for which it cannot
+ determine the normalization properties, then the processor will
+ ignore any possible denormalizations caused by these characters.
+ This parameter is ignored for [&lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204'&gt;XML 1.0&lt;/a&gt;]. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;false&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;optional&lt;/em&gt;] Report an fatal &lt;b&gt;&quot;unknown-character-denormalization&quot;&lt;/b&gt; error if a character is encountered for which the processor cannot
+ determine the normalization properties. &lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;infoset&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; See
+ the definition of &lt;code&gt;DOMConfiguration&lt;/code&gt; for a description of
+ this parameter. Unlike in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ , this parameter will default to &lt;code&gt;true&lt;/code&gt; for
+ &lt;code&gt;LSParser&lt;/code&gt;. &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;namespaces&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;true&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] (&lt;em&gt;default&lt;/em&gt;) Perform the namespace processing as defined in [&lt;a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'&gt;XML Namespaces&lt;/a&gt;]
+  and [&lt;a href='http://www.w3.org/TR/2004/REC-xml-names11-20040204/'&gt;XML Namespaces 1.1&lt;/a&gt;]
+ . &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;false&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;optional&lt;/em&gt;] Do not perform the namespace processing. &lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;resource-resolver&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] A reference to a &lt;code&gt;LSResourceResolver&lt;/code&gt; object, or null. If
+ the value of this parameter is not null when an external resource
+ (such as an external XML entity or an XML schema location) is
+ encountered, the implementation will request that the
+ &lt;code&gt;LSResourceResolver&lt;/code&gt; referenced in this parameter resolves
+ the resource. &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;supported-media-types-only&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;
+ &lt;code&gt;true&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;optional&lt;/em&gt;] Check that the media type of the parsed resource is a supported media
+ type. If an unsupported media type is encountered, a fatal error of
+ type &lt;b&gt;&quot;unsupported-media-type&quot;&lt;/b&gt; will be raised. The media types defined in [&lt;a href='http://www.ietf.org/rfc/rfc3023.txt'&gt;IETF RFC 3023&lt;/a&gt;] must always
+ be accepted. &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;false&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] (&lt;em&gt;default&lt;/em&gt;) Accept any media type. &lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;validate&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; See the definition of
+ &lt;code&gt;DOMConfiguration&lt;/code&gt; for a description of this parameter.
+ Unlike in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ , the processing of the internal subset is always accomplished, even
+ if this parameter is set to &lt;code&gt;false&lt;/code&gt;. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;validate-if-schema&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; See the definition of
+ &lt;code&gt;DOMConfiguration&lt;/code&gt; for a description of this parameter.
+ Unlike in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ , the processing of the internal subset is always accomplished, even
+ if this parameter is set to &lt;code&gt;false&lt;/code&gt;. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;well-formed&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; See the definition of
+ &lt;code&gt;DOMConfiguration&lt;/code&gt; for a description of this parameter.
+ Unlike in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ , this parameter cannot be set to &lt;code&gt;false&lt;/code&gt;. &lt;/dd&gt;
+ &lt;/dl&gt;
+*/
+getDomConfig : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSParser-method-getFilter'>/**When a filter is provided, the implementation will call out to the
+</span> filter as it is constructing the DOM tree structure. The filter can
+ choose to remove elements from the document being constructed, or to
+ terminate the parsing early.
+ &lt;br&gt; The filter is invoked after the operations requested by the
+ &lt;code&gt;DOMConfiguration&lt;/code&gt; parameters have been applied. For
+ example, if &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-validate'&gt;
+ validate&lt;/a&gt;&quot; is set to &lt;code&gt;true&lt;/code&gt;, the validation is done before invoking the
+ filter.
+*/
+getFilter : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSParser-method-setFilter'>/**When a filter is provided, the implementation will call out to the
+</span> filter as it is constructing the DOM tree structure. The filter can
+ choose to remove elements from the document being constructed, or to
+ terminate the parsing early.
+ &lt;br&gt; The filter is invoked after the operations requested by the
+ &lt;code&gt;DOMConfiguration&lt;/code&gt; parameters have been applied. For
+ example, if &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-validate'&gt;
+ validate&lt;/a&gt;&quot; is set to &lt;code&gt;true&lt;/code&gt;, the validation is done before invoking the
+ filter.
+*/
+setFilter : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSParser-method-getAsync'>/**&lt;code&gt;true&lt;/code&gt; if the &lt;code&gt;LSParser&lt;/code&gt; is asynchronous,
+</span> &lt;code&gt;false&lt;/code&gt; if it is synchronous.
+*/
+getAsync : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSParser-method-getBusy'>/**&lt;code&gt;true&lt;/code&gt; if the &lt;code&gt;LSParser&lt;/code&gt; is currently busy
+</span> loading a document, otherwise &lt;code&gt;false&lt;/code&gt;.
+*/
+getBusy : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSParser-method-parse'>/**Parse an XML document from a resource identified by a
+</span> &lt;code&gt;LSInput&lt;/code&gt;.
+@param {Object {LSInput}} input  The &lt;code&gt;LSInput&lt;/code&gt; from which the source of the
+   document is to be read.
+@return {Object {org.w3c.dom.Document}} If the &lt;code&gt;LSParser&lt;/code&gt; is a synchronous
+   &lt;code&gt;LSParser&lt;/code&gt;, the newly created and populated
+   &lt;code&gt;Document&lt;/code&gt; is returned. If the &lt;code&gt;LSParser&lt;/code&gt; is
+   asynchronous, &lt;code&gt;null&lt;/code&gt; is returned since the document
+   object may not yet be constructed when this method returns.
+@exception DOMException
+    INVALID_STATE_ERR: Raised if the &lt;code&gt;LSParser&lt;/code&gt;'s
+   &lt;code&gt;LSParser.busy&lt;/code&gt; attribute is &lt;code&gt;true&lt;/code&gt;.
+@exception LSException
+    PARSE_ERR: Raised if the &lt;code&gt;LSParser&lt;/code&gt; was unable to load
+   the XML document. DOM applications should attach a
+   &lt;code&gt;DOMErrorHandler&lt;/code&gt; using the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-error-handler'&gt;
+   error-handler&lt;/a&gt;&quot; if they wish to get details on the error.
+*/
+parse : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSParser-method-parseURI'>/**Parse an XML document from a location identified by a URI reference [&lt;a href='http://www.ietf.org/rfc/rfc2396.txt'&gt;IETF RFC 2396&lt;/a&gt;]. If the URI
+</span> contains a fragment identifier (see section 4.1 in [&lt;a href='http://www.ietf.org/rfc/rfc2396.txt'&gt;IETF RFC 2396&lt;/a&gt;]), the
+ behavior is not defined by this specification, future versions of
+ this specification may define the behavior.
+@param {String} uri The location of the XML document to be read.
+@return {Object {org.w3c.dom.Document}} If the &lt;code&gt;LSParser&lt;/code&gt; is a synchronous
+   &lt;code&gt;LSParser&lt;/code&gt;, the newly created and populated
+   &lt;code&gt;Document&lt;/code&gt; is returned, or &lt;code&gt;null&lt;/code&gt; if an error
+   occured. If the &lt;code&gt;LSParser&lt;/code&gt; is asynchronous,
+   &lt;code&gt;null&lt;/code&gt; is returned since the document object may not yet
+   be constructed when this method returns.
+@exception DOMException
+    INVALID_STATE_ERR: Raised if the &lt;code&gt;LSParser.busy&lt;/code&gt;
+   attribute is &lt;code&gt;true&lt;/code&gt;.
+@exception LSException
+    PARSE_ERR: Raised if the &lt;code&gt;LSParser&lt;/code&gt; was unable to load
+   the XML document. DOM applications should attach a
+   &lt;code&gt;DOMErrorHandler&lt;/code&gt; using the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-error-handler'&gt;
+   error-handler&lt;/a&gt;&quot; if they wish to get details on the error.
+*/
+parseURI : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSParser-method-parseWithContext'>/**Parse an XML fragment from a resource identified by a
+</span> &lt;code&gt;LSInput&lt;/code&gt; and insert the content into an existing document
+ at the position specified with the &lt;code&gt;context&lt;/code&gt; and
+ &lt;code&gt;action&lt;/code&gt; arguments. When parsing the input stream, the
+ context node (or its parent, depending on where the result will be
+ inserted) is used for resolving unbound namespace prefixes. The
+ context node's &lt;code&gt;ownerDocument&lt;/code&gt; node (or the node itself if
+ the node of type &lt;code&gt;DOCUMENT_NODE&lt;/code&gt;) is used to resolve
+ default attributes and entity references.
+ &lt;br&gt; As the new data is inserted into the document, at least one
+ mutation event is fired per new immediate child or sibling of the
+ context node.
+ &lt;br&gt; If the context node is a &lt;code&gt;Document&lt;/code&gt; node and the action
+ is &lt;code&gt;ACTION_REPLACE_CHILDREN&lt;/code&gt;, then the document that is
+ passed as the context node will be changed such that its
+ &lt;code&gt;xmlEncoding&lt;/code&gt;, &lt;code&gt;documentURI&lt;/code&gt;,
+ &lt;code&gt;xmlVersion&lt;/code&gt;, &lt;code&gt;inputEncoding&lt;/code&gt;,
+ &lt;code&gt;xmlStandalone&lt;/code&gt;, and all other such attributes are set to
+ what they would be set to if the input source was parsed using
+ &lt;code&gt;LSParser.parse()&lt;/code&gt;.
+ &lt;br&gt; This method is always synchronous, even if the
+ &lt;code&gt;LSParser&lt;/code&gt; is asynchronous (&lt;code&gt;LSParser.async&lt;/code&gt; is
+ &lt;code&gt;true&lt;/code&gt;).
+ &lt;br&gt; If an error occurs while parsing, the caller is notified through
+ the &lt;code&gt;ErrorHandler&lt;/code&gt; instance associated with the &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-error-handler'&gt;
+ error-handler&lt;/a&gt;&quot; parameter of the &lt;code&gt;DOMConfiguration&lt;/code&gt;.
+ &lt;br&gt; When calling &lt;code&gt;parseWithContext&lt;/code&gt;, the values of the
+ following configuration parameters will be ignored and their default
+ values will always be used instead: &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-validate'&gt;
+ validate&lt;/a&gt;&quot;, &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-validate-if-schema'&gt;
+ validate-if-schema&lt;/a&gt;&quot;, and &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-element-content-whitespace'&gt;
+ element-content-whitespace&lt;/a&gt;&quot;. Other parameters will be treated normally, and the parser is expected
+ to call the &lt;code&gt;LSParserFilter&lt;/code&gt; just as if a whole document
+ was parsed.
+@param {Object {LSInput}} input  The &lt;code&gt;LSInput&lt;/code&gt; from which the source document
+   is to be read. The source document must be an XML fragment, i.e.
+   anything except a complete XML document (except in the case where
+   the context node of type &lt;code&gt;DOCUMENT_NODE&lt;/code&gt;, and the action
+   is &lt;code&gt;ACTION_REPLACE_CHILDREN&lt;/code&gt;), a DOCTYPE (internal
+   subset), entity declaration(s), notation declaration(s), or XML or
+   text declaration(s).
+@param {Object {Node}} contextArg  The node that is used as the context for the data
+   that is being parsed. This node must be a &lt;code&gt;Document&lt;/code&gt;
+   node, a &lt;code&gt;DocumentFragment&lt;/code&gt; node, or a node of a type
+   that is allowed as a child of an &lt;code&gt;Element&lt;/code&gt; node, e.g. it
+   cannot be an &lt;code&gt;Attribute&lt;/code&gt; node.
+@param {Number} action  This parameter describes which action should be taken
+   between the new set of nodes being inserted and the existing
+   children of the context node. The set of possible actions is
+   defined in &lt;code&gt;ACTION_TYPES&lt;/code&gt; above.
+@return {Object {org.w3c.dom.Node}} Return the node that is the result of the parse operation. If
+   the result is more than one top-level node, the first one is
+   returned.
+@exception DOMException
+   HIERARCHY_REQUEST_ERR: Raised if the content cannot replace, be
+   inserted before, after, or as a child of the context node (see also
+   &lt;code&gt;Node.insertBefore&lt;/code&gt; or &lt;code&gt;Node.replaceChild&lt;/code&gt; in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+   ).
+   &lt;br&gt; NOT_SUPPORTED_ERR: Raised if the &lt;code&gt;LSParser&lt;/code&gt; doesn't
+   support this method, or if the context node is of type
+   &lt;code&gt;Document&lt;/code&gt; and the DOM implementation doesn't support
+   the replacement of the &lt;code&gt;DocumentType&lt;/code&gt; child or
+   &lt;code&gt;Element&lt;/code&gt; child.
+   &lt;br&gt; NO_MODIFICATION_ALLOWED_ERR: Raised if the context node is a
+   read only node and the content is being appended to its child list,
+   or if the parent node of the context node is read only node and the
+   content is being inserted in its child list.
+   &lt;br&gt; INVALID_STATE_ERR: Raised if the &lt;code&gt;LSParser.busy&lt;/code&gt;
+   attribute is &lt;code&gt;true&lt;/code&gt;.
+@exception LSException
+    PARSE_ERR: Raised if the &lt;code&gt;LSParser&lt;/code&gt; was unable to load
+   the XML fragment. DOM applications should attach a
+   &lt;code&gt;DOMErrorHandler&lt;/code&gt; using the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-error-handler'&gt;
+   error-handler&lt;/a&gt;&quot; if they wish to get details on the error.
+*/
+parseWithContext : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSParser-method-abort'>/**Abort the loading of the document that is currently being loaded by
+</span> the &lt;code&gt;LSParser&lt;/code&gt;. If the &lt;code&gt;LSParser&lt;/code&gt; is currently
+ not busy, a call to this method does nothing.
+*/
+abort : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

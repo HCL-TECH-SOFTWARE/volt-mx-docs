@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-recents-views-TaskView'>/**@class com.android.systemui.recents.views.TaskView
+</span> implements com.android.systemui.shared.recents.model.Task.TaskCallbacks
+
+ implements com.android.systemui.recents.views.TaskStackAnimationHelper.Callbacks
+
+ implements android.view.View.OnClickListener
+
+ implements android.view.View.OnLongClickListener
+
+@extends com.android.systemui.recents.views.FixedSizeFrameLayout
+
+ A {@link com.android.systemui.recents.views.TaskView} represents a fixed view of a task. Because the TaskView's layout is directed
+ solely by the {@link com.android.systemui.recents.views.TaskStackView}, we make it a fixed size layout which allows relayouts down
+ the view hierarchy, but not upwards from any of its children (the TaskView will relayout itself
+ with the previous bounds if any child requests layout).
+*/
+var TaskView = {
+
+<span id='com-android-systemui-recents-views-TaskView-property-DIM_ALPHA_WITHOUT_HEADER'>/** The dim overlay is generally calculated from the task progress, but occasionally (like when
+</span> launching) needs to be animated independently of the task progress.  This call is only used
+ when animating the task into Recents, when the header dim is already applied
+*/
+DIM_ALPHA_WITHOUT_HEADER : &quot;null&quot;,
+<span id='com-android-systemui-recents-views-TaskView-property-DIM_ALPHA'>/** The dim overlay is generally calculated from the task progress, but occasionally (like when
+</span> launching) needs to be animated independently of the task progress.
+*/
+DIM_ALPHA : &quot;null&quot;,
+<span id='com-android-systemui-recents-views-TaskView-property-VIEW_OUTLINE_ALPHA'>/** The dim overlay is generally calculated from the task progress, but occasionally (like when
+</span> launching) needs to be animated independently of the task progress.
+*/
+VIEW_OUTLINE_ALPHA : &quot;null&quot;,
+<span id='com-android-systemui-recents-views-TaskView-method-getTask'>/**Gets the task
+</span>*/
+getTask : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-hasOverlappingRendering'>/**
+</span>*/
+hasOverlappingRendering : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onInterceptTouchEvent'>/**
+</span>*/
+onInterceptTouchEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-cancelTransformAnimation'>/**Cancels any current transform animations.
+</span>*/
+cancelTransformAnimation : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-setTouchEnabled'>/**Enables/disables handling touch on this task view.
+</span>*/
+setTouchEnabled : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-startNoUserInteractionAnimation'>/**Animates this task view if the user does not interact with the stack after a certain time.
+</span>*/
+startNoUserInteractionAnimation : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-getHeaderView'>/**
+</span>*/
+getHeaderView : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-setDimAlpha'>/**Sets the current dim.
+</span>*/
+setDimAlpha : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-setDimAlphaWithoutHeader'>/**Sets the current dim without updating the header's dim.
+</span>*/
+setDimAlphaWithoutHeader : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-getDimAlpha'>/**Returns the current dim.
+</span>*/
+getDimAlpha : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-setFocusedState'>/**Explicitly sets the focused state of this task.
+</span>*/
+setFocusedState : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-showActionButton'>/**Shows the action button.
+</span>@param {Boolean} fadeIn whether or not to animate the action button in.
+@param {Number} fadeInDuration the duration of the action button animation, only used if
+                       {@param fadeIn} is true.
+*/
+showActionButton : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-hideActionButton'>/**Immediately hides the action button.
+</span>@param {Boolean} fadeOut whether or not to animate the action button out.
+*/
+hideActionButton : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onPrepareLaunchTargetForEnterAnimation'>/**TaskStackAnimationHelper.Callbacks Implementation
+</span>*/
+onPrepareLaunchTargetForEnterAnimation : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onStartLaunchTargetEnterAnimation'>/**
+</span>*/
+onStartLaunchTargetEnterAnimation : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onStartLaunchTargetLaunchAnimation'>/**
+</span>*/
+onStartLaunchTargetLaunchAnimation : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onStartFrontTaskEnterAnimation'>/**
+</span>*/
+onStartFrontTaskEnterAnimation : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onTaskBound'>/**TaskCallbacks Implementation
+</span>*/
+onTaskBound : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onTaskDataLoaded'>/**
+</span>*/
+onTaskDataLoaded : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onTaskDataUnloaded'>/**
+</span>*/
+onTaskDataUnloaded : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onTaskWindowingModeChanged'>/**
+</span>*/
+onTaskWindowingModeChanged : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onClick'>/**View.OnClickListener Implementation
+</span>*/
+onClick : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onLongClick'>/**View.OnLongClickListener Implementation
+</span>*/
+onLongClick : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onBusEvent'>/**Events
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskView-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

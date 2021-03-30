@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-sql-BatchUpdateException'>/**@class java.sql.BatchUpdateException
+</span>@extends java.sql.SQLException
+
+ The subclass of {@link java.sql.SQLException} thrown when an error
+ occurs during a batch update operation.  In addition to the
+ information provided by {@link java.sql.SQLException}, a
+ &lt;code&gt;BatchUpdateException&lt;/code&gt; provides the update
+ counts for all commands that were executed successfully during the
+ batch update, that is, all commands that were executed before the error
+ occurred.  The order of elements in an array of update counts
+ corresponds to the order in which commands were added to the batch.
+ &lt;P&gt;
+ After a command in a batch update fails to execute properly
+ and a &lt;code&gt;BatchUpdateException&lt;/code&gt; is thrown, the driver
+ may or may not continue to process the remaining commands in
+ the batch.  If the driver continues processing after a failure,
+ the array returned by the method
+ &lt;code&gt;BatchUpdateException.getUpdateCounts&lt;/code&gt; will have
+ an element for every command in the batch rather than only
+ elements for the commands that executed successfully before
+ the error.  In the case where the driver continues processing
+ commands, the array element for any command
+ that failed is &lt;code&gt;Statement.EXECUTE_FAILED&lt;/code&gt;.
+ &lt;P&gt;
+ @since 1.2
+*/
+var BatchUpdateException = {
+
+<span id='java-sql-BatchUpdateException-method-getUpdateCounts'>/**Retrieves the update count for each update statement in the batch
+</span> update that executed successfully before this exception occurred.
+ A driver that implements batch updates may or may not continue to
+ process the remaining commands in a batch when one of the commands
+ fails to execute properly. If the driver continues processing commands,
+ the array returned by this method will have as many elements as
+ there are commands in the batch; otherwise, it will contain an
+ update count for each command that executed successfully before
+ the &lt;code&gt;BatchUpdateException&lt;/code&gt; was thrown.
+&lt;P&gt;
+ The possible return values for this method were modified for
+ the Java 2 SDK, Standard Edition, version 1.3.  This was done to
+ accommodate the new option of continuing to process commands
+ in a batch update after a &lt;code&gt;BatchUpdateException&lt;/code&gt; object
+ has been thrown.
+@return {Number} an array of &lt;code&gt;int&lt;/code&gt; containing the update counts
+ for the updates that were executed successfully before this error
+ occurred.  Or, if the driver continues to process commands after an
+ error, one of the following for every command in the batch:
+ &lt;OL&gt;
+ &lt;LI&gt;an update count
+  &lt;LI&gt;&lt;code&gt;Statement.SUCCESS_NO_INFO&lt;/code&gt; to indicate that the command
+     executed successfully but the number of rows affected is unknown
+  &lt;LI&gt;&lt;code&gt;Statement.EXECUTE_FAILED&lt;/code&gt; to indicate that the command
+     failed to execute successfully
+ &lt;/OL&gt;
+@since 1.3
+*/
+getUpdateCounts : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

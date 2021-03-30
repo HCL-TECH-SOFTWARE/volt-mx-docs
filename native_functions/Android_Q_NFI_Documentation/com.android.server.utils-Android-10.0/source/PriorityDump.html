@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-utils-PriorityDump'>/**@class com.android.server.utils.PriorityDump
+</span>@extends java.lang.Object
+
+ Helper for {@link android.os.Binder#dump(java.io.FileDescriptor, String[])} that supports the
+ {@link #PRIORITY_ARG} and {@link #PROTO_ARG} arguments.
+ &lt;p&gt;
+ Typical usage:
+
+ &lt;pre&gt;&lt;code&gt;
+public class SpringfieldNuclearPowerPlant extends Binder {
+
+ private final PriorityDump.PriorityDumper mPriorityDumper = new PriorityDump.PriorityDumper() {
+
+     @Override
+     public void dumpCritical(FileDescriptor fd, PrintWriter pw, String[] args, boolean asProto) {
+       if (asProto) {
+         ProtoOutputStream proto = new ProtoOutputStream(fd);
+         proto.write(SpringfieldProto.DONUTS, 1);
+         proto.flush();
+       } else {
+         pw.println(&quot;Donuts in the box: 1&quot;);
+       }
+     }
+
+     @Override
+     public void dumpNormal(FileDescriptor fd, PrintWriter pw, String[] args) {
+        if (asProto) {
+          ProtoOutputStream proto = new ProtoOutputStream(fd);
+          proto.write(SpringfieldProto.REACTOR_STATUS, DANGER_MELTDOWN_IMMINENT);
+          proto.flush();
+        } else {
+          pw.println(&quot;Nuclear reactor status: DANGER - MELTDOWN IMMINENT&quot;);
+        }
+     }
+  };
+
+  @Override
+  protected void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+      PriorityDump.dump(mPriorityDumper, fd, pw, args);
+  }
+}
+
+ &lt;/code&gt;&lt;/pre&gt;
+
+ &lt;strong&gt;Disclaimer&lt;/strong&gt;: a real-life service should prioritize core status over donuts :-)
+
+ &lt;p&gt;Then to invoke it:
+
+ &lt;pre&gt;&lt;code&gt;
+
+    $ adb shell dumpsys snpp
+    Donuts in the box: 1
+    Nuclear reactor status: DANGER - MELTDOWN IMMINENT
+
+    $ adb shell dumpsys snpp --dump-priority CRITICAL
+    Donuts in the box: 1
+
+    $ adb shell dumpsys snpp --dump-priority NORMAL
+    Nuclear reactor status: DANGER - MELTDOWN IMMINENT
+
+    $ adb shell dumpsys snpp --dump-priority CRITICAL --proto
+    //binary output
+
+ &lt;/code&gt;&lt;/pre&gt;
+
+
+
+ &lt;p&gt;To run the unit tests:
+ &lt;pre&gt;&lt;code&gt;
+
+ atest FrameworksServicesTests:PriorityDumpTest
+ &lt;/code&gt;&lt;/pre&gt;
+
+
+ @hide
+*/
+var PriorityDump = {
+
+<span id='com-android-server-utils-PriorityDump-property-PRIORITY_ARG'>/***/
+</span>PRIORITY_ARG : &quot;--dump-priority&quot;,
+<span id='com-android-server-utils-PriorityDump-property-PROTO_ARG'>/***/
+</span>PROTO_ARG : &quot;--proto&quot;,
+<span id='com-android-server-utils-PriorityDump-property-PRIORITY_ARG_CRITICAL'>/***/
+</span>PRIORITY_ARG_CRITICAL : &quot;CRITICAL&quot;,
+<span id='com-android-server-utils-PriorityDump-property-PRIORITY_ARG_HIGH'>/***/
+</span>PRIORITY_ARG_HIGH : &quot;HIGH&quot;,
+<span id='com-android-server-utils-PriorityDump-property-PRIORITY_ARG_NORMAL'>/***/
+</span>PRIORITY_ARG_NORMAL : &quot;NORMAL&quot;,
+<span id='com-android-server-utils-PriorityDump-method-dump'>/**Parses {@code args} matching {@code --dump-priority} and/or {@code --proto}. The matching
+</span> arguments are stripped.
+ &lt;p&gt;
+ If priority args are passed as an argument, it will call the appropriate method and if proto
+ args are passed then the {@code asProto} flag is set.
+ &lt;p&gt;
+ For example, if called as {@code --dump-priority HIGH arg1 arg2 arg3}, it will call
+ &lt;code&gt;dumper.dumpHigh(fd, pw, {&quot;arg1&quot;, &quot;arg2&quot;, &quot;arg3&quot;}, false) &lt;/code&gt;
+ &lt;p&gt;
+ If the {@code --dump-priority} is not set, it calls
+ {@link com.android.server.utils.PriorityDump.PriorityDumper#dump(FileDescriptor, PrintWriter, String[], boolean)} passing the whole
+ {@code args} instead.
+*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

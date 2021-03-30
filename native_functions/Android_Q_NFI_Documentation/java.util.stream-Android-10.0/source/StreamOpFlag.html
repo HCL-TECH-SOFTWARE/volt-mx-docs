@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-stream-StreamOpFlag'>/**@class java.util.stream.StreamOpFlag
+</span>@extends java.lang.Enum
+
+ Flags corresponding to characteristics of streams and operations. Flags are
+ utilized by the stream framework to control, specialize or optimize
+ computation.
+
+ &lt;p&gt;
+ Stream flags may be used to describe characteristics of several different
+ entities associated with streams: stream sources, intermediate operations,
+ and terminal operations.  Not all stream flags are meaningful for all
+ entities; the following table summarizes which flags are meaningful in what
+ contexts:
+
+ &lt;div&gt;
+ &lt;table&gt;
+   &lt;caption&gt;Type Characteristics&lt;/caption&gt;
+   &lt;thead class=&quot;tableSubHeadingColor&quot;&gt;
+     &lt;tr&gt;
+       &lt;th colspan=&quot;2&quot;&gt;&amp;nbsp;&lt;/th&gt;
+       &lt;th&gt;{@code DISTINCT}&lt;/th&gt;
+       &lt;th&gt;{@code SORTED}&lt;/th&gt;
+       &lt;th&gt;{@code ORDERED}&lt;/th&gt;
+       &lt;th&gt;{@code SIZED}&lt;/th&gt;
+       &lt;th&gt;{@code SHORT_CIRCUIT}&lt;/th&gt;
+     &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;th colspan=&quot;2&quot; class=&quot;tableSubHeadingColor&quot;&gt;Stream source&lt;/th&gt;
+        &lt;td&gt;Y&lt;/td&gt;
+        &lt;td&gt;Y&lt;/td&gt;
+        &lt;td&gt;Y&lt;/td&gt;
+        &lt;td&gt;Y&lt;/td&gt;
+        &lt;td&gt;N&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th colspan=&quot;2&quot; class=&quot;tableSubHeadingColor&quot;&gt;Intermediate operation&lt;/th&gt;
+        &lt;td&gt;PCI&lt;/td&gt;
+        &lt;td&gt;PCI&lt;/td&gt;
+        &lt;td&gt;PCI&lt;/td&gt;
+        &lt;td&gt;PC&lt;/td&gt;
+        &lt;td&gt;PI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th colspan=&quot;2&quot; class=&quot;tableSubHeadingColor&quot;&gt;Terminal operation&lt;/th&gt;
+        &lt;td&gt;N&lt;/td&gt;
+        &lt;td&gt;N&lt;/td&gt;
+        &lt;td&gt;PC&lt;/td&gt;
+        &lt;td&gt;N&lt;/td&gt;
+        &lt;td&gt;PI&lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+   &lt;tfoot&gt;
+       &lt;tr&gt;
+         &lt;th class=&quot;tableSubHeadingColor&quot; colspan=&quot;2&quot;&gt;Legend&lt;/th&gt;
+         &lt;th colspan=&quot;6&quot; rowspan=&quot;7&quot;&gt;&amp;nbsp;&lt;/th&gt;
+       &lt;/tr&gt;
+       &lt;tr&gt;
+         &lt;th class=&quot;tableSubHeadingColor&quot;&gt;Flag&lt;/th&gt;
+         &lt;th class=&quot;tableSubHeadingColor&quot;&gt;Meaning&lt;/th&gt;
+         &lt;th colspan=&quot;6&quot;&gt;&lt;/th&gt;
+       &lt;/tr&gt;
+       &lt;tr&gt;&lt;td&gt;Y&lt;/td&gt;&lt;td&gt;Allowed&lt;/td&gt;&lt;/tr&gt;
+       &lt;tr&gt;&lt;td&gt;N&lt;/td&gt;&lt;td&gt;Invalid&lt;/td&gt;&lt;/tr&gt;
+       &lt;tr&gt;&lt;td&gt;P&lt;/td&gt;&lt;td&gt;Preserves&lt;/td&gt;&lt;/tr&gt;
+       &lt;tr&gt;&lt;td&gt;C&lt;/td&gt;&lt;td&gt;Clears&lt;/td&gt;&lt;/tr&gt;
+       &lt;tr&gt;&lt;td&gt;I&lt;/td&gt;&lt;td&gt;Injects&lt;/td&gt;&lt;/tr&gt;
+   &lt;/tfoot&gt;
+ &lt;/table&gt;
+ &lt;/div&gt;
+
+ &lt;p&gt;In the above table, &quot;PCI&quot; means &quot;may preserve, clear, or inject&quot;; &quot;PC&quot;
+ means &quot;may preserve or clear&quot;, &quot;PI&quot; means &quot;may preserve or inject&quot;, and &quot;N&quot;
+ means &quot;not valid&quot;.
+
+ &lt;p&gt;Stream flags are represented by unioned bit sets, so that a single word
+ may describe all the characteristics of a given stream entity, and that, for
+ example, the flags for a stream source can be efficiently combined with the
+ flags for later operations on that stream.
+
+ &lt;p&gt;The bit masks {@link #STREAM_MASK}, {@link #OP_MASK}, and
+ {@link #TERMINAL_OP_MASK} can be ANDed with a bit set of stream flags to
+ produce a mask containing only the valid flags for that entity type.
+
+ &lt;p&gt;When describing a stream source, one only need describe what
+ characteristics that stream has; when describing a stream operation, one need
+ describe whether the operation preserves, injects, or clears that
+ characteristic.  Accordingly, two bits are used for each flag, so as to allow
+ representing not only the presence of of a characteristic, but how an
+ operation modifies that characteristic.  There are two common forms in which
+ flag bits are combined into an {@code int} bit set.  &lt;em&gt;Stream flags&lt;/em&gt;
+ are a unioned bit set constructed by ORing the enum characteristic values of
+ {@link #set}() (or, more commonly, ORing the corresponding static named
+ constants prefixed with {@code IS_}).  &lt;em&gt;Operation flags&lt;/em&gt; are a unioned
+ bit set constructed by ORing the enum characteristic values of {@link #set}()
+ or {@link #clear}() (to inject, or clear, respectively, the corresponding
+ flag), or more commonly ORing the corresponding named constants prefixed with
+ {@code IS_} or {@code NOT_}.  Flags that are not marked with {@code IS_} or
+ {@code NOT_} are implicitly treated as preserved.  Care must be taken when
+ combining bitsets that the correct combining operations are applied in the
+ correct order.
+
+ &lt;p&gt;
+ With the exception of {@link #SHORT_CIRCUIT}, stream characteristics can be
+ derived from the equivalent {@link java.util.Spliterator} characteristics:
+ {@link java.util.Spliterator#DISTINCT}, {@link java.util.Spliterator#SORTED},
+ {@link java.util.Spliterator#ORDERED}, and
+ {@link java.util.Spliterator#SIZED}.  A spliterator characteristics bit set
+ can be converted to stream flags using the method
+ {@link #fromCharacteristics(java.util.Spliterator)} and converted back using
+ {@link #toCharacteristics}(int).  (The bit set
+ {@link #SPLITERATOR_CHARACTERISTICS_MASK} is used to AND with a bit set to
+ produce a valid spliterator characteristics bit set that can be converted to
+ stream flags.)
+
+ &lt;p&gt;
+ The source of a stream encapsulates a spliterator. The characteristics of
+ that source spliterator when transformed to stream flags will be a proper
+ subset of stream flags of that stream.
+ For example:
+ &lt;pre&gt; {@code
+     Spliterator s = ...;
+     Stream stream = Streams.stream(s);
+     flagsFromSplitr = fromCharacteristics(s.characteristics());
+     assert(flagsFromSplitr &amp; stream.getStreamFlags() == flagsFromSplitr);
+ }&lt;/pre&gt;
+
+ &lt;p&gt;
+ An intermediate operation, performed on an input stream to create a new
+ output stream, may preserve, clear or inject stream or operation
+ characteristics.  Similarly, a terminal operation, performed on an input
+ stream to produce an output result may preserve, clear or inject stream or
+ operation characteristics.  Preservation means that if that characteristic
+ is present on the input, then it is also present on the output.  Clearing
+ means that the characteristic is not present on the output regardless of the
+ input.  Injection means that the characteristic is present on the output
+ regardless of the input.  If a characteristic is not cleared or injected then
+ it is implicitly preserved.
+
+ &lt;p&gt;
+ A pipeline consists of a stream source encapsulating a spliterator, one or
+ more intermediate operations, and finally a terminal operation that produces
+ a result.  At each stage of the pipeline, a combined stream and operation
+ flags can be calculated, using {@link #combineOpFlags(int, int)}.  Such flags
+ ensure that preservation, clearing and injecting information is retained at
+ each stage.
+
+ The combined stream and operation flags for the source stage of the pipeline
+ is calculated as follows:
+ &lt;pre&gt; {@code
+     int flagsForSourceStage = combineOpFlags(sourceFlags, INITIAL_OPS_VALUE);
+ }&lt;/pre&gt;
+
+ The combined stream and operation flags of each subsequent intermediate
+ operation stage in the pipeline is calculated as follows:
+ &lt;pre&gt; {@code
+     int flagsForThisStage = combineOpFlags(flagsForPreviousStage, thisOpFlags);
+ }&lt;/pre&gt;
+
+ Finally the flags output from the last intermediate operation of the pipeline
+ are combined with the operation flags of the terminal operation to produce
+ the flags output from the pipeline.
+
+ &lt;p&gt;Those flags can then be used to apply optimizations. For example, if
+ {@code SIZED.isKnown(flags)} returns true then the stream size remains
+ constant throughout the pipeline, this information can be utilized to
+ pre-allocate data structures and combined with
+ {@link java.util.Spliterator#SUBSIZED} that information can be utilized to
+ perform concurrent in-place updates into a shared array.
+
+ For specific details see the {@link java.util.stream.AbstractPipeline} constructors.
+
+ @since 1.8
+ @hide Visible for CTS testing only (OpenJDK8 tests).
+*/
+var StreamOpFlag = {
+
+<span id='java-util-stream-StreamOpFlag-property-DISTINCT'>/** Characteristic value signifying that, for each pair of
+</span> encountered elements in a stream {@code x, y}, {@code !x.equals(y)}.
+ &lt;p&gt;
+ A stream may have this value or an intermediate operation can preserve,
+ clear or inject this value.
+*/
+DISTINCT : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-SORTED'>/** Characteristic value signifying that encounter order follows a natural
+</span> sort order of comparable elements.
+ &lt;p&gt;
+ A stream can have this value or an intermediate operation can preserve,
+ clear or inject this value.
+ &lt;p&gt;
+ Note: The {@link java.util.Spliterator#SORTED} characteristic can define
+ a sort order with an associated non-null comparator.  Augmenting flag
+ state with addition properties such that those properties can be passed
+ to operations requires some disruptive changes for a singular use-case.
+ Furthermore, comparing comparators for equality beyond that of identity
+ is likely to be unreliable.  Therefore the {@code SORTED} characteristic
+ for a defined non-natural sort order is not mapped internally to the
+ {@code SORTED} flag.
+*/
+SORTED : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-ORDERED'>/** Characteristic value signifying that an encounter order is
+</span> defined for stream elements.
+ &lt;p&gt;
+ A stream can have this value, an intermediate operation can preserve,
+ clear or inject this value, or a terminal operation can preserve or clear
+ this value.
+*/
+ORDERED : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-SIZED'>/** Characteristic value signifying that size of the stream
+</span> is of a known finite size that is equal to the known finite
+ size of the source spliterator input to the first stream
+ in the pipeline.
+ &lt;p&gt;
+ A stream can have this value or an intermediate operation can preserve or
+ clear this value.
+*/
+SIZED : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-SHORT_CIRCUIT'>/** Characteristic value signifying that an operation may short-circuit the
+</span> stream.
+ &lt;p&gt;
+ An intermediate operation can preserve or inject this value,
+ or a terminal operation can preserve or inject this value.
+*/
+SHORT_CIRCUIT : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-SPLITERATOR_CHARACTERISTICS_MASK'>/** The bit mask for spliterator characteristics
+</span>*/
+SPLITERATOR_CHARACTERISTICS_MASK : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-STREAM_MASK'>/** The bit mask for source stream flags.
+</span>*/
+STREAM_MASK : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-OP_MASK'>/** The bit mask for intermediate operation flags.
+</span>*/
+OP_MASK : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-TERMINAL_OP_MASK'>/** The bit mask for terminal operation flags.
+</span>*/
+TERMINAL_OP_MASK : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-UPSTREAM_TERMINAL_OP_MASK'>/** The bit mask for upstream terminal operation flags.
+</span>*/
+UPSTREAM_TERMINAL_OP_MASK : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-INITIAL_OPS_VALUE'>/** The initial value to be combined with the stream flags of the first
+</span> stream in the pipeline.
+*/
+INITIAL_OPS_VALUE : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-IS_DISTINCT'>/** The bit value to set or inject {@link #DISTINCT}.
+</span>*/
+IS_DISTINCT : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-NOT_DISTINCT'>/** The bit value to clear {@link #DISTINCT}.
+</span>*/
+NOT_DISTINCT : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-IS_SORTED'>/** The bit value to set or inject {@link #SORTED}.
+</span>*/
+IS_SORTED : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-NOT_SORTED'>/** The bit value to clear {@link #SORTED}.
+</span>*/
+NOT_SORTED : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-IS_ORDERED'>/** The bit value to set or inject {@link #ORDERED}.
+</span>*/
+IS_ORDERED : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-NOT_ORDERED'>/** The bit value to clear {@link #ORDERED}.
+</span>*/
+NOT_ORDERED : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-IS_SIZED'>/** The bit value to set {@link #SIZED}.
+</span>*/
+IS_SIZED : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-NOT_SIZED'>/** The bit value to clear {@link #SIZED}.
+</span>*/
+NOT_SIZED : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-property-IS_SHORT_CIRCUIT'>/** The bit value to inject {@link #SHORT_CIRCUIT}.
+</span>*/
+IS_SHORT_CIRCUIT : &quot;null&quot;,
+<span id='java-util-stream-StreamOpFlag-method-values'>/**
+</span>*/
+values : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-valueOf'>/**
+</span>*/
+valueOf : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-set'>/**Gets the bitmap associated with setting this characteristic.
+</span>@return {Number} the bitmap for setting this characteristic
+*/
+set : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-clear'>/**Gets the bitmap associated with clearing this characteristic.
+</span>@return {Number} the bitmap for clearing this characteristic
+*/
+clear : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-isStreamFlag'>/**Determines if this flag is a stream-based flag.
+</span>@return {Boolean} true if a stream-based flag, otherwise false.
+*/
+isStreamFlag : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-isKnown'>/**Checks if this flag is set on stream flags, injected on operation flags,
+</span> and injected on combined stream and operation flags.
+@param {Number} flags the stream flags, operation flags, or combined stream and
+        operation flags
+@return {Boolean} true if this flag is known, otherwise false.
+*/
+isKnown : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-isCleared'>/**Checks if this flag is cleared on operation flags or combined stream and
+</span> operation flags.
+@param {Number} flags the operation flags or combined stream and operations flags.
+@return {Boolean} true if this flag is preserved, otherwise false.
+*/
+isCleared : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-isPreserved'>/**Checks if this flag is preserved on combined stream and operation flags.
+</span>@param {Number} flags the combined stream and operations flags.
+@return {Boolean} true if this flag is preserved, otherwise false.
+*/
+isPreserved : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-canSet'>/**Determines if this flag can be set for a flag type.
+</span>@param {Object {StreamOpFlag.Type}} t the flag type.
+@return {Boolean} true if this flag can be set for the flag type, otherwise false.
+*/
+canSet : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-combineOpFlags'>/**Combines stream or operation flags with previously combined stream and
+</span> operation flags to produce updated combined stream and operation flags.
+ &lt;p&gt;
+ A flag set on stream flags or injected on operation flags,
+ and injected combined stream and operation flags,
+ will be injected on the updated combined stream and operation flags.
+
+ &lt;p&gt;
+ A flag set on stream flags or injected on operation flags,
+ and cleared on the combined stream and operation flags,
+ will be cleared on the updated combined stream and operation flags.
+
+ &lt;p&gt;
+ A flag set on the stream flags or injected on operation flags,
+ and preserved on the combined stream and operation flags,
+ will be injected on the updated combined stream and operation flags.
+
+ &lt;p&gt;
+ A flag not set on the stream flags or cleared/preserved on operation
+ flags, and injected on the combined stream and operation flags,
+ will be injected on the updated combined stream and operation flags.
+
+ &lt;p&gt;
+ A flag not set on the stream flags or cleared/preserved on operation
+ flags, and cleared on the combined stream and operation flags,
+ will be cleared on the updated combined stream and operation flags.
+
+ &lt;p&gt;
+ A flag not set on the stream flags,
+ and preserved on the combined stream and operation flags
+ will be preserved on the updated combined stream and operation flags.
+
+ &lt;p&gt;
+ A flag cleared on operation flags,
+ and preserved on the combined stream and operation flags
+ will be cleared on the updated combined stream and operation flags.
+
+ &lt;p&gt;
+ A flag preserved on operation flags,
+ and preserved on the combined stream and operation flags
+ will be preserved on the updated combined stream and operation flags.
+@param {Number} newStreamOrOpFlags the stream or operation flags.
+@param {Number} prevCombOpFlags previously combined stream and operation flags.
+        The value {#link INITIAL_OPS_VALUE} must be used as the seed value.
+@return {Number} the updated combined stream and operation flags.
+*/
+combineOpFlags : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-toStreamFlags'>/**Converts combined stream and operation flags to stream flags.
+</span>
+ &lt;p&gt;Each flag injected on the combined stream and operation flags will be
+ set on the stream flags.
+@param {Number} combOpFlags the combined stream and operation flags.
+@return {Number} the stream flags.
+*/
+toStreamFlags : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-toCharacteristics'>/**Converts stream flags to a spliterator characteristic bit set.
+</span>@param {Number} streamFlags the stream flags.
+@return {Number} the spliterator characteristic bit set.
+*/
+toCharacteristics : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-fromCharacteristics'>/**Converts a spliterator characteristic bit set to stream flags.
+</span>@param {Object {java.util.Spliterator}} spliterator the spliterator from which to obtain characteristic
+        bit set.
+@param spliterator the spliterator from which to obtain characteristic
+        bit set.
+@return {Number} the stream flags.
+*/
+fromCharacteristics : function(  ) {},
+
+<span id='java-util-stream-StreamOpFlag-method-fromCharacteristics'>/**Converts a spliterator characteristic bit set to stream flags.
+</span>@param {Number} characteristics the spliterator characteristic bit set.
+@return {Number} the stream flags.
+*/
+fromCharacteristics : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

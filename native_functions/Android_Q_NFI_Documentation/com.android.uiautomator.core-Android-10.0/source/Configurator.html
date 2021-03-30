@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-uiautomator-core-Configurator'>/**@class com.android.uiautomator.core.Configurator
+</span>@extends java.lang.Object
+
+ Allows you to set key parameters for running uiautomator tests. The new
+ settings take effect immediately and can be changed any time during a test run.
+
+ To modify parameters using Configurator, first obtain an instance by calling
+ {@link #getInstance}(). As a best practice, make sure you always save
+ the original value of any parameter that you are modifying. After running your
+ tests with the modified parameters, make sure to also restore
+ the original parameter values, otherwise this will impact other tests cases.
+ @since API Level 18
+ @deprecated New tests should be written using UI Automator 2.0 which is available as part of the
+ Android Testing Support Library.
+*/
+var Configurator = {
+
+<span id='com-android-uiautomator-core-Configurator-method-getInstance'>/**Retrieves a singleton instance of Configurator.
+</span>@return {Object {com.android.uiautomator.core.Configurator}} Configurator instance
+@since API Level 18
+*/
+getInstance : function(  ) {},
+
+<span id='com-android-uiautomator-core-Configurator-method-setWaitForIdleTimeout'>/**Sets the timeout for waiting for the user interface to go into an idle
+</span> state before starting a uiautomator action.
+
+ By default, all core uiautomator objects except {@link com.android.uiautomator.core.UiDevice} will perform
+ this wait before starting to search for the widget specified by the
+ object's {@link com.android.uiautomator.core.UiSelector}. Once the idle state is detected or the
+ timeout elapses (whichever occurs first), the object will start to wait
+ for the selector to find a match.
+ See {@link #setWaitForSelectorTimeout}(long)
+@param {Number} timeout Timeout value in milliseconds
+@return {Object {com.android.uiautomator.core.Configurator}} self
+@since API Level 18
+*/
+setWaitForIdleTimeout : function(  ) {},
+
+<span id='com-android-uiautomator-core-Configurator-method-getWaitForIdleTimeout'>/**Gets the current timeout used for waiting for the user interface to go
+</span> into an idle state.
+
+ By default, all core uiautomator objects except {@link com.android.uiautomator.core.UiDevice} will perform
+ this wait before starting to search for the widget specified by the
+ object's {@link com.android.uiautomator.core.UiSelector}. Once the idle state is detected or the
+ timeout elapses (whichever occurs first), the object will start to wait
+ for the selector to find a match.
+ See {@link #setWaitForSelectorTimeout}(long)
+@return {Number} Current timeout value in milliseconds
+@since API Level 18
+*/
+getWaitForIdleTimeout : function(  ) {},
+
+<span id='com-android-uiautomator-core-Configurator-method-setWaitForSelectorTimeout'>/**Sets the timeout for waiting for a widget to become visible in the user
+</span> interface so that it can be matched by a selector.
+
+ Because user interface content is dynamic, sometimes a widget may not
+ be visible immediately and won't be detected by a selector. This timeout
+ allows the uiautomator framework to wait for a match to be found, up until
+ the timeout elapses.
+@param {Number} timeout Timeout value in milliseconds.
+@return {Object {com.android.uiautomator.core.Configurator}} self
+@since API Level 18
+*/
+setWaitForSelectorTimeout : function(  ) {},
+
+<span id='com-android-uiautomator-core-Configurator-method-getWaitForSelectorTimeout'>/**Gets the current timeout for waiting for a widget to become visible in
+</span> the user interface so that it can be matched by a selector.
+
+ Because user interface content is dynamic, sometimes a widget may not
+ be visible immediately and won't be detected by a selector. This timeout
+ allows the uiautomator framework to wait for a match to be found, up until
+ the timeout elapses.
+@return {Number} Current timeout value in milliseconds
+@since API Level 18
+*/
+getWaitForSelectorTimeout : function(  ) {},
+
+<span id='com-android-uiautomator-core-Configurator-method-setScrollAcknowledgmentTimeout'>/**Sets the timeout for waiting for an acknowledgement of an
+</span> uiautomtor scroll swipe action.
+
+ The acknowledgment is an &lt;a href=&quot;http://developer.android.com/reference/android/view/accessibility/AccessibilityEvent.html&quot;&gt;AccessibilityEvent&lt;/a&gt;,
+ corresponding to the scroll action, that lets the framework determine if
+ the scroll action was successful. Generally, this timeout should not be modified.
+ See {@link com.android.uiautomator.core.UiScrollable}
+@param {Number} timeout Timeout value in milliseconds
+@return {Object {com.android.uiautomator.core.Configurator}} self
+@since API Level 18
+*/
+setScrollAcknowledgmentTimeout : function(  ) {},
+
+<span id='com-android-uiautomator-core-Configurator-method-getScrollAcknowledgmentTimeout'>/**Gets the timeout for waiting for an acknowledgement of an
+</span> uiautomtor scroll swipe action.
+
+ The acknowledgment is an &lt;a href=&quot;http://developer.android.com/reference/android/view/accessibility/AccessibilityEvent.html&quot;&gt;AccessibilityEvent&lt;/a&gt;,
+ corresponding to the scroll action, that lets the framework determine if
+ the scroll action was successful. Generally, this timeout should not be modified.
+ See {@link com.android.uiautomator.core.UiScrollable}
+@return {Number} current timeout in milliseconds
+@since API Level 18
+*/
+getScrollAcknowledgmentTimeout : function(  ) {},
+
+<span id='com-android-uiautomator-core-Configurator-method-setActionAcknowledgmentTimeout'>/**Sets the timeout for waiting for an acknowledgment of generic uiautomator
+</span> actions, such as clicks, text setting, and menu presses.
+
+ The acknowledgment is an &lt;a href=&quot;http://developer.android.com/reference/android/view/accessibility/AccessibilityEvent.html&quot;&gt;AccessibilityEvent&lt;/a&gt;,
+ corresponding to an action, that lets the framework determine if the
+ action was successful. Generally, this timeout should not be modified.
+ See {@link com.android.uiautomator.core.UiObject}
+@param {Number} timeout Timeout value in milliseconds
+@return {Object {com.android.uiautomator.core.Configurator}} self
+@since API Level 18
+*/
+setActionAcknowledgmentTimeout : function(  ) {},
+
+<span id='com-android-uiautomator-core-Configurator-method-getActionAcknowledgmentTimeout'>/**Gets the current timeout for waiting for an acknowledgment of generic
+</span> uiautomator actions, such as clicks, text setting, and menu presses.
+
+ The acknowledgment is an &lt;a href=&quot;http://developer.android.com/reference/android/view/accessibility/AccessibilityEvent.html&quot;&gt;AccessibilityEvent&lt;/a&gt;,
+ corresponding to an action, that lets the framework determine if the
+ action was successful. Generally, this timeout should not be modified.
+ See {@link com.android.uiautomator.core.UiObject}
+@return {Number} current timeout in milliseconds
+@since API Level 18
+*/
+getActionAcknowledgmentTimeout : function(  ) {},
+
+<span id='com-android-uiautomator-core-Configurator-method-setKeyInjectionDelay'>/**Sets a delay between key presses when injecting text input.
+</span> See {@link com.android.uiautomator.core.UiObject#setText(String)}
+@param {Number} delay Delay value in milliseconds
+@return {Object {com.android.uiautomator.core.Configurator}} self
+@since API Level 18
+*/
+setKeyInjectionDelay : function(  ) {},
+
+<span id='com-android-uiautomator-core-Configurator-method-getKeyInjectionDelay'>/**Gets the current delay between key presses when injecting text input.
+</span> See {@link com.android.uiautomator.core.UiObject#setText(String)}
+@return {Number} current delay in milliseconds
+@since API Level 18
+*/
+getKeyInjectionDelay : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

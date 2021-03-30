@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-RecursiveTask'>/**@class java.util.concurrent.RecursiveTask
+</span>@extends java.util.concurrent.ForkJoinTask
+
+ A recursive result-bearing {@link java.util.concurrent.ForkJoinTask}.
+
+ &lt;p&gt;For a classic example, here is a task computing Fibonacci numbers:
+
+ &lt;pre&gt; {@code
+ class Fibonacci extends RecursiveTask&lt;Integer&gt; {
+   final int n;
+   Fibonacci(int n) { this.n = n; }
+   protected Integer compute() {
+     if (n &lt;= 1)
+       return n;
+     Fibonacci f1 = new Fibonacci(n - 1);
+     f1.fork();
+     Fibonacci f2 = new Fibonacci(n - 2);
+     return f2.compute() + f1.join();
+   }
+ }}&lt;/pre&gt;
+
+ However, besides being a dumb way to compute Fibonacci functions
+ (there is a simple fast linear algorithm that you'd use in
+ practice), this is likely to perform poorly because the smallest
+ subtasks are too small to be worthwhile splitting up. Instead, as
+ is the case for nearly all fork/join applications, you'd pick some
+ minimum granularity size (for example 10 here) for which you always
+ sequentially solve rather than subdividing.
+
+ @since 1.7
+ @author Doug Lea
+*/
+var RecursiveTask = {
+
+<span id='java-util-concurrent-RecursiveTask-method-getRawResult'>/**
+</span>*/
+getRawResult : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm'>/**@class com.android.systemui.recents.views.TaskStackLayoutAlgorithm
+</span>@extends java.lang.Object
+
+ The layout logic for a TaskStackView.  This layout needs to be able to calculate the stack layout
+ without an activity-specific context only with the information passed in.  This layout can have
+ two states focused and unfocused, and in the focused state, there is a task that is displayed
+ more prominently in the stack.
+*/
+var TaskStackLayoutAlgorithm = {
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-property-OUTLINE_ALPHA_MIN_VALUE'>/***/
+</span>OUTLINE_ALPHA_MIN_VALUE : &quot;0.0&quot;,
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-property-OUTLINE_ALPHA_MAX_VALUE'>/***/
+</span>OUTLINE_ALPHA_MAX_VALUE : &quot;2.0&quot;,
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-property-STATE_FOCUSED'>/***/
+</span>STATE_FOCUSED : &quot;1&quot;,
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-property-STATE_UNFOCUSED'>/***/
+</span>STATE_UNFOCUSED : &quot;0&quot;,
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-property-mTaskRect'>/***/
+</span>mTaskRect : &quot;null&quot;,
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-property-mStackRect'>/***/
+</span>mStackRect : &quot;null&quot;,
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-property-mSystemInsets'>/***/
+</span>mSystemInsets : &quot;null&quot;,
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-property-mMaxTranslationZ'>/***/
+</span>mMaxTranslationZ : &quot;null&quot;,
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-reloadOnConfigurationChange'>/**Reloads the layout for the current configuration.
+</span>*/
+reloadOnConfigurationChange : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-reset'>/**Resets this layout when the stack view is reset.
+</span>*/
+reset : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-setSystemInsets'>/**Sets the system insets.
+</span>*/
+setSystemInsets : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-setFocusState'>/**Sets the focused state.
+</span>*/
+setFocusState : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getFocusState'>/**Gets the focused state.
+</span>*/
+getFocusState : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-initialize'>/**Computes the stack and task rects.  The given task stack bounds already has the top/right
+</span> insets and left/right padding already applied.
+*/
+initialize : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-update'>/**Computes the minimum and maximum scroll progress values and the progress values for each task
+</span> in the stack.
+*/
+update : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-setTaskOverridesForInitialState'>/**Creates task overrides to ensure the initial stack layout if necessary.
+</span>*/
+setTaskOverridesForInitialState : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-addUnfocusedTaskOverride'>/**Adds and override task progress for the given task when transitioning from focused to
+</span> unfocused state.
+*/
+addUnfocusedTaskOverride : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-addUnfocusedTaskOverride'>/**Adds and override task progress for the given task when transitioning from focused to
+</span> unfocused state.
+*/
+addUnfocusedTaskOverride : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-clearUnfocusedTaskOverrides'>/**
+</span>*/
+clearUnfocusedTaskOverrides : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-updateFocusStateOnScroll'>/**Updates this stack when a scroll happens.
+</span>*/
+updateFocusStateOnScroll : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getInitialFocusState'>/**Returns the default focus state.
+</span>*/
+getInitialFocusState : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getStackActionButtonRect'>/**
+</span>*/
+getStackActionButtonRect : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getBackOfStackTransform'>/**Returns the TaskViewTransform that would put the task just off the back of the stack.
+</span>*/
+getBackOfStackTransform : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getFrontOfStackTransform'>/**Returns the TaskViewTransform that would put the task just off the front of the stack.
+</span>*/
+getFrontOfStackTransform : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-isInitialized'>/**Returns whether this stack layout has been initialized.
+</span>*/
+isInitialized : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-computeStackVisibilityReport'>/**Computes the maximum number of visible tasks and thumbnails when the scroll is at the initial
+</span> stack scroll.  Requires that update() is called first.
+*/
+computeStackVisibilityReport : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getStackTransform'>/**Returns the transform for the given task.  This transform is relative to the mTaskRect, which
+</span> is what the view is measured and laid out with.
+*/
+getStackTransform : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getStackTransform'>/**
+</span>*/
+getStackTransform : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getStackTransform'>/**
+</span>*/
+getStackTransform : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getStackTransformScreenCoordinates'>/**Like {@link #getStackTransform}, but in screen coordinates
+</span>*/
+getStackTransformScreenCoordinates : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getStackTransform'>/**Update/get the transform.
+</span>@param {Number} ignoreSingleTaskCase When set, will ensure that the transform computed does not take
+                             into account the special single-task case.  This is only used
+                             internally to ensure that we can calculate the transform for any
+                             position in the stack.
+*/
+getStackTransform : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getUntransformedTaskViewBounds'>/**Returns the untransformed task view bounds.
+</span>*/
+getUntransformedTaskViewBounds : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getDeltaPForY'>/**Maps a movement in screen y, relative to {@param downY}, to a movement in along the arc
+</span> length of the curve.  We know the curve is mostly flat, so we just map the length of the
+ screen along the arc-length proportionally (1/arclength).
+*/
+getDeltaPForY : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getYForDeltaP'>/**This is the inverse of {@link #getDeltaPForY}.  Given a movement along the arc length
+</span> of the curve, map back to the screen y.
+*/
+getYForDeltaP : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getTaskStackBounds'>/**Returns the task stack bounds in the current orientation.  This rect takes into account the
+</span> top and right system insets (but not the bottom inset) and left/right paddings, but _not_
+ the top/bottom padding or insets.
+*/
+getTaskStackBounds : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getDimensionForDevice'>/**Retrieves resources that are constant regardless of the current configuration of the device.
+</span>*/
+getDimensionForDevice : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getDimensionForDevice'>/**Retrieves resources that are constant regardless of the current configuration of the device.
+</span>*/
+getDimensionForDevice : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-getTaskRect'>/**Returns the proper task rectangle according to the current grid state.
+</span>*/
+getTaskRect : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackLayoutAlgorithm-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

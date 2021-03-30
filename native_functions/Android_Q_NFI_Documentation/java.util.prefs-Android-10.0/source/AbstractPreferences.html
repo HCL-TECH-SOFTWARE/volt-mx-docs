@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-prefs-AbstractPreferences'>/**@class java.util.prefs.AbstractPreferences
+</span>@extends java.util.prefs.Preferences
+
+ This class provides a skeletal implementation of the {@link java.util.prefs.Preferences}
+ class, greatly easing the task of implementing it.
+
+ &lt;p&gt;&lt;strong&gt;This class is for &lt;tt&gt;Preferences&lt;/tt&gt; implementers only.
+ Normal users of the &lt;tt&gt;Preferences&lt;/tt&gt; facility should have no need to
+ consult this documentation.  The {@link java.util.prefs.Preferences} documentation
+ should suffice.&lt;/strong&gt;
+
+ &lt;p&gt;Implementors must override the nine abstract service-provider interface
+ (SPI) methods: {@link #getSpi}(String), {@link #putSpi(String,String)},
+ {@link #removeSpi}(String), {@link #childSpi}(String), {@link #removeNodeSpi}(), {@link #keysSpi}(), {@link #childrenNamesSpi}(), {@link #syncSpi}() and {@link #flushSpi}().  All of the concrete methods specify
+ precisely how they are implemented atop these SPI methods.  The implementor
+ may, at his discretion, override one or more of the concrete methods if the
+ default implementation is unsatisfactory for any reason, such as
+ performance.
+
+ &lt;p&gt;The SPI methods fall into three groups concerning exception
+ behavior. The &lt;tt&gt;getSpi&lt;/tt&gt; method should never throw exceptions, but it
+ doesn't really matter, as any exception thrown by this method will be
+ intercepted by {@link #get(String,String)}, which will return the specified
+ default value to the caller.  The &lt;tt&gt;removeNodeSpi, keysSpi,
+ childrenNamesSpi, syncSpi&lt;/tt&gt; and &lt;tt&gt;flushSpi&lt;/tt&gt; methods are specified
+ to throw {@link java.util.prefs.BackingStoreException}, and the implementation is required
+ to throw this checked exception if it is unable to perform the operation.
+ The exception propagates outward, causing the corresponding API method
+ to fail.
+
+ &lt;p&gt;The remaining SPI methods {@link #putSpi(String,String)}, {@link #removeSpi}(String) and {@link #childSpi}(String) have more complicated
+ exception behavior.  They are not specified to throw
+ &lt;tt&gt;BackingStoreException&lt;/tt&gt;, as they can generally obey their contracts
+ even if the backing store is unavailable.  This is true because they return
+ no information and their effects are not required to become permanent until
+ a subsequent call to {@link java.util.prefs.Preferences#flush()} or
+ {@link java.util.prefs.Preferences#sync()}. Generally speaking, these SPI methods should not
+ throw exceptions.  In some implementations, there may be circumstances
+ under which these calls cannot even enqueue the requested operation for
+ later processing.  Even under these circumstances it is generally better to
+ simply ignore the invocation and return, rather than throwing an
+ exception.  Under these circumstances, however, all subsequent invocations
+ of &lt;tt&gt;flush()&lt;/tt&gt; and &lt;tt&gt;sync&lt;/tt&gt; should return &lt;tt&gt;false&lt;/tt&gt;, as
+ returning &lt;tt&gt;true&lt;/tt&gt; would imply that all previous operations had
+ successfully been made permanent.
+
+ &lt;p&gt;There is one circumstance under which &lt;tt&gt;putSpi, removeSpi and
+ childSpi&lt;/tt&gt; &lt;i&gt;should&lt;/i&gt; throw an exception: if the caller lacks
+ sufficient privileges on the underlying operating system to perform the
+ requested operation.  This will, for instance, occur on most systems
+ if a non-privileged user attempts to modify system preferences.
+ (The required privileges will vary from implementation to
+ implementation.  On some implementations, they are the right to modify the
+ contents of some directory in the file system; on others they are the right
+ to modify contents of some key in a registry.)  Under any of these
+ circumstances, it would generally be undesirable to let the program
+ continue executing as if these operations would become permanent at a later
+ time.  While implementations are not required to throw an exception under
+ these circumstances, they are encouraged to do so.  A {@link SecurityException} would be appropriate.
+
+ &lt;p&gt;Most of the SPI methods require the implementation to read or write
+ information at a preferences node.  The implementor should beware of the
+ fact that another VM may have concurrently deleted this node from the
+ backing store.  It is the implementation's responsibility to recreate the
+ node if it has been deleted.
+
+ &lt;p&gt;Implementation note: In Sun's default &lt;tt&gt;Preferences&lt;/tt&gt;
+ implementations, the user's identity is inherited from the underlying
+ operating system and does not change for the lifetime of the virtual
+ machine.  It is recognized that server-side &lt;tt&gt;Preferences&lt;/tt&gt;
+ implementations may have the user identity change from request to request,
+ implicitly passed to &lt;tt&gt;Preferences&lt;/tt&gt; methods via the use of a
+ static {@link ThreadLocal} instance.  Authors of such implementations are
+ &lt;i&gt;strongly&lt;/i&gt; encouraged to determine the user at the time preferences
+ are accessed (for example by the {@link #get(String,String)} or {@link #put(String,String)} method) rather than permanently associating a user
+ with each &lt;tt&gt;Preferences&lt;/tt&gt; instance.  The latter behavior conflicts
+ with normal &lt;tt&gt;Preferences&lt;/tt&gt; usage and would lead to great confusion.
+
+ @author  Josh Bloch
+ @see     Preferences
+ @since   1.4
+*/
+var AbstractPreferences = {
+
+<span id='java-util-prefs-AbstractPreferences-method-put'>/**Implements the &lt;tt&gt;put&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#put(String,String)}.
+
+ &lt;p&gt;This implementation checks that the key and value are legal,
+ obtains this preference node's lock, checks that the node
+ has not been removed, invokes {@link #putSpi(String,String)}, and if
+ there are any preference change listeners, enqueues a notification
+ event for processing by the event dispatch thread.
+@param {String} key key with which the specified value is to be associated.
+@param {String} value value to be associated with the specified key.
+@throws NullPointerException if key or value is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+       &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt; or if &lt;tt&gt;value.length&lt;/tt&gt; exceeds
+       &lt;tt&gt;MAX_VALUE_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+put : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-get'>/**Implements the &lt;tt&gt;get&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#get(String,String)}.
+
+ &lt;p&gt;This implementation first checks to see if &lt;tt&gt;key&lt;/tt&gt; is
+ &lt;tt&gt;null&lt;/tt&gt; throwing a &lt;tt&gt;NullPointerException&lt;/tt&gt; if this is
+ the case.  Then it obtains this preference node's lock,
+ checks that the node has not been removed, invokes {@link #getSpi}(String), and returns the result, unless the &lt;tt&gt;getSpi&lt;/tt&gt;
+ invocation returns &lt;tt&gt;null&lt;/tt&gt; or throws an exception, in which case
+ this invocation returns &lt;tt&gt;def&lt;/tt&gt;.
+@param {String} key key whose associated value is to be returned.
+@param {String} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;.
+@return {String} the value associated with &lt;tt&gt;key&lt;/tt&gt;, or &lt;tt&gt;def&lt;/tt&gt;
+         if no value is associated with &lt;tt&gt;key&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if key is &lt;tt&gt;null&lt;/tt&gt;.  (A
+         &lt;tt&gt;null&lt;/tt&gt; default &lt;i&gt;is&lt;/i&gt; permitted.)
+*/
+get : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-remove'>/**Implements the &lt;tt&gt;remove(String)&lt;/tt&gt; method as per the specification
+</span> in {@link java.util.prefs.Preferences#remove(String)}.
+
+ &lt;p&gt;This implementation obtains this preference node's lock,
+ checks that the node has not been removed, invokes
+ {@link #removeSpi}(String) and if there are any preference
+ change listeners, enqueues a notification event for processing by the
+ event dispatch thread.
+@param {String} key key whose mapping is to be removed from the preference node.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException {@inheritDoc}.
+*/
+remove : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-clear'>/**Implements the &lt;tt&gt;clear&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#clear()}.
+
+ &lt;p&gt;This implementation obtains this preference node's lock,
+ invokes {@link #keys}() to obtain an array of keys, and
+ iterates over the array invoking {@link #remove}(String) on each key.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+clear : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-putInt'>/**Implements the &lt;tt&gt;putInt&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#putInt(String,int)}.
+
+ &lt;p&gt;This implementation translates &lt;tt&gt;value&lt;/tt&gt; to a string with
+ {@link Integer#toString(int)} and invokes {@link #put(String,String)}
+ on the result.
+@param {String} key key with which the string form of value is to be associated.
+@param {Number} value value whose string form is to be associated with key.
+@throws NullPointerException if key is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+         &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+putInt : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-getInt'>/**Implements the &lt;tt&gt;getInt&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#getInt(String,int)}.
+
+ &lt;p&gt;This implementation invokes {@link #get(String,String) &lt;tt&gt;get(key,
+ null)&lt;/tt&gt;}.  If the return value is non-null, the implementation
+ attempts to translate it to an &lt;tt&gt;int&lt;/tt&gt; with
+ {@link Integer#parseInt(String)}.  If the attempt succeeds, the return
+ value is returned by this method.  Otherwise, &lt;tt&gt;def&lt;/tt&gt; is returned.
+@param {String} key key whose associated value is to be returned as an int.
+@param {Number} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as an int.
+@return {Number} the int value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         an int.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+*/
+getInt : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-putLong'>/**Implements the &lt;tt&gt;putLong&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#putLong(String,long)}.
+
+ &lt;p&gt;This implementation translates &lt;tt&gt;value&lt;/tt&gt; to a string with
+ {@link Long#toString(long)} and invokes {@link #put(String,String)}
+ on the result.
+@param {String} key key with which the string form of value is to be associated.
+@param {Number} value value whose string form is to be associated with key.
+@throws NullPointerException if key is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+         &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+putLong : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-getLong'>/**Implements the &lt;tt&gt;getLong&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#getLong(String,long)}.
+
+ &lt;p&gt;This implementation invokes {@link #get(String,String) &lt;tt&gt;get(key,
+ null)&lt;/tt&gt;}.  If the return value is non-null, the implementation
+ attempts to translate it to a &lt;tt&gt;long&lt;/tt&gt; with
+ {@link Long#parseLong(String)}.  If the attempt succeeds, the return
+ value is returned by this method.  Otherwise, &lt;tt&gt;def&lt;/tt&gt; is returned.
+@param {String} key key whose associated value is to be returned as a long.
+@param {Number} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as a long.
+@return {Number} the long value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         a long.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+*/
+getLong : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-putBoolean'>/**Implements the &lt;tt&gt;putBoolean&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#putBoolean(String,boolean)}.
+
+ &lt;p&gt;This implementation translates &lt;tt&gt;value&lt;/tt&gt; to a string with
+ {@link String#valueOf(boolean)} and invokes {@link #put(String,String)}
+ on the result.
+@param {String} key key with which the string form of value is to be associated.
+@param {Boolean} value value whose string form is to be associated with key.
+@throws NullPointerException if key is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+         &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+putBoolean : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-getBoolean'>/**Implements the &lt;tt&gt;getBoolean&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#getBoolean(String,boolean)}.
+
+ &lt;p&gt;This implementation invokes {@link #get(String,String) &lt;tt&gt;get(key,
+ null)&lt;/tt&gt;}.  If the return value is non-null, it is compared with
+ &lt;tt&gt;&quot;true&quot;&lt;/tt&gt; using {@link String#equalsIgnoreCase(String)}.  If the
+ comparison returns &lt;tt&gt;true&lt;/tt&gt;, this invocation returns
+ &lt;tt&gt;true&lt;/tt&gt;.  Otherwise, the original return value is compared with
+ &lt;tt&gt;&quot;false&quot;&lt;/tt&gt;, again using {@link String#equalsIgnoreCase(String)}.
+ If the comparison returns &lt;tt&gt;true&lt;/tt&gt;, this invocation returns
+ &lt;tt&gt;false&lt;/tt&gt;.  Otherwise, this invocation returns &lt;tt&gt;def&lt;/tt&gt;.
+@param {String} key key whose associated value is to be returned as a boolean.
+@param {Boolean} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as a boolean.
+@return {Boolean} the boolean value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         a boolean.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+*/
+getBoolean : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-putFloat'>/**Implements the &lt;tt&gt;putFloat&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#putFloat(String,float)}.
+
+ &lt;p&gt;This implementation translates &lt;tt&gt;value&lt;/tt&gt; to a string with
+ {@link Float#toString(float)} and invokes {@link #put(String,String)}
+ on the result.
+@param {String} key key with which the string form of value is to be associated.
+@param {Number} value value whose string form is to be associated with key.
+@throws NullPointerException if key is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+         &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+putFloat : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-getFloat'>/**Implements the &lt;tt&gt;getFloat&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#getFloat(String,float)}.
+
+ &lt;p&gt;This implementation invokes {@link #get(String,String) &lt;tt&gt;get(key,
+ null)&lt;/tt&gt;}.  If the return value is non-null, the implementation
+ attempts to translate it to an &lt;tt&gt;float&lt;/tt&gt; with
+ {@link Float#parseFloat(String)}.  If the attempt succeeds, the return
+ value is returned by this method.  Otherwise, &lt;tt&gt;def&lt;/tt&gt; is returned.
+@param {String} key key whose associated value is to be returned as a float.
+@param {Number} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as a float.
+@return {Number} the float value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         a float.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+*/
+getFloat : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-putDouble'>/**Implements the &lt;tt&gt;putDouble&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#putDouble(String,double)}.
+
+ &lt;p&gt;This implementation translates &lt;tt&gt;value&lt;/tt&gt; to a string with
+ {@link Double#toString(double)} and invokes {@link #put(String,String)}
+ on the result.
+@param {String} key key with which the string form of value is to be associated.
+@param {Number} value value whose string form is to be associated with key.
+@throws NullPointerException if key is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+         &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+putDouble : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-getDouble'>/**Implements the &lt;tt&gt;getDouble&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#getDouble(String,double)}.
+
+ &lt;p&gt;This implementation invokes {@link #get(String,String) &lt;tt&gt;get(key,
+ null)&lt;/tt&gt;}.  If the return value is non-null, the implementation
+ attempts to translate it to an &lt;tt&gt;double&lt;/tt&gt; with
+ {@link Double#parseDouble(String)}.  If the attempt succeeds, the return
+ value is returned by this method.  Otherwise, &lt;tt&gt;def&lt;/tt&gt; is returned.
+@param {String} key key whose associated value is to be returned as a double.
+@param {Number} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as a double.
+@return {Number} the double value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         a double.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+*/
+getDouble : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-putByteArray'>/**Implements the &lt;tt&gt;putByteArray&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#putByteArray(String,byte[])}.
+@param {String} key key with which the string form of value is to be associated.
+@param {Object {byte[]}} value value whose string form is to be associated with key.
+@throws NullPointerException if key or value is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if key.length() exceeds MAX_KEY_LENGTH
+         or if value.length exceeds MAX_VALUE_LENGTH*3/4.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+putByteArray : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-getByteArray'>/**Implements the &lt;tt&gt;getByteArray&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#getByteArray(String,byte[])}.
+@param {String} key key whose associated value is to be returned as a byte array.
+@param {Object {byte[]}} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as a byte array.
+@return {Number} the byte array value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         a byte array.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.  (A
+         &lt;tt&gt;null&lt;/tt&gt; value for &lt;tt&gt;def&lt;/tt&gt; &lt;i&gt;is&lt;/i&gt; permitted.)
+*/
+getByteArray : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-keys'>/**Implements the &lt;tt&gt;keys&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#keys()}.
+
+ &lt;p&gt;This implementation obtains this preference node's lock, checks that
+ the node has not been removed and invokes {@link #keysSpi}().
+@return {String} an array of the keys that have an associated value in this
+         preference node.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+keys : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-childrenNames'>/**Implements the &lt;tt&gt;children&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#childrenNames()}.
+
+ &lt;p&gt;This implementation obtains this preference node's lock, checks that
+ the node has not been removed, constructs a &lt;tt&gt;TreeSet&lt;/tt&gt; initialized
+ to the names of children already cached (the children in this node's
+ &quot;child-cache&quot;), invokes {@link #childrenNamesSpi}(), and adds all of the
+ returned child-names into the set.  The elements of the tree set are
+ dumped into a &lt;tt&gt;String&lt;/tt&gt; array using the &lt;tt&gt;toArray&lt;/tt&gt; method,
+ and this array is returned.
+@return {String} the names of the children of this preference node.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #cachedChildren()
+*/
+childrenNames : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-parent'>/**Implements the &lt;tt&gt;parent&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#parent()}.
+
+ &lt;p&gt;This implementation obtains this preference node's lock, checks that
+ the node has not been removed and returns the parent value that was
+ passed to this node's constructor.
+@return {Object {java.util.prefs.Preferences}} the parent of this preference node.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+parent : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-node'>/**Implements the &lt;tt&gt;node&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#node(String)}.
+
+ &lt;p&gt;This implementation obtains this preference node's lock and checks
+ that the node has not been removed.  If &lt;tt&gt;path&lt;/tt&gt; is &lt;tt&gt;&quot;&quot;&lt;/tt&gt;,
+ this node is returned; if &lt;tt&gt;path&lt;/tt&gt; is &lt;tt&gt;&quot;/&quot;&lt;/tt&gt;, this node's
+ root is returned.  If the first character in &lt;tt&gt;path&lt;/tt&gt; is
+ not &lt;tt&gt;'/'&lt;/tt&gt;, the implementation breaks &lt;tt&gt;path&lt;/tt&gt; into
+ tokens and recursively traverses the path from this node to the
+ named node, &quot;consuming&quot; a name and a slash from &lt;tt&gt;path&lt;/tt&gt; at
+ each step of the traversal.  At each step, the current node is locked
+ and the node's child-cache is checked for the named node.  If it is
+ not found, the name is checked to make sure its length does not
+ exceed &lt;tt&gt;MAX_NAME_LENGTH&lt;/tt&gt;.  Then the {@link #childSpi}(String)
+ method is invoked, and the result stored in this node's child-cache.
+ If the newly created &lt;tt&gt;Preferences&lt;/tt&gt; object's {@link #newNode}
+ field is &lt;tt&gt;true&lt;/tt&gt; and there are any node change listeners,
+ a notification event is enqueued for processing by the event dispatch
+ thread.
+
+ &lt;p&gt;When there are no more tokens, the last value found in the
+ child-cache or returned by &lt;tt&gt;childSpi&lt;/tt&gt; is returned by this
+ method.  If during the traversal, two &lt;tt&gt;&quot;/&quot;&lt;/tt&gt; tokens occur
+ consecutively, or the final token is &lt;tt&gt;&quot;/&quot;&lt;/tt&gt; (rather than a name),
+ an appropriate &lt;tt&gt;IllegalArgumentException&lt;/tt&gt; is thrown.
+
+ &lt;p&gt; If the first character of &lt;tt&gt;path&lt;/tt&gt; is &lt;tt&gt;'/'&lt;/tt&gt;
+ (indicating an absolute path name) this preference node's
+ lock is dropped prior to breaking &lt;tt&gt;path&lt;/tt&gt; into tokens, and
+ this method recursively traverses the path starting from the root
+ (rather than starting from this node).  The traversal is otherwise
+ identical to the one described for relative path names.  Dropping
+ the lock on this node prior to commencing the traversal at the root
+ node is essential to avoid the possibility of deadlock, as per the
+ {@link #lock locking invariant}.
+@param {String} path the path name of the preference node to return.
+@return {Object {java.util.prefs.Preferences}} the specified preference node.
+@throws IllegalArgumentException if the path name is invalid (i.e.,
+         it contains multiple consecutive slash characters, or ends
+         with a slash character and is more than one character long).
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+node : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-nodeExists'>/**Implements the &lt;tt&gt;nodeExists&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#nodeExists(String)}.
+
+ &lt;p&gt;This implementation is very similar to {@link #node}(String),
+ except that {@link #getChild}(String) is used instead of {@link #childSpi}(String).
+@param {String} path the path name of the node whose existence is to be checked.
+@return {Boolean} true if the specified node exists.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalArgumentException if the path name is invalid (i.e.,
+         it contains multiple consecutive slash characters, or ends
+         with a slash character and is more than one character long).
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method and
+         &lt;tt&gt;pathname&lt;/tt&gt; is not the empty string (&lt;tt&gt;&quot;&quot;&lt;/tt&gt;).
+*/
+nodeExists : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-removeNode'>/**Implements the &lt;tt&gt;removeNode()&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#removeNode()}.
+
+ &lt;p&gt;This implementation checks to see that this node is the root; if so,
+ it throws an appropriate exception.  Then, it locks this node's parent,
+ and calls a recursive helper method that traverses the subtree rooted at
+ this node.  The recursive method locks the node on which it was called,
+ checks that it has not already been removed, and then ensures that all
+ of its children are cached: The {@link #childrenNamesSpi}() method is
+ invoked and each returned child name is checked for containment in the
+ child-cache.  If a child is not already cached, the {@link #childSpi}(String) method is invoked to create a &lt;tt&gt;Preferences&lt;/tt&gt;
+ instance for it, and this instance is put into the child-cache.  Then
+ the helper method calls itself recursively on each node contained in its
+ child-cache.  Next, it invokes {@link #removeNodeSpi}(), marks itself
+ as removed, and removes itself from its parent's child-cache.  Finally,
+ if there are any node change listeners, it enqueues a notification
+ event for processing by the event dispatch thread.
+
+ &lt;p&gt;Note that the helper method is always invoked with all ancestors up
+ to the &quot;closest non-removed ancestor&quot; locked.
+@throws IllegalStateException if this node (or an ancestor) has already
+         been removed with the {@link #removeNode()} method.
+@throws UnsupportedOperationException if this method is invoked on
+         the root node.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+*/
+removeNode : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-name'>/**Implements the &lt;tt&gt;name&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#name()}.
+
+ &lt;p&gt;This implementation merely returns the name that was
+ passed to this node's constructor.
+@return {String} this preference node's name, relative to its parent.
+*/
+name : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-absolutePath'>/**Implements the &lt;tt&gt;absolutePath&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#absolutePath()}.
+
+ &lt;p&gt;This implementation merely returns the absolute path name that
+ was computed at the time that this node was constructed (based on
+ the name that was passed to this node's constructor, and the names
+ that were passed to this node's ancestors' constructors).
+@return {String} this preference node's absolute path name.
+*/
+absolutePath : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-isUserNode'>/**Implements the &lt;tt&gt;isUserNode&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#isUserNode()}.
+
+ &lt;p&gt;This implementation compares this node's root node (which is stored
+ in a private field) with the value returned by
+ {@link java.util.prefs.Preferences#userRoot()}.  If the two object references are
+ identical, this method returns true.
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if this preference node is in the user
+         preference tree, &lt;tt&gt;false&lt;/tt&gt; if it's in the system
+         preference tree.
+*/
+isUserNode : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-addPreferenceChangeListener'>/**
+</span>*/
+addPreferenceChangeListener : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-removePreferenceChangeListener'>/**
+</span>*/
+removePreferenceChangeListener : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-addNodeChangeListener'>/**
+</span>*/
+addNodeChangeListener : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-removeNodeChangeListener'>/**
+</span>*/
+removeNodeChangeListener : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-toString'>/**Returns the absolute path name of this preferences node.
+</span>*/
+toString : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-sync'>/**Implements the &lt;tt&gt;sync&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#sync()}.
+
+ &lt;p&gt;This implementation calls a recursive helper method that locks this
+ node, invokes syncSpi() on it, unlocks this node, and recursively
+ invokes this method on each &quot;cached child.&quot;  A cached child is a child
+ of this node that has been created in this VM and not subsequently
+ removed.  In effect, this method does a depth first traversal of the
+ &quot;cached subtree&quot; rooted at this node, calling syncSpi() on each node in
+ the subTree while only that node is locked. Note that syncSpi() is
+ invoked top-down.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #flush()
+*/
+sync : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-flush'>/**Implements the &lt;tt&gt;flush&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#flush()}.
+
+ &lt;p&gt;This implementation calls a recursive helper method that locks this
+ node, invokes flushSpi() on it, unlocks this node, and recursively
+ invokes this method on each &quot;cached child.&quot;  A cached child is a child
+ of this node that has been created in this VM and not subsequently
+ removed.  In effect, this method does a depth first traversal of the
+ &quot;cached subtree&quot; rooted at this node, calling flushSpi() on each node in
+ the subTree while only that node is locked. Note that flushSpi() is
+ invoked top-down.
+
+ &lt;p&gt; If this method is invoked on a node that has been removed with
+ the {@link #removeNode}() method, flushSpi() is invoked on this node,
+ but not on others.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@see #flush()
+*/
+flush : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-exportNode'>/**Implements the &lt;tt&gt;exportNode&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#exportNode(OutputStream)}.
+@param {Object {OutputStream}} os the output stream on which to emit the XML document.
+@throws IOException if writing to the specified output stream
+         results in an &lt;tt&gt;IOException&lt;/tt&gt;.
+@throws BackingStoreException if preference data cannot be read from
+         backing store.
+*/
+exportNode : function(  ) {},
+
+<span id='java-util-prefs-AbstractPreferences-method-exportSubtree'>/**Implements the &lt;tt&gt;exportSubtree&lt;/tt&gt; method as per the specification in
+</span> {@link java.util.prefs.Preferences#exportSubtree(OutputStream)}.
+@param {Object {OutputStream}} os the output stream on which to emit the XML document.
+@throws IOException if writing to the specified output stream
+         results in an &lt;tt&gt;IOException&lt;/tt&gt;.
+@throws BackingStoreException if preference data cannot be read from
+         backing store.
+*/
+exportSubtree : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

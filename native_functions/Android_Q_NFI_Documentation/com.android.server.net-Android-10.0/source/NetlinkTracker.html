@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-net-NetlinkTracker'>/**@class com.android.server.net.NetlinkTracker
+</span>@extends com.android.server.net.BaseNetworkObserver
+
+ Keeps track of link configuration received from Netlink.
+
+ Instances of this class are expected to be owned by subsystems such as Wi-Fi
+ or Ethernet that manage one or more network interfaces. Each interface to be
+ tracked needs its own {@code NetlinkTracker}.
+
+ An instance of this class is constructed by passing in an interface name and
+ a callback. The owner is then responsible for registering the tracker with
+ NetworkManagementService. When the class receives update notifications from
+ the NetworkManagementService notification threads, it applies the update to
+ its local LinkProperties, and if something has changed, notifies its owner of
+ the update via the callback.
+
+ The owner can then call {@code getLinkProperties()} in order to find out
+ what changed. If in the meantime the LinkProperties stored here have changed,
+ this class will return the current LinkProperties. Because each change
+ triggers an update callback after the change is made, the owner may get more
+ callbacks than strictly necessary (some of which may be no-ops), but will not
+ be out of sync once all callbacks have been processed.
+
+ Threading model:
+
+ - The owner of this class is expected to create it, register it, and call
+   getLinkProperties or clearLinkProperties on its thread.
+ - Most of the methods in the class are inherited from BaseNetworkObserver
+   and are called by NetworkManagementService notification threads.
+ - All accesses to mLinkProperties must be synchronized(this). All the other
+   member variables are immutable once the object is constructed.
+
+ This class currently tracks IPv4 and IPv6 addresses. In the future it will
+ track routes and DNS servers.
+
+ @hide
+*/
+var NetlinkTracker = {
+
+<span id='com-android-server-net-NetlinkTracker-method-interfaceRemoved'>/**
+</span>*/
+interfaceRemoved : function(  ) {},
+
+<span id='com-android-server-net-NetlinkTracker-method-addressUpdated'>/**
+</span>*/
+addressUpdated : function(  ) {},
+
+<span id='com-android-server-net-NetlinkTracker-method-addressRemoved'>/**
+</span>*/
+addressRemoved : function(  ) {},
+
+<span id='com-android-server-net-NetlinkTracker-method-routeUpdated'>/**
+</span>*/
+routeUpdated : function(  ) {},
+
+<span id='com-android-server-net-NetlinkTracker-method-routeRemoved'>/**
+</span>*/
+routeRemoved : function(  ) {},
+
+<span id='com-android-server-net-NetlinkTracker-method-interfaceDnsServerInfo'>/**
+</span>*/
+interfaceDnsServerInfo : function(  ) {},
+
+<span id='com-android-server-net-NetlinkTracker-method-getLinkProperties'>/**Returns a copy of this object's LinkProperties.
+</span>*/
+getLinkProperties : function(  ) {},
+
+<span id='com-android-server-net-NetlinkTracker-method-clearLinkProperties'>/**
+</span>*/
+clearLinkProperties : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

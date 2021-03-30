@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-usage-AppIdleHistory'>/**@class com.android.server.usage.AppIdleHistory
+</span>@extends java.lang.Object
+
+ Keeps track of recent active state changes in apps.
+ Access should be guarded by a lock by the caller.
+*/
+var AppIdleHistory = {
+
+<span id='com-android-server-usage-AppIdleHistory-method-updateDisplay'>/**
+</span>*/
+updateDisplay : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-getScreenOnTime'>/**
+</span>*/
+getScreenOnTime : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-writeAppIdleDurations'>/**To be called periodically to keep track of elapsed time when app idle times are written
+</span>*/
+writeAppIdleDurations : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-reportUsage'>/**Mark the app as used and update the bucket if necessary. If there is a timeout specified
+</span> that's in the future, then the usage event is temporary and keeps the app in the specified
+ bucket at least until the timeout is reached. This can be used to keep the app in an
+ elevated bucket for a while until some important task gets to run.
+@param {Object {AppIdleHistory.AppUsageHistory}} appUsageHistory the usage record for the app being updated
+@param {String} packageName name of the app being updated, for logging purposes
+@param {Number} newBucket the bucket to set the app to
+@param {Number} usageReason the sub-reason for usage, one of REASON_SUB_USAGE_*
+@param {Number} elapsedRealtime mark as used time if non-zero
+@param {Number} timeout set the timeout of the specified bucket, if non-zero. Can only be used
+                with bucket values of ACTIVE and WORKING_SET.
+@return {Object {com.android.server.usage.AppIdleHistory.AppUsageHistory}} 
+*/
+reportUsage : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-reportUsage'>/**Mark the app as used and update the bucket if necessary. If there is a timeout specified
+</span> that's in the future, then the usage event is temporary and keeps the app in the specified
+ bucket at least until the timeout is reached. This can be used to keep the app in an
+ elevated bucket for a while until some important task gets to run.
+@param {String} packageName
+@param {Number} userId
+@param {Number} newBucket the bucket to set the app to
+@param {Number} usageReason sub reason for usage
+@param {Number} nowElapsed mark as used time if non-zero
+@param {Number} timeout set the timeout of the specified bucket, if non-zero. Can only be used
+                with bucket values of ACTIVE and WORKING_SET.
+@return {Object {com.android.server.usage.AppIdleHistory.AppUsageHistory}} 
+*/
+reportUsage : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-onUserRemoved'>/**
+</span>*/
+onUserRemoved : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-isIdle'>/**
+</span>*/
+isIdle : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-getAppUsageHistory'>/**
+</span>*/
+getAppUsageHistory : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-setAppStandbyBucket'>/**
+</span>*/
+setAppStandbyBucket : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-setAppStandbyBucket'>/**
+</span>*/
+setAppStandbyBucket : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-updateLastPrediction'>/**Update the prediction for the app but don't change the actual bucket
+</span>@param {Object {AppIdleHistory.AppUsageHistory}} app The app for which the prediction was made
+@param {Number} elapsedTimeAdjusted The elapsed time in the elapsed duration timebase
+@param {Number} bucket The predicted bucket
+*/
+updateLastPrediction : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-setLastJobRunTime'>/**Marks the last time a job was run, with the given elapsedRealtime. The time stored is
+</span> based on the elapsed timebase.
+@param {String} packageName
+@param {Number} userId
+@param {Number} elapsedRealtime
+*/
+setLastJobRunTime : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-getTimeSinceLastJobRun'>/**Returns the time since the last job was run for this app. This can be larger than the
+</span> current elapsedRealtime, in case it happened before boot or a really large value if no jobs
+ were ever run.
+@param {String} packageName
+@param {Number} userId
+@param {Number} elapsedRealtime
+@return {Number} 
+*/
+getTimeSinceLastJobRun : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-getAppStandbyBucket'>/**
+</span>*/
+getAppStandbyBucket : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-getAppStandbyBuckets'>/**
+</span>*/
+getAppStandbyBuckets : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-getAppStandbyReason'>/**
+</span>*/
+getAppStandbyReason : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-getElapsedTime'>/**
+</span>*/
+getElapsedTime : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-setIdle'>/**
+</span>*/
+setIdle : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-clearUsage'>/**
+</span>*/
+clearUsage : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-userFileExists'>/**Check if App Idle File exists on disk
+</span>@param {Number} userId
+@return {Boolean} true if file exists
+*/
+userFileExists : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-writeAppIdleTimes'>/**
+</span>*/
+writeAppIdleTimes : function(  ) {},
+
+<span id='com-android-server-usage-AppIdleHistory-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

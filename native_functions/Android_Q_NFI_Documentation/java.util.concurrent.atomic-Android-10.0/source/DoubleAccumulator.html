@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-atomic-DoubleAccumulator'>/**@class java.util.concurrent.atomic.DoubleAccumulator
+</span> implements java.io.Serializable
+
+@extends java.util.concurrent.atomic.Striped64
+
+ One or more variables that together maintain a running {@code double}
+ value updated using a supplied function.  When updates (method
+ {@link #accumulate}) are contended across threads, the set of variables
+ may grow dynamically to reduce contention.  Method {@link #get}
+ (or, equivalently, {@link #doubleValue}) returns the current value
+ across the variables maintaining updates.
+
+ &lt;p&gt;This class is usually preferable to alternatives when multiple
+ threads update a common value that is used for purposes such as
+ summary statistics that are frequently updated but less frequently
+ read.
+
+ &lt;p&gt;The supplied accumulator function should be side-effect-free,
+ since it may be re-applied when attempted updates fail due to
+ contention among threads. The function is applied with the current
+ value as its first argument, and the given update as the second
+ argument.  For example, to maintain a running maximum value, you
+ could supply {@code Double::max} along with {@code
+ Double.NEGATIVE_INFINITY} as the identity. The order of
+ accumulation within or across threads is not guaranteed. Thus, this
+ class may not be applicable if numerical stability is required,
+ especially when combining values of substantially different orders
+ of magnitude.
+
+ &lt;p&gt;Class {@link java.util.concurrent.atomic.DoubleAdder} provides analogs of the functionality
+ of this class for the common special case of maintaining sums.  The
+ call {@code new DoubleAdder()} is equivalent to {@code new
+ DoubleAccumulator((x, y) -&gt; x + y, 0.0)}.
+
+ &lt;p&gt;This class extends {@link Number}, but does &lt;em&gt;not&lt;/em&gt; define
+ methods such as {@code equals}, {@code hashCode} and {@code
+ compareTo} because instances are expected to be mutated, and so are
+ not useful as collection keys.
+
+ @since 1.8
+ @author Doug Lea
+*/
+var DoubleAccumulator = {
+
+<span id='java-util-concurrent-atomic-DoubleAccumulator-method-accumulate'>/**Updates with the given value.
+</span>@param {Number} x the value
+*/
+accumulate : function(  ) {},
+
+<span id='java-util-concurrent-atomic-DoubleAccumulator-method-get'>/**Returns the current value.  The returned value is &lt;em&gt;NOT&lt;/em&gt;
+</span> an atomic snapshot; invocation in the absence of concurrent
+ updates returns an accurate result, but concurrent updates that
+ occur while the value is being calculated might not be
+ incorporated.
+@return {Number} the current value
+*/
+get : function(  ) {},
+
+<span id='java-util-concurrent-atomic-DoubleAccumulator-method-reset'>/**Resets variables maintaining updates to the identity value.
+</span> This method may be a useful alternative to creating a new
+ updater, but is only effective if there are no concurrent
+ updates.  Because this method is intrinsically racy, it should
+ only be used when it is known that no threads are concurrently
+ updating.
+*/
+reset : function(  ) {},
+
+<span id='java-util-concurrent-atomic-DoubleAccumulator-method-getThenReset'>/**Equivalent in effect to {@link #get} followed by {@link #reset}. This method may apply for example during quiescent
+</span> points between multithreaded computations.  If there are
+ updates concurrent with this method, the returned value is
+ &lt;em&gt;not&lt;/em&gt; guaranteed to be the final value occurring before
+ the reset.
+@return {Number} the value before reset
+*/
+getThenReset : function(  ) {},
+
+<span id='java-util-concurrent-atomic-DoubleAccumulator-method-toString'>/**Returns the String representation of the current value.
+</span>@return {String} the String representation of the current value
+*/
+toString : function(  ) {},
+
+<span id='java-util-concurrent-atomic-DoubleAccumulator-method-doubleValue'>/**Equivalent to {@link #get}.
+</span>@return {Number} the current value
+*/
+doubleValue : function(  ) {},
+
+<span id='java-util-concurrent-atomic-DoubleAccumulator-method-longValue'>/**Returns the {@linkplain #get current value} as a {@code long}
+</span> after a narrowing primitive conversion.
+*/
+longValue : function(  ) {},
+
+<span id='java-util-concurrent-atomic-DoubleAccumulator-method-intValue'>/**Returns the {@linkplain #get current value} as an {@code int}
+</span> after a narrowing primitive conversion.
+*/
+intValue : function(  ) {},
+
+<span id='java-util-concurrent-atomic-DoubleAccumulator-method-floatValue'>/**Returns the {@linkplain #get current value} as a {@code float}
+</span> after a narrowing primitive conversion.
+*/
+floatValue : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

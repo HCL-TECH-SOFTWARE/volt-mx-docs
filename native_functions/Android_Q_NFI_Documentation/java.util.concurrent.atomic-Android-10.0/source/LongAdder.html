@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-atomic-LongAdder'>/**@class java.util.concurrent.atomic.LongAdder
+</span> implements java.io.Serializable
+
+@extends java.util.concurrent.atomic.Striped64
+
+ One or more variables that together maintain an initially zero
+ {@code long} sum.  When updates (method {@link #add}) are contended
+ across threads, the set of variables may grow dynamically to reduce
+ contention. Method {@link #sum} (or, equivalently, {@link #longValue}) returns the current total combined across the
+ variables maintaining the sum.
+
+ &lt;p&gt;This class is usually preferable to {@link java.util.concurrent.atomic.AtomicLong} when
+ multiple threads update a common sum that is used for purposes such
+ as collecting statistics, not for fine-grained synchronization
+ control.  Under low update contention, the two classes have similar
+ characteristics. But under high contention, expected throughput of
+ this class is significantly higher, at the expense of higher space
+ consumption.
+
+ &lt;p&gt;LongAdders can be used with a {@link java.util.concurrent.ConcurrentHashMap} to maintain a scalable
+ frequency map (a form of histogram or multiset). For example, to
+ add a count to a {@code ConcurrentHashMap&lt;String,LongAdder&gt; freqs},
+ initializing if not already present, you can use {@code
+ freqs.computeIfAbsent(key, k -&gt; new LongAdder()).increment();}
+
+ &lt;p&gt;This class extends {@link Number}, but does &lt;em&gt;not&lt;/em&gt; define
+ methods such as {@code equals}, {@code hashCode} and {@code
+ compareTo} because instances are expected to be mutated, and so are
+ not useful as collection keys.
+
+ @since 1.8
+ @author Doug Lea
+*/
+var LongAdder = {
+
+<span id='java-util-concurrent-atomic-LongAdder-method-add'>/**Adds the given value.
+</span>@param {Number} x the value to add
+*/
+add : function(  ) {},
+
+<span id='java-util-concurrent-atomic-LongAdder-method-increment'>/**Equivalent to {@code add(1)}.
+</span>*/
+increment : function(  ) {},
+
+<span id='java-util-concurrent-atomic-LongAdder-method-decrement'>/**Equivalent to {@code add(-1)}.
+</span>*/
+decrement : function(  ) {},
+
+<span id='java-util-concurrent-atomic-LongAdder-method-sum'>/**Returns the current sum.  The returned value is &lt;em&gt;NOT&lt;/em&gt; an
+</span> atomic snapshot; invocation in the absence of concurrent
+ updates returns an accurate result, but concurrent updates that
+ occur while the sum is being calculated might not be
+ incorporated.
+@return {Number} the sum
+*/
+sum : function(  ) {},
+
+<span id='java-util-concurrent-atomic-LongAdder-method-reset'>/**Resets variables maintaining the sum to zero.  This method may
+</span> be a useful alternative to creating a new adder, but is only
+ effective if there are no concurrent updates.  Because this
+ method is intrinsically racy, it should only be used when it is
+ known that no threads are concurrently updating.
+*/
+reset : function(  ) {},
+
+<span id='java-util-concurrent-atomic-LongAdder-method-sumThenReset'>/**Equivalent in effect to {@link #sum} followed by {@link #reset}. This method may apply for example during quiescent
+</span> points between multithreaded computations.  If there are
+ updates concurrent with this method, the returned value is
+ &lt;em&gt;not&lt;/em&gt; guaranteed to be the final value occurring before
+ the reset.
+@return {Number} the sum
+*/
+sumThenReset : function(  ) {},
+
+<span id='java-util-concurrent-atomic-LongAdder-method-toString'>/**Returns the String representation of the {@link #sum}.
+</span>@return {String} the String representation of the {@link #sum}
+*/
+toString : function(  ) {},
+
+<span id='java-util-concurrent-atomic-LongAdder-method-longValue'>/**Equivalent to {@link #sum}.
+</span>@return {Number} the sum
+*/
+longValue : function(  ) {},
+
+<span id='java-util-concurrent-atomic-LongAdder-method-intValue'>/**Returns the {@link #sum} as an {@code int} after a narrowing
+</span> primitive conversion.
+*/
+intValue : function(  ) {},
+
+<span id='java-util-concurrent-atomic-LongAdder-method-floatValue'>/**Returns the {@link #sum} as a {@code float}
+</span> after a widening primitive conversion.
+*/
+floatValue : function(  ) {},
+
+<span id='java-util-concurrent-atomic-LongAdder-method-doubleValue'>/**Returns the {@link #sum} as a {@code double} after a widening
+</span> primitive conversion.
+*/
+doubleValue : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

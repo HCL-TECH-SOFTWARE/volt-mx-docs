@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-temporal-ChronoUnit'>/**@class java.time.temporal.ChronoUnit
+</span> implements java.time.temporal.TemporalUnit
+
+@extends java.lang.Enum
+
+ A standard set of date periods units.
+ &lt;p&gt;
+ This set of units provide unit-based access to manipulate a date, time or date-time.
+ The standard set of units can be extended by implementing {@link java.time.temporal.TemporalUnit}.
+ &lt;p&gt;
+ These units are intended to be applicable in multiple calendar systems.
+ For example, most non-ISO calendar systems define units of years, months and days,
+ just with slightly different rules.
+ The documentation of each unit explains how it operates.
+
+ @implSpec
+ This is a final, immutable and thread-safe enum.
+
+ @since 1.8
+*/
+var ChronoUnit = {
+
+<span id='java-time-temporal-ChronoUnit-property-NANOS'>/** Unit that represents the concept of a nanosecond, the smallest supported unit of time.
+</span> For the ISO calendar system, it is equal to the 1,000,000,000th part of the second unit.
+*/
+NANOS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-MICROS'>/** Unit that represents the concept of a microsecond.
+</span> For the ISO calendar system, it is equal to the 1,000,000th part of the second unit.
+*/
+MICROS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-MILLIS'>/** Unit that represents the concept of a millisecond.
+</span> For the ISO calendar system, it is equal to the 1000th part of the second unit.
+*/
+MILLIS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-SECONDS'>/** Unit that represents the concept of a second.
+</span> For the ISO calendar system, it is equal to the second in the SI system
+ of units, except around a leap-second.
+*/
+SECONDS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-MINUTES'>/** Unit that represents the concept of a minute.
+</span> For the ISO calendar system, it is equal to 60 seconds.
+*/
+MINUTES : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-HOURS'>/** Unit that represents the concept of an hour.
+</span> For the ISO calendar system, it is equal to 60 minutes.
+*/
+HOURS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-HALF_DAYS'>/** Unit that represents the concept of half a day, as used in AM/PM.
+</span> For the ISO calendar system, it is equal to 12 hours.
+*/
+HALF_DAYS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-DAYS'>/** Unit that represents the concept of a day.
+</span> For the ISO calendar system, it is the standard day from midnight to midnight.
+ The estimated duration of a day is {@code 24 Hours}.
+ &lt;p&gt;
+ When used with other calendar systems it must correspond to the day defined by
+ the rising and setting of the Sun on Earth. It is not required that days begin
+ at midnight - when converting between calendar systems, the date should be
+ equivalent at midday.
+*/
+DAYS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-WEEKS'>/** Unit that represents the concept of a week.
+</span> For the ISO calendar system, it is equal to 7 days.
+ &lt;p&gt;
+ When used with other calendar systems it must correspond to an integral number of days.
+*/
+WEEKS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-MONTHS'>/** Unit that represents the concept of a month.
+</span> For the ISO calendar system, the length of the month varies by month-of-year.
+ The estimated duration of a month is one twelfth of {@code 365.2425 Days}.
+ &lt;p&gt;
+ When used with other calendar systems it must correspond to an integral number of days.
+*/
+MONTHS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-YEARS'>/** Unit that represents the concept of a year.
+</span> For the ISO calendar system, it is equal to 12 months.
+ The estimated duration of a year is {@code 365.2425 Days}.
+ &lt;p&gt;
+ When used with other calendar systems it must correspond to an integral number of days
+ or months roughly equal to a year defined by the passage of the Earth around the Sun.
+*/
+YEARS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-DECADES'>/** Unit that represents the concept of a decade.
+</span> For the ISO calendar system, it is equal to 10 years.
+ &lt;p&gt;
+ When used with other calendar systems it must correspond to an integral number of days
+ and is normally an integral number of years.
+*/
+DECADES : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-CENTURIES'>/** Unit that represents the concept of a century.
+</span> For the ISO calendar system, it is equal to 100 years.
+ &lt;p&gt;
+ When used with other calendar systems it must correspond to an integral number of days
+ and is normally an integral number of years.
+*/
+CENTURIES : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-MILLENNIA'>/** Unit that represents the concept of a millennium.
+</span> For the ISO calendar system, it is equal to 1000 years.
+ &lt;p&gt;
+ When used with other calendar systems it must correspond to an integral number of days
+ and is normally an integral number of years.
+*/
+MILLENNIA : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-ERAS'>/** Unit that represents the concept of an era.
+</span> The ISO calendar system doesn't have eras thus it is impossible to add
+ an era to a date or date-time.
+ The estimated duration of the era is artificially defined as {@code 1,000,000,000 Years}.
+ &lt;p&gt;
+ When used with other calendar systems there are no restrictions on the unit.
+*/
+ERAS : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-property-FOREVER'>/** Artificial unit that represents the concept of forever.
+</span> This is primarily used with {@link java.time.temporal.TemporalField} to represent unbounded fields
+ such as the year or era.
+ The estimated duration of the era is artificially defined as the largest duration
+ supported by {@code Duration}.
+*/
+FOREVER : &quot;null&quot;,
+<span id='java-time-temporal-ChronoUnit-method-values'>/**
+</span>*/
+values : function(  ) {},
+
+<span id='java-time-temporal-ChronoUnit-method-valueOf'>/**
+</span>*/
+valueOf : function(  ) {},
+
+<span id='java-time-temporal-ChronoUnit-method-getDuration'>/**Gets the estimated duration of this unit in the ISO calendar system.
+</span> &lt;p&gt;
+ All of the units in this class have an estimated duration.
+ Days vary due to daylight saving time, while months have different lengths.
+@return {Object {java.time.Duration}} the estimated duration of this unit, not null
+*/
+getDuration : function(  ) {},
+
+<span id='java-time-temporal-ChronoUnit-method-isDurationEstimated'>/**Checks if the duration of the unit is an estimate.
+</span> &lt;p&gt;
+ All time units in this class are considered to be accurate, while all date
+ units in this class are considered to be estimated.
+ &lt;p&gt;
+ This definition ignores leap seconds, but considers that Days vary due to
+ daylight saving time and months have different lengths.
+@return {Boolean} true if the duration is estimated, false if accurate
+*/
+isDurationEstimated : function(  ) {},
+
+<span id='java-time-temporal-ChronoUnit-method-isDateBased'>/**Checks if this unit is a date unit.
+</span> &lt;p&gt;
+ All units from days to eras inclusive are date-based.
+ Time-based units and {@code FOREVER} return false.
+@return {Boolean} true if a date unit, false if a time unit
+*/
+isDateBased : function(  ) {},
+
+<span id='java-time-temporal-ChronoUnit-method-isTimeBased'>/**Checks if this unit is a time unit.
+</span> &lt;p&gt;
+ All units from nanos to half-days inclusive are time-based.
+ Date-based units and {@code FOREVER} return false.
+@return {Boolean} true if a time unit, false if a date unit
+*/
+isTimeBased : function(  ) {},
+
+<span id='java-time-temporal-ChronoUnit-method-isSupportedBy'>/**
+</span>*/
+isSupportedBy : function(  ) {},
+
+<span id='java-time-temporal-ChronoUnit-method-addTo'>/**
+</span>*/
+addTo : function(  ) {},
+
+<span id='java-time-temporal-ChronoUnit-method-between'>/**
+</span>*/
+between : function(  ) {},
+
+<span id='java-time-temporal-ChronoUnit-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

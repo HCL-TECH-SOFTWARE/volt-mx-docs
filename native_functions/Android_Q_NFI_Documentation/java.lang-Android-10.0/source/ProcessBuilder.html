@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-ProcessBuilder'>/**@class java.lang.ProcessBuilder
+</span>@extends java.lang.Object
+
+ This class is used to create operating system processes.
+
+ &lt;p&gt;Each {@code ProcessBuilder} instance manages a collection
+ of process attributes.  The {@link #start}() method creates a new
+ {@link java.lang.Process} instance with those attributes.  The {@link #start}() method can be invoked repeatedly from the same instance
+ to create new subprocesses with identical or related attributes.
+
+ &lt;p&gt;Each process builder manages these process attributes:
+
+ &lt;ul&gt;
+
+ &lt;li&gt;a &lt;i&gt;command&lt;/i&gt;, a list of strings which signifies the
+ external program file to be invoked and its arguments, if any.
+ Which string lists represent a valid operating system command is
+ system-dependent.  For example, it is common for each conceptual
+ argument to be an element in this list, but there are operating
+ systems where programs are expected to tokenize command line
+ strings themselves - on such a system a Java implementation might
+ require commands to contain exactly two elements.
+
+ &lt;li&gt;an &lt;i&gt;environment&lt;/i&gt;, which is a system-dependent mapping from
+ &lt;i&gt;variables&lt;/i&gt; to &lt;i&gt;values&lt;/i&gt;.  The initial value is a copy of
+ the environment of the current process (see {@link java.lang.System#getenv()}).
+
+ &lt;li&gt;a &lt;i&gt;working directory&lt;/i&gt;.  The default value is the current
+ working directory of the current process, usually the directory
+ named by the system property {@code user.dir}.
+
+ &lt;li&gt;&lt;a name=&quot;redirect-input&quot;&gt;a source of &lt;i&gt;standard input&lt;/i&gt;&lt;/a&gt;.
+ By default, the subprocess reads input from a pipe.  Java code
+ can access this pipe via the output stream returned by
+ {@link java.lang.Process#getOutputStream()}.  However, standard input may
+ be redirected to another source using
+ {@link #redirectInput(Redirect) redirectInput}.
+ In this case, {@link java.lang.Process#getOutputStream()} will return a
+ &lt;i&gt;null output stream&lt;/i&gt;, for which:
+
+ &lt;ul&gt;
+ &lt;li&gt;the {@link OutputStream#write(int) write} methods always
+ throw {@code IOException}
+ &lt;li&gt;the {@link OutputStream#close() close} method does nothing
+ &lt;/ul&gt;
+
+ &lt;li&gt;&lt;a name=&quot;redirect-output&quot;&gt;a destination for &lt;i&gt;standard output&lt;/i&gt;
+ and &lt;i&gt;standard error&lt;/i&gt;&lt;/a&gt;.  By default, the subprocess writes standard
+ output and standard error to pipes.  Java code can access these pipes
+ via the input streams returned by {@link java.lang.Process#getInputStream()} and
+ {@link java.lang.Process#getErrorStream()}.  However, standard output and
+ standard error may be redirected to other destinations using
+ {@link #redirectOutput(Redirect) redirectOutput} and
+ {@link #redirectError(Redirect) redirectError}.
+ In this case, {@link java.lang.Process#getInputStream()} and/or
+ {@link java.lang.Process#getErrorStream()} will return a &lt;i&gt;null input
+ stream&lt;/i&gt;, for which:
+
+ &lt;ul&gt;
+ &lt;li&gt;the {@link InputStream#read() read} methods always return
+ {@code -1}
+ &lt;li&gt;the {@link InputStream#available() available} method always returns
+ {@code 0}
+ &lt;li&gt;the {@link InputStream#close() close} method does nothing
+ &lt;/ul&gt;
+
+ &lt;li&gt;a &lt;i&gt;redirectErrorStream&lt;/i&gt; property.  Initially, this property
+ is {@code false}, meaning that the standard output and error
+ output of a subprocess are sent to two separate streams, which can
+ be accessed using the {@link java.lang.Process#getInputStream()} and {@link java.lang.Process#getErrorStream()} methods.
+
+ &lt;p&gt;If the value is set to {@code true}, then:
+
+ &lt;ul&gt;
+ &lt;li&gt;standard error is merged with the standard output and always sent
+ to the same destination (this makes it easier to correlate error
+ messages with the corresponding output)
+ &lt;li&gt;the common destination of standard error and standard output can be
+ redirected using
+ {@link #redirectOutput(Redirect) redirectOutput}
+ &lt;li&gt;any redirection set by the
+ {@link #redirectError(Redirect) redirectError}
+ method is ignored when creating a subprocess
+ &lt;li&gt;the stream returned from {@link java.lang.Process#getErrorStream()} will
+ always be a &lt;a href=&quot;#redirect-output&quot;&gt;null input stream&lt;/a&gt;
+ &lt;/ul&gt;
+
+ &lt;/ul&gt;
+
+ &lt;p&gt;Modifying a process builder's attributes will affect processes
+ subsequently started by that object's {@link #start}() method, but
+ will never affect previously started processes or the Java process
+ itself.
+
+ &lt;p&gt;Most error checking is performed by the {@link #start}() method.
+ It is possible to modify the state of an object so that {@link #start}() will fail.  For example, setting the command attribute to
+ an empty list will not throw an exception unless {@link #start}()
+ is invoked.
+
+ &lt;p&gt;&lt;strong&gt;Note that this class is not synchronized.&lt;/strong&gt;
+ If multiple threads access a {@code ProcessBuilder} instance
+ concurrently, and at least one of the threads modifies one of the
+ attributes structurally, it &lt;i&gt;must&lt;/i&gt; be synchronized externally.
+
+ &lt;p&gt;Starting a new process which uses the default working directory
+ and environment is easy:
+
+ &lt;pre&gt; {@code
+ Process p = new ProcessBuilder(&quot;myCommand&quot;, &quot;myArg&quot;).start();
+ }&lt;/pre&gt;
+
+ &lt;p&gt;Here is an example that starts a process with a modified working
+ directory and environment, and redirects standard output and error
+ to be appended to a log file:
+
+ &lt;pre&gt; {@code
+ ProcessBuilder pb =
+   new ProcessBuilder(&quot;myCommand&quot;, &quot;myArg1&quot;, &quot;myArg2&quot;);
+ Map&lt;String, String&gt; env = pb.environment();
+ env.put(&quot;VAR1&quot;, &quot;myValue&quot;);
+ env.remove(&quot;OTHERVAR&quot;);
+ env.put(&quot;VAR2&quot;, env.get(&quot;VAR1&quot;) + &quot;suffix&quot;);
+ pb.directory(new File(&quot;myDir&quot;));
+ File log = new File(&quot;log&quot;);
+ pb.redirectErrorStream(true);
+ pb.redirectOutput(Redirect.appendTo(log));
+ Process p = pb.start();
+ assert pb.redirectInput() == Redirect.PIPE;
+ assert pb.redirectOutput().file() == log;
+ assert p.getInputStream().read() == -1;
+ }&lt;/pre&gt;
+
+ &lt;p&gt;To start a process with an explicit set of environment
+ variables, first call {@link java.util.Map#clear() Map.clear()}
+ before adding environment variables.
+
+ @author Martin Buchholz
+ @since 1.5
+*/
+var ProcessBuilder = {
+
+<span id='java-lang-ProcessBuilder-method-command'>/**Sets this process builder's operating system program and
+</span> arguments.  This method does &lt;i&gt;not&lt;/i&gt; make a copy of the
+ {@code command} list.  Subsequent updates to the list will
+ be reflected in the state of the process builder.  It is not
+ checked whether {@code command} corresponds to a valid
+ operating system command.
+@param {Object {java.util.List}} command the list containing the program and its arguments
+@return {Object {java.lang.ProcessBuilder}} this process builder
+@throws NullPointerException if the argument is null
+*/
+command : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-command'>/**Sets this process builder's operating system program and
+</span> arguments.  This is a convenience method that sets the command
+ to a string list containing the same strings as the
+ {@code command} array, in the same order.  It is not
+ checked whether {@code command} corresponds to a valid
+ operating system command.
+@param {Object {java.lang.String[]}} command a string array containing the program and its arguments
+@return {Object {java.lang.ProcessBuilder}} this process builder
+*/
+command : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-command'>/**Returns this process builder's operating system program and
+</span> arguments.  The returned list is &lt;i&gt;not&lt;/i&gt; a copy.  Subsequent
+ updates to the list will be reflected in the state of this
+ process builder.
+@return {Object {java.util.List}} this process builder's program and its arguments
+*/
+command : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-environment'>/**Returns a string map view of this process builder's environment.
+</span>
+ Whenever a process builder is created, the environment is
+ initialized to a copy of the current process environment (see
+ {@link java.lang.System#getenv()}).  Subprocesses subsequently started by
+ this object's {@link #start}() method will use this map as
+ their environment.
+
+ &lt;p&gt;The returned object may be modified using ordinary {@link java.util.Map Map} operations.  These modifications will be
+ visible to subprocesses started via the {@link #start}()
+ method.  Two {@code ProcessBuilder} instances always
+ contain independent process environments, so changes to the
+ returned map will never be reflected in any other
+ {@code ProcessBuilder} instance or the values returned by
+ {@link java.lang.System#getenv java.lang.System.getenv}.
+
+ &lt;p&gt;If the system does not support environment variables, an
+ empty map is returned.
+
+ &lt;p&gt;The returned map does not permit null keys or values.
+ Attempting to insert or query the presence of a null key or
+ value will throw a {@link java.lang.NullPointerException}.
+ Attempting to query the presence of a key or value which is not
+ of type {@link java.lang.String} will throw a {@link java.lang.ClassCastException}.
+
+ &lt;p&gt;The behavior of the returned map is system-dependent.  A
+ system may not allow modifications to environment variables or
+ may forbid certain variable names or values.  For this reason,
+ attempts to modify the map may fail with
+ {@link java.lang.UnsupportedOperationException} or
+ {@link java.lang.IllegalArgumentException}
+ if the modification is not permitted by the operating system.
+
+ &lt;p&gt;Since the external format of environment variable names and
+ values is system-dependent, there may not be a one-to-one
+ mapping between them and Java's Unicode strings.  Nevertheless,
+ the map is implemented in such a way that environment variables
+ which are not modified by Java code will have an unmodified
+ native representation in the subprocess.
+
+ &lt;p&gt;The returned map and its collection views may not obey the
+ general contract of the {@link java.lang.Object#equals} and
+ {@link java.lang.Object#hashCode} methods.
+
+ &lt;p&gt;The returned map is typically case-sensitive on all platforms.
+
+ &lt;p&gt;If a security manager exists, its
+ {@link java.lang.SecurityManager#checkPermission checkPermission} method
+ is called with a
+ {@link java.lang.RuntimePermission}{@code (&quot;getenv.*&quot;)} permission.
+ This may result in a {@link java.lang.SecurityException} being thrown.
+
+ &lt;p&gt;When passing information to a Java subprocess,
+ &lt;a href=System.html#EnvironmentVSSystemProperties&gt;system properties&lt;/a&gt;
+ are generally preferred over environment variables.
+@return {Object {java.util.Map}} this process builder's environment
+@throws SecurityException
+         if a security manager exists and its
+         {@link SecurityManager#checkPermission checkPermission}
+         method doesn't allow access to the process environment
+@see Runtime#exec(String[],String[],java.io.File)
+@see System#getenv()
+*/
+environment : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-directory'>/**Returns this process builder's working directory.
+</span>
+ Subprocesses subsequently started by this object's {@link #start}() method will use this as their working directory.
+ The returned value may be {@code null} -- this means to use
+ the working directory of the current Java process, usually the
+ directory named by the system property {@code user.dir},
+ as the working directory of the child process.
+@return {Object {java.io.File}} this process builder's working directory
+*/
+directory : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-directory'>/**Sets this process builder's working directory.
+</span>
+ Subprocesses subsequently started by this object's {@link #start}() method will use this as their working directory.
+ The argument may be {@code null} -- this means to use the
+ working directory of the current Java process, usually the
+ directory named by the system property {@code user.dir},
+ as the working directory of the child process.
+@param {Object {File}} directory the new working directory
+@return {Object {java.lang.ProcessBuilder}} this process builder
+*/
+directory : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectInput'>/**Sets this process builder's standard input source.
+</span>
+ Subprocesses subsequently started by this object's {@link #start}()
+ method obtain their standard input from this source.
+
+ &lt;p&gt;If the source is {@link java.lang.ProcessBuilder.Redirect#PIPE java.lang.ProcessBuilder.Redirect.PIPE}
+ (the initial value), then the standard input of a
+ subprocess can be written to using the output stream
+ returned by {@link java.lang.Process#getOutputStream()}.
+ If the source is set to any other value, then
+ {@link java.lang.Process#getOutputStream()} will return a
+ &lt;a href=&quot;#redirect-input&quot;&gt;null output stream&lt;/a&gt;.
+@param {Object {ProcessBuilder.Redirect}} source the new standard input source
+@return {Object {java.lang.ProcessBuilder}} this process builder
+@throws IllegalArgumentException
+         if the redirect does not correspond to a valid source
+         of data, that is, has type
+         {@link Redirect.Type#WRITE WRITE} or
+         {@link Redirect.Type#APPEND APPEND}
+@since 1.7
+*/
+redirectInput : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectOutput'>/**Sets this process builder's standard output destination.
+</span>
+ Subprocesses subsequently started by this object's {@link #start}()
+ method send their standard output to this destination.
+
+ &lt;p&gt;If the destination is {@link java.lang.ProcessBuilder.Redirect#PIPE java.lang.ProcessBuilder.Redirect.PIPE}
+ (the initial value), then the standard output of a subprocess
+ can be read using the input stream returned by {@link java.lang.Process#getInputStream()}.
+ If the destination is set to any other value, then
+ {@link java.lang.Process#getInputStream()} will return a
+ &lt;a href=&quot;#redirect-output&quot;&gt;null input stream&lt;/a&gt;.
+@param {Object {ProcessBuilder.Redirect}} destination the new standard output destination
+@return {Object {java.lang.ProcessBuilder}} this process builder
+@throws IllegalArgumentException
+         if the redirect does not correspond to a valid
+         destination of data, that is, has type
+         {@link Redirect.Type#READ READ}
+@since 1.7
+*/
+redirectOutput : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectError'>/**Sets this process builder's standard error destination.
+</span>
+ Subprocesses subsequently started by this object's {@link #start}()
+ method send their standard error to this destination.
+
+ &lt;p&gt;If the destination is {@link java.lang.ProcessBuilder.Redirect#PIPE java.lang.ProcessBuilder.Redirect.PIPE}
+ (the initial value), then the error output of a subprocess
+ can be read using the input stream returned by {@link java.lang.Process#getErrorStream()}.
+ If the destination is set to any other value, then
+ {@link java.lang.Process#getErrorStream()} will return a
+ &lt;a href=&quot;#redirect-output&quot;&gt;null input stream&lt;/a&gt;.
+
+ &lt;p&gt;If the {@link #redirectErrorStream redirectErrorStream}
+ attribute has been set {@code true}, then the redirection set
+ by this method has no effect.
+@param {Object {ProcessBuilder.Redirect}} destination the new standard error destination
+@return {Object {java.lang.ProcessBuilder}} this process builder
+@throws IllegalArgumentException
+         if the redirect does not correspond to a valid
+         destination of data, that is, has type
+         {@link Redirect.Type#READ READ}
+@since 1.7
+*/
+redirectError : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectInput'>/**Sets this process builder's standard input source to a file.
+</span>
+ &lt;p&gt;This is a convenience method.  An invocation of the form
+ {@code redirectInput(file)}
+ behaves in exactly the same way as the invocation
+ {@link #redirectInput(Redirect) redirectInput}
+ {@code (Redirect.from(file))}.
+@param {Object {File}} file the new standard input source
+@return {Object {java.lang.ProcessBuilder}} this process builder
+@since 1.7
+*/
+redirectInput : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectOutput'>/**Sets this process builder's standard output destination to a file.
+</span>
+ &lt;p&gt;This is a convenience method.  An invocation of the form
+ {@code redirectOutput(file)}
+ behaves in exactly the same way as the invocation
+ {@link #redirectOutput(Redirect) redirectOutput}
+ {@code (Redirect.to(file))}.
+@param {Object {File}} file the new standard output destination
+@return {Object {java.lang.ProcessBuilder}} this process builder
+@since 1.7
+*/
+redirectOutput : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectError'>/**Sets this process builder's standard error destination to a file.
+</span>
+ &lt;p&gt;This is a convenience method.  An invocation of the form
+ {@code redirectError(file)}
+ behaves in exactly the same way as the invocation
+ {@link #redirectError(Redirect) redirectError}
+ {@code (Redirect.to(file))}.
+@param {Object {File}} file the new standard error destination
+@return {Object {java.lang.ProcessBuilder}} this process builder
+@since 1.7
+*/
+redirectError : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectInput'>/**Returns this process builder's standard input source.
+</span>
+ Subprocesses subsequently started by this object's {@link #start}()
+ method obtain their standard input from this source.
+ The initial value is {@link java.lang.ProcessBuilder.Redirect#PIPE java.lang.ProcessBuilder.Redirect.PIPE}.
+@return {Object {java.lang.ProcessBuilder.Redirect}} this process builder's standard input source
+@since 1.7
+*/
+redirectInput : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectOutput'>/**Returns this process builder's standard output destination.
+</span>
+ Subprocesses subsequently started by this object's {@link #start}()
+ method redirect their standard output to this destination.
+ The initial value is {@link java.lang.ProcessBuilder.Redirect#PIPE java.lang.ProcessBuilder.Redirect.PIPE}.
+@return {Object {java.lang.ProcessBuilder.Redirect}} this process builder's standard output destination
+@since 1.7
+*/
+redirectOutput : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectError'>/**Returns this process builder's standard error destination.
+</span>
+ Subprocesses subsequently started by this object's {@link #start}()
+ method redirect their standard error to this destination.
+ The initial value is {@link java.lang.ProcessBuilder.Redirect#PIPE java.lang.ProcessBuilder.Redirect.PIPE}.
+@return {Object {java.lang.ProcessBuilder.Redirect}} this process builder's standard error destination
+@since 1.7
+*/
+redirectError : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-inheritIO'>/**Sets the source and destination for subprocess standard I/O
+</span> to be the same as those of the current Java process.
+
+ &lt;p&gt;This is a convenience method.  An invocation of the form
+  &lt;pre&gt; {@code
+ pb.inheritIO()
+ }&lt;/pre&gt;
+ behaves in exactly the same way as the invocation
+  &lt;pre&gt; {@code
+ pb.redirectInput(Redirect.INHERIT)
+   .redirectOutput(Redirect.INHERIT)
+   .redirectError(Redirect.INHERIT)
+ }&lt;/pre&gt;
+
+ This gives behavior equivalent to most operating system
+ command interpreters, or the standard C library function
+ {@code system()}.
+@return {Object {java.lang.ProcessBuilder}} this process builder
+@since 1.7
+*/
+inheritIO : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectErrorStream'>/**Tells whether this process builder merges standard error and
+</span> standard output.
+
+ &lt;p&gt;If this property is {@code true}, then any error output
+ generated by subprocesses subsequently started by this object's
+ {@link #start}() method will be merged with the standard
+ output, so that both can be read using the
+ {@link java.lang.Process#getInputStream()} method.  This makes it easier
+ to correlate error messages with the corresponding output.
+ The initial value is {@code false}.
+@return {Boolean} this process builder's {@code redirectErrorStream} property
+*/
+redirectErrorStream : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-redirectErrorStream'>/**Sets this process builder's {@code redirectErrorStream} property.
+</span>
+ &lt;p&gt;If this property is {@code true}, then any error output
+ generated by subprocesses subsequently started by this object's
+ {@link #start}() method will be merged with the standard
+ output, so that both can be read using the
+ {@link java.lang.Process#getInputStream()} method.  This makes it easier
+ to correlate error messages with the corresponding output.
+ The initial value is {@code false}.
+@param {Boolean} redirectErrorStream the new property value
+@return {Object {java.lang.ProcessBuilder}} this process builder
+*/
+redirectErrorStream : function(  ) {},
+
+<span id='java-lang-ProcessBuilder-method-start'>/**Starts a new process using the attributes of this process builder.
+</span>
+ &lt;p&gt;The new process will
+ invoke the command and arguments given by {@link #command}(),
+ in a working directory as given by {@link #directory}(),
+ with a process environment as given by {@link #environment}().
+
+ &lt;p&gt;This method checks that the command is a valid operating
+ system command.  Which commands are valid is system-dependent,
+ but at the very least the command must be a non-empty list of
+ non-null strings.
+
+ &lt;p&gt;A minimal set of system dependent environment variables may
+ be required to start a process on some operating systems.
+ As a result, the subprocess may inherit additional environment variable
+ settings beyond those in the process builder's {@link #environment}().
+
+ &lt;p&gt;If there is a security manager, its
+ {@link java.lang.SecurityManager#checkExec checkExec}
+ method is called with the first component of this object's
+ {@code command} array as its argument. This may result in
+ a {@link java.lang.SecurityException} being thrown.
+
+ &lt;p&gt;Starting an operating system process is highly system-dependent.
+ Among the many things that can go wrong are:
+ &lt;ul&gt;
+ &lt;li&gt;The operating system program file was not found.
+ &lt;li&gt;Access to the program file was denied.
+ &lt;li&gt;The working directory does not exist.
+ &lt;/ul&gt;
+
+ &lt;p&gt;In such cases an exception will be thrown.  The exact nature
+ of the exception is system-dependent, but it will always be a
+ subclass of {@link IOException}.
+
+ &lt;p&gt;Subsequent modifications to this process builder will not
+ affect the returned {@link java.lang.Process}.
+@return {Object {java.lang.Process}} a new {@link Process} object for managing the subprocess
+@throws NullPointerException
+         if an element of the command list is null
+@throws IndexOutOfBoundsException
+         if the command is an empty list (has size {@code 0})
+@throws SecurityException
+         if a security manager exists and
+         &lt;ul&gt;
+
+         &lt;li&gt;its
+         {@link SecurityManager#checkExec checkExec}
+         method doesn't allow creation of the subprocess, or
+
+         &lt;li&gt;the standard input to the subprocess was
+         {@linkplain #redirectInput redirected from a file}
+         and the security manager's
+         {@link SecurityManager#checkRead checkRead} method
+         denies read access to the file, or
+
+         &lt;li&gt;the standard output or standard error of the
+         subprocess was
+         {@linkplain #redirectOutput redirected to a file}
+         and the security manager's
+         {@link SecurityManager#checkWrite checkWrite} method
+         denies write access to the file
+
+         &lt;/ul&gt;
+@throws IOException if an I/O error occurs
+@see Runtime#exec(String[], String[], java.io.File)
+*/
+start : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

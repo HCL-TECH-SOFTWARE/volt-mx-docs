@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-io-BufferedReader'>/**@class java.io.BufferedReader
+</span>@extends java.io.Reader
+
+ Reads text from a character-input stream, buffering characters so as to
+ provide for the efficient reading of characters, arrays, and lines.
+
+ &lt;p&gt; The buffer size may be specified, or the default size may be used.  The
+ default is large enough for most purposes.
+
+ &lt;p&gt; In general, each read request made of a Reader causes a corresponding
+ read request to be made of the underlying character or byte stream.  It is
+ therefore advisable to wrap a BufferedReader around any Reader whose read()
+ operations may be costly, such as FileReaders and InputStreamReaders.  For
+ example,
+
+ &lt;pre&gt;
+ BufferedReader in
+   = new BufferedReader(new FileReader(&quot;foo.in&quot;));
+ &lt;/pre&gt;
+
+ will buffer the input from the specified file.  Without buffering, each
+ invocation of read() or readLine() could cause bytes to be read from the
+ file, converted into characters, and then returned, which can be very
+ inefficient.
+
+ &lt;p&gt; Programs that use DataInputStreams for textual input can be localized by
+ replacing each DataInputStream with an appropriate BufferedReader.
+
+ @see FileReader
+ @see InputStreamReader
+ @see java.nio.file.Files#newBufferedReader
+
+ @author      Mark Reinhold
+ @since       JDK1.1
+*/
+var BufferedReader = {
+
+<span id='java-io-BufferedReader-method-read'>/**Reads a single character.
+</span>@return {Number} The character read, as an integer in the range
+         0 to 65535 (&lt;tt&gt;0x00-0xffff&lt;/tt&gt;), or -1 if the
+         end of the stream has been reached
+@exception IOException  If an I/O error occurs
+*/
+read : function(  ) {},
+
+<span id='java-io-BufferedReader-method-read'>/**Reads characters into a portion of an array.
+</span>
+ &lt;p&gt; This method implements the general contract of the corresponding
+ &lt;code&gt;{@link java.io.Reader#read(char[], int, int) read}&lt;/code&gt; method of the
+ &lt;code&gt;{@link java.io.Reader}&lt;/code&gt; class.  As an additional convenience, it
+ attempts to read as many characters as possible by repeatedly invoking
+ the &lt;code&gt;read&lt;/code&gt; method of the underlying stream.  This iterated
+ &lt;code&gt;read&lt;/code&gt; continues until one of the following conditions becomes
+ true: &lt;ul&gt;
+
+   &lt;li&gt; The specified number of characters have been read,
+
+   &lt;li&gt; The &lt;code&gt;read&lt;/code&gt; method of the underlying stream returns
+   &lt;code&gt;-1&lt;/code&gt;, indicating end-of-file, or
+
+   &lt;li&gt; The &lt;code&gt;ready&lt;/code&gt; method of the underlying stream
+   returns &lt;code&gt;false&lt;/code&gt;, indicating that further input requests
+   would block.
+
+ &lt;/ul&gt; If the first &lt;code&gt;read&lt;/code&gt; on the underlying stream returns
+ &lt;code&gt;-1&lt;/code&gt; to indicate end-of-file then this method returns
+ &lt;code&gt;-1&lt;/code&gt;.  Otherwise this method returns the number of characters
+ actually read.
+
+ &lt;p&gt; Subclasses of this class are encouraged, but not required, to
+ attempt to read as many characters as possible in the same fashion.
+
+ &lt;p&gt; Ordinarily this method takes characters from this stream's character
+ buffer, filling it from the underlying stream as necessary.  If,
+ however, the buffer is empty, the mark is not valid, and the requested
+ length is at least as large as the buffer, then this method will read
+ characters directly from the underlying stream into the given array.
+ Thus redundant &lt;code&gt;BufferedReader&lt;/code&gt;s will not copy data
+ unnecessarily.
+@param {Object {char[]}} cbuf  Destination buffer
+@param {Number} off   Offset at which to start storing characters
+@param {Number} len   Maximum number of characters to read
+@return {Number} The number of characters read, or -1 if the end of the
+             stream has been reached
+@exception IOException  If an I/O error occurs
+*/
+read : function(  ) {},
+
+<span id='java-io-BufferedReader-method-readLine'>/**Reads a line of text.  A line is considered to be terminated by any one
+</span> of a line feed ('\n'), a carriage return ('\r'), or a carriage return
+ followed immediately by a linefeed.
+@return {String} A String containing the contents of the line, not including
+             any line-termination characters, or null if the end of the
+             stream has been reached
+@exception IOException  If an I/O error occurs
+@see java.nio.file.Files#readAllLines
+*/
+readLine : function(  ) {},
+
+<span id='java-io-BufferedReader-method-skip'>/**Skips characters.
+</span>@param {Number} n  The number of characters to skip
+@return {Number} The number of characters actually skipped
+@exception IllegalArgumentException  If &lt;code&gt;n&lt;/code&gt; is negative.
+@exception IOException  If an I/O error occurs
+*/
+skip : function(  ) {},
+
+<span id='java-io-BufferedReader-method-ready'>/**Tells whether this stream is ready to be read.  A buffered character
+</span> stream is ready if the buffer is not empty, or if the underlying
+ character stream is ready.
+@exception IOException  If an I/O error occurs
+*/
+ready : function(  ) {},
+
+<span id='java-io-BufferedReader-method-markSupported'>/**Tells whether this stream supports the mark() operation, which it does.
+</span>*/
+markSupported : function(  ) {},
+
+<span id='java-io-BufferedReader-method-mark'>/**Marks the present position in the stream.  Subsequent calls to reset()
+</span> will attempt to reposition the stream to this point.
+@param {Number} readAheadLimit   Limit on the number of characters that may be
+                         read while still preserving the mark. An attempt
+                         to reset the stream after reading characters
+                         up to this limit or beyond may fail.
+                         A limit value larger than the size of the input
+                         buffer will cause a new buffer to be allocated
+                         whose size is no smaller than limit.
+                         Therefore large values should be used with care.
+@exception IllegalArgumentException  If {@code readAheadLimit &lt; 0}
+@exception IOException  If an I/O error occurs
+*/
+mark : function(  ) {},
+
+<span id='java-io-BufferedReader-method-reset'>/**Resets the stream to the most recent mark.
+</span>@exception IOException  If the stream has never been marked,
+                          or if the mark has been invalidated
+*/
+reset : function(  ) {},
+
+<span id='java-io-BufferedReader-method-close'>/**
+</span>*/
+close : function(  ) {},
+
+<span id='java-io-BufferedReader-method-lines'>/**Returns a {@code Stream}, the elements of which are lines read from
+</span> this {@code BufferedReader}.  The {@link Stream} is lazily populated,
+ i.e., read only occurs during the
+ &lt;a href=&quot;../util/stream/package-summary.html#StreamOps&quot;&gt;terminal
+ stream operation&lt;/a&gt;.
+
+ &lt;p&gt; The reader must not be operated on during the execution of the
+ terminal stream operation. Otherwise, the result of the terminal stream
+ operation is undefined.
+
+ &lt;p&gt; After execution of the terminal stream operation there are no
+ guarantees that the reader will be at a specific position from which to
+ read the next character or line.
+
+ &lt;p&gt; If an {@link java.io.IOException} is thrown when accessing the underlying
+ {@code BufferedReader}, it is wrapped in an {@link java.io.UncheckedIOException} which will be thrown from the {@code Stream}
+ method that caused the read to take place. This method will return a
+ Stream if invoked on a BufferedReader that is closed. Any operation on
+ that stream that requires reading from the BufferedReader after it is
+ closed, will cause an UncheckedIOException to be thrown.
+@return {Object {java.util.stream.Stream}} a {@code Stream&lt;String&gt;} providing the lines of text
+         described by this {@code BufferedReader}
+@since 1.8
+*/
+lines : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

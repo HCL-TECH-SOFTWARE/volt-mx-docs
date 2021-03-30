@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-xpath-XPathFactory'>/**@class javax.xml.xpath.XPathFactory
+</span>@extends java.lang.Object
+
+ &lt;p&gt;An &lt;code&gt;XPathFactory&lt;/code&gt; instance can be used to create
+ {@link javax.xml.xpath.XPath} objects.&lt;/p&gt;
+
+&lt;p&gt;See {@link #newInstance}(String uri) for lookup mechanism.&lt;/p&gt;
+
+ @author  &lt;a href=&quot;mailto:Norman.Walsh@Sun.com&quot;&gt;Norman Walsh&lt;/a&gt;
+ @author  &lt;a href=&quot;mailto:Jeff.Suttor@Sun.com&quot;&gt;Jeff Suttor&lt;/a&gt;
+ @version $Revision: 888889 $, $Date: 2009-12-09 09:43:18 -0800 (Wed, 09 Dec 2009) $
+ @since 1.5
+*/
+var XPathFactory = {
+
+<span id='javax-xml-xpath-XPathFactory-property-DEFAULT_PROPERTY_NAME'>/** &lt;p&gt;The default property name according to the JAXP spec.&lt;/p&gt;
+</span>*/
+DEFAULT_PROPERTY_NAME : &quot;javax.xml.xpath.XPathFactory&quot;,
+<span id='javax-xml-xpath-XPathFactory-property-DEFAULT_OBJECT_MODEL_URI'>/** &lt;p&gt;Default Object Model URI.&lt;/p&gt;
+</span>*/
+DEFAULT_OBJECT_MODEL_URI : &quot;http://java.sun.com/jaxp/xpath/dom&quot;,
+<span id='javax-xml-xpath-XPathFactory-method-newInstance'>/**&lt;p&gt;Get a new &lt;code&gt;XPathFactory&lt;/code&gt; instance using the default object model,
+</span> {@link #DEFAULT_OBJECT_MODEL_URI},
+ the W3C DOM.&lt;/p&gt;
+
+ &lt;p&gt;This method is functionally equivalent to:&lt;/p&gt;
+ &lt;pre&gt;
+   newInstance(DEFAULT_OBJECT_MODEL_URI)
+ &lt;/pre&gt;
+
+ &lt;p&gt;Since the implementation for the W3C DOM is always available, this method will never fail.&lt;/p&gt;
+@return {Object {javax.xml.xpath.XPathFactory}} Instance of an &lt;code&gt;XPathFactory&lt;/code&gt;.
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-xpath-XPathFactory-method-newInstance'>/**&lt;p&gt;Get a new &lt;code&gt;XPathFactory&lt;/code&gt; instance using the specified object model.&lt;/p&gt;
+</span>
+ &lt;p&gt;To find a &lt;code&gt;XPathFactory&lt;/code&gt; object,
+ this method looks the following places in the following order where &quot;the class loader&quot; refers to the context class loader:&lt;/p&gt;
+ &lt;ol&gt;
+   &lt;li&gt;
+     If the system property {@link #DEFAULT_PROPERTY_NAME} + &quot;:uri&quot; is present,
+     where uri is the parameter to this method, then its value is read as a class name.
+     The method will try to create a new instance of this class by using the class loader,
+     and returns it if it is successfully created.
+   &lt;/li&gt;
+   &lt;li&gt;
+     ${java.home}/lib/jaxp.properties is read and the value associated with the key being the system property above is looked for.
+     If present, the value is processed just like above.
+   &lt;/li&gt;
+   &lt;li&gt;
+     The class loader is asked for service provider provider-configuration files matching &lt;code&gt;javax.xml.xpath.XPathFactory&lt;/code&gt;
+     in the resource directory META-INF/services.
+     See the JAR File Specification for file format and parsing rules.
+     Each potential service provider is required to implement the method:
+     &lt;pre&gt;
+       {@link #isObjectModelSupported}(String objectModel)
+     &lt;/pre&gt;
+     The first service provider found in class loader order that supports the specified object model is returned.
+   &lt;/li&gt;
+   &lt;li&gt;
+     Platform default &lt;code&gt;XPathFactory&lt;/code&gt; is located in a platform specific way.
+     There must be a platform default XPathFactory for the W3C DOM, i.e. {@link #DEFAULT_OBJECT_MODEL_URI}.
+   &lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;p&gt;If everything fails, an &lt;code&gt;XPathFactoryConfigurationException&lt;/code&gt; will be thrown.&lt;/p&gt;
+
+ &lt;p&gt;Tip for Trouble-shooting:&lt;/p&gt;
+ &lt;p&gt;See {@link java.util.Properties#load(java.io.InputStream)} for exactly how a property file is parsed.
+ In particular, colons ':' need to be escaped in a property file, so make sure the URIs are properly escaped in it.
+ For example:&lt;/p&gt;
+ &lt;pre&gt;
+   http\://java.sun.com/jaxp/xpath/dom=org.acme.DomXPathFactory
+ &lt;/pre&gt;
+@param {String} uri Identifies the underlying object model.
+   The specification only defines the URI {@link #DEFAULT_OBJECT_MODEL_URI},
+   &lt;code&gt;http://java.sun.com/jaxp/xpath/dom&lt;/code&gt; for the W3C DOM,
+   the org.w3c.dom package, and implementations are free to introduce other URIs for other object models.
+@return {Object {javax.xml.xpath.XPathFactory}} Instance of an &lt;code&gt;XPathFactory&lt;/code&gt;.
+@throws XPathFactoryConfigurationException If the specified object model is unavailable.
+@throws NullPointerException If &lt;code&gt;uri&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+@throws IllegalArgumentException If &lt;code&gt;uri.length() == 0&lt;/code&gt;.
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-xpath-XPathFactory-method-newInstance'>/**
+</span>@return {Object {javax.xml.xpath.XPathFactory}} Instance of an &lt;code&gt;XPathFactory&lt;/code&gt;.
+@throws XPathFactoryConfigurationException If the specified object model is unavailable.
+@throws NullPointerException If &lt;code&gt;uri&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+@throws IllegalArgumentException If &lt;code&gt;uri.length() == 0&lt;/code&gt;.
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-xpath-XPathFactory-method-isObjectModelSupported'>/**&lt;p&gt;Is specified object model supported by this &lt;code&gt;XPathFactory&lt;/code&gt;?&lt;/p&gt;
+</span>@param {String} objectModel Specifies the object model which the returned &lt;code&gt;XPathFactory&lt;/code&gt; will understand.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if &lt;code&gt;XPathFactory&lt;/code&gt; supports &lt;code&gt;objectModel&lt;/code&gt;, else &lt;code&gt;false&lt;/code&gt;.
+@throws NullPointerException If &lt;code&gt;objectModel&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+@throws IllegalArgumentException If &lt;code&gt;objectModel.length() == 0&lt;/code&gt;.
+*/
+isObjectModelSupported : function(  ) {},
+
+<span id='javax-xml-xpath-XPathFactory-method-setFeature'>/**&lt;p&gt;Set a feature for this &lt;code&gt;XPathFactory&lt;/code&gt; and &lt;code&gt;XPath&lt;/code&gt;s created by this factory.&lt;/p&gt;
+</span>
+ &lt;p&gt;
+ Feature names are fully qualified {@link java.net.URI}s.
+ Implementations may define their own features.
+ An {@link javax.xml.xpath.XPathFactoryConfigurationException} is thrown if this &lt;code&gt;XPathFactory&lt;/code&gt; or the &lt;code&gt;XPath&lt;/code&gt;s
+  it creates cannot support the feature.
+ It is possible for an &lt;code&gt;XPathFactory&lt;/code&gt; to expose a feature value but be unable to change its state.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ All implementations are required to support the {@link javax.xml.XMLConstants#FEATURE_SECURE_PROCESSING} feature.
+ When the feature is &lt;code&gt;true&lt;/code&gt;, any reference to  an external function is an error.
+ Under these conditions, the implementation must not call the {@link javax.xml.xpath.XPathFunctionResolver}
+ and must throw an {@link javax.xml.xpath.XPathFunctionException}.
+ &lt;/p&gt;
+@param {String} name Feature name.
+@param {Boolean} value Is feature state &lt;code&gt;true&lt;/code&gt; or &lt;code&gt;false&lt;/code&gt;.
+@throws XPathFactoryConfigurationException if this &lt;code&gt;XPathFactory&lt;/code&gt; or the &lt;code&gt;XPath&lt;/code&gt;s
+   it creates cannot support this feature.
+@throws NullPointerException if &lt;code&gt;name&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+setFeature : function(  ) {},
+
+<span id='javax-xml-xpath-XPathFactory-method-getFeature'>/**&lt;p&gt;Get the state of the named feature.&lt;/p&gt;
+</span>
+ &lt;p&gt;
+ Feature names are fully qualified {@link java.net.URI}s.
+ Implementations may define their own features.
+ An {@link javax.xml.xpath.XPathFactoryConfigurationException} is thrown if this &lt;code&gt;XPathFactory&lt;/code&gt; or the &lt;code&gt;XPath&lt;/code&gt;s
+ it creates cannot support the feature.
+ It is possible for an &lt;code&gt;XPathFactory&lt;/code&gt; to expose a feature value but be unable to change its state.
+ &lt;/p&gt;
+@param {String} name Feature name.
+@return {Boolean} State of the named feature.
+@throws XPathFactoryConfigurationException if this &lt;code&gt;XPathFactory&lt;/code&gt; or the &lt;code&gt;XPath&lt;/code&gt;s
+   it creates cannot support this feature.
+@throws NullPointerException if &lt;code&gt;name&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+getFeature : function(  ) {},
+
+<span id='javax-xml-xpath-XPathFactory-method-setXPathVariableResolver'>/**&lt;p&gt;Establish a default variable resolver.&lt;/p&gt;
+</span>
+ &lt;p&gt;Any &lt;code&gt;XPath&lt;/code&gt; objects constructed from this factory will use
+ the specified resolver by default.&lt;/p&gt;
+
+ &lt;p&gt;A &lt;code&gt;NullPointerException&lt;/code&gt; is thrown if &lt;code&gt;resolver&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
+@param {Object {XPathVariableResolver}} resolver Variable resolver.
+@throws NullPointerException If &lt;code&gt;resolver&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+setXPathVariableResolver : function(  ) {},
+
+<span id='javax-xml-xpath-XPathFactory-method-setXPathFunctionResolver'>/**&lt;p&gt;Establish a default function resolver.&lt;/p&gt;
+</span>
+ &lt;p&gt;Any &lt;code&gt;XPath&lt;/code&gt; objects constructed from this factory will use
+ the specified resolver by default.&lt;/p&gt;
+
+ &lt;p&gt;A &lt;code&gt;NullPointerException&lt;/code&gt; is thrown if &lt;code&gt;resolver&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
+@param {Object {XPathFunctionResolver}} resolver XPath function resolver.
+@throws NullPointerException If &lt;code&gt;resolver&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+setXPathFunctionResolver : function(  ) {},
+
+<span id='javax-xml-xpath-XPathFactory-method-newXPath'>/**&lt;p&gt;Return a new &lt;code&gt;XPath&lt;/code&gt; using the underlying object
+</span> model determined when the &lt;code&gt;XPathFactory&lt;/code&gt; was instantiated.&lt;/p&gt;
+@return {Object {javax.xml.xpath.XPath}} New instance of an &lt;code&gt;XPath&lt;/code&gt;.
+*/
+newXPath : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

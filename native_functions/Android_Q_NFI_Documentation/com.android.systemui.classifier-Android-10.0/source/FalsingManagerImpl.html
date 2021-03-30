@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-classifier-FalsingManagerImpl'>/**@class com.android.systemui.classifier.FalsingManagerImpl
+</span> implements com.android.systemui.plugins.FalsingManager
+
+@extends java.lang.Object
+
+ When the phone is locked, listens to touch, sensor and phone events and sends them to
+ DataCollector and HumanInteractionClassifier.
+
+ It does not collect touch events when the bouncer shows up.
+*/
+var FalsingManagerImpl = {
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-property-mStatusBarStateListener'>/***/
+</span>mStatusBarStateListener : &quot;null&quot;,
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-updateSessionActive'>/**
+</span>*/
+updateSessionActive : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-isClassiferEnabled'>/**
+</span>*/
+isClassiferEnabled : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-isUnlockingDisabled'>/**
+</span>*/
+isUnlockingDisabled : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-isFalseTouch'>/**
+</span>@return {Boolean} true if the classifier determined that this is not a human interacting with the phone
+*/
+isFalseTouch : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-shouldEnforceBouncer'>/**
+</span>*/
+shouldEnforceBouncer : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-setShowingAod'>/**
+</span>*/
+setShowingAod : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onScreenTurningOn'>/**
+</span>*/
+onScreenTurningOn : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onScreenOnFromTouch'>/**
+</span>*/
+onScreenOnFromTouch : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onScreenOff'>/**
+</span>*/
+onScreenOff : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onSucccessfulUnlock'>/**
+</span>*/
+onSucccessfulUnlock : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onBouncerShown'>/**
+</span>*/
+onBouncerShown : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onBouncerHidden'>/**
+</span>*/
+onBouncerHidden : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onQsDown'>/**
+</span>*/
+onQsDown : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-setQsExpanded'>/**
+</span>*/
+setQsExpanded : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onTrackingStarted'>/**
+</span>*/
+onTrackingStarted : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onTrackingStopped'>/**
+</span>*/
+onTrackingStopped : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onNotificationActive'>/**
+</span>*/
+onNotificationActive : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onNotificationDoubleTap'>/**
+</span>*/
+onNotificationDoubleTap : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-setNotificationExpanded'>/**
+</span>*/
+setNotificationExpanded : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onNotificatonStartDraggingDown'>/**
+</span>*/
+onNotificatonStartDraggingDown : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onStartExpandingFromPulse'>/**
+</span>*/
+onStartExpandingFromPulse : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onNotificatonStopDraggingDown'>/**
+</span>*/
+onNotificatonStopDraggingDown : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onExpansionFromPulseStopped'>/**
+</span>*/
+onExpansionFromPulseStopped : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onNotificationDismissed'>/**
+</span>*/
+onNotificationDismissed : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onNotificatonStartDismissing'>/**
+</span>*/
+onNotificatonStartDismissing : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onNotificatonStopDismissing'>/**
+</span>*/
+onNotificatonStopDismissing : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onCameraOn'>/**
+</span>*/
+onCameraOn : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onLeftAffordanceOn'>/**
+</span>*/
+onLeftAffordanceOn : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onAffordanceSwipingStarted'>/**
+</span>*/
+onAffordanceSwipingStarted : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onAffordanceSwipingAborted'>/**
+</span>*/
+onAffordanceSwipingAborted : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onUnlockHintStarted'>/**
+</span>*/
+onUnlockHintStarted : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onCameraHintStarted'>/**
+</span>*/
+onCameraHintStarted : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onLeftAffordanceHintStarted'>/**
+</span>*/
+onLeftAffordanceHintStarted : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-cleanup'>/**
+</span>*/
+cleanup : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-reportRejectedTouch'>/**
+</span>*/
+reportRejectedTouch : function(  ) {},
+
+<span id='com-android-systemui-classifier-FalsingManagerImpl-method-isReportingEnabled'>/**
+</span>*/
+isReportingEnabled : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-statusbar-StatusBarManagerService'>/**@class com.android.server.statusbar.StatusBarManagerService
+</span> implements android.hardware.display.DisplayManager.DisplayListener
+
+@extends IStatusBarService.Stub
+
+ A note on locking:  We rely on the fact that calls onto mBar are oneway or
+ if they are local, that they just enqueue messages to not deadlock.
+*/
+var StatusBarManagerService = {
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onDisplayAdded'>/**
+</span>*/
+onDisplayAdded : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onDisplayRemoved'>/**
+</span>*/
+onDisplayRemoved : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onDisplayChanged'>/**
+</span>*/
+onDisplayChanged : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-expandNotificationsPanel'>/**
+</span>*/
+expandNotificationsPanel : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-collapsePanels'>/**
+</span>*/
+collapsePanels : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-togglePanel'>/**
+</span>*/
+togglePanel : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-expandSettingsPanel'>/**
+</span>*/
+expandSettingsPanel : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-addTile'>/**
+</span>*/
+addTile : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-remTile'>/**
+</span>*/
+remTile : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-clickTile'>/**
+</span>*/
+clickTile : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-handleSystemKey'>/**
+</span>*/
+handleSystemKey : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-showPinningEnterExitToast'>/**
+</span>*/
+showPinningEnterExitToast : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-showPinningEscapeToast'>/**
+</span>*/
+showPinningEscapeToast : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-showBiometricDialog'>/**
+</span>*/
+showBiometricDialog : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onBiometricAuthenticated'>/**
+</span>*/
+onBiometricAuthenticated : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onBiometricHelp'>/**
+</span>*/
+onBiometricHelp : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onBiometricError'>/**
+</span>*/
+onBiometricError : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-hideBiometricDialog'>/**
+</span>*/
+hideBiometricDialog : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-disable'>/**
+</span>*/
+disable : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-disableForUser'>/**
+</span>*/
+disableForUser : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-disable2'>/**Disable additional status bar features. Pass the bitwise-or of the DISABLE2_* flags.
+</span> To re-enable everything, pass {@link #DISABLE2_NONE}.
+
+ Warning: Only pass DISABLE2_* flags into this function, do not use DISABLE_* flags.
+*/
+disable2 : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-disable2ForUser'>/**Disable additional status bar features for a given user. Pass the bitwise-or of the
+</span> DISABLE2_* flags. To re-enable everything, pass {@link #DISABLE_NONE}.
+
+ Warning: Only pass DISABLE2_* flags into this function, do not use DISABLE_* flags.
+*/
+disable2ForUser : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-getDisableFlags'>/**Get the currently applied disable flags, in the form of one Pair&lt;Integer, Integer&gt;.
+</span>@return {Number} pair of disable flags in the form of (disabled1, disabled2), where (0, 0) indicates
+ no flags are set for this token.
+*/
+getDisableFlags : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-setIcon'>/**
+</span>*/
+setIcon : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-setIconVisibility'>/**
+</span>*/
+setIconVisibility : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-removeIcon'>/**
+</span>*/
+removeIcon : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-setImeWindowStatus'>/**
+</span>*/
+setImeWindowStatus : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-setSystemUiVisibility'>/**
+</span>*/
+setSystemUiVisibility : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-registerStatusBar'>/**
+</span>*/
+registerStatusBar : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onPanelRevealed'>/**
+</span>@param {Boolean} clearNotificationEffects whether to consider notifications as &quot;shown&quot; and stop
+     LED, vibration, and ringing
+*/
+onPanelRevealed : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-clearNotificationEffects'>/**
+</span>*/
+clearNotificationEffects : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onPanelHidden'>/**
+</span>*/
+onPanelHidden : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-shutdown'>/**Allows the status bar to shutdown the device.
+</span>*/
+shutdown : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-reboot'>/**Allows the status bar to reboot the device.
+</span>*/
+reboot : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onGlobalActionsShown'>/**
+</span>*/
+onGlobalActionsShown : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onGlobalActionsHidden'>/**
+</span>*/
+onGlobalActionsHidden : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationClick'>/**
+</span>*/
+onNotificationClick : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationActionClick'>/**
+</span>*/
+onNotificationActionClick : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationError'>/**
+</span>*/
+onNotificationError : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationClear'>/**
+</span>*/
+onNotificationClear : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationVisibilityChanged'>/**
+</span>*/
+onNotificationVisibilityChanged : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationExpansionChanged'>/**
+</span>*/
+onNotificationExpansionChanged : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationDirectReplied'>/**
+</span>*/
+onNotificationDirectReplied : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationSmartSuggestionsAdded'>/**
+</span>*/
+onNotificationSmartSuggestionsAdded : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationSmartReplySent'>/**
+</span>*/
+onNotificationSmartReplySent : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationSettingsViewed'>/**
+</span>*/
+onNotificationSettingsViewed : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onClearAllNotifications'>/**
+</span>*/
+onClearAllNotifications : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onNotificationBubbleChanged'>/**
+</span>*/
+onNotificationBubbleChanged : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-onShellCommand'>/**
+</span>*/
+onShellCommand : function(  ) {},
+
+<span id='com-android-server-statusbar-StatusBarManagerService-method-getStatusBarIcons'>/**
+</span>*/
+getStatusBarIcons : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

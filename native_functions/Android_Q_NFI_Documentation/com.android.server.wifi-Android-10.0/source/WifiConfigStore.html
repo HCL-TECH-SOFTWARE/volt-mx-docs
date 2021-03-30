@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiConfigStore'>/**@class com.android.server.wifi.WifiConfigStore
+</span>@extends java.lang.Object
+
+ This class provides a mechanism to save data to persistent store files {@link com.android.server.wifi.WifiConfigStore.StoreFile}.
+ Modules can register a {@link com.android.server.wifi.WifiConfigStore.StoreData} instance indicating the {@StoreFile} into which they
+ want to save their data to.
+
+ NOTE:
+ &lt;li&gt;Modules can register their {@StoreData} using
+ {@link com.android.server.wifi.WifiConfigStore#registerStoreData(StoreData)} directly, but should
+ use {@link com.android.server.wifi.WifiConfigManager#saveToStore(boolean)} for any writes.&lt;/li&gt;
+ &lt;li&gt;{@link com.android.server.wifi.WifiConfigManager} controls {@link com.android.server.wifi.WifiConfigStore} and initiates read at bootup and
+ store file changes on user switch.&lt;/li&gt;
+ &lt;li&gt;Not thread safe!&lt;/li&gt;
+*/
+var WifiConfigStore = {
+
+<span id='com-android-server-wifi-WifiConfigStore-property-STORE_FILE_SHARED_GENERAL'>/** Config store file for general shared store file.
+</span>*/
+STORE_FILE_SHARED_GENERAL : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiConfigStore-property-STORE_FILE_USER_GENERAL'>/** Config store file for general user store file.
+</span>*/
+STORE_FILE_USER_GENERAL : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiConfigStore-property-STORE_FILE_USER_NETWORK_SUGGESTIONS'>/** Config store file for network suggestions user store file.
+</span>*/
+STORE_FILE_USER_NETWORK_SUGGESTIONS : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiConfigStore-property-BUFFERED_WRITE_ALARM_TAG'>/** Alarm tag to use for starting alarms for buffering file writes.
+</span>*/
+BUFFERED_WRITE_ALARM_TAG : &quot;WriteBufferAlarm&quot;,
+<span id='com-android-server-wifi-WifiConfigStore-method-setUserStores'>/**Set the user store files.
+</span> (Useful for mocking in unit tests).
+@param {Object {java.util.List}} userStores List of {@link StoreFile} created using {@link #createUserFiles(int)}.
+*/
+setUserStores : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-method-registerStoreData'>/**Register a {@link com.android.server.wifi.WifiConfigStore.StoreData} to read/write data from/to a store. A {@link com.android.server.wifi.WifiConfigStore.StoreData} is
+</span> responsible for a block of data in the store file, and provides serialization/deserialization
+ functions for those data.
+@param {Object {WifiConfigStore.StoreData}} storeData The store data to be registered to the config store
+@return {Boolean} true if registered successfully, false if the store file name is not valid.
+*/
+registerStoreData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-method-createSharedFile'>/**Create a new instance of the shared store file.
+</span>@return {Object {com.android.server.wifi.WifiConfigStore.StoreFile}} new instance of the store file or null if the directory cannot be created.
+*/
+createSharedFile : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-method-createUserFiles'>/**Create new instances of the user specific store files.
+</span> The user store file is inside the user's encrypted data directory.
+@param {Number} userId userId corresponding to the currently logged-in user.
+@return {Object {java.util.List}} List of new instances of the store files created or null if the directory cannot be
+ created.
+*/
+createUserFiles : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-method-enableVerboseLogging'>/**Enable verbose logging.
+</span>*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-method-areStoresPresent'>/**API to check if any of the store files are present on the device. This can be used
+</span> to detect if the device needs to perform data migration from legacy stores.
+@return {Boolean} true if any of the store file is present, false otherwise.
+*/
+areStoresPresent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-method-write'>/**API to write the data provided by registered store data to config stores.
+</span> The method writes the user specific configurations to user specific config store and the
+ shared configurations to shared config store.
+@param {Boolean} forceSync boolean to force write the config stores now. if false, the writes are
+                  buffered and written after the configured interval.
+*/
+write : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-method-read'>/**API to read the store data from the config stores.
+</span> The method reads the user specific configurations from user specific config store and the
+ shared configurations from the shared config store.
+*/
+read : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-method-switchUserStoresAndRead'>/**Handles a user switch. This method changes the user specific store files and reads from the
+</span> new user's store files.
+@param {Object {java.util.List}} userStores List of {@link StoreFile} created using {@link #createUserFiles(int)}.
+*/
+switchUserStoresAndRead : function(  ) {},
+
+<span id='com-android-server-wifi-WifiConfigStore-method-dump'>/**Dump the local log buffer and other internal state of WifiConfigManager.
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

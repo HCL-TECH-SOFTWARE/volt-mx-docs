@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-spi-AsynchronousChannelProvider'>/**@class java.nio.channels.spi.AsynchronousChannelProvider
+</span>@extends java.lang.Object
+
+ Service-provider class for asynchronous channels.
+
+ &lt;p&gt; An asynchronous channel provider is a concrete subclass of this class that
+ has a zero-argument constructor and implements the abstract methods specified
+ below.  A given invocation of the Java virtual machine maintains a single
+ system-wide default provider instance, which is returned by the {@link #provider() provider} method.  The first invocation of that method will locate
+ the default provider as specified below.
+
+ &lt;p&gt; All of the methods in this class are safe for use by multiple concurrent
+ threads.  &lt;/p&gt;
+
+ @since 1.7
+*/
+var AsynchronousChannelProvider = {
+
+<span id='java-nio-channels-spi-AsynchronousChannelProvider-method-provider'>/**Returns the system-wide default asynchronous channel provider for this
+</span> invocation of the Java virtual machine.
+
+ &lt;p&gt; The first invocation of this method locates the default provider
+ object as follows: &lt;/p&gt;
+
+ &lt;ol&gt;
+
+   &lt;li&gt;&lt;p&gt; If the system property
+   &lt;tt&gt;java.nio.channels.spi.AsynchronousChannelProvider&lt;/tt&gt; is defined
+   then it is taken to be the fully-qualified name of a concrete provider class.
+   The class is loaded and instantiated; if this process fails then an
+   unspecified error is thrown.  &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; If a provider class has been installed in a jar file that is
+   visible to the system class loader, and that jar file contains a
+   provider-configuration file named
+   &lt;tt&gt;java.nio.channels.spi.AsynchronousChannelProvider&lt;/tt&gt; in the resource
+   directory &lt;tt&gt;META-INF/services&lt;/tt&gt;, then the first class name
+   specified in that file is taken.  The class is loaded and
+   instantiated; if this process fails then an unspecified error is
+   thrown.  &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; Finally, if no provider has been specified by any of the above
+   means then the system-default provider class is instantiated and the
+   result is returned.  &lt;/p&gt;&lt;/li&gt;
+
+ &lt;/ol&gt;
+
+ &lt;p&gt; Subsequent invocations of this method return the provider that was
+ returned by the first invocation.  &lt;/p&gt;
+@return {Object {java.nio.channels.spi.AsynchronousChannelProvider}} The system-wide default AsynchronousChannel provider
+*/
+provider : function(  ) {},
+
+<span id='java-nio-channels-spi-AsynchronousChannelProvider-method-openAsynchronousChannelGroup'>/**Constructs a new asynchronous channel group with a fixed thread pool.
+</span>@param {Number} nThreads
+          The number of threads in the pool
+@param {Object {ThreadFactory}} threadFactory
+          The factory to use when creating new threads
+@return {Object {java.nio.channels.AsynchronousChannelGroup}} A new asynchronous channel group
+@throws IllegalArgumentException
+          If {@code nThreads &lt;= 0}
+@throws IOException
+          If an I/O error occurs
+@see AsynchronousChannelGroup#withFixedThreadPool
+*/
+openAsynchronousChannelGroup : function(  ) {},
+
+<span id='java-nio-channels-spi-AsynchronousChannelProvider-method-openAsynchronousChannelGroup'>/**Constructs a new asynchronous channel group with the given thread pool.
+</span>@param {Object {ExecutorService}} executor
+          The thread pool
+@param {Number} initialSize
+          A value {@code &gt;=0} or a negative value for implementation
+          specific default
+@return {Object {java.nio.channels.AsynchronousChannelGroup}} A new asynchronous channel group
+@throws IOException
+          If an I/O error occurs
+@see AsynchronousChannelGroup#withCachedThreadPool
+*/
+openAsynchronousChannelGroup : function(  ) {},
+
+<span id='java-nio-channels-spi-AsynchronousChannelProvider-method-openAsynchronousServerSocketChannel'>/**Opens an asynchronous server-socket channel.
+</span>@param {Object {AsynchronousChannelGroup}} group
+          The group to which the channel is bound, or {@code null} to
+          bind to the default group
+@return {Object {java.nio.channels.AsynchronousServerSocketChannel}} The new channel
+@throws IllegalChannelGroupException
+          If the provider that created the group differs from this provider
+@throws ShutdownChannelGroupException
+          The group is shutdown
+@throws IOException
+          If an I/O error occurs
+*/
+openAsynchronousServerSocketChannel : function(  ) {},
+
+<span id='java-nio-channels-spi-AsynchronousChannelProvider-method-openAsynchronousSocketChannel'>/**Opens an asynchronous socket channel.
+</span>@param {Object {AsynchronousChannelGroup}} group
+          The group to which the channel is bound, or {@code null} to
+          bind to the default group
+@return {Object {java.nio.channels.AsynchronousSocketChannel}} The new channel
+@throws IllegalChannelGroupException
+          If the provider that created the group differs from this provider
+@throws ShutdownChannelGroupException
+          The group is shutdown
+@throws IOException
+          If an I/O error occurs
+*/
+openAsynchronousSocketChannel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

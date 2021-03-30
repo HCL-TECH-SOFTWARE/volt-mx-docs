@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-CookieManager'>/**@class java.net.CookieManager
+</span>@extends java.net.CookieHandler
+
+ CookieManager provides a concrete implementation of {@link java.net.CookieHandler},
+ which separates the storage of cookies from the policy surrounding accepting
+ and rejecting cookies. A CookieManager is initialized with a {@link java.net.CookieStore}
+ which manages storage, and a {@link java.net.CookiePolicy} object, which makes
+ policy decisions on cookie acceptance/rejection.
+
+ &lt;p&gt; The HTTP cookie management in java.net package looks like:
+ &lt;blockquote&gt;
+ &lt;pre&gt;{@code
+                  use
+ CookieHandler &lt;------- HttpURLConnection
+       ^
+       | impl
+       |         use
+ CookieManager -------&gt; CookiePolicy
+             |   use
+             |--------&gt; HttpCookie
+             |              ^
+             |              | use
+             |   use        |
+             |--------&gt; CookieStore
+                            ^
+                            | impl
+                            |
+                  Internal in-memory implementation
+ }&lt;/pre&gt;
+ &lt;ul&gt;
+   &lt;li&gt;
+     CookieHandler is at the core of cookie management. User can call
+     CookieHandler.setDefault to set a concrete CookieHanlder implementation
+     to be used.
+   &lt;/li&gt;
+   &lt;li&gt;
+     CookiePolicy.shouldAccept will be called by CookieManager.put to see whether
+     or not one cookie should be accepted and put into cookie store. User can use
+     any of three pre-defined CookiePolicy, namely ACCEPT_ALL, ACCEPT_NONE and
+     ACCEPT_ORIGINAL_SERVER, or user can define his own CookiePolicy implementation
+     and tell CookieManager to use it.
+   &lt;/li&gt;
+   &lt;li&gt;
+     CookieStore is the place where any accepted HTTP cookie is stored in.
+     If not specified when created, a CookieManager instance will use an internal
+     in-memory implementation. Or user can implements one and tell CookieManager
+     to use it.
+   &lt;/li&gt;
+   &lt;li&gt;
+     Currently, only CookieStore.add(URI, HttpCookie) and CookieStore.get(URI)
+     are used by CookieManager. Others are for completeness and might be needed
+     by a more sophisticated CookieStore implementation, e.g. a NetscapeCookieSotre.
+   &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;There're various ways user can hook up his own HTTP cookie management behavior, e.g.
+ &lt;blockquote&gt;
+ &lt;ul&gt;
+   &lt;li&gt;Use CookieHandler.setDefault to set a brand new {@link java.net.CookieHandler} implementation
+   &lt;li&gt;Let CookieManager be the default {@link java.net.CookieHandler} implementation,
+       but implement user's own {@link java.net.CookieStore} and {@link java.net.CookiePolicy}
+       and tell default CookieManager to use them:
+     &lt;blockquote&gt;&lt;pre&gt;
+       // this should be done at the beginning of an HTTP session
+       CookieHandler.setDefault(new CookieManager(new MyCookieStore(), new MyCookiePolicy()));
+     &lt;/pre&gt;&lt;/blockquote&gt;
+   &lt;li&gt;Let CookieManager be the default {@link java.net.CookieHandler} implementation, but
+       use customized {@link java.net.CookiePolicy}:
+     &lt;blockquote&gt;&lt;pre&gt;
+       // this should be done at the beginning of an HTTP session
+       CookieHandler.setDefault(new CookieManager());
+       // this can be done at any point of an HTTP session
+       ((CookieManager)CookieHandler.getDefault()).setCookiePolicy(new MyCookiePolicy());
+     &lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;/ul&gt;
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;The implementation conforms to &lt;a href=&quot;http://www.ietf.org/rfc/rfc2965.txt&quot;&gt;RFC 2965&lt;/a&gt;, section 3.3.
+
+ @see CookiePolicy
+ @author Edward Wang
+ @since 1.6
+*/
+var CookieManager = {
+
+<span id='java-net-CookieManager-method-setCookiePolicy'>/**To set the cookie policy of this cookie manager.
+</span>
+ &lt;p&gt; A instance of {@code CookieManager} will have
+ cookie policy ACCEPT_ORIGINAL_SERVER by default. Users always
+ can call this method to set another cookie policy.
+@param {Object {CookiePolicy}} cookiePolicy      the cookie policy. Can be {@code null}, which
+                          has no effects on current cookie policy.
+*/
+setCookiePolicy : function(  ) {},
+
+<span id='java-net-CookieManager-method-getCookieStore'>/**To retrieve current cookie store.
+</span>@return {Object {java.net.CookieStore}} the cookie store currently used by cookie manager.
+*/
+getCookieStore : function(  ) {},
+
+<span id='java-net-CookieManager-method-get'>/**
+</span>*/
+get : function(  ) {},
+
+<span id='java-net-CookieManager-method-put'>/**
+</span>*/
+put : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

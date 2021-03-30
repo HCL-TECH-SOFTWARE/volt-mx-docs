@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-annotation-Annotation'>/**@class java.lang.annotation.Annotation
+</span> The common interface extended by all annotation types.  Note that an
+ interface that manually extends this one does &lt;i&gt;not&lt;/i&gt; define
+ an annotation type.  Also note that this interface does not itself
+ define an annotation type.
+
+ More information about annotation types can be found in section 9.6 of
+ &lt;cite&gt;The Java&amp;trade; Language Specification&lt;/cite&gt;.
+
+ The {@link java.lang.reflect.AnnotatedElement} interface discusses
+ compatibility concerns when evolving an annotation type from being
+ non-repeatable to being repeatable.
+
+ @author  Josh Bloch
+ @since   1.5
+*/
+var Annotation = {
+
+<span id='java-lang-annotation-Annotation-method-equals'>/**Returns true if the specified object represents an annotation
+</span> that is logically equivalent to this one.  In other words,
+ returns true if the specified object is an instance of the same
+ annotation type as this instance, all of whose members are equal
+ to the corresponding member of this annotation, as defined below:
+ &lt;ul&gt;
+    &lt;li&gt;Two corresponding primitive typed members whose values are
+    &lt;tt&gt;x&lt;/tt&gt; and &lt;tt&gt;y&lt;/tt&gt; are considered equal if &lt;tt&gt;x == y&lt;/tt&gt;,
+    unless their type is &lt;tt&gt;float&lt;/tt&gt; or &lt;tt&gt;double&lt;/tt&gt;.
+
+    &lt;li&gt;Two corresponding &lt;tt&gt;float&lt;/tt&gt; members whose values
+    are &lt;tt&gt;x&lt;/tt&gt; and &lt;tt&gt;y&lt;/tt&gt; are considered equal if
+    &lt;tt&gt;Float.valueOf(x).equals(Float.valueOf(y))&lt;/tt&gt;.
+    (Unlike the &lt;tt&gt;==&lt;/tt&gt; operator, NaN is considered equal
+    to itself, and &lt;tt&gt;0.0f&lt;/tt&gt; unequal to &lt;tt&gt;-0.0f&lt;/tt&gt;.)
+
+    &lt;li&gt;Two corresponding &lt;tt&gt;double&lt;/tt&gt; members whose values
+    are &lt;tt&gt;x&lt;/tt&gt; and &lt;tt&gt;y&lt;/tt&gt; are considered equal if
+    &lt;tt&gt;Double.valueOf(x).equals(Double.valueOf(y))&lt;/tt&gt;.
+    (Unlike the &lt;tt&gt;==&lt;/tt&gt; operator, NaN is considered equal
+    to itself, and &lt;tt&gt;0.0&lt;/tt&gt; unequal to &lt;tt&gt;-0.0&lt;/tt&gt;.)
+
+    &lt;li&gt;Two corresponding &lt;tt&gt;String&lt;/tt&gt;, &lt;tt&gt;Class&lt;/tt&gt;, enum, or
+    annotation typed members whose values are &lt;tt&gt;x&lt;/tt&gt; and &lt;tt&gt;y&lt;/tt&gt;
+    are considered equal if &lt;tt&gt;x.equals(y)&lt;/tt&gt;.  (Note that this
+    definition is recursive for annotation typed members.)
+
+    &lt;li&gt;Two corresponding array typed members &lt;tt&gt;x&lt;/tt&gt; and &lt;tt&gt;y&lt;/tt&gt;
+    are considered equal if &lt;tt&gt;Arrays.equals(x, y)&lt;/tt&gt;, for the
+    appropriate overloading of {@link java.util.Arrays#equals}.
+ &lt;/ul&gt;
+@return {Boolean} true if the specified object represents an annotation
+     that is logically equivalent to this one, otherwise false
+*/
+equals : function(  ) {},
+
+<span id='java-lang-annotation-Annotation-method-hashCode'>/**Returns the hash code of this annotation, as defined below:
+</span>
+ &lt;p&gt;The hash code of an annotation is the sum of the hash codes
+ of its members (including those with default values), as defined
+ below:
+
+ The hash code of an annotation member is (127 times the hash code
+ of the member-name as computed by {@link String#hashCode()}) XOR
+ the hash code of the member-value, as defined below:
+
+ &lt;p&gt;The hash code of a member-value depends on its type:
+ &lt;ul&gt;
+ &lt;li&gt;The hash code of a primitive value &lt;tt&gt;&lt;i&gt;v&lt;/i&gt;&lt;/tt&gt; is equal to
+     &lt;tt&gt;&lt;i&gt;WrapperType&lt;/i&gt;.valueOf(&lt;i&gt;v&lt;/i&gt;).hashCode()&lt;/tt&gt;, where
+     &lt;tt&gt;&lt;i&gt;WrapperType&lt;/i&gt;&lt;/tt&gt; is the wrapper type corresponding
+     to the primitive type of &lt;tt&gt;&lt;i&gt;v&lt;/i&gt;&lt;/tt&gt; ({@link Byte},
+     {@link Character}, {@link Double}, {@link Float}, {@link Integer},
+     {@link Long}, {@link Short}, or {@link Boolean}).
+
+ &lt;li&gt;The hash code of a string, enum, class, or annotation member-value
+     I     &lt;tt&gt;&lt;i&gt;v&lt;/i&gt;&lt;/tt&gt; is computed as by calling
+     &lt;tt&gt;&lt;i&gt;v&lt;/i&gt;.hashCode()&lt;/tt&gt;.  (In the case of annotation
+     member values, this is a recursive definition.)
+
+ &lt;li&gt;The hash code of an array member-value is computed by calling
+     the appropriate overloading of
+     {@link java.util.Arrays#hashCode(long[]) Arrays.hashCode}
+     on the value.  (There is one overloading for each primitive
+     type, and one for object reference types.)
+ &lt;/ul&gt;
+@return {Number} the hash code of this annotation
+*/
+hashCode : function(  ) {},
+
+<span id='java-lang-annotation-Annotation-method-toString'>/**Returns a string representation of this annotation.  The details
+</span> of the representation are implementation-dependent, but the following
+ may be regarded as typical:
+ &lt;pre&gt;
+   &amp;#064;com.acme.util.Name(first=Alfred, middle=E., last=Neuman)
+ &lt;/pre&gt;
+@return {String} a string representation of this annotation
+*/
+toString : function(  ) {},
+
+<span id='java-lang-annotation-Annotation-method-annotationType'>/**Returns the annotation type of this annotation.
+</span>@return {Object {java.lang.Class}} the annotation type of this annotation
+*/
+annotationType : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

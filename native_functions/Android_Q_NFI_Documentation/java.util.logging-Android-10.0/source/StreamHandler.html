@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-logging-StreamHandler'>/**@class java.util.logging.StreamHandler
+</span>@extends java.util.logging.Handler
+
+ Stream based logging &lt;tt&gt;Handler&lt;/tt&gt;.
+ &lt;p&gt;
+ This is primarily intended as a base class or support class to
+ be used in implementing other logging &lt;tt&gt;Handlers&lt;/tt&gt;.
+ &lt;p&gt;
+ &lt;tt&gt;LogRecords&lt;/tt&gt; are published to a given &lt;tt&gt;java.io.OutputStream&lt;/tt&gt;.
+ &lt;p&gt;
+ &lt;b&gt;Configuration:&lt;/b&gt;
+ By default each &lt;tt&gt;StreamHandler&lt;/tt&gt; is initialized using the following
+ &lt;tt&gt;LogManager&lt;/tt&gt; configuration properties where &lt;tt&gt;&amp;lt;handler-name&amp;gt;&lt;/tt&gt;
+ refers to the fully-qualified class name of the handler.
+ If properties are not defined
+ (or have invalid values) then the specified default values are used.
+ &lt;ul&gt;
+ &lt;li&gt;   &amp;lt;handler-name&amp;gt;.level
+        specifies the default level for the &lt;tt&gt;Handler&lt;/tt&gt;
+        (defaults to &lt;tt&gt;Level.INFO&lt;/tt&gt;). &lt;/li&gt;
+ &lt;li&gt;   &amp;lt;handler-name&amp;gt;.filter
+        specifies the name of a &lt;tt&gt;Filter&lt;/tt&gt; class to use
+         (defaults to no &lt;tt&gt;Filter&lt;/tt&gt;). &lt;/li&gt;
+ &lt;li&gt;   &amp;lt;handler-name&amp;gt;.formatter
+        specifies the name of a &lt;tt&gt;Formatter&lt;/tt&gt; class to use
+        (defaults to &lt;tt&gt;java.util.logging.SimpleFormatter&lt;/tt&gt;). &lt;/li&gt;
+ &lt;li&gt;   &amp;lt;handler-name&amp;gt;.encoding
+        the name of the character set encoding to use (defaults to
+        the default platform encoding). &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ For example, the properties for {@code StreamHandler} would be:
+ &lt;ul&gt;
+ &lt;li&gt;   java.util.logging.StreamHandler.level=INFO &lt;/li&gt;
+ &lt;li&gt;   java.util.logging.StreamHandler.formatter=java.util.logging.SimpleFormatter &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ For a custom handler, e.g. com.foo.MyHandler, the properties would be:
+ &lt;ul&gt;
+ &lt;li&gt;   com.foo.MyHandler.level=INFO &lt;/li&gt;
+ &lt;li&gt;   com.foo.MyHandler.formatter=java.util.logging.SimpleFormatter &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ @since 1.4
+*/
+var StreamHandler = {
+
+<span id='java-util-logging-StreamHandler-method-setEncoding'>/**Set (or change) the character encoding used by this &lt;tt&gt;Handler&lt;/tt&gt;.
+</span> &lt;p&gt;
+ The encoding should be set before any &lt;tt&gt;LogRecords&lt;/tt&gt; are written
+ to the &lt;tt&gt;Handler&lt;/tt&gt;.
+@param {String} encoding  The name of a supported character encoding.
+        May be null, to indicate the default platform encoding.
+@exception SecurityException  if a security manager exists and if
+             the caller does not have &lt;tt&gt;LoggingPermission(&quot;control&quot;)&lt;/tt&gt;.
+@exception UnsupportedEncodingException if the named encoding is
+          not supported.
+*/
+setEncoding : function(  ) {},
+
+<span id='java-util-logging-StreamHandler-method-publish'>/**Format and publish a &lt;tt&gt;LogRecord&lt;/tt&gt;.
+</span> &lt;p&gt;
+ The &lt;tt&gt;StreamHandler&lt;/tt&gt; first checks if there is an &lt;tt&gt;OutputStream&lt;/tt&gt;
+ and if the given &lt;tt&gt;LogRecord&lt;/tt&gt; has at least the required log level.
+ If not it silently returns.  If so, it calls any associated
+ &lt;tt&gt;Filter&lt;/tt&gt; to check if the record should be published.  If so,
+ it calls its &lt;tt&gt;Formatter&lt;/tt&gt; to format the record and then writes
+ the result to the current output stream.
+ &lt;p&gt;
+ If this is the first &lt;tt&gt;LogRecord&lt;/tt&gt; to be written to a given
+ &lt;tt&gt;OutputStream&lt;/tt&gt;, the &lt;tt&gt;Formatter&lt;/tt&gt;'s &quot;head&quot; string is
+ written to the stream before the &lt;tt&gt;LogRecord&lt;/tt&gt; is written.
+@param {Object {LogRecord}} record  description of the log event. A null record is
+                 silently ignored and is not published
+*/
+publish : function(  ) {},
+
+<span id='java-util-logging-StreamHandler-method-isLoggable'>/**Check if this &lt;tt&gt;Handler&lt;/tt&gt; would actually log a given &lt;tt&gt;LogRecord&lt;/tt&gt;.
+</span> &lt;p&gt;
+ This method checks if the &lt;tt&gt;LogRecord&lt;/tt&gt; has an appropriate level and
+ whether it satisfies any &lt;tt&gt;Filter&lt;/tt&gt;.  It will also return false if
+ no output stream has been assigned yet or the LogRecord is null.
+ &lt;p&gt;
+@param {Object {LogRecord}} record  a &lt;tt&gt;LogRecord&lt;/tt&gt;
+@return {Boolean} true if the &lt;tt&gt;LogRecord&lt;/tt&gt; would be logged.
+*/
+isLoggable : function(  ) {},
+
+<span id='java-util-logging-StreamHandler-method-flush'>/**Flush any buffered messages.
+</span>*/
+flush : function(  ) {},
+
+<span id='java-util-logging-StreamHandler-method-close'>/**Close the current output stream.
+</span> &lt;p&gt;
+ The &lt;tt&gt;Formatter&lt;/tt&gt;'s &quot;tail&quot; string is written to the stream before it
+ is closed.  In addition, if the &lt;tt&gt;Formatter&lt;/tt&gt;'s &quot;head&quot; string has not
+ yet been written to the stream, it will be written before the
+ &quot;tail&quot; string.
+@exception SecurityException  if a security manager exists and if
+             the caller does not have LoggingPermission(&quot;control&quot;).
+*/
+close : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

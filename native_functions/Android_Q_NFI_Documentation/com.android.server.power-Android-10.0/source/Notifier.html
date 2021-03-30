@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-power-Notifier'>/**@class com.android.server.power.Notifier
+</span>@extends java.lang.Object
+
+ Sends broadcasts about important power state changes.
+ &lt;p&gt;
+ This methods of this class may be called by the power manager service while
+ its lock is being held.  Internally it takes care of sending broadcasts to
+ notify other components of the system or applications asynchronously.
+ &lt;/p&gt;&lt;p&gt;
+ The notifier is designed to collapse unnecessary broadcasts when it is not
+ possible for the system to have observed an intermediate state.
+ &lt;/p&gt;&lt;p&gt;
+ For example, if the device wakes up, goes to sleep, wakes up again and goes to
+ sleep again before the wake up notification is sent, then the system will
+ be told about only one wake up and sleep.  However, we always notify the
+ fact that at least one transition occurred.  It is especially important to
+ tell the system when we go to sleep so that it can lock the keyguard if needed.
+ &lt;/p&gt;
+*/
+var Notifier = {
+
+<span id='com-android-server-power-Notifier-method-onWakeLockAcquired'>/**Called when a wake lock is acquired.
+</span>*/
+onWakeLockAcquired : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onLongPartialWakeLockStart'>/**
+</span>*/
+onLongPartialWakeLockStart : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onLongPartialWakeLockFinish'>/**
+</span>*/
+onLongPartialWakeLockFinish : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onWakeLockChanging'>/**Called when a wake lock is changing.
+</span>*/
+onWakeLockChanging : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onWakeLockReleased'>/**Called when a wake lock is released.
+</span>*/
+onWakeLockReleased : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onWakefulnessChangeStarted'>/**Notifies that the device is changing wakefulness.
+</span> This function may be called even if the previous change hasn't finished in
+ which case it will assume that the state did not fully converge before the
+ next transition began and will recover accordingly.
+*/
+onWakefulnessChangeStarted : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onWakefulnessChangeFinished'>/**Notifies that the device has finished changing wakefulness.
+</span>*/
+onWakefulnessChangeFinished : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onScreenBrightnessBoostChanged'>/**Called when screen brightness boost begins or ends.
+</span>*/
+onScreenBrightnessBoostChanged : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onUserActivity'>/**Called when there has been user activity.
+</span>*/
+onUserActivity : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onWakeUp'>/**Called when the screen has turned on.
+</span>*/
+onWakeUp : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onProfileTimeout'>/**Called when profile screen lock timeout has expired.
+</span>*/
+onProfileTimeout : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onWirelessChargingStarted'>/**Called when wireless charging has started - to provide user feedback (sound and visual).
+</span>*/
+onWirelessChargingStarted : function(  ) {},
+
+<span id='com-android-server-power-Notifier-method-onWiredChargingStarted'>/**Called when wired charging has started - to provide user feedback
+</span>*/
+onWiredChargingStarted : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xmlpull-v1-XmlSerializer'>/**@class org.xmlpull.v1.XmlSerializer
+</span> Define an interface to serialization of XML Infoset.
+ This interface abstracts away if serialized XML is XML 1.0 compatible text or
+ other formats of XML 1.0 serializations (such as binary XML for example with WBXML).
+
+ &lt;p&gt;&lt;b&gt;PLEASE NOTE:&lt;/b&gt; This interface will be part of XmlPull 1.2 API.
+ It is included as basis for discussion. It may change in any way.
+
+ &lt;p&gt;Exceptions that may be thrown are: IOException or runtime exception
+ (more runtime exceptions can be thrown but are not declared and as such
+ have no semantics defined for this interface):
+ &lt;ul&gt;
+ &lt;li&gt;&lt;em&gt;IllegalArgumentException&lt;/em&gt; - for almost all methods to signal that
+     argument is illegal
+ &lt;li&gt;&lt;em&gt;IllegalStateException&lt;/em&gt; - to signal that call has good arguments but
+     is not expected here (violation of contract) and for features/properties
+    when requesting setting unimplemented feature/property
+    (UnsupportedOperationException would be better but it is not in MIDP)
+  &lt;/ul&gt;
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; writing  CDSECT, ENTITY_REF, IGNORABLE_WHITESPACE,
+  PROCESSING_INSTRUCTION, COMMENT, and DOCDECL in some implementations
+ may not be supported (for example when serializing to WBXML).
+ In such case IllegalStateException will be thrown and it is recommended
+ to use an optional feature to signal that implementation is not
+ supporting this kind of output.
+*/
+var XmlSerializer = {
+
+<span id='org-xmlpull-v1-XmlSerializer-method-setFeature'>/**Set feature identified by name (recommended to be URI for uniqueness).
+</span> Some well known optional features are defined in
+ &lt;a href=&quot;http://www.xmlpull.org/v1/doc/features.html&quot;&gt;
+ http://www.xmlpull.org/v1/doc/features.html&lt;/a&gt;.
+
+ If feature is not recognized or can not be set
+ then IllegalStateException MUST be thrown.
+@exception IllegalStateException If the feature is not supported or can not be set
+*/
+setFeature : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-getFeature'>/**Return the current value of the feature with given name.
+</span> &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; unknown properties are &lt;strong&gt;always&lt;/strong&gt; returned as null
+@param {String} name The name of feature to be retrieved.
+@return {Boolean} The value of named feature.
+@exception IllegalArgumentException if feature string is null
+*/
+getFeature : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-setProperty'>/**Set the value of a property.
+</span> (the property name is recommended to be URI for uniqueness).
+ Some well known optional properties are defined in
+ &lt;a href=&quot;http://www.xmlpull.org/v1/doc/properties.html&quot;&gt;
+ http://www.xmlpull.org/v1/doc/properties.html&lt;/a&gt;.
+
+ If property is not recognized or can not be set
+ then IllegalStateException MUST be thrown.
+@exception IllegalStateException if the property is not supported or can not be set
+*/
+setProperty : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-getProperty'>/**Look up the value of a property.
+</span>
+ The property name is any fully-qualified URI. I
+ &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; unknown properties are &lt;string&gt;always&lt;/strong&gt; returned as null
+@param {String} name The name of property to be retrieved.
+@return {Object {java.lang.Object}} The value of named property.
+*/
+getProperty : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-setOutput'>/**Set to use binary output stream with given encoding.
+</span>*/
+setOutput : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-setOutput'>/**Set the output to the given writer.
+</span> &lt;p&gt;&lt;b&gt;WARNING&lt;/b&gt; no information about encoding is available!
+*/
+setOutput : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-startDocument'>/**Write &amp;lt;&amp;#63;xml declaration with encoding (if encoding not null)
+</span> and standalone flag (if standalone not null)
+ This method can only be called just after setOutput.
+*/
+startDocument : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-endDocument'>/**Finish writing. All unclosed start tags will be closed and output
+</span> will be flushed. After calling this method no more output can be
+ serialized until next call to setOutput()
+*/
+endDocument : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-setPrefix'>/**Binds the given prefix to the given namespace.
+</span> This call is valid for the next element including child elements.
+ The prefix and namespace MUST be always declared even if prefix
+ is not used in element (startTag() or attribute()) - for XML 1.0
+ it must result in declaring &lt;code&gt;xmlns:prefix='namespace'&lt;/code&gt;
+ (or &lt;code&gt;xmlns:prefix=&quot;namespace&quot;&lt;/code&gt; depending what character is used
+ to quote attribute value).
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; this method MUST be called directly before startTag()
+   and if anything but startTag() or setPrefix() is called next there will be exception.
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; prefixes &quot;xml&quot; and &quot;xmlns&quot; are already bound
+   and can not be redefined see:
+ &lt;a href=&quot;http://www.w3.org/XML/xml-names-19990114-errata#NE05&quot;&gt;Namespaces in XML Errata&lt;/a&gt;.
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; to set default namespace use as prefix empty string.
+@param {String} prefix must be not null (or IllegalArgumentException is thrown)
+@param {String} namespace must be not null
+*/
+setPrefix : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-getPrefix'>/**Return namespace that corresponds to given prefix
+</span> If there is no prefix bound to this namespace return null
+ but if generatePrefix is false then return generated prefix.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; if the prefix is empty string &quot;&quot; and default namespace is bound
+ to this prefix then empty string (&quot;&quot;) is returned.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; prefixes &quot;xml&quot; and &quot;xmlns&quot; are already bound
+   will have values as defined
+ &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/&quot;&gt;Namespaces in XML specification&lt;/a&gt;
+*/
+getPrefix : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-getDepth'>/**Returns the current depth of the element.
+</span> Outside the root element, the depth is 0. The
+ depth is incremented by 1 when startTag() is called.
+ The depth is decremented after the call to endTag()
+ event was observed.
+
+ &lt;pre&gt;
+ &amp;lt;!-- outside --&amp;gt;     0
+ &amp;lt;root&amp;gt;               1
+   sometext                 1
+     &amp;lt;foobar&amp;gt;         2
+     &amp;lt;/foobar&amp;gt;        2
+ &amp;lt;/root&amp;gt;              1
+ &amp;lt;!-- outside --&amp;gt;     0
+ &lt;/pre&gt;
+*/
+getDepth : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-getNamespace'>/**Returns the namespace URI of the current element as set by startTag().
+</span>
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; that means in particular that: &lt;ul&gt;
+ &lt;li&gt;if there was startTag(&quot;&quot;, ...) then getNamespace() returns &quot;&quot;
+ &lt;li&gt;if there was startTag(null, ...) then getNamespace() returns null
+ &lt;/ul&gt;
+@return {String} namespace set by startTag() that is currently in scope
+*/
+getNamespace : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-getName'>/**Returns the name of the current element as set by startTag().
+</span> It can only be null before first call to startTag()
+ or when last endTag() is called to close first startTag().
+@return {String} namespace set by startTag() that is currently in scope
+*/
+getName : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-startTag'>/**Writes a start tag with the given namespace and name.
+</span> If there is no prefix defined for the given namespace,
+ a prefix will be defined automatically.
+ The explicit prefixes for namespaces can be established by calling setPrefix()
+ immediately before this method.
+ If namespace is null no namespace prefix is printed but just name.
+ If namespace is empty string then serializer will make sure that
+ default empty namespace is declared (in XML 1.0 xmlns='')
+ or throw IllegalStateException if default namespace is already bound
+ to non-empty string.
+*/
+startTag : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-attribute'>/**Write an attribute. Calls to attribute() MUST follow a call to
+</span> startTag() immediately. If there is no prefix defined for the
+ given namespace, a prefix will be defined automatically.
+ If namespace is null or empty string
+ no namespace prefix is printed but just name.
+*/
+attribute : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-endTag'>/**Write end tag. Repetition of namespace and name is just for avoiding errors.
+</span> &lt;p&gt;&lt;b&gt;Background:&lt;/b&gt; in kXML endTag had no arguments, and non matching tags were
+  very difficult to find...
+ If namespace is null no namespace prefix is printed but just name.
+ If namespace is empty string then serializer will make sure that
+ default empty namespace is declared (in XML 1.0 xmlns='').
+*/
+endTag : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-text'>/**Writes text, where special XML chars are escaped automatically
+</span>*/
+text : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-text'>/**Writes text, where special XML chars are escaped automatically
+</span>*/
+text : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-cdsect'>/**
+</span>*/
+cdsect : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-entityRef'>/**
+</span>*/
+entityRef : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-processingInstruction'>/**
+</span>*/
+processingInstruction : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-comment'>/**
+</span>*/
+comment : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-docdecl'>/**
+</span>*/
+docdecl : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-ignorableWhitespace'>/**
+</span>*/
+ignorableWhitespace : function(  ) {},
+
+<span id='org-xmlpull-v1-XmlSerializer-method-flush'>/**Write all pending output to the stream.
+</span> If method startTag() or attribute() was called then start tag is closed (final &amp;gt;)
+ before flush() is called on underlying output stream.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; if there is need to close start tag
+ (so no more attribute() calls are allowed) but without flushing output
+ call method text() with empty string (text(&quot;&quot;)).
+*/
+flush : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

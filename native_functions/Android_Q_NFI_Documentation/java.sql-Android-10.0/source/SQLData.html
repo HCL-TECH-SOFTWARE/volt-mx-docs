@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-sql-SQLData'>/**@class java.sql.SQLData
+</span> The interface used for the custom mapping of an SQL user-defined type (UDT) to
+ a class in the Java programming language. The class object for a class
+ implementing the &lt;code&gt;SQLData&lt;/code&gt; interface will be entered in the
+ appropriate &lt;code&gt;Connection&lt;/code&gt; object's type map along with the SQL
+ name of the UDT for which it is a custom mapping.
+ &lt;P&gt;
+ Typically, a &lt;code&gt;SQLData&lt;/code&gt; implementation
+ will define a field for each attribute of an SQL structured type or a
+ single field for an SQL &lt;code&gt;DISTINCT&lt;/code&gt; type. When the UDT is
+ retrieved from a data source with the &lt;code&gt;ResultSet.getObject&lt;/code&gt;
+ method, it will be mapped as an instance of this class.  A programmer
+ can operate on this class instance just as on any other object in the
+ Java programming language and then store any changes made to it by
+ calling the &lt;code&gt;PreparedStatement.setObject&lt;/code&gt; method,
+ which will map it back to the SQL type.
+ &lt;p&gt;
+ It is expected that the implementation of the class for a custom
+ mapping will be done by a tool.  In a typical implementation, the
+ programmer would simply supply the name of the SQL UDT, the name of
+ the class to which it is being mapped, and the names of the fields to
+ which each of the attributes of the UDT is to be mapped.  The tool will use
+ this information to implement the &lt;code&gt;SQLData.readSQL&lt;/code&gt; and
+ &lt;code&gt;SQLData.writeSQL&lt;/code&gt; methods.  The &lt;code&gt;readSQL&lt;/code&gt; method
+ calls the appropriate &lt;code&gt;SQLInput&lt;/code&gt; methods to read
+ each attribute from an &lt;code&gt;SQLInput&lt;/code&gt; object, and the
+ &lt;code&gt;writeSQL&lt;/code&gt; method calls &lt;code&gt;SQLOutput&lt;/code&gt; methods
+ to write each attribute back to the data source via an
+ &lt;code&gt;SQLOutput&lt;/code&gt; object.
+ &lt;P&gt;
+ An application programmer will not normally call &lt;code&gt;SQLData&lt;/code&gt; methods
+ directly, and the &lt;code&gt;SQLInput&lt;/code&gt; and &lt;code&gt;SQLOutput&lt;/code&gt; methods
+ are called internally by &lt;code&gt;SQLData&lt;/code&gt; methods, not by application code.
+
+ @since 1.2
+*/
+var SQLData = {
+
+<span id='java-sql-SQLData-method-getSQLTypeName'>/**Returns the fully-qualified
+</span> name of the SQL user-defined type that this object represents.
+ This method is called by the JDBC driver to get the name of the
+ UDT instance that is being mapped to this instance of
+ &lt;code&gt;SQLData&lt;/code&gt;.
+@return {String} the type name that was passed to the method &lt;code&gt;readSQL&lt;/code&gt;
+            when this object was constructed and populated
+@exception SQLException if there is a database access error
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@since 1.2
+*/
+getSQLTypeName : function(  ) {},
+
+<span id='java-sql-SQLData-method-readSQL'>/**Populates this object with data read from the database.
+</span> The implementation of the method must follow this protocol:
+ &lt;UL&gt;
+ &lt;LI&gt;It must read each of the attributes or elements of the SQL
+ type  from the given input stream.  This is done
+ by calling a method of the input stream to read each
+ item, in the order that they appear in the SQL definition
+ of the type.
+ &lt;LI&gt;The method &lt;code&gt;readSQL&lt;/code&gt; then
+ assigns the data to appropriate fields or
+ elements (of this or other objects).
+ Specifically, it must call the appropriate &lt;i&gt;reader&lt;/i&gt; method
+ (&lt;code&gt;SQLInput.readString&lt;/code&gt;, &lt;code&gt;SQLInput.readBigDecimal&lt;/code&gt;,
+ and so on) method(s) to do the following:
+ for a distinct type, read its single data element;
+ for a structured type, read a value for each attribute of the SQL type.
+ &lt;/UL&gt;
+ The JDBC driver initializes the input stream with a type map
+ before calling this method, which is used by the appropriate
+ &lt;code&gt;SQLInput&lt;/code&gt; reader method on the stream.
+@param {Object {SQLInput}} stream the &lt;code&gt;SQLInput&lt;/code&gt; object from which to read the data for
+ the value that is being custom mapped
+@param {String} typeName the SQL type name of the value on the data stream
+@exception SQLException if there is a database access error
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@see SQLInput
+@since 1.2
+*/
+readSQL : function(  ) {},
+
+<span id='java-sql-SQLData-method-writeSQL'>/**Writes this object to the given SQL data stream, converting it back to
+</span> its SQL value in the data source.
+ The implementation of the method must follow this protocol:&lt;BR&gt;
+ It must write each of the attributes of the SQL type
+ to the given output stream.  This is done by calling a
+ method of the output stream to write each item, in the order that
+ they appear in the SQL definition of the type.
+ Specifically, it must call the appropriate &lt;code&gt;SQLOutput&lt;/code&gt; writer
+ method(s) (&lt;code&gt;writeInt&lt;/code&gt;, &lt;code&gt;writeString&lt;/code&gt;, and so on)
+ to do the following: for a Distinct Type, write its single data element;
+ for a Structured Type, write a value for each attribute of the SQL type.
+@param {Object {SQLOutput}} stream the &lt;code&gt;SQLOutput&lt;/code&gt; object to which to write the data for
+ the value that was custom mapped
+@exception SQLException if there is a database access error
+@exception SQLFeatureNotSupportedException if the JDBC driver does not support
+ this method
+@see SQLOutput
+@since 1.2
+*/
+writeSQL : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

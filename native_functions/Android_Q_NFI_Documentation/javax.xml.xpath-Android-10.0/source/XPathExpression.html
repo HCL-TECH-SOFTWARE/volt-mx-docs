@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-xpath-XPathExpression'>/**@class javax.xml.xpath.XPathExpression
+</span> &lt;p&gt;&lt;code&gt;XPathExpression&lt;/code&gt; provides access to compiled XPath expressions.&lt;/p&gt;
+
+ &lt;table id=&quot;XPathExpression-evaluation&quot; border=&quot;1&quot; cellpadding=&quot;2&quot;&gt;
+   &lt;thead&gt;
+     &lt;tr&gt;
+       &lt;th colspan=&quot;2&quot;&gt;Evaluation of XPath Expressions.&lt;/th&gt;
+     &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+     &lt;tr&gt;
+       &lt;td&gt;context&lt;/td&gt;
+       &lt;td&gt;
+         If a request is made to evaluate the expression in the absence
+ of a context item, an empty document node will be used for the context.
+ For the purposes of evaluating XPath expressions, a DocumentFragment
+ is treated like a Document node.
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;variables&lt;/td&gt;
+      &lt;td&gt;
+        If the expression contains a variable reference, its value will be found through the {@link javax.xml.xpath.XPathVariableResolver}.
+        An {@link javax.xml.xpath.XPathExpressionException} is raised if the variable resolver is undefined or
+        the resolver returns &lt;code&gt;null&lt;/code&gt; for the variable.
+        The value of a variable must be immutable through the course of any single evaluation.&lt;/p&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;functions&lt;/td&gt;
+      &lt;td&gt;
+        If the expression contains a function reference, the function will be found through the {@link javax.xml.xpath.XPathFunctionResolver}.
+        An {@link javax.xml.xpath.XPathExpressionException} is raised if the function resolver is undefined or
+        the function resolver returns &lt;code&gt;null&lt;/code&gt; for the function.&lt;/p&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;QNames&lt;/td&gt;
+      &lt;td&gt;
+        QNames in the expression are resolved against the XPath namespace context.
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;result&lt;/td&gt;
+      &lt;td&gt;
+        This result of evaluating an expression is converted to an instance of the desired return type.
+        Valid return types are defined in {@link javax.xml.xpath.XPathConstants}.
+        Conversion to the return type follows XPath conversion rules.&lt;/p&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+ &lt;/table&gt;
+
+ @author  &lt;a href=&quot;mailto:Norman.Walsh@Sun.com&quot;&gt;Norman Walsh&lt;/a&gt;
+ @author  &lt;a href=&quot;mailto:Jeff.Suttor@Sun.com&quot;&gt;Jeff Suttor&lt;/a&gt;
+ @version $Revision: 446598 $, $Date: 2006-09-15 05:55:40 -0700 (Fri, 15 Sep 2006) $
+ @see &lt;a href=&quot;http://www.w3.org/TR/xpath#section-Expressions&quot;&gt;XML Path Language (XPath) Version 1.0, Expressions&lt;/a&gt;
+ @since 1.5
+*/
+var XPathExpression = {
+
+<span id='javax-xml-xpath-XPathExpression-method-evaluate'>/**&lt;p&gt;Evaluate the compiled XPath expression in the specified context and return the result as the specified type.&lt;/p&gt;
+</span>
+ &lt;p&gt;See &lt;a href=&quot;#XPathExpression-evaluation&quot;&gt;Evaluation of XPath Expressions&lt;/a&gt; for context item evaluation,
+ variable, function and QName resolution and return type conversion.&lt;/p&gt;
+
+ &lt;p&gt;If &lt;code&gt;returnType&lt;/code&gt; is not one of the types defined in {@link javax.xml.xpath.XPathConstants},
+ then an &lt;code&gt;IllegalArgumentException&lt;/code&gt; is thrown.&lt;/p&gt;
+
+ &lt;p&gt;If a &lt;code&gt;null&lt;/code&gt; value is provided for
+ &lt;code&gt;item&lt;/code&gt;, an empty document will be used for the
+ context.
+ If &lt;code&gt;returnType&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;, then a &lt;code&gt;NullPointerException&lt;/code&gt; is thrown.&lt;/p&gt;
+@param {Object {Object}} item The starting context (node or node list, for example).
+@param {Object {QName}} returnType The desired return type.
+@return {Object {java.lang.Object}} The &lt;code&gt;Object&lt;/code&gt; that is the result of evaluating the expression and converting the result to
+   &lt;code&gt;returnType&lt;/code&gt;.
+@throws XPathExpressionException If the expression cannot be evaluated.
+@throws IllegalArgumentException If &lt;code&gt;returnType&lt;/code&gt; is not one of the types defined in {@link XPathConstants}.
+@throws NullPointerException If  &lt;code&gt;returnType&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+evaluate : function(  ) {},
+
+<span id='javax-xml-xpath-XPathExpression-method-evaluate'>/**&lt;p&gt;Evaluate the compiled XPath expression in the specified context and return the result as a &lt;code&gt;String&lt;/code&gt;.&lt;/p&gt;
+</span>
+ &lt;p&gt;This method calls {@link #evaluate(Object item, QName returnType)} with a &lt;code&gt;returnType&lt;/code&gt; of
+ {@link javax.xml.xpath.XPathConstants#STRING}.&lt;/p&gt;
+
+ &lt;p&gt;See &lt;a href=&quot;#XPathExpression-evaluation&quot;&gt;Evaluation of XPath Expressions&lt;/a&gt; for context item evaluation,
+ variable, function and QName resolution and return type conversion.&lt;/p&gt;
+
+ &lt;p&gt;If a &lt;code&gt;null&lt;/code&gt; value is provided for
+ &lt;code&gt;item&lt;/code&gt;, an empty document will be used for the
+ context.
+@param {Object {Object}} item The starting context (node or node list, for example).
+@return {String} The &lt;code&gt;String&lt;/code&gt; that is the result of evaluating the expression and converting the result to a
+   &lt;code&gt;String&lt;/code&gt;.
+@throws XPathExpressionException If the expression cannot be evaluated.
+*/
+evaluate : function(  ) {},
+
+<span id='javax-xml-xpath-XPathExpression-method-evaluate'>/**&lt;p&gt;Evaluate the compiled XPath expression in the context of the specified &lt;code&gt;InputSource&lt;/code&gt; and return the result as the
+</span> specified type.&lt;/p&gt;
+
+ &lt;p&gt;This method builds a data model for the {@link InputSource} and calls
+ {@link #evaluate(Object item, QName returnType)} on the resulting document object.&lt;/p&gt;
+
+ &lt;p&gt;See &lt;a href=&quot;#XPathExpression-evaluation&quot;&gt;Evaluation of XPath Expressions&lt;/a&gt; for context item evaluation,
+ variable, function and QName resolution and return type conversion.&lt;/p&gt;
+
+ &lt;p&gt;If &lt;code&gt;returnType&lt;/code&gt; is not one of the types defined in {@link javax.xml.xpath.XPathConstants},
+ then an &lt;code&gt;IllegalArgumentException&lt;/code&gt; is thrown.&lt;/p&gt;
+
+ &lt;p&gt;If &lt;code&gt;source&lt;/code&gt; or &lt;code&gt;returnType&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;,
+ then a &lt;code&gt;NullPointerException&lt;/code&gt; is thrown.&lt;/p&gt;
+@param {Object {InputSource}} source The &lt;code&gt;InputSource&lt;/code&gt; of the document to evaluate over.
+@param {Object {QName}} returnType The desired return type.
+@return {Object {java.lang.Object}} The &lt;code&gt;Object&lt;/code&gt; that is the result of evaluating the expression and converting the result to
+   &lt;code&gt;returnType&lt;/code&gt;.
+@throws XPathExpressionException If the expression cannot be evaluated.
+@throws IllegalArgumentException If &lt;code&gt;returnType&lt;/code&gt; is not one of the types defined in {@link XPathConstants}.
+@throws NullPointerException If  &lt;code&gt;source&lt;/code&gt; or &lt;code&gt;returnType&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+evaluate : function(  ) {},
+
+<span id='javax-xml-xpath-XPathExpression-method-evaluate'>/**&lt;p&gt;Evaluate the compiled XPath expression in the context of the specified &lt;code&gt;InputSource&lt;/code&gt; and return the result as a
+</span> &lt;code&gt;String&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;p&gt;This method calls {@link #evaluate(InputSource source, QName returnType)} with a &lt;code&gt;returnType&lt;/code&gt; of
+ {@link javax.xml.xpath.XPathConstants#STRING}.&lt;/p&gt;
+
+ &lt;p&gt;See &lt;a href=&quot;#XPathExpression-evaluation&quot;&gt;Evaluation of XPath Expressions&lt;/a&gt; for context item evaluation,
+ variable, function and QName resolution and return type conversion.&lt;/p&gt;
+
+ &lt;p&gt;If &lt;code&gt;source&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;, then a &lt;code&gt;NullPointerException&lt;/code&gt; is thrown.&lt;/p&gt;
+@param {Object {InputSource}} source The &lt;code&gt;InputSource&lt;/code&gt; of the document to evaluate over.
+@return {String} The &lt;code&gt;String&lt;/code&gt; that is the result of evaluating the expression and converting the result to a
+   &lt;code&gt;String&lt;/code&gt;.
+@throws XPathExpressionException If the expression cannot be evaluated.
+@throws NullPointerException If  &lt;code&gt;source&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+evaluate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

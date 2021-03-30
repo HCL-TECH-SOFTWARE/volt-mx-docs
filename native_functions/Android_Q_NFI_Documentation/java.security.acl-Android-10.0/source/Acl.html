@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-acl-Acl'>/**@class java.security.acl.Acl
+</span> implements java.security.acl.Owner
+
+ Interface representing an Access Control List (ACL).  An Access
+ Control List is a data structure used to guard access to
+ resources.&lt;p&gt;
+
+ An ACL can be thought of as a data structure with multiple ACL
+ entries.  Each ACL entry, of interface type AclEntry, contains a
+ set of permissions associated with a particular principal. (A
+ principal represents an entity such as an individual user or a
+ group). Additionally, each ACL entry is specified as being either
+ positive or negative. If positive, the permissions are to be
+ granted to the associated principal. If negative, the permissions
+ are to be denied.&lt;p&gt;
+
+ The ACL Entries in each ACL observe the following rules:
+
+ &lt;ul&gt; &lt;li&gt;Each principal can have at most one positive ACL entry and
+ one negative entry; that is, multiple positive or negative ACL
+ entries are not allowed for any principal.  Each entry specifies
+ the set of permissions that are to be granted (if positive) or
+ denied (if negative).
+
+ &lt;li&gt;If there is no entry for a particular principal, then the
+ principal is considered to have a null (empty) permission set.
+
+ &lt;li&gt;If there is a positive entry that grants a principal a
+ particular permission, and a negative entry that denies the
+ principal the same permission, the result is as though the
+ permission was never granted or denied.
+
+ &lt;li&gt;Individual permissions always override permissions of the
+ group(s) to which the individual belongs. That is, individual
+ negative permissions (specific denial of permissions) override the
+ groups' positive permissions. And individual positive permissions
+ override the groups' negative permissions.
+
+ &lt;/ul&gt;
+
+ The {@code  java.security.acl } package provides the
+ interfaces to the ACL and related data structures (ACL entries,
+ groups, permissions, etc.), and the {@code  sun.security.acl }
+ classes provide a default implementation of the interfaces. For
+ example, {@code  java.security.acl.Acl } provides the
+ interface to an ACL and the {@code  sun.security.acl.AclImpl }
+ class provides the default implementation of the interface.&lt;p&gt;
+
+ The {@code  java.security.acl.Acl } interface extends the
+ {@code  java.security.acl.Owner } interface. The Owner
+ interface is used to maintain a list of owners for each ACL.  Only
+ owners are allowed to modify an ACL. For example, only an owner can
+ call the ACL's {@code addEntry} method to add a new ACL entry
+ to the ACL.
+
+ @see java.security.acl.AclEntry
+ @see java.security.acl.Owner
+ @see java.security.acl.Acl#getPermissions
+
+ @author Satish Dharmaraj
+*/
+var Acl = {
+
+<span id='java-security-acl-Acl-method-setName'>/**Sets the name of this ACL.
+</span>@param {Object {Principal}} caller the principal invoking this method. It must be an
+ owner of this ACL.
+@param {String} name the name to be given to this ACL.
+@exception NotOwnerException if the caller principal
+ is not an owner of this ACL.
+@see #getName
+*/
+setName : function(  ) {},
+
+<span id='java-security-acl-Acl-method-getName'>/**Returns the name of this ACL.
+</span>@return {String} the name of this ACL.
+@see #setName
+*/
+getName : function(  ) {},
+
+<span id='java-security-acl-Acl-method-addEntry'>/**Adds an ACL entry to this ACL. An entry associates a principal
+</span> (e.g., an individual or a group) with a set of
+ permissions. Each principal can have at most one positive ACL
+ entry (specifying permissions to be granted to the principal)
+ and one negative ACL entry (specifying permissions to be
+ denied). If there is already an ACL entry of the same type
+ (negative or positive) already in the ACL, false is returned.
+@param {Object {Principal}} caller the principal invoking this method. It must be an
+ owner of this ACL.
+@param {Object {AclEntry}} entry the ACL entry to be added to this ACL.
+@return {Boolean} true on success, false if an entry of the same type
+ (positive or negative) for the same principal is already
+ present in this ACL.
+@exception NotOwnerException if the caller principal
+  is not an owner of this ACL.
+*/
+addEntry : function(  ) {},
+
+<span id='java-security-acl-Acl-method-removeEntry'>/**Removes an ACL entry from this ACL.
+</span>@param {Object {Principal}} caller the principal invoking this method. It must be an
+ owner of this ACL.
+@param {Object {AclEntry}} entry the ACL entry to be removed from this ACL.
+@return {Boolean} true on success, false if the entry is not part of this ACL.
+@exception NotOwnerException if the caller principal is not
+ an owner of this Acl.
+*/
+removeEntry : function(  ) {},
+
+<span id='java-security-acl-Acl-method-getPermissions'>/**Returns an enumeration for the set of allowed permissions for the
+</span> specified principal (representing an entity such as an individual or
+ a group). This set of allowed permissions is calculated as
+ follows:
+
+ &lt;ul&gt;
+
+ &lt;li&gt;If there is no entry in this Access Control List for the
+ specified principal, an empty permission set is returned.
+
+ &lt;li&gt;Otherwise, the principal's group permission sets are determined.
+ (A principal can belong to one or more groups, where a group is a
+ group of principals, represented by the Group interface.)
+ The group positive permission set is the union of all
+ the positive permissions of each group that the principal belongs to.
+ The group negative permission set is the union of all
+ the negative permissions of each group that the principal belongs to.
+ If there is a specific permission that occurs in both
+ the positive permission set and the negative permission set,
+ it is removed from both.&lt;p&gt;
+
+ The individual positive and negative permission sets are also
+ determined. The positive permission set contains the permissions
+ specified in the positive ACL entry (if any) for the principal.
+ Similarly, the negative permission set contains the permissions
+ specified in the negative ACL entry (if any) for the principal.
+ The individual positive (or negative) permission set is considered
+ to be null if there is not a positive (negative) ACL entry for the
+ principal in this ACL.&lt;p&gt;
+
+ The set of permissions granted to the principal is then calculated
+ using the simple rule that individual permissions always override
+ the group permissions. That is, the principal's individual negative
+ permission set (specific denial of permissions) overrides the group
+ positive permission set, and the principal's individual positive
+ permission set overrides the group negative permission set.
+
+ &lt;/ul&gt;
+@param {Object {Principal}} user the principal whose permission set is to be returned.
+@return {Object {java.util.Enumeration}} the permission set specifying the permissions the principal
+ is allowed.
+*/
+getPermissions : function(  ) {},
+
+<span id='java-security-acl-Acl-method-entries'>/**Returns an enumeration of the entries in this ACL. Each element in
+</span> the enumeration is of type AclEntry.
+@return {Object {java.util.Enumeration}} an enumeration of the entries in this ACL.
+*/
+entries : function(  ) {},
+
+<span id='java-security-acl-Acl-method-checkPermission'>/**Checks whether or not the specified principal has the specified
+</span> permission. If it does, true is returned, otherwise false is returned.
+
+ More specifically, this method checks whether the passed permission
+ is a member of the allowed permission set of the specified principal.
+ The allowed permission set is determined by the same algorithm as is
+ used by the {@code getPermissions} method.
+@param {Object {Principal}} principal the principal, assumed to be a valid authenticated
+ Principal.
+@param {Object {Permission}} permission the permission to be checked for.
+@return {Boolean} true if the principal has the specified permission, false
+ otherwise.
+@see #getPermissions
+*/
+checkPermission : function(  ) {},
+
+<span id='java-security-acl-Acl-method-toString'>/**Returns a string representation of the
+</span> ACL contents.
+@return {String} a string representation of the ACL contents.
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

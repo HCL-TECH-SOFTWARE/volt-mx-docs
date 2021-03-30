@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-settingslib-wifi-AccessPoint'>/**@class com.android.settingslib.wifi.AccessPoint
+</span> implements java.lang.Comparable
+
+@extends java.lang.Object
+
+ Represents a selectable Wifi Network for use in various wifi selection menus backed by
+ {@link com.android.settingslib.wifi.WifiTracker}.
+
+ &lt;p&gt;An AccessPoint, which would be more fittingly named &quot;WifiNetwork&quot;, is an aggregation of
+ {@link ScanResult ScanResults} along with pertinent metadata (e.g. current connection info,
+ network scores) required to successfully render the network to the user.
+*/
+var AccessPoint = {
+
+<span id='com-android-settingslib-wifi-AccessPoint-property-LOWER_FREQ_24GHZ'>/** Lower bound on the 2.4 GHz (802.11b/g/n) WLAN channels
+</span>*/
+LOWER_FREQ_24GHZ : &quot;2400&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-HIGHER_FREQ_24GHZ'>/** Upper bound on the 2.4 GHz (802.11b/g/n) WLAN channels
+</span>*/
+HIGHER_FREQ_24GHZ : &quot;2500&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-LOWER_FREQ_5GHZ'>/** Lower bound on the 5.0 GHz (802.11a/h/j/n/ac) WLAN channels
+</span>*/
+LOWER_FREQ_5GHZ : &quot;4900&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-HIGHER_FREQ_5GHZ'>/** Upper bound on the 5.0 GHz (802.11a/h/j/n/ac) WLAN channels
+</span>*/
+HIGHER_FREQ_5GHZ : &quot;5900&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SECURITY_NONE'>/***/
+</span>SECURITY_NONE : &quot;0&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SECURITY_WEP'>/***/
+</span>SECURITY_WEP : &quot;1&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SECURITY_PSK'>/***/
+</span>SECURITY_PSK : &quot;2&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SECURITY_EAP'>/***/
+</span>SECURITY_EAP : &quot;3&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SECURITY_OWE'>/***/
+</span>SECURITY_OWE : &quot;4&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SECURITY_SAE'>/***/
+</span>SECURITY_SAE : &quot;5&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SECURITY_EAP_SUITE_B'>/***/
+</span>SECURITY_EAP_SUITE_B : &quot;6&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SECURITY_PSK_SAE_TRANSITION'>/***/
+</span>SECURITY_PSK_SAE_TRANSITION : &quot;7&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SECURITY_OWE_TRANSITION'>/***/
+</span>SECURITY_OWE_TRANSITION : &quot;8&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SECURITY_MAX_VAL'>/***/
+</span>SECURITY_MAX_VAL : &quot;9&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-SIGNAL_LEVELS'>/** The number of distinct wifi levels.
+</span>
+ &lt;p&gt;Must keep in sync with {@link R.array.wifi_signal} and {@link WifiManager#RSSI_LEVELS}.
+*/
+SIGNAL_LEVELS : &quot;5&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-UNREACHABLE_RSSI'>/***/
+</span>UNREACHABLE_RSSI : &quot;-2147483648&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-KEY_PREFIX_AP'>/***/
+</span>KEY_PREFIX_AP : &quot;AP:&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-KEY_PREFIX_FQDN'>/***/
+</span>KEY_PREFIX_FQDN : &quot;FQDN:&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-property-KEY_PREFIX_OSU'>/***/
+</span>KEY_PREFIX_OSU : &quot;OSU:&quot;,
+<span id='com-android-settingslib-wifi-AccessPoint-method-compareTo'>/**Returns a negative integer, zero, or a positive integer if this AccessPoint is less than,
+</span> equal to, or greater than the other AccessPoint.
+
+ Sort order rules for AccessPoints:
+   1. Active before inactive
+   2. Reachable before unreachable
+   3. Saved before unsaved
+   4. Network speed value
+   5. Stronger signal before weaker signal
+   6. SSID alphabetically
+
+ Note that AccessPoints with a signal are usually also Reachable,
+ and will thus appear before unreachable saved AccessPoints.
+*/
+compareTo : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getKey'>/**
+</span>*/
+getKey : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getKey'>/**Returns the AccessPoint key for a WifiConfiguration.
+</span> This will return a special Passpoint key if the config is for Passpoint.
+*/
+getKey : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getKey'>/**Returns the AccessPoint key corresponding to a Passpoint network by its FQDN.
+</span>*/
+getKey : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getKey'>/**Returns the AccessPoint key corresponding to the OsuProvider.
+</span>*/
+getKey : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getKey'>/**
+</span>*/
+getKey : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-matches'>/**Determines if the other AccessPoint represents the same network as this AccessPoint
+</span>*/
+matches : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-matches'>/**
+</span>*/
+matches : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getConfig'>/**
+</span>*/
+getConfig : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getPasspointFqdn'>/**
+</span>*/
+getPasspointFqdn : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-clearConfig'>/**
+</span>*/
+clearConfig : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getInfo'>/**
+</span>*/
+getInfo : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getLevel'>/**Returns the number of levels to show for a Wifi icon, from 0 to {@link #SIGNAL_LEVELS}-1.
+</span>
+ &lt;p&gt;Use {@#isReachable()} to determine if an AccessPoint is in range, as this method will
+ always return at least 0.
+*/
+getLevel : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getRssi'>/**
+</span>*/
+getRssi : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getScanResults'>/**Returns the underlying scan result set.
+</span>
+ &lt;p&gt;Callers should not modify this set.
+*/
+getScanResults : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getScoredNetworkCache'>/**
+</span>*/
+getScoredNetworkCache : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-isMetered'>/**Returns if the network should be considered metered.
+</span>*/
+isMetered : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getNetworkInfo'>/**
+</span>*/
+getNetworkInfo : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getSecurity'>/**
+</span>*/
+getSecurity : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getSecurityString'>/**
+</span>*/
+getSecurityString : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getSsidStr'>/**
+</span>*/
+getSsidStr : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getBssid'>/**
+</span>*/
+getBssid : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getSsid'>/**
+</span>*/
+getSsid : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getConfigName'>/**Returns the name associated with the stored config.
+</span>@deprecated Please use {@link #getTitle()} instead to get the display name of an AccessPoint.
+*/
+getConfigName : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getDetailedState'>/**
+</span>*/
+getDetailedState : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-isCarrierAp'>/**
+</span>*/
+isCarrierAp : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getCarrierApEapType'>/**
+</span>*/
+getCarrierApEapType : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getCarrierName'>/**
+</span>*/
+getCarrierName : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getSavedNetworkSummary'>/**
+</span>*/
+getSavedNetworkSummary : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getTitle'>/**Returns the display title for the AccessPoint, such as for an AccessPointPreference's title.
+</span>*/
+getTitle : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getSummary'>/**
+</span>*/
+getSummary : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getSettingsSummary'>/**
+</span>*/
+getSettingsSummary : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getSettingsSummary'>/**Returns the summary for the AccessPoint.
+</span>*/
+getSettingsSummary : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-isActive'>/**Return whether this is the active connection.
+</span> For ephemeral connections (networkId is invalid), this returns false if the network is
+ disconnected.
+*/
+isActive : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-isConnectable'>/**
+</span>*/
+isConnectable : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-isEphemeral'>/**
+</span>*/
+isEphemeral : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-isPasspoint'>/**Return true if this AccessPoint represents a Passpoint AP.
+</span>*/
+isPasspoint : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-isPasspointConfig'>/**Return true if this AccessPoint represents a Passpoint provider configuration.
+</span>*/
+isPasspointConfig : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-isOsuProvider'>/**Return true if this AccessPoint represents an OSU Provider.
+</span>*/
+isOsuProvider : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-startOsuProvisioning'>/**Starts the OSU Provisioning flow.
+</span>*/
+startOsuProvisioning : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-isSaved'>/**
+</span>*/
+isSaved : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getTag'>/**
+</span>*/
+getTag : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-setTag'>/**
+</span>*/
+setTag : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-generateOpenNetworkConfig'>/**Generate and save a default wifiConfiguration with common values.
+</span> Can only be called for unsecured networks.
+*/
+generateOpenNetworkConfig : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-saveWifiState'>/**
+</span>*/
+saveWifiState : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-setListener'>/**
+</span>*/
+setListener : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-update'>/**Attempt to update the AccessPoint with the current connection info.
+</span> This is used to set an AccessPoint to the active one if the connection info matches, or
+ conversely to set an AccessPoint to inactive if the connection info does not match. The RSSI
+ is also updated upon a match. Listeners will be notified if an update occurred.
+
+ This is called in {@link com.android.settingslib.wifi.WifiTracker#updateAccessPoints} as well as in callbacks for handling
+ NETWORK_STATE_CHANGED_ACTION, RSSI_CHANGED_ACTION, and onCapabilitiesChanged in WifiTracker.
+
+ Returns true if an update occurred.
+*/
+update : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getSpeedLabel'>/**Return the speed label for a {@link ScoredNetwork} at the specified {@code rssi} level.
+</span>*/
+getSpeedLabel : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-isReachable'>/**Return true if the current RSSI is reachable, and false otherwise.
+</span>*/
+isReachable : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-getSummary'>/**
+</span>*/
+getSummary : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-convertToQuotedString'>/**
+</span>*/
+convertToQuotedString : function(  ) {},
+
+<span id='com-android-settingslib-wifi-AccessPoint-method-securityToString'>/**
+</span>*/
+securityToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

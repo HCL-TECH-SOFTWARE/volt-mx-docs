@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-obex-ClientOperation'>/**@class javax.obex.ClientOperation
+</span> implements javax.obex.Operation
+
+ implements javax.obex.BaseStream
+
+@extends java.lang.Object
+
+ This class implements the &lt;code&gt;Operation&lt;/code&gt; interface. It will read and
+ write data via puts and gets.
+ @hide
+*/
+var ClientOperation = {
+
+<span id='javax-obex-ClientOperation-method-setGetFinalFlag'>/**Allows to set flag which will force GET to be always sent as single packet request with
+</span> final flag set. This is to improve compatibility with some profiles, i.e. PBAP which
+ require requests to be sent this way.
+*/
+setGetFinalFlag : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-abort'>/**Sends an ABORT message to the server. By calling this method, the
+</span> corresponding input and output streams will be closed along with this
+ object.
+@throws IOException if the transaction has already ended or if an OBEX
+         server called this method
+*/
+abort : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-getResponseCode'>/**Retrieves the response code retrieved from the server. Response codes are
+</span> defined in the &lt;code&gt;ResponseCodes&lt;/code&gt; interface.
+@return {Number} the response code retrieved from the server
+@throws IOException if an error occurred in the transport layer during
+         the transaction; if this method is called on a
+         &lt;code&gt;HeaderSet&lt;/code&gt; object created by calling
+         &lt;code&gt;createHeaderSet&lt;/code&gt; in a &lt;code&gt;ClientSession&lt;/code&gt;
+         object
+*/
+getResponseCode : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-getEncoding'>/**This method will always return &lt;code&gt;null&lt;/code&gt;
+</span>@return {String} &lt;code&gt;null&lt;/code&gt;
+*/
+getEncoding : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-getType'>/**Returns the type of content that the resource connected to is providing.
+</span> E.g. if the connection is via HTTP, then the value of the content-type
+ header field is returned.
+@return {String} the content type of the resource that the URL references, or
+         &lt;code&gt;null&lt;/code&gt; if not known
+*/
+getType : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-getLength'>/**Returns the length of the content which is being provided. E.g. if the
+</span> connection is via HTTP, then the value of the content-length header field
+ is returned.
+@return {Number} the content length of the resource that this connection's URL
+         references, or -1 if the content length is not known
+*/
+getLength : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-openInputStream'>/**Open and return an input stream for a connection.
+</span>@return {Object {java.io.InputStream}} an input stream
+@throws IOException if an I/O error occurs
+*/
+openInputStream : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-openDataInputStream'>/**Open and return a data input stream for a connection.
+</span>@return {Object {java.io.DataInputStream}} an input stream
+@throws IOException if an I/O error occurs
+*/
+openDataInputStream : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-openOutputStream'>/**Open and return an output stream for a connection.
+</span>@return {Object {java.io.OutputStream}} an output stream
+@throws IOException if an I/O error occurs
+*/
+openOutputStream : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-getMaxPacketSize'>/**
+</span>*/
+getMaxPacketSize : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-getHeaderLength'>/**
+</span>*/
+getHeaderLength : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-openDataOutputStream'>/**Open and return a data output stream for a connection.
+</span>@return {Object {java.io.DataOutputStream}} an output stream
+@throws IOException if an I/O error occurs
+*/
+openDataOutputStream : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-close'>/**Closes the connection and ends the transaction
+</span>@throws IOException if the operation has already ended or is closed
+*/
+close : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-getReceivedHeader'>/**Returns the headers that have been received during the operation.
+</span> Modifying the object returned has no effect on the headers that are sent
+ or retrieved.
+@return {Object {javax.obex.HeaderSet}} the headers received during this &lt;code&gt;Operation&lt;/code&gt;
+@throws IOException if this &lt;code&gt;Operation&lt;/code&gt; has been closed
+*/
+getReceivedHeader : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-sendHeaders'>/**Specifies the headers that should be sent in the next OBEX message that
+</span> is sent.
+@param {Object {HeaderSet}} headers the headers to send in the next message
+@throws IOException if this &lt;code&gt;Operation&lt;/code&gt; has been closed or the
+         transaction has ended and no further messages will be exchanged
+@throws IllegalArgumentException if &lt;code&gt;headers&lt;/code&gt; was not created
+         by a call to &lt;code&gt;ServerRequestHandler.createHeaderSet()&lt;/code&gt;
+@throws NullPointerException if &lt;code&gt;headers&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;
+*/
+sendHeaders : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-ensureNotDone'>/**Verifies that additional information may be sent. In other words, the
+</span> operation is not done.
+@throws IOException if the operation is completed
+*/
+ensureNotDone : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-ensureOpen'>/**Verifies that the connection is open and no exceptions should be thrown.
+</span>@throws IOException if an exception needs to be thrown
+*/
+ensureOpen : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-continueOperation'>/**Continues the operation since there is no data to read.
+</span>@param {Boolean} sendEmpty &lt;code&gt;true&lt;/code&gt; if the operation should send an empty
+        packet or not send anything if there is no data to send
+@param {Boolean} inStream &lt;code&gt;true&lt;/code&gt; if the stream is input stream or is
+        output stream
+@throws IOException if an IO error occurs
+*/
+continueOperation : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-streamClosed'>/**Called when the output or input stream is closed.
+</span>@param {Boolean} inStream &lt;code&gt;true&lt;/code&gt; if the input stream is closed;
+        &lt;code&gt;false&lt;/code&gt; if the output stream is closed
+@throws IOException if an IO error occurs
+*/
+streamClosed : function(  ) {},
+
+<span id='javax-obex-ClientOperation-method-noBodyHeader'>/**
+</span>*/
+noBodyHeader : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

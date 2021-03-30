@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-ContentHandler'>/**@class java.net.ContentHandler
+</span>@extends java.lang.Object
+
+ The abstract class {@code ContentHandler} is the superclass
+ of all classes that read an {@code Object} from a
+ {@code URLConnection}.
+ &lt;p&gt;
+ An application does not generally call the
+ {@code getContent} method in this class directly. Instead, an
+ application calls the {@code getContent} method in class
+ {@code URL} or in {@code URLConnection}.
+ The application's content handler factory (an instance of a class that
+ implements the interface {@code ContentHandlerFactory} set
+ up by a call to {@code setContentHandler}) is
+ called with a {@code String} giving the MIME type of the
+ object being received on the socket. The factory returns an
+ instance of a subclass of {@code ContentHandler}, and its
+ {@code getContent} method is called to create the object.
+ &lt;p&gt;
+ If no content handler could be found, URLConnection will
+ look for a content handler in a user-defineable set of places.
+ By default it looks in sun.net.www.content, but users can define a
+ vertical-bar delimited set of class prefixes to search through in
+ addition by defining the java.content.handler.pkgs property.
+ The class name must be of the form:
+ &lt;pre&gt;
+     {package-prefix}.{major}.{minor}
+ e.g.
+     YoyoDyne.experimental.text.plain
+ &lt;/pre&gt;
+ If the loading of the content handler class would be performed by
+ a classloader that is outside of the delegation chain of the caller,
+ the JVM will need the RuntimePermission &quot;getClassLoader&quot;.
+
+ @author  James Gosling
+ @see     java.net.ContentHandler#getContent(java.net.URLConnection)
+ @see     java.net.ContentHandlerFactory
+ @see     java.net.URL#getContent()
+ @see     java.net.URLConnection
+ @see     java.net.URLConnection#getContent()
+ @see     java.net.URLConnection#setContentHandlerFactory(java.net.ContentHandlerFactory)
+ @since   JDK1.0
+*/
+var ContentHandler = {
+
+<span id='java-net-ContentHandler-method-getContent'>/**Given a URL connect stream positioned at the beginning of the
+</span> representation of an object, this method reads that stream and
+ creates an object from it.
+@param {Object {URLConnection}} urlc   a URL connection.
+@return {Object {java.lang.Object}} the object read by the {@code ContentHandler}.
+@exception IOException  if an I/O error occurs while reading the object.
+*/
+getContent : function(  ) {},
+
+<span id='java-net-ContentHandler-method-getContent'>/**Given a URL connect stream positioned at the beginning of the
+</span> representation of an object, this method reads that stream and
+ creates an object that matches one of the types specified.
+
+ The default implementation of this method should call getContent()
+ and screen the return type for a match of the suggested types.
+@param {Object {URLConnection}} urlc   a URL connection.
+@param {Object {java.lang.Class[]}} classes      an array of types requested
+@return {Object {java.lang.Object}} the object read by the {@code ContentHandler} that is
+                 the first match of the suggested types.
+                 null if none of the requested  are supported.
+@exception IOException  if an I/O error occurs while reading the object.
+@since 1.3
+*/
+getContent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

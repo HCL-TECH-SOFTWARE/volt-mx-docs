@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-crypto-spec-PBEKeySpec'>/**@class javax.crypto.spec.PBEKeySpec
+</span> implements java.security.spec.KeySpec
+
+@extends java.lang.Object
+
+ A user-chosen password that can be used with password-based encryption
+ (&lt;i&gt;PBE&lt;/i&gt;).
+
+ &lt;p&gt;The password can be viewed as some kind of raw key material, from which
+ the encryption mechanism that uses it derives a cryptographic key.
+
+ &lt;p&gt;Different PBE mechanisms may consume different bits of each password
+ character. For example, the PBE mechanism defined in
+ &lt;a href=&quot;http://www.ietf.org/rfc/rfc2898.txt&quot;&gt;
+ PKCS #5&lt;/a&gt; looks at only the low order 8 bits of each character, whereas
+ PKCS #12 looks at all 16 bits of each character.
+
+ &lt;p&gt;You convert the password characters to a PBE key by creating an
+ instance of the appropriate secret-key factory. For example, a secret-key
+ factory for PKCS #5 will construct a PBE key from only the low order 8 bits
+ of each password character, whereas a secret-key factory for PKCS #12 will
+ take all 16 bits of each character.
+
+ &lt;p&gt;Also note that this class stores passwords as char arrays instead of
+ &lt;code&gt;String&lt;/code&gt; objects (which would seem more logical), because the
+ String class is immutable and there is no way to overwrite its
+ internal value when the password stored in it is no longer needed. Hence,
+ this class requests the password as a char array, so it can be overwritten
+ when done.
+
+ @author Jan Luehe
+ @author Valerie Peng
+
+ @see javax.crypto.SecretKeyFactory
+ @see PBEParameterSpec
+ @since 1.4
+*/
+var PBEKeySpec = {
+
+<span id='javax-crypto-spec-PBEKeySpec-method-clearPassword'>/**Clears the internal copy of the password.
+</span>*/
+clearPassword : function(  ) {},
+
+<span id='javax-crypto-spec-PBEKeySpec-method-getPassword'>/**Returns a copy of the password.
+</span>
+ &lt;p&gt; Note: this method returns a copy of the password. It is
+ the caller's responsibility to zero out the password information after
+ it is no longer needed.
+@exception IllegalStateException if password has been cleared by
+ calling &lt;code&gt;clearPassword&lt;/code&gt; method.
+@return {String} the password.
+*/
+getPassword : function(  ) {},
+
+<span id='javax-crypto-spec-PBEKeySpec-method-getSalt'>/**Returns a copy of the salt or null if not specified.
+</span>
+ &lt;p&gt; Note: this method should return a copy of the salt. It is
+ the caller's responsibility to zero out the salt information after
+ it is no longer needed.
+@return {Number} the salt.
+*/
+getSalt : function(  ) {},
+
+<span id='javax-crypto-spec-PBEKeySpec-method-getIterationCount'>/**Returns the iteration count or 0 if not specified.
+</span>@return {Number} the iteration count.
+*/
+getIterationCount : function(  ) {},
+
+<span id='javax-crypto-spec-PBEKeySpec-method-getKeyLength'>/**Returns the to-be-derived key length or 0 if not specified.
+</span>
+ &lt;p&gt; Note: this is used to indicate the preference on key length
+ for variable-key-size ciphers. The actual key size depends on
+ each provider's implementation.
+@return {Number} the to-be-derived key length.
+*/
+getKeyLength : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

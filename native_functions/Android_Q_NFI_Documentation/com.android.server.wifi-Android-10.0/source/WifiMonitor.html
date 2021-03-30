@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiMonitor'>/**@class com.android.server.wifi.WifiMonitor
+</span>@extends java.lang.Object
+
+ Listen for events from the wpa_supplicant &amp; wificond and broadcast them on
+ to the various {@link com.android.server.wifi.ClientModeImpl} modules interested in handling these events.
+ @hide
+*/
+var WifiMonitor = {
+
+<span id='com-android-server-wifi-WifiMonitor-property-SUP_CONNECTION_EVENT'>/***/
+</span>SUP_CONNECTION_EVENT : &quot;147457&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-SUP_DISCONNECTION_EVENT'>/***/
+</span>SUP_DISCONNECTION_EVENT : &quot;147458&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-NETWORK_CONNECTION_EVENT'>/***/
+</span>NETWORK_CONNECTION_EVENT : &quot;147459&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-NETWORK_DISCONNECTION_EVENT'>/***/
+</span>NETWORK_DISCONNECTION_EVENT : &quot;147460&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-SCAN_RESULTS_EVENT'>/***/
+</span>SCAN_RESULTS_EVENT : &quot;147461&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-SUPPLICANT_STATE_CHANGE_EVENT'>/***/
+</span>SUPPLICANT_STATE_CHANGE_EVENT : &quot;147462&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-AUTHENTICATION_FAILURE_EVENT'>/***/
+</span>AUTHENTICATION_FAILURE_EVENT : &quot;147463&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-WPS_SUCCESS_EVENT'>/***/
+</span>WPS_SUCCESS_EVENT : &quot;147464&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-WPS_FAIL_EVENT'>/***/
+</span>WPS_FAIL_EVENT : &quot;147465&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-WPS_OVERLAP_EVENT'>/***/
+</span>WPS_OVERLAP_EVENT : &quot;147466&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-WPS_TIMEOUT_EVENT'>/***/
+</span>WPS_TIMEOUT_EVENT : &quot;147467&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-SUP_REQUEST_IDENTITY'>/***/
+</span>SUP_REQUEST_IDENTITY : &quot;147471&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-SUP_REQUEST_SIM_AUTH'>/***/
+</span>SUP_REQUEST_SIM_AUTH : &quot;147472&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-SCAN_FAILED_EVENT'>/***/
+</span>SCAN_FAILED_EVENT : &quot;147473&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-PNO_SCAN_RESULTS_EVENT'>/***/
+</span>PNO_SCAN_RESULTS_EVENT : &quot;147474&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-ASSOCIATION_REJECTION_EVENT'>/***/
+</span>ASSOCIATION_REJECTION_EVENT : &quot;147499&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-ANQP_DONE_EVENT'>/***/
+</span>ANQP_DONE_EVENT : &quot;147500&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-GAS_QUERY_START_EVENT'>/***/
+</span>GAS_QUERY_START_EVENT : &quot;147507&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-GAS_QUERY_DONE_EVENT'>/***/
+</span>GAS_QUERY_DONE_EVENT : &quot;147508&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-RX_HS20_ANQP_ICON_EVENT'>/***/
+</span>RX_HS20_ANQP_ICON_EVENT : &quot;147509&quot;,
+<span id='com-android-server-wifi-WifiMonitor-property-HS20_REMEDIATION_EVENT'>/***/
+</span>HS20_REMEDIATION_EVENT : &quot;147517&quot;,
+<span id='com-android-server-wifi-WifiMonitor-method-registerHandler'>/**
+</span>*/
+registerHandler : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-deregisterHandler'>/**Deregister the given |handler|
+</span>@param {String} iface
+@param {Number} what
+@param {Object {Handler}} handler
+*/
+deregisterHandler : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-setMonitoring'>/**Enable/Disable monitoring for the provided iface.
+</span>@param {String} iface Name of the iface.
+@param {Boolean} enabled true to enable, false to disable.
+*/
+setMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-startMonitoring'>/**Start Monitoring for wpa_supplicant events.
+</span>@param {String} iface Name of iface.
+*/
+startMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-stopMonitoring'>/**Stop Monitoring for wpa_supplicant events.
+</span>@param {String} iface Name of iface.
+*/
+stopMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-stopAllMonitoring'>/**Stop Monitoring for wpa_supplicant events.
+</span>
+ TODO: Add unit tests for these once we remove the legacy code.
+*/
+stopAllMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastWpsFailEvent'>/**Broadcast the WPS fail event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Number} cfgError Configuration error code.
+@param {Number} vendorErrorCode Vendor specific error indication code.
+*/
+broadcastWpsFailEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastWpsSuccessEvent'>/**Broadcast the WPS succes event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastWpsSuccessEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastWpsOverlapEvent'>/**Broadcast the WPS overlap event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastWpsOverlapEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastWpsTimeoutEvent'>/**Broadcast the WPS timeout event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastWpsTimeoutEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastAnqpDoneEvent'>/**Broadcast the ANQP done event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {AnqpEvent}} anqpEvent ANQP result retrieved.
+*/
+broadcastAnqpDoneEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastIconDoneEvent'>/**Broadcast the Icon done event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {IconEvent}} iconEvent Instance of IconEvent containing the icon data retrieved.
+*/
+broadcastIconDoneEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastWnmEvent'>/**Broadcast the WNM event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WnmData}} wnmData Instance of WnmData containing the event data.
+*/
+broadcastWnmEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastNetworkIdentityRequestEvent'>/**Broadcast the Network identity request event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Number} networkId ID of the network in wpa_supplicant.
+@param {String} ssid SSID of the network.
+*/
+broadcastNetworkIdentityRequestEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastNetworkGsmAuthRequestEvent'>/**Broadcast the Network Gsm Sim auth request event to all the handlers registered for this
+</span> event.
+@param {String} iface Name of iface on which this occurred.
+@param {Number} networkId ID of the network in wpa_supplicant.
+@param {String} ssid SSID of the network.
+@param {Object {java.lang.String[]}} data Accompanying event data.
+*/
+broadcastNetworkGsmAuthRequestEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastNetworkUmtsAuthRequestEvent'>/**Broadcast the Network Umts Sim auth request event to all the handlers registered for this
+</span> event.
+@param {String} iface Name of iface on which this occurred.
+@param {Number} networkId ID of the network in wpa_supplicant.
+@param {String} ssid SSID of the network.
+@param {Object {java.lang.String[]}} data Accompanying event data.
+*/
+broadcastNetworkUmtsAuthRequestEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastScanResultEvent'>/**Broadcast scan result event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastScanResultEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastPnoScanResultEvent'>/**Broadcast pno scan result event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastPnoScanResultEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastScanFailedEvent'>/**Broadcast scan failed event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastScanFailedEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastAuthenticationFailureEvent'>/**Broadcast the authentication failure event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Number} reason Reason for authentication failure. This has to be one of the
+               {@link android.net.wifi.WifiManager#ERROR_AUTH_FAILURE_NONE},
+               {@link android.net.wifi.WifiManager#ERROR_AUTH_FAILURE_TIMEOUT},
+               {@link android.net.wifi.WifiManager#ERROR_AUTH_FAILURE_WRONG_PSWD},
+               {@link android.net.wifi.WifiManager#ERROR_AUTH_FAILURE_EAP_FAILURE}
+@param {Number} errorCode Error code associated with the authentication failure event.
+               A value of -1 is used when no error code is reported.
+*/
+broadcastAuthenticationFailureEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastAssociationRejectionEvent'>/**Broadcast the association rejection event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Number} status Status code for association rejection.
+@param {Boolean} timedOut Indicates if the association timed out.
+@param {String} bssid BSSID of the access point from which we received the reject.
+*/
+broadcastAssociationRejectionEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastAssociatedBssidEvent'>/**Broadcast the association success event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {String} bssid BSSID of the access point.
+*/
+broadcastAssociatedBssidEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastTargetBssidEvent'>/**Broadcast the start of association event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {String} bssid BSSID of the access point.
+*/
+broadcastTargetBssidEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastNetworkConnectionEvent'>/**Broadcast the network connection event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Number} networkId ID of the network in wpa_supplicant.
+@param {String} bssid BSSID of the access point.
+*/
+broadcastNetworkConnectionEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastNetworkDisconnectionEvent'>/**Broadcast the network disconnection event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Number} local Whether the disconnect was locally triggered.
+@param {Number} reason Disconnect reason code.
+@param {String} bssid BSSID of the access point.
+*/
+broadcastNetworkDisconnectionEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastSupplicantStateChangeEvent'>/**Broadcast the supplicant state change event to all the handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Number} networkId ID of the network in wpa_supplicant.
+@param {Object {WifiSsid}} bssid BSSID of the access point.
+@param {String} newSupplicantState New supplicant state.
+*/
+broadcastSupplicantStateChangeEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastSupplicantConnectionEvent'>/**Broadcast the connection to wpa_supplicant event to all the handlers registered for
+</span> this event.
+@param {String} iface Name of iface on which this occurred.
+*/
+broadcastSupplicantConnectionEvent : function(  ) {},
+
+<span id='com-android-server-wifi-WifiMonitor-method-broadcastSupplicantDisconnectionEvent'>/**Broadcast the loss of connection to wpa_supplicant event to all the handlers registered for
+</span> this event.
+@param {String} iface Name of iface on which this occurred.
+*/
+broadcastSupplicantDisconnectionEvent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

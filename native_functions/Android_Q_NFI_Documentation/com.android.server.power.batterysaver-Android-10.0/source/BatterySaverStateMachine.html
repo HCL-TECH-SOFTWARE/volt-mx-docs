@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-power-batterysaver-BatterySaverStateMachine'>/**@class com.android.server.power.batterysaver.BatterySaverStateMachine
+</span>@extends java.lang.Object
+
+ Decides when to enable / disable battery saver.
+
+ IMPORTANT: This class shares the power manager lock, which is very low in the lock hierarchy.
+ Do not call out with the lock held. (Settings provider is okay.)
+
+ Test: atest com.android.server.power.batterysaver.BatterySaverStateMachineTest
+
+ Current state machine. This can be visualized using Graphviz:
+   &lt;pre&gt;
+
+   digraph {
+     STATE_OFF
+     STATE_MANUAL_ON [label=&quot;STATE_MANUAL_ON\nTurned on manually by the user&quot;]
+     STATE_AUTOMATIC_ON [label=&quot;STATE_AUTOMATIC_ON\nTurned on automatically by the system&quot;]
+     STATE_OFF_AUTOMATIC_SNOOZED [
+       label=&quot;STATE_OFF_AUTOMATIC_SNOOZED\nTurned off manually by the user.&quot;
+           + &quot; The system should not turn it back on automatically.&quot;
+     ]
+     STATE_PENDING_STICKY_ON [
+       label=&quot;STATE_PENDING_STICKY_ON\n&quot;
+           + &quot; Turned on manually by the user and then plugged in. Will turn back on after unplug.&quot;
+     ]
+
+     STATE_OFF -&gt; STATE_MANUAL_ON [label=&quot;manual&quot;]
+     STATE_OFF -&gt; STATE_AUTOMATIC_ON [label=&quot;Auto on AND charge &lt;= auto threshold&quot;]
+
+     STATE_MANUAL_ON -&gt; STATE_OFF [label=&quot;manual\nOR\nPlugged &amp; sticky disabled&quot;]
+     STATE_MANUAL_ON -&gt; STATE_PENDING_STICKY_ON [label=&quot;Plugged &amp; sticky enabled&quot;]
+
+     STATE_PENDING_STICKY_ON -&gt; STATE_MANUAL_ON [label=&quot;Unplugged &amp; sticky enabled&quot;]
+     STATE_PENDING_STICKY_ON -&gt; STATE_OFF [
+       label=&quot;Sticky disabled\nOR\nSticky auto off enabled AND charge &gt;= sticky auto off threshold&quot;
+     ]
+
+     STATE_AUTOMATIC_ON -&gt; STATE_OFF [label=&quot;Plugged&quot;]
+     STATE_AUTOMATIC_ON -&gt; STATE_OFF_AUTOMATIC_SNOOZED [label=&quot;Manual&quot;]
+
+     STATE_OFF_AUTOMATIC_SNOOZED -&gt; STATE_OFF [label=&quot;Plug\nOR\nCharge &gt; auto threshold&quot;]
+     STATE_OFF_AUTOMATIC_SNOOZED -&gt; STATE_MANUAL_ON [label=&quot;manual&quot;]
+
+     &lt;/pre&gt;
+   }
+*/
+var BatterySaverStateMachine = {
+
+<span id='com-android-server-power-batterysaver-BatterySaverStateMachine-method-onBootCompleted'>/**{@link com.android.server.power.PowerManagerService} calls it when the system is booted.
+</span>*/
+onBootCompleted : function(  ) {},
+
+<span id='com-android-server-power-batterysaver-BatterySaverStateMachine-method-setBatteryStatus'>/**{@link com.android.server.power.PowerManagerService} calls it when battery state changes.
+</span>
+ Note this may be called before {@link #onBootCompleted} too.
+*/
+setBatteryStatus : function(  ) {},
+
+<span id='com-android-server-power-batterysaver-BatterySaverStateMachine-method-setAdaptiveBatterySaverEnabled'>/**Enable or disable the current adaptive battery saver policy. This may not change what's in
+</span> effect if full battery saver is also enabled.
+*/
+setAdaptiveBatterySaverEnabled : function(  ) {},
+
+<span id='com-android-server-power-batterysaver-BatterySaverStateMachine-method-setAdaptiveBatterySaverPolicy'>/**Change the adaptive battery saver policy.
+</span>*/
+setAdaptiveBatterySaverPolicy : function(  ) {},
+
+<span id='com-android-server-power-batterysaver-BatterySaverStateMachine-method-setBatterySaverEnabledManually'>/**{@link com.android.server.power.PowerManagerService} calls it when
+</span> {@link android.os.PowerManager#setPowerSaveModeEnabled} is called.
+
+ Note this could? be called before {@link #onBootCompleted} too.
+*/
+setBatterySaverEnabledManually : function(  ) {},
+
+<span id='com-android-server-power-batterysaver-BatterySaverStateMachine-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-power-batterysaver-BatterySaverStateMachine-method-dumpProto'>/**
+</span>*/
+dumpProto : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

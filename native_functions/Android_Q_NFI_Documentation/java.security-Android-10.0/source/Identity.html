@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-Identity'>/**@class java.security.Identity
+</span> implements java.security.Principal
+
+ implements java.io.Serializable
+
+@extends java.lang.Object
+
+ &lt;p&gt;This class represents identities: real-world objects such as people,
+ companies or organizations whose identities can be authenticated using
+ their public keys. Identities may also be more abstract (or concrete)
+ constructs, such as daemon threads or smart cards.
+
+ &lt;p&gt;All Identity objects have a name and a public key. Names are
+ immutable. Identities may also be scoped. That is, if an Identity is
+ specified to have a particular scope, then the name and public
+ key of the Identity are unique within that scope.
+
+ &lt;p&gt;An Identity also has a set of certificates (all certifying its own
+ public key). The Principal names specified in these certificates need
+ not be the same, only the key.
+
+ &lt;p&gt;An Identity can be subclassed, to include postal and email addresses,
+ telephone numbers, images of faces and logos, and so on.
+
+ @see IdentityScope
+ @see Signer
+ @see Principal
+
+ @author Benjamin Renaud
+ @deprecated This class is no longer used. Its functionality has been
+ replaced by {@code java.security.KeyStore}, the
+ {@code java.security.cert} package, and
+ {@code java.security.Principal}.
+*/
+var Identity = {
+
+<span id='java-security-Identity-method-getName'>/**Returns this identity's name.
+</span>@return {String} the name of this identity.
+*/
+getName : function(  ) {},
+
+<span id='java-security-Identity-method-getScope'>/**Returns this identity's scope.
+</span>@return {Object {java.security.IdentityScope}} the scope of this identity.
+*/
+getScope : function(  ) {},
+
+<span id='java-security-Identity-method-getPublicKey'>/**Returns this identity's public key.
+</span>@return {Object {java.security.PublicKey}} the public key for this identity.
+@see #setPublicKey
+*/
+getPublicKey : function(  ) {},
+
+<span id='java-security-Identity-method-setPublicKey'>/**Sets this identity's public key. The old key and all of this
+</span> identity's certificates are removed by this operation.
+
+ &lt;p&gt;First, if there is a security manager, its {@code checkSecurityAccess}
+ method is called with {@code &quot;setIdentityPublicKey&quot;}
+ as its argument to see if it's ok to set the public key.
+@param {Object {PublicKey}} key the public key for this identity.
+@exception KeyManagementException if another identity in the
+ identity's scope has the same public key, or if another exception occurs.
+@exception SecurityException  if a security manager exists and its
+ {@code checkSecurityAccess} method doesn't allow
+ setting the public key.
+@see #getPublicKey
+@see SecurityManager#checkSecurityAccess
+*/
+setPublicKey : function(  ) {},
+
+<span id='java-security-Identity-method-setInfo'>/**Specifies a general information string for this identity.
+</span>
+ &lt;p&gt;First, if there is a security manager, its {@code checkSecurityAccess}
+ method is called with {@code &quot;setIdentityInfo&quot;}
+ as its argument to see if it's ok to specify the information string.
+@param {String} info the information string.
+@exception SecurityException  if a security manager exists and its
+ {@code checkSecurityAccess} method doesn't allow
+ setting the information string.
+@see #getInfo
+@see SecurityManager#checkSecurityAccess
+*/
+setInfo : function(  ) {},
+
+<span id='java-security-Identity-method-getInfo'>/**Returns general information previously specified for this identity.
+</span>@return {String} general information about this identity.
+@see #setInfo
+*/
+getInfo : function(  ) {},
+
+<span id='java-security-Identity-method-addCertificate'>/**Adds a certificate for this identity. If the identity has a public
+</span> key, the public key in the certificate must be the same, and if
+ the identity does not have a public key, the identity's
+ public key is set to be that specified in the certificate.
+
+ &lt;p&gt;First, if there is a security manager, its {@code checkSecurityAccess}
+ method is called with {@code &quot;addIdentityCertificate&quot;}
+ as its argument to see if it's ok to add a certificate.
+@param {Object {Certificate}} certificate the certificate to be added.
+@exception KeyManagementException if the certificate is not valid,
+ if the public key in the certificate being added conflicts with
+ this identity's public key, or if another exception occurs.
+@exception SecurityException  if a security manager exists and its
+ {@code checkSecurityAccess} method doesn't allow
+ adding a certificate.
+@see SecurityManager#checkSecurityAccess
+*/
+addCertificate : function(  ) {},
+
+<span id='java-security-Identity-method-removeCertificate'>/**Removes a certificate from this identity.
+</span>
+ &lt;p&gt;First, if there is a security manager, its {@code checkSecurityAccess}
+ method is called with {@code &quot;removeIdentityCertificate&quot;}
+ as its argument to see if it's ok to remove a certificate.
+@param {Object {Certificate}} certificate the certificate to be removed.
+@exception KeyManagementException if the certificate is
+ missing, or if another exception occurs.
+@exception SecurityException  if a security manager exists and its
+ {@code checkSecurityAccess} method doesn't allow
+ removing a certificate.
+@see SecurityManager#checkSecurityAccess
+*/
+removeCertificate : function(  ) {},
+
+<span id='java-security-Identity-method-certificates'>/**Returns a copy of all the certificates for this identity.
+</span>@return {Object {java.security.Certificate}} a copy of all the certificates for this identity.
+*/
+certificates : function(  ) {},
+
+<span id='java-security-Identity-method-equals'>/**Tests for equality between the specified object and this identity.
+</span> This first tests to see if the entities actually refer to the same
+ object, in which case it returns true. Next, it checks to see if
+ the entities have the same name and the same scope. If they do,
+ the method returns true. Otherwise, it calls
+ {@link #identityEquals(Identity) identityEquals}, which subclasses should
+ override.
+@param {Object {Object}} identity the object to test for equality with this identity.
+@return {Boolean} true if the objects are considered equal, false otherwise.
+@see #identityEquals
+*/
+equals : function(  ) {},
+
+<span id='java-security-Identity-method-toString'>/**Returns a short string describing this identity, telling its
+</span> name and its scope (if any).
+
+ &lt;p&gt;First, if there is a security manager, its {@code checkSecurityAccess}
+ method is called with {@code &quot;printIdentity&quot;}
+ as its argument to see if it's ok to return the string.
+@return {String} information about this identity, such as its name and the
+ name of its scope (if any).
+@exception SecurityException  if a security manager exists and its
+ {@code checkSecurityAccess} method doesn't allow
+ returning a string describing this identity.
+@see SecurityManager#checkSecurityAccess
+*/
+toString : function(  ) {},
+
+<span id='java-security-Identity-method-toString'>/**Returns a string representation of this identity, with
+</span> optionally more details than that provided by the
+ {@code toString} method without any arguments.
+
+ &lt;p&gt;First, if there is a security manager, its {@code checkSecurityAccess}
+ method is called with {@code &quot;printIdentity&quot;}
+ as its argument to see if it's ok to return the string.
+@param {Boolean} detailed whether or not to provide detailed information.
+@return {String} information about this identity. If {@code detailed}
+ is true, then this method returns more information than that
+ provided by the {@code toString} method without any arguments.
+@exception SecurityException  if a security manager exists and its
+ {@code checkSecurityAccess} method doesn't allow
+ returning a string describing this identity.
+@see #toString
+@see SecurityManager#checkSecurityAccess
+*/
+toString : function(  ) {},
+
+<span id='java-security-Identity-method-hashCode'>/**Returns a hashcode for this identity.
+</span>@return {Number} a hashcode for this identity.
+*/
+hashCode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

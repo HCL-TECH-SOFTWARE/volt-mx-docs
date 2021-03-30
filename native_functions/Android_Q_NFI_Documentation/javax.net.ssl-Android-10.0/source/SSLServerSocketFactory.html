@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-net-ssl-SSLServerSocketFactory'>/**@class javax.net.ssl.SSLServerSocketFactory
+</span>@extends javax.net.ServerSocketFactory
+
+ &lt;code&gt;SSLServerSocketFactory&lt;/code&gt;s create
+ &lt;code&gt;SSLServerSocket&lt;/code&gt;s.
+
+ @since 1.4
+ @see SSLSocket
+ @see SSLServerSocket
+ @author David Brownell
+*/
+var SSLServerSocketFactory = {
+
+<span id='javax-net-ssl-SSLServerSocketFactory-method-getDefault'>/**Returns the default SSL server socket factory.
+</span>
+ &lt;p&gt;The first time this method is called, the security property
+ &quot;ssl.ServerSocketFactory.provider&quot; is examined. If it is non-null, a
+ class by that name is loaded and instantiated. If that is successful and
+ the object is an instance of SSLServerSocketFactory, it is made the
+ default SSL server socket factory.
+
+ &lt;p&gt;Otherwise, this method returns
+ &lt;code&gt;SSLContext.getDefault().getServerSocketFactory()&lt;/code&gt;. If that
+ call fails, an inoperative factory is returned.
+@return {Object {javax.net.ServerSocketFactory}} the default &lt;code&gt;ServerSocketFactory&lt;/code&gt;
+@see SSLContext#getDefault
+*/
+getDefault : function(  ) {},
+
+<span id='javax-net-ssl-SSLServerSocketFactory-method-getDefaultCipherSuites'>/**Returns the list of cipher suites which are enabled by default.
+</span> Unless a different list is enabled, handshaking on an SSL connection
+ will use one of these cipher suites.  The minimum quality of service
+ for these defaults requires confidentiality protection and server
+ authentication (that is, no anonymous cipher suites).
+@see #getSupportedCipherSuites()
+@return {String} array of the cipher suites enabled by default
+*/
+getDefaultCipherSuites : function(  ) {},
+
+<span id='javax-net-ssl-SSLServerSocketFactory-method-getSupportedCipherSuites'>/**Returns the names of the cipher suites which could be enabled for use
+</span> on an SSL connection created by this factory.
+ Normally, only a subset of these will actually
+ be enabled by default, since this list may include cipher suites which
+ do not meet quality of service requirements for those defaults.  Such
+ cipher suites are useful in specialized applications.
+
+ &lt;p class=&quot;caution&quot;&gt;Applications should not blindly enable all supported
+ cipher suites.  The supported cipher suites can include signaling cipher suite
+ values that can cause connection problems if enabled inappropriately.
+
+ &lt;p&gt;The proper way to use this method is to either check if a specific cipher
+ suite is supported via {@code Arrays.asList(getSupportedCipherSuites()).contains(...)}
+ or to filter a desired list of cipher suites to only the supported ones via
+ {@code desiredSuiteSet.retainAll(Arrays.asList(getSupportedCipherSuites()))}.
+@return {String} an array of cipher suite names
+@see #getDefaultCipherSuites()
+*/
+getSupportedCipherSuites : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

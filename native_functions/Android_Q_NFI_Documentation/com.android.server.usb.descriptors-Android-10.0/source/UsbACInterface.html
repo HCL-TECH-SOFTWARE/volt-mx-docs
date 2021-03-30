@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-usb-descriptors-UsbACInterface'>/**@class com.android.server.usb.descriptors.UsbACInterface
+</span>@extends com.android.server.usb.descriptors.UsbDescriptor
+
+ @hide
+ An audio class-specific Interface.
+ see audio10.pdf section 4.3.2
+*/
+var UsbACInterface = {
+
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_UNDEFINED'>/***/
+</span>ACI_UNDEFINED : &quot;0&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_HEADER'>/***/
+</span>ACI_HEADER : &quot;1&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_INPUT_TERMINAL'>/***/
+</span>ACI_INPUT_TERMINAL : &quot;2&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_OUTPUT_TERMINAL'>/***/
+</span>ACI_OUTPUT_TERMINAL : &quot;3&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_MIXER_UNIT'>/***/
+</span>ACI_MIXER_UNIT : &quot;4&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_SELECTOR_UNIT'>/***/
+</span>ACI_SELECTOR_UNIT : &quot;5&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_FEATURE_UNIT'>/***/
+</span>ACI_FEATURE_UNIT : &quot;6&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_PROCESSING_UNIT'>/***/
+</span>ACI_PROCESSING_UNIT : &quot;7&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_EXTENSION_UNIT'>/***/
+</span>ACI_EXTENSION_UNIT : &quot;8&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_CLOCK_SOURCE'>/***/
+</span>ACI_CLOCK_SOURCE : &quot;10&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_CLOCK_SELECTOR'>/***/
+</span>ACI_CLOCK_SELECTOR : &quot;11&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_CLOCK_MULTIPLIER'>/***/
+</span>ACI_CLOCK_MULTIPLIER : &quot;12&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ACI_SAMPLE_RATE_CONVERTER'>/***/
+</span>ACI_SAMPLE_RATE_CONVERTER : &quot;13&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ASI_UNDEFINED'>/***/
+</span>ASI_UNDEFINED : &quot;0&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ASI_GENERAL'>/***/
+</span>ASI_GENERAL : &quot;1&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ASI_FORMAT_TYPE'>/***/
+</span>ASI_FORMAT_TYPE : &quot;2&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-ASI_FORMAT_SPECIFIC'>/***/
+</span>ASI_FORMAT_SPECIFIC : &quot;3&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-MSI_UNDEFINED'>/***/
+</span>MSI_UNDEFINED : &quot;0&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-MSI_HEADER'>/***/
+</span>MSI_HEADER : &quot;1&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-MSI_IN_JACK'>/***/
+</span>MSI_IN_JACK : &quot;2&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-MSI_OUT_JACK'>/***/
+</span>MSI_OUT_JACK : &quot;3&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-MSI_ELEMENT'>/***/
+</span>MSI_ELEMENT : &quot;4&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_I_UNDEFINED'>/***/
+</span>FORMAT_I_UNDEFINED : &quot;0&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_I_PCM'>/***/
+</span>FORMAT_I_PCM : &quot;1&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_I_PCM8'>/***/
+</span>FORMAT_I_PCM8 : &quot;2&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_I_IEEE_FLOAT'>/***/
+</span>FORMAT_I_IEEE_FLOAT : &quot;3&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_I_ALAW'>/***/
+</span>FORMAT_I_ALAW : &quot;4&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_I_MULAW'>/***/
+</span>FORMAT_I_MULAW : &quot;5&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_II_UNDEFINED'>/***/
+</span>FORMAT_II_UNDEFINED : &quot;4096&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_II_MPEG'>/***/
+</span>FORMAT_II_MPEG : &quot;4097&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_II_AC3'>/***/
+</span>FORMAT_II_AC3 : &quot;4098&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_III_UNDEFINED'>/***/
+</span>FORMAT_III_UNDEFINED : &quot;8192&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_III_IEC1937AC3'>/***/
+</span>FORMAT_III_IEC1937AC3 : &quot;8193&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_III_IEC1937_MPEG1_Layer1'>/***/
+</span>FORMAT_III_IEC1937_MPEG1_Layer1 : &quot;8194&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_III_IEC1937_MPEG1_Layer2'>/***/
+</span>FORMAT_III_IEC1937_MPEG1_Layer2 : &quot;8195&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_III_IEC1937_MPEG2_EXT'>/***/
+</span>FORMAT_III_IEC1937_MPEG2_EXT : &quot;8196&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-property-FORMAT_III_IEC1937_MPEG2_Layer1LS'>/***/
+</span>FORMAT_III_IEC1937_MPEG2_Layer1LS : &quot;8197&quot;,
+<span id='com-android-server-usb-descriptors-UsbACInterface-method-getSubtype'>/**
+</span>*/
+getSubtype : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbACInterface-method-getSubclass'>/**
+</span>*/
+getSubclass : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbACInterface-method-allocDescriptor'>/**Allocates an audio class interface subtype based on subtype and subclass.
+</span>*/
+allocDescriptor : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbACInterface-method-report'>/**
+</span>*/
+report : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

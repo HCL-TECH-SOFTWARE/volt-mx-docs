@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-zone-ZoneOffsetTransition'>/**@class java.time.zone.ZoneOffsetTransition
+</span> implements java.lang.Comparable
+
+ implements java.io.Serializable
+
+@extends java.lang.Object
+
+ A transition between two offsets caused by a discontinuity in the local time-line.
+ &lt;p&gt;
+ A transition between two offsets is normally the result of a daylight savings cutover.
+ The discontinuity is normally a gap in spring and an overlap in autumn.
+ {@code ZoneOffsetTransition} models the transition between the two offsets.
+ &lt;p&gt;
+ Gaps occur where there are local date-times that simply do not exist.
+ An example would be when the offset changes from {@code +03:00} to {@code +04:00}.
+ This might be described as 'the clocks will move forward one hour tonight at 1am'.
+ &lt;p&gt;
+ Overlaps occur where there are local date-times that exist twice.
+ An example would be when the offset changes from {@code +04:00} to {@code +03:00}.
+ This might be described as 'the clocks will move back one hour tonight at 2am'.
+
+ @implSpec
+ This class is immutable and thread-safe.
+
+ @since 1.8
+*/
+var ZoneOffsetTransition = {
+
+<span id='java-time-zone-ZoneOffsetTransition-method-of'>/**Obtains an instance defining a transition between two offsets.
+</span> &lt;p&gt;
+ Applications should normally obtain an instance from {@link java.time.zone.ZoneRules}.
+ This factory is only intended for use when creating {@link java.time.zone.ZoneRules}.
+@param {Object {LocalDateTime}} transition  the transition date-time at the transition, which never
+  actually occurs, expressed local to the before offset, not null
+@param {Object {ZoneOffset}} offsetBefore  the offset before the transition, not null
+@param {Object {ZoneOffset}} offsetAfter  the offset at and after the transition, not null
+@return {Object {java.time.zone.ZoneOffsetTransition}} the transition, not null
+@throws IllegalArgumentException if {@code offsetBefore} and {@code offsetAfter}
+         are equal, or {@code transition.getNano()} returns non-zero value
+*/
+of : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-getInstant'>/**Gets the transition instant.
+</span> &lt;p&gt;
+ This is the instant of the discontinuity, which is defined as the first
+ instant that the 'after' offset applies.
+ &lt;p&gt;
+ The methods {@link #getInstant}(), {@link #getDateTimeBefore}() and {@link #getDateTimeAfter}()
+ all represent the same instant.
+@return {Object {java.time.Instant}} the transition instant, not null
+*/
+getInstant : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-toEpochSecond'>/**Gets the transition instant as an epoch second.
+</span>@return {Number} the transition epoch second
+*/
+toEpochSecond : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-getDateTimeBefore'>/**Gets the local transition date-time, as would be expressed with the 'before' offset.
+</span> &lt;p&gt;
+ This is the date-time where the discontinuity begins expressed with the 'before' offset.
+ At this instant, the 'after' offset is actually used, therefore the combination of this
+ date-time and the 'before' offset will never occur.
+ &lt;p&gt;
+ The combination of the 'before' date-time and offset represents the same instant
+ as the 'after' date-time and offset.
+@return {Object {java.time.LocalDateTime}} the transition date-time expressed with the before offset, not null
+*/
+getDateTimeBefore : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-getDateTimeAfter'>/**Gets the local transition date-time, as would be expressed with the 'after' offset.
+</span> &lt;p&gt;
+ This is the first date-time after the discontinuity, when the new offset applies.
+ &lt;p&gt;
+ The combination of the 'before' date-time and offset represents the same instant
+ as the 'after' date-time and offset.
+@return {Object {java.time.LocalDateTime}} the transition date-time expressed with the after offset, not null
+*/
+getDateTimeAfter : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-getOffsetBefore'>/**Gets the offset before the transition.
+</span> &lt;p&gt;
+ This is the offset in use before the instant of the transition.
+@return {Object {java.time.ZoneOffset}} the offset before the transition, not null
+*/
+getOffsetBefore : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-getOffsetAfter'>/**Gets the offset after the transition.
+</span> &lt;p&gt;
+ This is the offset in use on and after the instant of the transition.
+@return {Object {java.time.ZoneOffset}} the offset after the transition, not null
+*/
+getOffsetAfter : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-getDuration'>/**Gets the duration of the transition.
+</span> &lt;p&gt;
+ In most cases, the transition duration is one hour, however this is not always the case.
+ The duration will be positive for a gap and negative for an overlap.
+ Time-zones are second-based, so the nanosecond part of the duration will be zero.
+@return {Object {java.time.Duration}} the duration of the transition, positive for gaps, negative for overlaps
+*/
+getDuration : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-isGap'>/**Does this transition represent a gap in the local time-line.
+</span> &lt;p&gt;
+ Gaps occur where there are local date-times that simply do not exist.
+ An example would be when the offset changes from {@code +01:00} to {@code +02:00}.
+ This might be described as 'the clocks will move forward one hour tonight at 1am'.
+@return {Boolean} true if this transition is a gap, false if it is an overlap
+*/
+isGap : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-isOverlap'>/**Does this transition represent an overlap in the local time-line.
+</span> &lt;p&gt;
+ Overlaps occur where there are local date-times that exist twice.
+ An example would be when the offset changes from {@code +02:00} to {@code +01:00}.
+ This might be described as 'the clocks will move back one hour tonight at 2am'.
+@return {Boolean} true if this transition is an overlap, false if it is a gap
+*/
+isOverlap : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-isValidOffset'>/**Checks if the specified offset is valid during this transition.
+</span> &lt;p&gt;
+ This checks to see if the given offset will be valid at some point in the transition.
+ A gap will always return false.
+ An overlap will return true if the offset is either the before or after offset.
+@param {Object {ZoneOffset}} offset  the offset to check, null returns false
+@return {Boolean} true if the offset is valid during the transition
+*/
+isValidOffset : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-compareTo'>/**Compares this transition to another based on the transition instant.
+</span> &lt;p&gt;
+ This compares the instants of each transition.
+ The offsets are ignored, making this order inconsistent with equals.
+@param {Object {ZoneOffsetTransition}} transition  the transition to compare to, not null
+@return {Number} the comparator value, negative if less, positive if greater
+*/
+compareTo : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-equals'>/**Checks if this object equals another.
+</span> &lt;p&gt;
+ The entire state of the object is compared.
+@param {Object {Object}} other  the other object to compare to, null returns false
+@return {Boolean} true if equal
+*/
+equals : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-hashCode'>/**Returns a suitable hash code.
+</span>@return {Number} the hash code
+*/
+hashCode : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransition-method-toString'>/**Returns a string describing this object.
+</span>@return {String} a string for debugging, not null
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

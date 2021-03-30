@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-ConcurrentSkipListSet'>/**@class java.util.concurrent.ConcurrentSkipListSet
+</span> implements java.util.NavigableSet
+
+ implements java.lang.Cloneable
+
+ implements java.io.Serializable
+
+@extends java.util.AbstractSet
+
+ A scalable concurrent {@link NavigableSet} implementation based on
+ a {@link java.util.concurrent.ConcurrentSkipListMap}.  The elements of the set are kept
+ sorted according to their {@linkplain Comparable natural ordering},
+ or by a {@link Comparator} provided at set creation time, depending
+ on which constructor is used.
+
+ &lt;p&gt;This implementation provides expected average &lt;i&gt;log(n)&lt;/i&gt; time
+ cost for the {@code contains}, {@code add}, and {@code remove}
+ operations and their variants.  Insertion, removal, and access
+ operations safely execute concurrently by multiple threads.
+
+ &lt;p&gt;Iterators and spliterators are
+ &lt;a href=&quot;package-summary.html#Weakly&quot;&gt;&lt;i&gt;weakly consistent&lt;/i&gt;&lt;/a&gt;.
+
+ &lt;p&gt;Ascending ordered views and their iterators are faster than
+ descending ones.
+
+ &lt;p&gt;Beware that, unlike in most collections, the {@code size}
+ method is &lt;em&gt;not&lt;/em&gt; a constant-time operation. Because of the
+ asynchronous nature of these sets, determining the current number
+ of elements requires a traversal of the elements, and so may report
+ inaccurate results if this collection is modified during traversal.
+ Additionally, the bulk operations {@code addAll},
+ {@code removeAll}, {@code retainAll}, {@code containsAll},
+ {@code equals}, and {@code toArray} are &lt;em&gt;not&lt;/em&gt; guaranteed
+ to be performed atomically. For example, an iterator operating
+ concurrently with an {@code addAll} operation might view only some
+ of the added elements.
+
+ &lt;p&gt;This class and its iterators implement all of the
+ &lt;em&gt;optional&lt;/em&gt; methods of the {@link Set} and {@link Iterator}
+ interfaces. Like most other concurrent collection implementations,
+ this class does not permit the use of {@code null} elements,
+ because {@code null} arguments and return values cannot be reliably
+ distinguished from the absence of elements.
+
+ @author Doug Lea
+ @param &lt;E&gt; the type of elements maintained by this set
+ @since 1.6
+*/
+var ConcurrentSkipListSet = {
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-clone'>/**Returns a shallow copy of this {@code ConcurrentSkipListSet}
+</span> instance. (The elements themselves are not cloned.)
+@return {Object {java.util.concurrent.ConcurrentSkipListSet}} a shallow copy of this set
+*/
+clone : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-size'>/**Returns the number of elements in this set.  If this set
+</span> contains more than {@code Integer.MAX_VALUE} elements, it
+ returns {@code Integer.MAX_VALUE}.
+
+ &lt;p&gt;Beware that, unlike in most collections, this method is
+ &lt;em&gt;NOT&lt;/em&gt; a constant-time operation. Because of the
+ asynchronous nature of these sets, determining the current
+ number of elements requires traversing them all to count them.
+ Additionally, it is possible for the size to change during
+ execution of this method, in which case the returned result
+ will be inaccurate. Thus, this method is typically not very
+ useful in concurrent applications.
+@return {Number} the number of elements in this set
+*/
+size : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-isEmpty'>/**Returns {@code true} if this set contains no elements.
+</span>@return {Boolean} {@code true} if this set contains no elements
+*/
+isEmpty : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-contains'>/**Returns {@code true} if this set contains the specified element.
+</span> More formally, returns {@code true} if and only if this set
+ contains an element {@code e} such that {@code o.equals(e)}.
+@param {Object {Object}} o object to be checked for containment in this set
+@return {Boolean} {@code true} if this set contains the specified element
+@throws ClassCastException if the specified element cannot be
+         compared with the elements currently in this set
+@throws NullPointerException if the specified element is null
+*/
+contains : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-add'>/**Adds the specified element to this set if it is not already present.
+</span> More formally, adds the specified element {@code e} to this set if
+ the set contains no element {@code e2} such that {@code e.equals(e2)}.
+ If this set already contains the element, the call leaves the set
+ unchanged and returns {@code false}.
+@param {Object {Object}} e element to be added to this set
+@return {Boolean} {@code true} if this set did not already contain the
+         specified element
+@throws ClassCastException if {@code e} cannot be compared
+         with the elements currently in this set
+@throws NullPointerException if the specified element is null
+*/
+add : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-remove'>/**Removes the specified element from this set if it is present.
+</span> More formally, removes an element {@code e} such that
+ {@code o.equals(e)}, if this set contains such an element.
+ Returns {@code true} if this set contained the element (or
+ equivalently, if this set changed as a result of the call).
+ (This set will not contain the element once the call returns.)
+@param {Object {Object}} o object to be removed from this set, if present
+@return {Boolean} {@code true} if this set contained the specified element
+@throws ClassCastException if {@code o} cannot be compared
+         with the elements currently in this set
+@throws NullPointerException if the specified element is null
+*/
+remove : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-clear'>/**Removes all of the elements from this set.
+</span>*/
+clear : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-iterator'>/**Returns an iterator over the elements in this set in ascending order.
+</span>@return {Object {java.util.Iterator}} an iterator over the elements in this set in ascending order
+*/
+iterator : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-descendingIterator'>/**Returns an iterator over the elements in this set in descending order.
+</span>@return {Object {java.util.Iterator}} an iterator over the elements in this set in descending order
+*/
+descendingIterator : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-equals'>/**Compares the specified object with this set for equality.  Returns
+</span> {@code true} if the specified object is also a set, the two sets
+ have the same size, and every member of the specified set is
+ contained in this set (or equivalently, every member of this set is
+ contained in the specified set).  This definition ensures that the
+ equals method works properly across different implementations of the
+ set interface.
+@param {Object {Object}} o the object to be compared for equality with this set
+@return {Boolean} {@code true} if the specified object is equal to this set
+*/
+equals : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-removeAll'>/**Removes from this set all of its elements that are contained in
+</span> the specified collection.  If the specified collection is also
+ a set, this operation effectively modifies this set so that its
+ value is the &lt;i&gt;asymmetric set difference&lt;/i&gt; of the two sets.
+@param {Object {java.util.Collection}} c collection containing elements to be removed from this set
+@return {Boolean} {@code true} if this set changed as a result of the call
+@throws ClassCastException if the class of an element of this set
+         is incompatible with the specified collection
+ (&lt;a href=&quot;../Collection.html#optional-restrictions&quot;&gt;optional&lt;/a&gt;)
+@throws NullPointerException if the specified collection or any
+         of its elements are null
+*/
+removeAll : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-lower'>/**
+</span>@throws ClassCastException {@inheritDoc}
+@throws NullPointerException if the specified element is null
+*/
+lower : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-floor'>/**
+</span>@throws ClassCastException {@inheritDoc}
+@throws NullPointerException if the specified element is null
+*/
+floor : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-ceiling'>/**
+</span>@throws ClassCastException {@inheritDoc}
+@throws NullPointerException if the specified element is null
+*/
+ceiling : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-higher'>/**
+</span>@throws ClassCastException {@inheritDoc}
+@throws NullPointerException if the specified element is null
+*/
+higher : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-pollFirst'>/**
+</span>*/
+pollFirst : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-pollLast'>/**
+</span>*/
+pollLast : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-comparator'>/**
+</span>*/
+comparator : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-first'>/**
+</span>@throws java.util.NoSuchElementException {@inheritDoc}
+*/
+first : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-last'>/**
+</span>@throws java.util.NoSuchElementException {@inheritDoc}
+*/
+last : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-subSet'>/**
+</span>@throws ClassCastException {@inheritDoc}
+@throws NullPointerException if {@code fromElement} or
+         {@code toElement} is null
+@throws IllegalArgumentException {@inheritDoc}
+*/
+subSet : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-headSet'>/**
+</span>@throws ClassCastException {@inheritDoc}
+@throws NullPointerException if {@code toElement} is null
+@throws IllegalArgumentException {@inheritDoc}
+*/
+headSet : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-tailSet'>/**
+</span>@throws ClassCastException {@inheritDoc}
+@throws NullPointerException if {@code fromElement} is null
+@throws IllegalArgumentException {@inheritDoc}
+*/
+tailSet : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-subSet'>/**
+</span>@throws ClassCastException {@inheritDoc}
+@throws NullPointerException if {@code fromElement} or
+         {@code toElement} is null
+@throws IllegalArgumentException {@inheritDoc}
+*/
+subSet : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-headSet'>/**
+</span>@throws ClassCastException {@inheritDoc}
+@throws NullPointerException if {@code toElement} is null
+@throws IllegalArgumentException {@inheritDoc}
+*/
+headSet : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-tailSet'>/**
+</span>@throws ClassCastException {@inheritDoc}
+@throws NullPointerException if {@code fromElement} is null
+@throws IllegalArgumentException {@inheritDoc}
+*/
+tailSet : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-descendingSet'>/**Returns a reverse order view of the elements contained in this set.
+</span> The descending set is backed by this set, so changes to the set are
+ reflected in the descending set, and vice-versa.
+
+ &lt;p&gt;The returned set has an ordering equivalent to
+ {@link Collections#reverseOrder(Comparator) Collections.reverseOrder}{@code (comparator())}.
+ The expression {@code s.descendingSet().descendingSet()} returns a
+ view of {@code s} essentially equivalent to {@code s}.
+@return {Object {java.util.NavigableSet}} a reverse order view of this set
+*/
+descendingSet : function(  ) {},
+
+<span id='java-util-concurrent-ConcurrentSkipListSet-method-spliterator'>/**Returns a {@link Spliterator} over the elements in this set.
+</span>
+ &lt;p&gt;The {@code Spliterator} reports {@link Spliterator#CONCURRENT},
+ {@link Spliterator#NONNULL}, {@link Spliterator#DISTINCT},
+ {@link Spliterator#SORTED} and {@link Spliterator#ORDERED}, with an
+ encounter order that is ascending order.  Overriding implementations
+ should document the reporting of additional characteristic values.
+
+ &lt;p&gt;The spliterator's comparator (see
+ {@link java.util.Spliterator#getComparator()}) is {@code null} if
+ the set's comparator (see {@link #comparator}()) is {@code null}.
+ Otherwise, the spliterator's comparator is the same as or imposes the
+ same total ordering as the set's comparator.
+@return {Object {java.util.Spliterator}} a {@code Spliterator} over the elements in this set
+@since 1.8
+*/
+spliterator : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

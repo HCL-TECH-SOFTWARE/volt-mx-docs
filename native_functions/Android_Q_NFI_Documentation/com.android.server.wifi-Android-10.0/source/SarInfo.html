@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-SarInfo'>/**@class com.android.server.wifi.SarInfo
+</span>@extends java.lang.Object
+
+ This class represents the list of SAR inputs that will be used to select the proper
+ power profile.
+ This includes:
+  - SAR sensor status
+  - Is there an ongoing voice call
+  - Is SoftAP active
+ It also contains info about state of the other Wifi modes
+  - Client mode (Sta)
+  - ScanOnly mode
+ It also keeps history for the reporting of SAR states/scenario to avoid unnecessary reporting
+  - keeps track of the last reported states
+  - keeps track of the last reported SAR scenario
+  - keeps track of if all wifi modes were disabled (no reporting should happen then)
+*/
+var SarInfo = {
+
+<span id='com-android-server-wifi-SarInfo-property-INITIAL_SAR_SCENARIO'>/** This value is used as an initial value for the last reported scenario
+</span> It is intended to be different than all valid SAR scenario values (including the
+ reset value).
+ Using this to initialize the lastReportedScenario results in that the first scenario
+ (including reset) would be reported.
+*/
+INITIAL_SAR_SCENARIO : &quot;-2&quot;,
+<span id='com-android-server-wifi-SarInfo-property-RESET_SAR_SCENARIO'>/** This value is used for the reset scenario (no TX Power backoff)
+</span> Valid scenario values only include scenarios with Tx Power backoff,
+ so we need this one to represent the &quot;No backoff&quot; case.
+*/
+RESET_SAR_SCENARIO : &quot;-1&quot;,
+<span id='com-android-server-wifi-SarInfo-property-SAR_SENSOR_FREE_SPACE'>/***/
+</span>SAR_SENSOR_FREE_SPACE : &quot;1&quot;,
+<span id='com-android-server-wifi-SarInfo-property-SAR_SENSOR_NEAR_HAND'>/***/
+</span>SAR_SENSOR_NEAR_HAND : &quot;2&quot;,
+<span id='com-android-server-wifi-SarInfo-property-SAR_SENSOR_NEAR_HEAD'>/***/
+</span>SAR_SENSOR_NEAR_HEAD : &quot;3&quot;,
+<span id='com-android-server-wifi-SarInfo-property-SAR_SENSOR_NEAR_BODY'>/***/
+</span>SAR_SENSOR_NEAR_BODY : &quot;4&quot;,
+<span id='com-android-server-wifi-SarInfo-property-sarVoiceCallSupported'>/***/
+</span>sarVoiceCallSupported : &quot;null&quot;,
+<span id='com-android-server-wifi-SarInfo-property-sarSapSupported'>/***/
+</span>sarSapSupported : &quot;null&quot;,
+<span id='com-android-server-wifi-SarInfo-property-sarSensorSupported'>/***/
+</span>sarSensorSupported : &quot;null&quot;,
+<span id='com-android-server-wifi-SarInfo-property-sensorState'>/***/
+</span>sensorState : &quot;null&quot;,
+<span id='com-android-server-wifi-SarInfo-property-isWifiClientEnabled'>/***/
+</span>isWifiClientEnabled : &quot;null&quot;,
+<span id='com-android-server-wifi-SarInfo-property-isWifiSapEnabled'>/***/
+</span>isWifiSapEnabled : &quot;null&quot;,
+<span id='com-android-server-wifi-SarInfo-property-isWifiScanOnlyEnabled'>/***/
+</span>isWifiScanOnlyEnabled : &quot;null&quot;,
+<span id='com-android-server-wifi-SarInfo-property-isVoiceCall'>/***/
+</span>isVoiceCall : &quot;null&quot;,
+<span id='com-android-server-wifi-SarInfo-property-isEarPieceActive'>/***/
+</span>isEarPieceActive : &quot;null&quot;,
+<span id='com-android-server-wifi-SarInfo-property-attemptedSarScenario'>/***/
+</span>attemptedSarScenario : &quot;null&quot;,
+<span id='com-android-server-wifi-SarInfo-method-shouldReport'>/**shouldReport()
+</span> This method returns false in the following cases:
+ 1. If all Wifi modes are disabled.
+ 2. Values contributing to the SAR scenario selection have not changed
+    since last successful reporting.
+
+ Special cases to allow for devices that require setting the SAR scenario value
+ when the chip comes up (initial startup, or during operation)
+ 1. This method would report true even with unchanged values from last reporting,
+    if any wifi mode is just enabled after all wifi modes were disabled.
+ 2. This method would report true the first time it is called with any wifi mode enabled.
+*/
+shouldReport : function(  ) {},
+
+<span id='com-android-server-wifi-SarInfo-method-reportingSuccessful'>/**reportingSuccessful()
+</span> This method is called when reporting SAR scenario is fully successful
+ This results in caching the last reported inputs for future comparison.
+*/
+reportingSuccessful : function(  ) {},
+
+<span id='com-android-server-wifi-SarInfo-method-resetSarScenarioNeeded'>/**resetSarScenarioNeeded()
+</span>  Returns true if a call towards HAL to reset SAR scenario would be necessary.
+  Returns false if the last call to HAL was already a reset, and hence
+  another call to reset the SAR scenario would be redundant.
+*/
+resetSarScenarioNeeded : function(  ) {},
+
+<span id='com-android-server-wifi-SarInfo-method-setSarScenarioNeeded'>/**setSarScenarioNeeded()
+</span> Returns true if a call towards HAL to set SAR scenario to that value would be
+ necessary. This happens in the following cases:
+   1. All Wifi modes were disabled, hence we need to init the SAR scenario value.
+   2. The new scenario is different from the last reported one.
+
+ Returns false if the last call to HAL was to set the scenario to that value, hence,
+ another call to set the SAR scenario to the same value would be redundant.
+*/
+setSarScenarioNeeded : function(  ) {},
+
+<span id='com-android-server-wifi-SarInfo-method-dump'>/**dump()
+</span> Dumps the state of SarInfo
+*/
+dump : function(  ) {},
+
+<span id='com-android-server-wifi-SarInfo-method-sensorStateToString'>/**Convert SAR sensor state to string
+</span>*/
+sensorStateToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

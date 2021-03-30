@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-chrono-JapaneseDate'>/**@class java.time.chrono.JapaneseDate
+</span> implements java.time.chrono.ChronoLocalDate
+
+ implements java.io.Serializable
+
+@extends java.time.chrono.ChronoLocalDateImpl
+
+ A date in the Japanese Imperial calendar system.
+ &lt;p&gt;
+ This date operates using the {@linkplain java.time.chrono.JapaneseChronology Japanese Imperial calendar}.
+ This calendar system is primarily used in Japan.
+ &lt;p&gt;
+ The Japanese Imperial calendar system is the same as the ISO calendar system
+ apart from the era-based year numbering. The proleptic-year is defined to be
+ equal to the ISO proleptic-year.
+ &lt;p&gt;
+ Japan introduced the Gregorian calendar starting with Meiji 6.
+ Only Meiji and later eras are supported;
+ dates before Meiji 6, January 1 are not supported.
+ &lt;p&gt;
+ For example, the Japanese year &quot;Heisei 24&quot; corresponds to ISO year &quot;2012&quot;.&lt;br&gt;
+ Calling {@code japaneseDate.get(YEAR_OF_ERA)} will return 24.&lt;br&gt;
+ Calling {@code japaneseDate.get(YEAR)} will return 2012.&lt;br&gt;
+ Calling {@code japaneseDate.get(ERA)} will return 2, corresponding to
+ {@code JapaneseChronology.ERA_HEISEI}.&lt;br&gt;
+
+ @implSpec
+ This class is immutable and thread-safe.
+
+ @since 1.8
+*/
+var JapaneseDate = {
+
+<span id='java-time-chrono-JapaneseDate-method-now'>/**Obtains the current {@code JapaneseDate} from the system clock in the default time-zone.
+</span> &lt;p&gt;
+ This will query the {@link Clock#systemDefaultZone() system clock} in the default
+ time-zone to obtain the current date.
+ &lt;p&gt;
+ Using this method will prevent the ability to use an alternate clock for testing
+ because the clock is hard-coded.
+@return {Object {java.time.chrono.JapaneseDate}} the current date using the system clock and default time-zone, not null
+*/
+now : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-now'>/**Obtains the current {@code JapaneseDate} from the system clock in the specified time-zone.
+</span> &lt;p&gt;
+ This will query the {@link Clock#system(ZoneId) system clock} to obtain the current date.
+ Specifying the time-zone avoids dependence on the default time-zone.
+ &lt;p&gt;
+ Using this method will prevent the ability to use an alternate clock for testing
+ because the clock is hard-coded.
+@param {Object {ZoneId}} zone  the zone ID to use, not null
+@return {Object {java.time.chrono.JapaneseDate}} the current date using the system clock, not null
+*/
+now : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-now'>/**Obtains the current {@code JapaneseDate} from the specified clock.
+</span> &lt;p&gt;
+ This will query the specified clock to obtain the current date - today.
+ Using this method allows the use of an alternate clock for testing.
+ The alternate clock may be introduced using {@linkplain Clock dependency injection}.
+@param {Object {Clock}} clock  the clock to use, not null
+@return {Object {java.time.chrono.JapaneseDate}} the current date, not null
+@throws DateTimeException if the current date cannot be obtained
+*/
+now : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-of'>/**Obtains a {@code JapaneseDate} representing a date in the Japanese calendar
+</span> system from the era, year-of-era, month-of-year and day-of-month fields.
+ &lt;p&gt;
+ This returns a {@code JapaneseDate} with the specified fields.
+ The day must be valid for the year and month, otherwise an exception will be thrown.
+ &lt;p&gt;
+ The Japanese month and day-of-month are the same as those in the
+ ISO calendar system. They are not reset when the era changes.
+ For example:
+ &lt;pre&gt;
+  6th Jan Showa 64 = ISO 1989-01-06
+  7th Jan Showa 64 = ISO 1989-01-07
+  8th Jan Heisei 1 = ISO 1989-01-08
+  9th Jan Heisei 1 = ISO 1989-01-09
+ &lt;/pre&gt;
+@param {Object {JapaneseEra}} era  the Japanese era, not null
+@param {Number} yearOfEra  the Japanese year-of-era
+@param {Number} month  the Japanese month-of-year, from 1 to 12
+@param {Number} dayOfMonth  the Japanese day-of-month, from 1 to 31
+@return {Object {java.time.chrono.JapaneseDate}} the date in Japanese calendar system, not null
+@throws DateTimeException if the value of any field is out of range,
+  or if the day-of-month is invalid for the month-year,
+  or if the date is not a Japanese era
+*/
+of : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-of'>/**Obtains a {@code JapaneseDate} representing a date in the Japanese calendar
+</span> system from the proleptic-year, month-of-year and day-of-month fields.
+ &lt;p&gt;
+ This returns a {@code JapaneseDate} with the specified fields.
+ The day must be valid for the year and month, otherwise an exception will be thrown.
+ &lt;p&gt;
+ The Japanese proleptic year, month and day-of-month are the same as those
+ in the ISO calendar system. They are not reset when the era changes.
+@param {Number} prolepticYear  the Japanese proleptic-year
+@param {Number} month  the Japanese month-of-year, from 1 to 12
+@param {Number} dayOfMonth  the Japanese day-of-month, from 1 to 31
+@return {Object {java.time.chrono.JapaneseDate}} the date in Japanese calendar system, not null
+@throws DateTimeException if the value of any field is out of range,
+  or if the day-of-month is invalid for the month-year
+*/
+of : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-from'>/**Obtains a {@code JapaneseDate} from a temporal object.
+</span> &lt;p&gt;
+ This obtains a date in the Japanese calendar system based on the specified temporal.
+ A {@code TemporalAccessor} represents an arbitrary set of date and time information,
+ which this factory converts to an instance of {@code JapaneseDate}.
+ &lt;p&gt;
+ The conversion typically uses the {@link ChronoField#EPOCH_DAY EPOCH_DAY}
+ field, which is standardized across calendar systems.
+ &lt;p&gt;
+ This method matches the signature of the functional interface {@link TemporalQuery}
+ allowing it to be used as a query via method reference, {@code JapaneseDate::from}.
+@param {Object {TemporalAccessor}} temporal  the temporal object to convert, not null
+@return {Object {java.time.chrono.JapaneseDate}} the date in Japanese calendar system, not null
+@throws DateTimeException if unable to convert to a {@code JapaneseDate}
+*/
+from : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-getChronology'>/**Gets the chronology of this date, which is the Japanese calendar system.
+</span> &lt;p&gt;
+ The {@code Chronology} represents the calendar system in use.
+ The era and other fields in {@link ChronoField} are defined by the chronology.
+@return {Object {java.time.chrono.JapaneseChronology}} the Japanese chronology, not null
+*/
+getChronology : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-getEra'>/**Gets the era applicable at this date.
+</span> &lt;p&gt;
+ The Japanese calendar system has multiple eras defined by {@link java.time.chrono.JapaneseEra}.
+@return {Object {java.time.chrono.JapaneseEra}} the era applicable at this date, not null
+*/
+getEra : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-lengthOfMonth'>/**Returns the length of the month represented by this date.
+</span> &lt;p&gt;
+ This returns the length of the month in days.
+ Month lengths match those of the ISO calendar system.
+@return {Number} the length of the month in days
+*/
+lengthOfMonth : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-lengthOfYear'>/**
+</span>*/
+lengthOfYear : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-isSupported'>/**Checks if the specified field is supported.
+</span> &lt;p&gt;
+ This checks if this date can be queried for the specified field.
+ If false, then calling the {@link #range(TemporalField) range} and
+ {@link #get(TemporalField) get} methods will throw an exception.
+ &lt;p&gt;
+ If the field is a {@link ChronoField} then the query is implemented here.
+ The supported fields are:
+ &lt;ul&gt;
+ &lt;li&gt;{@code DAY_OF_WEEK}
+ &lt;li&gt;{@code DAY_OF_MONTH}
+ &lt;li&gt;{@code DAY_OF_YEAR}
+ &lt;li&gt;{@code EPOCH_DAY}
+ &lt;li&gt;{@code MONTH_OF_YEAR}
+ &lt;li&gt;{@code PROLEPTIC_MONTH}
+ &lt;li&gt;{@code YEAR_OF_ERA}
+ &lt;li&gt;{@code YEAR}
+ &lt;li&gt;{@code ERA}
+ &lt;/ul&gt;
+ All other {@code ChronoField} instances will return false.
+ &lt;p&gt;
+ If the field is not a {@code ChronoField}, then the result of this method
+ is obtained by invoking {@code TemporalField.isSupportedBy(TemporalAccessor)}
+ passing {@code this} as the argument.
+ Whether the field is supported is determined by the field.
+@param {Object {TemporalField}} field  the field to check, null returns false
+@return {Boolean} true if the field is supported on this date, false if not
+*/
+isSupported : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-range'>/**
+</span>*/
+range : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-getLong'>/**
+</span>*/
+getLong : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-with'>/**
+</span>*/
+with : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-with'>/**{@inheritDoc}
+</span>@throws DateTimeException {@inheritDoc}
+@throws ArithmeticException {@inheritDoc}
+*/
+with : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-plus'>/**{@inheritDoc}
+</span>@throws DateTimeException {@inheritDoc}
+@throws ArithmeticException {@inheritDoc}
+*/
+plus : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-minus'>/**{@inheritDoc}
+</span>@throws DateTimeException {@inheritDoc}
+@throws ArithmeticException {@inheritDoc}
+*/
+minus : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-plus'>/**
+</span>*/
+plus : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-minus'>/**
+</span>*/
+minus : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-atTime'>/**
+</span>*/
+atTime : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-until'>/**
+</span>*/
+until : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-toEpochDay'>/**
+</span>*/
+toEpochDay : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-equals'>/**Compares this date to another date, including the chronology.
+</span> &lt;p&gt;
+ Compares this {@code JapaneseDate} with another ensuring that the date is the same.
+ &lt;p&gt;
+ Only objects of type {@code JapaneseDate} are compared, other types return false.
+ To compare the dates of two {@code TemporalAccessor} instances, including dates
+ in two different chronologies, use {@link ChronoField#EPOCH_DAY} as a comparator.
+@param {Object {Object}} obj  the object to check, null returns false
+@return {Boolean} true if this is equal to the other date
+*/
+equals : function(  ) {},
+
+<span id='java-time-chrono-JapaneseDate-method-hashCode'>/**A hash code for this date.
+</span>@return {Number} a suitable hash code based only on the Chronology and the date
+*/
+hashCode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-hotspot2-PasspointManager'>/**@class com.android.server.wifi.hotspot2.PasspointManager
+</span>@extends java.lang.Object
+
+ This class provides the APIs to manage Passpoint provider configurations.
+ It deals with the following:
+ - Maintaining a list of configured Passpoint providers for provider matching.
+ - Persisting the providers configurations to store when required.
+ - matching Passpoint providers based on the scan results
+ - Supporting WifiManager Public API calls:
+   &gt; addOrUpdatePasspointConfiguration()
+   &gt; removePasspointConfiguration()
+   &gt; getPasspointConfigurations()
+
+ The provider matching requires obtaining additional information from the AP (ANQP elements).
+ The ANQP elements will be cached using {@link com.android.server.wifi.hotspot2.AnqpCache} to avoid unnecessary requests.
+
+ NOTE: These API's are not thread safe and should only be used from ClientModeImpl thread.
+*/
+var PasspointManager = {
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-removePasspointProviderWithPackage'>/**Remove all Passpoint profiles installed by the app that has been disabled or uninstalled.
+</span>@param {String} packageName Package name of the app to remove the corresponding Passpoint profiles.
+*/
+removePasspointProviderWithPackage : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-initializeProvisioner'>/**Initializes the provisioning flow with a looper
+</span>*/
+initializeProvisioner : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-enableVerboseLogging'>/**Enable verbose logging
+</span>@param {Number} verbose more than 0 enables verbose logging
+*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-addOrUpdateProvider'>/**Add or update a Passpoint provider with the given configuration.
+</span>
+ Each provider is uniquely identified by its FQDN (Fully Qualified Domain Name).
+ In the case when there is an existing configuration with the same FQDN
+ a provider with the new configuration will replace the existing provider.
+@param {Object {PasspointConfiguration}} config Configuration of the Passpoint provider to be added
+@param {Number} packageName Package name of the app adding/Updating {@code config}
+@return {Boolean} true if provider is added, false otherwise
+*/
+addOrUpdateProvider : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-findEapMethodFromNAIRealmMatchedWithCarrier'>/**Finds a EAP method from a NAI realm element matched with MCC/MNC of current carrier.
+</span>@param {Object {java.util.List}} scanDetails a list of scanResults used to find a matching AP.
+@return {Number} a EAP method which should be one of EAP-Methods(EAP-SIM,AKA and AKA') if matching
+ realm is found, {@code -1} otherwise.
+*/
+findEapMethodFromNAIRealmMatchedWithCarrier : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-createEphemeralPasspointConfigForCarrier'>/**Creates an ephemeral {@link PasspointConfiguration} for current carrier(SIM) on the device.
+</span>@param {Number} eapMethod  eapMethod used to connect Passpoint Network.
+@return {Object {android.net.wifi.hotspot2.PasspointConfiguration}} return the {@link PasspointConfiguration} if a configuration is created successfully,
+ {@code null} otherwise.
+*/
+createEphemeralPasspointConfigForCarrier : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-hasCarrierProvider'>/**Check if the {@link com.android.server.wifi.hotspot2.PasspointProvider} for a carrier exists.
+</span>@param {String} mccmnc a MCC/MNC of the carrier to find
+@return {Boolean} {@code true} if the provider already exists, {@code false} otherwise.
+*/
+hasCarrierProvider : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-installEphemeralPasspointConfigForCarrier'>/**Installs a {@link PasspointConfiguration} created for auto connection with EAP-SIM/AKA/AKA'.
+</span>
+ It installs the Passpoint configuration created on runtime when the (MCC/MNC) of carrier that
+ supports encrypted IMSI is matched with one of ScanResults
+@param {Object {PasspointConfiguration}} config the Passpoint Configuration to connect the AP with EAP-SIM/AKA/AKA'
+@return {Boolean} {@code true} if config is installed successfully, {@code false} otherwise.
+*/
+installEphemeralPasspointConfigForCarrier : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-removeProvider'>/**Remove a Passpoint provider identified by the given FQDN.
+</span>@param {String} fqdn The FQDN of the provider to remove
+@return {Boolean} true if a provider is removed, false otherwise
+*/
+removeProvider : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-removeEphemeralProviders'>/**Remove the ephemeral providers that are created temporarily for a carrier.
+</span>*/
+removeEphemeralProviders : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-getProviderConfigs'>/**Return the installed Passpoint provider configurations.
+</span>
+ An empty list will be returned when no provider is installed.
+@return {Object {java.util.List}} A list of {@link PasspointConfiguration}
+*/
+getProviderConfigs : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-matchProvider'>/**Find the best provider that can provide service through the given AP, which means the
+</span> provider contained credential to authenticate with the given AP.
+
+ Here is the current precedence of the matching rule in descending order:
+ 1. Home Provider
+ 2. Roaming Provider
+
+ A {code null} will be returned if no matching is found.
+@param {Object {ScanResult}} scanResult The scan result associated with the AP
+@return {Object {android.util.Pair}} A pair of {@link PasspointProvider} and match status.
+*/
+matchProvider : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-getAllMatchedProviders'>/**Return a list of all providers that can provide service through the given AP.
+</span>@param {Object {ScanResult}} scanResult The scan result associated with the AP
+@return {Object {java.util.List}} a list of pairs of {@link PasspointProvider} and match status.
+*/
+getAllMatchedProviders : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-addLegacyPasspointConfig'>/**Add a legacy Passpoint configuration represented by a {@link WifiConfiguration} to the
+</span> current {@link com.android.server.wifi.hotspot2.PasspointManager}.
+
+ This will not trigger a config store write, since this will be invoked as part of the
+ configuration migration, the caller will be responsible for triggering store write
+ after the migration is completed.
+@param {Object {WifiConfiguration}} config {@link WifiConfiguration} representation of the Passpoint configuration
+@return {Boolean} true on success
+*/
+addLegacyPasspointConfig : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-sweepCache'>/**Sweep the ANQP cache to remove expired entries.
+</span>*/
+sweepCache : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-notifyANQPDone'>/**Notify the completion of an ANQP request.
+</span> TODO(zqiu): currently the notification is done through WifiMonitor,
+ will no longer be the case once we switch over to use wificond.
+*/
+notifyANQPDone : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-notifyIconDone'>/**Notify the completion of an icon request.
+</span> TODO(zqiu): currently the notification is done through WifiMonitor,
+ will no longer be the case once we switch over to use wificond.
+*/
+notifyIconDone : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-receivedWnmFrame'>/**Notify the reception of a Wireless Network Management (WNM) frame.
+</span> TODO(zqiu): currently the notification is done through WifiMonitor,
+ will no longer be the case once we switch over to use wificond.
+*/
+receivedWnmFrame : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-queryPasspointIcon'>/**Request the specified icon file |fileName| from the specified AP |bssid|.
+</span>@return {Boolean} true if the request is sent successfully, false otherwise
+*/
+queryPasspointIcon : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-getANQPElements'>/**Lookup the ANQP elements associated with the given AP from the cache. An empty map
+</span> will be returned if no match found in the cache.
+@param {Object {ScanResult}} scanResult The scan result associated with the AP
+@return {Object {java.util.Map}} Map of ANQP elements
+*/
+getANQPElements : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-getAllMatchingFqdnsForScanResults'>/**Returns a list of FQDN (Fully Qualified Domain Name) for installed Passpoint configurations.
+</span>
+ Return the map of all matching configurations with corresponding scanResults (or an empty
+ map if none).
+@param {Object {java.util.List}} scanResults The list of scan results
+@return {Object {java.util.Map}} Map that consists of FQDN (Fully Qualified Domain Name) and corresponding
+ scanResults per network type({@link WifiManager#PASSPOINT_HOME_NETWORK} and {@link
+ WifiManager#PASSPOINT_ROAMING_NETWORK}).
+*/
+getAllMatchingFqdnsForScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-getMatchingOsuProviders'>/**Returns the list of Hotspot 2.0 OSU (Online Sign-Up) providers associated with the given list
+</span> of ScanResult.
+
+ An empty map will be returned when an invalid scanResults are provided or no match is found.
+@param {Object {java.util.List}} scanResults a list of ScanResult that has Passpoint APs.
+@return {Object {java.util.Map}} Map that consists of {@link OsuProvider} and a matching list of {@link ScanResult}
+*/
+getMatchingOsuProviders : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-getMatchingPasspointConfigsForOsuProviders'>/**Returns the matching Passpoint configurations for given OSU(Online Sign-Up) providers
+</span>
+ An empty map will be returned when an invalid {@code osuProviders} are provided or no match
+ is found.
+@param {Object {java.util.List}} osuProviders a list of {@link OsuProvider}
+@return {Object {java.util.Map}} Map that consists of {@link OsuProvider} and matching {@link PasspointConfiguration}.
+*/
+getMatchingPasspointConfigsForOsuProviders : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-getWifiConfigsForPasspointProfiles'>/**Returns the corresponding wifi configurations for given FQDN (Fully Qualified Domain Name)
+</span> list.
+
+ An empty list will be returned when no match is found.
+@param {Object {java.util.List}} fqdnList a list of FQDN
+@return {Object {java.util.List}} List of {@link WifiConfiguration} converted from {@link PasspointProvider}
+*/
+getWifiConfigsForPasspointProfiles : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-onPasspointNetworkConnected'>/**Invoked when a Passpoint network was successfully connected based on the credentials
+</span> provided by the given Passpoint provider (specified by its FQDN).
+@param {String} fqdn The FQDN of the Passpoint provider
+*/
+onPasspointNetworkConnected : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-updateMetrics'>/**Update metrics related to installed Passpoint providers, this includes the number of
+</span> installed providers and the number of those providers that results in a successful network
+ connection.
+*/
+updateMetrics : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-dump'>/**Dump the current state of PasspointManager to the provided output stream.
+</span>@param {Object {PrintWriter}} pw The output stream to write to
+*/
+dump : function(  ) {},
+
+<span id='com-android-server-wifi-hotspot2-PasspointManager-method-startSubscriptionProvisioning'>/**Start the subscription provisioning flow with a provider.
+</span>@param {Number} callingUid integer indicating the uid of the caller
+@param {Object {OsuProvider}} provider {@link OsuProvider} the provider to subscribe to
+@param {Object {IProvisioningCallback}} callback {@link IProvisioningCallback} callback to update status to the caller
+@return {Boolean} boolean return value from the provisioning method
+*/
+startSubscriptionProvisioning : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-w3c-dom-TypeInfo'>/**@class org.w3c.dom.TypeInfo
+</span>  The &lt;code&gt;TypeInfo&lt;/code&gt; interface represents a type referenced from
+ &lt;code&gt;Element&lt;/code&gt; or &lt;code&gt;Attr&lt;/code&gt; nodes, specified in the schemas
+ associated with the document. The type is a pair of a namespace URI and
+ name properties, and depends on the document's schema.
+ &lt;p&gt; If the document's schema is an XML DTD [&lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204'&gt;XML 1.0&lt;/a&gt;], the values
+ are computed as follows:
+ &lt;ul&gt;
+ &lt;li&gt; If this type is referenced from an
+ &lt;code&gt;Attr&lt;/code&gt; node, &lt;code&gt;typeNamespace&lt;/code&gt; is
+ &lt;code&gt;&quot;http://www.w3.org/TR/REC-xml&quot;&lt;/code&gt; and &lt;code&gt;typeName&lt;/code&gt;
+ represents the &lt;b&gt;[attribute type]&lt;/b&gt; property in the [&lt;a href='http://www.w3.org/TR/2004/REC-xml-infoset-20040204/'&gt;XML Information Set&lt;/a&gt;]
+ . If there is no declaration for the attribute, &lt;code&gt;typeNamespace&lt;/code&gt;
+  and &lt;code&gt;typeName&lt;/code&gt; are &lt;code&gt;null&lt;/code&gt;.
+ &lt;/li&gt;
+ &lt;li&gt; If this type is
+ referenced from an &lt;code&gt;Element&lt;/code&gt; node, &lt;code&gt;typeNamespace&lt;/code&gt;
+ and &lt;code&gt;typeName&lt;/code&gt; are &lt;code&gt;null&lt;/code&gt;.
+ &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt; If the document's schema is an XML Schema [&lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/'&gt;XML Schema Part 1&lt;/a&gt;]
+ , the values are computed as follows using the post-schema-validation
+ infoset contributions (also called PSVI contributions):
+ &lt;ul&gt;
+ &lt;li&gt; If the &lt;b&gt;[validity]&lt;/b&gt; property exists AND is &lt;em&gt;&quot;invalid&quot;&lt;/em&gt; or &lt;em&gt;&quot;notKnown&quot;&lt;/em&gt;: the {target namespace} and {name} properties of the declared type if
+ available, otherwise &lt;code&gt;null&lt;/code&gt;.
+ &lt;p &gt;&lt;b&gt;Note:&lt;/b&gt;  At the time of writing, the XML Schema specification does
+ not require exposing the declared type. Thus, DOM implementations might
+ choose not to provide type information if validity is not valid.
+ &lt;/li&gt;
+ &lt;li&gt; If the &lt;b&gt;[validity]&lt;/b&gt; property exists and is &lt;em&gt;&quot;valid&quot;&lt;/em&gt;:
+ &lt;ol&gt;
+ &lt;li&gt; If &lt;b&gt;[member type definition]&lt;/b&gt; exists:
+ &lt;ol&gt;
+ &lt;li&gt;If {name} is not absent, then expose {name} and {target
+ namespace} properties of the &lt;b&gt;[member type definition]&lt;/b&gt; property;
+ &lt;/li&gt;
+ &lt;li&gt;Otherwise, expose the namespace and local name of the
+ corresponding anonymous type name.
+ &lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;/li&gt;
+ &lt;li&gt; If the &lt;b&gt;[type definition]&lt;/b&gt; property exists:
+ &lt;ol&gt;
+ &lt;li&gt;If {name} is not absent, then expose {name} and {target
+ namespace} properties of the &lt;b&gt;[type definition]&lt;/b&gt; property;
+ &lt;/li&gt;
+ &lt;li&gt;Otherwise, expose the namespace and local name of the
+ corresponding anonymous type name.
+ &lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;/li&gt;
+ &lt;li&gt; If the &lt;b&gt;[member type definition anonymous]&lt;/b&gt; exists:
+ &lt;ol&gt;
+ &lt;li&gt;If it is false, then expose &lt;b&gt;[member type definition name]&lt;/b&gt; and &lt;b&gt;[member type definition namespace]&lt;/b&gt; properties;
+ &lt;/li&gt;
+ &lt;li&gt;Otherwise, expose the namespace and local name of the
+ corresponding anonymous type name.
+ &lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;/li&gt;
+ &lt;li&gt; If the &lt;b&gt;[type definition anonymous]&lt;/b&gt; exists:
+ &lt;ol&gt;
+ &lt;li&gt;If it is false, then expose &lt;b&gt;[type definition name]&lt;/b&gt; and &lt;b&gt;[type definition namespace]&lt;/b&gt; properties;
+ &lt;/li&gt;
+ &lt;li&gt;Otherwise, expose the namespace and local name of the
+ corresponding anonymous type name.
+ &lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p &gt;&lt;b&gt;Note:&lt;/b&gt;  Other schema languages are outside the scope of the W3C
+ and therefore should define how to represent their type systems using
+ &lt;code&gt;TypeInfo&lt;/code&gt;.
+ &lt;p&gt;See also the &lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;Document Object Model (DOM) Level 3 Core Specification&lt;/a&gt;.
+ @since DOM Level 3
+*/
+var TypeInfo = {
+
+<span id='org-w3c-dom-TypeInfo-property-DERIVATION_RESTRICTION'>/**  If the document's schema is an XML Schema [&lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/'&gt;XML Schema Part 1&lt;/a&gt;]
+</span> , this constant represents the derivation by &lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/#key-typeRestriction'&gt;
+ restriction&lt;/a&gt; if complex types are involved, or a &lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/#element-restriction'&gt;
+ restriction&lt;/a&gt; if simple types are involved.
+ &lt;br&gt;  The reference type definition is derived by restriction from the
+ other type definition if the other type definition is the same as the
+ reference type definition, or if the other type definition can be
+ reached recursively following the {base type definition} property
+ from the reference type definition, and all the &lt;em&gt;derivation methods&lt;/em&gt; involved are restriction.
+*/
+DERIVATION_RESTRICTION : &quot;1&quot;,
+<span id='org-w3c-dom-TypeInfo-property-DERIVATION_EXTENSION'>/**  If the document's schema is an XML Schema [&lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/'&gt;XML Schema Part 1&lt;/a&gt;]
+</span> , this constant represents the derivation by &lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/#key-typeExtension'&gt;
+ extension&lt;/a&gt;.
+ &lt;br&gt;  The reference type definition is derived by extension from the
+ other type definition if the other type definition can be reached
+ recursively following the {base type definition} property from the
+ reference type definition, and at least one of the &lt;em&gt;derivation methods&lt;/em&gt; involved is an extension.
+*/
+DERIVATION_EXTENSION : &quot;2&quot;,
+<span id='org-w3c-dom-TypeInfo-property-DERIVATION_UNION'>/**  If the document's schema is an XML Schema [&lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/'&gt;XML Schema Part 1&lt;/a&gt;]
+</span> , this constant represents the &lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/#element-union'&gt;
+ union&lt;/a&gt; if simple types are involved.
+ &lt;br&gt; The reference type definition is derived by union from the other
+ type definition if there exists two type definitions T1 and T2 such
+ as the reference type definition is derived from T1 by
+ &lt;code&gt;DERIVATION_RESTRICTION&lt;/code&gt; or
+ &lt;code&gt;DERIVATION_EXTENSION&lt;/code&gt;, T2 is derived from the other type
+ definition by &lt;code&gt;DERIVATION_RESTRICTION&lt;/code&gt;, T1 has {variety} &lt;em&gt;union&lt;/em&gt;, and one of the {member type definitions} is T2. Note that T1 could be
+ the same as the reference type definition, and T2 could be the same
+ as the other type definition.
+*/
+DERIVATION_UNION : &quot;4&quot;,
+<span id='org-w3c-dom-TypeInfo-property-DERIVATION_LIST'>/**  If the document's schema is an XML Schema [&lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/'&gt;XML Schema Part 1&lt;/a&gt;]
+</span> , this constant represents the &lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/#element-list'&gt;list&lt;/a&gt;.
+ &lt;br&gt; The reference type definition is derived by list from the other
+ type definition if there exists two type definitions T1 and T2 such
+ as the reference type definition is derived from T1 by
+ &lt;code&gt;DERIVATION_RESTRICTION&lt;/code&gt; or
+ &lt;code&gt;DERIVATION_EXTENSION&lt;/code&gt;, T2 is derived from the other type
+ definition by &lt;code&gt;DERIVATION_RESTRICTION&lt;/code&gt;, T1 has {variety} &lt;em&gt;list&lt;/em&gt;, and T2 is the {item type definition}. Note that T1 could be the same as
+ the reference type definition, and T2 could be the same as the other
+ type definition.
+*/
+DERIVATION_LIST : &quot;8&quot;,
+<span id='org-w3c-dom-TypeInfo-method-getTypeName'>/**The name of a type declared for the associated element or attribute,
+</span> or &lt;code&gt;null&lt;/code&gt; if unknown.
+*/
+getTypeName : function(  ) {},
+
+<span id='org-w3c-dom-TypeInfo-method-getTypeNamespace'>/**The namespace of the type declared for the associated element or
+</span> attribute or &lt;code&gt;null&lt;/code&gt; if the element does not have
+ declaration or if no namespace information is available.
+*/
+getTypeNamespace : function(  ) {},
+
+<span id='org-w3c-dom-TypeInfo-method-isDerivedFrom'>/**This method returns if there is a derivation between the reference
+</span> type definition, i.e. the &lt;code&gt;TypeInfo&lt;/code&gt; on which the method
+ is being called, and the other type definition, i.e. the one passed
+ as parameters.
+@param {String} typeNamespaceArg  the namespace of the other type definition.
+@param {String} typeNameArg  the name of the other type definition.
+@param {Number} derivationMethod  the type of derivation and conditions applied
+   between two types, as described in the list of constants provided
+   in this interface.
+@return {Boolean} If the document's schema is a DTD or no schema is associated
+   with the document, this method will always return &lt;code&gt;false&lt;/code&gt;
+   .  If the document's schema is an XML Schema, the method will
+   &lt;code&gt;true&lt;/code&gt; if the reference type definition is derived from
+   the other type definition according to the derivation parameter. If
+   the value of the parameter is &lt;code&gt;0&lt;/code&gt; (no bit is set to
+   &lt;code&gt;1&lt;/code&gt; for the &lt;code&gt;derivationMethod&lt;/code&gt; parameter),
+   the method will return &lt;code&gt;true&lt;/code&gt; if the other type
+   definition can be reached by recursing any combination of {base
+   type definition}, {item type definition}, or {member type
+   definitions} from the reference type definition.
+*/
+isDerivedFrom : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-settingslib-widget-BarChartPreference'>/**@class com.android.settingslib.widget.BarChartPreference
+</span>@extends Preference
+
+ This BarChartPreference shows up to four bar views in this preference at most.
+
+ &lt;p&gt;The following code sample shows a typical use, with an XML layout and code to initialize the
+ contents of the BarChartPreference:
+
+ &lt;pre&gt;
+ &amp;lt;com.android.settingslib.widget.BarChartPreference
+        android:key=&quot;bar_chart&quot;/&amp;gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;This code sample demonstrates how to initialize the contents of the BarChartPreference
+ defined in the previous XML layout:
+
+ &lt;pre&gt;
+ BarChartPreference preference = ((BarChartPreference) findPreference(&quot;bar_chart&quot;));
+
+ BarChartInfo info = new BarChartInfo.Builder()
+     .setTitle(R.string.permission_bar_chart_title)
+     .setDetails(R.string.permission_bar_chart_details)
+     .setEmptyText(R.string.permission_bar_chart_empty_text)
+     .addBarViewInfo(new barViewInfo(...))
+     .addBarViewInfo(new barViewInfo(...))
+     .addBarViewInfo(new barViewInfo(...))
+     .addBarViewInfo(new barViewInfo(...))
+     .setDetailsOnClickListener(v -&gt; doSomething())
+     .build();
+
+ preference.initializeBarChart(info);
+ &lt;/pre&gt;
+
+
+ &lt;p&gt;You also can update new information for bar views by
+ {@link com.android.settingslib.widget.BarChartPreference#setBarViewInfos(BarViewInfo[])}
+
+ &lt;pre&gt;
+ BarViewInfo[] barViewsInfo = new BarViewInfo [] {
+     new BarViewInfo(...),
+     new BarViewInfo(...),
+     new BarViewInfo(...),
+     new BarViewInfo(...),
+ };
+
+ preference.setBarViewInfos(barViewsInfo);
+ &lt;/pre&gt;
+*/
+var BarChartPreference = {
+
+<span id='com-android-settingslib-widget-BarChartPreference-property-MAXIMUM_BAR_VIEWS'>/***/
+</span>MAXIMUM_BAR_VIEWS : &quot;4&quot;,
+<span id='com-android-settingslib-widget-BarChartPreference-method-initializeBarChart'>/**According to the information in {@link com.android.settingslib.widget.BarChartInfo} to initialize bar chart.
+</span>@param {Object {BarChartInfo}} barChartInfo The barChartInfo contains title, details, empty text, click listener
+                     attached on details view and four bar views.
+*/
+initializeBarChart : function(  ) {},
+
+<span id='com-android-settingslib-widget-BarChartPreference-method-setBarViewInfos'>/**Sets all bar view information which you'd like to show in preference.
+</span>@param {Object {com.android.settingslib.widget.BarViewInfo[]}} barViewInfos the barViewInfos contain at least one {@link BarViewInfo}.
+*/
+setBarViewInfos : function(  ) {},
+
+<span id='com-android-settingslib-widget-BarChartPreference-method-updateLoadingState'>/**Set loading state for {@link com.android.settingslib.widget.BarChartPreference}.
+</span>
+ By default, {@link com.android.settingslib.widget.BarChartPreference} doesn't care about it.
+
+ But if user sets loading state to true explicitly, it means {@link com.android.settingslib.widget.BarChartPreference}
+ needs to take some time to load data. So we won't initialize any view now.
+
+ Once the state is updated to false, we will start to initialize view again.
+@param {Boolean} isLoading whether or not {@link BarChartPreference} is in loading state.
+*/
+updateLoadingState : function(  ) {},
+
+<span id='com-android-settingslib-widget-BarChartPreference-method-onBindViewHolder'>/**
+</span>*/
+onBindViewHolder : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

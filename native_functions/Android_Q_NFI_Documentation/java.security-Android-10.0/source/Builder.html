@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-KeyStore-Builder'>/**@class java.security.KeyStore.Builder
+</span>@extends java.lang.Object
+
+ A description of a to-be-instantiated KeyStore object.
+
+ &lt;p&gt;An instance of this class encapsulates the information needed to
+ instantiate and initialize a KeyStore object. That process is
+ triggered when the {@linkplain #getKeyStore} method is called.
+
+ &lt;p&gt;This makes it possible to decouple configuration from KeyStore
+ object creation and e.g. delay a password prompt until it is
+ needed.
+
+ @see KeyStore
+ @see javax.net.ssl.KeyStoreBuilderParameters
+ @since 1.5
+*/
+var Builder = {
+
+<span id='java-security-KeyStore-Builder-method-getKeyStore'>/**Returns the KeyStore described by this object.
+</span>@return {Object {java.security.KeyStore}} the {@code KeyStore} described by this object
+@exception KeyStoreException if an error occurred during the
+   operation, for example if the KeyStore could not be
+   instantiated or loaded
+*/
+getKeyStore : function(  ) {},
+
+<span id='java-security-KeyStore-Builder-method-getProtectionParameter'>/**Returns the ProtectionParameters that should be used to obtain
+</span> the {@link java.security.KeyStore.Entry Entry} with the given alias.
+ The {@code getKeyStore} method must be invoked before this
+ method may be called.
+@param {String} alias the alias of the KeyStore entry
+@param alias the alias of the KeyStore entry
+@throws NullPointerException if alias is null
+@throws KeyStoreException if an error occurred during the
+   operation
+@throws IllegalStateException if the getKeyStore method has
+   not been invoked prior to calling this method
+*/
+getProtectionParameter : function(  ) {},
+
+<span id='java-security-KeyStore-Builder-method-newInstance'>/**Returns a new Builder that encapsulates the given KeyStore.
+</span> The {@linkplain #getKeyStore} method of the returned object
+ will return {@code keyStore}, the {@linkplain
+ #getProtectionParameter getProtectionParameter()} method will
+ return {@code protectionParameters}.
+
+ &lt;p&gt; This is useful if an existing KeyStore object needs to be
+ used with Builder-based APIs.
+@param {Object {KeyStore}} keyStore the KeyStore to be encapsulated
+@param {Object {KeyStore.ProtectionParameter}} protectionParameter the ProtectionParameter used to
+   protect the KeyStore entries
+@param protectionParameter the ProtectionParameter used to
+   protect the KeyStore entries
+@throws NullPointerException if keyStore or
+   protectionParameters is null
+@throws IllegalArgumentException if the keyStore has not been
+   initialized
+*/
+newInstance : function(  ) {},
+
+<span id='java-security-KeyStore-Builder-method-newInstance'>/**Returns a new Builder object.
+</span>
+ &lt;p&gt;The first call to the {@link #getKeyStore} method on the returned
+ builder will create a KeyStore of type {@code type} and call
+ its {@link java.security.KeyStore#load load()} method.
+ The {@code inputStream} argument is constructed from
+ {@code file}.
+ If {@code protection} is a
+ {@code PasswordProtection}, the password is obtained by
+ calling the {@code getPassword} method.
+ Otherwise, if {@code protection} is a
+ {@code CallbackHandlerProtection}, the password is obtained
+ by invoking the CallbackHandler.
+
+ &lt;p&gt;Subsequent calls to {@link #getKeyStore} return the same object
+ as the initial call. If the initial call to failed with a
+ KeyStoreException, subsequent calls also throw a
+ KeyStoreException.
+
+ &lt;p&gt;The KeyStore is instantiated from {@code provider} if
+ non-null. Otherwise, all installed providers are searched.
+
+ &lt;p&gt;Calls to {@link #getProtectionParameter getProtectionParameter()}
+ will return a {@link KeyStore.java.security.KeyStore.PasswordProtection java.security.KeyStore.PasswordProtection}
+ object encapsulating the password that was used to invoke the
+ {@code load} method.
+
+ &lt;p&gt;&lt;em&gt;Note&lt;/em&gt; that the {@link #getKeyStore} method is executed
+ within the {@link java.security.AccessControlContext} of the code invoking this
+ method.
+@param {String} type the type of KeyStore to be constructed
+@param {Object {Provider}} provider the provider from which the KeyStore is to
+   be instantiated (or null)
+@param {Object {File}} file the File that contains the KeyStore data
+@param {Object {KeyStore.ProtectionParameter}} protection the ProtectionParameter securing the KeyStore data
+@param protection the ProtectionParameter securing the KeyStore data
+@throws NullPointerException if type, file or protection is null
+@throws IllegalArgumentException if protection is not an instance
+   of either PasswordProtection or CallbackHandlerProtection; or
+   if file does not exist or does not refer to a normal file
+*/
+newInstance : function(  ) {},
+
+<span id='java-security-KeyStore-Builder-method-newInstance'>/**Returns a new Builder object.
+</span>
+ &lt;p&gt;Each call to the {@link #getKeyStore} method on the returned
+ builder will return a new KeyStore object of type {@code type}.
+ Its {@link java.security.KeyStore#load(java.security.KeyStore.LoadStoreParameter) load()}
+ method is invoked using a
+ {@code LoadStoreParameter} that encapsulates
+ {@code protection}.
+
+ &lt;p&gt;The KeyStore is instantiated from {@code provider} if
+ non-null. Otherwise, all installed providers are searched.
+
+ &lt;p&gt;Calls to {@link #getProtectionParameter getProtectionParameter()}
+ will return {@code protection}.
+
+ &lt;p&gt;&lt;em&gt;Note&lt;/em&gt; that the {@link #getKeyStore} method is executed
+ within the {@link java.security.AccessControlContext} of the code invoking this
+ method.
+@param {String} type the type of KeyStore to be constructed
+@param {Object {Provider}} provider the provider from which the KeyStore is to
+   be instantiated (or null)
+@param {Object {KeyStore.ProtectionParameter}} protection the ProtectionParameter securing the Keystore
+@param protection the ProtectionParameter securing the Keystore
+@throws NullPointerException if type or protection is null
+*/
+newInstance : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-Duration'>/**@class java.time.Duration
+</span> implements java.time.temporal.TemporalAmount
+
+ implements java.lang.Comparable
+
+ implements java.io.Serializable
+
+@extends java.lang.Object
+
+ A time-based amount of time, such as '34.5 seconds'.
+ &lt;p&gt;
+ This class models a quantity or amount of time in terms of seconds and nanoseconds.
+ It can be accessed using other duration-based units, such as minutes and hours.
+ In addition, the {@link ChronoUnit#DAYS DAYS} unit can be used and is treated as
+ exactly equal to 24 hours, thus ignoring daylight savings effects.
+ See {@link java.time.Period} for the date-based equivalent to this class.
+ &lt;p&gt;
+ A physical duration could be of infinite length.
+ For practicality, the duration is stored with constraints similar to {@link java.time.Instant}.
+ The duration uses nanosecond resolution with a maximum value of the seconds that can
+ be held in a {@code long}. This is greater than the current estimated age of the universe.
+ &lt;p&gt;
+ The range of a duration requires the storage of a number larger than a {@code long}.
+ To achieve this, the class stores a {@code long} representing seconds and an {@code int}
+ representing nanosecond-of-second, which will always be between 0 and 999,999,999.
+ The model is of a directed duration, meaning that the duration may be negative.
+ &lt;p&gt;
+ The duration is measured in &quot;seconds&quot;, but these are not necessarily identical to
+ the scientific &quot;SI second&quot; definition based on atomic clocks.
+ This difference only impacts durations measured near a leap-second and should not affect
+ most applications.
+ See {@link java.time.Instant} for a discussion as to the meaning of the second and time-scales.
+
+ @implSpec
+ This class is immutable and thread-safe.
+
+ @since 1.8
+*/
+var Duration = {
+
+<span id='java-time-Duration-property-ZERO'>/** Constant for a duration of zero.
+</span>*/
+ZERO : &quot;null&quot;,
+<span id='java-time-Duration-method-ofDays'>/**Obtains a {@code Duration} representing a number of standard 24 hour days.
+</span> &lt;p&gt;
+ The seconds are calculated based on the standard definition of a day,
+ where each day is 86400 seconds which implies a 24 hour day.
+ The nanosecond in second field is set to zero.
+@param {Number} days  the number of days, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration}, not null
+@throws ArithmeticException if the input days exceeds the capacity of {@code Duration}
+*/
+ofDays : function(  ) {},
+
+<span id='java-time-Duration-method-ofHours'>/**Obtains a {@code Duration} representing a number of standard hours.
+</span> &lt;p&gt;
+ The seconds are calculated based on the standard definition of an hour,
+ where each hour is 3600 seconds.
+ The nanosecond in second field is set to zero.
+@param {Number} hours  the number of hours, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration}, not null
+@throws ArithmeticException if the input hours exceeds the capacity of {@code Duration}
+*/
+ofHours : function(  ) {},
+
+<span id='java-time-Duration-method-ofMinutes'>/**Obtains a {@code Duration} representing a number of standard minutes.
+</span> &lt;p&gt;
+ The seconds are calculated based on the standard definition of a minute,
+ where each minute is 60 seconds.
+ The nanosecond in second field is set to zero.
+@param {Number} minutes  the number of minutes, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration}, not null
+@throws ArithmeticException if the input minutes exceeds the capacity of {@code Duration}
+*/
+ofMinutes : function(  ) {},
+
+<span id='java-time-Duration-method-ofSeconds'>/**Obtains a {@code Duration} representing a number of seconds.
+</span> &lt;p&gt;
+ The nanosecond in second field is set to zero.
+@param {Number} seconds  the number of seconds, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration}, not null
+*/
+ofSeconds : function(  ) {},
+
+<span id='java-time-Duration-method-ofSeconds'>/**Obtains a {@code Duration} representing a number of seconds and an
+</span> adjustment in nanoseconds.
+ &lt;p&gt;
+ This method allows an arbitrary number of nanoseconds to be passed in.
+ The factory will alter the values of the second and nanosecond in order
+ to ensure that the stored nanosecond is in the range 0 to 999,999,999.
+ For example, the following will result in the exactly the same duration:
+ &lt;pre&gt;
+  Duration.ofSeconds(3, 1);
+  Duration.ofSeconds(4, -999_999_999);
+  Duration.ofSeconds(2, 1000_000_001);
+ &lt;/pre&gt;
+@param {Number} seconds  the number of seconds, positive or negative
+@param {Number} nanoAdjustment  the nanosecond adjustment to the number of seconds, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration}, not null
+@throws ArithmeticException if the adjustment causes the seconds to exceed the capacity of {@code Duration}
+*/
+ofSeconds : function(  ) {},
+
+<span id='java-time-Duration-method-ofMillis'>/**Obtains a {@code Duration} representing a number of milliseconds.
+</span> &lt;p&gt;
+ The seconds and nanoseconds are extracted from the specified milliseconds.
+@param {Number} millis  the number of milliseconds, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration}, not null
+*/
+ofMillis : function(  ) {},
+
+<span id='java-time-Duration-method-ofNanos'>/**Obtains a {@code Duration} representing a number of nanoseconds.
+</span> &lt;p&gt;
+ The seconds and nanoseconds are extracted from the specified nanoseconds.
+@param {Number} nanos  the number of nanoseconds, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration}, not null
+*/
+ofNanos : function(  ) {},
+
+<span id='java-time-Duration-method-of'>/**Obtains a {@code Duration} representing an amount in the specified unit.
+</span> &lt;p&gt;
+ The parameters represent the two parts of a phrase like '6 Hours'. For example:
+ &lt;pre&gt;
+  Duration.of(3, SECONDS);
+  Duration.of(465, HOURS);
+ &lt;/pre&gt;
+ Only a subset of units are accepted by this method.
+ The unit must either have an {@linkplain TemporalUnit#isDurationEstimated() exact duration} or
+ be {@link ChronoUnit#DAYS} which is treated as 24 hours. Other units throw an exception.
+@param {Number} amount  the amount of the duration, measured in terms of the unit, positive or negative
+@param {Object {TemporalUnit}} unit  the unit that the duration is measured in, must have an exact duration, not null
+@return {Object {java.time.Duration}} a {@code Duration}, not null
+@throws DateTimeException if the period unit has an estimated duration
+@throws ArithmeticException if a numeric overflow occurs
+*/
+of : function(  ) {},
+
+<span id='java-time-Duration-method-from'>/**Obtains an instance of {@code Duration} from a temporal amount.
+</span> &lt;p&gt;
+ This obtains a duration based on the specified amount.
+ A {@code TemporalAmount} represents an  amount of time, which may be
+ date-based or time-based, which this factory extracts to a duration.
+ &lt;p&gt;
+ The conversion loops around the set of units from the amount and uses
+ the {@linkplain TemporalUnit#getDuration() duration} of the unit to
+ calculate the total {@code Duration}.
+ Only a subset of units are accepted by this method. The unit must either
+ have an {@linkplain TemporalUnit#isDurationEstimated() exact duration}
+ or be {@link ChronoUnit#DAYS} which is treated as 24 hours.
+ If any other units are found then an exception is thrown.
+@param {Object {TemporalAmount}} amount  the temporal amount to convert, not null
+@return {Object {java.time.Duration}} the equivalent duration, not null
+@throws DateTimeException if unable to convert to a {@code Duration}
+@throws ArithmeticException if numeric overflow occurs
+*/
+from : function(  ) {},
+
+<span id='java-time-Duration-method-parse'>/**Obtains a {@code Duration} from a text string such as {@code PnDTnHnMn.nS}.
+</span> &lt;p&gt;
+ This will parse a textual representation of a duration, including the
+ string produced by {@code toString()}. The formats accepted are based
+ on the ISO-8601 duration format {@code PnDTnHnMn.nS} with days
+ considered to be exactly 24 hours.
+ &lt;p&gt;
+ The string starts with an optional sign, denoted by the ASCII negative
+ or positive symbol. If negative, the whole period is negated.
+ The ASCII letter &quot;P&quot; is next in upper or lower case.
+ There are then four sections, each consisting of a number and a suffix.
+ The sections have suffixes in ASCII of &quot;D&quot;, &quot;H&quot;, &quot;M&quot; and &quot;S&quot; for
+ days, hours, minutes and seconds, accepted in upper or lower case.
+ The suffixes must occur in order. The ASCII letter &quot;T&quot; must occur before
+ the first occurrence, if any, of an hour, minute or second section.
+ At least one of the four sections must be present, and if &quot;T&quot; is present
+ there must be at least one section after the &quot;T&quot;.
+ The number part of each section must consist of one or more ASCII digits.
+ The number may be prefixed by the ASCII negative or positive symbol.
+ The number of days, hours and minutes must parse to an {@code long}.
+ The number of seconds must parse to an {@code long} with optional fraction.
+ The decimal point may be either a dot or a comma.
+ The fractional part may have from zero to 9 digits.
+ &lt;p&gt;
+ The leading plus/minus sign, and negative values for other units are
+ not part of the ISO-8601 standard.
+ &lt;p&gt;
+ Examples:
+ &lt;pre&gt;
+    &quot;PT20.345S&quot; -- parses as &quot;20.345 seconds&quot;
+    &quot;PT15M&quot;     -- parses as &quot;15 minutes&quot; (where a minute is 60 seconds)
+    &quot;PT10H&quot;     -- parses as &quot;10 hours&quot; (where an hour is 3600 seconds)
+    &quot;P2D&quot;       -- parses as &quot;2 days&quot; (where a day is 24 hours or 86400 seconds)
+    &quot;P2DT3H4M&quot;  -- parses as &quot;2 days, 3 hours and 4 minutes&quot;
+    &quot;P-6H3M&quot;    -- parses as &quot;-6 hours and +3 minutes&quot;
+    &quot;-P6H3M&quot;    -- parses as &quot;-6 hours and -3 minutes&quot;
+    &quot;-P-6H+3M&quot;  -- parses as &quot;+6 hours and -3 minutes&quot;
+ &lt;/pre&gt;
+@param {Object {CharSequence}} text  the text to parse, not null
+@return {Object {java.time.Duration}} the parsed duration, not null
+@throws DateTimeParseException if the text cannot be parsed to a duration
+*/
+parse : function(  ) {},
+
+<span id='java-time-Duration-method-between'>/**Obtains a {@code Duration} representing the duration between two temporal objects.
+</span> &lt;p&gt;
+ This calculates the duration between two temporal objects. If the objects
+ are of different types, then the duration is calculated based on the type
+ of the first object. For example, if the first argument is a {@code LocalTime}
+ then the second argument is converted to a {@code LocalTime}.
+ &lt;p&gt;
+ The specified temporal objects must support the {@link ChronoUnit#SECONDS SECONDS} unit.
+ For full accuracy, either the {@link ChronoUnit#NANOS NANOS} unit or the
+ {@link ChronoField#NANO_OF_SECOND NANO_OF_SECOND} field should be supported.
+ &lt;p&gt;
+ The result of this method can be a negative period if the end is before the start.
+ To guarantee to obtain a positive duration call {@link #abs}() on the result.
+@param {Object {Temporal}} startInclusive  the start instant, inclusive, not null
+@param {Object {Temporal}} endExclusive  the end instant, exclusive, not null
+@return {Object {java.time.Duration}} a {@code Duration}, not null
+@throws DateTimeException if the seconds between the temporals cannot be obtained
+@throws ArithmeticException if the calculation exceeds the capacity of {@code Duration}
+*/
+between : function(  ) {},
+
+<span id='java-time-Duration-method-get'>/**Gets the value of the requested unit.
+</span> &lt;p&gt;
+ This returns a value for each of the two supported units,
+ {@link ChronoUnit#SECONDS SECONDS} and {@link ChronoUnit#NANOS NANOS}.
+ All other units throw an exception.
+@param {Object {TemporalUnit}} unit the {@code TemporalUnit} for which to return the value
+@return {Number} the long value of the unit
+@throws DateTimeException if the unit is not supported
+@throws UnsupportedTemporalTypeException if the unit is not supported
+*/
+get : function(  ) {},
+
+<span id='java-time-Duration-method-getUnits'>/**Gets the set of units supported by this duration.
+</span> &lt;p&gt;
+ The supported units are {@link ChronoUnit#SECONDS SECONDS},
+ and {@link ChronoUnit#NANOS NANOS}.
+ They are returned in the order seconds, nanos.
+ &lt;p&gt;
+ This set can be used in conjunction with {@link #get}(TemporalUnit)
+ to access the entire state of the duration.
+@return {Object {java.util.List}} a list containing the seconds and nanos units, not null
+*/
+getUnits : function(  ) {},
+
+<span id='java-time-Duration-method-isZero'>/**Checks if this duration is zero length.
+</span> &lt;p&gt;
+ A {@code Duration} represents a directed distance between two points on
+ the time-line and can therefore be positive, zero or negative.
+ This method checks whether the length is zero.
+@return {Boolean} true if this duration has a total length equal to zero
+*/
+isZero : function(  ) {},
+
+<span id='java-time-Duration-method-isNegative'>/**Checks if this duration is negative, excluding zero.
+</span> &lt;p&gt;
+ A {@code Duration} represents a directed distance between two points on
+ the time-line and can therefore be positive, zero or negative.
+ This method checks whether the length is less than zero.
+@return {Boolean} true if this duration has a total length less than zero
+*/
+isNegative : function(  ) {},
+
+<span id='java-time-Duration-method-getSeconds'>/**Gets the number of seconds in this duration.
+</span> &lt;p&gt;
+ The length of the duration is stored using two fields - seconds and nanoseconds.
+ The nanoseconds part is a value from 0 to 999,999,999 that is an adjustment to
+ the length in seconds.
+ The total duration is defined by calling this method and {@link #getNano}().
+ &lt;p&gt;
+ A {@code Duration} represents a directed distance between two points on the time-line.
+ A negative duration is expressed by the negative sign of the seconds part.
+ A duration of -1 nanosecond is stored as -1 seconds plus 999,999,999 nanoseconds.
+@return {Number} the whole seconds part of the length of the duration, positive or negative
+*/
+getSeconds : function(  ) {},
+
+<span id='java-time-Duration-method-getNano'>/**Gets the number of nanoseconds within the second in this duration.
+</span> &lt;p&gt;
+ The length of the duration is stored using two fields - seconds and nanoseconds.
+ The nanoseconds part is a value from 0 to 999,999,999 that is an adjustment to
+ the length in seconds.
+ The total duration is defined by calling this method and {@link #getSeconds}().
+ &lt;p&gt;
+ A {@code Duration} represents a directed distance between two points on the time-line.
+ A negative duration is expressed by the negative sign of the seconds part.
+ A duration of -1 nanosecond is stored as -1 seconds plus 999,999,999 nanoseconds.
+@return {Number} the nanoseconds within the second part of the length of the duration, from 0 to 999,999,999
+*/
+getNano : function(  ) {},
+
+<span id='java-time-Duration-method-withSeconds'>/**Returns a copy of this duration with the specified amount of seconds.
+</span> &lt;p&gt;
+ This returns a duration with the specified seconds, retaining the
+ nano-of-second part of this duration.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} seconds  the seconds to represent, may be negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this period with the requested seconds, not null
+*/
+withSeconds : function(  ) {},
+
+<span id='java-time-Duration-method-withNanos'>/**Returns a copy of this duration with the specified nano-of-second.
+</span> &lt;p&gt;
+ This returns a duration with the specified nano-of-second, retaining the
+ seconds part of this duration.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} nanoOfSecond  the nano-of-second to represent, from 0 to 999,999,999
+@return {Object {java.time.Duration}} a {@code Duration} based on this period with the requested nano-of-second, not null
+@throws DateTimeException if the nano-of-second is invalid
+*/
+withNanos : function(  ) {},
+
+<span id='java-time-Duration-method-plus'>/**Returns a copy of this duration with the specified duration added.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Object {Duration}} duration  the duration to add, positive or negative, not null
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified duration added, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+plus : function(  ) {},
+
+<span id='java-time-Duration-method-plus'>/**Returns a copy of this duration with the specified duration added.
+</span> &lt;p&gt;
+ The duration amount is measured in terms of the specified unit.
+ Only a subset of units are accepted by this method.
+ The unit must either have an {@linkplain TemporalUnit#isDurationEstimated() exact duration} or
+ be {@link ChronoUnit#DAYS} which is treated as 24 hours. Other units throw an exception.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} amountToAdd  the amount to add, measured in terms of the unit, positive or negative
+@param {Object {TemporalUnit}} unit  the unit that the amount is measured in, must have an exact duration, not null
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified duration added, not null
+@throws UnsupportedTemporalTypeException if the unit is not supported
+@throws ArithmeticException if numeric overflow occurs
+*/
+plus : function(  ) {},
+
+<span id='java-time-Duration-method-plusDays'>/**Returns a copy of this duration with the specified duration in standard 24 hour days added.
+</span> &lt;p&gt;
+ The number of days is multiplied by 86400 to obtain the number of seconds to add.
+ This is based on the standard definition of a day as 24 hours.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} daysToAdd  the days to add, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified days added, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+plusDays : function(  ) {},
+
+<span id='java-time-Duration-method-plusHours'>/**Returns a copy of this duration with the specified duration in hours added.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} hoursToAdd  the hours to add, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified hours added, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+plusHours : function(  ) {},
+
+<span id='java-time-Duration-method-plusMinutes'>/**Returns a copy of this duration with the specified duration in minutes added.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} minutesToAdd  the minutes to add, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified minutes added, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+plusMinutes : function(  ) {},
+
+<span id='java-time-Duration-method-plusSeconds'>/**Returns a copy of this duration with the specified duration in seconds added.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} secondsToAdd  the seconds to add, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified seconds added, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+plusSeconds : function(  ) {},
+
+<span id='java-time-Duration-method-plusMillis'>/**Returns a copy of this duration with the specified duration in milliseconds added.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} millisToAdd  the milliseconds to add, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified milliseconds added, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+plusMillis : function(  ) {},
+
+<span id='java-time-Duration-method-plusNanos'>/**Returns a copy of this duration with the specified duration in nanoseconds added.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} nanosToAdd  the nanoseconds to add, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified nanoseconds added, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+plusNanos : function(  ) {},
+
+<span id='java-time-Duration-method-minus'>/**Returns a copy of this duration with the specified duration subtracted.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Object {Duration}} duration  the duration to subtract, positive or negative, not null
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified duration subtracted, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+minus : function(  ) {},
+
+<span id='java-time-Duration-method-minus'>/**Returns a copy of this duration with the specified duration subtracted.
+</span> &lt;p&gt;
+ The duration amount is measured in terms of the specified unit.
+ Only a subset of units are accepted by this method.
+ The unit must either have an {@linkplain TemporalUnit#isDurationEstimated() exact duration} or
+ be {@link ChronoUnit#DAYS} which is treated as 24 hours. Other units throw an exception.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} amountToSubtract  the amount to subtract, measured in terms of the unit, positive or negative
+@param {Object {TemporalUnit}} unit  the unit that the amount is measured in, must have an exact duration, not null
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified duration subtracted, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+minus : function(  ) {},
+
+<span id='java-time-Duration-method-minusDays'>/**Returns a copy of this duration with the specified duration in standard 24 hour days subtracted.
+</span> &lt;p&gt;
+ The number of days is multiplied by 86400 to obtain the number of seconds to subtract.
+ This is based on the standard definition of a day as 24 hours.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} daysToSubtract  the days to subtract, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified days subtracted, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+minusDays : function(  ) {},
+
+<span id='java-time-Duration-method-minusHours'>/**Returns a copy of this duration with the specified duration in hours subtracted.
+</span> &lt;p&gt;
+ The number of hours is multiplied by 3600 to obtain the number of seconds to subtract.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} hoursToSubtract  the hours to subtract, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified hours subtracted, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+minusHours : function(  ) {},
+
+<span id='java-time-Duration-method-minusMinutes'>/**Returns a copy of this duration with the specified duration in minutes subtracted.
+</span> &lt;p&gt;
+ The number of hours is multiplied by 60 to obtain the number of seconds to subtract.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} minutesToSubtract  the minutes to subtract, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified minutes subtracted, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+minusMinutes : function(  ) {},
+
+<span id='java-time-Duration-method-minusSeconds'>/**Returns a copy of this duration with the specified duration in seconds subtracted.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} secondsToSubtract  the seconds to subtract, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified seconds subtracted, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+minusSeconds : function(  ) {},
+
+<span id='java-time-Duration-method-minusMillis'>/**Returns a copy of this duration with the specified duration in milliseconds subtracted.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} millisToSubtract  the milliseconds to subtract, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified milliseconds subtracted, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+minusMillis : function(  ) {},
+
+<span id='java-time-Duration-method-minusNanos'>/**Returns a copy of this duration with the specified duration in nanoseconds subtracted.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} nanosToSubtract  the nanoseconds to subtract, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the specified nanoseconds subtracted, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+minusNanos : function(  ) {},
+
+<span id='java-time-Duration-method-multipliedBy'>/**Returns a copy of this duration multiplied by the scalar.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} multiplicand  the value to multiply the duration by, positive or negative
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration multiplied by the specified scalar, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+multipliedBy : function(  ) {},
+
+<span id='java-time-Duration-method-dividedBy'>/**Returns a copy of this duration divided by the specified value.
+</span> &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Number} divisor  the value to divide the duration by, positive or negative, not zero
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration divided by the specified divisor, not null
+@throws ArithmeticException if the divisor is zero or if numeric overflow occurs
+*/
+dividedBy : function(  ) {},
+
+<span id='java-time-Duration-method-negated'>/**Returns a copy of this duration with the length negated.
+</span> &lt;p&gt;
+ This method swaps the sign of the total length of this duration.
+ For example, {@code PT1.3S} will be returned as {@code PT-1.3S}.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with the amount negated, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+negated : function(  ) {},
+
+<span id='java-time-Duration-method-abs'>/**Returns a copy of this duration with a positive length.
+</span> &lt;p&gt;
+ This method returns a positive duration by effectively removing the sign from any negative total length.
+ For example, {@code PT-1.3S} will be returned as {@code PT1.3S}.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@return {Object {java.time.Duration}} a {@code Duration} based on this duration with an absolute length, not null
+@throws ArithmeticException if numeric overflow occurs
+*/
+abs : function(  ) {},
+
+<span id='java-time-Duration-method-addTo'>/**Adds this duration to the specified temporal object.
+</span> &lt;p&gt;
+ This returns a temporal object of the same observable type as the input
+ with this duration added.
+ &lt;p&gt;
+ In most cases, it is clearer to reverse the calling pattern by using
+ {@link Temporal#plus(TemporalAmount)}.
+ &lt;pre&gt;
+   // these two lines are equivalent, but the second approach is recommended
+   dateTime = thisDuration.addTo(dateTime);
+   dateTime = dateTime.plus(thisDuration);
+ &lt;/pre&gt;
+ &lt;p&gt;
+ The calculation will add the seconds, then nanos.
+ Only non-zero amounts will be added.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Object {Temporal}} temporal  the temporal object to adjust, not null
+@return {Object {java.time.temporal.Temporal}} an object of the same type with the adjustment made, not null
+@throws DateTimeException if unable to add
+@throws ArithmeticException if numeric overflow occurs
+*/
+addTo : function(  ) {},
+
+<span id='java-time-Duration-method-subtractFrom'>/**Subtracts this duration from the specified temporal object.
+</span> &lt;p&gt;
+ This returns a temporal object of the same observable type as the input
+ with this duration subtracted.
+ &lt;p&gt;
+ In most cases, it is clearer to reverse the calling pattern by using
+ {@link Temporal#minus(TemporalAmount)}.
+ &lt;pre&gt;
+   // these two lines are equivalent, but the second approach is recommended
+   dateTime = thisDuration.subtractFrom(dateTime);
+   dateTime = dateTime.minus(thisDuration);
+ &lt;/pre&gt;
+ &lt;p&gt;
+ The calculation will subtract the seconds, then nanos.
+ Only non-zero amounts will be added.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@param {Object {Temporal}} temporal  the temporal object to adjust, not null
+@return {Object {java.time.temporal.Temporal}} an object of the same type with the adjustment made, not null
+@throws DateTimeException if unable to subtract
+@throws ArithmeticException if numeric overflow occurs
+*/
+subtractFrom : function(  ) {},
+
+<span id='java-time-Duration-method-toDays'>/**Gets the number of days in this duration.
+</span> &lt;p&gt;
+ This returns the total number of days in the duration by dividing the
+ number of seconds by 86400.
+ This is based on the standard definition of a day as 24 hours.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@return {Number} the number of days in the duration, may be negative
+*/
+toDays : function(  ) {},
+
+<span id='java-time-Duration-method-toHours'>/**Gets the number of hours in this duration.
+</span> &lt;p&gt;
+ This returns the total number of hours in the duration by dividing the
+ number of seconds by 3600.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@return {Number} the number of hours in the duration, may be negative
+*/
+toHours : function(  ) {},
+
+<span id='java-time-Duration-method-toMinutes'>/**Gets the number of minutes in this duration.
+</span> &lt;p&gt;
+ This returns the total number of minutes in the duration by dividing the
+ number of seconds by 60.
+ &lt;p&gt;
+ This instance is immutable and unaffected by this method call.
+@return {Number} the number of minutes in the duration, may be negative
+*/
+toMinutes : function(  ) {},
+
+<span id='java-time-Duration-method-toMillis'>/**Converts this duration to the total length in milliseconds.
+</span> &lt;p&gt;
+ If this duration is too large to fit in a {@code long} milliseconds, then an
+ exception is thrown.
+ &lt;p&gt;
+ If this duration has greater than millisecond precision, then the conversion
+ will drop any excess precision information as though the amount in nanoseconds
+ was subject to integer division by one million.
+@return {Number} the total length of the duration in milliseconds
+@throws ArithmeticException if numeric overflow occurs
+*/
+toMillis : function(  ) {},
+
+<span id='java-time-Duration-method-toNanos'>/**Converts this duration to the total length in nanoseconds expressed as a {@code long}.
+</span> &lt;p&gt;
+ If this duration is too large to fit in a {@code long} nanoseconds, then an
+ exception is thrown.
+@return {Number} the total length of the duration in nanoseconds
+@throws ArithmeticException if numeric overflow occurs
+*/
+toNanos : function(  ) {},
+
+<span id='java-time-Duration-method-compareTo'>/**Compares this duration to the specified {@code Duration}.
+</span> &lt;p&gt;
+ The comparison is based on the total length of the durations.
+ It is &quot;consistent with equals&quot;, as defined by {@link Comparable}.
+@param {Object {Duration}} otherDuration  the other duration to compare to, not null
+@return {Number} the comparator value, negative if less, positive if greater
+*/
+compareTo : function(  ) {},
+
+<span id='java-time-Duration-method-equals'>/**Checks if this duration is equal to the specified {@code Duration}.
+</span> &lt;p&gt;
+ The comparison is based on the total length of the durations.
+@param {Object {Object}} otherDuration  the other duration, null returns false
+@return {Boolean} true if the other duration is equal to this one
+*/
+equals : function(  ) {},
+
+<span id='java-time-Duration-method-hashCode'>/**A hash code for this duration.
+</span>@return {Number} a suitable hash code
+*/
+hashCode : function(  ) {},
+
+<span id='java-time-Duration-method-toString'>/**A string representation of this duration using ISO-8601 seconds
+</span> based representation, such as {@code PT8H6M12.345S}.
+ &lt;p&gt;
+ The format of the returned string will be {@code PTnHnMnS}, where n is
+ the relevant hours, minutes or seconds part of the duration.
+ Any fractional seconds are placed after a decimal point i the seconds section.
+ If a section has a zero value, it is omitted.
+ The hours, minutes and seconds will all have the same sign.
+ &lt;p&gt;
+ Examples:
+ &lt;pre&gt;
+    &quot;20.345 seconds&quot;                 -- &quot;PT20.345S
+    &quot;15 minutes&quot; (15 * 60 seconds)   -- &quot;PT15M&quot;
+    &quot;10 hours&quot; (10 * 3600 seconds)   -- &quot;PT10H&quot;
+    &quot;2 days&quot; (2 * 86400 seconds)     -- &quot;PT48H&quot;
+ &lt;/pre&gt;
+ Note that multiples of 24 hours are not output as days to avoid confusion
+ with {@code Period}.
+@return {String} an ISO-8601 representation of this duration, not null
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

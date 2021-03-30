@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xml-sax-ext-DefaultHandler2'>/**@class org.xml.sax.ext.DefaultHandler2
+</span> implements org.xml.sax.ext.LexicalHandler
+
+ implements org.xml.sax.ext.DeclHandler
+
+ implements org.xml.sax.ext.EntityResolver2
+
+@extends org.xml.sax.helpers.DefaultHandler
+
+ This class extends the SAX2 base handler class to support the
+ SAX2 {@link org.xml.sax.ext.LexicalHandler}, {@link org.xml.sax.ext.DeclHandler}, and
+ {@link org.xml.sax.ext.EntityResolver2} extensions.  Except for overriding the
+ original SAX1 {@link DefaultHandler#resolveEntity resolveEntity()}
+ method the added handler methods just return.  Subclassers may
+ override everything on a method-by-method basis.
+
+ &lt;blockquote&gt;
+ &lt;em&gt;This module, both source code and documentation, is in the
+ Public Domain, and comes with &lt;strong&gt;NO WARRANTY&lt;/strong&gt;.&lt;/em&gt;
+ &lt;/blockquote&gt;
+
+ &lt;p&gt; &lt;em&gt;Note:&lt;/em&gt; this class might yet learn that the
+ &lt;em&gt;ContentHandler.setDocumentLocator()&lt;/em&gt; call might be passed a
+ {@link org.xml.sax.ext.Locator2} object, and that the
+ &lt;em&gt;ContentHandler.startElement()&lt;/em&gt; call might be passed a
+ {@link org.xml.sax.ext.Attributes2} object.
+
+ @since SAX 2.0 (extensions 1.1 alpha)
+ @author David Brownell
+ @version TBS
+*/
+var DefaultHandler2 = {
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-startCDATA'>/**
+</span>*/
+startCDATA : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-endCDATA'>/**
+</span>*/
+endCDATA : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-startDTD'>/**
+</span>*/
+startDTD : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-endDTD'>/**
+</span>*/
+endDTD : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-startEntity'>/**
+</span>*/
+startEntity : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-endEntity'>/**
+</span>*/
+endEntity : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-comment'>/**
+</span>*/
+comment : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-attributeDecl'>/**
+</span>*/
+attributeDecl : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-elementDecl'>/**
+</span>*/
+elementDecl : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-externalEntityDecl'>/**
+</span>*/
+externalEntityDecl : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-internalEntityDecl'>/**
+</span>*/
+internalEntityDecl : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-getExternalSubset'>/**Tells the parser that if no external subset has been declared
+</span> in the document text, none should be used.
+@param {String} name Identifies the document root element.  This name comes
+    from a DOCTYPE declaration (where available) or from the actual
+    root element. The parameter is ignored.
+@param {String} baseURI The document's base URI, serving as an additional
+    hint for selecting the external subset.  This is always an absolute
+    URI, unless it is null because the XMLReader was given an InputSource
+    without one. The parameter is ignored.
+@return {Object {org.xml.sax.InputSource}} null (always).
+@exception SAXException Any SAX exception, possibly wrapping
+    another exception.
+@exception IOException Probably indicating a failure to create
+    a new InputStream or Reader, or an illegal URL.
+*/
+getExternalSubset : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-resolveEntity'>/**Tells the parser to resolve the systemId against the baseURI
+</span> and read the entity text from that resulting absolute URI.
+ Note that because the older
+ {@link DefaultHandler#resolveEntity DefaultHandler.resolveEntity()},
+ method is overridden to call this one, this method may sometimes
+ be invoked with null &lt;em&gt;name&lt;/em&gt; and &lt;em&gt;baseURI&lt;/em&gt;, and
+ with the &lt;em&gt;systemId&lt;/em&gt; already absolutized.
+@param {String} name Identifies the external entity being resolved.
+    Either &quot;[dtd]&quot; for the external subset, or a name starting
+    with &quot;%&quot; to indicate a parameter entity, or else the name of
+    a general entity.  This is never null when invoked by a SAX2
+    parser.
+@param {String} publicId The public identifier of the external entity being
+    referenced (normalized as required by the XML specification), or
+    null if none was supplied.
+@param {String} baseURI The URI with respect to which relative systemIDs
+    are interpreted.  This is always an absolute URI, unless it is
+    null (likely because the XMLReader was given an InputSource without
+  one).  This URI is defined by the XML specification to be the one
+    associated with the &quot;&amp;lt;&quot; starting the relevant declaration.
+@param {String} systemId The system identifier of the external entity
+    being referenced; either a relative or absolute URI.
+  This is never null when invoked by a SAX2 parser; only declared
+    entities, and any external subset, are resolved by such parsers.
+@return {Object {org.xml.sax.InputSource}} An InputSource object describing the new input source.
+@exception SAXException Any SAX exception, possibly wrapping
+    another exception.
+@exception IOException Probably indicating a failure to create
+    a new InputStream or Reader, or an illegal URL.
+*/
+resolveEntity : function(  ) {},
+
+<span id='org-xml-sax-ext-DefaultHandler2-method-resolveEntity'>/**Invokes
+</span> {@link org.xml.sax.ext.EntityResolver2#resolveEntity org.xml.sax.ext.EntityResolver2.resolveEntity()}
+ with null entity name and base URI.
+ You only need to override that method to use this class.
+@param {String} publicId The public identifier of the external entity being
+    referenced (normalized as required by the XML specification), or
+    null if none was supplied.
+@param {String} systemId The system identifier of the external entity
+    being referenced; either a relative or absolute URI.
+  This is never null when invoked by a SAX2 parser; only declared
+    entities, and any external subset, are resolved by such parsers.
+@return {Object {org.xml.sax.InputSource}} An InputSource object describing the new input source.
+@exception SAXException Any SAX exception, possibly wrapping
+    another exception.
+@exception IOException Probably indicating a failure to create
+    a new InputStream or Reader, or an illegal URL.
+*/
+resolveEntity : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

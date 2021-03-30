@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-invoke-MethodHandles-Lookup'>/**@class java.lang.invoke.MethodHandles.Lookup
+</span>@extends java.lang.Object
+
+ A &lt;em&gt;lookup object&lt;/em&gt; is a factory for creating method handles,
+ when the creation requires access checking.
+ Method handles do not perform
+ access checks when they are called, but rather when they are created.
+ Therefore, method handle access
+ restrictions must be enforced when a method handle is created.
+ The caller class against which those restrictions are enforced
+ is known as the {@linkplain #lookupClass lookup class}.
+ &lt;p&gt;
+ A lookup class which needs to create method handles will call
+ {@link #lookup java.lang.invoke.MethodHandles.lookup} to create a factory for itself.
+ When the {@code Lookup} factory object is created, the identity of the lookup class is
+ determined, and securely stored in the {@code Lookup} object.
+ The lookup class (or its delegates) may then use factory methods
+ on the {@code Lookup} object to create method handles for access-checked members.
+ This includes all methods, constructors, and fields which are allowed to the lookup class,
+ even private ones.
+
+ &lt;h1&gt;&lt;a name=&quot;lookups&quot;&gt;&lt;/a&gt;Lookup Factory Methods&lt;/h1&gt;
+ The factory methods on a {@code Lookup} object correspond to all major
+ use cases for methods, constructors, and fields.
+ Each method handle created by a factory method is the functional
+ equivalent of a particular &lt;em&gt;bytecode behavior&lt;/em&gt;.
+ (Bytecode behaviors are described in section 5.4.3.5 of the Java Virtual Machine Specification.)
+ Here is a summary of the correspondence between these factory methods and
+ the behavior the resulting method handles:
+ &lt;table border=1 cellpadding=5 summary=&quot;lookup method behaviors&quot;&gt;
+ &lt;tr&gt;
+     &lt;th&gt;&lt;a name=&quot;equiv&quot;&gt;&lt;/a&gt;lookup expression&lt;/th&gt;
+     &lt;th&gt;member&lt;/th&gt;
+     &lt;th&gt;bytecode behavior&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#findGetter lookup.findGetter(C.class,&quot;f&quot;,FT.class)}&lt;/td&gt;
+     &lt;td&gt;{@code FT f;}&lt;/td&gt;&lt;td&gt;{@code (T) this.f;}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#findStaticGetter lookup.findStaticGetter(C.class,&quot;f&quot;,FT.class)}&lt;/td&gt;
+     &lt;td&gt;{@code static}&lt;br&gt;{@code FT f;}&lt;/td&gt;&lt;td&gt;{@code (T) C.f;}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#findSetter lookup.findSetter(C.class,&quot;f&quot;,FT.class)}&lt;/td&gt;
+     &lt;td&gt;{@code FT f;}&lt;/td&gt;&lt;td&gt;{@code this.f = x;}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#findStaticSetter lookup.findStaticSetter(C.class,&quot;f&quot;,FT.class)}&lt;/td&gt;
+     &lt;td&gt;{@code static}&lt;br&gt;{@code FT f;}&lt;/td&gt;&lt;td&gt;{@code C.f = arg;}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#findVirtual lookup.findVirtual(C.class,&quot;m&quot;,MT)}&lt;/td&gt;
+     &lt;td&gt;{@code T m(A*);}&lt;/td&gt;&lt;td&gt;{@code (T) this.m(arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#findStatic lookup.findStatic(C.class,&quot;m&quot;,MT)}&lt;/td&gt;
+     &lt;td&gt;{@code static}&lt;br&gt;{@code T m(A*);}&lt;/td&gt;&lt;td&gt;{@code (T) C.m(arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#findSpecial lookup.findSpecial(C.class,&quot;m&quot;,MT,this.class)}&lt;/td&gt;
+     &lt;td&gt;{@code T m(A*);}&lt;/td&gt;&lt;td&gt;{@code (T) super.m(arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#findConstructor lookup.findConstructor(C.class,MT)}&lt;/td&gt;
+     &lt;td&gt;{@code C(A*);}&lt;/td&gt;&lt;td&gt;{@code new C(arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#unreflectGetter lookup.unreflectGetter(aField)}&lt;/td&gt;
+     &lt;td&gt;({@code static})?&lt;br&gt;{@code FT f;}&lt;/td&gt;&lt;td&gt;{@code (FT) aField.get(thisOrNull);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#unreflectSetter lookup.unreflectSetter(aField)}&lt;/td&gt;
+     &lt;td&gt;({@code static})?&lt;br&gt;{@code FT f;}&lt;/td&gt;&lt;td&gt;{@code aField.set(thisOrNull, arg);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#unreflect lookup.unreflect(aMethod)}&lt;/td&gt;
+     &lt;td&gt;({@code static})?&lt;br&gt;{@code T m(A*);}&lt;/td&gt;&lt;td&gt;{@code (T) aMethod.invoke(thisOrNull, arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#unreflectConstructor lookup.unreflectConstructor(aConstructor)}&lt;/td&gt;
+     &lt;td&gt;{@code C(A*);}&lt;/td&gt;&lt;td&gt;{@code (C) aConstructor.newInstance(arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@link java.lang.invoke.MethodHandles.Lookup#unreflect lookup.unreflect(aMethod)}&lt;/td&gt;
+     &lt;td&gt;({@code static})?&lt;br&gt;{@code T m(A*);}&lt;/td&gt;&lt;td&gt;{@code (T) aMethod.invoke(thisOrNull, arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+
+ Here, the type {@code C} is the class or interface being searched for a member,
+ documented as a parameter named {@code refc} in the lookup methods.
+ The method type {@code MT} is composed from the return type {@code T}
+ and the sequence of argument types {@code A*}.
+ The constructor also has a sequence of argument types {@code A*} and
+ is deemed to return the newly-created object of type {@code C}.
+ Both {@code MT} and the field type {@code FT} are documented as a parameter named {@code type}.
+ The formal parameter {@code this} stands for the self-reference of type {@code C};
+ if it is present, it is always the leading argument to the method handle invocation.
+ (In the case of some {@code protected} members, {@code this} may be
+ restricted in type to the lookup class; see below.)
+ The name {@code arg} stands for all the other method handle arguments.
+ In the code examples for the Core Reflection API, the name {@code thisOrNull}
+ stands for a null reference if the accessed method or field is static,
+ and {@code this} otherwise.
+ The names {@code aMethod}, {@code aField}, and {@code aConstructor} stand
+ for reflective objects corresponding to the given members.
+ &lt;p&gt;
+ In cases where the given member is of variable arity (i.e., a method or constructor)
+ the returned method handle will also be of {@linkplain java.lang.invoke.MethodHandle#asVarargsCollector variable arity}.
+ In all other cases, the returned method handle will be of fixed arity.
+ &lt;p style=&quot;font-size:smaller;&quot;&gt;
+ &lt;em&gt;Discussion:&lt;/em&gt;
+ The equivalence between looked-up method handles and underlying
+ class members and bytecode behaviors
+ can break down in a few ways:
+ &lt;ul style=&quot;font-size:smaller;&quot;&gt;
+ &lt;li&gt;If {@code C} is not symbolically accessible from the lookup class's loader,
+ the lookup can still succeed, even when there is no equivalent
+ Java expression or bytecoded constant.
+ &lt;li&gt;Likewise, if {@code T} or {@code MT}
+ is not symbolically accessible from the lookup class's loader,
+ the lookup can still succeed.
+ For example, lookups for {@code MethodHandle.invokeExact} and
+ {@code MethodHandle.invoke} will always succeed, regardless of requested type.
+ &lt;li&gt;If there is a security manager installed, it can forbid the lookup
+ on various grounds (&lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;see below&lt;/a&gt;).
+ By contrast, the {@code ldc} instruction on a {@code CONSTANT_MethodHandle}
+ constant is not subject to security manager checks.
+ &lt;li&gt;If the looked-up method has a
+ &lt;a href=&quot;MethodHandle.html#maxarity&quot;&gt;very large arity&lt;/a&gt;,
+ the method handle creation may fail, due to the method handle
+ type having too many parameters.
+ &lt;/ul&gt;
+
+ &lt;h1&gt;&lt;a name=&quot;access&quot;&gt;&lt;/a&gt;Access checking&lt;/h1&gt;
+ Access checks are applied in the factory methods of {@code Lookup},
+ when a method handle is created.
+ This is a key difference from the Core Reflection API, since
+ {@link java.lang.reflect.Method#invoke java.lang.reflect.Method.invoke}
+ performs access checking against every caller, on every call.
+ &lt;p&gt;
+ All access checks start from a {@code Lookup} object, which
+ compares its recorded lookup class against all requests to
+ create method handles.
+ A single {@code Lookup} object can be used to create any number
+ of access-checked method handles, all checked against a single
+ lookup class.
+ &lt;p&gt;
+ A {@code Lookup} object can be shared with other trusted code,
+ such as a metaobject protocol.
+ A shared {@code Lookup} object delegates the capability
+ to create method handles on private members of the lookup class.
+ Even if privileged code uses the {@code Lookup} object,
+ the access checking is confined to the privileges of the
+ original lookup class.
+ &lt;p&gt;
+ A lookup can fail, because
+ the containing class is not accessible to the lookup class, or
+ because the desired class member is missing, or because the
+ desired class member is not accessible to the lookup class, or
+ because the lookup object is not trusted enough to access the member.
+ In any of these cases, a {@code ReflectiveOperationException} will be
+ thrown from the attempted lookup.  The exact class will be one of
+ the following:
+ &lt;ul&gt;
+ &lt;li&gt;NoSuchMethodException &amp;mdash; if a method is requested but does not exist
+ &lt;li&gt;NoSuchFieldException &amp;mdash; if a field is requested but does not exist
+ &lt;li&gt;IllegalAccessException &amp;mdash; if the member exists but an access check fails
+ &lt;/ul&gt;
+ &lt;p&gt;
+ In general, the conditions under which a method handle may be
+ looked up for a method {@code M} are no more restrictive than the conditions
+ under which the lookup class could have compiled, verified, and resolved a call to {@code M}.
+ Where the JVM would raise exceptions like {@code NoSuchMethodError},
+ a method handle lookup will generally raise a corresponding
+ checked exception, such as {@code NoSuchMethodException}.
+ And the effect of invoking the method handle resulting from the lookup
+ is &lt;a href=&quot;MethodHandles.Lookup.html#equiv&quot;&gt;exactly equivalent&lt;/a&gt;
+ to executing the compiled, verified, and resolved call to {@code M}.
+ The same point is true of fields and constructors.
+ &lt;p style=&quot;font-size:smaller;&quot;&gt;
+ &lt;em&gt;Discussion:&lt;/em&gt;
+ Access checks only apply to named and reflected methods,
+ constructors, and fields.
+ Other method handle creation methods, such as
+ {@link java.lang.invoke.MethodHandle#asType java.lang.invoke.MethodHandle.asType},
+ do not require any access checks, and are used
+ independently of any {@code Lookup} object.
+ &lt;p&gt;
+ If the desired member is {@code protected}, the usual JVM rules apply,
+ including the requirement that the lookup class must be either be in the
+ same package as the desired member, or must inherit that member.
+ (See the Java Virtual Machine Specification, sections 4.9.2, 5.4.3.5, and 6.4.)
+ In addition, if the desired member is a non-static field or method
+ in a different package, the resulting method handle may only be applied
+ to objects of the lookup class or one of its subclasses.
+ This requirement is enforced by narrowing the type of the leading
+ {@code this} parameter from {@code C}
+ (which will necessarily be a superclass of the lookup class)
+ to the lookup class itself.
+ &lt;p&gt;
+ The JVM imposes a similar requirement on {@code invokespecial} instruction,
+ that the receiver argument must match both the resolved method &lt;em&gt;and&lt;/em&gt;
+ the current class.  Again, this requirement is enforced by narrowing the
+ type of the leading parameter to the resulting method handle.
+ (See the Java Virtual Machine Specification, section 4.10.1.9.)
+ &lt;p&gt;
+ The JVM represents constructors and static initializer blocks as internal methods
+ with special names ({@code &quot;&lt;init&gt;&quot;} and {@code &quot;&lt;clinit&gt;&quot;}).
+ The internal syntax of invocation instructions allows them to refer to such internal
+ methods as if they were normal methods, but the JVM bytecode verifier rejects them.
+ A lookup of such an internal method will produce a {@code NoSuchMethodException}.
+ &lt;p&gt;
+ In some cases, access between nested classes is obtained by the Java compiler by creating
+ an wrapper method to access a private method of another class
+ in the same top-level declaration.
+ For example, a nested class {@code C.D}
+ can access private members within other related classes such as
+ {@code C}, {@code C.D.E}, or {@code C.B},
+ but the Java compiler may need to generate wrapper methods in
+ those related classes.  In such cases, a {@code Lookup} object on
+ {@code C.E} would be unable to those private members.
+ A workaround for this limitation is the {@link java.lang.invoke.MethodHandles.Lookup#in java.lang.invoke.MethodHandles.Lookup.in} method,
+ which can transform a lookup on {@code C.E} into one on any of those other
+ classes, without special elevation of privilege.
+ &lt;p&gt;
+ The accesses permitted to a given lookup object may be limited,
+ according to its set of {@link #lookupModes lookupModes},
+ to a subset of members normally accessible to the lookup class.
+ For example, the {@link #publicLookup publicLookup}
+ method produces a lookup object which is only allowed to access
+ public members in public classes.
+ The caller sensitive method {@link #lookup lookup}
+ produces a lookup object with full capabilities relative to
+ its caller class, to emulate all supported bytecode behaviors.
+ Also, the {@link java.lang.invoke.MethodHandles.Lookup#in java.lang.invoke.MethodHandles.Lookup.in} method may produce a lookup object
+ with fewer access modes than the original lookup object.
+
+ &lt;p style=&quot;font-size:smaller;&quot;&gt;
+ &lt;a name=&quot;privacc&quot;&gt;&lt;/a&gt;
+ &lt;em&gt;Discussion of private access:&lt;/em&gt;
+ We say that a lookup has &lt;em&gt;private access&lt;/em&gt;
+ if its {@linkplain #lookupModes lookup modes}
+ include the possibility of accessing {@code private} members.
+ As documented in the relevant methods elsewhere,
+ only lookups with private access possess the following capabilities:
+ &lt;ul style=&quot;font-size:smaller;&quot;&gt;
+ &lt;li&gt;access private fields, methods, and constructors of the lookup class
+ &lt;li&gt;create method handles which invoke &lt;a href=&quot;MethodHandles.Lookup.html#callsens&quot;&gt;caller sensitive&lt;/a&gt; methods,
+     such as {@code Class.forName}
+ &lt;li&gt;create method handles which {@link java.lang.invoke.MethodHandles.Lookup#findSpecial emulate invokespecial} instructions
+ &lt;li&gt;avoid &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;package access checks&lt;/a&gt;
+     for classes accessible to the lookup class
+ &lt;li&gt;create {@link java.lang.invoke.MethodHandles.Lookup#in delegated lookup objects} which have private access to other classes
+     within the same package member
+ &lt;/ul&gt;
+ &lt;p style=&quot;font-size:smaller;&quot;&gt;
+ Each of these permissions is a consequence of the fact that a lookup object
+ with private access can be securely traced back to an originating class,
+ whose &lt;a href=&quot;MethodHandles.Lookup.html#equiv&quot;&gt;bytecode behaviors&lt;/a&gt; and Java language access permissions
+ can be reliably determined and emulated by method handles.
+
+ &lt;h1&gt;&lt;a name=&quot;secmgr&quot;&gt;&lt;/a&gt;Security manager interactions&lt;/h1&gt;
+ Although bytecode instructions can only refer to classes in
+ a related class loader, this API can search for methods in any
+ class, as long as a reference to its {@code Class} object is
+ available.  Such cross-loader references are also possible with the
+ Core Reflection API, and are impossible to bytecode instructions
+ such as {@code invokestatic} or {@code getfield}.
+ There is a {@linkplain java.lang.SecurityManager security manager API}
+ to allow applications to check such cross-loader references.
+ These checks apply to both the {@code MethodHandles.Lookup} API
+ and the Core Reflection API
+ (as found on {@link java.lang.Class Class}).
+ &lt;p&gt;
+ If a security manager is present, member lookups are subject to
+ additional checks.
+ From one to three calls are made to the security manager.
+ Any of these calls can refuse access by throwing a
+ {@link java.lang.SecurityException SecurityException}.
+ Define {@code smgr} as the security manager,
+ {@code lookc} as the lookup class of the current lookup object,
+ {@code refc} as the containing class in which the member
+ is being sought, and {@code defc} as the class in which the
+ member is actually defined.
+ The value {@code lookc} is defined as &lt;em&gt;not present&lt;/em&gt;
+ if the current lookup object does not have
+ &lt;a href=&quot;MethodHandles.Lookup.html#privacc&quot;&gt;private access&lt;/a&gt;.
+ The calls are made according to the following rules:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;b&gt;Step 1:&lt;/b&gt;
+     If {@code lookc} is not present, or if its class loader is not
+     the same as or an ancestor of the class loader of {@code refc},
+     then {@link SecurityManager#checkPackageAccess
+     smgr.checkPackageAccess(refcPkg)} is called,
+     where {@code refcPkg} is the package of {@code refc}.
+ &lt;li&gt;&lt;b&gt;Step 2:&lt;/b&gt;
+     If the retrieved member is not public and
+     {@code lookc} is not present, then
+     {@link SecurityManager#checkPermission smgr.checkPermission}
+     with {@code RuntimePermission(&quot;accessDeclaredMembers&quot;)} is called.
+ &lt;li&gt;&lt;b&gt;Step 3:&lt;/b&gt;
+     If the retrieved member is not public,
+     and if {@code lookc} is not present,
+     and if {@code defc} and {@code refc} are different,
+     then {@link SecurityManager#checkPackageAccess
+     smgr.checkPackageAccess(defcPkg)} is called,
+     where {@code defcPkg} is the package of {@code defc}.
+ &lt;/ul&gt;
+ Security checks are performed after other access checks have passed.
+ Therefore, the above rules presuppose a member that is public,
+ or else that is being accessed from a lookup class that has
+ rights to access the member.
+
+ &lt;h1&gt;&lt;a name=&quot;callsens&quot;&gt;&lt;/a&gt;Caller sensitive methods&lt;/h1&gt;
+ A small number of Java methods have a special property called caller sensitivity.
+ A &lt;em&gt;caller-sensitive&lt;/em&gt; method can behave differently depending on the
+ identity of its immediate caller.
+ &lt;p&gt;
+ If a method handle for a caller-sensitive method is requested,
+ the general rules for &lt;a href=&quot;MethodHandles.Lookup.html#equiv&quot;&gt;bytecode behaviors&lt;/a&gt; apply,
+ but they take account of the lookup class in a special way.
+ The resulting method handle behaves as if it were called
+ from an instruction contained in the lookup class,
+ so that the caller-sensitive method detects the lookup class.
+ (By contrast, the invoker of the method handle is disregarded.)
+ Thus, in the case of caller-sensitive methods,
+ different lookup classes may give rise to
+ differently behaving method handles.
+ &lt;p&gt;
+ In cases where the lookup object is
+ {@link #publicLookup publicLookup()},
+ or some other lookup object without
+ &lt;a href=&quot;MethodHandles.Lookup.html#privacc&quot;&gt;private access&lt;/a&gt;,
+ the lookup class is disregarded.
+ In such cases, no caller-sensitive method handle can be created,
+ access is forbidden, and the lookup fails with an
+ {@code IllegalAccessException}.
+ &lt;p style=&quot;font-size:smaller;&quot;&gt;
+ &lt;em&gt;Discussion:&lt;/em&gt;
+ For example, the caller-sensitive method
+ {@link java.lang.Class#forName(String) Class.forName(x)}
+ can return varying classes or throw varying exceptions,
+ depending on the class loader of the class that calls it.
+ A public lookup of {@code Class.forName} will fail, because
+ there is no reasonable way to determine its bytecode behavior.
+ &lt;p style=&quot;font-size:smaller;&quot;&gt;
+ If an application caches method handles for broad sharing,
+ it should use {@code publicLookup()} to create them.
+ If there is a lookup of {@code Class.forName}, it will fail,
+ and the application must take appropriate action in that case.
+ It may be that a later lookup, perhaps during the invocation of a
+ bootstrap method, can incorporate the specific identity
+ of the caller, making the method accessible.
+ &lt;p style=&quot;font-size:smaller;&quot;&gt;
+ The function {@code MethodHandles.lookup} is caller sensitive
+ so that there can be a secure foundation for lookups.
+ Nearly all other methods in the JSR 292 API rely on lookup
+ objects to check access requests.
+*/
+var Lookup = {
+
+<span id='java-lang-invoke-MethodHandles-Lookup-property-PUBLIC'>/**A single-bit mask representing {@code public} access,
+</span>  which may contribute to the result of {@link #lookupModes lookupModes}.
+  The value, {@code 0x01}, happens to be the same as the value of the
+  {@code public} {@linkplain java.lang.reflect.Modifier#PUBLIC modifier bit}.
+*/
+PUBLIC : &quot;1&quot;,
+<span id='java-lang-invoke-MethodHandles-Lookup-property-PRIVATE'>/**A single-bit mask representing {@code private} access,
+</span>  which may contribute to the result of {@link #lookupModes lookupModes}.
+  The value, {@code 0x02}, happens to be the same as the value of the
+  {@code private} {@linkplain java.lang.reflect.Modifier#PRIVATE modifier bit}.
+*/
+PRIVATE : &quot;2&quot;,
+<span id='java-lang-invoke-MethodHandles-Lookup-property-PROTECTED'>/**A single-bit mask representing {@code protected} access,
+</span>  which may contribute to the result of {@link #lookupModes lookupModes}.
+  The value, {@code 0x04}, happens to be the same as the value of the
+  {@code protected} {@linkplain java.lang.reflect.Modifier#PROTECTED modifier bit}.
+*/
+PROTECTED : &quot;4&quot;,
+<span id='java-lang-invoke-MethodHandles-Lookup-property-PACKAGE'>/**A single-bit mask representing {@code package} access (default access),
+</span>  which may contribute to the result of {@link #lookupModes lookupModes}.
+  The value is {@code 0x08}, which does not correspond meaningfully to
+  any particular {@linkplain java.lang.reflect.Modifier modifier bit}.
+*/
+PACKAGE : &quot;8&quot;,
+<span id='java-lang-invoke-MethodHandles-Lookup-method-lookupClass'>/**Tells which class is performing the lookup.  It is this class against
+</span>  which checks are performed for visibility and access permissions.
+  &lt;p&gt;
+  The class implies a maximum level of access permission,
+  but the permissions may be additionally limited by the bitmask
+  {@link #lookupModes lookupModes}, which controls whether non-public members
+  can be accessed.
+@return {Object {java.lang.Class}} the lookup class, on behalf of which this lookup object finds members
+*/
+lookupClass : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-lookupModes'>/**Tells which access-protection classes of members this lookup object can produce.
+</span>  The result is a bit-mask of the bits
+  {@linkplain #PUBLIC PUBLIC (0x01)},
+  {@linkplain #PRIVATE PRIVATE (0x02)},
+  {@linkplain #PROTECTED PROTECTED (0x04)},
+  and {@linkplain #PACKAGE PACKAGE (0x08)}.
+  &lt;p&gt;
+  A freshly-created lookup object
+  on the {@linkplain java.lang.invoke.MethodHandles#lookup() caller's class}
+  has all possible bits set, since the caller class can access all its own members.
+  A lookup object on a new lookup class
+  {@linkplain java.lang.invoke.MethodHandles.Lookup#in created from a previous lookup object}
+  may have some mode bits set to zero.
+  The purpose of this is to restrict access via the new lookup object,
+  so that it can access only names which can be reached by the original
+  lookup object, and also by the new lookup class.
+@return {Number} the lookup modes, which limit the kinds of access performed by this lookup object
+*/
+lookupModes : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-in'>/**Creates a lookup on the specified new lookup class.
+</span> The resulting object will report the specified
+ class as its own {@link #lookupClass lookupClass}.
+ &lt;p&gt;
+ However, the resulting {@code Lookup} object is guaranteed
+ to have no more access capabilities than the original.
+ In particular, access capabilities can be lost as follows:&lt;ul&gt;
+ &lt;li&gt;If the new lookup class differs from the old one,
+ protected members will not be accessible by virtue of inheritance.
+ (Protected members may continue to be accessible because of package sharing.)
+ &lt;li&gt;If the new lookup class is in a different package
+ than the old one, protected and default (package) members will not be accessible.
+ &lt;li&gt;If the new lookup class is not within the same package member
+ as the old one, private members will not be accessible.
+ &lt;li&gt;If the new lookup class is not accessible to the old lookup class,
+ then no members, not even public members, will be accessible.
+ (In all other cases, public members will continue to be accessible.)
+ &lt;/ul&gt;
+@param {Object {java.lang.Class}} requestedLookupClass the desired lookup class for the new lookup object
+@return {Object {java.lang.invoke.MethodHandles.Lookup}} a lookup object which reports the desired lookup class
+@throws NullPointerException if the argument is null
+*/
+in : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-toString'>/**Displays the name of the class from which lookups are to be made.
+</span> (The name is the one reported by {@link java.lang.Class#getName() Class.getName}.)
+ If there are restrictions on the access permitted to this lookup,
+ this is indicated by adding a suffix to the class name, consisting
+ of a slash and a keyword.  The keyword represents the strongest
+ allowed access, and is chosen as follows:
+ &lt;ul&gt;
+ &lt;li&gt;If no access is allowed, the suffix is &quot;/noaccess&quot;.
+ &lt;li&gt;If only public access is allowed, the suffix is &quot;/public&quot;.
+ &lt;li&gt;If only public and package access are allowed, the suffix is &quot;/package&quot;.
+ &lt;li&gt;If only public, package, and private access are allowed, the suffix is &quot;/private&quot;.
+ &lt;/ul&gt;
+ If none of the above cases apply, it is the case that full
+ access (public, package, private, and protected) is allowed.
+ In this case, no suffix is added.
+ This is true only of an object obtained originally from
+ {@link java.lang.invoke.MethodHandles#lookup MethodHandles.lookup}.
+ Objects created by {@link java.lang.invoke.MethodHandles.Lookup#in Lookup.in}
+ always have restricted access, and will display a suffix.
+ &lt;p&gt;
+ (It may seem strange that protected access should be
+ stronger than private access.  Viewed independently from
+ package access, protected access is the first to be lost,
+ because it requires a direct subclass relationship between
+ caller and callee.)
+@see #in
+*/
+toString : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-findStatic'>/**Produces a method handle for a static method.
+</span> The type of the method handle will be that of the method.
+ (Since static methods do not take receivers, there is no
+ additional receiver argument inserted into the method handle type,
+ as there would be with {@link #findVirtual findVirtual} or {@link #findSpecial findSpecial}.)
+ The method and all its argument types must be accessible to the lookup object.
+ &lt;p&gt;
+ The returned method handle will have
+ {@linkplain java.lang.invoke.MethodHandle#asVarargsCollector variable arity} if and only if
+ the method's variable arity modifier bit ({@code 0x0080}) is set.
+ &lt;p&gt;
+ If the returned method handle is invoked, the method's class will
+ be initialized, if it has not already been initialized.
+ &lt;p&gt;&lt;b&gt;Example:&lt;/b&gt;
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+import static java.lang.invoke.MethodHandles.*;
+import static java.lang.invoke.MethodType.*;
+...
+MethodHandle MH_asList = publicLookup().findStatic(Arrays.class,
+  &quot;asList&quot;, methodType(List.class, Object[].class));
+assertEquals(&quot;[x, y]&quot;, MH_asList.invoke(&quot;x&quot;, &quot;y&quot;).toString());
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {java.lang.Class}} refc the class from which the method is accessed
+@param {String} name the name of the method
+@param {Object {MethodType}} type the type of the method
+@return {Object {java.lang.invoke.MethodHandle}} the desired method handle
+@throws NoSuchMethodException if the method does not exist
+@throws IllegalAccessException if access checking fails,
+                                or if the method is not {@code static},
+                                or if the method's variable arity modifier bit
+                                is set and {@code asVarargsCollector} fails
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+*/
+findStatic : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-findVirtual'>/**Produces a method handle for a virtual method.
+</span> The type of the method handle will be that of the method,
+ with the receiver type (usually {@code refc}) prepended.
+ The method and all its argument types must be accessible to the lookup object.
+ &lt;p&gt;
+ When called, the handle will treat the first argument as a receiver
+ and dispatch on the receiver's type to determine which method
+ implementation to enter.
+ (The dispatching action is identical with that performed by an
+ {@code invokevirtual} or {@code invokeinterface} instruction.)
+ &lt;p&gt;
+ The first argument will be of type {@code refc} if the lookup
+ class has full privileges to access the member.  Otherwise
+ the member must be {@code protected} and the first argument
+ will be restricted in type to the lookup class.
+ &lt;p&gt;
+ The returned method handle will have
+ {@linkplain java.lang.invoke.MethodHandle#asVarargsCollector variable arity} if and only if
+ the method's variable arity modifier bit ({@code 0x0080}) is set.
+ &lt;p&gt;
+ Because of the general &lt;a href=&quot;MethodHandles.Lookup.html#equiv&quot;&gt;equivalence&lt;/a&gt; between {@code invokevirtual}
+ instructions and method handles produced by {@code findVirtual},
+ if the class is {@code MethodHandle} and the name string is
+ {@code invokeExact} or {@code invoke}, the resulting
+ method handle is equivalent to one produced by
+ {@link java.lang.invoke.MethodHandles#exactInvoker MethodHandles.exactInvoker} or
+ {@link java.lang.invoke.MethodHandles#invoker MethodHandles.invoker}
+ with the same {@code type} argument.
+
+ &lt;b&gt;Example:&lt;/b&gt;
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+import static java.lang.invoke.MethodHandles.*;
+import static java.lang.invoke.MethodType.*;
+...
+MethodHandle MH_concat = publicLookup().findVirtual(String.class,
+  &quot;concat&quot;, methodType(String.class, String.class));
+MethodHandle MH_hashCode = publicLookup().findVirtual(Object.class,
+  &quot;hashCode&quot;, methodType(int.class));
+MethodHandle MH_hashCode_String = publicLookup().findVirtual(String.class,
+  &quot;hashCode&quot;, methodType(int.class));
+assertEquals(&quot;xy&quot;, (String) MH_concat.invokeExact(&quot;x&quot;, &quot;y&quot;));
+assertEquals(&quot;xy&quot;.hashCode(), (int) MH_hashCode.invokeExact((Object)&quot;xy&quot;));
+assertEquals(&quot;xy&quot;.hashCode(), (int) MH_hashCode_String.invokeExact(&quot;xy&quot;));
+// interface method:
+MethodHandle MH_subSequence = publicLookup().findVirtual(CharSequence.class,
+  &quot;subSequence&quot;, methodType(CharSequence.class, int.class, int.class));
+assertEquals(&quot;def&quot;, MH_subSequence.invoke(&quot;abcdefghi&quot;, 3, 6).toString());
+// constructor &quot;internal method&quot; must be accessed differently:
+MethodType MT_newString = methodType(void.class); //()V for new String()
+try { assertEquals(&quot;impossible&quot;, lookup()
+        .findVirtual(String.class, &quot;&lt;init&gt;&quot;, MT_newString));
+ } catch (NoSuchMethodException ex) { } // OK
+MethodHandle MH_newString = publicLookup()
+  .findConstructor(String.class, MT_newString);
+assertEquals(&quot;&quot;, (String) MH_newString.invokeExact());
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {java.lang.Class}} refc the class or interface from which the method is accessed
+@param {String} name the name of the method
+@param {Object {MethodType}} type the type of the method, with the receiver argument omitted
+@return {Object {java.lang.invoke.MethodHandle}} the desired method handle
+@throws NoSuchMethodException if the method does not exist
+@throws IllegalAccessException if access checking fails,
+                                or if the method is {@code static}
+                                or if the method's variable arity modifier bit
+                                is set and {@code asVarargsCollector} fails
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+*/
+findVirtual : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-findConstructor'>/**Produces a method handle which creates an object and initializes it, using
+</span> the constructor of the specified type.
+ The parameter types of the method handle will be those of the constructor,
+ while the return type will be a reference to the constructor's class.
+ The constructor and all its argument types must be accessible to the lookup object.
+ &lt;p&gt;
+ The requested type must have a return type of {@code void}.
+ (This is consistent with the JVM's treatment of constructor type descriptors.)
+ &lt;p&gt;
+ The returned method handle will have
+ {@linkplain java.lang.invoke.MethodHandle#asVarargsCollector variable arity} if and only if
+ the constructor's variable arity modifier bit ({@code 0x0080}) is set.
+ &lt;p&gt;
+ If the returned method handle is invoked, the constructor's class will
+ be initialized, if it has not already been initialized.
+ &lt;p&gt;&lt;b&gt;Example:&lt;/b&gt;
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+import static java.lang.invoke.MethodHandles.*;
+import static java.lang.invoke.MethodType.*;
+...
+MethodHandle MH_newArrayList = publicLookup().findConstructor(
+  ArrayList.class, methodType(void.class, Collection.class));
+Collection orig = Arrays.asList(&quot;x&quot;, &quot;y&quot;);
+Collection copy = (ArrayList) MH_newArrayList.invokeExact(orig);
+assert(orig != copy);
+assertEquals(orig, copy);
+// a variable-arity constructor:
+MethodHandle MH_newProcessBuilder = publicLookup().findConstructor(
+  ProcessBuilder.class, methodType(void.class, String[].class));
+ProcessBuilder pb = (ProcessBuilder)
+  MH_newProcessBuilder.invoke(&quot;x&quot;, &quot;y&quot;, &quot;z&quot;);
+assertEquals(&quot;[x, y, z]&quot;, pb.command().toString());
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {java.lang.Class}} refc the class or interface from which the method is accessed
+@param {Object {MethodType}} type the type of the method, with the receiver argument omitted, and a void return type
+@return {Object {java.lang.invoke.MethodHandle}} the desired method handle
+@throws NoSuchMethodException if the constructor does not exist
+@throws IllegalAccessException if access checking fails
+                                or if the method's variable arity modifier bit
+                                is set and {@code asVarargsCollector} fails
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+*/
+findConstructor : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-findSpecial'>/**Produces an early-bound method handle for a virtual method.
+</span> It will bypass checks for overriding methods on the receiver,
+ &lt;a href=&quot;MethodHandles.Lookup.html#equiv&quot;&gt;as if called&lt;/a&gt; from an {@code invokespecial}
+ instruction from within the explicitly specified {@code specialCaller}.
+ The type of the method handle will be that of the method,
+ with a suitably restricted receiver type prepended.
+ (The receiver type will be {@code specialCaller} or a subtype.)
+ The method and all its argument types must be accessible
+ to the lookup object.
+ &lt;p&gt;
+ Before method resolution,
+ if the explicitly specified caller class is not identical with the
+ lookup class, or if this lookup object does not have
+ &lt;a href=&quot;MethodHandles.Lookup.html#privacc&quot;&gt;private access&lt;/a&gt;
+ privileges, the access fails.
+ &lt;p&gt;
+ The returned method handle will have
+ {@linkplain java.lang.invoke.MethodHandle#asVarargsCollector variable arity} if and only if
+ the method's variable arity modifier bit ({@code 0x0080}) is set.
+ &lt;p style=&quot;font-size:smaller;&quot;&gt;
+ &lt;em&gt;(Note:  JVM internal methods named {@code &quot;&lt;init&gt;&quot;} are not visible to this API,
+ even though the {@code invokespecial} instruction can refer to them
+ in special circumstances.  Use {@link #findConstructor findConstructor}
+ to access instance initialization methods in a safe manner.)&lt;/em&gt;
+ &lt;p&gt;&lt;b&gt;Example:&lt;/b&gt;
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+import static java.lang.invoke.MethodHandles.*;
+import static java.lang.invoke.MethodType.*;
+...
+static class Listie extends ArrayList {
+  public String toString() { return &quot;[wee Listie]&quot;; }
+  static Lookup lookup() { return MethodHandles.lookup(); }
+}
+...
+// no access to constructor via invokeSpecial:
+MethodHandle MH_newListie = Listie.lookup()
+  .findConstructor(Listie.class, methodType(void.class));
+Listie l = (Listie) MH_newListie.invokeExact();
+try { assertEquals(&quot;impossible&quot;, Listie.lookup().findSpecial(
+        Listie.class, &quot;&lt;init&gt;&quot;, methodType(void.class), Listie.class));
+ } catch (NoSuchMethodException ex) { } // OK
+// access to super and self methods via invokeSpecial:
+MethodHandle MH_super = Listie.lookup().findSpecial(
+  ArrayList.class, &quot;toString&quot; , methodType(String.class), Listie.class);
+MethodHandle MH_this = Listie.lookup().findSpecial(
+  Listie.class, &quot;toString&quot; , methodType(String.class), Listie.class);
+MethodHandle MH_duper = Listie.lookup().findSpecial(
+  Object.class, &quot;toString&quot; , methodType(String.class), Listie.class);
+assertEquals(&quot;[]&quot;, (String) MH_super.invokeExact(l));
+assertEquals(&quot;&quot;+l, (String) MH_this.invokeExact(l));
+assertEquals(&quot;[]&quot;, (String) MH_duper.invokeExact(l)); // ArrayList method
+try { assertEquals(&quot;inaccessible&quot;, Listie.lookup().findSpecial(
+        String.class, &quot;toString&quot;, methodType(String.class), Listie.class));
+ } catch (IllegalAccessException ex) { } // OK
+Listie subl = new Listie() { public String toString() { return &quot;[subclass]&quot;; } };
+assertEquals(&quot;&quot;+l, (String) MH_this.invokeExact(subl)); // Listie method
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {java.lang.Class}} refc the class or interface from which the method is accessed
+@param {String} name the name of the method (which must not be &quot;&amp;lt;init&amp;gt;&quot;)
+@param {Object {MethodType}} type the type of the method, with the receiver argument omitted
+@param {Object {java.lang.Class}} specialCaller the proposed calling class to perform the {@code invokespecial}
+@return {Object {java.lang.invoke.MethodHandle}} the desired method handle
+@throws NoSuchMethodException if the method does not exist
+@throws IllegalAccessException if access checking fails
+                                or if the method's variable arity modifier bit
+                                is set and {@code asVarargsCollector} fails
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+*/
+findSpecial : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-findGetter'>/**Produces a method handle giving read access to a non-static field.
+</span> The type of the method handle will have a return type of the field's
+ value type.
+ The method handle's single argument will be the instance containing
+ the field.
+ Access checking is performed immediately on behalf of the lookup class.
+@param {Object {java.lang.Class}} refc the class or interface from which the method is accessed
+@param {String} name the field's name
+@param {Object {java.lang.Class}} type the field's type
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which can load values from the field
+@throws NoSuchFieldException if the field does not exist
+@throws IllegalAccessException if access checking fails, or if the field is {@code static}
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+*/
+findGetter : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-findSetter'>/**Produces a method handle giving write access to a non-static field.
+</span> The type of the method handle will have a void return type.
+ The method handle will take two arguments, the instance containing
+ the field, and the value to be stored.
+ The second argument will be of the field's value type.
+ Access checking is performed immediately on behalf of the lookup class.
+@param {Object {java.lang.Class}} refc the class or interface from which the method is accessed
+@param {String} name the field's name
+@param {Object {java.lang.Class}} type the field's type
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which can store values into the field
+@throws NoSuchFieldException if the field does not exist
+@throws IllegalAccessException if access checking fails, or if the field is {@code static}
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+*/
+findSetter : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-findVarHandle'>/**Produces a VarHandle giving access to a non-static field {@code name}
+</span> of type {@code type} declared in a class of type {@code recv}.
+ The VarHandle's variable type is {@code type} and it has one
+ coordinate type, {@code recv}.
+ &lt;p&gt;
+ Access checking is performed immediately on behalf of the lookup
+ class.
+ &lt;p&gt;
+ Certain access modes of the returned VarHandle are unsupported under
+ the following conditions:
+ &lt;ul&gt;
+ &lt;li&gt;if the field is declared {@code final}, then the write, atomic
+     update, numeric atomic update, and bitwise atomic update access
+     modes are unsupported.
+ &lt;li&gt;if the field type is anything other than {@code byte},
+     {@code short}, {@code char}, {@code int}, {@code long},
+     {@code float}, or {@code double} then numeric atomic update
+     access modes are unsupported.
+ &lt;li&gt;if the field type is anything other than {@code boolean},
+     {@code byte}, {@code short}, {@code char}, {@code int} or
+     {@code long} then bitwise atomic update access modes are
+     unsupported.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ If the field is declared {@code volatile} then the returned VarHandle
+ will override access to the field (effectively ignore the
+ {@code volatile} declaration) in accordance to its specified
+ access modes.
+ &lt;p&gt;
+ If the field type is {@code float} or {@code double} then numeric
+ and atomic update access modes compare values using their bitwise
+ representation (see {@link Float#floatToRawIntBits} and
+ {@link Double#doubleToRawLongBits}, respectively).
+@param {Object {java.lang.Class}} recv the receiver class, of type {@code R}, that declares the
+ non-static field
+@param {String} name the field's name
+@param {Object {java.lang.Class}} type the field's type, of type {@code T}
+@param type the field's type, of type {@code T}
+@return {Object {java.lang.invoke.VarHandle}} a VarHandle giving access to non-static fields.
+@throws NoSuchFieldException if the field does not exist
+@throws IllegalAccessException if access checking fails, or if the field is {@code static}
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+@since 9
+@hide 
+*/
+findVarHandle : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-findStaticGetter'>/**Produces a method handle giving read access to a static field.
+</span> The type of the method handle will have a return type of the field's
+ value type.
+ The method handle will take no arguments.
+ Access checking is performed immediately on behalf of the lookup class.
+ &lt;p&gt;
+ If the returned method handle is invoked, the field's class will
+ be initialized, if it has not already been initialized.
+@param {Object {java.lang.Class}} refc the class or interface from which the method is accessed
+@param {String} name the field's name
+@param {Object {java.lang.Class}} type the field's type
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which can load values from the field
+@throws NoSuchFieldException if the field does not exist
+@throws IllegalAccessException if access checking fails, or if the field is not {@code static}
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+*/
+findStaticGetter : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-findStaticSetter'>/**Produces a method handle giving write access to a static field.
+</span> The type of the method handle will have a void return type.
+ The method handle will take a single
+ argument, of the field's value type, the value to be stored.
+ Access checking is performed immediately on behalf of the lookup class.
+ &lt;p&gt;
+ If the returned method handle is invoked, the field's class will
+ be initialized, if it has not already been initialized.
+@param {Object {java.lang.Class}} refc the class or interface from which the method is accessed
+@param {String} name the field's name
+@param {Object {java.lang.Class}} type the field's type
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which can store values into the field
+@throws NoSuchFieldException if the field does not exist
+@throws IllegalAccessException if access checking fails, or if the field is not {@code static}
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+*/
+findStaticSetter : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-findStaticVarHandle'>/**Produces a VarHandle giving access to a static field {@code name} of
+</span> type {@code type} declared in a class of type {@code decl}.
+ The VarHandle's variable type is {@code type} and it has no
+ coordinate types.
+ &lt;p&gt;
+ Access checking is performed immediately on behalf of the lookup
+ class.
+ &lt;p&gt;
+ If the returned VarHandle is operated on, the declaring class will be
+ initialized, if it has not already been initialized.
+ &lt;p&gt;
+ Certain access modes of the returned VarHandle are unsupported under
+ the following conditions:
+ &lt;ul&gt;
+ &lt;li&gt;if the field is declared {@code final}, then the write, atomic
+     update, numeric atomic update, and bitwise atomic update access
+     modes are unsupported.
+ &lt;li&gt;if the field type is anything other than {@code byte},
+     {@code short}, {@code char}, {@code int}, {@code long},
+     {@code float}, or {@code double}, then numeric atomic update
+     access modes are unsupported.
+ &lt;li&gt;if the field type is anything other than {@code boolean},
+     {@code byte}, {@code short}, {@code char}, {@code int} or
+     {@code long} then bitwise atomic update access modes are
+     unsupported.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ If the field is declared {@code volatile} then the returned VarHandle
+ will override access to the field (effectively ignore the
+ {@code volatile} declaration) in accordance to its specified
+ access modes.
+ &lt;p&gt;
+ If the field type is {@code float} or {@code double} then numeric
+ and atomic update access modes compare values using their bitwise
+ representation (see {@link Float#floatToRawIntBits} and
+ {@link Double#doubleToRawLongBits}, respectively).
+@param {Object {java.lang.Class}} decl the class that declares the static field
+@param {String} name the field's name
+@param {Object {java.lang.Class}} type the field's type, of type {@code T}
+@param type the field's type, of type {@code T}
+@return {Object {java.lang.invoke.VarHandle}} a VarHandle giving access to a static field
+@throws NoSuchFieldException if the field does not exist
+@throws IllegalAccessException if access checking fails, or if the field is not {@code static}
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+@since 9
+@hide 
+*/
+findStaticVarHandle : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-bind'>/**Produces an early-bound method handle for a non-static method.
+</span> The receiver must have a supertype {@code defc} in which a method
+ of the given name and type is accessible to the lookup class.
+ The method and all its argument types must be accessible to the lookup object.
+ The type of the method handle will be that of the method,
+ without any insertion of an additional receiver parameter.
+ The given receiver will be bound into the method handle,
+ so that every call to the method handle will invoke the
+ requested method on the given receiver.
+ &lt;p&gt;
+ The returned method handle will have
+ {@linkplain java.lang.invoke.MethodHandle#asVarargsCollector variable arity} if and only if
+ the method's variable arity modifier bit ({@code 0x0080}) is set
+ &lt;em&gt;and&lt;/em&gt; the trailing array argument is not the only argument.
+ (If the trailing array argument is the only argument,
+ the given receiver value will be bound to it.)
+ &lt;p&gt;
+ This is equivalent to the following code:
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+import static java.lang.invoke.MethodHandles.*;
+import static java.lang.invoke.MethodType.*;
+...
+MethodHandle mh0 = lookup().findVirtual(defc, name, type);
+MethodHandle mh1 = mh0.bindTo(receiver);
+MethodType mt1 = mh1.type();
+if (mh0.isVarargsCollector())
+  mh1 = mh1.asVarargsCollector(mt1.parameterType(mt1.parameterCount()-1));
+return mh1;
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+ where {@code defc} is either {@code receiver.getClass()} or a super
+ type of that class, in which the requested method is accessible
+ to the lookup class.
+ (Note that {@code bindTo} does not preserve variable arity.)
+@param {Object {Object}} receiver the object from which the method is accessed
+@param {String} name the name of the method
+@param {Object {MethodType}} type the type of the method, with the receiver argument omitted
+@return {Object {java.lang.invoke.MethodHandle}} the desired method handle
+@throws NoSuchMethodException if the method does not exist
+@throws IllegalAccessException if access checking fails
+                                or if the method's variable arity modifier bit
+                                is set and {@code asVarargsCollector} fails
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws NullPointerException if any argument is null
+@see MethodHandle#bindTo
+@see #findVirtual
+*/
+bind : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-unreflect'>/**Makes a &lt;a href=&quot;MethodHandleInfo.html#directmh&quot;&gt;direct method handle&lt;/a&gt;
+</span> to &lt;i&gt;m&lt;/i&gt;, if the lookup class has permission.
+ If &lt;i&gt;m&lt;/i&gt; is non-static, the receiver argument is treated as an initial argument.
+ If &lt;i&gt;m&lt;/i&gt; is virtual, overriding is respected on every call.
+ Unlike the Core Reflection API, exceptions are &lt;em&gt;not&lt;/em&gt; wrapped.
+ The type of the method handle will be that of the method,
+ with the receiver type prepended (but only if it is non-static).
+ If the method's {@code accessible} flag is not set,
+ access checking is performed immediately on behalf of the lookup class.
+ If &lt;i&gt;m&lt;/i&gt; is not public, do not share the resulting handle with untrusted parties.
+ &lt;p&gt;
+ The returned method handle will have
+ {@linkplain java.lang.invoke.MethodHandle#asVarargsCollector variable arity} if and only if
+ the method's variable arity modifier bit ({@code 0x0080}) is set.
+ &lt;p&gt;
+ If &lt;i&gt;m&lt;/i&gt; is static, and
+ if the returned method handle is invoked, the method's class will
+ be initialized, if it has not already been initialized.
+@param {Object {Method}} m the reflected method
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which can invoke the reflected method
+@throws IllegalAccessException if access checking fails
+                                or if the method's variable arity modifier bit
+                                is set and {@code asVarargsCollector} fails
+@throws NullPointerException if the argument is null
+*/
+unreflect : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-unreflectSpecial'>/**Produces a method handle for a reflected method.
+</span> It will bypass checks for overriding methods on the receiver,
+ &lt;a href=&quot;MethodHandles.Lookup.html#equiv&quot;&gt;as if called&lt;/a&gt; from an {@code invokespecial}
+ instruction from within the explicitly specified {@code specialCaller}.
+ The type of the method handle will be that of the method,
+ with a suitably restricted receiver type prepended.
+ (The receiver type will be {@code specialCaller} or a subtype.)
+ If the method's {@code accessible} flag is not set,
+ access checking is performed immediately on behalf of the lookup class,
+ as if {@code invokespecial} instruction were being linked.
+ &lt;p&gt;
+ Before method resolution,
+ if the explicitly specified caller class is not identical with the
+ lookup class, or if this lookup object does not have
+ &lt;a href=&quot;MethodHandles.Lookup.html#privacc&quot;&gt;private access&lt;/a&gt;
+ privileges, the access fails.
+ &lt;p&gt;
+ The returned method handle will have
+ {@linkplain java.lang.invoke.MethodHandle#asVarargsCollector variable arity} if and only if
+ the method's variable arity modifier bit ({@code 0x0080}) is set.
+@param {Object {Method}} m the reflected method
+@param {Object {java.lang.Class}} specialCaller the class nominally calling the method
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which can invoke the reflected method
+@throws IllegalAccessException if access checking fails
+                                or if the method's variable arity modifier bit
+                                is set and {@code asVarargsCollector} fails
+@throws NullPointerException if any argument is null
+*/
+unreflectSpecial : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-unreflectConstructor'>/**Produces a method handle for a reflected constructor.
+</span> The type of the method handle will be that of the constructor,
+ with the return type changed to the declaring class.
+ The method handle will perform a {@code newInstance} operation,
+ creating a new instance of the constructor's class on the
+ arguments passed to the method handle.
+ &lt;p&gt;
+ If the constructor's {@code accessible} flag is not set,
+ access checking is performed immediately on behalf of the lookup class.
+ &lt;p&gt;
+ The returned method handle will have
+ {@linkplain java.lang.invoke.MethodHandle#asVarargsCollector variable arity} if and only if
+ the constructor's variable arity modifier bit ({@code 0x0080}) is set.
+ &lt;p&gt;
+ If the returned method handle is invoked, the constructor's class will
+ be initialized, if it has not already been initialized.
+@param {Object {java.lang.reflect.Constructor}} c the reflected constructor
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which can invoke the reflected constructor
+@throws IllegalAccessException if access checking fails
+                                or if the method's variable arity modifier bit
+                                is set and {@code asVarargsCollector} fails
+@throws NullPointerException if the argument is null
+*/
+unreflectConstructor : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-unreflectGetter'>/**Produces a method handle giving read access to a reflected field.
+</span> The type of the method handle will have a return type of the field's
+ value type.
+ If the field is static, the method handle will take no arguments.
+ Otherwise, its single argument will be the instance containing
+ the field.
+ If the field's {@code accessible} flag is not set,
+ access checking is performed immediately on behalf of the lookup class.
+ &lt;p&gt;
+ If the field is static, and
+ if the returned method handle is invoked, the field's class will
+ be initialized, if it has not already been initialized.
+@param {Object {Field}} f the reflected field
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which can load values from the reflected field
+@throws IllegalAccessException if access checking fails
+@throws NullPointerException if the argument is null
+*/
+unreflectGetter : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-unreflectSetter'>/**Produces a method handle giving write access to a reflected field.
+</span> The type of the method handle will have a void return type.
+ If the field is static, the method handle will take a single
+ argument, of the field's value type, the value to be stored.
+ Otherwise, the two arguments will be the instance containing
+ the field, and the value to be stored.
+ If the field's {@code accessible} flag is not set,
+ access checking is performed immediately on behalf of the lookup class.
+ &lt;p&gt;
+ If the field is static, and
+ if the returned method handle is invoked, the field's class will
+ be initialized, if it has not already been initialized.
+@param {Object {Field}} f the reflected field
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which can store values into the reflected field
+@throws IllegalAccessException if access checking fails
+@throws NullPointerException if the argument is null
+*/
+unreflectSetter : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-unreflectVarHandle'>/**Produces a VarHandle giving access to a reflected field {@code f}
+</span> of type {@code T} declared in a class of type {@code R}.
+ The VarHandle's variable type is {@code T}.
+ If the field is non-static the VarHandle has one coordinate type,
+ {@code R}.  Otherwise, the field is static, and the VarHandle has no
+ coordinate types.
+ &lt;p&gt;
+ Access checking is performed immediately on behalf of the lookup
+ class, regardless of the value of the field's {@code accessible}
+ flag.
+ &lt;p&gt;
+ If the field is static, and if the returned VarHandle is operated
+ on, the field's declaring class will be initialized, if it has not
+ already been initialized.
+ &lt;p&gt;
+ Certain access modes of the returned VarHandle are unsupported under
+ the following conditions:
+ &lt;ul&gt;
+ &lt;li&gt;if the field is declared {@code final}, then the write, atomic
+     update, numeric atomic update, and bitwise atomic update access
+     modes are unsupported.
+ &lt;li&gt;if the field type is anything other than {@code byte},
+     {@code short}, {@code char}, {@code int}, {@code long},
+     {@code float}, or {@code double} then numeric atomic update
+     access modes are unsupported.
+ &lt;li&gt;if the field type is anything other than {@code boolean},
+     {@code byte}, {@code short}, {@code char}, {@code int} or
+     {@code long} then bitwise atomic update access modes are
+     unsupported.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ If the field is declared {@code volatile} then the returned VarHandle
+ will override access to the field (effectively ignore the
+ {@code volatile} declaration) in accordance to its specified
+ access modes.
+ &lt;p&gt;
+ If the field type is {@code float} or {@code double} then numeric
+ and atomic update access modes compare values using their bitwise
+ representation (see {@link Float#floatToRawIntBits} and
+ {@link Double#doubleToRawLongBits}, respectively).
+@param {Object {Field}} f the reflected field, with a field of type {@code T}, and
+ a declaring class of type {@code R}
+@param f the reflected field, with a field of type {@code T}, and
+ a declaring class of type {@code R}
+@return {Object {java.lang.invoke.VarHandle}} a VarHandle giving access to non-static fields or a static
+ field
+@throws IllegalAccessException if access checking fails
+@throws NullPointerException if the argument is null
+@since 9
+@hide 
+*/
+unreflectVarHandle : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandles-Lookup-method-revealDirect'>/**Cracks a &lt;a href=&quot;MethodHandleInfo.html#directmh&quot;&gt;direct method handle&lt;/a&gt;
+</span> created by this lookup object or a similar one.
+ Security and access checks are performed to ensure that this lookup object
+ is capable of reproducing the target method handle.
+ This means that the cracking may fail if target is a direct method handle
+ but was created by an unrelated lookup object.
+ This can happen if the method handle is &lt;a href=&quot;MethodHandles.Lookup.html#callsens&quot;&gt;caller sensitive&lt;/a&gt;
+ and was created by a lookup object for a different class.
+@param {Object {MethodHandle}} target a direct method handle to crack into symbolic reference components
+@return {Object {java.lang.invoke.MethodHandleInfo}} a symbolic reference which can be used to reconstruct this method handle from this lookup object
+@exception SecurityException if a security manager is present and it
+                              &lt;a href=&quot;MethodHandles.Lookup.html#secmgr&quot;&gt;refuses access&lt;/a&gt;
+@throws IllegalArgumentException if the target is not a direct method handle or if access checking fails
+@exception NullPointerException if the target is {@code null}
+@see MethodHandleInfo
+@since 1.8
+*/
+revealDirect : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

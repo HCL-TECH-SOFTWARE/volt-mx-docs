@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-policy-WindowManagerPolicy-WindowState'>/**@class com.android.server.policy.WindowManagerPolicy.WindowState
+</span> Interface to the Window Manager state associated with a particular
+ window.  You can hold on to an instance of this interface from the call
+ to prepareAddWindow() until removeWindow().
+*/
+var WindowState = {
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getOwningUid'>/**Return the uid of the app that owns this window.
+</span>*/
+getOwningUid : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getOwningPackage'>/**Return the package name of the app that owns this window.
+</span>*/
+getOwningPackage : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-computeFrameLw'>/**Perform standard frame computation.  The result can be obtained with
+</span> getFrame() if so desired.  Must be called with the window manager
+ lock held.
+*/
+computeFrameLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getFrameLw'>/**Retrieve the current frame of the window that has been assigned by
+</span> the window manager.  Must be called with the window manager lock held.
+@return {Object {android.graphics.Rect}} Rect The rectangle holding the window frame.
+*/
+getFrameLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getDisplayFrameLw'>/**Retrieve the frame of the display that this window was last
+</span> laid out in.  Must be called with the
+ window manager lock held.
+@return {Object {android.graphics.Rect}} Rect The rectangle holding the display frame.
+*/
+getDisplayFrameLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getOverscanFrameLw'>/**Retrieve the frame of the area inside the overscan region of the
+</span> display that this window was last laid out in.  Must be called with the
+ window manager lock held.
+@return {Object {android.graphics.Rect}} Rect The rectangle holding the display overscan frame.
+*/
+getOverscanFrameLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getContentFrameLw'>/**Retrieve the frame of the content area that this window was last
+</span> laid out in.  This is the area in which the content of the window
+ should be placed.  It will be smaller than the display frame to
+ account for screen decorations such as a status bar or soft
+ keyboard.  Must be called with the
+ window manager lock held.
+@return {Object {android.graphics.Rect}} Rect The rectangle holding the content frame.
+*/
+getContentFrameLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getVisibleFrameLw'>/**Retrieve the frame of the visible area that this window was last
+</span> laid out in.  This is the area of the screen in which the window
+ will actually be fully visible.  It will be smaller than the
+ content frame to account for transient UI elements blocking it
+ such as an input method's candidates UI.  Must be called with the
+ window manager lock held.
+@return {Object {android.graphics.Rect}} Rect The rectangle holding the visible frame.
+*/
+getVisibleFrameLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getGivenInsetsPendingLw'>/**Returns true if this window is waiting to receive its given
+</span> internal insets from the client app, and so should not impact the
+ layout of other windows.
+*/
+getGivenInsetsPendingLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getGivenContentInsetsLw'>/**Retrieve the insets given by this window's client for the content
+</span> area of windows behind it.  Must be called with the
+ window manager lock held.
+@return {Object {android.graphics.Rect}} Rect The left, top, right, and bottom insets, relative
+ to the window's frame, of the actual contents.
+*/
+getGivenContentInsetsLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getGivenVisibleInsetsLw'>/**Retrieve the insets given by this window's client for the visible
+</span> area of windows behind it.  Must be called with the
+ window manager lock held.
+@return {Object {android.graphics.Rect}} Rect The left, top, right, and bottom insets, relative
+ to the window's frame, of the actual visible area.
+*/
+getGivenVisibleInsetsLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getAttrs'>/**Retrieve the current LayoutParams of the window.
+</span>@return {Object {android.view.WindowManager.LayoutParams}} WindowManager.LayoutParams The window's internal LayoutParams
+         instance.
+*/
+getAttrs : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getNeedsMenuLw'>/**Return whether this window needs the menu key shown.  Must be called
+</span> with window lock held, because it may need to traverse down through
+ window list to determine the result.
+@param {Object {WindowManagerPolicy.WindowState}} bottom The bottom-most window to consider when determining this.
+*/
+getNeedsMenuLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getSystemUiVisibility'>/**Retrieve the current system UI visibility flags associated with
+</span> this window.
+*/
+getSystemUiVisibility : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getSurfaceLayer'>/**Get the layer at which this window's surface will be Z-ordered.
+</span>*/
+getSurfaceLayer : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getBaseType'>/**Retrieve the type of the top-level window.
+</span>@return {Number} the base type of the parent window if attached or its own type otherwise
+*/
+getBaseType : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getAppToken'>/**Return the token for the application (actually activity) that owns
+</span> this window.  May return null for system windows.
+@return {Object {IApplicationToken}} An IApplicationToken identifying the owning activity.
+*/
+getAppToken : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isVoiceInteraction'>/**Return true if this window is participating in voice interaction.
+</span>*/
+isVoiceInteraction : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-hasAppShownWindows'>/**Return true if, at any point, the application token associated with
+</span> this window has actually displayed any windows.  This is most useful
+ with the &quot;starting up&quot; window to determine if any windows were
+ displayed when it is closed.
+@return {Boolean} Returns true if one or more windows have been displayed,
+         else false.
+*/
+hasAppShownWindows : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isVisibleLw'>/**Is this window visible?  It is not visible if there is no
+</span> surface, or we are in the process of running an exit animation
+ that will remove the surface.
+*/
+isVisibleLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isDisplayedLw'>/**Is this window currently visible to the user on-screen?  It is
+</span> displayed either if it is visible or it is currently running an
+ animation before no longer being visible.  Must be called with the
+ window manager lock held.
+*/
+isDisplayedLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isAnimatingLw'>/**Return true if this window (or a window it is attached to, but not
+</span> considering its app token) is currently animating.
+*/
+isAnimatingLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-canAffectSystemUiFlags'>/**
+</span>@return {Boolean} Whether the window can affect SystemUI flags, meaning that SystemUI (system bars,
+         for example) will be  affected by the flags specified in this window. This is the
+         case when the surface is on screen but not exiting.
+*/
+canAffectSystemUiFlags : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isGoneForLayoutLw'>/**Is this window considered to be gone for purposes of layout?
+</span>*/
+isGoneForLayoutLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isDrawnLw'>/**Returns true if the window has a surface that it has drawn a
+</span> complete UI in to. Note that this is different from {@link #hasDrawnLw}()
+ in that it also returns true if the window is READY_TO_SHOW, but was not yet
+ promoted to HAS_DRAWN.
+*/
+isDrawnLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-hasDrawnLw'>/**Returns true if this window has been shown on screen at some time in
+</span> the past.  Must be called with the window manager lock held.
+@deprecated Use {@link #isDrawnLw} or any of the other drawn/visibility methods.
+*/
+hasDrawnLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-hideLw'>/**Can be called by the policy to force a window to be hidden,
+</span> regardless of whether the client or window manager would like
+ it shown.  Must be called with the window manager lock held.
+ Returns true if {@link #showLw} was last called for the window.
+*/
+hideLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-showLw'>/**Can be called to undo the effect of {@link #hideLw}, allowing a
+</span> window to be shown as long as the window manager and client would
+ also like it to be shown.  Must be called with the window manager
+ lock held.
+ Returns true if {@link #hideLw} was last called for the window.
+*/
+showLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isAlive'>/**Check whether the process hosting this window is currently alive.
+</span>*/
+isAlive : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isDefaultDisplay'>/**Check if window is on {@link Display#DEFAULT_DISPLAY}.
+</span>@return {Boolean} true if window is on default display.
+*/
+isDefaultDisplay : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isDimming'>/**Check whether the window is currently dimming.
+</span>*/
+isDimming : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isLetterboxedForDisplayCutoutLw'>/**Returns true if the window is letterboxed for the display cutout.
+</span>*/
+isLetterboxedForDisplayCutoutLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isLetterboxedOverlappingWith'>/**Returns true if the window has a letterbox and any part of that letterbox overlaps with
+</span> the given {@code rect}.
+*/
+isLetterboxedOverlappingWith : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getWindowingMode'>/**
+</span>@return {Number} the current windowing mode of this window.
+*/
+getWindowingMode : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getActivityType'>/**Returns the {@link WindowConfiguration.ActivityType} associated with the configuration
+</span> of this window.
+*/
+getActivityType : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-inMultiWindowMode'>/**Returns true if the window is current in multi-windowing mode. i.e. it shares the
+</span> screen with other application windows.
+*/
+inMultiWindowMode : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getRotationAnimationHint'>/**
+</span>*/
+getRotationAnimationHint : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isInputMethodWindow'>/**
+</span>*/
+isInputMethodWindow : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-isInputMethodTarget'>/**
+</span>*/
+isInputMethodTarget : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getDisplayId'>/**
+</span>*/
+getDisplayId : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-canAddInternalSystemWindow'>/**Returns true if the window owner can add internal system windows.
+</span> That is, they have {@link Manifest.permission#INTERNAL_SYSTEM_WINDOW}.
+*/
+canAddInternalSystemWindow : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-canAcquireSleepToken'>/**Returns true if the window owner has the permission to acquire a sleep token when it's
+</span> visible. That is, they have the permission {@link Manifest.permission#DEVICE_POWER}.
+*/
+canAcquireSleepToken : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-canReceiveKeys'>/**
+</span>@return {Boolean} true if this window desires key events.
+*/
+canReceiveKeys : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-canShowWhenLocked'>/**
+</span>@return {Boolean} true if the window can show over keyguard.
+*/
+canShowWhenLocked : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-writeIdentifierToProto'>/**Writes {@link com.android.server.wm.IdentifierProto} to stream.
+</span>*/
+writeIdentifierToProto : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-WindowState-method-getWindowFrames'>/**
+</span>@return {Object {com.android.server.wm.WindowFrames}} The {@link WindowFrames} associated with this {@link WindowState}
+*/
+getWindowFrames : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

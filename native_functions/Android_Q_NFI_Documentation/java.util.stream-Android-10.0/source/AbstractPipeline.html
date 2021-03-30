@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-stream-AbstractPipeline'>/**@class java.util.stream.AbstractPipeline
+</span> implements java.util.stream.BaseStream
+
+@extends java.util.stream.PipelineHelper
+
+ Abstract base class for &quot;pipeline&quot; classes, which are the core
+ implementations of the Stream interface and its primitive specializations.
+ Manages construction and evaluation of stream pipelines.
+
+ &lt;p&gt;An {@code AbstractPipeline} represents an initial portion of a stream
+ pipeline, encapsulating a stream source and zero or more intermediate
+ operations.  The individual {@code AbstractPipeline} objects are often
+ referred to as &lt;em&gt;stages&lt;/em&gt;, where each stage describes either the stream
+ source or an intermediate operation.
+
+ &lt;p&gt;A concrete intermediate stage is generally built from an
+ {@code AbstractPipeline}, a shape-specific pipeline class which extends it
+ (e.g., {@code IntPipeline}) which is also abstract, and an operation-specific
+ concrete class which extends that.  {@code AbstractPipeline} contains most of
+ the mechanics of evaluating the pipeline, and implements methods that will be
+ used by the operation; the shape-specific classes add helper methods for
+ dealing with collection of results into the appropriate shape-specific
+ containers.
+
+ &lt;p&gt;After chaining a new intermediate operation, or executing a terminal
+ operation, the stream is considered to be consumed, and no more intermediate
+ or terminal operations are permitted on this stream instance.
+
+ @implNote
+ &lt;p&gt;For sequential streams, and parallel streams without
+ &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;stateful intermediate
+ operations&lt;/a&gt;, parallel streams, pipeline evaluation is done in a single
+ pass that &quot;jams&quot; all the operations together.  For parallel streams with
+ stateful operations, execution is divided into segments, where each
+ stateful operations marks the end of a segment, and each segment is
+ evaluated separately and the result used as the input to the next
+ segment.  In all cases, the source data is not consumed until a terminal
+ operation begins.
+
+ @param &lt;E_IN&gt;  type of input elements
+ @param &lt;E_OUT&gt; type of output elements
+ @param &lt;S&gt; type of the subclass implementing {@code BaseStream}
+ @since 1.8
+ @hide Made public for CTS tests only (OpenJDK 8 streams tests).
+*/
+var AbstractPipeline = {
+
+<span id='java-util-stream-AbstractPipeline-method-evaluateToArrayNode'>/**Collect the elements output from the pipeline stage.
+</span>@param {Object {java.util.function.IntFunction}} generator the array generator to be used to create array instances
+@return {Object {java.util.stream.Node}} a flat array-backed Node that holds the collected output elements
+*/
+evaluateToArrayNode : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-sequential'>/**
+</span>*/
+sequential : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-parallel'>/**
+</span>*/
+parallel : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-close'>/**
+</span>*/
+close : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-onClose'>/**
+</span>*/
+onClose : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-spliterator'>/**
+</span>*/
+spliterator : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-isParallel'>/**
+</span>*/
+isParallel : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-getStreamFlags'>/**Returns the composition of stream flags of the stream source and all
+</span> intermediate operations.
+@return {Number} the composition of stream flags of the stream source and all
+         intermediate operations
+@see StreamOpFlag
+*/
+getStreamFlags : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-getStreamAndOpFlags'>/**
+</span>*/
+getStreamAndOpFlags : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-wrapSink'>/**
+</span>*/
+wrapSink : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-evaluate'>/**
+</span>*/
+evaluate : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-getOutputShape'>/**Get the output shape of the pipeline.  If the pipeline is the head,
+</span> then it's output shape corresponds to the shape of the source.
+ Otherwise, it's output shape corresponds to the output shape of the
+ associated operation.
+@return {Object {java.util.stream.StreamShape}} the output shape
+*/
+getOutputShape : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-evaluateToNode'>/**Collect elements output from a pipeline into a Node that holds elements
+</span> of this shape.
+@param {Object {java.util.stream.PipelineHelper}} helper the pipeline helper describing the pipeline stages
+@param {Object {java.util.Spliterator}} spliterator the source spliterator
+@param {Boolean} flattenTree true if the returned node should be flattened
+@param {Object {java.util.function.IntFunction}} generator the array generator
+@return {Object {java.util.stream.Node}} a Node holding the output of the pipeline
+*/
+evaluateToNode : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-wrap'>/**Create a spliterator that wraps a source spliterator, compatible with
+</span> this stream shape, and operations associated with a {@link java.util.stream.PipelineHelper}.
+@param {Object {java.util.stream.PipelineHelper}} ph the pipeline helper describing the pipeline stages
+@param {Object {java.util.function.Supplier}} supplier the supplier of a spliterator
+@return {Object {java.util.Spliterator}} a wrapping spliterator compatible with this shape
+*/
+wrap : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-lazySpliterator'>/**Create a lazy spliterator that wraps and obtains the supplied the
+</span> spliterator when a method is invoked on the lazy spliterator.
+@param {Object {java.util.function.Supplier}} supplier the supplier of a spliterator
+*/
+lazySpliterator : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-forEachWithCancel'>/**Traverse the elements of a spliterator compatible with this stream shape,
+</span> pushing those elements into a sink.   If the sink requests cancellation,
+ no further elements will be pulled or pushed.
+@param {Object {java.util.Spliterator}} spliterator the spliterator to pull elements from
+@param {Object {java.util.stream.Sink}} sink the sink to push elements to
+*/
+forEachWithCancel : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-makeNodeBuilder'>/**Make a node builder compatible with this stream shape.
+</span>@param {Number} exactSizeIfKnown if {@literal &gt;=0}, then a node builder will be
+ created that has a fixed capacity of at most sizeIfKnown elements. If
+ {@literal &lt; 0}, then the node builder has an unfixed capacity. A fixed
+ capacity node builder will throw exceptions if an element is added after
+ builder has reached capacity, or is built before the builder has reached
+ capacity.
+@param {Object {java.util.function.IntFunction}} generator the array generator to be used to create instances of a
+ T[] array. For implementations supporting primitive nodes, this parameter
+ may be ignored.
+@return {Object {java.util.stream.Node.Builder}} a node builder
+*/
+makeNodeBuilder : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-opIsStateful'>/**Returns whether this operation is stateful or not.  If it is stateful,
+</span> then the method
+ {@link #opEvaluateParallel(PipelineHelper, java.util.Spliterator, java.util.function.IntFunction)}
+ must be overridden.
+@return {Boolean} {@code true} if this operation is stateful
+*/
+opIsStateful : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-opWrapSink'>/**Accepts a {@code Sink} which will receive the results of this operation,
+</span> and return a {@code Sink} which accepts elements of the input type of
+ this operation and which performs the operation, passing the results to
+ the provided {@code Sink}.
+@param {Number} flags The combined stream and operation flags up to, but not
+        including, this operation
+@param {Object {java.util.stream.Sink}} sink sink to which elements should be sent after processing
+@param sink sink to which elements should be sent after processing
+@return {Object {java.util.stream.Sink}} a sink which accepts elements, perform the operation upon
+         each element, and passes the results (if any) to the provided
+         {@code Sink}.
+*/
+opWrapSink : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-opEvaluateParallel'>/**Performs a parallel evaluation of the operation using the specified
+</span> {@code PipelineHelper} which describes the upstream intermediate
+ operations.  Only called on stateful operations.  If {@link #opIsStateful}() returns true then implementations must override the
+ default implementation.
+@param {Object {java.util.stream.PipelineHelper}} helper the pipeline helper describing the pipeline stages
+@param {Object {java.util.Spliterator}} spliterator the source {@code Spliterator}
+@param {Object {java.util.function.IntFunction}} generator the array generator
+@param generator the array generator
+@return {Object {java.util.stream.Node}} a {@code Node} describing the result of the evaluation
+*/
+opEvaluateParallel : function(  ) {},
+
+<span id='java-util-stream-AbstractPipeline-method-opEvaluateParallelLazy'>/**Returns a {@code Spliterator} describing a parallel evaluation of the
+</span> operation, using the specified {@code PipelineHelper} which describes the
+ upstream intermediate operations.  Only called on stateful operations.
+ It is not necessary (though acceptable) to do a full computation of the
+ result here; it is preferable, if possible, to describe the result via a
+ lazily evaluated spliterator.
+@param {Object {java.util.stream.PipelineHelper}} helper the pipeline helper
+@param {Object {java.util.Spliterator}} spliterator the source {@code Spliterator}
+@param spliterator the source {@code Spliterator}
+@return {Object {java.util.Spliterator}} a {@code Spliterator} describing the result of the evaluation
+*/
+opEvaluateParallelLazy : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-transform-TransformerFactory'>/**@class javax.xml.transform.TransformerFactory
+</span>@extends java.lang.Object
+
+ &lt;p&gt;A TransformerFactory instance can be used to create
+ {@link javax.xml.transform.Transformer} and
+ {@link javax.xml.transform.Templates} objects.&lt;/p&gt;
+
+ &lt;p&gt;The system property that determines which Factory implementation
+ to create is named &lt;code&gt;&quot;javax.xml.transform.TransformerFactory&quot;&lt;/code&gt;.
+ This property names a concrete subclass of the
+ &lt;code&gt;TransformerFactory&lt;/code&gt; abstract class. If the property is not
+ defined, a platform default is be used.&lt;/p&gt;
+
+ @author &lt;a href=&quot;mailto:Jeff.Suttor@Sun.com&quot;&gt;Jeff Suttor&lt;/a&gt;
+*/
+var TransformerFactory = {
+
+<span id='javax-xml-transform-TransformerFactory-method-newInstance'>/**Returns Android's implementation of {@code TransformerFactory}. Unlike
+</span> other Java implementations, this method does not consult system
+ properties, properties files, or the services API.
+@throws TransformerFactoryConfigurationError never. Included for API
+     compatibility with other Java implementations.
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-newInstance'>/**Returns an instance of the named implementation of {@code TransformerFactory}.
+</span>@throws TransformerFactoryConfigurationError if {@code factoryClassName} is not available or
+     cannot be instantiated.
+@since 1.6
+*/
+newInstance : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-newTransformer'>/**&lt;p&gt;Process the &lt;code&gt;Source&lt;/code&gt; into a &lt;code&gt;Transformer&lt;/code&gt;
+</span> &lt;code&gt;Object&lt;/code&gt;.  The &lt;code&gt;Source&lt;/code&gt; is an XSLT document that
+ conforms to &lt;a href=&quot;http://www.w3.org/TR/xslt&quot;&gt;
+ XSL Transformations (XSLT) Version 1.0&lt;/a&gt;.  Care must
+ be taken not to use this &lt;code&gt;Transformer&lt;/code&gt; in multiple
+ &lt;code&gt;Thread&lt;/code&gt;s running concurrently.
+ Different &lt;code&gt;TransformerFactories&lt;/code&gt; can be used concurrently by
+ different &lt;code&gt;Thread&lt;/code&gt;s.&lt;/p&gt;
+@param {Object {Source}} source &lt;code&gt;Source &lt;/code&gt; of XSLT document used to create
+   &lt;code&gt;Transformer&lt;/code&gt;.
+   Examples of XML &lt;code&gt;Source&lt;/code&gt;s include
+   {@link javax.xml.transform.stream.StreamSource StreamSource},
+   {@link javax.xml.transform.sax.SAXSource SAXSource} and
+   {@link javax.xml.transform.dom.DOMSource DOMSource}.
+@return {Object {javax.xml.transform.Transformer}} A &lt;code&gt;Transformer&lt;/code&gt; object that may be used to perform
+   a transformation in a single &lt;code&gt;Thread&lt;/code&gt;, never
+   &lt;code&gt;null&lt;/code&gt;.
+@throws TransformerConfigurationException Thrown if there are errors when
+    parsing the &lt;code&gt;Source&lt;/code&gt; or it is not possible to create a
+   &lt;code&gt;Transformer&lt;/code&gt; instance.
+@see &lt;a href=&quot;http://www.w3.org/TR/xslt&quot;&gt;
+   XSL Transformations (XSLT) Version 1.0&lt;/a&gt;
+*/
+newTransformer : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-newTransformer'>/**&lt;p&gt;Create a new &lt;code&gt;Transformer&lt;/code&gt; that performs a copy
+</span> of the &lt;code&gt;Source&lt;/code&gt; to the &lt;code&gt;Result&lt;/code&gt;.
+ i.e. the &quot;&lt;em&gt;identity transform&lt;/em&gt;&quot;.&lt;/p&gt;
+@return {Object {javax.xml.transform.Transformer}} A Transformer object that may be used to perform a transformation
+ in a single thread, never null.
+@exception TransformerConfigurationException Thrown if it is not
+   possible to create a &lt;code&gt;Transformer&lt;/code&gt; instance.
+*/
+newTransformer : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-newTemplates'>/**Process the Source into a Templates object, which is a
+</span> a compiled representation of the source. This Templates object
+ may then be used concurrently across multiple threads.  Creating
+ a Templates object allows the TransformerFactory to do detailed
+ performance optimization of transformation instructions, without
+ penalizing runtime transformation.
+@param {Object {Source}} source An object that holds a URL, input stream, etc.
+@return {Object {javax.xml.transform.Templates}} A Templates object capable of being used for transformation
+ purposes, never null.
+@exception TransformerConfigurationException May throw this during the
+ parse when it is constructing the Templates object and fails.
+*/
+newTemplates : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-getAssociatedStylesheet'>/**&lt;p&gt;Get the stylesheet specification(s) associated with the
+</span> XML &lt;code&gt;Source&lt;/code&gt; document via the
+ &lt;a href=&quot;http://www.w3.org/TR/xml-stylesheet/&quot;&gt;
+ xml-stylesheet processing instruction&lt;/a&gt; that match the given criteria.
+ Note that it is possible to return several stylesheets, in which case
+ they are applied as if they were a list of imports or cascades in a
+ single stylesheet.&lt;/p&gt;
+@param {Object {Source}} source The XML source document.
+@param {String} media The media attribute to be matched.  May be null, in which
+      case the preferred templates will be used (i.e. alternate = no).
+@param {String} title The value of the title attribute to match.  May be null.
+@param {String} charset The value of the charset attribute to match.  May be null.
+@return {Object {javax.xml.transform.Source}} A &lt;code&gt;Source&lt;/code&gt; &lt;code&gt;Object&lt;/code&gt; suitable for passing
+   to the &lt;code&gt;TransformerFactory&lt;/code&gt;.
+@throws TransformerConfigurationException An &lt;code&gt;Exception&lt;/code&gt;
+   is thrown if an error occurs during parsing of the
+   &lt;code&gt;source&lt;/code&gt;.
+@see &lt;a href=&quot;http://www.w3.org/TR/xml-stylesheet/&quot;&gt;
+   Associating Style Sheets with XML documents Version 1.0&lt;/a&gt;
+*/
+getAssociatedStylesheet : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-setURIResolver'>/**Set an object that is used by default during the transformation
+</span> to resolve URIs used in document(), xsl:import, or xsl:include.
+@param {Object {URIResolver}} resolver An object that implements the URIResolver interface,
+ or null.
+*/
+setURIResolver : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-getURIResolver'>/**Get the object that is used by default during the transformation
+</span> to resolve URIs used in document(), xsl:import, or xsl:include.
+@return {Object {javax.xml.transform.URIResolver}} The URIResolver that was set with setURIResolver.
+*/
+getURIResolver : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-setFeature'>/**&lt;p&gt;Set a feature for this &lt;code&gt;TransformerFactory&lt;/code&gt; and &lt;code&gt;Transformer&lt;/code&gt;s
+</span> or &lt;code&gt;Template&lt;/code&gt;s created by this factory.&lt;/p&gt;
+
+ &lt;p&gt;
+ Feature names are fully qualified {@link java.net.URI}s.
+ Implementations may define their own features.
+ An {@link javax.xml.transform.TransformerConfigurationException} is thrown if this &lt;code&gt;TransformerFactory&lt;/code&gt; or the
+ &lt;code&gt;Transformer&lt;/code&gt;s or &lt;code&gt;Template&lt;/code&gt;s it creates cannot support the feature.
+ It is possible for an &lt;code&gt;TransformerFactory&lt;/code&gt; to expose a feature value but be unable to change its state.
+ &lt;/p&gt;
+
+ &lt;p&gt;All implementations are required to support the {@link javax.xml.XMLConstants#FEATURE_SECURE_PROCESSING} feature.
+ When the feature is:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;
+     &lt;code&gt;true&lt;/code&gt;: the implementation will limit XML processing to conform to implementation limits
+     and behave in a secure fashion as defined by the implementation.
+     Examples include resolving user defined style sheets and functions.
+     If XML processing is limited for security reasons, it will be reported via a call to the registered
+     {@link javax.xml.transform.ErrorListener#fatalError(TransformerException exception)}.
+     See {@link #setErrorListener}(ErrorListener listener).
+   &lt;/li&gt;
+   &lt;li&gt;
+     &lt;code&gt;false&lt;/code&gt;: the implementation will processing XML according to the XML specifications without
+     regard to possible implementation limits.
+   &lt;/li&gt;
+ &lt;/ul&gt;
+@param {String} name Feature name.
+@param {Boolean} value Is feature state &lt;code&gt;true&lt;/code&gt; or &lt;code&gt;false&lt;/code&gt;.
+@throws TransformerConfigurationException if this &lt;code&gt;TransformerFactory&lt;/code&gt;
+   or the &lt;code&gt;Transformer&lt;/code&gt;s or &lt;code&gt;Template&lt;/code&gt;s it creates cannot support this feature.
+@throws NullPointerException If the &lt;code&gt;name&lt;/code&gt; parameter is null.
+*/
+setFeature : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-getFeature'>/**Look up the value of a feature.
+</span>
+ &lt;p&gt;
+ Feature names are fully qualified {@link java.net.URI}s.
+ Implementations may define their own features.
+ &lt;code&gt;false&lt;/code&gt; is returned if this &lt;code&gt;TransformerFactory&lt;/code&gt; or the
+ &lt;code&gt;Transformer&lt;/code&gt;s or &lt;code&gt;Template&lt;/code&gt;s it creates cannot support the feature.
+ It is possible for an &lt;code&gt;TransformerFactory&lt;/code&gt; to expose a feature value but be unable to change its state.
+ &lt;/p&gt;
+@param {String} name Feature name.
+@return {Boolean} The current state of the feature, &lt;code&gt;true&lt;/code&gt; or &lt;code&gt;false&lt;/code&gt;.
+@throws NullPointerException If the &lt;code&gt;name&lt;/code&gt; parameter is null.
+*/
+getFeature : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-setAttribute'>/**Allows the user to set specific attributes on the underlying
+</span> implementation.  An attribute in this context is defined to
+ be an option that the implementation provides.
+ An &lt;code&gt;IllegalArgumentException&lt;/code&gt; is thrown if the underlying
+ implementation doesn't recognize the attribute.
+@param {String} name The name of the attribute.
+@param {Object {Object}} value The value of the attribute.
+*/
+setAttribute : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-getAttribute'>/**Allows the user to retrieve specific attributes on the underlying
+</span> implementation.
+ An &lt;code&gt;IllegalArgumentException&lt;/code&gt; is thrown if the underlying
+ implementation doesn't recognize the attribute.
+@param {String} name The name of the attribute.
+@return {Object {java.lang.Object}} value The value of the attribute.
+*/
+getAttribute : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-setErrorListener'>/**Set the error event listener for the TransformerFactory, which
+</span> is used for the processing of transformation instructions,
+ and not for the transformation itself.
+ An &lt;code&gt;IllegalArgumentException&lt;/code&gt; is thrown if the
+ &lt;code&gt;ErrorListener&lt;/code&gt; listener is &lt;code&gt;null&lt;/code&gt;.
+@param {Object {ErrorListener}} listener The new error listener.
+*/
+setErrorListener : function(  ) {},
+
+<span id='javax-xml-transform-TransformerFactory-method-getErrorListener'>/**Get the error event handler for the TransformerFactory.
+</span>@return {Object {javax.xml.transform.ErrorListener}} The current error handler, which should never be null.
+*/
+getErrorListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

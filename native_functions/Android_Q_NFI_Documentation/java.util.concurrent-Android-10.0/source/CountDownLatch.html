@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-CountDownLatch'>/**@class java.util.concurrent.CountDownLatch
+</span>@extends java.lang.Object
+
+ A synchronization aid that allows one or more threads to wait until
+ a set of operations being performed in other threads completes.
+
+ &lt;p&gt;A {@code CountDownLatch} is initialized with a given &lt;em&gt;count&lt;/em&gt;.
+ The {@link #await await} methods block until the current count reaches
+ zero due to invocations of the {@link #countDown} method, after which
+ all waiting threads are released and any subsequent invocations of
+ {@link #await await} return immediately.  This is a one-shot phenomenon
+ -- the count cannot be reset.  If you need a version that resets the
+ count, consider using a {@link java.util.concurrent.CyclicBarrier}.
+
+ &lt;p&gt;A {@code CountDownLatch} is a versatile synchronization tool
+ and can be used for a number of purposes.  A
+ {@code CountDownLatch} initialized with a count of one serves as a
+ simple on/off latch, or gate: all threads invoking {@link #await await}
+ wait at the gate until it is opened by a thread invoking {@link #countDown}.  A {@code CountDownLatch} initialized to &lt;em&gt;N&lt;/em&gt;
+ can be used to make one thread wait until &lt;em&gt;N&lt;/em&gt; threads have
+ completed some action, or some action has been completed N times.
+
+ &lt;p&gt;A useful property of a {@code CountDownLatch} is that it
+ doesn't require that threads calling {@code countDown} wait for
+ the count to reach zero before proceeding, it simply prevents any
+ thread from proceeding past an {@link #await await} until all
+ threads could pass.
+
+ &lt;p&gt;&lt;b&gt;Sample usage:&lt;/b&gt; Here is a pair of classes in which a group
+ of worker threads use two countdown latches:
+ &lt;ul&gt;
+ &lt;li&gt;The first is a start signal that prevents any worker from proceeding
+ until the driver is ready for them to proceed;
+ &lt;li&gt;The second is a completion signal that allows the driver to wait
+ until all workers have completed.
+ &lt;/ul&gt;
+
+ &lt;pre&gt; {@code
+ class Driver { // ...
+   void main() throws InterruptedException {
+     CountDownLatch startSignal = new CountDownLatch(1);
+     CountDownLatch doneSignal = new CountDownLatch(N);
+
+     for (int i = 0; i &lt; N; ++i) // create and start threads
+       new Thread(new Worker(startSignal, doneSignal)).start();
+
+     doSomethingElse();            // don't let run yet
+     startSignal.countDown();      // let all threads proceed
+     doSomethingElse();
+     doneSignal.await();           // wait for all to finish
+   }
+ }
+
+ class Worker implements Runnable {
+   private final CountDownLatch startSignal;
+   private final CountDownLatch doneSignal;
+   Worker(CountDownLatch startSignal, CountDownLatch doneSignal) {
+     this.startSignal = startSignal;
+     this.doneSignal = doneSignal;
+   }
+   public void run() {
+     try {
+       startSignal.await();
+       doWork();
+       doneSignal.countDown();
+     } catch (InterruptedException ex) {} // return;
+   }
+
+   void doWork() { ... }
+ }}&lt;/pre&gt;
+
+ &lt;p&gt;Another typical usage would be to divide a problem into N parts,
+ describe each part with a Runnable that executes that portion and
+ counts down on the latch, and queue all the Runnables to an
+ Executor.  When all sub-parts are complete, the coordinating thread
+ will be able to pass through await. (When threads must repeatedly
+ count down in this way, instead use a {@link java.util.concurrent.CyclicBarrier}.)
+
+ &lt;pre&gt; {@code
+ class Driver2 { // ...
+   void main() throws InterruptedException {
+     CountDownLatch doneSignal = new CountDownLatch(N);
+     Executor e = ...
+
+     for (int i = 0; i &lt; N; ++i) // create and start threads
+       e.execute(new WorkerRunnable(doneSignal, i));
+
+     doneSignal.await();           // wait for all to finish
+   }
+ }
+
+ class WorkerRunnable implements Runnable {
+   private final CountDownLatch doneSignal;
+   private final int i;
+   WorkerRunnable(CountDownLatch doneSignal, int i) {
+     this.doneSignal = doneSignal;
+     this.i = i;
+   }
+   public void run() {
+     try {
+       doWork(i);
+       doneSignal.countDown();
+     } catch (InterruptedException ex) {} // return;
+   }
+
+   void doWork() { ... }
+ }}&lt;/pre&gt;
+
+ &lt;p&gt;Memory consistency effects: Until the count reaches
+ zero, actions in a thread prior to calling
+ {@code countDown()}
+ &lt;a href=&quot;package-summary.html#MemoryVisibility&quot;&gt;&lt;i&gt;happen-before&lt;/i&gt;&lt;/a&gt;
+ actions following a successful return from a corresponding
+ {@code await()} in another thread.
+
+ @since 1.5
+ @author Doug Lea
+*/
+var CountDownLatch = {
+
+<span id='java-util-concurrent-CountDownLatch-method-await'>/**Causes the current thread to wait until the latch has counted down to
+</span> zero, unless the thread is {@linkplain Thread#interrupt interrupted}.
+
+ &lt;p&gt;If the current count is zero then this method returns immediately.
+
+ &lt;p&gt;If the current count is greater than zero then the current
+ thread becomes disabled for thread scheduling purposes and lies
+ dormant until one of two things happen:
+ &lt;ul&gt;
+ &lt;li&gt;The count reaches zero due to invocations of the
+ {@link #countDown} method; or
+ &lt;li&gt;Some other thread {@linkplain Thread#interrupt interrupts}
+ the current thread.
+ &lt;/ul&gt;
+
+ &lt;p&gt;If the current thread:
+ &lt;ul&gt;
+ &lt;li&gt;has its interrupted status set on entry to this method; or
+ &lt;li&gt;is {@linkplain Thread#interrupt interrupted} while waiting,
+ &lt;/ul&gt;
+ then {@link InterruptedException} is thrown and the current thread's
+ interrupted status is cleared.
+@throws InterruptedException if the current thread is interrupted
+         while waiting
+*/
+await : function(  ) {},
+
+<span id='java-util-concurrent-CountDownLatch-method-await'>/**Causes the current thread to wait until the latch has counted down to
+</span> zero, unless the thread is {@linkplain Thread#interrupt interrupted},
+ or the specified waiting time elapses.
+
+ &lt;p&gt;If the current count is zero then this method returns immediately
+ with the value {@code true}.
+
+ &lt;p&gt;If the current count is greater than zero then the current
+ thread becomes disabled for thread scheduling purposes and lies
+ dormant until one of three things happen:
+ &lt;ul&gt;
+ &lt;li&gt;The count reaches zero due to invocations of the
+ {@link #countDown} method; or
+ &lt;li&gt;Some other thread {@linkplain Thread#interrupt interrupts}
+ the current thread; or
+ &lt;li&gt;The specified waiting time elapses.
+ &lt;/ul&gt;
+
+ &lt;p&gt;If the count reaches zero then the method returns with the
+ value {@code true}.
+
+ &lt;p&gt;If the current thread:
+ &lt;ul&gt;
+ &lt;li&gt;has its interrupted status set on entry to this method; or
+ &lt;li&gt;is {@linkplain Thread#interrupt interrupted} while waiting,
+ &lt;/ul&gt;
+ then {@link InterruptedException} is thrown and the current thread's
+ interrupted status is cleared.
+
+ &lt;p&gt;If the specified waiting time elapses then the value {@code false}
+ is returned.  If the time is less than or equal to zero, the method
+ will not wait at all.
+@param {Number} timeout the maximum time to wait
+@param {Object {TimeUnit}} unit the time unit of the {@code timeout} argument
+@return {Boolean} {@code true} if the count reached zero and {@code false}
+         if the waiting time elapsed before the count reached zero
+@throws InterruptedException if the current thread is interrupted
+         while waiting
+*/
+await : function(  ) {},
+
+<span id='java-util-concurrent-CountDownLatch-method-countDown'>/**Decrements the count of the latch, releasing all waiting threads if
+</span> the count reaches zero.
+
+ &lt;p&gt;If the current count is greater than zero then it is decremented.
+ If the new count is zero then all waiting threads are re-enabled for
+ thread scheduling purposes.
+
+ &lt;p&gt;If the current count equals zero then nothing happens.
+*/
+countDown : function(  ) {},
+
+<span id='java-util-concurrent-CountDownLatch-method-getCount'>/**Returns the current count.
+</span>
+ &lt;p&gt;This method is typically used for debugging and testing purposes.
+@return {Number} the current count
+*/
+getCount : function(  ) {},
+
+<span id='java-util-concurrent-CountDownLatch-method-toString'>/**Returns a string identifying this latch, as well as its state.
+</span> The state, in brackets, includes the String {@code &quot;Count =&quot;}
+ followed by the current count.
+@return {String} a string identifying this latch, as well as its state
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

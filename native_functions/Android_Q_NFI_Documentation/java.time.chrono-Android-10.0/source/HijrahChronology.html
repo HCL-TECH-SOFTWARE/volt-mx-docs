@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-chrono-HijrahChronology'>/**@class java.time.chrono.HijrahChronology
+</span> implements java.io.Serializable
+
+@extends java.time.chrono.AbstractChronology
+
+ The Hijrah calendar is a lunar calendar supporting Islamic calendars.
+ &lt;p&gt;
+ The HijrahChronology follows the rules of the Hijrah calendar system. The Hijrah
+ calendar has several variants based on differences in when the new moon is
+ determined to have occurred and where the observation is made.
+ In some variants the length of each month is
+ computed algorithmically from the astronomical data for the moon and earth and
+ in others the length of the month is determined by an authorized sighting
+ of the new moon. For the algorithmically based calendars the calendar
+ can project into the future.
+ For sighting based calendars only historical data from past
+ sightings is available.
+ &lt;p&gt;
+ The length of each month is 29 or 30 days.
+ Ordinary years have 354 days; leap years have 355 days.
+
+ &lt;p&gt;
+ CLDR and LDML identify variants:
+ &lt;table cellpadding=&quot;2&quot; summary=&quot;Variants of Hijrah Calendars&quot;&gt;
+ &lt;thead&gt;
+ &lt;tr class=&quot;tableSubHeadingColor&quot;&gt;
+ &lt;th class=&quot;colFirst&quot; align=&quot;left&quot; &gt;Chronology ID&lt;/th&gt;
+ &lt;th class=&quot;colFirst&quot; align=&quot;left&quot; &gt;Calendar Type&lt;/th&gt;
+ &lt;th class=&quot;colFirst&quot; align=&quot;left&quot; &gt;Locale extension, see {@link java.util.Locale}&lt;/th&gt;
+ &lt;th class=&quot;colLast&quot; align=&quot;left&quot; &gt;Description&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr class=&quot;altColor&quot;&gt;
+ &lt;td&gt;Hijrah-umalqura&lt;/td&gt;
+ &lt;td&gt;islamic-umalqura&lt;/td&gt;
+ &lt;td&gt;ca-islamic-umalqura&lt;/td&gt;
+ &lt;td&gt;Islamic - Umm Al-Qura calendar of Saudi Arabia&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+ &lt;p&gt;Additional variants may be available through {@link java.time.chrono.Chronology#getAvailableChronologies()}.
+
+ &lt;p&gt;Example&lt;/p&gt;
+ &lt;p&gt;
+ Selecting the chronology from the locale uses {@link java.time.chrono.Chronology#ofLocale}
+ to find the Chronology based on Locale supported BCP 47 extension mechanism
+ to request a specific calendar (&quot;ca&quot;). For example,
+ &lt;/p&gt;
+ &lt;pre&gt;
+      Locale locale = Locale.forLanguageTag(&quot;en-US-u-ca-islamic-umalqura&quot;);
+      Chronology chrono = Chronology.ofLocale(locale);
+ &lt;/pre&gt;
+
+ @implSpec
+ This class is immutable and thread-safe.
+
+ @implNote
+ Each Hijrah variant is configured individually. Each variant is defined by a
+ property resource that defines the {@code ID}, the {@code calendar type},
+ the start of the calendar, the alignment with the
+ ISO calendar, and the length of each month for a range of years.
+ The variants are identified in the {@code calendars.properties} file.
+ The new properties are prefixed with {@code &quot;calendars.hijrah.&quot;}:
+ &lt;table cellpadding=&quot;2&quot; border=&quot;0&quot; summary=&quot;Configuration of Hijrah Calendar Variants&quot;&gt;
+ &lt;thead&gt;
+ &lt;tr class=&quot;tableSubHeadingColor&quot;&gt;
+ &lt;th class=&quot;colFirst&quot; align=&quot;left&quot;&gt;Property Name&lt;/th&gt;
+ &lt;th class=&quot;colFirst&quot; align=&quot;left&quot;&gt;Property value&lt;/th&gt;
+ &lt;th class=&quot;colLast&quot; align=&quot;left&quot;&gt;Description &lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr class=&quot;altColor&quot;&gt;
+ &lt;td&gt;calendars.hijrah.{ID}&lt;/td&gt;
+ &lt;td&gt;The property resource defining the {@code {ID}} variant&lt;/td&gt;
+ &lt;td&gt;The property resource is located with the {@code calendars.properties} file&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr class=&quot;rowColor&quot;&gt;
+ &lt;td&gt;calendars.hijrah.{ID}.type&lt;/td&gt;
+ &lt;td&gt;The calendar type&lt;/td&gt;
+ &lt;td&gt;LDML defines the calendar type names&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+ &lt;p&gt;
+ The Hijrah property resource is a set of properties that describe the calendar.
+ The syntax is defined by {@code java.util.Properties#load(Reader)}.
+ &lt;table cellpadding=&quot;2&quot; summary=&quot;Configuration of Hijrah Calendar&quot;&gt;
+ &lt;thead&gt;
+ &lt;tr class=&quot;tableSubHeadingColor&quot;&gt;
+ &lt;th class=&quot;colFirst&quot; align=&quot;left&quot; &gt; Property Name&lt;/th&gt;
+ &lt;th class=&quot;colFirst&quot; align=&quot;left&quot; &gt; Property value&lt;/th&gt;
+ &lt;th class=&quot;colLast&quot; align=&quot;left&quot; &gt; Description &lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr class=&quot;altColor&quot;&gt;
+ &lt;td&gt;id&lt;/td&gt;
+ &lt;td&gt;Chronology Id, for example, &quot;Hijrah-umalqura&quot;&lt;/td&gt;
+ &lt;td&gt;The Id of the calendar in common usage&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr class=&quot;rowColor&quot;&gt;
+ &lt;td&gt;type&lt;/td&gt;
+ &lt;td&gt;Calendar type, for example, &quot;islamic-umalqura&quot;&lt;/td&gt;
+ &lt;td&gt;LDML defines the calendar types&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr class=&quot;altColor&quot;&gt;
+ &lt;td&gt;version&lt;/td&gt;
+ &lt;td&gt;Version, for example: &quot;1.8.0_1&quot;&lt;/td&gt;
+ &lt;td&gt;The version of the Hijrah variant data&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr class=&quot;rowColor&quot;&gt;
+ &lt;td&gt;iso-start&lt;/td&gt;
+ &lt;td&gt;ISO start date, formatted as {@code yyyy-MM-dd}, for example: &quot;1900-04-30&quot;&lt;/td&gt;
+ &lt;td&gt;The ISO date of the first day of the minimum Hijrah year.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr class=&quot;altColor&quot;&gt;
+ &lt;td&gt;yyyy - a numeric 4 digit year, for example &quot;1434&quot;&lt;/td&gt;
+ &lt;td&gt;The value is a sequence of 12 month lengths,
+ for example: &quot;29 30 29 30 29 30 30 30 29 30 29 29&quot;&lt;/td&gt;
+ &lt;td&gt;The lengths of the 12 months of the year separated by whitespace.
+ A numeric year property must be present for every year without any gaps.
+ The month lengths must be between 29-32 inclusive.
+ &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ @since 1.8
+*/
+var HijrahChronology = {
+
+<span id='java-time-chrono-HijrahChronology-property-INSTANCE'>/** Singleton instance of the Islamic Umm Al-Qura calendar of Saudi Arabia.
+</span> Other Hijrah chronology variants may be available from
+ {@link java.time.chrono.Chronology#getAvailableChronologies}.
+*/
+INSTANCE : &quot;null&quot;,
+<span id='java-time-chrono-HijrahChronology-method-getId'>/**Gets the ID of the chronology.
+</span> &lt;p&gt;
+ The ID uniquely identifies the {@code Chronology}. It can be used to
+ lookup the {@code Chronology} using {@link java.time.chrono.Chronology#of(String)}.
+@return {String} the chronology ID, non-null
+@see #getCalendarType()
+*/
+getId : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-getCalendarType'>/**Gets the calendar type of the Islamic calendar.
+</span> &lt;p&gt;
+ The calendar type is an identifier defined by the
+ &lt;em&gt;Unicode Locale Data Markup Language (LDML)&lt;/em&gt; specification.
+ It can be used to lookup the {@code Chronology} using {@link java.time.chrono.Chronology#of(String)}.
+@return {String} the calendar system type; non-null if the calendar has
+    a standard type, otherwise null
+@see #getId()
+*/
+getCalendarType : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-date'>/**Obtains a local date in Hijrah calendar system from the
+</span> era, year-of-era, month-of-year and day-of-month fields.
+@param {Object {Era}} era  the Hijrah era, not null
+@param {Number} yearOfEra  the year-of-era
+@param {Number} month  the month-of-year
+@param {Number} dayOfMonth  the day-of-month
+@return {Object {java.time.chrono.HijrahDate}} the Hijrah local date, not null
+@throws DateTimeException if unable to create the date
+@throws ClassCastException if the {@code era} is not a {@code HijrahEra}
+*/
+date : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-date'>/**Obtains a local date in Hijrah calendar system from the
+</span> proleptic-year, month-of-year and day-of-month fields.
+@param {Number} prolepticYear  the proleptic-year
+@param {Number} month  the month-of-year
+@param {Number} dayOfMonth  the day-of-month
+@return {Object {java.time.chrono.HijrahDate}} the Hijrah local date, not null
+@throws DateTimeException if unable to create the date
+*/
+date : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-dateYearDay'>/**Obtains a local date in Hijrah calendar system from the
+</span> era, year-of-era and day-of-year fields.
+@param {Object {Era}} era  the Hijrah era, not null
+@param {Number} yearOfEra  the year-of-era
+@param {Number} dayOfYear  the day-of-year
+@return {Object {java.time.chrono.HijrahDate}} the Hijrah local date, not null
+@throws DateTimeException if unable to create the date
+@throws ClassCastException if the {@code era} is not a {@code HijrahEra}
+*/
+dateYearDay : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-dateYearDay'>/**Obtains a local date in Hijrah calendar system from the
+</span> proleptic-year and day-of-year fields.
+@param {Number} prolepticYear  the proleptic-year
+@param {Number} dayOfYear  the day-of-year
+@return {Object {java.time.chrono.HijrahDate}} the Hijrah local date, not null
+@throws DateTimeException if the value of the year is out of range,
+  or if the day-of-year is invalid for the year
+*/
+dateYearDay : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-dateEpochDay'>/**Obtains a local date in the Hijrah calendar system from the epoch-day.
+</span>@param {Number} epochDay  the epoch day
+@return {Object {java.time.chrono.HijrahDate}} the Hijrah local date, not null
+@throws DateTimeException if unable to create the date
+*/
+dateEpochDay : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-dateNow'>/**
+</span>*/
+dateNow : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-dateNow'>/**
+</span>*/
+dateNow : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-dateNow'>/**
+</span>*/
+dateNow : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-date'>/**
+</span>*/
+date : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-localDateTime'>/**
+</span>*/
+localDateTime : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-zonedDateTime'>/**
+</span>*/
+zonedDateTime : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-zonedDateTime'>/**
+</span>*/
+zonedDateTime : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-isLeapYear'>/**
+</span>*/
+isLeapYear : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-prolepticYear'>/**
+</span>*/
+prolepticYear : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-eraOf'>/**
+</span>*/
+eraOf : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-eras'>/**
+</span>*/
+eras : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-range'>/**
+</span>*/
+range : function(  ) {},
+
+<span id='java-time-chrono-HijrahChronology-method-resolveDate'>/**
+</span>*/
+resolveDate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

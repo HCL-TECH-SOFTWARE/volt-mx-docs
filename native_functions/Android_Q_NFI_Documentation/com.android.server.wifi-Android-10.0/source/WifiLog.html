@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiLog'>/**@class com.android.server.wifi.WifiLog
+</span> Provides an abstraction of logging back-ends.
+
+ The abstraction is designed to
+ a) minimize the cost of disabled log messages,
+ b) allow callers to tag message parameters as containing sensitive
+    information,
+ c) avoid the use of format codes, and
+ d) easily support additional data types.
+
+ Implementations of WifiLog may or may not be thread-safe.
+ Implementations of LogMessage are expected _not_ to be thread-safe,
+ as LogMessage instances are not expected to be shared between threads.
+*/
+var WifiLog = {
+
+<span id='com-android-server-wifi-WifiLog-property-PLACEHOLDER'>/***/
+</span>PLACEHOLDER : &quot;37&quot;,
+<span id='com-android-server-wifi-WifiLog-method-err'>/**Allocate an error-level log message, which the caller will fill with
+</span> additional parameters according to |format|. After filling the message
+ with parameters, the caller must call flush(), to actually log the message.
+
+ Error-level messages should be used when a malfunction has occurred,
+ and the malfunction is likely to cause an externally visible problem.
+ For example: we failed to initialize the Wifi interface.
+
+ Typical usage is as follows:
+     WifiDevice() {
+         mLog = new LogcatLog(&quot;ModuleName&quot;);
+     }
+
+     void start() {
+         // ...
+         mLog.err(&quot;error % while starting interface %&quot;).c(errNum).c(ifaceName).flush();
+     }
+
+     void stop() {
+         // ...
+         mLog.err(&quot;error % while stopping interface %&quot;).c(errNum).c(ifaceName).flush();
+     }
+*/
+err : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-warn'>/**Like {@link #err(String) err()}, except that a warning-level message is
+</span> allocated.
+
+ Warning-level messages should be used when a malfunction has occurred,
+ but the malfunction is _unlikely_ to cause an externally visible problem
+ on its own. For example: if we fail to start the debugging subsystem.
+*/
+warn : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-info'>/**Like {@link #err(String) err()}, except that a info-level message is
+</span> allocated.
+
+ Info-level messages should be used to report progress or status messages
+ that help understand the program's external behavior. For example: we
+ might log an info message before initiating a Wifi association.
+*/
+info : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-trace'>/**Like {@link #err(String) err()}, except:
+</span> - a trace-level message is allocated
+ - the log message is prefixed with the caller's name
+
+ Trace-level messages should be used to report progress or status messages
+ that help understand the program's internal behavior. For example:
+ &quot;invoked with verbose=%&quot;.
+*/
+trace : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-trace'>/**Like {@link #trace(String) trace(String)}, except that, rather than logging
+</span> the immediate caller, the |numFramesToIgnore + 1|-th caller will be logged.
+
+ E.g. if numFramesToIgnore == 1, then the caller's caller will be logged.
+
+ Trace-level messages should be used to report progress or status messages
+ that help understand the program's internal behavior. For example:
+ &quot;invoked with verbose=%&quot;.
+*/
+trace : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-dump'>/**Like {@link #err(String) err()}, except that a dump-level message is
+</span> allocated.
+
+ Dump-level messages should be used to report detailed internal state.
+*/
+dump : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-eC'>/**Log a warning using the default tag for this WifiLog instance. Mark
+</span> the message as 'clean' (i.e. _not_ containing any sensitive data).
+
+ NOTE: this method should only be used for literal strings. For messages with
+ parameters, use err().
+@param {String} msg the message to be logged
+*/
+eC : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-wC'>/**Like {@link #eC}(String) eC()}, except that a warning-level message
+</span> is logged.
+*/
+wC : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-iC'>/**Like {@link #eC}(String) eC()}, except that an info-level message
+</span> is logged.
+*/
+iC : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-tC'>/**Like {@link #eC}(String) eC()}, except that a trace-level message
+</span> is logged.
+*/
+tC : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-e'>/**Log an error using the default tag for this WifiLog instance.
+</span>@param {String} msg the message to be logged
+ TODO(b/30736737): Remove this method, once all code has migrated to alternatives.
+*/
+e : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-w'>/**Log a warning using the default tag for this WifiLog instance.
+</span>@param {String} msg the message to be logged
+ TODO(b/30736737): Remove this method, once all code has migrated to alternatives.
+*/
+w : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-i'>/**Log an informational message using the default tag for this WifiLog instance.
+</span>@param {String} msg the message to be logged
+ TODO(b/30736737): Remove this method, once all code has migrated to alternatives.
+*/
+i : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-d'>/**Log a debug message using the default tag for this WifiLog instance.
+</span>@param {String} msg the message to be logged
+ TODO(b/30736737): Remove this method, once all code has migrated to alternatives.
+*/
+d : function(  ) {},
+
+<span id='com-android-server-wifi-WifiLog-method-v'>/**Log a verbose message using the default tag for this WifiLog instance.
+</span>@param {String} msg the message to be logged
+ TODO(b/30736737): Remove this method, once all code has migrated to alternatives.
+*/
+v : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

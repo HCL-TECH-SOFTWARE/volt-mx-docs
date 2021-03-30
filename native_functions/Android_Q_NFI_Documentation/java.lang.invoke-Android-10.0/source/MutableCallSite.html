@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-invoke-MutableCallSite'>/**@class java.lang.invoke.MutableCallSite
+</span>@extends java.lang.invoke.CallSite
+
+ A {@code MutableCallSite} is a {@link java.lang.invoke.CallSite} whose target variable
+ behaves like an ordinary field.
+ An {@code invokedynamic} instruction linked to a {@code MutableCallSite} delegates
+ all calls to the site's current target.
+ The {@linkplain java.lang.invoke.CallSite#dynamicInvoker dynamic invoker} of a mutable call site
+ also delegates each call to the site's current target.
+ &lt;p&gt;
+ Here is an example of a mutable call site which introduces a
+ state variable into a method handle chain.
+ &lt;!-- JavaDocExamplesTest.testMutableCallSite --&gt;
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+MutableCallSite name = new MutableCallSite(MethodType.methodType(String.class));
+MethodHandle MH_name = name.dynamicInvoker();
+MethodType MT_str1 = MethodType.methodType(String.class);
+MethodHandle MH_upcase = MethodHandles.lookup()
+    .findVirtual(String.class, &quot;toUpperCase&quot;, MT_str1);
+MethodHandle worker1 = MethodHandles.filterReturnValue(MH_name, MH_upcase);
+name.setTarget(MethodHandles.constant(String.class, &quot;Rocky&quot;));
+assertEquals(&quot;ROCKY&quot;, (String) worker1.invokeExact());
+name.setTarget(MethodHandles.constant(String.class, &quot;Fred&quot;));
+assertEquals(&quot;FRED&quot;, (String) worker1.invokeExact());
+// (mutation can be continued indefinitely)
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;p&gt;
+ The same call site may be used in several places at once.
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+MethodType MT_str2 = MethodType.methodType(String.class, String.class);
+MethodHandle MH_cat = lookup().findVirtual(String.class,
+  &quot;concat&quot;, methodType(String.class, String.class));
+MethodHandle MH_dear = MethodHandles.insertArguments(MH_cat, 1, &quot;, dear?&quot;);
+MethodHandle worker2 = MethodHandles.filterReturnValue(MH_name, MH_dear);
+assertEquals(&quot;Fred, dear?&quot;, (String) worker2.invokeExact());
+name.setTarget(MethodHandles.constant(String.class, &quot;Wilma&quot;));
+assertEquals(&quot;WILMA&quot;, (String) worker1.invokeExact());
+assertEquals(&quot;Wilma, dear?&quot;, (String) worker2.invokeExact());
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;p&gt;
+ &lt;em&gt;Non-synchronization of target values:&lt;/em&gt;
+ A write to a mutable call site's target does not force other threads
+ to become aware of the updated value.  Threads which do not perform
+ suitable synchronization actions relative to the updated call site
+ may cache the old target value and delay their use of the new target
+ value indefinitely.
+ (This is a normal consequence of the Java Memory Model as applied
+ to object fields.)
+ &lt;p&gt;
+ For target values which will be frequently updated, consider using
+ a {@linkplain java.lang.invoke.VolatileCallSite volatile call site} instead.
+ @author John Rose, JSR 292 EG
+*/
+var MutableCallSite = {
+
+<span id='java-lang-invoke-MutableCallSite-method-getTarget'>/**Returns the target method of the call site, which behaves
+</span> like a normal field of the {@code MutableCallSite}.
+ &lt;p&gt;
+ The interactions of {@code getTarget} with memory are the same
+ as of a read from an ordinary variable, such as an array element or a
+ non-volatile, non-final field.
+ &lt;p&gt;
+ In particular, the current thread may choose to reuse the result
+ of a previous read of the target from memory, and may fail to see
+ a recent update to the target by another thread.
+@return {Object {java.lang.invoke.MethodHandle}} the linkage state of this call site, a method handle which can change over time
+@see #setTarget
+*/
+getTarget : function(  ) {},
+
+<span id='java-lang-invoke-MutableCallSite-method-setTarget'>/**Updates the target method of this call site, as a normal variable.
+</span> The type of the new target must agree with the type of the old target.
+ &lt;p&gt;
+ The interactions with memory are the same
+ as of a write to an ordinary variable, such as an array element or a
+ non-volatile, non-final field.
+ &lt;p&gt;
+ In particular, unrelated threads may fail to see the updated target
+ until they perform a read from memory.
+ Stronger guarantees can be created by putting appropriate operations
+ into the bootstrap method and/or the target methods used
+ at any given call site.
+@param {Object {MethodHandle}} newTarget the new target
+@throws NullPointerException if the proposed new target is null
+@throws WrongMethodTypeException if the proposed new target
+         has a method type that differs from the previous target
+@see #getTarget
+*/
+setTarget : function(  ) {},
+
+<span id='java-lang-invoke-MutableCallSite-method-dynamicInvoker'>/**{@inheritDoc}
+</span>*/
+dynamicInvoker : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

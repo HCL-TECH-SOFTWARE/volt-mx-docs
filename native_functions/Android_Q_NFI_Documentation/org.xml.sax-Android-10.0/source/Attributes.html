@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xml-sax-Attributes'>/**@class org.xml.sax.Attributes
+</span> Interface for a list of XML attributes.
+
+ &lt;blockquote&gt;
+ &lt;em&gt;This module, both source code and documentation, is in the
+ Public Domain, and comes with &lt;strong&gt;NO WARRANTY&lt;/strong&gt;.&lt;/em&gt;
+ See &lt;a href='http://www.saxproject.org'&gt;http://www.saxproject.org&lt;/a&gt;
+ for further information.
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;This interface allows access to a list of attributes in
+ three different ways:&lt;/p&gt;
+
+ &lt;ol&gt;
+ &lt;li&gt;by attribute index;&lt;/li&gt;
+ &lt;li&gt;by Namespace-qualified name; or&lt;/li&gt;
+ &lt;li&gt;by qualified (prefixed) name.&lt;/li&gt;
+ &lt;/ol&gt;
+
+ &lt;p&gt;The list will not contain attributes that were declared
+ #IMPLIED but not specified in the start tag.  It will also not
+ contain attributes used as Namespace declarations (xmlns*) unless
+ the &lt;code&gt;http://xml.org/sax/features/namespace-prefixes&lt;/code&gt;
+ feature is set to &lt;var&gt;true&lt;/var&gt; (it is &lt;var&gt;false&lt;/var&gt; by
+ default).
+ Because SAX2 conforms to the original &quot;Namespaces in XML&quot;
+ recommendation, it normally does not
+ give namespace declaration attributes a namespace URI.
+ &lt;/p&gt;
+
+ &lt;p&gt;Some SAX2 parsers may support using an optional feature flag
+ (&lt;code&gt;http://xml.org/sax/features/xmlns-uris&lt;/code&gt;) to request
+ that those attributes be given URIs, conforming to a later
+ backwards-incompatible revision of that recommendation.  (The
+ attribute's &quot;local name&quot; will be the prefix, or &quot;xmlns&quot; when
+ defining a default element namespace.)  For portability, handler
+ code should always resolve that conflict, rather than requiring
+ parsers that can change the setting of that feature flag.  &lt;/p&gt;
+
+ &lt;p&gt;If the namespace-prefixes feature (see above) is
+ &lt;var&gt;false&lt;/var&gt;, access by qualified name may not be available; if
+ the &lt;code&gt;http://xml.org/sax/features/namespaces&lt;/code&gt; feature is
+ &lt;var&gt;false&lt;/var&gt;, access by Namespace-qualified names may not be
+ available.&lt;/p&gt;
+
+ &lt;p&gt;This interface replaces the now-deprecated SAX1 {@link org.xml.sax.AttributeList AttributeList} interface, which does not
+ contain Namespace support.  In addition to Namespace support, it
+ adds the &lt;var&gt;getIndex&lt;/var&gt; methods (below).&lt;/p&gt;
+
+ &lt;p&gt;The order of attributes in the list is unspecified, and will
+ vary from implementation to implementation.&lt;/p&gt;
+
+ @since SAX 2.0
+ @author David Megginson
+ @version 2.0.1 (sax2r2)
+ @see org.xml.sax.helpers.AttributesImpl
+ @see org.xml.sax.ext.DeclHandler#attributeDecl
+*/
+var Attributes = {
+
+<span id='org-xml-sax-Attributes-method-getLength'>/**Return the number of attributes in the list.
+</span>
+ &lt;p&gt;Once you know the number of attributes, you can iterate
+ through the list.&lt;/p&gt;
+@return {Number} The number of attributes in the list.
+@see #getURI(int)
+@see #getLocalName(int)
+@see #getQName(int)
+@see #getType(int)
+@see #getValue(int)
+*/
+getLength : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getURI'>/**Look up an attribute's Namespace URI by index.
+</span>@param {Number} index The attribute index (zero-based).
+@return {String} The Namespace URI, or the empty string if none
+         is available, or null if the index is out of
+         range.
+@see #getLength
+*/
+getURI : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getLocalName'>/**Look up an attribute's local name by index.
+</span>@param {Number} index The attribute index (zero-based).
+@return {String} The local name, or the empty string if Namespace
+         processing is not being performed, or null
+         if the index is out of range.
+@see #getLength
+*/
+getLocalName : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getQName'>/**Look up an attribute's XML qualified (prefixed) name by index.
+</span>@param {Number} index The attribute index (zero-based).
+@return {String} The XML qualified name, or the empty string
+         if none is available, or null if the index
+         is out of range.
+@see #getLength
+*/
+getQName : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getType'>/**Look up an attribute's type by index.
+</span>
+ &lt;p&gt;The attribute type is one of the strings &quot;CDATA&quot;, &quot;ID&quot;,
+ &quot;IDREF&quot;, &quot;IDREFS&quot;, &quot;NMTOKEN&quot;, &quot;NMTOKENS&quot;, &quot;ENTITY&quot;, &quot;ENTITIES&quot;,
+ or &quot;NOTATION&quot; (always in upper case).&lt;/p&gt;
+
+ &lt;p&gt;If the parser has not read a declaration for the attribute,
+ or if the parser does not report attribute types, then it must
+ return the value &quot;CDATA&quot; as stated in the XML 1.0 Recommendation
+ (clause 3.3.3, &quot;Attribute-Value Normalization&quot;).&lt;/p&gt;
+
+ &lt;p&gt;For an enumerated attribute that is not a notation, the
+ parser will report the type as &quot;NMTOKEN&quot;.&lt;/p&gt;
+@param {Number} index The attribute index (zero-based).
+@return {String} The attribute's type as a string, or null if the
+         index is out of range.
+@see #getLength
+*/
+getType : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getValue'>/**Look up an attribute's value by index.
+</span>
+ &lt;p&gt;If the attribute value is a list of tokens (IDREFS,
+ ENTITIES, or NMTOKENS), the tokens will be concatenated
+ into a single string with each token separated by a
+ single space.&lt;/p&gt;
+@param {Number} index The attribute index (zero-based).
+@return {String} The attribute's value as a string, or null if the
+         index is out of range.
+@see #getLength
+*/
+getValue : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getIndex'>/**Look up the index of an attribute by Namespace name.
+</span>@param {String} uri The Namespace URI, or the empty string if
+        the name has no Namespace URI.
+@param {String} localName The attribute's local name.
+@return {Number} The index of the attribute, or -1 if it does not
+         appear in the list.
+*/
+getIndex : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getIndex'>/**Look up the index of an attribute by XML qualified (prefixed) name.
+</span>@param {String} qName The qualified (prefixed) name.
+@return {Number} The index of the attribute, or -1 if it does not
+         appear in the list.
+*/
+getIndex : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getType'>/**Look up an attribute's type by Namespace name.
+</span>
+ &lt;p&gt;See {@link #getType(int) getType(int)} for a description
+ of the possible types.&lt;/p&gt;
+@param {String} uri The Namespace URI, or the empty String if the
+        name has no Namespace URI.
+@param {String} localName The local name of the attribute.
+@return {String} The attribute type as a string, or null if the
+         attribute is not in the list or if Namespace
+         processing is not being performed.
+*/
+getType : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getType'>/**Look up an attribute's type by XML qualified (prefixed) name.
+</span>
+ &lt;p&gt;See {@link #getType(int) getType(int)} for a description
+ of the possible types.&lt;/p&gt;
+@param {String} qName The XML qualified name.
+@return {String} The attribute type as a string, or null if the
+         attribute is not in the list or if qualified names
+         are not available.
+*/
+getType : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getValue'>/**Look up an attribute's value by Namespace name.
+</span>
+ &lt;p&gt;See {@link #getValue(int) getValue(int)} for a description
+ of the possible values.&lt;/p&gt;
+@param {String} uri The Namespace URI, or the empty String if the
+        name has no Namespace URI.
+@param {String} localName The local name of the attribute.
+@return {String} The attribute value as a string, or null if the
+         attribute is not in the list.
+*/
+getValue : function(  ) {},
+
+<span id='org-xml-sax-Attributes-method-getValue'>/**Look up an attribute's value by XML qualified (prefixed) name.
+</span>
+ &lt;p&gt;See {@link #getValue(int) getValue(int)} for a description
+ of the possible values.&lt;/p&gt;
+@param {String} qName The XML qualified name.
+@return {String} The attribute value as a string, or null if the
+         attribute is not in the list or if qualified names
+         are not available.
+*/
+getValue : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

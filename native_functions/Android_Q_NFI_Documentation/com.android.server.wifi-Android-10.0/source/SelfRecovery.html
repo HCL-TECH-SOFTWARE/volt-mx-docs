@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-SelfRecovery'>/**@class com.android.server.wifi.SelfRecovery
+</span>@extends java.lang.Object
+
+ This class is used to recover the wifi stack from a fatal failure. The recovery mechanism
+ involves triggering a stack restart (essentially simulating an airplane mode toggle) using
+ {@link com.android.server.wifi.WifiController}.
+ The current triggers for:
+ 1. Last resort watchdog bite.
+ 2. HAL/wificond crashes during normal operation.
+ 3. TBD: supplicant crashes during normal operation.
+*/
+var SelfRecovery = {
+
+<span id='com-android-server-wifi-SelfRecovery-property-REASON_LAST_RESORT_WATCHDOG'>/** Reason codes for the various recovery triggers.
+</span>*/
+REASON_LAST_RESORT_WATCHDOG : &quot;0&quot;,
+<span id='com-android-server-wifi-SelfRecovery-property-REASON_WIFINATIVE_FAILURE'>/***/
+</span>REASON_WIFINATIVE_FAILURE : &quot;1&quot;,
+<span id='com-android-server-wifi-SelfRecovery-property-REASON_STA_IFACE_DOWN'>/***/
+</span>REASON_STA_IFACE_DOWN : &quot;2&quot;,
+<span id='com-android-server-wifi-SelfRecovery-property-MAX_RESTARTS_IN_TIME_WINDOW'>/***/
+</span>MAX_RESTARTS_IN_TIME_WINDOW : &quot;2&quot;,
+<span id='com-android-server-wifi-SelfRecovery-property-MAX_RESTARTS_TIME_WINDOW_MILLIS'>/***/
+</span>MAX_RESTARTS_TIME_WINDOW_MILLIS : &quot;3600000&quot;,
+<span id='com-android-server-wifi-SelfRecovery-method-trigger'>/**Trigger recovery.
+</span>
+ This method does the following:
+ 1. Checks reason code used to trigger recovery
+ 2. Checks for sta iface down triggers and disables wifi by sending {@link com.android.server.wifi.WifiController#CMD_RECOVERY_DISABLE_WIFI} to {@link com.android.server.wifi.WifiController} to disable wifi.
+ 3. Throttles restart calls for underlying native failures
+ 4. Sends {@link com.android.server.wifi.WifiController#CMD_RECOVERY_RESTART_WIFI} to {@link com.android.server.wifi.WifiController} to
+ initiate the stack restart.
+@param {Number} reason One of the above |REASON_*| codes.
+*/
+trigger : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

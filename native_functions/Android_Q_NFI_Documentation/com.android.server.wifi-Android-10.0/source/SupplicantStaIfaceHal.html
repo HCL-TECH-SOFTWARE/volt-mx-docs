@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-SupplicantStaIfaceHal'>/**@class com.android.server.wifi.SupplicantStaIfaceHal
+</span>@extends java.lang.Object
+
+ Hal calls for bring up/shut down of the supplicant daemon and for
+ sending requests to the supplicant daemon
+ To maintain thread-safety, the locking protocol is that every non-static method (regardless of
+ access level) acquires mLock.
+*/
+var SupplicantStaIfaceHal = {
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-property-HAL_INSTANCE_NAME'>/***/
+</span>HAL_INSTANCE_NAME : &quot;default&quot;,
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-property-INIT_START_PROPERTY'>/***/
+</span>INIT_START_PROPERTY : &quot;ctl.start&quot;,
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-property-INIT_STOP_PROPERTY'>/***/
+</span>INIT_STOP_PROPERTY : &quot;ctl.stop&quot;,
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-property-INIT_SERVICE_NAME'>/***/
+</span>INIT_SERVICE_NAME : &quot;wpa_supplicant&quot;,
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-initialize'>/**Registers a service notification for the ISupplicant service, which triggers initialization
+</span> of the ISupplicantStaIface
+@return {Boolean} true if the service notification was successfully registered
+*/
+initialize : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setupIface'>/**Setup a STA interface for the specified iface name.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true on success, false otherwise.
+*/
+setupIface : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-teardownIface'>/**Teardown a STA interface for the specified iface name.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true on success, false otherwise.
+*/
+teardownIface : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-registerDeathHandler'>/**Registers a death notification for supplicant.
+</span>@return {Boolean} Returns true on success.
+*/
+registerDeathHandler : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-deregisterDeathHandler'>/**Deregisters a death notification for supplicant.
+</span>@return {Boolean} Returns true on success.
+*/
+deregisterDeathHandler : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-isInitializationStarted'>/**Signals whether Initialization completed successfully.
+</span>*/
+isInitializationStarted : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-isInitializationComplete'>/**Signals whether Initialization completed successfully.
+</span>*/
+isInitializationComplete : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-startDaemon'>/**Start the supplicant daemon.
+</span>@return {Boolean} true on success, false otherwise.
+*/
+startDaemon : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-terminate'>/**Terminate the supplicant daemon.
+</span>*/
+terminate : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-connectToNetwork'>/**Add the provided network configuration to wpa_supplicant and initiate connection to it.
+</span> This method does the following:
+ 1. If |config| is different to the current supplicant network, removes all supplicant
+ networks and saves |config|.
+ 2. Select the new network in wpa_supplicant.
+@param {String} ifaceName Name of the interface.
+@param {Object {WifiConfiguration}} config WifiConfiguration parameters for the provided network.
+@return {Boolean} {@code true} if it succeeds, {@code false} otherwise
+*/
+connectToNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-roamToNetwork'>/**Initiates roaming to the already configured network in wpa_supplicant. If the network
+</span> configuration provided does not match the already configured network, then this triggers
+ a new connection attempt (instead of roam).
+ 1. First check if we're attempting to connect to the same network as we currently have
+ configured.
+ 2. Set the new bssid for the network in wpa_supplicant.
+ 3. Trigger reassociate command to wpa_supplicant.
+@param {String} ifaceName Name of the interface.
+@param {Object {WifiConfiguration}} config WifiConfiguration parameters for the provided network.
+@return {Boolean} {@code true} if it succeeds, {@code false} otherwise
+*/
+roamToNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-loadNetworks'>/**Load all the configured networks from wpa_supplicant.
+</span>@param {String} ifaceName     Name of the interface.
+@param {Object {java.util.Map}} configs       Map of configuration key to configuration objects corresponding to all
+                      the networks.
+@param {Object {android.util.SparseArray}} networkExtras Map of extra configuration parameters stored in wpa_supplicant.conf
+@return {Boolean} true if succeeds, false otherwise.
+*/
+loadNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-removeNetworkIfCurrent'>/**Remove the request |networkId| from supplicant if it's the current network,
+</span> if the current configured network matches |networkId|.
+@param {String} ifaceName Name of the interface.
+@param {Number} networkId network id of the network to be removed from supplicant.
+*/
+removeNetworkIfCurrent : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-removeAllNetworks'>/**Remove all networks from supplicant
+</span>@param {String} ifaceName Name of the interface.
+*/
+removeAllNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setCurrentNetworkBssid'>/**Set the currently configured network's bssid.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssidStr Bssid to set in the form of &quot;XX:XX:XX:XX:XX:XX&quot;
+@return {Boolean} true if succeeds, false otherwise.
+*/
+setCurrentNetworkBssid : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-getCurrentNetworkWpsNfcConfigurationToken'>/**Get the currently configured network's WPS NFC token.
+</span>@param {String} ifaceName Name of the interface.
+@return {String} Hex string corresponding to the WPS NFC token.
+*/
+getCurrentNetworkWpsNfcConfigurationToken : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-getCurrentNetworkEapAnonymousIdentity'>/**Get the eap anonymous identity for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@return {String} anonymous identity string if succeeds, null otherwise.
+*/
+getCurrentNetworkEapAnonymousIdentity : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-sendCurrentNetworkEapIdentityResponse'>/**Send the eap identity response for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} identity identity used for EAP-Identity
+@param {String} encryptedIdentity encrypted identity used for EAP-AKA/EAP-SIM
+@return {Boolean} true if succeeds, false otherwise.
+*/
+sendCurrentNetworkEapIdentityResponse : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-sendCurrentNetworkEapSimGsmAuthResponse'>/**Send the eap sim gsm auth response for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} paramsStr String to send.
+@return {Boolean} true if succeeds, false otherwise.
+*/
+sendCurrentNetworkEapSimGsmAuthResponse : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-sendCurrentNetworkEapSimGsmAuthFailure'>/**Send the eap sim gsm auth failure for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if succeeds, false otherwise.
+*/
+sendCurrentNetworkEapSimGsmAuthFailure : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-sendCurrentNetworkEapSimUmtsAuthResponse'>/**Send the eap sim umts auth response for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} paramsStr String to send.
+@return {Boolean} true if succeeds, false otherwise.
+*/
+sendCurrentNetworkEapSimUmtsAuthResponse : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-sendCurrentNetworkEapSimUmtsAutsResponse'>/**Send the eap sim umts auts response for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} paramsStr String to send.
+@return {Boolean} true if succeeds, false otherwise.
+*/
+sendCurrentNetworkEapSimUmtsAutsResponse : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-sendCurrentNetworkEapSimUmtsAuthFailure'>/**Send the eap sim umts auth failure for the currently configured network.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if succeeds, false otherwise.
+*/
+sendCurrentNetworkEapSimUmtsAuthFailure : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setWpsDeviceName'>/**Set WPS device name.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} name String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setWpsDeviceName : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setWpsDeviceType'>/**Set WPS device type.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} typeStr Type specified as a string. Used format: &lt;categ&gt;-&lt;OUI&gt;-&lt;subcateg&gt;
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setWpsDeviceType : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setWpsManufacturer'>/**Set WPS manufacturer.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} manufacturer String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setWpsManufacturer : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setWpsModelName'>/**Set WPS model name.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} modelName String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setWpsModelName : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setWpsModelNumber'>/**Set WPS model number.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} modelNumber String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setWpsModelNumber : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setWpsSerialNumber'>/**Set WPS serial number.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} serialNumber String to be set.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setWpsSerialNumber : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setWpsConfigMethods'>/**Set WPS config methods
+</span>@param {String} ifaceName Name of the interface.
+@param {String} configMethodsStr List of config methods.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setWpsConfigMethods : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-reassociate'>/**Trigger a reassociation even if the iface is currently connected.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+reassociate : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-reconnect'>/**Trigger a reconnection if the iface is disconnected.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+reconnect : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-disconnect'>/**Trigger a disconnection from the currently connected network.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+disconnect : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setPowerSave'>/**Enable or disable power save mode.
+</span>@param {String} ifaceName Name of the interface.
+@param {Boolean} enable true to enable, false to disable.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setPowerSave : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-initiateTdlsDiscover'>/**Initiate TDLS discover with the specified AP.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} macAddress MAC Address of the AP.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+initiateTdlsDiscover : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-initiateTdlsSetup'>/**Initiate TDLS setup with the specified AP.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} macAddress MAC Address of the AP.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+initiateTdlsSetup : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-initiateTdlsTeardown'>/**Initiate TDLS teardown with the specified AP.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} macAddress MAC Address of the AP.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+initiateTdlsTeardown : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-initiateAnqpQuery'>/**Request the specified ANQP elements |elements| from the specified AP |bssid|.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssid BSSID of the AP
+@param {Object {java.util.ArrayList}} infoElements ANQP elements to be queried. Refer to ISupplicantStaIface.AnqpInfoId.
+@param {Object {java.util.ArrayList}} hs20SubTypes HS subtypes to be queried. Refer to ISupplicantStaIface.Hs20AnqpSubTypes.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+initiateAnqpQuery : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-initiateHs20IconQuery'>/**Request the specified ANQP ICON from the specified AP |bssid|.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssid BSSID of the AP
+@param {String} fileName Name of the file to request.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+initiateHs20IconQuery : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-getMacAddress'>/**Makes a callback to HIDL to getMacAddress from supplicant
+</span>@param {String} ifaceName Name of the interface.
+@return {String} string containing the MAC address, or null on a failed call
+*/
+getMacAddress : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-startRxFilter'>/**Start using the added RX filters.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+startRxFilter : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-stopRxFilter'>/**Stop using the added RX filters.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+stopRxFilter : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-addRxFilter'>/**Add an RX filter.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} type one of {@link WifiNative#RX_FILTER_TYPE_V4_MULTICAST}
+        {@link WifiNative#RX_FILTER_TYPE_V6_MULTICAST} values.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+addRxFilter : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-removeRxFilter'>/**Remove an RX filter.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} type one of {@link WifiNative#RX_FILTER_TYPE_V4_MULTICAST}
+        {@link WifiNative#RX_FILTER_TYPE_V6_MULTICAST} values.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+removeRxFilter : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setBtCoexistenceMode'>/**Set Bt co existense mode.
+</span>@param {String} ifaceName Name of the interface.
+@param {Number} mode one of the above {@link WifiNative#BLUETOOTH_COEXISTENCE_MODE_DISABLED},
+             {@link WifiNative#BLUETOOTH_COEXISTENCE_MODE_ENABLED} or
+             {@link WifiNative#BLUETOOTH_COEXISTENCE_MODE_SENSE}.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setBtCoexistenceMode : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setBtCoexistenceScanModeEnabled'>/**Enable or disable BT coexistence mode.
+</span>@param {String} ifaceName Name of the interface.
+@param {Boolean} enable true to enable, false to disable.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setBtCoexistenceScanModeEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setSuspendModeEnabled'>/**Enable or disable suspend mode optimizations.
+</span>@param {String} ifaceName Name of the interface.
+@param {Boolean} enable true to enable, false otherwise.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setSuspendModeEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setCountryCode'>/**Set country code.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} codeStr 2 byte ASCII string. For ex: US, CA.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setCountryCode : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-startWpsRegistrar'>/**Start WPS pin registrar operation with the specified peer and pin.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssidStr BSSID of the peer.
+@param {String} pin Pin to be used.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+startWpsRegistrar : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-startWpsPbc'>/**Start WPS pin display operation with the specified peer.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssidStr BSSID of the peer. Use empty bssid to indicate wildcard.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+startWpsPbc : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-startWpsPinKeypad'>/**Start WPS pin keypad operation with the specified pin.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} pin Pin to be used.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+startWpsPinKeypad : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-startWpsPinDisplay'>/**Start WPS pin display operation with the specified peer.
+</span>@param {String} ifaceName Name of the interface.
+@param {String} bssidStr BSSID of the peer. Use empty bssid to indicate wildcard.
+@return {String} new pin generated on success, null otherwise.
+*/
+startWpsPinDisplay : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-cancelWps'>/**Cancels any ongoing WPS requests.
+</span>@param {String} ifaceName Name of the interface.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+cancelWps : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setExternalSim'>/**Sets whether to use external sim for SIM/USIM processing.
+</span>@param {String} ifaceName Name of the interface.
+@param {Boolean} useExternalSim true to enable, false otherwise.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setExternalSim : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-enableAutoReconnect'>/**See ISupplicant.hal for documentation
+</span>*/
+enableAutoReconnect : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setLogLevel'>/**Set the debug log level for wpa_supplicant
+</span>@param {Boolean} turnOnVerbose Whether to turn on verbose logging or not.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setLogLevel : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-setConcurrencyPriority'>/**Set concurrency priority between P2P &amp; STA operations.
+</span>@param {Boolean} isStaHigherPriority Set to true to prefer STA over P2P during concurrency operations,
+                            false otherwise.
+@return {Boolean} true if request is sent successfully, false otherwise.
+*/
+setConcurrencyPriority : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-getAdvancedKeyMgmtCapabilities'>/**Returns a bitmask of advanced key management capabilities: WPA3 SAE/SUITE B and OWE
+</span> Bitmask used is:
+ - WIFI_FEATURE_WPA3_SAE
+ - WIFI_FEATURE_WPA3_SUITE_B
+ - WIFI_FEATURE_OWE
+
+  This is a v1.2+ HAL feature.
+  On error, or if these features are not supported, 0 is returned.
+*/
+getAdvancedKeyMgmtCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-addDppPeerUri'>/**Adds a DPP peer URI to the URI list.
+</span>
+  This is a v1.2+ HAL feature.
+  Returns an ID to be used later to refer to this URI (&gt;0).
+  On error, or if these features are not supported, -1 is returned.
+*/
+addDppPeerUri : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-removeDppUri'>/**Removes a DPP URI to the URI list given an ID.
+</span>
+  This is a v1.2+ HAL feature.
+  Returns true when operation is successful
+  On error, or if these features are not supported, false is returned.
+*/
+removeDppUri : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-stopDppInitiator'>/**Stops/aborts DPP Initiator request
+</span>
+  This is a v1.2+ HAL feature.
+  Returns true when operation is successful
+  On error, or if these features are not supported, false is returned.
+*/
+stopDppInitiator : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-startDppConfiguratorInitiator'>/**Starts DPP Configurator-Initiator request
+</span>
+  This is a v1.2+ HAL feature.
+  Returns true when operation is successful
+  On error, or if these features are not supported, false is returned.
+*/
+startDppConfiguratorInitiator : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-startDppEnrolleeInitiator'>/**Starts DPP Enrollee-Initiator request
+</span>
+  This is a v1.2+ HAL feature.
+  Returns true when operation is successful
+  On error, or if these features are not supported, false is returned.
+*/
+startDppEnrolleeInitiator : function(  ) {},
+
+<span id='com-android-server-wifi-SupplicantStaIfaceHal-method-registerDppCallback'>/**Register callbacks for DPP events.
+</span>@param {Object {WifiNative.DppEventCallback}} dppCallback DPP callback object.
+*/
+registerDppCallback : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

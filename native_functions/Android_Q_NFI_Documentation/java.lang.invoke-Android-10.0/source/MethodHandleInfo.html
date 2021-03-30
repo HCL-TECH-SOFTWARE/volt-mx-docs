@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-invoke-MethodHandleInfo'>/**@class java.lang.invoke.MethodHandleInfo
+</span> A symbolic reference obtained by cracking a direct method handle
+ into its consitutent symbolic parts.
+ To crack a direct method handle, call {@link java.lang.invoke.MethodHandles.Lookup#revealDirect java.lang.invoke.MethodHandles.Lookup.revealDirect}.
+ &lt;h1&gt;&lt;a name=&quot;directmh&quot;&gt;&lt;/a&gt;Direct Method Handles&lt;/h1&gt;
+ A &lt;em&gt;direct method handle&lt;/em&gt; represents a method, constructor, or field without
+ any intervening argument bindings or other transformations.
+ The method, constructor, or field referred to by a direct method handle is called
+ its &lt;em&gt;underlying member&lt;/em&gt;.
+ Direct method handles may be obtained in any of these ways:
+ &lt;ul&gt;
+ &lt;li&gt;By executing an {@code ldc} instruction on a {@code CONSTANT_MethodHandle} constant.
+     (See the Java Virtual Machine Specification, sections 4.4.8 and 5.4.3.)
+ &lt;li&gt;By calling one of the &lt;a href=&quot;MethodHandles.Lookup.html#lookups&quot;&gt;Lookup Factory Methods&lt;/a&gt;,
+     such as {@link java.lang.invoke.MethodHandles.Lookup#findVirtual java.lang.invoke.MethodHandles.Lookup.findVirtual},
+     to resolve a symbolic reference into a method handle.
+     A symbolic reference consists of a class, name string, and type.
+ &lt;li&gt;By calling the factory method {@link java.lang.invoke.MethodHandles.Lookup#unreflect java.lang.invoke.MethodHandles.Lookup.unreflect}
+     or {@link java.lang.invoke.MethodHandles.Lookup#unreflectSpecial java.lang.invoke.MethodHandles.Lookup.unreflectSpecial}
+     to convert a {@link Method} into a method handle.
+ &lt;li&gt;By calling the factory method {@link java.lang.invoke.MethodHandles.Lookup#unreflectConstructor java.lang.invoke.MethodHandles.Lookup.unreflectConstructor}
+     to convert a {@link Constructor} into a method handle.
+ &lt;li&gt;By calling the factory method {@link java.lang.invoke.MethodHandles.Lookup#unreflectGetter java.lang.invoke.MethodHandles.Lookup.unreflectGetter}
+     or {@link java.lang.invoke.MethodHandles.Lookup#unreflectSetter java.lang.invoke.MethodHandles.Lookup.unreflectSetter}
+     to convert a {@link Field} into a method handle.
+ &lt;/ul&gt;
+
+ &lt;h1&gt;Restrictions on Cracking&lt;/h1&gt;
+ Given a suitable {@code Lookup} object, it is possible to crack any direct method handle
+ to recover a symbolic reference for the underlying method, constructor, or field.
+ Cracking must be done via a {@code Lookup} object equivalent to that which created
+ the target method handle, or which has enough access permissions to recreate
+ an equivalent method handle.
+ &lt;p&gt;
+ If the underlying method is &lt;a href=&quot;MethodHandles.Lookup.html#callsens&quot;&gt;caller sensitive&lt;/a&gt;,
+ the direct method handle will have been &quot;bound&quot; to a particular caller class, the
+ {@linkplain java.lang.invoke.MethodHandles.Lookup#lookupClass() lookup class}
+ of the lookup object used to create it.
+ Cracking this method handle with a different lookup class will fail
+ even if the underlying method is public (like {@code Class.forName}).
+ &lt;p&gt;
+ The requirement of lookup object matching provides a &quot;fast fail&quot; behavior
+ for programs which may otherwise trust erroneous revelation of a method
+ handle with symbolic information (or caller binding) from an unexpected scope.
+ Use {@link java.lang.invoke.MethodHandles#reflectAs} to override this limitation.
+
+ &lt;h1&gt;&lt;a name=&quot;refkinds&quot;&gt;&lt;/a&gt;Reference kinds&lt;/h1&gt;
+ The &lt;a href=&quot;MethodHandles.Lookup.html#lookups&quot;&gt;Lookup Factory Methods&lt;/a&gt;
+ correspond to all major use cases for methods, constructors, and fields.
+ These use cases may be distinguished using small integers as follows:
+ &lt;table border=1 cellpadding=5 summary=&quot;reference kinds&quot;&gt;
+ &lt;tr&gt;&lt;th&gt;reference kind&lt;/th&gt;&lt;th&gt;descriptive name&lt;/th&gt;&lt;th&gt;scope&lt;/th&gt;&lt;th&gt;member&lt;/th&gt;&lt;th&gt;behavior&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@code 1}&lt;/td&gt;&lt;td&gt;{@code REF_getField}&lt;/td&gt;&lt;td&gt;{@code class}&lt;/td&gt;
+     &lt;td&gt;{@code FT f;}&lt;/td&gt;&lt;td&gt;{@code (T) this.f;}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@code 2}&lt;/td&gt;&lt;td&gt;{@code REF_getStatic}&lt;/td&gt;&lt;td&gt;{@code class} or {@code interface}&lt;/td&gt;
+     &lt;td&gt;{@code static}&lt;br&gt;{@code FT f;}&lt;/td&gt;&lt;td&gt;{@code (T) C.f;}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@code 3}&lt;/td&gt;&lt;td&gt;{@code REF_putField}&lt;/td&gt;&lt;td&gt;{@code class}&lt;/td&gt;
+     &lt;td&gt;{@code FT f;}&lt;/td&gt;&lt;td&gt;{@code this.f = x;}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@code 4}&lt;/td&gt;&lt;td&gt;{@code REF_putStatic}&lt;/td&gt;&lt;td&gt;{@code class}&lt;/td&gt;
+     &lt;td&gt;{@code static}&lt;br&gt;{@code FT f;}&lt;/td&gt;&lt;td&gt;{@code C.f = arg;}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@code 5}&lt;/td&gt;&lt;td&gt;{@code REF_invokeVirtual}&lt;/td&gt;&lt;td&gt;{@code class}&lt;/td&gt;
+     &lt;td&gt;{@code T m(A*);}&lt;/td&gt;&lt;td&gt;{@code (T) this.m(arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@code 6}&lt;/td&gt;&lt;td&gt;{@code REF_invokeStatic}&lt;/td&gt;&lt;td&gt;{@code class} or {@code interface}&lt;/td&gt;
+     &lt;td&gt;{@code static}&lt;br&gt;{@code T m(A*);}&lt;/td&gt;&lt;td&gt;{@code (T) C.m(arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@code 7}&lt;/td&gt;&lt;td&gt;{@code REF_invokeSpecial}&lt;/td&gt;&lt;td&gt;{@code class} or {@code interface}&lt;/td&gt;
+     &lt;td&gt;{@code T m(A*);}&lt;/td&gt;&lt;td&gt;{@code (T) super.m(arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@code 8}&lt;/td&gt;&lt;td&gt;{@code REF_newInvokeSpecial}&lt;/td&gt;&lt;td&gt;{@code class}&lt;/td&gt;
+     &lt;td&gt;{@code C(A*);}&lt;/td&gt;&lt;td&gt;{@code new C(arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+     &lt;td&gt;{@code 9}&lt;/td&gt;&lt;td&gt;{@code REF_invokeInterface}&lt;/td&gt;&lt;td&gt;{@code interface}&lt;/td&gt;
+     &lt;td&gt;{@code T m(A*);}&lt;/td&gt;&lt;td&gt;{@code (T) this.m(arg*);}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ @since 1.8
+*/
+var MethodHandleInfo = {
+
+<span id='java-lang-invoke-MethodHandleInfo-property-REF_getField'>/** A direct method handle reference kind,
+</span> as defined in the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;.
+*/
+REF_getField : &quot;1&quot;,
+<span id='java-lang-invoke-MethodHandleInfo-property-REF_getStatic'>/** A direct method handle reference kind,
+</span> as defined in the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;.
+*/
+REF_getStatic : &quot;2&quot;,
+<span id='java-lang-invoke-MethodHandleInfo-property-REF_putField'>/** A direct method handle reference kind,
+</span> as defined in the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;.
+*/
+REF_putField : &quot;3&quot;,
+<span id='java-lang-invoke-MethodHandleInfo-property-REF_putStatic'>/** A direct method handle reference kind,
+</span> as defined in the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;.
+*/
+REF_putStatic : &quot;4&quot;,
+<span id='java-lang-invoke-MethodHandleInfo-property-REF_invokeVirtual'>/** A direct method handle reference kind,
+</span> as defined in the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;.
+*/
+REF_invokeVirtual : &quot;5&quot;,
+<span id='java-lang-invoke-MethodHandleInfo-property-REF_invokeStatic'>/** A direct method handle reference kind,
+</span> as defined in the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;.
+*/
+REF_invokeStatic : &quot;6&quot;,
+<span id='java-lang-invoke-MethodHandleInfo-property-REF_invokeSpecial'>/** A direct method handle reference kind,
+</span> as defined in the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;.
+*/
+REF_invokeSpecial : &quot;7&quot;,
+<span id='java-lang-invoke-MethodHandleInfo-property-REF_newInvokeSpecial'>/** A direct method handle reference kind,
+</span> as defined in the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;.
+*/
+REF_newInvokeSpecial : &quot;8&quot;,
+<span id='java-lang-invoke-MethodHandleInfo-property-REF_invokeInterface'>/** A direct method handle reference kind,
+</span> as defined in the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;.
+*/
+REF_invokeInterface : &quot;9&quot;,
+<span id='java-lang-invoke-MethodHandleInfo-method-getReferenceKind'>/**Returns the reference kind of the cracked method handle, which in turn
+</span> determines whether the method handle's underlying member was a constructor, method, or field.
+ See the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt; for definitions.
+@return {Number} the integer code for the kind of reference used to access the underlying member
+*/
+getReferenceKind : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-getDeclaringClass'>/**Returns the class in which the cracked method handle's underlying member was defined.
+</span>@return {Object {java.lang.Class}} the declaring class of the underlying member
+*/
+getDeclaringClass : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-getName'>/**Returns the name of the cracked method handle's underlying member.
+</span> This is {@code &quot;&lt;init&gt;&quot;} if the underlying member was a constructor,
+ else it is a simple method name or field name.
+@return {String} the simple name of the underlying member
+*/
+getName : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-getMethodType'>/**Returns the nominal type of the cracked symbolic reference, expressed as a method type.
+</span> If the reference is to a constructor, the return type will be {@code void}.
+ If it is to a non-static method, the method type will not mention the {@code this} parameter.
+ If it is to a field and the requested access is to read the field,
+ the method type will have no parameters and return the field type.
+ If it is to a field and the requested access is to write the field,
+ the method type will have one parameter of the field type and return {@code void}.
+ &lt;p&gt;
+ Note that original direct method handle may include a leading {@code this} parameter,
+ or (in the case of a constructor) will replace the {@code void} return type
+ with the constructed class.
+ The nominal type does not include any {@code this} parameter,
+ and (in the case of a constructor) will return {@code void}.
+@return {Object {java.lang.invoke.MethodType}} the type of the underlying member, expressed as a method type
+*/
+getMethodType : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-reflectAs'>/**Reflects the underlying member as a method, constructor, or field object.
+</span> If the underlying member is public, it is reflected as if by
+ {@code getMethod}, {@code getConstructor}, or {@code getField}.
+ Otherwise, it is reflected as if by
+ {@code getDeclaredMethod}, {@code getDeclaredConstructor}, or {@code getDeclaredField}.
+ The underlying member must be accessible to the given lookup object.
+@param {Object {java.lang.Class}} expected a class object representing the desired result type {@code T}
+@param {Object {MethodHandles.Lookup}} lookup the lookup object that created this MethodHandleInfo, or one with equivalent access privileges
+@param lookup the lookup object that created this MethodHandleInfo, or one with equivalent access privileges
+@return {Object {java.lang.reflect.Member}} a reference to the method, constructor, or field object
+@exception ClassCastException if the member is not of the expected type
+@exception NullPointerException if either argument is {@code null}
+@exception IllegalArgumentException if the underlying member is not accessible to the given lookup object
+*/
+reflectAs : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-getModifiers'>/**Returns the access modifiers of the underlying member.
+</span>@return {Number} the Java language modifiers for underlying member,
+         or -1 if the member cannot be accessed
+@see Modifier
+@see #reflectAs
+*/
+getModifiers : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-isVarArgs'>/**Determines if the underlying member was a variable arity method or constructor.
+</span> Such members are represented by method handles that are varargs collectors.
+@implSpec This produces a result equivalent to:
+ &lt;pre&gt;{@code
+     getReferenceKind() &gt;= REF_invokeVirtual &amp;&amp; Modifier.isTransient(getModifiers())
+ }&lt;/pre&gt;
+@return {Boolean} {@code true} if and only if the underlying member was declared with variable arity.
+*/
+isVarArgs : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-referenceKindToString'>/**Returns the descriptive name of the given reference kind,
+</span> as defined in the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;.
+ The conventional prefix &quot;REF_&quot; is omitted.
+@param {Number} referenceKind an integer code for a kind of reference used to access a class member
+@return {String} a mixed-case string such as {@code &quot;getField&quot;}
+@exception IllegalArgumentException if the argument is not a valid
+            &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;reference kind number&lt;/a&gt;
+*/
+referenceKindToString : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-toString'>/**Returns a string representation for a {@code MethodHandleInfo},
+</span> given the four parts of its symbolic reference.
+ This is defined to be of the form {@code &quot;RK C.N:MT&quot;}, where {@code RK} is the
+ {@linkplain #referenceKindToString reference kind string} for {@code kind},
+ {@code C} is the {@linkplain java.lang.Class#getName name} of {@code defc}
+ {@code N} is the {@code name}, and
+ {@code MT} is the {@code type}.
+ These four values may be obtained from the
+ {@linkplain #getReferenceKind reference kind},
+ {@linkplain #getDeclaringClass declaring class},
+ {@linkplain #getName member name},
+ and {@linkplain #getMethodType method type}
+ of a {@code MethodHandleInfo} object.
+@param {Number} kind the {@linkplain #getReferenceKind reference kind} part of the symbolic reference
+@param {Object {java.lang.Class}} defc the {@linkplain #getDeclaringClass declaring class} part of the symbolic reference
+@param {String} name the {@linkplain #getName member name} part of the symbolic reference
+@param {Object {MethodType}} type the {@linkplain #getMethodType method type} part of the symbolic reference
+@param type the {@linkplain #getMethodType method type} part of the symbolic reference
+@return {String} a string of the form {@code &quot;RK C.N:MT&quot;}
+@exception IllegalArgumentException if the first argument is not a valid
+            &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;reference kind number&lt;/a&gt;
+@exception NullPointerException if any reference argument is {@code null}
+*/
+toString : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-refKindIsValid'>/**
+</span>@deprecated This internal method was accidentally added to API 26 and must not be used. No
+             replacement is available but it is possible to replicate using information from
+             the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;, e.g.
+             {@code refKind &gt;= 1 &amp;&amp; refKind &lt;= 9}. There are no guarantees that this logic
+             will work if future versions extend the table.
+*/
+refKindIsValid : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-refKindIsField'>/**
+</span>@deprecated This internal method was accidentally added to API 26 and must not be used. No
+             replacement is available but it is possible to replicate using information from
+             the &lt;a href=&quot;MethodHandleInfo.html#refkinds&quot;&gt;table above&lt;/a&gt;, e.g.
+             {@code refKind &gt;= 1 &amp;&amp; refKind &lt;= 4}.  There are no guarantees that this logic
+             will work if future versions extend the table.
+*/
+refKindIsField : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandleInfo-method-refKindName'>/**
+</span>@deprecated This internal method was accidentally added to API 26 and must not be used. Use
+             {@link MethodHandleInfo#referenceKindToString(int)} instead.
+*/
+refKindName : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

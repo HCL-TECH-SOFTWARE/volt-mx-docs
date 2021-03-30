@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-atomic-AtomicLongFieldUpdater'>/**@class java.util.concurrent.atomic.AtomicLongFieldUpdater
+</span>@extends java.lang.Object
+
+ A reflection-based utility that enables atomic updates to
+ designated {@code volatile long} fields of designated classes.
+ This class is designed for use in atomic data structures in which
+ several fields of the same node are independently subject to atomic
+ updates.
+
+ &lt;p&gt;Note that the guarantees of the {@code compareAndSet}
+ method in this class are weaker than in other atomic classes.
+ Because this class cannot ensure that all uses of the field
+ are appropriate for purposes of atomic access, it can
+ guarantee atomicity only with respect to other invocations of
+ {@code compareAndSet} and {@code set} on the same updater.
+
+ @since 1.5
+ @author Doug Lea
+ @param &lt;T&gt; The type of the object holding the updatable field
+*/
+var AtomicLongFieldUpdater = {
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-newUpdater'>/**Creates and returns an updater for objects with the given field.
+</span> The Class argument is needed to check that reflective types and
+ generic types match.
+@param {Object {java.lang.Class}} tclass the class of the objects holding the field
+@param {String} fieldName the name of the field to be updated
+@param &lt;U&gt; the type of instances of tclass
+@return {Object {java.util.concurrent.atomic.AtomicLongFieldUpdater}} the updater
+@throws IllegalArgumentException if the field is not a
+ volatile long type
+@throws RuntimeException with a nested reflection-based
+ exception if the class does not hold field or is the wrong type,
+ or the field is inaccessible to the caller according to Java language
+ access control
+*/
+newUpdater : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-compareAndSet'>/**Atomically sets the field of the given object managed by this updater
+</span> to the given updated value if the current value {@code ==} the
+ expected value. This method is guaranteed to be atomic with respect to
+ other calls to {@code compareAndSet} and {@code set}, but not
+ necessarily with respect to other changes in the field.
+@param {Object {Object}} obj An object whose field to conditionally set
+@param {Number} expect the expected value
+@param {Number} update the new value
+@return {Boolean} {@code true} if successful
+@throws ClassCastException if {@code obj} is not an instance
+ of the class possessing the field established in the constructor
+*/
+compareAndSet : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-weakCompareAndSet'>/**Atomically sets the field of the given object managed by this updater
+</span> to the given updated value if the current value {@code ==} the
+ expected value. This method is guaranteed to be atomic with respect to
+ other calls to {@code compareAndSet} and {@code set}, but not
+ necessarily with respect to other changes in the field.
+
+ &lt;p&gt;&lt;a href=&quot;package-summary.html#weakCompareAndSet&quot;&gt;May fail
+ spuriously and does not provide ordering guarantees&lt;/a&gt;, so is
+ only rarely an appropriate alternative to {@code compareAndSet}.
+@param {Object {Object}} obj An object whose field to conditionally set
+@param {Number} expect the expected value
+@param {Number} update the new value
+@return {Boolean} {@code true} if successful
+@throws ClassCastException if {@code obj} is not an instance
+ of the class possessing the field established in the constructor
+*/
+weakCompareAndSet : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-set'>/**Sets the field of the given object managed by this updater to the
+</span> given updated value. This operation is guaranteed to act as a volatile
+ store with respect to subsequent invocations of {@code compareAndSet}.
+@param {Object {Object}} obj An object whose field to set
+@param {Number} newValue the new value
+*/
+set : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-lazySet'>/**Eventually sets the field of the given object managed by this
+</span> updater to the given updated value.
+@param {Object {Object}} obj An object whose field to set
+@param {Number} newValue the new value
+@since 1.6
+*/
+lazySet : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-get'>/**Gets the current value held in the field of the given object managed
+</span> by this updater.
+@param {Object {Object}} obj An object whose field to get
+@return {Number} the current value
+*/
+get : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-getAndSet'>/**Atomically sets the field of the given object managed by this updater
+</span> to the given value and returns the old value.
+@param {Object {Object}} obj An object whose field to get and set
+@param {Number} newValue the new value
+@return {Number} the previous value
+*/
+getAndSet : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-getAndIncrement'>/**Atomically increments by one the current value of the field of the
+</span> given object managed by this updater.
+@param {Object {Object}} obj An object whose field to get and set
+@return {Number} the previous value
+*/
+getAndIncrement : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-getAndDecrement'>/**Atomically decrements by one the current value of the field of the
+</span> given object managed by this updater.
+@param {Object {Object}} obj An object whose field to get and set
+@return {Number} the previous value
+*/
+getAndDecrement : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-getAndAdd'>/**Atomically adds the given value to the current value of the field of
+</span> the given object managed by this updater.
+@param {Object {Object}} obj An object whose field to get and set
+@param {Number} delta the value to add
+@return {Number} the previous value
+*/
+getAndAdd : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-incrementAndGet'>/**Atomically increments by one the current value of the field of the
+</span> given object managed by this updater.
+@param {Object {Object}} obj An object whose field to get and set
+@return {Number} the updated value
+*/
+incrementAndGet : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-decrementAndGet'>/**Atomically decrements by one the current value of the field of the
+</span> given object managed by this updater.
+@param {Object {Object}} obj An object whose field to get and set
+@return {Number} the updated value
+*/
+decrementAndGet : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-addAndGet'>/**Atomically adds the given value to the current value of the field of
+</span> the given object managed by this updater.
+@param {Object {Object}} obj An object whose field to get and set
+@param {Number} delta the value to add
+@return {Number} the updated value
+*/
+addAndGet : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-getAndUpdate'>/**Atomically updates the field of the given object managed by this updater
+</span> with the results of applying the given function, returning the previous
+ value. The function should be side-effect-free, since it may be
+ re-applied when attempted updates fail due to contention among threads.
+@param {Object {Object}} obj An object whose field to get and set
+@param {Object {LongUnaryOperator}} updateFunction a side-effect-free function
+@return {Number} the previous value
+@since 1.8
+*/
+getAndUpdate : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-updateAndGet'>/**Atomically updates the field of the given object managed by this updater
+</span> with the results of applying the given function, returning the updated
+ value. The function should be side-effect-free, since it may be
+ re-applied when attempted updates fail due to contention among threads.
+@param {Object {Object}} obj An object whose field to get and set
+@param {Object {LongUnaryOperator}} updateFunction a side-effect-free function
+@return {Number} the updated value
+@since 1.8
+*/
+updateAndGet : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-getAndAccumulate'>/**Atomically updates the field of the given object managed by this
+</span> updater with the results of applying the given function to the
+ current and given values, returning the previous value. The
+ function should be side-effect-free, since it may be re-applied
+ when attempted updates fail due to contention among threads.  The
+ function is applied with the current value as its first argument,
+ and the given update as the second argument.
+@param {Object {Object}} obj An object whose field to get and set
+@param {Number} x the update value
+@param {Object {LongBinaryOperator}} accumulatorFunction a side-effect-free function of two arguments
+@return {Number} the previous value
+@since 1.8
+*/
+getAndAccumulate : function(  ) {},
+
+<span id='java-util-concurrent-atomic-AtomicLongFieldUpdater-method-accumulateAndGet'>/**Atomically updates the field of the given object managed by this
+</span> updater with the results of applying the given function to the
+ current and given values, returning the updated value. The
+ function should be side-effect-free, since it may be re-applied
+ when attempted updates fail due to contention among threads.  The
+ function is applied with the current value as its first argument,
+ and the given update as the second argument.
+@param {Object {Object}} obj An object whose field to get and set
+@param {Number} x the update value
+@param {Object {LongBinaryOperator}} accumulatorFunction a side-effect-free function of two arguments
+@return {Number} the updated value
+@since 1.8
+*/
+accumulateAndGet : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

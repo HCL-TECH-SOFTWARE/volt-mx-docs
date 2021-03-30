@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiCountryCode'>/**@class com.android.server.wifi.WifiCountryCode
+</span>@extends java.lang.Object
+
+ Provide functions for making changes to WiFi country code.
+ This Country Code is from MCC or phone default setting. This class sends Country Code
+ to driver through wpa_supplicant when ClientModeImpl marks current state as ready
+ using setReadyForChange(true).
+*/
+var WifiCountryCode = {
+
+<span id='com-android-server-wifi-WifiCountryCode-method-enableVerboseLogging'>/**Enable verbose logging for WifiCountryCode.
+</span>*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-WifiCountryCode-method-airplaneModeEnabled'>/**This is called when airplane mode is enabled.
+</span> In this case we should invalidate all other country code except the
+ phone default one.
+*/
+airplaneModeEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-WifiCountryCode-method-setReadyForChange'>/**Change the state to indicates if wpa_supplicant is ready to handle country code changing
+</span> request or not.
+ We call native code to request country code changes only when wpa_supplicant is
+ started but not yet L2 connected.
+*/
+setReadyForChange : function(  ) {},
+
+<span id='com-android-server-wifi-WifiCountryCode-method-setCountryCode'>/**Handle country code change request.
+</span>@param {String} countryCode The country code intended to set.
+ This is supposed to be from Telephony service.
+ otherwise we think it is from other applications.
+@return {Boolean} Returns true if the country code passed in is acceptable.
+*/
+setCountryCode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiCountryCode-method-getCountryCodeSentToDriver'>/**Method to get the Country Code that was sent to wpa_supplicant.
+</span>@return {String} Returns the local copy of the Country Code that was sent to the driver upon
+ setReadyForChange(true).
+ If wpa_supplicant was never started, this may be null even if a SIM reported a valid
+ country code.
+ Returns null if no Country Code was sent to driver.
+*/
+getCountryCodeSentToDriver : function(  ) {},
+
+<span id='com-android-server-wifi-WifiCountryCode-method-getCountryCode'>/**Method to return the currently reported Country Code from the SIM or phone default setting.
+</span>@return {String} The currently reported Country Code from the SIM. If there is no Country Code
+ reported from SIM, a phone default Country Code will be returned.
+ Returns null when there is no Country Code available.
+*/
+getCountryCode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiCountryCode-method-dump'>/**Method to dump the current state of this WifiCounrtyCode object.
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

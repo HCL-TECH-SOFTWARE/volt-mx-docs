@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-StrictMath'>/**@class java.lang.StrictMath
+</span>@extends java.lang.Object
+
+ The class {@code StrictMath} contains methods for performing basic
+ numeric operations such as the elementary exponential, logarithm,
+ square root, and trigonometric functions.
+
+ &lt;p&gt;To help ensure portability of Java programs, the definitions of
+ some of the numeric functions in this package require that they
+ produce the same results as certain published algorithms. These
+ algorithms are available from the well-known network library
+ {@code netlib} as the package &quot;Freely Distributable Math
+ Library,&quot; &lt;a
+ href=&quot;ftp://ftp.netlib.org/fdlibm.tar&quot;&gt;{@code fdlibm}&lt;/a&gt;. These
+ algorithms, which are written in the C programming language, are
+ then to be understood as executed with all floating-point
+ operations following the rules of Java floating-point arithmetic.
+
+ &lt;p&gt;The Java math library is defined with respect to
+ {@code fdlibm} version 5.3. Where {@code fdlibm} provides
+ more than one definition for a function (such as
+ {@code acos}), use the &quot;IEEE 754 core function&quot; version
+ (residing in a file whose name begins with the letter
+ {@code e}).  The methods which require {@code fdlibm}
+ semantics are {@code sin}, {@code cos}, {@code tan},
+ {@code asin}, {@code acos}, {@code atan},
+ {@code exp}, {@code log}, {@code log10},
+ {@code cbrt}, {@code atan2}, {@code pow},
+ {@code sinh}, {@code cosh}, {@code tanh},
+ {@code hypot}, {@code expm1}, and {@code log1p}.
+
+ &lt;p&gt;
+ The platform uses signed two's complement integer arithmetic with
+ int and long primitive types.  The developer should choose
+ the primitive type to ensure that arithmetic operations consistently
+ produce correct results, which in some cases means the operations
+ will not overflow the range of values of the computation.
+ The best practice is to choose the primitive type and algorithm to avoid
+ overflow. In cases where the size is {@code int} or {@code long} and
+ overflow errors need to be detected, the methods {@code addExact},
+ {@code subtractExact}, {@code multiplyExact}, and {@code toIntExact}
+ throw an {@code ArithmeticException} when the results overflow.
+ For other arithmetic operations such as divide, absolute value,
+ increment, decrement, and negation overflow occurs only with
+ a specific minimum or maximum value and should be checked against
+ the minimum or maximum as appropriate.
+
+ @author  unascribed
+ @author  Joseph D. Darcy
+ @since   1.3
+*/
+var StrictMath = {
+
+<span id='java-lang-StrictMath-property-E'>/** The {@code double} value that is closer than any other to
+</span> &lt;i&gt;e&lt;/i&gt;, the base of the natural logarithms.
+*/
+E : &quot;2.718281828459045&quot;,
+<span id='java-lang-StrictMath-property-PI'>/** The {@code double} value that is closer than any other to
+</span> &lt;i&gt;pi&lt;/i&gt;, the ratio of the circumference of a circle to its
+ diameter.
+*/
+PI : &quot;3.141592653589793&quot;,
+<span id='java-lang-StrictMath-method-sin'>/**Returns the trigonometric sine of an angle. Special cases:
+</span> &lt;ul&gt;&lt;li&gt;If the argument is NaN or an infinity, then the
+ result is NaN.
+ &lt;li&gt;If the argument is zero, then the result is a zero with the
+ same sign as the argument.&lt;/ul&gt;
+@param {Number} a   an angle, in radians.
+@return {Number} the sine of the argument.
+*/
+sin : function(  ) {},
+
+<span id='java-lang-StrictMath-method-cos'>/**Returns the trigonometric cosine of an angle. Special cases:
+</span> &lt;ul&gt;&lt;li&gt;If the argument is NaN or an infinity, then the
+ result is NaN.&lt;/ul&gt;
+@param {Number} a   an angle, in radians.
+@return {Number} the cosine of the argument.
+*/
+cos : function(  ) {},
+
+<span id='java-lang-StrictMath-method-tan'>/**Returns the trigonometric tangent of an angle. Special cases:
+</span> &lt;ul&gt;&lt;li&gt;If the argument is NaN or an infinity, then the result
+ is NaN.
+ &lt;li&gt;If the argument is zero, then the result is a zero with the
+ same sign as the argument.&lt;/ul&gt;
+@param {Number} a   an angle, in radians.
+@return {Number} the tangent of the argument.
+*/
+tan : function(  ) {},
+
+<span id='java-lang-StrictMath-method-asin'>/**Returns the arc sine of a value; the returned angle is in the
+</span> range -&lt;i&gt;pi&lt;/i&gt;/2 through &lt;i&gt;pi&lt;/i&gt;/2.  Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument is NaN or its absolute value is greater
+ than 1, then the result is NaN.
+ &lt;li&gt;If the argument is zero, then the result is a zero with the
+ same sign as the argument.&lt;/ul&gt;
+@param {Number} a   the value whose arc sine is to be returned.
+@return {Number} the arc sine of the argument.
+*/
+asin : function(  ) {},
+
+<span id='java-lang-StrictMath-method-acos'>/**Returns the arc cosine of a value; the returned angle is in the
+</span> range 0.0 through &lt;i&gt;pi&lt;/i&gt;.  Special case:
+ &lt;ul&gt;&lt;li&gt;If the argument is NaN or its absolute value is greater
+ than 1, then the result is NaN.&lt;/ul&gt;
+@param {Number} a   the value whose arc cosine is to be returned.
+@return {Number} the arc cosine of the argument.
+*/
+acos : function(  ) {},
+
+<span id='java-lang-StrictMath-method-atan'>/**Returns the arc tangent of a value; the returned angle is in the
+</span> range -&lt;i&gt;pi&lt;/i&gt;/2 through &lt;i&gt;pi&lt;/i&gt;/2.  Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument is NaN, then the result is NaN.
+ &lt;li&gt;If the argument is zero, then the result is a zero with the
+ same sign as the argument.&lt;/ul&gt;
+@param {Number} a   the value whose arc tangent is to be returned.
+@return {Number} the arc tangent of the argument.
+*/
+atan : function(  ) {},
+
+<span id='java-lang-StrictMath-method-toRadians'>/**Converts an angle measured in degrees to an approximately
+</span> equivalent angle measured in radians.  The conversion from
+ degrees to radians is generally inexact.
+@param {Number} angdeg   an angle, in degrees
+@return {Number} the measurement of the angle {@code angdeg}
+          in radians.
+*/
+toRadians : function(  ) {},
+
+<span id='java-lang-StrictMath-method-toDegrees'>/**Converts an angle measured in radians to an approximately
+</span> equivalent angle measured in degrees.  The conversion from
+ radians to degrees is generally inexact; users should
+ &lt;i&gt;not&lt;/i&gt; expect {@code cos(toRadians(90.0))} to exactly
+ equal {@code 0.0}.
+@param {Number} angrad   an angle, in radians
+@return {Number} the measurement of the angle {@code angrad}
+          in degrees.
+*/
+toDegrees : function(  ) {},
+
+<span id='java-lang-StrictMath-method-exp'>/**Returns Euler's number &lt;i&gt;e&lt;/i&gt; raised to the power of a
+</span> {@code double} value. Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument is NaN, the result is NaN.
+ &lt;li&gt;If the argument is positive infinity, then the result is
+ positive infinity.
+ &lt;li&gt;If the argument is negative infinity, then the result is
+ positive zero.&lt;/ul&gt;
+@param {Number} a   the exponent to raise &lt;i&gt;e&lt;/i&gt; to.
+@return {Number} the value &lt;i&gt;e&lt;/i&gt;&lt;sup&gt;{@code a}&lt;/sup&gt;,
+          where &lt;i&gt;e&lt;/i&gt; is the base of the natural logarithms.
+*/
+exp : function(  ) {},
+
+<span id='java-lang-StrictMath-method-log'>/**Returns the natural logarithm (base &lt;i&gt;e&lt;/i&gt;) of a {@code double}
+</span> value. Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument is NaN or less than zero, then the result
+ is NaN.
+ &lt;li&gt;If the argument is positive infinity, then the result is
+ positive infinity.
+ &lt;li&gt;If the argument is positive zero or negative zero, then the
+ result is negative infinity.&lt;/ul&gt;
+@param {Number} a   a value
+@return {Number} the value ln&amp;nbsp;{@code a}, the natural logarithm of
+          {@code a}.
+*/
+log : function(  ) {},
+
+<span id='java-lang-StrictMath-method-log10'>/**Returns the base 10 logarithm of a {@code double} value.
+</span> Special cases:
+
+ &lt;ul&gt;&lt;li&gt;If the argument is NaN or less than zero, then the result
+ is NaN.
+ &lt;li&gt;If the argument is positive infinity, then the result is
+ positive infinity.
+ &lt;li&gt;If the argument is positive zero or negative zero, then the
+ result is negative infinity.
+ &lt;li&gt; If the argument is equal to 10&lt;sup&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sup&gt; for
+ integer &lt;i&gt;n&lt;/i&gt;, then the result is &lt;i&gt;n&lt;/i&gt;.
+ &lt;/ul&gt;
+@param {Number} a   a value
+@return {Number} the base 10 logarithm of  {@code a}.
+@since 1.5
+*/
+log10 : function(  ) {},
+
+<span id='java-lang-StrictMath-method-sqrt'>/**Returns the correctly rounded positive square root of a
+</span> {@code double} value.
+ Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument is NaN or less than zero, then the result
+ is NaN.
+ &lt;li&gt;If the argument is positive infinity, then the result is positive
+ infinity.
+ &lt;li&gt;If the argument is positive zero or negative zero, then the
+ result is the same as the argument.&lt;/ul&gt;
+ Otherwise, the result is the {@code double} value closest to
+ the true mathematical square root of the argument value.
+@param {Number} a   a value.
+@return {Number} the positive square root of {@code a}.
+*/
+sqrt : function(  ) {},
+
+<span id='java-lang-StrictMath-method-cbrt'>/**Returns the cube root of a {@code double} value.  For
+</span> positive finite {@code x}, {@code cbrt(-x) ==
+ -cbrt(x)}; that is, the cube root of a negative value is
+ the negative of the cube root of that value's magnitude.
+ Special cases:
+
+ &lt;ul&gt;
+
+ &lt;li&gt;If the argument is NaN, then the result is NaN.
+
+ &lt;li&gt;If the argument is infinite, then the result is an infinity
+ with the same sign as the argument.
+
+ &lt;li&gt;If the argument is zero, then the result is a zero with the
+ same sign as the argument.
+
+ &lt;/ul&gt;
+@param {Number} a   a value.
+@return {Number} the cube root of {@code a}.
+@since 1.5
+*/
+cbrt : function(  ) {},
+
+<span id='java-lang-StrictMath-method-IEEEremainder'>/**Computes the remainder operation on two arguments as prescribed
+</span> by the IEEE 754 standard.
+ The remainder value is mathematically equal to
+ &lt;code&gt;f1&amp;nbsp;-&amp;nbsp;f2&lt;/code&gt;&amp;nbsp;&amp;times;&amp;nbsp;&lt;i&gt;n&lt;/i&gt;,
+ where &lt;i&gt;n&lt;/i&gt; is the mathematical integer closest to the exact
+ mathematical value of the quotient {@code f1/f2}, and if two
+ mathematical integers are equally close to {@code f1/f2},
+ then &lt;i&gt;n&lt;/i&gt; is the integer that is even. If the remainder is
+ zero, its sign is the same as the sign of the first argument.
+ Special cases:
+ &lt;ul&gt;&lt;li&gt;If either argument is NaN, or the first argument is infinite,
+ or the second argument is positive zero or negative zero, then the
+ result is NaN.
+ &lt;li&gt;If the first argument is finite and the second argument is
+ infinite, then the result is the same as the first argument.&lt;/ul&gt;
+@param {Number} f1   the dividend.
+@param {Number} f2   the divisor.
+@return {Number} the remainder when {@code f1} is divided by
+          {@code f2}.
+*/
+IEEEremainder : function(  ) {},
+
+<span id='java-lang-StrictMath-method-ceil'>/**Returns the smallest (closest to negative infinity)
+</span> {@code double} value that is greater than or equal to the
+ argument and is equal to a mathematical integer. Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument value is already equal to a
+ mathematical integer, then the result is the same as the
+ argument.  &lt;li&gt;If the argument is NaN or an infinity or
+ positive zero or negative zero, then the result is the same as
+ the argument.  &lt;li&gt;If the argument value is less than zero but
+ greater than -1.0, then the result is negative zero.&lt;/ul&gt; Note
+ that the value of {@code StrictMath.ceil(x)} is exactly the
+ value of {@code -StrictMath.floor(-x)}.
+@param {Number} a   a value.
+@return {Number} the smallest (closest to negative infinity)
+          floating-point value that is greater than or equal to
+          the argument and is equal to a mathematical integer.
+*/
+ceil : function(  ) {},
+
+<span id='java-lang-StrictMath-method-floor'>/**Returns the largest (closest to positive infinity)
+</span> {@code double} value that is less than or equal to the
+ argument and is equal to a mathematical integer. Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument value is already equal to a
+ mathematical integer, then the result is the same as the
+ argument.  &lt;li&gt;If the argument is NaN or an infinity or
+ positive zero or negative zero, then the result is the same as
+ the argument.&lt;/ul&gt;
+@param {Number} a   a value.
+@return {Number} the largest (closest to positive infinity)
+          floating-point value that less than or equal to the argument
+          and is equal to a mathematical integer.
+*/
+floor : function(  ) {},
+
+<span id='java-lang-StrictMath-method-rint'>/**Returns the {@code double} value that is closest in value
+</span> to the argument and is equal to a mathematical integer. If two
+ {@code double} values that are mathematical integers are
+ equally close to the value of the argument, the result is the
+ integer value that is even. Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument value is already equal to a mathematical
+ integer, then the result is the same as the argument.
+ &lt;li&gt;If the argument is NaN or an infinity or positive zero or negative
+ zero, then the result is the same as the argument.&lt;/ul&gt;
+@param {Number} a   a value.
+@return {Number} the closest floating-point value to {@code a} that is
+          equal to a mathematical integer.
+@author Joseph D. Darcy
+*/
+rint : function(  ) {},
+
+<span id='java-lang-StrictMath-method-atan2'>/**Returns the angle &lt;i&gt;theta&lt;/i&gt; from the conversion of rectangular
+</span> coordinates ({@code x},&amp;nbsp;{@code y}) to polar
+ coordinates (r,&amp;nbsp;&lt;i&gt;theta&lt;/i&gt;).
+ This method computes the phase &lt;i&gt;theta&lt;/i&gt; by computing an arc tangent
+ of {@code y/x} in the range of -&lt;i&gt;pi&lt;/i&gt; to &lt;i&gt;pi&lt;/i&gt;. Special
+ cases:
+ &lt;ul&gt;&lt;li&gt;If either argument is NaN, then the result is NaN.
+ &lt;li&gt;If the first argument is positive zero and the second argument
+ is positive, or the first argument is positive and finite and the
+ second argument is positive infinity, then the result is positive
+ zero.
+ &lt;li&gt;If the first argument is negative zero and the second argument
+ is positive, or the first argument is negative and finite and the
+ second argument is positive infinity, then the result is negative zero.
+ &lt;li&gt;If the first argument is positive zero and the second argument
+ is negative, or the first argument is positive and finite and the
+ second argument is negative infinity, then the result is the
+ {@code double} value closest to &lt;i&gt;pi&lt;/i&gt;.
+ &lt;li&gt;If the first argument is negative zero and the second argument
+ is negative, or the first argument is negative and finite and the
+ second argument is negative infinity, then the result is the
+ {@code double} value closest to -&lt;i&gt;pi&lt;/i&gt;.
+ &lt;li&gt;If the first argument is positive and the second argument is
+ positive zero or negative zero, or the first argument is positive
+ infinity and the second argument is finite, then the result is the
+ {@code double} value closest to &lt;i&gt;pi&lt;/i&gt;/2.
+ &lt;li&gt;If the first argument is negative and the second argument is
+ positive zero or negative zero, or the first argument is negative
+ infinity and the second argument is finite, then the result is the
+ {@code double} value closest to -&lt;i&gt;pi&lt;/i&gt;/2.
+ &lt;li&gt;If both arguments are positive infinity, then the result is the
+ {@code double} value closest to &lt;i&gt;pi&lt;/i&gt;/4.
+ &lt;li&gt;If the first argument is positive infinity and the second argument
+ is negative infinity, then the result is the {@code double}
+ value closest to 3*&lt;i&gt;pi&lt;/i&gt;/4.
+ &lt;li&gt;If the first argument is negative infinity and the second argument
+ is positive infinity, then the result is the {@code double} value
+ closest to -&lt;i&gt;pi&lt;/i&gt;/4.
+ &lt;li&gt;If both arguments are negative infinity, then the result is the
+ {@code double} value closest to -3*&lt;i&gt;pi&lt;/i&gt;/4.&lt;/ul&gt;
+@param {Number} y   the ordinate coordinate
+@param {Number} x   the abscissa coordinate
+@return {Number} the &lt;i&gt;theta&lt;/i&gt; component of the point
+          (&lt;i&gt;r&lt;/i&gt;,&amp;nbsp;&lt;i&gt;theta&lt;/i&gt;)
+          in polar coordinates that corresponds to the point
+          (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in Cartesian coordinates.
+*/
+atan2 : function(  ) {},
+
+<span id='java-lang-StrictMath-method-pow'>/**Returns the value of the first argument raised to the power of the
+</span> second argument. Special cases:
+
+ &lt;ul&gt;&lt;li&gt;If the second argument is positive or negative zero, then the
+ result is 1.0.
+ &lt;li&gt;If the second argument is 1.0, then the result is the same as the
+ first argument.
+ &lt;li&gt;If the second argument is NaN, then the result is NaN.
+ &lt;li&gt;If the first argument is NaN and the second argument is nonzero,
+ then the result is NaN.
+
+ &lt;li&gt;If
+ &lt;ul&gt;
+ &lt;li&gt;the absolute value of the first argument is greater than 1
+ and the second argument is positive infinity, or
+ &lt;li&gt;the absolute value of the first argument is less than 1 and
+ the second argument is negative infinity,
+ &lt;/ul&gt;
+ then the result is positive infinity.
+
+ &lt;li&gt;If
+ &lt;ul&gt;
+ &lt;li&gt;the absolute value of the first argument is greater than 1 and
+ the second argument is negative infinity, or
+ &lt;li&gt;the absolute value of the
+ first argument is less than 1 and the second argument is positive
+ infinity,
+ &lt;/ul&gt;
+ then the result is positive zero.
+
+ &lt;li&gt;If the absolute value of the first argument equals 1 and the
+ second argument is infinite, then the result is NaN.
+
+ &lt;li&gt;If
+ &lt;ul&gt;
+ &lt;li&gt;the first argument is positive zero and the second argument
+ is greater than zero, or
+ &lt;li&gt;the first argument is positive infinity and the second
+ argument is less than zero,
+ &lt;/ul&gt;
+ then the result is positive zero.
+
+ &lt;li&gt;If
+ &lt;ul&gt;
+ &lt;li&gt;the first argument is positive zero and the second argument
+ is less than zero, or
+ &lt;li&gt;the first argument is positive infinity and the second
+ argument is greater than zero,
+ &lt;/ul&gt;
+ then the result is positive infinity.
+
+ &lt;li&gt;If
+ &lt;ul&gt;
+ &lt;li&gt;the first argument is negative zero and the second argument
+ is greater than zero but not a finite odd integer, or
+ &lt;li&gt;the first argument is negative infinity and the second
+ argument is less than zero but not a finite odd integer,
+ &lt;/ul&gt;
+ then the result is positive zero.
+
+ &lt;li&gt;If
+ &lt;ul&gt;
+ &lt;li&gt;the first argument is negative zero and the second argument
+ is a positive finite odd integer, or
+ &lt;li&gt;the first argument is negative infinity and the second
+ argument is a negative finite odd integer,
+ &lt;/ul&gt;
+ then the result is negative zero.
+
+ &lt;li&gt;If
+ &lt;ul&gt;
+ &lt;li&gt;the first argument is negative zero and the second argument
+ is less than zero but not a finite odd integer, or
+ &lt;li&gt;the first argument is negative infinity and the second
+ argument is greater than zero but not a finite odd integer,
+ &lt;/ul&gt;
+ then the result is positive infinity.
+
+ &lt;li&gt;If
+ &lt;ul&gt;
+ &lt;li&gt;the first argument is negative zero and the second argument
+ is a negative finite odd integer, or
+ &lt;li&gt;the first argument is negative infinity and the second
+ argument is a positive finite odd integer,
+ &lt;/ul&gt;
+ then the result is negative infinity.
+
+ &lt;li&gt;If the first argument is finite and less than zero
+ &lt;ul&gt;
+ &lt;li&gt; if the second argument is a finite even integer, the
+ result is equal to the result of raising the absolute value of
+ the first argument to the power of the second argument
+
+ &lt;li&gt;if the second argument is a finite odd integer, the result
+ is equal to the negative of the result of raising the absolute
+ value of the first argument to the power of the second
+ argument
+
+ &lt;li&gt;if the second argument is finite and not an integer, then
+ the result is NaN.
+ &lt;/ul&gt;
+
+ &lt;li&gt;If both arguments are integers, then the result is exactly equal
+ to the mathematical result of raising the first argument to the power
+ of the second argument if that result can in fact be represented
+ exactly as a {@code double} value.&lt;/ul&gt;
+
+ &lt;p&gt;(In the foregoing descriptions, a floating-point value is
+ considered to be an integer if and only if it is finite and a
+ fixed point of the method {@link #ceil ceil} or,
+ equivalently, a fixed point of the method {@link #floor
+ floor}. A value is a fixed point of a one-argument
+ method if and only if the result of applying the method to the
+ value is equal to the value.)
+@param {Number} a   base.
+@param {Number} b   the exponent.
+@return {Number} the value {@code a}&lt;sup&gt;{@code b}&lt;/sup&gt;.
+*/
+pow : function(  ) {},
+
+<span id='java-lang-StrictMath-method-round'>/**Returns the closest {@code int} to the argument, with ties
+</span> rounding to positive infinity.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument is NaN, the result is 0.
+ &lt;li&gt;If the argument is negative infinity or any value less than or
+ equal to the value of {@code Integer.MIN_VALUE}, the result is
+ equal to the value of {@code Integer.MIN_VALUE}.
+ &lt;li&gt;If the argument is positive infinity or any value greater than or
+ equal to the value of {@code Integer.MAX_VALUE}, the result is
+ equal to the value of {@code Integer.MAX_VALUE}.&lt;/ul&gt;
+@param {Number} a   a floating-point value to be rounded to an integer.
+@return {Number} the value of the argument rounded to the nearest
+          {@code int} value.
+@see java.lang.Integer#MAX_VALUE
+@see java.lang.Integer#MIN_VALUE
+*/
+round : function(  ) {},
+
+<span id='java-lang-StrictMath-method-round'>/**Returns the closest {@code long} to the argument, with ties
+</span> rounding to positive infinity.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument is NaN, the result is 0.
+ &lt;li&gt;If the argument is negative infinity or any value less than or
+ equal to the value of {@code Long.MIN_VALUE}, the result is
+ equal to the value of {@code Long.MIN_VALUE}.
+ &lt;li&gt;If the argument is positive infinity or any value greater than or
+ equal to the value of {@code Long.MAX_VALUE}, the result is
+ equal to the value of {@code Long.MAX_VALUE}.&lt;/ul&gt;
+@param {Number} a  a floating-point value to be rounded to a
+          {@code long}.
+@return {Number} the value of the argument rounded to the nearest
+          {@code long} value.
+@see java.lang.Long#MAX_VALUE
+@see java.lang.Long#MIN_VALUE
+*/
+round : function(  ) {},
+
+<span id='java-lang-StrictMath-method-random'>/**Returns a {@code double} value with a positive sign, greater
+</span> than or equal to {@code 0.0} and less than {@code 1.0}.
+ Returned values are chosen pseudorandomly with (approximately)
+ uniform distribution from that range.
+
+ &lt;p&gt;When this method is first called, it creates a single new
+ pseudorandom-number generator, exactly as if by the expression
+
+ &lt;blockquote&gt;{@code new java.util.Random()}&lt;/blockquote&gt;
+
+ This new pseudorandom-number generator is used thereafter for
+ all calls to this method and is used nowhere else.
+
+ &lt;p&gt;This method is properly synchronized to allow correct use by
+ more than one thread. However, if many threads need to generate
+ pseudorandom numbers at a great rate, it may reduce contention
+ for each thread to have its own pseudorandom-number generator.
+@return {Number} a pseudorandom {@code double} greater than or equal
+ to {@code 0.0} and less than {@code 1.0}.
+@see Random#nextDouble()
+*/
+random : function(  ) {},
+
+<span id='java-lang-StrictMath-method-addExact'>/**Returns the sum of its arguments,
+</span> throwing an exception if the result overflows an {@code int}.
+@param {Number} x the first value
+@param {Number} y the second value
+@return {Number} the result
+@throws ArithmeticException if the result overflows an int
+@see Math#addExact(int,int)
+@since 1.8
+*/
+addExact : function(  ) {},
+
+<span id='java-lang-StrictMath-method-addExact'>/**Returns the sum of its arguments,
+</span> throwing an exception if the result overflows a {@code long}.
+@param {Number} x the first value
+@param {Number} y the second value
+@return {Number} the result
+@throws ArithmeticException if the result overflows a long
+@see Math#addExact(long,long)
+@since 1.8
+*/
+addExact : function(  ) {},
+
+<span id='java-lang-StrictMath-method-subtractExact'>/**Returns the difference of the arguments,
+</span> throwing an exception if the result overflows an {@code int}.
+@param {Number} x the first value
+@param {Number} y the second value to subtract from the first
+@return {Number} the result
+@throws ArithmeticException if the result overflows an int
+@see Math#subtractExact(int,int)
+@since 1.8
+*/
+subtractExact : function(  ) {},
+
+<span id='java-lang-StrictMath-method-subtractExact'>/**Returns the difference of the arguments,
+</span> throwing an exception if the result overflows a {@code long}.
+@param {Number} x the first value
+@param {Number} y the second value to subtract from the first
+@return {Number} the result
+@throws ArithmeticException if the result overflows a long
+@see Math#subtractExact(long,long)
+@since 1.8
+*/
+subtractExact : function(  ) {},
+
+<span id='java-lang-StrictMath-method-multiplyExact'>/**Returns the product of the arguments,
+</span> throwing an exception if the result overflows an {@code int}.
+@param {Number} x the first value
+@param {Number} y the second value
+@return {Number} the result
+@throws ArithmeticException if the result overflows an int
+@see Math#multiplyExact(int,int)
+@since 1.8
+*/
+multiplyExact : function(  ) {},
+
+<span id='java-lang-StrictMath-method-multiplyExact'>/**Returns the product of the arguments,
+</span> throwing an exception if the result overflows a {@code long}.
+@param {Number} x the first value
+@param {Number} y the second value
+@return {Number} the result
+@throws ArithmeticException if the result overflows a long
+@see Math#multiplyExact(long,long)
+@since 1.8
+*/
+multiplyExact : function(  ) {},
+
+<span id='java-lang-StrictMath-method-toIntExact'>/**Returns the value of the {@code long} argument;
+</span> throwing an exception if the value overflows an {@code int}.
+@param {Number} value the long value
+@return {Number} the argument as an int
+@throws ArithmeticException if the {@code argument} overflows an int
+@see Math#toIntExact(long)
+@since 1.8
+*/
+toIntExact : function(  ) {},
+
+<span id='java-lang-StrictMath-method-floorDiv'>/**Returns the largest (closest to positive infinity)
+</span> {@code int} value that is less than or equal to the algebraic quotient.
+ There is one special case, if the dividend is the
+ {@linkplain java.lang.Integer#MIN_VALUE java.lang.Integer.MIN_VALUE} and the divisor is {@code -1},
+ then integer overflow occurs and
+ the result is equal to the {@code Integer.MIN_VALUE}.
+ &lt;p&gt;
+ See {@link java.lang.Math#floorDiv(int, int) java.lang.Math.floorDiv} for examples and
+ a comparison to the integer division {@code /} operator.
+@param {Number} x the dividend
+@param {Number} y the divisor
+@return {Number} the largest (closest to positive infinity)
+ {@code int} value that is less than or equal to the algebraic quotient.
+@throws ArithmeticException if the divisor {@code y} is zero
+@see Math#floorDiv(int, int)
+@see Math#floor(double)
+@since 1.8
+*/
+floorDiv : function(  ) {},
+
+<span id='java-lang-StrictMath-method-floorDiv'>/**Returns the largest (closest to positive infinity)
+</span> {@code long} value that is less than or equal to the algebraic quotient.
+ There is one special case, if the dividend is the
+ {@linkplain java.lang.Long#MIN_VALUE java.lang.Long.MIN_VALUE} and the divisor is {@code -1},
+ then integer overflow occurs and
+ the result is equal to the {@code Long.MIN_VALUE}.
+ &lt;p&gt;
+ See {@link java.lang.Math#floorDiv(int, int) java.lang.Math.floorDiv} for examples and
+ a comparison to the integer division {@code /} operator.
+@param {Number} x the dividend
+@param {Number} y the divisor
+@return {Number} the largest (closest to positive infinity)
+ {@code long} value that is less than or equal to the algebraic quotient.
+@throws ArithmeticException if the divisor {@code y} is zero
+@see Math#floorDiv(long, long)
+@see Math#floor(double)
+@since 1.8
+*/
+floorDiv : function(  ) {},
+
+<span id='java-lang-StrictMath-method-floorMod'>/**Returns the floor modulus of the {@code int} arguments.
+</span> &lt;p&gt;
+ The floor modulus is {@code x - (floorDiv(x, y) * y)},
+ has the same sign as the divisor {@code y}, and
+ is in the range of {@code -abs(y) &lt; r &lt; +abs(y)}.
+ &lt;p&gt;
+ The relationship between {@code floorDiv} and {@code floorMod} is such that:
+ &lt;ul&gt;
+   &lt;li&gt;{@code floorDiv(x, y) * y + floorMod(x, y) == x}
+ &lt;/ul&gt;
+ &lt;p&gt;
+ See {@link java.lang.Math#floorMod(int, int) java.lang.Math.floorMod} for examples and
+ a comparison to the {@code %} operator.
+@param {Number} x the dividend
+@param {Number} y the divisor
+@return {Number} the floor modulus {@code x - (floorDiv(x, y) * y)}
+@throws ArithmeticException if the divisor {@code y} is zero
+@see Math#floorMod(int, int)
+@see StrictMath#floorDiv(int, int)
+@since 1.8
+*/
+floorMod : function(  ) {},
+
+<span id='java-lang-StrictMath-method-floorMod'>/**Returns the floor modulus of the {@code long} arguments.
+</span> &lt;p&gt;
+ The floor modulus is {@code x - (floorDiv(x, y) * y)},
+ has the same sign as the divisor {@code y}, and
+ is in the range of {@code -abs(y) &lt; r &lt; +abs(y)}.
+ &lt;p&gt;
+ The relationship between {@code floorDiv} and {@code floorMod} is such that:
+ &lt;ul&gt;
+   &lt;li&gt;{@code floorDiv(x, y) * y + floorMod(x, y) == x}
+ &lt;/ul&gt;
+ &lt;p&gt;
+ See {@link java.lang.Math#floorMod(int, int) java.lang.Math.floorMod} for examples and
+ a comparison to the {@code %} operator.
+@param {Number} x the dividend
+@param {Number} y the divisor
+@return {Number} the floor modulus {@code x - (floorDiv(x, y) * y)}
+@throws ArithmeticException if the divisor {@code y} is zero
+@see Math#floorMod(long, long)
+@see StrictMath#floorDiv(long, long)
+@since 1.8
+*/
+floorMod : function(  ) {},
+
+<span id='java-lang-StrictMath-method-abs'>/**Returns the absolute value of an {@code int} value.
+</span> If the argument is not negative, the argument is returned.
+ If the argument is negative, the negation of the argument is returned.
+
+ &lt;p&gt;Note that if the argument is equal to the value of
+ {@link java.lang.Integer#MIN_VALUE}, the most negative representable
+ {@code int} value, the result is that same value, which is
+ negative.
+@param {Number} a   the  argument whose absolute value is to be determined.
+@return {Number} the absolute value of the argument.
+*/
+abs : function(  ) {},
+
+<span id='java-lang-StrictMath-method-abs'>/**Returns the absolute value of a {@code long} value.
+</span> If the argument is not negative, the argument is returned.
+ If the argument is negative, the negation of the argument is returned.
+
+ &lt;p&gt;Note that if the argument is equal to the value of
+ {@link java.lang.Long#MIN_VALUE}, the most negative representable
+ {@code long} value, the result is that same value, which
+ is negative.
+@param {Number} a   the  argument whose absolute value is to be determined.
+@return {Number} the absolute value of the argument.
+*/
+abs : function(  ) {},
+
+<span id='java-lang-StrictMath-method-abs'>/**Returns the absolute value of a {@code float} value.
+</span> If the argument is not negative, the argument is returned.
+ If the argument is negative, the negation of the argument is returned.
+ Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument is positive zero or negative zero, the
+ result is positive zero.
+ &lt;li&gt;If the argument is infinite, the result is positive infinity.
+ &lt;li&gt;If the argument is NaN, the result is NaN.&lt;/ul&gt;
+ In other words, the result is the same as the value of the expression:
+ &lt;p&gt;{@code Float.intBitsToFloat(0x7fffffff &amp; Float.floatToIntBits(a))}
+@param {Number} a   the argument whose absolute value is to be determined
+@return {Number} the absolute value of the argument.
+*/
+abs : function(  ) {},
+
+<span id='java-lang-StrictMath-method-abs'>/**Returns the absolute value of a {@code double} value.
+</span> If the argument is not negative, the argument is returned.
+ If the argument is negative, the negation of the argument is returned.
+ Special cases:
+ &lt;ul&gt;&lt;li&gt;If the argument is positive zero or negative zero, the result
+ is positive zero.
+ &lt;li&gt;If the argument is infinite, the result is positive infinity.
+ &lt;li&gt;If the argument is NaN, the result is NaN.&lt;/ul&gt;
+ In other words, the result is the same as the value of the expression:
+ &lt;p&gt;{@code Double.longBitsToDouble((Double.doubleToLongBits(a)&lt;&lt;1)&gt;&gt;&gt;1)}
+@param {Number} a   the argument whose absolute value is to be determined
+@return {Number} the absolute value of the argument.
+*/
+abs : function(  ) {},
+
+<span id='java-lang-StrictMath-method-max'>/**Returns the greater of two {@code int} values. That is, the
+</span> result is the argument closer to the value of
+ {@link java.lang.Integer#MAX_VALUE}. If the arguments have the same value,
+ the result is that same value.
+@param {Number} a   an argument.
+@param {Number} b   another argument.
+@return {Number} the larger of {@code a} and {@code b}.
+*/
+max : function(  ) {},
+
+<span id='java-lang-StrictMath-method-max'>/**Returns the greater of two {@code long} values. That is, the
+</span> result is the argument closer to the value of
+ {@link java.lang.Long#MAX_VALUE}. If the arguments have the same value,
+ the result is that same value.
+@param {Number} a   an argument.
+@param {Number} b   another argument.
+@return {Number} the larger of {@code a} and {@code b}.
+*/
+max : function(  ) {},
+
+<span id='java-lang-StrictMath-method-max'>/**Returns the greater of two {@code float} values.  That is,
+</span> the result is the argument closer to positive infinity. If the
+ arguments have the same value, the result is that same
+ value. If either value is NaN, then the result is NaN.  Unlike
+ the numerical comparison operators, this method considers
+ negative zero to be strictly smaller than positive zero. If one
+ argument is positive zero and the other negative zero, the
+ result is positive zero.
+@param {Number} a   an argument.
+@param {Number} b   another argument.
+@return {Number} the larger of {@code a} and {@code b}.
+*/
+max : function(  ) {},
+
+<span id='java-lang-StrictMath-method-max'>/**Returns the greater of two {@code double} values.  That
+</span> is, the result is the argument closer to positive infinity. If
+ the arguments have the same value, the result is that same
+ value. If either value is NaN, then the result is NaN.  Unlike
+ the numerical comparison operators, this method considers
+ negative zero to be strictly smaller than positive zero. If one
+ argument is positive zero and the other negative zero, the
+ result is positive zero.
+@param {Number} a   an argument.
+@param {Number} b   another argument.
+@return {Number} the larger of {@code a} and {@code b}.
+*/
+max : function(  ) {},
+
+<span id='java-lang-StrictMath-method-min'>/**Returns the smaller of two {@code int} values. That is,
+</span> the result the argument closer to the value of
+ {@link java.lang.Integer#MIN_VALUE}.  If the arguments have the same
+ value, the result is that same value.
+@param {Number} a   an argument.
+@param {Number} b   another argument.
+@return {Number} the smaller of {@code a} and {@code b}.
+*/
+min : function(  ) {},
+
+<span id='java-lang-StrictMath-method-min'>/**Returns the smaller of two {@code long} values. That is,
+</span> the result is the argument closer to the value of
+ {@link java.lang.Long#MIN_VALUE}. If the arguments have the same
+ value, the result is that same value.
+@param {Number} a   an argument.
+@param {Number} b   another argument.
+@return {Number} the smaller of {@code a} and {@code b}.
+*/
+min : function(  ) {},
+
+<span id='java-lang-StrictMath-method-min'>/**Returns the smaller of two {@code float} values.  That is,
+</span> the result is the value closer to negative infinity. If the
+ arguments have the same value, the result is that same
+ value. If either value is NaN, then the result is NaN.  Unlike
+ the numerical comparison operators, this method considers
+ negative zero to be strictly smaller than positive zero.  If
+ one argument is positive zero and the other is negative zero,
+ the result is negative zero.
+@param {Number} a   an argument.
+@param {Number} b   another argument.
+@return {Number} the smaller of {@code a} and {@code b.}
+*/
+min : function(  ) {},
+
+<span id='java-lang-StrictMath-method-min'>/**Returns the smaller of two {@code double} values.  That
+</span> is, the result is the value closer to negative infinity. If the
+ arguments have the same value, the result is that same
+ value. If either value is NaN, then the result is NaN.  Unlike
+ the numerical comparison operators, this method considers
+ negative zero to be strictly smaller than positive zero. If one
+ argument is positive zero and the other is negative zero, the
+ result is negative zero.
+@param {Number} a   an argument.
+@param {Number} b   another argument.
+@return {Number} the smaller of {@code a} and {@code b}.
+*/
+min : function(  ) {},
+
+<span id='java-lang-StrictMath-method-ulp'>/**Returns the size of an ulp of the argument.  An ulp, unit in
+</span> the last place, of a {@code double} value is the positive
+ distance between this floating-point value and the {@code
+ double} value next larger in magnitude.  Note that for non-NaN
+ &lt;i&gt;x&lt;/i&gt;, &lt;code&gt;ulp(-&lt;i&gt;x&lt;/i&gt;) == ulp(&lt;i&gt;x&lt;/i&gt;)&lt;/code&gt;.
+
+ &lt;p&gt;Special Cases:
+ &lt;ul&gt;
+ &lt;li&gt; If the argument is NaN, then the result is NaN.
+ &lt;li&gt; If the argument is positive or negative infinity, then the
+ result is positive infinity.
+ &lt;li&gt; If the argument is positive or negative zero, then the result is
+ {@code Double.MIN_VALUE}.
+ &lt;li&gt; If the argument is &amp;plusmn;{@code Double.MAX_VALUE}, then
+ the result is equal to 2&lt;sup&gt;971&lt;/sup&gt;.
+ &lt;/ul&gt;
+@param {Number} d the floating-point value whose ulp is to be returned
+@return {Number} the size of an ulp of the argument
+@author Joseph D. Darcy
+@since 1.5
+*/
+ulp : function(  ) {},
+
+<span id='java-lang-StrictMath-method-ulp'>/**Returns the size of an ulp of the argument.  An ulp, unit in
+</span> the last place, of a {@code float} value is the positive
+ distance between this floating-point value and the {@code
+ float} value next larger in magnitude.  Note that for non-NaN
+ &lt;i&gt;x&lt;/i&gt;, &lt;code&gt;ulp(-&lt;i&gt;x&lt;/i&gt;) == ulp(&lt;i&gt;x&lt;/i&gt;)&lt;/code&gt;.
+
+ &lt;p&gt;Special Cases:
+ &lt;ul&gt;
+ &lt;li&gt; If the argument is NaN, then the result is NaN.
+ &lt;li&gt; If the argument is positive or negative infinity, then the
+ result is positive infinity.
+ &lt;li&gt; If the argument is positive or negative zero, then the result is
+ {@code Float.MIN_VALUE}.
+ &lt;li&gt; If the argument is &amp;plusmn;{@code Float.MAX_VALUE}, then
+ the result is equal to 2&lt;sup&gt;104&lt;/sup&gt;.
+ &lt;/ul&gt;
+@param {Number} f the floating-point value whose ulp is to be returned
+@return {Number} the size of an ulp of the argument
+@author Joseph D. Darcy
+@since 1.5
+*/
+ulp : function(  ) {},
+
+<span id='java-lang-StrictMath-method-signum'>/**Returns the signum function of the argument; zero if the argument
+</span> is zero, 1.0 if the argument is greater than zero, -1.0 if the
+ argument is less than zero.
+
+ &lt;p&gt;Special Cases:
+ &lt;ul&gt;
+ &lt;li&gt; If the argument is NaN, then the result is NaN.
+ &lt;li&gt; If the argument is positive zero or negative zero, then the
+      result is the same as the argument.
+ &lt;/ul&gt;
+@param {Number} d the floating-point value whose signum is to be returned
+@return {Number} the signum function of the argument
+@author Joseph D. Darcy
+@since 1.5
+*/
+signum : function(  ) {},
+
+<span id='java-lang-StrictMath-method-signum'>/**Returns the signum function of the argument; zero if the argument
+</span> is zero, 1.0f if the argument is greater than zero, -1.0f if the
+ argument is less than zero.
+
+ &lt;p&gt;Special Cases:
+ &lt;ul&gt;
+ &lt;li&gt; If the argument is NaN, then the result is NaN.
+ &lt;li&gt; If the argument is positive zero or negative zero, then the
+      result is the same as the argument.
+ &lt;/ul&gt;
+@param {Number} f the floating-point value whose signum is to be returned
+@return {Number} the signum function of the argument
+@author Joseph D. Darcy
+@since 1.5
+*/
+signum : function(  ) {},
+
+<span id='java-lang-StrictMath-method-sinh'>/**Returns the hyperbolic sine of a {@code double} value.
+</span> The hyperbolic sine of &lt;i&gt;x&lt;/i&gt; is defined to be
+ (&lt;i&gt;e&lt;sup&gt;x&lt;/sup&gt;&amp;nbsp;-&amp;nbsp;e&lt;sup&gt;-x&lt;/sup&gt;&lt;/i&gt;)/2
+ where &lt;i&gt;e&lt;/i&gt; is {@linkplain java.lang.Math#E Euler's number}.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;
+
+ &lt;li&gt;If the argument is NaN, then the result is NaN.
+
+ &lt;li&gt;If the argument is infinite, then the result is an infinity
+ with the same sign as the argument.
+
+ &lt;li&gt;If the argument is zero, then the result is a zero with the
+ same sign as the argument.
+
+ &lt;/ul&gt;
+@param {Number} x The number whose hyperbolic sine is to be returned.
+@return {Number} The hyperbolic sine of {@code x}.
+@since 1.5
+*/
+sinh : function(  ) {},
+
+<span id='java-lang-StrictMath-method-cosh'>/**Returns the hyperbolic cosine of a {@code double} value.
+</span> The hyperbolic cosine of &lt;i&gt;x&lt;/i&gt; is defined to be
+ (&lt;i&gt;e&lt;sup&gt;x&lt;/sup&gt;&amp;nbsp;+&amp;nbsp;e&lt;sup&gt;-x&lt;/sup&gt;&lt;/i&gt;)/2
+ where &lt;i&gt;e&lt;/i&gt; is {@linkplain java.lang.Math#E Euler's number}.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;
+
+ &lt;li&gt;If the argument is NaN, then the result is NaN.
+
+ &lt;li&gt;If the argument is infinite, then the result is positive
+ infinity.
+
+ &lt;li&gt;If the argument is zero, then the result is {@code 1.0}.
+
+ &lt;/ul&gt;
+@param {Number} x The number whose hyperbolic cosine is to be returned.
+@return {Number} The hyperbolic cosine of {@code x}.
+@since 1.5
+*/
+cosh : function(  ) {},
+
+<span id='java-lang-StrictMath-method-tanh'>/**Returns the hyperbolic tangent of a {@code double} value.
+</span> The hyperbolic tangent of &lt;i&gt;x&lt;/i&gt; is defined to be
+ (&lt;i&gt;e&lt;sup&gt;x&lt;/sup&gt;&amp;nbsp;-&amp;nbsp;e&lt;sup&gt;-x&lt;/sup&gt;&lt;/i&gt;)/(&lt;i&gt;e&lt;sup&gt;x&lt;/sup&gt;&amp;nbsp;+&amp;nbsp;e&lt;sup&gt;-x&lt;/sup&gt;&lt;/i&gt;),
+ in other words, {@linkplain Math#sinh
+ sinh(&lt;i&gt;x&lt;/i&gt;)}/{@linkplain Math#cosh cosh(&lt;i&gt;x&lt;/i&gt;)}.  Note
+ that the absolute value of the exact tanh is always less than
+ 1.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;
+
+ &lt;li&gt;If the argument is NaN, then the result is NaN.
+
+ &lt;li&gt;If the argument is zero, then the result is a zero with the
+ same sign as the argument.
+
+ &lt;li&gt;If the argument is positive infinity, then the result is
+ {@code +1.0}.
+
+ &lt;li&gt;If the argument is negative infinity, then the result is
+ {@code -1.0}.
+
+ &lt;/ul&gt;
+@param {Number} x The number whose hyperbolic tangent is to be returned.
+@return {Number} The hyperbolic tangent of {@code x}.
+@since 1.5
+*/
+tanh : function(  ) {},
+
+<span id='java-lang-StrictMath-method-hypot'>/**Returns sqrt(&lt;i&gt;x&lt;/i&gt;&lt;sup&gt;2&lt;/sup&gt;&amp;nbsp;+&lt;i&gt;y&lt;/i&gt;&lt;sup&gt;2&lt;/sup&gt;)
+</span> without intermediate overflow or underflow.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;
+
+ &lt;li&gt; If either argument is infinite, then the result
+ is positive infinity.
+
+ &lt;li&gt; If either argument is NaN and neither argument is infinite,
+ then the result is NaN.
+
+ &lt;/ul&gt;
+@param {Number} x a value
+@param {Number} y a value
+@return {Number} sqrt(&lt;i&gt;x&lt;/i&gt;&lt;sup&gt;2&lt;/sup&gt;&amp;nbsp;+&lt;i&gt;y&lt;/i&gt;&lt;sup&gt;2&lt;/sup&gt;)
+ without intermediate overflow or underflow
+@since 1.5
+*/
+hypot : function(  ) {},
+
+<span id='java-lang-StrictMath-method-expm1'>/**Returns &lt;i&gt;e&lt;/i&gt;&lt;sup&gt;x&lt;/sup&gt;&amp;nbsp;-1.  Note that for values of
+</span> &lt;i&gt;x&lt;/i&gt; near 0, the exact sum of
+ {@code expm1(x)}&amp;nbsp;+&amp;nbsp;1 is much closer to the true
+ result of &lt;i&gt;e&lt;/i&gt;&lt;sup&gt;x&lt;/sup&gt; than {@code exp(x)}.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;
+ &lt;li&gt;If the argument is NaN, the result is NaN.
+
+ &lt;li&gt;If the argument is positive infinity, then the result is
+ positive infinity.
+
+ &lt;li&gt;If the argument is negative infinity, then the result is
+ -1.0.
+
+ &lt;li&gt;If the argument is zero, then the result is a zero with the
+ same sign as the argument.
+
+ &lt;/ul&gt;
+@param {Number} x   the exponent to raise &lt;i&gt;e&lt;/i&gt; to in the computation of
+              &lt;i&gt;e&lt;/i&gt;&lt;sup&gt;{@code x}&lt;/sup&gt;&amp;nbsp;-1.
+@return {Number} the value &lt;i&gt;e&lt;/i&gt;&lt;sup&gt;{@code x}&lt;/sup&gt;&amp;nbsp;-&amp;nbsp;1.
+@since 1.5
+*/
+expm1 : function(  ) {},
+
+<span id='java-lang-StrictMath-method-log1p'>/**Returns the natural logarithm of the sum of the argument and 1.
+</span> Note that for small values {@code x}, the result of
+ {@code log1p(x)} is much closer to the true result of ln(1
+ + {@code x}) than the floating-point evaluation of
+ {@code log(1.0+x)}.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;
+
+ &lt;li&gt;If the argument is NaN or less than -1, then the result is
+ NaN.
+
+ &lt;li&gt;If the argument is positive infinity, then the result is
+ positive infinity.
+
+ &lt;li&gt;If the argument is negative one, then the result is
+ negative infinity.
+
+ &lt;li&gt;If the argument is zero, then the result is a zero with the
+ same sign as the argument.
+
+ &lt;/ul&gt;
+@param {Number} x   a value
+@return {Number} the value ln({@code x}&amp;nbsp;+&amp;nbsp;1), the natural
+ log of {@code x}&amp;nbsp;+&amp;nbsp;1
+@since 1.5
+*/
+log1p : function(  ) {},
+
+<span id='java-lang-StrictMath-method-copySign'>/**Returns the first floating-point argument with the sign of the
+</span> second floating-point argument.  For this method, a NaN
+ {@code sign} argument is always treated as if it were
+ positive.
+@param {Number} magnitude  the parameter providing the magnitude of the result
+@param {Number} sign   the parameter providing the sign of the result
+@return {Number} a value with the magnitude of {@code magnitude}
+ and the sign of {@code sign}.
+@since 1.6
+*/
+copySign : function(  ) {},
+
+<span id='java-lang-StrictMath-method-copySign'>/**Returns the first floating-point argument with the sign of the
+</span> second floating-point argument.  For this method, a NaN
+ {@code sign} argument is always treated as if it were
+ positive.
+@param {Number} magnitude  the parameter providing the magnitude of the result
+@param {Number} sign   the parameter providing the sign of the result
+@return {Number} a value with the magnitude of {@code magnitude}
+ and the sign of {@code sign}.
+@since 1.6
+*/
+copySign : function(  ) {},
+
+<span id='java-lang-StrictMath-method-getExponent'>/**Returns the unbiased exponent used in the representation of a
+</span> {@code float}.  Special cases:
+
+ &lt;ul&gt;
+ &lt;li&gt;If the argument is NaN or infinite, then the result is
+ {@link java.lang.Float#MAX_EXPONENT} + 1.
+ &lt;li&gt;If the argument is zero or subnormal, then the result is
+ {@link java.lang.Float#MIN_EXPONENT} -1.
+ &lt;/ul&gt;
+@param {Number} f a {@code float} value
+@return {Number} the unbiased exponent of the argument
+@since 1.6
+*/
+getExponent : function(  ) {},
+
+<span id='java-lang-StrictMath-method-getExponent'>/**Returns the unbiased exponent used in the representation of a
+</span> {@code double}.  Special cases:
+
+ &lt;ul&gt;
+ &lt;li&gt;If the argument is NaN or infinite, then the result is
+ {@link java.lang.Double#MAX_EXPONENT} + 1.
+ &lt;li&gt;If the argument is zero or subnormal, then the result is
+ {@link java.lang.Double#MIN_EXPONENT} -1.
+ &lt;/ul&gt;
+@param {Number} d a {@code double} value
+@return {Number} the unbiased exponent of the argument
+@since 1.6
+*/
+getExponent : function(  ) {},
+
+<span id='java-lang-StrictMath-method-nextAfter'>/**Returns the floating-point number adjacent to the first
+</span> argument in the direction of the second argument.  If both
+ arguments compare as equal the second argument is returned.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;
+ &lt;li&gt; If either argument is a NaN, then NaN is returned.
+
+ &lt;li&gt; If both arguments are signed zeros, {@code direction}
+ is returned unchanged (as implied by the requirement of
+ returning the second argument if the arguments compare as
+ equal).
+
+ &lt;li&gt; If {@code start} is
+ &amp;plusmn;{@link java.lang.Double#MIN_VALUE} and {@code direction}
+ has a value such that the result should have a smaller
+ magnitude, then a zero with the same sign as {@code start}
+ is returned.
+
+ &lt;li&gt; If {@code start} is infinite and
+ {@code direction} has a value such that the result should
+ have a smaller magnitude, {@link java.lang.Double#MAX_VALUE} with the
+ same sign as {@code start} is returned.
+
+ &lt;li&gt; If {@code start} is equal to &amp;plusmn;
+ {@link java.lang.Double#MAX_VALUE} and {@code direction} has a
+ value such that the result should have a larger magnitude, an
+ infinity with same sign as {@code start} is returned.
+ &lt;/ul&gt;
+@param {Number} start  starting floating-point value
+@param {Number} direction value indicating which of
+ {@code start}'s neighbors or {@code start} should
+ be returned
+@return {Number} The floating-point number adjacent to {@code start} in the
+ direction of {@code direction}.
+@since 1.6
+*/
+nextAfter : function(  ) {},
+
+<span id='java-lang-StrictMath-method-nextAfter'>/**Returns the floating-point number adjacent to the first
+</span> argument in the direction of the second argument.  If both
+ arguments compare as equal a value equivalent to the second argument
+ is returned.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;
+ &lt;li&gt; If either argument is a NaN, then NaN is returned.
+
+ &lt;li&gt; If both arguments are signed zeros, a value equivalent
+ to {@code direction} is returned.
+
+ &lt;li&gt; If {@code start} is
+ &amp;plusmn;{@link java.lang.Float#MIN_VALUE} and {@code direction}
+ has a value such that the result should have a smaller
+ magnitude, then a zero with the same sign as {@code start}
+ is returned.
+
+ &lt;li&gt; If {@code start} is infinite and
+ {@code direction} has a value such that the result should
+ have a smaller magnitude, {@link java.lang.Float#MAX_VALUE} with the
+ same sign as {@code start} is returned.
+
+ &lt;li&gt; If {@code start} is equal to &amp;plusmn;
+ {@link java.lang.Float#MAX_VALUE} and {@code direction} has a
+ value such that the result should have a larger magnitude, an
+ infinity with same sign as {@code start} is returned.
+ &lt;/ul&gt;
+@param {Number} start  starting floating-point value
+@param {Number} direction value indicating which of
+ {@code start}'s neighbors or {@code start} should
+ be returned
+@return {Number} The floating-point number adjacent to {@code start} in the
+ direction of {@code direction}.
+@since 1.6
+*/
+nextAfter : function(  ) {},
+
+<span id='java-lang-StrictMath-method-nextUp'>/**Returns the floating-point value adjacent to {@code d} in
+</span> the direction of positive infinity.  This method is
+ semantically equivalent to {@code nextAfter(d,
+ Double.POSITIVE_INFINITY)}; however, a {@code nextUp}
+ implementation may run faster than its equivalent
+ {@code nextAfter} call.
+
+ &lt;p&gt;Special Cases:
+ &lt;ul&gt;
+ &lt;li&gt; If the argument is NaN, the result is NaN.
+
+ &lt;li&gt; If the argument is positive infinity, the result is
+ positive infinity.
+
+ &lt;li&gt; If the argument is zero, the result is
+ {@link java.lang.Double#MIN_VALUE}
+
+ &lt;/ul&gt;
+@param {Number} d starting floating-point value
+@return {Number} The adjacent floating-point value closer to positive
+ infinity.
+@since 1.6
+*/
+nextUp : function(  ) {},
+
+<span id='java-lang-StrictMath-method-nextUp'>/**Returns the floating-point value adjacent to {@code f} in
+</span> the direction of positive infinity.  This method is
+ semantically equivalent to {@code nextAfter(f,
+ Float.POSITIVE_INFINITY)}; however, a {@code nextUp}
+ implementation may run faster than its equivalent
+ {@code nextAfter} call.
+
+ &lt;p&gt;Special Cases:
+ &lt;ul&gt;
+ &lt;li&gt; If the argument is NaN, the result is NaN.
+
+ &lt;li&gt; If the argument is positive infinity, the result is
+ positive infinity.
+
+ &lt;li&gt; If the argument is zero, the result is
+ {@link java.lang.Float#MIN_VALUE}
+
+ &lt;/ul&gt;
+@param {Number} f starting floating-point value
+@return {Number} The adjacent floating-point value closer to positive
+ infinity.
+@since 1.6
+*/
+nextUp : function(  ) {},
+
+<span id='java-lang-StrictMath-method-nextDown'>/**Returns the floating-point value adjacent to {@code d} in
+</span> the direction of negative infinity.  This method is
+ semantically equivalent to {@code nextAfter(d,
+ Double.NEGATIVE_INFINITY)}; however, a
+ {@code nextDown} implementation may run faster than its
+ equivalent {@code nextAfter} call.
+
+ &lt;p&gt;Special Cases:
+ &lt;ul&gt;
+ &lt;li&gt; If the argument is NaN, the result is NaN.
+
+ &lt;li&gt; If the argument is negative infinity, the result is
+ negative infinity.
+
+ &lt;li&gt; If the argument is zero, the result is
+ {@code -Double.MIN_VALUE}
+
+ &lt;/ul&gt;
+@param {Number} d  starting floating-point value
+@return {Number} The adjacent floating-point value closer to negative
+ infinity.
+@since 1.8
+*/
+nextDown : function(  ) {},
+
+<span id='java-lang-StrictMath-method-nextDown'>/**Returns the floating-point value adjacent to {@code f} in
+</span> the direction of negative infinity.  This method is
+ semantically equivalent to {@code nextAfter(f,
+ Float.NEGATIVE_INFINITY)}; however, a
+ {@code nextDown} implementation may run faster than its
+ equivalent {@code nextAfter} call.
+
+ &lt;p&gt;Special Cases:
+ &lt;ul&gt;
+ &lt;li&gt; If the argument is NaN, the result is NaN.
+
+ &lt;li&gt; If the argument is negative infinity, the result is
+ negative infinity.
+
+ &lt;li&gt; If the argument is zero, the result is
+ {@code -Float.MIN_VALUE}
+
+ &lt;/ul&gt;
+@param {Number} f  starting floating-point value
+@return {Number} The adjacent floating-point value closer to negative
+ infinity.
+@since 1.8
+*/
+nextDown : function(  ) {},
+
+<span id='java-lang-StrictMath-method-scalb'>/**Returns {@code d} &amp;times;
+</span> 2&lt;sup&gt;{@code scaleFactor}&lt;/sup&gt; rounded as if performed
+ by a single correctly rounded floating-point multiply to a
+ member of the double value set.  See the Java
+ Language Specification for a discussion of floating-point
+ value sets.  If the exponent of the result is between {@link java.lang.Double#MIN_EXPONENT} and {@link java.lang.Double#MAX_EXPONENT}, the
+ answer is calculated exactly.  If the exponent of the result
+ would be larger than {@code Double.MAX_EXPONENT}, an
+ infinity is returned.  Note that if the result is subnormal,
+ precision may be lost; that is, when {@code scalb(x, n)}
+ is subnormal, {@code scalb(scalb(x, n), -n)} may not equal
+ &lt;i&gt;x&lt;/i&gt;.  When the result is non-NaN, the result has the same
+ sign as {@code d}.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;
+ &lt;li&gt; If the first argument is NaN, NaN is returned.
+ &lt;li&gt; If the first argument is infinite, then an infinity of the
+ same sign is returned.
+ &lt;li&gt; If the first argument is zero, then a zero of the same
+ sign is returned.
+ &lt;/ul&gt;
+@param {Number} d number to be scaled by a power of two.
+@param {Number} scaleFactor power of 2 used to scale {@code d}
+@return {Number} {@code d} &amp;times; 2&lt;sup&gt;{@code scaleFactor}&lt;/sup&gt;
+@since 1.6
+*/
+scalb : function(  ) {},
+
+<span id='java-lang-StrictMath-method-scalb'>/**Returns {@code f} &amp;times;
+</span> 2&lt;sup&gt;{@code scaleFactor}&lt;/sup&gt; rounded as if performed
+ by a single correctly rounded floating-point multiply to a
+ member of the float value set.  See the Java
+ Language Specification for a discussion of floating-point
+ value sets.  If the exponent of the result is between {@link java.lang.Float#MIN_EXPONENT} and {@link java.lang.Float#MAX_EXPONENT}, the
+ answer is calculated exactly.  If the exponent of the result
+ would be larger than {@code Float.MAX_EXPONENT}, an
+ infinity is returned.  Note that if the result is subnormal,
+ precision may be lost; that is, when {@code scalb(x, n)}
+ is subnormal, {@code scalb(scalb(x, n), -n)} may not equal
+ &lt;i&gt;x&lt;/i&gt;.  When the result is non-NaN, the result has the same
+ sign as {@code f}.
+
+ &lt;p&gt;Special cases:
+ &lt;ul&gt;
+ &lt;li&gt; If the first argument is NaN, NaN is returned.
+ &lt;li&gt; If the first argument is infinite, then an infinity of the
+ same sign is returned.
+ &lt;li&gt; If the first argument is zero, then a zero of the same
+ sign is returned.
+ &lt;/ul&gt;
+@param {Number} f number to be scaled by a power of two.
+@param {Number} scaleFactor power of 2 used to scale {@code f}
+@return {Number} {@code f} &amp;times; 2&lt;sup&gt;{@code scaleFactor}&lt;/sup&gt;
+@since 1.6
+*/
+scalb : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

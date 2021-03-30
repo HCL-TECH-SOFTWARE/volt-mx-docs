@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-ConditionObject'>/**@class java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject
+</span> implements java.util.concurrent.locks.Condition
+
+ implements java.io.Serializable
+
+@extends java.lang.Object
+
+ Condition implementation for a {@link java.util.concurrent.locks.AbstractQueuedLongSynchronizer} serving as the basis of a {@link java.util.concurrent.locks.Lock} implementation.
+
+ &lt;p&gt;Method documentation for this class describes mechanics,
+ not behavioral specifications from the point of view of Lock
+ and Condition users. Exported versions of this class will in
+ general need to be accompanied by documentation describing
+ condition semantics that rely on those of the associated
+ {@code AbstractQueuedLongSynchronizer}.
+
+ &lt;p&gt;This class is Serializable, but all fields are transient,
+ so deserialized conditions have no waiters.
+
+ @since 1.6
+*/
+var ConditionObject = {
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-ConditionObject-method-signal'>/**Moves the longest-waiting thread, if one exists, from the
+</span> wait queue for this condition to the wait queue for the
+ owning lock.
+@throws IllegalMonitorStateException if {@link #isHeldExclusively}
+         returns {@code false}
+*/
+signal : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-ConditionObject-method-signalAll'>/**Moves all threads from the wait queue for this condition to
+</span> the wait queue for the owning lock.
+@throws IllegalMonitorStateException if {@link #isHeldExclusively}
+         returns {@code false}
+*/
+signalAll : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-ConditionObject-method-awaitUninterruptibly'>/**Implements uninterruptible condition wait.
+</span> &lt;ol&gt;
+ &lt;li&gt;Save lock state returned by {@link #getState}.
+ &lt;li&gt;Invoke {@link #release} with saved state as argument,
+     throwing IllegalMonitorStateException if it fails.
+ &lt;li&gt;Block until signalled.
+ &lt;li&gt;Reacquire by invoking specialized version of
+     {@link #acquire} with saved state as argument.
+ &lt;/ol&gt;
+*/
+awaitUninterruptibly : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-ConditionObject-method-await'>/**Implements interruptible condition wait.
+</span> &lt;ol&gt;
+ &lt;li&gt;If current thread is interrupted, throw InterruptedException.
+ &lt;li&gt;Save lock state returned by {@link #getState}.
+ &lt;li&gt;Invoke {@link #release} with saved state as argument,
+     throwing IllegalMonitorStateException if it fails.
+ &lt;li&gt;Block until signalled or interrupted.
+ &lt;li&gt;Reacquire by invoking specialized version of
+     {@link #acquire} with saved state as argument.
+ &lt;li&gt;If interrupted while blocked in step 4, throw InterruptedException.
+ &lt;/ol&gt;
+*/
+await : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-ConditionObject-method-awaitNanos'>/**Implements timed condition wait.
+</span> &lt;ol&gt;
+ &lt;li&gt;If current thread is interrupted, throw InterruptedException.
+ &lt;li&gt;Save lock state returned by {@link #getState}.
+ &lt;li&gt;Invoke {@link #release} with saved state as argument,
+     throwing IllegalMonitorStateException if it fails.
+ &lt;li&gt;Block until signalled, interrupted, or timed out.
+ &lt;li&gt;Reacquire by invoking specialized version of
+     {@link #acquire} with saved state as argument.
+ &lt;li&gt;If interrupted while blocked in step 4, throw InterruptedException.
+ &lt;/ol&gt;
+*/
+awaitNanos : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-ConditionObject-method-awaitUntil'>/**Implements absolute timed condition wait.
+</span> &lt;ol&gt;
+ &lt;li&gt;If current thread is interrupted, throw InterruptedException.
+ &lt;li&gt;Save lock state returned by {@link #getState}.
+ &lt;li&gt;Invoke {@link #release} with saved state as argument,
+     throwing IllegalMonitorStateException if it fails.
+ &lt;li&gt;Block until signalled, interrupted, or timed out.
+ &lt;li&gt;Reacquire by invoking specialized version of
+     {@link #acquire} with saved state as argument.
+ &lt;li&gt;If interrupted while blocked in step 4, throw InterruptedException.
+ &lt;li&gt;If timed out while blocked in step 4, return false, else true.
+ &lt;/ol&gt;
+*/
+awaitUntil : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-ConditionObject-method-await'>/**Implements timed condition wait.
+</span> &lt;ol&gt;
+ &lt;li&gt;If current thread is interrupted, throw InterruptedException.
+ &lt;li&gt;Save lock state returned by {@link #getState}.
+ &lt;li&gt;Invoke {@link #release} with saved state as argument,
+     throwing IllegalMonitorStateException if it fails.
+ &lt;li&gt;Block until signalled, interrupted, or timed out.
+ &lt;li&gt;Reacquire by invoking specialized version of
+     {@link #acquire} with saved state as argument.
+ &lt;li&gt;If interrupted while blocked in step 4, throw InterruptedException.
+ &lt;li&gt;If timed out while blocked in step 4, return false, else true.
+ &lt;/ol&gt;
+*/
+await : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

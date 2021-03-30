@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-obex-HeaderSet'>/**@class javax.obex.HeaderSet
+</span>@extends java.lang.Object
+
+ This class implements the javax.obex.HeaderSet interface for OBEX over
+ RFCOMM or OBEX over l2cap.
+ @hide
+*/
+var HeaderSet = {
+
+<span id='javax-obex-HeaderSet-property-COUNT'>/** Represents the OBEX Count header. This allows the connection statement to
+</span> tell the server how many objects it plans to send or retrieve.
+ &lt;P&gt;
+ The value of &lt;code&gt;COUNT&lt;/code&gt; is 0xC0 (192).
+*/
+COUNT : &quot;192&quot;,
+<span id='javax-obex-HeaderSet-property-NAME'>/** Represents the OBEX Name header. This specifies the name of the object.
+</span> &lt;P&gt;
+ The value of &lt;code&gt;NAME&lt;/code&gt; is 0x01 (1).
+*/
+NAME : &quot;1&quot;,
+<span id='javax-obex-HeaderSet-property-TYPE'>/** Represents the OBEX Type header. This allows a request to specify the
+</span> type of the object (e.g. text, html, binary, etc.).
+ &lt;P&gt;
+ The value of &lt;code&gt;TYPE&lt;/code&gt; is 0x42 (66).
+*/
+TYPE : &quot;66&quot;,
+<span id='javax-obex-HeaderSet-property-LENGTH'>/** Represents the OBEX Length header. This is the length of the object in
+</span> bytes.
+ &lt;P&gt;
+ The value of &lt;code&gt;LENGTH&lt;/code&gt; is 0xC3 (195).
+*/
+LENGTH : &quot;195&quot;,
+<span id='javax-obex-HeaderSet-property-TIME_ISO_8601'>/** Represents the OBEX Time header using the ISO 8601 standards. This is the
+</span> preferred time header.
+ &lt;P&gt;
+ The value of &lt;code&gt;TIME_ISO_8601&lt;/code&gt; is 0x44 (68).
+*/
+TIME_ISO_8601 : &quot;68&quot;,
+<span id='javax-obex-HeaderSet-property-TIME_4_BYTE'>/** Represents the OBEX Time header using the 4 byte representation. This is
+</span> only included for backwards compatibility. It represents the number of
+ seconds since January 1, 1970.
+ &lt;P&gt;
+ The value of &lt;code&gt;TIME_4_BYTE&lt;/code&gt; is 0xC4 (196).
+*/
+TIME_4_BYTE : &quot;196&quot;,
+<span id='javax-obex-HeaderSet-property-DESCRIPTION'>/** Represents the OBEX Description header. This is a text description of the
+</span> object.
+ &lt;P&gt;
+ The value of &lt;code&gt;DESCRIPTION&lt;/code&gt; is 0x05 (5).
+*/
+DESCRIPTION : &quot;5&quot;,
+<span id='javax-obex-HeaderSet-property-TARGET'>/** Represents the OBEX Target header. This is the name of the service an
+</span> operation is targeted to.
+ &lt;P&gt;
+ The value of &lt;code&gt;TARGET&lt;/code&gt; is 0x46 (70).
+*/
+TARGET : &quot;70&quot;,
+<span id='javax-obex-HeaderSet-property-HTTP'>/** Represents the OBEX HTTP header. This allows an HTTP 1.X header to be
+</span> included in a request or reply.
+ &lt;P&gt;
+ The value of &lt;code&gt;HTTP&lt;/code&gt; is 0x47 (71).
+*/
+HTTP : &quot;71&quot;,
+<span id='javax-obex-HeaderSet-property-BODY'>/** Represents the OBEX BODY header.
+</span> &lt;P&gt;
+ The value of &lt;code&gt;BODY&lt;/code&gt; is 0x48 (72).
+*/
+BODY : &quot;72&quot;,
+<span id='javax-obex-HeaderSet-property-END_OF_BODY'>/** Represents the OBEX End of BODY header.
+</span> &lt;P&gt;
+ The value of &lt;code&gt;BODY&lt;/code&gt; is 0x49 (73).
+*/
+END_OF_BODY : &quot;73&quot;,
+<span id='javax-obex-HeaderSet-property-WHO'>/** Represents the OBEX Who header. Identifies the OBEX application to
+</span> determine if the two peers are talking to each other.
+ &lt;P&gt;
+ The value of &lt;code&gt;WHO&lt;/code&gt; is 0x4A (74).
+*/
+WHO : &quot;74&quot;,
+<span id='javax-obex-HeaderSet-property-CONNECTION_ID'>/** Represents the OBEX Connection ID header. Identifies used for OBEX
+</span> connection multiplexing.
+ &lt;P&gt;
+ The value of &lt;code&gt;CONNECTION_ID&lt;/code&gt; is 0xCB (203).
+*/
+CONNECTION_ID : &quot;203&quot;,
+<span id='javax-obex-HeaderSet-property-APPLICATION_PARAMETER'>/** Represents the OBEX Application Parameter header. This header specifies
+</span> additional application request and response information.
+ &lt;P&gt;
+ The value of &lt;code&gt;APPLICATION_PARAMETER&lt;/code&gt; is 0x4C (76).
+*/
+APPLICATION_PARAMETER : &quot;76&quot;,
+<span id='javax-obex-HeaderSet-property-AUTH_CHALLENGE'>/** Represents the OBEX authentication digest-challenge.
+</span> &lt;P&gt;
+ The value of &lt;code&gt;AUTH_CHALLENGE&lt;/code&gt; is 0x4D (77).
+*/
+AUTH_CHALLENGE : &quot;77&quot;,
+<span id='javax-obex-HeaderSet-property-AUTH_RESPONSE'>/** Represents the OBEX authentication digest-response.
+</span> &lt;P&gt;
+ The value of &lt;code&gt;AUTH_RESPONSE&lt;/code&gt; is 0x4E (78).
+*/
+AUTH_RESPONSE : &quot;78&quot;,
+<span id='javax-obex-HeaderSet-property-OBJECT_CLASS'>/** Represents the OBEX Object Class header. This header specifies the OBEX
+</span> object class of the object.
+ &lt;P&gt;
+ The value of &lt;code&gt;OBJECT_CLASS&lt;/code&gt; is 0x4F (79).
+*/
+OBJECT_CLASS : &quot;79&quot;,
+<span id='javax-obex-HeaderSet-property-SINGLE_RESPONSE_MODE'>/** Represents the OBEX Single Response Mode (SRM). This header is used
+</span> for Single response mode, introduced in OBEX 1.5.
+ &lt;P&gt;
+ The value of &lt;code&gt;SINGLE_RESPONSE_MODE&lt;/code&gt; is 0x97 (151).
+*/
+SINGLE_RESPONSE_MODE : &quot;151&quot;,
+<span id='javax-obex-HeaderSet-property-SINGLE_RESPONSE_MODE_PARAMETER'>/** Represents the OBEX Single Response Mode Parameters. This header is used
+</span> for Single response mode, introduced in OBEX 1.5.
+ &lt;P&gt;
+ The value of &lt;code&gt;SINGLE_RESPONSE_MODE_PARAMETER&lt;/code&gt; is 0x98 (152).
+*/
+SINGLE_RESPONSE_MODE_PARAMETER : &quot;152&quot;,
+<span id='javax-obex-HeaderSet-property-mAuthChall'>/***/
+</span>mAuthChall : &quot;null&quot;,
+<span id='javax-obex-HeaderSet-property-mAuthResp'>/***/
+</span>mAuthResp : &quot;null&quot;,
+<span id='javax-obex-HeaderSet-property-mConnectionID'>/***/
+</span>mConnectionID : &quot;null&quot;,
+<span id='javax-obex-HeaderSet-property-responseCode'>/***/
+</span>responseCode : &quot;null&quot;,
+<span id='javax-obex-HeaderSet-method-setEmptyNameHeader'>/**Sets flag for special &quot;value&quot; of NAME header which should be empty. This
+</span> is not the same as NAME header with empty string in which case it will
+ have length of 5 bytes. It should be 3 bytes with only header id and
+ length field.
+*/
+setEmptyNameHeader : function(  ) {},
+
+<span id='javax-obex-HeaderSet-method-getEmptyNameHeader'>/**Gets flag for special &quot;value&quot; of NAME header which should be empty. See
+</span> above.
+*/
+getEmptyNameHeader : function(  ) {},
+
+<span id='javax-obex-HeaderSet-method-setHeader'>/**Sets the value of the header identifier to the value provided. The type
+</span> of object must correspond to the Java type defined in the description of
+ this interface. If &lt;code&gt;null&lt;/code&gt; is passed as the
+ &lt;code&gt;headerValue&lt;/code&gt; then the header will be removed from the set of
+ headers to include in the next request.
+@param {Number} headerID the identifier to include in the message
+@param {Object {Object}} headerValue the value of the header identifier
+@throws IllegalArgumentException if the header identifier provided is not
+         one defined in this interface or a user-defined header; if the
+         type of &lt;code&gt;headerValue&lt;/code&gt; is not the correct Java type as
+         defined in the description of this interface\
+*/
+setHeader : function(  ) {},
+
+<span id='javax-obex-HeaderSet-method-getHeader'>/**Retrieves the value of the header identifier provided. The type of the
+</span> Object returned is defined in the description of this interface.
+@param {Number} headerID the header identifier whose value is to be returned
+@return {Object {java.lang.Object}} the value of the header provided or &lt;code&gt;null&lt;/code&gt; if the
+         header identifier specified is not part of this
+         &lt;code&gt;HeaderSet&lt;/code&gt; object
+@throws IllegalArgumentException if the &lt;code&gt;headerID&lt;/code&gt; is not one
+         defined in this interface or any of the user-defined headers
+@throws IOException if an error occurred in the transport layer during
+         the operation or if the connection has been closed
+*/
+getHeader : function(  ) {},
+
+<span id='javax-obex-HeaderSet-method-getHeaderList'>/**Retrieves the list of headers that may be retrieved via the
+</span> &lt;code&gt;getHeader&lt;/code&gt; method that will not return &lt;code&gt;null&lt;/code&gt;. In
+ other words, this method returns all the headers that are available in
+ this object.
+@see #getHeader
+@return {Number} the array of headers that are set in this object or
+         &lt;code&gt;null&lt;/code&gt; if no headers are available
+@throws IOException if an error occurred in the transport layer during
+         the operation or the connection has been closed
+*/
+getHeaderList : function(  ) {},
+
+<span id='javax-obex-HeaderSet-method-createAuthenticationChallenge'>/**Sets the authentication challenge header. The &lt;code&gt;realm&lt;/code&gt; will be
+</span> encoded based upon the default encoding scheme used by the implementation
+ to encode strings. Therefore, the encoding scheme used to encode the
+ &lt;code&gt;realm&lt;/code&gt; is application dependent.
+@param {String} realm a short description that describes what password to use; if
+        &lt;code&gt;null&lt;/code&gt; no realm will be sent in the authentication
+        challenge header
+@param {Boolean} userID if &lt;code&gt;true&lt;/code&gt;, a user ID is required in the reply;
+        if &lt;code&gt;false&lt;/code&gt;, no user ID is required
+@param {Boolean} access if &lt;code&gt;true&lt;/code&gt; then full access will be granted if
+        successful; if &lt;code&gt;false&lt;/code&gt; then read-only access will be
+        granted if successful
+@throws IOException
+*/
+createAuthenticationChallenge : function(  ) {},
+
+<span id='javax-obex-HeaderSet-method-getResponseCode'>/**Returns the response code received from the server. Response codes are
+</span> defined in the &lt;code&gt;ResponseCodes&lt;/code&gt; class.
+@see ResponseCodes
+@return {Number} the response code retrieved from the server
+@throws IOException if an error occurred in the transport layer during
+         the transaction; if this method is called on a
+         &lt;code&gt;HeaderSet&lt;/code&gt; object created by calling
+         &lt;code&gt;createHeaderSet()&lt;/code&gt; in a &lt;code&gt;ClientSession&lt;/code&gt;
+         object; if this object was created by an OBEX server
+*/
+getResponseCode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

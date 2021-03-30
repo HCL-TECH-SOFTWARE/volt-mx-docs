@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-cert-CertStoreSpi'>/**@class java.security.cert.CertStoreSpi
+</span>@extends java.lang.Object
+
+ The &lt;i&gt;Service Provider Interface&lt;/i&gt; (&lt;b&gt;SPI&lt;/b&gt;)
+ for the {@link java.security.cert.CertStore java.security.cert.CertStore} class. All {@code CertStore}
+ implementations must include a class (the SPI class) that extends
+ this class ({@code CertStoreSpi}), provides a constructor with
+ a single argument of type {@code CertStoreParameters}, and implements
+ all of its methods. In general, instances of this class should only be
+ accessed through the {@code CertStore} class.
+ For details, see the Java Cryptography Architecture.
+ &lt;p&gt;
+ &lt;b&gt;Concurrent Access&lt;/b&gt;
+ &lt;p&gt;
+ The public methods of all {@code CertStoreSpi} objects must be
+ thread-safe. That is, multiple threads may concurrently invoke these
+ methods on a single {@code CertStoreSpi} object (or more than one)
+ with no ill effects. This allows a {@code CertPathBuilder} to search
+ for a CRL while simultaneously searching for further certificates, for
+ instance.
+ &lt;p&gt;
+ Simple {@code CertStoreSpi} implementations will probably ensure
+ thread safety by adding a {@code synchronized} keyword to their
+ {@code engineGetCertificates} and {@code engineGetCRLs} methods.
+ More sophisticated ones may allow truly concurrent access.
+
+ @since       1.4
+ @author      Steve Hanna
+*/
+var CertStoreSpi = {
+
+<span id='java-security-cert-CertStoreSpi-method-engineGetCertificates'>/**Returns a {@code Collection} of {@code Certificate}s that
+</span> match the specified selector. If no {@code Certificate}s
+ match the selector, an empty {@code Collection} will be returned.
+ &lt;p&gt;
+ For some {@code CertStore} types, the resulting
+ {@code Collection} may not contain &lt;b&gt;all&lt;/b&gt; of the
+ {@code Certificate}s that match the selector. For instance,
+ an LDAP {@code CertStore} may not search all entries in the
+ directory. Instead, it may just search entries that are likely to
+ contain the {@code Certificate}s it is looking for.
+ &lt;p&gt;
+ Some {@code CertStore} implementations (especially LDAP
+ {@code CertStore}s) may throw a {@code CertStoreException}
+ unless a non-null {@code CertSelector} is provided that includes
+ specific criteria that can be used to find the certificates. Issuer
+ and/or subject names are especially useful criteria.
+@param {Object {CertSelector}} selector A {@code CertSelector} used to select which
+  {@code Certificate}s should be returned. Specify {@code null}
+  to return all {@code Certificate}s (if supported).
+@return {Object {java.util.Collection}} A {@code Collection} of {@code Certificate}s that
+         match the specified selector (never {@code null})
+@throws CertStoreException if an exception occurs
+*/
+engineGetCertificates : function(  ) {},
+
+<span id='java-security-cert-CertStoreSpi-method-engineGetCRLs'>/**Returns a {@code Collection} of {@code CRL}s that
+</span> match the specified selector. If no {@code CRL}s
+ match the selector, an empty {@code Collection} will be returned.
+ &lt;p&gt;
+ For some {@code CertStore} types, the resulting
+ {@code Collection} may not contain &lt;b&gt;all&lt;/b&gt; of the
+ {@code CRL}s that match the selector. For instance,
+ an LDAP {@code CertStore} may not search all entries in the
+ directory. Instead, it may just search entries that are likely to
+ contain the {@code CRL}s it is looking for.
+ &lt;p&gt;
+ Some {@code CertStore} implementations (especially LDAP
+ {@code CertStore}s) may throw a {@code CertStoreException}
+ unless a non-null {@code CRLSelector} is provided that includes
+ specific criteria that can be used to find the CRLs. Issuer names
+ and/or the certificate to be checked are especially useful.
+@param {Object {CRLSelector}} selector A {@code CRLSelector} used to select which
+  {@code CRL}s should be returned. Specify {@code null}
+  to return all {@code CRL}s (if supported).
+@return {Object {java.util.Collection}} A {@code Collection} of {@code CRL}s that
+         match the specified selector (never {@code null})
+@throws CertStoreException if an exception occurs
+*/
+engineGetCRLs : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

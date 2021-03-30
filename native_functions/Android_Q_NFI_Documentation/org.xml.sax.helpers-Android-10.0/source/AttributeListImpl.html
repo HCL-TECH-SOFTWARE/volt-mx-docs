@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xml-sax-helpers-AttributeListImpl'>/**@class org.xml.sax.helpers.AttributeListImpl
+</span> implements org.xml.sax.AttributeList
+
+@extends java.lang.Object
+
+ Default implementation for AttributeList.
+
+ &lt;blockquote&gt;
+ &lt;em&gt;This module, both source code and documentation, is in the
+ Public Domain, and comes with &lt;strong&gt;NO WARRANTY&lt;/strong&gt;.&lt;/em&gt;
+ See &lt;a href='http://www.saxproject.org'&gt;http://www.saxproject.org&lt;/a&gt;
+ for further information.
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;AttributeList implements the deprecated SAX1 {@link org.xml.sax.AttributeList AttributeList} interface, and has been
+ replaced by the new SAX2 {@link org.xml.sax.helpers.AttributesImpl
+ AttributesImpl} interface.&lt;/p&gt;
+
+ &lt;p&gt;This class provides a convenience implementation of the SAX
+ {@link org.xml.sax.AttributeList AttributeList} interface.  This
+ implementation is useful both for SAX parser writers, who can use
+ it to provide attributes to the application, and for SAX application
+ writers, who can use it to create a persistent copy of an element's
+ attribute specifications:&lt;/p&gt;
+
+ &lt;pre&gt;
+ private AttributeList myatts;
+
+ public void startElement (String name, AttributeList atts)
+ {
+              // create a persistent copy of the attribute list
+              // for use outside this method
+   myatts = new AttributeListImpl(atts);
+   [...]
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;Please note that SAX parsers are not required to use this
+ class to provide an implementation of AttributeList; it is
+ supplied only as an optional convenience.  In particular,
+ parser writers are encouraged to invent more efficient
+ implementations.&lt;/p&gt;
+
+ @deprecated This class implements a deprecated interface,
+             {@link org.xml.sax.AttributeList AttributeList};
+             that interface has been replaced by
+             {@link org.xml.sax.Attributes Attributes},
+             which is implemented in the
+             {@link org.xml.sax.helpers.AttributesImpl
+            AttributesImpl} helper class.
+ @since SAX 1.0
+ @author David Megginson
+ @version 2.0.1 (sax2r2)
+ @see org.xml.sax.AttributeList
+ @see org.xml.sax.DocumentHandler#startElement
+*/
+var AttributeListImpl = {
+
+<span id='org-xml-sax-helpers-AttributeListImpl-method-setAttributeList'>/**Set the attribute list, discarding previous contents.
+</span>
+ &lt;p&gt;This method allows an application writer to reuse an
+ attribute list easily.&lt;/p&gt;
+@param {Object {AttributeList}} atts The attribute list to copy.
+*/
+setAttributeList : function(  ) {},
+
+<span id='org-xml-sax-helpers-AttributeListImpl-method-addAttribute'>/**Add an attribute to an attribute list.
+</span>
+ &lt;p&gt;This method is provided for SAX parser writers, to allow them
+ to build up an attribute list incrementally before delivering
+ it to the application.&lt;/p&gt;
+@param {String} name The attribute name.
+@param {String} type The attribute type (&quot;NMTOKEN&quot; for an enumeration).
+@param {String} value The attribute value (must not be null).
+@see #removeAttribute
+@see org.xml.sax.DocumentHandler#startElement
+*/
+addAttribute : function(  ) {},
+
+<span id='org-xml-sax-helpers-AttributeListImpl-method-removeAttribute'>/**Remove an attribute from the list.
+</span>
+ &lt;p&gt;SAX application writers can use this method to filter an
+ attribute out of an AttributeList.  Note that invoking this
+ method will change the length of the attribute list and
+ some of the attribute's indices.&lt;/p&gt;
+
+ &lt;p&gt;If the requested attribute is not in the list, this is
+ a no-op.&lt;/p&gt;
+@param {String} name The attribute name.
+@see #addAttribute
+*/
+removeAttribute : function(  ) {},
+
+<span id='org-xml-sax-helpers-AttributeListImpl-method-clear'>/**Clear the attribute list.
+</span>
+ &lt;p&gt;SAX parser writers can use this method to reset the attribute
+ list between DocumentHandler.startElement events.  Normally,
+ it will make sense to reuse the same AttributeListImpl object
+ rather than allocating a new one each time.&lt;/p&gt;
+@see org.xml.sax.DocumentHandler#startElement
+*/
+clear : function(  ) {},
+
+<span id='org-xml-sax-helpers-AttributeListImpl-method-getLength'>/**Return the number of attributes in the list.
+</span>@return {Number} The number of attributes in the list.
+@see org.xml.sax.AttributeList#getLength
+*/
+getLength : function(  ) {},
+
+<span id='org-xml-sax-helpers-AttributeListImpl-method-getName'>/**Get the name of an attribute (by position).
+</span>@param {Number} i The position of the attribute in the list.
+@return {String} The attribute name as a string, or null if there
+         is no attribute at that position.
+@see org.xml.sax.AttributeList#getName(int)
+*/
+getName : function(  ) {},
+
+<span id='org-xml-sax-helpers-AttributeListImpl-method-getType'>/**Get the type of an attribute (by position).
+</span>@param {Number} i The position of the attribute in the list.
+@return {String} The attribute type as a string (&quot;NMTOKEN&quot; for an
+         enumeration, and &quot;CDATA&quot; if no declaration was
+         read), or null if there is no attribute at
+         that position.
+@see org.xml.sax.AttributeList#getType(int)
+*/
+getType : function(  ) {},
+
+<span id='org-xml-sax-helpers-AttributeListImpl-method-getValue'>/**Get the value of an attribute (by position).
+</span>@param {Number} i The position of the attribute in the list.
+@return {String} The attribute value as a string, or null if
+         there is no attribute at that position.
+@see org.xml.sax.AttributeList#getValue(int)
+*/
+getValue : function(  ) {},
+
+<span id='org-xml-sax-helpers-AttributeListImpl-method-getType'>/**Get the type of an attribute (by name).
+</span>@param {String} name The attribute name.
+@return {String} The attribute type as a string (&quot;NMTOKEN&quot; for an
+         enumeration, and &quot;CDATA&quot; if no declaration was
+         read).
+@see org.xml.sax.AttributeList#getType(java.lang.String)
+*/
+getType : function(  ) {},
+
+<span id='org-xml-sax-helpers-AttributeListImpl-method-getValue'>/**Get the value of an attribute (by name).
+</span>@param {String} name The attribute name.
+@return {String} the named attribute's value or null, if the attribute does not
+         exist.
+@see org.xml.sax.AttributeList#getValue(java.lang.String)
+*/
+getValue : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

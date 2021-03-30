@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-zone-ZoneRulesProvider'>/**@class java.time.zone.ZoneRulesProvider
+</span>@extends java.lang.Object
+
+ Provider of time-zone rules to the system.
+ &lt;p&gt;
+ This class manages the configuration of time-zone rules.
+ The static methods provide the public API that can be used to manage the providers.
+ The abstract methods provide the SPI that allows rules to be provided.
+ &lt;p&gt;
+ ZoneRulesProvider may be installed in an instance of the Java Platform as
+ extension classes, that is, jar files placed into any of the usual extension
+ directories. Installed providers are loaded using the service-provider loading
+ facility defined by the {@link ServiceLoader} class. A ZoneRulesProvider
+ identifies itself with a provider configuration file named
+ {@code java.time.zone.ZoneRulesProvider} in the resource directory
+ {@code META-INF/services}. The file should contain a line that specifies the
+ fully qualified concrete zonerules-provider class name.
+ Providers may also be made available by adding them to the class path or by
+ registering themselves via {@link #registerProvider} method.
+ &lt;p&gt;
+ The Java virtual machine has a default provider that provides zone rules
+ for the time-zones defined by IANA Time Zone Database (TZDB). If the system
+ property {@code java.time.zone.DefaultZoneRulesProvider} is defined then
+ it is taken to be the fully-qualified name of a concrete ZoneRulesProvider
+ class to be loaded as the default provider, using the system class loader.
+ If this system property is not defined, a system-default provider will be
+ loaded to serve as the default provider.
+ &lt;p&gt;
+ Rules are looked up primarily by zone ID, as used by {@link ZoneId}.
+ Only zone region IDs may be used, zone offset IDs are not used here.
+ &lt;p&gt;
+ Time-zone rules are political, thus the data can change at any time.
+ Each provider will provide the latest rules for each zone ID, but they
+ may also provide the history of how the rules changed.
+
+ @implSpec
+ This interface is a service provider that can be called by multiple threads.
+ Implementations must be immutable and thread-safe.
+ &lt;p&gt;
+ Providers must ensure that once a rule has been seen by the application, the
+ rule must continue to be available.
+ &lt;p&gt;
+  Providers are encouraged to implement a meaningful {@code toString} method.
+ &lt;p&gt;
+ Many systems would like to update time-zone rules dynamically without stopping the JVM.
+ When examined in detail, this is a complex problem.
+ Providers may choose to handle dynamic updates, however the default provider does not.
+
+ @since 1.8
+*/
+var ZoneRulesProvider = {
+
+<span id='java-time-zone-ZoneRulesProvider-method-getAvailableZoneIds'>/**Gets the set of available zone IDs.
+</span> &lt;p&gt;
+ These IDs are the string form of a {@link ZoneId}.
+@return {Object {java.util.Set}} a modifiable copy of the set of zone IDs, not null
+*/
+getAvailableZoneIds : function(  ) {},
+
+<span id='java-time-zone-ZoneRulesProvider-method-getRules'>/**Gets the rules for the zone ID.
+</span> &lt;p&gt;
+ This returns the latest available rules for the zone ID.
+ &lt;p&gt;
+ This method relies on time-zone data provider files that are configured.
+ These are loaded using a {@code ServiceLoader}.
+ &lt;p&gt;
+ The caching flag is designed to allow provider implementations to
+ prevent the rules being cached in {@code ZoneId}.
+ Under normal circumstances, the caching of zone rules is highly desirable
+ as it will provide greater performance. However, there is a use case where
+ the caching would not be desirable, see {@link #provideRules}.
+@param {String} zoneId the zone ID as defined by {@code ZoneId}, not null
+@param {Boolean} forCaching whether the rules are being queried for caching,
+ true if the returned rules will be cached by {@code ZoneId},
+ false if they will be returned to the user without being cached in {@code ZoneId}
+@return {Object {java.time.zone.ZoneRules}} the rules, null if {@code forCaching} is true and this
+ is a dynamic provider that wants to prevent caching in {@code ZoneId},
+ otherwise not null
+@throws ZoneRulesException if rules cannot be obtained for the zone ID
+*/
+getRules : function(  ) {},
+
+<span id='java-time-zone-ZoneRulesProvider-method-getVersions'>/**Gets the history of rules for the zone ID.
+</span> &lt;p&gt;
+ Time-zones are defined by governments and change frequently.
+ This method allows applications to find the history of changes to the
+ rules for a single zone ID. The map is keyed by a string, which is the
+ version string associated with the rules.
+ &lt;p&gt;
+ The exact meaning and format of the version is provider specific.
+ The version must follow lexicographical order, thus the returned map will
+ be order from the oldest known rules to the newest available rules.
+ The default 'TZDB' group uses version numbering consisting of the year
+ followed by a letter, such as '2009e' or '2012f'.
+ &lt;p&gt;
+ Implementations must provide a result for each valid zone ID, however
+ they do not have to provide a history of rules.
+ Thus the map will always contain one element, and will only contain more
+ than one element if historical rule information is available.
+@param {String} zoneId  the zone ID as defined by {@code ZoneId}, not null
+@return {Object {java.util.NavigableMap}} a modifiable copy of the history of the rules for the ID, sorted
+  from oldest to newest, not null
+@throws ZoneRulesException if history cannot be obtained for the zone ID
+*/
+getVersions : function(  ) {},
+
+<span id='java-time-zone-ZoneRulesProvider-method-registerProvider'>/**Registers a zone rules provider.
+</span> &lt;p&gt;
+ This adds a new provider to those currently available.
+ A provider supplies rules for one or more zone IDs.
+ A provider cannot be registered if it supplies a zone ID that has already been
+ registered. See the notes on time-zone IDs in {@link ZoneId}, especially
+ the section on using the concept of a &quot;group&quot; to make IDs unique.
+ &lt;p&gt;
+ To ensure the integrity of time-zones already created, there is no way
+ to deregister providers.
+@param {Object {ZoneRulesProvider}} provider  the provider to register, not null
+@throws ZoneRulesException if a zone ID is already registered
+*/
+registerProvider : function(  ) {},
+
+<span id='java-time-zone-ZoneRulesProvider-method-refresh'>/**Refreshes the rules from the underlying data provider.
+</span> &lt;p&gt;
+ This method allows an application to request that the providers check
+ for any updates to the provided rules.
+ After calling this method, the offset stored in any {@link ZonedDateTime}
+ may be invalid for the zone ID.
+ &lt;p&gt;
+ Dynamic update of rules is a complex problem and most applications
+ should not use this method or dynamic rules.
+ To achieve dynamic rules, a provider implementation will have to be written
+ as per the specification of this class.
+ In addition, instances of {@code ZoneRules} must not be cached in the
+ application as they will become stale. However, the boolean flag on
+ {@link #provideRules(String, boolean)} allows provider implementations
+ to control the caching of {@code ZoneId}, potentially ensuring that
+ all objects in the system see the new rules.
+ Note that there is likely to be a cost in performance of a dynamic rules
+ provider. Note also that no dynamic rules provider is in this specification.
+@return {Boolean} true if the rules were updated
+@throws ZoneRulesException if an error occurs during the refresh
+*/
+refresh : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

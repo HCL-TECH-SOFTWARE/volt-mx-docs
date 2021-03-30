@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-obex-SessionNotifier'>/**@class javax.obex.SessionNotifier
+</span> The &lt;code&gt;SessionNotifier&lt;/code&gt; interface defines a connection notifier for
+ server-side OBEX connections. When a &lt;code&gt;SessionNotifier&lt;/code&gt; is created
+ and calls &lt;code&gt;acceptAndOpen()&lt;/code&gt;, it will begin listening for clients
+ to create a connection at the transport layer. When the transport layer
+ connection is received, the &lt;code&gt;acceptAndOpen()&lt;/code&gt; method will return a
+ &lt;code&gt;javax.microedition.io.Connection&lt;/code&gt; that is the connection to the
+ client. The &lt;code&gt;acceptAndOpen()&lt;/code&gt; method also takes a
+ &lt;code&gt;ServerRequestHandler&lt;/code&gt; argument that will process the requests
+ from the client that connects to the server.
+ @hide
+*/
+var SessionNotifier = {
+
+<span id='javax-obex-SessionNotifier-method-acceptAndOpen'>/**Waits for a transport layer connection to be established and specifies
+</span> the handler to handle the requests from the client. No authenticator is
+ associated with this connection, therefore, it is implementation
+ dependent as to how an authentication challenge and authentication
+ response header will be received and processed.
+ &lt;P&gt;
+ &lt;H4&gt;Additional Note for OBEX over Bluetooth&lt;/H4&gt; If this method is called
+ on a &lt;code&gt;SessionNotifier&lt;/code&gt; object that does not have a
+ &lt;code&gt;ServiceRecord&lt;/code&gt; in the SDDB, the &lt;code&gt;ServiceRecord&lt;/code&gt;
+ for this object will be added to the SDDB. This method requests the BCC
+ to put the local device in connectable mode so that it will respond to
+ connection attempts by clients.
+ &lt;P&gt;
+ The following checks are done to verify that the service record provided
+ is valid. If any of these checks fail, then a
+ &lt;code&gt;ServiceRegistrationException&lt;/code&gt; is thrown.
+ &lt;UL&gt;
+ &lt;LI&gt;ServiceClassIDList and ProtocolDescriptorList, the mandatory service
+ attributes for a &lt;code&gt;btgoep&lt;/code&gt; service record, must be present in
+ the &lt;code&gt;ServiceRecord&lt;/code&gt; associated with this notifier.
+ &lt;LI&gt;L2CAP, RFCOMM and OBEX must all be in the ProtocolDescriptorList
+ &lt;LI&gt;The &lt;code&gt;ServiceRecord&lt;/code&gt; associated with this notifier must not
+ have changed the RFCOMM server channel number
+ &lt;/UL&gt;
+ &lt;P&gt;
+ This method will not ensure that &lt;code&gt;ServiceRecord&lt;/code&gt; associated
+ with this notifier is a completely valid service record. It is the
+ responsibility of the application to ensure that the service record
+ follows all of the applicable syntactic and semantic rules for service
+ record correctness.
+@param {Object {ServerRequestHandler}} handler the request handler that will respond to OBEX requests
+@return {Object {javax.obex.ObexSession}} the connection to the client
+@throws IOException if an error occurs in the transport layer
+@throws NullPointerException if &lt;code&gt;handler&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;
+*/
+acceptAndOpen : function(  ) {},
+
+<span id='javax-obex-SessionNotifier-method-acceptAndOpen'>/**Waits for a transport layer connection to be established and specifies
+</span> the handler to handle the requests from the client and the
+ &lt;code&gt;Authenticator&lt;/code&gt; to use to respond to authentication challenge
+ and authentication response headers.
+ &lt;P&gt;
+ &lt;H4&gt;Additional Note for OBEX over Bluetooth&lt;/H4&gt; If this method is called
+ on a &lt;code&gt;SessionNotifier&lt;/code&gt; object that does not have a
+ &lt;code&gt;ServiceRecord&lt;/code&gt; in the SDDB, the &lt;code&gt;ServiceRecord&lt;/code&gt;
+ for this object will be added to the SDDB. This method requests the BCC
+ to put the local device in connectable mode so that it will respond to
+ connection attempts by clients.
+ &lt;P&gt;
+ The following checks are done to verify that the service record provided
+ is valid. If any of these checks fail, then a
+ &lt;code&gt;ServiceRegistrationException&lt;/code&gt; is thrown.
+ &lt;UL&gt;
+ &lt;LI&gt;ServiceClassIDList and ProtocolDescriptorList, the mandatory service
+ attributes for a &lt;code&gt;btgoep&lt;/code&gt; service record, must be present in
+ the &lt;code&gt;ServiceRecord&lt;/code&gt; associated with this notifier.
+ &lt;LI&gt;L2CAP, RFCOMM and OBEX must all be in the ProtocolDescriptorList
+ &lt;LI&gt;The &lt;code&gt;ServiceRecord&lt;/code&gt; associated with this notifier must not
+ have changed the RFCOMM server channel number
+ &lt;/UL&gt;
+ &lt;P&gt;
+ This method will not ensure that &lt;code&gt;ServiceRecord&lt;/code&gt; associated
+ with this notifier is a completely valid service record. It is the
+ responsibility of the application to ensure that the service record
+ follows all of the applicable syntactic and semantic rules for service
+ record correctness.
+@param {Object {ServerRequestHandler}} handler the request handler that will respond to OBEX requests
+@param {Object {Authenticator}} auth the &lt;code&gt;Authenticator&lt;/code&gt; to use with this connection;
+        if &lt;code&gt;null&lt;/code&gt; then no &lt;code&gt;Authenticator&lt;/code&gt; will be
+        used
+@return {Object {javax.obex.ObexSession}} the connection to the client
+@throws IOException if an error occurs in the transport layer
+@throws NullPointerException if &lt;code&gt;handler&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;
+*/
+acceptAndOpen : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

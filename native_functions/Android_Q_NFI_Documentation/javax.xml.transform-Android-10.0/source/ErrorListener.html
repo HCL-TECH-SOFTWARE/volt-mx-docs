@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-transform-ErrorListener'>/**@class javax.xml.transform.ErrorListener
+</span> &lt;p&gt;To provide customized error handling, implement this interface and
+ use the &lt;code&gt;setErrorListener&lt;/code&gt; method to register an instance of the
+ implementation with the {@link javax.xml.transform.Transformer}.  The
+ &lt;code&gt;Transformer&lt;/code&gt; then reports all errors and warnings through this
+ interface.&lt;/p&gt;
+
+ &lt;p&gt;If an application does &lt;em&gt;not&lt;/em&gt; register its own custom
+ &lt;code&gt;ErrorListener&lt;/code&gt;, the default &lt;code&gt;ErrorListener&lt;/code&gt;
+ is used which reports all warnings and errors to &lt;code&gt;System.err&lt;/code&gt;
+ and does not throw any &lt;code&gt;Exception&lt;/code&gt;s.
+ Applications are &lt;em&gt;strongly&lt;/em&gt; encouraged to register and use
+ &lt;code&gt;ErrorListener&lt;/code&gt;s that insure proper behavior for warnings and
+ errors.&lt;/p&gt;
+
+ &lt;p&gt;For transformation errors, a &lt;code&gt;Transformer&lt;/code&gt; must use this
+ interface instead of throwing an &lt;code&gt;Exception&lt;/code&gt;: it is up to the
+ application to decide whether to throw an &lt;code&gt;Exception&lt;/code&gt; for
+ different types of errors and warnings.  Note however that the
+ &lt;code&gt;Transformer&lt;/code&gt; is not required to continue with the transformation
+ after a call to {@link #fatalError}(TransformerException exception).&lt;/p&gt;
+
+ &lt;p&gt;&lt;code&gt;Transformer&lt;/code&gt;s may use this mechanism to report XML parsing
+ errors as well as transformation errors.&lt;/p&gt;
+*/
+var ErrorListener = {
+
+<span id='javax-xml-transform-ErrorListener-method-warning'>/**Receive notification of a warning.
+</span>
+ &lt;p&gt;{@link javax.xml.transform.Transformer} can use this method to report
+ conditions that are not errors or fatal errors.  The default behavior
+ is to take no action.&lt;/p&gt;
+
+ &lt;p&gt;After invoking this method, the Transformer must continue with
+ the transformation. It should still be possible for the
+ application to process the document through to the end.&lt;/p&gt;
+@param {Object {TransformerException}} exception The warning information encapsulated in a
+                  transformer exception.
+@throws javax.xml.transform.TransformerException if the application
+ chooses to discontinue the transformation.
+@see javax.xml.transform.TransformerException
+*/
+warning : function(  ) {},
+
+<span id='javax-xml-transform-ErrorListener-method-error'>/**Receive notification of a recoverable error.
+</span>
+ &lt;p&gt;The transformer must continue to try and provide normal transformation
+ after invoking this method.  It should still be possible for the
+ application to process the document through to the end if no other errors
+ are encountered.&lt;/p&gt;
+@param {Object {TransformerException}} exception The error information encapsulated in a
+                  transformer exception.
+@throws javax.xml.transform.TransformerException if the application
+ chooses to discontinue the transformation.
+@see javax.xml.transform.TransformerException
+*/
+error : function(  ) {},
+
+<span id='javax-xml-transform-ErrorListener-method-fatalError'>/**&lt;p&gt;Receive notification of a non-recoverable error.&lt;/p&gt;
+</span>
+ &lt;p&gt;The &lt;code&gt;Transformer&lt;/code&gt; must continue to try and provide normal
+ transformation after invoking this method.  It should still be possible for the
+ application to process the document through to the end if no other errors
+ are encountered, but there is no guarantee that the output will be
+ useable.&lt;/p&gt;
+@param {Object {TransformerException}} exception The error information encapsulated in a
+    &lt;code&gt;TransformerException&lt;/code&gt;.
+@throws javax.xml.transform.TransformerException if the application
+ chooses to discontinue the transformation.
+@see javax.xml.transform.TransformerException
+*/
+fatalError : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

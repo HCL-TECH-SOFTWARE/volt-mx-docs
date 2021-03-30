@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wm-WindowManagerInternal'>/**@class com.android.server.wm.WindowManagerInternal
+</span>@extends java.lang.Object
+
+ Window manager local system service interface.
+
+ @hide Only for use within the system server.
+*/
+var WindowManagerInternal = {
+
+<span id='com-android-server-wm-WindowManagerInternal-method-requestTraversalFromDisplayManager'>/**Request that the window manager call
+</span> {@link DisplayManagerInternal#performTraversalInTransactionFromWindowManager}
+ within a surface transaction at a later time.
+*/
+requestTraversalFromDisplayManager : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-setMagnificationCallbacks'>/**Set by the accessibility layer to observe changes in the magnified region,
+</span> rotation, and other window transformations related to display magnification
+ as the window manager is responsible for doing the actual magnification
+ and has access to the raw window data while the accessibility layer serves
+ as a controller.
+@param {Number} displayId The logical display id.
+@param {Object {WindowManagerInternal.MagnificationCallbacks}} callbacks The callbacks to invoke.
+@return {Boolean} {@code false} if display id is not valid.
+*/
+setMagnificationCallbacks : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-setMagnificationSpec'>/**Set by the accessibility layer to specify the magnification and panning to
+</span> be applied to all windows that should be magnified.
+@param {Number} displayId The logical display id.
+@param {Object {MagnificationSpec}} spec The MagnficationSpec to set.
+@see #setMagnificationCallbacks(int, MagnificationCallbacks)
+*/
+setMagnificationSpec : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-setForceShowMagnifiableBounds'>/**Set by the accessibility framework to indicate whether the magnifiable regions of the display
+</span> should be shown.
+@param {Number} displayId The logical display id.
+@param {Boolean} show {@code true} to show magnifiable region bounds, {@code false} to hide
+*/
+setForceShowMagnifiableBounds : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-getMagnificationRegion'>/**Obtains the magnification regions.
+</span>@param {Number} displayId The logical display id.
+@param {Object {Region}} magnificationRegion the current magnification region
+*/
+getMagnificationRegion : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-getCompatibleMagnificationSpecForWindow'>/**Gets the magnification and translation applied to a window given its token.
+</span> Not all windows are magnified and the window manager policy determines which
+ windows are magnified. The returned result also takes into account the compat
+ scale if necessary.
+@param {Object {IBinder}} windowToken The window's token.
+@return {Object {android.view.MagnificationSpec}} The magnification spec for the window.
+@see #setMagnificationCallbacks(int, MagnificationCallbacks)
+*/
+getCompatibleMagnificationSpecForWindow : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-setWindowsForAccessibilityCallback'>/**Sets a callback for observing which windows are touchable for the purposes
+</span> of accessibility.
+@param {Object {WindowManagerInternal.WindowsForAccessibilityCallback}} callback The callback.
+*/
+setWindowsForAccessibilityCallback : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-setInputFilter'>/**Sets a filter for manipulating the input event stream.
+</span>@param {Object {IInputFilter}} filter The filter implementation.
+*/
+setInputFilter : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-getFocusedWindowToken'>/**Gets the token of the window that has input focus.
+</span>@return {Object {android.os.IBinder}} The token.
+*/
+getFocusedWindowToken : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-isKeyguardLocked'>/**
+</span>@return {Boolean} Whether the keyguard is engaged.
+*/
+isKeyguardLocked : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-isKeyguardShowingAndNotOccluded'>/**
+</span>@return {Boolean} Whether the keyguard is showing and not occluded.
+*/
+isKeyguardShowingAndNotOccluded : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-getWindowFrame'>/**Gets the frame of a window given its token.
+</span>@param {Object {IBinder}} token The token.
+@param {Object {Rect}} outBounds The frame to populate.
+*/
+getWindowFrame : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-showGlobalActions'>/**Opens the global actions dialog.
+</span>*/
+showGlobalActions : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-waitForAllWindowsDrawn'>/**Invalidate all visible windows. Then report back on the callback once all windows have
+</span> redrawn.
+*/
+waitForAllWindowsDrawn : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-setForcedDisplaySize'>/**Overrides the display size.
+</span>@param {Number} displayId The display to override the display size.
+@param {Number} width The width to override.
+@param {Number} height The height to override.
+*/
+setForcedDisplaySize : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-clearForcedDisplaySize'>/**Recover the display size to real display size.
+</span>@param {Number} displayId The display to recover the display size.
+*/
+clearForcedDisplaySize : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-addWindowToken'>/**Adds a window token for a given window type.
+</span>@param {Object {IBinder}} token The token to add.
+@param {Number} type The window type.
+@param {Number} displayId The display to add the token to.
+*/
+addWindowToken : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-removeWindowToken'>/**Removes a window token.
+</span>@param {Object {IBinder}} token The toke to remove.
+@param {Boolean} removeWindows Whether to also remove the windows associated with the token.
+@param {Number} displayId The display to remove the token from.
+*/
+removeWindowToken : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-registerAppTransitionListener'>/**Registers a listener to be notified about app transition events.
+</span>@param {Object {WindowManagerInternal.AppTransitionListener}} listener The listener to register.
+*/
+registerAppTransitionListener : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-reportPasswordChanged'>/**Reports that the password for the given user has changed.
+</span>*/
+reportPasswordChanged : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-getInputMethodWindowVisibleHeight'>/**Retrieves a height of input method window for given display.
+</span>*/
+getInputMethodWindowVisibleHeight : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-updateInputMethodWindowStatus'>/**Notifies WindowManagerService that the current IME window status is being changed.
+</span>
+ &lt;p&gt;Only {@link com.android.server.inputmethod.InputMethodManagerService} is the expected and
+ tested caller of this method.&lt;/p&gt;
+@param {Object {IBinder}} imeToken token to track the active input method. Corresponding IME windows can be
+                 identified by checking {@link android.view.WindowManager.LayoutParams#token}.
+                 Note that there is no guarantee that the corresponding window is already
+                 created
+@param {Boolean} imeWindowVisible whether the active IME thinks that its window should be visible or
+                         hidden, no matter how WindowManagerService will react / has reacted
+                         to corresponding API calls.  Note that this state is not guaranteed
+                         to be synchronized with state in WindowManagerService.
+@param {Boolean} dismissImeOnBackKeyPressed {@code true} if the software keyboard is shown and the back
+                                   key is expected to dismiss the software keyboard.
+*/
+updateInputMethodWindowStatus : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-updateInputMethodTargetWindow'>/**Notifies WindowManagerService that the current IME window status is being changed.
+</span>
+ &lt;p&gt;Only {@link com.android.server.inputmethod.InputMethodManagerService} is the expected and
+ tested caller of this method.&lt;/p&gt;
+@param {Object {IBinder}} imeToken token to track the active input method. Corresponding IME windows can be
+                 identified by checking {@link android.view.WindowManager.LayoutParams#token}.
+                 Note that there is no guarantee that the corresponding window is already
+                 created
+@param {Object {IBinder}} imeTargetWindowToken token to identify the target window that the IME is associated
+                             with
+*/
+updateInputMethodTargetWindow : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-isHardKeyboardAvailable'>/**Returns true when the hardware keyboard is available.
+</span>*/
+isHardKeyboardAvailable : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-setOnHardKeyboardStatusChangeListener'>/**Sets the callback listener for hardware keyboard status changes.
+</span>@param {Object {WindowManagerInternal.OnHardKeyboardStatusChangeListener}} listener The listener to set.
+*/
+setOnHardKeyboardStatusChangeListener : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-isStackVisibleLw'>/**Returns true if a stack in the windowing mode is currently visible.
+</span>*/
+isStackVisibleLw : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-computeWindowsForAccessibility'>/**Requests the window manager to resend the windows for accessibility.
+</span>*/
+computeWindowsForAccessibility : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-setVr2dDisplayId'>/**Called after virtual display Id is updated by
+</span> {@link com.android.server.vr.Vr2dDisplay} with a specific
+ {@param vr2dDisplayId}.
+*/
+setVr2dDisplayId : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-registerDragDropControllerCallback'>/**Sets callback to DragDropController.
+</span>*/
+registerDragDropControllerCallback : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-lockNow'>/**
+</span>@see android.view.IWindowManager#lockNow
+*/
+lockNow : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-getWindowOwnerUserId'>/**Return the user that owns the given window, {@link android.os.UserHandle#USER_NULL} if
+</span> the window token is not found.
+*/
+getWindowOwnerUserId : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-isUidFocused'>/**Returns {@code true} if a Window owned by {@code uid} has focus.
+</span>*/
+isUidFocused : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-isInputMethodClientFocus'>/**Checks whether the specified IME client has IME focus or not.
+</span>@param {Number} uid UID of the process to be queried
+@param {Number} pid PID of the process to be queried
+@param {Number} displayId Display ID reported from the client. Note that this method also verifies
+                  whether the specified process is allowed to access to this display or not
+@return {Boolean} {@code true} if the IME client specified with {@code uid}, {@code pid}, and
+         {@code displayId} has IME focus
+*/
+isInputMethodClientFocus : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-isUidAllowedOnDisplay'>/**Checks whether the given {@code uid} is allowed to use the given {@code displayId} or not.
+</span>@param {Number} displayId Display ID to be checked
+@param {Number} uid UID to be checked.
+@return {Boolean} {@code true} if the given {@code uid} is allowed to use the given {@code displayId}
+*/
+isUidAllowedOnDisplay : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-getDisplayIdForWindow'>/**Return the display Id for given window.
+</span>*/
+getDisplayIdForWindow : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-getTopFocusedDisplayId'>/**
+</span>@return {Number} The top focused display ID.
+*/
+getTopFocusedDisplayId : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-shouldShowSystemDecorOnDisplay'>/**Checks if this display is configured and allowed to show system decorations.
+</span>*/
+shouldShowSystemDecorOnDisplay : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-shouldShowIme'>/**Indicates that the display should show IME.
+</span>@param {Number} displayId The id of the display.
+@return {Boolean} {@code true} if the display should show IME when an input field become focused on it.
+*/
+shouldShowIme : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-addNonHighRefreshRatePackage'>/**Tell window manager about a package that should not be running with high refresh rate
+</span> setting until removeNonHighRefreshRatePackage is called for the same package.
+
+ This must not be called again for the same package.
+*/
+addNonHighRefreshRatePackage : function(  ) {},
+
+<span id='com-android-server-wm-WindowManagerInternal-method-removeNonHighRefreshRatePackage'>/**Tell window manager to stop constraining refresh rate for the given package.
+</span>*/
+removeNonHighRefreshRatePackage : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-aware-WifiAwareStateManager'>/**@class com.android.server.wifi.aware.WifiAwareStateManager
+</span> implements com.android.server.wifi.aware.WifiAwareShellCommand.DelegatedShellCommand
+
+@extends java.lang.Object
+
+ Manages the state of the Wi-Fi Aware system service.
+*/
+var WifiAwareStateManager = {
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-property-HAL_COMMAND_TIMEOUT_TAG'>/***/
+</span>HAL_COMMAND_TIMEOUT_TAG : &quot;WifiAwareStateManager HAL Command Timeout&quot;,
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-property-HAL_SEND_MESSAGE_TIMEOUT_TAG'>/***/
+</span>HAL_SEND_MESSAGE_TIMEOUT_TAG : &quot;WifiAwareStateManager HAL Send Message Timeout&quot;,
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-property-HAL_DATA_PATH_CONFIRM_TIMEOUT_TAG'>/***/
+</span>HAL_DATA_PATH_CONFIRM_TIMEOUT_TAG : &quot;WifiAwareStateManager HAL Data Path Confirm Timeout&quot;,
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-property-mDataPathMgr'>/***/
+</span>mDataPathMgr : &quot;null&quot;,
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-property-PARAM_ON_IDLE_DISABLE_AWARE'>/***/
+</span>PARAM_ON_IDLE_DISABLE_AWARE : &quot;on_idle_disable_aware&quot;,
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-property-PARAM_ON_IDLE_DISABLE_AWARE_DEFAULT'>/***/
+</span>PARAM_ON_IDLE_DISABLE_AWARE_DEFAULT : &quot;1&quot;,
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-setNative'>/**Inject references to other manager objects. Needed to resolve
+</span> circular dependencies and to allow mocking.
+*/
+setNative : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onCommand'>/**Interpreter of adb shell command 'adb shell wifiaware native_api ...'.
+</span>@return {Number} -1 if parameter not recognized or invalid value, 0 otherwise.
+*/
+onCommand : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onReset'>/**
+</span>*/
+onReset : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onHelp'>/**
+</span>*/
+onHelp : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-start'>/**Initialize the handler of the state manager with the specified thread
+</span> looper.
+@param {Object {Context}} looper Thread looper on which to run the handler.
+*/
+start : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-startLate'>/**Initialize the late-initialization sub-services: depend on other services already existing.
+</span>*/
+startLate : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-getCapabilities'>/**Get the capabilities.
+</span>*/
+getCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-getCharacteristics'>/**Get the public characteristics derived from the capabilities. Use lazy initialization.
+</span>*/
+getCharacteristics : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-requestMacAddresses'>/**Translate (and return in the callback) the peerId to its MAC address representation.
+</span>*/
+requestMacAddresses : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-delayedInitialization'>/**Place a request for delayed start operation on the state machine queue.
+</span>*/
+delayedInitialization : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-getAwareInterface'>/**Place a request to get the Wi-Fi Aware interface (before which no HAL command can be
+</span> executed).
+*/
+getAwareInterface : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-releaseAwareInterface'>/**Place a request to release the Wi-Fi Aware interface (after which no HAL command can be
+</span> executed).
+*/
+releaseAwareInterface : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-connect'>/**Place a request for a new client connection on the state machine queue.
+</span>*/
+connect : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-disconnect'>/**Place a request to disconnect (destroy) an existing client on the state
+</span> machine queue.
+*/
+disconnect : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-reconfigure'>/**Place a request to reconfigure Aware. No additional input - intended to use current
+</span> power settings when executed. Thus possibly entering or exiting power saving mode if
+ needed (or do nothing if Aware is not active).
+*/
+reconfigure : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-terminateSession'>/**Place a request to stop a discovery session on the state machine queue.
+</span>*/
+terminateSession : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-publish'>/**Place a request to start a new publish discovery session on the state
+</span> machine queue.
+*/
+publish : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-updatePublish'>/**Place a request to modify an existing publish discovery session on the
+</span> state machine queue.
+*/
+updatePublish : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-subscribe'>/**Place a request to start a new subscribe discovery session on the state
+</span> machine queue.
+*/
+subscribe : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-updateSubscribe'>/**Place a request to modify an existing subscribe discovery session on the
+</span> state machine queue.
+*/
+updateSubscribe : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-sendMessage'>/**Place a request to send a message on a discovery session on the state
+</span> machine queue.
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-enableUsage'>/**Enable usage of Aware. Doesn't actually turn on Aware (form clusters) - that
+</span> only happens when a connection is created.
+*/
+enableUsage : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-disableUsage'>/**Disable usage of Aware. Terminates all existing clients with onAwareDown().
+</span>*/
+disableUsage : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-isUsageEnabled'>/**Checks whether Aware usage is enabled (not necessarily that Aware is up right
+</span> now) or disabled.
+@return {Boolean} A boolean indicating whether Aware usage is enabled (true) or
+         disabled (false).
+*/
+isUsageEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-queryCapabilities'>/**Get the capabilities of the current Aware firmware.
+</span>*/
+queryCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-createAllDataPathInterfaces'>/**Create all Aware data path interfaces which are supported by the firmware capabilities.
+</span>*/
+createAllDataPathInterfaces : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-deleteAllDataPathInterfaces'>/**delete all Aware data path interfaces.
+</span>*/
+deleteAllDataPathInterfaces : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-createDataPathInterface'>/**Create the specified data-path interface. Doesn't actually creates a data-path.
+</span>*/
+createDataPathInterface : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-deleteDataPathInterface'>/**Deletes the specified data-path interface.
+</span>*/
+deleteDataPathInterface : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-initiateDataPathSetup'>/**Command to initiate a data-path (executed by the initiator).
+</span>*/
+initiateDataPathSetup : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-respondToDataPathRequest'>/**Command to respond to the data-path request (executed by the responder).
+</span>*/
+respondToDataPathRequest : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-endDataPath'>/**Command to terminate the specified data-path.
+</span>*/
+endDataPath : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onConfigSuccessResponse'>/**Place a callback request on the state machine queue: configuration
+</span> request completed (successfully).
+*/
+onConfigSuccessResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onConfigFailedResponse'>/**Place a callback request on the state machine queue: configuration
+</span> request failed.
+*/
+onConfigFailedResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onDisableResponse'>/**Place a callback request on the stage machine queue: disable request finished
+</span> (with the provided reason code).
+*/
+onDisableResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onSessionConfigSuccessResponse'>/**Place a callback request on the state machine queue: session
+</span> configuration (new or update) request succeeded.
+*/
+onSessionConfigSuccessResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onSessionConfigFailResponse'>/**Place a callback request on the state machine queue: session
+</span> configuration (new or update) request failed.
+*/
+onSessionConfigFailResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onMessageSendQueuedSuccessResponse'>/**Place a callback request on the state machine queue: message has been queued successfully.
+</span>*/
+onMessageSendQueuedSuccessResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onMessageSendQueuedFailResponse'>/**Place a callback request on the state machine queue: attempt to queue the message failed.
+</span>*/
+onMessageSendQueuedFailResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onCapabilitiesUpdateResponse'>/**Place a callback request on the state machine queue: update vendor
+</span> capabilities of the Aware stack.
+*/
+onCapabilitiesUpdateResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onCreateDataPathInterfaceResponse'>/**Places a callback request on the state machine queue: data-path interface creation command
+</span> completed.
+*/
+onCreateDataPathInterfaceResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onDeleteDataPathInterfaceResponse'>/**Places a callback request on the state machine queue: data-path interface deletion command
+</span> completed.
+*/
+onDeleteDataPathInterfaceResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onInitiateDataPathResponseSuccess'>/**Response from firmware to initiateDataPathSetup(...). Indicates that command has started
+</span> succesfully (not completed!).
+*/
+onInitiateDataPathResponseSuccess : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onInitiateDataPathResponseFail'>/**Response from firmware to initiateDataPathSetup(...).
+</span> Indicates that command has failed.
+*/
+onInitiateDataPathResponseFail : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onRespondToDataPathSetupRequestResponse'>/**Response from firmware to
+</span> {@link #respondToDataPathRequest(boolean, int, String, byte[], String, boolean)}
+*/
+onRespondToDataPathSetupRequestResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onEndDataPathResponse'>/**Response from firmware to {@link #endDataPath}(int).
+</span>*/
+onEndDataPathResponse : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onInterfaceAddressChangeNotification'>/**Place a callback request on the state machine queue: the discovery
+</span> interface has changed.
+*/
+onInterfaceAddressChangeNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onClusterChangeNotification'>/**Place a callback request on the state machine queue: the cluster
+</span> membership has changed (e.g. due to starting a new cluster or joining
+ another cluster).
+*/
+onClusterChangeNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onMatchNotification'>/**Place a callback request on the state machine queue: a discovery match
+</span> has occurred - e.g. our subscription discovered someone else publishing a
+ matching service (to the one we were looking for).
+*/
+onMatchNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onSessionTerminatedNotification'>/**Place a callback request on the state machine queue: a session (publish
+</span> or subscribe) has terminated (per plan or due to an error).
+*/
+onSessionTerminatedNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onMessageReceivedNotification'>/**Place a callback request on the state machine queue: a message has been
+</span> received as part of a discovery session.
+*/
+onMessageReceivedNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onAwareDownNotification'>/**Place a callback request on the state machine queue: Aware is going down.
+</span>*/
+onAwareDownNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onMessageSendSuccessNotification'>/**Notification that a message has been sent successfully (i.e. an ACK has been received).
+</span>*/
+onMessageSendSuccessNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onMessageSendFailNotification'>/**Notification that a message transmission has failed due to the indicated reason - e.g. no ACK
+</span> was received.
+*/
+onMessageSendFailNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onDataPathRequestNotification'>/**Place a callback request on the state machine queue: data-path request (from peer) received.
+</span>*/
+onDataPathRequestNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onDataPathConfirmNotification'>/**Place a callback request on the state machine queue: data-path confirmation received - i.e.
+</span> data-path is now up.
+*/
+onDataPathConfirmNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onDataPathEndNotification'>/**Place a callback request on the state machine queue: the specified data-path has been
+</span> terminated.
+*/
+onDataPathEndNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-onDataPathScheduleUpdateNotification'>/**Place a callback request on the state machine queue: schedule update for the specified
+</span> data-paths.
+*/
+onDataPathScheduleUpdateNotification : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareStateManager-method-dump'>/**Dump the internal state of the class.
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

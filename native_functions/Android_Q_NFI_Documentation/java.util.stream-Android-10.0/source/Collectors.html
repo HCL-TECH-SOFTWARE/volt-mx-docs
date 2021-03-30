@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-stream-Collectors'>/**@class java.util.stream.Collectors
+</span>@extends java.lang.Object
+
+ Implementations of {@link java.util.stream.Collector} that implement various useful reduction
+ operations, such as accumulating elements into collections, summarizing
+ elements according to various criteria, etc.
+
+ &lt;p&gt;The following are examples of using the predefined collectors to perform
+ common mutable reduction tasks:
+
+ &lt;pre&gt;{@code
+     // Accumulate names into a List
+     List&lt;String&gt; list = people.stream().map(Person::getName).collect(Collectors.toList());
+
+     // Accumulate names into a TreeSet
+     Set&lt;String&gt; set = people.stream().map(Person::getName).collect(Collectors.toCollection(TreeSet::new));
+
+     // Convert elements to strings and concatenate them, separated by commas
+     String joined = things.stream()
+                           .map(Object::toString)
+                           .collect(Collectors.joining(&quot;, &quot;));
+
+     // Compute sum of salaries of employee
+     int total = employees.stream()
+                          .collect(Collectors.summingInt(Employee::getSalary)));
+
+     // Group employees by department
+     Map&lt;Department, List&lt;Employee&gt;&gt; byDept
+         = employees.stream()
+                    .collect(Collectors.groupingBy(Employee::getDepartment));
+
+     // Compute sum of salaries by department
+     Map&lt;Department, Integer&gt; totalByDept
+         = employees.stream()
+                    .collect(Collectors.groupingBy(Employee::getDepartment,
+                                                   Collectors.summingInt(Employee::getSalary)));
+
+     // Partition students into passing and failing
+     Map&lt;Boolean, List&lt;Student&gt;&gt; passingFailing =
+         students.stream()
+                 .collect(Collectors.partitioningBy(s -&gt; s.getGrade() &gt;= PASS_THRESHOLD));
+
+ }&lt;/pre&gt;
+
+ @since 1.8
+*/
+var Collectors = {
+
+<span id='java-util-stream-Collectors-method-toCollection'>/**Returns a {@code Collector} that accumulates the input elements into a
+</span> new {@code Collection}, in encounter order.  The {@code Collection} is
+ created by the provided factory.
+@param {Object {java.util.function.Supplier}} collectionFactory a {@code Supplier} which returns a new, empty
+ {@code Collection} of the appropriate type
+@param &lt;C&gt; the type of the resulting {@code Collection}
+@param collectionFactory a {@code Supplier} which returns a new, empty
+ {@code Collection} of the appropriate type
+@return {Object {java.util.stream.Collector}} a {@code Collector} which collects all the input elements into a
+ {@code Collection}, in encounter order
+*/
+toCollection : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-toList'>/**Returns a {@code Collector} that accumulates the input elements into a
+</span> new {@code List}. There are no guarantees on the type, mutability,
+ serializability, or thread-safety of the {@code List} returned; if more
+ control over the returned {@code List} is required, use {@link #toCollection}(Supplier).
+@param &lt;T&gt; the type of the input elements
+@return {Object {java.util.stream.Collector}} a {@code Collector} which collects all the input elements into a
+ {@code List}, in encounter order
+*/
+toList : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-toSet'>/**Returns a {@code Collector} that accumulates the input elements into a
+</span> new {@code Set}. There are no guarantees on the type, mutability,
+ serializability, or thread-safety of the {@code Set} returned; if more
+ control over the returned {@code Set} is required, use
+ {@link #toCollection}(Supplier).
+
+ &lt;p&gt;This is an {@link java.util.stream.Collector.Characteristics#UNORDERED unordered}
+ Collector.
+@param &lt;T&gt; the type of the input elements
+@return {Object {java.util.stream.Collector}} a {@code Collector} which collects all the input elements into a
+ {@code Set}
+*/
+toSet : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-joining'>/**Returns a {@code Collector} that concatenates the input elements into a
+</span> {@code String}, in encounter order.
+@return {Object {java.util.stream.Collector}} a {@code Collector} that concatenates the input elements into a
+ {@code String}, in encounter order
+*/
+joining : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-joining'>/**Returns a {@code Collector} that concatenates the input elements,
+</span> separated by the specified delimiter, in encounter order.
+@param {Object {CharSequence}} delimiter the delimiter to be used between each element
+@return {Object {java.util.stream.Collector}} A {@code Collector} which concatenates CharSequence elements,
+ separated by the specified delimiter, in encounter order
+*/
+joining : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-joining'>/**Returns a {@code Collector} that concatenates the input elements,
+</span> separated by the specified delimiter, with the specified prefix and
+ suffix, in encounter order.
+@param {Object {CharSequence}} delimiter the delimiter to be used between each element
+@param {Object {CharSequence}} prefix the sequence of characters to be used at the beginning
+                of the joined result
+@param {Object {CharSequence}} suffix the sequence of characters to be used at the end
+                of the joined result
+@return {Object {java.util.stream.Collector}} A {@code Collector} which concatenates CharSequence elements,
+ separated by the specified delimiter, in encounter order
+*/
+joining : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-mapping'>/**Adapts a {@code Collector} accepting elements of type {@code U} to one
+</span> accepting elements of type {@code T} by applying a mapping function to
+ each input element before accumulation.
+@param {Object {java.util.function.Function}} mapper a function to be applied to the input elements
+@param {Object {java.util.stream.Collector}} downstream a collector which will accept mapped values
+@param &lt;U&gt; type of elements accepted by downstream collector
+@param &lt;A&gt; intermediate accumulation type of the downstream collector
+@param &lt;R&gt; result type of collector
+@param mapper a function to be applied to the input elements
+@param downstream a collector which will accept mapped values
+@return {Object {java.util.stream.Collector}} a collector which applies the mapping function to the input
+ elements and provides the mapped results to the downstream collector
+*/
+mapping : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-collectingAndThen'>/**Adapts a {@code Collector} to perform an additional finishing
+</span> transformation.  For example, one could adapt the {@link #toList}()
+ collector to always produce an immutable list with:
+ &lt;pre&gt;{@code
+     List&lt;String&gt; people
+         = people.stream().collect(collectingAndThen(toList(), Collections::unmodifiableList));
+ }&lt;/pre&gt;
+@param {Object {java.util.stream.Collector}} downstream a collector
+@param {Object {java.util.function.Function}} finisher a function to be applied to the final result of the downstream collector
+@param &lt;R&gt; result type of the downstream collector
+@param &lt;RR&gt; result type of the resulting collector
+@param downstream a collector
+@param finisher a function to be applied to the final result of the downstream collector
+@return {Object {java.util.stream.Collector}} a collector which performs the action of the downstream collector,
+ followed by an additional finishing step
+*/
+collectingAndThen : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-counting'>/**Returns a {@code Collector} accepting elements of type {@code T} that
+</span> counts the number of input elements.  If no elements are present, the
+ result is 0.
+@implSpec This produces a result equivalent to:
+ &lt;pre&gt;{@code
+     reducing(0L, e -&gt; 1L, Long::sum)
+ }&lt;/pre&gt;
+@param &lt;T&gt; the type of the input elements
+@return {Object {java.util.stream.Collector}} a {@code Collector} that counts the input elements
+*/
+counting : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-minBy'>/**Returns a {@code Collector} that produces the minimal element according
+</span> to a given {@code Comparator}, described as an {@code Optional&lt;T&gt;}.
+@param {Object {java.util.Comparator}} comparator a {@code Comparator} for comparing elements
+@param &lt;T&gt; the type of the input elements
+@param comparator a {@code Comparator} for comparing elements
+@return {Object {java.util.stream.Collector}} a {@code Collector} that produces the minimal value
+*/
+minBy : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-maxBy'>/**Returns a {@code Collector} that produces the maximal element according
+</span> to a given {@code Comparator}, described as an {@code Optional&lt;T&gt;}.
+@param {Object {java.util.Comparator}} comparator a {@code Comparator} for comparing elements
+@param &lt;T&gt; the type of the input elements
+@param comparator a {@code Comparator} for comparing elements
+@return {Object {java.util.stream.Collector}} a {@code Collector} that produces the maximal value
+*/
+maxBy : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-summingInt'>/**Returns a {@code Collector} that produces the sum of a integer-valued
+</span> function applied to the input elements.  If no elements are present,
+ the result is 0.
+@param {Object {java.util.function.ToIntFunction}} mapper a function extracting the property to be summed
+@param mapper a function extracting the property to be summed
+@return {Object {java.util.stream.Collector}} a {@code Collector} that produces the sum of a derived property
+*/
+summingInt : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-summingLong'>/**Returns a {@code Collector} that produces the sum of a long-valued
+</span> function applied to the input elements.  If no elements are present,
+ the result is 0.
+@param {Object {java.util.function.ToLongFunction}} mapper a function extracting the property to be summed
+@param mapper a function extracting the property to be summed
+@return {Object {java.util.stream.Collector}} a {@code Collector} that produces the sum of a derived property
+*/
+summingLong : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-summingDouble'>/**Returns a {@code Collector} that produces the sum of a double-valued
+</span> function applied to the input elements.  If no elements are present,
+ the result is 0.
+
+ &lt;p&gt;The sum returned can vary depending upon the order in which
+ values are recorded, due to accumulated rounding error in
+ addition of values of differing magnitudes. Values sorted by increasing
+ absolute magnitude tend to yield more accurate results.  If any recorded
+ value is a {@code NaN} or the sum is at any point a {@code NaN} then the
+ sum will be {@code NaN}.
+@param {Object {java.util.function.ToDoubleFunction}} mapper a function extracting the property to be summed
+@param mapper a function extracting the property to be summed
+@return {Object {java.util.stream.Collector}} a {@code Collector} that produces the sum of a derived property
+*/
+summingDouble : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-averagingInt'>/**Returns a {@code Collector} that produces the arithmetic mean of an integer-valued
+</span> function applied to the input elements.  If no elements are present,
+ the result is 0.
+@param {Object {java.util.function.ToIntFunction}} mapper a function extracting the property to be summed
+@param mapper a function extracting the property to be summed
+@return {Object {java.util.stream.Collector}} a {@code Collector} that produces the sum of a derived property
+*/
+averagingInt : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-averagingLong'>/**Returns a {@code Collector} that produces the arithmetic mean of a long-valued
+</span> function applied to the input elements.  If no elements are present,
+ the result is 0.
+@param {Object {java.util.function.ToLongFunction}} mapper a function extracting the property to be summed
+@param mapper a function extracting the property to be summed
+@return {Object {java.util.stream.Collector}} a {@code Collector} that produces the sum of a derived property
+*/
+averagingLong : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-averagingDouble'>/**Returns a {@code Collector} that produces the arithmetic mean of a double-valued
+</span> function applied to the input elements.  If no elements are present,
+ the result is 0.
+
+ &lt;p&gt;The average returned can vary depending upon the order in which
+ values are recorded, due to accumulated rounding error in
+ addition of values of differing magnitudes. Values sorted by increasing
+ absolute magnitude tend to yield more accurate results.  If any recorded
+ value is a {@code NaN} or the sum is at any point a {@code NaN} then the
+ average will be {@code NaN}.
+@param {Object {java.util.function.ToDoubleFunction}} mapper a function extracting the property to be summed
+@param &lt;T&gt; the type of the input elements
+@param mapper a function extracting the property to be summed
+@return {Object {java.util.stream.Collector}} a {@code Collector} that produces the sum of a derived property
+*/
+averagingDouble : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-reducing'>/**Returns a {@code Collector} which performs a reduction of its
+</span> input elements under a specified {@code BinaryOperator} using the
+ provided identity.
+@param {Object {Object}} identity the identity value for the reduction (also, the value
+                 that is returned when there are no input elements)
+@param {Object {java.util.function.BinaryOperator}} op a {@code BinaryOperator&lt;T&gt;} used to reduce the input elements
+@param identity the identity value for the reduction (also, the value
+                 that is returned when there are no input elements)
+@param op a {@code BinaryOperator&lt;T&gt;} used to reduce the input elements
+@return {Object {java.util.stream.Collector}} a {@code Collector} which implements the reduction operation
+@see #reducing(BinaryOperator)
+@see #reducing(Object, Function, BinaryOperator)
+*/
+reducing : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-reducing'>/**Returns a {@code Collector} which performs a reduction of its
+</span> input elements under a specified {@code BinaryOperator}.  The result
+ is described as an {@code Optional&lt;T&gt;}.
+@param {Object {java.util.function.BinaryOperator}} op a {@code BinaryOperator&lt;T&gt;} used to reduce the input elements
+@param &lt;T&gt; element type for the input and output of the reduction
+@param op a {@code BinaryOperator&lt;T&gt;} used to reduce the input elements
+@return {Object {java.util.stream.Collector}} a {@code Collector} which implements the reduction operation
+@see #reducing(Object, BinaryOperator)
+@see #reducing(Object, Function, BinaryOperator)
+*/
+reducing : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-reducing'>/**Returns a {@code Collector} which performs a reduction of its
+</span> input elements under a specified mapping function and
+ {@code BinaryOperator}. This is a generalization of
+ {@link #reducing(Object, BinaryOperator)} which allows a transformation
+ of the elements before reduction.
+@param {Object {Object}} identity the identity value for the reduction (also, the value
+                 that is returned when there are no input elements)
+@param {Object {java.util.function.Function}} mapper a mapping function to apply to each input value
+@param {Object {java.util.function.BinaryOperator}} op a {@code BinaryOperator&lt;U&gt;} used to reduce the mapped values
+@param identity the identity value for the reduction (also, the value
+                 that is returned when there are no input elements)
+@param mapper a mapping function to apply to each input value
+@param op a {@code BinaryOperator&lt;U&gt;} used to reduce the mapped values
+@return {Object {java.util.stream.Collector}} a {@code Collector} implementing the map-reduce operation
+@see #reducing(Object, BinaryOperator)
+@see #reducing(BinaryOperator)
+*/
+reducing : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-groupingBy'>/**Returns a {@code Collector} implementing a &quot;group by&quot; operation on
+</span> input elements of type {@code T}, grouping elements according to a
+ classification function, and returning the results in a {@code Map}.
+
+ &lt;p&gt;The classification function maps elements to some key type {@code K}.
+ The collector produces a {@code Map&lt;K, List&lt;T&gt;&gt;} whose keys are the
+ values resulting from applying the classification function to the input
+ elements, and whose corresponding values are {@code List}s containing the
+ input elements which map to the associated key under the classification
+ function.
+
+ &lt;p&gt;There are no guarantees on the type, mutability, serializability, or
+ thread-safety of the {@code Map} or {@code List} objects returned.
+@param {Object {java.util.function.Function}} classifier the classifier function mapping input elements to keys
+@implNote The returned {@code Collector} is not concurrent.  For parallel stream
+ pipelines, the {@code combiner} function operates by merging the keys
+ from one map into another, which can be an expensive operation.  If
+ preservation of the order in which elements appear in the resulting {@code Map}
+ collector is not required, using {@link #groupingByConcurrent(Function)}
+ may offer better parallel performance.
+@param &lt;T&gt; the type of the input elements
+@param &lt;K&gt; the type of the keys
+@param classifier the classifier function mapping input elements to keys
+@return {Object {java.util.stream.Collector}} a {@code Collector} implementing the group-by operation
+@see #groupingBy(Function, Collector)
+@see #groupingBy(Function, Supplier, Collector)
+@see #groupingByConcurrent(Function)
+*/
+groupingBy : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-groupingBy'>/**Returns a {@code Collector} implementing a cascaded &quot;group by&quot; operation
+</span> on input elements of type {@code T}, grouping elements according to a
+ classification function, and then performing a reduction operation on
+ the values associated with a given key using the specified downstream
+ {@code Collector}.
+
+ &lt;p&gt;The classification function maps elements to some key type {@code K}.
+ The downstream collector operates on elements of type {@code T} and
+ produces a result of type {@code D}. The resulting collector produces a
+ {@code Map&lt;K, D&gt;}.
+
+ &lt;p&gt;There are no guarantees on the type, mutability,
+ serializability, or thread-safety of the {@code Map} returned.
+
+ &lt;p&gt;For example, to compute the set of last names of people in each city:
+ &lt;pre&gt;{@code
+     Map&lt;City, Set&lt;String&gt;&gt; namesByCity
+         = people.stream().collect(groupingBy(Person::getCity,
+                                              mapping(Person::getLastName, toSet())));
+ }&lt;/pre&gt;
+@param {Object {java.util.function.Function}} classifier a classifier function mapping input elements to keys
+@param {Object {java.util.stream.Collector}} downstream a {@code Collector} implementing the downstream reduction
+@param &lt;K&gt; the type of the keys
+@param &lt;A&gt; the intermediate accumulation type of the downstream collector
+@param &lt;D&gt; the result type of the downstream reduction
+@param classifier a classifier function mapping input elements to keys
+@param downstream a {@code Collector} implementing the downstream reduction
+@return {Object {java.util.stream.Collector}} a {@code Collector} implementing the cascaded group-by operation
+@see #groupingBy(Function)
+@see #groupingBy(Function, Supplier, Collector)
+@see #groupingByConcurrent(Function, Collector)
+*/
+groupingBy : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-groupingBy'>/**Returns a {@code Collector} implementing a cascaded &quot;group by&quot; operation
+</span> on input elements of type {@code T}, grouping elements according to a
+ classification function, and then performing a reduction operation on
+ the values associated with a given key using the specified downstream
+ {@code Collector}.  The {@code Map} produced by the Collector is created
+ with the supplied factory function.
+
+ &lt;p&gt;The classification function maps elements to some key type {@code K}.
+ The downstream collector operates on elements of type {@code T} and
+ produces a result of type {@code D}. The resulting collector produces a
+ {@code Map&lt;K, D&gt;}.
+
+ &lt;p&gt;For example, to compute the set of last names of people in each city,
+ where the city names are sorted:
+ &lt;pre&gt;{@code
+     Map&lt;City, Set&lt;String&gt;&gt; namesByCity
+         = people.stream().collect(groupingBy(Person::getCity, TreeMap::new,
+                                              mapping(Person::getLastName, toSet())));
+ }&lt;/pre&gt;
+@param {Object {java.util.function.Function}} classifier a classifier function mapping input elements to keys
+@param {Object {java.util.function.Supplier}} downstream a {@code Collector} implementing the downstream reduction
+@param {Object {java.util.stream.Collector}} mapFactory a function which, when called, produces a new empty
+                   {@code Map} of the desired type
+@param &lt;A&gt; the intermediate accumulation type of the downstream collector
+@param &lt;D&gt; the result type of the downstream reduction
+@param &lt;M&gt; the type of the resulting {@code Map}
+@param classifier a classifier function mapping input elements to keys
+@param downstream a {@code Collector} implementing the downstream reduction
+@param mapFactory a function which, when called, produces a new empty
+                   {@code Map} of the desired type
+@return {Object {java.util.stream.Collector}} a {@code Collector} implementing the cascaded group-by operation
+@see #groupingBy(Function, Collector)
+@see #groupingBy(Function)
+@see #groupingByConcurrent(Function, Supplier, Collector)
+*/
+groupingBy : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-groupingByConcurrent'>/**Returns a concurrent {@code Collector} implementing a &quot;group by&quot;
+</span> operation on input elements of type {@code T}, grouping elements
+ according to a classification function.
+
+ &lt;p&gt;This is a {@link java.util.stream.Collector.Characteristics#CONCURRENT concurrent} and
+ {@link java.util.stream.Collector.Characteristics#UNORDERED unordered} Collector.
+
+ &lt;p&gt;The classification function maps elements to some key type {@code K}.
+ The collector produces a {@code ConcurrentMap&lt;K, List&lt;T&gt;&gt;} whose keys are the
+ values resulting from applying the classification function to the input
+ elements, and whose corresponding values are {@code List}s containing the
+ input elements which map to the associated key under the classification
+ function.
+
+ &lt;p&gt;There are no guarantees on the type, mutability, or serializability
+ of the {@code Map} or {@code List} objects returned, or of the
+ thread-safety of the {@code List} objects returned.
+@param {Object {java.util.function.Function}} classifier a classifier function mapping input elements to keys
+@param &lt;T&gt; the type of the input elements
+@param &lt;K&gt; the type of the keys
+@param classifier a classifier function mapping input elements to keys
+@return {Object {java.util.stream.Collector}} a concurrent, unordered {@code Collector} implementing the group-by operation
+@see #groupingBy(Function)
+@see #groupingByConcurrent(Function, Collector)
+@see #groupingByConcurrent(Function, Supplier, Collector)
+*/
+groupingByConcurrent : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-groupingByConcurrent'>/**Returns a concurrent {@code Collector} implementing a cascaded &quot;group by&quot;
+</span> operation on input elements of type {@code T}, grouping elements
+ according to a classification function, and then performing a reduction
+ operation on the values associated with a given key using the specified
+ downstream {@code Collector}.
+
+ &lt;p&gt;This is a {@link java.util.stream.Collector.Characteristics#CONCURRENT concurrent} and
+ {@link java.util.stream.Collector.Characteristics#UNORDERED unordered} Collector.
+
+ &lt;p&gt;The classification function maps elements to some key type {@code K}.
+ The downstream collector operates on elements of type {@code T} and
+ produces a result of type {@code D}. The resulting collector produces a
+ {@code Map&lt;K, D&gt;}.
+
+ &lt;p&gt;For example, to compute the set of last names of people in each city,
+ where the city names are sorted:
+ &lt;pre&gt;{@code
+     ConcurrentMap&lt;City, Set&lt;String&gt;&gt; namesByCity
+         = people.stream().collect(groupingByConcurrent(Person::getCity,
+                                                        mapping(Person::getLastName, toSet())));
+ }&lt;/pre&gt;
+@param {Object {java.util.function.Function}} classifier a classifier function mapping input elements to keys
+@param {Object {java.util.stream.Collector}} downstream a {@code Collector} implementing the downstream reduction
+@param &lt;A&gt; the intermediate accumulation type of the downstream collector
+@param &lt;D&gt; the result type of the downstream reduction
+@param classifier a classifier function mapping input elements to keys
+@param downstream a {@code Collector} implementing the downstream reduction
+@return {Object {java.util.stream.Collector}} a concurrent, unordered {@code Collector} implementing the cascaded group-by operation
+@see #groupingBy(Function, Collector)
+@see #groupingByConcurrent(Function)
+@see #groupingByConcurrent(Function, Supplier, Collector)
+*/
+groupingByConcurrent : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-groupingByConcurrent'>/**Returns a concurrent {@code Collector} implementing a cascaded &quot;group by&quot;
+</span> operation on input elements of type {@code T}, grouping elements
+ according to a classification function, and then performing a reduction
+ operation on the values associated with a given key using the specified
+ downstream {@code Collector}.  The {@code ConcurrentMap} produced by the
+ Collector is created with the supplied factory function.
+
+ &lt;p&gt;This is a {@link java.util.stream.Collector.Characteristics#CONCURRENT concurrent} and
+ {@link java.util.stream.Collector.Characteristics#UNORDERED unordered} Collector.
+
+ &lt;p&gt;The classification function maps elements to some key type {@code K}.
+ The downstream collector operates on elements of type {@code T} and
+ produces a result of type {@code D}. The resulting collector produces a
+ {@code Map&lt;K, D&gt;}.
+
+ &lt;p&gt;For example, to compute the set of last names of people in each city,
+ where the city names are sorted:
+ &lt;pre&gt;{@code
+     ConcurrentMap&lt;City, Set&lt;String&gt;&gt; namesByCity
+         = people.stream().collect(groupingBy(Person::getCity, ConcurrentSkipListMap::new,
+                                              mapping(Person::getLastName, toSet())));
+ }&lt;/pre&gt;
+@param {Object {java.util.function.Function}} classifier a classifier function mapping input elements to keys
+@param {Object {java.util.function.Supplier}} downstream a {@code Collector} implementing the downstream reduction
+@param {Object {java.util.stream.Collector}} mapFactory a function which, when called, produces a new empty
+                   {@code ConcurrentMap} of the desired type
+@param &lt;D&gt; the result type of the downstream reduction
+@param &lt;M&gt; the type of the resulting {@code ConcurrentMap}
+@param classifier a classifier function mapping input elements to keys
+@param downstream a {@code Collector} implementing the downstream reduction
+@param mapFactory a function which, when called, produces a new empty
+                   {@code ConcurrentMap} of the desired type
+@return {Object {java.util.stream.Collector}} a concurrent, unordered {@code Collector} implementing the cascaded group-by operation
+@see #groupingByConcurrent(Function)
+@see #groupingByConcurrent(Function, Collector)
+@see #groupingBy(Function, Supplier, Collector)
+*/
+groupingByConcurrent : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-partitioningBy'>/**Returns a {@code Collector} which partitions the input elements according
+</span> to a {@code Predicate}, and organizes them into a
+ {@code Map&lt;Boolean, List&lt;T&gt;&gt;}.
+
+ There are no guarantees on the type, mutability,
+ serializability, or thread-safety of the {@code Map} returned.
+@param {Object {java.util.function.Predicate}} predicate a predicate used for classifying input elements
+@param predicate a predicate used for classifying input elements
+@return {Object {java.util.stream.Collector}} a {@code Collector} implementing the partitioning operation
+@see #partitioningBy(Predicate, Collector)
+*/
+partitioningBy : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-partitioningBy'>/**Returns a {@code Collector} which partitions the input elements according
+</span> to a {@code Predicate}, reduces the values in each partition according to
+ another {@code Collector}, and organizes them into a
+ {@code Map&lt;Boolean, D&gt;} whose values are the result of the downstream
+ reduction.
+
+ &lt;p&gt;There are no guarantees on the type, mutability,
+ serializability, or thread-safety of the {@code Map} returned.
+@param {Object {java.util.function.Predicate}} predicate a predicate used for classifying input elements
+@param {Object {java.util.stream.Collector}} downstream a {@code Collector} implementing the downstream
+                   reduction
+@param &lt;D&gt; the result type of the downstream reduction
+@param predicate a predicate used for classifying input elements
+@param downstream a {@code Collector} implementing the downstream
+                   reduction
+@return {Object {java.util.stream.Collector}} a {@code Collector} implementing the cascaded partitioning
+         operation
+@see #partitioningBy(Predicate)
+*/
+partitioningBy : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-toMap'>/**Returns a {@code Collector} that accumulates elements into a
+</span> {@code Map} whose keys and values are the result of applying the provided
+ mapping functions to the input elements.
+
+ &lt;p&gt;If the mapped keys contains duplicates (according to
+ {@link Object#equals(Object)}), an {@code IllegalStateException} is
+ thrown when the collection operation is performed.  If the mapped keys
+ may have duplicates, use {@link #toMap(Function, Function, BinaryOperator)}
+ instead.
+@param {Object {java.util.function.Function}} keyMapper a mapping function to produce keys
+@param {Object {java.util.function.Function}} valueMapper a mapping function to produce values
+@param &lt;T&gt; the type of the input elements
+@param &lt;K&gt; the output type of the key mapping function
+@param &lt;U&gt; the output type of the value mapping function
+@param keyMapper a mapping function to produce keys
+@param valueMapper a mapping function to produce values
+@return {Object {java.util.stream.Collector}} a {@code Collector} which collects elements into a {@code Map}
+ whose keys and values are the result of applying mapping functions to
+ the input elements
+@see #toMap(Function, Function, BinaryOperator)
+@see #toMap(Function, Function, BinaryOperator, Supplier)
+@see #toConcurrentMap(Function, Function)
+*/
+toMap : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-toMap'>/**Returns a {@code Collector} that accumulates elements into a
+</span> {@code Map} whose keys and values are the result of applying the provided
+ mapping functions to the input elements.
+
+ &lt;p&gt;If the mapped
+ keys contains duplicates (according to {@link Object#equals(Object)}),
+ the value mapping function is applied to each equal element, and the
+ results are merged using the provided merging function.
+@param {Object {java.util.function.Function}} keyMapper a mapping function to produce keys
+@param {Object {java.util.function.Function}} valueMapper a mapping function to produce values
+@param {Object {java.util.function.BinaryOperator}} mergeFunction a merge function, used to resolve collisions between
+                      values associated with the same key, as supplied
+                      to {@link Map#merge(Object, Object, BiFunction)}
+@param &lt;K&gt; the output type of the key mapping function
+@param &lt;U&gt; the output type of the value mapping function
+@param keyMapper a mapping function to produce keys
+@param valueMapper a mapping function to produce values
+@param mergeFunction a merge function, used to resolve collisions between
+                      values associated with the same key, as supplied
+                      to {@link Map#merge(Object, Object, BiFunction)}
+@return {Object {java.util.stream.Collector}} a {@code Collector} which collects elements into a {@code Map}
+ whose keys are the result of applying a key mapping function to the input
+ elements, and whose values are the result of applying a value mapping
+ function to all input elements equal to the key and combining them
+ using the merge function
+@see #toMap(Function, Function)
+@see #toMap(Function, Function, BinaryOperator, Supplier)
+@see #toConcurrentMap(Function, Function, BinaryOperator)
+*/
+toMap : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-toMap'>/**Returns a {@code Collector} that accumulates elements into a
+</span> {@code Map} whose keys and values are the result of applying the provided
+ mapping functions to the input elements.
+
+ &lt;p&gt;If the mapped
+ keys contains duplicates (according to {@link Object#equals(Object)}),
+ the value mapping function is applied to each equal element, and the
+ results are merged using the provided merging function.  The {@code Map}
+ is created by a provided supplier function.
+@param {Object {java.util.function.Function}} keyMapper a mapping function to produce keys
+@param {Object {java.util.function.Function}} valueMapper a mapping function to produce values
+@param {Object {java.util.function.BinaryOperator}} mergeFunction a merge function, used to resolve collisions between
+                      values associated with the same key, as supplied
+                      to {@link Map#merge(Object, Object, BiFunction)}
+@param {Object {java.util.function.Supplier}} mapSupplier a function which returns a new, empty {@code Map} into
+                    which the results will be inserted
+@param &lt;M&gt; the type of the resulting {@code Map}
+@param keyMapper a mapping function to produce keys
+@param valueMapper a mapping function to produce values
+@param mergeFunction a merge function, used to resolve collisions between
+                      values associated with the same key, as supplied
+                      to {@link Map#merge(Object, Object, BiFunction)}
+@param mapSupplier a function which returns a new, empty {@code Map} into
+                    which the results will be inserted
+@return {Object {java.util.stream.Collector}} a {@code Collector} which collects elements into a {@code Map}
+ whose keys are the result of applying a key mapping function to the input
+ elements, and whose values are the result of applying a value mapping
+ function to all input elements equal to the key and combining them
+ using the merge function
+@see #toMap(Function, Function)
+@see #toMap(Function, Function, BinaryOperator)
+@see #toConcurrentMap(Function, Function, BinaryOperator, Supplier)
+*/
+toMap : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-toConcurrentMap'>/**Returns a concurrent {@code Collector} that accumulates elements into a
+</span> {@code ConcurrentMap} whose keys and values are the result of applying
+ the provided mapping functions to the input elements.
+
+ &lt;p&gt;If the mapped keys contains duplicates (according to
+ {@link Object#equals(Object)}), an {@code IllegalStateException} is
+ thrown when the collection operation is performed.  If the mapped keys
+ may have duplicates, use
+ {@link #toConcurrentMap(Function, Function, BinaryOperator)} instead.
+@param {Object {java.util.function.Function}} keyMapper the mapping function to produce keys
+@param {Object {java.util.function.Function}} valueMapper the mapping function to produce values
+@param &lt;K&gt; the output type of the key mapping function
+@param &lt;U&gt; the output type of the value mapping function
+@param keyMapper the mapping function to produce keys
+@param valueMapper the mapping function to produce values
+@return {Object {java.util.stream.Collector}} a concurrent, unordered {@code Collector} which collects elements into a
+ {@code ConcurrentMap} whose keys are the result of applying a key mapping
+ function to the input elements, and whose values are the result of
+ applying a value mapping function to the input elements
+@see #toMap(Function, Function)
+@see #toConcurrentMap(Function, Function, BinaryOperator)
+@see #toConcurrentMap(Function, Function, BinaryOperator, Supplier)
+*/
+toConcurrentMap : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-toConcurrentMap'>/**Returns a concurrent {@code Collector} that accumulates elements into a
+</span> {@code ConcurrentMap} whose keys and values are the result of applying
+ the provided mapping functions to the input elements.
+
+ &lt;p&gt;If the mapped keys contains duplicates (according to {@link Object#equals(Object)}),
+ the value mapping function is applied to each equal element, and the
+ results are merged using the provided merging function.
+@param {Object {java.util.function.Function}} keyMapper a mapping function to produce keys
+@param {Object {java.util.function.Function}} valueMapper a mapping function to produce values
+@param {Object {java.util.function.BinaryOperator}} mergeFunction a merge function, used to resolve collisions between
+                      values associated with the same key, as supplied
+                      to {@link Map#merge(Object, Object, BiFunction)}
+@param &lt;U&gt; the output type of the value mapping function
+@param keyMapper a mapping function to produce keys
+@param valueMapper a mapping function to produce values
+@param mergeFunction a merge function, used to resolve collisions between
+                      values associated with the same key, as supplied
+                      to {@link Map#merge(Object, Object, BiFunction)}
+@return {Object {java.util.stream.Collector}} a concurrent, unordered {@code Collector} which collects elements into a
+ {@code ConcurrentMap} whose keys are the result of applying a key mapping
+ function to the input elements, and whose values are the result of
+ applying a value mapping function to all input elements equal to the key
+ and combining them using the merge function
+@see #toConcurrentMap(Function, Function)
+@see #toConcurrentMap(Function, Function, BinaryOperator, Supplier)
+@see #toMap(Function, Function, BinaryOperator)
+*/
+toConcurrentMap : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-toConcurrentMap'>/**Returns a concurrent {@code Collector} that accumulates elements into a
+</span> {@code ConcurrentMap} whose keys and values are the result of applying
+ the provided mapping functions to the input elements.
+
+ &lt;p&gt;If the mapped keys contains duplicates (according to {@link Object#equals(Object)}),
+ the value mapping function is applied to each equal element, and the
+ results are merged using the provided merging function.  The
+ {@code ConcurrentMap} is created by a provided supplier function.
+
+ &lt;p&gt;This is a {@link java.util.stream.Collector.Characteristics#CONCURRENT concurrent} and
+ {@link java.util.stream.Collector.Characteristics#UNORDERED unordered} Collector.
+@param {Object {java.util.function.Function}} keyMapper a mapping function to produce keys
+@param {Object {java.util.function.Function}} valueMapper a mapping function to produce values
+@param {Object {java.util.function.BinaryOperator}} mergeFunction a merge function, used to resolve collisions between
+                      values associated with the same key, as supplied
+                      to {@link Map#merge(Object, Object, BiFunction)}
+@param {Object {java.util.function.Supplier}} mapSupplier a function which returns a new, empty {@code Map} into
+                    which the results will be inserted
+@param keyMapper a mapping function to produce keys
+@param valueMapper a mapping function to produce values
+@param mergeFunction a merge function, used to resolve collisions between
+                      values associated with the same key, as supplied
+                      to {@link Map#merge(Object, Object, BiFunction)}
+@param mapSupplier a function which returns a new, empty {@code Map} into
+                    which the results will be inserted
+@return {Object {java.util.stream.Collector}} a concurrent, unordered {@code Collector} which collects elements into a
+ {@code ConcurrentMap} whose keys are the result of applying a key mapping
+ function to the input elements, and whose values are the result of
+ applying a value mapping function to all input elements equal to the key
+ and combining them using the merge function
+@see #toConcurrentMap(Function, Function)
+@see #toConcurrentMap(Function, Function, BinaryOperator)
+@see #toMap(Function, Function, BinaryOperator, Supplier)
+*/
+toConcurrentMap : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-summarizingInt'>/**Returns a {@code Collector} which applies an {@code int}-producing
+</span> mapping function to each input element, and returns summary statistics
+ for the resulting values.
+@param {Object {java.util.function.ToIntFunction}} mapper a mapping function to apply to each element
+@param mapper a mapping function to apply to each element
+@return {Object {java.util.stream.Collector}} a {@code Collector} implementing the summary-statistics reduction
+@see #summarizingDouble(ToDoubleFunction)
+@see #summarizingLong(ToLongFunction)
+*/
+summarizingInt : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-summarizingLong'>/**Returns a {@code Collector} which applies an {@code long}-producing
+</span> mapping function to each input element, and returns summary statistics
+ for the resulting values.
+@param {Object {java.util.function.ToLongFunction}} mapper the mapping function to apply to each element
+@param mapper the mapping function to apply to each element
+@return {Object {java.util.stream.Collector}} a {@code Collector} implementing the summary-statistics reduction
+@see #summarizingDouble(ToDoubleFunction)
+@see #summarizingInt(ToIntFunction)
+*/
+summarizingLong : function(  ) {},
+
+<span id='java-util-stream-Collectors-method-summarizingDouble'>/**Returns a {@code Collector} which applies an {@code double}-producing
+</span> mapping function to each input element, and returns summary statistics
+ for the resulting values.
+@param {Object {java.util.function.ToDoubleFunction}} mapper a mapping function to apply to each element
+@param mapper a mapping function to apply to each element
+@return {Object {java.util.stream.Collector}} a {@code Collector} implementing the summary-statistics reduction
+@see #summarizingLong(ToLongFunction)
+@see #summarizingInt(ToIntFunction)
+*/
+summarizingDouble : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

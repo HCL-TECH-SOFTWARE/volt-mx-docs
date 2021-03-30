@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-net-ssl-SNIHostName'>/**@class javax.net.ssl.SNIHostName
+</span>@extends javax.net.ssl.SNIServerName
+
+ Instances of this class represent a server name of type
+ {@link javax.net.ssl.StandardConstants#SNI_HOST_NAME host_name} in a Server Name
+ Indication (SNI) extension.
+ &lt;P&gt;
+ As described in section 3, &quot;Server Name Indication&quot;, of
+ &lt;A HREF=&quot;http://www.ietf.org/rfc/rfc6066.txt&quot;&gt;TLS Extensions (RFC 6066)&lt;/A&gt;,
+ &quot;HostName&quot; contains the fully qualified DNS hostname of the server, as
+ understood by the client.  The encoded server name value of a hostname is
+ represented as a byte string using ASCII encoding without a trailing dot.
+ This allows the support of Internationalized Domain Names (IDN) through
+ the use of A-labels (the ASCII-Compatible Encoding (ACE) form of a valid
+ string of Internationalized Domain Names for Applications (IDNA)) defined
+ in &lt;A HREF=&quot;http://www.ietf.org/rfc/rfc5890.txt&quot;&gt;RFC 5890&lt;/A&gt;.
+ &lt;P&gt;
+ Note that {@code SNIHostName} objects are immutable.
+
+ @see SNIServerName
+ @see StandardConstants#SNI_HOST_NAME
+
+ @since 1.8
+*/
+var SNIHostName = {
+
+<span id='javax-net-ssl-SNIHostName-method-getAsciiName'>/**Returns the {@link StandardCharsets#US_ASCII}-compliant hostname of
+</span> this {@code SNIHostName} object.
+ &lt;P&gt;
+ Note that, per
+ &lt;A HREF=&quot;http://www.ietf.org/rfc/rfc6066.txt&quot;&gt;RFC 6066&lt;/A&gt;, the
+ returned hostname may be an internationalized domain name that
+ contains A-labels. See
+ &lt;A HREF=&quot;http://www.ietf.org/rfc/rfc5890.txt&quot;&gt;RFC 5890&lt;/A&gt;
+ for more information about the detailed A-label specification.
+@return {String} the {@link StandardCharsets#US_ASCII}-compliant hostname
+         of this {@code SNIHostName} object
+*/
+getAsciiName : function(  ) {},
+
+<span id='javax-net-ssl-SNIHostName-method-equals'>/**Compares this server name to the specified object.
+</span> &lt;P&gt;
+ Per &lt;A HREF=&quot;http://www.ietf.org/rfc/rfc6066.txt&quot;&gt;RFC 6066&lt;/A&gt;, DNS
+ hostnames are case-insensitive.  Two server hostnames are equal if,
+ and only if, they have the same name type, and the hostnames are
+ equal in a case-independent comparison.
+@param {Object {Object}} other
+         the other server name object to compare with.
+@return {Boolean} true if, and only if, the {@code other} is considered
+         equal to this instance
+*/
+equals : function(  ) {},
+
+<span id='javax-net-ssl-SNIHostName-method-hashCode'>/**Returns a hash code value for this {@code SNIHostName}.
+</span> &lt;P&gt;
+ The hash code value is generated using the case-insensitive hostname
+ of this {@code SNIHostName}.
+@return {Number} a hash code value for this {@code SNIHostName}.
+*/
+hashCode : function(  ) {},
+
+<span id='javax-net-ssl-SNIHostName-method-toString'>/**Returns a string representation of the object, including the DNS
+</span> hostname in this {@code SNIHostName} object.
+ &lt;P&gt;
+ The exact details of the representation are unspecified and subject
+ to change, but the following may be regarded as typical:
+ &lt;pre&gt;
+     &quot;type=host_name (0), value={@literal &lt;hostname&gt;}&quot;
+ &lt;/pre&gt;
+ The &quot;{@literal &lt;hostname&gt;}&quot; is an ASCII representation of the hostname,
+ which may contains A-labels.  For example, a returned value of an pseudo
+ hostname may look like:
+ &lt;pre&gt;
+     &quot;type=host_name (0), value=www.example.com&quot;
+ &lt;/pre&gt;
+ or
+ &lt;pre&gt;
+     &quot;type=host_name (0), value=xn--fsqu00a.xn--0zwm56d&quot;
+ &lt;/pre&gt;
+ &lt;P&gt;
+ Please NOTE that the exact details of the representation are unspecified
+ and subject to change.
+@return {String} a string representation of the object.
+*/
+toString : function(  ) {},
+
+<span id='javax-net-ssl-SNIHostName-method-createSNIMatcher'>/**Creates an {@link javax.net.ssl.SNIMatcher} object for {@code SNIHostName}s.
+</span> &lt;P&gt;
+ This method can be used by a server to verify the acceptable
+ {@code SNIHostName}s.  For example,
+ &lt;pre&gt;
+     SNIMatcher matcher =
+         SNIHostName.createSNIMatcher(&quot;www\\.example\\.com&quot;);
+ &lt;/pre&gt;
+ will accept the hostname &quot;www.example.com&quot;.
+ &lt;pre&gt;
+     SNIMatcher matcher =
+         SNIHostName.createSNIMatcher(&quot;www\\.example\\.(com|org)&quot;);
+ &lt;/pre&gt;
+ will accept hostnames &quot;www.example.com&quot; and &quot;www.example.org&quot;.
+@param {String} regex
+         the &lt;a href=&quot;{@docRoot}/java/util/regex/Pattern.html#sum&quot;&gt;
+         regular expression pattern&lt;/a&gt;
+         representing the hostname(s) to match
+@return {Object {javax.net.ssl.SNIMatcher}} a {@code SNIMatcher} object for {@code SNIHostName}s
+@throws NullPointerException if {@code regex} is
+         {@code null}
+@throws java.util.regex.PatternSyntaxException if the regular expression's
+         syntax is invalid
+*/
+createSNIMatcher : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

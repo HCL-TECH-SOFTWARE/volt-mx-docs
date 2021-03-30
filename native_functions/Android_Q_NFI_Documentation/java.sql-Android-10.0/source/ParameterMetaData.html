@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-sql-ParameterMetaData'>/**@class java.sql.ParameterMetaData
+</span> implements java.sql.Wrapper
+
+ An object that can be used to get information about the types
+ and properties for each parameter marker in a
+ &lt;code&gt;PreparedStatement&lt;/code&gt; object. For some queries and driver
+ implementations, the data that would be returned by a &lt;code&gt;ParameterMetaData&lt;/code&gt;
+ object may not be available until the &lt;code&gt;PreparedStatement&lt;/code&gt; has
+ been executed.
+&lt;p&gt;
+Some driver implementations may not be able to provide information about the
+types and properties for each parameter marker in a &lt;code&gt;CallableStatement&lt;/code&gt;
+object.
+
+ @since 1.4
+*/
+var ParameterMetaData = {
+
+<span id='java-sql-ParameterMetaData-property-parameterNoNulls'>/** The constant indicating that a
+</span> parameter will not allow &lt;code&gt;NULL&lt;/code&gt; values.
+*/
+parameterNoNulls : &quot;0&quot;,
+<span id='java-sql-ParameterMetaData-property-parameterNullable'>/** The constant indicating that a
+</span> parameter will allow &lt;code&gt;NULL&lt;/code&gt; values.
+*/
+parameterNullable : &quot;1&quot;,
+<span id='java-sql-ParameterMetaData-property-parameterNullableUnknown'>/** The constant indicating that the
+</span> nullability of a parameter is unknown.
+*/
+parameterNullableUnknown : &quot;2&quot;,
+<span id='java-sql-ParameterMetaData-property-parameterModeUnknown'>/** The constant indicating that the mode of the parameter is unknown.
+</span>*/
+parameterModeUnknown : &quot;0&quot;,
+<span id='java-sql-ParameterMetaData-property-parameterModeIn'>/** The constant indicating that the parameter's mode is IN.
+</span>*/
+parameterModeIn : &quot;1&quot;,
+<span id='java-sql-ParameterMetaData-property-parameterModeInOut'>/** The constant indicating that the parameter's mode is INOUT.
+</span>*/
+parameterModeInOut : &quot;2&quot;,
+<span id='java-sql-ParameterMetaData-property-parameterModeOut'>/** The constant indicating that the parameter's mode is  OUT.
+</span>*/
+parameterModeOut : &quot;4&quot;,
+<span id='java-sql-ParameterMetaData-method-getParameterCount'>/**Retrieves the number of parameters in the &lt;code&gt;PreparedStatement&lt;/code&gt;
+</span> object for which this &lt;code&gt;ParameterMetaData&lt;/code&gt; object contains
+ information.
+@return {Number} the number of parameters
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getParameterCount : function(  ) {},
+
+<span id='java-sql-ParameterMetaData-method-isNullable'>/**Retrieves whether null values are allowed in the designated parameter.
+</span>@param {Number} param the first parameter is 1, the second is 2, ...
+@return {Number} the nullability status of the given parameter; one of
+        &lt;code&gt;ParameterMetaData.parameterNoNulls&lt;/code&gt;,
+        &lt;code&gt;ParameterMetaData.parameterNullable&lt;/code&gt;, or
+        &lt;code&gt;ParameterMetaData.parameterNullableUnknown&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+isNullable : function(  ) {},
+
+<span id='java-sql-ParameterMetaData-method-isSigned'>/**Retrieves whether values for the designated parameter can be signed numbers.
+</span>@param {Number} param the first parameter is 1, the second is 2, ...
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if so; &lt;code&gt;false&lt;/code&gt; otherwise
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+isSigned : function(  ) {},
+
+<span id='java-sql-ParameterMetaData-method-getPrecision'>/**Retrieves the designated parameter's specified column size.
+</span>
+ &lt;P&gt;The returned value represents the maximum column size for the given parameter.
+ For numeric data, this is the maximum precision.  For character data, this is the length in characters.
+ For datetime datatypes, this is the length in characters of the String representation (assuming the
+ maximum allowed precision of the fractional seconds component). For binary data, this is the length in bytes.  For the ROWID datatype,
+ this is the length in bytes. 0 is returned for data types where the
+ column size is not applicable.
+@param {Number} param the first parameter is 1, the second is 2, ...
+@return {Number} precision
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getPrecision : function(  ) {},
+
+<span id='java-sql-ParameterMetaData-method-getScale'>/**Retrieves the designated parameter's number of digits to right of the decimal point.
+</span> 0 is returned for data types where the scale is not applicable.
+@param {Number} param the first parameter is 1, the second is 2, ...
+@return {Number} scale
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getScale : function(  ) {},
+
+<span id='java-sql-ParameterMetaData-method-getParameterType'>/**Retrieves the designated parameter's SQL type.
+</span>@param {Number} param the first parameter is 1, the second is 2, ...
+@return {Number} SQL type from &lt;code&gt;java.sql.Types&lt;/code&gt;
+@exception SQLException if a database access error occurs
+@since 1.4
+@see Types
+*/
+getParameterType : function(  ) {},
+
+<span id='java-sql-ParameterMetaData-method-getParameterTypeName'>/**Retrieves the designated parameter's database-specific type name.
+</span>@param {Number} param the first parameter is 1, the second is 2, ...
+@return {String} type the name used by the database. If the parameter type is
+ a user-defined type, then a fully-qualified type name is returned.
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getParameterTypeName : function(  ) {},
+
+<span id='java-sql-ParameterMetaData-method-getParameterClassName'>/**Retrieves the fully-qualified name of the Java class whose instances
+</span> should be passed to the method &lt;code&gt;PreparedStatement.setObject&lt;/code&gt;.
+@param {Number} param the first parameter is 1, the second is 2, ...
+@return {String} the fully-qualified name of the class in the Java programming
+         language that would be used by the method
+         &lt;code&gt;PreparedStatement.setObject&lt;/code&gt; to set the value
+         in the specified parameter. This is the class name used
+         for custom mapping.
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getParameterClassName : function(  ) {},
+
+<span id='java-sql-ParameterMetaData-method-getParameterMode'>/**Retrieves the designated parameter's mode.
+</span>@param {Number} param the first parameter is 1, the second is 2, ...
+@return {Number} mode of the parameter; one of
+        &lt;code&gt;ParameterMetaData.parameterModeIn&lt;/code&gt;,
+        &lt;code&gt;ParameterMetaData.parameterModeOut&lt;/code&gt;, or
+        &lt;code&gt;ParameterMetaData.parameterModeInOut&lt;/code&gt;
+        &lt;code&gt;ParameterMetaData.parameterModeUnknown&lt;/code&gt;.
+@exception SQLException if a database access error occurs
+@since 1.4
+*/
+getParameterMode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

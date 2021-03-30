@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-usb-descriptors-UsbDescriptor'>/**@class com.android.server.usb.descriptors.UsbDescriptor
+</span> implements com.android.server.usb.descriptors.report.Reporting
+
+@extends java.lang.Object
+
+ @hide
+ Common superclass for all USB Descriptors.
+*/
+var UsbDescriptor = {
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-STATUS_UNPARSED'>/***/
+</span>STATUS_UNPARSED : &quot;0&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-STATUS_PARSED_OK'>/***/
+</span>STATUS_PARSED_OK : &quot;1&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-STATUS_PARSED_UNDERRUN'>/***/
+</span>STATUS_PARSED_UNDERRUN : &quot;2&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-STATUS_PARSED_OVERRUN'>/***/
+</span>STATUS_PARSED_OVERRUN : &quot;3&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-STATUS_PARSE_EXCEPTION'>/***/
+</span>STATUS_PARSE_EXCEPTION : &quot;4&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_DEVICE'>/***/
+</span>DESCRIPTORTYPE_DEVICE : &quot;1&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_CONFIG'>/***/
+</span>DESCRIPTORTYPE_CONFIG : &quot;2&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_STRING'>/***/
+</span>DESCRIPTORTYPE_STRING : &quot;3&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_INTERFACE'>/***/
+</span>DESCRIPTORTYPE_INTERFACE : &quot;4&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_ENDPOINT'>/***/
+</span>DESCRIPTORTYPE_ENDPOINT : &quot;5&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_INTERFACEASSOC'>/***/
+</span>DESCRIPTORTYPE_INTERFACEASSOC : &quot;11&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_BOS'>/***/
+</span>DESCRIPTORTYPE_BOS : &quot;15&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_CAPABILITY'>/***/
+</span>DESCRIPTORTYPE_CAPABILITY : &quot;16&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_HID'>/***/
+</span>DESCRIPTORTYPE_HID : &quot;33&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_REPORT'>/***/
+</span>DESCRIPTORTYPE_REPORT : &quot;34&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_PHYSICAL'>/***/
+</span>DESCRIPTORTYPE_PHYSICAL : &quot;35&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_AUDIO_INTERFACE'>/***/
+</span>DESCRIPTORTYPE_AUDIO_INTERFACE : &quot;36&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_AUDIO_ENDPOINT'>/***/
+</span>DESCRIPTORTYPE_AUDIO_ENDPOINT : &quot;37&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_HUB'>/***/
+</span>DESCRIPTORTYPE_HUB : &quot;41&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_SUPERSPEED_HUB'>/***/
+</span>DESCRIPTORTYPE_SUPERSPEED_HUB : &quot;42&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-DESCRIPTORTYPE_ENDPOINT_COMPANION'>/***/
+</span>DESCRIPTORTYPE_ENDPOINT_COMPANION : &quot;48&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_DEVICE'>/***/
+</span>CLASSID_DEVICE : &quot;0&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_AUDIO'>/***/
+</span>CLASSID_AUDIO : &quot;1&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_COM'>/***/
+</span>CLASSID_COM : &quot;2&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_HID'>/***/
+</span>CLASSID_HID : &quot;3&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_PHYSICAL'>/***/
+</span>CLASSID_PHYSICAL : &quot;5&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_IMAGE'>/***/
+</span>CLASSID_IMAGE : &quot;6&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_PRINTER'>/***/
+</span>CLASSID_PRINTER : &quot;7&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_STORAGE'>/***/
+</span>CLASSID_STORAGE : &quot;8&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_HUB'>/***/
+</span>CLASSID_HUB : &quot;9&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_CDC_CONTROL'>/***/
+</span>CLASSID_CDC_CONTROL : &quot;10&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_SMART_CARD'>/***/
+</span>CLASSID_SMART_CARD : &quot;11&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_SECURITY'>/***/
+</span>CLASSID_SECURITY : &quot;13&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_VIDEO'>/***/
+</span>CLASSID_VIDEO : &quot;14&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_HEALTHCARE'>/***/
+</span>CLASSID_HEALTHCARE : &quot;15&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_AUDIOVIDEO'>/***/
+</span>CLASSID_AUDIOVIDEO : &quot;16&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_BILLBOARD'>/***/
+</span>CLASSID_BILLBOARD : &quot;17&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_TYPECBRIDGE'>/***/
+</span>CLASSID_TYPECBRIDGE : &quot;18&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_DIAGNOSTIC'>/***/
+</span>CLASSID_DIAGNOSTIC : &quot;220&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_WIRELESS'>/***/
+</span>CLASSID_WIRELESS : &quot;224&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_MISC'>/***/
+</span>CLASSID_MISC : &quot;239&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_APPSPECIFIC'>/***/
+</span>CLASSID_APPSPECIFIC : &quot;254&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-CLASSID_VENDSPECIFIC'>/***/
+</span>CLASSID_VENDSPECIFIC : &quot;255&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-AUDIO_SUBCLASS_UNDEFINED'>/***/
+</span>AUDIO_SUBCLASS_UNDEFINED : &quot;0&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-AUDIO_AUDIOCONTROL'>/***/
+</span>AUDIO_AUDIOCONTROL : &quot;1&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-AUDIO_AUDIOSTREAMING'>/***/
+</span>AUDIO_AUDIOSTREAMING : &quot;2&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-AUDIO_MIDISTREAMING'>/***/
+</span>AUDIO_MIDISTREAMING : &quot;3&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-REQUEST_GET_STATUS'>/***/
+</span>REQUEST_GET_STATUS : &quot;0&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-REQUEST_CLEAR_FEATURE'>/***/
+</span>REQUEST_CLEAR_FEATURE : &quot;1&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-REQUEST_SET_FEATURE'>/***/
+</span>REQUEST_SET_FEATURE : &quot;3&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-REQUEST_GET_ADDRESS'>/***/
+</span>REQUEST_GET_ADDRESS : &quot;5&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-REQUEST_GET_DESCRIPTOR'>/***/
+</span>REQUEST_GET_DESCRIPTOR : &quot;6&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-REQUEST_SET_DESCRIPTOR'>/***/
+</span>REQUEST_SET_DESCRIPTOR : &quot;7&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-REQUEST_GET_CONFIGURATION'>/***/
+</span>REQUEST_GET_CONFIGURATION : &quot;8&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-REQUEST_SET_CONFIGURATION'>/***/
+</span>REQUEST_SET_CONFIGURATION : &quot;9&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-property-USB_CONTROL_TRANSFER_TIMEOUT_MS'>/***/
+</span>USB_CONTROL_TRANSFER_TIMEOUT_MS : &quot;200&quot;,
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-getLength'>/**
+</span>*/
+getLength : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-getType'>/**
+</span>*/
+getType : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-getStatus'>/**
+</span>*/
+getStatus : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-setStatus'>/**
+</span>*/
+setStatus : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-getOverUnderRunCount'>/**
+</span>*/
+getOverUnderRunCount : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-getStatusString'>/**
+</span>*/
+getStatusString : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-getRawData'>/**
+</span>*/
+getRawData : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-postParse'>/**Called by the parser for any necessary cleanup.
+</span>*/
+postParse : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-parseRawDescriptors'>/**Reads data fields from specified raw-data stream.
+</span>*/
+parseRawDescriptors : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-getUsbDescriptorString'>/**Gets a string for the specified index from the USB Device's string descriptors.
+</span>*/
+getUsbDescriptorString : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-report'>/**
+</span>*/
+report : function(  ) {},
+
+<span id='com-android-server-usb-descriptors-UsbDescriptor-method-shortReport'>/**
+</span>*/
+shortReport : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

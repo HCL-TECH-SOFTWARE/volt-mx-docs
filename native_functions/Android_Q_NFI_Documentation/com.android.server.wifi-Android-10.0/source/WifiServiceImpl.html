@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiServiceImpl'>/**@class com.android.server.wifi.WifiServiceImpl
+</span>@extends com.android.server.wifi.BaseWifiService
+
+ WifiService handles remote WiFi operation requests by implementing
+ the IWifiManager interface.
+
+ @hide
+*/
+var WifiServiceImpl = {
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-setWifiHandlerLogForTest'>/**Provide a way for unit tests to set valid log object in the WifiHandler
+</span>@param {Object {WifiLog}} log WifiLog object to assign to the clientHandler
+*/
+setWifiHandlerLogForTest : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-checkAndStartWifi'>/**Check if we are ready to start wifi.
+</span>
+ First check if we will be restarting system services to decrypt the device. If the device is
+ not encrypted, check if Wi-Fi needs to be enabled and start if needed
+
+ This function is used only at boot time.
+*/
+checkAndStartWifi : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-handleBootCompleted'>/**
+</span>*/
+handleBootCompleted : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-handleUserSwitch'>/**
+</span>*/
+handleUserSwitch : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-handleUserUnlock'>/**
+</span>*/
+handleUserUnlock : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-handleUserStop'>/**
+</span>*/
+handleUserStop : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-startScan'>/**See {@link android.net.wifi.WifiManager#startScan}
+</span>@param {String} packageName Package name of the app that requests wifi scan.
+*/
+startScan : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getCurrentNetworkWpsNfcConfigurationToken'>/**WPS support in Client mode is deprecated.  Return null.
+</span>*/
+getCurrentNetworkWpsNfcConfigurationToken : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-setWifiEnabled'>/**see {@link android.net.wifi.WifiManager#setWifiEnabled(boolean)}
+</span>@param {String} enable {@code true} to enable, {@code false} to disable.
+@return {Boolean} {@code true} if the enable/disable operation was
+         started or is already in the queue.
+*/
+setWifiEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getWifiEnabledState'>/**see {@link WifiManager#getWifiState()}
+</span>@return {Number} One of {@link WifiManager#WIFI_STATE_DISABLED},
+         {@link WifiManager#WIFI_STATE_DISABLING},
+         {@link WifiManager#WIFI_STATE_ENABLED},
+         {@link WifiManager#WIFI_STATE_ENABLING},
+         {@link WifiManager#WIFI_STATE_UNKNOWN}
+*/
+getWifiEnabledState : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getWifiApEnabledState'>/**see {@link WifiManager#getWifiApState()}
+</span>@return {Number} One of {@link WifiManager#WIFI_AP_STATE_DISABLED},
+         {@link WifiManager#WIFI_AP_STATE_DISABLING},
+         {@link WifiManager#WIFI_AP_STATE_ENABLED},
+         {@link WifiManager#WIFI_AP_STATE_ENABLING},
+         {@link WifiManager#WIFI_AP_STATE_FAILED}
+*/
+getWifiApEnabledState : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-updateInterfaceIpState'>/**see {@link android.net.wifi.WifiManager#updateInterfaceIpState(String, int)}
+</span>
+ The possible modes include: {@link WifiManager#IFACE_IP_MODE_TETHERED},
+                             {@link WifiManager#IFACE_IP_MODE_LOCAL_ONLY},
+                             {@link WifiManager#IFACE_IP_MODE_CONFIGURATION_ERROR}
+@param {String} ifaceName String name of the updated interface
+@param {Number} mode new operating mode of the interface
+@throws SecurityException if the caller does not have permission to call update
+*/
+updateInterfaceIpState : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-startSoftAp'>/**see {@link android.net.wifi.WifiManager#startSoftAp(WifiConfiguration)}
+</span>@param {Object {WifiConfiguration}} wifiConfig SSID, security and channel details as part of WifiConfiguration
+@return {Boolean} {@code true} if softap start was triggered
+@throws SecurityException if the caller does not have permission to start softap
+*/
+startSoftAp : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-stopSoftAp'>/**see {@link android.net.wifi.WifiManager#stopSoftAp()}
+</span>@return {Boolean} {@code true} if softap stop was triggered
+@throws SecurityException if the caller does not have permission to stop softap
+*/
+stopSoftAp : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-registerSoftApCallback'>/**see {@link android.net.wifi.WifiManager#registerSoftApCallback(SoftApCallback, Handler)}
+</span>@param {Object {IBinder}} binder IBinder instance to allow cleanup if the app dies
+@param {Object {ISoftApCallback}} callback Soft AP callback to register
+@param {Number} callbackIdentifier Unique ID of the registering callback. This ID will be used to
+        unregister the callback. See {@link unregisterSoftApCallback(int)}
+@throws SecurityException if the caller does not have permission to register a callback
+@throws RemoteException if remote exception happens
+@throws IllegalArgumentException if the arguments are null or invalid
+*/
+registerSoftApCallback : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-unregisterSoftApCallback'>/**see {@link android.net.wifi.WifiManager#unregisterSoftApCallback(SoftApCallback)}
+</span>@param {Number} callbackIdentifier Unique ID of the callback to be unregistered.
+@throws SecurityException if the caller does not have permission to register a callback
+*/
+unregisterSoftApCallback : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-startLocalOnlyHotspot'>/**Method to start LocalOnlyHotspot.  In this method, permissions, settings and modes are
+</span> checked to verify that we can enter softapmode.  This method returns
+ {@link LocalOnlyHotspotCallback#REQUEST_REGISTERED} if we will attempt to start, otherwise,
+ possible startup erros may include tethering being disallowed failure reason {@link LocalOnlyHotspotCallback#ERROR_TETHERING_DISALLOWED} or an incompatible mode failure reason
+ {@link LocalOnlyHotspotCallback#ERROR_INCOMPATIBLE_MODE}.
+
+ see {@link WifiManager#startLocalOnlyHotspot(LocalOnlyHotspotCallback)}
+@param {Object {Messenger}} messenger Messenger to send messages to the corresponding WifiManager.
+@param {Object {IBinder}} binder IBinder instance to allow cleanup if the app dies
+@param {String} packageName String name of the calling package
+@return {Number} int return code for attempt to start LocalOnlyHotspot.
+@throws SecurityException if the caller does not have permission to start a Local Only
+ Hotspot.
+@throws IllegalStateException if the caller attempts to start the LocalOnlyHotspot while they
+ have an outstanding request.
+*/
+startLocalOnlyHotspot : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-stopLocalOnlyHotspot'>/**see {@link WifiManager#stopLocalOnlyHotspot()}
+</span>@throws SecurityException if the caller does not have permission to stop a Local Only
+ Hotspot.
+*/
+stopLocalOnlyHotspot : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-startWatchLocalOnlyHotspot'>/**see {@link WifiManager#watchLocalOnlyHotspot(LocalOnlyHotspotObserver)}
+</span>
+ This call requires the android.permission.NETWORK_SETTINGS permission.
+@param {Object {Messenger}} messenger Messenger to send messages to the corresponding WifiManager.
+@param {Object {IBinder}} binder IBinder instance to allow cleanup if the app dies
+@throws SecurityException if the caller does not have permission to watch Local Only Hotspot
+ status updates.
+@throws IllegalStateException if the caller attempts to watch LocalOnlyHotspot updates with
+ an existing subscription.
+*/
+startWatchLocalOnlyHotspot : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-stopWatchLocalOnlyHotspot'>/**see {@link WifiManager#unregisterLocalOnlyHotspotObserver()}
+</span>*/
+stopWatchLocalOnlyHotspot : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getWifiApConfiguration'>/**see {@link WifiManager#getWifiApConfiguration()}
+</span>@return {Object {android.net.wifi.WifiConfiguration}} soft access point configuration
+@throws SecurityException if the caller does not have permission to retrieve the softap
+ config
+*/
+getWifiApConfiguration : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-setWifiApConfiguration'>/**see {@link WifiManager#setWifiApConfiguration(WifiConfiguration)}
+</span>@param {Object {WifiConfiguration}} wifiConfig WifiConfiguration details for soft access point
+@return {Boolean} boolean indicating success or failure of the operation
+@throws SecurityException if the caller does not have permission to write the softap config
+*/
+setWifiApConfiguration : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-notifyUserOfApBandConversion'>/**Method used to inform user of Ap Configuration conversion due to hardware.
+</span>*/
+notifyUserOfApBandConversion : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-isScanAlwaysAvailable'>/**see {@link android.net.wifi.WifiManager#isScanAlwaysAvailable()}
+</span>*/
+isScanAlwaysAvailable : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-disconnect'>/**see {@link android.net.wifi.WifiManager#disconnect()}
+</span>*/
+disconnect : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-reconnect'>/**see {@link android.net.wifi.WifiManager#reconnect()}
+</span>*/
+reconnect : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-reassociate'>/**see {@link android.net.wifi.WifiManager#reassociate()}
+</span>*/
+reassociate : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getSupportedFeatures'>/**see {@link android.net.wifi.WifiManager#getSupportedFeatures}
+</span>*/
+getSupportedFeatures : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-requestActivityInfo'>/**
+</span>*/
+requestActivityInfo : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-reportActivityInfo'>/**see {@link android.net.wifi.WifiManager#getControllerActivityEnergyInfo(int)}
+</span>*/
+reportActivityInfo : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getConfiguredNetworks'>/**see {@link android.net.wifi.WifiManager#getConfiguredNetworks()}
+</span>@param {String} packageName String name of the calling package
+@return {Object {android.content.pm.ParceledListSlice}} the list of configured networks
+*/
+getConfiguredNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getPrivilegedConfiguredNetworks'>/**see {@link android.net.wifi.WifiManager#getPrivilegedConfiguredNetworks()}
+</span>@param {String} packageName String name of the calling package
+@return {Object {android.content.pm.ParceledListSlice}} the list of configured networks with real preSharedKey
+*/
+getPrivilegedConfiguredNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getAllMatchingFqdnsForScanResults'>/**Returns the list of FQDN (Fully Qualified Domain Name) to installed Passpoint configurations.
+</span>
+ Return the map of all matching configurations with corresponding scanResults (or an empty map
+ if none).
+@param {Object {java.util.List}} scanResults The list of scan results
+@return {Object {java.util.Map}} Map that consists of FQDN (Fully Qualified Domain Name) and corresponding
+ scanResults per network type({@link WifiManager#PASSPOINT_HOME_NETWORK} and {@link
+ WifiManager#PASSPOINT_ROAMING_NETWORK}).
+*/
+getAllMatchingFqdnsForScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getMatchingOsuProviders'>/**Returns list of OSU (Online Sign-Up) providers associated with the given list of ScanResult.
+</span>@param {Object {java.util.List}} scanResults a list of ScanResult that has Passpoint APs.
+@return {Object {java.util.Map}} Map that consists of {@link OsuProvider} and a matching list of {@link ScanResult}.
+*/
+getMatchingOsuProviders : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getMatchingPasspointConfigsForOsuProviders'>/**Returns the matching Passpoint configurations for given OSU(Online Sign-Up) providers.
+</span>@param {Object {java.util.List}} osuProviders a list of {@link OsuProvider}
+@return {Object {java.util.Map}} Map that consists of {@link OsuProvider} and matching {@link PasspointConfiguration}.
+*/
+getMatchingPasspointConfigsForOsuProviders : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getWifiConfigsForPasspointProfiles'>/**Returns the corresponding wifi configurations for given FQDN (Fully Qualified Domain Name)
+</span> list.
+
+ An empty list will be returned when no match is found.
+@param {Object {java.util.List}} fqdnList a list of FQDN
+@return {Object {java.util.List}} List of {@link WifiConfiguration} converted from {@link PasspointProvider}
+*/
+getWifiConfigsForPasspointProfiles : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-addOrUpdateNetwork'>/**see {@link android.net.wifi.WifiManager#addOrUpdateNetwork(WifiConfiguration)}
+</span>@return {Number} the supplicant-assigned identifier for the new or updated
+ network if the operation succeeds, or {@code -1} if it fails
+*/
+addOrUpdateNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-verifyCert'>/**
+</span>*/
+verifyCert : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-removeNetwork'>/**See {@link android.net.wifi.WifiManager#removeNetwork(int)}
+</span>@param {Number} netId the integer that identifies the network configuration
+ to the supplicant
+@return {Boolean} {@code true} if the operation succeeded
+*/
+removeNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-enableNetwork'>/**See {@link android.net.wifi.WifiManager#enableNetwork(int, boolean)}
+</span>@param {Number} netId the integer that identifies the network configuration
+ to the supplicant
+@param {Boolean} disableOthers if true, disable all other networks.
+@return {Boolean} {@code true} if the operation succeeded
+*/
+enableNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-disableNetwork'>/**See {@link android.net.wifi.WifiManager#disableNetwork(int)}
+</span>@param {Number} netId the integer that identifies the network configuration
+ to the supplicant
+@return {Boolean} {@code true} if the operation succeeded
+*/
+disableNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getConnectionInfo'>/**See {@link android.net.wifi.WifiManager#getConnectionInfo()}
+</span>@return {Object {android.net.wifi.WifiInfo}} the Wi-Fi information, contained in {@link WifiInfo}.
+*/
+getConnectionInfo : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getScanResults'>/**Return the results of the most recent access point scan, in the form of
+</span> a list of {@link ScanResult} objects.
+@return {Object {java.util.List}} the list of results
+*/
+getScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-addOrUpdatePasspointConfiguration'>/**Add or update a Passpoint configuration.
+</span>@param {Object {PasspointConfiguration}} config The Passpoint configuration to be added
+@return {Boolean} true on success or false on failure
+*/
+addOrUpdatePasspointConfiguration : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-removePasspointConfiguration'>/**Remove the Passpoint configuration identified by its FQDN (Fully Qualified Domain Name).
+</span>@param {String} fqdn The FQDN of the Passpoint configuration to be removed
+@return {Boolean} true on success or false on failure
+*/
+removePasspointConfiguration : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getPasspointConfigurations'>/**Return the list of the installed Passpoint configurations.
+</span>
+ An empty list will be returned when no configuration is installed.
+@param {String} packageName String name of the calling package
+@return {Object {java.util.List}} A list of {@link PasspointConfiguration}.
+*/
+getPasspointConfigurations : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-queryPasspointIcon'>/**Query for a Hotspot 2.0 release 2 OSU icon
+</span>@param {Number} bssid The BSSID of the AP
+@param {String} fileName Icon file name
+*/
+queryPasspointIcon : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-matchProviderWithCurrentNetwork'>/**Match the currently associated network against the SP matching the given FQDN
+</span>@param {String} fqdn FQDN of the SP
+@return {Number} ordinal [HomeProvider, RoamingProvider, Incomplete, None, Declined]
+*/
+matchProviderWithCurrentNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-deauthenticateNetwork'>/**Deauthenticate and set the re-authentication hold off time for the current network
+</span>@param {Number} holdoff hold off time in milliseconds
+@param {Boolean} ess set if the hold off pertains to an ESS rather than a BSS
+*/
+deauthenticateNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-setCountryCode'>/**Set the country code
+</span>@param {String} countryCode ISO 3166 country code.
+*/
+setCountryCode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getCountryCode'>/**Get the country code
+</span>@return {String} Get the best choice country code for wifi, regardless of if it was set or
+ not.
+ Returns null when there is no country code available.
+*/
+getCountryCode : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-isDualBandSupported'>/**
+</span>*/
+isDualBandSupported : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-needs5GHzToAnyApBandConversion'>/**Method allowing callers with NETWORK_SETTINGS permission to check if this is a dual mode
+</span> capable device (STA+AP).
+@return {Boolean} true if a dual mode capable device
+*/
+needs5GHzToAnyApBandConversion : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getDhcpInfo'>/**Return the DHCP-assigned addresses from the last successful DHCP request,
+</span> if any.
+@return {Object {android.net.DhcpInfo}} the DHCP information
+@deprecated 
+*/
+getDhcpInfo : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-enableTdls'>/**
+</span>*/
+enableTdls : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-enableTdlsWithMacAddress'>/**
+</span>*/
+enableTdlsWithMacAddress : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getWifiServiceMessenger'>/**Get a reference to handler. This is used by a client to establish
+</span> an AsyncChannel communication with WifiService
+*/
+getWifiServiceMessenger : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-disableEphemeralNetwork'>/**Disable an ephemeral network, i.e. network that is created thru a WiFi Scorer
+</span>*/
+disableEphemeralNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-onShellCommand'>/**
+</span>*/
+onShellCommand : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-acquireWifiLock'>/**
+</span>*/
+acquireWifiLock : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-updateWifiLockWorkSource'>/**
+</span>*/
+updateWifiLockWorkSource : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-releaseWifiLock'>/**
+</span>*/
+releaseWifiLock : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-initializeMulticastFiltering'>/**
+</span>*/
+initializeMulticastFiltering : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-acquireMulticastLock'>/**
+</span>*/
+acquireMulticastLock : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-releaseMulticastLock'>/**
+</span>*/
+releaseMulticastLock : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-isMulticastEnabled'>/**
+</span>*/
+isMulticastEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-enableVerboseLogging'>/**
+</span>*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getVerboseLoggingLevel'>/**
+</span>*/
+getVerboseLoggingLevel : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-factoryReset'>/**
+</span>*/
+factoryReset : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getCurrentNetwork'>/**
+</span>*/
+getCurrentNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-toHexString'>/**
+</span>*/
+toHexString : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-enableWifiConnectivityManager'>/**Enable/disable WifiConnectivityManager at runtime
+</span>@param {Boolean} enabled true-enable; false-disable
+*/
+enableWifiConnectivityManager : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-retrieveBackupData'>/**Retrieve the data to be backed to save the current state.
+</span>@return {Number} Raw byte stream of the data to be backed up.
+*/
+retrieveBackupData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-restoreBackupData'>/**Restore state from the backed up data.
+</span>@param {Object {byte[]}} data Raw byte stream of the backed up data.
+*/
+restoreBackupData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-restoreSupplicantBackupData'>/**Restore state from the older supplicant back up data.
+</span> The old backup data was essentially a backup of wpa_supplicant.conf &amp; ipconfig.txt file.
+@param {Object {byte[]}} supplicantData Raw byte stream of wpa_supplicant.conf
+@param {Object {byte[]}} ipConfigData Raw byte stream of ipconfig.txt
+*/
+restoreSupplicantBackupData : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-startSubscriptionProvisioning'>/**Starts subscription provisioning with a provider.
+</span>@param {Object {OsuProvider}} provider {@link OsuProvider} the provider to provision with
+@param {Object {IProvisioningCallback}} callback {@link IProvisioningCallback} the callback object to inform status
+*/
+startSubscriptionProvisioning : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-registerTrafficStateCallback'>/**see {@link android.net.wifi.WifiManager#registerTrafficStateCallback(
+</span> WifiManager.TrafficStateCallback, Handler)}
+@param {Object {IBinder}} binder IBinder instance to allow cleanup if the app dies
+@param {Object {ITrafficStateCallback}} callback Traffic State callback to register
+@param {Number} callbackIdentifier Unique ID of the registering callback. This ID will be used to
+        unregister the callback. See {@link unregisterTrafficStateCallback(int)}
+@throws SecurityException if the caller does not have permission to register a callback
+@throws RemoteException if remote exception happens
+@throws IllegalArgumentException if the arguments are null or invalid
+*/
+registerTrafficStateCallback : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-unregisterTrafficStateCallback'>/**see {@link android.net.wifi.WifiManager#unregisterTrafficStateCallback(
+</span> WifiManager.TrafficStateCallback)}
+@param {Number} callbackIdentifier Unique ID of the callback to be unregistered.
+@throws SecurityException if the caller does not have permission to register a callback
+*/
+unregisterTrafficStateCallback : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-registerNetworkRequestMatchCallback'>/**see {@link android.net.wifi.WifiManager#registerNetworkRequestMatchCallback(
+</span> WifiManager.NetworkRequestMatchCallback, Handler)} (
+@param {Object {IBinder}} binder IBinder instance to allow cleanup if the app dies
+@param {Object {INetworkRequestMatchCallback}} callback Network Request Match callback to register
+@param {Number} callbackIdentifier Unique ID of the registering callback. This ID will be used to
+                           unregister the callback.
+                           See {@link #unregisterNetworkRequestMatchCallback(int)} (int)}
+@throws SecurityException if the caller does not have permission to register a callback
+@throws RemoteException if remote exception happens
+@throws IllegalArgumentException if the arguments are null or invalid
+*/
+registerNetworkRequestMatchCallback : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-unregisterNetworkRequestMatchCallback'>/**see {@link android.net.wifi.WifiManager#unregisterNetworkRequestMatchCallback(
+</span> WifiManager.NetworkRequestMatchCallback)}
+@param {Number} callbackIdentifier Unique ID of the callback to be unregistered.
+@throws SecurityException if the caller does not have permission to register a callback
+*/
+unregisterNetworkRequestMatchCallback : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-addNetworkSuggestions'>/**See {@link android.net.wifi.WifiManager#addNetworkSuggestions(List)}
+</span>@param {Object {java.util.List}} networkSuggestions List of network suggestions to be added.
+@param {String} callingPackageName Package Name of the app adding the suggestions.
+@throws SecurityException if the caller does not have permission.
+@return {Number} One of status codes from {@link WifiManager.NetworkSuggestionsStatusCode}.
+*/
+addNetworkSuggestions : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-removeNetworkSuggestions'>/**See {@link android.net.wifi.WifiManager#removeNetworkSuggestions(List)}
+</span>@param {Object {java.util.List}} networkSuggestions List of network suggestions to be removed.
+@param {String} callingPackageName Package Name of the app removing the suggestions.
+@throws SecurityException if the caller does not have permission.
+@return {Number} One of status codes from {@link WifiManager.NetworkSuggestionsStatusCode}.
+*/
+removeNetworkSuggestions : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getFactoryMacAddresses'>/**Gets the factory Wi-Fi MAC addresses.
+</span>@throws SecurityException if the caller does not have permission.
+@return {String} Array of String representing Wi-Fi MAC addresses, or null if failed.
+*/
+getFactoryMacAddresses : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-setDeviceMobilityState'>/**Sets the current device mobility state.
+</span>@param {Number} state the new device mobility state
+*/
+setDeviceMobilityState : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-getMockableCallingUid'>/**Proxy for the final native call of the parent class. Enables mocking of
+</span> the function.
+*/
+getMockableCallingUid : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-startDppAsConfiguratorInitiator'>/**Start DPP in Configurator-Initiator role. The current device will initiate DPP bootstrapping
+</span> with a peer, and send the SSID and password of the selected network.
+@param {Object {IBinder}} binder Caller's binder context
+@param {String} enrolleeUri URI of the Enrollee obtained externally (e.g. QR code scanning)
+@param {Number} selectedNetworkId Selected network ID to be sent to the peer
+@param {Number} netRole The network role of the enrollee
+@param {Object {IDppCallback}} callback Callback for status updates
+*/
+startDppAsConfiguratorInitiator : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-startDppAsEnrolleeInitiator'>/**Start DPP in Enrollee-Initiator role. The current device will initiate DPP bootstrapping
+</span> with a peer, and receive the SSID and password from the peer configurator.
+@param {Object {IBinder}} binder Caller's binder context
+@param {String} configuratorUri URI of the Configurator obtained externally (e.g. QR code scanning)
+@param {Object {IDppCallback}} callback Callback for status updates
+*/
+startDppAsEnrolleeInitiator : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-stopDppSession'>/**Stop or abort a current DPP session.
+</span>*/
+stopDppSession : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-addOnWifiUsabilityStatsListener'>/**see {@link android.net.wifi.WifiManager#addOnWifiUsabilityStatsListener(Executor,
+</span> OnWifiUsabilityStatsListener)}
+@param {Object {IBinder}} binder IBinder instance to allow cleanup if the app dies
+@param {Object {IOnWifiUsabilityStatsListener}} listener WifiUsabilityStatsEntry listener to add
+@param {Number} listenerIdentifier Unique ID of the adding listener. This ID will be used to
+        remove the listener. See {@link removeOnWifiUsabilityStatsListener(int)}
+@throws SecurityException if the caller does not have permission to add a listener
+@throws RemoteException if remote exception happens
+@throws IllegalArgumentException if the arguments are null or invalid
+*/
+addOnWifiUsabilityStatsListener : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-removeOnWifiUsabilityStatsListener'>/**see {@link android.net.wifi.WifiManager#removeOnWifiUsabilityStatsListener(
+</span> OnWifiUsabilityStatsListener)}
+@param {Number} listenerIdentifier Unique ID of the listener to be removed.
+@throws SecurityException if the caller does not have permission to add a listener
+*/
+removeOnWifiUsabilityStatsListener : function(  ) {},
+
+<span id='com-android-server-wifi-WifiServiceImpl-method-updateWifiUsabilityScore'>/**Updates the Wi-Fi usability score.
+</span>@param {Number} seqNum Sequence number of the Wi-Fi usability score.
+@param {Number} score The Wi-Fi usability score.
+@param {Number} predictionHorizonSec Prediction horizon of the Wi-Fi usability score in second.
+*/
+updateWifiUsabilityScore : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

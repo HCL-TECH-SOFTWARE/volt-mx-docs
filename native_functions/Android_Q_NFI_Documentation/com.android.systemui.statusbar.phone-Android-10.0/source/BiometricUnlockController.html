@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-statusbar-phone-BiometricUnlockController'>/**@class com.android.systemui.statusbar.phone.BiometricUnlockController
+</span>@extends com.android.keyguard.KeyguardUpdateMonitorCallback
+
+ Controller which coordinates all the biometric unlocking actions with the UI.
+*/
+var BiometricUnlockController = {
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-property-MODE_NONE'>/** Mode in which we don't need to wake up the device when we authenticate.
+</span>*/
+MODE_NONE : &quot;0&quot;,
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-property-MODE_WAKE_AND_UNLOCK'>/** Mode in which we wake up the device, and directly dismiss Keyguard. Active when we acquire
+</span> a fingerprint while the screen is off and the device was sleeping.
+*/
+MODE_WAKE_AND_UNLOCK : &quot;1&quot;,
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-property-MODE_WAKE_AND_UNLOCK_PULSING'>/** Mode in which we wake the device up, and fade out the Keyguard contents because they were
+</span> already visible while pulsing in doze mode.
+*/
+MODE_WAKE_AND_UNLOCK_PULSING : &quot;2&quot;,
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-property-MODE_SHOW_BOUNCER'>/** Mode in which we wake up the device, but play the normal dismiss animation. Active when we
+</span> acquire a fingerprint pulsing in doze mode.
+*/
+MODE_SHOW_BOUNCER : &quot;3&quot;,
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-property-MODE_ONLY_WAKE'>/** Mode in which we only wake up the device, and keyguard was not showing when we authenticated.
+</span> */
+MODE_ONLY_WAKE : &quot;4&quot;,
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-property-MODE_UNLOCK'>/** Mode in which fingerprint unlocks the device.
+</span>*/
+MODE_UNLOCK : &quot;5&quot;,
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-property-MODE_DISMISS_BOUNCER'>/** Mode in which fingerprint brings up the bouncer because fingerprint unlocking is currently
+</span> not allowed.
+*/
+MODE_DISMISS_BOUNCER : &quot;6&quot;,
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-property-MODE_WAKE_AND_UNLOCK_FROM_DREAM'>/** Mode in which fingerprint wakes and unlocks the device from a dream.
+</span>*/
+MODE_WAKE_AND_UNLOCK_FROM_DREAM : &quot;7&quot;,
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-setStatusBarKeyguardViewManager'>/**
+</span>*/
+setStatusBarKeyguardViewManager : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-onBiometricAcquired'>/**
+</span>*/
+onBiometricAcquired : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-onBiometricAuthenticated'>/**
+</span>*/
+onBiometricAuthenticated : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-startWakeAndUnlock'>/**
+</span>*/
+startWakeAndUnlock : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-onStartedGoingToSleep'>/**
+</span>*/
+onStartedGoingToSleep : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-onFinishedGoingToSleep'>/**
+</span>*/
+onFinishedGoingToSleep : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-hasPendingAuthentication'>/**
+</span>*/
+hasPendingAuthentication : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-getMode'>/**
+</span>*/
+getMode : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-onBiometricAuthFailed'>/**
+</span>*/
+onBiometricAuthFailed : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-onBiometricError'>/**
+</span>*/
+onBiometricError : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-startKeyguardFadingAway'>/**
+</span>*/
+startKeyguardFadingAway : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-finishKeyguardFadingAway'>/**
+</span>*/
+finishKeyguardFadingAway : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-hasScreenTurnedOnSinceAuthenticating'>/**
+</span>*/
+hasScreenTurnedOnSinceAuthenticating : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-isWakeAndUnlock'>/**Successful authentication with fingerprint, face, or iris that wakes up the device.
+</span>*/
+isWakeAndUnlock : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-unlockedByWakeAndUnlock'>/**Successful authentication with fingerprint, face, or iris that wakes up the device.
+</span> This will return {@code true} even after the keyguard fades away.
+*/
+unlockedByWakeAndUnlock : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-BiometricUnlockController-method-isBiometricUnlock'>/**Successful authentication with fingerprint, face, or iris when the screen was either
+</span> on or off.
+*/
+isBiometricUnlock : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

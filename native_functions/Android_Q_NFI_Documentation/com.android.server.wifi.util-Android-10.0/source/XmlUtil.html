@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-util-XmlUtil'>/**@class com.android.server.wifi.util.XmlUtil
+</span>@extends java.lang.Object
+
+ Utils for manipulating XML data. This is essentially a wrapper over XmlUtils provided by core.
+ The utility provides methods to write/parse section headers and write/parse values.
+ This utility is designed for formatting the XML into the following format:
+ &lt;Document Header&gt;
+  &lt;Section 1 Header&gt;
+   &lt;Value 1&gt;
+   &lt;Value 2&gt;
+   ...
+   &lt;Sub Section 1 Header&gt;
+    &lt;Value 1&gt;
+    &lt;Value 2&gt;
+    ...
+   &lt;/Sub Section 1 Header&gt;
+  &lt;/Section 1 Header&gt;
+ &lt;/Document Header&gt;
+
+ Note: These utility methods are meant to be used for:
+ 1. Backup/restore wifi network data to/from cloud.
+ 2. Persisting wifi network data to/from disk.
+*/
+var XmlUtil = {
+
+<span id='com-android-server-wifi-util-XmlUtil-method-gotoDocumentStart'>/**Start processing the XML stream at the document header.
+</span>@param {Object {XmlPullParser}} in         XmlPullParser instance pointing to the XML stream.
+@param {String} headerName expected name for the start tag.
+@throws XmlPullParserException if parsing errors occur.
+*/
+gotoDocumentStart : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-gotoNextSectionOrEnd'>/**Move the XML stream to the next section header or indicate if there are no more sections.
+</span> The provided outerDepth is used to find sub sections within that depth.
+
+ Use this to move across sections if the ordering of sections are variable. The returned name
+ can be used to decide what section is next.
+@param {Object {XmlPullParser}} in         XmlPullParser instance pointing to the XML stream.
+@param {Object {java.lang.String[]}} headerName An array of one string, used to return the name of the next section.
+@param {Number} outerDepth Find section within this depth.
+@return {Boolean} {@code true} if a next section is found, {@code false} if there are no more sections.
+@throws XmlPullParserException if parsing errors occur.
+*/
+gotoNextSectionOrEnd : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-gotoNextSectionWithNameOrEnd'>/**Move the XML stream to the next section header or indicate if there are no more sections.
+</span> If a section, exists ensure that the name matches the provided name.
+ The provided outerDepth is used to find sub sections within that depth.
+
+ Use this to move across repeated sections until the end.
+@param {Object {XmlPullParser}} in           XmlPullParser instance pointing to the XML stream.
+@param {String} expectedName expected name for the section header.
+@param {Number} outerDepth   Find section within this depth.
+@return {Boolean} {@code true} if a next section is found, {@code false} if there are no more sections.
+@throws XmlPullParserException if the section header name does not match |expectedName|,
+                                or if parsing errors occur.
+*/
+gotoNextSectionWithNameOrEnd : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-gotoNextSectionWithName'>/**Move the XML stream to the next section header and ensure that the name matches the provided
+</span> name.
+ The provided outerDepth is used to find sub sections within that depth.
+
+ Use this to move across sections if the ordering of sections are fixed.
+@param {Object {XmlPullParser}} in           XmlPullParser instance pointing to the XML stream.
+@param {String} expectedName expected name for the section header.
+@param {Number} outerDepth   Find section within this depth.
+@throws XmlPullParserException if the section header name does not match |expectedName|,
+                                there are no more sections or if parsing errors occur.
+*/
+gotoNextSectionWithName : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-isNextSectionEnd'>/**Checks if the stream is at the end of a section of values. This moves the stream to next tag
+</span> and checks if it finds an end tag at the specified depth.
+@param {Object {XmlPullParser}} in           XmlPullParser instance pointing to the XML stream.
+@param {Number} sectionDepth depth of the start tag of this section. Used to match the end tag.
+@return {Boolean} {@code true} if a end tag at the provided depth is found, {@code false} otherwise
+@throws XmlPullParserException if parsing errors occur.
+*/
+isNextSectionEnd : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-readCurrentValue'>/**Read the current value in the XML stream using core XmlUtils and stores the retrieved
+</span> value name in the string provided. This method reads the value contained in current start
+ tag.
+ Note: Because there could be genuine null values being read from the XML, this method raises
+ an exception to indicate errors.
+@param {Object {XmlPullParser}} in        XmlPullParser instance pointing to the XML stream.
+@param {Object {java.lang.String[]}} valueName An array of one string, used to return the name attribute
+                  of the value's tag.
+@return {Object {java.lang.Object}} value retrieved from the XML stream.
+@throws XmlPullParserException if parsing errors occur.
+*/
+readCurrentValue : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-readNextValueWithName'>/**Read the next value in the XML stream using core XmlUtils and ensure that it matches the
+</span> provided name. This method moves the stream to the next start tag and reads the value
+ contained in it.
+ Note: Because there could be genuine null values being read from the XML, this method raises
+ an exception to indicate errors.
+@param {Object {XmlPullParser}} in XmlPullParser instance pointing to the XML stream.
+@return {Object {java.lang.Object}} value retrieved from the XML stream.
+@throws XmlPullParserException if the value read does not match |expectedName|,
+                                or if parsing errors occur.
+*/
+readNextValueWithName : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-writeDocumentStart'>/**Write the XML document start with the provided document header name.
+</span>@param {Object {XmlSerializer}} out        XmlSerializer instance pointing to the XML stream.
+@param {String} headerName name for the start tag.
+*/
+writeDocumentStart : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-writeDocumentEnd'>/**Write the XML document end with the provided document header name.
+</span>@param {Object {XmlSerializer}} out        XmlSerializer instance pointing to the XML stream.
+@param {String} headerName name for the end tag.
+*/
+writeDocumentEnd : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-writeNextSectionStart'>/**Write a section start header tag with the provided section name.
+</span>@param {Object {XmlSerializer}} out        XmlSerializer instance pointing to the XML stream.
+@param {String} headerName name for the start tag.
+*/
+writeNextSectionStart : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-writeNextSectionEnd'>/**Write a section end header tag with the provided section name.
+</span>@param {Object {XmlSerializer}} out        XmlSerializer instance pointing to the XML stream.
+@param {String} headerName name for the end tag.
+*/
+writeNextSectionEnd : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-method-writeNextValue'>/**Write the value with the provided name in the XML stream using core XmlUtils.
+</span>@param {Object {XmlSerializer}} out   XmlSerializer instance pointing to the XML stream.
+@param {String} name  name of the value.
+@param {Object {Object}} value value to be written.
+*/
+writeNextValue : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

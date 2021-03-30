@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wm-ActivityTaskManagerInternal'>/**@class com.android.server.wm.ActivityTaskManagerInternal
+</span>@extends java.lang.Object
+
+ Activity Task manager local system service interface.
+ @hide Only for use within system server
+*/
+var ActivityTaskManagerInternal = {
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-APP_TRANSITION_SPLASH_SCREEN'>/** Type for {@link #notifyAppTransitionStarting}: The transition was started because we drew
+</span> the splash screen.
+*/
+APP_TRANSITION_SPLASH_SCREEN : &quot;null&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-APP_TRANSITION_WINDOWS_DRAWN'>/** Type for {@link #notifyAppTransitionStarting}: The transition was started because we all
+</span> app windows were drawn
+*/
+APP_TRANSITION_WINDOWS_DRAWN : &quot;null&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-APP_TRANSITION_TIMEOUT'>/** Type for {@link #notifyAppTransitionStarting}: The transition was started because of a
+</span> timeout.
+*/
+APP_TRANSITION_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-APP_TRANSITION_SNAPSHOT'>/** Type for {@link #notifyAppTransitionStarting}: The transition was started because of a
+</span> we drew a task snapshot.
+*/
+APP_TRANSITION_SNAPSHOT : &quot;null&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-APP_TRANSITION_RECENTS_ANIM'>/** Type for {@link #notifyAppTransitionStarting}: The transition was started because it was a
+</span> recents animation and we only needed to wait on the wallpaper.
+*/
+APP_TRANSITION_RECENTS_ANIM : &quot;null&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-ASSIST_TASK_ID'>/** The id of the task source of assist state.
+</span>*/
+ASSIST_TASK_ID : &quot;taskId&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-ASSIST_ACTIVITY_ID'>/** The id of the activity source of assist state.
+</span>*/
+ASSIST_ACTIVITY_ID : &quot;activityId&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-ASSIST_KEY_DATA'>/** The bundle key to extract the assist data.
+</span>*/
+ASSIST_KEY_DATA : &quot;data&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-ASSIST_KEY_STRUCTURE'>/** The bundle key to extract the assist structure.
+</span>*/
+ASSIST_KEY_STRUCTURE : &quot;structure&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-ASSIST_KEY_CONTENT'>/** The bundle key to extract the assist content.
+</span>*/
+ASSIST_KEY_CONTENT : &quot;content&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-property-ASSIST_KEY_RECEIVER_EXTRAS'>/** The bundle key to extract the assist receiver extras.
+</span>*/
+ASSIST_KEY_RECEIVER_EXTRAS : &quot;receiverExtras&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-acquireSleepToken'>/**Acquires a sleep token for the specified display with the specified tag.
+</span>@param {String} tag A string identifying the purpose of the token (eg. &quot;Dream&quot;).
+@param {Number} displayId The display to apply the sleep token to.
+*/
+acquireSleepToken : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getHomeActivityForUser'>/**Returns home activity for the specified user.
+</span>@param {Number} userId ID of the user or {@link android.os.UserHandle#USER_ALL}
+*/
+getHomeActivityForUser : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onLocalVoiceInteractionStarted'>/**
+</span>*/
+onLocalVoiceInteractionStarted : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-notifyAppTransitionStarting'>/**Callback for window manager to let activity manager know that we are finally starting the
+</span> app transition;
+@param {Object {SparseIntArray}} reasons A map from windowing mode to a reason integer why the transition was started,
+                which must be one of the APP_TRANSITION_* values.
+@param {Number} timestamp The time at which the app transition started in
+                  {@link SystemClock#uptimeMillis()} timebase.
+*/
+notifyAppTransitionStarting : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-notifyAppTransitionCancelled'>/**Callback for window manager to let activity manager know that the app transition was
+</span> cancelled.
+*/
+notifyAppTransitionCancelled : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-notifyAppTransitionFinished'>/**Callback for window manager to let activity manager know that the app transition is finished.
+</span>*/
+notifyAppTransitionFinished : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getTopVisibleActivities'>/**Returns the top activity from each of the currently visible stacks. The first entry will be
+</span> the focused activity.
+*/
+getTopVisibleActivities : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-notifyDockedStackMinimizedChanged'>/**Callback for window manager to let activity manager know that docked stack changes its
+</span> minimized state.
+*/
+notifyDockedStackMinimizedChanged : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-startActivitiesAsPackage'>/**Start activity {@code intents} as if {@code packageName} on user {@code userId} did it.
+</span>
+ - DO NOT call it with the calling UID cleared.
+ - All the necessary caller permission checks must be done at callsites.
+@return {Number} error codes used by {@link IActivityManager#startActivity} and its siblings.
+*/
+startActivitiesAsPackage : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-startActivitiesInPackage'>/**Start intents as a package.
+</span>@param {Number} uid Make a call as if this UID did.
+@param {Number} realCallingPid PID of the real caller.
+@param {Number} realCallingUid UID of the real caller.
+@param {String} callingPackage Make a call as if this package did.
+@param {Object {android.content.Intent[]}} intents Intents to start.
+@param {Object {java.lang.String[]}} userId Start the intents on this user.
+@param {Object {IBinder}} validateIncomingUser Set true to skip checking {@code userId} with the calling UID.
+@param {Object {SafeActivityOptions}} originatingPendingIntent PendingIntentRecord that originated this activity start or
+        null if not originated by PendingIntent
+@param {Number} allowBackgroundActivityStart Whether the background activity start should be allowed
+        from originatingPendingIntent
+*/
+startActivitiesInPackage : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-startActivityInPackage'>/**
+</span>*/
+startActivityInPackage : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-startActivityAsUser'>/**Start activity {@code intent} without calling user-id check.
+</span>
+ - DO NOT call it with the calling UID cleared.
+ - The caller must do the calling user ID check.
+@return {Number} error codes used by {@link IActivityManager#startActivity} and its siblings.
+*/
+startActivityAsUser : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-notifyKeyguardFlagsChanged'>/**Called when Keyguard flags might have changed.
+</span>@param {Object {Runnable}} callback Callback to run after activity visibilities have been reevaluated. This can
+                 be used from window manager so that when the callback is called, it's
+                 guaranteed that all apps have their visibility updated accordingly.
+@param {Number} displayId The id of the display where the keyguard flags changed.
+*/
+notifyKeyguardFlagsChanged : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-notifyKeyguardTrustedChanged'>/**Called when the trusted state of Keyguard has changed.
+</span>*/
+notifyKeyguardTrustedChanged : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-setVr2dDisplayId'>/**Called after virtual display Id is updated by
+</span> {@link com.android.server.vr.Vr2dDisplay} with a specific
+ {@param vr2dDisplayId}.
+*/
+setVr2dDisplayId : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-setFocusedActivity'>/**Set focus on an activity.
+</span>@param {Object {IBinder}} token The IApplicationToken for the activity
+*/
+setFocusedActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-registerScreenObserver'>/**
+</span>*/
+registerScreenObserver : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-isCallerRecents'>/**Returns is the caller has the same uid as the Recents component
+</span>*/
+isCallerRecents : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-isRecentsComponentHomeActivity'>/**Returns whether the recents component is the home activity for the given user.
+</span>*/
+isRecentsComponentHomeActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-cancelRecentsAnimation'>/**Cancels any currently running recents animation.
+</span>*/
+cancelRecentsAnimation : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-enforceCallerIsRecentsOrHasPermission'>/**This enforces {@code func} can only be called if either the caller is Recents activity or
+</span> has {@code permission}.
+*/
+enforceCallerIsRecentsOrHasPermission : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-notifyActiveVoiceInteractionServiceChanged'>/**Called after the voice interaction service has changed.
+</span>*/
+notifyActiveVoiceInteractionServiceChanged : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-setAllowAppSwitches'>/**Set a uid that is allowed to bypass stopped app switches, launching an app
+</span> whenever it wants.
+@param {String} type Type of the caller -- unique string the caller supplies to identify itself
+ and disambiguate with other calles.
+@param {Number} uid The uid of the app to be allowed, or -1 to clear the uid for this type.
+@param {Number} userId The user it is allowed for.
+*/
+setAllowAppSwitches : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onUserStopped'>/**Called when a user has been deleted. This can happen during normal device usage
+</span> or just at startup, when partially removed users are purged. Any state persisted by the
+ ActivityManager should be purged now.
+@param {Number} userId The user being cleaned up.
+*/
+onUserStopped : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-isGetTasksAllowed'>/**
+</span>*/
+isGetTasksAllowed : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onProcessAdded'>/**
+</span>*/
+onProcessAdded : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onProcessRemoved'>/**
+</span>*/
+onProcessRemoved : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onCleanUpApplicationRecord'>/**
+</span>*/
+onCleanUpApplicationRecord : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getTopProcessState'>/**
+</span>*/
+getTopProcessState : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-isHeavyWeightProcess'>/**
+</span>*/
+isHeavyWeightProcess : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-clearHeavyWeightProcessIfEquals'>/**
+</span>*/
+clearHeavyWeightProcessIfEquals : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-finishHeavyWeightApp'>/**
+</span>*/
+finishHeavyWeightApp : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-isSleeping'>/**
+</span>*/
+isSleeping : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-isShuttingDown'>/**
+</span>*/
+isShuttingDown : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-shuttingDown'>/**
+</span>*/
+shuttingDown : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-enableScreenAfterBoot'>/**
+</span>*/
+enableScreenAfterBoot : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-showStrictModeViolationDialog'>/**
+</span>*/
+showStrictModeViolationDialog : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-showSystemReadyErrorDialogsIfNeeded'>/**
+</span>*/
+showSystemReadyErrorDialogsIfNeeded : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onProcessMapped'>/**
+</span>*/
+onProcessMapped : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onProcessUnMapped'>/**
+</span>*/
+onProcessUnMapped : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onPackageDataCleared'>/**
+</span>*/
+onPackageDataCleared : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onPackageUninstalled'>/**
+</span>*/
+onPackageUninstalled : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onPackageAdded'>/**
+</span>*/
+onPackageAdded : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onPackageReplaced'>/**
+</span>*/
+onPackageReplaced : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-compatibilityInfoForPackage'>/**
+</span>*/
+compatibilityInfoForPackage : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onImeWindowSetOnDisplay'>/**Set the corresponding display information for the process global configuration. To be called
+</span> when we need to show IME on a different display.
+@param {Number} pid The process id associated with the IME window.
+@param {Number} displayId The ID of the display showing the IME.
+*/
+onImeWindowSetOnDisplay : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-sendActivityResult'>/**
+</span>*/
+sendActivityResult : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-clearPendingResultForActivity'>/**
+</span>*/
+clearPendingResultForActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getTopActivityForTask'>/**
+</span>@return {Object {com.android.server.wm.ActivityTaskManagerInternal.ActivityTokens}} the activity token and IApplicationThread for the top activity in the task or null
+ if there isn't a top activity with a valid process.
+*/
+getTopActivityForTask : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getIntentSender'>/**
+</span>*/
+getIntentSender : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getServiceConnectionsHolder'>/**
+</span>@return {Object {com.android.server.wm.ActivityServiceConnectionsHolder}} the service connection holder for a given activity token.
+*/
+getServiceConnectionsHolder : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getHomeIntent'>/**
+</span>@return {Object {android.content.Intent}} The intent used to launch the home activity.
+*/
+getHomeIntent : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-startHomeActivity'>/**
+</span>*/
+startHomeActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-startHomeOnDisplay'>/**This starts home activity on displays that can have system decorations based on displayId -
+</span> Default display always use primary home component.
+ For Secondary displays, the home activity must have category SECONDARY_HOME and then resolves
+ according to the priorities listed below.
+  - If default home is not set, always use the secondary home defined in the config.
+  - Use currently selected primary home activity.
+  - Use the activity in the same package as currently selected primary home activity.
+    If there are multiple activities matched, use first one.
+  - Use the secondary home defined in the config.
+*/
+startHomeOnDisplay : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-startHomeOnAllDisplays'>/**Start home activities on all displays that support system decorations.
+</span>*/
+startHomeOnAllDisplays : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-isFactoryTestProcess'>/**
+</span>@return {Boolean} true if the given process is the factory test process.
+*/
+isFactoryTestProcess : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-updateTopComponentForFactoryTest'>/**
+</span>*/
+updateTopComponentForFactoryTest : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-handleAppDied'>/**
+</span>*/
+handleAppDied : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-closeSystemDialogs'>/**
+</span>*/
+closeSystemDialogs : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-cleanupDisabledPackageComponents'>/**Removes all components (e.g. activities, recents, ...) belonging to a disabled package.
+</span>*/
+cleanupDisabledPackageComponents : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onForceStopPackage'>/**Called whenever AM force stops a package.
+</span>*/
+onForceStopPackage : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-resumeTopActivities'>/**Resumes all top activities in the system if they aren't resumed already.
+</span>@param {Boolean} scheduleIdle If the idle message should be schedule after the top activities are
+                     resumed.
+*/
+resumeTopActivities : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-preBindApplication'>/**Called by AM just before it binds to an application process.
+</span>*/
+preBindApplication : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-attachApplication'>/**Called by AM when an application process attaches.
+</span>*/
+attachApplication : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-notifyLockedProfile'>/**
+</span>@see IActivityManager#notifyLockedProfile(int)
+*/
+notifyLockedProfile : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-startConfirmDeviceCredentialIntent'>/**
+</span>@see IActivityManager#startConfirmDeviceCredentialIntent(Intent, Bundle)
+*/
+startConfirmDeviceCredentialIntent : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-writeActivitiesToProto'>/**Writes current activity states to the proto stream.
+</span>*/
+writeActivitiesToProto : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-saveANRState'>/**Saves the current activity manager state and includes the saved state in the next dump of
+</span> activity manager.
+*/
+saveANRState : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-clearSavedANRState'>/**Clears the previously saved activity manager ANR state.
+</span>*/
+clearSavedANRState : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-dump'>/**Dump the current state based on the command.
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-dumpForProcesses'>/**Dump the current state for inclusion in process dump.
+</span>*/
+dumpForProcesses : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-writeProcessesToProto'>/**Writes the current window process states to the proto stream.
+</span>*/
+writeProcessesToProto : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-dumpActivity'>/**Dump the current activities state.
+</span>*/
+dumpActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-dumpForOom'>/**Dump the current state for inclusion in oom dump.
+</span>*/
+dumpForOom : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-canGcNow'>/**
+</span>@return {Boolean} true if it the activity management system is okay with GC running now.
+*/
+canGcNow : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getTopApp'>/**
+</span>@return {Object {com.android.server.wm.WindowProcessController}} the process for the top-most resumed activity in the system.
+*/
+getTopApp : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-rankTaskLayersIfNeeded'>/**Generate oom-score-adjustment rank for all tasks in the system based on z-order.
+</span>*/
+rankTaskLayersIfNeeded : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-scheduleDestroyAllActivities'>/**Destroy all activities.
+</span>*/
+scheduleDestroyAllActivities : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-removeUser'>/**Remove user association with activities.
+</span>*/
+removeUser : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-switchUser'>/**Switch current focused user for activities.
+</span>*/
+switchUser : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onHandleAppCrash'>/**Called whenever an app crashes.
+</span>*/
+onHandleAppCrash : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-finishTopCrashedActivities'>/**Finish the topmost activities in all stacks that belong to the crashed app.
+</span>@param {Object {WindowProcessController}} crashedApp The app that crashed.
+@param {String} reason Reason to perform this action.
+@return {Number} The task id that was finished in this stack, or INVALID_TASK_ID if none was finished.
+*/
+finishTopCrashedActivities : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onUidActive'>/**
+</span>*/
+onUidActive : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onUidInactive'>/**
+</span>*/
+onUidInactive : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onActiveUidsCleared'>/**
+</span>*/
+onActiveUidsCleared : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onUidProcStateChanged'>/**
+</span>*/
+onUidProcStateChanged : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onUidAddedToPendingTempWhitelist'>/**
+</span>*/
+onUidAddedToPendingTempWhitelist : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onUidRemovedFromPendingTempWhitelist'>/**
+</span>*/
+onUidRemovedFromPendingTempWhitelist : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-handleAppCrashInActivityController'>/**Handle app crash event in {@link android.app.IActivityController} if there is one.
+</span>*/
+handleAppCrashInActivityController : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-removeRecentTasksByPackageName'>/**
+</span>*/
+removeRecentTasksByPackageName : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-cleanupRecentTasksForUser'>/**
+</span>*/
+cleanupRecentTasksForUser : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-loadRecentTasksForUser'>/**
+</span>*/
+loadRecentTasksForUser : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-onPackagesSuspendedChanged'>/**
+</span>*/
+onPackagesSuspendedChanged : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-flushRecentTasks'>/**Flush recent tasks to disk.
+</span>*/
+flushRecentTasks : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getHomeProcess'>/**
+</span>*/
+getHomeProcess : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getPreviousProcess'>/**
+</span>*/
+getPreviousProcess : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-clearLockedTasks'>/**
+</span>*/
+clearLockedTasks : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-updateUserConfiguration'>/**
+</span>*/
+updateUserConfiguration : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-canShowErrorDialogs'>/**
+</span>*/
+canShowErrorDialogs : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-setProfileApp'>/**
+</span>*/
+setProfileApp : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-setProfileProc'>/**
+</span>*/
+setProfileProc : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-setProfilerInfo'>/**
+</span>*/
+setProfilerInfo : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getLaunchObserverRegistry'>/**
+</span>*/
+getLaunchObserverRegistry : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-getTaskSnapshotNoRestore'>/**Gets bitmap snapshot of the provided task id.
+</span>*/
+getTaskSnapshotNoRestore : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-isUidForeground'>/**Returns true if uid is considered foreground for activity start purposes.
+</span>*/
+isUidForeground : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-setDeviceOwnerUid'>/**Called by DevicePolicyManagerService to set the uid of the device owner.
+</span>*/
+setDeviceOwnerUid : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerInternal-method-setCompanionAppPackages'>/**Set all associated companion app that belongs to an userId.
+</span>*/
+setCompanionAppPackages : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

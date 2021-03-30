@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-statusbar-NotificationLifetimeExtender'>/**@class com.android.systemui.statusbar.NotificationLifetimeExtender
+</span> Interface for anything that may need to keep notifications managed even after
+ {@link com.android.systemui.statusbar.NotificationListener} removes it.  The lifetime extender is in charge of performing the
+ callback when the notification is then safe to remove.
+*/
+var NotificationLifetimeExtender = {
+
+<span id='com-android-systemui-statusbar-NotificationLifetimeExtender-method-setCallback'>/**Set the handler to callback to when the notification is safe to remove.
+</span>@param {Object {NotificationLifetimeExtender.NotificationSafeToRemoveCallback}} callback the handler to callback
+*/
+setCallback : function(  ) {},
+
+<span id='com-android-systemui-statusbar-NotificationLifetimeExtender-method-shouldExtendLifetime'>/**Determines whether or not the extender needs the notification kept after removal.
+</span>@param {Object {NotificationEntry}} entry the entry containing the notification to check
+@return {Boolean} true if the notification lifetime should be extended
+*/
+shouldExtendLifetime : function(  ) {},
+
+<span id='com-android-systemui-statusbar-NotificationLifetimeExtender-method-setShouldManageLifetime'>/**Sets whether or not the lifetime should be managed by the extender.  In practice, if
+</span> shouldManage is true, this is where the extender starts managing the entry internally and is
+ now responsible for calling {@link com.android.systemui.statusbar.NotificationLifetimeExtender.NotificationSafeToRemoveCallback#onSafeToRemove(String)}
+ when the entry is safe to remove.  If shouldManage is false, the extender no longer needs to
+ worry about it (either because we will be removing it anyway or the entry is no longer
+ removed due to an update).
+@param {Object {NotificationEntry}} entry the entry that needs an extended lifetime
+@param {Boolean} shouldManage true if the extender should manage the entry now, false otherwise
+*/
+setShouldManageLifetime : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

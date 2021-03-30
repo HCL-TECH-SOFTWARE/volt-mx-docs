@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xml-sax-helpers-NamespaceSupport'>/**@class org.xml.sax.helpers.NamespaceSupport
+</span>@extends java.lang.Object
+
+ Encapsulate Namespace logic for use by applications using SAX,
+ or internally by SAX drivers.
+
+ &lt;blockquote&gt;
+ &lt;em&gt;This module, both source code and documentation, is in the
+ Public Domain, and comes with &lt;strong&gt;NO WARRANTY&lt;/strong&gt;.&lt;/em&gt;
+ See &lt;a href='http://www.saxproject.org'&gt;http://www.saxproject.org&lt;/a&gt;
+ for further information.
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;This class encapsulates the logic of Namespace processing: it
+ tracks the declarations currently in force for each context and
+ automatically processes qualified XML names into their Namespace
+ parts; it can also be used in reverse for generating XML qnames
+ from Namespaces.&lt;/p&gt;
+
+ &lt;p&gt;Namespace support objects are reusable, but the reset method
+ must be invoked between each session.&lt;/p&gt;
+
+ &lt;p&gt;Here is a simple session:&lt;/p&gt;
+
+ &lt;pre&gt;
+ String parts[] = new String[3];
+ NamespaceSupport support = new NamespaceSupport();
+
+ support.pushContext();
+ support.declarePrefix(&quot;&quot;, &quot;http://www.w3.org/1999/xhtml&quot;);
+ support.declarePrefix(&quot;dc&quot;, &quot;http://www.purl.org/dc#&quot;);
+
+ parts = support.processName(&quot;p&quot;, parts, false);
+ System.out.println(&quot;Namespace URI: &quot; + parts[0]);
+ System.out.println(&quot;Local name: &quot; + parts[1]);
+ System.out.println(&quot;Raw name: &quot; + parts[2]);
+
+ parts = support.processName(&quot;dc:title&quot;, parts, false);
+ System.out.println(&quot;Namespace URI: &quot; + parts[0]);
+ System.out.println(&quot;Local name: &quot; + parts[1]);
+ System.out.println(&quot;Raw name: &quot; + parts[2]);
+
+ support.popContext();
+ &lt;/pre&gt;
+
+ &lt;p&gt;Note that this class is optimized for the use case where most
+ elements do not contain Namespace declarations: if the same
+ prefix/URI mapping is repeated for each context (for example), this
+ class will be somewhat less efficient.&lt;/p&gt;
+
+ &lt;p&gt;Although SAX drivers (parsers) may choose to use this class to
+ implement namespace handling, they are not required to do so.
+ Applications must track namespace information themselves if they
+ want to use namespace information.
+
+ @since SAX 2.0
+ @author David Megginson
+ @version 2.0.1 (sax2r2)
+*/
+var NamespaceSupport = {
+
+<span id='org-xml-sax-helpers-NamespaceSupport-property-XMLNS'>/** The XML Namespace URI as a constant.
+</span> The value is &lt;code&gt;http://www.w3.org/XML/1998/namespace&lt;/code&gt;
+ as defined in the &quot;Namespaces in XML&quot; * recommendation.
+
+ &lt;p&gt;This is the Namespace URI that is automatically mapped
+ to the &quot;xml&quot; prefix.&lt;/p&gt;
+*/
+XMLNS : &quot;http://www.w3.org/XML/1998/namespace&quot;,
+<span id='org-xml-sax-helpers-NamespaceSupport-property-NSDECL'>/** The namespace declaration URI as a constant.
+</span> The value is &lt;code&gt;http://www.w3.org/xmlns/2000/&lt;/code&gt;, as defined
+ in a backwards-incompatible erratum to the &quot;Namespaces in XML&quot;
+ recommendation.  Because that erratum postdated SAX2, SAX2 defaults
+ to the original recommendation, and does not normally use this URI.
+
+
+ &lt;p&gt;This is the Namespace URI that is optionally applied to
+ &lt;em&gt;xmlns&lt;/em&gt; and &lt;em&gt;xmlns:*&lt;/em&gt; attributes, which are used to
+ declare namespaces.  &lt;/p&gt;
+
+ @since SAX 2.1alpha
+ @see #setNamespaceDeclUris
+ @see #isNamespaceDeclUris
+*/
+NSDECL : &quot;http://www.w3.org/xmlns/2000/&quot;,
+<span id='org-xml-sax-helpers-NamespaceSupport-method-reset'>/**Reset this Namespace support object for reuse.
+</span>
+ &lt;p&gt;It is necessary to invoke this method before reusing the
+ Namespace support object for a new session.  If namespace
+ declaration URIs are to be supported, that flag must also
+ be set to a non-default value.
+ &lt;/p&gt;
+@see #setNamespaceDeclUris
+*/
+reset : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-pushContext'>/**Start a new Namespace context.
+</span> The new context will automatically inherit
+ the declarations of its parent context, but it will also keep
+ track of which declarations were made within this context.
+
+ &lt;p&gt;Event callback code should start a new context once per element.
+ This means being ready to call this in either of two places.
+ For elements that don't include namespace declarations, the
+ &lt;em&gt;ContentHandler.startElement()&lt;/em&gt; callback is the right place.
+ For elements with such a declaration, it'd done in the first
+ &lt;em&gt;ContentHandler.startPrefixMapping()&lt;/em&gt; callback.
+ A boolean flag can be used to
+ track whether a context has been started yet.  When either of
+ those methods is called, it checks the flag to see if a new context
+ needs to be started.  If so, it starts the context and sets the
+ flag.  After &lt;em&gt;ContentHandler.startElement()&lt;/em&gt;
+ does that, it always clears the flag.
+
+ &lt;p&gt;Normally, SAX drivers would push a new context at the beginning
+ of each XML element.  Then they perform a first pass over the
+ attributes to process all namespace declarations, making
+ &lt;em&gt;ContentHandler.startPrefixMapping()&lt;/em&gt; callbacks.
+ Then a second pass is made, to determine the namespace-qualified
+ names for all attributes and for the element name.
+ Finally all the information for the
+ &lt;em&gt;ContentHandler.startElement()&lt;/em&gt; callback is available,
+ so it can then be made.
+
+ &lt;p&gt;The Namespace support object always starts with a base context
+ already in force: in this context, only the &quot;xml&quot; prefix is
+ declared.&lt;/p&gt;
+@see org.xml.sax.ContentHandler
+@see #popContext
+*/
+pushContext : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-popContext'>/**Revert to the previous Namespace context.
+</span>
+ &lt;p&gt;Normally, you should pop the context at the end of each
+ XML element.  After popping the context, all Namespace prefix
+ mappings that were previously in force are restored.&lt;/p&gt;
+
+ &lt;p&gt;You must not attempt to declare additional Namespace
+ prefixes after popping a context, unless you push another
+ context first.&lt;/p&gt;
+@see #pushContext
+*/
+popContext : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-declarePrefix'>/**Declare a Namespace prefix.  All prefixes must be declared
+</span> before they are referenced.  For example, a SAX driver (parser)
+ would scan an element's attributes
+ in two passes:  first for namespace declarations,
+ then a second pass using {@link #processName processName()} to
+ interpret prefixes against (potentially redefined) prefixes.
+
+ &lt;p&gt;This method declares a prefix in the current Namespace
+ context; the prefix will remain in force until this context
+ is popped, unless it is shadowed in a descendant context.&lt;/p&gt;
+
+ &lt;p&gt;To declare the default element Namespace, use the empty string as
+ the prefix.&lt;/p&gt;
+
+ &lt;p&gt;Note that you must &lt;em&gt;not&lt;/em&gt; declare a prefix after
+ you've pushed and popped another Namespace context, or
+ treated the declarations phase as complete by processing
+ a prefixed name.&lt;/p&gt;
+
+ &lt;p&gt;Note that there is an asymmetry in this library: {@link #getPrefix getPrefix} will not return the &quot;&quot; prefix,
+ even if you have declared a default element namespace.
+ To check for a default namespace,
+ you have to look it up explicitly using {@link #getURI getURI}.
+ This asymmetry exists to make it easier to look up prefixes
+ for attribute names, where the default prefix is not allowed.&lt;/p&gt;
+@param {String} prefix The prefix to declare, or the empty string to
+    indicate the default element namespace.  This may never have
+    the value &quot;xml&quot; or &quot;xmlns&quot;.
+@param {String} uri The Namespace URI to associate with the prefix.
+@return {Boolean} true if the prefix was legal, false otherwise
+@see #processName
+@see #getURI
+@see #getPrefix
+*/
+declarePrefix : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-processName'>/**Process a raw XML qualified name, after all declarations in the
+</span> current context have been handled by {@link #declarePrefix
+ declarePrefix()}.
+
+ &lt;p&gt;This method processes a raw XML qualified name in the
+ current context by removing the prefix and looking it up among
+ the prefixes currently declared.  The return value will be the
+ array supplied by the caller, filled in as follows:&lt;/p&gt;
+
+ &lt;dl&gt;
+ &lt;dt&gt;parts[0]&lt;/dt&gt;
+ &lt;dd&gt;The Namespace URI, or an empty string if none is
+  in use.&lt;/dd&gt;
+ &lt;dt&gt;parts[1]&lt;/dt&gt;
+ &lt;dd&gt;The local name (without prefix).&lt;/dd&gt;
+ &lt;dt&gt;parts[2]&lt;/dt&gt;
+ &lt;dd&gt;The original raw name.&lt;/dd&gt;
+ &lt;/dl&gt;
+
+ &lt;p&gt;All of the strings in the array will be internalized.  If
+ the raw name has a prefix that has not been declared, then
+ the return value will be null.&lt;/p&gt;
+
+ &lt;p&gt;Note that attribute names are processed differently than
+ element names: an unprefixed element name will receive the
+ default Namespace (if any), while an unprefixed attribute name
+ will not.&lt;/p&gt;
+@param {String} qName The XML qualified name to be processed.
+@param {Object {java.lang.String[]}} parts An array supplied by the caller, capable of
+        holding at least three members.
+@param {Boolean} isAttribute A flag indicating whether this is an
+        attribute name (true) or an element name (false).
+@return {String} The supplied array holding three internalized strings
+        representing the Namespace URI (or empty string), the
+        local name, and the XML qualified name; or null if there
+        is an undeclared prefix.
+@see #declarePrefix
+@see java.lang.String#intern
+*/
+processName : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-getURI'>/**Look up a prefix and get the currently-mapped Namespace URI.
+</span>
+ &lt;p&gt;This method looks up the prefix in the current context.
+ Use the empty string (&quot;&quot;) for the default Namespace.&lt;/p&gt;
+@param {String} prefix The prefix to look up.
+@return {String} The associated Namespace URI, or null if the prefix
+         is undeclared in this context.
+@see #getPrefix
+@see #getPrefixes
+*/
+getURI : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-getPrefixes'>/**Return an enumeration of all prefixes whose declarations are
+</span> active in the current context.
+ This includes declarations from parent contexts that have
+ not been overridden.
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; if there is a default prefix, it will not be
+ returned in this enumeration; check for the default prefix
+ using the {@link #getURI getURI} with an argument of &quot;&quot;.&lt;/p&gt;
+@return {Object {java.util.Enumeration}} An enumeration of prefixes (never empty).
+@see #getDeclaredPrefixes
+@see #getURI
+*/
+getPrefixes : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-getPrefix'>/**Return one of the prefixes mapped to a Namespace URI.
+</span>
+ &lt;p&gt;If more than one prefix is currently mapped to the same
+ URI, this method will make an arbitrary selection; if you
+ want all of the prefixes, use the {@link #getPrefixes}
+ method instead.&lt;/p&gt;
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; this will never return the empty (default) prefix;
+ to check for a default prefix, use the {@link #getURI getURI}
+ method with an argument of &quot;&quot;.&lt;/p&gt;
+@param {String} uri the namespace URI
+@return {String} one of the prefixes currently mapped to the URI supplied,
+         or null if none is mapped or if the URI is assigned to
+         the default namespace
+@see #getPrefixes(java.lang.String)
+@see #getURI
+*/
+getPrefix : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-getPrefixes'>/**Return an enumeration of all prefixes for a given URI whose
+</span> declarations are active in the current context.
+ This includes declarations from parent contexts that have
+ not been overridden.
+
+ &lt;p&gt;This method returns prefixes mapped to a specific Namespace
+ URI.  The xml: prefix will be included.  If you want only one
+ prefix that's mapped to the Namespace URI, and you don't care
+ which one you get, use the {@link #getPrefix getPrefix}
+  method instead.&lt;/p&gt;
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; the empty (default) prefix is &lt;em&gt;never&lt;/em&gt; included
+ in this enumeration; to check for the presence of a default
+ Namespace, use the {@link #getURI getURI} method with an
+ argument of &quot;&quot;.&lt;/p&gt;
+@param {String} uri The Namespace URI.
+@return {Object {java.util.Enumeration}} An enumeration of prefixes (never empty).
+@see #getPrefix
+@see #getDeclaredPrefixes
+@see #getURI
+*/
+getPrefixes : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-getDeclaredPrefixes'>/**Return an enumeration of all prefixes declared in this context.
+</span>
+ &lt;p&gt;The empty (default) prefix will be included in this
+ enumeration; note that this behaviour differs from that of
+ {@link #getPrefix} and {@link #getPrefixes}.&lt;/p&gt;
+@return {Object {java.util.Enumeration}} An enumeration of all prefixes declared in this
+         context.
+@see #getPrefixes
+@see #getURI
+*/
+getDeclaredPrefixes : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-setNamespaceDeclUris'>/**Controls whether namespace declaration attributes are placed
+</span> into the {@link #NSDECL NSDECL} namespace
+ by {@link #processName processName()}.  This may only be
+ changed before any contexts have been pushed.
+@param {Boolean} value the namespace declaration attribute state. A value of true
+              enables this feature, a value of false disables it.
+@since SAX 2.1alpha
+@exception IllegalStateException when attempting to set this
+    after any context has been pushed.
+*/
+setNamespaceDeclUris : function(  ) {},
+
+<span id='org-xml-sax-helpers-NamespaceSupport-method-isNamespaceDeclUris'>/**Returns true if namespace declaration attributes are placed into
+</span> a namespace.  This behavior is not the default.
+@return {Boolean} true if namespace declaration attributes are enabled, false
+         otherwise.
+@since SAX 2.1alpha
+*/
+isNamespaceDeclUris : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

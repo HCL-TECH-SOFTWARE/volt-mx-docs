@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-cert-PKIXParameters'>/**@class java.security.cert.PKIXParameters
+</span> implements java.security.cert.CertPathParameters
+
+@extends java.lang.Object
+
+ Parameters used as input for the PKIX {@code CertPathValidator}
+ algorithm.
+ &lt;p&gt;
+ A PKIX {@code CertPathValidator} uses these parameters to
+ validate a {@code CertPath} according to the PKIX certification path
+ validation algorithm.
+
+ &lt;p&gt;To instantiate a {@code PKIXParameters} object, an
+ application must specify one or more &lt;i&gt;most-trusted CAs&lt;/i&gt; as defined by
+ the PKIX certification path validation algorithm. The most-trusted CAs
+ can be specified using one of two constructors. An application
+ can call {@link #java.security.cert.PKIXParameters(Set) java.security.cert.PKIXParameters(Set)},
+ specifying a {@code Set} of {@code TrustAnchor} objects, each
+ of which identify a most-trusted CA. Alternatively, an application can call
+ {@link #java.security.cert.PKIXParameters(KeyStore) java.security.cert.PKIXParameters(KeyStore)}, specifying a
+ {@code KeyStore} instance containing trusted certificate entries, each
+ of which will be considered as a most-trusted CA.
+ &lt;p&gt;
+ Once a {@code PKIXParameters} object has been created, other parameters
+ can be specified (by calling {@link #setInitialPolicies setInitialPolicies}
+ or {@link #setDate setDate}, for instance) and then the
+ {@code PKIXParameters} is passed along with the {@code CertPath}
+ to be validated to {@link java.security.cert.CertPathValidator#validate
+ java.security.cert.CertPathValidator.validate}.
+ &lt;p&gt;
+ Any parameter that is not set (or is set to {@code null}) will
+ be set to the default value for that parameter. The default value for the
+ {@code date} parameter is {@code null}, which indicates
+ the current time when the path is validated. The default for the
+ remaining parameters is the least constrained.
+ &lt;p&gt;
+ &lt;b&gt;Concurrent Access&lt;/b&gt;
+ &lt;p&gt;
+ Unless otherwise specified, the methods defined in this class are not
+ thread-safe. Multiple threads that need to access a single
+ object concurrently should synchronize amongst themselves and
+ provide the necessary locking. Multiple threads each manipulating
+ separate objects need not synchronize.
+
+ @see CertPathValidator
+
+ @since       1.4
+ @author      Sean Mullan
+ @author      Yassir Elley
+*/
+var PKIXParameters = {
+
+<span id='java-security-cert-PKIXParameters-method-getTrustAnchors'>/**Returns an immutable {@code Set} of the most-trusted
+</span> CAs.
+@return {Object {java.util.Set}} an immutable {@code Set} of {@code TrustAnchor}s
+ (never {@code null})
+@see #setTrustAnchors
+*/
+getTrustAnchors : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setTrustAnchors'>/**Sets the {@code Set} of most-trusted CAs.
+</span> &lt;p&gt;
+ Note that the {@code Set} is copied to protect against
+ subsequent modifications.
+@param {Object {java.util.Set}} trustAnchors a {@code Set} of {@code TrustAnchor}s
+@throws InvalidAlgorithmParameterException if the specified
+ {@code Set} is empty {@code (trustAnchors.isEmpty() == true)}
+@throws NullPointerException if the specified {@code Set} is
+ {@code null}
+@throws ClassCastException if any of the elements in the set
+ are not of type {@code java.security.cert.TrustAnchor}
+@see #getTrustAnchors
+*/
+setTrustAnchors : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-getInitialPolicies'>/**Returns an immutable {@code Set} of initial
+</span> policy identifiers (OID strings), indicating that any one of these
+ policies would be acceptable to the certificate user for the purposes of
+ certification path processing. The default return value is an empty
+ {@code Set}, which is interpreted as meaning that any policy would
+ be acceptable.
+@return {Object {java.util.Set}} an immutable {@code Set} of initial policy OIDs in
+ {@code String} format, or an empty {@code Set} (implying any
+ policy is acceptable). Never returns {@code null}.
+@see #setInitialPolicies
+*/
+getInitialPolicies : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setInitialPolicies'>/**Sets the {@code Set} of initial policy identifiers
+</span> (OID strings), indicating that any one of these
+ policies would be acceptable to the certificate user for the purposes of
+ certification path processing. By default, any policy is acceptable
+ (i.e. all policies), so a user that wants to allow any policy as
+ acceptable does not need to call this method, or can call it
+ with an empty {@code Set} (or {@code null}).
+ &lt;p&gt;
+ Note that the {@code Set} is copied to protect against
+ subsequent modifications.
+@param {Object {java.util.Set}} initialPolicies a {@code Set} of initial policy
+ OIDs in {@code String} format (or {@code null})
+@throws ClassCastException if any of the elements in the set are
+ not of type {@code String}
+@see #getInitialPolicies
+*/
+setInitialPolicies : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setCertStores'>/**Sets the list of {@code CertStore}s to be used in finding
+</span> certificates and CRLs. May be {@code null}, in which case
+ no {@code CertStore}s will be used. The first
+ {@code CertStore}s in the list may be preferred to those that
+ appear later.
+ &lt;p&gt;
+ Note that the {@code List} is copied to protect against
+ subsequent modifications.
+@param {Object {java.util.List}} stores a {@code List} of {@code CertStore}s (or
+ {@code null})
+@throws ClassCastException if any of the elements in the list are
+ not of type {@code java.security.cert.CertStore}
+@see #getCertStores
+*/
+setCertStores : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-addCertStore'>/**Adds a {@code CertStore} to the end of the list of
+</span> {@code CertStore}s used in finding certificates and CRLs.
+@param {Object {CertStore}} store the {@code CertStore} to add. If {@code null},
+ the store is ignored (not added to list).
+*/
+addCertStore : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-getCertStores'>/**Returns an immutable {@code List} of {@code CertStore}s that
+</span> are used to find certificates and CRLs.
+@return {Object {java.util.List}} an immutable {@code List} of {@code CertStore}s
+ (may be empty, but never {@code null})
+@see #setCertStores
+*/
+getCertStores : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setRevocationEnabled'>/**Sets the RevocationEnabled flag. If this flag is true, the default
+</span> revocation checking mechanism of the underlying PKIX service provider
+ will be used. If this flag is false, the default revocation checking
+ mechanism will be disabled (not used).
+ &lt;p&gt;
+ When a {@code PKIXParameters} object is created, this flag is set
+ to true. This setting reflects the most common strategy for checking
+ revocation, since each service provider must support revocation
+ checking to be PKIX compliant. Sophisticated applications should set
+ this flag to false when it is not practical to use a PKIX service
+ provider's default revocation checking mechanism or when an alternative
+ revocation checking mechanism is to be substituted (by also calling the
+ {@link #addCertPathChecker addCertPathChecker} or {@link #setCertPathCheckers setCertPathCheckers} methods).
+@param {Boolean} val the new value of the RevocationEnabled flag
+*/
+setRevocationEnabled : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-isRevocationEnabled'>/**Checks the RevocationEnabled flag. If this flag is true, the default
+</span> revocation checking mechanism of the underlying PKIX service provider
+ will be used. If this flag is false, the default revocation checking
+ mechanism will be disabled (not used). See the {@link #setRevocationEnabled setRevocationEnabled} method for more details on
+ setting the value of this flag.
+@return {Boolean} the current value of the RevocationEnabled flag
+*/
+isRevocationEnabled : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setExplicitPolicyRequired'>/**Sets the ExplicitPolicyRequired flag. If this flag is true, an
+</span> acceptable policy needs to be explicitly identified in every certificate.
+ By default, the ExplicitPolicyRequired flag is false.
+@param {Boolean} val {@code true} if explicit policy is to be required,
+ {@code false} otherwise
+*/
+setExplicitPolicyRequired : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-isExplicitPolicyRequired'>/**Checks if explicit policy is required. If this flag is true, an
+</span> acceptable policy needs to be explicitly identified in every certificate.
+ By default, the ExplicitPolicyRequired flag is false.
+@return {Boolean} {@code true} if explicit policy is required,
+ {@code false} otherwise
+*/
+isExplicitPolicyRequired : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setPolicyMappingInhibited'>/**Sets the PolicyMappingInhibited flag. If this flag is true, policy
+</span> mapping is inhibited. By default, policy mapping is not inhibited (the
+ flag is false).
+@param {Boolean} val {@code true} if policy mapping is to be inhibited,
+ {@code false} otherwise
+*/
+setPolicyMappingInhibited : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-isPolicyMappingInhibited'>/**Checks if policy mapping is inhibited. If this flag is true, policy
+</span> mapping is inhibited. By default, policy mapping is not inhibited (the
+ flag is false).
+@return {Boolean} true if policy mapping is inhibited, false otherwise
+*/
+isPolicyMappingInhibited : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setAnyPolicyInhibited'>/**Sets state to determine if the any policy OID should be processed
+</span> if it is included in a certificate. By default, the any policy OID
+ is not inhibited ({@link #isAnyPolicyInhibited isAnyPolicyInhibited()}
+ returns {@code false}).
+@param {Boolean} val {@code true} if the any policy OID is to be
+ inhibited, {@code false} otherwise
+*/
+setAnyPolicyInhibited : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-isAnyPolicyInhibited'>/**Checks whether the any policy OID should be processed if it
+</span> is included in a certificate.
+@return {Boolean} {@code true} if the any policy OID is inhibited,
+ {@code false} otherwise
+*/
+isAnyPolicyInhibited : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setPolicyQualifiersRejected'>/**Sets the PolicyQualifiersRejected flag. If this flag is true,
+</span> certificates that include policy qualifiers in a certificate
+ policies extension that is marked critical are rejected.
+ If the flag is false, certificates are not rejected on this basis.
+
+ &lt;p&gt; When a {@code PKIXParameters} object is created, this flag is
+ set to true. This setting reflects the most common (and simplest)
+ strategy for processing policy qualifiers. Applications that want to use
+ a more sophisticated policy must set this flag to false.
+ &lt;p&gt;
+ Note that the PKIX certification path validation algorithm specifies
+ that any policy qualifier in a certificate policies extension that is
+ marked critical must be processed and validated. Otherwise the
+ certification path must be rejected. If the policyQualifiersRejected flag
+ is set to false, it is up to the application to validate all policy
+ qualifiers in this manner in order to be PKIX compliant.
+@param {Boolean} qualifiersRejected the new value of the PolicyQualifiersRejected
+ flag
+@see #getPolicyQualifiersRejected
+@see PolicyQualifierInfo
+*/
+setPolicyQualifiersRejected : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-getPolicyQualifiersRejected'>/**Gets the PolicyQualifiersRejected flag. If this flag is true,
+</span> certificates that include policy qualifiers in a certificate policies
+ extension that is marked critical are rejected.
+ If the flag is false, certificates are not rejected on this basis.
+
+ &lt;p&gt; When a {@code PKIXParameters} object is created, this flag is
+ set to true. This setting reflects the most common (and simplest)
+ strategy for processing policy qualifiers. Applications that want to use
+ a more sophisticated policy must set this flag to false.
+@return {Boolean} the current value of the PolicyQualifiersRejected flag
+@see #setPolicyQualifiersRejected
+*/
+getPolicyQualifiersRejected : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-getDate'>/**Returns the time for which the validity of the certification path
+</span> should be determined. If {@code null}, the current time is used.
+ &lt;p&gt;
+ Note that the {@code Date} returned is copied to protect against
+ subsequent modifications.
+@return {Object {java.util.Date}} the {@code Date}, or {@code null} if not set
+@see #setDate
+*/
+getDate : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setDate'>/**Sets the time for which the validity of the certification path
+</span> should be determined. If {@code null}, the current time is used.
+ &lt;p&gt;
+ Note that the {@code Date} supplied here is copied to protect
+ against subsequent modifications.
+@param {Object {Date}} date the {@code Date}, or {@code null} for the
+ current time
+@see #getDate
+*/
+setDate : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setCertPathCheckers'>/**Sets a {@code List} of additional certification path checkers. If
+</span> the specified {@code List} contains an object that is not a
+ {@code PKIXCertPathChecker}, it is ignored.
+ &lt;p&gt;
+ Each {@code PKIXCertPathChecker} specified implements
+ additional checks on a certificate. Typically, these are checks to
+ process and verify private extensions contained in certificates.
+ Each {@code PKIXCertPathChecker} should be instantiated with any
+ initialization parameters needed to execute the check.
+ &lt;p&gt;
+ This method allows sophisticated applications to extend a PKIX
+ {@code CertPathValidator} or {@code CertPathBuilder}.
+ Each of the specified {@code PKIXCertPathChecker}s will be called,
+ in turn, by a PKIX {@code CertPathValidator} or
+ {@code CertPathBuilder} for each certificate processed or
+ validated.
+ &lt;p&gt;
+ Regardless of whether these additional {@code PKIXCertPathChecker}s
+ are set, a PKIX {@code CertPathValidator} or
+ {@code CertPathBuilder} must perform all of the required PKIX
+ checks on each certificate. The one exception to this rule is if the
+ RevocationEnabled flag is set to false (see the {@link #setRevocationEnabled setRevocationEnabled} method).
+ &lt;p&gt;
+ Note that the {@code List} supplied here is copied and each
+ {@code PKIXCertPathChecker} in the list is cloned to protect
+ against subsequent modifications.
+@param {Object {java.util.List}} checkers a {@code List} of {@code PKIXCertPathChecker}s.
+ May be {@code null}, in which case no additional checkers will be
+ used.
+@throws ClassCastException if any of the elements in the list
+ are not of type {@code java.security.cert.PKIXCertPathChecker}
+@see #getCertPathCheckers
+*/
+setCertPathCheckers : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-getCertPathCheckers'>/**Returns the {@code List} of certification path checkers.
+</span> The returned {@code List} is immutable, and each
+ {@code PKIXCertPathChecker} in the {@code List} is cloned
+ to protect against subsequent modifications.
+@return {Object {java.util.List}} an immutable {@code List} of
+ {@code PKIXCertPathChecker}s (may be empty, but not
+ {@code null})
+@see #setCertPathCheckers
+*/
+getCertPathCheckers : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-addCertPathChecker'>/**Adds a {@code PKIXCertPathChecker} to the list of certification
+</span> path checkers. See the {@link #setCertPathCheckers setCertPathCheckers}
+ method for more details.
+ &lt;p&gt;
+ Note that the {@code PKIXCertPathChecker} is cloned to protect
+ against subsequent modifications.
+@param {Object {PKIXCertPathChecker}} checker a {@code PKIXCertPathChecker} to add to the list of
+ checks. If {@code null}, the checker is ignored (not added to list).
+*/
+addCertPathChecker : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-getSigProvider'>/**Returns the signature provider's name, or {@code null}
+</span> if not set.
+@return {String} the signature provider's name (or {@code null})
+@see #setSigProvider
+*/
+getSigProvider : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setSigProvider'>/**Sets the signature provider's name. The specified provider will be
+</span> preferred when creating {@link java.security.Signature Signature}
+ objects. If {@code null} or not set, the first provider found
+ supporting the algorithm will be used.
+@param {String} sigProvider the signature provider's name (or {@code null})
+@see #getSigProvider
+*/
+setSigProvider : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-getTargetCertConstraints'>/**Returns the required constraints on the target certificate.
+</span> The constraints are returned as an instance of {@code CertSelector}.
+ If {@code null}, no constraints are defined.
+
+ &lt;p&gt;Note that the {@code CertSelector} returned is cloned
+ to protect against subsequent modifications.
+@return {Object {java.security.cert.CertSelector}} a {@code CertSelector} specifying the constraints
+ on the target certificate (or {@code null})
+@see #setTargetCertConstraints
+*/
+getTargetCertConstraints : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-setTargetCertConstraints'>/**Sets the required constraints on the target certificate.
+</span> The constraints are specified as an instance of
+ {@code CertSelector}. If {@code null}, no constraints are
+ defined.
+
+ &lt;p&gt;Note that the {@code CertSelector} specified is cloned
+ to protect against subsequent modifications.
+@param {Object {CertSelector}} selector a {@code CertSelector} specifying the constraints
+ on the target certificate (or {@code null})
+@see #getTargetCertConstraints
+*/
+setTargetCertConstraints : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-clone'>/**Makes a copy of this {@code PKIXParameters} object. Changes
+</span> to the copy will not affect the original and vice versa.
+@return {Object {java.lang.Object}} a copy of this {@code PKIXParameters} object
+*/
+clone : function(  ) {},
+
+<span id='java-security-cert-PKIXParameters-method-toString'>/**Returns a formatted string describing the parameters.
+</span>@return {String} a formatted string describing the parameters.
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-setupwizardlib-util-WizardManagerHelper'>/**@class com.android.setupwizardlib.util.WizardManagerHelper
+</span>@extends java.lang.Object
+
+ Helper to interact with Wizard Manager in setup wizard, which should be used when a screen is
+ shown inside the setup flow. This includes things like parsing extras passed by Wizard Manager,
+ and invoking Wizard Manager to start the next action.
+*/
+var WizardManagerHelper = {
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-EXTRA_IS_SETUP_FLOW'>/***/
+</span>EXTRA_IS_SETUP_FLOW : &quot;isSetupFlow&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-EXTRA_THEME'>/***/
+</span>EXTRA_THEME : &quot;theme&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-EXTRA_USE_IMMERSIVE_MODE'>/***/
+</span>EXTRA_USE_IMMERSIVE_MODE : &quot;useImmersiveMode&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-SETTINGS_GLOBAL_DEVICE_PROVISIONED'>/***/
+</span>SETTINGS_GLOBAL_DEVICE_PROVISIONED : &quot;device_provisioned&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-SETTINGS_SECURE_USER_SETUP_COMPLETE'>/***/
+</span>SETTINGS_SECURE_USER_SETUP_COMPLETE : &quot;user_setup_complete&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-THEME_HOLO'>/***/
+</span>THEME_HOLO : &quot;holo&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-THEME_HOLO_LIGHT'>/***/
+</span>THEME_HOLO_LIGHT : &quot;holo_light&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-THEME_MATERIAL'>/***/
+</span>THEME_MATERIAL : &quot;material&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-THEME_MATERIAL_LIGHT'>/***/
+</span>THEME_MATERIAL_LIGHT : &quot;material_light&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-THEME_GLIF'>/** Passed in a setup wizard intent as {@link #EXTRA_THEME}. This is the dark variant of the theme
+</span> used in setup wizard for Nougat MR1.
+*/
+THEME_GLIF : &quot;glif&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-THEME_GLIF_LIGHT'>/** Passed in a setup wizard intent as {@link #EXTRA_THEME}. This is the default theme used in
+</span> setup wizard for Nougat MR1.
+*/
+THEME_GLIF_LIGHT : &quot;glif_light&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-THEME_GLIF_V2'>/** Passed in a setup wizard intent as {@link #EXTRA_THEME}. This is the dark variant of the theme
+</span> used in setup wizard for O DR.
+*/
+THEME_GLIF_V2 : &quot;glif_v2&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-THEME_GLIF_V2_LIGHT'>/** Passed in a setup wizard intent as {@link #EXTRA_THEME}. This is the default theme used in
+</span> setup wizard for O DR.
+*/
+THEME_GLIF_V2_LIGHT : &quot;glif_v2_light&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-THEME_GLIF_V3'>/** Passed in a setup wizard intent as {@link #EXTRA_THEME}. This is the dark variant of the theme
+</span> used in setup wizard for P.
+*/
+THEME_GLIF_V3 : &quot;glif_v3&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-property-THEME_GLIF_V3_LIGHT'>/** Passed in a setup wizard intent as {@link #EXTRA_THEME}. This is the default theme used in
+</span> setup wizard for P.
+*/
+THEME_GLIF_V3_LIGHT : &quot;glif_v3_light&quot;,
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-getNextIntent'>/**Get an intent that will invoke the next step of setup wizard.
+</span>@param {Object {Intent}} originalIntent The original intent that was used to start the step, usually via {@link
+     android.app.Activity#getIntent()}.
+@param {Number} resultCode The result code of the step. See {@link ResultCodes}.
+@return {Object {android.content.Intent}} A new intent that can be used with {@link
+     android.app.Activity#startActivityForResult(Intent, int)} to start the next step of the
+     setup flow.
+*/
+getNextIntent : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-getNextIntent'>/**Get an intent that will invoke the next step of setup wizard.
+</span>@param {Object {Intent}} originalIntent The original intent that was used to start the step, usually via {@link
+     android.app.Activity#getIntent()}.
+@param {Number} resultCode The result code of the step. See {@link ResultCodes}.
+@param {Object {Intent}} data An intent containing extra result data.
+@return {Object {android.content.Intent}} A new intent that can be used with {@link
+     android.app.Activity#startActivityForResult(Intent, int)} to start the next step of the
+     setup flow.
+*/
+getNextIntent : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-copyWizardManagerExtras'>/**Copy the internal extras used by setup wizard from one intent to another. For low-level use
+</span> only, such as when using {@link Intent#FLAG_ACTIVITY_FORWARD_RESULT} to relay to another
+ intent.
+@param {Object {Intent}} srcIntent Intent to get the wizard manager extras from.
+@param {Object {Intent}} dstIntent Intent to copy the wizard manager extras to.
+*/
+copyWizardManagerExtras : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-isSetupWizardIntent'>/**Check whether an intent is intended to be used within the setup wizard flow.
+</span>@param {Object {Intent}} intent The intent to be checked, usually from {@link android.app.Activity#getIntent()}.
+@return {Boolean} true if the intent passed in was intended to be used with setup wizard.
+*/
+isSetupWizardIntent : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-isUserSetupComplete'>/**Checks whether the current user has completed Setup Wizard. This is true if the current user
+</span> has gone through Setup Wizard. The current user may or may not be the device owner and the
+ device owner may have already completed setup wizard.
+@param {Object {Context}} context The context to retrieve the settings.
+@return {Boolean} true if the current user has completed Setup Wizard.
+@see #isDeviceProvisioned(android.content.Context)
+*/
+isUserSetupComplete : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-isDeviceProvisioned'>/**Checks whether the device is provisioned. This means that the device has gone through Setup
+</span> Wizard at least once. Note that the user can still be in Setup Wizard even if this is true, for
+ a secondary user profile triggered through Settings &gt; Add account.
+@param {Object {Context}} context The context to retrieve the settings.
+@return {Boolean} true if the device is provisioned.
+@see #isUserSetupComplete(android.content.Context)
+*/
+isDeviceProvisioned : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-isDeferredSetupWizard'>/**Checks whether an intent is running in the deferred setup wizard flow.
+</span>@param {Object {Intent}} originalIntent The original intent that was used to start the step, usually via {@link
+     android.app.Activity#getIntent()}.
+@return {Boolean} true if the intent passed in was running in deferred setup wizard.
+*/
+isDeferredSetupWizard : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-isPreDeferredSetupWizard'>/**Checks whether an intent is running in &quot;pre-deferred&quot; setup wizard flow.
+</span>@param {Object {Intent}} originalIntent The original intent that was used to start the step, usually via {@link
+     android.app.Activity#getIntent()}.
+@return {Boolean} true if the intent passed in was running in &quot;pre-deferred&quot; setup wizard.
+*/
+isPreDeferredSetupWizard : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-isLightTheme'>/**Checks the intent whether the extra indicates that the light theme should be used or not. If
+</span> the theme is not specified in the intent, or the theme specified is unknown, the value def will
+ be returned. Note that day-night themes are not taken into account by this method.
+@param {Object {Intent}} intent The intent used to start the activity, which the theme extra will be read from.
+@param {Boolean} def The default value if the theme is not specified.
+@return {Boolean} True if the activity started by the given intent should use light theme.
+*/
+isLightTheme : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-isLightTheme'>/**Checks whether {@code theme} represents a light or dark theme. If the theme specified is
+</span> unknown, the value def will be returned. Note that day-night themes are not taken into account
+ by this method.
+@param {String} theme The theme as specified from an intent sent from setup wizard.
+@param {Boolean} def The default value if the theme is not known.
+@return {Boolean} True if {@code theme} represents a light theme.
+*/
+isLightTheme : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-getThemeRes'>/**Gets the theme style resource defined by this library for the theme specified in the given
+</span> intent. For example, for THEME_GLIF_LIGHT, the theme @style/SuwThemeGlif.Light is returned.
+@param {Object {Intent}} intent The intent passed by setup wizard, or one with the theme propagated along using
+     {@link #copyWizardManagerExtras(Intent, Intent)}.
+@return {Number} The style corresponding to the theme in the given intent, or {@code defaultTheme} if
+     the given theme is not recognized.
+@see #getThemeRes(String, int)
+@deprecated it is recommended to use {@link ThemeResolver} which allows setting the default
+     theme in one place and applying it to multiple screens.
+*/
+getThemeRes : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-getThemeRes'>/**Gets the theme style resource defined by this library for the theme specified in the given
+</span> intent. For example, for THEME_GLIF_LIGHT, the theme @style/SuwThemeGlif.Light is returned.
+@param {Object {Intent}} intent The intent passed by setup wizard, or one with the theme propagated along using
+     {@link #copyWizardManagerExtras(Intent, Intent)}.
+@return {Number} The style corresponding to the theme in the given intent, or {@code defaultTheme} if
+     the given theme is not recognized. Return the {@code defaultTheme} if the specified theme
+     is older than the oldest supported one.
+@see #getThemeRes(String, int)
+@deprecated it is recommended to use {@link ThemeResolver} which allows setting the default
+     theme and oldest supported theme in one place and applying it to multiple screens.
+*/
+getThemeRes : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-getThemeRes'>/**Gets the theme style resource defined by this library for the given theme name. For example,
+</span> for THEME_GLIF_LIGHT, the theme @style/SuwThemeGlif.Light is returned.
+
+ &lt;p&gt;If you require extra theme attributes but want to ensure forward compatibility with new
+ themes added here, consider overriding {@link android.app.Activity#onApplyThemeResource} in
+ your activity and call {@link Theme#applyStyle(int, boolean)} using your theme overlay.
+
+ &lt;pre&gt;{@code
+ protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
+     super.onApplyThemeResource(theme, resid, first);
+     theme.applyStyle(R.style.MyThemeOverlay, true);
+ }
+ }&lt;/pre&gt;
+@param {String} theme The string representation of the theme.
+@return {Number} The style corresponding to the given {@code theme}, or {@code defaultTheme} if the
+     given theme is not recognized.
+@deprecated it is recommended to use {@link ThemeResolver} which allows setting the default
+     theme in one place and applying it to multiple screens.
+*/
+getThemeRes : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-getThemeRes'>/**Gets the theme style resource defined by this library for the given theme name. For example,
+</span> for THEME_GLIF_LIGHT, the theme @style/SuwThemeGlif.Light is returned.
+
+ &lt;p&gt;If you require extra theme attributes but want to ensure forward compatibility with new
+ themes added here, consider overriding {@link android.app.Activity#onApplyThemeResource} in
+ your activity and call {@link Theme#applyStyle(int, boolean)} using your theme overlay.
+
+ &lt;pre&gt;{@code
+ protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
+     super.onApplyThemeResource(theme, resid, first);
+     theme.applyStyle(R.style.MyThemeOverlay, true);
+ }
+ }&lt;/pre&gt;
+@param {String} theme The string representation of the theme.
+@return {Number} The style corresponding to the given {@code theme}, or {@code defaultTheme} if the
+     given theme is not recognized.
+@deprecated it is recommended to use {@link ThemeResolver} which allows setting the default
+     theme in one place and applying it to multiple screens.
+*/
+getThemeRes : function(  ) {},
+
+<span id='com-android-setupwizardlib-util-WizardManagerHelper-method-applyTheme'>/**Reads the theme from the intent, and applies the theme to the activity as resolved by {@link com.android.setupwizardlib.util.ThemeResolver#getDefault()}.
+</span>
+ &lt;p&gt;If you require extra theme attributes, consider overriding {@link android.app.Activity#onApplyThemeResource} in your activity and call {@link Theme#applyStyle(int, boolean)} using your theme overlay.
+
+ &lt;pre&gt;{@code
+ protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
+     super.onApplyThemeResource(theme, resid, first);
+     theme.applyStyle(R.style.MyThemeOverlay, true);
+ }
+ }&lt;/pre&gt;
+@param {Object {Activity}} activity the activity to get the intent from and apply the resulting theme to.
+*/
+applyTheme : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

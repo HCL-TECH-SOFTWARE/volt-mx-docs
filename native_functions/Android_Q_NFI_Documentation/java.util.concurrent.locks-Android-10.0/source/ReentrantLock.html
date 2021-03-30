@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-locks-ReentrantLock'>/**@class java.util.concurrent.locks.ReentrantLock
+</span> implements java.util.concurrent.locks.Lock
+
+ implements java.io.Serializable
+
+@extends java.lang.Object
+
+ A reentrant mutual exclusion {@link java.util.concurrent.locks.Lock} with the same basic
+ behavior and semantics as the implicit monitor lock accessed using
+ {@code synchronized} methods and statements, but with extended
+ capabilities.
+
+ &lt;p&gt;A {@code ReentrantLock} is &lt;em&gt;owned&lt;/em&gt; by the thread last
+ successfully locking, but not yet unlocking it. A thread invoking
+ {@code lock} will return, successfully acquiring the lock, when
+ the lock is not owned by another thread. The method will return
+ immediately if the current thread already owns the lock. This can
+ be checked using methods {@link #isHeldByCurrentThread}, and {@link #getHoldCount}.
+
+ &lt;p&gt;The constructor for this class accepts an optional
+ &lt;em&gt;fairness&lt;/em&gt; parameter.  When set {@code true}, under
+ contention, locks favor granting access to the longest-waiting
+ thread.  Otherwise this lock does not guarantee any particular
+ access order.  Programs using fair locks accessed by many threads
+ may display lower overall throughput (i.e., are slower; often much
+ slower) than those using the default setting, but have smaller
+ variances in times to obtain locks and guarantee lack of
+ starvation. Note however, that fairness of locks does not guarantee
+ fairness of thread scheduling. Thus, one of many threads using a
+ fair lock may obtain it multiple times in succession while other
+ active threads are not progressing and not currently holding the
+ lock.
+ Also note that the untimed {@link #tryLock}() method does not
+ honor the fairness setting. It will succeed if the lock
+ is available even if other threads are waiting.
+
+ &lt;p&gt;It is recommended practice to &lt;em&gt;always&lt;/em&gt; immediately
+ follow a call to {@code lock} with a {@code try} block, most
+ typically in a before/after construction such as:
+
+ &lt;pre&gt; {@code
+ class X {
+   private final ReentrantLock lock = new ReentrantLock();
+   // ...
+
+   public void m() {
+     lock.lock();  // block until condition holds
+     try {
+       // ... method body
+     } finally {
+       lock.unlock()
+     }
+   }
+ }}&lt;/pre&gt;
+
+ &lt;p&gt;In addition to implementing the {@link java.util.concurrent.locks.Lock} interface, this
+ class defines a number of {@code public} and {@code protected}
+ methods for inspecting the state of the lock.  Some of these
+ methods are only useful for instrumentation and monitoring.
+
+ &lt;p&gt;Serialization of this class behaves in the same way as built-in
+ locks: a deserialized lock is in the unlocked state, regardless of
+ its state when serialized.
+
+ &lt;p&gt;This lock supports a maximum of 2147483647 recursive locks by
+ the same thread. Attempts to exceed this limit result in
+ {@link Error} throws from locking methods.
+
+ @since 1.5
+ @author Doug Lea
+*/
+var ReentrantLock = {
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-lock'>/**Acquires the lock.
+</span>
+ &lt;p&gt;Acquires the lock if it is not held by another thread and returns
+ immediately, setting the lock hold count to one.
+
+ &lt;p&gt;If the current thread already holds the lock then the hold
+ count is incremented by one and the method returns immediately.
+
+ &lt;p&gt;If the lock is held by another thread then the
+ current thread becomes disabled for thread scheduling
+ purposes and lies dormant until the lock has been acquired,
+ at which time the lock hold count is set to one.
+*/
+lock : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-lockInterruptibly'>/**Acquires the lock unless the current thread is
+</span> {@linkplain Thread#interrupt interrupted}.
+
+ &lt;p&gt;Acquires the lock if it is not held by another thread and returns
+ immediately, setting the lock hold count to one.
+
+ &lt;p&gt;If the current thread already holds this lock then the hold count
+ is incremented by one and the method returns immediately.
+
+ &lt;p&gt;If the lock is held by another thread then the
+ current thread becomes disabled for thread scheduling
+ purposes and lies dormant until one of two things happens:
+
+ &lt;ul&gt;
+
+ &lt;li&gt;The lock is acquired by the current thread; or
+
+ &lt;li&gt;Some other thread {@linkplain Thread#interrupt interrupts} the
+ current thread.
+
+ &lt;/ul&gt;
+
+ &lt;p&gt;If the lock is acquired by the current thread then the lock hold
+ count is set to one.
+
+ &lt;p&gt;If the current thread:
+
+ &lt;ul&gt;
+
+ &lt;li&gt;has its interrupted status set on entry to this method; or
+
+ &lt;li&gt;is {@linkplain Thread#interrupt interrupted} while acquiring
+ the lock,
+
+ &lt;/ul&gt;
+
+ then {@link InterruptedException} is thrown and the current thread's
+ interrupted status is cleared.
+
+ &lt;p&gt;In this implementation, as this method is an explicit
+ interruption point, preference is given to responding to the
+ interrupt over normal or reentrant acquisition of the lock.
+@throws InterruptedException if the current thread is interrupted
+*/
+lockInterruptibly : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-tryLock'>/**Acquires the lock only if it is not held by another thread at the time
+</span> of invocation.
+
+ &lt;p&gt;Acquires the lock if it is not held by another thread and
+ returns immediately with the value {@code true}, setting the
+ lock hold count to one. Even when this lock has been set to use a
+ fair ordering policy, a call to {@code tryLock()} &lt;em&gt;will&lt;/em&gt;
+ immediately acquire the lock if it is available, whether or not
+ other threads are currently waiting for the lock.
+ This &amp;quot;barging&amp;quot; behavior can be useful in certain
+ circumstances, even though it breaks fairness. If you want to honor
+ the fairness setting for this lock, then use
+ {@link #tryLock(long, TimeUnit) tryLock(0, TimeUnit.SECONDS) }
+ which is almost equivalent (it also detects interruption).
+
+ &lt;p&gt;If the current thread already holds this lock then the hold
+ count is incremented by one and the method returns {@code true}.
+
+ &lt;p&gt;If the lock is held by another thread then this method will return
+ immediately with the value {@code false}.
+@return {Boolean} {@code true} if the lock was free and was acquired by the
+         current thread, or the lock was already held by the current
+         thread; and {@code false} otherwise
+*/
+tryLock : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-tryLock'>/**Acquires the lock if it is not held by another thread within the given
+</span> waiting time and the current thread has not been
+ {@linkplain Thread#interrupt interrupted}.
+
+ &lt;p&gt;Acquires the lock if it is not held by another thread and returns
+ immediately with the value {@code true}, setting the lock hold count
+ to one. If this lock has been set to use a fair ordering policy then
+ an available lock &lt;em&gt;will not&lt;/em&gt; be acquired if any other threads
+ are waiting for the lock. This is in contrast to the {@link #tryLock}()
+ method. If you want a timed {@code tryLock} that does permit barging on
+ a fair lock then combine the timed and un-timed forms together:
+
+ &lt;pre&gt; {@code
+ if (lock.tryLock() ||
+     lock.tryLock(timeout, unit)) {
+   ...
+ }}&lt;/pre&gt;
+
+ &lt;p&gt;If the current thread
+ already holds this lock then the hold count is incremented by one and
+ the method returns {@code true}.
+
+ &lt;p&gt;If the lock is held by another thread then the
+ current thread becomes disabled for thread scheduling
+ purposes and lies dormant until one of three things happens:
+
+ &lt;ul&gt;
+
+ &lt;li&gt;The lock is acquired by the current thread; or
+
+ &lt;li&gt;Some other thread {@linkplain Thread#interrupt interrupts}
+ the current thread; or
+
+ &lt;li&gt;The specified waiting time elapses
+
+ &lt;/ul&gt;
+
+ &lt;p&gt;If the lock is acquired then the value {@code true} is returned and
+ the lock hold count is set to one.
+
+ &lt;p&gt;If the current thread:
+
+ &lt;ul&gt;
+
+ &lt;li&gt;has its interrupted status set on entry to this method; or
+
+ &lt;li&gt;is {@linkplain Thread#interrupt interrupted} while
+ acquiring the lock,
+
+ &lt;/ul&gt;
+ then {@link InterruptedException} is thrown and the current thread's
+ interrupted status is cleared.
+
+ &lt;p&gt;If the specified waiting time elapses then the value {@code false}
+ is returned.  If the time is less than or equal to zero, the method
+ will not wait at all.
+
+ &lt;p&gt;In this implementation, as this method is an explicit
+ interruption point, preference is given to responding to the
+ interrupt over normal or reentrant acquisition of the lock, and
+ over reporting the elapse of the waiting time.
+@param {Number} timeout the time to wait for the lock
+@param {Object {TimeUnit}} unit the time unit of the timeout argument
+@return {Boolean} {@code true} if the lock was free and was acquired by the
+         current thread, or the lock was already held by the current
+         thread; and {@code false} if the waiting time elapsed before
+         the lock could be acquired
+@throws InterruptedException if the current thread is interrupted
+@throws NullPointerException if the time unit is null
+*/
+tryLock : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-unlock'>/**Attempts to release this lock.
+</span>
+ &lt;p&gt;If the current thread is the holder of this lock then the hold
+ count is decremented.  If the hold count is now zero then the lock
+ is released.  If the current thread is not the holder of this
+ lock then {@link IllegalMonitorStateException} is thrown.
+@throws IllegalMonitorStateException if the current thread does not
+         hold this lock
+*/
+unlock : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-newCondition'>/**Returns a {@link java.util.concurrent.locks.Condition} instance for use with this
+</span> {@link java.util.concurrent.locks.Lock} instance.
+
+ &lt;p&gt;The returned {@link java.util.concurrent.locks.Condition} instance supports the same
+ usages as do the {@link Object} monitor methods ({@link Object#wait() wait}, {@link Object#notify notify}, and {@link Object#notifyAll notifyAll}) when used with the built-in
+ monitor lock.
+
+ &lt;ul&gt;
+
+ &lt;li&gt;If this lock is not held when any of the {@link java.util.concurrent.locks.Condition}
+ {@linkplain java.util.concurrent.locks.Condition#await() waiting} or {@linkplain
+ java.util.concurrent.locks.Condition#signal signalling} methods are called, then an {@link IllegalMonitorStateException} is thrown.
+
+ &lt;li&gt;When the condition {@linkplain java.util.concurrent.locks.Condition#await() waiting}
+ methods are called the lock is released and, before they
+ return, the lock is reacquired and the lock hold count restored
+ to what it was when the method was called.
+
+ &lt;li&gt;If a thread is {@linkplain Thread#interrupt interrupted}
+ while waiting then the wait will terminate, an {@link InterruptedException} will be thrown, and the thread's
+ interrupted status will be cleared.
+
+ &lt;li&gt;Waiting threads are signalled in FIFO order.
+
+ &lt;li&gt;The ordering of lock reacquisition for threads returning
+ from waiting methods is the same as for threads initially
+ acquiring the lock, which is in the default case not specified,
+ but for &lt;em&gt;fair&lt;/em&gt; locks favors those threads that have been
+ waiting the longest.
+
+ &lt;/ul&gt;
+@return {Object {java.util.concurrent.locks.Condition}} the Condition object
+*/
+newCondition : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-getHoldCount'>/**Queries the number of holds on this lock by the current thread.
+</span>
+ &lt;p&gt;A thread has a hold on a lock for each lock action that is not
+ matched by an unlock action.
+
+ &lt;p&gt;The hold count information is typically only used for testing and
+ debugging purposes. For example, if a certain section of code should
+ not be entered with the lock already held then we can assert that
+ fact:
+
+ &lt;pre&gt; {@code
+ class X {
+   ReentrantLock lock = new ReentrantLock();
+   // ...
+   public void m() {
+     assert lock.getHoldCount() == 0;
+     lock.lock();
+     try {
+       // ... method body
+     } finally {
+       lock.unlock();
+     }
+   }
+ }}&lt;/pre&gt;
+@return {Number} the number of holds on this lock by the current thread,
+         or zero if this lock is not held by the current thread
+*/
+getHoldCount : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-isHeldByCurrentThread'>/**Queries if this lock is held by the current thread.
+</span>
+ &lt;p&gt;Analogous to the {@link Thread#holdsLock(Object)} method for
+ built-in monitor locks, this method is typically used for
+ debugging and testing. For example, a method that should only be
+ called while a lock is held can assert that this is the case:
+
+ &lt;pre&gt; {@code
+ class X {
+   ReentrantLock lock = new ReentrantLock();
+   // ...
+
+   public void m() {
+       assert lock.isHeldByCurrentThread();
+       // ... method body
+   }
+ }}&lt;/pre&gt;
+
+ &lt;p&gt;It can also be used to ensure that a reentrant lock is used
+ in a non-reentrant manner, for example:
+
+ &lt;pre&gt; {@code
+ class X {
+   ReentrantLock lock = new ReentrantLock();
+   // ...
+
+   public void m() {
+       assert !lock.isHeldByCurrentThread();
+       lock.lock();
+       try {
+           // ... method body
+       } finally {
+           lock.unlock();
+       }
+   }
+ }}&lt;/pre&gt;
+@return {Boolean} {@code true} if current thread holds this lock and
+         {@code false} otherwise
+*/
+isHeldByCurrentThread : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-isLocked'>/**Queries if this lock is held by any thread. This method is
+</span> designed for use in monitoring of the system state,
+ not for synchronization control.
+@return {Boolean} {@code true} if any thread holds this lock and
+         {@code false} otherwise
+*/
+isLocked : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-isFair'>/**Returns {@code true} if this lock has fairness set true.
+</span>@return {Boolean} {@code true} if this lock has fairness set true
+*/
+isFair : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-hasQueuedThreads'>/**Queries whether any threads are waiting to acquire this lock. Note that
+</span> because cancellations may occur at any time, a {@code true}
+ return does not guarantee that any other thread will ever
+ acquire this lock.  This method is designed primarily for use in
+ monitoring of the system state.
+@return {Boolean} {@code true} if there may be other threads waiting to
+         acquire the lock
+*/
+hasQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-hasQueuedThread'>/**Queries whether the given thread is waiting to acquire this
+</span> lock. Note that because cancellations may occur at any time, a
+ {@code true} return does not guarantee that this thread
+ will ever acquire this lock.  This method is designed primarily for use
+ in monitoring of the system state.
+@param {Object {Thread}} thread the thread
+@return {Boolean} {@code true} if the given thread is queued waiting for this lock
+@throws NullPointerException if the thread is null
+*/
+hasQueuedThread : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-getQueueLength'>/**Returns an estimate of the number of threads waiting to acquire
+</span> this lock.  The value is only an estimate because the number of
+ threads may change dynamically while this method traverses
+ internal data structures.  This method is designed for use in
+ monitoring system state, not for synchronization control.
+@return {Number} the estimated number of threads waiting for this lock
+*/
+getQueueLength : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-hasWaiters'>/**Queries whether any threads are waiting on the given condition
+</span> associated with this lock. Note that because timeouts and
+ interrupts may occur at any time, a {@code true} return does
+ not guarantee that a future {@code signal} will awaken any
+ threads.  This method is designed primarily for use in
+ monitoring of the system state.
+@param {Object {Condition}} condition the condition
+@return {Boolean} {@code true} if there are any waiting threads
+@throws IllegalMonitorStateException if this lock is not held
+@throws IllegalArgumentException if the given condition is
+         not associated with this lock
+@throws NullPointerException if the condition is null
+*/
+hasWaiters : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-getWaitQueueLength'>/**Returns an estimate of the number of threads waiting on the
+</span> given condition associated with this lock. Note that because
+ timeouts and interrupts may occur at any time, the estimate
+ serves only as an upper bound on the actual number of waiters.
+ This method is designed for use in monitoring of the system
+ state, not for synchronization control.
+@param {Object {Condition}} condition the condition
+@return {Number} the estimated number of waiting threads
+@throws IllegalMonitorStateException if this lock is not held
+@throws IllegalArgumentException if the given condition is
+         not associated with this lock
+@throws NullPointerException if the condition is null
+*/
+getWaitQueueLength : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantLock-method-toString'>/**Returns a string identifying this lock, as well as its lock state.
+</span> The state, in brackets, includes either the String {@code &quot;Unlocked&quot;}
+ or the String {@code &quot;Locked by&quot;} followed by the
+ {@linkplain Thread#getName name} of the owning thread.
+@return {String} a string identifying this lock, as well as its lock state
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-vcard-VCardSourceDetector'>/**@class com.android.vcard.VCardSourceDetector
+</span> implements com.android.vcard.VCardInterpreter
+
+@extends java.lang.Object
+
+ &lt;p&gt;
+ The class which tries to detects the source of a vCard file from its contents.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The specification of vCard (including both 2.1 and 3.0) is not so strict as to
+ guess its format just by reading beginning few lines (usually we can, but in
+ some most pessimistic case, we cannot until at almost the end of the file).
+ Also we cannot store all vCard entries in memory, while there's no specification
+ how big the vCard entry would become after the parse.
+ &lt;/p&gt;
+ &lt;p&gt;
+ This class is usually used for the &quot;first scan&quot;, in which we can understand which vCard
+ version is used (and how many entries exist in a file).
+ &lt;/p&gt;
+*/
+var VCardSourceDetector = {
+
+<span id='com-android-vcard-VCardSourceDetector-property-PARSE_TYPE_UNKNOWN'>/** Represents that no estimation is available. Users of this class is able to this
+</span> constant when you don't want to let a vCard parser rely on estimation for parse type.
+*/
+PARSE_TYPE_UNKNOWN : &quot;0&quot;,
+<span id='com-android-vcard-VCardSourceDetector-method-onVCardStarted'>/**
+</span>*/
+onVCardStarted : function(  ) {},
+
+<span id='com-android-vcard-VCardSourceDetector-method-onVCardEnded'>/**
+</span>*/
+onVCardEnded : function(  ) {},
+
+<span id='com-android-vcard-VCardSourceDetector-method-onEntryStarted'>/**
+</span>*/
+onEntryStarted : function(  ) {},
+
+<span id='com-android-vcard-VCardSourceDetector-method-onEntryEnded'>/**
+</span>*/
+onEntryEnded : function(  ) {},
+
+<span id='com-android-vcard-VCardSourceDetector-method-onPropertyCreated'>/**
+</span>*/
+onPropertyCreated : function(  ) {},
+
+<span id='com-android-vcard-VCardSourceDetector-method-getEstimatedType'>/**
+</span>@return {Number} The available type can be used with vCard parser. You probably need to
+ use {{@link #getEstimatedCharset()} to understand the charset to be used.
+*/
+getEstimatedType : function(  ) {},
+
+<span id='com-android-vcard-VCardSourceDetector-method-getEstimatedCharset'>/**&lt;p&gt;
+</span> Returns charset String guessed from the source's properties.
+ This method must be called after parsing target file(s).
+ &lt;/p&gt;
+@return {String} Charset String. Null is returned if guessing the source fails.
+*/
+getEstimatedCharset : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

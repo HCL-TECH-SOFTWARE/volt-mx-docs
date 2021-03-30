@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='jsr166-CompletableFutureTest'>/**@class jsr166.CompletableFutureTest
+</span>@extends jsr166.JSR166TestCase
+
+*/
+var CompletableFutureTest = {
+
+<span id='jsr166-CompletableFutureTest-method-testConstructor'>/**A newly constructed CompletableFuture is incomplete, as indicated
+</span> by methods isDone, isCancelled, and getNow
+*/
+testConstructor : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testComplete'>/**complete completes normally, as indicated by methods isDone,
+</span> isCancelled, join, get, and getNow
+*/
+testComplete : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCompleteExceptionally'>/**completeExceptionally completes exceptionally, as indicated by
+</span> methods isDone, isCancelled, join, get, and getNow
+*/
+testCompleteExceptionally : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCancel'>/**cancel completes exceptionally and reports cancelled, as indicated by
+</span> methods isDone, isCancelled, join, get, and getNow
+*/
+testCancel : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testObtrudeValue'>/**obtrudeValue forces completion with given value
+</span>*/
+testObtrudeValue : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testObtrudeException'>/**obtrudeException forces completion with given exception
+</span>*/
+testObtrudeException : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testGetNumberOfDependents'>/**getNumberOfDependents returns number of dependent tasks
+</span>*/
+testGetNumberOfDependents : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testToString'>/**toString indicates current completion state
+</span>*/
+testToString : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCompletedFuture'>/**completedFuture returns a completed CompletableFuture with given value
+</span>*/
+testCompletedFuture : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testExceptionally_normalCompletion'>/**exceptionally action is not invoked when source completes
+</span> normally, and source result is propagated
+*/
+testExceptionally_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testExceptionally_exceptionalCompletion'>/**exceptionally action completes with function value on source
+</span> exception
+*/
+testExceptionally_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testExceptionally_exceptionalCompletionActionFailed'>/**If an &quot;exceptionally action&quot; throws an exception, it completes
+</span> exceptionally with that exception
+*/
+testExceptionally_exceptionalCompletionActionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testWhenComplete_normalCompletion'>/**whenComplete action executes on normal completion, propagating
+</span> source result.
+*/
+testWhenComplete_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testWhenComplete_exceptionalCompletion'>/**whenComplete action executes on exceptional completion, propagating
+</span> source result.
+*/
+testWhenComplete_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testWhenComplete_sourceCancelled'>/**whenComplete action executes on cancelled source, propagating
+</span> CancellationException.
+*/
+testWhenComplete_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testWhenComplete_sourceCompletedNormallyActionFailed'>/**If a whenComplete action throws an exception when triggered by
+</span> a normal completion, it completes exceptionally
+*/
+testWhenComplete_sourceCompletedNormallyActionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testWhenComplete_sourceFailedActionFailed'>/**If a whenComplete action throws an exception when triggered by
+</span> a source completion that also throws an exception, the source
+ exception takes precedence (unlike handle)
+*/
+testWhenComplete_sourceFailedActionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testHandle_normalCompletion'>/**handle action completes normally with function value on normal
+</span> completion of source
+*/
+testHandle_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testHandle_exceptionalCompletion'>/**handle action completes normally with function value on
+</span> exceptional completion of source
+*/
+testHandle_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testHandle_sourceCancelled'>/**handle action completes normally with function value on
+</span> cancelled source
+*/
+testHandle_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testHandle_sourceCompletedNormallyActionFailed'>/**If a &quot;handle action&quot; throws an exception when triggered by
+</span> a normal completion, it completes exceptionally
+*/
+testHandle_sourceCompletedNormallyActionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testHandle_sourceFailedActionFailed'>/**If a &quot;handle action&quot; throws an exception when triggered by
+</span> a source completion that also throws an exception, the action
+ exception takes precedence (unlike whenComplete)
+*/
+testHandle_sourceFailedActionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAsync_normalCompletion'>/**runAsync completes after running Runnable
+</span>*/
+testRunAsync_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAsync_exceptionalCompletion'>/**failing runAsync completes exceptionally after running Runnable
+</span>*/
+testRunAsync_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testSupplyAsync_normalCompletion'>/**supplyAsync completes with result of supplier
+</span>*/
+testSupplyAsync_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testSupplyAsync_exceptionalCompletion'>/**Failing supplyAsync completes exceptionally
+</span>*/
+testSupplyAsync_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenRun_normalCompletion'>/**thenRun result completes normally after normal completion of source
+</span>*/
+testThenRun_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenRun_exceptionalCompletion'>/**thenRun result completes exceptionally after exceptional
+</span> completion of source
+*/
+testThenRun_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenRun_sourceCancelled'>/**thenRun result completes exceptionally if source cancelled
+</span>*/
+testThenRun_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenRun_actionFailed'>/**thenRun result completes exceptionally if action does
+</span>*/
+testThenRun_actionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenApply_normalCompletion'>/**thenApply result completes normally after normal completion of source
+</span>*/
+testThenApply_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenApply_exceptionalCompletion'>/**thenApply result completes exceptionally after exceptional
+</span> completion of source
+*/
+testThenApply_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenApply_sourceCancelled'>/**thenApply result completes exceptionally if source cancelled
+</span>*/
+testThenApply_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenApply_actionFailed'>/**thenApply result completes exceptionally if action does
+</span>*/
+testThenApply_actionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenAccept_normalCompletion'>/**thenAccept result completes normally after normal completion of source
+</span>*/
+testThenAccept_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenAccept_exceptionalCompletion'>/**thenAccept result completes exceptionally after exceptional
+</span> completion of source
+*/
+testThenAccept_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenAccept_sourceCancelled'>/**thenAccept result completes exceptionally if source cancelled
+</span>*/
+testThenAccept_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenAccept_actionFailed'>/**thenAccept result completes exceptionally if action does
+</span>*/
+testThenAccept_actionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenCombine_normalCompletion'>/**thenCombine result completes normally after normal completion
+</span> of sources
+*/
+testThenCombine_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenCombine_exceptionalCompletion'>/**thenCombine result completes exceptionally after exceptional
+</span> completion of either source
+*/
+testThenCombine_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenCombine_sourceCancelled'>/**thenCombine result completes exceptionally if either source cancelled
+</span>*/
+testThenCombine_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenCombine_actionFailed'>/**thenCombine result completes exceptionally if action does
+</span>*/
+testThenCombine_actionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenAcceptBoth_normalCompletion'>/**thenAcceptBoth result completes normally after normal
+</span> completion of sources
+*/
+testThenAcceptBoth_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenAcceptBoth_exceptionalCompletion'>/**thenAcceptBoth result completes exceptionally after exceptional
+</span> completion of either source
+*/
+testThenAcceptBoth_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenAcceptBoth_sourceCancelled'>/**thenAcceptBoth result completes exceptionally if either source cancelled
+</span>*/
+testThenAcceptBoth_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenAcceptBoth_actionFailed'>/**thenAcceptBoth result completes exceptionally if action does
+</span>*/
+testThenAcceptBoth_actionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAfterBoth_normalCompletion'>/**runAfterBoth result completes normally after normal
+</span> completion of sources
+*/
+testRunAfterBoth_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAfterBoth_exceptionalCompletion'>/**runAfterBoth result completes exceptionally after exceptional
+</span> completion of either source
+*/
+testRunAfterBoth_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAfterBoth_sourceCancelled'>/**runAfterBoth result completes exceptionally if either source cancelled
+</span>*/
+testRunAfterBoth_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAfterBoth_actionFailed'>/**runAfterBoth result completes exceptionally if action does
+</span>*/
+testRunAfterBoth_actionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testApplyToEither_normalCompletion'>/**applyToEither result completes normally after normal completion
+</span> of either source
+*/
+testApplyToEither_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testApplyToEither_exceptionalCompletion'>/**applyToEither result completes exceptionally after exceptional
+</span> completion of either source
+*/
+testApplyToEither_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testApplyToEither_exceptionalCompletion2'>/**
+</span>*/
+testApplyToEither_exceptionalCompletion2 : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testApplyToEither_sourceCancelled'>/**applyToEither result completes exceptionally if either source cancelled
+</span>*/
+testApplyToEither_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testApplyToEither_sourceCancelled2'>/**
+</span>*/
+testApplyToEither_sourceCancelled2 : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testApplyToEither_actionFailed'>/**applyToEither result completes exceptionally if action does
+</span>*/
+testApplyToEither_actionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAcceptEither_normalCompletion'>/**acceptEither result completes normally after normal completion
+</span> of either source
+*/
+testAcceptEither_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAcceptEither_exceptionalCompletion'>/**acceptEither result completes exceptionally after exceptional
+</span> completion of either source
+*/
+testAcceptEither_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAcceptEither_exceptionalCompletion2'>/**
+</span>*/
+testAcceptEither_exceptionalCompletion2 : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAcceptEither_sourceCancelled'>/**acceptEither result completes exceptionally if either source cancelled
+</span>*/
+testAcceptEither_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAcceptEither_actionFailed'>/**acceptEither result completes exceptionally if action does
+</span>*/
+testAcceptEither_actionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAfterEither_normalCompletion'>/**runAfterEither result completes normally after normal completion
+</span> of either source
+*/
+testRunAfterEither_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAfterEither_exceptionalCompletion'>/**runAfterEither result completes exceptionally after exceptional
+</span> completion of either source
+*/
+testRunAfterEither_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAfterEither_exceptionalCompletion2'>/**
+</span>*/
+testRunAfterEither_exceptionalCompletion2 : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAfterEither_sourceCancelled'>/**runAfterEither result completes exceptionally if either source cancelled
+</span>*/
+testRunAfterEither_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testRunAfterEither_actionFailed'>/**runAfterEither result completes exceptionally if action does
+</span>*/
+testRunAfterEither_actionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenCompose_normalCompletion'>/**thenCompose result completes normally after normal completion of source
+</span>*/
+testThenCompose_normalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenCompose_exceptionalCompletion'>/**thenCompose result completes exceptionally after exceptional
+</span> completion of source
+*/
+testThenCompose_exceptionalCompletion : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenCompose_actionFailed'>/**thenCompose result completes exceptionally if action does
+</span>*/
+testThenCompose_actionFailed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenCompose_sourceCancelled'>/**thenCompose result completes exceptionally if source cancelled
+</span>*/
+testThenCompose_sourceCancelled : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testThenCompose_actionReturnsFailingFuture'>/**thenCompose result completes exceptionally if the result of the action does
+</span>*/
+testThenCompose_actionReturnsFailingFuture : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAllOf_empty'>/**allOf(no component futures) returns a future completed normally
+</span> with the value null
+*/
+testAllOf_empty : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAllOf_normal'>/**allOf returns a future completed normally with the value null
+</span> when all components complete normally
+*/
+testAllOf_normal : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAllOf_backwards'>/**
+</span>*/
+testAllOf_backwards : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAllOf_exceptional'>/**
+</span>*/
+testAllOf_exceptional : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAnyOf_empty'>/**anyOf(no component futures) returns an incomplete future
+</span>*/
+testAnyOf_empty : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAnyOf_normal'>/**anyOf returns a future completed normally with a value when
+</span> a component future does
+*/
+testAnyOf_normal : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAnyOf_normal_backwards'>/**
+</span>*/
+testAnyOf_normal_backwards : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAnyOf_exceptional'>/**anyOf result completes exceptionally when any component does.
+</span>*/
+testAnyOf_exceptional : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAnyOf_exceptional_backwards'>/**
+</span>*/
+testAnyOf_exceptional_backwards : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testNPE'>/**Completion methods throw NullPointerException with null arguments
+</span>*/
+testNPE : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testToCompletableFuture'>/**toCompletableFuture returns this CompletableFuture.
+</span>*/
+testToCompletableFuture : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testNewIncompleteFuture'>/**newIncompleteFuture returns an incomplete CompletableFuture
+</span>*/
+testNewIncompleteFuture : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCompletedStage'>/**completedStage returns a completed CompletionStage
+</span>*/
+testCompletedStage : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testDefaultExecutor'>/**defaultExecutor by default returns the commonPool if
+</span> it supports more than one thread.
+*/
+testDefaultExecutor : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testFailedFuture'>/**failedFuture returns a CompletableFuture completed
+</span> exceptionally with the given Exception
+*/
+testFailedFuture : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testFailedFuture_null'>/**failedFuture(null) throws NPE
+</span>*/
+testFailedFuture_null : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCopy'>/**copy returns a CompletableFuture that is completed normally,
+</span> with the same value, when source is.
+*/
+testCopy : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCopy2'>/**copy returns a CompletableFuture that is completed exceptionally
+</span> when source is.
+*/
+testCopy2 : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testMinimalCompletionStage'>/**minimalCompletionStage returns a CompletableFuture that is
+</span> completed normally, with the same value, when source is.
+*/
+testMinimalCompletionStage : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testMinimalCompletionStage2'>/**minimalCompletionStage returns a CompletableFuture that is
+</span> completed exceptionally when source is.
+*/
+testMinimalCompletionStage2 : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testFailedStage'>/**failedStage returns a CompletionStage completed
+</span> exceptionally with the given Exception
+*/
+testFailedStage : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCompleteAsync'>/**completeAsync completes with value of given supplier
+</span>*/
+testCompleteAsync : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCompleteAsync2'>/**completeAsync completes exceptionally if given supplier throws
+</span>*/
+testCompleteAsync2 : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCompleteAsync3'>/**completeAsync with given executor completes with value of given supplier
+</span>*/
+testCompleteAsync3 : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCompleteAsync4'>/**completeAsync with given executor completes exceptionally if
+</span> given supplier throws
+*/
+testCompleteAsync4 : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testOrTimeout_timesOut'>/**orTimeout completes with TimeoutException if not complete
+</span>*/
+testOrTimeout_timesOut : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testOrTimeout_completed'>/**orTimeout completes normally if completed before timeout
+</span>*/
+testOrTimeout_completed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCompleteOnTimeout_timesOut'>/**completeOnTimeout completes with given value if not complete
+</span>*/
+testCompleteOnTimeout_timesOut : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCompleteOnTimeout_timesOut'>/**
+</span>*/
+testCompleteOnTimeout_timesOut : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testCompleteOnTimeout_completed'>/**completeOnTimeout has no effect if completed within timeout
+</span>*/
+testCompleteOnTimeout_completed : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testDelayedExecutor'>/**delayedExecutor returns an executor that delays submission
+</span>*/
+testDelayedExecutor : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testDelayedExecutor'>/**
+</span>*/
+testDelayedExecutor : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testExceptionPropagationReusesResultObject'>/**
+</span>*/
+testExceptionPropagationReusesResultObject : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testMinimalCompletionStage_minimality'>/**Minimal completion stages throw UOE for all non-CompletionStage methods
+</span>*/
+testMinimalCompletionStage_minimality : function(  ) {},
+
+<span id='jsr166-CompletableFutureTest-method-testAdditiveMonad'>/**CompletableFuture is an additive monad - sort of.
+</span> https://en.wikipedia.org/wiki/Monad_(functional_programming)#Additive_monads
+*/
+testAdditiveMonad : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

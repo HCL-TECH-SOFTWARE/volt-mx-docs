@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-TimeUnit'>/**@class java.util.concurrent.TimeUnit
+</span>@extends java.lang.Enum
+
+ A {@code TimeUnit} represents time durations at a given unit of
+ granularity and provides utility methods to convert across units,
+ and to perform timing and delay operations in these units.  A
+ {@code TimeUnit} does not maintain time information, but only
+ helps organize and use time representations that may be maintained
+ separately across various contexts.  A nanosecond is defined as one
+ thousandth of a microsecond, a microsecond as one thousandth of a
+ millisecond, a millisecond as one thousandth of a second, a minute
+ as sixty seconds, an hour as sixty minutes, and a day as twenty four
+ hours.
+
+ &lt;p&gt;A {@code TimeUnit} is mainly used to inform time-based methods
+ how a given timing parameter should be interpreted. For example,
+ the following code will timeout in 50 milliseconds if the {@link java.util.concurrent.locks.Lock lock} is not available:
+
+ &lt;pre&gt; {@code
+ Lock lock = ...;
+ if (lock.tryLock(50L, TimeUnit.MILLISECONDS)) ...}&lt;/pre&gt;
+
+ while this code will timeout in 50 seconds:
+ &lt;pre&gt; {@code
+ Lock lock = ...;
+ if (lock.tryLock(50L, TimeUnit.SECONDS)) ...}&lt;/pre&gt;
+
+ Note however, that there is no guarantee that a particular timeout
+ implementation will be able to notice the passage of time at the
+ same granularity as the given {@code TimeUnit}.
+
+ @since 1.5
+ @author Doug Lea
+*/
+var TimeUnit = {
+
+<span id='java-util-concurrent-TimeUnit-property-NANOSECONDS'>/** Time unit representing one thousandth of a microsecond.
+</span>*/
+NANOSECONDS : &quot;null&quot;,
+<span id='java-util-concurrent-TimeUnit-property-MICROSECONDS'>/** Time unit representing one thousandth of a millisecond.
+</span>*/
+MICROSECONDS : &quot;null&quot;,
+<span id='java-util-concurrent-TimeUnit-property-MILLISECONDS'>/** Time unit representing one thousandth of a second.
+</span>*/
+MILLISECONDS : &quot;null&quot;,
+<span id='java-util-concurrent-TimeUnit-property-SECONDS'>/** Time unit representing one second.
+</span>*/
+SECONDS : &quot;null&quot;,
+<span id='java-util-concurrent-TimeUnit-property-MINUTES'>/** Time unit representing sixty seconds.
+</span> @since 1.6
+*/
+MINUTES : &quot;null&quot;,
+<span id='java-util-concurrent-TimeUnit-property-HOURS'>/** Time unit representing sixty minutes.
+</span> @since 1.6
+*/
+HOURS : &quot;null&quot;,
+<span id='java-util-concurrent-TimeUnit-property-DAYS'>/** Time unit representing twenty four hours.
+</span> @since 1.6
+*/
+DAYS : &quot;null&quot;,
+<span id='java-util-concurrent-TimeUnit-method-values'>/**
+</span>*/
+values : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-valueOf'>/**
+</span>*/
+valueOf : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-convert'>/**Converts the given time duration in the given unit to this unit.
+</span> Conversions from finer to coarser granularities truncate, so
+ lose precision. For example, converting {@code 999} milliseconds
+ to seconds results in {@code 0}. Conversions from coarser to
+ finer granularities with arguments that would numerically
+ overflow saturate to {@code Long.MIN_VALUE} if negative or
+ {@code Long.MAX_VALUE} if positive.
+
+ &lt;p&gt;For example, to convert 10 minutes to milliseconds, use:
+ {@code TimeUnit.MILLISECONDS.convert(10L, TimeUnit.MINUTES)}
+@param {Number} sourceDuration the time duration in the given {@code sourceUnit}
+@param {Object {TimeUnit}} sourceUnit the unit of the {@code sourceDuration} argument
+@return {Number} the converted duration in this unit,
+ or {@code Long.MIN_VALUE} if conversion would negatively
+ overflow, or {@code Long.MAX_VALUE} if it would positively overflow.
+*/
+convert : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-toNanos'>/**Equivalent to
+</span> {@link #convert(long, java.util.concurrent.TimeUnit) NANOSECONDS.convert(duration, this)}.
+@param {Number} duration the duration
+@return {Number} the converted duration,
+ or {@code Long.MIN_VALUE} if conversion would negatively
+ overflow, or {@code Long.MAX_VALUE} if it would positively overflow.
+*/
+toNanos : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-toMicros'>/**Equivalent to
+</span> {@link #convert(long, java.util.concurrent.TimeUnit) MICROSECONDS.convert(duration, this)}.
+@param {Number} duration the duration
+@return {Number} the converted duration,
+ or {@code Long.MIN_VALUE} if conversion would negatively
+ overflow, or {@code Long.MAX_VALUE} if it would positively overflow.
+*/
+toMicros : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-toMillis'>/**Equivalent to
+</span> {@link #convert(long, java.util.concurrent.TimeUnit) MILLISECONDS.convert(duration, this)}.
+@param {Number} duration the duration
+@return {Number} the converted duration,
+ or {@code Long.MIN_VALUE} if conversion would negatively
+ overflow, or {@code Long.MAX_VALUE} if it would positively overflow.
+*/
+toMillis : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-toSeconds'>/**Equivalent to
+</span> {@link #convert(long, java.util.concurrent.TimeUnit) SECONDS.convert(duration, this)}.
+@param {Number} duration the duration
+@return {Number} the converted duration,
+ or {@code Long.MIN_VALUE} if conversion would negatively
+ overflow, or {@code Long.MAX_VALUE} if it would positively overflow.
+*/
+toSeconds : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-toMinutes'>/**Equivalent to
+</span> {@link #convert(long, java.util.concurrent.TimeUnit) MINUTES.convert(duration, this)}.
+@param {Number} duration the duration
+@return {Number} the converted duration,
+ or {@code Long.MIN_VALUE} if conversion would negatively
+ overflow, or {@code Long.MAX_VALUE} if it would positively overflow.
+@since 1.6
+*/
+toMinutes : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-toHours'>/**Equivalent to
+</span> {@link #convert(long, java.util.concurrent.TimeUnit) HOURS.convert(duration, this)}.
+@param {Number} duration the duration
+@return {Number} the converted duration,
+ or {@code Long.MIN_VALUE} if conversion would negatively
+ overflow, or {@code Long.MAX_VALUE} if it would positively overflow.
+@since 1.6
+*/
+toHours : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-toDays'>/**Equivalent to
+</span> {@link #convert(long, java.util.concurrent.TimeUnit) DAYS.convert(duration, this)}.
+@param {Number} duration the duration
+@return {Number} the converted duration
+@since 1.6
+*/
+toDays : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-timedWait'>/**Performs a timed {@link Object#wait(long, int) Object.wait}
+</span> using this time unit.
+ This is a convenience method that converts timeout arguments
+ into the form required by the {@code Object.wait} method.
+
+ &lt;p&gt;For example, you could implement a blocking {@code poll}
+ method (see {@link java.util.concurrent.BlockingQueue#poll java.util.concurrent.BlockingQueue.poll})
+ using:
+
+ &lt;pre&gt; {@code
+ public synchronized Object poll(long timeout, TimeUnit unit)
+     throws InterruptedException {
+   while (empty) {
+     unit.timedWait(this, timeout);
+     ...
+   }
+ }}&lt;/pre&gt;
+@param {Object {Object}} obj the object to wait on
+@param {Number} timeout the maximum time to wait. If less than
+ or equal to zero, do not wait at all.
+@throws InterruptedException if interrupted while waiting
+*/
+timedWait : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-timedJoin'>/**Performs a timed {@link Thread#join(long, int) Thread.join}
+</span> using this time unit.
+ This is a convenience method that converts time arguments into the
+ form required by the {@code Thread.join} method.
+@param {Object {Thread}} thread the thread to wait for
+@param {Number} timeout the maximum time to wait. If less than
+ or equal to zero, do not wait at all.
+@throws InterruptedException if interrupted while waiting
+*/
+timedJoin : function(  ) {},
+
+<span id='java-util-concurrent-TimeUnit-method-sleep'>/**Performs a {@link Thread#sleep(long, int) Thread.sleep} using
+</span> this time unit.
+ This is a convenience method that converts time arguments into the
+ form required by the {@code Thread.sleep} method.
+@param {Number} timeout the minimum time to sleep. If less than
+ or equal to zero, do not sleep at all.
+@throws InterruptedException if interrupted while sleeping
+*/
+sleep : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

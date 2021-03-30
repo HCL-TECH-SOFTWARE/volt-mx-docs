@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-spi-SelectorProvider'>/**@class java.nio.channels.spi.SelectorProvider
+</span>@extends java.lang.Object
+
+ Service-provider class for selectors and selectable channels.
+
+ &lt;p&gt; A selector provider is a concrete subclass of this class that has a
+ zero-argument constructor and implements the abstract methods specified
+ below.  A given invocation of the Java virtual machine maintains a single
+ system-wide default provider instance, which is returned by the {@link #provider() provider} method.  The first invocation of that method will locate
+ the default provider as specified below.
+
+ &lt;p&gt; The system-wide default provider is used by the static &lt;tt&gt;open&lt;/tt&gt;
+ methods of the {@link java.nio.channels.DatagramChannel#open
+ DatagramChannel}, {@link java.nio.channels.Pipe#open Pipe}, {@link java.nio.channels.Selector#open Selector}, {@link java.nio.channels.ServerSocketChannel#open ServerSocketChannel}, and {@link java.nio.channels.SocketChannel#open SocketChannel} classes.  It is also
+ used by the {@link java.lang.System#inheritedChannel System.inheritedChannel()}
+ method. A program may make use of a provider other than the default provider
+ by instantiating that provider and then directly invoking the &lt;tt&gt;open&lt;/tt&gt;
+ methods defined in this class.
+
+ &lt;p&gt; All of the methods in this class are safe for use by multiple concurrent
+ threads.  &lt;/p&gt;
+
+
+ @author Mark Reinhold
+ @author JSR-51 Expert Group
+ @since 1.4
+*/
+var SelectorProvider = {
+
+<span id='java-nio-channels-spi-SelectorProvider-method-provider'>/**Returns the system-wide default selector provider for this invocation of
+</span> the Java virtual machine.
+
+ &lt;p&gt; The first invocation of this method locates the default provider
+ object as follows: &lt;/p&gt;
+
+ &lt;ol&gt;
+
+   &lt;li&gt;&lt;p&gt; If the system property
+   &lt;tt&gt;java.nio.channels.spi.SelectorProvider&lt;/tt&gt; is defined then it is
+   taken to be the fully-qualified name of a concrete provider class.
+   The class is loaded and instantiated; if this process fails then an
+   unspecified error is thrown.  &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; If a provider class has been installed in a jar file that is
+   visible to the system class loader, and that jar file contains a
+   provider-configuration file named
+   &lt;tt&gt;java.nio.channels.spi.SelectorProvider&lt;/tt&gt; in the resource
+   directory &lt;tt&gt;META-INF/services&lt;/tt&gt;, then the first class name
+   specified in that file is taken.  The class is loaded and
+   instantiated; if this process fails then an unspecified error is
+   thrown.  &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; Finally, if no provider has been specified by any of the above
+   means then the system-default provider class is instantiated and the
+   result is returned.  &lt;/p&gt;&lt;/li&gt;
+
+ &lt;/ol&gt;
+
+ &lt;p&gt; Subsequent invocations of this method return the provider that was
+ returned by the first invocation.  &lt;/p&gt;
+@return {Object {java.nio.channels.spi.SelectorProvider}} The system-wide default selector provider
+*/
+provider : function(  ) {},
+
+<span id='java-nio-channels-spi-SelectorProvider-method-openDatagramChannel'>/**Opens a datagram channel.
+</span>@return {Object {java.nio.channels.DatagramChannel}} The new channel
+@throws IOException
+          If an I/O error occurs
+*/
+openDatagramChannel : function(  ) {},
+
+<span id='java-nio-channels-spi-SelectorProvider-method-openDatagramChannel'>/**Opens a datagram channel.
+</span>@param {Object {ProtocolFamily}} family
+          The protocol family
+@return {Object {java.nio.channels.DatagramChannel}} A new datagram channel
+@throws UnsupportedOperationException
+          If the specified protocol family is not supported
+@throws IOException
+          If an I/O error occurs
+@since 1.7
+*/
+openDatagramChannel : function(  ) {},
+
+<span id='java-nio-channels-spi-SelectorProvider-method-openPipe'>/**Opens a pipe.
+</span>@return {Object {java.nio.channels.Pipe}} The new pipe
+@throws IOException
+          If an I/O error occurs
+*/
+openPipe : function(  ) {},
+
+<span id='java-nio-channels-spi-SelectorProvider-method-openSelector'>/**Opens a selector.
+</span>@return {Object {java.nio.channels.spi.AbstractSelector}} The new selector
+@throws IOException
+          If an I/O error occurs
+*/
+openSelector : function(  ) {},
+
+<span id='java-nio-channels-spi-SelectorProvider-method-openServerSocketChannel'>/**Opens a server-socket channel.
+</span>@return {Object {java.nio.channels.ServerSocketChannel}} The new channel
+@throws IOException
+          If an I/O error occurs
+*/
+openServerSocketChannel : function(  ) {},
+
+<span id='java-nio-channels-spi-SelectorProvider-method-openSocketChannel'>/**Opens a socket channel.
+</span>@return {Object {java.nio.channels.SocketChannel}} The new channel
+@throws IOException
+          If an I/O error occurs
+*/
+openSocketChannel : function(  ) {},
+
+<span id='java-nio-channels-spi-SelectorProvider-method-inheritedChannel'>/**Returns the channel inherited from the entity that created this
+</span> Java virtual machine.
+
+ &lt;p&gt; On many operating systems a process, such as a Java virtual
+ machine, can be started in a manner that allows the process to
+ inherit a channel from the entity that created the process. The
+ manner in which this is done is system dependent, as are the
+ possible entities to which the channel may be connected. For example,
+ on UNIX systems, the Internet services daemon (&lt;i&gt;inetd&lt;/i&gt;) is used to
+ start programs to service requests when a request arrives on an
+ associated network port. In this example, the process that is started,
+ inherits a channel representing a network socket.
+
+ &lt;p&gt; In cases where the inherited channel represents a network socket
+ then the {@link java.nio.channels.Channel Channel} type returned
+ by this method is determined as follows:
+
+ &lt;ul&gt;
+
+  &lt;li&gt;&lt;p&gt; If the inherited channel represents a stream-oriented connected
+  socket then a {@link java.nio.channels.SocketChannel SocketChannel} is
+  returned. The socket channel is, at least initially, in blocking
+  mode, bound to a socket address, and connected to a peer.
+  &lt;/p&gt;&lt;/li&gt;
+
+  &lt;li&gt;&lt;p&gt; If the inherited channel represents a stream-oriented listening
+  socket then a {@link java.nio.channels.ServerSocketChannel
+  ServerSocketChannel} is returned. The server-socket channel is, at
+  least initially, in blocking mode, and bound to a socket address.
+  &lt;/p&gt;&lt;/li&gt;
+
+  &lt;li&gt;&lt;p&gt; If the inherited channel is a datagram-oriented socket
+  then a {@link java.nio.channels.DatagramChannel DatagramChannel} is
+  returned. The datagram channel is, at least initially, in blocking
+  mode, and bound to a socket address.
+  &lt;/p&gt;&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ &lt;p&gt; In addition to the network-oriented channels described, this method
+ may return other kinds of channels in the future.
+
+ &lt;p&gt; The first invocation of this method creates the channel that is
+ returned. Subsequent invocations of this method return the same
+ channel. &lt;/p&gt;
+@return {Object {java.nio.channels.Channel}} The inherited channel, if any, otherwise &lt;tt&gt;null&lt;/tt&gt;.
+@throws IOException
+          If an I/O error occurs
+@throws SecurityException
+          If a security manager has been installed and it denies
+          {@link RuntimePermission}&lt;tt&gt;(&quot;inheritedChannel&quot;)&lt;/tt&gt;
+@since 1.5
+*/
+inheritedChannel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

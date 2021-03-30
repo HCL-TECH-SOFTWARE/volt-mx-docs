@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-NetworkInterface'>/**@class java.net.NetworkInterface
+</span>@extends java.lang.Object
+
+ This class represents a Network Interface made up of a name,
+ and a list of IP addresses assigned to this interface.
+ It is used to identify the local interface on which a multicast group
+ is joined.
+
+ Interfaces are normally known by names such as &quot;le0&quot;.
+
+ @since 1.4
+*/
+var NetworkInterface = {
+
+<span id='java-net-NetworkInterface-method-getName'>/**Get the name of this network interface.
+</span>@return {String} the name of this network interface
+*/
+getName : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getInetAddresses'>/**Convenience method to return an Enumeration with all or a
+</span> subset of the InetAddresses bound to this network interface.
+ &lt;p&gt;
+ If there is a security manager, its {@code checkConnect}
+ method is called for each InetAddress. Only InetAddresses where
+ the {@code checkConnect} doesn't throw a SecurityException
+ will be returned in the Enumeration. However, if the caller has the
+ {@link java.net.NetPermission}(&quot;getNetworkInformation&quot;) permission, then all
+ InetAddresses are returned.
+@return {Object {java.util.Enumeration}} an Enumeration object with all or a subset of the InetAddresses
+ bound to this network interface
+*/
+getInetAddresses : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getInterfaceAddresses'>/**Get a List of all or a subset of the {@code InterfaceAddresses}
+</span> of this network interface.
+ &lt;p&gt;
+ If there is a security manager, its {@code checkConnect}
+ method is called with the InetAddress for each InterfaceAddress.
+ Only InterfaceAddresses where the {@code checkConnect} doesn't throw
+ a SecurityException will be returned in the List.
+@return {Object {java.util.List}} a {@code List} object with all or a subset of the
+         InterfaceAddresss of this network interface
+@since 1.6
+*/
+getInterfaceAddresses : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getSubInterfaces'>/**Get an Enumeration with all the subinterfaces (also known as virtual
+</span> interfaces) attached to this network interface.
+ &lt;p&gt;
+ For instance eth0:1 will be a subinterface to eth0.
+@return {Object {java.util.Enumeration}} an Enumeration object with all of the subinterfaces
+ of this network interface
+@since 1.6
+*/
+getSubInterfaces : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getParent'>/**Returns the parent NetworkInterface of this interface if this is
+</span> a subinterface, or {@code null} if it is a physical
+ (non virtual) interface or has no parent.
+@return {Object {java.net.NetworkInterface}} The {@code NetworkInterface} this interface is attached to.
+@since 1.6
+*/
+getParent : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getIndex'>/**Returns the index of this network interface. The index is an integer greater
+</span> or equal to zero, or {@code -1} for unknown. This is a system specific value
+ and interfaces with the same name can have different indexes on different
+ machines.
+@return {Number} the index of this network interface or {@code -1} if the index is
+         unknown
+@see #getByIndex(int)
+@since 1.7
+*/
+getIndex : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getDisplayName'>/**Get the display name of this network interface.
+</span> A display name is a human readable String describing the network
+ device.
+@return {String} a non-empty string representing the display name of this network
+         interface, or null if no display name is available.
+*/
+getDisplayName : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getByName'>/**Searches for the network interface with the specified name.
+</span>@param {String} name
+          The name of the network interface.
+@return {Object {java.net.NetworkInterface}} A {@code NetworkInterface} with the specified name,
+          or {@code null} if there is no network interface
+          with the specified name.
+@throws SocketException
+          If an I/O error occurs.
+@throws NullPointerException
+          If the specified name is {@code null}.
+*/
+getByName : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getByIndex'>/**Get a network interface given its index.
+</span>@param {Number} index an integer, the index of the interface
+@return {Object {java.net.NetworkInterface}} the NetworkInterface obtained from its index, or {@code null} if
+         there is no interface with such an index on the system
+@throws SocketException  if an I/O error occurs.
+@throws IllegalArgumentException if index has a negative value
+@see #getIndex()
+@since 1.7
+*/
+getByIndex : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getByInetAddress'>/**Convenience method to search for a network interface that
+</span> has the specified Internet Protocol (IP) address bound to
+ it.
+ &lt;p&gt;
+ If the specified IP address is bound to multiple network
+ interfaces it is not defined which network interface is
+ returned.
+@param {Object {InetAddress}} addr
+          The {@code InetAddress} to search with.
+@return {Object {java.net.NetworkInterface}} A {@code NetworkInterface}
+          or {@code null} if there is no network interface
+          with the specified IP address.
+@throws SocketException
+          If an I/O error occurs.
+@throws NullPointerException
+          If the specified address is {@code null}.
+*/
+getByInetAddress : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getNetworkInterfaces'>/**Returns all the interfaces on this machine. The {@code Enumeration}
+</span> contains at least one element, possibly representing a loopback
+ interface that only supports communication between entities on
+ this machine.
+
+ NOTE: can use getNetworkInterfaces()+getInetAddresses()
+       to obtain all IP addresses for this node
+@return {Object {java.util.Enumeration}} an Enumeration of NetworkInterfaces found on this machine
+@exception SocketException  if an I/O error occurs.
+*/
+getNetworkInterfaces : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-isUp'>/**Returns whether a network interface is up and running.
+</span>@return {Boolean} {@code true} if the interface is up and running.
+@exception SocketException if an I/O error occurs.
+@since 1.6
+*/
+isUp : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-isLoopback'>/**Returns whether a network interface is a loopback interface.
+</span>@return {Boolean} {@code true} if the interface is a loopback interface.
+@exception SocketException if an I/O error occurs.
+@since 1.6
+*/
+isLoopback : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-isPointToPoint'>/**Returns whether a network interface is a point to point interface.
+</span> A typical point to point interface would be a PPP connection through
+ a modem.
+@return {Boolean} {@code true} if the interface is a point to point
+          interface.
+@exception SocketException if an I/O error occurs.
+@since 1.6
+*/
+isPointToPoint : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-supportsMulticast'>/**Returns whether a network interface supports multicasting or not.
+</span>@return {Boolean} {@code true} if the interface supports Multicasting.
+@exception SocketException if an I/O error occurs.
+@since 1.6
+*/
+supportsMulticast : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getHardwareAddress'>/**Returns the hardware address (usually MAC) of the interface if it
+</span> has one and if it can be accessed given the current privileges.
+ If a security manager is set, then the caller must have
+ the permission {@link java.net.NetPermission}(&quot;getNetworkInformation&quot;).
+@return {Number} a byte array containing the address, or {@code null} if
+          the address doesn't exist, is not accessible or a security
+          manager is set and the caller does not have the permission
+          NetPermission(&quot;getNetworkInformation&quot;)
+@exception SocketException if an I/O error occurs.
+@since 1.6
+*/
+getHardwareAddress : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-getMTU'>/**Returns the Maximum Transmission Unit (MTU) of this interface.
+</span>@return {Number} the value of the MTU for that interface.
+@exception SocketException if an I/O error occurs.
+@since 1.6
+*/
+getMTU : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-isVirtual'>/**Returns whether this interface is a virtual interface (also called
+</span> subinterface).
+ Virtual interfaces are, on some systems, interfaces created as a child
+ of a physical interface and given different settings (like address or
+ MTU). Usually the name of the interface will the name of the parent
+ followed by a colon (:) and a number identifying the child since there
+ can be several virtual interfaces attached to a single physical
+ interface.
+@return {Boolean} {@code true} if this interface is a virtual interface.
+@since 1.6
+*/
+isVirtual : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-equals'>/**Compares this object against the specified object.
+</span> The result is {@code true} if and only if the argument is
+ not {@code null} and it represents the same NetworkInterface
+ as this object.
+ &lt;p&gt;
+ Two instances of {@code NetworkInterface} represent the same
+ NetworkInterface if both name and addrs are the same for both.
+@param {Object {Object}} obj   the object to compare against.
+@return {Boolean} {@code true} if the objects are the same;
+          {@code false} otherwise.
+@see java.net.InetAddress#getAddress()
+*/
+equals : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='java-net-NetworkInterface-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

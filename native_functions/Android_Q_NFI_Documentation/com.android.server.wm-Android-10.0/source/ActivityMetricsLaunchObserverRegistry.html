@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wm-ActivityMetricsLaunchObserverRegistry'>/**@class com.android.server.wm.ActivityMetricsLaunchObserverRegistry
+</span> Multi-cast delegate implementation for {@link com.android.server.wm.ActivityMetricsLaunchObserver}.
+
+ &lt;br/&gt;&lt;br/&gt;
+ This enables multiple launch observers to subscribe to {@link ActivityMetricsLogger}
+ independently of each other.
+
+ &lt;br/&gt;&lt;br/&gt;
+ Some callbacks in {@link com.android.server.wm.ActivityMetricsLaunchObserver} have a {@code byte[]}
+ parameter; this array is reused by all the registered observers, so it must not be written to
+ (i.e. all observers must treat any array parameters as immutable).
+
+ &lt;br /&gt;&lt;br /&gt;
+ Multi-cast invocations occurs sequentially in-order of registered observers.
+*/
+var ActivityMetricsLaunchObserverRegistry = {
+
+<span id='com-android-server-wm-ActivityMetricsLaunchObserverRegistry-method-registerLaunchObserver'>/**Register an extra launch observer to receive the multi-cast.
+</span>
+ &lt;br /&gt;&lt;br /&gt;
+ Multi-cast invocation happens in the same order the observers were registered. For example,
+ &lt;pre&gt;
+     registerLaunchObserver(A)
+     registerLaunchObserver(B)
+
+     obs.onIntentFailed() -&gt;
+       A.onIntentFailed()
+       B.onIntentFailed()
+ &lt;/pre&gt;
+*/
+registerLaunchObserver : function(  ) {},
+
+<span id='com-android-server-wm-ActivityMetricsLaunchObserverRegistry-method-unregisterLaunchObserver'>/**Unregister an existing launch observer. It will not receive the multi-cast in the future.
+</span>
+ &lt;br /&gt;&lt;br /&gt;
+ This does nothing if this observer was not already registered.
+*/
+unregisterLaunchObserver : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

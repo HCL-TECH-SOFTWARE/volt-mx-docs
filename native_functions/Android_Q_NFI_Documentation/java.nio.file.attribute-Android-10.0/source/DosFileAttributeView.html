@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-file-attribute-DosFileAttributeView'>/**@class java.nio.file.attribute.DosFileAttributeView
+</span> implements java.nio.file.attribute.BasicFileAttributeView
+
+ A file attribute view that provides a view of the legacy &quot;DOS&quot; file attributes.
+ These attributes are supported by file systems such as the File Allocation
+ Table (FAT) format commonly used in &lt;em&gt;consumer devices&lt;/em&gt;.
+
+ &lt;p&gt; A {@code DosFileAttributeView} is a {@link java.nio.file.attribute.BasicFileAttributeView} that
+ additionally supports access to the set of DOS attribute flags that are used
+ to indicate if the file is read-only, hidden, a system file, or archived.
+
+ &lt;p&gt; Where dynamic access to file attributes is required, the attributes
+ supported by this attribute view are as defined by {@code
+ BasicFileAttributeView}, and in addition, the following attributes are
+ supported:
+ &lt;blockquote&gt;
+ &lt;table border=&quot;1&quot; cellpadding=&quot;8&quot; summary=&quot;Supported attributes&quot;&gt;
+   &lt;tr&gt;
+     &lt;th&gt; Name &lt;/th&gt;
+     &lt;th&gt; Type &lt;/th&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+     &lt;td&gt; readonly &lt;/td&gt;
+     &lt;td&gt; {@link Boolean} &lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+     &lt;td&gt; hidden &lt;/td&gt;
+     &lt;td&gt; {@link Boolean} &lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+     &lt;td&gt; system &lt;/td&gt;
+     &lt;td&gt; {@link Boolean} &lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+     &lt;td&gt; archive &lt;/td&gt;
+     &lt;td&gt; {@link Boolean} &lt;/td&gt;
+   &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;/blockquote&gt;
+
+ &lt;p&gt; The {@link java.nio.file.Files#getAttribute getAttribute} method may
+ be used to read any of these attributes, or any of the attributes defined by
+ {@link java.nio.file.attribute.BasicFileAttributeView} as if by invoking the {@link #readAttributes
+ readAttributes()} method.
+
+ &lt;p&gt; The {@link java.nio.file.Files#setAttribute setAttribute} method may
+ be used to update the file's last modified time, last access time or create
+ time attributes as defined by {@link java.nio.file.attribute.BasicFileAttributeView}. It may also be
+ used to update the DOS attributes as if by invoking the {@link #setReadOnly
+ setReadOnly}, {@link #setHidden setHidden}, {@link #setSystem setSystem}, and
+ {@link #setArchive setArchive} methods respectively.
+
+ @since 1.7
+*/
+var DosFileAttributeView = {
+
+<span id='java-nio-file-attribute-DosFileAttributeView-method-name'>/**Returns the name of the attribute view. Attribute views of this type
+</span> have the name {@code &quot;dos&quot;}.
+*/
+name : function(  ) {},
+
+<span id='java-nio-file-attribute-DosFileAttributeView-method-readAttributes'>/**
+</span>@throws IOException                             {@inheritDoc}
+@throws SecurityException                       {@inheritDoc}
+*/
+readAttributes : function(  ) {},
+
+<span id='java-nio-file-attribute-DosFileAttributeView-method-setReadOnly'>/**Updates the value of the read-only attribute.
+</span>
+ &lt;p&gt; It is implementation specific if the attribute can be updated as an
+ atomic operation with respect to other file system operations. An
+ implementation may, for example, require to read the existing value of
+ the DOS attribute in order to update this attribute.
+@param {Boolean} value
+          the new value of the attribute
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default, and a security manager is installed,
+          its  {@link SecurityManager#checkWrite(String) checkWrite} method
+          is invoked to check write access to the file
+*/
+setReadOnly : function(  ) {},
+
+<span id='java-nio-file-attribute-DosFileAttributeView-method-setHidden'>/**Updates the value of the hidden attribute.
+</span>
+ &lt;p&gt; It is implementation specific if the attribute can be updated as an
+ atomic operation with respect to other file system operations. An
+ implementation may, for example, require to read the existing value of
+ the DOS attribute in order to update this attribute.
+@param {Boolean} value
+          the new value of the attribute
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default, and a security manager is installed,
+          its  {@link SecurityManager#checkWrite(String) checkWrite} method
+          is invoked to check write access to the file
+*/
+setHidden : function(  ) {},
+
+<span id='java-nio-file-attribute-DosFileAttributeView-method-setSystem'>/**Updates the value of the system attribute.
+</span>
+ &lt;p&gt; It is implementation specific if the attribute can be updated as an
+ atomic operation with respect to other file system operations. An
+ implementation may, for example, require to read the existing value of
+ the DOS attribute in order to update this attribute.
+@param {Boolean} value
+          the new value of the attribute
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default, and a security manager is installed,
+          its  {@link SecurityManager#checkWrite(String) checkWrite} method
+          is invoked to check write access to the file
+*/
+setSystem : function(  ) {},
+
+<span id='java-nio-file-attribute-DosFileAttributeView-method-setArchive'>/**Updates the value of the archive attribute.
+</span>
+ &lt;p&gt; It is implementation specific if the attribute can be updated as an
+ atomic operation with respect to other file system operations. An
+ implementation may, for example, require to read the existing value of
+ the DOS attribute in order to update this attribute.
+@param {Boolean} value
+          the new value of the attribute
+@throws IOException
+          if an I/O error occurs
+@throws SecurityException
+          In the case of the default, and a security manager is installed,
+          its  {@link SecurityManager#checkWrite(String) checkWrite} method
+          is invoked to check write access to the file
+*/
+setArchive : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

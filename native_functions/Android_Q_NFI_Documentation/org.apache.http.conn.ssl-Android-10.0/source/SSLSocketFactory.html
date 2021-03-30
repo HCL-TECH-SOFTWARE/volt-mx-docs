@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-apache-http-conn-ssl-SSLSocketFactory'>/**@class org.apache.http.conn.ssl.SSLSocketFactory
+</span> implements org.apache.http.conn.scheme.LayeredSocketFactory
+
+@extends java.lang.Object
+
+ Layered socket factory for TLS/SSL connections, based on JSSE.
+.
+ &lt;p&gt;
+ SSLSocketFactory can be used to validate the identity of the HTTPS 
+ server against a list of trusted certificates and to authenticate to
+ the HTTPS server using a private key. 
+ &lt;/p&gt;
+ 
+ &lt;p&gt;
+ SSLSocketFactory will enable server authentication when supplied with
+ a {@link KeyStore truststore} file containg one or several trusted
+ certificates. The client secure socket will reject the connection during
+ the SSL session handshake if the target HTTPS server attempts to
+ authenticate itself with a non-trusted certificate.
+ &lt;/p&gt;
+ 
+ &lt;p&gt;
+ Use JDK keytool utility to import a trusted certificate and generate a truststore file:    
+    &lt;pre&gt;
+     keytool -import -alias &quot;my server cert&quot; -file server.crt -keystore my.truststore
+    &lt;/pre&gt;
+ &lt;/p&gt;
+ 
+ &lt;p&gt;
+ SSLSocketFactory will enable client authentication when supplied with
+ a {@link KeyStore keystore} file containg a private key/public certificate
+ pair. The client secure socket will use the private key to authenticate
+ itself to the target HTTPS server during the SSL session handshake if
+ requested to do so by the server.
+ The target HTTPS server will in its turn verify the certificate presented
+ by the client in order to establish client's authenticity
+ &lt;/p&gt;
+ 
+ &lt;p&gt;
+ Use the following sequence of actions to generate a keystore file
+ &lt;/p&gt;
+   &lt;ul&gt;
+     &lt;li&gt;
+      &lt;p&gt;
+      Use JDK keytool utility to generate a new key
+      &lt;pre&gt;keytool -genkey -v -alias &quot;my client key&quot; -validity 365 -keystore my.keystore&lt;/pre&gt;
+      For simplicity use the same password for the key as that of the keystore
+      &lt;/p&gt;
+     &lt;/li&gt;
+     &lt;li&gt;
+      &lt;p&gt;
+      Issue a certificate signing request (CSR)
+      &lt;pre&gt;keytool -certreq -alias &quot;my client key&quot; -file mycertreq.csr -keystore my.keystore&lt;/pre&gt;
+     &lt;/p&gt;
+     &lt;/li&gt;
+     &lt;li&gt;
+      &lt;p&gt;
+      Send the certificate request to the trusted Certificate Authority for signature. 
+      One may choose to act as her own CA and sign the certificate request using a PKI 
+      tool, such as OpenSSL.
+      &lt;/p&gt;
+     &lt;/li&gt;
+     &lt;li&gt;
+      &lt;p&gt;
+       Import the trusted CA root certificate
+       &lt;pre&gt;keytool -import -alias &quot;my trusted ca&quot; -file caroot.crt -keystore my.keystore&lt;/pre&gt; 
+      &lt;/p&gt;
+     &lt;/li&gt;
+     &lt;li&gt;
+      &lt;p&gt;
+       Import the PKCS#7 file containg the complete certificate chain
+       &lt;pre&gt;keytool -import -alias &quot;my client key&quot; -file mycert.p7 -keystore my.keystore&lt;/pre&gt; 
+      &lt;/p&gt;
+     &lt;/li&gt;
+     &lt;li&gt;
+      &lt;p&gt;
+       Verify the content the resultant keystore file
+       &lt;pre&gt;keytool -list -v -keystore my.keystore&lt;/pre&gt; 
+      &lt;/p&gt;
+     &lt;/li&gt;
+   &lt;/ul&gt;
+ @author &lt;a href=&quot;mailto:oleg at ural.ru&quot;&gt;Oleg Kalnichevski&lt;/a&gt;
+ @author Julius Davies
+
+ @deprecated Please use {@link java.net.URL#openConnection} instead.
+     Please visit &lt;a href=&quot;http://android-developers.blogspot.com/2011/09/androids-http-clients.html&quot;&gt;this webpage&lt;/a&gt;
+     for further details.
+*/
+var SSLSocketFactory = {
+
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-property-TLS'>/***/
+</span>TLS : &quot;TLS&quot;,
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-property-SSL'>/***/
+</span>SSL : &quot;SSL&quot;,
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-property-SSLV2'>/***/
+</span>SSLV2 : &quot;SSLv2&quot;,
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-property-ALLOW_ALL_HOSTNAME_VERIFIER'>/***/
+</span>ALLOW_ALL_HOSTNAME_VERIFIER : &quot;null&quot;,
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-property-BROWSER_COMPATIBLE_HOSTNAME_VERIFIER'>/***/
+</span>BROWSER_COMPATIBLE_HOSTNAME_VERIFIER : &quot;null&quot;,
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-property-STRICT_HOSTNAME_VERIFIER'>/***/
+</span>STRICT_HOSTNAME_VERIFIER : &quot;null&quot;,
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-method-getSocketFactory'>/**Gets an singleton instance of the SSLProtocolSocketFactory.
+</span>@return {Object {org.apache.http.conn.ssl.SSLSocketFactory}} a SSLProtocolSocketFactory
+*/
+getSocketFactory : function(  ) {},
+
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-method-createSocket'>/**
+</span>*/
+createSocket : function(  ) {},
+
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-method-connectSocket'>/**
+</span>*/
+connectSocket : function(  ) {},
+
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-method-isSecure'>/**Checks whether a socket connection is secure.
+</span> This factory creates TLS/SSL socket connections
+ which, by default, are considered secure.
+ &lt;br/&gt;
+ Derived classes may override this method to perform
+ runtime checks, for example based on the cypher suite.
+@param {Object {Socket}} sock      the connected socket
+@return {Boolean} &lt;code&gt;true&lt;/code&gt;
+@throws IllegalArgumentException if the argument is invalid
+*/
+isSecure : function(  ) {},
+
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-method-createSocket'>/**
+</span>*/
+createSocket : function(  ) {},
+
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-method-setHostnameVerifier'>/**
+</span>*/
+setHostnameVerifier : function(  ) {},
+
+<span id='org-apache-http-conn-ssl-SSLSocketFactory-method-getHostnameVerifier'>/**
+</span>*/
+getHostnameVerifier : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

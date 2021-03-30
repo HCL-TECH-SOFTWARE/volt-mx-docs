@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-stream-Collector'>/**@class java.util.stream.Collector
+</span> A &lt;a href=&quot;package-summary.html#Reduction&quot;&gt;mutable reduction operation&lt;/a&gt; that
+ accumulates input elements into a mutable result container, optionally transforming
+ the accumulated result into a final representation after all input elements
+ have been processed.  Reduction operations can be performed either sequentially
+ or in parallel.
+
+ &lt;p&gt;Examples of mutable reduction operations include:
+ accumulating elements into a {@code Collection}; concatenating
+ strings using a {@code StringBuilder}; computing summary information about
+ elements such as sum, min, max, or average; computing &quot;pivot table&quot; summaries
+ such as &quot;maximum valued transaction by seller&quot;, etc.  The class {@link java.util.stream.Collectors}
+ provides implementations of many common mutable reductions.
+
+ &lt;p&gt;A {@code Collector} is specified by four functions that work together to
+ accumulate entries into a mutable result container, and optionally perform
+ a final transform on the result.  They are: &lt;ul&gt;
+     &lt;li&gt;creation of a new result container ({@link #supplier}())&lt;/li&gt;
+     &lt;li&gt;incorporating a new data element into a result container ({@link #accumulator}())&lt;/li&gt;
+     &lt;li&gt;combining two result containers into one ({@link #combiner}())&lt;/li&gt;
+     &lt;li&gt;performing an optional final transform on the container ({@link #finisher}())&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Collectors also have a set of characteristics, such as
+ {@link java.util.stream.Collector.Characteristics#CONCURRENT}, that provide hints that can be used by a
+ reduction implementation to provide better performance.
+
+ &lt;p&gt;A sequential implementation of a reduction using a collector would
+ create a single result container using the supplier function, and invoke the
+ accumulator function once for each input element.  A parallel implementation
+ would partition the input, create a result container for each partition,
+ accumulate the contents of each partition into a subresult for that partition,
+ and then use the combiner function to merge the subresults into a combined
+ result.
+
+ &lt;p&gt;To ensure that sequential and parallel executions produce equivalent
+ results, the collector functions must satisfy an &lt;em&gt;identity&lt;/em&gt; and an
+ &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associativity&lt;/a&gt; constraints.
+
+ &lt;p&gt;The identity constraint says that for any partially accumulated result,
+ combining it with an empty result container must produce an equivalent
+ result.  That is, for a partially accumulated result {@code a} that is the
+ result of any series of accumulator and combiner invocations, {@code a} must
+ be equivalent to {@code combiner.apply(a, supplier.get())}.
+
+ &lt;p&gt;The associativity constraint says that splitting the computation must
+ produce an equivalent result.  That is, for any input elements {@code t1}
+ and {@code t2}, the results {@code r1} and {@code r2} in the computation
+ below must be equivalent:
+ &lt;pre&gt;{@code
+     A a1 = supplier.get();
+     accumulator.accept(a1, t1);
+     accumulator.accept(a1, t2);
+     R r1 = finisher.apply(a1);  // result without splitting
+
+     A a2 = supplier.get();
+     accumulator.accept(a2, t1);
+     A a3 = supplier.get();
+     accumulator.accept(a3, t2);
+     R r2 = finisher.apply(combiner.apply(a2, a3));  // result with splitting
+ } &lt;/pre&gt;
+
+ &lt;p&gt;For collectors that do not have the {@code UNORDERED} characteristic,
+ two accumulated results {@code a1} and {@code a2} are equivalent if
+ {@code finisher.apply(a1).equals(finisher.apply(a2))}.  For unordered
+ collectors, equivalence is relaxed to allow for non-equality related to
+ differences in order.  (For example, an unordered collector that accumulated
+ elements to a {@code List} would consider two lists equivalent if they
+ contained the same elements, ignoring order.)
+
+ &lt;p&gt;Libraries that implement reduction based on {@code Collector}, such as
+ {@link java.util.stream.Stream#collect(Collector)}, must adhere to the following constraints:
+ &lt;ul&gt;
+     &lt;li&gt;The first argument passed to the accumulator function, both
+     arguments passed to the combiner function, and the argument passed to the
+     finisher function must be the result of a previous invocation of the
+     result supplier, accumulator, or combiner functions.&lt;/li&gt;
+     &lt;li&gt;The implementation should not do anything with the result of any of
+     the result supplier, accumulator, or combiner functions other than to
+     pass them again to the accumulator, combiner, or finisher functions,
+     or return them to the caller of the reduction operation.&lt;/li&gt;
+     &lt;li&gt;If a result is passed to the combiner or finisher
+     function, and the same object is not returned from that function, it is
+     never used again.&lt;/li&gt;
+     &lt;li&gt;Once a result is passed to the combiner or finisher function, it
+     is never passed to the accumulator function again.&lt;/li&gt;
+     &lt;li&gt;For non-concurrent collectors, any result returned from the result
+     supplier, accumulator, or combiner functions must be serially
+     thread-confined.  This enables collection to occur in parallel without
+     the {@code Collector} needing to implement any additional synchronization.
+     The reduction implementation must manage that the input is properly
+     partitioned, that partitions are processed in isolation, and combining
+     happens only after accumulation is complete.&lt;/li&gt;
+     &lt;li&gt;For concurrent collectors, an implementation is free to (but not
+     required to) implement reduction concurrently.  A concurrent reduction
+     is one where the accumulator function is called concurrently from
+     multiple threads, using the same concurrently-modifiable result container,
+     rather than keeping the result isolated during accumulation.
+     A concurrent reduction should only be applied if the collector has the
+     {@link java.util.stream.Collector.Characteristics#UNORDERED} characteristics or if the
+     originating data is unordered.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;In addition to the predefined implementations in {@link java.util.stream.Collectors}, the
+ static factory methods {@link #of(Supplier, BiConsumer, BinaryOperator, java.util.stream.Collector.Characteristics...)}
+ can be used to construct collectors.  For example, you could create a collector
+ that accumulates widgets into a {@code TreeSet} with:
+
+ &lt;pre&gt;{@code
+     Collector&lt;Widget, ?, TreeSet&lt;Widget&gt;&gt; intoSet =
+         Collector.of(TreeSet::new, TreeSet::add,
+                      (left, right) -&gt; { left.addAll(right); return left; });
+ }&lt;/pre&gt;
+
+ (This behavior is also implemented by the predefined collector
+ {@link java.util.stream.Collectors#toCollection(Supplier)}).
+
+ @apiNote
+ Performing a reduction operation with a {@code Collector} should produce a
+ result equivalent to:
+ &lt;pre&gt;{@code
+     R container = collector.supplier().get();
+     for (T t : data)
+         collector.accumulator().accept(container, t);
+     return collector.finisher().apply(container);
+ }&lt;/pre&gt;
+
+ &lt;p&gt;However, the library is free to partition the input, perform the reduction
+ on the partitions, and then use the combiner function to combine the partial
+ results to achieve a parallel reduction.  (Depending on the specific reduction
+ operation, this may perform better or worse, depending on the relative cost
+ of the accumulator and combiner functions.)
+
+ &lt;p&gt;Collectors are designed to be &lt;em&gt;composed&lt;/em&gt;; many of the methods
+ in {@link java.util.stream.Collectors} are functions that take a collector and produce
+ a new collector.  For example, given the following collector that computes
+ the sum of the salaries of a stream of employees:
+
+ &lt;pre&gt;{@code
+     Collector&lt;Employee, ?, Integer&gt; summingSalaries
+         = Collectors.summingInt(Employee::getSalary))
+ }&lt;/pre&gt;
+
+ If we wanted to create a collector to tabulate the sum of salaries by
+ department, we could reuse the &quot;sum of salaries&quot; logic using
+ {@link java.util.stream.Collectors#groupingBy(Function, Collector)}:
+
+ &lt;pre&gt;{@code
+     Collector&lt;Employee, ?, Map&lt;Department, Integer&gt;&gt; summingSalariesByDept
+         = Collectors.groupingBy(Employee::getDepartment, summingSalaries);
+ }&lt;/pre&gt;
+
+ @see Stream#collect(Collector)
+ @see Collectors
+
+ @param &lt;T&gt; the type of input elements to the reduction operation
+ @param &lt;A&gt; the mutable accumulation type of the reduction operation (often
+            hidden as an implementation detail)
+ @param &lt;R&gt; the result type of the reduction operation
+ @since 1.8
+*/
+var Collector = {
+
+<span id='java-util-stream-Collector-method-supplier'>/**A function that creates and returns a new mutable result container.
+</span>@return {Object {java.util.function.Supplier}} a function which returns a new, mutable result container
+*/
+supplier : function(  ) {},
+
+<span id='java-util-stream-Collector-method-accumulator'>/**A function that folds a value into a mutable result container.
+</span>@return {Object {java.util.function.BiConsumer}} a function which folds a value into a mutable result container
+*/
+accumulator : function(  ) {},
+
+<span id='java-util-stream-Collector-method-combiner'>/**A function that accepts two partial results and merges them.  The
+</span> combiner function may fold state from one argument into the other and
+ return that, or may return a new result container.
+@return {Object {java.util.function.BinaryOperator}} a function which combines two partial results into a combined
+ result
+*/
+combiner : function(  ) {},
+
+<span id='java-util-stream-Collector-method-finisher'>/**Perform the final transformation from the intermediate accumulation type
+</span> {@code A} to the final result type {@code R}.
+
+ &lt;p&gt;If the characteristic {@code IDENTITY_TRANSFORM} is
+ set, this function may be presumed to be an identity transform with an
+ unchecked cast from {@code A} to {@code R}.
+@return {Object {java.util.function.Function}} a function which transforms the intermediate result to the final
+ result
+*/
+finisher : function(  ) {},
+
+<span id='java-util-stream-Collector-method-characteristics'>/**Returns a {@code Set} of {@code Collector.Characteristics} indicating
+</span> the characteristics of this Collector.  This set should be immutable.
+@return {Object {java.util.Set}} an immutable set of collector characteristics
+*/
+characteristics : function(  ) {},
+
+<span id='java-util-stream-Collector-method-of'>/**Returns a new {@code Collector} described by the given {@code supplier},
+</span> {@code accumulator}, and {@code combiner} functions.  The resulting
+ {@code Collector} has the {@code Collector.Characteristics.IDENTITY_FINISH}
+ characteristic.
+@param {Object {java.util.function.Supplier}} supplier The supplier function for the new collector
+@param {Object {java.util.function.BiConsumer}} accumulator The accumulator function for the new collector
+@param {Object {java.util.function.BinaryOperator}} combiner The combiner function for the new collector
+@param {Object {java.util.stream.Collector.Characteristics[]}} characteristics The collector characteristics for the new
+                        collector
+@param &lt;T&gt; The type of input elements for the new collector
+@param &lt;R&gt; The type of intermediate accumulation result, and final result,
+           for the new collector
+@throws NullPointerException if any argument is null
+@return {Object {java.util.stream.Collector}} the new {@code Collector}
+*/
+of : function(  ) {},
+
+<span id='java-util-stream-Collector-method-of'>/**Returns a new {@code Collector} described by the given {@code supplier},
+</span> {@code accumulator}, {@code combiner}, and {@code finisher} functions.
+@param {Object {java.util.function.Supplier}} supplier The supplier function for the new collector
+@param {Object {java.util.function.BiConsumer}} accumulator The accumulator function for the new collector
+@param {Object {java.util.function.BinaryOperator}} combiner The combiner function for the new collector
+@param {Object {java.util.function.Function}} finisher The finisher function for the new collector
+@param {Object {java.util.stream.Collector.Characteristics[]}} characteristics The collector characteristics for the new
+                        collector
+@param &lt;T&gt; The type of input elements for the new collector
+@param &lt;A&gt; The intermediate accumulation type of the new collector
+@param &lt;R&gt; The final result type of the new collector
+@throws NullPointerException if any argument is null
+@return {Object {java.util.stream.Collector}} the new {@code Collector}
+*/
+of : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

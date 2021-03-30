@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiScoreCard'>/**@class com.android.server.wifi.WifiScoreCard
+</span>@extends java.lang.Object
+
+ Retains statistical information about the performance of various
+ access points, as experienced by this device.
+
+ The purpose is to better inform future network selection and switching
+ by this device.
+*/
+var WifiScoreCard = {
+
+<span id='com-android-server-wifi-WifiScoreCard-property-DUMP_ARG'>/***/
+</span>DUMP_ARG : &quot;WifiScoreCard&quot;,
+<span id='com-android-server-wifi-WifiScoreCard-method-installMemoryStore'>/**Installs a memory store.
+</span>
+ Normally this happens just once, shortly after we start. But wifi can
+ come up before the disk is ready, and we might not yet have a valid wall
+ clock when we start up, so we need to be prepared to begin recording data
+ even if the MemoryStore is not yet available.
+
+ When the store is installed for the first time, we want to merge any
+ recently recorded data together with data already in the store. But if
+ the store restarts and has to be reinstalled, we don't want to do
+ this merge, because that would risk double-counting the old data.
+*/
+installMemoryStore : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-getL2KeyAndGroupHint'>/**Gets the L2Key and GroupHint associated with the connection.
+</span>*/
+getL2KeyAndGroupHint : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-resetConnectionState'>/**Resets the connection state
+</span>*/
+resetConnectionState : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteSignalPoll'>/**Updates the score card after a signal poll
+</span>@param {Object {ExtendedWifiInfo}} wifiInfo object holding relevant values
+*/
+noteSignalPoll : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteIpConfiguration'>/**Updates the score card after IP configuration
+</span>@param {Object {ExtendedWifiInfo}} wifiInfo object holding relevant values
+*/
+noteIpConfiguration : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteValidationSuccess'>/**Updates the score card after network validation success.
+</span>@param {Object {ExtendedWifiInfo}} wifiInfo object holding relevant values
+*/
+noteValidationSuccess : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteConnectionAttempt'>/**Records the start of a connection attempt
+</span>@param {Object {ExtendedWifiInfo}} wifiInfo may have state about an existing connection
+*/
+noteConnectionAttempt : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteNetworkAgentCreated'>/**Records a newly assigned NetworkAgent netId.
+</span>*/
+noteNetworkAgentCreated : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteConnectionFailure'>/**Updates the score card after a failed connection attempt
+</span>@param {Object {ExtendedWifiInfo}} wifiInfo object holding relevant values
+*/
+noteConnectionFailure : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteIpReachabilityLost'>/**Updates the score card after network reachability failure
+</span>@param {Object {ExtendedWifiInfo}} wifiInfo object holding relevant values
+*/
+noteIpReachabilityLost : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteRoam'>/**Updates the score card before a roam
+</span>
+ We may have already done a firmware roam, but wifiInfo has not yet
+ been updated, so we still have the old state.
+@param {Object {ExtendedWifiInfo}} wifiInfo object holding relevant values
+*/
+noteRoam : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteSupplicantStateChanging'>/**Called when the supplicant state is about to change, before wifiInfo is updated
+</span>@param {Object {ExtendedWifiInfo}} wifiInfo object holding old values
+@param {Object {SupplicantState}} state the new supplicant state
+*/
+noteSupplicantStateChanging : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteSupplicantStateChanged'>/**Called after the supplicant state changed
+</span>@param {Object {ExtendedWifiInfo}} wifiInfo object holding old values
+*/
+noteSupplicantStateChanged : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-noteWifiDisabled'>/**Updates the score card after wifi is disabled
+</span>@param {Object {ExtendedWifiInfo}} wifiInfo object holding relevant values
+*/
+noteWifiDisabled : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-doWrites'>/**Issues write requests for all changed entries.
+</span>
+ This should be called from time to time to save the state to persistent
+ storage. Since we always check internal state first, this does not need
+ to be called very often, but it should be called before shutdown.
+@returns number of writes issued.
+*/
+doWrites : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-getNetworkListByteArray'>/**Returns the current scorecard in the form of a protobuf com_android_server_wifi.NetworkList
+</span>
+ Synchronization is the caller's responsibility.
+@param {Boolean} obfuscate - if true, ssids and bssids are omitted (short id only)
+*/
+getNetworkListByteArray : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-getNetworkListBase64'>/**Returns the current scorecard as a base64-encoded protobuf
+</span>
+ Synchronization is the caller's responsibility.
+@param {Boolean} obfuscate - if true, bssids are omitted (short id only)
+*/
+getNetworkListBase64 : function(  ) {},
+
+<span id='com-android-server-wifi-WifiScoreCard-method-clear'>/**Clears the internal state.
+</span>
+ This is called in response to a factoryReset call from Settings.
+ The memory store will be called after we are called, to wipe the stable
+ storage as well. Since we will have just removed all of our networks,
+ it is very unlikely that we're connected, or will connect immediately.
+ Any in-flight reads will land in the objects we are dropping here, and
+ the memory store should drop the in-flight writes. Ideally we would
+ avoid issuing reads until we were sure that the memory store had
+ received the factoryReset.
+*/
+clear : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

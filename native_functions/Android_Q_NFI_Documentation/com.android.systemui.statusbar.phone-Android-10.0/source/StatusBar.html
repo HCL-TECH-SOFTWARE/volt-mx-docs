@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-statusbar-phone-StatusBar'>/**@class com.android.systemui.statusbar.phone.StatusBar
+</span> implements com.android.systemui.DemoMode
+
+ implements com.android.systemui.plugins.ActivityStarter
+
+ implements com.android.systemui.statusbar.phone.UnlockMethodCache.OnUnlockMethodChangedListener
+
+ implements com.android.systemui.statusbar.policy.OnHeadsUpChangedListener
+
+ implements com.android.systemui.statusbar.CommandQueue.Callbacks
+
+ implements com.android.systemui.statusbar.policy.ZenModeController.Callback
+
+ implements com.android.internal.colorextraction.ColorExtractor.OnColorsChangedListener
+
+ implements com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
+
+ implements com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
+
+ implements com.android.systemui.statusbar.phone.ShadeController
+
+ implements com.android.systemui.statusbar.notification.ActivityLaunchAnimator.Callback
+
+ implements com.android.systemui.statusbar.AmbientPulseManager.OnAmbientChangedListener
+
+ implements com.android.systemui.appops.AppOpsController.Callback
+
+@extends com.android.systemui.SystemUI
+
+*/
+var StatusBar = {
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-MULTIUSER_DEBUG'>/***/
+</span>MULTIUSER_DEBUG : &quot;false&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-ENABLE_CHILD_NOTIFICATIONS'>/***/
+</span>ENABLE_CHILD_NOTIFICATIONS : &quot;null&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-SYSTEM_DIALOG_REASON_HOME_KEY'>/***/
+</span>SYSTEM_DIALOG_REASON_HOME_KEY : &quot;homekey&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-SYSTEM_DIALOG_REASON_RECENT_APPS'>/***/
+</span>SYSTEM_DIALOG_REASON_RECENT_APPS : &quot;recentapps&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-SYSTEM_DIALOG_REASON_SCREENSHOT'>/***/
+</span>SYSTEM_DIALOG_REASON_SCREENSHOT : &quot;screenshot&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-TAG'>/***/
+</span>TAG : &quot;StatusBar&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-DEBUG'>/***/
+</span>DEBUG : &quot;false&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-SPEW'>/***/
+</span>SPEW : &quot;false&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-DUMPTRUCK'>/***/
+</span>DUMPTRUCK : &quot;true&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-DEBUG_GESTURES'>/***/
+</span>DEBUG_GESTURES : &quot;false&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-DEBUG_MEDIA_FAKE_ARTWORK'>/***/
+</span>DEBUG_MEDIA_FAKE_ARTWORK : &quot;false&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-DEBUG_CAMERA_LIFT'>/***/
+</span>DEBUG_CAMERA_LIFT : &quot;false&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-DEBUG_WINDOW_STATE'>/***/
+</span>DEBUG_WINDOW_STATE : &quot;false&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-CHATTY'>/***/
+</span>CHATTY : &quot;false&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-SHOW_LOCKSCREEN_MEDIA_ARTWORK'>/***/
+</span>SHOW_LOCKSCREEN_MEDIA_ARTWORK : &quot;true&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-ACTION_FAKE_ARTWORK'>/***/
+</span>ACTION_FAKE_ARTWORK : &quot;fake_artwork&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-FADE_KEYGUARD_START_DELAY'>/***/
+</span>FADE_KEYGUARD_START_DELAY : &quot;100&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-FADE_KEYGUARD_DURATION'>/***/
+</span>FADE_KEYGUARD_DURATION : &quot;300&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-FADE_KEYGUARD_DURATION_PULSING'>/***/
+</span>FADE_KEYGUARD_DURATION_PULSING : &quot;96&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-ONLY_CORE_APPS'>/**If true, the system is in the half-boot-to-decryption-screen state.
+</span> Prudently disable QS and notifications.  */
+ONLY_CORE_APPS : &quot;null&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-property-ENABLE_LOCKSCREEN_WALLPAPER'>/**If true, the lockscreen will show a distinct wallpaper */
+</span>ENABLE_LOCKSCREEN_WALLPAPER : &quot;true&quot;,
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onActiveStateChanged'>/**
+</span>*/
+onActiveStateChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-start'>/**
+</span>*/
+start : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-addAfterKeyguardGoneRunnable'>/**
+</span>*/
+addAfterKeyguardGoneRunnable : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isDozing'>/**
+</span>*/
+isDozing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-wakeUpIfDozing'>/**
+</span>*/
+wakeUpIfDozing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onDensityOrFontScaleChanged'>/**
+</span>*/
+onDensityOrFontScaleChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onThemeChanged'>/**
+</span>*/
+onThemeChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onOverlayChanged'>/**
+</span>*/
+onOverlayChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onUiModeChanged'>/**
+</span>*/
+onUiModeChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getStatusBarWindow'>/**
+</span>*/
+getStatusBarWindow : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getStatusBarHeight'>/**
+</span>*/
+getStatusBarHeight : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-addQsTile'>/**
+</span>*/
+addQsTile : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-remQsTile'>/**
+</span>*/
+remQsTile : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-clickTile'>/**
+</span>*/
+clickTile : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-areNotificationsHidden'>/**
+</span>*/
+areNotificationsHidden : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-requestNotificationUpdate'>/**
+</span>*/
+requestNotificationUpdate : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-requestFaceAuth'>/**Asks {@link KeyguardUpdateMonitor} to run face auth.
+</span>*/
+requestFaceAuth : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-updateAreThereNotifications'>/**
+</span>*/
+updateAreThereNotifications : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-disable'>/**State is one or more of the DISABLE constants from StatusBarManager.
+</span>*/
+disable : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startActivity'>/**
+</span>*/
+startActivity : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startActivity'>/**
+</span>*/
+startActivity : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startActivity'>/**
+</span>*/
+startActivity : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startActivity'>/**
+</span>*/
+startActivity : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setQsExpanded'>/**
+</span>*/
+setQsExpanded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isWakeUpComingFromTouch'>/**
+</span>*/
+isWakeUpComingFromTouch : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isFalsingThresholdNeeded'>/**
+</span>*/
+isFalsingThresholdNeeded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onKeyguardViewManagerStatesUpdated'>/**To be called when there's a state change in StatusBarKeyguardViewManager.
+</span>*/
+onKeyguardViewManagerStatesUpdated : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onUnlockMethodStateChanged'>/**
+</span>*/
+onUnlockMethodStateChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onHeadsUpPinnedModeChanged'>/**
+</span>*/
+onHeadsUpPinnedModeChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onHeadsUpPinned'>/**
+</span>*/
+onHeadsUpPinned : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onHeadsUpUnPinned'>/**
+</span>*/
+onHeadsUpUnPinned : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onHeadsUpStateChanged'>/**
+</span>*/
+onHeadsUpStateChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onAmbientStateChanged'>/**
+</span>*/
+onAmbientStateChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isKeyguardCurrentlySecure'>/**
+</span>*/
+isKeyguardCurrentlySecure : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setPanelExpanded'>/**
+</span>*/
+setPanelExpanded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getNotificationScrollLayout'>/**
+</span>*/
+getNotificationScrollLayout : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isPulsing'>/**
+</span>*/
+isPulsing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-hideStatusBarIconsWhenExpanded'>/**
+</span>*/
+hideStatusBarIconsWhenExpanded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onColorsChanged'>/**
+</span>*/
+onColorsChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getAmbientIndicationContainer'>/**
+</span>*/
+getAmbientIndicationContainer : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isOccluded'>/**
+</span>*/
+isOccluded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setOccluded'>/**
+</span>*/
+setOccluded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-hideStatusBarIconsForBouncer'>/**
+</span>*/
+hideStatusBarIconsForBouncer : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isHeadsUpShouldBeVisible'>/**
+</span>*/
+isHeadsUpShouldBeVisible : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onLaunchAnimationCancelled'>/**
+</span>*/
+onLaunchAnimationCancelled : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onExpandAnimationFinished'>/**
+</span>*/
+onExpandAnimationFinished : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onExpandAnimationTimedOut'>/**
+</span>*/
+onExpandAnimationTimedOut : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-areLaunchAnimationsEnabled'>/**
+</span>*/
+areLaunchAnimationsEnabled : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isDeviceInVrMode'>/**
+</span>*/
+isDeviceInVrMode : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getPresenter'>/**
+</span>*/
+getPresenter : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-maybeEscalateHeadsUp'>/**
+</span>*/
+maybeEscalateHeadsUp : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-handleSystemKey'>/**Called for system navigation gestures. First action opens the panel, second opens
+</span> settings. Down action closes the entire panel.
+*/
+handleSystemKey : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-showPinningEnterExitToast'>/**
+</span>*/
+showPinningEnterExitToast : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-showPinningEscapeToast'>/**
+</span>*/
+showPinningEscapeToast : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-animateCollapsePanels'>/**
+</span>*/
+animateCollapsePanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-postAnimateCollapsePanels'>/**
+</span>*/
+postAnimateCollapsePanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-postAnimateForceCollapsePanels'>/**
+</span>*/
+postAnimateForceCollapsePanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-postAnimateOpenPanels'>/**
+</span>*/
+postAnimateOpenPanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-togglePanel'>/**
+</span>*/
+togglePanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-animateCollapsePanels'>/**
+</span>*/
+animateCollapsePanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-animateCollapsePanels'>/**
+</span>*/
+animateCollapsePanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-animateCollapsePanels'>/**
+</span>*/
+animateCollapsePanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-animateCollapsePanels'>/**
+</span>*/
+animateCollapsePanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-dispatchNotificationsPanelTouchEvent'>/**
+</span>*/
+dispatchNotificationsPanelTouchEvent : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-animateExpandNotificationsPanel'>/**
+</span>*/
+animateExpandNotificationsPanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-animateExpandSettingsPanel'>/**
+</span>*/
+animateExpandSettingsPanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-animateCollapseQuickSettings'>/**
+</span>*/
+animateCollapseQuickSettings : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-interceptTouchEvent'>/**
+</span>*/
+interceptTouchEvent : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getGestureRecorder'>/**
+</span>*/
+getGestureRecorder : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getBiometricUnlockController'>/**
+</span>*/
+getBiometricUnlockController : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setWindowState'>/**
+</span>*/
+setWindowState : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setSystemUiVisibility'>/**
+</span>*/
+setSystemUiVisibility : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-showWirelessChargingAnimation'>/**
+</span>*/
+showWirelessChargingAnimation : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onRecentsAnimationStateChanged'>/**
+</span>*/
+onRecentsAnimationStateChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setInteracting'>/**
+</span>*/
+setInteracting : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-inFullscreenMode'>/**Returns whether the top activity is in fullscreen mode.
+</span>*/
+inFullscreenMode : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-inImmersiveMode'>/**Returns whether the top activity is in immersive mode.
+</span>*/
+inImmersiveMode : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-viewInfo'>/**
+</span>*/
+viewInfo : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-createAndAddWindows'>/**
+</span>*/
+createAndAddWindows : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startActivityDismissingKeyguard'>/**
+</span>*/
+startActivityDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startActivityDismissingKeyguard'>/**
+</span>*/
+startActivityDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startActivityDismissingKeyguard'>/**
+</span>*/
+startActivityDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-readyForKeyguardDone'>/**
+</span>*/
+readyForKeyguardDone : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-executeRunnableDismissingKeyguard'>/**
+</span>*/
+executeRunnableDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-resetUserExpandedStates'>/**
+</span>*/
+resetUserExpandedStates : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-dismissKeyguardThenExecute'>/**
+</span>*/
+dismissKeyguardThenExecute : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onConfigChanged'>/**
+</span>*/
+onConfigChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setLockscreenUser'>/**
+</span>*/
+setLockscreenUser : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-postQSRunnableDismissingKeyguard'>/**
+</span>*/
+postQSRunnableDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-postStartActivityDismissingKeyguard'>/**
+</span>*/
+postStartActivityDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-postStartActivityDismissingKeyguard'>/**
+</span>*/
+postStartActivityDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-dispatchDemoCommand'>/**
+</span>*/
+dispatchDemoCommand : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-showKeyguard'>/**
+</span>*/
+showKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-hideKeyguard'>/**
+</span>*/
+hideKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isFullScreenUserSwitcherState'>/**stop(tag)
+</span>@return {Boolean} True if StatusBar state is FULLSCREEN_USER_SWITCHER.
+*/
+isFullScreenUserSwitcherState : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-showKeyguardImpl'>/**
+</span>*/
+showKeyguardImpl : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-addPostCollapseAction'>/**
+</span>*/
+addPostCollapseAction : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isInLaunchTransition'>/**
+</span>*/
+isInLaunchTransition : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-fadeKeyguardAfterLaunchTransition'>/**Fades the content of the keyguard away after the launch transition is done.
+</span>@param {Object {Runnable}} beforeFading the runnable to be run when the circle is fully expanded and the fading
+                     starts
+@param {Object {Runnable}} endRunnable the runnable to be run when the transition is done
+*/
+fadeKeyguardAfterLaunchTransition : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-fadeKeyguardWhilePulsing'>/**Fades the content of the Keyguard while we are dozing and makes it invisible when finished
+</span> fading.
+*/
+fadeKeyguardWhilePulsing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-animateKeyguardUnoccluding'>/**Plays the animation when an activity that was occluding Keyguard goes away.
+</span>*/
+animateKeyguardUnoccluding : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startLaunchTransitionTimeout'>/**Starts the timeout when we try to start the affordances on Keyguard. We usually rely that
+</span> Keyguard goes away via fadeKeyguardAfterLaunchTransition, however, that might not happen
+ because the launched app crashed or something else went wrong.
+*/
+startLaunchTransitionTimeout : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-hideKeyguardImpl'>/**
+</span>@return {Boolean} true if we would like to stay in the shade, false if it should go away entirely
+*/
+hideKeyguardImpl : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-keyguardGoingAway'>/**Notifies the status bar that Keyguard is going away very soon.
+</span>*/
+keyguardGoingAway : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setKeyguardFadingAway'>/**Notifies the status bar the Keyguard is fading away with the specified timings.
+</span>@param {Number} startTime the start time of the animations in uptime millis
+@param {Number} delay the precalculated animation delay in milliseconds
+@param {Number} fadeoutDuration the duration of the exit animation, in milliseconds
+*/
+setKeyguardFadingAway : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-finishKeyguardFadingAway'>/**Notifies that the Keyguard fading away animation is done.
+</span>*/
+finishKeyguardFadingAway : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-userActivity'>/**
+</span>*/
+userActivity : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-interceptMediaKey'>/**
+</span>*/
+interceptMediaKey : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onMenuPressed'>/**
+</span>*/
+onMenuPressed : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-endAffordanceLaunch'>/**
+</span>*/
+endAffordanceLaunch : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onBackPressed'>/**
+</span>*/
+onBackPressed : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onSpacePressed'>/**
+</span>*/
+onSpacePressed : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-showBouncer'>/**
+</span>*/
+showBouncer : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-instantExpandNotificationsPanel'>/**
+</span>*/
+instantExpandNotificationsPanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-closeShadeIfOpen'>/**
+</span>*/
+closeShadeIfOpen : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-postOnShadeExpanded'>/**
+</span>*/
+postOnShadeExpanded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onStatePreChange'>/**
+</span>*/
+onStatePreChange : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onStateChanged'>/**
+</span>*/
+onStateChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onDozingChanged'>/**
+</span>*/
+onDozingChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onActivationReset'>/**
+</span>*/
+onActivationReset : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onTrackingStarted'>/**
+</span>*/
+onTrackingStarted : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onClosingFinished'>/**
+</span>*/
+onClosingFinished : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onUnlockHintStarted'>/**
+</span>*/
+onUnlockHintStarted : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onHintFinished'>/**
+</span>*/
+onHintFinished : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onCameraHintStarted'>/**
+</span>*/
+onCameraHintStarted : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onVoiceAssistHintStarted'>/**
+</span>*/
+onVoiceAssistHintStarted : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onPhoneHintStarted'>/**
+</span>*/
+onPhoneHintStarted : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onTrackingStopped'>/**
+</span>*/
+onTrackingStopped : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getNavigationBarView'>/**
+</span>*/
+getNavigationBarView : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getKeyguardBottomAreaView'>/**TODO: Remove this method. Views should not be passed forward. Will cause theme issues.
+</span>@return {Object {com.android.systemui.statusbar.phone.KeyguardBottomAreaView}} bottom area view
+*/
+getKeyguardBottomAreaView : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-goToLockedShade'>/**If secure with redaction: Show bouncer, go to unlocked shade.
+</span>
+ &lt;p&gt;If secure without redaction or no security: Go to {@link com.android.systemui.statusbar.phone.StatusBarState#SHADE_LOCKED}.&lt;/p&gt;
+@param {Object {View}} expandView The view to expand after going to the shade.
+*/
+goToLockedShade : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-goToKeyguard'>/**Goes back to the keyguard after hanging around in {@link com.android.systemui.statusbar.phone.StatusBarState#SHADE_LOCKED}.
+</span>*/
+goToKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setBouncerShowing'>/**Propagation of the bouncer state, indicating that it's fully visible.
+</span>*/
+setBouncerShowing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-collapseShade'>/**Collapses the notification shade if it is tracking or expanded.
+</span>*/
+collapseShade : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getWakefulnessState'>/**
+</span>*/
+getWakefulnessState : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isScreenFullyOff'>/**
+</span>@return {Boolean} true if the screen is currently fully off, i.e. has finished turning off and has
+         since not started turning on.
+*/
+isScreenFullyOff : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-showScreenPinningRequest'>/**
+</span>*/
+showScreenPinningRequest : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-showScreenPinningRequest'>/**
+</span>*/
+showScreenPinningRequest : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-hasActiveNotifications'>/**
+</span>*/
+hasActiveNotifications : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-appTransitionCancelled'>/**
+</span>*/
+appTransitionCancelled : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-appTransitionFinished'>/**
+</span>*/
+appTransitionFinished : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onCameraLaunchGestureDetected'>/**
+</span>*/
+onCameraLaunchGestureDetected : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-notifyBiometricAuthModeChanged'>/**
+</span>*/
+notifyBiometricAuthModeChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isKeyguardShowing'>/**
+</span>*/
+isKeyguardShowing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-shouldIgnoreTouch'>/**
+</span>*/
+shouldIgnoreTouch : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isDeviceInteractive'>/**
+</span>*/
+isDeviceInteractive : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-collapsePanel'>/**
+</span>*/
+collapsePanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-collapsePanel'>/**
+</span>*/
+collapsePanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setNotificationSnoozed'>/**
+</span>*/
+setNotificationSnoozed : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-toggleSplitScreen'>/**
+</span>*/
+toggleSplitScreen : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-preloadRecentApps'>/**
+</span>*/
+preloadRecentApps : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-cancelPreloadRecentApps'>/**
+</span>*/
+cancelPreloadRecentApps : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-dismissKeyboardShortcutsMenu'>/**
+</span>*/
+dismissKeyboardShortcutsMenu : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-toggleKeyboardShortcutsMenu'>/**
+</span>*/
+toggleKeyboardShortcutsMenu : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-setTopAppHidesStatusBar'>/**
+</span>*/
+setTopAppHidesStatusBar : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-onPanelLaidOut'>/**Called when the notification panel layouts
+</span>*/
+onPanelLaidOut : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-updateKeyguardMaxNotifications'>/**
+</span>*/
+updateKeyguardMaxNotifications : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-executeActionDismissingKeyguard'>/**
+</span>*/
+executeActionDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startPendingIntentDismissingKeyguard'>/**
+</span>*/
+startPendingIntentDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startPendingIntentDismissingKeyguard'>/**
+</span>*/
+startPendingIntentDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startPendingIntentDismissingKeyguard'>/**
+</span>*/
+startPendingIntentDismissingKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getActivityOptions'>/**
+</span>*/
+getActivityOptions : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-clearNotificationEffects'>/**Clear Buzz/Beep/Blink.
+</span>*/
+clearNotificationEffects : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isBouncerShowing'>/**
+</span>@return {Boolean} Whether the security bouncer from Keyguard is showing.
+*/
+isBouncerShowing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isBouncerShowingScrimmed'>/**
+</span>@return {Boolean} Whether the security bouncer from Keyguard is showing.
+*/
+isBouncerShowingScrimmed : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getPackageManagerForUser'>/**
+</span>@return {Object {android.content.pm.PackageManager}} a PackageManger for userId or if userId is &lt; 0 (USER_ALL etc) then
+         return PackageManager for mContext
+*/
+getPackageManagerForUser : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-isKeyguardSecure'>/**
+</span>*/
+isKeyguardSecure : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-showAssistDisclosure'>/**
+</span>*/
+showAssistDisclosure : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getPanel'>/**
+</span>*/
+getPanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-startAssist'>/**
+</span>*/
+startAssist : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getGutsManager'>/**
+</span>*/
+getGutsManager : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-StatusBar-method-getStatusBarMode'>/**
+</span>*/
+getStatusBarMode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-io-BufferedInputStream'>/**@class java.io.BufferedInputStream
+</span>@extends java.io.FilterInputStream
+
+ A &lt;code&gt;BufferedInputStream&lt;/code&gt; adds
+ functionality to another input stream-namely,
+ the ability to buffer the input and to
+ support the &lt;code&gt;mark&lt;/code&gt; and &lt;code&gt;reset&lt;/code&gt;
+ methods. When  the &lt;code&gt;BufferedInputStream&lt;/code&gt;
+ is created, an internal buffer array is
+ created. As bytes  from the stream are read
+ or skipped, the internal buffer is refilled
+ as necessary  from the contained input stream,
+ many bytes at a time. The &lt;code&gt;mark&lt;/code&gt;
+ operation  remembers a point in the input
+ stream and the &lt;code&gt;reset&lt;/code&gt; operation
+ causes all the  bytes read since the most
+ recent &lt;code&gt;mark&lt;/code&gt; operation to be
+ reread before new bytes are  taken from
+ the contained input stream.
+
+ @author  Arthur van Hoff
+ @since   JDK1.0
+*/
+var BufferedInputStream = {
+
+<span id='java-io-BufferedInputStream-method-read'>/**See
+</span> the general contract of the &lt;code&gt;read&lt;/code&gt;
+ method of &lt;code&gt;InputStream&lt;/code&gt;.
+@return {Number} the next byte of data, or &lt;code&gt;-1&lt;/code&gt; if the end of the
+             stream is reached.
+@exception IOException  if this input stream has been closed by
+                          invoking its {@link #close()} method,
+                          or an I/O error occurs.
+@see java.io.FilterInputStream#in
+*/
+read : function(  ) {},
+
+<span id='java-io-BufferedInputStream-method-read'>/**Reads bytes from this byte-input stream into the specified byte array,
+</span> starting at the given offset.
+
+ &lt;p&gt; This method implements the general contract of the corresponding
+ &lt;code&gt;{@link java.io.InputStream#read(byte[], int, int) read}&lt;/code&gt; method of
+ the &lt;code&gt;{@link java.io.InputStream}&lt;/code&gt; class.  As an additional
+ convenience, it attempts to read as many bytes as possible by repeatedly
+ invoking the &lt;code&gt;read&lt;/code&gt; method of the underlying stream.  This
+ iterated &lt;code&gt;read&lt;/code&gt; continues until one of the following
+ conditions becomes true: &lt;ul&gt;
+
+   &lt;li&gt; The specified number of bytes have been read,
+
+   &lt;li&gt; The &lt;code&gt;read&lt;/code&gt; method of the underlying stream returns
+   &lt;code&gt;-1&lt;/code&gt;, indicating end-of-file, or
+
+   &lt;li&gt; The &lt;code&gt;available&lt;/code&gt; method of the underlying stream
+   returns zero, indicating that further input requests would block.
+
+ &lt;/ul&gt; If the first &lt;code&gt;read&lt;/code&gt; on the underlying stream returns
+ &lt;code&gt;-1&lt;/code&gt; to indicate end-of-file then this method returns
+ &lt;code&gt;-1&lt;/code&gt;.  Otherwise this method returns the number of bytes
+ actually read.
+
+ &lt;p&gt; Subclasses of this class are encouraged, but not required, to
+ attempt to read as many bytes as possible in the same fashion.
+@param {Object {byte[]}} b     destination buffer.
+@param {Number} off   offset at which to start storing bytes.
+@param {Number} len   maximum number of bytes to read.
+@return {Number} the number of bytes read, or &lt;code&gt;-1&lt;/code&gt; if the end of
+             the stream has been reached.
+@exception IOException  if this input stream has been closed by
+                          invoking its {@link #close()} method,
+                          or an I/O error occurs.
+*/
+read : function(  ) {},
+
+<span id='java-io-BufferedInputStream-method-skip'>/**See the general contract of the &lt;code&gt;skip&lt;/code&gt;
+</span> method of &lt;code&gt;InputStream&lt;/code&gt;.
+@exception IOException  if the stream does not support seek,
+                          or if this input stream has been closed by
+                          invoking its {@link #close()} method, or an
+                          I/O error occurs.
+*/
+skip : function(  ) {},
+
+<span id='java-io-BufferedInputStream-method-available'>/**Returns an estimate of the number of bytes that can be read (or
+</span> skipped over) from this input stream without blocking by the next
+ invocation of a method for this input stream. The next invocation might be
+ the same thread or another thread.  A single read or skip of this
+ many bytes will not block, but may read or skip fewer bytes.
+ &lt;p&gt;
+ This method returns the sum of the number of bytes remaining to be read in
+ the buffer (&lt;code&gt;count&amp;nbsp;- pos&lt;/code&gt;) and the result of calling the
+ {@link java.io.FilterInputStream#in in}.available().
+@return {Number} an estimate of the number of bytes that can be read (or skipped
+             over) from this input stream without blocking.
+@exception IOException  if this input stream has been closed by
+                          invoking its {@link #close()} method,
+                          or an I/O error occurs.
+*/
+available : function(  ) {},
+
+<span id='java-io-BufferedInputStream-method-mark'>/**See the general contract of the &lt;code&gt;mark&lt;/code&gt;
+</span> method of &lt;code&gt;InputStream&lt;/code&gt;.
+@param {Number} readlimit   the maximum limit of bytes that can be read before
+                      the mark position becomes invalid.
+@see java.io.BufferedInputStream#reset()
+*/
+mark : function(  ) {},
+
+<span id='java-io-BufferedInputStream-method-reset'>/**See the general contract of the &lt;code&gt;reset&lt;/code&gt;
+</span> method of &lt;code&gt;InputStream&lt;/code&gt;.
+ &lt;p&gt;
+ If &lt;code&gt;markpos&lt;/code&gt; is &lt;code&gt;-1&lt;/code&gt;
+ (no mark has been set or the mark has been
+ invalidated), an &lt;code&gt;IOException&lt;/code&gt;
+ is thrown. Otherwise, &lt;code&gt;pos&lt;/code&gt; is
+ set equal to &lt;code&gt;markpos&lt;/code&gt;.
+@exception IOException  if this stream has not been marked or,
+                  if the mark has been invalidated, or the stream
+                  has been closed by invoking its {@link #close()}
+                  method, or an I/O error occurs.
+@see java.io.BufferedInputStream#mark(int)
+*/
+reset : function(  ) {},
+
+<span id='java-io-BufferedInputStream-method-markSupported'>/**Tests if this input stream supports the &lt;code&gt;mark&lt;/code&gt;
+</span> and &lt;code&gt;reset&lt;/code&gt; methods. The &lt;code&gt;markSupported&lt;/code&gt;
+ method of &lt;code&gt;BufferedInputStream&lt;/code&gt; returns
+ &lt;code&gt;true&lt;/code&gt;.
+@return {Boolean} a &lt;code&gt;boolean&lt;/code&gt; indicating if this stream type supports
+          the &lt;code&gt;mark&lt;/code&gt; and &lt;code&gt;reset&lt;/code&gt; methods.
+@see java.io.InputStream#mark(int)
+@see java.io.InputStream#reset()
+*/
+markSupported : function(  ) {},
+
+<span id='java-io-BufferedInputStream-method-close'>/**Closes this input stream and releases any system resources
+</span> associated with the stream.
+ Once the stream has been closed, further read(), available(), reset(),
+ or skip() invocations will throw an IOException.
+ Closing a previously closed stream has no effect.
+@exception IOException  if an I/O error occurs.
+*/
+close : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

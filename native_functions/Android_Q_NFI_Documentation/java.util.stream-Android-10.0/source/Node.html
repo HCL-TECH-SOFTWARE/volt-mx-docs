@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-stream-Node'>/**@class java.util.stream.Node
+</span> An immutable container for describing an ordered sequence of elements of some
+ type {@code T}.
+
+ &lt;p&gt;A {@code Node} contains a fixed number of elements, which can be accessed
+ via the {@link #count}, {@link #spliterator}, {@link #forEach},
+ {@link #asArray}, or {@link #copyInto} methods.  A {@code Node} may have zero
+ or more child {@code Node}s; if it has no children (accessed via
+ {@link #getChildCount} and {@link #getChild}(int), it is considered &lt;em&gt;flat
+ &lt;/em&gt; or a &lt;em&gt;leaf&lt;/em&gt;; if it has children, it is considered an
+ &lt;em&gt;internal&lt;/em&gt; node.  The size of an internal node is the sum of sizes of
+ its children.
+
+ @apiNote
+ &lt;p&gt;A {@code Node} typically does not store the elements directly, but instead
+ mediates access to one or more existing (effectively immutable) data
+ structures such as a {@code Collection}, array, or a set of other
+ {@code Node}s.  Commonly {@code Node}s are formed into a tree whose shape
+ corresponds to the computation tree that produced the elements that are
+ contained in the leaf nodes.  The use of {@code Node} within the stream
+ framework is largely to avoid copying data unnecessarily during parallel
+ operations.
+
+ @param &lt;T&gt; the type of elements.
+ @since 1.8
+ @hide Visible for CTS testing only (OpenJDK8 tests).
+*/
+var Node = {
+
+<span id='java-util-stream-Node-method-spliterator'>/**Returns a {@link Spliterator} describing the elements contained in this
+</span> {@code Node}.
+@return {Object {java.util.Spliterator}} a {@code Spliterator} describing the elements contained in this
+         {@code Node}
+*/
+spliterator : function(  ) {},
+
+<span id='java-util-stream-Node-method-forEach'>/**Traverses the elements of this node, and invoke the provided
+</span> {@code Consumer} with each element.  Elements are provided in encounter
+ order if the source for the {@code Node} has a defined encounter order.
+@param {Object {java.util.function.Consumer}} consumer a {@code Consumer} that is to be invoked with each
+        element in this {@code Node}
+*/
+forEach : function(  ) {},
+
+<span id='java-util-stream-Node-method-getChildCount'>/**Returns the number of child nodes of this node.
+</span>@implSpec The default implementation returns zero.
+@return {Number} the number of child nodes
+*/
+getChildCount : function(  ) {},
+
+<span id='java-util-stream-Node-method-getChild'>/**Retrieves the child {@code Node} at a given index.
+</span>@param {Number} i the index to the child node
+@param i the index to the child node
+@return {Object {java.util.stream.Node}} the child node
+@throws IndexOutOfBoundsException if the index is less than 0 or greater
+         than or equal to the number of child nodes
+*/
+getChild : function(  ) {},
+
+<span id='java-util-stream-Node-method-truncate'>/**Return a node describing a subsequence of the elements of this node,
+</span> starting at the given inclusive start offset and ending at the given
+ exclusive end offset.
+@param {Number} from The (inclusive) starting offset of elements to include, must
+             be in range 0..count().
+@param {Number} to The (exclusive) end offset of elements to include, must be
+           in range 0..count().
+@param {Object {java.util.function.IntFunction}} generator A function to be used to create a new array, if needed,
+                  for reference nodes.
+@return {Object {java.util.stream.Node}} the truncated node
+*/
+truncate : function(  ) {},
+
+<span id='java-util-stream-Node-method-asArray'>/**Provides an array view of the contents of this node.
+</span>
+ &lt;p&gt;Depending on the underlying implementation, this may return a
+ reference to an internal array rather than a copy.  Since the returned
+ array may be shared, the returned array should not be modified.  The
+ {@code generator} function may be consulted to create the array if a new
+ array needs to be created.
+@param {Object {java.util.function.IntFunction}} generator a factory function which takes an integer parameter and
+        returns a new, empty array of that size and of the appropriate
+        array type
+@return {Object {java.lang.Object}} an array containing the contents of this {@code Node}
+*/
+asArray : function(  ) {},
+
+<span id='java-util-stream-Node-method-copyInto'>/**Copies the content of this {@code Node} into an array, starting at a
+</span> given offset into the array.  It is the caller's responsibility to ensure
+ there is sufficient room in the array, otherwise unspecified behaviour
+ will occur if the array length is less than the number of elements
+ contained in this node.
+@param {Object {java.lang.Object[]}} array the array into which to copy the contents of this
+       {@code Node}
+@param {Number} offset the starting offset within the array
+@throws IndexOutOfBoundsException if copying would cause access of data
+         outside array bounds
+@throws NullPointerException if {@code array} is {@code null}
+*/
+copyInto : function(  ) {},
+
+<span id='java-util-stream-Node-method-getShape'>/**Gets the {@code StreamShape} associated with this {@code Node}.
+</span>@implSpec The default in {@code Node} returns
+ {@code StreamShape.REFERENCE}
+@return {Object {java.util.stream.StreamShape}} the stream shape associated with this node
+*/
+getShape : function(  ) {},
+
+<span id='java-util-stream-Node-method-count'>/**Returns the number of elements contained in this node.
+</span>@return {Number} the number of elements contained in this node
+*/
+count : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

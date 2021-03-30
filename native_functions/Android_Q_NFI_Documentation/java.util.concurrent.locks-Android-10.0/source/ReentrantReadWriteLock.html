@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-locks-ReentrantReadWriteLock'>/**@class java.util.concurrent.locks.ReentrantReadWriteLock
+</span> implements java.util.concurrent.locks.ReadWriteLock
+
+ implements java.io.Serializable
+
+@extends java.lang.Object
+
+ An implementation of {@link java.util.concurrent.locks.ReadWriteLock} supporting similar
+ semantics to {@link java.util.concurrent.locks.ReentrantLock}.
+ &lt;p&gt;This class has the following properties:
+
+ &lt;ul&gt;
+ &lt;li&gt;&lt;b&gt;Acquisition order&lt;/b&gt;
+
+ &lt;p&gt;This class does not impose a reader or writer preference
+ ordering for lock access.  However, it does support an optional
+ &lt;em&gt;fairness&lt;/em&gt; policy.
+
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;b&gt;&lt;i&gt;Non-fair mode (default)&lt;/i&gt;&lt;/b&gt;
+ &lt;dd style=&quot;font-family:'DejaVu Sans', Arial, Helvetica, sans-serif&quot;&gt;
+ When constructed as non-fair (the default), the order of entry
+ to the read and write lock is unspecified, subject to reentrancy
+ constraints.  A nonfair lock that is continuously contended may
+ indefinitely postpone one or more reader or writer threads, but
+ will normally have higher throughput than a fair lock.
+
+ &lt;dt&gt;&lt;b&gt;&lt;i&gt;Fair mode&lt;/i&gt;&lt;/b&gt;
+ &lt;dd style=&quot;font-family:'DejaVu Sans', Arial, Helvetica, sans-serif&quot;&gt;
+ When constructed as fair, threads contend for entry using an
+ approximately arrival-order policy. When the currently held lock
+ is released, either the longest-waiting single writer thread will
+ be assigned the write lock, or if there is a group of reader threads
+ waiting longer than all waiting writer threads, that group will be
+ assigned the read lock.
+
+ &lt;p&gt;A thread that tries to acquire a fair read lock (non-reentrantly)
+ will block if either the write lock is held, or there is a waiting
+ writer thread. The thread will not acquire the read lock until
+ after the oldest currently waiting writer thread has acquired and
+ released the write lock. Of course, if a waiting writer abandons
+ its wait, leaving one or more reader threads as the longest waiters
+ in the queue with the write lock free, then those readers will be
+ assigned the read lock.
+
+ &lt;p&gt;A thread that tries to acquire a fair write lock (non-reentrantly)
+ will block unless both the read lock and write lock are free (which
+ implies there are no waiting threads).  (Note that the non-blocking
+ {@link java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock#tryLock()} and {@link java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock#tryLock()} methods
+ do not honor this fair setting and will immediately acquire the lock
+ if it is possible, regardless of waiting threads.)
+ &lt;/dl&gt;
+
+ &lt;li&gt;&lt;b&gt;Reentrancy&lt;/b&gt;
+
+ &lt;p&gt;This lock allows both readers and writers to reacquire read or
+ write locks in the style of a {@link java.util.concurrent.locks.ReentrantLock}. Non-reentrant
+ readers are not allowed until all write locks held by the writing
+ thread have been released.
+
+ &lt;p&gt;Additionally, a writer can acquire the read lock, but not
+ vice-versa.  Among other applications, reentrancy can be useful
+ when write locks are held during calls or callbacks to methods that
+ perform reads under read locks.  If a reader tries to acquire the
+ write lock it will never succeed.
+
+ &lt;li&gt;&lt;b&gt;Lock downgrading&lt;/b&gt;
+ &lt;p&gt;Reentrancy also allows downgrading from the write lock to a read lock,
+ by acquiring the write lock, then the read lock and then releasing the
+ write lock. However, upgrading from a read lock to the write lock is
+ &lt;b&gt;not&lt;/b&gt; possible.
+
+ &lt;li&gt;&lt;b&gt;Interruption of lock acquisition&lt;/b&gt;
+ &lt;p&gt;The read lock and write lock both support interruption during lock
+ acquisition.
+
+ &lt;li&gt;&lt;b&gt;{@link java.util.concurrent.locks.Condition} support&lt;/b&gt;
+ &lt;p&gt;The write lock provides a {@link java.util.concurrent.locks.Condition} implementation that
+ behaves in the same way, with respect to the write lock, as the
+ {@link java.util.concurrent.locks.Condition} implementation provided by
+ {@link java.util.concurrent.locks.ReentrantLock#newCondition} does for {@link java.util.concurrent.locks.ReentrantLock}.
+ This {@link java.util.concurrent.locks.Condition} can, of course, only be used with the write lock.
+
+ &lt;p&gt;The read lock does not support a {@link java.util.concurrent.locks.Condition} and
+ {@code readLock().newCondition()} throws
+ {@code UnsupportedOperationException}.
+
+ &lt;li&gt;&lt;b&gt;Instrumentation&lt;/b&gt;
+ &lt;p&gt;This class supports methods to determine whether locks
+ are held or contended. These methods are designed for monitoring
+ system state, not for synchronization control.
+ &lt;/ul&gt;
+
+ &lt;p&gt;Serialization of this class behaves in the same way as built-in
+ locks: a deserialized lock is in the unlocked state, regardless of
+ its state when serialized.
+
+ &lt;p&gt;&lt;b&gt;Sample usages&lt;/b&gt;. Here is a code sketch showing how to perform
+ lock downgrading after updating a cache (exception handling is
+ particularly tricky when handling multiple locks in a non-nested
+ fashion):
+
+ &lt;pre&gt; {@code
+ class CachedData {
+   Object data;
+   volatile boolean cacheValid;
+   final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+
+   void processCachedData() {
+     rwl.readLock().lock();
+     if (!cacheValid) {
+       // Must release read lock before acquiring write lock
+       rwl.readLock().unlock();
+       rwl.writeLock().lock();
+       try {
+         // Recheck state because another thread might have
+         // acquired write lock and changed state before we did.
+         if (!cacheValid) {
+           data = ...
+           cacheValid = true;
+         }
+         // Downgrade by acquiring read lock before releasing write lock
+         rwl.readLock().lock();
+       } finally {
+         rwl.writeLock().unlock(); // Unlock write, still hold read
+       }
+     }
+
+     try {
+       use(data);
+     } finally {
+       rwl.readLock().unlock();
+     }
+   }
+ }}&lt;/pre&gt;
+
+ ReentrantReadWriteLocks can be used to improve concurrency in some
+ uses of some kinds of Collections. This is typically worthwhile
+ only when the collections are expected to be large, accessed by
+ more reader threads than writer threads, and entail operations with
+ overhead that outweighs synchronization overhead. For example, here
+ is a class using a TreeMap that is expected to be large and
+ concurrently accessed.
+
+ &lt;pre&gt; {@code
+ class RWDictionary {
+   private final Map&lt;String, Data&gt; m = new TreeMap&lt;&gt;();
+   private final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+   private final Lock r = rwl.readLock();
+   private final Lock w = rwl.writeLock();
+
+   public Data get(String key) {
+     r.lock();
+     try { return m.get(key); }
+     finally { r.unlock(); }
+   }
+   public List&lt;String&gt; allKeys() {
+     r.lock();
+     try { return new ArrayList&lt;&gt;(m.keySet()); }
+     finally { r.unlock(); }
+   }
+   public Data put(String key, Data value) {
+     w.lock();
+     try { return m.put(key, value); }
+     finally { w.unlock(); }
+   }
+   public void clear() {
+     w.lock();
+     try { m.clear(); }
+     finally { w.unlock(); }
+   }
+ }}&lt;/pre&gt;
+
+ &lt;h3&gt;Implementation Notes&lt;/h3&gt;
+
+ &lt;p&gt;This lock supports a maximum of 65535 recursive write locks
+ and 65535 read locks. Attempts to exceed these limits result in
+ {@link Error} throws from locking methods.
+
+ @since 1.5
+ @author Doug Lea
+*/
+var ReentrantReadWriteLock = {
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-writeLock'>/**
+</span>*/
+writeLock : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-readLock'>/**
+</span>*/
+readLock : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-isFair'>/**Returns {@code true} if this lock has fairness set true.
+</span>@return {Boolean} {@code true} if this lock has fairness set true
+*/
+isFair : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-getReadLockCount'>/**Queries the number of read locks held for this lock. This
+</span> method is designed for use in monitoring system state, not for
+ synchronization control.
+@return {Number} the number of read locks held
+*/
+getReadLockCount : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-isWriteLocked'>/**Queries if the write lock is held by any thread. This method is
+</span> designed for use in monitoring system state, not for
+ synchronization control.
+@return {Boolean} {@code true} if any thread holds the write lock and
+         {@code false} otherwise
+*/
+isWriteLocked : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-isWriteLockedByCurrentThread'>/**Queries if the write lock is held by the current thread.
+</span>@return {Boolean} {@code true} if the current thread holds the write lock and
+         {@code false} otherwise
+*/
+isWriteLockedByCurrentThread : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-getWriteHoldCount'>/**Queries the number of reentrant write holds on this lock by the
+</span> current thread.  A writer thread has a hold on a lock for
+ each lock action that is not matched by an unlock action.
+@return {Number} the number of holds on the write lock by the current thread,
+         or zero if the write lock is not held by the current thread
+*/
+getWriteHoldCount : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-getReadHoldCount'>/**Queries the number of reentrant read holds on this lock by the
+</span> current thread.  A reader thread has a hold on a lock for
+ each lock action that is not matched by an unlock action.
+@return {Number} the number of holds on the read lock by the current thread,
+         or zero if the read lock is not held by the current thread
+@since 1.6
+*/
+getReadHoldCount : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-hasQueuedThreads'>/**Queries whether any threads are waiting to acquire the read or
+</span> write lock. Note that because cancellations may occur at any
+ time, a {@code true} return does not guarantee that any other
+ thread will ever acquire a lock.  This method is designed
+ primarily for use in monitoring of the system state.
+@return {Boolean} {@code true} if there may be other threads waiting to
+         acquire the lock
+*/
+hasQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-hasQueuedThread'>/**Queries whether the given thread is waiting to acquire either
+</span> the read or write lock. Note that because cancellations may
+ occur at any time, a {@code true} return does not guarantee
+ that this thread will ever acquire a lock.  This method is
+ designed primarily for use in monitoring of the system state.
+@param {Object {Thread}} thread the thread
+@return {Boolean} {@code true} if the given thread is queued waiting for this lock
+@throws NullPointerException if the thread is null
+*/
+hasQueuedThread : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-getQueueLength'>/**Returns an estimate of the number of threads waiting to acquire
+</span> either the read or write lock.  The value is only an estimate
+ because the number of threads may change dynamically while this
+ method traverses internal data structures.  This method is
+ designed for use in monitoring system state, not for
+ synchronization control.
+@return {Number} the estimated number of threads waiting for this lock
+*/
+getQueueLength : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-hasWaiters'>/**Queries whether any threads are waiting on the given condition
+</span> associated with the write lock. Note that because timeouts and
+ interrupts may occur at any time, a {@code true} return does
+ not guarantee that a future {@code signal} will awaken any
+ threads.  This method is designed primarily for use in
+ monitoring of the system state.
+@param {Object {Condition}} condition the condition
+@return {Boolean} {@code true} if there are any waiting threads
+@throws IllegalMonitorStateException if this lock is not held
+@throws IllegalArgumentException if the given condition is
+         not associated with this lock
+@throws NullPointerException if the condition is null
+*/
+hasWaiters : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-getWaitQueueLength'>/**Returns an estimate of the number of threads waiting on the
+</span> given condition associated with the write lock. Note that because
+ timeouts and interrupts may occur at any time, the estimate
+ serves only as an upper bound on the actual number of waiters.
+ This method is designed for use in monitoring of the system
+ state, not for synchronization control.
+@param {Object {Condition}} condition the condition
+@return {Number} the estimated number of waiting threads
+@throws IllegalMonitorStateException if this lock is not held
+@throws IllegalArgumentException if the given condition is
+         not associated with this lock
+@throws NullPointerException if the condition is null
+*/
+getWaitQueueLength : function(  ) {},
+
+<span id='java-util-concurrent-locks-ReentrantReadWriteLock-method-toString'>/**Returns a string identifying this lock, as well as its lock state.
+</span> The state, in brackets, includes the String {@code &quot;Write locks =&quot;}
+ followed by the number of reentrantly held write locks, and the
+ String {@code &quot;Read locks =&quot;} followed by the number of held
+ read locks.
+@return {String} a string identifying this lock, as well as its lock state
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-invoke-ConstantCallSite'>/**@class java.lang.invoke.ConstantCallSite
+</span>@extends java.lang.invoke.CallSite
+
+ A {@code ConstantCallSite} is a {@link java.lang.invoke.CallSite} whose target is permanent, and can never be changed.
+ An {@code invokedynamic} instruction linked to a {@code ConstantCallSite} is permanently
+ bound to the call site's target.
+ @author John Rose, JSR 292 EG
+*/
+var ConstantCallSite = {
+
+<span id='java-lang-invoke-ConstantCallSite-method-getTarget'>/**Returns the target method of the call site, which behaves
+</span> like a {@code final} field of the {@code ConstantCallSite}.
+ That is, the target is always the original value passed
+ to the constructor call which created this instance.
+@return {Object {java.lang.invoke.MethodHandle}} the immutable linkage state of this call site, a constant method handle
+@throws IllegalStateException if the {@code ConstantCallSite} constructor has not completed
+*/
+getTarget : function(  ) {},
+
+<span id='java-lang-invoke-ConstantCallSite-method-setTarget'>/**Always throws an {@link UnsupportedOperationException}.
+</span> This kind of call site cannot change its target.
+@param {Object {MethodHandle}} ignore a new target proposed for the call site, which is ignored
+@throws UnsupportedOperationException because this kind of call site cannot change its target
+*/
+setTarget : function(  ) {},
+
+<span id='java-lang-invoke-ConstantCallSite-method-dynamicInvoker'>/**Returns this call site's permanent target.
+</span> Since that target will never change, this is a correct implementation
+ of {@link java.lang.invoke.CallSite#dynamicInvoker java.lang.invoke.CallSite.dynamicInvoker}.
+@return {Object {java.lang.invoke.MethodHandle}} the immutable linkage state of this call site, a constant method handle
+@throws IllegalStateException if the {@code ConstantCallSite} constructor has not completed
+*/
+dynamicInvoker : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-ZoneId'>/**@class java.time.ZoneId
+</span> implements java.io.Serializable
+
+@extends java.lang.Object
+
+ A time-zone ID, such as {@code Europe/Paris}.
+ &lt;p&gt;
+ A {@code ZoneId} is used to identify the rules used to convert between
+ an {@link java.time.Instant} and a {@link java.time.LocalDateTime}.
+ There are two distinct types of ID:
+ &lt;ul&gt;
+ &lt;li&gt;Fixed offsets - a fully resolved offset from UTC/Greenwich, that uses
+  the same offset for all local date-times
+ &lt;li&gt;Geographical regions - an area where a specific set of rules for finding
+  the offset from UTC/Greenwich apply
+ &lt;/ul&gt;
+ Most fixed offsets are represented by {@link java.time.ZoneOffset}.
+ Calling {@link #normalized}() on any {@code ZoneId} will ensure that a
+ fixed offset ID will be represented as a {@code ZoneOffset}.
+ &lt;p&gt;
+ The actual rules, describing when and how the offset changes, are defined by {@link ZoneRules}.
+ This class is simply an ID used to obtain the underlying rules.
+ This approach is taken because rules are defined by governments and change
+ frequently, whereas the ID is stable.
+ &lt;p&gt;
+ The distinction has other effects. Serializing the {@code ZoneId} will only send
+ the ID, whereas serializing the rules sends the entire data set.
+ Similarly, a comparison of two IDs only examines the ID, whereas
+ a comparison of two rules examines the entire data set.
+
+ &lt;h3&gt;Time-zone IDs&lt;/h3&gt;
+ The ID is unique within the system.
+ There are three types of ID.
+ &lt;p&gt;
+ The simplest type of ID is that from {@code ZoneOffset}.
+ This consists of 'Z' and IDs starting with '+' or '-'.
+ &lt;p&gt;
+ The next type of ID are offset-style IDs with some form of prefix,
+ such as 'GMT+2' or 'UTC+01:00'.
+ The recognised prefixes are 'UTC', 'GMT' and 'UT'.
+ The offset is the suffix and will be normalized during creation.
+ These IDs can be normalized to a {@code ZoneOffset} using {@code normalized()}.
+ &lt;p&gt;
+ The third type of ID are region-based IDs. A region-based ID must be of
+ two or more characters, and not start with 'UTC', 'GMT', 'UT' '+' or '-'.
+ Region-based IDs are defined by configuration.
+ The configuration focuses on providing the lookup from the ID to the
+ underlying {@code ZoneRules}.
+ &lt;p&gt;
+ Time-zone rules are defined by governments and change frequently.
+ There are a number of organizations, known here as groups, that monitor
+ time-zone changes and collate them.
+ The default group is the IANA Time Zone Database (TZDB).
+ Other organizations include IATA (the airline industry body) and Microsoft.
+ &lt;p&gt;
+ Each group defines its own format for the region ID it provides.
+ The TZDB group defines IDs such as 'Europe/London' or 'America/New_York'.
+ TZDB IDs take precedence over other groups.
+ &lt;p&gt;
+ It is strongly recommended that the group name is included in all IDs supplied by
+ groups other than TZDB to avoid conflicts. For example, IATA airline time-zone
+ region IDs are typically the same as the three letter airport code.
+ However, the airport of Utrecht has the code 'UTC', which is obviously a conflict.
+ The recommended format for region IDs from groups other than TZDB is 'group~region'.
+ Thus if IATA data were defined, Utrecht airport would be 'IATA~UTC'.
+
+ &lt;h3&gt;Serialization&lt;/h3&gt;
+ This class can be serialized and stores the string zone ID in the external form.
+ The {@code ZoneOffset} subclass uses a dedicated format that only stores the
+ offset from UTC/Greenwich.
+ &lt;p&gt;
+ A {@code ZoneId} can be deserialized in a Java Runtime where the ID is unknown.
+ For example, if a server-side Java Runtime has been updated with a new zone ID, but
+ the client-side Java Runtime has not been updated. In this case, the {@code ZoneId}
+ object will exist, and can be queried using {@code getId}, {@code equals},
+ {@code hashCode}, {@code toString}, {@code getDisplayName} and {@code normalized}.
+ However, any call to {@code getRules} will fail with {@code ZoneRulesException}.
+ This approach is designed to allow a {@link java.time.ZonedDateTime} to be loaded and
+ queried, but not modified, on a Java Runtime with incomplete time-zone information.
+
+ @implSpec
+ This abstract class has two implementations, both of which are immutable and thread-safe.
+ One implementation models region-based IDs, the other is {@code ZoneOffset} modelling
+ offset-based IDs. This difference is visible in serialization.
+
+ @since 1.8
+*/
+var ZoneId = {
+
+<span id='java-time-ZoneId-property-SHORT_IDS'>/** A map of zone overrides to enable the short time-zone names to be used.
+</span> &lt;p&gt;
+ Use of short zone IDs has been deprecated in {@code java.util.TimeZone}.
+ This map allows the IDs to continue to be used via the
+ {@link #of(String, Map)} factory method.
+ &lt;p&gt;
+ This map contains a mapping of the IDs that is in line with TZDB 2005r and
+ later, where 'EST', 'MST' and 'HST' map to IDs which do not include daylight
+ savings.
+ &lt;p&gt;
+ This maps as follows:
+ &lt;ul&gt;
+ &lt;li&gt;EST - -05:00&lt;/li&gt;
+ &lt;li&gt;HST - -10:00&lt;/li&gt;
+ &lt;li&gt;MST - -07:00&lt;/li&gt;
+ &lt;li&gt;ACT - Australia/Darwin&lt;/li&gt;
+ &lt;li&gt;AET - Australia/Sydney&lt;/li&gt;
+ &lt;li&gt;AGT - America/Argentina/Buenos_Aires&lt;/li&gt;
+ &lt;li&gt;ART - Africa/Cairo&lt;/li&gt;
+ &lt;li&gt;AST - America/Anchorage&lt;/li&gt;
+ &lt;li&gt;BET - America/Sao_Paulo&lt;/li&gt;
+ &lt;li&gt;BST - Asia/Dhaka&lt;/li&gt;
+ &lt;li&gt;CAT - Africa/Harare&lt;/li&gt;
+ &lt;li&gt;CNT - America/St_Johns&lt;/li&gt;
+ &lt;li&gt;CST - America/Chicago&lt;/li&gt;
+ &lt;li&gt;CTT - Asia/Shanghai&lt;/li&gt;
+ &lt;li&gt;EAT - Africa/Addis_Ababa&lt;/li&gt;
+ &lt;li&gt;ECT - Europe/Paris&lt;/li&gt;
+ &lt;li&gt;IET - America/Indiana/Indianapolis&lt;/li&gt;
+ &lt;li&gt;IST - Asia/Kolkata&lt;/li&gt;
+ &lt;li&gt;JST - Asia/Tokyo&lt;/li&gt;
+ &lt;li&gt;MIT - Pacific/Apia&lt;/li&gt;
+ &lt;li&gt;NET - Asia/Yerevan&lt;/li&gt;
+ &lt;li&gt;NST - Pacific/Auckland&lt;/li&gt;
+ &lt;li&gt;PLT - Asia/Karachi&lt;/li&gt;
+ &lt;li&gt;PNT - America/Phoenix&lt;/li&gt;
+ &lt;li&gt;PRT - America/Puerto_Rico&lt;/li&gt;
+ &lt;li&gt;PST - America/Los_Angeles&lt;/li&gt;
+ &lt;li&gt;SST - Pacific/Guadalcanal&lt;/li&gt;
+ &lt;li&gt;VST - Asia/Ho_Chi_Minh&lt;/li&gt;
+ &lt;/ul&gt;
+ The map is unmodifiable.
+*/
+SHORT_IDS : &quot;null&quot;,
+<span id='java-time-ZoneId-method-systemDefault'>/**Gets the system default time-zone.
+</span> &lt;p&gt;
+ This queries {@link TimeZone#getDefault()} to find the default time-zone
+ and converts it to a {@code ZoneId}. If the system default time-zone is changed,
+ then the result of this method will also change.
+@return {Object {java.time.ZoneId}} the zone ID, not null
+@throws DateTimeException if the converted zone ID has an invalid format
+@throws ZoneRulesException if the converted zone region ID cannot be found
+*/
+systemDefault : function(  ) {},
+
+<span id='java-time-ZoneId-method-getAvailableZoneIds'>/**Gets the set of available zone IDs.
+</span> &lt;p&gt;
+ This set includes the string form of all available region-based IDs.
+ Offset-based zone IDs are not included in the returned set.
+ The ID can be passed to {@link #of}(String) to create a {@code ZoneId}.
+ &lt;p&gt;
+ The set of zone IDs can increase over time, although in a typical application
+ the set of IDs is fixed. Each call to this method is thread-safe.
+@return {Object {java.util.Set}} a modifiable copy of the set of zone IDs, not null
+*/
+getAvailableZoneIds : function(  ) {},
+
+<span id='java-time-ZoneId-method-of'>/**Obtains an instance of {@code ZoneId} using its ID using a map
+</span> of aliases to supplement the standard zone IDs.
+ &lt;p&gt;
+ Many users of time-zones use short abbreviations, such as PST for
+ 'Pacific Standard Time' and PDT for 'Pacific Daylight Time'.
+ These abbreviations are not unique, and so cannot be used as IDs.
+ This method allows a map of string to time-zone to be setup and reused
+ within an application.
+@param {String} zoneId  the time-zone ID, not null
+@param {Object {java.util.Map}} aliasMap  a map of alias zone IDs (typically abbreviations) to real zone IDs, not null
+@return {Object {java.time.ZoneId}} the zone ID, not null
+@throws DateTimeException if the zone ID has an invalid format
+@throws ZoneRulesException if the zone ID is a region ID that cannot be found
+*/
+of : function(  ) {},
+
+<span id='java-time-ZoneId-method-of'>/**Obtains an instance of {@code ZoneId} from an ID ensuring that the
+</span> ID is valid and available for use.
+ &lt;p&gt;
+ This method parses the ID producing a {@code ZoneId} or {@code ZoneOffset}.
+ A {@code ZoneOffset} is returned if the ID is 'Z', or starts with '+' or '-'.
+ The result will always be a valid ID for which {@link ZoneRules} can be obtained.
+ &lt;p&gt;
+ Parsing matches the zone ID step by step as follows.
+ &lt;ul&gt;
+ &lt;li&gt;If the zone ID equals 'Z', the result is {@code ZoneOffset.UTC}.
+ &lt;li&gt;If the zone ID consists of a single letter, the zone ID is invalid
+  and {@code DateTimeException} is thrown.
+ &lt;li&gt;If the zone ID starts with '+' or '-', the ID is parsed as a
+  {@code ZoneOffset} using {@link java.time.ZoneOffset#of(String)}.
+ &lt;li&gt;If the zone ID equals 'GMT', 'UTC' or 'UT' then the result is a {@code ZoneId}
+  with the same ID and rules equivalent to {@code ZoneOffset.UTC}.
+ &lt;li&gt;If the zone ID starts with 'UTC+', 'UTC-', 'GMT+', 'GMT-', 'UT+' or 'UT-'
+  then the ID is a prefixed offset-based ID. The ID is split in two, with
+  a two or three letter prefix and a suffix starting with the sign.
+  The suffix is parsed as a {@link java.time.ZoneOffset#of(String) java.time.ZoneOffset}.
+  The result will be a {@code ZoneId} with the specified UTC/GMT/UT prefix
+  and the normalized offset ID as per {@link java.time.ZoneOffset#getId()}.
+  The rules of the returned {@code ZoneId} will be equivalent to the
+  parsed {@code ZoneOffset}.
+ &lt;li&gt;All other IDs are parsed as region-based zone IDs. Region IDs must
+  match the regular expression &lt;code&gt;[A-Za-z][A-Za-z0-9~/._+-]+&lt;/code&gt;
+  otherwise a {@code DateTimeException} is thrown. If the zone ID is not
+  in the configured set of IDs, {@code ZoneRulesException} is thrown.
+  The detailed format of the region ID depends on the group supplying the data.
+  The default set of data is supplied by the IANA Time Zone Database (TZDB).
+  This has region IDs of the form '{area}/{city}', such as 'Europe/Paris' or 'America/New_York'.
+  This is compatible with most IDs from {@link java.util.TimeZone}.
+ &lt;/ul&gt;
+@param {String} zoneId  the time-zone ID, not null
+@return {Object {java.time.ZoneId}} the zone ID, not null
+@throws DateTimeException if the zone ID has an invalid format
+@throws ZoneRulesException if the zone ID is a region ID that cannot be found
+*/
+of : function(  ) {},
+
+<span id='java-time-ZoneId-method-ofOffset'>/**Obtains an instance of {@code ZoneId} wrapping an offset.
+</span> &lt;p&gt;
+ If the prefix is &quot;GMT&quot;, &quot;UTC&quot;, or &quot;UT&quot; a {@code ZoneId}
+ with the prefix and the non-zero offset is returned.
+ If the prefix is empty {@code &quot;&quot;} the {@code ZoneOffset} is returned.
+@param {String} prefix  the time-zone ID, not null
+@param {Object {ZoneOffset}} offset  the offset, not null
+@return {Object {java.time.ZoneId}} the zone ID, not null
+@throws IllegalArgumentException if the prefix is not one of
+     &quot;GMT&quot;, &quot;UTC&quot;, or &quot;UT&quot;, or &quot;&quot;
+*/
+ofOffset : function(  ) {},
+
+<span id='java-time-ZoneId-method-from'>/**Obtains an instance of {@code ZoneId} from a temporal object.
+</span> &lt;p&gt;
+ This obtains a zone based on the specified temporal.
+ A {@code TemporalAccessor} represents an arbitrary set of date and time information,
+ which this factory converts to an instance of {@code ZoneId}.
+ &lt;p&gt;
+ A {@code TemporalAccessor} represents some form of date and time information.
+ This factory converts the arbitrary temporal object to an instance of {@code ZoneId}.
+ &lt;p&gt;
+ The conversion will try to obtain the zone in a way that favours region-based
+ zones over offset-based zones using {@link TemporalQueries#zone()}.
+ &lt;p&gt;
+ This method matches the signature of the functional interface {@link TemporalQuery}
+ allowing it to be used as a query via method reference, {@code ZoneId::from}.
+@param {Object {TemporalAccessor}} temporal  the temporal object to convert, not null
+@return {Object {java.time.ZoneId}} the zone ID, not null
+@throws DateTimeException if unable to convert to a {@code ZoneId}
+*/
+from : function(  ) {},
+
+<span id='java-time-ZoneId-method-getId'>/**Gets the unique time-zone ID.
+</span> &lt;p&gt;
+ This ID uniquely defines this object.
+ The format of an offset based ID is defined by {@link java.time.ZoneOffset#getId()}.
+@return {String} the time-zone unique ID, not null
+*/
+getId : function(  ) {},
+
+<span id='java-time-ZoneId-method-getDisplayName'>/**Gets the textual representation of the zone, such as 'British Time' or
+</span> '+02:00'.
+ &lt;p&gt;
+ This returns the textual name used to identify the time-zone ID,
+ suitable for presentation to the user.
+ The parameters control the style of the returned text and the locale.
+ &lt;p&gt;
+ If no textual mapping is found then the {@link #getId() full ID} is returned.
+@param {Object {TextStyle}} style  the length of the text required, not null
+@param {Object {Locale}} locale  the locale to use, not null
+@return {String} the text value of the zone, not null
+*/
+getDisplayName : function(  ) {},
+
+<span id='java-time-ZoneId-method-getRules'>/**Gets the time-zone rules for this ID allowing calculations to be performed.
+</span> &lt;p&gt;
+ The rules provide the functionality associated with a time-zone,
+ such as finding the offset for a given instant or local date-time.
+ &lt;p&gt;
+ A time-zone can be invalid if it is deserialized in a Java Runtime which
+ does not have the same rules loaded as the Java Runtime that stored it.
+ In this case, calling this method will throw a {@code ZoneRulesException}.
+ &lt;p&gt;
+ {@link java.time.ZoneOffset} will always return a set of rules where the offset never changes.
+@return {Object {java.time.zone.ZoneRules}} the rules, not null
+@throws ZoneRulesException if no rules are available for this ID
+*/
+getRules : function(  ) {},
+
+<span id='java-time-ZoneId-method-normalized'>/**Normalizes the time-zone ID, returning a {@code ZoneOffset} where possible.
+</span> &lt;p&gt;
+ The returns a normalized {@code ZoneId} that can be used in place of this ID.
+ The result will have {@code ZoneRules} equivalent to those returned by this object,
+ however the ID returned by {@code getId()} may be different.
+ &lt;p&gt;
+ The normalization checks if the rules of this {@code ZoneId} have a fixed offset.
+ If they do, then the {@code ZoneOffset} equal to that offset is returned.
+ Otherwise {@code this} is returned.
+@return {Object {java.time.ZoneId}} the time-zone unique ID, not null
+*/
+normalized : function(  ) {},
+
+<span id='java-time-ZoneId-method-equals'>/**Checks if this time-zone ID is equal to another time-zone ID.
+</span> &lt;p&gt;
+ The comparison is based on the ID.
+@param {Object {Object}} obj  the object to check, null returns false
+@return {Boolean} true if this is equal to the other time-zone ID
+*/
+equals : function(  ) {},
+
+<span id='java-time-ZoneId-method-hashCode'>/**A hash code for this time-zone ID.
+</span>@return {Number} a suitable hash code
+*/
+hashCode : function(  ) {},
+
+<span id='java-time-ZoneId-method-toString'>/**Outputs this zone as a {@code String}, using the ID.
+</span>@return {String} a string representation of this time-zone ID, not null
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-statusbar-phone-ShadeController'>/**@class com.android.systemui.statusbar.phone.ShadeController
+</span> {@link com.android.systemui.statusbar.phone.ShadeController} is an abstraction of the work that used to be hard-coded in
+ {@link com.android.systemui.statusbar.phone.StatusBar}. The shade itself represents the concept of the status bar window state, and
+ can be in multiple states: dozing, locked, showing the bouncer, occluded, etc. All/some of these
+ are coordinated with {@link com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager} via
+ {@link com.android.systemui.keyguard.KeyguardViewMediator} and others.
+*/
+var ShadeController = {
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-showBouncer'>/**Shows the keyguard bouncer - the password challenge on the lock screen
+</span>@param {Boolean} scrimmed true when the bouncer should show scrimmed, false when the user will be
+ dragging it and translation should be deferred {@see KeyguardBouncer#show(boolean, boolean)}
+*/
+showBouncer : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-instantExpandNotificationsPanel'>/**Make our window larger and the panel expanded
+</span>*/
+instantExpandNotificationsPanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-animateCollapsePanels'>/**Collapse the shade animated, showing the bouncer when on {@link com.android.systemui.statusbar.phone.StatusBarState#KEYGUARD} or
+</span> dismissing {@link com.android.systemui.statusbar.phone.StatusBar} when on {@link com.android.systemui.statusbar.phone.StatusBarState#SHADE}.
+*/
+animateCollapsePanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-closeShadeIfOpen'>/**If the notifications panel is not fully expanded, collapse it animated.
+</span>@return {Boolean} Seems to always return false
+*/
+closeShadeIfOpen : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-postOnShadeExpanded'>/**Add a runnable for NotificationPanelView to post when the panel is expanded.
+</span>@param {Object {Runnable}} action the action to post
+*/
+postOnShadeExpanded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-addPostCollapseAction'>/**Add a runnable to be executed after the shade collapses. Post-collapse runnables are
+</span> aggregated and run serially.
+@param {Object {Runnable}} action the action to execute
+*/
+addPostCollapseAction : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-goToKeyguard'>/**Ask shade controller to set the state to {@link com.android.systemui.statusbar.phone.StatusBarState#KEYGUARD}, but only from
+</span> {@link com.android.systemui.statusbar.phone.StatusBarState#SHADE_LOCKED}
+*/
+goToKeyguard : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-isOccluded'>/**When the keyguard is showing and covered by something (bouncer, keyguard activity, etc.) it
+</span> is occluded. This is controlled by {@link com.android.server.policy.PhoneWindowManager}
+@return {Boolean} whether the keyguard is currently occluded
+*/
+isOccluded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-setLockscreenUser'>/**Notify the shade controller that the current user changed
+</span>@param {Number} newUserId userId of the new user
+*/
+setLockscreenUser : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-isDozing'>/**Dozing is when the screen is in AOD or asleep
+</span>@return {Boolean} true if we are dozing
+*/
+isDozing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-wakeUpIfDozing'>/**Ask the display to wake up if currently dozing, else do nothing
+</span>@param {Number} time when to wake up
+@param {Object {View}} view the view requesting the wakeup
+@param {String} why the reason for the wake up
+*/
+wakeUpIfDozing : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-goToLockedShade'>/**If secure with redaction: Show bouncer, go to unlocked shade.
+</span>
+ &lt;p&gt;If secure without redaction or no security: Go to {@link com.android.systemui.statusbar.phone.StatusBarState#SHADE_LOCKED}.&lt;/p&gt;
+@param {Object {View}} startingChild The view to expand after going to the shade.
+*/
+goToLockedShade : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-addAfterKeyguardGoneRunnable'>/**Adds a {@param runnable} to be executed after Keyguard is gone.
+</span>*/
+addAfterKeyguardGoneRunnable : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-collapsePanel'>/**Close the shade if it was open
+</span>@return {Boolean} true if the shade was open, else false
+*/
+collapsePanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-collapsePanel'>/**If {@param animate}, does the same as {@link #collapsePanel}(). Otherwise, instantly collapse
+</span> the panel. Post collapse runnables will be executed
+@param {Boolean} animate
+*/
+collapsePanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-onLaunchAnimationCancelled'>/**Callback to tell the shade controller that an activity launch animation was canceled
+</span>*/
+onLaunchAnimationCancelled : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-updateAreThereNotifications'>/**When notifications update, give the shade controller a chance to do thing in response to
+</span> the new data set
+*/
+updateAreThereNotifications : function(  ) {},
+
+<span id='com-android-systemui-statusbar-phone-ShadeController-method-onActivationReset'>/**Callback to notify the shade controller that a {@link ActivatableNotificationView} has become
+</span> inactive
+*/
+onActivationReset : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-charset-Charset'>/**@class java.nio.charset.Charset
+</span> implements java.lang.Comparable
+
+@extends java.lang.Object
+
+ A named mapping between sequences of sixteen-bit Unicode &lt;a
+ href=&quot;../../lang/Character.html#unicode&quot;&gt;code units&lt;/a&gt; and sequences of
+ bytes.  This class defines methods for creating decoders and encoders and
+ for retrieving the various names associated with a charset.  Instances of
+ this class are immutable.
+
+ &lt;p&gt; This class also defines static methods for testing whether a particular
+ charset is supported, for locating charset instances by name, and for
+ constructing a map that contains every charset for which support is
+ available in the current Java virtual machine.  Support for new charsets can
+ be added via the service-provider interface defined in the {@link java.nio.charset.spi.CharsetProvider} class.
+
+ &lt;p&gt; All of the methods defined in this class are safe for use by multiple
+ concurrent threads.
+
+
+ &lt;a name=&quot;names&quot;&gt;&lt;/a&gt;&lt;a name=&quot;charenc&quot;&gt;&lt;/a&gt;
+ &lt;h2&gt;Charset names&lt;/h2&gt;
+
+ &lt;p&gt; Charsets are named by strings composed of the following characters:
+
+ &lt;ul&gt;
+
+   &lt;li&gt; The uppercase letters &lt;tt&gt;'A'&lt;/tt&gt; through &lt;tt&gt;'Z'&lt;/tt&gt;
+        (&lt;tt&gt;'&amp;#92;u0041'&lt;/tt&gt;&amp;nbsp;through&amp;nbsp;&lt;tt&gt;'&amp;#92;u005a'&lt;/tt&gt;),
+
+   &lt;li&gt; The lowercase letters &lt;tt&gt;'a'&lt;/tt&gt; through &lt;tt&gt;'z'&lt;/tt&gt;
+        (&lt;tt&gt;'&amp;#92;u0061'&lt;/tt&gt;&amp;nbsp;through&amp;nbsp;&lt;tt&gt;'&amp;#92;u007a'&lt;/tt&gt;),
+
+   &lt;li&gt; The digits &lt;tt&gt;'0'&lt;/tt&gt; through &lt;tt&gt;'9'&lt;/tt&gt;
+        (&lt;tt&gt;'&amp;#92;u0030'&lt;/tt&gt;&amp;nbsp;through&amp;nbsp;&lt;tt&gt;'&amp;#92;u0039'&lt;/tt&gt;),
+
+   &lt;li&gt; The dash character &lt;tt&gt;'-'&lt;/tt&gt;
+        (&lt;tt&gt;'&amp;#92;u002d'&lt;/tt&gt;,&amp;nbsp;&lt;small&gt;HYPHEN-MINUS&lt;/small&gt;),
+
+   &lt;li&gt; The plus character &lt;tt&gt;'+'&lt;/tt&gt;
+        (&lt;tt&gt;'&amp;#92;u002b'&lt;/tt&gt;,&amp;nbsp;&lt;small&gt;PLUS SIGN&lt;/small&gt;),
+
+   &lt;li&gt; The period character &lt;tt&gt;'.'&lt;/tt&gt;
+        (&lt;tt&gt;'&amp;#92;u002e'&lt;/tt&gt;,&amp;nbsp;&lt;small&gt;FULL STOP&lt;/small&gt;),
+
+   &lt;li&gt; The colon character &lt;tt&gt;':'&lt;/tt&gt;
+        (&lt;tt&gt;'&amp;#92;u003a'&lt;/tt&gt;,&amp;nbsp;&lt;small&gt;COLON&lt;/small&gt;), and
+
+   &lt;li&gt; The underscore character &lt;tt&gt;'_'&lt;/tt&gt;
+        (&lt;tt&gt;'&amp;#92;u005f'&lt;/tt&gt;,&amp;nbsp;&lt;small&gt;LOW&amp;nbsp;LINE&lt;/small&gt;).
+
+ &lt;/ul&gt;
+
+ A charset name must begin with either a letter or a digit.  The empty string
+ is not a legal charset name.  Charset names are not case-sensitive; that is,
+ case is always ignored when comparing charset names.  Charset names
+ generally follow the conventions documented in &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc2278.txt&quot;&gt;&lt;i&gt;RFC&amp;nbsp;2278:&amp;nbsp;IANA Charset
+ Registration Procedures&lt;/i&gt;&lt;/a&gt;.
+
+ &lt;p&gt; Every charset has a &lt;i&gt;canonical name&lt;/i&gt; and may also have one or more
+ &lt;i&gt;aliases&lt;/i&gt;.  The canonical name is returned by the {@link #name() name} method
+ of this class.  Canonical names are, by convention, usually in upper case.
+ The aliases of a charset are returned by the {@link #aliases() aliases}
+ method.
+
+ &lt;p&gt;&lt;a name=&quot;hn&quot;&gt;Some charsets have an &lt;i&gt;historical name&lt;/i&gt; that is defined for
+ compatibility with previous versions of the Java platform.&lt;/a&gt;  A charset's
+ historical name is either its canonical name or one of its aliases.  The
+ historical name is returned by the &lt;tt&gt;getEncoding()&lt;/tt&gt; methods of the
+ {@link java.io.InputStreamReader#getEncoding InputStreamReader} and {@link java.io.OutputStreamWriter#getEncoding OutputStreamWriter} classes.
+
+ &lt;p&gt;&lt;a name=&quot;iana&quot;&gt; &lt;/a&gt;If a charset listed in the &lt;a
+ href=&quot;http://www.iana.org/assignments/character-sets&quot;&gt;&lt;i&gt;IANA Charset
+ Registry&lt;/i&gt;&lt;/a&gt; is supported by an implementation of the Java platform then
+ its canonical name must be the name listed in the registry. Many charsets
+ are given more than one name in the registry, in which case the registry
+ identifies one of the names as &lt;i&gt;MIME-preferred&lt;/i&gt;.  If a charset has more
+ than one registry name then its canonical name must be the MIME-preferred
+ name and the other names in the registry must be valid aliases.  If a
+ supported charset is not listed in the IANA registry then its canonical name
+ must begin with one of the strings &lt;tt&gt;&quot;X-&quot;&lt;/tt&gt; or &lt;tt&gt;&quot;x-&quot;&lt;/tt&gt;.
+
+ &lt;p&gt; The IANA charset registry does change over time, and so the canonical
+ name and the aliases of a particular charset may also change over time.  To
+ ensure compatibility it is recommended that no alias ever be removed from a
+ charset, and that if the canonical name of a charset is changed then its
+ previous canonical name be made into an alias.
+
+
+ &lt;h2&gt;Standard charsets&lt;/h2&gt;
+
+
+
+ &lt;p&gt;&lt;a name=&quot;standard&quot;&gt;Every implementation of the Java platform is required to support the
+ following standard charsets.&lt;/a&gt;  Consult the release documentation for your
+ implementation to see if any other charsets are supported.  The behavior
+ of such optional charsets may differ between implementations.
+
+ &lt;blockquote&gt;&lt;table width=&quot;80%&quot; summary=&quot;Description of standard charsets&quot;&gt;
+ &lt;tr&gt;&lt;th align=&quot;left&quot;&gt;Charset&lt;/th&gt;&lt;th align=&quot;left&quot;&gt;Description&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td valign=top&gt;&lt;tt&gt;US-ASCII&lt;/tt&gt;&lt;/td&gt;
+     &lt;td&gt;Seven-bit ASCII, a.k.a. &lt;tt&gt;ISO646-US&lt;/tt&gt;,
+         a.k.a. the Basic Latin block of the Unicode character set&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td valign=top&gt;&lt;tt&gt;ISO-8859-1&amp;nbsp;&amp;nbsp;&lt;/tt&gt;&lt;/td&gt;
+     &lt;td&gt;ISO Latin Alphabet No. 1, a.k.a. &lt;tt&gt;ISO-LATIN-1&lt;/tt&gt;&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td valign=top&gt;&lt;tt&gt;UTF-8&lt;/tt&gt;&lt;/td&gt;
+     &lt;td&gt;Eight-bit UCS Transformation Format&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td valign=top&gt;&lt;tt&gt;UTF-16BE&lt;/tt&gt;&lt;/td&gt;
+     &lt;td&gt;Sixteen-bit UCS Transformation Format,
+         big-endian byte&amp;nbsp;order&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td valign=top&gt;&lt;tt&gt;UTF-16LE&lt;/tt&gt;&lt;/td&gt;
+     &lt;td&gt;Sixteen-bit UCS Transformation Format,
+         little-endian byte&amp;nbsp;order&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td valign=top&gt;&lt;tt&gt;UTF-16&lt;/tt&gt;&lt;/td&gt;
+     &lt;td&gt;Sixteen-bit UCS Transformation Format,
+         byte&amp;nbsp;order identified by an optional byte-order mark&lt;/td&gt;&lt;/tr&gt;
+ &lt;/table&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt; The &lt;tt&gt;UTF-8&lt;/tt&gt; charset is specified by &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc2279.txt&quot;&gt;&lt;i&gt;RFC&amp;nbsp;2279&lt;/i&gt;&lt;/a&gt;; the
+ transformation format upon which it is based is specified in
+ Amendment&amp;nbsp;2 of ISO&amp;nbsp;10646-1 and is also described in the &lt;a
+ href=&quot;http://www.unicode.org/unicode/standard/standard.html&quot;&gt;&lt;i&gt;Unicode
+ Standard&lt;/i&gt;&lt;/a&gt;.
+
+ &lt;p&gt; The &lt;tt&gt;UTF-16&lt;/tt&gt; charsets are specified by &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc2781.txt&quot;&gt;&lt;i&gt;RFC&amp;nbsp;2781&lt;/i&gt;&lt;/a&gt;; the
+ transformation formats upon which they are based are specified in
+ Amendment&amp;nbsp;1 of ISO&amp;nbsp;10646-1 and are also described in the &lt;a
+ href=&quot;http://www.unicode.org/unicode/standard/standard.html&quot;&gt;&lt;i&gt;Unicode
+ Standard&lt;/i&gt;&lt;/a&gt;.
+
+ &lt;p&gt; The &lt;tt&gt;UTF-16&lt;/tt&gt; charsets use sixteen-bit quantities and are
+ therefore sensitive to byte order.  In these encodings the byte order of a
+ stream may be indicated by an initial &lt;i&gt;byte-order mark&lt;/i&gt; represented by
+ the Unicode character &lt;tt&gt;'&amp;#92;uFEFF'&lt;/tt&gt;.  Byte-order marks are handled
+ as follows:
+
+ &lt;ul&gt;
+
+   &lt;li&gt;&lt;p&gt; When decoding, the &lt;tt&gt;UTF-16BE&lt;/tt&gt; and &lt;tt&gt;UTF-16LE&lt;/tt&gt;
+   charsets interpret the initial byte-order marks as a &lt;small&gt;ZERO-WIDTH
+   NON-BREAKING SPACE&lt;/small&gt;; when encoding, they do not write
+   byte-order marks. &lt;/p&gt;&lt;/li&gt;
+
+
+   &lt;li&gt;&lt;p&gt; When decoding, the &lt;tt&gt;UTF-16&lt;/tt&gt; charset interprets the
+   byte-order mark at the beginning of the input stream to indicate the
+   byte-order of the stream but defaults to big-endian if there is no
+   byte-order mark; when encoding, it uses big-endian byte order and writes
+   a big-endian byte-order mark. &lt;/p&gt;&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ In any case, byte order marks occurring after the first element of an
+ input sequence are not omitted since the same code is used to represent
+ &lt;small&gt;ZERO-WIDTH NON-BREAKING SPACE&lt;/small&gt;.
+
+ &lt;p&gt;Android note: The Android platform default is always UTF-8.
+
+ &lt;p&gt;The {@link java.nio.charset.StandardCharsets} class defines constants for each of the
+ standard charsets.
+
+ &lt;h2&gt;Terminology&lt;/h2&gt;
+
+ &lt;p&gt; The name of this class is taken from the terms used in
+ &lt;a href=&quot;http://www.ietf.org/rfc/rfc2278.txt&quot;&gt;&lt;i&gt;RFC&amp;nbsp;2278&lt;/i&gt;&lt;/a&gt;.
+ In that document a &lt;i&gt;charset&lt;/i&gt; is defined as the combination of
+ one or more coded character sets and a character-encoding scheme.
+ (This definition is confusing; some other software systems define
+ &lt;i&gt;charset&lt;/i&gt; as a synonym for &lt;i&gt;coded character set&lt;/i&gt;.)
+
+ &lt;p&gt; A &lt;i&gt;coded character set&lt;/i&gt; is a mapping between a set of abstract
+ characters and a set of integers.  US-ASCII, ISO&amp;nbsp;8859-1,
+ JIS&amp;nbsp;X&amp;nbsp;0201, and Unicode are examples of coded character sets.
+
+ &lt;p&gt; Some standards have defined a &lt;i&gt;character set&lt;/i&gt; to be simply a
+ set of abstract characters without an associated assigned numbering.
+ An alphabet is an example of such a character set.  However, the subtle
+ distinction between &lt;i&gt;character set&lt;/i&gt; and &lt;i&gt;coded character set&lt;/i&gt;
+ is rarely used in practice; the former has become a short form for the
+ latter, including in the Java API specification.
+
+ &lt;p&gt; A &lt;i&gt;character-encoding scheme&lt;/i&gt; is a mapping between one or more
+ coded character sets and a set of octet (eight-bit byte) sequences.
+ UTF-8, UTF-16, ISO&amp;nbsp;2022, and EUC are examples of
+ character-encoding schemes.  Encoding schemes are often associated with
+ a particular coded character set; UTF-8, for example, is used only to
+ encode Unicode.  Some schemes, however, are associated with multiple
+ coded character sets; EUC, for example, can be used to encode
+ characters in a variety of Asian coded character sets.
+
+ &lt;p&gt; When a coded character set is used exclusively with a single
+ character-encoding scheme then the corresponding charset is usually
+ named for the coded character set; otherwise a charset is usually named
+ for the encoding scheme and, possibly, the locale of the coded
+ character sets that it supports.  Hence &lt;tt&gt;US-ASCII&lt;/tt&gt; is both the
+ name of a coded character set and of the charset that encodes it, while
+ &lt;tt&gt;EUC-JP&lt;/tt&gt; is the name of the charset that encodes the
+ JIS&amp;nbsp;X&amp;nbsp;0201, JIS&amp;nbsp;X&amp;nbsp;0208, and JIS&amp;nbsp;X&amp;nbsp;0212
+ coded character sets for the Japanese language.
+
+ &lt;p&gt; The native character encoding of the Java programming language is
+ UTF-16.  A charset in the Java platform therefore defines a mapping
+ between sequences of sixteen-bit UTF-16 code units (that is, sequences
+ of chars) and sequences of bytes. &lt;/p&gt;
+
+
+ @author Mark Reinhold
+ @author JSR-51 Expert Group
+ @since 1.4
+
+ @see CharsetDecoder
+ @see CharsetEncoder
+ @see java.nio.charset.spi.CharsetProvider
+ @see java.lang.Character
+*/
+var Charset = {
+
+<span id='java-nio-charset-Charset-method-isSupported'>/**Tells whether the named charset is supported.
+</span>@param {String} charsetName
+         The name of the requested charset; may be either
+         a canonical name or an alias
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if, and only if, support for the named charset
+          is available in the current Java virtual machine
+@throws IllegalCharsetNameException
+         If the given charset name is illegal
+@throws IllegalArgumentException
+          If the given &lt;tt&gt;charsetName&lt;/tt&gt; is null
+*/
+isSupported : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-forName'>/**Returns a charset object for the named charset.
+</span>@param {String} charsetName
+         The name of the requested charset; may be either
+         a canonical name or an alias
+@return {Object {java.nio.charset.Charset}} A charset object for the named charset
+@throws IllegalCharsetNameException
+          If the given charset name is illegal
+@throws IllegalArgumentException
+          If the given &lt;tt&gt;charsetName&lt;/tt&gt; is null
+@throws UnsupportedCharsetException
+          If no support for the named charset is available
+          in this instance of the Java virtual machine
+*/
+forName : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-forNameUEE'>/**Equivalent to {@code forName} but only throws {@code UnsupportedEncodingException},
+</span> which is all pre-nio code claims to throw.
+@hide internal use only
+*/
+forNameUEE : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-availableCharsets'>/**Constructs a sorted map from canonical charset names to charset objects.
+</span>
+ &lt;p&gt; The map returned by this method will have one entry for each charset
+ for which support is available in the current Java virtual machine.  If
+ two or more supported charsets have the same canonical name then the
+ resulting map will contain just one of them; which one it will contain
+ is not specified. &lt;/p&gt;
+
+ &lt;p&gt; The invocation of this method, and the subsequent use of the
+ resulting map, may cause time-consuming disk or network I/O operations
+ to occur.  This method is provided for applications that need to
+ enumerate all of the available charsets, for example to allow user
+ charset selection.  This method is not used by the {@link #forName
+ forName} method, which instead employs an efficient incremental lookup
+ algorithm.
+
+ &lt;p&gt; This method may return different results at different times if new
+ charset providers are dynamically made available to the current Java
+ virtual machine.  In the absence of such changes, the charsets returned
+ by this method are exactly those that can be retrieved via the {@link #forName forName} method.  &lt;/p&gt;
+@return {Object {java.util.SortedMap}} An immutable, case-insensitive map from canonical charset names
+         to charset objects
+*/
+availableCharsets : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-defaultCharset'>/**Returns the default charset of this Java virtual machine.
+</span>
+ &lt;p&gt;Android note: The Android platform default is always UTF-8.
+@return {Object {java.nio.charset.Charset}} A charset object for the default charset
+@since 1.5
+*/
+defaultCharset : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-name'>/**Returns this charset's canonical name.
+</span>@return {String} The canonical name of this charset
+*/
+name : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-aliases'>/**Returns a set containing this charset's aliases.
+</span>@return {Object {java.util.Set}} An immutable set of this charset's aliases
+*/
+aliases : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-displayName'>/**Returns this charset's human-readable name for the default locale.
+</span>
+ &lt;p&gt; The default implementation of this method simply returns this
+ charset's canonical name.  Concrete subclasses of this class may
+ override this method in order to provide a localized display name. &lt;/p&gt;
+@return {String} The display name of this charset in the default locale
+*/
+displayName : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-isRegistered'>/**Tells whether or not this charset is registered in the &lt;a
+</span> href=&quot;http://www.iana.org/assignments/character-sets&quot;&gt;IANA Charset
+ Registry&lt;/a&gt;.
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if, and only if, this charset is known by its
+          implementor to be registered with the IANA
+*/
+isRegistered : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-displayName'>/**Returns this charset's human-readable name for the given locale.
+</span>
+ &lt;p&gt; The default implementation of this method simply returns this
+ charset's canonical name.  Concrete subclasses of this class may
+ override this method in order to provide a localized display name. &lt;/p&gt;
+@param {Object {Locale}} locale
+         The locale for which the display name is to be retrieved
+@return {String} The display name of this charset in the given locale
+*/
+displayName : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-contains'>/**Tells whether or not this charset contains the given charset.
+</span>
+ &lt;p&gt; A charset &lt;i&gt;C&lt;/i&gt; is said to &lt;i&gt;contain&lt;/i&gt; a charset &lt;i&gt;D&lt;/i&gt; if,
+ and only if, every character representable in &lt;i&gt;D&lt;/i&gt; is also
+ representable in &lt;i&gt;C&lt;/i&gt;.  If this relationship holds then it is
+ guaranteed that every string that can be encoded in &lt;i&gt;D&lt;/i&gt; can also be
+ encoded in &lt;i&gt;C&lt;/i&gt; without performing any replacements.
+
+ &lt;p&gt; That &lt;i&gt;C&lt;/i&gt; contains &lt;i&gt;D&lt;/i&gt; does not imply that each character
+ representable in &lt;i&gt;C&lt;/i&gt; by a particular byte sequence is represented
+ in &lt;i&gt;D&lt;/i&gt; by the same byte sequence, although sometimes this is the
+ case.
+
+ &lt;p&gt; Every charset contains itself.
+
+ &lt;p&gt; This method computes an approximation of the containment relation:
+ If it returns &lt;tt&gt;true&lt;/tt&gt; then the given charset is known to be
+ contained by this charset; if it returns &lt;tt&gt;false&lt;/tt&gt;, however, then
+ it is not necessarily the case that the given charset is not contained
+ in this charset.
+@param {Object {Charset}} cs
+          The given charset
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if the given charset is contained in this charset
+*/
+contains : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-newDecoder'>/**Constructs a new decoder for this charset.
+</span>@return {Object {java.nio.charset.CharsetDecoder}} A new decoder for this charset
+*/
+newDecoder : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-newEncoder'>/**Constructs a new encoder for this charset.
+</span>@return {Object {java.nio.charset.CharsetEncoder}} A new encoder for this charset
+@throws UnsupportedOperationException
+          If this charset does not support encoding
+*/
+newEncoder : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-canEncode'>/**Tells whether or not this charset supports encoding.
+</span>
+ &lt;p&gt; Nearly all charsets support encoding.  The primary exceptions are
+ special-purpose &lt;i&gt;auto-detect&lt;/i&gt; charsets whose decoders can determine
+ which of several possible encoding schemes is in use by examining the
+ input byte sequence.  Such charsets do not support encoding because
+ there is no way to determine which encoding should be used on output.
+ Implementations of such charsets should override this method to return
+ &lt;tt&gt;false&lt;/tt&gt;. &lt;/p&gt;
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if, and only if, this charset supports encoding
+*/
+canEncode : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-decode'>/**Convenience method that decodes bytes in this charset into Unicode
+</span> characters.
+
+ &lt;p&gt; An invocation of this method upon a charset &lt;tt&gt;cs&lt;/tt&gt; returns the
+ same result as the expression
+
+ &lt;pre&gt;
+     cs.newDecoder()
+       .onMalformedInput(CodingErrorAction.REPLACE)
+       .onUnmappableCharacter(CodingErrorAction.REPLACE)
+       .decode(bb); &lt;/pre&gt;
+
+ except that it is potentially more efficient because it can cache
+ decoders between successive invocations.
+
+ &lt;p&gt; This method always replaces malformed-input and unmappable-character
+ sequences with this charset's default replacement byte array.  In order
+ to detect such sequences, use the {@link java.nio.charset.CharsetDecoder#decode(java.nio.ByteBuffer)} method directly.  &lt;/p&gt;
+@param {Object {ByteBuffer}} bb  The byte buffer to be decoded
+@return {Object {java.nio.CharBuffer}} A char buffer containing the decoded characters
+*/
+decode : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-encode'>/**Convenience method that encodes Unicode characters into bytes in this
+</span> charset.
+
+ &lt;p&gt; An invocation of this method upon a charset &lt;tt&gt;cs&lt;/tt&gt; returns the
+ same result as the expression
+
+ &lt;pre&gt;
+     cs.newEncoder()
+       .onMalformedInput(CodingErrorAction.REPLACE)
+       .onUnmappableCharacter(CodingErrorAction.REPLACE)
+       .encode(bb); &lt;/pre&gt;
+
+ except that it is potentially more efficient because it can cache
+ encoders between successive invocations.
+
+ &lt;p&gt; This method always replaces malformed-input and unmappable-character
+ sequences with this charset's default replacement string.  In order to
+ detect such sequences, use the {@link java.nio.charset.CharsetEncoder#encode(java.nio.CharBuffer)} method directly.  &lt;/p&gt;
+@param {Object {CharBuffer}} cb  The char buffer to be encoded
+@return {Object {java.nio.ByteBuffer}} A byte buffer containing the encoded characters
+*/
+encode : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-encode'>/**Convenience method that encodes a string into bytes in this charset.
+</span>
+ &lt;p&gt; An invocation of this method upon a charset &lt;tt&gt;cs&lt;/tt&gt; returns the
+ same result as the expression
+
+ &lt;pre&gt;
+     cs.encode(CharBuffer.wrap(s)); &lt;/pre&gt;
+@param {String} str  The string to be encoded
+@return {Object {java.nio.ByteBuffer}} A byte buffer containing the encoded characters
+*/
+encode : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-compareTo'>/**Compares this charset to another.
+</span>
+ &lt;p&gt; Charsets are ordered by their canonical names, without regard to
+ case. &lt;/p&gt;
+@param {Object {Charset}} that
+         The charset to which this charset is to be compared
+@return {Number} A negative integer, zero, or a positive integer as this charset
+         is less than, equal to, or greater than the specified charset
+*/
+compareTo : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-hashCode'>/**Computes a hashcode for this charset.
+</span>@return {Number} An integer hashcode
+*/
+hashCode : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-equals'>/**Tells whether or not this object is equal to another.
+</span>
+ &lt;p&gt; Two charsets are equal if, and only if, they have the same canonical
+ names.  A charset is never equal to any other type of object.  &lt;/p&gt;
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if, and only if, this charset is equal to the
+          given object
+*/
+equals : function(  ) {},
+
+<span id='java-nio-charset-Charset-method-toString'>/**Returns a string describing this charset.
+</span>@return {String} A string describing this charset
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

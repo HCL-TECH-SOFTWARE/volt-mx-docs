@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-net-NetworkPolicyManagerService'>/**@class com.android.server.net.NetworkPolicyManagerService
+</span>@extends INetworkPolicyManager.Stub
+
+ Service that maintains low-level network policy rules, using
+ {@link com.android.server.net.NetworkStatsService} statistics to drive those rules.
+ &lt;p&gt;
+ Derives active rules by combining a given policy with other system status,
+ and delivers to listeners, such as {@link ConnectivityManager}, for
+ enforcement.
+
+ &lt;p&gt;
+ This class uses 2 locks to synchronize state:
+ &lt;ul&gt;
+ &lt;li&gt;{@code mUidRulesFirstLock}: used to guard state related to individual UIDs (such as firewall
+ rules).
+ &lt;li&gt;{@code mNetworkPoliciesSecondLock}: used to guard state related to network interfaces (such
+ as network policies).
+ &lt;/ul&gt;
+
+ &lt;p&gt;
+ As such, methods that require synchronization have the following prefixes:
+ &lt;ul&gt;
+ &lt;li&gt;{@code UL()}: require the &quot;UID&quot; lock ({@code mUidRulesFirstLock}).
+ &lt;li&gt;{@code NL()}: require the &quot;Network&quot; lock ({@code mNetworkPoliciesSecondLock}).
+ &lt;li&gt;{@code AL()}: require all locks, which must be obtained in order ({@code mUidRulesFirstLock}
+ first, then {@code mNetworkPoliciesSecondLock}, then {@code mYetAnotherGuardThirdLock}, etc..
+ &lt;/ul&gt;
+*/
+var NetworkPolicyManagerService = {
+
+<span id='com-android-server-net-NetworkPolicyManagerService-property-OPPORTUNISTIC_QUOTA_UNKNOWN'>/** No opportunistic quota could be calculated from user data plan or data settings.
+</span>*/
+OPPORTUNISTIC_QUOTA_UNKNOWN : &quot;-1&quot;,
+<span id='com-android-server-net-NetworkPolicyManagerService-property-TYPE_WARNING'>/***/
+</span>TYPE_WARNING : &quot;null&quot;,
+<span id='com-android-server-net-NetworkPolicyManagerService-property-TYPE_LIMIT'>/***/
+</span>TYPE_LIMIT : &quot;null&quot;,
+<span id='com-android-server-net-NetworkPolicyManagerService-property-TYPE_LIMIT_SNOOZED'>/***/
+</span>TYPE_LIMIT_SNOOZED : &quot;null&quot;,
+<span id='com-android-server-net-NetworkPolicyManagerService-property-TYPE_RAPID'>/***/
+</span>TYPE_RAPID : &quot;null&quot;,
+<span id='com-android-server-net-NetworkPolicyManagerService-property-mStatLogger'>/***/
+</span>mStatLogger : &quot;null&quot;,
+<span id='com-android-server-net-NetworkPolicyManagerService-method-bindConnectivityManager'>/**
+</span>*/
+bindConnectivityManager : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-networkScoreAndNetworkManagementServiceReady'>/**
+</span>*/
+networkScoreAndNetworkManagementServiceReady : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-systemReady'>/**
+</span>*/
+systemReady : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-setUidPolicy'>/**
+</span>*/
+setUidPolicy : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-addUidPolicy'>/**
+</span>*/
+addUidPolicy : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-removeUidPolicy'>/**
+</span>*/
+removeUidPolicy : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-getUidPolicy'>/**
+</span>*/
+getUidPolicy : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-getUidsWithPolicy'>/**
+</span>*/
+getUidsWithPolicy : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-registerListener'>/**
+</span>*/
+registerListener : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-unregisterListener'>/**
+</span>*/
+unregisterListener : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-setNetworkPolicies'>/**
+</span>*/
+setNetworkPolicies : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-getNetworkPolicies'>/**
+</span>*/
+getNetworkPolicies : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-snoozeLimit'>/**
+</span>*/
+snoozeLimit : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-onTetheringChanged'>/**
+</span>*/
+onTetheringChanged : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-setRestrictBackground'>/**
+</span>*/
+setRestrictBackground : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-getRestrictBackgroundByCaller'>/**
+</span>*/
+getRestrictBackgroundByCaller : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-getRestrictBackground'>/**
+</span>*/
+getRestrictBackground : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-setDeviceIdleMode'>/**
+</span>*/
+setDeviceIdleMode : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-setWifiMeteredOverride'>/**
+</span>*/
+setWifiMeteredOverride : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-getNetworkQuotaInfo'>/**
+</span>*/
+getNetworkQuotaInfo : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-getSubscriptionPlans'>/**
+</span>*/
+getSubscriptionPlans : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-setSubscriptionPlans'>/**
+</span>*/
+setSubscriptionPlans : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-getSubscriptionPlansOwner'>/**
+</span>*/
+getSubscriptionPlansOwner : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-setSubscriptionOverride'>/**
+</span>*/
+setSubscriptionOverride : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-onShellCommand'>/**
+</span>*/
+onShellCommand : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-factoryReset'>/**
+</span>*/
+factoryReset : function(  ) {},
+
+<span id='com-android-server-net-NetworkPolicyManagerService-method-isUidNetworkingBlocked'>/**
+</span>*/
+isUidNetworkingBlocked : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

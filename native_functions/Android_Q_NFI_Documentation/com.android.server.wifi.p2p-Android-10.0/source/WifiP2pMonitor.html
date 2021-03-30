@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-p2p-WifiP2pMonitor'>/**@class com.android.server.wifi.p2p.WifiP2pMonitor
+</span>@extends java.lang.Object
+
+ Listens for events from the wpa_supplicant, and passes them on
+ to the {@link com.android.server.wifi.p2p.WifiP2pServiceImpl} for handling.
+
+ @hide
+*/
+var WifiP2pMonitor = {
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-SUP_CONNECTION_EVENT'>/***/
+</span>SUP_CONNECTION_EVENT : &quot;147457&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-SUP_DISCONNECTION_EVENT'>/***/
+</span>SUP_DISCONNECTION_EVENT : &quot;147458&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_DEVICE_FOUND_EVENT'>/***/
+</span>P2P_DEVICE_FOUND_EVENT : &quot;147477&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_DEVICE_LOST_EVENT'>/***/
+</span>P2P_DEVICE_LOST_EVENT : &quot;147478&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_GO_NEGOTIATION_REQUEST_EVENT'>/***/
+</span>P2P_GO_NEGOTIATION_REQUEST_EVENT : &quot;147479&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_GO_NEGOTIATION_SUCCESS_EVENT'>/***/
+</span>P2P_GO_NEGOTIATION_SUCCESS_EVENT : &quot;147481&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_GO_NEGOTIATION_FAILURE_EVENT'>/***/
+</span>P2P_GO_NEGOTIATION_FAILURE_EVENT : &quot;147482&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_GROUP_FORMATION_SUCCESS_EVENT'>/***/
+</span>P2P_GROUP_FORMATION_SUCCESS_EVENT : &quot;147483&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_GROUP_FORMATION_FAILURE_EVENT'>/***/
+</span>P2P_GROUP_FORMATION_FAILURE_EVENT : &quot;147484&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_GROUP_STARTED_EVENT'>/***/
+</span>P2P_GROUP_STARTED_EVENT : &quot;147485&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_GROUP_REMOVED_EVENT'>/***/
+</span>P2P_GROUP_REMOVED_EVENT : &quot;147486&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_INVITATION_RECEIVED_EVENT'>/***/
+</span>P2P_INVITATION_RECEIVED_EVENT : &quot;147487&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_INVITATION_RESULT_EVENT'>/***/
+</span>P2P_INVITATION_RESULT_EVENT : &quot;147488&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_PROV_DISC_PBC_REQ_EVENT'>/***/
+</span>P2P_PROV_DISC_PBC_REQ_EVENT : &quot;147489&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_PROV_DISC_PBC_RSP_EVENT'>/***/
+</span>P2P_PROV_DISC_PBC_RSP_EVENT : &quot;147490&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_PROV_DISC_ENTER_PIN_EVENT'>/***/
+</span>P2P_PROV_DISC_ENTER_PIN_EVENT : &quot;147491&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_PROV_DISC_SHOW_PIN_EVENT'>/***/
+</span>P2P_PROV_DISC_SHOW_PIN_EVENT : &quot;147492&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_FIND_STOPPED_EVENT'>/***/
+</span>P2P_FIND_STOPPED_EVENT : &quot;147493&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_SERV_DISC_RESP_EVENT'>/***/
+</span>P2P_SERV_DISC_RESP_EVENT : &quot;147494&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-P2P_PROV_DISC_FAILURE_EVENT'>/***/
+</span>P2P_PROV_DISC_FAILURE_EVENT : &quot;147495&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-AP_STA_DISCONNECTED_EVENT'>/***/
+</span>AP_STA_DISCONNECTED_EVENT : &quot;147497&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-property-AP_STA_CONNECTED_EVENT'>/***/
+</span>AP_STA_CONNECTED_EVENT : &quot;147498&quot;,
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-enableVerboseLogging'>/**Enable verbose logging for all sub modules.
+</span>*/
+enableVerboseLogging : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-registerHandler'>/**Registers a callback handler for the provided event.
+</span>*/
+registerHandler : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-setMonitoring'>/**Enable/Disable monitoring for the provided iface.
+</span>@param {String} iface Name of the iface.
+@param {Boolean} enabled true to enable, false to disable.
+*/
+setMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-startMonitoring'>/**Start Monitoring for wpa_supplicant events.
+</span>@param {String} iface Name of iface.
+ TODO: Add unit tests for these once we remove the legacy code.
+*/
+startMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-stopMonitoring'>/**Stop Monitoring for wpa_supplicant events.
+</span>@param {String} iface Name of iface.
+ TODO: Add unit tests for these once we remove the legacy code.
+*/
+stopMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-stopAllMonitoring'>/**Stop Monitoring for wpa_supplicant events.
+</span>
+ TODO: Add unit tests for these once we remove the legacy code.
+*/
+stopAllMonitoring : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastSupplicantConnectionEvent'>/**Broadcast the connection to wpa_supplicant event to all the handlers registered for
+</span> this event.
+@param {String} iface Name of iface on which this occurred.
+*/
+broadcastSupplicantConnectionEvent : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastSupplicantDisconnectionEvent'>/**Broadcast the loss of connection to wpa_supplicant event to all the handlers registered for
+</span> this event.
+@param {String} iface Name of iface on which this occurred.
+*/
+broadcastSupplicantDisconnectionEvent : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pDeviceFound'>/**Broadcast new p2p device discovered event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pDevice}} device Device that has been discovered during recent scan.
+*/
+broadcastP2pDeviceFound : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pDeviceLost'>/**Broadcast p2p device lost event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pDevice}} device Device that has been lost in recent scan.
+*/
+broadcastP2pDeviceLost : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pFindStopped'>/**Broadcast scan termination event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastP2pFindStopped : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pGoNegotiationRequest'>/**Broadcast group owner negotiation request event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pConfig}} config P2p configuration.
+*/
+broadcastP2pGoNegotiationRequest : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pGoNegotiationSuccess'>/**Broadcast group owner negotiation success event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastP2pGoNegotiationSuccess : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pGoNegotiationFailure'>/**Broadcast group owner negotiation failure event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pServiceImpl.P2pStatus}} reason Failure reason.
+*/
+broadcastP2pGoNegotiationFailure : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pGroupFormationSuccess'>/**Broadcast group formation success event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastP2pGroupFormationSuccess : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pGroupFormationFailure'>/**Broadcast group formation failure event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {String} reason Failure reason.
+*/
+broadcastP2pGroupFormationFailure : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pGroupStarted'>/**Broadcast group started event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pGroup}} group Started group.
+*/
+broadcastP2pGroupStarted : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pGroupRemoved'>/**Broadcast group removed event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pGroup}} group Removed group.
+*/
+broadcastP2pGroupRemoved : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pInvitationReceived'>/**Broadcast invitation received event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pGroup}} group Group to which invitation has been received.
+*/
+broadcastP2pInvitationReceived : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pInvitationResult'>/**Broadcast invitation result event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pServiceImpl.P2pStatus}} result Result of invitation.
+*/
+broadcastP2pInvitationResult : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pProvisionDiscoveryPbcRequest'>/**Broadcast PB discovery request event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pProvDiscEvent}} event Provision discovery request event.
+*/
+broadcastP2pProvisionDiscoveryPbcRequest : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pProvisionDiscoveryPbcResponse'>/**Broadcast PB discovery response event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pProvDiscEvent}} event Provision discovery response event.
+*/
+broadcastP2pProvisionDiscoveryPbcResponse : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pProvisionDiscoveryEnterPin'>/**Broadcast PIN discovery request event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pProvDiscEvent}} event Provision discovery request event.
+*/
+broadcastP2pProvisionDiscoveryEnterPin : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pProvisionDiscoveryShowPin'>/**Broadcast PIN discovery response event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {WifiP2pProvDiscEvent}} event Provision discovery response event.
+*/
+broadcastP2pProvisionDiscoveryShowPin : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pProvisionDiscoveryFailure'>/**Broadcast P2P discovery failure event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastP2pProvisionDiscoveryFailure : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pServiceDiscoveryResponse'>/**Broadcast service discovery response event to all handlers registered for this event.
+</span>@param {String} iface Name of iface on which this occurred.
+@param {Object {java.util.List}} services List of discovered services.
+*/
+broadcastP2pServiceDiscoveryResponse : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pApStaConnected'>/**Broadcast AP STA connection event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastP2pApStaConnected : function(  ) {},
+
+<span id='com-android-server-wifi-p2p-WifiP2pMonitor-method-broadcastP2pApStaDisconnected'>/**Broadcast AP STA disconnection event.
+</span>@param {String} iface Name of iface on which this occurred.
+*/
+broadcastP2pApStaDisconnected : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

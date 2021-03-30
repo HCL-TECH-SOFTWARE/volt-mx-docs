@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-zone-ZoneOffsetTransitionRule'>/**@class java.time.zone.ZoneOffsetTransitionRule
+</span> implements java.io.Serializable
+
+@extends java.lang.Object
+
+ A rule expressing how to create a transition.
+ &lt;p&gt;
+ This class allows rules for identifying future transitions to be expressed.
+ A rule might be written in many forms:
+ &lt;ul&gt;
+ &lt;li&gt;the 16th March
+ &lt;li&gt;the Sunday on or after the 16th March
+ &lt;li&gt;the Sunday on or before the 16th March
+ &lt;li&gt;the last Sunday in February
+ &lt;/ul&gt;
+ These different rule types can be expressed and queried.
+
+ @implSpec
+ This class is immutable and thread-safe.
+
+ @since 1.8
+*/
+var ZoneOffsetTransitionRule = {
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-of'>/**Obtains an instance defining the yearly rule to create transitions between two offsets.
+</span> &lt;p&gt;
+ Applications should normally obtain an instance from {@link java.time.zone.ZoneRules}.
+ This factory is only intended for use when creating {@link java.time.zone.ZoneRules}.
+@param {Object {Month}} month  the month of the month-day of the first day of the cutover week, not null
+@param {Number} dayOfMonthIndicator  the day of the month-day of the cutover week, positive if the week is that
+  day or later, negative if the week is that day or earlier, counting from the last day of the month,
+  from -28 to 31 excluding 0
+@param {Object {DayOfWeek}} dayOfWeek  the required day-of-week, null if the month-day should not be changed
+@param {Object {LocalTime}} time  the cutover time in the 'before' offset, not null
+@param {Boolean} timeEndOfDay  whether the time is midnight at the end of day
+@param {Object {ZoneOffsetTransitionRule.TimeDefinition}} timeDefnition  how to interpret the cutover
+@param {Object {ZoneOffset}} standardOffset  the standard offset in force at the cutover, not null
+@param {Object {ZoneOffset}} offsetBefore  the offset before the cutover, not null
+@param {Object {ZoneOffset}} offsetAfter  the offset after the cutover, not null
+@return {Object {java.time.zone.ZoneOffsetTransitionRule}} the rule, not null
+@throws IllegalArgumentException if the day of month indicator is invalid
+@throws IllegalArgumentException if the end of day flag is true when the time is not midnight
+*/
+of : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-getMonth'>/**Gets the month of the transition.
+</span> &lt;p&gt;
+ If the rule defines an exact date then the month is the month of that date.
+ &lt;p&gt;
+ If the rule defines a week where the transition might occur, then the month
+ if the month of either the earliest or latest possible date of the cutover.
+@return {Object {java.time.Month}} the month of the transition, not null
+*/
+getMonth : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-getDayOfMonthIndicator'>/**Gets the indicator of the day-of-month of the transition.
+</span> &lt;p&gt;
+ If the rule defines an exact date then the day is the month of that date.
+ &lt;p&gt;
+ If the rule defines a week where the transition might occur, then the day
+ defines either the start of the end of the transition week.
+ &lt;p&gt;
+ If the value is positive, then it represents a normal day-of-month, and is the
+ earliest possible date that the transition can be.
+ The date may refer to 29th February which should be treated as 1st March in non-leap years.
+ &lt;p&gt;
+ If the value is negative, then it represents the number of days back from the
+ end of the month where {@code -1} is the last day of the month.
+ In this case, the day identified is the latest possible date that the transition can be.
+@return {Number} the day-of-month indicator, from -28 to 31 excluding 0
+*/
+getDayOfMonthIndicator : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-getDayOfWeek'>/**Gets the day-of-week of the transition.
+</span> &lt;p&gt;
+ If the rule defines an exact date then this returns null.
+ &lt;p&gt;
+ If the rule defines a week where the cutover might occur, then this method
+ returns the day-of-week that the month-day will be adjusted to.
+ If the day is positive then the adjustment is later.
+ If the day is negative then the adjustment is earlier.
+@return {Object {java.time.DayOfWeek}} the day-of-week that the transition occurs, null if the rule defines an exact date
+*/
+getDayOfWeek : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-getLocalTime'>/**Gets the local time of day of the transition which must be checked with
+</span> {@link #isMidnightEndOfDay}().
+ &lt;p&gt;
+ The time is converted into an instant using the time definition.
+@return {Object {java.time.LocalTime}} the local time of day of the transition, not null
+*/
+getLocalTime : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-isMidnightEndOfDay'>/**Is the transition local time midnight at the end of day.
+</span> &lt;p&gt;
+ The transition may be represented as occurring at 24:00.
+@return {Boolean} whether a local time of midnight is at the start or end of the day
+*/
+isMidnightEndOfDay : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-getTimeDefinition'>/**Gets the time definition, specifying how to convert the time to an instant.
+</span> &lt;p&gt;
+ The local time can be converted to an instant using the standard offset,
+ the wall offset or UTC.
+@return {Object {java.time.zone.ZoneOffsetTransitionRule.TimeDefinition}} the time definition, not null
+*/
+getTimeDefinition : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-getStandardOffset'>/**Gets the standard offset in force at the transition.
+</span>@return {Object {java.time.ZoneOffset}} the standard offset, not null
+*/
+getStandardOffset : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-getOffsetBefore'>/**Gets the offset before the transition.
+</span>@return {Object {java.time.ZoneOffset}} the offset before, not null
+*/
+getOffsetBefore : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-getOffsetAfter'>/**Gets the offset after the transition.
+</span>@return {Object {java.time.ZoneOffset}} the offset after, not null
+*/
+getOffsetAfter : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-createTransition'>/**Creates a transition instance for the specified year.
+</span> &lt;p&gt;
+ Calculations are performed using the ISO-8601 chronology.
+@param {Number} year  the year to create a transition for, not null
+@return {Object {java.time.zone.ZoneOffsetTransition}} the transition instance, not null
+*/
+createTransition : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-equals'>/**Checks if this object equals another.
+</span> &lt;p&gt;
+ The entire state of the object is compared.
+@param {Object {Object}} otherRule  the other object to compare to, null returns false
+@return {Boolean} true if equal
+*/
+equals : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-hashCode'>/**Returns a suitable hash code.
+</span>@return {Number} the hash code
+*/
+hashCode : function(  ) {},
+
+<span id='java-time-zone-ZoneOffsetTransitionRule-method-toString'>/**Returns a string describing this object.
+</span>@return {String} a string for debugging, not null
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

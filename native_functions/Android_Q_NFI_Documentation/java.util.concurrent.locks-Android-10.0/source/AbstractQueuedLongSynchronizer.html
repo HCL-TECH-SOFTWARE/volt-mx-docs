@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer'>/**@class java.util.concurrent.locks.AbstractQueuedLongSynchronizer
+</span> implements java.io.Serializable
+
+@extends java.util.concurrent.locks.AbstractOwnableSynchronizer
+
+ A version of {@link java.util.concurrent.locks.AbstractQueuedSynchronizer} in
+ which synchronization state is maintained as a {@code long}.
+ This class has exactly the same structure, properties, and methods
+ as {@code AbstractQueuedSynchronizer} with the exception
+ that all state-related parameters and results are defined
+ as {@code long} rather than {@code int}. This class
+ may be useful when creating synchronizers such as
+ multilevel locks and barriers that require
+ 64 bits of state.
+
+ &lt;p&gt;See {@link java.util.concurrent.locks.AbstractQueuedSynchronizer} for usage
+ notes and examples.
+
+ @since 1.6
+ @author Doug Lea
+*/
+var AbstractQueuedLongSynchronizer = {
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-acquire'>/**Acquires in exclusive mode, ignoring interrupts.  Implemented
+</span> by invoking at least once {@link #tryAcquire},
+ returning on success.  Otherwise the thread is queued, possibly
+ repeatedly blocking and unblocking, invoking {@link #tryAcquire} until success.  This method can be used
+ to implement method {@link java.util.concurrent.locks.Lock#lock}.
+@param {Number} arg the acquire argument.  This value is conveyed to
+        {@link #tryAcquire} but is otherwise uninterpreted and
+        can represent anything you like.
+*/
+acquire : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-acquireInterruptibly'>/**Acquires in exclusive mode, aborting if interrupted.
+</span> Implemented by first checking interrupt status, then invoking
+ at least once {@link #tryAcquire}, returning on
+ success.  Otherwise the thread is queued, possibly repeatedly
+ blocking and unblocking, invoking {@link #tryAcquire}
+ until success or the thread is interrupted.  This method can be
+ used to implement method {@link java.util.concurrent.locks.Lock#lockInterruptibly}.
+@param {Number} arg the acquire argument.  This value is conveyed to
+        {@link #tryAcquire} but is otherwise uninterpreted and
+        can represent anything you like.
+@throws InterruptedException if the current thread is interrupted
+*/
+acquireInterruptibly : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-tryAcquireNanos'>/**Attempts to acquire in exclusive mode, aborting if interrupted,
+</span> and failing if the given timeout elapses.  Implemented by first
+ checking interrupt status, then invoking at least once {@link #tryAcquire}, returning on success.  Otherwise, the thread is
+ queued, possibly repeatedly blocking and unblocking, invoking
+ {@link #tryAcquire} until success or the thread is interrupted
+ or the timeout elapses.  This method can be used to implement
+ method {@link java.util.concurrent.locks.Lock#tryjava.util.concurrent.locks.Lock(long, TimeUnit)}.
+@param {Number} arg the acquire argument.  This value is conveyed to
+        {@link #tryAcquire} but is otherwise uninterpreted and
+        can represent anything you like.
+@param {Number} nanosTimeout the maximum number of nanoseconds to wait
+@return {Boolean} {@code true} if acquired; {@code false} if timed out
+@throws InterruptedException if the current thread is interrupted
+*/
+tryAcquireNanos : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-release'>/**Releases in exclusive mode.  Implemented by unblocking one or
+</span> more threads if {@link #tryRelease} returns true.
+ This method can be used to implement method {@link java.util.concurrent.locks.Lock#unlock}.
+@param {Number} arg the release argument.  This value is conveyed to
+        {@link #tryRelease} but is otherwise uninterpreted and
+        can represent anything you like.
+@return {Boolean} the value returned from {@link #tryRelease}
+*/
+release : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-acquireShared'>/**Acquires in shared mode, ignoring interrupts.  Implemented by
+</span> first invoking at least once {@link #tryAcquireShared},
+ returning on success.  Otherwise the thread is queued, possibly
+ repeatedly blocking and unblocking, invoking {@link #tryAcquireShared} until success.
+@param {Number} arg the acquire argument.  This value is conveyed to
+        {@link #tryAcquireShared} but is otherwise uninterpreted
+        and can represent anything you like.
+*/
+acquireShared : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-acquireSharedInterruptibly'>/**Acquires in shared mode, aborting if interrupted.  Implemented
+</span> by first checking interrupt status, then invoking at least once
+ {@link #tryAcquireShared}, returning on success.  Otherwise the
+ thread is queued, possibly repeatedly blocking and unblocking,
+ invoking {@link #tryAcquireShared} until success or the thread
+ is interrupted.
+@param {Number} arg the acquire argument.
+ This value is conveyed to {@link #tryAcquireShared} but is
+ otherwise uninterpreted and can represent anything
+ you like.
+@throws InterruptedException if the current thread is interrupted
+*/
+acquireSharedInterruptibly : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-tryAcquireSharedNanos'>/**Attempts to acquire in shared mode, aborting if interrupted, and
+</span> failing if the given timeout elapses.  Implemented by first
+ checking interrupt status, then invoking at least once {@link #tryAcquireShared}, returning on success.  Otherwise, the
+ thread is queued, possibly repeatedly blocking and unblocking,
+ invoking {@link #tryAcquireShared} until success or the thread
+ is interrupted or the timeout elapses.
+@param {Number} arg the acquire argument.  This value is conveyed to
+        {@link #tryAcquireShared} but is otherwise uninterpreted
+        and can represent anything you like.
+@param {Number} nanosTimeout the maximum number of nanoseconds to wait
+@return {Boolean} {@code true} if acquired; {@code false} if timed out
+@throws InterruptedException if the current thread is interrupted
+*/
+tryAcquireSharedNanos : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-releaseShared'>/**Releases in shared mode.  Implemented by unblocking one or more
+</span> threads if {@link #tryReleaseShared} returns true.
+@param {Number} arg the release argument.  This value is conveyed to
+        {@link #tryReleaseShared} but is otherwise uninterpreted
+        and can represent anything you like.
+@return {Boolean} the value returned from {@link #tryReleaseShared}
+*/
+releaseShared : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-hasQueuedThreads'>/**Queries whether any threads are waiting to acquire. Note that
+</span> because cancellations due to interrupts and timeouts may occur
+ at any time, a {@code true} return does not guarantee that any
+ other thread will ever acquire.
+
+ &lt;p&gt;In this implementation, this operation returns in
+ constant time.
+@return {Boolean} {@code true} if there may be other threads waiting to acquire
+*/
+hasQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-hasContended'>/**Queries whether any threads have ever contended to acquire this
+</span> synchronizer; that is, if an acquire method has ever blocked.
+
+ &lt;p&gt;In this implementation, this operation returns in
+ constant time.
+@return {Boolean} {@code true} if there has ever been contention
+*/
+hasContended : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-getFirstQueuedThread'>/**Returns the first (longest-waiting) thread in the queue, or
+</span> {@code null} if no threads are currently queued.
+
+ &lt;p&gt;In this implementation, this operation normally returns in
+ constant time, but may iterate upon contention if other threads are
+ concurrently modifying the queue.
+@return {Object {java.lang.Thread}} the first (longest-waiting) thread in the queue, or
+         {@code null} if no threads are currently queued
+*/
+getFirstQueuedThread : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-isQueued'>/**Returns true if the given thread is currently queued.
+</span>
+ &lt;p&gt;This implementation traverses the queue to determine
+ presence of the given thread.
+@param {Object {Thread}} thread the thread
+@return {Boolean} {@code true} if the given thread is on the queue
+@throws NullPointerException if the thread is null
+*/
+isQueued : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-hasQueuedPredecessors'>/**Queries whether any threads have been waiting to acquire longer
+</span> than the current thread.
+
+ &lt;p&gt;An invocation of this method is equivalent to (but may be
+ more efficient than):
+ &lt;pre&gt; {@code
+ getFirstQueuedThread() != Thread.currentThread()
+   &amp;&amp; hasQueuedThreads()}&lt;/pre&gt;
+
+ &lt;p&gt;Note that because cancellations due to interrupts and
+ timeouts may occur at any time, a {@code true} return does not
+ guarantee that some other thread will acquire before the current
+ thread.  Likewise, it is possible for another thread to win a
+ race to enqueue after this method has returned {@code false},
+ due to the queue being empty.
+
+ &lt;p&gt;This method is designed to be used by a fair synchronizer to
+ avoid &lt;a href=&quot;AbstractQueuedSynchronizer.html#barging&quot;&gt;barging&lt;/a&gt;.
+ Such a synchronizer's {@link #tryAcquire} method should return
+ {@code false}, and its {@link #tryAcquireShared} method should
+ return a negative value, if this method returns {@code true}
+ (unless this is a reentrant acquire).  For example, the {@code
+ tryAcquire} method for a fair, reentrant, exclusive mode
+ synchronizer might look like this:
+
+ &lt;pre&gt; {@code
+ protected boolean tryAcquire(int arg) {
+   if (isHeldExclusively()) {
+     // A reentrant acquire; increment hold count
+     return true;
+   } else if (hasQueuedPredecessors()) {
+     return false;
+   } else {
+     // try to acquire normally
+   }
+ }}&lt;/pre&gt;
+@return {Boolean} {@code true} if there is a queued thread preceding the
+         current thread, and {@code false} if the current thread
+         is at the head of the queue or the queue is empty
+@since 1.7
+*/
+hasQueuedPredecessors : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-getQueueLength'>/**Returns an estimate of the number of threads waiting to
+</span> acquire.  The value is only an estimate because the number of
+ threads may change dynamically while this method traverses
+ internal data structures.  This method is designed for use in
+ monitoring system state, not for synchronization control.
+@return {Number} the estimated number of threads waiting to acquire
+*/
+getQueueLength : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-getQueuedThreads'>/**Returns a collection containing threads that may be waiting to
+</span> acquire.  Because the actual set of threads may change
+ dynamically while constructing this result, the returned
+ collection is only a best-effort estimate.  The elements of the
+ returned collection are in no particular order.  This method is
+ designed to facilitate construction of subclasses that provide
+ more extensive monitoring facilities.
+@return {Object {java.util.Collection}} the collection of threads
+*/
+getQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-getExclusiveQueuedThreads'>/**Returns a collection containing threads that may be waiting to
+</span> acquire in exclusive mode. This has the same properties
+ as {@link #getQueuedThreads} except that it only returns
+ those threads waiting due to an exclusive acquire.
+@return {Object {java.util.Collection}} the collection of threads
+*/
+getExclusiveQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-getSharedQueuedThreads'>/**Returns a collection containing threads that may be waiting to
+</span> acquire in shared mode. This has the same properties
+ as {@link #getQueuedThreads} except that it only returns
+ those threads waiting due to a shared acquire.
+@return {Object {java.util.Collection}} the collection of threads
+*/
+getSharedQueuedThreads : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-toString'>/**Returns a string identifying this synchronizer, as well as its state.
+</span> The state, in brackets, includes the String {@code &quot;State =&quot;}
+ followed by the current value of {@link #getState}, and either
+ {@code &quot;nonempty&quot;} or {@code &quot;empty&quot;} depending on whether the
+ queue is empty.
+@return {String} a string identifying this synchronizer, as well as its state
+*/
+toString : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-owns'>/**Queries whether the given ConditionObject
+</span> uses this synchronizer as its lock.
+@param {Object {AbstractQueuedLongSynchronizer.ConditionObject}} condition the condition
+@return {Boolean} {@code true} if owned
+@throws NullPointerException if the condition is null
+*/
+owns : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-hasWaiters'>/**Queries whether any threads are waiting on the given condition
+</span> associated with this synchronizer. Note that because timeouts
+ and interrupts may occur at any time, a {@code true} return
+ does not guarantee that a future {@code signal} will awaken
+ any threads.  This method is designed primarily for use in
+ monitoring of the system state.
+@param {Object {AbstractQueuedLongSynchronizer.ConditionObject}} condition the condition
+@return {Boolean} {@code true} if there are any waiting threads
+@throws IllegalMonitorStateException if exclusive synchronization
+         is not held
+@throws IllegalArgumentException if the given condition is
+         not associated with this synchronizer
+@throws NullPointerException if the condition is null
+*/
+hasWaiters : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-getWaitQueueLength'>/**Returns an estimate of the number of threads waiting on the
+</span> given condition associated with this synchronizer. Note that
+ because timeouts and interrupts may occur at any time, the
+ estimate serves only as an upper bound on the actual number of
+ waiters.  This method is designed for use in monitoring system
+ state, not for synchronization control.
+@param {Object {AbstractQueuedLongSynchronizer.ConditionObject}} condition the condition
+@return {Number} the estimated number of waiting threads
+@throws IllegalMonitorStateException if exclusive synchronization
+         is not held
+@throws IllegalArgumentException if the given condition is
+         not associated with this synchronizer
+@throws NullPointerException if the condition is null
+*/
+getWaitQueueLength : function(  ) {},
+
+<span id='java-util-concurrent-locks-AbstractQueuedLongSynchronizer-method-getWaitingThreads'>/**Returns a collection containing those threads that may be
+</span> waiting on the given condition associated with this
+ synchronizer.  Because the actual set of threads may change
+ dynamically while constructing this result, the returned
+ collection is only a best-effort estimate. The elements of the
+ returned collection are in no particular order.
+@param {Object {AbstractQueuedLongSynchronizer.ConditionObject}} condition the condition
+@return {Object {java.util.Collection}} the collection of threads
+@throws IllegalMonitorStateException if exclusive synchronization
+         is not held
+@throws IllegalArgumentException if the given condition is
+         not associated with this synchronizer
+@throws NullPointerException if the condition is null
+*/
+getWaitingThreads : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

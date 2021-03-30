@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-validation-ValidatorHandler'>/**@class javax.xml.validation.ValidatorHandler
+</span> implements org.xml.sax.ContentHandler
+
+@extends java.lang.Object
+
+ Streaming validator that works on SAX stream.
+
+ &lt;p&gt;
+ A {@link javax.xml.validation.ValidatorHandler} object is a thread-unsafe, non-reentrant object.
+ In other words, it is the application's responsibility to make
+ sure that one {@link javax.xml.validation.ValidatorHandler} object is not used from
+ more than one thread at any given time.
+
+ &lt;p&gt;
+ {@link javax.xml.validation.ValidatorHandler} checks if the SAX events follow
+ the set of constraints described in the associated {@link javax.xml.validation.Schema},
+ and additionally it may modify the SAX events (for example
+ by adding default values, etc.)
+
+ &lt;p&gt;
+ {@link javax.xml.validation.ValidatorHandler} extends from {@link ContentHandler},
+ but it refines the underlying {@link ContentHandler} in
+ the following way:
+ &lt;ol&gt;
+  &lt;li&gt;startElement/endElement events must receive non-null String
+      for &lt;code&gt;uri&lt;/code&gt;, &lt;code&gt;localName&lt;/code&gt;, and &lt;code&gt;qname&lt;/code&gt;,
+      even though SAX allows some of them to be null.
+      Similarly, the user-specified {@link ContentHandler} will receive non-null
+      Strings for all three parameters.
+
+  &lt;li&gt;Applications must ensure that {@link javax.xml.validation.ValidatorHandler}'s
+      {@link ContentHandler#startPrefixMapping(String,String)} and
+      {@link ContentHandler#endPrefixMapping(String)} are invoked
+      properly. Similarly, the user-specified {@link ContentHandler}
+      will receive startPrefixMapping/endPrefixMapping events.
+      If the {@link javax.xml.validation.ValidatorHandler} introduces additional namespace
+      bindings, the user-specified {@link ContentHandler} will receive
+      additional startPrefixMapping/endPrefixMapping events.
+
+  &lt;li&gt;{@link org.xml.sax.Attributes} for the
+      {@link ContentHandler#startElement(String,String,String,Attributes)} method
+      may or may not include xmlns* attributes.
+ &lt;/ol&gt;
+
+ &lt;p&gt;
+ A {@link javax.xml.validation.ValidatorHandler} is automatically reset every time
+ the startDocument method is invoked.
+
+ &lt;h2&gt;Recognized Properties and Features&lt;/h2&gt;
+ &lt;p&gt;
+ This spec defines the following feature that must be recognized
+ by all {@link javax.xml.validation.ValidatorHandler} implementations.
+
+ &lt;h3&gt;&lt;code&gt;http://xml.org/sax/features/namespace-prefixes&lt;/code&gt;&lt;/h3&gt;
+ &lt;p&gt;
+ This feature controls how a {@link javax.xml.validation.ValidatorHandler} introduces
+ namespace bindings that were not present in the original SAX event
+ stream.
+ When this feature is set to true, it must make
+ sure that the user's {@link ContentHandler} will see
+ the corresponding &lt;code&gt;xmlns*&lt;/code&gt; attribute in
+ the {@link org.xml.sax.Attributes} object of the
+ {@link ContentHandler#startElement(String,String,String,Attributes)}
+ callback. Otherwise, &lt;code&gt;xmlns*&lt;/code&gt; attributes must not be
+ added to {@link org.xml.sax.Attributes} that's passed to the
+ user-specified {@link ContentHandler}.
+ &lt;p&gt;
+ (Note that regardless of this switch, namespace bindings are
+ always notified to applications through
+ {@link ContentHandler#startPrefixMapping(String,String)} and
+ {@link ContentHandler#endPrefixMapping(String)} methods of the
+ {@link ContentHandler} specified by the user.)
+
+ &lt;p&gt;
+ Note that this feature does &lt;em&gt;NOT&lt;/em&gt; affect the way
+ a {@link javax.xml.validation.ValidatorHandler} receives SAX events. It merely
+ changes the way it augments SAX events.
+
+ &lt;p&gt;This feature is set to &lt;code&gt;false&lt;/code&gt; by default.&lt;/p&gt;
+
+ @author  &lt;a href=&quot;mailto:Kohsuke.Kawaguchi@Sun.com&quot;&gt;Kohsuke Kawaguchi&lt;/a&gt;
+ @version $Revision: 446598 $, $Date: 2006-09-15 05:55:40 -0700 (Fri, 15 Sep 2006) $
+ @since 1.5
+*/
+var ValidatorHandler = {
+
+<span id='javax-xml-validation-ValidatorHandler-method-setContentHandler'>/**Sets the {@link ContentHandler} which receives
+</span> the augmented validation result.
+
+ &lt;p&gt;
+ When a {@link ContentHandler} is specified, a
+ {@link javax.xml.validation.ValidatorHandler} will work as a filter
+ and basically copy the incoming events to the
+ specified {@link ContentHandler}.
+
+ &lt;p&gt;
+ In doing so, a {@link javax.xml.validation.ValidatorHandler} may modify
+ the events, for example by adding defaulted attributes.
+
+ &lt;p&gt;
+ A {@link javax.xml.validation.ValidatorHandler} may buffer events to certain
+ extent, but to allow {@link javax.xml.validation.ValidatorHandler} to be used
+ by a parser, the following requirement has to be met.
+
+ &lt;ol&gt;
+  &lt;li&gt;When
+      {@link ContentHandler#startElement(String, String, String, Attributes)},
+      {@link ContentHandler#endElement(String, String, String)},
+      {@link ContentHandler#startDocument()}, or
+      {@link ContentHandler#endDocument()}
+      are invoked on a {@link javax.xml.validation.ValidatorHandler},
+      the same method on the user-specified {@link ContentHandler}
+      must be invoked for the same event before the callback
+      returns.
+  &lt;li&gt;{@link javax.xml.validation.ValidatorHandler} may not introduce new elements that
+      were not present in the input.
+
+  &lt;li&gt;{@link javax.xml.validation.ValidatorHandler} may not remove attributes that were
+      present in the input.
+ &lt;/ol&gt;
+
+ &lt;p&gt;
+ When a callback method on the specified {@link ContentHandler}
+ throws an exception, the same exception object must be thrown
+ from the {@link javax.xml.validation.ValidatorHandler}. The {@link ErrorHandler}
+ should not be notified of such an exception.
+
+ &lt;p&gt;
+ This method can be called even during a middle of a validation.
+@param {Object {ContentHandler}} receiver
+      A {@link ContentHandler} or a null value.
+*/
+setContentHandler : function(  ) {},
+
+<span id='javax-xml-validation-ValidatorHandler-method-getContentHandler'>/**Gets the {@link ContentHandler} which receives the
+</span> augmented validation result.
+@return {Object {org.xml.sax.ContentHandler}} This method returns the object that was last set through
+      the {@link #getContentHandler()} method, or null
+      if that method has never been called since this {@link ValidatorHandler}
+      has created.
+@see #setContentHandler(ContentHandler)
+*/
+getContentHandler : function(  ) {},
+
+<span id='javax-xml-validation-ValidatorHandler-method-setErrorHandler'>/**Sets the {@link ErrorHandler} to receive errors encountered
+</span> during the validation.
+
+ &lt;p&gt;
+ Error handler can be used to customize the error handling process
+ during a validation. When an {@link ErrorHandler} is set,
+ errors found during the validation will be first sent
+ to the {@link ErrorHandler}.
+
+ &lt;p&gt;
+ The error handler can abort further validation immediately
+ by throwing {@link org.xml.sax.SAXException} from the handler. Or for example
+ it can print an error to the screen and try to continue the
+ validation by returning normally from the {@link ErrorHandler}
+
+ &lt;p&gt;
+ If any {@link Throwable} is thrown from an {@link ErrorHandler},
+ the same {@link Throwable} object will be thrown toward the
+ root of the call stack.
+
+ &lt;p&gt;
+ {@link javax.xml.validation.ValidatorHandler} is not allowed to
+ throw {@link org.xml.sax.SAXException} without first reporting it to
+ {@link ErrorHandler}.
+
+ &lt;p&gt;
+ When the {@link ErrorHandler} is null, the implementation will
+ behave as if the following {@link ErrorHandler} is set:
+ &lt;pre&gt;
+ class DraconianErrorHandler implements {@link ErrorHandler} {
+     public void fatalError( {@link org.xml.sax.SAXParseException} e ) throws {@link org.xml.sax.SAXException} {
+         throw e;
+     }
+     public void error( {@link org.xml.sax.SAXParseException} e ) throws {@link org.xml.sax.SAXException} {
+         throw e;
+     }
+     public void warning( {@link org.xml.sax.SAXParseException} e ) throws {@link org.xml.sax.SAXException} {
+         // noop
+     }
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ When a new {@link javax.xml.validation.ValidatorHandler} object is created, initially
+ this field is set to null.
+@param {Object {ErrorHandler}} errorHandler
+      A new error handler to be set. This parameter can be null.
+*/
+setErrorHandler : function(  ) {},
+
+<span id='javax-xml-validation-ValidatorHandler-method-getErrorHandler'>/**Gets the current {@link ErrorHandler} set to this {@link javax.xml.validation.ValidatorHandler}.
+</span>@return {Object {org.xml.sax.ErrorHandler}} This method returns the object that was last set through
+      the {@link #setErrorHandler(ErrorHandler)} method, or null
+      if that method has never been called since this {@link ValidatorHandler}
+      has created.
+@see #setErrorHandler(ErrorHandler)
+*/
+getErrorHandler : function(  ) {},
+
+<span id='javax-xml-validation-ValidatorHandler-method-setResourceResolver'>/**Sets the {@link LSResourceResolver} to customize
+</span> resource resolution while in a validation episode.
+
+ &lt;p&gt;
+ {@link javax.xml.validation.ValidatorHandler} uses a {@link LSResourceResolver}
+ when it needs to locate external resources while a validation,
+ although exactly what constitutes &quot;locating external resources&quot; is
+ up to each schema language.
+
+ &lt;p&gt;
+ When the {@link LSResourceResolver} is null, the implementation will
+ behave as if the following {@link LSResourceResolver} is set:
+ &lt;pre&gt;
+ class DumbLSResourceResolver implements {@link LSResourceResolver} {
+     public {@link org.w3c.dom.ls.LSInput} resolveResource(
+         String publicId, String systemId, String baseURI) {
+
+         return null; // always return null
+     }
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ If a {@link LSResourceResolver} throws a {@link RuntimeException}
+  (or instances of its derived classes),
+ then the {@link javax.xml.validation.ValidatorHandler} will abort the parsing and
+ the caller of the &lt;code&gt;validate&lt;/code&gt; method will receive
+ the same {@link RuntimeException}.
+
+ &lt;p&gt;
+ When a new {@link javax.xml.validation.ValidatorHandler} object is created, initially
+ this field is set to null.
+@param {Object {LSResourceResolver}} resourceResolver
+      A new resource resolver to be set. This parameter can be null.
+*/
+setResourceResolver : function(  ) {},
+
+<span id='javax-xml-validation-ValidatorHandler-method-getResourceResolver'>/**Gets the current {@link LSResourceResolver} set to this {@link javax.xml.validation.ValidatorHandler}.
+</span>@return {Object {org.w3c.dom.ls.LSResourceResolver}} This method returns the object that was last set through
+      the {@link #setResourceResolver(LSResourceResolver)} method, or null
+      if that method has never been called since this {@link ValidatorHandler}
+      has created.
+@see #setErrorHandler(ErrorHandler)
+*/
+getResourceResolver : function(  ) {},
+
+<span id='javax-xml-validation-ValidatorHandler-method-getTypeInfoProvider'>/**Obtains the {@link javax.xml.validation.TypeInfoProvider} implementation of this
+</span> {@link javax.xml.validation.ValidatorHandler}.
+
+ &lt;p&gt;
+ The obtained {@link javax.xml.validation.TypeInfoProvider} can be queried during a parse
+ to access the type information determined by the validator.
+
+ &lt;p&gt;
+ Some schema languages do not define the notion of type,
+ for those languages, this method may not be supported.
+ However, to be compliant with this specification, implementations
+ for W3C XML Schema 1.0 must support this operation.
+@return {Object {javax.xml.validation.TypeInfoProvider}} null if the validator / schema language does not support
+      the notion of {@link org.w3c.dom.TypeInfo}.
+      Otherwise a non-null valid {@link TypeInfoProvider}.
+*/
+getTypeInfoProvider : function(  ) {},
+
+<span id='javax-xml-validation-ValidatorHandler-method-getFeature'>/**Look up the value of a feature flag.
+</span>
+ &lt;p&gt;The feature name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.ValidatorHandler} to recognize a feature name but
+ temporarily be unable to return its value.
+ Some feature values may be available only in specific
+ contexts, such as before, during, or after a validation.
+
+ &lt;p&gt;Implementors are free (and encouraged) to invent their own features,
+ using names built on their own URIs.&lt;/p&gt;
+@param {String} name The feature name, which is a non-null fully-qualified URI.
+@return {Boolean} The current value of the feature (true or false).
+@exception org.xml.sax.SAXNotRecognizedException If the feature
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            {@link ValidatorHandler} recognizes the feature name but
+            cannot determine its value at this time.
+@throws NullPointerException
+          When the name parameter is null.
+@see #setFeature(String, boolean)
+*/
+getFeature : function(  ) {},
+
+<span id='javax-xml-validation-ValidatorHandler-method-setFeature'>/**Set the value of a feature flag.
+</span>
+ &lt;p&gt;
+ Feature can be used to control the way a {@link javax.xml.validation.ValidatorHandler}
+ parses schemas, although {@link javax.xml.validation.ValidatorHandler}s are not required
+ to recognize any specific property names.&lt;/p&gt;
+
+ &lt;p&gt;The feature name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.ValidatorHandler} to expose a feature value but
+ to be unable to change the current value.
+ Some feature values may be immutable or mutable only
+ in specific contexts, such as before, during, or after
+ a validation.&lt;/p&gt;
+@param {String} name The feature name, which is a non-null fully-qualified URI.
+@param {Boolean} value The requested value of the feature (true or false).
+@exception org.xml.sax.SAXNotRecognizedException If the feature
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            {@link ValidatorHandler} recognizes the feature name but
+            cannot set the requested value.
+@throws NullPointerException
+          When the name parameter is null.
+@see #getFeature(String)
+*/
+setFeature : function(  ) {},
+
+<span id='javax-xml-validation-ValidatorHandler-method-setProperty'>/**Set the value of a property.
+</span>
+ &lt;p&gt;The property name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.ValidatorHandler} to recognize a property name but
+ to be unable to change the current value.
+ Some property values may be immutable or mutable only
+ in specific contexts, such as before, during, or after
+ a validation.&lt;/p&gt;
+
+ &lt;p&gt;{@link javax.xml.validation.ValidatorHandler}s are not required to recognize setting
+ any specific property names.&lt;/p&gt;
+@param {String} name The property name, which is a non-null fully-qualified URI.
+@param {Object {Object}} object The requested value for the property.
+@exception org.xml.sax.SAXNotRecognizedException If the property
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            {@link ValidatorHandler} recognizes the property name but
+            cannot set the requested value.
+@throws NullPointerException
+          When the name parameter is null.
+*/
+setProperty : function(  ) {},
+
+<span id='javax-xml-validation-ValidatorHandler-method-getProperty'>/**Look up the value of a property.
+</span>
+ &lt;p&gt;The property name is any fully-qualified URI.  It is
+ possible for a {@link javax.xml.validation.ValidatorHandler} to recognize a property name but
+ temporarily be unable to return its value.
+ Some property values may be available only in specific
+ contexts, such as before, during, or after a validation.&lt;/p&gt;
+
+ &lt;p&gt;{@link javax.xml.validation.ValidatorHandler}s are not required to recognize any specific
+ property names.&lt;/p&gt;
+
+ &lt;p&gt;Implementors are free (and encouraged) to invent their own properties,
+ using names built on their own URIs.&lt;/p&gt;
+@param {String} name The property name, which is a non-null fully-qualified URI.
+@return {Object {java.lang.Object}} The current value of the property.
+@exception org.xml.sax.SAXNotRecognizedException If the property
+            value can't be assigned or retrieved.
+@exception org.xml.sax.SAXNotSupportedException When the
+            XMLReader recognizes the property name but
+            cannot determine its value at this time.
+@throws NullPointerException
+          When the name parameter is null.
+@see #setProperty(String, Object)
+*/
+getProperty : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-w3c-dom-Element'>/**@class org.w3c.dom.Element
+</span> implements org.w3c.dom.Node
+
+ The &lt;code&gt;Element&lt;/code&gt; interface represents an element in an HTML or XML
+ document. Elements may have attributes associated with them; since the
+ &lt;code&gt;Element&lt;/code&gt; interface inherits from &lt;code&gt;Node&lt;/code&gt;, the
+ generic &lt;code&gt;Node&lt;/code&gt; interface attribute &lt;code&gt;attributes&lt;/code&gt; may
+ be used to retrieve the set of all attributes for an element. There are
+ methods on the &lt;code&gt;Element&lt;/code&gt; interface to retrieve either an
+ &lt;code&gt;Attr&lt;/code&gt; object by name or an attribute value by name. In XML,
+ where an attribute value may contain entity references, an
+ &lt;code&gt;Attr&lt;/code&gt; object should be retrieved to examine the possibly
+ fairly complex sub-tree representing the attribute value. On the other
+ hand, in HTML, where all attributes have simple string values, methods to
+ directly access an attribute value can safely be used as a convenience.
+ &lt;p &gt;&lt;b&gt;Note:&lt;/b&gt; In DOM Level 2, the method &lt;code&gt;normalize&lt;/code&gt; is
+ inherited from the &lt;code&gt;Node&lt;/code&gt; interface where it was moved.
+ &lt;p&gt;See also the &lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;Document Object Model (DOM) Level 3 Core Specification&lt;/a&gt;.
+*/
+var Element = {
+
+<span id='org-w3c-dom-Element-method-getTagName'>/**The name of the element. If &lt;code&gt;Node.localName&lt;/code&gt; is different
+</span> from &lt;code&gt;null&lt;/code&gt;, this attribute is a qualified name. For
+ example, in:
+ &lt;pre&gt; &amp;lt;elementExample id=&quot;demo&quot;&amp;gt; ...
+ &amp;lt;/elementExample&amp;gt; , &lt;/pre&gt;
+  &lt;code&gt;tagName&lt;/code&gt; has the value
+ &lt;code&gt;&quot;elementExample&quot;&lt;/code&gt;. Note that this is case-preserving in
+ XML, as are all of the operations of the DOM. The HTML DOM returns
+ the &lt;code&gt;tagName&lt;/code&gt; of an HTML element in the canonical
+ uppercase form, regardless of the case in the source HTML document.
+*/
+getTagName : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-getAttribute'>/**Retrieves an attribute value by name.
+</span>@param {String} name The name of the attribute to retrieve.
+@return {String} The &lt;code&gt;Attr&lt;/code&gt; value as a string, or the empty string
+   if that attribute does not have a specified or default value.
+*/
+getAttribute : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-setAttribute'>/**Adds a new attribute. If an attribute with that name is already present
+</span> in the element, its value is changed to be that of the value
+ parameter. This value is a simple string; it is not parsed as it is
+ being set. So any markup (such as syntax to be recognized as an
+ entity reference) is treated as literal text, and needs to be
+ appropriately escaped by the implementation when it is written out.
+ In order to assign an attribute value that contains entity
+ references, the user must create an &lt;code&gt;Attr&lt;/code&gt; node plus any
+ &lt;code&gt;Text&lt;/code&gt; and &lt;code&gt;EntityReference&lt;/code&gt; nodes, build the
+ appropriate subtree, and use &lt;code&gt;setAttributeNode&lt;/code&gt; to assign
+ it as the value of an attribute.
+ &lt;br&gt;To set an attribute with a qualified name and namespace URI, use
+ the &lt;code&gt;setAttributeNS&lt;/code&gt; method.
+@param {String} name The name of the attribute to create or alter.
+@param {String} value Value to set in string form.
+@exception DOMException
+   INVALID_CHARACTER_ERR: Raised if the specified name is not an XML
+   name according to the XML version in use specified in the
+   &lt;code&gt;Document.xmlVersion&lt;/code&gt; attribute.
+   &lt;br&gt;NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+*/
+setAttribute : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-removeAttribute'>/**Removes an attribute by name. If a default value for the removed
+</span> attribute is defined in the DTD, a new attribute immediately appears
+ with the default value as well as the corresponding namespace URI,
+ local name, and prefix when applicable. The implementation may handle
+ default values from other schemas similarly but applications should
+ use &lt;code&gt;Document.normalizeDocument()&lt;/code&gt; to guarantee this
+ information is up-to-date.
+ &lt;br&gt;If no attribute with this name is found, this method has no effect.
+ &lt;br&gt;To remove an attribute by local name and namespace URI, use the
+ &lt;code&gt;removeAttributeNS&lt;/code&gt; method.
+@param {String} name The name of the attribute to remove.
+@exception DOMException
+   NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+*/
+removeAttribute : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-getAttributeNode'>/**Retrieves an attribute node by name.
+</span> &lt;br&gt;To retrieve an attribute node by qualified name and namespace URI,
+ use the &lt;code&gt;getAttributeNodeNS&lt;/code&gt; method.
+@param {String} name The name (&lt;code&gt;nodeName&lt;/code&gt;) of the attribute to
+   retrieve.
+@return {Object {org.w3c.dom.Attr}} The &lt;code&gt;Attr&lt;/code&gt; node with the specified name (
+   &lt;code&gt;nodeName&lt;/code&gt;) or &lt;code&gt;null&lt;/code&gt; if there is no such
+   attribute.
+*/
+getAttributeNode : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-setAttributeNode'>/**Adds a new attribute node. If an attribute with that name (
+</span> &lt;code&gt;nodeName&lt;/code&gt;) is already present in the element, it is
+ replaced by the new one. Replacing an attribute node by itself has no
+ effect.
+ &lt;br&gt;To add a new attribute node with a qualified name and namespace
+ URI, use the &lt;code&gt;setAttributeNodeNS&lt;/code&gt; method.
+@param {Object {Attr}} newAttr The &lt;code&gt;Attr&lt;/code&gt; node to add to the attribute list.
+@return {Object {org.w3c.dom.Attr}} If the &lt;code&gt;newAttr&lt;/code&gt; attribute replaces an existing
+   attribute, the replaced &lt;code&gt;Attr&lt;/code&gt; node is returned,
+   otherwise &lt;code&gt;null&lt;/code&gt; is returned.
+@exception DOMException
+   WRONG_DOCUMENT_ERR: Raised if &lt;code&gt;newAttr&lt;/code&gt; was created from a
+   different document than the one that created the element.
+   &lt;br&gt;NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+   &lt;br&gt;INUSE_ATTRIBUTE_ERR: Raised if &lt;code&gt;newAttr&lt;/code&gt; is already an
+   attribute of another &lt;code&gt;Element&lt;/code&gt; object. The DOM user must
+   explicitly clone &lt;code&gt;Attr&lt;/code&gt; nodes to re-use them in other
+   elements.
+*/
+setAttributeNode : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-removeAttributeNode'>/**Removes the specified attribute node. If a default value for the
+</span> removed &lt;code&gt;Attr&lt;/code&gt; node is defined in the DTD, a new node
+ immediately appears with the default value as well as the
+ corresponding namespace URI, local name, and prefix when applicable.
+ The implementation may handle default values from other schemas
+ similarly but applications should use
+ &lt;code&gt;Document.normalizeDocument()&lt;/code&gt; to guarantee this
+ information is up-to-date.
+@param {Object {Attr}} oldAttr The &lt;code&gt;Attr&lt;/code&gt; node to remove from the attribute
+   list.
+@return {Object {org.w3c.dom.Attr}} The &lt;code&gt;Attr&lt;/code&gt; node that was removed.
+@exception DOMException
+   NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+   &lt;br&gt;NOT_FOUND_ERR: Raised if &lt;code&gt;oldAttr&lt;/code&gt; is not an attribute
+   of the element.
+*/
+removeAttributeNode : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-getElementsByTagName'>/**Returns a &lt;code&gt;NodeList&lt;/code&gt; of all descendant &lt;code&gt;Elements&lt;/code&gt;
+</span> with a given tag name, in document order.
+@param {String} name The name of the tag to match on. The special value &quot;*&quot;
+   matches all tags.
+@return {Object {org.w3c.dom.NodeList}} A list of matching &lt;code&gt;Element&lt;/code&gt; nodes.
+*/
+getElementsByTagName : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-getAttributeNS'>/**Retrieves an attribute value by local name and namespace URI.
+</span> &lt;br&gt;Per [&lt;a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'&gt;XML Namespaces&lt;/a&gt;]
+ , applications must use the value &lt;code&gt;null&lt;/code&gt; as the
+ &lt;code&gt;namespaceURI&lt;/code&gt; parameter for methods if they wish to have
+ no namespace.
+@param {String} namespaceURI The namespace URI of the attribute to retrieve.
+@param {String} localName The local name of the attribute to retrieve.
+@return {String} The &lt;code&gt;Attr&lt;/code&gt; value as a string, or the empty string
+   if that attribute does not have a specified or default value.
+@exception DOMException
+   NOT_SUPPORTED_ERR: May be raised if the implementation does not
+   support the feature &lt;code&gt;&quot;XML&quot;&lt;/code&gt; and the language exposed
+   through the Document does not support XML Namespaces (such as [&lt;a href='http://www.w3.org/TR/1999/REC-html401-19991224/'&gt;HTML 4.01&lt;/a&gt;]).
+@since DOM Level 2
+*/
+getAttributeNS : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-setAttributeNS'>/**Adds a new attribute. If an attribute with the same local name and
+</span> namespace URI is already present on the element, its prefix is
+ changed to be the prefix part of the &lt;code&gt;qualifiedName&lt;/code&gt;, and
+ its value is changed to be the &lt;code&gt;value&lt;/code&gt; parameter. This
+ value is a simple string; it is not parsed as it is being set. So any
+ markup (such as syntax to be recognized as an entity reference) is
+ treated as literal text, and needs to be appropriately escaped by the
+ implementation when it is written out. In order to assign an
+ attribute value that contains entity references, the user must create
+ an &lt;code&gt;Attr&lt;/code&gt; node plus any &lt;code&gt;Text&lt;/code&gt; and
+ &lt;code&gt;EntityReference&lt;/code&gt; nodes, build the appropriate subtree,
+ and use &lt;code&gt;setAttributeNodeNS&lt;/code&gt; or
+ &lt;code&gt;setAttributeNode&lt;/code&gt; to assign it as the value of an
+ attribute.
+ &lt;br&gt;Per [&lt;a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'&gt;XML Namespaces&lt;/a&gt;]
+ , applications must use the value &lt;code&gt;null&lt;/code&gt; as the
+ &lt;code&gt;namespaceURI&lt;/code&gt; parameter for methods if they wish to have
+ no namespace.
+@param {String} namespaceURI The namespace URI of the attribute to create or
+   alter.
+@param {String} qualifiedName The qualified name of the attribute to create or
+   alter.
+@param {String} value The value to set in string form.
+@exception DOMException
+   INVALID_CHARACTER_ERR: Raised if the specified qualified name is not
+   an XML name according to the XML version in use specified in the
+   &lt;code&gt;Document.xmlVersion&lt;/code&gt; attribute.
+   &lt;br&gt;NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+   &lt;br&gt;NAMESPACE_ERR: Raised if the &lt;code&gt;qualifiedName&lt;/code&gt; is
+   malformed per the Namespaces in XML specification, if the
+   &lt;code&gt;qualifiedName&lt;/code&gt; has a prefix and the
+   &lt;code&gt;namespaceURI&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;, if the
+   &lt;code&gt;qualifiedName&lt;/code&gt; has a prefix that is &quot;xml&quot; and the
+   &lt;code&gt;namespaceURI&lt;/code&gt; is different from &quot;&lt;a href='http://www.w3.org/XML/1998/namespace'&gt;
+   http://www.w3.org/XML/1998/namespace&lt;/a&gt;&quot;, if the &lt;code&gt;qualifiedName&lt;/code&gt; or its prefix is &quot;xmlns&quot; and the
+   &lt;code&gt;namespaceURI&lt;/code&gt; is different from &quot;&lt;a href='http://www.w3.org/2000/xmlns/'&gt;http://www.w3.org/2000/xmlns/&lt;/a&gt;&quot;, or if the &lt;code&gt;namespaceURI&lt;/code&gt; is &quot;&lt;a href='http://www.w3.org/2000/xmlns/'&gt;http://www.w3.org/2000/xmlns/&lt;/a&gt;&quot; and neither the &lt;code&gt;qualifiedName&lt;/code&gt; nor its prefix is &quot;xmlns&quot;.
+   &lt;br&gt;NOT_SUPPORTED_ERR: May be raised if the implementation does not
+   support the feature &lt;code&gt;&quot;XML&quot;&lt;/code&gt; and the language exposed
+   through the Document does not support XML Namespaces (such as [&lt;a href='http://www.w3.org/TR/1999/REC-html401-19991224/'&gt;HTML 4.01&lt;/a&gt;]).
+@since DOM Level 2
+*/
+setAttributeNS : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-removeAttributeNS'>/**Removes an attribute by local name and namespace URI. If a default
+</span> value for the removed attribute is defined in the DTD, a new
+ attribute immediately appears with the default value as well as the
+ corresponding namespace URI, local name, and prefix when applicable.
+ The implementation may handle default values from other schemas
+ similarly but applications should use
+ &lt;code&gt;Document.normalizeDocument()&lt;/code&gt; to guarantee this
+ information is up-to-date.
+ &lt;br&gt;If no attribute with this local name and namespace URI is found,
+ this method has no effect.
+ &lt;br&gt;Per [&lt;a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'&gt;XML Namespaces&lt;/a&gt;]
+ , applications must use the value &lt;code&gt;null&lt;/code&gt; as the
+ &lt;code&gt;namespaceURI&lt;/code&gt; parameter for methods if they wish to have
+ no namespace.
+@param {String} namespaceURI The namespace URI of the attribute to remove.
+@param {String} localName The local name of the attribute to remove.
+@exception DOMException
+   NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+   &lt;br&gt;NOT_SUPPORTED_ERR: May be raised if the implementation does not
+   support the feature &lt;code&gt;&quot;XML&quot;&lt;/code&gt; and the language exposed
+   through the Document does not support XML Namespaces (such as [&lt;a href='http://www.w3.org/TR/1999/REC-html401-19991224/'&gt;HTML 4.01&lt;/a&gt;]).
+@since DOM Level 2
+*/
+removeAttributeNS : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-getAttributeNodeNS'>/**Retrieves an &lt;code&gt;Attr&lt;/code&gt; node by local name and namespace URI.
+</span> &lt;br&gt;Per [&lt;a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'&gt;XML Namespaces&lt;/a&gt;]
+ , applications must use the value &lt;code&gt;null&lt;/code&gt; as the
+ &lt;code&gt;namespaceURI&lt;/code&gt; parameter for methods if they wish to have
+ no namespace.
+@param {String} namespaceURI The namespace URI of the attribute to retrieve.
+@param {String} localName The local name of the attribute to retrieve.
+@return {Object {org.w3c.dom.Attr}} The &lt;code&gt;Attr&lt;/code&gt; node with the specified attribute local
+   name and namespace URI or &lt;code&gt;null&lt;/code&gt; if there is no such
+   attribute.
+@exception DOMException
+   NOT_SUPPORTED_ERR: May be raised if the implementation does not
+   support the feature &lt;code&gt;&quot;XML&quot;&lt;/code&gt; and the language exposed
+   through the Document does not support XML Namespaces (such as [&lt;a href='http://www.w3.org/TR/1999/REC-html401-19991224/'&gt;HTML 4.01&lt;/a&gt;]).
+@since DOM Level 2
+*/
+getAttributeNodeNS : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-setAttributeNodeNS'>/**Adds a new attribute. If an attribute with that local name and that
+</span> namespace URI is already present in the element, it is replaced by
+ the new one. Replacing an attribute node by itself has no effect.
+ &lt;br&gt;Per [&lt;a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'&gt;XML Namespaces&lt;/a&gt;]
+ , applications must use the value &lt;code&gt;null&lt;/code&gt; as the
+ &lt;code&gt;namespaceURI&lt;/code&gt; parameter for methods if they wish to have
+ no namespace.
+@param {Object {Attr}} newAttr The &lt;code&gt;Attr&lt;/code&gt; node to add to the attribute list.
+@return {Object {org.w3c.dom.Attr}} If the &lt;code&gt;newAttr&lt;/code&gt; attribute replaces an existing
+   attribute with the same local name and namespace URI, the replaced
+   &lt;code&gt;Attr&lt;/code&gt; node is returned, otherwise &lt;code&gt;null&lt;/code&gt; is
+   returned.
+@exception DOMException
+   WRONG_DOCUMENT_ERR: Raised if &lt;code&gt;newAttr&lt;/code&gt; was created from a
+   different document than the one that created the element.
+   &lt;br&gt;NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+   &lt;br&gt;INUSE_ATTRIBUTE_ERR: Raised if &lt;code&gt;newAttr&lt;/code&gt; is already an
+   attribute of another &lt;code&gt;Element&lt;/code&gt; object. The DOM user must
+   explicitly clone &lt;code&gt;Attr&lt;/code&gt; nodes to re-use them in other
+   elements.
+   &lt;br&gt;NOT_SUPPORTED_ERR: May be raised if the implementation does not
+   support the feature &lt;code&gt;&quot;XML&quot;&lt;/code&gt; and the language exposed
+   through the Document does not support XML Namespaces (such as [&lt;a href='http://www.w3.org/TR/1999/REC-html401-19991224/'&gt;HTML 4.01&lt;/a&gt;]).
+@since DOM Level 2
+*/
+setAttributeNodeNS : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-getElementsByTagNameNS'>/**Returns a &lt;code&gt;NodeList&lt;/code&gt; of all the descendant
+</span> &lt;code&gt;Elements&lt;/code&gt; with a given local name and namespace URI in
+ document order.
+@param {String} namespaceURI The namespace URI of the elements to match on. The
+   special value &quot;*&quot; matches all namespaces.
+@param {String} localName The local name of the elements to match on. The
+   special value &quot;*&quot; matches all local names.
+@return {Object {org.w3c.dom.NodeList}} A new &lt;code&gt;NodeList&lt;/code&gt; object containing all the matched
+   &lt;code&gt;Elements&lt;/code&gt;.
+@exception DOMException
+   NOT_SUPPORTED_ERR: May be raised if the implementation does not
+   support the feature &lt;code&gt;&quot;XML&quot;&lt;/code&gt; and the language exposed
+   through the Document does not support XML Namespaces (such as [&lt;a href='http://www.w3.org/TR/1999/REC-html401-19991224/'&gt;HTML 4.01&lt;/a&gt;]).
+@since DOM Level 2
+*/
+getElementsByTagNameNS : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-hasAttribute'>/**Returns &lt;code&gt;true&lt;/code&gt; when an attribute with a given name is
+</span> specified on this element or has a default value, &lt;code&gt;false&lt;/code&gt;
+ otherwise.
+@param {String} name The name of the attribute to look for.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if an attribute with the given name is
+   specified on this element or has a default value, &lt;code&gt;false&lt;/code&gt;
+    otherwise.
+@since DOM Level 2
+*/
+hasAttribute : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-hasAttributeNS'>/**Returns &lt;code&gt;true&lt;/code&gt; when an attribute with a given local name and
+</span> namespace URI is specified on this element or has a default value,
+ &lt;code&gt;false&lt;/code&gt; otherwise.
+ &lt;br&gt;Per [&lt;a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'&gt;XML Namespaces&lt;/a&gt;]
+ , applications must use the value &lt;code&gt;null&lt;/code&gt; as the
+ &lt;code&gt;namespaceURI&lt;/code&gt; parameter for methods if they wish to have
+ no namespace.
+@param {String} namespaceURI The namespace URI of the attribute to look for.
+@param {String} localName The local name of the attribute to look for.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if an attribute with the given local name
+   and namespace URI is specified or has a default value on this
+   element, &lt;code&gt;false&lt;/code&gt; otherwise.
+@exception DOMException
+   NOT_SUPPORTED_ERR: May be raised if the implementation does not
+   support the feature &lt;code&gt;&quot;XML&quot;&lt;/code&gt; and the language exposed
+   through the Document does not support XML Namespaces (such as [&lt;a href='http://www.w3.org/TR/1999/REC-html401-19991224/'&gt;HTML 4.01&lt;/a&gt;]).
+@since DOM Level 2
+*/
+hasAttributeNS : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-getSchemaTypeInfo'>/**The type information associated with this element.
+</span>@since DOM Level 3
+*/
+getSchemaTypeInfo : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-setIdAttribute'>/**If the parameter &lt;code&gt;isId&lt;/code&gt; is &lt;code&gt;true&lt;/code&gt;, this method
+</span> declares the specified attribute to be a user-determined ID attribute
+ . This affects the value of &lt;code&gt;Attr.isId&lt;/code&gt; and the behavior
+ of &lt;code&gt;Document.getElementById&lt;/code&gt;, but does not change any
+ schema that may be in use, in particular this does not affect the
+ &lt;code&gt;Attr.schemaTypeInfo&lt;/code&gt; of the specified &lt;code&gt;Attr&lt;/code&gt;
+ node. Use the value &lt;code&gt;false&lt;/code&gt; for the parameter
+ &lt;code&gt;isId&lt;/code&gt; to undeclare an attribute for being a
+ user-determined ID attribute.
+ &lt;br&gt; To specify an attribute by local name and namespace URI, use the
+ &lt;code&gt;setIdAttributeNS&lt;/code&gt; method.
+@param {String} name The name of the attribute.
+@param {Boolean} isId Whether the attribute is a of type ID.
+@exception DOMException
+   NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+   &lt;br&gt;NOT_FOUND_ERR: Raised if the specified node is not an attribute
+   of this element.
+@since DOM Level 3
+*/
+setIdAttribute : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-setIdAttributeNS'>/**If the parameter &lt;code&gt;isId&lt;/code&gt; is &lt;code&gt;true&lt;/code&gt;, this method
+</span> declares the specified attribute to be a user-determined ID attribute
+ . This affects the value of &lt;code&gt;Attr.isId&lt;/code&gt; and the behavior
+ of &lt;code&gt;Document.getElementById&lt;/code&gt;, but does not change any
+ schema that may be in use, in particular this does not affect the
+ &lt;code&gt;Attr.schemaTypeInfo&lt;/code&gt; of the specified &lt;code&gt;Attr&lt;/code&gt;
+ node. Use the value &lt;code&gt;false&lt;/code&gt; for the parameter
+ &lt;code&gt;isId&lt;/code&gt; to undeclare an attribute for being a
+ user-determined ID attribute.
+@param {String} namespaceURI The namespace URI of the attribute.
+@param {String} localName The local name of the attribute.
+@param {Boolean} isId Whether the attribute is a of type ID.
+@exception DOMException
+   NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+   &lt;br&gt;NOT_FOUND_ERR: Raised if the specified node is not an attribute
+   of this element.
+@since DOM Level 3
+*/
+setIdAttributeNS : function(  ) {},
+
+<span id='org-w3c-dom-Element-method-setIdAttributeNode'>/**If the parameter &lt;code&gt;isId&lt;/code&gt; is &lt;code&gt;true&lt;/code&gt;, this method
+</span> declares the specified attribute to be a user-determined ID attribute
+ . This affects the value of &lt;code&gt;Attr.isId&lt;/code&gt; and the behavior
+ of &lt;code&gt;Document.getElementById&lt;/code&gt;, but does not change any
+ schema that may be in use, in particular this does not affect the
+ &lt;code&gt;Attr.schemaTypeInfo&lt;/code&gt; of the specified &lt;code&gt;Attr&lt;/code&gt;
+ node. Use the value &lt;code&gt;false&lt;/code&gt; for the parameter
+ &lt;code&gt;isId&lt;/code&gt; to undeclare an attribute for being a
+ user-determined ID attribute.
+@param {Object {Attr}} idAttr The attribute node.
+@param {Boolean} isId Whether the attribute is a of type ID.
+@exception DOMException
+   NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+   &lt;br&gt;NOT_FOUND_ERR: Raised if the specified node is not an attribute
+   of this element.
+@since DOM Level 3
+*/
+setIdAttributeNode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

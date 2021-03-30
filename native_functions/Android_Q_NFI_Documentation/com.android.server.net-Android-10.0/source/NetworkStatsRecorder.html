@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-net-NetworkStatsRecorder'>/**@class com.android.server.net.NetworkStatsRecorder
+</span>@extends java.lang.Object
+
+ Logic to record deltas between periodic {@link NetworkStats} snapshots into
+ {@link NetworkStatsHistory} that belong to {@link com.android.server.net.NetworkStatsCollection}.
+ Keeps pending changes in memory until they pass a specific threshold, in
+ bytes. Uses {@link FileRotator} for persistence logic if present.
+ &lt;p&gt;
+ Not inherently thread safe.
+*/
+var NetworkStatsRecorder = {
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-setPersistThreshold'>/**
+</span>*/
+setPersistThreshold : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-resetLocked'>/**
+</span>*/
+resetLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-getTotalSinceBootLocked'>/**
+</span>*/
+getTotalSinceBootLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-getSinceBoot'>/**
+</span>*/
+getSinceBoot : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-getOrLoadCompleteLocked'>/**Load complete history represented by {@link FileRotator}. Caches
+</span> internally as a {@link WeakReference}, and updated with future
+ {@link #recordSnapshotLocked(NetworkStats, Map, long)} snapshots as long
+ as reference is valid.
+*/
+getOrLoadCompleteLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-getOrLoadPartialLocked'>/**
+</span>*/
+getOrLoadPartialLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-recordSnapshotLocked'>/**Record any delta that occurred since last {@link NetworkStats} snapshot,
+</span> using the given {@link Map} to identify network interfaces. First
+ snapshot is considered bootstrap, and is not counted as delta.
+@param {Object {NetworkStats}} vpnArray Optional info about the currently active VPN, if any. This is used to
+                 redistribute traffic from the VPN app to the underlying responsible apps.
+                 This should always be set to null if the provided snapshot is aggregated
+                 across all UIDs (e.g. contains UID_ALL buckets), regardless of VPN state.
+*/
+recordSnapshotLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-maybePersistLocked'>/**Consider persisting any pending deltas, if they are beyond
+</span> {@link #mPersistThresholdBytes}.
+*/
+maybePersistLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-forcePersistLocked'>/**Force persisting any pending deltas.
+</span>*/
+forcePersistLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-removeUidsLocked'>/**Remove the given UID from all {@link FileRotator} history, migrating it
+</span> to {@link TrafficStats#UID_REMOVED}.
+*/
+removeUidsLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-importLegacyNetworkLocked'>/**
+</span>*/
+importLegacyNetworkLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-importLegacyUidLocked'>/**
+</span>*/
+importLegacyUidLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-dumpLocked'>/**
+</span>*/
+dumpLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-writeToProtoLocked'>/**
+</span>*/
+writeToProtoLocked : function(  ) {},
+
+<span id='com-android-server-net-NetworkStatsRecorder-method-dumpCheckin'>/**
+</span>*/
+dumpCheckin : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-HalDeviceManager'>/**@class com.android.server.wifi.HalDeviceManager
+</span>@extends java.lang.Object
+
+ Handles device management through the HAL (HIDL) interface.
+*/
+var HalDeviceManager = {
+
+<span id='com-android-server-wifi-HalDeviceManager-property-START_HAL_RETRY_TIMES'>/***/
+</span>START_HAL_RETRY_TIMES : &quot;3&quot;,
+<span id='com-android-server-wifi-HalDeviceManager-method-initialize'>/**Actually starts the HalDeviceManager: separate from constructor since may want to phase
+</span> at a later time.
+
+ TODO: if decide that no need for separating construction from initialization (e.g. both are
+ done at injector) then move to constructor.
+*/
+initialize : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-registerStatusListener'>/**Register a ManagerStatusListener to get information about the status of the manager. Use the
+</span> isReady() and isStarted() methods to check status immediately after registration and when
+ triggered.
+
+ It is safe to re-register the same callback object - duplicates are detected and only a
+ single copy kept.
+@param {Object {HalDeviceManager.ManagerStatusListener}} listener ManagerStatusListener listener object.
+@param {Object {Handler}} handler Handler on which to dispatch listener. Null implies the listener will be
+                invoked synchronously from the context of the client which triggered the
+                state change.
+*/
+registerStatusListener : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-isSupported'>/**Returns whether the vendor HAL is supported on this device or not.
+</span>*/
+isSupported : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-isReady'>/**Returns the current status of the HalDeviceManager: whether or not it is ready to execute
+</span> commands. A return of 'false' indicates that the HAL service (IWifi) is not available. Use
+ the registerStatusListener() to listener for status changes.
+*/
+isReady : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-isStarted'>/**Returns the current status of Wi-Fi: started (true) or stopped (false).
+</span>
+ Note: direct call to HIDL.
+*/
+isStarted : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-start'>/**Attempts to start Wi-Fi (using HIDL). Returns the success (true) or failure (false) or
+</span> the start operation. Will also dispatch any registered ManagerStatusCallback.onStart() on
+ success.
+
+ Note: direct call to HIDL.
+*/
+start : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-stop'>/**Stops Wi-Fi. Will also dispatch any registeredManagerStatusCallback.onStop().
+</span>
+ Note: direct call to HIDL - failure is not-expected.
+*/
+stop : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-getSupportedIfaceTypes'>/**Return the set of supported interface types across all Wi-Fi chips on the device.
+</span>@return {Object {java.util.Set}} A set of IfaceTypes constants (possibly empty, e.g. on error).
+*/
+getSupportedIfaceTypes : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-getSupportedIfaceTypes'>/**Return the set of supported interface types for the specified Wi-Fi chip.
+</span>@return {Object {java.util.Set}} A set of IfaceTypes constants  (possibly empty, e.g. on error).
+*/
+getSupportedIfaceTypes : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-createStaIface'>/**Create a STA interface if possible. Changes chip mode and removes conflicting interfaces if
+</span> needed and permitted by priority.
+@param {Boolean} lowPrioritySta Indicates whether the requested STA is a low priority STA. The priority
+                       and preemption rules for low priority STA are:
+                       - Do not destroy any interface for it (even another low priority STA)
+                       - Destroy it for any other request
+@param {Object {HalDeviceManager.InterfaceDestroyedListener}} destroyedListener Optional (nullable) listener to call when the allocated interface
+                          is removed. Will only be registered and used if an interface is
+                          created successfully.
+@param {Object {Handler}} handler Handler on which to dispatch listener. Null implies the listener will be
+                invoked synchronously from the context of the client which triggered the
+                iface destruction.
+@return {Object {IWifiStaIface}} A newly created interface - or null if the interface could not be created.
+*/
+createStaIface : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-createApIface'>/**Create AP interface if possible (see createStaIface doc).
+</span>*/
+createApIface : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-createP2pIface'>/**Create P2P interface if possible (see createStaIface doc).
+</span>*/
+createP2pIface : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-createNanIface'>/**Create NAN interface if possible (see createStaIface doc).
+</span>*/
+createNanIface : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-removeIface'>/**Removes (releases/destroys) the given interface. Will trigger any registered
+</span> InterfaceDestroyedListeners and possibly some InterfaceAvailableForRequestListeners if we
+ can potentially create some other interfaces as a result of removing this interface.
+*/
+removeIface : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-getChip'>/**Returns the IWifiChip corresponding to the specified interface (or null on error).
+</span>
+ Note: clients must not perform chip mode changes or interface management (create/delete)
+ operations on IWifiChip directly. However, they can use the IWifiChip interface to perform
+ other functions - e.g. calling the debug/trace methods.
+*/
+getChip : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-registerDestroyedListener'>/**Register an InterfaceDestroyedListener to the specified iface - returns true on success
+</span> and false on failure. This listener is in addition to the one registered when the interface
+ was created - allowing non-creators to monitor interface status.
+@param {Object {IWifiIface}} destroyedListener Listener to call when the allocated interface is removed.
+                          Will only be registered and used if an interface is created
+                          successfully.
+@param {Object {HalDeviceManager.InterfaceDestroyedListener}} handler Handler on which to dispatch listener. Null implies the listener will be
+                invoked synchronously from the context of the client which triggered the
+                iface destruction.
+*/
+registerDestroyedListener : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-registerInterfaceAvailableForRequestListener'>/**Register a listener to be called when an interface of the specified type could be requested.
+</span> No guarantees are provided (some other entity could request it first). The listener is
+ active from registration until unregistration - using
+ unregisterInterfaceAvailableForRequestListener().
+
+ Only a single instance of a listener will be registered (even if the specified looper is
+ different).
+
+ Note that if it is possible to create the specified interface type at registration time
+ then the callback will be triggered immediately.
+@param {Number} ifaceType The interface type (IfaceType) to be monitored.
+@param {Object {HalDeviceManager.InterfaceAvailableForRequestListener}} listener Listener to call when an interface of the requested
+                 type could be created
+@param {Object {Handler}} handler Handler on which to dispatch listener. Null implies the listener will be
+                invoked synchronously from the context of the client which triggered the
+                mode change.
+*/
+registerInterfaceAvailableForRequestListener : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-unregisterInterfaceAvailableForRequestListener'>/**Unregisters a listener registered with registerInterfaceAvailableForRequestListener().
+</span>*/
+unregisterInterfaceAvailableForRequestListener : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-registerRttControllerLifecycleCallback'>/**Register a callback object for RTT life-cycle events. The callback object registration
+</span> indicates that an RTT controller should be created whenever possible. The callback object
+ will be called with a new RTT controller whenever it is created (or at registration time
+ if an RTT controller already exists). The callback object will also be triggered whenever
+ an existing RTT controller is destroyed (the previous copies must be discarded by the
+ recipient).
+@param {Object {HalDeviceManager.InterfaceRttControllerLifecycleCallback}} callback InterfaceRttControllerLifecycleCallback object.
+@param {Object {Handler}} handler Handler on which to dispatch callback
+*/
+registerRttControllerLifecycleCallback : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-getName'>/**Return the name of the input interface or null on error.
+</span>*/
+getName : function(  ) {},
+
+<span id='com-android-server-wifi-HalDeviceManager-method-dump'>/**Dump the internal state of the class.
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

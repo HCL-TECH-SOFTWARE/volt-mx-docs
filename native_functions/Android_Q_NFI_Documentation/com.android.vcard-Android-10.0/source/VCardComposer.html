@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-vcard-VCardComposer'>/**@class com.android.vcard.VCardComposer
+</span>@extends java.lang.Object
+
+ &lt;p&gt;
+ The class for composing vCard from Contacts information.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Usually, this class should be used like this.
+ &lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;VCardComposer composer = null;
+ try {
+     composer = new VCardComposer(context);
+     composer.addHandler(
+             composer.new HandlerForOutputStream(outputStream));
+     if (!composer.init()) {
+         // Do something handling the situation.
+         return;
+     }
+     while (!composer.isAfterLast()) {
+         if (mCanceled) {
+             // Assume a user may cancel this operation during the export.
+             return;
+         }
+         if (!composer.createOneEntry()) {
+             // Do something handling the error situation.
+             return;
+         }
+     }
+ } finally {
+     if (composer != null) {
+         composer.terminate();
+     }
+ }&lt;/pre&gt;
+ &lt;p&gt;
+ Users have to manually take care of memory efficiency. Even one vCard may contain
+ image of non-trivial size for mobile devices.
+ &lt;/p&gt;
+ &lt;p&gt;
+ {@link com.android.vcard.VCardBuilder} is used to build each vCard.
+ &lt;/p&gt;
+*/
+var VCardComposer = {
+
+<span id='com-android-vcard-VCardComposer-property-FAILURE_REASON_FAILED_TO_GET_DATABASE_INFO'>/***/
+</span>FAILURE_REASON_FAILED_TO_GET_DATABASE_INFO : &quot;Failed to get database information&quot;,
+<span id='com-android-vcard-VCardComposer-property-FAILURE_REASON_NO_ENTRY'>/***/
+</span>FAILURE_REASON_NO_ENTRY : &quot;There's no exportable in the database&quot;,
+<span id='com-android-vcard-VCardComposer-property-FAILURE_REASON_NOT_INITIALIZED'>/***/
+</span>FAILURE_REASON_NOT_INITIALIZED : &quot;The vCard composer object is not correctly initialized&quot;,
+<span id='com-android-vcard-VCardComposer-property-FAILURE_REASON_UNSUPPORTED_URI'>/**Should be visible only from developers... (no need to translate, hopefully) */
+</span>FAILURE_REASON_UNSUPPORTED_URI : &quot;The Uri vCard composer received is not supported by the composer.&quot;,
+<span id='com-android-vcard-VCardComposer-property-NO_ERROR'>/***/
+</span>NO_ERROR : &quot;No error&quot;,
+<span id='com-android-vcard-VCardComposer-method-init'>/**Initializes this object using default {@link Contacts#CONTENT_URI}.
+</span>
+ You can call this method or a variant of this method just once. In other words, you cannot
+ reuse this object.
+@return {Boolean} Returns true when initialization is successful and all the other
+          methods are available. Returns false otherwise.
+*/
+init : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-initWithRawContactsEntityUri'>/**Special variant of init(), which accepts a Uri for obtaining {@link RawContactsEntity} from
+</span> {@link ContentResolver} with {@link Contacts#_ID}.
+ &lt;code&gt;
+ String selection = Data.CONTACT_ID + &quot;=?&quot;;
+ String[] selectionArgs = new String[] {contactId};
+ Cursor cursor = mContentResolver.query(
+         contentUriForRawContactsEntity, null, selection, selectionArgs, null)
+ &lt;/code&gt;
+
+ You can call this method or a variant of this method just once. In other words, you cannot
+ reuse this object.
+@deprecated Use {@link #init(Uri, String[], String, String[], String, Uri)} if you really
+ need to change the default Uri.
+*/
+initWithRawContactsEntityUri : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-init'>/**Initializes this object using default {@link Contacts#CONTENT_URI} and given selection
+</span> arguments.
+*/
+init : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-init'>/**Note that this is unstable interface, may be deleted in the future.
+</span>*/
+init : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-init'>/**
+</span>@param {Object {Uri}} contentUri Uri for obtaining the list of contactId. Used with
+ {@link ContentResolver#query(Uri, String[], String, String[], String)}
+@param {String} selection selection used with
+ {@link ContentResolver#query(Uri, String[], String, String[], String)}
+@param {Object {java.lang.String[]}} selectionArgs selectionArgs used with
+ {@link ContentResolver#query(Uri, String[], String, String[], String)}
+@param {String} sortOrder sortOrder used with
+ {@link ContentResolver#query(Uri, String[], String, String[], String)}
+@param {Object {Uri}} contentUriForRawContactsEntity Uri for obtaining entries relevant to each
+ contactId.
+ Note that this is an unstable interface, may be deleted in the future.
+*/
+init : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-init'>/**A variant of init(). Currently just for testing. Use other variants for init().
+</span>
+ First we'll create {@link Cursor} for the list of contactId.
+
+ &lt;code&gt;
+ Cursor cursorForId = mContentResolver.query(
+         contentUri, projection, selection, selectionArgs, sortOrder);
+ &lt;/code&gt;
+
+ After that, we'll obtain data for each contactId in the list.
+
+ &lt;code&gt;
+ Cursor cursorForContent = mContentResolver.query(
+         contentUriForRawContactsEntity, null,
+         Data.CONTACT_ID + &quot;=?&quot;, new String[] {contactId}, null)
+ &lt;/code&gt;
+
+ {@link #createOneEntry}() or its variants let the caller obtain each entry from
+ &lt;code&gt;cursorForContent&lt;/code&gt; above.
+@param {Object {Uri}} contentUri Uri for obtaining the list of contactId. Used with
+ {@link ContentResolver#query(Uri, String[], String, String[], String)}
+@param {Object {java.lang.String[]}} projection projection used with
+ {@link ContentResolver#query(Uri, String[], String, String[], String)}
+@param {String} selection selection used with
+ {@link ContentResolver#query(Uri, String[], String, String[], String)}
+@param {Object {java.lang.String[]}} selectionArgs selectionArgs used with
+ {@link ContentResolver#query(Uri, String[], String, String[], String)}
+@param {String} sortOrder sortOrder used with
+ {@link ContentResolver#query(Uri, String[], String, String[], String)}
+@param {Object {Uri}} contentUriForRawContactsEntity Uri for obtaining entries relevant to each
+ contactId.
+@return {Boolean} true when successful
+@hide 
+*/
+init : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-init'>/**Just for testing for now. Do not use.
+</span>@hide 
+*/
+init : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-initWithCallback'>/**
+</span>@param {Object {Cursor}} cursor Cursor that used to get contact id
+@param {Object {VCardComposer.RawContactEntitlesInfoCallback}} rawContactEntitlesInfoCallback Callback that return RawContactEntitlesInfo
+ Note that this is an unstable interface, may be deleted in the future.
+@return {Boolean} true when successful
+*/
+initWithCallback : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-createOneEntry'>/**
+</span>@return {String} a vCard string.
+*/
+createOneEntry : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-createOneEntry'>/**
+</span>@hide 
+*/
+createOneEntry : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-setPhoneNumberTranslationCallback'>/**&lt;p&gt;
+</span> Set a callback for phone number formatting. It will be called every time when this object
+ receives a phone number for printing.
+ &lt;/p&gt;
+ &lt;p&gt;
+ When this is set {@link com.android.vcard.VCardConfig#FLAG_REFRAIN_PHONE_NUMBER_FORMATTING} will be ignored
+ and the callback should be responsible for everything about phone number formatting.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Caution: This interface will change. Please don't use without any strong reason.
+ &lt;/p&gt;
+*/
+setPhoneNumberTranslationCallback : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-buildVCard'>/**Builds and returns vCard using given map, whose key is CONTENT_ITEM_TYPE defined in
+</span> {ContactsContract}. Developers can override this method to customize the output.
+*/
+buildVCard : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-terminate'>/**
+</span>*/
+terminate : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-getCount'>/**
+</span>@return {Number} returns the number of available entities. The return value is undefined
+ when this object is not ready yet (typically when {{@link #init()} is not called
+ or when {@link #terminate()} is already called).
+*/
+getCount : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-isAfterLast'>/**
+</span>@return {Boolean} true when there's no entity to be built. The return value is undefined
+ when this object is not ready yet.
+*/
+isAfterLast : function(  ) {},
+
+<span id='com-android-vcard-VCardComposer-method-getErrorReason'>/**
+</span>@return {String} Returns the error reason.
+*/
+getErrorReason : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

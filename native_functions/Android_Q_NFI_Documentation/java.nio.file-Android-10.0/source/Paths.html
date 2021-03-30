@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-file-Paths'>/**@class java.nio.file.Paths
+</span>@extends java.lang.Object
+
+ This class consists exclusively of static methods that return a {@link java.nio.file.Path}
+ by converting a path string or {@link URI}.
+
+ @since 1.7
+*/
+var Paths = {
+
+<span id='java-nio-file-Paths-method-get'>/**Converts a path string, or a sequence of strings that when joined form
+</span> a path string, to a {@code Path}. If {@code more} does not specify any
+ elements then the value of the {@code first} parameter is the path string
+ to convert. If {@code more} specifies one or more elements then each
+ non-empty string, including {@code first}, is considered to be a sequence
+ of name elements (see {@link java.nio.file.Path}) and is joined to form a path string.
+ The details as to how the Strings are joined is provider specific but
+ typically they will be joined using the {@link java.nio.file.FileSystem#getSeparator
+ name-separator} as the separator. For example, if the name separator is
+ &quot;{@code /}&quot; and {@code getPath(&quot;/foo&quot;,&quot;bar&quot;,&quot;gus&quot;)} is invoked, then the
+ path string {@code &quot;/foo/bar/gus&quot;} is converted to a {@code Path}.
+ A {@code Path} representing an empty path is returned if {@code first}
+ is the empty string and {@code more} does not contain any non-empty
+ strings.
+
+ &lt;p&gt; The {@code Path} is obtained by invoking the {@link java.nio.file.FileSystem#getPath
+ getPath} method of the {@link java.nio.file.FileSystems#getDefault default} {@link java.nio.file.FileSystem}.
+
+ &lt;p&gt; Note that while this method is very convenient, using it will imply
+ an assumed reference to the default {@code FileSystem} and limit the
+ utility of the calling code. Hence it should not be used in library code
+ intended for flexible reuse. A more flexible alternative is to use an
+ existing {@code Path} instance as an anchor, such as:
+ &lt;pre&gt;
+     Path dir = ...
+     Path path = dir.resolve(&quot;file&quot;);
+ &lt;/pre&gt;
+@param {String} first
+          the path string or initial part of the path string
+@param {Object {java.lang.String[]}} more
+          additional strings to be joined to form the path string
+@return {Object {java.nio.file.Path}} the resulting {@code Path}
+@throws InvalidPathException
+          if the path string cannot be converted to a {@code Path}
+@see FileSystem#getPath
+*/
+get : function(  ) {},
+
+<span id='java-nio-file-Paths-method-get'>/**Converts the given URI to a {@link java.nio.file.Path} object.
+</span>
+ &lt;p&gt; This method iterates over the {@link java.nio.file.FileSystemProvider#installedProviders()
+ installed} providers to locate the provider that is identified by the
+ URI {@link URI#getScheme scheme} of the given URI. URI schemes are
+ compared without regard to case. If the provider is found then its {@link java.nio.file.FileSystemProvider#getPath getPath} method is invoked to convert the
+ URI.
+
+ &lt;p&gt; In the case of the default provider, identified by the URI scheme
+ &quot;file&quot;, the given URI has a non-empty path component, and undefined query
+ and fragment components. Whether the authority component may be present
+ is platform specific. The returned {@code Path} is associated with the
+ {@link java.nio.file.FileSystems#getDefault default} file system.
+
+ &lt;p&gt; The default provider provides a similar &lt;em&gt;round-trip&lt;/em&gt; guarantee
+ to the {@link java.io.File} class. For a given {@code Path} &lt;i&gt;p&lt;/i&gt; it
+ is guaranteed that
+ &lt;blockquote&gt;&lt;tt&gt;
+ Paths.get(&lt;/tt&gt;&lt;i&gt;p&lt;/i&gt;&lt;tt&gt;.{@link java.nio.file.Path#toUri() toUri}()).equals(&lt;/tt&gt;
+ &lt;i&gt;p&lt;/i&gt;&lt;tt&gt;.{@link java.nio.file.Path#toAbsolutejava.nio.file.Path() toAbsolutejava.nio.file.Path}())&lt;/tt&gt;
+ &lt;/blockquote&gt;
+ so long as the original {@code Path}, the {@code URI}, and the new {@code
+ Path} are all created in (possibly different invocations of) the same
+ Java virtual machine. Whether other providers make any guarantees is
+ provider specific and therefore unspecified.
+@param {Object {URI}} uri
+          the URI to convert
+@return {Object {java.nio.file.Path}} the resulting {@code Path}
+@throws IllegalArgumentException
+          if preconditions on the {@code uri} parameter do not hold. The
+          format of the URI is provider specific.
+@throws FileSystemNotFoundException
+          The file system, identified by the URI, does not exist and
+          cannot be created automatically, or the provider identified by
+          the URI's scheme component is not installed
+@throws SecurityException
+          if a security manager is installed and it denies an unspecified
+          permission to access the file system
+*/
+get : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

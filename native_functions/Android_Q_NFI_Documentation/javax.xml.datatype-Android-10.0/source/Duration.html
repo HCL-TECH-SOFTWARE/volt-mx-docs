@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-xml-datatype-Duration'>/**@class javax.xml.datatype.Duration
+</span>@extends java.lang.Object
+
+ &lt;p&gt;Immutable representation of a time span as defined in
+ the W3C XML Schema 1.0 specification.&lt;/p&gt;
+
+ &lt;p&gt;A Duration object represents a period of Gregorian time,
+ which consists of six fields (years, months, days, hours,
+ minutes, and seconds) plus a sign (+/-) field.&lt;/p&gt;
+
+ &lt;p&gt;The first five fields have non-negative (&gt;=0) integers or null
+ (which represents that the field is not set),
+ and the seconds field has a non-negative decimal or null.
+ A negative sign indicates a negative duration.&lt;/p&gt;
+
+ &lt;p&gt;This class provides a number of methods that make it easy
+ to use for the duration datatype of XML Schema 1.0 with
+ the errata.&lt;/p&gt;
+
+ &lt;h2&gt;Order relationship&lt;/h2&gt;
+ &lt;p&gt;Duration objects only have partial order, where two values A and B
+ maybe either:&lt;/p&gt;
+ &lt;ol&gt;
+  &lt;li&gt;A&amp;lt;B (A is shorter than B)
+  &lt;li&gt;A&amp;gt;B (A is longer than B)
+  &lt;li&gt;A==B   (A and B are of the same duration)
+  &lt;li&gt;A&amp;lt;&gt;B (Comparison between A and B is indeterminate)
+ &lt;/ol&gt;
+
+ &lt;p&gt;For example, 30 days cannot be meaningfully compared to one month.
+ The {@link #compare}(Duration duration) method implements this
+ relationship.&lt;/p&gt;
+
+ &lt;p&gt;See the {@link #isLongerThan}(Duration) method for details about
+ the order relationship among &lt;code&gt;Duration&lt;/code&gt; objects.&lt;/p&gt;
+
+ &lt;h2&gt;Operations over Duration&lt;/h2&gt;
+ &lt;p&gt;This class provides a set of basic arithmetic operations, such
+ as addition, subtraction and multiplication.
+ Because durations don't have total order, an operation could
+ fail for some combinations of operations. For example, you cannot
+ subtract 15 days from 1 month. See the javadoc of those methods
+ for detailed conditions where this could happen.&lt;/p&gt;
+
+ &lt;p&gt;Also, division of a duration by a number is not provided because
+ the &lt;code&gt;Duration&lt;/code&gt; class can only deal with finite precision
+ decimal numbers. For example, one cannot represent 1 sec divided by 3.&lt;/p&gt;
+
+ &lt;p&gt;However, you could substitute a division by 3 with multiplying
+ by numbers such as 0.3 or 0.333.&lt;/p&gt;
+
+ &lt;h2&gt;Range of allowed values&lt;/h2&gt;
+ &lt;p&gt;
+ Because some operations of &lt;code&gt;Duration&lt;/code&gt; rely on {@link Calendar}
+ even though {@link javax.xml.datatype.Duration} can hold very large or very small values,
+ some of the methods may not work correctly on such &lt;code&gt;Duration&lt;/code&gt;s.
+ The impacted methods document their dependency on {@link Calendar}.
+
+
+ @author &lt;a href=&quot;mailto:Joseph.Fialli@Sun.COM&quot;&gt;Joseph Fialli&lt;/a&gt;
+ @author &lt;a href=&quot;mailto:Kohsuke.Kawaguchi@Sun.com&quot;&gt;Kohsuke Kawaguchi&lt;/a&gt;
+ @author &lt;a href=&quot;mailto:Jeff.Suttor@Sun.com&quot;&gt;Jeff Suttor&lt;/a&gt;
+ @version $Revision: 759828 $, $Date: 2009-03-29 18:26:29 -0700 (Sun, 29 Mar 2009) $
+ @see XMLGregorianCalendar#add(Duration)
+ @since 1.5
+*/
+var Duration = {
+
+<span id='javax-xml-datatype-Duration-method-getXMLSchemaType'>/**&lt;p&gt;Return the name of the XML Schema date/time type that this instance
+</span> maps to. Type is computed based on fields that are set,
+ i.e. {@link #isSet(DatatypeConstants.Field field)} == &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;table border=&quot;2&quot; rules=&quot;all&quot; cellpadding=&quot;2&quot;&gt;
+   &lt;thead&gt;
+     &lt;tr&gt;
+       &lt;th align=&quot;center&quot; colspan=&quot;7&quot;&gt;
+         Required fields for XML Schema 1.0 Date/Time Datatypes.&lt;br/&gt;
+         &lt;i&gt;(timezone is optional for all date/time datatypes)&lt;/i&gt;
+       &lt;/th&gt;
+     &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+     &lt;tr&gt;
+       &lt;td&gt;Datatype&lt;/td&gt;
+       &lt;td&gt;year&lt;/td&gt;
+       &lt;td&gt;month&lt;/td&gt;
+       &lt;td&gt;day&lt;/td&gt;
+       &lt;td&gt;hour&lt;/td&gt;
+       &lt;td&gt;minute&lt;/td&gt;
+       &lt;td&gt;second&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;{@link javax.xml.datatype.DatatypeConstants#DURATION}&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;{@link javax.xml.datatype.DatatypeConstants#DURATION_DAYTIME}&lt;/td&gt;
+       &lt;td&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;{@link javax.xml.datatype.DatatypeConstants#DURATION_YEARMONTH}&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+       &lt;td&gt;X&lt;/td&gt;
+       &lt;td&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/tbody&gt;
+ &lt;/table&gt;
+@return {Object {javax.xml.namespace.QName}} one of the following constants:
+   {@link DatatypeConstants#DURATION},
+   {@link DatatypeConstants#DURATION_DAYTIME} or
+   {@link DatatypeConstants#DURATION_YEARMONTH}.
+@throws IllegalStateException If the combination of set fields does not match one of the XML Schema date/time datatypes.
+*/
+getXMLSchemaType : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-getSign'>/**Returns the sign of this duration in -1,0, or 1.
+</span>@return {Number} -1 if this duration is negative, 0 if the duration is zero,
+      and 1 if the duration is positive.
+*/
+getSign : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-getYears'>/**&lt;p&gt;Get the years value of this &lt;code&gt;Duration&lt;/code&gt; as an &lt;code&gt;int&lt;/code&gt; or &lt;code&gt;0&lt;/code&gt; if not present.&lt;/p&gt;
+</span>
+ &lt;p&gt;&lt;code&gt;getYears()&lt;/code&gt; is a convenience method for
+ {@link #getField(DatatypeConstants.Field field) getField(DatatypeConstants.YEARS)}.&lt;/p&gt;
+
+ &lt;p&gt;As the return value is an &lt;code&gt;int&lt;/code&gt;, an incorrect value will be returned for &lt;code&gt;Duration&lt;/code&gt;s
+ with years that go beyond the range of an &lt;code&gt;int&lt;/code&gt;.
+ Use {@link #getField(DatatypeConstants.Field field) getField(DatatypeConstants.YEARS)} to avoid possible loss of precision.&lt;/p&gt;
+@return {Number} If the years field is present, return its value as an &lt;code&gt;int&lt;/code&gt;, else return &lt;code&gt;0&lt;/code&gt;.
+*/
+getYears : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-getMonths'>/**Obtains the value of the MONTHS field as an integer value,
+</span> or 0 if not present.
+
+ This method works just like {@link #getYears}() except
+ that this method works on the MONTHS field.
+@return {Number} Months of this &lt;code&gt;Duration&lt;/code&gt;.
+*/
+getMonths : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-getDays'>/**Obtains the value of the DAYS field as an integer value,
+</span> or 0 if not present.
+
+ This method works just like {@link #getYears}() except
+ that this method works on the DAYS field.
+@return {Number} Days of this &lt;code&gt;Duration&lt;/code&gt;.
+*/
+getDays : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-getHours'>/**Obtains the value of the HOURS field as an integer value,
+</span> or 0 if not present.
+
+ This method works just like {@link #getYears}() except
+ that this method works on the HOURS field.
+@return {Number} Hours of this &lt;code&gt;Duration&lt;/code&gt;.
+*/
+getHours : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-getMinutes'>/**Obtains the value of the MINUTES field as an integer value,
+</span> or 0 if not present.
+
+ This method works just like {@link #getYears}() except
+ that this method works on the MINUTES field.
+@return {Number} Minutes of this &lt;code&gt;Duration&lt;/code&gt;.
+*/
+getMinutes : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-getSeconds'>/**Obtains the value of the SECONDS field as an integer value,
+</span> or 0 if not present.
+
+ This method works just like {@link #getYears}() except
+ that this method works on the SECONDS field.
+@return {Number} seconds in the integer value. The fraction of seconds
+   will be discarded (for example, if the actual value is 2.5,
+   this method returns 2)
+*/
+getSeconds : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-getTimeInMillis'>/**&lt;p&gt;Returns the length of the duration in milliseconds.&lt;/p&gt;
+</span>
+ &lt;p&gt;If the seconds field carries more digits than millisecond order,
+ those will be simply discarded (or in other words, rounded to zero.)
+ For example, for any Calendar value &lt;code&gt;x&lt;/code&gt;,&lt;/p&gt;
+ &lt;pre&gt;
+ &lt;code&gt;new Duration(&quot;PT10.00099S&quot;).getTimeInMills(x) == 10000&lt;/code&gt;.
+ &lt;code&gt;new Duration(&quot;-PT10.00099S&quot;).getTimeInMills(x) == -10000&lt;/code&gt;.
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Note that this method uses the {@link #addTo}(Calendar) method,
+ which may work incorrectly with &lt;code&gt;Duration&lt;/code&gt; objects with
+ very large values in its fields. See the {@link #addTo}(Calendar)
+ method for details.
+@param {Object {Calendar}} startInstant
+      The length of a month/year varies. The &lt;code&gt;startInstant&lt;/code&gt; is
+      used to disambiguate this variance. Specifically, this method
+      returns the difference between &lt;code&gt;startInstant&lt;/code&gt; and
+      &lt;code&gt;startInstant+duration&lt;/code&gt;
+@return {Number} milliseconds between &lt;code&gt;startInstant&lt;/code&gt; and
+   &lt;code&gt;startInstant&lt;/code&gt; plus this &lt;code&gt;Duration&lt;/code&gt;
+@throws NullPointerException if &lt;code&gt;startInstant&lt;/code&gt; parameter
+ is null.
+*/
+getTimeInMillis : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-getTimeInMillis'>/**&lt;p&gt;Returns the length of the duration in milliseconds.&lt;/p&gt;
+</span>
+ &lt;p&gt;If the seconds field carries more digits than millisecond order,
+ those will be simply discarded (or in other words, rounded to zero.)
+ For example, for any &lt;code&gt;Date&lt;/code&gt; value &lt;code&gt;x&lt;/code&gt;,&lt;/p&gt;
+ &lt;pre&gt;
+ &lt;code&gt;new Duration(&quot;PT10.00099S&quot;).getTimeInMills(x) == 10000&lt;/code&gt;.
+ &lt;code&gt;new Duration(&quot;-PT10.00099S&quot;).getTimeInMills(x) == -10000&lt;/code&gt;.
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Note that this method uses the {@link #addTo}(Date) method,
+ which may work incorrectly with &lt;code&gt;Duration&lt;/code&gt; objects with
+ very large values in its fields. See the {@link #addTo}(Date)
+ method for details.
+@param {Object {Date}} startInstant
+      The length of a month/year varies. The &lt;code&gt;startInstant&lt;/code&gt; is
+      used to disambiguate this variance. Specifically, this method
+      returns the difference between &lt;code&gt;startInstant&lt;/code&gt; and
+      &lt;code&gt;startInstant+duration&lt;/code&gt;.
+@throws NullPointerException
+      If the startInstant parameter is null.
+@return {Number} milliseconds between &lt;code&gt;startInstant&lt;/code&gt; and
+   &lt;code&gt;startInstant&lt;/code&gt; plus this &lt;code&gt;Duration&lt;/code&gt;
+@see #getTimeInMillis(Calendar)
+*/
+getTimeInMillis : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-getField'>/**Gets the value of a field.
+</span>
+ Fields of a duration object may contain arbitrary large value.
+ Therefore this method is designed to return a {@link Number} object.
+
+ In case of YEARS, MONTHS, DAYS, HOURS, and MINUTES, the returned
+ number will be a non-negative integer. In case of seconds,
+ the returned number may be a non-negative decimal value.
+@param {Object {DatatypeConstants.Field}} field
+      one of the six Field constants (YEARS,MONTHS,DAYS,HOURS,
+      MINUTES, or SECONDS.)
+@return {Object {java.lang.Number}} If the specified field is present, this method returns
+      a non-null non-negative {@link Number} object that
+      represents its value. If it is not present, return null.
+      For YEARS, MONTHS, DAYS, HOURS, and MINUTES, this method
+      returns a {@link java.math.BigInteger} object. For SECONDS, this
+      method returns a {@link java.math.BigDecimal}.
+@throws NullPointerException If the &lt;code&gt;field&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+*/
+getField : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-isSet'>/**Checks if a field is set.
+</span>
+ A field of a duration object may or may not be present.
+ This method can be used to test if a field is present.
+@param {Object {DatatypeConstants.Field}} field
+      one of the six Field constants (YEARS,MONTHS,DAYS,HOURS,
+      MINUTES, or SECONDS.)
+@return {Boolean} true if the field is present. false if not.
+@throws NullPointerException
+      If the field parameter is null.
+*/
+isSet : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-add'>/**&lt;p&gt;Computes a new duration whose value is &lt;code&gt;this+rhs&lt;/code&gt;.&lt;/p&gt;
+</span>
+ &lt;p&gt;For example,&lt;/p&gt;
+ &lt;pre&gt;
+ &quot;1 day&quot; + &quot;-3 days&quot; = &quot;-2 days&quot;
+ &quot;1 year&quot; + &quot;1 day&quot; = &quot;1 year and 1 day&quot;
+ &quot;-(1 hour,50 minutes)&quot; + &quot;-20 minutes&quot; = &quot;-(1 hours,70 minutes)&quot;
+ &quot;15 hours&quot; + &quot;-3 days&quot; = &quot;-(2 days,9 hours)&quot;
+ &quot;1 year&quot; + &quot;-1 day&quot; = IllegalStateException
+ &lt;/pre&gt;
+
+ &lt;p&gt;Since there's no way to meaningfully subtract 1 day from 1 month,
+ there are cases where the operation fails in
+ {@link IllegalStateException}.&lt;/p&gt;
+
+ &lt;p&gt;
+ Formally, the computation is defined as follows.&lt;/p&gt;
+ &lt;p&gt;
+ Firstly, we can assume that two &lt;code&gt;Duration&lt;/code&gt;s to be added
+ are both positive without losing generality (i.e.,
+ &lt;code&gt;(-X)+Y=Y-X&lt;/code&gt;, &lt;code&gt;X+(-Y)=X-Y&lt;/code&gt;,
+ &lt;code&gt;(-X)+(-Y)=-(X+Y)&lt;/code&gt;)
+
+ &lt;p&gt;
+ Addition of two positive &lt;code&gt;Duration&lt;/code&gt;s are simply defined as
+ field by field addition where missing fields are treated as 0.
+ &lt;p&gt;
+ A field of the resulting &lt;code&gt;Duration&lt;/code&gt; will be unset if and
+ only if respective fields of two input &lt;code&gt;Duration&lt;/code&gt;s are unset.
+ &lt;p&gt;
+ Note that &lt;code&gt;lhs.add(rhs)&lt;/code&gt; will be always successful if
+ &lt;code&gt;lhs.signum()*rhs.signum()!=-1&lt;/code&gt; or both of them are
+ normalized.&lt;/p&gt;
+@param {Object {Duration}} rhs &lt;code&gt;Duration&lt;/code&gt; to add to this &lt;code&gt;Duration&lt;/code&gt;
+@return {Object {javax.xml.datatype.Duration}} non-null valid Duration object.
+@throws NullPointerException
+      If the rhs parameter is null.
+@throws IllegalStateException
+      If two durations cannot be meaningfully added. For
+      example, adding negative one day to one month causes
+      this exception.
+@see #subtract(Duration)
+*/
+add : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-addTo'>/**Adds this duration to a {@link Calendar} object.
+</span>
+ &lt;p&gt;
+ Calls {@link java.util.Calendar#add(int,int)} in the
+ order of YEARS, MONTHS, DAYS, HOURS, MINUTES, SECONDS, and MILLISECONDS
+ if those fields are present. Because the {@link Calendar} class
+ uses int to hold values, there are cases where this method
+ won't work correctly (for example if values of fields
+ exceed the range of int.)
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ Also, since this duration class is a Gregorian duration, this
+ method will not work correctly if the given {@link Calendar}
+ object is based on some other calendar systems.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ Any fractional parts of this &lt;code&gt;Duration&lt;/code&gt; object
+ beyond milliseconds will be simply ignored. For example, if
+ this duration is &quot;P1.23456S&quot;, then 1 is added to SECONDS,
+ 234 is added to MILLISECONDS, and the rest will be unused.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ Note that because {@link Calendar#add(int, int)} is using
+ &lt;tt&gt;int&lt;/tt&gt;, &lt;code&gt;Duration&lt;/code&gt; with values beyond the
+ range of &lt;tt&gt;int&lt;/tt&gt; in its fields
+ will cause overflow/underflow to the given {@link Calendar}.
+ {@link javax.xml.datatype.XMLGregorianCalendar#add(Duration)} provides the same
+ basic operation as this method while avoiding
+ the overflow/underflow issues.
+@param {Object {Calendar}} calendar
+      A calendar object whose value will be modified.
+@throws NullPointerException
+      if the calendar parameter is null.
+*/
+addTo : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-addTo'>/**Adds this duration to a {@link Date} object.
+</span>
+ &lt;p&gt;
+ The given date is first converted into
+ a {@link java.util.GregorianCalendar}, then the duration
+ is added exactly like the {@link #addTo}(Calendar) method.
+
+ &lt;p&gt;
+ The updated time instant is then converted back into a
+ {@link Date} object and used to update the given {@link Date} object.
+
+ &lt;p&gt;
+ This somewhat redundant computation is necessary to unambiguously
+ determine the duration of months and years.
+@param {Object {Date}} date
+      A date object whose value will be modified.
+@throws NullPointerException
+      if the date parameter is null.
+*/
+addTo : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-subtract'>/**&lt;p&gt;Computes a new duration whose value is &lt;code&gt;this-rhs&lt;/code&gt;.&lt;/p&gt;
+</span>
+ &lt;p&gt;For example:&lt;/p&gt;
+ &lt;pre&gt;
+ &quot;1 day&quot; - &quot;-3 days&quot; = &quot;4 days&quot;
+ &quot;1 year&quot; - &quot;1 day&quot; = IllegalStateException
+ &quot;-(1 hour,50 minutes)&quot; - &quot;-20 minutes&quot; = &quot;-(1hours,30 minutes)&quot;
+ &quot;15 hours&quot; - &quot;-3 days&quot; = &quot;3 days and 15 hours&quot;
+ &quot;1 year&quot; - &quot;-1 day&quot; = &quot;1 year and 1 day&quot;
+ &lt;/pre&gt;
+
+ &lt;p&gt;Since there's no way to meaningfully subtract 1 day from 1 month,
+ there are cases where the operation fails in {@link IllegalStateException}.&lt;/p&gt;
+
+ &lt;p&gt;Formally the computation is defined as follows.
+ First, we can assume that two &lt;code&gt;Duration&lt;/code&gt;s are both positive
+ without losing generality.  (i.e.,
+ &lt;code&gt;(-X)-Y=-(X+Y)&lt;/code&gt;, &lt;code&gt;X-(-Y)=X+Y&lt;/code&gt;,
+ &lt;code&gt;(-X)-(-Y)=-(X-Y)&lt;/code&gt;)&lt;/p&gt;
+
+ &lt;p&gt;Then two durations are subtracted field by field.
+ If the sign of any non-zero field &lt;tt&gt;F&lt;/tt&gt; is different from
+ the sign of the most significant field,
+ 1 (if &lt;tt&gt;F&lt;/tt&gt; is negative) or -1 (otherwise)
+ will be borrowed from the next bigger unit of &lt;tt&gt;F&lt;/tt&gt;.&lt;/p&gt;
+
+ &lt;p&gt;This process is repeated until all the non-zero fields have
+ the same sign.&lt;/p&gt;
+
+ &lt;p&gt;If a borrow occurs in the days field (in other words, if
+ the computation needs to borrow 1 or -1 month to compensate
+ days), then the computation fails by throwing an
+ {@link IllegalStateException}.&lt;/p&gt;
+@param {Object {Duration}} rhs &lt;code&gt;Duration&lt;/code&gt; to subtract from this &lt;code&gt;Duration&lt;/code&gt;.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; created from subtracting &lt;code&gt;rhs&lt;/code&gt; from this &lt;code&gt;Duration&lt;/code&gt;.
+@throws IllegalStateException
+      If two durations cannot be meaningfully subtracted. For
+      example, subtracting one day from one month causes
+      this exception.
+@throws NullPointerException
+      If the rhs parameter is null.
+@see #add(Duration)
+*/
+subtract : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-multiply'>/**&lt;p&gt;Computes a new duration whose value is &lt;code&gt;factor&lt;/code&gt; times
+</span> longer than the value of this duration.&lt;/p&gt;
+
+ &lt;p&gt;This method is provided for the convenience.
+ It is functionally equivalent to the following code:&lt;/p&gt;
+ &lt;pre&gt;
+ multiply(new BigDecimal(String.valueOf(factor)))
+ &lt;/pre&gt;
+@param {Number} factor Factor times longer of new &lt;code&gt;Duration&lt;/code&gt; to create.
+@return {Object {javax.xml.datatype.Duration}} New &lt;code&gt;Duration&lt;/code&gt; that is &lt;code&gt;factor&lt;/code&gt;times longer than this &lt;code&gt;Duration&lt;/code&gt;.
+@see #multiply(BigDecimal)
+*/
+multiply : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-multiply'>/**Computes a new duration whose value is &lt;code&gt;factor&lt;/code&gt; times
+</span> longer than the value of this duration.
+
+ &lt;p&gt;
+ For example,
+ &lt;pre&gt;
+ &quot;P1M&quot; (1 month) * &quot;12&quot; = &quot;P12M&quot; (12 months)
+ &quot;PT1M&quot; (1 min) * &quot;0.3&quot; = &quot;PT18S&quot; (18 seconds)
+ &quot;P1M&quot; (1 month) * &quot;1.5&quot; = IllegalStateException
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Since the &lt;code&gt;Duration&lt;/code&gt; class is immutable, this method
+ doesn't change the value of this object. It simply computes
+ a new Duration object and returns it.
+
+ &lt;p&gt;
+ The operation will be performed field by field with the precision
+ of {@link BigDecimal}. Since all the fields except seconds are
+ restricted to hold integers,
+ any fraction produced by the computation will be
+ carried down toward the next lower unit. For example,
+ if you multiply &quot;P1D&quot; (1 day) with &quot;0.5&quot;, then it will be 0.5 day,
+ which will be carried down to &quot;PT12H&quot; (12 hours).
+ When fractions of month cannot be meaningfully carried down
+ to days, or year to months, this will cause an
+ {@link IllegalStateException} to be thrown.
+ For example if you multiple one month by 0.5.&lt;/p&gt;
+
+ &lt;p&gt;
+ To avoid {@link IllegalStateException}, use
+ the {@link #normalizeWith}(Calendar) method to remove the years
+ and months fields.
+@param {Object {BigDecimal}} factor to multiply by
+@return {Object {javax.xml.datatype.Duration}} returns a non-null valid &lt;code&gt;Duration&lt;/code&gt; object
+@throws IllegalStateException if operation produces fraction in
+ the months field.
+@throws NullPointerException if the &lt;code&gt;factor&lt;/code&gt; parameter is
+ &lt;code&gt;null&lt;/code&gt;.
+*/
+multiply : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-negate'>/**Returns a new &lt;code&gt;Duration&lt;/code&gt; object whose
+</span> value is &lt;code&gt;-this&lt;/code&gt;.
+
+ &lt;p&gt;
+ Since the &lt;code&gt;Duration&lt;/code&gt; class is immutable, this method
+ doesn't change the value of this object. It simply computes
+ a new Duration object and returns it.
+@return {Object {javax.xml.datatype.Duration}} always return a non-null valid &lt;code&gt;Duration&lt;/code&gt; object.
+*/
+negate : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-normalizeWith'>/**&lt;p&gt;Converts the years and months fields into the days field
+</span> by using a specific time instant as the reference point.&lt;/p&gt;
+
+ &lt;p&gt;For example, duration of one month normalizes to 31 days
+ given the start time instance &quot;July 8th 2003, 17:40:32&quot;.&lt;/p&gt;
+
+ &lt;p&gt;Formally, the computation is done as follows:&lt;/p&gt;
+ &lt;ol&gt;
+  &lt;li&gt;the given Calendar object is cloned&lt;/li&gt;
+  &lt;li&gt;the years, months and days fields will be added to the {@link Calendar} object
+      by using the {@link Calendar#add(int,int)} method&lt;/li&gt;
+  &lt;li&gt;the difference between the two Calendars in computed in milliseconds and converted to days,
+     if a remainder occurs due to Daylight Savings Time, it is discarded&lt;/li&gt;
+  &lt;li&gt;the computed days, along with the hours, minutes and seconds
+      fields of this duration object is used to construct a new
+      Duration object.&lt;/li&gt;
+ &lt;/ol&gt;
+
+ &lt;p&gt;Note that since the Calendar class uses &lt;code&gt;int&lt;/code&gt; to
+ hold the value of year and month, this method may produce
+ an unexpected result if this duration object holds
+ a very large value in the years or months fields.&lt;/p&gt;
+@param {Object {Calendar}} startTimeInstant &lt;code&gt;Calendar&lt;/code&gt; reference point.
+@return {Object {javax.xml.datatype.Duration}} &lt;code&gt;Duration&lt;/code&gt; of years and months of this &lt;code&gt;Duration&lt;/code&gt; as days.
+@throws NullPointerException If the startTimeInstant parameter is null.
+*/
+normalizeWith : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-compare'>/**&lt;p&gt;Partial order relation comparison with this &lt;code&gt;Duration&lt;/code&gt; instance.&lt;/p&gt;
+</span>
+ &lt;p&gt;Comparison result must be in accordance with
+ &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#duration-order&quot;&gt;W3C XML Schema 1.0 Part 2, Section 3.2.7.6.2,
+ &lt;i&gt;Order relation on duration&lt;/i&gt;&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;Return:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link javax.xml.datatype.DatatypeConstants#LESSER} if this &lt;code&gt;Duration&lt;/code&gt; is shorter than &lt;code&gt;duration&lt;/code&gt; parameter&lt;/li&gt;
+   &lt;li&gt;{@link javax.xml.datatype.DatatypeConstants#EQUAL} if this &lt;code&gt;Duration&lt;/code&gt; is equal to &lt;code&gt;duration&lt;/code&gt; parameter&lt;/li&gt;
+   &lt;li&gt;{@link javax.xml.datatype.DatatypeConstants#GREATER} if this &lt;code&gt;Duration&lt;/code&gt; is longer than &lt;code&gt;duration&lt;/code&gt; parameter&lt;/li&gt;
+   &lt;li&gt;{@link javax.xml.datatype.DatatypeConstants#INDETERMINATE} if a conclusive partial order relation cannot be determined&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Object {Duration}} duration to compare
+@return {Number} the relationship between &lt;code&gt;this&lt;/code&gt; &lt;code&gt;Duration&lt;/code&gt;and &lt;code&gt;duration&lt;/code&gt; parameter as
+   {@link DatatypeConstants#LESSER}, {@link DatatypeConstants#EQUAL}, {@link DatatypeConstants#GREATER}
+   or {@link DatatypeConstants#INDETERMINATE}.
+@throws UnsupportedOperationException If the underlying implementation
+   cannot reasonably process the request, e.g. W3C XML Schema allows for
+   arbitrarily large/small/precise values, the request may be beyond the
+   implementations capability.
+@throws NullPointerException if &lt;code&gt;duration&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.
+@see #isShorterThan(Duration)
+@see #isLongerThan(Duration)
+*/
+compare : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-isLongerThan'>/**&lt;p&gt;Checks if this duration object is strictly longer than
+</span> another &lt;code&gt;Duration&lt;/code&gt; object.&lt;/p&gt;
+
+ &lt;p&gt;Duration X is &quot;longer&quot; than Y if and only if X&gt;Y
+ as defined in the section 3.2.6.2 of the XML Schema 1.0
+ specification.&lt;/p&gt;
+
+ &lt;p&gt;For example, &quot;P1D&quot; (one day) &gt; &quot;PT12H&quot; (12 hours) and
+ &quot;P2Y&quot; (two years) &gt; &quot;P23M&quot; (23 months).&lt;/p&gt;
+@param {Object {Duration}} duration &lt;code&gt;Duration&lt;/code&gt; to test this &lt;code&gt;Duration&lt;/code&gt; against.
+@throws UnsupportedOperationException If the underlying implementation
+   cannot reasonably process the request, e.g. W3C XML Schema allows for
+   arbitrarily large/small/precise values, the request may be beyond the
+   implementations capability.
+@throws NullPointerException If &lt;code&gt;duration&lt;/code&gt; is null.
+@return {Boolean} true if the duration represented by this object
+      is longer than the given duration. false otherwise.
+@see #isShorterThan(Duration)
+@see #compare(Duration duration)
+*/
+isLongerThan : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-isShorterThan'>/**&lt;p&gt;Checks if this duration object is strictly shorter than
+</span> another &lt;code&gt;Duration&lt;/code&gt; object.&lt;/p&gt;
+@param {Object {Duration}} duration &lt;code&gt;Duration&lt;/code&gt; to test this &lt;code&gt;Duration&lt;/code&gt; against.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if &lt;code&gt;duration&lt;/code&gt; parameter is shorter than this &lt;code&gt;Duration&lt;/code&gt;,
+   else &lt;code&gt;false&lt;/code&gt;.
+@throws UnsupportedOperationException If the underlying implementation
+   cannot reasonably process the request, e.g. W3C XML Schema allows for
+   arbitrarily large/small/precise values, the request may be beyond the
+   implementations capability.
+@throws NullPointerException if &lt;code&gt;duration&lt;/code&gt; is null.
+@see #isLongerThan(Duration duration)
+@see #compare(Duration duration)
+*/
+isShorterThan : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-equals'>/**&lt;p&gt;Checks if this duration object has the same duration
+</span> as another &lt;code&gt;Duration&lt;/code&gt; object.&lt;/p&gt;
+
+ &lt;p&gt;For example, &quot;P1D&quot; (1 day) is equal to &quot;PT24H&quot; (24 hours).&lt;/p&gt;
+
+ &lt;p&gt;Duration X is equal to Y if and only if time instant
+ t+X and t+Y are the same for all the test time instants
+ specified in the section 3.2.6.2 of the XML Schema 1.0
+ specification.&lt;/p&gt;
+
+ &lt;p&gt;Note that there are cases where two &lt;code&gt;Duration&lt;/code&gt;s are
+ &quot;incomparable&quot; to each other, like one month and 30 days.
+ For example,&lt;/p&gt;
+ &lt;pre&gt;
+ !new Duration(&quot;P1M&quot;).isShorterThan(new Duration(&quot;P30D&quot;))
+ !new Duration(&quot;P1M&quot;).isLongerThan(new Duration(&quot;P30D&quot;))
+ !new Duration(&quot;P1M&quot;).equals(new Duration(&quot;P30D&quot;))
+ &lt;/pre&gt;
+@param {Object {Object}} duration
+      A non-null valid &lt;code&gt;Duration&lt;/code&gt; object.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this duration is the same length as
+         &lt;code&gt;duration&lt;/code&gt;.
+      &lt;code&gt;false&lt;/code&gt; if &lt;code&gt;duration&lt;/code&gt; is not a
+         &lt;code&gt;Duration&lt;/code&gt; object, is &lt;code&gt;null&lt;/code&gt;,
+         or its length is different from this duration.
+@throws UnsupportedOperationException If the underlying implementation
+   cannot reasonably process the request, e.g. W3C XML Schema allows for
+   arbitrarily large/small/precise values, the request may be beyond the
+   implementations capability.
+@see #compare(Duration duration)
+*/
+equals : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-hashCode'>/**Returns a hash code consistent with the definition of the equals method.
+</span>@see Object#hashCode()
+*/
+hashCode : function(  ) {},
+
+<span id='javax-xml-datatype-Duration-method-toString'>/**&lt;p&gt;Returns a &lt;code&gt;String&lt;/code&gt; representation of this &lt;code&gt;Duration&lt;/code&gt; &lt;code&gt;Object&lt;/code&gt;.&lt;/p&gt;
+</span>
+ &lt;p&gt;The result is formatted according to the XML Schema 1.0 specification and can be always parsed back later into the
+ equivalent &lt;code&gt;Duration&lt;/code&gt; &lt;code&gt;Object&lt;/code&gt; by {@link javax.xml.datatype.DatatypeFactory#newDuration(String  lexicalRepresentation)}.&lt;/p&gt;
+
+ &lt;p&gt;Formally, the following holds for any &lt;code&gt;Duration&lt;/code&gt;
+ &lt;code&gt;Object&lt;/code&gt; x:&lt;/p&gt;
+ &lt;pre&gt;
+ new Duration(x.toString()).equals(x)
+ &lt;/pre&gt;
+@return {String} A non-&lt;code&gt;null&lt;/code&gt; valid &lt;code&gt;String&lt;/code&gt; representation of this &lt;code&gt;Duration&lt;/code&gt;.
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

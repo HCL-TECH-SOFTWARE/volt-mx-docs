@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-text-DecimalFormat'>/**@class java.text.DecimalFormat
+</span>@extends java.text.NumberFormat
+
+ &lt;code&gt;DecimalFormat&lt;/code&gt; is a concrete subclass of
+ &lt;code&gt;NumberFormat&lt;/code&gt; that formats decimal numbers. It has a variety of
+ features designed to make it possible to parse and format numbers in any
+ locale, including support for Western, Arabic, and Indic digits.  It also
+ supports different kinds of numbers, including integers (123), fixed-point
+ numbers (123.4), scientific notation (1.23E4), percentages (12%), and
+ currency amounts ($123).  All of these can be localized.
+
+ &lt;p&gt;To obtain a &lt;code&gt;NumberFormat&lt;/code&gt; for a specific locale, including the
+ default locale, call one of &lt;code&gt;NumberFormat&lt;/code&gt;'s factory methods, such
+ as &lt;code&gt;getInstance()&lt;/code&gt;.  In general, do not call the
+ &lt;code&gt;DecimalFormat&lt;/code&gt; constructors directly, since the
+ &lt;code&gt;NumberFormat&lt;/code&gt; factory methods may return subclasses other than
+ &lt;code&gt;DecimalFormat&lt;/code&gt;. If you need to customize the format object, do
+ something like this:
+
+ &lt;blockquote&gt;&lt;pre&gt;
+ NumberFormat f = NumberFormat.getInstance(loc);
+ if (f instanceof DecimalFormat) {
+     ((DecimalFormat) f).setDecimalSeparatorAlwaysShown(true);
+ }
+ &lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;A &lt;code&gt;DecimalFormat&lt;/code&gt; comprises a &lt;em&gt;pattern&lt;/em&gt; and a set of
+ &lt;em&gt;symbols&lt;/em&gt;.  The pattern may be set directly using
+ &lt;code&gt;applyPattern()&lt;/code&gt;, or indirectly using the API methods.  The
+ symbols are stored in a &lt;code&gt;DecimalFormatSymbols&lt;/code&gt; object.  When using
+ the &lt;code&gt;NumberFormat&lt;/code&gt; factory methods, the pattern and symbols are
+ read from localized &lt;code&gt;ResourceBundle&lt;/code&gt;s.
+
+ &lt;h3&gt;Patterns&lt;/h3&gt;
+
+ &lt;code&gt;DecimalFormat&lt;/code&gt; patterns have the following syntax:
+ &lt;blockquote&gt;&lt;pre&gt;
+ &lt;i&gt;Pattern:&lt;/i&gt;
+         &lt;i&gt;PositivePattern&lt;/i&gt;
+         &lt;i&gt;PositivePattern&lt;/i&gt; ; &lt;i&gt;NegativePattern&lt;/i&gt;
+ &lt;i&gt;PositivePattern:&lt;/i&gt;
+         &lt;i&gt;Prefix&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt; &lt;i&gt;Number&lt;/i&gt; &lt;i&gt;Suffix&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt;
+ &lt;i&gt;NegativePattern:&lt;/i&gt;
+         &lt;i&gt;Prefix&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt; &lt;i&gt;Number&lt;/i&gt; &lt;i&gt;Suffix&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt;
+ &lt;i&gt;Prefix:&lt;/i&gt;
+         any Unicode characters except &amp;#92;uFFFE, &amp;#92;uFFFF, and special characters
+ &lt;i&gt;Suffix:&lt;/i&gt;
+         any Unicode characters except &amp;#92;uFFFE, &amp;#92;uFFFF, and special characters
+ &lt;i&gt;Number:&lt;/i&gt;
+         &lt;i&gt;Integer&lt;/i&gt; &lt;i&gt;Exponent&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt;
+         &lt;i&gt;Integer&lt;/i&gt; . &lt;i&gt;Fraction&lt;/i&gt; &lt;i&gt;Exponent&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt;
+ &lt;i&gt;Integer:&lt;/i&gt;
+         &lt;i&gt;MinimumInteger&lt;/i&gt;
+         #
+         # &lt;i&gt;Integer&lt;/i&gt;
+         # , &lt;i&gt;Integer&lt;/i&gt;
+ &lt;i&gt;MinimumInteger:&lt;/i&gt;
+         0
+         0 &lt;i&gt;MinimumInteger&lt;/i&gt;
+         0 , &lt;i&gt;MinimumInteger&lt;/i&gt;
+ &lt;i&gt;Fraction:&lt;/i&gt;
+         &lt;i&gt;MinimumFraction&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt; &lt;i&gt;OptionalFraction&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt;
+ &lt;i&gt;MinimumFraction:&lt;/i&gt;
+         0 &lt;i&gt;MinimumFraction&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt;
+ &lt;i&gt;OptionalFraction:&lt;/i&gt;
+         # &lt;i&gt;OptionalFraction&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt;
+ &lt;i&gt;Exponent:&lt;/i&gt;
+         E &lt;i&gt;MinimumExponent&lt;/i&gt;
+ &lt;i&gt;MinimumExponent:&lt;/i&gt;
+         0 &lt;i&gt;MinimumExponent&lt;sub&gt;opt&lt;/sub&gt;&lt;/i&gt;
+ &lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;A &lt;code&gt;DecimalFormat&lt;/code&gt; pattern contains a positive and negative
+ subpattern, for example, &lt;code&gt;&quot;#,##0.00;(#,##0.00)&quot;&lt;/code&gt;.  Each
+ subpattern has a prefix, numeric part, and suffix. The negative subpattern
+ is optional; if absent, then the positive subpattern prefixed with the
+ localized minus sign (&lt;code&gt;'-'&lt;/code&gt; in most locales) is used as the
+ negative subpattern. That is, &lt;code&gt;&quot;0.00&quot;&lt;/code&gt; alone is equivalent to
+ &lt;code&gt;&quot;0.00;-0.00&quot;&lt;/code&gt;.  If there is an explicit negative subpattern, it
+ serves only to specify the negative prefix and suffix; the number of digits,
+ minimal digits, and other characteristics are all the same as the positive
+ pattern. That means that &lt;code&gt;&quot;#,##0.0#;(#)&quot;&lt;/code&gt; produces precisely
+ the same behavior as &lt;code&gt;&quot;#,##0.0#;(#,##0.0#)&quot;&lt;/code&gt;.
+
+ &lt;p&gt;The prefixes, suffixes, and various symbols used for infinity, digits,
+ thousands separators, decimal separators, etc. may be set to arbitrary
+ values, and they will appear properly during formatting.  However, care must
+ be taken that the symbols and strings do not conflict, or parsing will be
+ unreliable.  For example, either the positive and negative prefixes or the
+ suffixes must be distinct for &lt;code&gt;DecimalFormat.parse()&lt;/code&gt; to be able
+ to distinguish positive from negative values.  (If they are identical, then
+ &lt;code&gt;DecimalFormat&lt;/code&gt; will behave as if no negative subpattern was
+ specified.)  Another example is that the decimal separator and thousands
+ separator should be distinct characters, or parsing will be impossible.
+
+ &lt;p&gt;The grouping separator is commonly used for thousands, but in some
+ countries it separates ten-thousands. The grouping size is a constant number
+ of digits between the grouping characters, such as 3 for 100,000,000 or 4 for
+ 1,0000,0000.  If you supply a pattern with multiple grouping characters, the
+ interval between the last one and the end of the integer is the one that is
+ used. So &lt;code&gt;&quot;#,##,###,####&quot;&lt;/code&gt; == &lt;code&gt;&quot;######,####&quot;&lt;/code&gt; ==
+ &lt;code&gt;&quot;##,####,####&quot;&lt;/code&gt;.
+
+ &lt;h4&gt;Special Pattern Characters&lt;/h4&gt;
+
+ &lt;p&gt;Many characters in a pattern are taken literally; they are matched during
+ parsing and output unchanged during formatting.  Special characters, on the
+ other hand, stand for other characters, strings, or classes of characters.
+ They must be quoted, unless noted otherwise, if they are to appear in the
+ prefix or suffix as literals.
+
+ &lt;p&gt;The characters listed here are used in non-localized patterns.  Localized
+ patterns use the corresponding characters taken from this formatter's
+ &lt;code&gt;DecimalFormatSymbols&lt;/code&gt; object instead, and these characters lose
+ their special status.  Two exceptions are the currency sign and quote, which
+ are not localized.
+
+ &lt;blockquote&gt;
+ &lt;table border=0 cellspacing=3 cellpadding=0 summary=&quot;Chart showing symbol,
+  location, localized, and meaning.&quot;&gt;
+     &lt;tr style=&quot;background-color: rgb(204, 204, 255);&quot;&gt;
+          &lt;th align=left&gt;Symbol
+          &lt;th align=left&gt;Location
+          &lt;th align=left&gt;Localized?
+          &lt;th align=left&gt;Meaning
+     &lt;tr valign=top&gt;
+          &lt;td&gt;&lt;code&gt;0&lt;/code&gt;
+          &lt;td&gt;Number
+          &lt;td&gt;Yes
+          &lt;td&gt;Digit
+     &lt;tr style=&quot;vertical-align: top; background-color: rgb(238, 238, 255);&quot;&gt;
+          &lt;td&gt;&lt;code&gt;#&lt;/code&gt;
+          &lt;td&gt;Number
+          &lt;td&gt;Yes
+          &lt;td&gt;Digit, zero shows as absent
+     &lt;tr valign=top&gt;
+          &lt;td&gt;&lt;code&gt;.&lt;/code&gt;
+          &lt;td&gt;Number
+          &lt;td&gt;Yes
+          &lt;td&gt;Decimal separator or monetary decimal separator
+     &lt;tr style=&quot;vertical-align: top; background-color: rgb(238, 238, 255);&quot;&gt;
+          &lt;td&gt;&lt;code&gt;-&lt;/code&gt;
+          &lt;td&gt;Number
+          &lt;td&gt;Yes
+          &lt;td&gt;Minus sign
+     &lt;tr valign=top&gt;
+          &lt;td&gt;&lt;code&gt;,&lt;/code&gt;
+          &lt;td&gt;Number
+          &lt;td&gt;Yes
+          &lt;td&gt;Grouping separator
+     &lt;tr style=&quot;vertical-align: top; background-color: rgb(238, 238, 255);&quot;&gt;
+          &lt;td&gt;&lt;code&gt;E&lt;/code&gt;
+          &lt;td&gt;Number
+          &lt;td&gt;Yes
+          &lt;td&gt;Separates mantissa and exponent in scientific notation.
+              &lt;em&gt;Need not be quoted in prefix or suffix.&lt;/em&gt;
+     &lt;tr valign=top&gt;
+          &lt;td&gt;&lt;code&gt;;&lt;/code&gt;
+          &lt;td&gt;Subpattern boundary
+          &lt;td&gt;Yes
+          &lt;td&gt;Separates positive and negative subpatterns
+     &lt;tr style=&quot;vertical-align: top; background-color: rgb(238, 238, 255);&quot;&gt;
+          &lt;td&gt;&lt;code&gt;%&lt;/code&gt;
+          &lt;td&gt;Prefix or suffix
+          &lt;td&gt;Yes
+          &lt;td&gt;Multiply by 100 and show as percentage
+     &lt;tr valign=top&gt;
+          &lt;td&gt;&lt;code&gt;&amp;#92;u2030&lt;/code&gt;
+          &lt;td&gt;Prefix or suffix
+          &lt;td&gt;Yes
+          &lt;td&gt;Multiply by 1000 and show as per mille value
+     &lt;tr style=&quot;vertical-align: top; background-color: rgb(238, 238, 255);&quot;&gt;
+          &lt;td&gt;&lt;code&gt;&amp;#164;&lt;/code&gt; (&lt;code&gt;&amp;#92;u00A4&lt;/code&gt;)
+          &lt;td&gt;Prefix or suffix
+          &lt;td&gt;No
+          &lt;td&gt;Currency sign, replaced by currency symbol.  If
+              doubled, replaced by international currency symbol.
+              If present in a pattern, the monetary decimal separator
+              is used instead of the decimal separator.
+     &lt;tr valign=top&gt;
+          &lt;td&gt;&lt;code&gt;'&lt;/code&gt;
+          &lt;td&gt;Prefix or suffix
+          &lt;td&gt;No
+          &lt;td&gt;Used to quote special characters in a prefix or suffix,
+              for example, &lt;code&gt;&quot;'#'#&quot;&lt;/code&gt; formats 123 to
+              &lt;code&gt;&quot;#123&quot;&lt;/code&gt;.  To create a single quote
+              itself, use two in a row: &lt;code&gt;&quot;# o''clock&quot;&lt;/code&gt;.
+ &lt;/table&gt;
+ &lt;/blockquote&gt;
+
+ &lt;h4&gt;Scientific Notation&lt;/h4&gt;
+
+ &lt;p&gt;Numbers in scientific notation are expressed as the product of a mantissa
+ and a power of ten, for example, 1234 can be expressed as 1.234 x 10^3.  The
+ mantissa is often in the range 1.0 &amp;le; x {@literal &lt;} 10.0, but it need not
+ be.
+ &lt;code&gt;DecimalFormat&lt;/code&gt; can be instructed to format and parse scientific
+ notation &lt;em&gt;only via a pattern&lt;/em&gt;; there is currently no factory method
+ that creates a scientific notation format.  In a pattern, the exponent
+ character immediately followed by one or more digit characters indicates
+ scientific notation.  Example: &lt;code&gt;&quot;0.###E0&quot;&lt;/code&gt; formats the number
+ 1234 as &lt;code&gt;&quot;1.234E3&quot;&lt;/code&gt;.
+
+ &lt;ul&gt;
+ &lt;li&gt;The number of digit characters after the exponent character gives the
+ minimum exponent digit count.  There is no maximum.  Negative exponents are
+ formatted using the localized minus sign, &lt;em&gt;not&lt;/em&gt; the prefix and suffix
+ from the pattern.  This allows patterns such as &lt;code&gt;&quot;0.###E0 m/s&quot;&lt;/code&gt;.
+
+ &lt;li&gt;The minimum and maximum number of integer digits are interpreted
+ together:
+
+ &lt;ul&gt;
+ &lt;li&gt;If the maximum number of integer digits is greater than their minimum number
+ and greater than 1, it forces the exponent to be a multiple of the maximum
+ number of integer digits, and the minimum number of integer digits to be
+ interpreted as 1.  The most common use of this is to generate
+ &lt;em&gt;engineering notation&lt;/em&gt;, in which the exponent is a multiple of three,
+ e.g., &lt;code&gt;&quot;##0.#####E0&quot;&lt;/code&gt;. Using this pattern, the number 12345
+ formats to &lt;code&gt;&quot;12.345E3&quot;&lt;/code&gt;, and 123456 formats to
+ &lt;code&gt;&quot;123.456E3&quot;&lt;/code&gt;.
+
+ &lt;li&gt;Otherwise, the minimum number of integer digits is achieved by adjusting the
+ exponent.  Example: 0.00123 formatted with &lt;code&gt;&quot;00.###E0&quot;&lt;/code&gt; yields
+ &lt;code&gt;&quot;12.3E-4&quot;&lt;/code&gt;.
+ &lt;/ul&gt;
+
+ &lt;li&gt;The number of significant digits in the mantissa is the sum of the
+ &lt;em&gt;minimum integer&lt;/em&gt; and &lt;em&gt;maximum fraction&lt;/em&gt; digits, and is
+ unaffected by the maximum integer digits.  For example, 12345 formatted with
+ &lt;code&gt;&quot;##0.##E0&quot;&lt;/code&gt; is &lt;code&gt;&quot;12.3E3&quot;&lt;/code&gt;. To show all digits, set
+ the significant digits count to zero.  The number of significant digits
+ does not affect parsing.
+
+ &lt;li&gt;Exponential patterns may not contain grouping separators.
+ &lt;/ul&gt;
+
+ &lt;h4&gt;Rounding&lt;/h4&gt;
+
+ &lt;code&gt;DecimalFormat&lt;/code&gt; provides rounding modes defined in
+ {@link java.math.RoundingMode} for formatting.  By default, it uses
+ {@link java.math.RoundingMode#HALF_EVEN RoundingMode.HALF_EVEN}.
+
+ &lt;h4&gt;Digits&lt;/h4&gt;
+
+ For formatting, &lt;code&gt;DecimalFormat&lt;/code&gt; uses the ten consecutive
+ characters starting with the localized zero digit defined in the
+ &lt;code&gt;DecimalFormatSymbols&lt;/code&gt; object as digits. For parsing, these
+ digits as well as all Unicode decimal digits, as defined by
+ {@link Character#digit Character.digit}, are recognized.
+
+ &lt;h4&gt;Special Values&lt;/h4&gt;
+
+ &lt;p&gt;&lt;code&gt;NaN&lt;/code&gt; is formatted as a string, which typically has a single character
+ &lt;code&gt;&amp;#92;uFFFD&lt;/code&gt;.  This string is determined by the
+ &lt;code&gt;DecimalFormatSymbols&lt;/code&gt; object.  This is the only value for which
+ the prefixes and suffixes are not used.
+
+ &lt;p&gt;Infinity is formatted as a string, which typically has a single character
+ &lt;code&gt;&amp;#92;u221E&lt;/code&gt;, with the positive or negative prefixes and suffixes
+ applied.  The infinity string is determined by the
+ &lt;code&gt;DecimalFormatSymbols&lt;/code&gt; object.
+
+ &lt;p&gt;Negative zero (&lt;code&gt;&quot;-0&quot;&lt;/code&gt;) parses to
+ &lt;ul&gt;
+ &lt;li&gt;&lt;code&gt;BigDecimal(0)&lt;/code&gt; if &lt;code&gt;isParseBigDecimal()&lt;/code&gt; is
+ true,
+ &lt;li&gt;&lt;code&gt;Long(0)&lt;/code&gt; if &lt;code&gt;isParseBigDecimal()&lt;/code&gt; is false
+     and &lt;code&gt;isParseIntegerOnly()&lt;/code&gt; is true,
+ &lt;li&gt;&lt;code&gt;Double(-0.0)&lt;/code&gt; if both &lt;code&gt;isParseBigDecimal()&lt;/code&gt;
+ and &lt;code&gt;isParseIntegerOnly()&lt;/code&gt; are false.
+ &lt;/ul&gt;
+
+ &lt;h4&gt;&lt;a name=&quot;synchronization&quot;&gt;Synchronization&lt;/a&gt;&lt;/h4&gt;
+
+ &lt;p&gt;
+ Decimal formats are generally not synchronized.
+ It is recommended to create separate format instances for each thread.
+ If multiple threads access a format concurrently, it must be synchronized
+ externally.
+
+ &lt;h4&gt;Example&lt;/h4&gt;
+
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+ &lt;strong&gt;// Print out a number using the localized number, integer, currency,
+ // and percent format for each locale&lt;/strong&gt;
+ Locale[] locales = NumberFormat.getAvailableLocales();
+ double myNumber = -1234.56;
+ NumberFormat form;
+ for (int j = 0; j &lt; 4; ++j) {
+     System.out.println(&quot;FORMAT&quot;);
+     for (int i = 0; i &lt; locales.length; ++i) {
+         if (locales[i].getCountry().length() == 0) {
+            continue; // Skip language-only locales
+         }
+         System.out.print(locales[i].getDisplayName());
+         switch (j) {
+         case 0:
+             form = NumberFormat.getInstance(locales[i]); break;
+         case 1:
+             form = NumberFormat.getIntegerInstance(locales[i]); break;
+         case 2:
+             form = NumberFormat.getCurrencyInstance(locales[i]); break;
+         default:
+             form = NumberFormat.getPercentInstance(locales[i]); break;
+         }
+         if (form instanceof DecimalFormat) {
+             System.out.print(&quot;: &quot; + ((DecimalFormat) form).toPattern());
+         }
+         System.out.print(&quot; -&gt; &quot; + form.format(myNumber));
+         try {
+             System.out.println(&quot; -&gt; &quot; + form.parse(form.format(myNumber)));
+         } catch (ParseException e) {}
+     }
+ }
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+
+ @see          &lt;a href=&quot;https://docs.oracle.com/javase/tutorial/i18n/format/decimalFormat.html&quot;&gt;Java Tutorial&lt;/a&gt;
+ @see          NumberFormat
+ @see          DecimalFormatSymbols
+ @see          ParsePosition
+ @author       Mark Davis
+ @author       Alan Liu
+*/
+var DecimalFormat = {
+
+<span id='java-text-DecimalFormat-method-format'>/**Formats a number and appends the resulting text to the given string
+</span> buffer.
+ The number can be of any subclass of {@link java.lang.Number}.
+ &lt;p&gt;
+ This implementation uses the maximum precision permitted.
+@param {Object {Object}} number     the number to format
+@param {Object {StringBuffer}} toAppendTo the &lt;code&gt;StringBuffer&lt;/code&gt; to which the formatted
+                   text is to be appended
+@param {Object {FieldPosition}} pos        On input: an alignment field, if desired.
+                   On output: the offsets of the alignment field.
+@return {Object {java.lang.StringBuffer}} the value passed in as &lt;code&gt;toAppendTo&lt;/code&gt;
+@exception IllegalArgumentException if &lt;code&gt;number&lt;/code&gt; is
+                   null or not an instance of &lt;code&gt;Number&lt;/code&gt;.
+@exception NullPointerException if &lt;code&gt;toAppendTo&lt;/code&gt; or
+                   &lt;code&gt;pos&lt;/code&gt; is null
+@exception ArithmeticException if rounding is needed with rounding
+                   mode being set to RoundingMode.UNNECESSARY
+@see java.text.FieldPosition
+*/
+format : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-format'>/**Formats a double to produce a string.
+</span>@param {Number} number    The double to format
+@param {Object {StringBuffer}} result    where the text is to be appended
+@param {Object {FieldPosition}} fieldPosition    On input: an alignment field, if desired.
+ On output: the offsets of the alignment field.
+@exception ArithmeticException if rounding is needed with rounding
+            mode being set to RoundingMode.UNNECESSARY
+@return {Object {java.lang.StringBuffer}} The formatted number string
+@see java.text.FieldPosition
+*/
+format : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-format'>/**Format a long to produce a string.
+</span>@param {Number} number    The long to format
+@param {Object {StringBuffer}} result    where the text is to be appended
+@param {Object {FieldPosition}} fieldPosition    On input: an alignment field, if desired.
+ On output: the offsets of the alignment field.
+@exception ArithmeticException if rounding is needed with rounding
+                  mode being set to RoundingMode.UNNECESSARY
+@return {Object {java.lang.StringBuffer}} The formatted number string
+@see java.text.FieldPosition
+*/
+format : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-formatToCharacterIterator'>/**Formats an Object producing an &lt;code&gt;AttributedCharacterIterator&lt;/code&gt;.
+</span> You can use the returned &lt;code&gt;AttributedCharacterIterator&lt;/code&gt;
+ to build the resulting String, as well as to determine information
+ about the resulting String.
+ &lt;p&gt;
+ Each attribute key of the AttributedCharacterIterator will be of type
+ &lt;code&gt;NumberFormat.Field&lt;/code&gt;, with the attribute value being the
+ same as the attribute key.
+@param {Object {Object}} obj The object to format
+@exception IllegalArgumentException when the Format cannot format the
+            given object.
+@exception ArithmeticException if rounding is needed with rounding
+                   mode being set to RoundingMode.UNNECESSARY
+@param obj The object to format
+@return {Object {java.text.AttributedCharacterIterator}} AttributedCharacterIterator describing the formatted value.
+@since 1.4
+*/
+formatToCharacterIterator : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-parse'>/**Parses text from a string to produce a &lt;code&gt;Number&lt;/code&gt;.
+</span> &lt;p&gt;
+ The method attempts to parse text starting at the index given by
+ &lt;code&gt;pos&lt;/code&gt;.
+ If parsing succeeds, then the index of &lt;code&gt;pos&lt;/code&gt; is updated
+ to the index after the last character used (parsing does not necessarily
+ use all characters up to the end of the string), and the parsed
+ number is returned. The updated &lt;code&gt;pos&lt;/code&gt; can be used to
+ indicate the starting point for the next call to this method.
+ If an error occurs, then the index of &lt;code&gt;pos&lt;/code&gt; is not
+ changed, the error index of &lt;code&gt;pos&lt;/code&gt; is set to the index of
+ the character where the error occurred, and null is returned.
+ &lt;p&gt;
+ The subclass returned depends on the value of {@link #isParseBigDecimal}
+ as well as on the string being parsed.
+ &lt;ul&gt;
+   &lt;li&gt;If &lt;code&gt;isParseBigDecimal()&lt;/code&gt; is false (the default),
+       most integer values are returned as &lt;code&gt;Long&lt;/code&gt;
+       objects, no matter how they are written: &lt;code&gt;&quot;17&quot;&lt;/code&gt; and
+       &lt;code&gt;&quot;17.000&quot;&lt;/code&gt; both parse to &lt;code&gt;Long(17)&lt;/code&gt;.
+       Values that cannot fit into a &lt;code&gt;Long&lt;/code&gt; are returned as
+       &lt;code&gt;Double&lt;/code&gt;s. This includes values with a fractional part,
+       infinite values, &lt;code&gt;NaN&lt;/code&gt;, and the value -0.0.
+       &lt;code&gt;DecimalFormat&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; decide whether to
+       return a &lt;code&gt;Double&lt;/code&gt; or a &lt;code&gt;Long&lt;/code&gt; based on the
+       presence of a decimal separator in the source string. Doing so
+       would prevent integers that overflow the mantissa of a double,
+       such as &lt;code&gt;&quot;-9,223,372,036,854,775,808.00&quot;&lt;/code&gt;, from being
+       parsed accurately.
+       &lt;p&gt;
+       Callers may use the &lt;code&gt;Number&lt;/code&gt; methods
+       &lt;code&gt;doubleValue&lt;/code&gt;, &lt;code&gt;longValue&lt;/code&gt;, etc., to obtain
+       the type they want.
+   &lt;li&gt;If &lt;code&gt;isParseBigDecimal()&lt;/code&gt; is true, values are returned
+       as &lt;code&gt;BigDecimal&lt;/code&gt; objects. The values are the ones
+       constructed by {@link java.math.BigDecimal#BigDecimal(String)}
+       for corresponding strings in locale-independent format. The
+       special cases negative and positive infinity and NaN are returned
+       as &lt;code&gt;Double&lt;/code&gt; instances holding the values of the
+       corresponding &lt;code&gt;Double&lt;/code&gt; constants.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ &lt;code&gt;DecimalFormat&lt;/code&gt; parses all Unicode characters that represent
+ decimal digits, as defined by &lt;code&gt;Character.digit()&lt;/code&gt;. In
+ addition, &lt;code&gt;DecimalFormat&lt;/code&gt; also recognizes as digits the ten
+ consecutive characters starting with the localized zero digit defined in
+ the &lt;code&gt;DecimalFormatSymbols&lt;/code&gt; object.
+@param {String} text the string to be parsed
+@param {Object {ParsePosition}} pos  A &lt;code&gt;ParsePosition&lt;/code&gt; object with index and error
+             index information as described above.
+@return {Object {java.lang.Number}} the parsed value, or &lt;code&gt;null&lt;/code&gt; if the parse fails
+@exception NullPointerException if &lt;code&gt;text&lt;/code&gt; or
+             &lt;code&gt;pos&lt;/code&gt; is null.
+*/
+parse : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getDecimalFormatSymbols'>/**Returns a copy of the decimal format symbols, which is generally not
+</span> changed by the programmer or user.
+@return {Object {java.text.DecimalFormatSymbols}} a copy of the desired DecimalFormatSymbols
+@see java.text.DecimalFormatSymbols
+*/
+getDecimalFormatSymbols : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setDecimalFormatSymbols'>/**Sets the decimal format symbols, which is generally not changed
+</span> by the programmer or user.
+@param {Object {DecimalFormatSymbols}} newSymbols desired DecimalFormatSymbols
+@see java.text.DecimalFormatSymbols
+*/
+setDecimalFormatSymbols : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getPositivePrefix'>/**Get the positive prefix.
+</span> &lt;P&gt;Examples: +123, $123, sFr123
+@return {String} the positive prefix
+*/
+getPositivePrefix : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setPositivePrefix'>/**Set the positive prefix.
+</span> &lt;P&gt;Examples: +123, $123, sFr123
+@param {String} newValue the new positive prefix
+*/
+setPositivePrefix : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getNegativePrefix'>/**Get the negative prefix.
+</span> &lt;P&gt;Examples: -123, ($123) (with negative suffix), sFr-123
+@return {String} the negative prefix
+*/
+getNegativePrefix : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setNegativePrefix'>/**Set the negative prefix.
+</span> &lt;P&gt;Examples: -123, ($123) (with negative suffix), sFr-123
+@param {String} newValue the new negative prefix
+*/
+setNegativePrefix : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getPositiveSuffix'>/**Get the positive suffix.
+</span> &lt;P&gt;Example: 123%
+@return {String} the positive suffix
+*/
+getPositiveSuffix : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setPositiveSuffix'>/**Set the positive suffix.
+</span> &lt;P&gt;Example: 123%
+@param {String} newValue the new positive suffix
+*/
+setPositiveSuffix : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getNegativeSuffix'>/**Get the negative suffix.
+</span> &lt;P&gt;Examples: -123%, ($123) (with positive suffixes)
+@return {String} the negative suffix
+*/
+getNegativeSuffix : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setNegativeSuffix'>/**Set the negative suffix.
+</span> &lt;P&gt;Examples: 123%
+@param {String} newValue the new negative suffix
+*/
+setNegativeSuffix : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getMultiplier'>/**Gets the multiplier for use in percent, per mille, and similar
+</span> formats.
+@return {Number} the multiplier
+@see #setMultiplier(int)
+*/
+getMultiplier : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setMultiplier'>/**Sets the multiplier for use in percent, per mille, and similar
+</span> formats.
+ For a percent format, set the multiplier to 100 and the suffixes to
+ have '%' (for Arabic, use the Arabic percent sign).
+ For a per mille format, set the multiplier to 1000 and the suffixes to
+ have '&amp;#92;u2030'.
+
+ &lt;P&gt;Example: with multiplier 100, 1.23 is formatted as &quot;123&quot;, and
+ &quot;123&quot; is parsed into 1.23.
+@param {Number} newValue the new multiplier
+@see #getMultiplier
+*/
+setMultiplier : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setGroupingUsed'>/**{@inheritDoc}
+</span>*/
+setGroupingUsed : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-isGroupingUsed'>/**{@inheritDoc}
+</span>*/
+isGroupingUsed : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getGroupingSize'>/**Return the grouping size. Grouping size is the number of digits between
+</span> grouping separators in the integer portion of a number.  For example,
+ in the number &quot;123,456.78&quot;, the grouping size is 3.
+@return {Number} the grouping size
+@see #setGroupingSize
+@see java.text.NumberFormat#isGroupingUsed
+@see java.text.DecimalFormatSymbols#getGroupingSeparator
+*/
+getGroupingSize : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setGroupingSize'>/**Set the grouping size. Grouping size is the number of digits between
+</span> grouping separators in the integer portion of a number.  For example,
+ in the number &quot;123,456.78&quot;, the grouping size is 3.
+ &lt;br&gt;
+ The value passed in is converted to a byte, which may lose information.
+@param {Number} newValue the new grouping size
+@see #getGroupingSize
+@see java.text.NumberFormat#setGroupingUsed
+@see java.text.DecimalFormatSymbols#setGroupingSeparator
+*/
+setGroupingSize : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-isDecimalSeparatorAlwaysShown'>/**Allows you to get the behavior of the decimal separator with integers.
+</span> (The decimal separator will always appear with decimals.)
+ &lt;P&gt;Example: Decimal ON: 12345 &amp;rarr; 12345.; OFF: 12345 &amp;rarr; 12345
+@return {Boolean} {@code true} if the decimal separator is always shown;
+         {@code false} otherwise
+*/
+isDecimalSeparatorAlwaysShown : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setDecimalSeparatorAlwaysShown'>/**Allows you to set the behavior of the decimal separator with integers.
+</span> (The decimal separator will always appear with decimals.)
+ &lt;P&gt;Example: Decimal ON: 12345 &amp;rarr; 12345.; OFF: 12345 &amp;rarr; 12345
+@param {Boolean} newValue {@code true} if the decimal separator is always shown;
+                 {@code false} otherwise
+*/
+setDecimalSeparatorAlwaysShown : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-isParseBigDecimal'>/**Returns whether the {@link #parse(java.lang.String, java.text.ParsePosition)}
+</span> method returns &lt;code&gt;BigDecimal&lt;/code&gt;. The default value is false.
+@return {Boolean} {@code true} if the parse method returns BigDecimal;
+         {@code false} otherwise
+@see #setParseBigDecimal
+@since 1.5
+*/
+isParseBigDecimal : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setParseBigDecimal'>/**Sets whether the {@link #parse(java.lang.String, java.text.ParsePosition)}
+</span> method returns &lt;code&gt;BigDecimal&lt;/code&gt;.
+@param {Boolean} newValue {@code true} if the parse method returns BigDecimal;
+                 {@code false} otherwise
+@see #isParseBigDecimal
+@since 1.5
+*/
+setParseBigDecimal : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-isParseIntegerOnly'>/**{@inheritDoc}
+</span>*/
+isParseIntegerOnly : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setParseIntegerOnly'>/**{@inheritDoc}
+</span>*/
+setParseIntegerOnly : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-clone'>/**Standard override; no change in semantics.
+</span>*/
+clone : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-equals'>/**Overrides equals
+</span>*/
+equals : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-hashCode'>/**Overrides hashCode
+</span>*/
+hashCode : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-toPattern'>/**Synthesizes a pattern string that represents the current state
+</span> of this Format object.
+@return {String} a pattern string
+@see #applyPattern
+*/
+toPattern : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-toLocalizedPattern'>/**Synthesizes a localized pattern string that represents the current
+</span> state of this Format object.
+@return {String} a localized pattern string
+@see #applyPattern
+*/
+toLocalizedPattern : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-applyPattern'>/**Apply the given pattern to this Format object.  A pattern is a
+</span> short-hand specification for the various formatting properties.
+ These properties can also be changed individually through the
+ various setter methods.
+ &lt;p&gt;
+ There is no limit to integer digits set
+ by this routine, since that is the typical end-user desire;
+ use setMaximumInteger if you want to set a real value.
+ For negative numbers, use a second pattern, separated by a semicolon
+ &lt;P&gt;Example &lt;code&gt;&quot;#,#00.0#&quot;&lt;/code&gt; &amp;rarr; 1,234.56
+ &lt;P&gt;This means a minimum of 2 integer digits, 1 fraction digit, and
+ a maximum of 2 fraction digits.
+ &lt;p&gt;Example: &lt;code&gt;&quot;#,#00.0#;(#,#00.0#)&quot;&lt;/code&gt; for negatives in
+ parentheses.
+ &lt;p&gt;In negative patterns, the minimum and maximum counts are ignored;
+ these are presumed to be set in the positive pattern.
+@param {String} pattern a new pattern
+@exception NullPointerException if &lt;code&gt;pattern&lt;/code&gt; is null
+@exception IllegalArgumentException if the given pattern is invalid.
+*/
+applyPattern : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-applyLocalizedPattern'>/**Apply the given pattern to this Format object.  The pattern
+</span> is assumed to be in a localized notation. A pattern is a
+ short-hand specification for the various formatting properties.
+ These properties can also be changed individually through the
+ various setter methods.
+ &lt;p&gt;
+ There is no limit to integer digits set
+ by this routine, since that is the typical end-user desire;
+ use setMaximumInteger if you want to set a real value.
+ For negative numbers, use a second pattern, separated by a semicolon
+ &lt;P&gt;Example &lt;code&gt;&quot;#,#00.0#&quot;&lt;/code&gt; &amp;rarr; 1,234.56
+ &lt;P&gt;This means a minimum of 2 integer digits, 1 fraction digit, and
+ a maximum of 2 fraction digits.
+ &lt;p&gt;Example: &lt;code&gt;&quot;#,#00.0#;(#,#00.0#)&quot;&lt;/code&gt; for negatives in
+ parentheses.
+ &lt;p&gt;In negative patterns, the minimum and maximum counts are ignored;
+ these are presumed to be set in the positive pattern.
+@param {String} pattern a new pattern
+@exception NullPointerException if &lt;code&gt;pattern&lt;/code&gt; is null
+@exception IllegalArgumentException if the given pattern is invalid.
+*/
+applyLocalizedPattern : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setMaximumIntegerDigits'>/**Sets the maximum number of digits allowed in the integer portion of a
+</span> number.
+ For formatting numbers other than &lt;code&gt;BigInteger&lt;/code&gt; and
+ &lt;code&gt;BigDecimal&lt;/code&gt; objects, the lower of &lt;code&gt;newValue&lt;/code&gt; and
+ 309 is used. Negative input values are replaced with 0.
+@see NumberFormat#setMaximumIntegerDigits
+*/
+setMaximumIntegerDigits : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setMinimumIntegerDigits'>/**Sets the minimum number of digits allowed in the integer portion of a
+</span> number.
+ For formatting numbers other than &lt;code&gt;BigInteger&lt;/code&gt; and
+ &lt;code&gt;BigDecimal&lt;/code&gt; objects, the lower of &lt;code&gt;newValue&lt;/code&gt; and
+ 309 is used. Negative input values are replaced with 0.
+@see NumberFormat#setMinimumIntegerDigits
+*/
+setMinimumIntegerDigits : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setMaximumFractionDigits'>/**Sets the maximum number of digits allowed in the fraction portion of a
+</span> number.
+ For formatting numbers other than &lt;code&gt;BigInteger&lt;/code&gt; and
+ &lt;code&gt;BigDecimal&lt;/code&gt; objects, the lower of &lt;code&gt;newValue&lt;/code&gt; and
+ 340 is used. Negative input values are replaced with 0.
+@see NumberFormat#setMaximumFractionDigits
+*/
+setMaximumFractionDigits : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setMinimumFractionDigits'>/**Sets the minimum number of digits allowed in the fraction portion of a
+</span> number.
+ For formatting numbers other than &lt;code&gt;BigInteger&lt;/code&gt; and
+ &lt;code&gt;BigDecimal&lt;/code&gt; objects, the lower of &lt;code&gt;newValue&lt;/code&gt; and
+ 340 is used. Negative input values are replaced with 0.
+@see NumberFormat#setMinimumFractionDigits
+*/
+setMinimumFractionDigits : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getMaximumIntegerDigits'>/**Gets the maximum number of digits allowed in the integer portion of a
+</span> number.
+ For formatting numbers other than &lt;code&gt;BigInteger&lt;/code&gt; and
+ &lt;code&gt;BigDecimal&lt;/code&gt; objects, the lower of the return value and
+ 309 is used.
+@see #setMaximumIntegerDigits
+*/
+getMaximumIntegerDigits : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getMinimumIntegerDigits'>/**Gets the minimum number of digits allowed in the integer portion of a
+</span> number.
+ For formatting numbers other than &lt;code&gt;BigInteger&lt;/code&gt; and
+ &lt;code&gt;BigDecimal&lt;/code&gt; objects, the lower of the return value and
+ 309 is used.
+@see #setMinimumIntegerDigits
+*/
+getMinimumIntegerDigits : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getMaximumFractionDigits'>/**Gets the maximum number of digits allowed in the fraction portion of a
+</span> number.
+ For formatting numbers other than &lt;code&gt;BigInteger&lt;/code&gt; and
+ &lt;code&gt;BigDecimal&lt;/code&gt; objects, the lower of the return value and
+ 340 is used.
+@see #setMaximumFractionDigits
+*/
+getMaximumFractionDigits : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getMinimumFractionDigits'>/**Gets the minimum number of digits allowed in the fraction portion of a
+</span> number.
+ For formatting numbers other than &lt;code&gt;BigInteger&lt;/code&gt; and
+ &lt;code&gt;BigDecimal&lt;/code&gt; objects, the lower of the return value and
+ 340 is used.
+@see #setMinimumFractionDigits
+*/
+getMinimumFractionDigits : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getCurrency'>/**Gets the currency used by this decimal format when formatting
+</span> currency values.
+ The currency is obtained by calling
+ {@link java.text.DecimalFormatSymbols#getCurrency java.text.DecimalFormatSymbols.getCurrency}
+ on this number format's symbols.
+@return {Object {java.util.Currency}} the currency used by this decimal format, or &lt;code&gt;null&lt;/code&gt;
+@since 1.4
+*/
+getCurrency : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setCurrency'>/**Sets the currency used by this number format when formatting
+</span> currency values. This does not update the minimum or maximum
+ number of fraction digits used by the number format.
+ The currency is set by calling
+ {@link java.text.DecimalFormatSymbols#setCurrency java.text.DecimalFormatSymbols.setCurrency}
+ on this number format's symbols.
+@param {Object {Currency}} currency the new currency to be used by this decimal format
+@exception NullPointerException if &lt;code&gt;currency&lt;/code&gt; is null
+@since 1.4
+*/
+setCurrency : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-getRoundingMode'>/**Gets the {@link java.math.RoundingMode} used in this DecimalFormat.
+</span>@return {Object {java.math.RoundingMode}} The &lt;code&gt;RoundingMode&lt;/code&gt; used for this DecimalFormat.
+@see #setRoundingMode(RoundingMode)
+@since 1.6
+*/
+getRoundingMode : function(  ) {},
+
+<span id='java-text-DecimalFormat-method-setRoundingMode'>/**Sets the {@link java.math.RoundingMode} used in this DecimalFormat.
+</span>@param {Object {RoundingMode}} roundingMode The &lt;code&gt;RoundingMode&lt;/code&gt; to be used
+@see #getRoundingMode()
+@exception NullPointerException if &lt;code&gt;roundingMode&lt;/code&gt; is null.
+@since 1.6
+*/
+setRoundingMode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

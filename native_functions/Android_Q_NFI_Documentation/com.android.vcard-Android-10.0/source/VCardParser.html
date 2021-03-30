@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-vcard-VCardParser'>/**@class com.android.vcard.VCardParser
+</span>@extends java.lang.Object
+
+*/
+var VCardParser = {
+
+<span id='com-android-vcard-VCardParser-method-addInterpreter'>/**Registers one {@link com.android.vcard.VCardInterpreter} instance, which receives events along with
+</span> vCard parsing.
+@param {Object {VCardInterpreter}} interpreter
+*/
+addInterpreter : function(  ) {},
+
+<span id='com-android-vcard-VCardParser-method-parse'>/**&lt;p&gt;Parses a whole InputStream as a vCard file and lets registered {@link com.android.vcard.VCardInterpreter}
+</span> instances handle callbacks.&lt;/p&gt;
+
+ &lt;p&gt;This method reads a whole InputStream. If you just want to parse one vCard entry inside
+ a vCard file with multiple entries, try {@link #parseOne}(InputStream).&lt;/p&gt;
+@param {Object {InputStream}} is The source to parse.
+@throws IOException, VCardException
+*/
+parse : function(  ) {},
+
+<span id='com-android-vcard-VCardParser-method-parseOne'>/**&lt;p&gt;Parses the first vCard entry in InputStream and lets registered {@link com.android.vcard.VCardInterpreter}
+</span> instances handle callbacks.&lt;/p&gt;
+
+ &lt;p&gt;This method finishes itself when the first entry ended.&lt;/p&gt;
+
+ &lt;p&gt;Note that, registered {@link com.android.vcard.VCardInterpreter} may still see multiple
+ {@link com.android.vcard.VCardInterpreter#onEntryStarted()} / {@link com.android.vcard.VCardInterpreter#onEntryEnded()} calls
+ even with this method.&lt;/p&gt;
+
+ &lt;p&gt;This happens when the first entry contains nested vCards, which is allowed in vCard 2.1.
+ See the following example.&lt;/p&gt;
+
+ &lt;code&gt;
+ BEGIN:VCARD
+ N:a
+ BEGIN:VCARD
+ N:b
+ END:VCARD
+ END:VCARD
+ &lt;/code&gt;
+
+ &lt;p&gt;With this vCard, registered interpreters will grab two
+ {@link com.android.vcard.VCardInterpreter#onEntryStarted()} and {@link com.android.vcard.VCardInterpreter#onEntryEnded()}
+ calls. Callers should handle the situation by themselves.&lt;/p&gt;
+@param {Object {InputStream}} is  The source to parse.
+@throws IOException, VCardException
+*/
+parseOne : function(  ) {},
+
+<span id='com-android-vcard-VCardParser-method-parse'>/**
+</span>@deprecated use {@link #addInterpreter(VCardInterpreter)} and
+ {@link #parse(InputStream)}
+*/
+parse : function(  ) {},
+
+<span id='com-android-vcard-VCardParser-method-cancel'>/**&lt;p&gt;
+</span> Cancel parsing vCard. Useful when you want to stop the parse in the other threads.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Actual cancel is done after parsing the current vcard.
+ &lt;/p&gt;
+*/
+cancel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

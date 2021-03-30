@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-w3c-dom-ls-LSSerializer'>/**@class org.w3c.dom.ls.LSSerializer
+</span>  A &lt;code&gt;LSSerializer&lt;/code&gt; provides an API for serializing (writing) a
+ DOM document out into XML. The XML data is written to a string or an
+ output stream. Any changes or fixups made during the serialization affect
+ only the serialized data. The &lt;code&gt;Document&lt;/code&gt; object and its
+ children are never altered by the serialization operation.
+ &lt;p&gt; During serialization of XML data, namespace fixup is done as defined in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ , Appendix B. [&lt;a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113'&gt;DOM Level 2 Core&lt;/a&gt;]
+  allows empty strings as a real namespace URI. If the
+ &lt;code&gt;namespaceURI&lt;/code&gt; of a &lt;code&gt;Node&lt;/code&gt; is empty string, the
+ serialization will treat them as &lt;code&gt;null&lt;/code&gt;, ignoring the prefix
+ if any.
+ &lt;p&gt; &lt;code&gt;LSSerializer&lt;/code&gt; accepts any node type for serialization. For
+ nodes of type &lt;code&gt;Document&lt;/code&gt; or &lt;code&gt;Entity&lt;/code&gt;, well-formed
+ XML will be created when possible (well-formedness is guaranteed if the
+ document or entity comes from a parse operation and is unchanged since it
+ was created). The serialized output for these node types is either as a
+ XML document or an External XML Entity, respectively, and is acceptable
+ input for an XML parser. For all other types of nodes the serialized form
+ is implementation dependent.
+ &lt;p&gt;Within a &lt;code&gt;Document&lt;/code&gt;, &lt;code&gt;DocumentFragment&lt;/code&gt;, or
+ &lt;code&gt;Entity&lt;/code&gt; being serialized, &lt;code&gt;Nodes&lt;/code&gt; are processed as
+ follows
+ &lt;ul&gt;
+ &lt;li&gt; &lt;code&gt;Document&lt;/code&gt; nodes are written, including the XML
+ declaration (unless the parameter &quot;xml-declaration&quot; is set to
+ &lt;code&gt;false&lt;/code&gt;) and a DTD subset, if one exists in the DOM. Writing a
+ &lt;code&gt;Document&lt;/code&gt; node serializes the entire document.
+ &lt;/li&gt;
+ &lt;li&gt;
+ &lt;code&gt;Entity&lt;/code&gt; nodes, when written directly by
+ &lt;code&gt;LSSerializer.write&lt;/code&gt;, outputs the entity expansion but no
+ namespace fixup is done. The resulting output will be valid as an
+ external entity.
+ &lt;/li&gt;
+ &lt;li&gt; If the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-entities'&gt;
+ entities&lt;/a&gt;&quot; is set to &lt;code&gt;true&lt;/code&gt;, &lt;code&gt;EntityReference&lt;/code&gt; nodes are
+ serialized as an entity reference of the form &quot;
+ &lt;code&gt;&amp;amp;entityName;&lt;/code&gt;&quot; in the output. Child nodes (the expansion)
+ of the entity reference are ignored. If the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-entities'&gt;
+ entities&lt;/a&gt;&quot; is set to &lt;code&gt;false&lt;/code&gt;, only the children of the entity reference
+ are serialized. &lt;code&gt;EntityReference&lt;/code&gt; nodes with no children (no
+ corresponding &lt;code&gt;Entity&lt;/code&gt; node or the corresponding
+ &lt;code&gt;Entity&lt;/code&gt; nodes have no children) are always serialized.
+ &lt;/li&gt;
+ &lt;li&gt;
+ &lt;code&gt;CDATAsections&lt;/code&gt; containing content characters that cannot be
+ represented in the specified output encoding are handled according to the
+ &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-split-cdata-sections'&gt;
+ split-cdata-sections&lt;/a&gt;&quot; parameter.  If the parameter is set to &lt;code&gt;true&lt;/code&gt;,
+ &lt;code&gt;CDATAsections&lt;/code&gt; are split, and the unrepresentable characters
+ are serialized as numeric character references in ordinary content. The
+ exact position and number of splits is not specified.  If the parameter
+ is set to &lt;code&gt;false&lt;/code&gt;, unrepresentable characters in a
+ &lt;code&gt;CDATAsection&lt;/code&gt; are reported as
+ &lt;code&gt;&quot;wf-invalid-character&quot;&lt;/code&gt; errors if the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-well-formed'&gt;
+ well-formed&lt;/a&gt;&quot; is set to &lt;code&gt;true&lt;/code&gt;. The error is not recoverable - there is no
+ mechanism for supplying alternative characters and continuing with the
+ serialization.
+ &lt;/li&gt;
+ &lt;li&gt; &lt;code&gt;DocumentFragment&lt;/code&gt; nodes are serialized by
+ serializing the children of the document fragment in the order they
+ appear in the document fragment.
+ &lt;/li&gt;
+ &lt;li&gt; All other node types (Element, Text,
+ etc.) are serialized to their corresponding XML source form.
+ &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p &gt;&lt;b&gt;Note:&lt;/b&gt;  The serialization of a &lt;code&gt;Node&lt;/code&gt; does not always
+ generate a well-formed XML document, i.e. a &lt;code&gt;LSParser&lt;/code&gt; might
+ throw fatal errors when parsing the resulting serialization.
+ &lt;p&gt; Within the character data of a document (outside of markup), any
+ characters that cannot be represented directly are replaced with
+ character references. Occurrences of '&amp;lt;' and '&amp;amp;' are replaced by
+ the predefined entities &amp;amp;lt; and &amp;amp;amp;. The other predefined
+ entities (&amp;amp;gt;, &amp;amp;apos;, and &amp;amp;quot;) might not be used, except
+ where needed (e.g. using &amp;amp;gt; in cases such as ']]&amp;gt;'). Any
+ characters that cannot be represented directly in the output character
+ encoding are serialized as numeric character references (and since
+ character encoding standards commonly use hexadecimal representations of
+ characters, using the hexadecimal representation when serializing
+ character references is encouraged).
+ &lt;p&gt; To allow attribute values to contain both single and double quotes, the
+ apostrophe or single-quote character (') may be represented as
+ &quot;&amp;amp;apos;&quot;, and the double-quote character (&quot;)  as &quot;&amp;amp;quot;&quot;. New
+ line characters and other characters that cannot be represented directly
+ in attribute values in the output character encoding are serialized as a
+ numeric character reference.
+ &lt;p&gt; Within markup, but outside of attributes, any occurrence of a character
+ that cannot be represented in the output character encoding is reported
+ as a &lt;code&gt;DOMError&lt;/code&gt; fatal error. An example would be serializing
+ the element &amp;lt;LaCañada/&amp;gt; with &lt;code&gt;encoding=&quot;us-ascii&quot;&lt;/code&gt;.
+ This will result with a generation of a &lt;code&gt;DOMError&lt;/code&gt;
+ &quot;wf-invalid-character-in-node-name&quot; (as proposed in &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-well-formed'&gt;
+ well-formed&lt;/a&gt;&quot;).
+ &lt;p&gt; When requested by setting the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-normalize-characters'&gt;
+ normalize-characters&lt;/a&gt;&quot; on &lt;code&gt;LSSerializer&lt;/code&gt; to true, character normalization is
+ performed according to the definition of &lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/#dt-fullnorm'&gt;fully
+ normalized&lt;/a&gt; characters included in appendix E of [&lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/'&gt;XML 1.1&lt;/a&gt;] on all
+ data to be serialized, both markup and character data. The character
+ normalization process affects only the data as it is being written; it
+ does not alter the DOM's view of the document after serialization has
+ completed.
+ &lt;p&gt; Implementations are required to support the encodings &quot;UTF-8&quot;,
+ &quot;UTF-16&quot;, &quot;UTF-16BE&quot;, and &quot;UTF-16LE&quot; to guarantee that data is
+ serializable in all encodings that are required to be supported by all
+ XML parsers. When the encoding is UTF-8, whether or not a byte order mark
+ is serialized, or if the output is big-endian or little-endian, is
+ implementation dependent. When the encoding is UTF-16, whether or not the
+ output is big-endian or little-endian is implementation dependent, but a
+ Byte Order Mark must be generated for non-character outputs, such as
+ &lt;code&gt;LSOutput.byteStream&lt;/code&gt; or &lt;code&gt;LSOutput.systemId&lt;/code&gt;. If
+ the Byte Order Mark is not generated, a &quot;byte-order-mark-needed&quot; warning
+ is reported. When the encoding is UTF-16LE or UTF-16BE, the output is
+ big-endian (UTF-16BE) or little-endian (UTF-16LE) and the Byte Order Mark
+ is not be generated. In all cases, the encoding declaration, if
+ generated, will correspond to the encoding used during the serialization
+ (e.g. &lt;code&gt;encoding=&quot;UTF-16&quot;&lt;/code&gt; will appear if UTF-16 was
+ requested).
+ &lt;p&gt; Namespaces are fixed up during serialization, the serialization process
+ will verify that namespace declarations, namespace prefixes and the
+ namespace URI associated with elements and attributes are consistent. If
+ inconsistencies are found, the serialized form of the document will be
+ altered to remove them. The method used for doing the namespace fixup
+ while serializing a document is the algorithm defined in Appendix B.1,
+ &quot;Namespace normalization&quot;, of [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ .
+ &lt;p&gt; While serializing a document, the parameter &quot;discard-default-content&quot;
+ controls whether or not non-specified data is serialized.
+ &lt;p&gt; While serializing, errors and warnings are reported to the application
+ through the error handler (&lt;code&gt;LSSerializer.domConfig&lt;/code&gt;'s &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-error-handler'&gt;
+ error-handler&lt;/a&gt;&quot; parameter). This specification does in no way try to define all possible
+ errors and warnings that can occur while serializing a DOM node, but some
+ common error and warning cases are defined. The types (
+ &lt;code&gt;DOMError.type&lt;/code&gt;) of errors and warnings defined by this
+ specification are:
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;no-output-specified&quot; [fatal]&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; Raised when
+ writing to a &lt;code&gt;LSOutput&lt;/code&gt; if no output is specified in the
+ &lt;code&gt;LSOutput&lt;/code&gt;. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;unbound-prefix-in-entity-reference&quot; [fatal]&lt;/code&gt; &lt;/dt&gt;
+ &lt;dd&gt; Raised if the
+ configuration parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-namespaces'&gt;
+ namespaces&lt;/a&gt;&quot; is set to &lt;code&gt;true&lt;/code&gt; and an entity whose replacement text
+ contains unbound namespace prefixes is referenced in a location where
+ there are no bindings for the namespace prefixes. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;unsupported-encoding&quot; [fatal]&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; Raised if an unsupported
+ encoding is encountered. &lt;/dd&gt;
+ &lt;/dl&gt;
+ &lt;p&gt; In addition to raising the defined errors and warnings, implementations
+ are expected to raise implementation specific errors and warnings for any
+ other error and warning cases such as IO errors (file not found,
+ permission denied,...) and so on.
+ &lt;p&gt;See also the &lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407'&gt;Document Object Model (DOM) Level 3 Load
+and Save Specification&lt;/a&gt;.
+*/
+var LSSerializer = {
+
+<span id='org-w3c-dom-ls-LSSerializer-method-getDomConfig'>/**The &lt;code&gt;DOMConfiguration&lt;/code&gt; object used by the
+</span> &lt;code&gt;LSSerializer&lt;/code&gt; when serializing a DOM node.
+ &lt;br&gt; In addition to the parameters recognized by the &lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMConfiguration'&gt;
+ DOMConfiguration&lt;/a&gt; interface defined in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ , the &lt;code&gt;DOMConfiguration&lt;/code&gt; objects for
+ &lt;code&gt;LSSerializer&lt;/code&gt; adds, or modifies, the following
+ parameters:
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;canonical-form&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;true&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;optional&lt;/em&gt;] Writes the document according to the rules specified in [&lt;a href='http://www.w3.org/TR/2001/REC-xml-c14n-20010315'&gt;Canonical XML&lt;/a&gt;].
+ In addition to the behavior described in &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-canonical-form'&gt;
+ canonical-form&lt;/a&gt;&quot; [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ , setting this parameter to &lt;code&gt;true&lt;/code&gt; will set the parameters
+ &quot;format-pretty-print&quot;, &quot;discard-default-content&quot;, and &quot;xml-declaration
+ &quot;, to &lt;code&gt;false&lt;/code&gt;. Setting one of those parameters to
+ &lt;code&gt;true&lt;/code&gt; will set this parameter to &lt;code&gt;false&lt;/code&gt;.
+ Serializing an XML 1.1 document when &quot;canonical-form&quot; is
+ &lt;code&gt;true&lt;/code&gt; will generate a fatal error. &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;false&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] (&lt;em&gt;default&lt;/em&gt;) Do not canonicalize the output. &lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;discard-default-content&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;
+ &lt;code&gt;true&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] (&lt;em&gt;default&lt;/em&gt;) Use the &lt;code&gt;Attr.specified&lt;/code&gt; attribute to decide what attributes
+ should be discarded. Note that some implementations might use
+ whatever information available to the implementation (i.e. XML
+ schema, DTD, the &lt;code&gt;Attr.specified&lt;/code&gt; attribute, and so on) to
+ determine what attributes and content to discard if this parameter is
+ set to &lt;code&gt;true&lt;/code&gt;. &lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;false&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;]Keep all attributes and all content.&lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;&quot;format-pretty-print&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;
+ &lt;code&gt;true&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;optional&lt;/em&gt;] Formatting the output by adding whitespace to produce a pretty-printed,
+ indented, human-readable form. The exact form of the transformations
+ is not specified by this specification. Pretty-printing changes the
+ content of the document and may affect the validity of the document,
+ validating implementations should preserve validity. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;false&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] (&lt;em&gt;default&lt;/em&gt;) Don't pretty-print the result. &lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;ignore-unknown-character-denormalizations&quot;&lt;/code&gt; &lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;
+ &lt;code&gt;true&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] (&lt;em&gt;default&lt;/em&gt;) If, while verifying full normalization when [&lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/'&gt;XML 1.1&lt;/a&gt;] is
+ supported, a character is encountered for which the normalization
+ properties cannot be determined, then raise a
+ &lt;code&gt;&quot;unknown-character-denormalization&quot;&lt;/code&gt; warning (instead of
+ raising an error, if this parameter is not set) and ignore any
+ possible denormalizations caused by these characters. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;false&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;optional&lt;/em&gt;] Report a fatal error if a character is encountered for which the
+ processor cannot determine the normalization properties. &lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;normalize-characters&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt; This parameter is equivalent to
+ the one defined by &lt;code&gt;DOMConfiguration&lt;/code&gt; in [&lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;DOM Level 3 Core&lt;/a&gt;]
+ . Unlike in the Core, the default value for this parameter is
+ &lt;code&gt;true&lt;/code&gt;. While DOM implementations are not required to
+ support &lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/#dt-fullnorm'&gt;fully
+ normalizing&lt;/a&gt; the characters in the document according to appendix E of [&lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/'&gt;XML 1.1&lt;/a&gt;], this
+ parameter must be activated by default if supported. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;&quot;xml-declaration&quot;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;true&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] (&lt;em&gt;default&lt;/em&gt;) If a &lt;code&gt;Document&lt;/code&gt;, &lt;code&gt;Element&lt;/code&gt;, or &lt;code&gt;Entity&lt;/code&gt;
+  node is serialized, the XML declaration, or text declaration, should
+ be included. The version (&lt;code&gt;Document.xmlVersion&lt;/code&gt; if the
+ document is a Level 3 document and the version is non-null, otherwise
+ use the value &quot;1.0&quot;), and the output encoding (see
+ &lt;code&gt;LSSerializer.write&lt;/code&gt; for details on how to find the output
+ encoding) are specified in the serialized XML declaration. &lt;/dd&gt;
+ &lt;dt&gt;
+ &lt;code&gt;false&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;[&lt;em&gt;required&lt;/em&gt;] Do not serialize the XML and text declarations. Report a
+ &lt;code&gt;&quot;xml-declaration-needed&quot;&lt;/code&gt; warning if this will cause
+ problems (i.e. the serialized data is of an XML version other than [&lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204'&gt;XML 1.0&lt;/a&gt;], or an
+ encoding would be needed to be able to re-parse the serialized data). &lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;/dl&gt;
+*/
+getDomConfig : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSSerializer-method-getNewLine'>/**The end-of-line sequence of characters to be used in the XML being
+</span> written out. Any string is supported, but XML treats only a certain
+ set of characters sequence as end-of-line (See section 2.11,
+ &quot;End-of-Line Handling&quot; in [&lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204'&gt;XML 1.0&lt;/a&gt;], if the
+ serialized content is XML 1.0 or section 2.11, &quot;End-of-Line Handling&quot;
+ in [&lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/'&gt;XML 1.1&lt;/a&gt;], if the
+ serialized content is XML 1.1). Using other character sequences than
+ the recommended ones can result in a document that is either not
+ serializable or not well-formed).
+ &lt;br&gt; On retrieval, the default value of this attribute is the
+ implementation specific default end-of-line sequence. DOM
+ implementations should choose the default to match the usual
+ convention for text files in the environment being used.
+ Implementations must choose a default sequence that matches one of
+ those allowed by XML 1.0 or XML 1.1, depending on the serialized
+ content. Setting this attribute to &lt;code&gt;null&lt;/code&gt; will reset its
+ value to the default value.
+ &lt;br&gt;
+*/
+getNewLine : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSSerializer-method-setNewLine'>/**The end-of-line sequence of characters to be used in the XML being
+</span> written out. Any string is supported, but XML treats only a certain
+ set of characters sequence as end-of-line (See section 2.11,
+ &quot;End-of-Line Handling&quot; in [&lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204'&gt;XML 1.0&lt;/a&gt;], if the
+ serialized content is XML 1.0 or section 2.11, &quot;End-of-Line Handling&quot;
+ in [&lt;a href='http://www.w3.org/TR/2004/REC-xml11-20040204/'&gt;XML 1.1&lt;/a&gt;], if the
+ serialized content is XML 1.1). Using other character sequences than
+ the recommended ones can result in a document that is either not
+ serializable or not well-formed).
+ &lt;br&gt; On retrieval, the default value of this attribute is the
+ implementation specific default end-of-line sequence. DOM
+ implementations should choose the default to match the usual
+ convention for text files in the environment being used.
+ Implementations must choose a default sequence that matches one of
+ those allowed by XML 1.0 or XML 1.1, depending on the serialized
+ content. Setting this attribute to &lt;code&gt;null&lt;/code&gt; will reset its
+ value to the default value.
+ &lt;br&gt;
+*/
+setNewLine : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSSerializer-method-getFilter'>/**When the application provides a filter, the serializer will call out
+</span> to the filter before serializing each Node. The filter implementation
+ can choose to remove the node from the stream or to terminate the
+ serialization early.
+ &lt;br&gt; The filter is invoked after the operations requested by the
+ &lt;code&gt;DOMConfiguration&lt;/code&gt; parameters have been applied. For
+ example, CDATA sections won't be passed to the filter if &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-cdata-sections'&gt;
+ cdata-sections&lt;/a&gt;&quot; is set to &lt;code&gt;false&lt;/code&gt;.
+@hide 
+*/
+getFilter : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSSerializer-method-setFilter'>/**When the application provides a filter, the serializer will call out
+</span> to the filter before serializing each Node. The filter implementation
+ can choose to remove the node from the stream or to terminate the
+ serialization early.
+ &lt;br&gt; The filter is invoked after the operations requested by the
+ &lt;code&gt;DOMConfiguration&lt;/code&gt; parameters have been applied. For
+ example, CDATA sections won't be passed to the filter if &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-cdata-sections'&gt;
+ cdata-sections&lt;/a&gt;&quot; is set to &lt;code&gt;false&lt;/code&gt;.
+@hide 
+*/
+setFilter : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSSerializer-method-write'>/**Serialize the specified node as described above in the general
+</span> description of the &lt;code&gt;LSSerializer&lt;/code&gt; interface. The output is
+ written to the supplied &lt;code&gt;LSOutput&lt;/code&gt;.
+ &lt;br&gt; When writing to a &lt;code&gt;LSOutput&lt;/code&gt;, the encoding is found by
+ looking at the encoding information that is reachable through the
+ &lt;code&gt;LSOutput&lt;/code&gt; and the item to be written (or its owner
+ document) in this order:
+ &lt;ol&gt;
+ &lt;li&gt; &lt;code&gt;LSOutput.encoding&lt;/code&gt;,
+ &lt;/li&gt;
+ &lt;li&gt;
+ &lt;code&gt;Document.inputEncoding&lt;/code&gt;,
+ &lt;/li&gt;
+ &lt;li&gt;
+ &lt;code&gt;Document.xmlEncoding&lt;/code&gt;.
+ &lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;br&gt; If no encoding is reachable through the above properties, a
+ default encoding of &quot;UTF-8&quot; will be used. If the specified encoding
+ is not supported an &quot;unsupported-encoding&quot; fatal error is raised.
+ &lt;br&gt; If no output is specified in the &lt;code&gt;LSOutput&lt;/code&gt;, a
+ &quot;no-output-specified&quot; fatal error is raised.
+ &lt;br&gt; The implementation is responsible of associating the appropriate
+ media type with the serialized data.
+ &lt;br&gt; When writing to a HTTP URI, a HTTP PUT is performed. When writing
+ to other types of URIs, the mechanism for writing the data to the URI
+ is implementation dependent.
+@param {Object {Node}} nodeArg  The node to serialize.
+@param {Object {LSOutput}} destination The destination for the serialized DOM.
+@return {Boolean} Returns &lt;code&gt;true&lt;/code&gt; if &lt;code&gt;node&lt;/code&gt; was
+   successfully serialized. Return &lt;code&gt;false&lt;/code&gt; in case the
+   normal processing stopped but the implementation kept serializing
+   the document; the result of the serialization being implementation
+   dependent then.
+@exception LSException
+    SERIALIZE_ERR: Raised if the &lt;code&gt;LSSerializer&lt;/code&gt; was unable to
+   serialize the node. DOM applications should attach a
+   &lt;code&gt;DOMErrorHandler&lt;/code&gt; using the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-error-handler'&gt;
+   error-handler&lt;/a&gt;&quot; if they wish to get details on the error.
+*/
+write : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSSerializer-method-writeToURI'>/**A convenience method that acts as if &lt;code&gt;LSSerializer.write&lt;/code&gt;
+</span> was called with a &lt;code&gt;LSOutput&lt;/code&gt; with no encoding specified
+ and &lt;code&gt;LSOutput.systemId&lt;/code&gt; set to the &lt;code&gt;uri&lt;/code&gt;
+ argument.
+@param {Object {Node}} nodeArg  The node to serialize.
+@param {String} uri The URI to write to.
+@return {Boolean} Returns &lt;code&gt;true&lt;/code&gt; if &lt;code&gt;node&lt;/code&gt; was
+   successfully serialized. Return &lt;code&gt;false&lt;/code&gt; in case the
+   normal processing stopped but the implementation kept serializing
+   the document; the result of the serialization being implementation
+   dependent then.
+@exception LSException
+    SERIALIZE_ERR: Raised if the &lt;code&gt;LSSerializer&lt;/code&gt; was unable to
+   serialize the node. DOM applications should attach a
+   &lt;code&gt;DOMErrorHandler&lt;/code&gt; using the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-error-handler'&gt;
+   error-handler&lt;/a&gt;&quot; if they wish to get details on the error.
+*/
+writeToURI : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSSerializer-method-writeToString'>/**Serialize the specified node as described above in the general
+</span> description of the &lt;code&gt;LSSerializer&lt;/code&gt; interface. The output is
+ written to a &lt;code&gt;DOMString&lt;/code&gt; that is returned to the caller.
+ The encoding used is the encoding of the &lt;code&gt;DOMString&lt;/code&gt; type,
+ i.e. UTF-16. Note that no Byte Order Mark is generated in a
+ &lt;code&gt;DOMString&lt;/code&gt; object.
+@param {Object {Node}} nodeArg  The node to serialize.
+@return {String} Returns the serialized data.
+@exception DOMException
+    DOMSTRING_SIZE_ERR: Raised if the resulting string is too long to
+   fit in a &lt;code&gt;DOMString&lt;/code&gt;.
+@exception LSException
+    SERIALIZE_ERR: Raised if the &lt;code&gt;LSSerializer&lt;/code&gt; was unable to
+   serialize the node. DOM applications should attach a
+   &lt;code&gt;DOMErrorHandler&lt;/code&gt; using the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-error-handler'&gt;
+   error-handler&lt;/a&gt;&quot; if they wish to get details on the error.
+*/
+writeToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

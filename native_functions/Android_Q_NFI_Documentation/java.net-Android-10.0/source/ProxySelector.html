@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-ProxySelector'>/**@class java.net.ProxySelector
+</span>@extends java.lang.Object
+
+ Selects the proxy server to use, if any, when connecting to the
+ network resource referenced by a URL. A proxy selector is a
+ concrete sub-class of this class and is registered by invoking the
+ {@link java.net.ProxySelector#setDefault setDefault} method. The
+ currently registered proxy selector can be retrieved by calling
+ {@link java.net.ProxySelector#getDefault getDefault} method.
+
+ &lt;p&gt; When a proxy selector is registered, for instance, a subclass
+ of URLConnection class should call the {@link #select select}
+ method for each URL request so that the proxy selector can decide
+ if a direct, or proxied connection should be used. The {@link #select select} method returns an iterator over a collection with
+ the preferred connection approach.
+
+ &lt;p&gt; If a connection cannot be established to a proxy (PROXY or
+ SOCKS) servers then the caller should call the proxy selector's
+ {@link #connectFailed connectFailed} method to notify the proxy
+ selector that the proxy server is unavailable. &lt;/p&gt;
+
+ &lt;P&gt;The default proxy selector does enforce a
+ &lt;a href=&quot;doc-files/net-properties.html#Proxies&quot;&gt;set of System Properties&lt;/a&gt;
+ related to proxy settings.&lt;/P&gt;
+
+ @author Yingxian Wang
+ @author Jean-Christophe Collet
+ @since 1.5
+*/
+var ProxySelector = {
+
+<span id='java-net-ProxySelector-method-getDefault'>/**Gets the system-wide proxy selector.
+</span>@throws SecurityException
+          If a security manager has been installed and it denies
+ {@link NetPermission}{@code (&quot;getProxySelector&quot;)}
+@see #setDefault(ProxySelector)
+@return {Object {java.net.ProxySelector}} the system-wide {@code ProxySelector}
+@since 1.5
+*/
+getDefault : function(  ) {},
+
+<span id='java-net-ProxySelector-method-setDefault'>/**Sets (or unsets) the system-wide proxy selector.
+</span>
+ Note: non-standard protocol handlers may ignore this setting.
+@param {Object {ProxySelector}} ps The HTTP proxy selector, or
+          {@code null} to unset the proxy selector.
+@throws SecurityException
+          If a security manager has been installed and it denies
+ {@link NetPermission}{@code (&quot;setProxySelector&quot;)}
+@see #getDefault()
+@since 1.5
+*/
+setDefault : function(  ) {},
+
+<span id='java-net-ProxySelector-method-select'>/**Selects all the applicable proxies based on the protocol to
+</span> access the resource with and a destination address to access
+ the resource at.
+ The format of the URI is defined as follow:
+ &lt;UL&gt;
+ &lt;LI&gt;http URI for http connections&lt;/LI&gt;
+ &lt;LI&gt;https URI for https connections
+ &lt;LI&gt;{@code socket://host:port}&lt;br&gt;
+     for tcp client sockets connections&lt;/LI&gt;
+ &lt;/UL&gt;
+@param {Object {URI}} uri
+          The URI that a connection is required to
+@return {Object {java.util.List}} a List of Proxies. Each element in the
+          the List is of type
+          {@link java.net.Proxy Proxy};
+          when no proxy is available, the list will
+          contain one element of type
+          {@link java.net.Proxy Proxy}
+          that represents a direct connection.
+@throws IllegalArgumentException if the argument is null
+*/
+select : function(  ) {},
+
+<span id='java-net-ProxySelector-method-connectFailed'>/**Called to indicate that a connection could not be established
+</span> to a proxy/socks server. An implementation of this method can
+ temporarily remove the proxies or reorder the sequence of
+ proxies returned by {@link #select}(URI), using the address
+ and the IOException caught when trying to connect.
+@param {Object {URI}} uri
+          The URI that the proxy at sa failed to serve.
+@param {Object {SocketAddress}} sa
+          The socket address of the proxy/SOCKS server
+@param {Object {IOException}} ioe
+          The I/O exception thrown when the connect failed.
+@throws IllegalArgumentException if either argument is null
+*/
+connectFailed : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

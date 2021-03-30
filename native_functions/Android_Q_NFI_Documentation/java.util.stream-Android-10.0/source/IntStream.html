@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-stream-IntStream'>/**@class java.util.stream.IntStream
+</span> implements java.util.stream.BaseStream
+
+ A sequence of primitive int-valued elements supporting sequential and parallel
+ aggregate operations.  This is the {@code int} primitive specialization of
+ {@link java.util.stream.Stream}.
+
+ &lt;p&gt;The following example illustrates an aggregate operation using
+ {@link java.util.stream.Stream} and {@link java.util.stream.IntStream}, computing the sum of the weights of the
+ red widgets:
+
+ &lt;pre&gt;{@code
+     int sum = widgets.stream()
+                      .filter(w -&gt; w.getColor() == RED)
+                      .mapToInt(w -&gt; w.getWeight())
+                      .sum();
+ }&lt;/pre&gt;
+
+ See the class documentation for {@link java.util.stream.Stream} and the package documentation
+ for &lt;a href=&quot;package-summary.html&quot;&gt;java.util.stream&lt;/a&gt; for additional
+ specification of streams, stream operations, stream pipelines, and
+ parallelism.
+
+ @since 1.8
+ @see Stream
+ @see &lt;a href=&quot;package-summary.html&quot;&gt;java.util.stream&lt;/a&gt;
+*/
+var IntStream = {
+
+<span id='java-util-stream-IntStream-method-filter'>/**Returns a stream consisting of the elements of this stream that match
+</span> the given predicate.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@param {Object {IntPredicate}} predicate a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+                  &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+                  predicate to apply to each element to determine if it
+                  should be included
+@return {Object {java.util.stream.IntStream}} the new stream
+*/
+filter : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-map'>/**Returns a stream consisting of the results of applying the given
+</span> function to the elements of this stream.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@param {Object {IntUnaryOperator}} mapper a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+               &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+               function to apply to each element
+@return {Object {java.util.stream.IntStream}} the new stream
+*/
+map : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-mapToObj'>/**Returns an object-valued {@code Stream} consisting of the results of
+</span> applying the given function to the elements of this stream.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;
+     intermediate operation&lt;/a&gt;.
+@param {Object {java.util.function.IntFunction}} mapper a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+               &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+               function to apply to each element
+@param mapper a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+               &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+               function to apply to each element
+@return {Object {java.util.stream.Stream}} the new stream
+*/
+mapToObj : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-mapToLong'>/**Returns a {@code LongStream} consisting of the results of applying the
+</span> given function to the elements of this stream.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@param {Object {IntToLongFunction}} mapper a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+               &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+               function to apply to each element
+@return {Object {java.util.stream.LongStream}} the new stream
+*/
+mapToLong : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-mapToDouble'>/**Returns a {@code DoubleStream} consisting of the results of applying the
+</span> given function to the elements of this stream.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@param {Object {IntToDoubleFunction}} mapper a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+               &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+               function to apply to each element
+@return {Object {java.util.stream.DoubleStream}} the new stream
+*/
+mapToDouble : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-flatMap'>/**Returns a stream consisting of the results of replacing each element of
+</span> this stream with the contents of a mapped stream produced by applying
+ the provided mapping function to each element.  Each mapped stream is
+ {@link java.util.stream.BaseStream#close() closed} after its contents
+ have been placed into this stream.  (If a mapped stream is {@code null}
+ an empty stream is used, instead.)
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@param {Object {java.util.function.IntFunction}} mapper a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+               &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+               function to apply to each element which produces an
+               {@code IntStream} of new values
+@return {Object {java.util.stream.IntStream}} the new stream
+@see Stream#flatMap(Function)
+*/
+flatMap : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-distinct'>/**Returns a stream consisting of the distinct elements of this stream.
+</span>
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;stateful
+ intermediate operation&lt;/a&gt;.
+@return {Object {java.util.stream.IntStream}} the new stream
+*/
+distinct : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-sorted'>/**Returns a stream consisting of the elements of this stream in sorted
+</span> order.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;stateful
+ intermediate operation&lt;/a&gt;.
+@return {Object {java.util.stream.IntStream}} the new stream
+*/
+sorted : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-peek'>/**Returns a stream consisting of the elements of this stream, additionally
+</span> performing the provided action on each element as elements are consumed
+ from the resulting stream.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+
+ &lt;p&gt;For parallel stream pipelines, the action may be called at
+ whatever time and in whatever thread the element is made available by the
+ upstream operation.  If the action modifies shared state,
+ it is responsible for providing the required synchronization.
+@param {Object {IntConsumer}} action a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;
+               non-interfering&lt;/a&gt; action to perform on the elements as
+               they are consumed from the stream
+@param action a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;
+               non-interfering&lt;/a&gt; action to perform on the elements as
+               they are consumed from the stream
+@return {Object {java.util.stream.IntStream}} the new stream
+*/
+peek : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-limit'>/**Returns a stream consisting of the elements of this stream, truncated
+</span> to be no longer than {@code maxSize} in length.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;short-circuiting
+ stateful intermediate operation&lt;/a&gt;.
+@param {Number} maxSize the number of elements the stream should be limited to
+@param maxSize the number of elements the stream should be limited to
+@return {Object {java.util.stream.IntStream}} the new stream
+@throws IllegalArgumentException if {@code maxSize} is negative
+*/
+limit : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-skip'>/**Returns a stream consisting of the remaining elements of this stream
+</span> after discarding the first {@code n} elements of the stream.
+ If this stream contains fewer than {@code n} elements then an
+ empty stream will be returned.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;stateful
+ intermediate operation&lt;/a&gt;.
+@param {Number} n the number of leading elements to skip
+@param n the number of leading elements to skip
+@return {Object {java.util.stream.IntStream}} the new stream
+@throws IllegalArgumentException if {@code n} is negative
+*/
+skip : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-forEach'>/**Performs an action for each element of this stream.
+</span>
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+
+ &lt;p&gt;For parallel stream pipelines, this operation does &lt;em&gt;not&lt;/em&gt;
+ guarantee to respect the encounter order of the stream, as doing so
+ would sacrifice the benefit of parallelism.  For any given element, the
+ action may be performed at whatever time and in whatever thread the
+ library chooses.  If the action accesses shared state, it is
+ responsible for providing the required synchronization.
+@param {Object {IntConsumer}} action a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;
+               non-interfering&lt;/a&gt; action to perform on the elements
+*/
+forEach : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-forEachOrdered'>/**Performs an action for each element of this stream, guaranteeing that
+</span> each element is processed in encounter order for streams that have a
+ defined encounter order.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@param {Object {IntConsumer}} action a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;
+               non-interfering&lt;/a&gt; action to perform on the elements
+@see #forEach(IntConsumer)
+*/
+forEachOrdered : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-toArray'>/**Returns an array containing the elements of this stream.
+</span>
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@return {Number} an array containing the elements of this stream
+*/
+toArray : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-reduce'>/**Performs a &lt;a href=&quot;package-summary.html#Reduction&quot;&gt;reduction&lt;/a&gt; on the
+</span> elements of this stream, using the provided identity value and an
+ &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associative&lt;/a&gt;
+ accumulation function, and returns the reduced value.  This is equivalent
+ to:
+ &lt;pre&gt;{@code
+     int result = identity;
+     for (int element : this stream)
+         result = accumulator.applyAsInt(result, element)
+     return result;
+ }&lt;/pre&gt;
+
+ but is not constrained to execute sequentially.
+
+ &lt;p&gt;The {@code identity} value must be an identity for the accumulator
+ function. This means that for all {@code x},
+ {@code accumulator.apply(identity, x)} is equal to {@code x}.
+ The {@code accumulator} function must be an
+ &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associative&lt;/a&gt; function.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@param {Number} identity the identity value for the accumulating function
+@param {Object {IntBinaryOperator}} op an &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associative&lt;/a&gt;,
+           &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+           &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+           function for combining two values
+@param op an &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associative&lt;/a&gt;,
+           &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+           &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+           function for combining two values
+@return {Number} the result of the reduction
+@see #sum()
+@see #min()
+@see #max()
+@see #average()
+*/
+reduce : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-reduce'>/**Performs a &lt;a href=&quot;package-summary.html#Reduction&quot;&gt;reduction&lt;/a&gt; on the
+</span> elements of this stream, using an
+ &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associative&lt;/a&gt; accumulation
+ function, and returns an {@code OptionalInt} describing the reduced value,
+ if any. This is equivalent to:
+ &lt;pre&gt;{@code
+     boolean foundAny = false;
+     int result = null;
+     for (int element : this stream) {
+         if (!foundAny) {
+             foundAny = true;
+             result = element;
+         }
+         else
+             result = accumulator.applyAsInt(result, element);
+     }
+     return foundAny ? OptionalInt.of(result) : OptionalInt.empty();
+ }&lt;/pre&gt;
+
+ but is not constrained to execute sequentially.
+
+ &lt;p&gt;The {@code accumulator} function must be an
+ &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associative&lt;/a&gt; function.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@param {Object {IntBinaryOperator}} op an &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associative&lt;/a&gt;,
+           &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+           &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+           function for combining two values
+@return {Object {java.util.OptionalInt}} the result of the reduction
+@see #reduce(int, IntBinaryOperator)
+*/
+reduce : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-collect'>/**Performs a &lt;a href=&quot;package-summary.html#MutableReduction&quot;&gt;mutable
+</span> reduction&lt;/a&gt; operation on the elements of this stream.  A mutable
+ reduction is one in which the reduced value is a mutable result container,
+ such as an {@code ArrayList}, and elements are incorporated by updating
+ the state of the result rather than by replacing the result.  This
+ produces a result equivalent to:
+ &lt;pre&gt;{@code
+     R result = supplier.get();
+     for (int element : this stream)
+         accumulator.accept(result, element);
+     return result;
+ }&lt;/pre&gt;
+
+ &lt;p&gt;Like {@link #reduce(int, IntBinaryOperator)}, {@code collect} operations
+ can be parallelized without requiring additional synchronization.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@param {Object {java.util.function.Supplier}} supplier a function that creates a new result container. For a
+                 parallel execution, this function may be called
+                 multiple times and must return a fresh value each time.
+@param {Object {java.util.function.ObjIntConsumer}} accumulator an &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associative&lt;/a&gt;,
+                    &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+                    &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+                    function for incorporating an additional element into a result
+@param {Object {java.util.function.BiConsumer}} combiner an &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associative&lt;/a&gt;,
+                    &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+                    &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+                    function for combining two values, which must be
+                    compatible with the accumulator function
+@param combiner an &lt;a href=&quot;package-summary.html#Associativity&quot;&gt;associative&lt;/a&gt;,
+                    &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+                    &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+                    function for combining two values, which must be
+                    compatible with the accumulator function
+@return {Object {java.lang.Object}} the result of the reduction
+@see Stream#collect(Supplier, BiConsumer, BiConsumer)
+*/
+collect : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-sum'>/**Returns the sum of elements in this stream.  This is a special case
+</span> of a &lt;a href=&quot;package-summary.html#Reduction&quot;&gt;reduction&lt;/a&gt;
+ and is equivalent to:
+ &lt;pre&gt;{@code
+     return reduce(0, Integer::sum);
+ }&lt;/pre&gt;
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@return {Number} the sum of elements in this stream
+*/
+sum : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-min'>/**Returns an {@code OptionalInt} describing the minimum element of this
+</span> stream, or an empty optional if this stream is empty.  This is a special
+ case of a &lt;a href=&quot;package-summary.html#Reduction&quot;&gt;reduction&lt;/a&gt;
+ and is equivalent to:
+ &lt;pre&gt;{@code
+     return reduce(Integer::min);
+ }&lt;/pre&gt;
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal operation&lt;/a&gt;.
+@return {Object {java.util.OptionalInt}} an {@code OptionalInt} containing the minimum element of this
+ stream, or an empty {@code OptionalInt} if the stream is empty
+*/
+min : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-max'>/**Returns an {@code OptionalInt} describing the maximum element of this
+</span> stream, or an empty optional if this stream is empty.  This is a special
+ case of a &lt;a href=&quot;package-summary.html#Reduction&quot;&gt;reduction&lt;/a&gt;
+ and is equivalent to:
+ &lt;pre&gt;{@code
+     return reduce(Integer::max);
+ }&lt;/pre&gt;
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@return {Object {java.util.OptionalInt}} an {@code OptionalInt} containing the maximum element of this
+ stream, or an empty {@code OptionalInt} if the stream is empty
+*/
+max : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-count'>/**Returns the count of elements in this stream.  This is a special case of
+</span> a &lt;a href=&quot;package-summary.html#Reduction&quot;&gt;reduction&lt;/a&gt; and is
+ equivalent to:
+ &lt;pre&gt;{@code
+     return mapToLong(e -&gt; 1L).sum();
+ }&lt;/pre&gt;
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal operation&lt;/a&gt;.
+@return {Number} the count of elements in this stream
+*/
+count : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-average'>/**Returns an {@code OptionalDouble} describing the arithmetic mean of elements of
+</span> this stream, or an empty optional if this stream is empty.  This is a
+ special case of a
+ &lt;a href=&quot;package-summary.html#Reduction&quot;&gt;reduction&lt;/a&gt;.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@return {Object {java.util.OptionalDouble}} an {@code OptionalDouble} containing the average element of this
+ stream, or an empty optional if the stream is empty
+*/
+average : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-summaryStatistics'>/**Returns an {@code IntSummaryStatistics} describing various
+</span> summary data about the elements of this stream.  This is a special
+ case of a &lt;a href=&quot;package-summary.html#Reduction&quot;&gt;reduction&lt;/a&gt;.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@return {Object {java.util.IntSummaryStatistics}} an {@code IntSummaryStatistics} describing various summary data
+ about the elements of this stream
+*/
+summaryStatistics : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-anyMatch'>/**Returns whether any elements of this stream match the provided
+</span> predicate.  May not evaluate the predicate on all elements if not
+ necessary for determining the result.  If the stream is empty then
+ {@code false} is returned and the predicate is not evaluated.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;short-circuiting
+ terminal operation&lt;/a&gt;.
+@param {Object {IntPredicate}} predicate a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+                  &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+                  predicate to apply to elements of this stream
+@param predicate a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+                  &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+                  predicate to apply to elements of this stream
+@return {Boolean} {@code true} if any elements of the stream match the provided
+ predicate, otherwise {@code false}
+*/
+anyMatch : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-allMatch'>/**Returns whether all elements of this stream match the provided predicate.
+</span> May not evaluate the predicate on all elements if not necessary for
+ determining the result.  If the stream is empty then {@code true} is
+ returned and the predicate is not evaluated.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;short-circuiting
+ terminal operation&lt;/a&gt;.
+@param {Object {IntPredicate}} predicate a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+                  &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+                  predicate to apply to elements of this stream
+@param predicate a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+                  &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+                  predicate to apply to elements of this stream
+@return {Boolean} {@code true} if either all elements of the stream match the
+ provided predicate or the stream is empty, otherwise {@code false}
+*/
+allMatch : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-noneMatch'>/**Returns whether no elements of this stream match the provided predicate.
+</span> May not evaluate the predicate on all elements if not necessary for
+ determining the result.  If the stream is empty then {@code true} is
+ returned and the predicate is not evaluated.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;short-circuiting
+ terminal operation&lt;/a&gt;.
+@param {Object {IntPredicate}} predicate a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+                  &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+                  predicate to apply to elements of this stream
+@param predicate a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+                  &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+                  predicate to apply to elements of this stream
+@return {Boolean} {@code true} if either no elements of the stream match the
+ provided predicate or the stream is empty, otherwise {@code false}
+*/
+noneMatch : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-findFirst'>/**Returns an {@link OptionalInt} describing the first element of this
+</span> stream, or an empty {@code OptionalInt} if the stream is empty.  If the
+ stream has no encounter order, then any element may be returned.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;short-circuiting
+ terminal operation&lt;/a&gt;.
+@return {Object {java.util.OptionalInt}} an {@code OptionalInt} describing the first element of this stream,
+ or an empty {@code OptionalInt} if the stream is empty
+*/
+findFirst : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-findAny'>/**Returns an {@link OptionalInt} describing some element of the stream, or
+</span> an empty {@code OptionalInt} if the stream is empty.
+
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;short-circuiting
+ terminal operation&lt;/a&gt;.
+
+ &lt;p&gt;The behavior of this operation is explicitly nondeterministic; it is
+ free to select any element in the stream.  This is to allow for maximal
+ performance in parallel operations; the cost is that multiple invocations
+ on the same source may not return the same result.  (If a stable result
+ is desired, use {@link #findFirst}() instead.)
+@return {Object {java.util.OptionalInt}} an {@code OptionalInt} describing some element of this stream, or
+ an empty {@code OptionalInt} if the stream is empty
+@see #findFirst()
+*/
+findAny : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-asLongStream'>/**Returns a {@code LongStream} consisting of the elements of this stream,
+</span> converted to {@code long}.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@return {Object {java.util.stream.LongStream}} a {@code LongStream} consisting of the elements of this stream,
+ converted to {@code long}
+*/
+asLongStream : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-asDoubleStream'>/**Returns a {@code DoubleStream} consisting of the elements of this stream,
+</span> converted to {@code double}.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@return {Object {java.util.stream.DoubleStream}} a {@code DoubleStream} consisting of the elements of this stream,
+ converted to {@code double}
+*/
+asDoubleStream : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-boxed'>/**Returns a {@code Stream} consisting of the elements of this stream,
+</span> each boxed to an {@code Integer}.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@return {Object {java.util.stream.Stream}} a {@code Stream} consistent of the elements of this stream,
+ each boxed to an {@code Integer}
+*/
+boxed : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-sequential'>/**
+</span>*/
+sequential : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-parallel'>/**
+</span>*/
+parallel : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-iterator'>/**
+</span>*/
+iterator : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-spliterator'>/**
+</span>*/
+spliterator : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-builder'>/**Returns a builder for an {@code IntStream}.
+</span>@return {Object {java.util.stream.IntStream.Builder}} a stream builder
+*/
+builder : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-empty'>/**Returns an empty sequential {@code IntStream}.
+</span>@return {Object {java.util.stream.IntStream}} an empty sequential stream
+*/
+empty : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-of'>/**Returns a sequential {@code IntStream} containing a single element.
+</span>@param {Number} t the single element
+@return {Object {java.util.stream.IntStream}} a singleton sequential stream
+*/
+of : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-of'>/**Returns a sequential ordered stream whose elements are the specified values.
+</span>@param {Object {int[]}} values the elements of the new stream
+@return {Object {java.util.stream.IntStream}} the new stream
+*/
+of : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-iterate'>/**Returns an infinite sequential ordered {@code IntStream} produced by iterative
+</span> application of a function {@code f} to an initial element {@code seed},
+ producing a {@code Stream} consisting of {@code seed}, {@code f(seed)},
+ {@code f(f(seed))}, etc.
+
+ &lt;p&gt;The first element (position {@code 0}) in the {@code IntStream} will be
+ the provided {@code seed}.  For {@code n &gt; 0}, the element at position
+ {@code n}, will be the result of applying the function {@code f} to the
+ element at position {@code n - 1}.
+@param {Number} seed the initial element
+@param {Object {IntUnaryOperator}} f a function to be applied to to the previous element to produce
+          a new element
+@return {Object {java.util.stream.IntStream}} A new sequential {@code IntStream}
+*/
+iterate : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-generate'>/**Returns an infinite sequential unordered stream where each element is
+</span> generated by the provided {@code IntSupplier}.  This is suitable for
+ generating constant streams, streams of random elements, etc.
+@param {Object {IntSupplier}} s the {@code IntSupplier} for generated elements
+@return {Object {java.util.stream.IntStream}} a new infinite sequential unordered {@code IntStream}
+*/
+generate : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-range'>/**Returns a sequential ordered {@code IntStream} from {@code startInclusive}
+</span> (inclusive) to {@code endExclusive} (exclusive) by an incremental step of
+ {@code 1}.
+@param {Number} startInclusive the (inclusive) initial value
+@param {Number} endExclusive the exclusive upper bound
+@param endExclusive the exclusive upper bound
+@return {Object {java.util.stream.IntStream}} a sequential {@code IntStream} for the range of {@code int}
+         elements
+*/
+range : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-rangeClosed'>/**Returns a sequential ordered {@code IntStream} from {@code startInclusive}
+</span> (inclusive) to {@code endInclusive} (inclusive) by an incremental step of
+ {@code 1}.
+@param {Number} startInclusive the (inclusive) initial value
+@param {Number} endInclusive the inclusive upper bound
+@param endInclusive the inclusive upper bound
+@return {Object {java.util.stream.IntStream}} a sequential {@code IntStream} for the range of {@code int}
+         elements
+*/
+rangeClosed : function(  ) {},
+
+<span id='java-util-stream-IntStream-method-concat'>/**Creates a lazily concatenated stream whose elements are all the
+</span> elements of the first stream followed by all the elements of the
+ second stream.  The resulting stream is ordered if both
+ of the input streams are ordered, and parallel if either of the input
+ streams is parallel.  When the resulting stream is closed, the close
+ handlers for both input streams are invoked.
+@param {Object {IntStream}} a the first stream
+@param {Object {IntStream}} b the second stream
+@param b the second stream
+@return {Object {java.util.stream.IntStream}} the concatenation of the two input streams
+*/
+concat : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

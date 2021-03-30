@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-invoke-VolatileCallSite'>/**@class java.lang.invoke.VolatileCallSite
+</span>@extends java.lang.invoke.CallSite
+
+ A {@code VolatileCallSite} is a {@link java.lang.invoke.CallSite} whose target acts like a volatile variable.
+ An {@code invokedynamic} instruction linked to a {@code VolatileCallSite} sees updates
+ to its call site target immediately, even if the update occurs in another thread.
+ There may be a performance penalty for such tight coupling between threads.
+ &lt;p&gt;
+ In other respects, a {@code VolatileCallSite} is interchangeable
+ with {@code MutableCallSite}.
+ @see MutableCallSite
+ @author John Rose, JSR 292 EG
+*/
+var VolatileCallSite = {
+
+<span id='java-lang-invoke-VolatileCallSite-method-getTarget'>/**Returns the target method of the call site, which behaves
+</span> like a {@code volatile} field of the {@code VolatileCallSite}.
+ &lt;p&gt;
+ The interactions of {@code getTarget} with memory are the same
+ as of a read from a {@code volatile} field.
+ &lt;p&gt;
+ In particular, the current thread is required to issue a fresh
+ read of the target from memory, and must not fail to see
+ a recent update to the target by another thread.
+@return {Object {java.lang.invoke.MethodHandle}} the linkage state of this call site, a method handle which can change over time
+@see #setTarget
+*/
+getTarget : function(  ) {},
+
+<span id='java-lang-invoke-VolatileCallSite-method-setTarget'>/**Updates the target method of this call site, as a volatile variable.
+</span> The type of the new target must agree with the type of the old target.
+ &lt;p&gt;
+ The interactions with memory are the same as of a write to a volatile field.
+ In particular, any threads is guaranteed to see the updated target
+ the next time it calls {@code getTarget}.
+@param {Object {MethodHandle}} newTarget the new target
+@throws NullPointerException if the proposed new target is null
+@throws WrongMethodTypeException if the proposed new target
+         has a method type that differs from the previous target
+@see #getTarget
+*/
+setTarget : function(  ) {},
+
+<span id='java-lang-invoke-VolatileCallSite-method-dynamicInvoker'>/**{@inheritDoc}
+</span>*/
+dynamicInvoker : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-awt-font-NumericShaper'>/**@class java.awt.font.NumericShaper
+</span> implements java.io.Serializable
+
+@extends java.lang.Object
+
+ The &lt;code&gt;NumericShaper&lt;/code&gt; class is used to convert Latin-1 (European)
+ digits to other Unicode decimal digits.  Users of this class will
+ primarily be people who wish to present data using
+ national digit shapes, but find it more convenient to represent the
+ data internally using Latin-1 (European) digits.  This does not
+ interpret the deprecated numeric shape selector character (U+206E).
+ &lt;p&gt;
+ Instances of &lt;code&gt;NumericShaper&lt;/code&gt; are typically applied
+ as attributes to text with the
+ {@link java.awt.font.TextAttribute#NUMERIC_SHAPING NUMERIC_SHAPING} attribute
+ of the &lt;code&gt;TextAttribute&lt;/code&gt; class.
+ For example, this code snippet causes a &lt;code&gt;TextLayout&lt;/code&gt; to
+ shape European digits to Arabic in an Arabic context:&lt;br&gt;
+ &lt;blockquote&gt;&lt;pre&gt;
+ Map map = new HashMap();
+ map.put(TextAttribute.NUMERIC_SHAPING,
+     NumericShaper.getContextualShaper(NumericShaper.ARABIC));
+ FontRenderContext frc = ...;
+ TextLayout layout = new TextLayout(text, map, frc);
+ layout.draw(g2d, x, y);
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;br&gt;
+ It is also possible to perform numeric shaping explicitly using instances
+ of &lt;code&gt;NumericShaper&lt;/code&gt;, as this code snippet demonstrates:&lt;br&gt;
+ &lt;blockquote&gt;&lt;pre&gt;
+ char[] text = ...;
+ // shape all EUROPEAN digits (except zero) to ARABIC digits
+ NumericShaper shaper = NumericShaper.getShaper(NumericShaper.ARABIC);
+ shaper.shape(text, start, count);
+
+ // shape European digits to ARABIC digits if preceding text is Arabic, or
+ // shape European digits to TAMIL digits if preceding text is Tamil, or
+ // leave European digits alone if there is no preceding text, or
+ // preceding text is neither Arabic nor Tamil
+ NumericShaper shaper =
+     NumericShaper.getContextualShaper(NumericShaper.ARABIC |
+                                         NumericShaper.TAMIL,
+                                       NumericShaper.EUROPEAN);
+ shaper.shape(text, start, count);
+ &lt;/pre&gt;&lt;/blockquote&gt;
+
+ &lt;p&gt;&lt;b&gt;Bit mask- and enum-based Unicode ranges&lt;/b&gt;&lt;/p&gt;
+
+ &lt;p&gt;This class supports two different programming interfaces to
+ represent Unicode ranges for script-specific digits: bit
+ mask-based ones, such as {@link #ARABIC java.awt.font.NumericShaper.ARABIC}, and
+ enum-based ones, such as {@link java.awt.font.NumericShaper.Range#ARABIC}.
+ Multiple ranges can be specified by ORing bit mask-based constants,
+ such as:
+ &lt;blockquote&gt;&lt;pre&gt;
+ NumericShaper.ARABIC | NumericShaper.TAMIL
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ or creating a {@code Set} with the {@link java.awt.font.NumericShaper.Range}
+ constants, such as:
+ &lt;blockquote&gt;&lt;pre&gt;
+ EnumSet.of(NumericShaper.Scirpt.ARABIC, NumericShaper.Range.TAMIL)
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ The enum-based ranges are a super set of the bit mask-based ones.
+
+ &lt;p&gt;If the two interfaces are mixed (including serialization),
+ Unicode range values are mapped to their counterparts where such
+ mapping is possible, such as {@code NumericShaper.Range.ARABIC}
+ from/to {@code NumericShaper.ARABIC}.  If any unmappable range
+ values are specified, such as {@code NumericShaper.Range.BALINESE},
+ those ranges are ignored.
+
+ &lt;p&gt;&lt;b&gt;Decimal Digits Precedence&lt;/b&gt;&lt;/p&gt;
+
+ &lt;p&gt;A Unicode range may have more than one set of decimal digits. If
+ multiple decimal digits sets are specified for the same Unicode
+ range, one of the sets will take precedence as follows.
+
+ &lt;table border=1 cellspacing=3 cellpadding=0 summary=&quot;NumericShaper constants precedence.&quot;&gt;
+    &lt;tr&gt;
+       &lt;th class=&quot;TableHeadingColor&quot;&gt;Unicode Range&lt;/th&gt;
+       &lt;th class=&quot;TableHeadingColor&quot;&gt;&lt;code&gt;NumericShaper&lt;/code&gt; Constants&lt;/th&gt;
+       &lt;th class=&quot;TableHeadingColor&quot;&gt;Precedence&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+       &lt;td rowspan=&quot;2&quot;&gt;Arabic&lt;/td&gt;
+       &lt;td&gt;{@link java.awt.font.NumericShaper#ARABIC java.awt.font.NumericShaper.ARABIC}&lt;br&gt;
+           {@link java.awt.font.NumericShaper#EASTERN_ARABIC java.awt.font.NumericShaper.EASTERN_ARABIC}&lt;/td&gt;
+       &lt;td&gt;{@link java.awt.font.NumericShaper#EASTERN_ARABIC java.awt.font.NumericShaper.EASTERN_ARABIC}&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+       &lt;td&gt;{@link java.awt.font.NumericShaper.Range#ARABIC}&lt;br&gt;
+           {@link java.awt.font.NumericShaper.Range#EASTERN_ARABIC}&lt;/td&gt;
+       &lt;td&gt;{@link java.awt.font.NumericShaper.Range#EASTERN_ARABIC}&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+       &lt;td&gt;Tai Tham&lt;/td&gt;
+       &lt;td&gt;{@link java.awt.font.NumericShaper.Range#TAI_THAM_HORA}&lt;br&gt;
+           {@link java.awt.font.NumericShaper.Range#TAI_THAM_THAM}&lt;/td&gt;
+       &lt;td&gt;{@link java.awt.font.NumericShaper.Range#TAI_THAM_THAM}&lt;/td&gt;
+    &lt;/tr&gt;
+ &lt;/table&gt;
+
+ @since 1.4
+*/
+var NumericShaper = {
+
+<span id='java-awt-font-NumericShaper-property-EUROPEAN'>/**Identifies the Latin-1 (European) and extended range, and
+</span>  Latin-1 (European) decimal base.
+*/
+EUROPEAN : &quot;1&quot;,
+<span id='java-awt-font-NumericShaper-property-ARABIC'>/**Identifies the ARABIC range and decimal base. */
+</span>ARABIC : &quot;2&quot;,
+<span id='java-awt-font-NumericShaper-property-EASTERN_ARABIC'>/**Identifies the ARABIC range and ARABIC_EXTENDED decimal base. */
+</span>EASTERN_ARABIC : &quot;4&quot;,
+<span id='java-awt-font-NumericShaper-property-DEVANAGARI'>/**Identifies the DEVANAGARI range and decimal base. */
+</span>DEVANAGARI : &quot;8&quot;,
+<span id='java-awt-font-NumericShaper-property-BENGALI'>/**Identifies the BENGALI range and decimal base. */
+</span>BENGALI : &quot;16&quot;,
+<span id='java-awt-font-NumericShaper-property-GURMUKHI'>/**Identifies the GURMUKHI range and decimal base. */
+</span>GURMUKHI : &quot;32&quot;,
+<span id='java-awt-font-NumericShaper-property-GUJARATI'>/**Identifies the GUJARATI range and decimal base. */
+</span>GUJARATI : &quot;64&quot;,
+<span id='java-awt-font-NumericShaper-property-ORIYA'>/**Identifies the ORIYA range and decimal base. */
+</span>ORIYA : &quot;128&quot;,
+<span id='java-awt-font-NumericShaper-property-TAMIL'>/**Identifies the TAMIL range and decimal base. */
+</span>TAMIL : &quot;256&quot;,
+<span id='java-awt-font-NumericShaper-property-TELUGU'>/**Identifies the TELUGU range and decimal base. */
+</span>TELUGU : &quot;512&quot;,
+<span id='java-awt-font-NumericShaper-property-KANNADA'>/**Identifies the KANNADA range and decimal base. */
+</span>KANNADA : &quot;1024&quot;,
+<span id='java-awt-font-NumericShaper-property-MALAYALAM'>/**Identifies the MALAYALAM range and decimal base. */
+</span>MALAYALAM : &quot;2048&quot;,
+<span id='java-awt-font-NumericShaper-property-THAI'>/**Identifies the THAI range and decimal base. */
+</span>THAI : &quot;4096&quot;,
+<span id='java-awt-font-NumericShaper-property-LAO'>/**Identifies the LAO range and decimal base. */
+</span>LAO : &quot;8192&quot;,
+<span id='java-awt-font-NumericShaper-property-TIBETAN'>/**Identifies the TIBETAN range and decimal base. */
+</span>TIBETAN : &quot;16384&quot;,
+<span id='java-awt-font-NumericShaper-property-MYANMAR'>/**Identifies the MYANMAR range and decimal base. */
+</span>MYANMAR : &quot;32768&quot;,
+<span id='java-awt-font-NumericShaper-property-ETHIOPIC'>/**Identifies the ETHIOPIC range and decimal base. */
+</span>ETHIOPIC : &quot;65536&quot;,
+<span id='java-awt-font-NumericShaper-property-KHMER'>/**Identifies the KHMER range and decimal base. */
+</span>KHMER : &quot;131072&quot;,
+<span id='java-awt-font-NumericShaper-property-MONGOLIAN'>/**Identifies the MONGOLIAN range and decimal base. */
+</span>MONGOLIAN : &quot;262144&quot;,
+<span id='java-awt-font-NumericShaper-property-ALL_RANGES'>/**Identifies all ranges, for full contextual shaping.
+</span>
+ &lt;p&gt;This constant specifies all of the bit mask-based
+ ranges. Use {@code EmunSet.allOf(NumericShaper.Range.class)} to
+ specify all of the enum-based ranges.
+*/
+ALL_RANGES : &quot;524287&quot;,
+<span id='java-awt-font-NumericShaper-method-getShaper'>/**Returns a shaper for the provided unicode range.  All
+</span> Latin-1 (EUROPEAN) digits are converted
+ to the corresponding decimal unicode digits.
+@param {Number} singleRange the specified Unicode range
+@return {Object {java.awt.font.NumericShaper}} a non-contextual numeric shaper
+@throws IllegalArgumentException if the range is not a single range
+*/
+getShaper : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-getShaper'>/**Returns a shaper for the provided Unicode
+</span> range. All Latin-1 (EUROPEAN) digits are converted to the
+ corresponding decimal digits of the specified Unicode range.
+@param {Object {NumericShaper.Range}} singleRange the Unicode range given by a {@link
+                    NumericShaper.Range} constant.
+@return {Object {java.awt.font.NumericShaper}} a non-contextual {@code NumericShaper}.
+@throws NullPointerException if {@code singleRange} is {@code null}
+@since 1.7
+*/
+getShaper : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-getContextualShaper'>/**Returns a contextual shaper for the provided unicode range(s).
+</span> Latin-1 (EUROPEAN) digits are converted to the decimal digits
+ corresponding to the range of the preceding text, if the
+ range is one of the provided ranges.  Multiple ranges are
+ represented by or-ing the values together, such as,
+ &lt;code&gt;NumericShaper.ARABIC | NumericShaper.THAI&lt;/code&gt;.  The
+ shaper assumes EUROPEAN as the starting context, that is, if
+ EUROPEAN digits are encountered before any strong directional
+ text in the string, the context is presumed to be EUROPEAN, and
+ so the digits will not shape.
+@param {Number} ranges the specified Unicode ranges
+@return {Object {java.awt.font.NumericShaper}} a shaper for the specified ranges
+*/
+getContextualShaper : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-getContextualShaper'>/**Returns a contextual shaper for the provided Unicode
+</span> range(s). The Latin-1 (EUROPEAN) digits are converted to the
+ decimal digits corresponding to the range of the preceding
+ text, if the range is one of the provided ranges.
+
+ &lt;p&gt;The shaper assumes EUROPEAN as the starting context, that
+ is, if EUROPEAN digits are encountered before any strong
+ directional text in the string, the context is presumed to be
+ EUROPEAN, and so the digits will not shape.
+@param {Object {java.util.Set}} ranges the specified Unicode ranges
+@return {Object {java.awt.font.NumericShaper}} a contextual shaper for the specified ranges
+@throws NullPointerException if {@code ranges} is {@code null}.
+@since 1.7
+*/
+getContextualShaper : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-getContextualShaper'>/**Returns a contextual shaper for the provided unicode range(s).
+</span> Latin-1 (EUROPEAN) digits will be converted to the decimal digits
+ corresponding to the range of the preceding text, if the
+ range is one of the provided ranges.  Multiple ranges are
+ represented by or-ing the values together, for example,
+ &lt;code&gt;NumericShaper.ARABIC | NumericShaper.THAI&lt;/code&gt;.  The
+ shaper uses defaultContext as the starting context.
+@param {Number} ranges the specified Unicode ranges
+@param {Number} defaultContext the starting context, such as
+ &lt;code&gt;NumericShaper.EUROPEAN&lt;/code&gt;
+@return {Object {java.awt.font.NumericShaper}} a shaper for the specified Unicode ranges.
+@throws IllegalArgumentException if the specified
+ &lt;code&gt;defaultContext&lt;/code&gt; is not a single valid range.
+*/
+getContextualShaper : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-getContextualShaper'>/**Returns a contextual shaper for the provided Unicode range(s).
+</span> The Latin-1 (EUROPEAN) digits will be converted to the decimal
+ digits corresponding to the range of the preceding text, if the
+ range is one of the provided ranges. The shaper uses {@code
+ defaultContext} as the starting context.
+@param {Object {java.util.Set}} ranges the specified Unicode ranges
+@param {Object {NumericShaper.Range}} defaultContext the starting context, such as
+                       {@code NumericShaper.Range.EUROPEAN}
+@return {Object {java.awt.font.NumericShaper}} a contextual shaper for the specified Unicode ranges.
+@throws NullPointerException
+         if {@code ranges} or {@code defaultContext} is {@code null}
+@since 1.7
+*/
+getContextualShaper : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-shape'>/**Converts the digits in the text that occur between start and
+</span> start + count.
+@param {Object {char[]}} text an array of characters to convert
+@param {Number} start the index into &lt;code&gt;text&lt;/code&gt; to start
+        converting
+@param {Number} count the number of characters in &lt;code&gt;text&lt;/code&gt;
+        to convert
+@throws IndexOutOfBoundsException if start or start + count is
+        out of bounds
+@throws NullPointerException if text is null
+*/
+shape : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-shape'>/**Converts the digits in the text that occur between start and
+</span> start + count, using the provided context.
+ Context is ignored if the shaper is not a contextual shaper.
+@param {Object {char[]}} text an array of characters
+@param {Number} start the index into &lt;code&gt;text&lt;/code&gt; to start
+        converting
+@param {Number} count the number of characters in &lt;code&gt;text&lt;/code&gt;
+        to convert
+@param {Number} context the context to which to convert the
+        characters, such as &lt;code&gt;NumericShaper.EUROPEAN&lt;/code&gt;
+@throws IndexOutOfBoundsException if start or start + count is
+        out of bounds
+@throws NullPointerException if text is null
+@throws IllegalArgumentException if this is a contextual shaper
+ and the specified &lt;code&gt;context&lt;/code&gt; is not a single valid
+ range.
+*/
+shape : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-shape'>/**Converts the digits in the text that occur between {@code
+</span> start} and {@code start + count}, using the provided {@code
+ context}. {@code Context} is ignored if the shaper is not a
+ contextual shaper.
+@param {Object {char[]}} text  a {@code char} array
+@param {Number} start the index into {@code text} to start converting
+@param {Number} count the number of {@code char}s in {@code text}
+              to convert
+@param {Object {NumericShaper.Range}} context the context to which to convert the characters,
+                such as {@code NumericShaper.Range.EUROPEAN}
+@throws IndexOutOfBoundsException
+         if {@code start} or {@code start + count} is out of bounds
+@throws NullPointerException
+         if {@code text} or {@code context} is null
+@since 1.7
+*/
+shape : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-isContextual'>/**Returns a &lt;code&gt;boolean&lt;/code&gt; indicating whether or not
+</span> this shaper shapes contextually.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if this shaper is contextual;
+         &lt;code&gt;false&lt;/code&gt; otherwise.
+*/
+isContextual : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-getRanges'>/**Returns an &lt;code&gt;int&lt;/code&gt; that ORs together the values for
+</span> all the ranges that will be shaped.
+ &lt;p&gt;
+ For example, to check if a shaper shapes to Arabic, you would use the
+ following:
+ &lt;blockquote&gt;
+   {@code if ((shaper.getRanges() &amp; shaper.ARABIC) != 0) &amp;#123; ... }
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;Note that this method supports only the bit mask-based
+ ranges. Call {@link #getRangeSet}() for the enum-based ranges.
+@return {Number} the values for all the ranges to be shaped.
+*/
+getRanges : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-getRangeSet'>/**Returns a {@code Set} representing all the Unicode ranges in
+</span> this {@code NumericShaper} that will be shaped.
+@return {Object {java.util.Set}} all the Unicode ranges to be shaped.
+@since 1.7
+*/
+getRangeSet : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-hashCode'>/**Returns a hash code for this shaper.
+</span>@return {Number} this shaper's hash code.
+@see java.lang.Object#hashCode
+*/
+hashCode : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-equals'>/**Returns {@code true} if the specified object is an instance of
+</span> &lt;code&gt;NumericShaper&lt;/code&gt; and shapes identically to this one,
+ regardless of the range representations, the bit mask or the
+ enum. For example, the following code produces {@code &quot;true&quot;}.
+ &lt;blockquote&gt;&lt;pre&gt;
+ NumericShaper ns1 = NumericShaper.getShaper(NumericShaper.ARABIC);
+ NumericShaper ns2 = NumericShaper.getShaper(NumericShaper.Range.ARABIC);
+ System.out.println(ns1.equals(ns2));
+ &lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {Object}} o the specified object to compare to this
+          &lt;code&gt;NumericShaper&lt;/code&gt;
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if &lt;code&gt;o&lt;/code&gt; is an instance
+         of &lt;code&gt;NumericShaper&lt;/code&gt; and shapes in the same way;
+         &lt;code&gt;false&lt;/code&gt; otherwise.
+@see java.lang.Object#equals(java.lang.Object)
+*/
+equals : function(  ) {},
+
+<span id='java-awt-font-NumericShaper-method-toString'>/**Returns a &lt;code&gt;String&lt;/code&gt; that describes this shaper. This method
+</span> is used for debugging purposes only.
+@return {String} a &lt;code&gt;String&lt;/code&gt; describing this shaper.
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

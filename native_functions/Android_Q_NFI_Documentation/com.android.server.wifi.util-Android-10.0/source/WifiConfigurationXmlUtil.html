@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil'>/**@class com.android.server.wifi.util.XmlUtil.WifiConfigurationXmlUtil
+</span>@extends java.lang.Object
+
+ Utility class to serialize and deserialize {@link WifiConfiguration} object to XML &amp;
+ vice versa.
+ This is used by both {@link com.android.server.wifi.WifiConfigStore} &amp;
+ {@link com.android.server.wifi.WifiBackupRestore} modules.
+ The |writeConfigurationToXml| has 2 versions, one for backup and one for config store.
+ There is only 1 version of |parseXmlToConfiguration| for both backup &amp; config store.
+ The parse method is written so that any element added/deleted in future revisions can
+ be easily handled.
+*/
+var WifiConfigurationXmlUtil = {
+
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_SSID'>/** List of XML tags corresponding to WifiConfiguration object elements.
+</span>*/
+XML_TAG_SSID : &quot;SSID&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_BSSID'>/***/
+</span>XML_TAG_BSSID : &quot;BSSID&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_CONFIG_KEY'>/***/
+</span>XML_TAG_CONFIG_KEY : &quot;ConfigKey&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_PRE_SHARED_KEY'>/***/
+</span>XML_TAG_PRE_SHARED_KEY : &quot;PreSharedKey&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_WEP_KEYS'>/***/
+</span>XML_TAG_WEP_KEYS : &quot;WEPKeys&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_WEP_TX_KEY_INDEX'>/***/
+</span>XML_TAG_WEP_TX_KEY_INDEX : &quot;WEPTxKeyIndex&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_HIDDEN_SSID'>/***/
+</span>XML_TAG_HIDDEN_SSID : &quot;HiddenSSID&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_REQUIRE_PMF'>/***/
+</span>XML_TAG_REQUIRE_PMF : &quot;RequirePMF&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_ALLOWED_KEY_MGMT'>/***/
+</span>XML_TAG_ALLOWED_KEY_MGMT : &quot;AllowedKeyMgmt&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_ALLOWED_PROTOCOLS'>/***/
+</span>XML_TAG_ALLOWED_PROTOCOLS : &quot;AllowedProtocols&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_ALLOWED_AUTH_ALGOS'>/***/
+</span>XML_TAG_ALLOWED_AUTH_ALGOS : &quot;AllowedAuthAlgos&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_ALLOWED_GROUP_CIPHERS'>/***/
+</span>XML_TAG_ALLOWED_GROUP_CIPHERS : &quot;AllowedGroupCiphers&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_ALLOWED_PAIRWISE_CIPHERS'>/***/
+</span>XML_TAG_ALLOWED_PAIRWISE_CIPHERS : &quot;AllowedPairwiseCiphers&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_ALLOWED_GROUP_MGMT_CIPHERS'>/***/
+</span>XML_TAG_ALLOWED_GROUP_MGMT_CIPHERS : &quot;AllowedGroupMgmtCiphers&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_ALLOWED_SUITE_B_CIPHERS'>/***/
+</span>XML_TAG_ALLOWED_SUITE_B_CIPHERS : &quot;AllowedSuiteBCiphers&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_SHARED'>/***/
+</span>XML_TAG_SHARED : &quot;Shared&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_STATUS'>/***/
+</span>XML_TAG_STATUS : &quot;Status&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_FQDN'>/***/
+</span>XML_TAG_FQDN : &quot;FQDN&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_PROVIDER_FRIENDLY_NAME'>/***/
+</span>XML_TAG_PROVIDER_FRIENDLY_NAME : &quot;ProviderFriendlyName&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_LINKED_NETWORKS_LIST'>/***/
+</span>XML_TAG_LINKED_NETWORKS_LIST : &quot;LinkedNetworksList&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_DEFAULT_GW_MAC_ADDRESS'>/***/
+</span>XML_TAG_DEFAULT_GW_MAC_ADDRESS : &quot;DefaultGwMacAddress&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_VALIDATED_INTERNET_ACCESS'>/***/
+</span>XML_TAG_VALIDATED_INTERNET_ACCESS : &quot;ValidatedInternetAccess&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_NO_INTERNET_ACCESS_EXPECTED'>/***/
+</span>XML_TAG_NO_INTERNET_ACCESS_EXPECTED : &quot;NoInternetAccessExpected&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_USER_APPROVED'>/***/
+</span>XML_TAG_USER_APPROVED : &quot;UserApproved&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_METERED_HINT'>/***/
+</span>XML_TAG_METERED_HINT : &quot;MeteredHint&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_METERED_OVERRIDE'>/***/
+</span>XML_TAG_METERED_OVERRIDE : &quot;MeteredOverride&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_USE_EXTERNAL_SCORES'>/***/
+</span>XML_TAG_USE_EXTERNAL_SCORES : &quot;UseExternalScores&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_NUM_ASSOCIATION'>/***/
+</span>XML_TAG_NUM_ASSOCIATION : &quot;NumAssociation&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_CREATOR_UID'>/***/
+</span>XML_TAG_CREATOR_UID : &quot;CreatorUid&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_CREATOR_NAME'>/***/
+</span>XML_TAG_CREATOR_NAME : &quot;CreatorName&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_CREATION_TIME'>/***/
+</span>XML_TAG_CREATION_TIME : &quot;CreationTime&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_LAST_UPDATE_UID'>/***/
+</span>XML_TAG_LAST_UPDATE_UID : &quot;LastUpdateUid&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_LAST_UPDATE_NAME'>/***/
+</span>XML_TAG_LAST_UPDATE_NAME : &quot;LastUpdateName&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_LAST_CONNECT_UID'>/***/
+</span>XML_TAG_LAST_CONNECT_UID : &quot;LastConnectUid&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_IS_LEGACY_PASSPOINT_CONFIG'>/***/
+</span>XML_TAG_IS_LEGACY_PASSPOINT_CONFIG : &quot;IsLegacyPasspointConfig&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_ROAMING_CONSORTIUM_OIS'>/***/
+</span>XML_TAG_ROAMING_CONSORTIUM_OIS : &quot;RoamingConsortiumOIs&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_RANDOMIZED_MAC_ADDRESS'>/***/
+</span>XML_TAG_RANDOMIZED_MAC_ADDRESS : &quot;RandomizedMacAddress&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-property-XML_TAG_MAC_RANDOMIZATION_SETTING'>/***/
+</span>XML_TAG_MAC_RANDOMIZATION_SETTING : &quot;MacRandomizationSetting&quot;,
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-method-writeCommonElementsToXml'>/**Write the Configuration data elements that are common for backup &amp; config store to the
+</span> XML stream.
+@param {Object {XmlSerializer}} out           XmlSerializer instance pointing to the XML stream.
+@param {Object {WifiConfiguration}} configuration WifiConfiguration object to be serialized.
+*/
+writeCommonElementsToXml : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-method-writeToXmlForBackup'>/**Write the Configuration data elements for backup from the provided Configuration to the
+</span> XML stream.
+ Note: This is a subset of the elements serialized for config store.
+@param {Object {XmlSerializer}} out           XmlSerializer instance pointing to the XML stream.
+@param {Object {WifiConfiguration}} configuration WifiConfiguration object to be serialized.
+*/
+writeToXmlForBackup : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-method-writeToXmlForConfigStore'>/**Write the Configuration data elements for config store from the provided Configuration
+</span> to the XML stream.
+@param {Object {XmlSerializer}} out           XmlSerializer instance pointing to the XML stream.
+@param {Object {WifiConfiguration}} configuration WifiConfiguration object to be serialized.
+*/
+writeToXmlForConfigStore : function(  ) {},
+
+<span id='com-android-server-wifi-util-XmlUtil-WifiConfigurationXmlUtil-method-parseFromXml'>/**Parses the configuration data elements from the provided XML stream to a
+</span> WifiConfiguration object.
+ Note: This is used for parsing both backup data and config store data. Looping through
+ the tags make it easy to add or remove elements in the future versions if needed.
+@param {Object {XmlPullParser}} in            XmlPullParser instance pointing to the XML stream.
+@param {Number} outerTagDepth depth of the outer tag in the XML document.
+@return {Object {android.util.Pair}} Pair&lt;Config key, WifiConfiguration object&gt; if parsing is successful,
+ null otherwise.
+*/
+parseFromXml : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

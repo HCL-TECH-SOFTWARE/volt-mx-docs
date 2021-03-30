@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-charset-CharsetDecoder'>/**@class java.nio.charset.CharsetDecoder
+</span>@extends java.lang.Object
+
+ An engine that can transform a sequence of bytes in a specific charset into a sequence of
+ sixteen-bit Unicode characters.
+
+ &lt;a name=&quot;steps&quot;&gt;&lt;/a&gt;
+
+ &lt;p&gt; The input byte sequence is provided in a byte buffer or a series
+ of such buffers.  The output character sequence is written to a character buffer
+ or a series of such buffers.  A decoder should always be used by making
+ the following sequence of method invocations, hereinafter referred to as a
+ &lt;i&gt;decoding operation&lt;/i&gt;:
+
+ &lt;ol&gt;
+
+   &lt;li&gt;&lt;p&gt; Reset the decoder via the {@link #reset reset} method, unless it
+   has not been used before; &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; Invoke the {@link #decode decode} method zero or more times, as
+   long as additional input may be available, passing &lt;tt&gt;false&lt;/tt&gt; for the
+   &lt;tt&gt;endOfInput&lt;/tt&gt; argument and filling the input buffer and flushing the
+   output buffer between invocations; &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; Invoke the {@link #decode decode} method one final time, passing
+   &lt;tt&gt;true&lt;/tt&gt; for the &lt;tt&gt;endOfInput&lt;/tt&gt; argument; and then &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; Invoke the {@link #flush flush} method so that the decoder can
+   flush any internal state to the output buffer. &lt;/p&gt;&lt;/li&gt;
+
+ &lt;/ol&gt;
+
+ Each invocation of the {@link #decode decode} method will decode as many
+ bytes as possible from the input buffer, writing the resulting characters
+ to the output buffer.  The {@link #decode decode} method returns when more
+ input is required, when there is not enough room in the output buffer, or
+ when a decoding error has occurred.  In each case a {@link java.nio.charset.CoderResult}
+ object is returned to describe the reason for termination.  An invoker can
+ examine this object and fill the input buffer, flush the output buffer, or
+ attempt to recover from a decoding error, as appropriate, and try again.
+
+ &lt;a name=&quot;ce&quot;&gt;&lt;/a&gt;
+
+ &lt;p&gt; There are two general types of decoding errors.  If the input byte
+ sequence is not legal for this charset then the input is considered &lt;i&gt;malformed&lt;/i&gt;.  If
+ the input byte sequence is legal but cannot be mapped to a valid
+ Unicode character then an &lt;i&gt;unmappable character&lt;/i&gt; has been encountered.
+
+ &lt;a name=&quot;cae&quot;&gt;&lt;/a&gt;
+
+ &lt;p&gt; How a decoding error is handled depends upon the action requested for
+ that type of error, which is described by an instance of the {@link java.nio.charset.CodingErrorAction} class.  The possible error actions are to {@linkplain
+ java.nio.charset.CodingErrorAction#IGNORE ignore} the erroneous input, {@linkplain
+ java.nio.charset.CodingErrorAction#REPORT report} the error to the invoker via
+ the returned {@link java.nio.charset.CoderResult} object, or {@linkplain java.nio.charset.CodingErrorAction#REPLACE
+ replace} the erroneous input with the current value of the
+ replacement string.  The replacement
+
+
+
+
+
+
+ has the initial value &lt;tt&gt;&quot;&amp;#92;uFFFD&quot;&lt;/tt&gt;;
+
+
+ its value may be changed via the {@link #replaceWith(java.lang.String)
+ replaceWith} method.
+
+ &lt;p&gt; The default action for malformed-input and unmappable-character errors
+ is to {@linkplain java.nio.charset.CodingErrorAction#REPORT report} them.  The
+ malformed-input error action may be changed via the {@link #onMalformedInput(CodingErrorAction) onMalformedInput} method; the
+ unmappable-character action may be changed via the {@link #onUnmappableCharacter(CodingErrorAction) onUnmappableCharacter} method.
+
+ &lt;p&gt; This class is designed to handle many of the details of the decoding
+ process, including the implementation of error actions.  A decoder for a
+ specific charset, which is a concrete subclass of this class, need only
+ implement the abstract {@link #decodeLoop decodeLoop} method, which
+ encapsulates the basic decoding loop.  A subclass that maintains internal
+ state should, additionally, override the {@link #implFlush implFlush} and
+ {@link #implReset implReset} methods.
+
+ &lt;p&gt; Instances of this class are not safe for use by multiple concurrent
+ threads.  &lt;/p&gt;
+
+
+ @author Mark Reinhold
+ @author JSR-51 Expert Group
+ @since 1.4
+
+ @see ByteBuffer
+ @see CharBuffer
+ @see Charset
+ @see CharsetEncoder
+*/
+var CharsetDecoder = {
+
+<span id='java-nio-charset-CharsetDecoder-method-charset'>/**Returns the charset that created this decoder.
+</span>@return {Object {java.nio.charset.Charset}} This decoder's charset
+*/
+charset : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-replacement'>/**Returns this decoder's replacement value.
+</span>@return {String} This decoder's current replacement,
+          which is never &lt;tt&gt;null&lt;/tt&gt; and is never empty
+*/
+replacement : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-replaceWith'>/**Changes this decoder's replacement value.
+</span>
+ &lt;p&gt; This method invokes the {@link #implReplaceWith implReplaceWith}
+ method, passing the new replacement, after checking that the new
+ replacement is acceptable.  &lt;/p&gt;
+@param {String} newReplacement  The replacement value
+
+
+         The new replacement; must not be &lt;tt&gt;null&lt;/tt&gt;
+         and must have non-zero length
+@return {Object {java.nio.charset.CharsetDecoder}} This decoder
+@throws IllegalArgumentException
+          If the preconditions on the parameter do not hold
+*/
+replaceWith : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-malformedInputAction'>/**Returns this decoder's current action for malformed-input errors.
+</span>@return {Object {java.nio.charset.CodingErrorAction}} The current malformed-input action, which is never &lt;tt&gt;null&lt;/tt&gt;
+*/
+malformedInputAction : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-onMalformedInput'>/**Changes this decoder's action for malformed-input errors.
+</span>
+ &lt;p&gt; This method invokes the {@link #implOnMalformedInput
+ implOnMalformedInput} method, passing the new action.  &lt;/p&gt;
+@param {Object {CodingErrorAction}} newAction  The new action; must not be &lt;tt&gt;null&lt;/tt&gt;
+@return {Object {java.nio.charset.CharsetDecoder}} This decoder
+@throws IllegalArgumentException
+         If the precondition on the parameter does not hold
+*/
+onMalformedInput : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-unmappableCharacterAction'>/**Returns this decoder's current action for unmappable-character errors.
+</span>@return {Object {java.nio.charset.CodingErrorAction}} The current unmappable-character action, which is never
+         &lt;tt&gt;null&lt;/tt&gt;
+*/
+unmappableCharacterAction : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-onUnmappableCharacter'>/**Changes this decoder's action for unmappable-character errors.
+</span>
+ &lt;p&gt; This method invokes the {@link #implOnUnmappableCharacter
+ implOnUnmappableCharacter} method, passing the new action.  &lt;/p&gt;
+@param {Object {CodingErrorAction}} newAction  The new action; must not be &lt;tt&gt;null&lt;/tt&gt;
+@return {Object {java.nio.charset.CharsetDecoder}} This decoder
+@throws IllegalArgumentException
+         If the precondition on the parameter does not hold
+*/
+onUnmappableCharacter : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-averageCharsPerByte'>/**Returns the average number of characters that will be produced for each
+</span> byte of input.  This heuristic value may be used to estimate the size
+ of the output buffer required for a given input sequence.
+@return {Number} The average number of characters produced
+          per byte of input
+*/
+averageCharsPerByte : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-maxCharsPerByte'>/**Returns the maximum number of characters that will be produced for each
+</span> byte of input.  This value may be used to compute the worst-case size
+ of the output buffer required for a given input sequence.
+@return {Number} The maximum number of characters that will be produced per
+          byte of input
+*/
+maxCharsPerByte : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-decode'>/**Decodes as many bytes as possible from the given input buffer,
+</span> writing the results to the given output buffer.
+
+ &lt;p&gt; The buffers are read from, and written to, starting at their current
+ positions.  At most {@link Buffer#remaining in.remaining()} bytes
+ will be read and at most {@link Buffer#remaining out.remaining()}
+ characters will be written.  The buffers' positions will be advanced to
+ reflect the bytes read and the characters written, but their marks and
+ limits will not be modified.
+
+ &lt;p&gt; In addition to reading bytes from the input buffer and writing
+ characters to the output buffer, this method returns a {@link java.nio.charset.CoderResult}
+ object to describe its reason for termination:
+
+ &lt;ul&gt;
+
+   &lt;li&gt;&lt;p&gt; {@link java.nio.charset.CoderResult#UNDERFLOW} indicates that as much of the
+   input buffer as possible has been decoded.  If there is no further
+   input then the invoker can proceed to the next step of the
+   &lt;a href=&quot;#steps&quot;&gt;decoding operation&lt;/a&gt;.  Otherwise this method
+   should be invoked again with further input.  &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; {@link java.nio.charset.CoderResult#OVERFLOW} indicates that there is
+   insufficient space in the output buffer to decode any more bytes.
+   This method should be invoked again with an output buffer that has
+   more {@linkplain Buffer#remaining remaining} characters. This is
+   typically done by draining any decoded characters from the output
+   buffer.  &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; A {@linkplain java.nio.charset.CoderResult#malformedForLength
+   malformed-input} result indicates that a malformed-input
+   error has been detected.  The malformed bytes begin at the input
+   buffer's (possibly incremented) position; the number of malformed
+   bytes may be determined by invoking the result object's {@link java.nio.charset.CoderResult#length() length} method.  This case applies only if the
+   {@linkplain #onMalformedInput malformed action} of this decoder
+   is {@link java.nio.charset.CodingErrorAction#REPORT}; otherwise the malformed input
+   will be ignored or replaced, as requested.  &lt;/p&gt;&lt;/li&gt;
+
+   &lt;li&gt;&lt;p&gt; An {@linkplain java.nio.charset.CoderResult#unmappableForLength
+   unmappable-character} result indicates that an
+   unmappable-character error has been detected.  The bytes that
+   decode the unmappable character begin at the input buffer's (possibly
+   incremented) position; the number of such bytes may be determined
+   by invoking the result object's {@link java.nio.charset.CoderResult#length() length}
+   method.  This case applies only if the {@linkplain #onUnmappableCharacter
+   unmappable action} of this decoder is {@link java.nio.charset.CodingErrorAction#REPORT}; otherwise the unmappable character will be
+   ignored or replaced, as requested.  &lt;/p&gt;&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ In any case, if this method is to be reinvoked in the same decoding
+ operation then care should be taken to preserve any bytes remaining
+ in the input buffer so that they are available to the next invocation.
+
+ &lt;p&gt; The &lt;tt&gt;endOfInput&lt;/tt&gt; parameter advises this method as to whether
+ the invoker can provide further input beyond that contained in the given
+ input buffer.  If there is a possibility of providing additional input
+ then the invoker should pass &lt;tt&gt;false&lt;/tt&gt; for this parameter; if there
+ is no possibility of providing further input then the invoker should
+ pass &lt;tt&gt;true&lt;/tt&gt;.  It is not erroneous, and in fact it is quite
+ common, to pass &lt;tt&gt;false&lt;/tt&gt; in one invocation and later discover that
+ no further input was actually available.  It is critical, however, that
+ the final invocation of this method in a sequence of invocations always
+ pass &lt;tt&gt;true&lt;/tt&gt; so that any remaining undecoded input will be treated
+ as being malformed.
+
+ &lt;p&gt; This method works by invoking the {@link #decodeLoop decodeLoop}
+ method, interpreting its results, handling error conditions, and
+ reinvoking it as necessary.  &lt;/p&gt;
+@param {Object {ByteBuffer}} in
+         The input byte buffer
+@param {Object {CharBuffer}} out
+         The output character buffer
+@param {Boolean} endOfInput
+         &lt;tt&gt;true&lt;/tt&gt; if, and only if, the invoker can provide no
+         additional input bytes beyond those in the given buffer
+@return {Object {java.nio.charset.CoderResult}} A coder-result object describing the reason for termination
+@throws IllegalStateException
+          If a decoding operation is already in progress and the previous
+          step was an invocation neither of the {@link #reset reset}
+          method, nor of this method with a value of &lt;tt&gt;false&lt;/tt&gt; for
+          the &lt;tt&gt;endOfInput&lt;/tt&gt; parameter, nor of this method with a
+          value of &lt;tt&gt;true&lt;/tt&gt; for the &lt;tt&gt;endOfInput&lt;/tt&gt; parameter
+          but a return value indicating an incomplete decoding operation
+@throws CoderMalfunctionError
+          If an invocation of the decodeLoop method threw
+          an unexpected exception
+*/
+decode : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-flush'>/**Flushes this decoder.
+</span>
+ &lt;p&gt; Some decoders maintain internal state and may need to write some
+ final characters to the output buffer once the overall input sequence has
+ been read.
+
+ &lt;p&gt; Any additional output is written to the output buffer beginning at
+ its current position.  At most {@link Buffer#remaining out.remaining()}
+ characters will be written.  The buffer's position will be advanced
+ appropriately, but its mark and limit will not be modified.
+
+ &lt;p&gt; If this method completes successfully then it returns {@link java.nio.charset.CoderResult#UNDERFLOW}.  If there is insufficient room in the output
+ buffer then it returns {@link java.nio.charset.CoderResult#OVERFLOW}.  If this happens
+ then this method must be invoked again, with an output buffer that has
+ more room, in order to complete the current &lt;a href=&quot;#steps&quot;&gt;decoding
+ operation&lt;/a&gt;.
+
+ &lt;p&gt; If this decoder has already been flushed then invoking this method
+ has no effect.
+
+ &lt;p&gt; This method invokes the {@link #implFlush implFlush} method to
+ perform the actual flushing operation.  &lt;/p&gt;
+@param {Object {CharBuffer}} out
+         The output character buffer
+@return {Object {java.nio.charset.CoderResult}} A coder-result object, either {@link CoderResult#UNDERFLOW} or
+          {@link CoderResult#OVERFLOW}
+@throws IllegalStateException
+          If the previous step of the current decoding operation was an
+          invocation neither of the {@link #flush flush} method nor of
+          the three-argument {@link
+          #decode(ByteBuffer,CharBuffer,boolean) decode} method
+          with a value of &lt;tt&gt;true&lt;/tt&gt; for the &lt;tt&gt;endOfInput&lt;/tt&gt;
+          parameter
+*/
+flush : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-reset'>/**Resets this decoder, clearing any internal state.
+</span>
+ &lt;p&gt; This method resets charset-independent state and also invokes the
+ {@link #implReset() implReset} method in order to perform any
+ charset-specific reset actions.  &lt;/p&gt;
+@return {Object {java.nio.charset.CharsetDecoder}} This decoder
+*/
+reset : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-decode'>/**Convenience method that decodes the remaining content of a single input
+</span> byte buffer into a newly-allocated character buffer.
+
+ &lt;p&gt; This method implements an entire &lt;a href=&quot;#steps&quot;&gt;decoding
+ operation&lt;/a&gt;; that is, it resets this decoder, then it decodes the
+ bytes in the given byte buffer, and finally it flushes this
+ decoder.  This method should therefore not be invoked if a decoding
+ operation is already in progress.  &lt;/p&gt;
+@param {Object {ByteBuffer}} in
+         The input byte buffer
+@return {Object {java.nio.CharBuffer}} A newly-allocated character buffer containing the result of the
+         decoding operation.  The buffer's position will be zero and its
+         limit will follow the last character written.
+@throws IllegalStateException
+          If a decoding operation is already in progress
+@throws MalformedInputException
+          If the byte sequence starting at the input buffer's current
+          position is not legal for this charset and the current malformed-input action
+          is {@link CodingErrorAction#REPORT}
+@throws UnmappableCharacterException
+          If the byte sequence starting at the input buffer's current
+          position cannot be mapped to an equivalent character sequence and
+          the current unmappable-character action is {@link
+          CodingErrorAction#REPORT}
+*/
+decode : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-isAutoDetecting'>/**Tells whether or not this decoder implements an auto-detecting charset.
+</span>
+ &lt;p&gt; The default implementation of this method always returns
+ &lt;tt&gt;false&lt;/tt&gt;; it should be overridden by auto-detecting decoders to
+ return &lt;tt&gt;true&lt;/tt&gt;.  &lt;/p&gt;
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if, and only if, this decoder implements an
+          auto-detecting charset
+*/
+isAutoDetecting : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-isCharsetDetected'>/**Tells whether or not this decoder has yet detected a
+</span> charset&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+
+ &lt;p&gt; If this decoder implements an auto-detecting charset then at a
+ single point during a decoding operation this method may start returning
+ &lt;tt&gt;true&lt;/tt&gt; to indicate that a specific charset has been detected in
+ the input byte sequence.  Once this occurs, the {@link #detectedCharset
+ detectedCharset} method may be invoked to retrieve the detected charset.
+
+ &lt;p&gt; That this method returns &lt;tt&gt;false&lt;/tt&gt; does not imply that no bytes
+ have yet been decoded.  Some auto-detecting decoders are capable of
+ decoding some, or even all, of an input byte sequence without fixing on
+ a particular charset.
+
+ &lt;p&gt; The default implementation of this method always throws an {@link UnsupportedOperationException}; it should be overridden by
+ auto-detecting decoders to return &lt;tt&gt;true&lt;/tt&gt; once the input charset
+ has been determined.  &lt;/p&gt;
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if, and only if, this decoder has detected a
+          specific charset
+@throws UnsupportedOperationException
+          If this decoder does not implement an auto-detecting charset
+*/
+isCharsetDetected : function(  ) {},
+
+<span id='java-nio-charset-CharsetDecoder-method-detectedCharset'>/**Retrieves the charset that was detected by this
+</span> decoder&amp;nbsp;&amp;nbsp;&lt;i&gt;(optional operation)&lt;/i&gt;.
+
+ &lt;p&gt; If this decoder implements an auto-detecting charset then this
+ method returns the actual charset once it has been detected.  After that
+ point, this method returns the same value for the duration of the
+ current decoding operation.  If not enough input bytes have yet been
+ read to determine the actual charset then this method throws an {@link IllegalStateException}.
+
+ &lt;p&gt; The default implementation of this method always throws an {@link UnsupportedOperationException}; it should be overridden by
+ auto-detecting decoders to return the appropriate value.  &lt;/p&gt;
+@return {Object {java.nio.charset.Charset}} The charset detected by this auto-detecting decoder,
+          or &lt;tt&gt;null&lt;/tt&gt; if the charset has not yet been determined
+@throws IllegalStateException
+          If insufficient bytes have been read to determine a charset
+@throws UnsupportedOperationException
+          If this decoder does not implement an auto-detecting charset
+*/
+detectedCharset : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

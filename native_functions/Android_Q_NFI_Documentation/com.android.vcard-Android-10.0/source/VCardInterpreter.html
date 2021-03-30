@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-vcard-VCardInterpreter'>/**@class com.android.vcard.VCardInterpreter
+</span> &lt;P&gt;
+ The interface which should be implemented by the classes which have to analyze each
+ vCard entry minutely.
+ &lt;/P&gt;
+ &lt;P&gt;
+ Here, there are several terms specific to vCard (and this library).
+ &lt;/P&gt;
+ &lt;P&gt;
+ The term &quot;entry&quot; is one vCard representation in the input, which should start with &quot;BEGIN:VCARD&quot;
+ and end with &quot;END:VCARD&quot;.
+ &lt;/P&gt;
+ &lt;P&gt;
+ The term &quot;property&quot; is one line in vCard entry, which consists of &quot;group&quot;, &quot;property name&quot;,
+ &quot;parameter(param) names and values&quot;, and &quot;property values&quot;.
+ &lt;/P&gt;
+ &lt;P&gt;
+ e.g. group1.propName;paramName1=paramValue1;paramName2=paramValue2;propertyValue1;propertyValue2...
+ &lt;/P&gt;
+*/
+var VCardInterpreter = {
+
+<span id='com-android-vcard-VCardInterpreter-method-onVCardStarted'>/**Called when vCard interpretation started.
+</span>*/
+onVCardStarted : function(  ) {},
+
+<span id='com-android-vcard-VCardInterpreter-method-onVCardEnded'>/**Called when vCard interpretation finished.
+</span>*/
+onVCardEnded : function(  ) {},
+
+<span id='com-android-vcard-VCardInterpreter-method-onEntryStarted'>/**Called when parsing one vCard entry started.
+</span> More specifically, this method is called when &quot;BEGIN:VCARD&quot; is read.
+
+ This may be called before {@link #onEntryEnded}() is called, as vCard 2.1 accepts nested
+ vCard.
+
+ &lt;code&gt;
+ BEGIN:VCARD
+ BEGIN:VCARD
+ VERSION:2.1
+ N:test;;;;
+ END:VCARD
+ END:VCARD
+ &lt;/code&gt;
+*/
+onEntryStarted : function(  ) {},
+
+<span id='com-android-vcard-VCardInterpreter-method-onEntryEnded'>/**Called when parsing one vCard entry ended.
+</span> More specifically, this method is called when &quot;END:VCARD&quot; is read.
+*/
+onEntryEnded : function(  ) {},
+
+<span id='com-android-vcard-VCardInterpreter-method-onPropertyCreated'>/**Called when a property is created.
+</span>*/
+onPropertyCreated : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

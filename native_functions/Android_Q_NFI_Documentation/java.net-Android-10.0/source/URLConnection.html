@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-URLConnection'>/**@class java.net.URLConnection
+</span>@extends java.lang.Object
+
+ The abstract class {@code URLConnection} is the superclass
+ of all classes that represent a communications link between the
+ application and a URL. Instances of this class can be used both to
+ read from and to write to the resource referenced by the URL. In
+ general, creating a connection to a URL is a multistep process:
+
+ &lt;center&gt;&lt;table border=2 summary=&quot;Describes the process of creating a connection to a URL: openConnection() and connect() over time.&quot;&gt;
+ &lt;tr&gt;&lt;th&gt;{@code openConnection()}&lt;/th&gt;
+     &lt;th&gt;{@code connect()}&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;Manipulate parameters that affect the connection to the remote
+         resource.&lt;/td&gt;
+     &lt;td&gt;Interact with the resource; query header fields and
+         contents.&lt;/td&gt;&lt;/tr&gt;
+ &lt;/table&gt;
+ ----------------------------&amp;gt;
+ &lt;br&gt;time&lt;/center&gt;
+
+ &lt;ol&gt;
+ &lt;li&gt;The connection object is created by invoking the
+     {@code openConnection} method on a URL.
+ &lt;li&gt;The setup parameters and general request properties are manipulated.
+ &lt;li&gt;The actual connection to the remote object is made, using the
+    {@code connect} method.
+ &lt;li&gt;The remote object becomes available. The header fields and the contents
+     of the remote object can be accessed.
+ &lt;/ol&gt;
+ &lt;p&gt;
+ The setup parameters are modified using the following methods:
+ &lt;ul&gt;
+   &lt;li&gt;{@code setAllowUserInteraction}
+   &lt;li&gt;{@code setDoInput}
+   &lt;li&gt;{@code setDoOutput}
+   &lt;li&gt;{@code setIfModifiedSince}
+   &lt;li&gt;{@code setUseCaches}
+ &lt;/ul&gt;
+ &lt;p&gt;
+ and the general request properties are modified using the method:
+ &lt;ul&gt;
+   &lt;li&gt;{@code setRequestProperty}
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Default values for the {@code AllowUserInteraction} and
+ {@code UseCaches} parameters can be set using the methods
+ {@code setDefaultAllowUserInteraction} and
+ {@code setDefaultUseCaches}.
+ &lt;p&gt;
+ Each of the above {@code set} methods has a corresponding
+ {@code get} method to retrieve the value of the parameter or
+ general request property. The specific parameters and general
+ request properties that are applicable are protocol specific.
+ &lt;p&gt;
+ The following methods are used to access the header fields and
+ the contents after the connection is made to the remote object:
+ &lt;ul&gt;
+   &lt;li&gt;{@code getContent}
+   &lt;li&gt;{@code getHeaderField}
+   &lt;li&gt;{@code getInputStream}
+   &lt;li&gt;{@code getOutputStream}
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Certain header fields are accessed frequently. The methods:
+ &lt;ul&gt;
+   &lt;li&gt;{@code getContentEncoding}
+   &lt;li&gt;{@code getContentLength}
+   &lt;li&gt;{@code getContentType}
+   &lt;li&gt;{@code getDate}
+   &lt;li&gt;{@code getExpiration}
+   &lt;li&gt;{@code getLastModifed}
+ &lt;/ul&gt;
+ &lt;p&gt;
+ provide convenient access to these fields. The
+ {@code getContentType} method is used by the
+ {@code getContent} method to determine the type of the remote
+ object; subclasses may find it convenient to override the
+ {@code getContentType} method.
+ &lt;p&gt;
+ In the common case, all of the pre-connection parameters and
+ general request properties can be ignored: the pre-connection
+ parameters and request properties default to sensible values. For
+ most clients of this interface, there are only two interesting
+ methods: {@code getInputStream} and {@code getContent},
+ which are mirrored in the {@code URL} class by convenience methods.
+ &lt;p&gt;
+ More information on the request properties and header fields of
+ an {@code http} connection can be found at:
+ &lt;blockquote&gt;&lt;pre&gt;
+ &lt;a href=&quot;http://www.ietf.org/rfc/rfc2616.txt&quot;&gt;http://www.ietf.org/rfc/rfc2616.txt&lt;/a&gt;
+ &lt;/pre&gt;&lt;/blockquote&gt;
+
+ Invoking the {@code close()} methods on the {@code InputStream} or {@code OutputStream} of an
+ {@code URLConnection} after a request may free network resources associated with this
+ instance, unless particular protocol specifications specify different behaviours
+ for it.
+
+ @author  James Gosling
+ @see     java.net.URL#openConnection()
+ @see     java.net.URLConnection#connect()
+ @see     java.net.URLConnection#getContent()
+ @see     java.net.URLConnection#getContentEncoding()
+ @see     java.net.URLConnection#getContentLength()
+ @see     java.net.URLConnection#getContentType()
+ @see     java.net.URLConnection#getDate()
+ @see     java.net.URLConnection#getExpiration()
+ @see     java.net.URLConnection#getHeaderField(int)
+ @see     java.net.URLConnection#getHeaderField(java.lang.String)
+ @see     java.net.URLConnection#getInputStream()
+ @see     java.net.URLConnection#getLastModified()
+ @see     java.net.URLConnection#getOutputStream()
+ @see     java.net.URLConnection#setAllowUserInteraction(boolean)
+ @see     java.net.URLConnection#setDefaultUseCaches(boolean)
+ @see     java.net.URLConnection#setDoInput(boolean)
+ @see     java.net.URLConnection#setDoOutput(boolean)
+ @see     java.net.URLConnection#setIfModifiedSince(long)
+ @see     java.net.URLConnection#setRequestProperty(java.lang.String, java.lang.String)
+ @see     java.net.URLConnection#setUseCaches(boolean)
+ @since   JDK1.0
+*/
+var URLConnection = {
+
+<span id='java-net-URLConnection-method-getFileNameMap'>/**Loads filename map (a mimetable) from a data file. It will
+</span> first try to load the user-specific table, defined
+ by &amp;quot;content.types.user.table&amp;quot; property. If that fails,
+ it tries to load the default built-in table.
+@return {Object {java.net.FileNameMap}} the FileNameMap
+@since 1.2
+@see #setFileNameMap(java.net.FileNameMap)
+*/
+getFileNameMap : function(  ) {},
+
+<span id='java-net-URLConnection-method-setFileNameMap'>/**Sets the FileNameMap.
+</span> &lt;p&gt;
+ If there is a security manager, this method first calls
+ the security manager's {@code checkSetFactory} method
+ to ensure the operation is allowed.
+ This could result in a SecurityException.
+@param {Object {FileNameMap}} map the FileNameMap to be set
+@exception SecurityException  if a security manager exists and its
+             {@code checkSetFactory} method doesn't allow the operation.
+@see SecurityManager#checkSetFactory
+@see #getFileNameMap()
+@since 1.2
+*/
+setFileNameMap : function(  ) {},
+
+<span id='java-net-URLConnection-method-connect'>/**Opens a communications link to the resource referenced by this
+</span> URL, if such a connection has not already been established.
+ &lt;p&gt;
+ If the {@code connect} method is called when the connection
+ has already been opened (indicated by the {@code connected}
+ field having the value {@code true}), the call is ignored.
+ &lt;p&gt;
+ URLConnection objects go through two phases: first they are
+ created, then they are connected.  After being created, and
+ before being connected, various options can be specified
+ (e.g., doInput and UseCaches).  After connecting, it is an
+ error to try to set them.  Operations that depend on being
+ connected, like getContentLength, will implicitly perform the
+ connection, if necessary.
+@throws SocketTimeoutException if the timeout expires before
+               the connection can be established
+@exception IOException  if an I/O error occurs while opening the
+               connection.
+@see java.net.URLConnection#connected
+@see #getConnectTimeout()
+@see #setConnectTimeout(int)
+*/
+connect : function(  ) {},
+
+<span id='java-net-URLConnection-method-setConnectTimeout'>/**Sets a specified timeout value, in milliseconds, to be used
+</span> when opening a communications link to the resource referenced
+ by this URLConnection.  If the timeout expires before the
+ connection can be established, a
+ java.net.SocketTimeoutException is raised. A timeout of zero is
+ interpreted as an infinite timeout.
+
+ &lt;p&gt; Some non-standard implementation of this method may ignore
+ the specified timeout. To see the connect timeout set, please
+ call getConnectTimeout().
+
+ &lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: If the hostname resolves to multiple IP
+ addresses, Android's default implementation of {@link java.net.HttpURLConnection}
+ will try each in
+ &lt;a href=&quot;http://www.ietf.org/rfc/rfc3484.txt&quot;&gt;RFC 3484&lt;/a&gt; order. If
+ connecting to each of these addresses fails, multiple timeouts will
+ elapse before the connect attempt throws an exception. Host names
+ that support both IPv6 and IPv4 always have at least 2 IP addresses.
+@param {Number} timeout an {@code int} that specifies the connect
+               timeout value in milliseconds
+@throws IllegalArgumentException if the timeout parameter is negative
+@see #getConnectTimeout()
+@see #connect()
+@since 1.5
+*/
+setConnectTimeout : function(  ) {},
+
+<span id='java-net-URLConnection-method-getConnectTimeout'>/**Returns setting for connect timeout.
+</span> &lt;p&gt;
+ 0 return implies that the option is disabled
+ (i.e., timeout of infinity).
+@return {Number} an {@code int} that indicates the connect timeout
+         value in milliseconds
+@see #setConnectTimeout(int)
+@see #connect()
+@since 1.5
+*/
+getConnectTimeout : function(  ) {},
+
+<span id='java-net-URLConnection-method-setReadTimeout'>/**Sets the read timeout to a specified timeout, in
+</span> milliseconds. A non-zero value specifies the timeout when
+ reading from Input stream when a connection is established to a
+ resource. If the timeout expires before there is data available
+ for read, a java.net.SocketTimeoutException is raised. A
+ timeout of zero is interpreted as an infinite timeout.
+
+&lt;p&gt; Some non-standard implementation of this method ignores the
+ specified timeout. To see the read timeout set, please call
+ getReadTimeout().
+@param {Number} timeout an {@code int} that specifies the timeout
+ value to be used in milliseconds
+@throws IllegalArgumentException if the timeout parameter is negative
+@see #getReadTimeout()
+@see InputStream#read()
+@since 1.5
+*/
+setReadTimeout : function(  ) {},
+
+<span id='java-net-URLConnection-method-getReadTimeout'>/**Returns setting for read timeout. 0 return implies that the
+</span> option is disabled (i.e., timeout of infinity).
+@return {Number} an {@code int} that indicates the read timeout
+         value in milliseconds
+@see #setReadTimeout(int)
+@see InputStream#read()
+@since 1.5
+*/
+getReadTimeout : function(  ) {},
+
+<span id='java-net-URLConnection-method-getURL'>/**Returns the value of this {@code URLConnection}'s {@code URL}
+</span> field.
+@return {Object {java.net.URL}} the value of this {@code URLConnection}'s {@code URL}
+          field.
+@see java.net.URLConnection#url
+*/
+getURL : function(  ) {},
+
+<span id='java-net-URLConnection-method-getContentLength'>/**Returns the value of the {@code content-length} header field.
+</span> &lt;P&gt;
+ &lt;B&gt;Note&lt;/B&gt;: {@link #getContentLengthLong() getContentLengthLong()}
+ should be preferred over this method, since it returns a {@code long}
+ instead and is therefore more portable.&lt;/P&gt;
+@return {Number} the content length of the resource that this connection's URL
+          references, {@code -1} if the content length is not known,
+          or if the content length is greater than Integer.MAX_VALUE.
+*/
+getContentLength : function(  ) {},
+
+<span id='java-net-URLConnection-method-getContentLengthLong'>/**Returns the value of the {@code content-length} header field as a
+</span> long.
+@return {Number} the content length of the resource that this connection's URL
+          references, or {@code -1} if the content length is
+          not known.
+@since 7.0
+*/
+getContentLengthLong : function(  ) {},
+
+<span id='java-net-URLConnection-method-getContentType'>/**Returns the value of the {@code content-type} header field.
+</span>@return {String} the content type of the resource that the URL references,
+          or {@code null} if not known.
+@see java.net.URLConnection#getHeaderField(java.lang.String)
+*/
+getContentType : function(  ) {},
+
+<span id='java-net-URLConnection-method-getContentEncoding'>/**Returns the value of the {@code content-encoding} header field.
+</span>@return {String} the content encoding of the resource that the URL references,
+          or {@code null} if not known.
+@see java.net.URLConnection#getHeaderField(java.lang.String)
+*/
+getContentEncoding : function(  ) {},
+
+<span id='java-net-URLConnection-method-getExpiration'>/**Returns the value of the {@code expires} header field.
+</span>@return {Number} the expiration date of the resource that this URL references,
+          or 0 if not known. The value is the number of milliseconds since
+          January 1, 1970 GMT.
+@see java.net.URLConnection#getHeaderField(java.lang.String)
+*/
+getExpiration : function(  ) {},
+
+<span id='java-net-URLConnection-method-getDate'>/**Returns the value of the {@code date} header field.
+</span>@return {Number} the sending date of the resource that the URL references,
+          or {@code 0} if not known. The value returned is the
+          number of milliseconds since January 1, 1970 GMT.
+@see java.net.URLConnection#getHeaderField(java.lang.String)
+*/
+getDate : function(  ) {},
+
+<span id='java-net-URLConnection-method-getLastModified'>/**Returns the value of the {@code last-modified} header field.
+</span> The result is the number of milliseconds since January 1, 1970 GMT.
+@return {Number} the date the resource referenced by this
+          {@code URLConnection} was last modified, or 0 if not known.
+@see java.net.URLConnection#getHeaderField(java.lang.String)
+*/
+getLastModified : function(  ) {},
+
+<span id='java-net-URLConnection-method-getHeaderField'>/**Returns the value of the named header field.
+</span> &lt;p&gt;
+ If called on a connection that sets the same header multiple times
+ with possibly different values, only the last value is returned.
+@param {String} name   the name of a header field.
+@return {String} the value of the named header field, or {@code null}
+          if there is no such field in the header.
+*/
+getHeaderField : function(  ) {},
+
+<span id='java-net-URLConnection-method-getHeaderFields'>/**Returns an unmodifiable Map of the header fields.
+</span> The Map keys are Strings that represent the
+ response-header field names. Each Map value is an
+ unmodifiable List of Strings that represents
+ the corresponding field values.
+@return {Object {java.util.Map}} a Map of header fields
+@since 1.4
+*/
+getHeaderFields : function(  ) {},
+
+<span id='java-net-URLConnection-method-getHeaderFieldInt'>/**Returns the value of the named field parsed as a number.
+</span> &lt;p&gt;
+ This form of {@code getHeaderField} exists because some
+ connection types (e.g., {@code http-ng}) have pre-parsed
+ headers. Classes for that connection type can override this method
+ and short-circuit the parsing.
+@param {String} name      the name of the header field.
+@param {Number} Default   the default value.
+@return {Number} the value of the named field, parsed as an integer. The
+          {@code Default} value is returned if the field is
+          missing or malformed.
+*/
+getHeaderFieldInt : function(  ) {},
+
+<span id='java-net-URLConnection-method-getHeaderFieldLong'>/**Returns the value of the named field parsed as a number.
+</span> &lt;p&gt;
+ This form of {@code getHeaderField} exists because some
+ connection types (e.g., {@code http-ng}) have pre-parsed
+ headers. Classes for that connection type can override this method
+ and short-circuit the parsing.
+@param {String} name      the name of the header field.
+@param {Number} Default   the default value.
+@return {Number} the value of the named field, parsed as a long. The
+          {@code Default} value is returned if the field is
+          missing or malformed.
+@since 7.0
+*/
+getHeaderFieldLong : function(  ) {},
+
+<span id='java-net-URLConnection-method-getHeaderFieldDate'>/**Returns the value of the named field parsed as date.
+</span> The result is the number of milliseconds since January 1, 1970 GMT
+ represented by the named field.
+ &lt;p&gt;
+ This form of {@code getHeaderField} exists because some
+ connection types (e.g., {@code http-ng}) have pre-parsed
+ headers. Classes for that connection type can override this method
+ and short-circuit the parsing.
+@param {String} name     the name of the header field.
+@param {Number} Default   a default value.
+@return {Number} the value of the field, parsed as a date. The value of the
+          {@code Default} argument is returned if the field is
+          missing or malformed.
+*/
+getHeaderFieldDate : function(  ) {},
+
+<span id='java-net-URLConnection-method-getHeaderFieldKey'>/**Returns the key for the {@code n}&lt;sup&gt;th&lt;/sup&gt; header field.
+</span> It returns {@code null} if there are fewer than {@code n+1} fields.
+@param {Number} n   an index, where {@code n&gt;=0}
+@return {String} the key for the {@code n}&lt;sup&gt;th&lt;/sup&gt; header field,
+          or {@code null} if there are fewer than {@code n+1}
+          fields.
+*/
+getHeaderFieldKey : function(  ) {},
+
+<span id='java-net-URLConnection-method-getHeaderField'>/**Returns the value for the {@code n}&lt;sup&gt;th&lt;/sup&gt; header field.
+</span> It returns {@code null} if there are fewer than
+ {@code n+1}fields.
+ &lt;p&gt;
+ This method can be used in conjunction with the
+ {@link #getHeaderFieldKey(int) getHeaderFieldKey} method to iterate through all
+ the headers in the message.
+@param {Number} n   an index, where {@code n&gt;=0}
+@return {String} the value of the {@code n}&lt;sup&gt;th&lt;/sup&gt; header field
+          or {@code null} if there are fewer than {@code n+1} fields
+@see java.net.URLConnection#getHeaderFieldKey(int)
+*/
+getHeaderField : function(  ) {},
+
+<span id='java-net-URLConnection-method-getContent'>/**Retrieves the contents of this URL connection.
+</span> &lt;p&gt;
+ This method first determines the content type of the object by
+ calling the {@code getContentType} method. If this is
+ the first time that the application has seen that specific content
+ type, a content handler for that content type is created:
+ &lt;ol&gt;
+ &lt;li&gt;If the application has set up a content handler factory instance
+     using the {@code setContentHandlerFactory} method, the
+     {@code createContentHandler} method of that instance is called
+     with the content type as an argument; the result is a content
+     handler for that content type.
+ &lt;li&gt;If no content handler factory has yet been set up, or if the
+     factory's {@code createContentHandler} method returns
+     {@code null}, then the application loads the class named:
+     &lt;blockquote&gt;&lt;pre&gt;
+         sun.net.www.content.&amp;lt;&lt;i&gt;contentType&lt;/i&gt;&amp;gt;
+     &lt;/pre&gt;&lt;/blockquote&gt;
+     where &amp;lt;&lt;i&gt;contentType&lt;/i&gt;&amp;gt; is formed by taking the
+     content-type string, replacing all slash characters with a
+     {@code period} ('.'), and all other non-alphanumeric characters
+     with the underscore character '{@code _}'. The alphanumeric
+     characters are specifically the 26 uppercase ASCII letters
+     '{@code A}' through '{@code Z}', the 26 lowercase ASCII
+     letters '{@code a}' through '{@code z}', and the 10 ASCII
+     digits '{@code 0}' through '{@code 9}'. If the specified
+     class does not exist, or is not a subclass of
+     {@code ContentHandler}, then an
+     {@code UnknownServiceException} is thrown.
+ &lt;/ol&gt;
+@return {Object {java.lang.Object}} the object fetched. The {@code instanceof} operator
+               should be used to determine the specific kind of object
+               returned.
+@exception IOException              if an I/O error occurs while
+               getting the content.
+@exception UnknownServiceException  if the protocol does not support
+               the content type.
+@see java.net.ContentHandlerFactory#createContentHandler(java.lang.String)
+@see java.net.URLConnection#getContentType()
+@see java.net.URLConnection#setContentHandlerFactory(java.net.ContentHandlerFactory)
+*/
+getContent : function(  ) {},
+
+<span id='java-net-URLConnection-method-getContent'>/**Retrieves the contents of this URL connection.
+</span>@param {Object {java.lang.Class[]}} classes the {@code Class} array
+ indicating the requested types
+@return {Object {java.lang.Object}} the object fetched that is the first match of the type
+               specified in the classes array. null if none of
+               the requested types are supported.
+               The {@code instanceof} operator should be used to
+               determine the specific kind of object returned.
+@exception IOException              if an I/O error occurs while
+               getting the content.
+@exception UnknownServiceException  if the protocol does not support
+               the content type.
+@see java.net.URLConnection#getContent()
+@see java.net.ContentHandlerFactory#createContentHandler(java.lang.String)
+@see java.net.URLConnection#getContent(java.lang.Class[])
+@see java.net.URLConnection#setContentHandlerFactory(java.net.ContentHandlerFactory)
+@since 1.3
+*/
+getContent : function(  ) {},
+
+<span id='java-net-URLConnection-method-getPermission'>/**Returns a permission object representing the permission
+</span> necessary to make the connection represented by this
+ object. This method returns null if no permission is
+ required to make the connection. By default, this method
+ returns {@code java.security.AllPermission}. Subclasses
+ should override this method and return the permission
+ that best represents the permission required to make a
+ a connection to the URL. For example, a {@code URLConnection}
+ representing a {@code file:} URL would return a
+ {@code java.io.FilePermission} object.
+
+ &lt;p&gt;The permission returned may dependent upon the state of the
+ connection. For example, the permission before connecting may be
+ different from that after connecting. For example, an HTTP
+ sever, say foo.com, may redirect the connection to a different
+ host, say bar.com. Before connecting the permission returned by
+ the connection will represent the permission needed to connect
+ to foo.com, while the permission returned after connecting will
+ be to bar.com.
+
+ &lt;p&gt;Permissions are generally used for two purposes: to protect
+ caches of objects obtained through URLConnections, and to check
+ the right of a recipient to learn about a particular URL. In
+ the first case, the permission should be obtained
+ &lt;em&gt;after&lt;/em&gt; the object has been obtained. For example, in an
+ HTTP connection, this will represent the permission to connect
+ to the host from which the data was ultimately fetched. In the
+ second case, the permission should be obtained and tested
+ &lt;em&gt;before&lt;/em&gt; connecting.
+@return {Object {java.security.Permission}} the permission object representing the permission
+ necessary to make the connection represented by this
+ URLConnection.
+@exception IOException if the computation of the permission
+ requires network or file I/O and an exception occurs while
+ computing it.
+*/
+getPermission : function(  ) {},
+
+<span id='java-net-URLConnection-method-getInputStream'>/**Returns an input stream that reads from this open connection.
+</span>
+ A SocketTimeoutException can be thrown when reading from the
+ returned input stream if the read timeout expires before data
+ is available for read.
+@return {Object {java.io.InputStream}} an input stream that reads from this open connection.
+@exception IOException              if an I/O error occurs while
+               creating the input stream.
+@exception UnknownServiceException  if the protocol does not support
+               input.
+@see #setReadTimeout(int)
+@see #getReadTimeout()
+*/
+getInputStream : function(  ) {},
+
+<span id='java-net-URLConnection-method-getOutputStream'>/**Returns an output stream that writes to this connection.
+</span>@return {Object {java.io.OutputStream}} an output stream that writes to this connection.
+@exception IOException              if an I/O error occurs while
+               creating the output stream.
+@exception UnknownServiceException  if the protocol does not support
+               output.
+*/
+getOutputStream : function(  ) {},
+
+<span id='java-net-URLConnection-method-toString'>/**Returns a {@code String} representation of this URL connection.
+</span>@return {String} a string representation of this {@code URLConnection}.
+*/
+toString : function(  ) {},
+
+<span id='java-net-URLConnection-method-setDoInput'>/**Sets the value of the {@code doInput} field for this
+</span> {@code URLConnection} to the specified value.
+ &lt;p&gt;
+ A URL connection can be used for input and/or output.  Set the DoInput
+ flag to true if you intend to use the URL connection for input,
+ false if not.  The default is true.
+@param {Boolean} doinput   the new value.
+@throws IllegalStateException if already connected
+@see java.net.URLConnection#doInput
+@see #getDoInput()
+*/
+setDoInput : function(  ) {},
+
+<span id='java-net-URLConnection-method-getDoInput'>/**Returns the value of this {@code URLConnection}'s
+</span> {@code doInput} flag.
+@return {Boolean} the value of this {@code URLConnection}'s
+          {@code doInput} flag.
+@see #setDoInput(boolean)
+*/
+getDoInput : function(  ) {},
+
+<span id='java-net-URLConnection-method-setDoOutput'>/**Sets the value of the {@code doOutput} field for this
+</span> {@code URLConnection} to the specified value.
+ &lt;p&gt;
+ A URL connection can be used for input and/or output.  Set the DoOutput
+ flag to true if you intend to use the URL connection for output,
+ false if not.  The default is false.
+@param {Boolean} dooutput   the new value.
+@throws IllegalStateException if already connected
+@see #getDoOutput()
+*/
+setDoOutput : function(  ) {},
+
+<span id='java-net-URLConnection-method-getDoOutput'>/**Returns the value of this {@code URLConnection}'s
+</span> {@code doOutput} flag.
+@return {Boolean} the value of this {@code URLConnection}'s
+          {@code doOutput} flag.
+@see #setDoOutput(boolean)
+*/
+getDoOutput : function(  ) {},
+
+<span id='java-net-URLConnection-method-setAllowUserInteraction'>/**Set the value of the {@code allowUserInteraction} field of
+</span> this {@code URLConnection}.
+@param {Boolean} allowuserinteraction   the new value.
+@throws IllegalStateException if already connected
+@see #getAllowUserInteraction()
+*/
+setAllowUserInteraction : function(  ) {},
+
+<span id='java-net-URLConnection-method-getAllowUserInteraction'>/**Returns the value of the {@code allowUserInteraction} field for
+</span> this object.
+@return {Boolean} the value of the {@code allowUserInteraction} field for
+          this object.
+@see #setAllowUserInteraction(boolean)
+*/
+getAllowUserInteraction : function(  ) {},
+
+<span id='java-net-URLConnection-method-setDefaultAllowUserInteraction'>/**Sets the default value of the
+</span> {@code allowUserInteraction} field for all future
+ {@code URLConnection} objects to the specified value.
+@param {Boolean} defaultallowuserinteraction   the new value.
+@see #getDefaultAllowUserInteraction()
+*/
+setDefaultAllowUserInteraction : function(  ) {},
+
+<span id='java-net-URLConnection-method-getDefaultAllowUserInteraction'>/**Returns the default value of the {@code allowUserInteraction}
+</span> field.
+ &lt;p&gt;
+ Ths default is &quot;sticky&quot;, being a part of the static state of all
+ URLConnections.  This flag applies to the next, and all following
+ URLConnections that are created.
+@return {Boolean} the default value of the {@code allowUserInteraction}
+          field.
+@see #setDefaultAllowUserInteraction(boolean)
+*/
+getDefaultAllowUserInteraction : function(  ) {},
+
+<span id='java-net-URLConnection-method-setUseCaches'>/**Sets the value of the {@code useCaches} field of this
+</span> {@code URLConnection} to the specified value.
+ &lt;p&gt;
+ Some protocols do caching of documents.  Occasionally, it is important
+ to be able to &quot;tunnel through&quot; and ignore the caches (e.g., the
+ &quot;reload&quot; button in a browser).  If the UseCaches flag on a connection
+ is true, the connection is allowed to use whatever caches it can.
+  If false, caches are to be ignored.
+  The default value comes from DefaultUseCaches, which defaults to
+ true.
+@param {Boolean} usecaches a {@code boolean} indicating whether
+ or not to allow caching
+@throws IllegalStateException if already connected
+@see #getUseCaches()
+*/
+setUseCaches : function(  ) {},
+
+<span id='java-net-URLConnection-method-getUseCaches'>/**Returns the value of this {@code URLConnection}'s
+</span> {@code useCaches} field.
+@return {Boolean} the value of this {@code URLConnection}'s
+          {@code useCaches} field.
+@see #setUseCaches(boolean)
+*/
+getUseCaches : function(  ) {},
+
+<span id='java-net-URLConnection-method-setIfModifiedSince'>/**Sets the value of the {@code ifModifiedSince} field of
+</span> this {@code URLConnection} to the specified value.
+@param {Number} ifmodifiedsince   the new value.
+@throws IllegalStateException if already connected
+@see #getIfModifiedSince()
+*/
+setIfModifiedSince : function(  ) {},
+
+<span id='java-net-URLConnection-method-getIfModifiedSince'>/**Returns the value of this object's {@code ifModifiedSince} field.
+</span>@return {Number} the value of this object's {@code ifModifiedSince} field.
+@see #setIfModifiedSince(long)
+*/
+getIfModifiedSince : function(  ) {},
+
+<span id='java-net-URLConnection-method-getDefaultUseCaches'>/**Returns the default value of a {@code URLConnection}'s
+</span> {@code useCaches} flag.
+ &lt;p&gt;
+ Ths default is &quot;sticky&quot;, being a part of the static state of all
+ URLConnections.  This flag applies to the next, and all following
+ URLConnections that are created.
+@return {Boolean} the default value of a {@code URLConnection}'s
+          {@code useCaches} flag.
+@see #setDefaultUseCaches(boolean)
+*/
+getDefaultUseCaches : function(  ) {},
+
+<span id='java-net-URLConnection-method-setDefaultUseCaches'>/**Sets the default value of the {@code useCaches} field to the
+</span> specified value.
+@param {Boolean} defaultusecaches   the new value.
+@see #getDefaultUseCaches()
+*/
+setDefaultUseCaches : function(  ) {},
+
+<span id='java-net-URLConnection-method-setRequestProperty'>/**Sets the general request property. If a property with the key already
+</span> exists, overwrite its value with the new value.
+
+ &lt;p&gt; NOTE: HTTP requires all request properties which can
+ legally have multiple instances with the same key
+ to use a comma-separated list syntax which enables multiple
+ properties to be appended into a single property.
+@param {String} key     the keyword by which the request is known
+                  (e.g., &quot;{@code Accept}&quot;).
+@param {String} value   the value associated with it.
+@throws IllegalStateException if already connected
+@throws NullPointerException if key is &lt;CODE&gt;null&lt;/CODE&gt;
+@see #getRequestProperty(java.lang.String)
+*/
+setRequestProperty : function(  ) {},
+
+<span id='java-net-URLConnection-method-addRequestProperty'>/**Adds a general request property specified by a
+</span> key-value pair.  This method will not overwrite
+ existing values associated with the same key.
+@param {String} key     the keyword by which the request is known
+                  (e.g., &quot;{@code Accept}&quot;).
+@param {String} value  the value associated with it.
+@throws IllegalStateException if already connected
+@throws NullPointerException if key is null
+@see #getRequestProperties()
+@since 1.4
+*/
+addRequestProperty : function(  ) {},
+
+<span id='java-net-URLConnection-method-getRequestProperty'>/**Returns the value of the named general request property for this
+</span> connection.
+@param {String} key the keyword by which the request is known (e.g., &quot;Accept&quot;).
+@return {String} the value of the named general request property for this
+           connection. If key is null, then null is returned.
+@throws IllegalStateException if already connected
+@see #setRequestProperty(java.lang.String, java.lang.String)
+*/
+getRequestProperty : function(  ) {},
+
+<span id='java-net-URLConnection-method-getRequestProperties'>/**Returns an unmodifiable Map of general request
+</span> properties for this connection. The Map keys
+ are Strings that represent the request-header
+ field names. Each Map value is a unmodifiable List
+ of Strings that represents the corresponding
+ field values.
+@return {Object {java.util.Map}} a Map of the general request properties for this connection.
+@throws IllegalStateException if already connected
+@since 1.4
+*/
+getRequestProperties : function(  ) {},
+
+<span id='java-net-URLConnection-method-setDefaultRequestProperty'>/**Sets the default value of a general request property. When a
+</span> {@code URLConnection} is created, it is initialized with
+ these properties.
+@param {String} key     the keyword by which the request is known
+                  (e.g., &quot;{@code Accept}&quot;).
+@param {String} value   the value associated with the key.
+@see java.net.URLConnection#setRequestProperty(java.lang.String,java.lang.String)
+@deprecated The instance specific setRequestProperty method
+ should be used after an appropriate instance of URLConnection
+ is obtained. Invoking this method will have no effect.
+@see #getDefaultRequestProperty(java.lang.String)
+*/
+setDefaultRequestProperty : function(  ) {},
+
+<span id='java-net-URLConnection-method-getDefaultRequestProperty'>/**Returns the value of the default request property. Default request
+</span> properties are set for every connection.
+@param {String} key the keyword by which the request is known (e.g., &quot;Accept&quot;).
+@return {String} the value of the default request property
+ for the specified key.
+@see java.net.URLConnection#getRequestProperty(java.lang.String)
+@deprecated The instance specific getRequestProperty method
+ should be used after an appropriate instance of URLConnection
+ is obtained.
+@see #setDefaultRequestProperty(java.lang.String, java.lang.String)
+*/
+getDefaultRequestProperty : function(  ) {},
+
+<span id='java-net-URLConnection-method-setContentHandlerFactory'>/**Sets the {@code ContentHandlerFactory} of an
+</span> application. It can be called at most once by an application.
+ &lt;p&gt;
+ The {@code ContentHandlerFactory} instance is used to
+ construct a content handler from a content type
+ &lt;p&gt;
+ If there is a security manager, this method first calls
+ the security manager's {@code checkSetFactory} method
+ to ensure the operation is allowed.
+ This could result in a SecurityException.
+@param {Object {ContentHandlerFactory}} fac   the desired factory.
+@exception Error  if the factory has already been defined.
+@exception SecurityException  if a security manager exists and its
+             {@code checkSetFactory} method doesn't allow the operation.
+@see java.net.ContentHandlerFactory
+@see java.net.URLConnection#getContent()
+@see SecurityManager#checkSetFactory
+*/
+setContentHandlerFactory : function(  ) {},
+
+<span id='java-net-URLConnection-method-guessContentTypeFromName'>/**Tries to determine the content type of an object, based
+</span> on the specified &quot;file&quot; component of a URL.
+ This is a convenience method that can be used by
+ subclasses that override the {@code getContentType} method.
+@param {String} fname   a filename.
+@return {String} a guess as to what the content type of the object is,
+          based upon its file name.
+@see java.net.URLConnection#getContentType()
+*/
+guessContentTypeFromName : function(  ) {},
+
+<span id='java-net-URLConnection-method-guessContentTypeFromStream'>/**Tries to determine the type of an input stream based on the
+</span> characters at the beginning of the input stream. This method can
+ be used by subclasses that override the
+ {@code getContentType} method.
+ &lt;p&gt;
+ Ideally, this routine would not be needed. But many
+ {@code http} servers return the incorrect content type; in
+ addition, there are many nonstandard extensions. Direct inspection
+ of the bytes to determine the content type is often more accurate
+ than believing the content type claimed by the {@code http} server.
+@param {Object {InputStream}} is   an input stream that supports marks.
+@return {String} a guess at the content type, or {@code null} if none
+             can be determined.
+@exception IOException  if an I/O error occurs while reading the
+               input stream.
+@see java.io.InputStream#mark(int)
+@see java.io.InputStream#markSupported()
+@see java.net.URLConnection#getContentType()
+*/
+guessContentTypeFromStream : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

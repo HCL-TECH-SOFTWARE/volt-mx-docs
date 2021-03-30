@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-invoke-MethodHandle'>/**@class java.lang.invoke.MethodHandle
+</span>@extends java.lang.Object
+
+ A method handle is a typed, directly executable reference to an underlying method,
+ constructor, field, or similar low-level operation, with optional
+ transformations of arguments or return values.
+ These transformations are quite general, and include such patterns as
+ {@linkplain #asType conversion},
+ {@linkplain #bindTo insertion},
+ {@linkplain java.lang.invoke.MethodHandles#dropArguments deletion},
+ and {@linkplain java.lang.invoke.MethodHandles#filterArguments substitution}.
+
+ &lt;h1&gt;Method handle contents&lt;/h1&gt;
+ Method handles are dynamically and strongly typed according to their parameter and return types.
+ They are not distinguished by the name or the defining class of their underlying methods.
+ A method handle must be invoked using a symbolic type descriptor which matches
+ the method handle's own {@linkplain #type type descriptor}.
+ &lt;p&gt;
+ Every method handle reports its type descriptor via the {@link #type type} accessor.
+ This type descriptor is a {@link java.lang.invoke.MethodType MethodType} object,
+ whose structure is a series of classes, one of which is
+ the return type of the method (or {@code void.class} if none).
+ &lt;p&gt;
+ A method handle's type controls the types of invocations it accepts,
+ and the kinds of transformations that apply to it.
+ &lt;p&gt;
+ A method handle contains a pair of special invoker methods
+ called {@link #invokeExact invokeExact} and {@link #invoke invoke}.
+ Both invoker methods provide direct access to the method handle's
+ underlying method, constructor, field, or other operation,
+ as modified by transformations of arguments and return values.
+ Both invokers accept calls which exactly match the method handle's own type.
+ The plain, inexact invoker also accepts a range of other call types.
+ &lt;p&gt;
+ Method handles are immutable and have no visible state.
+ Of course, they can be bound to underlying methods or data which exhibit state.
+ With respect to the Java Memory Model, any method handle will behave
+ as if all of its (internal) fields are final variables.  This means that any method
+ handle made visible to the application will always be fully formed.
+ This is true even if the method handle is published through a shared
+ variable in a data race.
+ &lt;p&gt;
+ Method handles cannot be subclassed by the user.
+ Implementations may (or may not) create internal subclasses of {@code MethodHandle}
+ which may be visible via the {@link java.lang.Object#getClass Object.getClass}
+ operation.  The programmer should not draw conclusions about a method handle
+ from its specific class, as the method handle class hierarchy (if any)
+ may change from time to time or across implementations from different vendors.
+
+ &lt;h1&gt;Method handle compilation&lt;/h1&gt;
+ A Java method call expression naming {@code invokeExact} or {@code invoke}
+ can invoke a method handle from Java source code.
+ From the viewpoint of source code, these methods can take any arguments
+ and their result can be cast to any return type.
+ Formally this is accomplished by giving the invoker methods
+ {@code Object} return types and variable arity {@code Object} arguments,
+ but they have an additional quality called &lt;em&gt;signature polymorphism&lt;/em&gt;
+ which connects this freedom of invocation directly to the JVM execution stack.
+ &lt;p&gt;
+ As is usual with virtual methods, source-level calls to {@code invokeExact}
+ and {@code invoke} compile to an {@code invokevirtual} instruction.
+ More unusually, the compiler must record the actual argument types,
+ and may not perform method invocation conversions on the arguments.
+ Instead, it must push them on the stack according to their own unconverted types.
+ The method handle object itself is pushed on the stack before the arguments.
+ The compiler then calls the method handle with a symbolic type descriptor which
+ describes the argument and return types.
+ &lt;p&gt;
+ To issue a complete symbolic type descriptor, the compiler must also determine
+ the return type.  This is based on a cast on the method invocation expression,
+ if there is one, or else {@code Object} if the invocation is an expression
+ or else {@code void} if the invocation is a statement.
+ The cast may be to a primitive type (but not {@code void}).
+ &lt;p&gt;
+ As a corner case, an uncasted {@code null} argument is given
+ a symbolic type descriptor of {@code java.lang.Void}.
+ The ambiguity with the type {@code Void} is harmless, since there are no references of type
+ {@code Void} except the null reference.
+
+ &lt;h1&gt;Method handle invocation&lt;/h1&gt;
+ The first time a {@code invokevirtual} instruction is executed
+ it is linked, by symbolically resolving the names in the instruction
+ and verifying that the method call is statically legal.
+ This is true of calls to {@code invokeExact} and {@code invoke}.
+ In this case, the symbolic type descriptor emitted by the compiler is checked for
+ correct syntax and names it contains are resolved.
+ Thus, an {@code invokevirtual} instruction which invokes
+ a method handle will always link, as long
+ as the symbolic type descriptor is syntactically well-formed
+ and the types exist.
+ &lt;p&gt;
+ When the {@code invokevirtual} is executed after linking,
+ the receiving method handle's type is first checked by the JVM
+ to ensure that it matches the symbolic type descriptor.
+ If the type match fails, it means that the method which the
+ caller is invoking is not present on the individual
+ method handle being invoked.
+ &lt;p&gt;
+ In the case of {@code invokeExact}, the type descriptor of the invocation
+ (after resolving symbolic type names) must exactly match the method type
+ of the receiving method handle.
+ In the case of plain, inexact {@code invoke}, the resolved type descriptor
+ must be a valid argument to the receiver's {@link #asType asType} method.
+ Thus, plain {@code invoke} is more permissive than {@code invokeExact}.
+ &lt;p&gt;
+ After type matching, a call to {@code invokeExact} directly
+ and immediately invoke the method handle's underlying method
+ (or other behavior, as the case may be).
+ &lt;p&gt;
+ A call to plain {@code invoke} works the same as a call to
+ {@code invokeExact}, if the symbolic type descriptor specified by the caller
+ exactly matches the method handle's own type.
+ If there is a type mismatch, {@code invoke} attempts
+ to adjust the type of the receiving method handle,
+ as if by a call to {@link #asType asType},
+ to obtain an exactly invokable method handle {@code M2}.
+ This allows a more powerful negotiation of method type
+ between caller and callee.
+ &lt;p&gt;
+ (&lt;em&gt;Note:&lt;/em&gt; The adjusted method handle {@code M2} is not directly observable,
+ and implementations are therefore not required to materialize it.)
+
+ &lt;h1&gt;Invocation checking&lt;/h1&gt;
+ In typical programs, method handle type matching will usually succeed.
+ But if a match fails, the JVM will throw a {@link java.lang.invoke.WrongMethodTypeException},
+ either directly (in the case of {@code invokeExact}) or indirectly as if
+ by a failed call to {@code asType} (in the case of {@code invoke}).
+ &lt;p&gt;
+ Thus, a method type mismatch which might show up as a linkage error
+ in a statically typed program can show up as
+ a dynamic {@code WrongMethodTypeException}
+ in a program which uses method handles.
+ &lt;p&gt;
+ Because method types contain &quot;live&quot; {@code Class} objects,
+ method type matching takes into account both types names and class loaders.
+ Thus, even if a method handle {@code M} is created in one
+ class loader {@code L1} and used in another {@code L2},
+ method handle calls are type-safe, because the caller's symbolic type
+ descriptor, as resolved in {@code L2},
+ is matched against the original callee method's symbolic type descriptor,
+ as resolved in {@code L1}.
+ The resolution in {@code L1} happens when {@code M} is created
+ and its type is assigned, while the resolution in {@code L2} happens
+ when the {@code invokevirtual} instruction is linked.
+ &lt;p&gt;
+ Apart from the checking of type descriptors,
+ a method handle's capability to call its underlying method is unrestricted.
+ If a method handle is formed on a non-public method by a class
+ that has access to that method, the resulting handle can be used
+ in any place by any caller who receives a reference to it.
+ &lt;p&gt;
+ Unlike with the Core Reflection API, where access is checked every time
+ a reflective method is invoked,
+ method handle access checking is performed
+ &lt;a href=&quot;MethodHandles.Lookup.html#access&quot;&gt;when the method handle is created&lt;/a&gt;.
+ In the case of {@code ldc} (see below), access checking is performed as part of linking
+ the constant pool entry underlying the constant method handle.
+ &lt;p&gt;
+ Thus, handles to non-public methods, or to methods in non-public classes,
+ should generally be kept secret.
+ They should not be passed to untrusted code unless their use from
+ the untrusted code would be harmless.
+
+ &lt;h1&gt;Method handle creation&lt;/h1&gt;
+ Java code can create a method handle that directly accesses
+ any method, constructor, or field that is accessible to that code.
+ This is done via a reflective, capability-based API called
+ {@link java.lang.invoke.MethodHandles.Lookup MethodHandles.Lookup}
+ For example, a static method handle can be obtained
+ from {@link java.lang.invoke.MethodHandles.Lookup#findStatic Lookup.findStatic}.
+ There are also conversion methods from Core Reflection API objects,
+ such as {@link java.lang.invoke.MethodHandles.Lookup#unreflect Lookup.unreflect}.
+ &lt;p&gt;
+ Like classes and strings, method handles that correspond to accessible
+ fields, methods, and constructors can also be represented directly
+ in a class file's constant pool as constants to be loaded by {@code ldc} bytecodes.
+ A new type of constant pool entry, {@code CONSTANT_MethodHandle},
+ refers directly to an associated {@code CONSTANT_Methodref},
+ {@code CONSTANT_InterfaceMethodref}, or {@code CONSTANT_Fieldref}
+ constant pool entry.
+ (For full details on method handle constants,
+ see sections 4.4.8 and 5.4.3.5 of the Java Virtual Machine Specification.)
+ &lt;p&gt;
+ Method handles produced by lookups or constant loads from methods or
+ constructors with the variable arity modifier bit ({@code 0x0080})
+ have a corresponding variable arity, as if they were defined with
+ the help of {@link #asVarargsCollector asVarargsCollector}.
+ &lt;p&gt;
+ A method reference may refer either to a static or non-static method.
+ In the non-static case, the method handle type includes an explicit
+ receiver argument, prepended before any other arguments.
+ In the method handle's type, the initial receiver argument is typed
+ according to the class under which the method was initially requested.
+ (E.g., if a non-static method handle is obtained via {@code ldc},
+ the type of the receiver is the class named in the constant pool entry.)
+ &lt;p&gt;
+ Method handle constants are subject to the same link-time access checks
+ their corresponding bytecode instructions, and the {@code ldc} instruction
+ will throw corresponding linkage errors if the bytecode behaviors would
+ throw such errors.
+ &lt;p&gt;
+ As a corollary of this, access to protected members is restricted
+ to receivers only of the accessing class, or one of its subclasses,
+ and the accessing class must in turn be a subclass (or package sibling)
+ of the protected member's defining class.
+ If a method reference refers to a protected non-static method or field
+ of a class outside the current package, the receiver argument will
+ be narrowed to the type of the accessing class.
+ &lt;p&gt;
+ When a method handle to a virtual method is invoked, the method is
+ always looked up in the receiver (that is, the first argument).
+ &lt;p&gt;
+ A non-virtual method handle to a specific virtual method implementation
+ can also be created.  These do not perform virtual lookup based on
+ receiver type.  Such a method handle simulates the effect of
+ an {@code invokespecial} instruction to the same method.
+
+ &lt;h1&gt;Usage examples&lt;/h1&gt;
+ Here are some examples of usage:
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+Object x, y; String s; int i;
+MethodType mt; MethodHandle mh;
+MethodHandles.Lookup lookup = MethodHandles.lookup();
+// mt is (char,char)String
+mt = MethodType.methodType(String.class, char.class, char.class);
+mh = lookup.findVirtual(String.class, &quot;replace&quot;, mt);
+s = (String) mh.invokeExact(&quot;daddy&quot;,'d','n');
+// invokeExact(Ljava/lang/String;CC)Ljava/lang/String;
+assertEquals(s, &quot;nanny&quot;);
+// weakly typed invocation (using MHs.invoke)
+s = (String) mh.invokeWithArguments(&quot;sappy&quot;, 'p', 'v');
+assertEquals(s, &quot;savvy&quot;);
+// mt is (Object[])List
+mt = MethodType.methodType(java.util.List.class, Object[].class);
+mh = lookup.findStatic(java.util.Arrays.class, &quot;asList&quot;, mt);
+assert(mh.isVarargsCollector());
+x = mh.invoke(&quot;one&quot;, &quot;two&quot;);
+// invoke(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;
+assertEquals(x, java.util.Arrays.asList(&quot;one&quot;,&quot;two&quot;));
+// mt is (Object,Object,Object)Object
+mt = MethodType.genericMethodType(3);
+mh = mh.asType(mt);
+x = mh.invokeExact((Object)1, (Object)2, (Object)3);
+// invokeExact(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+assertEquals(x, java.util.Arrays.asList(1,2,3));
+// mt is ()int
+mt = MethodType.methodType(int.class);
+mh = lookup.findVirtual(java.util.List.class, &quot;size&quot;, mt);
+i = (int) mh.invokeExact(java.util.Arrays.asList(1,2,3));
+// invokeExact(Ljava/util/List;)I
+assert(i == 3);
+mt = MethodType.methodType(void.class, String.class);
+mh = lookup.findVirtual(java.io.PrintStream.class, &quot;println&quot;, mt);
+mh.invokeExact(System.out, &quot;Hello, world.&quot;);
+// invokeExact(Ljava/io/PrintStream;Ljava/lang/String;)V
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+ Each of the above calls to {@code invokeExact} or plain {@code invoke}
+ generates a single invokevirtual instruction with
+ the symbolic type descriptor indicated in the following comment.
+ In these examples, the helper method {@code assertEquals} is assumed to
+ be a method which calls {@link java.util.Objects#equals(Object,Object) Objects.equals}
+ on its arguments, and asserts that the result is true.
+
+ &lt;h1&gt;Exceptions&lt;/h1&gt;
+ The methods {@code invokeExact} and {@code invoke} are declared
+ to throw {@link java.lang.Throwable Throwable},
+ which is to say that there is no static restriction on what a method handle
+ can throw.  Since the JVM does not distinguish between checked
+ and unchecked exceptions (other than by their class, of course),
+ there is no particular effect on bytecode shape from ascribing
+ checked exceptions to method handle invocations.  But in Java source
+ code, methods which perform method handle calls must either explicitly
+ throw {@code Throwable}, or else must catch all
+ throwables locally, rethrowing only those which are legal in the context,
+ and wrapping ones which are illegal.
+
+ &lt;h1&gt;&lt;a name=&quot;sigpoly&quot;&gt;&lt;/a&gt;Signature polymorphism&lt;/h1&gt;
+ The unusual compilation and linkage behavior of
+ {@code invokeExact} and plain {@code invoke}
+ is referenced by the term &lt;em&gt;signature polymorphism&lt;/em&gt;.
+ As defined in the Java Language Specification,
+ a signature polymorphic method is one which can operate with
+ any of a wide range of call signatures and return types.
+ &lt;p&gt;
+ In source code, a call to a signature polymorphic method will
+ compile, regardless of the requested symbolic type descriptor.
+ As usual, the Java compiler emits an {@code invokevirtual}
+ instruction with the given symbolic type descriptor against the named method.
+ The unusual part is that the symbolic type descriptor is derived from
+ the actual argument and return types, not from the method declaration.
+ &lt;p&gt;
+ When the JVM processes bytecode containing signature polymorphic calls,
+ it will successfully link any such call, regardless of its symbolic type descriptor.
+ (In order to retain type safety, the JVM will guard such calls with suitable
+ dynamic type checks, as described elsewhere.)
+ &lt;p&gt;
+ Bytecode generators, including the compiler back end, are required to emit
+ untransformed symbolic type descriptors for these methods.
+ Tools which determine symbolic linkage are required to accept such
+ untransformed descriptors, without reporting linkage errors.
+
+ &lt;h1&gt;Interoperation between method handles and the Core Reflection API&lt;/h1&gt;
+ Using factory methods in the {@link java.lang.invoke.MethodHandles.Lookup Lookup} API,
+ any class member represented by a Core Reflection API object
+ can be converted to a behaviorally equivalent method handle.
+ For example, a reflective {@link java.lang.reflect.Method Method} can
+ be converted to a method handle using
+ {@link java.lang.invoke.MethodHandles.Lookup#unreflect Lookup.unreflect}.
+ The resulting method handles generally provide more direct and efficient
+ access to the underlying class members.
+ &lt;p&gt;
+ As a special case,
+ when the Core Reflection API is used to view the signature polymorphic
+ methods {@code invokeExact} or plain {@code invoke} in this class,
+ they appear as ordinary non-polymorphic methods.
+ Their reflective appearance, as viewed by
+ {@link java.lang.Class#getDeclaredMethod Class.getDeclaredMethod},
+ is unaffected by their special status in this API.
+ For example, {@link java.lang.reflect.Method#getModifiers Method.getModifiers}
+ will report exactly those modifier bits required for any similarly
+ declared method, including in this case {@code native} and {@code varargs} bits.
+ &lt;p&gt;
+ As with any reflected method, these methods (when reflected) may be
+ invoked via {@link java.lang.reflect.Method#invoke java.lang.reflect.Method.invoke}.
+ However, such reflective calls do not result in method handle invocations.
+ Such a call, if passed the required argument
+ (a single one, of type {@code Object[]}), will ignore the argument and
+ will throw an {@code UnsupportedOperationException}.
+ &lt;p&gt;
+ Since {@code invokevirtual} instructions can natively
+ invoke method handles under any symbolic type descriptor, this reflective view conflicts
+ with the normal presentation of these methods via bytecodes.
+ Thus, these two native methods, when reflectively viewed by
+ {@code Class.getDeclaredMethod}, may be regarded as placeholders only.
+ &lt;p&gt;
+ In order to obtain an invoker method for a particular type descriptor,
+ use {@link java.lang.invoke.MethodHandles#exactInvoker MethodHandles.exactInvoker},
+ or {@link java.lang.invoke.MethodHandles#invoker MethodHandles.invoker}.
+ The {@link java.lang.invoke.MethodHandles.Lookup#findVirtual Lookup.findVirtual}
+ API is also able to return a method handle
+ to call {@code invokeExact} or plain {@code invoke},
+ for any specified type descriptor .
+
+ &lt;h1&gt;Interoperation between method handles and Java generics&lt;/h1&gt;
+ A method handle can be obtained on a method, constructor, or field
+ which is declared with Java generic types.
+ As with the Core Reflection API, the type of the method handle
+ will constructed from the erasure of the source-level type.
+ When a method handle is invoked, the types of its arguments
+ or the return value cast type may be generic types or type instances.
+ If this occurs, the compiler will replace those
+ types by their erasures when it constructs the symbolic type descriptor
+ for the {@code invokevirtual} instruction.
+ &lt;p&gt;
+ Method handles do not represent
+ their function-like types in terms of Java parameterized (generic) types,
+ because there are three mismatches between function-like types and parameterized
+ Java types.
+ &lt;ul&gt;
+ &lt;li&gt;Method types range over all possible arities,
+ from no arguments to up to the  &lt;a href=&quot;MethodHandle.html#maxarity&quot;&gt;maximum number&lt;/a&gt; of allowed arguments.
+ Generics are not variadic, and so cannot represent this.&lt;/li&gt;
+ &lt;li&gt;Method types can specify arguments of primitive types,
+ which Java generic types cannot range over.&lt;/li&gt;
+ &lt;li&gt;Higher order functions over method handles (combinators) are
+ often generic across a wide range of function types, including
+ those of multiple arities.  It is impossible to represent such
+ genericity with a Java type parameter.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;h1&gt;&lt;a name=&quot;maxarity&quot;&gt;&lt;/a&gt;Arity limits&lt;/h1&gt;
+ The JVM imposes on all methods and constructors of any kind an absolute
+ limit of 255 stacked arguments.  This limit can appear more restrictive
+ in certain cases:
+ &lt;ul&gt;
+ &lt;li&gt;A {@code long} or {@code double} argument counts (for purposes of arity limits) as two argument slots.
+ &lt;li&gt;A non-static method consumes an extra argument for the object on which the method is called.
+ &lt;li&gt;A constructor consumes an extra argument for the object which is being constructed.
+ &lt;li&gt;Since a method handle&amp;rsquo;s {@code invoke} method (or other signature-polymorphic method) is non-virtual,
+     it consumes an extra argument for the method handle itself, in addition to any non-virtual receiver object.
+ &lt;/ul&gt;
+ These limits imply that certain method handles cannot be created, solely because of the JVM limit on stacked arguments.
+ For example, if a static JVM method accepts exactly 255 arguments, a method handle cannot be created for it.
+ Attempts to create method handles with impossible method types lead to an {@link IllegalArgumentException}.
+ In particular, a method handle&amp;rsquo;s type must not have an arity of the exact maximum 255.
+
+ @see MethodType
+ @see MethodHandles
+ @author John Rose, JSR 292 EG
+*/
+var MethodHandle = {
+
+<span id='java-lang-invoke-MethodHandle-property-INVOKE_VIRTUAL'>/**@hide */
+</span>INVOKE_VIRTUAL : &quot;0&quot;,
+<span id='java-lang-invoke-MethodHandle-property-INVOKE_SUPER'>/**@hide */
+</span>INVOKE_SUPER : &quot;1&quot;,
+<span id='java-lang-invoke-MethodHandle-property-INVOKE_DIRECT'>/**@hide */
+</span>INVOKE_DIRECT : &quot;2&quot;,
+<span id='java-lang-invoke-MethodHandle-property-INVOKE_STATIC'>/**@hide */
+</span>INVOKE_STATIC : &quot;3&quot;,
+<span id='java-lang-invoke-MethodHandle-property-INVOKE_INTERFACE'>/**@hide */
+</span>INVOKE_INTERFACE : &quot;4&quot;,
+<span id='java-lang-invoke-MethodHandle-property-INVOKE_TRANSFORM'>/**@hide */
+</span>INVOKE_TRANSFORM : &quot;5&quot;,
+<span id='java-lang-invoke-MethodHandle-property-INVOKE_CALLSITE_TRANSFORM'>/**@hide */
+</span>INVOKE_CALLSITE_TRANSFORM : &quot;6&quot;,
+<span id='java-lang-invoke-MethodHandle-property-INVOKE_VAR_HANDLE'>/**@hide */
+</span>INVOKE_VAR_HANDLE : &quot;7&quot;,
+<span id='java-lang-invoke-MethodHandle-property-INVOKE_VAR_HANDLE_EXACT'>/**@hide */
+</span>INVOKE_VAR_HANDLE_EXACT : &quot;8&quot;,
+<span id='java-lang-invoke-MethodHandle-property-IGET'>/**@hide */
+</span>IGET : &quot;9&quot;,
+<span id='java-lang-invoke-MethodHandle-property-IPUT'>/**@hide */
+</span>IPUT : &quot;10&quot;,
+<span id='java-lang-invoke-MethodHandle-property-SGET'>/**@hide */
+</span>SGET : &quot;11&quot;,
+<span id='java-lang-invoke-MethodHandle-property-SPUT'>/**@hide */
+</span>SPUT : &quot;12&quot;,
+<span id='java-lang-invoke-MethodHandle-method-type'>/**Reports the type of this method handle.
+</span> Every invocation of this method handle via {@code invokeExact} must exactly match this type.
+@return {Object {java.lang.invoke.MethodType}} the method handle type
+*/
+type : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-invokeExact'>/**Invokes the method handle, allowing any caller type descriptor, but requiring an exact type match.
+</span> The symbolic type descriptor at the call site of {@code invokeExact} must
+ exactly match this method handle's {@link #type type}.
+ No conversions are allowed on arguments or return values.
+ &lt;p&gt;
+ When this method is observed via the Core Reflection API,
+ it will appear as a single native method, taking an object array and returning an object.
+ If this native method is invoked directly via
+ {@link java.lang.reflect.Method#invoke java.lang.reflect.Method.invoke}, via JNI,
+ or indirectly via {@link java.lang.invoke.MethodHandles.Lookup#unreflect Lookup.unreflect},
+ it will throw an {@code UnsupportedOperationException}.
+@param {Object {java.lang.Object[]}} args the signature-polymorphic parameter list, statically represented using varargs
+@return {Object {java.lang.Object}} the signature-polymorphic result, statically represented using {@code Object}
+@throws WrongMethodTypeException if the target's type is not identical with the caller's symbolic type descriptor
+@throws Throwable anything thrown by the underlying method propagates unchanged through the method handle call
+*/
+invokeExact : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-invoke'>/**Invokes the method handle, allowing any caller type descriptor,
+</span> and optionally performing conversions on arguments and return values.
+ &lt;p&gt;
+ If the call site's symbolic type descriptor exactly matches this method handle's {@link #type type},
+ the call proceeds as if by {@link #invokeExact invokeExact}.
+ &lt;p&gt;
+ Otherwise, the call proceeds as if this method handle were first
+ adjusted by calling {@link #asType asType} to adjust this method handle
+ to the required type, and then the call proceeds as if by
+ {@link #invokeExact invokeExact} on the adjusted method handle.
+ &lt;p&gt;
+ There is no guarantee that the {@code asType} call is actually made.
+ If the JVM can predict the results of making the call, it may perform
+ adaptations directly on the caller's arguments,
+ and call the target method handle according to its own exact type.
+ &lt;p&gt;
+ The resolved type descriptor at the call site of {@code invoke} must
+ be a valid argument to the receivers {@code asType} method.
+ In particular, the caller must specify the same argument arity
+ as the callee's type,
+ if the callee is not a {@linkplain #asVarargsCollector variable arity collector}.
+ &lt;p&gt;
+ When this method is observed via the Core Reflection API,
+ it will appear as a single native method, taking an object array and returning an object.
+ If this native method is invoked directly via
+ {@link java.lang.reflect.Method#invoke java.lang.reflect.Method.invoke}, via JNI,
+ or indirectly via {@link java.lang.invoke.MethodHandles.Lookup#unreflect Lookup.unreflect},
+ it will throw an {@code UnsupportedOperationException}.
+@param {Object {java.lang.Object[]}} args the signature-polymorphic parameter list, statically represented using varargs
+@return {Object {java.lang.Object}} the signature-polymorphic result, statically represented using {@code Object}
+@throws WrongMethodTypeException if the target's type cannot be adjusted to the caller's symbolic type descriptor
+@throws ClassCastException if the target's type can be adjusted to the caller, but a reference cast fails
+@throws Throwable anything thrown by the underlying method propagates unchanged through the method handle call
+*/
+invoke : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-invokeWithArguments'>/**Performs a variable arity invocation, passing the arguments in the given list
+</span> to the method handle, as if via an inexact {@link #invoke invoke} from a call site
+ which mentions only the type {@code Object}, and whose arity is the length
+ of the argument list.
+ &lt;p&gt;
+ Specifically, execution proceeds as if by the following steps,
+ although the methods are not guaranteed to be called if the JVM
+ can predict their effects.
+ &lt;ul&gt;
+ &lt;li&gt;Determine the length of the argument array as {@code N}.
+     For a null reference, {@code N=0}. &lt;/li&gt;
+ &lt;li&gt;Determine the general type {@code TN} of {@code N} arguments as
+     as {@code TN=MethodType.genericMethodType(N)}.&lt;/li&gt;
+ &lt;li&gt;Force the original target method handle {@code MH0} to the
+     required type, as {@code MH1 = MH0.asType(TN)}. &lt;/li&gt;
+ &lt;li&gt;Spread the array into {@code N} separate arguments {@code A0, ...}. &lt;/li&gt;
+ &lt;li&gt;Invoke the type-adjusted method handle on the unpacked arguments:
+     MH1.invokeExact(A0, ...). &lt;/li&gt;
+ &lt;li&gt;Take the return value as an {@code Object} reference. &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Because of the action of the {@code asType} step, the following argument
+ conversions are applied as necessary:
+ &lt;ul&gt;
+ &lt;li&gt;reference casting
+ &lt;li&gt;unboxing
+ &lt;li&gt;widening primitive conversions
+ &lt;/ul&gt;
+ &lt;p&gt;
+ The result returned by the call is boxed if it is a primitive,
+ or forced to null if the return type is void.
+ &lt;p&gt;
+ This call is equivalent to the following code:
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+ MethodHandle invoker = MethodHandles.spreadInvoker(this.type(), 0);
+ Object result = invoker.invokeExact(this, arguments);
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;p&gt;
+ Unlike the signature polymorphic methods {@code invokeExact} and {@code invoke},
+ {@code invokeWithArguments} can be accessed normally via the Core Reflection API and JNI.
+ It can therefore be used as a bridge between native or reflective code and method handles.
+@param {Object {java.lang.Object[]}} arguments the arguments to pass to the target
+@return {Object {java.lang.Object}} the result returned by the target
+@throws ClassCastException if an argument cannot be converted by reference casting
+@throws WrongMethodTypeException if the target's type cannot be adjusted to take the given number of {@code Object} arguments
+@throws Throwable anything thrown by the target method invocation
+@see MethodHandles#spreadInvoker
+*/
+invokeWithArguments : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-invokeWithArguments'>/**Performs a variable arity invocation, passing the arguments in the given array
+</span> to the method handle, as if via an inexact {@link #invoke invoke} from a call site
+ which mentions only the type {@code Object}, and whose arity is the length
+ of the argument array.
+ &lt;p&gt;
+ This method is also equivalent to the following code:
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+   invokeWithArguments(arguments.toArray()
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {java.util.List}} arguments the arguments to pass to the target
+@return {Object {java.lang.Object}} the result returned by the target
+@throws NullPointerException if {@code arguments} is a null reference
+@throws ClassCastException if an argument cannot be converted by reference casting
+@throws WrongMethodTypeException if the target's type cannot be adjusted to take the given number of {@code Object} arguments
+@throws Throwable anything thrown by the target method invocation
+*/
+invokeWithArguments : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-asType'>/**Produces an adapter method handle which adapts the type of the
+</span> current method handle to a new type.
+ The resulting method handle is guaranteed to report a type
+ which is equal to the desired new type.
+ &lt;p&gt;
+ If the original type and new type are equal, returns {@code this}.
+ &lt;p&gt;
+ The new method handle, when invoked, will perform the following
+ steps:
+ &lt;ul&gt;
+ &lt;li&gt;Convert the incoming argument list to match the original
+     method handle's argument list.
+ &lt;li&gt;Invoke the original method handle on the converted argument list.
+ &lt;li&gt;Convert any result returned by the original method handle
+     to the return type of new method handle.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ This method provides the crucial behavioral difference between
+ {@link #invokeExact invokeExact} and plain, inexact {@link #invoke invoke}.
+ The two methods
+ perform the same steps when the caller's type descriptor exactly m atches
+ the callee's, but when the types differ, plain {@link #invoke invoke}
+ also calls {@code asType} (or some internal equivalent) in order
+ to match up the caller's and callee's types.
+ &lt;p&gt;
+ If the current method is a variable arity method handle
+ argument list conversion may involve the conversion and collection
+ of several arguments into an array, as
+ {@linkplain #asVarargsCollector described elsewhere}.
+ In every other case, all conversions are applied &lt;em&gt;pairwise&lt;/em&gt;,
+ which means that each argument or return value is converted to
+ exactly one argument or return value (or no return value).
+ The applied conversions are defined by consulting the
+ the corresponding component types of the old and new
+ method handle types.
+ &lt;p&gt;
+ Let &lt;em&gt;T0&lt;/em&gt; and &lt;em&gt;T1&lt;/em&gt; be corresponding new and old parameter types,
+ or old and new return types.  Specifically, for some valid index {@code i}, let
+ &lt;em&gt;T0&lt;/em&gt;{@code =newType.parameterType(i)} and &lt;em&gt;T1&lt;/em&gt;{@code =this.type().parameterType(i)}.
+ Or else, going the other way for return values, let
+ &lt;em&gt;T0&lt;/em&gt;{@code =this.type().returnType()} and &lt;em&gt;T1&lt;/em&gt;{@code =newType.returnType()}.
+ If the types are the same, the new method handle makes no change
+ to the corresponding argument or return value (if any).
+ Otherwise, one of the following conversions is applied
+ if possible:
+ &lt;ul&gt;
+ &lt;li&gt;If &lt;em&gt;T0&lt;/em&gt; and &lt;em&gt;T1&lt;/em&gt; are references, then a cast to &lt;em&gt;T1&lt;/em&gt; is applied.
+     (The types do not need to be related in any particular way.
+     This is because a dynamic value of null can convert to any reference type.)
+ &lt;li&gt;If &lt;em&gt;T0&lt;/em&gt; and &lt;em&gt;T1&lt;/em&gt; are primitives, then a Java method invocation
+     conversion (JLS 5.3) is applied, if one exists.
+     (Specifically, &lt;em&gt;T0&lt;/em&gt; must convert to &lt;em&gt;T1&lt;/em&gt; by a widening primitive conversion.)
+ &lt;li&gt;If &lt;em&gt;T0&lt;/em&gt; is a primitive and &lt;em&gt;T1&lt;/em&gt; a reference,
+     a Java casting conversion (JLS 5.5) is applied if one exists.
+     (Specifically, the value is boxed from &lt;em&gt;T0&lt;/em&gt; to its wrapper class,
+     which is then widened as needed to &lt;em&gt;T1&lt;/em&gt;.)
+ &lt;li&gt;If &lt;em&gt;T0&lt;/em&gt; is a reference and &lt;em&gt;T1&lt;/em&gt; a primitive, an unboxing
+     conversion will be applied at runtime, possibly followed
+     by a Java method invocation conversion (JLS 5.3)
+     on the primitive value.  (These are the primitive widening conversions.)
+     &lt;em&gt;T0&lt;/em&gt; must be a wrapper class or a supertype of one.
+     (In the case where &lt;em&gt;T0&lt;/em&gt; is Object, these are the conversions
+     allowed by {@link java.lang.reflect.Method#invoke java.lang.reflect.Method.invoke}.)
+     The unboxing conversion must have a possibility of success, which means that
+     if &lt;em&gt;T0&lt;/em&gt; is not itself a wrapper class, there must exist at least one
+     wrapper class &lt;em&gt;TW&lt;/em&gt; which is a subtype of &lt;em&gt;T0&lt;/em&gt; and whose unboxed
+     primitive value can be widened to &lt;em&gt;T1&lt;/em&gt;.
+ &lt;li&gt;If the return type &lt;em&gt;T1&lt;/em&gt; is marked as void, any returned value is discarded
+ &lt;li&gt;If the return type &lt;em&gt;T0&lt;/em&gt; is void and &lt;em&gt;T1&lt;/em&gt; a reference, a null value is introduced.
+ &lt;li&gt;If the return type &lt;em&gt;T0&lt;/em&gt; is void and &lt;em&gt;T1&lt;/em&gt; a primitive,
+     a zero value is introduced.
+ &lt;/ul&gt;
+ (&lt;em&gt;Note:&lt;/em&gt; Both &lt;em&gt;T0&lt;/em&gt; and &lt;em&gt;T1&lt;/em&gt; may be regarded as static types,
+ because neither corresponds specifically to the &lt;em&gt;dynamic type&lt;/em&gt; of any
+ actual argument or return value.)
+ &lt;p&gt;
+ The method handle conversion cannot be made if any one of the required
+ pairwise conversions cannot be made.
+ &lt;p&gt;
+ At runtime, the conversions applied to reference arguments
+ or return values may require additional runtime checks which can fail.
+ An unboxing operation may fail because the original reference is null,
+ causing a {@link java.lang.NullPointerException NullPointerException}.
+ An unboxing operation or a reference cast may also fail on a reference
+ to an object of the wrong type,
+ causing a {@link java.lang.ClassCastException ClassCastException}.
+ Although an unboxing operation may accept several kinds of wrappers,
+ if none are available, a {@code ClassCastException} will be thrown.
+@param {Object {MethodType}} newType the expected type of the new method handle
+@return {Object {java.lang.invoke.MethodHandle}} a method handle which delegates to {@code this} after performing
+           any necessary argument conversions, and arranges for any
+           necessary return value conversions
+@throws NullPointerException if {@code newType} is a null reference
+@throws WrongMethodTypeException if the conversion cannot be made
+@see MethodHandles#explicitCastArguments
+*/
+asType : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-asSpreader'>/**Makes an &lt;em&gt;array-spreading&lt;/em&gt; method handle, which accepts a trailing array argument
+</span> and spreads its elements as positional arguments.
+ The new method handle adapts, as its &lt;i&gt;target&lt;/i&gt;,
+ the current method handle.  The type of the adapter will be
+ the same as the type of the target, except that the final
+ {@code arrayLength} parameters of the target's type are replaced
+ by a single array parameter of type {@code arrayType}.
+ &lt;p&gt;
+ If the array element type differs from any of the corresponding
+ argument types on the original target,
+ the original target is adapted to take the array elements directly,
+ as if by a call to {@link #asType asType}.
+ &lt;p&gt;
+ When called, the adapter replaces a trailing array argument
+ by the array's elements, each as its own argument to the target.
+ (The order of the arguments is preserved.)
+ They are converted pairwise by casting and/or unboxing
+ to the types of the trailing parameters of the target.
+ Finally the target is called.
+ What the target eventually returns is returned unchanged by the adapter.
+ &lt;p&gt;
+ Before calling the target, the adapter verifies that the array
+ contains exactly enough elements to provide a correct argument count
+ to the target method handle.
+ (The array may also be null when zero elements are required.)
+ &lt;p&gt;
+ If, when the adapter is called, the supplied array argument does
+ not have the correct number of elements, the adapter will throw
+ an {@link IllegalArgumentException} instead of invoking the target.
+ &lt;p&gt;
+ Here are some simple examples of array-spreading method handles:
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+MethodHandle equals = publicLookup()
+  .findVirtual(String.class, &quot;equals&quot;, methodType(boolean.class, Object.class));
+assert( (boolean) equals.invokeExact(&quot;me&quot;, (Object)&quot;me&quot;));
+assert(!(boolean) equals.invokeExact(&quot;me&quot;, (Object)&quot;thee&quot;));
+// spread both arguments from a 2-array:
+MethodHandle eq2 = equals.asSpreader(Object[].class, 2);
+assert( (boolean) eq2.invokeExact(new Object[]{ &quot;me&quot;, &quot;me&quot; }));
+assert(!(boolean) eq2.invokeExact(new Object[]{ &quot;me&quot;, &quot;thee&quot; }));
+// try to spread from anything but a 2-array:
+for (int n = 0; n &lt;= 10; n++) {
+  Object[] badArityArgs = (n == 2 ? null : new Object[n]);
+  try { assert((boolean) eq2.invokeExact(badArityArgs) &amp;&amp; false); }
+  catch (IllegalArgumentException ex) { } // OK
+}
+// spread both arguments from a String array:
+MethodHandle eq2s = equals.asSpreader(String[].class, 2);
+assert( (boolean) eq2s.invokeExact(new String[]{ &quot;me&quot;, &quot;me&quot; }));
+assert(!(boolean) eq2s.invokeExact(new String[]{ &quot;me&quot;, &quot;thee&quot; }));
+// spread second arguments from a 1-array:
+MethodHandle eq1 = equals.asSpreader(Object[].class, 1);
+assert( (boolean) eq1.invokeExact(&quot;me&quot;, new Object[]{ &quot;me&quot; }));
+assert(!(boolean) eq1.invokeExact(&quot;me&quot;, new Object[]{ &quot;thee&quot; }));
+// spread no arguments from a 0-array or null:
+MethodHandle eq0 = equals.asSpreader(Object[].class, 0);
+assert( (boolean) eq0.invokeExact(&quot;me&quot;, (Object)&quot;me&quot;, new Object[0]));
+assert(!(boolean) eq0.invokeExact(&quot;me&quot;, (Object)&quot;thee&quot;, (Object[])null));
+// asSpreader and asCollector are approximate inverses:
+for (int n = 0; n &lt;= 2; n++) {
+    for (Class&lt;?&gt; a : new Class&lt;?&gt;[]{Object[].class, String[].class, CharSequence[].class}) {
+        MethodHandle equals2 = equals.asSpreader(a, n).asCollector(a, n);
+        assert( (boolean) equals2.invokeWithArguments(&quot;me&quot;, &quot;me&quot;));
+        assert(!(boolean) equals2.invokeWithArguments(&quot;me&quot;, &quot;thee&quot;));
+    }
+}
+MethodHandle caToString = publicLookup()
+  .findStatic(Arrays.class, &quot;toString&quot;, methodType(String.class, char[].class));
+assertEquals(&quot;[A, B, C]&quot;, (String) caToString.invokeExact(&quot;ABC&quot;.toCharArray()));
+MethodHandle caString3 = caToString.asCollector(char[].class, 3);
+assertEquals(&quot;[A, B, C]&quot;, (String) caString3.invokeExact('A', 'B', 'C'));
+MethodHandle caToString2 = caString3.asSpreader(char[].class, 2);
+assertEquals(&quot;[A, B, C]&quot;, (String) caToString2.invokeExact('A', &quot;BC&quot;.toCharArray()));
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {java.lang.Class}} arrayType usually {@code Object[]}, the type of the array argument from which to extract the spread arguments
+@param {Number} arrayLength the number of arguments to spread from an incoming array argument
+@return {Object {java.lang.invoke.MethodHandle}} a new method handle which spreads its final array argument,
+         before calling the original method handle
+@throws NullPointerException if {@code arrayType} is a null reference
+@throws IllegalArgumentException if {@code arrayType} is not an array type,
+         or if target does not have at least
+         {@code arrayLength} parameter types,
+         or if {@code arrayLength} is negative,
+         or if the resulting method handle's type would have
+         &lt;a href=&quot;MethodHandle.html#maxarity&quot;&gt;too many parameters&lt;/a&gt;
+@throws WrongMethodTypeException if the implied {@code asType} call fails
+@see #asCollector
+*/
+asSpreader : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-asCollector'>/**Makes an &lt;em&gt;array-collecting&lt;/em&gt; method handle, which accepts a given number of trailing
+</span> positional arguments and collects them into an array argument.
+ The new method handle adapts, as its &lt;i&gt;target&lt;/i&gt;,
+ the current method handle.  The type of the adapter will be
+ the same as the type of the target, except that a single trailing
+ parameter (usually of type {@code arrayType}) is replaced by
+ {@code arrayLength} parameters whose type is element type of {@code arrayType}.
+ &lt;p&gt;
+ If the array type differs from the final argument type on the original target,
+ the original target is adapted to take the array type directly,
+ as if by a call to {@link #asType asType}.
+ &lt;p&gt;
+ When called, the adapter replaces its trailing {@code arrayLength}
+ arguments by a single new array of type {@code arrayType}, whose elements
+ comprise (in order) the replaced arguments.
+ Finally the target is called.
+ What the target eventually returns is returned unchanged by the adapter.
+ &lt;p&gt;
+ (The array may also be a shared constant when {@code arrayLength} is zero.)
+ &lt;p&gt;
+ (&lt;em&gt;Note:&lt;/em&gt; The {@code arrayType} is often identical to the last
+ parameter type of the original target.
+ It is an explicit argument for symmetry with {@code asSpreader}, and also
+ to allow the target to use a simple {@code Object} as its last parameter type.)
+ &lt;p&gt;
+ In order to create a collecting adapter which is not restricted to a particular
+ number of collected arguments, use {@link #asVarargsCollector asVarargsCollector} instead.
+ &lt;p&gt;
+ Here are some examples of array-collecting method handles:
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+MethodHandle deepToString = publicLookup()
+  .findStatic(Arrays.class, &quot;deepToString&quot;, methodType(String.class, Object[].class));
+assertEquals(&quot;[won]&quot;,   (String) deepToString.invokeExact(new Object[]{&quot;won&quot;}));
+MethodHandle ts1 = deepToString.asCollector(Object[].class, 1);
+assertEquals(methodType(String.class, Object.class), ts1.type());
+//assertEquals(&quot;[won]&quot;, (String) ts1.invokeExact(         new Object[]{&quot;won&quot;})); //FAIL
+assertEquals(&quot;[[won]]&quot;, (String) ts1.invokeExact((Object) new Object[]{&quot;won&quot;}));
+// arrayType can be a subtype of Object[]
+MethodHandle ts2 = deepToString.asCollector(String[].class, 2);
+assertEquals(methodType(String.class, String.class, String.class), ts2.type());
+assertEquals(&quot;[two, too]&quot;, (String) ts2.invokeExact(&quot;two&quot;, &quot;too&quot;));
+MethodHandle ts0 = deepToString.asCollector(Object[].class, 0);
+assertEquals(&quot;[]&quot;, (String) ts0.invokeExact());
+// collectors can be nested, Lisp-style
+MethodHandle ts22 = deepToString.asCollector(Object[].class, 3).asCollector(String[].class, 2);
+assertEquals(&quot;[A, B, [C, D]]&quot;, ((String) ts22.invokeExact((Object)'A', (Object)&quot;B&quot;, &quot;C&quot;, &quot;D&quot;)));
+// arrayType can be any primitive array type
+MethodHandle bytesToString = publicLookup()
+  .findStatic(Arrays.class, &quot;toString&quot;, methodType(String.class, byte[].class))
+  .asCollector(byte[].class, 3);
+assertEquals(&quot;[1, 2, 3]&quot;, (String) bytesToString.invokeExact((byte)1, (byte)2, (byte)3));
+MethodHandle longsToString = publicLookup()
+  .findStatic(Arrays.class, &quot;toString&quot;, methodType(String.class, long[].class))
+  .asCollector(long[].class, 1);
+assertEquals(&quot;[123]&quot;, (String) longsToString.invokeExact((long)123));
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {java.lang.Class}} arrayType often {@code Object[]}, the type of the array argument which will collect the arguments
+@param {Number} arrayLength the number of arguments to collect into a new array argument
+@return {Object {java.lang.invoke.MethodHandle}} a new method handle which collects some trailing argument
+         into an array, before calling the original method handle
+@throws NullPointerException if {@code arrayType} is a null reference
+@throws IllegalArgumentException if {@code arrayType} is not an array type
+         or {@code arrayType} is not assignable to this method handle's trailing parameter type,
+         or {@code arrayLength} is not a legal array size,
+         or the resulting method handle's type would have
+         &lt;a href=&quot;MethodHandle.html#maxarity&quot;&gt;too many parameters&lt;/a&gt;
+@throws WrongMethodTypeException if the implied {@code asType} call fails
+@see #asSpreader
+@see #asVarargsCollector
+*/
+asCollector : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-asVarargsCollector'>/**Makes a &lt;em&gt;variable arity&lt;/em&gt; adapter which is able to accept
+</span> any number of trailing positional arguments and collect them
+ into an array argument.
+ &lt;p&gt;
+ The type and behavior of the adapter will be the same as
+ the type and behavior of the target, except that certain
+ {@code invoke} and {@code asType} requests can lead to
+ trailing positional arguments being collected into target's
+ trailing parameter.
+ Also, the last parameter type of the adapter will be
+ {@code arrayType}, even if the target has a different
+ last parameter type.
+ &lt;p&gt;
+ This transformation may return {@code this} if the method handle is
+ already of variable arity and its trailing parameter type
+ is identical to {@code arrayType}.
+ &lt;p&gt;
+ When called with {@link #invokeExact invokeExact}, the adapter invokes
+ the target with no argument changes.
+ (&lt;em&gt;Note:&lt;/em&gt; This behavior is different from a
+ {@linkplain #asCollector fixed arity collector},
+ since it accepts a whole array of indeterminate length,
+ rather than a fixed number of arguments.)
+ &lt;p&gt;
+ When called with plain, inexact {@link #invoke invoke}, if the caller
+ type is the same as the adapter, the adapter invokes the target as with
+ {@code invokeExact}.
+ (This is the normal behavior for {@code invoke} when types match.)
+ &lt;p&gt;
+ Otherwise, if the caller and adapter arity are the same, and the
+ trailing parameter type of the caller is a reference type identical to
+ or assignable to the trailing parameter type of the adapter,
+ the arguments and return values are converted pairwise,
+ as if by {@link #asType asType} on a fixed arity
+ method handle.
+ &lt;p&gt;
+ Otherwise, the arities differ, or the adapter's trailing parameter
+ type is not assignable from the corresponding caller type.
+ In this case, the adapter replaces all trailing arguments from
+ the original trailing argument position onward, by
+ a new array of type {@code arrayType}, whose elements
+ comprise (in order) the replaced arguments.
+ &lt;p&gt;
+ The caller type must provides as least enough arguments,
+ and of the correct type, to satisfy the target's requirement for
+ positional arguments before the trailing array argument.
+ Thus, the caller must supply, at a minimum, {@code N-1} arguments,
+ where {@code N} is the arity of the target.
+ Also, there must exist conversions from the incoming arguments
+ to the target's arguments.
+ As with other uses of plain {@code invoke}, if these basic
+ requirements are not fulfilled, a {@code WrongMethodTypeException}
+ may be thrown.
+ &lt;p&gt;
+ In all cases, what the target eventually returns is returned unchanged by the adapter.
+ &lt;p&gt;
+ In the final case, it is exactly as if the target method handle were
+ temporarily adapted with a {@linkplain #asCollector fixed arity collector}
+ to the arity required by the caller type.
+ (As with {@code asCollector}, if the array length is zero,
+ a shared constant may be used instead of a new array.
+ If the implied call to {@code asCollector} would throw
+ an {@code IllegalArgumentException} or {@code WrongMethodTypeException},
+ the call to the variable arity adapter must throw
+ {@code WrongMethodTypeException}.)
+ &lt;p&gt;
+ The behavior of {@link #asType asType} is also specialized for
+ variable arity adapters, to maintain the invariant that
+ plain, inexact {@code invoke} is always equivalent to an {@code asType}
+ call to adjust the target type, followed by {@code invokeExact}.
+ Therefore, a variable arity adapter responds
+ to an {@code asType} request by building a fixed arity collector,
+ if and only if the adapter and requested type differ either
+ in arity or trailing argument type.
+ The resulting fixed arity collector has its type further adjusted
+ (if necessary) to the requested type by pairwise conversion,
+ as if by another application of {@code asType}.
+ &lt;p&gt;
+ When a method handle is obtained by executing an {@code ldc} instruction
+ of a {@code CONSTANT_MethodHandle} constant, and the target method is marked
+ as a variable arity method (with the modifier bit {@code 0x0080}),
+ the method handle will accept multiple arities, as if the method handle
+ constant were created by means of a call to {@code asVarargsCollector}.
+ &lt;p&gt;
+ In order to create a collecting adapter which collects a predetermined
+ number of arguments, and whose type reflects this predetermined number,
+ use {@link #asCollector asCollector} instead.
+ &lt;p&gt;
+ No method handle transformations produce new method handles with
+ variable arity, unless they are documented as doing so.
+ Therefore, besides {@code asVarargsCollector},
+ all methods in {@code MethodHandle} and {@code MethodHandles}
+ will return a method handle with fixed arity,
+ except in the cases where they are specified to return their original
+ operand (e.g., {@code asType} of the method handle's own type).
+ &lt;p&gt;
+ Calling {@code asVarargsCollector} on a method handle which is already
+ of variable arity will produce a method handle with the same type and behavior.
+ It may (or may not) return the original variable arity method handle.
+ &lt;p&gt;
+ Here is an example, of a list-making variable arity method handle:
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+MethodHandle deepToString = publicLookup()
+  .findStatic(Arrays.class, &quot;deepToString&quot;, methodType(String.class, Object[].class));
+MethodHandle ts1 = deepToString.asVarargsCollector(Object[].class);
+assertEquals(&quot;[won]&quot;,   (String) ts1.invokeExact(    new Object[]{&quot;won&quot;}));
+assertEquals(&quot;[won]&quot;,   (String) ts1.invoke(         new Object[]{&quot;won&quot;}));
+assertEquals(&quot;[won]&quot;,   (String) ts1.invoke(                      &quot;won&quot; ));
+assertEquals(&quot;[[won]]&quot;, (String) ts1.invoke((Object) new Object[]{&quot;won&quot;}));
+// findStatic of Arrays.asList(...) produces a variable arity method handle:
+MethodHandle asList = publicLookup()
+  .findStatic(Arrays.class, &quot;asList&quot;, methodType(List.class, Object[].class));
+assertEquals(methodType(List.class, Object[].class), asList.type());
+assert(asList.isVarargsCollector());
+assertEquals(&quot;[]&quot;, asList.invoke().toString());
+assertEquals(&quot;[1]&quot;, asList.invoke(1).toString());
+assertEquals(&quot;[two, too]&quot;, asList.invoke(&quot;two&quot;, &quot;too&quot;).toString());
+String[] argv = { &quot;three&quot;, &quot;thee&quot;, &quot;tee&quot; };
+assertEquals(&quot;[three, thee, tee]&quot;, asList.invoke(argv).toString());
+assertEquals(&quot;[three, thee, tee]&quot;, asList.invoke((Object[])argv).toString());
+List ls = (List) asList.invoke((Object)argv);
+assertEquals(1, ls.size());
+assertEquals(&quot;[three, thee, tee]&quot;, Arrays.toString((Object[])ls.get(0)));
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;p style=&quot;font-size:smaller;&quot;&gt;
+ &lt;em&gt;Discussion:&lt;/em&gt;
+ These rules are designed as a dynamically-typed variation
+ of the Java rules for variable arity methods.
+ In both cases, callers to a variable arity method or method handle
+ can either pass zero or more positional arguments, or else pass
+ pre-collected arrays of any length.  Users should be aware of the
+ special role of the final argument, and of the effect of a
+ type match on that final argument, which determines whether
+ or not a single trailing argument is interpreted as a whole
+ array or a single element of an array to be collected.
+ Note that the dynamic type of the trailing argument has no
+ effect on this decision, only a comparison between the symbolic
+ type descriptor of the call site and the type descriptor of the method handle.)
+@param {Object {java.lang.Class}} arrayType often {@code Object[]}, the type of the array argument which will collect the arguments
+@return {Object {java.lang.invoke.MethodHandle}} a new method handle which can collect any number of trailing arguments
+         into an array, before calling the original method handle
+@throws NullPointerException if {@code arrayType} is a null reference
+@throws IllegalArgumentException if {@code arrayType} is not an array type
+         or {@code arrayType} is not assignable to this method handle's trailing parameter type
+@see #asCollector
+@see #isVarargsCollector
+@see #asFixedArity
+*/
+asVarargsCollector : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-isVarargsCollector'>/**Determines if this method handle
+</span> supports {@linkplain #asVarargsCollector variable arity} calls.
+ Such method handles arise from the following sources:
+ &lt;ul&gt;
+ &lt;li&gt;a call to {@linkplain #asVarargsCollector asVarargsCollector}
+ &lt;li&gt;a call to a {@linkplain java.lang.invoke.MethodHandles.Lookup lookup method}
+     which resolves to a variable arity Java method or constructor
+ &lt;li&gt;an {@code ldc} instruction of a {@code CONSTANT_MethodHandle}
+     which resolves to a variable arity Java method or constructor
+ &lt;/ul&gt;
+@return {Boolean} true if this method handle accepts more than one arity of plain, inexact {@code invoke} calls
+@see #asVarargsCollector
+@see #asFixedArity
+*/
+isVarargsCollector : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-asFixedArity'>/**Makes a &lt;em&gt;fixed arity&lt;/em&gt; method handle which is otherwise
+</span> equivalent to the current method handle.
+ &lt;p&gt;
+ If the current method handle is not of
+ {@linkplain #asVarargsCollector variable arity},
+ the current method handle is returned.
+ This is true even if the current method handle
+ could not be a valid input to {@code asVarargsCollector}.
+ &lt;p&gt;
+ Otherwise, the resulting fixed-arity method handle has the same
+ type and behavior of the current method handle,
+ except that {@link #isVarargsCollector isVarargsCollector}
+ will be false.
+ The fixed-arity method handle may (or may not) be the
+ a previous argument to {@code asVarargsCollector}.
+ &lt;p&gt;
+ Here is an example, of a list-making variable arity method handle:
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+MethodHandle asListVar = publicLookup()
+  .findStatic(Arrays.class, &quot;asList&quot;, methodType(List.class, Object[].class))
+  .asVarargsCollector(Object[].class);
+MethodHandle asListFix = asListVar.asFixedArity();
+assertEquals(&quot;[1]&quot;, asListVar.invoke(1).toString());
+Exception caught = null;
+try { asListFix.invoke((Object)1); }
+catch (Exception ex) { caught = ex; }
+assert(caught instanceof ClassCastException);
+assertEquals(&quot;[two, too]&quot;, asListVar.invoke(&quot;two&quot;, &quot;too&quot;).toString());
+try { asListFix.invoke(&quot;two&quot;, &quot;too&quot;); }
+catch (Exception ex) { caught = ex; }
+assert(caught instanceof WrongMethodTypeException);
+Object[] argv = { &quot;three&quot;, &quot;thee&quot;, &quot;tee&quot; };
+assertEquals(&quot;[three, thee, tee]&quot;, asListVar.invoke(argv).toString());
+assertEquals(&quot;[three, thee, tee]&quot;, asListFix.invoke(argv).toString());
+assertEquals(1, ((List) asListVar.invoke((Object)argv)).size());
+assertEquals(&quot;[three, thee, tee]&quot;, asListFix.invoke((Object)argv).toString());
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+@return {Object {java.lang.invoke.MethodHandle}} a new method handle which accepts only a fixed number of arguments
+@see #asVarargsCollector
+@see #isVarargsCollector
+*/
+asFixedArity : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-bindTo'>/**Binds a value {@code x} to the first argument of a method handle, without invoking it.
+</span> The new method handle adapts, as its &lt;i&gt;target&lt;/i&gt;,
+ the current method handle by binding it to the given argument.
+ The type of the bound handle will be
+ the same as the type of the target, except that a single leading
+ reference parameter will be omitted.
+ &lt;p&gt;
+ When called, the bound handle inserts the given value {@code x}
+ as a new leading argument to the target.  The other arguments are
+ also passed unchanged.
+ What the target eventually returns is returned unchanged by the bound handle.
+ &lt;p&gt;
+ The reference {@code x} must be convertible to the first parameter
+ type of the target.
+ &lt;p&gt;
+ (&lt;em&gt;Note:&lt;/em&gt;  Because method handles are immutable, the target method handle
+ retains its original type and behavior.)
+@param {Object {Object}} x  the value to bind to the first argument of the target
+@return {Object {java.lang.invoke.MethodHandle}} a new method handle which prepends the given value to the incoming
+         argument list, before calling the original method handle
+@throws IllegalArgumentException if the target does not have a
+         leading parameter type that is a reference type
+@throws ClassCastException if {@code x} cannot be converted
+         to the leading parameter type of the target
+@see MethodHandles#insertArguments
+*/
+bindTo : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-toString'>/**Returns a string representation of the method handle,
+</span> starting with the string {@code &quot;MethodHandle&quot;} and
+ ending with the string representation of the method handle's type.
+ In other words, this method returns a string equal to the value of:
+ &lt;blockquote&gt;&lt;pre&gt;{@code
+ &quot;MethodHandle&quot; + type().toString()
+ }&lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;p&gt;
+ (&lt;em&gt;Note:&lt;/em&gt;  Future releases of this API may add further information
+ to the string representation.
+ Therefore, the present syntax should not be parsed by applications.)
+@return {String} a string representation of the method handle
+*/
+toString : function(  ) {},
+
+<span id='java-lang-invoke-MethodHandle-method-getHandleKind'>/**
+</span>@hide 
+*/
+getHandleKind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

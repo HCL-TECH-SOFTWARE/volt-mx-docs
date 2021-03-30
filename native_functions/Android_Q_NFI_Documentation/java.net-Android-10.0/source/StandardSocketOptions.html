@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-StandardSocketOptions'>/**@class java.net.StandardSocketOptions
+</span>@extends java.lang.Object
+
+ Defines the &lt;em&gt;standard&lt;/em&gt; socket options.
+
+ &lt;p&gt; The {@link java.net.SocketOption#name name} of each socket option defined by this
+ class is its field name.
+
+ &lt;p&gt; In this release, the socket options defined here are used by {@link java.nio.channels.NetworkChannel network} channels in the {@link java.nio.channels channels} package.
+
+ @since 1.7
+*/
+var StandardSocketOptions = {
+
+<span id='java-net-StandardSocketOptions-property-SO_BROADCAST'>/** Allow transmission of broadcast datagrams.
+</span>
+ &lt;p&gt; The value of this socket option is a {@code Boolean} that represents
+ whether the option is enabled or disabled. The option is specific to
+ datagram-oriented sockets sending to {@link java.net.Inet4Address IPv4}
+ broadcast addresses. When the socket option is enabled then the socket
+ can be used to send &lt;em&gt;broadcast datagrams&lt;/em&gt;.
+
+ &lt;p&gt; The initial value of this socket option is {@code FALSE}. The socket
+ option may be enabled or disabled at any time. Some operating systems may
+ require that the Java virtual machine be started with implementation
+ specific privileges to enable this option or send broadcast datagrams.
+
+ @see &lt;a href=&quot;http://www.ietf.org/rfc/rfc919.txt&quot;&gt;RFC&amp;nbsp;929:
+ Broadcasting Internet Datagrams&lt;/a&gt;
+ @see DatagramSocket#setBroadcast
+*/
+SO_BROADCAST : &quot;null&quot;,
+<span id='java-net-StandardSocketOptions-property-SO_KEEPALIVE'>/** Keep connection alive.
+</span>
+ &lt;p&gt; The value of this socket option is a {@code Boolean} that represents
+ whether the option is enabled or disabled. When the {@code SO_KEEPALIVE}
+ option is enabled the operating system may use a &lt;em&gt;keep-alive&lt;/em&gt;
+ mechanism to periodically probe the other end of a connection when the
+ connection is otherwise idle. The exact semantics of the keep alive
+ mechanism is system dependent and therefore unspecified.
+
+ &lt;p&gt; The initial value of this socket option is {@code FALSE}. The socket
+ option may be enabled or disabled at any time.
+
+ @see &lt;a href=&quot;http://www.ietf.org/rfc/rfc1122.txt&quot;&gt;RFC&amp;nbsp;1122
+ Requirements for Internet Hosts -- Communication Layers&lt;/a&gt;
+ @see Socket#setKeepAlive
+*/
+SO_KEEPALIVE : &quot;null&quot;,
+<span id='java-net-StandardSocketOptions-property-SO_SNDBUF'>/** The size of the socket send buffer.
+</span>
+ &lt;p&gt; The value of this socket option is an {@code Integer} that is the
+ size of the socket send buffer in bytes. The socket send buffer is an
+ output buffer used by the networking implementation. It may need to be
+ increased for high-volume connections. The value of the socket option is
+ a &lt;em&gt;hint&lt;/em&gt; to the implementation to size the buffer and the actual
+ size may differ. The socket option can be queried to retrieve the actual
+ size.
+
+ &lt;p&gt; For datagram-oriented sockets, the size of the send buffer may limit
+ the size of the datagrams that may be sent by the socket. Whether
+ datagrams larger than the buffer size are sent or discarded is system
+ dependent.
+
+ &lt;p&gt; The initial/default size of the socket send buffer and the range of
+ allowable values is system dependent although a negative size is not
+ allowed. An attempt to set the socket send buffer to larger than its
+ maximum size causes it to be set to its maximum size.
+
+ &lt;p&gt; An implementation allows this socket option to be set before the
+ socket is bound or connected. Whether an implementation allows the
+ socket send buffer to be changed after the socket is bound is system
+ dependent.
+
+ @see Socket#setSendBufferSize
+*/
+SO_SNDBUF : &quot;null&quot;,
+<span id='java-net-StandardSocketOptions-property-SO_RCVBUF'>/** The size of the socket receive buffer.
+</span>
+ &lt;p&gt; The value of this socket option is an {@code Integer} that is the
+ size of the socket receive buffer in bytes. The socket receive buffer is
+ an input buffer used by the networking implementation. It may need to be
+ increased for high-volume connections or decreased to limit the possible
+ backlog of incoming data. The value of the socket option is a
+ &lt;em&gt;hint&lt;/em&gt; to the implementation to size the buffer and the actual
+ size may differ.
+
+ &lt;p&gt; For datagram-oriented sockets, the size of the receive buffer may
+ limit the size of the datagrams that can be received. Whether datagrams
+ larger than the buffer size can be received is system dependent.
+ Increasing the socket receive buffer may be important for cases where
+ datagrams arrive in bursts faster than they can be processed.
+
+ &lt;p&gt; In the case of stream-oriented sockets and the TCP/IP protocol, the
+ size of the socket receive buffer may be used when advertising the size
+ of the TCP receive window to the remote peer.
+
+ &lt;p&gt; The initial/default size of the socket receive buffer and the range
+ of allowable values is system dependent although a negative size is not
+ allowed. An attempt to set the socket receive buffer to larger than its
+ maximum size causes it to be set to its maximum size.
+
+ &lt;p&gt; An implementation allows this socket option to be set before the
+ socket is bound or connected. Whether an implementation allows the
+ socket receive buffer to be changed after the socket is bound is system
+ dependent.
+
+ @see &lt;a href=&quot;http://www.ietf.org/rfc/rfc1323.txt&quot;&gt;RFC&amp;nbsp;1323: TCP
+ Extensions for High Performance&lt;/a&gt;
+ @see Socket#setReceiveBufferSize
+ @see ServerSocket#setReceiveBufferSize
+*/
+SO_RCVBUF : &quot;null&quot;,
+<span id='java-net-StandardSocketOptions-property-SO_REUSEADDR'>/** Re-use address.
+</span>
+ &lt;p&gt; The value of this socket option is a {@code Boolean} that represents
+ whether the option is enabled or disabled. The exact semantics of this
+ socket option are socket type and system dependent.
+
+ &lt;p&gt; In the case of stream-oriented sockets, this socket option will
+ usually determine whether the socket can be bound to a socket address
+ when a previous connection involving that socket address is in the
+ &lt;em&gt;TIME_WAIT&lt;/em&gt; state. On implementations where the semantics differ,
+ and the socket option is not required to be enabled in order to bind the
+ socket when a previous connection is in this state, then the
+ implementation may choose to ignore this option.
+
+ &lt;p&gt; For datagram-oriented sockets the socket option is used to allow
+ multiple programs bind to the same address. This option should be enabled
+ when the socket is to be used for Internet Protocol (IP) multicasting.
+
+ &lt;p&gt; An implementation allows this socket option to be set before the
+ socket is bound or connected. Changing the value of this socket option
+ after the socket is bound has no effect. The default value of this
+ socket option is system dependent.
+
+ @see &lt;a href=&quot;http://www.ietf.org/rfc/rfc793.txt&quot;&gt;RFC&amp;nbsp;793: Transmission
+ Control Protocol&lt;/a&gt;
+ @see ServerSocket#setReuseAddress
+*/
+SO_REUSEADDR : &quot;null&quot;,
+<span id='java-net-StandardSocketOptions-property-SO_LINGER'>/** Linger on close if data is present.
+</span>
+ &lt;p&gt; The value of this socket option is an {@code Integer} that controls
+ the action taken when unsent data is queued on the socket and a method
+ to close the socket is invoked. If the value of the socket option is zero
+ or greater, then it represents a timeout value, in seconds, known as the
+ &lt;em&gt;linger interval&lt;/em&gt;. The linger interval is the timeout for the
+ {@code close} method to block while the operating system attempts to
+ transmit the unsent data or it decides that it is unable to transmit the
+ data. If the value of the socket option is less than zero then the option
+ is disabled. In that case the {@code close} method does not wait until
+ unsent data is transmitted; if possible the operating system will transmit
+ any unsent data before the connection is closed.
+
+ &lt;p&gt; This socket option is intended for use with sockets that are configured
+ in {@link java.nio.channels.SelectableChannel#isBlocking() blocking} mode
+ only. The behavior of the {@code close} method when this option is
+ enabled on a non-blocking socket is not defined.
+
+ &lt;p&gt; The initial value of this socket option is a negative value, meaning
+ that the option is disabled. The option may be enabled, or the linger
+ interval changed, at any time. The maximum value of the linger interval
+ is system dependent. Setting the linger interval to a value that is
+ greater than its maximum value causes the linger interval to be set to
+ its maximum value.
+
+ @see Socket#setSoLinger
+*/
+SO_LINGER : &quot;null&quot;,
+<span id='java-net-StandardSocketOptions-property-IP_TOS'>/** The Type of Service (ToS) octet in the Internet Protocol (IP) header.
+</span>
+ &lt;p&gt; The value of this socket option is an {@code Integer} representing
+ the value of the ToS octet in IP packets sent by sockets to an {@link java.net.StandardProtocolFamily#INET IPv4} socket. The interpretation of the ToS
+ octet is network specific and is not defined by this class. Further
+ information on the ToS octet can be found in &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc1349.txt&quot;&gt;RFC&amp;nbsp;1349&lt;/a&gt; and &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc2474.txt&quot;&gt;RFC&amp;nbsp;2474&lt;/a&gt;. The value
+ of the socket option is a &lt;em&gt;hint&lt;/em&gt;. An implementation may ignore the
+ value, or ignore specific values.
+
+ &lt;p&gt; The initial/default value of the TOS field in the ToS octet is
+ implementation specific but will typically be {@code 0}. For
+ datagram-oriented sockets the option may be configured at any time after
+ the socket has been bound. The new value of the octet is used when sending
+ subsequent datagrams. It is system dependent whether this option can be
+ queried or changed prior to binding the socket.
+
+ &lt;p&gt; The behavior of this socket option on a stream-oriented socket, or an
+ {@link java.net.StandardProtocolFamily#INET6 IPv6} socket, is not defined in this
+ release.
+
+ @see DatagramSocket#setTrafficClass
+*/
+IP_TOS : &quot;null&quot;,
+<span id='java-net-StandardSocketOptions-property-IP_MULTICAST_IF'>/** The network interface for Internet Protocol (IP) multicast datagrams.
+</span>
+ &lt;p&gt; The value of this socket option is a {@link java.net.NetworkInterface} that
+ represents the outgoing interface for multicast datagrams sent by the
+ datagram-oriented socket. For {@link java.net.StandardProtocolFamily#INET6 IPv6}
+ sockets then it is system dependent whether setting this option also
+ sets the outgoing interface for multicast datagrams sent to IPv4
+ addresses.
+
+ &lt;p&gt; The initial/default value of this socket option may be {@code null}
+ to indicate that outgoing interface will be selected by the operating
+ system, typically based on the network routing tables. An implementation
+ allows this socket option to be set after the socket is bound. Whether
+ the socket option can be queried or changed prior to binding the socket
+ is system dependent.
+
+ @see java.nio.channels.MulticastChannel
+ @see MulticastSocket#setInterface
+*/
+IP_MULTICAST_IF : &quot;null&quot;,
+<span id='java-net-StandardSocketOptions-property-IP_MULTICAST_TTL'>/** The &lt;em&gt;time-to-live&lt;/em&gt; for Internet Protocol (IP) multicast datagrams.
+</span>
+ &lt;p&gt; The value of this socket option is an {@code Integer} in the range
+ {@code 0 &lt;= value &lt;= 255}. It is used to control the scope of multicast
+ datagrams sent by the datagram-oriented socket.
+ In the case of an {@link java.net.StandardProtocolFamily#INET IPv4} socket
+ the option is the time-to-live (TTL) on multicast datagrams sent by the
+ socket. Datagrams with a TTL of zero are not transmitted on the network
+ but may be delivered locally. In the case of an {@link java.net.StandardProtocolFamily#INET6 IPv6} socket the option is the
+ &lt;em&gt;hop limit&lt;/em&gt; which is number of &lt;em&gt;hops&lt;/em&gt; that the datagram can
+ pass through before expiring on the network. For IPv6 sockets it is
+ system dependent whether the option also sets the &lt;em&gt;time-to-live&lt;/em&gt;
+ on multicast datagrams sent to IPv4 addresses.
+
+ &lt;p&gt; The initial/default value of the time-to-live setting is typically
+ {@code 1}. An implementation allows this socket option to be set after
+ the socket is bound. Whether the socket option can be queried or changed
+ prior to binding the socket is system dependent.
+
+ @see java.nio.channels.MulticastChannel
+ @see MulticastSocket#setTimeToLive
+*/
+IP_MULTICAST_TTL : &quot;null&quot;,
+<span id='java-net-StandardSocketOptions-property-IP_MULTICAST_LOOP'>/** Loopback for Internet Protocol (IP) multicast datagrams.
+</span>
+ &lt;p&gt; The value of this socket option is a {@code Boolean} that controls
+ the &lt;em&gt;loopback&lt;/em&gt; of multicast datagrams. The value of the socket
+ option represents if the option is enabled or disabled.
+
+ &lt;p&gt; The exact semantics of this socket options are system dependent.
+ In particular, it is system dependent whether the loopback applies to
+ multicast datagrams sent from the socket or received by the socket.
+ For {@link java.net.StandardProtocolFamily#INET6 IPv6} sockets then it is
+ system dependent whether the option also applies to multicast datagrams
+ sent to IPv4 addresses.
+
+ &lt;p&gt; The initial/default value of this socket option is {@code TRUE}. An
+ implementation allows this socket option to be set after the socket is
+ bound. Whether the socket option can be queried or changed prior to
+ binding the socket is system dependent.
+
+ @see java.nio.channels.MulticastChannel
+  @see MulticastSocket#setLoopbackMode
+*/
+IP_MULTICAST_LOOP : &quot;null&quot;,
+<span id='java-net-StandardSocketOptions-property-TCP_NODELAY'>/** Disable the Nagle algorithm.
+</span>
+ &lt;p&gt; The value of this socket option is a {@code Boolean} that represents
+ whether the option is enabled or disabled. The socket option is specific to
+ stream-oriented sockets using the TCP/IP protocol. TCP/IP uses an algorithm
+ known as &lt;em&gt;The Nagle Algorithm&lt;/em&gt; to coalesce short segments and
+ improve network efficiency.
+
+ &lt;p&gt; The default value of this socket option is {@code FALSE}. The
+ socket option should only be enabled in cases where it is known that the
+ coalescing impacts performance. The socket option may be enabled at any
+ time. In other words, the Nagle Algorithm can be disabled. Once the option
+ is enabled, it is system dependent whether it can be subsequently
+ disabled. If it cannot, then invoking the {@code setOption} method to
+ disable the option has no effect.
+
+ @see &lt;a href=&quot;http://www.ietf.org/rfc/rfc1122.txt&quot;&gt;RFC&amp;nbsp;1122:
+ Requirements for Internet Hosts -- Communication Layers&lt;/a&gt;
+ @see Socket#setTcpNoDelay
+*/
+TCP_NODELAY : &quot;null&quot;,
+
+};</pre>
+</body>
+</html>

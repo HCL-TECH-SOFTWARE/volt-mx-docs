@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-stream-PipelineHelper'>/**@class java.util.stream.PipelineHelper
+</span>@extends java.lang.Object
+
+ Helper class for executing &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;
+ stream pipelines&lt;/a&gt;, capturing all of the information about a stream
+ pipeline (output shape, intermediate operations, stream flags, parallelism,
+ etc) in one place.
+
+ &lt;p&gt;
+ A {@code PipelineHelper} describes the initial segment of a stream pipeline,
+ including its source, intermediate operations, and may additionally
+ incorporate information about the terminal (or stateful) operation which
+ follows the last intermediate operation described by this
+ {@code PipelineHelper}. The {@code PipelineHelper} is passed to the
+ {@link TerminalOp#evaluateParallel(PipelineHelper, java.util.Spliterator)},
+ {@link TerminalOp#evaluateSequential(PipelineHelper, java.util.Spliterator)},
+ and {@link java.util.stream.AbstractPipeline#opEvaluateParallel(PipelineHelper, java.util.Spliterator,
+ java.util.function.IntFunction)}, methods, which can use the
+ {@code PipelineHelper} to access information about the pipeline such as
+ head shape, stream flags, and size, and use the helper methods
+ such as {@link #wrapAndCopyInto(Sink, Spliterator)},
+ {@link #copyInto(Sink, Spliterator)}, and {@link #wrapSink}(Sink) to execute
+ pipeline operations.
+
+ @param &lt;P_OUT&gt; type of output elements from the pipeline
+ @since 1.8
+ @hide Visible for CTS testing only (OpenJDK8 tests).
+*/
+var PipelineHelper = {
+
+<span id='java-util-stream-PipelineHelper-method-getStreamAndOpFlags'>/**Gets the combined stream and operation flags for the output of the described
+</span> pipeline.  This will incorporate stream flags from the stream source, all
+ the intermediate operations and the terminal operation.
+@return {Number} the combined stream and operation flags
+@see StreamOpFlag
+*/
+getStreamAndOpFlags : function(  ) {},
+
+<span id='java-util-stream-PipelineHelper-method-wrapSink'>/**Takes a {@code Sink} that accepts elements of the output type of the
+</span> {@code PipelineHelper}, and wrap it with a {@code Sink} that accepts
+ elements of the input type and implements all the intermediate operations
+ described by this {@code PipelineHelper}, delivering the result into the
+ provided {@code Sink}.
+@param {Object {java.util.stream.Sink}} sink the {@code Sink} to receive the results
+@return {Object {java.util.stream.Sink}} a {@code Sink} that implements the pipeline stages and sends
+         results to the provided {@code Sink}
+*/
+wrapSink : function(  ) {},
+
+<span id='java-util-stream-PipelineHelper-method-evaluate'>/**Collects all output elements resulting from applying the pipeline stages
+</span> to the source {@code Spliterator} into a {@code Node}.
+@param {Object {java.util.Spliterator}} spliterator the source {@code Spliterator}
+@param {Boolean} flatten if true and the pipeline is a parallel pipeline then the
+        {@code Node} returned will contain no children, otherwise the
+        {@code Node} may represent the root in a tree that reflects the
+        shape of the computation tree.
+@param {Object {java.util.function.IntFunction}} generator a factory function for array instances
+@param generator a factory function for array instances
+@return {Object {java.util.stream.Node}} the {@code Node} containing all output elements
+*/
+evaluate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

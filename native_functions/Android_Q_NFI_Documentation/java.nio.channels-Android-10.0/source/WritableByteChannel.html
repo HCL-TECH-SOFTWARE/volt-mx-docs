@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-WritableByteChannel'>/**@class java.nio.channels.WritableByteChannel
+</span> implements java.nio.channels.Channel
+
+ A channel that can write bytes.
+
+ &lt;p&gt; Only one write operation upon a writable channel may be in progress at
+ any given time.  If one thread initiates a write operation upon a channel
+ then any other thread that attempts to initiate another write operation will
+ block until the first operation is complete.  Whether or not other kinds of
+ I/O operations may proceed concurrently with a write operation depends upon
+ the type of the channel. &lt;/p&gt;
+
+
+ @author Mark Reinhold
+ @author JSR-51 Expert Group
+ @since 1.4
+*/
+var WritableByteChannel = {
+
+<span id='java-nio-channels-WritableByteChannel-method-write'>/**Writes a sequence of bytes to this channel from the given buffer.
+</span>
+ &lt;p&gt; An attempt is made to write up to &lt;i&gt;r&lt;/i&gt; bytes to the channel,
+ where &lt;i&gt;r&lt;/i&gt; is the number of bytes remaining in the buffer, that is,
+ &lt;tt&gt;src.remaining()&lt;/tt&gt;, at the moment this method is invoked.
+
+ &lt;p&gt; Suppose that a byte sequence of length &lt;i&gt;n&lt;/i&gt; is written, where
+ &lt;tt&gt;0&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;&amp;lt;=&lt;/tt&gt;&amp;nbsp;&lt;i&gt;n&lt;/i&gt;&amp;nbsp;&lt;tt&gt;&amp;lt;=&lt;/tt&gt;&amp;nbsp;&lt;i&gt;r&lt;/i&gt;.
+ This byte sequence will be transferred from the buffer starting at index
+ &lt;i&gt;p&lt;/i&gt;, where &lt;i&gt;p&lt;/i&gt; is the buffer's position at the moment this
+ method is invoked; the index of the last byte written will be
+ &lt;i&gt;p&lt;/i&gt;&amp;nbsp;&lt;tt&gt;+&lt;/tt&gt;&amp;nbsp;&lt;i&gt;n&lt;/i&gt;&amp;nbsp;&lt;tt&gt;-&lt;/tt&gt;&amp;nbsp;&lt;tt&gt;1&lt;/tt&gt;.
+ Upon return the buffer's position will be equal to
+ &lt;i&gt;p&lt;/i&gt;&amp;nbsp;&lt;tt&gt;+&lt;/tt&gt;&amp;nbsp;&lt;i&gt;n&lt;/i&gt;; its limit will not have changed.
+
+ &lt;p&gt; Unless otherwise specified, a write operation will return only after
+ writing all of the &lt;i&gt;r&lt;/i&gt; requested bytes.  Some types of channels,
+ depending upon their state, may write only some of the bytes or possibly
+ none at all.  A socket channel in non-blocking mode, for example, cannot
+ write any more bytes than are free in the socket's output buffer.
+
+ &lt;p&gt; This method may be invoked at any time.  If another thread has
+ already initiated a write operation upon this channel, however, then an
+ invocation of this method will block until the first operation is
+ complete. &lt;/p&gt;
+@param {Object {ByteBuffer}} src
+         The buffer from which bytes are to be retrieved
+@return {Number} The number of bytes written, possibly zero
+@throws NonWritableChannelException
+          If this channel was not opened for writing
+@throws ClosedChannelException
+          If this channel is closed
+@throws AsynchronousCloseException
+          If another thread closes this channel
+          while the write operation is in progress
+@throws ClosedByInterruptException
+          If another thread interrupts the current thread
+          while the write operation is in progress, thereby
+          closing the channel and setting the current thread's
+          interrupt status
+@throws IOException
+          If some other I/O error occurs
+*/
+write : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

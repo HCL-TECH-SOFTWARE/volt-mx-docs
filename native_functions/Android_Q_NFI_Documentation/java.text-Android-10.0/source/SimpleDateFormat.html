@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-text-SimpleDateFormat'>/**@class java.text.SimpleDateFormat
+</span>@extends java.text.DateFormat
+
+ &lt;code&gt;SimpleDateFormat&lt;/code&gt; is a concrete class for formatting and
+ parsing dates in a locale-sensitive manner. It allows for formatting
+ (date &amp;rarr; text), parsing (text &amp;rarr; date), and normalization.
+
+ &lt;p&gt;
+ &lt;code&gt;SimpleDateFormat&lt;/code&gt; allows you to start by choosing
+ any user-defined patterns for date-time formatting. However, you
+ are encouraged to create a date-time formatter with either
+ &lt;code&gt;getTimeInstance&lt;/code&gt;, &lt;code&gt;getDateInstance&lt;/code&gt;, or
+ &lt;code&gt;getDateTimeInstance&lt;/code&gt; in &lt;code&gt;DateFormat&lt;/code&gt;. Each
+ of these class methods can return a date/time formatter initialized
+ with a default format pattern. You may modify the format pattern
+ using the &lt;code&gt;applyPattern&lt;/code&gt; methods as desired.
+ For more information on using these methods, see
+ {@link java.text.DateFormat}.
+
+ &lt;h3&gt;Date and Time Patterns&lt;/h3&gt;
+ &lt;p&gt;
+ Date and time formats are specified by &lt;em&gt;date and time pattern&lt;/em&gt;
+ strings.
+ Within date and time pattern strings, unquoted letters from
+ &lt;code&gt;'A'&lt;/code&gt; to &lt;code&gt;'Z'&lt;/code&gt; and from &lt;code&gt;'a'&lt;/code&gt; to
+ &lt;code&gt;'z'&lt;/code&gt; are interpreted as pattern letters representing the
+ components of a date or time string.
+ Text can be quoted using single quotes (&lt;code&gt;'&lt;/code&gt;) to avoid
+ interpretation.
+ &lt;code&gt;&quot;''&quot;&lt;/code&gt; represents a single quote.
+ All other characters are not interpreted; they're simply copied into the
+ output string during formatting or matched against the input string
+ during parsing.
+ &lt;p&gt;
+ The following pattern letters are defined (all other characters from
+ &lt;code&gt;'A'&lt;/code&gt; to &lt;code&gt;'Z'&lt;/code&gt; and from &lt;code&gt;'a'&lt;/code&gt; to
+ &lt;code&gt;'z'&lt;/code&gt; are reserved):
+ &lt;blockquote&gt;
+ &lt;table border=0 cellspacing=3 cellpadding=0 summary=&quot;Chart shows pattern letters, date/time component, presentation, and examples.&quot;&gt;
+     &lt;tr style=&quot;background-color: rgb(204, 204, 255);&quot;&gt;
+         &lt;th align=left&gt;Letter
+         &lt;th align=left&gt;Date or Time Component
+         &lt;th align=left&gt;Presentation
+         &lt;th align=left&gt;Examples
+         &lt;th align=left&gt;Supported (API Levels)
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;G&lt;/code&gt;
+         &lt;td&gt;Era designator
+         &lt;td&gt;&lt;a href=&quot;#text&quot;&gt;Text&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;AD&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;y&lt;/code&gt;
+         &lt;td&gt;Year
+         &lt;td&gt;&lt;a href=&quot;#year&quot;&gt;Year&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;1996&lt;/code&gt;; &lt;code&gt;96&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;Y&lt;/code&gt;
+         &lt;td&gt;Week year
+         &lt;td&gt;&lt;a href=&quot;#year&quot;&gt;Year&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;2009&lt;/code&gt;; &lt;code&gt;09&lt;/code&gt;
+         &lt;td&gt;24+&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;M&lt;/code&gt;
+         &lt;td&gt;Month in year (context sensitive)
+         &lt;td&gt;&lt;a href=&quot;#month&quot;&gt;Month&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;July&lt;/code&gt;; &lt;code&gt;Jul&lt;/code&gt;; &lt;code&gt;07&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;L&lt;/code&gt;
+         &lt;td&gt;Month in year (standalone form)
+         &lt;td&gt;&lt;a href=&quot;#month&quot;&gt;Month&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;July&lt;/code&gt;; &lt;code&gt;Jul&lt;/code&gt;; &lt;code&gt;07&lt;/code&gt;
+         &lt;td&gt;TBD&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;w&lt;/code&gt;
+         &lt;td&gt;Week in year
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;27&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;W&lt;/code&gt;
+         &lt;td&gt;Week in month
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;2&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;D&lt;/code&gt;
+         &lt;td&gt;Day in year
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;189&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;d&lt;/code&gt;
+         &lt;td&gt;Day in month
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;10&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;F&lt;/code&gt;
+         &lt;td&gt;Day of week in month
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;2&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;E&lt;/code&gt;
+         &lt;td&gt;Day name in week
+         &lt;td&gt;&lt;a href=&quot;#text&quot;&gt;Text&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;Tuesday&lt;/code&gt;; &lt;code&gt;Tue&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;u&lt;/code&gt;
+         &lt;td&gt;Day number of week (1 = Monday, ..., 7 = Sunday)
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;1&lt;/code&gt;
+         &lt;td&gt;24+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;a&lt;/code&gt;
+         &lt;td&gt;Am/pm marker
+         &lt;td&gt;&lt;a href=&quot;#text&quot;&gt;Text&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;PM&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;H&lt;/code&gt;
+         &lt;td&gt;Hour in day (0-23)
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;0&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;k&lt;/code&gt;
+         &lt;td&gt;Hour in day (1-24)
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;24&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;K&lt;/code&gt;
+         &lt;td&gt;Hour in am/pm (0-11)
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;0&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;h&lt;/code&gt;
+         &lt;td&gt;Hour in am/pm (1-12)
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;12&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;m&lt;/code&gt;
+         &lt;td&gt;Minute in hour
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;30&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;s&lt;/code&gt;
+         &lt;td&gt;Second in minute
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;55&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;S&lt;/code&gt;
+         &lt;td&gt;Millisecond
+         &lt;td&gt;&lt;a href=&quot;#number&quot;&gt;Number&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;978&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;z&lt;/code&gt;
+         &lt;td&gt;Time zone
+         &lt;td&gt;&lt;a href=&quot;#timezone&quot;&gt;General time zone&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;Pacific Standard Time&lt;/code&gt;; &lt;code&gt;PST&lt;/code&gt;; &lt;code&gt;GMT-08:00&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;Z&lt;/code&gt;
+         &lt;td&gt;Time zone
+         &lt;td&gt;&lt;a href=&quot;#rfc822timezone&quot;&gt;RFC 822 time zone&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;-0800&lt;/code&gt;
+         &lt;td&gt;1+&lt;/td&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;X&lt;/code&gt;
+         &lt;td&gt;Time zone
+         &lt;td&gt;&lt;a href=&quot;#iso8601timezone&quot;&gt;ISO 8601 time zone&lt;/a&gt;
+         &lt;td&gt;&lt;code&gt;-08&lt;/code&gt;; &lt;code&gt;-0800&lt;/code&gt;;  &lt;code&gt;-08:00&lt;/code&gt;
+         &lt;td&gt;24+&lt;/td&gt;
+ &lt;/table&gt;
+ &lt;/blockquote&gt;
+ Pattern letters are usually repeated, as their number determines the
+ exact presentation:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;strong&gt;&lt;a name=&quot;text&quot;&gt;Text:&lt;/a&gt;&lt;/strong&gt;
+     For formatting, if the number of pattern letters is 4 or more,
+     the full form is used; otherwise a short or abbreviated form
+     is used if available.
+     For parsing, both forms are accepted, independent of the number
+     of pattern letters.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;&lt;a name=&quot;number&quot;&gt;Number:&lt;/a&gt;&lt;/strong&gt;
+     For formatting, the number of pattern letters is the minimum
+     number of digits, and shorter numbers are zero-padded to this amount.
+     For parsing, the number of pattern letters is ignored unless
+     it's needed to separate two adjacent fields.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;&lt;a name=&quot;year&quot;&gt;Year:&lt;/a&gt;&lt;/strong&gt;
+     If the formatter's {@link #getCalendar() Calendar} is the Gregorian
+     calendar, the following rules are applied.
+     &lt;ul&gt;
+     &lt;li&gt;For formatting, if the number of pattern letters is 2, the year
+         is truncated to 2 digits; otherwise it is interpreted as a
+         &lt;a href=&quot;#number&quot;&gt;number&lt;/a&gt;.
+     &lt;li&gt;For parsing, if the number of pattern letters is more than 2,
+         the year is interpreted literally, regardless of the number of
+         digits. So using the pattern &quot;MM/dd/yyyy&quot;, &quot;01/11/12&quot; parses to
+         Jan 11, 12 A.D.
+     &lt;li&gt;For parsing with the abbreviated year pattern (&quot;y&quot; or &quot;yy&quot;),
+         &lt;code&gt;SimpleDateFormat&lt;/code&gt; must interpret the abbreviated year
+         relative to some century.  It does this by adjusting dates to be
+         within 80 years before and 20 years after the time the &lt;code&gt;SimpleDateFormat&lt;/code&gt;
+         instance is created. For example, using a pattern of &quot;MM/dd/yy&quot; and a
+         &lt;code&gt;SimpleDateFormat&lt;/code&gt; instance created on Jan 1, 1997,  the string
+         &quot;01/11/12&quot; would be interpreted as Jan 11, 2012 while the string &quot;05/04/64&quot;
+         would be interpreted as May 4, 1964.
+         During parsing, only strings consisting of exactly two digits, as defined by
+         {@link Character#isDigit(char)}, will be parsed into the default century.
+         Any other numeric string, such as a one digit string, a three or more digit
+         string, or a two digit string that isn't all digits (for example, &quot;-1&quot;), is
+         interpreted literally.  So &quot;01/02/3&quot; or &quot;01/02/003&quot; are parsed, using the
+         same pattern, as Jan 2, 3 AD.  Likewise, &quot;01/02/-3&quot; is parsed as Jan 2, 4 BC.
+     &lt;/ul&gt;
+     Otherwise, calendar system specific forms are applied.
+     For both formatting and parsing, if the number of pattern
+     letters is 4 or more, a calendar specific {@linkplain
+     Calendar#LONG long form} is used. Otherwise, a calendar
+     specific {@linkplain Calendar#SHORT short or abbreviated form}
+     is used.
+     &lt;br&gt;
+     If week year {@code 'Y'} is specified and the {@linkplain
+     #getCalendar() calendar} doesn't support any &lt;a
+     href=&quot;../util/GregorianCalendar.html#week_year&quot;&gt; week
+     years&lt;/a&gt;, the calendar year ({@code 'y'}) is used instead. The
+     support of week years can be tested with a call to {@link java.text.DateFormat#getCalendar() getCalendar()}.{@link java.util.Calendar#isWeekDateSupported()
+     isWeekDateSupported()}.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;&lt;a name=&quot;month&quot;&gt;Month:&lt;/a&gt;&lt;/strong&gt;
+     If the number of pattern letters is 3 or more, the month is
+     interpreted as &lt;a href=&quot;#text&quot;&gt;text&lt;/a&gt;; otherwise,
+     it is interpreted as a &lt;a href=&quot;#number&quot;&gt;number&lt;/a&gt;.
+     &lt;ul&gt;
+     &lt;li&gt;Letter &lt;em&gt;M&lt;/em&gt; produces context-sensitive month names, such as the
+         embedded form of names. If a {@code DateFormatSymbols} has been set
+         explicitly with constructor {@link #Simplejava.text.DateFormat(String,
+         java.text.DateFormatSymbols)} or method {@link #setDateFormatSymbols}(DateFormatSymbols), the month names given by
+         the {@code DateFormatSymbols} are used.&lt;/li&gt;
+     &lt;li&gt;Letter &lt;em&gt;L&lt;/em&gt; produces the standalone form of month names.&lt;/li&gt;
+     &lt;/ul&gt;
+     &lt;br&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;&lt;a name=&quot;timezone&quot;&gt;General time zone:&lt;/a&gt;&lt;/strong&gt;
+     Time zones are interpreted as &lt;a href=&quot;#text&quot;&gt;text&lt;/a&gt; if they have
+     names. For time zones representing a GMT offset value, the
+     following syntax is used:
+     &lt;pre&gt;
+     &lt;a name=&quot;GMTOffsetTimeZone&quot;&gt;&lt;i&gt;GMTOffsetTimeZone:&lt;/i&gt;&lt;/a&gt;
+             &lt;code&gt;GMT&lt;/code&gt; &lt;i&gt;Sign&lt;/i&gt; &lt;i&gt;Hours&lt;/i&gt; &lt;code&gt;:&lt;/code&gt; &lt;i&gt;Minutes&lt;/i&gt;
+     &lt;i&gt;Sign:&lt;/i&gt; one of
+             &lt;code&gt;+ -&lt;/code&gt;
+     &lt;i&gt;Hours:&lt;/i&gt;
+             &lt;i&gt;Digit&lt;/i&gt;
+             &lt;i&gt;Digit&lt;/i&gt; &lt;i&gt;Digit&lt;/i&gt;
+     &lt;i&gt;Minutes:&lt;/i&gt;
+             &lt;i&gt;Digit&lt;/i&gt; &lt;i&gt;Digit&lt;/i&gt;
+     &lt;i&gt;Digit:&lt;/i&gt; one of
+             &lt;code&gt;0 1 2 3 4 5 6 7 8 9&lt;/code&gt;&lt;/pre&gt;
+     &lt;i&gt;Hours&lt;/i&gt; must be between 0 and 23, and &lt;i&gt;Minutes&lt;/i&gt; must be between
+     00 and 59. The format is locale independent and digits must be taken
+     from the Basic Latin block of the Unicode standard.
+     &lt;p&gt;For parsing, &lt;a href=&quot;#rfc822timezone&quot;&gt;RFC 822 time zones&lt;/a&gt; are also
+     accepted.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;&lt;a name=&quot;rfc822timezone&quot;&gt;RFC 822 time zone:&lt;/a&gt;&lt;/strong&gt;
+     For formatting, the RFC 822 4-digit time zone format is used:
+
+     &lt;pre&gt;
+     &lt;i&gt;RFC822TimeZone:&lt;/i&gt;
+             &lt;i&gt;Sign&lt;/i&gt; &lt;i&gt;TwoDigitHours&lt;/i&gt; &lt;i&gt;Minutes&lt;/i&gt;
+     &lt;i&gt;TwoDigitHours:&lt;/i&gt;
+             &lt;i&gt;Digit Digit&lt;/i&gt;&lt;/pre&gt;
+     &lt;i&gt;TwoDigitHours&lt;/i&gt; must be between 00 and 23. Other definitions
+     are as for &lt;a href=&quot;#timezone&quot;&gt;general time zones&lt;/a&gt;.
+
+     &lt;p&gt;For parsing, &lt;a href=&quot;#timezone&quot;&gt;general time zones&lt;/a&gt; are also
+     accepted.
+ &lt;li&gt;&lt;strong&gt;&lt;a name=&quot;iso8601timezone&quot;&gt;ISO 8601 Time zone:&lt;/a&gt;&lt;/strong&gt;
+     The number of pattern letters designates the format for both formatting
+     and parsing as follows:
+     &lt;pre&gt;
+     &lt;i&gt;ISO8601TimeZone:&lt;/i&gt;
+             &lt;i&gt;OneLetterISO8601TimeZone&lt;/i&gt;
+             &lt;i&gt;TwoLetterISO8601TimeZone&lt;/i&gt;
+             &lt;i&gt;ThreeLetterISO8601TimeZone&lt;/i&gt;
+     &lt;i&gt;OneLetterISO8601TimeZone:&lt;/i&gt;
+             &lt;i&gt;Sign&lt;/i&gt; &lt;i&gt;TwoDigitHours&lt;/i&gt;
+             {@code Z}
+     &lt;i&gt;TwoLetterISO8601TimeZone:&lt;/i&gt;
+             &lt;i&gt;Sign&lt;/i&gt; &lt;i&gt;TwoDigitHours&lt;/i&gt; &lt;i&gt;Minutes&lt;/i&gt;
+             {@code Z}
+     &lt;i&gt;ThreeLetterISO8601TimeZone:&lt;/i&gt;
+             &lt;i&gt;Sign&lt;/i&gt; &lt;i&gt;TwoDigitHours&lt;/i&gt; {@code :} &lt;i&gt;Minutes&lt;/i&gt;
+             {@code Z}&lt;/pre&gt;
+     Other definitions are as for &lt;a href=&quot;#timezone&quot;&gt;general time zones&lt;/a&gt; or
+     &lt;a href=&quot;#rfc822timezone&quot;&gt;RFC 822 time zones&lt;/a&gt;.
+
+     &lt;p&gt;For formatting, if the offset value from GMT is 0, {@code &quot;Z&quot;} is
+     produced. If the number of pattern letters is 1, any fraction of an hour
+     is ignored. For example, if the pattern is {@code &quot;X&quot;} and the time zone is
+     {@code &quot;GMT+05:30&quot;}, {@code &quot;+05&quot;} is produced.
+
+     &lt;p&gt;For parsing, the letter {@code &quot;Z&quot;} is parsed as the UTC time zone designator (therefore
+     {@code &quot;09:30Z&quot;} is parsed as {@code &quot;09:30 UTC&quot;}.
+     &lt;a href=&quot;#timezone&quot;&gt;General time zones&lt;/a&gt; are &lt;em&gt;not&lt;/em&gt; accepted.
+     &lt;p&gt;If the number of {@code &quot;X&quot;} pattern letters is 4 or more (e.g. {@code XXXX}), {@link IllegalArgumentException} is thrown when constructing a {@code
+     SimpleDateFormat} or {@linkplain #applyPattern(String) applying a
+     pattern}.
+ &lt;/ul&gt;
+ &lt;code&gt;SimpleDateFormat&lt;/code&gt; also supports &lt;em&gt;localized date and time
+ pattern&lt;/em&gt; strings. In these strings, the pattern letters described above
+ may be replaced with other, locale dependent, pattern letters.
+ &lt;code&gt;SimpleDateFormat&lt;/code&gt; does not deal with the localization of text
+ other than the pattern letters; that's up to the client of the class.
+
+ &lt;h4&gt;Examples&lt;/h4&gt;
+
+ The following examples show how date and time patterns are interpreted in
+ the U.S. locale. The given date and time are 2001-07-04 12:08:56 local time
+ in the U.S. Pacific Time time zone.
+ &lt;blockquote&gt;
+ &lt;table border=0 cellspacing=3 cellpadding=0 summary=&quot;Examples of date and time patterns interpreted in the U.S. locale&quot;&gt;
+     &lt;tr style=&quot;background-color: rgb(204, 204, 255);&quot;&gt;
+         &lt;th align=left&gt;Date and Time Pattern
+         &lt;th align=left&gt;Result
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;&quot;yyyy.MM.dd G 'at' HH:mm:ss z&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;2001.07.04 AD at 12:08:56 PDT&lt;/code&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;&quot;EEE, MMM d, ''yy&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;Wed, Jul 4, '01&lt;/code&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;&quot;h:mm a&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;12:08 PM&lt;/code&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;&quot;hh 'o''clock' a, zzzz&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;12 o'clock PM, Pacific Daylight Time&lt;/code&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;&quot;K:mm a, z&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;0:08 PM, PDT&lt;/code&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;&quot;yyyyy.MMMMM.dd GGG hh:mm aaa&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;02001.July.04 AD 12:08 PM&lt;/code&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;&quot;EEE, d MMM yyyy HH:mm:ss Z&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;Wed, 4 Jul 2001 12:08:56 -0700&lt;/code&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;&quot;yyMMddHHmmssZ&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;010704120856-0700&lt;/code&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;&quot;yyyy-MM-dd'T'HH:mm:ss.SSSZ&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;2001-07-04T12:08:56.235-0700&lt;/code&gt;
+     &lt;tr style=&quot;background-color: rgb(238, 238, 255);&quot;&gt;
+         &lt;td&gt;&lt;code&gt;&quot;yyyy-MM-dd'T'HH:mm:ss.SSSXXX&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;2001-07-04T12:08:56.235-07:00&lt;/code&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&lt;code&gt;&quot;YYYY-'W'ww-u&quot;&lt;/code&gt;
+         &lt;td&gt;&lt;code&gt;2001-W27-3&lt;/code&gt;
+ &lt;/table&gt;
+ &lt;/blockquote&gt;
+
+ &lt;h4&gt;&lt;a name=&quot;synchronization&quot;&gt;Synchronization&lt;/a&gt;&lt;/h4&gt;
+
+ &lt;p&gt;
+ Date formats are not synchronized.
+ It is recommended to create separate format instances for each thread.
+ If multiple threads access a format concurrently, it must be synchronized
+ externally.
+
+ @see          &lt;a href=&quot;https://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html&quot;&gt;Java Tutorial&lt;/a&gt;
+ @see          java.util.Calendar
+ @see          java.util.TimeZone
+ @see          DateFormat
+ @see          DateFormatSymbols
+ @author       Mark Davis, Chen-Lieh Huang, Alan Liu
+*/
+var SimpleDateFormat = {
+
+<span id='java-text-SimpleDateFormat-method-set2DigitYearStart'>/**Sets the 100-year period 2-digit years will be interpreted as being in
+</span> to begin on the date the user specifies.
+@param {Object {Date}} startDate During parsing, two digit years will be placed in the range
+ &lt;code&gt;startDate&lt;/code&gt; to &lt;code&gt;startDate + 100 years&lt;/code&gt;.
+@see #get2DigitYearStart
+@since 1.2
+*/
+set2DigitYearStart : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-get2DigitYearStart'>/**Returns the beginning date of the 100-year period 2-digit years are interpreted
+</span> as being within.
+@return {Object {java.util.Date}} the start of the 100-year period into which two digit years are
+ parsed
+@see #set2DigitYearStart
+@since 1.2
+*/
+get2DigitYearStart : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-format'>/**Formats the given &lt;code&gt;Date&lt;/code&gt; into a date/time string and appends
+</span> the result to the given &lt;code&gt;StringBuffer&lt;/code&gt;.
+@param {Object {Date}} date the date-time value to be formatted into a date-time string.
+@param {Object {StringBuffer}} toAppendTo where the new date-time text is to be appended.
+@param {Object {FieldPosition}} pos the formatting position. On input: an alignment field,
+ if desired. On output: the offsets of the alignment field.
+@return {Object {java.lang.StringBuffer}} the formatted date-time string.
+@exception NullPointerException if the given {@code date} is {@code null}.
+*/
+format : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-formatToCharacterIterator'>/**Formats an Object producing an &lt;code&gt;AttributedCharacterIterator&lt;/code&gt;.
+</span> You can use the returned &lt;code&gt;AttributedCharacterIterator&lt;/code&gt;
+ to build the resulting String, as well as to determine information
+ about the resulting String.
+ &lt;p&gt;
+ Each attribute key of the AttributedCharacterIterator will be of type
+ &lt;code&gt;DateFormat.Field&lt;/code&gt;, with the corresponding attribute value
+ being the same as the attribute key.
+@param {Object {Object}} obj The object to format
+@exception IllegalArgumentException if the Format cannot format the
+            given object, or if the Format's pattern string is invalid.
+@param obj The object to format
+@return {Object {java.text.AttributedCharacterIterator}} AttributedCharacterIterator describing the formatted value.
+@since 1.4
+*/
+formatToCharacterIterator : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-parse'>/**Parses text from a string to produce a &lt;code&gt;Date&lt;/code&gt;.
+</span> &lt;p&gt;
+ The method attempts to parse text starting at the index given by
+ &lt;code&gt;pos&lt;/code&gt;.
+ If parsing succeeds, then the index of &lt;code&gt;pos&lt;/code&gt; is updated
+ to the index after the last character used (parsing does not necessarily
+ use all characters up to the end of the string), and the parsed
+ date is returned. The updated &lt;code&gt;pos&lt;/code&gt; can be used to
+ indicate the starting point for the next call to this method.
+ If an error occurs, then the index of &lt;code&gt;pos&lt;/code&gt; is not
+ changed, the error index of &lt;code&gt;pos&lt;/code&gt; is set to the index of
+ the character where the error occurred, and null is returned.
+
+ &lt;p&gt;This parsing operation uses the {@link java.text.DateFormat#calendar
+ calendar} to produce a {@code Date}. All of the {@code
+ calendar}'s date-time fields are {@linkplain Calendar#clear()
+ cleared} before parsing, and the {@code calendar}'s default
+ values of the date-time fields are used for any missing
+ date-time information. For example, the year value of the
+ parsed {@code Date} is 1970 with {@link GregorianCalendar} if
+ no year value is given from the parsing operation.  The {@code
+ TimeZone} value may be overwritten, depending on the given
+ pattern and the time zone value in {@code text}. Any {@code
+ TimeZone} value that has previously been set by a call to
+ {@link #setTimeZone(java.util.TimeZone) setTimeZone} may need
+ to be restored for further operations.
+@param {String} text  A &lt;code&gt;String&lt;/code&gt;, part of which should be parsed.
+@param {Object {ParsePosition}} pos   A &lt;code&gt;ParsePosition&lt;/code&gt; object with index and error
+              index information as described above.
+@return {Object {java.util.Date}} A &lt;code&gt;Date&lt;/code&gt; parsed from the string. In case of
+         error, returns null.
+@exception NullPointerException if &lt;code&gt;text&lt;/code&gt; or &lt;code&gt;pos&lt;/code&gt; is null.
+*/
+parse : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-toPattern'>/**Returns a pattern string describing this date format.
+</span>@return {String} a pattern string describing this date format.
+*/
+toPattern : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-toLocalizedPattern'>/**Returns a localized pattern string describing this date format.
+</span>@return {String} a localized pattern string describing this date format.
+*/
+toLocalizedPattern : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-applyPattern'>/**Applies the given pattern string to this date format.
+</span>@param {String} pattern the new date and time pattern for this date format
+@exception NullPointerException if the given pattern is null
+@exception IllegalArgumentException if the given pattern is invalid
+*/
+applyPattern : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-applyLocalizedPattern'>/**Applies the given localized pattern string to this date format.
+</span>@param {String} pattern a String to be mapped to the new date and time format
+        pattern for this format
+@exception NullPointerException if the given pattern is null
+@exception IllegalArgumentException if the given pattern is invalid
+*/
+applyLocalizedPattern : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-getDateFormatSymbols'>/**Gets a copy of the date and time format symbols of this date format.
+</span>@return {Object {java.text.DateFormatSymbols}} the date and time format symbols of this date format
+@see #setDateFormatSymbols
+*/
+getDateFormatSymbols : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-setDateFormatSymbols'>/**Sets the date and time format symbols of this date format.
+</span>@param {Object {DateFormatSymbols}} newFormatSymbols the new date and time format symbols
+@exception NullPointerException if the given newFormatSymbols is null
+@see #getDateFormatSymbols
+*/
+setDateFormatSymbols : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-clone'>/**Creates a copy of this &lt;code&gt;SimpleDateFormat&lt;/code&gt;. This also
+</span> clones the format's date format symbols.
+@return {Object {java.lang.Object}} a clone of this &lt;code&gt;SimpleDateFormat&lt;/code&gt;
+*/
+clone : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-hashCode'>/**Returns the hash code value for this &lt;code&gt;SimpleDateFormat&lt;/code&gt; object.
+</span>@return {Number} the hash code value for this &lt;code&gt;SimpleDateFormat&lt;/code&gt; object.
+*/
+hashCode : function(  ) {},
+
+<span id='java-text-SimpleDateFormat-method-equals'>/**Compares the given object with this &lt;code&gt;SimpleDateFormat&lt;/code&gt; for
+</span> equality.
+@return {Boolean} true if the given object is equal to this
+ &lt;code&gt;SimpleDateFormat&lt;/code&gt;
+*/
+equals : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

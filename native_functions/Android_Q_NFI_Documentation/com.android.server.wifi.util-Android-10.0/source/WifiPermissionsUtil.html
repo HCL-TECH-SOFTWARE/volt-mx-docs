@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-util-WifiPermissionsUtil'>/**@class com.android.server.wifi.util.WifiPermissionsUtil
+</span>@extends java.lang.Object
+
+ A wifi permissions utility assessing permissions
+ for getting scan results by a package.
+*/
+var WifiPermissionsUtil = {
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkConfigOverridePermission'>/**Checks if the app has the permission to override Wi-Fi network configuration or not.
+</span>@param {Number} uid uid of the app.
+@return {Boolean} true if the app does have the permission, false otherwise.
+*/
+checkConfigOverridePermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkChangePermission'>/**Checks if the app has the permission to change Wi-Fi network configuration or not.
+</span>@param {Number} uid uid of the app.
+@return {Boolean} true if the app does have the permission, false otherwise.
+*/
+checkChangePermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkWifiAccessPermission'>/**Checks if the app has the permission to access Wi-Fi state or not.
+</span>@param {Number} uid uid of the app.
+@return {Boolean} true if the app does have the permission, false otherwise.
+*/
+checkWifiAccessPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-enforceLocationPermission'>/**Check and enforce Coarse or Fine Location permission (depending on target SDK).
+</span>@param {String} pkgName PackageName of the application requesting access
+@param {Number} uid The uid of the package
+*/
+enforceLocationPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-isTargetSdkLessThan'>/**Checks whether than the target SDK of the package is less than the specified version code.
+</span>*/
+isTargetSdkLessThan : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkCallersLocationPermission'>/**Checks that calling process has android.Manifest.permission.ACCESS_FINE_LOCATION or
+</span> android.Manifest.permission.ACCESS_FINE_LOCATION (depending on config/targetSDK leve)
+ and a corresponding app op is allowed for this package and uid.
+@param {String} pkgName PackageName of the application requesting access
+@param {Number} uid The uid of the package
+@param {Boolean} coarseForTargetSdkLessThanQ If true and the targetSDK &lt; Q then will check for COARSE
+                                    else (false or targetSDK &gt;= Q) then will check for FINE
+*/
+checkCallersLocationPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-enforceFineLocationPermission'>/**Check and enforce Fine Location permission.
+</span>@param {String} pkgName PackageName of the application requesting access
+@param {Number} uid The uid of the package
+*/
+enforceFineLocationPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-enforceCanAccessScanResults'>/**API to determine if the caller has permissions to get scan results. Throws SecurityException
+</span> if the caller has no permission.
+@param {String} pkgName package name of the application requesting access
+@param {Number} uid The uid of the package
+*/
+enforceCanAccessScanResults : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-enforceCanAccessScanResultsForWifiScanner'>/**API to determine if the caller has permissions to get scan results. Throws SecurityException
+</span> if the caller has no permission.
+@param {String} pkgName package name of the application requesting access
+@param {Number} uid The uid of the package
+@param {Boolean} ignoreLocationSettings Whether this request can bypass location settings.
+@param {Boolean} hideFromAppOps Whether to note the request in app-ops logging or not.
+
+ Note: This is to be used for checking permissions in the internal WifiScanner API surface
+ for requests coming from system apps.
+*/
+enforceCanAccessScanResultsForWifiScanner : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkCanAccessWifiDirect'>/**Checks that calling process has android.Manifest.permission.ACCESS_FINE_LOCATION
+</span> and a corresponding app op is allowed for this package and uid
+@param {String} pkgName package name of the application requesting access
+@param {Number} uid The uid of the package
+@param {Boolean} needLocationModeEnabled indicates location mode must be enabled.
+@return {Boolean} true if caller has permission, false otherwise
+*/
+checkCanAccessWifiDirect : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkPackage'>/**API to check to validate if a package name belongs to a UID. Throws SecurityException
+</span> if pkgName does not belongs to a UID
+@param {Number} pkgName package name of the application requesting access
+@param {String} uid The uid of the package
+*/
+checkPackage : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-isLocationModeEnabled'>/**Retrieves a handle to LocationManager (if not already done) and check if location is enabled.
+</span>*/
+isLocationModeEnabled : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkNetworkSettingsPermission'>/**Returns true if the |uid| holds NETWORK_SETTINGS permission.
+</span>*/
+checkNetworkSettingsPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkLocalMacAddressPermission'>/**Returns true if the |uid| holds LOCAL_MAC_ADDRESS permission.
+</span>*/
+checkLocalMacAddressPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkNetworkSetupWizardPermission'>/**Returns true if the |uid| holds NETWORK_SETUP_WIZARD permission.
+</span>*/
+checkNetworkSetupWizardPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkNetworkStackPermission'>/**Returns true if the |uid| holds NETWORK_STACK permission.
+</span>*/
+checkNetworkStackPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkMainlineNetworkStackPermission'>/**Returns true if the |uid| holds MAINLINE_NETWORK_STACK permission.
+</span>*/
+checkMainlineNetworkStackPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkNetworkManagedProvisioningPermission'>/**Returns true if the |uid| holds NETWORK_MANAGED_PROVISIONING permission.
+</span>*/
+checkNetworkManagedProvisioningPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkNetworkCarrierProvisioningPermission'>/**Returns true if the |uid| holds NETWORK_CARRIER_PROVISIONING permission.
+</span>*/
+checkNetworkCarrierProvisioningPermission : function(  ) {},
+
+<span id='com-android-server-wifi-util-WifiPermissionsUtil-method-checkSystemAlertWindowPermission'>/**Returns true if the |callingUid|/\callingPackage| holds SYSTEM_ALERT_WINDOW permission.
+</span>*/
+checkSystemAlertWindowPermission : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

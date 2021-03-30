@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-obex-ObexTransport'>/**@class javax.obex.ObexTransport
+</span> The &lt;code&gt;ObexTransport&lt;/code&gt; interface defines the underlying transport
+ connection which carries the OBEX protocol( such as TCP, RFCOMM device file
+ exposed by Bluetooth or USB in kernel, RFCOMM socket emulated in Android
+ platform, Irda). This interface provides an abstract layer to be used by the
+ &lt;code&gt;ObexConnection&lt;/code&gt;. Each kind of medium shall have its own
+ implementation to wrap and follow the same interface.
+ &lt;P&gt;
+ See section 1.2.2 of IrDA Object Exchange Protocol specification.
+ &lt;P&gt;
+ Different kind of medium may have different construction - for example, the
+ RFCOMM device file medium may be constructed from a file descriptor or simply
+ a string while the TCP medium usually from a socket.
+ @hide
+*/
+var ObexTransport = {
+
+<span id='javax-obex-ObexTransport-method-create'>/**
+</span>*/
+create : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-listen'>/**
+</span>*/
+listen : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-close'>/**
+</span>*/
+close : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-connect'>/**
+</span>*/
+connect : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-disconnect'>/**
+</span>*/
+disconnect : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-openInputStream'>/**
+</span>*/
+openInputStream : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-openOutputStream'>/**
+</span>*/
+openOutputStream : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-openDataInputStream'>/**
+</span>*/
+openDataInputStream : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-openDataOutputStream'>/**
+</span>*/
+openDataOutputStream : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-getMaxTransmitPacketSize'>/**Must return the maximum allowed OBEX packet that can be sent over
+</span> the transport. For L2CAP this will be the Max SDU reported by the
+ peer device.
+ The returned value will be used to set the outgoing OBEX packet
+ size. Therefore this value shall not change.
+ For RFCOMM or other transport types where the OBEX packets size
+ is unrelated to the transport packet size, return -1;
+@return {Number} the maximum allowed OBEX packet that can be send over
+         the transport. Or -1 in case of don't care.
+*/
+getMaxTransmitPacketSize : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-getMaxReceivePacketSize'>/**Must return the maximum allowed OBEX packet that can be received over
+</span> the transport. For L2CAP this will be the Max SDU configured for the
+ L2CAP channel.
+ The returned value will be used to validate the incoming packet size
+ values.
+ For RFCOMM or other transport types where the OBEX packets size
+ is unrelated to the transport packet size, return -1;
+@return {Number} the maximum allowed OBEX packet that can be send over
+         the transport. Or -1 in case of don't care.
+*/
+getMaxReceivePacketSize : function(  ) {},
+
+<span id='javax-obex-ObexTransport-method-isSrmSupported'>/**Shall return true if the transport in use supports SRM.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if SRM operation is supported, and is to be enabled.
+        &lt;code&gt;false&lt;/code&gt; if SRM operations are not supported, or should not be used.
+*/
+isSrmSupported : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

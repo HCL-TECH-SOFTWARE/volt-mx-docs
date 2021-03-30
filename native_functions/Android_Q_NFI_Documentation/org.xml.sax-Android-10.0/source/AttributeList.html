@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xml-sax-AttributeList'>/**@class org.xml.sax.AttributeList
+</span> Interface for an element's attribute specifications.
+
+ &lt;blockquote&gt;
+ &lt;em&gt;This module, both source code and documentation, is in the
+ Public Domain, and comes with &lt;strong&gt;NO WARRANTY&lt;/strong&gt;.&lt;/em&gt;
+ See &lt;a href='http://www.saxproject.org'&gt;http://www.saxproject.org&lt;/a&gt;
+ for further information.
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;This is the original SAX1 interface for reporting an element's
+ attributes.  Unlike the new {@link org.xml.sax.Attributes Attributes}
+ interface, it does not support Namespace-related information.&lt;/p&gt;
+
+ &lt;p&gt;When an attribute list is supplied as part of a
+ {@link org.xml.sax.DocumentHandler#startElement startElement}
+ event, the list will return valid results only during the
+ scope of the event; once the event handler returns control
+ to the parser, the attribute list is invalid.  To save a
+ persistent copy of the attribute list, use the SAX1
+ {@link org.xml.sax.helpers.AttributeListImpl AttributeListImpl}
+ helper class.&lt;/p&gt;
+
+ &lt;p&gt;An attribute list includes only attributes that have been
+ specified or defaulted: #IMPLIED attributes will not be included.&lt;/p&gt;
+
+ &lt;p&gt;There are two ways for the SAX application to obtain information
+ from the AttributeList.  First, it can iterate through the entire
+ list:&lt;/p&gt;
+
+ &lt;pre&gt;
+ public void startElement (String name, AttributeList atts) {
+   for (int i = 0; i &lt; atts.getLength(); i++) {
+     String name = atts.getName(i);
+     String type = atts.getType(i);
+     String value = atts.getValue(i);
+     [...]
+   }
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;(Note that the result of getLength() will be zero if there
+ are no attributes.)
+
+ &lt;p&gt;As an alternative, the application can request the value or
+ type of specific attributes:&lt;/p&gt;
+
+ &lt;pre&gt;
+ public void startElement (String name, AttributeList atts) {
+   String identifier = atts.getValue(&quot;id&quot;);
+   String label = atts.getValue(&quot;label&quot;);
+   [...]
+ }
+ &lt;/pre&gt;
+
+ @deprecated This interface has been replaced by the SAX2
+             {@link org.xml.sax.Attributes Attributes}
+             interface, which includes Namespace support.
+ @since SAX 1.0
+ @author David Megginson
+ @version 2.0.1 (sax2r2)
+ @see org.xml.sax.DocumentHandler#startElement startElement
+ @see org.xml.sax.helpers.AttributeListImpl AttributeListImpl
+*/
+var AttributeList = {
+
+<span id='org-xml-sax-AttributeList-method-getLength'>/**Return the number of attributes in this list.
+</span>
+ &lt;p&gt;The SAX parser may provide attributes in any
+ arbitrary order, regardless of the order in which they were
+ declared or specified.  The number of attributes may be
+ zero.&lt;/p&gt;
+@return {Number} The number of attributes in the list.
+*/
+getLength : function(  ) {},
+
+<span id='org-xml-sax-AttributeList-method-getName'>/**Return the name of an attribute in this list (by position).
+</span>
+ &lt;p&gt;The names must be unique: the SAX parser shall not include the
+ same attribute twice.  Attributes without values (those declared
+ #IMPLIED without a value specified in the start tag) will be
+ omitted from the list.&lt;/p&gt;
+
+ &lt;p&gt;If the attribute name has a namespace prefix, the prefix
+ will still be attached.&lt;/p&gt;
+@param {Number} i The index of the attribute in the list (starting at 0).
+@return {String} The name of the indexed attribute, or null
+         if the index is out of range.
+@see #getLength
+*/
+getName : function(  ) {},
+
+<span id='org-xml-sax-AttributeList-method-getType'>/**Return the type of an attribute in the list (by position).
+</span>
+ &lt;p&gt;The attribute type is one of the strings &quot;CDATA&quot;, &quot;ID&quot;,
+ &quot;IDREF&quot;, &quot;IDREFS&quot;, &quot;NMTOKEN&quot;, &quot;NMTOKENS&quot;, &quot;ENTITY&quot;, &quot;ENTITIES&quot;,
+ or &quot;NOTATION&quot; (always in upper case).&lt;/p&gt;
+
+ &lt;p&gt;If the parser has not read a declaration for the attribute,
+ or if the parser does not report attribute types, then it must
+ return the value &quot;CDATA&quot; as stated in the XML 1.0 Recommentation
+ (clause 3.3.3, &quot;Attribute-Value Normalization&quot;).&lt;/p&gt;
+
+ &lt;p&gt;For an enumerated attribute that is not a notation, the
+ parser will report the type as &quot;NMTOKEN&quot;.&lt;/p&gt;
+@param {Number} i The index of the attribute in the list (starting at 0).
+@return {String} The attribute type as a string, or
+         null if the index is out of range.
+@see #getLength
+@see #getType(java.lang.String)
+*/
+getType : function(  ) {},
+
+<span id='org-xml-sax-AttributeList-method-getValue'>/**Return the value of an attribute in the list (by position).
+</span>
+ &lt;p&gt;If the attribute value is a list of tokens (IDREFS,
+ ENTITIES, or NMTOKENS), the tokens will be concatenated
+ into a single string separated by whitespace.&lt;/p&gt;
+@param {Number} i The index of the attribute in the list (starting at 0).
+@return {String} The attribute value as a string, or
+         null if the index is out of range.
+@see #getLength
+@see #getValue(java.lang.String)
+*/
+getValue : function(  ) {},
+
+<span id='org-xml-sax-AttributeList-method-getType'>/**Return the type of an attribute in the list (by name).
+</span>
+ &lt;p&gt;The return value is the same as the return value for
+ getType(int).&lt;/p&gt;
+
+ &lt;p&gt;If the attribute name has a namespace prefix in the document,
+ the application must include the prefix here.&lt;/p&gt;
+@param {String} name The name of the attribute.
+@return {String} The attribute type as a string, or null if no
+         such attribute exists.
+@see #getType(int)
+*/
+getType : function(  ) {},
+
+<span id='org-xml-sax-AttributeList-method-getValue'>/**Return the value of an attribute in the list (by name).
+</span>
+ &lt;p&gt;The return value is the same as the return value for
+ getValue(int).&lt;/p&gt;
+
+ &lt;p&gt;If the attribute name has a namespace prefix in the document,
+ the application must include the prefix here.&lt;/p&gt;
+@param {String} name the name of the attribute to return
+@return {String} The attribute value as a string, or null if
+         no such attribute exists.
+@see #getValue(int)
+*/
+getValue : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

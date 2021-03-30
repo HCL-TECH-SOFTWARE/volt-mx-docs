@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-acl-Owner'>/**@class java.security.acl.Owner
+</span> Interface for managing owners of Access Control Lists (ACLs) or ACL
+ configurations. (Note that the Acl interface in the
+ {@code  java.security.acl} package extends this Owner
+ interface.) The initial owner Principal should be specified as an
+ argument to the constructor of the class implementing this interface.
+
+ @see java.security.acl.Acl
+
+*/
+var Owner = {
+
+<span id='java-security-acl-Owner-method-addOwner'>/**Adds an owner. Only owners can modify ACL contents. The caller
+</span> principal must be an owner of the ACL in order to invoke this method.
+ That is, only an owner can add another owner. The initial owner is
+ configured at ACL construction time.
+@param {Object {Principal}} caller the principal invoking this method. It must be an owner
+ of the ACL.
+@param {Object {Principal}} owner the owner that should be added to the list of owners.
+@return {Boolean} true if successful, false if owner is already an owner.
+@exception NotOwnerException if the caller principal is not an owner
+ of the ACL.
+*/
+addOwner : function(  ) {},
+
+<span id='java-security-acl-Owner-method-deleteOwner'>/**Deletes an owner. If this is the last owner in the ACL, an exception is
+</span> raised.&lt;p&gt;
+
+ The caller principal must be an owner of the ACL in order to invoke
+ this method.
+@param {Object {Principal}} caller the principal invoking this method. It must be an owner
+ of the ACL.
+@param {Object {Principal}} owner the owner to be removed from the list of owners.
+@return {Boolean} true if the owner is removed, false if the owner is not part
+ of the list of owners.
+@exception NotOwnerException if the caller principal is not an owner
+ of the ACL.
+@exception LastOwnerException if there is only one owner left, so that
+ deleteOwner would leave the ACL owner-less.
+*/
+deleteOwner : function(  ) {},
+
+<span id='java-security-acl-Owner-method-isOwner'>/**Returns true if the given principal is an owner of the ACL.
+</span>@param {Object {Principal}} owner the principal to be checked to determine whether or not
+ it is an owner.
+@return {Boolean} true if the passed principal is in the list of owners, false
+ if not.
+*/
+isOwner : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

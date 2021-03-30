@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-chrono-JapaneseChronology'>/**@class java.time.chrono.JapaneseChronology
+</span> implements java.io.Serializable
+
+@extends java.time.chrono.AbstractChronology
+
+ The Japanese Imperial calendar system.
+ &lt;p&gt;
+ This chronology defines the rules of the Japanese Imperial calendar system.
+ This calendar system is primarily used in Japan.
+ The Japanese Imperial calendar system is the same as the ISO calendar system
+ apart from the era-based year numbering.
+ &lt;p&gt;
+ Japan introduced the Gregorian calendar starting with Meiji 6.
+ Only Meiji and later eras are supported;
+ dates before Meiji 6, January 1 are not supported.
+ &lt;p&gt;
+ The supported {@code ChronoField} instances are:
+ &lt;ul&gt;
+ &lt;li&gt;{@code DAY_OF_WEEK}
+ &lt;li&gt;{@code DAY_OF_MONTH}
+ &lt;li&gt;{@code DAY_OF_YEAR}
+ &lt;li&gt;{@code EPOCH_DAY}
+ &lt;li&gt;{@code MONTH_OF_YEAR}
+ &lt;li&gt;{@code PROLEPTIC_MONTH}
+ &lt;li&gt;{@code YEAR_OF_ERA}
+ &lt;li&gt;{@code YEAR}
+ &lt;li&gt;{@code ERA}
+ &lt;/ul&gt;
+
+ @implSpec
+ This class is immutable and thread-safe.
+
+ @since 1.8
+*/
+var JapaneseChronology = {
+
+<span id='java-time-chrono-JapaneseChronology-property-INSTANCE'>/** Singleton instance for Japanese chronology.
+</span>*/
+INSTANCE : &quot;null&quot;,
+<span id='java-time-chrono-JapaneseChronology-method-getId'>/**Gets the ID of the chronology - 'Japanese'.
+</span> &lt;p&gt;
+ The ID uniquely identifies the {@code Chronology}.
+ It can be used to lookup the {@code Chronology} using {@link java.time.chrono.Chronology#of(String)}.
+@return {String} the chronology ID - 'Japanese'
+@see #getCalendarType()
+*/
+getId : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-getCalendarType'>/**Gets the calendar type of the underlying calendar system - 'japanese'.
+</span> &lt;p&gt;
+ The calendar type is an identifier defined by the
+ &lt;em&gt;Unicode Locale Data Markup Language (LDML)&lt;/em&gt; specification.
+ It can be used to lookup the {@code Chronology} using {@link java.time.chrono.Chronology#of(String)}.
+ It can also be used as part of a locale, accessible via
+ {@link Locale#getUnicodeLocaleType(String)} with the key 'ca'.
+@return {String} the calendar system type - 'japanese'
+@see #getId()
+*/
+getCalendarType : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-date'>/**Obtains a local date in Japanese calendar system from the
+</span> era, year-of-era, month-of-year and day-of-month fields.
+ &lt;p&gt;
+ The Japanese month and day-of-month are the same as those in the
+ ISO calendar system. They are not reset when the era changes.
+ For example:
+ &lt;pre&gt;
+  6th Jan Showa 64 = ISO 1989-01-06
+  7th Jan Showa 64 = ISO 1989-01-07
+  8th Jan Heisei 1 = ISO 1989-01-08
+  9th Jan Heisei 1 = ISO 1989-01-09
+ &lt;/pre&gt;
+@param {Object {Era}} era  the Japanese era, not null
+@param {Number} yearOfEra  the year-of-era
+@param {Number} month  the month-of-year
+@param {Number} dayOfMonth  the day-of-month
+@return {Object {java.time.chrono.JapaneseDate}} the Japanese local date, not null
+@throws DateTimeException if unable to create the date
+@throws ClassCastException if the {@code era} is not a {@code JapaneseEra}
+*/
+date : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-date'>/**Obtains a local date in Japanese calendar system from the
+</span> proleptic-year, month-of-year and day-of-month fields.
+ &lt;p&gt;
+ The Japanese proleptic year, month and day-of-month are the same as those
+ in the ISO calendar system. They are not reset when the era changes.
+@param {Number} prolepticYear  the proleptic-year
+@param {Number} month  the month-of-year
+@param {Number} dayOfMonth  the day-of-month
+@return {Object {java.time.chrono.JapaneseDate}} the Japanese local date, not null
+@throws DateTimeException if unable to create the date
+*/
+date : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-dateYearDay'>/**Obtains a local date in Japanese calendar system from the
+</span> era, year-of-era and day-of-year fields.
+ &lt;p&gt;
+ The day-of-year in this factory is expressed relative to the start of the year-of-era.
+ This definition changes the normal meaning of day-of-year only in those years
+ where the year-of-era is reset to one due to a change in the era.
+ For example:
+ &lt;pre&gt;
+  6th Jan Showa 64 = day-of-year 6
+  7th Jan Showa 64 = day-of-year 7
+  8th Jan Heisei 1 = day-of-year 1
+  9th Jan Heisei 1 = day-of-year 2
+ &lt;/pre&gt;
+@param {Object {Era}} era  the Japanese era, not null
+@param {Number} yearOfEra  the year-of-era
+@param {Number} dayOfYear  the day-of-year
+@return {Object {java.time.chrono.JapaneseDate}} the Japanese local date, not null
+@throws DateTimeException if unable to create the date
+@throws ClassCastException if the {@code era} is not a {@code JapaneseEra}
+*/
+dateYearDay : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-dateYearDay'>/**Obtains a local date in Japanese calendar system from the
+</span> proleptic-year and day-of-year fields.
+ &lt;p&gt;
+ The day-of-year in this factory is expressed relative to the start of the proleptic year.
+ The Japanese proleptic year and day-of-year are the same as those in the ISO calendar system.
+ They are not reset when the era changes.
+@param {Number} prolepticYear  the proleptic-year
+@param {Number} dayOfYear  the day-of-year
+@return {Object {java.time.chrono.JapaneseDate}} the Japanese local date, not null
+@throws DateTimeException if unable to create the date
+*/
+dateYearDay : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-dateEpochDay'>/**Obtains a local date in the Japanese calendar system from the epoch-day.
+</span>@param {Number} epochDay  the epoch day
+@return {Object {java.time.chrono.JapaneseDate}} the Japanese local date, not null
+@throws DateTimeException if unable to create the date
+*/
+dateEpochDay : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-dateNow'>/**
+</span>*/
+dateNow : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-dateNow'>/**
+</span>*/
+dateNow : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-dateNow'>/**
+</span>*/
+dateNow : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-date'>/**
+</span>*/
+date : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-localDateTime'>/**
+</span>*/
+localDateTime : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-zonedDateTime'>/**
+</span>*/
+zonedDateTime : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-zonedDateTime'>/**
+</span>*/
+zonedDateTime : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-isLeapYear'>/**Checks if the specified year is a leap year.
+</span> &lt;p&gt;
+ Japanese calendar leap years occur exactly in line with ISO leap years.
+ This method does not validate the year passed in, and only has a
+ well-defined result for years in the supported range.
+@param {Number} prolepticYear  the proleptic-year to check, not validated for range
+@return {Boolean} true if the year is a leap year
+*/
+isLeapYear : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-prolepticYear'>/**
+</span>*/
+prolepticYear : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-eraOf'>/**Returns the calendar system era object from the given numeric value.
+</span>
+ See the description of each Era for the numeric values of:
+ {@link java.time.chrono.JapaneseEra#HEISEI}, {@link java.time.chrono.JapaneseEra#SHOWA},{@link java.time.chrono.JapaneseEra#TAISHO},
+ {@link java.time.chrono.JapaneseEra#MEIJI}), only Meiji and later eras are supported.
+@param {Number} eraValue  the era value
+@return {Object {java.time.chrono.JapaneseEra}} the Japanese {@code Era} for the given numeric era value
+@throws DateTimeException if {@code eraValue} is invalid
+*/
+eraOf : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-eras'>/**
+</span>*/
+eras : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-range'>/**
+</span>*/
+range : function(  ) {},
+
+<span id='java-time-chrono-JapaneseChronology-method-resolveDate'>/**
+</span>*/
+resolveDate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

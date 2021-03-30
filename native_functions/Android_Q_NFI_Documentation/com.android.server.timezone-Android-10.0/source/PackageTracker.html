@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-timezone-PackageTracker'>/**@class com.android.server.timezone.PackageTracker
+</span>@extends java.lang.Object
+
+ Monitors the installed applications associated with time zone updates. If the app packages are
+ updated it indicates there &lt;em&gt;might&lt;/em&gt; be a time zone rules update to apply so a targeted
+ broadcast intent is used to trigger the time zone updater app.
+
+ &lt;p&gt;The &quot;update triggering&quot; behavior of this component can be disabled via device configuration.
+
+ &lt;p&gt;The package tracker listens for package updates of the time zone &quot;updater app&quot; and &quot;data app&quot;.
+ It also listens for &quot;reliability&quot; triggers. Reliability triggers are there to ensure that the
+ package tracker handles failures reliably and are &quot;idle maintenance&quot; events or something similar.
+ Reliability triggers can cause a time zone update check to take place if the current state is
+ unclear. For example, it can be unclear after boot or after a failure. If there are repeated
+ failures reliability updates are halted until the next boot.
+
+ &lt;p&gt;This component keeps persistent track of the most recent app packages checked to avoid
+ unnecessary expense from broadcasting intents (which will cause other app processes to spawn).
+ The current status is also stored to detect whether the most recently-generated check is
+ complete successfully. For example, if the device was interrupted while doing a check and never
+ acknowledged a check then a check will be retried the next time a &quot;reliability trigger&quot; event
+ happens.
+*/
+var PackageTracker = {
+
+<span id='com-android-server-timezone-PackageTracker-method-triggerUpdateIfNeeded'>/**Inspects the current in-memory state, installed packages and storage state to determine if an
+</span> update check is needed and then trigger if it is.
+@param {Boolean} packageChanged true if this method was called because a known packaged definitely
+     changed, false if the cause is a reliability trigger
+*/
+triggerUpdateIfNeeded : function(  ) {},
+
+<span id='com-android-server-timezone-PackageTracker-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-timezone-PackageTracker-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

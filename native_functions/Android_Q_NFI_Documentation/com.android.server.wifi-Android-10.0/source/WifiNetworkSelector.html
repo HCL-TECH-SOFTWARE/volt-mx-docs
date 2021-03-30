@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiNetworkSelector'>/**@class com.android.server.wifi.WifiNetworkSelector
+</span>@extends java.lang.Object
+
+ This class looks at all the connectivity scan results then
+ selects a network for the phone to connect or roam to.
+*/
+var WifiNetworkSelector = {
+
+<span id='com-android-server-wifi-WifiNetworkSelector-property-MINIMUM_NETWORK_SELECTION_INTERVAL_MS'>/** Minimum time gap between last successful network selection and a
+</span> new selection attempt.
+*/
+MINIMUM_NETWORK_SELECTION_INTERVAL_MS : &quot;10000&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-property-LAST_USER_SELECTION_SUFFICIENT_MS'>/** For this duration after user selected it, consider the current network as sufficient.
+</span>
+ This delays network selection during the time that connectivity service may be posting
+ a dialog about a no-internet network.
+*/
+LAST_USER_SELECTION_SUFFICIENT_MS : &quot;30000&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-property-LAST_USER_SELECTION_DECAY_TO_ZERO_MS'>/** Time that it takes for the boost given to the most recently user-selected
+</span> network to decay to zero.
+
+ In milliseconds.
+*/
+LAST_USER_SELECTION_DECAY_TO_ZERO_MS : &quot;28800000&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-property-WIFI_POOR_SCORE'>/** Connected score value used to decide whether a still-connected wifi should be treated
+</span> as unconnected when filtering scan results.
+*/
+WIFI_POOR_SCORE : &quot;40&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-property-PRESET_CANDIDATE_SCORER_NAME'>/** The identifier string of the CandidateScorer to use (in the absence of overrides).
+</span>*/
+PRESET_CANDIDATE_SCORER_NAME : &quot;CompatibilityScorer&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-property-LEGACY_CANDIDATE_SCORER_EXP_ID'>/** Experiment ID for the legacy scorer.
+</span>*/
+LEGACY_CANDIDATE_SCORER_EXP_ID : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-method-toScanId'>/**Format the given ScanResult as a scan ID for logging.
+</span>*/
+toScanId : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-toNetworkString'>/**Format the given WifiConfiguration as a SSID:netId string
+</span>*/
+toNetworkString : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-isSignalTooWeak'>/**Compares ScanResult level against the minimum threshold for its band, returns true if lower
+</span>*/
+isSignalTooWeak : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-getFilteredScanDetailsForOpenUnsavedNetworks'>/**This returns a list of ScanDetails that were filtered in the process of network selection.
+</span> The list is further filtered for only open unsaved networks.
+@return {Object {java.util.List}} the list of ScanDetails for open unsaved networks that do not have invalid SSIDS,
+ blacklisted BSSIDS, or low signal strength. This will return an empty list when there are
+ no open unsaved networks, or when network selection has not been run.
+*/
+getFilteredScanDetailsForOpenUnsavedNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-getFilteredScanDetailsForCarrierUnsavedNetworks'>/**This returns a list of ScanDetails that were filtered in the process of network selection.
+</span> The list is further filtered for only carrier unsaved networks with EAP encryption.
+@param {Object {CarrierNetworkConfig}} carrierConfig CarrierNetworkConfig used to filter carrier networks
+@return {Object {java.util.List}} the list of ScanDetails for carrier unsaved networks that do not have invalid SSIDS,
+ blacklisted BSSIDS, or low signal strength, and with EAP encryption. This will return an
+ empty list when there are no such networks, or when network selection has not been run.
+*/
+getFilteredScanDetailsForCarrierUnsavedNetworks : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-getConnectableScanDetails'>/**
+</span>@return {Object {java.util.List}} the list of ScanDetails scored as potential candidates by the last run of
+ selectNetwork, this will be empty if Network selector determined no selection was
+ needed on last run. This includes scan details of sufficient signal strength, and
+ had an associated WifiConfiguration.
+*/
+getConnectableScanDetails : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-setUserConnectChoice'>/**This API is called when user explicitly selects a network. Currently, it is used in following
+</span> cases:
+ (1) User explicitly chooses to connect to a saved network.
+ (2) User saves a network after adding a new network.
+ (3) User saves a network after modifying a saved network.
+ Following actions will be triggered:
+ 1. If this network is disabled, we need re-enable it again.
+ 2. This network is favored over all the other networks visible in latest network
+    selection procedure.
+@param {Number} netId  ID for the network chosen by the user
+@return {Boolean} true -- There is change made to connection choice of any saved network.
+         false -- There is no change made to connection choice of any saved network.
+*/
+setUserConnectChoice : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-selectNetwork'>/**Select the best network from the ones in range.
+</span>@param {Object {java.util.List}} scanDetails    List of ScanDetail for all the APs in range
+@param {Object {java.util.HashSet}} bssidBlacklist Blacklisted BSSIDs
+@param {Object {WifiInfo}} wifiInfo       Currently connected network
+@param {Boolean} connected      True if the device is connected
+@param {Boolean} disconnected   True if the device is disconnected
+@param {Boolean} untrustedNetworkAllowed True if untrusted networks are allowed for connection
+@return {Object {android.net.wifi.WifiConfiguration}} Configuration of the selected network, or Null if nothing
+*/
+selectNetwork : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-registerNetworkEvaluator'>/**Register a network evaluator
+</span>@param {Object {WifiNetworkSelector.NetworkEvaluator}} evaluator the network evaluator to be registered
+*/
+registerNetworkEvaluator : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-registerCandidateScorer'>/**Register a candidate scorer.
+</span>
+ Replaces any existing scorer having the same identifier.
+*/
+registerCandidateScorer : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-unregisterCandidateScorer'>/**Unregister a candidate scorer.
+</span>*/
+unregisterCandidateScorer : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-method-experimentIdFromIdentifier'>/**Derives a numeric experiment identifier from a CandidateScorer's identifier.
+</span>@returns a positive number that starts with the decimal digits ID_PREFIX
+*/
+experimentIdFromIdentifier : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

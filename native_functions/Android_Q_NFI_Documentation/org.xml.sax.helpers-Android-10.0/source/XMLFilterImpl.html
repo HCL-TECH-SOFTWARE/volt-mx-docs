@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-xml-sax-helpers-XMLFilterImpl'>/**@class org.xml.sax.helpers.XMLFilterImpl
+</span> implements org.xml.sax.XMLFilter
+
+ implements org.xml.sax.EntityResolver
+
+ implements org.xml.sax.DTDHandler
+
+ implements org.xml.sax.ContentHandler
+
+ implements org.xml.sax.ErrorHandler
+
+@extends java.lang.Object
+
+ Base class for deriving an XML filter.
+
+ &lt;blockquote&gt;
+ &lt;em&gt;This module, both source code and documentation, is in the
+ Public Domain, and comes with &lt;strong&gt;NO WARRANTY&lt;/strong&gt;.&lt;/em&gt;
+ See &lt;a href='http://www.saxproject.org'&gt;http://www.saxproject.org&lt;/a&gt;
+ for further information.
+ &lt;/blockquote&gt;
+
+ &lt;p&gt;This class is designed to sit between an {@link org.xml.sax.XMLReader
+ XMLReader} and the client application's event handlers.  By default, it
+ does nothing but pass requests up to the reader and events
+ on to the handlers unmodified, but subclasses can override
+ specific methods to modify the event stream or the configuration
+ requests as they pass through.&lt;/p&gt;
+
+ @since SAX 2.0
+ @author David Megginson
+ @version 2.0.1 (sax2r2)
+ @see org.xml.sax.XMLFilter
+ @see org.xml.sax.XMLReader
+ @see org.xml.sax.EntityResolver
+ @see org.xml.sax.DTDHandler
+ @see org.xml.sax.ContentHandler
+ @see org.xml.sax.ErrorHandler
+*/
+var XMLFilterImpl = {
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-setParent'>/**Set the parent reader.
+</span>
+ &lt;p&gt;This is the {@link org.xml.sax.XMLReader XMLReader} from which
+ this filter will obtain its events and to which it will pass its
+ configuration requests.  The parent may itself be another filter.&lt;/p&gt;
+
+ &lt;p&gt;If there is no parent reader set, any attempt to parse
+ or to set or get a feature or property will fail.&lt;/p&gt;
+@param {Object {XMLReader}} parent The parent XML reader.
+@see #getParent
+*/
+setParent : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-getParent'>/**Get the parent reader.
+</span>@return {Object {org.xml.sax.XMLReader}} The parent XML reader, or null if none is set.
+@see #setParent
+*/
+getParent : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-setFeature'>/**Set the value of a feature.
+</span>
+ &lt;p&gt;This will always fail if the parent is null.&lt;/p&gt;
+@param {String} name The feature name.
+@param {Boolean} value The requested feature value.
+@exception org.xml.sax.SAXNotRecognizedException If the feature
+            value can't be assigned or retrieved from the parent.
+@exception org.xml.sax.SAXNotSupportedException When the
+            parent recognizes the feature name but
+            cannot set the requested value.
+*/
+setFeature : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-getFeature'>/**Look up the value of a feature.
+</span>
+ &lt;p&gt;This will always fail if the parent is null.&lt;/p&gt;
+@param {String} name The feature name.
+@return {Boolean} The current value of the feature.
+@exception org.xml.sax.SAXNotRecognizedException If the feature
+            value can't be assigned or retrieved from the parent.
+@exception org.xml.sax.SAXNotSupportedException When the
+            parent recognizes the feature name but
+            cannot determine its value at this time.
+*/
+getFeature : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-setProperty'>/**Set the value of a property.
+</span>
+ &lt;p&gt;This will always fail if the parent is null.&lt;/p&gt;
+@param {String} name The property name.
+@param {Object {Object}} value The requested property value.
+@exception org.xml.sax.SAXNotRecognizedException If the property
+            value can't be assigned or retrieved from the parent.
+@exception org.xml.sax.SAXNotSupportedException When the
+            parent recognizes the property name but
+            cannot set the requested value.
+*/
+setProperty : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-getProperty'>/**Look up the value of a property.
+</span>@param {String} name The property name.
+@return {Object {java.lang.Object}} The current value of the property.
+@exception org.xml.sax.SAXNotRecognizedException If the property
+            value can't be assigned or retrieved from the parent.
+@exception org.xml.sax.SAXNotSupportedException When the
+            parent recognizes the property name but
+            cannot determine its value at this time.
+*/
+getProperty : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-setEntityResolver'>/**Set the entity resolver.
+</span>@param {Object {EntityResolver}} resolver The new entity resolver.
+*/
+setEntityResolver : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-getEntityResolver'>/**Get the current entity resolver.
+</span>@return {Object {org.xml.sax.EntityResolver}} The current entity resolver, or null if none was set.
+*/
+getEntityResolver : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-setDTDHandler'>/**Set the DTD event handler.
+</span>@param {Object {DTDHandler}} handler the new DTD handler
+*/
+setDTDHandler : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-getDTDHandler'>/**Get the current DTD event handler.
+</span>@return {Object {org.xml.sax.DTDHandler}} The current DTD handler, or null if none was set.
+*/
+getDTDHandler : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-setContentHandler'>/**Set the content event handler.
+</span>@param {Object {ContentHandler}} handler the new content handler
+*/
+setContentHandler : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-getContentHandler'>/**Get the content event handler.
+</span>@return {Object {org.xml.sax.ContentHandler}} The current content handler, or null if none was set.
+*/
+getContentHandler : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-setErrorHandler'>/**Set the error event handler.
+</span>@param {Object {ErrorHandler}} handler the new error handler
+*/
+setErrorHandler : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-getErrorHandler'>/**Get the current error event handler.
+</span>@return {Object {org.xml.sax.ErrorHandler}} The current error handler, or null if none was set.
+*/
+getErrorHandler : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-parse'>/**Parse a document.
+</span>@param {Object {InputSource}} input The input source for the document entity.
+@exception org.xml.sax.SAXException Any SAX exception, possibly
+            wrapping another exception.
+@exception java.io.IOException An IO exception from the parser,
+            possibly from a byte stream or character stream
+            supplied by the application.
+*/
+parse : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-parse'>/**Parse a document.
+</span>@param {String} systemId The system identifier as a fully-qualified URI.
+@exception org.xml.sax.SAXException Any SAX exception, possibly
+            wrapping another exception.
+@exception java.io.IOException An IO exception from the parser,
+            possibly from a byte stream or character stream
+            supplied by the application.
+*/
+parse : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-resolveEntity'>/**Filter an external entity resolution.
+</span>@param {String} publicId The entity's public identifier, or null.
+@param {String} systemId The entity's system identifier.
+@return {Object {org.xml.sax.InputSource}} A new InputSource or null for the default.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+@exception java.io.IOException The client may throw an
+            I/O-related exception while obtaining the
+            new InputSource.
+*/
+resolveEntity : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-notationDecl'>/**Filter a notation declaration event.
+</span>@param {String} name The notation name.
+@param {String} publicId The notation's public identifier, or null.
+@param {String} systemId The notation's system identifier, or null.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+notationDecl : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-unparsedEntityDecl'>/**Filter an unparsed entity declaration event.
+</span>@param {String} name The entity name.
+@param {String} publicId The entity's public identifier, or null.
+@param {String} systemId The entity's system identifier, or null.
+@param {String} notationName The name of the associated notation.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+unparsedEntityDecl : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-setDocumentLocator'>/**Filter a new document locator event.
+</span>@param {Object {Locator}} locator The document locator.
+*/
+setDocumentLocator : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-startDocument'>/**Filter a start document event.
+</span>@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+startDocument : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-endDocument'>/**Filter an end document event.
+</span>@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+endDocument : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-startPrefixMapping'>/**Filter a start Namespace prefix mapping event.
+</span>@param {String} prefix The Namespace prefix.
+@param {String} uri The Namespace URI.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+startPrefixMapping : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-endPrefixMapping'>/**Filter an end Namespace prefix mapping event.
+</span>@param {String} prefix The Namespace prefix.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+endPrefixMapping : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-startElement'>/**Filter a start element event.
+</span>@param {String} uri The element's Namespace URI, or the empty string.
+@param {String} localName The element's local name, or the empty string.
+@param {String} qName The element's qualified (prefixed) name, or the empty
+        string.
+@param {Object {Attributes}} atts The element's attributes.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+startElement : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-endElement'>/**Filter an end element event.
+</span>@param {String} uri The element's Namespace URI, or the empty string.
+@param {String} localName The element's local name, or the empty string.
+@param {String} qName The element's qualified (prefixed) name, or the empty
+        string.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+endElement : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-characters'>/**Filter a character data event.
+</span>@param {Object {char[]}} ch An array of characters.
+@param {Number} start The starting position in the array.
+@param {Number} length The number of characters to use from the array.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+characters : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-ignorableWhitespace'>/**Filter an ignorable whitespace event.
+</span>@param {Object {char[]}} ch An array of characters.
+@param {Number} start The starting position in the array.
+@param {Number} length The number of characters to use from the array.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+ignorableWhitespace : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-processingInstruction'>/**Filter a processing instruction event.
+</span>@param {String} target The processing instruction target.
+@param {String} data The text following the target.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+processingInstruction : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-skippedEntity'>/**Filter a skipped entity event.
+</span>@param {String} name The name of the skipped entity.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+skippedEntity : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-warning'>/**Filter a warning event.
+</span>@param {Object {SAXParseException}} e The warning as an exception.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+warning : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-error'>/**Filter an error event.
+</span>@param {Object {SAXParseException}} e The error as an exception.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+error : function(  ) {},
+
+<span id='org-xml-sax-helpers-XMLFilterImpl-method-fatalError'>/**Filter a fatal error event.
+</span>@param {Object {SAXParseException}} e The error as an exception.
+@exception org.xml.sax.SAXException The client may throw
+            an exception during processing.
+*/
+fatalError : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

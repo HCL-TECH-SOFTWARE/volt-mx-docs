@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-net-URL'>/**@class java.net.URL
+</span> implements java.io.Serializable
+
+@extends java.lang.Object
+
+ Class {@code URL} represents a Uniform Resource
+ Locator, a pointer to a &quot;resource&quot; on the World
+ Wide Web. A resource can be something as simple as a file or a
+ directory, or it can be a reference to a more complicated object,
+ such as a query to a database or to a search engine. More
+ information on the types of URLs and their formats can be found at:
+ &lt;a href=
+ &quot;http://web.archive.org/web/20051219043731/http://archive.ncsa.uiuc.edu/SDG/Software/Mosaic/Demo/url-primer.html&quot;&gt;
+ &lt;i&gt;Types of URL&lt;/i&gt;&lt;/a&gt;
+ &lt;p&gt;
+ In general, a URL can be broken into several parts. Consider the
+ following example:
+ &lt;blockquote&gt;&lt;pre&gt;
+     http://www.example.com/docs/resource1.html
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;p&gt;
+ The URL above indicates that the protocol to use is
+ {@code http} (HyperText Transfer Protocol) and that the
+ information resides on a host machine named
+ {@code www.example.com}. The information on that host
+ machine is named {@code /docs/resource1.html}. The exact
+ meaning of this name on the host machine is both protocol
+ dependent and host dependent. The information normally resides in
+ a file, but it could be generated on the fly. This component of
+ the URL is called the &lt;i&gt;path&lt;/i&gt; component.
+ &lt;p&gt;
+ A URL can optionally specify a &quot;port&quot;, which is the
+ port number to which the TCP connection is made on the remote host
+ machine. If the port is not specified, the default port for
+ the protocol is used instead. For example, the default port for
+ {@code http} is {@code 80}. An alternative port could be
+ specified as:
+ &lt;blockquote&gt;&lt;pre&gt;
+     http://www.example.com:1080/docs/resource1.html
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;p&gt;
+ The syntax of {@code URL} is defined by  &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc2396.txt&quot;&gt;&lt;i&gt;RFC&amp;nbsp;2396: Uniform
+ Resource Identifiers (URI): Generic Syntax&lt;/i&gt;&lt;/a&gt;, amended by &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc2732.txt&quot;&gt;&lt;i&gt;RFC&amp;nbsp;2732: Format for
+ Literal IPv6 Addresses in URLs&lt;/i&gt;&lt;/a&gt;. The Literal IPv6 address format
+ also supports scope_ids. The syntax and usage of scope_ids is described
+ &lt;a href=&quot;Inet6Address.html#scoped&quot;&gt;here&lt;/a&gt;.
+ &lt;p&gt;
+ A URL may have appended to it a &quot;fragment&quot;, also known
+ as a &quot;ref&quot; or a &quot;reference&quot;. The fragment is indicated by the sharp
+ sign character &quot;#&quot; followed by more characters. For example,
+ &lt;blockquote&gt;&lt;pre&gt;
+     http://java.sun.com/index.html#chapter1
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;p&gt;
+ This fragment is not technically part of the URL. Rather, it
+ indicates that after the specified resource is retrieved, the
+ application is specifically interested in that part of the
+ document that has the tag {@code chapter1} attached to it. The
+ meaning of a tag is resource specific.
+ &lt;p&gt;
+ An application can also specify a &quot;relative URL&quot;,
+ which contains only enough information to reach the resource
+ relative to another URL. Relative URLs are frequently used within
+ HTML pages. For example, if the contents of the URL:
+ &lt;blockquote&gt;&lt;pre&gt;
+     http://java.sun.com/index.html
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ contained within it the relative URL:
+ &lt;blockquote&gt;&lt;pre&gt;
+     FAQ.html
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ it would be a shorthand for:
+ &lt;blockquote&gt;&lt;pre&gt;
+     http://java.sun.com/FAQ.html
+ &lt;/pre&gt;&lt;/blockquote&gt;
+ &lt;p&gt;
+ The relative URL need not specify all the components of a URL. If
+ the protocol, host name, or port number is missing, the value is
+ inherited from the fully specified URL. The file component must be
+ specified. The optional fragment is not inherited.
+ &lt;p&gt;
+ The URL class does not itself encode or decode any URL components
+ according to the escaping mechanism defined in RFC2396. It is the
+ responsibility of the caller to encode any fields, which need to be
+ escaped prior to calling URL, and also to decode any escaped fields,
+ that are returned from URL. Furthermore, because URL has no knowledge
+ of URL escaping, it does not recognise equivalence between the encoded
+ or decoded form of the same URL. For example, the two URLs:&lt;br&gt;
+ &lt;pre&gt;    http://foo.com/hello world/ and http://foo.com/hello%20world&lt;/pre&gt;
+ would be considered not equal to each other.
+ &lt;p&gt;
+ Note, the {@link java.net.URI} class does perform escaping of its
+ component fields in certain circumstances. The recommended way
+ to manage the encoding and decoding of URLs is to use {@link java.net.URI},
+ and to convert between these two classes using {@link #toURI}() and
+ {@link java.net.URI#toURL()}.
+ &lt;p&gt;
+ The {@link java.net.URLEncoder} and {@link java.net.URLDecoder} classes can also be
+ used, but only for HTML form encoding, which is not the same
+ as the encoding scheme defined in RFC2396.
+
+ @author  James Gosling
+ @since JDK1.0
+*/
+var URL = {
+
+<span id='java-net-URL-method-getQuery'>/**Gets the query part of this {@code URL}.
+</span>@return {String} the query part of this {@code URL},
+ or &lt;CODE&gt;null&lt;/CODE&gt; if one does not exist
+@since 1.3
+*/
+getQuery : function(  ) {},
+
+<span id='java-net-URL-method-getPath'>/**Gets the path part of this {@code URL}.
+</span>@return {String} the path part of this {@code URL}, or an
+ empty string if one does not exist
+@since 1.3
+*/
+getPath : function(  ) {},
+
+<span id='java-net-URL-method-getUserInfo'>/**Gets the userInfo part of this {@code URL}.
+</span>@return {String} the userInfo part of this {@code URL}, or
+ &lt;CODE&gt;null&lt;/CODE&gt; if one does not exist
+@since 1.3
+*/
+getUserInfo : function(  ) {},
+
+<span id='java-net-URL-method-getAuthority'>/**Gets the authority part of this {@code URL}.
+</span>@return {String} the authority part of this {@code URL}
+@since 1.3
+*/
+getAuthority : function(  ) {},
+
+<span id='java-net-URL-method-getPort'>/**Gets the port number of this {@code URL}.
+</span>@return {Number} the port number, or -1 if the port is not set
+*/
+getPort : function(  ) {},
+
+<span id='java-net-URL-method-getDefaultPort'>/**Gets the default port number of the protocol associated
+</span> with this {@code URL}. If the URL scheme or the URLStreamHandler
+ for the URL do not define a default port number,
+ then -1 is returned.
+@return {Number} the port number
+@since 1.4
+*/
+getDefaultPort : function(  ) {},
+
+<span id='java-net-URL-method-getProtocol'>/**Gets the protocol name of this {@code URL}.
+</span>@return {String} the protocol of this {@code URL}.
+*/
+getProtocol : function(  ) {},
+
+<span id='java-net-URL-method-getHost'>/**Gets the host name of this {@code URL}, if applicable.
+</span> The format of the host conforms to RFC 2732, i.e. for a
+ literal IPv6 address, this method will return the IPv6 address
+ enclosed in square brackets ({@code '['} and {@code ']'}).
+@return {String} the host name of this {@code URL}.
+*/
+getHost : function(  ) {},
+
+<span id='java-net-URL-method-getFile'>/**Gets the file name of this {@code URL}.
+</span> The returned file portion will be
+ the same as &lt;CODE&gt;getPath()&lt;/CODE&gt;, plus the concatenation of
+ the value of &lt;CODE&gt;getQuery()&lt;/CODE&gt;, if any. If there is
+ no query portion, this method and &lt;CODE&gt;getPath()&lt;/CODE&gt; will
+ return identical results.
+@return {String} the file name of this {@code URL},
+ or an empty string if one does not exist
+*/
+getFile : function(  ) {},
+
+<span id='java-net-URL-method-getRef'>/**Gets the anchor (also known as the &quot;reference&quot;) of this
+</span> {@code URL}.
+@return {String} the anchor (also known as the &quot;reference&quot;) of this
+          {@code URL}, or &lt;CODE&gt;null&lt;/CODE&gt; if one does not exist
+*/
+getRef : function(  ) {},
+
+<span id='java-net-URL-method-equals'>/**Compares this URL for equality with another object.&lt;p&gt;
+</span>
+ If the given object is not a URL then this method immediately returns
+ {@code false}.&lt;p&gt;
+
+ Two URL objects are equal if they have the same protocol, reference
+ equivalent hosts, have the same port number on the host, and the same
+ file and fragment of the file.&lt;p&gt;
+
+ Returns true if this URL equals {@code o}. URLs are equal if they have
+ the same protocol, host, port, file, and reference.
+
+ &lt;h3&gt;Network I/O Warning&lt;/h3&gt;
+ &lt;p&gt;Some implementations of URL.equals() resolve host names over the
+ network. This is problematic:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;strong&gt;The network may be slow.&lt;/strong&gt; Many classes, including
+ core collections like {@link java.util.Map Map} and {@link java.util.Set
+ Set} expect that {@code equals} and {@code hashCode} will return quickly.
+ By violating this assumption, this method posed potential performance
+ problems.
+ &lt;li&gt;&lt;strong&gt;Equal IP addresses do not imply equal content.&lt;/strong&gt;
+ Virtual hosting permits unrelated sites to share an IP address. This
+ method could report two otherwise unrelated URLs to be equal because
+ they're hosted on the same server.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;The network may not be available.&lt;/strong&gt; Two URLs could be
+ equal when a network is available and unequal otherwise.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;The network may change.&lt;/strong&gt; The IP address for a given
+ host name varies by network and over time. This is problematic for mobile
+ devices. Two URLs could be equal on some networks and unequal on
+ others.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;This problem is fixed in Android 4.0 (Ice Cream Sandwich). In that
+ release, URLs are only equal if their host names are equal (ignoring
+ case).
+@param {Object {Object}} obj   the URL to compare against.
+@return {Boolean} {@code true} if the objects are the same;
+          {@code false} otherwise.
+*/
+equals : function(  ) {},
+
+<span id='java-net-URL-method-hashCode'>/**Creates an integer suitable for hash table indexing.&lt;p&gt;
+</span>
+ The hash code is based upon all the URL components relevant for URL
+ comparison. As such, this operation is a blocking operation.&lt;p&gt;
+@return {Number} a hash code for this {@code URL}.
+*/
+hashCode : function(  ) {},
+
+<span id='java-net-URL-method-sameFile'>/**Compares two URLs, excluding the fragment component.&lt;p&gt;
+</span>
+ Returns {@code true} if this {@code URL} and the
+ {@code other} argument are equal without taking the
+ fragment component into consideration.
+@param {Object {URL}} other   the {@code URL} to compare against.
+@return {Boolean} {@code true} if they reference the same remote object;
+          {@code false} otherwise.
+*/
+sameFile : function(  ) {},
+
+<span id='java-net-URL-method-toString'>/**Constructs a string representation of this {@code URL}. The
+</span> string is created by calling the {@code toExternalForm}
+ method of the stream protocol handler for this object.
+@return {String} a string representation of this object.
+@see java.net.URL#URL(java.lang.String, java.lang.String, int,
+                  java.lang.String)
+@see java.net.URLStreamHandler#toExternalForm(java.net.URL)
+*/
+toString : function(  ) {},
+
+<span id='java-net-URL-method-toExternalForm'>/**Constructs a string representation of this {@code URL}. The
+</span> string is created by calling the {@code toExternalForm}
+ method of the stream protocol handler for this object.
+@return {String} a string representation of this object.
+@see java.net.URL#URL(java.lang.String, java.lang.String,
+                  int, java.lang.String)
+@see java.net.URLStreamHandler#toExternalForm(java.net.URL)
+*/
+toExternalForm : function(  ) {},
+
+<span id='java-net-URL-method-toURI'>/**Returns a {@link java.net.URI} equivalent to this URL.
+</span> This method functions in the same way as {@code new URI (this.toString())}.
+ &lt;p&gt;Note, any URL instance that complies with RFC 2396 can be converted
+ to a URI. However, some URLs that are not strictly in compliance
+ can not be converted to a URI.
+@exception URISyntaxException if this URL is not formatted strictly according to
+            to RFC2396 and cannot be converted to a URI.
+@return {Object {java.net.URI}} a URI instance equivalent to this URL.
+@since 1.5
+*/
+toURI : function(  ) {},
+
+<span id='java-net-URL-method-openConnection'>/**Returns a {@link java.net.URLConnection URLConnection} instance that
+</span> represents a connection to the remote object referred to by the
+ {@code URL}.
+
+ &lt;P&gt;A new instance of {@linkplain java.net.URLConnection URLConnection} is
+ created every time when invoking the
+ {@linkplain java.net.URLStreamHandler#openConnection(URL)
+ URLStreamHandler.openConnection(URL)} method of the protocol handler for
+ this URL.&lt;/P&gt;
+
+ &lt;P&gt;It should be noted that a URLConnection instance does not establish
+ the actual network connection on creation. This will happen only when
+ calling {@linkplain java.net.URLConnection#connect() URLConnection.connect()}.&lt;/P&gt;
+
+ &lt;P&gt;If for the URL's protocol (such as HTTP or JAR), there
+ exists a public, specialized URLConnection subclass belonging
+ to one of the following packages or one of their subpackages:
+ java.lang, java.io, java.util, java.net, the connection
+ returned will be of that subclass. For example, for HTTP an
+ HttpURLConnection will be returned, and for JAR a
+ JarURLConnection will be returned.&lt;/P&gt;
+@return {Object {java.net.URLConnection}} a {@link java.net.URLConnection URLConnection} linking
+             to the URL.
+@exception IOException  if an I/O exception occurs.
+@see java.net.URL#URL(java.lang.String, java.lang.String,
+             int, java.lang.String)
+*/
+openConnection : function(  ) {},
+
+<span id='java-net-URL-method-openConnection'>/**Same as {@link #openConnection}(), except that the connection will be
+</span> made through the specified proxy; Protocol handlers that do not
+ support proxing will ignore the proxy parameter and make a
+ normal connection.
+
+ Invoking this method preempts the system's default ProxySelector
+ settings.
+@param {Object {Proxy}} proxy the Proxy through which this connection
+             will be made. If direct connection is desired,
+             Proxy.NO_PROXY should be specified.
+@return {Object {java.net.URLConnection}} a {@code URLConnection} to the URL.
+@exception IOException  if an I/O exception occurs.
+@exception SecurityException if a security manager is present
+             and the caller doesn't have permission to connect
+             to the proxy.
+@exception IllegalArgumentException will be thrown if proxy is null,
+             or proxy has the wrong type
+@exception UnsupportedOperationException if the subclass that
+             implements the protocol handler doesn't support
+             this method.
+@see java.net.URL#URL(java.lang.String, java.lang.String,
+             int, java.lang.String)
+@see java.net.URLConnection
+@see java.net.URLStreamHandler#openConnection(java.net.URL,
+             java.net.Proxy)
+@since 1.5
+*/
+openConnection : function(  ) {},
+
+<span id='java-net-URL-method-openStream'>/**Opens a connection to this {@code URL} and returns an
+</span> {@code InputStream} for reading from that connection. This
+ method is a shorthand for:
+ &lt;blockquote&gt;&lt;pre&gt;
+     openConnection().getInputStream()
+ &lt;/pre&gt;&lt;/blockquote&gt;
+@return {Object {java.io.InputStream}} an input stream for reading from the URL connection.
+@exception IOException  if an I/O exception occurs.
+@see java.net.URL#openConnection()
+@see java.net.URLConnection#getInputStream()
+*/
+openStream : function(  ) {},
+
+<span id='java-net-URL-method-getContent'>/**Gets the contents of this URL. This method is a shorthand for:
+</span> &lt;blockquote&gt;&lt;pre&gt;
+     openConnection().getContent()
+ &lt;/pre&gt;&lt;/blockquote&gt;
+@return {Object {java.lang.Object}} the contents of this URL.
+@exception IOException  if an I/O exception occurs.
+@see java.net.URLConnection#getContent()
+*/
+getContent : function(  ) {},
+
+<span id='java-net-URL-method-getContent'>/**Gets the contents of this URL. This method is a shorthand for:
+</span> &lt;blockquote&gt;&lt;pre&gt;
+     openConnection().getContent(Class[])
+ &lt;/pre&gt;&lt;/blockquote&gt;
+@param {Object {java.lang.Class[]}} classes an array of Java types
+@return {Object {java.lang.Object}} the content object of this URL that is the first match of
+               the types specified in the classes array.
+               null if none of the requested types are supported.
+@exception IOException  if an I/O exception occurs.
+@see java.net.URLConnection#getContent(Class[])
+@since 1.3
+*/
+getContent : function(  ) {},
+
+<span id='java-net-URL-method-setURLStreamHandlerFactory'>/**Sets an application's {@code URLStreamHandlerFactory}.
+</span> This method can be called at most once in a given Java Virtual
+ Machine.
+
+&lt;p&gt; The {@code URLStreamHandlerFactory} instance is used to
+construct a stream protocol handler from a protocol name.
+
+ &lt;p&gt; If there is a security manager, this method first calls
+ the security manager's {@code checkSetFactory} method
+ to ensure the operation is allowed.
+ This could result in a SecurityException.
+@param {Object {URLStreamHandlerFactory}} fac   the desired factory.
+@exception Error  if the application has already set a factory.
+@exception SecurityException  if a security manager exists and its
+             {@code checkSetFactory} method doesn't allow
+             the operation.
+@see java.net.URL#URL(java.lang.String, java.lang.String,
+             int, java.lang.String)
+@see java.net.URLStreamHandlerFactory
+@see SecurityManager#checkSetFactory
+*/
+setURLStreamHandlerFactory : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

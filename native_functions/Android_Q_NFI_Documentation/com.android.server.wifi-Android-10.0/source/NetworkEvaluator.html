@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiNetworkSelector-NetworkEvaluator'>/**@class com.android.server.wifi.WifiNetworkSelector.NetworkEvaluator
+</span> Interface for WiFi Network Evaluator
+
+ A network evaluator examines the scan results and recommends the
+ best network in its category to connect to; it also reports the
+ connectable candidates in its category for further consideration.
+*/
+var NetworkEvaluator = {
+
+<span id='com-android-server-wifi-WifiNetworkSelector-NetworkEvaluator-property-EVALUATOR_ID_SAVED'>/**Type of evaluators */
+</span>EVALUATOR_ID_SAVED : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-NetworkEvaluator-property-EVALUATOR_ID_SUGGESTION'>/***/
+</span>EVALUATOR_ID_SUGGESTION : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-NetworkEvaluator-property-EVALUATOR_ID_PASSPOINT'>/***/
+</span>EVALUATOR_ID_PASSPOINT : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-NetworkEvaluator-property-EVALUATOR_ID_CARRIER'>/***/
+</span>EVALUATOR_ID_CARRIER : &quot;3&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-NetworkEvaluator-property-EVALUATOR_ID_SCORED'>/***/
+</span>EVALUATOR_ID_SCORED : &quot;4&quot;,
+<span id='com-android-server-wifi-WifiNetworkSelector-NetworkEvaluator-method-getId'>/**Get the evaluator type.
+</span>*/
+getId : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-NetworkEvaluator-method-getName'>/**Get the evaluator name.
+</span>*/
+getName : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-NetworkEvaluator-method-update'>/**Update the evaluator.
+</span>
+ Certain evaluators have to be updated with the new scan results. For example
+ the ScoredNetworkEvaluator needs to refresh its Score Cache.
+@param {Object {java.util.List}} scanDetails    a list of scan details constructed from the scan results
+*/
+update : function(  ) {},
+
+<span id='com-android-server-wifi-WifiNetworkSelector-NetworkEvaluator-method-evaluateNetworks'>/**Evaluate all the networks from the scan results.
+</span>@param {Object {java.util.List}} scanDetails    a list of scan details constructed from the scan results
+@param {Object {WifiConfiguration}} currentNetwork configuration of the current connected network
+                       or null if disconnected
+@param {String} currentBssid   BSSID of the current connected network or null if
+                       disconnected
+@param {Boolean} connected      a flag to indicate if ClientModeImpl is in connected
+                       state
+@param {Boolean} untrustedNetworkAllowed a flag to indicate if untrusted networks like
+                                ephemeral networks are allowed
+@param {Object {WifiNetworkSelector.NetworkEvaluator.OnConnectableListener}} onConnectableListener callback to record all of the connectable networks
+@return {Object {android.net.wifi.WifiConfiguration}} configuration of the chosen network;
+         null if no network in this category is available.
+*/
+evaluateNetworks : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

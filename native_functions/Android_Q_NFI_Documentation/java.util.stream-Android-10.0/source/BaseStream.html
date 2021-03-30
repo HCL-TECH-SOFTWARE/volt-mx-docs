@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-stream-BaseStream'>/**@class java.util.stream.BaseStream
+</span> implements java.lang.AutoCloseable
+
+ Base interface for streams, which are sequences of elements supporting
+ sequential and parallel aggregate operations.  The following example
+ illustrates an aggregate operation using the stream types {@link java.util.stream.Stream}
+ and {@link java.util.stream.IntStream}, computing the sum of the weights of the red widgets:
+
+ &lt;pre&gt;{@code
+     int sum = widgets.stream()
+                      .filter(w -&gt; w.getColor() == RED)
+                      .mapToInt(w -&gt; w.getWeight())
+                      .sum();
+ }&lt;/pre&gt;
+
+ See the class documentation for {@link java.util.stream.Stream} and the package documentation
+ for &lt;a href=&quot;package-summary.html&quot;&gt;java.util.stream&lt;/a&gt; for additional
+ specification of streams, stream operations, stream pipelines, and
+ parallelism, which governs the behavior of all stream types.
+
+ @param &lt;T&gt; the type of the stream elements
+ @param &lt;S&gt; the type of of the stream implementing {@code BaseStream}
+ @since 1.8
+ @see Stream
+ @see IntStream
+ @see LongStream
+ @see DoubleStream
+ @see &lt;a href=&quot;package-summary.html&quot;&gt;java.util.stream&lt;/a&gt;
+*/
+var BaseStream = {
+
+<span id='java-util-stream-BaseStream-method-iterator'>/**Returns an iterator for the elements of this stream.
+</span>
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@return {Object {java.util.Iterator}} the element iterator for this stream
+*/
+iterator : function(  ) {},
+
+<span id='java-util-stream-BaseStream-method-spliterator'>/**Returns a spliterator for the elements of this stream.
+</span>
+ &lt;p&gt;This is a &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;terminal
+ operation&lt;/a&gt;.
+@return {Object {java.util.Spliterator}} the element spliterator for this stream
+*/
+spliterator : function(  ) {},
+
+<span id='java-util-stream-BaseStream-method-isParallel'>/**Returns whether this stream, if a terminal operation were to be executed,
+</span> would execute in parallel.  Calling this method after invoking an
+ terminal stream operation method may yield unpredictable results.
+@return {Boolean} {@code true} if this stream would execute in parallel if executed
+*/
+isParallel : function(  ) {},
+
+<span id='java-util-stream-BaseStream-method-sequential'>/**Returns an equivalent stream that is sequential.  May return
+</span> itself, either because the stream was already sequential, or because
+ the underlying stream state was modified to be sequential.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@return {Object {java.util.stream.BaseStream}} a sequential stream
+*/
+sequential : function(  ) {},
+
+<span id='java-util-stream-BaseStream-method-parallel'>/**Returns an equivalent stream that is parallel.  May return
+</span> itself, either because the stream was already parallel, or because
+ the underlying stream state was modified to be parallel.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@return {Object {java.util.stream.BaseStream}} a parallel stream
+*/
+parallel : function(  ) {},
+
+<span id='java-util-stream-BaseStream-method-unordered'>/**Returns an equivalent stream that is
+</span> &lt;a href=&quot;package-summary.html#Ordering&quot;&gt;unordered&lt;/a&gt;.  May return
+ itself, either because the stream was already unordered, or because
+ the underlying stream state was modified to be unordered.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@return {Object {java.util.stream.BaseStream}} an unordered stream
+*/
+unordered : function(  ) {},
+
+<span id='java-util-stream-BaseStream-method-onClose'>/**Returns an equivalent stream with an additional close handler.  Close
+</span> handlers are run when the {@link #close}() method
+ is called on the stream, and are executed in the order they were
+ added.  All close handlers are run, even if earlier close handlers throw
+ exceptions.  If any close handler throws an exception, the first
+ exception thrown will be relayed to the caller of {@code close()}, with
+ any remaining exceptions added to that exception as suppressed exceptions
+ (unless one of the remaining exceptions is the same exception as the
+ first exception, since an exception cannot suppress itself.)  May
+ return itself.
+
+ &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ operation&lt;/a&gt;.
+@param {Object {Runnable}} closeHandler A task to execute when the stream is closed
+@return {Object {java.util.stream.BaseStream}} a stream with a handler that is run if the stream is closed
+*/
+onClose : function(  ) {},
+
+<span id='java-util-stream-BaseStream-method-close'>/**Closes this stream, causing all close handlers for this stream pipeline
+</span> to be called.
+@see AutoCloseable#close()
+*/
+close : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

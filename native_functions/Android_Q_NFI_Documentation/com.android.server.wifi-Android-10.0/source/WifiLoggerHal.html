@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-WifiLoggerHal'>/**@class com.android.server.wifi.WifiLoggerHal
+</span>@extends java.lang.Object
+
+*/
+var WifiLoggerHal = {
+
+<span id='com-android-server-wifi-WifiLoggerHal-property-MAX_FATE_LOG_LEN'>/***/
+</span>MAX_FATE_LOG_LEN : &quot;32&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-FRAME_TYPE_UNKNOWN'>/***/
+</span>FRAME_TYPE_UNKNOWN : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-FRAME_TYPE_ETHERNET_II'>/***/
+</span>FRAME_TYPE_ETHERNET_II : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-FRAME_TYPE_80211_MGMT'>/***/
+</span>FRAME_TYPE_80211_MGMT : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-TX_PKT_FATE_ACKED'>/***/
+</span>TX_PKT_FATE_ACKED : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-TX_PKT_FATE_SENT'>/***/
+</span>TX_PKT_FATE_SENT : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-TX_PKT_FATE_FW_QUEUED'>/***/
+</span>TX_PKT_FATE_FW_QUEUED : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-TX_PKT_FATE_FW_DROP_INVALID'>/***/
+</span>TX_PKT_FATE_FW_DROP_INVALID : &quot;3&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-TX_PKT_FATE_FW_DROP_NOBUFS'>/***/
+</span>TX_PKT_FATE_FW_DROP_NOBUFS : &quot;4&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-TX_PKT_FATE_FW_DROP_OTHER'>/***/
+</span>TX_PKT_FATE_FW_DROP_OTHER : &quot;5&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-TX_PKT_FATE_DRV_QUEUED'>/***/
+</span>TX_PKT_FATE_DRV_QUEUED : &quot;6&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-TX_PKT_FATE_DRV_DROP_INVALID'>/***/
+</span>TX_PKT_FATE_DRV_DROP_INVALID : &quot;7&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-TX_PKT_FATE_DRV_DROP_NOBUFS'>/***/
+</span>TX_PKT_FATE_DRV_DROP_NOBUFS : &quot;8&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-TX_PKT_FATE_DRV_DROP_OTHER'>/***/
+</span>TX_PKT_FATE_DRV_DROP_OTHER : &quot;9&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_SUCCESS'>/***/
+</span>RX_PKT_FATE_SUCCESS : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_FW_QUEUED'>/***/
+</span>RX_PKT_FATE_FW_QUEUED : &quot;1&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_FW_DROP_FILTER'>/***/
+</span>RX_PKT_FATE_FW_DROP_FILTER : &quot;2&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_FW_DROP_INVALID'>/***/
+</span>RX_PKT_FATE_FW_DROP_INVALID : &quot;3&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_FW_DROP_NOBUFS'>/***/
+</span>RX_PKT_FATE_FW_DROP_NOBUFS : &quot;4&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_FW_DROP_OTHER'>/***/
+</span>RX_PKT_FATE_FW_DROP_OTHER : &quot;5&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_DRV_QUEUED'>/***/
+</span>RX_PKT_FATE_DRV_QUEUED : &quot;6&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_DRV_DROP_FILTER'>/***/
+</span>RX_PKT_FATE_DRV_DROP_FILTER : &quot;7&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_DRV_DROP_INVALID'>/***/
+</span>RX_PKT_FATE_DRV_DROP_INVALID : &quot;8&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_DRV_DROP_NOBUFS'>/***/
+</span>RX_PKT_FATE_DRV_DROP_NOBUFS : &quot;9&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-RX_PKT_FATE_DRV_DROP_OTHER'>/***/
+</span>RX_PKT_FATE_DRV_DROP_OTHER : &quot;10&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-WIFI_ALERT_REASON_RESERVED'>/**These aren't formally part of the HAL. But they probably should be, eventually. */
+</span>WIFI_ALERT_REASON_RESERVED : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-WIFI_ALERT_REASON_MIN'>/***/
+</span>WIFI_ALERT_REASON_MIN : &quot;0&quot;,
+<span id='com-android-server-wifi-WifiLoggerHal-property-WIFI_ALERT_REASON_MAX'>/***/
+</span>WIFI_ALERT_REASON_MAX : &quot;1024&quot;,
+
+};</pre>
+</body>
+</html>

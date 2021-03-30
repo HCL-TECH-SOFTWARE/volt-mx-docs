@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-obex-ObexHelper'>/**@class javax.obex.ObexHelper
+</span>@extends java.lang.Object
+
+ This class defines a set of helper methods for the implementation of Obex.
+ @hide
+*/
+var ObexHelper = {
+
+<span id='javax-obex-ObexHelper-property-VDBG'>/***/
+</span>VDBG : &quot;false&quot;,
+<span id='javax-obex-ObexHelper-property-BASE_PACKET_LENGTH'>/** Defines the basic packet length used by OBEX. Every OBEX packet has the
+</span> same basic format:&lt;BR&gt;
+ Byte 0: Request or Response Code Byte 1&amp;2: Length of the packet.
+*/
+BASE_PACKET_LENGTH : &quot;3&quot;,
+<span id='javax-obex-ObexHelper-property-MAX_PACKET_SIZE_INT'>/** The maximum packet size for OBEX packets that this client can handle. At
+</span> present, this must be changed for each port. TODO: The max packet size
+ should be the Max incoming MTU minus TODO: L2CAP package headers and
+ RFCOMM package headers. TODO: Retrieve the max incoming MTU from TODO:
+ LocalDevice.getProperty().
+ NOTE: This value must be larger than or equal to the L2CAP SDU
+*/
+MAX_PACKET_SIZE_INT : &quot;65534&quot;,
+<span id='javax-obex-ObexHelper-property-LOWER_LIMIT_MAX_PACKET_SIZE'>/***/
+</span>LOWER_LIMIT_MAX_PACKET_SIZE : &quot;255&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_BYTE_SEQ_HEADER_LEN'>/***/
+</span>OBEX_BYTE_SEQ_HEADER_LEN : &quot;3&quot;,
+<span id='javax-obex-ObexHelper-property-MAX_CLIENT_PACKET_SIZE'>/** Temporary workaround to be able to push files to Windows 7.
+</span> TODO: Should be removed as soon as Microsoft updates their driver.
+*/
+MAX_CLIENT_PACKET_SIZE : &quot;64512&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_FINAL_BIT_MASK'>/***/
+</span>OBEX_OPCODE_FINAL_BIT_MASK : &quot;128&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_CONNECT'>/***/
+</span>OBEX_OPCODE_CONNECT : &quot;128&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_DISCONNECT'>/***/
+</span>OBEX_OPCODE_DISCONNECT : &quot;129&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_PUT'>/***/
+</span>OBEX_OPCODE_PUT : &quot;2&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_PUT_FINAL'>/***/
+</span>OBEX_OPCODE_PUT_FINAL : &quot;130&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_GET'>/***/
+</span>OBEX_OPCODE_GET : &quot;3&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_GET_FINAL'>/***/
+</span>OBEX_OPCODE_GET_FINAL : &quot;131&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_RESERVED'>/***/
+</span>OBEX_OPCODE_RESERVED : &quot;4&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_RESERVED_FINAL'>/***/
+</span>OBEX_OPCODE_RESERVED_FINAL : &quot;132&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_SETPATH'>/***/
+</span>OBEX_OPCODE_SETPATH : &quot;133&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_OPCODE_ABORT'>/***/
+</span>OBEX_OPCODE_ABORT : &quot;255&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_ASCII'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_ASCII : &quot;0&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_ISO_8859_1'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_ISO_8859_1 : &quot;1&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_ISO_8859_2'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_ISO_8859_2 : &quot;2&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_ISO_8859_3'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_ISO_8859_3 : &quot;3&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_ISO_8859_4'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_ISO_8859_4 : &quot;4&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_ISO_8859_5'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_ISO_8859_5 : &quot;5&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_ISO_8859_6'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_ISO_8859_6 : &quot;6&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_ISO_8859_7'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_ISO_8859_7 : &quot;7&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_ISO_8859_8'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_ISO_8859_8 : &quot;8&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_ISO_8859_9'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_ISO_8859_9 : &quot;9&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_AUTH_REALM_CHARSET_UNICODE'>/***/
+</span>OBEX_AUTH_REALM_CHARSET_UNICODE : &quot;255&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_SRM_ENABLE'>/***/
+</span>OBEX_SRM_ENABLE : &quot;1&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_SRM_DISABLE'>/***/
+</span>OBEX_SRM_DISABLE : &quot;0&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_SRM_SUPPORT'>/***/
+</span>OBEX_SRM_SUPPORT : &quot;2&quot;,
+<span id='javax-obex-ObexHelper-property-OBEX_SRMP_WAIT'>/***/
+</span>OBEX_SRMP_WAIT : &quot;1&quot;,
+<span id='javax-obex-ObexHelper-method-updateHeaderSet'>/**Updates the HeaderSet with the headers received in the byte array
+</span> provided. Invalid headers are ignored.
+ &lt;P&gt;
+ The first two bits of an OBEX Header specifies the type of object that is
+ being sent. The table below specifies the meaning of the high bits.
+ &lt;TABLE&gt;
+ &lt;TR&gt;
+ &lt;TH&gt;Bits 8 and 7&lt;/TH&gt;
+ &lt;TH&gt;Value&lt;/TH&gt;
+ &lt;TH&gt;Description&lt;/TH&gt;
+ &lt;/TR&gt;
+ &lt;TR&gt;
+ &lt;TD&gt;00&lt;/TD&gt;
+ &lt;TD&gt;0x00&lt;/TD&gt;
+ &lt;TD&gt;Null Terminated Unicode text, prefixed with 2 byte unsigned integer&lt;/TD&gt;
+ &lt;/TR&gt;
+ &lt;TR&gt;
+ &lt;TD&gt;01&lt;/TD&gt;
+ &lt;TD&gt;0x40&lt;/TD&gt;
+ &lt;TD&gt;Byte Sequence, length prefixed with 2 byte unsigned integer&lt;/TD&gt;
+ &lt;/TR&gt;
+ &lt;TR&gt;
+ &lt;TD&gt;10&lt;/TD&gt;
+ &lt;TD&gt;0x80&lt;/TD&gt;
+ &lt;TD&gt;1 byte quantity&lt;/TD&gt;
+ &lt;/TR&gt;
+ &lt;TR&gt;
+ &lt;TD&gt;11&lt;/TD&gt;
+ &lt;TD&gt;0xC0&lt;/TD&gt;
+ &lt;TD&gt;4 byte quantity - transmitted in network byte order (high byte first&lt;/TD&gt;
+ &lt;/TR&gt;
+ &lt;/TABLE&gt;
+ This method uses the information in this table to determine the type of
+ Java object to create and passes that object with the full header to
+ setHeader() to update the HeaderSet object. Invalid headers will cause an
+ exception to be thrown. When it is thrown, it is ignored.
+@param {Object {HeaderSet}} header the HeaderSet to update
+@param {Object {byte[]}} headerArray the byte array containing headers
+@return {Number} the result of the last start body or end body header provided;
+         the first byte in the result will specify if a body or end of
+         body is received
+@throws IOException if an invalid header was found
+*/
+updateHeaderSet : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-createHeader'>/**Creates the header part of OBEX packet based on the header provided.
+</span> TODO: Could use getHeaderList() to get the array of headers to include
+ and then use the high two bits to determine the the type of the object
+ and construct the byte array from that. This will make the size smaller.
+@param {Object {HeaderSet}} head the header used to construct the byte array
+@param {Boolean} nullOut &lt;code&gt;true&lt;/code&gt; if the header should be set to
+        &lt;code&gt;null&lt;/code&gt; once it is added to the array or
+        &lt;code&gt;false&lt;/code&gt; if it should not be nulled out
+@return {Number} the header of an OBEX packet
+*/
+createHeader : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-findHeaderEnd'>/**Determines where the maximum divide is between headers. This method is
+</span> used by put and get operations to separate headers to a size that meets
+ the max packet size allowed.
+@param {Object {byte[]}} headerArray the headers to separate
+@param {Number} start the starting index to search
+@param {Number} maxSize the maximum size of a packet
+@return {Number} the index of the end of the header block to send or -1 if the
+         header could not be divided because the header is too large
+*/
+findHeaderEnd : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-convertToLong'>/**Converts the byte array to a long.
+</span>@param {Object {byte[]}} b the byte array to convert to a long
+@return {Number} the byte array as a long
+*/
+convertToLong : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-convertToByteArray'>/**Converts the long to a 4 byte array. The long must be non negative.
+</span>@param {Number} l the long to convert
+@return {Number} a byte array that is the same as the long
+*/
+convertToByteArray : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-convertToUnicodeByteArray'>/**Converts the String to a UNICODE byte array. It will also add the ending
+</span> null characters to the end of the string.
+@param {String} s the string to convert
+@return {Number} the unicode byte array of the string
+*/
+convertToUnicodeByteArray : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-getTagValue'>/**Retrieves the value from the byte array for the tag value specified. The
+</span> array should be of the form Tag - Length - Value triplet.
+@param {Number} tag the tag to retrieve from the byte array
+@param {Object {byte[]}} triplet the byte sequence containing the tag length value form
+@return {Number} the value of the specified tag
+*/
+getTagValue : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-findTag'>/**Finds the index that starts the tag value pair in the byte array provide.
+</span>@param {Number} tag the tag to look for
+@param {Object {byte[]}} value the byte array to search
+@return {Number} the starting index of the tag or -1 if the tag could not be found
+*/
+findTag : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-convertToUnicode'>/**Converts the byte array provided to a unicode string.
+</span>@param {Object {byte[]}} b the byte array to convert to a string
+@param {Boolean} includesNull determine if the byte string provided contains the
+        UNICODE null character at the end or not; if it does, it will be
+        removed
+@return {String} a Unicode string
+@throws IllegalArgumentException if the byte array has an odd length
+*/
+convertToUnicode : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-computeMd5Hash'>/**Compute the MD5 hash of the byte array provided. Does not accumulate
+</span> input.
+@param {Object {byte[]}} in the byte array to hash
+@return {Number} the MD5 hash of the byte array
+*/
+computeMd5Hash : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-computeAuthenticationChallenge'>/**Computes an authentication challenge header.
+</span>@param {Object {byte[]}} nonce the challenge that will be provided to the peer; the
+        challenge must be 16 bytes long
+@param {String} realm a short description that describes what password to use
+@param {Boolean} access if &lt;code&gt;true&lt;/code&gt; then full access will be granted if
+        successful; if &lt;code&gt;false&lt;/code&gt; then read only access will be
+        granted if successful
+@param {Boolean} userID if &lt;code&gt;true&lt;/code&gt;, a user ID is required in the reply;
+        if &lt;code&gt;false&lt;/code&gt;, no user ID is required
+@throws IllegalArgumentException if the challenge is not 16 bytes long;
+         if the realm can not be encoded in less then 255 bytes
+@throws IOException if the encoding scheme ISO 8859-1 is not supported
+*/
+computeAuthenticationChallenge : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-getMaxTxPacketSize'>/**Return the maximum allowed OBEX packet to transmit.
+</span> OBEX packets transmitted must be smaller than this value.
+@param {Object {ObexTransport}} transport Reference to the ObexTransport in use.
+@return {Number} the maximum allowed OBEX packet to transmit
+*/
+getMaxTxPacketSize : function(  ) {},
+
+<span id='javax-obex-ObexHelper-method-getMaxRxPacketSize'>/**Return the maximum allowed OBEX packet to receive - used in OBEX connect.
+</span>@param {Object {ObexTransport}} transport
+@return {Number} he maximum allowed OBEX packet to receive
+*/
+getMaxRxPacketSize : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

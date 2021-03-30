@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-statusbar-CommandQueue'>/**@class com.android.systemui.statusbar.CommandQueue
+</span> implements com.android.systemui.statusbar.policy.CallbackController
+
+ implements android.hardware.display.DisplayManager.DisplayListener
+
+@extends IStatusBar.Stub
+
+ This class takes the functions from IStatusBar that come in on
+ binder pool threads and posts messages to get them onto the main
+ thread, and calls onto Callbacks.  It also takes care of
+ coalescing these calls so they don't stack up.  For the calls
+ are coalesced, note that they are all idempotent.
+*/
+var CommandQueue = {
+
+<span id='com-android-systemui-statusbar-CommandQueue-property-FLAG_EXCLUDE_NONE'>/***/
+</span>FLAG_EXCLUDE_NONE : &quot;0&quot;,
+<span id='com-android-systemui-statusbar-CommandQueue-property-FLAG_EXCLUDE_SEARCH_PANEL'>/***/
+</span>FLAG_EXCLUDE_SEARCH_PANEL : &quot;1&quot;,
+<span id='com-android-systemui-statusbar-CommandQueue-property-FLAG_EXCLUDE_RECENTS_PANEL'>/***/
+</span>FLAG_EXCLUDE_RECENTS_PANEL : &quot;2&quot;,
+<span id='com-android-systemui-statusbar-CommandQueue-property-FLAG_EXCLUDE_NOTIFICATION_PANEL'>/***/
+</span>FLAG_EXCLUDE_NOTIFICATION_PANEL : &quot;4&quot;,
+<span id='com-android-systemui-statusbar-CommandQueue-property-FLAG_EXCLUDE_INPUT_METHODS_PANEL'>/***/
+</span>FLAG_EXCLUDE_INPUT_METHODS_PANEL : &quot;8&quot;,
+<span id='com-android-systemui-statusbar-CommandQueue-property-FLAG_EXCLUDE_COMPAT_MODE_PANEL'>/***/
+</span>FLAG_EXCLUDE_COMPAT_MODE_PANEL : &quot;16&quot;,
+<span id='com-android-systemui-statusbar-CommandQueue-method-onDisplayAdded'>/**
+</span>*/
+onDisplayAdded : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-onDisplayRemoved'>/**
+</span>*/
+onDisplayRemoved : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-onDisplayChanged'>/**
+</span>*/
+onDisplayChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-panelsEnabled'>/**
+</span>*/
+panelsEnabled : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-addCallback'>/**
+</span>*/
+addCallback : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-removeCallback'>/**
+</span>*/
+removeCallback : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-setIcon'>/**
+</span>*/
+setIcon : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-removeIcon'>/**
+</span>*/
+removeIcon : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-disable'>/**Called to notify that disable flags are updated.
+</span>@see Callbacks#disable(int, int, int, boolean).
+*/
+disable : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-disable'>/**
+</span>*/
+disable : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-recomputeDisableFlags'>/**Apply current disable flags by {@link com.android.systemui.statusbar.CommandQueue#disable(int, int, int, boolean)}.
+</span>@param {Number} displayId The id of the display to notify.
+@param {Boolean} animate {@code true} to show animations.
+*/
+recomputeDisableFlags : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-animateExpandNotificationsPanel'>/**
+</span>*/
+animateExpandNotificationsPanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-animateCollapsePanels'>/**
+</span>*/
+animateCollapsePanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-animateCollapsePanels'>/**
+</span>*/
+animateCollapsePanels : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-togglePanel'>/**
+</span>*/
+togglePanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-animateExpandSettingsPanel'>/**
+</span>*/
+animateExpandSettingsPanel : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-setSystemUiVisibility'>/**
+</span>*/
+setSystemUiVisibility : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-topAppWindowChanged'>/**
+</span>*/
+topAppWindowChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-setImeWindowStatus'>/**
+</span>*/
+setImeWindowStatus : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-showRecentApps'>/**
+</span>*/
+showRecentApps : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-hideRecentApps'>/**
+</span>*/
+hideRecentApps : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-toggleSplitScreen'>/**
+</span>*/
+toggleSplitScreen : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-toggleRecentApps'>/**
+</span>*/
+toggleRecentApps : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-preloadRecentApps'>/**
+</span>*/
+preloadRecentApps : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-cancelPreloadRecentApps'>/**
+</span>*/
+cancelPreloadRecentApps : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-dismissKeyboardShortcutsMenu'>/**
+</span>*/
+dismissKeyboardShortcutsMenu : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-toggleKeyboardShortcutsMenu'>/**
+</span>*/
+toggleKeyboardShortcutsMenu : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-showPictureInPictureMenu'>/**
+</span>*/
+showPictureInPictureMenu : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-setWindowState'>/**
+</span>*/
+setWindowState : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-showScreenPinningRequest'>/**
+</span>*/
+showScreenPinningRequest : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-appTransitionPending'>/**
+</span>*/
+appTransitionPending : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-appTransitionPending'>/**Called to notify System UI that an application transition is pending.
+</span>@see Callbacks#appTransitionPending(int, boolean)
+*/
+appTransitionPending : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-appTransitionCancelled'>/**
+</span>*/
+appTransitionCancelled : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-appTransitionStarting'>/**
+</span>*/
+appTransitionStarting : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-appTransitionStarting'>/**Called to notify System UI that an application transition is starting.
+</span>@see Callbacks#appTransitionStarting(int, long, long, boolean).
+*/
+appTransitionStarting : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-appTransitionFinished'>/**
+</span>*/
+appTransitionFinished : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-showAssistDisclosure'>/**
+</span>*/
+showAssistDisclosure : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-startAssist'>/**
+</span>*/
+startAssist : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-onCameraLaunchGestureDetected'>/**
+</span>*/
+onCameraLaunchGestureDetected : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-addQsTile'>/**
+</span>*/
+addQsTile : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-remQsTile'>/**
+</span>*/
+remQsTile : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-clickQsTile'>/**
+</span>*/
+clickQsTile : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-handleSystemKey'>/**
+</span>*/
+handleSystemKey : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-showPinningEnterExitToast'>/**
+</span>*/
+showPinningEnterExitToast : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-showPinningEscapeToast'>/**
+</span>*/
+showPinningEscapeToast : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-showGlobalActionsMenu'>/**
+</span>*/
+showGlobalActionsMenu : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-setTopAppHidesStatusBar'>/**
+</span>*/
+setTopAppHidesStatusBar : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-showShutdownUi'>/**
+</span>*/
+showShutdownUi : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-showWirelessChargingAnimation'>/**
+</span>*/
+showWirelessChargingAnimation : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-onProposedRotationChanged'>/**
+</span>*/
+onProposedRotationChanged : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-showBiometricDialog'>/**
+</span>*/
+showBiometricDialog : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-onBiometricAuthenticated'>/**
+</span>*/
+onBiometricAuthenticated : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-onBiometricHelp'>/**
+</span>*/
+onBiometricHelp : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-onBiometricError'>/**
+</span>*/
+onBiometricError : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-hideBiometricDialog'>/**
+</span>*/
+hideBiometricDialog : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-onDisplayReady'>/**
+</span>*/
+onDisplayReady : function(  ) {},
+
+<span id='com-android-systemui-statusbar-CommandQueue-method-onRecentsAnimationStateChanged'>/**
+</span>*/
+onRecentsAnimationStateChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

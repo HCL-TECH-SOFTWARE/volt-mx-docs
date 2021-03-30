@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-chrono-MinguoChronology'>/**@class java.time.chrono.MinguoChronology
+</span> implements java.io.Serializable
+
+@extends java.time.chrono.AbstractChronology
+
+ The Minguo calendar system.
+ &lt;p&gt;
+ This chronology defines the rules of the Minguo calendar system.
+ This calendar system is primarily used in the Republic of China, often known as Taiwan.
+ Dates are aligned such that {@code 0001-01-01 (Minguo)} is {@code 1912-01-01 (ISO)}.
+ &lt;p&gt;
+ The fields are defined as follows:
+ &lt;ul&gt;
+ &lt;li&gt;era - There are two eras, the current 'Republic' (ERA_ROC) and the previous era (ERA_BEFORE_ROC).
+ &lt;li&gt;year-of-era - The year-of-era for the current era increases uniformly from the epoch at year one.
+  For the previous era the year increases from one as time goes backwards.
+  The value for the current era is equal to the ISO proleptic-year minus 1911.
+ &lt;li&gt;proleptic-year - The proleptic year is the same as the year-of-era for the
+  current era. For the previous era, years have zero, then negative values.
+  The value is equal to the ISO proleptic-year minus 1911.
+ &lt;li&gt;month-of-year - The Minguo month-of-year exactly matches ISO.
+ &lt;li&gt;day-of-month - The Minguo day-of-month exactly matches ISO.
+ &lt;li&gt;day-of-year - The Minguo day-of-year exactly matches ISO.
+ &lt;li&gt;leap-year - The Minguo leap-year pattern exactly matches ISO, such that the two calendars
+  are never out of step.
+ &lt;/ul&gt;
+
+ @implSpec
+ This class is immutable and thread-safe.
+
+ @since 1.8
+*/
+var MinguoChronology = {
+
+<span id='java-time-chrono-MinguoChronology-property-INSTANCE'>/** Singleton instance for the Minguo chronology.
+</span>*/
+INSTANCE : &quot;null&quot;,
+<span id='java-time-chrono-MinguoChronology-method-getId'>/**Gets the ID of the chronology - 'Minguo'.
+</span> &lt;p&gt;
+ The ID uniquely identifies the {@code Chronology}.
+ It can be used to lookup the {@code Chronology} using {@link java.time.chrono.Chronology#of(String)}.
+@return {String} the chronology ID - 'Minguo'
+@see #getCalendarType()
+*/
+getId : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-getCalendarType'>/**Gets the calendar type of the underlying calendar system - 'roc'.
+</span> &lt;p&gt;
+ The calendar type is an identifier defined by the
+ &lt;em&gt;Unicode Locale Data Markup Language (LDML)&lt;/em&gt; specification.
+ It can be used to lookup the {@code Chronology} using {@link java.time.chrono.Chronology#of(String)}.
+ It can also be used as part of a locale, accessible via
+ {@link Locale#getUnicodeLocaleType(String)} with the key 'ca'.
+@return {String} the calendar system type - 'roc'
+@see #getId()
+*/
+getCalendarType : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-date'>/**Obtains a local date in Minguo calendar system from the
+</span> era, year-of-era, month-of-year and day-of-month fields.
+@param {Object {Era}} era  the Minguo era, not null
+@param {Number} yearOfEra  the year-of-era
+@param {Number} month  the month-of-year
+@param {Number} dayOfMonth  the day-of-month
+@return {Object {java.time.chrono.MinguoDate}} the Minguo local date, not null
+@throws DateTimeException if unable to create the date
+@throws ClassCastException if the {@code era} is not a {@code MinguoEra}
+*/
+date : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-date'>/**Obtains a local date in Minguo calendar system from the
+</span> proleptic-year, month-of-year and day-of-month fields.
+@param {Number} prolepticYear  the proleptic-year
+@param {Number} month  the month-of-year
+@param {Number} dayOfMonth  the day-of-month
+@return {Object {java.time.chrono.MinguoDate}} the Minguo local date, not null
+@throws DateTimeException if unable to create the date
+*/
+date : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-dateYearDay'>/**Obtains a local date in Minguo calendar system from the
+</span> era, year-of-era and day-of-year fields.
+@param {Object {Era}} era  the Minguo era, not null
+@param {Number} yearOfEra  the year-of-era
+@param {Number} dayOfYear  the day-of-year
+@return {Object {java.time.chrono.MinguoDate}} the Minguo local date, not null
+@throws DateTimeException if unable to create the date
+@throws ClassCastException if the {@code era} is not a {@code MinguoEra}
+*/
+dateYearDay : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-dateYearDay'>/**Obtains a local date in Minguo calendar system from the
+</span> proleptic-year and day-of-year fields.
+@param {Number} prolepticYear  the proleptic-year
+@param {Number} dayOfYear  the day-of-year
+@return {Object {java.time.chrono.MinguoDate}} the Minguo local date, not null
+@throws DateTimeException if unable to create the date
+*/
+dateYearDay : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-dateEpochDay'>/**Obtains a local date in the Minguo calendar system from the epoch-day.
+</span>@param {Number} epochDay  the epoch day
+@return {Object {java.time.chrono.MinguoDate}} the Minguo local date, not null
+@throws DateTimeException if unable to create the date
+*/
+dateEpochDay : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-dateNow'>/**
+</span>*/
+dateNow : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-dateNow'>/**
+</span>*/
+dateNow : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-dateNow'>/**
+</span>*/
+dateNow : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-date'>/**
+</span>*/
+date : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-localDateTime'>/**
+</span>*/
+localDateTime : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-zonedDateTime'>/**
+</span>*/
+zonedDateTime : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-zonedDateTime'>/**
+</span>*/
+zonedDateTime : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-isLeapYear'>/**Checks if the specified year is a leap year.
+</span> &lt;p&gt;
+ Minguo leap years occur exactly in line with ISO leap years.
+ This method does not validate the year passed in, and only has a
+ well-defined result for years in the supported range.
+@param {Number} prolepticYear  the proleptic-year to check, not validated for range
+@return {Boolean} true if the year is a leap year
+*/
+isLeapYear : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-prolepticYear'>/**
+</span>*/
+prolepticYear : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-eraOf'>/**
+</span>*/
+eraOf : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-eras'>/**
+</span>*/
+eras : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-range'>/**
+</span>*/
+range : function(  ) {},
+
+<span id='java-time-chrono-MinguoChronology-method-resolveDate'>/**
+</span>*/
+resolveDate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-security-cert-CertPathBuilderSpi'>/**@class java.security.cert.CertPathBuilderSpi
+</span>@extends java.lang.Object
+
+ The &lt;i&gt;Service Provider Interface&lt;/i&gt; (&lt;b&gt;SPI&lt;/b&gt;)
+ for the {@link java.security.cert.CertPathBuilder java.security.cert.CertPathBuilder} class. All
+ {@code CertPathBuilder} implementations must include a class (the
+ SPI class) that extends this class ({@code CertPathBuilderSpi}) and
+ implements all of its methods. In general, instances of this class should
+ only be accessed through the {@code CertPathBuilder} class. For
+ details, see the Java Cryptography Architecture.
+ &lt;p&gt;
+ &lt;b&gt;Concurrent Access&lt;/b&gt;
+ &lt;p&gt;
+ Instances of this class need not be protected against concurrent
+ access from multiple threads. Threads that need to access a single
+ {@code CertPathBuilderSpi} instance concurrently should synchronize
+ amongst themselves and provide the necessary locking before calling the
+ wrapping {@code CertPathBuilder} object.
+ &lt;p&gt;
+ However, implementations of {@code CertPathBuilderSpi} may still
+ encounter concurrency issues, since multiple threads each
+ manipulating a different {@code CertPathBuilderSpi} instance need not
+ synchronize.
+
+ @since       1.4
+ @author      Sean Mullan
+*/
+var CertPathBuilderSpi = {
+
+<span id='java-security-cert-CertPathBuilderSpi-method-engineBuild'>/**Attempts to build a certification path using the specified
+</span> algorithm parameter set.
+@param {Object {CertPathParameters}} params the algorithm parameters
+@return {Object {java.security.cert.CertPathBuilderResult}} the result of the build algorithm
+@throws CertPathBuilderException if the builder is unable to construct
+ a certification path that satisfies the specified parameters
+@throws InvalidAlgorithmParameterException if the specified parameters
+ are inappropriate for this {@code CertPathBuilder}
+*/
+engineBuild : function(  ) {},
+
+<span id='java-security-cert-CertPathBuilderSpi-method-engineGetRevocationChecker'>/**Returns a {@code CertPathChecker} that this implementation uses to
+</span> check the revocation status of certificates. A PKIX implementation
+ returns objects of type {@code PKIXRevocationChecker}.
+
+ &lt;p&gt;The primary purpose of this method is to allow callers to specify
+ additional input parameters and options specific to revocation checking.
+ See the class description of {@code CertPathBuilder} for an example.
+
+ &lt;p&gt;This method was added to version 1.8 of the Java Platform Standard
+ Edition. In order to maintain backwards compatibility with existing
+ service providers, this method cannot be abstract and by default throws
+ an {@code UnsupportedOperationException}.
+@return {Object {java.security.cert.CertPathChecker}} a {@code CertPathChecker} that this implementation uses to
+ check the revocation status of certificates
+@throws UnsupportedOperationException if this method is not supported
+@since 1.8
+*/
+engineGetRevocationChecker : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

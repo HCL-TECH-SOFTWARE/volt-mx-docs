@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-systemui-recents-views-TaskStackView'>/**@class com.android.systemui.recents.views.TaskStackView
+</span> implements com.android.systemui.recents.model.TaskStack.TaskStackCallbacks
+
+ implements com.android.systemui.recents.views.TaskView.TaskViewCallbacks
+
+ implements com.android.systemui.recents.views.TaskStackViewScroller.TaskStackViewScrollerCallbacks
+
+ implements com.android.systemui.recents.views.TaskStackLayoutAlgorithm.TaskStackLayoutAlgorithmCallbacks
+
+ implements com.android.systemui.recents.views.ViewPool.ViewPoolConsumer
+
+@extends android.widget.FrameLayout
+
+*/
+var TaskStackView = {
+
+<span id='com-android-systemui-recents-views-TaskStackView-property-DEFAULT_SYNC_STACK_DURATION'>/***/
+</span>DEFAULT_SYNC_STACK_DURATION : &quot;200&quot;,
+<span id='com-android-systemui-recents-views-TaskStackView-property-SLOW_SYNC_STACK_DURATION'>/***/
+</span>SLOW_SYNC_STACK_DURATION : &quot;250&quot;,
+<span id='com-android-systemui-recents-views-TaskStackView-method-setTasks'>/**Sets the stack tasks of this TaskStackView from the given TaskStack.
+</span>*/
+setTasks : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-getStack'>/**Returns the task stack.
+</span>*/
+getStack : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-updateToInitialState'>/**Updates this TaskStackView to the initial state.
+</span>*/
+updateToInitialState : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-getChildViewForTask'>/**Finds the child view given a specific {@param task}.
+</span>*/
+getChildViewForTask : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-getStackAlgorithm'>/**Returns the stack algorithm for this task stack.
+</span>*/
+getStackAlgorithm : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-getGridAlgorithm'>/**Returns the grid algorithm for this task stack.
+</span>*/
+getGridAlgorithm : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-getTouchHandler'>/**Returns the touch handler for this task stack.
+</span>*/
+getTouchHandler : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-relayoutTaskViews'>/**
+</span>@see #relayoutTaskViews(AnimationProps, ArrayMap&lt;Task, AnimationProps&gt;, boolean)
+*/
+relayoutTaskViews : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-updateTaskViewToTransform'>/**Called to update a specific {@link com.android.systemui.recents.views.TaskView} to a given {@link com.android.systemui.recents.views.TaskViewTransform} with a
+</span> given set of {@link AnimationProps} properties.
+*/
+updateTaskViewToTransform : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-getCurrentTaskTransforms'>/**Returns the current task transforms of all tasks, falling back to the stack layout if there
+</span> is no {@link com.android.systemui.recents.views.TaskView} for the task.
+*/
+getCurrentTaskTransforms : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-getLayoutTaskTransforms'>/**Returns the task transforms for all the tasks in the stack if the stack was at the given
+</span> {@param stackScroll} and {@param focusState}.
+*/
+getLayoutTaskTransforms : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-updateLayoutAlgorithm'>/**
+</span>*/
+updateLayoutAlgorithm : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-updateLayoutAlgorithm'>/**Updates the layout algorithm min and max virtual scroll bounds.
+</span>*/
+updateLayoutAlgorithm : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-getScroller'>/**Returns the scroller.
+</span>*/
+getScroller : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-setFocusedTask'>/**Sets the focused task to the provided (bounded taskIndex).
+</span>@return {Boolean} whether or not the stack will scroll as a part of this focus change
+*/
+setFocusedTask : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-setFocusedTask'>/**Sets the focused task to the provided (bounded focusTaskIndex).
+</span>@return {Boolean} whether or not the stack will scroll as a part of this focus change
+*/
+setFocusedTask : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-setRelativeFocusedTask'>/**Sets the focused task relative to the currently focused task.
+</span>@param {Boolean} forward whether to go to the next task in the stack (along the curve) or the previous
+@param {Boolean} stackTasksOnly if set, will ensure that the traversal only goes along stack tasks, and
+                       if the currently focused task is not a stack task, will set the focus
+                       to the first visible stack task
+@param {Boolean} animated determines whether to actually draw the highlight along with the change in
+                            focus.
+*/
+setRelativeFocusedTask : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-setRelativeFocusedTask'>/**Sets the focused task relative to the currently focused task.
+</span>@param {Boolean} forward whether to go to the next task in the stack (along the curve) or the previous
+@param {Boolean} stackTasksOnly if set, will ensure that the traversal only goes along stack tasks, and
+                       if the currently focused task is not a stack task, will set the focus
+                       to the first visible stack task
+@param {Boolean} animated determines whether to actually draw the highlight along with the change in
+                            focus.
+@param {Boolean} cancelWindowAnimations if set, will attempt to cancel window animations if a scroll
+                               happens.
+@param {Number} timerIndicatorDuration the duration to initialize the auto-advance timer indicator
+*/
+setRelativeFocusedTask : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-resetFocusedTask'>/**Resets the focused task.
+</span>*/
+resetFocusedTask : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-getFocusedTask'>/**Returns the focused task.
+</span>*/
+getFocusedTask : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onInitializeAccessibilityEvent'>/**
+</span>*/
+onInitializeAccessibilityEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onInitializeAccessibilityNodeInfo'>/**
+</span>*/
+onInitializeAccessibilityNodeInfo : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-getAccessibilityClassName'>/**
+</span>*/
+getAccessibilityClassName : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-performAccessibilityAction'>/**
+</span>*/
+performAccessibilityAction : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onInterceptTouchEvent'>/**
+</span>*/
+onInterceptTouchEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onGenericMotionEvent'>/**
+</span>*/
+onGenericMotionEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-computeScroll'>/**
+</span>*/
+computeScroll : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-computeStackVisibilityReport'>/**Computes the maximum number of visible tasks and thumbnails. Requires that
+</span> updateLayoutForStack() is called first.
+*/
+computeStackVisibilityReport : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-setSystemInsets'>/**Updates the system insets.
+</span>*/
+setSystemInsets : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-isTouchPointInView'>/**
+</span>*/
+isTouchPointInView : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-findAnchorTask'>/**Returns a non-ignored task in the {@param tasks} list that can be used as an achor when
+</span> calculating the scroll position before and after a layout change.
+*/
+findAnchorTask : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onStackTaskAdded'>/**TaskStackCallbacks Implementation
+</span>*/
+onStackTaskAdded : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onStackTaskRemoved'>/**We expect that the {@link com.android.systemui.recents.views.TaskView} associated with the removed task is already hidden.
+</span>*/
+onStackTaskRemoved : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onStackTasksRemoved'>/**
+</span>*/
+onStackTasksRemoved : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onStackTasksUpdated'>/**
+</span>*/
+onStackTasksUpdated : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-createView'>/**ViewPoolConsumer Implementation
+</span>*/
+createView : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onReturnViewToPool'>/**
+</span>*/
+onReturnViewToPool : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onPickUpViewFromPool'>/**
+</span>*/
+onPickUpViewFromPool : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-hasPreferredData'>/**
+</span>*/
+hasPreferredData : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onTaskViewClipStateChanged'>/**TaskViewCallbacks Implementation
+</span>*/
+onTaskViewClipStateChanged : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onFocusStateChanged'>/**TaskStackLayoutAlgorithm.TaskStackLayoutAlgorithmCallbacks
+</span>*/
+onFocusStateChanged : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onStackScrollChanged'>/**TaskStackViewScroller.TaskStackViewScrollerCallbacks
+</span>*/
+onStackScrollChanged : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**EventBus Events
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-onBusEvent'>/**
+</span>*/
+onBusEvent : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-reloadOnConfigurationChange'>/**
+</span>*/
+reloadOnConfigurationChange : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-useGridLayout'>/**Check whether we should use the grid layout.
+</span>*/
+useGridLayout : function(  ) {},
+
+<span id='com-android-systemui-recents-views-TaskStackView-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

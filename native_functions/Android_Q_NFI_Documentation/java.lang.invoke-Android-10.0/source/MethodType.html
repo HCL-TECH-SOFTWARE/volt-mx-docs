@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-lang-invoke-MethodType'>/**@class java.lang.invoke.MethodType
+</span> implements java.io.Serializable
+
+@extends java.lang.Object
+
+ A method type represents the arguments and return type accepted and
+ returned by a method handle, or the arguments and return type passed
+ and expected  by a method handle caller.  Method types must be properly
+ matched between a method handle and all its callers,
+ and the JVM's operations enforce this matching at, specifically
+ during calls to {@link java.lang.invoke.MethodHandle#invokeExact java.lang.invoke.MethodHandle.invokeExact}
+ and {@link java.lang.invoke.MethodHandle#invoke java.lang.invoke.MethodHandle.invoke}, and during execution
+ of {@code invokedynamic} instructions.
+ &lt;p&gt;
+ The structure is a return type accompanied by any number of parameter types.
+ The types (primitive, {@code void}, and reference) are represented by {@link Class} objects.
+ (For ease of exposition, we treat {@code void} as if it were a type.
+ In fact, it denotes the absence of a return type.)
+ &lt;p&gt;
+ All instances of {@code MethodType} are immutable.
+ Two instances are completely interchangeable if they compare equal.
+ Equality depends on pairwise correspondence of the return and parameter types and on nothing else.
+ &lt;p&gt;
+ This type can be created only by factory methods.
+ All factory methods may cache values, though caching is not guaranteed.
+ Some factory methods are static, while others are virtual methods which
+ modify precursor method types, e.g., by changing a selected parameter.
+ &lt;p&gt;
+ Factory methods which operate on groups of parameter types
+ are systematically presented in two versions, so that both Java arrays and
+ Java lists can be used to work with groups of parameter types.
+ The query methods {@code parameterArray} and {@code parameterList}
+ also provide a choice between arrays and lists.
+ &lt;p&gt;
+ {@code MethodType} objects are sometimes derived from bytecode instructions
+ such as {@code invokedynamic}, specifically from the type descriptor strings associated
+ with the instructions in a class file's constant pool.
+ &lt;p&gt;
+ Like classes and strings, method types can also be represented directly
+ in a class file's constant pool as constants.
+ A method type may be loaded by an {@code ldc} instruction which refers
+ to a suitable {@code CONSTANT_MethodType} constant pool entry.
+ The entry refers to a {@code CONSTANT_Utf8} spelling for the descriptor string.
+ (For full details on method type constants,
+ see sections 4.4.8 and 5.4.3.5 of the Java Virtual Machine Specification.)
+ &lt;p&gt;
+ When the JVM materializes a {@code MethodType} from a descriptor string,
+ all classes named in the descriptor must be accessible, and will be loaded.
+ (But the classes need not be initialized, as is the case with a {@code CONSTANT_Class}.)
+ This loading may occur at any time before the {@code MethodType} object is first derived.
+ @author John Rose, JSR 292 EG
+*/
+var MethodType = {
+
+<span id='java-lang-invoke-MethodType-method-rtype'>/**
+</span>@hide 
+*/
+rtype : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-ptypes'>/**
+</span>@hide 
+*/
+ptypes : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-methodType'>/**Finds or creates an instance of the given method type.
+</span>@param {Object {java.lang.Class}} rtype  the return type
+@param {Object {java.lang.Class[]}} ptypes the parameter types
+@return {Object {java.lang.invoke.MethodType}} a method type with the given components
+@throws NullPointerException if {@code rtype} or {@code ptypes} or any element of {@code ptypes} is null
+@throws IllegalArgumentException if any element of {@code ptypes} is {@code void.class}
+*/
+methodType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-methodType'>/**Finds or creates a method type with the given components.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+@param {Object {java.lang.Class}} rtype  the return type
+@param {Object {java.util.List}} ptypes the parameter types
+@return {Object {java.lang.invoke.MethodType}} a method type with the given components
+@throws NullPointerException if {@code rtype} or {@code ptypes} or any element of {@code ptypes} is null
+@throws IllegalArgumentException if any element of {@code ptypes} is {@code void.class}
+*/
+methodType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-methodType'>/**Finds or creates a method type with the given components.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+ The leading parameter type is prepended to the remaining array.
+@param {Object {java.lang.Class}} rtype  the return type
+@param {Object {java.lang.Class}} ptype0 the first parameter type
+@param {Object {java.lang.Class[]}} ptypes the remaining parameter types
+@return {Object {java.lang.invoke.MethodType}} a method type with the given components
+@throws NullPointerException if {@code rtype} or {@code ptype0} or {@code ptypes} or any element of {@code ptypes} is null
+@throws IllegalArgumentException if {@code ptype0} or {@code ptypes} or any element of {@code ptypes} is {@code void.class}
+*/
+methodType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-methodType'>/**Finds or creates a method type with the given components.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+ The resulting method has no parameter types.
+@param {Object {java.lang.Class}} rtype  the return type
+@return {Object {java.lang.invoke.MethodType}} a method type with the given return value
+@throws NullPointerException if {@code rtype} is null
+*/
+methodType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-methodType'>/**Finds or creates a method type with the given components.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+ The resulting method has the single given parameter type.
+@param {Object {java.lang.Class}} rtype  the return type
+@param {Object {java.lang.Class}} ptype0 the parameter type
+@return {Object {java.lang.invoke.MethodType}} a method type with the given return value and parameter type
+@throws NullPointerException if {@code rtype} or {@code ptype0} is null
+@throws IllegalArgumentException if {@code ptype0} is {@code void.class}
+*/
+methodType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-methodType'>/**Finds or creates a method type with the given components.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+ The resulting method has the same parameter types as {@code ptypes},
+ and the specified return type.
+@param {Object {java.lang.Class}} rtype  the return type
+@param {Object {MethodType}} ptypes the method type which supplies the parameter types
+@return {Object {java.lang.invoke.MethodType}} a method type with the given components
+@throws NullPointerException if {@code rtype} or {@code ptypes} is null
+*/
+methodType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-genericMethodType'>/**Finds or creates a method type whose components are {@code Object} with an optional trailing {@code Object[]} array.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+ All parameters and the return type will be {@code Object},
+ except the final array parameter if any, which will be {@code Object[]}.
+@param {Number} objectArgCount number of parameters (excluding the final array parameter if any)
+@param {Boolean} finalArray whether there will be a trailing array parameter, of type {@code Object[]}
+@return {Object {java.lang.invoke.MethodType}} a generally applicable method type, for all calls of the given fixed argument count and a collected array of further arguments
+@throws IllegalArgumentException if {@code objectArgCount} is negative or greater than 255 (or 254, if {@code finalArray} is true)
+@see #genericMethodType(int)
+*/
+genericMethodType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-genericMethodType'>/**Finds or creates a method type whose components are all {@code Object}.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+ All parameters and the return type will be Object.
+@param {Number} objectArgCount number of parameters
+@return {Object {java.lang.invoke.MethodType}} a generally applicable method type, for all calls of the given argument count
+@throws IllegalArgumentException if {@code objectArgCount} is negative or greater than 255
+@see #genericMethodType(int, boolean)
+*/
+genericMethodType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-changeParameterType'>/**Finds or creates a method type with a single different parameter type.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+@param {Number} num    the index (zero-based) of the parameter type to change
+@param {Object {java.lang.Class}} nptype a new parameter type to replace the old one with
+@return {Object {java.lang.invoke.MethodType}} the same type, except with the selected parameter changed
+@throws IndexOutOfBoundsException if {@code num} is not a valid index into {@code parameterArray()}
+@throws IllegalArgumentException if {@code nptype} is {@code void.class}
+@throws NullPointerException if {@code nptype} is null
+*/
+changeParameterType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-insertParameterTypes'>/**Finds or creates a method type with additional parameter types.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+@param {Number} num    the position (zero-based) of the inserted parameter type(s)
+@param {Object {java.lang.Class[]}} ptypesToInsert zero or more new parameter types to insert into the parameter list
+@return {Object {java.lang.invoke.MethodType}} the same type, except with the selected parameter(s) inserted
+@throws IndexOutOfBoundsException if {@code num} is negative or greater than {@code parameterCount()}
+@throws IllegalArgumentException if any element of {@code ptypesToInsert} is {@code void.class}
+                                  or if the resulting method type would have more than 255 parameter slots
+@throws NullPointerException if {@code ptypesToInsert} or any of its elements is null
+*/
+insertParameterTypes : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-appendParameterTypes'>/**Finds or creates a method type with additional parameter types.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+@param {Object {java.lang.Class[]}} ptypesToInsert zero or more new parameter types to insert after the end of the parameter list
+@return {Object {java.lang.invoke.MethodType}} the same type, except with the selected parameter(s) appended
+@throws IllegalArgumentException if any element of {@code ptypesToInsert} is {@code void.class}
+                                  or if the resulting method type would have more than 255 parameter slots
+@throws NullPointerException if {@code ptypesToInsert} or any of its elements is null
+*/
+appendParameterTypes : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-insertParameterTypes'>/**Finds or creates a method type with additional parameter types.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+@param {Number} num    the position (zero-based) of the inserted parameter type(s)
+@param {Object {java.util.List}} ptypesToInsert zero or more new parameter types to insert into the parameter list
+@return {Object {java.lang.invoke.MethodType}} the same type, except with the selected parameter(s) inserted
+@throws IndexOutOfBoundsException if {@code num} is negative or greater than {@code parameterCount()}
+@throws IllegalArgumentException if any element of {@code ptypesToInsert} is {@code void.class}
+                                  or if the resulting method type would have more than 255 parameter slots
+@throws NullPointerException if {@code ptypesToInsert} or any of its elements is null
+*/
+insertParameterTypes : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-appendParameterTypes'>/**Finds or creates a method type with additional parameter types.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+@param {Object {java.util.List}} ptypesToInsert zero or more new parameter types to insert after the end of the parameter list
+@return {Object {java.lang.invoke.MethodType}} the same type, except with the selected parameter(s) appended
+@throws IllegalArgumentException if any element of {@code ptypesToInsert} is {@code void.class}
+                                  or if the resulting method type would have more than 255 parameter slots
+@throws NullPointerException if {@code ptypesToInsert} or any of its elements is null
+*/
+appendParameterTypes : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-dropParameterTypes'>/**Finds or creates a method type with some parameter types omitted.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+@param {Number} start  the index (zero-based) of the first parameter type to remove
+@param {Number} end    the index (greater than {@code start}) of the first parameter type after not to remove
+@return {Object {java.lang.invoke.MethodType}} the same type, except with the selected parameter(s) removed
+@throws IndexOutOfBoundsException if {@code start} is negative or greater than {@code parameterCount()}
+                                  or if {@code end} is negative or greater than {@code parameterCount()}
+                                  or if {@code start} is greater than {@code end}
+*/
+dropParameterTypes : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-changeReturnType'>/**Finds or creates a method type with a different return type.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+@param {Object {java.lang.Class}} nrtype a return parameter type to replace the old one with
+@return {Object {java.lang.invoke.MethodType}} the same type, except with the return type change
+@throws NullPointerException if {@code nrtype} is null
+*/
+changeReturnType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-hasPrimitives'>/**Reports if this type contains a primitive argument or return value.
+</span> The return type {@code void} counts as a primitive.
+@return {Boolean} true if any of the types are primitives
+*/
+hasPrimitives : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-hasWrappers'>/**Reports if this type contains a wrapper argument or return value.
+</span> Wrappers are types which box primitive values, such as {@link Integer}.
+ The reference type {@code java.lang.Void} counts as a wrapper,
+ if it occurs as a return type.
+@return {Boolean} true if any of the types are wrappers
+*/
+hasWrappers : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-erase'>/**Erases all reference types to {@code Object}.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+ All primitive types (including {@code void}) will remain unchanged.
+@return {Object {java.lang.invoke.MethodType}} a version of the original type with all reference types replaced
+*/
+erase : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-generic'>/**Converts all types, both reference and primitive, to {@code Object}.
+</span> Convenience method for {@link #genericMethodType(int) genericMethodType}.
+ The expression {@code type.wrap().erase()} produces the same value
+ as {@code type.generic()}.
+@return {Object {java.lang.invoke.MethodType}} a version of the original type with all types replaced
+*/
+generic : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-wrap'>/**Converts all primitive types to their corresponding wrapper types.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+ All reference types (including wrapper types) will remain unchanged.
+ A {@code void} return type is changed to the type {@code java.lang.Void}.
+ The expression {@code type.wrap().erase()} produces the same value
+ as {@code type.generic()}.
+@return {Object {java.lang.invoke.MethodType}} a version of the original type with all primitive types replaced
+*/
+wrap : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-unwrap'>/**Converts all wrapper types to their corresponding primitive types.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+ All primitive types (including {@code void}) will remain unchanged.
+ A return type of {@code java.lang.Void} is changed to {@code void}.
+@return {Object {java.lang.invoke.MethodType}} a version of the original type with all wrapper types replaced
+*/
+unwrap : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-parameterType'>/**Returns the parameter type at the specified index, within this method type.
+</span>@param {Number} num the index (zero-based) of the desired parameter type
+@return {Object {java.lang.Class}} the selected parameter type
+@throws IndexOutOfBoundsException if {@code num} is not a valid index into {@code parameterArray()}
+*/
+parameterType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-parameterCount'>/**Returns the number of parameter types in this method type.
+</span>@return {Number} the number of parameter types
+*/
+parameterCount : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-returnType'>/**Returns the return type of this method type.
+</span>@return {Object {java.lang.Class}} the return type
+*/
+returnType : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-parameterList'>/**Presents the parameter types as a list (a convenience method).
+</span> The list will be immutable.
+@return {Object {java.util.List}} the parameter types (as an immutable list)
+*/
+parameterList : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-parameterArray'>/**Presents the parameter types as an array (a convenience method).
+</span> Changes to the array will not result in changes to the type.
+@return {Object {java.lang.Class}} the parameter types (as a fresh copy if necessary)
+*/
+parameterArray : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-equals'>/**Compares the specified object with this type for equality.
+</span> That is, it returns &lt;tt&gt;true&lt;/tt&gt; if and only if the specified object
+ is also a method type with exactly the same parameters and return type.
+@param {Object {Object}} x object to compare
+@see Object#equals(Object)
+*/
+equals : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-hashCode'>/**Returns the hash code value for this method type.
+</span> It is defined to be the same as the hashcode of a List
+ whose elements are the return type followed by the
+ parameter types.
+@return {Number} the hash code value for this method type
+@see Object#hashCode()
+@see #equals(Object)
+@see List#hashCode()
+*/
+hashCode : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-toString'>/**Returns a string representation of the method type,
+</span> of the form {@code &quot;(PT0,PT1...)RT&quot;}.
+ The string representation of a method type is a
+ parenthesis enclosed, comma separated list of type names,
+ followed immediately by the return type.
+ &lt;p&gt;
+ Each type is represented by its
+ {@link java.lang.Class#getSimpleName simple name}.
+*/
+toString : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-fromMethodDescriptorString'>/**Finds or creates an instance of a method type, given the spelling of its bytecode descriptor.
+</span> Convenience method for {@link #methodType(java.lang.Class, java.lang.Class[]) methodType}.
+ Any class or interface name embedded in the descriptor string
+ will be resolved by calling {@link ClassLoader#loadClass(java.lang.String)}
+ on the given loader (or if it is null, on the system class loader).
+ &lt;p&gt;
+ Note that it is possible to encounter method types which cannot be
+ constructed by this method, because their component types are
+ not all reachable from a common class loader.
+ &lt;p&gt;
+ This method is included for the benefit of applications that must
+ generate bytecodes that process method handles and {@code invokedynamic}.
+@param {String} descriptor a bytecode-level type descriptor string &quot;(T...)T&quot;
+@param {Object {ClassLoader}} loader the class loader in which to look up the types
+@return {Object {java.lang.invoke.MethodType}} a method type matching the bytecode-level type descriptor
+@throws NullPointerException if the string is null
+@throws IllegalArgumentException if the string is not well-formed
+@throws TypeNotPresentException if a named type cannot be found
+*/
+fromMethodDescriptorString : function(  ) {},
+
+<span id='java-lang-invoke-MethodType-method-toMethodDescriptorString'>/**Produces a bytecode descriptor representation of the method type.
+</span> &lt;p&gt;
+ Note that this is not a strict inverse of {@link #fromMethodDescriptorString fromMethodDescriptorString}.
+ Two distinct classes which share a common name but have different class loaders
+ will appear identical when viewed within descriptor strings.
+ &lt;p&gt;
+ This method is included for the benefit of applications that must
+ generate bytecodes that process method handles and {@code invokedynamic}.
+ {@link #fromMethodDescriptorString(java.lang.String, java.lang.ClassLoader) fromMethodDescriptorString},
+ because the latter requires a suitable class loader argument.
+@return {String} the bytecode type descriptor representation
+*/
+toMethodDescriptorString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

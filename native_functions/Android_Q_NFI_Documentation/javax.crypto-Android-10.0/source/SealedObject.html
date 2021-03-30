@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-crypto-SealedObject'>/**@class javax.crypto.SealedObject
+</span> implements java.io.Serializable
+
+@extends java.lang.Object
+
+ This class enables a programmer to create an object and protect its
+ confidentiality with a cryptographic algorithm.
+
+ &lt;p&gt; Given any Serializable object, one can create a SealedObject
+ that encapsulates the original object, in serialized
+ format (i.e., a &quot;deep copy&quot;), and seals (encrypts) its serialized contents,
+ using a cryptographic algorithm such as DES, to protect its
+ confidentiality.  The encrypted content can later be decrypted (with
+ the corresponding algorithm using the correct decryption key) and
+ de-serialized, yielding the original object.
+
+ &lt;p&gt; Note that the Cipher object must be fully initialized with the
+ correct algorithm, key, padding scheme, etc., before being applied
+ to a SealedObject.
+
+ &lt;p&gt; The original object that was sealed can be recovered in two different
+ ways:
+
+ &lt;ul&gt;
+
+ &lt;li&gt;by using the {@link #getObject(javax.crypto.Cipher) getObject}
+ method that takes a &lt;code&gt;Cipher&lt;/code&gt; object.
+
+ &lt;p&gt; This method requires a fully initialized &lt;code&gt;Cipher&lt;/code&gt; object,
+ initialized with the
+ exact same algorithm, key, padding scheme, etc., that were used to seal the
+ object.
+
+ &lt;p&gt; This approach has the advantage that the party who unseals the
+ sealed object does not require knowledge of the decryption key. For example,
+ after one party has initialized the cipher object with the required
+ decryption key, it could hand over the cipher object to
+ another party who then unseals the sealed object.
+
+ &lt;li&gt;by using one of the
+ {@link #getObject(java.security.Key) getObject} methods
+ that take a &lt;code&gt;Key&lt;/code&gt; object.
+
+ &lt;p&gt; In this approach, the &lt;code&gt;getObject&lt;/code&gt; method creates a cipher
+ object for the appropriate decryption algorithm and initializes it with the
+ given decryption key and the algorithm parameters (if any) that were stored
+ in the sealed object.
+
+ &lt;p&gt; This approach has the advantage that the party who
+ unseals the object does not need to keep track of the parameters (e.g., an
+ IV) that were used to seal the object.
+
+ &lt;/ul&gt;
+
+ @author Li Gong
+ @author Jan Luehe
+ @see Cipher
+ @since 1.4
+*/
+var SealedObject = {
+
+<span id='javax-crypto-SealedObject-method-getAlgorithm'>/**Returns the algorithm that was used to seal this object.
+</span>@return {String} the algorithm that was used to seal this object.
+*/
+getAlgorithm : function(  ) {},
+
+<span id='javax-crypto-SealedObject-method-getObject'>/**Retrieves the original (encapsulated) object.
+</span>
+ &lt;p&gt;This method creates a cipher for the algorithm that had been used in
+ the sealing operation.
+ If the default provider package provides an implementation of that
+ algorithm, an instance of Cipher containing that implementation is used.
+ If the algorithm is not available in the default package, other
+ packages are searched.
+ The Cipher object is initialized for decryption, using the given
+ &lt;code&gt;key&lt;/code&gt; and the parameters (if any) that had been used in the
+ sealing operation.
+
+ &lt;p&gt;The encapsulated object is unsealed and de-serialized, before it is
+ returned.
+@param {Object {Key}} key the key used to unseal the object.
+@return {Object {java.lang.Object}} the original object.
+@exception IOException if an error occurs during de-serialiazation.
+@exception ClassNotFoundException if an error occurs during
+ de-serialiazation.
+@exception NoSuchAlgorithmException if the algorithm to unseal the
+ object is not available.
+@exception InvalidKeyException if the given key cannot be used to unseal
+ the object (e.g., it has the wrong algorithm).
+@exception NullPointerException if &lt;code&gt;key&lt;/code&gt; is null.
+*/
+getObject : function(  ) {},
+
+<span id='javax-crypto-SealedObject-method-getObject'>/**Retrieves the original (encapsulated) object.
+</span>
+ &lt;p&gt;The encapsulated object is unsealed (using the given Cipher,
+ assuming that the Cipher is already properly initialized) and
+ de-serialized, before it is returned.
+@param {Object {Cipher}} c the cipher used to unseal the object
+@return {Object {java.lang.Object}} the original object.
+@exception NullPointerException if the given cipher is null.
+@exception IOException if an error occurs during de-serialiazation
+@exception ClassNotFoundException if an error occurs during
+ de-serialiazation
+@exception IllegalBlockSizeException if the given cipher is a block
+ cipher, no padding has been requested, and the total input length is
+ not a multiple of the cipher's block size
+@exception BadPaddingException if the given cipher has been
+ initialized for decryption, and padding has been specified, but
+ the input data does not have proper expected padding bytes
+*/
+getObject : function(  ) {},
+
+<span id='javax-crypto-SealedObject-method-getObject'>/**Retrieves the original (encapsulated) object.
+</span>
+ &lt;p&gt;This method creates a cipher for the algorithm that had been used in
+ the sealing operation, using an implementation of that algorithm from
+ the given &lt;code&gt;provider&lt;/code&gt;.
+ The Cipher object is initialized for decryption, using the given
+ &lt;code&gt;key&lt;/code&gt; and the parameters (if any) that had been used in the
+ sealing operation.
+
+ &lt;p&gt;The encapsulated object is unsealed and de-serialized, before it is
+ returned.
+@param {Object {Key}} key the key used to unseal the object.
+@param {String} provider the name of the provider of the algorithm to unseal
+ the object.
+@return {Object {java.lang.Object}} the original object.
+@exception IllegalArgumentException if the given provider is null
+ or empty.
+@exception IOException if an error occurs during de-serialiazation.
+@exception ClassNotFoundException if an error occurs during
+ de-serialiazation.
+@exception NoSuchAlgorithmException if the algorithm to unseal the
+ object is not available.
+@exception NoSuchProviderException if the given provider is not
+ configured.
+@exception InvalidKeyException if the given key cannot be used to unseal
+ the object (e.g., it has the wrong algorithm).
+@exception NullPointerException if &lt;code&gt;key&lt;/code&gt; is null.
+*/
+getObject : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

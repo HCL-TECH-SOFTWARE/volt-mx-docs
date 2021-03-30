@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-time-temporal-TemporalAdjusters'>/**@class java.time.temporal.TemporalAdjusters
+</span>@extends java.lang.Object
+
+ Common and useful TemporalAdjusters.
+ &lt;p&gt;
+ Adjusters are a key tool for modifying temporal objects.
+ They exist to externalize the process of adjustment, permitting different
+ approaches, as per the strategy design pattern.
+ Examples might be an adjuster that sets the date avoiding weekends, or one that
+ sets the date to the last day of the month.
+ &lt;p&gt;
+ There are two equivalent ways of using a {@code TemporalAdjuster}.
+ The first is to invoke the method on the interface directly.
+ The second is to use {@link java.time.temporal.Temporal#with(java.time.temporal.TemporalAdjuster)}:
+ &lt;pre&gt;
+   // these two lines are equivalent, but the second approach is recommended
+   temporal = thisAdjuster.adjustInto(temporal);
+   temporal = temporal.with(thisAdjuster);
+ &lt;/pre&gt;
+ It is recommended to use the second approach, {@code with(TemporalAdjuster)},
+ as it is a lot clearer to read in code.
+ &lt;p&gt;
+ This class contains a standard set of adjusters, available as static methods.
+ These include:
+ &lt;ul&gt;
+ &lt;li&gt;finding the first or last day of the month
+ &lt;li&gt;finding the first day of next month
+ &lt;li&gt;finding the first or last day of the year
+ &lt;li&gt;finding the first day of next year
+ &lt;li&gt;finding the first or last day-of-week within a month, such as &quot;first Wednesday in June&quot;
+ &lt;li&gt;finding the next or previous day-of-week, such as &quot;next Thursday&quot;
+ &lt;/ul&gt;
+
+ @implSpec
+ All the implementations supplied by the static methods are immutable.
+
+ @see TemporalAdjuster
+ @since 1.8
+*/
+var TemporalAdjusters = {
+
+<span id='java-time-temporal-TemporalAdjusters-method-ofDateAdjuster'>/**Obtains a {@code TemporalAdjuster} that wraps a date adjuster.
+</span> &lt;p&gt;
+ The {@code TemporalAdjuster} is based on the low level {@code Temporal} interface.
+ This method allows an adjustment from {@code LocalDate} to {@code LocalDate}
+ to be wrapped to match the temporal-based interface.
+ This is provided for convenience to make user-written adjusters simpler.
+ &lt;p&gt;
+ In general, user-written adjusters should be static constants:
+ &lt;pre&gt;{@code
+  static TemporalAdjuster TWO_DAYS_LATER =
+       TemporalAdjusters.ofDateAdjuster(date -&gt; date.plusDays(2));
+ }&lt;/pre&gt;
+@param {Object {java.util.function.UnaryOperator}} dateBasedAdjuster  the date-based adjuster, not null
+@return {Object {java.time.temporal.TemporalAdjuster}} the temporal adjuster wrapping on the date adjuster, not null
+*/
+ofDateAdjuster : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-firstDayOfMonth'>/**Returns the &quot;first day of month&quot; adjuster, which returns a new date set to
+</span> the first day of the current month.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-01-15 will return 2011-01-01.&lt;br&gt;
+ The input 2011-02-15 will return 2011-02-01.
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It is equivalent to:
+ &lt;pre&gt;
+  temporal.with(DAY_OF_MONTH, 1);
+ &lt;/pre&gt;
+@return {Object {java.time.temporal.TemporalAdjuster}} the first day-of-month adjuster, not null
+*/
+firstDayOfMonth : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-lastDayOfMonth'>/**Returns the &quot;last day of month&quot; adjuster, which returns a new date set to
+</span> the last day of the current month.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-01-15 will return 2011-01-31.&lt;br&gt;
+ The input 2011-02-15 will return 2011-02-28.&lt;br&gt;
+ The input 2012-02-15 will return 2012-02-29 (leap year).&lt;br&gt;
+ The input 2011-04-15 will return 2011-04-30.
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It is equivalent to:
+ &lt;pre&gt;
+  long lastDay = temporal.range(DAY_OF_MONTH).getMaximum();
+  temporal.with(DAY_OF_MONTH, lastDay);
+ &lt;/pre&gt;
+@return {Object {java.time.temporal.TemporalAdjuster}} the last day-of-month adjuster, not null
+*/
+lastDayOfMonth : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-firstDayOfNextMonth'>/**Returns the &quot;first day of next month&quot; adjuster, which returns a new date set to
+</span> the first day of the next month.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-01-15 will return 2011-02-01.&lt;br&gt;
+ The input 2011-02-15 will return 2011-03-01.
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It is equivalent to:
+ &lt;pre&gt;
+  temporal.with(DAY_OF_MONTH, 1).plus(1, MONTHS);
+ &lt;/pre&gt;
+@return {Object {java.time.temporal.TemporalAdjuster}} the first day of next month adjuster, not null
+*/
+firstDayOfNextMonth : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-firstDayOfYear'>/**Returns the &quot;first day of year&quot; adjuster, which returns a new date set to
+</span> the first day of the current year.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-01-15 will return 2011-01-01.&lt;br&gt;
+ The input 2011-02-15 will return 2011-01-01.&lt;br&gt;
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It is equivalent to:
+ &lt;pre&gt;
+  temporal.with(DAY_OF_YEAR, 1);
+ &lt;/pre&gt;
+@return {Object {java.time.temporal.TemporalAdjuster}} the first day-of-year adjuster, not null
+*/
+firstDayOfYear : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-lastDayOfYear'>/**Returns the &quot;last day of year&quot; adjuster, which returns a new date set to
+</span> the last day of the current year.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-01-15 will return 2011-12-31.&lt;br&gt;
+ The input 2011-02-15 will return 2011-12-31.&lt;br&gt;
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It is equivalent to:
+ &lt;pre&gt;
+  long lastDay = temporal.range(DAY_OF_YEAR).getMaximum();
+  temporal.with(DAY_OF_YEAR, lastDay);
+ &lt;/pre&gt;
+@return {Object {java.time.temporal.TemporalAdjuster}} the last day-of-year adjuster, not null
+*/
+lastDayOfYear : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-firstDayOfNextYear'>/**Returns the &quot;first day of next year&quot; adjuster, which returns a new date set to
+</span> the first day of the next year.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-01-15 will return 2012-01-01.
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It is equivalent to:
+ &lt;pre&gt;
+  temporal.with(DAY_OF_YEAR, 1).plus(1, YEARS);
+ &lt;/pre&gt;
+@return {Object {java.time.temporal.TemporalAdjuster}} the first day of next month adjuster, not null
+*/
+firstDayOfNextYear : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-firstInMonth'>/**Returns the first in month adjuster, which returns a new date
+</span> in the same month with the first matching day-of-week.
+ This is used for expressions like 'first Tuesday in March'.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-12-15 for (MONDAY) will return 2011-12-05.&lt;br&gt;
+ The input 2011-12-15 for (FRIDAY) will return 2011-12-02.&lt;br&gt;
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It uses the {@code DAY_OF_WEEK} and {@code DAY_OF_MONTH} fields
+ and the {@code DAYS} unit, and assumes a seven day week.
+@param {Object {DayOfWeek}} dayOfWeek  the day-of-week, not null
+@return {Object {java.time.temporal.TemporalAdjuster}} the first in month adjuster, not null
+*/
+firstInMonth : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-lastInMonth'>/**Returns the last in month adjuster, which returns a new date
+</span> in the same month with the last matching day-of-week.
+ This is used for expressions like 'last Tuesday in March'.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-12-15 for (MONDAY) will return 2011-12-26.&lt;br&gt;
+ The input 2011-12-15 for (FRIDAY) will return 2011-12-30.&lt;br&gt;
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It uses the {@code DAY_OF_WEEK} and {@code DAY_OF_MONTH} fields
+ and the {@code DAYS} unit, and assumes a seven day week.
+@param {Object {DayOfWeek}} dayOfWeek  the day-of-week, not null
+@return {Object {java.time.temporal.TemporalAdjuster}} the first in month adjuster, not null
+*/
+lastInMonth : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-dayOfWeekInMonth'>/**Returns the day-of-week in month adjuster, which returns a new date
+</span> in the same month with the ordinal day-of-week.
+ This is used for expressions like the 'second Tuesday in March'.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-12-15 for (1,TUESDAY) will return 2011-12-06.&lt;br&gt;
+ The input 2011-12-15 for (2,TUESDAY) will return 2011-12-13.&lt;br&gt;
+ The input 2011-12-15 for (3,TUESDAY) will return 2011-12-20.&lt;br&gt;
+ The input 2011-12-15 for (4,TUESDAY) will return 2011-12-27.&lt;br&gt;
+ The input 2011-12-15 for (5,TUESDAY) will return 2012-01-03.&lt;br&gt;
+ The input 2011-12-15 for (-1,TUESDAY) will return 2011-12-27 (last in month).&lt;br&gt;
+ The input 2011-12-15 for (-4,TUESDAY) will return 2011-12-06 (3 weeks before last in month).&lt;br&gt;
+ The input 2011-12-15 for (-5,TUESDAY) will return 2011-11-29 (4 weeks before last in month).&lt;br&gt;
+ The input 2011-12-15 for (0,TUESDAY) will return 2011-11-29 (last in previous month).&lt;br&gt;
+ &lt;p&gt;
+ For a positive or zero ordinal, the algorithm is equivalent to finding the first
+ day-of-week that matches within the month and then adding a number of weeks to it.
+ For a negative ordinal, the algorithm is equivalent to finding the last
+ day-of-week that matches within the month and then subtracting a number of weeks to it.
+ The ordinal number of weeks is not validated and is interpreted leniently
+ according to this algorithm. This definition means that an ordinal of zero finds
+ the last matching day-of-week in the previous month.
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It uses the {@code DAY_OF_WEEK} and {@code DAY_OF_MONTH} fields
+ and the {@code DAYS} unit, and assumes a seven day week.
+@param {Number} ordinal  the week within the month, unbounded but typically from -5 to 5
+@param {Object {DayOfWeek}} dayOfWeek  the day-of-week, not null
+@return {Object {java.time.temporal.TemporalAdjuster}} the day-of-week in month adjuster, not null
+*/
+dayOfWeekInMonth : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-next'>/**Returns the next day-of-week adjuster, which adjusts the date to the
+</span> first occurrence of the specified day-of-week after the date being adjusted.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (MONDAY) will return 2011-01-17 (two days later).&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (WEDNESDAY) will return 2011-01-19 (four days later).&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (SATURDAY) will return 2011-01-22 (seven days later).
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It uses the {@code DAY_OF_WEEK} field and the {@code DAYS} unit,
+ and assumes a seven day week.
+@param {Object {DayOfWeek}} dayOfWeek  the day-of-week to move the date to, not null
+@return {Object {java.time.temporal.TemporalAdjuster}} the next day-of-week adjuster, not null
+*/
+next : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-nextOrSame'>/**Returns the next-or-same day-of-week adjuster, which adjusts the date to the
+</span> first occurrence of the specified day-of-week after the date being adjusted
+ unless it is already on that day in which case the same object is returned.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (MONDAY) will return 2011-01-17 (two days later).&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (WEDNESDAY) will return 2011-01-19 (four days later).&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (SATURDAY) will return 2011-01-15 (same as input).
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It uses the {@code DAY_OF_WEEK} field and the {@code DAYS} unit,
+ and assumes a seven day week.
+@param {Object {DayOfWeek}} dayOfWeek  the day-of-week to check for or move the date to, not null
+@return {Object {java.time.temporal.TemporalAdjuster}} the next-or-same day-of-week adjuster, not null
+*/
+nextOrSame : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-previous'>/**Returns the previous day-of-week adjuster, which adjusts the date to the
+</span> first occurrence of the specified day-of-week before the date being adjusted.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (MONDAY) will return 2011-01-10 (five days earlier).&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (WEDNESDAY) will return 2011-01-12 (three days earlier).&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (SATURDAY) will return 2011-01-08 (seven days earlier).
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It uses the {@code DAY_OF_WEEK} field and the {@code DAYS} unit,
+ and assumes a seven day week.
+@param {Object {DayOfWeek}} dayOfWeek  the day-of-week to move the date to, not null
+@return {Object {java.time.temporal.TemporalAdjuster}} the previous day-of-week adjuster, not null
+*/
+previous : function(  ) {},
+
+<span id='java-time-temporal-TemporalAdjusters-method-previousOrSame'>/**Returns the previous-or-same day-of-week adjuster, which adjusts the date to the
+</span> first occurrence of the specified day-of-week before the date being adjusted
+ unless it is already on that day in which case the same object is returned.
+ &lt;p&gt;
+ The ISO calendar system behaves as follows:&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (MONDAY) will return 2011-01-10 (five days earlier).&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (WEDNESDAY) will return 2011-01-12 (three days earlier).&lt;br&gt;
+ The input 2011-01-15 (a Saturday) for parameter (SATURDAY) will return 2011-01-15 (same as input).
+ &lt;p&gt;
+ The behavior is suitable for use with most calendar systems.
+ It uses the {@code DAY_OF_WEEK} field and the {@code DAYS} unit,
+ and assumes a seven day week.
+@param {Object {DayOfWeek}} dayOfWeek  the day-of-week to check for or move the date to, not null
+@return {Object {java.time.temporal.TemporalAdjuster}} the previous-or-same day-of-week adjuster, not null
+*/
+previousOrSame : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

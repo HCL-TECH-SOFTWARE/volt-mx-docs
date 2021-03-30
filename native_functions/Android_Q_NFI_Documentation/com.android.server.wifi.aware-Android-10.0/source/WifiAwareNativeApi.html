@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wifi-aware-WifiAwareNativeApi'>/**@class com.android.server.wifi.aware.WifiAwareNativeApi
+</span> implements com.android.server.wifi.aware.WifiAwareShellCommand.DelegatedShellCommand
+
+@extends java.lang.Object
+
+ Translates Wi-Fi Aware requests from the framework to the HAL (HIDL).
+
+ Delegates the management of the NAN interface to WifiAwareNativeManager.
+*/
+var WifiAwareNativeApi = {
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-mockableCastTo_1_2'>/**(HIDL) Cast the input to a 1.2 NAN interface (possibly resulting in a null).
+</span>
+ Separate function so can be mocked in unit tests.
+*/
+mockableCastTo_1_2 : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-onCommand'>/**Interpreter of adb shell command 'adb shell wifiaware native_api ...'.
+</span>@return {Number} -1 if parameter not recognized or invalid value, 0 otherwise.
+*/
+onCommand : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-onReset'>/**
+</span>*/
+onReset : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-onHelp'>/**
+</span>*/
+onHelp : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-getCapabilities'>/**Query the firmware's capabilities.
+</span>@param {Number} transactionId Transaction ID for the transaction - used in the async callback to
+                      match with the original request.
+*/
+getCapabilities : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-enableAndConfigure'>/**Enable and configure Aware.
+</span>@param {Number} transactionId Transaction ID for the transaction - used in the
+            async callback to match with the original request.
+@param {Object {ConfigRequest}} configRequest Requested Aware configuration.
+@param {Boolean} notifyIdentityChange Indicates whether or not to get address change callbacks.
+@param {Boolean} initialConfiguration Specifies whether initial configuration
+            (true) or an update (false) to the configuration.
+@param {Boolean} isInteractive PowerManager.isInteractive
+@param {Boolean} isIdle PowerManager.isIdle
+*/
+enableAndConfigure : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-disable'>/**Disable Aware.
+</span>@param {Number} transactionId transactionId Transaction ID for the transaction -
+            used in the async callback to match with the original request.
+*/
+disable : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-publish'>/**Start or modify a service publish session.
+</span>@param {Number} transactionId transactionId Transaction ID for the transaction -
+            used in the async callback to match with the original request.
+@param {Number} publishId ID of the requested session - 0 to request a new publish
+            session.
+@param {Object {PublishConfig}} publishConfig Configuration of the discovery session.
+*/
+publish : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-subscribe'>/**Start or modify a service subscription session.
+</span>@param {Number} transactionId transactionId Transaction ID for the transaction -
+            used in the async callback to match with the original request.
+@param {Number} subscribeId ID of the requested session - 0 to request a new
+            subscribe session.
+@param {Object {SubscribeConfig}} subscribeConfig Configuration of the discovery session.
+*/
+subscribe : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-sendMessage'>/**Send a message through an existing discovery session.
+</span>@param {Number} transactionId transactionId Transaction ID for the transaction -
+            used in the async callback to match with the original request.
+@param {Number} pubSubId ID of the existing publish/subscribe session.
+@param {Number} requestorInstanceId ID of the peer to communicate with - obtained
+            through a previous discovery (match) operation with that peer.
+@param {Object {byte[]}} dest MAC address of the peer to communicate with - obtained
+            together with requestorInstanceId.
+@param {Object {byte[]}} message Message.
+@param {Number} messageId Arbitary integer from host (not sent to HAL - useful for
+                  testing/debugging at this level)
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-stopPublish'>/**Terminate a publish discovery session.
+</span>@param {Number} transactionId transactionId Transaction ID for the transaction -
+            used in the async callback to match with the original request.
+@param {Number} pubSubId ID of the publish/subscribe session - obtained when
+            creating a session.
+*/
+stopPublish : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-stopSubscribe'>/**Terminate a subscribe discovery session.
+</span>@param {Number} transactionId transactionId Transaction ID for the transaction -
+            used in the async callback to match with the original request.
+@param {Number} pubSubId ID of the publish/subscribe session - obtained when
+            creating a session.
+*/
+stopSubscribe : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-createAwareNetworkInterface'>/**Create a Aware network interface. This only creates the Linux interface - it doesn't actually
+</span> create the data connection.
+@param {Number} transactionId Transaction ID for the transaction - used in the async callback to
+                      match with the original request.
+@param {String} interfaceName The name of the interface, e.g. &quot;aware0&quot;.
+*/
+createAwareNetworkInterface : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-deleteAwareNetworkInterface'>/**Deletes a Aware network interface. The data connection can (should?) be torn down previously.
+</span>@param {Number} transactionId Transaction ID for the transaction - used in the async callback to
+                      match with the original request.
+@param {String} interfaceName The name of the interface, e.g. &quot;aware0&quot;.
+*/
+deleteAwareNetworkInterface : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-initiateDataPath'>/**Initiates setting up a data-path between device and peer. Security is provided by either
+</span> PMK or Passphrase (not both) - if both are null then an open (unencrypted) link is set up.
+@param {Number} transactionId      Transaction ID for the transaction - used in the async callback to
+                           match with the original request.
+@param {Number} peerId             ID of the peer ID to associate the data path with. A value of 0
+                           indicates that not associated with an existing session.
+@param {Number} channelRequestType Indicates whether the specified channel is available, if available
+                           requested or forced (resulting in failure if cannot be
+                           accommodated).
+@param {Number} channel            The channel on which to set up the data-path.
+@param {Object {byte[]}} peer               The MAC address of the peer to create a connection with.
+@param {String} interfaceName      The interface on which to create the data connection.
+@param {Object {byte[]}} pmk Pairwise master key (PMK - see IEEE 802.11i) for the data-path.
+@param {String} passphrase  Passphrase for the data-path.
+@param {Boolean} isOutOfBand Is the data-path out-of-band (i.e. without a corresponding Aware discovery
+                    session).
+@param {Object {byte[]}} appInfo Arbitrary binary blob transmitted to the peer.
+@param {Object {Capabilities}} capabilities The capabilities of the firmware.
+*/
+initiateDataPath : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-respondToDataPathRequest'>/**Responds to a data request from a peer. Security is provided by either PMK or Passphrase (not
+</span> both) - if both are null then an open (unencrypted) link is set up.
+@param {Number} transactionId Transaction ID for the transaction - used in the async callback to
+                      match with the original request.
+@param {Boolean} accept Accept (true) or reject (false) the original call.
+@param {Number} ndpId The NDP (Aware data path) ID. Obtained from the request callback.
+@param {String} interfaceName The interface on which the data path will be setup. Obtained from the
+                      request callback.
+@param {Object {byte[]}} pmk Pairwise master key (PMK - see IEEE 802.11i) for the data-path.
+@param {String} passphrase  Passphrase for the data-path.
+@param {Object {byte[]}} appInfo Arbitrary binary blob transmitted to the peer.
+@param {Boolean} isOutOfBand Is the data-path out-of-band (i.e. without a corresponding Aware discovery
+                    session).
+@param {Object {Capabilities}} capabilities The capabilities of the firmware.
+*/
+respondToDataPathRequest : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-endDataPath'>/**Terminate an existing data-path (does not delete the interface).
+</span>@param {Number} transactionId Transaction ID for the transaction - used in the async callback to
+                      match with the original request.
+@param {Number} ndpId The NDP (Aware data path) ID to be terminated.
+*/
+endDataPath : function(  ) {},
+
+<span id='com-android-server-wifi-aware-WifiAwareNativeApi-method-dump'>/**Dump the internal state of the class.
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

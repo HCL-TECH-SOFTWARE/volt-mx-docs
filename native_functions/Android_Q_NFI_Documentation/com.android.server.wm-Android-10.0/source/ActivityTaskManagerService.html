@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-wm-ActivityTaskManagerService'>/**@class com.android.server.wm.ActivityTaskManagerService
+</span>@extends IActivityTaskManager.Stub
+
+ System service for managing activities and their containers (task, stacks, displays,... ).
+
+ {@hide}
+*/
+var ActivityTaskManagerService = {
+
+<span id='com-android-server-wm-ActivityTaskManagerService-property-KEY_DISPATCHING_TIMEOUT_MS'>/***/
+</span>KEY_DISPATCHING_TIMEOUT_MS : &quot;5000&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-DUMP_ACTIVITIES_CMD'>/***/
+</span>DUMP_ACTIVITIES_CMD : &quot;activities&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-DUMP_ACTIVITIES_SHORT_CMD'>/***/
+</span>DUMP_ACTIVITIES_SHORT_CMD : &quot;a&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-DUMP_LASTANR_CMD'>/***/
+</span>DUMP_LASTANR_CMD : &quot;lastanr&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-DUMP_LASTANR_TRACES_CMD'>/***/
+</span>DUMP_LASTANR_TRACES_CMD : &quot;lastanr-traces&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-DUMP_STARTER_CMD'>/***/
+</span>DUMP_STARTER_CMD : &quot;starter&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-DUMP_CONTAINERS_CMD'>/***/
+</span>DUMP_CONTAINERS_CMD : &quot;containers&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-DUMP_RECENTS_CMD'>/***/
+</span>DUMP_RECENTS_CMD : &quot;recents&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-DUMP_RECENTS_SHORT_CMD'>/***/
+</span>DUMP_RECENTS_SHORT_CMD : &quot;r&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-RELAUNCH_REASON_NONE'>/**This activity is not being relaunched, or being relaunched for a non-resize reason. */
+</span>RELAUNCH_REASON_NONE : &quot;0&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-RELAUNCH_REASON_WINDOWING_MODE_RESIZE'>/**This activity is being relaunched due to windowing mode change. */
+</span>RELAUNCH_REASON_WINDOWING_MODE_RESIZE : &quot;1&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-property-RELAUNCH_REASON_FREE_RESIZE'>/**This activity is being relaunched due to a free-resize operation. */
+</span>RELAUNCH_REASON_FREE_RESIZE : &quot;2&quot;,
+<span id='com-android-server-wm-ActivityTaskManagerService-method-onSystemReady'>/**
+</span>*/
+onSystemReady : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-onInitPowerManagement'>/**
+</span>*/
+onInitPowerManagement : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-installSystemProviders'>/**
+</span>*/
+installSystemProviders : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-retrieveSettings'>/**
+</span>*/
+retrieveSettings : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getGlobalLock'>/**
+</span>*/
+getGlobalLock : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getAtmInternal'>/**For test purpose only.
+</span>*/
+getAtmInternal : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-initialize'>/**
+</span>*/
+initialize : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-onActivityManagerInternalAdded'>/**
+</span>*/
+onActivityManagerInternalAdded : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setWindowManager'>/**
+</span>*/
+setWindowManager : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setUsageStatsManager'>/**
+</span>*/
+setUsageStatsManager : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getDeviceConfigurationInfo'>/**Return the device configuration info used by the process corresponding to the input pid.
+</span> The value is consistent with the global configuration for the process.
+*/
+getDeviceConfigurationInfo : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startActivity'>/**
+</span>*/
+startActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startActivities'>/**
+</span>*/
+startActivities : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startActivityAsUser'>/**
+</span>*/
+startActivityAsUser : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startActivityIntentSender'>/**
+</span>*/
+startActivityIntentSender : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startNextMatchingActivity'>/**
+</span>*/
+startNextMatchingActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startActivityAndWait'>/**
+</span>*/
+startActivityAndWait : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startActivityWithConfig'>/**
+</span>*/
+startActivityWithConfig : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-requestStartActivityPermissionToken'>/**
+</span>*/
+requestStartActivityPermissionToken : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startActivityAsCaller'>/**
+</span>*/
+startActivityAsCaller : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startVoiceActivity'>/**
+</span>*/
+startVoiceActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startAssistantActivity'>/**
+</span>*/
+startAssistantActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startRecentsActivity'>/**
+</span>*/
+startRecentsActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startActivityFromRecents'>/**
+</span>*/
+startActivityFromRecents : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-isActivityStartAllowedOnDisplay'>/**Public API to check if the client is allowed to start an activity on specified display.
+</span>
+ If the target display is private or virtual, some restrictions will apply.
+@param {Number} displayId Target display id.
+@param {Object {Intent}} intent Intent used to launch the activity.
+@param {String} resolvedType The MIME type of the intent.
+@param {Number} userId The id of the user for whom the call is made.
+@return {Boolean} {@code true} if a call to start an activity on the target display should succeed and
+         no {@link SecurityException} will be thrown, {@code false} otherwise.
+*/
+isActivityStartAllowedOnDisplay : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-finishActivity'>/**This is the internal entry point for handling Activity.finish().
+</span>@param {Object {IBinder}} token The Binder token referencing the Activity we want to finish.
+@param {Number} resultCode Result code, if any, from this Activity.
+@param {Object {Intent}} resultData Result data (Intent), if any, from this Activity.
+@param {Number} finishTask Whether to finish the task associated with this Activity.
+@return {Boolean} Returns true if the activity successfully finished, or false if it is still running.
+*/
+finishActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-finishActivityAffinity'>/**
+</span>*/
+finishActivityAffinity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-activityIdle'>/**
+</span>*/
+activityIdle : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-activityResumed'>/**
+</span>*/
+activityResumed : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-activityTopResumedStateLost'>/**
+</span>*/
+activityTopResumedStateLost : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-activityPaused'>/**
+</span>*/
+activityPaused : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-activityStopped'>/**
+</span>*/
+activityStopped : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-activityDestroyed'>/**
+</span>*/
+activityDestroyed : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-activityRelaunched'>/**
+</span>*/
+activityRelaunched : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-activitySlept'>/**
+</span>*/
+activitySlept : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setRequestedOrientation'>/**
+</span>*/
+setRequestedOrientation : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getRequestedOrientation'>/**
+</span>*/
+getRequestedOrientation : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setImmersive'>/**
+</span>*/
+setImmersive : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-isImmersive'>/**
+</span>*/
+isImmersive : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-isTopActivityImmersive'>/**
+</span>*/
+isTopActivityImmersive : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-overridePendingTransition'>/**
+</span>*/
+overridePendingTransition : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getFrontActivityScreenCompatMode'>/**
+</span>*/
+getFrontActivityScreenCompatMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setFrontActivityScreenCompatMode'>/**
+</span>*/
+setFrontActivityScreenCompatMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getLaunchedFromUid'>/**
+</span>*/
+getLaunchedFromUid : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getLaunchedFromPackage'>/**
+</span>*/
+getLaunchedFromPackage : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-convertFromTranslucent'>/**
+</span>*/
+convertFromTranslucent : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-convertToTranslucent'>/**
+</span>*/
+convertToTranslucent : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-notifyActivityDrawn'>/**
+</span>*/
+notifyActivityDrawn : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-reportActivityFullyDrawn'>/**
+</span>*/
+reportActivityFullyDrawn : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getActivityDisplayId'>/**
+</span>*/
+getActivityDisplayId : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getFocusedStackInfo'>/**
+</span>*/
+getFocusedStackInfo : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setFocusedStack'>/**
+</span>*/
+setFocusedStack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setFocusedTask'>/**
+</span>*/
+setFocusedTask : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-restartActivityProcessIfVisible'>/**
+</span>*/
+restartActivityProcessIfVisible : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-removeTask'>/**
+</span>*/
+removeTask : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-removeAllVisibleRecentTasks'>/**
+</span>*/
+removeAllVisibleRecentTasks : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-shouldUpRecreateTask'>/**
+</span>*/
+shouldUpRecreateTask : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-navigateUpTo'>/**
+</span>*/
+navigateUpTo : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-moveActivityTaskToBack'>/**Attempts to move a task backwards in z-order (the order of activities within the task is
+</span> unchanged).
+
+ There are several possible results of this call:
+ - if the task is locked, then we will show the lock toast
+ - if there is a task behind the provided task, then that task is made visible and resumed as
+   this task is moved to the back
+ - otherwise, if there are no other tasks in the stack:
+     - if this task is in the pinned stack, then we remove the stack completely, which will
+       have the effect of moving the task to the top or bottom of the fullscreen stack
+       (depending on whether it is visible)
+     - otherwise, we simply return home and hide this task
+@param {Object {IBinder}} token A reference to the activity we wish to move
+@param {Boolean} nonRoot If false then this only works if the activity is the root
+                of a task; if true it will work for any activity in a task.
+@return {Boolean} Returns true if the move completed, false if not.
+*/
+moveActivityTaskToBack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getTaskBounds'>/**
+</span>*/
+getTaskBounds : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getTaskDescription'>/**
+</span>*/
+getTaskDescription : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setTaskWindowingMode'>/**
+</span>*/
+setTaskWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getCallingPackage'>/**
+</span>*/
+getCallingPackage : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getCallingActivity'>/**
+</span>*/
+getCallingActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-unhandledBack'>/**
+</span>*/
+unhandledBack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-onBackPressedOnTaskRoot'>/**
+</span>*/
+onBackPressedOnTaskRoot : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-moveTaskToFront'>/**TODO: Add mController hook
+</span>*/
+moveTaskToFront : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setActivityController'>/**
+</span>*/
+setActivityController : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-isControllerAMonkey'>/**
+</span>*/
+isControllerAMonkey : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getTaskForActivity'>/**
+</span>*/
+getTaskForActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getTasks'>/**
+</span>*/
+getTasks : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getFilteredTasks'>/**
+</span>*/
+getFilteredTasks : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-finishSubActivity'>/**
+</span>*/
+finishSubActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-willActivityBeVisible'>/**
+</span>*/
+willActivityBeVisible : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-moveTaskToStack'>/**
+</span>*/
+moveTaskToStack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-resizeStack'>/**
+</span>*/
+resizeStack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-offsetPinnedStackBounds'>/**
+</span>*/
+offsetPinnedStackBounds : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setTaskWindowingModeSplitScreenPrimary'>/**Moves the specified task to the primary-split-screen stack.
+</span>@param {Number} taskId Id of task to move.
+@param {Number} createMode The mode the primary split screen stack should be created in if it doesn't
+                   exist already. See
+                   {@link android.app.ActivityTaskManager#SPLIT_SCREEN_CREATE_MODE_TOP_OR_LEFT}
+                   and
+                   {@link android.app.ActivityTaskManager#SPLIT_SCREEN_CREATE_MODE_BOTTOM_OR_RIGHT}
+@param {Boolean} toTop If the task and stack should be moved to the top.
+@param {Boolean} animate Whether we should play an animation for the moving the task.
+@param {Object {Rect}} initialBounds If the primary stack gets created, it will use these bounds for the
+                      stack. Pass {@code null} to use default bounds.
+@param {Boolean} showRecents If the recents activity should be shown on the other side of the task
+                    going into split-screen mode.
+*/
+setTaskWindowingModeSplitScreenPrimary : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-removeStacksInWindowingModes'>/**Removes stacks in the input windowing modes from the system if they are of activity type
+</span> ACTIVITY_TYPE_STANDARD or ACTIVITY_TYPE_UNDEFINED
+*/
+removeStacksInWindowingModes : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-removeStacksWithActivityTypes'>/**
+</span>*/
+removeStacksWithActivityTypes : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getRecentTasks'>/**
+</span>*/
+getRecentTasks : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getAllStackInfos'>/**
+</span>*/
+getAllStackInfos : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getStackInfo'>/**
+</span>*/
+getStackInfo : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-cancelRecentsAnimation'>/**
+</span>*/
+cancelRecentsAnimation : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startLockTaskModeByToken'>/**
+</span>*/
+startLockTaskModeByToken : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startSystemLockTaskMode'>/**
+</span>*/
+startSystemLockTaskMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-stopLockTaskModeByToken'>/**
+</span>*/
+stopLockTaskModeByToken : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-stopSystemLockTaskMode'>/**This API should be called by SystemUI only when user perform certain action to dismiss
+</span> lock task mode. We should only dismiss pinned lock task mode in this case.
+*/
+stopSystemLockTaskMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-updateLockTaskPackages'>/**
+</span>*/
+updateLockTaskPackages : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-isInLockTaskMode'>/**
+</span>*/
+isInLockTaskMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getLockTaskModeState'>/**
+</span>*/
+getLockTaskModeState : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setTaskDescription'>/**
+</span>*/
+setTaskDescription : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getActivityOptions'>/**
+</span>*/
+getActivityOptions : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getAppTasks'>/**
+</span>*/
+getAppTasks : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-finishVoiceTask'>/**
+</span>*/
+finishVoiceTask : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-isTopOfTask'>/**
+</span>*/
+isTopOfTask : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-notifyLaunchTaskBehindComplete'>/**
+</span>*/
+notifyLaunchTaskBehindComplete : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-notifyEnterAnimationComplete'>/**
+</span>*/
+notifyEnterAnimationComplete : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-reportAssistContextExtras'>/**Called from an app when assist data is ready.
+</span>*/
+reportAssistContextExtras : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-addAppTask'>/**
+</span>*/
+addAppTask : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getAppTaskThumbnailSize'>/**
+</span>*/
+getAppTaskThumbnailSize : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setTaskResizeable'>/**
+</span>*/
+setTaskResizeable : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-resizeTask'>/**
+</span>*/
+resizeTask : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-releaseActivityInstance'>/**
+</span>*/
+releaseActivityInstance : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-releaseSomeActivities'>/**
+</span>*/
+releaseSomeActivities : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setLockScreenShown'>/**
+</span>*/
+setLockScreenShown : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-onScreenAwakeChanged'>/**
+</span>*/
+onScreenAwakeChanged : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getTaskDescriptionIcon'>/**
+</span>*/
+getTaskDescriptionIcon : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startInPlaceAnimationOnFrontMostApplication'>/**
+</span>*/
+startInPlaceAnimationOnFrontMostApplication : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-removeStack'>/**
+</span>*/
+removeStack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-moveStackToDisplay'>/**
+</span>*/
+moveStackToDisplay : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-toggleFreeformWindowingMode'>/**
+</span>*/
+toggleFreeformWindowingMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-registerTaskStackListener'>/**Sets the task stack listener that gets callbacks when a task stack changes.
+</span>*/
+registerTaskStackListener : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-unregisterTaskStackListener'>/**Unregister a task stack listener so that it stops receiving callbacks.
+</span>*/
+unregisterTaskStackListener : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-requestAssistContextExtras'>/**
+</span>*/
+requestAssistContextExtras : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-requestAutofillData'>/**
+</span>*/
+requestAutofillData : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-launchAssistIntent'>/**
+</span>*/
+launchAssistIntent : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getAssistContextExtras'>/**
+</span>*/
+getAssistContextExtras : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-checkComponentPermission'>/**
+</span>*/
+checkComponentPermission : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-isAssistDataAllowedOnCurrentActivity'>/**
+</span>*/
+isAssistDataAllowedOnCurrentActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-showAssistFromActivity'>/**
+</span>*/
+showAssistFromActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-isRootVoiceInteraction'>/**
+</span>*/
+isRootVoiceInteraction : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setVoiceKeepAwake'>/**
+</span>*/
+setVoiceKeepAwake : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getActivityClassForToken'>/**
+</span>*/
+getActivityClassForToken : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getPackageForToken'>/**
+</span>*/
+getPackageForToken : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-showLockTaskEscapeMessage'>/**
+</span>*/
+showLockTaskEscapeMessage : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-keyguardGoingAway'>/**
+</span>*/
+keyguardGoingAway : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-positionTaskInStack'>/**Try to place task to provided position. The final position might be different depending on
+</span> current user and stacks state. The task will be moved to target stack if it's currently in
+ different stack.
+*/
+positionTaskInStack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-reportSizeConfigurations'>/**
+</span>*/
+reportSizeConfigurations : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-dismissSplitScreenMode'>/**Dismisses split-screen multi-window mode.
+</span>@param {Boolean} toTop If true the current primary split-screen stack will be placed or left on top.
+*/
+dismissSplitScreenMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-dismissPip'>/**Dismisses Pip
+</span>@param {Boolean} animate True if the dismissal should be animated.
+@param {Number} animationDuration The duration of the resize animation in milliseconds or -1 if the
+                          default animation duration should be used.
+*/
+dismissPip : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-suppressResizeConfigChanges'>/**
+</span>*/
+suppressResizeConfigChanges : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-moveTasksToFullscreenStack'>/**NOTE: For the pinned stack, this method is usually called after the bounds animation has
+</span>       animated the stack to the fullscreen, but can also be called if we are relaunching an
+       activity and clearing the task at the same time.
+*/
+moveTasksToFullscreenStack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-moveTopActivityToPinnedStack'>/**Moves the top activity in the input stackId to the pinned stack.
+</span>@param {Number} stackId Id of stack to move the top activity to pinned stack.
+@param {Object {Rect}} bounds Bounds to use for pinned stack.
+@return {Boolean} True if the top activity of the input stack was successfully moved to the pinned
+          stack.
+*/
+moveTopActivityToPinnedStack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-isInMultiWindowMode'>/**
+</span>*/
+isInMultiWindowMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-isInPictureInPictureMode'>/**
+</span>*/
+isInPictureInPictureMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-enterPictureInPictureMode'>/**
+</span>*/
+enterPictureInPictureMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setPictureInPictureParams'>/**
+</span>*/
+setPictureInPictureParams : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getMaxNumPictureInPictureActions'>/**
+</span>*/
+getMaxNumPictureInPictureActions : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getUriPermissionOwnerForActivity'>/**
+</span>*/
+getUriPermissionOwnerForActivity : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-resizeDockedStack'>/**
+</span>*/
+resizeDockedStack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setSplitScreenResizing'>/**
+</span>*/
+setSplitScreenResizing : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-enforceSystemHasVrFeature'>/**Check that we have the features required for VR-related API calls, and throw an exception if
+</span> not.
+*/
+enforceSystemHasVrFeature : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setVrMode'>/**
+</span>*/
+setVrMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-startLocalVoiceInteraction'>/**
+</span>*/
+startLocalVoiceInteraction : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-stopLocalVoiceInteraction'>/**
+</span>*/
+stopLocalVoiceInteraction : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-supportsLocalVoiceInteraction'>/**
+</span>*/
+supportsLocalVoiceInteraction : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-notifyPinnedStackAnimationStarted'>/**Notifies all listeners when the pinned stack animation starts.
+</span>*/
+notifyPinnedStackAnimationStarted : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-notifyPinnedStackAnimationEnded'>/**Notifies all listeners when the pinned stack animation ends.
+</span>*/
+notifyPinnedStackAnimationEnded : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-resizePinnedStack'>/**
+</span>*/
+resizePinnedStack : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-updateDisplayOverrideConfiguration'>/**
+</span>*/
+updateDisplayOverrideConfiguration : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-updateConfiguration'>/**
+</span>*/
+updateConfiguration : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-dismissKeyguard'>/**
+</span>*/
+dismissKeyguard : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-cancelTaskWindowTransition'>/**
+</span>*/
+cancelTaskWindowTransition : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getTaskSnapshot'>/**
+</span>*/
+getTaskSnapshot : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setDisablePreviewScreenshots'>/**
+</span>*/
+setDisablePreviewScreenshots : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getLastResumedActivityUserId'>/**Return the user id of the last resumed activity.
+</span>*/
+getLastResumedActivityUserId : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-updateLockTaskFeatures'>/**
+</span>*/
+updateLockTaskFeatures : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setShowWhenLocked'>/**
+</span>*/
+setShowWhenLocked : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setInheritShowWhenLocked'>/**
+</span>*/
+setInheritShowWhenLocked : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setTurnScreenOn'>/**
+</span>*/
+setTurnScreenOn : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-registerRemoteAnimations'>/**
+</span>*/
+registerRemoteAnimations : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-registerRemoteAnimationForNextActivityStart'>/**
+</span>*/
+registerRemoteAnimationForNextActivityStart : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-registerRemoteAnimationsForDisplay'>/**
+</span>*/
+registerRemoteAnimationsForDisplay : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-alwaysShowUnsupportedCompileSdkWarning'>/**
+</span>@see android.app.ActivityManager#alwaysShowUnsupportedCompileSdkWarning
+*/
+alwaysShowUnsupportedCompileSdkWarning : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setVrThread'>/**
+</span>*/
+setVrThread : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setPersistentVrThread'>/**
+</span>*/
+setPersistentVrThread : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-stopAppSwitches'>/**
+</span>*/
+stopAppSwitches : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-resumeAppSwitches'>/**
+</span>*/
+resumeAppSwitches : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getPackageScreenCompatMode'>/**
+</span>*/
+getPackageScreenCompatMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setPackageScreenCompatMode'>/**
+</span>*/
+setPackageScreenCompatMode : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getPackageAskScreenCompat'>/**
+</span>*/
+getPackageAskScreenCompat : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setPackageAskScreenCompat'>/**
+</span>*/
+setPackageAskScreenCompat : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-relaunchReasonToString'>/**
+</span>*/
+relaunchReasonToString : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-clearLaunchParamsForPackages'>/**Clears launch params for the given package.
+</span>@param {Object {java.util.List}} packageNames the names of the packages of which the launch params are to be cleared
+*/
+clearLaunchParamsForPackages : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-setDisplayToSingleTaskInstance'>/**Makes the display with the given id a single task instance display. I.e the display can only
+</span> contain one task.
+*/
+setDisplayToSingleTaskInstance : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-getConfiguration'>/**
+</span>*/
+getConfiguration : function(  ) {},
+
+<span id='com-android-server-wm-ActivityTaskManagerService-method-updatePersistentConfiguration'>/**
+</span>*/
+updatePersistentConfiguration : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-pm-dex-DexManager'>/**@class com.android.server.pm.dex.DexManager
+</span>@extends java.lang.Object
+
+ This class keeps track of how dex files are used.
+ Every time it gets a notification about a dex file being loaded it tracks
+ its owning package and records it in PackageDexUsage (package-dex-usage.list).
+
+ TODO(calin): Extract related dexopt functionality from PackageManagerService
+ into this class.
+*/
+var DexManager = {
+
+<span id='com-android-server-pm-dex-DexManager-method-getDynamicCodeLogger'>/**
+</span>*/
+getDynamicCodeLogger : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-notifyDexLoad'>/**Notify about dex files loads.
+</span> Note that this method is invoked when apps load dex files and it should
+ return as fast as possible.
+@param {Object {ApplicationInfo}} loadingAppInfo the package performing the load
+@param {Object {java.util.List}} classLoadersNames the names of the class loaders present in the loading chain. The
+    list encodes the class loader chain in the natural order. The first class loader has
+    the second one as its parent and so on. The dex files present in the class path of the
+    first class loader will be recorded in the usage file.
+@param {Object {java.util.List}} classPaths the class paths corresponding to the class loaders names from
+     {@param classLoadersNames}. The the first element corresponds to the first class loader
+     and so on. A classpath is represented as a list of dex files separated by
+     {@code File.pathSeparator}, or null if the class loader's classpath is not known.
+     The dex files found in the first class path will be recorded in the usage file.
+@param {String} loaderIsa the ISA of the app loading the dex files
+@param {Number} loaderUserId the user id which runs the code loading the dex files
+*/
+notifyDexLoad : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-load'>/**Read the dex usage from disk and populate the code cache locations.
+</span>@param {Object {java.util.Map}} existingPackages a map containing information about what packages
+          are available to what users. Only packages in this list will be
+          recognized during notifyDexLoad().
+*/
+load : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-notifyPackageInstalled'>/**Notifies that a new package was installed for {@code userId}.
+</span> {@code userId} must not be {@code UserHandle.USER_ALL}.
+@throws IllegalArgumentException if {@code userId} is {@code UserHandle.USER_ALL}.
+*/
+notifyPackageInstalled : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-notifyPackageUpdated'>/**Notifies that package {@code packageName} was updated.
+</span> This will clear the UsedByOtherApps mark if it exists.
+*/
+notifyPackageUpdated : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-notifyPackageDataDestroyed'>/**Notifies that the user {@code userId} data for package {@code packageName}
+</span> was destroyed. This will remove all usage info associated with the package
+ for the given user.
+ {@code userId} is allowed to be {@code UserHandle.USER_ALL} in which case
+ all usage information for the package will be removed.
+*/
+notifyPackageDataDestroyed : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-getPackageUseInfoOrDefault'>/**Get the package dex usage for the given package name.
+</span> If there is no usage info the method will return a default {@code PackageUseInfo} with
+ no data about secondary dex files and marked as not being used by other apps.
+
+ Note that no use info means the package was not used or it was used but not by other apps.
+ Also, note that right now we might prune packages which are not used by other apps.
+ TODO(calin): maybe we should not (prune) so we can have an accurate view when we try
+ to access the package use.
+*/
+getPackageUseInfoOrDefault : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-dexoptSecondaryDex'>/**Perform dexopt on with the given {@code options} on the secondary dex files.
+</span>@return {Boolean} true if all secondary dex files were processed successfully (compiled or skipped
+         because they don't need to be compiled)..
+*/
+dexoptSecondaryDex : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-reconcileSecondaryDexFiles'>/**Reconcile the information we have about the secondary dex files belonging to
+</span> {@code packagName} and the actual dex files. For all dex files that were
+ deleted, update the internal records and delete any generated oat files.
+*/
+reconcileSecondaryDexFiles : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-registerDexModule'>/**
+</span>*/
+registerDexModule : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-getAllPackagesWithSecondaryDexFiles'>/**Return all packages that contain records of secondary dex files.
+</span>*/
+getAllPackagesWithSecondaryDexFiles : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-writePackageDexUsageNow'>/**Writes the in-memory package dex usage to disk right away.
+</span>*/
+writePackageDexUsageNow : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-isPackageSelectedToRunOob'>/**Returns whether the given package is in the list of privilaged apps that should run out of
+</span> box. This only makes sense if the feature is enabled. Note that when the the OOB list is
+ empty, all priv apps will run in OOB mode.
+*/
+isPackageSelectedToRunOob : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-isPackageSelectedToRunOob'>/**Returns whether any of the given packages are in the list of privilaged apps that should run
+</span> out of box. This only makes sense if the feature is enabled. Note that when the the OOB list
+ is empty, all priv apps will run in OOB mode.
+*/
+isPackageSelectedToRunOob : function(  ) {},
+
+<span id='com-android-server-pm-dex-DexManager-method-auditUncompressedDexInApk'>/**Generates log if the archive located at {@code fileName} has uncompressed dex file that can
+</span> be direclty mapped.
+*/
+auditUncompressedDexInApk : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

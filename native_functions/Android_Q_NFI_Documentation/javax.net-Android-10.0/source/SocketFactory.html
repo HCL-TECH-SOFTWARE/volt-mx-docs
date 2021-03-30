@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='javax-net-SocketFactory'>/**@class javax.net.SocketFactory
+</span>@extends java.lang.Object
+
+ This class creates sockets.  It may be subclassed by other factories,
+ which create particular subclasses of sockets and thus provide a general
+ framework for the addition of public socket-level functionality.
+
+ &lt;P&gt; Socket factories are a simple way to capture a variety of policies
+ related to the sockets being constructed, producing such sockets in
+ a way which does not require special configuration of the code which
+ asks for the sockets:  &lt;UL&gt;
+
+      &lt;LI&gt; Due to polymorphism of both factories and sockets, different
+      kinds of sockets can be used by the same application code just
+      by passing it different kinds of factories.
+
+      &lt;LI&gt; Factories can themselves be customized with parameters used
+      in socket construction.  So for example, factories could be
+      customized to return sockets with different networking timeouts
+      or security parameters already configured.
+
+      &lt;LI&gt; The sockets returned to the application can be subclasses
+      of java.net.Socket, so that they can directly expose new APIs
+      for features such as compression, security, record marking,
+      statistics collection, or firewall tunneling.
+
+      &lt;/UL&gt;
+
+ &lt;P&gt; Factory classes are specified by environment-specific configuration
+ mechanisms.  For example, the &lt;em&gt;getDefault&lt;/em&gt; method could return
+ a factory that was appropriate for a particular user or applet, and a
+ framework could use a factory customized to its own purposes.
+
+ @since 1.4
+ @see ServerSocketFactory
+
+ @author David Brownell
+*/
+var SocketFactory = {
+
+<span id='javax-net-SocketFactory-method-getDefault'>/**Returns a copy of the environment's default socket factory.
+</span>@return {Object {javax.net.SocketFactory}} the default &lt;code&gt;SocketFactory&lt;/code&gt;
+*/
+getDefault : function(  ) {},
+
+<span id='javax-net-SocketFactory-method-setDefault'>/**
+</span>@hide Visible for testing only
+*/
+setDefault : function(  ) {},
+
+<span id='javax-net-SocketFactory-method-createSocket'>/**Creates an unconnected socket.
+</span>@return {Object {java.net.Socket}} the unconnected socket
+@throws IOException if the socket cannot be created
+@see java.net.Socket#connect(java.net.SocketAddress)
+@see java.net.Socket#connect(java.net.SocketAddress, int)
+@see java.net.Socket#Socket()
+*/
+createSocket : function(  ) {},
+
+<span id='javax-net-SocketFactory-method-createSocket'>/**Creates a socket and connects it to the specified remote host
+</span> at the specified remote port.  This socket is configured using
+ the socket options established for this factory.
+ &lt;p&gt;
+ If there is a security manager, its &lt;code&gt;checkConnect&lt;/code&gt;
+ method is called with the host address and &lt;code&gt;port&lt;/code&gt;
+ as its arguments. This could result in a SecurityException.
+@param {String} host the server host name with which to connect, or
+        &lt;code&gt;null&lt;/code&gt; for the loopback address.
+@param {Number} port the server port
+@return {Object {java.net.Socket}} the &lt;code&gt;Socket&lt;/code&gt;
+@throws IOException if an I/O error occurs when creating the socket
+@throws SecurityException if a security manager exists and its
+         &lt;code&gt;checkConnect&lt;/code&gt; method doesn't allow the operation.
+@throws UnknownHostException if the host is not known
+@throws IllegalArgumentException if the port parameter is outside the
+         specified range of valid port values, which is between 0 and
+         65535, inclusive.
+@see SecurityManager#checkConnect
+@see java.net.Socket#Socket(String, int)
+*/
+createSocket : function(  ) {},
+
+<span id='javax-net-SocketFactory-method-createSocket'>/**Creates a socket and connects it to the specified remote host
+</span> on the specified remote port.
+ The socket will also be bound to the local address and port supplied.
+ This socket is configured using
+ the socket options established for this factory.
+ &lt;p&gt;
+ If there is a security manager, its &lt;code&gt;checkConnect&lt;/code&gt;
+ method is called with the host address and &lt;code&gt;port&lt;/code&gt;
+ as its arguments. This could result in a SecurityException.
+@param {String} host the server host name with which to connect, or
+        &lt;code&gt;null&lt;/code&gt; for the loopback address.
+@param {Number} port the server port
+@param {Object {InetAddress}} localHost the local address the socket is bound to
+@param {Number} localPort the local port the socket is bound to
+@return {Object {java.net.Socket}} the &lt;code&gt;Socket&lt;/code&gt;
+@throws IOException if an I/O error occurs when creating the socket
+@throws SecurityException if a security manager exists and its
+         &lt;code&gt;checkConnect&lt;/code&gt; method doesn't allow the operation.
+@throws UnknownHostException if the host is not known
+@throws IllegalArgumentException if the port parameter or localPort
+         parameter is outside the specified range of valid port values,
+         which is between 0 and 65535, inclusive.
+@see SecurityManager#checkConnect
+@see java.net.Socket#Socket(String, int, java.net.InetAddress, int)
+*/
+createSocket : function(  ) {},
+
+<span id='javax-net-SocketFactory-method-createSocket'>/**Creates a socket and connects it to the specified port number
+</span> at the specified address.  This socket is configured using
+ the socket options established for this factory.
+ &lt;p&gt;
+ If there is a security manager, its &lt;code&gt;checkConnect&lt;/code&gt;
+ method is called with the host address and &lt;code&gt;port&lt;/code&gt;
+ as its arguments. This could result in a SecurityException.
+@param {Object {InetAddress}} host the server host
+@param {Number} port the server port
+@return {Object {java.net.Socket}} the &lt;code&gt;Socket&lt;/code&gt;
+@throws IOException if an I/O error occurs when creating the socket
+@throws SecurityException if a security manager exists and its
+         &lt;code&gt;checkConnect&lt;/code&gt; method doesn't allow the operation.
+@throws IllegalArgumentException if the port parameter is outside the
+         specified range of valid port values, which is between 0 and
+         65535, inclusive.
+@throws NullPointerException if &lt;code&gt;host&lt;/code&gt; is null.
+@see SecurityManager#checkConnect
+@see java.net.Socket#Socket(java.net.InetAddress, int)
+*/
+createSocket : function(  ) {},
+
+<span id='javax-net-SocketFactory-method-createSocket'>/**Creates a socket and connect it to the specified remote address
+</span> on the specified remote port.  The socket will also be bound
+ to the local address and port suplied.  The socket is configured using
+ the socket options established for this factory.
+ &lt;p&gt;
+ If there is a security manager, its &lt;code&gt;checkConnect&lt;/code&gt;
+ method is called with the host address and &lt;code&gt;port&lt;/code&gt;
+ as its arguments. This could result in a SecurityException.
+@param {Object {InetAddress}} address the server network address
+@param {Number} port the server port
+@param {Object {InetAddress}} localAddress the client network address
+@param {Number} localPort the client port
+@return {Object {java.net.Socket}} the &lt;code&gt;Socket&lt;/code&gt;
+@throws IOException if an I/O error occurs when creating the socket
+@throws SecurityException if a security manager exists and its
+         &lt;code&gt;checkConnect&lt;/code&gt; method doesn't allow the operation.
+@throws IllegalArgumentException if the port parameter or localPort
+         parameter is outside the specified range of valid port values,
+         which is between 0 and 65535, inclusive.
+@throws NullPointerException if &lt;code&gt;address&lt;/code&gt; is null.
+@see SecurityManager#checkConnect
+@see java.net.Socket#Socket(java.net.InetAddress, int,
+     java.net.InetAddress, int)
+*/
+createSocket : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

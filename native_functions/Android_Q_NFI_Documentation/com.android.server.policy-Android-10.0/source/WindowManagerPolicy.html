@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-policy-WindowManagerPolicy'>/**@class com.android.server.policy.WindowManagerPolicy
+</span> implements android.view.WindowManagerPolicyConstants
+
+ This interface supplies all UI-specific behavior of the window manager.  An
+ instance of it is created by the window manager when it starts up, and allows
+ customization of window layering, special window types, key dispatching, and
+ layout.
+
+ &lt;p&gt;Because this provides deep interaction with the system window manager,
+ specific methods on this interface can be called from a variety of contexts
+ with various restrictions on what they can do.  These are encoded through
+ a suffixes at the end of a method encoding the thread the method is called
+ from and any locks that are held when it is being called; if no suffix
+ is attached to a method, then it is not called with any locks and may be
+ called from the main window manager thread or another thread calling into
+ the window manager.
+
+ &lt;p&gt;The current suffixes are:
+
+ &lt;dl&gt;
+ &lt;dt&gt; Ti &lt;dd&gt; Called from the input thread.  This is the thread that
+ collects pending input events and dispatches them to the appropriate window.
+ It may block waiting for events to be processed, so that the input stream is
+ properly serialized.
+ &lt;dt&gt; Tq &lt;dd&gt; Called from the low-level input queue thread.  This is the
+ thread that reads events out of the raw input devices and places them
+ into the global input queue that is read by the &lt;var&gt;Ti&lt;/var&gt; thread.
+ This thread should not block for a long period of time on anything but the
+ key driver.
+ &lt;dt&gt; Lw &lt;dd&gt; Called with the main window manager lock held.  Because the
+ window manager is a very low-level system service, there are few other
+ system services you can call with this lock held.  It is explicitly okay to
+ make calls into the package manager and power manager; it is explicitly not
+ okay to make calls into the activity manager or most other services.  Note that
+ {@link android.content.Context#checkPermission(String, int, int)} and
+ variations require calling into the activity manager.
+ &lt;dt&gt; Li &lt;dd&gt; Called with the input thread lock held.  This lock can be
+ acquired by the window manager while it holds the window lock, so this is
+ even more restrictive than &lt;var&gt;Lw&lt;/var&gt;.
+ &lt;/dl&gt;
+*/
+var WindowManagerPolicy = {
+
+<span id='com-android-server-policy-WindowManagerPolicy-property-ACTION_PASS_TO_USER'>/** Pass this event to the user / app.  To be returned from
+</span> {@link #interceptKeyBeforeQueueing}.
+*/
+ACTION_PASS_TO_USER : &quot;1&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-FINISH_LAYOUT_REDO_LAYOUT'>/**Layout state may have changed (so another layout will be performed) */
+</span>FINISH_LAYOUT_REDO_LAYOUT : &quot;1&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-FINISH_LAYOUT_REDO_CONFIG'>/**Configuration state may have changed */
+</span>FINISH_LAYOUT_REDO_CONFIG : &quot;2&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-FINISH_LAYOUT_REDO_WALLPAPER'>/**Wallpaper may need to move */
+</span>FINISH_LAYOUT_REDO_WALLPAPER : &quot;4&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-FINISH_LAYOUT_REDO_ANIM'>/**Need to recompute animations */
+</span>FINISH_LAYOUT_REDO_ANIM : &quot;8&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-COLOR_FADE_LAYER'>/**Layer for the screen off animation */
+</span>COLOR_FADE_LAYER : &quot;1073741825&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-TRANSIT_ENTER'>/**Window has been added to the screen. */
+</span>TRANSIT_ENTER : &quot;1&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-TRANSIT_EXIT'>/**Window has been removed from the screen. */
+</span>TRANSIT_EXIT : &quot;2&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-TRANSIT_SHOW'>/**Window has been made visible. */
+</span>TRANSIT_SHOW : &quot;3&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-TRANSIT_HIDE'>/**Window has been made invisible.
+</span> TODO: Consider removal as this is unused. */
+TRANSIT_HIDE : &quot;4&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-TRANSIT_PREVIEW_DONE'>/**The &quot;application starting&quot; preview window is no longer needed, and will
+</span> animate away to show the real window. */
+TRANSIT_PREVIEW_DONE : &quot;5&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-USER_ROTATION_FREE'>/**When not otherwise specified by the activity's screenOrientation, rotation should be
+</span> determined by the system (that is, using sensors). */
+USER_ROTATION_FREE : &quot;0&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-property-USER_ROTATION_LOCKED'>/**When not otherwise specified by the activity's screenOrientation, rotation is set by
+</span> the user. */
+USER_ROTATION_LOCKED : &quot;1&quot;,
+<span id='com-android-server-policy-WindowManagerPolicy-method-registerShortcutKey'>/**Register shortcuts for window manager to dispatch.
+</span> Shortcut code is packed as (metaState &lt;&lt; Integer.SIZE) | keyCode
+@hide 
+*/
+registerShortcutKey : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-onKeyguardOccludedChangedLw'>/**Called when the Keyguard occluded state changed.
+</span>@param {Boolean} occluded Whether Keyguard is currently occluded or not.
+*/
+onKeyguardOccludedChangedLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setDefaultDisplay'>/**Set the default display content to provide basic functions for the policy.
+</span>*/
+setDefaultDisplay : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-init'>/**Perform initialization of the policy.
+</span>@param {Object {Context}} context The system context we are running in.
+*/
+init : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-checkAddPermission'>/**Check permissions when adding a window.
+</span>@param {Object {WindowManager.LayoutParams}} attrs The window's LayoutParams.
+@param {Object {int[]}} outAppOp First element will be filled with the app op corresponding to
+                 this window, or OP_NONE.
+@return {Number} {@link WindowManagerGlobal#ADD_OKAY} if the add can proceed;
+      else an error code, usually
+      {@link WindowManagerGlobal#ADD_PERMISSION_DENIED}, to abort the add.
+*/
+checkAddPermission : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-checkShowToOwnerOnly'>/**Check permissions when adding a window.
+</span>@param {Object {WindowManager.LayoutParams}} attrs The window's LayoutParams.
+@return {Boolean} True if the window may only be shown to the current user, false if the window can
+ be shown on all users' windows.
+*/
+checkShowToOwnerOnly : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-adjustConfigurationLw'>/**After the window manager has computed the current configuration based
+</span> on its knowledge of the display and input devices, it gives the policy
+ a chance to adjust the information contained in it.  If you want to
+ leave it as-is, simply do nothing.
+
+ &lt;p&gt;This method may be called by any thread in the window manager, but
+ no internal locks in the window manager will be held.
+@param {Object {Configuration}} config The Configuration being computed, for you to change as
+ desired.
+@param {Number} keyboardPresence Flags that indicate whether internal or external
+ keyboards are present.
+@param {Number} navigationPresence Flags that indicate whether internal or external
+ navigation devices are present.
+*/
+adjustConfigurationLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-getWindowLayerLw'>/**Returns the layer assignment for the window state. Allows you to control how different
+</span> kinds of windows are ordered on-screen.
+@param {Object {WindowManagerPolicy.WindowState}} win The window state
+@return {Number} int An arbitrary integer used to order windows, with lower numbers below higher ones.
+*/
+getWindowLayerLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-getWindowLayerFromTypeLw'>/**Returns the layer assignment for the window type. Allows you to control how different
+</span> kinds of windows are ordered on-screen.
+@param {Number} type The type of window being assigned.
+@return {Number} int An arbitrary integer used to order windows, with lower numbers below higher ones.
+*/
+getWindowLayerFromTypeLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-getWindowLayerFromTypeLw'>/**Returns the layer assignment for the window type. Allows you to control how different
+</span> kinds of windows are ordered on-screen.
+@param {Number} type The type of window being assigned.
+@param {Boolean} canAddInternalSystemWindow If the owner window associated with the type we are
+        evaluating can add internal system windows. I.e they have
+        {@link Manifest.permission#INTERNAL_SYSTEM_WINDOW}. If true, alert window
+        types {@link android.view.WindowManager.LayoutParams#isSystemAlertWindowType(int)}
+        can be assigned layers greater than the layer for
+        {@link android.view.WindowManager.LayoutParams#TYPE_APPLICATION_OVERLAY} Else, their
+        layers would be lesser.
+@return {Number} int An arbitrary integer used to order windows, with lower numbers below higher ones.
+*/
+getWindowLayerFromTypeLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-getSubWindowLayerFromTypeLw'>/**Return how to Z-order sub-windows in relation to the window they are attached to.
+</span> Return positive to have them ordered in front, negative for behind.
+@param {Number} type The sub-window type code.
+@return {Number} int Layer in relation to the attached window, where positive is
+         above and negative is below.
+*/
+getSubWindowLayerFromTypeLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-getMaxWallpaperLayer'>/**Get the highest layer (actually one more than) that the wallpaper is
+</span> allowed to be in.
+*/
+getMaxWallpaperLayer : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-isKeyguardHostWindow'>/**Return whether the given window can become the Keyguard window. Typically returns true for
+</span> the StatusBar.
+*/
+isKeyguardHostWindow : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-canBeHiddenByKeyguardLw'>/**
+</span>@return {Boolean} whether {@param win} can be hidden by Keyguard
+*/
+canBeHiddenByKeyguardLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-addSplashScreen'>/**Called when the system would like to show a UI to indicate that an
+</span> application is starting.  You can use this to add a
+ APPLICATION_STARTING_TYPE window with the given appToken to the window
+ manager (using the normal window manager APIs) that will be shown until
+ the application displays its own window.  This is called without the
+ window manager locked so that you can call back into it.
+@param {Object {IBinder}} appToken Token of the application being started.
+@param {String} packageName The name of the application package being started.
+@param {Number} theme Resource defining the application's overall visual theme.
+@param {Object {CompatibilityInfo}} nonLocalizedLabel The default title label of the application if
+        no data is found in the resource.
+@param {Object {CharSequence}} labelRes The resource ID the application would like to use as its name.
+@param {Number} icon The resource ID the application would like to use as its icon.
+@param {Number} windowFlags Window layout flags.
+@param {Number} overrideConfig override configuration to consider when generating
+        context to for resources.
+@param {Number} displayId Id of the display to show the splash screen at.
+@return {Object {com.android.server.policy.WindowManagerPolicy.StartingSurface}} The starting surface.
+*/
+addSplashScreen : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setKeyguardCandidateLw'>/**Set or clear a window which can behave as the keyguard.
+</span>@param {Object {WindowManagerPolicy.WindowState}} win The window which can behave as the keyguard.
+*/
+setKeyguardCandidateLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-createHiddenByKeyguardExit'>/**Create and return an animation to re-display a window that was force hidden by Keyguard.
+</span>*/
+createHiddenByKeyguardExit : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-createKeyguardWallpaperExit'>/**Create and return an animation to let the wallpaper disappear after being shown behind
+</span> Keyguard.
+*/
+createKeyguardWallpaperExit : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-interceptKeyBeforeQueueing'>/**Called from the input reader thread before a key is enqueued.
+</span>
+ &lt;p&gt;There are some actions that need to be handled here because they
+ affect the power state of the device, for example, the power keys.
+ Generally, it's best to keep as little as possible in the queue thread
+ because it's the most fragile.
+@param {Object {KeyEvent}} event The key event.
+@param {Number} policyFlags The policy flags associated with the key.
+@return {Number} Actions flags: may be {@link #ACTION_PASS_TO_USER}.
+*/
+interceptKeyBeforeQueueing : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-interceptMotionBeforeQueueingNonInteractive'>/**Called from the input reader thread before a motion is enqueued when the device is in a
+</span> non-interactive state.
+
+ &lt;p&gt;There are some actions that need to be handled here because they
+ affect the power state of the device, for example, waking on motions.
+ Generally, it's best to keep as little as possible in the queue thread
+ because it's the most fragile.
+@param {Number} displayId The display ID of the motion event.
+@param {Number} policyFlags The policy flags associated with the motion.
+@return {Number} Actions flags: may be {@link #ACTION_PASS_TO_USER}.
+*/
+interceptMotionBeforeQueueingNonInteractive : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-interceptKeyBeforeDispatching'>/**Called from the input dispatcher thread before a key is dispatched to a window.
+</span>
+ &lt;p&gt;Allows you to define
+ behavior for keys that can not be overridden by applications.
+ This method is called from the input thread, with no locks held.
+@param {Object {WindowManagerPolicy.WindowState}} win The window that currently has focus.  This is where the key
+            event will normally go.
+@param {Object {KeyEvent}} event The key event.
+@param {Number} policyFlags The policy flags associated with the key.
+@return {Number} 0 if the key should be dispatched immediately, -1 if the key should
+ not be dispatched ever, or a positive value indicating the number of
+ milliseconds by which the key dispatch should be delayed before trying
+ again.
+*/
+interceptKeyBeforeDispatching : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-dispatchUnhandledKey'>/**Called from the input dispatcher thread when an application did not handle
+</span> a key that was dispatched to it.
+
+ &lt;p&gt;Allows you to define default global behavior for keys that were not handled
+ by applications.  This method is called from the input thread, with no locks held.
+@param {Object {WindowManagerPolicy.WindowState}} win The window that currently has focus.  This is where the key
+            event will normally go.
+@param {Object {KeyEvent}} event The key event.
+@param {Number} policyFlags The policy flags associated with the key.
+@return {Object {android.view.KeyEvent}} Returns an alternate key event to redispatch as a fallback, or null to give up.
+ The caller is responsible for recycling the key event.
+*/
+dispatchUnhandledKey : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setTopFocusedDisplay'>/**Called when the top focused display is changed.
+</span>@param {Number} displayId The ID of the top focused display.
+*/
+setTopFocusedDisplay : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-applyKeyguardPolicyLw'>/**Apply the keyguard policy to a specific window.
+</span>@param {Object {WindowManagerPolicy.WindowState}} win The window to apply the keyguard policy.
+@param {Object {WindowManagerPolicy.WindowState}} imeTarget The current IME target window.
+*/
+applyKeyguardPolicyLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setAllowLockscreenWhenOn'>/**Called when the state of allow-lockscreen-when-on of the display is changed. See
+</span> {@link WindowManager.LayoutParams#FLAG_ALLOW_LOCK_WHILE_SCREEN_ON}
+@param {Number} displayId The ID of the display.
+@param {Boolean} allow Whether the display allows showing lockscreen when it is on.
+*/
+setAllowLockscreenWhenOn : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-startedWakingUp'>/**Called when the device has started waking up.
+</span>*/
+startedWakingUp : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-finishedWakingUp'>/**Called when the device has finished waking up.
+</span>*/
+finishedWakingUp : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-startedGoingToSleep'>/**Called when the device has started going to sleep.
+</span>@param {Number} why {@link #OFF_BECAUSE_OF_USER}, {@link #OFF_BECAUSE_OF_ADMIN},
+ or {@link #OFF_BECAUSE_OF_TIMEOUT}.
+*/
+startedGoingToSleep : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-finishedGoingToSleep'>/**Called when the device has finished going to sleep.
+</span>@param {Number} why {@link #OFF_BECAUSE_OF_USER}, {@link #OFF_BECAUSE_OF_ADMIN},
+ or {@link #OFF_BECAUSE_OF_TIMEOUT}.
+*/
+finishedGoingToSleep : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-screenTurningOn'>/**Called when the device is about to turn on the screen to show content.
+</span> When waking up, this method will be called once after the call to wakingUp().
+ When dozing, the method will be called sometime after the call to goingToSleep() and
+ may be called repeatedly in the case where the screen is pulsing on and off.
+
+ Must call back on the listener to tell it when the higher-level system
+ is ready for the screen to go on (i.e. the lock screen is shown).
+*/
+screenTurningOn : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-screenTurnedOn'>/**Called when the device has actually turned on the screen, i.e. the display power state has
+</span> been set to ON and the screen is unblocked.
+*/
+screenTurnedOn : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-screenTurningOff'>/**Called when the display would like to be turned off. This gives policy a chance to do some
+</span> things before the display power state is actually changed to off.
+@param {Object {WindowManagerPolicy.ScreenOffListener}} screenOffListener Must be called to tell that the display power state can actually be
+                          changed now after policy has done its work.
+*/
+screenTurningOff : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-screenTurnedOff'>/**Called when the device has turned the screen off.
+</span>*/
+screenTurnedOff : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-isScreenOn'>/**Return whether the default display is on and not blocked by a black surface.
+</span>*/
+isScreenOn : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-okToAnimate'>/**
+</span>@return {Boolean} whether the device is currently allowed to animate.
+
+ Note: this can be true even if it is not appropriate to animate for reasons that are outside
+       of the policy's authority.
+*/
+okToAnimate : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-notifyLidSwitchChanged'>/**Tell the policy that the lid switch has changed state.
+</span>@param {Number} whenNanos The time when the change occurred in uptime nanoseconds.
+@param {Boolean} lidOpen True if the lid is now open.
+*/
+notifyLidSwitchChanged : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-notifyCameraLensCoverSwitchChanged'>/**Tell the policy that the camera lens has been covered or uncovered.
+</span>@param {Number} whenNanos The time when the change occurred in uptime nanoseconds.
+@param {Boolean} lensCovered True if the lens is covered.
+*/
+notifyCameraLensCoverSwitchChanged : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-enableKeyguard'>/**Tell the policy if anyone is requesting that keyguard not come on.
+</span>@param {Boolean} enabled Whether keyguard can be on or not.  does not actually
+ turn it on, unless it was previously disabled with this function.
+@see android.app.KeyguardManager.KeyguardLock#disableKeyguard()
+@see android.app.KeyguardManager.KeyguardLock#reenableKeyguard()
+*/
+enableKeyguard : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-exitKeyguardSecurely'>/**Tell the policy if anyone is requesting the keyguard to exit securely
+</span> (this would be called after the keyguard was disabled)
+@param {Object {WindowManagerPolicy.OnKeyguardExitResult}} callback Callback to send the result back.
+@see android.app.KeyguardManager#exitKeyguardSecurely(android.app.KeyguardManager.OnKeyguardExitResult)
+*/
+exitKeyguardSecurely : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-isKeyguardLocked'>/**isKeyguardLocked
+</span>
+ Return whether the keyguard is currently locked.
+@return {Boolean} true if in keyguard is locked.
+*/
+isKeyguardLocked : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-isKeyguardSecure'>/**isKeyguardSecure
+</span>
+ Return whether the keyguard requires a password to unlock.
+@param {Number} userId
+@return {Boolean} true if in keyguard is secure.
+*/
+isKeyguardSecure : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-isKeyguardOccluded'>/**Return whether the keyguard is currently occluded.
+</span>@return {Boolean} true if in keyguard is occluded, false otherwise
+*/
+isKeyguardOccluded : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-isKeyguardShowingAndNotOccluded'>/**
+</span>@return {Boolean} true if in keyguard is on and not occluded.
+*/
+isKeyguardShowingAndNotOccluded : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-isKeyguardTrustedLw'>/**
+</span>@return {Boolean} whether Keyguard is in trusted state and can be dismissed without credentials
+*/
+isKeyguardTrustedLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-inKeyguardRestrictedKeyInputMode'>/**inKeyguardRestrictedKeyInputMode
+</span>
+ If keyguard screen is showing or in restricted key input mode (i.e. in
+ keyguard password emergency screen). When in such mode, certain keys,
+ such as the Home key and the right soft keys, don't work.
+@return {Boolean} true if in keyguard restricted input mode.
+*/
+inKeyguardRestrictedKeyInputMode : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-dismissKeyguardLw'>/**Ask the policy to dismiss the keyguard, if it is currently shown.
+</span>@param {Object {IKeyguardDismissCallback}} callback Callback to be informed about the result.
+@param {Object {CharSequence}} message A message that should be displayed in the keyguard.
+*/
+dismissKeyguardLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-isKeyguardDrawnLw'>/**Ask the policy whether the Keyguard has drawn. If the Keyguard is disabled, this method
+</span> returns true as soon as we know that Keyguard is disabled.
+@return {Boolean} true if the keyguard has drawn.
+*/
+isKeyguardDrawnLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setSafeMode'>/**Called when the system is mostly done booting to set whether
+</span> the system should go into safe mode.
+*/
+setSafeMode : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-systemReady'>/**Called when the system is mostly done booting.
+</span>*/
+systemReady : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-systemBooted'>/**Called when the system is done booting to the point where the
+</span> user can start interacting with it.
+*/
+systemBooted : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-showBootMessage'>/**Show boot time message to the user.
+</span>*/
+showBootMessage : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-hideBootMessages'>/**Hide the UI for showing boot messages, never to be displayed again.
+</span>*/
+hideBootMessages : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-userActivity'>/**Called when userActivity is signalled in the power manager.
+</span> This is safe to call from any thread, with any window manager locks held or not.
+*/
+userActivity : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-enableScreenAfterBoot'>/**Called when we have finished booting and can now display the home
+</span> screen to the user.  This will happen after systemReady(), and at
+ this point the display is active.
+*/
+enableScreenAfterBoot : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-performHapticFeedback'>/**Call from application to perform haptic feedback on its window.
+</span>*/
+performHapticFeedback : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-keepScreenOnStartedLw'>/**Called when we have started keeping the screen on because a window
+</span> requesting this has become visible.
+*/
+keepScreenOnStartedLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-keepScreenOnStoppedLw'>/**Called when we have stopped keeping the screen on because the last window
+</span> requesting this is no longer visible.
+*/
+keepScreenOnStoppedLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setRecentsVisibilityLw'>/**Called by System UI to notify of changes to the visibility of Recents.
+</span>*/
+setRecentsVisibilityLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setPipVisibilityLw'>/**Called by System UI to notify of changes to the visibility of PIP.
+</span>*/
+setPipVisibilityLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setNavBarVirtualKeyHapticFeedbackEnabledLw'>/**Called by System UI to enable or disable haptic feedback on the navigation bar buttons.
+</span>*/
+setNavBarVirtualKeyHapticFeedbackEnabledLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-hasNavigationBar'>/**Specifies whether there is an on-screen navigation bar separate from the status bar.
+</span>*/
+hasNavigationBar : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-lockNow'>/**Lock the device now.
+</span>*/
+lockNow : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setDismissImeOnBackKeyPressed'>/**An internal callback (from InputMethodManagerService) to notify a state change regarding
+</span> whether the back key should dismiss the software keyboard (IME) or not.
+@param {Boolean} newValue {@code true} if the software keyboard is shown and the back key is expected
+                 to dismiss the software keyboard.
+@hide 
+*/
+setDismissImeOnBackKeyPressed : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-showRecentApps'>/**Show the recents task list app.
+</span>@hide 
+*/
+showRecentApps : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-showGlobalActions'>/**Show the global actions dialog.
+</span>@hide 
+*/
+showGlobalActions : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-isUserSetupComplete'>/**Returns whether the user setup is complete.
+</span>*/
+isUserSetupComplete : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-getUiMode'>/**Returns the current UI mode.
+</span>*/
+getUiMode : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setCurrentUserLw'>/**Called when the current user changes. Guaranteed to be called before the broadcast
+</span> of the new user id is made to all listeners.
+@param {Number} newUserId The id of the incoming user.
+*/
+setCurrentUserLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setSwitchingUser'>/**For a given user-switch operation, this will be called once with switching=true before the
+</span> user-switch and once with switching=false afterwards (or if the user-switch was cancelled).
+ This gives the policy a chance to alter its behavior for the duration of a user-switch.
+@param {Boolean} switching true if a user-switch is in progress
+*/
+setSwitchingUser : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-dump'>/**Print the WindowManagerPolicy's state into the given stream.
+</span>@param {String} prefix Text to print at the front of each line.
+@param {Object {PrintWriter}} writer The PrintWriter to which you should dump your state.  This will be
+ closed for you after you return.
+@param {Object {java.lang.String[]}} args additional arguments to the dump request.
+*/
+dump : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-writeToProto'>/**Write the WindowManagerPolicy's state into the protocol buffer.
+</span> The message is described in {@link com.android.server.wm.WindowManagerPolicyProto}
+@param {Object {ProtoOutputStream}} proto The protocol buffer output stream to write to.
+*/
+writeToProto : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-isTopLevelWindow'>/**Returns whether a given window type is considered a top level one.
+</span> A top level window does not have a container, i.e. attached window,
+ or if it has a container it is laid out as a top-level window, not
+ as a child of its container.
+@param {Number} windowType The window type.
+@return {Boolean} True if the window is a top level one.
+*/
+isTopLevelWindow : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-startKeyguardExitAnimation'>/**Notifies the keyguard to start fading out.
+</span>@param {Number} startTime the start time of the animation in uptime milliseconds
+@param {Number} fadeoutDuration the duration of the exit animation, in milliseconds
+*/
+startKeyguardExitAnimation : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-onSystemUiStarted'>/**Called when System UI has been started.
+</span>*/
+onSystemUiStarted : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-canDismissBootAnimation'>/**Checks whether the policy is ready for dismissing the boot animation and completing the boot.
+</span>@return {Boolean} true if ready; false otherwise.
+*/
+canDismissBootAnimation : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-userRotationModeToString'>/**Convert the user rotation mode to a human readable format.
+</span>*/
+userRotationModeToString : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-requestUserActivityNotification'>/**Requests that the WindowManager sends
+</span> WindowManagerPolicyConstants#ACTION_USER_ACTIVITY_NOTIFICATION on the next user activity.
+*/
+requestUserActivityNotification : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-registerDisplayFoldListener'>/**Registers an IDisplayFoldListener.
+</span>*/
+registerDisplayFoldListener : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-unregisterDisplayFoldListener'>/**Unregisters an IDisplayFoldListener.
+</span>*/
+unregisterDisplayFoldListener : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setOverrideFoldedArea'>/**Overrides the folded area.
+</span>@param {Object {Rect}} area the overriding folded area or an empty {@code Rect} to clear the override.
+*/
+setOverrideFoldedArea : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-getFoldedArea'>/**Get the display folded area.
+</span>*/
+getFoldedArea : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-onDefaultDisplayFocusChangedLw'>/**A new window on default display has been focused.
+</span>*/
+onDefaultDisplayFocusChangedLw : function(  ) {},
+
+<span id='com-android-server-policy-WindowManagerPolicy-method-setAodShowing'>/**Updates the flag about whether AOD is showing.
+</span>@return {Boolean} whether the value was changed.
+*/
+setAodShowing : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

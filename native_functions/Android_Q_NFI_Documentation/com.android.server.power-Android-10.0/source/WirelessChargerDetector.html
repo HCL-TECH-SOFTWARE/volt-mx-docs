@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-power-WirelessChargerDetector'>/**@class com.android.server.power.WirelessChargerDetector
+</span>@extends java.lang.Object
+
+ Implements heuristics to detect docking or undocking from a wireless charger.
+ &lt;p&gt;
+ Some devices have wireless charging circuits that are unable to detect when the
+ device is resting on a wireless charger except when the device is actually
+ receiving power from the charger.  The device may stop receiving power
+ if the battery is already nearly full or if it is too hot.  As a result, we cannot
+ always rely on the battery service wireless plug signal to accurately indicate
+ whether the device has been docked or undocked from a wireless charger.
+ &lt;/p&gt;&lt;p&gt;
+ This is a problem because the power manager typically wakes up the screen and
+ plays a tone when the device is docked in a wireless charger.  It is important
+ for the system to suppress spurious docking and undocking signals because they
+ can be intrusive for the user (especially if they cause a tone to be played
+ late at night for no apparent reason).
+ &lt;/p&gt;&lt;p&gt;
+ To avoid spurious signals, we apply some special policies to wireless chargers.
+ &lt;/p&gt;&lt;p&gt;
+ 1. Don't wake the device when undocked from the wireless charger because
+ it might be that the device is still resting on the wireless charger
+ but is not receiving power anymore because the battery is full.
+ Ideally we would wake the device if we could be certain that the user had
+ picked it up from the wireless charger but due to hardware limitations we
+ must be more conservative.
+ &lt;/p&gt;&lt;p&gt;
+ 2. Don't wake the device when docked on a wireless charger if the
+ battery already appears to be mostly full.  This situation may indicate
+ that the device was resting on the charger the whole time and simply
+ wasn't receiving power because the battery was already full.  We can't tell
+ whether the device was just placed on the charger or whether it has
+ been there for half of the night slowly discharging until it reached
+ the point where it needed to start charging again.  So we suppress docking
+ signals that occur when the battery level is above a given threshold.
+ &lt;/p&gt;&lt;p&gt;
+ 3. Don't wake the device when docked on a wireless charger if it does
+ not appear to have moved since it was last undocked because it may
+ be that the prior undocking signal was spurious.  We use the gravity
+ sensor to detect this case.
+ &lt;/p&gt;
+*/
+var WirelessChargerDetector = {
+
+<span id='com-android-server-power-WirelessChargerDetector-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-power-WirelessChargerDetector-method-writeToProto'>/**
+</span>*/
+writeToProto : function(  ) {},
+
+<span id='com-android-server-power-WirelessChargerDetector-method-update'>/**Updates the charging state and returns true if docking was detected.
+</span>@param {Boolean} isPowered True if the device is powered.
+@param {Number} plugType The current plug type.
+@return {Boolean} True if the device is determined to have just been docked on a wireless
+ charger, after suppressing spurious docking or undocking signals.
+*/
+update : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-w3c-dom-ls-LSParserFilter'>/**@class org.w3c.dom.ls.LSParserFilter
+</span>  &lt;code&gt;LSParserFilter&lt;/code&gt;s provide applications the ability to examine
+ nodes as they are being constructed while parsing. As each node is
+ examined, it may be modified or removed, or the entire parse may be
+ terminated early.
+ &lt;p&gt; At the time any of the filter methods are called by the parser, the
+ owner Document and DOMImplementation objects exist and are accessible.
+ The document element is never passed to the &lt;code&gt;LSParserFilter&lt;/code&gt;
+ methods, i.e. it is not possible to filter out the document element.
+ &lt;code&gt;Document&lt;/code&gt;, &lt;code&gt;DocumentType&lt;/code&gt;, &lt;code&gt;Notation&lt;/code&gt;,
+ &lt;code&gt;Entity&lt;/code&gt;, and &lt;code&gt;Attr&lt;/code&gt; nodes are never passed to the
+ &lt;code&gt;acceptNode&lt;/code&gt; method on the filter. The child nodes of an
+ &lt;code&gt;EntityReference&lt;/code&gt; node are passed to the filter if the
+ parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-entities'&gt;
+ entities&lt;/a&gt;&quot; is set to &lt;code&gt;false&lt;/code&gt;. Note that, as described by the parameter &quot;&lt;a href='http://www.w3.org/TR/DOM-Level-3-Core/core.html#parameter-entities'&gt;
+ entities&lt;/a&gt;&quot;, unexpanded entity reference nodes are never discarded and are always
+ passed to the filter.
+ &lt;p&gt; All validity checking while parsing a document occurs on the source
+ document as it appears on the input stream, not on the DOM document as it
+ is built in memory. With filters, the document in memory may be a subset
+ of the document on the stream, and its validity may have been affected by
+ the filtering.
+ &lt;p&gt; All default attributes must be present on elements when the elements
+ are passed to the filter methods. All other default content must be
+ passed to the filter methods.
+ &lt;p&gt; DOM applications must not raise exceptions in a filter. The effect of
+ throwing exceptions from a filter is DOM implementation dependent.
+ &lt;p&gt;See also the &lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407'&gt;Document Object Model (DOM) Level 3 Load
+and Save Specification&lt;/a&gt;.
+*/
+var LSParserFilter = {
+
+<span id='org-w3c-dom-ls-LSParserFilter-property-FILTER_ACCEPT'>/** Accept the node.
+</span>*/
+FILTER_ACCEPT : &quot;1&quot;,
+<span id='org-w3c-dom-ls-LSParserFilter-property-FILTER_REJECT'>/** Reject the node and its children.
+</span>*/
+FILTER_REJECT : &quot;2&quot;,
+<span id='org-w3c-dom-ls-LSParserFilter-property-FILTER_SKIP'>/** Skip this single node. The children of this node will still be
+</span> considered.
+*/
+FILTER_SKIP : &quot;3&quot;,
+<span id='org-w3c-dom-ls-LSParserFilter-property-FILTER_INTERRUPT'>/**  Interrupt the normal processing of the document.
+</span>*/
+FILTER_INTERRUPT : &quot;4&quot;,
+<span id='org-w3c-dom-ls-LSParserFilter-method-startElement'>/**The parser will call this method after each &lt;code&gt;Element&lt;/code&gt; start
+</span> tag has been scanned, but before the remainder of the
+ &lt;code&gt;Element&lt;/code&gt; is processed. The intent is to allow the
+ element, including any children, to be efficiently skipped. Note that
+ only element nodes are passed to the &lt;code&gt;startElement&lt;/code&gt;
+ function.
+ &lt;br&gt;The element node passed to &lt;code&gt;startElement&lt;/code&gt; for filtering
+ will include all of the Element's attributes, but none of the
+ children nodes. The Element may not yet be in place in the document
+ being constructed (it may not have a parent node.)
+ &lt;br&gt;A &lt;code&gt;startElement&lt;/code&gt; filter function may access or change
+ the attributes for the Element. Changing Namespace declarations will
+ have no effect on namespace resolution by the parser.
+ &lt;br&gt;For efficiency, the Element node passed to the filter may not be
+ the same one as is actually placed in the tree if the node is
+ accepted. And the actual node (node object identity) may be reused
+ during the process of reading in and filtering a document.
+@param {Object {Element}} elementArg The newly encountered element. At the time this
+   method is called, the element is incomplete - it will have its
+   attributes, but no children.
+@return {Number} &lt;ul&gt;
+ &lt;li&gt; &lt;code&gt;FILTER_ACCEPT&lt;/code&gt; if the &lt;code&gt;Element&lt;/code&gt; should
+   be included in the DOM document being built.
+ &lt;/li&gt;
+ &lt;li&gt;
+   &lt;code&gt;FILTER_REJECT&lt;/code&gt; if the &lt;code&gt;Element&lt;/code&gt; and all of
+   its children should be rejected.
+ &lt;/li&gt;
+ &lt;li&gt; &lt;code&gt;FILTER_SKIP&lt;/code&gt; if the
+   &lt;code&gt;Element&lt;/code&gt; should be skipped. All of its children are
+   inserted in place of the skipped &lt;code&gt;Element&lt;/code&gt; node.
+ &lt;/li&gt;
+ &lt;li&gt;
+   &lt;code&gt;FILTER_INTERRUPT&lt;/code&gt; if the filter wants to stop the
+   processing of the document. Interrupting the processing of the
+   document does no longer guarantee that the resulting DOM tree is
+   XML well-formed. The &lt;code&gt;Element&lt;/code&gt; is rejected.
+ &lt;/li&gt;
+ &lt;/ul&gt; Returning
+   any other values will result in unspecified behavior.
+*/
+startElement : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSParserFilter-method-acceptNode'>/**This method will be called by the parser at the completion of the
+</span> parsing of each node. The node and all of its descendants will exist
+ and be complete. The parent node will also exist, although it may be
+ incomplete, i.e. it may have additional children that have not yet
+ been parsed. Attribute nodes are never passed to this function.
+ &lt;br&gt;From within this method, the new node may be freely modified -
+ children may be added or removed, text nodes modified, etc. The state
+ of the rest of the document outside this node is not defined, and the
+ affect of any attempt to navigate to, or to modify any other part of
+ the document is undefined.
+ &lt;br&gt;For validating parsers, the checks are made on the original
+ document, before any modification by the filter. No validity checks
+ are made on any document modifications made by the filter.
+ &lt;br&gt;If this new node is rejected, the parser might reuse the new node
+ and any of its descendants.
+@param {Object {Node}} nodeArg The newly constructed element. At the time this method
+   is called, the element is complete - it has all of its children
+   (and their children, recursively) and attributes, and is attached
+   as a child to its parent.
+@return {Number} &lt;ul&gt;
+ &lt;li&gt; &lt;code&gt;FILTER_ACCEPT&lt;/code&gt; if this &lt;code&gt;Node&lt;/code&gt; should
+   be included in the DOM document being built.
+ &lt;/li&gt;
+ &lt;li&gt;
+   &lt;code&gt;FILTER_REJECT&lt;/code&gt; if the &lt;code&gt;Node&lt;/code&gt; and all of its
+   children should be rejected.
+ &lt;/li&gt;
+ &lt;li&gt; &lt;code&gt;FILTER_SKIP&lt;/code&gt; if the
+   &lt;code&gt;Node&lt;/code&gt; should be skipped and the &lt;code&gt;Node&lt;/code&gt;
+   should be replaced by all the children of the &lt;code&gt;Node&lt;/code&gt;.
+ &lt;/li&gt;
+ &lt;li&gt;
+   &lt;code&gt;FILTER_INTERRUPT&lt;/code&gt; if the filter wants to stop the
+   processing of the document. Interrupting the processing of the
+   document does no longer guarantee that the resulting DOM tree is
+   XML well-formed. The &lt;code&gt;Node&lt;/code&gt; is accepted and will be the
+   last completely parsed node.
+ &lt;/li&gt;
+ &lt;/ul&gt;
+*/
+acceptNode : function(  ) {},
+
+<span id='org-w3c-dom-ls-LSParserFilter-method-getWhatToShow'>/**Tells the &lt;code&gt;LSParser&lt;/code&gt; what types of nodes to show to the
+</span> method &lt;code&gt;LSParserFilter.acceptNode&lt;/code&gt;. If a node is not shown
+ to the filter using this attribute, it is automatically included in
+ the DOM document being built. See &lt;code&gt;NodeFilter&lt;/code&gt; for
+ definition of the constants. The constants &lt;code&gt;SHOW_ATTRIBUTE&lt;/code&gt;
+ , &lt;code&gt;SHOW_DOCUMENT&lt;/code&gt;, &lt;code&gt;SHOW_DOCUMENT_TYPE&lt;/code&gt;,
+ &lt;code&gt;SHOW_NOTATION&lt;/code&gt;, &lt;code&gt;SHOW_ENTITY&lt;/code&gt;, and
+ &lt;code&gt;SHOW_DOCUMENT_FRAGMENT&lt;/code&gt; are meaningless here. Those nodes
+ will never be passed to &lt;code&gt;LSParserFilter.acceptNode&lt;/code&gt;.
+ &lt;br&gt; The constants used here are defined in [&lt;a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113'&gt;DOM Level 2 Traversal and      Range&lt;/a&gt;]
+ .
+*/
+getWhatToShow : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-uiautomator-core-UiObject'>/**@class com.android.uiautomator.core.UiObject
+</span>@extends java.lang.Object
+
+ A UiObject is a representation of a view. It is not in any way directly bound to a
+ view as an object reference. A UiObject contains information to help it
+ locate a matching view at runtime based on the {@link com.android.uiautomator.core.UiSelector} properties specified in
+ its constructor. Once you create an instance of a UiObject, it can
+ be reused for different views that match the selector criteria.
+ @since API Level 16
+ @deprecated New tests should be written using UI Automator 2.0 which is available as part of the
+ Android Testing Support Library.
+*/
+var UiObject = {
+
+<span id='com-android-uiautomator-core-UiObject-method-getSelector'>/**Debugging helper. A test can dump the properties of a selector as a string
+</span> to its logs if needed. &lt;code&gt;getSelector().toString();&lt;/code&gt;
+@return {Object {com.android.uiautomator.core.UiSelector}} {@link UiSelector}
+@since API Level 16
+*/
+getSelector : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-getChild'>/**Creates a new UiObject for a child view that is under the present UiObject.
+</span>@param {Object {UiSelector}} selector for child view to match
+@return {Object {com.android.uiautomator.core.UiObject}} a new UiObject representing the child view
+@since API Level 16
+*/
+getChild : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-getFromParent'>/**Creates a new UiObject for a sibling view or a child of the sibling view, 
+</span> relative to the present UiObject.
+@param {Object {UiSelector}} selector for a sibling view or children of the sibling view
+@return {Object {com.android.uiautomator.core.UiObject}} a new UiObject representing the matched view
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+getFromParent : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-getChildCount'>/**Counts the child views immediately under the present UiObject.
+</span>@return {Number} the count of child views.
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+getChildCount : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-dragTo'>/**Drags this object to a destination UiObject.
+</span> The number of steps specified in your input parameter can influence the
+ drag speed, and varying speeds may impact the results. Consider
+ evaluating different speeds when using this method in your tests.
+@param {Object {UiObject}} destObj the destination UiObject.
+@param {Number} steps usually 40 steps. You can increase or decrease the steps to change the speed.
+@return {Boolean} true if successful
+@throws UiObjectNotFoundException
+@since API Level 18
+*/
+dragTo : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-dragTo'>/**Drags this object to arbitrary coordinates.
+</span> The number of steps specified in your input parameter can influence the
+ drag speed, and varying speeds may impact the results. Consider
+ evaluating different speeds when using this method in your tests.
+@param {Number} destX the X-axis coordinate.
+@param {Number} destY the Y-axis coordinate.
+@param {Number} steps usually 40 steps. You can increase or decrease the steps to change the speed.
+@return {Boolean} true if successful
+@throws UiObjectNotFoundException
+@since API Level 18
+*/
+dragTo : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-swipeUp'>/**Performs the swipe up action on the UiObject. 
+</span> See also:
+ &lt;ul&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollToBeginning(int)}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollToEnd(int)}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollBackward()}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollForward()}&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} steps indicates the number of injected move steps into the system. Steps are
+ injected about 5ms apart. So a 100 steps may take about 1/2 second to complete.
+@return {Boolean} true of successful
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+swipeUp : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-swipeDown'>/**Performs the swipe down action on the UiObject. 
+</span> The swipe gesture can be performed over any surface. The targeted
+ UI element does not need to be scrollable.
+ See also:
+ &lt;ul&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollToBeginning(int)}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollToEnd(int)}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollBackward()}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollForward()}&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} steps indicates the number of injected move steps into the system. Steps are
+ injected about 5ms apart. So a 100 steps may take about 1/2 second to complete.
+@return {Boolean} true if successful
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+swipeDown : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-swipeLeft'>/**Performs the swipe left action on the UiObject. 
+</span> The swipe gesture can be performed over any surface. The targeted
+ UI element does not need to be scrollable.
+ See also:
+ &lt;ul&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollToBeginning(int)}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollToEnd(int)}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollBackward()}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollForward()}&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} steps indicates the number of injected move steps into the system. Steps are
+ injected about 5ms apart. So a 100 steps may take about 1/2 second to complete.
+@return {Boolean} true if successful
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+swipeLeft : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-swipeRight'>/**Performs the swipe right action on the UiObject. 
+</span> The swipe gesture can be performed over any surface. The targeted
+ UI element does not need to be scrollable.
+ See also:
+ &lt;ul&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollToBeginning(int)}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollToEnd(int)}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollBackward()}&lt;/li&gt;
+ &lt;li&gt;{@link com.android.uiautomator.core.UiScrollable#scrollForward()}&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} steps indicates the number of injected move steps into the system. Steps are
+ injected about 5ms apart. So a 100 steps may take about 1/2 second to complete.
+@return {Boolean} true if successful
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+swipeRight : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-click'>/**Performs a click at the center of the visible bounds of the UI element represented
+</span> by this UiObject.
+@return {Boolean} true id successful else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+click : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-clickAndWaitForNewWindow'>/**Waits for window transitions that would typically take longer than the
+</span> usual default timeouts.
+ See {@link #clickAndWaitForNewWindow}(long)
+@return {Boolean} true if the event was triggered, else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+clickAndWaitForNewWindow : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-clickAndWaitForNewWindow'>/**Performs a click at the center of the visible bounds of the UI element represented
+</span> by this UiObject and waits for window transitions.
+
+ This method differ from {@link com.android.uiautomator.core.UiObject#click()} only in that this method waits for a
+ a new window transition as a result of the click. Some examples of a window transition:
+ &lt;li&gt;launching a new activity&lt;/li&gt;
+ &lt;li&gt;bringing up a pop-up menu&lt;/li&gt;
+ &lt;li&gt;bringing up a dialog&lt;/li&gt;
+@param {Number} timeout timeout before giving up on waiting for a new window
+@return {Boolean} true if the event was triggered, else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+clickAndWaitForNewWindow : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-clickTopLeft'>/**Clicks the top and left corner of the UI element
+</span>@return {Boolean} true on success
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+clickTopLeft : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-longClickBottomRight'>/**Long clicks bottom and right corner of the UI element
+</span>@return {Boolean} true if operation was successful
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+longClickBottomRight : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-clickBottomRight'>/**Clicks the bottom and right corner of the UI element
+</span>@return {Boolean} true on success
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+clickBottomRight : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-longClick'>/**Long clicks the center of the visible bounds of the UI element
+</span>@return {Boolean} true if operation was successful
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+longClick : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-longClickTopLeft'>/**Long clicks on the top and left corner of the UI element
+</span>@return {Boolean} true if operation was successful
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+longClickTopLeft : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-getText'>/**Reads the &lt;code&gt;text&lt;/code&gt; property of the UI element
+</span>@return {String} text value of the current node represented by this UiObject
+@throws UiObjectNotFoundException if no match could be found
+@since API Level 16
+*/
+getText : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-getClassName'>/**Retrieves the &lt;code&gt;className&lt;/code&gt; property of the UI element.
+</span>@return {String} class name of the current node represented by this UiObject
+@throws UiObjectNotFoundException if no match was found
+@since API Level 18
+*/
+getClassName : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-getContentDescription'>/**Reads the &lt;code&gt;content_desc&lt;/code&gt; property of the UI element
+</span>@return {String} value of node attribute &quot;content_desc&quot;
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+getContentDescription : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-setText'>/**Sets the text in an editable field, after clearing the field's content.
+</span>
+ The {@link com.android.uiautomator.core.UiSelector} selector of this object must reference a UI element that is editable.
+
+ When you call this method, the method first simulates a {@link #click}() on
+ editable field to set focus. The method then clears the field's contents
+ and injects your specified text into the field.
+
+ If you want to capture the original contents of the field, call {@link #getText}() first.
+ You can then modify the text and use this method to update the field.
+@param {String} text string to set
+@return {Boolean} true if operation is successful
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+setText : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-clearTextField'>/**Clears the existing text contents in an editable field.
+</span>
+ The {@link com.android.uiautomator.core.UiSelector} of this object must reference a UI element that is editable.
+
+ When you call this method, the method first sets focus at the start edge of the field.
+ The method then simulates a long-press to select the existing text, and deletes the
+ selected text.
+
+ If a &quot;Select-All&quot; option is displayed, the method will automatically attempt to use it
+ to ensure full text selection.
+
+ Note that it is possible that not all the text in the field is selected; for example,
+ if the text contains separators such as spaces, slashes, at symbol etc.
+ Also, not all editable fields support the long-press functionality.
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+clearTextField : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-isChecked'>/**Check if the UI element's &lt;code&gt;checked&lt;/code&gt; property is currently true
+</span>@return {Boolean} true if it is else false
+@since API Level 16
+*/
+isChecked : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-isSelected'>/**Checks if the UI element's &lt;code&gt;selected&lt;/code&gt; property is currently true.
+</span>@return {Boolean} true if it is else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+isSelected : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-isCheckable'>/**Checks if the UI element's &lt;code&gt;checkable&lt;/code&gt; property is currently true.
+</span>@return {Boolean} true if it is else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+isCheckable : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-isEnabled'>/**Checks if the UI element's &lt;code&gt;enabled&lt;/code&gt; property is currently true.
+</span>@return {Boolean} true if it is else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+isEnabled : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-isClickable'>/**Checks if the UI element's &lt;code&gt;clickable&lt;/code&gt; property is currently true.
+</span>@return {Boolean} true if it is else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+isClickable : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-isFocused'>/**Check if the UI element's &lt;code&gt;focused&lt;/code&gt; property is currently true
+</span>@return {Boolean} true if it is else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+isFocused : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-isFocusable'>/**Check if the UI element's &lt;code&gt;focusable&lt;/code&gt; property is currently true.
+</span>@return {Boolean} true if it is else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+isFocusable : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-isScrollable'>/**Check if the view's &lt;code&gt;scrollable&lt;/code&gt; property is currently true
+</span>@return {Boolean} true if it is else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+isScrollable : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-isLongClickable'>/**Check if the view's &lt;code&gt;long-clickable&lt;/code&gt; property is currently true
+</span>@return {Boolean} true if it is else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+isLongClickable : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-getPackageName'>/**Reads the view's &lt;code&gt;package&lt;/code&gt; property
+</span>@return {String} true if it is else false
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+getPackageName : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-getVisibleBounds'>/**Returns the visible bounds of the view.
+</span>
+ If a portion of the view is visible, only the bounds of the visible portion are
+ reported.
+@return {Object {android.graphics.Rect}} Rect
+@throws UiObjectNotFoundException
+@see #getBounds()
+@since API Level 17
+*/
+getVisibleBounds : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-getBounds'>/**Returns the view's &lt;code&gt;bounds&lt;/code&gt; property. See {@link #getVisibleBounds}()
+</span>@return {Object {android.graphics.Rect}} Rect
+@throws UiObjectNotFoundException
+@since API Level 16
+*/
+getBounds : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-waitForExists'>/**Waits a specified length of time for a view to become visible.
+</span>
+ This method waits until the view becomes visible on the display, or
+ until the timeout has elapsed. You can use this method in situations where
+ the content that you want to select is not immediately displayed.
+@param {Number} timeout the amount of time to wait (in milliseconds)
+@return {Boolean} true if the view is displayed, else false if timeout elapsed while waiting
+@since API Level 16
+*/
+waitForExists : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-waitUntilGone'>/**Waits a specified length of time for a view to become undetectable.
+</span>
+ This method waits until a view is no longer matchable, or until the
+ timeout has elapsed.
+
+ A view becomes undetectable when the {@link com.android.uiautomator.core.UiSelector} of the object is
+ unable to find a match because the element has either changed its state or is no
+ longer displayed.
+
+ You can use this method when attempting to wait for some long operation
+ to compete, such as downloading a large file or connecting to a remote server.
+@param {Number} timeout time to wait (in milliseconds)
+@return {Boolean} true if the element is gone before timeout elapsed, else false if timeout elapsed
+ but a matching element is still found.
+@since API Level 16
+*/
+waitUntilGone : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-exists'>/**Check if view exists.
+</span>
+ This methods performs a {@link #waitForExists}(long) with zero timeout. This
+ basically returns immediately whether the view represented by this UiObject
+ exists or not. If you need to wait longer for this view, then see
+ {@link #waitForExists}(long).
+@return {Boolean} true if the view represented by this UiObject does exist
+@since API Level 16
+*/
+exists : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-pinchOut'>/**Performs a two-pointer gesture, where each pointer moves diagonally
+</span> opposite across the other, from the center out towards the edges of the
+ this UiObject.
+@param {Number} percent percentage of the object's diagonal length for the pinch gesture
+@param {Number} steps the number of steps for the gesture. Steps are injected 
+ about 5 milliseconds apart, so 100 steps may take around 0.5 seconds to complete.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if all touch events for this gesture are injected successfully,
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@throws UiObjectNotFoundException
+@since API Level 18
+*/
+pinchOut : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-pinchIn'>/**Performs a two-pointer gesture, where each pointer moves diagonally
+</span> toward the other, from the edges to the center of this UiObject .
+@param {Number} percent percentage of the object's diagonal length for the pinch gesture
+@param {Number} steps the number of steps for the gesture. Steps are injected 
+ about 5 milliseconds apart, so 100 steps may take around 0.5 seconds to complete.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if all touch events for this gesture are injected successfully,
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@throws UiObjectNotFoundException
+@since API Level 18
+*/
+pinchIn : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-performTwoPointerGesture'>/**Generates a two-pointer gesture with arbitrary starting and ending points.
+</span>@param {Object {Point}} startPoint1 start point of pointer 1
+@param {Object {Point}} startPoint2 start point of pointer 2
+@param {Object {Point}} endPoint1 end point of pointer 1
+@param {Object {Point}} endPoint2 end point of pointer 2
+@param {Number} steps the number of steps for the gesture. Steps are injected 
+ about 5 milliseconds apart, so 100 steps may take around 0.5 seconds to complete.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if all touch events for this gesture are injected successfully,
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@since API Level 18
+*/
+performTwoPointerGesture : function(  ) {},
+
+<span id='com-android-uiautomator-core-UiObject-method-performMultiPointerGesture'>/**Performs a multi-touch gesture. You must specify touch coordinates for
+</span> at least 2 pointers. Each pointer must have all of its touch steps
+ defined in an array of {@link PointerCoords}. You can use this method to
+ specify complex gestures, like circles and irregular shapes, where each
+ pointer may take a different path.
+
+ To create a single point on a pointer's touch path:
+ &lt;code&gt;
+       PointerCoords p = new PointerCoords();
+       p.x = stepX;
+       p.y = stepY;
+       p.pressure = 1;
+       p.size = 1;
+ &lt;/code&gt;
+@param {Object {android.view.MotionEvent.PointerCoords[][]}} touches represents the pointers' paths. Each {@link PointerCoords}
+ array represents a different pointer. Each {@link PointerCoords} in an
+ array element represents a touch point on a pointer's path.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if all touch events for this gesture are injected successfully,
+         &lt;code&gt;false&lt;/code&gt; otherwise
+@since API Level 18
+*/
+performMultiPointerGesture : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

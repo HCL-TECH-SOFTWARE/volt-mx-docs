@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='org-w3c-dom-Attr'>/**@class org.w3c.dom.Attr
+</span> implements org.w3c.dom.Node
+
+ The &lt;code&gt;Attr&lt;/code&gt; interface represents an attribute in an
+ &lt;code&gt;Element&lt;/code&gt; object. Typically the allowable values for the
+ attribute are defined in a schema associated with the document.
+ &lt;p&gt;&lt;code&gt;Attr&lt;/code&gt; objects inherit the &lt;code&gt;Node&lt;/code&gt; interface, but
+ since they are not actually child nodes of the element they describe, the
+ DOM does not consider them part of the document tree. Thus, the
+ &lt;code&gt;Node&lt;/code&gt; attributes &lt;code&gt;parentNode&lt;/code&gt;,
+ &lt;code&gt;previousSibling&lt;/code&gt;, and &lt;code&gt;nextSibling&lt;/code&gt; have a
+ &lt;code&gt;null&lt;/code&gt; value for &lt;code&gt;Attr&lt;/code&gt; objects. The DOM takes the
+ view that attributes are properties of elements rather than having a
+ separate identity from the elements they are associated with; this should
+ make it more efficient to implement such features as default attributes
+ associated with all elements of a given type. Furthermore,
+ &lt;code&gt;Attr&lt;/code&gt; nodes may not be immediate children of a
+ &lt;code&gt;DocumentFragment&lt;/code&gt;. However, they can be associated with
+ &lt;code&gt;Element&lt;/code&gt; nodes contained within a
+ &lt;code&gt;DocumentFragment&lt;/code&gt;. In short, users and implementors of the
+ DOM need to be aware that &lt;code&gt;Attr&lt;/code&gt; nodes have some things in
+ common with other objects inheriting the &lt;code&gt;Node&lt;/code&gt; interface, but
+ they also are quite distinct.
+ &lt;p&gt;The attribute's effective value is determined as follows: if this
+ attribute has been explicitly assigned any value, that value is the
+ attribute's effective value; otherwise, if there is a declaration for
+ this attribute, and that declaration includes a default value, then that
+ default value is the attribute's effective value; otherwise, the
+ attribute does not exist on this element in the structure model until it
+ has been explicitly added. Note that the &lt;code&gt;Node.nodeValue&lt;/code&gt;
+ attribute on the &lt;code&gt;Attr&lt;/code&gt; instance can also be used to retrieve
+ the string version of the attribute's value(s).
+ &lt;p&gt; If the attribute was not explicitly given a value in the instance
+ document but has a default value provided by the schema associated with
+ the document, an attribute node will be created with
+ &lt;code&gt;specified&lt;/code&gt; set to &lt;code&gt;false&lt;/code&gt;. Removing attribute
+ nodes for which a default value is defined in the schema generates a new
+ attribute node with the default value and &lt;code&gt;specified&lt;/code&gt; set to
+ &lt;code&gt;false&lt;/code&gt;. If validation occurred while invoking
+ &lt;code&gt;Document.normalizeDocument()&lt;/code&gt;, attribute nodes with
+ &lt;code&gt;specified&lt;/code&gt; equals to &lt;code&gt;false&lt;/code&gt; are recomputed
+ according to the default attribute values provided by the schema. If no
+ default value is associate with this attribute in the schema, the
+ attribute node is discarded.
+ &lt;p&gt;In XML, where the value of an attribute can contain entity references,
+ the child nodes of the &lt;code&gt;Attr&lt;/code&gt; node may be either
+ &lt;code&gt;Text&lt;/code&gt; or &lt;code&gt;EntityReference&lt;/code&gt; nodes (when these are
+ in use; see the description of &lt;code&gt;EntityReference&lt;/code&gt; for
+ discussion).
+ &lt;p&gt;The DOM Core represents all attribute values as simple strings, even if
+ the DTD or schema associated with the document declares them of some
+ specific type such as tokenized.
+ &lt;p&gt;The way attribute value normalization is performed by the DOM
+ implementation depends on how much the implementation knows about the
+ schema in use. Typically, the &lt;code&gt;value&lt;/code&gt; and
+ &lt;code&gt;nodeValue&lt;/code&gt; attributes of an &lt;code&gt;Attr&lt;/code&gt; node initially
+ returns the normalized value given by the parser. It is also the case
+ after &lt;code&gt;Document.normalizeDocument()&lt;/code&gt; is called (assuming the
+ right options have been set). But this may not be the case after
+ mutation, independently of whether the mutation is performed by setting
+ the string value directly or by changing the &lt;code&gt;Attr&lt;/code&gt; child
+ nodes. In particular, this is true when &lt;a href='http://www.w3.org/TR/2004/REC-xml-20040204#dt-charref'&gt;character
+ references&lt;/a&gt; are involved, given that they are not represented in the DOM and they
+ impact attribute value normalization. On the other hand, if the
+ implementation knows about the schema in use when the attribute value is
+ changed, and it is of a different type than CDATA, it may normalize it
+ again at that time. This is especially true of specialized DOM
+ implementations, such as SVG DOM implementations, which store attribute
+ values in an internal form different from a string.
+ &lt;p&gt;The following table gives some examples of the relations between the
+ attribute value in the original document (parsed attribute), the value as
+ exposed in the DOM, and the serialization of the value:
+ &lt;table border='1' cellpadding='3'&gt;
+ &lt;tr&gt;
+ &lt;th&gt;Examples&lt;/th&gt;
+ &lt;th&gt;Parsed
+ attribute value&lt;/th&gt;
+ &lt;th&gt;Initial &lt;code&gt;Attr.value&lt;/code&gt;&lt;/th&gt;
+ &lt;th&gt;Serialized attribute value&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ Character reference&lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;x&amp;amp;#178;=5&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;x²=5&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;x&amp;amp;#178;=5&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;Built-in
+ character entity&lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;y&amp;amp;lt;6&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;y&amp;lt;6&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;y&amp;amp;lt;6&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;Literal newline between&lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;
+ &quot;x=5&amp;amp;#10;y=6&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;x=5 y=6&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;x=5&amp;amp;#10;y=6&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;Normalized newline between&lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;x=5
+ y=6&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;x=5 y=6&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;&quot;x=5 y=6&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;Entity &lt;code&gt;e&lt;/code&gt; with literal newline&lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;
+ &lt;pre&gt;
+ &amp;lt;!ENTITY e '...&amp;amp;#10;...'&amp;gt; [...]&amp;gt; &quot;x=5&amp;amp;e;y=6&quot;&lt;/pre&gt;
+ &lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;&lt;em&gt;Dependent on Implementation and Load Options&lt;/em&gt;&lt;/td&gt;
+ &lt;td valign='top' rowspan='1' colspan='1'&gt;&lt;em&gt;Dependent on Implementation and Load/Save Options&lt;/em&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;p&gt;See also the &lt;a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'&gt;Document Object Model (DOM) Level 3 Core Specification&lt;/a&gt;.
+*/
+var Attr = {
+
+<span id='org-w3c-dom-Attr-method-getName'>/**Returns the name of this attribute. If &lt;code&gt;Node.localName&lt;/code&gt; is
+</span> different from &lt;code&gt;null&lt;/code&gt;, this attribute is a qualified name.
+*/
+getName : function(  ) {},
+
+<span id='org-w3c-dom-Attr-method-getSpecified'>/**&lt;code&gt;True&lt;/code&gt; if this attribute was explicitly given a value in
+</span> the instance document, &lt;code&gt;false&lt;/code&gt; otherwise. If the
+ application changed the value of this attribute node (even if it ends
+ up having the same value as the default value) then it is set to
+ &lt;code&gt;true&lt;/code&gt;. The implementation may handle attributes with
+ default values from other schemas similarly but applications should
+ use &lt;code&gt;Document.normalizeDocument()&lt;/code&gt; to guarantee this
+ information is up-to-date.
+*/
+getSpecified : function(  ) {},
+
+<span id='org-w3c-dom-Attr-method-getValue'>/**On retrieval, the value of the attribute is returned as a string.
+</span> Character and general entity references are replaced with their
+ values. See also the method &lt;code&gt;getAttribute&lt;/code&gt; on the
+ &lt;code&gt;Element&lt;/code&gt; interface.
+ &lt;br&gt;On setting, this creates a &lt;code&gt;Text&lt;/code&gt; node with the unparsed
+ contents of the string, i.e. any characters that an XML processor
+ would recognize as markup are instead treated as literal text. See
+ also the method &lt;code&gt;Element.setAttribute()&lt;/code&gt;.
+ &lt;br&gt; Some specialized implementations, such as some [&lt;a href='http://www.w3.org/TR/2003/REC-SVG11-20030114/'&gt;SVG 1.1&lt;/a&gt;]
+ implementations, may do normalization automatically, even after
+ mutation; in such case, the value on retrieval may differ from the
+ value on setting.
+*/
+getValue : function(  ) {},
+
+<span id='org-w3c-dom-Attr-method-setValue'>/**On retrieval, the value of the attribute is returned as a string.
+</span> Character and general entity references are replaced with their
+ values. See also the method &lt;code&gt;getAttribute&lt;/code&gt; on the
+ &lt;code&gt;Element&lt;/code&gt; interface.
+ &lt;br&gt;On setting, this creates a &lt;code&gt;Text&lt;/code&gt; node with the unparsed
+ contents of the string, i.e. any characters that an XML processor
+ would recognize as markup are instead treated as literal text. See
+ also the method &lt;code&gt;Element.setAttribute()&lt;/code&gt;.
+ &lt;br&gt; Some specialized implementations, such as some [&lt;a href='http://www.w3.org/TR/2003/REC-SVG11-20030114/'&gt;SVG 1.1&lt;/a&gt;]
+ implementations, may do normalization automatically, even after
+ mutation; in such case, the value on retrieval may differ from the
+ value on setting.
+@exception DOMException
+   NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.
+*/
+setValue : function(  ) {},
+
+<span id='org-w3c-dom-Attr-method-getOwnerElement'>/**The &lt;code&gt;Element&lt;/code&gt; node this attribute is attached to or
+</span> &lt;code&gt;null&lt;/code&gt; if this attribute is not in use.
+@since DOM Level 2
+*/
+getOwnerElement : function(  ) {},
+
+<span id='org-w3c-dom-Attr-method-getSchemaTypeInfo'>/**The type information associated with this attribute. While the type
+</span> information contained in this attribute is guarantee to be correct
+ after loading the document or invoking
+ &lt;code&gt;Document.normalizeDocument()&lt;/code&gt;, &lt;code&gt;schemaTypeInfo&lt;/code&gt;
+  may not be reliable if the node was moved.
+@since DOM Level 3
+*/
+getSchemaTypeInfo : function(  ) {},
+
+<span id='org-w3c-dom-Attr-method-isId'>/**Returns whether this attribute is known to be of type ID (i.e. to
+</span> contain an identifier for its owner element) or not. When it is and
+ its value is unique, the &lt;code&gt;ownerElement&lt;/code&gt; of this attribute
+ can be retrieved using the method &lt;code&gt;Document.getElementById&lt;/code&gt;
+ . The implementation could use several ways to determine if an
+ attribute node is known to contain an identifier:
+ &lt;ul&gt;
+ &lt;li&gt; If validation
+ occurred using an XML Schema [&lt;a href='http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/'&gt;XML Schema Part 1&lt;/a&gt;]
+  while loading the document or while invoking
+ &lt;code&gt;Document.normalizeDocument()&lt;/code&gt;, the post-schema-validation
+ infoset contributions (PSVI contributions) values are used to
+ determine if this attribute is a schema-determined ID attribute using
+ the &lt;a href='http://www.w3.org/TR/2003/REC-xptr-framework-20030325/#term-sdi'&gt;
+ schema-determined ID&lt;/a&gt; definition in [&lt;a href='http://www.w3.org/TR/2003/REC-xptr-framework-20030325/'&gt;XPointer&lt;/a&gt;]
+ .
+ &lt;/li&gt;
+ &lt;li&gt; If validation occurred using a DTD while loading the document or
+ while invoking &lt;code&gt;Document.normalizeDocument()&lt;/code&gt;, the infoset &lt;b&gt;[type definition]&lt;/b&gt; value is used to determine if this attribute is a DTD-determined ID
+ attribute using the &lt;a href='http://www.w3.org/TR/2003/REC-xptr-framework-20030325/#term-ddi'&gt;
+ DTD-determined ID&lt;/a&gt; definition in [&lt;a href='http://www.w3.org/TR/2003/REC-xptr-framework-20030325/'&gt;XPointer&lt;/a&gt;]
+ .
+ &lt;/li&gt;
+ &lt;li&gt; from the use of the methods &lt;code&gt;Element.setIdAttribute()&lt;/code&gt;,
+ &lt;code&gt;Element.setIdAttributeNS()&lt;/code&gt;, or
+ &lt;code&gt;Element.setIdAttributeNode()&lt;/code&gt;, i.e. it is an
+ user-determined ID attribute;
+ &lt;p &gt;&lt;b&gt;Note:&lt;/b&gt;  XPointer framework (see section 3.2 in [&lt;a href='http://www.w3.org/TR/2003/REC-xptr-framework-20030325/'&gt;XPointer&lt;/a&gt;]
+ ) consider the DOM user-determined ID attribute as being part of the
+ XPointer externally-determined ID definition.
+ &lt;/li&gt;
+ &lt;li&gt; using mechanisms that
+ are outside the scope of this specification, it is then an
+ externally-determined ID attribute. This includes using schema
+ languages different from XML schema and DTD.
+ &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;br&gt; If validation occurred while invoking
+ &lt;code&gt;Document.normalizeDocument()&lt;/code&gt;, all user-determined ID
+ attributes are reset and all attribute nodes ID information are then
+ reevaluated in accordance to the schema used. As a consequence, if
+ the &lt;code&gt;Attr.schemaTypeInfo&lt;/code&gt; attribute contains an ID type,
+ &lt;code&gt;isId&lt;/code&gt; will always return true.
+@since DOM Level 3
+*/
+isId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

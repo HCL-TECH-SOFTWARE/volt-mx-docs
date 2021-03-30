@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-nio-channels-MembershipKey'>/**@class java.nio.channels.MembershipKey
+</span>@extends java.lang.Object
+
+ A token representing the membership of an Internet Protocol (IP) multicast
+ group.
+
+ &lt;p&gt; A membership key may represent a membership to receive all datagrams sent
+ to the group, or it may be &lt;em&gt;source-specific&lt;/em&gt;, meaning that it
+ represents a membership that receives only datagrams from a specific source
+ address. Whether or not a membership key is source-specific may be determined
+ by invoking its {@link #sourceAddress() sourceAddress} method.
+
+ &lt;p&gt; A membership key is valid upon creation and remains valid until the
+ membership is dropped by invoking the {@link #drop() drop} method, or
+ the channel is closed. The validity of the membership key may be tested
+ by invoking its {@link #isValid() isValid} method.
+
+ &lt;p&gt; Where a membership key is not source-specific and the underlying operation
+ system supports source filtering, then the {@link #block block} and {@link #unblock unblock} methods can be used to block or unblock multicast datagrams
+ from particular source addresses.
+
+ @see MulticastChannel
+
+ @since 1.7
+*/
+var MembershipKey = {
+
+<span id='java-nio-channels-MembershipKey-method-isValid'>/**Tells whether or not this membership is valid.
+</span>
+ &lt;p&gt; A multicast group membership is valid upon creation and remains
+ valid until the membership is dropped by invoking the {@link #drop() drop}
+ method, or the channel is closed.
+@return {Boolean} {@code true} if this membership key is valid, {@code false}
+          otherwise
+*/
+isValid : function(  ) {},
+
+<span id='java-nio-channels-MembershipKey-method-drop'>/**Drop membership.
+</span>
+ &lt;p&gt; If the membership key represents a membership to receive all datagrams
+ then the membership is dropped and the channel will no longer receive any
+ datagrams sent to the group. If the membership key is source-specific
+ then the channel will no longer receive datagrams sent to the group from
+ that source address.
+
+ &lt;p&gt; After membership is dropped it may still be possible to receive
+ datagrams sent to the group. This can arise when datagrams are waiting to
+ be received in the socket's receive buffer. After membership is dropped
+ then the channel may {@link java.nio.channels.MulticastChannel#join join} the group again
+ in which case a new membership key is returned.
+
+ &lt;p&gt; Upon return, this membership object will be {@link #isValid() invalid}.
+ If the multicast group membership is already invalid then invoking this
+ method has no effect. Once a multicast group membership is invalid,
+ it remains invalid forever.
+*/
+drop : function(  ) {},
+
+<span id='java-nio-channels-MembershipKey-method-block'>/**Block multicast datagrams from the given source address.
+</span>
+ &lt;p&gt; If this membership key is not source-specific, and the underlying
+ operating system supports source filtering, then this method blocks
+ multicast datagrams from the given source address. If the given source
+ address is already blocked then this method has no effect.
+ After a source address is blocked it may still be possible to receive
+ datagrams from that source. This can arise when datagrams are waiting to
+ be received in the socket's receive buffer.
+@param {Object {InetAddress}} source
+          The source address to block
+@return {Object {java.nio.channels.MembershipKey}} This membership key
+@throws IllegalArgumentException
+          If the {@code source} parameter is not a unicast address or
+          is not the same address type as the multicast group
+@throws IllegalStateException
+          If this membership key is source-specific or is no longer valid
+@throws UnsupportedOperationException
+          If the underlying operating system does not support source
+          filtering
+@throws IOException
+          If an I/O error occurs
+*/
+block : function(  ) {},
+
+<span id='java-nio-channels-MembershipKey-method-unblock'>/**Unblock multicast datagrams from the given source address that was
+</span> previously blocked using the {@link #block(InetAddress) block} method.
+@param {Object {InetAddress}} source
+          The source address to unblock
+@return {Object {java.nio.channels.MembershipKey}} This membership key
+@throws IllegalStateException
+          If the given source address is not currently blocked or the
+          membership key is no longer valid
+*/
+unblock : function(  ) {},
+
+<span id='java-nio-channels-MembershipKey-method-channel'>/**Returns the channel for which this membership key was created. This
+</span> method will continue to return the channel even after the membership
+ becomes {@link #isValid invalid}.
+@return {Object {java.nio.channels.MulticastChannel}} the channel
+*/
+channel : function(  ) {},
+
+<span id='java-nio-channels-MembershipKey-method-group'>/**Returns the multicast group for which this membership key was created.
+</span> This method will continue to return the group even after the membership
+ becomes {@link #isValid invalid}.
+@return {Object {java.net.InetAddress}} the multicast group
+*/
+group : function(  ) {},
+
+<span id='java-nio-channels-MembershipKey-method-networkInterface'>/**Returns the network interface for which this membership key was created.
+</span> This method will continue to return the network interface even after the
+ membership becomes {@link #isValid invalid}.
+@return {Object {java.net.NetworkInterface}} the network interface
+*/
+networkInterface : function(  ) {},
+
+<span id='java-nio-channels-MembershipKey-method-sourceAddress'>/**Returns the source address if this membership key is source-specific,
+</span> or {@code null} if this membership is not source-specific.
+@return {Object {java.net.InetAddress}} The source address if this membership key is source-specific,
+          otherwise {@code null}
+*/
+sourceAddress : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

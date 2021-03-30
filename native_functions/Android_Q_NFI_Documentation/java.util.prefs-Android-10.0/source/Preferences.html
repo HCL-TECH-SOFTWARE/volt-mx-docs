@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='java-util-prefs-Preferences'>/**@class java.util.prefs.Preferences
+</span>@extends java.lang.Object
+
+ A node in a hierarchical collection of preference data.  This class
+ allows applications to store and retrieve user and system
+ preference and configuration data.  This data is stored
+ persistently in an implementation-dependent backing store.  Typical
+ implementations include flat files, OS-specific registries,
+ directory servers and SQL databases.  The user of this class needn't
+ be concerned with details of the backing store.
+
+ &lt;p&gt;There are two separate trees of preference nodes, one for user
+ preferences and one for system preferences.  Each user has a separate user
+ preference tree, and all users in a given system share the same system
+ preference tree.  The precise description of &quot;user&quot; and &quot;system&quot; will vary
+ from implementation to implementation.  Typical information stored in the
+ user preference tree might include font choice, color choice, or preferred
+ window location and size for a particular application.  Typical information
+ stored in the system preference tree might include installation
+ configuration data for an application.
+
+ &lt;p&gt;Nodes in a preference tree are named in a similar fashion to
+ directories in a hierarchical file system.   Every node in a preference
+ tree has a &lt;i&gt;node name&lt;/i&gt; (which is not necessarily unique),
+ a unique &lt;i&gt;absolute path name&lt;/i&gt;, and a path name &lt;i&gt;relative&lt;/i&gt; to each
+ ancestor including itself.
+
+ &lt;p&gt;The root node has a node name of the empty string (&quot;&quot;).  Every other
+ node has an arbitrary node name, specified at the time it is created.  The
+ only restrictions on this name are that it cannot be the empty string, and
+ it cannot contain the slash character ('/').
+
+ &lt;p&gt;The root node has an absolute path name of &lt;tt&gt;&quot;/&quot;&lt;/tt&gt;.  Children of
+ the root node have absolute path names of &lt;tt&gt;&quot;/&quot; + &lt;/tt&gt;&lt;i&gt;&amp;lt;node
+ name&amp;gt;&lt;/i&gt;.  All other nodes have absolute path names of &lt;i&gt;&amp;lt;parent's
+ absolute path name&amp;gt;&lt;/i&gt;&lt;tt&gt; + &quot;/&quot; + &lt;/tt&gt;&lt;i&gt;&amp;lt;node name&amp;gt;&lt;/i&gt;.
+ Note that all absolute path names begin with the slash character.
+
+ &lt;p&gt;A node &lt;i&gt;n&lt;/i&gt;'s path name relative to its ancestor &lt;i&gt;a&lt;/i&gt;
+ is simply the string that must be appended to &lt;i&gt;a&lt;/i&gt;'s absolute path name
+ in order to form &lt;i&gt;n&lt;/i&gt;'s absolute path name, with the initial slash
+ character (if present) removed.  Note that:
+ &lt;ul&gt;
+ &lt;li&gt;No relative path names begin with the slash character.
+ &lt;li&gt;Every node's path name relative to itself is the empty string.
+ &lt;li&gt;Every node's path name relative to its parent is its node name (except
+ for the root node, which does not have a parent).
+ &lt;li&gt;Every node's path name relative to the root is its absolute path name
+ with the initial slash character removed.
+ &lt;/ul&gt;
+
+ &lt;p&gt;Note finally that:
+ &lt;ul&gt;
+ &lt;li&gt;No path name contains multiple consecutive slash characters.
+ &lt;li&gt;No path name with the exception of the root's absolute path name
+ ends in the slash character.
+ &lt;li&gt;Any string that conforms to these two rules is a valid path name.
+ &lt;/ul&gt;
+
+ &lt;p&gt;All of the methods that modify preferences data are permitted to operate
+ asynchronously; they may return immediately, and changes will eventually
+ propagate to the persistent backing store with an implementation-dependent
+ delay.  The &lt;tt&gt;flush&lt;/tt&gt; method may be used to synchronously force
+ updates to the backing store.  Normal termination of the Java Virtual
+ Machine will &lt;i&gt;not&lt;/i&gt; result in the loss of pending updates -- an explicit
+ &lt;tt&gt;flush&lt;/tt&gt; invocation is &lt;i&gt;not&lt;/i&gt; required upon termination to ensure
+ that pending updates are made persistent.
+
+ &lt;p&gt;All of the methods that read preferences from a &lt;tt&gt;Preferences&lt;/tt&gt;
+ object require the invoker to provide a default value.  The default value is
+ returned if no value has been previously set &lt;i&gt;or if the backing store is
+ unavailable&lt;/i&gt;.  The intent is to allow applications to operate, albeit
+ with slightly degraded functionality, even if the backing store becomes
+ unavailable.  Several methods, like &lt;tt&gt;flush&lt;/tt&gt;, have semantics that
+ prevent them from operating if the backing store is unavailable.  Ordinary
+ applications should have no need to invoke any of these methods, which can
+ be identified by the fact that they are declared to throw {@link java.util.prefs.BackingStoreException}.
+
+ &lt;p&gt;The methods in this class may be invoked concurrently by multiple threads
+ in a single JVM without the need for external synchronization, and the
+ results will be equivalent to some serial execution.  If this class is used
+ concurrently &lt;i&gt;by multiple JVMs&lt;/i&gt; that store their preference data in
+ the same backing store, the data store will not be corrupted, but no
+ other guarantees are made concerning the consistency of the preference
+ data.
+
+ &lt;p&gt;This class contains an export/import facility, allowing preferences
+ to be &quot;exported&quot; to an XML document, and XML documents representing
+ preferences to be &quot;imported&quot; back into the system.  This facility
+ may be used to back up all or part of a preference tree, and
+ subsequently restore from the backup.
+
+ &lt;p&gt;The XML document has the following DOCTYPE declaration:
+ &lt;pre&gt;{@code
+ &lt;!DOCTYPE preferences SYSTEM &quot;http://java.sun.com/dtd/preferences.dtd&quot;&gt;
+ }&lt;/pre&gt;
+ Note that the system URI (http://java.sun.com/dtd/preferences.dtd) is
+ &lt;i&gt;not&lt;/i&gt; accessed when exporting or importing preferences; it merely
+ serves as a string to uniquely identify the DTD, which is:
+ &lt;pre&gt;{@code
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+    &lt;!-- DTD for a Preferences tree. --&gt;
+
+    &lt;!-- The preferences element is at the root of an XML document
+         representing a Preferences tree. --&gt;
+    &lt;!ELEMENT preferences (root)&gt;
+
+    &lt;!-- The preferences element contains an optional version attribute,
+          which specifies version of DTD. --&gt;
+    &lt;!ATTLIST preferences EXTERNAL_XML_VERSION CDATA &quot;0.0&quot; &gt;
+
+    &lt;!-- The root element has a map representing the root's preferences
+         (if any), and one node for each child of the root (if any). --&gt;
+    &lt;!ELEMENT root (map, node*) &gt;
+
+    &lt;!-- Additionally, the root contains a type attribute, which
+         specifies whether it's the system or user root. --&gt;
+    &lt;!ATTLIST root
+              type (system|user) #REQUIRED &gt;
+
+    &lt;!-- Each node has a map representing its preferences (if any),
+         and one node for each child (if any). --&gt;
+    &lt;!ELEMENT node (map, node*) &gt;
+
+    &lt;!-- Additionally, each node has a name attribute --&gt;
+    &lt;!ATTLIST node
+              name CDATA #REQUIRED &gt;
+
+    &lt;!-- A map represents the preferences stored at a node (if any). --&gt;
+    &lt;!ELEMENT map (entry*) &gt;
+
+    &lt;!-- An entry represents a single preference, which is simply
+          a key-value pair. --&gt;
+    &lt;!ELEMENT entry EMPTY &gt;
+    &lt;!ATTLIST entry
+              key   CDATA #REQUIRED
+              value CDATA #REQUIRED &gt;
+ }&lt;/pre&gt;
+
+ Every &lt;tt&gt;Preferences&lt;/tt&gt; implementation must have an associated {@link java.util.prefs.PreferencesFactory} implementation.  Every Java(TM) SE implementation must provide
+ some means of specifying which &lt;tt&gt;PreferencesFactory&lt;/tt&gt; implementation
+ is used to generate the root preferences nodes.  This allows the
+ administrator to replace the default preferences implementation with an
+ alternative implementation.
+
+ &lt;p&gt;Implementation note: In Sun's JRE, the &lt;tt&gt;PreferencesFactory&lt;/tt&gt;
+ implementation is located as follows:
+
+ &lt;ol&gt;
+
+ &lt;li&gt;&lt;p&gt;If the system property
+ &lt;tt&gt;java.util.prefs.PreferencesFactory&lt;/tt&gt; is defined, then it is
+ taken to be the fully-qualified name of a class implementing the
+ &lt;tt&gt;PreferencesFactory&lt;/tt&gt; interface.  The class is loaded and
+ instantiated; if this process fails then an unspecified error is
+ thrown.&lt;/p&gt;&lt;/li&gt;
+
+ &lt;li&gt;&lt;p&gt; If a &lt;tt&gt;PreferencesFactory&lt;/tt&gt; implementation class file
+ has been installed in a jar file that is visible to the
+ {@link java.lang.ClassLoader#getSystemClassLoader system class loader},
+ and that jar file contains a provider-configuration file named
+ &lt;tt&gt;java.util.prefs.PreferencesFactory&lt;/tt&gt; in the resource
+ directory &lt;tt&gt;META-INF/services&lt;/tt&gt;, then the first class name
+ specified in that file is taken.  If more than one such jar file is
+ provided, the first one found will be used.  The class is loaded
+ and instantiated; if this process fails then an unspecified error
+ is thrown.  &lt;/p&gt;&lt;/li&gt;
+
+ &lt;li&gt;&lt;p&gt;Finally, if neither the above-mentioned system property nor
+ an extension jar file is provided, then the system-wide default
+ &lt;tt&gt;PreferencesFactory&lt;/tt&gt; implementation for the underlying
+ platform is loaded and instantiated.&lt;/p&gt;&lt;/li&gt;
+
+ &lt;/ol&gt;
+
+ @author  Josh Bloch
+ @since   1.4
+*/
+var Preferences = {
+
+<span id='java-util-prefs-Preferences-property-MAX_KEY_LENGTH'>/** Maximum length of string allowed as a key (80 characters).
+</span>*/
+MAX_KEY_LENGTH : &quot;80&quot;,
+<span id='java-util-prefs-Preferences-property-MAX_VALUE_LENGTH'>/** Maximum length of string allowed as a value (8192 characters).
+</span>*/
+MAX_VALUE_LENGTH : &quot;8192&quot;,
+<span id='java-util-prefs-Preferences-property-MAX_NAME_LENGTH'>/** Maximum length of a node name (80 characters).
+</span>*/
+MAX_NAME_LENGTH : &quot;80&quot;,
+<span id='java-util-prefs-Preferences-method-setPreferencesFactory'>/**
+</span>@hide for testing only.
+*/
+setPreferencesFactory : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-userNodeForPackage'>/**&lt;strong&gt;WARNING:&lt;/strong&gt; On Android, the Preference nodes
+</span> corresponding to the &quot;system&quot; and &quot;user&quot; preferences are stored in sections
+ of the file system that are inaccessible to apps. Further, allowing apps to set
+ &quot;system wide&quot; preferences is contrary to android's security model.
+
+ Returns the preference node from the calling user's preference tree
+ that is associated (by convention) with the specified class's package.
+ The convention is as follows: the absolute path name of the node is the
+ fully qualified package name, preceded by a slash (&lt;tt&gt;'/'&lt;/tt&gt;), and
+ with each period (&lt;tt&gt;'.'&lt;/tt&gt;) replaced by a slash.  For example the
+ absolute path name of the node associated with the class
+ &lt;tt&gt;com.acme.widget.Foo&lt;/tt&gt; is &lt;tt&gt;/com/acme/widget&lt;/tt&gt;.
+
+ &lt;p&gt;This convention does not apply to the unnamed package, whose
+ associated preference node is &lt;tt&gt;&amp;lt;unnamed&amp;gt;&lt;/tt&gt;.  This node
+ is not intended for long term use, but for convenience in the early
+ development of programs that do not yet belong to a package, and
+ for &quot;throwaway&quot; programs.  &lt;i&gt;Valuable data should not be stored
+ at this node as it is shared by all programs that use it.&lt;/i&gt;
+
+ &lt;p&gt;A class &lt;tt&gt;Foo&lt;/tt&gt; wishing to access preferences pertaining to its
+ package can obtain a preference node as follows: &lt;pre&gt;
+    static Preferences prefs = Preferences.userNodeForPackage(Foo.class);
+ &lt;/pre&gt;
+ This idiom obviates the need for using a string to describe the
+ preferences node and decreases the likelihood of a run-time failure.
+ (If the class name is misspelled, it will typically result in a
+ compile-time error.)
+
+ &lt;p&gt;Invoking this method will result in the creation of the returned
+ node and its ancestors if they do not already exist.  If the returned
+ node did not exist prior to this call, this node and any ancestors that
+ were created by this call are not guaranteed to become permanent until
+ the &lt;tt&gt;flush&lt;/tt&gt; method is called on the returned node (or one of its
+ ancestors or descendants).
+@param {Object {java.lang.Class}} c the class for whose package a user preference node is desired.
+@return {Object {java.util.prefs.Preferences}} the user preference node associated with the package of which
+         &lt;tt&gt;c&lt;/tt&gt; is a member.
+@throws NullPointerException if &lt;tt&gt;c&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@throws SecurityException if a security manager is present and
+         it denies &lt;tt&gt;RuntimePermission(&quot;preferences&quot;)&lt;/tt&gt;.
+@see RuntimePermission
+*/
+userNodeForPackage : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-systemNodeForPackage'>/**&lt;strong&gt;WARNING:&lt;/strong&gt; On Android, the Preference nodes
+</span> corresponding to the &quot;system&quot; and &quot;user&quot; preferences are stored in sections
+ of the file system that are inaccessible to apps. Further, allowing apps to set
+ &quot;system wide&quot; preferences is contrary to android's security model.
+
+ Returns the preference node from the system preference tree that is
+ associated (by convention) with the specified class's package.  The
+ convention is as follows: the absolute path name of the node is the
+ fully qualified package name, preceded by a slash (&lt;tt&gt;'/'&lt;/tt&gt;), and
+ with each period (&lt;tt&gt;'.'&lt;/tt&gt;) replaced by a slash.  For example the
+ absolute path name of the node associated with the class
+ &lt;tt&gt;com.acme.widget.Foo&lt;/tt&gt; is &lt;tt&gt;/com/acme/widget&lt;/tt&gt;.
+
+ &lt;p&gt;This convention does not apply to the unnamed package, whose
+ associated preference node is &lt;tt&gt;&amp;lt;unnamed&amp;gt;&lt;/tt&gt;.  This node
+ is not intended for long term use, but for convenience in the early
+ development of programs that do not yet belong to a package, and
+ for &quot;throwaway&quot; programs.  &lt;i&gt;Valuable data should not be stored
+ at this node as it is shared by all programs that use it.&lt;/i&gt;
+
+ &lt;p&gt;A class &lt;tt&gt;Foo&lt;/tt&gt; wishing to access preferences pertaining to its
+ package can obtain a preference node as follows: &lt;pre&gt;
+  static Preferences prefs = Preferences.systemNodeForPackage(Foo.class);
+ &lt;/pre&gt;
+ This idiom obviates the need for using a string to describe the
+ preferences node and decreases the likelihood of a run-time failure.
+ (If the class name is misspelled, it will typically result in a
+ compile-time error.)
+
+ &lt;p&gt;Invoking this method will result in the creation of the returned
+ node and its ancestors if they do not already exist.  If the returned
+ node did not exist prior to this call, this node and any ancestors that
+ were created by this call are not guaranteed to become permanent until
+ the &lt;tt&gt;flush&lt;/tt&gt; method is called on the returned node (or one of its
+ ancestors or descendants).
+@param {Object {java.lang.Class}} c the class for whose package a system preference node is desired.
+@return {Object {java.util.prefs.Preferences}} the system preference node associated with the package of which
+         &lt;tt&gt;c&lt;/tt&gt; is a member.
+@throws NullPointerException if &lt;tt&gt;c&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@throws SecurityException if a security manager is present and
+         it denies &lt;tt&gt;RuntimePermission(&quot;preferences&quot;)&lt;/tt&gt;.
+@see RuntimePermission
+*/
+systemNodeForPackage : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-userRoot'>/**&lt;strong&gt;WARNING:&lt;/strong&gt; On Android, the Preference nodes
+</span> corresponding to the &quot;system&quot; and &quot;user&quot; preferences are stored in sections
+ of the file system that are inaccessible to apps. Further, allowing apps to set
+ &quot;system wide&quot; preferences is contrary to android's security model.
+
+ Returns the root preference node for the calling user.
+@return {Object {java.util.prefs.Preferences}} the root preference node for the calling user.
+@throws SecurityException If a security manager is present and
+         it denies &lt;tt&gt;RuntimePermission(&quot;preferences&quot;)&lt;/tt&gt;.
+@see RuntimePermission
+*/
+userRoot : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-systemRoot'>/**&lt;strong&gt;WARNING:&lt;/strong&gt; On Android, the Preference nodes
+</span> corresponding to the &quot;system&quot; and &quot;user&quot; preferences are stored in sections
+ of the file system that are inaccessible to apps. Further, allowing apps to set
+ &quot;system wide&quot; preferences is contrary to android's security model.
+
+ Returns the root preference node for the system.
+@return {Object {java.util.prefs.Preferences}} the root preference node for the system.
+@throws SecurityException If a security manager is present and
+         it denies &lt;tt&gt;RuntimePermission(&quot;preferences&quot;)&lt;/tt&gt;.
+@see RuntimePermission
+*/
+systemRoot : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-put'>/**Associates the specified value with the specified key in this
+</span> preference node.
+@param {String} key key with which the specified value is to be associated.
+@param {String} value value to be associated with the specified key.
+@throws NullPointerException if key or value is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+       &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt; or if &lt;tt&gt;value.length&lt;/tt&gt; exceeds
+       &lt;tt&gt;MAX_VALUE_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+put : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-get'>/**Returns the value associated with the specified key in this preference
+</span> node.  Returns the specified default if there is no value associated
+ with the key, or the backing store is inaccessible.
+
+ &lt;p&gt;Some implementations may store default values in their backing
+ stores.  If there is no value associated with the specified key
+ but there is such a &lt;i&gt;stored default&lt;/i&gt;, it is returned in
+ preference to the specified default.
+@param {String} key key whose associated value is to be returned.
+@param {String} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;.
+@return {String} the value associated with &lt;tt&gt;key&lt;/tt&gt;, or &lt;tt&gt;def&lt;/tt&gt;
+         if no value is associated with &lt;tt&gt;key&lt;/tt&gt;, or the backing
+         store is inaccessible.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.  (A
+         &lt;tt&gt;null&lt;/tt&gt; value for &lt;tt&gt;def&lt;/tt&gt; &lt;i&gt;is&lt;/i&gt; permitted.)
+*/
+get : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-remove'>/**Removes the value associated with the specified key in this preference
+</span> node, if any.
+
+ &lt;p&gt;If this implementation supports &lt;i&gt;stored defaults&lt;/i&gt;, and there is
+ such a default for the specified preference, the stored default will be
+ &quot;exposed&quot; by this call, in the sense that it will be returned
+ by a succeeding call to &lt;tt&gt;get&lt;/tt&gt;.
+@param {String} key key whose mapping is to be removed from the preference node.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+remove : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-clear'>/**Removes all of the preferences (key-value associations) in this
+</span> preference node.  This call has no effect on any descendants
+ of this node.
+
+ &lt;p&gt;If this implementation supports &lt;i&gt;stored defaults&lt;/i&gt;, and this
+ node in the preferences hierarchy contains any such defaults,
+ the stored defaults will be &quot;exposed&quot; by this call, in the sense that
+ they will be returned by succeeding calls to &lt;tt&gt;get&lt;/tt&gt;.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #removeNode()
+*/
+clear : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-putInt'>/**Associates a string representing the specified int value with the
+</span> specified key in this preference node.  The associated string is the
+ one that would be returned if the int value were passed to
+ {@link Integer#toString(int)}.  This method is intended for use in
+ conjunction with {@link #getInt}.
+@param {String} key key with which the string form of value is to be associated.
+@param {Number} value value whose string form is to be associated with key.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+         &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #getInt(String,int)
+*/
+putInt : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-getInt'>/**Returns the int value represented by the string associated with the
+</span> specified key in this preference node.  The string is converted to
+ an integer as by {@link Integer#parseInt(String)}.  Returns the
+ specified default if there is no value associated with the key,
+ the backing store is inaccessible, or if
+ &lt;tt&gt;Integer.parseInt(String)&lt;/tt&gt; would throw a {@link NumberFormatException} if the associated value were passed.  This
+ method is intended for use in conjunction with {@link #putInt}.
+
+ &lt;p&gt;If the implementation supports &lt;i&gt;stored defaults&lt;/i&gt; and such a
+ default exists, is accessible, and could be converted to an int
+ with &lt;tt&gt;Integer.parseInt&lt;/tt&gt;, this int is returned in preference to
+ the specified default.
+@param {String} key key whose associated value is to be returned as an int.
+@param {Number} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as an int,
+        or the backing store is inaccessible.
+@return {Number} the int value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         an int.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@see #putInt(String,int)
+@see #get(String,String)
+*/
+getInt : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-putLong'>/**Associates a string representing the specified long value with the
+</span> specified key in this preference node.  The associated string is the
+ one that would be returned if the long value were passed to
+ {@link Long#toString(long)}.  This method is intended for use in
+ conjunction with {@link #getLong}.
+@param {String} key key with which the string form of value is to be associated.
+@param {Number} value value whose string form is to be associated with key.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+         &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #getLong(String,long)
+*/
+putLong : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-getLong'>/**Returns the long value represented by the string associated with the
+</span> specified key in this preference node.  The string is converted to
+ a long as by {@link Long#parseLong(String)}.  Returns the
+ specified default if there is no value associated with the key,
+ the backing store is inaccessible, or if
+ &lt;tt&gt;Long.parseLong(String)&lt;/tt&gt; would throw a {@link NumberFormatException} if the associated value were passed.  This
+ method is intended for use in conjunction with {@link #putLong}.
+
+ &lt;p&gt;If the implementation supports &lt;i&gt;stored defaults&lt;/i&gt; and such a
+ default exists, is accessible, and could be converted to a long
+ with &lt;tt&gt;Long.parseLong&lt;/tt&gt;, this long is returned in preference to
+ the specified default.
+@param {String} key key whose associated value is to be returned as a long.
+@param {Number} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as a long,
+        or the backing store is inaccessible.
+@return {Number} the long value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         a long.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@see #putLong(String,long)
+@see #get(String,String)
+*/
+getLong : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-putBoolean'>/**Associates a string representing the specified boolean value with the
+</span> specified key in this preference node.  The associated string is
+ &lt;tt&gt;&quot;true&quot;&lt;/tt&gt; if the value is true, and &lt;tt&gt;&quot;false&quot;&lt;/tt&gt; if it is
+ false.  This method is intended for use in conjunction with
+ {@link #getBoolean}.
+@param {String} key key with which the string form of value is to be associated.
+@param {Boolean} value value whose string form is to be associated with key.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+         &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #getBoolean(String,boolean)
+@see #get(String,String)
+*/
+putBoolean : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-getBoolean'>/**Returns the boolean value represented by the string associated with the
+</span> specified key in this preference node.  Valid strings
+ are &lt;tt&gt;&quot;true&quot;&lt;/tt&gt;, which represents true, and &lt;tt&gt;&quot;false&quot;&lt;/tt&gt;, which
+ represents false.  Case is ignored, so, for example, &lt;tt&gt;&quot;TRUE&quot;&lt;/tt&gt;
+ and &lt;tt&gt;&quot;False&quot;&lt;/tt&gt; are also valid.  This method is intended for use in
+ conjunction with {@link #putBoolean}.
+
+ &lt;p&gt;Returns the specified default if there is no value
+ associated with the key, the backing store is inaccessible, or if the
+ associated value is something other than &lt;tt&gt;&quot;true&quot;&lt;/tt&gt; or
+ &lt;tt&gt;&quot;false&quot;&lt;/tt&gt;, ignoring case.
+
+ &lt;p&gt;If the implementation supports &lt;i&gt;stored defaults&lt;/i&gt; and such a
+ default exists and is accessible, it is used in preference to the
+ specified default, unless the stored default is something other than
+ &lt;tt&gt;&quot;true&quot;&lt;/tt&gt; or &lt;tt&gt;&quot;false&quot;&lt;/tt&gt;, ignoring case, in which case the
+ specified default is used.
+@param {String} key key whose associated value is to be returned as a boolean.
+@param {Boolean} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as a boolean,
+        or the backing store is inaccessible.
+@return {Boolean} the boolean value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         a boolean.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@see #get(String,String)
+@see #putBoolean(String,boolean)
+*/
+getBoolean : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-putFloat'>/**Associates a string representing the specified float value with the
+</span> specified key in this preference node.  The associated string is the
+ one that would be returned if the float value were passed to
+ {@link Float#toString(float)}.  This method is intended for use in
+ conjunction with {@link #getFloat}.
+@param {String} key key with which the string form of value is to be associated.
+@param {Number} value value whose string form is to be associated with key.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+         &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #getFloat(String,float)
+*/
+putFloat : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-getFloat'>/**Returns the float value represented by the string associated with the
+</span> specified key in this preference node.  The string is converted to an
+ integer as by {@link Float#parseFloat(String)}.  Returns the specified
+ default if there is no value associated with the key, the backing store
+ is inaccessible, or if &lt;tt&gt;Float.parseFloat(String)&lt;/tt&gt; would throw a
+ {@link NumberFormatException} if the associated value were passed.
+ This method is intended for use in conjunction with {@link #putFloat}.
+
+ &lt;p&gt;If the implementation supports &lt;i&gt;stored defaults&lt;/i&gt; and such a
+ default exists, is accessible, and could be converted to a float
+ with &lt;tt&gt;Float.parseFloat&lt;/tt&gt;, this float is returned in preference to
+ the specified default.
+@param {String} key key whose associated value is to be returned as a float.
+@param {Number} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as a float,
+        or the backing store is inaccessible.
+@return {Number} the float value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         a float.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@see #putFloat(String,float)
+@see #get(String,String)
+*/
+getFloat : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-putDouble'>/**Associates a string representing the specified double value with the
+</span> specified key in this preference node.  The associated string is the
+ one that would be returned if the double value were passed to
+ {@link Double#toString(double)}.  This method is intended for use in
+ conjunction with {@link #getDouble}.
+@param {String} key key with which the string form of value is to be associated.
+@param {Number} value value whose string form is to be associated with key.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if &lt;tt&gt;key.length()&lt;/tt&gt; exceeds
+         &lt;tt&gt;MAX_KEY_LENGTH&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #getDouble(String,double)
+*/
+putDouble : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-getDouble'>/**Returns the double value represented by the string associated with the
+</span> specified key in this preference node.  The string is converted to an
+ integer as by {@link Double#parseDouble(String)}.  Returns the specified
+ default if there is no value associated with the key, the backing store
+ is inaccessible, or if &lt;tt&gt;Double.parseDouble(String)&lt;/tt&gt; would throw a
+ {@link NumberFormatException} if the associated value were passed.
+ This method is intended for use in conjunction with {@link #putDouble}.
+
+ &lt;p&gt;If the implementation supports &lt;i&gt;stored defaults&lt;/i&gt; and such a
+ default exists, is accessible, and could be converted to a double
+ with &lt;tt&gt;Double.parseDouble&lt;/tt&gt;, this double is returned in preference
+ to the specified default.
+@param {String} key key whose associated value is to be returned as a double.
+@param {Number} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as a double,
+        or the backing store is inaccessible.
+@return {Number} the double value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         a double.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.
+@see #putDouble(String,double)
+@see #get(String,String)
+*/
+getDouble : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-putByteArray'>/**Associates a string representing the specified byte array with the
+</span> specified key in this preference node.  The associated string is
+ the &lt;i&gt;Base64&lt;/i&gt; encoding of the byte array, as defined in &lt;a
+ href=http://www.ietf.org/rfc/rfc2045.txt&gt;RFC 2045&lt;/a&gt;, Section 6.8,
+ with one minor change: the string will consist solely of characters
+ from the &lt;i&gt;Base64 Alphabet&lt;/i&gt;; it will not contain any newline
+ characters.  Note that the maximum length of the byte array is limited
+ to three quarters of &lt;tt&gt;MAX_VALUE_LENGTH&lt;/tt&gt; so that the length
+ of the Base64 encoded String does not exceed &lt;tt&gt;MAX_VALUE_LENGTH&lt;/tt&gt;.
+ This method is intended for use in conjunction with
+ {@link #getByteArray}.
+@param {String} key key with which the string form of value is to be associated.
+@param {Object {byte[]}} value value whose string form is to be associated with key.
+@throws NullPointerException if key or value is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalArgumentException if key.length() exceeds MAX_KEY_LENGTH
+         or if value.length exceeds MAX_VALUE_LENGTH*3/4.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #getByteArray(String,byte[])
+@see #get(String,String)
+*/
+putByteArray : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-getByteArray'>/**Returns the byte array value represented by the string associated with
+</span> the specified key in this preference node.  Valid strings are
+ &lt;i&gt;Base64&lt;/i&gt; encoded binary data, as defined in &lt;a
+ href=http://www.ietf.org/rfc/rfc2045.txt&gt;RFC 2045&lt;/a&gt;, Section 6.8,
+ with one minor change: the string must consist solely of characters
+ from the &lt;i&gt;Base64 Alphabet&lt;/i&gt;; no newline characters or
+ extraneous characters are permitted.  This method is intended for use
+ in conjunction with {@link #putByteArray}.
+
+ &lt;p&gt;Returns the specified default if there is no value
+ associated with the key, the backing store is inaccessible, or if the
+ associated value is not a valid Base64 encoded byte array
+ (as defined above).
+
+ &lt;p&gt;If the implementation supports &lt;i&gt;stored defaults&lt;/i&gt; and such a
+ default exists and is accessible, it is used in preference to the
+ specified default, unless the stored default is not a valid Base64
+ encoded byte array (as defined above), in which case the
+ specified default is used.
+@param {String} key key whose associated value is to be returned as a byte array.
+@param {Object {byte[]}} def the value to be returned in the event that this
+        preference node has no value associated with &lt;tt&gt;key&lt;/tt&gt;
+        or the associated value cannot be interpreted as a byte array,
+        or the backing store is inaccessible.
+@return {Number} the byte array value represented by the string associated with
+         &lt;tt&gt;key&lt;/tt&gt; in this preference node, or &lt;tt&gt;def&lt;/tt&gt; if the
+         associated value does not exist or cannot be interpreted as
+         a byte array.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@throws NullPointerException if &lt;tt&gt;key&lt;/tt&gt; is &lt;tt&gt;null&lt;/tt&gt;.  (A
+         &lt;tt&gt;null&lt;/tt&gt; value for &lt;tt&gt;def&lt;/tt&gt; &lt;i&gt;is&lt;/i&gt; permitted.)
+@see #get(String,String)
+@see #putByteArray(String,byte[])
+*/
+getByteArray : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-keys'>/**Returns all of the keys that have an associated value in this
+</span> preference node.  (The returned array will be of size zero if
+ this node has no preferences.)
+
+ &lt;p&gt;If the implementation supports &lt;i&gt;stored defaults&lt;/i&gt; and there
+ are any such defaults at this node that have not been overridden,
+ by explicit preferences, the defaults are returned in the array in
+ addition to any explicit preferences.
+@return {String} an array of the keys that have an associated value in this
+         preference node.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+keys : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-childrenNames'>/**Returns the names of the children of this preference node, relative to
+</span> this node.  (The returned array will be of size zero if this node has
+ no children.)
+@return {String} the names of the children of this preference node.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+childrenNames : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-parent'>/**Returns the parent of this preference node, or &lt;tt&gt;null&lt;/tt&gt; if this is
+</span> the root.
+@return {Object {java.util.prefs.Preferences}} the parent of this preference node.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+parent : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-node'>/**Returns the named preference node in the same tree as this node,
+</span> creating it and any of its ancestors if they do not already exist.
+ Accepts a relative or absolute path name.  Relative path names
+ (which do not begin with the slash character &lt;tt&gt;('/')&lt;/tt&gt;) are
+ interpreted relative to this preference node.
+
+ &lt;p&gt;If the returned node did not exist prior to this call, this node and
+ any ancestors that were created by this call are not guaranteed
+ to become permanent until the &lt;tt&gt;flush&lt;/tt&gt; method is called on
+ the returned node (or one of its ancestors or descendants).
+@param {String} pathName the path name of the preference node to return.
+@return {Object {java.util.prefs.Preferences}} the specified preference node.
+@throws IllegalArgumentException if the path name is invalid (i.e.,
+         it contains multiple consecutive slash characters, or ends
+         with a slash character and is more than one character long).
+@throws NullPointerException if path name is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #flush()
+*/
+node : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-nodeExists'>/**Returns true if the named preference node exists in the same tree
+</span> as this node.  Relative path names (which do not begin with the slash
+ character &lt;tt&gt;('/')&lt;/tt&gt;) are interpreted relative to this preference
+ node.
+
+ &lt;p&gt;If this node (or an ancestor) has already been removed with the
+ {@link #removeNode}() method, it &lt;i&gt;is&lt;/i&gt; legal to invoke this method,
+ but only with the path name &lt;tt&gt;&quot;&quot;&lt;/tt&gt;; the invocation will return
+ &lt;tt&gt;false&lt;/tt&gt;.  Thus, the idiom &lt;tt&gt;p.nodeExists(&quot;&quot;)&lt;/tt&gt; may be
+ used to test whether &lt;tt&gt;p&lt;/tt&gt; has been removed.
+@param {String} pathName the path name of the node whose existence
+        is to be checked.
+@return {Boolean} true if the specified node exists.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalArgumentException if the path name is invalid (i.e.,
+         it contains multiple consecutive slash characters, or ends
+         with a slash character and is more than one character long).
+@throws NullPointerException if path name is &lt;tt&gt;null&lt;/tt&gt;.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method and
+         &lt;tt&gt;pathName&lt;/tt&gt; is not the empty string (&lt;tt&gt;&quot;&quot;&lt;/tt&gt;).
+*/
+nodeExists : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-removeNode'>/**Removes this preference node and all of its descendants, invalidating
+</span> any preferences contained in the removed nodes.  Once a node has been
+ removed, attempting any method other than {@link #name}(),
+ {@link #absolutePath}(), {@link #isUserNode}(), {@link #flush}() or
+ {@link #node(String) nodeExists(&quot;&quot;)} on the corresponding
+ &lt;tt&gt;Preferences&lt;/tt&gt; instance will fail with an
+ &lt;tt&gt;IllegalStateException&lt;/tt&gt;.  (The methods defined on {@link Object}
+ can still be invoked on a node after it has been removed; they will not
+ throw &lt;tt&gt;IllegalStateException&lt;/tt&gt;.)
+
+ &lt;p&gt;The removal is not guaranteed to be persistent until the
+ &lt;tt&gt;flush&lt;/tt&gt; method is called on this node (or an ancestor).
+
+ &lt;p&gt;If this implementation supports &lt;i&gt;stored defaults&lt;/i&gt;, removing a
+ node exposes any stored defaults at or below this node.  Thus, a
+ subsequent call to &lt;tt&gt;nodeExists&lt;/tt&gt; on this node's path name may
+ return &lt;tt&gt;true&lt;/tt&gt;, and a subsequent call to &lt;tt&gt;node&lt;/tt&gt; on this
+ path name may return a (different) &lt;tt&gt;Preferences&lt;/tt&gt; instance
+ representing a non-empty collection of preferences and/or children.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalStateException if this node (or an ancestor) has already
+         been removed with the {@link #removeNode()} method.
+@throws UnsupportedOperationException if this method is invoked on
+         the root node.
+@see #flush()
+*/
+removeNode : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-name'>/**Returns this preference node's name, relative to its parent.
+</span>@return {String} this preference node's name, relative to its parent.
+*/
+name : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-absolutePath'>/**Returns this preference node's absolute path name.
+</span>@return {String} this preference node's absolute path name.
+*/
+absolutePath : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-isUserNode'>/**Returns &lt;tt&gt;true&lt;/tt&gt; if this preference node is in the user
+</span> preference tree, &lt;tt&gt;false&lt;/tt&gt; if it's in the system preference tree.
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if this preference node is in the user
+         preference tree, &lt;tt&gt;false&lt;/tt&gt; if it's in the system
+         preference tree.
+*/
+isUserNode : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-toString'>/**Returns a string representation of this preferences node,
+</span> as if computed by the expression:&lt;tt&gt;(this.isUserNode() ? &quot;User&quot; :
+ &quot;System&quot;) + &quot; Preference Node: &quot; + this.absolutePath()&lt;/tt&gt;.
+*/
+toString : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-flush'>/**Forces any changes in the contents of this preference node and its
+</span> descendants to the persistent store.  Once this method returns
+ successfully, it is safe to assume that all changes made in the
+ subtree rooted at this node prior to the method invocation have become
+ permanent.
+
+ &lt;p&gt;Implementations are free to flush changes into the persistent store
+ at any time.  They do not need to wait for this method to be called.
+
+ &lt;p&gt;When a flush occurs on a newly created node, it is made persistent,
+ as are any ancestors (and descendants) that have yet to be made
+ persistent.  Note however that any preference value changes in
+ ancestors are &lt;i&gt;not&lt;/i&gt; guaranteed to be made persistent.
+
+ &lt;p&gt; If this method is invoked on a node that has been removed with
+ the {@link #removeNode}() method, flushSpi() is invoked on this node,
+ but not on others.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@see #sync()
+*/
+flush : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-sync'>/**Ensures that future reads from this preference node and its
+</span> descendants reflect any changes that were committed to the persistent
+ store (from any VM) prior to the &lt;tt&gt;sync&lt;/tt&gt; invocation.  As a
+ side-effect, forces any changes in the contents of this preference node
+ and its descendants to the persistent store, as if the &lt;tt&gt;flush&lt;/tt&gt;
+ method had been invoked on this node.
+@throws BackingStoreException if this operation cannot be completed
+         due to a failure in the backing store, or inability to
+         communicate with it.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #flush()
+*/
+sync : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-addPreferenceChangeListener'>/**Registers the specified listener to receive &lt;i&gt;preference change
+</span> events&lt;/i&gt; for this preference node.  A preference change event is
+ generated when a preference is added to this node, removed from this
+ node, or when the value associated with a preference is changed.
+ (Preference change events are &lt;i&gt;not&lt;/i&gt; generated by the {@link #removeNode}() method, which generates a &lt;i&gt;node change event&lt;/i&gt;.
+ Preference change events &lt;i&gt;are&lt;/i&gt; generated by the &lt;tt&gt;clear&lt;/tt&gt;
+ method.)
+
+ &lt;p&gt;Events are only guaranteed for changes made within the same JVM
+ as the registered listener, though some implementations may generate
+ events for changes made outside this JVM.  Events may be generated
+ before the changes have been made persistent.  Events are not generated
+ when preferences are modified in descendants of this node; a caller
+ desiring such events must register with each descendant.
+@param {Object {PreferenceChangeListener}} pcl The preference change listener to add.
+@throws NullPointerException if &lt;tt&gt;pcl&lt;/tt&gt; is null.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #removePreferenceChangeListener(PreferenceChangeListener)
+@see #addNodeChangeListener(NodeChangeListener)
+*/
+addPreferenceChangeListener : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-removePreferenceChangeListener'>/**Removes the specified preference change listener, so it no longer
+</span> receives preference change events.
+@param {Object {PreferenceChangeListener}} pcl The preference change listener to remove.
+@throws IllegalArgumentException if &lt;tt&gt;pcl&lt;/tt&gt; was not a registered
+         preference change listener on this node.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #addPreferenceChangeListener(PreferenceChangeListener)
+*/
+removePreferenceChangeListener : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-addNodeChangeListener'>/**Registers the specified listener to receive &lt;i&gt;node change events&lt;/i&gt;
+</span> for this node.  A node change event is generated when a child node is
+ added to or removed from this node.  (A single {@link #removeNode}()
+ invocation results in multiple &lt;i&gt;node change events&lt;/i&gt;, one for every
+ node in the subtree rooted at the removed node.)
+
+ &lt;p&gt;Events are only guaranteed for changes made within the same JVM
+ as the registered listener, though some implementations may generate
+ events for changes made outside this JVM.  Events may be generated
+ before the changes have become permanent.  Events are not generated
+ when indirect descendants of this node are added or removed; a
+ caller desiring such events must register with each descendant.
+
+ &lt;p&gt;Few guarantees can be made regarding node creation.  Because nodes
+ are created implicitly upon access, it may not be feasible for an
+ implementation to determine whether a child node existed in the backing
+ store prior to access (for example, because the backing store is
+ unreachable or cached information is out of date).  Under these
+ circumstances, implementations are neither required to generate node
+ change events nor prohibited from doing so.
+@param {Object {NodeChangeListener}} ncl The &lt;tt&gt;NodeChangeListener&lt;/tt&gt; to add.
+@throws NullPointerException if &lt;tt&gt;ncl&lt;/tt&gt; is null.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #removeNodeChangeListener(NodeChangeListener)
+@see #addPreferenceChangeListener(PreferenceChangeListener)
+*/
+addNodeChangeListener : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-removeNodeChangeListener'>/**Removes the specified &lt;tt&gt;NodeChangeListener&lt;/tt&gt;, so it no longer
+</span> receives change events.
+@param {Object {NodeChangeListener}} ncl The &lt;tt&gt;NodeChangeListener&lt;/tt&gt; to remove.
+@throws IllegalArgumentException if &lt;tt&gt;ncl&lt;/tt&gt; was not a registered
+         &lt;tt&gt;NodeChangeListener&lt;/tt&gt; on this node.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #addNodeChangeListener(NodeChangeListener)
+*/
+removeNodeChangeListener : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-exportNode'>/**Emits on the specified output stream an XML document representing all
+</span> of the preferences contained in this node (but not its descendants).
+ This XML document is, in effect, an offline backup of the node.
+
+ &lt;p&gt;The XML document will have the following DOCTYPE declaration:
+ &lt;pre&gt;{@code
+ &lt;!DOCTYPE preferences SYSTEM &quot;http://java.sun.com/dtd/preferences.dtd&quot;&gt;
+ }&lt;/pre&gt;
+ The UTF-8 character encoding will be used.
+
+ &lt;p&gt;This method is an exception to the general rule that the results of
+ concurrently executing multiple methods in this class yields
+ results equivalent to some serial execution.  If the preferences
+ at this node are modified concurrently with an invocation of this
+ method, the exported preferences comprise a &quot;fuzzy snapshot&quot; of the
+ preferences contained in the node; some of the concurrent modifications
+ may be reflected in the exported data while others may not.
+@param {Object {OutputStream}} os the output stream on which to emit the XML document.
+@throws IOException if writing to the specified output stream
+         results in an &lt;tt&gt;IOException&lt;/tt&gt;.
+@throws BackingStoreException if preference data cannot be read from
+         backing store.
+@see #importPreferences(InputStream)
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+*/
+exportNode : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-exportSubtree'>/**Emits an XML document representing all of the preferences contained
+</span> in this node and all of its descendants.  This XML document is, in
+ effect, an offline backup of the subtree rooted at the node.
+
+ &lt;p&gt;The XML document will have the following DOCTYPE declaration:
+ &lt;pre&gt;{@code
+ &lt;!DOCTYPE preferences SYSTEM &quot;http://java.sun.com/dtd/preferences.dtd&quot;&gt;
+ }&lt;/pre&gt;
+ The UTF-8 character encoding will be used.
+
+ &lt;p&gt;This method is an exception to the general rule that the results of
+ concurrently executing multiple methods in this class yields
+ results equivalent to some serial execution.  If the preferences
+ or nodes in the subtree rooted at this node are modified concurrently
+ with an invocation of this method, the exported preferences comprise a
+ &quot;fuzzy snapshot&quot; of the subtree; some of the concurrent modifications
+ may be reflected in the exported data while others may not.
+@param {Object {OutputStream}} os the output stream on which to emit the XML document.
+@throws IOException if writing to the specified output stream
+         results in an &lt;tt&gt;IOException&lt;/tt&gt;.
+@throws BackingStoreException if preference data cannot be read from
+         backing store.
+@throws IllegalStateException if this node (or an ancestor) has been
+         removed with the {@link #removeNode()} method.
+@see #importPreferences(InputStream)
+@see #exportNode(OutputStream)
+*/
+exportSubtree : function(  ) {},
+
+<span id='java-util-prefs-Preferences-method-importPreferences'>/**Imports all of the preferences represented by the XML document on the
+</span> specified input stream.  The document may represent user preferences or
+ system preferences.  If it represents user preferences, the preferences
+ will be imported into the calling user's preference tree (even if they
+ originally came from a different user's preference tree).  If any of
+ the preferences described by the document inhabit preference nodes that
+ do not exist, the nodes will be created.
+
+ &lt;p&gt;The XML document must have the following DOCTYPE declaration:
+ &lt;pre&gt;{@code
+ &lt;!DOCTYPE preferences SYSTEM &quot;http://java.sun.com/dtd/preferences.dtd&quot;&gt;
+ }&lt;/pre&gt;
+ (This method is designed for use in conjunction with
+ {@link #exportNode}(OutputStream) and
+ {@link #exportSubtree}(OutputStream).
+
+ &lt;p&gt;This method is an exception to the general rule that the results of
+ concurrently executing multiple methods in this class yields
+ results equivalent to some serial execution.  The method behaves
+ as if implemented on top of the other public methods in this class,
+ notably {@link #node}(String) and {@link #put(String, String)}.
+@param {Object {InputStream}} is the input stream from which to read the XML document.
+@throws IOException if reading from the specified input stream
+         results in an &lt;tt&gt;IOException&lt;/tt&gt;.
+@throws InvalidPreferencesFormatException Data on input stream does not
+         constitute a valid XML document with the mandated document type.
+@throws SecurityException If a security manager is present and
+         it denies &lt;tt&gt;RuntimePermission(&quot;preferences&quot;)&lt;/tt&gt;.
+@see RuntimePermission
+*/
+importPreferences : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

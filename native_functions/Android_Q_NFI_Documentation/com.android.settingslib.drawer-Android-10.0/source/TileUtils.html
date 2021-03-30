@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-settingslib-drawer-TileUtils'>/**@class com.android.settingslib.drawer.TileUtils
+</span>@extends java.lang.Object
+
+ Utils is a helper class that contains profile key, meta data, settings action
+ and static methods for get icon or text from uri.
+*/
+var TileUtils = {
+
+<span id='com-android-settingslib-drawer-TileUtils-property-EXTRA_SETTINGS_ACTION'>/** Settings will search for system activities of this action and add them as a top level
+</span> settings tile using the following parameters.
+
+ &lt;p&gt;A category must be specified in the meta-data for the activity named
+ {@link #EXTRA_CATEGORY_KEY}
+
+ &lt;p&gt;The title may be defined by meta-data named {@link #META_DATA_PREFERENCE_TITLE}
+ otherwise the label for the activity will be used.
+
+ &lt;p&gt;The icon may be defined by meta-data named {@link #META_DATA_PREFERENCE_ICON}
+ otherwise the icon for the activity will be used.
+
+ &lt;p&gt;A summary my be defined by meta-data named {@link #META_DATA_PREFERENCE_SUMMARY}
+*/
+EXTRA_SETTINGS_ACTION : &quot;com.android.settings.action.EXTRA_SETTINGS&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-IA_SETTINGS_ACTION'>/** @See {@link #EXTRA_SETTINGS_ACTION}.
+</span>*/
+IA_SETTINGS_ACTION : &quot;com.android.settings.action.IA_SETTINGS&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_PREFERENCE_KEYHINT'>/** Name of the meta-data item that should be set in the AndroidManifest.xml
+</span> to specify the key that should be used for the preference.
+*/
+META_DATA_PREFERENCE_KEYHINT : &quot;com.android.settings.keyhint&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_KEY_ORDER'>/** Order of the item that should be displayed on screen. Bigger value items displays closer on
+</span> top.
+*/
+META_DATA_KEY_ORDER : &quot;com.android.settings.order&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_PREFERENCE_ICON'>/** Name of the meta-data item that should be set in the AndroidManifest.xml
+</span> to specify the icon that should be displayed for the preference.
+*/
+META_DATA_PREFERENCE_ICON : &quot;com.android.settings.icon&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_PREFERENCE_ICON_BACKGROUND_HINT'>/** Name of the meta-data item that should be set in the AndroidManifest.xml
+</span> to specify the icon background color. The value may or may not be used by Settings app.
+*/
+META_DATA_PREFERENCE_ICON_BACKGROUND_HINT : &quot;com.android.settings.bg.hint&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB'>/** Name of the meta-data item that should be set in the AndroidManifest.xml
+</span> to specify the icon background color as raw ARGB.
+*/
+META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB : &quot;com.android.settings.bg.argb&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_PREFERENCE_ICON_URI'>/** Name of the meta-data item that should be set in the AndroidManifest.xml
+</span> to specify the content provider providing the icon that should be displayed for
+ the preference.
+
+ Icon provided by the content provider overrides any static icon.
+*/
+META_DATA_PREFERENCE_ICON_URI : &quot;com.android.settings.icon_uri&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_PREFERENCE_ICON_TINTABLE'>/** Name of the meta-data item that should be set in the AndroidManifest.xml
+</span> to specify whether the icon is tintable. This should be a boolean value {@code true} or
+ {@code false}, set using {@code android:value}
+*/
+META_DATA_PREFERENCE_ICON_TINTABLE : &quot;com.android.settings.icon_tintable&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_PREFERENCE_TITLE'>/** Name of the meta-data item that should be set in the AndroidManifest.xml
+</span> to specify the title that should be displayed for the preference.
+
+ &lt;p&gt;Note: It is preferred to provide this value using {@code android:resource} with a string
+ resource for localization.
+*/
+META_DATA_PREFERENCE_TITLE : &quot;com.android.settings.title&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_PREFERENCE_SUMMARY'>/** Name of the meta-data item that should be set in the AndroidManifest.xml
+</span> to specify the summary text that should be displayed for the preference.
+*/
+META_DATA_PREFERENCE_SUMMARY : &quot;com.android.settings.summary&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_PREFERENCE_SUMMARY_URI'>/** Name of the meta-data item that should be set in the AndroidManifest.xml
+</span> to specify the content provider providing the summary text that should be displayed for the
+ preference.
+
+ Summary provided by the content provider overrides any static summary.
+*/
+META_DATA_PREFERENCE_SUMMARY_URI : &quot;com.android.settings.summary_uri&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-PROFILE_PRIMARY'>/** Value for {@link #META_DATA_KEY_PROFILE}. When the device has a managed profile,
+</span> the app will always be run in the primary profile.
+
+ @see #META_DATA_KEY_PROFILE
+*/
+PROFILE_PRIMARY : &quot;primary_profile_only&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-PROFILE_ALL'>/** Value for {@link #META_DATA_KEY_PROFILE}. When the device has a managed profile, the user
+</span> will be presented with a dialog to choose the profile the app will be run in.
+
+ @see #META_DATA_KEY_PROFILE
+*/
+PROFILE_ALL : &quot;all_profiles&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-property-META_DATA_KEY_PROFILE'>/** Name of the meta-data item that should be set in the AndroidManifest.xml
+</span> to specify the profile in which the app should be run when the device has a managed profile.
+ The default value is {@link #PROFILE_ALL} which means the user will be presented with a
+ dialog to choose the profile. If set to {@link #PROFILE_PRIMARY} the app will always be
+ run in the primary profile.
+
+ @see #PROFILE_PRIMARY
+ @see #PROFILE_ALL
+*/
+META_DATA_KEY_PROFILE : &quot;com.android.settings.profile&quot;,
+<span id='com-android-settingslib-drawer-TileUtils-method-getCategories'>/**Build a list of DashboardCategory.
+</span>*/
+getCategories : function(  ) {},
+
+<span id='com-android-settingslib-drawer-TileUtils-method-getIconFromUri'>/**Gets the icon package name and resource id from content provider.
+</span>@param {Object {Context}} context     context
+@param {String} packageName package name of the target activity
+@param {String} uriString   URI for the content provider
+@param {Object {java.util.Map}} providerMap Maps URI authorities to providers
+@return {Object {android.util.Pair}} package name and resource id of the icon specified
+*/
+getIconFromUri : function(  ) {},
+
+<span id='com-android-settingslib-drawer-TileUtils-method-getTextFromUri'>/**Gets text associated with the input key from the content provider.
+</span>@param {Object {Context}} context     context
+@param {String} uriString   URI for the content provider
+@param {Object {java.util.Map}} providerMap Maps URI authorities to providers
+@param {String} key         Key mapping to the text in bundle returned by the content provider
+@return {String} Text associated with the key, if returned by the content provider
+*/
+getTextFromUri : function(  ) {},
+
+
+};</pre>
+</body>
+</html>
