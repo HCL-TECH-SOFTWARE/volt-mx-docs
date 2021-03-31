@@ -1,3 +1,9 @@
+var docs;
+var index;
+var searchResults = document.getElementById('search-results');
+var prepareSearch = document.getElementById('search-prepare');
+var searchInput = document.getElementById('search-input');
+
 (function (jtd, undefined) {
 
 // Event handling
@@ -440,5 +446,3 @@ jtd.onReady(function(){
 });
 
 })(window.jtd = window.jtd || {});
-
-
