@@ -167,7 +167,7 @@
         </li>
         <li>
             <!-- <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a> -->
-            <a href="https://support.hcltechsw.com/csm?id=kb_search" title="Articles" class="sub-link">Articles</a>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
         </li>
     </ul>
 
@@ -249,20 +249,19 @@
     </blockquote>
 
     <blockquote>
-      <p><strong><em>Important:</em></strong> In addition to the grants, add the following grants while creating an Oracle DB:</p>
-    </blockquote>
-
-    <p>  –  grant create any table to idconfig;<br />
+      <p><strong><em>Important:</em></strong> In addition to the grants, add the following grants while creating an Oracle DB:<br />
+  –  grant create any table to idconfig;<br />
   –  grant create any index to idconfig;<br />
   –  grant alter any table to idconfig;</p>
+    </blockquote>
 
     <p>The following is a sample query for creating a database in MSSQL:</p>
 
-    <p>CREATE DATABASE idconfig;</p>
+    <p><code class="language-plaintext highlighter-rouge">CREATE DATABASE idconfig;</code></p>
 
     <p>The following is a sample query for creating a database in MySQL:</p>
 
-    <p>CREATE DATABASE `<DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;</DBNAME></p>
+    <p><code class="language-plaintext highlighter-rouge">CREATE DATABASE \</code><DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;`</DBNAME></p>
 
     <p>The following details are required for Flyway configuration:</p>
 
@@ -272,33 +271,68 @@
     </ul>
   </li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">**\# VoltMX Identity Services Database, replace the following placeholders 
-        # in SQL migrations for your database** flyway.placeholders.VOLTMX_AUTH_LOG_LOCATION=C:VoltMXFoundry/logs
-        flyway.placeholders.VOLTMX_AUTH_LOG_OPTION=logfile  
-        flyway.placeholders.VOLTMX_AUTH_CONFIG=idconfig  
-        flyway.placeholders.VOLTMX_AUTH_GLOBAL_DB=idconfig **(This placeholder is applicable only for MySQL)**  
-        flyway.placeholders.VOLTMX_AUTH_LOG_LEVEL=INFO
-        flyway.placeholders.VOLTMX_MFINSTALLER_VERSION=&lt;MF_version format: 8.x.0_GA&gt;
-        flyway.placeholders.VOLTMX_MFINSTALLER_TYPE=&lt;enter the VoltMX Foundry installation type 
-        such as **production**, **non-production**, or **development**\&gt;
-        </code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*   Tablespace Placeholders for Oracle:
-    
-    | Product Name | Tablespace Placeholders for Oracle |
-    | --- | --- |
-    | Identity or Auth | AUTH\_DATA\_TABLESPACE, AUTH\_INDEX\_TABLESPACE, AUTH\_LOB\_TABLESPACE |
-    
-*   SQL files paths for Identity Services in VoltMXFoundry\_Plugins folder:
-    
-    [![Closed](/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details](javascript:void(0);)
-    
-    | Path for SQL files in the VoltMXFoundry\_Plugins folder | Database | Component |
-    | --- | --- | --- |
-    | \\VoltMXFoundry\_Plugins\\scripts\\javamigrations-auth\\com\\voltmx\\auth\\migrations\\mysql | MySQL | Identity |
-    | \\VoltMXFoundry\_Plugins\\scripts\\javamigrations-auth\\com\\voltmx\\auth\\migrations\\oracle | Oracle |
-    | \\VoltMXFoundry\_Plugins\\scripts\\javamigrations-auth\\com\\voltmx\\auth\\migrations\\sqlserver | SQL Server |
-</code></pre></div></div>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> 
+    # VoltMX Identity Services Database, replace the following placeholders 
+    # in SQL migrations for your database flyway.placeholders.VOLTMX_AUTH_LOG_LOCATION=C:VoltMXFoundry/logs
+    flyway.placeholders.VOLTMX_AUTH_LOG_OPTION=logfile  
+    flyway.placeholders.VOLTMX_AUTH_CONFIG=idconfig  
+    flyway.placeholders.VOLTMX_AUTH_GLOBAL_DB=idconfig (This placeholder is applicable only for MySQL)
+    flyway.placeholders.VOLTMX_AUTH_LOG_LEVEL=INFO
+    flyway.placeholders.VOLTMX_MFINSTALLER_VERSION=&lt;MF_version format: 8.x.0_GA&gt;
+    flyway.placeholders.VOLTMX_MFINSTALLER_TYPE=&lt;enter the VoltMX Foundry installation type 
+    such as production, non-production, or development&gt;
+    </code></pre></figure>
+
+<ul>
+  <li>Tablespace Placeholders for Oracle:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Tablespace Placeholders for Oracle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Identity or Auth</td>
+      <td>AUTH_DATA_TABLESPACE, AUTH_INDEX_TABLESPACE, AUTH_LOB_TABLESPACE</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>SQL files paths for Identity Services in VoltMXFoundry_Plugins folder:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Path for SQL files in the VoltMXFoundry_Plugins folder</th>
+      <th>Database</th>
+      <th>Component</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>\VoltMXFoundry_Plugins\scripts\javamigrations-auth\com\voltmx\auth\migrations\mysql</td>
+      <td>MySQL</td>
+      <td>Identity</td>
+    </tr>
+    <tr>
+      <td>\VoltMXFoundry_Plugins\scripts\javamigrations-auth\com\voltmx\auth\migrations\oracle</td>
+      <td>Oracle</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>\VoltMXFoundry_Plugins\scripts\javamigrations-auth\com\voltmx\auth\migrations\sqlserver</td>
+      <td>SQL Server</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
 <ol>
   <li>
@@ -310,23 +344,28 @@
 
 <p>Since the structure of flyway has changed from Flyway 3.2.1 to Flyway 4.0.3 in VoltMX Foundry installer, execute the following statements to make the <code class="language-plaintext highlighter-rouge">schema_version</code> table compatible with Flyway 4.0.3.</p>
 
-<p><strong>Oracle:</strong><br />
+<blockquote>
+  <p><strong>Oracle:</strong><br />
 drop index “schema_version_ir_idx”;<br />
 drop index “schema_version_vr_idx”;<br />
 ALTER TABLE “schema_version” DROP constraint “schema_version_pk” drop index;<br />
 ALTER TABLE “schema_version” DROP COLUMN “version_rank”;<br />
 ALTER TABLE “schema_version” modify(“version” null);<br />
 ALTER TABLE “schema_version” add constraint “schema_version_pk” primary key(“installed_rank”);</p>
+</blockquote>
 
-<p><strong>MySQL:</strong><br />
+<blockquote>
+  <p><strong>MySQL:</strong><br />
 ALTER TABLE schema_version DROP INDEX schema_version_vr_idx;<br />
 ALTER TABLE schema_version DROP INDEX schema_version_ir_idx;<br />
 ALTER TABLE schema_version DROP PRIMARY KEY;<br />
 ALTER TABLE schema_version DROP COLUMN version_rank;<br />
 ALTER TABLE schema_version CHANGE version version VARCHAR(50);<br />
 ALTER TABLE schema_version ADD PRIMARY KEY (installed_rank);</p>
+</blockquote>
 
-<p><strong>SQL Server:</strong><br />
+<blockquote>
+  <p><strong>SQL Server:</strong><br />
 DROP INDEX schema_version_ir_idx ON dbo.schema_version<br />
 GO<br />
 DROP INDEX schema_version_vr_idx ON dbo.schema_version<br />
@@ -339,6 +378,7 @@ ALTER TABLE dbo.schema_version ADD CONSTRAINT schema_version_pk PRIMARY KEY CLUS
 GO<br />
 ALTER TABLE dbo.schema_version ALTER COLUMN version nvarchar(50) NULL<br />
 GO</p>
+</blockquote>
 
         
 
