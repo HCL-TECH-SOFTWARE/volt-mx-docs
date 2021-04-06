@@ -167,7 +167,7 @@
         </li>
         <li>
             <!-- <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a> -->
-            <a href="https://support.hcltechsw.com/csm?id=kb_search" title="Articles" class="sub-link">Articles</a>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
         </li>
     </ul>
 
@@ -431,12 +431,12 @@
     bind *:80
     
     bind *:443 ssl crt /root/hclnet.pem   
-    _\# By default all requests(Integration/Identity) will be forwarded to the nodes' backend_
+    _# By default all requests(Integration/Identity) will be forwarded to the nodes' backend_
     
     Certificate provided for ssl termination
     
     redirect scheme https if !{ ssl_fc }  
-    _\# Redirects to HTTPS if the user comes via HTTP_
+    _# Redirects to HTTPS if the user comes via HTTP_
     
     mode http 
     
@@ -447,7 +447,7 @@
     acl url_mfconsole path_beg /workspace
     
     use_backend console if url_mfconsole  
-    \# Any request on any of the VoltMX Foundry Console Component contexts will be redirected to the backend of the console
+    # Any request on any of the VoltMX Foundry Console Component contexts will be redirected to the backend of the console
     
     default_backend nodes
     
@@ -456,7 +456,7 @@
     mode http
     
     option forwardfor  
-    _\# Insert the X-Forwarded-For header. HAProxy will stamp this header with the IP of the source client_
+    \# Insert the X-Forwarded-For header. HAProxy will stamp this header with the IP of the source client_
     
     http-request set-header X-Forwarded-Port %[dst_port]
     

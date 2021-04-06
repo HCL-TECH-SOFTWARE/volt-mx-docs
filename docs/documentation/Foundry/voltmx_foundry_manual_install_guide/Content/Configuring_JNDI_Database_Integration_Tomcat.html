@@ -167,7 +167,7 @@
         </li>
         <li>
             <!-- <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a> -->
-            <a href="https://support.hcltechsw.com/csm?id=kb_search" title="Articles" class="sub-link">Articles</a>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
         </li>
     </ul>
 
@@ -265,13 +265,18 @@
 
 <ol>
   <li>Open the <code class="language-plaintext highlighter-rouge">context.xml</code> file located under <code class="language-plaintext highlighter-rouge">&lt;User install directory&gt;\apache-tomcat-9.0.33\conf</code> depending on the database type.</li>
-  <li>
-    <p>In the <code class="language-plaintext highlighter-rouge">context.xml</code> file, create two entries one for voltmxadmindb and the other for KDCDB by using the following template:</p>
+  <li>In the <code class="language-plaintext highlighter-rouge">context.xml</code> file, create two entries one for voltmxadmindb and the other for KDCDB by using the following template:</li>
+</ol>
 
-    <JarScanner scanManifest="false" />
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    &lt;JarScanner scanManifest="false"/&gt;  
+    &lt;Resource name=&lt;JNDI_NAME&gt; auth="Container" type="javax.sql.DataSource" maxActive="10" maxIdle="5" maxWait="10000" scope="Shareable"
+      factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" username="&lt;USER_NAME&gt;" password="&lt;PWD&gt;" driverClassName="&lt;DB_Driver&gt;"
+      defaultReadOnly="true" url="&lt;AdminDB_Connection_String&gt;" testWhileIdle="true" testOnBorrow="true" testOnReturn="false" validationQuery="SELECT
+      1" validationInterval="30000" timeBetweenEvictionRunsMillis="30000" initialSize="1" minIdle="0" removeAbandonedTimeout="300"
+      removeAbandoned="true" logAbandoned="true" minEvictableIdleTimeMillis="30000" jmxEnabled="true"/&gt;
+    </code></pre></figure>
 
-    <p>&lt;Resource name=&lt;JNDI_NAME&gt; auth=”Container” type=”javax.sql.DataSource” maxActive=”10” maxIdle=”5” maxWait=”10000” scope=”Shareable” factory=”org.apache.tomcat.jdbc.pool.DataSourceFactory” username=”&lt;USER_NAME&gt;” password=”<PWD>" driverClassName="&lt;DB\_Driver&gt;" defaultReadOnly="true" url="&lt;AdminDB\_Connection\_String&gt;" testWhileIdle="true" testOnBorrow="true" testOnReturn="false" validationQuery="SELECT 1" validationInterval="30000" timeBetweenEvictionRunsMillis="30000" initialSize="1" minIdle="0" removeAbandonedTimeout="300" removeAbandoned="true" logAbandoned="true" minEvictableIdleTimeMillis="30000" jmxEnabled="true"/&gt;</PWD></p>
-  </li>
+<ol>
   <li>
     <p>In the <code class="language-plaintext highlighter-rouge">context.xml</code> file, add the following data source configurations:</p>
 
@@ -289,22 +294,22 @@
       <tbody>
         <tr>
           <td>&lt;DB_Driver&gt;</td>
-          <td>Database specific driver,<strong>MySQL</strong>: <code class="language-plaintext highlighter-rouge">com.mysql.jdbc.Driver</code><strong>ORACLE</strong>: <code class="language-plaintext highlighter-rouge">oracle.jdbc.driver.OracleDriver</code><strong>MSSQL</strong>: <code class="language-plaintext highlighter-rouge">com.microsoft.sqlserver.jdbc.SQLServerDriver</code></td>
+          <td>Database specific driver,<br /><strong>MySQL</strong>: <code class="language-plaintext highlighter-rouge">com.mysql.jdbc.Driver</code><br /><strong>ORACLE</strong>: <code class="language-plaintext highlighter-rouge">oracle.jdbc.driver.OracleDriver</code><br /><strong>MSSQL</strong>: <code class="language-plaintext highlighter-rouge">com.microsoft.sqlserver.jdbc.SQLServerDriver</code></td>
         </tr>
         <tr>
           <td>&lt;JNDI_NAME&gt;</td>
-          <td>JNDI string.jdbc/voltmxadmindbjdbc/KDCDB</td>
+          <td>JNDI string.jdbc/voltmxadmindb<br />jdbc/KDCDB</td>
         </tr>
         <tr>
-          <td><code class="language-plaintext highlighter-rouge">&lt;PWD&gt;</code></td>
+          <td>&lt;PWD&gt;</td>
           <td>Database password</td>
         </tr>
         <tr>
-          <td><code class="language-plaintext highlighter-rouge">&lt;DB_connection_String&gt;</code></td>
-          <td>Database connection string, <strong>MySQL</strong>: <code class="language-plaintext highlighter-rouge">jdbc:mysql://localhost:3306/databaseName?autoReconnect=true&amp;useSSL=false</code><strong>ORACLE</strong>: <code class="language-plaintext highlighter-rouge">jdbc:oracle:thin:@hostname:port Number:databaseName</code><strong>MSSQL</strong>: <code class="language-plaintext highlighter-rouge">jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME</code></td>
+          <td>&lt;DB_connection_String&gt;</td>
+          <td>Database connection string, <br /><strong>MySQL</strong>: <code class="language-plaintext highlighter-rouge">jdbc:mysql://localhost:3306/databaseName?autoReconnect=true&amp;useSSL=false</code><br /><strong>ORACLE</strong>: <code class="language-plaintext highlighter-rouge">jdbc:oracle:thin:@hostname:port Number:databaseName</code><br /><strong>MSSQL</strong>: <code class="language-plaintext highlighter-rouge">jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME</code></td>
         </tr>
         <tr>
-          <td><code class="language-plaintext highlighter-rouge">&lt;USER_NAME&gt;</code></td>
+          <td>&lt;USER_NAME&gt;</td>
           <td>Database username. For example, root</td>
         </tr>
       </tbody>
@@ -314,7 +319,9 @@
       <li>The following JNDI configuration template is for <strong>VoltMX Integration Service</strong> component:</li>
     </ul>
   </li>
-  <li>Save the <code class="language-plaintext highlighter-rouge">context.xml</code> file.</li>
+  <li>
+    <p>Save the <code class="language-plaintext highlighter-rouge">context.xml</code> file.</p>
+  </li>
 </ol>
       <h3 id="how-to-configure-data-source---adminxml">
         
@@ -345,40 +352,44 @@
       <tbody>
         <tr>
           <td>&lt;DB_Driver&gt;</td>
-          <td>Database specific driver,<strong>MySQL</strong>: <code class="language-plaintext highlighter-rouge">com.mysql.jdbc.Driver</code><strong>ORACLE</strong>: <code class="language-plaintext highlighter-rouge">oracle.jdbc.driver.OracleDriver</code><strong>MSSQL</strong>: <code class="language-plaintext highlighter-rouge">com.microsoft.sqlserver.jdbc.SQLServerDriver</code></td>
+          <td>Database specific driver,<br /><strong>MySQL</strong>: <code class="language-plaintext highlighter-rouge">com.mysql.jdbc.Driver</code><br /><strong>ORACLE</strong>: <code class="language-plaintext highlighter-rouge">oracle.jdbc.driver.OracleDriver</code><br /><strong>MSSQL</strong>: <code class="language-plaintext highlighter-rouge">com.microsoft.sqlserver.jdbc.SQLServerDriver</code></td>
         </tr>
         <tr>
           <td>&lt;JNDI_NAME&gt;</td>
           <td>jdbc/voltmxreports.</td>
         </tr>
         <tr>
-          <td><code class="language-plaintext highlighter-rouge">&lt;PWD&gt;</code></td>
+          <td>&lt;PWD&gt;</td>
           <td>Database password</td>
         </tr>
         <tr>
-          <td><code class="language-plaintext highlighter-rouge">&lt;DB_connection_String&gt;</code></td>
-          <td>Database connection string, <strong>MySQL</strong>: <code class="language-plaintext highlighter-rouge">jdbc:mysql://hostname/databaseName</code><strong>ORACLE</strong>: <code class="language-plaintext highlighter-rouge">jdbc:oracle:thin:@hostname:port Number:databaseName</code><strong>MSSQL</strong>: <code class="language-plaintext highlighter-rouge">jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME</code></td>
+          <td>&lt;DB_connection_String&gt;</td>
+          <td>Database connection string, <br /><strong>MySQL</strong>: <code class="language-plaintext highlighter-rouge">jdbc:mysql://hostname/databaseName</code><br /><strong>ORACLE</strong>: <code class="language-plaintext highlighter-rouge">jdbc:oracle:thin:@hostname:port Number:databaseName</code><br /><strong>MSSQL</strong>: <code class="language-plaintext highlighter-rouge">jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME</code></td>
         </tr>
         <tr>
-          <td><code class="language-plaintext highlighter-rouge">&lt;USER_NAME&gt;</code></td>
+          <td>&lt;USER_NAME&gt;</td>
           <td>Database username. For example, root</td>
         </tr>
       </tbody>
     </table>
 
     <ul>
-      <li>
-        <p>The following JNDI configuration template is for <strong>VoltMX Integration Service</strong> (reportsdb) component:</p>
-
-        <p>&lt;?xml version=”1.0” encoding=”utf-8” ?&gt;</p>
-        <Context>  
-&lt;Resource auth="Container" driverClassName=="&lt;DB\_Driver&gt;" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/voltmxreports" password="<PWD>" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="&lt;AdminDB\_Connection\_String&gt;" username="&lt;USER\_NAME&gt;" validationInterval="30000" validationQuery="SELECT 1"/&gt;  
-&lt;/Context&gt;
-        
-</PWD></Context>
-      </li>
+      <li>The following JNDI configuration template is for <strong>VoltMX Integration Service</strong> (reportsdb) component:</li>
     </ul>
   </li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        &lt;?xml version="1.0" encoding="utf-8" ?&gt;  
+        &lt;Context&gt;  
+        &lt;Resource auth="Container" driverClassName=="&lt;DB_Driver&gt;" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5"
+        jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2"
+        name="jdbc/voltmxreports" password="&lt;PWD&gt;" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true"
+        testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="&lt;AdminDB_Connection_String&gt;"
+        username="&lt;USER_NAME&gt;" validationInterval="30000" validationQuery="SELECT 1"/&gt;  
+        &lt;/Context&gt;
+    </code></pre></figure>
+
+<ol>
   <li>Save the <code class="language-plaintext highlighter-rouge">admin.xml</code> file.</li>
 </ol>
 

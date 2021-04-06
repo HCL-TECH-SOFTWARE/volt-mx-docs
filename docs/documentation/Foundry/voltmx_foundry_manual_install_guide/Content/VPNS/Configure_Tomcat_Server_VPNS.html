@@ -167,7 +167,7 @@
         </li>
         <li>
             <!-- <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a> -->
-            <a href="https://support.hcltechsw.com/csm?id=kb_search" title="Articles" class="sub-link">Articles</a>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
         </li>
     </ul>
 
@@ -312,6 +312,8 @@
         
       </h2>
     
+  </li>
+</ol>
       <h3 id="mysql">
         
         
@@ -321,15 +323,15 @@
       </h3>
     
 
-    <ol>
-      <li>Copy <code class="language-plaintext highlighter-rouge">mysql-connector-java-8.0.12.jar</code> to <code class="language-plaintext highlighter-rouge">&lt;Tomcat installation directory&gt;/lib</code></li>
-      <li>Create the <strong>vpns.xml</strong> file in the <code class="language-plaintext highlighter-rouge">&lt;User install directory&gt;\apache-tomcat-9.0.33\conf\Catalina\localhost</code> folder.</li>
-      <li>In the <strong>vpns.xml</strong> file, add the following data source configurations:</li>
-    </ol>
-  </li>
+<ol>
+  <li>Copy <code class="language-plaintext highlighter-rouge">mysql-connector-java-8.0.12.jar</code> to <code class="language-plaintext highlighter-rouge">&lt;Tomcat installation directory&gt;/lib</code></li>
+  <li>Create the <strong>vpns.xml</strong> file in the <code class="language-plaintext highlighter-rouge">&lt;User install directory&gt;\apache-tomcat-9.0.33\conf\Catalina\localhost</code> folder.</li>
+  <li>In the <strong>vpns.xml</strong> file, add the following data source configurations:</li>
 </ol>
+
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;Resource name="jdbc/vpnsdb" auth="Container" type="javax.sql.DataSource" scope="Shareable" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" maxActive="50" minIdle="1" maxIdle="10" testWhileIdle="true" maxWait="10000" initialSize="10" testOnBorrow="true" validationQuery="SELECT 1" removeAbandoned="false"
-        removeAbandonedTimeout="180" logAbandoned="false" username="username" password="password" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://&lt;host&gt;:&lt;port&gt;/
+       removeAbandonedTimeout="180" logAbandoned="false" username="username" password="password" driverClassName="com.mysql.jdbc.Driver"
+       url="jdbc:mysql://&lt;host&gt;:&lt;port&gt;/
         &lt;database&gt;?autoReconnect=true&amp;amp;
         useUnicode=yes&amp;amp;characterEncoding=UTF-8&amp;amp;cachePrepStmts=true&amp;amp;
         cacheCallableStmts
@@ -339,23 +341,54 @@
         rewriteBatchedStatements=true&amp;amp;max_allowed_packet=104857600 "/&gt;
         </code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4.  Replace the value given below in the above configuration.
-    
-    | Configuration Value | Description |
-    | --- | --- |
-    | host | Database server IP/name |
-    | port | Database server port |
-    | username | Database user name |
-    | password | Database password |
-    | database | Database name |
+<ol>
+  <li>Replace the value given below in the above configuration.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>Configuration Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>host</td>
+      <td>Database server IP/name</td>
+    </tr>
+    <tr>
+      <td>port</td>
+      <td>Database server port</td>
+    </tr>
+    <tr>
+      <td>username</td>
+      <td>Database user name</td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td>Database password</td>
+    </tr>
+    <tr>
+      <td>database</td>
+      <td>Database name</td>
+    </tr>
+  </tbody>
+</table>
+      <h3 id="oracle">
+        
+        
+          <a href="#oracle" class="anchor-heading" aria-labelledby="oracle"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Oracle
+        
+        
+      </h3>
     
 
-### Oracle
-
-1.  Copy `ojdbc6.jar` to `&lt;Tomcat installation directory&gt;/lib`
-2.  Create the **vpns.xml** file in the `&lt;User install directory&gt;\apache-tomcat-9.0.33\conf\Catalina\localhost` folder.
-3.  In the **vpns.xml** file, add the following data source configurations:
-</code></pre></div></div>
+<ol>
+  <li>Copy <code class="language-plaintext highlighter-rouge">ojdbc6.jar</code> to <code class="language-plaintext highlighter-rouge">&lt;Tomcat installation directory&gt;/lib</code></li>
+  <li>Create the <strong>vpns.xml</strong> file in the <code class="language-plaintext highlighter-rouge">&lt;User install directory&gt;\apache-tomcat-9.0.33\conf\Catalina\localhost</code> folder.</li>
+  <li>In the <strong>vpns.xml</strong> file, add the following data source configurations:</li>
+</ol>
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;Resource name="jdbc/vpnsdb" auth="Container" type="javax.sql.DataSource" scope="Shareable"
         
         factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" maxActive="30" minIdle="1" maxIdle="10" testWhileIdle="true"
@@ -365,39 +398,95 @@
         removeAbandonedTimeout="180" logAbandoned="false" username="username" password="password" driverClassName="oracle.jdbc.driver.OracleDriver" url="jdbc:oracle:thin:@host:port:sid"/&gt;
         </code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4.  Replace the value given below in the above configuration.
-    
-    | Configuration Value | Description |
-    | --- | --- |
-    | host | Database server IP/name |
-    | port | Database server port |
-    | username | database user name |
-    | password | Database password |
-    | sid | Oracle service id/name |
+<ol>
+  <li>Replace the value given below in the above configuration.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>Configuration Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>host</td>
+      <td>Database server IP/name</td>
+    </tr>
+    <tr>
+      <td>port</td>
+      <td>Database server port</td>
+    </tr>
+    <tr>
+      <td>username</td>
+      <td>database user name</td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td>Database password</td>
+    </tr>
+    <tr>
+      <td>sid</td>
+      <td>Oracle service id/name</td>
+    </tr>
+  </tbody>
+</table>
+      <h3 id="sqlserver">
+        
+        
+          <a href="#sqlserver" class="anchor-heading" aria-labelledby="sqlserver"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> SQLServer
+        
+        
+      </h3>
     
 
-### SQLServer
-
-1.  Copy `sqljdbc4-4.1.jar`to `&lt;Tomcat installation directory&gt;/lib`
-2.  Create the **vpns.xml** file in the `&lt;User install directory&gt;\apache-tomcat-9.0.33\conf\Catalina\localhost` folder.
-3.  In the **vpns.xml** file, add the following data source configurations:
-</code></pre></div></div>
+<ol>
+  <li>Copy <code class="language-plaintext highlighter-rouge">sqljdbc4-4.1.jar</code>to <code class="language-plaintext highlighter-rouge">&lt;Tomcat installation directory&gt;/lib</code></li>
+  <li>Create the <strong>vpns.xml</strong> file in the <code class="language-plaintext highlighter-rouge">&lt;User install directory&gt;\apache-tomcat-9.0.33\conf\Catalina\localhost</code> folder.</li>
+  <li>In the <strong>vpns.xml</strong> file, add the following data source configurations:</li>
+</ol>
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;Resource name="jdbc/vpnsdb" auth="Container" type="javax.sql.DataSource" scope="Shareable"factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" maxActive="50" minIdle="1" maxIdle="10" testWhileIdle="true" maxWait="10000" initialSize="10" testOnBorrow="true" validationQuery="SELECT 1" removeAbandoned="false"
         
-        removeAbandonedTimeout="180" logAbandoned="false" username="username" password="password" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://host:port;databaseName=database;user=username;
-        password=password;sendStringParametersAsUnicode=true;"/&gt;
-        </code></pre></figure>
+   removeAbandonedTimeout="180" logAbandoned="false" username="username" password="password"
+   driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://host:port;databaseName=database;user=username;
+   password=password;sendStringParametersAsUnicode=true;"/&gt;
+   </code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4.  Replace the value given below in the above configuration.
-    
-    | Configuration Value | Description |
-    | --- | --- |
-    | host | Database server IP/name |
-    | port | Database server port |
-    | username | Database user name |
-    | password | Database password |
-    | database | Database name |
-</code></pre></div></div>
+<ol>
+  <li>Replace the value given below in the above configuration.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>Configuration Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>host</td>
+      <td>Database server IP/name</td>
+    </tr>
+    <tr>
+      <td>port</td>
+      <td>Database server port</td>
+    </tr>
+    <tr>
+      <td>username</td>
+      <td>Database user name</td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td>Database password</td>
+    </tr>
+    <tr>
+      <td>database</td>
+      <td>Database name</td>
+    </tr>
+  </tbody>
+</table>
       <h2 id="deploy-engagement-services">
         
         

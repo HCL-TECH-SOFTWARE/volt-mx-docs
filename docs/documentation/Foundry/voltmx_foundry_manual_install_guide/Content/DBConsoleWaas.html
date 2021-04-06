@@ -167,7 +167,7 @@
         </li>
         <li>
             <!-- <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a> -->
-            <a href="https://support.hcltechsw.com/csm?id=kb_search" title="Articles" class="sub-link">Articles</a>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
         </li>
     </ul>
 
@@ -250,22 +250,20 @@
 
     <ul>
       <li>
-        <p><strong>The following is a sample query for creating a database in SQL Server</strong>:</p>
-
-        <p>CREATE DATABASE mfconsoledb;</p>
+        <p><strong>The following is a sample query for creating a database in SQL Server</strong>:
+    <code class="language-plaintext highlighter-rouge">CREATE DATABASE mfconsoledb;</code></p>
       </li>
       <li>
         <p>The following is a sample query for creating a database in MySQL:</p>
 
-        <p>CREATE DATABASE `<DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;</DBNAME></p>
+        <p><code class="language-plaintext highlighter-rouge">CREATE DATABASE \`&lt;DBNAME&gt;\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;</code></p>
       </li>
     </ul>
 
     <blockquote>
-      <p><strong><em>Important:</em></strong>  For workspace, you can create database with a custom name instead the default databases such as  <code class="language-plaintext highlighter-rouge">mfconsoledb</code>.</p>
+      <p><strong><em>Important:</em></strong>  For workspace, you can create database with a custom name instead the default databases such as  <code class="language-plaintext highlighter-rouge">mfconsoledb</code>.<br />
+  For example, if you have created a workspace database with a custom name ( <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;mfconsoledb&lt;suffix&gt;</code>), replace the custom database name in all SQL scripts in the <code class="language-plaintext highlighter-rouge">\VoltMXFoundry_Plugins\scripts\waasdbmigrations\commondbscripts</code>  folder.</p>
     </blockquote>
-
-    <p>For example, if you have created a workspace database with a custom name ( <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;mfconsoledb&lt;suffix&gt;</code>), replace the custom database name in all SQL scripts in the <code class="language-plaintext highlighter-rouge">\VoltMXFoundry_Plugins\scripts\waasdbmigrations\commondbscripts</code>  folder.</p>
   </li>
   <li>
     <p>Execute all SQL scripts for the component by using the steps provided at <a href="FlywayNew.html">Configuring Flyway Command-line Tool</a>.</p>
@@ -278,7 +276,7 @@
     </ul>
   </li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">\# VoltMX Workspace Services Database, replace the following placeholders 
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">      # VoltMX Workspace Services Database, replace the following placeholders 
         # in SQL migrations for your database
         flyway.placeholders.VOLTMX_WAAS_LOG_LOCATION=C:VoltMXFoundry/logs
         flyway.placeholders.VOLTMX_WAAS_LOG_LEVEL=INFO
@@ -287,25 +285,56 @@
         flyway.placeholders.VOLTMX_WAAS_GLOBAL_DB
         </code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*   Tablespace Placeholders for Oracle:
-    
-    | Product Name | Tablespace Placeholders for Oracle |
-    | --- | --- |
-    | Workspace | WAAS\_DATA\_TABLESPACE , WAAS\_INDEX\_TABLESPACE , WAAS\_LOB\_TABLESPACE |
-    
-*   SQL files paths for Workspace Services in VoltMXFoundry\_Plugins folder:
-</code></pre></div></div>
+<ul>
+  <li>
+    <p>Tablespace Placeholders for Oracle:</p>
 
-<details close="">
-  <summary>Click here for more details</summary>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Tablespace Placeholders for Oracle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Workspace</td>
+          <td>WAAS_DATA_TABLESPACE , WAAS_INDEX_TABLESPACE , WAAS_LOB_TABLESPACE</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>SQL files paths for Workspace Services in VoltMXFoundry_Plugins folders.</p>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    | Path for SQL files in the VoltMXFoundry\_Plugins folder | Database | Component |
-    | --- | --- | --- |
-    | \\VoltMXFoundry\_Plugins\\scripts\\waasdbmigrations\\commondbscripts | MySQL | Workspace   |
-    | \\VoltMXFoundry\_Plugins\\scripts\\mmigrations-waas-oracle\\commondbscripts | Oracle |
-    | \\VoltMXFoundry\_Plugins\\scripts\\migrations-waas-sqlserver\\commondbscripts | SQL Server |
-</code></pre></div>  </div>
-</details>
+    <table>
+      <thead>
+        <tr>
+          <th>Path for SQL files in the VoltMXFoundry_Plugins folder</th>
+          <th>Database</th>
+          <th>Component</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>\VoltMXFoundry_Plugins\scripts\waasdbmigrations\commondbscripts</td>
+          <td>MySQL</td>
+          <td>Workspace  </td>
+        </tr>
+        <tr>
+          <td>\VoltMXFoundry_Plugins\scripts\mmigrations-waas-oracle\commondbscripts</td>
+          <td>Oracle</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>\VoltMXFoundry_Plugins\scripts\migrations-waas-sqlserver\commondbscripts</td>
+          <td>SQL Server</td>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <ol>
   <li>

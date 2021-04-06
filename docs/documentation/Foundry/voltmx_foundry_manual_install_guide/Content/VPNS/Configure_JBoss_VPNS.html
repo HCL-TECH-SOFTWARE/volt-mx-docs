@@ -167,7 +167,7 @@
         </li>
         <li>
             <!-- <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a> -->
-            <a href="https://support.hcltechsw.com/csm?id=kb_search" title="Articles" class="sub-link">Articles</a>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
         </li>
     </ul>
 
@@ -254,7 +254,7 @@
 
 <p>You must configure the JBoss Server to provide the memory arguments and the location of the VoltMX Foundry Engagement Services configuration files.</p>
 
-<p>To configure the JBoss server, follow these steps:</p>
+<p><strong>To configure the JBoss server, follow these steps:</strong></p>
 
 <ol>
   <li>Go to <code class="language-plaintext highlighter-rouge">&lt;JBoss Install Directory&gt;/bin.</code></li>
@@ -304,7 +304,7 @@
     </table>
   </li>
   <li>
-    <p>-Xms2048m –Xmx2048m -Dvpns.configLocation=/data/vpns-config</p>
+    <p><code class="language-plaintext highlighter-rouge">\-Xms2048m –Xmx2048m -Dvpns.configLocation=/data/vpns-config</code></p>
   </li>
   <li>Save the configuration.</li>
 </ol>
@@ -352,95 +352,56 @@
       <li>Create <code class="language-plaintext highlighter-rouge">module.xml</code> file.</li>
       <li>Add the following content.</li>
     </ol>
-  </li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;module xmlns="urn:jboss:module:1.1" name="com.mysql"&gt;
-        
-        &lt;properties&gt;
-        
-        &lt;property name="jboss.api" value="unsupported"/&gt;
-        
-        &lt;/properties&gt;
-        
-        &lt;resources&gt;
-        
-        &lt;resource-root path="mysql-connector-java-8.0.12.jar"/&gt;
-        
-        &lt;/resources&gt;
-        
-        &lt;dependencies&gt;
-        
-        &lt;module name="javax.api"/&gt;
-        
-        &lt;module name="javax.transaction.api"/&gt;
-        
-        &lt;module name="javax.servlet.api" optional="true"/&gt;
-        
-        &lt;/dependencies&gt;
-        
-        &lt;/module&gt;
-        
-        
-        </code></pre></figure>
 
-<ol>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;module xmlns="urn:jboss:module:1.1" name="com.mysql"&gt;
+    &lt;properties&gt;
+    &lt;property name="jboss.api" value="unsupported"/&gt;
+    &lt;/properties&gt;
+    &lt;resources&gt;
+    &lt;resource-root path="mysql-connector-java-8.0.12.jar"/&gt;
+    &lt;/resources&gt;        
+    &lt;dependencies&gt;
+    &lt;module name="javax.api"/&gt;
+    &lt;module name="javax.transaction.api"/&gt;
+    &lt;module name="javax.servlet.api" optional="true"/&gt;
+    &lt;/dependencies&gt;
+    &lt;/module&gt;
+</code></pre></div>    </div>
+  </li>
   <li>Configure data source in <code class="language-plaintext highlighter-rouge">$JBOSS_HOME/standalone/configuration/standalone.xml</code>
     <ol>
-      <li>Add the following configuration with in <datasources></datasources></li>
+      <li>Add the following configuration with in &lt;datasources&gt;</li>
+    </ol>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;datasource jndi-name="java:/jdbc/vpnsdb" pool-name="vpnsds" enabled="true" use-java-context="true"&gt;
+    &lt;connection-url&gt;vpns db connection url&lt;/connection-url&gt;
+    &lt;driver&gt;mysql&lt;/driver&gt;
+    &lt;security&gt;
+    &lt;user-name&gt;vpns db username&lt;/user-name&gt;
+    &lt;password&gt;vpns db password&lt;/password&gt;
+    &lt;/security&gt;
+    &lt;new-connection-sql&gt;SELECT 1&lt;/new-connection-sql&gt;
+    &lt;validation&gt;
+    &lt;validate-on-match&gt;true&lt;/validate-on-match&gt;
+    &lt;check-valid-connection-sql&gt;SELECT 1&lt;/check-valid-connection-sql&gt;
+    &lt;/validation&gt;
+    &lt;/datasource&gt;
+</code></pre></div>    </div>
+
+    <ol>
+      <li>Add driver with in &lt;drivers&gt;
+    <code class="language-plaintext highlighter-rouge">&lt;driver name="mysql" module="com.mysql"/&gt;</code></li>
     </ol>
   </li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;datasource jndi-name="java:/jdbc/vpnsdb" pool-name="vpnsds" enabled="true" use-java-context="true"&gt;
-        
-        &lt;connection-url&gt;vpns db connection url&lt;/connection-url&gt;
-        
-        &lt;driver&gt;mysql&lt;/driver&gt;
-        
-        &lt;security&gt;
-        
-        &lt;user-name&gt;vpns db username&lt;/user-name&gt;
-        
-        &lt;password&gt;vpns db password&lt;/password&gt;
-        
-        &lt;/security&gt;
-        
-        &lt;new-connection-sql&gt;SELECT 1&lt;/new-connection-sql&gt;
-        
-        &lt;validation&gt;
-        
-        &lt;validate-on-match&gt;true&lt;/validate-on-match&gt;
-        
-        &lt;check-valid-connection-sql&gt;SELECT 1&lt;/check-valid-connection-sql&gt;
-        
-        &lt;/validation&gt;
-        
-        &lt;/datasource&gt;
-        
-        
-        </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.  Add driver with in &lt;drivers&gt;
-    
-    `&lt;driver name="mysql" module="com.mysql"/&gt;`
-</code></pre></div></div>
-
-<ol>
   <li>Disable default JPA in <code class="language-plaintext highlighter-rouge">jboss 6.2 $JBOSS_HOME/standalone/configuration/standalone.xml</code>
     <ol>
       <li>Remove the following tag:</li>
     </ol>
   </li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;subsystem xmlns="urn:jboss:domain:jpa:1.1"&gt;
-        
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        &lt;subsystem xmlns="urn:jboss:domain:jpa:1.1"&gt;
         &lt;jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/&gt;
-        
         &lt;/subsystem&gt;
-        
-        
         </code></pre></figure>
       <h3 id="microsoftsql">
         
@@ -460,96 +421,67 @@
       <li>Create <code class="language-plaintext highlighter-rouge">module.xml</code>file.</li>
       <li>Add the following content:</li>
     </ol>
-  </li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;module xmlns="urn:jboss:module:1.1" name="com.microsoft"&gt;
-        
-        &lt;properties&gt;
-        
-        &lt;property name="jboss.api" value="unsupported"/&gt;
-        
-        &lt;/properties&gt;
-        
-        &lt;resources&gt;
-        
-        &lt;resource-root path=" `mssql-jdbc-7.0.0.jre8`"/&gt;
-        
-        &lt;/resources&gt;
-        
-        &lt;dependencies&gt;
-        
-        &lt;module name="javax.api"/&gt;
-        
-        &lt;module name="javax.transaction.api"/&gt;
-        
-        &lt;module name="javax.servlet.api" optional="true"/&gt;
-        
-        &lt;/dependencies&gt;
-        
-        &lt;/module&gt;
-        
-        
-        </code></pre></figure>
 
-<ol>
+    <p><code class="language-plaintext highlighter-rouge">
+    &lt;module xmlns="urn:jboss:module:1.1" name="com.microsoft"&gt;       
+    &lt;properties&gt;
+    &lt;property name="jboss.api" value="unsupported"/&gt;
+    &lt;/properties&gt;
+    &lt;resources&gt;
+    &lt;resource-root path=" `mssql-jdbc-7.0.0.jre8`"/&gt;
+    &lt;/resources&gt;
+    &lt;dependencies&gt;
+    &lt;module name="javax.api"/&gt;
+    &lt;module name="javax.transaction.api"/&gt;
+    &lt;module name="javax.servlet.api" optional="true"/&gt;
+    &lt;/dependencies&gt;
+    &lt;/module&gt;
+   </code></p>
+  </li>
   <li>Configure data source in <code class="language-plaintext highlighter-rouge">$JBOSS_HOME/standalone/configuration/standalone.xml.</code>
     <ol>
-      <li>Add the following configuration with in <datasources></datasources></li>
+      <li>Add the following configuration with in &lt;datasources&gt;</li>
+    </ol>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;datasource jndi-name="java:/jdbc/vpnsdb" pool-name="vpnsds" enabled="true" use-java-context="true"&gt;
+    &lt;connection-url&gt;vpns db connection url&lt;/connection-url&gt;
+    &lt;driver&gt;microsoft&lt;/driver&gt;
+    &lt;security&gt;
+    &lt;user-name&gt;vpns db username&lt;/user-name&gt;
+    &lt;password&gt;vpns db password&lt;/password&gt;
+    &lt;/security&gt;
+    &lt;new-connection-sql&gt;SELECT 1&lt;/new-connection-sql&gt;
+    &lt;validation&gt;
+    &lt;validate-on-match&gt;true&lt;/validate-on-match&gt;
+    &lt;check-valid-connection-sql&gt;SELECT 1&lt;/check-valid-connection-sql&gt;
+    &lt;/validation&gt;
+    &lt;/datasource&gt;
+</code></pre></div>    </div>
+    <ol>
+      <li>
+        <p>Add driver with in <drivers></drivers></p>
+
+        <p><code class="language-plaintext highlighter-rouge">&lt;driver name="microsoft" module="com.microsoft"/&gt;</code></p>
+      </li>
     </ol>
   </li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;datasource jndi-name="java:/jdbc/vpnsdb" pool-name="vpnsds" enabled="true" use-java-context="true"&gt;
-        
-        &lt;connection-url&gt;vpns db connection url&lt;/connection-url&gt;
-        
-        &lt;driver&gt;microsoft&lt;/driver&gt;
-        
-        &lt;security&gt;
-        
-        &lt;user-name&gt;vpns db username&lt;/user-name&gt;
-        
-        &lt;password&gt;vpns db password&lt;/password&gt;
-        
-        &lt;/security&gt;
-        
-        &lt;new-connection-sql&gt;SELECT 1&lt;/new-connection-sql&gt;
-        
-        &lt;validation&gt;
-        
-        &lt;validate-on-match&gt;true&lt;/validate-on-match&gt;
-        
-        &lt;check-valid-connection-sql&gt;SELECT 1&lt;/check-valid-connection-sql&gt;
-        
-        &lt;/validation&gt;
-        
-        &lt;/datasource&gt;
-        
-        
-        </code></pre></figure>
+  <li>
+    <p>Disable default JPA in <code class="language-plaintext highlighter-rouge">jboss 6.2 $JBOSS_HOME/standalone/configuration/standalone.xml</code></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.  Add driver with in &lt;drivers&gt;
-    
-    `&lt;driver name="microsoft" module="com.microsoft"/&gt;`
-</code></pre></div></div>
-
-<ol>
-  <li>Disable default JPA in <code class="language-plaintext highlighter-rouge">jboss 6.2 $JBOSS_HOME/standalone/configuration/standalone.xml</code>
     <ol>
       <li>Remove the following tag:</li>
     </ol>
+
+    <p>``` 
+    <subsystem xmlns="urn:jboss:domain:jpa:1.1"></subsystem></p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/&gt;
+    
+&lt;/subsystem&gt;
+```
+</code></pre></div>    </div>
   </li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;subsystem xmlns="urn:jboss:domain:jpa:1.1"&gt;
-        
-        &lt;jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/&gt;
-        
-        &lt;/subsystem&gt;
-        
-        
-        </code></pre></figure>
       <h3 id="oracle">
         
         
@@ -566,94 +498,61 @@
       <li><code class="language-plaintext highlighter-rouge">$JBOSS_HOME/modules/com/oracle/main</code></li>
       <li>Copy <code class="language-plaintext highlighter-rouge">ojdbc6_g.jar</code> to <code class="language-plaintext highlighter-rouge">$JBOSS_HOME/modules/com/oracle/main</code></li>
       <li>Create <code class="language-plaintext highlighter-rouge">module.xml</code> file.</li>
-      <li>Add the following content:</li>
+      <li>Add the following content:
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;module xmlns="urn:jboss:module:1.1" name="com.oracle"&gt; 
+&lt;properties&gt;
+&lt;property name="jboss.api" value="unsupported"/&gt;
+&lt;/properties&gt;
+&lt;resources&gt;
+&lt;resource-root path="ojdbc6_g.jar"/&gt;
+&lt;/resources&gt;
+&lt;dependencies&gt;
+&lt;module name="javax.api"/&gt;
+&lt;module name="javax.transaction.api"/&gt;
+&lt;module name="javax.servlet.api" optional="true"/&gt;
+&lt;/dependencies&gt;
+&lt;/module&gt;
+</code></pre></div>        </div>
+      </li>
     </ol>
   </li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;module xmlns="urn:jboss:module:1.1" name="com.oracle"&gt;
-        
-        &lt;properties&gt;
-        
-        &lt;property name="jboss.api" value="unsupported"/&gt;
-        
-        &lt;/properties&gt;
-        
-        &lt;resources&gt;
-        
-        &lt;resource-root path="ojdbc6_g.jar"/&gt;
-        
-        &lt;/resources&gt;
-        
-        &lt;dependencies&gt;
-        
-        &lt;module name="javax.api"/&gt;
-        
-        &lt;module name="javax.transaction.api"/&gt;
-        
-        &lt;module name="javax.servlet.api" optional="true"/&gt;
-        
-        &lt;/dependencies&gt;
-        
-        &lt;/module&gt;
-        
-        
-        </code></pre></figure>
-
-<ol>
   <li>Configure data source in <code class="language-plaintext highlighter-rouge">$JBOSS_HOME/standalone/configuration/standalone.xml</code>
     <ol>
-      <li>Add the following configuration with in <datasources></datasources></li>
+      <li>Add the following configuration with in &lt;datasources&gt;</li>
+    </ol>
+
+    <p><code class="language-plaintext highlighter-rouge">
+    &lt;datasource jndi-name="java:/jdbc/vpnsdb" pool-name="vpnsds" enabled="true" use-java-context="true"&gt;
+    &lt;connection-url&gt;vpns db connection url&lt;/connection-url&gt;
+    &lt;driver&gt;oracle&lt;/driver&gt;
+    &lt;security&gt;
+    &lt;user-name&gt;vpns db username&lt;/user-name&gt;
+    &lt;password&gt;vpns db password&lt;/password&gt;
+    &lt;/security&gt;
+    &lt;new-connection-sql&gt;select 1 from dual&lt;/new-connection-sql&gt;
+    &lt;validation&gt;
+    &lt;validate-on-match&gt;true&lt;/validate-on-match&gt;
+    &lt;check-valid-connection-sql&gt;select 1 from dual&lt;/check-valid-connection-sql&gt;
+    &lt;/validation&gt;
+    &lt;/datasource&gt;
+   </code></p>
+
+    <ol>
+      <li>
+        <p>Add driver with in <drivers></drivers></p>
+
+        <p><code class="language-plaintext highlighter-rouge">&lt;driver name="oracle" module="com.oracle"/&gt;</code></p>
+      </li>
     </ol>
   </li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;datasource jndi-name="java:/jdbc/vpnsdb" pool-name="vpnsds" enabled="true" use-java-context="true"&gt;
-        
-        &lt;connection-url&gt;vpns db connection url&lt;/connection-url&gt;
-        
-        &lt;driver&gt;oracle&lt;/driver&gt;
-        
-        &lt;security&gt;
-        
-        &lt;user-name&gt;vpns db username&lt;/user-name&gt;
-        
-        &lt;password&gt;vpns db password&lt;/password&gt;
-        
-        &lt;/security&gt;
-        
-        &lt;new-connection-sql&gt;select 1 from dual&lt;/new-connection-sql&gt;
-        
-        &lt;validation&gt;
-        
-        &lt;validate-on-match&gt;true&lt;/validate-on-match&gt;
-        
-        &lt;check-valid-connection-sql&gt;select 1 from dual&lt;/check-valid-connection-sql&gt;
-        
-        &lt;/validation&gt;
-        
-        &lt;/datasource&gt;
-        
-        
-        </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.  Add driver with in &lt;drivers&gt;
-    
-    `&lt;driver name="oracle" module="com.oracle"/&gt;`
-</code></pre></div></div>
-
-<ol>
   <li>Disable default JPA in <code class="language-plaintext highlighter-rouge">jboss 6.2 $JBOSS_HOME/standalone/configuration/standalone.xml</code></li>
   <li>Remove the following tag:</li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    
-    &lt;subsystem xmlns="urn:jboss:domain:jpa:1.1"&gt;
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    &lt;subsystem xmlns="urn:jboss:domain:jpa:1.1"&gt;
     
     &lt;jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/&gt;
     
     &lt;/subsystem&gt;
-    
-    
     </code></pre></figure>
       <h3 id="db2">
         
@@ -671,92 +570,57 @@
       <li><code class="language-plaintext highlighter-rouge">$JBOSS_HOME/modules/com/db2/main</code></li>
       <li> Copy <code class="language-plaintext highlighter-rouge">db2jcc4.jar</code> to <code class="language-plaintext highlighter-rouge">$JBOSS_HOME/modules/com/db2/main</code></li>
       <li>Create <code class="language-plaintext highlighter-rouge">module.xml</code> file.</li>
-      <li>Add the following content:</li>
+      <li>Add the following content:
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;module xmlns="urn:jboss:module:1.1" name="com.db2"&gt; 
+&lt;properties&gt;
+&lt;property name="jboss.api" value="unsupported"/&gt;
+&lt;/properties&gt;
+&lt;resources&gt;
+&lt;resource-root path="db2jcc4.jar"/&gt;
+&lt;/resources&gt;
+&lt;dependencies&gt;
+&lt;module name="javax.api"/&gt;
+&lt;module name="javax.transaction.api"/&gt;
+&lt;module name="javax.servlet.api" optional="true"/&gt;
+&lt;/dependencies&gt;
+&lt;/module&gt;
+</code></pre></div>        </div>
+      </li>
     </ol>
   </li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;module xmlns="urn:jboss:module:1.1" name="com.db2"&gt;
-        
-        &lt;properties&gt;
-        
-        &lt;property name="jboss.api" value="unsupported"/&gt;
-        
-        &lt;/properties&gt;
-        
-        &lt;resources&gt;
-        
-        &lt;resource-root path="db2jcc4.jar"/&gt;
-        
-        &lt;/resources&gt;
-        
-        &lt;dependencies&gt;
-        
-        &lt;module name="javax.api"/&gt;
-        
-        &lt;module name="javax.transaction.api"/&gt;
-        
-        &lt;module name="javax.servlet.api" optional="true"/&gt;
-        
-        &lt;/dependencies&gt;
-        
-        &lt;/module&gt;
-        
-        
-        </code></pre></figure>
-
-<ol>
   <li>Configure data source in <code class="language-plaintext highlighter-rouge">$JBOSS_HOME/standalone/configuration/standalone.xml</code>
     <ol>
-      <li>Add the following configuration with in <datasources></datasources></li>
+      <li>Add the following configuration with in &lt;datasources&gt;
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;datasource jndi-name="java:/jdbc/vpnsdb" pool-name="vpnsds" enabled="true" use-java-context="true"&gt; 
+&lt;connection-url&gt;vpns db connection url&lt;/connection-url&gt;
+&lt;driver&gt;db2&lt;/driver&gt;
+&lt;security&gt;
+&lt;user-name&gt;vpns db username&lt;/user-name&gt;
+&lt;password&gt;vpns db password&lt;/password&gt;
+&lt;/security&gt;
+&lt;new-connection-sql&gt;select 1 from sysibm.sysdummy1&lt;/new-connection-sql&gt;
+&lt;validation&gt;
+&lt;validate-on-match&gt;true&lt;/validate-on-match&gt;
+&lt;check-valid-connection-sql&gt;select 1 from sysibm.sysdummy1&lt;/check-valid-connection-sql&gt;
+&lt;/validation&gt;
+&lt;/datasource&gt;
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Add driver with in <drivers></drivers></p>
+
+        <p><code class="language-plaintext highlighter-rouge">&lt;driver name="db2" module="com.db2"/&gt;</code></p>
+      </li>
+      <li>Disable default JPA in <code class="language-plaintext highlighter-rouge">jboss 6.2 $JBOSS_HOME/standalone/configuration/standalone.xm</code>l</li>
+      <li>Remove the following tag:</li>
     </ol>
   </li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;datasource jndi-name="java:/jdbc/vpnsdb" pool-name="vpnsds" enabled="true" use-java-context="true"&gt;
-        
-        &lt;connection-url&gt;vpns db connection url&lt;/connection-url&gt;
-        
-        &lt;driver&gt;db2&lt;/driver&gt;
-        
-        &lt;security&gt;
-        
-        &lt;user-name&gt;vpns db username&lt;/user-name&gt;
-        
-        &lt;password&gt;vpns db password&lt;/password&gt;
-        
-        &lt;/security&gt;
-        
-        &lt;new-connection-sql&gt;select 1 from sysibm.sysdummy1&lt;/new-connection-sql&gt;
-        
-        &lt;validation&gt;
-        
-        &lt;validate-on-match&gt;true&lt;/validate-on-match&gt;
-        
-        &lt;check-valid-connection-sql&gt;select 1 from sysibm.sysdummy1&lt;/check-valid-connection-sql&gt;
-        
-        &lt;/validation&gt;
-        
-        &lt;/datasource&gt;
-        
-        
-        </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.  Add driver with in &lt;drivers&gt;
-    
-    `&lt;driver name="db2" module="com.db2"/&gt;`
-    
-3.  Disable default JPA in `jboss 6.2 $JBOSS_HOME/standalone/configuration/standalone.xm`l
-4.  Remove the following tag:
-</code></pre></div></div>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        
-        &lt;subsystem xmlns="urn:jboss:domain:jpa:1.1"&gt;
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">        &lt;subsystem xmlns="urn:jboss:domain:jpa:1.1"&gt;
         
         &lt;jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/&gt;
         
         &lt;/subsystem&gt;
-        
-        
         </code></pre></figure>
       <h2 id="deploy-voltmx-foundry-engagement-services">
         

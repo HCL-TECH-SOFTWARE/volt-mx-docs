@@ -167,7 +167,7 @@
         </li>
         <li>
             <!-- <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a> -->
-            <a href="https://support.hcltechsw.com/csm?id=kb_search" title="Articles" class="sub-link">Articles</a>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
         </li>
     </ul>
 
@@ -241,10 +241,9 @@
     <p>Create a database for admin with a custom name along with prefix and suffix. Prefix and suffix are optional. For example, database name is <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;admindb&lt;suffix&gt;</code>.</p>
 
     <blockquote>
-      <p><strong><em>Note:</em></strong>  For Oracle databases, a schema name should be in capital letters.</p>
+      <p><strong><em>Note:</em></strong>  For Oracle databases, a schema name should be in capital letters.<br />
+  Find the word <code class="language-plaintext highlighter-rouge">adminDB</code> in SQL files located in the admin scripts and replace it with <code class="language-plaintext highlighter-rouge">ADMINDB</code>.</p>
     </blockquote>
-
-    <p>Find the word <code class="language-plaintext highlighter-rouge">adminDB</code> in SQL files located in the admin scripts and replace it with <code class="language-plaintext highlighter-rouge">ADMINDB</code>.</p>
 
     <blockquote>
       <p><strong><em>Note:</em></strong> For Oracle, create necessary tablespaces and Users before proceeding. Refer to <a href="Database_Prerequsites.html#prerequisites-for-voltmx-foundry-with-oracle">Prerequisites for VoltMX Foundry with Oracle</a>.</p>
@@ -254,11 +253,11 @@
 
     <p><strong>The following is a sample query for creating a database in MSSQL:</strong></p>
 
-    <p>CREATE DATABASE admindb;</p>
+    <p><code class="language-plaintext highlighter-rouge">CREATE DATABASE admindb;</code></p>
 
     <p>The following is a sample query for creating a database in MySQL:</p>
 
-    <p>CREATE DATABASE `<DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;</DBNAME></p>
+    <p><code class="language-plaintext highlighter-rouge">CREATE DATABASE \`&lt;DBNAME&gt;\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;</code></p>
   </li>
   <li>
     <p>The following details are required for Flyway configuration:</p>
@@ -269,7 +268,8 @@
     </ul>
   </li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">\# For Admin (admindb), replace the following placeholders in SQL migrations for your database flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_TYPE -&gt; value must be 
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"># For Admin (admindb), replace the following placeholders in SQL migrations for your database flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_TYPE -&gt; value must be 
         mysql/oracle/sqlserver based on the chosen databases.
         
         flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_HOSTNAME -&gt; database host name where 
@@ -280,7 +280,7 @@
         
         flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_USERNAME -&gt; database user name
         flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_PASSWORD -&gt;:  ([Encrypt](Encrypt_Passwords.html) this password)
-           - For MySQL and SQL Server: **database user password** 
+           - For MySQL and SQL Server: database user password 
         
         flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_INSTANCE -&gt;  MySQL – empty, 
         SQL Server – instance name if given, Oracle - SID name. flyway.placeholders.VOLTMX_SERVER_CACHEID_TRANSPORT=""flyway.placeholders.VOLTMX_SERVER_SESSION_DISTRIBUTED="FALSE"  
@@ -309,42 +309,148 @@
         flyway.placeholders.SERVER_TOPIC_CONNECTION_FACTORY=ConnectionFactory
         </code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    | No. | Property name | Place holder |
-    | --- | --- | --- |
-    | 1 | richclient.deploy | ${VOLTMX\_SERVER\_RICH\_CLIENT\_DEPLOY} Example value, `lib/apps` (Directory where the rich client binaries will be downloaded. Used by admin module) |
-    | 2 | memcache.cluster | ${VOLTMX\_SERVER\_MEMCACHE\_CLUSTER}Example value, `10.10.10.10:21201` (&lt;ip&gt;:&lt;port&gt; where memcache cluster is running) &gt; **_Note:_** If the installation is being done without memcache, leave this value empty. |
-    | 3 | memcache.no.of.clients | ${VOLTMX\_SERVER\_MEMCACHED\_COUNT}Example value, `1`&gt; **_Note:_** If the installation is being done without memcache, leave this value empty. |
-    | 4 | cacheid.transport | ${VOLTMX\_SERVER\_CACHEID\_TRANSPORT}Example value, `Null`(Specify the transfer mode through below property. Valid values are PARAM\_ONLY, COOKIE\_ONLY, EITHER (Default) or null if memcache is not used) |
-    | 5 | ssl.trustStore | ${VOLTMX\_SERVER\_TRUSTSTORE\_LOCATION}Example value, `$JAVA_HOME/jre/lib/security/cacerts`(cacerts Location) |
-    | 6 | ssl.keyStore | ${VOLTMX\_SERVER\_KEYSTORE\_LOCATION}Example value, `$JAVA_HOME/jre/lib/security/cacerts`(cacerts Location) |
-    | 7 | ssl.trustStorePassword | ${VOLTMX\_SERVER\_TRUSTSTORE\_PASSWORD}Example value, `changeit` |
-    | 8 | ssl.keyStorePassword | ${VOLTMX\_SERVER\_TRUSTSTORE\_PASSWORDExample value, `changeit` |
-    | 9 | metrics.initialContextFactoryName | ${VOLTMX\_SERVER\_JMS\_INITIAL\_CONTEXT\_FACTORY}Example value,for WebLogic: `weblogic.jndi.WLInitialContextFactory`for WebSphere: `com.ibm.websphere.naming.WsnInitialContextFactory`for Tomcat: `org.apache.activemq.jndi.ActiveMQInitialContextFactory`if jboss\_jms is used: `org.jboss.naming.remote.client.InitialContextFactory`if activemq is used: `org.apache.activemq.jndi.ActiveMQInitialContextFactory` |
-    | 10 | metrics.providerURL | ${VOLTMX\_SERVER\_JMS\_PROVIDER\_URL}Example value,For WebLogic: `t3://&lt;ip&gt;:&lt;port&gt;`For WebSphere: `iiop://&lt;ip&gt;:&lt;port&gt;`For Tomcat:  `tcp://$HOST_IP$:$USER_INPUT_JMS_PORT$?jms.useAsyncSend=TRUE`For JBoss: `http-remoting://&lt;Hostname/Host IP&gt;:&lt;HTTP Port&gt;` |
-    | 11 | metrics.securityPrincipalName | ${VOLTMX\_SERVER\_JMS\_USER\_NAME}Example value, `Weblogic`(weblogic admin username) |
-    | 12 | metrics.securityCredentials | ${VOLTMX\_SERVER\_JMS\_USER\_PASSWORD}Example value, `Weblogic123`(weblogic admin password) |
-    | 13 | metrics.userName | ${VOLTMX\_SERVER\_JMS\_USER\_NAME}Example value, `Weblogic`(weblogic admin username) |
-    | 14 | metrics.password | ${VOLTMX\_SERVER\_JMS\_USER\_PASSWORD}Example value, `Weblogic123`(weblogic admin password) |
-    | 15 | SERVER\_LOG\_LOCATION | ${VOLTMX\_SERVER\_LOG\_LOCATION}Example value, `C:/voltmxmflogs/`(Log location for middleware log) |
-    | 16 | SERVER\_LOGGER\_JNDI\_NAME | ${VOLTMX\_SERVER\_LOGGER\_JNDI\_NAME}Example value,`java:comp/env/jdbc/voltmxadmindb` |
-    
-*   Tablespace Placeholders for **Oracle**:
-    
-    | Product Name | Tablespace Placeholders for Oracle |
-    | --- | --- |
-    | Admin DB / Integration Services | VOLTMX\_SERVER\_DATA\_TABLESPACE, VOLTMX\_SERVER\_INDEX\_TABLESPACE, VOLTMX\_SERVER\_LOB\_TABLESPACE |
-    
-*   SQL files paths for an Admin in VoltMXFoundry\_Plugins folder:
-    
-    [![Closed](/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details](javascript:void(0);)
-    
-      
-    | Path for SQL files in the VoltMXFoundry\_Plugins folder | Database | Component |
-    | --- | --- | --- |
-    | \\VoltMXFoundry\_Plugins\\middleware\\admindb\_mysql | MySQL | Admin DB   |
-    | \\VoltMXFoundry\_Plugins\\middleware\\admindb\_oracle | Oracle |
-    | \\VoltMXFoundry\_Plugins\\middleware\\admindb\_sqlserver | SQL Server |
-</code></pre></div></div>
+<table>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Property name</th>
+      <th>Place holder</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>richclient.deploy</td>
+      <td>${VOLTMX_SERVER_RICH_CLIENT_DEPLOY} Example value, <code class="language-plaintext highlighter-rouge">lib/apps</code> (Directory where the rich client binaries will be downloaded. Used by admin module)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>memcache.cluster</td>
+      <td>${VOLTMX_SERVER_MEMCACHE_CLUSTER}Example value, <code class="language-plaintext highlighter-rouge">10.10.10.10:21201</code> (<ip>:<port> where memcache cluster is running)  **_Note:_** If the installation is being done without memcache, leave this value empty.</port></ip></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>memcache.no.of.clients</td>
+      <td>${VOLTMX_SERVER_MEMCACHED_COUNT}Example value, <code class="language-plaintext highlighter-rouge">1</code>  <strong><em>Note:</em></strong> If the installation is being done without memcache, leave this value empty.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>cacheid.transport</td>
+      <td>${VOLTMX_SERVER_CACHEID_TRANSPORT}Example value, <code class="language-plaintext highlighter-rouge">Null</code>(Specify the transfer mode through below property. Valid values are PARAM_ONLY, COOKIE_ONLY, EITHER (Default) or null if memcache is not used)</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>ssl.trustStore</td>
+      <td>${VOLTMX_SERVER_TRUSTSTORE_LOCATION}Example value, <code class="language-plaintext highlighter-rouge">$JAVA_HOME/jre/lib/security/cacerts</code>(cacerts Location)</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>ssl.keyStore</td>
+      <td>${VOLTMX_SERVER_KEYSTORE_LOCATION}Example value, <code class="language-plaintext highlighter-rouge">$JAVA_HOME/jre/lib/security/cacerts</code>(cacerts Location)</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>ssl.trustStorePassword</td>
+      <td>${VOLTMX_SERVER_TRUSTSTORE_PASSWORD}Example value, <code class="language-plaintext highlighter-rouge">changeit</code></td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>ssl.keyStorePassword</td>
+      <td>${VOLTMX_SERVER_TRUSTSTORE_PASSWORDExample value, <code class="language-plaintext highlighter-rouge">changeit</code></td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>metrics.initialContextFactoryName</td>
+      <td>${VOLTMX_SERVER_JMS_INITIAL_CONTEXT_FACTORY}Example value,for WebLogic: <code class="language-plaintext highlighter-rouge">weblogic.jndi.WLInitialContextFactory</code>for WebSphere: <code class="language-plaintext highlighter-rouge">com.ibm.websphere.naming.WsnInitialContextFactory</code>for Tomcat: <code class="language-plaintext highlighter-rouge">org.apache.activemq.jndi.ActiveMQInitialContextFactory</code>if jboss_jms is used: <code class="language-plaintext highlighter-rouge">org.jboss.naming.remote.client.InitialContextFactory</code>if activemq is used: <code class="language-plaintext highlighter-rouge">org.apache.activemq.jndi.ActiveMQInitialContextFactory</code></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>metrics.providerURL</td>
+      <td>${VOLTMX_SERVER_JMS_PROVIDER_URL}Example value,For WebLogic: <code class="language-plaintext highlighter-rouge">t3://&lt;ip&gt;:&lt;port&gt;</code>For WebSphere: <code class="language-plaintext highlighter-rouge">iiop://&lt;ip&gt;:&lt;port&gt;</code>For Tomcat:  <code class="language-plaintext highlighter-rouge">tcp://$HOST_IP$:$USER_INPUT_JMS_PORT$?jms.useAsyncSend=TRUE</code>For JBoss: <code class="language-plaintext highlighter-rouge">http-remoting://&lt;Hostname/Host IP&gt;:&lt;HTTP Port&gt;</code></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>metrics.securityPrincipalName</td>
+      <td>${VOLTMX_SERVER_JMS_USER_NAME}Example value, <code class="language-plaintext highlighter-rouge">Weblogic</code>(weblogic admin username)</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>metrics.securityCredentials</td>
+      <td>${VOLTMX_SERVER_JMS_USER_PASSWORD}Example value, <code class="language-plaintext highlighter-rouge">Weblogic123</code>(weblogic admin password)</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>metrics.userName</td>
+      <td>${VOLTMX_SERVER_JMS_USER_NAME}Example value, <code class="language-plaintext highlighter-rouge">Weblogic</code>(weblogic admin username)</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>metrics.password</td>
+      <td>${VOLTMX_SERVER_JMS_USER_PASSWORD}Example value, <code class="language-plaintext highlighter-rouge">Weblogic123</code>(weblogic admin password)</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>SERVER_LOG_LOCATION</td>
+      <td>${VOLTMX_SERVER_LOG_LOCATION}Example value, <code class="language-plaintext highlighter-rouge">C:/voltmxmflogs/</code>(Log location for middleware log)</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>SERVER_LOGGER_JNDI_NAME</td>
+      <td>${VOLTMX_SERVER_LOGGER_JNDI_NAME}Example value,<code class="language-plaintext highlighter-rouge">java:comp/env/jdbc/voltmxadmindb</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>Tablespace Placeholders for <strong>Oracle</strong>:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Tablespace Placeholders for Oracle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Admin DB / Integration Services</td>
+          <td>VOLTMX_SERVER_DATA_TABLESPACE, VOLTMX_SERVER_INDEX_TABLESPACE, VOLTMX_SERVER_LOB_TABLESPACE</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>SQL files paths for an Admin in VoltMXFoundry_Plugins folder:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Path for SQL files in the VoltMXFoundry_Plugins folder</th>
+          <th>Database</th>
+          <th>Component</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>\VoltMXFoundry_Plugins\middleware\admindb_mysql</td>
+          <td>MySQL</td>
+          <td>Admin DB  </td>
+        </tr>
+        <tr>
+          <td>\VoltMXFoundry_Plugins\middleware\admindb_oracle</td>
+          <td>Oracle</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>\VoltMXFoundry_Plugins\middleware\admindb_sqlserver</td>
+          <td>SQL Server</td>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <ol>
   <li>Execute all SQL scripts by using the steps provided at <a href="FlywayNew.html">Configuring Flyway Command-line Tool</a>.</li>
@@ -383,36 +489,40 @@
 </ol>
 
 <blockquote>
-  <p><strong><em>Important:</em></strong> If you are installing VoltMX Foundry V8 on an application server using the existing database and in case if there is a change in server details, you must update the <code class="language-plaintext highlighter-rouge">management_server</code> details in the <code class="language-plaintext highlighter-rouge">admin</code> database with the application server instance details for the WebAapp publish to work. You must update the following fields in the <code class="language-plaintext highlighter-rouge">server_configuration</code> table of the <strong>admin DB</strong>:</p>
+  <p><strong><em>Important:</em></strong> If you are installing VoltMX Foundry V8 on an application server using the existing database and in case if there is a change in server details, you must update the <code class="language-plaintext highlighter-rouge">management_server</code> details in the <code class="language-plaintext highlighter-rouge">admin</code> database with the application server instance details for the WebAapp publish to work. You must update the following fields in the <code class="language-plaintext highlighter-rouge">server_configuration</code> table of the <strong>admin DB</strong>:<br />
+   - management_server_host_name &lt;application_instance hostname&gt;<br />
+   - management_server_port &lt;soap port of application_instance&gt;<br />
+   - management_server_user &lt;application_instance admin username&gt;<br />
+   - management_server_password &lt;application_instance admin password&gt;<br />
+   - management_server_groups &lt;application_instance groups details&gt;</p>
 </blockquote>
-
-<p>  <code class="language-plaintext highlighter-rouge">- management_server_host_name &lt;application_instance hostname&gt;  
-   - management_server_port &lt;soap port of application_instance&gt;  
-   - management_server_user &lt;application_instance admin username&gt;  
-   - management_server_password &lt;application_instance admin password&gt;  
-   - management_server_groups &lt;application_instance groups details&gt;</code></p>
 
 <p>Click here to view the <a href="http://docs.voltmx.com/8_x_PDFs/MFSchema_Diagrams/admin_server.png">Admin Server DB schema diagram</a></p>
 
 <p>Since the structure of flyway has changed from Flyway 3.2.1 to Flyway 4.0.3 in VoltMX Foundry installer, execute the following statements to make the <code class="language-plaintext highlighter-rouge">schema_version</code> table compatible with Flyway 4.0.3.</p>
 
-<p><strong>Oracle:</strong><br />
+<blockquote>
+  <p><strong>Oracle:</strong><br />
 drop index “schema_version_ir_idx”;<br />
 drop index “schema_version_vr_idx”;<br />
 ALTER TABLE “schema_version” DROP constraint “schema_version_pk” drop index;<br />
 ALTER TABLE “schema_version” DROP COLUMN “version_rank”;<br />
 ALTER TABLE “schema_version” modify(“version” null);<br />
 ALTER TABLE “schema_version” add constraint “schema_version_pk” primary key(“installed_rank”);</p>
+</blockquote>
 
-<p><strong>MySQL:</strong><br />
+<blockquote>
+  <p><strong>MySQL:</strong><br />
 ALTER TABLE schema_version DROP INDEX schema_version_vr_idx;<br />
 ALTER TABLE schema_version DROP INDEX schema_version_ir_idx;<br />
 ALTER TABLE schema_version DROP PRIMARY KEY;<br />
 ALTER TABLE schema_version DROP COLUMN version_rank;<br />
 ALTER TABLE schema_version CHANGE version version VARCHAR(50);<br />
 ALTER TABLE schema_version ADD PRIMARY KEY (installed_rank);</p>
+</blockquote>
 
-<p><strong>SQL Server:</strong><br />
+<blockquote>
+  <p><strong>SQL Server:</strong><br />
 DROP INDEX schema_version_ir_idx ON dbo.schema_version<br />
 GO<br />
 DROP INDEX schema_version_vr_idx ON dbo.schema_version<br />
@@ -425,6 +535,7 @@ ALTER TABLE dbo.schema_version ADD CONSTRAINT schema_version_pk PRIMARY KEY CLUS
 GO<br />
 ALTER TABLE dbo.schema_version ALTER COLUMN version nvarchar(50) NULL<br />
 GO</p>
+</blockquote>
 
         
 

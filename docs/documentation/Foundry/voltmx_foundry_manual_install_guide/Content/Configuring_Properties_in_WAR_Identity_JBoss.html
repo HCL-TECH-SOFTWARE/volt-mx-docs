@@ -167,7 +167,7 @@
         </li>
         <li>
             <!-- <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a> -->
-            <a href="https://support.hcltechsw.com/csm?id=kb_search" title="Articles" class="sub-link">Articles</a>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
         </li>
     </ul>
 
@@ -251,31 +251,34 @@
 <p>To configure properties files in the authService.war file, follow these steps:</p>
 
 <ol>
+  <li>In the <code class="language-plaintext highlighter-rouge">authService.war`/WEB-INF/classes`</code>, open the <code class="language-plaintext highlighter-rouge">authService.properties</code> file, and then edit the following parameters.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    #Database parameters  
+    RDS_DB_TYPE=&lt;Database Type&gt;  
+    RDS_HOSTNAME=&lt;Dataserver IP/Hostname&gt;  
+    RDS_PORT=&lt;Database port&gt;  
+    AUTH_GLOBAL_DBNAME=&lt;VoltMX identity service global database name&gt;  
+    AUTH_CONFIG_DBNAME=&lt;VoltMX identity service configuration database name&gt;  
+    MAX_ACTIVE_DBC=20  
+    AUTH_GLOBAL_DB_MAX_ACTIVE_DBC=5  
+      
+    #General auth parameters  
+      
+    APPSERVER_TYPE=&lt;Application server type&gt;  
+    LOG_LEVEL=INFO  
+    LOG_OPTION=logfile  
+    LOG_LOCATION=&lt;USER_INSTALL_DIR&gt;/logs  
+    ADMIN_USERSTORE_PROVIDER=AUTH  
+      
+    #add the following property only for Oracle  
+    TXN_ISOLATION_LEVEL=2
+    
+    </code></pre></figure>
+
+<ol>
   <li>
-    <p>In the <code class="language-plaintext highlighter-rouge">authService.war`/WEB-INF/classes`</code>, open the <code class="language-plaintext highlighter-rouge">authService.properties</code> file, and then edit the following parameters.</p>
-
-    <p>#Database parameters<br />
-RDS_DB_TYPE=<Database Type="">  
-RDS\_HOSTNAME=&lt;Dataserver IP/Hostname&gt;  
-RDS\_PORT=<Database port="">  
-AUTH\_GLOBAL\_DBNAME=<VoltMX identity="" service="" global="" database="" name="">  
-AUTH\_CONFIG\_DBNAME=<VoltMX identity="" service="" configuration="" database="" name="">  
-MAX\_ACTIVE\_DBC=20  
-AUTH\_GLOBAL\_DB\_MAX\_ACTIVE\_DBC=5</VoltMX></VoltMX></Database></Database></p>
-
-    <p>#General auth parameters</p>
-
-    <p>APPSERVER_TYPE=<Application server="" type="">  
-LOG\_LEVEL=INFO  
-LOG\_OPTION=logfile  
-LOG\_LOCATION=&lt;USER\_INSTALL\_DIR&gt;/logs  
-ADMIN\_USERSTORE\_PROVIDER=AUTH</Application></p>
-
-    <p>#add the following property only for Oracle<br />
-TXN_ISOLATION_LEVEL=2</p>
-  </li>
-  <li>
-    <p>In the <code class="language-plaintext highlighter-rouge">`authService.properties`</code> file, configure the following properties with proper values, shown below:</p>
+    <p>In the  <code class="language-plaintext highlighter-rouge">authService.properties</code>  file, configure the following properties with proper values, shown below:</p>
 
     <ul>
       <li>RDS_DB_TYPE=<Database Type="">. For example, RDS\_DB\_TYPE=MySQL, MSSQL, ORACLE, or MariaDB</Database></li>
@@ -283,22 +286,20 @@ TXN_ISOLATION_LEVEL=2</p>
     </ul>
 
     <blockquote>
-      <p><strong><em>Important:</em></strong> Enter the appropriate path for LOG_LOCATION=&lt;USER_INSTALL_DIR&gt;.</p>
+      <p><strong><em>Important:</em></strong> Enter the appropriate path for LOG_LOCATION=&lt;USER_INSTALL_DIR&gt;.<br />
+For example:<br />
+- For Windows: &lt;C:/VoltMXFoundry&gt;<br />
+- For Linux: &lt;/home/user/VoltMXFoundry&gt;</p>
     </blockquote>
-
-    <p>For example:</p>
-
-    <p>- For Windows: &lt;C:/VoltMXFoundry&gt;</p>
-
-    <p>- For Linux: &lt;/home/user/VoltMXFoundry&gt;</p>
   </li>
   <li>
     <p>In the <code class="language-plaintext highlighter-rouge">WEB-INF/classes</code>, edit the <code class="language-plaintext highlighter-rouge">authservice.key</code> file, shown below:</p>
-
-    <p>master_key=<Any Random="" GUID="">  
-master\_key\_id=<Any Random="" GUID=""></Any></Any></p>
   </li>
 </ol>
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    master_key=&lt;Any Random GUID&gt;  
+    master_key_id=&lt;Any Random GUID&gt;
+    </code></pre></figure>
 
         
 
