@@ -1,0 +1,103 @@
+---
+layout: "documentation"
+category: "offline_objectsapi_reference_guide"
+---
+
+
+\<objectService\>.getSdkObjectByName
+==================================
+
+The **\<objectService\>.getSdkObjectByName** API returns an instance of HCLObj if the given object name is valid and belongs to the owning object service.
+
+Volt MX  Iris (JavaScript)
+-------------------------------
+
+### Signature
+
+{% highlight voltMx %}HCLObjSvc.getSdkObjectByName(CATEGORY)
+{% endhighlight %}
+
+### Parameters
+
+  
+| Parameter | Type | Description | Required |
+| --- | --- | --- | --- |
+| objectName | String | Name of the object that belongs to the current object service. | Yes |
+
+### Return Type
+
+An instance of HCLObj or undefined if object creation fails due to invalid name and so on.
+
+### Example
+
+{% highlight voltMx %}try {
+    var orgObjSvc = new voltmx.sdk.HCLObjSvc("Organization");
+    var empObj = orgObjSvc.getSdkObjectByName("Employee");
+} catch (err) {
+    //Handles Exception.
+}
+{% endhighlight %}
+
+Android (Java)
+--------------
+
+### Signature
+
+{% highlight voltMx %}HCLObj <HCLObjSvc>.getSdkObjectByName(String objectName) throws Exception
+{% endhighlight %}
+
+### Parameters
+
+  
+| Parameter | Type | Description | Required |
+| --- | --- | --- | --- |
+| objectName | String | Name of the object that belongs to the current object services. | Yes |
+
+### Return Type
+
+An instance of HCLObj or Exception in case of error.
+
+### Example
+
+{% highlight voltMx %}try {
+    HCLObjSvc orgObjSvc = new HCLObjSvc("Organization");
+    HCLObj empObj = orgObjSvc.getSdkObjectByName("Employee");
+} catch (Exception e) {
+    Log.d("ObjectServiceSync", "ObjectService sync failed with error:" + e.getMessage());
+}
+{% endhighlight %}
+
+iOS (Objective C)
+-----------------
+
+### Signature
+
+{% highlight voltMx %}(HCLObj *) <HCLObjSvc> getSdkObjectByName:(NSString *)objectName withError:(NSError *)error;
+
+{% endhighlight %}
+
+### Parameters
+
+  
+| Parameter | Type | Description | Required |
+| --- | --- | --- | --- |
+| objectName | NSString | Name of the object that belongs to current object service. | Yes |
+| error | NSError | Error object percolation in case of any failure. | Yes |
+
+### Return Type
+
+An instance of HCLObj or nil in case of error.
+
+### Example
+
+{% highlight voltMx %}NSError * error;
+HCLObjSvc * orgObjSvc = [
+    [HCLObjSvc alloc] initWithName: @"Organization"
+    error: & error
+];
+If(! * error) {
+    HCLObj * empObj = [orgObjSvc getSdkObjectByName: @"Employee"
+        withError: & error
+    ];
+}
+{% endhighlight %}
