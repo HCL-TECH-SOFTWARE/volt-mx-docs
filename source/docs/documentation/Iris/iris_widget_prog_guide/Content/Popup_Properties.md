@@ -52,25 +52,27 @@ The properties for the Popup widget are:
 *   [viewConfig](#viewConfig)
 *   [windowsSoftInputMode](#windowsSoftInputMode)
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bounces](javascript:void(0);)
+
+<details close markdown="block"><summary>bounces</summary>
 
 * * *
 
 Specifies whether the scroll view bounces past the edge of the content and back again.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 bounces
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -78,7 +80,7 @@ If set to _false,_ the scroll view bounce is not applied.
 
 If set to _true,_ the scroll view bounce is applied.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with bounces:true
@@ -92,7 +94,7 @@ var popPSP ={**bounces:true**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -100,25 +102,27 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[captureGPS](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>captureGPS</summary>
 
 * * *
 
 Specifies if the Popup must display a dialog seeking permission from the user to access the location details.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 captureGPS
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -134,7 +138,7 @@ The following image illustrates the popup to access the location details:
 
 ![](Resources/Images/CaptureGPS.png)
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with captureGPS:true
@@ -147,7 +151,7 @@ var popLayout ={containerWeight:100, padding:[5,5,5,5]};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -155,31 +159,32 @@ Available on Server side Mobile Web (advanced) platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[containerHeight](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>containerHeight</summary>
 
 * * *
 
 Specifies the available height of the container in terms of percentage. The percentage is with reference to the value of containerHeightReference property.
 
-Syntax
+### Syntax
 
 containerHeight
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In Windows platforms, popup occupies the child widget/content height.
 
 If not configured, the value may vary depending on the platforms.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with containerHeight:80
@@ -198,31 +203,33 @@ alert("popUp containerHeight::"+popUp.containerHeight);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[containerHeightReference](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>containerHeightReference</summary>
 
 * * *
 
 This property is enabled when you set the [containerHeight](#containe). The widget height percentage is calculated based on the following options:
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 containerHeightReference
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is CONTAINER\_HEIGHT\_BY\_FORM\_REFERENCE.
 
@@ -234,7 +241,7 @@ The container height percentage is calculated based on the below options.
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining the properties for Popup with 
@@ -251,7 +258,7 @@ var popPSP ={};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP); 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -259,25 +266,27 @@ Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentAlignment](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentAlignment</summary>
 
 * * *
 
 Specifies the alignment of content in the Popup with respect to the boundaries of the Popup.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 contentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is CONTENT\_ALIGN\_CENTER.
 
@@ -295,18 +304,20 @@ Following are the possible alignment options available for Popup content:
 
 > **_Note:_** When the contentHExpand property is set to true, the Popup content occupies the entire width of the Popup. When the contentHExpand property is set to false, the Popup content is aligned based on the contentAlignment property.
 
-Example
+### Example
 
-{% highlight voltMx %}<PopupName>.contentAlignment = constants. CONTENT_ALIGN_CENTER
+{% highlight voltMx %}
+<PopupName>.contentAlignment = constants. CONTENT_ALIGN_CENTER
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 This property is available on Windows Phone 8.1
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentHExpand](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentHExpand</summary>
 
 * * *
 
@@ -318,30 +329,32 @@ If set to _false_, the content in the Popup occupies its preferred width. The pr
 
 If set to _true_, the content in the Popup occupies the entire width of the Popup.
 
-Syntax
+### Syntax
 
 contentHExpand
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}<PopupName>.contentHExpand = true;
+{% highlight voltMx %}
+<PopupName>.contentHExpand = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 This property is available on Windows Phone 8.1
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contextPath](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contextPath</summary>
 
 * * *
 
@@ -351,15 +364,15 @@ Specifies the context path to be displayed in the address field of the browser. 
 
 > **_Note:_** This field is only populated when you specify a Context ID and a corresponding Context Path in the Site Minder tab under Mobile web in the Project properties window.
 
-Syntax
+#### Syntax
 
 contextPath
 
-Type
+### Type
 
 String
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with contextPath:"https://www.xyz.com"
@@ -373,7 +386,7 @@ var popPSP ={**contextPath:"https://www.xyz.com"**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Server side Mobile Web (basic)
@@ -381,21 +394,23 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[configureExtendTop](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>configureExtendTop</summary>
 
 * * *
 
 This property enables you to configure extendTop property.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 None. Its an IDE only property
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -403,7 +418,7 @@ If set to _true,_ the property extendTop is displayed.
 
 If set to _false,_ the property extendTop is not displayed.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -411,25 +426,27 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[draggable](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>draggable</summary>
 
 * * *
 
 Specifies the weather the popup can be dragged across the browser screen.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 draggable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -437,7 +454,7 @@ If set to _true_, the popup window can be dragged.
 
 if set to _false_, the popup window cannot be dragged.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with draggable:true.
@@ -451,7 +468,7 @@ var popPSP ={**draggable: true**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -459,31 +476,33 @@ This property is available on Desktop Web platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache</summary>
 
 * * *
 
 This property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 When this property is used, it increases the memory consumption by the application. It enables tradeoff between performance and visual quality of the content.
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -491,25 +510,27 @@ This property is supported only on Windows platform
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[extendTop](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>extendTop</summary>
 
 * * *
 
 Specifies the popup content to scroll under the App Menu. This property is supported in iOS7 and above only.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 extendTop
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is also applicable on the Application Level properties under Application Properties > Native > iPhone/iPad > Platform Settings. The property set at popup level takes precedence over Application level.
 
@@ -519,7 +540,7 @@ If set to _true,_ the popup scroll under the App Menu.
 
 This property is applicable on popup level headers and footers, app level headers and footers, title bar, and app menu.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining a popup with extendTop:true
@@ -534,7 +555,7 @@ var popPSP ={**extendTop:true**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -542,7 +563,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[footerOverlap](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>footerOverlap</summary>
 
 * * *
 
@@ -550,19 +572,20 @@ Specifies if the footer must overlaps the Popup. For example, every time you scr
 
 **Default:**_false_
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 footerOverlap
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with footerOverlap:true
@@ -576,7 +599,7 @@ var popPSP ={**footerOverlap:true**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -584,29 +607,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[footers](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>footers</summary>
 
 * * *
 
 A footer is a section of the Popup that is docked at the bottom of the Popup (does not scroll along with the content of the Popup).
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 footers
+{% endhighlight %}
 
-Type
+### Type
 
 Array(voltmx.ui.Box)
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 It accepts an array of voltmx.ui.Box object references with horizontal orientation that are added as footer docked at the bottom of the Popup. These footers can be reused across forms.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with Footers:[box3,box4], where box3 and box4 are boxes and these boxes should be created and made available for access.
@@ -620,7 +645,7 @@ var popPSP ={};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -628,7 +653,8 @@ Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[gridCell](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>gridCell</summary>
 
 * * *
 
@@ -639,25 +665,26 @@ Represents the grid cell details in the sequence colSpan, rowSpan, rowNo, colNo.
 *   rowNo: Specifies the row number in where the widget is placed in a grid layout.
 *   colNo: Specifies the column number in where the widget is placed in a grid layout.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 gridCell
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is applicable only when a widget is placed inside a container widget with Grid Layout applied.
 
 Layout type is not visible as a property. It is set when the user applies XYLayout or GridLayout on a form. The default option is XYLayout. To set GridLayout, right-click on the form and select Apply GridLayout.  
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with gridCell.
@@ -676,38 +703,40 @@ var popPSP ={};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Windows Tablet
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[headerOverlap](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>headerOverlap</summary>
 
 * * *
 
 Specifies if the header must overlaps the Popup.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 headerOverlap
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
 For example, every time you scroll the Popup, the header is fixed and the header overlaps the Popup as specified in the header overlap field. If this field is selected, the Popup scrolls behind the header background and a part of the header background is transparent.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with headerOverlap:true
@@ -721,7 +750,7 @@ var popPSP ={**headerOverlap:true**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -729,25 +758,27 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[headers](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>headers</summary>
 
 * * *
 
 A header is a section of the Popup that is docked at the top of the Popup (does not scroll along with the content of the Popup). It accepts an array of voltmx.ui.Box object references with horizontal orientation that are added as header docked at the top of the Popup. These headers can be reused across Popups.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 headers
+{% endhighlight %}
 
-Type
+### Type
 
 Array(voltmx.ui.Box)
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with headers:[box1,box2],Where box1 and box2 are boxes and these boxes should be created and made available for access.
@@ -761,7 +792,7 @@ var popPSP ={};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -769,25 +800,27 @@ Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id</summary>
 
 * * *
 
 id is a unique identifier of Popup consisting of alpha numeric characters. Every Popup should have a unique id within an application.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with id:"popUp1"
@@ -801,7 +834,7 @@ var popPSP ={};
 var popUp1=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -809,7 +842,8 @@ Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info</summary>
 
 * * *
 
@@ -825,19 +859,20 @@ widget.info = inf; //works
 widget.info.a = 'hello world'; //This will not update the widget info a property to Hello world. widget.info.a will have old value as hello.
 {% endhighlight %}
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with info property.
@@ -854,33 +889,35 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 alert("popUp info is ::"+popUp.info);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[inputAccessoryViewType](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>inputAccessoryViewType</summary>
 
 * * *
 
 When building iPhone applications that support or provide text input, it's often necessary to create some extra buttons (or other controls) beyond the ones provided by the default keyboard interface.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 inputAccessoryViewType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
-Volt MX  Platform by default, adds the Previous, Next and Done buttons to the applicable input controls. These buttons allow specific operations needed by your application, such as moving to the next or previous text field, make the keyboard disappear. The area above the keyboard is known as Input Accessory View.
+VoltMX Platform by default, adds the Previous, Next and Done buttons to the applicable input controls. These buttons allow specific operations needed by your application, such as moving to the next or previous text field, make the keyboard disappear. The area above the keyboard is known as Input Accessory View.
 
 This property, allows you to specify the type of accessory view that will be shown for all the input controls on this Popup.
 
@@ -905,7 +942,7 @@ The available options are:
 
 This option (_none_) should be used carefully, as setting this option for widgets like calendar leaves the user with no option to select and drop-down a wheel calendar.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with inputAccessoryViewType as nextprevtoolbar
@@ -919,7 +956,7 @@ var popPSP ={**inputAccessoryViewType:constants.nextprevtoolbar**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -927,25 +964,27 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[inTransitionConfig](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>inTransitionConfig</summary>
 
 * * *
 
 Specifies the configuration to be used when the user arrives on this form. It accepts hash values.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 inTransitionConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the properties available for iPhone and iPad:
 
@@ -1002,7 +1041,7 @@ On SPA Platform, **Transition** has the below options to set:
 4.  Right Center - Specifies that the popup must appear from the right center.
 5.  Left Center - Specifies that the popup must appear from the left center.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with inTransitionConfig:{transitionDirection:"topCenter"}
@@ -1019,7 +1058,7 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 alert("popUp inTransitionConfig::"+popUp.inTransitionConfig);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -1027,25 +1066,27 @@ Available on all platforms., Windows Desktop, and Windows Tablet
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isModal](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isModal</summary>
 
 * * *
 
 This property indicates whether the popup is to be shown as modal window or a non-modal window.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 isModal
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In user interface design, a _modal_ window, which is a child window that requires users to interact with it before they can return to operating the parent application, thus preventing the workflow on the application main window.
 
@@ -1055,7 +1096,7 @@ If set to _true,_ the popup is shown as modal window.
 
 If set to _false,_ the popup is shown as non-modal window.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with isModal:true
@@ -1072,7 +1113,7 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 alert("popUp isModal::"+popUp.isModal);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -1080,25 +1121,25 @@ Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layout](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layout</summary>
 
 * * *
 
 Specifies if the arrangement of the widgets either in horizontal or vertical direction.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 layout
+{% endhighlight %}
 
-Type
-
+### Type
 String
 
-Read/Write
-
+### Read/Write
 No
 
-Remarks
+### Remarks
 
 The default value for this property is Vertical.
 
@@ -1107,7 +1148,7 @@ The available options are:
 *   Vertical:The navigation happens in vertical direction.
 *   Horizontal:The navigation happens in horizontal direction.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with layout:Vertical
@@ -1121,7 +1162,7 @@ var popPSP ={**layout:constants.Vertical**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -1129,29 +1170,31 @@ This property is available on Windows Tablet
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layoutMeta](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layoutMeta</summary>
 
 * * *
 
 A custom JSObject with the key, value pairs that developer can use to provide the meta info about the grid layout.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 layoutMeta
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The following are the mandatory keys required to be part of the Meta.
 
-The data for layoutmeta data is set when you set grid layout view properties for rows and columns. This property can be set using Volt MX Iris Grid Layout view. To set the view, go to Window > Show View > Others and select GridLayout View from Volt MX Iris folder.
+The data for layoutmeta data is set when you set grid layout view properties for rows and columns. This property can be set using VoltMX Iris Grid Layout view. To set the view, go to Window > Show View > Others and select GridLayout View from VoltMX Iris folder.
 
 **rows :** no of grid rows
 
@@ -1161,7 +1204,7 @@ The data for layoutmeta data is set when you set grid layout view properties for
 
 The sum total of percentage (%) widths of each of the columns in the grid layout should add up to 100%.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with layoutMeta.
@@ -1180,32 +1223,34 @@ var popPSP ={};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Windows Tablet
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layoutType](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layoutType</summary>
 
 * * *
 
 Defines the type of the layout of container widget.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 layoutType
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 The available options are:
 
@@ -1214,7 +1259,7 @@ The available options are:
 
 Layout type is not visible as a property. It is set when the user applies XYLayout or GridLayout on a form. From the IDE, the default option is XYLayout. To set GridLayout, right-click on the form and select Apply GridLayout.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with layoutType:CONTAINER_LAYOUT_GRID.
@@ -1233,28 +1278,30 @@ var popPSP ={};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Windows Tablet
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minimizeOnLostFocus](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minimizeOnLostFocus</summary>
 
 * * *
 
 Indicates the popup window should minimize when the focus moves out of the popup.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 minimizeOnLostFocus
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
@@ -1268,7 +1315,7 @@ If set to _true_, the popup window is minimized.
 
 if set to _false_, the popup window is not minimized.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining a Popup with layoutType
@@ -1287,7 +1334,7 @@ layoutMeta: {
 var frm =new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -1295,21 +1342,23 @@ This property is available on Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[noCache](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>noCache</summary>
 
 * * *
 
 This property indicates that if the form is enabled for caching on the device browser.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 noCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 A web cache is a mechanism for the temporary storage (caching) of web documents, such as HTML pages and images, to reduce bandwidth usage, server load, and perceived lag.
 
@@ -1319,7 +1368,7 @@ If set to _false_, appropriate Cache control headers are included in the HTTP re
 
 If set to _true_, cache control headers are not included in the HTTP response.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with noCache:false
@@ -1333,7 +1382,7 @@ var popPSP ={**noCache:false**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Server side Mobile Web (basic)
@@ -1341,23 +1390,25 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[outTransitionConfig](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>outTransitionConfig</summary>
 
 * * *
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 outTransitionConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Specifies the type of transition effect to be applied when the popup is going out of view. It accepts hash values.
 
@@ -1416,7 +1467,7 @@ On SPA Platform, **Transition** has the below options to set:
 4.  Right Center - Specifies that the popup must disappear from the right center.
 5.  Left Center - Specifies that the popup must appear from the left center.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with outTransitionConfig:{transitionDirection:"topCenter"}
@@ -1441,25 +1492,27 @@ Available on all platforms., Windows Desktop, and Windows Tablet.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[padding](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>padding</summary>
 
 * * *
 
 Defines the space between the content of the widget and the widget boundaries.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 padding
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 You can use this option to define the top, left, right, and bottom distance between the widget content and the widget boundary.
 
@@ -1479,7 +1532,7 @@ The following image illustrates a widget with a defined padding:
 
 ![](Resources/Images/Padding.png)
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with padding:[5,5,5,5]
@@ -1495,7 +1548,7 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -1503,25 +1556,27 @@ Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[paddingInPixel](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>paddingInPixel</summary>
 
 * * *
 
 Indicates if the padding is to be applied in pixels or in percentage.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 paddingInPixel
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -1533,7 +1588,7 @@ This property can be set to _true_ or _false_ only for iPhone, iPad, Android and
 
 For backward compatibility on older projects, this property is will be made _true_ for iPhone, iPad, Android and Windows Phone and for other platforms it will be _false_.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with padding in pixels.
@@ -1547,7 +1602,7 @@ var popPSP ={};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -1557,32 +1612,34 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[popupStyle](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>popupStyle</summary>
 
 * * *
 
 Specifies the popup style to be displayed in the application.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 popupStyle
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The available options are:
 
 *   POPUP\_TYPE\_VOLTMX\_STYLE:This is the default popup provided by voltmx.
 *   POPUP\_TYPE\_NATIVE\_STYLE:This option is applicable for iPad only. Using this style, the popup is rendered as popover.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with outTransitionConfig:{transitionDirection:"topCenter"}
@@ -1599,7 +1656,7 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 alert("popUp style is ::"+popUp.popupStyle);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -1607,25 +1664,27 @@ Available on iPad platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[resizable](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>resizable</summary>
 
 * * *
 
 Specifies the weather the popup can be resized across the browser screen.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 resizable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -1633,7 +1692,7 @@ If set to _true_, the popup window can be resized.
 
 if set to _false_, the popup window cannot be resized.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with resizable:true.
@@ -1647,7 +1706,7 @@ var popPSP ={**resizable: true**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Availability
+### Availability
 
 Available in the IDE
 
@@ -1655,62 +1714,66 @@ This property is available on Desktop Web platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollsToTop](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollsToTop</summary>
 
 * * *
 
 This property enables you to scroll the Popup to top on tapping a device’s status bar.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 scrollsToTop
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 If this property is true for more than one widget, then this property is not applied to any of the widgets.
 
-Platform Availability
+### Platform Availability
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[secureData](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>secureData</summary>
 
 * * *
 
 Specifies if the browser must retain and use the information that you have filled in a form (for example, username and password) and use it during the POST request made when you refresh the browser or use the back button on the browser.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 secureData
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 **Default:**_the option is not selected_ (the browser will retain data and use it during POST request)
 
 If you do not want the browser to use the information during the POST request made when you refresh the browser or use the back button on the browser, select the checkbox.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with secureData:true
@@ -1724,7 +1787,7 @@ var popPSP ={**secureData:true**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Server side Mobile Web (basic)
@@ -1732,25 +1795,27 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showMiniAppMenu](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showMiniAppMenu</summary>
 
 * * *
 
 Specifies if the application menu is shown or hidden in the application.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 showMiniAppMenu
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -1766,7 +1831,7 @@ The below image illustrates the _Mini_ mode of an application menu of the Popup:
 
 ![](Resources/Images/formmodewpmini.png)
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with mangoMode:true
@@ -1780,7 +1845,7 @@ var popPSP ={**showMiniAppMenu:true**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Availability
+### Availability
 
 Available in the IDE
 
@@ -1788,25 +1853,27 @@ Available on Windows Phone platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin</summary>
 
 * * *
 
 Specifies a background skin for Popup.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 skin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with skin:"popSkin", skin should be created with the same name through IDE or code.
@@ -1823,7 +1890,7 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 alert("popUp skin::"+popUp.skin);
 {% endhighlight %}
 
-Availability
+### Availability
 
 Available in the IDE
 
@@ -1831,21 +1898,22 @@ Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[submitSecure](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>submitSecure</summary>
 
 * * *
 
 Specifies if the information must be sent using secure connection (https) or insecure connection (http).
 
-Syntax
+### Syntax
 
 submitSecure
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
@@ -1859,7 +1927,7 @@ To send information securely, set the value to _true_ (select the checkbox).
 
 If you have marked all the Forms to be submitted through a secure protocol, then the popup must also be secured.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with submitSecure:true
@@ -1873,7 +1941,7 @@ var popPSP ={**submitSecure:true**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Server side Mobile Web (basic)
@@ -1881,7 +1949,8 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[title](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>title</summary>
 
 * * *
 
@@ -1889,19 +1958,20 @@ Specifies a general or descriptive text that will be shown as the title for the 
 
 > **_Note:_** For Desktop Web platform, the title is displayed on the browser window.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 title
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with title:"PopUP Title"
@@ -1918,7 +1988,7 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 alert("popUp title::"+popUp.title);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -1926,25 +1996,27 @@ Available on all platforms except SPA platform
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[titleBarConfig](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>titleBarConfig</summary>
 
 * * *
 
 Specifies the configuration properties for title bar for Desktop Web platform.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 titleBarConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 **minIcon**: Represents the URL of the icon to be used for displaying the minimize option for the popup window. The default icon is "-".
 
@@ -1964,7 +2036,7 @@ Remarks
 
 **template**: Specifies the template for the browser window there the developer can arrange the images and the titles.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with titleBarConfig properties.
@@ -1983,7 +2055,7 @@ var popPSP ={**titleBarConfig: {
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Availability
+### Availability
 
 Available in the IDE
 
@@ -1991,31 +2063,33 @@ This property is available on Desktop Web platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transparencyBehindThePopup](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transparencyBehindThePopup</summary>
 
 * * *
 
 Indicates the transparency to be used behind the popup, default is 100% transparent.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 transparencyBehindThePopup
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This can be used to have dim effect behind the popup when a popup is shown.
 
 On SPA platforms, transparencyBehindThePopup is supported only for modal popup.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with transparencyBehindThePopup:80
@@ -2032,7 +2106,7 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 alert("popUp transparencyBehindThePopup ::"+popUp.transparencyBehindThePopup);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -2040,27 +2114,29 @@ Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewConfig](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewConfig</summary>
 
 * * *
 
 View Configuration is applicable only when container widget layout is grid.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 viewConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
-For more information on applying the Grid layout please refer Volt MX Iris User Guide.
+For more information on applying the Grid layout please refer VoltMX Iris User Guide.
 
 ViewConfig displays two types of views:
 
@@ -2081,7 +2157,7 @@ Possible values for Size Mode:
 *   constants.GRID\_TYPE\_GROW\_COLUMNS
 *   constants.GRID\_TYPE\_GROW\_ROWS
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with the viewConfig
@@ -2099,7 +2175,7 @@ var popPSP ={viewConfig: {
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Availability
+### Availability
 
 Available in the IDE
 
@@ -2107,25 +2183,27 @@ This property is available on Windows Tablet platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[windowSoftInputMode](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>windowSoftInputMode</summary>
 
 * * *
 
 This property defines how the main Popup interacts with the window containing the on-screen soft keyboard.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 windowSoftInputMode
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 It determines the adjustments made to the Popup whether it is resized smaller to make room for the soft keyboard or whether its contents pan to make the current focus visible when part of the Popup is covered by the soft keyboard.
 
@@ -2136,7 +2214,7 @@ Following are the available options:
 *   POPUP\_ADJUST\_RESIZE: Specifies the popup is resized and when you click or start typing within the widget which requires an input, the popup scrolls up and the widget which requires an input is not overlapped by the keypad or footer.
 *   POPUP\_ADJUST\_PAN: Specifies the widget which requires an input is placed at the bottom of the popup is overlapped by the keypad. The main Popup is not resized to make room for the soft keyboard. Rather, the contents of the Popup are automatically panned so that the current focus is never obscured by the keyboard and users can always see what they are typing. This is generally less desirable than resizing, because the user may need to close the soft keyboard to get at and interact with obscured parts of the Popup.
 
-Example
+### Example
 
 {% highlight voltMx %}
 //Defining properties for a Popup with windowSoftInputMode:constants.POPUP_ADJUST_RESIZE
@@ -2150,7 +2228,7 @@ var popPSP ={**windowSoftInputMode:constants.POPUP_ADJUST_RESIZE**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Availability
+### Availability
 
 Available in the IDE
 

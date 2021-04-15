@@ -10,56 +10,58 @@ Properties
 
 The Local Notifications API contains the following properties:
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundColor](javascript:void(0);) 
+
+<details close markdown="block"><summary>backgroundColor</summary> 
 
 * * *
 
 An optional String value (for example, ffffff for white) that fires a notification with the provided background color for the notification icon.
 
-Syntax
+### Syntax
 
 backgroundColor
 
-Type
+### Type
 
 String
 
-Remarks
+### Remarks
 
 *   You can configure the background color of the notification icon at the app level in localnotificationconfig.xml and pushconfig.xml.  
     
 *   <table style="width: 100%;"><colgroup><col style="width: 371px;"> <col style="width: 50px;"> <col></colgroup><tbody><tr><td>notify_local_msg_background_color</td><td>empty</td><td>Notification icon background color for local message notification.</td></tr><tr><td>notify_push_msg_background_color</td><td>empty</td><td>Notification icon background color for push message notification.</td></tr></tbody></table>
     
 
-Example
+### Example
 
-{% highlight voltMx %}pspconfig:{
-“backgroundColor” :  “ffffff” 
+{% highlight VoltMx %}
+pspconfig:{
+“backgroundColor” :  “ffffff”
 }
-
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[priority](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>priority</summary> 
 
 * * *
 
 An optional constant integer value that fires a notification with the specified priority.
 
-Syntax
+### Syntax
 
 priority
 
-Type
+### Type
 
 int
 
-Supported Values
+### Supported Values
 
 *   constants.NOTIFICATION\_PRIORITY\_MIN: This is the lowest notification priority. For this priority value, the notifications may not be shown to the user, except for special circumstances such as detailed notification logs.
 *   constants.NOTIFICATION\_PRIORITY\_MAX: This is the highest notification priority. This priority value should be used for your application's most important notifications that require the user's prompt attention or input.
@@ -71,35 +73,36 @@ Supported Values
 *   <table style="width: 100%;"><colgroup><col style="width: 371px;"> <col style="width: 50px;"> <col></colgroup><tbody><tr><td>notify_local_msg_priority</td><td>empty</td><td>Priority for local message notification.</td></tr><tr><td>notify_push_msg_priority</td><td>empty</td><td>Priority for push message notification.</td></tr></tbody></table>
     
 
-Example
+### Example
 
-{% highlight voltMx %}pspconfig:{
+{% highlight VoltMx %}
+pspconfig:{
 “priority” :  constants.NOTIFICATION_PRIORITY_DEFAULT
- }
-
+}
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[repeats](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>repeats</summary> 
 
 * * *
 
 An optional Boolean value that displays a notification repeatedly after a specific time interval. You must use the **repeats** function along with a **timeInterval** value.
 
-Syntax
+### Syntax
 
 repeats
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 *   You can only set **repeats** to true if **timeInterval** is equal to or greater than 60 seconds.
     
@@ -110,101 +113,104 @@ Remarks
 *   By default, the value of **repeats** is false.
     
 
-Example
+### Example
 
 Repeat a notification after every 300 seconds.
 
-{% highlight voltMx %}pspconfig:{
+{% highlight VoltMx %}
+pspconfig:{
 “timeInterval”: 300
 “repeats”: true
 }
-
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[timeInterval](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>timeInterval</summary> 
 
 * * *
 
 An optional constant integer value that fires a notification at a time relative to the current time.
 
-Syntax
+### Syntax
 
 timeInterval
 
-Type
+### Type
 
 int
 
-Remarks
+### Remarks
 
 *   You should always specify the timeInterval value in seconds.
 *   If values for both timeInterval and dateTime are provided, timeInterval is given higher precedence.
 
-Example
+### Example
 
 Fire a notification in the next 300 seconds.
 
-{% highlight voltMx %}pspconfig:{
+{% highlight VoltMx %}
+pspconfig:{
 “timeInterval”: 300
 }
-
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[vibrate](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>vibrate</summary> 
 
 * * *
 
 An optional Boolean value that fires a notification with or without the vibration of the device.
 
-Syntax
+### Syntax
 
 vibrate
 
-Type
+### Type
 
 Boolean
 
-Example
+### Example
 
-{% highlight voltMx %}pspconfig:{
+{% highlight VoltMx %}
+pspconfig:{
 “vibrate”: ”true”
 }
-
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[visibility](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>visibility</summary> 
 
 * * *
 
 An optional constant integer value that fires a notification with the given visibility.
 
-Syntax
+### Syntax
 
 visibility
 
-Type
+### Type
 
 int
 
-Supported Values
+### Supported Values
 
 *   constants.NOTIFICATION\_VISIBILITY\_PRIVATE: This notification visibility value does not reveal any part of the notification on the secure lock-screen of a user's device.
 *   constants.NOTIFICATION\_VISIBILITY\_PUBLIC: This notification visibility value displays the entire notification on all the lock-screens of a user's device.
@@ -212,20 +218,20 @@ Supported Values
 *   You can configure the visibility of notifications at the app level in localnotificationconfig.xml and pushconfig.xml.  
     
 *   <table style="width: 100%;"><colgroup><col style="width: 371px;"> <col style="width: 50px;"> <col></colgroup><tbody><tr><td>notify_local_msg_visibility</td><td>empty</td><td>Visibility for local message notification.</td></tr><tr><td>notify_push_msg_visibility</td><td>empty</td><td>Visibility for push message notification.</td></tr></tbody></table>
-    
 
-Example
+### Example
 
-{% highlight voltMx %}pspconfig:{
+{% highlight VoltMx %}
+pspconfig:{
 “visibility” :  constants.NOTIFICATION_VISIBILITY_PRIVATE 
 }
-
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
 ![](resources/prettify/onload.png)
+</details>

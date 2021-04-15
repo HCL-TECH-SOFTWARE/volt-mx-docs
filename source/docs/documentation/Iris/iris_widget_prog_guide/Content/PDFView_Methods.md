@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                                
-
 
 PDFView Methods
 ===============
@@ -12,17 +10,19 @@ The PDFView widget is associated with the following methods:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addGestureRecognizer Method](javascript:void(0);)
+<details close markdown="block"><summary>addGestureRecognizer Method</summary>
 
 * * *
 
 This API allows you to set a gesture recognizer for a specified gesture for a specified widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _gestureType_
 
@@ -52,11 +52,11 @@ This function will be raised asynchronously
 
 See Remarks for the syntax of this function.
 
-Return Values
+### Return Values
 
 String - Reference to the gesture is returned.
 
-Remarks
+### Remarks
 
 The values for the _gestureType_parameter are:
 
@@ -80,47 +80,47 @@ The parameter specifies a table that has the required configuration parameters t
 
 This parameter supports the following key-value pairs:
 
-Gesture Type:TAP
+### Gesture Type:TAP
 
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[Number\] - specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
 
-For example:  
+### For example:  
 
 {fingers:1,taps:1}
 
-Gesture Type:SWIPE
+### Gesture Type:SWIPE
 
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 
-For example:
+### For example:
 
 {fingers: 1}
 
-Gesture Type:LONGPRESS
+### Gesture Type:LONGPRESS
 
 *   pressDuration \[Number\] - specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if pressDuration is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This is not applicable to Windows.
 
-For example:
+### For example:
 
 {pressDuration=1}.
 
-Gesture Type: PAN
+### Gesture Type: PAN
 
 *   fingers \[number\] specifies the minimum number of fingers needed to recognize this gesture. Default value is 1.
 *   continuousEvents \[Boolean\] indicates if callback should be called continuously for every change beginning from the time the gesture is recognized to the time it ends.
 
-Gesture Type: ROTATION
+### Gesture Type: ROTATION
 
 *   Rotation gesture involves only two fingers.
 *   continuousEvents \[Boolean\] indicates if callback must be called continuously for every change beginning from the time the gesture is recognized to the time it ends.
 
-Gesture Type:PINCH
+### Gesture Type:PINCH
 
 *   Pinch gesture invloves two fingures.
 *   continuousEvents \[Boolean\] indicates if callback should be called continuously every change beginning from the time the gesture is recognized to the time it ends.
 
-The syntax for the _onGestureClosure_callback function are:
+### The syntax for the _onGestureClosure_callback function are:
 
 \[function\] - Mandatory
 
@@ -172,7 +172,7 @@ If you swipe a larger form, the default behavior is to scroll up and down depend
 
 If you swipe a Segmented UI with huge number of rows, the default behavior is to scroll the Segmented UI. If you define a SWIPE gesture on such segments, the gesture closure gets executed in addition to scrolling the form.
 
-Gestures can be added only for the following widgets:
+### Gestures can be added only for the following widgets:
 
 *   Flex Container
     
@@ -184,9 +184,10 @@ In the android platform, the top and bottom gestures work only when the scrollin
 *   RIGHTTAP applicable only to Windows 10
 *   ROTATION is not supported on android.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
+{% highlight VoltMx %}
+//Sample code to add Gestures to the frmGestures FlexForm.
 //Code to add DOUBLE TAP gesture to the frmGestures, FlexForm.
 var doubletp = {
  fingers: 1,
@@ -218,27 +219,30 @@ function onGestureFunction(commonWidget, gestureInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[animate Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>animate Method</summary>
 
 * * *
 
 Applies an animation to the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 animate (animationObj, animateConfig, animationCallbacks)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _animationObj_
 
-An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#createAn) function.
+An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#createAn?TocPath=References|voltmx.ui_Namespace|Functions|_____5) function.
 
 _animationConfig_
 
@@ -253,11 +257,11 @@ A JavaScript dictionary that contains key-value pairs. The following keys are su
 | animationEnd | A JavaScript function that is invoked with the animation ends. For more information, see the **Remarks** section below. |
 | animationStart | A JavaScript function that is invoked with the animation starts. For more information, see the **Remarks** section below. |
 
-Return Values
+### Return Values
 
 Returns a platform-specific handle to the animation. This handle currently not used, but is returned for possible future requirements use.
 
-Remarks
+### Remarks
 
 The callback for the `animationStart` key in the JavaScript object passed in this method's _animationCallbacks_ parameter has the following signature.
 
@@ -279,9 +283,10 @@ The `animate` method throws an Invalid Animation Definition Exception if animati
 
 If the widget is not part of the currently visible view hierarchy, calling this method does nothing. Because this method is asynchronous and immediately returns, it does not wait for the animation to start or complete.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code of animation
+{% highlight VoltMx %}
+//Sample code of animation
 function AnimateBoth() {
     var getFuncName = frm1.listbox18.selectedKey;
     if (getFuncName == "BothLT") {
@@ -294,23 +299,26 @@ function AnimateBoth() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[canGoBack Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>canGoBack Method</summary>
 
 * * *
 
 This method specifies whether the PDFView can navigate to the previous page in the page history.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 canGoBack()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -318,31 +326,35 @@ True - Indicates whether the user can navigate to the previous page of the docum
 
 False - There is no previous page in the page history.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke canGoBack method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke canGoBack method for a PDFView widget.
 var canGoBack = this.view.myPDFView.canGoBack();
 alert("canGoBack?::" + canGoBack);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[canGoForward Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>canGoForward Method</summary>
 
 * * *
 
 This method specifies whether the PDFView can navigate to the next page in the page history.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 canGoForward()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -350,31 +362,35 @@ True - Indicates whether the user can navigate to the next page of the document 
 
 False - There is no next page in the page history.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke canGoForward method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke canGoForward method for a PDFView widget.
 var canGoForward = this.view.myPDFView.canGoForward();
 alert("canGoForward?::" + canGoForward);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[canGoToFirstPage Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>canGoToFirstPage Method</summary>
 
 * * *
 
 This method specifies whether the PDFView can navigate to the first page of the document.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 canGoToFirstPage()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -382,31 +398,35 @@ True - Indicates whether the user can navigate to the first page of the document
 
 False - The user is already at the first page of the document.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke canGoToFirstPage method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke canGoToFirstPage method for a PDFView widget.
 var canGoToFirstPage = this.view.myPDFView.canGoToFirstPage();
 alert("canGoToFirstPage?::" + canGoToFirstPage);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[canGoToLastPage Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>canGoToLastPage Method</summary>
 
 * * *
 
 This method specifies whether the PDFView can navigate to the last page of the document.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 canGoToLastPage()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -414,32 +434,36 @@ True - Indicates whether the user can navigate to the last page of the document.
 
 False - The user is already at the last page of the document.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke canGoToLastPage method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke canGoToLastPage method for a PDFView widget.
 var canGoToLastPage = this.view.myPDFView.canGoToLastPage();
 alert("canGoToLastPage?::" + canGoToLastPage);
 
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[canGoToNextPage Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>canGoToNextPage Method</summary>
 
 * * *
 
 This method specifies whether the PDFView can navigate to the next page of the document.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 canGoToNextPage()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -447,32 +471,36 @@ True - Indicates whether the user can navigate to the next page of the document.
 
 False - The user is already at the next page of the document.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke canGoToNextPage method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke canGoToNextPage method for a PDFView widget.
 var canGoToNextPage = this.view.myPDFView.canGoToNextPage();
 alert("canGoToNextPage?::" + canGoToNextPage);
 
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[canGoToPreviousPage Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>canGoToPreviousPage Method</summary>
 
 * * *
 
 This method specifies whether the PDFView can navigate to the previous page of the document.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 canGoToPreviousPage()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -480,31 +508,35 @@ True - Indicates whether the user can navigate to the previous page of the docum
 
 False - The user is already at the previous page of the document.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke canGoToPreviousPage method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke canGoToPreviousPage method for a PDFView widget.
 var canGoToPreviousPage = this.view.myPDFView.canGoToPreviousPage();
 alert("canGoToPreviousPage?::" + canGoToPreviousPage);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[canZoomIn Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>canZoomIn Method</summary>
 
 * * *
 
 This method specifies whether the PDFView can magnify the view and zoom in.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 canZoomIn()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -512,32 +544,36 @@ True - Indicates whether the user can magnify the view and perform a zoom in ope
 
 False - User cannot perform zoom in on the PDFView widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke canZoomIn method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke canZoomIn method for a PDFView widget.
 var canZoomIn = this.view.myPDFView.canZoomIn();
 alert("canZoomIn?::" + canZoomIn);
 
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[canZoomOut Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>canZoomOut Method</summary>
 
 * * *
 
 This method specifies whether the PDFView can view an expanded area and zoom out.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 canZoomOut()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -545,21 +581,23 @@ True - Indicates whether the user can view an expanded area and perform a zoom o
 
 False - User cannot perform zoom out on the PDFView widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke canZoomOut method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke canZoomOut method for a PDFView widget.
 var canZoomOut = this.view.myPDFView.canZoomOut();
 alert("canZoomOut?::" + canZoomOut);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clone Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>clone Method</summary>
 
 * * *
 
@@ -571,25 +609,27 @@ For example, if the widget ID is "fc1" and the widget ID passed to clone API is 
 
 Exceptions are not displayed if widget ID parameter is not unique. Instead when the cloned copy is added to the same form as of original container then it may lead to unexpected behaviors. So it is your responsibility to provide unique widget ID.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 clone()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 widgetId \[String\]
 
 Optional. Reference of the name of the widget.
 
-Return Values
+### Return Values
 
 Cloned copy of the widget.
 
-Exceptions
+### Exceptions
 
 None
 
-Remarks
+### Remarks
 
 *   This method is not supported on SegmentedUI2 widget.
 *   Gestures for the FlexContainer are not cloned. You have to reapply the gestures on the cloned object.
@@ -600,9 +640,9 @@ Remarks
 *   To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy. This is applicable for the Desktop web platform.{% highlight voltMx %}formid.widgetid.hoverSkin = "skinname";
     {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the clone Method for a FlexContainer widget.
 //You need to make a corresponding call of the clone method for other applicable widgets.  
@@ -614,23 +654,26 @@ var myLabel=frmFlex.lbl1.clone();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointFromWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointFromWidget Method</summary>
 
 * * *
 
 This method allows you to convert the coordinate system from a widget to a point (receiver's coordinate system).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 convertPointFromWidget(point, fromWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -644,31 +687,35 @@ _fromWidget_
 
 This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from the widget to a point (receiver's coordinate system).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.convertPointFromWidget({
+{% highlight VoltMx %}
+Form1.widget1.convertPointFromWidget({
     x: "10dp",
     y: "20dp"
 }, widget2);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointToWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointToWidget Method</summary>
 
 * * *
 
 Using the convertPointToWidget method, you can modify the co-ordinate system. You can convert the receiver's co-ordinate system from a **point** to a **Widget**.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 convertPointToWidget(point, toWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -678,49 +725,55 @@ _toWidget_
 
 \[widgetref\] - Mandatory. This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from a point to a widget.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget2.convertPointToWidget({
+{% highlight VoltMx %}
+Form1.widget2.convertPointToWidget({
     x: "20dp",
     y: "30dp"
 }, widget1);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)getCurrentPageIndex Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getCurrentPageIndex Method</summary>
 
 * * *
 
 This method provides the ability to get the current page number from the document.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 getCurrentPageIndex()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 _Number_
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke getCurrentPageIndex method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke getCurrentPageIndex method for a PDFView widget.
 var currentPageNo = this.view.myPDFView.getCurrentPageIndex();
 alert("Current Page No?::" + currentPageNo);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)getDocumentHistory Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getDocumentHistory Method</summary>
 
 * * *
 
@@ -728,73 +781,84 @@ This method provides the ability to get the dictionary of the document metadata.
 
 > **_Note:_** The dictionary may be empty, or only some of the keys may have associated values. Metadata is optional for PDF documents.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 getDocumentHistory()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 _Array_
 
 The array might contain CreationDate, Producer, ModDate, Title, Creator, etc.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke getCurrentPageIndex method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke getCurrentPageIndex method for a PDFView widget.
 var currentPageNo = this.view.myPDFView.getCurrentPageIndex();
 alert("Current Page No?::" + currentPageNo);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)getPageCount Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getPageCount Method</summary>
 
 * * *
 
 This method provides the ability to get the total number of pages present in the document.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 getPageCount()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 _Number_
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke getPageCount method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke getPageCount method for a PDFView widget.
 var pageCount = this.view.myPDFView.getPageCount();
 alert("PageCount?::" + pageCount);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)goBack Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>goBack Method</summary>
 
 * * *
 
 This method navigates you to the previous page in the page history.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 goBack()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke goBack method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke goBack method for a PDFView widget.
 this.view.myPDFView.goBack();
 
-OR
+### OR
 
 if(this.view.myPDFView.canGoBack())
 {
@@ -803,28 +867,32 @@ if(this.view.myPDFView.canGoBack())
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)goForward Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>goForward Method</summary>
 
 * * *
 
 This method navigates you to the next page in the page history.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 goForward()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke goForward method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke goForward method for a PDFView widget.
 this.view.myPDFView.goForward();
 
-OR
+### OR
 
 if(this.view.myPDFView.canGoForward())
 {
@@ -833,13 +901,14 @@ if(this.view.myPDFView.canGoForward())
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[goToFirstPage Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>goToFirstPage Method</summary>
 
 * * *
 
@@ -847,16 +916,19 @@ This method specifies whether the PDFView can navigate to the first page of the 
 
 This type of navigation records the move in its page history.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 goToFirstPage()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke goToFirstPage method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke goToFirstPage method for a PDFView widget.
 this.view.myPDFView.goToFirstPage();
 
-OR
+### OR
 
 if(this.view.myPDFView.canGoToFirstPage())
 {
@@ -865,13 +937,14 @@ if(this.view.myPDFView.canGoToFirstPage())
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[goToLastPage Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>goToLastPage Method</summary>
 
 * * *
 
@@ -879,16 +952,19 @@ This method specifies whether the PDFView can navigate to the last page of the d
 
 This type of navigation records the move in its page history.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 goToLastPage()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke goToLastPage method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke goToLastPage method for a PDFView widget.
 this.view.myPDFView.goToLastPage();
 
-OR
+### OR
 
 if(this.view.myPDFView.canGoToLastPage())
 {
@@ -897,13 +973,14 @@ if(this.view.myPDFView.canGoToLastPage())
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[goToNextPage Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>goToNextPage Method</summary>
 
 * * *
 
@@ -911,16 +988,19 @@ This method specifies whether the PDFView can navigate to the next page of the d
 
 This type of navigation records the move in its page history.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 goToNextPage()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke goToNextPage method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke goToNextPage method for a PDFView widget.
 this.view.myPDFView.goToNextPage();
 
-OR
+### OR
 
 if(this.view.myPDFView.canGoToNextPage())
 {
@@ -929,13 +1009,14 @@ if(this.view.myPDFView.canGoToNextPage())
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)goToPage Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>goToPage Method</summary>
 
 * * *
 
@@ -943,25 +1024,29 @@ This method provides the ability to scroll to the specified page of the document
 
 This type of navigation records the move in its page history.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 goToPage()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke goToPage method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke goToPage method for a PDFView widget.
 
 this.view.myPDFView.goToPage=5(pagenumber);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)goToPreviousPage Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>goToPreviousPage Method</summary>
 
 * * *
 
@@ -969,16 +1054,19 @@ This method specifies whether the PDFView can navigate to the previous page of t
 
 This type of navigation records the move in its page history.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 goToPreviousPage()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke goToPreviousPage method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke goToPreviousPage method for a PDFView widget.
 this.view.myPDFView.goToPreviousPage();
 
-OR
+### OR
 
 if(this.view.myPDFView.canGoToPreviousPage())
 {
@@ -987,23 +1075,26 @@ if(this.view.myPDFView.canGoToPreviousPage())
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)isPDFEncrypted Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isPDFEncrypted Method</summary>
 
 * * *
 
 This method specifies whether the PDFView document is encrypted or not.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isPDFEncrypted()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -1011,21 +1102,23 @@ True - Indicates that the PDF is encrypted.
 
 False - Indicates that the PDF is not encrypted.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke isPDFEncrypted method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke isPDFEncrypted method for a PDFView widget.
 var isEncrypted = this.view.myPDFView.isPDFEncrypted();
 alert("isPDFEncrypted?::" + isEncrypted);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)isPDFLocked Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isPDFLocked Method</summary>
 
 * * *
 
@@ -1033,11 +1126,13 @@ This method specifies whether the PDFView document is locked or not.
 
 > **_Note:_** You can only lock encrypted documents. When you open encrypted documents whose password is an empty string, they are unlocked automatically. The PDF Kit tries the empty string as a password if none is supplied.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isPDFLocked()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -1045,53 +1140,58 @@ True - Indicates that the PDF is locked.
 
 False - Indicates that the PDF is not locked.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke isPDFLocked method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke isPDFLocked method for a PDFView widget.
 var isLocked = this.view.myPDFView.isPDFLocked();
 alert("isPDFEncrypted?::" + isLocked);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[registerForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>registerForPeekandPop Method</summary>
 
 * * *
 
 This method registers a widget to enable 3D Touch peek and pop gestures.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 registerForPeekandPop(onPeekCallback, onPopCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPeekCallback
 
 A callback function that is invoked when the user slightly presses (soft press) the widget.
 
-Callback Syntax
+### Callback Syntax
 
 onPeekCallback(widget)
 
-Callback Input Parameters
+### Callback Input Parameters
 
 _widget_
 
 A widget reference that is registered for peek and pop.
 
-Callback Return Values
+### Callback Return Values
 
   A PreviewInfoTable. See the Remarks section for a description of this table.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget) {
+{% highlight VoltMx %}
+function onPeekCallback(widget) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -1105,11 +1205,11 @@ onPopCallback (Optional)
 
 A callback function that is invoked when the user further presses (hard press) the preview that is displayed for the widget.
 
-Callback Syntax
+### Callback Syntax
 
 onPopCallback(widget,peekForm)
 
-Callback Input Parameters
+### Callback Input Parameters
 
 _widget_
 
@@ -1119,23 +1219,24 @@ _peekForm_
 
 A form reference that is displayed as preview/peek.
 
-Callback Return Values
+### Callback Return Values
 
   A form reference.
 
-Callback Remarks
+### Callback Remarks
 
 Use this callback to set the content for pop. The form handle returned by this callback is used for pop content. In general, the form that is used for preview is used for pop content also. If the pop callback is not implemented, peek disappears and the app returns to its previous state.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}
+function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Remarks
+### Remarks
 
 A PreviewInfoTable has the following format.
 
@@ -1161,43 +1262,48 @@ Example: \[“0dp”, “0dp”, “200dp”, “300dp”\], \[“10%”, “10%
 
 Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “240px”\]
 
-Example of a PreviewInfoTable:
+### Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}
+var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[reload Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>reload Method</summary>
 
 * * *
 
 This method provides you with the ability to reload the current web page.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 reload()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke reload method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke reload method for a Browser widget.
 frmBrowser.myBrowser.reload();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1207,23 +1313,27 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeFromParent Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeFromParent Method</summary>
 
 * * *
 
 This method allows you to remove a child widget from a parent widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 removeFromParent()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the removeFromParent Method for a Calendar widget.
 //You need to make a corresponding call of the removeFromParent method for other applicable widgets.
 
@@ -1231,36 +1341,40 @@ Form1.calendar.removeFromParent();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android , Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to remove the specified gesture recognizer for the specified widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 removeGestureRecognizer(gestureHandle)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 gestureHandle - Mandatory
 
 Specifies the handle to the gesture returned by addGestureRecognizer call.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
+{% highlight VoltMx %}
+//Sample code to remove Double tap gesture from frmGestures FlexForm.  
 frmGestures.removeGestureRecognizer(doubletp);  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available on all platforms except Desktop Web and Android.
 
@@ -1268,17 +1382,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setEnabled Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setEnabled Method</summary>
 
 * * *
 
 This method specifies the widget that must be enabled or disabled.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setEnabled(enabled)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _enabled_
 
@@ -1288,46 +1405,50 @@ true -Indicates widget is enabled.
 
 false - Indicates widget is disabled.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 Browser widget does not support this method in SPA.
 
 This method is not applicable in Map widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setEnabled Method for button widget.
 //You need to make a corresponding call of the setEnabled method for other applicable widgets.
 
 form1.myButton.setEnabled(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available on all platforms except SPA.
+    Available on all platforms except SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to set a gesture recognizer for a specified gesture for a specified widget. You can set a Gesture recognizer only for a FlexForm, a FlexContainer, and a FlexScrollContainer. The setGestureRecognizer method is deprecated and should not be used in new software. However, Swipe Distance and Swipe Velocity parameters are not deprecated. So if you want to use the Swipe Distance and Swipe velocity parameters, use the setGestureRecognizer method. To use all other parameters, you must use the addGestureRecognizer method.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setGestureRecognizer (gestureType,setupParams,gestureHandler)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _gestureType_
 
@@ -1356,7 +1477,7 @@ onGesturefunction(widgetRef,gestureInfo)
 *   _widgetRef_ - This parameter specifies the handle to the widget on which the gesture was recognized.
 *   _gestureInfo_ - This parameter specifies an array that provides information about the gesture. The contents of this array vary based on the gesture type.
 
-Volt MX  Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
+Volt MX Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
 
 *   _gestureType_ \[number\] - indicates the gesture type; **1** for TAP, **2** for SWIPE, and **3** for LONGPRESS.
 *   _gesturesetUpParams_ \[object\] - this array is the set up parameters passed while adding the gesture recognizer.
@@ -1368,15 +1489,15 @@ Volt MX  Iris populates the details in the _gestureInfo_ array. This array has t
 *   _widgetWidth_ \[number\] - specifies the width of the widget (in pixels). This parameter is applicable only on iPhone.
 *   _widgetHeight_ \[number\] - specifies the height of the widget (in pixels). This parameter is applicable only on iPhone.
 
-Return Values
+### Return Values
 
 String - Reference(uniqueidentifier) to the gesture is returned.
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is applicable on Form, Box, and ScrollBox widgets only.
 
@@ -1384,7 +1505,7 @@ Configuration of setupParams
 
 The configuration parameters vary based on the type of the gesture.
 
-Gesture Type:TAP
+### Gesture Type:TAP
 
 *   fingers \[number\] - This parameter specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[number\] - This parameter specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
@@ -1393,25 +1514,25 @@ For example:
 
 {fingers:1,taps:1}
 
-Gesture Type:SWIPE
+### Gesture Type:SWIPE
 
 *   fingers \[number\] - This parameter specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   swipedistance \[number\] - This parameter specifies the distance between the pixel from where the swipe started to the pixel where the swipe stopped (finger is moved up or removed). The default value is 50 pixels. This parameter is applicable only on android. This parameter is applicable only if the gesture type is SWIPE.
 *   swipevelocity \[number\] - This parameter specifies the velocity of the swipe measured in pixels per second. The default value is 75. This parameter is applicable only on android. This parameter is applicable only if the gesture type is SWIPE.
 
-For example:
+### For example:
 
 {fingers:1,swipedistance:50,swipevelocity:75}
 
-Gesture Type:LONGPRESS
+### Gesture Type:LONGPRESS
 
 *   pressDuration \[number\] - This parameter specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if the _pressDuration_ is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This parameter is not customizable on android platform. The default value on android platform is 500 ms. Any value you pass to this parameter is ignored and the default value is used.
 
-For example:
+### For example:
 
 {pressDuration:1}
 
-Function syntax for the _GestureHandler_ parameter
+### Function syntax for the _GestureHandler_ parameter
 
 The parameter specifies the function that needs to be executed when a gesture is recognized. This function has the following Syntax:
 
@@ -1420,7 +1541,7 @@ onGesturefunction(widgetRef,gestureInfo)
 *   _widgetRef_ - This parameter specifies the handle to the widget on which the gesture was recognized.
 *   _gestureInfo_ - This parameter specifies an array that provides information about the gesture. The contents of this array vary based on the gesture type.
 
-Volt MX  Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
+Volt MX Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
 
 *   _gestureType_ \[number\] - indicates the gesture type; **1** for TAP, **2** for SWIPE, and **3** for LONGPRESS.
 *   _gesturesetUpParams_ \[object\] - this array is the set up parameters passed while adding the gesture recognizer.
@@ -1432,9 +1553,10 @@ Volt MX  Iris populates the details in the _gestureInfo_ array. This array has t
 *   _widgetWidth_ \[number\] - specifies the width of the widget (in pixels). This parameter is applicable only on iPhone.
 *   _widgetHeight_ \[number\] - specifies the height of the widget (in pixels). This parameter is applicable only on iPhone.
 
-Example
+### Example
 
-{% highlight voltMx %}//The below function will get invoked  when a gesture is recognized. 
+{% highlight VoltMx %}
+//The below function will get invoked  when a gesture is recognized. 
 function myTap(myWidget, gestureInfo) {
     alert(" Tap Gesture detected");
     alert("gestureType :" + gestureInfo.gestureType);
@@ -1452,45 +1574,49 @@ var setupTblTap = {
 var tapGesture = frm1.hbx1.setGgestureRecognizer(1, setupTblTap, myTap);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPeek Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPeek Method</summary>
 
 * * *
 
 This method sets and overrides the existing onPeekCallback for the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setOnPeek(onPeekCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPeekCallback
 
 A callback function that is invoked when the user slightly presses (soft press) the widget.
 
-Callback Syntax
+### Callback Syntax
 
 onPeekCallback(widget)
 
-Callback Parameters
+### Callback Parameters
 
 _widget_
 
 A widget reference that is registered for peek and pop.
 
-Callback Return Values
+### Callback Return Values
 
 PreviewInfoTable. See the Remarks section for a description of this table.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget, contextInfo) {
+{% highlight VoltMx %}
+function onPeekCallback(widget, contextInfo) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -1500,11 +1626,11 @@ Callback Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 A PreviewInfoTable has the following format.
 
@@ -1530,18 +1656,20 @@ Example: \[“0dp”, “0dp”, “200dp”, “300dp”\], \[“10%”, “10%
 
 Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “240px”\]
 
-Example of a PreviewInfoTable:
+### Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}
+var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}function settingPeek() {
+{% highlight VoltMx %}
+function settingPeek() {
     Form1.setOnPeek(onMyPeekcallback);
 }
 
@@ -1560,33 +1688,36 @@ function onMyPeekcallback(widgetref, contextInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPop Method</summary>
 
 * * *
 
 This method overrides the existing onPopCallback for the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setOnPop(onPopCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPopCallback
 
 A callback function that is invoked when the user slightly presses (soft press) the widget.
 
-Callback Syntax
+### Callback Syntax
 
 onPopCallback(widget,peekForm)
 
-Callback Parameters
+### Callback Parameters
 
 _widget_
 
@@ -1596,29 +1727,31 @@ _peekForm_
 
  A form reference that is displayed as preview/peek.
 
-Callback Return Values
+### Callback Return Values
 
  A form reference.
 
-Callback Remarks
+### Callback Remarks
 
  Use this callback to set the content for pop. The form handle returned by this callback is used for pop content. In general, the form that is used for preview is used for pop content also. If the pop callback is not implemented, peek disappears and the app returns to its previous state.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}
+function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Example
+### Example
 
-{% highlight voltMx %}function settingPop() {
+{% highlight VoltMx %}
+function settingPop() {
     Form1.setOnPop(myonPopcallback);
 }
 
@@ -1628,13 +1761,14 @@ function myonPopcallback(widgetref, peekForm) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setVisibility Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setVisibility Method</summary>
 
 * * *
 
@@ -1642,11 +1776,13 @@ Use this method to set the visibility of the widget.
 
 **Default :** true
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setVisibility(visible)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _visible_
 
@@ -1698,15 +1834,15 @@ It is a JS dictionary containing the events invoked by the platform during the a
 *   **animStarted**: Invoked at the beginning of the animation without any parameters. Following is the Syntax of the event: function animStarted()
 *   **animEnded**: Invoked at the end of the animation without any parameters. Following is the Syntax of the event: function animEnded()
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is not applicable on Form, Popup, and Alert. It is also not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so by using [Segment](Segment_Methods.html#segmentedui-methods) methods.
 
@@ -1714,9 +1850,10 @@ Passing an invalid type other than the above events lead to run time exceptions/
 
 This method is not supported on the widgets FlexForm, FlexContainer, and FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to invoke the setVisibility Method for a button widget with animation.
 //You need to make a corresponding call of the setVisibility method for other applicable widgets.
 
@@ -1735,42 +1872,47 @@ form1.myButton.setVisibility(
 form1.myButton.setVisibility(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[unregisterForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>unregisterForPeekandPop Method</summary>
 
 * * *
 
 This method unregisters a widget from 3D Touch peek and pop gestures.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 unregisterForPeekandPop()
-
-Parameters
-
-None.
-
-Return Values
-
-None.
-
-Example
-
-{% highlight voltMx %}Form1.unregisterForPeekAndPop();
 {% endhighlight %}
 
-Platform Availability
+### Parameters
+
+None.
+
+### Return Values
+
+None.
+
+### Example
+
+{% highlight VoltMx %}
+Form1.unregisterForPeekAndPop();
+{% endhighlight %}
+
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)zoomIn Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zoomIn Method</summary>
 
 * * *
 
@@ -1778,16 +1920,19 @@ This method provides the ability to zoom in by increasing the scaling factor.
 
 Each invocation of zoomIn multiplies the scaling factor by the square root of 2.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 zoomIn()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke zoomIn method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke zoomIn method for a PDFView widget.
 this.view.myPDFView.zoomIn();
 
-OR
+### OR
 
 if(this.view.myPDFView.canZoomIn())
 {
@@ -1796,13 +1941,14 @@ if(this.view.myPDFView.canZoomIn())
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)zoomOut Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zoomOut Method</summary>
 
 * * *
 
@@ -1810,16 +1956,19 @@ This method provides the ability to allow zoom out by decreasing the scaling fac
 
 Each invocation of zoomOut divides the scaling factor by the square root of 2.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 zoomOut()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke zoomIn method for a PDFView widget.
+{% highlight VoltMx %}
+//Sample code to invoke zoomIn method for a PDFView widget.
 this.view.myPDFView.zoomOut();
 
-OR
+### OR
 
 if(this.view.myPDFView.canZoomOut())
 {
@@ -1828,9 +1977,10 @@ if(this.view.myPDFView.canZoomOut())
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
+</details>
 

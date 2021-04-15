@@ -10,7 +10,7 @@ Segment
 
 A Segment widget consists of multiple segments (rows or records) and each segment can have multiple child widgets. You can use Segment widgets to create menus and grouped lists in your applications.
 
-To learn how to use this widget programmatically, refer [VoltMX Iris Widget guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Overview.html#Segment.html#segmentedui-widget).
+To learn how to use this widget programmatically, refer [VoltMX Iris Widget guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Segment.html#segmentedui-widget).
 
 You can place a Segment widget within a number of parent widgets, and you can place a number of child widgets within a Segment widget.
 

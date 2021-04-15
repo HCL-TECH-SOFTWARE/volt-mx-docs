@@ -4,7 +4,7 @@ category: "voltmx_foundry_user_guide"
 ---
                                
 
-User Guide: [VoltMX Foundry Command Line Utility - Continuous Integration](CI_Foundry.html) > Use Case
+User Guide: [Volt MX Foundry Command Line Utility - Continuous Integration](CI_Foundry.html) > Use Case
 
 Configuring Read-only Fields for Object Services through MFCLI
 ==============================================================
@@ -29,7 +29,7 @@ After you create your data model for an object service in an app in Foundry Cons
 
 Use the locked zip file to import the locked fields into your existing app. When you import the locked zip file, the existing app is overwritten. The locked fields of your objects are categorized as the **BASE FIELDS** and the rest of the fields in the objects are categorized as **CUSTOM FIELDS**.
 
-Refer to the following diagram that explains how to lock fields of object services as read-only `(2.d)` fields:
+Refer to the following diagram that explains how to lock fields of object services as read-only **`(2.d)`** fields:
 
 ![](Resources/Images/LockField_Configurations_661x345.png)
 
@@ -41,15 +41,12 @@ Prerequisites
 | Volt MX Foundry Console Version V9 GA |
 | Foundry App with Objects Services |
 | MFCLI version <version number> onwards |
-| LockConfigTemplate.json file
+| LockConfigTemplate.json file |
 
 <details close markdown="block"><summary>Structure of Lock Configuration JSON file</summary>
 
 LoockConfigTemplate.json { "serviceLockConfigs": { "objectServices": { "<object\_service\_name>": { "version": "<version>", "paths": \[ "objects/<object\_name>/fields/<field\_name>", "objects/<object\_name>/fields/\*", "objects/<object\_name>/fields", { "path": "objects/<object\_name>/fields", "values": \[ "<field1\_name>", "<field2\_name>" \] } \] }, "<object\_service2\_name>": {}, "<object\_service3\_name>": {} } } } `"objects/<object_name>/fields"` = The path marks all the existing fields as read-only and no new fields can be created. `" objects/<object_name>/fields/*"` = This path with an `asterisk (*)` marks all the existing fields in an object as **read-only** but new fields can be created. `"objects/<object_name>/fields/<field_name>"` = The path marks only the specified field as read-only.You can also provide a path and array of specific values to mark as read-only, as follows: { "path": "objects/objName/fields", "values": \[ "fieldName1", "fieldName2", "fieldName3", "fieldName4", "fieldName5" \] }
 
-
-
- |
 </details>
 Lock Fields Operation
 ---------------------
@@ -116,12 +113,13 @@ To remove the locked configurations of object services from Foundry Cloud enviro
 
 Example
 
-{% highlight voltMx %}java -jar mfcli.jar unlock-config -u abc@voltmx.com -p password -t 100054321 -a ~/../App.zip -ua my_unlocked_app
+{% highlight VoltMx %}
+java -jar mfcli.jar unlock-config -u abc@voltmx.com -p password -t 100054321 -a ~/../App.zip -ua my_unlocked_app
 {% endhighlight %}
 
 In this scenario, the following are the mandatory steps:
 
-*   The `` `-a` ``is the path of the Foundry app with lock configurations. This is a mandatory parameter.
+*   The  **`-a`** is the path of the Foundry app with lock configurations. This is a mandatory parameter.
 
 This command removes all locked configurations for the fields of objects services in the App.zip, and creates a clone of the provided Foundry app with lock configuration applied. For example, `C:\\tmp\\App_locked.zip` file created in the same Foundry app path.
 
@@ -141,6 +139,6 @@ Example
 
 In this scenario, the following parameters are mandatory:
 
-*   The `` `-a` ``is the path of the Foundry app with lock configurations.
+*   The **`-a`** is the path of the Foundry app with lock configurations.
 
 This command removes all locked configurations for the fields of objects services in the App.zip, and creates a clone of the provided Foundry app with lock configuration applied. For example, `C:\\tmp\\App_locked.zip` file is created in the same Foundry app path.

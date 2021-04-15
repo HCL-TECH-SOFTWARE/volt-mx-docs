@@ -10,23 +10,27 @@ Functions
 
 The Battery API contains the following functions, which belong to the [voltmx.os Namespace](voltmx.os_constants.html).
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.os.getBatteryLevel](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.os.getBatteryLevel</summary> 
 
 * * *
 
 Retrieves the current percentage charge level of the device battery, as an integer value.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.os.getBatteryLevel()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}getBatteryLevel: function() {
+{% highlight VoltMx %}
+getBatteryLevel: function() {
     voltmx.os.registerBatteryService(this.batterySuccessCallback);
     var battery = voltmx.os.getBatteryLevel();
     voltmx.os.unregisterBatteryService();
@@ -34,11 +38,11 @@ Example
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an integer that ranges from 0-100 (inclusive) that specifies the battery's current charge level in percentage. For example, a return value of 30 specifies that the current charge level of the battery is 30%.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -46,23 +50,27 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.os.getBatteryState](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.os.getBatteryState</summary> 
 
 * * *
 
 Retrieves the current state of the battery.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.os.getBatteryState()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//This code is used to obtain your device battery state
+{% highlight VoltMx %}
+//This code is used to obtain your device battery state
 getBatteryState: function() {
     voltmx.os.registerBatteryService(this.batterySuccessCallback);
     var batteryState = voltmx.os.getBatteryState();
@@ -82,15 +90,15 @@ getBatteryState: function() {
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns a constant from the [Battery State Constants](voltmx.os_constants_batteryapi.html#BatteryState).
 
-Remarks
+### Remarks
 
 The battery state indicates whether it is charging, discharging, and so forth.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -98,7 +106,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.os.registerBatteryService](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.os.registerBatteryService</summary>
 
 * * *
 
@@ -106,11 +115,13 @@ Registers for the battery monitoring service of the device operating system. The
 
 > **_Note:_** Whenever the battery state changes or for every 1% change in the battery level, a callback to the registerBatteryService function is triggered.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.os.registerBatteryService(callbackMethod)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -119,9 +130,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}//This code is used to register a battery service and deregister the service based on your battery level
+{% highlight VoltMx %}
+//This code is used to register a battery service and deregister the service based on your battery level
 registerBatteryService: function() {
     voltmx.os.registerBatteryService(this.mybatterychangecallback);
     var batterylevel = voltmx.os.getBatteryLevel();
@@ -138,16 +150,16 @@ mybatterychangecallback: function(batteryInfo) {
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Limitations
+### Limitations
 
 *   The callback for the registered battery service is delivered only when the application is running; this is because, you can only receive notifications when the application is in the foreground for the iOS, Windows, and Android platforms.
 *   The callback to the registered battery service is delivered after every one minute duration for iOS; whereas in case of in Android and Windows, the callback is delivered for every 1% change in the battery charge.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -155,7 +167,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.os.unregisterBatteryService](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.os.unregisterBatteryService</summary> 
 
 * * *
 
@@ -163,17 +176,20 @@ This API stops the monitoring process of the device battery. You must call this 
 
 > **_Note:_** After your app calls the voltmx.os.unregisterBatteryService API, the callback function registered by the [voltmx.os.registerBatteryService](#registerBatteryService) API is no longer invoked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.os.unregisterBatteryService()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//This code is used to register a battery service and deregister the service based on your battery level
+{% highlight VoltMx %}
+//This code is used to register a battery service and deregister the service based on your battery level
 registerBatteryService: function() {
     voltmx.os.registerBatteryService(this.mybatterychangecallback);
     var batterylevel = voltmx.os.getBatteryLevel();
@@ -190,16 +206,16 @@ mybatterychangecallback: function(batteryInfo) {
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 *   Windows
 
 * * *
-
+</details>
 ![](resources/prettify/onload.png)

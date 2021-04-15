@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                              
-
 
 SegmentedUI Objects
 ===================
@@ -12,18 +10,19 @@ The following objects are used with the SegmentedUI widget.
 
 * * *
 
-
 <details close markdown="block"><summary>animation Object</summary>
 
 * * *
 
 Contains the definition of an animation.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 animation={definition:defObject, config:{}, callbacks:{}}
+{% endhighlight %}
 
-Members
+### Members
 
 _definition_
 
@@ -37,9 +36,10 @@ _callbacks_
 
 Optional. One or more callback functions.
 
-Example
+### Example
 
-{% highlight voltMx %}var transfromObject = voltmx.ui.makeAffineTransform();
+{% highlight VoltMx %}
+var transfromObject = voltmx.ui.makeAffineTransform();
 transfromObject.translate(10, 0);
 transfromObject.scale(0.1, 1);
 animationDef = {
@@ -68,11 +68,13 @@ form.segments.addAt(data, sectionIndex, rowIndex, animation);
 
 Contains the configuration specification of an animation.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 animationConfig={duration: <d>,fillMode: <f>}
+{% endhighlight %}
 
-Members
+### Members
 
 _<d>_
 
@@ -82,9 +84,10 @@ _<f>_
 
 A value from the set of voltmx.anim.FILL\_MODE\* that specifies the fill mode.
 
-Example
+### Example
 
-{% highlight voltMx %}animationConfig = {
+{% highlight VoltMx %}
+animationConfig = {
 	duration: 0.3,
 	fillMode: voltmx.anim.FILL_MODE_FORWARDS
 }
@@ -101,11 +104,13 @@ Example
 
 Specifies the section and row index of the animation.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 animationContext={sectionIndex=<s>,rowIndex = <r>}
+{% endhighlight %}
 
-Members
+### Members
 
 _sectionIndex_
 
@@ -115,9 +120,10 @@ _rowIndex_
 
 An integer value that specifies the row number.
 
-Example
+### Example
 
-{% highlight voltMx %}contextDef1 = {
+{% highlight VoltMx %}
+contextDef1 = {
 	sectionIndex=0,
 	rowIndex = 1,
 }
@@ -134,7 +140,7 @@ Example
 
 Defines the transformations to be performed during the animation of a widget in a Segment row.
 
-Members
+### Members
 
 _translate(x,y)_
 
@@ -148,13 +154,13 @@ _rotate(angle)_
 
 A method that sets the angle of rotation for the animation.
 
-Remarks
+### Remarks
 
 To create a transformationObject, call the voltmx.ui.makeAffineTransform function.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var transformObject = voltmx.ui.makeAffineTransform();
 transformObject.translate(10, -5);
 transformObject.scale(0.5, 2.0);
@@ -163,4 +169,4 @@ transformObject.rotate(10);
 {% endhighlight %}
 
 * * *
-
+</details>

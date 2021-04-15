@@ -12,31 +12,34 @@ The properties for the Segment widget are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
 Enables you to control accessibility behavior and alternative text for the widget.
 
-For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
+For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the VoltMX IrisUser Guide.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
-> **_Note:_** From Volt MX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the `accessibilityConfig` property. Values provided in the i18n keys take precedence over values provided in `a11yLabel`, `a11yValue`, and `a11yHint` fields.
+> **_Note:_** From VoltMX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the `accessibilityConfig` property. Values provided in the i18n keys take precedence over values provided in `a11yLabel`, `a11yValue`, and `a11yHint` fields.
 
 The accessibilityConfig property is a JavaScript object which can contain the following key-value pairs.
 
@@ -61,11 +64,11 @@ SPA/Desktop Web limitations
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+### Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -76,11 +79,11 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -92,118 +95,127 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[alternateRowSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>alternateRowSkin Property</summary>
 
 * * *
 
 Specifies the skin that is applied to every alternate _even numbered_ row in the segment.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 alternateRowSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 For example, if you have 5 segments, the alternate row skin is applied to segments 2 and 4.
 
 If you delete any even segment using the method [removeAt](Segment_Methods.html#removeAt), the odd indexes will reset and become even. The Alternate skin is applied to these new even indexes.  
 For example, if you have 5 segments and you delete segment 2, the odd indexes reset and segment 3 becomes segment 2 and the alternate skin is applied to it.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to define the alternateRowSkin property for Segment.
+{% highlight VoltMx %}//Sample code to define the alternateRowSkin property for Segment.
 frmSegment.mySegment.alternateRowSkin="alternateSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>anchorPoint Property</summary>
 
 * * *
 
 Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 anchorPoint
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The value for this property is a JavaScript dictionary object with the keys "x" and "y". The values for the "x" and "y" keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.anchorPoint = {
+{% highlight VoltMx %}Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[animateFocusChanges Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>animateFocusChanges Property</summary>
 
 * * *
 
 This property is used to bring the row specified in the selectedRowIndex property to the visible region.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 animateFocusChanges
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   If you set the animateFocusChanges property as true, the row specified in the [selectedRowIndex](#selected) property moves to the viewable area on the screen with animation. This property is supported for all the values of the property [viewtype](#viewType).
 *   If you set the animateFocusChanges property as false, the selected row moves to the viewable area without animation.
 
-Example
+### Example
 
-{% highlight voltMx %}frmHome.seg.animateFocusChanges = true;
+{% highlight VoltMx %}frmHome.seg.animateFocusChanges = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Not available in the IDE.
 
@@ -211,7 +223,8 @@ Not available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[autogrowMode Property (Deprecated)](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>autogrowMode Property (Deprecated)</summary>
 
 * * *
 
@@ -220,21 +233,23 @@ The autogrowMode property is deprecated in 6.0.3 release. The autogrowMode prope
 *   voltmx.flex.AUTOGROW\_NONE (value is 0)
 *   voltmx.flex.AUTOGROW\_HEIGHT (value is 1)
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 autogrowMode
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
-> **_Note:_** If you want to configure this property in Volt MX Iris, configure the height property of FlexContainer as preferred, then Volt MX Iris generates the autogrowMode property as voltmx.flex.AUTOGROW\_HEIGHT.
+> **_Note:_** If you want to configure this property in VoltMX Iris, configure the height property of FlexContainer as preferred, then VoltMX Iris generates the autogrowMode property as voltmx.flex.AUTOGROW\_HEIGHT.
 
 The default value for this property is voltmx.flex.AUTOGROW\_NONE.
 
@@ -260,13 +275,13 @@ Rules and priorities of autogrowMode property
 When to Use
 
 *    If the height of the FlexContainer is dependent on the heights of the child widgets that are added.
-*   If you are using the FlexContainer in a SegmentedUI template, where each row of the SegmentedUI row height is dependent on the child widgets content. Configure the height property of the FlexContainer as preferred, then Volt MX Iris generates the autogrowMode property as voltmx.flex.AUTOGROW\_HEIGHT.
+*   If you are using the FlexContainer in a SegmentedUI template, where each row of the SegmentedUI row height is dependent on the child widgets content. Configure the height property of the FlexContainer as preferred, then VoltMX Iris generates the autogrowMode property as voltmx.flex.AUTOGROW\_HEIGHT.
 
-Example
+### Example
 
 Setting the autogrowMode property on an existing widget
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //widget will use the set height flex property to derive height
 frmHome.autogrow1.autogrowMode=voltmx.flex.AUTOGROW_NONE;
 
@@ -274,7 +289,7 @@ frmHome.autogrow1.autogrowMode=voltmx.flex.AUTOGROW_NONE;
 frmHome.autogrow1.autogrowMode=voltmx.flex.AUTOGROW_HEIGHT;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Not available in the IDE.
 
@@ -285,25 +300,28 @@ Not available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[border Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>border Property</summary>
 
 * * *
 
 Specifies the border to the SegmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 border
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is SEGUI\_BORDER\_BOTH\_BOTTOM\_TOP.
 
@@ -318,13 +336,13 @@ This property is applicable only when the segment viewType is set to SEGUI\_VIEW
 
 To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to define border property for a Segment widget.
+{% highlight VoltMx %}//Sample code to define border property for a Segment widget.
 frmSegment.mySegment.border=constants.SEGUI_BORDER_TOP_ONLY;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Server side Mobile Web (basic)
@@ -334,7 +352,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
@@ -344,27 +363,29 @@ The bottom property determines the position of the bottom edge of the widget’s
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 bottom
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
-If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
+If the layout Type is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -372,28 +393,31 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA , and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bounces Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bounces Property</summary>
 
 * * *
 
 Specifies whether the scroll view bounces past the edge of the content and back again.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 bounces
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -403,20 +427,21 @@ If set to _true,_ the scroll view bounce is applied.
 
 This property is applicable only when the segment viewType is set to SEGUI\_VIEW\_TYPE\_TABLE\_VIEW.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable bounces property for a Segment widget.
+{% highlight VoltMx %}//Sample code to enable bounces property for a Segment widget.
 frmSegment.mySegment.bounces=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
@@ -424,25 +449,27 @@ This property determines the center of a widget measured from the left bounds of
 
 The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 centerX
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
-If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
+If the layout Type is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -450,14 +477,15 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
@@ -465,25 +493,27 @@ This property determines the center of a widget measured from the top bounds of 
 
 The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 centerY
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
-If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
+If the layout Type is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
@@ -491,14 +521,15 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentInsetAdjustmentType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentInsetAdjustmentType Property</summary>
 
 * * *
 
@@ -506,15 +537,17 @@ On scroll view, the contentInsetAdjustmentBehaviour property automatically adds 
 
 As specified later, this property plays an important role in various iPhone X layout scenarios.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contentInsetAdjustmentType
+{% endhighlight %}
 
-Type
+### Type
 
 Constant (Number)
 
-Read/Write
+### Read/Write
 
 Read + Write
 
@@ -554,40 +587,43 @@ State 2: After scrolling; with contentInsetAdjustmentType = constants.CONTENTINS
 
 ![](Resources/Images/iphone_X_Layout_State_3.png)
 
-Example
+### Example
 
-{% highlight voltMx %}function setContentInsetAdjustmentType(){
+{% highlight VoltMx %}function setContentInsetAdjustmentType(){
      Form1.SegmentInForm1.contentInsetAdjustmentType = constants.CONTENTINSET_ADJUSTMENT_AUTOMATIC;
 }
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 11 and later
 *   Not available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentOffsetMeasured Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentOffsetMeasured Property</summary>
 
 * * *
 
 This property returns the current coordinates of the top left corner of the scrollable region in the segment.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contentOffsetMeasured
+{% endhighlight %}
 
-Type
+### Type
 
 JavaScript Object
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 Returns the following key:value pairs:
 
@@ -601,14 +637,14 @@ If the Image widget has preferred height and if the image source is from the net
 
 The segment widget reuses row-templates. Rows which move out of the screen stop downloading the image and that affects the height calculation of the row height.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var offset = frmHome.seg.contentOffsetMeasured;
 voltmx.print (“contentOffsetMeasured:” + frmHome.seg.contentOffsetMeasured);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -616,31 +652,34 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cursorType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cursorType Property</summary>
 
 * * *
 
 In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 cursorType
+{% endhighlight %}
 
-Type
+### Type
 
 String.
 
 You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
-To add the `cursorType` property using Volt MX Iris in a Desktop Web application, follow these steps.
+To add the `cursorType` property using VoltMX Iris in a Desktop Web application, follow these steps.
 
-1.  In Volt MX Iris, open the Desktop Web application. From the **Project** explorer, expand **Responsive Web/ Desktop**\> **Forms** and select the form to which you need to make the changes.
+1.  In VoltMX Iris, open the Desktop Web application. From the **Project** explorer, expand **Responsive Web/ Desktop**\> **Forms** and select the form to which you need to make the changes.
 2.  On the canvas, select the widget for which you want to specify the cursor type. For example, button.
 3.  From the **Properties** panel, navigate to the **Skin** tab > **Hover Skin** tab.  
     You will find that the details of the hover skin is not enabled here.
@@ -653,9 +692,9 @@ To add the `cursorType` property using Volt MX Iris in a Desktop Web application
     You can see that the **Cursor Type** property has been added under the **General** section.
 8.  Select a value from the drop-down list to set the **Cursor Type** for the widget.
 
-Example
+### Example
 
-{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %} //This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
   
@@ -663,30 +702,35 @@ frmButton.myButton.cursorType = "wait";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[data Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>data Property</summary>
 
 * * *
 
 Specifies the set of values that must be displayed on each row of the segment.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 data
+{% endhighlight %}
+
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The data is categorized into Sections and Rows. The Sections information is optional. You can set the data in three different formats.
 
@@ -698,9 +742,9 @@ The below table explains the type and description of template key:
 
 <table style="width: 100%;mc-table-style: url('Resources/Stylesheets/Basic.css');border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-left-style: solid;border-left-width: 2px;border-left-color: #000000;border-right-style: solid;border-right-width: 2px;border-right-color: #000000;border-top-style: solid;border-top-width: 2px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 2px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle-Basic" cellspacing="0"><colgroup><col style="width: 121px;" class="TableStyle-Basic-Column-Column1"> <col style="width: 124px;" class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col style="width: 331px;" class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyE-Column1-Body1">Key</td><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyE-Column1-Body1">Key</td><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyE-Column1-Body1">Type</td><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyD-Column1-Body1">Comments</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">template</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Not Applicable</td><td class="TableStyle-Basic-BodyB-Column1-Body1">JavaScript: Object</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Indicates the template to be used for the specific row</td></tr></tbody></table>
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to define data property for a Segment widget.
+{% highlight VoltMx %}//Sample code to define data property for a Segment widget.
 frmSegment.mySegment.data = [{
  "dataId1": "data1",
  "dataId2": "data2",
@@ -715,9 +759,9 @@ frmSegment.mySegment.data = [{
 }];
 {% endhighlight %}
 
-Example of Format 1
+### Example of Format 1
 
-{% highlight voltMx %}[{
+{% highlight VoltMx %}[{
     "dataId1": "foo",
     "dataId2": "foo",
     "dataId3": "foo",
@@ -745,9 +789,9 @@ In the above example, **template** is the standard key which can be optionally t
 
 In the above examples, the values of dataId1, dataId2 are shown as string, but dataId3 is key value pair. The key value pair format allows you to set the properties specific to the widget. In the above example, you are setting the _isVisible_ property to true and **text** property to "Foo", **skin** property with ID nskin and **focusSkin** to a skin with ID fskin. If a string is provided, typically is mapped to the **text** property for button and labels and the _src_ property for the image.
 
-Example of Format 2
+### Example of Format 2
 
-{% highlight voltMx %}/*set the data with sections where section header is a name. 
+{% highlight VoltMx %}/*set the data with sections where section header is a name. 
 This example has two sections and each section with two rows.*/
 [
     ["section1", [{
@@ -776,9 +820,9 @@ This example has two sections and each section with two rows.*/
 
 {% endhighlight %}
 
-Example of Format 3
+### Example of Format 3
 
-{% highlight voltMx %}/*set the data with sections where section header driven by template. This example has two sections and each section with two rows.*/
+{% highlight VoltMx %}/*set the data with sections where section header driven by template. This example has two sections and each section with two rows.*/
 [
     [{
             "secDataId1": "",
@@ -829,7 +873,7 @@ The **data** property is then used to set the values that are to be displayed in
 
 In the following example, after the mapping is done, the **data** property assigns value to the _Comp1lbl1_ and _Comp1Img1_ keys. This value is then assigned to the child widgets- _lbl1_ and _img1_ of the _segComp1_component.
 
-{% highlight voltMx %}/*In this example, segComp1 is the component with lbl1 and img1 as child widgets. Comp1lbl1, and Comp1Img1 are the keys.*/  
+{% highlight VoltMx %}/*In this example, segComp1 is the component with lbl1 and img1 as child widgets. Comp1lbl1, and Comp1Img1 are the keys.*/  
 mySegment.widgetDataMap = {
  " template1": " template1",
  "segComp1.lbl1": "Comp1lbl1",
@@ -873,32 +917,35 @@ mySegment.data = [{
 
 > **_Note:_** When components are rendered inside a Segment template, the events and gestures assigned to the child widgets of the components are retained.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[defaultSelection Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>defaultSelection Property</summary>
 
 * * *
 
 Specifies if the first clickable element (Image or Label) of the segment is selected by default.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 defaultSelection
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -908,13 +955,13 @@ If set to _true,_ the default selection is applied.
 
 This property is applicable only when the segment viewType is set to SEGUI\_VIEW\_TYPE\_TABLE\_VIEW.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable defaultSelection Property for a Segment widget
+{% highlight VoltMx %}//Sample code to enable defaultSelection Property for a Segment widget
 frmSegment.mySegment.defaultSelection=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Server side Mobile Web (basic)
@@ -922,25 +969,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[displayType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>displayType Property</summary>
 
 * * *
 
 The displayType property specifies the display type of segmentPageView, either in PivotView or FlipView.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 displayType
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property can be set for a Segment that is placed in either a flex form or a vbox form.
 
@@ -950,37 +1000,40 @@ The possible values for this property are:
 *   SEGPAGE\_VIEW\_TYPE\_PHONE: The rows of the segment appear in PivotView. The pivot must be swiped to view the rows.
 *   SEGPAGE\_VIEW\_TYPE\_TABLET: The rows of the segment appear in FlipView. The arrows must be clicked to view the rows.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to define displayType property for a Segment widget
+{% highlight VoltMx %}//Sample code to define displayType property for a Segment widget
 frmSegment.mySegment.displayType=constants.SEGPAGE_VIEW_TYPE_PHONE;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[dockSectionHeaders Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>dockSectionHeaders Property</summary>
 
 * * *
 
 The docking header property enables you to dock or place the section header at the top of the segment while scrolling the section content.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 dockSectionHeaders
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If you are scrolling the segment data, the next section header will be docked on top of the segment.
 
@@ -998,39 +1051,42 @@ If set to _false,_ the section header is not docked.
 
 If set to _true,_ the section header is docked.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable dockSectionHeaders property for a Segment widget
+{% highlight VoltMx %}//Sample code to enable dockSectionHeaders property for a Segment widget
 
 frmSegment.mySegment.dockSectionHeaders=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on Android platforms only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[editStyle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>editStyle Property</summary>
 
 * * *
 
 Specifies the editing style to be applied to the rows in the SegmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 editStyle
+{% endhighlight %}
 
-Type
+#### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is SEGUI\_EDITING\_STYLE\_NONE.
 
@@ -1048,9 +1104,9 @@ For information regarding the Meta Info that can be set for the rows, see [Metho
 
 If you want to enable Swipe to delete feature for a row in the SegmentedUI then set the editing style to constants.SEGUI.EDITING\_STYLE\_SWIPE (a delete confirmation appears when you swipe a row).
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to define editStyle property for a Segment widget
+{% highlight VoltMx %}//Sample code to define editStyle property for a Segment widget
 
 frmSegment.mySegment.editStyle= constants.SEGUI_EDITING_STYLE_SWIPE;
 {% endhighlight %}
@@ -1059,34 +1115,37 @@ The following image illustrates the _Icon_ edit style:
 
 ![Edit Style set as Icon](Resources/Images/Icon_edit.png)
 
-Platform Availability
+### Platform Availability
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
 The `enable` property is used to control the actionability of the widgets. In a scenario where you want to display a widget but not invoke any action on the widget, configure the `enable` property to false to achieve it.
 
-This is a constructor level property and applicable for all widgets in Volt MX Iris.
+This is a constructor level property and applicable for all widgets in VoltMX Iris.
 
-Syntax
+### Syntax
 
-enable
+{% highlight VoltMx %}
+nable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
@@ -1094,16 +1153,16 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
   
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
@@ -1111,43 +1170,47 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCloneControllerForRowTemplates Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCloneControllerForRowTemplates Property</summary>
 
 * * *
 
@@ -1155,48 +1218,53 @@ This property helps you to create multiple copies of the controller of a Segment
 
 When you set the value of this property as `true`, multiple copies of the row template controller is created. You can then use `this.view` to access a particular row and the row's data. When the value of this property is set as `false`, the multiple copies of the row template controller is not created.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableCloneControllerForRowTemplates
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
 The default value of this property is false.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to enable enableCloneControllerForRowTemplates property for a Segment widget.*/
+{% highlight VoltMx %}/*Sample code to enable enableCloneControllerForRowTemplates property for a Segment widget.*/
 
 frmSegment.mySegment.enableCloneControllerForRowTemplates = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableDictionary Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableDictionary Property</summary>
 
 * * *
 
 Specifies if dictionary must be enabled for easy navigation.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableDictionary
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 If the dictionary property is enabled, alphabets from A to Z appear on the screen and when you select any alphabet, all the corresponding results that start with the selected alphabet are displayed.
 
@@ -1212,14 +1280,14 @@ The following image illustrates the behavior of the Enable Dictionary property w
 
 ![Enable Dictionary true](Resources/Images/Dictionary.png)
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to enable enableDictionary property for a Segment widget
+{% highlight VoltMx %} //Sample code to enable enableDictionary property for a Segment widget
 
 frmSegment.mySegment.enableDictionary=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -1227,26 +1295,29 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableHapticFeedback Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableHapticFeedback Property</summary>
 
 * * *
 
 Allows you to enable or disable haptic feedback on the Segment widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableHapticFeedback
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean.  
 If the enableHapticFeedback property is not specified, haptic feedback is not enabled on the Segment widget.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The enableHapticFeedback property is supported for Segment widgets only when the onClick callback event is defined.
 *   iOS
@@ -1259,13 +1330,13 @@ Remarks
 *   Windows
     *   Haptic Feedback is supported on Windows devices with OS build version 10.0.15063.0 or later.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the enableHapticFeedback property on a Segment widget.
+{% highlight VoltMx %}//Sample code to set the enableHapticFeedback property on a Segment widget.
 frmSegment.mySegment.enableHapticFeedback = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1273,7 +1344,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableLazyLoad Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableLazyLoad Property</summary>
 
 * * *
 
@@ -1283,71 +1355,76 @@ This property helps you to enable the lazy loading capability for the rows of a 
 
 When you set the value of this property as `true`, lazy loading is enabled for the segment, by default.
 
-> **_Note:_** Support for this property has been introduced in the Volt MX Iris V9 Service Pack 2 Fix Pack 7 release.
+> **_Note:_** Support for this property has been introduced in the VoltMX Iris V9 Service Pack 2 Fix Pack 7 release.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableLazyLoad
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
 The default value of this property is false.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to enable enableLazyLoad property for a Segment widget.*/
+{% highlight VoltMx %}/*Sample code to enable enableLazyLoad property for a Segment widget.*/
 
 frmSegment.mySegment.enableLazyLoad = true;
 {% endhighlight %}
 
-Remarks
+### Remarks
 
 As lazy loading only loads selective segment rows, the row animations and the onRowDisplay event callbacks are only triggered for the segment rows that are loaded.
 
 When lazy loading is enabled, a default loading image is displayed when users scroll through the segment. Developers can use the [loadingPlaceholderImage](#loadingPlaceholderImage) property to display a desired image as the background (in place of the default background image).
 
-Platform Availability
+### Platform Availability
 
 *   Responsive Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableReordering Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableReordering Property</summary>
 
 * * *
 
 The property allows you enable or disable reordering the rows in a Segment.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableReordering
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 To allow users to reorder (drag and drop) the rows in a segment, set the property to true. The reordering of the rows works only when the segment's view type is table view. To do so, set the [viewType](#viewType) property as SEGUI\_VIEW\_TYPE\_TABLEVIEW.
 
-Example
+### Example
 
 Setting the enableReordering property on an existing widget
 
-{% highlight voltMx %}form1.Sgmnt1.enableReordering = true;
+{% highlight VoltMx %}form1.Sgmnt1.enableReordering = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Android
@@ -1355,21 +1432,24 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[groupCells Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>groupCells Property</summary>
 
 * * *
 
 Specifies if all the rows in the segment should grouped using a rounded corner background and border.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 groupCells
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -1381,21 +1461,22 @@ If set to _true,_ the cells will have a rounded border.
 
 ![](Resources/Images/Group_Cell_false_307x190.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable groupCells property for a Segment widget
+{% highlight VoltMx %}//Sample code to enable groupCells property for a Segment widget
 
 frmSegment.mySegment.groupCells= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except Desktop Web and Server side Mobile Web platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -1403,19 +1484,21 @@ It determines the height of the widget and measured along the y-axis.
 
 The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 height
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the available measurement options:
 
@@ -1425,9 +1508,9 @@ Following are the available measurement options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
 
-**Example**
+### Example
 
-{% highlight voltMx %}//Sample code to set the height property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the height property for widgets by using DP, Percentage and Pixels.
 frmHome.segment1.height="50dp";
 
 frmHome.segment1. height="10%";
@@ -1436,7 +1519,7 @@ frmHome.segment1. height="10px";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -1446,27 +1529,30 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 A unique identifier of Segment consisting of alpha numeric characters. Every Segment should have a unique id within a Form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for a Segment with id:"segId".
+{% highlight VoltMx %}//Defining the properties for a Segment with id:"segId".
 var segBasic = {
     **id**: "segment",
     isVisible: true,
@@ -1499,28 +1585,31 @@ var segment = new voltmx.ui.SegmentedUI2(segBasic, segLayout, segPSP);
 voltmx.print("SegmentedUI Id ::" + segment.id);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[indicator Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>indicator Property</summary>
 
 * * *
 
 Specifies the indicator type as _rowSelect_, _rowClick_, or _none_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 indicator
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Remarks
+### Remarks
 
 Based on your selection, the behavior is exhibited:
 
@@ -1544,14 +1633,14 @@ The available options are:
 
 To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set indicator property for a Segment widget
+{% highlight VoltMx %}//Sample code to set indicator property for a Segment widget
 
 frmSegment.mySegment.indicator=constants.SEGUI_ROW_CLICK;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -1559,25 +1648,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This will help in avoiding the globals to most part of the programming.
 
@@ -1585,9 +1677,9 @@ This is a **non-Constructor** property. You cannot set this property through wid
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified.
 
-Example
+### Example
 
-{% highlight voltMx %}var inf = {
+{% highlight VoltMx %}var inf = {
     a: 'hello'
 };
 widget.info = inf; //works
@@ -1596,7 +1688,7 @@ widget.info.a = 'hello world';
 //widget.info.a will have old value as hello.
 {% endhighlight %}
 
-{% highlight voltMx %}//Sample code to set info property for a Segment widget
+{% highlight VoltMx %}//Sample code to set info property for a Segment widget
 
 frmSegment.mySegment.info = {
     key: "segmentobjects"
@@ -1606,69 +1698,75 @@ frmSegment.mySegment.info = {
 voltmx.print("SegmentedUI info ::" +frmSegment.mySegment.info);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isMaster Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>isMaster Property</summary> 
 
 * * *
 
 Specifies whether the container is a master container.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isMaster
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read Only after initialization.
 
-Remarks
+### Remarks
 
 If the `isMaster` property is true, the current widget is a master container and all of the rules and limitations of master containers apply to it. For more information, please see [Masters](Masters.html) in the Overviews section of this guide, as well as [Using Masters]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 Your app can set the `isMaster` property in this container's constructor. After that, this property is read-only.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var isMasterContainer = segContainer1.isMaster;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE (except for form/popup)
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>isVisible Property</summary> 
 
 * * *
 
 This property controls the visibility of a widget on the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -1676,22 +1774,23 @@ If set to _false,_ the widget is not displayed.
 
 If set to _true,_ the widget is displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set isVisible property for a Segment widget
+{% highlight VoltMx %}//Sample code to set isVisible property for a Segment widget
 frmSegment.mySegment.isVisible=true;
 {% endhighlight %}
 
 > **_Note:_** You can set the visibility of a widget dynamically from code using the setVisibility method.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE (except for form/popup)
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[left Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>left Property</summary>
 
 * * *
 
@@ -1699,25 +1798,27 @@ This property determines the lower left corner edge of the widget and is measure
 
 The left property determines the position of the left edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 left
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
@@ -1725,34 +1826,37 @@ frmHome.widgetID.left = "10%";
 frmHome.widgetID.left = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[loadingPlaceholderImage](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>loadingPlaceholderImage</summary> 
 
 * * *
 
 Specifies the image to be used as a background to indicate that the rows are loading while the user scrolls through the segment at a fast pace.
 
-> **_Note:_** Support for this property has been introduced in the Volt MX Iris V9 Service Pack 2 Fix Pack 7 release.
+> **_Note:_** Support for this property has been introduced in the VoltMX Iris V9 Service Pack 2 Fix Pack 7 release.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 loadingPlaceholderImage
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The following image formats are supported:
 
@@ -1760,17 +1864,17 @@ The following image formats are supported:
 *   .gif
 *   .svg
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to assign Loading Placeholder Image property of a Segment widget
+{% highlight VoltMx %}//Sample code to assign Loading Placeholder Image property of a Segment widget
 frmSegment.mySegment.loadingPlaceholderImage = "loader.gif";
 {% endhighlight %}
 
-Remarks
+### Remarks
 
 The lazy loading feature is only available for Segments present in a Responsive Web App that is built in the CSS Library mode (with the **Enable JS Library Mode (Legacy)** option disabled in the Project Settings). If the **Enable JS Library Mode (Legacy)** option is enabled for the app, the lazy loading feature does not work at run-time, and the [loadingPlaceholderImage](#loadingPlaceholderImage) property does not appear.
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -1778,7 +1882,8 @@ Available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -1786,21 +1891,23 @@ This property specifies the maximum height of the widget and is applicable only 
 
 The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -1808,14 +1915,15 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -1823,21 +1931,23 @@ This property specifies the maximum width of the widget and is applicable only w
 
 The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -1845,38 +1955,41 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[metaInfo Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>metaInfo Property</summary>
 
 * * *
 
 Allows to capture row level attributes.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 metaInfo
+{% endhighlight %}
 
-Type
+### Type
 
 JS Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
-<table style="width: 100%;mc-table-style: url('Resources/Stylesheets/Basic.css');border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-left-style: solid;border-left-width: 2px;border-left-color: #000000;border-right-style: solid;border-right-width: 2px;border-right-color: #000000;border-top-style: solid;border-top-width: 2px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 2px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle-Basic" cellspacing="0"><colgroup><col style="width: 124px;" class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col style="width: 331px;" class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyE-Column1-Body1">Key</td><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyE-Column1-Body1">Type</td><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyD-Column1-Body1">Comments</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">clickable</td><td class="TableStyle-Basic-BodyE-Column1-Body1">JavaScript: Boolean</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies if the row is clickable and supported by all platforms.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">editMode ( in JS)</td><td class="TableStyle-Basic-BodyE-Column1-Body1">JavaScript: Number <u>Possible values</u> constants.SEGUI_EDIT_MODE_INSERT ( displays a "+" icon on the left handside of the row) constants.SEGUI_EDIT_MODE_DELETE ( displays a "-" icon on the left handside of the row)</td><td class="TableStyle-Basic-BodyD-Column1-Body1">eidtMode is only applicable if the <b>editStyle</b> has been set to either constants.SEGUI_EDITING_STYLE_ICON or constants.SEGUI_EDITING_STYLE_SWIPE If the editMode property is not specified for a row then it is not enabled for editing (even though an <b>editStyle</b> has been set). constants.SEGUI_EDIT_MODE_INSERT is not applicable for constants.SEGUI_EDITING_STYLE_SWIPE</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">editModeCustomConfig</td><td class="TableStyle-Basic-BodyE-Column1-Body1">JavaScript: Object Example: <tt>metaInfo: {editModeCustomConfig :[{title:"custom edit", backgroundColor:"0xff000000", callback: Callback object},{title:"custom edit1", backgroundColor:"0xffff0000", callback: Callback object1},…]}</tt> &nbsp;</td><td class="TableStyle-Basic-BodyD-Column1-Body1">The editModeCustomConfig property defines a single action to present when the user swipes horizontally on a row. When user performs a horizontal swipe in a row, by default, the Delete button is displayed. To delete the row by clicking on this button, in the associated callback, you need to write the segment.removeAt function. This configuration lets you define one or more custom actions to display for a given row. Each instance of this configuration represents a single action to perform and includes the text, formatting information, and behavior for the corresponding button. Set the editMode as constants.SEGUI_EDIT_MODE_DELETE to get the canned swipe as delete behavior by configuring a new property. Parameters: title - Specify a title for the button. backgroundColor - Optional. By default, red color is set. callback - Optional. Callback signature is:<code>function mycallbcak (widgetHandle, section, row)</code></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><a name="enableScrolling"></a>enableScrolling</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Boolean Example: <tt>metaInfo:{"enableScrolling":false}</tt></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Allows you enable or disable the vertical scrolling of a page added as a row inside the Segment Widget. By default, the property is set to true. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>The enableScrolling parameter is applicable only when the <a href="#viewType" class="selected">viewType</a> property is set to SEGUI_VIEW_TYPE_PAGEVIEW. Sample Code: <tt>var seg = new voltmx.ui.SegmentedUI2({"data": [{ "metaInfo":{"enableScrolling":true}}],"viewType": constants.SEGUI_VIEW_TYPE_PAGEVIEW //which is required});</tt></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">skin</td><td class="TableStyle-Basic-BodyB-Column1-Body1">JavaScript: Object</td><td class="TableStyle-Basic-BodyA-Column1-Body1">ID of the skin that needs to be applied to the entire row.</td></tr></tbody></table>
+<table style="width: 100%;mc-table-style: url('Resources/Stylesheets/Basic.css');border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-left-style: solid;border-left-width: 2px;border-left-color: #000000;border-right-style: solid;border-right-width: 2px;border-right-color: #000000;border-top-style: solid;border-top-width: 2px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 2px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle-Basic" cellspacing="0"><colgroup><col style="width: 124px;" class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col style="width: 331px;" class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyE-Column1-Body1">Key</td><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyE-Column1-Body1">Type</td><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyD-Column1-Body1">Comments</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">clickable</td><td class="TableStyle-Basic-BodyE-Column1-Body1">JavaScript: Boolean</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies if the row is clickable and supported by all platforms.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">editMode ( in JS)</td><td class="TableStyle-Basic-BodyE-Column1-Body1">JavaScript: Number <u>Possible values</u> constants.SEGUI_EDIT_MODE_INSERT ( displays a "+" icon on the left handside of the row) constants.SEGUI_EDIT_MODE_DELETE ( displays a "-" icon on the left handside of the row)</td><td class="TableStyle-Basic-BodyD-Column1-Body1">eidtMode is only applicable if the <b>editStyle</b> has been set to either constants.SEGUI_EDITING_STYLE_ICON or constants.SEGUI_EDITING_STYLE_SWIPE If the editMode property is not specified for a row then it is not enabled for editing (even though an <b>editStyle</b> has been set). constants.SEGUI_EDIT_MODE_INSERT is not applicable for constants.SEGUI_EDITING_STYLE_SWIPE</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">editModeCustomConfig</td><td class="TableStyle-Basic-BodyE-Column1-Body1">JavaScript: Object ### Example: <tt>metaInfo: {editModeCustomConfig :[{title:"custom edit", backgroundColor:"0xff000000", callback: Callback object},{title:"custom edit1", backgroundColor:"0xffff0000", callback: Callback object1},…]}</tt> &nbsp;</td><td class="TableStyle-Basic-BodyD-Column1-Body1">The editModeCustomConfig property defines a single action to present when the user swipes horizontally on a row. When user performs a horizontal swipe in a row, by default, the Delete button is displayed. To delete the row by clicking on this button, in the associated callback, you need to write the segment.removeAt function. This configuration lets you define one or more custom actions to display for a given row. Each instance of this configuration represents a single action to perform and includes the text, formatting information, and behavior for the corresponding button. Set the editMode as constants.SEGUI_EDIT_MODE_DELETE to get the canned swipe as delete behavior by configuring a new property. Parameters: title - Specify a title for the button. backgroundColor - Optional. By default, red color is set. callback - Optional. Callback signature is:<code>function mycallbcak (widgetHandle, section, row)</code></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><a name="enableScrolling"></a>enableScrolling</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Boolean ### Example: <tt>metaInfo:{"enableScrolling":false}</tt></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Allows you enable or disable the vertical scrolling of a page added as a row inside the Segment Widget. By default, the property is set to true. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>The enableScrolling parameter is applicable only when the <a href="#viewType" class="selected">viewType</a> property is set to SEGUI_VIEW_TYPE_PAGEVIEW. Sample Code: <tt>var seg = new voltmx.ui.SegmentedUI2({"data": [{ "metaInfo":{"enableScrolling":true}}],"viewType": constants.SEGUI_VIEW_TYPE_PAGEVIEW //which is required});</tt></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">skin</td><td class="TableStyle-Basic-BodyB-Column1-Body1">JavaScript: Object</td><td class="TableStyle-Basic-BodyA-Column1-Body1">ID of the skin that needs to be applied to the entire row.</td></tr></tbody></table>
 
-Example
+### Example
 
-{% highlight voltMx %}Form3.seg1.data = {
+{% highlight VoltMx %}Form3.seg1.data = {
     metaInfo: {
         editModeCustomConfig: [{
             title: "custom edit",
@@ -1889,14 +2002,15 @@ Example
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -1904,21 +2018,23 @@ This property specifies the minimum height of the widget and is applicable only 
 
 The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -1926,14 +2042,15 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -1941,21 +2058,23 @@ This property specifies the minimum width of the widget and is applicable only w
 
 The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -1963,32 +2082,35 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[needPageIndicator Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>needPageIndicator Property</summary>
 
 * * *
 
 A Page Indicator is a succession of docs centered below the SegmentedUI widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 needPageIndicator
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Each dot corresponds to a row segment with the white dot indicating the currently viewed page.
 
@@ -2000,38 +2122,41 @@ If set to _false,_ the page indicator is not displayed.
 
 If set to _true,_ the page indicator is displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set needPageIndicator property for a Segment widget
+{% highlight VoltMx %}//Sample code to set needPageIndicator property for a Segment widget
 frmSegment.mySegment.needPageIndicator=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[orientation Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>orientation Property</summary>
 
 * * *
 
 Specifies how you can stack the widgets within the SegmentedUI. You can set the orientation of the SegmentedUI as _horizontal_ or _vertical_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 orientation
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 The default value for this property is BOX\_LAYOUT\_HORIZONTAL.
 
@@ -2042,21 +2167,22 @@ The available options are:
 
 To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set orientation property for a Segment widget as BOX_LAYOUT_HORIZONTAL.
+{% highlight VoltMx %}//Sample code to set orientation property for a Segment widget as BOX_LAYOUT_HORIZONTAL.
 frmSegment.mySegment.orientation=constants.BOX_LAYOUT_HORIZONTAL;
    
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>opacity Property</summary>
 
 * * *
 
@@ -2064,91 +2190,99 @@ Specifies the opacity of the widget. The value of this property must be in the r
 
 Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 opacity
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This property has more priority compared to the values coming from the configured skin.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
+{% highlight VoltMx %}//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
 
 //Sample code to make the widget opaque by using the opacity property.
 frmHome.widgetID.opacity = 1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE.
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Helps you access the parent of the widget. If the widget is not part of the widget hierarchy, the parent property returns null.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 parent
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 > **_Note:_** The property works for all the widgets inside a FlexForm, FlexContainer or FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}function func() {
+{% highlight VoltMx %}function func() {
 
     voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pageOnDotImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pageOnDotImage Property</summary>
 
 * * *
 
 Specifies the image to indicate that the page is currently being viewed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pageOnDotImage
+{% endhighlight %}
 
-Type
+### Type
 
 String / image Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is available only when the [viewType](#viewType) is selected as pageview. By default a white dot indicates the currently viewed page.
 
@@ -2156,23 +2290,23 @@ iOS - The image size should be 7x7 px for non-retina devices, and 14x14 px for r
 
 You can create an image Object by using voltmx.image Namespace functions.
 
-Example
+### Example
 
 Using a string to define a local image resource:
 
-{% highlight voltMx %}//Sample code to assign pageOnDotImage property of a Segment widget with dot.png.
+{% highlight VoltMx %}//Sample code to assign pageOnDotImage property of a Segment widget with dot.png.
 frmSegment.mySegment.pageOnDotImage="dot.png";
 {% endhighlight %}
 
 Using an image object (voltmx.image) to specify the pageOnDotImage image
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var imgObjRef = voltmx.image.createImage("local.png");
 var segment = new voltmx.ui.SegmentedUI2(segBasic, segLayout, segPSP);
 segment.pageOnDotImage=imgObjRef;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -2182,25 +2316,28 @@ Available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pageOffDotImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pageOffDotImage Property</summary>
 
 * * *
 
 Specifies the image to indicate that the pages that are not been currently viewed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pageOffDotImage
+{% endhighlight %}
 
-Type
+### Type
 
 String / image Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is available only when the [viewType](#viewType) is selected as pageview. By default a black/grey dot indicates the currently viewed page.
 
@@ -2208,23 +2345,23 @@ iOS - The image size should be 7x7 px for non-retina devices, and 14x14 px for r
 
 You can create an image Object by using voltmx.image Namespace functions.
 
-Example
+### Example
 
 Using a string to define a local image resource:
 
-{% highlight voltMx %}//Sample code to assign pageOnDotImage property of a Segment widget with off.png.
+{% highlight VoltMx %}//Sample code to assign pageOnDotImage property of a Segment widget with off.png.
 frmSegment.mySegment.pageOffDotImage="off.png";
 {% endhighlight %}
 
 Using an image object (voltmx.image) to set pageOffDotImage:
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var imgObjRef = voltmx.image.createImage("local.png");
 var segment = new voltmx.ui.SegmentedUI2(segBasic, segLayout, segPSP);
 segment.pageOffDotImage=imgObjRef;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -2234,25 +2371,28 @@ Available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pageSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pageSkin Property</summary>
 
 * * *
 
 Specifies the skin for page indicator. This property is applicable only when the viewType is set as SEGUI\_VIEW\_TYPE\_PAGEVIEW.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pageSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Use the pageSkin property to customize the color of the Segment Indicator for a segment with Page View. By default, the page indicator is displayed with a black background color.
 
@@ -2260,68 +2400,74 @@ To change the default black background color page indicator, use the below code 
 
 In case you want to change the color of the dots on the Segment page indicator, use images on pageOnDotImage and pageOffDotImage in segment widget as per your requirement.
 
-Example
+### Example
 
-{% highlight voltMx %}frmSegment.mySegment.pageSkin="skinName";  
+{% highlight VoltMx %}frmSegment.mySegment.pageSkin="skinName";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pressedSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pressedSkin Property</summary>
 
 * * *
 
 Specifies the skin to indicate that the row of the segment is pressed or clicked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pressedSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If you do not specify the _pressedSkin_, the rowFocusSkin is applied.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to assign value to the pressedSkin property for a Segment widget. frmSegment.mySegment.pressedSkin="pressedSkn";  
+{% highlight VoltMx %}//Sample code to assign value to the pressedSkin property for a Segment widget. frmSegment.mySegment.pressedSkin="pressedSkn";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   This property is available on Android only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[progressIndicatorColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>progressIndicatorColor Property</summary>
 
 * * *
 
 Specifies the color of the progress indicator as white or grey.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 progressIndicatorColor
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Remarks
+### Remarks
 
 The default for this property is PROGRESS\_INDICATOR\_COLOR\_WHITE.
 
@@ -2332,14 +2478,14 @@ The available options are:
 
 To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to define the properties for a Segment with 
+{% highlight VoltMx %}/*Sample code to define the properties for a Segment with 
 progressIndicatorColor:constants.PROGRESS_INDICATOR_COLOR_GREY.*/
 frmSegment.mySegment.progressIndicatorColor=constants.PROGRESS_INDICATOR_COLOR_GREY;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -2347,61 +2493,67 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pullToRefreshI18NKey Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pullToRefreshI18NKey Property</summary>
 
 * * *
 
 Specifies the i18N key for "pull to refresh" title.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pullToRefreshI18NKey
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The platforms get the value from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then platforms use the default (english locale) title text.
 
 This property is supported when the viewType is set as SEGUI\_VIEW\_TYPE\_TABLEVIEW and the property screenLevelWidget is set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.mySegment.pullToRefreshI18NKey= "Pull To Refresh";
+{% highlight VoltMx %}Form1.mySegment.pullToRefreshI18NKey= "Pull To Refresh";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except Desktop WebF and Server side Mobile Web platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pullToRefreshSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pullToRefreshSkin Property</summary>
 
 * * *
 
 Specifies the skin to be applied to the pull to refresh title.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pullToRefreshSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property does not support image as background.
 
@@ -2420,75 +2572,81 @@ Following are the skin definition properties:
 
 > **_Note:_** The "release to refresh" title picks the skin of "pull to refresh" or "release to refresh" respectively.
 
-Example
+### Example
 
-{% highlight voltMx %}Form3.seg1.pullToRefreshSkin="segPullSkin"; 
+{% highlight VoltMx %}Form3.seg1.pullToRefreshSkin="segPullSkin"; 
 /*Here segPullSkin is a skin created as a 
 Pull refresh skin under Skins Tab->segment*/
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except Desktop Web and Server side Mobile Web platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pushToRefreshI18NKey Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pushToRefreshI18NKey Property</summary>
 
 * * *
 
 Specifies the i18N key for "push to refresh" title.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pushToRefreshI18NKey
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The platforms get the value from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then platforms use the default (english locale) title text.
 
 This property is supported when the viewType is set as SEGUI\_VIEW\_TYPE\_TABLEVIEW and the property screenLevelWidget is set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.mySegment.pushToRefreshI18NKey= "Push To Refresh";
+{% highlight VoltMx %}Form1.mySegment.pushToRefreshI18NKey= "Push To Refresh";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except Desktop Web and Server side Mobile Web platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pushToRefreshSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pushToRefreshSkin Property</summary>
 
 * * *
 
 Specifies the skin to be applied to the push to refresh title.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pushToRefreshSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property does not support image as background.
 
@@ -2507,93 +2665,100 @@ Following are the skin definition properties:
 
 > **_Note:_** The "release to refresh" title picks the skin of "pull to refresh" or "release to refresh" respectively.
 
-Example
+### Example
 
-{% highlight voltMx %}Form3.seg1.pushToRefreshSkin="segPushSkin"; 
+{% highlight VoltMx %}Form3.seg1.pushToRefreshSkin="segPushSkin"; 
 /*Here segPullSkin is a skin created as a 
 Push refresh skin under Skins Tab->segment*/
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except Desktop Web and Server side Mobile Web platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[releaseToPullRefreshI18NKey Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>releaseToPullRefreshI18NKey Property</summary>
 
 * * *
 
 Specifies the i18N key for "release to refresh" title that appears for pull to refresh.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 releaseToPullRefreshI18NKey
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The platforms get the value from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then platforms use the default (english locale) title text.
 
 This property is supported when the viewType is set as SEGUI\_VIEW\_TYPE\_TABLEVIEW and the property screenLevelWidget is set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.mySegment.releaseToPullRefreshI18NKey = "Release To Refresh";
+{% highlight VoltMx %}Form1.mySegment.releaseToPullRefreshI18NKey = "Release To Refresh";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except Desktop Web and Server side Mobile Web platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[releaseToPushRefreshI18NKey Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>releaseToPushRefreshI18NKey Property</summary>
 
 * * *
 
 Specifies the i18N key for "release to refresh" title that appears for push for refresh.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 releaseToPushRefreshI18NKey
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The platforms get the value from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then platforms use the default (english locale) title text.
 
 This property is supported when the viewType is set as SEGUI\_VIEW\_TYPE\_TABLEVIEW and screenLevelWidget is set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.mySegment.releaseToPushRefreshI18NKey = "Release To Refresh";
+{% highlight VoltMx %}Form1.mySegment.releaseToPushRefreshI18NKey = "Release To Refresh";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except Desktop Web and Server side Mobile Web platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -2603,7 +2768,7 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2626,21 +2791,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -2665,14 +2832,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -2682,7 +2850,7 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2705,21 +2873,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -2744,14 +2914,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -2761,7 +2932,7 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2784,21 +2955,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -2824,24 +2997,27 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainScrolledPage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainScrolledPage Property</summary>
 
 * * *
 
 This property helps you to maintain the same page when the Segment widget with the [viewType](#retainScrolledPage) property set as`SEGUI_VIEW_TYPE_PAGEVIEW` is reloaded.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainScrolledPage
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
@@ -2851,41 +3027,44 @@ If set to _true,_ the scrolled page is retained when the Segment widget is reloa
 
 If set to _false,_ the scrolled page is not retained, when the Segment widget is reloaded.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable retainScrolledPage property for a Segment widget.
+{% highlight VoltMx %}//Sample code to enable retainScrolledPage property for a Segment widget.
 frmSegment.mySegment.retainScrolledPage=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainSelection Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainSelection Property</summary>
 
 * * *
 
 Specifies if the segment should retain the selection made even when the user navigates out of the form and revisits the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainSelection
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -2895,13 +3074,13 @@ If set to _false,_ the selection is not retailed.
 
 The retainSelection property works only when segment viewType is TableView.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable retainSelection property for a Segment widget.
+{% highlight VoltMx %}//Sample code to enable retainSelection property for a Segment widget.
 frmSegment.mySegment.retainSelection=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPad
@@ -2911,7 +3090,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -2921,25 +3101,27 @@ The right property determines the position of the right edge of the widget’s b
 
 The right property is used only if the width property is not provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 right
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
-If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
+If the layout Type is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -2947,63 +3129,69 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[rowFocusSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>rowFocusSkin Property</summary>
 
 * * *
 
 Specifies the skin that must be applied when user selects the row.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 rowFocusSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the rowFocusSkin property for a Segment widget as rowFSkn.
+{% highlight VoltMx %}//Sample code to set the rowFocusSkin property for a Segment widget as rowFSkn.
 frmSegment.mySegment.rowFocusSkin="rowFSkn";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[rowHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>rowHeight Property</summary>
 
 * * *
 
 This property specifies the height of the row of a SegmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 rowHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the options:
 
@@ -3013,11 +3201,11 @@ Following are the options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height. The preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
 Setting the rowHeight property on an existing widget
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Using DP units
 frmHome.seg1.rowHeight="50dp";
 
@@ -3028,7 +3216,7 @@ frmHome.seg1.rowHeight="10%";
 frmHome.seg1.rowHeight="10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -3036,56 +3224,62 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[rowSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>rowSkin Property</summary>
 
 * * *
 
 Specifies the skin that must be applied for each row.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 rowSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the rowSkin property for a Segment widget as rowSkn.
+{% highlight VoltMx %}//Sample code to set the rowSkin property for a Segment widget as rowSkn.
 frmSegment.mySegment.rowSkin="rowSkn";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[rowTemplate Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>rowTemplate Property</summary>
 
 * * *
 
 Indicates the common template to be used for each row while creating the row and filling the data.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 rowTemplate
+{% endhighlight %}
 
-Type
+### Type
 
 voltmx.ui.FlexContainer
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This can be overridden at the row level when setting the data using the **template** key.
 
@@ -3093,39 +3287,42 @@ On iOS platform, when a FlexContainer is used as a template for SegmentedUI, the
 
 > **_Note:_** If you are switching between the templates of the segment, ensure that the widgetDataMap property is defined after the segment template is set. The mapping of the widgets needs to be refreshed after setting the template on a segment.
 
-Example
+### Example
 
-{% highlight voltMx %}/*In this example, TempFlexContainer is the immediate child FlexContainer of a Segment Row Template.*/  
+{% highlight VoltMx %}/*In this example, TempFlexContainer is the immediate child FlexContainer of a Segment Row Template.*/  
 frmSegment.mySegment.rowTemplate = TempFlexContainer;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[rowWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>rowWidth Property</summary>
 
 * * *
 
 This property specifies the width of the row of a SegmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 rowWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the options:
 
@@ -3135,11 +3332,11 @@ Following are the options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height. The preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
 Setting the rowWidth property on an existing widget
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Using DP units
 frmHome.seg1.rowWidth ="50dp";
 
@@ -3150,7 +3347,7 @@ frmHome.seg1.rowWidth ="10%";
 frmHome.seg1.rowWidth ="10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -3158,25 +3355,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollsToTop Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollsToTop Property</summary>
 
 * * *
 
 This property enables you to scroll the Segment to top on tapping a device’s status bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 scrollsToTop
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is supported only when the viewType is set as SEGUI\_VIEW \_TYPE\_TABLEVIEW or SEGUI\_VIEW \_TYPE\_PAGEVIEW.
 
@@ -3184,50 +3384,53 @@ The default value for this property is false.
 
 If this property is true for more than one widget, then this property is not applied to any of the widgets.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable the scrollsToTop property for a Segment widget. frmSegment.mySegment.scrollsToTop = true;  
+{% highlight VoltMx %}//Sample code to enable the scrollsToTop property for a Segment widget. frmSegment.mySegment.scrollsToTop = true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[searchBy Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>searchBy Property</summary>
 
 * * *
 
 Indicates the identifier of the widget placed inside the row of the SegmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 searchBy
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Search will be performed against the content present inside the widget.
 
 This property is applicable only when screenLevelWidget of SegmentedUI is set to _true_ preserve">var var viewType is set to SEGUI\_VIEW\_TYPE\_TABLE\_VIEW.
 
-Example
+### Example
 
-{% highlight voltMx %} /*Sample code to enable the searchBy property for a Segment widget with searchBy:"widgetId1".*/
+{% highlight VoltMx %} /*Sample code to enable the searchBy property for a Segment widget with searchBy:"widgetId1".*/
 frmSegment.mySegment.searchBy="widgetId1";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -3235,25 +3438,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[searchCriteria Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>searchCriteria Property</summary>
 
 * * *
 
 Specifies the search criteria to be applied when searching has been enabled on the SegmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 searchCriteria
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is applicable only when screenLevelWidget of SegmentedUI is set to true, viewType is set to SEGUI\_VIEW\_TYPE\_TABLE\_VIEW, and [searchBy](#searchBy) property has been set.
 
@@ -3271,14 +3477,14 @@ The following image illustrates the search with _startsWith_ criteria:
 
 ![search with starts With criteria](Resources/Images/Search.png)
 
-Example
+### Example
 
-{% highlight voltMx %} /*Sample code to enable the searchCriteria property for a Segment widget with
+{% highlight VoltMx %} /*Sample code to enable the searchCriteria property for a Segment widget with
 searchCriteria:constants.SEGUI_SEARCH_CRITERIA_ENDSWITH */
 frmSegment.mySegment.searchCriteria=constants.SEGUI_SEARCH_CRITERIA_ENDSWITH;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -3286,31 +3492,34 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[sectionHeaderSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>sectionHeaderSkin Property</summary>
 
 * * *
 
 Specifies the skin to be applied to the Section Header.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 sectionHeaderSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to define the sectionHeaderSkin property for Segment.
+{% highlight VoltMx %}//Sample code to define the sectionHeaderSkin property for Segment.
 frmSegment.mySegment.sectionHeaderSkin ="secHSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -3318,25 +3527,28 @@ Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[sectionHeaderTemplate Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>sectionHeaderTemplate Property</summary>
 
 * * *
 
 Specifies the common template to be used for each section while creating the section header and filling the data.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 sectionHeaderTemplate
+{% endhighlight %}
 
-Type
+### Type
 
 voltmx.ui.FlexContainer
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is optional parameter and if not provided the default template provided by each platform will be used. It can also be provided at each section level when setting the data. Please refer [data](#data) property for examples.
 
@@ -3344,37 +3556,40 @@ When a Section Header is provided along with the rows/items, the Section Header 
   
 This behavior of Section Headers is available on iOS and Android platform and is enabled when the [screenLevelWidget](#screenLe) has been set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}frmSegment.mySegment.sectionHeaderTemplate = template1
+{% highlight VoltMx %}frmSegment.mySegment.sectionHeaderTemplate = template1
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedRowIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedRowIndex Property</summary>
 
 * * *
 
 Indicates the currently selected row in single select or multi select modes in the SegmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectedRowIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The index is with respect to the order in which data is set with [data](#data) property.
 
@@ -3388,7 +3603,7 @@ The selectedRowIndex is not updated when clicked on any child widget of a Row. F
 
 selectedRowIndex Array format:
 
-{% highlight voltMx %}[sectionIndex1, [rowIndex1],  
+{% highlight VoltMx %}[sectionIndex1, [rowIndex1],  
   
 For example,  
 [1,3] indicates 4th row in 2nd section.  
@@ -3399,9 +3614,9 @@ selectedRowIndex is not updated when a row is swiped in PAGE\_VIEW or COVERFLOW\
 
 If data contains the sections then the _selectedIndex_ indicates the selected row index within the section.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the selectedRowIndex property for a Segment as four.
+{% highlight VoltMx %}//Sample code to set the selectedRowIndex property for a Segment as four.
 frmSegment.mySegment.selectedRowIndex= 4;  
   
 //Reading the selectedRowIndex of the Segment widget.
@@ -3409,31 +3624,34 @@ voltmx.print("SegmentedUI selectedRowIndex ::" + frmSegment.mySegment.selectedRo
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedRowIndices Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedRowIndices Property</summary>
 
 * * *
 
 Specifies an array of indexes which indicates the selected rows.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectedRowIndices
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Setting this value before the parent form is shown may result in the value not being changed. To avoid this you can set this value in the onDidFinishDataLoading callback for the SegmentUI widget.
 
@@ -3449,7 +3667,7 @@ When this property is read from the SegmentedUI the list structure depends on th
 
 selectedRowIndices Array format:
 
-{% highlight voltMx %}[  
+{% highlight VoltMx %}[  
  [sectionIndex1, [rowIndex1, rowIndex2, ...],  
  [sectionIndex3, [rowIndex4, rowIndex5, ...],  
  .....  
@@ -3472,9 +3690,9 @@ Behavior when data is modified in the segment
 > *   If you set new data in the segment using the _[setData](Segment_Methods.html#setData)_ method, the earlier selected indices are cleared.
 > *   If you add additional data to the segment using the _[addAll](Segment_Methods.html#addAll)_ method, the earlier selected indices are retained.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the selectedRowIndices property for a Segment as [4,5].
+{% highlight VoltMx %}//Sample code to set the selectedRowIndices property for a Segment as [4,5].
 frmSegment.mySegment.selectedRowIndices= [4, 5];  
   
 //Reading the selectedRowIndices of the Segment widget.
@@ -3482,67 +3700,73 @@ voltmx.print("SegmentedUI selectedRowIndices ::" + frmSegment.mySegment.selected
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedRowItems Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedRowItems Property</summary>
 
 * * *
 
 Returns the data of the selected rows in the segmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectedRowItems
+{% endhighlight %}
 
-Type
+### Type
 
 Array of objects
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 Use the property name as _selectedItem_ for backward compatibility.
 
 Setting this value before the parent form is shown may result in the value not being changed. To avoid this you can set this value in the onDidFinishDataLoading callback for the SegmentUI widget.
 
-Example
+### Example
 
-{% highlight voltMx %} var row_items=Form3.seg1.selectedRowItems;
+{% highlight VoltMx %} var row_items=Form3.seg1.selectedRowItems;
   voltmx.print("The selected row items are"+JSON.stringify(row_items));
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectionBehavior Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectionBehavior Property</summary>
 
 * * *
 
 Specifies if the segment can support single or multiple selection.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectionBehavior
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is SEGUI\_DEFAULT\_BEHAVIOR.
 
@@ -3555,40 +3779,43 @@ The available options are:
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the selectionBehavior property for a Segment as constants.SEGUI_MULTI_SELECT_BEHAVIOR.*/
+{% highlight VoltMx %}/*Sample code to set the selectionBehavior property for a Segment as constants.SEGUI_MULTI_SELECT_BEHAVIOR.*/
 frmSegment.mySegment.selectionBehavior= constants.SEGUI_MULTI_SELECT_BEHAVIOR;  
   
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectionBehaviorConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectionBehaviorConfig Property</summary>
 
 * * *
 
 This property is enabled if you select either _singleselect_ or _multiselect_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectionBehaviorConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 It specifies the Image widget ID which is used to indicate to the user that the row is selected or deselected. Following are the key value configurations:
 
@@ -3606,9 +3833,9 @@ Specifies the image to be displayed when the user deselects the row.
 
 > **_Note:_** The image size should be equal for both selectedStateImage and unselectedStateImage otherwise the UI gets distorted.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the selectionBehaviorConfig property for a Segment widget. 
+{% highlight VoltMx %}//Sample code to set the selectionBehaviorConfig property for a Segment widget. 
 frmSegment.mySegment.selectionBehaviorConfig = {
  imageIdentifier: img,
  selectedStateImage: "sel.png",
@@ -3618,64 +3845,70 @@ frmSegment.mySegment.selectionBehaviorConfig = {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[separatorColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>separatorColor Property</summary>
 
 * * *
 
 Specifies the color of the separator between row of segmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 separatorColor
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The color property follows hex format (#RRGGBBAA) which includes even transparency portion. For example, if the seperator color is green and transparency is 50% then value is **00ff0032**. Similarly if the transparency is 100% then the value is **00ff0064**.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the seperatorColor property for a Segment widget.  
+{% highlight VoltMx %}//Sample code to set the seperatorColor property for a Segment widget.  
 frmSegment.mySegment.seperatorColor="#FF0000";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[separatorRequired Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>separatorRequired Property</summary>
 
 * * *
 
 Specifies if the segment should display the separator between the rows of the SegmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 separatorRequired
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -3683,39 +3916,42 @@ If set to _true,_ the separator is displayed.
 
 If set to _false,_ the separator is not displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable the seperatorRequired property for a Segment widget.  
+{% highlight VoltMx %}//Sample code to enable the seperatorRequired property for a Segment widget.  
 frmSegment.mySegment.separatorRequired=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[separatorThickness Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>separatorThickness Property</summary>
 
 * * *
 
 Specifies the thickness of the separator in pixels.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 separatorThickness
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1 px.
 
@@ -3723,50 +3959,53 @@ For iOS platform, this property is applicable only when you set the [groupCells]
 
 From iOS7 onwards this property is not applicable even when you set the groupCells property as _true_.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the separatorThickness property for a Segment widget.  
+{% highlight VoltMx %}//Sample code to set the separatorThickness property for a Segment widget.  
   
 frmSegment.mySegment.separatorThickness= 20;  
   
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except iPhone and iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showProgressIndicator Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showProgressIndicator Property</summary>
 
 * * *
 
 Specifies if the progress indicator must be displayed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showProgressIndicator
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 The default value for this property is true (the progress indicator is displayed on the widget).
 
 If you do not want the progress indicator to be displayed, set the value to _none_.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable the showProgressIndicator property for a Segment widget.  
+{% highlight VoltMx %}//Sample code to enable the showProgressIndicator property for a Segment widget.  
 frmSegment.mySegment.showProgressIndicator=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -3774,21 +4013,24 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showScrollbars Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showScrollbars Property</summary>
 
 * * *
 
 Specifies if the scrollbars must be visible all the time.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showScrollbars
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 The default value for this property depends on the individual native behavior.
 
@@ -3796,35 +4038,38 @@ If set to _true,_ the scrollbars are displayed.
 
 If set to _false,_ the scrollbars are not displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable the showScrollbars property for a Segment widget.  
+{% highlight VoltMx %}//Sample code to enable the showScrollbars property for a Segment widget.  
 frmSegment.mySegment.showScrollbar=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[supportSectionHeaderIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>supportSectionHeaderIndex Property</summary>
 
 * * *
 
-When this property is enabled, Volt MX Iris allows indexing of section headers of Segment widget. You can bring the section headers to the visible region by setting the [selectedRowIndex](#selected) Property.
+When this property is enabled, VoltMX Iris allows indexing of section headers of Segment widget. You can bring the section headers to the visible region by setting the [selectedRowIndex](#selected) Property.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 supportSectionHeaderIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 You can use this property in the following scenarios:
 
@@ -3833,12 +4078,12 @@ You can use this property in the following scenarios:
 
 If set through code, enable this property in the preShow/postShow of the form.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.segment1.supportSectionHeaderIndex = true;
+{% highlight VoltMx %}Form1.segment1.supportSectionHeaderIndex = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Android
@@ -3848,7 +4093,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[stopRerenderOnSetDataAt Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>stopRerenderOnSetDataAt Property</summary>
 
 * * *
 
@@ -3856,15 +4102,17 @@ This property is used to enable only the modified contents of a Segment row to b
 
 Consider a scenario where there are two widgets in a Segment row, such as a Label and a Button widget. By using a tab key, if the focus was set on the Button widget and the text of the Label widget was modified using the setDataAt method, the whole row gets modified. After the row has been modified, the Button widget in the row is no longer in focus. The focus goes to the top-right corner of the page. When you enable the `stopRerenderOnSetDataAt` property, only the modified contents of the row are updated in the Segment widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 stopRerenderOnSetDataAt
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 The default value of the `stopRerenderOnSetDataAt` property is false.
 
@@ -3876,19 +4124,20 @@ Limitations
 *   The `stopRerenderOnSetDataAt` property is not enabled, when the old and new data have different row templates.
 *   The `stopRerenderOnSetDataAt` property is not enabled, if the [isVisible](#isVisible) property of a widget is modified.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to enable the stopRerenderOnSetDataAt property by using mySegment Segment widget in frmSegment Form.*/  
+{% highlight VoltMx %}/*Sample code to enable the stopRerenderOnSetDataAt property by using mySegment Segment widget in frmSegment Form.*/  
 frmSegment.mySegment.stopRerenderOnSetDataAt=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   SPA and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
@@ -3896,25 +4145,27 @@ This property determines the top edge of the widget and measured from the top bo
 
 The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 top
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -3922,40 +4173,43 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transform Property</summary>
 
 * * *
 
 Contains an animation transformation that can be used to animate the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 transform
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi) function.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}//Animation sample
+{% highlight VoltMx %}//Animation sample
 var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
@@ -3963,13 +4217,14 @@ newTransform.translate3D(223, 12, 56);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewConfig Property</summary>
 
 * * *
 
@@ -3984,19 +4239,21 @@ The viewConfig property is applicable on widgets when the [viewType](#viewType) 
 *   SEGUI\_VIEW\_TYPE\_ROTARY (For iOS only)
 *   SEGUI\_VIEW\_TYPE\_STACK (For iOS only)
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 viewConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 When the viewType is set as SEGUI\_VIEW\_TYPE\_COVERFLOW, then you can set the viewConfig Property through canvas for Android.
 
@@ -4042,9 +4299,9 @@ When the viewType is set as SEGUI\_VIEW\_TYPE\_TABLEVIEW(in iOS), viewConfig wil
 
 All the above keys are optional.
 
-Example
+### Example
 
-{% highlight voltMx %}/*This example uses the segment widget, 
+{% highlight VoltMx %}/*This example uses the segment widget, 
 but the principle remains the same for all widgets that have a viewConfig property. In this sample code the viewType is SEGUI_VIEW_TYPE_COVERFLOW.*/  
 frmSegment.mySegment.viewConfig = {
  coverflowConfig: {
@@ -4055,34 +4312,37 @@ frmSegment.mySegment.viewConfig = {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE (only for Android)
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewType Property</summary>
 
 * * *
 
 You can use this property to select the view type of a segment.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 viewType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
 > **_Note:_** On Android platform, this property cannot be changed dynamically.
 
-Remarks
+### Remarks
 
 The default value for this property is SEGUI\_VIEW\_TYPE\_TABLEVIEW.
 
@@ -4135,43 +4395,46 @@ The following are the available view types that you can select and their appeara
 
 > > > ![](Resources/Images/view_stack_189x227.png)
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the viewType property for a Segment widget to SEGUI_VIEW_TYPE_PAGEVIEW.*/  
+{% highlight VoltMx %}/*Sample code to set the viewType property for a Segment widget to SEGUI_VIEW_TYPE_PAGEVIEW.*/  
 frmSegment.mySegment.viewType=constants.SEGUI_VIEW_TYPE_PAGEVIEW;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetDataMap Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetDataMap Property</summary>
 
 * * *
 
 Specifies the mapping information between the widget id's and the keys in the data.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 widgetDataMap
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 It is developer responsibility to ensure that widgetDataMap to accommodate all the widget ids required including the widgets referred in dynamic templates.
 
-{% highlight voltMx %}{  
+{% highlight VoltMx %}{  
  widgetID1: "dataId1",  
  widgetId2: "dataId2",  
  widgetId3: "dtaId3",  
@@ -4183,9 +4446,9 @@ It is developer responsibility to ensure that widgetDataMap to accommodate all t
 
 > **_Note:_** Only after you specify the mapping information, you can use the [Methods](Segment_Methods.html#segmentedui-methods) applicable for a segment.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the properties for a Segment with widgetDataMap:
+{% highlight VoltMx %}/*Sample code to set the properties for a Segment with widgetDataMap:
 {widgetId1:"dataid1", widgetId2:"dataId2", widgetId3:"dataId3",
  widgetId4:"secDataId1", widgetId5:"secDataId2" }. */
 frmSegment.mySegment.widgetDataMap= {
@@ -4208,7 +4471,7 @@ The **[data](#data)** property is then used to set the values that are to be dis
 
 In the following example, after the mapping is done, the **[data](#data)** property assigns value to the _Comp1lbl1_ and _Comp1Img1_ keys. This value is then assigned to the child widgets- _lbl1_ and _img1_ of the _segComp1_ component.
 
-{% highlight voltMx %}  
+{% highlight VoltMx %}  
 /*In this example, segComp1 is the component with lbl1 and img1 as child widgets. Comp1lbl1 and Comp1Img1 are the keys.*/  
 mySegment.widgetDataMap = {
  " template1": " template1",
@@ -4252,62 +4515,68 @@ mySegment.data = [{
 
 > **_Note:_** When components are rendered inside a Segment template, the events and gestures assigned to the child widgets of the components are retained.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetSkin Property</summary>
 
 * * *
 
 Specifies the skin to be applied to the entire SegmentedUI.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 widgetSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In widgetSkin property with Border style as rounded corner is supported only when you set the border property as SEGUI\_BORDER\_NONE.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to define the widgetSkin property for Segment.
+{% highlight VoltMx %}//Sample code to define the widgetSkin property for Segment.
 frmSegment.mySegment.widgetSkin="widSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetSwipeMove Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetSwipeMove Property</summary>
 
 * * *
 
 This property is used to enable and configure left or right swipe actions for a widget. The widgetSwipeMove Property can be used for all widgets . The most common use case is for implementing swipe action for individual rows in Segment.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 widgetSwipeMove
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
@@ -4319,7 +4588,7 @@ The following table consists of the parameters of the _callback_ parameter:
 
 <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 111px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 93px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter consists of the widget handle or ID of the widget on which the swipe action has been performed.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">context</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is applicable only for widgets inside the Segment with row templates. Each context parameter consists of <i>rowIndex</i>, <i>sectionIndex</i> and <i>widgetref</i></td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">rowIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the row index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">sectionIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the section index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetref</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This parameter stores the handle of the Segment containing the swiped widget.</td></tr></tbody></table>
 
-Remarks
+### Remarks
 
 *   For a Segment, the **widgetSwipeMove** Property is configured while setting the data of the Segment.
 
@@ -4334,15 +4603,15 @@ Limitations
 *   If the widgetSwipeMove property is configured on a top level Flex container of a segment template, the onRowClick event will not be triggered. - Applicable on iOS, Android, and SPA.
 *   Android limitation: On Android devices, when the user lifts their finger, the transition occurs immediately.
 
-Example
+### Example
 
 Following is a code snippet for a mail app. Here we have used a Segment for listing the mail and the _widgetSwipeMove_ Property has been configured for the _SwipeFlex_ FlexContainer.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.  
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.  
 //Here, we have shown how to use the widetSwipeMove property for Button widget.
 /*You need to make a corresponding use of the 
 widgetSwipeMove property for other applicable widgets.*/  
-//Example of a swipe move configuration.  
+//### Example of a swipe move configuration.  
 var swipeMoveConfig = {
  "translate": true,
  "Xboundaries": ["-60%", "60%"],
@@ -4374,13 +4643,14 @@ this.view.myButton.widgetSwipeMove=swipeMoveConfig;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -4388,19 +4658,21 @@ This property determines the width of the widget and is measured along the x-axi
 
 The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 width
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the options that can be used as units of width:
 
@@ -4410,9 +4682,9 @@ Following are the options that can be used as units of width:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
@@ -4420,40 +4692,43 @@ frmHome.widgetID.width = "10%";
 frmHome.widgetID.width = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
 This property specifies the stack order of a widget. A widget with a higher zIndex is always in front of a widget with a lower zIndex.
 
-The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
+The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the VoltMX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
 > **_Note:_** Modifying the zIndex does not modify the order of the widgets inside the FlexContainer. If zIndex is same for group of overlapping widgets then widget order decides the order of overlapping. The last added widget is displayed on top.
 
-From Volt MX Iris V9 SP2 FP7, developers can configure the Z Index value for a Responsive Web app as **Auto** or **Custom**. When the selected Z Index value is **Auto**, the default Z Index value of 1 is applied. When the selected Z Index value is **Custom**, developers can specify a desired numeric value.
+From VoltMX Iris V9 SP2 FP7, developers can configure the Z Index value for a Responsive Web app as **Auto** or **Custom**. When the selected Z Index value is **Auto**, the default Z Index value of 1 is applied. When the selected Z Index value is **Custom**, developers can specify a desired numeric value.
 
 Prior to the V9 SP2 FP7 release, the default value for the Z Index was **1**. When developers imported any third-party libraries with the Z index set as **Auto**, content overflow was disabled as the value of Auto is less than 1.
 
@@ -4467,24 +4742,24 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 **voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+{% highlight VoltMx %}//Sample code to set the ZIndex value to Auto  
  var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
   "zIndex": voltmx.flex.ZINDEX_AUTO
 });
 
-{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+{% endhighlight %}{% highlight VoltMx %}//Sample code to set the ZIndex value to Auto
 flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web

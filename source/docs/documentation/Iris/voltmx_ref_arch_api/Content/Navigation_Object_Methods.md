@@ -12,7 +12,8 @@ Navigation Methods
 
 The Navigation object provides the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getModel](javascript:void(0);) 
+
+<details close markdown="block"><summary>getModel</summary> 
 
 * * *
 
@@ -36,12 +37,13 @@ This method retrieves the form's model.
 
 Example
 
-{% highlight voltMx %}var formModel = navObject.getModel();
+{% highlight VoltMx %}var formModel = navObject.getModel();
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[navigate Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>navigate Method</summary> 
 
 * * *
 
@@ -68,13 +70,14 @@ The _params_ parameter is passed to all of the lifecycle events, such as preShow
 
 Example
 
-{% highlight voltMx %}var x = new voltmx.mvc.Navigation(“friendlyName/formName”, model);
+{% highlight VoltMx %}var x = new voltmx.mvc.Navigation(“friendlyName/formName”, model);
 x.navigate(params);
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setModel](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>setModel</summary> 
 
 * * *
 
@@ -100,3 +103,5 @@ Remarks
 This method sets the model of the target form, which is the form being navigated to. It triggers the [FormController.setModel](FormController_Events.html#setModel) event.
 
 * * *
+
+</details>

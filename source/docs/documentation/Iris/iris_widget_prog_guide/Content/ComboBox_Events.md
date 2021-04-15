@@ -11,7 +11,8 @@ ComboBox has the following event associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
@@ -19,57 +20,63 @@ This event is invoked for every widget when the widget position and dimensions a
 
 This event is used to set the layout properties of child widgets in the relation to self and peer widgets whose layout is not yet performed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}
+//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
-
 function doLayoutButton1(){
-      
+
     myForm.button2.top = myForm.button1.frame.height;
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-*   iOS
-*   Android
-*   Windows
-*   SPA
+* iOS
+* Android
+* Windows
+* SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
+### Syntax
 
-onScrollWidgetPosition()
+{% highlight VoltMx %}
+onScrollWidgetPostion()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}
+var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -83,68 +90,74 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-*   Not Accessible from IDE
-*   Android, iOS, SPA, and Windows
+* Not Accessible from IDE
+* Android, iOS, SPA, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSelection Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onSelection Event</summary>
 
 * * *
 
 This event is triggered when you select or unselect any item in ComboBox.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onSelection()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onSelection event callback for ComboBox widget.
+{% highlight VoltMx %}//Sample code to set onSelection event callback for ComboBox widget.
 
 frmComboBox.myComboBox.onSelection=onSelCallBck;
 
 function onSelCallBck(combobox){
-      
+
    //Write your code here.
 }
 {% endhighlight %}
 
-Availability
+### Availability
 
-*   Available on all platforms
+* Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[preOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>preOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom javascript function before the _onSelection_ callback of the ComboBox is invoked. This is applicable only for Mobile Web channel. The function must exist in a javascript file under project>module>js folder.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 preOnclickJS()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In for the events preOnclickJS and postOnclickJS you cannot access application model or APIs, as these functions are executed in browser whereas the remaining JavaScript modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action. You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
 > **_Note:_** This event should return true, to continue with execution of onSelection and postOnclickJS events.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set preOnclickJS event callback for ComboBox widget.
+{% highlight VoltMx %}//Sample code to set preOnclickJS event callback for ComboBox widget.
 
 frmComboBox.myComboBox.preOnclickJS=preOnclickJSCallBck;
 
@@ -154,49 +167,54 @@ function preOnclickJSCallBck(chkBox){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-*   Available in the IDE
-*   Available on Server side Mobile Web (BJS and Advanced) platform only
+* Available in the IDE
+* Available on Server side Mobile Web (BJS and Advanced) platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[postOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>postOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom javascript function after the _onSelection_ callback of the ComboBox is invoked. This is applicable only for Mobile Web channel.The function must exist in a javascript file under project>module>js folder.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 postOnclickJS()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In for the events preOnclickJS and postOnclickJS you cannot access application model or APIs, as these functions are executed in browser whereas the remaining JavaScript modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action.  
   
 You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set postOnclickJS event callback for ComboBox widget.
+{% highlight VoltMx %}
+//Sample code to set postOnclickJS event callback for ComboBox widget.
 
 frmComboBox.myComboBox.postOnclickJS=postOnclickJSCallBck;
 
 function postOnclickJSCallBck(chkBox){
-      
+
    //Write your code here.
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-*   Available in the IDE
-*   Available on Server side Mobile Web (Advanced) platform only
+* Available in the IDE
+* Available on Server side Mobile Web (Advanced) platform only
 
 * * *
 
+</details>

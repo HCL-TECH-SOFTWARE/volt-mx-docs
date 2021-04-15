@@ -10,31 +10,35 @@ Toolbar Properties
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[barButtonItems Property](javascript:void(0);)
+
+<details close markdown="block"><summary>barButtonItems Property</summary>
 
 * * *
 
 This property contains an array of BarButtonItem objects.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 barButtonItems
+{% endhighlight %}
 
-Type
+### Type
 
 Array of objects.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property contains an array of BarButtonItem objects.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the leftBarButtonItems and rightBarButtonItems property method of a ToolBar widget.*/
+{% highlight VoltMx %}
+/*Sample code to set the leftBarButtonItems and rightBarButtonItems property method of a ToolBar widget.*/
 
 var btns = [item0, item1];
 var btns1 = [item2];
@@ -42,75 +46,82 @@ frmToolBar.myToolbar.leftBarButtonItems = btns;
 frmToolBar.myToolbar.rightBarButtonItems = btns1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[barStyle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>barStyle Property</summary>
 
 * * *
 
 This property determines the toolbar bar appearance
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 barStyle
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The toolbar bar style can be one of the following: 
 
 *   constants.BAR\_STYLE\_DEAFULT
 *   constants.BAR\_STYLE\_BLACK
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the barStyle property of a ToolBar widget.
+{% highlight VoltMx %}
+//Sample code to set the barStyle property of a ToolBar widget.
 
 frmToolBar.myToolbar.barStyle=constants.BAR_STYLE_DEAFULT;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[barTintColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>barTintColor Property</summary>
 
 * * *
 
 This property determines the tint color of the toolbar bar background.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 barTintColor
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property determines the tint color of the toolbar bar background. It is specified as a string that contains a hex value.
 
-Remarks
+### Remarks
 
-{% highlight voltMx %}//Sample code to set the barTintColor property of a ToolBar widget.
+{% highlight VoltMx %}
+//Sample code to set the barTintColor property of a ToolBar widget.
 
 var item1 = new voltmx.ui.BarButtonItem({
     // All items must be created in the same manner.
@@ -125,37 +136,40 @@ var item1 = new voltmx.ui.BarButtonItem({
 item1.barTintColor = "FF0000";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isToolBarBottomAttached Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isToolBarBottomAttached Property</summary>
 
 * * *
 
 This property determines if the toolbar is docked to the bottom of the form.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 isToolBarBottomAttached
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If True, the toolbar is docked to the bottom of the form. Width and Height properties are disabled in this case.
 
-Remarks
+### Remarks
 
-{% highlight voltMx %}//Sample code to set the isToolBarBoottomAttached property of a ToolBar widget.
+{% highlight VoltMx %}
+//Sample code to set the isToolBarBoottomAttached property of a ToolBar widget.
 
 var item1 = new voltmx.ui.BarButtonItem({
     // All items must be created in the same manner.
@@ -170,13 +184,14 @@ var item1 = new voltmx.ui.BarButtonItem({
 item1.isToolBarBoottomAttached=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -186,7 +201,8 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -209,21 +225,22 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainContentAlignment
-
-Type
+{% endhighlight %}
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -248,14 +265,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -265,7 +283,8 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -288,21 +307,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -327,14 +348,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -344,7 +366,8 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -367,21 +390,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -407,76 +432,82 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[tintColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>tintColor Property</summary>
 
 * * *
 
 This property determines the tint color to apply to the toolbar items and bar button items. - hex string
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 tintColor
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The hex value is a 6 digit string. For example, red would be FF0000, green 00FF00, blue 0000FF, white FFFFFF, and black 000000.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the tintColor property of a ToolBar widget.
+{% highlight VoltMx %}
+//Sample code to set the tintColor property of a ToolBar widget.
 frmToolbar.myToolbar.tintColor="FFFFFF00";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[translucent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>translucent Property</summary>
 
 * * *
 
 This property indicates if the toolbar is translucent.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 translucent
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is a boolean value indicating whether the toolbar bar is translucent.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the translucent property of a ToolBar widget.
+{% highlight VoltMx %}
+//Sample code to set the translucent property of a ToolBar widget.
 frmToolbar.myToolbar.translucent=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 

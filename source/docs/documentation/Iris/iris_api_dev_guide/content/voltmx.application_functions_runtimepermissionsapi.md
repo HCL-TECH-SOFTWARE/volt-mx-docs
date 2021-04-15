@@ -10,17 +10,20 @@ Functions
 
 The Runtime Permission API contains the following functions, which are part of the [voltmx.application Namespace](voltmx.application_functions.html).
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.checkPermission](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.application.checkPermission</summary>
 
 * * *
 
 Checks and returns the permission status of one or more resources.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.checkPermission(resourceId\[constant/String\], options\[JSObject\])
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -28,11 +31,10 @@ Input Parameters
 | resourceId \[constant/String\] - Mandatory | Specify the ID of the resource or name of the permission (only for Android) for which you want to check the status. You can specify either a String (permission name) or an integer (resourceId) value. The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: "android.permission.READ\_PHONE\_STATE". |
 | options \[JSObject\] - Optional | Specify the additional option to identify the exact resource of which you want to know the status. This is a platform-specific key. For more information, refer to Resource ID. |
 
- 
+### Example 1
 
-Example 1
-
-{% highlight voltMx %}var options = {
+{% highlight VoltMx %}
+var options = {
     isAccessModeAlways: true
 };
 var result = voltmx.application.checkPermission(voltmx.os.RESOURCE_LOCATION, options);
@@ -43,9 +45,10 @@ if (result.status = = voltmx.application.PERMISSION_DENIED) {
 }
 {% endhighlight %}
 
-Example 2
+### Example 2
 
-{% highlight voltMx %}< uses - permission  android: name = "android.permission.READ_PHONE_STATE" / >
+{% highlight VoltMx %}
+< uses - permission  android: name = "android.permission.READ_PHONE_STATE" / >
 var result = voltmx.application.checkPermission("android.permission.READ_PHONE_STATE");
 if (result.status = = voltmx.application.PERMISSION_DENIED) {
     voltmx.application.requestPermission();
@@ -54,7 +57,7 @@ if (result.status = = voltmx.application.PERMISSION_DENIED) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 JSObject
 
@@ -65,9 +68,7 @@ A JS Object contains the authorization status of the requested resource. The ret
 | status \[constant\] | Resource status constant which indicates the overall status of the resource authorization. For more information, refer to Permission Status. |
 | canRequestPermission \[Boolean\] | Indicates whether you can request for the permissions or not in case the value of the status is PERMISSION\_DENIED. In the iOS platform, authorization for a resource can be requested only once. For more information, refer to [Permission model in iOS](runtime_permissions.html#iOS).In the Android platform, the app can request for the permissions even though the status return value is PERMISSION\_DENIED or direct the user to app settings to turn on or off the authorization. |
 
- 
-
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -76,7 +77,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.getBackgroundPermissionOptionLabel](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.getBackgroundPermissionOptionLabel</summary>
 
 * * *
 
@@ -84,17 +86,20 @@ Fetches the localized label that corresponds to the option in the Project Settin
 
 The intended use of this permission is for apps to reference this label in the instruction that is displayed to the users requesting background access.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getBackgroundPermissionOptionLabel()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}showEducationalUI: function() {  
+{% highlight VoltMx %}
+showEducationalUI: function() {  
     var text = voltmx.application.getBackgroundPermissionOptionLabel();  
     voltmx.ui.Alert({  
         "alertType": constants.ALERT_TYPE_CONFIRMATION,  
@@ -119,17 +124,18 @@ permissionStatusCallback: function(response) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 String
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.isAutoRevokeWhitelisted](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.isAutoRevokeWhitelisted</summary>
 
 * * *
 
@@ -137,36 +143,40 @@ Checks whether an application is exempt from having its permissions be automatic
 
 > **_Note:_** This API is only available on Android 11 (OS API level 30), or later devices. If the app uses target SDK versions less than version 30, the behavior of this API may not be as expected.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.isAutoRevokeWhitelisted()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}function isAutoRevokeWhitelisted() {  
+{% highlight VoltMx %}
+function isAutoRevokeWhitelisted() {  
 	var retVal = voltmx.application.isAutoRevokeWhitelisted();  
     voltmx.print(" Is my application whitelisted "+ retVal);  
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 **Boolean**
 
 *   true: The package is whitelisted from having its runtime permission be auto-revoked if unused for an extended period of time.
 *   false: The package is not whitelisted from having its runtime permission be auto-revoked if unused for an extended period of time.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.launchAutoRevokeSettings](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.launchAutoRevokeSettings</summary>
 
 * * *
 
@@ -180,26 +190,29 @@ In the app settings screen that appears, users must follow these steps to preven
 
 > **_Note:_** This API is only available on Android 11 (OS API level 30), or later devices.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.launchAutoRevokeSettings();
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}function launchAutoRevokeSettings(){  
+{% highlight VoltMx %}
+function launchAutoRevokeSettings(){  
 voltmx.application.launchAutoRevokeSettings();  
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 This API is useful in situations where the app works in the background and there is no user interaction. For example, the API can be used in the following scenarios:
 
@@ -208,38 +221,39 @@ This API is useful in situations where the app works in the background and there
 *   Communicate with smart devices
 *   Pair compatible devices
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.requestPermission](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.requestPermission</summary>
 
 * * *
 
 Sends a request to the end-user to provide the access to specific resource.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.requestPermission(resourceId\[constant/String\], statusCallback\[Function\], options\[JSObject\])
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | resourceId \[constant/String\] - Mandatory | Specifies the ID of the resource or name of the permission (only for Android) that you want to access. You can specify either a String (permission name) or an integer (resourceId) value. The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: "android.permission.READ\_PHONE\_STATE". The available **resourceId** constants are as follows: voltmx.os.RESOURCE\_CAMERA voltmx.os.RESOURCE\_LOCATION voltmx.os.RESOURCE\_PHOTO\_GALERY voltmx.os.RESOURCE\_CONTACTS voltmx.os.RESOURCE\_CALENDAR voltmx.os.RESOURCE\_SIRI (iOS-specific) voltmx.os.RESOURCE\_AUDIO\_RECORD voltmx.os.RESOURCE\_NOTIFICATION (iOS-specific) |
 | statusCallback \[Function\] - Mandatory | A callback function receives the end-user's decision. The statusCallback function receives a JS Object, which contains overall status and permission-specific status that end-user responded on the permission dialog box. function statusCallback(response); Here, **response** is a hash map that contains the authorization status of the requested resource. This argument contains the following key: status \[constant\] Resource status constant that indicates the overall status of the resource authorization. The possible values for **status** are as follows: voltmx.application.PERMISSION\_GRANTED voltmx.application.PERMISSION\_DENIED voltmx.application.PERMISSION\_NEVER\_ASK\_AGAIN |
-| options \[JSObject\] - Optional | 
-> Specifies the additional option to identify the resource for which you want permission. This key is applicable on android only. To obtain the voltmx.application.PERMISSION\_NEVER\_ASK\_AGAIN status, you have to set the `getNeverAskAgainStatus` key to true and pass the key in the options object. If the key is not set, and the user selects either the Deny or Never Ask Again options, then the permission status is considered as VoltMX.application.PERMISSION\_DENIED.var options = { "isVideoCapture": true, "getNeverAskAgainStatus": true }
-
- |
+| options \[JSObject\] - Optional | Specifies the additional option to identify the resource for which you want permission. This key is applicable on android only. To obtain the voltmx.application.PERMISSION\_NEVER\_ASK\_AGAIN status, you have to set the `getNeverAskAgainStatus` key to true and pass the key in the options object. If the key is not set, and the user selects either the Deny or Never Ask Again options, then the permission status is considered as VoltMX.application.PERMISSION\_DENIED.var options = { "isVideoCapture": true, "getNeverAskAgainStatus": true } |
 | options \[Object\] - For Notifications | This is a mandatory parameter for notifications. {notificationtypes : constants} The available constants are as follows: voltmx.notificationsettings.BADGE voltmx.notificationsettings.SOUND voltmx.notificationsettings.ALERT |
 
-Example 1
+### Example 1
 
-{% highlight voltMx %}//< uses - permission  android: name = "android.permission.READ_PHONE_STATE" >
+{% highlight VoltMx %}
+//< uses - permission  android: name = "android.permission.READ_PHONE_STATE" >
     voltmx.application.requestPermission("android.permission.READ_PHONE_STATE", permissionStatusCallback);
 
 function permissionStatusCallback(response) {
@@ -251,9 +265,10 @@ function permissionStatusCallback(response) {
 }
 {% endhighlight %}
 
-Example 2
+### Example 2
 
-{% highlight voltMx %}function requestpermission() {
+{% highlight VoltMx %}
+function requestpermission() {
 
     var options = {
         "isVideoCapture": true,
@@ -289,14 +304,14 @@ function permissionStatusCallback(response) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
   
 | Function | Description |
 | --- | --- |
 | JSObject | A JSObject contains the authorization status of the requested resource. The returned JSObject contains the following key: status \[constant\] Resource status constant which indicates the overall status of the resource authorization. For more information, refer to [Permission Status](runtime_permissions.html#permission-status). > **_Note:_** In the Android platform, the status remains PERMISSION\_DENIED if at least one of the permissions associated with the resource is denied by the end-user. |
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -305,17 +320,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[VoltMX.application.requestPermissionSet](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>VoltMX.application.requestPermissionSet</summary> 
 
 * * *
 
 When invoked, this API sends a request for a set of permissions. The status of the request is sent back to the user through a callback.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 VoltMX.application.requestPermissionSet(permissions, callback)  
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -323,10 +341,10 @@ Input Parameters
 | Callback | Function object result will invoke this function. The result is a JSobject where the key is permission string and the value is the permission status. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}function requestpermission() {
+{% highlight VoltMx %}
+function requestpermission() {
 
     voltmx.application.requestPermissionSet(["android.permission.CAMERA", "android.permission.WRITE_CONTACTS"], permissionStatusCallback);
 
@@ -360,17 +378,18 @@ function permissionStatusCallback(response) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.openApplicationSettings](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.openApplicationSettings</summary>
 
 * * *
 
@@ -384,29 +403,30 @@ The behavior of the openApplicationSettings API in different platforms:
 *   **iOS**: Opens the application-level settings screen showing the access status of the resource. The end-user can turn on or off the access to the resource from the app. The resourceid parameter is ignored in the iOS platform.
 *   **Android**: Opens the application-level settings screen showing the access status of the resource. The end-user can turn on or off the access to the resource from the app. The resourceid parameter is ignored in the iOS platform.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.openApplicationSettings(resourceId\[const\])
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Function | Description |
 | --- | --- |
 | resourceId \[constant\] - Optional | Specify the resource ID of the resource that you want open its settings. The parameter works only for Windows. For more information, refer to Resource ID. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}voltmx.application.openApplicationSettings(voltmx.os.RESOURCE_CONTACTS);
+{% highlight VoltMx %}
+voltmx.application.openApplicationSettings(voltmx.os.RESOURCE_CONTACTS);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS

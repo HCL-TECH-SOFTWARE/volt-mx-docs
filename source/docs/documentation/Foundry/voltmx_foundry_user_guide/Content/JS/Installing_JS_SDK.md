@@ -19,7 +19,8 @@ These steps show how to download JS SDK files and initialize JS client.
 *   [Invoking a Configuration Service](Invoking_Configuration_Service_JS.html)
 *   [Invoking a Logic Service](Invoking_Logic_Service_JS.html)
 *   [Invoking a Metrics Service](Invoking_Metrics_Object_JS.html)
-
-*   [![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[API Reference](javascript:void(0);)
+  
+<details close markdown="block"><summary>API Reference</summary>
     
     To view the API Reference for Plain JS, click [VoltMX JS docset](http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_docsets/js/voltmx-sdk.doc/index.html).
+</details>

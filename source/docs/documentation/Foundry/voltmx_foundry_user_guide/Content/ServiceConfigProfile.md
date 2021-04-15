@@ -41,14 +41,14 @@ When you export service profiles, the service configuration parameters are downl
     *   **Complete:** Downloads the configuration parameters in a simplified JSON file structure containing the Environment Current Configuration, which is the configuration currently in a specific environment for a specific app.
     *   **Delta**: Downloads the configuration parameters in a simplified JSON file structure **containing only the Changed Values, which are the edited values and modified artifacts.**
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for **sample JSON file format for Exported Service Configurations**  
-    ](javascript:void(0);)
+<details close markdown="block"><summary>sample JSON file format for Exported Service Configurations</summary>
     
     From V9SP2, the simplified JSON file structure (2.0) with level values **complete** and **delta** is supported as follows:
     
     | **V2.0, Complete** | **V2.0, Delta** |
     | --- | --- |
     | //Sample code for exported service profile for Complete { "identity": { "SampleIdentityService": { "profile\_endpoint": "https://.......", "client\_secret": "qwerty", "type": "oauth2", "version": "1.0", "client\_id": "changed value", "authorization\_endpoint": "https://.........", "token\_endpoint": "https://.............." }, "SampleIdentityService2": { } }, "objectsvc": {}, "integration": { }, "formatVersion": "2.0" } |  //Sample code for exported service profile for Delta { "identity": { "SampleIdentityService": { "type": "oauth2", "version": "1.0", "client\_id": "changed value" } }, "objectsvc": {}, "integration": {}, "formatVersion": "2.0" } |
+</details>
     
 
 Export/Import Service Profiles using Volt MX Foundry
@@ -90,19 +90,19 @@ The `export-config` helps you to export the Service Profile for the existing ser
 *   To export a service profile from a Cloud (manage.hclvoltmx.com) environment{% highlight voltMx %}java -jar mfcli.jar export-config -u <user> -p <password> -t <account id> [-f <file name>  [-a <app name>] [-v <app version>] [-e <environment name>] [-x <format version>] [-y <level>]
     {% endhighlight %}
     
-    > **_Important:_** The <level> values supported are **complete** and **delta**.  
-    For example:`  
-      
-    {-x 2.0} {-y complete}  
-    `Downloads simplified JSON file structure containing the environment current configuration (the configuration currently in a specific environment for a specific app)  
-      
-    `{-x 2.0} {-y delta}`  or  `{-x 2.0}`  
-    Downloads simplified JSON file structure contains only the changed values (the edited values and modified artifacts)
-    
-    For example:
-    
-    {% highlight voltMx %}java -jar mfcli.jar export-config -u abc@voltmx.com -p password -t 100054321 -f "C:\\tmp\\Sample.json" -a MyApp_23 -v 1.0 -e MyCloudEnvironment \-x 2.0 -y delta
-    {% endhighlight %}
+> **_Important:_** The <level> values supported are **complete** and **delta**.  
+{% highlight VoltMx %}
+For example:    
+{-x 2.0} {-y complete}
+Downloads simplified JSON file structure containing the environment current configuration (the configuration currently in a specific environment for a specific app)     
+{-x 2.0} {-y delta}  or  {-x 2.0}
+Downloads simplified JSON file structure contains only the changed values (the edited values and modified artifacts)
+{% endhighlight %}
+
+For example:
+
+{% highlight VoltMx %}java -jar mfcli.jar export-config -u abc@voltmx.com -p password -t 100054321 -f "C:\\tmp\\Sample.json" -a MyApp_23 -v 1.0 -e MyCloudEnvironment \-x 2.0 -y delta
+{% endhighlight %}
 
 *   To export a service profile from an on-premise installation{% highlight voltMx %} java -jar mfcli.jar export-config -u <user> -p <password> -au <Identity URL> -cu <Console URL> [-f <file name>  [-a <app name>] [-v <app version>] [-e <environment name>] [-x <format version>] [-y <level>]
     {% endhighlight %}

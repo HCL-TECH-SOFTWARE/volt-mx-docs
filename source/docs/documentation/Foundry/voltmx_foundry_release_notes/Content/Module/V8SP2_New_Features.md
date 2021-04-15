@@ -7,7 +7,8 @@ category: "voltmx_foundry_release_notes"
 New Features in V8 SP2
 ======================
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Console](javascript:void(0);)
+
+<details close markdown="block"><summary>Console</summary>
 
 *   Added support for versioning of Volt MX Foundry applications. For more information, refer [Volt MX Foundry Application Versioning]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/App_Versioning.html).    
 *   Added support for viewing the published applications from the Environment page. For more information, refer [Viewing Applications Published to a Runtime Environment]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Published_Apps-Environments.html).
@@ -21,7 +22,8 @@ New Features in V8 SP2
 *   Added support that enables users with "Report Full Access" to run the reports without accessing the cloud.
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Offline Objects](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Offline Objects</summary>
 
 *   Integrated offline enabled Objects API access through MVC models.
     
@@ -44,7 +46,8 @@ New Features in V8 SP2
 *   Offline Objects provide batching support for hierarchical data. For more information, refer [Batching Support .]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Batching.html)
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Volt MX Foundry SDK](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Volt MX Foundry SDK</summary>
 
 *   Added binary support for S3 and File System (via NFS drive). For more information, refer [Binary APIs]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Binary_APIs.html).
     
@@ -53,21 +56,24 @@ New Features in V8 SP2
 *   Added support to fetch client app properties configured in App Services.
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Identity](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Identity</summary>
 
 *   Added support to publish different identity service configurations to different environments in an account. . If you are accessing identity services directly, refer [Publishing of identity services to different environments]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Publish.html) for additional parameters that needs to be passed.
     
 *   Added support to HTTP message body integrity from Volt MX Foundry. For more information, refer [How to enable HTTP Message Body Integrity]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ServiceConfig-Identiy-Apps.html).
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Accounts/Metrics](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Accounts/Metrics</summary>
 
 *   Added Web Application Firewall (WAF) support to Volt MX Foundry products.
     
 *   Added support to optimize data load logic to increase performance.
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Integration](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Integration</summary>
 
 *   Enabled the support for testing services in Volt MX Foundry Starter Edition.
     
@@ -88,7 +94,8 @@ New Features in V8 SP2
 *   Significant Improvement in publishing performance and added support of zero downtime during publishing.
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Installer](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Installer</summary>
 
 *   Offline Sync features are now available with Integration component using Offline Objects. For more information, refer [Offline Objects Getting Started Guide]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html). Sync Services is deprecated as a separate component, and will be unselected by default in the Install Components Screen.
     
@@ -97,14 +104,16 @@ New Features in V8 SP2
 *   New version of Websphere v9 is supported for remote deployments.
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Management](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Management</summary>
 
 *   Enterprise Appstore for Volt MX Foundry Community edition.
     
 *   Automate JAR generate to do away with JAR commits for Launchpad.
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Engagement](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Engagement</summary>
 
 *   Added support for cloud push processing optimizations.
     
@@ -123,7 +132,8 @@ New Features in V8 SP2
 *   SQL performance enhancements in Engagement server (cloud and on-prem).
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[App Factory](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>App Factory</summary>
 
 *   Added support for Custom Hooks. For more information, refer [Running CustomHooks]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/CustomHooks.html).
     

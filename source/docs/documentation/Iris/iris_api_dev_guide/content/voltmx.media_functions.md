@@ -19,98 +19,106 @@ Functions
 
 The voltmx.media namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.media.createFromFile](javascript:void(0);) 
+<details close markdown="block"><summary>voltmx.media.createFromFile</summary> 
 
 * * *
 
 Creates a [media object](media_object.html) from a media file on the device.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.media.createFromFile(  
     fileobj)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | fileobj | An object of type [voltmx.io.File](voltmx.io.file_namespace.html) that specifies the file that the created `media` object will play. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}var fileObj = new voltmx.io.File("MyAudioFile.mp3");
+{% highlight VoltMx %}
+var fileObj = new voltmx.io.File("MyAudioFile.mp3");
 var mediaObj = voltmx.media.createFromFile(fileObj);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns a [media object](media_object.html) that is associated with a specific file on the device, or null if the object was not created.
 
-Remarks
+### Remarks
 
 This function has platform-specific behaviors when there are errors. In particular, when the _fileObj_ parameter refers to a file that doesn't exist on iOS, iOS generates an error with the message string "Unable to play the media file". However, if this error occurs on Android, no error message is generated. Instead, this function does not create the `media` object.
 
-Platform Availability
+### Platform Availability
 
 Windows10, Android, iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.media.createFromUri](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.media.createFromUri</summary> 
 
 * * *
 
 Creates a [media object](media_object.html) that plays a remote audio file across the network.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.media.createFromUri(  
     uriString)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | _uriString_ | A string containing the URI of the remote audio file. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}var mediaObj = voltmx.media.createFromUri(url);
+{% highlight VoltMx %}
+var mediaObj = voltmx.media.createFromUri(url);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns a [media object](media_object.html) that is associated with a remote audio file, or null if the object was not created.
 
-Platform Availability
+### Platform Availability
 
 Windows10, Android, iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.media.record](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.media.record</summary> 
 
 * * *
 
 Creates a [record object](record_object.html) that your app can use to record audio.
 
-Syntax
+### Syntax
 
 The syntax for native platforms is as follows.
 
+{% highlight VoltMx %}
 voltmx.media.record(fileobj,config)
+{% endhighlight %}
 
 The syntax for Desktop Web is as follows.
 
+{% highlight VoltMx %}
 voltmx.media.record(config)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -119,10 +127,10 @@ Input Parameters
 | _config_ | An optional object that contains configuration information for the `record` object. For more information, see [Remarks](#Remarks) below. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}function errorcallback(errorMessage) {
+{% highlight VoltMx %}
+function errorcallback(errorMessage) {
     var errorMesg = "Reason for failure is : " + errorMessage;
     alert(errorMesg);
 }
@@ -141,15 +149,15 @@ var config = {
 var _recordObj = voltmx.media.record(fileObj, config);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `record` object, or null if the object was not created.
 
-Remarks
+### Remarks
 
 Use the `voltmx.media.record` function to instantiate a record object that your app can use to record audio on the device.
 
-Parameter Details
+### Parameter Details
 
 The _config_ parameter contains an object with configuration information. Specifically, it contains key-value pairs that set callbacks which are invoked by the `voltmx.media.record` function. The _config_ parameter supports the following keys.
 
@@ -160,19 +168,25 @@ The _config_ parameter contains an object with configuration information. Specif
 
 The callback for the `onFailure` key must have the following signature.
 
+{% highlight VoltMx %}
 onFailureCallback(errorMessage);
+{% endhighlight %}
 
 where the `errorMessage` parameter is a string containing the reason for the failure.
 
 The callback for the `onSuccess` key must have the following signature.
 
+{% highlight VoltMx %}
 onSuccessCallback(fileobj);
+{% endhighlight %}
 
 where the `fileobj` parameter is an object of type `voltmx.io.file` that represents the file the audio is recorded into.
 
 The callback for the onSuccess key must have the following signature in Desktop Web platform.
 
+{% highlight VoltMx %}
 onSuccessCallback(audiobytes);
+{% endhighlight %}
 
 here, the `audiobytes` parameter contains the recorded audio as Blob URL.
 
@@ -185,10 +199,12 @@ The following platform-specific features should be considered when using this fu
 *   **Windows**: To enable your app to record audio, you must add the "Micriphone" capability in the app's properties.
 *   **Desktop Web**: If you are creating more than one `record` object at the same time, the `audiobytes` parameter returns only the last recording of all `onSuccess` callbacks.
 
-Platform Availability
+### Platform Availability
 
 Windows10, Android, iOS, and Desktop Web
 
 * * *
 
 ![](resources/prettify/onload.png)
+
+</details>

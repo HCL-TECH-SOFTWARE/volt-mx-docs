@@ -11,7 +11,7 @@ User Repository Identity Service
 
 With the Enhanced **User Repository** identity service, you can create multiple instances in the same account. An instance of the User Repository type can contain a custom set of users. You can use one service for authentication of multiple apps, use them individually, or share the service across multiple apps.
 
-`Admins` and `Members` are the default groups available in each **User Repository** identity service instance. A user must be part of a group in an instance. By default, all users are associated to the Members group. This authentication service works in the same norms as other Volt MX Foundry services.
+`Admins` and `Members` are the default groups available in each **User Repository** identity service instance. A user must be part of a group in an instance. By default, all users are associated to the Members group. This authentication service works in the same norms as other VoltMX Foundry services.
 
 ### Use Case 1- Creating multiple instances of User Repository Identity Service
 
@@ -36,7 +36,7 @@ To configure an identity service using User Repository, follow these steps:
 2.  In the **Foundry Apps** page, click **ADD NEW**. By default, the **Configure Services** tab is selected. A new app is added, and you are directed to the **Identity** page of the new app.
 3.  Click **CONFIGURE NEW**.
     
-    > **_Note:_** For more details on Identity Service Designer page, refer to **[**Identity** service designer](#IdentitySDpage)**.
+    > **_Note:_** For more details on Identity Service Designer page, refer to [**Identity** service designer](#IdentitySDpage).
     
 4.  Specify a name for the service in the **Name** text box.
 5.  From the **Type of Identity** list, select **User Repository**.
@@ -181,7 +181,7 @@ To import users to a User Repository, follow these steps:
     | **Phone -** for example, _12346753abc_ | Phone field contains illegal characters and is invalid |
     | **Password** - for example, _passw_ | Password must be between 8-20 characters |
     | **Status** \- for example, my status | User status **my status** is invalid. Pending, active, blocked, and disabled are valid statuses. |
-</details>    
+</details>
 
 ### Exporting Users from a User Repository
 

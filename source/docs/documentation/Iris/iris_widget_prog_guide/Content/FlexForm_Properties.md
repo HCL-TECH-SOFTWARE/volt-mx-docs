@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                                  
-
 
 FlexForm Properties
 ===================
@@ -12,7 +10,7 @@ The properties for FlexForm widget are as follows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
@@ -20,25 +18,27 @@ Enables you to control accessibility behavior and alternative text for the widge
 
 For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
 > **_Note:_** From Volt MX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the `accessibilityConfig` property. Values provided in the i18n keys take precedence over values provided in `a11yLabel`, `a11yValue`, and `a11yHint` fields.
 
-The accessibilityConfig property is a JavaScript object which can contain the following key-value pairs.
+### The accessibilityConfig property is a JavaScript object which can contain the following key-value pairs.
 
   
 | Key | Type | Description | ARIA Equivalent |
@@ -50,22 +50,23 @@ The accessibilityConfig property is a JavaScript object which can contain the fo
 | a11yHidden | Boolean | This is an optional parameter. Specifies if the widget should be ignored by assistive technology. The default option is set to _false_. This option is supported on iOS 5.0 and above, Android 4.1 and above, and SPA | For all widgets, this parameter maps to the `aria-hidden` property of ARIA in HTML. |
 | a11yARIA | Object | This is an optional parameter. For each widget, the key and value provided in this object are added as the attribute and value of the HTML tags respectively. Any values provided for attributes such as `aria-labelledby` and `aria-describedby` using this attribute, takes precedence over values given in `a11yLabel` and `a11yHint` fields. When a widget is provided with the following key value pair or attribute using the a11yARIA object, the tabIndex of the widget is automatically appended as zero.`{"role": "main"}``aria-label` | This parameter is only available on the Desktop Web platform. |
 
-Android limitations
+### Android limitations
 
 *   If the results of the concatenation of a11y fields result in an empty string, then `accessibilityConfig` is ignored and the text that is on widget is read out.
 *   The soft keypad does not gain accessibility focus during the right/left swipe gesture when the keypad appears.
 
-SPA/Desktop Web limitations
+### SPA/Desktop Web limitations
 
 *   When `accessibilityConfig` property is configured for any widget, the `tabIndex` attribute is added automatically to the `accessibilityConfig` property.
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+### Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -76,11 +77,12 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}
+/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -92,45 +94,49 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[allowHorizontalBounce Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>allowHorizontalBounce Property</summary>
 
 * * *
 
 Specifies whether the scroll bounce is enabled or disabled in the horizontal direction.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 allowHorizontalBounce
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true. That is the scroll bounce is enabled in horizontal direction.
 
 > **_Note:_** The **bounces** property takes precedence over this property.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable horizontal bounce in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to enable horizontal bounce in a FlexForm.
 
 myForm.allowHorizontalBounce=true;    
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE.
 
@@ -138,122 +144,139 @@ This property is available on iOS platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[allowVerticalBounce Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>allowVerticalBounce Property</summary>
 
 * * *
 
 Specifies whether the scroll bounce is enabled or disabled in the vertical direction.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 allowVerticalBounce
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true. That is the scroll bounce is enabled in vertical direction.
 
 > **_Note:_** The **bounces** property takes precedence over this property.
 
-Example
+### Example
 
-Platform Availability
+### Platform Availability
 
-{% highlight voltMx %}//Sample code to enable vertical bounce in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to enable vertical bounce in a FlexForm.
 
 myForm.allowVerticalBounce=true;    
 {% endhighlight %}
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>anchorPoint Property</summary>
 
 * * *
 
 Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 anchorPoint
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The value for this property is a JavaScript dictionary object with the keys "x" and "y". The values for the "x" and "y" keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.anchorPoint = {
+{% highlight VoltMx %}
+Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>backgroundColor Property</summary>
 
 * * *
 
 Specifies the background color of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 backgroundColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
-*   The initial value of backgroundColor has to be specified explicitly. If not, Iris will not deduce the values from the existing skin and this will lead to undefined behavior.
+*   The initial value of backgroundColor has to be specified explicitly. If not, Iris will not deduce the values from the existing skin
+    and this will lead to undefined behavior.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
-*   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
+*   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value
+    is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
     For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.
-*   A color constant is a String that is defined at the theme level. Ensure that you append the **$** symbol at the beginning of the color constant.
+*   A color constant is a String that is defined at the theme level. Ensure that you append the **$** symbol at the beginning of the
+    color constant.
 *   This property does not have a default value.
-*   This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
-*   The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.
+*   This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin
+    configured for the widget, this property updates the skin.
+*   The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually
+    exclusive. The property that was set most recently is given higher priority over other properties.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColor property.
 
-{% highlight voltMx %}Form1.btn1.backgroundColor = "ea5075";
+{% highlight VoltMx %}
+Form1.btn1.backgroundColor = "ea5075";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -261,38 +284,42 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bounces Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bounces Property</summary>
 
 * * *
 
 Specifies whether the scroll bounce is enabled or disabled.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 bounces
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is _true_. If set to _false,_ the scroll view bounce is not applied. If set to _true,_ the scroll view bounce is applied.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable bounces property in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to enable bounces property in a FlexForm.
 
 myForm.bounces=true;    
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -301,27 +328,30 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[captureGPS Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>captureGPS Property</summary>
 
 * * *
 
 Specifies if the Form must display a popup seeking permission from the user to access the location details.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 captureGPS
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
-> **_Note:_** For this property to work, you must have selected **Requires GPS functionality** in the Project Properties of the Application (For more information, see the _Configuring Project Properties_ section of the _VoltMX Iris User Guide_) to enable the application to use the GPS functionality.
+> **_Note:_** For this property to work, you must have selected **Requires GPS functionality** in the Project Properties of the Application (For more information, see the _Configuring Project Properties_ section of the _Volt MX Iris User Guide_) to enable the application to use the GPS functionality.
 
 The default value for this property is false. The checkbox is not selected and the popup does not appear when you navigate to the Form. If you want the popup to appear when you navigate to the specified Form, set the value to _true_ (select the checkbox).
 
@@ -329,143 +359,158 @@ The following image illustrates the popup to access the location details:
 
 ![](Resources/Images/CaptureGPS_273x249.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable captureGPS property in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to enable captureGPS property in a FlexForm.
 
 myForm.captureGPS=true;    
 {% endhighlight %}
 
-Availability
+### Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 This property is available on Mobile Web (advanced)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[configureExtendBottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>configureExtendBottom Property</summary>
 
 * * *
 
 This property enables you to configure extendBottom property.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 None. Its an IDE only property
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false. If set to _true,_ the property extendBottom is displayed. If set to _false,_ the property extendBottom is not displayed.
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[configureExtendTop Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>configureExtendTop Property</summary>
 
 * * *
 
 This property enables you to configure extendTop property.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 None. Its an IDE only property
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false. If set to _true,_ the property extendTop is displayed. If set to _false,_ the property extendTop is not displayed.
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[configureStatusBarStyle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>configureStatusBarStyle Property</summary>
 
 * * *
 
 This property enables you to configure statusBarStyle property.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 configureStatusBarStyle
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false. If set to _true,_ the property statusBarStyle is displayed. If set to _false,_ the property statusBarStyle is not displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable configureStatusBarStyle property in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to enable configureStatusBarStyle property in a FlexForm.
 
 myForm.configureStatusBarStyle=true;    
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentOffset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentOffset Property</summary>
 
 * * *
 
 Specifies the x and y coordinates of the top-left of the scrollable region. When the values are set, the container scrolls even if the scrolling is disabled. This will always returns the value that you set, but never reflects the actual computed offset.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contentOffset
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject (x and y values can be specified in dp, px, and %)
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set contentOffset property in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set contentOffset property in a FlexForm.
 myForm.contentOffset = {
  "x": "3dp",
  "y": "4dp"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -474,25 +519,28 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentSize Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentSize Property</summary>
 
 * * *
 
 Specifies the width and height of the container to accommodate all the widgets placed in it. This will returns the values that you set, but never reflects the actual computed content size.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contentSize
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the properties available:
 
@@ -506,18 +554,19 @@ Following are the properties available:
 > *   dp: Specifies the values in terms of device independent pixels.
 > *   default: Specifies the default value of the widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set contentSize property in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set contentSize property in a FlexForm.
 myForm.contentSize = {
  "width": "3dp",
  "height": "4dp"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -525,157 +574,173 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[defaultIndicatorColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>defaultIndicatorColor Property</summary>
 
 * * *
 
 This property enables you to set color to the progress indicator when it is show on the form. It overrides the application level setting set using setApplicationbehavior() for this form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 defaultIndicatorColor
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The color for this property is in RGBA hex code.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the defaultIndicatorColor property in a FlexForm as red.
+{% highlight VoltMx %}
+//Sample code to set the defaultIndicatorColor property in a FlexForm as red.
 myForm.defaultIndicatorColor= "ff0000";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Not available in the IDE.
+### Not available in the IDE.
 
 *   Android
 *   Android Tablet
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[disableZoom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>disableZoom Property</summary>
 
 * * *
 
 This property allows you to enable or disable zooming the FlexForm.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 disableZoom
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true. If set to _true,_ the zooming action on FlexForm is disabled. User cannot zoom the FlexForm. If set to _false,_ the zooming action on FlexForm is enabled. User can zoom the FlexForm.
 
 > **_Note:_** This property is supported from GA 6.0.2.3 onwards.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to disable zoom in a FlexForm.  
+{% highlight VoltMx %}
+//Sample code to disable zoom in a FlexForm.  
   
 Form1.disableZoom = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[drawerLayout Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>drawerLayout Property</summary>
 
 * * *
 
 Gets and sets the FlexContainer that contains the elements of the NavigationDrawer, which is named drawerLayout. It is a child element of the FlexForm, and it is created when the FlexForm is created based on a template that supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 drawerLayout
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer). It is not available unless the FlexForm has been created from a template that supports the NavigationDrawer. The NavigationDrawer is based on the [Android native Navigation drawer](https://material.io/guidelines/patterns/navigation-drawer.html#). It is only supported on Android.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var flexLayout = formObject.drawerLayout;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[drawerWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>drawerWidth Property</summary>
 
 * * *
 
 Gets and sets the width of the Navigation Drawer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 drawerWidth
+{% endhighlight %}
 
-Type
+### Type
 
 int
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer). It is not available unless the FlexForm has been created from a template that supports the NavigationDrawer. The NavigationDrawer is based on the [Android native Navigation drawer](https://material.io/guidelines/patterns/navigation-drawer.html#). It is only supported on Android.
 
-Example
+### Example
 
-{% highlight voltMx %}var width = formObject.drawerWidth;
+{% highlight VoltMx %}
+var width = formObject.drawerWidth;
 
 //Writing
 formObject.drawerWidth = "100dp";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[drawerShadowColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>drawerShadowColor Property</summary>
 
 * * *
 
@@ -693,19 +758,21 @@ Writing:
 
 formObject.drawerShadowColor = ffffff64
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 drawerShadowColor
+{% endhighlight %}
 
-Type
+### Type
 
 color value in RGBA format.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The value used to read or write this property is in RGBA format. R,G, and B are 0-255, and A is 0-64.
 
@@ -713,9 +780,10 @@ This value is respected only if drawer type is set to temporary or persistent.
 
 This property supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer). It is not available unless the FlexForm has been created from a template that supports the NavigationDrawer. The NavigationDrawer is based on the [Android native Navigation drawer](https://material.io/guidelines/patterns/navigation-drawer.html#). It is only supported on Android.
 
-Example
+### Example
 
-{% highlight voltMx %}// Reading
+{% highlight VoltMx %}
+// Reading
 var shadowColor = formObject.drawerShadowColor;
 	
 //Writing	
@@ -723,33 +791,36 @@ formObject.drawerShadowColor = "ffffff64";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[drawerOpenIcon Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>drawerOpenIcon Property</summary>
 
 * * *
 
 The icon to be displayed when Navigation bar is open. This can only be a PNG or JPEG.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 drawerOpenIcon
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This can only be a PNG or JPEG image.
 
@@ -757,79 +828,88 @@ The Android specification for this icon can be found at:
 
 This property supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer). It is not available unless the FlexForm has been created from a template that supports the NavigationDrawer. The NavigationDrawer is based on the [Android native Navigation drawer](https://material.io/guidelines/patterns/navigation-drawer.html#). It is only supported on Android.
 
-Example
+### Example
 
-{% highlight voltMx %}//Reading
+{% highlight VoltMx %}
+//Reading
 var iconame = formObject.drawerOpenIcon;
 
 //Writing
 formObject.drawerOpenIcon = "opened.png";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[drawerClosedIcon Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>drawerClosedIcon Property</summary>
 
 * * *
 
 The icon to be displayed when Navigation bar is open. This can only be a PNG or JPEG.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 drawerClosedIcon
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Reading
+{% highlight VoltMx %}
+//Reading
 var iconame = formObject.drawerClosedIcon;
 
 //Writing
 formObject.drawerClosedIcon = "closed.png";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[drawerOpena11yHint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>drawerOpena11yHint Property</summary>
 
 * * *
 
 Specifies the descriptive text that explains the action of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 drawerOpena11yHint
+{% endhighlight %}
 
-Type
+### Type
 
 Text
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Reading
+{% highlight VoltMx %}
+//Reading
 var hint = formObject.drawerOpena11yHint;
 
 //Writing
@@ -838,102 +918,113 @@ formObject.drawerOpena11yHint = "Navigation Drawer Opened";
 
 **Platform Availability**
 
-Available in the IDE
+### Available in the IDE
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[drawerCloseda11yHint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>drawerCloseda11yHint Property</summary>
 
 * * *
 
 Specifies the descriptive text that explains the action of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 drawerCloseda11yHint
+{% endhighlight %}
 
-Type
+### Type
 
 Text
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Reading
+{% highlight VoltMx %}
+//Reading
 var hint = formObject.drawerCloseda11yHint;
 
 //Writing
 formObject.drawerCloseda11yHint = "Navigation Drawer Closed";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE
+### Available in the IDE
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}
+Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enabledForIdleTimeout Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enabledForIdleTimeout Property</summary>
 
 * * *
 
 Idle time indicates the amount of time that a user has not interacted with the application. Some of the applications require a notification to be raised when a user has not interacted with the form for a specified amount of time. For example, a banking app might require a notification after 5 minutes of inactivity by the user. At the same time, applications also need an ability to not raise this notification for certain forms in the application. For example, ATM Locator forms in a banking app, _enabledForIdleTimeout_ property indicates, if the form is going to raise the notification after a specific period of inactivity (set using the API _voltmx.application.registerForIdleTimeout_.)
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enabledForIdleTimeout
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false. The session will not expire after a period of inactivity.
 
@@ -941,16 +1032,17 @@ If you want the session to expire after a period of inactivity (for example, you
 
 For more information about enabled for idle timeout, see API _voltmx.application.registerForIdleTimeout_ in the _API User Guide._
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the enabledForIdleTimeout property by using a FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the enabledForIdleTimeout property by using a FlexForm.  
 myForm.enabledForIdleTimeout=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -959,31 +1051,35 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableOnScrollWidgetPositionForSubwidgets Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableOnScrollWidgetPositionForSubwidgets Property</summary>
 
 * * *
 
 This property enables the FlexForm widget to iterate into all the widgets that make use of the onScrollWidgetPosition event. The property is available for FlexForm and FlexScrollContainer widgets.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableOnScrollWidgetPositionForSubwidgets
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the enableOnScrollWidgetPositionForSubwidgets property by using FlexForm*/  
+{% highlight VoltMx %}
+/*Sample code to set the enableOnScrollWidgetPositionForSubwidgets property by using FlexForm*/  
 myForm.enableOnScrollWidgetPositionForSubwidgets = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iOS
@@ -993,40 +1089,44 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableScrolling Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableScrolling Property</summary>
 
 * * *
 
 Specifies whether the scrolling is enabled on the container or not.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableScrolling
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 > **_Note:_** This property does not restrict the scrolling programmatically through scroll container properties and APIs.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the enableScrolling property by using FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the enableScrolling property by using FlexForm.  
   
 myForm.enableScrolling = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -1035,118 +1135,130 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[extendBottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>extendBottom Property</summary>
 
 * * *
 
 This property is displayed only when [configureExtendBottom](#configur2) is set to true. This property enables you to configure extendBottom property. This property is supported in iOS7 and above only. This property is also applicable on the Application Level properties under Application Properties > Native > iPhone/iPad > Platform Settings. The property set at form level takes precedence over Application level.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 extendBottom
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read+Write
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
 > **_Note:_** This property is applicable on form level headers and footers, app level headers and footers, title bar, and app menu.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the extendBottom property by using FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the extendBottom property by using FlexForm.  
   
 myForm.extendBottom= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[extendTop Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>extendTop Property</summary>
 
 * * *
 
 This property is displayed only when [configureExtendTop](#configur) is set to true. It specifies the form content to scroll under the App Menu. This property is supported in iOS7 and above only. This property is also applicable on the Application Level properties under Application Properties > Native > iPhone/iPad > Platform Settings. The property set at form level takes precedence over Application level.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 extendTop
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is false. If set to _true,_ the form scroll under the App Menu.
 
 > **_Note:_** This property is applicable on form level headers and footers, app level headers and footers, title bar, and app menu.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the extendTop property by using FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the extendTop property by using FlexForm.  
   
 myForm.extendTop= true;
 {% endhighlight %}
 
-Availability
+### Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[footerOverlap Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>footerOverlap Property</summary> 
 
 * * *
 
 Specifies if the footer must overlap the form. For example, every time you scroll the form, the footer is fixed and the footer overlap the form as specified in the Footer Overlap field. If this field is selected, the form scrolls behind the footer background and a part of the footer background is transparent.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 footerOverlap
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the footerOverlap property by using FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the footerOverlap property by using FlexForm.  
   
 myForm.footerOverlap= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   iPad
@@ -1154,7 +1266,8 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[formTransparencyDuringPostShow Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>formTransparencyDuringPostShow Property</summary>
 
 * * *
 
@@ -1162,19 +1275,21 @@ Specifies the transparency in percentage when a form is loaded.
 
 Normally, when a form is loading, the user interface is blocked. You can use this property to specify the percentage of transparency.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 formTransparencyDuringPostShow
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is 100.
 
@@ -1182,54 +1297,59 @@ The following image illustrates the transparency as 0 during post show:
 
 ![Transparency during Post Show](Resources/Images/Loading_in_iPhone.jpg)
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the formTransparencyDuringPostShow property by using FlexForm as ten.*/  
+{% highlight VoltMx %}
+/*Sample code to set the formTransparencyDuringPostShow property by using FlexForm as ten.*/  
   
 myForm.formTransparencyDuringPostShow= 10;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[headerOverlap Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>headerOverlap Property</summary> 
 
 * * *
 
 Specifies if the header must overlap the form. For example, every time you scroll the form, the header is fixed and the header overlap the form as specified in the header overlap field. If this field is selected, the form scrolls behind the header background and a part of the header background is transparent.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 headerOverlap
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the headerOverlap property by using FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the headerOverlap property by using FlexForm.  
   
 myForm.headerOverlap=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   iPad
@@ -1237,27 +1357,31 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 id is a unique identifier of form consisting of alpha numeric characters. Every Form should have a unique id within an application.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String - \[Mandatory\]
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining properties of FlexForm.
+{% highlight VoltMx %}
+//Defining properties of FlexForm.
 function testfrmGlobals() {
     var MenuId = [];
     testfrm = new voltmx.ui.Form2({
@@ -1304,9 +1428,9 @@ function testfrmGlobals() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -1315,25 +1439,28 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the widget. This will help in avoiding the globals to most part of the programming.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This is a **non-Constructor** property. You cannot set this property through widget constructor. But you can read and write data to it.
 
@@ -1345,9 +1472,10 @@ Info property can hold any JSObject. After assigning the JSObject to info proper
 widget.info = inf;
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set info property for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set info property for a FlexForm.
 
 myForm.info = {
 key: "FlexFormName"
@@ -1357,9 +1485,9 @@ key: "FlexFormName"
 voltmx.print("FlexForm info ::" +myForm.info);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Not available in the IDE.
+### Not available in the IDE.
 
 *   iOS
 *   Android
@@ -1368,25 +1496,28 @@ Not available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[inputAccessoryViewType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>inputAccessoryViewType Property</summary>
 
 * * *
 
 When building iPhone applications that support or provide text input, it's often necessary to create some extra buttons (or other controls) beyond the ones provided by the default keyboard interface. Volt MX Iris by default, adds the Previous, Next and Done buttons to the applicable input controls. These buttons allow specific operations needed by your application, such as moving to the next or previous text field, make the keyboard disappear. The area above the keyboard is known as Input Accessory View.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 inputAccessoryViewType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is FORM\_INPUTACCESSORYVIEW\_DEFAULT.
 
@@ -1421,41 +1552,45 @@ You can use any of the following constants. You must specify each constant with 
 
 *   FORM\_INPUTACCESSORYVIEW\_CANCEL: Specifies that the input accessory view has a cancel button. This option does not trigger any events.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the inputAccessoryViewType property by using FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the inputAccessoryViewType property by using FlexForm.  
   
 myForm.inputAccessoryViewType=constants.FORM_INPUTACCESSORYVIEW_DEFAULT;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[inTransitionConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>inTransitionConfig Property</summary>
 
 * * *
 
 Specifies the configuration to be used when the user arrives on this form. It accepts hash values.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 inTransitionConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the properties available for iPhone and iPad:
 
@@ -1536,7 +1671,7 @@ Following are the properties available for iPhone and iPad:
 
 For more information on the preceding transition effects, see [transitionEffect](#transitionEffect).
 
-The below effects applicable to Android platform:
+### The below effects applicable to Android platform:
 
 1.  default/none - The constant value is 0. The default device effect is applied or none of the effect is applied.
 2.  bottom-top - The constant value is 1. It specifies that the form must _slide-in_ from the bottom and proceed towards the top.
@@ -1550,13 +1685,14 @@ The below effects applicable to Android platform:
 10.  bottom-top style1 - The constant value is 9. It specifies that the form must _shrink_ from the bottom towards the top.
 11.  top down - The constant value is 10. It specifies that the form must _slide-in_ from the top and proceed towards the bottom.
 
-{% highlight voltMx %}//sample code to set inTransitionConfig with the option bottom-top.
+{% highlight VoltMx %}
+//sample code to set inTransitionConfig with the option bottom-top.
 rm.inTransitionConfig = {
     formAnimation: 1
 };
 {% endhighlight %}
 
-Following are the properties available for Windows:
+### Following are the properties available for Windows:
 
 **transitionMode:** Specifies the direction from which the From is displayed. The available options are:
 
@@ -1584,7 +1720,7 @@ On SPA Platforms, **Transition** has the below options to set:
 4.  Right Center - Specifies that the form must appear from the right center.
 5.  Left Center - Specifies that the form must appear from the left center.
 
-Android-specific Constant
+### Android-specific Constant
 
 This constant provides the default activity for IN Config transitions of FlexForms. This transition simulates native activity transitions.
 
@@ -1599,9 +1735,10 @@ The constant is available from V8 SP2 version onwards of Volt MX Iris.
     *   formobject.outTransitionConfig = {"formAnimation": 16};
     *   formobject.outTransitionConfig = {"formAnimation": constants.VOLTMX\_FORM\_DEFAULT\_ACTIVITY\_IN};
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the inTransitionConfig property in a FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the inTransitionConfig property in a FlexForm.  
   
 myForm.inTransitionConfig = {
  "transitionDirection": "fromLeft",
@@ -1616,33 +1753,36 @@ transitionMode: "Default",
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-Available on all platforms except Windows.
+### Available on all platforms except Windows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layout Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layout Property</summary>
 
 * * *
 
 Specifies if the arrangement of the widgets either in horizontal or vertical direction.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 layout
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is vertical.
 
@@ -1651,9 +1791,10 @@ The available options are:
 *   Vertical:The navigation happens in vertical direction.
 *   Horizontal:The navigation happens in horizontal direction.
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining a form with layout:horizontal
+{% highlight VoltMx %}
+//Defining a form with layout:horizontal
 var frmBasic = {
     id: "frm",
     type: constants.FORM_TYPE_NATIVE,
@@ -1671,33 +1812,36 @@ var frmPSP = {
 var frm = new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-This property is available on Windows.
+### This property is available on Windows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layoutType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layoutType Property</summary>
 
 * * *
 
 Specifies if the arrangement of the widgets either in free form or vertical direction.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 layoutType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 The default value for this property is voltmx.flex.FREE\_FORM.
 
@@ -1724,17 +1868,18 @@ The available options are:
     *   You can only provide FlexContainer widget as the direct child after assigning this value to the parent.
     *   If the width of a child widget exceeds the width of the container widget, the next child widget is wrapped and placed in the next row.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to read the layoutType property of a FlexForm.  
+{% highlight VoltMx %}
+//Sample code to read the layoutType property of a FlexForm.  
   
 var myLayout=myForm.layoutType;  
 voltmx.print("The layout type of myForm FlexForm is:"+myLayout);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -1743,31 +1888,35 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxAppMenuButtons Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxAppMenuButtons Property</summary>
 
 * * *
 
 Specifies the number of appmenu buttons should be displayed on the screen.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxAppMenuButtons
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is 4.
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining a form with maxAppMenuButtons:4
+{% highlight VoltMx %}
+//Defining a form with maxAppMenuButtons:4
 var frmBasic = {
     id: "frm",
     type: constants.FORM_TYPE_NATIVE,
@@ -1785,77 +1934,85 @@ var frmPSP = {
 var frm = new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxZoomScale Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxZoomScale Property</summary>
 
 * * *
 
 Specifies the maximum zoom scale factor that can be applied to the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxZoomScale
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxZoomScale property in a FlexForm as two.  
+{% highlight VoltMx %}
+//Sample code to set the maxZoomScale property in a FlexForm as two.  
   
 myForm.maxZoomScale=2.0;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-This property is available on iOS platform.
+### This property is available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[menuFocusSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>menuFocusSkin Property</summary>
 
 * * *
 
 This is a skin property of a form level menu and it determines the look and feel of the Menu Item when focused.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 menuFocusSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Write only \[Applicable on Windows platforms\]
 
-Example
+### Example
 
-{% highlight voltMx %}frm1.menuFocusSkin = "menuFSkin";
+{% highlight VoltMx %}
+frm1.menuFocusSkin = "menuFSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -1864,32 +2021,36 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[menuItems Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>menuItems Property</summary>
 
 * * *
 
 menuItems represents the list of items to be displayed in the device menu control. Unlike application menu items, which are available across all the forms, these items are only available for a specific form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 menuItems
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Write only \[Applicable on Windows platforms\]
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.menuItems=menuItemObj;
+{% highlight VoltMx %}
+Form1.menuItems=menuItemObj;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -1898,32 +2059,36 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[menuNormalSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>menuNormalSkin Property</summary>
 
 * * *
 
 This is a skin property and it determines the look and feel of a menu items when not in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 menuNormalSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Write only
 
-Example
+### Example
 
-{% highlight voltMx %}frm1.menuNormalSkin = "menuSkin";
+{% highlight VoltMx %}
+frm1.menuNormalSkin = "menuSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -1932,25 +2097,28 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[menuPosition Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>menuPosition Property</summary>
 
 * * *
 
 Specifies if the application menu is shown or hidden in the application. In some platforms, form menu items appear along with app menu items. This property allows developer to configure weather to append at the end of application menu list or inserted at beginning of the application menus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 menuPosition
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is FORM\_MENU\_POSITION\_AFTER\_APPMENU.
 
@@ -1959,123 +2127,136 @@ The available options are:
 *   FORM\_MENU\_POSITION\_BEFORE\_APPMENU
 *   FORM\_MENU\_POSITION\_AFTER\_APPMENU
 
-Example
+### Example
 
-{% highlight voltMx %}form1.menuPosition = constants.FORM_MENU_POSITION_AFTER_APPMENU;
+{% highlight VoltMx %}
+form1.menuPosition = constants.FORM_MENU_POSITION_AFTER_APPMENU;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-This property is available on Android/Android Tablet.
+### This property is available on Android/Android Tablet.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minZoomScale Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minZoomScale Property</summary>
 
 * * *
 
 Specifies the minimum zoom scale factor that can be applied to the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minZoomScale
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minZoomScale property in a FlexForm as two.  
+{% highlight VoltMx %}
+//Sample code to set the minZoomScale property in a FlexForm as two.  
   
 myForm.minZoomScale=2.0;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-This property is available on iOS platform.
+    This property is available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[navigationBarColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>navigationBarColor Property</summary>
 
 * * *
 
 The navigationBarColor property helps you set the color for a device's navigation bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 navigationBarColor
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 When you set the navigationBarColor property to a form (form level), the property gets applied only to that particular form in the visible region. When a user navigates to another form, the navigation bar may change based on the properties set to that form. If the value of the navigationBarColor property is null or invalid, the value set at the application level is applied. If the navigationBarColor property is set at form level and application level, the property set at the form level overrides the property set at the application level. If the navigationBarColor property is not set at the form level and at the application level, the Android’s default settings are applied to the navigation bar.
 
 You can define the navigation bar color in the RGBA format, where the R, G, and B range from 00 to ff, and the A (transparency) ranges from 00 (zero percent) to 64 (100 percent). The RGBA format complies with the color format generated in skins.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the navigationBarColor by using a FlexForm.   
+{% highlight VoltMx %}
+//Sample code to set the navigationBarColor by using a FlexForm.   
   
 myForm.navigationBarColor = "ffff0000";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android 5.0 and later versions.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[needAppMenu Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>needAppMenu Property</summary>
 
 * * *
 
 Specifies if the [application menu](App_Menu.html) items should be displayed as a part of the menu controls on the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 needAppMenu
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is true (Indicates that the application menu must be displayed). Falseindicates that the application menu must not be displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.needAppMenu = true;
+{% highlight VoltMx %}
+Form1.needAppMenu = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -2084,31 +2265,35 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[navigationDrawerListeners Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>navigationDrawerListeners Property</summary>
 
 * * *
 
 This property maps Navigation Drawer events to user defined handler functions.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 navigationDrawerListeners
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer). It is not available unless the FlexForm has been created from a template that supports the NavigationDrawer. The NavigationDrawer is based on the [Android native Navigation drawer](https://material.io/guidelines/patterns/navigation-drawer.html#). It is only supported on Android.
 
-Example
+### Example
 
-{% highlight voltMx %}// Mapping predefined callback functions to Navigation Drawer events
+{% highlight VoltMx %}
+// Mapping predefined callback functions to Navigation Drawer events
 Form1.navigationDrawerListerners = {
     onDrawerSlide: drawerSlideCallback,
     onDrawerOpened: drawerOpenedCallback,
@@ -2117,15 +2302,16 @@ Form1.navigationDrawerListerners = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[needsIndicatorDuringPostShow Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>needsIndicatorDuringPostShow Property</summary>
 
 * * *
 
@@ -2133,19 +2319,21 @@ Specifies if there must be an indication to the user that the form content is be
 
 You can use this property typically for forms that require network calls during post show.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 needsIndicatorDuringPostShow
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is true. If set to _false,_ the progress indicator is not displayed. If set to _true,_ the progress indicator is displayed.
 
@@ -2153,61 +2341,67 @@ The following image illustrates the loading indicator:
 
 ![Need Loading Indicator During Post Show](Resources/Images/Need_Loading_Indicator_During_Post_Show.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the needsIndicatorDuringPostShow property by using a FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the needsIndicatorDuringPostShow property by using a FlexForm.  
 myForm.needsIndicatorDuringPostShow=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[noCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>noCache Property</summary>
 
 * * *
 
 A web cache is a mechanism for the temporary storage (caching) of web documents, such as HTML pages and images, to reduce bandwidth usage, server load, and perceived lag. This property indicates that if the form is enabled for caching on the device browser.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 noCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is true. If set to _false_, appropriate Cache control headers are included in the HTTP response. If set to _true_, cache control headers are not included in the HTTP response.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the noCache property by using a FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the noCache property by using a FlexForm.  
 myForm.noCache=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Server side Mobile Web (basic)
 *   Server side Mobile Web (BJS)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>opacity Property</summary>
 
 * * *
 
@@ -2215,57 +2409,63 @@ Specifies the opacity of the widget. The value of this property must be in the r
 
 Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 opacity
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This property has more priority compared to the values coming from the configured skin.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
+{% highlight VoltMx %}
+//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
 
 //Sample code to make the widget opaque by using the opacity property.
 frmHome.widgetID.opacity = 1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE.
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[outTransitionConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>outTransitionConfig Property</summary>
 
 * * *
 
 Specifies the type of transition effect to be applied when the Form is going out of view. It accepts hash values.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 outTransitionConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the properties available for iPhone and iPad:
 
@@ -2360,13 +2560,13 @@ The below effects applicable to Android platform:
 10.  bottom-top style1 - The constant value is 9. It specifies that the form must _shrink_ from the bottom towards the top.
 11.  top down - The constant value is 10. It specifies that the form must _slide-in_ from the top and proceed towards the bottom.
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //sample code to set outTransitionConfig with the option top down.  
   
 frm.outTransitionConfig= { formAnimation: 10 };
 {% endhighlight %}
 
-Following are the properties available for Windows:
+### Following are the properties available for Windows:
 
 **transitionMode:** Specifies the direction from which the From is displayed. The available options are:
 
@@ -2386,7 +2586,7 @@ Following are the properties available for Windows:
 
 **transitionSpeed:** Specifies the speed at which the From is transitioned. The value must be specified in seconds.
 
-On SPA Platforms, **Transition** has the below options to set:
+### On SPA Platforms, **Transition** has the below options to set:
 
 1.  None- Use this option if you do not want to specify a transition direction.
 2.  Top Center - Specifies that the form must disappear from the top center.
@@ -2394,7 +2594,7 @@ On SPA Platforms, **Transition** has the below options to set:
 4.  Right Center - Specifies that the form must disappear from the right center.
 5.  Left Center - Specifies that the form must appear from the left center.
 
-Android-specific Constant
+### Android-specific Constant
 
 This constant provides the default activity for OUT Config transitions of FlexForms. This transition simulates native activity transitions.
 
@@ -2409,9 +2609,10 @@ The constant is available from V8 SP2 version onwards of Volt MX Iris.
     *   formobject.outTransitionConfig = {"formAnimation": 17};
     *   formobject.outTransitionConfig = {"formAnimation": constants.VOLTMX\_FORM\_DEFAULT\_ACTIVITY\_OUT};
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the outTransitionConfig property in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the outTransitionConfig property in a FlexForm.
 myForm.outTransitionConfig = {
  "transitionDirection": "fromRight",
  "transitionEffect": "none",
@@ -2425,105 +2626,116 @@ myForm.outTransitionConfig = {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-Available on all platforms except Windows.
+    Available on all platforms except Windows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pagingEnabled Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pagingEnabled Property</summary>
 
 * * *
 
 Specifies the whether the paging is enabled for the container. If this property is set to true, the scroll view stops on multiples of the scroll view's bounds when the user scrolls.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pagingEnabled
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable paging in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to enable paging in a FlexForm.
 myForm.pagingEnabled=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Helps you access the parent of the widget. If the widget is not part of the widget hierarchy, the parent property returns null.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 parent
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 > **_Note:_** The property works for all the widgets inside a FlexForm, FlexContainer or FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}function func() {
+{% highlight VoltMx %}
+function func() {
 
     voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[prefersStatusBarHidden Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>prefersStatusBarHidden Property</summary>
 
 * * *
 
 Specifies whether the status bar must be shown or not.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 prefersStatusBarHidden
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 > **_Note:_** This property can be set only during widget construction.
 
@@ -2531,20 +2743,22 @@ Remarks
 
 The default value for this property is false.
 
-Example
+### Example
 
-{% highlight voltMx %}voltmx.print("The parent of the widget is" + Form1.prefersStatusBarHidden);
+{% highlight VoltMx %}
+voltmx.print("The parent of the widget is" + Form1.prefersStatusBarHidden);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Not available in the IDE.
+### Not available in the IDE.
 
-This property is available on iOS platform.
+### This property is available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[requiresBottomSafeAreaInset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>requiresBottomSafeAreaInset Property</summary>
 
 * * *
 
@@ -2552,36 +2766,40 @@ This property helps you to implement the Safe Area Layout for iOS devices. speci
 
 To use this property, ensure that the [extendBottom](#extendBo) Property of the FlexForm is enabled.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 requiresBottomSafeAreaInset
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Yes
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
 When you set the requiresBottomSafeAreaInset Property to false, the FlexForm widget occupies the full screen at the bottom and overlaps the virtual home indicator. When this property is set to true, the FlexForm widget does not occupy the full screen and the content is seen only in the Safe Area of the device.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.requiresBottomSafeAreaInset = false;
+{% highlight VoltMx %}
+Form1.requiresBottomSafeAreaInset = false;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS (valid only for iPhone X device family)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[requiresLeftSafeAreaInset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>requiresLeftSafeAreaInset Property</summary>
 
 * * *
 
@@ -2589,36 +2807,40 @@ This property helps you to implement the Safe Area Layout for iOS devices, speci
 
 This property is applicable only when the device is in Landscape mode.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 requiresLeftSafeAreaInset
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Yes
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
 When you set the requiresLeftSafeAreaInset Property to false, the content of the FlexForm widget starts from (0,0) pixel. The content is overlapped by the navigation bar/notch of the phone. When you set this property to true, the FlexForm widget does not occupy the full screen and the content is seen only in the Safe Area of the device.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.requiresLeftSafeAreaInset = false;
+{% highlight VoltMx %}
+Form1.requiresLeftSafeAreaInset = false;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS (valid only for iPhone X device family)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[requiresRightSafeAreaInset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>requiresRightSafeAreaInset Property</summary>
 
 * * *
 
@@ -2626,36 +2848,40 @@ This property helps you to implement the Safe Area Layout for iOS devices, speci
 
 This property is applicable only when a device is in Landscape mode.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 requiresRightSafeAreaInset
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Yes
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
 When you set the requiresRightSafeAreaInset Property to false, the FlexForm widget occupies the full screen at the right/left part of the screen. When you set this property to true, the FlexForm widget does not occupy the full screen and the content is seen only in the Safe Area of the device.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.requiresRightSafeAreaInset = false;
+{% highlight VoltMx %}
+Form1.requiresRightSafeAreaInset = false;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS (valid only for iPhone X device family)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[requiresTopSafeAreaInset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>requiresTopSafeAreaInset Property</summary>
 
 * * *
 
@@ -2663,36 +2889,40 @@ This property helps you to implement the Safe Area Layout for iOS devices, speci
 
 To use this property, ensure that the [extendTop](#extendTo) Property of the FlexForm is enabled.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 requiresTopSafeAreaInset
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Yes
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
 When you set the requiresTopSafeAreaInset Property to false, the content of the FlexForm widget starts from (0,0) pixel. The content is overlapped by the navigation bar/notch of the phone. When you set this property to true, the FlexForm widget does not occupy the full screen and the content is seen only in the Safe Area of the device.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.requiresTopSafeAreaInset = false;
+{% highlight VoltMx %}
+Form1.requiresTopSafeAreaInset = false;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS (valid only for iPhone X device family)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -2700,9 +2930,10 @@ This property is used to retain the content alignment property value, as it was 
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2710,7 +2941,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -2725,21 +2956,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -2764,14 +2998,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -2779,9 +3014,10 @@ This property is used to retain flex positional property values as they were def
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2789,7 +3025,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -2804,21 +3040,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -2843,14 +3082,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -2858,9 +3098,10 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2868,7 +3109,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -2883,21 +3124,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -2923,69 +3167,76 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainScrollPosition Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainScrollPosition Property</summary>
 
 * * *
 
 Specifies if the Form must remember the scroll position when the user revisits the Form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainScrollPosition
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false. The Form does not remember the scroll position. If set to _true_, the scroll position of the Form is retained at the same location when the Form was last visited. If set to _false,_ the Form scroll position will be set to top.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the retainScrollPosition property in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the retainScrollPosition property in a FlexForm.
 myForm.retainScrollPosition=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-Available on all platforms.
+    Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollDirection Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollDirection Property</summary>
 
 * * *
 
 Specifies the direction in which the widget should scroll. This property is supported only when the scrollingEnabled property is set to true.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 scrollDirection
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is voltmx.flex.SCROLL\_HORIZONTAL.
 
@@ -2998,9 +3249,10 @@ The available options are:
 *   voltmx.flex.SCROLL\_BOTH: Specifies the form to scroll in both the horizontal and vertical directions.(default for CollectionView widget)
 *   voltmx.flex.SCROLL\_NONE: Specifies the form not to scroll in any direction.
 
-Example
+### Example
 
-{% highlight voltMx %}/*This property is applicable for FlexForm, CollectionView and FlexScrollContainer widgets.*/
+{% highlight VoltMx %}
+/*This property is applicable for FlexForm, CollectionView and FlexScrollContainer widgets.*/
 //Here, we have shown how to use the scrollDirection Property for FlexScrollContainer widget.
 /*You need to make a corresponding use of the 
 scrollDirection Property for other applicable widgets.*/  
@@ -3008,163 +3260,179 @@ scrollDirection Property for other applicable widgets.*/
 frmFlxScroll.myFlxScroll.scrollDirection=voltmx.flex.SCROLL_BOTH;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[secureData Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>secureData Property</summary>
 
 * * *
 
 Specifies if the browser must retain and use the information that you have filled in a form (for example, username and password) and use it during the _POST_ request made when you refresh the browser or use the backbutton on the browser.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 secureData
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 There is no default value for this property. The browser will retain data and use it during POST request.
 
 If you do not want the browser to use the information during the _POST_ request made when you refresh the browser or use the back button on the browser, select the checkbox.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the secureData property in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the secureData property in a FlexForm.
 myForm.secureData=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Server side Mobile Web (basic)
 *   Server side Mobile Web (BJS)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showActionBar Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showActionBar Property</summary>
 
 * * *
 
 Specifies if the action bar should be displayed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showActionBar
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true. If set to _true,_ the action bar is displayed. If set to _false,_ the action bar is not displayed.
 
 > **_Note:_** This property is displayed in the widget properties list only when you select SDK versions 3.0 and above in the Application Properties > Native > Android > SDK Versions section.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the showActionBar property in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the showActionBar property in a FlexForm.
 myForm.showActionBar=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-This property is available on Android/Android tablet only.
+### This property is available on Android/Android tablet only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showActionBarIcon Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showActionBarIcon Property</summary>
 
 * * *
 
 Specifies the icon to be displayed for the action bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showActionBarIcon
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true. If set to _true,_ the action bar icon is displayed. If set to _false,_ the action bar icon is not displayed.
 
 > **_Note:_** This property is displayed in the widget properties list only when you select SDK versions 3.0 and above in the Application Properties > Native > Android > SDK Versions section.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the showActionBarIcon property in a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the showActionBarIcon property in a FlexForm.
 myForm.showActionBarIcon=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-This property is available on Android/Android tablet only.
+    This property is available on Android/Android tablet only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin Property</summary>
 
 * * *
 
 Specifies a background skin for FlexScrollForm widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 skin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** Transparent skin is not supported on SPA (Windows) platform.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the skin property of a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the skin property of a FlexForm.
 myForm.skin="frmskn";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -3173,25 +3441,28 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[statusBarColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>statusBarColor Property</summary>
 
 * * *
 
 The statusBarColor property helps you set the color for a device's status bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 statusBarColor
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 When you set the status bar properties to a form (form level), the properties get applied only to that particular form in the visible region. When a user navigates to another form, the status bar may change based on the properties set to that form. Otherwise, the status bar behaves based on the properties set at the application level. If the status bar properties are not set at the form level and at the application level, the device’s default settings are applied to the status bar.
 
@@ -3199,66 +3470,74 @@ When you set the status bar properties to a form (form level), the properties ge
 
 You can define the status bar color in the RGBA format, where the R, G, and B range from 00 to ff, and the A (transparency) ranges from 00 (zero percent) to 64 (100 percent). The RGBA format complies with the color format generated in skins.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.statusBarColor = "ffff0000";
+{% highlight VoltMx %}
+Form1.statusBarColor = "ffff0000";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[statusBarForegroundColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>statusBarForegroundColor Property</summary>
 
 * * *
 
 The statusBarForegroundColor property helps you set the foreground color of the status bar, such as color for any text or icon on the status bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 statusBarForegroundColor
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.statusBarForegroundColor = "ff0000";
+{% highlight VoltMx %}
+Form1.statusBarForegroundColor = "ff0000";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[statusBarHidden Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>statusBarHidden Property</summary>
 
 * * *
 
 Lets you show or hide the status bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 statusBarHidden
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   true: hides the status bar
 *   false: shows the status bar
@@ -3281,12 +3560,13 @@ The following table provides the precedence levels when hidden status bar behavi
 
 > **_Note:_** Recommend you to use the systemUiConfig property at the form level to hide the status bar. Because the statusBarHidden Property has the least priority when both properties are set.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.statusBarHidden = true;
+{% highlight VoltMx %}
+Form1.statusBarHidden = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -3294,25 +3574,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[statusBarStyle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>statusBarStyle Property</summary>
 
 * * *
 
 The property helps you set a style for the status bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 statusBarStyle
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is constants.STATUS\_BAR\_STYLE\_DEFAULT.
 
@@ -3323,18 +3606,20 @@ The available options are:
 
 You can set a style for the status bar at the application level using the [setApplicationProperties]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.application_functions.html#voltmx.application.setApplicationProperties) API.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.statusBarStyle = constants.STATUS_BAR_STYLE_LIGHT_CONTENT;
+{% highlight VoltMx %}
+Form1.statusBarStyle = constants.STATUS_BAR_STYLE_LIGHT_CONTENT;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[submitSecure Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>submitSecure Property</summary>
 
 * * *
 
@@ -3342,19 +3627,21 @@ Specifies if the information must be sent using secure connection (https) or ins
 
 This property is useful in scenarios where you want the information sent to be secure. For example, credit card user credentials, transactions etc.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 submitSecure
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false. The checkbox is not selected and the information sent is not secure.
 
@@ -3362,41 +3649,45 @@ To send information securely, set the value to _true_ (select the checkbox).
 
 > **_Note:_** If you have marked a form to be submitted through a secure protocol, then the popup that is displayed on the form is also submitted through secured protocol.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the submitSecure property of a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the submitSecure property of a FlexForm.
 myForm.submitSecure=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Server side Mobile Web (basic)
 *   Server side Mobile Web (BJS)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[systemUiConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>systemUiConfig Property</summary>
 
 * * *
 
 Controls the behavior of the status and navigation bars.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 systemUiConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 You can set the property at the application level and at the form level. When you set the systemUiConfig property to a form (form level), the property gets applied only to that particular form in the visible region. When a user navigates to another form, the navigation and status bars behave based on the property value set to that form. If the value of the systemUiConfig property is null or invalid, the value set at the application level is applied. If the systemUiConfig property is set at both form level and application level, the property set at the form level overrides the property set at the application level. If the systemUiConfig property is not set at the form level and at the application level, Android’s default immersive mode settings are applied.
 
@@ -3444,14 +3735,15 @@ _IMMERSIVE\_STICKY\_HIDE\_SYSTEM\_BARS\_KEEP\_LAYOUT\_STABLE_: Hides the status 
 
 > **_Note:_** The systemUIConfig flag is cleared when you move the application to the background and then bring it back to the foreground. So, the status bar/navigation bar is displayed by default when you move the application back to the foreground.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the systemUiConfig property by using a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the systemUiConfig property by using a FlexForm.
 myForm.systemUiConfig=constants.IMMERSIVE_HIDE_NAVIGATION_BAR;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Dimming status and navigation bars is applicable from Android 4.0 and later versions
 *   Hiding the status bar is applicable from Android 4.1 and later versions
@@ -3460,34 +3752,38 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[title Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>title Property</summary>
 
 * * *
 
 Specifies the title of the FlexScrollForm.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 title
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the title property by using a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the title property by using a FlexForm.
 myForm.title="Hello World";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -3496,25 +3792,28 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[titleBar Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>titleBar Property</summary>
 
 * * *
 
 Specifies the title bar must be displayed on the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 titleBar
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The Mobile channels, the default value for this property is true.
 
@@ -3545,40 +3844,44 @@ Recommended image size for form title bar on iOS platform:
 
 > **_Note:_** For retina devices, it is must to provide retina images with @2x suffix.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the titleBar property by using a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the titleBar property by using a FlexForm.
 myForm.titleBar=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
 *   Windows
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[titleBarAttributes Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>titleBarAttributes Property</summary>
 
 * * *
 
 This property contains data that supports Application bar functionality in iOS.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 titleBarAttributes
+{% endhighlight %}
 
-Type
+### Type
 
 JavaScript object
 
-Read/Write
+### Read/Write
 
 Read/Write
 
-Remarks
+### Remarks
 
 If this property is set, then existing title bar properties and methods are ignored.
 
@@ -3602,9 +3905,10 @@ This attribute can be set to one or more of the following key-value pairs. Many 
 *   **rightBarButtonItems**: An array of objects of type BarButtonItem. rightBarButtonItems are placed right to left with the first item in the list at the right outside edge and right aligned.
 *   **leftItemsSupplementBackButton**: A boolean. If false the back button is not shown and the items in leftBarButtonItems replace it. If true, the leftBarButtonItems appear in addition to the back button. By default, the leftItemsSupplementBackButton property is false.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the titleBarAttributes property by using a FlexForm.  
+{% highlight VoltMx %}
+//Sample code to set the titleBarAttributes property by using a FlexForm.  
 var newAttributes = {
     "prompt": "",
     "tintColor": "FFFFFF00",
@@ -3622,33 +3926,36 @@ var newAttributes = {
 myForm.titleBarAttributes = newAttributes;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE
+### Available in the IDE
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[titleBarConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>titleBarConfig Property</summary>
 
 * * *
 
 Specifies the position of the title bar of the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 titleBarConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 To set the configuration for a platform, follow the below steps:
 
@@ -3678,18 +3985,19 @@ Following are the available options for Windows:
 
 You can set the skins for the above two options using the respective drop down box.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the titleBarConfig property by using a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the titleBarConfig property by using a FlexForm.
 myForm.titleBarConfig = {
  renderTitleText: "text"
 };  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE
+### Available in the IDE
 
 *   iPhone
 *   iPad
@@ -3698,71 +4006,79 @@ Available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[titleBarSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>titleBarSkin Property</summary>
 
 * * *
 
 Specifies the skin to be applied to the [titleBar](#titleBar) of the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 titleBarSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 There is no default value for this property.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the titleBarSkin property by using a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the titleBarSkin property by using a FlexForm.
 myForm.titleBarSkin = "titleBarSkin1";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iPhone
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transform Property</summary>
 
 * * *
 
 Contains an animation transformation that can be used to animate the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 transform
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi) function.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}//Animation sample
+{% highlight VoltMx %}
+//Animation sample
 var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
@@ -3770,44 +4086,48 @@ newTransform.translate3D(223, 12, 56);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[verticalScrollIndicator Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>verticalScrollIndicator Property</summary>
 
 * * *
 
 Specifies whether the scroll indicator must be shown or not in the vertical direction.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 verticalScrollIndicator
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** Scroll indicator may not by shown by default, but depending on the platform may appear during scrolling.
 
 The default value for this property is true.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.verticalScrollIndicator = true;
+{% highlight VoltMx %}
+Form1.verticalScrollIndicator = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   iOS
 *   Android
@@ -3816,7 +4136,8 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewConfig Property</summary>
 
 * * *
 
@@ -3828,19 +4149,21 @@ Possible values for Size Mode:
 *   constants.GRID\_TYPE\_GROW\_COLUMNS
 *   constants.GRID\_TYPE\_GROW\_ROWS
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 viewConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 > **_Note:_** For more information on applying the Grid layout please refer Volt MX Iris User Guide.
 
@@ -3857,9 +4180,10 @@ Possible value for Reference width and Height:
 
 Default application displays 0,you can give any number greater than 0 to get grid view type of a widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the viewConfig property by using a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the viewConfig property by using a FlexForm.
 myForm.viewConfig = {
  "referenceHeight": 40,
  "sizeMode": constants.GRID_TYPE_FIXED,
@@ -3868,33 +4192,36 @@ myForm.viewConfig = {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-Windows
+    Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[windowSoftInputMode Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>windowSoftInputMode Property</summary>
 
 * * *
 
 This property defines how the main Form interacts with the window containing the on-screen soft keyboard. It determines the adjustments made to the Form whether it is resized smaller to make room for the soft keyboard or whether its contents pan to make the current focus visible when part of the Form is covered by the soft keyboard.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 windowSoftInputMode
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is FORM\_ADJUST\_RESIZE.
 
@@ -3907,22 +4234,24 @@ The below image illustrates the above two options:
 
 ![](Resources/Images/windowsoftinput_resize_278x398.png)  ![](Resources/Images/windowsoftinput_pan_278x397.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the windowSoftInputMode property by using a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set the windowSoftInputMode property by using a FlexForm.
 myForm.windowSoftInputMode=constants.FORM_ADJUST_PAN;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-This property is available on Android/Android Tablet platform.
+    This property is available on Android/Android Tablet platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
@@ -3930,19 +4259,21 @@ This property specifies the stack order of a widget. A widget with a higher zInd
 
 The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
@@ -3962,64 +4293,74 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 **voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto  
  var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
   "zIndex": voltmx.flex.ZINDEX_AUTO
 });
 
-{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+{% endhighlight %}
+
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto
 flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}
+//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zoomScale Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zoomScale Property</summary>
 
 * * *
 
 Specifies the current scale factor applied to the form content.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 zoomScale
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zoomScale property by using a FlexForm as 22.
+{% highlight VoltMx %}
+//Sample code to set the zoomScale property by using a FlexForm as 22.
 myForm.zoomScale=22;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
-This property is available on the iOS platform.
+### This property is available on the iOS platform.
 
 * * *
+</details>
 

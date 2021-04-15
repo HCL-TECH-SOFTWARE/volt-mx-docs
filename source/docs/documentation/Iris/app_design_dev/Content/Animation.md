@@ -4,7 +4,7 @@ category: "app_design_dev"
 ---
                             
 
-Volt MX  Application Design and Development Guidelines: [Flex Layout Guidelines](Flex_Layout_Guidelines_Overview.html) > Flex Layout Animation
+Volt MX Application Design and Development Guidelines: [Flex Layout Guidelines](Flex_Layout_Guidelines_Overview.html) > Flex Layout Animation
 
 Widget Level Animation Using Flex Forms
 ---------------------------------------
@@ -37,7 +37,7 @@ Key frame animation can be defined dictionary of steps with each step configured
 
 > **_Note:_** If the animation definition does not follow the above syntax then animate API throws Invalid Animation Definition exception.
 
-{% highlight voltMx %}{  
+{% highlight VoltMx %}{  
          
 <step>: { 
  
@@ -94,14 +94,17 @@ This method applies the animation to the widget immediately, if the widget is pa
 
 All the animation callbacks will receive animate as a second parameter.
 
-Signature
+<b>Signature</b>
 
+{% highlight VoltMx %}
 animate(  
    animationObj,  
   animationConfig,  
    animationCallbacks)
+{% endhighlight %}
 
-Input Parameters
+
+<b>Input Parameters</b>
 
 animationObj
 
@@ -124,17 +127,17 @@ Optional. A dictionary represents JavaScript functions that work as animation ca
 > > > 
 > > > _elapsedTime:_ The amount of time the animation has been running in seconds, when this event is fired.
 
-Return Values
+<b>Return Values</b>
 
 Returns a handle to the animation, that is platform-defined object. This handle is of no use for now, but is returned for the future requirements such as cancellation of animations etc.
 
-Remarks
+<b>Remarks</b>
 
 This method throws Invalid Animation Definition Exception if animation definition, does not follow the dictionary structure expected. This method is ignored if this is called on widget whose immediate parent is not FlexForm, FlexContainer or FlexScrollContainer.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code of animation   
+{% highlight VoltMx %}//Sample code of animation   
   
 function AnimateBoth()
 {
@@ -151,7 +154,7 @@ function AnimateBoth()
 
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 *   iOS
 *   Android/Android Tablet
@@ -160,18 +163,21 @@ Availability
 
 This method creates an animation object that can be used to animate the widgets using animate API.
 
-Signature
+<b>Signature</b>
 
+{% highlight VoltMx %}
 voltmx.ui.createAnimation (  
    animationDef)
+{% endhighlight %}
 
-Input Parameters
+
+<b>Input Parameters</b>
 
 animationDef \[Number\]
 
 A sample animation definition.
 
-> {% highlight voltMx %}{
+> {% highlight VoltMx %}{
 >     <step>: {
 > 
 >         <widget_property>: <value>,
@@ -193,21 +199,21 @@ A sample animation definition.
 > 
 > {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 Values cannot be specified using pixels.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code of animation   
+{% highlight VoltMx %}//Sample code of animation   
   
 function myAnimDefinition()
 {
@@ -230,7 +236,7 @@ function myAnimDefinition()
 
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 *   iOS
 *   Android/Android Tablet
@@ -242,23 +248,25 @@ Availability
 
 Specifies the anchor point of the widget bounds rectangle using the widgets coordinate space. The possible values are dictionary with x,y as possible keys with the values as numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 anchorPoint
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Permissions
+<b>Permissions</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Availability
+<b>Availability</b>
 
 Not available in the IDE.
 
@@ -272,21 +280,23 @@ Not available in the IDE.
 
 This property is set to identify transform by default. Any transformations applied to the widget, occur relative to the widget anchor point. Values that can be set to this property must be created using voltmx.ui.makeAffineTransform.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 transform
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Permissions
+<b>Permissions</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code of animation 
+{% highlight VoltMx %}//Sample code of animation 
 function animDeftranslate() {
     var transformProp1 = voltmx.ui.makeAffineTransform();
     transformProp1.translate(100, 100);
@@ -320,7 +330,7 @@ Function getParent() {
 
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 Not available in the IDE.
 
@@ -334,29 +344,31 @@ Not available in the IDE.
 
 This method creates a 2D transform object. A 2D transform object can be used to scale, translate, and rotate the widgets in a two-dimensional space.
 
-Signature
+<b>Signature</b>
 
+{% highlight VoltMx %}
 voltmx.ui.makeAffineTransform( )
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Return Values
+<b>Return Values</b>
 
 It returns the identity transform.
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 Irrespective of the invocation order of operations, voltmx.ui.makeAffineTransform method applies the transform in the sequence of scale, translate, and rotate operations.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code of animation 
+{% highlight VoltMx %}//Sample code of animation 
 function animDeftranslate() {
     var transformProp1 = voltmx.ui.makeAffineTransform();
     transformProp1.translate(10, 10);
@@ -400,7 +412,7 @@ Function getParent() {
 
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 *   iOS
 *   Android/Android Tablet
@@ -412,25 +424,27 @@ Availability
 
 This method returns an affine transformation matrix constructed by rotating receivers affine transform. Angle is a number in degrees and always measured from x-axis as shown.
 
-Signature
+<b>Signature</b>
 
+{% highlight VoltMx %}
 rotate(angle)
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 angle \[Number\]
 
 A number represents the angle, in degrees, by which this matrix rotates the coordinate system axes. A positive value specifies counterclockwise rotation and a negative value specifies clockwise rotation.
 
-Return Values
+<b>Return Values</b>
 
 Returns an affine transformation matrix constructed by rotating receivers affine transform.
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 Default value is 0, if transform was never applied to the widget. The rotation does not result in any layout changes to parent or peer widgets. This is also applicable for widgets placed inside horizontal or vertical flex containers.
 
@@ -444,9 +458,9 @@ For example, if you want to rotate a widget in 360 degrees, you can follow the b
 
 Any value greater than 180 degrees may lead to shortest path rotation from its current position. For cross platform values, for example 190 degrees will make the object rotate -170 (190-360) in negative direction, as 170 is shortest path compared to 190.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code of animation 
+{% highlight VoltMx %}//Sample code of animation 
 function animDeftranslate() {
     var transformProp1 = voltmx.ui.makeAffineTransform();
     transformProp1.translate(100, 100);
@@ -478,7 +492,7 @@ Function getParent() {
 }
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 *   iOS
 *   Android/Android Tablet
@@ -490,15 +504,17 @@ Availability
 
 This method rotates the widget by angle on the unit directional vector formed by rx, ry, and rz.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 rotate3D(  
     angle,  
     rx,  
     ry,  
     rz)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 angle
 
@@ -516,7 +532,7 @@ rz
 
 Specify the z-axis value on which rotation to happen.
 
-Exceptions
+<b>Exceptions</b>
 
   
 | Error Code | Description |
@@ -524,7 +540,7 @@ Exceptions
 | 100 | Invalid input |
 | 101 | Incomplete input |
 
-Remarks
+<b>Remarks</b>
 
 The value of angle should be in degrees and the range should be in between 180o to -180o. Any value greater or lesser than range will result into platform-specific behavior. Positive values of angle will rotate the widget in anti-clockwise direction and vice versa.
 
@@ -534,14 +550,14 @@ In the Android platform, the values between 0 - 1 are not accepted. Only '0' or 
 
 All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
+{% highlight VoltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
 newTransform.rotate3D(45, 1,0,1); //rotates by 45degrees in x and z Axis.  
 widget.transform = newTransform;
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 Available in the IDE
 
@@ -556,13 +572,15 @@ SPA
 
 This method returns an affine transformation matrix constructed by scaling receivers affine transform. It is a JSObject with keys sx and sy and allow numbers only.
 
-Signature
+<b>Signature</b>
 
+{% highlight VoltMx %}
 scale (  
    sx,   
    sy)
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 sx \[Number\]
 
@@ -574,21 +592,21 @@ The factor by which to scale the y-axis of the widget coordinate system.
 
 Default values are {"sx":1, "sy":1}, if the transform was never applied to the widget.
 
-Return Values
+<b>Return Values</b>
 
 Returns an affine transformation matrix constructed by scaling receivers affine transform.
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 Scaling does not result in any layout changes to parent or peer widgets. This is applicable to the widgets placed inside horizontal or vertical flex containers. Negative values for sx and sy will make the widget flip in that direction.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code of animation 
+{% highlight VoltMx %}//Sample code of animation 
 function animDeftranslate() {
     var transformProp1 = voltmx.ui.makeAffineTransform();
     transformProp1.translate(100, 100);
@@ -620,7 +638,7 @@ Function getParent() {
 }
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 *   iOS
 *   Android/Android Tablet
@@ -632,14 +650,16 @@ Availability
 
 Scales a widget in three dimensions (x, y, z) coordinate system.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 scale3D(  
     sx,  
     sy,  
     sz)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 sx
 
@@ -653,7 +673,7 @@ sz
 
 Specify the value to be scaled in the z direction.
 
-Exceptions
+<b>Exceptions</b>
 
   
 | Error Code | Description |
@@ -661,21 +681,21 @@ Exceptions
 | 100 | Invalid input |
 | 101 | Incomplete input |
 
-Remarks
+<b>Remarks</b>
 
 The default values of the sx, sy, and sz directions are (1, 1, 1). Any value with in the 0 - 1 range scales down the widget and the value greater than '1' scales up in the specified directions. As all the widgets are not 3D meshes, this function may not be applicable for z-axis and may have platform-specific behavior. The scale3D method should not be applied on zero dimension widgets. If applied, the behavior is undefined.
 
 All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
+{% highlight VoltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
 newTransform.scale3D(2, 0.5, 1);  
 //scales by 200% in xDirection, 50% in yDirection and no scale happening in zDirection.  
 widget.transform = newTransform;
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 Available in the IDE
 
@@ -688,13 +708,16 @@ SPA
 
 This method returns an affine transformation matrix constructed by translating receivers affine transform. It is a JavaScript object with keys tx and ty and allow numbers in dp.
 
-Signature
+<b>Signature</b>
 
+{% highlight VoltMx %}
 translate (  
    tx,  
    ty)
+{% endhighlight %}
 
-Input Parameters
+
+<b>Input Parameters</b>
 
 tx \[Number\]
 
@@ -706,23 +729,23 @@ The factor by which to move the y-axis of the widget coordinate system.
 
 Default values are {"tx":0, "ty":0} if the transform was never applied to the widget.
 
-Return Values
+<b>Return Values</b>
 
 Returns an affine transformation matrix constructed by translating receivers affine transform.
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 Translate does not result in any layout changes to parent or peer widgets. This is applicable to the widgets placed inside horizontal or vertical flex containers.
 
 > **_Note:_** Values cannot be specified using percentage and pixels.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code of animation 
+{% highlight VoltMx %}//Sample code of animation 
 function animDeftranslate() {
     var transformProp1 = voltmx.ui.makeAffineTransform();
     transformProp1.translate(100, 100);
@@ -754,7 +777,7 @@ Function getParent() {
 }
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 *   iOS
 *   Android/Android Tablet
@@ -766,14 +789,16 @@ Availability
 
 Translate the widget from present location to new location by x, y, z amount.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 translate3D(  
     tx,  
     ty,  
     tz)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 tx
 
@@ -787,7 +812,7 @@ tz
 
 Specify the value to be moved in the z direction from present location.
 
-Exceptions
+<b>Exceptions</b>
 
   
 | Error Code | Description |
@@ -795,20 +820,20 @@ Exceptions
 | 100 | Invalid input |
 | 101 | Incomplete input |
 
-Remarks
+<b>Remarks</b>
 
 The values of tx, ty, and tz should be floating numbers. If the [setPerspective](#setPersp) method is not used, the widget moving in the z direction will not have any visual effect.
 
 All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
+{% highlight VoltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
 newTransform.translate3D(223,12,56); //translates by 223 xAxis,12 in yAxis,56 in zAxis  
 widget.transform = newTransform;
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 Available in the IDE
 
@@ -821,18 +846,20 @@ SPA
 
 This method sets the perspective and sets the vanishing point at the center of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 setPerspective(  
     distanceOfViewerToPlane)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 distanceOfViewerToPlane
 
 The distance between the viewer and object. Always the value of this parameter should be greater than zero. Otherwise results an exception 100.
 
-Exceptions
+<b>Exceptions</b>
 
   
 | Error Code | Description |
@@ -840,7 +867,7 @@ Exceptions
 | 100 | Invalid input |
 | 101 | Incomplete input |
 
-Remarks
+<b>Remarks</b>
 
 The perspective has to be set in combination with other transforms. The perspective set by itself will not have any effect. If perspective is set to transform in any key frame, the perspective will be applied to that particular key frame itself in the KeyFrameAnimation.
 
@@ -852,9 +879,9 @@ For the iOS platform, the value of the distanceOfViewerToPlane parameter should 
 
 All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
+{% highlight VoltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
 newTransform.setPerspective(1000.0);  
 //Sets the perspective as such this will have no effect until it is combined with other transformation matrix.  
 newTransform.rotate3D(45, 1,0,1);  
@@ -862,7 +889,7 @@ newTransform.rotate3D(45, 1,0,1);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Availability
+<b>Availability</b>
 
 Available in the IDE
 
@@ -879,19 +906,21 @@ Following widget skin properties can be animated: 
 
 Specifies the background color of the widget in hex format.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 backgroundColor
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Permissions
+<b>Permissions</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 There is no default value. It accepts 6 dig or 8 digit with alpha position are allowed. For example, ffffff or ffffff00.
 
@@ -901,7 +930,7 @@ When the 4-byte color format (RGBA) string is used, an alpha (A) value of FF spe
 
 > **_Note:_** Initial value of backgroundColor has to be specified explicitly. If not, platform will not deduce the values from the existing skin and will lead to undefined behavior.
 
-Availability
+<b>Availability</b>
 
 Not available in the IDE.
 
@@ -915,23 +944,25 @@ Not available in the IDE.
 
 Specifies the opacity of the widget. The value of this property must be in the range 0.0 (transparent) to 1.0 (opaque). Any values outside this range are fixed to the nearest minimum or maximum value.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 opacity
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Permissions
+<b>Permissions</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This property has more priority compared to the values coming from the configured skin.
 
-Availability
+<b>Availability</b>
 
 Not available in the IDE.
 
@@ -1029,9 +1060,9 @@ Following is the table showing the behavior of the animatable properties when qu
 
 > **_Note:_** This is overall animation level configuration and not the step level configuration. Values will be specified as string containing one of the above values and any other values would be ignored or may lead to undefined behavior.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function animConfig(){
+{% highlight VoltMx %}function animConfig(){
  var config = {
     "duration":1,
     "iterationCount":1,
@@ -1124,3 +1155,5 @@ Interacting with the widget during animation may also lead to undefined behavior
 As a guideline, developers must avoid writing code that changes the widget properties if they are being animated.
 
 > **_Note:_** For example, changing properties of the widget immediately after widget.animate() may lead to undefined behaviors. Ideally, any changes on the widget must happen after animation, in animationEnd() event.
+
+</details>

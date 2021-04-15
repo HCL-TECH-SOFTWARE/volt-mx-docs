@@ -15,7 +15,8 @@ Functions
 
 The voltmx.reactNative namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)voltmx.reactNative.setCallback](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.reactNative.setCallback</summary>
 
 * * *
 
@@ -23,15 +24,17 @@ This API registers a callback/listener for the incoming request from the React N
 
 > **_Note:_** Calling the voltmx.reactNative.setCallback API two or more times with different callbacks will override the previously set callback with the recent one.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.reactNative.setCallback(callback)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
-| callback | This parameter registers a function with the following signature. function callback(id,args){ ................ } |
+| callback | This parameter registers a function with the following signature. `function callback(id,args){ ................ }` |
 
  
 
@@ -41,12 +44,13 @@ The callback function does not have any return value and consists of the followi
 
 > **_Note:_** While using the voltmx.reactNative.sendResult API, you must pass the _id_ parameter to send the result to a particular request instance.
 
-*   **args:** Object with key-value pairs that is passed from the React Native app to the Volt MX Iris app based on the contract of the Volt MX Iris app.
+*   **args:** Object with key-value pairs that is passed from the React Native app to the VoltMX Iris app based on the contract of the VoltMX Iris app.
     
 
-Example
+### Example
 
-{% highlight voltMx %}function callback(id, args) {
+{% highlight VoltMx %}
+function callback(id, args) {
         ........
 
     if (args != null & amp; & amp; args["operation"] == "fetchAccounts") {
@@ -72,18 +76,20 @@ Example
 voltmx.reactNative.setCallback(callback);
 {% endhighlight %}
 
-Return Value
+### Return Value
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)voltmx.reactNative.sendResult](javascript:void(0);)
+</details>
+
+<details close markdown="block"><summary>voltmx.reactNative.sendResult</summary>
 
 * * *
 
@@ -91,37 +97,42 @@ This API is used to send a response (for the request) to the React Native app, i
 
 > **_Note:_** This API must be called only once per request to send the result or response. Calling this API more than once per request leads to no operation from the second instance onwards.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.reactNative.sendResult(id, resultData)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | id | Unique identifier of the React Native app (this parameter is received in the callback function of [voltmx.reactNative.setCallback API](#setCallback).) |
-| resultData | Object with key–value pair elements with key as String and value as JavaScript native data types, such as Number, Boolean, String, Array, and Object. > **_Note:_** The Volt MX Iris app must publish the keys of the resultData parameter, in order to predict the resultData value by the React Native app. |
+| resultData | Object with key–value pair elements with key as String and value as JavaScript native data types, such as Number, Boolean, String, Array, and Object.`**_Note:_** The VoltMX Iris app must publish the keys of the resultData parameter, in order to predict the resultData value by the React Native app.` |
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}var resultData = {
+{% highlight VoltMx %}
+var resultData = {
     status: "success",
     ...
 };
 voltmx.reactNative.sendResult(id, resultData);
 {% endhighlight %}
 
-Return Value
+### Return Value
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

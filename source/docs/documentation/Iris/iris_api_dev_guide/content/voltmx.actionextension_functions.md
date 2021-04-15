@@ -23,71 +23,81 @@ Properties
 
 The voltmx.actionExtensions Namespace provides the following properties.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.actionExtensions.view](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.actionExtensions.view</summary>
 
 * * *
 
 Holds the current extension view.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.actionExtensions.view;
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code  
+{% highlight VoltMx %}
+//Sample code  
 var myView = voltmx.actionExtensions.view;
 myView.addSubView(button);
 {% endhighlight %}
 
-Type
+### Type
 
 UIView
 
-Read/Write
+### Read/Write
 
 Read only.
 
-Platform Availability
+### Platform Availability
 
 iOS.
+
+</details>
 
 Functions
 ---------
 
 The voltmx.actionExtension namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.actionExtension.setExtensionsCallbacks](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.actionExtension.setExtensionsCallbacks</summary>
 
 * * *
 
 Sets an Action Extension with callbacks for app extension state changes.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.actionExtension.setExtensionsCallbacks(callbacks)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 callbacks
 
 Contains an object with key-value pairs where the key specifies the extension state and the value is a callback function. The following are the possible keys.
 
-> | Key | Description |
-> | --- | --- |
-> | beginRequestWithExtensionContext | The user has selected the action. |
-> | loadView | Loads a view that the controller manages. |
-> | viewDidAppear | A view was just displayed. |
-> | viewDidDisappear | A view just removed from the view hierarchy. |
-> | viewDidLoad | The view's controller was loaded into memory. |
-> | viewWillAppear | A view is about to be displayed. |
-> | viewWillDisappear | A view is about to be removed from the view hierarchy. |
-> 
->   
+ | Key | Description |
+ | --- | --- |
+ | beginRequestWithExtensionContext | The user has selected the action. |
+ | loadView | Loads a view that the controller manages. |
+ | viewDidAppear | A view was just displayed. |
+ | viewDidDisappear | A view just removed from the view hierarchy. |
+ | viewDidLoad | The view's controller was loaded into memory. |
+ | viewWillAppear | A view is about to be displayed. |
+ | viewWillDisappear | A view is about to be removed from the view hierarchy. |
+ 
+   
 
-Example: beginRequestWithExtensionContext
+### Example: beginRequestWithExtensionContext
 
-{% highlight voltMx %}function beginRequestWithExtensionContext(var ExtensionContext) {
+{% highlight VoltMx %}
+function beginRequestWithExtensionContext(var ExtensionContext) {
     // Native bindings code
 }
 voltmx.actionExtension.setExtensionsCallbacks({
@@ -95,9 +105,10 @@ voltmx.actionExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: loadView
+### Example: loadView
 
-{% highlight voltMx %}function loadView() {
+{% highlight VoltMx %}
+function loadView() {
     // Native Function API code
 }
 
@@ -106,9 +117,10 @@ voltmx.actionExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewDidAppear
+### Example: viewDidAppear
 
-{% highlight voltMx %}function viewDidAppear() {
+{% highlight VoltMx %}
+function viewDidAppear() {
     // Native Function API code
 }
 
@@ -117,9 +129,10 @@ voltmx.actionExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewDidLoad
+### Example: viewDidLoad
 
-{% highlight voltMx %}function viewDidLoad() {
+{% highlight VoltMx %}
+function viewDidLoad() {
     // Native Function API code
 }
 
@@ -128,9 +141,10 @@ voltmx.actionExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewDidDisappear
+### Example: viewDidDisappear
 
-{% highlight voltMx %}function viewDidDisappear() {
+{% highlight VoltMx %}
+function viewDidDisappear() {
     // Native Function API code
 }
 
@@ -139,9 +153,10 @@ voltmx.actionExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewWillAppear
+### Example: viewWillAppear
 
-{% highlight voltMx %}function viewWillAppear() {
+{% highlight VoltMx %}
+function viewWillAppear() {
     // Native Function API code
 }
 
@@ -150,9 +165,10 @@ voltmx.actionExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewWillDisappear
+### Example: viewWillDisappear
 
-{% highlight voltMx %}function viewWillDisappear() {
+{% highlight VoltMx %}
+function viewWillDisappear() {
     // Native Function API code
 }
 
@@ -161,14 +177,16 @@ voltmx.actionExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 iOS only
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

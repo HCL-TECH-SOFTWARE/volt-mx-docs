@@ -20,7 +20,7 @@ You can configure the attributes from an `IDENTITY` or `SESSION` scope by using 
 
 *   Click **Configure** under ****Process Incoming Payload**** of a in User task properties, in a workflow service. The **Process Incoming Payload** dialog box appears.
     
-    [![](Resources/Images/UserTaskOP1_thumb_0_48.png)](Resources/Images/UserTaskOP1.png)
+    ![](Resources/Images/UserTaskOP1_thumb_0_48.png)(Resources/Images/UserTaskOP1.png)
     
     1.  Specify a top-level key name in **FOUNDRY\_WORKFLOW\_CONTEXT** field. The top-level key stores data copied from output elements of the other namespaces.
     2.  Map parameters in the table to copy data from other namespaces. Individual elements of the output can be accessed by using a dot(.) notation with a key.

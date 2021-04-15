@@ -24,6 +24,6 @@ You can use Volt MX Iris to easily create applications across multiple channels:
 
 ![](Resources/Marketplace.png) [Browser Widget]({{ site.baseurl }}/docs/documentation/Iris/iris_tutorials/Content/Module/Browser.html)
 
-![](Resources/overview_video.png) [Using Sketch](https://youtu.be/eN4eIc13wt4)
+![](Resources/overview_video.png) [Using Sketch](https://youtu.be/CyYC3x0nzAg)
 
 ![](Resources/Marketplace.png) [Locale Based Output]({{ site.baseurl }}/docs/documentation/Iris/iris_tutorials/Content/Module/Locale based Layout.html)

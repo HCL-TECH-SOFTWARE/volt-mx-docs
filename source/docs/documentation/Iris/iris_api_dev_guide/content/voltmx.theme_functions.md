@@ -15,19 +15,19 @@ Functions
 
 The voltmx.theme namespace provides the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.theme.createTheme](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.theme.createTheme</summary>
 
 * * *
 
 This API enables you to create a theme.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.theme.createTheme([url](#url), [themeIdentifier](#themeIdentifier1), [onsuccesscallback](#onsuccesscallback1), [onerrorcallback](#onerrorcallback1))
+{% endhighlight %}
+### Input Parameters
 
-Input Parameters
-
-  
 | Parameter | Description |
 | --- | --- |
 | url \[String\] - Mandatory | Specifies a string (URL) from which the theme is to be downloaded. The theme is represented as a JSON object.> **_Note:_** If the JSON object contains invalid skin attributes, the platforms use the default attributes (platform specific and may vary from platform to platform). |
@@ -35,9 +35,10 @@ Input Parameters
 | onsuccesscallback \[Function\]-Mandatory | Specifies the callback function that needs to be executed in case of success. This callback function is executed after the theme is created. |
 | onerrorcallback \[Function\] - Mandatory | Specifies the callback function that needs to be executed in case of error. This callback function has the following signature:onerrorcallback (errorcode,errormessage)_errorcode_ - the error code thrown if there was a problem while creating the theme_errormessage_ - the error message that corresponds to the error code. |
 
-Example
+### Example
 
-{% highlight voltMx %}            function onsuccesscallback() {
+{% highlight VoltMx %}
+function onsuccesscallback() {
     alert("successfully set the theme to app");
 }
 
@@ -48,12 +49,12 @@ function onerrorcallback() {
 voltmx.theme.createTheme("", "Mytheme", onsuccesscreatecallback, onerrorcreatecallback);
 {% endhighlight %}
 
-Exceptions
+### Exceptions
 
 *   1900- SkinError. This error occurs when there is an error related to skin.
 *   Error - This error is thrown when there is a generic error.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -61,19 +62,20 @@ For SPA, Desktop Web, and Mobile Web ensure that the URL mentioned in the create
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.theme.createThemeFromJSONString](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.theme.createThemeFromJSONString</summary>
 
 * * *
 
 This API enables you to create or replace a JSON string theme in the current session.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.theme.createThemeFromJSONString([jsonString](#jsonString_), [themeIdentifier](#themeIdentifier_), [onsuccesscallback](#onsuccesscallback_), [onerrorcallback](#onerrorcallback_))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | jsonString \[String\] - Mandatory | A well-defined theme JSON string with which a theme is created. The theme is represented as a JSON object.You can use the jsonString parameter to set the required skin attributes for various properties that are applicable for Volt MX Iris Widgets. For instance, you can set values for properties that are applicable for several Volt MX Iris Widgets. These properties include background color, font weight, font size, border color, shadow, text shadow, and so on. > **_Note:_** For more information on what properties are applicable for each widget and what values you can specify for each property, refer to the **default.themes** file in the **build-> dist -> Project folder-> assets** path of Volt MX Iris. > **_Note:_** If the JSON object contains invalid skin attributes, the platforms use the default attributes (platform specific and may vary from platform to platform). |
@@ -88,11 +90,10 @@ As an example, here is a set of values that you can specify for the following ap
 
 <table style="width: 100%;"><colgroup><col style="width: 50%;"> <col style="width: 50%;"></colgroup><tbody><tr><td style="text-align: center;font-weight: bold;">Property</td><td style="text-align: center;font-weight: bold;">Value</td></tr><tr><td style="text-align: center;">"wtype"</td><td style="text-align: center;">"Button"</td></tr><tr><td style="text-align: center;">"bg_type"</td><td style="text-align: center;">"one"</td></tr><tr><td style="text-align: center;">"background_color"</td><td style="text-align: center;">"ff000000"</td></tr><tr><td style="text-align: center;">"font_weight"</td><td style="text-align: center;">"bold"</td></tr><tr><td style="text-align: center;">"font_size"</td><td style="text-align: center;">120</td></tr><tr><td style="text-align: center;">"font_color"</td><td style="text-align: center;">"314e8900"</td></tr><tr><td style="text-align: center;">"font_name"</td><td style="text-align: center;">"Arial-BoldMT"</td></tr><tr><td style="text-align: center;">"border_color"</td><td style="text-align: center;">"9f9f9f00"</td></tr><tr><td style="text-align: center;">"border_width"</td><td style="text-align: center;">1</td></tr><tr><td style="text-align: center;">"border_style"</td><td style="text-align: center;">"rc"</td></tr><tr><td style="text-align: center;">"shadow"</td><td style="text-align: center;">{"x":0,"y":0,"br":0,"color":"00000000","inner":false}</td></tr><tr><td style="text-align: center;">"text_shadow"</td><td style="text-align: center;">{"x":0,"y":0,"br":0,"color":"00000000"}</td></tr></tbody></table>
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}function testCreateThemeFromJSONString() {
+{% highlight VoltMx %}
+function testCreateThemeFromJSONString() {
     function onsuccesscallback() {
         voltmx.print("Successfully created theme.");
     }
@@ -112,18 +113,19 @@ Example
 }
 {% endhighlight %}
 
-Exceptions
+### Exceptions
 
 *   1900- SkinError. This error occurs when there is an error related to skin.
 *   Error - This error is thrown when there is a generic error.
 
-Platform Availability
+### Platform Availability
 
 Available on iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.theme.deleteTheme](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.theme.deleteTheme</summary>
 
 * * *
 
@@ -134,128 +136,136 @@ This API allows you to delete a specified theme in the application programmatica
 *   On all Platforms, pre-bundled themes in the application cannot be deleted, but only the themes created through createTheme API, which are in memory, can be deleted.
 *   On Windows Platforms, only the themes created using the createTheme API can be deleted. Pre-bundled themes and currently used theme cannot be deleted.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.theme.deleteTheme([themeidentifier](#themeidentifier3), [onsuccesscallback](#onsuccesscallback3), [onerrorcallback](#onerrorcallback3))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | themeidentifier \[String\] - Mandatory | Specifies a string that denotes the theme ID. The specified theme will be deleted from the application. |
 | onsuccesscallback \[Function\] - Mandatory | Specifies the callback function that needs to be executed in case of success. This callback function is executed after the theme is deleted. |
 | onerrorcallback \[Function\] - Mandatory | Specifies the callback function that needs to be executed in case of error. This callback function has the following signature:onerrorcallback (errorcode,errormessage)_errorcode_ - the error code thrown if there was a problem while creating the theme_errormessage_ - the error message that corresponds to the error code. |
 
-Example
+### Example
 
-{% highlight voltMx %}voltmx.theme.deleteTheme ("green");
+{% highlight VoltMx %}
+voltmx.theme.deleteTheme ("green");
 {% endhighlight %}
 
-Exceptions
+### Exceptions
 
 *   1900- SkinError. This error occurs when there is an error related to skin.
 *   Error - This error is thrown when there is a generic error.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Server side Mobile Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.theme.getAllThemes](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.theme.getAllThemes</summary>
 
 * * *
 
 This API returns all the themes available in the application.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.theme.getAllThemes()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var themes = voltmx.theme.getAllThemes();
+{% highlight VoltMx %}
+var themes = voltmx.theme.getAllThemes();
 alert("No Of themes are " + themes.length);
 {% endhighlight %}
 
-Return Values
-
+### Return Values
   
 | Return Value | Description |
 | --- | --- |
 | JavaScript: Array | Returns an array with a list of all theme Identifiers available in the application. |
 
-Exceptions
+### Exceptions
 
 *   1900- SkinError. This error occurs when there is an error related to skin.
 *   Error - This error is thrown when there is a generic error.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.theme.getCurrentTheme](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.theme.getCurrentTheme</summary>
 
 * * *
 
 This API returns the current theme that is applied to the application.
 
-Syntax
-
+## Syntax
+{% highlight VoltMx %}
 voltmx.theme.getCurrentTheme()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var crntTheme = voltmx.theme.getCurrentTheme();
+{% highlight VoltMx %}
+var crntTheme = voltmx.theme.getCurrentTheme();
 alert("current theme is:" + crntTheme+" And the type is " + typeof(crntTheme));
 {% endhighlight %}
 
-Return Values
+### Return Values
 
-  
 | Return Value | Description |
 | --- | --- |
 | themeID\[String\] | Returns the identifier of the current theme that is applied to the application |
 
-Exceptions
+### Exceptions
 
 *   1900- SkinError. This error occurs when there is an error related to skin.
 *   Error - This error is thrown when there is a generic error.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.theme.getCurrentThemeData](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.theme.getCurrentThemeData</summary>
 
 * * *
 
 This API returns the meta data of the current theme in the application.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.theme.getCurrentThemeData()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}function onsuccesscallback() {
+{% highlight VoltMx %}
+function onsuccesscallback() {
     voltmx.theme.setCurrentTheme("MyTheme1", onsuccesscallbacktheme1, onerrorcallbacktheme1);
     voltmx.print(voltmx.theme.getCurrentThemeData());
 }
@@ -276,19 +286,18 @@ function fun_createTheme_and_set() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
-  
 | Return Value | Description |
 | --- | --- |
 | metadata \[Object\] | Returns an object that contains the metadata of the current theme in the application. In each theme, you can store the metadata (additional key, values) relevant for the theme by using the standard "metadata" key and the same can be read programmatically by using voltmx.theme.getCurrentThemeData API. |
 
-Exceptions
+### Exceptions
 
 *   1900- SkinError. This error occurs when there is an error related to skin.
 *   Error - This error is thrown when there is a generic error.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA and Mobile Web.
 
@@ -296,32 +305,33 @@ For SPA, Desktop Web, and Mobile Web, this API will always return null. As theme
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.theme.isThemePresent](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.theme.isThemePresent</summary>
 
 * * *
 
 This API allows you to check the existence of specific theme in the application.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.theme.isThemePresent([themeidentifier](#themeidentifier2))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | themeidentifier \[String\] - Mandatory | Specifies a string that represents a theme. |
 
-Example
+### Example
 
-{% highlight voltMx %}var isThemePresent = voltmx.theme.isThemePresent("green");
+{% highlight VoltMx %}
+var isThemePresent = voltmx.theme.isThemePresent("green");
 alert("IS theme present ? True/False: " + isThemePresent);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
-  
 | Return Value | Description |
 | --- | --- |
 | status \[Boolean\] | Returns the status of the execution of this API.
@@ -329,39 +339,41 @@ Return Values
 
  |
 
-Exceptions
+### Exceptions
 
 *   1900- SkinError. This error occurs when there is an error related to skin.
 *   Error - This error is thrown when there is a generic error.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.theme.setCurrentTheme](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.theme.setCurrentTheme</summary>
 
 * * *
 
 This API allows you to apply a specified theme to the application at runtime.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.theme.setCurrentTheme ([themeidentifier](#themeidentifier), [onsuccesscallback](#onsuccesscallback), [onerrorcallback](#onerrorcallback))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | themeidentifier \[String\] - Mandatory | Specifies a string that denotes the theme ID. The specified theme is applied to the application. |
 | onsuccesscallback \[Function\] - Mandatory | Specifies the callback function that needs to be executed in case of success. This callback function is executed after applying the specified theme. |
 | onerrorcallback \[Function\] - Mandatory | Specifies the callback function that needs to be executed in case of error. This callback function has the following parameters:_errorcode_ - the error code thrown if there was a problem while applying the specified theme_errormessage_ - the error message that corresponds to the error code.This callback function is executed if there is an error while applying the specified theme. |
 
-Example
+### Example
 
-{% highlight voltMx %}function onsuccesscallback() {
+{% highlight VoltMx %}
+function onsuccesscallback() {
     alert("successfully set the theme to app");
 }
 
@@ -371,18 +383,19 @@ function onerrorcallback(1900, "Skin Error") {
 voltmx.theme.setCurrentTheme("red", onsuccesscallback, onerrorcallback);
 {% endhighlight %}
 
-Exceptions
+### Exceptions
 
 *   1900- SkinError. This error occurs when there is an error related to skin.
 *   Error - This error is thrown when there is a generic error.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.theme.setSkinsProperties](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.theme.setSkinsProperties</summary>
 
 * * *
 
@@ -390,19 +403,18 @@ This API allows you to modify the skin properties of a Skin Object at run time. 
 
 You can also modify the properties for multiple skin objects.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.theme.setSkinsProperties({“skinName”: propertiesObject},...);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | skinName \[String\] | A string that specifies the name of the skin for which the properties are to be changed. The skin must already be present in the current theme, and must be defined. > **_Note:_** If the specified skin is not present in the current theme, the skin properties will not be updated. |
 | propertiesObject \[JSON Object\] | A JSON Object with key-value pair attributes. The keys are the names of pre-defined properties of the Skin. You can set the key-value pair attributes for the following Skin properties: [background](#Background) [border](#Border) [fonts](#Fonts) [shadow](#Shadow) [textShadow](#TextShadow) |
 
- 
 
 background \[JSON Object\]
 
@@ -508,11 +520,11 @@ The Text Shadow parameter contains the key-value pair attributes of the properti
  |
 | textShadowOffset \[JSON Object\] | A JSON Object that specifies the offset value for the text shadow. The JSON Object contains the X-coordinate and Y-coordinates for the offset.The values for the X and Y coordinates must be provided in the following format:`{x: Number value in px, y: Number value in px}` |
 
- 
 
-Example 1
+### Example 1
 
-{% highlight voltMx %}var skinPropertiesObj = {  
+{% highlight VoltMx %}
+var skinPropertiesObj = {  
     background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -555,7 +567,8 @@ voltmx.theme.setSkinsProperties({“blueSkinWithBorder”:skinPropertiesObj});
 
 Example 2
 
-{% highlight voltMx %}var skinPropertiesObj1 = {  
+{% highlight VoltMx %}
+var skinPropertiesObj1 = {  
     background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -635,17 +648,17 @@ var skinPropertiesObj2 = {
 voltmx.theme.setSkinsProperties({“blueSkinWithBorder”:skinPropertiesObj1, "redSkinWithBorder":skinPropertiesObj2});
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 *   Ensure that you provide appropriate values for all the properties and keys. If you provide invalid values, the properties will not be updated.
 *   Using this API affects the performance of the app.
 *   When you invoke this API in an Android or iOS app, the Form is refreshed for the changes to reflect on the canvas.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS

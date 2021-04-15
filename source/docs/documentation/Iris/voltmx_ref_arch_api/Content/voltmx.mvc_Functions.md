@@ -19,28 +19,31 @@ The `voltmx.mvc namespace` contains the following function.
 
 Creates an instance of the Navigation object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.mvc.Navigation(  
     friendlyName);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _friendlyName_
 
 The friendly name of the form that the [Navigation](Navigation_Object.html) object is to be created for.
 
-Return Values
+### Return Values
 
 Returns a Navigation object on success, or `null` on failure.
 
-Remarks
+### Remarks
 
 A form can have multiple `Navigation` objects, so it is possible for an app to call this function multiple times on a form.
 
-Example
+### Example
 
-{% highlight voltMx %}var Navigation = new voltmx.mvc.Navigation("FormFriendlyName");
+{% highlight VoltMx %}
+var Navigation = new voltmx.mvc.Navigation("FormFriendlyName");
 {% endhighlight %}
 
 * * *

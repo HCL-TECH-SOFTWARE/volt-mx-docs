@@ -27,7 +27,7 @@ Button widget is employed in many scenarios where the user performs an on-click 
 *   **Perform Animations:** You can animate other widgets to move, rotate or scale using a button widget. The most common use case for this is the Hamburger menu. You can click on a hamburger menu to move a container which is not in the device frame to the visible area.
     
 
-Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Iris_User_Guide.html).
+Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 For general information on the Button widget see the [Button]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Button.html) topic in the Volt MX Iris User Guide.
 

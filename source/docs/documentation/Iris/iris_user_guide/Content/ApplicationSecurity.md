@@ -37,7 +37,7 @@ Build Runtime Security in the Application
 You can build runtime security in your application using the following Volt MX Iris features and API's: 
 
 *   Data can be encrypted using [Cryptography APIs]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/cryptography.html).
-*   Offline data can be encrypted and stored in [SQL Database Encryption APIs]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/dataaccessapi.html).
+*   Offline data can be encrypted and stored in [SQL Database Encryption APIs]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/data_store_library.html).
 *   Network communications can be secured using **[Two-way SSL/Mutual Authentication]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/client-authentication.html) (SSL Pinning + Client Authentication)** which defends against man-in-the-middle attacks by authenticating both the client and server to each other.
     *   **SSL Pinning** - This extra feature authenticates the server to which the application is communicating. For more information, see Allow Self-Signed Certificates ([Android](Native_App_Properties.html#AllowSelfSignedCertis), [iOS](Native_App_Properties.html#SelfSignedCerti_iOS)).
     *   **Client Authentication** - This extra security feature uses a certificate to authenticate a client to a server.

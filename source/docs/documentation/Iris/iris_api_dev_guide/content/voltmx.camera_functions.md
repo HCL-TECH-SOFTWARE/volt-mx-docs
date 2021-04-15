@@ -15,29 +15,30 @@ Functions
 
 The voltmx.camera namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.camera.releaseRawBytes](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.camera.releaseRawBytes</summary>
 
 * * *
 
 This function enables your app to delete rawbytes for the image.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.camera.releaseRawBytes(  
     rawBytes)
+{% endhighlight %}
 
-Input Parameters
-
-  
+### Input Parameters
+ 
 | Parameter | Description |
 | --- | --- |
 | rawBytes | A JavaScript objects that specifies the rawbytes of the image (captured from the camera) you want to release. This can be a [voltmx.types.RawBytes](voltmx.types_objects_rawbytes.html) object or an [Image](image_object.html) object. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}var cameraBytes = this.view.camera3.rawBytes;
+{% highlight VoltMx %}
+var cameraBytes = this.view.camera3.rawBytes;
 voltmx.camera.releaseRawBytes(cameraBytes);
 if (this.view.camera3.rawBytes == null) {
     alert("The rawbytes are released");
@@ -46,11 +47,11 @@ if (this.view.camera3.rawBytes == null) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 Apps typically call this function to ensure that the data from captured images does not overwhelm the device's memory capacity, causing the app to slow down or crash.
 
@@ -63,7 +64,7 @@ If you assign a handle to new rawbytes without releasing the rawbytes that the h
 > *   Initialize the rawbytes handle to null before use.
 > *   Before assigning the rawbytes, ensure that the rawbytes handle is null.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -71,5 +72,7 @@ Platform Availability
 *   DesktopWeb/ResponsiveWeb
 
 * * *
+</details>
 
 ![](resources/prettify/onload.png)
+

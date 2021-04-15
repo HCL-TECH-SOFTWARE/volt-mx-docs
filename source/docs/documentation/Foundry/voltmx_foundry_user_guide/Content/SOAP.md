@@ -24,45 +24,46 @@ To configure a SOAP service in [Integration service definition](ConfigureIntegra
     
 3.  Provide the following details to create a SOAP service.
     
-    | Fields | Description |
-    | --- | --- |
-    | Version | Specify the version number for the service. |
-    | Base URL | Type the URL. |
-    | Choose WSDL Specification | 
-     [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif) Select the option to specify the WSDL (Web Service Definition Language) URL or upload the WSDL / ZIP fil](javascript:void(0);)e.
+| Fields | Description |
+| --- | --- |
+| Version | Specify the version number for the service. |
+| Base URL | Type the URL. |
+| Identity Service for Backend Token | Select the Identity service associated with your app if this service needs backend token like access\_token from that Identity service to access the backend server. |
+     
+<details close markdown="block"><summary> Select the option to specify the WSDL (Web Service Definition Language) URL or upload the WSDL / ZIP file.</summary>e.
     
-    Click **Specify WSDL URL**and type the WSDL URL.> **_Important:_** In case, if you are unable to read metadata from an integration service (for example, SOAP) that is protected by an SSL certificate, enable the integration service by following one of the ways:- Download the WSDL file from the https WSDL URL and upload the WSDL file on Volt MX Foundry console. - Importing the SSL into your cacerts in your Volt MX Foundry install location. For more details, refer to [FAQs.](Appendix_-_FAQs.html#SOAPWSDL)Click **Upload WSDL** **/ ZIP** **File** and follow these steps to upload your WSDL / ZIP file. The ZIP file that refers to local XSD files.Click **Up**load WSDL**** ****/** **ZIP**** ****File**** button. Navigate to the WSDL or ZIP file from your local system and click **Open**.![](Resources/Images/SOAPWSDLZIPFile_330x110.png)The selected WSDL or ZIP file gets uploaded.
+Click **Specify WSDL URL** and type the WSDL URL.
+
+> **_Important:_** In case, if you are unable to read metadata from an integration service (for example, SOAP) that is protected by an SSL certificate, enable the integration service by following one of the ways:- Download the WSDL file from the https WSDL URL and upload the WSDL file on Volt MX Foundry console. - Importing the SSL into your cacerts in your Volt MX Foundry install location. For more details, refer to [FAQs.](Appendix_-_FAQs.html#SOAPWSDL)Click **Upload WSDL** **/ ZIP** **File** and follow these steps to upload your WSDL / ZIP file. The ZIP file that refers to local XSD files.Click **Up**load WSDL**** ****/** **ZIP**** ****File**** button. Navigate to the WSDL or ZIP file from your local system and click **Open**.![](Resources/Images/SOAPWSDLZIPFile_330x110.png)
+
+> The selected WSDL or ZIP file gets uploaded.
+
+</details>
+
+<details close markdown="block"><summary>Select one of the following modes:</summary>
     
-    
-    
-     |
-    | Web Service Authentication | 
-    
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select one of the following modes:](javascript:void(0);)
-    
-    **None**: Select this option if you do not want to provide any authentication for the service.**Basic**: Provide User ID and Password if the external Web service requires a form or basic authentication.**NTLM**: Your service follows the NT LAN Manager authentication process. You are required to provide the User ID, Password, NTLM Host, and NTLM Domain.
-    
-    
-    
-     |
-    | Identity Service for Backend Token | Select the Identity service associated with your app if this service needs backend token like access\_token from that Identity service to access the backend server. |
-    
-4.  [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)For additional configuration of your service definition, provide the following details in the **Advanced** section.](javascript:void(0);) 
-    
+**None**: Select this option if you do not want to provide any authentication for the service.
+**Basic**: Provide User ID and Password if the external Web service requires a form or basic authentication.
+**NTLM**: Your service follows the NT LAN Manager authentication process. You are required to provide the User ID, Password, NTLM Host, and NTLM Domain.
+
+</details>
+
+1. <details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the **Advanced** section.</summary> 
       
-    | Field | Description |
-    | --- | --- |
-    | Custom code | To specify a JAR associated to the service, select one from the **Select Existing JAR** drop-down menu or click **Upload New** to add a new JAR file. Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration. You can download the uploaded jars to your local system. |
-    | API Throttling | If you want to use **API throttling** in Volt MX Foundry Console, to limit the number of request calls within a minute. do the following:
-    In the **Total Rate Limit** text box, enter a required value. This will limit the total number of requests processed by this API.In the **Rate Limit Per IP** field, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.
+| Field | Description |
+| --- | --- |
+| Custom code | To specify a JAR associated to the service, select one from the **Select Existing JAR** drop-down menu or click **Upload New** to add a new JAR file. Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration. You can download the uploaded jars to your local system. |
+| API Throttling | If you want to use **API throttling** in Volt MX Foundry Console, to limit the number of request calls within a minute. do the following:
+In the **Total Rate Limit** text box, enter a required value. This will limit the total number of requests processed by this API.In the **Rate Limit Per IP** field, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.
+To override throttling from Volt MX Foundry App Services Console, refer to [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). |
+| URL Provider Class | Enter the qualified name of the URL Provider Class. For more information, refer [URL Provider Support for XML, JSON, SOAP, and API Proxy](URL_Provider_Support_for_XML__JSON__SOAP_and_API_Proxy.html). |
+
+</details>
+
+> **_Note:_** All options in the Advanced section are optional.
     
-    To override throttling from Volt MX Foundry App Services Console, refer to [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). |
-    | URL Provider Class | Enter the qualified name of the URL Provider Class. For more information, refer [URL Provider Support for XML, JSON, SOAP, and API Proxy](URL_Provider_Support_for_XML__JSON__SOAP_and_API_Proxy.html). |
-    
-    > **_Note:_** All options in the Advanced section are optional.
-    
-5.  Enter the **Description** for the service.
-6.  Click **SAVE** to save your service definition.
+5. Enter the **Description** for the service.
+6. Click **SAVE** to save your service definition.
 
 ### Create Operations for SOAP
 
@@ -76,11 +77,13 @@ The **Operation List** tab appears when you click **Add Operation** in the **Ser
                         OR  
     Click **Add Operation** to add a new operation or from the tree in the left pane, click **Add > Add New Operation**.
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click to View image](javascript:void(0);)
+
+<details close markdown="block"><summary>Click to View image</summary>
     
     ![](Resources/Images/MuleSoftAddOps_549x351.png)
     
     > **_Note:_** To use an existing integration service, refer to [How to Use an Existing Integration Service](Manage_Existing_Integration_Services_1.html#how-to-use-an-existing-integration-service).
+</details>
     
 2.  In **Operations List** tab, click **Operation Name** list box and select one or more **Operations**.
 3.  Click **Add Operation**. The selected operations appears under **Configured Operations** list.
@@ -90,14 +93,17 @@ The **Operation List** tab appears when you click **Add Operation** in the **Ser
 4.  Click the operation name under **Configured Operations**. The operation details page appears.
 5.  Type the following fields to create an operation
     
-    | Field | Description |
-    | --- | --- |
-    | Name | The operation name appears in the Name field. You can modify the name, if required. |
-    | Operation Security Level | It specifies how a client must authenticate to invoke this operation.
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select one of the following security operations in the **Operation Security Level** field.](javascript:void(0);)
+| Field | Description |
+| --- | --- |
+| Name | The operation name appears in the Name field. You can modify the name, if required. |
+| Operation Security Level | It specifies how a client must authenticate to invoke this operation. |
+| Target URL | The **Target URL** field is pre-populated with the URL. You can add the suffix, if required.http://baseurl.com/suffixFor Example, to the base URL, you can add suffix such as `/latest`  or `/sports` to get latest news or sports news:``http://feeds.foxnews.com/foxnews`/latest` ````http://feeds.foxnews.com/foxnews`/sports` `` |
+
+<details close markdown="block"><summary>Select one of the following security operations in the **Operation Security Level** field.</summary>
     
     **Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.**Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.**Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.
     
+</details>
     > **_Note:_** The field is set to Authenticated App User, by default. |
     | Target URL | The **Target URL** field is pre-populated with the URL. You can add the suffix, if required.http://baseurl.com/suffixFor Example, to the base URL, you can add suffix such as `/latest`  or `/sports` to get latest news or sports news:``http://feeds.foxnews.com/foxnews`/latest` ````http://feeds.foxnews.com/foxnews`/sports` `` |
     
@@ -129,8 +135,7 @@ You can perform the following actions in **Request Input** tab:
         | --- | --- |
         | Name | Enter the name for the request input parameter. |
         | Value | Three different options are available in Volt MX Foundry under **VALUE** during configuration of any operation. When you start editing this field, dependent identity services are auto populated. These options primarily determine the source of the value of the header**.**
-        [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select request or session or Identity.](javascript:void(0);)
-        
+        Select request or session or Identity        
         **Request**: If this option is selected, the Integration Server picks the value pairs from the client's request during run time and forwards the same to the back-end.User has the option to configure the default value. This default value is taken if the request does not have the header.**Session**: If this option is selected, the value of header is picked from session context based on the user configuration.**Identity**: If this option is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html).
         
         > **_Note:_** The field is set to **Request**, by default. |
@@ -153,7 +158,7 @@ You can perform the following actions in **Request Input** tab:
         | --- | --- |
         | Name | Provide custom HTTP headers required by the external source. |
         | Value | Three different options are available in Volt MX Foundry under **VALUE** during configuration of any operation. When you start editing this field, dependent identity services are auto populated. These options primarily determine the source of the value of the header**.**
-        [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select request or session or Identity.](javascript:void(0);)
+        Select request or session or Identity.
         
         **Request**: If this option is selected, the Integration Server picks the value pairs from the client's request during run time and forwards the same to the back-end.User has the option to configure the default value. This default value is taken if the request does not have the header.**Session**: If this option is selected, the value of header is picked from session context based on the user configuration.**Identity**: If this option is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html).
         

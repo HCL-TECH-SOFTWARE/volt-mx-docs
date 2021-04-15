@@ -12,7 +12,8 @@ voltmx.model Constants
 
 The voltmx.model namespace provides the following constants.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.model.ExceptionCode Constants](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.model.ExceptionCode Constants</summary> 
 
 * * *
 
@@ -34,7 +35,8 @@ Specifies the error code that occurred for the exception.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.model.ValidationType Constants](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.model.ValidationType Constants</summary> 
 
 * * *
 
@@ -47,3 +49,5 @@ Specifies the type of validation to be performed.
 | voltmx.model.constants.ValidationType.UPDATE | The operation updates a record in the backend data source. |
 
 * * *
+
+</details>

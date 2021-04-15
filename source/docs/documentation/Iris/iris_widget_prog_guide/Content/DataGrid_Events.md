@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                               
-
 
 DataGrid Events
 ===============
@@ -12,7 +10,7 @@ DataGrid has the following event associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
@@ -20,21 +18,24 @@ This event is invoked for every widget when the widget position and dimensions a
 
 This event is used to set the layout properties of child widgets in the relation to self and peer widgets whose layout is not yet performed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}
+//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -44,7 +45,7 @@ function doLayoutButton1(){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -53,23 +54,27 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onRowSelected Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onRowSelected Event</summary>
 
 * * *
 
 An event callback that is invoked by the platform when a row is selected.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onRowSelected()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onRowSelected event callback for a DataGrid widget.
+{% highlight VoltMx %}
+//Sample code to set onRowSelected event callback for a DataGrid widget.
 
 frmDataGrid.myDataGrid.onRowSelected=onRowSelectedCalBck;
 
@@ -79,7 +84,7 @@ function onRowSelectedCalBck(dGrid){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -87,23 +92,27 @@ Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onScrollWidgetPosition()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}
+var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -117,24 +126,27 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not Accessible from IDE
 *   Android, iOS, SPA, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touch is released from the touch surface.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchEnd ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -154,17 +166,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchEndCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -173,23 +186,26 @@ Example
 Form1.widget1.onTouchEnd = onTouchEndCallback;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchMove Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchMove Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the touch moves on the touch surface continuously until movement ends.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchMove ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -209,17 +225,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchMoveCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -228,23 +245,26 @@ Example
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touches the touch surface.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchStart ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -264,17 +284,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchStartCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -284,9 +305,10 @@ Form1.widget1.onTouchStart = onTouchStartCallback;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
+</details>
 

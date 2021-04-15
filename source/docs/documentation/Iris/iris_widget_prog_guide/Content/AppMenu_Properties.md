@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                                
-
 
 App Menu Properties
 ===================
@@ -12,28 +10,31 @@ The properties for the App Menu are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Appbar Button Style Property](javascript:void(0);)
+<details close markdown="block"><summary>Appbar Button Style Property</summary>
 
 * * *
 
 Specifies the button style for application bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 style
+{% endhighlight %}
 
-Remarks
+### Remarks
 
 Styles include play button style and pause button style.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
@@ -41,19 +42,21 @@ The `enable` property is used to control the actionability of the widgets. In a 
 
 This is a constructor level property and applicable for all widgets in Volt MX Iris.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
@@ -61,37 +64,38 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}
+//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
   
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
- 
+* * *
+
+</details>
+<details close markdown="block"><summary>Event Property</summary>
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Event Property](javascript:void(0);)
+Specifies the event for the App Menu item. For more information, see _Volt MX Iris User Guide_.
 
-* * *
-
-Specifies the event for the App Menu item. For more information, see _VoltMX Iris User Guide_.
-
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[focusSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>focusSkin Property</summary>
 
 * * *
 
@@ -99,71 +103,76 @@ Specifies the look and feel when there is focus on the App Menu.
 
 **Syntax**
 
+{% highlight VoltMx %}
 focusSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 For iPhone and Android, you cannot set a focus skin for the default App Menu items.
 
-Example
+### Example
 
-{% highlight voltMx %}frm1.appMenu1.focusSkin=skin1;
+{% highlight VoltMx %}
+frm1.appMenu1.focusSkin=skin1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[i18n Key Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>i18n Key Property</summary>
 
 * * *
 
 Specifies the i18n Key to be used for internationalization.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 When an application supports more than one locale and you require different text for a different locale, you have to destroy the form before locale change. Even if the forms are destroyed, the App Menu still remains in the old locale. To overcome this behavior, you have to re-create the App menu every time locale is changed. To recreate the App menu, use the createAppMenu method.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Icon Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Icon Property</summary>
 
 * * *
 
 Specifies the image to be displayed for the App Menu item.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -171,26 +180,28 @@ Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 A unique identifier of App Menu consisting of alpha numeric characters.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Position Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Position Property</summary>
 
 * * *
 
 Specifies the position of the button for application bar.
 
-Remarks
+### Remarks
 
 Following are the available options:
 
@@ -199,28 +210,29 @@ Following are the available options:
 *   TOP\_LEFT
 *   TOP\_RIGHT
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Render Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Render Property</summary>
 
 * * *
 
 Specifies if the widget code must be included in the platform when the code is generated.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 You can use the _Render_ property to specify the platforms on which the widget will not be available.
 
@@ -234,14 +246,15 @@ Unlike the _Visible_ property, the _Render_ property does not include the widget
 
 When two widgets are placed side by side in an HBox, and you exclude one widget from code generation, the widget which is rendered respects its container weight and does not expand. However, on _Mobile Web advanced platform_, due to the browser behavior, the widget which is rendered does not respect the container weight and expands to occupy the available width.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -249,9 +262,10 @@ This property is used to retain the content alignment property value, as it was 
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -259,7 +273,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -274,21 +288,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -313,14 +330,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -328,9 +346,10 @@ This property is used to retain flex positional property values as they were def
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -338,7 +357,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -353,21 +372,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -392,14 +414,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -407,9 +430,10 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -417,7 +441,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -432,21 +456,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -472,57 +499,60 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin Property</summary>
 
 * * *
 
 Specifies the look and feel of the App Menu.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 For iPhone and Android, you cannot set a skin for the default App Menu items.
 
 In iOS 7 and 7.1, App Menu supports only single color. If the color is not specified, by default, native color (transparent) is applied to iOS 7 and cyan color is applied to iOS 7.1.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[title Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>title Property</summary>
 
 * * *
 
 Specifies a general or descriptive text for App Menu.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
+</details>
 

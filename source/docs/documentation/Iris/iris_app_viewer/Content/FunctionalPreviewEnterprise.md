@@ -132,7 +132,7 @@ To install the Volt MX App, follow these steps:
 Generate a Preview of the App
 -----------------------------
 
-You must have Volt MX Foundry configured for Enterprise. This procedure assumes that you have already created and published a Volt MX Foundry app and have bound your client app to it. These details are covered in [Publish a Project to Volt MX Foundry]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/PublishMobileFoundryServicesApp.html).
+You must have Volt MX Foundry configured for Enterprise. This procedure assumes that you have already created and published a Volt MX Foundry app and have bound your client app to it. These details are covered in [Publish a Project to Volt MX Foundry]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/PublishVoltMXFoundryServicesApp.html).
 
 From V8 SP4 onwards, to create a prototype viewable on the Volt MX App:
 

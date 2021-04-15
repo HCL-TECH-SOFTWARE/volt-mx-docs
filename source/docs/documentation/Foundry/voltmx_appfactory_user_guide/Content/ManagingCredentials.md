@@ -12,28 +12,28 @@ The following sections explain the different types of credentials that can be ad
 Adding New Credentials
 ----------------------
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Adding New Volt MX Cloud Credentials](javascript:void(0);)
+
+<details close markdown="block"><summary>Adding New Volt MX Cloud Credentials</summary>
 
 A Iris project connects to Volt MX Foundry to create and publish back-end services. To use Volt MX Foundry, you need to add the Volt MX Cloud credentials to your project.
 
 To add Volt MX Cloud credentials to your project, follow these steps.
 
-1.  From the **VoltMX Iris & Foundry** section in the **buildIrisApp** job, next to the **FOUNDRY\_CREDENTIALS\_ID** parameter, click **ADD**. A drop-down list appears.
-2.  From the drop-down list, select the scope at which you want to add the new credentials.  
-    
-    [![](Resources/Images/Config_CloudCredentialsID_thumb_700_0.png)](Resources/Images/Config_CloudCredentialsID.png)
+1.  From the **Volt MX Iris & Foundry** section in the **buildIrisApp** job, next to the **FOUNDRY\_CREDENTIALS\_ID** parameter, click **ADD**. A drop-down list appears.
+2.  From the drop-down list, select the scope at which you want to add the new credentials.
+        ![](Resources/Images/Config_CloudCredentialsID_thumb_700_0.png)
     
     > **_Note:_** As HCL typically provides only one set of these credentials per customer, HCL recommends that you store this credential type in the **Jenkins** scope to share it across projects and to avoid creating unnecessary duplicates.  
-    [![](Resources/Images/Foundry_credentials_Jenkins_thumb_700_0.png)](Resources/Images/Foundry_credentials_Jenkins.png)
+    ![](Resources/Images/Foundry_credentials_Jenkins_thumb_700_0.png)
     
 3.  In the **Add Credentials** window, from the **Kind** list, select **Username and Password**.
     
     > **_Note:_** In the Domain field, make sure that the **Global Credentials (Unrestricted)** domain is selected.
-    
       
-    [![](Resources/Images/kind_thumb_600_0.png)](Resources/Images/kind.PNG)
-4.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.  
-    [![](Resources/Images/Add_Credentials_thumb_700_0.png)](Resources/Images/Add_Credentials.PNG)  
+    ![](Resources/Images/kind_thumb_600_0.png)]
+
+4.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.
+    ![](Resources/Images/Add_Credentials_thumb_700_0.png)]
     
     <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Scope</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the level at which the credentials are used. Contains the following options:<b>System</b>: The credentials are available to the associated object. Credentials with a System scope are used for email, authentication, slave connection, and scenarios in which the Jenkins instance uses the credentials.<b>Global</b>: The credentials are available to the associated object and also to the child objects. The credentials with a global scope are typically used for the additional requirements of a job.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>For Cloud credentials, select <b>Global</b>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Username</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the Username of your Volt MX Cloud instance.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Password</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the Password of your Volt MX Cloud instance.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ID</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the unique identifier that jobs and other configurations use to identify the credentials.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>HCL strongly recommends that you specify an ID that you can easily recognize.If this field is left blank, an ID is automatically generated, which you may not be able to recognize later.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the details about the credentials. This is an optional field.HCL recommends that you provide a unique description so that you can easily distinguish the credentials while triggering a build.</td></tr></tbody></table>
     
@@ -42,25 +42,26 @@ To add Volt MX Cloud credentials to your project, follow these steps.
 
 ![](Resources/Images/Config_CredSelection.png)
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Adding new Volt MX Foundry App Config](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Adding new Volt MX Foundry App Config</summary>
 
 A Volt MX Foundry App configuration connects to the specified back-end services while building a Iris app. In the FOUNDRY\_APP\_CONFIG parameter, you can specify the details of your app such as the host URL, app name, environment, and app version. The details are used to fetch the app services document, binding the app to an environment, and publish the app to the environment.
 
 To add a Foundry app configuration, follow these steps:
 
-1.  From the **VoltMX Iris & Foundry** section in the **buildIrisApp** job, next to the **FOUNDRY\_APP\_CONFIG** parameter, click **ADD**. A drop-down list appears.
+1.  From the **Volt MX Iris & Foundry** section in the **buildIrisApp** job, next to the **FOUNDRY\_APP\_CONFIG** parameter, click **ADD**. A drop-down list appears.
 2.  From the drop-down list, select the scope at which you want to add the new credentials.  
     
     ![](Resources/Images/FoundryAppConfig_AddCredentials_900x152.png)
     
     > **_Note:_** As HCL typically provides only one set of these credentials per customer, HCL recommends that you store this credential type in the **Jenkins** scope to share it across projects and to avoid creating unnecessary duplicates.  
-    [![](Resources/Images/Foundry_credentials_Jenkins_thumb_700_0.png)](Resources/Images/Foundry_credentials_Jenkins.png)
+    ![](Resources/Images/Foundry_credentials_Jenkins_thumb_700_0.png)
     
 3.  In the **Add Credentials** window, from the **Kind** list, select **Foundry App Configuration**.
     
     > **_Note:_** In the Domain field, make sure that the **Global Credentials (Unrestricted)** domain is selected.
     
-    [![](Resources/Images/FoundryAppConfig_Params_thumb_700_0.png)](Resources/Images/FoundryAppConfig_Params.png)
+    ![](Resources/Images/FoundryAppConfig_Params_thumb_700_0.png)
     
 4.  Configure the parameters that appear on the **Add Credentials** window. For more information about the parameters, refer to the following table.
     
@@ -69,7 +70,8 @@ To add a Foundry app configuration, follow these steps:
 5.  Validate the details that you entered for the parameters, and then click **ADD**.
 6.  On the **buildIrisApp** job, from the FOUNDRY\_APP\_CONFIG list, select the credentials that you added.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Adding a Sonar Token](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Adding a Sonar Token</summary>
 
 A Sonar token is used to sign-in to your SonarQube cloud. To add a Sonar token as credentials, follow these steps:
 
@@ -86,7 +88,8 @@ A Sonar token is used to sign-in to your SonarQube cloud. To add a Sonar token a
 5.  After you configure all the parameters, click **Add**.
 6.  In the **Project Settings**, from the **Login Token** list, select the credentials that you added.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Adding New Source Control Repository Credentials](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Adding New Source Control Repository Credentials</summary>
 
 App Factory signs-in to your repository to check-out and build the Iris project. To build a Iris app, you need to add the source code repository credentials to your project.
 
@@ -98,19 +101,20 @@ To add source code repository credentials, follow these steps.
 2.  From the drop-down list, select the scope at which you want to add the new credentials.
     
     > **_Note:_** As developers typically use the different GitHub accounts for different projects, HCL recommends that you store this credential type at the project level scope to keep it local to the project.  
-    [![](Resources/Images/projectSettings_credentials_Jenkins_thumb_700_0.png)](Resources/Images/projectSettings_credentials_Jenkins.png)
+    ![](Resources/Images/projectSettings_credentials_Jenkins_thumb_700_0.png)](Resources/Images/projectSettings_credentials_Jenkins.png)
     
-3.  In the **Add Credentials** window, from the **Kind** list, select **Username and Password**.[![](Resources/Images/kind_thumb_600_0.png)](Resources/Images/kind.PNG)
+3.  In the **Add Credentials** window, from the **Kind** list, select **Username and Password**.![](Resources/Images/kind_thumb_600_0.png)
 4.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.  
-    [![](Resources/Images/Source_code_2_thumb_600_0.png)](Resources/Images/Source_code_2.png)  
+    ![](Resources/Images/Source_code_2_thumb_600_0.png)
     
     <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Scope</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the level at which the credentials are used. Contains the following options:<b>System</b>: The credentials are available to the associated object. Credentials with a System scope are used for email, authentication, slave connection, and scenarios in which the Jenkins instance uses the credentials.<b>Global</b>: The credentials are available to the associated object and also to the child objects. The credentials with a global scope are typically used for the additional requirements of a job.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Username</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the user name of your SCM credentials.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>If your repository is protected with 2FA (two-factor authentication) on GitHub, then the <b>Username</b> is your <b>GitHub user name</b>. For more information, refer to <a href="Prerequisites.html#GitHub_2FA" target="_blank">GitHub 2FA</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Password</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the password of your SCM credentials.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>If your repository is protected with 2FA (two-factor authentication) on GitHub, then the <b>Password</b> is the <b>GitHub personal access token</b>. For more information, refer to <a href="Prerequisites.html#GitHub_2FA" target="_blank">GitHub 2FA</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ID</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the unique identifier that jobs and other configurations use to identify the credentials.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>HCL strongly recommends that you specify an ID that you can easily recognize.If this field is left blank, an ID is automatically generated, which you may not be able to recognize later.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the details about the credentials. This is an optional field.HCL recommends that you provide a unique description so that you can easily distinguish the credentials while triggering a build.</td></tr></tbody></table>
     
 5.  After you configure the parameters, click **Add**.
 6.  In the **Source Control** section in the Project Settings, from the SCM Credentials list, select the credentials that you added.  
-    [![](Resources/Images/Source_code_3_thumb_700_0.png)](Resources/Images/Source_code_3.png)
+    ![](Resources/Images/Source_code_3_thumb_700_0.png)
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Add SSH Key Credentials](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Add SSH Key Credentials</summary>
 
 If the source code URL for your project is an SSH URL, you need to add the SSH key credentials that act as the source code repository credentials for the project.
 
@@ -122,9 +126,9 @@ To add new SSH key credentials to your project, follow these steps.
 2.  From the drop-down list, select the scope at which you want to add the new credentials.
     
     > **_Note:_** As developers typically use the different GitHub accounts for different projects, HCL recommends that you store this credential type at the project level scope to avoid potential security concerns.  
-    [![](Resources/Images/projectSettings_credentials_Jenkins_thumb_700_0.png)](Resources/Images/projectSettings_credentials_Jenkins.png)
+    ![](Resources/Images/projectSettings_credentials_Jenkins_thumb_700_0.png)
     
-3.  In the **Add Credentials** window, from the **Kind** list, select **SSH Username with private key**.[![](Resources/Images/kind_ssh_thumb_700_0.png)](Resources/Images/kind_ssh.PNG)
+3.  In the **Add Credentials** window, from the **Kind** list, select **SSH Username with private key**.![](Resources/Images/kind_ssh_thumb_700_0.png)
 4.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.  
     ![](Resources/Images/SSH-Add.PNG)  
     
@@ -134,7 +138,8 @@ To add new SSH key credentials to your project, follow these steps.
 6.  From the **Source Control** section in the Project Settings, from the **SCM Credentials** list, select the credentials that you added.  
     ![](Resources/Images/Source_code_3_678x51.png)
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Adding New Database Credentials](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Adding New Database Credentials</summary>
 
 App Factory signs-in to your database to run scripts and commands. To run SQL or Flyway scripts on your database, you need to add the database credentials to your project.
 
@@ -145,14 +150,14 @@ To add the database credentials, follow these steps.
 2.  From the drop-down list, select the scope at which you want to add the new credentials.
     
     > **_Note:_** As developers typically have unique database credentials, HCL recommends that you store this credential type at the project level scope to avoid potential security concerns.  
-    [![](Resources/Images/Flyway_credentials_Jenkins_thumb_700_0.png)](Resources/Images/Flyway_credentials_Jenkins.png)
+    ![](Resources/Images/Flyway_credentials_Jenkins_thumb_700_0.png)
     
 3.  In the **Add Credentials** window, from the **Kind** list, select **Username and Password**.
     
     > **_Note:_** In the Domain field, make sure that the **Global Credentials (Unrestricted)** domain is selected.
     
       
-    [![](Resources/Images/kind_thumb_600_0.png)](Resources/Images/kind.PNG)
+    ![](Resources/Images/kind_thumb_600_0.png)]
 4.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.  
     
     <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Scope</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the level at which the credentials are used. Contains the following options:<b>System</b>: The credentials are available to the associated object. Credentials with a System scope are used for email, authentication, slave connection, and scenarios in which the Jenkins instance uses the credentials.<b>Global</b>: The credentials are available to the associated object and also to the child objects. The credentials with a global scope are typically used for the additional requirements of a job.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ID</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the unique identifier that jobs and other configurations use to identify the credentials.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>HCL strongly recommends that you specify an ID that you can easily recognize.If this field is left blank, an ID is automatically generated, which you may not be able to recognize later.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the details about the credentials. This is an optional field.HCL recommends that you provide a unique description so that you can easily distinguish the credentials while triggering a build.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">DB_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL at which the database is hosted. The URL must be in the JDBC format.For example:<code class="codefirst" style="font-size: 11pt;">jdbc:mysql://host1:3060</code><code class="codefirst" style="font-size: 11pt;">jdbc:mysql://host1:3060/sampledb</code></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">DB_USERNAME</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the username that is used to access your database.Make sure that the user has permissions to write and update schemas.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">DB_PASSWORD</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the password that is used to access your database.</td></tr></tbody></table>
@@ -163,7 +168,8 @@ To add the database credentials, follow these steps.
 
 7.  In the Flyway job, from the **DB\_CREDENTIALS** list, select the credentials that you added.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Adding New Apple ID credentials](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Adding New Apple ID credentials</summary>
 
 App Factory uses credentials of the Apple Developer account to generate signing certificates for iOS apps. If you want to generate certificates by using your Apple Developer account, you need to add the Apple ID credentials to your project.
 
@@ -175,16 +181,16 @@ To add Apple ID credentials to your project, follow these steps.
 2.  From the drop-down list, select the scope at which you want to add the new credentials.
     
     > **_Note:_** As developers typically have unique Apple ID credentials, HCL recommends that you store this credential type at the project level scope to avoid potential security concerns.  
-    [![](Resources/Images/Iris_credentials_Jenkins_thumb_700_0.png)](Resources/Images/Iris_credentials_Jenkins.png)
+    ![](Resources/Images/Iris_credentials_Jenkins_thumb_700_0.png)
     
 3.  In the **Add Credentials** window, from the **Kind** list, select **Username and Password**.
     
     > **_Note:_** In the Domain field, make sure that the **Global Credentials (Unrestricted)** domain is selected.
     
       
-    [![](Resources/Images/kind_thumb_600_0.png)](Resources/Images/kind.PNG)
+    ![](Resources/Images/kind_thumb_600_0.png)
 4.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.  
-    [![](Resources/Images/Add_Credentials_thumb_600_0.png)](Resources/Images/Add_Credentials.PNG)  
+    ![](Resources/Images/Add_Credentials_thumb_600_0.png)
     
     <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Scope</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the level at which the credentials are used. Contains the following options:<b>System</b>: The credentials are available to the associated object. Credentials with a System scope are used for email, authentication, slave connection, and scenarios in which the Jenkins instance uses the credentials.<b>Global</b>: The credentials are available to the associated object and also to the child objects. The credentials with a global scope are typically used for the additional requirements of a job.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Username</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the user name of your Apple Developer account.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Password</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the password of your Apple Developer account.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ID</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the unique identifier that jobs and other configurations use to identify the credentials.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>HCL strongly recommends that you specify an ID that you can easily recognize.If this field is left blank, an ID is automatically generated, which you may not be able to recognize later.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the details about the credentials. This is an optional field.HCL recommends that you provide a unique description so that you can easily distinguish the credentials while triggering a build.</td></tr></tbody></table>
     
@@ -192,7 +198,8 @@ To add Apple ID credentials to your project, follow these steps.
 6.  In the **buildIrisApp** job, from the APPLE\_ID list, select the credentials that you added.  
     ![](Resources/Images/Apple_ID_3_667x78.png)
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Adding a new signing certificate](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Adding a new signing certificate</summary>
 
 App Factory uses certificates to sign the iOS binaries (`.ipa`). If you want to upload the signing certificates manually, you need to add the certificates to your project.
 
@@ -203,14 +210,14 @@ To add signing certificates to your project, follow these steps.
 2.  From the drop-down list, select the scope at which you want to add the new credentials.
     
     > **_Note:_** As developers typically have unique Apple ID credentials, HCL recommends that you store this credential type at the project level scope to avoid potential security concerns.  
-    [![](Resources/Images/Iris_credentials_Jenkins_thumb_700_0.png)](Resources/Images/Iris_credentials_Jenkins.png)
+    ![](Resources/Images/Iris_credentials_Jenkins_thumb_700_0.png)
     
 3.  In the **Add Credentials** window, from the **Kind** list, select **Apple Signing Certificates**.
     
     > **_Note:_** In the Domain field, make sure that the **Global Credentials (Unrestricted)** domain is selected.
     
       
-    [![](Resources/Images/Apple_Signing_Cert_kind_thumb_700_0.png)](Resources/Images/Apple_Signing_Cert_kind.png)
+    ![](Resources/Images/Apple_Signing_Cert_kind_thumb_700_0.png)
 4.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.  
     ![](Resources/Images/Apple_Signing_Certs_data.png)  
     
@@ -222,7 +229,8 @@ To add signing certificates to your project, follow these steps.
 
 > **_Important:_** Make sure that the signing certificates and provisioning profiles have not expired. Otherwise, the build fails and an error occurs.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Adding New Android\_KeyStore Credentials](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Adding New Android\_KeyStore Credentials</summary>
 
 The keystore file stores the key that is used to sign the Android binary. To build a Visualize app for Android, you need to add an Android\_Keystore file and an Android\_KeyStore password to your project.
 
@@ -231,7 +239,7 @@ The keystore file stores the key that is used to sign the Android binary. To bui
 #### Creating a New Android\_KeyStore File
 
 1.  While configuring the build parameters for the **buildIrisApp** job, next to ANDROID\_KEYSTORE\_FILE, click **ADD**. A drop-down list appears.  
-    [![](Resources/Images/Android_KeyStore_1_thumb_700_0.png)](Resources/Images/Android_KeyStore_1.png)
+    ![](Resources/Images/Android_KeyStore_1_thumb_700_0.png)
 2.  From the drop-down list, select the scope at which you want to add the credentials.
     
     > **_Note:_** If you use the same keystore for multiple apps, you can add the keystore file at the **Jenkins** scope to use it across different projects. If you use different keystores for different apps, you can add the keystore file at the project level scope.  
@@ -242,9 +250,9 @@ The keystore file stores the key that is used to sign the Android binary. To bui
     > **_Note:_** In the Domain field, make sure that the **Global Credentials (Unrestricted)** domain is selected.
     
       
-    [![](Resources/Images/Android_KeyStore_2_thumb_700_0.png)](Resources/Images/Android_KeyStore_2.png)
+    ![](Resources/Images/Android_KeyStore_2_thumb_700_0.png)
 4.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.  
-    [![](Resources/Images/Android_KeyStore_3_thumb_700_0.png)](Resources/Images/Android_KeyStore_3.png)  
+    ![](Resources/Images/Android_KeyStore_3_thumb_700_0.png)
     
     <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Scope</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the level at which the credentials are used. Contains the following options:<b>System</b>: The credentials are available to the associated object. Credentials with a System scope are used for email, authentication, slave connection, and scenarios in which the Jenkins instance uses the credentials.<b>Global</b>: The credentials are available to the associated object and also to the child objects. The credentials with a global scope are typically used for the additional requirements of a job.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">File</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the Keystore file that is used to sign the Android binaries.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ID</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the unique identifier that jobs and other configurations use to identify the credentials.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>HCL strongly recommends that you specify an ID that you can easily recognize.If this field is left blank, an ID is automatically generated, which you may not be able to recognize later.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the details about the credentials. This is an optional field.HCL recommends that you provide a unique description so that you can easily distinguish the credentials while triggering a build.</td></tr></tbody></table>
     
@@ -254,7 +262,7 @@ The keystore file stores the key that is used to sign the Android binary. To bui
 #### Creating a New Android\_KeyStore Password
 
 1.  While configuring the build parameters for the **buildIrisApp** job, next to ANDROID\_KEYSTORE\_PASSWORD, click **ADD**. A drop-down list appears.  
-    [![](Resources/Images/Android_KeyStore_Password1_thumb_700_0.png)](Resources/Images/Android_KeyStore_Password1.png)
+    ![](Resources/Images/Android_KeyStore_Password1_thumb_700_0.png)
 2.  From the drop-down list, select the scope at which you want to add the credentials.
     
     > **_Note:_** If you use the same keystore for multiple apps, you can add the keystore file at the **Jenkins** scope to use it across different projects. If you use different keystores for different apps, you can add the keystore file at the project level scope.  
@@ -265,23 +273,24 @@ The keystore file stores the key that is used to sign the Android binary. To bui
     > **_Note:_** In the Domain field, make sure that the **Global Credentials (Unrestricted)** domain is selected.
     
       
-    [![](Resources/Images/Android_KeyStore_Password2_thumb_700_0.png)](Resources/Images/Android_KeyStore_Password2.png)
+    ![](Resources/Images/Android_KeyStore_Password2_thumb_700_0.png)
 4.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.  
-    [![](Resources/Images/ANDROID_KEYSTORE_PASSWORD3_thumb_700_0.png)](Resources/Images/ANDROID_KEYSTORE_PASSWORD3.png)  
+    ![](Resources/Images/ANDROID_KEYSTORE_PASSWORD3_thumb_700_0.png)
     
     <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Scope</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the level at which the credentials are used. Contains the following options:<b>System</b>: The credentials are available to the associated object. Credentials with a System scope are used for email, authentication, slave connection, and scenarios in which the Jenkins instance uses the credentials.<b>Global</b>: The credentials are available to the associated object and also to the child objects. The credentials with a global scope are typically used for the additional requirements of a job.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Secret</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies password for the Keystore file that you uploaded.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ID</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the unique identifier that jobs and other configurations use to identify the credentials.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>HCL strongly recommends that you specify an ID that you can easily recognize.If this field is left blank, an ID is automatically generated, which you may not be able to recognize later.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the details about the credentials. This is an optional field.HCL recommends that you provide a unique description so that you can easily distinguish the credentials while triggering a build.</td></tr></tbody></table>
     
 5.  After you configure the parameters, click **Add**.
 6.  In the **buildIrisApp** job, from the ANDROID\_KEYSTORE\_PASSWORD list, select the credentials that you added.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Adding Keys for Protected Mode Build](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Adding Keys for Protected Mode Build</summary>
 
 App Factory provides an option to build protected binaries for both Android and iOS platform by using Volt MX Iris. To build an app in protected mode, you need to add keys to your project.
 
 To add protected mode keys to your project, follow these steps.
 
 1.  While configuring the build parameters for the **buildIrisApp** job, from the **Protected Build** section, next to PROTECTED\_KEYS, click **ADD**. A drop-down list appears.  
-    [![](Resources/Images/Protected_Build_thumb_700_0.png)](Resources/Images/Protected_Build.png)
+    ![](Resources/Images/Protected_Build_thumb_700_0.png)
 2.  From the drop-down list, select the scope at which you want to add the credentials.
     
     > **_Note:_** As teams typically use one set of protected mode keys across multiple apps, HCL recommends that you store this credential type in the **Jenkins** scope to share it across projects and to avoid creating unnecessary duplicates.  
@@ -292,42 +301,45 @@ To add protected mode keys to your project, follow these steps.
     > **_Note:_** The **Domain** field displays **Global Credentials (Unrestricted)**.
     
       
-    [![](Resources/Images/Protected_Build_Drop-down_thumb_700_0.png)](Resources/Images/Protected_Build_Drop-down.png)
+    ![](Resources/Images/Protected_Build_Drop-down_thumb_700_0.png)
 4.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.  
-    [![](Resources/Images/Protected_Mode_Buid_Keys_thumb_700_0.png)](Resources/Images/Protected_Mode_Buid_Keys.png)  
+    ![](Resources/Images/Protected_Mode_Buid_Keys_thumb_700_0.png)
     
     <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Scope</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the level at which the credentials are used. Contains the following options:<b>System</b>: The credentials are available to the associated object. Credentials with a System scope are used for email, authentication, slave connection, and scenarios in which the Jenkins instance uses the credentials.<b>Global</b>: The credentials are available to the associated object and also to the child objects. The credentials with a global scope are typically used for the additional requirements of a job.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Public Key</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the public key that is used for encryption and to protect the app.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Private Key</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the private key that is used for encryption and to protect the app.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Fin Keys</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the fin keys that you want to use for the app.Fin Keys must be uploaded in a zip archive. The key files must be at the root of the zip archive, which must not have any sub-folder within the zip.<img src="Resources/Images/protected_keys_575x206.png" style="border-left-style: solid;border-left-width: 1px;border-left-color: #dcdcdc;border-right-style: solid;border-right-width: 1px;border-right-color: #dcdcdc;border-top-style: solid;border-top-width: 1px;border-top-color: #dcdcdc;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #dcdcdc;width: 575;height: 206;"><span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>For versions V8 ServicePack 3 or later. uploading Fin Keys is optional.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ID</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the unique identifier that jobs and other configurations use to identify the credentials.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>HCL strongly recommends that you specify an ID that you can easily recognize.If this field is left blank, an ID is automatically generated, which you may not be able to recognize later.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the details about the credentials. This is an optional field.HCL recommends that you provide a unique description so that you can easily distinguish the credentials while triggering a build.</td></tr></tbody></table>
     
 5.  After you configure the parameters, click **Add**.
 6.  In the **buildIrisApp** job, from the PROTECTED\_KEYS list, select the credentials that you added.  
-    [![](Resources/Images/Selected_Keys_thumb_600_0.png)](Resources/Images/Selected_Keys.png)
+    ![](Resources/Images/Selected_Keys_thumb_600_0.png)
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Adding Secure JS properties](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Adding Secure JS properties</summary>
 
 App Factory provides an option to protect web applications as part of the automated build by obfuscating their Javascript logic. To build a web app in protected mode, follow these steps.
 
-1.  In the **VoltMX Iris & Foundry** section of the **buildIrisApp** job, from the **BUILD\_MODE** list, select **release-protected**.  
-    [![](Resources/Images/obfuscation_credentials_releaseProtect_thumb_800_0.png)](Resources/Images/obfuscation_credentials_releaseProtect.png)
+1.  In the **Volt MX Iris & Foundry** section of the **buildIrisApp** job, from the **BUILD\_MODE** list, select **release-protected**.  
+    ![](Resources/Images/obfuscation_credentials_releaseProtect_thumb_800_0.png)
 2.  From the **Web Protection** section in the **buildIrisApp** job, next to the **OBFUSCATION\_PROPERTIES** parameter, click **ADD**. A drop-down list appears.
 3.  From the drop-down list, select the scope at which you want to add the new credentials.  
     
-    [![](Resources/Images/obfuscation_addCredentials_thumb_800_0.png)](Resources/Images/obfuscation_addCredentials.png)
+    ![](Resources/Images/obfuscation_addCredentials_thumb_800_0.png)
     
     > **_Note:_** As HCL typically provides only one set of these credentials per customer, HCL recommends that you store this credential type in the **Jenkins** scope to share it across projects and to avoid creating unnecessary duplicates.  
-    [![](Resources/Images/Iris_credentials_Jenkins_thumb_700_0.png)](Resources/Images/Iris_credentials_Jenkins.png)
+    ![](Resources/Images/Iris_credentials_Jenkins_thumb_700_0.png)
     
 4.  In the **Add Credentials** window, from the **Kind** list, select **Secure JS Properties**.  
     
     > **_Note:_** In the Domain field, make sure that the **Global Credentials (Unrestricted)** domain is selected.
     
-    [![](Resources/Images/obfuscation_credentialFields_thumb_800_0.png)](Resources/Images/obfuscation_credentialFields.png)
+    ![](Resources/Images/obfuscation_credentialFields_thumb_800_0.png)
     
 5.  Configure the parameters that appear on the Add Credentials window. For more information about the parameters, refer to the following table.  
     
     <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Scope</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the level at which the credentials are used. Contains the following options:<b>System</b>: The credentials are available to the associated object. Credentials with a System scope are used for email, authentication, agent connection, and scenarios in which the Jenkins instance uses the credentials.<b>Global</b>: The credentials are available to the associated object and also to the child objects. The credentials with a global scope are typically used for the additional requirements of a job.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ID</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the unique identifier that jobs and other configurations use to identify the credentials.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>HCL strongly recommends that you specify an ID that you can easily recognize.If this field is left blank, an ID is automatically generated, which you may not be able to recognize later.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1">An optional free text field.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Consumer Key</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the consumer identifier that is used to invoke protection API calls (on your behalf) to obfuscate your web app.This is the value of the <code class="file_names" style="font-weight: bold; font-size: 11pt;">ci</code> property in the <code class="file_names" style="font-size: 11pt;">securejs.properties</code> file that you must request from the Support team.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Consumer Secret</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the consumer secret that is used to invoke protection API calls (on your behalf) to obfuscate your web app.This is the value of the <code class="file_names" style="font-weight: bold; font-size: 11pt;">cs</code> property in the <code class="file_names" style="font-size: 11pt;">securejs.properties</code> file that you must request from the Support team.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Encryption Key</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the base64-encoded symmetric encryption key, which is itself encrypted with your RSA public key.This is the value of the <code class="file_names" style="font-size: 11pt; font-weight: bold;">id</code> property in the <code class="file_names" style="font-size: 11pt;">securejs.properties</code> file that you must request from the Support team.</td></tr></tbody></table>
     
 6.  After you configure the parameters, click **Add**. In the **buildIrisApp** job, from the OBFUSCATION\_PROPERTIES list, select the credentials that you added.  
-    [![](Resources/Images/obfuscation_credentials_myCreds_thumb_800_0.png)](Resources/Images/obfuscation_credentials_myCreds.png)
+    ![](Resources/Images/obfuscation_credentials_myCreds_thumb_800_0.png)
+
+</details>
 
 Deleting Credentials
 --------------------
@@ -352,7 +364,7 @@ Deleting Credentials
 The following credentials are system driven credentials. Do not delete these credentials.
 
 *   jenkins\_github\_ssh-certificates
-*   jenkins\_github\_ssh-volt-mx-common
-*   jenkins\_github\_ssh-volt-mx-jenkins-job-DSL
+*   jenkins\_github\_ssh-voltmx-common
+*   jenkins\_github\_ssh-voltmx-jenkins-job-DSL
 
 ![](Resources/Images/ssh.PNG)

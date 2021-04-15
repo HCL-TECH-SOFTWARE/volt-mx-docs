@@ -11,31 +11,33 @@ The MenuContainer widget has the following methods associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addAll Method](javascript:void(0);)
+
+<details close markdown="block"><summary>addAll Method</summary>
 
 * * *
 
 This method allows you to add new data to the menu container widget. The new data is appended to the existing data.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 addAll(data)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _data_ \[Array\]
 
-Mandatory
+### Mandatory
 
 Specifies an array to represent data as key value pairs. The format of the array of data is explained in [data](MenuContainer_Basic_Properties.html#data) property of menuContainer basic properties. The top most menu items are directly added to the menuContainer.
 
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //addAll method call. 
 menu1.addAll([{
     template: hbox2,
@@ -47,21 +49,22 @@ menu1.addAll([{
 }]);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addDataAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addDataAt Method</summary>
 
 Allows you to add an array of menu items at a given index. The new data is placed before the index. The existing menu items are pushed to the next row.
 
-Syntax
+### Syntax
 
 addDataAt(data,Index)
 
-Parameters
+### Parameters
 
 data \[JSObject \] - Mandatory
 
@@ -75,13 +78,13 @@ if at any level of the hierarchy if a provided position is not found, it is simp
 
 For example, addDataAt(data, \[1, 2, 3\]) if the 3rd row is not found, then menu items defined will be added under the last available menu item which in this case will be the 2nd position. Which means the data is actually added to the position \[1, 2, 2\].
 
-Return Values
+## Return Values
 
 None
 
-Example
+## Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 
 //addDataAt method call. 
 menu1.addDataAt({
@@ -94,19 +97,20 @@ menu1.addDataAt({
 }, [0, 3]);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addGestureRecognizer Method</summary>
 
 * * *
 
 This API allows you to set a gesture recognizer for a specified gesture for a specified widget.
 
-Syntax
+### Syntax
 
 addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure)
 
@@ -140,11 +144,11 @@ This function will be raised asynchronously
 
 See Remarks for the syntax of this function.
 
-Return Values
+### Return Values
 
 String - Reference to the gesture is returned.
 
-Remarks
+### Remarks
 
 The values for the _gestureType_parameter are:
 
@@ -173,7 +177,7 @@ Gesture Type:TAP
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[Number\] - specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
 
-For example:  
+### For example:  
 
 {fingers:1,taps:1}
 
@@ -181,7 +185,7 @@ Gesture Type:SWIPE
 
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 
-For example:
+### For example:
 
 {fingers: 1}
 
@@ -189,7 +193,7 @@ Gesture Type:LONGPRESS
 
 *   pressDuration \[Number\] - specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if pressDuration is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This is not applicable to Windows.
 
-For example:
+### For example:
 
 {pressDuration=1}.
 
@@ -272,9 +276,10 @@ In the android platform, the top and bottom gestures work only when the scrollin
 *   RIGHTTAP applicable only to Windows 10
 *   ROTATION is not supported on android.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
+{% highlight VoltMx %}
+//Sample code to add Gestures to the frmGestures FlexForm.
 //Code to add DOUBLE TAP gesture to the frmGestures, FlexForm.
 var doubletp = {
  fingers: 1,
@@ -306,23 +311,25 @@ function onGestureFunction(commonWidget, gestureInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointFromWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointFromWidget Method</summary>
 
 * * *
 
 This method allows you to convert the coordinate system from a widget to a point (receiver's coordinate system).
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 convertPointFromWidget(point, fromWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -336,9 +343,10 @@ _fromWidget_
 
 This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from the widget to a point (receiver's coordinate system).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.convertPointFromWidget({
+{% highlight VoltMx %}
+Form1.widget1.convertPointFromWidget({
     x: "10dp",
     y: "20dp"
 }, widget2);
@@ -350,17 +358,19 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointToWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointToWidget Method</summary>
 
 * * *
 
 Using the convertPointToWidget method, you can modify the co-ordinate system. You can convert the receiver's co-ordinate system from a **point** to a **Widget**.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 convertPointToWidget(point, toWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -370,29 +380,32 @@ _toWidget_
 
 \[widgetref\] - Mandatory. This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from a point to a widget.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget2.convertPointToWidget({
+{% highlight VoltMx %}
+Form1.widget2.convertPointToWidget({
     x: "20dp",
     y: "30dp"
 }, widget1);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getBadge Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getBadge Method</summary>
 
 * * *
 
 This API enables you to read the badge value (if any) attached to the specified widget. If the specified widget does not have a badge attached to it, it returns an empty string.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 getBadge()
+{% endhighlight %}
 
 Optional Parameter
 
@@ -400,19 +413,20 @@ uniqueIdentifier
 
 Unique identifier of a widget which is a handle to the widget.
 
-Return Values
+### Return Values
 
 Returns a string containing the badge value applied to the specified widget. If the specified widget has no badge value attached to it, it returns an empty string.
 
-Remarks
+### Remarks
 
 When a badge is removed, the widgets are re-formatted to accommodate the cleared badge values.
 
 On the iOS platform, this method is applicable on Label, Button, Image, TextBox, and TextArea widgets only.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the getBadge Method for button widget.
 //You need to make a corresponding call of the getBadge method for other applicable widgets.
 function getBadge() {
@@ -425,23 +439,25 @@ function getBadge() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[registerForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>registerForPeekandPop Method</summary>
 
 * * *
 
 This method registers a widget to enable 3D Touch peek and pop gestures.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 registerForPeekandPop(onPeekCallback, onPopCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPeekCallback
 
@@ -463,7 +479,8 @@ Callback Return Values
 
 Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget) {
+{% highlight VoltMx %}
+function onPeekCallback(widget) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -501,13 +518,14 @@ Use this callback to set the content for pop. The form handle returned by this c
 
 Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}
+function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Remarks
+### Remarks
 
 A PreviewInfoTable has the following format.
 
@@ -533,58 +551,62 @@ Example: \[“0dp”, “0dp”, “200dp”, “300dp”\], \[“10%”, “10%
 
 Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “240px”\]
 
-Example of a PreviewInfoTable:
+### Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}
+var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeAll Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeAll Method</summary>
 
 * * *
 
 This method is used to remove all the menu items and sub menus from the menu container.
 
-Syntax
+### Syntax
+{% highlight VoltMx %}
+removeAll()
+{% endhighlight %}
 
-removeAll()  
-
-Parameters
-
-None
-
-Return Values
+### Parameters
 
 None
 
-Example
+### Return Values
 
-{% highlight voltMx %}
+None
+
+### Example
+
+{% highlight VoltMx %}
 
 //removeAll method call
 menu1.removeAll();
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeAt Method</summary>
 
 * * *
 
@@ -592,11 +614,11 @@ This method is used to remove the menu item from hierarchy based on the index pr
 
 > **_Note:_** If the index is not within the limits then _removeAt_ will be silent and doesn't yield any result.
 
-Syntax
+### Syntax
 
 removeAt(rowIndex, animation)
 
-Parameters
+### Parameters
 
 _rowIndex_ \[Number\] - Mandatory
 
@@ -616,41 +638,44 @@ config
 
 As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the Volt MX Iris [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
  
 //removeAt method call.
 menu1.removeAt([0, 1]);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeFromParent Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeFromParent Method</summary>
 
 * * *
 
 This method allows you to remove a child widget from a parent widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeFromParent()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the removeFromParent Method for a Calendar widget.
 //You need to make a corresponding call of the removeFromParent method for other applicable widgets.
 
@@ -658,52 +683,57 @@ Form1.calendar.removeFromParent();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android , Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to remove the specified gesture recognizer for the specified widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeGestureRecognizer(gestureHandle)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 gestureHandle - Mandatory
 
 Specifies the handle to the gesture returned by addGestureRecognizer call.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
+{% highlight VoltMx %}
+//Sample code to remove Double tap gesture from frmGestures FlexForm.  
 frmGestures.removeGestureRecognizer(doubletp);  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available on all platforms except Desktop Web and Android.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setBadge Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setBadge Method</summary>
 
 * * *
 
 This method enables you to set the badge value to the given widget at the upper, right corner of the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setBadge(badgeText)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 badgeText \[String\] - Mandatory
 
@@ -713,15 +743,15 @@ skin \[String\] - Optional
 
 The parameter specifies the background color for the badge. The default color is red.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 The color for the badge can be defined using a skin. The default color for the badge is red with white lettering.
 
@@ -743,9 +773,10 @@ For iOS platform, this method is applicable on Box, Label, and Image widgets onl
 
 For Android platform, this method is applicable on Button and Image widgets only.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setBadge Method for button widget.
 //You need to make a corresponding call of the setBadge method for other applicable widgets.
 function setBadge() {
@@ -757,7 +788,7 @@ placed on a form frm1, use the following code: */
 form.lbl1.setBadge("4", "badgeSkin");
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
@@ -765,17 +796,19 @@ For more information about the badge APIs refer the _API Reference Document_.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setData Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setData Method</summary>
 
 * * *
 
 This method allows you to set new data to the menuContainer widget. When you set new data, the existing data will be replaced with the new data.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setData(menubarRef)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _menubarRef_ \[Array\]
 
@@ -783,13 +816,13 @@ Mandatory.
 
 Specifies an array of menu items.
 
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 
 //setData method call. 
 menu1.setData([{
@@ -861,27 +894,29 @@ menu1.setData([{
 }]);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setDataAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setDataAt Method</summary>
 
 * * *
 
 This method allows you to set/modify the menu item at a particular index in the hierarchy with in the menuContainer.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setDataAt(data,index)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _data_ \[JSObject\]
 
-Mandatory
+### Mandatory
 
 Specifies the JSObject to represent data as key value pairs. The format of the array of data is explained in [data](MenuContainer_Basic_Properties.html#data) property of MenuContainer basic properties.
 
@@ -893,13 +928,13 @@ if at any level of the hierarchy if a provided position is not found, it is simp
 
 For example, addDataAt(data, \[1, 2, 3\]) if the 3rd row is not found, then menu items defined will be added under the last available menu item which in this case will be the 2nd position. Which means the data is actually added to the position \[1, 2, 2\].
 
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
  
 //setDataAt method call. 
 menu1.setDataAt({
@@ -912,23 +947,25 @@ menu1.setDataAt({
 }, [0, 3]);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setEnabled Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setEnabled Method</summary>
 
 * * *
 
 This method specifies the widget that must be enabled or disabled.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setEnabled(enabled)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _enabled_
 
@@ -938,36 +975,38 @@ true -Indicates widget is enabled.
 
 false - Indicates widget is disabled.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 Browser widget does not support this method in SPA.
 
 This method is not applicable in Map widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setEnabled Method for button widget.
 //You need to make a corresponding call of the setEnabled method for other applicable widgets.
 
 form1.myButton.setEnabled(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setFocus Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setFocus Method</summary>
 
 * * *
 
@@ -975,11 +1014,12 @@ This method specifies the widget on which there must be focus.
 
 **Default :** true
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setFocus(focus)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _focus_ \[Boolean\]- Mandatory
 
@@ -987,46 +1027,49 @@ true -Indicates focus is set on a widget.
 
 false - Indicates focus is not set on a widget.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 You should not call this method in **preShow** of a form as it is not respected by all platforms. In android platform, this method is not respected in **preShow** of a form. You can give focus to a particular widget only after it is rendered on the screen, hence it should be called in postShow of a form.
 
 This method is not applicable in Form widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setFocus Method for button widget.
 //You need to make a corresponding call of the setFocus method for other applicable widgets.
 
 form1.myButton.setFocus(true);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to set a gesture recognizer for a specified gesture for a specified widget. You can set a Gesture recognizer only for a FlexForm, a FlexContainer, and a FlexScrollContainer. The setGestureRecognizer method is deprecated and should not be used in new software. However, Swipe Distance and Swipe Velocity parameters are not deprecated. So if you want to use the Swipe Distance and Swipe velocity parameters, use the setGestureRecognizer method. To use all other parameters, you must use the addGestureRecognizer method.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setGestureRecognizer (gestureType,setupParams,gestureHandler)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _gestureType_
 
@@ -1055,7 +1098,7 @@ onGesturefunction(widgetRef,gestureInfo)
 *   _widgetRef_ - This parameter specifies the handle to the widget on which the gesture was recognized.
 *   _gestureInfo_ - This parameter specifies an array that provides information about the gesture. The contents of this array vary based on the gesture type.
 
-Volt MX  Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
+Volt MX Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
 
 *   _gestureType_ \[number\] - indicates the gesture type; **1** for TAP, **2** for SWIPE, and **3** for LONGPRESS.
 *   _gesturesetUpParams_ \[object\] - this array is the set up parameters passed while adding the gesture recognizer.
@@ -1067,15 +1110,15 @@ Volt MX  Iris populates the details in the _gestureInfo_ array. This array has t
 *   _widgetWidth_ \[number\] - specifies the width of the widget (in pixels). This parameter is applicable only on iPhone.
 *   _widgetHeight_ \[number\] - specifies the height of the widget (in pixels). This parameter is applicable only on iPhone.
 
-Return Values
+### Return Values
 
 String - Reference(uniqueidentifier) to the gesture is returned.
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is applicable on Form, Box, and ScrollBox widgets only.
 
@@ -1088,7 +1131,7 @@ Gesture Type:TAP
 *   fingers \[number\] - This parameter specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[number\] - This parameter specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
 
-For example:
+### For example:
 
 {fingers:1,taps:1}
 
@@ -1098,7 +1141,7 @@ Gesture Type:SWIPE
 *   swipedistance \[number\] - This parameter specifies the distance between the pixel from where the swipe started to the pixel where the swipe stopped (finger is moved up or removed). The default value is 50 pixels. This parameter is applicable only on android. This parameter is applicable only if the gesture type is SWIPE.
 *   swipevelocity \[number\] - This parameter specifies the velocity of the swipe measured in pixels per second. The default value is 75. This parameter is applicable only on android. This parameter is applicable only if the gesture type is SWIPE.
 
-For example:
+### For example:
 
 {fingers:1,swipedistance:50,swipevelocity:75}
 
@@ -1106,7 +1149,7 @@ Gesture Type:LONGPRESS
 
 *   pressDuration \[number\] - This parameter specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if the _pressDuration_ is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This parameter is not customizable on android platform. The default value on android platform is 500 ms. Any value you pass to this parameter is ignored and the default value is used.
 
-For example:
+### For example:
 
 {pressDuration:1}
 
@@ -1119,7 +1162,7 @@ onGesturefunction(widgetRef,gestureInfo)
 *   _widgetRef_ - This parameter specifies the handle to the widget on which the gesture was recognized.
 *   _gestureInfo_ - This parameter specifies an array that provides information about the gesture. The contents of this array vary based on the gesture type.
 
-Volt MX  Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
+Volt MX Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
 
 *   _gestureType_ \[number\] - indicates the gesture type; **1** for TAP, **2** for SWIPE, and **3** for LONGPRESS.
 *   _gesturesetUpParams_ \[object\] - this array is the set up parameters passed while adding the gesture recognizer.
@@ -1131,9 +1174,10 @@ Volt MX  Iris populates the details in the _gestureInfo_ array. This array has t
 *   _widgetWidth_ \[number\] - specifies the width of the widget (in pixels). This parameter is applicable only on iPhone.
 *   _widgetHeight_ \[number\] - specifies the height of the widget (in pixels). This parameter is applicable only on iPhone.
 
-Example
+### Example
 
-{% highlight voltMx %}//The below function will get invoked  when a gesture is recognized. 
+{% highlight VoltMx %}
+//The below function will get invoked  when a gesture is recognized. 
 function myTap(myWidget, gestureInfo) {
     alert(" Tap Gesture detected");
     alert("gestureType :" + gestureInfo.gestureType);
@@ -1151,23 +1195,25 @@ var setupTblTap = {
 var tapGesture = frm1.hbx1.setGgestureRecognizer(1, setupTblTap, myTap);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPeek Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPeek Method</summary>
 
 * * *
 
 This method sets and overrides the existing onPeekCallback for the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setOnPeek(onPeekCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPeekCallback
 
@@ -1189,7 +1235,8 @@ PreviewInfoTable. See the Remarks section for a description of this table.
 
 Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget, contextInfo) {
+{% highlight VoltMx %}
+function onPeekCallback(widget, contextInfo) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -1199,11 +1246,11 @@ Callback Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 A PreviewInfoTable has the following format.
 
@@ -1229,18 +1276,20 @@ Example: \[“0dp”, “0dp”, “200dp”, “300dp”\], \[“10%”, “10%
 
 Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “240px”\]
 
-Example of a PreviewInfoTable:
+### Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}
+var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}function settingPeek() {
+{% highlight VoltMx %}
+function settingPeek() {
     Form1.setOnPeek(onMyPeekcallback);
 }
 
@@ -1259,25 +1308,27 @@ function onMyPeekcallback(widgetref, contextInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPop Method</summary>
 
 * * *
 
 This method overrides the existing onPopCallback for the widget.
 
-Syntax
+### Syntax
 
 setOnPop(onPopCallback)
 
-Parameters
-
+### Parameters
+{% highlight VoltMx %}
 onPopCallback
+{% endhighlight %}
 
 A callback function that is invoked when the user slightly presses (soft press) the widget.
 
@@ -1305,19 +1356,21 @@ Callback Remarks
 
 Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}
+function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Example
+### Example
 
-{% highlight voltMx %}function settingPop() {
+{% highlight VoltMx %}
+function settingPop() {
     Form1.setOnPop(myonPopcallback);
 }
 
@@ -1327,13 +1380,14 @@ function myonPopcallback(widgetref, peekForm) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setVisibility Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setVisibility Method</summary>
 
 * * *
 
@@ -1341,11 +1395,12 @@ Use this method to set the visibility of the widget.
 
 **Default :** true
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setVisibility(visible)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _visible_
 
@@ -1397,15 +1452,15 @@ It is a JS dictionary containing the events invoked by the platform during the a
 *   **animStarted**: Invoked at the beginning of the animation without any parameters. Following is the Syntax of the event: function animStarted()
 *   **animEnded**: Invoked at the end of the animation without any parameters. Following is the Syntax of the event: function animEnded()
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is not applicable on Form, Popup, and Alert. It is also not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so by using [Segment](Segment_Methods.html#segmentedui-methods) methods.
 
@@ -1413,9 +1468,10 @@ Passing an invalid type other than the above events lead to run time exceptions/
 
 This method is not supported on the widgets FlexForm, FlexContainer, and FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to invoke the setVisibility Method for a button widget with animation.
 //You need to make a corresponding call of the setVisibility method for other applicable widgets.
 
@@ -1434,36 +1490,39 @@ form1.myButton.setVisibility(
 form1.myButton.setVisibility(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[unregisterForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>unregisterForPeekandPop Method</summary>
 
 * * *
 
 This method unregisters a widget from 3D Touch peek and pop gestures.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 unregisterForPeekandPop()
-
-Parameters
-
-None.
-
-Return Values
-
-None.
-
-Example
-
-{% highlight voltMx %}Form1.unregisterForPeekAndPop();
 {% endhighlight %}
 
-Platform Availability
+### Parameters
+
+None.
+
+### Return Values
+
+None.
+
+### Example
+
+{% highlight VoltMx %}
+Form1.unregisterForPeekAndPop();
+{% endhighlight %}
+
+### Platform Availability
 
 *   iOS 9.0 and later
 

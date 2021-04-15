@@ -19,31 +19,17 @@ To configure Volt MX SAP Gateway service in the **[Integration Service Definiti
 2.  From the **Service Type** list, select **VoltMX SAP Gateway**.
 3.  Provide the following details to create the Volt MX SAP Gateway service:  
     
-
-  
-| Field | Description |
-| --- | --- |
-| Select Authentication Services | **Use Existing Identity Provider** - to select an identity provider. This drop-down lists all identity providers only if you have already created identity providers for SAP in the Identity page. Fill in the details for the following fields:
-From the **Identity** list, select your Volt MX SAP Gateway identity.The details for the selected identity are displayed in the **Gateway address & port** text box. You cannot modify these details.Under the **User ID** and **Password**, provide valid log-in credentials that you created while registering with Volt MX SAP services.In the **Default Caller ID**, provide the ID that Volt MX SAP Gateway uses for logging and auditing.In the **Default Caller Group**, provide the ID that Volt MX SAP Gateway uses for logging and auditing. This information is optional.
-
-**Specify Login Endpoint**\- to configure a new endpoint. Fill in the details for the following fields:
-
-In the **Gateway address**, enter the domain. For example, connect.voltmx.com_._ In the **Port** text box, enter a valid port number ranging from 1 to 65535. In the **Header parameter name prefix \*** text box, enter the header. For example, VoltMXSAP. Under the **User ID** and **Password**, provide valid log-in credentials that you created while registering with Volt MX SAP Gateway services. In the **Default Caller ID**, provide the ID that Volt MX SAP Gateway uses for logging and auditing. In the **Default Caller Group**, provide the ID that Volt MX SAP Gateway uses for logging and auditing. This information is optional.
-
- |
-
-  
-  
-4. <details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the **Advanced** section:</summary>
-    
-      
     | Field | Description |
     | --- | --- |
-    | Throttling | API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response. **To specify throttling in Volt MX Foundry Console, follow these steps:**
-    In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your Volt MX Foundry console in terms of Total Rate Limit. In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.
+    | Select Authentication Services | **Use Existing Identity Provider** - to select an identity provider. This drop-down lists all identity providers only if you have already created identity providers for SAP in the Identity page. Fill in the details for the following fields: From the **Identity** list, select your VoltMX SAP Gateway identity.The details for the selected identity are displayed in the **Gateway address & port** text box. You cannot modify these details.Under the **User ID** and **Password**, provide valid log-in credentials that you created while registering with VoltMX SAP services.In the **Default Caller ID**, provide the ID that VoltMX SAP Gateway uses for logging and auditing.In the **Default Caller Group**, provide the ID that VoltMX SAP Gateway uses for logging and auditing. This information is optional. **Specify Login Endpoint**\- to configure a new endpoint. Fill in the details for the following fields: In the **Gateway address**, enter the domain. For example, connect.voltmx.com_._ In the **Port** text box, enter a valid port number ranging from 1 to 65535. In the **Header parameter name prefix \*** text box, enter the header. For example, VoltMXSAP. Under the **User ID** and **Password**, provide valid log-in credentials that you created while registering with VoltMX SAP Gateway services. In the **Default Caller ID**, provide the ID that VoltMX SAP Gateway uses for logging and auditing. In the **Default Caller Group**, provide the ID that VoltMX SAP Gateway uses for logging and auditing. This information is optional |
+
+4. <details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the **Advanced** section:</summary>
     
-    **To override throttling in App Services Console, refer to** [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). > **_Note:_** In case of On-premises, the number of nodes in a clustered environment is set by configuring the `VOLTMX_SERVER_NUMBER_OF_NODES` property in the Admin Console. This property indicates the number of nodes configured in the cluster. The default value is 1. Refer to [The Runtime Configuration tab on the Settings screen of App Services]({{ site.baseurl }}/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html). The total limit set in the Volt MX Foundry Console will be divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node. This is applicable for Cloud and On-premises. |
-</details>
+    | Field | Description |
+    | --- | --- |
+    | Throttling | API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response. **To specify throttling in VoltMX Foundry Console, follow these steps:** In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your VoltMX Foundry console in terms of Total Rate Limit. In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your VoltMX Foundry console in terms of Per IP Rate Limit. **To override throttling in App Services Console, refer to** [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). > **_Note:_** In case of On-premises, the number of nodes in a clustered environment is set by configuring the `VOLTMX_SERVER_NUMBER_OF_NODES` property in the Admin Console. This property indicates the number of nodes configured in the cluster. The default value is 1. Refer to [The Runtime Configuration tab on the Settings screen of App Services]({{ site.baseurl }}/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html). The total limit set in the VoltMX Foundry Console will be divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node. This is applicable for Cloud and On-premises. |
+        
+    </details>
     
     > **_Note:_** All the fields in the Advanced section are optional.
     
@@ -69,15 +55,15 @@ To create operation, follow these steps:
                         OR  
     Click **Add Operation** to add a new operation or from the tree in the left pane, click **Add > Add New Operation**.  
     
-
-<details close markdown="block"><summary>Click to View image</summary>
-    
+    <details close markdown="block"><summary>Click to View image</summary>
+        
     ![](Resources/Images/MuleSoftAddOps_549x351.png)
-    
+
     ![](Resources/Images/SAP_libraries_569x220.png)
-    
+
     > **_Note:_** To use an existing integration service, refer to [How to Use an Existing Integration Service](Manage_Existing_Integration_Services_1.html#how-to-use-an-existing-integration-service).
-</details>   
+
+    </details>
 
 2.  Under **Operations List** tab, from the **Libraries** list, select a library - for example, CRM. The system loads available objects and operations for the selected library.
 3.  From the **Object** list, select an object.
@@ -91,36 +77,32 @@ To create operation, follow these steps:
 8.  To configure an operation, provide the following details:  
     
 
-  
 | Field | Description |
 | --- | --- |
 | Name | Enter a unique name for your operation. |
-| Operation Security Level | It specifies how a client must authenticate to invoke this operation.
-
-<details close markdown="block"><summary>Select one of the following security operations in the **Operation Security Level** field.</summary> 
-
-**Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app. **Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. **Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible. **Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.
-
-
-
-
-
- |
+| Operation Security Level | It specifies how a client must authenticate to invoke this operation. |
 | Front End HTTP Method | Select a HTTP method that you want to invoke on the integration server. By default, the field is set to **Post** method. > **_Note:_** The front-end HTTP methods are used for all non-SDK clients such as API Management users. Invoking a service from an SDK will continue to use the POST method for operations. |
 | Target HTTP Method | Select a HTTP method that you want to invoke on the back-end service from integration server. |
 | Operation Path | Modify the path if required. > **_Note:_** If you provide incorrect Salesforce endpoint details, the **Object** list will contain only _\_Login_ object. |
 
-  
+<details close markdown="block"><summary>Select one of the following security operations in the **Operation Security Level** field.</summary> 
+
+* **Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.
+* **Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.
+* **Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.
+* **Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment. 
+
 </details>
+
 9. <details close markdown="block"><summary> response operations, provide the following details in the **Advanced** section:</summary>
     
-      
     | Field | Description |
     | --- | --- |
     | Front End API | It allows you map your endpoint (or) backend URL of an operation to a [front-end URL](FrontEndAPI.html). |
     | Server Events | Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer [Server Events](ServerEvents.html). |
-</details>
     
+    </details>
+
     > **_Note:_** All options in the Advanced section are optional.
     
 
@@ -138,23 +120,22 @@ You can perform the following actions in Request Input tab:
     
 4.  Under the **Body** tab, provide the following details:  
     
-      
     | Field | Description |
     | --- | --- |
     | Name | It Contains a Unique Identifier. Change the name if required. |
     | Test Value | Enter a value. A test value is used for testing the service. |
     | Default Value | Enter the value, if required. The default value will be used if the test value is empty. |
-    | Scope | Select Request or Session. It is set to **Request** by default. **Request** indicates that the value must be retrieved from the HTTP request received from the mobile device. **Session** indicates that the value must be retrieved from the HTTP session stored on Volt MX Foundry. |
-    | Datatype | 
- 
-<details close markdown="block"><summary>Select one of the following data types.</summary>
-    
-    **String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit. **Boolean** - A value that can be true or false. **Number** - An integer or a floating number. **Collection** - A group of data, also referred as data set.
-</details>   
-    
-    
-     |
+    | Scope | Select Request or Session. It is set to **Request** by default. **Request** indicates that the value must be retrieved from the HTTP request received from the mobile device. **Session** indicates that the value must be retrieved from the HTTP session stored on VoltMX Foundry. |
+    | Datatype | --- |
     | Encode | Select the check box to enable encoding of an input parameter. For example, the name New York Times would be encoded as _New_York_Times_ when the encoding is set to True. The encoding must also adhere to the HTML URL encoding standards. |
+
+    <details close markdown="block"><summary>Select one of the following data types.</summary>
+
+    * **String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit. * * **Boolean** - A value that can be true or false. 
+    * **Number** - An integer or a floating number. 
+    * **Collection** - A group of data, also referred as data set.
+
+    </details>  
     
 5.  Under the **Header** tab, provide the **Custom HTTP Headers**. For example, **POST** or **GET**. The following Custom HTTP Headers are required by the external source:
     

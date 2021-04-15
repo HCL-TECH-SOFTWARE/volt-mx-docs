@@ -15,65 +15,70 @@ Functions
 
 The voltmx.net namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.cancel](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.net.cancel</summary>
 
 * * *
 
 This API cancels only async network calls. Synchronous calls have a platform-specific cancellation mechanism provided by the platform (mechanism may vary from platform to platform).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.cancel(  
     connHandle);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | connHandle | The handle to the asynchronous service. connHandle is returned by invokeserviceasync. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}function cancelService() {
+{% highlight VoltMx %}
+function cancelService() {
     voltmx.net.cancel(connHandle);
 }
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Exceptions
+### Exceptions
 
 1200 - Network Error.
 
-Remarks
+### Remarks
 
 Invalid parameters to this function are ignored.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Server-Side Mobile Web, Windows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.clearCookies](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.clearCookies</summary>
 
 * * *
 
 Removes cookies from the client that are associated with the specified domain.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.clearCookies(  
     url,  
     cookieName)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -82,30 +87,30 @@ Input Parameters
 | cookieName | An optional array of strings that specifies the cookie names that are to be removed from the current application. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}voltmx.net.clearCookies("http://www.google.com");
+{% highlight VoltMx %}
+voltmx.net.clearCookies("http://www.google.com");
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 In an application where service calls are made through Browser Widget or through native service calls, cookies are sent from the servers to maintain the session. These cookies are stored in the cookie store on the client side. Using this API you can remove the cookies of a particular domain obtained through all of HttpRequest, invokeServiceAsync and browser widget.
 
-If you specify the optional parameters url and cookieName, then all the cookies with the specified name related to that URL are removed from your application. The parameter url should be the complete URL. For example, [http://www.gooogle.com](http://www.gooogle.com/). If the URL is not valid, then this API will not remove the cookies. An exception is shown of type VoltMXError with the error code as 1005 and error name/message as "invalid input url".
+If you specify the optional parameters url and cookieName, then all the cookies with the specified name related to that URL are removed from your application. The parameter url should be the complete URL. For example, [http://www.gooogle.com](http://www.gooogle.com/). If the URL is not valid, then this API will not remove the cookies. An exception is shown of type Volt MX Error with the error code as 1005 and error name/message as "invalid input url".
 
 If the scheme of the URL is "https" then all the cookies of https as well as http will be removed. If the scheme of the URL is "http" then only the cookies stored for http will be removed. If the cookies are not present in the application cookie store in the provided array of cookieNames, then this API will not perform any action and does not raise an exception.
 
-Platform Availability
+### Platform Availability
 
 Available on iOS, Android, Windows, and SPA platforms.
 
-Limitations
+### Limitations
 
 *   Android
     *   The voltmx.net.clearCookies API does not remove the cookie from the Browser widget's cookie store; it replaces the cookie value with an empty string.
@@ -115,46 +120,53 @@ Limitations
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.FormData](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.FormData</summary>
 
 * * *
 
 The FormData object represents an ordered collection of entries with name-value pairs. Call this function to create a FormData object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.FormData();
-
-Example
-
-{% highlight voltMx %}var httpinputparams1 = new voltmx.net.FormData()
 {% endhighlight %}
 
-Input Parameters
+### Example
+
+{% highlight VoltMx %}
+var httpinputparams1 = new voltmx.net.FormData()
+{% endhighlight %}
+
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 Returns an object of type FormData.
 
-Platform Availability
+### Platform Availability
 
 Android, iOS, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.getActiveNetworkType](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.getActiveNetworkType</summary>
 
 * * *
 
 Retrieves the currently-active network type.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 _voltmx.net.getActiveNetworkType(_ _optionsConfig_ _);_
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 optionsConfig \[JSON Object\] - An optional JSON Object that contains the following parameters:
 
@@ -166,9 +178,10 @@ optionsConfig \[JSON Object\] - An optional JSON Object that contains the follow
 | requestWithPermission \[Boolean\] | A Boolean parameter that is required to obtain information on a 2G or 4G network used.If you set the value of this parameter to **true**, the Android Framework invokes the callback function. If you set the value of this parameter to false (or do not specify a value for the parameter) the API returns the Network Type. |
 | callback \[Function\] | A callback function that is invoked when the value of the [requestWithPermission](#requestWithPermission) parameter is set to **true**. The callback function is invoked with a JSON Object that contains the following parameters:**status**: A String value that contains the status information. The status parameter can have the following values:SUCCESSFAILEDPERMISSION\_DENIED**networkType**: An integer constant that specifies the network type on the device for data transport. You can specify any of the [Network Constants](#Network).**networkName**: A String value that contains the name of the mobile data network. The networkName parameter can have the following values:GPRSEDGECDMA1xRTTIDENUMTSEVDO\_0EVDO\_AHSDPAHSUPAHSPAEVDO\_BEHRPDHSPAPLTENRUNKNOWN> **_Note:_** When the networkType is NETWORK\_TYPE\_WIFI, the value of the networkName parameter is Null. |
 
-Example
+### Example
 
-{% highlight voltMx %}function callbackFunction(network){  
+{% highlight VoltMx %}
+function callbackFunction(network){  
   if(network.status != "FAILED"){  
     alert(JSON.stringify(network));  
   }  
@@ -185,7 +198,7 @@ function checkActiveNetwork() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 If the device is offline, it will return null. Otherwise, it will return the appropriate connection type.
 
@@ -206,28 +219,31 @@ For Android, if the value of the **requestWithPermission** parameter is `true`, 
 
 For SPA and Desktop Web, it will always return constants.NETWORK\_TYPE\_ANY.
 
-Remarks
+### Remarks
 
 SPA and Desktop Web depend upon the navigator.onLine property to detect if the device is offline or online. The implementation of this property across browsers is uneven. For more information, refer to [Mozilla documentation for browser support](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorOnLine.onLine).
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.getCookies](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.getCookies</summary>
 
 * * *
 
 Retrieves cookies associated with the specified domain.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.getCookies(  
     URL, cookieFormat)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -236,10 +252,10 @@ Input Parameters
 | cookieFormat (optional) | The format in which the cookies must be retrieved. > **_Note:_** This parameter is only available on the iOS platform. The cookieFormat parameter can have the following two values: **constants.COOKIES\_IN\_JSON**: Returns an array of cookies in JSON format. Sample JSON dictionary format: {  "Version": 1,  "Name":"appName",  "Value": "App01",  "ExpiresDate":'(null)', // in milli seconds "Domain": "app.example.com",  "Path": "/"  "HttpOnly"=TRUE;} **constants.COOKIES\_IN\_STRING**: Returns an array of cookies in String format. This is the default format in which cookies are retrieved. Sample String format: appName=App01; Version=1; Domain=app.example.com; HttpOnly=TRUE; Path=/ |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var cookies = voltmx.net.getCookies("http://www.google.com", constants.COOKIES_IN_STRING);  
+{% highlight VoltMx %}
+var cookies = voltmx.net.getCookies("http://www.google.com", constants.COOKIES_IN_STRING);  
 for (index = 0; index < cookies.length; index++) {  
     cookie = cookies[index];  
     voltmx.print("Cookie is: " + cookie);   
@@ -247,14 +263,17 @@ for (index = 0; index < cookies.length; index++) {
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an array of cookies. For details, see **Remarks** below.
 
+
+{% highlight VoltMx %}
 //For example  
 SSID=Ap4P….GTEq; Domain=foo.com; Path=/; Expires=Wed, 13 Jan 2021 22:23:01 GMT; Secure; HttpOnly
+{% endhighlight %}
 
-Remarks
+### Remarks
 
 In an application where service calls are made through Browser Widget or through native service calls, cookies are sent from the servers to maintain the session. These cookies are stored in cookie store on the client side. The voltmx.net.getCookies API enables access to the cookies for a particular domain. The URL is given as an input parameter to voltmx.net.getCookies API, then all cookies related to that domain are returned.
 
@@ -270,11 +289,11 @@ Each cookie that this function returns is a string that follows the format `key=
 
 If the scheme of the URL is `https`, then this function returns all the cookies of `https` cookies as well as the `http` cookies. If the scheme of the URL is `http`, then only the cookies stored for `http` are returned.
 
-Platform Availability
+### Platform Availability
 
 Android, iOS, Windows, and SPA
 
-Limitations
+### Limitations
 
 *   In Windows, the cookies stored in the Browser Widget cookie store are returned. Cookies stored through native service calls are not returned.
 *   In SPA, the cookies related to a currently loaded domain in a web page are accessible.
@@ -282,17 +301,20 @@ Limitations
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.hasCapability](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.hasCapability</summary>
 
 * * *
 
 Determines whether the device has the specified capability.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.hasCapability(capability);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 _capability_
 
@@ -301,46 +323,50 @@ A constant that specifies the availability of a capability on the device. You ca
 <table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 33%;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Constant</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_CAPTIVE_PORTAL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network was found to have a captive portal in place during the last time it was probed.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_CBS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has an ability to reach the CBS servers of the network carrier that is used for carrier-specific services.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_DUN</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has the ability to reach the DUN or tethering gateway of the network carrier.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_EIMS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has the ability to reach the Emergency IMS servers or other services of the network carrier used for network signaling during emergency calls.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_FOREGROUND</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network is available for use by apps, and is not a network that is being kept up in the background to facilitate fast network switches.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_FOTA</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has the ability to reach the FOTA portal of the network carrier that is used for over the air updates.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_IA</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has the ability to reach the Initial Attach servers of the network carrier.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_IMS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has the ability to reach the IMS servers of the network carrier that is used for network registration and signaling.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_INTERNET</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network must be able to reach the internet.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_MCX</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has the ability to reach the Mission Critical servers of the network carrier.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_MMS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has the ability to reach the MMSC of the network carrier that is used to send and receive MMS messages.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_NOT_CONGESTED</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network is not congested.When a network is congested, applications must defer network traffic that can be done at a later point in time, such as uploading analytics.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_NOT_METERED</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network is unmetered.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_NOT_RESTRICTED</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network is available for general use. This constant is set by default. If this constant is not set, applications must not attempt to communicate on this network. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This is simply informative and not enforcement - enforcement is handled via other means.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_NOT_ROAMING</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network is not roaming.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_NOT_SUSPENDED</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network is currently not suspended. When a network is suspended, the IP addresses and any connections established on the network remain valid, but the network is temporarily unable to transfer data. This issue may be observed if a cellular network experiences a temporary loss of signal, such as while driving through a tunnel, etc. A network with this capability is not suspended, and so is expected to be able to transfer data.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_NOT_VPN</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network is not a VPN. This capability is set by default and must be explicitly cleared for VPN networks.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_RCS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has the ability to reach the RCS servers of the network carrier, used for Rich Communication Services.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_SUPL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has the ability to reach the SUPL server of the network carrier, used to retrieve GPS information.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_TEMPORARILY_NOT_METERED</td><td class="TableStyle-Basic-BodyD-Column1-Body1">This capability is set for networks that are generally metered, but are currently unmetered, For example, when the user may not be in a particular area. This capability can be changed at any time. When this constant is not specified, the application is responsible for stopping any data transfer that must not occur on a metered network.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_TRUSTED</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the user has indicated implicit trust on this network. This constant is set by default. In general, this means that the network is a sim-selected carrier, a plugged-in ethernet, a paired Bluetooth device or a WiFi router that the user has requested connection to. Untrusted networks are probably limited to unknown WiFi access points.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_VALIDATED</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network connection is successfully validate. For example, on a network with NET_CAPABILITY_INTERNET, it means that the Internet connectivity was successfully detected.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">constants.NET_CAPABILITY_WIFI_P2P</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Indicates that the network has the ability to reach a Wi-Fi direct peer.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">constants.NET_CAPABILITY_XCAP</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Indicates that the network has the ability to reach the XCAP servers of the network carrier, used for configuration and control.</td></tr></tbody></table>
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}voltmx.net.hasCapability(constants.NET_CAPABILITY_TEMPORARILY_NOT_METERED)
+{% highlight VoltMx %}
+voltmx.net.hasCapability(constants.NET_CAPABILITY_TEMPORARILY_NOT_METERED)
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Boolean
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on Android platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.HttpRequest](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.HttpRequest</summary>
 
 * * *
 
 Creates an [HttpRequest](httprequestobject.html) object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.HttpRequest(requestOptions)
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}var httpRequestNew = voltmx.net.HttpRequest({
+{% highlight VoltMx %}
+var httpRequestNew = voltmx.net.HttpRequest({
        "timeoutIntervalForRequest": 60,
        "timeoutIntervalForResource": 600
    }
 );
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 _requestOptions_ - An optional argument that can have the following parameters.
 
@@ -353,39 +379,41 @@ _requestOptions_ - An optional argument that can have the following parameters.
 | timeoutIntervalForResource \[integer\] | An optional parameter that specifies the maximum time out value (in seconds) for which the network must wait for a response from the server resource. If the resource is not retrieved before the timeout interval is reached, a timeout error occurs. The timeoutIntervalForResource parameter is only applicable for the Android and iOS platforms. On the Android platform, the default timeout value is zero, which means that the timeout is infinite. On the iOS platform, the timeoutIntervalForResource parameter is only applicable for background network calls (when the [backgroundTransfer](httprequestobject_properties.html#backgroundTransfer) property is set to true). If the timeout value is not specified, the default timeout value of 1 week (7 days) is set by the OS. |
 
  
-
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 The [HttpRequest](httprequestobject.html) Object supports an HTTP or HTTPS request to any resource on the network and fetches the response.
 
 > **_Note:_** SNI (Server Name Indication ) is supported from Android 4.2 onwards. That is, from API level >=17. From Android 4.0 to 4.2 versions, the support of SNI depends on device capability. That is 14<= API Level <17.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.isNetworkAvailable](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.net.isNetworkAvailable</summary> 
 
 * * *
 
 This API enables you to check whether a network is available for data transport on a device.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.isNetworkAvailable(  
     networkType, optionsConfig)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 <table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 20%;"> <col class="TableStyle-Basic-Column-Column1" style="width: 80%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><td class="TableStyle-Basic-BodyE-Column1-Body1">networkType [Integer]</td><td class="TableStyle-Basic-BodyD-Column1-Body1">An integer constant that specifies the network type on the device for data transport. You can specify any of the <a href="#Network" class="selected">Network Constants</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions="Default.V9SP2-GA"><td class="TableStyle-Basic-BodyB-Column1-Body1">optionsConfig [JSON Object] - Optional</td><td class="TableStyle-Basic-BodyA-Column1-Body1">A JSON Object that contains the following parameter: <b>requestWithPermission</b>: A Boolean parameter that is required to obtain information on a 2G or 4G network used.If you set the value of this parameter to true when you place a request for mobile data networks, the system requests the <code class="codefirst">READ_PHONE_STATE</code> permission, and then processes the request. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This parameter is only available on the Android platform.</td></tr></tbody></table>
 
-Network Constants
+### Network Constants
 
   
 | Constant | Description |
@@ -399,10 +427,10 @@ Network Constants
 | constants.NETWORK\_TYPE\_ANY | Indicates that the device has sufficient network coverage to send data over any supported data channels, especially on SPA , Mobile Web, and Desktop Web applications. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}function checkIfNetworkIsAvailable() {  
+{% highlight VoltMx %}
+function checkIfNetworkIsAvailable() {  
   
 var options = {  
   "requestWithPermission" : true  
@@ -412,30 +440,33 @@ return voltmx.net.isNetworkAvailable(constants.NETWORK_TYPE_ANY, options);
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
-_Boolean_
+**_Boolean_**
 
 Returns `true` if the specified data network is available, or `false` if not.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.loadClientCertificate](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.loadClientCertificate</summary>
 
 * * *
 
 Sets a client certificate to be used for HTTPS client authentication.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.loadClientCertificate(  
     certParamsTable)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 certParamsTable
 
@@ -448,10 +479,10 @@ A list of following key-value pairs required to load client certificate for clie
 | pass | A string containing the password that is protecting the PKCS12 certificate. If PKCS12 certificate is not password protected, use an empty string; that is, “ ”. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}function loadCert() {  
+{% highlight VoltMx %}
+function loadCert() {  
   try {  
   var certFileName = voltmx.io.FileSystem.getCacheDirectoryPath() + "/" + clientCertFileName;  
   var certFile = new voltmx.io.File(certFileName);  
@@ -469,17 +500,17 @@ Example
  }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 This API returns a Boolean value whether the client certificate is loaded successfully or not.
 
-Remarks
+### Remarks
 
 The following functions use the client authentication feature:
 
-voltmx.net.invokeServiceAsync
+    voltmx.net.invokeServiceAsync
 
-voltmx.net.send
+    voltmx.net.send
 
 If loading the client certificate succeeds, the previously-loaded certificate is replaced with new one.
 
@@ -489,7 +520,7 @@ Any certificate loaded using this function is automatically unloaded as soon as 
 
 > **_Note:_** When you use the [voltmx.net.HttpRequest](#HttpRequ) API in sync mode, both server and client pinning do not work in the iOS platform.
 
-Exceptions
+### Exceptions
 
 If the mandatory parameters are missing, following error codes occur.
 
@@ -497,28 +528,31 @@ If the mandatory parameters are missing, following error codes occur.
 
 101 - invalid number of arguments
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.mfintegrationsecureinvokerasync](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.net.mfintegrationsecureinvokerasync</summary> 
 
 * * *
 
 Invokes a Volt MX Foundry service asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.mfintegrationsecureinvokerasync(  
     inputParams,  
     serviceName ,  
     operationName,  
     callbackFunction)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -529,10 +563,10 @@ Input Parameters
 | _callbackFunction_ | A callback function to handle the service's response. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}function callbackFunction(status, response) {
+{% highlight VoltMx %}
+function callbackFunction(status, response) {
     //application specific code goes here.
 }
 
@@ -553,11 +587,11 @@ mfintegrationsecureinvokerasync(inputParams, serviceName, operationName, callbac
 				
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 Use this service to call a Volt MX Foundry service from your app. When the service sends a response to your app, the response is processed by the callback function that your app passes through the callbackFunction parameter of this function.
 
@@ -565,7 +599,9 @@ The format of the _inputParams_ object parameter is not specified here because i
 
 The function passed through the _callbackFunction_ parameter must match the following Syntax.
 
+{% highlight VoltMx %}
 callbackFunction(status,response);
+{% endhighlight %}
 
 The callback function takes two parameters. The first, called _status_, is an integer that indicates the status of the response from the service's operation The value contained in the _status_ parameter depends on the service itself.
 
@@ -573,106 +609,121 @@ The second parameter to the callback function is called _response_. It is a Java
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.removeAllCachedResponses](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.net.removeAllCachedResponses</summary> 
 
 * * *
 
 Clears the default cache of an application by removing all responses received from URLs.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.removeAllCachedResponses()
-
-Example
-
-{% highlight voltMx %}voltmx.net.removeAllCachedResponses();
 {% endhighlight %}
 
-Input Parameters
+### Example
+
+{% highlight VoltMx %}
+voltmx.net.removeAllCachedResponses();
+{% endhighlight %}
+
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.removeClientCertificate](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.removeClientCertificate</summary>
 
 * * *
 
 Removes already loaded client certificate.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.removeClientCertificate()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}function removeCert() {  
+{% highlight VoltMx %}
+function removeCert() {  
     voltmx.net.removeClientCertificate();  
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None.
 
-Exceptions
+### Exceptions
 
 None.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.removeIntegrityCheck](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.removeIntegrityCheck</summary>
 
 * * *
 
 Disables intregity checks for HTTP calls between the client and the server.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.removeIntegrityCheck()
-
-Example
-
-{% highlight voltMx %}voltmx.net.removeIntegrityCheck();
 {% endhighlight %}
 
-Input Parameters
+### Example
+
+{% highlight VoltMx %}
+voltmx.net.removeIntegrityCheck();
+{% endhighlight %}
+
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.set5GNetworkListener](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.set5GNetworkListener</summary>
 
 * * *
 
 Determines if the device has a 5G network connection to the app.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.set5GNetworkListener(callback);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 _callback_ - The callback function that must be executed after the execution of the API call is complete.
 
@@ -686,25 +737,25 @@ _callback_ - The callback function that must be executed after the execution of 
 | constants.OVERRIDE\_NETWORK\_TYPE\_NONE | No configured network override. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}callbackFunction : function(networktype){  
+{% highlight VoltMx %}
+callbackFunction : function(networktype){  
   if(networktype = constants.OVERRIDE_NETWORK_TYPE_LTE_CA)
     alert("LTE_CA");  
 }  
 voltmx.net.set5GNetworkListener(callbackFunction);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Constant
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on Android platform.
 
@@ -712,17 +763,20 @@ Available on Android platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.setCookies](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.setCookies</summary>
 
 * * *
 
 Adds cookies in the main app cookie storage. If a cookie with the same name, domain, and path already exists in storage, this API replaces the specified cookie in the cookie storage.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.setCookies(url,cookiesList)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -731,10 +785,10 @@ Input Parameters
 | cookiesList | An array of objects, that each contains details of a cookie in the dictionary format. Sample dictionary format:{  "Version": 1,  "Name":"appName",  "Value": "App01",  "ExpiresDate":'(null)', // in milli seconds  "Domain": "app.example.com",  "Path": "/" } |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}function setCookiesFunc() {
+{% highlight VoltMx %}
+function setCookiesFunc() {
     var lisOfCookies = [{
         "Name": "appName",
         "Value": "App01",
@@ -745,36 +799,39 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 To successfully create a cookie, you must provide values for (at least) the **Path**, **Name**, **Value**, and the **Domain** keys. All the other valid keys must start with capital letters.
 
 The parameter url must be the complete URL. For example, [http://www.gooogle.com](http://www.gooogle.com/).
 
-Platform Availability
+### Platform Availability
 
 Available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.setIntegrityCheck](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.net.setIntegrityCheck</summary> 
 
 * * *
 
 Enables the addition of checksums to HTTP calls for HTTP integrity checking.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.setIntegrityCheck(  
     propertiesTable)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-_propertiesTable_
+**_propertiesTable_**
 
 A JavaScript object that contains the following key-value pairs.
 
@@ -788,10 +845,10 @@ A JavaScript object that contains the following key-value pairs.
 | hostNameList | An optional array of strings that specify the URLs of servers. When the client app on the device communicates with the specified servers, it adds integrity checking headers to each HTTP request. For more information, see the **Remarks** section below. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var propertiesTable {
+{% highlight VoltMx %}
+var propertiesTable {
     algo: “SHA256”,
     salt: “secret_123”,
     headerName: “X - Checksum”,
@@ -803,11 +860,11 @@ Example
 voltmx.net.setIntegrityCheck(propertiesTable);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 This function throws the following exceptions.
 
@@ -817,7 +874,7 @@ This function throws the following exceptions.
 | 101 | Missing argument or parameter, |
 | 102 | Invalid number of arguments. |
 
-Remarks
+### Remarks
 
 Use this function to cause the Volt MX IrisAPI Framework to use checksums to validate HTTP messages passing between the client app and the servers.
 
@@ -827,7 +884,7 @@ If the `validateResp` argument in the `propertiesTable` parameter is set to `tru
 
 If the optional `hostNameList` argument is omitted from the `propertiesTable` parameter, then the integrity checking header is added to all outgoing HTTP and HTTPS calls. However, if the host names are specified in the `hostNameList` argument, then the integrity checking header is only added to calls to the specified hosts. Also, only basic validation is performed on the named hosts' parameters if the hostname strings are limited to the set \[a-z, A-Z, 0-9, -\]. In addition, the wildcard character, which is the asterisk (\*), can only be used as a prefix. For example, \*.voltmx.com is valid, but voltmx.\* is not. Finally, you must ensure that all of the host names you pass are valid. The `setIntegrityCheck` function does not validate the format of the host names for you. All host names must follow the standard delineated in the Wikipedia [Hostname](https://en.wikipedia.org/wiki/Hostname) topic.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -835,27 +892,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.setNetworkCallbacks](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.setNetworkCallbacks</summary>
 
 * * *
 
 This function allows the developer to register for network status changes.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.setNetworkCallbacks(  
     callbackconfig)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | callbackconfig | A JSON object that contains a property called `statusChange`. statusChange: A callback function that is invoked when the device goes offline or online. This callback receives an input parameter that indicates whether the device was online or offline when this callback was invoked. |
 
-Example
+### Example
 
-{% highlight voltMx %}var config = {};
+{% highlight VoltMx %}
+var config = {};
 config.statusChange = function(isOnLine) {
     if (isOnLine) {
         alert("Device is online");
@@ -866,68 +927,73 @@ config.statusChange = function(isOnLine) {
 voltmx.net.setNetworkCallbacks(config);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 This function allows the developer to register for network status changes. You can then change the user experience according to the network availability.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Windows and Mobile Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.unregister5GNetworkListener](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.unregister5GNetworkListener</summary>
 
 * * *
 
 Unregister from the 5G Network Listener.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.unregister5GNetworkListener();
-
-Input Parameters
-
-None
-
- 
-
-Example
-
-{% highlight voltMx %}voltmx.net.unregister5GNetworkListener();
 {% endhighlight %}
 
-Return Values
+### Input Parameters
 
 None
 
-Exceptions
+### Example
+
+{% highlight VoltMx %}
+voltmx.net.unregister5GNetworkListener();
+{% endhighlight %}
+
+### Return Values
 
 None
 
-Platform Availability
+### Exceptions
+
+None
+
+### Platform Availability
 
 Available on Android platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.urlDecode](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.urlDecode</summary>
 
 * * *
 
 Converts a URL string from application/x-www-form-urlencoded format in the UTF-8 encoding.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.urlDecode(  
     queryParams,  
     exemptionString)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -936,10 +1002,10 @@ Input Parameters
 | exemptionString | Optional. Specify the characters in the string that should be exempted from decoding. The parameter is used only on iOS . The Android and Windows platforms ignore this parameter. |
 
  
+### Example with exemptionString parameter
 
-Example with exemptionString parameter
-
-{% highlight voltMx %}var result = voltmx.net.urlDecode(“hello*_%40+world”); 
+{% highlight VoltMx %}
+var result = voltmx.net.urlDecode(“hello*_%40+world”); 
 voltmx.print(result);  
   
 //iOS output  
@@ -951,18 +1017,19 @@ voltmx.print(result);
 
 Example without exemptionString parameter
 
-{% highlight voltMx %}var result = voltmx.net.urlDecode(“hello*_%40+world”); 
+{% highlight VoltMx %}
+var result = voltmx.net.urlDecode(“hello*_%40+world”); 
 voltmx.print(result);
 					  
 //Output for all platforms  
   “hello*_@ world”		
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns a string containing the decoded URL.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -970,19 +1037,22 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.net.urlEncode](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.net.urlEncode</summary>
 
 * * *
 
 Converts a URL string into application/x-www-form-urlencoded format using the UTF-8 encoding.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.net.urlEncode(  
     queryParams  
     exemptionString)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -991,10 +1061,10 @@ Input Parameters
 | exemptionString | Optional. A string that specifies the characters in the string that should be exempted from encoding. The parameter is used only on iOS. The Android and Windows platforms ignore this parameter. |
 
  
+### Example with exemptionString parameter
 
-Example with exemptionString parameter
-
-{% highlight voltMx %}var exemptionString =  "helloworl-*_.";
+{% highlight VoltMx %}
+var exemptionString =  "helloworl-*_.";
 var result = voltmx.net.urlEncode(“hello*_@ world”, exemptionString); 
 voltmx.print(result);  
   
@@ -1005,34 +1075,33 @@ voltmx.print(result);
   hello*_%40+world
 {% endhighlight %}
 
-Example without exemptionString parameter
+### Example without exemptionString parameter
 
-{% highlight voltMx %}var result = voltmx.net.urlEncode(“hello*_@ world”); 
+{% highlight VoltMx %}
+var result = voltmx.net.urlEncode(“hello*_@ world”); 
 voltmx.print(result);
 					  
 //Output for all platforms  
   hello*_%40+world		
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns the encoded string.
 
-Remarks
+### Remarks
 
 The string is encoded based on the following rules.
 
 *   The following characters remain the unchanged.
-
-*   a-z
-*   A-Z
-*   0-9
-*   Period (**.**), hyphen (**\-**), asterisk (**\***), and underscore (**\_**)
-
+    *  a-z
+    *  A-Z
+    *  0-9
+    *  Period (**.**), hyphen (**\-**), asterisk (**\***), and underscore (**\_**)
 *   The space character " " is converted to a plus symbol (**+**).
 *   Other characters are unsafe and are first converted to one or more bytes using an encoding scheme. Each byte is represented as 3-character string, _%xy_, where _xy_ is the two-digit hexadecimal representation of the byte.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS

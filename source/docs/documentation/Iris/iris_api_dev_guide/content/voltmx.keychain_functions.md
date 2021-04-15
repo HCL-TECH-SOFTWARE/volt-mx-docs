@@ -13,27 +13,29 @@ The voltmx.keychain namespace consists of functions that enable your app to acce
 Functions
 ---------
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.keychain.remove](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.keychain.remove</summary>
 
 * * *
 
 Deletes the credential information from the device's keychain. It deletes secure data from the keychain with the provided identifier.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.keychain.remove(  
     identifier);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | identifier | A JavaScript Dictionary object containing a key-value pair that specifies the identifier of the credential information to remove. The only supported key is 'identifier.' Its value must be a string that contains the credentialInfo's unique identifier. |
 
-Example
+### Example
 
-{% highlight voltMx %}//Use the below function to remove sensitive data from your device keychain
+{% highlight VoltMx %}
+//Use the below function to remove sensitive data from your device keychain
   remove: function() {
     var cred = {
         "identifier": "Apple"
@@ -43,7 +45,7 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 If the credential information is successfully removed, 0 is the return value. If the credentials were not removed or not found, the appropriate error code is the return value.
 
@@ -58,34 +60,37 @@ If the credential information is successfully removed, 0 is the return value. If
 | \-36 | IO\_ERRORCODE |
 | \-4 | API\_NOT\_IMPLEMENTED\_ERRORCODE |
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.keychain.retrieve](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.keychain.retrieve</summary>
 
 * * *
 
 Retrieves the specified credential information from the device's keychain.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.keychain.retrieve(  
     identifier);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | identifier | A JavaScript Dictionary object containing a key-value pair that specifies the identifier of the credential information to retrieve. They only supported key is "identifier". Its value must be a string that contains the credential info's unique identifier. |
 
-Example
+### Example
 
-{% highlight voltMx %}//Use the below function to retrieve sensitive data from your device keychain   
+{% highlight VoltMx %}
+//Use the below function to retrieve sensitive data from your device keychain   
  retrieve: function() {
     var cred = {
         "identifier": "Apple"
@@ -95,11 +100,11 @@ Example
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 If successful, a JavaScript Dictionary object containing the retrieved secure data is returned. If the retrieval process fails, an appropriate error code is returned. If the data does not exist in the devuce, an empty dictionary is returned.
 
-Android-specific Error/Success Codes
+**Android-specific Error/Success Codes**
 
 | Error/Success Code | Error/Success Message |
 | --- | --- |
@@ -110,27 +115,29 @@ Android-specific Error/Success Codes
 | \-36 | IO\_ERRORCODE |
 | \-4 | API\_NOT\_IMPLEMENTED\_ERRORCODE |
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.keychain.save](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.keychain.save</summary> 
 
 * * *
 
 Saves credential information in the device's keychain.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.keychain.save(  
     credentialInfo);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-_credentialInfo_
+**credentialInfo**
 
 A JavaScript Dictionary object that contains a key-value pair that specifies the identifier of the credential information to save. They following keys are supported.
 
@@ -141,9 +148,10 @@ A JavaScript Dictionary object that contains a key-value pair that specifies the
 | secureAccessControl | An iOS-specific optional key that contains information about how a keychain item can be used. |
 | securedata | A mandatory key which stores a string that contains the secure data to store in the keychain. |
 
-Example 1 (for iOS)
+### Example 1 (for iOS)
 
-{% highlight voltMx %}//Use the below function to save sensitive data  to your device keychain
+{% highlight VoltMx %}
+//Use the below function to save sensitive data  to your device keychain
   save: function() {
     var cred = {
         "securedata": JSON.stringify(this.view.tbxData.text),
@@ -179,9 +187,10 @@ The **secureAccessControl** parameter contains information about how a keychain 
 *   constants.VOLTMX\_KEYCHAIN\_ACCESS\_CONTROL\_AND: Constraint logic operation: When using more than one constraint, all constraints must be satisfied.
 *   constants.VOLTMX\_KEYCHAIN\_ACCESS\_CONTROL\_APPLICATION\_PASSWORD: The application-provided password to generate the data encryption key. This is not a constraint, but an additional item encryption mechanism.
 
-Example 2 (for Android)
+### Example 2 (for Android)
 
-{% highlight voltMx %}var cred = {
+{% highlight VoltMx %}
+var cred = {
     "securedata": "Appleseed",
     "identifier": "Apple"
 };
@@ -190,11 +199,11 @@ voltmx.keychain.save(cred);
 
 Here, **identifier** and **securedata** are **mandatory** parameters. The 'securedata' string must be less than or equal to 245 characters. Also, items saved in one Android app cannot be retrieved from another app.
 
-Return Values
+### Return Values
 
 Returns an error dictionary containing an error number and error message.
 
-Android-specific Error/Success Codes
+**Android-specific Error/Success Codes**
 
 | Error/Success Code | Error/Success Message |
 | --- | --- |
@@ -205,7 +214,7 @@ Android-specific Error/Success Codes
 | \-36 | IO\_ERRORCODE |
 | \-4 | API\_NOT\_IMPLEMENTED\_ERRORCODE |
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -217,4 +226,5 @@ Usage
 
 To store the required credential information in the device's keychain, you must call the [voltmx.keychain.save](#save) function. Your app can access the saved credential information by calling the [voltmx.keychain.retrieve](#retrieve) function. If you want to remove any information that is no longer required, you need to call the [voltmx.keychain.remove](#remove) function.
 
+</details>
 ![](resources/prettify/onload.png)

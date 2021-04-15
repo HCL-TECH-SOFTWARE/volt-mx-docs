@@ -37,7 +37,7 @@ The voltmx.gms namespace provides the following constants:
 | SECURITY\_PROVIDER\_UPDATE\_NOT\_POSSIBLE | Security Crypto Provider patching can not be done as Google Play Services is not available on the device or an unresolvable error was encountered during patching. |
 | GMS\_UPDATE\_INPROGRESS | Security Crypto Provider patching is not done as an update to Google Play Services is being installed on the device. When the Google Play Services update is in progress, the dialog box is not displayed, and Security Crypto Provider patching is skipped in silent mode. |
 | SECURITY\_PROVIDER\_UPDATE\_SUCCESS | Security Crypto Provider patching is successful. |
-| GMS\_LIBRARY\_MISSING | Security Crypto Provider patching is not done as the GMS (Google Mobile Services/Google Play Services) Library is not bundled with the application (during the build process). To bundle the GMS Library with the app, follow the steps mentioned [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html#Native_App_Properties.html#security-provider-patching). |
+| GMS\_LIBRARY\_MISSING | Security Crypto Provider patching is not done as the GMS (Google Mobile Services/Google Play Services) Library is not bundled with the application (during the build process). To bundle the GMS Library with the app, follow the steps mentioned [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Native_App_Properties.html#security-provider-patching). |
 
 ### Hints StatusCodes
 
@@ -65,15 +65,17 @@ The requestHintAPI displays a list of email addresses and phone numbers that are
 
 In situations where users need to fill input text fields with email address or phone number (such as in a Sign-in or Sign-up forms, or sms verification), this API helps users retrieve appropriate hint texts relevant to the input field. These user hints help speed up the on-boarding or verification process for an app.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.requestHint({  
 "callback" : callback,  
 "hintTypes" : \[voltmx.gms.HINT\_TYPE\_EMAIL,voltmx.gms.HINT\_TYPE\_PHONE\_NUMBER\],  
 "showCancelButton" : false  
 });
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -87,9 +89,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}signupForm1(){
+{% highlight VoltMx %}signupForm1(){
     voltmx.gms.requestCredentialHints({
       "callback" : this.callback.bind(this),
        "hintTypes" : [voltmx.gms.HINT_TYPE_EMAIL,voltmx.gms.HINT_TYPE_PHONE_NUMBER],
@@ -106,15 +108,15 @@ Example
   }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 List of hints
 
-Remarks
+<b>Remarks</b>
 
 Ensure that you add the `supportGooglePlayAuthLib=true` entry in the **androidbuild.properties** file.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 </details>
@@ -136,11 +138,13 @@ A nonce used with an attestation request must be at least 16 bytes in length. Af
 
 The result is returned through the success or failure callbacks.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.gms.safetynet.attest(apikey, nonce, successCallback, failureCallback)
+{% highlight VoltMx %}
+voltmx.gms.safetynet.attest(apikey, nonce, successCallback, failureCallback);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -152,9 +156,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var uuid = voltmx.os.createUUID();  
+{% highlight VoltMx %}var uuid = voltmx.os.createUUID();  
 var timestamp = new Date().getTime();  
 var nonce = uuid + timestamp; // generating nonce at client. However generating at server is best practice.  
 var apiKey = “google_api_key”; // check reference links to know how to get the API key.  
@@ -166,15 +170,15 @@ function failureCallback(errorCode,errormessage){
 
 {% endhighlight %}
 
-Return Values
+<b>Return Value</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 </details>
@@ -191,11 +195,13 @@ This API allows your app to determine whether the user has enrolled for the [Ver
 
 The result is returned through the result callback.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.gms.safetynet.isVerifyAppsEnabled(successCallback, failureCallback)
+{% highlight VoltMx %}
+voltmx.gms.safetynet.isVerifyAppsEnabled(successCallback, failureCallback);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -205,9 +211,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function isVerifyAppsEnabled() {  
+{% highlight VoltMx %}function isVerifyAppsEnabled() {  
     voltmx.gms.safetynet.isVerifyAppsEnabled(successCallback, failureCallback);  
 }  
 function successCallback(result) {  
@@ -219,15 +225,15 @@ alert("isVerifyAppsEnabled API failed with errorCode" + errorCode + " and errorM
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -242,11 +248,13 @@ The API allows your app to invoke a dialog box requesting that the user enable t
 
 The result is returned through the result callback.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.gms.safetynet.enableVerifyApps(successCallback, failureCallback)
+{% highlight VoltMx %}
+voltmx.gms.safetynet.enableVerifyApps(successCallback, failureCallback);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -256,9 +264,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.gms.safetynet.enableVerifyApps(successCallback, failureCallback);  
+{% highlight VoltMx %}voltmx.gms.safetynet.enableVerifyApps(successCallback, failureCallback);  
 function successCallback (result) {  
     alert("enableVerifyApps API result is " + result); // Perform the appropriate action based on the result.  
 }  
@@ -267,15 +275,15 @@ alert(" enableVerifyApps API failed with errorCode " + errorCode + " and errorMe
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -290,11 +298,13 @@ This API identifies a list of installed apps that are known to be potentially ha
 
 The result is returned through the success or failure callbacks.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.gms.safetynet.listHarmfulApps(successCallback, failureCallback)
+{% highlight VoltMx %}
+voltmx.gms.safetynet.listHarmfulApps(successCallback, failureCallback);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -304,9 +314,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.gms.safetynet.listHarmfulApps(successCallback, failureCallback);  
+{% highlight VoltMx %}voltmx.gms.safetynet.listHarmfulApps(successCallback, failureCallback);  
 function successCallback(result) {  
     var apps = "";  
     if (result != null) {  
@@ -329,15 +339,15 @@ alert("listHarmfulApps API failed with errorCode " + errorCode + " and errorMess
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 </details>
@@ -356,19 +366,21 @@ The getSecurityProvidersList API returns a list of names all the providers that 
 
 In case of successful provider patching, the first entry in the list must include a new provider from the GMS, GmsCore\_OpenSSL.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.getSecurityProvidersList();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var providerList = voltmx.gms.getSecurityProvidersList();  
+{% highlight VoltMx %}var providerList = voltmx.gms.getSecurityProvidersList();  
 voltmx.print("array values ::" + providerList);  
 if (providerList.includes("GmsCore_OpenSSL")) {  
     voltmx.print("PROVIDER UPDATED");  
@@ -377,11 +389,11 @@ if (providerList.includes("GmsCore_OpenSSL")) {
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 List of provider names
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -396,11 +408,13 @@ If the value of the `showUpdateDialog` parameter is set to **true**, an appropri
 
 Even if the user selects **Accept** in the Google Play Services Update or Error Resolution dialog box (with the status code GMS\_REQUEST\_ACCEPTED), it does not imply that the installation of the security provider is successful. Users must download (or update to) the latest version of Google Play Services from the Google Play Store, and then invoke this API to install the security provider in the application process.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.installSecurityProvider(requestConfig);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 **requestConfig** - A mandatory parameter that is a JSON Object and contains the following fields.
 
@@ -413,9 +427,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function providersync() {
+{% highlight VoltMx %}function providersync() {
     var updateRequestParms = {
         "showUpdateDialog": true,
         "updateDialogListener": requestDialogCallback,
@@ -452,11 +466,11 @@ function requestDialogCallback(status) {
 
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -467,11 +481,13 @@ Android
 
 The installSecurityProviderAsync API tries to install the security provider from Google Play Services into the application's process asynchronously, by replacing the current security provider.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.installSecurityProviderAsync(requestConfig);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 **requestConfig** - A mandatory parameter that is a JSON Object and contains the following fields.
 
@@ -484,9 +500,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function providerAsync() {
+{% highlight VoltMx %}function providerAsync() {
     var updateRequestParms = {
         "showUpdateDialog": true,
         "updateDialogListener": requestDialogCallbackAsync,
@@ -521,11 +537,11 @@ function requestDialogCallbackAsync(status) {
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 </details>
@@ -551,11 +567,13 @@ The getStatusString API returns the statusCode (that is returned by the [voltmx.
 
 The string that is returned can be used to display customized notifications (by using the voltmx.gms.showCustomErrorNotification) and custom dialogs boxes (by using the voltmx.gms.raiseGooglePlayErrorResolutionIntent).
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.getStatusString(statusCode);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -564,9 +582,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function checkGMSAvailabiltity() {
+{% highlight VoltMx %}function checkGMSAvailabiltity() {
     var googlePlayServicesAvailabilityStatus = voltmx.gms.isGooglePlayServicesAvailable();
     //This check is to ensure googleplayservices is available and uptodate in device.
     if (voltmx.gms.getStatusString(googlePlayServicesAvailabilityStatus) == "SUCCESS") {
@@ -582,13 +600,13 @@ Example
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 String
 
 A message that describes the statusCode that is returned by the [voltmx.gms.isGooglePlayServicesAvailable](#isGooglePlayServicesAvailable) API in a readable format.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -599,19 +617,21 @@ Android
 
 The isBaseLibraryAvailable API checks if the base client library is integrated with the application.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.isBaseLibraryAvailable();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var isBaseLibAvailable = voltmx.gms.isBaseLibraryAvailable();
+{% highlight VoltMx %}var isBaseLibAvailable = voltmx.gms.isBaseLibraryAvailable();
 if (isBaseLibAvailable) // This check is to ensure google play base client library is available
 {
 
@@ -624,13 +644,13 @@ if (isBaseLibAvailable) // This check is to ensure google play base client libra
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 Boolean
 
 The API returns true if the base library is integrated with the app. If the base library is not integrated, the API returns false.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -641,13 +661,15 @@ Android
 
 The isGooglePlayServicesAvailable API checks if Google Play Services is installed and enabled on the device. The API also checks if the version of Google Play Services that is installed is not older than the one that is required for the app (based on the value of the minApkVersion parameter). If the value of the minApkVersion parameter is not valid, the voltmx.gms.isGooglePlayServicesAvailable API gets invoked without an argument.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.isGooglePlayServicesAvailable();  
 or  
 voltmx.gms.isGooglePlayServicesAvailable(minApkVersion);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -656,9 +678,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var googlePlayServicesAvailabilityStatus = voltmx.gms.isGooglePlayServicesAvailable();
+{% highlight VoltMx %}var googlePlayServicesAvailabilityStatus = voltmx.gms.isGooglePlayServicesAvailable();
 
 //This check is to ensure googleplayservices is available and uptodate in device.
 if (voltmx.gms.getStatusString(googlePlayServicesAvailabilityStatus) == "SUCCESS") {
@@ -668,9 +690,9 @@ if (voltmx.gms.getStatusString(googlePlayServicesAvailabilityStatus) == "SUCCESS
 }
 {% endhighlight %}
 
-Example 2
+<b>Example 2</b> 
 
-{% highlight voltMx %}var versionCode = 203965037; // google play services apk version code
+{% highlight VoltMx %}var versionCode = 203965037; // google play services apk version code
 var googlePlayServicesAvailabilityStatus = voltmx.gms.isGooglePlayServicesAvailable(versionCode);
 
 //This check is to ensure googleplayservices is available and uptodate in device.
@@ -681,7 +703,7 @@ if (voltmx.gms.getStatusString(googlePlayServicesAvailabilityStatus) == "SUCCESS
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 Number
 
@@ -694,7 +716,7 @@ This API returns the status code that indicates whether there was an error. The 
 *   SERVICE\_DISABLED
 *   SERVICE\_INVALID
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -705,11 +727,13 @@ Android
 
 The isUserResolvableError API determines whether an error can be resolved through a user action such as, on a dialog box or a notification.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.isUserResolvableError(statusCode);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -718,9 +742,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var googlePlayServicesAvailabilityStatus = voltmx.gms.isGooglePlayServicesAvailable();
+{% highlight VoltMx %}var googlePlayServicesAvailabilityStatus = voltmx.gms.isGooglePlayServicesAvailable();
 
 //This check is to ensure googleplayservices is available and uptodate in device.
 if (voltmx.gms.getStatusString(googlePlayServicesAvailabilityStatus) == "SUCCESS") {
@@ -734,7 +758,7 @@ if (voltmx.gms.getStatusString(googlePlayServicesAvailabilityStatus) == "SUCCESS
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 Boolean
 
@@ -742,7 +766,7 @@ The API returns true if the error can be resolved by using the Resolution APIs (
 
 If the API returns true, you can invoke the voltmx.gms.showResolutionDialog API to display a dialog box.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -757,15 +781,17 @@ The dialog box displays a localized message about the error, and upon confirmati
 
 This API attempts to make Google Play Services available on the device. If Google Play Services is already available on the device, the resultCallback may be triggered immediately.
 
-If it is necessary to display a UI to complete this request, (for example, while directing the user to the Google Play Store) the VoltMXMain Activity must be used to display the UI.
+If it is necessary to display a UI to complete this request, (for example, while directing the user to the Google Play Store) the Volt MX Main Activity must be used to display the UI.
 
 > **_Note:_** You must not invoke this API when the app is running in the background.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.makeGooglePlayServicesAvailable(resulCallback);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 **resultCallback \[Function\]**: A callback function that is executed when a user actions performed and the API call is complete. The resultCallback function is a JSON Object that has the following keys:
 
@@ -779,9 +805,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function makeGMSAvailabile() {
+{% highlight VoltMx %}function makeGMSAvailabile() {
     //This check is to ensure googleplayservices is available and uptodate in device.
     voltmx.gms.makeGooglePlayServicesAvailable(resulCallback)
 }
@@ -797,11 +823,11 @@ function resulCallback(result) {
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -816,17 +842,19 @@ When a user taps the notification, they are directed to the Google Play Store if
 
 This API has been introduced to handle background tasks that cannot (or must not) display dialog boxes.
 
-If it is necessary to display a UI to complete this request, (for example, while directing the user to the Google Play Store) the VoltMXMain Activity must be used to display the UI.
+If it is necessary to display a UI to complete this request, (for example, while directing the user to the Google Play Store) the Volt MX Main Activity must be used to display the UI.
 
 Developers can use this API to display a user-defined UI instead of the system dialogs that appears when the with voltmx.gms.showResolutionDialog API is triggered.
 
 This api is not allowed in app background state.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.raiseGooglePlayErrorResolutionIntent(statusCode, requestCode, resultCallback);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -837,9 +865,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function checkGMSAvailabiltity() {
+{% highlight VoltMx %}function checkGMSAvailabiltity() {
     googlePlayServicesAvailabilityStatus = voltmx.gms.isGooglePlayServicesAvailable();
     //This check is to ensure googleplayservices is available and uptodate in device.
     if (voltmx.gms.getStatusString(googlePlayServicesAvailabilityStatus) == "SUCCESS") {
@@ -871,11 +899,11 @@ function resulCallback(result) {
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -890,11 +918,13 @@ When a user taps the notification, they are directed to the Google Play Store if
 
 This API has been introduced to handle background tasks that cannot (or must not) display dialog boxes.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.showCustomErrorNotification(statusCode, channelId, notificationId, priority, title, text);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -908,9 +938,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function checkGMSAvailabiltity() {
+{% highlight VoltMx %}function checkGMSAvailabiltity() {
     var googlePlayServicesAvailabilityStatus = voltmx.gms.isGooglePlayServicesAvailable();
     //This check is to ensure googleplayservices is available and uptodate in device.
     if (voltmx.gms.getStatusString(googlePlayServicesAvailabilityStatus) == "SUCCESS") {
@@ -928,13 +958,13 @@ Example
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 Boolean
 
 The API returns true if the API is successfully invoked. The API returns false if the invocation of the API fails.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -949,11 +979,13 @@ When a user taps the notification, they are directed to the Google Play Store if
 
 This API has been introduced to handle background tasks that cannot (or must not) display dialog boxes.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.gms.showErrorNotification(statusCode);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -962,9 +994,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function checkGMSAvailabiltity() {
+{% highlight VoltMx %}function checkGMSAvailabiltity() {
     var googlePlayServicesAvailabilityStatus = voltmx.gms.isGooglePlayServicesAvailable();
     //This check is to ensure googleplayservices is available and uptodate in device.
     if (voltmx.gms.getStatusString(googlePlayServicesAvailabilityStatus) == "SUCCESS") {
@@ -980,13 +1012,13 @@ Example
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 Boolean
 
 The API returns true if the API is successfully invoked. The API returns false if the invocation of the API fails.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -999,11 +1031,11 @@ The showResolutionDialog API displays a dialog box to address any errors based o
 
 The dialog box displays a localized message about the error, and upon confirmation from the user (by tapping on the dialog box) directs them to the Google Play Store if the Google Play Services is out of date or missing. Users are directed to the system settings if Google Play Services is disabled on the device.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.gms.showResolutionDialog(statusCode, requestCode, resultCallback);
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -1014,9 +1046,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function checkGMSAvailabiltity() {
+{% highlight VoltMx %}function checkGMSAvailabiltity() {
     var googlePlayServicesAvailabilityStatus = voltmx.gms.isGooglePlayServicesAvailable();
     //This check is to ensure googleplayservices is available and uptodate in device.
     if (voltmx.gms.getStatusString(googlePlayServicesAvailabilityStatus) == "SUCCESS") {
@@ -1040,12 +1072,14 @@ function resulCallback() {
 }
 {% endhighlight %}
 
-Return Value
+<b>Return Value</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
+
+</details>
 
 ![](resources/prettify/onload.png)

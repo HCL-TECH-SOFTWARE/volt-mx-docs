@@ -18,5 +18,4 @@ These steps show how to add the VoltMX-iOS-SDK to your project and set up Volt M
 *   [Invoking a Messaging Service](Invoking_Messaging_Service_iOS.html)
 *   [Invoking a Sync Service](Invoking_Sync_Service_iOS.html)
 *   [Invoking a Metrics Service](Invoking_Metrics_Service_iOS.html)
-*   [![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[API Reference](javascript:void(0);)
-    
+  

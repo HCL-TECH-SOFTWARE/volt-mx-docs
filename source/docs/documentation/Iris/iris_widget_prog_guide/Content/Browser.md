@@ -22,7 +22,7 @@ The three key ways to load the content of a Browser widget are as follows:
 > **_Note:_** In previous versions of iOS applications, Browser widget uses UIWebView class in UIKit framework by default to display its contents. Apple has deprecated UIWebView class and recommends using the WKWebView class in WebKit framework.  
 As UIWebView class has been deprecated and its support will be removed from Apple, you must change the Browser Type of Browser widget to WKWebView class.
 
-Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Iris_User_Guide.html).
+Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 For general information on the Browser widget see the []({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Button.html)[Browser]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Browser.html) topic in the Volt MX Iris User Guide.
 

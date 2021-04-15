@@ -8,9 +8,10 @@ category: "iris_api_dev_guide"
 AnimationConfiguration Object
 =============================
 
-The `AnimationConfiguration` object is a JavaScript object that your app builds to perform animations on [widgets]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Overview.html#Animation.html#widget-level-animation-using-flex-forms). The `AnimationConfiguration` object contains key-value pairs. The following keys are supported.
+The `AnimationConfiguration` object is a JavaScript object that your app builds to perform animations on [widgets]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Animation.html#widget-level-animation-using-flex-forms). The `AnimationConfiguration` object contains key-value pairs. The following keys are supported.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[delay](javascript:void(0);)
+
+<details close markdown="block"><summary>delay</summary>
 
 * * *
 
@@ -22,7 +23,8 @@ This is used for the overall widget animation configuration and not the step-lev
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[direction](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>direction</summary>
 
 * * *
 
@@ -44,7 +46,8 @@ Values will be specified as a string containing one of the above values. Any oth
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[duration](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>duration</summary>
 
 * * *
 
@@ -56,7 +59,8 @@ Negative values will be treated as zero or may lead to undefined behavior.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fillMode](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fillMode</summary>
 
 * * *
 
@@ -64,7 +68,8 @@ This key defines what values are applied to the widget state by the animation ou
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[iterationCount](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>iterationCount</summary>
 
 * * *
 
@@ -74,11 +79,12 @@ Possible values include all the positive integer numbers. Any invalid values suc
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Common Example](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Common Example</summary>
 
 * * *
 
-{% highlight voltMx %}var animDef = {
+{% highlight VoltMx %}var animDef = {
     "delay": 0.01,
     "iterationCount": "2",
     "fillMode": voltmx.anim.FILL_MODE_FORWARDS,
@@ -88,5 +94,6 @@ Possible values include all the positive integer numbers. Any invalid values suc
 {% endhighlight %}
 
 * * *
+</details>
 
 ![](resources/prettify/onload.png)

@@ -12,17 +12,20 @@ The FlexForm widget has the following methods associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[add Method](javascript:void(0);)
+
+<details close markdown="block"><summary>add Method</summary>
 
 * * *
 
 This method is used to add widgets to the FlexForm. When the widgets are added to the current visible FlexForm, then the changes will reflect immediately. Adding a widget to the FlexForm hierarchy, which is already a part of the other widget hierarchy, will lead to undefined behaviors. You have to explicitly remove the widget from one hierarchy before adding it to another FlexForm.
 
-Syntax
+<b>Syntax</b>
 
-add(widgetArray)
+{% highlight VoltMx %}
+add(widgetArray);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgetArray \[JSObject\]
 
@@ -32,17 +35,17 @@ formid \[widgetref\]
 
 Handle to the widget instance.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke add method by using a FlexForm.
+{% highlight VoltMx %}//Sample code to invoke add method by using a FlexForm.
 var myFlexScroll = new voltmx.ui.FlexScrollContainer({
  "id": "myFlexScroll",
  "top": "5dp",
@@ -69,7 +72,7 @@ var myFlexScroll = new voltmx.ui.FlexScrollContainer({
 testfrm.add(myFlexScroll);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -78,17 +81,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addAt Method</summary>
 
 * * *
 
 This method is used to add widgets to the Form container at the specified index. Widget is prepended if index <0 and appended at the end of the container if the index > size+1. Size is the number of widgets already present in the container. If a new widget is added or removed will reflect immediately from the form hierarchy model perspective, however the changes are displayed when the Form appears. When the widgets are added to the current visible form, then the changes will reflect immediately. Adding a widget to the Form or Box hierarchy, which is already a part of the other widget hierarchy, will lead to undefined behaviors. You have to explicitly remove the widget from one hierarchy before adding it to another Form or Box.
 
-Syntax
+<b>Syntax</b>
 
-addAt(widgetref,index)
+{% highlight VoltMx %}
+addAt(widgetref,index);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgetref
 
@@ -98,17 +104,17 @@ index \[Number\]
 
 Index number at which the widget is to be added.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke addAt method by using a FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke addAt method by using a FlexForm.  
 var myButton = new voltmx.ui.Button({
  "focusSkin": "defBtnFocus",
  "height": "50dp",
@@ -129,7 +135,7 @@ var myButton = new voltmx.ui.Button({
 myForm.addAt(myButton, 1);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -138,17 +144,21 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addGestureRecognizer Method</summary>
 
 * * *
 
 This API allows you to set a gesture recognizer for a specified gesture for a specified widget.
 
-Syntax
+<b>Syntax</b>
 
-addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure)
+{% highlight VoltMx %}
+addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure);
+{% endhighlight %}
 
-Parameters
+
+<b>Parameters</b>
 
 _gestureType_
 
@@ -178,11 +188,11 @@ This function will be raised asynchronously
 
 See Remarks for the syntax of this function.
 
-Return Values
+<b>Return Values</b>
 
 String - Reference to the gesture is returned.
 
-Remarks
+<b>Remarks</b>
 
 The values for the _gestureType_parameter are:
 
@@ -310,9 +320,9 @@ In the android platform, the top and bottom gestures work only when the scrollin
 *   RIGHTTAP applicable only to Windows 10
 *   ROTATION is not supported on android.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
+{% highlight VoltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
 //Code to add DOUBLE TAP gesture to the frmGestures, FlexForm.
 var doubletp = {
  fingers: 1,
@@ -344,7 +354,7 @@ function onGestureFunction(commonWidget, gestureInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Windows
 
@@ -352,21 +362,24 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[animate Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>animate Method</summary>
 
 * * *
 
 Applies an animation to the widget.
 
-Syntax
+<b>Syntax</b>
 
-animate (animationObj, animateConfig, animationCallbacks)
+{% highlight VoltMx %}
+animate (animationObj, animateConfig, animationCallbacks);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _animationObj_
 
-An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#createAn) function.
+An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#createAn?TocPath=References|voltmx.ui_Namespace|Functions|_____5) function.
 
 _animationConfig_
 
@@ -381,11 +394,11 @@ A JavaScript dictionary that contains key-value pairs. The following keys are su
 | animationEnd | A JavaScript function that is invoked with the animation ends. For more information, see the **Remarks** section below. |
 | animationStart | A JavaScript function that is invoked with the animation starts. For more information, see the **Remarks** section below. |
 
-Return Values
+<b>Return Values</b>
 
 Returns a platform-specific handle to the animation. This handle currently not used, but is returned for possible future requirements use.
 
-Remarks
+<b>Remarks</b>
 
 The callback for the `animationStart` key in the JavaScript object passed in this method's _animationCallbacks_ parameter has the following signature.
 
@@ -407,9 +420,9 @@ The `animate` method throws an Invalid Animation Definition Exception if animati
 
 If the widget is not part of the currently visible view hierarchy, calling this method does nothing. Because this method is asynchronous and immediately returns, it does not wait for the animation to start or complete.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code of animation
+{% highlight VoltMx %}//Sample code of animation
 function AnimateBoth() {
     var getFuncName = frm1.listbox18.selectedKey;
     if (getFuncName == "BothLT") {
@@ -422,13 +435,14 @@ function AnimateBoth() {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clone Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>clone Method</summary>
 
 * * *
 
@@ -438,40 +452,42 @@ If the widget ID is passed as a parameter then it will be prefixed to the existi
 
 For example, if the widget ID is "fc1" and the widget ID passed to clone API is "ref1", then the cloned widget ID will be "ref1fc1". For a child widget placed in a container with widget ID as "wid1", the cloned copy will have the widget ID as "ref1wid1".
 
-Exceptions are not displayed if widget ID parameter is not unique. Instead when the cloned copy is added to the same form as of original container then it may lead to unexpected behaviors. So it is your responsibility to provide unique widget ID.
+<b>Exceptions</b> are not displayed if widget ID parameter is not unique. Instead when the cloned copy is added to the same form as of original container then it may lead to unexpected behaviors. So it is your responsibility to provide unique widget ID.
 
-Syntax
+<b>Syntax</b>
 
-clone()
+{% highlight VoltMx %}
+clone();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgetId \[String\]
 
 Optional. Reference of the name of the widget.
 
-Return Values
+<b>Return Values</b>
 
 Cloned copy of the widget.
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Remarks
+<b>Remarks</b>
 
 *   This method is not supported on SegmentedUI2 widget.
 *   Gestures for the FlexContainer are not cloned. You have to reapply the gestures on the cloned object.
 *   In Android platform, cloned Map widget will not work if prefix is not passed as parameter to the API.
 
-*   To apply focusSkin for dynamically created widgets or cloned widgets, assign focusSkin dynamically after adding the widget to the form hierarchy. This is applicable for SPA and Desktop web platforms.{% highlight voltMx %}formid.widgetid.focusSkin = "skinname";
+*   To apply focusSkin for dynamically created widgets or cloned widgets, assign focusSkin dynamically after adding the widget to the form hierarchy. This is applicable for SPA and Desktop web platforms.{% highlight VoltMx %}formid.widgetid.focusSkin = "skinname";
     {% endhighlight %}
-*   To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy. This is applicable for the Desktop web platform.{% highlight voltMx %}formid.widgetid.hoverSkin = "skinname";
+*   To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy. This is applicable for the Desktop web platform.{% highlight VoltMx %}formid.widgetid.hoverSkin = "skinname";
     {% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the clone Method for a FlexContainer widget.
 //You need to make a corresponding call of the clone method for other applicable widgets.  
@@ -483,23 +499,26 @@ var myLabel=frmFlex.lbl1.clone();
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[closeNavigationDrawer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>closeNavigationDrawer Method</summary>
 
 * * *
 
 Close the NavigationDrawer on forms that have been created using a template that supports the NavigationDrawer. See remarks for more information.
 
-Syntax
+<b>Syntax</b>
 
-closeNavigationDrawer(widgetArray)
+{% highlight VoltMx %}
+closeNavigationDrawer(widgetArray);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgetArray \[JSObject\]
 
@@ -509,63 +528,66 @@ formid \[widgetref\]
 
 Optional. Handle to the widget instance.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Remarks
+<b>Remarks</b>
 
 This method supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer). It is not available unless the FlexForm has been created from a template that supports the NavigationDrawer. The NavigationDrawer is based on the [Android native Navigation drawer](https://material.io/guidelines/patterns/navigation-drawer.html#). It is only supported on Android.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to close the NavigationDrawer
+{% highlight VoltMx %}//Sample code to close the NavigationDrawer
 formObject.closeNavigationDrawer();
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[destroy Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>destroy Method</summary>
 
 * * *
 
 This method is used to destroy any unwanted forms at any point in time, and allows increasing the application life by reducing the memory usage.
 
-Syntax
+<b>Syntax</b>
 
-destroy()
+{% highlight VoltMx %}
+destroy();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 formname
 
 Reference of the name of the Form.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** Destroying the current form might lead to unexpected behavior.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke destroy method by using a FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke destroy method by using a FlexForm.  
   
 myForm.destroy();  
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -574,29 +596,32 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[forceLayout Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>forceLayout Method</summary>
 
 * * *
 
 When this method is called, underlying OS layout cycle is forced to layout the widgets of the FlexContainer. FlexContainer does not issue layout as and when layout changes happen to the widgets inside FlexContainer.
 
-Syntax
+<b>Syntax</b>
 
-forceLayout()
+{% highlight VoltMx %}
+forceLayout();
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
+
+None
+
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** This method asynchronously forces the layout while method returns immediately.
 
@@ -616,41 +641,44 @@ When to Use
 
 Case1: If you have a SegmentedUI inside a FlexForm and you want to change the SegmentedUI layout properties dynamically. In this case you have to call the forceLayout after configuring the new layout properties.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke forceLayout method by using a FlexContainer widget.  
+{% highlight VoltMx %}//Sample code to invoke forceLayout method by using a FlexContainer widget.  
   
 myForm.myFlexContainer.forceLayout();  
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getTitleVerticalPositionAdjustment Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getTitleVerticalPositionAdjustment Method</summary>
 
 * * *
 
 Gets the position of the title vertically on the navigation bar. This method only functions if the [titleBarAttributes](FlexForm_Properties.html#titleBarAttributes) property is set.
 
-Syntax
+<b>Syntax</b>
 
-getTitleVerticalPositionAdjustmentMethod(barMetrics)
+{% highlight VoltMx %}
+getTitleVerticalPositionAdjustmentMethod(barMetrics);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _barMetrics_
 
-A JavaScript object containing a set of key:value pairs that contain information on the background image. See Remarks for more information.
+A JavaScript object containing a set of key:value pairs that contain information on the background image. See <b>Remarks</b> for more information.
 
-Return Values
+<b>Return Values</b>
 
 adjustment. A JavaScript variable containing the value of the title adjustment.
 
-Remarks
+<b>Remarks</b>
 
 keyList is a JavaScript object that contains key:value pairs in the following format:
 
@@ -661,9 +689,9 @@ keyList is a JavaScript object that contains key:value pairs in the following fo
 *   **constants.BAR\_METRICS\_PROMPT**, - applies when prompt is shown.
 *   **constants.BAR\_METRICS\_COMPACT\_PROMPT** - applies when prompt is shown for landscape mode.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke getTitleVerticalPositionAdjustment method by using a FlexForm widget.  
+{% highlight VoltMx %}//Sample code to invoke getTitleVerticalPositionAdjustment method by using a FlexForm widget.  
 var titleAttributes = {
     "barStyle": constants.BAR_STYLE_DEAFULT,
     "hidesBackButton": false
@@ -675,96 +703,105 @@ var adjustmentForm = Form1.getTitleVerticalPositionAdjustment({
 });
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hideTitleBar Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hideTitleBar Method</summary>
 
 * * *
 
 This method gives you the control to hide a titlebar within a form.
 
-Syntax
+<b>Syntax</b>
 
-hideTitleBar()
+{% highlight VoltMx %}
+hideTitleBar();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 formid \[widgetref\]
 
 Handle to the widget instance.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke hideTitleBar method by using a FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke hideTitleBar method by using a FlexForm.  
   
 myForm.hideTitleBar();  
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 This method is available on iPhone/iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[openNavigationDrawer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>openNavigationDrawer Method</summary>
 
 * * *
 
-Open the NavigationDrawer on forms that have been created using a template that supports the NavigationDrawer. See Remarks for more information.
+Open the NavigationDrawer on forms that have been created using a template that supports the NavigationDrawer. See <b>Remarks</b> for more information.
 
-Syntax
+<b>Syntax</b>
 
-openNavigationDrawer()
+{% highlight VoltMx %}
+openNavigationDrawer();
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Remarks
+<b>Return Values</b>
+
+None
+
+<b>Remarks</b>
 
 This method supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer). It is not available unless the FlexForm has been created from a template that supports the NavigationDrawer. The NavigationDrawer is based on the [Android native Navigation drawer](https://material.io/guidelines/patterns/navigation-drawer.html#). It is only supported on Android.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to open the NavigationDrawer.
+{% highlight VoltMx %}//Sample code to open the NavigationDrawer.
 formObject.openNavigationDrawer();
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[registerForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>registerForPeekandPop Method</summary>
 
 * * *
 
 This method registers a widget to enable 3D Touch peek and pop gestures.
 
-Syntax
+<b>Syntax</b>
 
-registerForPeekandPop(onPeekCallback, onPopCallback)
+{% highlight VoltMx %}
+registerForPeekandPop(onPeekCallback, onPopCallback);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 onPeekCallback
 
@@ -772,7 +809,9 @@ A callback function that is invoked when the user slightly presses (soft press) 
 
 Callback Syntax
 
-onPeekCallback(widget)
+{% highlight VoltMx %}
+onPeekCallback(widget);
+{% endhighlight %}
 
 Callback Input Parameters
 
@@ -786,7 +825,7 @@ Callback Return Values
 
 Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget) {
+{% highlight VoltMx %}function onPeekCallback(widget) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -802,7 +841,9 @@ A callback function that is invoked when the user further presses (hard press) t
 
 Callback Syntax
 
-onPopCallback(widget,peekForm)
+{% highlight VoltMx %}
+onPopCallback(widget,peekForm);
+{% endhighlight %}
 
 Callback Input Parameters
 
@@ -824,13 +865,13 @@ Use this callback to set the content for pop. The form handle returned by this c
 
 Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Remarks
+<b>Remarks</b>
 
 A PreviewInfoTable has the following format.
 
@@ -858,34 +899,37 @@ Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “2
 
 Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[remove Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>remove Method</summary>
 
 * * *
 
 This method removes a widget from the form container. If a widget is removed from a form, will reflect immediately from the Form hierarchy model perspective; however the changes are displayed when the Form appears. When the widgets are removed from the current visible Form, then the changes will reflect immediately.
 
-Syntax
+<b>Syntax</b>
 
-remove(widgetref)
+{% highlight VoltMx %}
+remove(widgetref);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgetref
 
@@ -895,13 +939,13 @@ formid \[widgetref\]
 
 Handle to the widget instance.
 
-Return Values
+<b>Return Values</b>
 
 The current Form handle is returned.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample Code to invoke remove method by using a FlexContainer widget.  
+{% highlight VoltMx %}//Sample Code to invoke remove method by using a FlexContainer widget.  
   
 /*In this example, the myFlexContainer FlexContainer invokes remove method to delete myButton button.*/  
   
@@ -909,27 +953,30 @@ myForm.myFlexContainer.remove(myForm.myFlexContainer.myButton);
 
 {% endhighlight %}
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeAt Method</summary>
 
 * * *
 
 This method removes a widget at the given index from the Form container. If a widget is removed from the form, will reflect immediately from the Form hierarchy model perspective; however the changes are displayed when the Form appears. When the widgets are removed from the current visible Form, then the changes will reflect immediately.
 
-Syntax
+<b>Syntax</b>
 
-removeAt(index)
+{% highlight VoltMx %}
+removeAt(index);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 index \[Number\]
 
@@ -953,13 +1000,13 @@ callbacks
 
 A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Return Values
+<b>Return Values</b>
 
 Reference of the name of the widget to be removed.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}/*Sample code to invoke the removeAt method without animation. In this sample code, the removeAt method deletes the data from the 15th Index position for a Segment widget.*/  
+{% highlight VoltMx %}/*Sample code to invoke the removeAt method without animation. In this sample code, the removeAt method deletes the data from the 15th Index position for a Segment widget.*/  
   
 frmSegment.mySegment.removeAt(15);  
   
@@ -969,81 +1016,87 @@ frmSegment.mySegment.removeAt (15, animation);
 
 {% endhighlight %}
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** If the index is not within the limits then _removeAt_ will be silent and doesn't yield any result.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeAll Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeAll Method</summary>
 
 * * *
 
 This method removes all the widget on the container.
 
-Syntax
+<b>Syntax</b>
 
-removeAll()
+{% highlight VoltMx %}
+removeAll();
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Example
+<b>Return Values</b>
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+None
+
+<b>Example</b>
+
+{% highlight VoltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to invoke the clone Method for a CollectionView widget.  
   
 frmCollection.myCollection.removeAll();  
 
 {% endhighlight %}
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to remove the specified gesture recognizer for the specified widget.
 
-Syntax
+<b>Syntax</b>
 
-removeGestureRecognizer(gestureHandle)
+{% highlight VoltMx %}
+removeGestureRecognizer(gestureHandle);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 gestureHandle - Mandatory
 
 Specifies the handle to the gesture returned by addGestureRecognizer call.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
+{% highlight VoltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
 frmGestures.removeGestureRecognizer(doubletp);  
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available on all platforms except Desktop Web and Android.
 
@@ -1051,17 +1104,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[replaceAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>replaceAt Method</summary>
 
 * * *
 
 This method replaces a widget with another widget in a form. If a widget is replaced from the form, will reflect immediately from the Form hierarchy model perspective; however the changes are displayed when the Form appears.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 replaceAt(widgetref,index)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgetref
 
@@ -1088,55 +1144,58 @@ Specifies the position in number format. Following are the rules applicable for 
 > 
 > As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Return Values
+<b>Return Values</b>
 
 Reference of the name of the widget to be removed.
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** Post this operation widget that was replaced will get garbage collected unless you hold explicitly a reference to the replaced widget.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollToBeginning Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollToBeginning Method</summary>
 
 * * *
 
 This method gives you the control to scroll to the beginning of the form.
 
-Syntax
+<b>Syntax</b>
 
-scrollToBeginning()
+{% highlight VoltMx %}
+scrollToBeginning();
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
+
+None
+
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke scrollToBeginning method by using FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke scrollToBeginning method by using FlexForm.  
 myForm.scrollToBeginning();  
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -1145,36 +1204,39 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollToEnd Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollToEnd Method</summary>
 
 * * *
 
 This method gives you the control to scroll to the end of the FlexForm.
 
-Syntax
+<b>Syntax</b>
 
-scrollToEnd()
+{% highlight VoltMx %}
+scrollToEnd();
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
+
+None
+
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke scrollToEnd method by using FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke scrollToEnd method by using FlexForm.  
 myForm.scrollToEnd();  
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -1183,17 +1245,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollToWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollToWidget Method</summary>
 
 * * *
 
 This method gives you the control to scroll the FlexForm up to the position of selected widget. If the complete widget cannot fit into the container's view port, container scroll to the extent possible where top-left of the widget is displayed. There is no scrolling if the widget is already visible completely with in the view port.
 
-Syntax
+<b>Syntax</b>
 
-scrollToWidget(widgetref)
+{% highlight VoltMx %}
+scrollToWidget(widgetref);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgetref
 
@@ -1203,55 +1268,58 @@ animate
 
 Optional. A Boolean value to indicate that zooming to rect should happen with animation.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** In iOS platform, this method brings the widget to viewable area on the form.
 
 > **_Note:_** In Android platform, the widget reference provided in the `scrollToWidget` method for FlexScrollContainer widget must be a direct child. You cannot provide the reference of a widget inside the direct child widget. For example: if `myFlexScroll` is a FlexScrollContainer with `testFlex` FlexContainer as its direct child and `myBtn` Button widget is a child of testFlex. You can use `scrollToWidget` method in `myFlexScroll` FlexScrollContainer only using the widget reference of `testFlex` FlexContainer. You cannot provide the widget reference of `myBtn` Button.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke scrollToWidget Method for a FlexScrollContainer widget.  
+{% highlight VoltMx %}//Sample code to invoke scrollToWidget Method for a FlexScrollContainer widget.  
 //Here btnScroll Button is a child widget of myFlxScrlContainer FlexScrollContainer.
 
 frmHome.myFlxScrlContainer.scrollToWidget(frmHome.myFlxScrlContainer.btnScroll);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setBackgroundImageForNavbar Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setBackgroundImageForNavbar Method</summary>
 
 * * *
 
 Set the background image for the title bar for iOS specific applications. This method only functions if [titleBarAttributes](FlexForm_Properties.html#titleBarAttributes) is set.
 
-Syntax
+<b>Syntax</b>
 
-setBackgroundImageForNavbar(keyList)
+{% highlight VoltMx %}
+setBackgroundImageForNavbar(keyList);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _keyList_
 
 A JavaScript object containing a set of key:value pairs that contain information on the background image. See Remarks for more information.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Remarks
+<b>Remarks</b>
 
 keyList is a JavaScript object that contains key:value pairs in the following format:
 
@@ -1264,22 +1332,23 @@ keyList is a JavaScript object that contains key:value pairs in the following fo
 
 If the barMetrics is set as constants.BAR\_METRICS\_PROMPT, the setTitleVerticalPositionAdjustment API does not work.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke setBackgroundImageForNavbar method by using a FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke setBackgroundImageForNavbar method by using a FlexForm.  
 frmHome.setBackgroundImageForNavbar({
     "image": "background.png",
     "barMetrics": constants.BAR_METRICS_COMPACT
 });
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setContentOffset Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setContentOffset Method</summary>
 
 * * *
 
@@ -1287,11 +1356,13 @@ This method gives you the control to offset a portion of the content in a Form t
 
 For example, if you have a scrollbox with 20 images in a Form and only first image is present in view port. If you want to bring 13th image into view port, specify x and y values with this method to bring 13th image into the current view port.
 
-Syntax
+<b>Syntax</b>
 
-setContentOffset(contentOffset)
+{% highlight VoltMx %}
+setContentOffset(contentOffset);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 contentOffset
 
@@ -1301,17 +1372,17 @@ animate
 
 Optional. A Boolean value to indicate that zooming to rectangle should happen with animation.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke setContentOffset method by using a FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke setContentOffset method by using a FlexForm.  
 frmHome.setContentOffset({
     "x": 0,
     "y": 20,
@@ -1319,7 +1390,7 @@ frmHome.setContentOffset({
 });
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -1328,17 +1399,21 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setDefaultUnit Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setDefaultUnit Method</summary>
 
 * * *
 
 Specifies the default unit to be used for interpretation of numbers with no qualifiers when passed to layout properties. It is assumed that all the unqualified numbers specified for child widget layout properties and parent widget layout properties to follow the default unit specified.
 
-Syntax
+<b>Syntax</b>
 
-setDefaultUnit(unit)
+{% highlight VoltMx %}
+setDefaultUnit(unit);
+{% endhighlight %}
 
-Parameters
+
+<b>Parameters</b>
 
 unit - (Mandatory): Specifies the position in number format.Following are the options:
 
@@ -1346,27 +1421,27 @@ unit - (Mandatory): Specifies the position in number format.Following are the op
 > *   voltmx.flex.PX: Specifies the values in terms of device hardware pixels.
 > *   voltmx.flex.PERCENTAGE(Default): Specifies the values in percentage relative to the parent dimensions.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** Irrespective of the number of times this method is called, system picks up the default unit configured through this method just before the layout triggers.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample Code to invoke setDefaultUnit method by using a FlexForm.  
+{% highlight VoltMx %}//Sample Code to invoke setDefaultUnit method by using a FlexForm.  
   
 myForm.setDefaultUnit(voltmx.flex.PX);  
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -1375,33 +1450,36 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setHidesBackButton Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setHidesBackButton Method</summary>
 
 * * *
 
 Hides or shows the back button. This method only functions if the [titleBarAttributes](FlexForm_Properties.html#titleBarAttributes) property is set.
 
-Syntax
+<b>Syntax</b>
 
-setHidesBackButton(keyValues)
+{% highlight VoltMx %}
+setHidesBackButton(keyValues);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _keyValues_
 
 A JSObject that contains key:value pairs. It has this format: {hidesBackButton:boolean, animated:boolean}.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke setHidesBackButton method by using a FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke setHidesBackButton method by using a FlexForm.  
 Form1.setHidesBackButton({
     "hidesBackButton": false,
     "animated": false
@@ -1409,23 +1487,26 @@ Form1.setHidesBackButton({
 });
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setLeftBarButtonItems Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setLeftBarButtonItems Method</summary>
 
 * * *
 
 Allows you to add BarButtonItems to the left side of the NavigationBar. This method only functions if the [titleBarAttributes](FlexForm_Properties.html#titleBarAttributes) property is set.
 
-Syntax
+<b>Syntax</b>
 
-setLeftBarButtonItems(keyValues)
+{% highlight VoltMx %}
+setLeftBarButtonItems(keyValues);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _keyValues_
 
@@ -1433,17 +1514,17 @@ A JSObject that contains key:value pairs. It has this format: {items:array of Ba
 
 The BarButtonItem object is documented in the API Programmers Guide.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke setLeftBarButtonItems method by using a FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke setLeftBarButtonItems method by using a FlexForm.  
   
 var itemArray = new voltmx.ui.BarButtonItem({
     "type": constants.BAR_BUTTON_IMAGE,
@@ -1465,23 +1546,26 @@ function bar_function() {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPeek Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPeek Method</summary>
 
 * * *
 
 This method sets and overrides the existing onPeekCallback for the widget.
 
-Syntax
+<b>Syntax</b>
 
-setOnPeek(onPeekCallback)
+{% highlight VoltMx %}
+setOnPeek(onPeekCallback);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 onPeekCallback
 
@@ -1489,7 +1573,9 @@ A callback function that is invoked when the user slightly presses (soft press) 
 
 Callback Syntax
 
-onPeekCallback(widget)
+{% highlight VoltMx %}
+onPeekCallback(widget);
+{% endhighlight %}
 
 Callback Parameters
 
@@ -1503,7 +1589,7 @@ PreviewInfoTable. See the Remarks section for a description of this table.
 
 Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget, contextInfo) {
+{% highlight VoltMx %}function onPeekCallback(widget, contextInfo) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -1513,11 +1599,11 @@ Callback Example
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 A PreviewInfoTable has the following format.
 
@@ -1545,16 +1631,16 @@ Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “2
 
 Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function settingPeek() {
+{% highlight VoltMx %}function settingPeek() {
     Form1.setOnPeek(onMyPeekcallback);
 }
 
@@ -1573,23 +1659,26 @@ function onMyPeekcallback(widgetref, contextInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPop Method</summary>
 
 * * *
 
 This method overrides the existing onPopCallback for the widget.
 
-Syntax
+<b>Syntax</b>
 
-setOnPop(onPopCallback)
+{% highlight VoltMx %}
+setOnPop(onPopCallback);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 onPopCallback
 
@@ -1597,7 +1686,9 @@ A callback function that is invoked when the user slightly presses (soft press) 
 
 Callback Syntax
 
-onPopCallback(widget,peekForm)
+{% highlight VoltMx %}
+onPopCallback(widget,peekForm);
+{% endhighlight %}
 
 Callback Parameters
 
@@ -1619,19 +1710,19 @@ Callback Remarks
 
 Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function settingPop() {
+{% highlight VoltMx %}function settingPop() {
     Form1.setOnPop(myonPopcallback);
 }
 
@@ -1641,23 +1732,26 @@ function myonPopcallback(widgetref, peekForm) {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setPreviewActionItems Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setPreviewActionItems Method</summary>
 
 * * *
 
 This method sets the preview actions for a form to be displayed when the user swipes up the preview/peek of a form.
 
-Syntax
+<b>Syntax</b>
 
-setPreviewActionItems(previewActionItems)
+{% highlight VoltMx %}
+setPreviewActionItems(previewActionItems);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 previewActionItems
 
@@ -1698,7 +1792,9 @@ The callback function that is invoked when the user selects this preview action 
 
 **Syntax**
 
-onPreviewAction(previewActionConfig,previewForm)
+{% highlight VoltMx %}
+onPreviewAction(previewActionConfig,previewForm);
+{% endhighlight %}
 
 **Input Parameters**
 
@@ -1712,18 +1808,18 @@ Preview form reference.
 
 **Example**
 
-{% highlight voltMx %}function previewaction1(previewActionConfig, previewForm) {
+{% highlight VoltMx %}function previewaction1(previewActionConfig, previewForm) {
     voltmx.print("Copy Preview action invoked.");
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}frmSecond.setPreviewActionItems(
+{% highlight VoltMx %}frmSecond.setPreviewActionItems(
     [{ //1 - group previewaction item
         "type": voltmx.forcetouch.PREVIEW_ACTION_TYPE_GROUP,
         "title": "copy",
@@ -1754,23 +1850,26 @@ Example
 );
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setRightBarButtonItems Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setRightBarButtonItems Method</summary>
 
 * * *
 
 Allows you to add BarButtonItems to the Right side of the Navigation Bar. This method only functions if the [titleBarAttributes](FlexForm_Properties.html#titleBarAttributes) property is set.
 
-Syntax
+<b>Syntax</b>
 
-setRightBarButtonItems(keyValues)
+{% highlight VoltMx %}
+setRightBarButtonItems(keyValues);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _keyValues_
 
@@ -1778,13 +1877,13 @@ A JSObject that contains key:value pairs. It has this format: {items:array of Ba
 
 The BarButtonItem object is documented in the API Programmers Guide.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke setRightBarButtonItems method by using a FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke setRightBarButtonItems method by using a FlexForm.  
   
 var itemArray = new voltmx.ui.BarButtonItem({
     "type": constants.BAR_BUTTON_IMAGE,
@@ -1806,23 +1905,26 @@ function bar_function() {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setTitleBarLeftSideButtonSkin Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setTitleBarLeftSideButtonSkin Method</summary>
 
 * * *
 
 This method enables you to set the properties for a left-side button of a titlebar.
 
-Syntax
+<b>Syntax</b>
 
-setTitleBarLeftSideButtonSkin(text,skin,callBack)
+{% highlight VoltMx %}
+setTitleBarLeftSideButtonSkin(text,skin,callBack);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 formid \[widgetref\]
 
@@ -1840,31 +1942,34 @@ callBack \[event call back\]
 
 Specifies the event call back to be invoked on tapping left button.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 This method is available on iPhone/iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setTitleBarRightSideButtonSkin Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setTitleBarRightSideButtonSkin Method</summary>
 
 * * *
 
 This method enables you to set the properties for a right-side button of a titlebar.
 
-Syntax
+<b>Syntax</b>
 
-setTitleBarRightSideButtonSkin(text,skin,callBack)
+{% highlight VoltMx %}
+setTitleBarRightSideButtonSkin(text,skin,callBack);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 formid \[widgetref\]
 
@@ -1882,41 +1987,44 @@ callBack \[event call back\]
 
 Specifies the event call back to be invoked on tapping right button.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 This method is available on iPhone/iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setTitleVerticalPositionAdjustment Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setTitleVerticalPositionAdjustment Method</summary>
 
 * * *
 
 Set position of the title vertically on the navigation bar. This method only functions if the [titleBarAttributes](FlexForm_Properties.html#titleBarAttributes) property is set.
 
-Syntax
+<b>Syntax</b>
 
-setTitleVerticalPositionAdjustment(barMetrics)
+{% highlight VoltMx %}
+setTitleVerticalPositionAdjustment(barMetrics);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _barMetrics_
 
-A JavaScript object containing a set of key:value pairs that contain information on the background image. See Remarks for more information.
+A JavaScript object containing a set of key:value pairs that contain information on the background image. See <b>Remarks</b> for more information.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Remarks
+<b>Remarks</b>
 
 keyList is a JavaScript object that contains key:value pairs in the following format:
 
@@ -1927,9 +2035,9 @@ keyList is a JavaScript object that contains key:value pairs in the following fo
 *   **constants.BAR\_METRICS\_PROMPT**, - applies when prompt is shown.
 *   **constants.BAR\_METRICS\_COMPACT\_PROMPT** - applies when prompt is shown for landscape mode.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to invoke setTitleVerticalPositionAdjustment method by using a FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke setTitleVerticalPositionAdjustment method by using a FlexForm.  
   
 var adjustmentForm = 10;
 
@@ -1939,23 +2047,26 @@ Form1.setTitleVerticalPositionAdjustment({
 });
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setZoomScale Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setZoomScale Method</summary>
 
 * * *
 
 This method allows you the zoom the widgets with an option to animate. The default value of the scale is 1. When you set the scale value as 2, the widget will be zoomed by factor of 2 (twice the size of its original size).
 
-Syntax
+<b>Syntax</b>
 
-setZoomScale(scale)
+{% highlight VoltMx %}
+setZoomScale(scale);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _scale_
 
@@ -1965,157 +2076,170 @@ _animate_
 
 Optional. A boolean value to indicate that zoom scale should happen with animation.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** You must configure widgetToZoom event to view the zooming effect.
 
 For example, If you have a form with a flexScrollContainer and an image widget inside flexScrollContainer, when you pinch the screen on flexScrollContainer it will call the function configured using widgetToZoom event. If the function returns image, the image will be zoomed.
 
-{% highlight voltMx %}//Sample code to invoke setZoomScale method by using a FlexForm.  
+{% highlight VoltMx %}//Sample code to invoke setZoomScale method by using a FlexForm.  
   
 myForm.setZoomScale(2, true);
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on iOS platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[show Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>show Method</summary>
 
 * * *
 
 This method is used to display the FlexForm.
 
-Syntax
+<b>Syntax</b>
 
-show()
+{% highlight VoltMx %}
+show();
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
 
 None
 
-Example
+<b>Exceptions</b>
 
-{% highlight voltMx %}//Sample code to invoke show method for a FlexForm.
+None
+
+<b>Example</b>
+
+{% highlight VoltMx %}//Sample code to invoke show method for a FlexForm.
 
 myForm.show();
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showTitleBar Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showTitleBar Method</summary>
 
 * * *
 
 This method gives you the control to show a titlebar to a FlexForm.
 
-Syntax
+<b>Syntax</b>
 
-showTitleBar()
+{% highlight VoltMx %}
+showTitleBar();
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
 
 None
 
-Example
+<b>Exceptions</b>
 
-{% highlight voltMx %} //Sample code to invoke showTitleBar method by using a FlexForm.  
+None
+
+<b>Example</b>
+
+{% highlight VoltMx %} //Sample code to invoke showTitleBar method by using a FlexForm.  
   
 myForm.showTitleBar();  
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 This method is available on iPhone/iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[unregisterForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>unregisterForPeekandPop Method</summary>
 
 * * *
 
 This method unregisters a widget from 3D Touch peek and pop gestures.
 
-Syntax
+<b>Syntax</b>
 
-unregisterForPeekandPop()
-
-Parameters
-
-None.
-
-Return Values
-
-None.
-
-Example
-
-{% highlight voltMx %}Form1.unregisterForPeekAndPop();
+{% highlight VoltMx %}
+unregisterForPeekandPop();
 {% endhighlight %}
 
-Platform Availability
+
+<b>Parameters</b>
+
+None.
+
+<b>Return Values</b>
+
+None.
+
+<b>Example</b>
+
+{% highlight VoltMx %}Form1.unregisterForPeekAndPop();
+{% endhighlight %}
+
+<b>Platform Availability</b>
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgets Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgets Method</summary>
 
 * * *
 
 This method returns an array of the widget references which are direct children of Form.
 
-Syntax
+<b>Syntax</b>
 
-widgets()
+{% highlight VoltMx %}
+widgets();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None
 
-Return Values
+<b>Return Values</b>
 
 This method returns _Read only_ array of widget references. Modifying the array and changing the position of widgets in this array doesn't reflect in the Form hierarchy, however you can get handle to the widgets through this array and modify the widgets through widget level methods as exposed by individual widgets.
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to read the direct child widgets of a FlexForm.
+{% highlight VoltMx %}//Sample code to read the direct child widgets of a FlexForm.
 
 var myWidgets=myForm.widgets();  
   
@@ -2123,9 +2247,10 @@ voltmx.print("The child widgets inside myForm FlexForm are:"+myWidgets);
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Desktop Web, SPA, and Windows
 
 * * *
 
+</details>

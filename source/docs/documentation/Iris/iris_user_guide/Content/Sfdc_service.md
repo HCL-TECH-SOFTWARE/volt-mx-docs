@@ -126,7 +126,7 @@ To configure your Salesforce service, follow these steps:
         *   **Timeout (in ms)** - the duration in milliseconds after which the service call times out. Provide the details in the text box.
         *   **Cachable(sec)** - the duration in seconds within which the service response is fetched from the cache. Select the **Cachable(in sec)** check box and provide the details in the text box.
         *   **Decode Response Body -** To ignore the Salesforce response received in the XMLvalue field, select the Decode Response Body response check box.
-        *   **Response Encoding -** select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/studio/Studio_User_Guide/Content/Response_Encoding.html).
+        *   **Response Encoding -** select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Response_Encoding.html).
 2.  Click **Test** to view the results.
 3.  Click **Save Operation** to save the operation. They system displays the **Operation** section for your service.
 4.  Click **Done** to navigate to the **Integration** page.

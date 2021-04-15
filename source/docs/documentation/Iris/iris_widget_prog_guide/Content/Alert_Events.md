@@ -12,25 +12,29 @@ Alert has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[alertHandler Event](javascript:void(0);)
+
+<details close markdown="block"><summary>alertHandler Event</summary>
 
 * * *
 
 Specifies the JavaScript function that should get called when alert is dismissed either through "**Yes**" button or through "**No**" button.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 alertHandler
+{% endhighlight %}
 
-Type
+### Type
 
 Event
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-{% highlight voltMx %}//Sample code to set alertHandler event callback to an Alert widget.
+{% highlight VoltMx %}
+//Sample code to set alertHandler event callback to an Alert widget.
 
 frmAlert.myAlert.alertHandler=alertHandlerCallBck;
 
@@ -41,13 +45,14 @@ function alertHandlerCallBck(alert)
 
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
+</details>
 

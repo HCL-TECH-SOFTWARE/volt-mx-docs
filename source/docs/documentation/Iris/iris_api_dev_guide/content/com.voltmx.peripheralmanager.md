@@ -50,7 +50,8 @@ Methods
 
 The com.voltmx.PeripheralManager class has the following methods:
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[authorizationStatus](javascript:void(0);)
+
+<details close markdown="block"><summary>authorizationStatus</summary>
 
 The authorization status of an application is managed by the system and determined by several factors. Applications must be clearly authorized to share data using Bluetooth services while in the background state. The system automatically displays a request for user authorization when your app first attempts to use Bluetooth services to share data.
 
@@ -66,7 +67,7 @@ None
 
 **Example**
 
-{% highlight voltMx %}var authorizationStatus1 = PeripheralManager1.authorizationStatus(); 
+{% highlight VoltMx %}var authorizationStatus1 = PeripheralManager1.authorizationStatus(); 
 
 {% endhighlight %}
 
@@ -90,7 +91,8 @@ Available only on iOS.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isAdvertising](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isAdvertising</summary>
 
 To determine if the Peripheral Manager is currently advertising data.
 
@@ -104,7 +106,7 @@ None
 
 **Example**
 
-{% highlight voltMx %}var isAdvertising1 = PeripheralManager1.isAdvertising();
+{% highlight VoltMx %}var isAdvertising1 = PeripheralManager1.isAdvertising();
 {% endhighlight %}
 
 **Return Values**
@@ -117,7 +119,8 @@ Available only on iOS.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[startAdvertisingWithMeasuredPower](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>startAdvertisingWithMeasuredPower</summary>
 
 Starts advertising beacon data with Measured Power.
 
@@ -135,7 +138,7 @@ Starts advertising beacon data with Measured Power.
 
 **Example**
 
-{% highlight voltMx %}PeripheralManager1.startAdvertisingWithMeasuredPower(beaconRegion, measuredPower);
+{% highlight VoltMx %}PeripheralManager1.startAdvertisingWithMeasuredPower(beaconRegion, measuredPower);
 
 {% endhighlight %}
 
@@ -149,7 +152,8 @@ Available only on iOS.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[stopAdvertising](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>stopAdvertising</summary>
 
 Stops advertising Peripheral Manager data.
 
@@ -163,7 +167,7 @@ None
 
 **Example**
 
-{% highlight voltMx %}var stopAdvertising1 = PeripheralManager1.stopAdvertising(); 
+{% highlight VoltMx %}var stopAdvertising1 = PeripheralManager1.stopAdvertising(); 
 
 {% endhighlight %}
 
@@ -176,5 +180,7 @@ None
 Available only on iOS.
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

@@ -12,17 +12,20 @@ Functions
 
 The voltmx.ui Namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.ActionItem](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.ui.ActionItem</summary> 
 
 * * *
 
 Constructs an `ActionItem` object for use in an [ActionSheet object](actionsheet_object_methods.html#actionsheet-object).
 
-**Syntax**
+### Syntax
 
-> new voltmx.ui.ActionItem(actionItemParams)
+{% highlight VoltMx %}
+new voltmx.ui.ActionItem(actionItemParams)
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 _actionItemParams_
 
@@ -34,9 +37,10 @@ A JavaScript object containing key-value pairs that define the configuration par
 | style | A value from the [](constants_namespace.html#ActionItemStyles)[Action Item Style Constants](constants_namespace.html#ActionItemStyles) that selects the style of the action item. |
 | actionCallback | A JavaScript function that handles user selections from the action item. For more information, see **Remarks** below. |
 
-Example
+### Example
 
-{% highlight voltMx %}//Creating the Action Item Object
+{% highlight VoltMx %}
+//Creating the Action Item Object
   setActionSheet: function(){
     var actionItem = new voltmx.ui.ActionItem({
     "title": "Open Basecamp",
@@ -46,35 +50,40 @@ Example
     }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an `ActionItem` object that can be added to an Action Sheet.
 
-Remarks
+### Remarks
 
 The `actionCallback` function, which is passed into this function through the _actionSheetParams_ parameter, must have the following prototype.
 
-> actionItemCallback(actionSheetObject, actionItem1);
+{% highlight VoltMx %}
+actionItemCallback(actionSheetObject, actionItem1);
+{% endhighlight %}
 
 where actionSheetObject is a handle to the `ActionSheet` object that the `ActionItem` object is associated with, and _actionItem1_ is a handle to the `ActionItem` object that the user selected.
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.ActionSheet](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.ActionSheet</summary> 
 
 * * *
 
 Constructs an `ActionSheet` object that represents an iOS Action Sheet.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.ActionSheet(actionSheetParams)
+{% highlight voltMx %}
+voltmx.ui.ActionSheet(actionSheetParams)
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 _actionSheetParams_
 
@@ -86,9 +95,10 @@ A JavaScript object containing key-value pairs that define the configuration par
 | message | A string containing the action sheet's message to display to the user. |
 | showCompletionCallback | A callback function that is invoked after the display of the action sheet. For details, see the **Remarks** section below. |
 
-Example
+### Example
 
-{% highlight voltMx %}//Creating the Action Sheet Object
+{% highlight voltMx %}
+//Creating the Action Sheet Object
   var actionSheetObject = new voltmx.ui.ActionSheet({
         "title":"VoltMX Basecamp", 
         "message":"Welcome to Volt MX Base Camp! Explore. Learn. Develop. Share.", 
@@ -97,25 +107,28 @@ Example
     });
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an `ActionSheet` object.
 
-Remarks
+### Remarks
 
 The _actionSheetParams_ parameter is an object containing key-value pairs. When your app uses the `showCompletionCallback` key, it specifies a callback function that is automatically invoked after your app displays the action sheet. The callback function must have the following signature.
 
+{% highlight voltMx %}
 showCompletionCallback();
+{% endhighlight %}
 
 In an Action Sheet, only one action item can have the style `constants.ACTION_ITEM_STYLE_CANCEL`.
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Alert](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Alert</summary> 
 
 * * *
 
@@ -127,13 +140,15 @@ This API provides you the ability to add alerts in the application. The alerts a
 
 All the alerts are modal in nature, i.e., the user cannot proceed with other UI operations unless the alert is dismissed.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Alert(basicConfig, pspConfig)
+{% highlight voltMx %}
+voltmx.ui.Alert(basicConfig, pspConfig)
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
-basicConfig
+**_basicConfig_**
 
 basicConfig is an object with the following configuration properties.
 
@@ -148,8 +163,7 @@ basicConfig is an object with the following configuration properties.
 | **alertHandler** \[Read / Write Event\] - Mandatory | JavaScript function that should get called when alert is dismissed either through "yes" label button or through "no" label button. |
 
  
-
-pspConfig
+**_pspConfig_**
 
 pspConfig is an object with platform specific configuration properties.
 
@@ -159,9 +173,10 @@ pspConfig is an object with platform specific configuration properties.
 | contentAlignment | Used to align content of an alert. Following are the values of this property: constants.ALERT\_CONTENT\_ALIGN\_LEFT  // defaultconstants.ALERT\_CONTENT\_ALIGN\_CENTERconstants.ALERT\_CONTENT\_ALIGN\_RIGHT |
 | iconPosition | It is used to align and alert title icon. Following are the values of this property: constants.ALERT\_ICON\_POSITION\_LEFT // defaultconstants.ALERT\_ICON\_POSITION\_RIGHT> **_Note:_** Refer the example given below to create an alert using `contentAlignment` and `iconPostion` parameters. |
 
-Example
+### Example
 
-{% highlight voltMx %}  confirmationAlert: function(){ 
+{% highlight voltMx %}
+confirmationAlert: function(){ 
    //Creating the basicConfig object 
   var basicConf = {
     message: "This is an confirmation alert",
@@ -204,11 +219,11 @@ Example
  },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 Invoking this API multiple times in the same action sequence leads to an erroneous behavior.
 
@@ -216,13 +231,13 @@ This API should be invoked at the end of a function as a best practice.
 
 The following are the behavioral aspects of alerts on various platforms:
 
-RichClient
+**_RichClient_**
 
 In all native implementations alert is non blocking, i.e. the execution of any logic defined after the alert definition continues without the alert confirmation.
 
 > **_Important:_** Alert images are not supported on Windows 10.
 
-Android
+**_Android_**
 
 Android platform supports display of multiple alerts each time the **voltmx.ui.Alert** API is invoked. On device back, the alert gets dismissed and also the alert handler is raised.
 
@@ -230,11 +245,11 @@ For CONFIRMATION type alert, the alert callback is invoked with cancel flag. For
 
 For INFO & ERROR type alert, the alert callback is invoked with true argument.
 
-iPhone
+**_iPhone_**
 
 iPhone does not support displaying image icons based on the alert types: info,confirmation, error. _"\\n_" as a newline character in the alert messages supported for iPhone Platform
 
-Mobile Web/SPA/Desktop Web
+**_Mobile Web/SPA/Desktop Web_**
 
 > *   For advanced Mobile Web devices like iPhone, Android, and Palm Pre, alerts are displayed as popups. For basic devices, the alerts are displayed in a new page.
 > *   For all platforms you cannot customize alert icons/yes or no labels/ look and feel.
@@ -245,25 +260,30 @@ Mobile Web/SPA/Desktop Web
 
 For JavaScript conversion, an alert has to be created using another variant constructor,i.e an _Indexed argument_ constructor.
 
+{% highlight voltMx %}
 voltmx.ui.Alert(message, alertHandler, alertType, yesLabel, noLabel, alertTitle, pspConf);
+{% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.ARRenderer](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.ui.ARRenderer</summary>
 
 * * *
 
 Creates the ARRenderer widget. It occupies some space on a form depending on its positional and dimensional properties.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.ARRenderer(arBasic, arLayout, arPsp)
+{% highlight voltMx %}
+voltmx.ui.ARRenderer(arBasic, arLayout, arPsp)
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -272,10 +292,10 @@ Creates the ARRenderer widget. It occupies some space on a form depending on its
 | arPsp | A JavaScript object containing key-value pairs. The keys are the names of the `ARRenderer` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `ARRenderer` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Phone_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var myscene = new voltmx.ui.ARRenderer({
+{% highlight VoltMx %}
+var myscene = new voltmx.ui.ARRenderer({
 "placeholderText": "Please wait while the camera loads..",
 "placeholderSkin": "voltmxmpiSknlblItemName",
 "height": "100%",
@@ -296,28 +316,31 @@ Example
 }); 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated and configured `ARRenderer` widget.
 
-Platform Availability
+### Platform Availability
 
 Android, iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.BarButtonItem](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.BarButtonItem</summary> 
 
 * * *
 
 BarButtonItem
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.BarButtonItem(  
+{% highlight VoltMx %}
+voltmx.ui.BarButtonItem(  
     options);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 options
 
@@ -332,9 +355,10 @@ A JavaScript object containing key-value pairs that the constructor uses to set 
 | action | Contains a function that is automatically called when the user selects the `BarButtonItem`. |
 | metaData | Holds the data needed by the `BarButtonItem`. For more information see **Remarks** below. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    var item = new voltmx.ui.BarButtonItem(
+{% highlight VoltMx %}
+var item = new voltmx.ui.BarButtonItem(
     {type:constants.BAR_BUTTON_IMAGE,   
     tintColor: hex color string,   
     style :constants.BAR_ITEM_STYLE_PLAIN,   
@@ -343,11 +367,11 @@ Example
     metaData:{image:"imagename"}} );
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated and configured `BarButtonItem` object.
 
-Remarks
+### Remarks
 
 The kind of data needed by the `BarButtonItem` in its `metaData` key in the `options` parameter varies depending on the type of the `BarButtonItem` that is being created. The value for the `metaData` key can be any of the following.
 
@@ -374,20 +398,23 @@ Set the value for the `metaData` key to a widget reference. Only the `Label` and
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Browser](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Browser</summary> 
 
 * * *
 
 Creates a [Browser]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Browser.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Browser(  
+{% highlight VoltMx %}
+voltmx.ui.Browser(  
     basicConfig,  
     layoutConfig,  
     pspConfig);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -396,10 +423,10 @@ Creates a [Browser]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_
 | pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Button` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Button` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Browser_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var basicConfig = {
+{% highlight VoltMx %}
+var basicConfig = {
     "detectTelNumber": false,
     "enableZoom": false,
     "id": "brwInline",
@@ -426,29 +453,33 @@ var PSPConfig = {};
 frmBrowser.add(webtemp);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Browser` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.BrowserSettings.getSafeBrowsingPrivacyPolicyUrl](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.BrowserSettings.getSafeBrowsingPrivacyPolicyUrl</summary> 
 
 * * *
 
 Returns a URL that points to the privacy policy for Safe Browsing reporting, which is displayed to end users if you want a custom interstition.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.BrowserSettings.getSafeBrowsingPrivacyPolicyUrl()
+{% highlight VoltMx %}
+voltmx.ui.BrowserSettings.getSafeBrowsingPrivacyPolicyUrl()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    var webBasic = {id:"browserID", 
+{% highlight VoltMx %}
+var webBasic = {id:"browserID", 
 	isVisible:true, 
 	screenLevelWidget: false, 
 	requestURLConfig:{URL: "https://www.google.co.in/", 
@@ -460,29 +491,29 @@ var browser = new voltmx.ui.Browser(webBasic, webLayout, {});
 frm.add(browser);
 voltmx.ui.BrowserSettings.getSafeBrowsingPrivacyPolicyUrl(); 
 //Getting the SafeBrowsingPrivacyPolicyUrl to display a custom interstition
-
 {% endhighlight %}
 
-Type
+### Type
 
 Static
 
-**Input Parameters**
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 String - The URL that points to a privacy policy document that can be displayed to end users. Returns null if the device API Level is earlier than 27.
 
-Platform Availability
+### Platform Availability
 
 *   Android (API Level 27 and later)
     
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.BrowserSettings.setOnSafeBrowsingInitializedCallback](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.BrowserSettings.setOnSafeBrowsingInitializedCallback</summary> 
 
 * * *
 
@@ -492,33 +523,36 @@ The URL is not guaranteed to be protected by Safe Browsing until after the callb
 
 For optimal protection against known threats, you must wait until the onSafeBrowsingInitialized callback is triggered with true before you invoke a Browser widget object's loadUrl() method.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.BrowserSettings.setOnSafeBrowsingInitializedCallback(eventCallback);
+{% highlight VoltMx %}
+voltmx.ui.BrowserSettings.setOnSafeBrowsingInitializedCallback(eventCallback);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | eventCallback | The callback function that is triggered once the Safe Browsing initialization process is completed with the following parameter. |
 
  
+### Event Callback Syntax
 
-Event Callback **Syntax**
-
+{% highlight VoltMx %}
 onSafeBrowsingInitialized(initStatus)
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | initStatus | The value of this parameter is true if the initialization is successful; otherwise, the value is false or it may be null. For Android devices with API level earlier than 27, the callback will not be triggered. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var webBasic = 
+{% highlight VoltMx %}
+var webBasic = 
 {
   id:"browserID", 
   isVisible:true, 
@@ -541,18 +575,19 @@ function onSafeBrowsingInitializedCallback(initStatus)
 }
 {% endhighlight %}
 
-Type
+### Type
 
 static
 
-Platform Availability
+### Platform Availability
 
 *   Android (API Level 27 and later)
     
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.BrowserSettings.setSafeBrowsingWhitelist](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.BrowserSettings.setSafeBrowsingWhitelist</summary> 
 
 * * *
 
@@ -562,17 +597,19 @@ The following table illustrates the rules that are applicable for different host
 
 <table style="width: 100%;"><colgroup><col style="width: 33.33%;"> <col style="width: 33.33%;"> <col style="width: 33.33%;"></colgroup><tbody><tr><td style="text-align: center;font-weight: bold;">Rule</td><td style="text-align: center;"><b>Example</b></td><td style="text-align: center;"><b>Matches Subdomain</b></td></tr><tr><td style="text-align: center;">HOSTNAME</td><td style="text-align: center;">example.com</td><td style="text-align: center;">Yes</td></tr><tr><td style="text-align: center;">.HOSTNAME</td><td style="text-align: center;">example.com</td><td style="text-align: center;">Yes</td></tr><tr><td style="text-align: center;">IPV4_LITERAL</td><td style="text-align: center;">192.168.1.1</td><td style="text-align: center;">No</td></tr><tr><td style="text-align: center;">IPV6_LITERAL_WITH_BRACKETS</td><td style="text-align: center;">[10:20:30:40:50:60:70:80]</td><td style="text-align: center;">No</td></tr></tbody></table>
 
-All other rules, including wildcards, are not valid. The correct **Syntax** for hosts is defined by RFC 3986.
+All other rules, including wildcards, are not valid. The correct syntax for hosts is defined by RFC 3986.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.BrowserSettings.setSafeBrowsingWhitelist(\[url1,url2\], callback)
+{% highlight VoltMx %}
+voltmx.ui.BrowserSettings.setSafeBrowsingWhitelist(\[url1,url2\], callback)
+{% endhighlight %} 
 
-Type
+### Type
 
 Static
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -580,10 +617,10 @@ Static
 | callback \[Function\] | A JavaScript function that will be called with value as "true," if the hosts are successfully added to the whitelist. The callback function will be called with value as "false," if any hosts are malformed. This value may be null. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var webBasic = {id:"browserID", 
+{% highlight VoltMx %}
+var webBasic = {id:"browserID", 
 	isVisible:true, 
 	screenLevelWidget: false, 
 	requestURLConfig:{URL: "https://www.google.co.in/", 
@@ -601,27 +638,29 @@ function resultCallback(result){}
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android (API Level 27 and later)
     
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Button](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Button</summary> 
 
 * * *
 
 Creates a [Button]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Button.html) widget.
 
-**Syntax**
-
-> voltmx.ui.Button(  
+### Syntax
+{% highlight VoltMx %}
+voltmx.ui.Button(  
     basicConfig,  
     LayoutConfig,  
     PSPConfig);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -629,11 +668,11 @@ Creates a [Button]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_g
 | layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Button` widget's layout properties and the values are the initial values of the properties. For a complete list of the `Button` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Browser_Properties.html). |
 | pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Button` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Button` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Browser_Properties.html). |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}//Call back function onClick of button
+{% highlight VoltMx %}
+//Call back function onClick of button
 function onClickCallBack()
 {
     alert("button clicked");  
@@ -668,30 +707,33 @@ var Button0cde40e79ba934b = new voltmx.ui.Button(basicConfig,LayoutConfig,PSPCon
 Form06900dd40fc7842.add(Button0cde40e79ba934b); 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Button` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Calendar](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Calendar</summary> 
 
 * * *
 
 Creates a [Calendar]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Calendar.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Calendar(  
+{% highlight VoltMx %}
+voltmx.ui.Calendar(  
     basicConf,  
     layoutConf,  
     PSPConf);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -699,11 +741,11 @@ Parameters
 | layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Calendar` widget's layout properties and the values are the initial values of the properties. For a complete list of the `Calendar` widget's properties, see the Volt MX Iris[Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Calendar_Properties.html). |
 | pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Calendar` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Calendar` widget's properties, see the [VoltMX IrisWidget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Calendar_Properties.html). |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for a calendar with id:"calendar1"
+{% highlight VoltMx %}
+//Defining the properties for a calendar with id:"calendar1"
 var basicConf = {
     id: "calendar1",
     isVisible:true, 
@@ -730,42 +772,46 @@ var calendar1 = new voltmx.ui.Calendar(basicConf,layoutConf,PSPConf);
 frmHome.add(calendar1);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Calendar` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Camera](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Camera</summary> 
 
 * * *
 
 Creates a [Camera]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Camera.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Camera(  
+{% highlight VoltMx %}
+voltmx.ui.Camera(  
     basicConfig,  
     layoutConfig,  
     pspConfig);
+{% endhighlight %}
 
-**Input Parameters**
+
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | basicConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Camera` widget's basic properties and the values are the initial values of the properties. For a complete list of the `Camera` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Camera_Properties.html). |
-| layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Camera` widget's layout properties and the values are the initial values of the properties. For a complete list of the `Camera` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Camera_Properties.html). |
+| layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Camera` widget's layout properties and the values are the initial values of the properties. For a complete list of the `Camera` widget's properties, see the VoltMX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Camera_Properties.html). |
 | pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Camera` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Camera` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Camera_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}function onCameraCaptureAPI(eventobject)
+{% highlight VoltMx %}
+function onCameraCaptureAPI(eventobject)
 {
     var  cameraRawBytes = camera1.rawBytes;
     Form06900dd40fc7842.Image0e7a54b01924146.rawBytes=cameraRawBytes;
@@ -807,42 +853,45 @@ var camera1 = new voltmx.ui.Camera(basicConfig,LayoutConfig,PSPConfig );
 CameraForm.add(camera1);  
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Camera` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Canvas](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Canvas</summary> 
 
 * * *
 
 Creates a Canvas widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Canvas(  
+{% highlight VoltMx %}
+voltmx.ui.Canvas(  
     basicConfig,  
     layoutConfig,  
     pspConfig)
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | basicConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Canvas` widget's basic properties and the values are the initial values of the properties. For a complete list of the `Canvas` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Camera_Properties.html). |
 | layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Canvas` widget's layout properties and the values are the initial values of the properties. For a complete list of the `Canvas` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Camera_Properties.html). |
-| pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Canvas` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Canvas` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Camera_Properties.html). |
+| pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Canvas` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Canvas` widget's properties, see the VoltMX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Camera_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Sample code to draw a red and a green line using Canvas widget.  
+{% highlight VoltMx %}
+//Sample code to draw a red and a green line using Canvas widget.  
 define({
  addCanvasWidget: function() {
   var shapesDataArray = [{
@@ -885,30 +934,33 @@ define({
 });  
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Canvas` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.CheckBoxGroup](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.CheckBoxGroup</summary> 
 
 * * *
 
 Creates a [CheckBoxGroup]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/CheckBox.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.CheckBoxGroup(  
+{% highlight VoltMx %}
+voltmx.ui.CheckBoxGroup(  
     basicConf,  
     layoutConf,  
     pspConf);
+ {% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -916,11 +968,11 @@ Creates a [CheckBoxGroup]({{ site.baseurl }}/docs/documentation/Iris/iris_widget
 | layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `CheckBoxGroup` widget's layout properties and the values are the initial values of the properties. For a complete list of the `CheckBoxGroup` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/CheckBox_Properties.html). |
 | pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `CheckBoxGroup` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `CheckBoxGroup` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/CheckBox_Properties.html). |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for a checkBoxGroup with id:"chkBox1"
+{% highlight VoltMx %}
+//Defining the properties for a checkBoxGroup with id:"chkBox1"
 var basicConf = { 
     id: "chkBox1",
     isVisible: true,
@@ -956,42 +1008,46 @@ function onSelCallBck(chkBox)
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `CheckBoxGroup` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.ComboBox](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.ComboBox</summary> 
 
 * * *
 
 Creates a [ComboBox]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ComboBox.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.ComboBox(  
+{% highlight VoltMx %}
+voltmx.ui.ComboBox(  
     basicConf,  
     layoutConf,  
     pspConf);
+{% endhighlight %}
 
-Parameters
+
+### Parameters
 
 | Parameter | Description |
 | --- | --- |
 | basicConfig | A JavaScript object containing key-value pairs. The keys are the names of the `ComboBox` widget's basic properties and the values are the initial values of the properties. For a complete list of the `ComboBox` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ComboBox_Properties.html). |
-| layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `ComboBox` widget's layout properties and the values are the initial values of the properties. For a complete list of the `ComboBox` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ComboBox_Properties.html). |
+| layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `ComboBox` widget's layout properties and the values are the initial values of the properties. For a complete list of the `ComboBox` widget's properties, see the VoltMX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ComboBox_Properties.html). |
 | pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `ComboBox` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `ComboBox` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ComboBox_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Defining properties of ComboBox with d:combobox1
+{% highlight VoltMx %}
+//Defining properties of ComboBox with d:combobox1
 var comboBasic = {
     id:"combobox1", 
     isVisible:true, 
@@ -1036,38 +1092,41 @@ combo = new voltmx.ui.ComboBox(comboBasic, comboLayout, comboPSP);
 frmHome.add(combo);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns a `ComboBox` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.createAnimation Function](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.createAnimation Function</summary> 
 
 * * *
 
 Creates an object that defines an animation.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.createAnimation(  
+{% highlight VoltMx %} 
+voltmx.ui.createAnimation(  
     animationDefinition);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | animationDefinition | An object that defines the transformations to perform during the animation. |
-
  
 
-Example
+### Example
 
-{% highlight voltMx %}var transformObject = voltmx.ui.makeAffineTransform();
+{% highlight VoltMx %}
+var transformObject = voltmx.ui.makeAffineTransform();
 transformObject.translate(10, 0);
 transformObject.scale(0.1, 1);
 animationDef = {
@@ -1082,26 +1141,29 @@ animationConfig = {
 animationDefObject = voltmx.ui.createAnimation(animationDef);	
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `animation` object.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.DataGrid](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.DataGrid</summary> 
 
 * * *
 
 Creates a [DataGrid]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/DataGrid.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.DataGrid(  
+{% highlight VoltMx %}
+voltmx.ui.DataGrid(  
     dgridBasic,  
     dgridLayout,  
     dgridPSP);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -1110,10 +1172,10 @@ Creates a [DataGrid]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog
 | dgridPSP | A JavaScript object containing key-value pairs. The keys are the names of the `DataGrid` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `DataGrid` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/DataGrid_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Defining the properties for dataGrid with id:dgrid
+{% highlight VoltMx %}
+//Defining the properties for dataGrid with id:dgrid
 var dgridBasic = {
     id:"dgrid",
     info:{key:"This is a datagrid"},
@@ -1173,17 +1235,18 @@ var dgrid = new voltmx.ui.DataGrid(dgridBasic, dgridLayout, dgridPSP);
 frmHome.add(dgrid);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `DataGrid` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.defineExtendedWidget](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.defineExtendedWidget</summary> 
 
 * * *
 
@@ -1193,14 +1256,16 @@ For more information, refer the Widget Extensions section in Volt MX Iris User g
 
 > **_Note:_** From V9 SP2 release, you can extend the following basic Volt MX widgets, Button, Image, Label, Switch, TextArea, and TextBox.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.defineExtendedWidget(  
+{% highlight VoltMx %}
+voltmx.ui.defineExtendedWidget(  
     chilWdg,  
     baseWidget,  
     protoFuncDict);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -1208,9 +1273,8 @@ For more information, refer the Widget Extensions section in Volt MX Iris User g
 | baseWidget | A JavaScript Object containing the base Volt MX class that is extended, such as `voltmx.ui.Label`. |
 | protoFuncDict | A JavaScript object containing the user defined methods for the extended widget. This parameter must have the definition of `preInitialializeCall` method. For more information about this method, refer the **Remarks** section. |
 
- 
 
-Remarks
+### Remarks
 
 The `protoFuncDict` argument inside the `voltmx.ui.defineExtendedWidget`API, contains the `preInitializeCall` method to define all the properties of the widget. This method contains the following:
 
@@ -1220,7 +1284,8 @@ The `protoFuncDict` argument inside the `voltmx.ui.defineExtendedWidget`API, con
 
 Here is an example of this method for a Label widget.
 
-{% highlight voltMx %}preInitializeCall: function() {
+{% highlight VoltMx %}
+preInitializeCall: function() {
   var bconfig = arguments[0];
   var lconfig = arguments[1];
   var pspconfig = arguments[2];
@@ -1232,7 +1297,7 @@ Here is an example of this method for a Label widget.
 }
 {% endhighlight %}
 
-Limitations
+### Limitations
 
 *   You cannot override the existing properties of the Volt MX widget.
 *   You cannot view the extended properties of the Volt MX widget, if you use alert to display the properties of the extended widget.
@@ -1241,7 +1306,7 @@ Limitations
 *   You cannot override the existing methods of the existing Volt MX widget class.
 *   Extended widget is not supported in the widgets placed inside the Segment widget.
 
-Error Codes
+### Error Codes
 
 | Error Codes | Description |
 | --- | --- |
@@ -1252,9 +1317,10 @@ Error Codes
 | 4005 | This error code is thrown when the `preInitialializeCall` method is not provided in the `voltmx.ui.defineExtendedWidget` API. |
 | 4006 | This error code is thrown when the name provided in the `childWdg` parameter is already a Volt MX widget class. |
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to extend the Label widget to automatically add the '$' to the starting of the text*/
+{% highlight VoltMx %}
+/*Sample code to extend the Label widget to automatically add the '$' to the starting of the text*/
 voltmx.ui.defineExtendedWidget("voltmx.ui2.Label2", voltmx.ui.Label, {
   preInitializeCall: function() {
     var bconfig = arguments[0];
@@ -1309,26 +1375,29 @@ var myInheritedLabelInstance = new voltmx.ui2.Label2({
 frmHome.add(myInheritedLabelInstance)
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instance of the extended widget.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.FlexContainer](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.FlexContainer</summary> 
 
 * * *
 
 Creates a FlexContainer widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.FlexContainer(  
+{% highlight VoltMx %}
+voltmx.ui.FlexContainer(  
     basicConfig,  
     layoutConfig,  
     pspConfig);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -1337,10 +1406,10 @@ Creates a FlexContainer widget.
 | pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `FlexContainer` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `FlexContainer` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/FlexContainer.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var basicConfig = {
+{% highlight VoltMx %}
+var basicConfig = {
     "id": "flexContainer1",
     "top": "100dp",
     "left": "30dp",
@@ -1361,30 +1430,33 @@ var flexContainer1 = new voltmx.ui.FlexContainer(basicConfig,LayoutConfig,PSPCon
 myForm.add(flexContainer1);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `FlexContainer` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.FlexScrollContainer](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.FlexScrollContainer</summary> 
 
 * * *
 
 Instantiates a `FlexScrollContainer` widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.FlexScrollContainer(  
+{% highlight VoltMx %}
+voltmx.ui.FlexScrollContainer(  
     basicConf,  
     layoutConf,  
     pspConf);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -1393,10 +1465,10 @@ Instantiates a `FlexScrollContainer` widget.
 | pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `FlexScrollContainer` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `FlexScrollContainer` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/FlexScrollContainer_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Defining the properties of FlexScrollContainer
+{% highlight VoltMx %}
+//Defining the properties of FlexScrollContainer
 function testfrm_flexScrollContainer1_onScrollStart_seq0(eventobject) 
 {
     normalform.show();
@@ -1525,30 +1597,33 @@ function testfrmGlobals()
 };
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns a `FlexScrollContainer` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Form2](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Form2</summary> 
 
 * * *
 
 Creates a new `FlexForm` widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Form2(  
+{% highlight VoltMx %}
+voltmx.ui.Form2(  
     basicConf,  
     layoutConf,  
     pspConf);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -1556,11 +1631,11 @@ Creates a new `FlexForm` widget.
 | layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `FlexForm` widget's layout properties and the values are the initial values of the properties. For a complete list of the `FlexForm` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/FlexForm_Properties.html). |
 | pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `FlexForm` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `FlexForm` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/FlexForm_Properties.html). |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties of FlexScrollContainer
+{% highlight VoltMx %}
+//Defining the properties of FlexScrollContainer
 function testfrm_flexScrollContainer1_onScrollStart_seq0(eventobject) 
 {
     normalform.show();
@@ -1694,11 +1769,11 @@ function testfrmGlobals()
 };
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns a `FlexForm` widget.
 
-Remarks
+### Remarks
 
 FlexForms created with this function are the recommended type of form to use in your applications. Legacy box forms should not be used in new software.
 
@@ -1706,20 +1781,23 @@ All writable properties can be optionally passed inside dictionary objects to th
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.HorizontalImageStrip2](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.HorizontalImageStrip2</summary> 
 
 * * *
 
 Creates a [HorizontalImageStrip]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Horizontal_Image_Strip.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.HorizontalImageStrip2(  
+{% highlight VoltMx %}
+voltmx.ui.HorizontalImageStrip2(  
     hImgBasic,  
     hImgLayout,  
     hImgPSP);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -1728,10 +1806,10 @@ Creates a [HorizontalImageStrip]({{ site.baseurl }}/docs/documentation/Iris/iris
 | hImgPSP | A JavaScript object containing key-value pairs. The keys are the names of the `HorizontalImageStrip` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `HorizontalImageStrip` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/HzImage_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Defining the properties for Image strip with id:hImg1
+{% highlight VoltMx %}
+//Defining the properties for Image strip with id:hImg1
 var hImgBasic = {
     id:"hImg1",
     skin:"hImgSkn",
@@ -1772,42 +1850,45 @@ var hImg1=new voltmx.ui.HorizontalImageStrip2(hImgBasic, hImgLayout, hImgPSP);
 frmHome.add(hImg1);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `HorizontalImageStrip` object.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Image2](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Image2</summary> 
 
 * * *
 
 Creates an [Image]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Image.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Image2(  
+{% highlight VoltMx %}
+voltmx.ui.Image2(  
     basicConfig,  
     layoutConfig,  
     pspConfig);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
-| basicConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Image` widget's basic properties and the values are the initial values of the properties. For a complete list of the `Image` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Image_Properties.html). |
+| basicConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Image` widget's basic properties and the values are the initial values of the properties. For a complete list of the `Image` widget's properties, see the VoltMX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Image_Properties.html). |
 | layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Image` widget's layout properties and the values are the initial values of the properties. For a complete list of the `Image` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Image_Properties.html). |
-| pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Image` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Image` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Image_Properties.html). |
+| pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Image` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Image` widget's properties, see the VoltMX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Image_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var basicConfig = {
+{% highlight VoltMx %}
+var basicConfig = {
     "id": "imgBullet1",
     "isVisible": true,
     "src": "bullet_white.png"
@@ -1832,11 +1913,11 @@ var imageIdTest = new voltmx.ui.Image2(basicConfig, LayoutConfig, PSPConfImage);
 Form0bf93c59bdc404d.add(imageIdTest);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Image` widget.
 
-Remarks
+### Remarks
 
 The [Image]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Image.html) widget, like all widgets, is a UI element that you can place of forms when you design your program or add programmatically at runtime. It simply displays images on the screen. The `Image` widget is different from the [Image](image_object.html) object, which encapsulates images in code for cropping, scaling, and other similar operations.
 
@@ -1844,32 +1925,35 @@ All writable properties can be optionally passed inside dictionary objects to th
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.ImageGallery](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.ui.ImageGallery</summary>
 
 * * *
 
 Creates an [ImageGallery]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ImageGallery.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.ImageGallery(  
+{% highlight VoltMx %}
+voltmx.ui.ImageGallery(  
     imgGalBasic,  
     imgGalLayout,  
     imgGalPSP );
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | imgGalBasic | A JavaScript object containing key-value pairs. The keys are the names of the `ImageGallery` widget's basic properties and the values are the initial values of the properties. For a complete list of the `ImageGallery` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ImageGallery.html). |
 | imgGalLayout | A JavaScript object containing key-value pairs. The keys are the names of the `ImageGallery` widget's layout properties and the values are the initial values of the properties. For a complete list of the `ImageGallery` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ImageGallery.html). |
-| imgGalPSP | A JavaScript object containing key-value pairs. The keys are the names of the `ImageGallery` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `ImageGallery` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ImageGallery.html). |
+| imgGalPSP | A JavaScript object containing key-value pairs. The keys are the names of the `ImageGallery` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `ImageGallery` widget's properties, see the VoltMX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ImageGallery.html). |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for ImageGallery widget with id:imgGallery
+{% highlight VoltMx %}
+//Defining the properties for ImageGallery widget with id:imgGallery
 var imgGalBasic = { 
     id: "imgGallery",
     isVisible: true,
@@ -1889,42 +1973,45 @@ var imgGallery = new voltmx.ui.ImageGallery(imgGalBasic,imgGalLayout,imgGalPSP )
 frmHome.add(imgGallery);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `ImageGallery` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Label](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Label</summary> 
 
 * * *
 
 Creates a [Label]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/label.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Label(  
+{% highlight VoltMx %}
+voltmx.ui.Label(  
     basicConfig,  
     LayoutConfig,  
     PSPConfig);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
-| basicConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Label` widget's basic properties and the values are the initial values of the properties. For a complete list of the `Label` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Label_Properties.html). |
-| layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Label` widget's layout properties and the values are the initial values of the properties. For a complete list of the `Label` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Label_Properties.html). |
+| basicConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Label` widget's basic properties and the values are the initial values of the properties. For a complete list of the `Label` widget's properties, see the VoltMX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Label_Properties.html). |
+| layoutConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Label` widget's layout properties and the values are the initial values of the properties. For a complete list of the `Label` widget's properties, see the VoltMX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Label_Properties.html). |
 | pspConfig | A JavaScript object containing key-value pairs. The keys are the names of the `Label` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Label` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Label_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var basicConfig = {
+{% highlight VoltMx %}
+var basicConfig = {
     "id":  "lblDescription2",
     "isVisible": true,
     "skin": "sknLblWhiteSampleApp",
@@ -1954,30 +2041,33 @@ var lbl = new voltmx.ui.Label(basicConfig, LayoutConfig, PSPConfig);
 Form06900dd40fc7842.add(lbl);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Label` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Line](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Line</summary> 
 
 * * *
 
 Creates a [Line]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Line.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Line(  
+{% highlight VoltMx %}
+voltmx.ui.Line(  
     lineBasicConf,  
     lineLayoutConf,  
     linePSPConf);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -1986,10 +2076,10 @@ Creates a [Line]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_gui
 | linePSPConf | A JavaScript object containing key-value pairs. The keys are the names of the `Line` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Line` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Line_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Defining the properties for a Line with id:"line".
+{% highlight VoltMx %}
+//Defining the properties for a Line with id:"line".
 var lineBasicConf = {
     id:"line1",
     skin:"gradlblskin",
@@ -2009,30 +2099,33 @@ var line1 = new voltmx.ui.Line(lineBasicConf,lineLayoutConf,linePSPConf);
 frmHome.add(line);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Line` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Link](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Link</summary> 
 
 * * *
 
 Creates a `Link` widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Link(  
+{% highlight VoltMx %}
+voltmx.ui.Link(  
     linkBasic,  
     linkLayout,  
     linkPSP);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -2041,10 +2134,10 @@ Creates a `Link` widget.
 | linkPSP | A JavaScript object containing key-value pairs. The keys are the names of the `Link` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Link` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Link_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Defining properties for a link widget with id:link1
+{% highlight VoltMx %}
+//Defining properties for a link widget with id:link1
 var linkBasic = {
     id:"link1",
     skin:"linkSkin",
@@ -2069,30 +2162,33 @@ var link1 = new voltmx.ui.Link(linkBasic, linkLayout, linkPSP);
 frmHome.add(link1);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Link` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.ListBox](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.ListBox</summary> 
 
 * * *
 
 Creates a [ListBox]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ListBox.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.ListBox(  
+{% highlight VoltMx %}
+voltmx.ui.ListBox(  
     listBasic,  
     listLayout,  
     listPSP);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -2101,10 +2197,10 @@ Parameters
 | listPSP | A JavaScript object containing key-value pairs. The keys are the names of the `ListBox` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `ListBox` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/ListBox_Basic_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Defining properties for a listbox with id:listbox
+{% highlight VoltMx %}
+//Defining properties for a listbox with id:listbox
 var listBasic = {
     id:"listbox",
     isVisible:true,
@@ -2136,30 +2232,33 @@ var listbx = new voltmx.ui.ListBox(listBasic, listLayout, listPSP);
 frmHome.add(listbx);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `ListBox` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Map](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Map</summary> 
 
 * * *
 
 Creates a [Map]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Map.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Map(  
+{% highlight VoltMx %}
+voltmx.ui.Map(  
     mapBasicConf,  
     mapLayoutConf,  
     mapPSPConf);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -2168,10 +2267,10 @@ Creates a [Map]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guid
 | mapPSPConf | A JavaScript object containing key-value pairs. The keys are the names of the `Map` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Map` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Map_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Defining the properties for map with id:map1
+{% highlight VoltMx %}
+//Defining the properties for map with id:map1
 var mapBasicConf = {
     id: "map1",
     provider:constants.MAP_PROVIDER_GOOGLE,
@@ -2201,31 +2300,35 @@ var map = new voltmx.ui.Map(mapBasicConf,mapLayoutConf,mapPSPConf);
 frmHome.add(map);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Map` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.makeAffineTransform](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.makeAffineTransform</summary> 
 
 * * *
 
 Creates a transformation object that can be used in an animation definition.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.makeAffineTransform()
+{% highlight VoltMx %}
+voltmx.ui.makeAffineTransform()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}/******************************************************************
+{% highlight VoltMx %}
+/******************************************************************
  *	Name    : createAnimation
- *	Author  : Volt MX
+ *	Author  : VoltMX
  *	Purpose : To call makeAffineTransform API and createAnimation API on widgets.
  *******************************************************************/
 function animation() {
@@ -2257,27 +2360,30 @@ function animation() {
 }
 {% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 None.
 
-Return Vales
+### Return Vales
 
 An object that can be used to specify a transformation.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.MLCamera](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.MLCamera</summary> 
 
 * * *
 
 Creates a MLCamera widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.MLCamera(mlCamBasic, mlCamLayout, mlCamPsp);
+{% highlight VoltMx %}
+voltmx.ui.MLCamera(mlCamBasic, mlCamLayout, mlCamPsp);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -2286,10 +2392,10 @@ Creates a MLCamera widget.
 | mlCamPsp | A JavaScript object containing key-value pairs. The keys are the names of the `MLCamera` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `MLCamera` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Phone_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}// //Sample code for creating an MLCamera widget.
+{% highlight VoltMx %}
+// //Sample code for creating an MLCamera widget.
 var mlCamBasic = {
  "height": "85%",
  "id": "mlCamera",
@@ -2304,39 +2410,42 @@ var mlCamPsp = {};
 var mlCamera = new voltmx.ui.MLCamera(mlCamBasic, mlCamLayout, mlCamPsp);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `MLCamera` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.PDFView](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.ui.PDFView</summary>
 
 * * *
 
 Creates the PDFView widget. It occupies some space on a form depending on its positional and dimensional properties.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.PDFView(pdfBasic, pdfLayout, pdfPsp)
+{% highlight VoltMx %}
+voltmx.ui.PDFView(pdfBasic, pdfLayout, pdfPsp)
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | pdfBasic | A JavaScript object containing key-value pairs. The keys are the names of the `PDFView` widget's basic properties and the values are the initial values of the properties. For a complete list of the `PDFView` widget's properties, see the [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Phone_Properties.html). |
 | pdfLayout | A JavaScript object containing key-value pairs. The keys are the names of the `PDFView` widget's layout properties and the values are the initial values of the properties. For a complete list of the `PDFView` widget's properties, see the [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Phone_Properties.html). |
 | pdfPsp | A JavaScript object containing key-value pairs. The keys are the names of the `PDFView` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `PDFView` widget's properties, see the [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Phone_Properties.html). |
-
  
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code for creating an PDFView widget. 
+{% highlight VoltMx %}
+//Sample code for creating an PDFView widget. 
 
 var pdfBasic = {
 
@@ -2356,30 +2465,33 @@ var pdfViewID = new voltmx.ui.PDFView(pdfBasic, pdfLayout, pdfPsp);
 frmPDF.add(pdfViewID);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated and configured `PDFView` widget.
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Phone](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Phone</summary> 
 
 * * *
 
 Creates a [Phone]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Phone.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Phone(  
+{% highlight VoltMx %}
+voltmx.ui.Phone(  
     phBasicConf,  
     phLayoutConf,  
     phPSPConf);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -2388,10 +2500,10 @@ Creates a [Phone]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_gu
 | phPSPConf | A JavaScript object containing key-value pairs. The keys are the names of the `Phone` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Phone` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Phone_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}// Create a phone widget.
+{% highlight VoltMx %}
+// Create a phone widget.
 var phBasic={
     "focusSkin": "phoneFocus",
     "id": "phone192735980025729",
@@ -2422,30 +2534,33 @@ var phone192735980025729 = new voltmx.ui.Phone(phBasic,phLayout,phPSP);
 frmHome.add(phone192735980025729);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Phone` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.PickerView](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.PickerView</summary> 
 
 * * *
 
 Creates a [PickerView]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/PickerView.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.PickerView(  
+{% highlight VoltMx %}
+voltmx.ui.PickerView(  
     pickerBasic,  
     pickerLayout,  
     pickerPSP);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -2454,10 +2569,10 @@ Creates a [PickerView]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_pr
 | pickerPSP | A JavaScript object containing key-value pairs. The keys are the names of the `PickerView` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `PickerView` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/PickerView_Basic_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Defining the properties for PickerView with id:picker
+{% highlight VoltMx %}
+//Defining the properties for PickerView with id:picker
 var pickerBasic = {
     id:"picker",
     info:{key:"PickerView"},
@@ -2505,42 +2620,45 @@ function onSelectCalBck(picker)
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `PickerView` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.RadioButtonGroup](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.RadioButtonGroup</summary> 
 
 * * *
 
 Creates a [RadioButtonGroup]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/RadioButtonGroup.html) widget
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.RadioButtonGroup(  
+{% highlight VoltMx %}
+voltmx.ui.RadioButtonGroup(  
     radioBasic,  
     radioLayout,  
     radioPSP);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | radioBasic | A JavaScript object containing key-value pairs. The keys are the names of the `RadioButtonGroup` widget's basic properties and the values are the initial values of the properties. For a complete list of the `RadioButtonGroup` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/RadioButton_Properties.html). |
 | radioLayout | A JavaScript object containing key-value pairs. The keys are the names of the `RadioButtonGroup` widget's layout properties and the values are the initial values of the properties. For a complete list of the `RadioButtonGroup` widget's properties, see the [VoltMX Iris Widget Programmer's Guide.]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/RadioButton_Properties.html) |
-| radioPSP | A JavaScript object containing key-value pairs. The keys are the names of the `RadioButtonGroup` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `RadioButtonGroup` widget's properties, see the Volt MX Iris [Widget Programmer's Guide.]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/RadioButton_Properties.html) |
+| radioPSP | A JavaScript object containing key-value pairs. The keys are the names of the `RadioButtonGroup` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `RadioButtonGroup` widget's properties, see the VoltMX Iris [Widget Programmer's Guide.]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/RadioButton_Properties.html) |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Defining properties for RadioButtonGroup with id:RadioButton
+{% highlight VoltMx %}
+//Defining properties for RadioButtonGroup with id:RadioButton
 var radioBasic = {
     id:"RadioButton",
     isVisible:true,
@@ -2575,27 +2693,30 @@ alert("RadioButtonGroup Id ::"+radioBtn.id);
 frmHome.add(radioBtn);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `RadioButtonGroup` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.signInWithApple](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.signInWithApple</summary> 
 
 * * *
 
 Creates the SignInWithApple widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.signInWithApple(signInWithAppleBasic, signInWithAppleLayout, signInWithApplePsp)
+{% highlight VoltMx %}
+voltmx.ui.signInWithApple(signInWithAppleBasic, signInWithAppleLayout, signInWithApplePsp)
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -2604,10 +2725,10 @@ Creates the SignInWithApple widget.
 | signInWithApplePsp | A JavaScript object containing key-value pairs. The keys are the names of the `SignInWithApple` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `SignInWithApple` widget's properties, see the [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/SigninWithApple_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Sample code for creating a SignInWithApple widget. 
+{% highlight VoltMx %}
+//Sample code for creating a SignInWithApple widget. 
 
 var signInWithAppleBasic= {  
  "authorizationButtonType": voltmx.signinwithapple.BUTTON_TYPE_DEFAULT,  
@@ -2625,17 +2746,18 @@ var signInWithApple = new voltmx.ui.SignInWithApple(signInWithAppleBasic,signInW
 frmSignIn.add(signInWithApple);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated and configured `PDFView` widget.
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Toast](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Toast</summary> 
 
 * * *
 
@@ -2643,59 +2765,65 @@ Creates a `Toast` object.
 
 > **_Important:_** The voltmx.ui.Toast function is only available for the Android platform.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Toast(configParams)
+{% highlight VoltMx %}
+voltmx.ui.Toast(configParams)
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | configParams | A JavaScript object that contains key-value pairs that provide the configuration of the toast to be created. The following keys are supported. text: The text for the toast to display.duration: The duration of time that the toast appears on the screen. This must be set to one of the [Toast Duration Constants](constants_namespace.html#ToastDuration). |
 
-Example
+### Example
 
-{% highlight voltMx %}var toast = new voltmx.ui.Toast({
+{% highlight VoltMx %}
+var toast = new voltmx.ui.Toast({
   "text": "This is the toast's text.",
   "duration": constants.SHORT
   });
 toast.show();
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated [Toast Object](toast_properties.html#toast-object).
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Video](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.ui.Video</summary> 
 
 * * *
 
 Creates a [Video]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Video.html) widget.
 
-**Syntax**
+### Syntax
 
-> voltmx.ui.Video(  
+{% highlight VoltMx %}
+voltmx.ui.Video(  
     vidBasicConf,  
     vidLayoutConf,  
     vidPSPConf);
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
-| vidBasicConf | A JavaScript object containing key-value pairs. The keys are the names of the `Video` widget's basic properties and the values are the initial values of the properties. For a complete list of the `Video` widget's properties, see the Volt MX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Map_Properties.html). |
-| vidLayoutConf | A JavaScript object containing key-value pairs. The keys are the names of the `Video` widget's layout properties and the values are the initial values of the properties. For a complete list of the `Video` widget's properties, see the [<VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Map_Properties.html). |
+| vidBasicConf | A JavaScript object containing key-value pairs. The keys are the names of the `Video` widget's basic properties and the values are the initial values of the properties. For a complete list of the `Video` widget's properties, see the VoltMX Iris [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Map_Properties.html). |
+| vidLayoutConf | A JavaScript object containing key-value pairs. The keys are the names of the `Video` widget's layout properties and the values are the initial values of the properties. For a complete list of the `Video` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Map_Properties.html). |
 | vidPSPConf | A JavaScript object containing key-value pairs. The keys are the names of the `Video` widget's platform-specific properties and the values are the initial values of the properties. For a complete list of the `Video` widget's properties, see the [VoltMX Iris Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Map_Properties.html). |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var vidBasic = {
+{% highlight VoltMx %}
+var vidBasic = {
     "id": "video1",
     skin:"vSkin",
     "source": {
@@ -2722,11 +2850,11 @@ var video1 = new voltmx.ui.Video(vidBasic, vidLayout, vidPSP);
 frmHome.add(video1);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an instantiated `Video` widget.
 
-Remarks
+### Remarks
 
 All writable properties can be optionally passed inside dictionary objects to the constructor. Unspecified properties or an empty constructor results in the defaults values being used for all unprovided information.
 

@@ -31,7 +31,8 @@ Formatting Conventions in This Guide
 
 The following formatting conventions are used throughout the document:
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here](javascript:void(0);)
+
+<details close markdown="block"><summary>Click here</summary>
 
   
 | Convention | Explanation |
@@ -43,6 +44,7 @@ The following formatting conventions are used throughout the document:
 | > **_Note:_**   | Provides helpful hints or additional information |
 | > **_Important:_**   | Highlights actions or information that might cause problems to systems or data |
 
+</details>
 Contact Us
 ----------
 

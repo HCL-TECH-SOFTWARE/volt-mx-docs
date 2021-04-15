@@ -20,15 +20,16 @@ This API retrieves the information required to launch the in-app review flow fo
 Before you raise a request for an in-app review, Android recommends that you cache the review object in advance. This is to ensure that the review information is successfully retrieved before the user navigates to a different screen. In addition, you can find the staleness of a cached object from the value of the [timeElapsed](#timeElapsed) parameter.
 
 > **_Note:_**
-
 *   Ensure that you add the `supportGooglePlayCoreLib=true` entry in the **androidbuild.properties** file of the project.
 *   In-app reviews only work on devices that have the Google Play store installed, and use Chrome OS or Android versions 5.0 (API level 21), and later
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.requestReviewFlow(config);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 _config_ - A JSON Object that contains the following keys:
 
@@ -40,9 +41,10 @@ _config_ - A JSON Object that contains the following keys:
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}requestReviewFlow: function() {  
+{% highlight VoltMx %}
+requestReviewFlow: function() {  
     var config = {  
         "clearCachedRequest": false,  
         "onResult":this.requestReviewFlowCallback  
@@ -60,11 +62,11 @@ requestReviewFlowCallback: function(info) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Status Code Constants
+### Status Code Constants
 
 | Constant | Description |
 | --- | --- |
@@ -76,11 +78,11 @@ Status Code Constants
 
  
 
-Remarks
+### Remarks
 
 If the GMS or library is missing, the API returns the REVIEW\_LIBRARY\_MISSING, GMS\_LIBRARY\_MISSING, or GOOGLE\_PLAY\_SERVICES\_UNAVAILABLE constants. Ideally, when you encounter these errors, you must not invoke the [voltmx.application.requestReview(config)](#requestReview) API.
 
-Platform Availability
+### Platform Availability
 
 Android
 
@@ -93,11 +95,13 @@ Android
 
 This function requests users to provide a rating and to write a review for an app.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.requestReview(config);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 _config_ \[optional\]- If you want to enable the in-app review feature on Android devices, you must include the config parameter, which is a JSON Object that contains the following keys:
 
@@ -109,9 +113,10 @@ _config_ \[optional\]- If you want to enable the in-app review feature on Androi
 
 > **_Note:_** Support for the config parameter (that provides the in-app review functionality) is only available on the Android platform.
 
-Example
+### Example
 
-{% highlight voltMx %}requestReview: function() {  
+{% highlight VoltMx %}
+requestReview: function() {  
     var config = {  
         "reviewInApp": true,  
         "onResult": this.requestReviewCallback  
@@ -129,17 +134,17 @@ requestReviewCallback: function(info) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 *   If this API returns the REVIEW\_SUCCESS status code constant, the review info object is cleared.
 *   If the GMS or library is missing, the API returns the REVIEW\_LIBRARY\_MISSING or GOOGLE\_PLAY\_SERVICES\_UNAVAILABLE or GMS\_LIBRARY\_MISSING statusCode. However, in this case, the API reverts to invoking the older review flow.  
     Ideally, you must not invoke this API if you catch these errors in the [voltmx.application.requestReviewFlow](#requestReviewFlow) API.
 
-Status Codes
+### Status Codes
 
   
 | Constant | Description |
@@ -153,14 +158,12 @@ Status Codes
 
  
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 
 * * *
-
-</details>
 
 ### Status Codes
 
@@ -176,4 +179,5 @@ Platform Availability
 | GOOGLE\_PLAY\_SERVICES\_UNAVAILABLE | The Google Play Store services are missing. |
 | GMS\_LIBRARY\_MISSING | The Google Mobile Services library is not linked with the application. |
 
+</details>
 ![](resources/prettify/onload.png)

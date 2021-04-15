@@ -21,20 +21,20 @@ Typographical Conventions
 
 The following typographical conventions have been used throughout the document:
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here](javascript:void(0);)
 
-  
+<details close markdown="block"><summary>Click here</summary>
+ 
 | Conventions | Explanation |
 | --- | --- |
 | Monospace | User input text, system prompts, and responses File Path Commands Program Code File Names. |
 | _Italic_ | Emphasis Names of books and documents New Terminology. |
 | **Bold** | Windows Menus Buttons Icons Fields Tabs Folders. |
 | [URL](http://a/) | Active link to a URL. |
-| _Note:_ | Provides helpful hints or additional information. |
+| <b>_Note:_ </b>| Provides helpful hints or additional information. |
 
-  
+</details>
 
 Contact Us
 ----------
 
-We welcome your feedback on our documentation; write to us at [techpubs@voltmx.com](mailto:techpubs@voltmx.com?subject=Documentation Feedback). For technical questions, suggestions, comments, or to report problems on VoltMX's product line, contact [support@voltmx.com](mailto:support@voltmx.com).
+We welcome your feedback on our documentation; write to us at [techpubs@voltmx.com](mailto:techpubs@voltmx.com?subject=Documentation Feedback). For technical questions, suggestions, comments, or to report problems on Volt MX's product line, contact [support@voltmx.com](mailto:support@voltmx.com).

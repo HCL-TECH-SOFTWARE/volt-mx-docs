@@ -13,38 +13,45 @@ Functions
 
 The voltmx.lang namespace provides the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.lang.getUncaughtExceptionHandler](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.lang.getUncaughtExceptionHandler</summary>
 
 The voltmx.lang.getUncaughtExceptionHandler API retrieves the reference to a JavaScript function that is currently set as an exception handler for all uncaught exceptions.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.lang.getUncaughtExceptionHandler()
-
-**Example**
-
-{% highlight voltMx %}var funtionObject = voltmx.lang.getUncaughtExceptionHandler();
 {% endhighlight %}
 
-**Return Values**
+### Example
+
+{% highlight VoltMx %}
+var funtionObject = voltmx.lang.getUncaughtExceptionHandler();
+{% endhighlight %}
+
+### Return Values
 
 JavaScript value containing the function reference.
 
-**Platform Availability**
+### Platform Availability
 
 Available in iOS and Android platforms.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.lang.setUncaughtExceptionHandler](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.lang.setUncaughtExceptionHandler</summary>
 
 The voltmx.lang.setUncaughtExceptionHandler API sets a JavaScript function as an exception handler for all uncaught exceptions. The JavaScript function takes one argument that is the JavaScript exception object. A developer can query the properties of this object like any other JavaScript object.
 
 > **_Note:_** In Android platform ,the exceptionObject contains only **stack** and **message** properties.
 
-**Syntax**
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.lang.setUncaughtExceptionHandler([JavaScript Function Object](#JSFunctionObject))
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
   
 | Parameter | Description |
@@ -53,13 +60,16 @@ voltmx.lang.setUncaughtExceptionHandler([JavaScript Function Object](#JSFunction
 
 Following is the signature of the function object: 
 
+{% highlight VoltMx %}
 Function <FuncName> ( exceptionObject)  
 <handler code>  
 End  
+{% endhighlight %}
 
-**Example**
+### Example
 
-{% highlight voltMx %}function uncaughtExceptionHandler(exceptionObject) {
+{% highlight VoltMx %}
+function uncaughtExceptionHandler(exceptionObject) {
     // Converting exception object into a readable string
     var exceptionString = "";
 
@@ -80,12 +90,14 @@ End
 voltmx.lang.setUncaughtExceptionHandler(uncaughtExceptionHandler);
 {% endhighlight %}
 
-**Return Values**
+### Return Values
 
 None
 
-**Platform Availability**
+### Platform Availability
 
 Available in iOS and Android platforms.
+
+</details>
 
 ![](resources/prettify/onload.png)

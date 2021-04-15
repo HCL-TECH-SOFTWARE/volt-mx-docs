@@ -13,37 +13,40 @@ Popup has the following methods associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[add](javascript:void(0);)
+
+<details close markdown="block"><summary>add</summary>
 
 * * *
 
 This method is used to add widgets to the Popup. When the widgets are added to the current visible Popup, then the changes will reflect immediately.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 add(widgets)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgets
 
 Comma separated list of widgets.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Remarks
+<b>Remarks</b>
 
 Adding a widget to the Popup or Box hierarchy, which is already a part of the other widget hierarchy, will lead to undefined behaviors. You have to explicitly remove the widget from one hierarchy before adding it to another Popup or Box.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP",skin:"popSkin",isModal:true, 
 transparencyBehindThePopup:100};
@@ -60,23 +63,26 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.add(lbl,btn);**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addAt](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addAt</summary>
 
 * * *
 
 This method is used to add widgets to the Popup container at the specified index. Widget is prepended if index <0 and appended at the end of the container if the index > size+1. Size is the number of widgets already present in the container. If a new widget is added or removed will reflect immediately from the Popup hierarchy model perspective, however the changes are displayed when the Popup appears. When the widgets are added to the current visible Popup, then the changes will reflect immediately. Adding a widget to the Popup or Box hierarchy, which is already a part of the other widget hierarchy, will lead to undefined behaviors. You have to explicitly remove the widget from one hierarchy before adding it to another Popup or Box.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 addAt(widgetref,index,animation)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgetref
 
@@ -104,17 +110,17 @@ callbacks
 
 A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the Volt MX Iris [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -131,37 +137,40 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.addAt(lbl,15);**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[destroy](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>destroy</summary>
 
 * * *
 
 This method is used to destroy any unwanted Popups at any point in time, and allows increasing the application life by reducing the memory usage.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 destroy()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
 
 None
 
-Example
+<b>Exceptions</b>
 
-{% highlight voltMx %}
+None
+
+<b>Example</b>
+
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin",isModal:true, 
 transparencyBehindThePopup:100};
@@ -177,37 +186,40 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.destroy();**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[dismiss](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>dismiss</summary>
 
 * * *
 
 This method is used to dismiss the popup on which this method is called.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 dismiss()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
 
 None
 
-Example
+<b>Exceptions</b>
 
-{% highlight voltMx %}
+None
+
+<b>Example</b>
+
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -223,13 +235,14 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.dismiss();**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[navigateTo](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>navigateTo</summary>
 
 * * *
 
@@ -237,11 +250,13 @@ This method is used to navigate from one popup to other popup. The popup on whic
 
 > **_Note:_** This method is applicable only when the popupStyle is set as POPUP\_TYPE\_NATIVE\_STYLE.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 navigateTo(popupinstance,config);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 popupinstance
 
@@ -251,17 +266,17 @@ config
 
 Optional. For future releases. Not configurable as of now.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -277,39 +292,42 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.navigateTo(popupinstance);**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on iOS (iPad only) platform
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[remove](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>remove</summary>
 
 * * *
 
 This method removes a widget from the Popup container. If a new widget is removed will reflect immediately from the Popup hierarchy model perspective, however the changes are displayed when the Popup appears. When the widgets are added to the current visible Popup, then the changes will reflect immediately.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 remove(widgetref)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgetref
 
 Reference of the name of the widget.
 
-Return Values
+<b>Return Values</b>
 
 The current Popup handle is returned.
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -326,13 +344,14 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.remove(lbl,btn);**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeAt](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeAt</summary>
 
 * * *
 
@@ -340,27 +359,29 @@ This method removes a widget at the given index from the Popup container. If a n
 
 > **_Note:_** If the index is not within the limits then _removeAt_ will be silent and doesn't yield any result.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 removeAt(index)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 index
 
 Specifies the index of the popup.
 
-Return Values
+<b>Return Values</b>
 
 Reference of the name of the widget to be removed.
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", type:constants.POPUP_TYPE_NATIVE,title:"PopUP", 
 skin:"popSkin", isModal:true, transparencyBehindThePopup:100};
@@ -376,37 +397,40 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.removeAt(15);**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollToBeginning](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollToBeginning</summary>
 
 * * *
 
 This method gives you the control to scroll to the beginning of the Popup.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 scrollToBeginning()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
+
+None
+
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin",isModal:true, 
 transparencyBehindThePopup:100};
@@ -422,37 +446,40 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.scrollToBeginning();**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollToEnd](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollToEnd</summary>
 
 * * *
 
 This method gives you the control to scroll to the end of the Popup.
 
-Synax
+<b>Synax</b>
 
+{% highlight VoltMx %}
 scrollToEnd()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
+
+None
+
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -468,39 +495,43 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.scrollToEnd();**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollToWidget](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollToWidget</summary>
 
 * * *
 
 This method gives you the control to scroll the widget in the Popup.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 scrollToWidget(widgetref)
+{% endhighlight %}
 
-Parameters
+
+<b>Parameters</b>
 
 widgetref
 
 Reference of the name of the widget.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP",skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -516,13 +547,14 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.scrollToWidget(lbl);**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setContext](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setContext</summary>
 
 * * *
 
@@ -532,11 +564,13 @@ The context contains information regarding the _widget_ for which the popup must
 
 Additionally for the iPhone platform, you can choose to specify the _sizetoanchorwidth_, a boolean property. If you set the value to true, the popup width is made equal to the width of the anchor. If the value is _false_ (default value), the popup takes the width allocated in the popup properties.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 setContext(context)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 context
 
@@ -556,17 +590,17 @@ Set of key value pairs providing information about the widget and the anchoring 
 
 > Reference to an existing widget with respect to which the Popup has to be anchored (Pass the Formid if the popup is to be positioned with respect to a Form. This Form is assumed to be the form on which the popup will be overlaid).
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -585,13 +619,14 @@ var context1={"widget":frmApis.label22,"anchor":"bottom","sizetoanchorwidth":fal
 **popUp.setContext(context1);**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setTitleBarLeftSideButtonSkin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setTitleBarLeftSideButtonSkin</summary>
 
 * * *
 
@@ -599,11 +634,14 @@ This method enables you to set the properties for a left-side button of a titleb
 
 > **_Note:_** The setTitleBarLeftSideButtonSkin method is supported only for IPAD when the popupStyle is set to POPUP\_TYPE\_NATIVE\_STYLE.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 setTitleBarLeftSideButtonSkin(text,skin,callback);
+{% endhighlight %}
 
-Parameters
+
+<b>Parameters</b>
 
 text
 
@@ -617,17 +655,17 @@ callback
 
 An event callback is invoked by the platform when the user performs a click action.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -646,13 +684,14 @@ var context1={"widget":frmApis.label22,"anchor":"bottom","sizetoanchorwidth":fal
 **popUp.setTitleBarLeftSideButtonSkin(title, image, handler);**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 This method is available on iPhone/iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setTitleBarRightSideButtonSkin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setTitleBarRightSideButtonSkin</summary>
 
 * * *
 
@@ -660,11 +699,14 @@ This method enables you to set the properties for a right-side button of a title
 
 > **_Note:_** The setTitleBarRightSideButtonSkin method is supported only for IPAD when the popupStyle is set to POPUP\_TYPE\_NATIVE\_STYLE.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 setTitleBarRightSideButtonSkin(title,image,handler);
+{% endhighlight %}
 
-Parameters
+
+<b>Parameters</b>
 
 text
 
@@ -678,17 +720,17 @@ callback
 
 An event callback is invoked by the platform when the user performs a click action.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -707,13 +749,14 @@ var context1={"widget":frmApis.label22,"anchor":"bottom","sizetoanchorwidth":fal
 **popUp.setTitleBarRightSideButtonSkin(title, image, handler);**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 This method is available on iPhone/iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setTitleBarSkin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setTitleBarSkin</summary>
 
 * * *
 
@@ -721,27 +764,29 @@ This method enables you to set the skin for a titlebar of a popup.
 
 > **_Note:_** The setTitleBarSkin method is supported only for IPAD when the popupStyle is set to POPUP\_TYPE\_NATIVE\_STYLE.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 setTitleBarSkin()
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 skin
 
 Reference to the skin.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -760,13 +805,14 @@ var context1={"widget":frmApis.label22,"anchor":"bottom","sizetoanchorwidth":fal
 **popUp.setTitleBarSkin(skin);**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 This method is available on iPhone/iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showTitleBar](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showTitleBar</summary>
 
 * * *
 
@@ -774,25 +820,27 @@ This method gives you the control to show a titlebar within a popup.
 
 > **_Note:_** The showTitleBar method is supported only for IPAD when the popupStyle is set to POPUP\_TYPE\_NATIVE\_STYLE.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 showTitleBar()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
 
 None
 
-Example
+<b>Exceptions</b>
 
-{% highlight voltMx %}
+None
+
+<b>Example</b>
+
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -811,13 +859,14 @@ var context1={"widget":frmApis.label22,"anchor":"bottom","sizetoanchorwidth":fal
 **popUp.showTitleBar();**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 This method is available on iPhone/iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hideTitleBar](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hideTitleBar</summary>
 
 * * *
 
@@ -825,25 +874,27 @@ This method gives you the control to hide a titlebar within a popup.
 
 > **_Note:_** The hideTitleBar method is supported only for IPAD when the popupStyle is set to POPUP\_TYPE\_NATIVE\_STYLE.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 hideTitleBar()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
 
 None
 
-Example
+<b>Exceptions</b>
 
-{% highlight voltMx %}
+None
+
+<b>Example</b>
+
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -862,37 +913,40 @@ var context1={"widget":frmApis.label22,"anchor":"bottom","sizetoanchorwidth":fal
 **popUp.hideTitleBar();**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 This method is available on iPhone/iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[show](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>show</summary>
 
 * * *
 
 Displays the popup on to the screen.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 show()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+<b>Parameters</b>
 
 None
 
-Exceptions
+<b>Return Values</b>
 
 None
 
-Example
+<b>Exceptions</b>
 
-{% highlight voltMx %}
+None
+
+<b>Example</b>
+
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -908,37 +962,40 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 **popUp.show();**
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 This method is available on iPhone/iPad, and Windows Desktop platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgets](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgets</summary>
 
 * * *
 
 Returns an array of the widget references which are direct children of the popup.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 widgets()
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None
 
-Return Values
+<b>Return Values</b>
 
 This method returns _Read only_ array of widget references. Modifying the array and changing the position of widgets in this array doesn't reflect in the Form hierarchy, however you can get handle to the widgets through this array and modify the widgets through widget level methods as exposed by individual widgets.
 
-Exceptions
+<b>Exceptions</b>
 
 WidgetError
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup.
 var popBasic ={id:"popUp", title:"PopUP", skin:"popSkin", isModal:true, 
 transparencyBehindThePopup:100};
@@ -955,9 +1012,11 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 alert("Widgets are::"+wigArr);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
+
+</details>
 

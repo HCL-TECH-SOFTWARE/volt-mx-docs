@@ -12,7 +12,8 @@ The namespace for the BottomSheet widget is **mBottomSheetObject**. It contains 
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[destroy Method](javascript:void(0);)
+
+<details close markdown="block"><summary>destroy Method</summary>
 
 * * *
 
@@ -24,7 +25,7 @@ destroy()
 
 Example
 
-{% highlight voltMx %}var mBottomSheetObject = new voltmx.ui.BottomSheet({});
+{% highlight VoltMx %}var mBottomSheetObject = new voltmx.ui.BottomSheet({});
 //Destroying a widget using destroy method.
 testForm.mBottomSheetObject.destroy();
 {% endhighlight %}
@@ -35,7 +36,8 @@ testForm.mBottomSheetObject.destroy();
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[dismiss Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>dismiss Method</summary>
 
 * * *
 
@@ -47,7 +49,7 @@ dismiss()
 
 Example
 
-{% highlight voltMx %}var mBottomSheetObject= new voltmx.ui.BottomSheet({});
+{% highlight VoltMx %}var mBottomSheetObject= new voltmx.ui.BottomSheet({});
 //Dismissing a widget using dismiss method.
 testForm.mBottomSheetObject.dismiss();
 {% endhighlight %}
@@ -58,7 +60,8 @@ testForm.mBottomSheetObject.dismiss();
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[show Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>show Method</summary>
 
 * * *
 
@@ -70,7 +73,7 @@ show()
 
 Example
 
-{% highlight voltMx %}var mBottomSheetObject = new voltmx.ui.BottomSheet({});
+{% highlight VoltMx %}var mBottomSheetObject = new voltmx.ui.BottomSheet({});
 //Showing a widget using show method.
 testForm.mBottomSheetObject.show();
 {% endhighlight %}
@@ -81,7 +84,8 @@ testForm.mBottomSheetObject.show();
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setState Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setState Method</summary>
 
 * * *
 
@@ -98,7 +102,7 @@ Constants
 
 Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var mBottomSheetObject = new voltmx.ui.BottomSheet({});
 //Collapsing a bottomSheet widget using setState method.
 mBottomSheetObject.setState(constants.BOTTOM_SHEET_STATE_COLLAPSED);
@@ -109,4 +113,6 @@ mBottomSheetObject.setState(constants.BOTTOM_SHEET_STATE_COLLAPSED);
 *   Android
 
 * * *
+
+</details>
 

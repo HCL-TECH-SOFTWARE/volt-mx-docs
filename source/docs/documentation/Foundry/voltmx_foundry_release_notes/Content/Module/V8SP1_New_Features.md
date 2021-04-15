@@ -7,7 +7,8 @@ category: "voltmx_foundry_release_notes"
 New Features in V8 SP1
 ======================
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Console](javascript:void(0);)
+
+<details close markdown="block"><summary>Console</summary>
 
 *   Added support for API Management features of Volt MX Foundry in on-premises version. Users can create Developer Portals and add oAuth servers on the Active Directory and UserStore identity services in their on-premises instances.
 *   Added support for testing services with Pre and Post processors from Volt MX Foundry Console. Users can view detailed logs of steps involved in the service invocation.
@@ -20,7 +21,8 @@ New Features in V8 SP1
 *   Added support to republish individual Integration and Object services and application from API Management View.
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Offline Objects](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Offline Objects</summary>
 
 *   Offline Objects API calls now send metrics data for reporting.
 *   Error (or) Exception handling is significantly enhanced in Offline Objects. Errors from native layers are percolated to JavaScript layer for an app developer to handle in client code. In addition to application errors, Sync errors are also percolated to the app developer.
@@ -32,7 +34,8 @@ New Features in V8 SP1
 *   Offline Objects now support cascade delete feature. Child objects are deleted to avoid creating orphan records on the client.
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Integration](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Integration</summary>
 
 *   **Configurable Parameters**
     
@@ -50,7 +53,8 @@ New Features in V8 SP1
     For information on the process downloading, refer [Downloading a Swagger API file]({{ site.baseurl }}/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Integration_Services.html).
     
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Installer](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Installer</summary>
 
 *   App Server components upgrade using the installer is not supported anymore. Volt MX suggests that you can upgrade your Volt MX Foundry by installing it afresh with connecting to an existing database.
 *   Added support for API Developer Portal is added. An interface to expose APIs and enable Volt MX Foundry users to develop third-party apps.

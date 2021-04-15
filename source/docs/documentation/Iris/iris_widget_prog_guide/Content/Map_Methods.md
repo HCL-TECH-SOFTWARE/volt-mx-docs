@@ -12,17 +12,19 @@ The Map widget has the following methods associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addCircle Method](javascript:void(0);)
+
+<details close markdown="block"><summary>addCircle Method</summary>
 
 * * *
 
 This method is used to add a circle to the map widget with the given location data.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 addCircle(circleData)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 circleData
 
@@ -34,17 +36,17 @@ Specifies the location data for which the circle is drawn on the map. Parameters
 >     
 > *   **radius** \[Number\] \[Mandatory\]: Specifies the radius in meters.
 > *   **navigateAndZoom** \[Boolean\] \[Optional\]: Decides whether the navigation to first pin should take place. It is available on Android, Windows, and iOS. The default value of this parameter is true.  
->     Here is an example of how to enable this property.{% highlight voltMx %}
->      locationData: [{
->       lat: "17.445775",
->       lon: "78.3731",
->       name: "Campus 1",
->       desc: "My Office Campus",
->       navigateAndZoom: true
->     }]
->     };
->     {% endhighlight %}  
->     
+     Here is an example of how to enable this property.
+    {% highlight VoltMx %}
+      locationData: [{
+       lat: "17.445775",
+       lon: "78.3731",
+       name: "Campus 1",
+       desc: "My Office Campus",
+       navigateAndZoom: true
+     }]
+     };
+     {% endhighlight %}    
 > *   **showCenterPin** \[Boolean\] \[Optional\]: Indicates whether to show pin image for Circle center location. Default value is true.
 > *   **circleConfig** \[JSObject\] \[Optional\]: Specifies an object with predefined configuration keys. These configuration keys can hold platform specific keys as well. The following is the list configuration keys:
 > 
@@ -63,24 +65,24 @@ Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 None
 
-Remarks
+### Remarks
 
 The `image` parameter inside the `locationData` property can accept the pin image as a name string or as a JavaScript pin object. The pin object contains the following keys.
 
-  
 | Key | Description |
 | --- | --- |
 | source | Specifies the source of the image. It could be an image name, an image path, or a URL. |
 | sourceType | Contains a value from the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgTyp)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Type Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not given for the sourceType, the default value of PIN\_IMG\_SRC\_TYPE\_RESOURCES is used. |
 | anchor | Optional. A constant that defines how the pin image should be anchored to the location point. Its value should be one of the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgAnc)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Anchor Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not specified, the default value of PIN\_IMG\_ANACHOR\_BOTTOM\_CENTER is used. |
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke addCircle method
+{% highlight VoltMx %}
+//Sample code to invoke addCircle method
 var testdata = {
   id: "circleId",
   centerLocation: {
@@ -99,23 +101,25 @@ var testdata = {
 frmMapCircle2.Map1.addCircle(testdata);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addPin Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addPin Method</summary>
 
 * * *
 
 Adds or appends a single pin to the map.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 addPin(pinData)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 pinData
 
@@ -128,7 +132,7 @@ pinData
 *   **desc** \[String\] \[Mandatory\]: Specifies a long description for the location.
 *   **image** \[String or Image Object\] \[Mandatory\]: Specifies the map pin image that overrides the [defaultPinImage](Map_Properties.html#defaultP).Refer the **Remarks** section for more information.
 *   **navigateAndZoom** \[Boolean\] \[Optional\]: Decides whether the navigation to first pin should take place. It is available on Android, Windows, and iOS. The default value of this parameter is true.  
-    Here is an example of how to enable this property.{% highlight voltMx %}
+    Here is an example of how to enable this property.{% highlight VoltMx %}
      locationData: [{
       lat: "17.445775",
       lon: "78.3731",
@@ -155,11 +159,11 @@ pinData
     > **_Note:_** In Android platform, in a map the z-index value stack of the pins are different from the z-index stack of the shapes. The pins are drawn on top of the shapes based on their z-index values. Also, when the pins and shapes (such as circle and polyline) are placed on the map on top of each other, the click event of the pins have a higher priority than the click events of the shapes.
     
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 The `image` parameter inside the `locationData` property can accept the pin image as a name string or as a JavaScript pin object. The pin object contains the following keys.
 
@@ -170,9 +174,10 @@ The `image` parameter inside the `locationData` property can accept the pin imag
 | sourceType | Contains a value from the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgTyp)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Type Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not given for the sourceType, the default value of PIN\_IMG\_SRC\_TYPE\_RESOURCES is used. |
 | anchor | Optional. A constant that defines how the pin image should be anchored to the location point. Its value should be one of the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgAnc)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Anchor Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not specified, the default value of PIN\_IMG\_ANACHOR\_BOTTOM\_CENTER is used. |
 
-Example
+### Example
 
-{% highlight voltMx %}// Sample code to invoke addPin method in MainMap Map widget
+{% highlight VoltMx %}
+// Sample code to invoke addPin method in MainMap Map widget
 pin1 = {
   id: "id1", // id is mandatory for every pin
   lat: "17.4947934",
@@ -196,23 +201,25 @@ function addThePin() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addPins Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addPins Method</summary>
 
 * * *
 
 Adds or appends multiple pins to the map.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 addPins(pin)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 pinData \[Array\]\[Mandatory\]
 
@@ -226,7 +233,8 @@ pinData \[Array\]\[Mandatory\]
 *   **image** \[String or Image Object\] \[Mandatory\]: Specifies the map pin image that overrides the [defaultPinImage](Map_Properties.html#defaultP).Refer the **Remarks** section for more information.  
     
 *   **navigateAndZoom** \[Boolean\] \[Optional\]: Decides whether the navigation to first pin should take place. It is available on Android, Windows, and iOS. The default value of this parameter is true.  
-    Here is an example of how to enable this property.{% highlight voltMx %}
+    Here is an example of how to enable this property.
+    {% highlight VoltMx %}
     locationData: [{
       lat: "17.445775",
       lon: "78.3731",
@@ -251,11 +259,11 @@ pinData \[Array\]\[Mandatory\]
     > **_Note:_** In Android platform, in a map the z-index value stack of the pins are different from the z-index stack of the shapes. The pins are drawn on top of the shapes based on their z-index values. Also, when the pins and shapes (such as circle and polyline) are placed on the map on top of each other, the click event of the pins have a higher priority than the click events of the shapes.
     
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 The `image` parameter inside the `locationData` property can accept the pin image as a name string or as a JavaScript pin object. The pin object contains the following keys.
 
@@ -266,9 +274,10 @@ The `image` parameter inside the `locationData` property can accept the pin imag
 | sourceType | Contains a value from the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgTyp)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Type Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not given for the sourceType, the default value of PIN\_IMG\_SRC\_TYPE\_RESOURCES is used. |
 | anchor | Optional. A constant that defines how the pin image should be anchored to the location point. Its value should be one of the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgAnc)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Anchor Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not specified, the default value of PIN\_IMG\_ANACHOR\_BOTTOM\_CENTER is used. |
 
-Example
+### Example
 
-{% highlight voltMx %}/* Sample code to invoke addPins method in MainMap Map widget to add pin1 and pin2 to the map.*/
+{% highlight VoltMx %}
+/* Sample code to invoke addPins method in MainMap Map widget to add pin1 and pin2 to the map.*/
 // id is mandatory for every pin in dictionary
 
 pin1 = {
@@ -310,23 +319,25 @@ function addThePins() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addGestureRecognizer Method</summary>
 
 * * *
 
 This API allows you to set a gesture recognizer for a specified gesture for a specified widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _gestureType_
 
@@ -356,11 +367,11 @@ This function will be raised asynchronously
 
 See Remarks for the syntax of this function.
 
-Return Values
+### Return Values
 
 String - Reference to the gesture is returned.
 
-Remarks
+### Remarks
 
 The values for the _gestureType_parameter are:
 
@@ -389,7 +400,7 @@ Gesture Type:TAP
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[Number\] - specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
 
-For example:  
+### For example:  
 
 {fingers:1,taps:1}
 
@@ -397,7 +408,7 @@ Gesture Type:SWIPE
 
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 
-For example:
+### For example:
 
 {fingers: 1}
 
@@ -405,7 +416,7 @@ Gesture Type:LONGPRESS
 
 *   pressDuration \[Number\] - specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if pressDuration is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This is not applicable to Windows.
 
-For example:
+### For example:
 
 {pressDuration=1}.
 
@@ -488,9 +499,10 @@ In the android platform, the top and bottom gestures work only when the scrollin
 *   RIGHTTAP applicable only to Windows 10
 *   ROTATION is not supported on android.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
+{% highlight VoltMx %}
+//Sample code to add Gestures to the frmGestures FlexForm.
 //Code to add DOUBLE TAP gesture to the frmGestures, FlexForm.
 var doubletp = {
  fingers: 1,
@@ -522,23 +534,25 @@ function onGestureFunction(commonWidget, gestureInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addPolygon Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addPolygon Method</summary>
 
 * * *
 
 This method is used to add a polygon to the map widget with the given location data.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 addPolygon(polygonData)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 polygonData
 
@@ -547,7 +561,8 @@ Specifies the location data for which the polygon is drawn on the map. Parameter
 *   **id** \[String\] \[Mandatory\]: Specifies the unique identifier to represent the polygon. If a polygon already exists with the same identifier, then it gets replaced by the new id.
 *   **locations** \[Array\] \[Mandatory\]: Specifies the list of all the locations as an array. Each location object accepts "lat" and "lon" keys and other keys are ignored. First and last location in the list are connected even if they are not same.
 *   **navigateAndZoom** \[Boolean\] \[Optional\]: Decides whether the navigation to first pin should take place. It is available on Android, Windows, and iOS. The default value of this parameter is true.  
-    Here is an example of how to enable this property.{% highlight voltMx %}
+    Here is an example of how to enable this property.
+    {% highlight VoltMx %}
      locationData: [{
       lat: "17.445775",
       lon: "78.3731",
@@ -573,17 +588,18 @@ Specifies the location data for which the polygon is drawn on the map. Parameter
     > **_Note:_** In Android platform, in a map the z-index value stack of the pins are different from the z-index stack of the shapes. The pins are drawn on top of the shapes based on their z-index values. Also, when the pins and shapes (such as circle and polyline) are placed on the map on top of each other, the click event of the pins have a higher priority than the click events of the shapes.
     
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke addPolygon method using MainMap Map widget.
+{% highlight VoltMx %}
+//Sample code to invoke addPolygon method using MainMap Map widget.
 var polyData = {
   id: "polyId1",
   locations: [{
@@ -609,23 +625,25 @@ var polyData = {
 frmMapPolygon1.MainMap.addPolygon(polyData);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addPolyline Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addPolyline Method</summary>
 
 * * *
 
 This method is used to add a polyline to the map widget with the given location data. You can add multiple polylines to the map widget using this method.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 addPolyline(locationData)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 locationData
 
@@ -636,7 +654,8 @@ Specifies the location data for which the polyline is drawn on the map. Paramete
     
 *   **endLocation** \[String\] \[Optional\]: Specifies the location data for the end point of the polyline. The values should be provided as specified in [locationData](Map_Properties.html#location) property. The start point of the polyline is represented with a map pin.
 *   **navigateAndZoom** \[Boolean\] \[Optional\]: Decides whether the navigation to first pin should take place. It is available on Android, Windows, and iOS. The default value of this parameter is true.  
-    Here is an example of how to enable this property.{% highlight voltMx %}
+    Here is an example of how to enable this property.
+    {% highlight VoltMx %}
      locationData: [{
       lat: "17.445775",
       lon: "78.3731",
@@ -666,15 +685,15 @@ Specifies the location data for which the polyline is drawn on the map. Paramete
     > **_Note:_** In Android platform, in a map the z-index value stack of the pins are different from the z-index stack of the shapes. The pins are drawn on top of the shapes based on their z-index values. Also, when the pins and shapes (such as circle and polyline) are placed on the map on top of each other, the click event of the pins have a higher priority than the click events of the shapes.
     
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 WidgetError, Error
 
-Remarks
+### Remarks
 
 The image property of the start and end locations can accept the pin image as a name string or as a JavaScript pin object. The pin object contains the following keys.
 
@@ -685,9 +704,10 @@ The image property of the start and end locations can accept the pin image as a 
 | sourceType | Contains a value from the [Pin Image Type Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not given for the sourceType, the default value of PIN\_IMG\_SRC\_TYPE\_RESOURCES is used. |
 | anchor | Optional. A constant that defines how the pin image should be anchored to the location point. Its value should be one of the [Pin Image Anchor Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not specified, the value PIN\_IMG\_ANCHOR\_BOTTOM\_CENTER is used. |
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke addPolyline method using mapref Map widget
+{% highlight VoltMx %}
+//Sample code to invoke addPolyline method using mapref Map widget
 frmMap.mapref.addPolyline({
   id: "polyid1",
   startLocation: {
@@ -730,27 +750,29 @@ frmMap.mapref.addPolyline({
 });
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[animate Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>animate Method</summary>
 
 * * *
 
 Applies an animation to the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 animate (animationObj, animateConfig, animationCallbacks)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _animationObj_
 
-An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#createAn) function.
+An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#createAn?TocPath=References|voltmx.ui_Namespace|Functions|_____5) function.
 
 _animationConfig_
 
@@ -765,11 +787,11 @@ A JavaScript dictionary that contains key-value pairs. The following keys are su
 | animationEnd | A JavaScript function that is invoked with the animation ends. For more information, see the **Remarks** section below. |
 | animationStart | A JavaScript function that is invoked with the animation starts. For more information, see the **Remarks** section below. |
 
-Return Values
+### Return Values
 
 Returns a platform-specific handle to the animation. This handle currently not used, but is returned for possible future requirements use.
 
-Remarks
+### Remarks
 
 The callback for the `animationStart` key in the JavaScript object passed in this method's _animationCallbacks_ parameter has the following signature.
 
@@ -791,9 +813,10 @@ The `animate` method throws an Invalid Animation Definition Exception if animati
 
 If the widget is not part of the currently visible view hierarchy, calling this method does nothing. Because this method is asynchronous and immediately returns, it does not wait for the animation to start or complete.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code of animation
+{% highlight VoltMx %}
+//Sample code of animation
 function AnimateBoth() {
     var getFuncName = frm1.listbox18.selectedKey;
     if (getFuncName == "BothLT") {
@@ -806,47 +829,51 @@ function AnimateBoth() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clear Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>clear Method</summary>
 
 * * *
 
 This method is used to clear all the data associated with a map widget, including locationData and polylines.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 clear()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+### Parameters
 
 None
 
-Exceptions
+### Return Values
 
 None
 
-Example
+### Exceptions
 
-{% highlight voltMx %}//clear method call
+None
+
+### Example
+
+{% highlight VoltMx %}
+//clear method call
 mapref.clear();
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clone Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>clone Method</summary>
 
 * * *
 
@@ -858,38 +885,43 @@ For example, if the widget ID is "fc1" and the widget ID passed to clone API is 
 
 Exceptions are not displayed if widget ID parameter is not unique. Instead when the cloned copy is added to the same form as of original container then it may lead to unexpected behaviors. So it is your responsibility to provide unique widget ID.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 clone()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 widgetId \[String\]
 
 Optional. Reference of the name of the widget.
 
-Return Values
+### Return Values
 
 Cloned copy of the widget.
 
-Exceptions
+### Exceptions
 
 None
 
-Remarks
+### Remarks
 
 *   This method is not supported on SegmentedUI2 widget.
 *   Gestures for the FlexContainer are not cloned. You have to reapply the gestures on the cloned object.
 *   In Android platform, cloned Map widget will not work if prefix is not passed as parameter to the API.
 
-*   To apply focusSkin for dynamically created widgets or cloned widgets, assign focusSkin dynamically after adding the widget to the form hierarchy. This is applicable for SPA and Desktop web platforms.{% highlight voltMx %}formid.widgetid.focusSkin = "skinname";
+*   To apply focusSkin for dynamically created widgets or cloned widgets, assign focusSkin dynamically after adding the widget to the form hierarchy. This is applicable for SPA and Desktop web platforms.
+    {% highlight VoltMx %}
+    formid.widgetid.focusSkin = "skinname";
     {% endhighlight %}
-*   To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy. This is applicable for the Desktop web platform.{% highlight voltMx %}formid.widgetid.hoverSkin = "skinname";
+*   To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy. This is applicable for the Desktop web platform.
+    {% highlight VoltMx %}
+    formid.widgetid.hoverSkin = "skinname";
     {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the clone Method for a FlexContainer widget.
 //You need to make a corresponding call of the clone method for other applicable widgets.  
@@ -901,23 +933,25 @@ var myLabel=frmFlex.lbl1.clone();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointFromWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointFromWidget Method</summary>
 
 * * *
 
 This method allows you to convert the coordinate system from a widget to a point (receiver's coordinate system).
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 convertPointFromWidget(point, fromWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -931,31 +965,34 @@ _fromWidget_
 
 This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from the widget to a point (receiver's coordinate system).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.convertPointFromWidget({
+{% highlight VoltMx %}
+Form1.widget1.convertPointFromWidget({
     x: "10dp",
     y: "20dp"
 }, widget2);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointToWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointToWidget Method</summary>
 
 * * *
 
 Using the convertPointToWidget method, you can modify the co-ordinate system. You can convert the receiver's co-ordinate system from a **point** to a **Widget**.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 convertPointToWidget(point, toWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -965,69 +1002,74 @@ _toWidget_
 
 \[widgetref\] - Mandatory. This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from a point to a widget.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget2.convertPointToWidget({
+{% highlight VoltMx %}
+Form1.widget2.convertPointToWidget({
     x: "20dp",
     y: "30dp"
 }, widget1);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[dismissCallout Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>dismissCallout Method</summary>
 
 * * *
 
 This method is used to dismiss the custom callout for a given location. This method is ignored if the callout is already is in dismissed state, or location argument is invalid or non-existing.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 dismissCallout(location)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 locationData
 
 Specifies the location data of a single location following the data format of the "locationData" property on the map widget. It should support both hash and array format.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 WidgetError
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to invoke dismissCallout method by using a Map widget.  
+{% highlight VoltMx %}
+//Sample code to invoke dismissCallout method by using a Map widget.  
   
 frmMap.myMap.dismissCallout();  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fitToBounds Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fitToBounds Method</summary>
 
 * * *
 
 This API helps to fit the given locationdata on to the map.
 
-Signature
+### Signature
 
 fitToBounds(config)
 
-Parameters
+### Parameters
 
 config \[JSDictionary\]: config is a mandatory argument that is a JSDictionary with the following properties:
 
@@ -1037,18 +1079,19 @@ config \[JSDictionary\]: config is a mandatory argument that is a JSDictionary w
     > **_Note:_** Map navigates to provided latitude-longitude dictionaries, animate only decides whether the navigation occurs with or without animation.
     
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 1.  You should call the fitToBounds and setBounds methods for onMapLoaded callback.
 2.  If you call both fitToBounds and setBounds (fitToBounds, setBounds) before navigating to the form that contains the map, the fitToBounds method takes precedence.
 
-Example
+### Example
 
-{% highlight voltMx %}var data = {
+{% highlight VoltMx %}
+var data = {
     locations: [{
         lat: "17.469157",
         lon: "78.322256"
@@ -1070,13 +1113,14 @@ Example
 formInstance.mapObj.fitToBounds(data);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getBounds Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getBounds Method</summary>
 
 * * *
 
@@ -1093,42 +1137,45 @@ This method returns the currently visible map boundaries as an object. The prede
 
 > **_Note:_** This method returns nil if the map is not initialized.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 getBounds()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+### Parameters
 
 None
 
-Exceptions
+### Return Values
+
+None
+
+### Exceptions
 
 WidgetError, Error
 
-Example
+### Example
 
-{% highlight voltMx %}//getBounds method call
+{% highlight VoltMx %}
+//getBounds method call
 var bounds = mapref.getBounds();
 voltmx.print(bounds.center);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getBadge Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getBadge Method</summary>
 
 * * *
 
 This API enables you to read the badge value (if any) attached to the specified widget. If the specified widget does not have a badge attached to it, it returns an empty string.
 
-Syntax
+### Syntax
 
 getBadge()
 
@@ -1138,19 +1185,20 @@ uniqueIdentifier
 
 Unique identifier of a widget which is a handle to the widget.
 
-Return Values
+### Return Values
 
 Returns a string containing the badge value applied to the specified widget. If the specified widget has no badge value attached to it, it returns an empty string.
 
-Remarks
+### Remarks
 
 When a badge is removed, the widgets are re-formatted to accommodate the cleared badge values.
 
 On the iOS platform, this method is applicable on Label, Button, Image, TextBox, and TextArea widgets only.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the getBadge Method for button widget.
 //You need to make a corresponding call of the getBadge method for other applicable widgets.
 function getBadge() {
@@ -1163,23 +1211,25 @@ function getBadge() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[navigateTo Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>navigateTo Method</summary>
 
 * * *
 
 This helps to navigate from one index to other index in the given list of locations shown on the map view.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 navigateTo(index,showcallout)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 Index
 
@@ -1189,39 +1239,42 @@ showCallout
 
 Indicates whether to show the call out on the pin after navigating to the pin at the given index.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 WidgetError
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to invoke navigateTo method by using a Map widget.  
+{% highlight VoltMx %}
+//Sample code to invoke navigateTo method by using a Map widget.  
   
 frmMap.myMap.navigateTo(2, true);  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[navigateToLocation Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>navigateToLocation Method</summary>
 
 * * *
 
 This method allows you to navigate programmatically to the specified location. Based on the parameters passed it also displays the dropPin and callout.  
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 navigateToLocation(locationData,showcallout,dropPin)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 locationData
 
@@ -1241,21 +1294,22 @@ Indicates whether to drop the pin at the given location or not. If true, a pin i
 
 > > **_Note:_** If navigated to same location again and again by toggling dropPin property, pin is toggled.  
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 WidgetError
 
-Remarks
+### Remarks
 
 All the values specified in this method invocation are respected only for the invocation and does not change the original state of the map, I.e locationData that is set at the map widget level. When this method is called in sequence, the map is navigated to the latest location and there wont be trace of the old locations which were navigated earlier through this method on the map.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to invoke navigateToLocation method by using a Map widget.  
+{% highlight VoltMx %}
+//Sample code to invoke navigateToLocation method by using a Map widget.  
   
 var locationData = {
     lat: "17.433451",
@@ -1267,23 +1321,25 @@ frmMap.myMap.navigateToLocation(locationData, true, true);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[registerForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>registerForPeekandPop Method</summary>
 
 * * *
 
 This method registers a widget to enable 3D Touch peek and pop gestures.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 registerForPeekandPop(onPeekCallback, onPopCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPeekCallback
 
@@ -1299,13 +1355,14 @@ _widget_
 
 A widget reference that is registered for peek and pop.
 
-Callback Return Values
+### Callback Return Values
 
   A PreviewInfoTable. See the Remarks section for a description of this table.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget) {
+{% highlight VoltMx %}
+function onPeekCallback(widget) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -1333,23 +1390,24 @@ _peekForm_
 
 A form reference that is displayed as preview/peek.
 
-Callback Return Values
+### Callback Return Values
 
   A form reference.
 
-Callback Remarks
+### Callback Remarks
 
 Use this callback to set the content for pop. The form handle returned by this callback is used for pop content. In general, the form that is used for preview is used for pop content also. If the pop callback is not implemented, peek disappears and the app returns to its previous state.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}
+function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Remarks
+### Remarks
 
 A PreviewInfoTable has the following format.
 
@@ -1375,52 +1433,56 @@ Example: \[“0dp”, “0dp”, “200dp”, “300dp”\], \[“10%”, “10%
 
 Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “240px”\]
 
-Example of a PreviewInfoTable:
+### Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}
+var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeCircle Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeCircle Method</summary>
 
 * * *
 
 This method is used to remove a Circle from the map.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeCircle(circleId)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 circleId
 
 Specifies the id of the circle to remove. This method is ignored if the given id is incorrect or not found.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 WidgetError, Error
 
-Example
+### Example
 
-{% highlight voltMx %}var testdata = {
+{% highlight VoltMx %}
+var testdata = {
     id: "circleId",
     centerLocation: {
         lat: "17.4442897",
@@ -1441,23 +1503,26 @@ frmMapCircle2.Map1.removeCircle();
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeFromParent Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeFromParent Method</summary>
 
 * * *
 
 This method allows you to remove a child widget from a parent widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeFromParent()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the removeFromParent Method for a Calendar widget.
 //You need to make a corresponding call of the removeFromParent method for other applicable widgets.
 
@@ -1465,88 +1530,96 @@ Form1.calendar.removeFromParent();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android , Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to remove the specified gesture recognizer for the specified widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeGestureRecognizer(gestureHandle)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 gestureHandle - Mandatory
 
 Specifies the handle to the gesture returned by addGestureRecognizer call.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
+{% highlight VoltMx %}
+//Sample code to remove Double tap gesture from frmGestures FlexForm.  
 frmGestures.removeGestureRecognizer(doubletp);  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available on all platforms except Desktop Web and Android.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removePolygon Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removePolygon Method</summary>
 
 * * *
 
 This method is used to remove a polygon from the map.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removePolygon(polygonId)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 polygonId
 
 Specifies the id of the polygon to remove. This method is ignored if the given id is incorrect or not found.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 WidgetError, Error
 
-Example
+### Example
 
-{% highlight voltMx %}//removePolygon method call
+{% highlight VoltMx %}
+//removePolygon method call
 mapref.removePolygon("polyid1");
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removePin Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removePin Method</summary>
 
 * * *
 
 Removes a single pin from the map.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removePin(pin)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 pin
 
@@ -1560,7 +1633,8 @@ pin
 *   **image** \[String or Image Object\] \[Mandatory\]: Specifies the map pin image that overrides the [defaultPinImage](Map_Properties.html#defaultP).Refer the **Remarks** section for more information.  
     
 *   **navigateAndZoom** \[Boolean\] \[Optional\]: Decides whether the navigation to first pin should take place. It is available on Android, Windows, and iOS. The default value of this parameter is true.  
-    Here is an example of how to enable this property.{% highlight voltMx %}
+    Here is an example of how to enable this property.
+    {% highlight VoltMx %}
      locationData: [{
       lat: "17.445775",
       lon: "78.3731",
@@ -1581,15 +1655,15 @@ pin
     
     *   **label** \[String\] \[Optional\]: Specifies the text for the pop-up. (Supported on Mobile Web and SPA.)
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 None
 
-Remarks
+### Remarks
 
 The `image` parameter inside the `locationData` property can accept the pin image as a name string or as a JavaScript pin object. The pin object contains the following keys.
 
@@ -1600,30 +1674,32 @@ The `image` parameter inside the `locationData` property can accept the pin imag
 | sourceType | Contains a value from the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgTyp)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Type Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not given for the sourceType, the default value of PIN\_IMG\_SRC\_TYPE\_RESOURCES is used. |
 | anchor | Optional. A constant that defines how the pin image should be anchored to the location point. Its value should be one of the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgAnc)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Anchor Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not specified, the default value of PIN\_IMG\_ANACHOR\_BOTTOM\_CENTER is used. |
 
-Example
+### Example
 
-{% highlight voltMx %}function removeThePin() {
+{% highlight VoltMx %}
+function removeThePin() {
     frmMapNew.MainMap.removePin(pin1);
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removePins Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removePins Method</summary>
 
 * * *
 
 Removes several pins from the map.
 
-Syntax
+### Syntax
 
 removePins(pin)
 
-Parameters
+### Parameters
 
 pin
 
@@ -1637,7 +1713,8 @@ pin
 *   **image** \[String or Image Object\] \[Mandatory\]: Specifies the map pin image that overrides the [defaultPinImage](Map_Properties.html#defaultP).Refer the **Remarks** section for more information.  
     
 *   **navigateAndZoom** \[Boolean\] \[Optional\]: Decides whether the navigation to first pin should take place. It is available on Android, Windows, and iOS. The default value of this parameter is true.  
-    Here is an example of how to enable this property.{% highlight voltMx %}
+    Here is an example of how to enable this property.
+    {% highlight VoltMx %}
      locationData: [{
       lat: "17.445775",
       lon: "78.3731",
@@ -1658,83 +1735,88 @@ pin
     
     *   **label** \[String\] \[Optional\]: Specifies the text for the pop-up. (Supported on Mobile Web and SPA.)
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 None
 
-Remarks
+### Remarks
 
 The `image` parameter inside the `locationData` property can accept the pin image as a name string or as a JavaScript pin object. The pin object contains the following keys.
 
-  
 | Key | Description |
 | --- | --- |
 | source | Specifies the source of the image. It could be an image name, an image path, or a URL. |
 | sourceType | Contains a value from the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgTyp)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Type Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not given for the sourceType, the default value of PIN\_IMG\_SRC\_TYPE\_RESOURCES is used. |
 | anchor | Optional. A constant that defines how the pin image should be anchored to the location point. Its value should be one of the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgAnc)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Anchor Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not specified, the default value of PIN\_IMG\_ANACHOR\_BOTTOM\_CENTER is used. |
 
-Example
+### Example
 
-{% highlight voltMx %}frmMapNew.MainMap.removePins([pin2, pin3]);
+{% highlight VoltMx %}
+frmMapNew.MainMap.removePins([pin2, pin3]);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removePolyline Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removePolyline Method</summary>
 
 * * *
 
 This method is used to remove a polyline from the map.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removePolyline(polylineId)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 polylineId
 
 Specifies the id of the polyline to remove. This method is ignored if the given id is incorrect or not found.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 WidgetError, Error
 
-Example
+### Example
 
-{% highlight voltMx %}//removePolyline method call
+{% highlight VoltMx %}
+//removePolyline method call
 mapref.removePolyline("polyid1");
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setBadge Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setBadge Method</summary>
 
 * * *
 
 This method enables you to set the badge value to the given widget at the upper, right corner of the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setBadge(badgeText)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 badgeText \[String\] - Mandatory
 
@@ -1744,15 +1826,15 @@ skin \[String\] - Optional
 
 The parameter specifies the background color for the badge. The default color is red.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 The color for the badge can be defined using a skin. The default color for the badge is red with white lettering.
 
@@ -1774,9 +1856,10 @@ For iOS platform, this method is applicable on Box, Label, and Image widgets onl
 
 For Android platform, this method is applicable on Button and Image widgets only.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setBadge Method for button widget.
 //You need to make a corresponding call of the setBadge method for other applicable widgets.
 function setBadge() {
@@ -1788,7 +1871,7 @@ placed on a form frm1, use the following code: */
 form.lbl1.setBadge("4", "badgeSkin");
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
@@ -1796,7 +1879,8 @@ For more information about the badge APIs refer the _API Reference Document_.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setBounds Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setBounds Method</summary>
 
 * * *
 
@@ -1804,11 +1888,12 @@ This API helps to fit the map to the provided center, zoom, viewingAngle, and or
 
 bounds is the dictionary config returned by [getBounds](#getBound).
 
-Signature
-
+### Signature
+{% highlight VoltMx %}
 setBounds(config)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 config \[JSDictionary\]: config is a mandatory argument that is a JSDictionary with the following properties:
 
@@ -1833,19 +1918,20 @@ config \[JSDictionary\]: config is a mandatory argument that is a JSDictionary w
 *   latspan \[number\] - Specifies the spanning latitude in degrees. For Windows, it is an optional value and it is not respected.
 *   lonspan \[number\] - Specifies the spanning longitude in degrees. For Windows, it is an optional value and it is not respected.
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 1.  You should call the fitToBounds and setBounds methods for onMapLoaded callback.
 2.  Before using the setBounds method, you must use the getBounds method to retrieve the current map bounds.
 3.  If you call both fitToBounds and setBounds (fitToBounds, setBounds) before navigating to the form that contains the map, the fitToBounds method takes precedence.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to invoke setBounds method for myMap Map widget in frmMap form.*/
+{% highlight VoltMx %}
+/*Sample code to invoke setBounds method for myMap Map widget in frmMap form.*/
 var bounds = frmMap.myMap.getBounds();
 bounds.center = {
  lat: "17.3850",
@@ -1857,13 +1943,14 @@ bounds.orientation = 270;
 frmMap.myMap.setBounds(bounds);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setCalloutVisibility Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setCalloutVisibility Method</summary>
 
 * * *
 
@@ -1871,11 +1958,12 @@ This method is used to show or hide callouts in Google Maps.
 
 Consider a banking application where you want to search for bank branches or ATMs. The bank branches and ATMs are represented is represented as pins in the Maps. When you click on any pin corresponding to branches, you can show the callout with the information such as address and working hours using the `setCalloutVisibility` method. If you want to hide the information corresponding to the ATMs, you can use the `setCalloutVisibility` method to hide it.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setCalloutVisibility(visible, pin)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 visible
 
@@ -1885,21 +1973,22 @@ pin
 
 Dictionary. Required.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 None
 
-Remarks
+### Remarks
 
 `setCalloutVisibility` method does not work when the Map widget corresponding to the pins, is not visible.
 
-Example
+### Example
 
-{% highlight voltMx %}var pin1 = {
+{% highlight VoltMx %}
+var pin1 = {
     id: "id1", // id is mandatory for every pin
     lat: "17.447412",
     lon: "78.376230",
@@ -1917,23 +2006,25 @@ Example
 frmMapNew.mainMap.setCalloutVisibility(true, pin1);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setEnabled Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setEnabled Method</summary>
 
 * * *
 
 This method specifies the widget that must be enabled or disabled.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setEnabled(enabled)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _enabled_
 
@@ -1943,36 +2034,38 @@ true -Indicates widget is enabled.
 
 false - Indicates widget is disabled.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 Browser widget does not support this method in SPA.
 
 This method is not applicable in Map widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setEnabled Method for button widget.
 //You need to make a corresponding call of the setEnabled method for other applicable widgets.
 
 form1.myButton.setEnabled(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setFocus Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setFocus Method</summary>
 
 * * *
 
@@ -1980,11 +2073,12 @@ This method specifies the widget on which there must be focus.
 
 **Default :** true
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setFocus(focus)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _focus_ \[Boolean\]- Mandatory
 
@@ -1992,46 +2086,49 @@ true -Indicates focus is set on a widget.
 
 false - Indicates focus is not set on a widget.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 You should not call this method in **preShow** of a form as it is not respected by all platforms. In android platform, this method is not respected in **preShow** of a form. You can give focus to a particular widget only after it is rendered on the screen, hence it should be called in postShow of a form.
 
 This method is not applicable in Form widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setFocus Method for button widget.
 //You need to make a corresponding call of the setFocus method for other applicable widgets.
 
 form1.myButton.setFocus(true);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to set a gesture recognizer for a specified gesture for a specified widget. You can set a Gesture recognizer only for a FlexForm, a FlexContainer, and a FlexScrollContainer. The setGestureRecognizer method is deprecated and should not be used in new software. However, Swipe Distance and Swipe Velocity parameters are not deprecated. So if you want to use the Swipe Distance and Swipe velocity parameters, use the setGestureRecognizer method. To use all other parameters, you must use the addGestureRecognizer method.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setGestureRecognizer (gestureType,setupParams,gestureHandler)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _gestureType_
 
@@ -2060,7 +2157,7 @@ onGesturefunction(widgetRef,gestureInfo)
 *   _widgetRef_ - This parameter specifies the handle to the widget on which the gesture was recognized.
 *   _gestureInfo_ - This parameter specifies an array that provides information about the gesture. The contents of this array vary based on the gesture type.
 
-Volt MX  Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
+Volt MX Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
 
 *   _gestureType_ \[number\] - indicates the gesture type; **1** for TAP, **2** for SWIPE, and **3** for LONGPRESS.
 *   _gesturesetUpParams_ \[object\] - this array is the set up parameters passed while adding the gesture recognizer.
@@ -2072,15 +2169,15 @@ Volt MX  Iris populates the details in the _gestureInfo_ array. This array has t
 *   _widgetWidth_ \[number\] - specifies the width of the widget (in pixels). This parameter is applicable only on iPhone.
 *   _widgetHeight_ \[number\] - specifies the height of the widget (in pixels). This parameter is applicable only on iPhone.
 
-Return Values
+### Return Values
 
 String - Reference(uniqueidentifier) to the gesture is returned.
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is applicable on Form, Box, and ScrollBox widgets only.
 
@@ -2093,7 +2190,7 @@ Gesture Type:TAP
 *   fingers \[number\] - This parameter specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[number\] - This parameter specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
 
-For example:
+### For example:
 
 {fingers:1,taps:1}
 
@@ -2103,7 +2200,7 @@ Gesture Type:SWIPE
 *   swipedistance \[number\] - This parameter specifies the distance between the pixel from where the swipe started to the pixel where the swipe stopped (finger is moved up or removed). The default value is 50 pixels. This parameter is applicable only on android. This parameter is applicable only if the gesture type is SWIPE.
 *   swipevelocity \[number\] - This parameter specifies the velocity of the swipe measured in pixels per second. The default value is 75. This parameter is applicable only on android. This parameter is applicable only if the gesture type is SWIPE.
 
-For example:
+### For example:
 
 {fingers:1,swipedistance:50,swipevelocity:75}
 
@@ -2111,7 +2208,7 @@ Gesture Type:LONGPRESS
 
 *   pressDuration \[number\] - This parameter specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if the _pressDuration_ is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This parameter is not customizable on android platform. The default value on android platform is 500 ms. Any value you pass to this parameter is ignored and the default value is used.
 
-For example:
+### For example:
 
 {pressDuration:1}
 
@@ -2124,7 +2221,7 @@ onGesturefunction(widgetRef,gestureInfo)
 *   _widgetRef_ - This parameter specifies the handle to the widget on which the gesture was recognized.
 *   _gestureInfo_ - This parameter specifies an array that provides information about the gesture. The contents of this array vary based on the gesture type.
 
-Volt MX  Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
+Volt MX Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
 
 *   _gestureType_ \[number\] - indicates the gesture type; **1** for TAP, **2** for SWIPE, and **3** for LONGPRESS.
 *   _gesturesetUpParams_ \[object\] - this array is the set up parameters passed while adding the gesture recognizer.
@@ -2136,9 +2233,10 @@ Volt MX  Iris populates the details in the _gestureInfo_ array. This array has t
 *   _widgetWidth_ \[number\] - specifies the width of the widget (in pixels). This parameter is applicable only on iPhone.
 *   _widgetHeight_ \[number\] - specifies the height of the widget (in pixels). This parameter is applicable only on iPhone.
 
-Example
+### Example
 
-{% highlight voltMx %}//The below function will get invoked  when a gesture is recognized. 
+{% highlight VoltMx %}
+//The below function will get invoked  when a gesture is recognized. 
 function myTap(myWidget, gestureInfo) {
     alert(" Tap Gesture detected");
     alert("gestureType :" + gestureInfo.gestureType);
@@ -2156,23 +2254,25 @@ var setupTblTap = {
 var tapGesture = frm1.hbx1.setGgestureRecognizer(1, setupTblTap, myTap);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPeek Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPeek Method</summary>
 
 * * *
 
 This method sets and overrides the existing onPeekCallback for the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setOnPeek(onPeekCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPeekCallback
 
@@ -2188,13 +2288,14 @@ _widget_
 
 A widget reference that is registered for peek and pop.
 
-Callback Return Values
+### Callback Return Values
 
 PreviewInfoTable. See the Remarks section for a description of this table.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget, contextInfo) {
+{% highlight VoltMx %}
+function onPeekCallback(widget, contextInfo) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -2204,11 +2305,11 @@ Callback Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 A PreviewInfoTable has the following format.
 
@@ -2234,18 +2335,20 @@ Example: \[“0dp”, “0dp”, “200dp”, “300dp”\], \[“10%”, “10%
 
 Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “240px”\]
 
-Example of a PreviewInfoTable:
+### Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}
+var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}function settingPeek() {
+{% highlight VoltMx %}
+function settingPeek() {
     Form1.setOnPeek(onMyPeekcallback);
 }
 
@@ -2264,23 +2367,25 @@ function onMyPeekcallback(widgetref, contextInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPop Method</summary>
 
 * * *
 
 This method overrides the existing onPopCallback for the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setOnPop(onPopCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPopCallback
 
@@ -2300,29 +2405,31 @@ _peekForm_
 
  A form reference that is displayed as preview/peek.
 
-Callback Return Values
+### Callback Return Values
 
  A form reference.
 
-Callback Remarks
+### Callback Remarks
 
  Use this callback to set the content for pop. The form handle returned by this callback is used for pop content. In general, the form that is used for preview is used for pop content also. If the pop callback is not implemented, peek disappears and the app returns to its previous state.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}
+function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Example
+### Example
 
-{% highlight voltMx %}function settingPop() {
+{% highlight VoltMx %}
+function settingPop() {
     Form1.setOnPop(myonPopcallback);
 }
 
@@ -2332,13 +2439,14 @@ function myonPopcallback(widgetref, peekForm) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setVisibility Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setVisibility Method</summary>
 
 * * *
 
@@ -2346,11 +2454,12 @@ Use this method to set the visibility of the widget.
 
 **Default :** true
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setVisibility(visible)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _visible_
 
@@ -2402,15 +2511,15 @@ It is a JS dictionary containing the events invoked by the platform during the a
 *   **animStarted**: Invoked at the beginning of the animation without any parameters. Following is the Syntax of the event: function animStarted()
 *   **animEnded**: Invoked at the end of the animation without any parameters. Following is the Syntax of the event: function animEnded()
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is not applicable on Form, Popup, and Alert. It is also not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so by using [Segment](Segment_Methods.html#segmentedui-methods) methods.
 
@@ -2418,9 +2527,10 @@ Passing an invalid type other than the above events lead to run time exceptions/
 
 This method is not supported on the widgets FlexForm, FlexContainer, and FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to invoke the setVisibility Method for a button widget with animation.
 //You need to make a corresponding call of the setVisibility method for other applicable widgets.
 
@@ -2439,52 +2549,57 @@ form1.myButton.setVisibility(
 form1.myButton.setVisibility(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[unregisterForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>unregisterForPeekandPop Method</summary>
 
 * * *
 
 This method unregisters a widget from 3D Touch peek and pop gestures.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 unregisterForPeekandPop()
-
-Parameters
-
-None.
-
-Return Values
-
-None.
-
-Example
-
-{% highlight voltMx %}Form1.unregisterForPeekAndPop();
 {% endhighlight %}
 
-Platform Availability
+### Parameters
+
+None.
+
+### Return Values
+
+None.
+
+### Example
+
+{% highlight VoltMx %}
+Form1.unregisterForPeekAndPop();
+{% endhighlight %}
+
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[updatePin Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>updatePin Method</summary>
 
 * * *
 
 Updates a single pin on the map.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 updatePin(pinData)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 pinData
 
@@ -2498,7 +2613,8 @@ pinData
 *   **image** \[String or Image Object\] \[Mandatory\]: Specifies the map pin image that overrides the [defaultPinImage](Map_Properties.html#defaultP).Refer the **Remarks** section for more information.  
     
 *   **navigateAndZoom** \[Boolean\] \[Optional\]: Decides whether the navigation to first pin should take place. It is available on Android, Windows, and iOS. The default value of this parameter is true.  
-    Here is an example of how to enable this property.{% highlight voltMx %}
+    Here is an example of how to enable this property.
+    {% highlight VoltMx %}
      locationData: [{
       lat: "17.445775",
       lon: "78.3731",
@@ -2524,11 +2640,11 @@ pinData
     > **_Note:_** In Android platform, in a map the z-index value stack of the pins are different from the z-index stack of the shapes. The pins are drawn on top of the shapes based on their z-index values. Also, when the pins and shapes (such as circle and polyline) are placed on the map on top of each other, the click event of the pins have a higher priority than the click events of the shapes.
     
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 The `image` parameter inside the `locationData` property can accept the pin image as a name string or as a JavaScript pin object. The pin object contains the following keys.
 
@@ -2539,9 +2655,10 @@ The `image` parameter inside the `locationData` property can accept the pin imag
 | sourceType | Contains a value from the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgTyp)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Type Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not given for the sourceType, the default value of PIN\_IMG\_SRC\_TYPE\_RESOURCES is used. |
 | anchor | Optional. A constant that defines how the pin image should be anchored to the location point. Its value should be one of the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgAnc)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Anchor Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not specified, the default value of PIN\_IMG\_ANACHOR\_BOTTOM\_CENTER is used. |
 
-Example
+### Example
 
-{% highlight voltMx %}// id is mandatory for every pin
+{% highlight VoltMx %}
+// id is mandatory for every pin
 function updatePin() {
     pinTemp = {
         id: "id1",
@@ -2552,23 +2669,25 @@ function updatePin() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[updatePins Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>updatePins Method</summary>
 
 * * *
 
 Updates several pins on the map.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 updatePins(pinData)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 pinData
 
@@ -2582,7 +2701,8 @@ pinData
 *   **image** \[String or Image Object\] \[Mandatory\]: Specifies the map pin image that overrides the [defaultPinImage](Map_Properties.html#defaultP).Refer the **Remarks** section for more information.  
     
 *   **navigateAndZoom** \[Boolean\] \[Optional\]: Decides whether the navigation to first pin should take place. It is available on Android, Windows, and iOS. The default value of this parameter is true.  
-    Here is an example of how to enable this property.{% highlight voltMx %}
+    Here is an example of how to enable this property.
+    {% highlight VoltMx %}
     locationData: [{
       lat: "17.445775",
       lon: "78.3731",
@@ -2608,24 +2728,24 @@ pinData
     > **_Note:_** In Android platform, in a map the z-index value stack of the pins are different from the z-index stack of the shapes. The pins are drawn on top of the shapes based on their z-index values. Also, when the pins and shapes (such as circle and polyline) are placed on the map on top of each other, the click event of the pins have a higher priority than the click events of the shapes.
     
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 The `image` parameter inside the `locationData` property can accept the pin image as a name string or as a JavaScript pin object. The pin object contains the following keys.
 
-  
 | Key | Description |
 | --- | --- |
 | source | Specifies the source of the image. It could be an image name, an image path, or a URL. |
 | sourceType | Contains a value from the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgTyp)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Type Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not given for the sourceType, the default value of PIN\_IMG\_SRC\_TYPE\_RESOURCES is used. |
 | anchor | Optional. A constant that defines how the pin image should be anchored to the location point. Its value should be one of the []({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html#PnImgAnc)[]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html)[Pin Image Anchor Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not specified, the default value of PIN\_IMG\_ANACHOR\_BOTTOM\_CENTER is used. |
 
-Example
+### Example
 
-{% highlight voltMx %}// id is mandatory for every pin
+{% highlight VoltMx %}
+// id is mandatory for every pin
 function updatePins() {
     pinTemp = {
         id: "id1",
@@ -2640,7 +2760,7 @@ function updatePins() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, and Windows
 

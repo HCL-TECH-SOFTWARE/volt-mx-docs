@@ -12,91 +12,103 @@ Navigation Methods
 
 The Navigation object provides the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getModel](javascript:void(0);) 
+
+<details close markdown="block"><summary>getModel</summary> 
 
 * * *
 
 Retrieves the model for the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 getModel();
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 Returns a JavaScript object that contains the model for the form. The model is either the model that the app previously set or the model that is retrieved from the `FormController`. This method triggers the [FormController.getModel](FormController_Events.html#getModel) event.
 
-Remarks
+### Remarks
 
 This method retrieves the form's model.
 
-Example
+### Example
 
-{% highlight voltMx %}var formModel = navObject.getModel();
+{% highlight VoltMx %}
+var formModel = navObject.getModel();
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[navigate Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>navigate Method</summary> 
 
 * * *
 
 Performs a form navigation.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 navigate(  
     params);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _params_
 
 A JavaScript object containing key/value pairs that are passed to the target form from the current form.
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 The _params_ parameter is passed to all of the lifecycle events, such as preShow, postShow, and init, on the target form.
 
-Example
+### Example
 
-{% highlight voltMx %}var x = new voltmx.mvc.Navigation(“friendlyName/formName”, model);
+{% highlight VoltMx %}
+var x = new voltmx.mvc.Navigation(“friendlyName/formName”, model);
 x.navigate(params);
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setModel](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>setModel</summary> 
 
 * * *
 
 Sets the model for the form being navigated to.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setModel(  
     newModel
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 newModel
 
 A JavaScript object that holds the model for the target form.
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This method sets the model of the target form, which is the form being navigated to. It triggers the [FormController.setModel](FormController_Events.html#setModel) event.
 
 * * *
+</details>

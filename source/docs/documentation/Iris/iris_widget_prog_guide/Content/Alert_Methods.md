@@ -12,31 +12,35 @@ The namespace for the Alert widget is **voltmx.ui**. It contains the following a
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[dismissAlert Method](javascript:void(0);)
+
+<details close markdown="block"><summary>dismissAlert Method</summary>
 
 * * *
 
 This method is used to dismiss an alert.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.ui.dismissAlert(alertHandler)
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Argument
+### Argument
 
 An object of Alert widget that was returned from the voltmx.ui.Alert API.
 
-Limitation
+### Limitation
 
 In iOS, when you present multiple alerts in succession and then close an alert, all the alerts that are present above this alert are closed.
 
-Example
+### Example
 
-{% highlight voltMx %}var myalert = voltmx.ui.Alert({
+{% highlight voltMx %}
+var myalert = voltmx.ui.Alert({
     "message": "Do you want to proceed ?",
     "alertType": constants.ALERT_TYPE_CONFIRMATION,
     "alertTitle": "Confirmation",
@@ -49,7 +53,7 @@ voltmx.ui.dismissAlert(myalert); //Here, 'myalert' is the alerthandler that was 
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iPhone
@@ -58,4 +62,5 @@ Platform Availability
 Not available for SPA and Desktop Web.
 
 * * *
+</details>
 

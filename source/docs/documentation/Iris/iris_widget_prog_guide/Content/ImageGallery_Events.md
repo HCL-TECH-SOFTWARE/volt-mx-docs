@@ -11,23 +11,26 @@ ImageGallery has the following event associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSelection Event](javascript:void(0);)
+
+<details close markdown="block"><summary>onSelection Event</summary>
 
 * * *
 
 An event callback that is invoked by the platform when an Image is selected in ImageGallery.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onSelection
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //The below function is the callback for onSelection event
 function onSelCallBck(imgGal)
 {
@@ -53,7 +56,7 @@ var imgGalPSP = {itemsPerRow:3};
 var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE.
 
@@ -61,27 +64,30 @@ Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[postOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>postOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom javascript function after the _onClick_ callback of the ImageGallery is invoked. This is applicable only for Mobile Web channel.The function must exist in a javascript file under project>module>js folder.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 postOnclickJS
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In for the events preOnclickJS and postOnclickJS you cannot access application model or APIs, as these functions are executed in browser whereas the remaining JavaScript modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action. You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //The below function is the callback for postOnclickJS event.
 function postOnclickCallBck(imgGal)
 {
@@ -105,7 +111,7 @@ var imgGalPSP = {itemsPerRow:3, **postOnclickJS:postOnclickCallBck**};
 var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE.
 
@@ -113,27 +119,30 @@ Available on Server side Mobile Web (Advanced) platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[preOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>preOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom javascript function when the ImageGallery is invoked. This is applicable only for Mobile Web channel. The function must exist in a javascript file under project>module>js folder.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 preOnclickJS
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In for the events preOnclickJS and postOnclickJS you cannot access application model or APIs, as these functions are executed in browser whereas the remaining JavaScript modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action. You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //The below function is the callback for preOnclickJS event
 function preOnclickCallBck(imgGal)
 {
@@ -158,7 +167,7 @@ var imgGalPSP = {itemsPerRow:3, **preOnclickJS:preOnclickCallBck**};
 var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE.
 
@@ -166,3 +175,4 @@ Available on Server side Mobile Web (BJS and Advanced) platform only.
 
 * * *
 
+</details>

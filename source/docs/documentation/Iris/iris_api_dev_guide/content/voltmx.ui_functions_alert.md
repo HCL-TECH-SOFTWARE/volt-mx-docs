@@ -10,7 +10,8 @@ voltmx.ui.Alert Function
 
 The details of the voltmx.ui.Alert function, which is part of the [voltmx.ui Namespace](voltmx.ui_functions.html), are as follows.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.ui.Alert](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.ui.Alert</summary> 
 
 * * *
 
@@ -22,13 +23,14 @@ This API provides you the ability to add alerts in the application. The alerts a
 
 All the alerts are modal in nature, i.e., the user cannot proceed with other UI operations unless the alert is dismissed.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.ui.Alert(basicConfig, pspConfig)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-basicConfig
+### basicConfig
 
 basicConfig is an object with the following configuration properties.
 
@@ -42,9 +44,7 @@ basicConfig is an object with the following configuration properties.
 | **alertIcon** \[String / image Object\] - Optional | Icon to be displayed to visually indicate the type of alert, such as, Info, Error, Confirmation. This parameter is not supported on iPhone. You can create an image Object by using [voltmx.image Namespace functions](voltmximagenamespacefunctions.html#functions). |
 | **alertHandler** \[Read / Write Event\] - Mandatory | JavaScript function that should get called when alert is dismissed either through "yes" label button or through "no" label button. |
 
- 
-
-pspConfig
+### pspConfig
 
 pspConfig is an object with platform specific configuration properties.
 
@@ -54,9 +54,10 @@ pspConfig is an object with platform specific configuration properties.
 | contentAlignment | Used to align content of an alert. Following are the values of this property: constants.ALERT\_CONTENT\_ALIGN\_LEFT  // defaultconstants.ALERT\_CONTENT\_ALIGN\_CENTERconstants.ALERT\_CONTENT\_ALIGN\_RIGHT |
 | iconPosition | It is used to align and alert title icon. Following are the values of this property: constants.ALERT\_ICON\_POSITION\_LEFT // defaultconstants.ALERT\_ICON\_POSITION\_RIGHT> **_Note:_** Refer the example given below to create an alert using `contentAlignment` and `iconPostion` parameters. |
 
-Example
+### Example
 
-{% highlight voltMx %}  confirmationAlert: function(){ 
+{% highlight VoltMx %}
+confirmationAlert: function(){ 
    //Creating the basicConfig object 
   var basicConf = {
     message: "This is an confirmation alert",
@@ -99,11 +100,11 @@ Example
  },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 Invoking this API multiple times in the same action sequence leads to an erroneous behavior.
 
@@ -111,13 +112,13 @@ This API should be invoked at the end of a function as a best practice.
 
 The following are the behavioral aspects of alerts on various platforms:
 
-RichClient
+### RichClient
 
 In all native implementations alert is non blocking, i.e. the execution of any logic defined after the alert definition continues without the alert confirmation.
 
 > **_Important:_** Alert images are not supported on Windows 10.
 
-Android
+### Android
 
 Android platform supports display of multiple alerts each time the **voltmx.ui.Alert** API is invoked. On device back, the alert gets dismissed and also the alert handler is raised.
 
@@ -125,15 +126,17 @@ For CONFIRMATION type alert, the alert callback is invoked with cancel flag. For
 
 For INFO & ERROR type alert, the alert callback is invoked with true argument.
 
-iPhone
+### iPhone
 
 iPhone does not support displaying image icons based on the alert types: info,confirmation, error. _"\\n_" as a newline character in the alert messages supported for iPhone Platform
 
-Mobile Web/SPA/Desktop Web
+### Mobile Web/SPA/Desktop Web
 
-> *   For advanced Mobile Web devices like iPhone, Android, and Palm Pre, alerts are displayed as popups. For basic devices, the alerts are displayed in a new page.
+> *   For advanced Mobile Web devices like iPhone, Android, and Palm Pre, alerts are displayed as popups. For basic devices, the alerts
+      are displayed in a new page.
 > *   For all platforms you cannot customize alert icons/yes or no labels/ look and feel.
-> *   Titles of the alerts are provided by the browser and you cannot modify them. The alert title attribute does not apply for Mobile Web. Usually, the title on the alert will be the IP address or the domain name of the application.
+> *   Titles of the alerts are provided by the browser and you cannot modify them. The alert title attribute does not apply for Mobile
+      Web. Usually, the title on the alert will be the IP address or the domain name of the application.
 > *   Confirmation alerts in the basic devices will be displayed in another form.
 > *   If the alert message is _nil_, alert is not displayed.
 > *   In case of all platforms, the execution of the logic defined after alert is blocked until the user clicks "yes" or "no".
@@ -147,5 +150,7 @@ Platform Availability
 Available on all platforms.
 
 * * *
+</details>
 
 ![](resources/prettify/onload.png)
+

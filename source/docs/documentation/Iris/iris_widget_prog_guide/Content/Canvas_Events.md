@@ -12,7 +12,8 @@ Canvas widget has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
@@ -20,7 +21,9 @@ This event is invoked for every widget when the widget position and dimensions a
 
 Syntax
 
-doLayout()
+{% highlight VoltMx %}doLayout();
+
+{% endhighlight %} 
 
 Read/Write
 
@@ -34,7 +37,7 @@ This event is used to set the layout properties of child widgets in the relation
 
 Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -51,7 +54,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
@@ -59,7 +63,9 @@ This event callback is invoked by the platform when the widget location position
 
 Syntax
 
-onScrollWidgetPosition()
+{% highlight VoltMx %}onScrollWidgetPosition ();
+
+{% endhighlight %}
 
 Read/Write
 
@@ -67,7 +73,7 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -88,7 +94,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchEnd Event</summary>
 
 * * *
 
@@ -96,7 +103,7 @@ An event callback is invoked by the platform when the user touch is released fro
 
 Syntax
 
-onTouchEnd ()
+{% highlight VoltMx %}onTouchEnd (); {% endhighlight %}
 
 Optional Parameters
 
@@ -128,7 +135,7 @@ This event is invoked asynchronously.
 
 Example
 
-{% highlight voltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -143,7 +150,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchMove Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchMove Event</summary>
 
 * * *
 
@@ -151,7 +159,11 @@ An event callback is invoked by the platform when the touch moves on the touch s
 
 Syntax
 
-onTouchMove ()
+{% highlight VoltMx %}
+
+onTouchMove (); 
+
+{% endhighlight %}
 
 Optional Parameters
 
@@ -183,7 +195,7 @@ This event is invoked asynchronously.
 
 Example
 
-{% highlight voltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -198,7 +210,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchStart Event</summary>
 
 * * *
 
@@ -206,7 +219,10 @@ An event callback is invoked by the platform when the user touches the touch sur
 
 Syntax
 
-onTouchStart ()
+{% highlight VoltMx %}onTouchStart ();
+
+
+{% endhighlight %}
 
 Optional Parameters
 
@@ -238,7 +254,7 @@ This event is invoked asynchronously.
 
 Example
 
-{% highlight voltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -253,4 +269,6 @@ Platform Availability
 *   iOS, Android, Windows, and SPA
 
 * * *
+
+</details>
 

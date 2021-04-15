@@ -3,8 +3,6 @@ layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
                                   
-
-
 Map Properties
 ==============
 
@@ -12,7 +10,7 @@ The Map widget has the following properties:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
@@ -20,25 +18,27 @@ Enables you to control accessibility behavior and alternative text for the widge
 
 For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
 > **_Note:_** From Volt MX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the `accessibilityConfig` property. Values provided in the i18n keys take precedence over values provided in `a11yLabel`, `a11yValue`, and `a11yHint` fields.
 
-The accessibilityConfig property is a JavaScript object which can contain the following key-value pairs.
+### The accessibilityConfig property is a JavaScript object which can contain the following key-value pairs.
 
   
 | Key | Type | Description | ARIA Equivalent |
@@ -50,22 +50,23 @@ The accessibilityConfig property is a JavaScript object which can contain the fo
 | a11yHidden | Boolean | This is an optional parameter. Specifies if the widget should be ignored by assistive technology. The default option is set to _false_. This option is supported on iOS 5.0 and above, Android 4.1 and above, and SPA | For all widgets, this parameter maps to the `aria-hidden` property of ARIA in HTML. |
 | a11yARIA | Object | This is an optional parameter. For each widget, the key and value provided in this object are added as the attribute and value of the HTML tags respectively. Any values provided for attributes such as `aria-labelledby` and `aria-describedby` using this attribute, takes precedence over values given in `a11yLabel` and `a11yHint` fields. When a widget is provided with the following key value pair or attribute using the a11yARIA object, the tabIndex of the widget is automatically appended as zero.`{"role": "main"}``aria-label` | This parameter is only available on the Desktop Web platform. |
 
-Android limitations
+### Android limitations
 
 *   If the results of the concatenation of a11y fields result in an empty string, then `accessibilityConfig` is ignored and the text that is on widget is read out.
 *   The soft keypad does not gain accessibility focus during the right/left swipe gesture when the keypad appears.
 
-SPA/Desktop Web limitations
+### SPA/Desktop Web limitations
 
 *   When `accessibilityConfig` property is configured for any widget, the `tabIndex` attribute is added automatically to the `accessibilityConfig` property.
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+### Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -76,11 +77,12 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}
+/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -92,148 +94,163 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[address Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>address Property</summary>
 
 * * *
 
 Enables you to navigate to the specified address.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 address
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is a **non-constructor** property. You cannot set the property through a widget constructor. But you can read and write data to it.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the address property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the address property of a Map widget.  
   
 frmMap.myMap.address = {
     "location": "test, test"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>anchor Property</summary>
 
 Specifies the anchor position of a map's pin image.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 anchor
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The anchor property is an optional property that your app can set to one of the Pin Image Anchor Constants defined in the voltmx.map namespace. Refer to [Iris API Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>anchorPoint Property</summary>
 
 * * *
 
 Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 anchorPoint
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The value for this property is a JavaScript dictionary object with the keys "x" and "y". The values for the "x" and "y" keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.anchorPoint = {
+{% highlight VoltMx %}
+Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[autoCenterPinOnClick Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>autoCenterPinOnClick Property</summary>
 
 * * *
 
 This property helps you to control the placement of the pins of the Map widget to the center, when it is clicked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 autoCenterPinOnClick
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of the autoCenterPinOnClick Property is false in all platforms, except for Android.
 
 > **_Note:_** For 3D maps in iOS, if _autoCenterPinOnClick_ Property is false and the custom callout is clipped to the borders, the map gets re-centered.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable the autoCenterPinOnClick property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to enable the autoCenterPinOnClick property of a Map widget.  
   
 frmMap.myMap.autoCenterPinOnClick=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   Windows
@@ -242,7 +259,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
@@ -252,27 +270,30 @@ The bottom property determines the position of the bottom edge of the widget’s
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 bottom
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -280,63 +301,69 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA , and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[calloutTemplate Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>calloutTemplate Property</summary>
 
 * * *
 
 Accepts a reference to a Box Widget which represents a UI template for a custom callout.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 calloutTemplate
+{% endhighlight %}
 
-Type
+### Type
 
 voltmx.ui.Box
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The box template can only have Label, Link, RichText, Button and Image widgets.
 
 If template is not provided, it will fallback to the platform specific default callout for backward compatibility. On iOS platform, onSelection event will not get fired for custom callout.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[calloutWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>calloutWidth Property</summary>
 
 * * *
 
 Specifies the width of the callout on the map.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 calloutWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is _80 percent_.
 
@@ -346,21 +373,23 @@ The property accepts a number between 1 to 100 in percentage relative to the Map
 
 The calloutWidth property is applicable only for Box container templates. The calloutWidth property is not applicable for the FlexContainer templates.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the calloutWidth property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the calloutWidth property of a Map widget.  
   
 frmMap.myMap.calloutWidth=80;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
@@ -368,25 +397,28 @@ This property determines the center of a widget measured from the left bounds of
 
 The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 centerX
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -394,14 +426,15 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
@@ -409,25 +442,28 @@ This property determines the center of a widget measured from the top bounds of 
 
 The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 centerY
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
@@ -435,14 +471,15 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[containerHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>containerHeight Property</summary>
 
 * * *
 
@@ -452,36 +489,40 @@ Specifies the available height of the container in terms of percentage. The perc
 
 If not configured, the value may vary depending on the platforms.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 containerHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Yes- (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the containerHeight property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the containerHeight property of a Map widget.  
   
 frmMap.myMap.containerHeight=80;
 {% endhighlight %}
 
-Accessible form IDE
+### Accessible form IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except server-side Mobile Web platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[containerHeightReference Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>containerHeightReference Property</summary>
 
 * * *
 
@@ -496,91 +537,101 @@ The container height percentage is calculated based on the below options.
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 containerHeightReference
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the containerHeightReference property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the containerHeightReference property of a Map widget.  
   
 frmMap.myMap.containerHeightReference=constants.CONTAINER_HEIGHT_BY_PARENT_WIDTH;
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except server-side Mobile Web platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[containerWeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>containerWeight Property</summary>
 
 * * *
 
 Specifies percentage of weight to be allocated by its parent widget. The parent widget space is distributed to its child widgets based on this weight factor. The child widgets of the parent widget should sum up to 100% of weight except when placed in _voltmx.ui.ScrollBox_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 containerWeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number (less than or equal to 100)
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the containerWeight property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the containerWeight property of a Map widget.  
   
 frmMap.myMap.containerWeight=80;
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 No
 
-Platform Availability
+### Platform Availability
 
-Available on all platforms
+    Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cursorType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cursorType Property</summary>
 
 * * *
 
 In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 cursorType
+{% endhighlight %}
 
-Type
+### Type
 
 String.
 
 You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 To add the `cursorType` property using Volt MX Iris in a Desktop Web application, follow these steps.
 
@@ -597,9 +648,10 @@ To add the `cursorType` property using Volt MX Iris in a Desktop Web application
     You can see that the **Cursor Type** property has been added under the **General** section.
 8.  Select a value from the drop-down list to set the **Cursor Type** for the widget.
 
-Example
+### Example
 
-{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
+{% highlight voltMx %}
+//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
   
@@ -607,32 +659,35 @@ frmButton.myButton.cursorType = "wait";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[defaultPinImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>defaultPinImage Property</summary>
 
 * * *
 
 The default map pin image used to indicate a location on map.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 defaultPinImage
+{% endhighlight %}
 
-Type
+### Type
 
 String or Image Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The defaultPinImage property can accept the pin image as a name string or as a JavaScript pin object. The pin object contains the following keys.
 
@@ -643,30 +698,33 @@ The defaultPinImage property can accept the pin image as a name string or as a J
 | sourceType | Contains a value from the [Pin Image Type Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). If a value is not given for the sourceType, the default value of PIN\_IMG\_SRC\_TYPE\_RESOURCES is used. |
 | anchor | Optional. A constant that defines how the pin image should be anchored to the location point. Its value should be one of the [Pin Image Anchor Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html). |
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the defaultPinImage property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the defaultPinImage property of a Map widget.  
   
 frmMap.myMap.defaultPinImage="kmpin.png";
 {% endhighlight %}
 
 Setting the pin image using an image object.
 
-{% highlight voltMx %}frm1.map1.defaultPinImage = {
+{% highlight VoltMx %}
+frm1.map1.defaultPinImage = {
     source: "ZA8976AG..", //base64 string
     sourceType: voltmx.map.PIN_IMG_SRC_TYPE_BASE64,
     anchor: voltmx.map.PIN_IMG_ANCHOR_BOTTOM_CENTER
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
@@ -674,19 +732,21 @@ The `enable` property is used to control the actionability of the widgets. In a 
 
 This is a constructor level property and applicable for all widgets in Volt MX Iris.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
@@ -694,78 +754,84 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}
+//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
   
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
- 
-
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}
+Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableMultipleCallouts Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableMultipleCallouts Property</summary>
 
 * * *
 
 The property helps you define index to a Map Widget added in any container such as FlexForm, FlexContainer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableMultipleCallouts
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If set to false then the default behavior of the map is shown
 
@@ -773,13 +839,14 @@ If set to true then callout’s visibility is controlled with setCalloutVisibili
 
 When enableMultipleCallouts is set to TRUE, default callouts will not be supported.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the enableMultipleCallouts property of a Map widget.
+{% highlight VoltMx %}
+//Sample code to set the enableMultipleCallouts property of a Map widget.
 Form1.map.enableMultipleCallouts = true;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   iOS
 *   Android
@@ -787,44 +854,49 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableToolBar Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableToolBar Property</summary>
 
 * * *
 
 This property helps you to either enable or disable toolbar of a Map widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableToolBar
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
 > **_Note:_** The _enableToolBar_ property is introduced for the Android platform in the V8 SP4 release.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the enableToolBar property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the enableToolBar property of a Map widget.  
   
 frmMap.myMap.enableToolBar=true;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -832,19 +904,21 @@ It determines the height of the widget and measured along the y-axis.
 
 The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 height
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the available measurement options:
 
@@ -854,9 +928,10 @@ Following are the available measurement options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the height property for a Map widget by using DP, Percentage and Pixels.*/
+{% highlight VoltMx %}
+/*Sample code to set the height property for a Map widget by using DP, Percentage and Pixels.*/
 frmMap.myMap.height="50dp";
 
 frmMap.myMap.height="10%";
@@ -865,7 +940,7 @@ frmMap.myMap.height="10px";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -875,27 +950,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 The id property is a unique identifier of the Map Widget consisting of alphanumeric characters. Every Map Widget should have a unique id within a Form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for Map with the id: "map1"
+{% highlight VoltMx %}
+//Defining the properties for Map with the id: "map1"
 var mapBasicConf = {
     id: "map1",
     provider: constants.MAP_PROVIDER_GOOGLE,
@@ -915,32 +994,35 @@ var map = new voltmx.ui.Map(mapBasicConf, mapLayoutConf, mapPSPConf);
 alert("Map ID is :" + map.id);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[imageSourceType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>imageSourceType Property</summary>
 
 * * *
 
 Specifies the source of the image for pins on the map.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 imageSourceType
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 This property can be set to one of the following values.
 
@@ -957,37 +1039,41 @@ If the imageSourceType property is not set, the Map Widget uses the default valu
 
 Additional pin image constants are available to anchor the pin image. These constants are found in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Example
+### Example
 
-{% highlight voltMx %}voltmx.print("The imageSource type is:" + FormMap.map1.imageSourceType);
+{% highlight VoltMx %}
+voltmx.print("The imageSource type is:" + FormMap.map1.imageSourceType);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the Map Widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The info property will help in avoiding the globals to most part of the programming.
 
@@ -995,7 +1081,8 @@ The info property is a **non-constructor** property. You cannot set this propert
 
 The info property can hold any JSObject. After assigning the JSObject to the info property, the JSObject should not be modified. For example:
 
-{% highlight voltMx %}var inf = {
+{% highlight VoltMx %}
+var inf = {
     a: "hello"
 };
 widget.info = inf;
@@ -1004,9 +1091,10 @@ widget.info.a = "hello world";
 //widget.info.a will have the old value as hello.
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set info property for a Map widget.
+{% highlight VoltMx %}
+//Sample code to set info property for a Map widget.
 
 frmMap.myMap.info = {
     key: "My location"
@@ -1017,32 +1105,35 @@ voltmx.print("Map widget info:" +frmMap.myMap.info);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
 The isVisible property controls the visibility of a widget on the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for the isVisible property is true.
 
@@ -1050,23 +1141,25 @@ If set to _false,_ the widget is not displayed.
 
 If set to _true,_ the widget is displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the isVisible property of a Map widget.
+{% highlight VoltMx %}
+//Sample code to set the isVisible property of a Map widget.
 frmMap.myMap.isVisible=true;
 
 {% endhighlight %}
 
 > **_Note:_** You can set the visibility of a widget dynamically from code using the setVisibility method.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[left Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>left Property</summary>
 
 * * *
 
@@ -1074,25 +1167,28 @@ This property determines the lower left corner edge of the widget and is measure
 
 The left property determines the position of the left edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 left
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
@@ -1100,32 +1196,35 @@ frmHome.widgetID.left = "10%";
 frmHome.widgetID.left = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[locationData Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>locationData Property</summary>
 
 * * *
 
 The locationData property helps you specify the data of the location highlighted on the Map Widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 locationData
+{% endhighlight %}
 
-Type
+### Type
 
 Array.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The following keys required in the location JSObject:
 
@@ -1162,11 +1261,12 @@ The image property of the locationData property can accept the pin image as a na
 | sourceType | Contains a value from the [Pin Image Type Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html). If a value is not given for the sourceType, the default value PIN\_IMG\_SRC\_TYPE\_RESOURCES is used. |
 | anchor | Optional. A constant that defines how the pin image should be anchored to the location point. The constant's value should be one of the [Pin Image Anchor Constants]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_map_constants.html). If a value is not specified, the value PIN\_IMG\_ANCHOR\_BOTTOM\_CENTER is used. |
 
-Examples
+### Examples
 
 Creating a map.
 
-{% highlight voltMx %}//Sample code to set the locationData property of a Map widget.
+{% highlight VoltMx %}
+//Sample code to set the locationData property of a Map widget.
 frmMap.myMap.locationData = [{
  lat: "17.445775",
  lon: "78.3731",
@@ -1183,7 +1283,7 @@ color: "green",
 
 Specifying the pin image as a string.
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 locationData = {
 	…
 	Image = "mypinimage.png";
@@ -1193,7 +1293,7 @@ locationData = {
 
 Specifying the pin image using file path.
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 locationData = {
 	….
 	image = {
@@ -1208,7 +1308,8 @@ locationData = {
 
 Specifying the location data with custom pin images and flex callout template. This example is applicable to Android and iOS.
 
-{% highlight voltMx %}var imgConfigfilePath;
+{% highlight VoltMx %}
+var imgConfigfilePath;
 
 var base64StringImage;
 
@@ -1291,14 +1392,15 @@ function SetLocationData() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[mapHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>mapHeight Property</summary>
 
 * * *
 
@@ -1310,21 +1412,24 @@ To specify a skin, select a skin from the list.
 
 > **_Note:_** For the skin to be available in the list, you must add a skin for BlockedUI under Widget Skins.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 mapHeight
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for Map with mapHeight:100
+{% highlight VoltMx %}
+//Defining the properties for Map with mapHeight:100
 var mapBasicConf = {
     id: "map1",
     provider: constants.MAP_PROVIDER_GOOGLE,
@@ -1343,7 +1448,7 @@ var mapPSPConf = {
 var map = new voltmx.ui.Map(mapBasicConf, mapLayoutConf, mapPSPConf);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Server-side Mobile Web (basic)
@@ -1351,33 +1456,37 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[mapKey Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>mapKey Property</summary>
 
 * * *
 
 The map key required to connect to the map provider service. Since Iris only supports Google maps, the mapKey property accepts the Google map key.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 mapKey
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 A separate map key is needed for the Android platform based on the Android SDK map key requirements, which is different from the map key requirements for static/ dynamic JavaScript based on the Google map key.
 
 For more information on configuring the map keys, refer to [Generating and Configuring Map API Keys]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Generating_Map_Keys.html).
 
-Example
+### Example
 
-{% highlight voltMx %}/* Defining the properties for Map with mapKey:"0z5UtaSPUYj42f5qX0VAwmDGLX39Qxgbtcra0TA"*/
+{% highlight VoltMx %}
+/* Defining the properties for Map with mapKey:"0z5UtaSPUYj42f5qX0VAwmDGLX39Qxgbtcra0TA"*/
 var mapBasicConf = {
     id: "map1",
     provider: constants.MAP_PROVIDER_GOOGLE,
@@ -1395,32 +1504,35 @@ var mapPSPConf = {};
 var map = new voltmx.ui.Map(mapBasicConf, mapLayoutConf, mapPSPConf);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[mapSource Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>mapSource Property</summary>
 
 * * *
 
 Specifies the source of a map.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 mapSource
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 You can choose one of the following sources:
 
@@ -1440,7 +1552,7 @@ MAP\_SOURCE\_NATIVE: If you select the option, the application uses the [mapKey]
 
 > **_Note:_** Mobile Web (basic), and Mobile Web (BJS) support only Google Static Maps as a source. Static maps are directly requested from Google for a given latitude and longitude. Volt MX Iris does not support any other option because the size of the get request URL can be bigger than 256 characters, leading to the request not being served.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Server-side Mobile Web (basic)
@@ -1450,27 +1562,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[mapWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>mapWidth Property</summary>
 
 * * *
 
 Specifies the width of the map. Accepts the values based on 320 screen width.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 mapWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for Map with mapWidth:100
+{% highlight VoltMx %}
+//Defining the properties for Map with mapWidth:100
 var mapBasicConf = {
     id: "map1",
     provider: constants.MAP_PROVIDER_GOOGLE,
@@ -1489,7 +1605,7 @@ var mapPSPConf = {
 var map = new voltmx.ui.Map(mapBasicConf, mapLayoutConf, mapPSPConf);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Server-side Mobile Web (basic)
@@ -1497,7 +1613,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[margin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>margin Property</summary>
 
 * * *
 
@@ -1515,36 +1632,40 @@ The following image illustrates a widget with a defined margin:
 
 ![](Resources/Images/Margin.png)
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 margin
+{% endhighlight %}
 
-Type
+### Type
 
 Array of numbers
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the margin property of a Map widget.
+{% highlight VoltMx %}
+//Sample code to set the margin property of a Map widget.
 frmMap.myMap.margin= [20, 40, 50, 20];   
 
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
-Available on all platforms
+### Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[marginInPixel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>marginInPixel Property</summary>
 
 * * *
 
@@ -1556,30 +1677,33 @@ If set to _true,_ the margin is applied in pixels.
 
 If set to _false,_ the margin is applied as set in the [margin](#margin) property.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 marginInPixel
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the marginInPixel property of a Map widget.
+{% highlight VoltMx %}
+//Sample code to set the marginInPixel property of a Map widget.
 frmMap.myMap.marginInPixel=true;  
 
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iPhone
 *   iPad
@@ -1588,7 +1712,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -1596,21 +1721,24 @@ This property specifies the maximum height of the widget and is applicable only 
 
 The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -1618,14 +1746,15 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -1633,21 +1762,24 @@ This property specifies the maximum width of the widget and is applicable only w
 
 The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -1655,14 +1787,15 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -1670,21 +1803,24 @@ This property specifies the minimum height of the widget and is applicable only 
 
 The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -1692,14 +1828,15 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -1707,21 +1844,24 @@ This property specifies the minimum width of the widget and is applicable only w
 
 The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -1729,32 +1869,35 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[mode Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>mode Property</summary>
 
 * * *
 
 Specifies the view mode to view the map.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 mode
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** From Volt MX Iris V8 SP4 FP 43, when a user changes the map mode by using the native UI, the mode property returns the latest modified value. This value does not change even when the user navigates to another form, and then, returns to the form with the map. The map will open in the mode set by the user.  
 For example, the user changes the mode of the map from normal to satellite. Then the user navigates to another form and returns to the form with the map. The map will open in the satellite mode.  
@@ -1780,28 +1923,28 @@ _MAP\_VIEW\_MODE\_TERRAIN_: Map showing the surface of the land in 3D view.
 
 > **_Note:_** Traffic mode works only in North America and Europe.
 
-The following images illustrate **Normal Mode**, **Satellite Mode**, and **Street Mode**.
+### The following images illustrate **Normal Mode**, **Satellite Mode**, and **Street Mode**.
 
   
 | Normal Mode | Satellite Mode | Street Mode |
 | --- | --- | --- |
 | ![Normal View](Resources/Images/normal_map.png) | ![Satellite View](Resources/Images/satellite_map.png) | ![Street View](Resources/Images/street_map.png) |
 
-The following images illustrate the **Polygon Mode**, **Hybrid Mode**, and **Traffic Mode**.
+### The following images illustrate the **Polygon Mode**, **Hybrid Mode**, and **Traffic Mode**.
 
   
 | Polygon Mode | Hybrid Mode | Traffic Mode |
 | --- | --- | --- |
 | ![Polygon View](Resources/Images/Polygon_View.png) | ![](Resources/Images/hybrid.png) | ![](Resources/Images/traffic.png) |
 
-The following image illustrates the **Terrain Mode**
+### The following image illustrates the **Terrain Mode**
 
 | Terrain Mode |
 | --- |
 | ![](Resources/Images/terrainmap.png) |
 
   
-The following table shows the list of map modes and their availability in respective platforms:
+### The following table shows the list of map modes and their availability in respective platforms:
 
   
 | Modes | Normal | Satellite | Hybrid | Street | Polygon | Traffic | Terrain |
@@ -1819,15 +1962,16 @@ If you select the mode as polygon for Mobile Web, the location coordinates speci
 
 > **_Note:_** The polygon mode is applicable only if the _[mapSource](#mapSourc)_ is MAP\_SOURCE\_NON\_NATIVE.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the mode property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the mode property of a Map widget.  
   
 frmMap.myMap.mode=constants.MAP_VIEW_MODE_HYBRID;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -1839,25 +1983,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[navControlsImageConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>navControlsImageConfig Property</summary>
 
 * * *
 
 The images required to configure the zoom (in and out) and navigation ( left, right, top, and bottom) controls on the static map view.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 navControlsImageConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The property accepts key values for image names for the following.
 
@@ -1868,9 +2015,10 @@ The property accepts key values for image names for the following.
 *   navTop
 *   navBottom
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the navControlsImageConfig property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the navControlsImageConfig property of a Map widget.  
   
 frmMap.myMap.navControlsImageConfig = {
  zoomIn: "a.png",
@@ -1883,7 +2031,7 @@ frmMap.myMap.navControlsImageConfig = {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Server-side Mobile Web (Advanced)
@@ -1891,7 +2039,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>opacity Property</summary> 
 
 * * *
 
@@ -1899,99 +2048,110 @@ Specifies the opacity of the widget. The value of this property must be in the r
 
 Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 opacity
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This property has more priority compared to the values coming from the configured skin.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
+{% highlight VoltMx %}
+//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
 
 //Sample code to make the widget opaque by using the opacity property.
 frmHome.widgetID.opacity = 1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE.
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Helps you access the parent of the widget. If the widget is not part of the widget hierarchy, the parent property returns null.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 parent
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 > **_Note:_** The property works for all the widgets inside a FlexForm, FlexContainer or FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}function func() {
+{% highlight VoltMx %}
+function func() {
 
     voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[provider Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>provider Property</summary>
 
 * * *
 
 Specifies the map data provider.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 provider
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for the provider property is MAP\_PROVIDER\_GOOGLE.
 
-Example
+### Example
 
 For example, you can set the map provider as Google or Bing based on your location and requirement.
 
-{% highlight voltMx %}//Defining the properties for Map with provider:constants.MAP_PROVIDER_GOOGLE
+{% highlight VoltMx %}
+//Defining the properties for Map with provider:constants.MAP_PROVIDER_GOOGLE
 var mapBasicConf = {
     id: "map1",
     provider: constants.MAP_PROVIDER_GOOGLE,
@@ -2009,14 +2169,15 @@ var mapPSPConf = {};
 var map = new voltmx.ui.Map(mapBasicConf, mapLayoutConf, mapPSPConf);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -2024,9 +2185,10 @@ This property is used to retain the content alignment property value, as it was 
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2034,7 +2196,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -2049,21 +2211,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -2088,14 +2253,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -2103,9 +2269,10 @@ This property is used to retain flex positional property values as they were def
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2113,7 +2280,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -2128,21 +2295,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -2167,24 +2337,26 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
-This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
+### This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2192,7 +2364,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -2207,21 +2379,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -2247,43 +2422,46 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainMapPositionOnRestore Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainMapPositionOnRestore Property</summary>
 
 * * *
 
 This flag indicates whether to retain mapPosition or bounds on map restore. This means that when retainMapPositionOnRestore is true, the last viewed map position/bounds (which is the map postion/bounds before navigating away from the form that contains the map) stays intact when you revisit the form that contains the map widget.
 
-Example
+### Example
 
 retainMapPositionOnRestore
 
-Default Value
+### Default Value
 
 false (for Android)
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}Form2.map1.retainMapPositionOnRestore = true;
+{% highlight VoltMx %}
+Form2.map1.retainMapPositionOnRestore = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -2293,25 +2471,28 @@ The right property determines the position of the right edge of the widget’s b
 
 The right property is used only if the width property is not provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 right
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -2319,85 +2500,92 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[screenLevelWidget Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>screenLevelWidget Property</summary>
 
 * * *
 
 Specifies whether the widget should occupy the whole container excluding space for headers and footers, if any.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 screenLevelWidget
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 If set to _false,_ the map occupies the space as set in the IDE or layout properties.
 
 If set to _true,_ the map occupies the whole space on the container.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the screenLevelWidget property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the screenLevelWidget property of a Map widget.  
 frmMap.myMap.screenLevelWidget=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showCurrentLocation Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showCurrentLocation Property</summary>
 
 * * *
 
 Indicates the current location on a map as a pin, circle, or none.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showCurrentLocation
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Yes
 
-Remarks
+### Remarks
 
-Following are the options available for iOS:
+### Following are the options available for iOS:
 
 *   MAP\_VIEW\_SHOW\_CURRENT\_LOCATION\_NONE. This is the default value.
 *   MAP\_VIEW\_SHOW\_CURRENT\_LOCATION\_AS\_PIN
 *   MAP\_VIEW\_SHOW\_CURRENT\_LOCATION\_AS\_CIRCLE
 
-For Android, the showCurrentLocation property accepts only Boolean values.
+### For Android, the showCurrentLocation property accepts only Boolean values.
 
 *   _true_: the current location is shown on the map with blue circle and a camera handle on top of the map.
 *   _false_: the current location is not indicated on the map. This is the default value.
 
 > **_Note:_** The property is supported only from the Google Maps V2 version.
 
-For Android, make sure that the following are defined under the Manifest Properties.
+### For Android, make sure that the following are defined under the Manifest Properties.
 
 1.  Open the application, and click **Project Settings** icon. The **Project Settings** window opens.
 2.  Click the **Native** tab, and then click **Android** sub-tab.
@@ -2415,23 +2603,25 @@ For Android, make sure that the following are defined under the Manifest Propert
 
 9.  Click **Finish**.
 
-Example for iOS
+### Example for iOS
 
-{% highlight voltMx %}//Sample code to set the showCurrentLocation property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the showCurrentLocation property of a Map widget.  
   
 frmMap.myMap.showCurrentLocation=constants.MAP_VIEW_SHOW_CURRENT_LOCATION_AS_PIN;  
 
 {% endhighlight %}
 
-Example for Android
+### Example for Android
 
-{% highlight voltMx %}//Sample code to set the showCurrentLocation property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the showCurrentLocation property of a Map widget.  
   
 frmMap.myMap.showCurrentLocation=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE only for iOS
 *   iOS
@@ -2439,25 +2629,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showZoomControl Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showZoomControl Property</summary>
 
 * * *
 
 Indicates if the zoom control is to be displayed on the map.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showZoomControl
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for the showZoomControl property is true.
 
@@ -2465,15 +2658,16 @@ If set to _false,_ the zoom control is displayed.
 
 If set to _true,_ the zoom control is not displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the showZoomControl property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the showZoomControl property of a Map widget.  
   
 frmMap.myMap.showZoomControl=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Android
@@ -2482,33 +2676,37 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
-This property determines the top edge of the widget and measured from the top bounds of the parent container.
+### This property determines the top edge of the widget and measured from the top bounds of the parent container.
 
 The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 top
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -2516,40 +2714,44 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transform Property</summary>
 
 * * *
 
 Contains an animation transformation that can be used to animate the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 transform
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi) function.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}//Animation sample
+{% highlight VoltMx %}
+//Animation sample
 var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
@@ -2557,39 +2759,43 @@ newTransform.translate3D(223, 12, 56);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetDataMapForCallout Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetDataMapForCallout Property</summary>
 
 * * *
 
 Specifies the mapping between the widget identifiers and data identifiers.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 widgetDataMapForCallout
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The map must contain all widget data maps referred across multiple templates, including the dynamic templates for each map location, if any. The map accepts the data as key-value pairs, where **key** is the widget identifier and **value** is the data identifier.
 
 On the iOS platform, the onSelection event is triggered for a custom callout.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the widgetDataMapForCallout property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the widgetDataMapForCallout property of a Map widget.  
   
 frmMap.myMap.widgetDataMapForCallout = {
  "flxMap": "flxMap",
@@ -2598,14 +2804,15 @@ frmMap.myMap.widgetDataMapForCallout = {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except on Windows10
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -2613,19 +2820,21 @@ This property determines the width of the widget and is measured along the x-axi
 
 The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 width
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the options that can be used as units of width:
 
@@ -2635,9 +2844,10 @@ Following are the options that can be used as units of width:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
@@ -2645,14 +2855,15 @@ frmHome.widgetID.width = "10%";
 frmHome.widgetID.width = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
@@ -2660,19 +2871,21 @@ This property specifies the stack order of a widget. A widget with a higher zInd
 
 The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
@@ -2692,31 +2905,37 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 **voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto  
  var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
   "zIndex": voltmx.flex.ZINDEX_AUTO
 });
 
-{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+{% endhighlight %}
+
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto
 flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}
+//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zoomLevel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zoomLevel Property</summary>
 
 * * *
 
@@ -2724,19 +2943,21 @@ Sets the zoom level for the current map view. The range varies from platform to 
 
 zoomLevel accepts floating values to improve precision.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 zoomLevel
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the range and default values on different platforms:
 
@@ -2745,14 +2966,15 @@ Following are the range and default values on different platforms:
 *   Windows: 1.0 to 20.0.
 *   Desktop Web/ SPA: 0-22, the default value is 15.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zoomLevel property of a Map widget.  
+{% highlight VoltMx %}
+//Sample code to set the zoomLevel property of a Map widget.  
   
 frmMap.myMap.zoomLevel=10.5;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Android
@@ -2762,4 +2984,5 @@ Platform Availability
 *   SPA
 
 * * *
+</details>
 

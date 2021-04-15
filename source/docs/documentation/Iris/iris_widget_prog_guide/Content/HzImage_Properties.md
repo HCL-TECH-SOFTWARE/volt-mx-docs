@@ -2,7 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                                
 
 HorizontalImageStrip Properties
 -------------------------------
@@ -11,7 +10,7 @@ The basic properties for HorizontalImageStrip widget are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
@@ -19,19 +18,21 @@ Enables you to control accessibility behavior and alternative text for the widge
 
 For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
@@ -49,22 +50,23 @@ The accessibilityConfig property is a JavaScript object which can contain the fo
 | a11yHidden | Boolean | This is an optional parameter. Specifies if the widget should be ignored by assistive technology. The default option is set to _false_. This option is supported on iOS 5.0 and above, Android 4.1 and above, and SPA | For all widgets, this parameter maps to the `aria-hidden` property of ARIA in HTML. |
 | a11yARIA | Object | This is an optional parameter. For each widget, the key and value provided in this object are added as the attribute and value of the HTML tags respectively. Any values provided for attributes such as `aria-labelledby` and `aria-describedby` using this attribute, takes precedence over values given in `a11yLabel` and `a11yHint` fields. When a widget is provided with the following key value pair or attribute using the a11yARIA object, the tabIndex of the widget is automatically appended as zero.`{"role": "main"}``aria-label` | This parameter is only available on the Desktop Web platform. |
 
-Android limitations
+### Android limitations
 
 *   If the results of the concatenation of a11y fields result in an empty string, then `accessibilityConfig` is ignored and the text that is on widget is read out.
 *   The soft keypad does not gain accessibility focus during the right/left swipe gesture when the keypad appears.
 
-SPA/Desktop Web limitations
+### SPA/Desktop Web limitations
 
 *   When `accessibilityConfig` property is configured for any widget, the `tabIndex` attribute is added automatically to the `accessibilityConfig` property.
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+### Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -75,11 +77,12 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}
+/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -91,70 +94,77 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>anchorPoint Property</summary>
 
 * * *
 
 Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 anchorPoint
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The value for this property is a JavaScript dictionary object with the keys "x" and "y". The values for the "x" and "y" keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.anchorPoint = {
+{% highlight VoltMx %}
+Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[arrowConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>arrowConfig Property</summary>
 
 * * *
 
 Specifies the configurable arrow properties of the HorizontalImageStrip. This property is available only when showArrows is set to _true_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 arrowConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The available options are:
 
@@ -165,9 +175,9 @@ The available options are:
 
 > **_Note:_** The options **leftArrowFocusImage** and **rightArrowFocusImage** are not supported in BlackBerry, Mobile Web, and SPA platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with arrowConfig.
 var hISBasic={id:"hIS", 
 	skin:"hISkn", 
@@ -206,23 +216,25 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip arrowConfig::"+hIS.arrowConfig);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[data Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>data Property</summary>
 
 * * *
 
 Specifies the JSObject which represents the images to be rendered in horizontal image strip.
 
-Data format of JavaScript object
+### Data format of JavaScript object
 
-{% highlight voltMx %}//Data format of JavaScript object
+{% highlight VoltMx %}
+//Data format of JavaScript object
 formname.widgetname.data=
 [
  [
@@ -234,28 +246,30 @@ formname.widgetname.data=
 ];
 {% endhighlight %}
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 data
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Remarks
+### Remarks
 
 Data format:An array with two elements.
 
 *   \[0\] is the array of objects with hashes.
 *   \[1\] is the image key's key in the data hash of \[0\].
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with data:
 //[[{"imagekey":"image1.png"}, {"imagekey":"image2.png"}, "imagekey"]]
 					
@@ -310,77 +324,84 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip data::"+hIS.data);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}
+Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[focusSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>focusSkin Property</summary>
 
 * * *
 
 Specifies the look and feel of the widget when in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 focusSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Remarks
+### Remarks
 
 > **_Note:_** You must be aware of the following:  
 1\. On J2ME non-touch devices, if you do not specify the Focus skin, it is not possible to identify the focus change between the widgets.  
 2\. Mobile Web does not support this property, instead browser specific focus will be applied.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with focusSkin:"hISknFocus"
 var hISBasic={id:"hIS",
 	skin:"hISkn",
@@ -413,35 +434,38 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip focusSkin::"+hIS.focusSkin);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms. platforms.
+	Available on all platforms. platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hoverSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hoverSkin Property</summary>
 
 * * *
 
 Specifies the look and feel of a widget when the cursor hovers on the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 hoverSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for a HzImageStrip with hoverSkin:"hskin"
 
 var hISBasic={id:"his1", 
@@ -463,35 +487,38 @@ var hISPSP={hoverSkin:"hskin"};
 var his1 = new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-This property is available on Windows Tablet.
+	This property is available on Windows Tablet.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 id is a unique identifier of HorizontalImageStrip consisting of alpha numeric characters. Every HorizontalImageStrip should have a unique id within a Form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String - \[Mandatory\]
 
-Read/Write
+### Read/Write
 
 Yes - (Read only)
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with id:"hIS"
 var hISBasic={id:"hIS", 
 	skin:"hISkn", 
@@ -525,35 +552,38 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip id::"+hIS.id);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[imageWhenFailed Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>imageWhenFailed Property</summary>
 
 * * *
 
 Specifies the image to be displayed when the remote resource is not available. This image is taken from the resources folder.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 imageWhenFailed
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with imageWhenFailed:"img3.png"
 var hISBasic={id:"hIS",skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -582,35 +612,38 @@ var hISPSP={};
 var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms. and Windows Desktop platforms.
+	Available on all platforms. and Windows Desktop platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[imageWhileDownloading Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>imageWhileDownloading Property</summary>
 
 * * *
 
 Specifies the image to be displayed when the remote source is still being downloaded. This image is taken from the resources folder.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 imageWhileDownloading
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with imageWhileDownloading:"img.png"
 var hISBasic={id:"hIS",
 	skin:"hISkn", 
@@ -640,15 +673,16 @@ var hISPSP={};
 var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms except Server side Mobile Web and Windows Desktop platforms.
+	Available on all platforms except Server side Mobile Web and Windows Desktop platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
@@ -656,7 +690,7 @@ A custom JSObject with the key value pairs that a developer can use to store the
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var inf = {a: 'hello'};
 widget.info = inf; //works
 widget.info.a = 'hello world';
@@ -664,25 +698,27 @@ widget.info.a = 'hello world';
 //widget.info.a will have old value as hello.
 {% endhighlight %}
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Remarks
+### Remarks
 
 > **_Note:_** This is a **non-Constructor** property. You cannot set this property through widget constructor. But you can read and write data to it.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with info property.
 var hISBasic={id:"hIS", skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -713,41 +749,44 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip info is ::"+hIS.info);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Not available in the IDE.
+	Not available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
 This property controls the visibility of a widget on the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Remarks
+### Remarks
 
 The default value for this property is true. If set to _false,_ the widget is not displayed. If set to _true,_ the widget is displayed.
 
 > **_Note:_** You can also set the visibility of a widget dynamically from code using the setVisibility method.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with isVisible:true
 var hISBasic={id:"hIS",skin:"hISkn",
 	focusSkin:"hISknFocus", 
@@ -781,15 +820,16 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip isVisible::"+hIS.isVisible);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -799,7 +839,8 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -807,7 +848,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -822,21 +863,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -861,14 +905,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -876,9 +921,10 @@ This property is used to retain flex positional property values as they were def
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -886,7 +932,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -901,21 +947,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -940,14 +989,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -955,9 +1005,10 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -965,7 +1016,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -980,21 +1031,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -1020,38 +1074,41 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedIndex Property</summary>
 
 * * *
 
 Indicates the currently selected row in the HorizontalImageStrip. The index is with respect to the order in which data is set with data property. Programmatically setting the selected Index will not make any visible differences in the row, however it will bring the row at the index into the view able area on the screen. Setting it to _null/nil_ clears the selection state.In JavaScript the Index is '0' based.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectedIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Remarks
+### Remarks
 
 > **_Note:_** If data contains the sections then the _selectedIndex_ indicates the selected row index within the section.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with selectedIndex:1
 					
 var hISBasic={id:"hIS",skin:"hISkn", 
@@ -1085,35 +1142,38 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip selectedIndex::"+hIS.selectedIndex);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Not available in the IDE.
+	Not available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedItem Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedItem Property</summary>
 
 * * *
 
 Returns the selected data object (input array) corresponding to the selected image of the HorizontalImageStrip. If no image is selected, _null/nil_ is returned.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectedItem
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with selectedIndex:1
 var hISBasic={id:"hIS",skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -1146,39 +1206,42 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 **voltmx.print("Horizontal Image strip selectedItem::"+hIS.selectedItem);**
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Not available in the IDE.
+	Not available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showArrows Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showArrows Property</summary>
 
 * * *
 
 Specifies the arrow images must be displayed on the left and right edges of the HorizontalImageStrip.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showArrows
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false. If set to _true,_ the arrows are displayed. If set to _false,_ the arrows are not displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with showArrows:true
 var hISBasic={id:"hIS",skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -1211,39 +1274,42 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip showArrows::"+hIS.showArrows);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showScrollbars Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showScrollbars Property</summary>
 
 * * *
 
 Specifies if the scrollbars must be visible all the time.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showScrollbars
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property depends on the native platform behavior.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with showScrollbars:true
 var hISBasic={id:"hIS",skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -1275,35 +1341,38 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip showScrollbars::"+hIS.showScrollbars);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms..
+	Available on all platforms..
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin Property</summary>
 
 * * *
 
 Specifies the look and feel of the HorizontalImageStrip when not in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 skin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with skin:"hISkn"
 var hISBasic={id:"hIS", 
 	**skin:"hISkn"**, 
@@ -1338,35 +1407,38 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip Skin::"+hIS.skin);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[spaceBetweenImages Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>spaceBetweenImages Property</summary>
 
 * * *
 
 Specifies the space between the images in the horizontal image strip.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 spaceBetweenImages
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with spaceBetweenImages:20
 var hISBasic={id:"hIS",skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -1396,35 +1468,38 @@ var hISPSP={};
 var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[toolTip Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>toolTip Property</summary>
 
 * * *
 
 Specifies the hint text when the cursor hovers over a widget, without clicking it. The text entered in the tooltip appears as a small box when the cursor hovers over a widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 toolTip
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for a HzImageStrip with toolTip:sample text
 var hISBasic=
     {id:"hIS1",
@@ -1446,41 +1521,45 @@ var hISPSP=
 var hIS1 = new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-This property is available on Windows Tablet.
+	This property is available on Windows Tablet.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transform Property</summary>
 
 * * *
 
 Contains an animation transformation that can be used to animate the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 transform
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi) function.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}//Animation sample
+{% highlight VoltMx %}
+//Animation sample
 var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
@@ -1488,13 +1567,14 @@ newTransform.translate3D(223, 12, 56);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewConfig Property</summary>
 
 * * *
 
@@ -1502,7 +1582,9 @@ Specifies the view configuration properties for various view types in the horizo
 
 **Syntax**
 
+{% highlight VoltMx %}
 viewConfig
+{% endhighlight %}
 
 **Type**
 
@@ -1529,7 +1611,7 @@ Following are the available view types:
 
 **Example**
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for a HorizontalImageStrip with viewConfig.
 
 var hISBasic=
@@ -1561,25 +1643,28 @@ var hIS1 = new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewType Property</summary>
 
 * * *
 
 Specifies the view type of Horizontal Image Strip.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 viewType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is HORIZONTAL\_IMAGESTRIP\_VIEW\_TYPE\_STRIPVIEW.
 
@@ -1601,7 +1686,7 @@ The below table shows the list of view types and their availability in different
 | HORIZONTAL\_IMAGESTRIP\_VIEW\_TYPE\_PAGEVIEW | No | No | Yes | Yes |
 
   
-Following are the available view types:
+### Following are the available view types:
 
 *   **HORIZONTAL\_IMAGESTRIP\_VIEW\_TYPE\_STRIPVIEW**: In this view the images are placed side by side and looks as if the images are placed in a strip. You can scroll through the images and view the desired image.
 *   **HORIZONTAL\_IMAGESTRIP\_VIEW\_TYPE\_ SLOTVIEW**:In this view the images are displayed one at a time. The images change with the left or right gesture. This view is useful when you want to present a 360 degree view of an object.
@@ -1636,9 +1721,9 @@ Following are the available view types:
     
 *   **HORIZONTAL\_IMAGESTRIP\_VIEW\_TYPE\_PAGEVIEW**:In this view the images are displayed pagewise. You can scroll through the images and view the desired image. If you do not specify the width of an image, by default only 3 images appear in a page. If you specify the width of the image, images are displayed as per the screen width. You can view the page you are on or view the images exist by viewing the page indicator below.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for Horizontal Image strip with viewType as COVERFLOW.
 var hISBasic={id:"hIS", 
 	skin:"hISkn", 
@@ -1673,11 +1758,12 @@ var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 voltmx.print("Horizontal Image strip viewType::"+hIS.viewType);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+	Available in the IDE.
 
-Available on all platforms.
+	Available on all platforms.
 
 * * *
+</details>
 

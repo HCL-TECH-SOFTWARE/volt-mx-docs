@@ -151,7 +151,7 @@ The following are the APIs, keys, and constants associated with Responsive Web.
 
 *   [voltmx.application.setApplicationBehaviors (Breakpoint key)]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.application_functions.html#voltmx.app)
 *   [voltmx.application.getCurrentBreakpoint();]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.application_functions.html#voltmx.application.getCurrentBreakpoint)
-*   [constants.BREAKPOINT\_MAX\_VALUE]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html#voltmx.application_functions.html#constants)
+*   [constants.BREAKPOINT\_MAX\_VALUE]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.application_functions.html#constants)
 
 Create a Breakpoint
 -------------------

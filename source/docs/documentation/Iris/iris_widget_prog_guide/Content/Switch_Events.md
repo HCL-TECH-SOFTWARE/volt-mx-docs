@@ -12,7 +12,8 @@ Switch has the following event associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
@@ -56,7 +57,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
@@ -93,7 +95,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSlide Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onSlide Event</summary>
 
 * * *
 
@@ -145,7 +148,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchEnd Event</summary>
 
 * * *
 
@@ -200,7 +204,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchMove Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchMove Event</summary>
 
 * * *
 
@@ -255,7 +260,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchStart Event</summary>
 
 * * *
 

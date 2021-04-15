@@ -13,20 +13,23 @@ The voltmx.application.settings Namespace provides the following API elements.
 Functions
 ---------
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.settings.read](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.application.settings.read</summary>
 
 * * *
 
 This function enables your app to read the configuration values associated with specified keys.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.settings.read(  
     key,  
     onsuccesscallback,  
     onfailureback)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
@@ -37,9 +40,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}read: function() {
+{% highlight VoltMx %}
+read: function() {
 
     voltmx.application.settings.read("key1", this.onsuccesscallbackR, this.onfailureback);
     voltmx.application.settings.read("key2", this.onsuccesscallbackR, this.onfailurebackR);
@@ -84,15 +88,15 @@ onfailurebackR: function(errorcode, errormessage) {
 }
 {% endhighlight %} 
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This function reads an app's settings from the settings file that is bundled with the application's binary. Your app can use this function to read, among other things, the user-defined values such as the preferred locations.
 
-This is an asynchronous call so it returns immediately. Upon successfully reading the app's settings, the Volt MX IrisAPI framework automatically invokes the callback your app passes in the _onsuccesscallback_ parameter. The callback function has the following signature.
+This is an asynchronous call so it returns immediately. Upon successfully reading the app's settings, the VoltMX IrisAPI framework automatically invokes the callback your app passes in the _onsuccesscallback_ parameter. The callback function has the following signature.
 
 onsuccess(key, value);
 
@@ -100,33 +104,36 @@ When this callback function is invoked, the _key_ parameter contains a string th
 
 The _value_ parameter contains the settings that were read. It can be `Boolean`, `string`, `double`, or an object. It contains an object when _Display option_ is set to multiselect.
 
-If the Volt MX IrisAPI framework cannot read the settings associated with the _key_ parameter to the `voltmx.application.settings.read` function, then the framework automatically invokes the function in the _onfailurecallback_ parameter. The callback function has the following signature.
+If the VoltMX IrisAPI framework cannot read the settings associated with the _key_ parameter to the `voltmx.application.settings.read` function, then the framework automatically invokes the function in the _onfailurecallback_ parameter. The callback function has the following signature.
 
 onfailure(errorcode,errormessage);
 
 When the framework calls the `onfailure` callback function _errorcode_ parameter of contains a numeric error code and the _errormessage_ parameter contains the corresponding error message as a `string`.
 
-Platform Availability
+### Platform Availability
 
 Available only on iPhone
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.settings.write](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.settings.write</summary>
 
 * * *
 
 This function enables your app to write values associated with specified keys.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.settings.write(  
     key,  
     value,  
     onsuccesscallback,  
     onfailurecallback);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -138,9 +145,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}write: function() {
+{% highlight VoltMx %}
+write: function() {
 
     var str1 = this.view.txtMsg.text + " ";
     var str2 = this.view.lstBxType.selectedKey;
@@ -169,28 +177,36 @@ onfailurebackWrite: function(errorcode, errormessage) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This function sets the value of configuration options in the configuration file that is associated with the app. New keys cannot be introduced with this function. Your app can only write to existing keys. This is an asynchronous call, so it returns immediately and does not wait for the underlying hardware to write the value to the specified key. It uses callback functions to communicate success or failure. The callback functions for success and failure are set using this function's _onsuccesscallback_ and _onfailurecallback_, respectively.
 
-The callback function for the _onsuccesscallback_ parameter of the `voltmx.application.settings.write` function has the following syntax.
+The callback function for the _onsuccesscallback_ parameter of the `voltmx.application.settings.write` function has the following 
 
-**onsuccesscallback(key,value);**
+### syntax.
+
+{% highlight VoltMx %}
+onsuccesscallback(key,value);
+{% endhighlight %}
 
 where the `key` parameter to this callback is a string containing the name of the key that was set, and the callback function's `value` parameter contains the value that the key was set to. The callback function's `value` parameter can be `boolean`, `string`, `double`, or an object. An object is only passed in through the _value_ parameter when "_Display option_" is multiselect.
 
 If the `voltmx.application.settings.write` function cannot set the value of the specified key, in invokes another callback function. The callback function for the `voltmx.application.settings.write` function's _onfailurecallback_ parameter has the following syntax.
 
+{% highlight VoltMx %}
 onfailurecallback(errorcode,errormessage);
+{% endhighlight %}
 
 where the `errorcode` parameter contains a numeric error code and the `errormessage` parameter holds a string that specifies the error message.
 
-Platform Availability
+### Platform Availability
 
 Available only on iPhone
+
+</details>
 
 ![](resources/prettify/onload.png)

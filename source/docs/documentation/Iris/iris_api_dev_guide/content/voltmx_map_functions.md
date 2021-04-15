@@ -114,6 +114,7 @@ The following constants identify the shapes that can be drawn on maps.
 | voltmx.map.SHAPE\_TYPE\_POLYGON | The shape is a polygon. |
 | voltmx.map.SHAPE\_TYPE\_POLYLINE | The shape is a polyline. |
 | voltmx.map.SHAPE\_TYPE\_CIRCLE | The shape is a circle. |
+
 </details>
 
 Functions
@@ -128,32 +129,31 @@ The voltmx.map namespaces contains the following functions.
 
 This function tests to see whether a specified location is within a circle or polygon on a map or whether it lies along a polyline on a map.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.map.containsLocation(  
-    shapeType,  
-    location,  
-    shapeData)
+shapeType,
+location,
+shapeData)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | shapeType | Contains a [Shape Type Constant](voltmx_map_constants.html#ShapeTyp) that defines which kind of shape the location is being tested against. |
 | location | Holds a location object which contains lat and lon values. |
-| shapeData | A key-value pair object that defines the shape using the following keys:
-> locations \[Array\]: List of locations that defines a given shape. Each element in Array is an Object, which contains latitude and longitude values. For Circle, only first value in Array is considered.radius \[Number\]: Radius that is needed to define circle shape. This key is only valid of shapeType is Circle and ignored for other shapes.tolerance \[Number\] \[Android\]: Specify tolerance in meters when user is interacting with Polyline or Polygon. Not applicable for other shapes.
+| shapeData | A key-value pair object that defines the shape using the following keys: > locations \[Array\]: List of locations that defines a given shape. Each element in Array is an Object, which contains latitude and longitude values. For Circle, only first value in Array is considered.radius \[Number\]: Radius that is needed to define circle shape. This key is only valid of shapeType is Circle and ignored for other shapes.tolerance \[Number\] \[Android\]: Specify tolerance in meters when user is interacting with Polyline or Polygon. Not applicable for other shapes. |
 
- |
 
- 
 
-Examples
+### Examples
 
-Example 1: Polyline
+**Example 1: Polyline**
 
-{% highlight voltMx %}//Defining the shapeData parameter  
+{% highlight voltMx %}
+//Defining the shapeData parameter  
   var shapeData = {
     locations: [{
         lat: "17.451759",
@@ -173,12 +173,13 @@ var location = {
 var value = voltmx.map.containsLocation(voltmx.map.SHAPE_TYPE_POLYLINE, location, shapeData);	
 {% endhighlight %}
 
-Example 2: Circle
+**Example 2: Circle**
 
-{% highlight voltMx %}//Defining the shapeData parameter      
-    var shapeData = {
+{% highlight voltMx %}
+//Defining the shapeData parameter      
+var shapeData = {
     locations: [{
-        lat: "17.451759", 
+        lat: "17.451759",
         lon: "78.380806"
     }],
     radius: 1000
@@ -192,15 +193,15 @@ Example 2: Circle
 var b = voltmx.map.containsLocation(voltmx.map.SHAPE_TYPE_CIRCLE, location, shapeData);	
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 True if the location is within the circle or polygon, or if it lies along the polyline. Otherwise, false.
 
-Remarks
+### Remarks
 
 For detailed information on how to use this function and what parameter values are valid, please see [Map API](mapapi.html).
 
-Platform Availability
+### Platform Availability
 
 Available on Android and iOS.
 
@@ -211,23 +212,25 @@ Available on Android and iOS.
 
 This function finds the linear distance between two locations on a map.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 voltmx.map.distanceBetween(  
     location1,  
     location2)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
+
 | Parameter | Description |
 | --- | --- |
 | location1 | Contains the first location to use. |
 | location2 | Contains the second location to use. |
 
-Example
+**Example**
 
-{% highlight voltMx %}//Defining pin 1.      
+{% highlight voltMx %}
+//Defining pin 1.      
 var pin1 = {
     id: "id1", // id is mandatory for every pin in dictionary
     lat: "17.4947934",
@@ -265,11 +268,11 @@ this.view.MainMap.addPins([pin1, pin2]);
 var distanceInMeters = voltmx.map.distanceBetween(pin1, pin2);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 A number that specifies the distance between the two input locations.
 
-Platform Availability
+### Platform Availability
 
 Available on Android and iOS.
 
@@ -280,32 +283,35 @@ Available on Android and iOS.
 
 This function enables apps to to decode the encoded polyline points which are provided in search route results. In Android, each step in the search results contains a key.
 
-Syntax
+### Syntax
 
+{% highlight voltMx %}
 voltmx.map.decode(  
     encodedPolylinePoints)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
+
 | Parameter | Description |
 | --- | --- |
 | encodedPolylinePoints | Hold a string containing the encoded polyline points. |
 
-Return Values
+### Return Values
 
 An array containing only the lat/lon values.
 
-Example
+**Example**
 
-{% highlight voltMx %}var polylineConfig = {
+{% highlight voltMx %}
+var polylineConfig = {
     lineColor: "0x0000ffff",
     lineWidth: "2"
 };
 var bool = voltmx.map.decode(polylineconfig);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Android only.
 
@@ -316,27 +322,28 @@ Available on Android only.
 
 This function searches for routes between the start and destination locations.
 
-Syntax
+### Syntax
 
+{% highlight voltMx %}
 voltmx.map.searchRoutes(  
     searchCriteria,  
     successCallback,  
     errorCallback)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
+
 | Parameter | Description |
 | --- | --- |
 | searchCriteria | A JSObject with set of search request configuration parameters that defines the search criteria for routes request. |
-| successCallback | A callback function that receives the search results when search request succeeds. The callback function must have the following syntax. function successCallback( routes );The callback function's _routes_ parameter is an array with one or more routes indicating possible directions between source and destination. |
-| errorCallback | An optional callback function that gets called when search request fails. The callback function must have the following syntax. function errorCallback( errorCode\[Number\], errorMessage\[String\] )The _errorCode_ parameter indicates the category of error. This carries the one of the Map Error Codes defined in the voltmx.map namespace. The _errorMessage_ parameter contains a detailed error message describes the reason for failure. These error messages are platform specific. |
-
+| successCallback | A callback function that receives the search results when search request succeeds. The callback function must have the following syntax. `function successCallback( routes );` The callback function's _routes_ parameter is an array with one or more routes indicating possible directions between source and destination. |
+| errorCallback | An optional callback function that gets called when search request fails. The callback function must have the following syntax. `function errorCallback( errorCode [Number], errorMessage [String] )` The _errorCode_ parameter indicates the category of error. This carries the one of the Map Error Codes defined in the voltmx.map namespace. The _errorMessage_ parameter contains a detailed error message describes the reason for failure. These error messages are platform specific. |
  
 
-Example
+### Example
 
-{% highlight voltMx %}* @ function callSearchRoutefunc * @description invokes searchRoutes API * /
+{% highlight VoltMx %}* @ function callSearchRoutefunc * @description invokes searchRoutes API * /
   callSearchRoutefunc:function()
   {
     try{
@@ -403,16 +410,17 @@ frmMapSearchResult Controller "+JSON.stringify(error));
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 Applications which use the apiKey in search criteria must enable the “Directions API” in Google Developer Console. Google API’s usage quota is counted against the apiKey. For activating and deactivating Google API’s, please follow the below link for detailed procedure. For an overview on searching for routes on maps, please see [Map API](mapapi.html).
 
-Platform Availability
+### Platform Availability
 
 Available on Android and iOS.
 
 ![](resources/prettify/onload.png)
+</details>

@@ -12,21 +12,23 @@ The Browser widget has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
 This event is invoked for every widget when the widget position and dimensions are computed.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked for all the widgets placed inside flex containers. This event is invoked in the order in which the widgets are added to the widget hierarchy and expect the frame property of the widget is calculated and available for use within this event.
 
@@ -34,9 +36,10 @@ This event is used to set the layout properties of child widgets in the relation
 
 The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight voltMx %}
+//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -46,7 +49,7 @@ function doLayoutButton1(){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -55,17 +58,19 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[handleRequest Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>handleRequest Event</summary>
 
 * * *
 
 An event callback which gets invoked by the platform before browser widget navigates to a new URL.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 handleRequest()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 eventobject
 
@@ -96,11 +101,11 @@ Following are the parameters of the object.
 > 
 > Specifies a dictionary containing all the HTTP header fields.
 
-Read/Write
+### Read/Write
 
 Write only
 
-Remarks
+### Remarks
 
 This is useful in scenarios where the developer wants to keep track of the URLs that the browser field navigates to. For example, in a payment flow (that is, being executed inside a browser widget) on successful redirection to a payment confirmation page the developer would like to take the user to a new native form.
 
@@ -112,9 +117,10 @@ The handleRequest event is not triggered for the web pages that change the HTML�
 
 The handleRequest event is not triggered for the bookmark navigation on the same page in the Android platform.
 
-Example
+### Example
 
-{% highlight voltMx %}//The below function is the call back for handleRequest event
+{% highlight voltMx %}
+//The below function is the call back for handleRequest event
 function handleRequestCallback(browserWidget, params) {
     voltmx.print("handleRequest event triggered");
     voltmx.print("Original URL" + params["originalURL"]);
@@ -128,7 +134,7 @@ function handleRequestCallback(browserWidget, params) {
 frmobj.brw1.handleRequest = handleRequestCallback
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iPhone
 *   iPad
@@ -137,17 +143,19 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onFailure Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onFailure Event</summary>
 
 * * *
 
 An event callback which gets invoked by the platform when the given URL fails to load. The behavior of this callback has changed in Iris 7.3 and may require changes to your code, particularly the addition of the errorObject parameter.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 onFailure()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 eventObject
 
@@ -157,15 +165,15 @@ errorObject
 
 Required. An object that provides details for the error. See Remarks for possible values. This value is new in Iris 7.3.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The errorObject is a dictionary object that has these predefined keys:
 
-*   errorCode - the Volt MX error code
+*   errorCode - the VoltMX error code
 *   errorMessage – error message
 *   errorDetails – platform specific error details
 *   httpStatusCode - Actual HTTP status code. For iOS this will be set to -1.
@@ -198,7 +206,7 @@ This event is called only for the given request URL, but not for the subsequent 
 
 This event is also not called when .htmlString](Browser_Properties.html.htmlString) is set to the web widget.
 
-Example
+### Example
 
 {% highlight voltMx %}
 // This function is the callback for the onFailure event that checks for iOS native error -999
@@ -211,7 +219,7 @@ function onFailureCallback(eventObj, error) {
 frmBrowser.myBrowser.onFailure=onFailureCallback;				
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -221,17 +229,19 @@ Not available on SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onPageFinished Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onPageFinished Event</summary>
 
 * * *
 
 This event is sent when a page is finished loading.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 onPageFinished (eventobject, params)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 eventobject
 
@@ -241,7 +251,7 @@ params
 
 Optional. An object that identifies the url parameters as key-values pair. See Remarks for possible values.
 
-Remarks
+### Remarks
 
 The following are the parameters of the params object.
 
@@ -253,9 +263,10 @@ _queryParams\[Object\] - Optional_
 
 Specifies the dictionary containing the query parameters passed to the URL as key, values in the dictionary.
 
-Example
+### Example
 
-{% highlight voltMx %}Form2.brw1.onPageFinished = onPageFinishedCallback;
+{% highlight voltMx %}
+Form2.brw1.onPageFinished = onPageFinishedCallback;
 
 function onPageFinishedCallback(eventobject, params) {
 
@@ -264,7 +275,7 @@ function onPageFinishedCallback(eventobject, params) {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -272,17 +283,19 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onPageStarted Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onPageStarted Event</summary>
 
 * * *
 
 This event is sent when a page starts loading.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 onPageStarted (eventObject, params)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 eventObject
 
@@ -292,7 +305,7 @@ params
 
 Optional. An object that identifies the url parameters as key-values pair. See Remarks for possible values.
 
-Remarks
+### Remarks
 
 The following are the parameters of the params object.
 
@@ -304,9 +317,10 @@ _queryParams\[Object\] - Optional_
 
 Specifies the dictionary containing the query parameters passed to the URL as key, values in the dictionary.
 
-Example
+### Example
 
-{% highlight voltMx %}Form2.brw1.onPageStarted = onPageStartedCallback;
+{% highlight voltMx %}
+Form2.brw1.onPageStarted = onPageStartedCallback;
 
 function onPageStartedCallback(eventobject, params) {
 
@@ -323,27 +337,30 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onProgressChanged Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onProgressChanged Event</summary>
 
 * * *
 
 The onProgressChanged callback event shows you the progress of the page loading in the Browser Widget. The platform invokes the event when the page is loading.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 onProgressChanged
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 When you set the onProgressChanged event in the Browser Widget, the progress value of the loading page is passed as a parameter to the callback.
 
-Example
+### Example
 
-{% highlight voltMx %}// The following function is the callback for onProgressChanged event
+{% highlight voltMx %}
+// The following function is the callback for onProgressChanged event
 function onProgessChangedCallback(progress) {
     alert("Progress value -" + progress);
 }
@@ -351,24 +368,26 @@ function onProgessChangedCallback(progress) {
 frmBrowser.myBrowser.onProgressChanged = onProgessChangedCallback;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available only on the Android platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onReachingBegining Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onReachingBegining Event</summary>
 
 * * *
 
 Specifies the scrolling events which gets called when scrolling reaches beginning of the widget.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 onReachingBegining()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 browser
 
@@ -383,13 +402,14 @@ Specifies the direction in which the scroll box must scroll. Following are the a
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onReachingBeginning event callback to a Browser widget.
+{% highlight voltMx %}
+//Sample code to set onReachingBeginning event callback to a Browser widget.
 
 frmBrowser.myBrowser.scrollingEvents={
         onReachingBeginning: onReachingBeginningCallBCk
@@ -400,23 +420,25 @@ function onReachingBeginningCallBCk (webwidget, scrollDirection) {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on iPad platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onReachingEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onReachingEnd Event</summary>
 
 * * *
 
 Specifies the scrolling events which gets called when scrolling reaches the end of the widget.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 onReachingEnd()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 browser
 
@@ -431,13 +453,14 @@ Specifies the direction in which the scroll box must scroll. Following are the a
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onReachingEnd event callback to a Browser widget.
+{% highlight voltMx %}
+//Sample code to set onReachingEnd event callback to a Browser widget.
 
 frmBrowser.myBrowser.scrollingEvents={
         onReachingEnd: onReachingEndCallBCk
@@ -448,35 +471,37 @@ function onReachingEndCallBCk (webwidget, scrollDirection) {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on iPad platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onReceive Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onReceive Event</summary>
 
 * * *
 
 This event is triggered whenever a page is loaded that has an event callback such as digest authentication.
 
-Handler signature
+### Handler signature
 
 onReceive (eventType)
 
-Parameters
+### Parameters
 
 eventType
 
 Required. The constant that identifies the event type. See Remarks for possible values.
 
-Remarks
+### Remarks
 
 The only possible value for eventType is constants.WEBWIDGET\_RECEIVE\_TYPE\_HTTP\_AUTH
 
-Example
+### Example
 
-{% highlight voltMx %}Form2.brw1.onReceive = onReceiveCallback;
+{% highlight voltMx %}
+Form2.brw1.onReceive = onReceiveCallback;
 
 function onReceiveCallback(eventtype) {
 
@@ -484,24 +509,25 @@ function onReceiveCallback(eventtype) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
     
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSafeBrowsingHit Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onSafeBrowsingHit Event</summary>
 
 * * *
 
 This event registers a callback that notifies the application that a loading URL has been flagged by **Safe Browsing**. If this event callback is not registered, the application displays a default interstitial page.
 
-Handler signature
+### Handler signature
 
 onSafeBrowsingHit()
 
-Parameters
+### Parameters
 
 *   **browserwidgetref** \[widgetref\]: This parameter provides the widget reference of the Browser widget that has triggered the **onSafeBrowsingHit** event.
 *   **requestUrl**\[String\]: This parameter provides the URL which triggered the _onSafeBrowsingHit_ event.
@@ -513,13 +539,14 @@ Parameters
     *   _constants.BROWSER\_SAFE\_BROWSING\_THREAT\_PHISHING_
     *   _constants.BROWSER\_SAFE\_BROWSING\_THREAT\_UNWANTED\_SOFTWARE_
 
-Remarks
+### Remarks
 
 *   You should use the **onSafeBrowsingHit** callback and the [setSafeBrowsingResponse](Browser_Methods.html#setSafeBrowsingResponse) Method together to create a custom interstitial page when the Browser widget loads a flagged URL.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample snippet for creating a custom interstitial flexContainer inside the form:frmBrowser with the browser widget:myBrowser*/
+{% highlight voltMx %}
+/*Sample snippet for creating a custom interstitial flexContainer inside the form:frmBrowser with the browser widget:myBrowser*/
 //setting safebrowsing hit callback
 frmBrowser.myBrowser.onSafeBrowsingHit = onSafeBrowsingHitForCustomInterstition;
 var reqUrl;
@@ -547,29 +574,31 @@ The screenshot of the custom interstitial FlexContainer created by using the Exa
 
 ![](Resources/Images/browserInterstition_406x218.png)
 
-Platform Availability
+### Platform Availability
 
 *   Android(API Level 27 and later)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
+### Syntax
 
 onScrollWidgetPosition()
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight voltMx %}
+var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -583,36 +612,39 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not Accessible from IDE
 *   Android, iOS, SPA, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSuccess Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onSuccess Event</summary>
 
 * * *
 
 An event callback which gets invoked by the platform when the given request URL is successful in loading the data.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 onSuccess()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is called every time the page is loaded. This event is not called when .htmlString](Browser_Properties.html.htmlString) is set to the web widget.
 
 This event gets called whenever the URL is loaded, or you navigate from one URL to another, or the browser URL internally redirects to another URL. This event is also called whenever the content is loaded, and when a URL contains any third party content using an iframe.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to onSuccess event of a Browser widget.  
+{% highlight voltMx %}
+//Sample code to set a callback to onSuccess event of a Browser widget.  
   
 frmBrowser.myBrowser.onSuccess= onSuccessCallback;
 
@@ -624,7 +656,7 @@ function onSuccessCallback(browser) {
 
 For more information about defining an action sequence for this event, see _Event Editor_ in the _VoltMX IrisUser Guide_.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Desktop Web, and SPA.
 

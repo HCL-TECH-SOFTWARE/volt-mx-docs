@@ -25,7 +25,7 @@ For installing Volt MX Foundry Database for Oracle, complete the following steps
 > **_Important:_**  Ensure that a dedicated database user must not be an application user for installation of database. A dedicated user gets logged into audit logs.  
 After granting privileges, disconnect existing session, and use new session in order to get the new privileges loaded to the user.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details on Oracle tablespaces and connection details:](javascript:void(0);)
+<details close markdown="block"><summary>Click here for more details on Oracle tablespaces and connection details:</summary>
 
 *   Unicode support needs to be enabled in Database. This is possible only while creating a database needed for Volt MX Foundry with a Unicode character set with the properties for Database character set as `AL32UTF8` and National character set as `AL16UTF16`.
 
@@ -40,10 +40,16 @@ After granting privileges, disconnect existing session, and use new session in o
 *   Using an SQLPlus or another Database client, connect to you Oracle database as Sysdba.  
     Replace the <DATA\_FILE\_PATH> with actual data file path on the Oracle database server.  
     
-    CREATE TABLESPACE MF\_DATA DATAFILE '<DATA\_FILE\_PATH>/MF\_DATA\_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M; CREATE TABLESPACE MF\_INDEX DATAFILE '<DATA\_FILE\_PATH>/MF\_INDEX\_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M; CREATE TABLESPACE MF\_LOB\_DATA DATAFILE '<DATA\_FILE\_PATH>/MF\_LOB\_DATA\_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
+    {% highlight VoltMx %}
+    CREATE TABLESPACE MF\_DATA DATAFILE '<DATA\_FILE\_PATH>/MF\_DATA\_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
+    CREATE TABLESPACE MF\_INDEX DATAFILE '<DATA\_FILE\_PATH>/MF\_INDEX\_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
+    CREATE TABLESPACE MF\_LOB\_DATA DATAFILE '<DATA\_FILE\_PATH>/MF\_LOB\_DATA\_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
+    {% endhighlight %}
     
 *   Create a dedicated database user with default tablespaces (MF\_DATA) and grant quota to two other tablespaces (MF\_INDEX and MF\_LOB\_DATA tablespaces).
-    *   To create a user based on your Oracle 11g or 12c without PDB, which will be used in the JDBC.{% highlight voltMx %}CREATE USER <install-user> IDENTIFIED BY <password> DEFAULT TABLESPACE MF_DATA TEMPORARY TABLESPACE TEMP PROFILE DEFAULT;
+    *   To create a user based on your Oracle 11g or 12c without PDB, which will be used in the JDBC.
+    	{% highlight VoltMx %}
+	CREATE USER <install-user> IDENTIFIED BY <password> DEFAULT TABLESPACE MF_DATA TEMPORARY TABLESPACE TEMP PROFILE DEFAULT;
         GRANT DBA TO <install-user>;
         ALTER USER <install-user> QUOTA UNLIMITED ON MF_DATA;
         ALTER USER <install-user> QUOTA UNLIMITED ON MF_INDEX;
@@ -61,7 +67,7 @@ After granting privileges, disconnect existing session, and use new session in o
 
 *   If you are using Volt MX Foundry installer to setup Volt MX Foundry database, then please choose the below options based on your Oracle database version.
     
-    *   If Oracle database is created with PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as `pdborcl` or `pdbmfdb`{% highlight voltMx %}jdbc:oracle:thin:@<Database_Host_IP>:1521/pdbmfdb 
+    *   If Oracle database is created with PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as `pdborcl` or `pdbmfdb`{% highlight VoltMx %}jdbc:oracle:thin:@<Database_Host_IP>:1521/pdbmfdb 
         {% endhighlight %}<br>For example: jdbc:oracle:thin:@192.168.1.2:1521/pdbmfdb<br>
 *   But if your database is 11g or 12c without PDB, then you can use `ORACLE_SID` in the JDBC URL such as  `orcl`  or  `mfdb`.{% highlight voltMx %}jdbc:oracle:thin:@<Database_Host_IP>:1521:mfdb
         {% endhighlight %}<br>For example: jdbc:oracle:thin:@192.168.1.2:1521:mfdb

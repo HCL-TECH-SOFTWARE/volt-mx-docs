@@ -21,7 +21,7 @@ The Upgrade Mechanism for App Version on EAS feature is supported for Cloud and 
 Upgrade Policy Options Available for Apps
 -----------------------------------------
 
-Volt MX  Foundry provides a series of options to upgrade apps. You can access the **Upgrade Policy** functionality in the **Environments > Published Apps >** **Published Channel Assets**, and then **More Options**.
+Volt MX Foundry provides a series of options to upgrade apps. You can access the **Upgrade Policy** functionality in the **Environments > Published Apps >** **Published Channel Assets**, and then **More Options**.
 
 You can configure the available upgrade options suitable to your business requirements, as follows:
 
@@ -50,71 +50,68 @@ Prerequisites
 *   Access to a Volt MX Cloud Build Environment version, Iris, and Foundry App Server for publishing apps to EAS.
 *   EAS V3.1.0  
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details on](javascript:void(0);) **EAS and Platform Versions Compatibility Chart**  
     
-    The following table details the supported versions of EAS source and Platform.
+<details close markdown="block"><summary>Click here for more details on</summary> **EAS and Platform Versions Compatibility Chart**  
     
-    > **_Important:_** If you are upgrading to EAS V 2.0.1 or a higher version, you must restart the server.
+The following table details the supported versions of EAS source and Platform.
+
+> **_Important:_** If you are upgrading to EAS V 2.0.1 or a higher version, you must restart the server.
+
+| EAS Source App version || **Platform Supported Version** |||
+| --- | --- | --- | --- | --- |
+| Client App (Store.zip) | Server App (VoltMX App Store.zip) | Foundry |   Iris | Middleware |
+| --- | --- | --- | --- | --- |
+| 1.0.0
+
+<details close markdown="block"><summary>Features</summary>
     
-    | EAS Source App version || **Platform Supported Version** |||
-    | --- | --- | --- | --- | --- |
-    | Client App (Store.zip) | Server App (VoltMX App Store.zip) | Foundry |   Iris | Middleware |
-    | --- | --- | --- | --- | --- |
-    | 1.0.0
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
+Initial Release
+
+| 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
+| 1.1.0
     
-    Initial Release
+</details>
+<details close markdown="block"><summary>Features</summary>
     
+Support for Web apps
+
+| 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
+| 2.0.0
     
+</details>
+<details close markdown="block"><summary>Features</summary>
     
-     | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
-    | 1.1.0
+Support for Android 10Support for iOS 13Push Notifications
+
+| 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
+| 2.0.1
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Features</summary>
     
-    Support for Web apps
+Bug fixes
+
+| 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
+| 3.0.1
     
+</details>
+<details close markdown="block"><summary>Features</summary>
     
+Support for Desktop ViewHelp section in iOS Native Apps
+
+| 3.0.1 | NA | V9 GA | 8.4.3.10 |
+| 3.1.0
     
-     | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
-    | 2.0.0
+</details>
+<details close markdown="block"><summary>Features</summary>
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
-    
-    Support for Android 10Support for iOS 13Push Notifications
-    
-    
-    
-     | 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
-    | 2.0.1
-    
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
-    
-    Bug fixes
-    
-    
-    
-     | 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
-    | 3.0.1
-    
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
-    
-    Support for Desktop ViewHelp section in iOS Native Apps
-    
-    
-    
-     | 3.0.1 | NA | V9 GA | 8.4.3.10 |
-    | 3.1.0
-    
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
-    
-    Support for Upgrade Policy
-    
-    
-    
-     | 3.1.0 | NA | V9 SP1 | V9 SP1 |
-    | **SP**: Service Pack**FP**: Fix Pack |||||
-    
+Support for Upgrade Policy
+
+| 3.1.0 | NA | V9 SP1 | V9 SP1 |
+| **SP**: Service Pack**FP**: Fix Pack |||||
+
+</details>  
+</details>   
 
 Apps Eligible for Upgrade Policy
 --------------------------------

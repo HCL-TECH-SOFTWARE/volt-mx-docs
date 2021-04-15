@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                               
-
 
 Calendar Events
 ===============
@@ -12,21 +10,23 @@ Calendar widget has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
 This event is invoked for every widget when the widget position and dimensions are computed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked for all the widgets placed inside flex containers. This event is invoked in the order in which the widgets are added to the widget hierarchy and expect the frame property of the widget is calculated and available for use within this event.
 
@@ -34,9 +34,10 @@ This event is used to set the layout properties of child widgets in the relation
 
 The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}
+//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -47,7 +48,7 @@ function doLayoutButton1(){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -56,7 +57,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onAppointmentTap Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onAppointmentTap Event</summary>
 
 * * *
 
@@ -66,15 +68,17 @@ This event is triggered when you tap any of the existing appointments in the fol
 *   CALENDAR\_VIEW\_TYPE\_WEEK\_VIEW
 *   CALENDAR\_VIEW\_TYPE\_MONTH\_VIEW
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onAppointmentTap()
+{% endhighlight %}
 
-Remarks
+### Remarks
 
 The details of the appointment tapped is returned with a unique id in the callback.
 
-{% highlight voltMx %}{  
+{% highlight VoltMx %}{  
   "uniqueid":"fc309",  
   "startDate":"2014-10-12 00:00:00",  
   "endDate":"2014-10-13 04:00:00",  
@@ -89,9 +93,10 @@ The details of the appointment tapped is returned with a unique id in the callba
 
 The unique id, identifies the appointment displayed in these calendar views.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onAppointmentTap event callback to Calendar widget.
+{% highlight VoltMx %}
+//Sample code to set onAppointmentTap event callback to Calendar widget.
 
 frmCalendar.myCalendar.onAppointmentTap=onAppointmentTapCallBck;
 
@@ -101,34 +106,38 @@ function onAppointmentTapCallBck(calendar){
 }
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available on Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDone Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDone Event</summary>
 
 * * *
 
 This event is triggered when the _Done_ or _Enter_ button is clicked or tapped after the calendar opens.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onDone()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   In Desktop Web platform, this event is fired when the enter key is pressed when the Calendar widget is in focus.
 *   In iOS platform, the Done button is available only when the value of the [inputAccessoryViewType](Calendar_Properties.html#inputAccessoryViewType) property is `CALENDAR_INPUTACCESSORYVIEW_NEXTPREV`. So in iOS platform, the `onDone` event is fired only when the value of inputAccessoryViewType property is `CALENDAR_INPUTACCESSORYVIEW_NEXTPREV`.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onDone event callback to a Calendar widget.
+{% highlight VoltMx %}
+//Sample code to set the onDone event callback to a Calendar widget.
 
 frmCalendar.myCalendar.onDone=onDoneCallback;
 
@@ -138,30 +147,34 @@ function onDoneCallback(calendarWdg){
 
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   iOS, Desktop Web, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onEmptyCellTap Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onEmptyCellTap Event</summary>
 
 * * *
 
 This event is triggered when you tap on any of the empty cells of the calendar day view.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onEmptyCellTap()
+{% endhighlight %}
 
-Remarks
+### Remarks
 
 This event is applicable only when the viewType is set to CALENDAR\_VIEW\_TYPE\_DAY\_VIEW. The arguments holds the value for the date time details of the empty cell being tapped in the following format "dd-MM-yyyy HH:mm". For example, 13-10-2014 10:20.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onEmptyCellTap event callback to Calendar widget.
+{% highlight VoltMx %}
+//Sample code to set onEmptyCellTap event callback to Calendar widget.
 
 frmCalendar.myCalendar.onEmptyCellTap=onEmptyCellTapCallBck;
 
@@ -171,29 +184,33 @@ function onEmptyCellTapCallBck(calendar){
 }
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available on Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onScrollWidgetPosition()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}
+var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -207,34 +224,38 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not Accessible from IDE
 *   Android, iOS, SPA, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSelection Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onSelection Event</summary>
 
 * * *
 
 This event is triggered when an item is selected or deselected.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onSelection()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 On Android platform, this event works only from Android OS version 4.0 and later.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onSelection event callback to Calendar widget.
+{% highlight VoltMx %}
+//Sample code to set onSelection event callback to Calendar widget.
 
 frmCalendar.myCalendar.onSelection=onSelectionCallBck;  
   
@@ -245,23 +266,26 @@ function onSelectionCallBck(calendar, isValidDateSelected)
 }
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touch is released from the touch surface.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchEnd ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -281,17 +305,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchEndCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -300,23 +325,26 @@ Example
 Form1.widget1.onTouchEnd = onTouchEndCallback;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchMove Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchMove Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the touch moves on the touch surface continuously until movement ends.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchMove ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -336,17 +364,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchMoveCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -355,21 +384,24 @@ Example
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touches the touch surface.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchStart ()
+{% endhighlight %}
 
 Optional Parameters
 
@@ -391,17 +423,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchStartCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -411,9 +444,10 @@ Form1.widget1.onTouchStart = onTouchStartCallback;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
+</details>
 

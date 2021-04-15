@@ -12,109 +12,119 @@ The properties for TabPane widget are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[activeFocusSkin Property](javascript:void(0);)
+
+<details close markdown="block"><summary>activeFocusSkin Property</summary>
 
 * * *
 
 This is a skin property. This property specifies the skin that is to be applied when a TabPane is active and focused.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 activeFocusSkin
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the activeFocusSkin property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the activeFocusSkin property of a TabPane widget.
 
 frmTab.myTab.activeFocusSkin="aFSkin";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[activeSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>activeSkin Property</summary>
 
 * * *
 
 This is a skin property. Skin to be applied when a TabPane is active.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 activeSkin
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the activeSkin property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the activeSkin property of a TabPane widget.
 
 frmTab.myTab.activeSkin="aSkin";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[activeTabs Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>activeTabs Property</summary>
 
 * * *
 
 Indicates the selected Tabs indices. Index starts from 0. Specifies the Tab that must be displayed as the default open Tab.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 activeTabs
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Array
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is '1' (Tab 1 will be displayed as the Active Tab)
 
 If you want to set another Tab as Active Tab, select that Tab in the drop-down list. Multiple indices in activeTabs is only appropriate for collapsible view currently. For all the remaining views,activeTabs always respects only one selected item i.e first element in the array.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the activeTabs property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the activeTabs property of a TabPane widget.
 
 frmTab.myTab.activeTabs=[0, 1, 2, 3, 4];
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[autogrowMode Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>autogrowMode Property</summary>
 
 * * *
 
@@ -122,11 +132,13 @@ The `autogrowMode` property is used to set the height of the TabPane widget dyna
 
 This property is not applicable when the [viewType](#viewType) property has the value: `TABPANE_VIEW_TYPE_PAGEVIEW` .
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 autogrowMode
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Constant
 
@@ -135,11 +147,11 @@ You can add any of the following constants to the autogrowMode property.
 *   `voltmx.flex.AUTOGROW_NONE`: When the autogrowMode property is assigned this value, the height of the TabPane widget does not increase dynamically. The default value is applied using the values in [minHeight](#minHeigh) and [maxHeight](#maxHeigh) properties. This is the default value of this property.
 *   `voltmx.flex.AUTOGROW_HEIGHT` : When the autogrowMode property is assigned this value, the height of the TabPane widget increases dynamically. The height of the TabPane widget is dependent on the height of the selected tab.
 
-Read/Write
+<b>Read/Write</b>
 
 Read +Write
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** If one or all the child widgets height or other properties such as centerY, top, bottom, minHeight or maxHeight are used in determining the height given in percentage (%), then the autogrowMode property will not work for the selected tab and the height of the TabPane widget falls back to the default configuration value (220 dp).
 
@@ -149,9 +161,9 @@ Remarks
 *   If the autogrowMode property is configured as voltmx.flex.AUTOGROW\_HEIGHT, then preferred Size (based on content in the selected tab ) is computed, and min/max constraints are applied.
 *   In a TabPane widget with Collapsible view, when the value of the autogrowMode property is voltmx.flex.AUTOGROW\_HEIGHT,the height of the widget is the total height of all the expanded tabs.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the autogrowMode property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the autogrowMode property of a TabPane widget.
 //The TabPane widget will use the set height property to derive height
 frmHome.myTab1.autogrowMode=voltmx.flex.AUTOGROW_NONE;
 
@@ -159,13 +171,14 @@ frmHome.myTab1.autogrowMode=voltmx.flex.AUTOGROW_NONE;
 frmHome.autogrow1.autogrowMode=voltmx.flex.AUTOGROW_HEIGHT;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
@@ -175,27 +188,29 @@ The bottom property determines the position of the bottom edge of the widget’s
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 bottom
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -203,14 +218,15 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA , and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
@@ -218,25 +234,27 @@ This property determines the center of a widget measured from the left bounds of
 
 The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 centerX
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -244,14 +262,15 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
@@ -259,23 +278,25 @@ This property determines the center of a widget measured from the top bounds of 
 
 The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 centerY
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
@@ -285,34 +306,37 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cursorType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cursorType Property</summary>
 
 * * *
 
 In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 cursorType
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String.
 
 You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 To add the `cursorType` property using Volt MX Iris in a Desktop Web application, follow these steps.
 
@@ -329,9 +353,9 @@ To add the `cursorType` property using Volt MX Iris in a Desktop Web application
     You can see that the **Cursor Type** property has been added under the **General** section.
 8.  Select a value from the drop-down list to set the **Cursor Type** for the widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %} //This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
   
@@ -339,14 +363,15 @@ frmButton.myButton.cursorType = "wait";
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
@@ -354,19 +379,21 @@ The `enable` property is used to control the actionability of the widgets. In a 
 
 This is a constructor level property and applicable for all widgets in Volt MX Iris.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 enable
+{% endhighlight %}
 
-Type
+>b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value of this property is true.
 
@@ -374,16 +401,16 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
   
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
@@ -391,43 +418,47 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE.
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -435,19 +466,21 @@ It determines the height of the widget and measured along the y-axis.
 
 The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 height
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number, String, and Constant
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 Following are the available measurement options:
 
@@ -457,9 +490,9 @@ Following are the available measurement options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}/*Sample code to set the height property for a TabPane widget by using DP, Percentage and Pixels.*/
+{% highlight VoltMx %}/*Sample code to set the height property for a TabPane widget by using DP, Percentage and Pixels.*/
 frmTab.myTab.height="50dp";
 
 frmTab.myTab.height="10%";
@@ -468,7 +501,7 @@ frmTab.myTab.height="10px";
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS
@@ -478,27 +511,30 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 id is a unique identifier of a TabPane consisting of alpha numeric characters. Every TabPane should have a unique id within a Form.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read only
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Defining the properties for TabPane with id:"tPane"
+{% highlight VoltMx %}//Defining the properties for TabPane with id:"tPane"
 var tabBasic = {
     id: "tPane",
     info: {
@@ -533,64 +569,70 @@ var tabPane = new voltmx.ui.TabPane(tabBasic, tabLayout, tabPSP);
 alert("TabPane id is ::" + tabPane.id);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[inactiveSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>inactiveSkin Property</summary>
 
 * * *
 
 Skin to be applied for all inactive tabs.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 inactiveSkin
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the inactiveSkin property for a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the inactiveSkin property for a TabPane widget.
 frmTab.myTab.inactiveSkin="inActiveSkin";
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JS Object with the key value pairs that a developer can use to store the context with the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This will help in avoiding the globals to most part of the programming.
 
@@ -598,7 +640,7 @@ This is a **non-Constructor property**. You cannot set this property through wid
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}var inf = {
+{% highlight VoltMx %}var inf = {
     a: "hello"
 };
 widget.info = inf; //works
@@ -608,9 +650,9 @@ widget.info.a = "hello world";
 //widget.info.a will have old value as hello.
 {% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set info property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set info property of a TabPane widget.
 
 frmTab.myTab.info = {
    key: "TabPane"
@@ -621,63 +663,69 @@ voltmx.print("TabPane widget info:" +frmTab.myTab.info);
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isMaster Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>isMaster Property</summary> 
 
 * * *
 
 Specifies whether the container is a master container.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 isMaster
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read Only after initialization.
 
-Remarks
+<b>Remarks</b>
 
 If the `isMaster` property is true, the current widget is a master container and all of the rules and limitations of master containers apply to it. For more information, please see [Masters](Masters.html) in the Overviews section of this guide, as well as [Using Masters]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html) in the Volt MX Iris [User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 Your app can set the `isMaster` property in this container's constructor. After that, this property is read-only.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var isMasterContainer = tabPane1.isMaster;
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
 This property controls the visibility of the TabPane on the form.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is true.
 
@@ -685,37 +733,41 @@ If set to _false,_ the widget is not displayed.
 
 If set to _true,_ the widget is displayed.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set isVisible property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set isVisible property of a TabPane widget.
 
 frmTab.myTab.isVisible=true;
 {% endhighlight %}
 
 > **_Note:_** You can set the visibility of a widget dynamically from code using the setVisibility method.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layoutMeta Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layoutMeta Property</summary>
 
 * * *
 
 A custom Object with the key, value pairs that developer can use to provide the meta info about the grid layout.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 layoutMeta
+{% endhighlight %}
 
-Type
+
+<b>Type</b>
 
 JSObject
 
-Remarks
+<b>Remarks</b>
 
 The following are the mandatory keys required to be part of the Meta. These are not visible PSPs in IDE. The data for layoutmeta data is set when you set grid layout view properties for rows and columns.
 
@@ -727,9 +779,9 @@ The following are the mandatory keys required to be part of the Meta. These are 
 
 The sum total of the % widths of each of the columns in the grid layout should add up to 100%
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set layoutMeta property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set layoutMeta property of a TabPane widget.
 
 frmTab.myTab.layoutMeta = {
  cols: 8,
@@ -745,27 +797,30 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layoutType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layoutType Property</summary>
 
 * * *
 
 Defines the type of the layout of widget. Layout type can be grid or normal.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 layoutType
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Remarks
+<b>Remarks</b>
 
 Layout type is not visible as a property. It is set when the user applies XYLayout or Grid Layout on a form.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set layoutType property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set layoutType property of a TabPane widget.
 
 frmTab.myTab.layoutType =constants.CONTAINER_LAYOUT_GRID;
 {% endhighlight %}
@@ -777,7 +832,8 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[left Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>left Property</summary>
 
 * * *
 
@@ -785,25 +841,27 @@ This property determines the lower left corner edge of the widget and is measure
 
 The left property determines the position of the left edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 left
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
@@ -811,14 +869,15 @@ frmHome.widgetID.left = "10%";
 frmHome.widgetID.left = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -826,21 +885,23 @@ This property specifies the maximum height of the widget and is applicable only 
 
 The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 maxHeight
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -848,14 +909,15 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -863,21 +925,23 @@ This property specifies the maximum width of the widget and is applicable only w
 
 The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 maxWidth
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -885,14 +949,15 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -900,21 +965,23 @@ This property specifies the minimum height of the widget and is applicable only 
 
 The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 minHeight
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -922,14 +989,15 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -937,21 +1005,23 @@ This property specifies the minimum width of the widget and is applicable only w
 
 The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 minWidth
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read only
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -959,32 +1029,35 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pageSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pageSkin Property</summary>
 
 * * *
 
 Specifies the skin for page indicator.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 pageSkin
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is Skin Defaults ( blue color strip is applied for the page indicator).
 
@@ -992,14 +1065,14 @@ This property is applicable only when viewType is set as TABPANE\_VIEW\_TYPE\_PA
 
 ![](Resources/Images/pageSkin_297x317.png)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set pageSkin property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set pageSkin property of a TabPane widget.
 
 frmTab.myTab.pageSkin="pSkin";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iPhone
@@ -1007,21 +1080,24 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[progressIndicatorColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>progressIndicatorColor Property</summary>
 
 * * *
 
 Specifies the color of the progress indicator as white or grey.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 progressIndicatorColor
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is PROGRESS\_INDICATOR\_COLOR\_WHITE.
 
@@ -1032,14 +1108,14 @@ The available options are:
 
 To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set progressIndicatorColor property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set progressIndicatorColor property of a TabPane widget.
 
 frmTab.myTab.progressIndicatorColor=constants.PROGRESS_INDICATOR_COLOR_GREY;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iPhone
@@ -1047,7 +1123,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -1057,7 +1134,7 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1080,21 +1157,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No (only during widget-construction time)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -1119,14 +1198,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -1136,7 +1216,7 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1159,21 +1239,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No (only during widget-construction time)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -1198,14 +1280,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -1215,7 +1298,7 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1238,21 +1321,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No (only during widget-construction time)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -1278,50 +1363,54 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainPositionInTab Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainPositionInTab Property</summary>
 
 * * *
 
 Indicates whether each individual tab should retain its scroll position when the TabPanes are switched over.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 retainPositionInTab
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is false.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the retainPositionInTab property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the retainPositionInTab property of a TabPane widget.
 
 frmTab.myTab.retainPositionInTab=true;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms except Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -1331,25 +1420,27 @@ The right property determines the position of the right edge of the widget’s b
 
 The right property is used only if the width property is not provided.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 right
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -1357,28 +1448,31 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[screenLevelWidget Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>screenLevelWidget Property</summary>
 
 * * *
 
 Specifies whether the widget should occupy the whole container or not.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 screenLevelWidget
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is false.
 
@@ -1390,73 +1484,79 @@ You cannot place more than one TabPane as a screen level widget inside a form. I
 
 Do not set the screen level widget property to true for more than one widget in the form. If you have multiple widgets with this property set as true, there may be issues with how information is displayed along with some scrolling issues.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the screenLevelWidget property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the screenLevelWidget property of a TabPane widget.
 
 frmTab.myTab.screenLevelWidget=true;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms except Desktop Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollsToTop Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollsToTop Property</summary>
 
 * * *
 
 This property enables you to scroll the TabPane to top on tapping a device’s status bar.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 scrollsToTop
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is false.
 
 If this property is true for more than one widget, then this property is not applied to any of the widgets.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the scrollsToTop property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the scrollsToTop property of a TabPane widget.
 
 frmTab.myTab.scrollsToTop=true;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showProgressIndicator Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showProgressIndicator Property</summary>
 
 * * *
 
 Specifies if the progress indicator must be displayed.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 showProgressIndicator
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is true.
 
@@ -1464,14 +1564,14 @@ If set to _false_, the progress indicator is not displayed on the widget.
 
 If set to _true_, the progress indicator is displayed on the widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the showProgressIndicator property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the showProgressIndicator property of a TabPane widget.
 
 frmTab.myTab.showProgressIndicator=true;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iPhone
@@ -1479,70 +1579,77 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[tabHeaderHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>tabHeaderHeight Property</summary>
 
 * * *
 
 Specifies the height of the Tab header in pixels.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 tabHeaderHeight
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value of this property is 64.
 
 This property is applicable only when the viewType is set as TABPANE\_VIEW\_TYPE\_TABVIEW.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the tabHeaderHeight property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the tabHeaderHeight property of a TabPane widget.
 
 frmTab.myTab.tabHeaderHeight=64;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   This property is available on Android/Android Tablet platform
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[tabHeaderTemplate Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>tabHeaderTemplate Property</summary>
 
 * * *
 
 Accepts reference to a box widget which represents a UI template for a custom tab header. The box template is allowed to have only Label, Link, Richtext, Button and Image widgets.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 tabHeaderTemplate
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 voltmx.ui.Box
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
@@ -1550,25 +1657,27 @@ This property determines the top edge of the widget and measured from the top bo
 
 The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 top
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -1576,32 +1685,35 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewConfig Property</summary>
 
 * * *
 
 The view configuration for different view types.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 viewConfig
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 Below are the view configuration properties when the _viewType_ is set as:
 
@@ -1638,9 +1750,9 @@ The viewConfig property accepts JSObject with the below key-value pairs.
 *   **headerPosition**: Specifies the position of the header.It can be set to :TAB\_HEADER\_POSITION\_TOP, TAB\_HEADER\_POSITION\_BOTTOM, TAB\_HEADER\_POSITION\_LEFT, and TAB\_HEADER\_POSITION\_RIGHT.
 *   **headerContainerWeight:** Specifies percentage of width to be allocated to the header. Type: Number, Default: 50%.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the viewConfig property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the viewConfig property of a TabPane widget.
 
 frmTab.myTab.viewConfig = {
  "panoramaTitle": "panorama",
@@ -1649,9 +1761,9 @@ frmTab.myTab.viewConfig = {
 };
 {% endhighlight %}
 
-Example using image objects:
+<b>Example using image objects:</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var imgobj1 = getImageFromLocalStorage("calbtn.png");
 var imgobj2 = getImageFromLocalStorage("zoomout.png");
 var viewConfig1 = {	
@@ -1680,7 +1792,7 @@ var viewConfig1 = {
 };					
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available in the IDE
 
@@ -1690,25 +1802,28 @@ Available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewType Property</summary>
 
 * * *
 
 Specifies the view type the Tab Pane should display.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 viewType
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is TABPANE\_VIEW\_TYPE\_TABVIEW.
 
@@ -1724,35 +1839,38 @@ Sections are supported only when the viewType is set as TABPANE\_VIEW\_TYPE\_TAB
 
 TABPANE\_VIEW\_TYPE\_PAGEVIEW is always screen level irrespective of whether the value for [screenLevelWidget](#screenLe) property is set to true or false.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the viewType property of a TabPane widget.
+{% highlight VoltMx %}//Sample code to set the viewType property of a TabPane widget.
 
 frmTab.myTab.viewType= constants.TABPANE_VIEW_TYPE_TABVIEW;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetSwipeMove Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetSwipeMove Property</summary>
 
 * * *
 
 This property is used to enable and configure left or right swipe actions for a widget. The widgetSwipeMove Property can be used for all widgets . The most common use case is for implementing swipe action for individual rows in Segment.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 widgetSwipeMove
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
@@ -1764,7 +1882,7 @@ The following table consists of the parameters of the _callback_ parameter:
 
 <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 111px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 93px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter consists of the widget handle or ID of the widget on which the swipe action has been performed.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">context</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is applicable only for widgets inside the Segment with row templates. Each context parameter consists of <i>rowIndex</i>, <i>sectionIndex</i> and <i>widgetref</i></td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">rowIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the row index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">sectionIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the section index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetref</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This parameter stores the handle of the Segment containing the swiped widget.</td></tr></tbody></table>
 
-Remarks
+<b>Remarks</b>
 
 *   For a Segment, the **widgetSwipeMove** Property is configured while setting the data of the Segment.
 
@@ -1779,11 +1897,11 @@ Limitations
 *   If the widgetSwipeMove property is configured on a top level Flex container of a segment template, the onRowClick event will not be triggered. - Applicable on iOS, Android, and SPA.
 *   Android limitation: On Android devices, when the user lifts their finger, the transition occurs immediately.
 
-Example
+<b>Example</b>
 
 Following is a code snippet for a mail app. Here we have used a Segment for listing the mail and the _widgetSwipeMove_ Property has been configured for the _SwipeFlex_ FlexContainer.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.  
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.  
 //Here, we have shown how to use the widetSwipeMove property for Button widget.
 /*You need to make a corresponding use of the 
 widgetSwipeMove property for other applicable widgets.*/  
@@ -1819,13 +1937,14 @@ this.view.myButton.widgetSwipeMove=swipeMoveConfig;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android, iOS, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -1833,19 +1952,21 @@ This property determines the width of the widget and is measured along the x-axi
 
 The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 width
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number, String, and Constant
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 Following are the options that can be used as units of width:
 
@@ -1855,9 +1976,9 @@ Following are the options that can be used as units of width:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
@@ -1865,14 +1986,15 @@ frmHome.widgetID.width = "10%";
 frmHome.widgetID.width = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
@@ -1880,19 +2002,21 @@ This property specifies the stack order of a widget. A widget with a higher zInd
 
 The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is 1.
 
@@ -1923,7 +2047,7 @@ flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
@@ -1936,3 +2060,4 @@ Platform Availability
 
 * * *
 
+</details>

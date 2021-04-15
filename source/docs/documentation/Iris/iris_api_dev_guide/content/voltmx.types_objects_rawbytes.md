@@ -5,8 +5,6 @@ category: "iris_api_dev_guide"
                             
 
 
- 
-
 Properties
 ----------
 
@@ -19,17 +17,20 @@ The RawBytes object has the following property:
 
 This API returns the UTF-8 representation of data in the RawBytes. Returns null if the RawBytes object represents a binary data.
 
-**Syntax**
+### Syntax
 
+{% highlight VoltMx %}
 <RawBytes object>.text
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 None
 
-**Example**
+### Example
 
-{% highlight voltMx %} var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var myFileLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myFile.txt";
 var rawBytesObj = new voltmx.io.File(myFileLoc).read();
 if (rawBytesObj === null) {
@@ -39,20 +40,21 @@ if (rawBytesObj === null) {
 }
 {% endhighlight %}
 
-**Return Value**
+### Return Value
 
 String
 
-**Read/ Write**
+### Read/ Write
 
 Read only.
 
-**Platform Availability**
+### Platform Availability
 
 Android
 
 * * *
 </details>
+
 
 Functions
 ---------
@@ -68,17 +70,20 @@ This API clears the content that is held by the RawBytes object.
 
 > **_Note:_** If the RawBytes object contains sensitive text that is generated when data is retrieved from the **TextBox** or **TextArea** widgets with the `isSensitiveText` property enabled, HCL recommends that you clear the content of the object from the app memory using the clear API after the usage of object is done, or the object is no longer needed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 RawBytesObject.clear()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//Example to clear the sensitive text content on Android devices
+{% highlight VoltMx %}
+//Example to clear the sensitive text content on Android devices
 var basicConfig = {  
     id: "textBox1",  
     …,  
@@ -98,15 +103,15 @@ if (voltmx.type(textRawBytes) == "voltmx.types.RawBytes") {
 textRawBytes = null;
 {% endhighlight %}
 
-Return Value
+### Return Value
 
 None
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
@@ -125,17 +130,20 @@ To avoid security issues, the sensitive text held by the Rawbytes Objects (retri
 
 > **_Note:_** If the RawBytes object contains sensitive text that is generated when data is retrieved from the **TextBox** or **TextArea** widgets with the `isSensitiveText` property enabled, HCL recommends that you clear the content of the object from the app memory using the [clear](#clear) API after the usage of object is done, or the object is no longer needed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 RawBytesObject.clone()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//Example to clone an existing RawBytes Object on Android devices
+{% highlight VoltMx %}
+//Example to clone an existing RawBytes Object on Android devices
 var rowItems = Form1.segmentOne.selectedRowItems;  
 var mytext = rowItems[0]["txtSegOne"]["text"];  
 if (voltmx.type(mytext) == "voltmx.types.RawBytes") {  
@@ -144,15 +152,15 @@ var clonedRawBytes = mytext.clone();
 }
 {% endhighlight %}
 
-Return Value
+### Return Value
 
 Returns a new JS RawBytes object cloned from the existing RawBytes object.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
@@ -165,21 +173,24 @@ Platform Availability
 
 This API retrieves the Content Type of the RawBytes object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 RawBytesObject.getContentType()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//The RawBytesObject can be obtained from sources such as TextArea or TextBox widgets with the isSensitiveText property enabled or through FFIs.  
+{% highlight VoltMx %}
+//The RawBytesObject can be obtained from sources such as TextArea or TextBox widgets with the isSensitiveText property enabled or through FFIs.  
 var voltmxrawbytes = rawbytesObject.getContentType();
 {% endhighlight %}
 
-Return Value
+### Return Value
 
 The content type of the RawBytes Object.
 
@@ -189,17 +200,17 @@ Depending on the content type of the RawBytes Object, this API returns one of th
 | --- | --- |
 | voltmx.types.RawBytes.CONTENT\_TYPE\_BYTE\_ARRAY | Specifies that the content type of the RawBytes Object is a Byte array. RawBytes of this type can be retrieved from a [Cryptography API](voltmx.crypto_functions.html#encrypt) after the text is decrypted. |
 | voltmx.types.RawBytes.CONTENT\_TYPE\_CHAR\_ARRAY | Specifies that the content type of the RawBytes Object is a Character array. RawBytes of this type can be retrieved from a TextBox or TextArea widget that has the [isSensitiveText]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/TextBox_Properties.html#isSensitiveText) property enabled. |
-| voltmx.types.RawBytes.CONTENT\_TYPE\_FILE | Specifies that the content type of the RawBytes Object is a File. RawBytes of this type can be retrieved from a [File API](voltmx.io.file_functions.html#volt-mx-io-file-namespace). |
-| voltmx.types.RawBytes. CONTENT\_TYPE\_URI | Specifies that the content type of the RawBytes Object is a URI. RawBytes of this type can be retrieved from a [Camera API](voltmx.camera_functions.html#volt-mx-camera-namespace). |
-| voltmx.types.RawBytes.CONTENT\_TYPE\_BITMAP | Specifies that the content type of the RawBytes Object is a Bitmap. RawBytes of this type can be retrieved from a [Camera API](voltmx.camera_functions.html#volt-mx-camera-namespace). |
+| voltmx.types.RawBytes.CONTENT\_TYPE\_FILE | Specifies that the content type of the RawBytes Object is a File. RawBytes of this type can be retrieved from a [File API](voltmx.io.file_functions.html#voltmx-io-file-namespace). |
+| voltmx.types.RawBytes. CONTENT\_TYPE\_URI | Specifies that the content type of the RawBytes Object is a URI. RawBytes of this type can be retrieved from a [Camera API](voltmx.camera_functions.html#voltmx-camera-namespace). |
+| voltmx.types.RawBytes.CONTENT\_TYPE\_BITMAP | Specifies that the content type of the RawBytes Object is a Bitmap. RawBytes of this type can be retrieved from a [Camera API](voltmx.camera_functions.html#voltmx-camera-namespace). |
 | voltmx.types.RawBytes.CONTENT\_TYPE\_HTTP\_STREAM | Specifies that the content type of the RawBytes Object is a Network Stream. RawBytes of this type can be retrieved from a [network](voltmx.net_functions.html#HttpRequ). |
 | voltmx.types.RawBytes.CONTENT\_TYPE\_NONE | Specifies that the RawBytes Object is empty. RawBytes of this type are set after the [clear](#clear) API is invoked on the RawBytes Object. |
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
@@ -212,17 +223,20 @@ Platform Availability
 
 This API returns the location of rawbytes which can be Android content URI or a file path.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 RawBytesObject.getResourcePath()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %} var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();  
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();  
 var myFileLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myFile.txt";  
 var rawBytesObj = new voltmx.io.File(myFileLoc).read();  
 if (rawBytesObj === null) {  
@@ -233,20 +247,19 @@ if (rawBytesObj === null) {
 
 {% endhighlight %}
 
-Return Value
+### Return Value
 
 | Return Value | Description |
 | --- | --- |
 | String | Returned when file path is found. |
 | Null | Returned when file path is not available. |
 
- 
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -260,28 +273,31 @@ Platform Availability
 
 This API returns the path where the source files of all RawBytes are stored.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 RawBytesObject.getTempPath()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var tempPath = voltmx.types.RawBytes.getTempPath();
+{% highlight VoltMx %}
+var tempPath = voltmx.types.RawBytes.getTempPath();
 {% endhighlight %}
 
-Return Value
+### Return Value
 
 The path of source files of all RawBytes.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
@@ -294,17 +310,20 @@ Platform Availability
 
 This API returns the data as text represented by the RawBytes object. It returns null if the RawBytes object represents binary data.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 RawBytesObject.readAsText()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %} var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();  
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();  
 var myFileLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myFile.txt";  
 var rawBytesObj = new voltmx.io.File(myFileLoc).read();  
 if (rawBytesObj === null) {  
@@ -314,15 +333,15 @@ if (rawBytesObj === null) {
 }
 {% endhighlight %}
 
-Return Value
+### Return Value
 
 String - text available in this rawbytes.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS

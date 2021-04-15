@@ -15,18 +15,22 @@ Accelerometer Functions
 
 The voltmx.accelerometer namespace provides the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.accelerometer.registerAccelerationEvents](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.accelerometer.registerAccelerationEvents</summary>
 
 * * *
 
 Registers event handlers for acceleration events, such as 'shake'.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.accelerometer.registerAccelerationEvents(  
     events)
+{% endhighlight %}
 
-Input Parameters
+
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -34,9 +38,10 @@ Input Parameters
 
  
 
-Example
+**Example**
 
-{% highlight voltMx %}//Defining the shake event handler function
+{% highlight VoltMx %}
+//Defining the shake event handler function
 function onshake() {
     voltmx.print("Shake called");
 }
@@ -55,11 +60,11 @@ function registerAccelerationEvents() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 Event handlers that you set with this function are called asynchronously whenever an accelerometer event occurs. The event handler is triggered only at the end of the event. For example, a `shake` event handler is called after the shaking has stopped, indicating that device motion has occurred. The precision with which a `shake` event can be recognized may vary per platform and depends on the device capability.
 
@@ -69,25 +74,28 @@ The table contained in the _event_ parameter has the following format`: {<event>
 
 > **_Note:_** Currently, shake is the only event that is supported.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA, Desktop Web and Mobile Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.accelerometer.retrieveCurrentAcceleration](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.accelerometer.retrieveCurrentAcceleration</summary>
 
 * * *
 
 Sets callback functions for retrieving the current device acceleration.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.accelerometer.retrieveCurrentAcceleration (  
     onSuccessCallback,  
     onFailureCallback);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -96,11 +104,12 @@ Input Parameters
 
  
 
-Example
+**Example**
 
 Example 1:
 
-{% highlight voltMx %}// Retrieve the current acceleration data 
+{% highlight VoltMx %}
+// Retrieve the current acceleration data 
 
 // onsuccesscallback
 // This method accepts an 'accelerometerdata' object, which contains the current device acceleration values
@@ -121,7 +130,8 @@ function retrieveCurrentAcceleration() {
 
 Example 2:
 
-{% highlight voltMx %}//Displays the accelerometer data in form frmAclMeter1. This is callback function is set by the voltmx.accelerometer.retrievecurrentacceleration function and invoked automatically by the Volt MX Iris API framework when the
+{% highlight VoltMx %}
+//Displays the accelerometer data in form frmAclMeter1. This is callback function is set by the voltmx.accelerometer.retrievecurrentacceleration function and invoked automatically by the Volt MX Iris API framework when the
 retrieval of the current device acceleration is successful.
  
 function onsuccesscallbackretCurrentAcc(accelerometerdata) {
@@ -154,11 +164,11 @@ function retrieveCurrentAcceleration()
 }			
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This function sets twp callback that your app uses for retrieving the current acceleration information from the device. One is called if the acceleration was successfully retrieved, while the other is called if it was not.
 
@@ -185,26 +195,30 @@ The `onFailureCallback` function has no parameters. It enables your app to handl
 
 The two callback functions are invoked asynchronously and this function returns the value immediately without waiting for actual retrieval of the device acceleration data.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA, Desktop Web and Mobile Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.accelerometer.startMonitoringAcceleration](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.accelerometer.startMonitoringAcceleration</summary>
 
 * * *
 
 Starts monitoring the device's acceleration on a continuous basis.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.accelerometer.startMonitoringAcceleration(  
     onSuccessCallback,  
     onFailureCallback,  
     configData);
+{% endhighlight %}
 
-Input Parameters
+
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -214,11 +228,12 @@ Input Parameters
 
  
 
-Example
+**Example**
 
 Example 1:
 
-{% highlight voltMx %}//Start monitoring acceleration
+{% highlight VoltMx %}
+//Start monitoring acceleration
 
 // onSuccessCallback
 // This function accepts an 'accelerometerdata' object, which contains the current device acceleration values 
@@ -242,7 +257,7 @@ function startMonitoringAcceleration() {
 
 Example 2:
 
-{% highlight voltMx %}//To display the accelerometerdata in form frmAclMeter1. This callback function is set by the voltmx.accelerometer.startmonitoringacceleration function and invoked automatically by the Volt MX Iris API Framework when the retrieval of the current device acceleration is successful and there is a change in the device acceleration values because the device has moved.
+{% highlight VoltMx %}//To display the accelerometerdata in form frmAclMeter1. This callback function is set by the voltmx.accelerometer.startmonitoringacceleration function and invoked automatically by the Volt MX Iris API Framework when the retrieval of the current device acceleration is successful and there is a change in the device acceleration values because the device has moved.
  
 function onsuccesscallbackstartmonitoringAcc(startmonitoringdata) {
     frmAclMeter1.lblX.text = startmonitoringdata.x;
@@ -274,11 +289,11 @@ function startmonitoringAcc() {
 }				
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 By calling this function, your app can start monitoring the device acceleration or motion continuously. When there is a change in the device acceleration values because the device moves, the callback functions passed in through this function's parameters are invoked asynchronously. This function returns immediately without waiting for the device initialization for accelerometer.
 
@@ -312,60 +327,67 @@ When your app invokes the `voltmx.accelerometer.startMonitoringAcceleration` fun
 
 > **_Note:_** If you set `onchange` to `false`, it is necessary to specify a `frequency` value or the _onSuccessCallback_ function is never invoked.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA, Desktop Web, and Mobile Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.accelerometer.stopMonitoringAcceleration](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.accelerometer.stopMonitoringAcceleration</summary>
 
 * * *
 
 Stops the device monitoring activity if it is active.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.accelerometer.stopMonitoringAcceleration();
+{% endhighlight %}
 
-Example
+**Example**
 
-{% highlight voltMx %}function stopMonitoringAcceleration() {
+{% highlight VoltMx %}
+function stopMonitoringAcceleration() {
     // Stop the device monitoring activity if it is active.
     voltmx.accelerometer.stopMonitoringAcceleration();
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 If your app has been continuously monitoring the device's motion, it calls the `voltmx.accelerometer.stopMonitoringAcceleration` to stop. Apps can start monitoring the device motion using the [accelerometer.startmonitoringacceleration](#accelero2) function.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA, Desktop Web, and Mobile Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.accelerometer.unregisterAccelerationEvents](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.accelerometer.unregisterAccelerationEvents</summary>
 
 * * *
 
 Unregisters event handlers for the specified acceleration event types.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.accelerometer.unregisterAccelerationEvents(  
     eventTypes);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -373,9 +395,10 @@ Input Parameters
 
  
 
-Example
+**Example**
 
-{% highlight voltMx %}function unregisteraccelerationevents() {
+{% highlight VoltMx %}
+function unregisteraccelerationevents() {
     // Unregister for acceleration events. 
     voltmx.accelerometer.unregisteraccelerationevents({
         "shake"
@@ -383,18 +406,19 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 After this function returns, the event specified in the _eventTypes_ parameter no longer have event handlers registered for them. As a result, your app no longer receives notifications of those events.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA, Desktop Web, and Mobile Web.
 
 * * *
 
 ![](resources/prettify/onload.png)
+</details>

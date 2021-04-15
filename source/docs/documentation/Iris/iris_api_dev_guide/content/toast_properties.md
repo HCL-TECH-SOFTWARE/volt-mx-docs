@@ -22,28 +22,28 @@ The Toast object provides the show method.
 
 When you invoke the show method, the toast message is displayed on the screen.
 
-Syntax
+<b>Syntax</b>
 
-show()
+{% highlight VoltMx %}show();{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.ui.Toast({
+{% highlight VoltMx %}voltmx.ui.Toast({
     "text": "Hello World.",
     "duration": constants.TOAST_LENGTH_SHORT
 });
 toast.show();
 {% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -61,13 +61,13 @@ The Toast object provides the following properties.
 
 Using the alignConfig property, you can configure the alignment of the toast message on the screen.
 
-Syntax
+<b>Syntax</b>
 
-alignConfig
+{% highlight VoltMx %}alignConfig{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var offset = { 
+{% highlight VoltMx %}var offset = { 
     gravity: constant.TOAST_POS_MIDDLE_CENTER, 
     x: "100",
     y: "200"
@@ -75,7 +75,7 @@ Example
 myToast.alignConfig = offset;
 {% endhighlight %}
 
-Type
+<b>Type</b>
 
 The alignConfig proeprty is a JavaScript object which contains key-value pairs to set the alignment of the toast. The following keys are supported.
 
@@ -87,11 +87,11 @@ The alignConfig proeprty is a JavaScript object which contains key-value pairs t
 
  
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -106,13 +106,13 @@ Platform Availability
 
 Using the data property, you can provide the information that you want to display in the toast.
 
-Syntax
+<b>Syntax</b>
 
-data
+{% highlight VoltMx %}data{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}myToast.template = Tempflex;
+{% highlight VoltMx %}myToast.template = Tempflex;
 myToast.widgetDataMap = { //specifying the data item IDs and the widgets in a template
     "Tempflex": "TempFlex", 
     "img1": "img1",
@@ -124,19 +124,19 @@ myToast.data = { //specifying the data item IDs and the data values directly
 };
 {% endhighlight %}
 
-Type
+<b>Type</b>
 
 A JavaScript object that contains key-value pairs consisting of the IDs of each widget and the values for the individual widgets.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 There are two ways in which you can initialize the object in the `data` property. The first way is to specify the widget IDs and the data values directly. The second is to specify the widget IDs including the widgets in a template. These are demonstrated in the **Example** provided below.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -149,30 +149,30 @@ Platform Availability
 
 Using the isVisible property, you can configure the visibility of a toast.
 
-Syntax
+<b>Syntax</b>
 
-isVisible
+{% highlight VoltMx %}isVisible{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}myToast.isVisible = true;
+{% highlight VoltMx %}myToast.isVisible = true;
 {% endhighlight %}
 
 Type
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If you set the value of this property to `true`, the toast is displayed after the invocation of the **show** method.
 
 If you set the value of this property to `false`, the toast is not displayed even after the invocation of the **show** method.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -185,13 +185,13 @@ Platform Availability
 
 Using the template property, you can set a FlexContainer widget as the template for a toast.
 
-Syntax
+<b>Syntax</b>
 
-template
+{% highlight VoltMx %}template{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}myToast.template = Tempflex;
+{% highlight VoltMx %}myToast.template = Tempflex;
 myToast.widgetDataMap = {
     "Tempflex": "Tempflex",
     "img1": "img1",
@@ -207,11 +207,11 @@ Type
 
 A JavaScript object.
 
-Read/Write
+<b>Read/Write</b>
 
 Read+Write
 
-Remarks
+<b>Remarks</b>
 
 If you do not set a template, it uses the default appearance for the toast. Only the following widgets can be used in the template of the toast.
 
@@ -223,7 +223,7 @@ If you do not set a template, it uses the default appearance for the toast. Only
 
 > **_Note:_** An Image widget with a dynamic URL is not supported. Widget animations are also not supported.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -238,13 +238,13 @@ Platform Availability
 
 Using the widgetDataMap property, you can map information between the widget IDs and keys in the data.
 
-Syntax
+<b>Syntax</b>
 
-widgetDataMap
+{% highlight VoltMx %}widgetDataMap{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}myToast.template = Tempflex;
+{% highlight VoltMx %}myToast.template = Tempflex;
 myToast.widgetDataMap = {
     "Tempflex": "Tempflex",
     "img1": "img1",
@@ -260,20 +260,21 @@ Type
 
 A JavaScript object that contains key-value pairs consisting of the IDs of each data-item and keys.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 Using this property you can create a mapping between widget IDs and specific items in your app's data. Ensure that the widgetDataMap property accommodates all widget IDs, including widgets referred to in dynamic templates.
 
 After your app provides the data mapping, it updates the data in the toast whenever the data changes.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
 * * *
+</details>
 
 ![](resources/prettify/onload.png)

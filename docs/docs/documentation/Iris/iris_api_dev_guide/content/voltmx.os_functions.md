@@ -38,7 +38,7 @@ Example
 
 When you query for the state of the device battery as shown in this example, any of the four available battery states is returned.
 
-{% highlight voltMx %}var batteryState = voltmx.os.getBatteryState();
+{% highlight VoltMx %}var batteryState = voltmx.os.getBatteryState();
 
 if (voltmx.os.BATTERY_STATE_CHARGING == batteryState) {
 
@@ -70,11 +70,13 @@ The voltmx.os namespace contains the following functions.
 
 This API helps the developers to pass dynamic values when the form needs to be submitted to external sites.
 
-Syntax
+<b>Syntax</b>
 
-addHiddenField([key](#key),[value](#value),[private](#private))
+{% highlight VoltMx %}
+addHiddenField([key](#key),[value](#value),[private](#private));
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -83,9 +85,9 @@ Input Parameters
 | value \[String\] - Mandatory | Specifies the value that corresponds to the specified key in the hidden field. |
 | private \[String\] - Optional | Specifies if the hidden field can be read using the `voltmx.os.readHiddenField` API. The expected values for this field are either "private" or "public". The default value of this field id "public". > **_Note:_** Only when this value is specified, you can read the hidden value through `voltmx.os.readHiddenField` API. |
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function addHiddenField() {
+{% highlight VoltMx %}function addHiddenField() {
     voltmx.os.addHiddenField("myhiddenfield", "myvalue", "private");
     // private value is specified and hence this hiddenfield can be read through the voltmx.os.readHiddenField API
     voltmx.os.addHiddenField("myhiddenfield1", "myvalue");
@@ -93,11 +95,11 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available only on Mobile Web.
 
@@ -110,11 +112,13 @@ Available only on Mobile Web.
 
 This API adds a meta tag in.html header. This API result will effect only on header reload.
 
-Syntax
+<b>Syntax</b>
 
-addMetaTag (key, value)
+{% highlight VoltMx %}
+addMetaTag (key, value);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -124,19 +128,19 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.os.addMetaTag("test2", {
+{% highlight VoltMx %}voltmx.os.addMetaTag("test2", {
     "http-equiv": "refresh",
     "content": "30"
 });
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 This API has no return values.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Applicable only on Mobile Web.
 
@@ -149,9 +153,11 @@ Applicable only on Mobile Web.
 
 UUID (Universally Unique Identifier) is a universally unique value that can be used to identify types, interfaces, and other items. This API returns a string that contains a formatted UUID value. For example, E621E1F8-C36C-495A-93FC-0C247A3E6E5F.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.createUUID()
+{% highlight VoltMx %}
+voltmx.os.createUUID();
+{% endhighlight %}
 
 Input Parameters
 
@@ -159,7 +165,7 @@ None
 
 Example
 
-{% highlight voltMx %}function createMyUUIDFunc() {
+{% highlight VoltMx %}function createMyUUIDFunc() {
 var uuid = voltmx.os.createUUID();
 voltmx.print("The created UUID is : " + uuid);
 }
@@ -183,9 +189,11 @@ Platform Availability
 
 This API helps your application to detect the presence of any Dynamic Instrumentation instance. Currently, this API only supports the detection of Frida server presence.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.detectDynamicInstrumentation(object)
+{% highlight VoltMx %}
+voltmx.os.detectDynamicInstrumentation(object);
+{% endhighlight %}
 
 Input Parameters
 
@@ -196,7 +204,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}var didobject = {
+{% highlight VoltMx %}var didobject = {
     detectedCallback: detectedCallbackFunction,
     undetectedCallback: undetectedCallbackFunction,
     "type": "fridaquickscan"
@@ -224,17 +232,21 @@ This API allows the developers to get information about the device in which the 
 
 You can view a video on using Device Info API [here](https://www.youtube.com/embed/N4po9_SspDo?rel=0).
 
-Syntax
+<b>Syntax</b>
 
-deviceInfo()
+{% highlight VoltMx %}
+deviceInfo();
+{% endhighlight %}
 
-Input Parameters
+
+
+<b>Input Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var deviceInfo = voltmx.os.deviceInfo();
+{% highlight VoltMx %}var deviceInfo = voltmx.os.deviceInfo();
 alert(deviceInfo);
 
 for (var key in deviceInfo) {
@@ -244,7 +256,7 @@ for (var key in deviceInfo) {
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
   
 | Return Value | Description |
@@ -253,7 +265,7 @@ Return Values
 
  
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms.
 
@@ -266,24 +278,26 @@ Available on all platforms.
 
 This API can be invoked on an event of a widget. This API should be invoked on forms of the application where user validation is not required or cross site request forgery is not a concern.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.endSecureTransaction()
-
-Input Parameters
-
-None
-
-Example
-
-{% highlight voltMx %}voltmx.os.endSecureTransaction();
+{% highlight VoltMx %}
+voltmx.os.endSecureTransaction();
 {% endhighlight %}
 
-Return Values
+<b>Input Parameters</b>
 
 None
 
-Platform Availability
+<b>Example</b>
+
+{% highlight VoltMx %}voltmx.os.endSecureTransaction();
+{% endhighlight %}
+
+<b>Return Values</b>
+
+None
+
+<b>Platform Availability</b>
 
 Available only on Mobile Web.
 
@@ -301,25 +315,27 @@ You can use this API to:
 *   Check the amount of free memory on the mobile device before you go ahead with installation of any software or applications.
 *   Find out the free memory on the mobile device, clear unwanted objects, and thus improve the performance of the application.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.freeMemory()
+{% highlight VoltMx %}
+voltmx.os.freeMemory();
+{% endhighlight %}
 
-Input Parameters
+<B>Input Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
 In the following example, voltmx.os.freeMemory returns the freememory available for allocation.
 
-{% highlight voltMx %}var freememory = voltmx.os.freeMemory();
+{% highlight VoltMx %}var freememory = voltmx.os.freeMemory();
 voltmx.print(freememory);
 //After the voltmx.os.freeMemory operation, the memory available for allocation is printed. 
 //For example, 1070404 (indicates that 1046 KB of memory is available for allocation)
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
   
 | Return Value | Description |
@@ -328,7 +344,7 @@ Return Values
 
  
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\* except Windows. \*Dummy implementation on Server Side Mobile Web, SPA, and DesktopWeb and returns a dummy value.
 
@@ -341,17 +357,19 @@ Available on all platforms\* except Windows. \*Dummy implementation on Server Si
 
 This API allows the developers to get information about the mode in which the application is launched.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.getAppContext()
+{% highlight VoltMx %}
+voltmx.os.getAppContext();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function getAppContext() {
+{% highlight VoltMx %}function getAppContext() {
     var mycontext = voltmx.os.getAppContext();
     voltmx.print(mycontext); 
     /*prints {launchmode=0} if the application was launched in normal mode ,prints {launchmode=1} if the application was launched in full screen mode*/
@@ -359,14 +377,14 @@ Example
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
   
 | Return Value | Description |
 | --- | --- |
 | contextDetails\[Object\] | Returns an object with key-value pairs:`launchmode:0` indicates that the application is launched in normal mode.`launchmode:1` indicates that the application is launched in full screen mode. |
 
-Platform Availability
+<b>Platform Availability</b>
 
 Applicable only on Mobile Web.
 
@@ -379,17 +397,19 @@ Applicable only on Mobile Web.
 
 Retrieves the current percentage charge level of the device battery, as an integer value.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.getBatteryLevel()
+{% highlight VoltMx %}
+voltmx.os.getBatteryLevel();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}getBatteryLevel: function() {
+{% highlight VoltMx %}getBatteryLevel: function() {
     voltmx.os.registerBatteryService(this.batterySuccessCallback);
     var battery = voltmx.os.getBatteryLevel();
     voltmx.os.unregisterBatteryService();
@@ -397,11 +417,11 @@ Example
 },
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 Returns an integer that ranges from 0-100 (inclusive) that specifies the battery's current charge level in percentage. For example, a return value of 30 specifies that the current charge level of the battery is 30%.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -416,17 +436,19 @@ Platform Availability
 
 Retrieves the current state of the battery.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.getBatteryState()
+{% highlight VoltMx %}
+voltmx.os.getBatteryState();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This code is used to obtain your device battery state
+{% highlight VoltMx %}//This code is used to obtain your device battery state
 getBatteryState: function() {
     voltmx.os.registerBatteryService(this.batterySuccessCallback);
     var batteryState = voltmx.os.getBatteryState();
@@ -446,7 +468,7 @@ getBatteryState: function() {
 },
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 Returns a constant from the [Battery State Constants](voltmx.os_constants_batteryapi.html#BatteryState).
 
@@ -454,7 +476,7 @@ Remarks
 
 The battery state indicates whether it is charging, discharging, and so forth.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -477,9 +499,11 @@ You must set the READ\_PHONE\_STATE permission in the Android Manifest file to r
   
 Starting in Android Q, apps must have the READ\_PRIVILEGED\_PHONE\_STATE privileged permission (which cannot be granted to a regular app) to access the device's non-resettable identifiers, which include both IMEI and serial number. For more information, see [Android Documentation](https://developer.android.com/preview/privacy/data-identifiers#device-ids).
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.getDeviceId(int slot)
+{% highlight VoltMx %}
+voltmx.os.getDeviceId(int slot);
+{% endhighlight %}
 
 Input Parameters
 
@@ -487,7 +511,7 @@ Slot Index as an integer value.
 
 Example
 
-{% highlight voltMx %}function getMyDeviceIDFunc() {
+{% highlight VoltMx %}function getMyDeviceIDFunc() {
     var devId = voltmx.os.getDeviceId(0); // param is sim slot
     voltmx.print("The device ID of the first SIM slot is: " + devId);
 }
@@ -519,27 +543,29 @@ Platform Availability
 
 This API returns the current orientation of the device. The possible values are portrait or landscape.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.getDeviceCurrentOrientation()
+{% highlight VoltMx %}
+voltmx.os.getDeviceCurrentOrientation();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.os.getDeviceCurrentOrientation(); //Returns the orientation of the device
+{% highlight VoltMx %}voltmx.os.getDeviceCurrentOrientation(); //Returns the orientation of the device
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 This API returns whether the device orientation is landscape or portrait.
 
 *   constants.DEVICE\_ORIENTATION\_PORTRAIT
 *   constants.DEVICE\_ORIENTATION\_LANDSCAPE
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on iPhone, iPad, Windows, Android, and Desktop Web
 
@@ -554,17 +580,19 @@ This API returns the maximum OpenGLES Version supported by the device.
 
 Depending on the value returned, you can determine if the device supports AR capabilities.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.getOpenGlESVersion()
+{% highlight VoltMx %}
+voltmx.os.getOpenGlESVersion();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}if (voltmx.os.getOpenGLESVersion() >= 3.0 && voltmx.os.deviceInfo().APILevel >= 24)
+{% highlight VoltMx %}if (voltmx.os.getOpenGLESVersion() >= 3.0 && voltmx.os.deviceInfo().APILevel >= 24)
 {
       voltmx.print("ARRenderer is supported")
 }
@@ -575,7 +603,7 @@ else
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
   
 | Return Value | Description |
@@ -584,7 +612,7 @@ Return Values
 
  
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android
 
@@ -597,15 +625,17 @@ Android
 
 This API returns whether accelerometer is supported on a device.
 
-Syntax
+<b>Syntax</b>
 
-hasAccelerometerSupport()
+{% highlight VoltMx %}
+hasAccelerometerSupport();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
   
 | Return Value | Description |
@@ -614,13 +644,13 @@ Return Values
 
  
 
-Platform Availability
+<b>Platform Availability</b>
 
 Applicable only on iPhone, Android, and Windows platforms.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.print(voltmx.os.hasAccelerometerSupport());
+{% highlight VoltMx %}voltmx.print(voltmx.os.hasAccelerometerSupport());
 //prints true if device has accelerometer support
 
 {% endhighlight %}
@@ -634,22 +664,24 @@ Example
 
 This API returns whether Camera is supported on a device.
 
-Syntax
+<b>Syntax</b>
 
-hasCameraSupport()
+{% highlight VoltMx %}
+hasCameraSupport();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.print(voltmx.os.hasCameraSupport());
+{% highlight VoltMx %}voltmx.print(voltmx.os.hasCameraSupport());
 //prints true if device has  camera support
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
   
 | Return Value | Description |
@@ -669,28 +701,30 @@ Available on all platforms\* except Mobile Web. \*Dummy implementation for SPA a
 
 This API returns whether GPS is supported on a device.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.hasGPSSupport()
+{% highlight VoltMx %}
+voltmx.os.hasGPSSupport();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.print(voltmx.os.hasGPSSupport());
+{% highlight VoltMx %}voltmx.print(voltmx.os.hasGPSSupport());
 //prints true if device has GPS support
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
   
 | Return Value | Description |
 | --- | --- |
 | value\[Boolean\] | _true_: the platform supports GPS. _false_: the platform does not support GPS. |
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Mobile Web.
 
@@ -705,17 +739,19 @@ This API returns whether Orientation is supported on a device.
 
 You can view a video on using Display Orientation [here](https://youtu.be/C3yMLbV1TQA).
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.hasOrientationSupport()
+{% highlight VoltMx %}
+voltmx.os.hasOrientationSupport();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var orientation = voltmx.os.getDeviceCurrentOrientation();
+{% highlight VoltMx %}var orientation = voltmx.os.getDeviceCurrentOrientation();
 
 if (orientation == constants.DEVICE_ORIENTATION_PORTRAIT) {
     alert("PORTRAIT");
@@ -726,14 +762,14 @@ if (orientation == constants.DEVICE_ORIENTATION_PORTRAIT) {
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
   
 | Return Value | Description |
 | --- | --- |
 | value\[Boolean\] | _true_: the platform supports orientation. _false_: the platform does not support orientation. |
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Mobile Web.
 
@@ -746,29 +782,31 @@ Available on all platforms except Mobile Web.
 
 This API returns whether Touch is supported on a device.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.hasTouchSupport()
+{% highlight VoltMx %}
+voltmx.os.hasTouchSupport();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.print(voltmx.os.hasTouchSupport());
+{% highlight VoltMx %}voltmx.print(voltmx.os.hasTouchSupport());
 //prints true if device is a touch device
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
   
 | Return Value | Description |
 | --- | --- |
 | value\[Boolean\] | _true_: the platform supports touch. _false_: the platform does not support touch. |
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Mobile Web and Desktop Web.
 
@@ -781,11 +819,13 @@ Available on all platforms except Mobile Web and Desktop Web.
 
 When invoked without any parameter, this API prints the entire form that is currently in view.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.print(containerID)
+{% highlight VoltMx %}
+voltmx.os.print(containerID);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -795,16 +835,16 @@ Input Parameters
 
  |
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.os.print()
+{% highlight VoltMx %}voltmx.os.print()
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Applicable only on Desktop Web.
 
@@ -817,11 +857,13 @@ Applicable only on Desktop Web.
 
 This API allows the developers to read the hidden fields added by the `os.addHiddenField` API.
 
-Syntax
+<b>Syntax</b>
 
-readHiddenField([key](#key))
+{% highlight VoltMx %}
+readHiddenField([key](#key));
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -830,15 +872,15 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function readHiddenField() {
+{% highlight VoltMx %}function readHiddenField() {
     voltmx.os.readHiddenField("myhiddenfield");
     // Reads the value that corresponds to the myhiddenfield key, i.e., myvalue
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
@@ -847,7 +889,7 @@ Return Values
 
  
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available only on Mobile Web.
 
@@ -862,11 +904,13 @@ Registers for the battery monitoring service of the device operating system. The
 
 > **_Note:_** Whenever the battery state changes or for every 1% change in the battery level, a callback to the registerBatteryService function is triggered.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.registerBatteryService(callbackMethod)
+{% highlight VoltMx %}
+voltmx.os.registerBatteryService(callbackMethod);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -875,9 +919,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This code is used to register a battery service and deregister the service based on your battery level
+{% highlight VoltMx %}//This code is used to register a battery service and deregister the service based on your battery level
 registerBatteryService: function() {
     voltmx.os.registerBatteryService(this.mybatterychangecallback);
     var batterylevel = voltmx.os.getBatteryLevel();
@@ -894,16 +938,16 @@ mybatterychangecallback: function(batteryInfo) {
 },
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Limitations
+<b>Limitations</b>
 
 *   The callback for the registered battery service is delivered only when the application is running; this is because, you can only receive notifications when the application is in the foreground for the iOS, Windows, and Android platforms.
 *   The callback to the registered battery service is delivered after every one minute duration for iOS; whereas in case of in Android and Windows, the callback is delivered for every 1% change in the battery charge.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -920,11 +964,12 @@ Registers callbacks for speech recognition events.
 
 **Syntax**
 
-voltmx.os.registerSpeechRecognizer(callbackTable)
+{% highlight VoltMx %}
+voltmx.os.registerSpeechRecognizer(callbackTable);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
-  
 | Parameters | Description |
 | --- | --- |
 | callbackTable\[JSON object\] - Mandatory | The callbackTable is a mandatory key-value pair, that helps you to register JavaScript callbacks, which are triggered when any speech to text recognition events occur.Following are the key-value pairs:
@@ -932,13 +977,11 @@ Input Parameters
 
 > Triggered continuously whenever a phrase is generated out of the recognized speech. _Parameters for callback_ **\[JSON object\]****result \[String\]** The recognized phrase of the speech recognition session.**confidence \[Number\]**The confidence level of the speech recognition result. For example, if the speech includes a word such as "weight," the confidence level is the certainty with which the app recognizes the word as "weight" and not as "wait."0 - High1 - Medium2 - Low3 - Rejected**status \[Number\]**The status of the result. 0 - Success 1 - TopicLanguageNotSupported 2 - GrammarLanguageMismatch3 - GrammarCompilationFailure 4 - AudioQualityFailure5 - UserCanceled 6 - Unknown 7 - TimeoutExceeded8 - PauseLimitExceeded 9 - NetworkFailure10 - MicrophoneUnavailable
 
-> **timeouts \[JSON object\]**Set initial, in-session (continuous event), and end silence timeouts based on which the speech recognition session will be stopped.**initialSilenceTimeout \[Number\]** Minimum timeout value (in seconds) given to ignore the silence (no speech input) after the speech recognition session starts (that is, before the speech is recognized and text is generated). Default value is 5 seconds.**autoStopSilenceTimeout \[Number\]**Minimum timeout value (in seconds) given to ignore the silence between the event(s) that are triggered continuously (that is, during speech recognition process).**endSilenceTimeout \[Number\]**Minimum timeout value (in seconds) to ignore the silence (no speech input) after which the speech recognition should end (that is, after speech is recognized and text is generated). Default value is 150 milliseconds.
-
- |
+> **timeouts \[JSON object\]**Set initial, in-session (continuous event), and end silence timeouts based on which the speech recognition session will be stopped.**initialSilenceTimeout \[Number\]** Minimum timeout value (in seconds) given to ignore the silence (no speech input) after the speech recognition session starts (that is, before the speech is recognized and text is generated). Default value is 5 seconds.**autoStopSilenceTimeout \[Number\]**Minimum timeout value (in seconds) given to ignore the silence between the event(s) that are triggered continuously (that is, during speech recognition process).**endSilenceTimeout \[Number\]**Minimum timeout value (in seconds) to ignore the silence (no speech input) after which the speech recognition should end (that is, after speech is recognized and text is generated). Default value is 150 milliseconds. |
 
 **Example**
 
-{% highlight voltMx %}function registerCallbacks() {
+{% highlight VoltMx %}function registerCallbacks() {
     voltmx.os.registerSpeechRecognizer({
         "resultGenerated": resultGenCallback,
         "timeouts": {
@@ -969,24 +1012,26 @@ Available only on Windows.
 
 This API removes all the user defined meta tags from a.html header. This API result will effect only on header reload.
 
-Syntax
+<b>Syntax</b>
 
-removeAllMetaTags()
-
-Input Parameters
-
-None.
-
-Example
-
-{% highlight voltMx %}voltmx.os.removeAllMetaTags()
+{% highlight VoltMx %}
+removeAllMetaTags();
 {% endhighlight %}
 
-Return Values
+<b>Input Parameters</b>
 
 None.
 
-Platform Availability
+<b>Example</b>
+
+{% highlight VoltMx %}voltmx.os.removeAllMetaTags()
+{% endhighlight %}
+
+<b>Return Values</b>
+
+None.
+
+<b>Platform Availability</b>
 
 Applicable only on Mobile Web.
 
@@ -999,11 +1044,13 @@ Applicable only on Mobile Web.
 
 This API removes a specific meta tag from a.html header. This API result will effect only on header reload.
 
-Syntax
+<b>Syntax</b>
 
-removeMetaTag (key)
+{% highlight VoltMx %}
+removeMetaTag (key);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -1012,16 +1059,16 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.os.removeMetaTag("test1")
+{% highlight VoltMx %}voltmx.os.removeMetaTag("test1")
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 This API has no return values.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Applicable only on Mobile Web.
 
@@ -1034,11 +1081,13 @@ Applicable only on Mobile Web.
 
 This API can be invoked on an event of a widget. When this API is invoked it makes all the data and subsequent transactions of the application secure. For example, the login page of an application has the following: user name field, password field, and a button. On the onclick event of the button, the user is verified and navigated to pages with sensitive information. If you want to prevent cross site request forgery or double submissions, you can invoke this API ensuring that all the subsequent transactions are secure.
 
-Syntax
+<b>Syntax</b>
 
-startSecureTransaction(callback, scope)
+{% highlight VoltMx %}
+startSecureTransaction(callback, scope);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -1046,21 +1095,21 @@ Input Parameters
 | callback \[Function\] - Mandatory | If there are instances where cross site request forgery is attempted, this parameter should comprise a session/request expiry function. |
 | scope \[Integer\] - Mandatory | Specifies whether this API will be valid per request or per session of the application. The possible values are as follows:0 - Request Scope: The data in the application is secure only on a per request basis.> **_Note:_** If you press the browser back button on BJS, the token is rendered invalid on the browser back request.1 - Session Scope. The data is secure for an entire user session. This is the default value. |
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function callback() {}
+{% highlight VoltMx %}function callback() {}
 voltmx.os.startSecureTransaction(callback, 1)
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 This API has no return values.
 
-Remarks
+<b>Remarks</b>
 
 Whenever os.startsecuretransaction is invoked, a krfid for that session or request is generated internally as a hidden field. The krfid is validated for each transaction/request. If the krfid is invalid, the callback function of os.startsecuretransaction API is invoked, and the request processing fails or a message appears stating that the session has expired.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available only on Mobile Web.
 
@@ -1075,9 +1124,11 @@ Starts the speech recognition process.
 
 **Syntax**
 
-voltmx.os.startSpeechRecognition(successCallback, errorCallback)
+{% highlight VoltMx %}
+voltmx.os.startSpeechRecognition(successCallback, errorCallback);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -1087,7 +1138,7 @@ Input Parameters
 
 **Example**
 
-{% highlight voltMx %}function startSpeech() {
+{% highlight VoltMx %}function startSpeech() {
     voltmx.os.startSpeechRecognition(successCallback, errorCallback);
 }
 
@@ -1119,9 +1170,11 @@ Stops existing (already started with **voltmx.os.startSpeechRecognition** API) s
 
 **Syntax**
 
-voltmx.os.stopSpeechRecognition(successCallback, errorCallback)
+{% highlight VoltMx %}
+voltmx.os.stopSpeechRecognition(successCallback, errorCallback);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Descrption |
@@ -1131,7 +1184,7 @@ Input Parameters
 
 **Example**
 
-{% highlight voltMx %}function stopSpeech() {
+{% highlight VoltMx %}function stopSpeech() {
     voltmx.os.stopSpeechRecognition(successCallback, errorCallback);
 }
 
@@ -1159,11 +1212,13 @@ Available only on Windows.
 
 This API allows you to convert the given number to represent currency. At present, only USA currency is supported.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.toCurrency([number](#number))
+{% highlight VoltMx %}
+voltmx.os.toCurrency([number](#number));
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -1172,17 +1227,17 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
 Perform a _voltmx.os.toCurrency_ operation on the number "_10000_".
 
-{% highlight voltMx %}var tocurrency = voltmx.os.toCurrency(10000);
+{% highlight VoltMx %}var tocurrency = voltmx.os.toCurrency(10000);
 voltmx.print(tocurrency);
 //prints $ 10,000
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
@@ -1190,13 +1245,13 @@ Return Values
 
  
 
-Exceptions
+<b>Exceptions</b>
 
 An error is thrown if input is invalid or does not follow the expected structure.
 
 102 - Invalid input error
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms.
 
@@ -1209,11 +1264,11 @@ Available on all platforms.
 
 This API converts the argument to a number. If the argument is already a number or a string convertible to a number, then the API returns this number; otherwise, it returns **null** for JavaScript.
 
-Syntax
+<b>Syntax</b>
 
 **k**ony.os.toNumber**([argument](#argument))**
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -1222,18 +1277,18 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
 In this example, only the string which can be converted to a number returns a number otherwise it returns n.
 
-{% highlight voltMx %}voltmx.os.toNumber (ms34rd);
+{% highlight VoltMx %}voltmx.os.toNumber (ms34rd);
 //returns null as the string passed cannot be converted to a number
 voltmx.os.toNumber ("58");
 //returns 58 as the string could be converted to a number
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
@@ -1242,17 +1297,17 @@ Return Values
 
  
 
-Remarks
+<b>Remarks</b>
 
 The input parameter must be a number or a string.
 
-Exceptions
+<b>Exceptions</b>
 
 An error is thrown if input is invalid or does not follow the expected structure.
 
 102 - Invalid input error
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms.
 
@@ -1267,17 +1322,19 @@ This API stops the monitoring process of the device battery. You must call this 
 
 > **_Note:_** After your app calls the voltmx.os.unregisterBatteryService API, the callback function registered by the [voltmx.os.registerBatteryService](voltmx.os_functions_batteryapi.html#registerBatteryService) API is no longer invoked.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.os.unregisterBatteryService()
+{% highlight VoltMx %}
+voltmx.os.unregisterBatteryService();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This code is used to register a battery service and deregister the service based on your battery level
+{% highlight VoltMx %}//This code is used to register a battery service and deregister the service based on your battery level
 registerBatteryService: function() {
     voltmx.os.registerBatteryService(this.mybatterychangecallback);
     var batterylevel = voltmx.os.getBatteryLevel();
@@ -1294,11 +1351,11 @@ mybatterychangecallback: function(batteryInfo) {
 },
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -1315,15 +1372,17 @@ Deregisters existing (already registered with **voltmx.os.registerSpeechRecogniz
 
 **Syntax**
 
-voltmx.os.unregisterSpeechRecognizer()
+{% highlight VoltMx %}
+voltmx.os.unregisterSpeechRecognizer();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None.
 
 **Example**
 
-{% highlight voltMx %}function unRegisterCallbacks() {  
+{% highlight VoltMx %}function unRegisterCallbacks() {  
 voltmx.os.unregisterSpeechRecognizer();  
 }
 {% endhighlight %}
@@ -1371,23 +1430,23 @@ You can use this API in the following scenarios when you need to identify:
 *   The mobile devices based on the manufacturer.
 *   If the device is a web browser, mobile device, micro browser, or a computer.
 
-Syntax
+<b>Syntax</b>
 
 **voltmx.os.userAgent()**
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
 In the following example, the uid returned by the voltmx.os.userAgent is displayed in the alert.
 
-{% highlight voltMx %}var devID = voltmx.os.userAgent();
+{% highlight VoltMx %}var devID = voltmx.os.userAgent();
 alert("User Agent return value is::" + devID);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 Device ID \[String\]
 
@@ -1398,10 +1457,11 @@ Any of the available Device ID is returned in the order Device Model, OS Version
 > *   For Android and Android Tablet, device model is returned as an user agent.
 > *   For iOS Devices, user agent is returned as a string.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms.
 
 * * *
+</deatils>
 
 ![](resources/prettify/onload.png)

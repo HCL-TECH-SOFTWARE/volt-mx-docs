@@ -15,17 +15,20 @@ Functions
 
 The voltmx.payment Namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.payment.canWeMakePayment](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.payment.canWeMakePayment</summary>
 
 * * *
 
 Determines if users can make payments on their device. When users call this function without specifying the paymentRequirements parameter, it verifies the minimum platform requirements and these requirements differ from platform to platform. Users can enforce additional requirements apart from the minimum platform requirements by using the optional parameter: paymentRequirements.
 
-Syntax
+### Syntax
 
-voltmx.payment.canWeMakePayment(canWeMakePaymentCallback,paymentRequirements);  
+{% highlight VoltMx %}
+voltmx.payment.canWeMakePayment(canWeMakePaymentCallback,paymentRequirements);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -34,9 +37,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}paymentRequirements = {
+{% highlight VoltMx %}
+paymentRequirements = {
     paymentCardNetworks: [voltmx.payment.NETWORK_MASTERCARD],
     paymentMethodType: [voltmx.payment.METHODTYPE_CREDIT]
 };
@@ -47,24 +51,27 @@ function canWeMakePaymentCallback(result) {
 voltmx.payment.canWeMakePayment(canWeMakePaymentCallback, paymentRequirements);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.payment.getPaymentData](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.payment.getPaymentData</summary>
 
 * * *
 
 This asynchronous API returns paymentResponseData, which contains the necessary information to complete a payment transaction, in the successCallback. This generally requires the UI to be shown to the users so that they can select the payment method, shipping address, and other transaction information. Based on the paymentRequestData object values, the Payment Sheet UI input fields and the values in paymentResponseData are framed.
 
-Syntax
+### Syntax
 
-voltmx.payment.getPaymentData(paymentRequestData,successCallback,errorCallback);  
+{% highlight VoltMx %}
+voltmx.payment.getPaymentData(paymentRequestData,successCallback,errorCallback);
+{% endhighlight %}  
 
-Input Parameters
+### Input Parameters
 
 1\. _paymentRequestData\[JSON Map Object\]_
 
@@ -93,7 +100,7 @@ It has the list of card networks to limit payments to specific network cards. Th
 
 **Note**: If no cards are specified, the default supported card networks will be voltmx.payment.NETWORK\_MASTERCARD, voltmx.payment.NETWORK\_VISA, voltmx.payment.NETWORK\_DISCOVER, and voltmx.payment.NETWORK\_AMEX.
 
-iOS-specific Constants
+### iOS-specific Constants
 
 *   voltmx.payment.NETWORK\_SUICA
 *   voltmx.payment.NETWORK\_QUICPAY
@@ -104,9 +111,10 @@ iOS-specific Constants
 *   voltmx.payment.NETWORK\_CARTEBANCAIRES
 *   voltmx.payment.NETWORK\_CARTEBANCAIRE
 
-Supported Values
+### Supported Values
 
-{% highlight voltMx %}paymentCardNetworks : [voltmx.payment.NETWORK_MASTERCARD, voltmx.payment.NETWORK_VISA]
+{% highlight VoltMx %}
+paymentCardNetworks : [voltmx.payment.NETWORK_MASTERCARD, voltmx.payment.NETWORK_VISA]
 {% endhighlight %}
 
 1.1.2 _paymentMethodType\[JSON List Object\]_
@@ -115,16 +123,16 @@ It has a list of payment methods to limit payments to specific cards. The values
 
 **Note**: In iOS, 3DS cards are supported by default.
 
-iOS-specific Constants
+### iOS-specific Constants
 
 *   voltmx.payment.METHODTYPE\_EMV: For Prepaid payment method type.
 *   voltmx.payment.METHODTYPE\_CREDIT: For Credit payment method type.
 *   voltmx.payment.METHODTYPE\_DEBIT: For Debit payment method type.
 
-Example
+### Example
 
-{% highlight voltMx %}paymentMethodType : [voltmx.payment.METHODTYPE_CREDIT,voltmx.payment.METHODTYPE_DEBIT,voltmx.payment.METHODTYPE_EMV]
-
+{% highlight VoltMx %}
+paymentMethodType : [voltmx.payment.METHODTYPE_CREDIT,voltmx.payment.METHODTYPE_DEBIT,voltmx.payment.METHODTYPE_EMV]
 {% endhighlight %}
 
 **Android-specific Constants**
@@ -135,24 +143,24 @@ Example
 
 **Note**: If no payment methods are specified , the default supported payment methods will be voltmx.payment.METHODTYPE\_GOOGLE and voltmx.payment.METHODTYPE\_ANDROIDPAY.
 
-Example
+### Example
 
-{% highlight voltMx %}paymentMethodType : [voltmx.payment.METHODTYPE_PREPAID]
-
+{% highlight VoltMx %}
+paymentMethodType : [voltmx.payment.METHODTYPE_PREPAID]
 {% endhighlight %}
 
 1.1.3 _supportedCountries\[JSON List Object\]_
 
 It contains a list of ISO 3166 country codes to limit payments to cards from specific countries. Only values of type String are allowed for this key.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
-Example
+### Example
 
-{% highlight voltMx %}supportedCountries : [“IN”,“US”,“AU”]
-
+{% highlight VoltMx %}
+supportedCountries : [“IN”,“US”,“AU”]
 {% endhighlight %}
 
 1.2 _shippingAddressInfo\[JSON Map Object\]_
@@ -171,9 +179,10 @@ If this key value is true, the Name field is enabled under Shipping Address in t
 
 For Android: The name and postalAddress fields are enabled if the **name** key value is true.
 
-Example
+### Example
 
-{% highlight voltMx %}name : true
+{% highlight VoltMx %}
+name : true
 {% endhighlight %}
 
 1.2.2 _postalAddress\[boolean\]_
@@ -184,9 +193,9 @@ If this key value is true, the postalAddress field is enabled under Shipping Add
 
 For Android: The values for the name and postalAddress fields are enabled if the **postalAddress** key value is true.
 
-Example
+### Example
 
-{% highlight voltMx %}postalAddress : true
+{% highlight VoltMx %}postalAddress : true
 {% endhighlight %}
 
 1.2.3 _email\[boolean\]_
@@ -197,9 +206,10 @@ For iOS: If this key value is true, the Email field is enabled under Shipping Ad
 
 For Android: By default, your registered email ID for your Google Play Store account is retrieved and that email ID is auto-populated in the Payment Sheet UI. The billingAddressInfo email and the shippingAddressInfo email fields are enabled if the email value is true.
 
-Example
+### Example
 
-{% highlight voltMx %}email : true
+{% highlight VoltMx %}
+email : true
 {% endhighlight %}
 
 1.2.4 _phoneNumber\[boolean\]_
@@ -208,42 +218,45 @@ The default value is false. If this key value is true, the phoneNumber field is 
 
 For Android: This value is taken into account only if the name or postal address field is enabled. The billingAddressInfo phoneNumber and the shippingAddressInfo phoneNumber fields are enabled if the phoneNumber value is true.
 
-Example
+### Example
 
-{% highlight voltMx %}phoneNumber : true
+{% highlight VoltMx %}
+phoneNumber : true
 {% endhighlight %}
 
 1.2.5 _shippingType\[JSON list object\]_
 
 This key specifies the shipping type of the purchased item. It can be any of the following values. The value of this key should be of type "VoltMX Constant."
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
-iOS-specific Constants
+### iOS-specific Constants
 
 *   voltmx.payment.SHIPPINGTYPE\_SHIPPING
 *   voltmx.payment.SHIPPINGTYPE\_ DELIVERY
 *   voltmx.payment.SHIPPINGTYPE\_ STOREPICKUP
 *   voltmx.payment.SHIPPINGTYPE\_ SERVICEPICKUP
 
-Example
+### Example
 
-{% highlight voltMx %}shippingType : [voltmx.payment.SHIPPINGTYPE_SERVICEPICKUP]
+{% highlight VoltMx %}
+shippingType : [voltmx.payment.SHIPPINGTYPE_SERVICEPICKUP]
 {% endhighlight %}
 
 1.2.6 _shippingMethod\[JSON List Object\]_
 
 It defines the shipping method for delivering physical goods. The value of this key should be of type String. App developer-defined custom values are allowed for this key.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
-Example
+### Example
 
-{% highlight voltMx %}"shippingMethod":
+{% highlight VoltMx %}
+"shippingMethod":
 
 [
 
@@ -274,13 +287,14 @@ Example
 
 Adds a collection of ISO 3166-2 formatted country codes of the countries to which shipping is allowed in this transaction. If not specified, all the countries are considered to be allowed.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
-Example
+### Example
 
-{% highlight voltMx %}allowedShippingCountryCodes : ["US", "CA"]
+{% highlight VoltMx %}
+allowedShippingCountryCodes : ["US", "CA"]
 {% endhighlight %}
 
 1.3 _billingAddressInfo\[JSON Map Object\]_
@@ -301,9 +315,10 @@ For iOS: If this key value is true, the Name field is enabled under Billing Addr
 
 For Android: If the **name** key value is true, **name** and **postalAddress** are returned in the PaymentDataResponse billing address.
 
-Example
+### Example
 
-{% highlight voltMx %}name : true
+{% highlight VoltMx %}
+name : true
 {% endhighlight %}
 
 1.3.2 _postalAddress\[boolean\]_
@@ -314,9 +329,10 @@ For iOS: If this key value is true, the postalAddress field is enabled under Bil
 
 For Android: If the **postalAddress** key value is true, **name** and **postalAddress** are returned in the PaymentDataResponse billing address.
 
-Example
+### Example
 
-{% highlight voltMx %}postalAddress : true
+{% highlight VoltMx %}
+postalAddress : true
 {% endhighlight %}
 
 1.3.3 _email\[boolean\]_
@@ -327,9 +343,10 @@ For iOS: If this key value is true, the email field will be available under Bill
 
 For Android: If the **email** key value is true, the billingAddressInfo email and the shippingAddressInfo email fields are enabled.
 
-Example
+### Example
 
-{% highlight voltMx %}email : true
+{% highlight VoltMx %}
+email : true
 {% endhighlight %}
 
 1.3.4 _phoneNumber\[boolean\]_
@@ -340,12 +357,13 @@ For iOS: If this key value is true, the phoneNumber field is enabled under Billi
 
 For Android: This value is taken into consideration only if name or postalAddress is enabled. The billingAddressInfo phone number and the shippingAddressInfo phone number fields are enabled if the phoneNumber key value is true.
 
-Example
+### Example
 
-{% highlight voltMx %}phoneNumber : true
+{% highlight VoltMx %}
+phoneNumber : true
 {% endhighlight %}
 
-1.3.5 _billingAddressFormat\[VoltMX Constant\]_
+1.3.5 _billingAddressFormat\[Volt MX Constant\]_
 
 This sets the billing address format, which is returned in paymentDataResponse .
 
@@ -356,13 +374,14 @@ The following constants are allowed:
 
 **Note**: By default, the voltmx.payment.BILLING\_ADDRESS\_FORMAT\_MIN format is applied.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
-Example
+### Example
 
-{% highlight voltMx %}billingAddressFormat : voltmx.payment.BILLING_ADDRESS_FORMAT_FULL
+{% highlight VoltMx %}
+billingAddressFormat : voltmx.payment.BILLING_ADDRESS_FORMAT_FULL
 {% endhighlight %}
 
 1.4 _merchantInfo\[JSON Map Object\]_
@@ -377,13 +396,14 @@ merchantInfo : { "merchantName" : "", "merchantID" : "", "countryCode" : "", "ad
 
 You must specify the name of the merchant here. It should be of type String. Merchants authorized by native platforms are allowed here. If voltmx.payment.TOKENIZATION\_GATEWAY is selected for tokenizationType, merchantName is mandatory.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
-Example
+### Example
 
-{% highlight voltMx %}merchantName :  “Stripe”
+{% highlight VoltMx %}
+merchantName :  “Stripe”
 {% endhighlight %}
 
 1.4.2 _merchantID\[String\]_
@@ -392,32 +412,34 @@ You must specify the merchant registration ID here. It should be of type String.
 
 For Android : If voltmx.payment.TOKENIZATION\_GATEWAY is selected for tokenizationType, merchantID is mandatory.
 
-Example
+### Example
 
-{% highlight voltMx %}merchantID : “pk_test_DCYXN0nOheeRbbf4KlNdUB9I”
+{% highlight VoltMx %}
+merchantID : “pk_test_DCYXN0nOheeRbbf4KlNdUB9I”
 {% endhighlight %}
 
 1.4.3 _countryCode\[String\]_
 
 Two-letter ISO 3166 country code where the transaction will be processed. Value of this key should be of type String. This field is mandatory. If countryCode is not specified, error code 105 is returned in errorcallback.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 Example
 
-{% highlight voltMx %}countryCode :  “IN”
+{% highlight VoltMx %}
+countryCode :  “IN”
 {% endhighlight %}
 
 1.4.4 _additionalParameters\[JSON Map Object\]_
 
 This key is used when an app developer wants to add custom options to a merchant's information. You can add custom option key-value pairs here.
 
-Example
+### Example
 
-{% highlight voltMx %}additionalParameters : {"stripe:version" : 1.5, "TOKENIZATION_TYPE" : GATEWAY}
-
+{% highlight VoltMx %}
+additionalParameters : {"stripe:version" : 1.5, "TOKENIZATION_TYPE" : GATEWAY}
 {% endhighlight %}
 
 1.4.5 _tokenizationType\[VoltMX Constant\]_
@@ -432,22 +454,24 @@ This key configures the tokenization of paymentToken that is received in payment
 *   When voltmx.payment.TOKENIZATION\_GATEWAY is selected, merchantName and merchantID are mandatory.
 *   When voltmx.payment.TOKENIZATION\_DIRECT is selected, publicKey is mandatory.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
-Example
+### Example
 
-{% highlight voltMx %}tokenizationType : voltmx.payment.TOKENIZATION_DIRECT
+{% highlight VoltMx %}
+tokenizationType : voltmx.payment.TOKENIZATION_DIRECT
 {% endhighlight %}
 
 1.4.6 _publicKey\[String\]_
 
 If voltmx.payment.TOKENIZATION\_DIRECT is selected, publicKey is mandatory. This public key is used to encrypt the returned token.
 
-Example
+### Example
 
-{% highlight voltMx %}publicKey : "abc123"
+{% highlight VoltMx %}
+publicKey : "abc123"
 {% endhighlight %}
 
 1.5 _paymentSummary\[JSON Map Object\]_
@@ -460,9 +484,10 @@ paymentSummary : { currenyCode : "", priceDetails : { } }
 
 You must specify the ISO 4217 currency code of the transaction here. This is a mandatory field. If currencyCode is not specified, error code 102 is returned in errorcallback.
 
-Example
+### Example
 
-{% highlight voltMx %}currencyCode : “USD”
+{% highlight VoltMx %}
+currencyCode : “USD”
 {% endhighlight %}
 
 1.5.2 _priceDetails\[JSON Map Object\]_
@@ -488,7 +513,7 @@ When the getPaymentData call is successful, this callback is invoked with the pa
 
 The billing postal address, name, email, and phone number details are returned in this key.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
@@ -496,45 +521,50 @@ Platform Availability
 
 The billing postal address information is returned in this key.
 
-Example
+### Example
 
-{% highlight voltMx %}var billingName = paymentResponseData.billingAddressInfo.name;
+{% highlight VoltMx %}
+var billingName = paymentResponseData.billingAddressInfo.name;
 {% endhighlight %}
 
 2.1.2 _email_
 
 The billing email address is returned in this key.
 
-Example
+### Example
 
-{% highlight voltMx %}var billingemail = paymentResponseData.billingAddressInfo.email;
+{% highlight VoltMx %}
+var billingemail = paymentResponseData.billingAddressInfo.email;
 {% endhighlight %}
 
 2.1.3 _phoneNumber_
 
 The billing phone number is returned in this key.
 
-Example
+### Example
 
-{% highlight voltMx %}var billing_phone = paymentResponseData.billingAddressInfo.phoneNumber;
+{% highlight VoltMx %}
+var billing_phone = paymentResponseData.billingAddressInfo.phoneNumber;
 {% endhighlight %}
 
 2.1.4 _locality_
 
 The billing locality is returned in this key. If the city, town, etc., details are not specified, the value defaults to "".
 
-Example
+### Example
 
-{% highlight voltMx %}var billing_locality = paymentResponseData.billingAddressInfo.locality;
+{% highlight VoltMx %}
+var billing_locality = paymentResponseData.billingAddressInfo.locality;
 {% endhighlight %}
 
 2.1.5 _administrativeArea_
 
 The billing administrativeArea is returned in this key. If the state, province, etc., details are not specified, the value defaults to "".
 
-Example
+### Example
 
-{% highlight voltMx %}var billing_state = paymentResponseData.billingAddressInfo.administrativeArea;
+{% highlight VoltMx %}
+var billing_state = paymentResponseData.billingAddressInfo.administrativeArea;
 {% endhighlight %}
 
 2.1.6 _country_
@@ -545,27 +575,30 @@ For Android : The 2-letter ISO-3166 country code.
 
 For iOS: The country name.
 
-Example
+### Example
 
-{% highlight voltMx %}var billing_country = paymentResponseData.billingAddressInfo.country;
+{% highlight VoltMx %}
+var billing_country = paymentResponseData.billingAddressInfo.country;
 {% endhighlight %}
 
 2.1.7 _postalCode_
 
 The billing postalCode is returned in this key. If the postal, zip code, etc., details are not specified, its value defaults to "".
 
-Example
+### Example
 
-{% highlight voltMx %}var billing_postalCode = paymentResponseData.billingAddressInfo.postalCode;
+{% highlight VoltMx %}
+var billing_postalCode = paymentResponseData.billingAddressInfo.postalCode;
 {% endhighlight %}
 
 2.1.8 _area_
 
 The billing local area is returned in this key. If it is not specified, the value defaults to "".
 
-Example
+### Example
 
-{% highlight voltMx %}var billing_area = paymentResponseData.billingAddressInfo.area;
+{% highlight VoltMx %}
+var billing_area = paymentResponseData.billingAddressInfo.area;
 {% endhighlight %}
 
 2.2 _shippingAddressInfo_
@@ -576,45 +609,50 @@ The shipping postal address, name, email, and phone number details are returned 
 
 The shipping address information is returned in this key.
 
-Example
+### Example
 
-{% highlight voltMx %}var billingName = paymentResponseData.shippingAddressInfo.name;
+{% highlight VoltMx %}
+var billingName = paymentResponseData.shippingAddressInfo.name;
 {% endhighlight %}
 
 2.2.2 _email_
 
 The shipping email address is returned in this key.
 
-Example
+### Example
 
-{% highlight voltMx %}var billingemail = paymentResponseData.shippingAddressInfo.email;
+{% highlight VoltMx %}
+var billingemail = paymentResponseData.shippingAddressInfo.email;
 {% endhighlight %}
 
 2.2.3 _phoneNumber_
 
 The shipping phone number is returned in this key.
 
-Example
+### Example
 
-{% highlight voltMx %}var billing_phone = paymentResponseData.shippingAddressInfo.phoneNumber;
+{% highlight VoltMx %}
+var billing_phone = paymentResponseData.shippingAddressInfo.phoneNumber;
 {% endhighlight %}
 
 2.2.4 _locality_
 
 The shipping locality is returned in this key. If the city, town, etc., details are not specified, the value defaults to "".
 
-Example
+### Example
 
-{% highlight voltMx %}var shipping_locality = paymentResponseData.shippingAddressInfo.locality;
+{% highlight VoltMx %}
+var shipping_locality = paymentResponseData.shippingAddressInfo.locality;
 {% endhighlight %}
 
 2.2.5 _administrativeArea_
 
 The shipping administrativeArea is returned in this key. If the state, province, etc., details are not specified, the value defaults to "".
 
-Example
+### Example
 
-{% highlight voltMx %}var shipping_state = paymentResponseData.shippingAddressInfo.administrativeArea;
+{% highlight VoltMx %}
+var shipping_state = paymentResponseData.shippingAddressInfo.administrativeArea;
 {% endhighlight %}
 
 2.2.6 _country_
@@ -625,27 +663,30 @@ For Android : The 2-letter ISO-3166 country code.
 
 For iOS: The country name.
 
-Example
+### Example
 
-{% highlight voltMx %}var shipping_country = paymentResponseData.shippingAddressInfo.country;
+{% highlight VoltMx %}
+var shipping_country = paymentResponseData.shippingAddressInfo.country;
 {% endhighlight %}
 
 2.2.7 _postalCode_
 
 The shipping postalCode is returned in this key. If the postal, zip code, etc., details are not specified, the value defaults to "".
 
-Example
+### Example
 
-{% highlight voltMx %}var shipping_postalCode = paymentResponseData.shippingAddressInfo.postalCode;
+{% highlight VoltMx %}
+var shipping_postalCode = paymentResponseData.shippingAddressInfo.postalCode;
 {% endhighlight %}
 
 2.2.8 _area_
 
 The shipping local area is returned in this key. If it is not specified, the value defaults to "".
 
-Example
+### Example
 
-{% highlight voltMx %}var shipping_area = paymentResponseData.shippingAddressInfo.area;
+{% highlight VoltMx %}
+var shipping_area = paymentResponseData.shippingAddressInfo.area;
 {% endhighlight %}
 
 2.3 _selectedCardInfo_
@@ -656,36 +697,40 @@ The selected card network, payment method type, and card number are returned in 
 
 The selected card network is present in this key. Volt MX constants are returned in this key.
 
-Example
+### Example
 
-{% highlight voltMx %}var card_network = paymentResponseData.selectedCardInfo.cardNetwork;
+{% highlight VoltMx %}
+var card_network = paymentResponseData.selectedCardInfo.cardNetwork;
 {% endhighlight %}
 
 2.3.2 _cardPaymentMethod_
 
 The selected card pay method (Credit, Debit, Prepaid ) is present in this key. Volt MX constants are returned in this key.
 
-Example
+### Example
 
-{% highlight voltMx %}var card_class =  paymentResponseData.selectedCardInfo.cardPymentMethod;
+{% highlight VoltMx %}
+var card_class =  paymentResponseData.selectedCardInfo.cardPymentMethod;
 {% endhighlight %}
 
 2.4 _paymentToken_
 
 Transaction token is returned in this key.
 
-Example
+### Example
 
-{% highlight voltMx %}var token = paymentResponseData.paymentToken;
+{% highlight VoltMx %}
+var token = paymentResponseData.paymentToken;
 {% endhighlight %}
 
 2.5 _transactionID_
 
 The unique ID assigned to this payment transaction by native platform.
 
-Example
+### Example
 
-{% highlight voltMx %}var token = paymentResponseData.transactionID;
+{% highlight VoltMx %}
+var token = paymentResponseData.transactionID;
 {% endhighlight %}
 
 3\. _errorCallback\[JSON Object\]_
@@ -700,13 +745,14 @@ When the getPaymentData() call fails, this callback is invoked with any of the e
 *   106 for not specifying "label".
 *   107 for not specifying "publicKey"
 
-Return Values
+### Return Values
 
 If the getPaymentData call is successful, successCallback is invoked with paymentDataResponse; else, errorCallback is invoked.
 
-Example
+### Example
 
-{% highlight voltMx %}var paymentCardsInfo = {
+{% highlight VoltMx %}
+var paymentCardsInfo = {
     "paymentCardNetworks": [voltmx.payment.NETWORK_MASTERCARD, voltmx.payment.NETWORK_VISA],
     "paymentMethodType": [voltmx.payment.METHODTYPE_PREPAID, voltmx.payment.METHODTYPE_ANDROIDPAY,
         voltmx.payment.METHODTYPE_GOOGLE
@@ -752,29 +798,33 @@ var paymentRequestData = {
 voltmx.payment.getPaymentData(getPaymentDataSuccessCallback, getPaymentDataErrorCallback, paymentRequestData);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.payment.getSupportedPaymentNetworks](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.payment.getSupportedPaymentNetworks</summary> 
 
 * * *
 
 Returns the list of available payment networks that are supported by Apple Pay.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 getSupportedPaymentNetworks()
-
-Example
-
-{% highlight voltMx %}var supportedNetworksList = voltmx.payment.getSupportedPaymentNetworks();
 {% endhighlight %}
 
-Return Values
+### Example
+
+{% highlight VoltMx %}
+var supportedNetworksList = voltmx.payment.getSupportedPaymentNetworks();
+{% endhighlight %}
+
+### Return Values
 
 An array of constants that represent the available payment networks. The values returned by this function are as follows:
 
@@ -792,13 +842,14 @@ An array of constants that represent the available payment networks. The values 
 *   QUICPay
 *   Visa
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.payment.updateTransactonResponse(voltmxconstant)](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.payment.updateTransactonResponse(voltmxconstant)</summary> 
 
 * * *
 
@@ -807,19 +858,23 @@ For iOS, on receiving the payment token, the Payment Sheet UI is not automatical
 *   voltmx.payment.TRANSACTION\_SUCCESS : If the transaction is successful.
 *   voltmx.payment.TRANSACTION\_FAILED : If the transaction is unsuccessful.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 updateTransactionResponse()
-
-Example
-
-{% highlight voltMx %}voltmx.payment.updateTransactionResponse(voltmx.payment.TRANSACTION_SUCCESS);
 {% endhighlight %}
 
-Platform Availability
+### Example
+
+{% highlight VoltMx %}
+voltmx.payment.updateTransactionResponse(voltmx.payment.TRANSACTION_SUCCESS);
+{% endhighlight %}
+
+### Platform Availability
 
 *   iOS
 
 * * *
+</details>
 
 ![](resources/prettify/onload.png)

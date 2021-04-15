@@ -9,26 +9,29 @@ Functions
 
 The voltmx.filter namespace provides the following function.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.filter.createFilter Function](javascript:void(0);) 
+<details close markdown="block"><summary>voltmx.filter.createFilter Function</summary> 
 
 * * *
 
 Creates a new filter object for use with the Image widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.filter.createFilter();
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 A new filter object.
 
-Platform Availability
+### Platform Availability
 
 All platforms.
 
+</details>
 ![](resources/prettify/onload.png)

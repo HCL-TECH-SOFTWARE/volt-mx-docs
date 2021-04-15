@@ -94,7 +94,8 @@ Conflict Resolution Policy contains the following options:
     
    Request Mapper
         
-    {% highlight voltMx %}<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    {% highlight VoltMx %}
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <mapper xmlns="http://www.voltmx.com/ns/mapper">
         <map inputpath="request_in" outputpath="request_out">
         <set-param inputpath="../criteria/filter/LastModifiedDate" outputpath="from_timestamp"/>
@@ -107,7 +108,8 @@ Conflict Resolution Policy contains the following options:
         
    Response Mapper
         
-    {% highlight voltMx %}<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    {% highlight VoltMx %}
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <mapper xmlns="http://www.voltmx.com/ns/mapper">
         <map inputpath="response_in" outputpath="response_out">
         <set-param inputpath="hasMoreRecords" outputpath="hasMoreRecords"/>

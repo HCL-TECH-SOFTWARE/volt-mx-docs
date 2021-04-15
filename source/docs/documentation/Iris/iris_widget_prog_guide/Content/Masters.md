@@ -8,7 +8,7 @@ category: "iris_widget_prog_guide"
 Masters
 =======
 
-Masters enable you to package reusable functionality into a single modular unit. You can insert widgets inside of masters, and the widgets can respond to all the events that they normally do. With masters, you can build modular units of highly reusable code that is portable across multiple apps. For detailed information on masters, please see [Using Masters]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Masters.html) in the [VoltMX Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
+Masters enable you to package reusable functionality into a single modular unit. You can insert widgets inside of masters, and the widgets can respond to all the events that they normally do. With masters, you can build modular units of highly reusable code that is portable across multiple apps. For detailed information on masters, please see [Using Masters]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Masters.html) in the [VoltMX Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 Masters are based on the [flexContainer](FlexContainer.html) widget. To turn a flexContainer into a master, simply set it's `isMaster` property to `true`. The master serves as a container for other widgets, just like a normal flexForm. Any widget that can be used in a flexForm can be used in a master.
 

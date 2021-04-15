@@ -12,7 +12,8 @@ The basic properties of Video widget are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
@@ -20,19 +21,21 @@ Enables you to control accessibility behavior and alternative text for the widge
 
 For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Object
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
@@ -61,11 +64,11 @@ SPA/Desktop Web limitations
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+<b>Example 1</b> 
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -76,11 +79,11 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+<b>Example 2</b> 
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -92,38 +95,41 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>anchorPoint Property</summary>
 
 * * *
 
 Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 anchorPoint
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The value for this property is a JavaScript dictionary object with the keys "x" and "y". The values for the "x" and "y" keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}Form1.widget1.anchorPoint = {
     "x": 0.5,
@@ -131,13 +137,14 @@ Example
 };
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
@@ -147,27 +154,29 @@ The bottom property determines the position of the bottom edge of the widget’s
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 bottom
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -175,14 +184,15 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA , and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
@@ -190,25 +200,27 @@ This property determines the center of a widget measured from the left bounds of
 
 The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 centerX
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -216,14 +228,15 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
@@ -231,25 +244,27 @@ This property determines the center of a widget measured from the top bounds of 
 
 The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 centerY
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
@@ -257,32 +272,35 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[controls Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>controls Property</summary>
 
 * * *
 
 Specifies whether to display the video controls or not.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 controls
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read only
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is true.
 
@@ -290,42 +308,45 @@ If set to false, the video controls are not displayed.
 
 If set to true, the video controls are displayed.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the controls property of a Video widget.  
+{% highlight VoltMx %}//Sample code to set the controls property of a Video widget.  
   
 frmVideo.myVideo.controls=true;  
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   iOS, Android, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cursorType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cursorType Property</summary>
 
 * * *
 
 In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 cursorType
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String.
 
 You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 To add the `cursorType` property using Volt MX Iris in a Desktop Web application, follow these steps.
 
@@ -342,9 +363,9 @@ To add the `cursorType` property using Volt MX Iris in a Desktop Web application
     You can see that the **Cursor Type** property has been added under the **General** section.
 8.  Select a value from the drop-down list to set the **Cursor Type** for the widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %} //This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
   
@@ -352,34 +373,37 @@ frmButton.myButton.cursorType = "wait";
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCaptions Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCaptions Property</summary>
 
 * * *
 
 This property specifies the visibility of captions for a video that is playing.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 enableCaptions
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the enableCaptions property of a Video widget   
+{% highlight VoltMx %}//Sample code to set the enableCaptions property of a Video widget   
   
 //where myVideo is a video widget in frmVideo Form
 frmVideo.myVideo.enableCaptions = true/false
@@ -390,13 +414,14 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
@@ -404,19 +429,21 @@ The `enable` property is used to control the actionability of the widgets. In a 
 
 This is a constructor level property and applicable for all widgets in Volt MX Iris.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 enable
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value of this property is true.
 
@@ -424,16 +451,16 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
   
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
@@ -441,7 +468,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -449,19 +477,21 @@ Determines the height of the widget and measured along the y-axis.
 
 The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 height
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number, String, and Constant
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 Following are the available measurement options:
 
@@ -471,9 +501,9 @@ Following are the available measurement options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}/*Sample code to set the height property for a Video widget by using DP, Percentage and Pixels.*/
+{% highlight VoltMx %}/*Sample code to set the height property for a Video widget by using DP, Percentage and Pixels.*/
 frmVideo.myVideo.height="50dp";
 
 frmVideo.myVideo.height="10%";
@@ -482,7 +512,7 @@ frmVideo.myVideo.height="10px";
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS
@@ -492,7 +522,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
@@ -500,21 +531,23 @@ id is a unique identifier of a Video consisting of alpha numeric characters. Eve
 
 > **_Note:_** This is a **Construct-only property**. You cannot set this property through a widget constructor. But you can always read and write data to it.  
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String - \[Mandatory\]
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read only)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Defining the properties for Video with Id:"video"
+{% highlight VoltMx %}//Defining the properties for Video with Id:"video"
 var video1 = new voltmx.ui.Video({
     "id": "video1",
     "isVisible": true,
@@ -537,37 +570,40 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the widget. This will help in avoiding the globals to most part of the programming.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The info property can hold any JSObject. After assigning the JSObject to this property, the JSObject should not be modified.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the info property for a Video widget.
+{% highlight VoltMx %}//Sample code to set the info property for a Video widget.
 frmVideo.myVideo.info={
     key: "video"
 };
@@ -580,13 +616,14 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
@@ -598,21 +635,23 @@ If set to _false,_ the widget is not displayed.
 
 If set to _true,_ the widget is displayed.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the isVisible property of a Video widget.  
+{% highlight VoltMx %}//Sample code to set the isVisible property of a Video widget.  
   
 frmVideo.myVideo.isVisible=true;  
 
@@ -624,13 +663,14 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[left Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>left Property</summary>
 
 * * *
 
@@ -638,25 +678,27 @@ This property determines the lower left corner edge of the widget and is measure
 
 The left property determines the position of the left edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 left
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
@@ -664,14 +706,15 @@ frmHome.widgetID.left = "10%";
 frmHome.widgetID.left = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[margin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>margin Property</summary>
 
 * * *
 
@@ -689,21 +732,23 @@ The following image illustrates a widget with a defined margin:
 
 ![](Resources/Images/Margin.png)
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 margin
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Array of Numbers
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the margin property of a Video widget.  
+{% highlight VoltMx %}//Sample code to set the margin property of a Video widget.  
   
 frmVideo.myVideo.margin=[5, 5, 5, 5];  
 
@@ -713,13 +758,14 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -727,21 +773,23 @@ This property specifies the maximum height of the widget and is applicable only 
 
 The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 maxHeight
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -749,14 +797,15 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -764,21 +813,23 @@ This property specifies the maximum width of the widget and is applicable only w
 
 The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 maxWidth
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -786,14 +837,15 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -801,21 +853,23 @@ This property specifies the minimum height of the widget and is applicable only 
 
 The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 minHeight
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -823,14 +877,15 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -838,21 +893,23 @@ This property specifies the minimum width of the widget and is applicable only w
 
 The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 minWidth
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read only
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -860,14 +917,15 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>opacity Property</summary>
 
 * * *
 
@@ -875,39 +933,42 @@ Specifies the opacity of the widget. The value of this property must be in the r
 
 Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 opacity
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** This property has more priority compared to the values coming from the configured skin.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
+{% highlight VoltMx %}//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
 
 //Sample code to make the widget opaque by using the opacity property.
 frmHome.widgetID.opacity = 1;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Not available in the IDE.
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[padding Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>padding Property</summary>
 
 * * *
 
@@ -929,21 +990,23 @@ The following image illustrates a widget with a defined padding:
 
 ![](Resources/Images/Padding.png)
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 padding
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Array of Numbers
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the padding property of a Video widget.  
+{% highlight VoltMx %}//Sample code to set the padding property of a Video widget.  
   
 frmVideo.myVideo.padding=[5, 5, 5, 5];  
 
@@ -953,68 +1016,75 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Helps you access the parent of the widget. If the widget is not part of the widget hierarchy, the parent property returns null.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 parent
+{% endhighlight %}
 
-Read/Write
+<b>Read/Write</b>
 
 Read only
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** The property works for all the widgets inside a FlexForm, FlexContainer or FlexScrollContainer.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function func() {
+{% highlight VoltMx %}function func() {
 
     voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Not available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[poster Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>poster Property</summary>
 
 * * *
 
 You can specify an image which is to be displayed as a poster or as a starting image for the video. The image location must point to an external URL. For example, www.voltmx.com/sites/all/themes/voltmx/logo.png
 
-Syntax
+<b>Syntax</b>
 
-{% highlight voltMx %} poster
+{% highlight VoltMx %} poster
 {% endhighlight %}
 
-Type
+<b>Type</b>
 
+{% highlight VoltMx %}
 String
+{% endhighlight %}
 
-Read/Write
+
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Defining the properties for Video with poster:"Sample URL"
+{% highlight VoltMx %}//Defining the properties for Video with poster:"Sample URL"
 var videoBasic = {
     Id: "video",
     skin: "vSkin",
@@ -1044,14 +1114,15 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Mobile Web (advanced)
 *   SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -1061,7 +1132,7 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1084,21 +1155,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No (only during widget-construction time)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -1123,14 +1196,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -1140,7 +1214,7 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1163,21 +1237,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No (only during widget-construction time)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -1202,14 +1279,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -1219,7 +1297,7 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1242,21 +1320,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No (only during widget-construction time)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -1282,14 +1362,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -1299,25 +1380,28 @@ The right property determines the position of the right edge of the widget’s b
 
 The right property is used only if the width property is not provided.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 right
+{% endhighlight %}
 
-Type
+
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -1325,34 +1409,37 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin Property</summary>
 
 * * *
 
 Specifies the look and feel of the video.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 skin
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the skin property of a Video widget.  
+{% highlight VoltMx %}//Sample code to set the skin property of a Video widget.  
   
 frmVideo.myVideo.skin="vSkin";  
 
@@ -1362,13 +1449,14 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[source Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>source Property</summary>
 
 * * *
 
@@ -1376,25 +1464,27 @@ The feature specifies the URLs of a video that is to be streamed, the path of th
 
 > **_Note:_** It is mandatory to specify the URLs for all the three different formats. The device browser plays a format that is compatible with the underlying Native SDK.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 source
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Remarks
+<b>Remarks</b>
 
 Define the source parameter as a JSObject with key as mp4, mov, or rawBytes. For example:
 
 *   SPA
 
-{% highlight voltMx %}{
+{% highlight VoltMx %}{
     mp4: "mp4 URL",
     webm: "webm URL",
     ogg: "ogv URL"
@@ -1403,7 +1493,7 @@ Define the source parameter as a JSObject with key as mp4, mov, or rawBytes. For
 
 *   iOS
 
-{% highlight voltMx %}{
+{% highlight VoltMx %}{
     mp4: "mp4 URL",
     mov: "mov URL",
     "rawBytes": camera1.rawBytes
@@ -1412,7 +1502,7 @@ Define the source parameter as a JSObject with key as mp4, mov, or rawBytes. For
 
 *   Android
 
-{% highlight voltMx %}{
+{% highlight VoltMx %}{
     mp4: "mp4 URL",
     "rawBytes": camera1.rawBytes
 }
@@ -1431,7 +1521,7 @@ The following table lists the formats supported for different platforms.
 
 In the iOS and Android platforms, by default, mp4 format is selected as the source format even when other formats are defined. For example, if the source is defined as shown below, the application selects the mp4 format as the source and ignores other source files irrespective of order of the definition - that is, in the below example, even "rawBytes":camera1.rawBytes is defined at the beginning of the syntax, still the application selects the mp4 file as source.
 
-{% highlight voltMx %}"source": { 
+{% highlight VoltMx %}"source": { 
 	  "rawBytes":camera1.rawBytes, 
 	  "mp4":"URL goes here", 
 	  "mov": ”URL goes here”
@@ -1444,9 +1534,9 @@ In the iOS platform, when only mov and rawBytes source files are defined in the 
 
 You can modify the source type using the [setSource](Video_Method.html#setSourc) method.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}/*Sample code to set the source property of a Video widget where myCamera is a Camera widget in frmVideo Form.*/
+{% highlight VoltMx %}/*Sample code to set the source property of a Video widget where myCamera is a Camera widget in frmVideo Form.*/
 frmVideo.myVideo.source = {
  "mp4": "http://www.quirksmode.org.html5/videos/big_buck_bunny.mp4",
  "mov": "video file path",
@@ -1459,33 +1549,36 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[text Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>text Property</summary>
 
 * * *
 
 Specifies a general or descriptive text for the Video widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 text
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read and Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the text property of a Video widget.
+{% highlight VoltMx %}//Sample code to set the text property of a Video widget.
 frmVideo.myVideo.text="samplevideo";  
 
 {% endhighlight %}
@@ -1494,13 +1587,14 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
@@ -1508,25 +1602,27 @@ This property determines the top edge of the widget and measured from the top bo
 
 The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 top
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -1534,40 +1630,43 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transform Property</summary>
 
 * * *
 
 Contains an animation transformation that can be used to animate the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 transform
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi) function.
 
-Example
+<b>Example</b>
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}//Animation sample
+{% highlight VoltMx %}//Animation sample
 var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
@@ -1575,23 +1674,26 @@ newTransform.translate3D(223, 12, 56);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[tracks Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>tracks Property</summary>
 
 * * *
 
 Specifies the tracks or captions of a playing video.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 tracks
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
@@ -1602,11 +1704,11 @@ This JSON object contains the following keys:
 *   `srclang`: The language name of the subtitles.
 *   `default`: When configured to True, the track list will display if captions are enabled.
 
-Read/Write
+<b>Read/Write</b>
 
 Read and Write
 
-Remarks
+<b>Remarks</b>
 
 When you import a `.vtt` file containing the subtitles/ captions of the video using Iris, the file is placed in the following folders:
 
@@ -1617,37 +1719,40 @@ If you set the [enableCaptions](#enableCaptions) property to true, by default, t
 
 You can modify the source type using the [setTracks](Video_Method.html#setTracks) method.
 
-Example
+<b>Example</b>
 
 Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[videoGravityProperty](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>videoGravityProperty</summary>
 
 * * *
 
 videoGravity Property helps to decide how to render a video content inside the Video widget. This property helps to decide whether the video content needs to scale or stretch inside the Video widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 videoGravity
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number (constants)
 
-Read/Write
+<b>Read/Write</b>
 
 Read and Write
 
-Remarks
+<b>Remarks</b>
 
 The defaut value for this property is constants .VIDEO\_GRAVITY\_RESIZE\_ASPECT.
 
@@ -1657,37 +1762,41 @@ You can assign the following constants to the **videoGravity** property.
 *   constants .VIDEO\_GRAVITY\_RESIZE\_ASPECT: Use this option, if you want to preserve the video's aspect ratio.
 *   constants .VIDEO\_GRAVITY\_RESIZE\_ASPECT\_FILL: Use this option, when you want to preserve the video's aspect ratio as well as fill the video inside the Video widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 Form1.videoWidget.videoGravity = constants.VIDEO_GRAVITY_RESIZE_ASPECT_FILL;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[volume Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>volume Property</summary>
 
 * * *
 
 Specifies the current volume of the audio of the video.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 volume
+{% endhighlight %}
 
-Type
+
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read and Write
 
-Remarks
+<b>Remarks</b>
 
 The value of this property should be between 0.0 and 1.0. For example:
 
@@ -1695,24 +1804,27 @@ The value of this property should be between 0.0 and 1.0. For example:
 *   0.5 is the half volume (50 percent).
 *   0.0 is no volume (muted).
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the volume property of a Video widget.
+{% highlight VoltMx %}//Sample code to set the volume property of a Video widget.
 frmVideo.myVideo.volume=0.5;  
 
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetAlignment Property</summary>
 
 * * *
 
 Indicates how a widget is to be anchored with respect to its parent. Each of these below options have a horizontal alignment attribute and a vertical alignment attribute. For example, WIDGET\_ALIGN\_TOP\_LEFT specifies the vertical alignment as TOP and horizontal alignment as LEFT.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 widgetAlignment
+{% endhighlight %}
 
 Default: WIDGET\_ALIGN\_CENTER
 
@@ -1728,17 +1840,17 @@ The available options are:
 *   WIDGET\_ALIGN\_BOTTOM\_CENTER
 *   WIDGET\_ALIGN\_BOTTOM\_RIGHT
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the widgetAlignment property of a Video widget.
+{% highlight VoltMx %}//Sample code to set the widgetAlignment property of a Video widget.
 frmVideo.myVideo.widgetAlignment=constants.WIDGET_ALIGN_MIDDLE_LEFT;  
 
 {% endhighlight %}
@@ -1747,27 +1859,30 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetSwipeMove Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetSwipeMove Property</summary>
 
 * * *
 
 This property is used to enable and configure left or right swipe actions for a widget. The widgetSwipeMove Property can be used for all widgets . The most common use case is for implementing swipe action for individual rows in Segment.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 widgetSwipeMove
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
@@ -1779,7 +1894,7 @@ The following table consists of the parameters of the _callback_ parameter:
 
 <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 111px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 93px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter consists of the widget handle or ID of the widget on which the swipe action has been performed.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">context</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is applicable only for widgets inside the Segment with row templates. Each context parameter consists of <i>rowIndex</i>, <i>sectionIndex</i> and <i>widgetref</i></td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">rowIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the row index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">sectionIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the section index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetref</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This parameter stores the handle of the Segment containing the swiped widget.</td></tr></tbody></table>
 
-Remarks
+<b>Remarks</b>
 
 *   For a Segment, the **widgetSwipeMove** Property is configured while setting the data of the Segment.
 
@@ -1794,11 +1909,11 @@ Limitations
 *   If the widgetSwipeMove property is configured on a top level Flex container of a segment template, the onRowClick event will not be triggered. - Applicable on iOS, Android, and SPA.
 *   Android limitation: On Android devices, when the user lifts their finger, the transition occurs immediately.
 
-Example
+<b>Example</b>
 
 Following is a code snippet for a mail app. Here we have used a Segment for listing the mail and the _widgetSwipeMove_ Property has been configured for the _SwipeFlex_ FlexContainer.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.  
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.  
 //Here, we have shown how to use the widetSwipeMove property for Button widget.
 /*You need to make a corresponding use of the 
 widgetSwipeMove property for other applicable widgets.*/  
@@ -1834,13 +1949,14 @@ this.view.myButton.widgetSwipeMove=swipeMoveConfig;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android, iOS, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -1848,19 +1964,21 @@ This property determines the width of the widget and is measured along the x-axi
 
 The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 width
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number, String, and Constant
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 Following are the options that can be used as units of width:
 
@@ -1870,9 +1988,9 @@ Following are the options that can be used as units of width:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}/*Sample code to set the width property for a Video widget by using DP, Percentage and Pixels.*/
+{% highlight VoltMx %}/*Sample code to set the width property for a Video widget by using DP, Percentage and Pixels.*/
 frmVideo.myVideo.width="50dp";
 
 frmVideo.myVideo.width="10%";
@@ -1881,7 +1999,7 @@ frmVideo.myVideo.width="10px";
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS
@@ -1891,7 +2009,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
@@ -1899,19 +2018,21 @@ This property specifies the stack order of a widget. A widget with a higher zInd
 
 The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is 1.
 
@@ -1931,27 +2052,28 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 **voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+{% highlight VoltMx %}//Sample code to set the ZIndex value to Auto  
  var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
   "zIndex": voltmx.flex.ZINDEX_AUTO
 });
 
-{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+{% endhighlight %}{% highlight VoltMx %}//Sample code to set the ZIndex value to Auto
 flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
+</details>

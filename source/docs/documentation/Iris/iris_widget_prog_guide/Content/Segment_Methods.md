@@ -22,17 +22,19 @@ Additionally, you can also specify the _Meta Info_ for the rows as explained in 
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addAll Method](javascript:void(0);)
+
+<details close markdown="block"><summary>addAll Method</summary>
 
 * * *
 
 This method allows you to add new data to the segment.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 addAll(data)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 data
 
@@ -56,7 +58,7 @@ callbacks
 
 A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Remarks
+### Remarks
 
 The new data is appended to the existing data. If the segment has no data, the new data is placed in the segment.
 
@@ -70,9 +72,10 @@ If the animation property is defined in the addAll method, the animation will be
 
 The widget/row model will be updated based on the animation fill modes, so that the widget/row would always show the appropriate values. Note that your app must provide rowTemplateId as an empty object in the data object of a row to update the row model.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to use addAll method without animation  
+{% highlight VoltMx %}
+//Sample code to use addAll method without animation  
 formSegment.mysegment.addAll([{
     dataId1: "data1",
     dataId2: "data2",
@@ -100,23 +103,25 @@ formSegment.mysegment.addAll([{
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addDataAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addDataAt Method</summary>
 
 * * *
 
 Allows you to add one row of data at a given index or within a section.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 addDataAt(data,rowIndex,sectionIndex)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 data
 
@@ -158,7 +163,7 @@ callbacks
 
 A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Remarks
+### Remarks
 
 The new data is placed before the index. The existing data is pushed to the next row.
 
@@ -170,9 +175,10 @@ The widget/ row model will be updated based on the animation fill modes, so that
 
 For example, the syntax to get the label text is `segment.selectedValue.label(text)`. Earlier this was written as `segment.selectedValue.label.text`.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to use addDataAt method without animation. In this sample code, the data is added above the 15th Index position in the first section of the Segment, mySegment.*/  
+{% highlight VoltMx %}
+/*Sample code to use addDataAt method without animation. In this sample code, the data is added above the 15th Index position in the first section of the Segment, mySegment.*/  
 formSegment.mysegment.addDataAt(dataObj1, 15);  
   
 /*Sample code to use addDataAt method with animation. In this sample code, the data is added above the 15th Index position in the first section of the Segment, mySegment.*/  
@@ -183,13 +189,14 @@ formSegment.mysegment.addDataAt(dataObj1, 15,0);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addGestureRecognizer Method</summary>
 
 * * *
 
@@ -229,11 +236,11 @@ This function will be raised asynchronously
 
 See Remarks for the syntax of this function.
 
-Return Values
+### Return Values
 
 String - Reference to the gesture is returned.
 
-Remarks
+### Remarks
 
 The values for the _gestureType_parameter are:
 
@@ -262,7 +269,7 @@ Gesture Type:TAP
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[Number\] - specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
 
-For example:  
+### For example:  
 
 {fingers:1,taps:1}
 
@@ -270,7 +277,7 @@ Gesture Type:SWIPE
 
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 
-For example:
+### For example:
 
 {fingers: 1}
 
@@ -278,7 +285,7 @@ Gesture Type:LONGPRESS
 
 *   pressDuration \[Number\] - specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if pressDuration is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This is not applicable to Windows.
 
-For example:
+### For example:
 
 {pressDuration=1}.
 
@@ -303,7 +310,7 @@ The syntax for the _onGestureClosure_callback function are:
 
 Specifies the function that needs to be executed when a gesture is recognized.
 
-This function will be raised asynchronously and has the following Syntax:
+### This function will be raised asynchronously and has the following Syntax:
 
 onGestureClosure(widgetRef, gestureInfo, context)
 
@@ -336,7 +343,7 @@ gestureInfo table has the following key-value pairs:
 *   2 - constants.TOUCHTYPE\_MOUSE
 *   translationX and translationY \[number\] : cumulative distance as number. (Applicable only for PAN gesture type)
 
-context table has the following key-value pairs:
+### context table has the following key-value pairs:
 
 *   rowIndex \[number\] : row index of the segui where gesture was recognised. (Applicable to gestures added to segUI rows)
 *   sectionIndex \[number\] : section index of the segui where gesture was recognised. (Applicable to gestures added to segUI rows)
@@ -349,7 +356,7 @@ If you swipe a larger form, the default behavior is to scroll up and down depend
 
 If you swipe a Segmented UI with huge number of rows, the default behavior is to scroll the Segmented UI. If you define a SWIPE gesture on such segments, the gesture closure gets executed in addition to scrolling the form.
 
-Gestures can be added only for the following widgets:
+### Gestures can be added only for the following widgets:
 
 *   Flex Container
     
@@ -361,9 +368,10 @@ In the android platform, the top and bottom gestures work only when the scrollin
 *   RIGHTTAP applicable only to Windows 10
 *   ROTATION is not supported on android.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
+{% highlight VoltMx %} 
+//Sample code to add Gestures to the frmGestures FlexForm.
 //Code to add DOUBLE TAP gesture to the frmGestures, FlexForm.
 var doubletp = {
  fingers: 1,
@@ -395,23 +403,25 @@ function onGestureFunction(commonWidget, gestureInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addSectionAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addSectionAt Method</summary>
 
 * * *
 
 This method allows you to add one section with rows to the segment.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %} 
 addSectionAt(data,sectionIndex)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 data
 
@@ -441,7 +451,7 @@ callbacks
 
 A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Remarks
+### Remarks
 
 > **_Note:_** Sections and its rows can have the standard template key to indicate a new template for this added row. However it is developer responsibility to ensure widgetdatamap covers the widgets present in the new template.
 
@@ -453,9 +463,10 @@ The widget/row model will be updated based on the animation fill modes, so that 
 
 For example, the syntax to get the label text is `segment.selectedValue.label(text)`. In previous versions this was written as `segment.selectedValue.label.text`.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to use the addSectionAt method without animation. In this sample code, the data is added above the 15th Index position in the Segment,mySegment.*/  
+{% highlight VoltMx %}
+/*Sample code to use the addSectionAt method without animation. In this sample code, the data is added above the 15th Index position in the Segment,mySegment.*/  
   
 formSegment.mysegment.addSectionAt(dataObj1, 15);  
   
@@ -464,27 +475,29 @@ formSegment.mysegment.addSectionAt(dataObj1, 15);
 formSegment.mysegment.addSectionAt (dataObj1, 15, animation);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[animate Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>animate Method</summary>
 
 * * *
 
 Applies an animation to the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 animate (animationObj, animateConfig, animationCallbacks)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _animationObj_
 
-An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#createAn) function.
+An `animation` object created using [voltmx.ui.createAnimation] function.
 
 _animationConfig_
 
@@ -499,11 +512,11 @@ A JavaScript dictionary that contains key-value pairs. The following keys are su
 | animationEnd | A JavaScript function that is invoked with the animation ends. For more information, see the **Remarks** section below. |
 | animationStart | A JavaScript function that is invoked with the animation starts. For more information, see the **Remarks** section below. |
 
-Return Values
+### Return Values
 
 Returns a platform-specific handle to the animation. This handle currently not used, but is returned for possible future requirements use.
 
-Remarks
+### Remarks
 
 The callback for the `animationStart` key in the JavaScript object passed in this method's _animationCallbacks_ parameter has the following signature.
 
@@ -525,9 +538,10 @@ The `animate` method throws an Invalid Animation Definition Exception if animati
 
 If the widget is not part of the currently visible view hierarchy, calling this method does nothing. Because this method is asynchronous and immediately returns, it does not wait for the animation to start or complete.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code of animation
+{% highlight VoltMx %}
+//Sample code of animation
 function AnimateBoth() {
     var getFuncName = frm1.listbox18.selectedKey;
     if (getFuncName == "BothLT") {
@@ -540,23 +554,25 @@ function AnimateBoth() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[animateRows Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>animateRows Method</summary>
 
 * * *
 
 This method associates animations with a specific row and its elements.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 animateRows(rowAnimationConfig)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 rowAnimationConfig
 
@@ -571,11 +587,11 @@ The array of elements and their animation definitions. This parameter has follow
 
 > **_Note:_** If the widget ID is not specified, the animation is applied at row level.
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 Using this method, you can apply animation to multiple rows so that all rows are animated simultaneously. The callbacks will be called only once for each row. You can even club the animations, but either at row level or at row elements level, not both at the same time. The rows being animated with this method should be in the visible region.
 
@@ -587,9 +603,10 @@ If your app calls this method on a SegmentedUI widget and the SegmentedUI widget
 
 If the orientation of the user's device changes while animations are being performed, the animations end immediately. Animations will also end immediately whenever your app calls any method or function that causes a complete refresh of the SegmentedUI widget. For example, if your app changes the SegmentedUI widget's data map while an animation is playing, the animation current animation will end and all subsequent animations are skipped.
 
-Example
+### Example
 
-{% highlight voltMx %}var transformObject = voltmx.ui.makeAffineTransform();
+{% highlight VoltMx %}
+var transformObject = voltmx.ui.makeAffineTransform();
 transformObject.translate(10, 0);
 transformObject.scale(0.1, 1);
 
@@ -621,28 +638,31 @@ form1.segment1.animateRows({
 });
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Android, iOS, SPA, Desktop Web, and Windows tablet.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clearSearch Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>clearSearch Method</summary>
 
 * * *
 
 This method clears the filtered results of the Segment widget generated using the [searchText](#searchText) Method. If the filtered results are displayed in the Segment widget, this method also resets the Segment to display the full master data.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 clearSearch()
-
-Example
-
-{% highlight voltMx %}this.view.SegSearch.clearSearch();
 {% endhighlight %}
 
-Platform Availability
+### Example
+
+{% highlight VoltMx %}
+this.view.SegSearch.clearSearch();
+{% endhighlight %}
+
+### Platform Availability
 
 *   Android
 *   iOS
@@ -650,17 +670,19 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointFromWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointFromWidget Method</summary>
 
 * * *
 
 This method allows you to convert the coordinate system from a widget to a point (receiver's coordinate system).
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 convertPointFromWidget(point, fromWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -674,31 +696,34 @@ _fromWidget_
 
 This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from the widget to a point (receiver's coordinate system).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.convertPointFromWidget({
+{% highlight VoltMx %}
+Form1.widget1.convertPointFromWidget({
     x: "10dp",
     y: "20dp"
 }, widget2);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointToWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointToWidget Method</summary>
 
 * * *
 
 Using the convertPointToWidget method, you can modify the co-ordinate system. You can convert the receiver's co-ordinate system from a **point** to a **Widget**.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 convertPointToWidget(point, toWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -708,49 +733,53 @@ _toWidget_
 
 \[widgetref\] - Mandatory. This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from a point to a widget.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget2.convertPointToWidget({
+{% highlight VoltMx %}
+Form1.widget2.convertPointToWidget({
     x: "20dp",
     y: "30dp"
 }, widget1);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getBadge Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getBadge Method</summary>
 
 * * *
 
 This API enables you to read the badge value (if any) attached to the specified widget. If the specified widget does not have a badge attached to it, it returns an empty string.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 getBadge()
+{% endhighlight %}
 
-Optional Parameter
+### Optional Parameter
 
 uniqueIdentifier
 
 Unique identifier of a widget which is a handle to the widget.
 
-Return Values
+### Return Values
 
 Returns a string containing the badge value applied to the specified widget. If the specified widget has no badge value attached to it, it returns an empty string.
 
-Remarks
+### Remarks
 
 When a badge is removed, the widgets are re-formatted to accommodate the cleared badge values.
 
 On the iOS platform, this method is applicable on Label, Button, Image, TextBox, and TextArea widgets only.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the getBadge Method for button widget.
 //You need to make a corresponding call of the getBadge method for other applicable widgets.
 function getBadge() {
@@ -763,101 +792,111 @@ function getBadge() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getFirstVisibleRow Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getFirstVisibleRow Method</summary>
 
 * * *
 
 This method returns a JavaScript object containing the first visible row section index and row index.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 getFirstVisibleRow()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 No
 
-Return Values
+### Return Values
 
 A JavaScript object in the following format.
 
-{% highlight voltMx %}contextDef={
+{% highlight VoltMx %}
+contextDef={
 	sectionIndex=0,
 	 rowIndex = 1,
 }
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}var object = form.segment.getFirstVisibleRow();
+{% highlight VoltMx %}
+var object = form.segment.getFirstVisibleRow();
 voltmx.print(object[sectionIndex]);
 voltmx.print(object[rowIndex]);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Android, iOS, SPA, and desktop Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getLastVisibleRow Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getLastVisibleRow Method</summary>
 
 * * *
 
 This method returns a JavaScript object containing the last visible row's section index and row index.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 getLastVisibleRow()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 No
 
-Return Values
+### Return Values
 
 JavaScript object which would be of the following format
 
-{% highlight voltMx %}contextDef = {
+{% highlight VoltMx %}
+contextDef = {
   sectionIndex:0,
   rowIndex:1,
 };
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}var object1 = form1.segment.getLastVisibleRow();
+{% highlight VoltMx %}
+var object1 = form1.segment.getLastVisibleRow();
 voltmx.print(object1[sectionIndex]);
 voltmx.print(object1[rowIndex]);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except on Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getUpdatedSearchResults Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getUpdatedSearchResults Method</summary>
 
 * * *
 
 This method is used to return the filtered list that you get after applying the [searchText](#searchText) Method on the Segment.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 getUpdatedSearchResults()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 No
 
-Return Values
+### Return Values
 
 The _getUpdatedSearchResults_ Method returns an array of index values of the Segment. The first index value is the sectionIndex of the data and the second index value is the rowIndex of the data.
 
@@ -865,12 +904,13 @@ The list of search results is in the following format:
 
 \[\[sectionIndex, rowIndex\], \[sectionIndex, rowIndex\],\[sectionIndex, rowIndex\],\[sectionIndex, rowIndex\], ......... \]
 
-Example
+### Example
 
-{% highlight voltMx %}var newList=self.view.SegSearch.getUpdatedSearchResults();
+{% highlight VoltMx %}
+var newList=self.view.SegSearch.getUpdatedSearchResults();
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -878,17 +918,19 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[registerForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>registerForPeekandPop Method</summary>
 
 * * *
 
 This method registers a widget to enable 3D Touch peek and pop gestures.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 registerForPeekandPop(onPeekCallback, onPopCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPeekCallback
 
@@ -908,9 +950,10 @@ Callback Return Values
 
   A PreviewInfoTable. See the Remarks section for a description of this table.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget) {
+{% highlight VoltMx %}
+function onPeekCallback(widget) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -948,13 +991,14 @@ Use this callback to set the content for pop. The form handle returned by this c
 
 Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}
+function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Remarks
+### Remarks
 
 A PreviewInfoTable has the following format.
 
@@ -980,36 +1024,39 @@ Example: \[“0dp”, “0dp”, “200dp”, “300dp”\], \[“10%”, “10%
 
 Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “240px”\]
 
-Example of a PreviewInfoTable:
+### Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}
+var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeAll Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeAll Method</summary>
 
 * * *
 
 This method is used to remove all the existing rows and sections in a segment.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeAll()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 animation
 
@@ -1029,7 +1076,7 @@ callbacks
 
 A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Remarks
+### Remarks
 
 Animations get applied to the rows only in the visible region and ignored if the rows are in the invisible region.
 
@@ -1039,9 +1086,10 @@ The widget/row model will be updated based on the animation fill modes, so that 
 
 For example, the syntax to get the label text is `segment.selectedValue.label(text)`. Earlier this was written as `segment.selectedValue.label.text`.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to use the removeAll method without animation.  
+{% highlight VoltMx %}
+//Sample code to use the removeAll method without animation.  
   
 formSegment.mysegment.removeAll();  
   
@@ -1051,23 +1099,25 @@ formSegment.mysegment.removeAll (animation);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
- [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);) [removeAt Method](javascript:void(0);) 
+ </details>
+<details close markdown="block"><summary> [removeAt Method</summary> 
 
 * * *
 
 This method is used to remove the row at the given index or a row with in a section.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeAt(rowIndex,sectionIndex)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 rowIndex
 
@@ -1101,7 +1151,7 @@ callbacks
 
 A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Remarks
+### Remarks
 
 > **_Note:_** Sections should not be counted as rows when calculating the _rowIndex_.
 
@@ -1115,9 +1165,10 @@ The widget/row model will be updated based on the animation fill modes, so that 
 
 For example, the syntax to get the label text is `segment.selectedValue.label(text)`. Earlier this was written as `segment.selectedValue.label.text`.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to use the removeAt method without animation. In this sample code, the removeAt method removes the data from the 15th Index position.*/  
+{% highlight VoltMx %}
+/*Sample code to use the removeAt method without animation. In this sample code, the removeAt method removes the data from the 15th Index position.*/  
 formSegment.mysegment.removeAt(15);  
   
 /*Sample code to use the removeAt method with animation to remove the data from the15th Index position.*/  
@@ -1128,29 +1179,32 @@ formSegment.mysegment.removeAt(dataObj1, 15,0);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeFromParent Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeFromParent Method</summary>
 
 * * *
 
 This method allows you to remove a child widget from a parent widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeFromParent()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the removeFromParent Method for a Calendar widget.
 //You need to make a corresponding call of the removeFromParent method for other applicable widgets.
 
@@ -1158,52 +1212,57 @@ Form1.calendar.removeFromParent();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android , Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to remove the specified gesture recognizer for the specified widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeGestureRecognizer(gestureHandle)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 gestureHandle - Mandatory
 
 Specifies the handle to the gesture returned by addGestureRecognizer call.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
+{% highlight VoltMx %}
+//Sample code to remove Double tap gesture from frmGestures FlexForm.  
 frmGestures.removeGestureRecognizer(doubletp);  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available on all platforms except Desktop Web and Android.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeSectionAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeSectionAt Method</summary>
 
 * * *
 
 This method allows you to remove a section at the given index within a segment.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeSectionAt(sectionIndex)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 sectionIndex
 
@@ -1229,7 +1288,7 @@ callbacks
 
 A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Remarks
+### Remarks
 
 Animations get applied to the rows only in the visible region and ignored if the rows are in the invisible region.
 
@@ -1239,9 +1298,10 @@ The widget/row model will be updated based on the animation fill modes, so that 
 
 For example, the syntax to get the label text is `segment.selectedValue.label(text)`. Earlier this was written as `segment.selectedValue.label.text`.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to use the removeSectionAt method without animation. In this code, removeSectionAt method removes the section from the 2nd Index position.*/  
+{% highlight VoltMx %}
+/*Sample code to use the removeSectionAt method without animation. In this code, removeSectionAt method removes the section from the 2nd Index position.*/  
   
 formSegment.mysegment.removeSectionAt(2);  
   
@@ -1251,23 +1311,25 @@ formSegment.mysegment.removeSectionAt(2, animation);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[resetSwipeMove Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>resetSwipeMove Method</summary>
 
 * * *
 
 This method is applicable only when the _widgetSwipeMove_ Property is configured for the Segment. When you swipe a widget in a Segment widget, use the _resetSwipeMove_ Method to reset the widget swipe to its initial state. The resetSwipeMove Method, resets the translate position to zero.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 resetSwipeMove()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 swipeWidget
 
@@ -1285,13 +1347,13 @@ Limitations
 
 Android limitation: Swipe action will no longer appear on the specified position defined in the sub-boundaries once the finger is out of the widget.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 frmSegment.mySegment.resetSwipeMove(swipeWidget,context);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1299,17 +1361,19 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[searchText Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>searchText Method</summary>
 
 * * *
 
 This method searches the data given inside the Segment widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 searchText (searchCondition, config)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 config
 
@@ -1334,13 +1398,13 @@ This is an optional parameter. However, if there are more than one searchCriteri
 *   constants.SEGUI\_SEARCH\_CRITERIA\_OPERATOR\_AND
 *   constants.SEGUI\_SEARCH\_CRITERIA\_OPERATOR\_OR ( Default)
 
-Return Values
+### Return Values
 
 Returns an array of index values of the segment. The first index value is the sectionIndex and the second index value is the rowIndex of the data. Following is the sample of the output:
 
 \[ \[ 0 ,5 \] ,\[ 0 ,6 \] ,\[ 0 ,7 \] ,\[ 0 ,8 \] ,\[ 1 ,5 \] ,\[ 1 ,6 \] ,\[ 1 ,7 \] ,\[ 1 ,8 \] \]
 
-Remarks
+### Remarks
 
 The different search types are:
 
@@ -1360,9 +1424,10 @@ The different search types are:
 > **_Note:_** 1.If a non-numerical **searchText** does not yield results using the given **searchCriteria**(such as greater, greatedEqual, etc.) , the **searchCriteria** performs the search as **SEGUI\_SEARCH\_CRITERIA\_CONTAINS** by default.  
 2\. Following is the list of supported widgets for the **searchableWidgets** field: Label, TextBox, TextArea, Button and Calendar.
 
-Example
+### Example
 
-{% highlight voltMx %}  var result = self.view.segmentSearch.searchText(
+{% highlight VoltMx %}
+var result = self.view.segmentSearch.searchText(
  [{//search criteria one
    "textToSearch": this.view.textBoxSearch.text,
    "caseSensitive": false,
@@ -1394,7 +1459,7 @@ Example
 );
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1402,27 +1467,29 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setAnimations Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setAnimations Method</summary>
 
 * * *
 
 This method is used to associate animations to the rows at each operation.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setAnimations (animationConfig)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 animationConfig
 
 The animation definitions to be associated with the row.
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 The animationConfig parameter is an animation definition consisting of two arguments: _visible_ preserve">var var _invisible_. The _visible_ argument contains animation definition, callback, and configuration to be applied when a row is being brought to the visible canvas. The _invisible_ argument contains animation definition, callback, and configuration to be applied when a row is being moved out of the visible canvas.
 
@@ -1432,9 +1499,10 @@ When visible animation is set and segment is scrolled, because of which a row is
 
 In Android and iOS platforms, the setAnimations method is not applicable for the AutoGrow Segment.
 
-Example
+### Example
 
-{% highlight voltMx %}var transformObject = voltmx.ui.makeAffineTransform();
+{% highlight VoltMx %}
+var transformObject = voltmx.ui.makeAffineTransform();
 transformObject.translate(10, 0);
 transformObject.scale(0.1, 1);
 animationDef = {
@@ -1459,23 +1527,25 @@ form.segment.setAnimations({
 });
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except on Windows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setBadge Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setBadge Method</summary>
 
 * * *
 
 This method enables you to set the badge value to the given widget at the upper, right corner of the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setBadge(badgeText)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 badgeText \[String\] - Mandatory
 
@@ -1485,15 +1555,15 @@ skin \[String\] - Optional
 
 The parameter specifies the background color for the badge. The default color is red.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 The color for the badge can be defined using a skin. The default color for the badge is red with white lettering.
 
@@ -1515,9 +1585,10 @@ For iOS platform, this method is applicable on Box, Label, and Image widgets onl
 
 For Android platform, this method is applicable on Button and Image widgets only.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setBadge Method for button widget.
 //You need to make a corresponding call of the setBadge method for other applicable widgets.
 function setBadge() {
@@ -1529,7 +1600,7 @@ placed on a form frm1, use the following code: */
 form.lbl1.setBadge("4", "badgeSkin");
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
@@ -1537,17 +1608,19 @@ For more information about the badge APIs refer the _API Reference Document_.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setData Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setData Method</summary>
 
 * * *
 
 This method allows you to set new data to the segment.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setData(data)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 data
 
@@ -1571,7 +1644,7 @@ callbacks
 
 A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Remarks
+### Remarks
 
 When you set new data, the existing data will be replaced with the new data. If the segment has no data, the new data is placed in the segment.
 
@@ -1585,9 +1658,10 @@ The widget/row model will be updated based on the animation fill modes, so that 
 
 For example, the syntax to get the label text is `segment.selectedValue.label(text)`. Earlier this was written as `segment.selectedValue.label.text`.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to use setData method without animation.  
+{% highlight VoltMx %}
+//Sample code to use setData method without animation.  
   
 formSegment.mysegment.segment.setData([{
 
@@ -1623,23 +1697,25 @@ formSegment.mysegment.setData([
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setDataAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setDataAt Method</summary>
 
 * * *
 
 Allows you to set data or modify an existing data of a row or within a section.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setDataAt(data,rowIndex,sectionIndex)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 data
 
@@ -1679,7 +1755,7 @@ callbacks
 
 A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
-Remarks
+### Remarks
 
 The existing data of the row will be replaced with the new set. In case the index is not valid and not falling in range 0 <= index <= N, where N is the total number of records then the operation is ignored.
 
@@ -1691,9 +1767,10 @@ The widget/row model will be updated based on the animation fill modes, so that 
 
 For example, the syntax to get the label text is `segment.selectedValue.label(text)`. Earlier this was written as `segment.selectedValue.label.text`.
 
-Example
+### Example
 
-{% highlight voltMx %}//Example of a data object that needs to be set in the 15th Index of the Segment.  
+{% highlight VoltMx %}
+//Example of a data object that needs to be set in the 15th Index of the Segment.  
   
 dataObj1 = {
     globaDdataId1: "label3",
@@ -1711,21 +1788,23 @@ formSegment.mysegment.setDataAt(dataObj1, 15,0);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setEnabled Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setEnabled Method</summary>
 
 * * *
 
 This method specifies the widget that must be enabled or disabled.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setEnabled(enabled)
+{% endhighlight %}
 
 Parameters
 
@@ -1737,23 +1816,24 @@ true -Indicates widget is enabled.
 
 false - Indicates widget is disabled.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 Browser widget does not support this method in SPA.
 
 This method is not applicable in Map widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setEnabled Method for button widget.
 //You need to make a corresponding call of the setEnabled method for other applicable widgets.
 
@@ -1766,7 +1846,8 @@ Available on all platforms except SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setFocus Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setFocus Method</summary>
 
 * * *
 
@@ -1774,11 +1855,12 @@ This method specifies the widget on which there must be focus.
 
 **Default :** true
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setFocus(focus)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _focus_ \[Boolean\]- Mandatory
 
@@ -1786,46 +1868,49 @@ true -Indicates focus is set on a widget.
 
 false - Indicates focus is not set on a widget.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 You should not call this method in **preShow** of a form as it is not respected by all platforms. In android platform, this method is not respected in **preShow** of a form. You can give focus to a particular widget only after it is rendered on the screen, hence it should be called in postShow of a form.
 
 This method is not applicable in Form widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setFocus Method for button widget.
 //You need to make a corresponding call of the setFocus method for other applicable widgets.
 
 form1.myButton.setFocus(true);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPeek Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPeek Method</summary>
 
 * * *
 
 This method sets and overrides the existing onPeekCallback for the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setOnPeek(onPeekCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPeekCallback
 
@@ -1845,9 +1930,10 @@ Callback Return Values
 
 PreviewInfoTable. See the Remarks section for a description of this table.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget, contextInfo) {
+{% highlight VoltMx %}
+function onPeekCallback(widget, contextInfo) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -1857,11 +1943,11 @@ Callback Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 A PreviewInfoTable has the following format.
 
@@ -1887,18 +1973,20 @@ Example: \[“0dp”, “0dp”, “200dp”, “300dp”\], \[“10%”, “10%
 
 Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “240px”\]
 
-Example of a PreviewInfoTable:
+### Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}
+var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}function settingPeek() {
+{% highlight VoltMx %}
+function settingPeek() {
     Form1.setOnPeek(onMyPeekcallback);
 }
 
@@ -1917,23 +2005,25 @@ function onMyPeekcallback(widgetref, contextInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPop Method</summary>
 
 * * *
 
 This method overrides the existing onPopCallback for the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setOnPop(onPopCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPopCallback
 
@@ -1961,21 +2051,23 @@ Callback Remarks
 
  Use this callback to set the content for pop. The form handle returned by this callback is used for pop content. In general, the form that is used for preview is used for pop content also. If the pop callback is not implemented, peek disappears and the app returns to its previous state.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}
+function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Example
+### Example
 
-{% highlight voltMx %}function settingPop() {
+{% highlight VoltMx %}
+function settingPop() {
     Form1.setOnPop(myonPopcallback);
 }
 
@@ -1985,23 +2077,25 @@ function myonPopcallback(widgetref, peekForm) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setSectionAt Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setSectionAt Method</summary>
 
 * * *
 
 This method allows you to set or modify a section with rows to the segment.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setSectionAt(arrayofdata,sectionIndex)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 arrayofdata
 
@@ -2013,7 +2107,7 @@ Specifies the Index of the section.
 
 Index is '0' based in JavaScript and should be less than "N", where "N" is the number of existing sections within the segmentedUI widget. If not. setSectionAt will be silent and does not yield any results.
 
-Remarks
+### Remarks
 
 When you set new data, the existing data will be replaced with the new data. If the segment has no data, the new data is placed in the segment.
 
@@ -2025,9 +2119,10 @@ The widget/row model will be updated based on the animation fill modes, so that 
 
 For example, the syntax to get the label text is `segment.selectedValue.label(text)`. Earlier this was written as `segment.selectedValue.label.text`.
 
-Example
+### Example
 
-{% highlight voltMx %}//Example of a data object that needs to be set in the 2nd Section Index of the Segment.  
+{% highlight VoltMx %}
+//Example of a data object that needs to be set in the 2nd Section Index of the Segment.  
   
 var dataObj1 = [{
     "lbl": "Row 0",
@@ -2053,13 +2148,14 @@ formSegment.mysegment.setSectionAt(dataObj1, 15, animation);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setVisibility Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setVisibility Method</summary>
 
 * * *
 
@@ -2067,11 +2163,12 @@ Use this method to set the visibility of the widget.
 
 **Default :** true
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setVisibility(visible)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _visible_
 
@@ -2123,15 +2220,15 @@ It is a JS dictionary containing the events invoked by the platform during the a
 *   **animStarted**: Invoked at the beginning of the animation without any parameters. Following is the Syntax of the event: function animStarted()
 *   **animEnded**: Invoked at the end of the animation without any parameters. Following is the Syntax of the event: function animEnded()
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is not applicable on Form, Popup, and Alert. It is also not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so by using [Segment](#segmentedui-methods) methods.
 
@@ -2139,9 +2236,10 @@ Passing an invalid type other than the above events lead to run time exceptions/
 
 This method is not supported on the widgets FlexForm, FlexContainer, and FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to invoke the setVisibility Method for a button widget with animation.
 //You need to make a corresponding call of the setVisibility method for other applicable widgets.
 
@@ -2160,36 +2258,39 @@ form1.myButton.setVisibility(
 form1.myButton.setVisibility(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[unregisterForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>unregisterForPeekandPop Method</summary>
 
 * * *
 
 This method unregisters a widget from 3D Touch peek and pop gestures.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 unregisterForPeekandPop()
-
-Parameters
-
-None.
-
-Return Values
-
-None.
-
-Example
-
-{% highlight voltMx %}Form1.unregisterForPeekAndPop();
 {% endhighlight %}
 
-Platform Availability
+### Parameters
+
+None.
+
+### Return Values
+
+None.
+
+### Example
+
+{% highlight VoltMx %}
+Form1.unregisterForPeekAndPop();
+{% endhighlight %}
+
+### Platform Availability
 
 *   iOS 9.0 and later
 

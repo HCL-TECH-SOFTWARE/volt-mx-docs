@@ -3,8 +3,6 @@ layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
                                   
-
-
 TextBox Properties
 ==================
 
@@ -12,7 +10,7 @@ The properties for TextBox widget are as follows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
@@ -20,25 +18,27 @@ Enables you to control accessibility behavior and alternative text for the widge
 
 For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
 > **_Note:_** From Volt MX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the `accessibilityConfig` property. Values provided in the i18n keys take precedence over values provided in `a11yLabel`, `a11yValue`, and `a11yHint` fields.
 
-The accessibilityConfig property is a JavaScript object which can contain the following key-value pairs.
+### The accessibilityConfig property is a JavaScript object which can contain the following key-value pairs.
 
   
 | Key | Type | Description | ARIA Equivalent |
@@ -50,22 +50,23 @@ The accessibilityConfig property is a JavaScript object which can contain the fo
 | a11yHidden | Boolean | This is an optional parameter. Specifies if the widget should be ignored by assistive technology. The default option is set to _false_. This option is supported on iOS 5.0 and above, Android 4.1 and above, and SPA | For all widgets, this parameter maps to the `aria-hidden` property of ARIA in HTML. |
 | a11yARIA | Object | This is an optional parameter. For each widget, the key and value provided in this object are added as the attribute and value of the HTML tags respectively. Any values provided for attributes such as `aria-labelledby` and `aria-describedby` using this attribute, takes precedence over values given in `a11yLabel` and `a11yHint` fields. When a widget is provided with the following key value pair or attribute using the a11yARIA object, the tabIndex of the widget is automatically appended as zero.`{"role": "main"}``aria-label` | This parameter is only available on the Desktop Web platform. |
 
-Android limitations
+### Android limitations
 
 *   If the results of the concatenation of a11y fields result in an empty string, then `accessibilityConfig` is ignored and the text that is on widget is read out.
 *   The soft keypad does not gain accessibility focus during the right/left swipe gesture when the keypad appears.
 
-SPA/Desktop Web limitations
+### SPA/Desktop Web limitations
 
 *   When `accessibilityConfig` property is configured for any widget, the `tabIndex` attribute is added automatically to the `accessibilityConfig` property.
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+### Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -76,11 +77,12 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}
+/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -92,70 +94,77 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>anchorPoint Property</summary>
 
 * * *
 
 Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 anchorPoint
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The value for this property is a JavaScript dictionary object with the keys "x" and "y". The values for the "x" and "y" keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.anchorPoint = {
+{% highlight VoltMx %}
+Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[autoCapitalize Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>autoCapitalize Property</summary>
 
 * * *
 
 Specifies the character capitalization behavior.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 autoCapitalize
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is TEXTBOX\_AUTO\_CAPITALIZE\_NONE.
 
@@ -177,14 +186,15 @@ Following are the options available:
 
 Below is the browser specific limitations on SPA platform for the available options:
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the autoCapitalize property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the autoCapitalize property of TextBox widget.
 
 frmTxtBox.myTxtBox.autoCapitalize=constants.TEXTBOX_AUTO_CAPITALIZE_SENTENCES;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms.
@@ -192,25 +202,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[autoComplete Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>autoComplete Property</summary>
 
 * * *
 
 autoComplete property enables users to quickly find and select from a prepopulated list of values as they type, leveraging searching and filtering.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 autoComplete
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -222,39 +235,43 @@ Below is the browser specific limitations on SPA platform when _autoComplete_ pr
 
 <table style="mc-table-style: url('Resources/Stylesheets/Basic.css');width: 457px;" class="TableStyle-Basic" cellspacing="0"><colgroup><col style="width: 149px;" class="TableStyle-Basic-Column-Column1"> <col style="width: 167px;" class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;background-color: #005386;color: #ffffff;">Browsers/Devices</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;font-weight: bold;color: #ffffff;background-color: #005386;">True</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;font-weight: bold;color: #ffffff;background-color: #005386;">False</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">IE8</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">IE9</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">IE10</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Chrome 29.0</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Supported if form is submitted to an external url</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Firefox 23.0.0</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Supported if form is submitted to an external url</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Safari 5</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">iPhone4 OS 4.2</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">iPhone5 OS 6.1.3</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Android 2.3.3</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Android 4.2</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1" style="font-weight: bold;">Windows</td><td class="TableStyle-Basic-BodyB-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyA-Column1-Body1" style="text-align: center;">Supported</td></tr></tbody></table>
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the autoComplete property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the autoComplete property of TextBox widget.
 
 frmTxtBox.myTxtBox.autoComplete=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[autoCorrect Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>autoCorrect Property</summary>
 
 * * *
 
 This property determines whether auto-correction is enabled or disabled during typing.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 autoCorrect
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 With auto-correction enabled, the text object tracks unknown words and suggests a more suitable replacement candidate to the user, replacing the typed text automatically unless the user explicitly overrides the action.
 
@@ -268,14 +285,15 @@ Below is the browser specific limitations on SPA platform when _autoCorrect_ pro
 
 <table style="mc-table-style: url('Resources/Stylesheets/Basic.css');width: 457px;" class="TableStyle-Basic" cellspacing="0"><colgroup><col style="width: 149px;" class="TableStyle-Basic-Column-Column1"> <col style="width: 167px;" class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;background-color: #005386;color: #ffffff;">Browsers/Devices</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;font-weight: bold;color: #ffffff;background-color: #005386;">True</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;font-weight: bold;color: #ffffff;background-color: #005386;">False</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">IE8</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">IE9</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">IE10</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Chrome 29.0</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Firefox 23.0.0</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Safari 5</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">iPhone4 OS 4.2</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">iPhone5 OS 6.1.3</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Android 2.3.3</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Android 4.2</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">Supported</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1" style="font-weight: bold;">Windows</td><td class="TableStyle-Basic-BodyB-Column1-Body1" style="text-align: center;">Not supported</td><td class="TableStyle-Basic-BodyA-Column1-Body1" style="text-align: center;">Supported</td></tr></tbody></table>
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the autoCorrect property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the autoCorrect property of TextBox widget.
 
 frmTxtBox.myTxtBox.autoCorrect=true;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   iOS
@@ -283,21 +301,24 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[autoFilter Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>autoFilter Property</summary>
 
 * * *
 
 Specifies if the input characters you enter in the TextBox widget must be matched against the [filterList](#filterLi) and possible matches be displayed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 autoFilter
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 This property is applicable only if you set a [filterList](#filterLi).
 
@@ -333,14 +354,15 @@ filterBoxSkin
 
 Specifies the skin that must be applied to the box in which the filtered values are displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the autoFilter property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the autoFilter property of TextBox widget.
 
 frmTxtBox.myTxtBox.autoFilter=true;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Android
@@ -348,25 +370,28 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[autoSuggestions Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>autoSuggestions Property</summary>
 
 * * *
 
 The autoSuggestions property is used to enable or disable suggestions such as spell checker, predictive text and corrections in the application.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 autoSuggestions
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -377,40 +402,44 @@ The autoSuggestions property works only when auto suggestion options are enabled
 
 This property works only on devices which have Google keyboard. For example, Google Nexus.
 
-Example
+### Example
 
 This example uses the textBox widget, but the principle remains the same for all widgets that have an autoSuggestions property.
 
-{% highlight voltMx %}//Setting the autoSuggestions property on an existing widget
+{% highlight VoltMx %}
+//Setting the autoSuggestions property on an existing widget
 Form1.textBox1.autoSuggestions = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>backgroundColor Property</summary>
 
 * * *
 
 Specifies the background color of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 backgroundColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The initial value of backgroundColor has to be specified explicitly. If not, Iris will not deduce the values from the existing skin and this will lead to undefined behavior.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
@@ -421,15 +450,15 @@ Remarks
 *   This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 *   The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColor property.
 
-{% highlight voltMx %}Form1.btn1.backgroundColor = "ea5075";
-
+{% highlight VoltMx %}
+Form1.btn1.backgroundColor = "ea5075";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -437,25 +466,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundColorMultiStepGradient Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>backgroundColorMultiStepGradient Property</summary>
 
 * * *
 
 Specifies the multi-step gradient color for the background of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 backgroundColorMultiStepGradient
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Input Parameters
+### Input Parameters
 
 *   **gradientType** \[Constant\]: Specifies the configuration type of the gradient. This parameter can have the following constant values:
     
@@ -469,7 +501,7 @@ Input Parameters
 *   **colors** \[Array\]: Specifies the colors for the multi-step gradient. Colors is an array of color hex values that indicate the reference color values of the gradient. This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.
 *   **colorStops** \[Array\]: Specifies the color stops for the multi-step gradient. Color Stops are the locations of the reference colors on the gradient, from 0 (the start of the gradient) to 100 (the final value of the gradient). This parameter contains an array of numbers that represent the color stops.
 
-Remarks
+### Remarks
 
 *   The default value of the gradientType key is `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
@@ -480,11 +512,12 @@ Remarks
 *   This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 *   The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColorMultiStepGradient property.
 
-{% highlight voltMx %}Form1.btn1.backgroundColorMultiStepGradient = {
+{% highlight VoltMx %}
+Form1.btn1.backgroundColorMultiStepGradient = {
     "gradientType": voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM  
     "angle": 45,
     "colors": ["ea5075", "f1fa70", "eefd04"],
@@ -492,7 +525,7 @@ This example uses the button widget, but the principle remains the same for all 
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -500,25 +533,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundColorTwoStepGradient Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>backgroundColorTwoStepGradient Property</summary>
 
 * * *
 
 Specifies the two-step gradient color for the background of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 backgroundColorTwoStepGradient
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Input Parameters
+### Input Parameters
 
 *   **topColor** \[Constant or Hex\]: Specifies the top color of the two-step gradient. The value of this parameter can be a hexadecimal number that represents a color or a constant that is defined at the theme level.
     
@@ -531,7 +567,7 @@ Input Parameters
     *   `voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_GRADIENT`: Constant for the horizontal gradient style.
     *   `voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_SPLIT`: Constant for the horizontal split style.
 
-Remarks
+### Remarks
 
 *   The default value of the style key is `voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT`.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
@@ -542,18 +578,19 @@ Remarks
 *   This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 *   The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColorTwoStepGradient property.
 
-{% highlight voltMx %}Form1.btn1.backgroundColorTwoStepGradient = {  
+{% highlight VoltMx %}
+Form1.btn1.backgroundColorTwoStepGradient = {  
      "topColor": "ea5075",  
     "bottomColor": "eefd04",  
     "style": voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT  
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -561,38 +598,42 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>backgroundImage Property</summary>
 
 * * *
 
 Sets the image for the background of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 backgroundImage
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 *   The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundImage property.
 
-{% highlight voltMx %}Form1.btn1.backgroundImage = "bgImg.png";
+{% highlight VoltMx %}
+Form1.btn1.backgroundImage = "bgImg.png";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -600,15 +641,18 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[blur Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>blur Property</summary>
 
 * * *
 
 You can enable or disable a blur-effect for a widget(for example, a FlexContainer) by making use of a constructor-level property, called **blur**. The **blur** property accepts a dictionary that contains the following keys: enabled, value and style. You must specify an appropriate value for the dictionary keys, otherwise the property will not be valid.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 blur
+{% endhighlight %}
 
 **Input Parameters**
 
@@ -627,11 +671,11 @@ blur
     *   constants.BLUR\_EFFECT\_PROMINENT
         
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   If you set _enabled_ as true, the blur-effect for the widget is enabled.
 *   If you set _enabled_ as false, the blur-effect for the widget is disabled.
@@ -639,7 +683,7 @@ Remarks
     
 *   If you specify _value_ as greater than 100, the value is taken as 100.
 
-Limitations
+### Limitations
 
 *   For Android:
     *   If a FlexContainer or a FlexScrollContainer contains a Map widget, the blur-effect is not applied to the map.
@@ -649,11 +693,12 @@ Limitations
     *   Even if you apply 100% blur for widgets that display any text( such as Label or Calendar widgets), the text on these widgets is not blurred. This is a Native Android limitation. To generate the blur effect for the text, apply a skin with darker background to the Label or Calendar widget. This is true even when the widgets are placed in a FlexContainer with blur effect and the widgets do not have a skin.
     *   Blur effect will not work on widgets added inside BOX containers.
 
-Example 1
+### Example 1
 
 To dynamically set the blur-effect for any widget, such as a FlexContainer, use the following code.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the blur property for FlexContainer widget.
 /*You need to make a corresponding use of the 
 blur property for other applicable widgets.*/
@@ -665,44 +710,46 @@ Form1.myFlexContainer.blur = {
 
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 To dynamically set the blur-effect for any widget, such as a FlexContainer in iOS, use the following code.
 
-{% highlight voltMx %}Form1.widget1.blur = {
+{% highlight VoltMx %}
+Form1.widget1.blur = {
     "enabled": true,
     "value": 60,
     "style": constants.BLUR_EFFECT_DARK
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, Windows, SPA , and Desktop web
 
- 
-
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[borderColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>borderColor Property</summary>
 
 * * *
 
 Specifies the border color of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 borderColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
@@ -711,14 +758,15 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderColor property.
 
-{% highlight voltMx %}Form1.btn1.borderColor = "ea5075";
+{% highlight VoltMx %}
+Form1.btn1.borderColor = "ea5075";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -726,25 +774,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[borderColorGradient Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>borderColorGradient Property</summary>
 
 * * *
 
 Specifies the multi-step gradient color for the border of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 borderColorGradient
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Input Parameters
+### Input Parameters
 
 *   **gradientType** \[Constant\]: Specifies the configuration type of the gradient. This parameter can have the following constant values:
     
@@ -768,11 +819,12 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderColorGradient property.
 
-{% highlight voltMx %}Form1.btn1.borderColorGradient = {
+{% highlight VoltMx %}
+Form1.btn1.borderColorGradient = {
     "gradientType": voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM  
     "angle": 45,
     "colors": ["ea5075", "f1fa70", "eefd04"],
@@ -780,32 +832,35 @@ This example uses the button widget, but the principle remains the same for all 
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[borderStyle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>borderStyle Property</summary>
 
 * * *
 
 Specifies the border style for the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 borderStyle
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property can have the following constant values:
     
@@ -817,63 +872,67 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderStyle property.
 
-{% highlight voltMx %}Form1.btn1.borderStyle = voltmx.skin.BORDER_STYLE_PLAIN;
+{% highlight VoltMx %}
+Form1.btn1.borderStyle = voltmx.skin.BORDER_STYLE_PLAIN;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[borderWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>borderWidth Property</summary>
 
 * * *
 
 Specifies the width of the border for the widget in pixels.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 borderWidth
+{% endhighlight %}
 
 **Type**
 
 Number or JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   The default unit for the value of this property is pixels.
 *   The Desktop Web platform supports both Number and JSON Object (with the top, bottom, right, and left keys) values for the borderWidth parameter. The Android and iOS platforms support only Number values for the borderWidth parameter.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderWidth property.
 
-{% highlight voltMx %} Form1.btn1.borderWidth = 2;
+{% highlight VoltMx %}
+Form1.btn1.borderWidth = 2;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
- 
-
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
@@ -883,27 +942,30 @@ The bottom property determines the position of the bottom edge of the widget’s
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 bottom
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -911,14 +973,15 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA , and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
@@ -926,25 +989,28 @@ This property determines the center of a widget measured from the left bounds of
 
 The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 centerX
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -952,14 +1018,15 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
@@ -967,25 +1034,28 @@ This property determines the center of a widget measured from the top bounds of 
 
 The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 centerY
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
@@ -993,28 +1063,31 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[closeButtonText Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>closeButtonText Property</summary>
 
 * * *
 
 Specifies the text to replace the "_Done_" button that appears in the Keypad (opens when you select a textbox).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 closeButtonText
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Remarks
+### Remarks
 
 The default value for this property is Done. The text on the close button is "Done".
 
@@ -1022,39 +1095,43 @@ If you want to change the text for the close button, enter the text of your choi
 
 ![](Resources/Images/keypadcustom.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the closeButtonText property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the closeButtonText property of TextBox widget.
 
 frmTxtBox.myTxtBox.closeButtonText="Done";
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Available on iPhone only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentAlignment Property</summary>
 
 * * *
 
 This property specifies the alignment of the text on the widget with respect to its boundaries.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read+Write
 
-Remarks
+### Remarks
 
 The default value for the property is _CONTENT\_ALIGN\_CENTER_.
 
@@ -1070,44 +1147,48 @@ The following are the available options:
 *   constants.CONTENT\_ALIGN\_BOTTOM\_CENTER
 *   constants.CONTENT\_ALIGN\_BOTTOM\_RIGHT
 
-Limitations
+### Limitations
 
 Desktop Web/ SPA platforms do not support _contentAlignment_ property in Camera widget, ComboBox widget and ListBox widget.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the contentAlignment property of the widgetID Button widget in frmHome Form.*/  
+{% highlight VoltMx %}
+/*Sample code to set the contentAlignment property of the widgetID Button widget in frmHome Form.*/  
   
 frmHome.widgetID.contentAlignment=constants.CONTENT_ALIGN_TOP_LEFT;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cornerRadius Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cornerRadius Property</summary>
 
 * * *
 
 Specifies the radius of the border for the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 cornerRadius
+{% endhighlight %}
 
 **Type**
 
 Number or JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The cornerRadius property is only applicable when the borderStyle is voltmx.skin.BORDER\_STYLE\_CUSTOM.
 *   For a Responsive Web app, a corner radius of value zero applies a plain border, and a corner radius value greater than zero applies a rounded border.
@@ -1116,44 +1197,46 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the cornerRadius property.
 
-{% highlight voltMx %} Form1.btn1.cornerRadius = 60;
+{% highlight VoltMx %}
+Form1.btn1.cornerRadius = 60;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
- 
-
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cursorType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cursorType Property</summary>
 
 * * *
 
 In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 cursorType
+{% endhighlight %}
 
-Type
+### Type
 
 String.
 
 You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 To add the `cursorType` property using Volt MX Iris in a Desktop Web application, follow these steps.
 
@@ -1170,9 +1253,10 @@ To add the `cursorType` property using Volt MX Iris in a Desktop Web application
     You can see that the **Cursor Type** property has been added under the **General** section.
 8.  Select a value from the drop-down list to set the **Cursor Type** for the widget.
 
-Example
+### Example
 
-{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}
+//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
   
@@ -1180,41 +1264,45 @@ frmButton.myButton.cursorType = "wait";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[disabledStateSkinProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>disabledStateSkinProperties Property</summary>
 
 * * *
 
 Specifies the skin properties that define the look and feel of the widget, when the widget is disabled or blocked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 disabledStateSkinProperties
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the disabledSkin property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the disabledStateSkinProperties property.
 
-{% highlight voltMx %}Form1.btn1.disabledStateSkinProperties= {  
+{% highlight VoltMx %}
+Form1.btn1.disabledStateSkinProperties= {  
      background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -1246,7 +1334,7 @@ This example uses the button widget, but the principle remains the same for all 
     }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
@@ -1254,7 +1342,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
@@ -1262,19 +1351,21 @@ The `enable` property is used to control the actionability of the widgets. In a 
 
 This is a constructor level property and applicable for all widgets in Volt MX Iris.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
@@ -1282,60 +1373,64 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}
+//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
   
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
- 
-
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}
+Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableHapticFeedback Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableHapticFeedback Property</summary>
 
 * * *
 
@@ -1343,20 +1438,22 @@ Allows you to enable or disable haptic feedback on the TextBox widget.
 
 > **_Note:_** Haptic feedback is provided on the Copy, Cut, and Paste options.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableHapticFeedback
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean.  
 If the enableHapticFeedback property is not specified, haptic feedback is not enabled on the TextBox widget.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   iOS
     
@@ -1365,123 +1462,136 @@ Remarks
     *   Users can enable the Vibrate on touch feature from Settings-> Sound & notification-> Other sounds.
         
 
-Limitations and Behavior
+### Limitations and Behavior
 
 *   For iOS, haptic feedback is not supported for keyboard. Users can enable the haptic feedback functionality by configuring the TextBox widget\`s **onTextChange** event with the **performHapticFeedback** API. **selectAll**, **LookUp**, and **Share** do not support haptic feedback.
 *   For Windows, haptic feedback is not available on keyboard.
 *   This property is not applicable for Android. For Android, Native OS provides haptic feedback for keyboard. To disable haptic for keyboard, users can disable haptics from the device settings.
 *   Haptic Feedback is supported on Windows devices with OS build version 10.0.16299.0 or later.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the enableHapticFeedback property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the enableHapticFeedback property of TextBox widget.
 
 frmTxtBox.myTxtBox.enableHapticFeedback=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[filterList Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>filterList Property</summary>
 
 * * *
 
 The values you enter in the TextBox are matched against this list and possible matches are displayed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 filterList
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Write only
 
-Remarks
+### Remarks
 
 For Android and Windows platforms, this property is applicable only if the [_autoFilter_](#autoFilt) property is set to _true_.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the filterlist property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the filterlist property of TextBox widget.
 
 frmTxtBox.myTxtBox.filterlist=["Aaaa", "Bbbb", "Cccc", "Dddd"];
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Windows
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[focusSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>focusSkin Property</summary>
 
 * * *
 
 Specifies the look and feel of the widget when in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 focusSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the focusSkin property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the focusSkin property of TextBox widget.
 
 frmTxtBox.myTxtBox.focusSkin="txtFSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[focusStateSkinProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>focusStateSkinProperties Property</summary>
 
 * * *
 
 Specifies the skin properties that define the look and feel of the widget, when the widget is in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 focusStateSkinProperties
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the focusSkin property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the focusStateSkinProperties property.
 
-{% highlight voltMx %} Form1.btn1.focusStateSkinProperties = {  
+{% highlight VoltMx %}
+Form1.btn1.focusStateSkinProperties = {  
      background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -1513,7 +1623,7 @@ This example uses the button widget, but the principle remains the same for all 
     }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1523,25 +1633,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fontColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fontColor Property</summary>
 
 * * *
 
 Specifies the font color of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 fontColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
@@ -1550,14 +1663,15 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontColor property.
 
-{% highlight voltMx %}Form1.btn1.fontColor = "ea5075";
+{% highlight VoltMx %}
+Form1.btn1.fontColor = "ea5075";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1565,105 +1679,112 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fontFamily Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fontFamily Property</summary>
 
 * * *
 
 Specifies the font family for the font of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 fontFamily
+{% endhighlight %}
 
 **Type**
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontFamily property.
 
-{% highlight voltMx %} Form1.btn1.fontFamily = "Serif";
+{% highlight VoltMx %}
+Form1.btn1.fontFamily = "Serif";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
- 
-
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fontSize Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fontSize Property</summary>
 
 * * *
 
 Specifies the font size for the widget in percentage (%) units.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 fontSize
+{% endhighlight %}
 
 **Type**
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontSize property.
 
-{% highlight voltMx %} Form1.btn1.fontSize = 150;
+{% highlight VoltMx %}
+Form1.btn1.fontSize = 150;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
- 
-
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fontStyle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fontStyle Property</summary>
 
 * * *
 
 Specifies the font style for the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 fontStyle
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property can have the following constant values:
     
@@ -1673,39 +1794,43 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontStyle property.
 
-{% highlight voltMx %}Form1.btn1.fontStyle = voltmx.skin.FONT_STYLE_NONE;
+{% highlight VoltMx %}
+Form1.btn1.fontStyle = voltmx.skin.FONT_STYLE_NONE;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fontWeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fontWeight Property</summary>
 
 * * *
 
 Specifies the weight for the font of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 fontWeight
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property can have the following constant values:
     
@@ -1714,21 +1839,23 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontWeight property.
 
-{% highlight voltMx %}Form1.btn1.fontWeight = voltmx.skin.FONT_WEIGHT_NORMAL;
+{% highlight VoltMx %}
+Form1.btn1.fontWeight = voltmx.skin.FONT_WEIGHT_NORMAL;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -1736,19 +1863,21 @@ It determines the height of the widget and measured along the y-axis.
 
 The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 height
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the available measurement options:
 
@@ -1758,9 +1887,10 @@ Following are the available measurement options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the height property for a TextBox widget by using DP, Percentage and Pixels.*/
+{% highlight VoltMx %}
+/*Sample code to set the height property for a TextBox widget by using DP, Percentage and Pixels.*/
 frmTxtBox.myTxtBox.height="50dp";
 
 frmTxtBox.myTxtBox.height="10%";
@@ -1769,7 +1899,7 @@ frmTxtBox.myTxtBox.height="10px";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -1779,66 +1909,74 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hoverSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hoverSkin Property</summary>
 
 * * *
 
 Specifies the look and feel of a widget when the cursor hovers on the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 hoverSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the hoverSkin property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the hoverSkin property of TextBox widget.
 
 frmTxtBox.myTxtBox.hoverSkin="hSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hoverStateSkinProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hoverStateSkinProperties Property</summary>
 
 * * *
 
 Specifies the skin properties that define the look and feel of the widget, when the cursor hovers on the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 hoverStateSkinProperties
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the hoverSkin property of the configured skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the hoverStateSkinProperties property.
 
-{% highlight voltMx %} Form1.btn1.hoverStateSkinProperties = {  
+{% highlight VoltMx %}
+Form1.btn1.hoverStateSkinProperties = {  
      background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -1870,7 +2008,7 @@ This example uses the button widget, but the principle remains the same for all 
     }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
@@ -1878,27 +2016,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 id is a unique identifier of TextBox consisting of alpha numeric characters. Every TextBox should have a unique id within a Form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for a Textbox with id:"textBox1".
+{% highlight VoltMx %}
+//Defining the properties for a Textbox with id:"textBox1".
 var txtBasic = {
     id: "textBox1",
     skin: "txtSkin",
@@ -1927,67 +2069,74 @@ var textBox1 = new voltmx.ui.TextBox2(txtBasic, txtLayout, txtPSP);
 alert("Textbox Id ::" + textBox1.id);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)imageForSearchBarBackground Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>imageForSearchBarBackground Property</summary>
 
 * * *
 
 Sets an image as the background for the TextBox widget in Search View.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 imageForSearchBarBackground
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 When using this property, ensure you set the ViewType property as TEXTBOX\_VIEW\_TYPE\_SEARCH\_VIEW.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the imageForSearchBarBackground property of TextBox widget where image.png is an image file in the resources folder.*/
+{% highlight VoltMx %}
+/*Sample code to set the imageForSearchBarBackground property of TextBox widget where image.png is an image file in the resources folder.*/
 
 frmTxtBox.myTxtBox.imageForSearchBarBackground="image.png";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on the iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This will help in avoiding the globals to most part of the programming.
 
@@ -1995,7 +2144,8 @@ This is a **non-Constructor** property. You cannot set this property through wid
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}var inf = {
+{% highlight VoltMx %}
+var inf = {
     a: 'hello'
 };
 widget.info = inf;
@@ -2005,9 +2155,10 @@ widget.info.a = 'hello world';
 widget.info.a will have old value as hello.*/
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the info property for a TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the info property for a TextBox widget.
 frmTxtBox.myTxtBox.info={
     key: "Textboxinfo"
 };
@@ -2016,31 +2167,34 @@ alert("TextBox widget info is ::" +frmTxtBox.myTxtBox.info);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[inputAccessoryViewType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>inputAccessoryViewType Property</summary>
 
 * * *
 
 While building iPhone applications that support or provide text input, it is necessary to create some extra buttons (or other controls) beyond the ones provided by the default keyboard interface. Volt MX Iris by default, adds the Previous, Next, and Done buttons to the applicable input controls. These buttons allow specific operations needed by your application, such as moving to the next or previous text field, making the keyboard disappear and so on. The area above the keyboard is known as Input Accessory View.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 inputAccessoryViewType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Yes
 
-Remarks
+### Remarks
 
 The default value for this property is TEXTBOX\_INPUTACCESSORYVIEW\_DEFAULT.
 
@@ -2059,14 +2213,15 @@ To turn on/off the header at widget-level, assign any of the following constants
 
 *   TEXTBOX\_INPUTACCESSORYVIEW\_CANCEL: Specifies that the input accessory view has a Cancel button. This option does not trigger any events.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the inputAccessoryViewType property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the inputAccessoryViewType property of TextBox widget.
 
 frmTxtBox.myTxtBox.inputAccessoryViewType=constants.TEXTBOX_INPUTACCESSORYVIEWTYPE_DEFAULT;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -2074,45 +2229,50 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isSelectable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isSelectable Property</summary>
 
 * * *
 
 isSelectable property allows you to select the content inside a TextBox widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isSelectable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 *   If set to _true_, the text in the TextBox Widget can be selected.
 *   If set to _false_, the text in the TextBox Widget cannot be selected.
 
-Example
+### Example
 
-{% highlight voltMx %}myForm.myTextBox.isSelectable = false;  
+{% highlight VoltMx %}
+myForm.myTextBox.isSelectable = false;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available from IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isSensitiveText Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isSensitiveText Property</summary>
 
 * * *
 
@@ -2120,21 +2280,23 @@ This property secures the text entered in the TextArea and TextBox widgets. This
 
 > **_Note:_** In Android platform, when you enable the `isSensitiveText` property, the text property of TextArea and TextBox widget returns an instance of the [RawBytes]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.html) object. The RawBytes data type internally holds the text as a character array. The instance of the Rawbytes object must be cleared using the [clear]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.html#clear) API once the text read from the widget is not required.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isSensitiveText
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
 The default value of this property is false.
 
-Read/ Write
+### Read/ Write
 
 Read Only (Constructor- level property only)
 
-Remarks
+### Remarks
 
 *   When you enable the `isSensitiveText` property,
     
@@ -2152,9 +2314,10 @@ Following image shows the field corresponding to `isSensitiveText` property in I
 
 ![](Resources/Images/SensitiveText_357x34.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//This property is applicable for TextBox and TextArea widgets.
+{% highlight VoltMx %}
+//This property is applicable for TextBox and TextArea widgets.
 
 /*This example demonstrates how to use isSensitiveText property by using myTxtBox TextBox widget in frmTextBox FlexForm. You need to use isSensitiveText property for TextArea widget use voltmx.ui.TextArea2 API in a similar manner.*/
 
@@ -2196,34 +2359,35 @@ textContent = null;
 textAsString = null;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Android, iOS, and Desktop Web
 
- 
-
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
 This property controls the visibility of a widget on the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -2231,41 +2395,45 @@ If set to _false_ the widget is not displayed.
 
 If set to _true_ the widget is displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the isVisible property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the isVisible property of TextBox widget.
 
 frmTxtBox.myTxtBox.isVisible=true;
 {% endhighlight %}
 
 > **_Note:_** In addition, the visibility of the widget can be controlled using the setVisibility method.
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[keyboardActionLabel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>keyboardActionLabel Property</summary>
 
 * * *
 
 Specifies the text to be displayed in action key of the keyboard.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 keyboardActionLabel
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is TEXTBOX\_KEYBOARD\_LABEL\_DONE.
 
@@ -2300,14 +2468,15 @@ The following images illustrate the Keyboard label as _Done_ preserve">var var _
 
 For the iOS platform, the Iris provides built-in support for navigating through widgets using Previous and Next buttons. The keyboardActionLabel property is used to modify the title of the Done button. Generally, the Done button is not for navigation purpose. If you want to get custom navigation behavior for the Done button's click event, you need to write the custom navigation logic using scrollTo/setFocus methods.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the keyboardActionLabel property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the keyboardActionLabel property of TextBox widget.
 
 frmTxtBox.myTxtBox.keyboardActionLabel=constants.TEXTBOX_KEYBOARD_LABEL_SEARCH;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   iPad
@@ -2316,62 +2485,69 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[keyboardAppearance Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>keyboardAppearance Property</summary>
 
 * * *
 
 Allows you to set the on screen keyboard to a dark or light color scheme.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 keyboardAppearance
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Possible values are:
 
 *   constants.TEXTBOX\_KEYBOARD\_COLOR\_LIGHT(Default)
 *   constants.TEXTBOX\_KEYBOARD\_COLOR\_DARK
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.textBox1.keyboardAppearence = constants.TEXTBOX_KEYBOARD_COLOR_LIGHT;
+{% highlight VoltMx %}
+Form1.textBox1.keyboardAppearence = constants.TEXTBOX_KEYBOARD_COLOR_LIGHT;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[keyBoardStyle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>keyBoardStyle Property</summary>
 
 * * *
 
 When you interact with a TextBox widget, a keyboard is displayed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 keyBoardStyle
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 You can use this property to select the type of keyboard that you want to display.
 
@@ -2403,26 +2579,28 @@ The following are the available keyboard types when you select [textInputMode](#
 *   constants.TEXTBOX\_KEY\_BOARD\_STYLE\_DATE
 *   constants.TEXTBOX\_KEY\_BOARD\_STYLE\_TIME
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the keyBoardStyle property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the keyBoardStyle property of TextBox widget.
 
 frmTxtBox.myTxtBox.keyBoardStyle=constants.TEXTBOX_KEY_BOARD_STYLE_URL;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Available on all platforms except SPA.
 
-Properties combination and Behavior:
+### Properties combination and Behavior:
 
 *   When `secureTextEntry` is true and `keyBoardStyle` is VOLTMX\_TEXTVIEW\_URL(10) then the text will not be secured and default keyboard will be displayed. (TEXTBOX\_KEY\_BOARD\_STYLE\_DEFAULT).
 *   When `secureTextEntry` is true and `keyBoardStyle` is VOLTMX\_TEXTVIEW\_EMAIL(9) then the text will not be secured and the default keyboard appears. (TEXTBOX\_KEY\_BOARD\_STYLE\_DEFAULT).
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[left Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>left Property</summary>
 
 * * *
 
@@ -2430,25 +2608,28 @@ This property determines the lower left corner edge of the widget and is measure
 
 The left property determines the position of the left edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 left
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
@@ -2456,28 +2637,31 @@ frmHome.widgetID.left = "10%";
 frmHome.widgetID.left = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[leftViewImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>leftViewImage Property</summary>
 
 * * *
 
 Specifies an optional image to be displayed on the left-hand side of a TextBox widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 leftViewImage
+{% endhighlight %}
 
-Type
+### Type
 
 String / Image object
 
-Remarks
+### Remarks
 
 For example, if you want a magnifying glass image to be displayed to indicate "Search" option, you can use this property to display the image.
 
@@ -2485,21 +2669,23 @@ The following image illustrates a TextBox widget with a Left View image:
 
 ![](Resources/Images/Placeholder_Text.png)
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the leftViewImage property of TextBox widget where magnify.png is an image file in resources folder.*/
+{% highlight VoltMx %}
+/*Sample code to set the leftViewImage property of TextBox widget where magnify.png is an image file in resources folder.*/
 
 frmTxtBox.myTxtBox.leftViewImage="magnify.png";
 {% endhighlight %}
 
 Using an image object (voltmx.image) as the leftViewImage:
 
-{% highlight voltMx %}/*Sample code to set the leftViewImage property of TextBox widget where local.png is an image file in resources folder.*/
+{% highlight VoltMx %}
+/*Sample code to set the leftViewImage property of TextBox widget where local.png is an image file in resources folder.*/
 var imgObjRef = voltmx.image.createImage("local.png");
 frmTxtBox.myTxtBox.leftViewImage=imgObjRef;
 {% endhighlight %}
 
-Availability
+### Availability
 
 Available in the IDE
 
@@ -2507,7 +2693,8 @@ Available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -2517,21 +2704,24 @@ This property specifies the maximum height of the widget and is applicable only 
 
 The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -2539,28 +2729,31 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxTextLength Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxTextLength Property</summary>
 
 * * *
 
 Specifies the maximum number of characters that the text field can accept.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxTextLength
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Remarks
+### Remarks
 
 The default value for this property is empty.
 
@@ -2568,25 +2761,27 @@ If you specify a number for this property, the number of input characters cannot
 
 On support for this property depends on the device that support maxlength attribute for TextBox (HTML input tag), else this property is ignored.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxTextLength property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the maxTextLength property of TextBox widget.
 
 frmTxtBox.myTxtBox.maxTextLength=20;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -2594,21 +2789,24 @@ This property specifies the maximum width of the widget and is applicable only w
 
 The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -2616,14 +2814,15 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -2631,21 +2830,24 @@ This property specifies the minimum height of the widget and is applicable only 
 
 The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -2653,14 +2855,15 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -2668,21 +2871,24 @@ This property specifies the minimum width of the widget and is applicable only w
 
 The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -2690,14 +2896,15 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>opacity Property</summary>
 
 * * *
 
@@ -2705,39 +2912,43 @@ Specifies the opacity of the widget. The value of this property must be in the r
 
 Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 opacity
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This property has more priority compared to the values coming from the configured skin.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
+{% highlight VoltMx %}
+//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
 
 //Sample code to make the widget opaque by using the opacity property.
 frmHome.widgetID.opacity = 1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE.
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[padding Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>padding Property</summary>
 
 * * *
 
@@ -2750,55 +2961,61 @@ The following image illustrates a widget with a defined padding:
 
 ![](Resources/Images/Padding.png)
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 padding
+{% endhighlight %}
 
-Type
+### Type
 
 Array of numbers
 
-Read / Write
+### Read / Write
 
 Read+Write
 
-Limitations
+### Limitations
 
 *   Desktop Web/ SPA platforms do not support _padding_ property in Image widget, Slider widget and Switch widget.
 *   If no skin is applied to a Button, then Padding is not supported on iPhone. This is due to iOS Safari browser limitation. If you want the padding to be applied, apply a skin to the button and then apply padding
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the padding property for widgetID Button widget in frmHome Form.
+{% highlight VoltMx %}
+//Sample code to set the padding property for widgetID Button widget in frmHome Form.
 frmHome.widgetID.padding= [2,2,2,2];
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Android, iOS, Desktop Web and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[paddingInPixel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>paddingInPixel Property</summary>
 
 * * *
 
 This property specifies whether the padding property is to be applied in pixels or in percentage.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 paddingInPixel
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read Only
 
-Remarks
+### Remarks
 
 The default value of this property is _false_.
 
@@ -2806,76 +3023,84 @@ If the value of this property is _true,_ the padding are applied in pixels.
 
 If the value of this property is _false,_ the padding are applied as set in [padding](#padding) property.
 
-Limitations
+### Limitations
 
 Desktop Web/ SPA platforms do not support _paddingInPixel_ property in Image widget, Slider widget and Switch widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to read paddingInPixel property for widgetID Button widget in frmHome form.
+{% highlight VoltMx %}
+//Sample code to read paddingInPixel property for widgetID Button widget in frmHome form.
 
 voltmx.print("PaddingInPixel property value is:"+fromHome.widgetID.paddingInPixel);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Desktop Web and SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Helps you access the parent of the widget. If the widget is not part of the widget hierarchy, the parent property returns null.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 parent
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 > **_Note:_** The property works for all the widgets inside a FlexForm, FlexContainer or FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}function func() {
+{% highlight VoltMx %}
+function func() {
 
     voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pasteboardType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pasteboardType Property</summary>
 
 * * *
 
 This property enables an application to share data within the application or with another application using system-wide or application-specific pasteboards.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pasteboardType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Typically, an object in the application writes data to a pasteboard when the user requests a copy or cut operation on a selection in the user interface. Another object in the same or different application then reads that data from the pasteboard and presents it to the user at a new location; this usually happens when the user requests a paste operation.
 
@@ -2889,14 +3114,15 @@ The different Pasteboard types are:
 *   TEXTBOX\_PASTE\_BOARD\_TYPE\_APP\_LEVEL\_NON\_PERSISTENT:If you select this option , the text copied from a Textbox can be pasted in Textboxes (with the pasteboard type set as (nonpersistent) within the same instance of the application. This text is not retained in the memory when you close the application.
 *   TEXTBOX\_PASTE\_BOARD\_TYPE\_NO\_PASTE\_BOARD:Select this option if you want to disable copying the content from a TextBox.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the pasteboardType property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the pasteboardType property of TextBox widget.
 
 frmTxtBox.myTxtBox.pasteboardType=constants.TEXTBOX_PASTE_BOARD_TYPE_SYSTEM_LEVEL;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   iPhone
@@ -2904,25 +3130,28 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[placeholder Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>placeholder Property</summary>
 
 * * *
 
 The placeholder attribute specifies a short hint that describes the expected value of an input field (example, a sample value or a short description of the expected format).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 placeholder
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The hint is displayed in the input field when it is empty, and disappears when the field gets focus.
 
@@ -2935,41 +3164,45 @@ The following image illustrates the placeholder text in a TextBox widget:
 
 ![](Resources/Images/tb-placeholder.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the placeholder property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the placeholder property of TextBox widget.
 
 frmTxtBox.myTxtBox.placeholder="Enter Text";
 {% endhighlight %}
 
 > **_Note:_** You can set the placeholder text from the code only on iPhone, Android, and Windows.
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[placeholderSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>placeholderSkin Property</summary>
 
 * * *
 
 Specifies the skin to be applied to the placeholder text in the TextBox widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 placeholderSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Only the font color skin attribute is applicable.
 
@@ -2977,9 +3210,10 @@ The following image illustrates the placeholder text with a placeholder color ap
 
 ![](Resources/Images/tb-placeholdercolor.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the placeholderSkin property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the placeholderSkin property of TextBox widget.
 
 frmTxtBox.myTxtBox.placeholderSkin="placeholderSkn";
 {% endhighlight %}
@@ -2988,7 +3222,7 @@ frmTxtBox.myTxtBox.placeholderSkin="placeholderSkn";
 
 > **_Note:_** Android and Windows support change in font color only.
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   iPhone
@@ -2997,34 +3231,38 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pressedStateSkinProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pressedStateSkinProperties Property</summary>
 
 * * *
 
 Specifies the skin properties that define the look and feel of the widget, when the widget is pressed or clicked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pressedStateSkinProperties
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the pressedSkin property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the pressedStateSkinProperties property.
 
-{% highlight voltMx %}Form1.btn1.pressedStateSkinProperties = {  
+{% highlight VoltMx %}
+Form1.btn1.pressedStateSkinProperties = {  
      background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -3056,7 +3294,7 @@ This example uses the button widget, but the principle remains the same for all 
     }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
@@ -3064,7 +3302,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -3074,7 +3313,8 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -3082,7 +3322,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -3097,21 +3337,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -3136,14 +3379,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -3151,9 +3395,10 @@ This property is used to retain flex positional property values as they were def
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -3161,7 +3406,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -3176,21 +3421,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -3215,14 +3463,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -3230,9 +3479,10 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -3240,7 +3490,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -3255,21 +3505,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -3295,37 +3548,41 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[restrictCharactersSet Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>restrictCharactersSet Property</summary>
 
 * * *
 
 This property restricts users from entering a set of input characters from the soft keyboard in the TextBox widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 restrictCharactersSet
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.textBox1.restrictCharactersSet =  "~#^|$%&*!";
+{% highlight VoltMx %}
+Form1.textBox1.restrictCharactersSet =  "~#^|$%&*!";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Android
@@ -3335,7 +3592,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -3345,25 +3603,28 @@ The right property determines the position of the right edge of the widget’s b
 
 The right property is used only if the width property is not provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 right
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -3371,32 +3632,35 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[secureTextEntry Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>secureTextEntry Property</summary>
 
 * * *
 
 Specifies whether the text entered by the user will be secured using a mask character, such as asterisk or dot.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 secureTextEntry
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -3405,39 +3669,43 @@ The default value for this property is false.
 
 This is typically set to _true_ for a password field.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the secureTextEntry property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the secureTextEntry property of TextBox widget.
 
 frmTxtBox.myTxtBox.secureTextEntry=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setImportantForAutofill Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setImportantForAutofill Property</summary>
 
 * * *
 
 setImportantForAutoFill property is used to specify whether a TextBox widget should be considered important for auto-fill or not.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setImportantForAutofill
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of `setImportantForAutofill` property is _constants.TEXT\_IMPORTANT\_FOR\_AUTOFILL\_AUTO_.
 
@@ -3447,38 +3715,42 @@ You can specify any of the following values to this property.
 *   _constants.TEXT\_IMPORTANT\_FOR\_AUTOFILL\_NO_: When the setImportantForAutoFill property is set as this value for a TextBox widget, the widget is not considered for auto-fill by the
 *   _constants.TEXT\_IMPORTANT\_FOR\_AUTOFILL\_YES_: When the setImportantForAutoFill property is set as this value for a TextBox widget, the widget is considered for auto-fill by the
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the setImportantForAutofill property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the setImportantForAutofill property of TextBox widget.
 
 frmTxtBox.myTxtBox.setImportantForAutofill=constants.TEXT_IMPORTANT_FOR_AUTOFILL_AUTO;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[shadowColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>shadowColor Property</summary>
 
 * * *
 
 Specifies the color for the shadow of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 shadowColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
@@ -3487,75 +3759,83 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the shadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the shadowColor property.
 
-{% highlight voltMx %}Form1.btn1.shadowColor = "ea5075";
+{% highlight VoltMx %}
+Form1.btn1.shadowColor = "ea5075";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[shadowDepth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>shadowDepth Property</summary>
 
 * * *
 
 Defines the depth of the shadow effect applied to the TextBox Widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 shadowDepth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The depth of the shadow should be specified in DP (Device Independent Pixels) units. The higher the value of shadowDepth, the appearance of the TextBox Widget is elevated from the screen and the casted shadow becomes soft.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the shadowDepth property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the shadowDepth property of TextBox widget.
 
 frmTxtBox.myTxtBox.shadowDepth=10;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android 5.0 and later versions.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[shadowOffset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>shadowOffset Property</summary>
 
 * * *
 
 This property specifies the current coordinates of the shadow region in the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 shadowOffset
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The JSON Object contains the X-coordinate and Y-coordinates for the offset in the following format:
     
@@ -3565,56 +3845,61 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the shadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the shadowOffset property.
 
-{% highlight voltMx %}Form1.btn1.shadowOffset= {
+{% highlight VoltMx %}
+Form1.btn1.shadowOffset= {
     "x": "3",
     "y": "27"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[shadowRadius Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>shadowRadius Property</summary>
 
 * * *
 
 Specifies the radius for the blur value of the shadow.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 shadowRadius
+{% endhighlight %}
 
 **Type**
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The default value of the shadowRadius property for a Responsive Web app is 0.
 *   The default unit for the value of this property is pixels.
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the shadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the shadowRadius property.
 
-{% highlight voltMx %} Form1.btn1.shadowRadius = 6;
+{% highlight VoltMx %}
+Form1.btn1.shadowRadius = 6;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
@@ -3623,25 +3908,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[shadowType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>shadowType Property</summary>
 
 * * *
 
 Sets a type of the shadow effect to apply to the TextBox Widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 shadowType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The property specifies a shape to the widget's shadow that is cast. You can apply any one of the following shadow types:
 
@@ -3651,35 +3939,39 @@ _PADDED\_VIEW\_BOUNDS\_SHADOW_: Shadow matches the widget's rectangular padded b
 
 _BACKGROUND\_SHADOW_: Shadow matches the widget's background. This is the default value.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the shadowType property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the shadowType property of TextBox widget.
 
 frmTxtBox.myTxtBox.shadowType =constants.VIEW_BOUNDS_SHADOW;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android 5.0 and later versions.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showClearButton Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showClearButton Property</summary>
 
 * * *
 
 Specifies if a "_Clear_" button must be provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showClearButton
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 You can use the "_Clear_" button to erase the text in the TextBox widget.
 
@@ -3699,14 +3991,15 @@ Without Clear Button:
 
 ![](Resources/Images/tb-wioutclear.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the showClearButton property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the showClearButton property of TextBox widget.
 
 frmTxtBox.myTxtBox.showClearButton=true;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   iPhone
@@ -3714,21 +4007,24 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showCloseButton Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showCloseButton Property</summary>
 
 * * *
 
 Specifies if the "_Done_" button that appears in the keypad (opens when you select text box) must be visible or not.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showCloseButton
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -3746,31 +4042,35 @@ The following image illustrates the Keypad when the property is set to _false_:
 
 ![](Resources/Images/keypadntreqd.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the showCloseButton property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the showCloseButton property of TextBox widget.
 
 frmTxtBox.myTxtBox.showCloseButton=true;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Available on iPhone only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showProgressIndicator Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showProgressIndicator Property</summary>
 
 * * *
 
 Specifies if there must be an indication to the user that the widget content is being loaded.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showProgressIndicator
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
@@ -3786,14 +4086,15 @@ The following image illustrates the loading indicator:
 
 ![Need Loading Indicator During Post Show](Resources/Images/Need_Loading_Indicator_During_Post_Show.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the showProgressIndicator property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the showProgressIndicator property of TextBox widget.
 
 frmTxtBox.myTxtBox.showProgressIndicator=true;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   iPhone
@@ -3801,39 +4102,44 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin Property</summary>
 
 * * *
 
 Specifies the look and feel of the widget when not in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 skin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the skin property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the skin property of TextBox widget.
 
 frmTxtBox.myTxtBox.skin="txtSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[smartDashes Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>smartDashes Property</summary>
 
 * * *
 
@@ -3841,25 +4147,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[smartInsertDelete Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>smartInsertDelete Property</summary>
 
 * * *
 
 When you copy and paste a text inside a TextBox or a TextArea widget, you can use this property to add a space after the text.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 smartInsertDelete
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 You can assign any of the following constants to the `smartInsertDelete` property.
 
@@ -3867,43 +4176,44 @@ You can assign any of the following constants to the `smartInsertDelete` propert
 *   constants.SMART\_INSERT\_DELETE\_TYPE\_NO: When you use this constant, no space is added after the text.
 *   constants.SMART\_INSERT\_DELETE\_TYPE\_YES: When you use this constant, the space is added after the text.
 
-Example
+### Example
 
-{% highlight voltMx %}//This property is applicable for TextBox and TextArea widgets.
+{% highlight VoltMx %}
+//This property is applicable for TextBox and TextArea widgets.
 
 /*This example demonstrates how to use smartInsertDelete property by using myTxtBox TextBox widget in frmTextBox FlexForm. You need to use smartInsertDelete property for TextArea widget in a similar manner.*/
 frmTextBox.myTxtBox.smartInsertDelete = constants.SMART_INSERT_DELETE_TYPE_NO;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 11 and onwards.
-    
-
- 
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[smartQuotes Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>smartQuotes Property</summary>
 
 * * *
 
 This property is used to enable or disable the curly quotes, ie,**“ ‘ ’ ”** inside the text of a TextBox or a TextArea widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 smartQuotes
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 You can assign any of the following constants to the `smartQuotes` property.
 
@@ -3911,35 +4221,36 @@ You can assign any of the following constants to the `smartQuotes` property.
 *   constants.SMART\_QUOTES\_TYPE\_NO: When you use this constant, the curly quotes is disabled.
 *   constants.SMART\_QUOTES\_TYPE\_YES: When you use this constant, the curly quotes is enabled for all keyboard types.
 
-Example
+### Example
 
-{% highlight voltMx %}//This property is applicable for TextBox and TextArea widgets.
+{% highlight VoltMx %}
+//This property is applicable for TextBox and TextArea widgets.
 /*This example demonstrates how to use smartQuotes property by using myTxtBox TextBox widget in frmTextBox FlexForm. You need to use smartQuotes property for TextArea widget in a similar manner.*/
 
 frmTextBox.myTxtBox.smartQuotes = constants.SMART_QUOTES_TYPE_NO;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 11 and onwards.
-    
-
- 
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[text Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>text Property</summary>
 
 * * *
 
 Specifies a general or descriptive text for the TextBox widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 text
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
@@ -3949,20 +4260,22 @@ String
 2.  You must set the JavaScript text references to null after the text is no longer required. This will enable the Garbage Collection to delete the text references from the memory. This is valid for all platforms.
 3.  In Android platform, you must also use the [clear]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.html#clear) API of the Rawbytes object, to clear the text reference in the Native Android RawBytes object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example 1
+### Example 1
 
-{% highlight voltMx %}//Sample code to set the text property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the text property of TextBox widget.
 
 frmTxtBox.myTxtBox.text="Sample Text";
 {% endhighlight %}
 
-Example 2
+### Example 2
 
-{% highlight voltMx %}/*Sample code to read and clear the text property in when the isSensitiveText property is set as true.*/
+{% highlight VoltMx %}
+/*Sample code to read and clear the text property in when the isSensitiveText property is set as true.*/
 
 //Reading the text from the myTxtBox TextBox widget.
 var textContent = frmTxtBox.myTxtBox.text;
@@ -3985,32 +4298,35 @@ textContent = null;
 textAsString = null;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textContentType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textContentType Property</summary>
 
 * * *
 
 The textContentType property is used to specify the keyboard and system information based on the text type entered by the application user.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 textContentType
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of the textContentType property is TEXTBOX\_TEXT\_CONTENT\_TYPE\_DEFAULT.
 
@@ -4021,77 +4337,85 @@ To change the content type of the text, assign any of the following constants to
 *   TEXTBOX\_TEXT\_CONTENT\_TYPE\_PASSWORD: Use this value when the TextBox widget is used to type a password. When you use this value, the suggestions for password are available. This constant is applicable from iOS 11.0 onwards.
 *   TEXTBOX\_TEXT\_CONTENT\_TYPE\_OTP: Use this value when the TextBox widget is used to specify a single factor SMS login code or OTP. When you use this value, the suggestions for the OTP are provided only if the system keyboard is in use.This constant is applicable from iOS 12.0 onwards.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the textContentType property of a TextBox widget.  
+{% highlight VoltMx %}
+//Sample code to set the textContentType property of a TextBox widget.  
   
 frmTextBox.myTextBox.textContentType=constants.TEXTBOX_TEXT_CONTENT_TYPE_ DEFAULT;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textCopyable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textCopyable Property</summary>
 
 * * *
 
 The textCopyable property is used to enable or disable the cut, copy and, paste of the text present in the TextBox2 widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 textCopyable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Default value
+### Default value
 
 True
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the textcopyable property of TextBox2 widget.  
+{% highlight VoltMx %}
+//Sample code to set the textcopyable property of TextBox2 widget.  
   
 this.view.textbox.textCopyable = true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the Desktop Web
 *   Available in the SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textInputMode Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textInputMode Property</summary>
 
 * * *
 
 This property helps you to specify the type of input characters a user can enter into the TextBox widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 textInputMode
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 You can use this property to restrict the input characters to only numbers or a combination of alphabets, numbers, and special characters.
 
@@ -4109,39 +4433,43 @@ The values of [keyBoardStyle](#keyBoard) property are dependent on following mod
 
 "enablePeriodAtBeginningForTextBoxWidget" :true
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the textInputMode property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the textInputMode property of TextBox widget.
 
 frmTxtBox.myTxtBox.textInputMode=constants.TEXTBOX_INPUT_MODE_NUMERIC;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textShadowColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textShadowColor Property</summary>
 
 * * *
 
 Specifies the color for the text shadow of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 textShadowColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
@@ -4150,14 +4478,15 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the textShadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the textShadowColor property.
 
-{% highlight voltMx %}Form1.btn1.textShadowColor = "ea5075";
+{% highlight VoltMx %}
+Form1.btn1.textShadowColor = "ea5075";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -4165,25 +4494,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textShadowOffset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textShadowOffset Property</summary>
 
 * * *
 
 This property specifies the current coordinates of the text shadow region in the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 textShadowOffset
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The JSON Object contains the X-coordinate and Y-coordinates for the offset in the following format:
     
@@ -4193,17 +4525,18 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the textShadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the textShadowOffset property.
 
-{% highlight voltMx %}Form1.btn1.textShadowOffset = {
+{% highlight VoltMx %}
+Form1.btn1.textShadowOffset = {
     "x": "2",
     "y": "24"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -4211,85 +4544,92 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textShadowRadius Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textShadowRadius Property</summary>
 
 * * *
 
 Specifies the radius for the blur value of the text shadow.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 textShadowRadius
+{% endhighlight %}
 
 **Type**
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The default value of the textShadowRadius property for a Responsive Web app is 0.
 *   The default unit for the value of this property is pixels.
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the textShadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the textShadowRadius property.
 
-{% highlight voltMx %} Form1.btn1.textShadowRadius = 6;
+{% highlight VoltMx %}
+Form1.btn1.textShadowRadius = 6;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
- 
-
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[toolTip Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>toolTip Property</summary>
 
 * * *
 
 Specifies the hint text when the cursor hovers over a widget, without clicking it.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 toolTip
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The text entered in the tooltip appears as a small box when the cursor hovers over a widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the toolTip property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the toolTip property of TextBox widget.
 
 frmTxtBox.myTxtBox.toolTip="sample text";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
@@ -4297,25 +4637,28 @@ This property determines the top edge of the widget and measured from the top bo
 
 The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 top
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -4323,40 +4666,44 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transform Property</summary>
 
 * * *
 
 Contains an animation transformation that can be used to animate the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 transform
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi) function.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}//Animation sample
+{% highlight VoltMx %}
+//Animation sample
 var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
@@ -4364,31 +4711,34 @@ newTransform.translate3D(223, 12, 56);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewType Property</summary>
 
 * * *
 
 Specifies the appearance of the Textbox as Search view or a textbox to accept text input.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 viewType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write ( on Android Platform, this property is not writable)
 
-Remarks
+### Remarks
 
 You can select one of the following available views:
 
@@ -4418,14 +4768,15 @@ In the above sample code the object contains a list of objects which have the su
 
 ![](Resources/Images/searchboxandroid_292x438.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the viewType property of TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the viewType property of TextBox widget.
 
 frmTxtBox.myTxtBox.viewType=TEXTBOX_VIEW_TYPE_SEARCH_VIEW;
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   iPhone
@@ -4434,39 +4785,42 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetSwipeMove Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetSwipeMove Property</summary>
 
 * * *
 
 This property is used to enable and configure left or right swipe actions for a widget. The widgetSwipeMove Property can be used for all widgets . The most common use case is for implementing swipe action for individual rows in Segment.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 widgetSwipeMove
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Input Parameters
+### Input Parameters
 
 <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 111px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 93px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 184px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Default Value</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translate</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Boolean</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">true</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter. When the value of this parameter is set as true, the widget moves along with the swipe in the same direction.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Xboundaries</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Size of the current widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it defines the boundaries of the swipe in the X-axis.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">swipeLeft/swipeRight</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it is used to define the configuration of the widget while swiping to the left/ right. Each <i>swipeLeft</i> or <i>swipeRight</i>parameter is an array of configuration attributes containing <i>translateRange</i> , <i>callback</i> , <i>translatePos</i> , and <i>translate</i>. This JS&nbsp;Object defines the behavior of the widget during the swipe action.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translateRange</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Size of the current widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it defines the sub-boundaries for the action when the swipe action ends.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translatePos</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Previous position of the widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it determines the final translation position to be applied to the widget when the widget swipe reaches the <i>translateRange</i> value.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">callback</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">null</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This is an optional parameter and it defines the callback which needs to be triggered when the finger swipe reaches the sub boundary defined in <i>translateRange</i>. The attributes inside this parameter are described in the following table.</td></tr></tbody></table>
 
-The following table consists of the parameters of the _callback_ parameter:
+### The following table consists of the parameters of the _callback_ parameter:
 
 <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 111px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 93px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter consists of the widget handle or ID of the widget on which the swipe action has been performed.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">context</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is applicable only for widgets inside the Segment with row templates. Each context parameter consists of <i>rowIndex</i>, <i>sectionIndex</i> and <i>widgetref</i></td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">rowIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the row index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">sectionIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the section index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetref</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This parameter stores the handle of the Segment containing the swiped widget.</td></tr></tbody></table>
 
-Remarks
+### Remarks
 
 *   For a Segment, the **widgetSwipeMove** Property is configured while setting the data of the Segment.
 
 > **_Note:_** It is not recommended to assign the widgetSwipeMove property on a top Flex container of the segment template widget.
 
-Limitations
+### Limitations
 
 *   When a translation animation is applied to the same widget that has **widgetSwipeMove** already configured, the action which has been performed last takes precedence. For example, if you have set a translation animation on a FlexContainer and then set the _widgetSwipeMove_ property, the actions set in _widgetSwipeMove_ take precedence over the translation animation.
 *   The state of the swipe transition of the widget is not retained.
@@ -4475,11 +4829,12 @@ Limitations
 *   If the widgetSwipeMove property is configured on a top level Flex container of a segment template, the onRowClick event will not be triggered. - Applicable on iOS, Android, and SPA.
 *   Android limitation: On Android devices, when the user lifts their finger, the transition occurs immediately.
 
-Example
+### Example
 
 Following is a code snippet for a mail app. Here we have used a Segment for listing the mail and the _widgetSwipeMove_ Property has been configured for the _SwipeFlex_ FlexContainer.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.  
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.  
 //Here, we have shown how to use the widetSwipeMove property for Button widget.
 /*You need to make a corresponding use of the 
 widgetSwipeMove property for other applicable widgets.*/  
@@ -4515,13 +4870,14 @@ this.view.myButton.widgetSwipeMove=swipeMoveConfig;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -4529,19 +4885,21 @@ This property determines the width of the widget and is measured along the x-axi
 
 The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 width
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the options that can be used as units of width:
 
@@ -4551,9 +4909,10 @@ Following are the options that can be used as units of width:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
@@ -4561,14 +4920,15 @@ frmHome.widgetID.width = "10%";
 frmHome.widgetID.width = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
@@ -4576,19 +4936,21 @@ This property specifies the stack order of a widget. A widget with a higher zInd
 
 The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
@@ -4608,27 +4970,33 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 **voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto  
  var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
   "zIndex": voltmx.flex.ZINDEX_AUTO
 });
 
-{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+{% endhighlight %}
+
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto
 flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}
+//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
+</details>
 

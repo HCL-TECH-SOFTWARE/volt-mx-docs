@@ -2,9 +2,7 @@
 layout: "documentation"
 category: "voltmx_foundry_user_guide"
 ---
-                                
 
-User Guide: [Integration](Services.html#integration) \> [Configure the Integration Service](ConfigureIntegrationService.html) > JavaScript Adapter
 
 JavaScript Adapter
 ------------------
@@ -31,32 +29,19 @@ To configure JavaScript service in the **[Integration Service Definition](Config
     
 
   
-| Field | Description |
+      | Field | Description |
 | --- | --- |
-| Specify JavaScript libraries | From the **Specify the Javascript libraries** section, select a .JS file, or click **Upload** to select the .JS file from your local machine. The console adds your JS file to the console. The system displays the added JS file's name under the **Specify the Javascript libraries** section.The system allows you to upload more than one JS file at **Specify the Javascript libraries**.Once uploaded, JavaScript files are available across Volt MX Foundry console. They cannot be deleted, only unlinked. You can unlink uploaded .JS files by clicking the **Unlink** icon.
-
-<details close markdown="block"><summary>**JavaScript file Validation for the JavaScript service:**</summary>
-
-**You can validate the associated JavaScript files for the JavaScript service before saving the integration service. To validate the JavaScript file, click the Validate icon available for that file.**While uploading a JavaScript file, and if the JavaScript file **has no errors**, the **Validation** icon turns into the **Successful Validation File** icon for that file. And the JavaScript file is uploaded to the Workspace.> **_Note:_** When you link the validated JavaScript file to another JavaScript service, the **Successful Validation File** icon is displayed for that file in the new JavaScript Service.While uploading a JavaScript file, and if the JavaScript file **has errors**, the Console validates the file and displays the **Error** message dialog with a **Download** link to the validation results. When you click **Download**, a .txt file with the validation results will be downloaded to your local system. In this case you must upload a valid JavaScript file and ensure that the upload is successful.> **_Important:_** While uploading the JavaScript file, and if found errors, the Console does not allow you to upload the file to the Workspace.For the existing linked JavaScript files, the validation statuses icons are treated as follows:**Validate** icon indicates that the linked JavaScript files are not validated**Successful Validation File** icon indicates that the linked JavaScript files are validated, and no errors found.**Validation Error** icon indicates that the linked JavaScript files are validated, which contain errors.![](Resources/Images/JSFilevalidation_514x191.png)For example:For the linked JavaScript files, the following icons If you click **Validate** for the **linked** JavaScript file, and if the JavaScript file **has no errors**, the **Validation** icon turns into the **Successful Validation File** icon for that file. If you click **Validate** for the **linked** JavaScript file, and if the JavaScript file **has errors**, the **Error** message dialog is displayed with a **Download** link to the validation results. When you click **Download**, a .txt file with the validation results will be downloaded to your local system. In this case you must provide a valid JavaScript file, validate the updated file, and only then you can save the service.> **_Important:_** If you have validated the existing JavaScript file and found errors, the Workspace does not allow you to save the service.If you have **not validated** the existing linked JavaScript file, the **Validate** icon for that file is displayed. If you do not want to validate the JavaScript file, and want to save the service, do not click **Validate**.
-
-</details>
-
- |
+| Specify JavaScript libraries | From the **Specify the Javascript libraries** section, select a .JS file, or click **Upload** to select the .JS file from your local machine. The console adds your JS file to the console. The system displays the added JS file's name under the **Specify the Javascript libraries** section.<br><br>The system allows you to upload more than one JS file at **Specify the Javascript libraries**.<br><br>Once uploaded, JavaScript files are available across Volt MX Foundry console. They cannot be deleted, only unlinked. You can unlink uploaded .JS files by clicking the **Unlink** icon.<br><br>**JavaScript file Validation for the JavaScript service:**<br><br> You can validate the associated JavaScript files for the JavaScript service before saving the integration service. To validate the JavaScript file, click the Validate icon available for that file.<br><br>While uploading a JavaScript file, and if the JavaScript file **has no errors**, the **Validation** icon turns into the **Successful Validation File** icon for that file. And the JavaScript file is uploaded to the Workspace.<br> **_Note:_** When you link the validated JavaScript file to another JavaScript service, the **Successful Validation File** icon is displayed for that file in the new JavaScript Service.<br><br>While uploading a JavaScript file, and if the JavaScript file **has errors**, the Console validates the file and displays the **Error** message dialog with a **Download** link to the validation results. When you click **Download**, a .txt file with the validation results will be downloaded to your local system. In this case you must upload a valid JavaScript file and ensure that the upload is successful.<br><br> **_Important:_** While uploading the JavaScript file, and if found errors, the Console does not allow you to upload the file to the Workspace.<br><br>For the existing linked JavaScript files, the validation statuses icons are treated as follows:<br><br>**Validate** icon indicates that the linked JavaScript files are not validated<br><br>**Successful Validation File** icon indicates that the linked JavaScript files are validated, and no errors found.<br><br>**Validation Error** icon indicates that the linked JavaScript files are validated, which contain errors.![](Resources/Images/JSFilevalidation_514x191.png)<br>For example:<br><br>For the linked JavaScript files, the following icons If you click **Validate** for the **linked** JavaScript file, and if the JavaScript file **has no errors**, the **Validation** icon turns into the **Successful Validation File** icon for that file.<br><br> If you click **Validate** for the **linked** JavaScript file, and if the JavaScript file **has errors**, the **Error** message dialog is displayed with a **Download** link to the validation results. When you click **Download**, a .txt file with the validation results will be downloaded to your local system. In this case you must provide a valid JavaScript file, validate the updated file, and only then you can save the service.<br><br> **_Important:_** If you have validated the existing JavaScript file and found errors, the Workspace does not allow you to save the service.<br><br>If you have **not validated** the existing linked JavaScript file, the **Validate** icon for that file is displayed. If you do not want to validate the JavaScript file, and want to save the service, do not click **Validate**. |
 
   
-4.  
-<details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the **Advanced** section:</summary>
+4. **For additional configuration of your service definition, provide the following details in the Advanced section:** 
     
-      
-    | Field | Description |
-    | --- | --- |
-    | Throttling | API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response. **To specify throttling in Volt MX Foundry Console, follow these steps:**
-    In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your Volt MX Foundry console in terms of Total Rate Limit. In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.
-    
-    **To override throttling in App Services Console, refer to** [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). > **_Note:_** In case of On-premises, the number of nodes in a clustered environment is set by configuring the `VOLTMX_SERVER_NUMBER_OF_NODES` property in the Admin Console. This property indicates the number of nodes configured in the cluster. The default value is 1. Refer to [The Runtime Configuration tab on the Settings screen of App Services]({{ site.baseurl }}/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html). The total limit set in the Volt MX Foundry Console will be divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node. This is applicable for Cloud and On-premises. |
-</details> 
-    > **_Note:_** All the fields in the Advanced tab are optional.
-    
+      | Field | Description |
+| --- | --- |
+| Throttling | API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response. <br><br>**To specify throttling in Volt MX Foundry Console, follow these steps:<br><br>** In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your Volt MX Foundry console in terms of Total Rate Limit. <br><br>In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit. <br><br>**To override throttling in App Services Console, refer to** [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). <br><br>**_Note:_** In case of On-premises, the number of nodes in a clustered environment is set by configuring the `VOLTMX_SERVER_NUMBER_OF_NODES` property in the Admin Console. This property indicates the number of nodes configured in the cluster.<br> The default value is 1. Refer to [The Runtime Configuration tab on the Settings screen of App Services]({{ site.baseurl }}/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html).<br><br> The total limit set in the Volt MX Foundry Console will be divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node. This is applicable for Cloud and On-premises. |
+
+      > **_Note:_** All the fields in the Advanced tab are optional.
+
 5.  In the **Description** field, provide a suitable description for the service.
     
 6.  Click **Save** to save your service definition.
@@ -74,52 +59,41 @@ The **Operation List** tab appears when you click **Add Operation** in the **Ser
     
 <details close markdown="block"><summary>Click to View image</summary>
     
-    ![](Resources/Images/MuleSoftAddOps_553x354.png)
+   ![](Resources/Images/MuleSoftAddOps_553x354.png)
     
-    > **_Note:_** To use an existing integration service, refer to [How to Use an Existing Integration Service](Manage_Existing_Integration_Services_1.html#how-to-use-an-existing-integration-service).
- </details>   
-    1.  Under **Operations List** tab, in the **JS Library** drop-down list, select the required .JS file. For example, Sample.js. This will populate the Function drop-down list.
-    2.  From the **Function** drop-down list, select the required functions. Each function equates to an operation.
-    3.  Click **ADD OPERATION** to create operations with the selected functions.  
+   > **_Note:_** To use an existing integration service, refer to [How to Use an Existing Integration Service](Manage_Existing_Integration_Services_1.html#how-to-use-an-existing-integration-service).
+
+ </details>
+
+1.  Under **Operations List** tab, in the **JS Library** drop-down list, select the required .JS file. For example, Sample.js. This will populate the Function drop-down list.
+2.  From the **Function** drop-down list, select the required functions. Each function equates to an operation.
+3.  Click **ADD OPERATION** to create operations with the selected functions.  
         The new operations are created and listed under the **Configured Operations**.
-        
         Operation names are auto-generated in the format : <Name-of-the-JS-file>\_<function-name>. For example, `sample_addTwoNumbers`
         
 2.  To edit an operation, either click on the operation name or click **Edit** from the **Settings**.
 3.  In the **Operation Modal** tab, provide the following details to configure an operation:|  
     
-      
-    | Field | Description |
-    | --- | --- |
-    | Name | It is prepopulated with the operation name. You can change the name if required. |
-    | Operation Security Level | It specifies how a client must authenticate to invoke this operation.
-    
-<details close markdown="block"><summary>Select one of the following security operations in the **Operation Security Level** field.</summary> 
-    
-    **Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app. **Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. **Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible. **Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.
-    
-    
-</details>
-    
-    
-     |
-    | Description | Provide a suitable description of your operation. |
-    
-4.  
-<details close markdown="block"><summary> response operations, provide the following details in the **Advanced** section:</summary>
-    
-      
-    | Field | Description |
-    | --- | --- |
-    | Custom Code Invocation | You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to [Preprocessor and Postprocessor](Java_Preprocessor_Postprocessor_.html). |
-    | Properties | [Properties](Java_Preprocessor_Postprocessor_.html#timeout_cachable) allows you to configure service call time out cache response. **Cache Response** - the duration in seconds within which the service response is fetched from the cache. Select the **Cache Response** check box, and provide the details in the text box. |
-    | Front End API | It allows you map your endpoint/back-end URL of an operation to a [front-end URL](FrontEndAPI.html). |
-    | Server Events | Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer [Server Events](ServerEvents.html). 
-</details>|
-    
-    > **_Note:_** All options in the Advanced section are optional.
-    
+    **Select one of the following security operations in the Operation Security Level field.**
+      | Field | Description |
+| --- | --- |
+| Name | It is prepopulated with the operation name. You can change the name if required. |
+| Operation Security Level | It specifies how a client must authenticate to invoke this operation.<br><br>**Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.<br><br>**Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.<br><br>**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.<br><br>**Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment. |
+| Description | Provide a suitable description of your operation. |
 
+    
+4. **For additional configurations of response(or) operations, provide the following details in the Advanced section:**
+
+      | Field | Description |
+| --- | --- |
+| Custom Code Invocation | You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to [Preprocessor and Postprocessor](Java_Preprocessor_Postprocessor_.html). |
+| Properties | [Properties](Java_Preprocessor_Postprocessor_.html#timeout_cachable) allows you to configure service call time out cache response.<br><br> **Cache Response** - the duration in seconds within which the service response is fetched from the cache. <br>Select the **Cache Response** check box, and provide the details in the text box. |
+| Front End API | It allows you map your endpoint/back-end URL of an operation to a [front-end URL](FrontEndAPI.html). |
+| Server Events | Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer [Server Events](ServerEvents.html). |
+
+    
+      > **_Note:_** All options in the Advanced section are optional.
+    
 ### Configure Request Operation for JavaScript
 
 Integration services accept only `form-url-encoded` inputs for all the input parameters provided in the service input parameters (request input).
@@ -132,22 +106,13 @@ You can perform the following actions in Request Input tab:
 4.  To configure the request input tab, provide the following details:  
     
 
-  
-| Field | Description |
+      | Field | Description |
 | --- | --- |
 | Name | It Contains a Unique Identifier. Change the name if required. |
 | Test Value | Enter a value. A test value is used for testing the service. |
 | Default Value | Enter the value, if required. The default value will be used if the test value is empty. |
 | Value | Select one of the following options. It is set to **Request** by default. **Request** indicates that the value must be retrieved from the HTTP request received from the mobile device. **Session** indicates that the value must be retrieved from the HTTP session stored on Volt MX Foundry. **Identity**:Selecting this option allows you to send values from identity session as request inputs. Use `<Identity Provider><”Profile”/”Security”><Name of the Parameter>` notation to send identity session values.**<Identity Provider>** - Name of the identity provider from which the value must be extracted.**<Parameter>** is the key whose value must be passed along with the service request. |
-| Data Type | 
-
-<details close markdown="block"><summary>Select one of the following data types.</summary>
-
-**String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit. **Boolean** - A value that can be true or false. **Number** - An integer or a floating number. **Collection** - A group of data, also referred as data set.
-
-
-</details>
- |
+| Data Type | **String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit. <br><br>**Boolean** - A value that can be true or false.<br><br> **Number** - An integer or a floating number.<br><br>**Collection** - A group of data, also referred as data set. |
 | Encode | Select the check box to enable encoding of an input parameter. For example, the name New York Times would be encoded as _New_York_Times_ when the encoding is set to True. The encoding must also adhere to the HTML URL encoding standards. |
 | Description | Provide a suitable description. |
 
@@ -187,5 +152,5 @@ You can perform the following actions in Request Input tab:
 
 ### Limitations for Supported Function Formats - JavaScript Adapter
 
-*   Supported formats of the JavaScript function definition as follows:{% highlight voltMx %} function abc() { … }
+*   Supported formats of the JavaScript function definition as follows:{% highlight VoltMx %} function abc() { … }
     {% endhighlight %}

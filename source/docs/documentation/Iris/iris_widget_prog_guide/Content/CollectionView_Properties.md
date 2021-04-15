@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                                   
-
 
 CollectionView Properties
 =========================
@@ -12,7 +10,7 @@ The properties for the CollectionView widget are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
@@ -20,19 +18,21 @@ Enables you to control accessibility behavior and alternative text for the widge
 
 For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
@@ -50,22 +50,23 @@ The accessibilityConfig property is a JavaScript object which can contain the fo
 | a11yHidden | Boolean | This is an optional parameter. Specifies if the widget should be ignored by assistive technology. The default option is set to _false_. This option is supported on iOS 5.0 and above, Android 4.1 and above, and SPA | For all widgets, this parameter maps to the `aria-hidden` property of ARIA in HTML. |
 | a11yARIA | Object | This is an optional parameter. For each widget, the key and value provided in this object are added as the attribute and value of the HTML tags respectively. Any values provided for attributes such as `aria-labelledby` and `aria-describedby` using this attribute, takes precedence over values given in `a11yLabel` and `a11yHint` fields. When a widget is provided with the following key value pair or attribute using the a11yARIA object, the tabIndex of the widget is automatically appended as zero.`{"role": "main"}``aria-label` | This parameter is only available on the Desktop Web platform. |
 
-Android limitations
+### Android limitations
 
 *   If the results of the concatenation of a11y fields result in an empty string, then `accessibilityConfig` is ignored and the text that is on widget is read out.
 *   The soft keypad does not gain accessibility focus during the right/left swipe gesture when the keypad appears.
 
-SPA/Desktop Web limitations
+### SPA/Desktop Web limitations
 
 *   When `accessibilityConfig` property is configured for any widget, the `tabIndex` attribute is added automatically to the `accessibilityConfig` property.
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+### Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -76,11 +77,12 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}
+/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -92,44 +94,48 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
-This property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
+    This property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
 The bottom property determines the position of the bottom edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the bottom edge of the parent container. In flow-vertical layout, the value is ignored. In flow-horizontal layout, the value is ignored.
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 bottom
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -137,40 +143,44 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA , and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
-This property determines the center of a widget measured from the left bounds of the parent container.
+    This property determines the center of a widget measured from the left bounds of the parent container.
 
 The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 centerX
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -178,40 +188,44 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
-This property determines the center of a widget measured from the top bounds of the parent container.
+    This property determines the center of a widget measured from the top bounds of the parent container.
 
 The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 centerY
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
@@ -219,32 +233,35 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentOffset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentOffset Property</summary>
 
 * * *
 
 This property returns the current coordinates of the top left corner of the scrollable region in the item.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contentOffset
+{% endhighlight %}
 
-Type
+### Type
 
 JavaScript Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Returns the following key:value pairs:
 
@@ -254,40 +271,44 @@ The values are numbers that represent device pixels (DP).
 
 For android this property is disabled if any templates are marked as autogrow.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widgetID.contentOffset = {
+{% highlight VoltMx %}
+Form1.widgetID.contentOffset = {
     "x": "3dp",
     "y": "4dp"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentOffsetMeasured Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentOffsetMeasured Property</summary>
 
 * * *
 
 This property returns the current coordinates of the top left corner of the scrollable region in the item.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contentOffsetMeasured
+{% endhighlight %}
 
-Type
+### Type
 
 JavaScript Object
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 Returns the following key:value pairs:
 
@@ -297,14 +318,14 @@ The values are numbers that represent device pixels (DP).
 
 For android this property is disabled if any templates are marked as autogrow.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var offset = frmHome.coll.contentOffsetMeasured;
 voltmx.print("contentOffsetMeasured:" + frmHome.coll.contentOffsetMeasured);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -312,25 +333,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentSize Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentSize Property</summary>
 
 * * *
 
-This property specifies the size of the scrollable area in the widget. Collection view items will appear in this area.
+    This property specifies the size of the scrollable area in the widget. Collection view items will appear in this area.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contentSize
+{% endhighlight %}
 
-Type
+### Type
 
 JavaScript object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is only used for voltmx.collectionview.LAYOUT\_CUSTOM.
 
@@ -343,15 +367,16 @@ If this value is not given, the scrollable area is determined by the actual cont
 
 The items are laid out according to flex layout rules.
 
-Example
+### Example
 
-{% highlight voltMx %}frmHome.coll.contentSize = {
+{% highlight VoltMx %}
+frmHome.coll.contentSize = {
     "width": "200dp",
     "height": "100dp"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -360,27 +385,30 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cursorType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cursorType Property</summary>
 
 * * *
 
 In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 cursorType
+{% endhighlight %}
 
-Type
+### Type
 
 String.
 
 You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 To add the `cursorType` property using Volt MX Iris in a Desktop Web application, follow these steps.
 
@@ -397,9 +425,10 @@ To add the `cursorType` property using Volt MX Iris in a Desktop Web application
     You can see that the **Cursor Type** property has been added under the **General** section.
 8.  Select a value from the drop-down list to set the **Cursor Type** for the widget.
 
-Example
+### Example
 
-{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}
+//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
   
@@ -407,30 +436,33 @@ frmButton.myButton.cursorType = "wait";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[data Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>data Property</summary>
 
 * * *
 
 Specifies the set of values for each item.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 data
+{% endhighlight %}
 
 Array
 
-Read/Write
+### Read/Write
 
 Read Only
 
-Remarks
+### Remarks
 
 The data is categorized into Sections and items. The Sections information is optional. You can set the data in three different formats.
 
@@ -442,9 +474,10 @@ The below table explains the type and description of template key:
 
 <table style="width: 100%;mc-table-style: url('Resources/Stylesheets/Basic.css');border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-left-style: solid;border-left-width: 2px;border-left-color: #000000;border-right-style: solid;border-right-width: 2px;border-right-color: #000000;border-top-style: solid;border-top-width: 2px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 2px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle-Basic" cellspacing="0"><colgroup><col style="width: 121px;" class="TableStyle-Basic-Column-Column1"> <col style="width: 124px;" class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col style="width: 331px;" class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyE-Column1-Body1">Key</td><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyE-Column1-Body1">Key</td><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyE-Column1-Body1">Type</td><td style="font-weight: bold;color: #ffffff;background-color: #005386;text-align: center;" class="TableStyle-Basic-BodyD-Column1-Body1">Comments</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">template</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Not Applicable</td><td class="TableStyle-Basic-BodyB-Column1-Body1">JavaScript: Object</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Indicates the template to be used for the specific item</td></tr></tbody></table>
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to define data property for a CollectionView widget.
+{% highlight VoltMx %}
+//Sample code to define data property for a CollectionView widget.
 frmCollection.myCollection.data = [{
  "dataId1": "data1",
  "dataId2": "data2",
@@ -461,7 +494,7 @@ frmCollection.myCollection.data = [{
 
 Example of Format 1
 
-{% highlight voltMx %}[{
+{% highlight VoltMx %}[{
     "dataId1": "foo",
     "dataId2": "foo",
     "dataId3": "foo",
@@ -489,9 +522,10 @@ In the above example, **template** is the standard key which can be optionally t
 
 In the above examples, the values of dataId1, dataId2 are shown as string, but dataId3 is key value pair. The key value pair format allows you to set the properties specific to the widget. In the above example, we are setting the _isVisible_ property to ture and **text** property to "Foo", **skin** property with ID nskin and **focusSkin** to a skin with ID fskin. If a string is provided, typically is mapped to the **text** property for button and labels and the _src_ property for the image.
 
-Example of Format 2
+### Example of Format 2
 
-{% highlight voltMx %}/*set the data with sections where section header is a name. 
+{% highlight VoltMx %}
+/*set the data with sections where section header is a name. 
 This example has two sections and each section with two rows.*/
 [
     ["section1", [{
@@ -519,9 +553,10 @@ This example has two sections and each section with two rows.*/
 ]
 {% endhighlight %}
 
-Example of Format 3
+### Example of Format 3
 
-{% highlight voltMx %}/*set the data with sections where section header driven by template. This example has two sections and each section with two rows.*/
+{% highlight VoltMx %}
+/*set the data with sections where section header driven by template. This example has two sections and each section with two rows.*/
 [
     [{
             "secDataId1": "",
@@ -562,7 +597,7 @@ Example of Format 3
 ]
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -571,7 +606,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
@@ -579,19 +615,21 @@ The `enable` property is used to control the actionability of the widgets. In a 
 
 This is a constructor level property and applicable for all widgets in Volt MX Iris.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
@@ -599,16 +637,17 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}
+//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
   
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
@@ -616,43 +655,48 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}
+Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -660,19 +704,21 @@ It determines the height of the widget and measured along the y-axis.
 
 The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 height
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the available measurement options:
 
@@ -684,7 +730,8 @@ Following are the available measurement options:
 
 **Example**
 
-{% highlight voltMx %}//Sample code to set the height property for widgets by using DP, Percentage and Pixels.   
+{% highlight VoltMx %}
+//Sample code to set the height property for widgets by using DP, Percentage and Pixels.   
 frmHome.CollectionView1.height = "50dp";
 
 frmHome.CollectionView1. height = "10%";
@@ -693,7 +740,7 @@ frmHome.CollectionView1. height = "10px";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -702,27 +749,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 A unique identifier of Segment consisting of alpha numeric characters. Every Segment should have a unique id within a Form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for an item with id:"ItemId".
+{% highlight VoltMx %}
+//Defining the properties for an item with id:"ItemId".
 
 var itemBasic = {
     id: "segment",
@@ -754,7 +805,7 @@ var item = new voltmx.ui.collectionview(itemBasic, itemLayout, itemPSP);
 alert("CollectionView Id ::" + item.id);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -763,25 +814,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This will help in avoiding the globals to most part of the programming.
 
@@ -789,9 +843,10 @@ This is a **non-Constructor** property. You cannot set this property through wid
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set info property for a CollectionView widget
+{% highlight VoltMx %}
+//Sample code to set info property for a CollectionView widget
 
 frmCollection.myCollection.info = {
     key: "segmentobjects"
@@ -801,7 +856,7 @@ frmCollection.myCollection.info = {
 voltmx.print("CollectionView Widget info ::" +frmCollection.myCollection.info);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -810,25 +865,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>isVisible Property</summary> 
 
 * * *
 
 This property controls the visibility of a widget on the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -836,15 +894,16 @@ If set to _false,_ the widget is not displayed.
 
 If set to _true,_ the widget is displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set isVisible property for a CollectionView widget
+{% highlight VoltMx %}
+//Sample code to set isVisible property for a CollectionView widget
 frmCollection.myCollection.isVisible=true;
 {% endhighlight %}
 
 > **_Note:_** You can set the visibility of a widget dynamically from code using the setVisibility method.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -853,31 +912,35 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[itemSelectedSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>itemSelectedSkin Property</summary>
 
 * * *
 
 Specifies the skin that must be applied when user selects the item.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 itemSelectedSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set itemSelectedSkin property for a CollectionView widget
+{% highlight VoltMx %}
+//Sample code to set itemSelectedSkin property for a CollectionView widget
 frmCollection.myCollection.itemSelectedSkin="itemFSkn";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -886,35 +949,39 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[itemSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>itemSkin Property</summary>
 
 * * *
 
 The default skin for each item.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 itemSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This skin will be overridden is a skin is specified in the item template, or in item data.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set itemSkin property for a CollectionView widget
+{% highlight VoltMx %}
+//Sample code to set itemSkin property for a CollectionView widget
 frmCollection.myCollection.itemSkin="itemSkn";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -923,25 +990,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[itemTemplate Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>itemTemplate Property</summary>
 
 * * *
 
 Indicates the common template to be used for each item while creating the item and filling the data.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 itemTemplate
+{% endhighlight %}
 
-Type
+### Type
 
 voltmx.ui.FlexContainer
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This can be overridden at the item level when setting the data using the **template** key. Only a FlexContainer can be used here.
 
@@ -958,14 +1028,15 @@ On iOS platform, when a FlexContainer is used as a template for CollectionView, 
 
 > **_Note:_** If you are switching between the templates of the item, ensure that the widgetDataMap property is defined after the itemtemplate is set. The mapping of the widgets needs to be refreshed after setting the template on a item.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set itemTemplate property for a CollectionView widget.  
+{% highlight VoltMx %}
+//Sample code to set itemTemplate property for a CollectionView widget.  
 /*Here, flexContainerTemplate, is the template that is assigned to the myCollection CollectionView widget.*/
 frmCollection.myCollection.itemTemplate=flexContainerTemplate;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -974,25 +1045,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layout Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layout Property</summary>
 
 * * *
 
 This property determines how the items get arranged within the CollectionView widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 layout
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The value is a constant using one of the following values:
 
@@ -1000,7 +1074,7 @@ The value is a constant using one of the following values:
 *   voltmx.collectionview.LAYOUT\_VERTICAL. Items are laid out vertically and wrap at the widget frame's boundary. The view scrolls horizontally and scrollable area is decided by the underlying control so that all items fit.
 *   voltmx.collectionview.LAYOUT\_CUSTOM. ContentSize is set to define the scrollable area. Items are laid out according to flex layout rules.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1009,7 +1083,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -1017,21 +1092,24 @@ This property specifies the maximum height of the widget and is applicable only 
 
 The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -1039,14 +1117,15 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -1054,21 +1133,24 @@ This property specifies the maximum width of the widget and is applicable only w
 
 The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -1076,14 +1158,15 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -1091,21 +1174,24 @@ This property specifies the minimum height of the widget and is applicable only 
 
 The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -1113,38 +1199,41 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minItemSpace Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minItemSpace Property</summary>
 
 * * *
 
 This property specifies the minimum spacing between items.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minItemSpace
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 All units, such as DP, %, PX are supported.
 
 This property is only supported at the widget level. It can not be overridden.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1153,31 +1242,34 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minLineSpace Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minLineSpace Property</summary>
 
 * * *
 
 This property specifies the minimum spacing between lines of items.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minLineSpace
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 All units, such as DP, %, PX are supported.
 
 This property is only supported at the widget level. It can not be overridden.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1186,7 +1278,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -1194,21 +1287,24 @@ This property specifies the minimum width of the widget and is applicable only w
 
 The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -1216,14 +1312,15 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>opacity Property</summary>
 
 * * *
 
@@ -1231,59 +1328,65 @@ Specifies the opacity of the widget. The value of this property must be in the r
 
 Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 opacity
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This property has more priority compared to the values coming from the configured skin.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
+{% highlight VoltMx %}
+//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
 
 //Sample code to make the widget opaque by using the opacity property.
 frmHome.widgetID.opacity = 1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE.
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Gives you the ability to access the parent of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 parent
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 If the widget is not part of the widget hierarchy, then this property returns null.
 
 This property works for all the widgets whether they are placed inside a FlexContainer or Form.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1292,59 +1395,66 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pressedSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pressedSkin Property</summary>
 
 * * *
 
 Specifies the skin to indicate that an item of the collection is pressed or clicked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pressedSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If you do not specify the _pressedSkin_, the itemFocusSkin is applied.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set pressedSkin property for a CollectionView widget
+{% highlight VoltMx %}
+//Sample code to set pressedSkin property for a CollectionView widget
 frmCollection.myCollection.pressedSkin="pressedSkn";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pullToRefreshView Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pullToRefreshView Property</summary>
 
 * * *
 
 Displays a Flex Container above the content area of the CollectionView widget when the widget is pulled down from the top.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pullToRefreshView
+{% endhighlight %}
 
-Type
+### Type
 
 A Flex Container reference
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is valid only in horizontal and vertical layouts.
 
@@ -1360,16 +1470,17 @@ In case of vertical layout:
 *   Width is based on the width configured for the widget. If not given, 50dp is the default
 *   The view is docked at the extreme beginning or end of the collection view
 
-Example
+### Example
 
-{% highlight voltMx %}var fc = voltmx.ui.FlexContainer({
+{% highlight VoltMx %}
+var fc = voltmx.ui.FlexContainer({
     "id": "myc"
 }, {}, {});
 
 collview.pullToRefreshView = fc;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1378,25 +1489,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pushToRefreshView Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pushToRefreshView Property</summary>
 
 * * *
 
 Displays a Flex Container below the content area of the CollectionView widget when the widget is pushed up from the bottom.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pushToRefreshView
+{% endhighlight %}
 
-Type
+### Type
 
 A Flex Container reference
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is valid only in horizontal and vertical layouts.
 
@@ -1412,16 +1526,17 @@ In case of vertical layout:
 *   Width is based on the width configured for the widget. If not given, 50dp is the default
 *   The view is docked at the extreme beginning or end of the collection view
 
-Example
+### Example
 
-{% highlight voltMx %}var fc = voltmx.ui.FlexContainer({
+{% highlight VoltMx %}
+var fc = voltmx.ui.FlexContainer({
     "id": "myc"
 }, {}, {});
 
 collview.pushToRefreshView = fc;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1430,25 +1545,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[releaseToPullRefreshView Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>releaseToPullRefreshView Property</summary>
 
 * * *
 
 Displays a Flex Container above the content area of the CollectionView widget when the widget is pulled down from the top and then released.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 releaseToPullRefreshView
+{% endhighlight %}
 
-Type
+### Type
 
 A Flex Container reference
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is valid only in horizontal and vertical layouts.
 
@@ -1468,16 +1586,17 @@ The height of the Flex Container must be set to match the height of the Flex Con
 
 Replaces pullToRefreshView when the client area of the CollectionView has been pulled enough to trigger the onPull callback.
 
-Example
+### Example
 
-{% highlight voltMx %}var fc = voltmx.ui.FlexContainer({
+{% highlight VoltMx %}
+var fc = voltmx.ui.FlexContainer({
     "id": "myc"
 }, {}, {});
 
 collview.releaseToPullRefreshView = fc;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1486,25 +1605,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[releaseToPushRefreshView Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>releaseToPushRefreshView Property</summary>
 
 * * *
 
 Displays a Flex Container below the content area of the CollectionView widget when the widget is pushed up from the bottom and released.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 releaseToPushRefreshView
+{% endhighlight %}
 
-Type
+### Type
 
 A Flex Container reference
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is valid only in horizontal and vertical layouts.
 
@@ -1524,16 +1646,17 @@ The height of the Flex Container must be set to match the height of the Flex Con
 
 Replaces pushToRefreshView when the client area of the CollectionView has been pushed enough to trigger the onPush callback.
 
-Example
+### Example
 
-{% highlight voltMx %}var fc = voltmx.ui.FlexContainer({
+{% highlight VoltMx %}
+var fc = voltmx.ui.FlexContainer({
     "id": "myc"
 }, {}, {});
 
 collview.releaseToPushRefreshView = fc;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1542,7 +1665,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -1550,9 +1674,10 @@ This property is used to retain the content alignment property value, as it was 
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1560,7 +1685,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -1575,21 +1700,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -1614,14 +1742,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -1629,9 +1758,10 @@ This property is used to retain flex positional property values as they were def
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1639,7 +1769,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -1654,21 +1784,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -1693,14 +1826,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -1708,9 +1842,10 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 > **_Note:_** Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.
 
-The mirroring widget layout properties should be defined as follows.
+### The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1718,7 +1853,7 @@ The mirroring widget layout properties should be defined as follows.
 }
 {% endhighlight %}
 
-The following table illustrates how widgets consider Local flag and Widget flag values.
+### The following table illustrates how widgets consider Local flag and Widget flag values.
 
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
@@ -1733,21 +1868,24 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -1773,32 +1911,35 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainSelection Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainSelection Property</summary>
 
 * * *
 
 Specifies if the segment should retain the selection made even when the user navigates out and back to the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainSelection
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is _false,_.
 
@@ -1806,13 +1947,14 @@ If set to _false,_, selection behaves like button click; the focus skin shows an
 
 If set to _true,_ the selection is retained when the user navigates to different form. If set to _false,_ the selection is not retained.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable retainSelection property for a CollectionView widget
+{% highlight VoltMx %}
+//Sample code to enable retainSelection property for a CollectionView widget
 frmCollection.myCollection.retainSelection=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1821,25 +1963,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[reachingBeginningOffset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>reachingBeginningOffset Property</summary>
 
 * * *
 
 This property specifies an offset from the top of the content area of the CollectionView widget. This offset allows scrolling to continue past the start of content.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 reachingBeginningOffset
+{% endhighlight %}
 
-Type
+### Type
 
 JavaScript object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The object consists of two key-value pairs:
 
@@ -1850,15 +1995,16 @@ The onReachingBeginning event is sent only after the user has scrolled through t
 
 The default value for x and y is 0.
 
-Example
+### Example
 
-{% highlight voltMx %}Coll.reachingBeginningOffset = {
+{% highlight VoltMx %}
+Coll.reachingBeginningOffset = {
     "x": "10dp",
     "y": "0dp"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1867,25 +2013,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[reachingEndOffset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>reachingEndOffset Property</summary>
 
 * * *
 
 This property specifies an offset from the bottom of the content area of the CollectionView widget. This offset allows scrolling to continue past the start of content.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 reachingEndOffset
+{% endhighlight %}
 
-Type
+### Type
 
 JavaScript object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The object consists of two key-value pairs:
 
@@ -1896,14 +2045,14 @@ The onReachingEnd event is sent only after the user has scrolled through this of
 
 The default value for x and y is 0.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 Coll.reachingEndOffset = {"x":"10dp", "y":"0dp"};
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1912,7 +2061,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -1922,25 +2072,28 @@ The right property determines the position of the right edge of the widget’s b
 
 The right property is used only if the width property is not provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 right
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -1948,32 +2101,35 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollDirection Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollDirection Property</summary>
 
 * * *
 
 Specifies the direction in which the widget should scroll. This property is supported only when the scrollingEnabled property is set to true.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 scrollDirection
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is voltmx.flex.SCROLL\_HORIZONTAL.
 
@@ -1986,9 +2142,10 @@ The available options are:
 *   voltmx.flex.SCROLL\_BOTH: Specifies the form to scroll in both the horizontal and vertical directions.(default for CollectionView widget)
 *   voltmx.flex.SCROLL\_NONE: Specifies the form not to scroll in any direction.
 
-Example
+### Example
 
-{% highlight voltMx %}/*This property is applicable for FlexForm, CollectionView and FlexScrollContainer widgets.*/
+{% highlight VoltMx %}
+/*This property is applicable for FlexForm, CollectionView and FlexScrollContainer widgets.*/
 //Here, we have shown how to use the scrollDirection Property for FlexScrollContainer widget.
 /*You need to make a corresponding use of the 
 scrollDirection Property for other applicable widgets.*/  
@@ -1996,80 +2153,88 @@ scrollDirection Property for other applicable widgets.*/
 frmFlxScroll.myFlxScroll.scrollDirection=voltmx.flex.SCROLL_BOTH;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollsToTop Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollsToTop Property</summary>
 
 * * *
 
 This property enables you to scroll the view to the top by tapping a device’s status bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 scrollsToTop
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is supported only in horizontal layout on iOS (voltmx.collectionview.LAYOUT\_HORIZONTAL).
 
 The default value for this property is false.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable scrollsToTop property for a CollectionView widget
+{% highlight VoltMx %}
+//Sample code to enable scrollsToTop property for a CollectionView widget
 frmCollection.myCollection.scrollsToTop=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[sectionFooterSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>sectionFooterSkin Property</summary>
 
 * * *
 
 Specifies the skin to be applied to the Section footer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 sectionFooterSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This skin is overwritten when the footer template or data has a skin configured.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set sectionFooterSkin property for a CollectionView widget
+{% highlight VoltMx %}
+//Sample code to set sectionFooterSkin property for a CollectionView widget
 frmCollection.myCollection.sectionFooterSkin="secFtSkin";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -2078,25 +2243,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[sectionFooterTemplate Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>sectionFooterTemplate Property</summary>
 
 * * *
 
 Specifies the template to use for each section when creating the section footer and filling the data.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 sectionFooterTemplate
+{% endhighlight %}
 
-Type
+### Type
 
 string
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is an optional parameter. If it is not provided the default template for each platform will be used.
 
@@ -2104,14 +2272,15 @@ Templates can also be provided at each section level when setting the data. Plea
 
 If used inside a data object, "template" continues to be the special key to set templates specific to any specific section header. Templates are mandatory to get headers and footers to function.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set sectionFooterTemplate property as box2 for a CollectionView widget
+{% highlight VoltMx %}
+//Sample code to set sectionFooterTemplate property as box2 for a CollectionView widget
 frmCollection.myCollection.sectionFooterTemplate=box2;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -2120,36 +2289,40 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[sectionHeaderSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>sectionHeaderSkin Property</summary>
 
 * * *
 
 Specifies the skin to be applied to the Section Header.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 sectionHeaderSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This skin is overwritten when the header template or data template does not have a normal skin configured.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set sectionHeaderSkin property for a CollectionView widget
+{% highlight VoltMx %}
+//Sample code to set sectionHeaderSkin property for a CollectionView widget
 frmCollection.myCollection.sectionHeaderSkin="secHSkin";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -2158,25 +2331,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[sectionHeaderTemplate Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>sectionHeaderTemplate Property</summary>
 
 * * *
 
 Specifies the common template to be used for each section when creating the section header and filling the data.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 sectionHeaderTemplate
+{% endhighlight %}
 
-Type
+### Type
 
 string
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is an optional parameter. If it is not provided the default template for each platform will be used.
 
@@ -2188,13 +2364,14 @@ When a Section Header is provided along with items/items, the Section Header is 
   
 This behavior of Section Headers is available on iOS and Android platform and is enabled when the [screenLevelWidget](#screenLe) has been set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set sectionHeaderTemplate property for a CollectionView widget.  
+{% highlight VoltMx %}
+//Sample code to set sectionHeaderTemplate property for a CollectionView widget.  
 frmCollection.CollectionView1.sectionHeaderTemplate = template1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -2203,25 +2380,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedItemIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedItemIndex Property</summary>
 
 * * *
 
 Indicates the currently selected item in single select or multi select modes in the CollectionView widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectedItemIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The index is with respect to the order in which data is set with [data](#data) property.
 
@@ -2235,7 +2415,8 @@ The selectedItemIndex is not updated when clicked on any child widget of a itrem
 
 selectedItemIndex Array format:
 
-{% highlight voltMx %}[sectionIndex1, [itemIndex1],  
+{% highlight VoltMx %}
+[sectionIndex1, [itemIndex1],  
   
 For example,  
 [1,3] indicates 4th item in 2nd section.  
@@ -2244,9 +2425,10 @@ For example,
 
 If data contains the sections then the _selectedIndex_ indicates the selected itemindex within the section.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the selectedItemIndex property for a CollectionView widget as four.
+{% highlight VoltMx %}
+//Sample code to set the selectedItemIndex property for a CollectionView widget as four.
 frmColl.myColl.selectedItemIndex= 4;  
   
 //Reading the selectedItemIndex of a CollectionView widget.
@@ -2254,31 +2436,34 @@ voltmx.print("CollectionView widget selectedItemIndex:" + frmColl.myColl.selecte
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedItemIndices Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedItemIndices Property</summary>
 
 * * *
 
 Specifies an array of indexes which indicates the selected items.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectedItemIndices
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Setting this value before the parent form is shown may result in the value not being changed. To avoid this you can set this value in the onDidFinishDataLoading callback for the CollectionView widget.
 
@@ -2294,7 +2479,8 @@ When this property is read from the SegmentedUI the list structure depends on th
 
 selectedItemIndices Array format:
 
-{% highlight voltMx %}[  
+{% highlight VoltMx %}
+[  
  [sectionIndex1, [itemIndex1, itemIndex2, ...],  
  [sectionIndex3, [itemIndex4, itemIndex5, ...],  
  .....  
@@ -2302,7 +2488,7 @@ selectedItemIndices Array format:
 
 {% endhighlight %}
 
-For example:
+### For example:
 
 *   \[ **\[0, \[2\] \]** \] indicates 3rd item is selected in the first selection.
 *   \[ **\[0, \[1, 4\] \]** \] indicates 2nd and 5th items are selected in the first section.  
@@ -2317,9 +2503,10 @@ Behavior when data is modified in the segment
 > *   If you set new data in the segment using the _[setData](Segment_Methods.html#setData)_ method, the earlier selected indices are cleared.
 > *   If you add additional data to the segment using the _[addAll](Segment_Methods.html#addAll)_ method, the earlier selected indices are retained.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the selectedItemIndices property for a CollectionView widget as [4,5].
+{% highlight VoltMx %}
+//Sample code to set the selectedItemIndices property for a CollectionView widget as [4,5].
 frmColl.myColl.selectedItemIndices=[4, 5];  
   
 //Reading the selectedItemIndices of a CollectionView widget.
@@ -2327,27 +2514,30 @@ voltmx.print("CollectionView widget selectedItemIndices:"+ frmColl.myColl.select
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showScrollbars Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showScrollbars Property</summary>
 
 * * *
 
 Specifies if the scrollbars are visible all the time.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showScrollbars
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Remarks
+### Remarks
 
 The default value for this property is per native platform behavior.
 
@@ -2355,46 +2545,51 @@ If set to _true,_ the scrollbars are displayed.
 
 If set to _false,_ the scrollbars are not displayed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable showScrollbars property for a CollectionView widget.
+{% highlight VoltMx %}
+//Sample code to enable showScrollbars property for a CollectionView widget.
 frmCollection.myCollection.showScrollbars=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin Property</summary>
 
 * * *
 
 Specifies the skin to be applied to the entire CollectionView.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 skin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set skin property for a CollectionView widget.
+{% highlight VoltMx %}
+//Sample code to set skin property for a CollectionView widget.
 frmCollection.myCollection.skin="widSkin";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -2403,7 +2598,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
@@ -2411,25 +2607,28 @@ This property determines the top edge of the widget and measured from the top bo
 
 The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 top
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -2437,36 +2636,39 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetDataMap Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetDataMap Property</summary>
 
 * * *
 
 Specifies the mapping information between widget ids and the keys in the data.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 widgetDataMap
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 It is the developers responsibility to ensure that the Widget datamap accommodates all widget ids, including widgets referred to in dynamic templates.
 
-{% highlight voltMx %}{  
+{% highlight VoltMx %}{  
  widgetID1: "dataId1",  
  widgetId2: "dataId2",  
  widgetId3: "dtaId3",  
@@ -2478,9 +2680,10 @@ It is the developers responsibility to ensure that the Widget datamap accommodat
 
 > **_Note:_** Only after you specify the mapping information, you can use the [Methods](CollectionView_Methods.html) applicable for a segment of a CollectionView widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set widgetDataMap property for a CollectionView widget.
+{% highlight VoltMx %}
+//Sample code to set widgetDataMap property for a CollectionView widget.
 frmCollection.myCollection.widgetDataMap = {
  widgetId1: "dataid1",
  widgetId2: "dataId2",
@@ -2491,7 +2694,7 @@ frmCollection.myCollection.widgetDataMap = {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -2500,39 +2703,42 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetSwipeMove Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetSwipeMove Property</summary>
 
 * * *
 
 This property is used to enable and configure left or right swipe actions for a widget. The widgetSwipeMove Property can be used for all widgets . The most common use case is for implementing swipe action for individual rows in Segment.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 widgetSwipeMove
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Input Parameters
+### Input Parameters
 
 <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 80px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 80px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 184px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 300px;"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Default Value</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translate</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Boolean</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">true</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter. When the value of this parameter is set as true, the widget moves along with the swipe in the same direction.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Xboundaries</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Size of the current widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it defines the boundaries of the swipe in the X-axis.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">swipeLeft/swipeRight</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it is used to define the configuration of the widget while swiping to the left/ right. Each <i>swipeLeft</i> or <i>swipeRight</i>parameter is an array of configuration attributes containing <i>translateRange</i> , <i>callback</i> , <i>translatePos</i> , and <i>translate</i>. This JS&nbsp;Object defines the behavior of the widget during the swipe action.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translateRange</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Size of the current widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it defines the sub-boundaries for the action when the swipe action ends.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translatePos</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Previous position of the widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it determines the final translation position to be applied to the widget when the widget swipe reaches the <i>translateRange</i> value.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">callback</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">null</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This is an optional parameter and it defines the callback which needs to be triggered when the finger swipe reaches the sub boundary defined in <i>translateRange</i>. The attributes inside this parameter are described in the following table.</td></tr></tbody></table>
 
-The following table consists of the parameters of the _callback_ parameter:
+### The following table consists of the parameters of the _callback_ parameter:
 
 <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 111px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 93px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter consists of the widget handle or ID of the widget on which the swipe action has been performed.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">context</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is applicable only for widgets inside the Segment with row templates. Each context parameter consists of <i>rowIndex</i>, <i>sectionIndex</i> and <i>widgetref</i></td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">rowIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the row index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">sectionIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the section index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetref</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This parameter stores the handle of the Segment containing the swiped widget.</td></tr></tbody></table>
 
-Remarks
+### Remarks
 
 *   For a Segment, the **widgetSwipeMove** Property is configured while setting the data of the Segment.
 
 > **_Note:_** It is not recommended to assign the widgetSwipeMove property on a top Flex container of the segment template widget.
 
-Limitations
+### Limitations
 
 *   When a translation animation is applied to the same widget that has **widgetSwipeMove** already configured, the action which has been performed last takes precedence. For example, if you have set a translation animation on a FlexContainer and then set the _widgetSwipeMove_ property, the actions set in _widgetSwipeMove_ take precedence over the translation animation.
 *   The state of the swipe transition of the widget is not retained.
@@ -2541,11 +2747,12 @@ Limitations
 *   If the widgetSwipeMove property is configured on a top level Flex container of a segment template, the onRowClick event will not be triggered. - Applicable on iOS, Android, and SPA.
 *   Android limitation: On Android devices, when the user lifts their finger, the transition occurs immediately.
 
-Example
+### Example
 
 Following is a code snippet for a mail app. Here we have used a Segment for listing the mail and the _widgetSwipeMove_ Property has been configured for the _SwipeFlex_ FlexContainer.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.  
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.  
 //Here, we have shown how to use the widetSwipeMove property for Button widget.
 /*You need to make a corresponding use of the 
 widgetSwipeMove property for other applicable widgets.*/  
@@ -2581,13 +2788,14 @@ this.view.myButton.widgetSwipeMove=swipeMoveConfig;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -2595,19 +2803,21 @@ This property determines the width of the widget and is measured along the x-axi
 
 The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 width
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the options that can be used as units of width:
 
@@ -2617,9 +2827,10 @@ Following are the options that can be used as units of width:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
@@ -2627,14 +2838,15 @@ frmHome.widgetID.width = "10%";
 frmHome.widgetID.width = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
@@ -2642,19 +2854,21 @@ This property specifies the stack order of a widget. A widget with a higher zInd
 
 The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
@@ -2674,27 +2888,33 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 **voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto  
  var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
   "zIndex": voltmx.flex.ZINDEX_AUTO
 });
 
-{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+{% endhighlight %}
+
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto
 flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}
+//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
+</details>
 

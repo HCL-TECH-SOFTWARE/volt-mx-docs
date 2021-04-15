@@ -10,52 +10,54 @@ media Methods
 
 The media Object consists of the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pause](javascript:void(0);) 
+
+<details close markdown="block"><summary>pause</summary> 
 
 * * *
 
 Pauses the playback of a media file.
 
-Syntax
+<b>Syntax</b>
 
-pause()
+{% highlight VoltMx %}pause();{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var theFile = new voltmx.io.File("MyAudioFile.mp3");
+{% highlight VoltMx %}var theFile = new voltmx.io.File("MyAudioFile.mp3");
 var mediaObj = voltmx.media.createFromFile(theFile);
 mediaObj.pause();
 {% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 This method only has an effect if a media file is currently being played.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Windows10, Android, iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[play](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>play</summary> 
 
 * * *
 
 Plays a media file.
 
-Syntax
+<b>Syntax</b>
 
-play(repeatCount)
+{% highlight VoltMx %}play(repeatCount);{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -64,72 +66,75 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var theFile = new voltmx.io.File("MyAudioFile.mp3");
+{% highlight VoltMx %}var theFile = new voltmx.io.File("MyAudioFile.mp3");
 var mediaObj =  voltmx.media.createFromFile(theFile);
 mediaObj.play(5);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 If your app calls this method and does not provide a value for the _repeatCount_ parameter, this method plays the audio file once. if the value for the _repeatCount_ parameter is negative, the file plays indefinitely. Setting the _repeatCount_ parameter to zero stops the playback. However, the recommended way to stop playback is for your app to call the [stop](#stop) or [pause](#pause) methods.
 
 When you call the [stop](#stop) method on Android and then call `play`, there may be a noticeable lag before the file starts playing again. The delay is caused by Android preparing the media again and is therefore specific to that platform only.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Windows10, Android, iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[releaseMedia](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>releaseMedia</summary> 
 
 * * *
 
 Releases the memory and resources held by the `media` object.
 
-Syntax
+<b>Syntax</b>
 
-releaseMedia()
+{% highlight VoltMx %}releaseMedia();{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var theFile = new voltmx.io.File("MyAudioFile.mp3");
+{% highlight VoltMx %}var theFile = new voltmx.io.File("MyAudioFile.mp3");
 var mediaObj = voltmx.media.createFromFile(theFile);
 mediaObj.releaseMedia();
 // If your app tries to use the mediaObj object again, it will get an error!
 {% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 Your app can call this function to save memory, especially on devices where memory is in short supply. After your app invokes this function, the `media` object is no longer in memory and attempts to continue to use it by calling its member functions result in errors. Your app must
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[seek](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>seek</summary> 
 
 * * *
 
 Sets the current playback position to a specific spot in the media file.
 
-Syntax
+<b>Syntax</b>
 
-seek(position)
+{% highlight VoltMx %}seek(position);{% endhighlight %}
 
-Input Parameters
+
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -138,39 +143,39 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var theFile = new voltmx.io.File("MyAudioFile.mp3");
+{% highlight VoltMx %}var theFile = new voltmx.io.File("MyAudioFile.mp3");
 var mediaObj = voltmx.media.createFromFile(theFile);
 mediaObj.seek(5); // Moves playback to 5 seconds from the start of the file.
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 This method moves the current playback position to a point that is a specified number of seconds from the beginning of the media. The number of seconds is specified as an integer in the _position_ parameter.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Windows10, Android, iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setCallbacks](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setCallbacks</summary>
 
 * * *
 
 Associates callback functions with the `media` object.
 
-Syntax
+<b>Syntax</b>
 
-setCallbacks(  
-    config);
+{% highlight VoltMx %}setCallbacks(config);{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 _config_
 
@@ -182,9 +187,9 @@ A JavaScript object that contains key-value pairs specifying functions to call w
 | onMediaFailed | A function that is called if the media cannot be played. For more information, see the **Remarks** section below. |
 | onProgressCallBack | A function that is called when the media is playing. For more information, see the **Remarks** section below. |
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function OnMediaProgress(Position) {
+{% highlight VoltMx %}function OnMediaProgress(Position) {
     // Your code goes here.
 }
 
@@ -206,11 +211,11 @@ function SetCallbacks() {
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 The _config_ parameter of the `setCallbacks` function contains keys that specify callback functions. The callback functions are as follows.
 
@@ -234,47 +239,51 @@ onProgressCallBack(Position);
 
 where Position contains the position of the current playback at the time the callback function is triggered.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Windows10, Android, iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[stop](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>stop</summary>
 
 * * *
 
 Stops the playback of a media file.
 
-Syntax
+<b>Syntax</b>
 
-stop()
+{% highlight VoltMx %}stop();{% endhighlight %}
 
-Example
 
-{% highlight voltMx %}var theFile = new voltmx.io.File("MyAudioFile.mp3");
+<b>Example</b>
+
+{% highlight VoltMx %}var theFile = new voltmx.io.File("MyAudioFile.mp3");
 var mediaObj = voltmx.media.createFromFile(theFile);
 mediaObj.stop();
 {% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 This method only has an effect if a media file is currently being played.
 
 When you call this method on Android and then call [play](#play), there may be a noticeable lag before the file starts playing again. The delay is caused by Android preparing the media again and is therefore specific to that platform only.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Windows10, Android, iOS
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

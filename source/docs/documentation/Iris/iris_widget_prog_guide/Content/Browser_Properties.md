@@ -12,7 +12,8 @@ The properties for Browser widget are as follows:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
@@ -20,19 +21,19 @@ Enables you to control accessibility behavior and alternative text for the widge
 
 For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
-Syntax
+### Syntax
 
 accessibilityConfig
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
@@ -50,22 +51,23 @@ The accessibilityConfig property is a JavaScript object which can contain the fo
 | a11yHidden | Boolean | This is an optional parameter. Specifies if the widget should be ignored by assistive technology. The default option is set to _false_. This option is supported on iOS 5.0 and above, Android 4.1 and above, and SPA | For all widgets, this parameter maps to the `aria-hidden` property of ARIA in HTML. |
 | a11yARIA | Object | This is an optional parameter. For each widget, the key and value provided in this object are added as the attribute and value of the HTML tags respectively. Any values provided for attributes such as `aria-labelledby` and `aria-describedby` using this attribute, takes precedence over values given in `a11yLabel` and `a11yHint` fields. When a widget is provided with the following key value pair or attribute using the a11yARIA object, the tabIndex of the widget is automatically appended as zero.`{"role": "main"}``aria-label` | This parameter is only available on the Desktop Web platform. |
 
-Android limitations
+### Android limitations
 
 *   If the results of the concatenation of a11y fields result in an empty string, then `accessibilityConfig` is ignored and the text that is on widget is read out.
 *   The soft keypad does not gain accessibility focus during the right/left swipe gesture when the keypad appears.
 
-SPA/Desktop Web limitations
+### SPA/Desktop Web limitations
 
 *   When `accessibilityConfig` property is configured for any widget, the `tabIndex` attribute is added automatically to the `accessibilityConfig` property.
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+### Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -76,11 +78,12 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}
+/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -92,32 +95,33 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[allowsInlineMediaPlayback Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>allowsInlineMediaPlayback Property</summary>
 
 * * *
 
 This property enables you to play a video inline in a Browser widget .
 
-Syntax
+### Syntax
 
 allowsInlineMediaPlayback
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read-only for WKWebView.
 
-Remarks
+### Remarks
 
 The default value of this property is false.
 
@@ -125,12 +129,13 @@ When you set the value of this property as true, the video in the Browser does n
 
 To ensure that this property works for devices with iOS 10 and later, add the **playsinline** attribute to the video element inside the HTML document. For applications created for OS versions earlier than iOS 10, add the **webkit-playsinline** attribute to the video element in the HTML document.
 
-Example
+### Example
 
 Sample HTML document for iOS 10 and later:
 
-{% highlight voltMx %}<!DOCTYPE.html>
-.html>
+{% highlight VoltMx %}
+<!DOCTYPE.html>
+<html>
 <body>
 
 <h1>My First Heading</h1>
@@ -143,13 +148,14 @@ Sample HTML document for iOS 10 and later:
 </video>
 
 </body>
-<.html>
+<html>
 {% endhighlight %}
 
 Sample HTML Document for devices earlier than iOS 10
 
-{% highlight voltMx %}<!DOCTYPE.html>
-.html>
+{% highlight VoltMx %}
+<!DOCTYPE.html>
+<html>
 <body>
 
 <h1>My First Heading</h1>
@@ -167,8 +173,10 @@ Video courtesy of
 </p>
 
 </body>
-<.html>
-{% endhighlight %}{% highlight voltMx %}frmBrowser.myBrowser.allowsInlineMediaPlayback = true;
+<html>
+{% endhighlight %}
+{% highlight VoltMx %}
+frmBrowser.myBrowser.allowsInlineMediaPlayback = true;
 {% endhighlight %}
 
 Platform Availability
@@ -177,33 +185,35 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>anchorPoint Property</summary>
 
 * * *
 
 Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.
 
-Syntax
+### Syntax
 
 anchorPoint
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The value for this property is a JavaScript dictionary object with the keys "x" and "y". The values for the "x" and "y" keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.anchorPoint = {
+{% highlight VoltMx %}
+Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
 };
@@ -215,25 +225,26 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[baseURL Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>baseURL Property</summary>
 
 * * *
 
 This property is used to configure the base URL and load a resource file in a Browser widget.
 
-Syntax
+### Syntax
 
 baseURL
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is about:blank.
 
@@ -243,9 +254,10 @@ frmBrowser.myBrowser.baseURL = ".";
 
 This property is mandatory for loading a resource file inside a browser widget. The resource file can be an image file, audio file, video file or another HTML file.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to access a base URL in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to access a base URL in Browser widget.  
 frmBrowser.myBrowser.baseURL="http://www.abcd.com";  
   
 /*Sample code to access a resource file in a browser widget, when it is packaged in an application.*/  
@@ -253,14 +265,15 @@ frmBrowser.myBrowser.baseURL = voltmx.io.FileSystem.getApplicationDirectoryPath(
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
@@ -270,27 +283,28 @@ The bottom property determines the position of the bottom edge of the widget’s
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
+### Syntax
 
 bottom
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -298,24 +312,25 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA , and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bounces Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bounces Property</summary>
 
 * * *
 
 Specifies whether the scroll view bounces past the edge of the content and back again.
 
-Syntax
+### Syntax
 
 bounces
 
-Type
+### Type
 
 Boolean
 
@@ -325,30 +340,32 @@ If set to _false,_ the scroll view bounce is not applied.
 
 If set to _true,_ the scroll view bounce is applied.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable bounces property for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to enable bounces property for a Browser widget.
 frmBrowser.myBrowser.bounces=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[browserType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>browserType Property</summary>
 
 * * *
 
 The `browserType` property helps you to set the type of web view that you want to load the web pages in your application.
 
-Syntax
+### Syntax
 
 browserType
 
-Type
+### Type
 
 Constant
 
@@ -356,64 +373,67 @@ You can set the following value to this property.
 
 *   constants.BROWSER\_TYPE\_WKWEBVIEW: This is the default value of this property.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the browserType property in myBrowser Browser widget in frmBrowser form.*/  
+{% highlight VoltMx %}
+/*Sample code to set the browserType property in myBrowser Browser widget in frmBrowser form.*/  
 frmBrowser.myBrowser.browserType=constants.BROWSER_TYPE_WKWebView;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cacheConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cacheConfig Property</summary>
 
 * * *
 
 This property is used to configure the cachePolicy and storagePolicy of the cache responses for the request at the app level.
 
-Syntax
+### Syntax
 
 CacheConfig
 
-Type
+### Type
 
 Dictionary
 
-Read / Write
+### Read / Write
 
 Read + Write
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | cacheConfig(JSDictionary) | The cacheConfig is a dictionary which configures the **cachePolicy** and **storagePolicy** of the cache responses. cacheConfig Constants The cache config has the following constantsfor **cachePolicy**: **voltmx.net.cache.USE\_PROTOCOL\_CACHE\_POLICY**: Specifies that the caching logic defined in the protocol implementation, if any, is used for a particular URL load request. This is the default policy for URL load requests. **voltmx.net.cache.RELOAD\_IGNORING\_LOCAL\_CACHE\_DATA**: Specifies that the data for the URL should be loaded from the originating source. No existing cache data should be used to satisfy a URL load request. **voltmx.net.cache.RETURN\_CACHE\_DATA\_ELSE\_LOAD**: Specifies that the existing cached data should be used to satisfy the request, regardless of its age or expiration date. If there is no existing data in the cache corresponding the request, the data is loaded from the originating source. **voltmx.net.cache.RETURN\_CACHE\_DATA\_DONT\_LOAD**: Specifies that the existing cached data should be used to satisfy the request, regardless of its age or expiration date. If there is no existing data in the cache corresponding the request, the data is not loaded from the originating source. The cache config has the following constantsfor **storagePolicy**: **voltmx.net.cache.DISK\_AND\_MEMORY**: The response stored in disk and memory. **voltmx.net.cache.MEMORY\_ONLY**: The response stored in memory only. **voltmx.net.cache.NOT\_ALLOWED**: The response stored neither in the memory nor on the disk.   |
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to add cacheConfig proerty to the browser widget
+{% highlight VoltMx %}
+//Sample code to add cacheConfig proerty to the browser widget
 frmBrowser.myBrowser.cacheConfig = {
   cachePolicy: voltmx.net.cache.RELOAD_IGNORING_LOCAL_CACHE_DATA,
   cacheStoragePolicy: voltmx.net.cache.MEMORY_ONLY
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
@@ -421,25 +441,26 @@ This property determines the center of a widget measured from the left bounds of
 
 The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
 centerX
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -447,14 +468,15 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
@@ -462,25 +484,26 @@ This property determines the center of a widget measured from the top bounds of 
 
 The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
 centerY
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
@@ -488,69 +511,72 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clearCanvasBeforeLoading Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>clearCanvasBeforeLoading Property</summary> 
 
 * * *
 
 Clears the browser's canvas before data is loaded.
 
-Syntax
+### Syntax
 
 clearCanvasBeforeLoading
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read+Write
 
-Remarks
+### Remarks
 
 If this property is set to `true`, the browser widget will clear its canvas before it loads data. If it is `false`, it will not clear the canvas.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to disable clearCanvasBeforeLoading property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to disable clearCanvasBeforeLoading property in Browser widget.  
 frmBrowser.myBrowser.clearCanvasBeforeLoading=false;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cursorType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cursorType Property</summary>
 
 * * *
 
 In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.
 
-Syntax
+### Syntax
 
 cursorType
 
-Type
+### Type
 
 String.
 
 You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 To add the `cursorType` property using Volt MX Iris in a Desktop Web application, follow these steps.
 
@@ -567,9 +593,10 @@ To add the `cursorType` property using Volt MX Iris in a Desktop Web application
     You can see that the **Cursor Type** property has been added under the **General** section.
 8.  Select a value from the drop-down list to set the **Cursor Type** for the widget.
 
-Example
+### Example
 
-{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}
+//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
   
@@ -577,32 +604,33 @@ frmButton.myButton.cursorType = "wait";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[detectTelNumber Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>detectTelNumber Property</summary>
 
 * * *
 
 Specifies if the Browser widget must support the detection of phone numbers in the web page and display the phone numbers as clickable Phone links. If you click the Phone link, the Phone application launches and dials the number.
 
-Syntax
+### Syntax
 
 detectTelNumber
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -610,21 +638,23 @@ If set to _false_, the Browser does not detect the Phone numbers.
 
 If set to _true_, the Browser detects the phone numbers and displays them as links on the Phone.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable detectTelNumber property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to enable detectTelNumber property in Browser widget.  
 frmBrowser.myBrowser.detectTelNumber=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
@@ -632,19 +662,19 @@ The `enable` property is used to control the actionability of the widgets. In a 
 
 This is a constructor level property and applicable for all widgets in Volt MX Iris.
 
-Syntax
+### Syntax
 
 enable
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
@@ -652,16 +682,17 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}
+//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
   
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
@@ -669,36 +700,38 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+### Syntax
 
 enableCache
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}
+Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Windows
@@ -706,7 +739,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableFocusInTouchMode Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableFocusInTouchMode Property</summary>
 
 * * *
 
@@ -715,21 +749,22 @@ When `enableFocusInTouchMode` property is configured to _false_, the widget will
 
 This property is applicable only for Browser and CordovaBrowser widgets.
 
-Syntax
+### Syntax
 
 enableFocusInTouchMode
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//This property is applicable for Browser and CordovaBrowser widgets.
+{% highlight VoltMx %}
+//This property is applicable for Browser and CordovaBrowser widgets.
 
 /*This example demonstrates how to use enableFocusInTouchMode property by using myBrowser Browser widget in frmBrowser FlexForm. You need to use enableFocusInTouchMode property for CordovaBrowser widget in a similar manner.*/
 
@@ -737,7 +772,7 @@ frmBrowser.myBrowser.enableFocusInTouchMode= false;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
     
@@ -746,98 +781,103 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableNativeCommunication Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>enableNativeCommunication Property</summary> 
 
 * * *
 
 Enables web apps to access Volt MX Iris native capabilities from within the web app's JavaScript code.
 
-Syntax
+### Syntax
 
 enableNativeCommunication
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 By default, this property is set `false`. Your app can only set this property in the Browser widget's constructor. After the constructor executes, this property is read-only.
 
-Example
+### Example
 
-{% highlight voltMx %}//This property is applicable for Browser and CordovaBrowser widgets.
+{% highlight VoltMx %}
+//This property is applicable for Browser and CordovaBrowser widgets.
 
 /*This example demonstrates how to use enableNativeCommunication property by using myBrowser Browser widget in frmBrowser FlexForm. You need to use enableNativeCommunication property for CordovaBrowser widget in a similar manner.*/  
 FrmBrowser.myBrowser.enableNativeCommunication = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableOverviewMode Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableOverviewMode Property</summary>
 
 * * *
 
 Specifies whether the browser should load pages in overview mode. For example, zoom out the content to fit in the screen width.
 
-Syntax
+### Syntax
 
 enableOverviewMode
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Write only
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
 To use this property, you must set useWideViewport property and screenLevelWidget property to true, else the behavior is undefined.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable enableOverviewMode property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to enable enableOverviewMode property in Browser widget.  
 frmBrowser.myBrowser.enableOverviewMode=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Android 8
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableParentScrollingWhenReachToBoundaries Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableParentScrollingWhenReachToBoundaries Property</summary>
 
 * * *
 
 Makes the content of the Browser scrollable.
 
-Syntax
+### Syntax
 
 enableParentScrollingWhenReachToBoundaries
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read+Write
 
-Remarks
+### Remarks
 
 This is a non-Constructor property.
 
@@ -849,36 +889,38 @@ Limitation
 
 If a Browser has a scrollable parent, the parent cannot be scrolled further once you reach the end of the Browser. Touch the parent to scroll it. This limitation is applicable when you set this property to **false**.
 
-Example
+### Example
 
-{% highlight voltMx %}formHome.browser.enableParentScrollingWhenReachToBoundaries = false;
+{% highlight VoltMx %}
+formHome.browser.enableParentScrollingWhenReachToBoundaries = false;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableSafeBrowsing Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableSafeBrowsing Property</summary>
 
 * * *
 
 This property helps you to enable or disable the Safe Browsing feature in a _Browser_ widget.
 
-Syntax
+### Syntax
 
 enableSafeBrowsing
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read+Write
 
-Remarks
+### Remarks
 
 *   The default value of this property is _true_.
 *   Safe Browsing is available by default on devices with WebView version 66 and later (Android 5.0 and later).
@@ -890,38 +932,40 @@ Remarks
   
 This manifest tag is also helpful if you have multiple Browser widgets in your application. However, this tag has lower precedence over enableSafeBrowsing Property.  
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable enableSafeBrowsing property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to enable enableSafeBrowsing property in Browser widget.  
 frmBrowser.myBrowser.enableSafeBrowsing=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android(API Level 26 and later)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableSoftwareRendering Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableSoftwareRendering Property</summary>
 
 * * *
 
 Sets the rendering of the browser contents using software, not hardware.
 
-Syntax
+### Syntax
 
 enableSoftwareRendering
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -931,66 +975,69 @@ To handle this issue, the browser rendering can be moved from hardware to softwa
 
 If you configure the enableSoftwareRendering property value as True, the Browser widget refresh rate decreases. The decrease in the Browser widget refresh rate will impact the refresh rate of animations, GIFs, and videos in the browser.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 formHome.browser.enableSoftwareRendering = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableThirdPartyCookies Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableThirdPartyCookies Property</summary>
 
 * * *
 
 Specifies if third party cookies must be enabled.
 
-Syntax
+### Syntax
 
 enableThirdPartyCookies
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}formHome.browser.enableThirdPartyCookies = true;
+{% highlight VoltMx %}
+formHome.browser.enableThirdPartyCookies = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableZoom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableZoom Property</summary>
 
 * * *
 
 Specifies if Zoom (ability to change the scale of the view area) must be enabled.
 
-Syntax
+### Syntax
 
 enableZoom
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -998,21 +1045,23 @@ If set to _true_, the Zoom feature is enabled.
 
 If set to _false_, the Zoom feature is disabled.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable enableZoom property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to enable enableZoom property in Browser widget.  
 frmBrowser.myBrowser.enableZoom=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except Windows platform
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -1020,19 +1069,19 @@ It determines the height of the widget and measured along the y-axis.
 
 The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.
 
-Syntax
+### Syntax
 
 height
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the available measurement options:
 
@@ -1042,9 +1091,10 @@ Following are the available measurement options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the height property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the height property for widgets by using DP, Percentage and Pixels.
 frmHome.browser1.height="50dp";
 
 frmHome.browser1. height="10%";
@@ -1052,7 +1102,7 @@ frmHome.browser1. height="10%";
 frmHome.browser1. height="10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -1062,59 +1112,63 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);).htmlString Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>.htmlString Property</summary>
 
 * * *
 
 Specifies the HTML content for the Browser widget.
 
-Syntax
+### Syntax
 
 htmlString
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set.htmlString property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to set.htmlString property in Browser widget.  
 var.htmlStringWelcome= ".html>Welcome<.html>";  
 frmBrowser.myBrowser.htmlString.htmlStringWelcome;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 id is a unique identifier of Browser widget consisting of alpha numeric characters. Every Browser should have a unique id within a Form.
 
-Syntax
+### Syntax
 
 id
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for a Browser widget with id :"browserID"
+{% highlight VoltMx %}
+//Defining the properties for a Browser widget with id :"browserID"
 var webBasic = {
     id: "browserID",
     isVisible: true,
@@ -1132,47 +1186,49 @@ var browser = new voltmx.ui.Browser(webBasic, webLayout, {});
 alert("Browser id ::" + browser.id);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the widget. This will help in avoiding the globals to most part of the programming.
 
-Syntax
+### Syntax
 
 info
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is a **non-Constructor** property. You cannot set this property through widget constructor. But you can read and write data to it.
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var inf = {a: 'hello'};
 widget.info = inf; //works
 widget.info.a = 'hello world'; //This will not update the widget info a property to Hello world. 
 //widget.info.a will have old value as hello.
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set info property for a Browser widget
+{% highlight VoltMx %}
+//Sample code to set info property for a Browser widget
 
 frmBrowser.myBrowser.info = {
     key: "zoom of browser"
@@ -1182,31 +1238,32 @@ frmBrowser.myBrowser.info = {
 voltmx.print("Browser info ::" + frmBrowser.myBrowser.info);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
 This property controls the visibility of a widget on the form.
 
-Syntax
+### Syntax
 
 isVisible
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -1216,20 +1273,22 @@ If set to _true,_ the widget is displayed.
 
 You can also set the visibility of a widget dynamically from code using the setVisibility method.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set isVisible property for a Browser widget
+{% highlight VoltMx %}
+//Sample code to set isVisible property for a Browser widget
 frmBrowser.myBrowser.isVisible=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[left Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>left Property</summary>
 
 * * *
 
@@ -1237,25 +1296,26 @@ This property determines the lower left corner edge of the widget and is measure
 
 The left property determines the position of the left edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
 left
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
@@ -1263,14 +1323,15 @@ frmHome.widgetID.left = "10%";
 frmHome.widgetID.left = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -1278,21 +1339,22 @@ This property specifies the maximum height of the widget and is applicable only 
 
 The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.
 
-Syntax
+### Syntax
 
 maxHeight
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -1300,14 +1362,15 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -1315,21 +1378,22 @@ This property specifies the maximum width of the widget and is applicable only w
 
 The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.
 
-Syntax
+### Syntax
 
 maxWidth
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -1337,14 +1401,15 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -1352,21 +1417,22 @@ This property specifies the minimum height of the widget and is applicable only 
 
 The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.
 
-Syntax
+### Syntax
 
 minHeight
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -1374,14 +1440,15 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -1389,21 +1456,22 @@ This property specifies the minimum width of the widget and is applicable only w
 
 The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
+### Syntax
 
 minWidth
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -1411,32 +1479,33 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[mixedContentMode Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>mixedContentMode Property</summary>
 
 * * *
 
 This property is used to set the behavior of Browser widget, when a secure URL tries to load a content that is not secure.
 
-Syntax
+### Syntax
 
 mixedContentMode
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is constants.BROWSER\_MIXED\_CONTENT\_NEVER\_ALLOW.
 
@@ -1448,15 +1517,16 @@ You can set any of the following value to this property.
 
 > **_Note:_** In an application with target SDK as Android 9 (API level 28), the cleartext content for specific domains is blocked. To enable cleartext for specific domains, you must configure cleartexttraffic in the network security configuration. For more information on cleartexttraffic, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Android_Pie_Behavioral_Changes.html).
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set mixedContentMode property for a Browser widget.   
+{% highlight VoltMx %}
+//Sample code to set mixedContentMode property for a Browser widget.   
   
 frmBrowser.myBrowser.mixedContentMode = constants.BROWSER_MIXED_CONTENT_COMPATIBILITY_MODE;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android 5.0 onwards
 
@@ -1464,7 +1534,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>opacity Property</summary>
 
 * * *
 
@@ -1472,39 +1543,41 @@ Specifies the opacity of the widget. The value of this property must be in the r
 
 Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.
 
-Syntax
+### Syntax
 
 opacity
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This property has more priority compared to the values coming from the configured skin.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
+{% highlight VoltMx %}
+//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
 
 //Sample code to make the widget opaque by using the opacity property.
 frmHome.widgetID.opacity = 1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE.
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[padding Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>padding Property</summary>
 
 * * *
 
@@ -1517,54 +1590,56 @@ The following image illustrates a widget with a defined padding:
 
 ![](../../../8.4/WidgetsProgGuide/Content/Resources/Images/Padding.png)
 
-Syntax
+### Syntax
 
 padding
 
-Type
+### Type
 
 Array of numbers
 
-Read / Write
+### Read / Write
 
 Read+Write
 
-Limitations
+### Limitations
 
 Desktop Web/ SPA platforms do not support _padding_ property in Image widget, Slider widget and Switch widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the padding property for widgetID Button widget in frmHome Form.
+{% highlight VoltMx %}
+//Sample code to set the padding property for widgetID Button widget in frmHome Form.
 frmHome.widgetID.padding= [2,2,2,2];
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Desktop Web and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[paddingInPixel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>paddingInPixel Property</summary>
 
 * * *
 
 This property specifies whether the padding property is to be applied in pixels or in percentage.
 
-Syntax
+### Syntax
 
 paddingInPixel
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read Only
 
-Remarks
+### Remarks
 
 The default value of this property is _false_.
 
@@ -1572,107 +1647,112 @@ If the value of this property is _true,_ the padding are applied in pixels.
 
 If the value of this property is _false,_ the padding are applied as set in [padding](#padding) property.
 
-Limitations
+### Limitations
 
 Desktop Web/ SPA platforms do not support _paddingInPixel_ property in Image widget, Slider widget and Switch widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to read paddingInPixel property for widgetID Button widget in frmHome form.
+{% highlight VoltMx %}
+//Sample code to read paddingInPixel property for widgetID Button widget in frmHome form.
 
 voltmx.print("PaddingInPixel property value is:"+fromHome.widgetID.paddingInPixel);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Desktop Web and SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Helps you access the parent of the widget. If the widget is not part of the widget hierarchy, the parent property returns null.
 
-Syntax
+### Syntax
 
 parent
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 > **_Note:_** The property works for all the widgets inside a FlexForm, FlexContainer or FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}function func() {
+{% highlight VoltMx %}
+function func() {
 
     voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[playVideoInFullScreen Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>playVideoInFullScreen Property</summary>
 
 * * *
 
 You can use this property to enable Full Screen viewing of videos in webpages in Browser widget. After enabling this property, by clicking the Full Screen Expansion button, you can make the videos play in full-screen view.
 
-Syntax
+### Syntax
 
 playVideoInFullScreen
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 frm1.browser1.playVideoInFullScreen = true;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[requestURLConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>requestURLConfig Property</summary>
 
 * * *
 
 Specifies the configurations for the requested URL in key-value pairs as a JavaScript object.
 
-Syntax
+### Syntax
 
 requestURLConfig
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The following are the keys that are accepted in this object.
 
@@ -1695,12 +1775,14 @@ Specifies the HTTP method to use for requesting the initial URL. You can choose 
 
 Specifies the key-value pairs that must be sent to the initial URL. It accepts an array of array. For example,
 
-{% highlight voltMx %}[["key1","value1"],["key2","value2"],["keyn", "valuen"]]
+{% highlight VoltMx %}
+[["key1","value1"],["key2","value2"],["keyn", "valuen"]]
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke requestURLConfig property for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke requestURLConfig property for a Browser widget.
   
 var urlConf = {
     URL: "https://www.google.co.in/",
@@ -1711,14 +1793,15 @@ frmBrowser.myBrowser.requestURLConfig=urlConf;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -1728,7 +1811,8 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1738,7 +1822,6 @@ The mirroring widget layout properties should be defined as follows.
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
-  
 | Properties | Local Flag Value | Widget Flag Value | Action |
 | --- | --- | --- | --- |
 | Mirror/retain FlexPositionProperties | true | true | Use the designed layout from widget for all locales. Widget layout overrides everything else. |
@@ -1751,21 +1834,22 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
 retainContentAlignment
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -1790,14 +1874,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -1807,7 +1892,8 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1817,7 +1903,6 @@ The mirroring widget layout properties should be defined as follows.
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
-  
 | Properties | Local Flag Value | Widget Flag Value | Action |
 | --- | --- | --- | --- |
 | Mirror/retain FlexPositionProperties | true | true | Use the designed layout from widget for all locales. Widget layout overrides everything else. |
@@ -1830,21 +1915,22 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
 retainFlexPositionProperties
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -1869,14 +1955,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -1886,7 +1973,8 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1896,7 +1984,6 @@ The mirroring widget layout properties should be defined as follows.
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
-  
 | Properties | Local Flag Value | Widget Flag Value | Action |
 | --- | --- | --- | --- |
 | Mirror/retain FlexPositionProperties | true | true | Use the designed layout from widget for all locales. Widget layout overrides everything else. |
@@ -1909,21 +1996,22 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
 retainFlowHorizontalAlignment
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -1949,14 +2037,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -1966,25 +2055,26 @@ The right property determines the position of the right edge of the widget’s b
 
 The right property is used only if the width property is not provided.
 
-Syntax
+### Syntax
 
 right
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -1992,32 +2082,33 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[screenLevelWidget Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>screenLevelWidget Property</summary>
 
 * * *
 
 Specifies whether the widget should occupy the whole container or not when your Browser widget has a large HTML content to display.
 
-Syntax
+### Syntax
 
 screenLevelWidget
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -2050,77 +2141,81 @@ Windows
 
 > **_Note:_** If you configure Application level Header and Footer, they will be visible even if the browser is a screen level widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable screenLevelWidget property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to enable screenLevelWidget property in Browser widget.  
 frmBrowser.myBrowser.screenLevelWidget=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except Desktop Web, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollsToTop Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollsToTop Property</summary>
 
 * * *
 
 This property enables you to scroll the Browser to top, on tapping a device’s status bar.
 
-Syntax
+### Syntax
 
 scrollsToTop
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 If this property is true for more than one widget, then this property is not applied to any of the widgets.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to disable scrollsToTop property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to disable scrollsToTop property in Browser widget.  
 frmBrowser.myBrowser.scrollsToTop=false;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iPhone
 *   iPad
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[settings Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>settings Property</summary>
 
 * * *
 
 The settings property helps you to configure the Browser Widget settings.
 
-Syntax
+### Syntax
 
 settings
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 enableJavaScript Key
 
@@ -2143,7 +2238,8 @@ The values other than "true" and "false" are discarded.
 
 The settings property accepts the **allowFileAccess** key, which enables or disables file access in the Browser Widget.
 
-{% highlight voltMx %}{“allowFileAccess”:true}
+{% highlight VoltMx %}
+{“allowFileAccess”:true}
 {“allowFileAccess”:false}
 {% endhighlight %}
 
@@ -2161,9 +2257,10 @@ If the Browser widget has to access any files through java script code ( for exa
 
 Once the **allowFileAccess** key is disabled, and the Browser Widget is loaded, it is not possible to enable the **allowFileAccess** key dynamically.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable settings property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to enable settings property in Browser widget.  
 frmBrowser.myBrowser.settings= {
     "enableJavaScript": false,
     "allowFileAccess": false
@@ -2171,24 +2268,25 @@ frmBrowser.myBrowser.settings= {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[shareCookiesInBrowsers Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>shareCookiesInBrowsers Property</summary>
 
 * * *
 
 In the iOS platform, the Browser widget uses WKWebView engine to load data. WKWebView engine does not allow you to use cookie from one browser in another. From Iris V9 SP1 version, you can use the _shareCookiesInBrowsers_ property to enable sharing of cookies between browsers. You can only share the cookies between browsers that have enabled the _shareCookiesInBrowsers_ property.  
 This is a constructor level property.  
 
-Syntax
+### Syntax
 
 shareCookiesInBrowsers
 
-Type
+### Type
 
 Boolean
 
@@ -2198,13 +2296,14 @@ When the value of this property is _true_, you can share the cookies between the
 
 When the value of this property is _false_, you cannot share the cookies between the browsers.
 
-Read/Write
+### Read/Write
 
 Read Only
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable the shareCookiesInBrowsers property in Browser widget.
+{% highlight VoltMx %}
+//Sample code to enable the shareCookiesInBrowsers property in Browser widget.
 var urlConf = {
  URL: "help/index.html",
  requestMethod: constants.BROWSER_REQUEST_METHOD_GET
@@ -2223,31 +2322,32 @@ var webPsp = {
 var browserID = new voltmx.ui.Browser(webBasic, webLayout, webPsp);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 11 and onwards
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showProgressIndicator Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showProgressIndicator Property</summary>
 
 * * *
 
 Specifies if the progress indicator must be displayed before loading the URL or executing an event.
 
-Syntax
+### Syntax
 
 showProgressIndicator
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
@@ -2255,21 +2355,23 @@ If set to _false_, the progress indicator is not displayed on the widget.
 
 If set to _true_, the progress indicator is displayed on the widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to disable showProgressIndicator property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to disable showProgressIndicator property in Browser widget.  
 frmBrowser.myBrowser.showProgressIndicator=false;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[SSLValidationBehavior Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>SSLValidationBehavior Property</summary>
 
 * * *
 
@@ -2277,11 +2379,11 @@ Prior to Iris V9 SP1 version, in the iOS platform, SSL validations occurred base
   
 From the Iris V9 SP 1 version , you can use the `SSLValidationBehavior` property to handle the SSL pinning and validation behavior of Browser widget in the iOS platform. This property can be used when public key pinning or SSL certificate pinning is enabled.
 
-Syntax
+### Syntax
 
 SSLValidationBehavior
 
-Type
+### Type
 
 Constant
 
@@ -2293,15 +2395,14 @@ You can provide any of the following constants as input to `SSLValidationBehavio
 
 For more information on the behavior of these constants, refer the table provided under **Remarks**.
 
-Read/Write
+### Read/Write
 
 Read Only
 
-Remarks
+### Remarks
 
 The following table lists the behavior of _SSLValidationBehavior_ property with the various values of _[allowbundledonly]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Certificate_Pinning.html#enable-certificate-pinning-in-ios)_ and _[VoltMXHTTPPublicKeyPinning]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Public_Key_Pinning.html#enable-public-key-pinning)_ in _infoplist\_configuration.json_ file.
 
-  
 | allowbundledonly(Certificate Pinning) | VoltMXHTTPPublishKeyPinning (Public Key Pinning) | SSLValidationBehavior | Result |
 | --- | --- | --- | --- |
 | False | True | SSL\_VALIDATION\_BEHAVIOR\_NONE | All URLs are bypassed. |
@@ -2311,9 +2412,10 @@ The following table lists the behavior of _SSLValidationBehavior_ property with 
 | False | True | SSL\_VALIDATION\_BEHAVIOR\_CHECK\_DECLARED\_ALLOW\_OTHERS | The pinned URLs are validated. Rest are bypassed |
 | True | False | SSL\_VALIDATION\_BEHAVIOR\_CHECK\_DECLARED\_ALLOW\_OTHERS | The pinned certificates are validated. Rest are bypassed |
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the behavior of SSL pinning in Browser widget.
+{% highlight VoltMx %}
+//Sample code to set the behavior of SSL pinning in Browser widget.
 var myBrowser = new voltmx.ui.Browser({
  id: "myBrowser",
  isVisible: true,
@@ -2326,45 +2428,48 @@ var myBrowser = new voltmx.ui.Browser({
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[supportedURLSchemes Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>supportedURLSchemes Property</summary>
 
 * * *
 
 This property is used to deep link URLs between applications. The `supportedURLSchemes` property is used to provide the keys of the custom URLs required to launch the application URLs using the Browser widget.
 
-Syntax
+### Syntax
 
 supportedURLSchemes
 
-Type
+### Type
 
 Array of Strings
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to add keys in supportedURLSchemes property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to add keys in supportedURLSchemes property in Browser widget.  
   
 frmBrowser.myBrowser.supportedURLSchemes =[“customURLkey1”,"customURLkey2”];  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
@@ -2372,25 +2477,26 @@ This property determines the top edge of the widget and measured from the top bo
 
 The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.
 
-Syntax
+### Syntax
 
 top
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -2398,40 +2504,42 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transform Property</summary>
 
 * * *
 
 Contains an animation transformation that can be used to animate the widget.
 
-Syntax
+### Syntax
 
 transform
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi) function.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}//Animation sample
+{% highlight VoltMx %}
+//Animation sample
 var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
@@ -2439,50 +2547,53 @@ newTransform.translate3D(223, 12, 56);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[useWideViewport Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>useWideViewport Property</summary>
 
 * * *
 
 Specifies whether the browser should enable support for the "viewport" HTML meta tag or should use the wide viewport. If this property is set to true, it loads the browser with the attributes defined in the meta tag of the webpage. It scales the web page as defined in the.html.
 
-Syntax
+### Syntax
 
 useWideViewport
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Write only
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
 If this property is set to true, it loads the browser with the attributes defined in the meta tag of the webpage. It scales the web page as defined in the.html.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable useWideViewport property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to enable useWideViewport property in Browser widget.  
 frmBrowser.myBrowser.useWideViewport=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Android / Android Tablet  platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -2490,19 +2601,19 @@ This property determines the width of the widget and is measured along the x-axi
 
 The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.
 
-Syntax
+### Syntax
 
 width
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the options that can be used as units of width:
 
@@ -2512,9 +2623,10 @@ Following are the options that can be used as units of width:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
@@ -2522,14 +2634,15 @@ frmHome.widgetID.width = "10%";
 frmHome.widgetID.width = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
@@ -2537,19 +2650,19 @@ This property specifies the stack order of a widget. A widget with a higher zInd
 
 The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
+### Syntax
 
 zIndex
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
@@ -2569,57 +2682,63 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 **voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto  
  var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
   "zIndex": voltmx.flex.ZINDEX_AUTO
 });
 
-{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+{% endhighlight %}
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto
 flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}
+//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zoomDensity Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zoomDensity Property</summary>
 
 * * *
 
 Specifies the default zoom density of the page.
 
-Syntax
+### Syntax
 
 zoomDensity
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Write only
 
-Remarks
+### Remarks
 
 *   0 - FAR ( makes 100% with 240dpi)
 *   1 - MEDIUM (makes 100% with 160dpi)
 *   2 - CLOSE (makes 100% with 120dpi)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set zoomDensity property in Browser widget.  
+{% highlight VoltMx %}
+//Sample code to set zoomDensity property in Browser widget.  
 frmBrowser.myBrowser.zoomDensity=0;   
 
 {% endhighlight %}
@@ -2628,5 +2747,6 @@ Platform Availability
 
 Available on Android
 
+</details>
 * * *
 

@@ -12,31 +12,37 @@ TemplateController Properties
 
 The TemplateController object contains the following property.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[view Property](javascript:void(0);) 
+
+<details close markdown="block"><summary>view Property</summary> 
 
 * * *
 
 Contains a reference to the TemplateController object's view.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 view
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read / Write
+### Read / Write
 
 Read-only
 
-Remarks
+### Remarks
 
 Your app can access the view using the syntax `this.view` .
 
-Example
+### Example
 
-{% highlight voltMx %}var view = this.view;
+{% highlight VoltMx %}
+var view = this.view;
 {% endhighlight %}
 
 * * *
+
+</details>

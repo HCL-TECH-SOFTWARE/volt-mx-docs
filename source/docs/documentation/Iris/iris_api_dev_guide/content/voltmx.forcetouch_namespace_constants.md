@@ -10,7 +10,7 @@ voltmx.forcetouch Constants
 The voltmx.forcetouch Namespace provides the following constants.
 
  
-<details close markdown="block"><summary> Force Touch System Icon Constants</summary> 
+<details close markdown="block"><summary>Force Touch System Icon Constants</summary> 
 
 * * *
 
@@ -48,10 +48,11 @@ The Force Touch System Icon constants enable your app to select a system icon fo
 | voltmx.forcetouch.QUICK\_ACTION\_ICON\_TYPE\_TIME | An icon for a quick action that offers use of a clock or timer. Supported in iOS 9.1 and later. |
 | voltmx.forcetouch.QUICK\_ACTION\_ICON\_TYPE\_UPDATE | An icon for a quick action that offers updating. Supported in iOS 9.1 and later. |
 
-Remarks
+### Remarks
 
 For more information about these values, see the [iOS developer documentation](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIApplicationShortcutIcon_Class#//apple_ref/c/tdef/UIApplicationShortcutIconType).
 
 * * *
 
 ![](resources/prettify/onload.png)
+</details>

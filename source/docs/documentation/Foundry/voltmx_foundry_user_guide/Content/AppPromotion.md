@@ -42,7 +42,8 @@ Path to access the Save App Package in Snapshot check box in Foundry Console: *
 How to Promote a Deployment Package
 -----------------------------------
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)**How to promote a Deployment Package using Foundry Console**
+
+<details close markdown="block"><summary>How to promote a Deployment Package using Foundry Console</summary>
 
 The Deployment Package promotion involves the following steps by using Foundry Console:
 
@@ -79,7 +80,8 @@ The Deployment Package promotion involves the following steps by using Foundry C
         The selected Deployment Package.zip is processed for publishing the app to the environment. After the app is published, the app is set to the active snapshot listed under the **History & Rollback** page.
         
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)**How to promote a Deployment Package using MFCLI**
+</details>
+<details close markdown="block"><summary>How to promote a Deployment Package using MFCLI</summary>
 
 The Deployment Package promotion involves the following steps by using MFCLI commands:
 
@@ -89,6 +91,8 @@ The Deployment Package promotion involves the following steps by using MFCLI com
 | 1 | `explore-snapshots`: To view the details of the available snapshots from the current environment, run the following command: for Volt MX Cloud environment:java -jar mfcli.jar explore-snapshots -u <user> -p <password> -t <account id> -clurl <cloud url> \[ -a <app name> \] \[ -v <app version> \] \[ -e <environment name> \]For example,java -jar mfcli.jar explore-snapshots -u abc@voltmx.com -p password -t 100054321 -clurl https://manage.hcl-cloud.com -a MyApp -v 2.0 -e MyEnv for on-premise installation:java -jar mfcli.jar explore-snapshots -u <user> -p <password> -au <Identity URL> -cu <Console URL> \[ -a <app name> \] \[ -v <app version> \] \[ -e <environment name> \]For example,java -jar mfcli.jar explore-snapshots -u abc@voltmx.com -p password -au http://10.10.24.79:8080 -cu http://10.10.24.78:8081 -a MyApp -v 2.0 -e MyEnv ||
 | 2 | `export-deploymentpackage`: To export/download the deployment package of a snapshot from the current environment, run the following build command: for Volt MX Cloud environment:java -jar mfcli.jar export-deploymentpackage -u <user> -p <password> -t <account id> -clurl <cloud url> \[ -d <deployment package> \] \[ -s <snapshot name>\] \[ -a <app name> \] \[ -v <app version> \] \[ -e <environment name> \]For example,java -jar mfcli.jar export-deploymentpackage -u abc@voltmx.com -p password -t 100054321 -clurl https://manage.hcl-cloud.com -d "C:\\\\tmp\\\\MyDeploymentPackage.zip" -s MySnapshot -a MyApp -v 2.0 -e MyEnv for on-premise installation:java -jar mfcli.jar export-deploymentpackage -u <user> -p <password> -au <Identity URL> -cu <Console URL> \[ -d <deployment package> \] \[ -s <snapshot name>\] \[ -a <app name> \] \[ -v <app version> \] \[ -e <environment name> \]For example,java -jar mfcli.jar export-deploymentpackage -u abc@voltmx.com -p password -au http://10.10.24.79:8080 -cu http://10.10.24.78:8081 -d "C:\\\\tmp\\\\MyDeploymentPackage.zip" -s MySnapshot -a MyApp -v 2.0 -e MyEnv ||
 | 3 | `promote-deploymentpackage`: To import and promote the deployment package to the target environment, run the following command: for Volt MX Cloud environment:java -jar mfcli.jar promote-deploymentpackage -u <user> -p <password> -t <account id> -clurl <cloud url> \[ -d <deployment package> \] \[ -a <app name> \] \[ -v <app version> \] \[ -e <environment name> \]For example,java -jar mfcli.jar promote-deploymentpackage -u abc@voltmx.com -p password -t 100054321 -clurl https://manage.hcl-cloud.com -d "C:\\\\tmp\\\\MyDeploymentPackage.zip" -a MyApp -v 2.0 -e MyEnv for on-premise installation:java -jar mfcli.jar promote-deploymentpackage -u <user> -p <password> -au <Identity URL> -cu <Console URL> \[ -d <deployment package> \] \[ -a <app name> \] \[ -v <app version> \] \[ -e <environment name> \]For example,java -jar mfcli.jar promote-deploymentpackage -u abc@voltmx.com -p password -au http://10.10.24.79:8080 -cu http://10.10.24.78:8081 -d "C:\\\\tmp\\\\MyDeploymentPackage.zip" -a MyApp -v 2.0 -e MyEnv ||
+
+</details>
 
 > **_Important:_** For Object Services of type 'Storage', if you want to promote a new version of sample data, you must include the `sampleData` value as `true` for the specified SAAS service, in the Service Reconfiguration JSON present under the Configuration folder of Deployment Package zip.  
   

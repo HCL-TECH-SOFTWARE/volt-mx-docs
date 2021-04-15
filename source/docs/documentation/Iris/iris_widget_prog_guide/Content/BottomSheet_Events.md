@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                               
-
 
 BottomSheet Events
 ==================
@@ -12,19 +10,22 @@ The BottomSheet widget contains the following events:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onCollapsed Event](javascript:void(0);)
+<details close markdown="block"><summary>onCollapsed Event</summary>
 
 * * *
 
 This event is called when you need to collapse a BottomSheet from its peek height.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onCollapsed
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onCollapsed event callback for a BottomSheet widget.
+{% highlight VoltMx %}
+//Sample code to set onCollapsed event callback for a BottomSheet widget.
 
 frmBottomSheet.myBottomSheet.onCollapsed=onCollapseCallBack;
 
@@ -40,19 +41,23 @@ function onCollapseCallBack()
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDismiss Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDismiss Event</summary>
 
 * * *
 
 This event is called when you need to dismiss a BottomSheet from the screen.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onDismiss
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onDismiss event callback for a BottomSheet widget.
+{% highlight VoltMx %}
+//Sample code to set onDismiss event callback for a BottomSheet widget.
 
 frmBottomSheet.myBottomSheet.onDismiss=onDismissCallBack;
 
@@ -68,19 +73,23 @@ function onDismissCallBack()
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDraggingStarted Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDraggingStarted Event</summary>
 
 * * *
 
 This event is called when you need to start dragging a BottomSheet to an Expanded or Collapsed state.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onDraggingStarted
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onDraggingStarted event callback for a BottomSheet widget.
+{% highlight VoltMx %}
+//Sample code to set onDraggingStarted event callback for a BottomSheet widget.
 
 frmBottomSheet.myBottomSheet.onDraggingStarted=onDraggingStartedCallBack;
 
@@ -96,19 +105,23 @@ function onDraggingStartedCallBack()
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onExpanded Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onExpanded Event</summary>
 
 * * *
 
 This event is called when a BottomSheet reaches its fully expanded state.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onExpanded
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onExpanded event callback for a BottomSheet widget.
+{% highlight VoltMx %}
+//Sample code to set onExpanded event callback for a BottomSheet widget.
 
 frmBottomSheet.myBottomSheet.onExpanded=onExpandCallBack;
 
@@ -124,19 +137,23 @@ function onExpandCallBack()
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSettled Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onSettled Event</summary>
 
 * * *
 
 This event is called when a BottomSheet is at peek height, is expanded, or is dismissed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onSettled
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onSettled event callback for a BottomSheet widget.
+{% highlight VoltMx %}
+//Sample code to set onSettled event callback for a BottomSheet widget.
 
 frmBottomSheet.myBottomSheet.onSettled=onSettledCallBack;
 
@@ -152,19 +169,23 @@ function onSettledCallBack()
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onShow Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onShow Event</summary>
 
 * * *
 
 This event is called when you need a BottomSheet to be displayed on the screen.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onShow
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onShow event callback for a BottomSheet widget.
+{% highlight VoltMx %}
+//Sample code to set onShow event callback for a BottomSheet widget.
 
 frmBottomSheet.myBottomSheet.onShow=onShowCallBack;
 
@@ -180,19 +201,23 @@ function onShowCallBack()
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSliding Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onSliding Event</summary>
 
 * * *
 
 This event is called when a BottomSheet slides in/out of view.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onSliding
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onSliding event callback for a BottomSheet widget.
+{% highlight VoltMx %}
+//Sample code to set onSliding event callback for a BottomSheet widget.
 
 frmBottomSheet.myBottomSheet.onSliding=onSlidingCallBack;
 
@@ -207,4 +232,5 @@ function onSlidingCallBack(offset)
 *   Android
 
 * * *
+</details>
 

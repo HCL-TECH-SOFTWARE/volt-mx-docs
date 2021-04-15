@@ -41,7 +41,7 @@ Fields
     25.  Session User Agent - User agent of the client device from a network call.
     
 
-*   </details>
+</details>
 <details close markdown="block"><summary>Requests</summary>
     
     1.  Request Application Name - Name of the application.
@@ -74,8 +74,7 @@ Fields
     28.  Request Remote IP
     29.  Request User Agent - User agent of the client device a network call.
     
-
-*   </details>
+</details>
 <details close markdown="block"><summary>Events</summary>
     
     1.  Event Application Name - Name of the application.
@@ -111,10 +110,9 @@ Fields
     31.  Event TimeStamp\_UTC - Timestamp of request in UTC.
     32.  Event Network Type - Mobile Network vs WiFi (networktype) - indicates the type of network during the time of the crash. Valid values are `mobilenetwork` and `WiFi`.
     
-
 Measures
 
-*   </details>
+</details>
 <details close markdown="block"><summary>Sessions</summary>
     
     1.  Session HTTP Response Code
@@ -122,8 +120,7 @@ Measures
     3.  Session Session Key
     4.  Session Total Duration
     
-
-*   </details>
+</details>
 <details close markdown="block"><summary>Requests</summary>
     
     1.  Request HTTP Response Code – HTTP code of the service response obtained by the device.
@@ -143,8 +140,7 @@ Measures
     15.  Request Request\_Key
     16.  Request session\_key
     
-
-*   </details>
+</details>
 <details close markdown="block"><summary>Events</summary>
     
     1.  Event Error Line – Line number in application code file where the error occurred. Applicable for event types error/exception.
@@ -168,3 +164,4 @@ Measures
 *   All duration fields indicate time duration in milliseconds. 
 *   To view only Custom Metrics service-related data for an application, add a pre-filter or filter while creating reports for Service ID equals "capturevoltmxcustommetrics."  
 
+</details>

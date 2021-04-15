@@ -21,17 +21,20 @@ Functions
 
 The voltmx.screenrecorder namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.screenrecorder.start](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.screenrecorder.start</summary> 
 
 * * *
 
 You can use the _start_ API to initiate the recording of the screen. When this method is invoked, the web browser asks for permission to select the window, tab, or screen.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.screenrecorder.start(config)
+{% highlight VoltMx %}
+voltmx.screenrecorder.start(config);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _config_
 
@@ -49,9 +52,9 @@ onFailureCallback(err);
 
 here, the `err` parameter is a string that contains the reason for the failure.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}config = {
+{% highlight VoltMx %}config = {
  framerate: 24,
  onFailure: function(err) {  
 //Sample code for onFailure callback, where err contains the error message.
@@ -61,111 +64,125 @@ Example
 voltmx.screenrecorder.start(config);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.screenrecorder.pause](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.screenrecorder.pause</summary> 
 
 * * *
 
 You can use the _pause_ API to temporarily stop the recording of the screen. You can restart the recording process by using the [resume](#resume) API.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.screenrecorder.pause()
+{% highlight VoltMx %}
+voltmx.screenrecorder.pause();
+{% endhighlight %}
 
-Parameters
+
+<b>Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %} voltmx.screenrecorder.pause();	
+{% highlight VoltMx %} voltmx.screenrecorder.pause();	
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.screenrecorder.resume](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.screenrecorder.resume</summary> 
 
 * * *
 
 You can use the _resume_ API to restart the screen recording after the [pause](#pause) API has been invoked.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.screenrecorder.resume()
+{% highlight VoltMx %}
+voltmx.screenrecorder.resume();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %} voltmx.screenrecorder.resume();	
+{% highlight VoltMx %} voltmx.screenrecorder.resume();	
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.screenrecorder.stop](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.screenrecorder.stop</summary> 
 
 * * *
 
 You can use the _stop_ API to end the screen recording. After the recording process is stopped, you can use the [getrecordeddata](#getrecordeddata) API to retrieve the Blob URL of the video.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.screenrecorder.stop()
-
-Parameters
-
-None
-
-Example
-
-{% highlight voltMx %} voltmx.screenrecorder.stop();	
+{% highlight VoltMx %}
+voltmx.screenrecorder.stop();
 {% endhighlight %}
 
-Return Values
+
+<b>Parameters</b>
 
 None
 
-Remarks
+<b>Example</b>
+
+{% highlight VoltMx %} voltmx.screenrecorder.stop();	
+{% endhighlight %}
+
+<b>Return Values</b>
+
+None
+
+<b>Remarks</b>
 
 *   After you have invoked the stop API, invoke the [getrecordeddata](#getrecordeddata) API to retrieve the screen recording. If you invoke the [start](#start) API before invoking the getrecordeddata API, the new recording overrides the previous recording. The previous recording is not retained and you will lose the data.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.screenrecorder.getrecordeddata](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.screenrecorder.getrecordeddata</summary> 
 
 * * *
 
 You can use the _getrecordeddata_ API to retrieve the screen recording in the form of a Blob URL.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.screenrecorder.getrecordeddata()
+{% highlight VoltMx %}
+voltmx.screenrecorder.getrecordeddata();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var blob = voltmx.screenrecorder.getrecordeddata();
+{% highlight VoltMx %}var blob = voltmx.screenrecorder.getrecordeddata();
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 Returns a Blob URL of the screen recording as a String.
 
@@ -173,26 +190,29 @@ Returns a Blob URL of the screen recording as a String.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.screenrecorder.getrecordedstate](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.screenrecorder.getrecordedstate</summary> 
 
 * * *
 
 You can use the _getrecordedstate_ API to retrieve the current state of the screen recording.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.screenrecorder.getrecordedstate()
+{% highlight VoltMx %}
+voltmx.screenrecorder.getrecordedstate();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var state = voltmx.screenrecorder.getrecordingstate();
+{% highlight VoltMx %}var state = voltmx.screenrecorder.getrecordingstate();
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 This API can return any one of the following values.
 
@@ -204,5 +224,7 @@ This API can return any one of the following values.
 | recording | The screen is being recorded. |
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

@@ -12,14 +12,16 @@ voltmx.model.VoltMXApplicationContext Methods
 
 The VoltMXApplicationContext provides the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.model.ApplicationContext.createModel Method](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.model.ApplicationContext.createModel Method</summary>
 
 * * *
 
 Creates a model using the specified inputs.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.model.ApplicationContext.createModel(  
     entityName,  
     serviceName,  
@@ -27,8 +29,9 @@ voltmx.model.ApplicationContext.createModel(
     metadataOptions,  
     successCallback,  
     errorCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 entityName
 
@@ -62,26 +65,29 @@ loginErrorCallback(error);
 
 The _error_ parameter to this callback function holds a [voltmx.model.Exception](voltmx.model.Exception_Object.html) object.
 
-Return Values
+### Return Values
 
 Returns the model object.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.model.ApplicationContext.login](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.model.ApplicationContext.login</summary> 
 
 * * *
 
 Performs a login operation.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.model.ApplicationContext.login(  
     params,  
     loginSucCallback,  
     loginErrCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _params_
 
@@ -99,21 +105,25 @@ loginSucCallback
 
 A JavaScript function, which you provide, that is automatically invoked when the login is successful. The signature of this function is as follows.
 
+{% highlight VoltMx %}
 loginSuccessCallback();
+{% endhighlight %}
 
 loginErrCallback
 
 A JavaScript function, which you provide, that is automatically invoked when the login is not successful. The signature of this function is as follows.
 
+{% highlight VoltMx %}
 loginErrorCallback(err);
+{% endhighlight %}
 
 The _err_ parameter to this callback function contains the error value and error message string for the error that occurred.
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 The _params_ parameter contains key-value pairs that hold information needed to log into a server. The `authParams` key in the _params_ parameter is an object that also contains key-value pairs. The keys it contains are given in the following table.
 
@@ -124,9 +134,10 @@ The _params_ parameter contains key-value pairs that hold information needed to 
 
 The `options` key in the _params_ object is a JavaScript object that specifies the type of access. The key name for selecting the type of access is "access". A value of "online" indicates that the app is logging into a remote service that is not on the device, but rather on the network. The value "offline" means that the service is on the device.
 
-Example
+### Example
 
-{% highlight voltMx %}var params = {  
+{% highlight VoltMx %}
+var params = {  
     "authParams" : {  
         "userid" : "MyUserID",  
         "password" : "MyPassword"  
@@ -146,51 +157,59 @@ function loginErrorCallback(err)
 }
 
 voltmx.model.ApplicationContext.login(params,loginSuccessCallback,loginErrorCallback);
-
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.model.VoltMXApplicationContext.logout Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.model.VoltMXApplicationContext.logout Method</summary> 
 
 * * *
 
 Performs a logout operation.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 logout(  
     successCallback,  
     errorCallback);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _successCallback_
 
 A JavaScript function, which you provide, that is automatically invoked when the logout is successful. The signature of this function is as follows.
 
+{% highlight VoltMx %}
 loginSuccessCallback();
+{% endhighlight %}
 
 _errorCallback_
 
 A JavaScript function, which you provide, that is automatically invoked when the logout is not successful. The signature of this function is as follows.
 
+{% highlight VoltMx %}
 loginErrorCallback(err);
+{% endhighlight %}
 
 The _err_ parameter to this callback function contains the error value and error message string for the error that occurred.
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 This function clears all form controllers, models, and so forth from the `VoltMXApplicationContext` object's application context. It then logs the app out of Volt MX Foundry services that it is logged into.
 
-Example
+### Example
 
-{% highlight voltMx %}var appContext = voltmx.model.VoltMXApplicationContext.getAppInstance();
+{% highlight VoltMx %}
+var appContext = voltmx.model.VoltMXApplicationContext.getAppInstance();
 appContext.logout();
 {% endhighlight %}
 
 * * *
+</details>

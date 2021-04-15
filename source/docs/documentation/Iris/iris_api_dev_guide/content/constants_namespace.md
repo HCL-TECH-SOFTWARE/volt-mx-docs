@@ -2,7 +2,6 @@
 layout: "documentation"
 category: "iris_api_dev_guide"
 ---
-                            
 
 constants Namespace
 ===================
@@ -95,7 +94,8 @@ Constants by Functional Area
 
 The `constants` namespace provides groups of constants that are used by the rest of the Volt MX Iris API framework. The following constants are available, grouped by functional area.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Action Item Style Constants](javascript:void(0);) 
+
+<details close markdown="block"><summary>Action Item Style Constants</summary> 
 
 * * *
 
@@ -107,11 +107,10 @@ The constants in this group select the style of an [action item](voltmx.ui_funct
 | constants.ACTION\_ITEM\_STYLE\_DEFAULT | The default action item style for the device. |
 | constants.ACTION\_ITEM\_STYLE\_DESTRUCTIVE | Specifies that the Action Sheet changes data. |
 
-  
-
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Action Sheet Anchor Direction Constants](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>Action Sheet Anchor Direction Constants</summary> 
 
 * * *
 
@@ -124,15 +123,14 @@ These constants specify the [anchor direction](actionsheet_object_methods.html#s
 | constants.ANCHOR\_DIRECTION\_RIGHT | The Action Sheet attaches to the right side of the widget. |
 | constants.ANCHOR\_DIRECTION\_TOP | The Action Sheet attaches to the top of the widget. |
 
-  
+* * *
+
+</details>
+<details close markdown="block"><summary>ButtonBarItem Type Constants</summary> 
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[ButtonBarItem Type Constants](javascript:void(0);) 
-
-* * *
-
-Specifies the type of the `ButtonBarItem` to create.
+### Specifies the type of the `ButtonBarItem` to create.
 
 | Constant | Description |
 | --- | --- |
@@ -141,15 +139,14 @@ Specifies the type of the `ButtonBarItem` to create.
 | constants.BAR\_BUTTON\_SYSTEM\_ITEM | Create a button with a system icon. |
 | constants.BAR\_BUTTON\_TITLE | Create a button with a title. |
 
-  
-
-Remarks
+### Remarks
 
 These constants are passed to the `ButtonBarItem` constructor to tell it what type of `ButtonBarItem` to create.
 
-Example
+### Example
 
-{% highlight voltMx %}var item = new voltmx.ui.BarButtonItem(
+{% highlight VoltMx %}
+var item = new voltmx.ui.BarButtonItem(
     {type:constants.BAR_BUTTON_IMAGE,   
     tintColor: hex color string,   
     style :constants.BAR_ITEM_STYLE_PLAIN,   
@@ -160,41 +157,40 @@ Example
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Bar Metrics Constants](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>Bar Metrics Constants</summary> 
 
 * * *
 
-The constants in this group select the metrics for a Toolbar widget.
+### The constants in this group select the metrics for a Toolbar widget.
 
 | Constant | Description |
 | --- | --- |
 | constants.BAR\_METRICS\_COMPACT | Use compact metrics. Supported in landscape orientation only. |
 | constants.BAR\_METRICS\_DEFAULT | Use the default toolbar metrics for the hardware platform. Supported in all orientations. |
 
-  
+* * *
+
+</details>
+<details close markdown="block"><summary>Bar Style Constants</summary> 
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Bar Style Constants](javascript:void(0);) 
-
-* * *
-
-These constants specify the style of a Toolbar widget.
+### These constants specify the style of a Toolbar widget.
 
 | Constant | Description |
 | --- | --- |
 | constants.BAR\_STYLE\_BLACK | Use a black toolbar. |
 | constants.BAR\_STYLE\_DEFAULT | Use the default style for the hardware platform. |
 
-  
+* * *
+
+</details>
+<details close markdown="block"><summary>Skin Image Scale Mode Constants</summary> 
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Skin Image Scale Mode Constants](javascript:void(0);) 
-
-* * *
-
-The following constants set the skin image scaling mode.
+### The following constants set the skin image scaling mode.
 
 | Constant | Description |
 | --- | --- |
@@ -204,15 +200,14 @@ The following constants set the skin image scaling mode.
 | constants.SKIN\_IMAGE\_SCALE\_MODE\_UNIFORM | Selects uniform scaling for images. The image is scaled to fill the size of the widget while ensuring it’s aspect ratio is preserved. Example: ![](resources/images/skinpreserved_121x199.png) |
 | constants.SKIN\_IMAGE\_SCALE\_MODE\_UNIFORMTOFILL | Sets the image to resize to fill the widget dimensions while preserving the native aspect ratio. If the aspect ratio of the widget differs from that of the image, the image is clipped to fit in the destination. Example: ![](resources/images/skinfitall.png) |
 
-  
-
-Platform Availability
+### Platform Availability
 
 Available on only Windows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[System Item Constants](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>System Item Constants</summary> 
 
 * * *
 
@@ -245,15 +240,14 @@ Selects the type of `BarButtonItem` from one of the system-provided items.
 | constants.SYSTEM\_ITEM\_TRASH | The `BarButtonItem` is a Trash button. |
 | constants.SYSTEM\_ITEM\_UNDO | The `BarButtonItem` is an Undo button |
 
-  
+* * *
+
+</details>
+<details close markdown="block"><summary>Tint Mode Constants</summary> 
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Tint Mode Constants](javascript:void(0);) 
-
-* * *
-
-The following constants select the tint mode for images.
+### The following constants select the tint mode for images.
 
   
 | Constant | Description | Availability |
@@ -267,19 +261,18 @@ The following constants select the tint mode for images.
 | constants.SRC\_IN | The tint color is calculated by keeping the source pixels that cover the destination pixels, and discarding the remaining source and destination pixels. | Android, iOS |
 | constants.SRC\_OVER | Draws the source color over the destination color. This is the default mode if none is supplied. | Android, iOS, SPA |
 
-  
-
-Remarks
+### Remarks
 
 The iOS-specific tint modes are available only for the Button and Image widgets. When a tint mode is assigned to a set of skins, only one tint mode is applied even if there are other tint modes applied to individual skins in the set.
 
-Platform Availability
+### Platform Availability
 
 Android, iOS, SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Toast Duration Constants](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>Toast Duration Constants</summary> 
 
 * * *
 
@@ -290,15 +283,14 @@ The following constants designate the length of time that [toasts](voltmx.ui_fun
 | constants.TOAST\_LENGTH\_LONG | The app displays the toast for a relatively long period of time. |
 | constants.TOAST\_LENGTH\_SHORT | The app displays the toast for a relatively short period of time. |
 
-  
-
-Remarks
+### Remarks
 
 These constants are defined only in relative terms. The exact length of time is determined by the underlying hardware platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Toast Position Constants](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>Toast Position Constants</summary> 
 
 * * *
 
@@ -316,8 +308,7 @@ The constants in this group set the gravity point or anchor point of a toast.
 | TOAST\_POS\_TOP\_LEFT | Specifies the toast should align at top left corner of the device screen. |
 | TOAST\_POS\_TOP\_RIGHT | Specifies the toast should align at top right of the device screen. |
 
-  
-
 * * *
+</details>
 
 ![](resources/prettify/onload.png)

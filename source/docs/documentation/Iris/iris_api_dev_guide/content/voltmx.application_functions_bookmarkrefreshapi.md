@@ -10,17 +10,20 @@ Functions
 
 The Bookmark and Refresh API contains the following functions, which are part of the [voltmx.application Namespace](voltmx.application_functions.html).
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.addBMState](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.application.addBMState</summary>
 
 * * *
 
 This API adds a specified key and value to the parameter list of the URL of the form.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.application.addBMState([formID](#id3), [key](#key), [value](#value))
+{% highlight VoltMx %}
+voltmx.application.addBMState([formID](#id3), [key](#key), [value](#value));
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -41,27 +44,30 @@ Input Parameters
 },
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Supported for SPA and Desktop Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.getBMState](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.getBMState</summary>
 
 * * *
 
 This API retrieves the list of parameters attached to a URL using the above add, set APIs.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.application.getBMState([formID](#id4))
+{% highlight VoltMx %}
+voltmx.application.getBMState([formID](#id4));
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -79,27 +85,30 @@ Example
 },
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 A JSON structure representing key-values of various parameters attached to the URL string of the given form.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Supported for SPA and Desktop Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.removeBMState](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.removeBMState</summary>
 
 * * *
 
 This API removes a specified key from the parameter list of the URL of the form.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.application.removeBMState([formID,](#id2)[key](#key2))
+{% highlight VoltMx %}
+voltmx.application.removeBMState([formID,](#id2)[key](#key2));
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -119,27 +128,30 @@ To remove a bookmark for a URL, enter the following:
 },
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Supported for SPA and Desktop Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.resetBMState](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.resetBMState</summary>
 
 * * *
 
 This API resets the state associated with the URL of a form. It removes all the parameters attached to the form URL
 
-Syntax
+<b>Syntax</b>
 
-voltmx.application.resetBMState([formID](#id1))
+{% highlight VoltMx %}
+voltmx.application.resetBMState([formID](#id1));
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -156,27 +168,30 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Supported for SPA and Desktop Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.setBMState](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.setBMState</summary>
 
 * * *
 
 This API sets the bookmark state to the URL. This API accepts the _formID_ and a _json_ structure of key value pairs which will be added to the URL of the page.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.application.setBMState([formID,](#id) [State](#menuSettings))
+{% highlight VoltMx %}
+voltmx.application.setBMState([formID,](#id) [State](#menuSettings));
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -199,14 +214,16 @@ Example
 },
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Supported for SPA and Desktop Web.
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

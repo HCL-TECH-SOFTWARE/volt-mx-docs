@@ -15,27 +15,30 @@ Methods
 
 The transform Object provides the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[rotate](javascript:void(0);)
+
+<details close markdown="block"><summary>rotate</summary>
 
 * * *
 
 This method returns an affine transformation matrix constructed by rotating receivers affine transform. Angle is a number in degrees and always measured from x-axis as shown.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 rotate(angle)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | angle \[Number\] | A number represents the angle, in degrees, by which this matrix rotates the coordinate system axes. A positive value specifies counterclockwise rotation and a negative value specifies clockwise rotation. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Sample code of animation 
+{% highlight VoltMx %}
+//Sample code of animation 
 function animDeftranslate() {
     var transformProp1 = voltmx.ui.makeAffineTransform();
     transformProp1.translate(100, 100);
@@ -67,29 +70,27 @@ Function getParent() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an affine transformation matrix constructed by rotating receivers affine transform.
 
-Exceptions
+### Exceptions
 
 WidgetError
 
-Remarks
+### Remarks
 
 Default value is 0, if transform was never applied to the widget. The rotation does not result in any layout changes to parent or peer widgets. This is also applicable for widgets placed inside horizontal or vertical flex containers.
 
 For example, if you want to rotate a widget in 360 degrees, you can follow the below sequence of steps:
 
-> step1: Rotate the widget from 0  -   120
-> 
-> step1: Rotate the widget from 120  -   240
-> 
-> step3: Rotate the widget from 240  -  360
+   *  step1: Rotate the widget from 0  -   120
+   *  step1: Rotate the widget from 120  -   240
+   * step3: Rotate the widget from 240  -  360
 
 Any value greater than 180 degrees may lead to shortest path rotation from its current position. For cross platform values, for example 190 degrees will make the object rotate -170 (190-360) in negative direction, as 170 is shortest path compared to 190.
 
-Availability
+### Availability
 
 *   iOS
 *   Android/Android Tablet
@@ -98,21 +99,24 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)rotate3D](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>rotate3D</summary>
 
 * * *
 
 This method rotates the widget by angle on the unit directional vector formed by rx, ry, and rz.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 rotate3D(  
     angle,  
     rx,  
     ry,  
     rz)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -122,15 +126,15 @@ Input Parameters
 | rz | Specify the z-axis value on which rotation to happen. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
+{% highlight VoltMx %}
+var newTransform = voltmx.ui.makeAffineTransform();  
 newTransform.rotate3D(45, 1, 0, 1); //rotates by 45degrees in x and z Axis.  
 widget.transform = newTransform;
 {% endhighlight %}
 
-Exceptions
+### Exceptions
 
 | Error Code | Description |
 | --- | --- |
@@ -138,8 +142,7 @@ Exceptions
 | 101 | Incomplete input |
 
  
-
-Remarks
+### Remarks
 
 The value of angle should be in degrees and the range should be in between 180o to -180o. Any value greater or lesser than range will result into platform-specific behavior. Positive values of angle will rotate the widget in anti-clockwise direction and vice versa.
 
@@ -149,7 +152,7 @@ In the Android platform, the values between 0 - 1 are not accepted. Only '0' or 
 
 All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
 
-Availability
+### Availability
 
 Available in the IDE
 
@@ -161,19 +164,22 @@ SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scale](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scale</summary>
 
 * * *
 
 This method returns an affine transformation matrix constructed by scaling receivers affine transform. It is a JSObject with keys sx and sy and allow numbers only.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 scale (  
    sx,   
    sy)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -181,12 +187,12 @@ Input Parameters
 | sy \[Number\] | The factor by which to scale the y-axis of the widget coordinate system. |
 
  
-
 Default values are {"sx":1, "sy":1}, if the transform was never applied to the widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code of animation 
+{% highlight VoltMx %}
+//Sample code of animation 
 function animDeftranslate() {
     var transformProp1 = voltmx.ui.makeAffineTransform();
     transformProp1.translate(100, 100);
@@ -218,15 +224,15 @@ Function getParent() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an affine transformation matrix constructed by scaling receivers affine transform.
 
-Exceptions
+### Exceptions
 
 WidgetError
 
-Remarks
+### Remarks
 
 Scaling does not result in any layout changes to parent or peer widgets. This is applicable to the widgets placed inside horizontal or vertical flex containers. Negative values for sx and sy will make the widget flip in that direction.
 
@@ -239,20 +245,23 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)scale3D](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scale3D</summary>
 
 * * *
 
 Scales a widget in three dimensions (x, y, z) coordinate system.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 scale3D(  
     sx,  
     sy,  
     sz)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -261,10 +270,10 @@ Input Parameters
 | sz \[Number\] | Specify the value to be scaled in the z direction. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
+{% highlight VoltMx %}
+var newTransform = voltmx.ui.makeAffineTransform();  
 newTransform.scale3D(2, 0.5, 1);  
 //scales by 200% in xDirection, 50% in yDirection and no scale happening in zDirection.  
 widget.transform = newTransform;
@@ -278,14 +287,13 @@ Exceptions
 | 101 | Incomplete input |
 
  
-
-Remarks
+### Remarks
 
 The default values of the sx, sy, and sz directions are (1, 1, 1). Any value with in the 0 - 1 range scales down the widget and the value greater than '1' scales up in the specified directions. As all the widgets are not 3D meshes, this function may not be applicable for z-axis and may have platform-specific behavior. The scale3D method should not be applied on zero dimension widgets. If applied, the behavior is undefined.
 
 All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
 
-Availability
+### Availability
 
 Available in the IDE
 
@@ -295,28 +303,31 @@ SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setPerspective](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setPerspective</summary>
 
 * * *
 
 This method sets the perspective and sets the vanishing point at the center of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setPerspective(  
     distanceOfViewerToPlane)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | distanceOfViewerToPlane | The distance between the viewer and object. Always the value of this parameter should be greater than zero. Otherwise results an exception 100. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
+{% highlight VoltMx %}
+var newTransform = voltmx.ui.makeAffineTransform();  
 newTransform.setPerspective(1000.0);  
 //Sets the perspective as such this will have no effect until it is combined with other transformation matrix.  
 newTransform.rotate3D(45, 1, 0, 1);  
@@ -332,8 +343,7 @@ Exceptions
 | 101 | Incomplete input |
 
  
-
-Remarks
+### Remarks
 
 The perspective has to be set in combination with other transforms. The perspective set by itself will not have any effect. If perspective is set to transform in any key frame, the perspective will be applied to that particular key frame itself in the KeyFrameAnimation.
 
@@ -345,7 +355,7 @@ For the iOS platform, the value of the distanceOfViewerToPlane parameter should 
 
 All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
 
-Availability
+### Availability
 
 Available in the IDE
 
@@ -355,19 +365,22 @@ SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[translate](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>translate</summary>
 
 * * *
 
 This method returns an affine transformation matrix constructed by translating receivers affine transform. It is a JavaScript object with keys tx and ty and allow numbers in dp.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 translate (  
    tx,  
    ty)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -375,12 +388,12 @@ Input Parameters
 | ty \[Number\] | The factor by which to move the y-axis of the widget coordinate system. |
 
  
-
 Default values are {"tx":0, "ty":0} if the transform was never applied to the widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code of animation 
+{% highlight VoltMx %}
+//Sample code of animation 
 function animDeftranslate() {
     var transformProp1 = voltmx.ui.makeAffineTransform();
     transformProp1.translate(100, 100);
@@ -412,21 +425,21 @@ Function getParent() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an affine transformation matrix constructed by translating receivers affine transform.
 
-Exceptions
+### Exceptions
 
 WidgetError
 
-Remarks
+### Remarks
 
 Translate does not result in any layout changes to parent or peer widgets. This is applicable to the widgets placed inside horizontal or vertical flex containers.
 
 > **_Note:_** Values cannot be specified using percentage and pixels.
 
-Availability
+### Availability
 
 *   iOS
 *   Android/Android Tablet
@@ -435,20 +448,23 @@ Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)translate3D](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>translate3D</summary> 
 
 * * *
 
 Translates the widget from present location to new location by x, y, z amount.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 translate3D(  
     tx,  
     ty,  
     tz)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -457,15 +473,15 @@ Input Parameters
 | tz | Specify the value to be moved in the z direction from present location. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}var newTransform = voltmx.ui.makeAffineTransform();  
+{% highlight VoltMx %}
+var newTransform = voltmx.ui.makeAffineTransform();  
 newTransform.translate3D(223, 12, 56); //translates by 223 xAxis,12 in yAxis,56 in zAxis  
 widget.transform = newTransform;
 {% endhighlight %}
 
-Exceptions
+### Exceptions
 
 | Error Code | Description |
 | --- | --- |
@@ -473,14 +489,13 @@ Exceptions
 | 101 | Incomplete input |
 
  
-
-Remarks
+### Remarks
 
 The values of tx, ty, and tz should be floating numbers. If the [setPerspective](#setPersp) method is not used, the widget moving in the z direction will not have any visual effect.
 
 All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
 
-Availability
+### Availability
 
 Available in the IDE
 

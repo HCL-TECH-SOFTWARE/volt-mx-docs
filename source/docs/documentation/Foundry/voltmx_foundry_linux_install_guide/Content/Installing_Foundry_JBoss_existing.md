@@ -705,10 +705,10 @@ If your SSL certificate is not configured, the system displays an error - for ex
   
 For details, refer to [Troubleshoot with SSL Certificate Issues](Troubleshooting.html#Service_Provider's_Certificate_Issues).
 
-> **_Note:_** You can now access Volt MX Foundry Console by using the URLs. For more details, refer to [Accessing Volt MX Foundry Console - On-premises]({{ site.baseurl }}/documentation/Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html#how-to-get-started-with-foundry-console).  
+> **_Note:_** You can now access Volt MX Foundry Console by using the URLs. For more details, refer to [Accessing Volt MX Foundry Console - On-premises]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html#how-to-get-started-with-foundry-console).  
   
 ![](Resources/Images/MFWelcome_649x407.png)  
   
-During installation if you have configured your super administrator account, you can directly [log in to Volt MX Foundry Console]({{ site.baseurl }}/documentation/Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html#how-to-log-in-to-foundry-console) by using the Console URL.  
+During installation if you have configured your super administrator account, you can directly [log in to Volt MX Foundry Console]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html#how-to-log-in-to-foundry-console) by using the Console URL.  
   
 ![](Resources/Images/Sign-inMF_648x363.png)

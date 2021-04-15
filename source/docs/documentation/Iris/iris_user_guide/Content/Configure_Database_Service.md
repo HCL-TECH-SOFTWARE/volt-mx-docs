@@ -242,7 +242,7 @@ To create a database record with create operation, follow these steps: 
         
         **Decode Response Body -** To ignore the Database response received in the XMLvalue field, select the **Decode Response Body response** check box.
         
-        **Response Encoding -** select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/studio/Studio_User_Guide/Content/Response_Encoding.html).
+        **Response Encoding -** select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Response_Encoding.html).
         
 4.  In the **Request Input** tab, do the following:
     

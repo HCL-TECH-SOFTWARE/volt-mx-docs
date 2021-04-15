@@ -72,7 +72,7 @@ The following table displays the browser support for the various methods in Came
 | Safari iOS Mobile (only using https) | ![](Resources/Images/GreenCheck_24x24.png) | ![](Resources/Images/GreenCheck_24x24.png) | ![](Resources/Images/GreenCheck_24x24.png) | ![](Resources/Images/RedX_18x18.png) | ![](Resources/Images/RedX_18x18.png) |
 | Chrome for MAC & iOS | ![](Resources/Images/RedX_18x18.png) | ![](Resources/Images/RedX_18x18.png) | ![](Resources/Images/RedX_18x18.png) | ![](Resources/Images/RedX_18x18.png) | ![](Resources/Images/RedX_18x18.png) |
 
-Widgets are normally added to your application by using Volt MX Iris, but they can also be added through code. For general information on using widgets in Volt MX Iris, refer [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Iris_User_Guide.html).
+Widgets are normally added to your application by using Volt MX Iris, but they can also be added through code. For general information on using widgets in Volt MX Iris, refer [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 For general information on the Camera widget see the [Camera]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Camera.html) topic in the Volt MX Iris User Guide.
 

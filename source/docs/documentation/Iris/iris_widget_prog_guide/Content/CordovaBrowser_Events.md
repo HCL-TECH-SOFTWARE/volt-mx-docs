@@ -12,21 +12,24 @@ The CordovaBrowser widget has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
 This event is invoked for every widget when the widget position and dimensions are computed.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This event is invoked for all the widgets placed inside flex containers. This event is invoked in the order in which the widgets are added to the widget hierarchy and expect the frame property of the widget is calculated and available for use within this event.
 
@@ -34,9 +37,9 @@ This event is used to set the layout properties of child widgets in the relation
 
 The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -47,25 +50,28 @@ function doLayoutButton1(){
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[handleRequest Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>handleRequest Event</summary>
 
 * * *
 
 An event callback which gets invoked by the platform before CordovaBrowserwidget navigates to a new URL.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 handleRequest ()  
 handleRequest (eventobject,params)
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 eventobject
 
@@ -96,11 +102,11 @@ Following are the parameters of the object.
 > 
 > Specifies a dictionary containing all the HTTP header fields.
 
-Read/Write
+<b>Read/Write</b>
 
 Write only
 
-Remarks
+<b>Remarks</b>
 
 This is useful in scenarios where the developer wants to keep track of the URLs that the CordovaBrowserfield navigates to. For example, in a payment flow (that is, being executed inside a CordovaBrowserwidget) on successful redirection to a payment confirmation page the developer would like to take the user to a new native form.
 
@@ -108,9 +114,9 @@ On iOS platform, whenever handleRequest is set to browser and request comes to C
 
 The return value from this function determines how the CordovaBrowserwidget handles the original request. If a false value is returned, then the CordovaBrowserwidget continues navigation to the original URL and if the true value is returned then the developer has to handle the request.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample call back for handleRequest event
+{% highlight VoltMx %}//Sample call back for handleRequest event
 function handleRequestCallback(browserWidget, params) {
     voltmx.print("handleRequest event triggered");
     voltmx.print("Original URL" + params["originalURL"]);
@@ -125,36 +131,39 @@ function handleRequestCallback(browserWidget, params) {
 frmobj.brw1.handleRequest = handleRequestCallback
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onFailure Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onFailure Event</summary>
 
 * * *
 
 An event callback which gets invoked by the platform when the given request URL is failed to load the data.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onFailure()
+{% endhighlight %}
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This event is called only for the given request URL, but not for the subsequent web navigation request failures.
 
 This event is also not called when .htmlString](Browser_Properties.html.htmlString) is set to the web widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set onFailure event callback to a CordovaBrowser widget.
+{% highlight VoltMx %}//Sample code to set onFailure event callback to a CordovaBrowser widget.
 
 frmCBrowser.myCBrowser.onFailure=onFailureCallBck;  
 function onFailureCallBck(browser) {
@@ -165,33 +174,36 @@ function onFailureCallBck(browser) {
 
 For more information about defining an action sequence for this event, see _Event Editor_ in the _VoltMX Iris User Guide_.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available on all platforms except Desktop Web and SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onProgressChanged Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onProgressChanged Event</summary>
 
 * * *
 
 The onProgressChanged callback event shows you the progress of the page loading in the CordovaBrowserWidget. The platform invokes the event when the page is loading.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onProgressChanged()
+{% endhighlight %}
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 When you set the onProgressChanged event in the CordovaBrowserWidget, the progress value of the loading page is passed as a parameter to the callback.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set onProgressChanged event callback to a CordovaBrowser widget.
+{% highlight VoltMx %}//Sample code to set onProgressChanged event callback to a CordovaBrowser widget.
 function onProgessChangedCallback(progress) {
     alert("Progress value -" + progress);
 }
@@ -201,30 +213,34 @@ function onProgessChangedCallback(progress) {
 frmCBrowser.myCBrowser = onProgessChangedCallback;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available only on the Android platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onScrollWidgetPosition()
+{% endhighlight %}
 
-Read/Write
+
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -238,36 +254,39 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Not Accessible from IDE
 *   Android, iOS, SPA, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSuccess Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onSuccess Event</summary>
 
 * * *
 
 An event callback which gets invoked by the platform when the given request URL is successful in loading the data.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onSuccess()
+{% endhighlight %}
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This event is called every time the page is loaded. This event is not called when .htmlString](Browser_Properties.html.htmlString) is set to the web widget.
 
 This event gets called whenever the URL is loaded, or you navigate from one URL to another, or the browser URL internally redirects to another URL. This event is also called whenever the content is loaded, and when a URL contains any third party content using an iframe.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set onSuccess event callback to a CordovaBrowser widget.
+{% highlight VoltMx %}//Sample code to set onSuccess event callback to a CordovaBrowser widget.
 
 frmCBrowser.myCBrowser.onSuccess=onSuccessCallBck;  
 function onSuccessCallBck(browser) {
@@ -278,14 +297,15 @@ function onSuccessCallBck(browser) {
 
 For more information about defining an action sequence for this event, see _Event Editor_ in the _VoltMX Iris User Guide_.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollingEvents Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollingEvents Event</summary>
 
 * * *
 
@@ -295,19 +315,19 @@ Following are the events and their callback signature:
 
 > onReachingBegining: Gets called when scrolling reaches the beginning of the Browse widget.
 > 
-> Syntax
+> <b>Syntax</b>
 > 
-> onReachingBegining()  
-> onReachingBegining(browser,scrollDirection)  
+> {% highlight VoltMx %}onReachingBegining()  
+> onReachingBegining(browser,scrollDirection){% endhighlight %} 
 > 
 > onReachingEnd: Gets called when scrolling reaches the end of the Browse widget.
 > 
-> Syntax
+> <b>Syntax</b>
 > 
-> onReachingEnd()  
-> onReachingEnd(browser,scrollDirection)  
+> {% highlight VoltMx %}onReachingEnd()  
+> onReachingEnd(browser,scrollDirection){% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 browser - Optional
 
@@ -322,13 +342,13 @@ Specifies the direction in which the scroll box must scroll. Following are the a
 
 > > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample callback function for onReachingBegining event under scrollingEvents.  
+{% highlight VoltMx %}//Sample callback function for onReachingBegining event under scrollingEvents.  
 function onReachingBeginingCallBack(webwidget, scrollDirection) {
  alert("onReachingBegining event triggered");
 }
@@ -345,9 +365,11 @@ frmCBrowser.myCBrowser.scrollingEvents = {
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available on iPad platform.
 
 * * *
+
+</details>
 

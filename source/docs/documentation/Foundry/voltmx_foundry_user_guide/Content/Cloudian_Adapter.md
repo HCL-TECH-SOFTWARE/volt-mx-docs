@@ -36,13 +36,15 @@ To configure an S3 File Storage adapter, follow these steps:
     | Service Namespace | The namespace of the resource that you want to use on the Cloudian HyperStore. |
     | Advanced Settings | Additional settings that are configured for the Cloudian HyperStore.This parameter is optional. |
     
-4.  [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)For additional configuration of your service definition, provide the following details in the **Advanced** section.](javascript:void(0);) 
+4. <details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the Advanced section.</summary> 
     
       
-    | Field | Description |
+      | Field | Description |
     | --- | --- |
     | Custom code | Specifies any custom business logic that you want to use for the service and the operations. The custom business logic must be in a JAR file. To specify a JAR associated to the service, select one from the **Select Existing JAR** drop-down menu or click **Upload New** to add a new JAR file. For on-premise instances of Volt MX Foundry, make sure that the JAR file that is built on the same JDK version that is used to install Volt MX Foundry Integration. |
     | API Throttling | **API throttling** on the Volt MX Foundry Console limits the number of request calls within a minute. To use API Throttling, configure the following fields: **Total Rate Limit**: Limits the number of requests that are processed by the service **Rate Limit Per IP**: Limits the number of requests that are processed by an IP address To override throttling from the Volt MX Foundry App Services Console, refer to [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). |
+	
+	</details>
     
     > **_Note:_**  
     Options in the **Advanced** section are optional.
@@ -59,7 +61,8 @@ The operations are REST APIs that are mapped to back-end methods, such as GET an
 
 You can invoke the operations from a Volt MX Iris project by using the Volt MX Foundry SDKs. For example, to upload an image file from the client app to the S3 bucket on the Cloudian HyperStore, you can use the following code:
 
-{% highlight voltMx %}//Function to upload a file to the bucket
+{% highlight VoltMx %}
+//Function to upload a file to the bucket
 function uploadFile()
 {
 	currentObj = voltmx.sdk.getCurrentInstance();

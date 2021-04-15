@@ -20,7 +20,7 @@ Following are the real-time use cases of PickerView widget:
 *   Used in selecting your birthday and year in a sign up form.
     
 
-Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Iris_User_Guide.html).
+Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 For general information on the PickerView widget see the [PickerView]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/PickerView.html) topic in the Volt MX Iris User Guide.
 

@@ -10,20 +10,22 @@ voltmx.wearable Namespace Functions
 
 The `voltmx.wearable` namespace provides the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.addCapabilityChangeListener Function](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.wearable.addCapabilityChangeListener Function</summary> 
 
 * * *
 
 Adds a callback event handler function that monitors for changes to the status of paired devices, such the device becoming available or unavailable.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.addCapabilityChangeListener(  
     capability,  
     onCapabilityChanged,  
     errorCallback);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _capability_
 
@@ -51,19 +53,20 @@ errorCallback(errorConst);
 
 Where `errorConst` is a value from the [Callback Result Constants](voltmx.wearable_namespace_constants.html#CallBackResult).
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This function enables your app to see when devices that are paired with the current device become available or unavailable, or when the paired app gets installed or uninstalled.
 
 > **_Important:_** To call this function from the app that is paired with your watch app, you must set the compilation settings in  Volt MX Iris appropriately. For details, see [Transmitting Data Between Paired Apps](androidwearoverviews.html#transmitting-data-between-paired-apps).
 
-Example
+### Example
 
-{% highlight voltMx %}function addCapabilityChangeListener()
+{% highlight VoltMx %}
+function addCapabilityChangeListener()
 {
     voltmx.wearable.addCapabilityChangeListener("capability_1", onCapabilityChanged, capabilityErrorCallback);
 }
@@ -86,25 +89,26 @@ function capabilityErrorCallback(errorConst)
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.addForegroundDataItemListener Function](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.addForegroundDataItemListener Function</summary> 
 
 * * *
 
 Receives data items when the app is in the foreground.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.addForegroundDataItemListener(  
     onDataItemReceiver,  
     errorCallback);
-
-Parameters
+{% endhighlight %}
+### Parameters
 
 _onDataItemReceiver_
 
@@ -122,19 +126,20 @@ errorCallback(errorConst);
 
 Where `errorConst` is a value from the [Callback Result Constants](voltmx.wearable_namespace_constants.html#CallBackResult).
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This function only receives data when the app is in the foreground. It does not affect the device or the device's battery life when the app is not running or is running in the background.
 
 > **_Important:_** To call this function from the app that is paired with your watch app, you must set the compilation settings in  Volt MX Iris appropriately. For details, see [Transmitting Data Between Paired Apps](androidwearoverviews.html#transmitting-data-between-paired-apps).
 
-Example
+### Example
 
-{% highlight voltMx %}function onDataItemReceiver(path,payloadTable,nodeId)
+{% highlight VoltMx %}
+function onDataItemReceiver(path,payloadTable,nodeId)
 {
     if (path == “/photo’’)
     {
@@ -175,25 +180,27 @@ function errorCallback(errorConst)
 voltmx.wearable.addForegroundDataItemListener(onDataItemReceiver,errorCallback);				
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.addForegroundMessageListener Function](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.addForegroundMessageListener Function</summary> 
 
 * * *
 
 Receives messages when the app is running in the foreground.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.addForegroundMessageListener(  
     onMessageReceiver,  
     errorCallback);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _onMessageReceiver_
 
@@ -211,19 +218,20 @@ errorCallback(errorConst);
 
 Where `errorConst` is a value from the [Callback Result Constants](voltmx.wearable_namespace_constants.html#CallBackResult).
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 The callback set by this function receives messages only when the app is in the foreground. This can extend the charge of the device's battery.
 
 > **_Important:_** To call this function from the app that is paired with your watch app, you must set the compilation settings in  Volt MX Iris appropriately. For details, see [Transmitting Data Between Paired Apps](androidwearoverviews.html#transmitting-data-between-paired-apps).
 
-Example
+### Example
 
-{% highlight voltMx %}function onMessageReceiver (path,payload,nodeId)
+{% highlight VoltMx %}
+function onMessageReceiver (path,payload,nodeId)
 {
     if(path == “/location”)
     {
@@ -250,25 +258,27 @@ Example
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.getCapabilityAsync Function](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.getCapabilityAsync Function</summary> 
 
 * * *
 
 Retrieves the capabilities of a paired device.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.getCapabilityAsync(  
     capability,  
     capabilityCallback);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _capability_
 
@@ -288,11 +298,11 @@ Where `nodesArray` is an array of JavaScript objects, each of which represents a
 | nodeId | A string that specifies a unique ID for the device. |
 | isNearBy | A Boolean value that is `true` if the device is nearby (within range), or `false` if not. |
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 When you write apps for Android Wear 2.0 or later, the watch apps can be stand-alone apps or they can paired with a companion app on an Android mobile device. If your watch app is paired with a companion app on an Android mobile device, your watch app and your companion app each needs a way to discover whether or not the paired device is available and the matching app is running on it. The primary use of this function is to find that out. Both the Android Wear app and the Android phone or tablet app must advertise their presence on the network of paired devices. The apps on the paired devices call the `getCapabilityAsync` function find out whether the paired device has the companion app. For more information, see [Using Capabilities](androidwearoverviews.html#using-capabilities).
 
@@ -300,9 +310,10 @@ This function is executed asynchronously and the results are passed to the callb
 
 > **_Important:_** To call this function from the app that is paired with your watch app, you must set the compilation settings in  Volt MX Iris appropriately. For details, see [Transmitting Data Between Paired Apps](androidwearoverviews.html#transmitting-data-between-paired-apps).
 
-Example
+### Example
 
-{% highlight voltMx %}var nodesArray= voltmx.wearable.getCapabilityAsync("phoneApp", capabilityCallback);
+{% highlight VoltMx %}
+var nodesArray= voltmx.wearable.getCapabilityAsync("phoneApp", capabilityCallback);
 function capabilityCallback (nodesArray)
 {
     if(nodesArray.length > 0)
@@ -321,27 +332,30 @@ function capabilityCallback (nodesArray)
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.getConnectedNodes Function](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.getConnectedNodes Function</summary> 
 
 * * *
 
 Retrieves an array of connected devices.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.getConnectedNodes();
+}
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 Returns an array of nodes. Nodes are devices that are paired with the current device. Each node in the array is a JavaScript object containing the following key-value pairs.
 
@@ -351,15 +365,16 @@ Returns an array of nodes. Nodes are devices that are paired with the current de
 | nodeId | A string that specifies a unique ID for the device. |
 | isNearBy | A Boolean value that is `true` if the device is nearby (within range), or `false` if not. |
 
-Remarks
+### Remarks
 
 This function retrieves an array of devices that are paired with the current device via Bluetooth. The paired devices may or may not currently be in range.
 
 > **_Important:_** To call this function from the app that is paired with your watch app, you must set the compilation settings in  Volt MX Iris appropriately. For details, see [Transmitting Data Between Paired Apps](androidwearoverviews.html#transmitting-data-between-paired-apps).
 
-Example
+### Example
 
-{% highlight voltMx %}function sendMessageToPairedDevices()
+{% highlight VoltMx %}
+function sendMessageToPairedDevices()
 {
     var nodesArray = voltmx.wearable.getConnectedNodes();
 
@@ -379,26 +394,28 @@ Example
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.openListingOfAppInPlayStoreOnRemoteDevice](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.openListingOfAppInPlayStoreOnRemoteDevice</summary> 
 
 * * *
 
 Opens the listing for the specified package name in the Google Play store on the remote device so that the user can install the corresponding app.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.openListingOfAppInPlayStoreOnRemoteDevice(  
     appPackageName,  
     nodeId,  
     statusCallback);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _appPackageName_
 
@@ -422,17 +439,18 @@ Where result is a value from the [Callback Result Constants](voltmx.wearable_nam
 | voltmx.wearable.RESULT\_SUCCESS | The listing for the companion app was successfully opened in the Google Play store on the paired device. |
 | voltmx.wearable.RESULT\_UNKNOWN | The results of the operation are unknown. |
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 If your watch app depends on a phone app, both the watch app and the phone can detect whether the companion app is installed on the paired device. For example, the watch app can detect whether the paired phone has the phone app installed by calling the [voltmx.wearable.getCapabilityAsync](#openListingOfAppInPlayStoreOnRemoteDevice) function. Suppose that in this example, the watch finds that the paired device is present but it does not have the companion phone app installed. The watch app can then call this function to open the companion phone app's listing in the Google Play store for the user. The user can then install the companion phone app so that the phone app and the watch app can work together.
 
-Example
+### Example
 
-{% highlight voltMx %}function checkAppInstalledInConnectedDeviceIfNotOpenPlayStoreInRemoteDevice()
+{% highlight VoltMx %}
+function checkAppInstalledInConnectedDeviceIfNotOpenPlayStoreInRemoteDevice()
 {
      var nodeIds = voltmx.wearable.getConnectedNodeIds();
 
@@ -458,27 +476,29 @@ function capabilityCallback(capabilityNodes)
 } 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.putDataItem Function](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.putDataItem Function</summary> 
 
 * * *
 
 Sends data items to paired devices that are connected over Bluetooth.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.putDataItem(  
     path,  
     payloadTable,  
     statusCallback ,  
     options);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _path_
 
@@ -506,11 +526,11 @@ An JavaScript object that contains key-value pairs. This parameter is optional. 
 | --- | --- |
 | isUrgent | A Boolean value that indicates whether the data must be synched right away or not. The default for this key is `false`. This means that the data is may not be transmitted for as much as 30 minutes, though the delay is usually not more than 2-3 minutes. Android Wear does this to preserve battery life. Setting this key to `true` forces Android Wear to transmit the data immediately. Because the _options_ parameter is optional, this key is set to `false` if you do not provide a value for the _options_ parameter when you call the `putDataItem` function. |
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 Your Volt MX Wearables for Android Wear apps use this function to transmit data between watches and the Android mobile devices they are paired with. The paired devices can send both simple data, such as numbers, strings, and Boolean values and large data items, such as RawBytes obtained from an Image object or Camera widget. However, other data or objects cannot be sent.
 
@@ -520,9 +540,10 @@ If your app calls this function without changing the payload, it is the same as 
 
 > **_Important:_** To call this function from the app that is paired with your watch app, you must set the compilation settings in  Volt MX Iris appropriately. For details, see [Transmitting Data Between Paired Apps](androidwearoverviews.html#transmitting-data-between-paired-apps).
 
-Example 1
+### Example 1
 
-{% highlight voltMx %}var path = “/count”;
+{% highlight VoltMx %}
+var path = “/count”;
 var payloadTable = {“count”: 2};
 
 function statusCallback(status)
@@ -541,9 +562,10 @@ function statusCallback(status)
 voltmx.wearable.putDataItem(path,payloadTable,statusCallback) ;
 {% endhighlight %}
 
-Example 2
+### Example 2
 
-{% highlight voltMx %}// Take a picture with camera widget and send it to the android wear.
+{% highlight VoltMx %}
+// Take a picture with camera widget and send it to the android wear.
 rawBytes = null;
 
 function onCaptureCallbackOfCamera()
@@ -574,121 +596,132 @@ function sendDataItem()
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.removeCapabilityChangeListener](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.removeCapabilityChangeListener</summary> 
 
 * * *
 
 Removes the listener callback function for the specified capability.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.removeCapabilityChangeListener(  
     capability);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _capability_
 
 A string that specifies the capability whose listener callback function is removed.
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This function enables your app to removed listener callback functions set by the [voltmx.wearable.addCapabilityChangeListener](#addCapabilityChangeListener) function.
 
-Example
+### Example
 
-{% highlight voltMx %}voltmx.wearable.removeCapabilityChangeListener(“voiceTranscription”);
+{% highlight VoltMx %}
+voltmx.wearable.removeCapabilityChangeListener(“voiceTranscription”);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.removeForegroundDataItemListener Function](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.removeForegroundDataItemListener Function</summary> 
 
 * * *
 
 Removes the callback function set by the [voltmx.wearable.addForegroundDataItemListener](#addForegroundDataItemListener) function.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.removeForegroundDataItemListener();
-
-Parameters
-
-None.
-
-Return Values
-
-None.
-
-Example
-
-{% highlight voltMx %}voltmx.wearable.removeForegroundDataItemListener();
 {% endhighlight %}
 
-Platform Availability
+### Parameters
+
+None.
+
+### Return Values
+
+None.
+
+### Example
+
+{% highlight VoltMx %}
+voltmx.wearable.removeForegroundDataItemListener();
+{% endhighlight %}
+
+### Platform Availability
 
 Android Wear 2.0 or later.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.removeForegroundMessageListener](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.removeForegroundMessageListener</summary> 
 
 * * *
 
 Removes the callback function set by the [voltmx.wearable.addForegroundMessageListener](#addForegroundMessageListener) function.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.removeForegroundMessageListener();
-
-Parameters
-
-None.
-
-Return Values
-
-None.
-
-Example
-
-{% highlight voltMx %}voltmx.wearable.removeForegroundMessageListener();
 {% endhighlight %}
 
-Platform Availability
+### Parameters
+
+None.
+
+### Return Values
+
+None.
+
+### Example
+
+{% highlight VoltMx %}
+voltmx.wearable.removeForegroundMessageListener();
+{% endhighlight %}
+
+### Platform Availability
 
 Android Wear 2.0 or later.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.sendMessage Function](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.sendMessage Function</summary> 
 
 * * *
 
 Sends a message to a paired device.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.sendMessage(  
     path,  
     payload,  
     statusCallback,  
     options);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 path
 
@@ -714,11 +747,11 @@ An JavaScript object that contains key-value pairs. This parameter is optional. 
 | --- | --- |
 | nodeId | A string containing the ID of the node to send the message to.Your app can use this to reply to the sender. For more information, see the **[Remarks](#sendMessage_Remarks)** section below. |
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 Sending a message to a paired device results in a faster delivery of the data than transmitting a data item. But messages are not guaranteed to be delivered because the device may not be connected or it may be out of range at the time the message is sent. Transmitting data items guarantees the deliver of the data.
 
@@ -733,9 +766,10 @@ Your app can get the node ID for the _options_ parameter by calling the followin
 
 > **_Important:_** To call this function from the app that is paired with your watch app, you must set the compilation settings in  Volt MX Iris appropriately. For details, see [Transmitting Data Between Paired Apps](androidwearoverviews.html#transmitting-data-between-paired-apps).
 
-Example 1
+### Example 1
 
-{% highlight voltMx %}var path = “/location”;
+{% highlight VoltMx %}
+var path = “/location”;
 var payload = “17.4478262,78.3363178,13”
 
 function statusCallback(status)
@@ -753,9 +787,10 @@ function statusCallback(status)
 voltmx.wearable.sendMessage(path,payload, statusCallback,null) ;
 {% endhighlight %}
 
-Example 2
+### Example 2
 
-{% highlight voltMx %}var path = “/Start-Form”;
+{% highlight VoltMx %}
+var path = “/Start-Form”;
 var payload = “Form1”
 
 function statusCallback(status)
@@ -781,18 +816,20 @@ Android Wear 2.0 or later.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.setDataItemListener Function](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.setDataItemListener Function</summary> 
 
 * * *
 
 Sets a callback event handler function that is invoked when the app receives data.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.setDataItemListener(  
     onDataItemReceiver);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _onDataItemReceiver_
 
@@ -808,7 +845,7 @@ Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This function sets a callback event handler that receives data even when the app is in the background or not running. However, setting this callback function consumes more power from the battery. So your app should only invoke `setDataItemListener` for high-priority items. In most cases, your app should use the [voltmx.wearable.addForegroundDataItemListener](#addForegroundDataItemListener) function instead.
 
@@ -816,9 +853,10 @@ Your app should generally call this function in either the pre-appinit or postap
 
 > **_Important:_** To call this function you must set the compilation settings in  Volt MX Iris appropriately. For details, see [Transmitting Data Between Paired Apps](androidwearoverviews.html#transmitting-data-between-paired-apps).
 
-Example
+### Example
 
-{% highlight voltMx %}function onDataItemReceiver(path,payloadTable, nodeId)
+{% highlight VoltMx %}
+function onDataItemReceiver(path,payloadTable, nodeId)
 {
     if(path == “/photo’’)
     {
@@ -846,24 +884,26 @@ Example
 voltmx.wearable.setDataItemListener(onDataItemReceiver);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.wearable.setMessageListener Function](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.wearable.setMessageListener Function</summary> 
 
 * * *
 
 Receives a message from a paired app regardless of whether the app is running, running in the foreground, or running in the background.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.wearable.setMessageListener(  
     onMessageReceiver);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _onMessageReceiver_
 
@@ -873,19 +913,20 @@ onMessageReceiver(path,payload,nodeId);
 
 Where `path` is a string that uniquely identifies the data item being transmitted, `payload` is a JavaScript object of type `RawBytes` or `String`, and `nodeId` is a string containing the ID of the node to send the message to. The `path` argument must start with a forward slash character ('/') or an exception is thrown. The maximum size of the `payload` argument is 100KB. Your app can use the `nodeId` value to reply to the sender..
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 Setting a callback function to receive messages by calling `setMessageListener` consumes more power than setting a callback that only operates in the foreground. In general, your app should use this function sparingly.
 
 > **_Important:_** To call this function you must set the compilation settings in  Volt MX Iris appropriately. For details, see [Transmitting Data Between Paired Apps](androidwearoverviews.html#transmitting-data-between-paired-apps).
 
-Example
+### Example
 
-{% highlight voltMx %}function onMessageReceiver(path,payload,nodeId)
+{% highlight VoltMx %}
+function onMessageReceiver(path,payload,nodeId)
 {
     // Add your code to read the payload.
 }
@@ -893,7 +934,7 @@ Example
 voltmx.wearable.setMessageListener(onMessageReceiver) ;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later
 

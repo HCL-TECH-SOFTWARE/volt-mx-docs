@@ -48,154 +48,49 @@ Prerequisites for Cloud
     
     
 <details close markdown="block"><summary>Click here for more details on</summary>**EAS and Platform Versions Compatibility Chart**  
-    
     The following table details the supported versions of EAS source and Platform.
     
-    > **_Important:_** If you are upgrading to EAS V 2.0.1 or a higher version, you must restart the server.
+> **_Important:_** If you are upgrading to EAS V 2.0.1 or a higher version, you must restart the server.
+  
+| EAS Source App version || **Platform Supported Version** |||
+| --- | --- | --- | --- | --- |
+| Client App (Store.zip) | Server App (VoltMX App Store.zip) | Foundry |   Iris | Middleware |
+| --- | --- | --- | --- | --- |
+| 1.0.0 - Initial Release | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
+| 1.1.0 - Support for Web apps | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
+| 2.0.0 - Support for Android 10 <br/> Support for iOS 13 <br/> Push Notifications | 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
+| 2.0.1 - Bug fixes | 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
+| 3.0.1 - Support for Desktop View <br/> Help section in iOS Native Apps | 3.0.1 | NA | V9 GA | 8.4.3.10 |
+| 3.1.0 - Support for Upgrade Policy | 3.1.0 | NA | V9 SP1 | V9 SP1 |
+| **SP**: Service Pack**FP**: Fix Pack |||||
     
-    | EAS Source App version || **Platform Supported Version** |||
-    | --- | --- | --- | --- | --- |
-    | Client App (Store.zip) | Server App (VoltMX App Store.zip) | Foundry |   Iris | Middleware |
-    | --- | --- | --- | --- | --- |
-    | 1.0.0
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Initial Release
-    
-    
-    
-     | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
-    | 1.1.0
-    
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Support for Web apps
-    
-    
-    
-     | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
-    | 2.0.0
-    
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Support for Android 10Support for iOS 13Push Notifications
-    
-    
-    
-     | 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
-    | 2.0.1
-    
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Bug fixes
-    
-    
-    
-     | 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
-    | 3.0.1
-    
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Support for Desktop ViewHelp section in iOS Native Apps
-    
-    
-    
-     | 3.0.1 | NA | V9 GA | 8.4.3.10 |
-    | 3.1.0
-    
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Support for Upgrade Policy
-    
-    
-    
-     | 3.1.0 | NA | V9 SP1 | V9 SP1 |
-    | **SP**: Service Pack**FP**: Fix Pack |||||
-    
+</details>
 
 Prerequisites for On-premises
 -----------------------------
 
 *   For publishing apps to the Enterprise App Store, you have to have Volt MX Foundry App Server.
     
-    </details>
+
 <details close markdown="block"><summary>Click here for more details on</summary> **EAS and Platform Versions Compatibility Chart**  
-    
     The following table details the supported versions of EAS source and Platform.
     
-    > **_Important:_** If you are upgrading to EAS V 2.0.1 or a higher version, you must restart the server.
+> **_Important:_** If you are upgrading to EAS V 2.0.1 or a higher version, you must restart the server.
     
-    | EAS Source App version || **Platform Supported Version** |||
-    | --- | --- | --- | --- | --- |
-    | Client App (Store.zip) | Server App (VoltMX App Store.zip) | Foundry |   Iris | Middleware |
-    | --- | --- | --- | --- | --- |
-    | 1.0.0
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Initial Release
-    
-    
-    
-     | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
-    | 1.1.0
-    
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Support for Web apps
-    
-    
-    
-     | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
-    | 2.0.0
-    
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Support for Android 10Support for iOS 13Push Notifications
-    
-    
-    
-     | 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
-    | 2.0.1
-    
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Bug fixes
-    
-    
-    
-     | 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
-    | 3.0.1
-    
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Support for Desktop ViewHelp section in iOS Native Apps
-    
-    
-    
-     | 3.0.1 | NA | V9 GA | 8.4.3.10 |
-    | 3.1.0
-    
-    </details>
-<details close markdown="block"><summary>Features</summary>
-    
-    Support for Upgrade Policy
-    
-    
-    
-     | 3.1.0 | NA | V9 SP1 | V9 SP1 |
-    | **SP**: Service Pack**FP**: Fix Pack |||||
-    
+| EAS Source App version || **Platform Supported Version** |||
+| --- | --- | --- | --- | --- |
+| Client App (Store.zip) | Server App (VoltMX App Store.zip) | Foundry |   Iris | Middleware |
+| --- | --- | --- | --- | --- |
+| 1.0.0 - Initial Release | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
+| 1.1.0 - Support for Web apps | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
+| 2.0.0 - Support for Android 10Support for iOS 13Push Notifications | 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
+| 2.0.1 - Bug fixes | 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
+| 3.0.1 - Support for Desktop ViewHelp section in iOS Native Apps | 3.0.1 | NA | V9 GA | 8.4.3.10 |
+| 3.1.0 - Support for Upgrade Policy | 3.1.0 | NA | V9 SP1 | V9 SP1 |
+| **SP**: Service Pack**FP**: Fix Pack |||||
+
+</details>
+
 *   Set the variable `max_allowed_packet` as per the size of your application:
     
     > **_Important:_** **For on-premises**: If the size of your application is more than the variable size of server database, an error occurs. Ensure the variable `max_allowed_packet` is set to a higher value than the application size.  
@@ -546,7 +441,7 @@ After you [enable authentication](#Manage) to apps for EAS, you can switch betwe
 1.  Go to Volt MX Foundry Account.
 2.  Navigate to the **VoltMX App Store**.
 3.  Click the **Identity** tab. The authentication service type is listed in the Identity page. The default identity service type is `User Repository`, and the service name is `AppStoreUserRepository`.
-4.  [Configure a new identity service]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ConfigureIdentiryService.html) or [use an existing identity service]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Introduction.html#Identity14_Manage_Existing.html#how-to-use-an-existing-identity-service).
+4.  [Configure a new identity service]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ConfigureIdentiryService.html) or [use an existing identity service]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Identity14_Manage_Existing.html#how-to-use-an-existing-identity-service).
     
     The new service is listed in the **Identity** page. You need to have only one service in the list. In the case of more than one service listed, the first service from the list is used for authentication.
     
@@ -561,7 +456,7 @@ Configuring Properties for Client Binaries
 After you upload client binaries in Volt MX Foundry, you can reconfigure a few of the basic properties such as the description of a binary, the icon of a binary, and the related screen shots of a binary file. You can reconfigure these properties of the client binaries only by using Volt MX Foundry.
 
 1.  Open the app where assets are available.
-2.  Click the [**Manage Client App Assets**](#http://docs.voltmx.com/voltmxlibrary/voltmx_foundry_user_guide/Content/Upload_Native_Client_Binaries.html#Uploadin) tab.
+2.  Click the [**Manage Client App Assets**](Upload_Native_Client_Binaries.html#Uploadin) tab.
 3.  Click the required platform tab, for example iOS or Android.
     
     ![](Resources/Images/EditClientBinary_620x247.png)

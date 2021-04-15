@@ -12,29 +12,33 @@ Button has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
 This event is used to set the layout properties of child widgets in the relation to self and peer widgets whose layout is not yet performed.
 
-Syntax
+### Syntax
 
+{% highlight voltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked for every widget when the widget position and dimensions are computed. This event is invoked for all the widgets placed inside flex containers. This event is invoked in the order in which the widgets are added to the widget hierarchy and expect the frame property of the widget is calculated and available for use within this event.
 
 The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight voltMx %}
+//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -53,17 +57,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onClick Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onClick Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user performs a click action on the button.
 
-Syntax
+### Syntax
 
+{% highlight voltMx %}
 onClick ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 rowIndex
 
@@ -77,17 +84,18 @@ widgetInfo
 
 Handle to the widget instance that contains the button.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The onClick event callback accepts additional parameters when a button is placed in a segment row or section template.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set onClick event callback to Button widget.
+{% highlight voltMx %}
+//Sample code to set onClick event callback to Button widget.
 
 frmButton.myButton.onClick=onClickCallBck;
 
@@ -104,23 +112,27 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
+### Syntax
 
+{% highlight voltMx %}
 onScrollWidgetPosition()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight voltMx %}
+var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -141,17 +153,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touch is released from the touch surface.
 
-Syntax
+### Syntax
 
+{% highlight voltMx %}
 onTouchEnd ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -171,17 +186,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
+{% highlight voltMx %}
+function onTouchEndCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -190,23 +206,24 @@ Example
 Form1.widget1.onTouchEnd = onTouchEndCallback;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchMove Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchMove Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the touch moves on the touch surface continuously until movement ends.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 onTouchMove ()
-
-Optional Parameters
+{% endhighlight %}
+### Optional Parameters
 
 source
 
@@ -226,17 +243,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
+{% highlight voltMx %}
+function onTouchMoveCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -251,17 +269,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touches the touch surface.
 
-Syntax
+### Syntax
 
+{% highlight voltMx %}
 onTouchStart ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -281,17 +302,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
+{% highlight voltMx %}
+function onTouchStartCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -301,33 +323,36 @@ Form1.widget1.onTouchStart = onTouchStartCallback;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[postOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>postOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom JavaScript function after the _onClick_ callback of the widget is invoked.
 
-Syntax
-
+### Syntax
+{% highlight voltMx %}
 postOnclickJS()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is applicable only for Mobile Web channel. The function must exist in a JavaScript file under project>module>js folder.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set postOnclickJS event callback to Button widget.
+{% highlight voltMx %}
+//Sample code to set postOnclickJS event callback to Button widget.
 
 frmButton.myButton.postOnclickJS=postOnclickJSCallBck;
 
@@ -337,28 +362,31 @@ function postOnclickJSCallBck(button){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on Server side Mobile Web (Advanced) platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[preOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>preOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom JavaScript function before the _onClick_ callback of the widget is invoked.
 
-Syntax
+### Syntax
 
+{% highlight voltMx %}
 preOnclickJS()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is applicable only for Mobile Web channel. The function must exist in a JavaScript file under the project>module>js folder.
 
@@ -366,9 +394,10 @@ In for the preOnclickJS and postOnclickJS events , you will not be able to acces
 
 You have to specify the modules to be loaded in browser using import JS tab; only then these files get included in HTML script tag, otherwise you will not be able to access the objects defined in those modules.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set preOnclickJS event callback to Button widget.
+{% highlight voltMx %}
+//Sample code to set preOnclickJS event callback to Button widget.
 
 frmButton.myButton.preOnclickJS=preOnclickJSCallBck;
 
@@ -378,7 +407,7 @@ function preOnclickJSCallBck(button){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on Server side Mobile Web (BJS and Advanced) platform only

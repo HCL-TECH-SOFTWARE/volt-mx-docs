@@ -43,7 +43,8 @@ Prerequisites
 *   Download the `patchinstaller(binary)` and `hotfix archives` from [downloads/manual/](http://community.hclvoltmx.com/downloads/manual/) with your credentials.
 *   Ensure that  `VoltMXFoundryPatchInstaller.bin`  file has execute permission.
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details on How to download patch installer and hotfix archives:](javascript:void(0);)
+    
+<details close markdown="block"><summary>Click here for more details on How to download patch installer and hotfix archives:</summary>
     
     To download Volt MX Foundry Patch Installer and hotfixes, follow these steps:
     
@@ -52,6 +53,7 @@ Prerequisites
     3.  From the **VoltMX Foundry Patch Installer**, select the specific release from the **Version** drop-down list and then click on the specific release related files you want to download based on your platform (Windows or Linux).  
         For example, if you want to download `VoltMX Foundry Patch Installer 8.0 GA`, select the `8.0 GA` version from the drop-down list, and then click the **Installer\_Linux** link.
     4.  For the required hotfix components, select the specific release from the **Version** drop-down list and then click **Download**.
+</details>
     
 *   For GA version 8.3 - Patch installers (8.3.1), using Tomcat and Oracle, you must ensure that the following additional files are added into the component zip folder.
     
@@ -65,8 +67,9 @@ To install Volt MX Foundry patch using the installer, follow these steps:
 
 1.  Execute the following command to switch to the user that you created.  
     
-
-\# su - username  
+    {% highlight VoltMx %}
+    # su - username
+    {% endhighlight %}
 
 3.  Press **Enter**. The system prompts you to enter the password.
 4.  Enter the password, and press **Enter**.
@@ -74,6 +77,7 @@ To install Volt MX Foundry patch using the installer, follow these steps:
 6.  Start the `VoltMXFoundryPatchInstaller-8.x.x.GA.bin` file by executing the following command:  
     `./VoltMXFoundryPatchInstaller-8.x.x.GA.bin`
 
+    {% highlight VoltMx %}
 \[root@mbaastest11 ~\]# chmod +x VoltMXFoundryPatchInstaller-8.x.x.GA.bin  
 \[root@mbaastest11 ~\]# ./VoltMXFoundryPatchInstaller-8.x.x.GA.bin  
 Preparing to install...  
@@ -86,6 +90,7 @@ Launching installer...
 Volt MX  Foundry (created with InstallAnywhere)  
 \-------------------------------------------------------------------------------  
 Preparing CONSOLE Mode Installation...  
+    {% endhighlight %}  
 
 8.  To continue the installation, press **Enter**. The _Introduction_ page appears asking for following details. Enter the details to proceed with the upgrade:
     
@@ -94,6 +99,7 @@ Preparing CONSOLE Mode Installation...
     *   **Please provide the location of existing installation** .The default install location appears in this field.  
         Provide the location of existing Volt MX Foundry installation that you wish to upgrade with the selected patch version.
         
+        {% highlight VoltMx %}
         \===============================================================================  
         Introduction  
         \------------  
@@ -103,9 +109,11 @@ Preparing CONSOLE Mode Installation...
         Please provide the below details to proceed with the upgrade.  
         Please provide the location of the patch file : (Default: ): /root/sample.zip  
         Please provide the location of existing installation : (Default: ): /root/MFJB6525132
+        {% endhighlight %} 
         
 9.  Press **Enter**. The _Pre-Installation Summary_ details appear.
     
+    {% highlight VoltMx %}
     \===============================================================================  
     Pre-Installation Summary  
     \------------------------  
@@ -121,6 +129,7 @@ Preparing CONSOLE Mode Installation...
     To proceed with the update, please press “enter"  
       
     PRESS <ENTER> TO CONTINUE:
+    {% endhighlight %}
     
 10.  Press **Enter** to continue the installation.
     
@@ -132,14 +141,17 @@ Preparing CONSOLE Mode Installation...
       
      -  After the upgrade, republish your Volt MX Foundry applications.
     
+    {% highlight VoltMx %}
     \========================================================================  
     Installing...  
     \-----------------------------------------  
       
     \[==================|==================|==================|==================\] \[-----------------  
+    {% endhighlight %}  
     
     The _Installation Complete_ details appear.
     
+    {% highlight VoltMx %}
     \========================================================================  
     Installation Complete  
     \-----------------------------------------  
@@ -151,6 +163,7 @@ Preparing CONSOLE Mode Installation...
     <List of components installed> URL: https://00.00.00.00:port/vpns  
       
     PRESS <ENTER> TO EXIT THE INSTALLER: \[user1@cnt6-01c downloads\]$
+    {% endhighlight %}
     
 11.  Press **Enter** to complete the installation. After the installation is completed, the installer creates logs in the install folder.
     

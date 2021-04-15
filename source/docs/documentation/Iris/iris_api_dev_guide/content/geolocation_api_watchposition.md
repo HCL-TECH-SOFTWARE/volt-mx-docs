@@ -45,7 +45,7 @@ If the user denies permission for background location access, but the app requir
 
 The GeoLocation APIs are modeled after W3C GeoLocation specification. For a more hands-on approach on the functionality of the various Geolocation APIs provided by Volt MX, import and preview the [Geolocation Feature app](https://marketplace.kony.com/items/geolocation-feature-app) by using Volt MX Iris.
 
-{% include youtube.html id='inYnRPqoKps' %}
+{% include youtube.html id='XEdOHCBBMVw' %}
 
 To get the current position of the device, use the **[voltmx.location.getCurrentPosition](#getCurrentPosition)** function. Continue to watch the position of the device by using the **[voltmx.location.watchPosition](#watchPosition)** function. To stop tracking the device movement, use the **[voltmx.location.clearWatch](#voltmx.loc)** function.
 

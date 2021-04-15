@@ -14,7 +14,7 @@ Intent extensions enable your iOS app to interface with Siri. An Intent contain
 
 By default, an Intent extension in Volt MX Irisdoes not have a UI. However, Iris also enables you to create an IntentUI extension that does provide a UI. When you create an IntentUI with Volt MX Iris, it generates an empty view. Whether you use an Intent extension or an IntentUI extension, you add your business logic to the extension's callback functions. Your JavaScript code accesses native functionality on iOS devices by using objects and invoking functions in the [Native Functions API](native_function.html#native_function_api_for_ios_reference.html).
 
-Volt MX  Irissupports following functionality in the Intent (or IntentUI) extensions.
+Volt MX Irissupports following functionality in the Intent (or IntentUI) extensions.
 
 *   VoIP calling
 *   Messaging
@@ -40,7 +40,8 @@ Apple specifies that users must manually grant apps permission to use the Apple 
     
 3.  Provide runtime permissions for your app by invoking functions in the [Runtime Permissions API](runtime_permissions.html). An example of this is provided in the following sample code.
     
-    {% highlight voltMx %}var result =
+    {% highlight VoltMx %}
+    var result =
         voltmx.application.checkPermission(voltmx.os.RESOURCE_SIRI, null);
     
     // If the app does not have the required permissions ...
@@ -99,38 +100,39 @@ Functions
 
 The voltmx.intentExtension namespace provides the following function.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.intentExtension.setExtensionsCallbacks Function](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.intentExtension.setExtensionsCallbacks Function</summary> 
 
 * * *
 
 Sets an iMessage extension functionality with various states as callback events.
 
-Syntax
+### Syntax
 
 voltmx.intentExtension.setExtensionsCallbacks(callbacks)
 
-Input Parameters
+### Input Parameters
 
 callbacks
 
 Contains an object with key-value pairs where the key specifies the extension state and the value is a callback function. The following are the possible keys.
 
-> | Key | Description |
-> | --- | --- |
-> | configureWithInteractionContextCompletion | The configuration is complete for the given interaction, the hosted view controller should call the completion block with its view's desired size. This size will be constrained between hostedViewMinimumAllowedSize and hostedViewMaximumAllowedSize of the extension context. Used with IntentUI extensions only. |
-> | handlerForIntent | An intent has arrived for the app. Used with Intent extensions only. |
-> | loadView | Loads a view that the controller manages. Used with IntentUI extensions only. |
-> | viewDidAppear | A view was just displayed. Used with IntentUI extensions only. |
-> | viewDidDisappear | A view just removed from the view hierarchy. Used with IntentUI extensions only. |
-> | viewDidLoad | The the view controller has loaded its view hierarchy into memory. Used with IntentUI extensions only. |
-> | viewWillAppear | A view is about to be displayed. Used with IntentUI extensions only. |
-> | viewWillDisappear | A view is about to be removed from the view hierarchy. Used with IntentUI extensions only. |
-> 
->   
+| Key | Description |
+| --- | --- |
+| configureWithInteractionContextCompletion | The configuration is complete for the given interaction, the hosted view controller should call the completion block with its view's desired size. This size will be constrained between hostedViewMinimumAllowedSize and hostedViewMaximumAllowedSize of the extension context. Used with IntentUI extensions only. |
+| handlerForIntent | An intent has arrived for the app. Used with Intent extensions only. |
+| loadView | Loads a view that the controller manages. Used with IntentUI extensions only. |
+| viewDidAppear | A view was just displayed. Used with IntentUI extensions only. |
+| viewDidDisappear | A view just removed from the view hierarchy. Used with IntentUI extensions only. |
+| viewDidLoad | The the view controller has loaded its view hierarchy into memory. Used with IntentUI extensions only. |
+| viewWillAppear | A view is about to be displayed. Used with IntentUI extensions only. |
+| viewWillDisappear | A view is about to be removed from the view hierarchy. Used with IntentUI extensions only. |
 
-Example: configureWithInteractionContextCompletion
 
-{% highlight voltMx %}function configureWithInteractionContextCompletion({
+### Example: configureWithInteractionContextCompletion
+
+{% highlight VoltMx %}
+function configureWithInteractionContextCompletion({
     "configureWithInteractionContextCompletion": configureWithInteractionContextCompletion
 }) {
     // Native Function API code
@@ -139,9 +141,10 @@ Example: configureWithInteractionContextCompletion
 voltmx.intentExtension.setExtensionsCallbacks(interaction, uicontext, completion);
 {% endhighlight %}
 
-Example: handlerForIntent
+### Example: handlerForIntent
 
-{% highlight voltMx %}function handlerForIntent(intent) {
+{% highlight VoltMx %}
+function handlerForIntent(intent) {
     // Native Function API code
 }
 
@@ -150,9 +153,10 @@ voltmx.intentExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: loadView
+### Example: loadView
 
-{% highlight voltMx %}function loadView() {
+{% highlight VoltMx %}
+function loadView() {
     // Native Function API code
 }
 
@@ -161,9 +165,10 @@ voltmx.intentExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewDidAppear
+### Example: viewDidAppear
 
-{% highlight voltMx %}function viewDidAppear() {
+{% highlight VoltMx %}
+function viewDidAppear() {
     // Native Function API code
 }
 
@@ -172,9 +177,10 @@ voltmx.intentExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewWillAppear
+### Example: viewWillAppear
 
-{% highlight voltMx %}function viewWillAppear() {
+{% highlight VoltMx %}
+function viewWillAppear() {
     // Native Function API code
 }
 
@@ -183,9 +189,10 @@ voltmx.intentExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewDidDisappear
+### Example: viewDidDisappear
 
-{% highlight voltMx %}function viewDidDisappear() {
+{% highlight VoltMx %}
+function viewDidDisappear() {
     // Native Function API code
 }
 
@@ -195,9 +202,10 @@ voltmx.intentExtension.setExtensionsCallbacks({
 
 {% endhighlight %}
 
-Example: viewWillDisappear
+### Example: viewWillDisappear
 
-{% highlight voltMx %}function viewWillDisappear() {
+{% highlight VoltMx %}
+function viewWillDisappear() {
     // Native Function API code
 }
 
@@ -206,29 +214,29 @@ voltmx.intentExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 When setting the callback function for `handlerForIntent`, the callback function takes a parameter named `intent`. This parameter contains an intent object of type INIntent class that encapsulates the request coming from Siri.
 
 When setting the callback function for `configureWithInteractionContextCompletion`, the callback function takes the following parameters.
 
-_interaction_
+**_interaction_**
 
 An object that contains the intent and response objects. Use the information in this object to configure the content of your view controller’s view. For some types of interactions, only an intent object is available.
 
-_uiContext_
+**_uiContext_**
 
 An object that holds context in which your view controller is displayed. Use this parameter to determine whether your view controller is to be displayed in the Maps or Siri interface. You can customize your view controller accordingly for each interface.
 
-_completion_
+**_completion_**
 
 The block to execute when you finish configuring your view controller. You must execute this block at some point in your implementation of this method. This block has no return value and takes a parameter named _desiredSize_ that sets the size you want applied to the view controller’s view. Specify a value that is between the allowed minimum and maximum size, which you can get from the view controller associated extension object. Specify CGRectZero to hide your view controller’s content altogether
 
-Platform Availability
+### Platform Availability
 
 iOS.only
 

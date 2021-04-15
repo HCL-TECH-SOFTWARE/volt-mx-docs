@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_api_dev_guide"
 ---
-                            
-
 
 voltmx.crypto Namespace
 =====================
@@ -15,17 +13,20 @@ Functions
 
 The voltmx.crypto namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)voltmx.crypto.asymmetricEncrypt](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.crypto.asymmetricEncrypt</summary>
 
 * * *
 
 This API encrypts the input string and returns the encrypted text. This API is available from V8 SP3 onwards.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.asymmetricEncrypt(alias, inputstring, propertiesTable)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
@@ -34,9 +35,10 @@ Input Parameters
 | inputstring\[String/ RawBytes\] - Mandatory | The input text to be encrypted. > **_Note:_** RawBytes are only accepted on the Android platform. The content type of the RawBytes must be `voltmx.types.RawBytes.CONTENT_TYPE_CHAR_ARRAY` or `voltmx.types.RawBytes.CONTENT_TYPE_BYTE_ARRAY`. |
 | propertiesTable \[Object\] - Mandatory | The applicable values for this parameter are as follows: **transformation** (String): The cipher transformation to be used. Possible transformation values are as follows:For iOSRSA:rawRSA:PKCS1RSA:OAEP:SHA1RSA:OAEP:SHA224RSA:OAEP:SHA256RSA:OAEP:SHA384RSA:OAEP:SHA512RSA:OAEP:SHA1:AESGCMRSA:OAEP:SHA224:AESGCMRSA:OAEP:SHA256:AESGCMRSA:OAEP:SHA384:AESGCMRSA:OAEP:SHA512:AESGCMFor Android and Windows"RSA/ECB/PKCS1Padding""RSA/ECB/OAEPWithSHA-1AndMGF1Padding""RSA/ECB/OAEPWithSHA-224AndMGF1Padding""RSA/ECB/OAEPWithSHA-256AndMGF1Padding""RSA/ECB/OAEPWithSHA-384AndMGF1Padding""RSA/ECB/OAEPWithSHA-512AndMGF1Padding""RSA/ECB/OAEPPadding""RSA/NONE/NoPadding""RSA/NONE/PKCS1Padding""RSA/NONE/OAEPWithSHA-1AndMGF1Padding""RSA/NONE/OAEPWithSHA-224AndMGF1Padding""RSA/NONE/OAEPWithSHA-256AndMGF1Padding""RSA/NONE/OAEPWithSHA-384AndMGF1Padding""RSA/NONE/OAEPWithSHA-512AndMGF1Padding""RSA/NONE/OAEPPadding" |
 
-Example
+### Example
 
-{% highlight voltMx %}asymmetricEncrypt: function() {
+{% highlight VoltMx %}
+asymmetricEncrypt: function() {
     var key = this.view.tbxasyencrypt.text;
 
     //#ifdef iphone
@@ -56,11 +58,11 @@ Example
 },
 {% endhighlight %}
 
-Return Value
+### Return Value
 
 rawbytes \[Object\] - The rawbytes for the encrypted version of the input text.
 
-Limitations
+### Limitations
 
 *   RSA can only encrypt data to a maximum amount of your keysize (256 bytes) – padding)/header data.
 *   keytype is not considered for Android.
@@ -79,7 +81,7 @@ Limitations
     
 *   For iOS, this API works on devices with iOS 10 or later.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -87,17 +89,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)voltmx.crypto.asymmetricDecrypt](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.asymmetricDecrypt</summary>
 
 * * *
 
 This API decrypts the input encrypted string. This API is available from V8 SP3 onwards.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.asymmetricDecrypt(alias, encryptedContent, propertiesTable)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
@@ -106,9 +111,10 @@ Input Parameters
 | encryptedContent \[Object\] - Mandatory | An object that contains the encrypted text to be decrypted. |
 | propertiesTable \[Object\] - Mandatory | The applicable values for this parameter are as follows: **transformation (String)**: The cipher transformation to be used. Possible transformation values are as follows: For iOS RSA:raw RSA:PKCS1 RSA:OAEP:SHA1 RSA:OAEP:SHA224 RSA:OAEP:SHA256 RSA:OAEP:SHA384 RSA:OAEP:SHA512 RSA:OAEP:SHA1:AESGCM RSA:OAEP:SHA224:AESGCM RSA:OAEP:SHA256:AESGCM RSA:OAEP:SHA384:AESGCM RSA:OAEP:SHA512:AESGCM For Android and Windows"RSA/ECB/PKCS1Padding""RSA/ECB/OAEPWithSHA-1AndMGF1Padding""RSA/ECB/OAEPWithSHA-224AndMGF1Padding""RSA/ECB/OAEPWithSHA-256AndMGF1Padding""RSA/ECB/OAEPWithSHA-384AndMGF1Padding""RSA/ECB/OAEPWithSHA-512AndMGF1Padding""RSA/ECB/OAEPPadding""RSA/NONE/NoPadding""RSA/NONE/PKCS1Padding""RSA/NONE/OAEPWithSHA-1AndMGF1Padding""RSA/NONE/OAEPWithSHA-224AndMGF1Padding""RSA/NONE/OAEPWithSHA-256AndMGF1Padding""RSA/NONE/OAEPWithSHA-384AndMGF1Padding""RSA/NONE/OAEPWithSHA-512AndMGF1Padding""RSA/NONE/OAEPPadding" **decryptToRawBytes**: An optional Boolean value that specifies whether the input content must be decrypted to RawBytes. > **_Note:_** If you enable the decryptToRawBytes property, the decrypted text does not appear in the application memory in the String format. If the value is true, the encrypted input content is decrypted to RawBytes of the type voltmx.types.RawBytes.CONTENT\_TYPE\_BYTE\_ARRAY.If the value is false, the encrypted input content is decrypted to a String. > **_Note:_** This parameter is only available on the Android platform. |
 
-Example
+### Example
 
-{% highlight voltMx %}asymmetricDecrypt: function() {
+{% highlight VoltMx %}
+asymmetricDecrypt: function() {
     if (voltmx.os.deviceInfo().name == "iPhone") {
         var decryptedForiOS = voltmx.crypto.asymmetricDecrypt("VoltMX", encryptedobject, {
             "transformation": "RSA:OAEP:SHA1"
@@ -123,13 +129,11 @@ Example
 },
 {% endhighlight %}
 
-Return Value \[String\]
+### Return Value \[String\]
 
 Returns the decrypted/cipher text.
 
-  
-
-Limitations
+### Limitations
 
 *   transformation is not considered for Windows.
 *   keytype is not considered for Android
@@ -139,7 +143,7 @@ Limitations
 *   OAEPPadding transformations are not supported on all Android devices, as there is no documentation from Android for this limitation.
 *   For iOS, this API works on devices with iOS 10 or later.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -147,30 +151,33 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.createHash](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.createHash</summary>
 
 * * *
 
 This function provides your app with the ability to create a hash value in hexadecimal format for a given input string using a specified algorithm.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.createHash(  
     algo,  
     inputstring,options)
+{% endhighlight %}
 
-Input Parameters
-
-  
+### Input Parameters
+ 
 | Parameters | Description |
 | --- | --- |
 | algo \[String\] | The algorithm to be used for creating the hash value. For details, see the **Remarks** section below. |
 | inputstring \[String/ RawBytes\] | The data to be hashed. > **_Note:_** RawBytes are only accepted on the Android platform. The content type of the RawBytes must be `voltmx.types.RawBytes.CONTENT_TYPE_CHAR_ARRAY` or `voltmx.types.RawBytes.CONTENT_TYPE_BYTE_ARRAY`. |
 | options \[Dictionary\] - Optional | An optional parameter of type dictionary that contains key-value pairs. Following is a list of the supported keys: **returnBase64String**: When you set the value of this key as true, the API returns a base64encoded string. If the value is set as false (or not specified), the API returns a Hexadecimal String. |
 
-Example
+### Example
 
-{% highlight voltMx %}createHash: function() {  
+{% highlight VoltMx %}
+createHash: function() {  
 var algo="sha256";  
 var inputstr="pleasecreatehash";  
  var options = {"returnBase64String":"true"};  
@@ -179,7 +186,7 @@ voltmx.print(“hash value ::”+myHashValue);
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 This function returns a string containing the hash value of the _inputstring_ parameter created using the algorithm specified in the _algo_ parameter. This string is in hexadecimal format. The length of the string in bytes is as follows.
 
@@ -195,9 +202,7 @@ This function returns a string containing the hash value of the _inputstring_ pa
 | md4 | 16 | 32 |
 | md5 | 16 | 32 |
 
-  
-
-Exceptions
+### Exceptions
 
 If an error occurs, this function throws on of the following errors.
 
@@ -211,9 +216,7 @@ If an error occurs, this function throws on of the following errors.
 | 2006 | The specified name already exists. |
 | 2007 | A key with the specified unique ID is not found. |
 
-  
-
-Remarks
+### Remarks
 
 The `voltmx.crypto.createHash` function encrypts data by creating a hash of it. The first parameter to this function specifies the cipher. or the encryption algorithm, to use on the data. The _algo_ parameter can be one of the following values.
 
@@ -232,26 +235,29 @@ The `voltmx.crypto.createHash` function encrypts data by creating a hash of it. 
 
 > **_Note:_** md5, sha1, sha256, sha384, and sha512 are supported for Windows.
 
-Platform Availability
+### Platform Availability
 
-Available on all platforms.
+    Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.createHMacHash](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.createHMacHash</summary>
 
 * * *
 
 This function generates a hash-based message authentication code (HMAC) that verifies the data integrity and authenticity of the data.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.createHMacHash(  
     algo,  
     key,  
     message,options)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
@@ -261,9 +267,10 @@ Input Parameters
 | message \[String/ RawBytes\] | The plain text message for which the hash is generated. > **_Note:_** RawBytes are only accepted on the Android platform. The content type of the RawBytes must be `voltmx.types.RawBytes.CONTENT_TYPE_CHAR_ARRAY` or `voltmx.types.RawBytes.CONTENT_TYPE_BYTE_ARRAY`. |
 | options \[Dictionary\] - Optional | An optional parameter of type dictionary that contains key-value pairs. Following is a list of the supported keys: **returnBase64String**: When you set the value of this key as true, the API returns a base64encoded string. If the value is set as false (or not specified), the API returns a Hexadecimal String. |
 
-Example
+### Example
 
-{% highlight voltMx %}createHMacHash: function() {  
+{% highlight VoltMx %}
+createHMacHash: function() {  
     var algo = "sha1";  
     var message="test message to generate hash ";  
     var key=”key1”  
@@ -273,7 +280,7 @@ Example
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 This function returns a string that holds the hash value created using the specified algorithm for the given input string. This string is in a hexadecimal format. The length of the string in bytes is as follows.
 
@@ -289,9 +296,7 @@ This function returns a string that holds the hash value created using the speci
 | md4 | 16 | 32 |
 | md5 | 16 | 32 |
 
-  
-
-Exceptions
+### Exceptions
 
 This function throws the following exceptions.
 
@@ -304,9 +309,7 @@ This function throws the following exceptions.
 | 105 | A mandatory algorithm parameter is missing. |
 | 109 | The specified item could not be found. |
 
-  
-
-Remarks
+### Remarks
 
 The following table lists algorithms supported for each platform.
 
@@ -325,28 +328,31 @@ On Android, the _Bundle OpenSSL Library_ option is available in the **Applicatio
 
 If the device under testing does not support a the hashing algorithm your app selects, this function throws an exception.
 
-Platform Availability
+### Platform Availability
 
-Available on iOS and Android.
+    Available on iOS and Android.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.createPBKDF2Key](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.createPBKDF2Key</summary>
 
 * * *
 
 The `voltmx.crypto.createPBKDF2Key` function creates a Password-Based Key Derivation Function 2 (PBKDF2) key for protecting passwords and other similar tasks.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.createPBKDF2Key(  
     algo,  
     password,  
     salt,  
     iteration,  
     klen)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
@@ -357,11 +363,10 @@ Input Parameters
 | iteration | A number that specifies the desired number of iterations. Should be at least 10,000, as per NIST standards. |
 | klen | An optional numeric parameter that specifies the desired length of the derived key in bits. If the key length is not specified, this value defaults to 256-bits. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}createPBKDF2KEY: function() {
+{% highlight VoltMx %}
+createPBKDF2KEY: function() {
     var algo = "SHA1";
     var password = this.view.txtPBKDF2Key.text;
     var PBKDF2Key = voltmx.crypto.createPBKDF2Key(algo, password, "salt", 10000, 256);
@@ -369,11 +374,11 @@ Example
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns the key created using the PBKDF2 algorithm.
 
-Exceptions
+### Exceptions
 
 The following table shows the error codes for the exceptions that this function throws, as well as their descriptions .
 
@@ -386,9 +391,7 @@ The following table shows the error codes for the exceptions that this function 
 | 105 | Sub algorithm parameter is mandatory |
 | 109 | The specified item could not be found. |
 
-  
-
-Remarks
+### Remarks
 
 > **_Note:_** voltmx.crypto.createPBKDF2Key API does not support md5 algorithm from Volt MX IrisV8 release.
 
@@ -412,27 +415,30 @@ In Android, the _Bundle OpenSSL Library_ option is available in **Application Pr
 
 If the _klen_ parameter is provided to this function, you must make sure that this key length is supported by a corresponding encryption or decryption algorithm. For aes ciphers, the supported key lengths are 128, 192, or 256 bits. For tripledes ciphers, the possible key length is 192.
 
-Platform Availability
+### Platform Availability
 
 Available in iOS, Android , and Windows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.decrypt](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.decrypt</summary>
 
 * * *
 
 This function provides the ability to decrypt the encrypted text with the specified key and algorithm. The API returns the decrypted text.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.decrypt(  
     algo,  
     generatedkey,  
     encryptedRawbytes,  
     propertiesTable)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
@@ -442,11 +448,10 @@ Input Parameters
 | encryptedRawbytes | An object that contains the rawbytes of the encrypted text to be decrypted. |
 | propertiesTable \[Table\] - Mandatory | A JavaScript object that contains key-value pairs necessary for decryption. For details, see the **Remarks** section below. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}decrypt: function() {
+{% highlight VoltMx %}
+decrypt: function() {
     try {
         var algo = "aes";
         var myEncryptedTextRa = "";
@@ -486,11 +491,11 @@ Example
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns a string chat holds the clear text decrypted from the encrypted rawbytes.
 
-Exceptions
+### Exceptions
 
 **CryptoError:** Thrown by Crypto API.Various error conditions related to CryptoError will be covered through the following error codes.
 
@@ -502,7 +507,7 @@ Exceptions
 *   2006 - specified name already exists.
 *   2007 - key with the specified unique ID is not found.
 
-Remarks
+### Remarks
 
 The values that your app can use for the _algo_ parameter are as follows.
 
@@ -512,7 +517,6 @@ The values that your app can use for the _algo_ parameter are as follows.
 | tripledes | Selects Triple DES encryption. Not available on Windows platforms. |
 | rsa | Selects RSA encryption. |
 
-  
 
 The JavaScript object in the _propertiesTable_ parameter must have the following format.
 
@@ -537,52 +541,53 @@ The `padding` property of the object that is passed into this function through t
 
 For more information on padding, modes, and initialization vectors, see [Concepts](cryptography.html#concepts) in the [Cryptography API overviews](cryptography.html).
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except J2ME.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.deleteKey](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.deleteKey</summary>
 
 * * *
 
 This API provides you the ability to delete a key from the device store.
 
-Use Cases
+### Use Cases
 
 You can delete the key from the device store if you are sure that you do not need that key anymore in the application.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.deleteKey([uniqueID](#uniqueID))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameters |   |
 | --- | --- |
 | uniqueID \[String\] - Mandatory | Unique ID represents the key on the device store (this is the ID returned by voltmx.crypto.saveKey API). |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}deleteKey: function() {
+{% highlight VoltMx %}
+deleteKey: function() {
     voltmx.crypto.deleteKey(saveKey);
     this.view.lblKey.text = "The key is deleted";
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-API Usage
+### API Usage
 
 You can use this API only to delete the keys that you have saved earlier on the device store,which is keys that have a unique ID associated with it.
 
-Exceptions
+### Exceptions
 
 **CryptoError:** Thrown by Crypto API.Various error conditions related to CryptoError will be covered through the following error codes.
 
@@ -594,7 +599,7 @@ Exceptions
 *   2006 - specified name already exists.
 *   2007 - key with the specified unique ID is not found.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -602,7 +607,8 @@ Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.encrypt](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.encrypt</summary>
 
 * * *
 
@@ -610,7 +616,7 @@ Converting data into an encoded format using a key is known as _encryption_. Enc
 
 This API provides the ability to encrypt the input text with the specified key and algorithm. The rawbytes of the encrypted text are returned.
 
-Use Cases
+### Use Cases
 
 You need to use encryption when you pass sensitive data like:
 
@@ -619,17 +625,20 @@ You need to use encryption when you pass sensitive data like:
 *   account information
 *   credit card information, and so on.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.encrypt([algo](#algo_encrypt), [generatedkey](#generatedkey), [inputstring](#inputstring_encrypt), [propertiesTable](#propertiesTable_encrypt))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-<table style="margin-left: 0;margin-right: auto;"><colgroup><col> <col></colgroup><tbody><tr><td><a name="algo encrypt"></a>algo [String] - Mandatory</td><td>Specifies the algorithm using which the input string needs to be encrypted. Possible values are : aes tripledes rsa tripledes algorithm is not supported in Windows Platforms.</td></tr><tr><td><a name="generatedkey"></a>generatedkey [Object] - Mandatory</td><td>The key to be used for encryption. On Windows, this parameter is the name of the certificate that is included in the root directory of the Windows package, in “resources/common” <span class="MyVariablesMADP">VoltMX Iris</span>. On all other platforms, this API accepts the key generated using the voltmx.crypto.newKey and voltmx.crypto.createPBKDF2Key APIs. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>The voltmx.crypto.createPBKDF2Key API is supported on iOS,&nbsp;Windows, and Android platforms.</td></tr><tr><td><a name="inputstring encrypt"></a>inputstring [String/ RawBytes] - Mandatory</td><td>Data that must be encrypted. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span><a name="RawBytes"></a>RawBytes are only accepted on the Android platform. The content type of the RawBytes must be <code class="codefirst">voltmx.types.RawBytes.CONTENT_TYPE_CHAR_ARRAY</code> or <code class="codefirst">voltmx.types.RawBytes.CONTENT_TYPE_BYTE_ARRAY</code>.</td></tr><tr><td><a name="propertiesTable encrypt"></a>propertiesTable [Table] - Mandatory</td><td><span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This parameter is ignored in Windows. This Object contains the following key-value pairs: <b>padding</b> - a string that denotes the padding that needs to be applied. <b>mode</b> - a string that denotes the encryption mode. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This value is ignored for the rsa algorithm. <b>initializationvector</b> - a string that denotes the Initialization Vector to be used. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This parameter is applicable only if the subalgo is aes or tripledes.</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;"><colgroup><col> <col></colgroup><tbody><tr><td><a name="algo encrypt"></a>algo [String] - Mandatory</td><td>Specifies the algorithm using which the input string needs to be encrypted. Possible values are : aes tripledes rsa tripledes algorithm is not supported in Windows Platforms.</td></tr><tr><td><a name="generatedkey"></a>generatedkey [Object] - Mandatory</td><td>The key to be used for encryption. On Windows, this parameter is the name of the certificate that is included in the root directory of the Windows package, in “resources/common” <span class="MyVariablesMADP">Volt MX Iris</span>. On all other platforms, this API accepts the key generated using the voltmx.crypto.newKey and voltmx.crypto.createPBKDF2Key APIs. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>The voltmx.crypto.createPBKDF2Key API is supported on iOS,&nbsp;Windows, and Android platforms.</td></tr><tr><td><a name="inputstring encrypt"></a>inputstring [String/ RawBytes] - Mandatory</td><td>Data that must be encrypted. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span><a name="RawBytes"></a>RawBytes are only accepted on the Android platform. The content type of the RawBytes must be <code class="codefirst">voltmx.types.RawBytes.CONTENT_TYPE_CHAR_ARRAY</code> or <code class="codefirst">voltmx.types.RawBytes.CONTENT_TYPE_BYTE_ARRAY</code>.</td></tr><tr><td><a name="propertiesTable encrypt"></a>propertiesTable [Table] - Mandatory</td><td><span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This parameter is ignored in Windows. This Object contains the following key-value pairs: <b>padding</b> - a string that denotes the padding that needs to be applied. <b>mode</b> - a string that denotes the encryption mode. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This value is ignored for the rsa algorithm. <b>initializationvector</b> - a string that denotes the Initialization Vector to be used. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This parameter is applicable only if the subalgo is aes or tripledes.</td></tr></tbody></table>
 
-Examples  
+### Examples  
 
-{% highlight voltMx %}Encrypt: function() {
+{% highlight VoltMx %}
+Encrypt: function() {
     try {
         var algo = "aes";
         var inputstr = "";
@@ -670,13 +679,13 @@ Examples
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 rawbytes \[Object\] - userdata
 
 The rawbytes for the encrypted version of the input text.
 
-Exceptions
+### Exceptions
 
 **CryptoError:** Thrown by Crypto API.Various error conditions related to CryptoError will be covered through the following error codes.
 
@@ -688,32 +697,36 @@ Exceptions
 *   2006 - specified name already exists.
 *   2007 - key with the specified unique ID is not found.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.generateAsymmetricKeyPair](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.generateAsymmetricKeyPair</summary>
 
 * * *
 
 This API is used to generate public and private keys for encryption and decryption processes. Typically, you can use the Public key to verify the digital signature and plain text data, whereas you can use the Private key to create a digital signature and to decrypt the text. This API is available from V8 SP3 onwards.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.generateAsymmetricKeyPair(propertiesTable)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
 | --- | --- |
 | propertiesTable \[Object\] - Mandatory | A key-value pair that you can use to generate asymmetric key pairs. The following input values are applicable for this parameter: **alias** (String) \[Mandatory\]: UTF-8 string. **keysize** (number): Size of the key that is to be generated by using this API. **cipher** \[String\]: The cipher algorithm to be used. The applicable value is RSA. **publicexponent** \[odd integer\]: The recommended value is 65337. **padding** \[bytes\]: For RSA algorithm, the possible padding modes are PKCS1, OAEP, and None. The recommended value is OAEP. The maximum byte lengths for the padding input value are as follows: PKCS1: < b - 11 OAEP: < b - 41 None: < b **mode** \[String\]: Block mode. The possible values are ECB and you can also pass an empty string to use the platform default mode. **digest** \[String\]: The hashing algorithm to be used. The possible values are SHA-1, SHA-256, SHA-224, SHA-384, and SHA-512. |
 
-Example
+### Example
 
-{% highlight voltMx %}generateAsymmetricKeyPair: function() {
+{% highlight VoltMx %}
+generateAsymmetricKeyPair: function() {
     var isGenerated = voltmx.crypto.generateAsymmetricKeyPair({
         "alias": "VoltMX",
         "algo": "RSA",
@@ -732,7 +745,7 @@ Return Value \[Boolean\]
 
 Status of the key value generation.
 
-Limitations
+### Limitations
 
 *   For iOS
     *   publicexponent, padding, digest, and mode are not considered for key generation.
@@ -755,7 +768,7 @@ Limitations
     *   Typical key sizes are 512 bits, 1024 bits, 2048 bits, or 4096 bits.
         
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -763,17 +776,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.generateSecureRandom](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.generateSecureRandom</summary>
 
 * * *
 
 This API is used to generate cryptographically secure random numbers. This API is available from V8 SP3 onwards.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.generateSecureRandom(propertiesTable)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
@@ -783,9 +799,10 @@ Input Parameters
 *   **type** \[String\]: The possible values for the type key are 'bytes' and 'base64.'
 *   **size** \[bytes\]: The length of the random key to be generated.
 
-Example
+### Example
 
-{% highlight voltMx %}voltmx.crypto.generateSecureRandom({
+{% highlight VoltMx %}
+voltmx.crypto.generateSecureRandom({
     type:”bytes”, 
     size: < length >
 });
@@ -795,13 +812,13 @@ Return Value \[Object\]
 
 Secure random key of the bytes array or Base64 string of the specified length.
 
-Limitations
+### Limitations
 
 *   For Android
     *   This API does not work on devices with API level earlier than 18.
         
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -809,7 +826,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.newKey](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.newKey</summary>
 
 * * *
 
@@ -819,11 +837,13 @@ Use Case
 
 You can use this API to generate cryptographic keys when you want to transmit information in a secured manner over the private or public networks.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.newKey([algo](#algo), [keystrength](#keystrength), [propertiesTable](#propertiesTable))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
@@ -835,9 +855,10 @@ Input Parameters
  |
 | propertiesTable \[Table\] - Mandatory | _passphrasetext_ \[Array of Strings \]- the exact passphrase using which the key needs to be generated if the scheme is _passphrase_.> **_Note:_** This value in the table is mandatory only if the scheme is _passphrase_. If the subalgo is aes, it contains a single string, whereas if the subalgo is tripledes, it contains three strings.For example: for _aes_, passphrasetext = {"inputstring1"}for _tripledes_, passphrasetext = \["TestStr1","TestStr2","TestStr3"\]> **_Note:_** _passphrase_ should contain at least 3 characters (24 bytes), else the API throws an _illegalargument_ exception.> **_Note:_** _tripledes_ - in Android, if the passphrase length is less than 24 bytes or greater than 24 bytes an exception will be thrown with error message Invalid Keystrength and error code 104. _subalgo_ - represents the key algorithm that is used to create the key. This is a mandatory parameter (irrespective of the scheme). Possible values are: _aes_ and _tripledes_. _passphrasehashlogo_ - hashing algorithm to be applied for the passphrase text. (applicable only on iPhone). > **_Note:_** This value in the table is applicable only if the scheme is _passphrase_.Possible values for the hash algorithm are: _md2_ (for key strength of 128)_md4_ (for key strength of 128)_md5_ (for key strength of 128)_sha2_ (for key strength of 256) |
 
-Example
+### Example
 
-{% highlight voltMx %}createNewKey: function() {
+{% highlight VoltMx %}
+createNewKey: function() {
     newKey = voltmx.crypto.newKey("passphrase", 128, {
         passphrasetext: ["inputstring1"],
         subalgo: "aes",
@@ -847,7 +868,7 @@ Example
 },
 {% endhighlight %}
 
-Exceptions
+### Exceptions
 
 **CryptoError:** Thrown by Crypto API.Various error conditions related to CryptoError will be covered through the following error codes.
 
@@ -859,7 +880,7 @@ Exceptions
 *   2006 - specified name already exists.
 *   2007 - key with the specified unique ID is not found.
 
-Return Values
+### Return Values
 
 The following are the return values for this API:
 
@@ -867,20 +888,21 @@ _key \[userdata\] - object_
 
 The key that is created using the specified algorithm.
 
-API Usage
+### API Usage
 
 The recommended key strengths are as follows for this API:
 
 *   _aes_ - 128
 *   _tripledes_ - 192.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except J2ME.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.readKey](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.readKey</summary>
 
 * * *
 
@@ -896,20 +918,23 @@ Use Cases
 
 You can read the key from the device store if you want to use that key for encryption or decryption.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.readKey([uniqueID](#uniqueID_Read))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
 | --- | --- |
 | uniqueID \[String\] - Mandatory | Unique ID represents the key on the device store (this is the ID returned by voltmx.crypto.saveKey API). |
 
-Example
+### Example
 
-{% highlight voltMx %}readKey: function() {
+{% highlight VoltMx %}
+readKey: function() {
     var read = voltmx.crypto.readKey(saveKey);
     this.view.lblKey.text = JSON.stringify(read);
 }
@@ -927,7 +952,7 @@ The following values are supported:
 *   constants.VOLTMX\_KEYCHAIN\_ITEM\_ACCESSIBLE\_AFTER\_FIRST\_UNLOCK: The data in the keychain item cannot be accessed after a restart until the device has been unlocked once by the user.
 *   constants.VOLTMX\_KEYCHAIN\_ITEM\_ACCESSIBLE\_AFTER\_FIRST\_UNLOCK\_THIS\_DEVICE\_ONLY: The data in the keychain item cannot be accessed after a restart until the device has been unlocked once by the user.
 
-Return Values
+### Return Values
 
 The following are the return values for this API:
 
@@ -935,11 +960,11 @@ key \[rawbytes - object\]
 
 This key is generated using aes, tripledes, or RSA algorithms and saved on the device store.
 
-API Usage
+### API Usage
 
 You can use this API only to read the keys that you have saved earlier on the device store, i.e., keys that have a unique ID associated with them.
 
-Exceptions
+### Exceptions
 
 **CryptoError:** Thrown by Crypto API.Various error conditions related to CryptoError will be covered through the following error codes.
 
@@ -951,32 +976,36 @@ Exceptions
 *   2006 - specified name already exists.
 *   2007 - key with the specified unique ID is not found.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)voltmx.crypto.retrieveAsymmetricPublicKey](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.retrieveAsymmetricPublicKey</summary>
 
 * * *
 
 This API returns the public key for the alias that you provide. This API is available from V8 SP3 onwards.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.retrieveAsymmetricPublicKey(alias)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
 | --- | --- |
 | alias \[String\] | The alias value generated by using [generateAsymmetricKeyPair API.](#generateAsymmetricKeyPair) |
 
-Example
+### Example
 
-{% highlight voltMx %}retrieveAsymmetricKey: function() {
+{% highlight VoltMx %}
+retrieveAsymmetricKey: function() {
     var key = voltmx.crypto.retrieveAsymmetricPublicKey("VoltMX");
     alert("The Asymmetric key is " + key);
 }
@@ -986,14 +1015,14 @@ Return Value \[String\]
 
 Returns the public part of the asymmetric key-pair for the provided alias.
 
-Limitations
+### Limitations
 
 *   For iOS
     *   This API works on devices with iOS 10 or later.
 *   For Android
     *   This API does not work on devices with API level earlier than 18.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1001,7 +1030,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.retrievePublicKey](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.retrievePublicKey</summary>
 
 * * *
 
@@ -1011,11 +1041,14 @@ Public Key Infrastructure (PKI) is the mechanism to secure the public networks (
 
 This API provides the ability to extract the public key from a base64 string of encoded X509 certificate or a locally packaged X509 certificate.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.retrievePublicKey([algo](#algo_retrievepk), [inputsource](#inputsource_retrievepk), [islocalresource](#islocalresource_retrievepk))
 
-Input Parameters
+{% endhighlight %}
+
+### Input Parameters
 
   
 | Parameters | Description |
@@ -1024,23 +1057,24 @@ Input Parameters
 | inputsource \[String\] - Mandatory | This parameter indicates the name of the input source certificate from which the key needs to be retrieved. > **_Note:_** The certificate must be present in the resources folder. > **_Note:_** In case of the Android platform, place the .cer file at the ../resources/mobile/native/android/assets/ location. |
 | islocalresource \[Boolean\] - Mandatory | This flag defines how the inputsource string needs to be interpreted. islocalresource is **false** - represents that the input source is base64 string of X509 certificate. islocalresource is **true** - represents that the input source is name of the local resource for the certificate. For example, _public.cer_. |
 
-Example
+### Example
 
-{% highlight voltMx %}var myKey = voltmx.crypto.retrievePublicKey("rsa", "public.cer", true);
+{% highlight VoltMx %}
+var myKey = voltmx.crypto.retrievePublicKey("rsa", "public.cer", true);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 publickey - userdata \[Object\]
 
 The public key extracted from the certificate.
 
-Rules and Restrictions
+### Rules and Restrictions
 
 *   Self-signed certificates are not supported on Android.
 *   iOS supports only Distinguished Encoding Rules (DER) representation of an X.509 certificate, when input source is certificate.
 
-Exceptions
+### Exceptions
 
 **CryptoError:** Thrown by Crypto API.Various error conditions related to CryptoError will be covered through the following error codes.
 
@@ -1052,13 +1086,14 @@ Exceptions
 *   2006 - specified name already exists.
 *   2007 - key with the specified unique ID is not found.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Windows, Service Side Mobile Web, Desktop Web, and SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.crypto.saveKey](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.crypto.saveKey</summary>
 
 * * *
 
@@ -1066,13 +1101,15 @@ This function allows your app to save a generated key on the device's storage.
 
 > **_Note:_** From V8 SP4 onwards, the saveKey data for a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.crypto.saveKey(  
     name,  
     key)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameters | Description |
@@ -1080,9 +1117,10 @@ Input Parameters
 | name | A string that specifies a unique name with which you want to save the key on the device store. |
 | key | An object that holds the key that you want to save on the device. |
 
-Example  
+### Example  
 
-{% highlight voltMx %}saveTheKey: function() {
+{% highlight VoltMx %}
+saveTheKey: function() {
     saveKey = voltmx.crypto.saveKey("SavedKey", newKey, constants.VOLTMX_KEYCHAIN_ITEM_ACCESSIBLE_WHEN_UNLOCKED);
     this.view.lblKey.text = "The Key is Saved";
 },
@@ -1090,7 +1128,7 @@ Example
 
 The **constants.VOLTMX\_KEYCHAIN\_ITEM\_ACCESSIBLE\_WHEN\_UNLOCKED** parameter is an optional parameter. It indicates when a keychain item is accessible.
 
-The following values are supported:
+### The following values are supported:
 
 *   constants.VOLTMX\_KEYCHAIN\_ITEM\_ACCESSIBLE\_WHEN\_UNLOCKED : The data in the keychain item can be accessed when a device is unlocked by the user.
 *   constants.VOLTMX\_KEYCHAIN\_ITEM\_ACCESSIBLE\_WHEN\_UNLOCKED\_THIS\_DEVICE\_ONLY: The data in the keychain item can be accessed only when a specific device is unlocked by the user.
@@ -1100,11 +1138,11 @@ The following values are supported:
 *   constants.VOLTMX\_KEYCHAIN\_ITEM\_ACCESSIBLE\_AFTER\_FIRST\_UNLOCK: The data in the keychain item cannot be accessed after a restart until the device has been unlocked once by the user.
 *   constants.VOLTMX\_KEYCHAIN\_ITEM\_ACCESSIBLE\_AFTER\_FIRST\_UNLOCK\_THIS\_DEVICE\_ONLY: The data in the keychain item cannot be accessed after a restart until the device has been unlocked once by the user.
 
-Return Values
+### Return Values
 
 Returns a string containing a unique ID that represents the saved key on the device's storage. Your app can access the key from the device's storage using this unique ID. The unique ID is determined by the system. On some platforms it might be the same as the name in the name parameter. However, that is not the case on all platforms.
 
-Exceptions
+### Exceptions
 
 **CryptoError:** Thrown by Crypto API.Various error conditions related to CryptoError will be covered through the following error codes.
 
@@ -1120,7 +1158,7 @@ Exceptions
 
   
 
-Remarks
+### Remarks
 
 Your app can use this function to save the generated symmetric keys. If a key does not exist with the given name, this function creates a key. If a key exists with the given name, this function saves the key onto the device's storage.
 
@@ -1130,10 +1168,11 @@ In Android, the voltmx.crypto.saveKey saves the crypto key in the application's 
 
 > **_Important:_** To avoid accidentally overwriting one application's keys by another application, Volt MX Iris recommends that your app use a unique application-specific identifier while saving and reading keys.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
+</details>
 
 ![](resources/prettify/onload.png)

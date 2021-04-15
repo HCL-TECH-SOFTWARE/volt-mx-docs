@@ -10,7 +10,8 @@ Constants
 
 The Battery API, which belongs to the [voltmx.os Namespace](voltmx.os_constants.html), contains the following types of constants.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Battery State Constants](javascript:void(0);) 
+
+<details close markdown="block"><summary>Battery State Constants</summary> 
 
 * * *
 
@@ -25,11 +26,12 @@ These constants specify the current state of the device battery.
 
   
 
-Example
+### Example
 
 When you query for the state of the device battery as shown in this example, any of the four available battery states is returned.
 
-{% highlight voltMx %}var batteryState = voltmx.os.getBatteryState();
+{% highlight VoltMx %}
+var batteryState = voltmx.os.getBatteryState();
 
 if (voltmx.os.BATTERY_STATE_CHARGING == batteryState) {
 
@@ -37,7 +39,7 @@ if (voltmx.os.BATTERY_STATE_CHARGING == batteryState) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android

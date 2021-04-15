@@ -9,25 +9,28 @@ AppWindow Properties
 
 The AppWindow object contains the following properties.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[buttonsFocusSkin Property](javascript:void(0);)
+
+<details close markdown="block"><summary>buttonsFocusSkin Property</summary>
 
 * * *
 
 This property applies a skin in the focused state to all the buttons in the title bar (back, maximize, and minimize buttons).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 appwindow.buttonsFocusSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is null (system theme).
 
@@ -35,31 +38,34 @@ Passing a null or empty string resets the property to the system theme.
 
 **BackgroundColor** and **ForegroundColor** are picked from valid skins. The rest of the skin properties are ignored.
 
-Availability
+### Availability
 
 Windows 10
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[buttonsHoverSkin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>buttonsHoverSkin</summary>
 
 * * *
 
 This property applies a skin when the mouse is hovering to all the buttons of the title bar (back, maximize, and minimize buttons).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 appwindow.buttonsHoverSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is null (system theme).
 
@@ -67,38 +73,41 @@ Passing a null or empty string resets the property to the system theme.
 
 **BackgroundColor**and **ForegroundColor** are picked from valid skins. The rest of the skin properties are ignored.
 
-Availability
+### Availability
 
 Windows 10
 
-Example
+**Example**
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var appwindow = voltmx.appication.getAppWindow();
 appwindow.buttonsHoverSkin = "skin1";	
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[buttonsInactiveSkin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>buttonsInactiveSkin</summary>
 
 * * *
 
 This property applies a skin in the inactive state to all the buttons in the title bar (back, maximize, and minimize buttons).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 appwindow.buttonsInactiveSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is null (system theme).
 
@@ -106,76 +115,81 @@ Passing a null or empty string resets the property to the system theme.
 
 **BackgroundColor** and **ForegroundColor**are picked from valid skins. The rest of the skin properties are ignored.
 
-Availability
+### Availability
 
 Windows 10
 
-Example
+**Example**
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var appwindow = voltmx.application.getAppWindow();
 appwindow.buttonsInactiveSkin = "skin1";		
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[buttonsSkin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>buttonsSkin</summary>
 
 * * *
 
 This property applies a skin in a normal state to all the buttons in the title bar (back, maximize, and minimize buttons).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 appwindow.buttonsSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is null (system theme).
 
 Passing a null or empty string resets the property to the system theme. **BackgroundColor** and **ForegroundColor** are picked from valid skins. The rest of the skin properties are ignored.
 
-Availability
+### Availability
 
 Windows 10
 
-Example
+**Example**
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var appwindow = voltmx.application.getAppWindow();
 appwindow.buttonsSkin = "skin1";
-
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showBackButton](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showBackButton</summary>
 
 * * *
 
 This property specifies whether the back button is shown in the title bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 appwindow.showBackButton
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If this property is **true**, the form is checked. If the user is in the first form, the back button will be hidden. Otherwise, the button will be visible.
 
@@ -183,38 +197,41 @@ If the property is **false**, the back button is hidden.
 
 The default value is **false**.
 
-Availability
+### Availability
 
 Windows 10
 
-Example
+**Example**
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var appwindow = voltmx.application.getAppWindow();
 appwindow.showBackButton = true;	
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin</summary>
 
 * * *
 
 This property applies a skin to the entire title bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 appwindow.skin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is null (system theme).
 
@@ -226,35 +243,37 @@ Availability
 
 Windows 10
 
-Example
+**Example**
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var appwindow = voltmx.application.getAppWindow();
 appwindow.skin = "skin1";
-
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[title](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>title</summary>
 
 * * *
 
 This property allows you to customize the title text shown on the title bar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 appwindow.title
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is an empty string.
 
@@ -264,16 +283,18 @@ Pass a null or empty string to reset the title. Set the new title by providing a
 
 The application name will always be displayed on the title bar with the given title added to it.
 
-Availability
+### Availability
 
 Windows 10
 
-Example
+**Example**
 
-{% highlight voltMx %}appwindow.title = "some text";
+{% highlight VoltMx %}
+appwindow.title = "some text";
 appwindow.title = "";
 {% endhighlight %}
 
 * * *
 
 ![](resources/prettify/onload.png)
+</details>

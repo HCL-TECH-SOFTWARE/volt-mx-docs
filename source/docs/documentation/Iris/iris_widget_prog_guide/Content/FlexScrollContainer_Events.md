@@ -12,29 +12,32 @@ FlexScrollContainer widget has the following events associated:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
 This event is invoked for every widget when the widget position and dimensions are computed. This event is invoked for all the widgets placed inside flex containers. This event is invoked in the order in which the widgets are added to the widget hierarchy and expect the frame property of the widget is calculated and available for use within this event.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is used to set the layout properties of child widgets in the relation to self and peer widgets whose layout is not yet performed.
 
 > **_Note:_** The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}
+//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -45,7 +48,7 @@ function doLayoutButton1(){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -54,23 +57,26 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDecelerationStarted Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDecelerationStarted Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user stops scrolling but the content still moves before the content actually stops. This event is invoked asynchronously.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 onDecelerationStarted()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onDecelerationStarted event for a FlexScrollContainer widget.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onDecelerationStarted event for a FlexScrollContainer widget.
 
 myForm.myFlexScroll.onDecelerationStarted=onDecelerationStartedCallback;
 
@@ -79,33 +85,36 @@ function onDecelerationStartedCallback() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 This property is available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the scrolling is ended. This event is invoked asynchronously.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 onScrollEnd ()  
+{% endhighlight %}
 
 source \[widgetref\]
 
 Optional. Handle to the widget reference on which the scrolling is ended.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onScrollEnd event for a FlexScrollContainer widget.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onScrollEnd event for a FlexScrollContainer widget.
 
 myForm.myFlexScroll.onScrollEnd=onScrollEndCallback;
 
@@ -114,7 +123,7 @@ function onScrollEndCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -123,29 +132,32 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrolling Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrolling Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the scrolling is in progress. This event is invoked asynchronously.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 onScrolling (source)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 source \[widgetref\]
 
 Handle to the widget reference on which the scrolling is in progress.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onScrolling event for a FlexScrollContainer widget.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onScrolling event for a FlexScrollContainer widget.
 
 myForm.myFlexScroll.onScrolling=onScrollingCallback;
 
@@ -154,7 +166,7 @@ function onScrollingCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -163,27 +175,30 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user starts scrolling the content. This event is invoked asynchronously.
 
-Syntax
-
-onScrollStart()  
+### Syntax
+{% highlight VoltMx %}
+onScrollStart()
+{% endhighlight %}
 
 source \[widgetref\]
 
 Optional. Handle to the widget reference on which the scrolling has started.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onScrollStart event for a FlexScrollContainer widget.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onScrollStart event for a FlexScrollContainer widget.
 
 myForm.myFlexScroll.onScrollStart=onScrollStartCallback;
 
@@ -192,7 +207,7 @@ function onScrollStartCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -201,27 +216,29 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollTouchReleased Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollTouchReleased Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touch is released from the touch surface. This event is invoked asynchronously.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 onScrollTouchReleased()  
-
+{% endhighlight %}
 source \[widgetref\]
 
 Optional. Handle to the widget reference on which the user touch is released from the display.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onScrollTouchReleased event for a FlexScrollContainer widget.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onScrollTouchReleased event for a FlexScrollContainer widget.
 
 myForm.myFlexScroll.onScrollTouchReleased=onScrollTouchReleasedCallback;
 
@@ -230,7 +247,7 @@ function onScrollTouchReleasedCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -238,23 +255,26 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 onScrollWidgetPosition()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}
+var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -268,36 +288,38 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not Accessible from IDE
 *   Android, iOS, SPA, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onZoomEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onZoomEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the zooming has ended. This event is invoked asynchronously.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 onZoomEnd()
+{% endhighlight %}
 
 source \[widgetref\]
 
 Handle to the widget reference on which the zooming has ended.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 For example, If you have a form with a flexScrollContainer and an image widget inside flexScrollContainer, when you pinch the screen on flexScrollContainer it will call the function configured using widgetToZoom event. If the function returns image, the image will be zoomed.
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 
 function onZoomEndCalBck(flexScrollContainer) {
     //Write your logic here
@@ -309,7 +331,7 @@ myForm.myflexScrollContainer.onZoomEnd = onZoomEndCalBck;
 
 > **_Note:_** This event callback is invoked only when zooming is initiated by user interaction.
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE.
 
@@ -317,29 +339,32 @@ Available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onZooming Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onZooming Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the container is zooming. This event is invoked asynchronously.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 onZooming ()
+{% endhighlight %}
 
 source \[widgetref\]
 
 Optional. Handle to the widget reference on which the zooming has started.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 For example, If you have a form with a flexScrollContainer and an image widget inside flexScrollContainer, when you pinch the screen on flexScrollContainer it will call the function configured using widgetToZoom event. If the function returns image, the image will be zoomed.
 
-{% highlight voltMx %}function onZoomingCalBck(flexScrollContainer) {
+{% highlight VoltMx %}
+function onZoomingCalBck(flexScrollContainer) {
     //Write your logic here.
 }
 myForm.myflexScrollContainer.onZooming = onZoomingCalBck;
@@ -348,21 +373,23 @@ myForm.myflexScrollContainer.onZooming = onZoomingCalBck;
 
 > **_Note:_** This event callback is invoked only when zooming is initiated by user interaction.
 
-Platform Availability
+### Platform Availability
 
 Available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onZoomStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onZoomStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the container is about to zoom. This event is invoked asynchronously.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 onZoomStart()
+{% endhighlight %}
 
 source \[widgetref\]
 
@@ -372,15 +399,15 @@ widget \[widgetref\]
 
 Optional. Specifies the widget that actually zooms.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 For example, If you have a form with a flexScrollContainer and an image widget inside flexScrollContainer, when you pinch the screen on flexScrollContainer it will call the function configured using widgetToZoom event. If the function returns image, the image will be zoomed.
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 
 function onZoomStartCalBck(flexScrollContainer) {
     //Write your logic here
@@ -392,21 +419,23 @@ myForm.myflexScrollContainer.onZoomStart = onZoomStartCalBck;
 
 > **_Note:_** This event callback is invoked only when zooming is initiated by user interaction.
 
-Platform Availability
+### Platform Availability
 
 Available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scrollingEvents Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scrollingEvents Event</summary>
 
 * * *
 
 This event callback is invoked while scrolling the FlexScrollContainer horizontally or vertically. The **scrollingEvents** event is triggered when the FlexScrollContainer is pushed or pulled beyond its horizontal or vertical boundaries.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 scrollingEvents()
+{% endhighlight %}
 
 Events defined in scrollingEvents
 
@@ -432,17 +461,17 @@ _widgetRef_
 
 This parameter references the FlexScrollContainer that triggered the event.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   In SPA and iOS, pull and push events are triggered only when the [bounces](FlexScrollContainer_Properties.html#bounces) property is set as true.
 *   When the [scrollDirection](FlexScrollContainer_Properties.html#scrollDi) Property of the **FlexScrollContainer** is set as vertical, the text provided in the **[pullToRefreshI18NKey](#pullToRefreshI18NKey)** and **[pushToRefreshI18NKey](#pushToRefreshI18NKey)** attributes takes precedence over the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)**.
 *   When the [scrollDirection](FlexScrollContainer_Properties.html#scrollDi) Property of the **FlexScrollContainer** is set as horizontal, only the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)** are displayed.
 
-Limitations
+### Limitations
 
 *   Desktop Web does not support onPull and onPush events.
 *   onPull and onPush events do not work when the [scrollDirection](FlexScrollContainer_Properties.html#scrollDi) Property is set as Both.
@@ -450,7 +479,8 @@ Limitations
 *   In Android, when onPull and onPush events are enabled, the [scrollDirection](FlexScrollContainer_Properties.html#scrollDi) Property cannot be modified in the same FlexForm.
 *   In Android, you cannot enable **scrollingEvents** after navigating to the FlexForm. It must be enabled before navigating to the form.
 
-{% highlight voltMx %}//The following function should be called in the Preshow event of the myForm FlexForm.
+{% highlight VoltMx %}
+//The following function should be called in the Preshow event of the myForm FlexForm.
 function myFormPreShow() {
  myForm.myFlexScroll.scrollingEvents = {
   "onPull": flxPushMethod,
@@ -478,7 +508,7 @@ function flxReachEndMethod(widgetRef) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -487,29 +517,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetToZoom Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetToZoom Event</summary>
 
 * * *
 
 An event callback is invoked by the platform to return one of the child widgets of source to zoom. The returning source itself may not result in zooming the entire source. The container will not zoom, if a null value is returned. This event is invoked asynchronously.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 widgetToZoom()
+{% endhighlight %}
 
 source \[widgetref\]
 
 Optional. Handle to the widget reference on which the zooming has started.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 For example, If you have a form with a flexScrollContainer and an image widget inside flexScrollContainer, when you pinch the screen on flexScrollContainer it will call the function configured using widgetToZoom event. If the function returns image, the image will be zoomed.
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 
 function onWidgetToZoomCalBck(flexScrollContainer) {
     //Write your logic here
@@ -520,7 +552,7 @@ myForm.myflexScrollContainer.widgetToZoom = onWidgetToZoomCalBck;
 
 > **_Note:_** This event callback is invoked only when zooming is initiated by user interaction.
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE.
 

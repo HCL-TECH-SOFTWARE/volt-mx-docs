@@ -28,7 +28,7 @@ Using the SigninWithApple widget, an application user can quickly sign in to an 
 
 > **_Note:_** You must have a paid Apple Developer account to create a SignInWithApple widget. You must also go through the guidelines for apps to be accepted to Appstore in Apple.  
 
-Widgets are normally added to an application using Volt MX Iris through the user interface. However, the SigninWithApple widget can only be added using code. For more information on using widgets in Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Iris_User_Guide.html).
+Widgets are normally added to an application using Volt MX Iris through the user interface. However, the SigninWithApple widget can only be added using code. For more information on using widgets in Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 ### Scenarios where you can use SigninWithApple:
 

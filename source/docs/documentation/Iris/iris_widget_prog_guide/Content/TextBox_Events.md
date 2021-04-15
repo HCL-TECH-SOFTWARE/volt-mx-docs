@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                              
-
 
 TextBox Events
 ==============
@@ -12,21 +10,23 @@ The TextBox widget has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
 This event is invoked for every widget when the widget position and dimensions are computed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked for all the widgets placed inside flex containers. This event is invoked in the order in which the widgets are added to the widget hierarchy and expect the frame property of the widget is calculated and available for use within this event.
 
@@ -34,9 +34,10 @@ This event is used to set the layout properties of child widgets in the relation
 
 The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}
+//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -47,13 +48,14 @@ function doLayoutButton1(){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onBackKeyPress Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onBackKeyPress Event</summary>
 
 * * *
 
@@ -63,17 +65,20 @@ This is event callback is invoked by the Android platform when the soft- keyboar
 
 This event is not be triggered when you use gestures in the mobile device for back navigation.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onBackKeyPress()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}/*This event is triggered in both TextBox and TextArea widgets for Android platform.*/
+{% highlight VoltMx %}
+/*This event is triggered in both TextBox and TextArea widgets for Android platform.*/
 
 /*This example demonstrates how to assign callback to onBackKeyPress event myTxtBox TextBox widget in frmTextBox FlexForm. Use the onBackKeyPress event in TextArea widget in a similar manner.*/
 frmTextBox.myTxtBox.onBackKeyPress= onBackKeyPressCallback;
@@ -84,29 +89,33 @@ function onBackKeyPressCallback(wdgRef) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onBeginEditing Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onBeginEditing Event</summary>
 
 * * *
 
 This is an event callback that is invoked by the platform when the user clicks within the TextBox and is about to start editing.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onBeginEditing()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onBeginEditing event callback to a TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the onBeginEditing event callback to a TextBox widget.
 
 frmTxtBox.myTxtBox.onBeginEditing =onBeginEditingCallback;
 
@@ -116,7 +125,7 @@ function onBeginEditingCallback(txtBox){
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, and Desktop Web  
@@ -124,27 +133,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onCancel Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onCancel Event</summary>
 
 * * *
 
 This event is a callback that is invoked by the platform then the user performs a click action on the _Cancel_ button.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onCancel()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is triggered only when the viewType is set as TEXTBOX\_VIEW\_TYPE\_SEARCH\_VIEW.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onCancel event callback to a TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the onCancel event callback to a TextBox widget.
 
 frmTxtBox.myTxtBox.onCancel=onCancelCallback;
 
@@ -154,33 +167,37 @@ function onCancelCallback(eventobject){
 
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDone Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDone Event</summary>
 
 * * *
 
 This event is a callback that is invoked by the platform then the user performs a click action on the _Go_ or _Enter_ button.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onDone()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In Desktop Web platform, this event is fired when the enter key is pressed when the textbox has focus.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onDone event callback to a TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the onDone event callback to a TextBox widget.
 
 frmTxtBox.myTxtBox.onDone=onDoneCallback;
 
@@ -190,28 +207,31 @@ function onDoneCallback(txtBox){
 
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onEndEditing Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onEndEditing Event</summary>
 
 * * *
 
 This is an event callback that is invoked by the platform.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onEndEditing()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 When the user performs one of the below actions:
 
@@ -228,11 +248,12 @@ In Android platform, onEndEditing event will be triggered when the focus is lost
 
 > ![](Resources/Images/onendediting_358x360.png)
 
-Example
+### Example
 
 Please note that the use of alerts is not recommended inside the event handler. Print statements are recommended.
 
-{% highlight voltMx %}//Sample code to set the onEndEditing event callback to a TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the onEndEditing event callback to a TextBox widget.
 
 frmTxtBox.myTxtBox.onEndEditing=onEndEditingCallback;
 
@@ -242,13 +263,14 @@ function onEndEditingCallback(txtBox){
 
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onKeyboardDidHide Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onKeyboardDidHide Event</summary>
 
 * * *
 
@@ -256,17 +278,20 @@ Availability
 
 This is event callback is invoked by the Android platform when the soft keyboard has been closed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onKeyboardDidHide()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}/*This event is triggered in both TextBox and TextArea widgets for Android platform.*/
+{% highlight VoltMx %}
+/*This event is triggered in both TextBox and TextArea widgets for Android platform.*/
 
 /*This example demonstrates how to assign callback to onKeyBoardDidHide event myTxtBox TextBox widget in frmTextBox FlexForm. Use the onKeyBoardDidHide event in TextArea widget in a similar manner.*/
 frmTextBox.myTxtBox.onKeyboardDidHide = keyboardCallbacksDidHide;
@@ -277,13 +302,14 @@ function keyboardCallbacksDidHide(wdgRef) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onKeyboardDidShow Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onKeyboardDidShow Event</summary>
 
 * * *
 
@@ -291,21 +317,24 @@ Platform Availability
 
 This is event callback is invoked by the Android platform when the soft keyboard has been just brought into view.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onKeyboardDidShow()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Limitation
+### Limitation
 
 *   In Android platform, when you close the soft keyboard using back button, and then re-select the text by long-press in TextArea and TextBox widget, the `onKeyBoardDidShow` event is not triggered.
 
-Example
+### Example
 
-{% highlight voltMx %}/*This event is triggered in both TextBox and TextArea widgets for Android platform.*/
+{% highlight VoltMx %}
+/*This event is triggered in both TextBox and TextArea widgets for Android platform.*/
 
 /*This example demonstrates how to assign callback to onKeyBoardDidShow event myTxtBox TextBox widget in frmTextBox FlexForm. Use the onKeyBoardDidShow event in TextArea widget in a similar manner.*/
 frmTextBox.myTxtBox.onKeyboardDidShow = keyboardCallbacksDidShow;
@@ -316,13 +345,14 @@ function keyboardCallbacksDidShow(wdgRef) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onKeyboardWillHide Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onKeyboardWillHide Event</summary>
 
 * * *
 
@@ -330,17 +360,20 @@ Platform Availability
 
 This is event callback is invoked by the Android platform when the soft keyboard is about to be hidden.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onKeyboardWillHide()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}/*This event is triggered in both TextBox and TextArea widgets for Android platform.*/
+{% highlight VoltMx %}
+/*This event is triggered in both TextBox and TextArea widgets for Android platform.*/
 
 /*This example demonstrates how to assign callback to onKeyBoardWillHide event myTxtBox TextBox widget in frmTextBox FlexForm. Use the onKeyBoardWillHide event in TextArea widget in a similar manner.*/
 frmTextBox.myTxtBox.onKeyboardWillHide = keyboardCallbacksWillHide;
@@ -351,13 +384,14 @@ function keyboardCallbacksWillHide(wdgRef) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onKeyboardWillShow Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onKeyboardWillShow Event</summary>
 
 * * *
 
@@ -365,21 +399,24 @@ Platform Availability
 
 This is event callback is invoked by the Android platform when the soft keyboard is about to be displayed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onKeyboardWillShow()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Limitation
+### Limitation
 
 *   In Android platform, when you close the soft keyboard using back button, and then re-select the text by long-press in TextArea and TextBox widget, the `onKeyBoardWillShow` event is not triggered.
 
-Example
+### Example
 
-{% highlight voltMx %}/*This event is triggered in both TextBox and TextArea widgets for Android platform.*/
+{% highlight VoltMx %}
+/*This event is triggered in both TextBox and TextArea widgets for Android platform.*/
 
 /*This example demonstrates how to assign callback to onKeyBoardWillShow event myTxtBox TextBox widget in frmTextBox FlexForm. Use the onKeyBoardWillShow event in TextArea widget in a similar manner.*/
 frmTextBox.myTxtBox.onKeyboardWillShow = keyboardCallbacksWillShow;
@@ -390,29 +427,33 @@ function keyboardCallbacksWillShow(wdgRef) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onKeyDown Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onKeyDown Event</summary>
 
 * * *
 
 This is an event callback that is invoked by the platform when the user presses a key (on the keyboard).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onKeyDown()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onKeyDown event callback to a TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the onKeyDown event callback to a TextBox widget.
 
 frmTxtBox.myTxtBox.onKeyDown=onKeyDownCallback;
 
@@ -422,30 +463,34 @@ function onKeyDownCallback(txtBox){
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onKeyUp Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onKeyUp Event</summary>
 
 * * *
 
 This is an event callback that is invoked by the platform when the user releases a key (on the keyboard).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onKeyUp()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onKeyUp event callback to a TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the onKeyUp event callback to a TextBox widget.
 
 frmTxtBox.myTxtBox.onKeyUp=onKeyUpCallback;
 
@@ -455,36 +500,40 @@ function onKeyUpCallback(txtBox){
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTextChange Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTextChange Event</summary>
 
 * * *
 
 This is an event callback triggered when text in the text box changes.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTextChange()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is not fired when the text is changed programmatically.
 
 In SPA platform, this event is fired also when the focus is out after changing the text in the textbox.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onTextChange event callback to a TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the onTextChange event callback to a TextBox widget.
 
 frmTxtBox.myTxtBox.onTextChange=onTextChangeCallback;
 
@@ -494,24 +543,27 @@ function onTextChangeCallback(txtBox){
 
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touch is released from the touch surface.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchEnd ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -531,17 +583,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchEndCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -550,23 +603,26 @@ Example
 Form1.widget1.onTouchEnd = onTouchEndCallback;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchMove Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchMove Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the touch moves on the touch surface continuously until movement ends.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchMove ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -586,17 +642,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchMoveCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -605,23 +662,26 @@ Example
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touches the touch surface.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchStart ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -641,17 +701,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchStartCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -661,29 +722,33 @@ Form1.widget1.onTouchStart = onTouchStartCallback;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onScrollWidgetPosition()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}
+var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -697,34 +762,38 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not Accessible from IDE
 *   Android, iOS, SPA, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[postOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>postOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom javascript function after the _onClick_ callback of the widget is invoked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 postOnclickJS()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is applicable only for Mobile Web channel.The function must exist in a javascript file under project>module>js folder.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the postOnclickJS event callback to a TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the postOnclickJS event callback to a TextBox widget.
 
 frmTxtBox.myTxtBox.postOnclickJS=postOnclickJSCallback;
 
@@ -734,28 +803,31 @@ function postOnclickJSCallback(txtBox){
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on Server side Mobile Web (Advanced) platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[preOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>preOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom javascript function before the _onClick_ callback of the widget is invoked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 preOnclickJS()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is applicable only for Mobile Web channel. The function must exist in a javascript file under project>module>js folder.
 
@@ -763,9 +835,10 @@ In for the events preOnclickJS and postOnclickJS you will not be able to access 
   
 You have to specify the modules to be loaded in browser using import JS tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the preOnclickJS event callback to a TextBox widget.
+{% highlight VoltMx %}
+//Sample code to set the preOnclickJS event callback to a TextBox widget.
 
 frmTxtBox.myTxtBox.preOnclickJS=preOnclickJSCallback;
 
@@ -773,12 +846,13 @@ function preOnclickJSCallback(txtBox){
       //Write your logic here.
 }
 
-{% endhighlight %}
+{% endhighlight %}s
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on Server side Mobile Web (BJS and Advanced) platform only
 
 * * *
+</details>
 

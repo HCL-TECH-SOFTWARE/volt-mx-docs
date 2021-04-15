@@ -14,7 +14,7 @@ The Share app extension is one of the types of app extensions provided by Apple 
 
 The share extension app can be accessed by tapping an action button provided in an app to display the activity view. The activity view contains extensions relevant to the current context.
 
-Volt MX  Irisprovides integrated support for developing Share app extensions for iOS apps. You develop Share extensions and package them into your app in the same way you do for other types of app extensions. For more information, refer [App Extension API for iOS](app-extension-ios.html).
+VoltMX Irisprovides integrated support for developing Share app extensions for iOS apps. You develop Share extensions and package them into your app in the same way you do for other types of app extensions. For more information, refer [App Extension API for iOS](app-extension-ios.html).
 
 For more information about what the Share app extension is and what you can do with it, refer the [Apple developer documentation](app-extension-ios.html).
 
@@ -40,157 +40,172 @@ Properties
 
 The voltmx.shareExtensions Namespace provides the following properties.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.shareExtensions.charactersRemaining](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.shareExtensions.charactersRemaining</summary>
 
 * * *
 
 Sets an initial value to be displayed as the number of characters remaining in the placeholder.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.shareExtensions.charactersRemaining;
+{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code  
+{% highlight VoltMx %}//Sample code  
 voltmx.shareExtensions.charactersRemaining = 100;
 {% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read and write.
 
-Remarks
+<b>Remarks</b>
 
 This property is accessible only in the default GUI mode.
 
-Platform Availability
+<b>Platform Availability</b>
 
 iOS
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.shareExtensions.contentText](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.shareExtensions.contentText</summary>
 
 * * *
 
 Contains the text from the current textView.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.shareExtensions.contentText;
+{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code  
+{% highlight VoltMx %}//Sample code  
 var text = voltmx.shareExtensions.contentText;
 {% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Return Values
+<b>Return Values</b>
 
 text
 
-Remarks
+<b>Remarks</b>
 
 This property is only available in the default GUI mode.
 
-Platform Availability
+<b>Platform Availability</b>
 
 iOS
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.shareExtensions.extensionContext](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.shareExtensions.extensionContext</summary>
 
 * * *
 
 Returns the current extension context.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.shareExtensions.extensionContext;
+{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code  
+{% highlight VoltMx %}//Sample code  
 var Context = voltmx.shareExtensions.extensionContext;
 Context.extensionContext.completeRequestReturningItemsCompletionHandler([], );
 {% endhighlight %}
 
-Type
+<b>Type</b>
 
 Object
 
-Read/Write
+<b>Read/Write</b>
 
 Read only
 
-Platform Availability
+<b>Platform Availability</b>
 
 iOS
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.shareExtensions.placeholder](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.shareExtensions.placeholder</summary>
 
 * * *
 
 Sets the text for the share app extension in the placeholder.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.shareExtensions.placeholder;
+{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code  
+{% highlight VoltMx %}//Sample code  
 voltmx.shareExtensions.placeholder = "write here";
 {% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read and write.
 
-Remarks
+<b>Remarks</b>
 
 The API works only in default GUI mode.
 
-Platform Availability
+<b>Platform Availability</b>
 
 iOS
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.shareExtensions.view](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.shareExtensions.view</summary>
 
 * * *
 
 Holds the current extension view.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.shareExtensions.view;
+{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code  
+{% highlight VoltMx %}//Sample code  
 var myView = voltmx.shareExtensions.view;
 myView.addSubView(button);
 {% endhighlight %}
 
-Type
+<b>Type</b>
 
 UIView
 
-Read/Write
+<b>Read/Write</b>
 
 Read only.
 
-Platform Availability
+<b>Platform Availability</b>
 
 iOS
 
@@ -199,49 +214,54 @@ Functions
 
 The voltmx.shareExtensions Namespace provides the following function.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.shareExtensions.popConfigurationViewController](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.shareExtensions.popConfigurationViewController</summary>
 
 * * *
 
 Dismisses the current configuration view controller.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.shareExtensions.popConfigurationViewController()
+{% highlight VoltMx %}voltmx.shareExtensions.popConfigurationViewController();
+{% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code  
+{% highlight VoltMx %}//Sample code  
 voltmx.shareExtensions.popConfigurationViewController();
 {% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 The function works only in the default GUI mode.
 
-Platform Availability
+<b>Platform Availability</b>
 
 iOS.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.shareExtensions.pushConfigurationViewController](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.shareExtensions.pushConfigurationViewController</summary>
 
 * * *
 
 Displays a configuration view controller.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.shareExtensions.pushConfigurationViewController(UIVController)
+{% highlight VoltMx %}
+voltmx.shareExtensions.pushConfigurationViewController(UIVController);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
@@ -249,37 +269,39 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var UIVC = //native bindings code to create UIViewController  
  voltmx.shareExtensions.pushConfigurationViewController(UIVC);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 The function works only in the default GUI mode. The configuration view controller is called from a configuration item's tabHandler. Only one configuration view controller is allowed at a time. The pushed view controller should set `preferredContentSize` appropriately. The `SLComposeServiceViewController` observes changes to that property and animates sheet size changes as necessary.
 
-Platform Availability
+<b>Platform Availability</b>
 
 iOS.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.shareExtensions.setExtensionsCallbacks](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.shareExtensions.setExtensionsCallbacks</summary>
 
 * * *
 
 Allows your app to set callback event handlers for a Share extension.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.shareExtensions.setExtensionsCallbacks(  
-    callbacks)
+{% highlight VoltMx %}voltmx.shareExtensions.setExtensionsCallbacks(  
+    callbacks);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 callbacks {Object}
 
@@ -298,9 +320,9 @@ Contains an object with key-value pairs where the key specifies the extension st
 | viewDidDisappear | The view has just been removed from the view hierarchy. |
 | viewWillDisappear | The view is about to be removed from the view hierarchy. |
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var callbackEvents = {
+{% highlight VoltMx %}var callbackEvents = {
     didSelectCancel: function() {
         voltmx.shareExtensions.extensionContext.cancelRequestWithError(undefined);
     },
@@ -324,9 +346,9 @@ Example
 voltmx.shareExtensions.setExtensionsCallbacks(callbackEvents);
 {% endhighlight %}
 
-Example: configurationItems
+<b>Example: configurationItems</b>
 
-{% highlight voltMx %}function configurationItems() {
+{% highlight VoltMx %}function configurationItems() {
     var returnarray = native bindings code to
     return array of SLComposeSheetConfigurationItem
     return returnarray;
@@ -336,9 +358,9 @@ voltmx.shareExtensions.setExtensionsCallbacks({“
 });
 {% endhighlight %}
 
-Example: didSelectCancel
+<b>Example: didSelectCancel</b>
 
-{% highlight voltMx %}function didSelectCancelcallback() {
+{% highlight VoltMx %}function didSelectCancelcallback() {
     // native bindings code
 }
 voltmx.shareExtensions.setExtensionsCallbacks({“
@@ -346,9 +368,9 @@ voltmx.shareExtensions.setExtensionsCallbacks({“
 });
 {% endhighlight %}
 
-Example: didSelectPostcallback
+<b>Example: didSelectPostcallback</b>
 
-{% highlight voltMx %}function didSelectPostcallback() {
+{% highlight VoltMx %}function didSelectPostcallback() {
     // native bindings code
 }
 
@@ -357,9 +379,9 @@ voltmx.shareExtensions.setExtensionsCallbacks({“
 });
 {% endhighlight %}
 
-Example: isContentValid
+<b>Example: isContentValid</b>
 
-{% highlight voltMx %}function isContentValid() {
+{% highlight VoltMx %}function isContentValid() {
     if ( //check the validity of the input using native 						bindings code)
         {
             return true; //will enable the post button. 
@@ -371,9 +393,9 @@ Example: isContentValid
     });
 {% endhighlight %}
 
-Example; loadView
+<b>Example; loadView</b>
 
-{% highlight voltMx %}function loadView() {
+{% highlight VoltMx %}function loadView() {
     //native bindings code
 }
 voltmx.shareExtensions.setExtensionsCallbacks({“
@@ -381,9 +403,9 @@ voltmx.shareExtensions.setExtensionsCallbacks({“
 });
 {% endhighlight %}
 
-Example: presentationAnimationDidFinish
+<b>Example: presentationAnimationDidFinish</b>
 
-{% highlight voltMx %}function presentationAnimationDidFinish() {
+{% highlight VoltMx %}function presentationAnimationDidFinish() {
     //native bindings code
 }
 voltmx.shareExtensions.setExtensionsCallbacks({“
@@ -392,9 +414,9 @@ voltmx.shareExtensions.setExtensionsCallbacks({“
 
 {% endhighlight %}
 
-Example: viewDidAppear
+<b>Example: viewDidAppear</b>
 
-{% highlight voltMx %}function viewDidAppear() {
+{% highlight VoltMx %}function viewDidAppear() {
     //native bindings code
 }
 voltmx.shareExtensions.setExtensionsCallbacks({“
@@ -402,9 +424,9 @@ voltmx.shareExtensions.setExtensionsCallbacks({“
 });
 {% endhighlight %}
 
-Example: viewWillAppear
+<b>Example: viewWillAppear</b>
 
-{% highlight voltMx %}function viewWillAppear() {
+{% highlight VoltMx %}function viewWillAppear() {
     //native bindings code
 }
 voltmx.shareExtensions.setExtensionsCallbacks({“
@@ -413,9 +435,9 @@ voltmx.shareExtensions.setExtensionsCallbacks({“
 
 {% endhighlight %}
 
-Example: viewDidDisappear
+<b>Example: viewDidDisappear</b>
 
-{% highlight voltMx %}function viewDidDisappear() {
+{% highlight VoltMx %}function viewDidDisappear() {
     //native bindings code
 }
 voltmx.shareExtensions.setExtensionsCallbacks({“
@@ -423,9 +445,9 @@ voltmx.shareExtensions.setExtensionsCallbacks({“
 });
 {% endhighlight %}
 
-Example: viewWillDisappear
+<b>Example: viewWillDisappear</b>
 
-{% highlight voltMx %}function viewWillDisappear() {
+{% highlight VoltMx %}function viewWillDisappear() {
     //native bindings code
 }
 voltmx.shareExtensions.setExtensionsCallbacks({“
@@ -433,12 +455,14 @@ voltmx.shareExtensions.setExtensionsCallbacks({“
 });
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 iOS.
+
+</details>
 
 ![](resources/prettify/onload.png)

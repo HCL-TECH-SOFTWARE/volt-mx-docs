@@ -30,7 +30,7 @@ A Volt MX Foundry environment is required to execute, build, and publish apps fr
 </details>
 <details close markdown="block"><summary>Iris project in source control</summary>
 
-A Iris project (app) is a collection of forms, widgets, actions, and JavaScript files. For more information, refer to [Designing an Application in Iris]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html#Part_II_CreatingAnApplication.html). To build and run a Iris app in App Factory, you need to version the Iris project in your SCM.
+A Iris project (app) is a collection of forms, widgets, actions, and JavaScript files. For more information, refer to [Designing an Application in Iris]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html). To build and run a Iris app in App Factory, you need to version the Iris project in your SCM.
 
 The repository that you use must contain at least one Iris project. Typically, the project is put directly at the root of the repository, but you can also put the project in a sub-folder. The repository can contain multiple Iris apps in organized sub-directories. For more information, refer to [Versioning a Iris project in SCM](IrisProjectVersioning.html).
 
@@ -133,3 +133,4 @@ To build a web app in protected mode, you need to add keys to two parameters.
 To run migrations by using the Flyway feature in App Factory, you must have a Relational Database System which is accessible over a public network or a VPN tunnel. You can achieve this connectivity by working with the Volt MX DevOps team while procuring an App Factory instance, or by raising a request with the Volt MX Support team. For information about the supported databases, refer to the FAQs Section.
 
 To run Flyway jobs on your database, App Factory requires your database credentials, which you can add while configuring a Flyway job. The user must have Read and Write permissions for the relevant database. For more information, refer to [Flyway related parameters](RunningFlywayJobs.html#Flyway).
+</details>
