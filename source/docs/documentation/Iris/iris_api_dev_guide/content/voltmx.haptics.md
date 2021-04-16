@@ -32,22 +32,23 @@ An **advancedHaptics** UI interface has been provided for the following widget-s
 *   TextArea widget
 *   TextBox widget
 
-
-<details close markdown="block"><summary>kony.haptics.HapticsObj.play</summary>voltmx.haptics.HapticsObj.play
+<details close markdown="block"><summary>voltmx.haptics.HapticsObj.play</summary>
 
 The voltmx.haptics.HapticsObj.play API generates and performs the customized haptic feedback based on the parameters passed.
 
-Syntax
+### Syntax
+{% highlight VoltMx %}
+VoltMX.haptics.HapticsObj.play([Array events](#Array)) ;
+{% endhighlight %}
 
-VoltMX.haptics.HapticsObj.play([Array events](#Array));
-
-Input Parameters
+### Input Parameters
 
 Array events
 
 An array of events containing the following elements:
 
-{% highlight voltMx %}Array events: [{  
+{% highlight VoltMx %}
+Array events: [{  
     startTime:   
     type:   
     duration:   
@@ -67,9 +68,10 @@ An array of events containing the following elements:
 | eventParams (optional) | The combination of event parameters determines the character of the haptic event. Event parameters are specified as part of the creation of a hapticEvent, or as part of an event definition in a haptic pattern. |
 | parameterID | The parameter ID can be any of the following: **voltmx.haptics.HAPTIC\_INTENSITY**: Specifies the presumed intensity of a haptic event.The range of values for this parameter varies from 0.0 (maximum attenuation) to 1.0 (no attenuation). **voltmx.haptics.HAPTIC\_SHARPNESS**: Depending on the event's signal content, this parameter may map to the frequency, the frequency content (i.e., filtering), or any other signal processing.The range of values for this parameter varies from 0.0 (least sharp) to 1.0 (most sharp). **voltmx.haptics.HAPTIC\_ATTACKTIME**: The point in time when the intensity of a haptic pattern begins increasing. The attack time adjuster for a Continuous event's envelope.The range of values for this parameter varies from 0.0 to 1.0. The default value is 0.0 (shortest attack time). > **_Note:_** Higher values exponentially increase the time.Only few types of events respond to this parameter. **voltmx.haptics.HAPTIC\_DECAYTIME**: The point in time when the intensity of a haptic pattern begins decreasing. The decay time adjuster for a Continuous event's envelope.The range of values for this parameter varies from 0.0 to 1.0. The default value is 0.0 (shortest decay time). > **_Note:_** Higher values exponentially increase the time.Only few types of events respond to this parameter.For envelope decay to take effect, the voltmx.haptics.HAPTIC\_SUSTAINED parameter must be set to 0.0. **voltmx.haptics.HAPTIC\_RELEASETIME**:The point in time when the haptic pattern begins to fade. The release time adjuster for a Continuous event's envelope.The range of values for this parameter varies from 0.0 to 1.0. The default value is 0.0 (shortest release time). > **_Note:_** Higher values exponentially increase the time.Only few types of Continuous events respond to this parameter. **voltmx.haptics.HAPTIC\_SUSTAINED**: A boolean (1.0 or 0.0) that indicates whether a Continuous event sustains for the specified duration (using an Attack/Release envelope) or whether the event ends when its envelope decay segment reaches its minimum (i.e., using an Attack/Decay envelope with no sustain). The default value is 1.0 (sustained, Attack/Release). > **_Note:_** For envelope decay to take effect, the voltmx.haptics.HAPTIC\_SUSTAINED parameter must be set to 0.0. |
 
-Example
+### Example
 
-{% highlight voltMx %}var temp = [{  
+{% highlight VoltMx %}
+var temp = [{  
     "startTime": 0,  
     "type": voltmx.haptics.HAPTIC_TYPE_TRANSIENT,  
     "duration": 3,  
@@ -85,13 +87,13 @@ var obj = new voltmx.haptics.HapticsObj();
 obj.play(temp);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns a handle to the haptics object that contains the haptic pattern, for successful.
 
 Returns `null`, for failure.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
@@ -101,35 +103,38 @@ Functions
 ---------
 
 
-<details close markdown="block"><summary>kony.haptics.isDeviceCompatible</summary>voltmx.haptics.isDeviceCompatible
+<details close markdown="block"><summary>voltmx.haptics.isDeviceCompatible</summary>
 
 The voltmx.haptics.isDeviceCompatible API checks if the device is compatible to use core haptics.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.haptics.isDeviceCompatible()
+{% endhighlight %}
 
-Input Parameters
+
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}voltmx.haptics.isDeviceCompatible();
+{% highlight VoltMx %}
+voltmx.haptics.isDeviceCompatible();
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Boolean
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 ![](resources/prettify/onload.png)
 </details>
-

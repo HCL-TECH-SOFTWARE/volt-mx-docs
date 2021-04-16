@@ -19,11 +19,13 @@ Image widget is associated with the following methods:
 
 This API allows you to set a gesture recognizer for a specified gesture for a specified widget.
 
-Syntax
+<b>Syntax</b>
 
-addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure)
+{% highlight VoltMx %}
+addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _gestureType_
 
@@ -53,11 +55,11 @@ This function will be raised asynchronously
 
 See Remarks for the syntax of this function.
 
-Return Values
+<b>Return Values</b>
 
 String - Reference to the gesture is returned.
 
-Remarks
+<b>Remarks</b>
 
 The values for the _gestureType_parameter are:
 
@@ -185,9 +187,9 @@ In the android platform, the top and bottom gestures work only when the scrollin
 *   RIGHTTAP applicable only to Windows 10
 *   ROTATION is not supported on android.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
+{% highlight VoltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
 //Code to add DOUBLE TAP gesture to the frmGestures, FlexForm.
 var doubletp = {
  fingers: 1,
@@ -219,7 +221,7 @@ function onGestureFunction(commonWidget, gestureInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Windows
 
@@ -233,23 +235,25 @@ Platform Availability
 
 This method takes an array of widgets as input, which are to be added as overlay widgets on the Image widget.
 
-Syntax
+<b>Syntax</b>
 
-addOverlayWidgets(\[widget1,widget2…\])
+{% highlight VoltMx %}
+addOverlayWidgets(\[widget1,widget2…\]);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _Array of widgets_
 
 An array of widgets that needs to be added as overlay widgets on the Image widget. The applicable overlay widgets are Image, Button, and Label.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var widgetRef1 = new voltmx.ui.Image2({
+{% highlight VoltMx %}var widgetRef1 = new voltmx.ui.Image2({
     "height": "32dp",
     "id": "widgetRef1",
     "isVisible": true,
@@ -324,7 +328,7 @@ Limitations
 *   Percentage-based calculations of overlay widgets are with respect to the imageWidget frame without zoom.
     
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -340,15 +344,17 @@ Platform Availability
 
 Applies an animation to the widget.
 
-Syntax
+<b>Syntax</b>
 
-animate (animationObj, animateConfig, animationCallbacks)
+{% highlight VoltMx %}
+animate (animationObj, animateConfig, animationCallbacks);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _animationObj_
 
-An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/Content/voltmx.ui_functions.html#createAn) function.
+An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#createAn?TocPath=References|voltmx.ui_Namespace|Functions|_____5) function.
 
 _animationConfig_
 
@@ -363,11 +369,11 @@ A JavaScript dictionary that contains key-value pairs. The following keys are su
 | animationEnd | A JavaScript function that is invoked with the animation ends. For more information, see the **Remarks** section below. |
 | animationStart | A JavaScript function that is invoked with the animation starts. For more information, see the **Remarks** section below. |
 
-Return Values
+<b>Return Values</b>
 
 Returns a platform-specific handle to the animation. This handle currently not used, but is returned for possible future requirements use.
 
-Remarks
+<b>Remarks</b>
 
 The callback for the `animationStart` key in the JavaScript object passed in this method's _animationCallbacks_ parameter has the following signature.
 
@@ -389,9 +395,9 @@ The `animate` method throws an Invalid Animation Definition Exception if animati
 
 If the widget is not part of the currently visible view hierarchy, calling this method does nothing. Because this method is asynchronous and immediately returns, it does not wait for the animation to start or complete.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code of animation
+{% highlight VoltMx %}//Sample code of animation
 function AnimateBoth() {
     var getFuncName = frm1.listbox18.selectedKey;
     if (getFuncName == "BothLT") {
@@ -404,7 +410,7 @@ function AnimateBoth() {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
@@ -423,25 +429,27 @@ For example, if the widget ID is "fc1" and the widget ID passed to clone API is 
 
 Exceptions are not displayed if widget ID parameter is not unique. Instead when the cloned copy is added to the same form as of original container then it may lead to unexpected behaviors. So it is your responsibility to provide unique widget ID.
 
-Syntax
+<b>Syntax</b>
 
-clone()
+{% highlight VoltMx %}
+clone();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 widgetId \[String\]
 
 Optional. Reference of the name of the widget.
 
-Return Values
+<b>Return Values</b>
 
 Cloned copy of the widget.
 
-Exceptions
+<b>Exceptions</b>
 
 None
 
-Remarks
+<b>Remarks</b>
 
 *   This method is not supported on SegmentedUI2 widget.
 *   Gestures for the FlexContainer are not cloned. You have to reapply the gestures on the cloned object.
@@ -452,9 +460,9 @@ Remarks
 *   To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy. This is applicable for the Desktop web platform.{% highlight voltMx %}formid.widgetid.hoverSkin = "skinname";
     {% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the clone Method for a FlexContainer widget.
 //You need to make a corresponding call of the clone method for other applicable widgets.  
@@ -466,7 +474,7 @@ var myLabel=frmFlex.lbl1.clone();
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
@@ -479,11 +487,13 @@ Platform Availability
 
 This method allows you to convert the coordinate system from a widget to a point (receiver's coordinate system).
 
-Syntax
+<b>Syntax</b>
 
-convertPointFromWidget(point, fromWidget)
+{% highlight VoltMx %}
+convertPointFromWidget(point, fromWidget);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _point_
 
@@ -497,15 +507,15 @@ _fromWidget_
 
 This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from the widget to a point (receiver's coordinate system).
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}Form1.widget1.convertPointFromWidget({
+{% highlight VoltMx %}Form1.widget1.convertPointFromWidget({
     x: "10dp",
     y: "20dp"
 }, widget2);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
@@ -518,11 +528,13 @@ Platform Availability
 
 Using the convertPointToWidget method, you can modify the co-ordinate system. You can convert the receiver's co-ordinate system from a **point** to a **Widget**.
 
-Syntax
+<b>Syntax</b>
 
-convertPointToWidget(point, toWidget)
+{% highlight VoltMx %}
+convertPointToWidget(point, toWidget);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _point_
 
@@ -532,15 +544,15 @@ _toWidget_
 
 \[widgetref\] - Mandatory. This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from a point to a widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}Form1.widget2.convertPointToWidget({
+{% highlight VoltMx %}Form1.widget2.convertPointToWidget({
     x: "20dp",
     y: "30dp"
 }, widget1);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
@@ -553,25 +565,27 @@ Platform Availability
 
 This method crops the bitmap contained by the Image widget to the size of the input rectangle.
 
-Syntax
+<b>Syntax</b>
 
-cropToRect(array)
+{% highlight VoltMx %}
+cropToRect(array);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _array_
 
 An array of integers specifying the cropping rectangle in the order (x,y,width,height).
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 This method crops the current Image widget's bitmap to the size of the rectangle specified in the _array_ parameter, altering the bitmap in the process.
 
-Availability
+<b>Availability</b>
 
 Available on iOS and Android.
 
@@ -584,29 +598,31 @@ Available on iOS and Android.
 
 This API enables you to read the badge value (if any) attached to the specified widget. If the specified widget does not have a badge attached to it, it returns an empty string.
 
-Syntax
+<b>Syntax</b>
 
-getBadge()
+{% highlight VoltMx %}
+getBadge();
+{% endhighlight %}
 
-Optional Parameter
+<b>Optional Parameter</b>
 
 uniqueIdentifier
 
 Unique identifier of a widget which is a handle to the widget.
 
-Return Values
+<b>Return Values</b>
 
 Returns a string containing the badge value applied to the specified widget. If the specified widget has no badge value attached to it, it returns an empty string.
 
-Remarks
+<b>Remarks</b>
 
 When a badge is removed, the widgets are re-formatted to accommodate the cleared badge values.
 
 On the iOS platform, this method is applicable on Label, Button, Image, TextBox, and TextArea widgets only.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the getBadge Method for button widget.
 //You need to make a corresponding call of the getBadge method for other applicable widgets.
 function getBadge() {
@@ -619,7 +635,7 @@ function getBadge() {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
@@ -632,21 +648,23 @@ Platform Availability
 
 Retrieves the image as Rawbytes
 
-Syntax
+<b>Syntax</b>
 
-getImageAsRawBytes()
+{% highlight VoltMx %}
+getImageAsRawBytes();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _encodingFormat_
 
 Optional. A constant from the Image Format Constants in the voltmx.image namespace that specifies the format of the bitmap image.
 
-Return Values
+<b>Return Values</b>
 
 The Image widget's bitmap in RawBytes format if an image format is specified. If not, this method returns the RawBytes data in a platform-specific formats.
 
-Availability
+<b>Availability</b>
 
 Available on iOS and Android.
 
@@ -659,19 +677,21 @@ Available on iOS and Android.
 
 Retrieves the image height as an integer.
 
-Syntax
+<b>Syntax</b>
 
-getImageHeight()
+{% highlight VoltMx %}
+getImageHeight();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 An integer that specifies the height of the Image.
 
-Availability
+<b>Availability</b>
 
 Available on iOS and Android.
 
@@ -684,19 +704,21 @@ Available on iOS and Android.
 
 Retrieves the image width as an integer.
 
-Syntax
+<b>Syntax</b>
 
-getImageWidth()
+{% highlight VoltMx %}
+getImageWidth();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 An integer that specifies the width of the Image.
 
-Availability
+<b>Availability</b>
 
 Available on iOS and Android.
 
@@ -709,33 +731,35 @@ Available on iOS and Android.
 
 This method registers a widget to enable 3D Touch peek and pop gestures.
 
-Syntax
+<b>Syntax</b>
 
-registerForPeekandPop(onPeekCallback, onPopCallback)
+{% highlight VoltMx %}
+registerForPeekandPop(onPeekCallback, onPopCallback);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 onPeekCallback
 
 A callback function that is invoked when the user slightly presses (soft press) the widget.
 
-Callback Syntax
+Callback  Syntax
 
 onPeekCallback(widget)
 
-Callback Input Parameters
+Callback Input <b>Parameters</b>
 
 _widget_
 
 A widget reference that is registered for peek and pop.
 
-Callback Return Values
+Callback  Return Values
 
-  A PreviewInfoTable. See the Remarks section for a description of this table.
+  A PreviewInfoTable. See the  Remarks section for a description of this table.
 
 Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget) {
+{% highlight VoltMx %}function onPeekCallback(widget) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -749,7 +773,7 @@ onPopCallback (Optional)
 
 A callback function that is invoked when the user further presses (hard press) the preview that is displayed for the widget.
 
-Callback Syntax
+Callback  Syntax
 
 onPopCallback(widget,peekForm)
 
@@ -763,7 +787,7 @@ _peekForm_
 
 A form reference that is displayed as preview/peek.
 
-Callback Return Values
+Callback  Return Values
 
   A form reference.
 
@@ -773,13 +797,13 @@ Use this callback to set the content for pop. The form handle returned by this c
 
 Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Remarks
+<b>Remarks</b>
 
 A PreviewInfoTable has the following format.
 
@@ -807,18 +831,18 @@ Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “2
 
 Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS 9.0 and later
 
@@ -831,17 +855,19 @@ Platform Availability
 
 This method allows you to remove a child widget from a parent widget.
 
-Syntax
+<b>Syntax</b>
 
-removeFromParent()
+{% highlight VoltMx %}
+removeFromParent();
+{% endhighlight %}
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the removeFromParent Method for a Calendar widget.
 //You need to make a corresponding call of the removeFromParent method for other applicable widgets.
 
@@ -849,7 +875,7 @@ Form1.calendar.removeFromParent();
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android , Windows, SPA, and Desktop Web
 
@@ -862,24 +888,26 @@ Platform Availability
 
 This method allows you to remove the specified gesture recognizer for the specified widget.
 
-Syntax
+<b>Syntax</b>
 
-removeGestureRecognizer(gestureHandle)
+{% highlight VoltMx %}
+removeGestureRecognizer(gestureHandle);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 gestureHandle - Mandatory
 
 Specifies the handle to the gesture returned by addGestureRecognizer call.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
+{% highlight VoltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
 frmGestures.removeGestureRecognizer(doubletp);  
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available on all platforms except Desktop Web and Android.
 
@@ -892,27 +920,29 @@ Platform Availability
 
 This method takes an array of widget references as input, which are to be removed as overlay widgets from an Image widget.
 
-Syntax
+<b>Syntax</b>
 
-removeOverlayWidgets(\[widgetRef1,widgetRef2…\])
+{% highlight VoltMx %}
+removeOverlayWidgets(\[widgetRef1,widgetRef2…\]);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _Array of widgets_
 
 An array of widget references (either Image, Button, and Label) that need to be added as overlay widgets from the Image widget.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}Image1.removeOverlayWidgets([widgetRef1, widgetRef2, widgetRef3]);
+{% highlight VoltMx %}Image1.removeOverlayWidgets([widgetRef1, widgetRef2, widgetRef3]);
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 *   Android
@@ -928,27 +958,29 @@ Platform Availability
 
 Scales the bitmap in the current Image widget to a larger or smaller size.
 
-Syntax
+<b>Syntax</b>
 
-scale()
+{% highlight VoltMx %}
+scale();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _scaleFactor_
 
 Optional. A floating point number that is used to scale the bitmap to a larger or smaller size.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 The floating point number in the _scaleFactor_ parameter cannot be less than zero. If it is in the range 0.0<=_scaleFactor_<1.0, the bitmap size will be reduced. Depending on the hardware and the size of the bitmap, distortion or blurring of the image can occur when it is reduced. If _scaleFactor_ equals 1, this method does nothing.
 
 When your app sets _scaleFactor_ to a value greater than 1.0, the size of the bitmap increases. Values greater than 2.0 may result into memory warnings on some platforms. The resultant image quality may differ on platforms due to interpolation algorithms used.
 
-Availability
+<b>Availability</b>
 
 Available on iOS and Android.
 
@@ -961,11 +993,13 @@ Available on iOS and Android.
 
 This method enables you to set the badge value to the given widget at the upper, right corner of the widget.
 
-Syntax
+<b>Syntax</b>
 
-setBadge(badgeText)
+{% highlight VoltMx %}
+setBadge(badgeText);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 badgeText \[String\] - Mandatory
 
@@ -975,15 +1009,15 @@ skin \[String\] - Optional
 
 The parameter specifies the background color for the badge. The default color is red.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 Error
 
-Remarks
+<b>Remarks</b>
 
 The color for the badge can be defined using a skin. The default color for the badge is red with white lettering.
 
@@ -1005,9 +1039,9 @@ For iOS platform, this method is applicable on Box, Label, and Image widgets onl
 
 For Android platform, this method is applicable on Button and Image widgets only.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setBadge Method for button widget.
 //You need to make a corresponding call of the setBadge method for other applicable widgets.
 function setBadge() {
@@ -1019,7 +1053,7 @@ placed on a form frm1, use the following code: */
 form.lbl1.setBadge("4", "badgeSkin");
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
@@ -1034,11 +1068,13 @@ For more information about the badge APIs refer the _API Reference Document_.
 
 This method specifies the widget that must be enabled or disabled.
 
-Syntax
+<b>Syntax</b>
 
-setEnabled(enabled)
+{% highlight VoltMx %}
+setEnabled(enabled);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _enabled_
 
@@ -1048,30 +1084,30 @@ true -Indicates widget is enabled.
 
 false - Indicates widget is disabled.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 Error
 
-Remarks
+<b>Remarks</b>
 
 Browser widget does not support this method in SPA.
 
 This method is not applicable in Map widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setEnabled Method for button widget.
 //You need to make a corresponding call of the setEnabled method for other applicable widgets.
 
 form1.myButton.setEnabled(false);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except SPA.
 
@@ -1086,11 +1122,13 @@ This method specifies the widget on which there must be focus.
 
 **Default :** true
 
-Syntax
+<b>Syntax</b>
 
-setFocus(focus)
+{% highlight VoltMx %}
+setFocus(focus);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _focus_ \[Boolean\]- Mandatory
 
@@ -1098,30 +1136,30 @@ true -Indicates focus is set on a widget.
 
 false - Indicates focus is not set on a widget.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 Error
 
-Remarks
+<b>Remarks</b>
 
 You should not call this method in **preShow** of a form as it is not respected by all platforms. In android platform, this method is not respected in **preShow** of a form. You can give focus to a particular widget only after it is rendered on the screen, hence it should be called in postShow of a form.
 
 This method is not applicable in Form widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setFocus Method for button widget.
 //You need to make a corresponding call of the setFocus method for other applicable widgets.
 
 form1.myButton.setFocus(true);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms.
 
@@ -1134,11 +1172,13 @@ Available on all platforms.
 
 This method allows you to set a gesture recognizer for a specified gesture for a specified widget. You can set a Gesture recognizer only for a FlexForm, a FlexContainer, and a FlexScrollContainer. The setGestureRecognizer method is deprecated and should not be used in new software. However, Swipe Distance and Swipe Velocity parameters are not deprecated. So if you want to use the Swipe Distance and Swipe velocity parameters, use the setGestureRecognizer method. To use all other parameters, you must use the addGestureRecognizer method.
 
-Syntax
+<b>Syntax</b>
 
-setGestureRecognizer (gestureType,setupParams,gestureHandler)
+{% highlight VoltMx %}
+setGestureRecognizer (gestureType,setupParams,gestureHandler);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _gestureType_
 
@@ -1167,7 +1207,7 @@ onGesturefunction(widgetRef,gestureInfo)
 *   _widgetRef_ - This parameter specifies the handle to the widget on which the gesture was recognized.
 *   _gestureInfo_ - This parameter specifies an array that provides information about the gesture. The contents of this array vary based on the gesture type.
 
-Volt MX  Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
+Volt MX Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
 
 *   _gestureType_ \[number\] - indicates the gesture type; **1** for TAP, **2** for SWIPE, and **3** for LONGPRESS.
 *   _gesturesetUpParams_ \[object\] - this array is the set up parameters passed while adding the gesture recognizer.
@@ -1179,15 +1219,15 @@ Volt MX  Iris populates the details in the _gestureInfo_ array. This array has t
 *   _widgetWidth_ \[number\] - specifies the width of the widget (in pixels). This parameter is applicable only on iPhone.
 *   _widgetHeight_ \[number\] - specifies the height of the widget (in pixels). This parameter is applicable only on iPhone.
 
-Return Values
+<b>Return Values</b>
 
 String - Reference(uniqueidentifier) to the gesture is returned.
 
-Exceptions
+<b>Exceptions</b>
 
 Error
 
-Remarks
+<b>Remarks</b>
 
 This method is applicable on Form, Box, and ScrollBox widgets only.
 
@@ -1224,14 +1264,14 @@ For example:
 
 Function syntax for the _GestureHandler_ parameter
 
-The parameter specifies the function that needs to be executed when a gesture is recognized. This function has the following Syntax:
+The parameter specifies the function that needs to be executed when a gesture is recognized. This function has the following  Syntax:
 
 onGesturefunction(widgetRef,gestureInfo)
 
 *   _widgetRef_ - This parameter specifies the handle to the widget on which the gesture was recognized.
 *   _gestureInfo_ - This parameter specifies an array that provides information about the gesture. The contents of this array vary based on the gesture type.
 
-Volt MX  Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
+Volt MX Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
 
 *   _gestureType_ \[number\] - indicates the gesture type; **1** for TAP, **2** for SWIPE, and **3** for LONGPRESS.
 *   _gesturesetUpParams_ \[object\] - this array is the set up parameters passed while adding the gesture recognizer.
@@ -1243,9 +1283,9 @@ Volt MX  Iris populates the details in the _gestureInfo_ array. This array has t
 *   _widgetWidth_ \[number\] - specifies the width of the widget (in pixels). This parameter is applicable only on iPhone.
 *   _widgetHeight_ \[number\] - specifies the height of the widget (in pixels). This parameter is applicable only on iPhone.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//The below function will get invoked  when a gesture is recognized. 
+{% highlight VoltMx %}//The below function will get invoked  when a gesture is recognized. 
 function myTap(myWidget, gestureInfo) {
     alert(" Tap Gesture detected");
     alert("gestureType :" + gestureInfo.gestureType);
@@ -1263,7 +1303,7 @@ var setupTblTap = {
 var tapGesture = frm1.hbx1.setGgestureRecognizer(1, setupTblTap, myTap);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Windows, and SPA
 
@@ -1276,17 +1316,19 @@ Platform Availability
 
 This method sets and overrides the existing onPeekCallback for the widget.
 
-Syntax
+<b>Syntax</b>
 
-setOnPeek(onPeekCallback)
+{% highlight VoltMx %}
+setOnPeek(onPeekCallback);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 onPeekCallback
 
 A callback function that is invoked when the user slightly presses (soft press) the widget.
 
-Callback Syntax
+Callback  Syntax
 
 onPeekCallback(widget)
 
@@ -1296,13 +1338,13 @@ _widget_
 
 A widget reference that is registered for peek and pop.
 
-Callback Return Values
+Callback  Return Values
 
 PreviewInfoTable. See the Remarks section for a description of this table.
 
 Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget, contextInfo) {
+{% highlight VoltMx %}function onPeekCallback(widget, contextInfo) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -1312,11 +1354,11 @@ Callback Example
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 A PreviewInfoTable has the following format.
 
@@ -1344,16 +1386,16 @@ Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “2
 
 Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function settingPeek() {
+{% highlight VoltMx %}function settingPeek() {
     Form1.setOnPeek(onMyPeekcallback);
 }
 
@@ -1372,7 +1414,7 @@ function onMyPeekcallback(widgetref, contextInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS 9.0 and later
 
@@ -1385,21 +1427,23 @@ Platform Availability
 
 This method overrides the existing onPopCallback for the widget.
 
-Syntax
+<b>Syntax</b>
 
-setOnPop(onPopCallback)
+{% highlight VoltMx %}
+setOnPop(onPopCallback);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 onPopCallback
 
 A callback function that is invoked when the user slightly presses (soft press) the widget.
 
-Callback Syntax
+Callback  Syntax
 
 onPopCallback(widget,peekForm)
 
-Callback Parameters
+Callback  Parameters
 
 _widget_
 
@@ -1409,29 +1453,29 @@ _peekForm_
 
  A form reference that is displayed as preview/peek.
 
-Callback Return Values
+Callback  Return Values
 
  A form reference.
 
-Callback Remarks
+Callback <b>Remarks</b>
 
  Use this callback to set the content for pop. The form handle returned by this callback is used for pop content. In general, the form that is used for preview is used for pop content also. If the pop callback is not implemented, peek disappears and the app returns to its previous state.
 
 Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function settingPop() {
+{% highlight VoltMx %}function settingPop() {
     Form1.setOnPop(myonPopcallback);
 }
 
@@ -1441,7 +1485,7 @@ function myonPopcallback(widgetref, peekForm) {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS 9.0 and later
 
@@ -1456,11 +1500,13 @@ Use this method to set the visibility of the widget.
 
 **Default :** true
 
-Syntax
+<b>Syntax</b>
 
-setVisibility(visible)
+{% highlight VoltMx %}
+setVisibility(visible);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _visible_
 
@@ -1512,15 +1558,15 @@ It is a JS dictionary containing the events invoked by the platform during the a
 *   **animStarted**: Invoked at the beginning of the animation without any parameters. Following is the Syntax of the event: function animStarted()
 *   **animEnded**: Invoked at the end of the animation without any parameters. Following is the Syntax of the event: function animEnded()
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Exceptions
+<b>Exceptions</b>
 
 Error
 
-Remarks
+<b>Remarks</b>
 
 This method is not applicable on Form, Popup, and Alert. It is also not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so by using [Segment](Segment_Methods.html#segmentedui-methods) methods.
 
@@ -1528,9 +1574,9 @@ Passing an invalid type other than the above events lead to run time exceptions/
 
 This method is not supported on the widgets FlexForm, FlexContainer, and FlexScrollContainer.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to invoke the setVisibility Method for a button widget with animation.
 //You need to make a corresponding call of the setVisibility method for other applicable widgets.
 
@@ -1549,7 +1595,7 @@ form1.myButton.setVisibility(
 form1.myButton.setVisibility(false);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms.
 
@@ -1562,26 +1608,28 @@ Available on all platforms.
 
 This method unregisters a widget from 3D Touch peek and pop gestures.
 
-Syntax
+<b>Syntax</b>
 
 unregisterForPeekandPop()
 
-Parameters
+<b>Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}Form1.unregisterForPeekAndPop();
+{% highlight VoltMx %}Form1.unregisterForPeekAndPop();
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS 9.0 and later
 
 * * *
+
+</details>
 

@@ -28,7 +28,7 @@ Few real-time scenarios using the CheckBoxGroup widget are as follows:
 *   **Coupons:** Applying coupons in shopping websites employ checkboxes.
     
 
-Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Iris_User_Guide.html).
+Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 For general information on the CheckBoxGroup widget see the []({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Button.html)[CheckBoxGroup]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/CheckBoxGroup.html) topic in the Volt MX Iris User Guide.
 

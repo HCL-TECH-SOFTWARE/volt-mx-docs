@@ -3,8 +3,6 @@ layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
                                
-
-
 MLCamera Methods
 ================
 
@@ -12,17 +10,19 @@ MLCamera widget has the following methods associated with it.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointFromWidget Method](javascript:void(0);)
+<details close markdown="block"><summary>convertPointFromWidget Method</summary>
 
 * * *
 
 This method allows you to convert the coordinate system from a widget to a point (receiver's coordinate system).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 convertPointFromWidget(point, fromWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -36,31 +36,35 @@ _fromWidget_
 
 This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from the widget to a point (receiver's coordinate system).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.convertPointFromWidget({
+{% highlight VoltMx %}
+Form1.widget1.convertPointFromWidget({
     x: "10dp",
     y: "20dp"
 }, widget2);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointToWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointToWidget Method</summary>
 
 * * *
 
 Using the convertPointToWidget method, you can modify the co-ordinate system. You can convert the receiver's co-ordinate system from a **point** to a **Widget**.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 convertPointToWidget(point, toWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -70,37 +74,42 @@ _toWidget_
 
 \[widgetref\] - Mandatory. This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from a point to a widget.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget2.convertPointToWidget({
+{% highlight VoltMx %}
+Form1.widget2.convertPointToWidget({
     x: "20dp",
     y: "30dp"
 }, widget1);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeFromParent Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeFromParent Method</summary>
 
 * * *
 
 This method allows you to remove a child widget from a parent widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 removeFromParent()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the removeFromParent Method for a Calendar widget.
 //You need to make a corresponding call of the removeFromParent method for other applicable widgets.
 
@@ -108,13 +117,14 @@ Form1.calendar.removeFromParent();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android , Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setImageClassifier Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setImageClassifier Method</summary>
 
 * * *
 
@@ -122,95 +132,107 @@ This method is used to set an imageClassifier object to the MLCamera widget. Thi
 
 For more information on Image Classifier and its related APIs, click here.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setImageClassifier(imageClassifier)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _imageClassifier_ \[JSObject\]-Mandatory
 
 This object must be created using the [voltmx.ml.imageClassifier]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ml_namespace_functions.html#ImageClassifier) API.  
 
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to invoke setImageClassifier Method using myMLCamera MLCamera widget in frmMLCamera Form and imageClassifier1 object.*/  
+{% highlight VoltMx %}
+/*Sample code to invoke setImageClassifier Method using myMLCamera MLCamera widget in frmMLCamera Form and imageClassifier1 object.*/  
 frmMLCamera.mlCamera.setImageClassifier(imageClassifier1);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[startDetection Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>startDetection Method</summary>
 
 * * *
 
 This method enables you to classify preview frames.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 startDetection()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+### Parameters
 
 None
 
-Example
+### Return Values
 
-{% highlight voltMx %}/*Sample code to invoke startDetection Method using myMLCamera MLCamera widget in frmMLCamera Form.*/
+None
+
+### Example
+
+{% highlight VoltMx %}
+/*Sample code to invoke startDetection Method using myMLCamera MLCamera widget in frmMLCamera Form.*/
 
 frmMLCamera.myMLCamera.startDetection();
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[stopDetection Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>stopDetection Method</summary>
 
 * * *
 
 This method is used to stop the classification of the preview frames.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 stopDetection()
+{% endhighlight %}
 
-Parameters
-
-None
-
-Return Values
+### Parameters
 
 None
 
-Example
+### Return Values
 
-{% highlight voltMx %}/*Sample code to invoke stopDetection Method using myMLCamera MLCamera widget in frmMLCamera Form.*/
+None
+
+### Example
+
+{% highlight VoltMx %}
+/*Sample code to invoke stopDetection Method using myMLCamera MLCamera widget in frmMLCamera Form.*/
 
 frmMLCamera.myMLCamera.stopDetection();
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setVisibility Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setVisibility Method</summary>
 
 * * *
 
@@ -218,11 +240,13 @@ Use this method to set the visibility of the widget.
 
 **Default :** true
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setVisibility(visible)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _visible_
 
@@ -236,7 +260,7 @@ _animationConfig_
 
 \[JSObject\] - Optional. The parameter specifies the animation configuration of the object. This is not supported in SPA and Desktop Web platforms.
 
-Following are the parameters of the JSObject:
+### Following are the parameters of the JSObject:
 
 _animEffect_
 
@@ -274,15 +298,15 @@ It is a JS dictionary containing the events invoked by the platform during the a
 *   **animStarted**: Invoked at the beginning of the animation without any parameters. Following is the Syntax of the event: function animStarted()
 *   **animEnded**: Invoked at the end of the animation without any parameters. Following is the Syntax of the event: function animEnded()
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is not applicable on Form, Popup, and Alert. It is also not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so by using [Segment](Segment_Methods.html#segmentedui-methods) methods.
 
@@ -290,9 +314,10 @@ Passing an invalid type other than the above events lead to run time exceptions/
 
 This method is not supported on the widgets FlexForm, FlexContainer, and FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to invoke the setVisibility Method for a button widget with animation.
 //You need to make a corresponding call of the setVisibility method for other applicable widgets.
 
@@ -311,9 +336,10 @@ form1.myButton.setVisibility(
 form1.myButton.setVisibility(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
+</details>
 

@@ -15,7 +15,7 @@ Before using Volt MX SDK APIs for Android, you must configure Volt MX Android SD
 *   [Configuring voltmx-sdk.doc to Project - Eclipse](#configuring-volt-mx-sdk-doc-to-project-eclipse)
     
 
-*   [Configuring voltmx-sdk.jar to Project - Android Studio](Android/Android_Studio.html)
+*   [Configuring voltmx-sdk.jar to Project - Android Studio](Android_Studio.html)
 
 Configuring voltmx-sdk.jar to Project - Eclipse
 ---------------------------------------------

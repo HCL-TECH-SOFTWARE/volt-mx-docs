@@ -16,13 +16,15 @@ The com.voltmx namespace contains the following functions.
 
 Creates an [AddPassesViewController](addpassesviewcontroller.html) object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 com.voltmx.AddPassesViewController(  
     passbookArray,  
     statusCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _passbookArray_
 
@@ -36,32 +38,35 @@ statusCallbackFunctionName(status);
 
 where _status_ is a string that contains the status of the AddPassesViewController object
 
-Return Values
+### Return Values
 
 Returns a AddPassesViewController object.
 
-Example
+**Example**
 
+{% highlight VoltMx %}
 var AddPassesViewController1 = new com.voltmx.AddPassesViewController(an, statusCallback);
+{% endhighlight %}
 
 * * *
 
 </details>
-
 <details close markdown="block"><summary>com.voltmx.BeaconManager Function</summary>
 
 * * *
 
 Allocates and initializes a [BeaconManager](beacon_manager.html) object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 com.voltmx.BeaconManager(  
     monitoringCallback,  
     rangingCallback,  
     errorCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _monitoringCallback_
 
@@ -75,11 +80,11 @@ _errorCallback_
 
 An optional callback function that gets error updates from BeaconManager: For details, see the **Remarks** below.
 
-Return Values
+### Return Values
 
 Returns a BeaconManager object.
 
-Remarks
+### Remarks
 
 The _monitoringCallback_ parameter is optional. If you do provide a callback for this parameter, the callback must have the following signature,
 
@@ -103,7 +108,7 @@ A string that contains one of the following.
 
 The _rangingCallback_ parameter is also optional. If you provide a callback for this parameter, the callback must have the following signature.
 
-function rangingCallback(beaconRegion, beacons);  
+`function rangingCallback(beaconRegion, beacons);`
 
 where the parameters to the callback are as follows.
 
@@ -117,7 +122,7 @@ An array of Beacon objects representing the beacons currently in range (in the o
 
 The _rangingCallback_ parameter is optional. If you provide a callback for this parameter, the callback must have the following signature.
 
-function errorCallback(beaconManagerError, errorName, errorDictionary, beaconRegion);
+`function errorCallback(beaconManagerError, errorName, errorDictionary, beaconRegion);`
 
 where the parameters to the callback are as follows.
 
@@ -143,11 +148,13 @@ _beaconRegion_
 
 A [BeconRegion](com.voltmx.beaconregion.html) object that specifies the region where the error occurred.
 
-Example
+**Example**
 
-var aBeaconManager = new com.voltmx.BeaconManager(monitoringCallback, rangingCallback, errorCallback);
+{% highlight VoltMx %}
+var aBeaconManager = new com.voltmx.BeaconManager(monitoringCallback, rangingCallback, errorCallback);`
+{% endhighlight %}
 
-Availability
+### Availability
 
 iOS only.
 
@@ -160,15 +167,17 @@ iOS only.
 
 Creates a [BeaconRegion](com.voltmx.beaconregion.html) object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 com.voltmx.BeaconRegion(  
     proximityUUID,  
     major,  
     minor,  
     identifier1)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _proximityUUID_
 
@@ -186,11 +195,11 @@ _identifier_
 
 A string containing a unique identifier for the [BeaconRegion](com.voltmx.beaconregion.html) object. This value must not be null.
 
-Return Values
+### Return Values
 
 Returns a [BeaconRegion](com.voltmx.beaconregion.html) object.
 
-Remarks
+### Remarks
 
 You usually generate only one UUID for your beacons but can generate more as needed and pass them through the _proximityUUID_ parameter. You can generate UUIDs using the uuidgen command-line tool, which is widely available on the internet, or by using an online UUID generator..
 
@@ -198,15 +207,17 @@ When you are grouping related sets of beacons, you typically do so by location. 
 
 The _identifier_ parameter enables you to specify a unique name for each [BeaconRegion](com.voltmx.beaconregion.html) object. Therefore, your app can use this identifier to differentiate regions within your application.
 
-Example
+**Example**
 
-{% highlight voltMx %}var BeaconRegion1= new com.voltmx.BeaconRegion(UUIDString1, major1, minor1, identifier1)
+{% highlight VoltMx %}
+var BeaconRegion1 = new com.voltmx.BeaconRegion(UUIDString1, major1, minor1, identifier1)
 {% endhighlight %}
 
-Availability
+### Availability
 
 Available only on iOS.
 
 * * *
 
 ![](resources/prettify/onload.png)
+</details>

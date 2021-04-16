@@ -11,7 +11,8 @@ The properties of ComboBox Widget are as follows:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
@@ -19,19 +20,21 @@ Enables you to control accessibility behavior and alternative text for the widge
 
 For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
@@ -49,7 +52,7 @@ The accessibilityConfig property is a JavaScript object which can contain the fo
 | a11yHidden | Boolean | This is an optional parameter. Specifies if the widget should be ignored by assistive technology. The default option is set to _false_. This option is supported on iOS 5.0 and above, Android 4.1 and above, and SPA | For all widgets, this parameter maps to the `aria-hidden` property of ARIA in HTML. |
 | a11yARIA | Object | This is an optional parameter. For each widget, the key and value provided in this object are added as the attribute and value of the HTML tags respectively. Any values provided for attributes such as `aria-labelledby` and `aria-describedby` using this attribute, takes precedence over values given in `a11yLabel` and `a11yHint` fields. When a widget is provided with the following key value pair or attribute using the a11yARIA object, the tabIndex of the widget is automatically appended as zero.`{"role": "main"}``aria-label` | This parameter is only available on the Desktop Web platform. |
 
-Android limitations
+**Android limitations**
 
 *   If the results of the concatenation of a11y fields result in an empty string, then `accessibilityConfig` is ignored and the text that is on widget is read out.
 *   The soft keypad does not gain accessibility focus during the right/left swipe gesture when the keypad appears.
@@ -60,13 +63,13 @@ SPA/Desktop Web limitations
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+**Example 1**
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
 {% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
-/*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
+/* You need to make a corresponding use of the accessibilityConfig property for other applicable widgets. */
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": "Label",
@@ -75,7 +78,7 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+**Example 2**
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
@@ -84,45 +87,48 @@ This example uses the button widget to implement internationalization in `access
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
 };  
-/*Sample code to implement internationalization in accessibilityConfig property in Desktop Web platform.*/
+/* Sample code to implement internationalization in accessibilityConfig property in Desktop Web platform. */
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": "voltmx.i18n.getLocalizedString(\"key3\")"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>anchorPoint Property</summary>
 
 * * *
 
 Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 anchorPoint
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The value for this property is a JavaScript dictionary object with the keys "x" and "y". The values for the "x" and "y" keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Example
+### Example
 
 {% highlight voltMx %}Form1.widget1.anchorPoint = {
     "x": 0.5,
@@ -130,68 +136,72 @@ Example
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[blockedUISkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>blockedUISkin Property</summary>
 
 * * *
 
 Specifies the skin that must be used to block the interface until the action in progress (for example, a service call) is completed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 blockedUISkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is none. That means no skin is applied. To specify a skin, select a skin from the list.
 
 > **_Note:_** For the skin to be available in the list, you must add a skin for Blocked UI under Widget Skins.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the blockedUISkin property for a ComboBox Widget.
+{% highlight VoltMx %}//Sample code to set the blockedUISkin property for a ComboBox Widget.
 frmCombobox.myCombobox.blockedUISkin="blockUiSkn";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   SPA (iPhone/Android/BlackBerry/Windows NTH)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentAlignment Property</summary>
 
 * * *
 
 This property specifies the alignment of the text on the widget with respect to its boundaries.
 
-Syntax
+### Syntax
 
 contentAlignment
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read+Write
 
-Remarks
+### Remarks
 
 The default value for the property is _CONTENT\_ALIGN\_CENTER_.
 
@@ -207,64 +217,69 @@ The following are the available options:
 *   constants.CONTENT\_ALIGN\_BOTTOM\_CENTER
 *   constants.CONTENT\_ALIGN\_BOTTOM\_RIGHT
 
-Limitations
+**Limitations**
 
 Desktop Web/ SPA platforms do not support _contentAlignment_ property in Camera widget, ComboBox widget and ListBox widget.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the contentAlignment property of the widgetID Button widget in frmHome Form.*/  
+{% highlight VoltMx %} /* Sample code to set the contentAlignment property of the widgetID Button widget in frmHome Form. */
   
 frmHome.widgetID.contentAlignment=constants.CONTENT_ALIGN_TOP_LEFT;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[dropDownImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>dropDownImage Property</summary>
 
 * * *
 
 Specifies the image to be used for the drop-down box indicator. This is an inverted triangle by default. If you do not specify an image, the drop-down box displays the default image.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 dropDownImage
+{% endhighlight %}
 
-Type
+### Type
 
 String/image object
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 For iOS platform, the drop down image should be 20px \* 33px for non retina devices and for retina devices the image size should be 40px \* 66px.
 
-Example
+### Example
 
 Using a locally defined image:
 
-{% highlight voltMx %}//Sample code to set the dropDownImage property for a ComboBox Widget.
+{% highlight VoltMx %}
+//Sample code to set the dropDownImage property for a ComboBox Widget.
 frmCombobox.myCombobox.dropDownImage="ddimage.png";
 {% endhighlight %}
 
 Using an image object (voltmx.image):
 
-{% highlight voltMx %}//Sample code to set the dropDownImage property for a ComboBox Widget using Image Object  
+{% highlight VoltMx %}
+//Sample code to set the dropDownImage property for a ComboBox Widget using Image Object  
   
 var imgObjRef = voltmx.image.createImage("local.png");
 frmCombobox.myCombobox.dropDownImage=imgObjRef;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -272,7 +287,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
@@ -280,19 +296,21 @@ The `enable` property is used to control the actionability of the widgets. In a 
 
 This is a constructor level property and applicable for all widgets in Volt MX Iris.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
@@ -300,16 +318,16 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
-  
-/*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
-  
+{% highlight VoltMx %}//This is a generic property and is applicable for many widgets.  
+ 
+/* The example provided is for the Button widget. Make the changes required in the example while using other widgets. */
+
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
@@ -317,61 +335,68 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}
+Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[focusSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>focusSkin Property</summary>
 
 * * *
 
 Specifies the look and feel of the ComboBox when in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 focusSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In Desktop Web platform, Chrome browser does not support if the properties defined in font tab are different for [skin](#skin) and focusSkin.
 
@@ -380,50 +405,55 @@ In Desktop Web platform, Chrome browser does not support if the properties defin
 2\. Mobile Web does not support this property, instead browser specific focus will be applied.  
 3\. On Windows Platform, focusSkin is applied only to the selected item, but not to the entire widget when in focus.  
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the focusSkin property for a ComboBox Widget.  
+{% highlight VoltMx %}
+//Sample code to set the focusSkin property for a ComboBox Widget.  
   
 frmCombobox.myCombobox.focusSkin="comboFSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[groupCells Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>groupCells Property</summary>
 
 * * *
 
 Specifies if the group cells style must be applied.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 groupCells
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false. This property is applicable only when [viewType](#viewType) is set as COMBOBOX\_VIEW\_TYPE\_TABLEVIEW.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable the groupCells property for a ComboBox Widget.  
+{% highlight VoltMx %}
+//Sample code to enable the groupCells property for a ComboBox Widget.  
   
 frmCombobox.myCombobox.groupCells=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPad
@@ -431,65 +461,72 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hoverSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hoverSkin Property</summary>
 
 * * *
 
 Specifies the look and feel of a widget when the cursor hovers on the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 hoverSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
 Setting the hoverSkin property on an existing widget
 
-{% highlight voltMx %}FormHover.widgetID.hoverSkin="theHoverSkin";
+{% highlight VoltMx %}FormHover.widgetID.hoverSkin="theHoverSkin";
 //the Hover Skin is a hover skin created under Skins tab
 {% endhighlight %}
 
 > **_Note:_** To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy. This is applicable for the Desktop web platform.
 
-{% highlight voltMx %}formid.widgetid.hoverSkin = "skinname";
+{% highlight VoltMx %}
+formid.widgetid.hoverSkin = "skinname";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 id is a unique identifier of button consisting of alpha numeric characters. Every ComboBox should have a unique id within an Form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String - \[Mandatory\]
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for ComboBox with the id:"combobox1"
+{% highlight VoltMx %}//Defining the properties for ComboBox with the id:"combobox1"
 var comboBasic = {
     id: "combobox1",
     isVisible: true
@@ -508,38 +545,40 @@ combo = new voltmx.ui.ComboBox(comboBasic, comboLayout, comboPSP);
 alert("ComboBox ID is ::" + combo.id);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the widget. This will help in avoiding the globals to most part of the programming.
 
-Syntax
+### Syntax
 
 info
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is a **non-Constructor** property. You cannot set this property through widget constructor. But you can read and write data to it.
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}var inf = {
+{% highlight VoltMx %}
+var inf = {
     a: 'hello'
 };
 widget.info = inf;
@@ -551,9 +590,9 @@ widget.info.a = 'hello world';
 widget.info.a will have old value as hello.*/
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set info property for a ComboBox widget
+{% highlight VoltMx %}//Sample code to set info property for a ComboBox widget
 
 frmCombobox.myCombobox.info = {
     key: "comboboxitems"
@@ -563,32 +602,35 @@ frmCombobox.myCombobox.info = {
 voltmx.print("Combobox widget info:" +frmCombobox.myCombobox.info);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[inputAccessoryViewType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>inputAccessoryViewType Property</summary>
 
 * * *
 
 While building iPhone applications that support or provide text input, it is necessary to create some extra buttons (or other controls) beyond the ones provided by the default keyboard interface. Volt MX AppPlatform by default, adds the Previous, Next, and Done buttons to the applicable input controls. These buttons allow specific operations needed by your application, such as moving to the next or previous text field, making the keyboard disappear and so on. The area above the keyboard is known as Input Accessory View.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 inputAccessoryViewType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Yes
 
-Remarks
+### Remarks
 
 The default value for this property is COMBOBOX\_INPUTACCESSORYVIEW\_DEFAULT.
 
@@ -606,14 +648,14 @@ To turn on/off the header at widget-level, assign any of the following constants
 
 *   COMBOBOX\_INPUTACCESSORYVIEW\_CANCEL: Specifies that the input accessory view has a Cancel button. This constant does not trigger any events.
 
-Example
+#### Example
 
-{% highlight voltMx %}//Sample code to set the inputAccessoryViewType property for a ComboBox Widget.  
+{% highlight VoltMx %}//Sample code to set the inputAccessoryViewType property for a ComboBox Widget.  
   
 frmCbox.myCbox.inputAccessoryViewType=constants.COMBOBOX_INPUTACCESSORYVIEWTYPE_DEFAULT;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -621,101 +663,110 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
 This property controls the visibility of a widget on the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 You can set the visibility of a widget dynamically from code using the setVisibility method.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the isVisible property for a ComboBox Widget.  
-  
+{% highlight VoltMx %}//Sample code to set the isVisible property for a ComboBox Widget.  
+
 frmCombobox.myCombobox.isVisible=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[lockTextScroll Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>lockTextScroll Property</summary>
 
 * * *
 
 This property allows you to enable/disable the horizontal scrolling for the selected item in the ComboBox Widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 lockTextScroll
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
 If set to _true,_ the scrolling for the selected item is disabled. If set to _false,_ the scrolling for the selected item is enabled.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable the lockTextScroll property for a ComboBox Widget.  
+{% highlight VoltMx %}//Sample code to enable the lockTextScroll property for a ComboBox Widget.  
   
 frmCombobox.myCombobox.lockTextScroll=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   This property is available on Windows Phone 8/8/1 platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[masterData Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>masterData Property</summary>
 
 * * *
 
 Specifies the set of values that must be displayed for the user to make a selection from the available choices.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 masterData
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is user defined. You must specify the key and the display value
 
@@ -733,7 +784,7 @@ The following image illustrates the MasterData for ComboBox window:
 
 > **_Note:_** The accessibilityConfigObject is optional and the object should contain the keys as defined in the accessibilityConfig property.
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Format of the masterData property
 
 [
@@ -743,9 +794,9 @@ The following image illustrates the MasterData for ComboBox window:
 ]
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the masterData property for a ComboBox Widget.  
+{% highlight VoltMx %}//Sample code to set the masterData property for a ComboBox Widget.  
   
 frmCombobox.myCombobox.masterData = [
  ["A", "Asia", accessibilityConfigObject],
@@ -755,28 +806,31 @@ frmCombobox.myCombobox.masterData = [
 ];
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[masterDataMap Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>masterDataMap Property</summary>
 
 Specifies the set of values from which you can make a selection. You must set the values from the code.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 masterDataMap
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is a **non-Constructor** property. You cannot set this property through widget constructor. But you can read and write data to it.
 
@@ -784,7 +838,7 @@ This property is applicable only if the [masterData](#masterDa) is not set. You 
 
 You must specify a key, value, and the accessibilityConfig in a master data map.
 
-{% highlight voltMx %}//Format of the masterDataMap property
+{% highlight VoltMx %}//Format of the masterDataMap property
 [
     [{
             "mykey": "item1",
@@ -808,9 +862,9 @@ You must specify a key, value, and the accessibilityConfig in a master data map.
 
 > **_Note:_** If the key or the value is _null/nil_, the value will not be listed as one of the available choices.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the masterDataMap property for a ComboBox Widget.  
+{% highlight VoltMx %}//Sample code to set the masterDataMap property for a ComboBox Widget.  
   
 frmCombobox.myCombobox.masterDataMap = [
  [{
@@ -829,14 +883,15 @@ frmCombobox.myCombobox.masterDataMap = [
 ];
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Not available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>opacity Property</summary>
 
 * * *
 
@@ -844,23 +899,25 @@ Specifies the opacity of the widget. The value of this property must be in the r
 
 Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 opacity
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This property has more priority compared to the values coming from the configured skin.
 
-Example
+### Example
 
 {% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
@@ -869,79 +926,85 @@ frmHome.widgetID.opacity = 0;
 frmHome.widgetID.opacity = 1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE.
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Helps you access the parent of the widget. If the widget is not part of the widget hierarchy, the parent property returns null.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 parent
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 > **_Note:_** The property works for all the widgets inside a FlexForm, FlexContainer or FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}function func() {
+{% highlight VoltMx %}function func() {
 
     voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[placeholder Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>placeholder Property</summary>
 
 * * *
 
 Specifies the temporary or substitute text (a hint provided as a word or phrase) that must be displayed on the ComboBox until the actual selection is made. If you do not specify the placeholder text, the first option in the list is shown as the selected value.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 placeholder
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 On iPhone platform, placeholder is supported only when the viewType is set as COMBOBOX\_VIEW\_TYPE\_LISTVIEW.
 
-Example
+### Example
 
 If you specify a value for the placeholder property and set selectedkey=nil or selectedkeyvalue=nil, then the specified placeholder is displayed to the user when the Combo Box is rendered.
 
-{% highlight voltMx %}//Sample code to set the placeholder property for a ComboBox Widget.  
-  
+{% highlight VoltMx %}//Sample code to set the placeholder property for a ComboBox Widget.  
+
 frmCombobox.myCombobox.placeholder= "Please select a value";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPad
@@ -952,109 +1015,120 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[popupFocusSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>popupFocusSkin Property</summary>
 
 * * *
 
 Specifies the skin that is applied to each item in the native popup (list of options available) that appears when you select the ComboBox.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 popupFocusSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the popupFocusSkin property for a ComboBox Widget.  
+{% highlight VoltMx %}
+//Sample code to set the popupFocusSkin property for a ComboBox Widget.  
   
 frmCombobox.myCombobox.popupFocusSkin= "popFSkn";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   This property is available on BlackBerry platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[popupSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>popupSkin Property</summary>
 
 * * *
 
 Specifies the skin that is applied to each item in the native popup (list of options available) that appears when you select the ComboBox.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 popupSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the popupSkin property for a ComboBox Widget.  
-  
+{% highlight VoltMx %}//Sample code to set the popupSkin property for a ComboBox Widget.  
+
 frmCombobox.myCombobox.popupSkin= "popSkn";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   This property is available on BlackBerry platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[popupTitle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>popupTitle Property</summary>
 
 * * *
 
 Specifies the title text to be displayed for the ComboBox.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 popupTitle
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is _Please Select_.
 
 ![](Resources/Images/Title_text_Listbox.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the popupTitle property for a ComboBox Widget.  
-  
+{% highlight VoltMx %}//Sample code to set the popupTitle property for a ComboBox Widget.  
+
 frmCombobox.myCombobox.popupTitle="ComboPopUp";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -1064,7 +1138,7 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1087,24 +1161,27 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
-/*You need to make a corresponding use of the 
-retainContentAlignment property for other applicable widgets.*/
+/* You need to make a corresponding use of the 
+retainContentAlignment property for other applicable widgets. */
 var btn = new voltmx.ui.Button({
     "focusSkin": "defBtnFocus",
     "height": "50dp",
@@ -1126,14 +1203,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -1143,7 +1221,7 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1166,24 +1244,26 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
-//Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
-/*You need to make a corresponding use of the 
-retainFlexPositionProperties property for other applicable widgets.*/
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
+// Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
+/* You need to make a corresponding use of the 
+retainFlexPositionProperties property for other applicable widgets. */
 var btn = new voltmx.ui.Button({
     "focusSkin": "defBtnFocus",
     "height": "50dp",
@@ -1205,14 +1285,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -1222,7 +1303,7 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1245,23 +1326,26 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
-/*You need to make a corresponding use of the 
+/* You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
 var btn = new voltmx.ui.Button({
  "focusSkin": "defBtnFocus",
@@ -1285,40 +1369,43 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedKey Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedKey Property</summary>
 
 * * *
 
 Specifies the value to be shown as selected. If you do not select a value, the return value is _null/nil_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectedKey
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 On Android platform, if you do not select a value, the first item in the ComboBox is selected.
 
 If you create a ComboBox with multiple values, you can choose to show a specific value as selected when the ComboBox is rendered.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the selectedKey property for a ComboBox Widget with the key:key1.  
+{% highlight VoltMx %}//Sample code to set the selectedKey property for a ComboBox Widget with the key:key1.  
   
 frmCombobox.myCombobox.selectedKey="key1";
 //Sample code to read the selectedKey property of the ComboBox widget.
@@ -1326,35 +1413,38 @@ alert("ComboBox selectedKey is ::" + frmCombobox.myCombobox.selectedKey);
 
 {% endhighlight %}
 
-Availability
+### Availability
 
 *   Not available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedKeyValue Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedKeyValue Property</summary>
 
 * * *
 
 Returns the array of selected key-value pair. If you do not select a value, the return value is _null/nil_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 selectedKeyValue
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the selectedKeyValue property for a ComboBox Widget.  
-  
+{% highlight VoltMx %}//Sample code to set the selectedKeyValue property for a ComboBox Widget.  
+
 frmCombobox.myCombobox.selectedKeyValue = [
  ["key1", "value1"],
  ["key2", "value2"]
@@ -1364,7 +1454,7 @@ alert("ComboBox selectedKey is ::" + frmCombobox.myCombobox.selectedKeyValue);
 
 {% endhighlight %}
 
-Availability
+### Availability
 
 Not available in the IDE.
 
@@ -1373,25 +1463,28 @@ Not available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showAppMenu Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showAppMenu Property</summary>
 
 * * *
 
 This property provides you to show or hide the app menu when the dialog is open.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 showAppMenu
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property true.
 
@@ -1399,69 +1492,75 @@ When this property is set to true, the app menu is visible.
 
 When this property is set to false, the app menu is hidden.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable the showAppMenu property for a ComboBox Widget.  
-  
-frmCombobox.myCombobox.showAppMenu=true;   
+{% highlight VoltMx %}//Sample code to enable the showAppMenu property for a ComboBox Widget.  
+
+frmCombobox.myCombobox.showAppMenu=true;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   This property is available on Windows 8.1 platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[singleLineText Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>singleLineText Property</summary>
 
 * * *
 
 If the length of the text is more than the space available, the selected options text will be displayed truncated, in a single line with (...) ellipses. The position of the ellipses is controlled by textTruncatePosition property. The default ellipses position is at the end of the line if textTruncatePosition property is not set.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 singleLineText
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable the singleLineText property for a ComboBox Widget.  
+{% highlight VoltMx %}//Sample code to enable the singleLineText property for a ComboBox Widget.  
   
 frmCombobox.myCombobox.singleLineText=true;   
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   This property is available on Android/Android Tablet platform
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[singleLineTextInPopup Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>singleLineTextInPopup Property</summary>
 
 * * *
 
 If the length of the text is more than the space available, the popup options text will be displayed truncated, in a single line with (...) ellipses. The position of the ellipses is controlled by textTruncatePositionInPopup property. The default ellipses position is at the end of the line if textTruncatePositionInPopup property is not set.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 singleLineTextInPopup
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
@@ -1469,11 +1568,11 @@ Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property false.
 
-Example
+### Example
 
 {% highlight voltMx %}//Sample code to enable the singleLineTextInPopup property for a ComboBox Widget.  
   
@@ -1481,38 +1580,41 @@ frmCombobox.myCombobox.singleLineTextInPopup=true;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   This property is available on Android/Android Tablet platform
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin Property</summary>
 
 * * *
 
 Specifies the look and feel of the ComboBox when not in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 skin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In Desktop Web platform, Chrome browser does not support if the properties defined in font tab are different for skin and [focusSkin](#focusSki).
 
 In Android platform, you can apply skin only to the dropdown list that displays when ComboBox is clicked.
 
-Example
+### Example
 
 {% highlight voltMx %}//Sample code to set the skin property for a ComboBox Widget.  
   
@@ -1520,32 +1622,35 @@ frmCombobox.myCombobox.skin="comboSkin";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textTruncatePosition Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textTruncatePosition Property</summary>
 
 * * *
 
 When the property [singleLineText](#singleLi) is set to true, this property controls the position of the ellipses (...), in the selected option text.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 textTruncatePosition
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The options are:
 
@@ -1553,7 +1658,7 @@ The options are:
 *   constants.TEXT\_TRUNCATE\_MIDDLE
 *   constants.TEXT\_TRUNCATE\_END (Default)
 
-Example
+### Example
 
 {% highlight voltMx %}/*Sample code to set the textTruncatePosition property for a ComboBox Widget to TEXT_TRUNCATE_MIDDLE.*/  
   
@@ -1561,32 +1666,33 @@ frmCombobox.myCombobox.textTruncatePosition=constants.TEXT_TRUNCATE_MIDDLE;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   This property is available on Android/Android Tablet platform
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textTruncatePositionInPopup Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textTruncatePositionInPopup Property</summary>
 
 * * *
 
 When the property [singleLineTextInPopup](#singleLi2) is set to true, this property controls the position of the ellipses (...), in the popup options text.
 
-Syntax
+### Syntax
 
 textTruncatePositionInPopup
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write### 
 
 Read + Write
 
-Remarks
+### Remarks
 
 The options are:
 
@@ -1594,7 +1700,7 @@ The options are:
 *   constants.TEXT\_TRUNCATE\_MIDDLE
 *   constants.TEXT\_TRUNCATE\_END (Default)
 
-Example
+### Example
 
 {% highlight voltMx %}/*Sample code to set the textTruncatePositionInPopup property for a ComboBox Widget to TEXT_TRUNCATE_MIDDLE.*/  
   
@@ -1602,36 +1708,39 @@ frmCombobox.myCombobox.textTruncatePositionInPopup=constants.TEXT_TRUNCATE_MIDDL
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   This property is available on Android/Android Tablet platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[tickedImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>tickedImage Property</summary>
 
 * * *
 
 Specifies the image to be displayed when you make a selection.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 tickedImage
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 If you specify a tickedImage, ensure that you also specify an [unTickedImage](#unTicked). If not specified, the behavior will be undefined.
 
-Example
+### Example
 
 {% highlight voltMx %}/*Sample code to set the tickedImage property for a ComboBox Widget with "tickedImg.png".*/  
   
@@ -1639,7 +1748,7 @@ frmCombobox.myCombobox.tickedImage="tickedImg.png";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPad
@@ -1647,25 +1756,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[toolTip Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>toolTip Property</summary>
 
 * * *
 
 Specifies the hint text when the cursor hovers over a widget, without clicking it. The text entered in the tooltip appears as a small box when the cursor hovers over a widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 toolTip
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
 {% highlight voltMx %}//Sample code to set the toolTip property for a ComboBox Widget.  
   
@@ -1673,40 +1785,43 @@ frmCombobox.myCombobox.toolTip="Sample text";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   This property is available on Windows Tablet
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transform Property</summary>
 
 * * *
 
 Contains an animation transformation that can be used to animate the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 transform
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi) function.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}//Animation sample
+{% highlight VoltMx %}//Animation sample
 var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
@@ -1714,43 +1829,46 @@ newTransform.translate3D(223, 12, 56);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-*   iOS, Android, Windows, and SPA
+* iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[unTickedImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>unTickedImage Property</summary>
 
 * * *
 
 Specifies the image to be displayed when a selection is cleared.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 unTickedImage
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 If you specify an unTickedImage, ensure that you also specify a [tickedImage](#Ticked). If not specified, the behavior will be undefined.
 
-Example
+### Example
 
 {% highlight voltMx %}//Sample code to set the unTickedImage property for a ComboBox Widget.  
-  
+
 frmCombobox.myCombobox.unTickedImage="unTickedImg.png";   
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPad
@@ -1758,25 +1876,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewConfig Property</summary>
 
 * * *
 
 Specifies the view configuration for different viewtypes.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 viewConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 You can set the configuration for toggle view.
 
@@ -1806,10 +1927,11 @@ You can set the configuration for toggle view.
 
 > Type: String
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the viewConfig property for a ComboBox Widget when the viewType property is set as COMBOBOX_VIEW_TYPE_EDITVIEW.*/  
-  
+{% highlight VoltMx %}
+/* Sample code to set the viewConfig property for a ComboBox Widget when the viewType property is set as COMBOBOX_VIEW_TYPE_EDITVIEW. */  
+ 
 frmCombobox.myCombobox.viewConfig = {
  autoSuggest: true,
  editableAreaSkin: "editareaskin"
@@ -1817,7 +1939,7 @@ frmCombobox.myCombobox.viewConfig = {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPad
@@ -1825,25 +1947,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewType Property</summary>
 
 * * *
 
 Specifies the view mode of the ComboBox.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 viewType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default option for this property is COMBOBOX\_VIEW\_TYPE\_LISTVIEW.
 
@@ -1888,15 +2013,15 @@ The below image illustrate the nextprevtoolbar set to a Combo Box. The highlight
 
 ![](Resources/Images/nextprevtoolbarwheelmode.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the viewType property for a ComboBox Widget as Editview.  
+{% highlight VoltMx %}//Sample code to set the viewType property for a ComboBox Widget as Editview.  
   
 frmCombobox.myCombobox.viewType=constants.COMBOBOX_VIEW_TYPE_EDITVIEW;   
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPad
@@ -1906,57 +2031,63 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[wheelBackgroundColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>wheelBackgroundColor Property</summary>
 
 * * *
 
 Specifies the background color for the wheel that is displayed when you click the ComboBox. This property is applicable only when you set the viewType as COMBOBOX\_VIEW\_TYPE\_ONSCREENWHEEL.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 wheelBackgroundColor
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the wheelBackgroundColor property for a ComboBox Widget.  
+{% highlight VoltMx %}//Sample code to set the wheelBackgroundColor property for a ComboBox Widget.  
   
 frmCombobox.myCombobox.wheelBackgroundColor="0000ff00";   
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iPad
 *   iPhone
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetSwipeMove Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetSwipeMove Property</summary>
 
 * * *
 
 This property is used to enable and configure left or right swipe actions for a widget. The widgetSwipeMove Property can be used for all widgets . The most common use case is for implementing swipe action for individual rows in Segment.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 widgetSwipeMove
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Input Parameters
+### Input Parameters
 
 <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 80px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 80px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 184px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 300px;"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Default Value</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translate</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Boolean</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">true</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter. When the value of this parameter is set as true, the widget moves along with the swipe in the same direction.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Xboundaries</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Size of the current widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it defines the boundaries of the swipe in the X-axis.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">swipeLeft/swipeRight</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it is used to define the configuration of the widget while swiping to the left/ right. Each <i>swipeLeft</i> or <i>swipeRight</i>parameter is an array of configuration attributes containing <i>translateRange</i> , <i>callback</i> , <i>translatePos</i> , and <i>translate</i>. This JS&nbsp;Object defines the behavior of the widget during the swipe action.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translateRange</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Size of the current widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it defines the sub-boundaries for the action when the swipe action ends.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translatePos</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Previous position of the widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it determines the final translation position to be applied to the widget when the widget swipe reaches the <i>translateRange</i> value.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">callback</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">null</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This is an optional parameter and it defines the callback which needs to be triggered when the finger swipe reaches the sub boundary defined in <i>translateRange</i>. The attributes inside this parameter are described in the following table.</td></tr></tbody></table>
 
@@ -1964,26 +2095,29 @@ The following table consists of the parameters of the _callback_ parameter:
 
 <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 111px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 93px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter consists of the widget handle or ID of the widget on which the swipe action has been performed.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">context</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is applicable only for widgets inside the Segment with row templates. Each context parameter consists of <i>rowIndex</i>, <i>sectionIndex</i> and <i>widgetref</i></td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">rowIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the row index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">sectionIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the section index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetref</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This parameter stores the handle of the Segment containing the swiped widget.</td></tr></tbody></table>
 
-Remarks
+### Remarks
 
 *   For a Segment, the **widgetSwipeMove** Property is configured while setting the data of the Segment.
 
 > **_Note:_** It is not recommended to assign the widgetSwipeMove property on a top Flex container of the segment template widget.
 
-Limitations
+### Limitations
 
 *   When a translation animation is applied to the same widget that has **widgetSwipeMove** already configured, the action which has been performed last takes precedence. For example, if you have set a translation animation on a FlexContainer and then set the _widgetSwipeMove_ property, the actions set in _widgetSwipeMove_ take precedence over the translation animation.
+
 *   The state of the swipe transition of the widget is not retained.
+
 *   In a Segment, the _widgetSwipeMove_ Property must be configured for the rows so that they reset to the previous position.
 
 *   If the widgetSwipeMove property is configured on a top level Flex container of a segment template, the onRowClick event will not be triggered. - Applicable on iOS, Android, and SPA.
+
 *   Android limitation: On Android devices, when the user lifts their finger, the transition occurs immediately.
 
-Example
+### Example
 
 Following is a code snippet for a mail app. Here we have used a Segment for listing the mail and the _widgetSwipeMove_ Property has been configured for the _SwipeFlex_ FlexContainer.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.  
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.  
 //Here, we have shown how to use the widetSwipeMove property for Button widget.
 /*You need to make a corresponding use of the 
 widgetSwipeMove property for other applicable widgets.*/  
@@ -2019,7 +2153,7 @@ this.view.myButton.widgetSwipeMove=swipeMoveConfig;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, and SPA
 
@@ -2027,3 +2161,4 @@ Platform Availability
 
 * * *
 
+</details>

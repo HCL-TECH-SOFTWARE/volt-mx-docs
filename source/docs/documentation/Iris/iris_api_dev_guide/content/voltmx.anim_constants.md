@@ -15,7 +15,8 @@ Constants
 
 The `voltmx.anim` namespace provides the following constants.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Animation Effect Constants](javascript:void(0);) 
+
+<details close markdown="block"><summary>Animation Effect Constants</summary> 
 
 * * *
 
@@ -45,7 +46,7 @@ The following constants are used to define the velocity of animation.
 
  
 
-Remarks
+### Remarks
 
 These constants are usable with the following widget methods, which are documented in the [VoltMX Iris\> Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Overview.html). These methods are available on all widgets that support animation.
 
@@ -68,18 +69,20 @@ These constants are usable with the following widget methods, which are document
 *   SetData
     
 
-Currently, animations are supported for the [SegmentedUI]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Overview.html#Segment_Properties.html#segmentedui-properties) widget.
+Currently, animations are supported for the [SegmentedUI]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Segment_Properties.html#segmentedui-properties) widget.
 
-Example 1
+### Example 1
 
-{% highlight voltMx %}animation = voltmx.anim.ANIMATION_EFFECT_LEFT;
+{% highlight VoltMx %}
+animation = voltmx.anim.ANIMATION_EFFECT_LEFT;
 form.segments.addAt(data, sectionIndex, rowIndex, animation);
 
 {% endhighlight %}
 
-**Example 2**
+### Example 2
 
-{% highlight voltMx %}function animateWidget() {
+{% highlight VoltMx %}
+function animateWidget() {
     <Widget>.animate(voltmx.ui.createAnimation({
         "100": {
             "stepConfig": {
@@ -101,11 +104,12 @@ form.segments.addAt(data, sectionIndex, rowIndex, animation);
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Animation Fill Mode Constants](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>Animation Fill Mode Constants</summary> 
 
 * * *
 
-Specifies the fill mode being used when performing [widget animations]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Overview.html#Animation.html#widget-level-animation-using-flex-forms).
+Specifies the fill mode being used when performing [widgetanimations]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Animation.html#widget-level-animation-using-flex-forms).
 
 | Constant | Description |
 | --- | --- |
@@ -116,9 +120,10 @@ Specifies the fill mode being used when performing [widget animations]({{ site.b
 
   
 
-Example
+### Example
 
-{% highlight voltMx %}                    function animConfig() {
+{% highlight VoltMx %}                    
+function animConfig() {
     var config = {
         "duration": 1,
         "iterationCount": 1,
@@ -130,5 +135,7 @@ Example
 {% endhighlight %}
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

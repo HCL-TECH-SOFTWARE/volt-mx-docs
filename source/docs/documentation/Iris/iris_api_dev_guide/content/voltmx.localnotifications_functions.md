@@ -15,7 +15,8 @@ Functions
 
 The voltmx.localnotifications namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.localnotifications.cancel](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.localnotifications.cancel</summary>
 
 * * *
 
@@ -35,10 +36,10 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}/*************************************************************************************
+{% highlight VoltMx %}/*************************************************************************************
 * Function:cancelLocalnotifications()
 * Description: function is used to cancel local notifications.
-* Author: Volt MX
+* Author: VoltMX
 *************************************************************************************/
 function cancelLocalnotifications(){
     notificationIdArray = [];
@@ -57,7 +58,8 @@ Available on iOS and Android platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.localnotifications.create](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.localnotifications.create</summary>
 
 * * *
 
@@ -88,10 +90,10 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}/*************************************************************************************
+{% highlight VoltMx %}/*************************************************************************************
 * Function:createLocalnotification()
 * Description: Creates local notifications.
-* Author: Volt MX
+* Author: VoltMX
 *************************************************************************************/
 function createLocalnotification(){ 
     var notificationId = "01";
@@ -132,12 +134,13 @@ Platform Availability
 
 Available on
 
-*   iOS (The [voltmx.notificationsettings.registerCategory](voltmx.notificationssettings_functions.html#volt-mx-notificationsettings-registercategory) API must be called before the create API for it to work)
+*   iOS (The [voltmx.notificationsettings.registerCategory](voltmx.notificationssettings_functions.html#voltmx-notificationsettings-registercategory) API must be called before the create API for it to work)
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.localnotifications.getNotifications](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.localnotifications.getNotifications</summary> 
 
 * * *
 
@@ -157,7 +160,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}// iOS Example. The callback function is not used on Android.
+{% highlight VoltMx %}// iOS Example. The callback function is not used on Android.
 function callback(arrayOfNotificationObjects)
 {
     // Your logic
@@ -181,7 +184,8 @@ Available on iOS and Android platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.localnotifications.setCallbacks](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.localnotifications.setCallbacks</summary>
 
 * * *
 
@@ -202,10 +206,10 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}/*************************************************************************************
+{% highlight VoltMx %}/*************************************************************************************
 * Function:localNotCallBacks()
 * Description: Initializes local notifications.
-* Author: Volt MX
+* Author: VoltMX
 *************************************************************************************/
 function localNotCallBacks() {
     try {
@@ -255,5 +259,7 @@ Platform Availability
 Available on iOS and Android platforms.
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

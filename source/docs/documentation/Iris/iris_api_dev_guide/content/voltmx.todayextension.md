@@ -23,32 +23,35 @@ Properties
 
 The voltmx.todayExtension Namespace contains the following property.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.todayExtension.view](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.todayExtension.view</summary>
 
 * * *
 
 Stores the current extension view.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.todayExtension.view;
+{% endhighlight %}
 
-Example
+**Example**
 
-{% highlight voltMx %}//Sample code  
+{% highlight VoltMx %}
+//Sample code  
 var myView = voltmx.todayExtension.view;
 myView.addSubView(button);
 {% endhighlight %}
 
-Type
+### Type
 
 UIView
 
-Read/Write
+### Read/Write
 
 Read only
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
@@ -57,23 +60,25 @@ Functions
 
 The voltmx.todayExtension Namespace contains the following function.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.todayExtension.setExtensionsCallbacks](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.todayExtension.setExtensionsCallbacks</summary>
 
 * * *
 
 Sets a Today extension with callbacks for app extension state changes.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.todayExtension.setExtensionsCallbacks(  
     callbackEvents);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 callbackEvents
 
 Contains an object with key-value pairs where the key specifies the extension state and the value is a callback function. The possible keys of this parameter are as follows.  
-  
 
 | Key | Description |
 | --- | --- |
@@ -86,7 +91,7 @@ Contains an object with key-value pairs where the key specifies the extension st
 | widgetPerformUpdate | The system calls this key at opportune times for the widget to update its state; both when the Notification Center is visible as well as when the Notification Center is in the background. |
 | widgetActiveDisplayModeDidChangeWithMaximumSize | Called when the active display mode changes. It has the following arguments: displayMode. It can take two values: NCWidgetDisplayModeCompact and NCWidgetDisplayModeExpanded. NSValue. It contains one value: CGSizeValue. |
 
-Example
+**Example**
 
 {% highlight voltMx %}//Sample Code 
 function loadViewSample() {
@@ -154,12 +159,13 @@ voltmx.todayExtension.setExtensionsCallbacks(callbackEvents);
 //end of code
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 ![](resources/prettify/onload.png)
+</details>

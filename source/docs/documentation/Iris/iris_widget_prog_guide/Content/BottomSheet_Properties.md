@@ -12,19 +12,23 @@ The BottomSheet widget contains the following properties:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundTransparency Property](javascript:void(0);)
+
+<details close markdown="block"><summary>backgroundTransparency Property</summary>
 
 * * *
 
 Indicates to users that the UI control is currently restricted for a BottomSheet until it is dismissed, i.e., dragged down completely.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 backgroundTransparency
+{% endhighlight %}
 
 **Example**
 
-{% highlight voltMx %}var mBottomSheetObject = new voltmx.ui.BottomSheet({
+{% highlight VoltMx %}
+var mBottomSheetObject = new voltmx.ui.BottomSheet({
     "contentWidget": FlexScrollTemplate /*This is a template*/ ,
     "peekHeight": constants.BOTTOM_SHEET_PEEK_HEIGHT_AUTO,
     "skipCollapsed": false,
@@ -46,7 +50,8 @@ backgroundTransparency
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentWidget Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentWidget Property</summary>
 
 * * *
 
@@ -65,13 +70,16 @@ For creating the template, follow these steps:
 
 You must set the contentWidget property to a valid widget template.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contentWidget
+{% endhighlight %}
 
 **Example**
 
-{% highlight voltMx %}var mBottomSheetObject = new voltmx.ui.BottomSheet({
+{% highlight VoltMx %}
+var mBottomSheetObject = new voltmx.ui.BottomSheet({
     "contentWidget": FlexScrollContainer0cf099f76793441 /*This is a template*/ ,
     "peekHeight": constants.BOTTOM_SHEET_PEEK_HEIGHT_AUTO,
     "skipCollapsed": false,
@@ -93,25 +101,28 @@ contentWidget
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[peekHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>peekHeight Property</summary>
 
 * * *
 
 The height at which a collapsed BottomSheet docks.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 peekHeight
+{% endhighlight %}
 
-Constants
+### Constants
 
 *   BOTTOM\_SHEET\_PEEK\_HEIGHT\_AUTO
 
 **Example**
 
-{% highlight voltMx %}//Sample code to set peekHeight property to a BottomSheet widget.  
+{% highlight VoltMx %}
+//Sample code to set peekHeight property to a BottomSheet widget.  
 frmBottomSheet.myBottomSheet.peekHeight = constants.BOTTOM_SHEET_PEEK_HEIGHT_AUTO;  
-
 {% endhighlight %}
 
 **Platform Availability**
@@ -120,19 +131,23 @@ frmBottomSheet.myBottomSheet.peekHeight = constants.BOTTOM_SHEET_PEEK_HEIGHT_AUT
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skipCollapsed Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skipCollapsed Property</summary>
 
 * * *
 
 If this property is set to true, a BottomSheet directly goes from an Expanded state to a Dismissed one. The BottomSheet, however, does not reach the Collapsed state.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 skipCollapsed
+{% endhighlight %}
 
 **Example**
 
-{% highlight voltMx %}var mBottomSheetObject = new voltmx.ui.BottomSheet({
+{% highlight VoltMx %}
+var mBottomSheetObject = new voltmx.ui.BottomSheet({
     "contentWidget": FlexScrollContainer0cf099f76793441 /*This is a template*/ ,
     "peekHeight": constants.BOTTOM_SHEET_PEEK_HEIGHT_AUTO,
     "skipCollapsed": false,
@@ -153,4 +168,4 @@ skipCollapsed
 *   Android
 
 * * *
-
+</details>

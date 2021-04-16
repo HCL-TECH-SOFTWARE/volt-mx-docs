@@ -12,19 +12,22 @@ TemplateController Methods
 
 The TemplateController object provides the following method.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[executeOnParent Method](javascript:void(0);) 
+
+<details close markdown="block"><summary>executeOnParent Method</summary> 
 
 * * *
 
 Executes the specified method of the parent object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 executeOnParent(  
     methodName,  
     methodParams);
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _methodName_
 
@@ -34,42 +37,49 @@ _methodParams_
 
 An optional list of parameters to pass to the method specified by the _methodName_ parameter.
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 The parent of this object is always a FormController object. This method should only be called from sub-view controllers.
 
-Example
+### Example
 
-{% highlight voltMx %}this.executeOnParent(“func1”, “param1”, "param2");
+{% highlight VoltMx %}
+this.executeOnParent(“func1”, “param1”, "param2");
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getCurrentView Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getCurrentView Method</summary>
 
 * * *
 
 Retrieves the current view for the template controller.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 getCurrentView();
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 Returns the template controller's view.
 
-Example
+### Example
 
-{% highlight voltMx %}var currentView = tmpController.getCurrentView();
+{% highlight VoltMx %}
+var currentView = tmpController.getCurrentView();
 {% endhighlight %}
 
 * * *
+
+</details>

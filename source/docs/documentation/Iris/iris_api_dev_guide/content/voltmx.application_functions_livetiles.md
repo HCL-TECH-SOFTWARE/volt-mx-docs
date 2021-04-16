@@ -10,19 +10,22 @@ Functions
 
 The Live Tiles API contains the following functions, which are part of the [voltmx.application Namespace](voltmx.application_functions.html).
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.setAppTile](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.application.setAppTile</summary>
 
 * * *
 
 This API enables you to set the data for an application tile. If the user chooses to pin the application tile, the data set is visible. For more information on pinning a tile, refer [http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx](http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setAppTitle([tileTemplateType](#tileTemplateType), [tileTemplateData](#tileTemplateData))  
 
 setapptile([tileTemplateType](#tileTemplateType), [tileTemplateData](#tileTemplateData))
+{% endhighlight %}
 
-Input Parameters for Windows 10
+### Input Parameters for Windows 10
 
   
 | Parameter | Description |
@@ -31,17 +34,17 @@ Input Parameters for Windows 10
 | tileTemplateData \[Array\] - Optional | tileTemplateData is an array of data for the tile, according to the tileTemplateType being used. The [tile template catalog](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh761491.aspx). contains details of the data required for each tile template. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}voltmx.application.setAppTile("TileSquareBlock", ["Hello", "World!"] );
+{% highlight VoltMx %}
+voltmx.application.setAppTile("TileSquareBlock", ["Hello", "World!"] );
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-UI Behavior - Windows 10
+### UI Behavior - Windows 10
 
 The title and the display name of the tile will be displayed in white or black depending on the setting in Volt MX Irisand this behavior cannot be changed even if the user sets a different theme or a background image. Unlike Mango, tiles cannot be flipped on Windows 10. The tile can be updated dynamically in Windows 10.
 
@@ -53,21 +56,23 @@ Available on Windows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.setSecondaryTile](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.setSecondaryTile</summary>
 
 * * *
 
 This function enables you to create or update data for a secondary tile for an application. For more information about secondary tiles, refer [Secondary tiles](http://msdn.microsoft.com/en-us/library/windows/apps/hh465372.aspx).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setSecondaryTile([id](#id2), [shortname](#title), [displayname](#displayname), [imagename](#imagename))  
 
 setSecondaryTile([id](#id2), [shortname](#title), [displayname](#displayname), [imagename](#imagename))
+{% endhighlight %}
 
-Input Parameters for Windows 10
-
-  
+### Input Parameters for Windows 10
+ 
 | Parameter | Description |
 | --- | --- |
 | id \[String\] - Mandatory | Unique identifier of the secondary tile. |
@@ -76,40 +81,43 @@ Input Parameters for Windows 10
 | imagename \[String\] - Optional | Name of the image to be displayed on the tile. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}//Setting a secondary tile for an application with tile id myTile1.
+{% highlight VoltMx %}
+//Setting a secondary tile for an application with tile id myTile1.
 voltmx.application.setSecondaryTile("myTile1", "title text", "display name", "orange.png");
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-UI Behavior - Windows 10
+### UI Behavior - Windows 10
 
 The title and the display name of the tile will be displayed in white or black depending on the setting in Volt MX Irisand this behavior cannot be changed even if the user sets a different theme or a background image. Unlike Mango, tiles cannot be flipped on Windows 10. The tile can be updated dynamically in Windows 10.
 
 ![](resources/images/live_tile_win8_142x141.png)
 
-Platform Availability
+### Platform Availability
 
 Available for Windows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.removeSecondaryTile](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.removeSecondaryTile</summary>
 
 * * *
 
 This API enables you to remove and unpin a specified secondary tile which was created earlier.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.removeSecondaryTile([id](#id2))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -120,17 +128,19 @@ Input Parameters
 
 **Example**
 
-{% highlight voltMx %}voltmx.application.removeSecondaryTile("12345");
+{% highlight VoltMx %}
+voltmx.application.removeSecondaryTile("12345");
 {% endhighlight %}
 
-Return Values
+#### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on Windows.
 
 * * *
-
+</details>
 ![](resources/prettify/onload.png)
+

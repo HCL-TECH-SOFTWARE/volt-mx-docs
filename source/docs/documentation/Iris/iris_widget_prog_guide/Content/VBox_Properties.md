@@ -11,7 +11,8 @@ The properties for the VBox Widget are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
@@ -19,19 +20,21 @@ Enables you to control accessibility behavior and alternative text for the widge
 
 For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
@@ -60,11 +63,12 @@ SPA/Desktop Web limitations
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+### Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -75,11 +79,12 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}
+/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -91,30 +96,33 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[blockedUISkin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>blockedUISkin</summary>
 
 Specifies the skin that must be used to block the interface until the action in progress (for example, a service call) is completed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 blockedUISkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is None (No skin is applied).
 
@@ -122,9 +130,9 @@ To specify a skin, select a skin from the list.
 
 For the skin to be available in the list, you must add a skin for Blocked UI under Widget Skins.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Call back for box onClick event
 function boxblockedUISkinTCSPAPlayClick(box){  
 	//Call the service here to observe blockedUI skin  
@@ -150,28 +158,31 @@ var boxblockedUISkin = new voltmx.ui.Box(basicConfBox, layoutConfBox, {blockedUI
 **boxblockedUISkin.add(lblblockedUISkin);**
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   SPA (iPhone/Android/BlackBerry/Windows NTH)
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[borderCollapse](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>borderCollapse</summary>
 
 Specifies if the space between the Box and its child widgets is considered.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 borderCollapse
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -181,9 +192,9 @@ If set to _false,_ the default space between the parent and the child widget ret
 
 ![](Resources/Images/border_collapse.png)
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Creating the box with borderCollapse:true .(If you set the Border-Collapse value to true, the default space between the parent and the child widget reduces else not.)
 var basicConfBox = {id:"boxBorderCollapse", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL};
 
@@ -195,33 +206,36 @@ var PSPConfBox = {**borderCollapse:true**}
 var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Server side Mobile Web (basic)
 *   Server side Mobile Web (BJS)
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[containerWeight](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>containerWeight</summary>
 
 Specifies percentage of width to be allocated by its parent widget. The parent widget space is distributed to its child widgets based on this weight factor. All its child widgets should sum up to 100% of weight except when placed in **voltmx.ui.ScrollBox**.
 
 For example, a Form has Label1, Button1, and Button2 and the container weight could be 30 each for Label1 and Button1 and 40 for Button2, so that the sum of the container weight is 100.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 containerWeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number (less than or equal to 100)
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for a box with containerWeight:50 (box will occupy half of its parent widget).
 var basicConfBox = {id:"boxContainerWeightTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL, skin:"gradroundbox"};
 
@@ -231,27 +245,30 @@ var layoutConfBox = {**containerWeight:50,margin:[0,5,0,5]**};
 boxContainerWeightTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contextMenu](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contextMenu</summary>
 
 Shows the list of actions (appropriate to the widget in focus) as menu items.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contextMenu
+{% endhighlight %}
 
-Type
+### Type
 
 Array (voltmx.ui.Menuitem)
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Due to BlackBerry platform limitation, to display a context menu for an Box, you must define an [onclick event](Box_Events.html#onclick) for the Box.
 
@@ -299,9 +316,9 @@ Series of steps to be followed to use contextMenu:
 3.  Go to your project and then to desired form and drag-drop a hbox and navigate to Desktop Web properties in Widget Properties window.
 4.  Select the contextmenu template from the dropdown.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining contextMenu items for Windows 8 platform.
 var appMenu1 = {id:"appmenuitemid1", text:"Add", image:"tc.png", onclick:callbackMenuItem1 };
 
@@ -344,7 +361,7 @@ var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBo
 
 The below example is applicable to Desktop Web platform only.
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining contextMenu template.  
 function initializeaddtoabc() {
 menucontainer12068 = new voltmx.ui.MenuContainer({
@@ -376,58 +393,64 @@ var PSPConfBox = {**contextMenu:menucontainer12068**};
 var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );
 {% endhighlight %}
 
-Availability
+**Availability**
 
 *   Available in the IDE only for the Desktop Web platform
 *   Android
 *   BlackBerry
 *   Windows Tablet
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache</summary>
 
 This property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 When this property is used, it increases the memory consumption by the application. It enables tradeoff between performance and visual quality of the content.
 
-Availability
+**Availability**
 
 Available in the IDE
 
 This property is supported only on Windows platform
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[focusSkin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>focusSkin</summary>
 
 This is a skin property and it determines the look and feel when there is focus on a widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 focusSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 For more information on how to create and work with skins, see the _Working with Applications_ section of the _VoltMX Iris User Guide_.
 
@@ -435,9 +458,9 @@ You must be aware of the following:
 1\. On J2ME, if you do not specify the Focus skin, it is not possible to identify the focus change between the widgets.  
 2\. Mobile Web does not support this property; instead browser specific focus will be applied.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for a box with focusSkin:"boxGrayFocus"
 var basicConfBox = {id:"boxFocusSkinTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL, kin:"boxGray", **focusSkin:"boxGrayFocus"**};
 
@@ -450,13 +473,14 @@ boxFocusSkinTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 alert("box focusSkin is ::"+boxFocusSkinTest.focusSkin);
 {% endhighlight %}
 
-Availability
+**Availability**
 
 Available in the IDE
 
 Available on all platforms. and SPA (Windows Tablet only)
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[gridCell](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>gridCell</summary>
 
 Represents the grid cell details in the sequence colSpan, rowSpan, rowNo, colNo. Description of the details are:
 
@@ -465,27 +489,29 @@ Represents the grid cell details in the sequence colSpan, rowSpan, rowNo, colNo.
 *   rowNo: Specifies the row number in where the widget is placed in a grid layout.
 *   colNo: Specifies the column number in where the widget is placed in a grid layout.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 gridCell
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is applicable only when a widget is placed inside a container widget with Grid Layout applied.
 
 Layout type is not visible as a property. It is set when the user applies XYLayout or GridLayout on a form. The default option is XYLayout. To set GridLayout, right-click on the form and select Apply GridLayout.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a box with gridCell.
 var basicConfBox = {id:"boxLayoutAlignmentLeftTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL,skin:"gradroundbox"};
 
@@ -499,50 +525,56 @@ layoutMeta: {
 boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 {% endhighlight %}
 
-Availability
+**Availability**
 
 *   Windows Tablet
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hoverSkin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hoverSkin</summary>
 
 Specifies the look and feel of a widget when the cursor hovers on the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 hoverSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Windows Tablet
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id</summary>
 
 id is a unique identifier of a Box consisting of alpha numeric characters. Every Box widget should have a unique id within a Form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Creating the box with the ID :"boxIdTest".
 var basicConfBox = {**id:"boxIdTest"**, isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL};
 
@@ -555,43 +587,46 @@ boxIdTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 alert("box id is ::"+boxIdTest.id);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
 Available on all platforms
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info</summary>
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the widget. This will help in avoiding the globals to most part of the programming.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Remarks
+### Remarks
 
 This is a **non-Constructor** property. You cannot set this property through widget constructor. But you can read and write data to it.
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var inf = {a: 'hello'};
 widget.info = inf; //works
 widget.info.a = 'hello world'; //This will not update the widget info a property to Hello world. widget.info.a will have old value as hello.
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Creating the box with the info property.
 var basicConfBox = {id:"boxIdTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL};
 
@@ -604,27 +639,30 @@ boxIdTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 alert("box info is ::"+boxIdTest.info);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible</summary>
 
 This property controls the visibility of a widget on the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property true.
 
@@ -632,11 +670,11 @@ If set to _false,_ the widget is not displayed.
 
 If set to _true,_ the widget is displayed.
 
-This property is not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so using the [Segment Methods](Segment_Methods_new.html).
+This property is not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so using the [Segment Methods](Segment_Methods.html).
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for a box with isVisible:true.
 var basicConfBox = {id:"boxisVisibleTest", **isVisible:true**, orientation:constants.BOX_LAYOUT_VERTICAL};
 
@@ -659,29 +697,32 @@ alert("Second box visibility is ::"+boxisVisibleTest.isVisible);
 
 > **_Note:_** You can set the visibility of a widget dynamically from code using the setVisibility method.
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE (Except for form/popup)
 
 Available on all platforms. platform.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layoutAlignment](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layoutAlignment</summary>
 
 This property is applicable if the [percent](#percent) property is set to _false_. Specifies the direction in which the widgets are laid out.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 layoutAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is BOX\_LAYOUT\_ALIGN\_FROM\_LEFT.
 
@@ -691,11 +732,11 @@ The available options are:
 *   BOX\_LAYOUT\_ALIGN\_FROM\_CENTER: The widgets placed inside a box are aligned center.
 *   BOX\_LAYOUT\_ALIGN\_FROM\_RIGHT: The widgets placed inside a box are aligned right.
 
-To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
+To set the value through code, prefix the option with _constants._ such as _**constants.<option>
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a box with layoutAlignment:BOX_LAYOUT_ALIGN_FROM_LEFT(If percent property is false then this property is considered).
 var basicConfBox = {id:"boxLayoutAlignmentLeftTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL,skin:"gradroundbox"};
 
@@ -705,29 +746,32 @@ var layoutConfBox = {containerWeight:100, percent:false, **layoutAlignment:const
 boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 {% endhighlight %}
 
-Availability
+**Availability**
 
 Available in the IDE
 
 Available on all platforms
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layoutMeta](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layoutMeta</summary>
 
 A custom JSObject with the key, value pairs that developer can use to provide the meta info about the grid layout. The following are the mandatory keys required to be part of the Meta.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 layoutMeta
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The data for layoutmeta data is set when you set grid layout view properties for rows and columns. This property can be set using Volt MX Iris Grid Layout view. To set the view, go to Window > Show View > Others and select GridLayout View from Volt MX Iris folder.
 
@@ -739,9 +783,9 @@ The data for layoutmeta data is set when you set grid layout view properties for
 
 The sum total of percentage (%) widths of each of the columns in the grid layout should add up to 100%.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a box with layoutMeta.
 var basicConfBox = {id:"boxLayoutAlignmentLeftTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL,skin:"gradroundbox"};
 
@@ -755,11 +799,12 @@ var layoutConfBox = {containerWeight:100, percent:false, layoutType: constants.C
 boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 {% endhighlight %}
 
-Availability
+**Availability**
 
 *   Windows Tablet
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[layoutType](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>layoutType</summary>
 
 Defines the type of the layout of container widget. Following are the available options:
 
@@ -768,21 +813,23 @@ Defines the type of the layout of container widget. Following are the available 
 
 > **_Note:_** Layout type is not visible as a property. It is set when the user applies XYLayout or GridLayout on a form. From the IDE, the default option is XYLayout. To set GridLayout, right-click on the form and select Apply GridLayout.  
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 layoutType
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a box with layoutType:CONTAINER_LAYOUT_GRID.
 var basicConfBox = {id:"boxLayoutAlignmentLeftTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL,skin:"gradroundbox"};
 
@@ -797,28 +844,31 @@ layoutMeta: {
 boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 {% endhighlight %}
 
-Availability
+**Availability**
 
 *   Available in the IDE
 *   Windows Tablet
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[margin](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>margin</summary>
 
 Defines the space around a widget. You can use this option to define the left, top, right, and bottom distance between the widget and the next element.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 margin
+{% endhighlight %}
 
-Type
+### Type
 
 Array of Numbers
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 To define the margin values for a platform, click the (![](Resources/Images/clicktoedit.png)) button against the property to open the _Margin_ screen. Select the checkbox against the platform for which you want to define the margins and enter the top, left, right, and bottom margin values.
 
@@ -832,9 +882,9 @@ The following image illustrates a widget with a defined margin:
 
 ![](Resources/Images/Margin.png)
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties of a box with margin:[0,5,0,5], Directions :left,top,right,bottom respectively.
 var basicConfBox = {id:"boxMarginTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL};
 
@@ -844,29 +894,32 @@ var layoutConfBox = { containerWeight:100, **margin:[0,5,0,5]**};
 boxMarginTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 {% endhighlight %}
 
-Availability
+**Availability**
 
 Available in the IDE
 
 Available on all platforms.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[marginInPixel](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>marginInPixel</summary>
 
 Indicates if the margin is to be applied in pixels or in percentage.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 marginInPixel
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -874,9 +927,9 @@ If set to _true,_ the margins are applied in pixels.
 
 If set to _false,_ the margins are applied as set in [margin](#margin) property.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for a box with margin in pixels.
 var basicConfBox = {id:"boxMarginTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL};
 
@@ -886,7 +939,7 @@ var layoutConfBox = { containerWeight:100, margin:[0,5,0,5], **marginInPixel:tru
 boxMarginTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 {% endhighlight %}
 
-Availability
+**Availability**
 
 *   Available in the IDE
 *   iPhone
@@ -894,31 +947,34 @@ Availability
 *   Android
 *   Windows Phone
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[orientation](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>orientation</summary>
 
 Specifies the orientation of the VBox. The widgets placed in a VBox are aligned vertically.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 orientation
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 The default value for this property is BOX\_LAYOUT\_VERTICAL.
 
 To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Creating the box with the orientation:constants.BOX_LAYOUT_VERTICAL.
 var basicConfBox = {id:"boxIdTest", isVisible:true, **orientation:constants.BOX_LAYOUT_VERTICAL**};
 
@@ -931,27 +987,30 @@ boxIdTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 alert("box orientation is ::"+boxIdTest.orientation);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[padding](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>padding</summary>
 
 Defines the space between the content of the widget and the widget boundaries. You can use this option to define the top, left, right, and bottom distance between the widget content and the widget boundary.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 padding
+{% endhighlight %}
 
-Type
+### Type
 
 Array of Numbers
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 To define the padding values for a platform, click the (![](Resources/Images/clicktoedit.png)) button against the property to open the _Padding_ screen. Select the checkbox against the platform for which you want to define the padding's and enter the top, left, right, and bottom padding values.
 
@@ -967,9 +1026,9 @@ The following image illustrates a widget with a defined padding:
 
 ![](Resources/Images/Padding.png)
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties of a box with padding:[10,10,10,10], Directions :left,top,right,bottom respectively.
 var basicConfBox = {id:"boxPaddingTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL};
 
@@ -979,36 +1038,39 @@ var layoutConfBox = { containerWeight:100, **padding:[10,10,10,10]**};
 boxPaddingTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 {% endhighlight %}
 
-Availability
+**Availability**
 
 Available in the IDE
 
 Available on all platforms
 
-Limitations
+**Limitations**
 
 *   iPhone - Not supported for Button unless a skin is specified.
 *   Windows Phone/Windows Desktop - Not supported for Box, Image Gallery due to Browser limitation.
 *   Mobile Web (BJS) - Not supported for ComboBox, Form, and ListBox due to Browser limitations.
 *   Mobile Web (advanced) - Not supported for ComboBox, Form, and ListBox due to Browser limitations.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[paddingInPixel](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>paddingInPixel</summary>
 
 Indicates if the padding is to be applied in pixels or in percentage.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 paddingInPixel
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for this property is false.
 
@@ -1020,9 +1082,9 @@ This property can be set to _true_ or _false_ only for iPhone, iPad, Android and
 
 For backward compatibility on older projects, this property is will be made _true_ for iPhone, iPad, Android and Windows Phone and for other platforms it will be _false_.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties of a box with padding in pixels.
 var basicConfBox = {id:"boxPaddingTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL};
 
@@ -1032,7 +1094,7 @@ var layoutConfBox = { containerWeight:100, padding:[10,10,10,10], **paddingInPix
 boxPaddingTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 {% endhighlight %}
 
-Availability
+**Availability**
 
 *   Available in the IDE
 *   iPhone
@@ -1040,25 +1102,28 @@ Availability
 *   Android
 *   Windows Phone
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>skin</summary> 
 
 Specifies the look and feel of the widget when not in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 skin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties for a box with skin:"boxGray"
 var basicConfBox = {id:"boxSkinTest", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL, **skin:"boxGray"**};
 
@@ -1071,29 +1136,32 @@ boxSkinTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 alert("box skin is ::"+boxSkinTest.skin);
 {% endhighlight %}
 
-Availability
+**Availability**
 
 Available in the IDE
 
 Available on all platforms
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewConfig](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewConfig</summary>
 
 View Configuration is applicable only when container widget layout is grid.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 viewConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 For more information on applying the Grid layout, refer Volt MX Iris User Guide.
 
@@ -1103,76 +1171,66 @@ ViewConfig displays two types of views:
 *   Grid view - Windows 8 or 8.1
 
 Following are the available properties:
-
 *   **view:** Specifies the type of view to be rendered. This option is available in both Normal grid and Grid view. Following are the available options :
-
-> *   constants.CONTAINER\_LAYOUT\_GRID (Default option)
-> *   constants.CONTAINER\_LAYOUT\_GRIDVIEW
-
+   *   constants.CONTAINER\_LAYOUT\_GRID (Default option)
+   *   constants.CONTAINER\_LAYOUT\_GRIDVIEW
 *   **gridSizeMode:** Specifies the behavior of the grid with respect to size, rows, and columns. This option is available in both Normal grid and Grid view. The available options are:
-
-> *   fixed grid - Use this option to fix the number of rows and columns. For example, columns = 4, rows = 2.  
->     1 2 3 4  
->     5 6 7 8  
->     
-> *   Vertically expand - Use this option to fix the number of columns and rows can grow indefinitely. For example, columns = 3, rows = infinite.  
->     1 2 3  
->     4 5 6  
->     7 8
-> *   Horizontally expand - Use this option to fix the number of rows are fixed and columns can grow indefinitely. For example, rows = 3, columns = infinite.  
->     1 4 7  
->     2 5 8  
->     3 6  
->     
-
+    *   fixed grid - Use this option to fix the number of rows and columns. For example, columns = 4, rows = 2.  
+        1 2 3 4  
+        5 6 7 8  
+    *   Vertically expand - Use this option to fix the number of columns and rows can grow indefinitely. For example, columns = 3, rows = infinite.  
+        1 2 3  
+        4 5 6  
+        7 8
+    *   Horizontally expand - Use this option to fix the number of rows are fixed and columns can grow indefinitely. For example, rows = 3, columns = infinite.  
+        1 4 7  
+        2 5 8  
+        3 6  
 *   **referenceWidth:** Specifies the width of the cell. This option is supported in Grid view only.
 
-> > **Type**: Number  
-> >   
-> > **Default Value:** 0 (Accepts positive numbers only)
+**Type**: Number  
+
+**Default Value:** 0 (Accepts positive numbers only)
 
 *   **referenceHeight:** Specifies the height of the cell. This option is supported in Grid view only.
 
-> > **Type**: Number  
-> >   
-> > **Default Value:** 0 (Accepts positive numbers only)
+**Type**: Number  
+
+**Default Value:** 0 (Accepts positive numbers only)
 
 *   **onClick:** If an onClick event is defined on a widget, the event callback is invoked by the platform when the user performs a click action in each cell. This option is supported in Grid view only.
-
 *   **enableItemClick:** This property enables the click behavior on each cell in grid view.This option is supported in Grid view only.
 
-> > **Type**: Boolean  
-> >   
-> > **Default Value:** false (item click is disabled)
+**Type**: Boolean  
+ 
+**Default Value:** false (item click is disabled)
 
 *   **selectionMode:** This property enables you to select the items in grid view. This option is supported in Grid view only.
+    The available options are:
 
-> The available options are:
-> 
-> *   0 - None
-> *   1 - Single
-> *   2 - Multiple
-> 
-> > **_Note:_** When you set _righttap_ event using _setGestureRecognizer_ to a container widget, the selection mode will be considered from righttap gesture arguments, the values you entered are ignored.
-> 
-> > **Type**: Number  
-> >   
-> > **Default Value:** 0
+    *   0 - None
+    *   1 - Single
+    *   2 - Multiple
+
+> **_Note:_** When you set _righttap_ event using _setGestureRecognizer_ to a container widget, the selection mode will be considered from righttap gesture arguments, the values you entered are ignored.
+
+**Type**: Number  
+
+**Default Value:** 0
 
 *   **onSelect:** An event callback is invoked by the platform when you right tap using mouse or selects with touch. This option is supported in Grid view only.
 
-> > **_Note:_** This event is invoked only when you set _selectionModeView!=0_ (None). If you set righttap event using setGestureRecognizer to a container widget, righttap gesture callback is set to onSelect automatically.
+> **_Note:_** This event is invoked only when you set _selectionModeView!=0_ (None). If you set righttap event using setGestureRecognizer to a container widget, righttap gesture callback is set to onSelect automatically.
 
 *   **orientation:** Specifies the orientation of the grid. This option is supported in Grid view only.
+    The available options are:
 
-> The available options are:
-> 
-> *   0 - Horizontal
-> *   1 - Vertical
-> 
-> > **Type**: Number  
-> >   
-> > **Default Value:** When the value is not provided, it the rowCount is more than 0 and gridSizeMode is set to constants.GRID\_SIZE\_MODE\_VERTICAL, the orientation is set to "vertical" else it is set to "Horizontal".
+    *   0 - Horizontal
+    *   1 - Vertical
+
+**Type**: Number  
+
+**Default Value:** When the value is not provided, it the rowCount is more than 0 and gridSizeMode is set to constants.GRID\_SIZE\_MODE\_VERTICAL, the orientation is set to "vertical" else it is set to "Horizontal".
 
 Possible values for Size Mode:
 
@@ -1180,29 +1238,32 @@ Possible values for Size Mode:
 *   constants.GRID\_TYPE\_GROW\_COLUMNS
 *   constants.GRID\_TYPE\_GROW\_ROWS
 
-Availability
+**Availability**
 
 Available in the IDE
 
 This property is available on Windows Tablet platform.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetAlignment](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetAlignment</summary>
 
 Indicates how a widget is to be anchored with respect to its parent. Each of these below options have a horizontal alignment attribute and a vertical alignment attribute. For example, WIDGET\_ALIGN\_TOP\_LEFT specifies the vertical alignment as TOP and horizontal alignment as LEFT.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 widgetAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 The default value for this property is WIDGET\_ALIGN\_CENTER.
 
@@ -1218,9 +1279,9 @@ The available options are:
 *   WIDGET\_ALIGN\_BOTTOM\_CENTER
 *   WIDGET\_ALIGN\_BOTTOM\_RIGHT - (BlackBerry 10 supports this option)
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining the properties of a box with widgetAlignment:constants.WIDGET_ALIGN_TOP_LEFT.
 var basicConfBox = {id:"boxwidgetAlignment", isVisible:true, orientation:constants.BOX_LAYOUT_VERTICAL, skin:"gradroundbox"};
 
@@ -1230,7 +1291,7 @@ var layoutConfBox = {containerWeight:99, **widgetAlignment:constants.WIDGET_ALIG
 boxwidgetAlignment = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 {% endhighlight %}
 
-Availability
+**Availability**
 
 *   Available in the IDE
 *   SPA

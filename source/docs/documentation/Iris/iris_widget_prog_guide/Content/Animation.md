@@ -65,7 +65,7 @@ Finally, your app calls the widget's `animate` method to perform the animation.
 Affine Transform Animation
 --------------------------
 
-Your app performs affine transform animations by first calling the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions_makeaffinetransform.html) function to create a `transform` object. Your app then calls the [methods]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html#transform_object_methods.html#methods) of the `transform` object, such as rotate, scale, and translate, to set transformations to be performed. Your app can set as many transformations on the `transform` object as it needs to. The example below illustrates how this is done.
+Your app performs affine transform animations by first calling the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions_makeaffinetransform.html) function to create a `transform` object. Your app then calls the [methods]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/transform_object_methods.html#methods) of the `transform` object, such as rotate, scale, and translate, to set transformations to be performed. Your app can set as many transformations on the `transform` object as it needs to. The example below illustrates how this is done.
 
 {% highlight voltMx %}// Creates a transformation object that can be used in an animation definition. 
 var transformObject = voltmx.ui.makeAffineTransform();

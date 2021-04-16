@@ -33,7 +33,8 @@ The properties (common for all the widgets) of the Widget class are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Alignment Property](javascript:void(0);)
+
+<details close markdown="block"><summary>Alignment Property</summary>
 
 * * *
 
@@ -47,19 +48,19 @@ The following image illustrates the widget alignment property:
 
 ![Widget Alignment when the widget size is lesser than the allocated size](Resources/Images/Alignment.png)
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -75,7 +76,8 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Expand Property (horizontal and vertical)](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Expand Property (horizontal and vertical)</summary>
 
 * * *
 
@@ -107,19 +109,19 @@ If you set the value to _true_ (select the checkbox), the widget occupies the en
 
 ![Widget when the Expand vertical is set to true ](Resources/Images/Expand_Vertical.png)
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -135,7 +137,8 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Expand Property (horizontal)](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Expand Property (horizontal)</summary>
 
 * * *
 
@@ -157,19 +160,19 @@ Specifies if the widget must expand horizontally.
 
 If you set the value to _true_ (select the checkbox), the widget occupies the entire available height.
 
-Type
+### Type
 
 Boolean
 
-Accessible from code
+### Accessible from code
 
 No
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -184,37 +187,39 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Focus Skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Focus Skin Property</summary>
 
 * * *
 
 This is a skin property and it determines the look and feel when there is focus on a widget.
 
-For more information on how to create and work with skins, see the _Working with Applications_ section of the _VoltMX Iris User Guide_.
+For more information on how to create and work with skins, see the _Working with Applications_ section of the _Volt MX Iris User Guide_.
 
 > **_Note:_**  
 1\. Mobile Web does not support this property. For Advanced Mobile Web platforms, a platform specific progress indicator is displayed. For other Mobile Web platforms (Basic and BJS), the screen is refreshed.  
 2\. For the Pickerview widget on Android, borders, font weight, font size, and font style are ignored.
 
-Type
+### Type
 
 Object
 
-Read / Write
+### Read / Write
 
 Yes (Write only)
 
 You can change the focus skin of a button with ID _btn1_ and in form _frm1_ during the runtime by entering the following code:
 
-{% highlight voltMx %} frm1.btn1.focusSkin="skin1";
+{% highlight VoltMx %} 
+frm1.btn1.focusSkin="skin1";
 {% endhighlight %}
 
   
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -230,33 +235,34 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[ID Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>ID Property</summary>
 
 * * *
 
 Defines a string of alpha numeric characters that uniquely identifies a widget within an application.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes (Read-only access)
 
 **Example** If you want to access a widget with ID _widget1_ in a Form whose ID is _frm1_, enter the following:
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var idcheck = frm1.widget1.id;
 voltmx.print ("widget1 id is :"+idcheck);
 
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -272,7 +278,8 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Location Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Location Property</summary>
 
 * * *
 
@@ -285,19 +292,19 @@ When you select the Location property the following additional properties are vi
 *   **x**: Specifies the x coordinate of the widget.
 *   **y**: Specifies the y coordinate of the widget.
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -313,7 +320,8 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Margin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Margin Property</summary>
 
 * * *
 
@@ -327,19 +335,19 @@ The following image illustrates a widget with a defined margin:
 
 ![](Resources/Images/Margin.png)
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -353,7 +361,8 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -363,7 +372,8 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -386,21 +396,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -425,7 +437,7 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
@@ -443,7 +455,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -453,7 +466,8 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -476,21 +490,22 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainContentAlignment
-
-Type
+{% endhighlight %}
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -515,7 +530,7 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
@@ -533,7 +548,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Skin Property</summary>
 
 * * *
 
@@ -543,19 +559,20 @@ This is a skin property and it determines the look and feel of a widget. For mor
 
 > **_Note:_** For the [Signature](Signature.html) widget, the font color you specify in the skin is the color of the Signature. The background color specified in the skin is the background color of the Signature widget.
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Yes (Write)
 
-Example
+### Example
 
 You can change the skin of a button with ID _btn1_ in form _frm1_ during runtime by entering the following code:
 
-{% highlight voltMx %}frm1.btn1.skin="skin1";
+{% highlight VoltMx %}
+frm1.btn1.skin="skin1";
 {% endhighlight %}
 
 Accessible from IDE
@@ -578,7 +595,8 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Padding Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Padding Property</summary>
 
 * * *
 
@@ -596,19 +614,19 @@ The following image illustrates a widget with a defined padding:
 
 ![](Resources/Images/Padding.png)
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -624,7 +642,8 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Render Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Render Property</summary>
 
 * * *
 
@@ -642,19 +661,19 @@ Unlike the _Visible_ property, the _Render_ property does not include the widget
 
 > **_Note:_** **Note:** When two widgets are placed side by side in an HBox, and you exclude one widget from code generation, the widget which is rendered respects its container weight and does not expand. However, on _Mobile Web advanced platform_, due to the browser behavior, the widget which is rendered does not respect the container weight and expands to occupy the available width.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -668,27 +687,28 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Text Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Text Property</summary>
 
 * * *
 
 Specifies a general or descriptive text for the widget.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes (Read and Write)
 
 To set the text of a widget with ID _widget1_ on a form _frm1_ enter the following code:
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 frm1.widget1.text="sample text";
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
@@ -706,21 +726,22 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Title Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Title Property</summary>
 
 * * *
 
 Specifies a general or descriptive text for the widget.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
@@ -740,25 +761,26 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Text i18n Key Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Text i18n Key Property</summary>
 
 * * *
 
 Specifies the I18N key to be used for internationalization.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -772,25 +794,26 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Title i18n Key Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Title i18n Key Property</summary>
 
 * * *
 
 Specifies the I18N key to be used for internationalization.
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Availability on platforms
+### Availability on platforms
 
 The following table shows the list of available platforms and property availability:
 
@@ -804,7 +827,8 @@ The following table shows the list of available platforms and property availabil
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
@@ -816,17 +840,17 @@ If you do not want the widget to be visible, set the value to _false_ (clear the
 
 > **_Note:_** This property is not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so using the [Segment Methods](Segment_Methods.html#segmentedui-methods).
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Yes (Read Only)
 
 For example, to find out if a widget whose ID is _widget1_ on a Form whose ID is _frm1_ is visible or not, enter the following:
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var visibility=frm1.widget1.isVisible;
 voltmx.print(visibility);
 {% endhighlight %}

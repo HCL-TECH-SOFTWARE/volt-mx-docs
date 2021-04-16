@@ -12,7 +12,8 @@ voltmx.model.Exception Properties
 
 The voltmx.model.Exception object provides the following properties.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[code Property](javascript:void(0);) 
+
+<details close markdown="block"><summary>code Property</summary> 
 
 * * *
 
@@ -36,7 +37,8 @@ This property can only be set to one of the values in the [voltmx.model.Exceptio
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[message Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>message Property</summary>
 
 * * *
 
@@ -56,7 +58,8 @@ Read only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[name Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>name Property</summary>
 
 * * *
 
@@ -75,3 +78,5 @@ Read / Write
 Read only
 
 * * *
+
+</details>

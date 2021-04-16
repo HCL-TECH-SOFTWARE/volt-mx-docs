@@ -10,17 +10,20 @@ Functions
 
 The Charms API contains the following functions, which are part of the [voltmx.application Namespace](voltmx.application_functions.html).
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.createSettingsMenu](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.application.createSettingsMenu</summary>
 
 * * *
 
 This API enables you to create a _Charm settings_ menu for an application.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.applicationcreateSettingsMenu ([id](#id), [menuSettings](#menuSettings))
+{% highlight VoltMx %}
+voltmx.applicationcreateSettingsMenu ([id](#id), [menuSettings](#menuSettings));
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -30,7 +33,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}//To create a Charm settings menu, enter the following  
+{% highlight VoltMx %}//To create a Charm settings menu, enter the following  
 var settingsMenuItem1 = {
     id: "about",
     text: "About"
@@ -43,7 +46,7 @@ var settingsMenu = [settingsMenuItem1, settingsMenuItem2];
 voltmx.application.createSettingsMenu("mysettingsmenu", settingsMenu);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
@@ -53,21 +56,25 @@ If a Charm setting menu is already created with the identifier passed, a new Cha
 
 At least one menu item must be present in the Charm settings menu created. A Charm settings menu with no menu items is invalid.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on Windows only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.setCurrentSettingsMenu](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.setCurrentSettingsMenu</summary>
 
 * * *
 
 This method uses the unique identifier which represents the Charm settings menu and sets it as current settings menu. There can be only one current settings menu that can be set any time. Calling this method multiple times, replaces the current Charm settings menu.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.application.setCurrentSettingsMenu([id](#id2))
+{% highlight VoltMx %}
+voltmx.application.setCurrentSettingsMenu([id](#id2));
+{% endhighlight %}
+
 
 Input Parameters
 
@@ -80,44 +87,47 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}//To create a Charm settings menu, enter the following  
+{% highlight VoltMx %}//To create a Charm settings menu, enter the following  
 voltmx.application.setCurrentSettingsMenu("myMenu");
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on Windows only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.getCurrentSettingsMenu](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.getCurrentSettingsMenu</summary>
 
 * * *
 
 This method returns the unique identifier of the current menu that is set through getCurrentSettingsMenu.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.application.getCurrentSettingsMenu()
+{% highlight VoltMx %}
+voltmx.application.getCurrentSettingsMenu();
+{% endhighlight %}
 
-Input Parameters
 
+<b>Input Parameters</b>
 None
 
 Example
 
-{% highlight voltMx %}//To get the unique identifier a Charm settings menu, enter the following  
+{% highlight VoltMx %}//To get the unique identifier a Charm settings menu, enter the following  
 voltmx.application.getCurrentSettingsMenu();
 
 //Alert the Current Charm Settings menu
 alert("Current charm menu id is: " + currCharmMenuId);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
   
 | Return value | Description |
@@ -126,23 +136,27 @@ Return Values
 
  
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on Windows only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.addSettingsMenuItemAt](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.addSettingsMenuItemAt</summary>
 
 * * *
 
 This API enables you to add a menu item at a given index in the Charm settings menu.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.application.addSettingsMenuItemAt ([id](#id3), [index](#index), [menuSettings](#menuSettings2))
+{% highlight VoltMx %}
+voltmx.application.addSettingsMenuItemAt ([id](#id3), [index](#index), [menuSettings](#menuSettings2));
+{% endhighlight %}
 
-Input Parameters
+
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -155,7 +169,7 @@ Example
 
 To add a menu item at a given index, enter the following:
 
-{% highlight voltMx %}//The below function is the callback function for onClickClosure event of app menu item with id "appmenuitemid3".
+{% highlight VoltMx %}//The below function is the callback function for onClickClosure event of app menu item with id "appmenuitemid3".
 function onClickClosure3() {
     //proceed with the logic
 }
@@ -170,27 +184,30 @@ var settingsMenuItem1 = {
 voltmx.application.addSettingsMenuItemAt("accountMenu", 3, settingsMenuItem1);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on Windows only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.removeSettingsMenuItemAt](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.removeSettingsMenuItemAt</summary>
 
 * * *
 
 This API enables you to removes the specified App Menu item based on the index.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.application.removeSettingsMenuItemAt ([id](#id4), [index](#index2))
+{% highlight VoltMx %}
+voltmx.application.removeSettingsMenuItemAt ([id](#id4), [index](#index2));
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -204,19 +221,21 @@ Example
 
 To remove a menu item from a given index, enter the following:
 
-{% highlight voltMx %}//Removing a menu item from the index 3.
+{% highlight VoltMx %}//Removing a menu item from the index 3.
 voltmx.application.removeSettingsMenuItemAt("charmmenu", 3);
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on Windows only.
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

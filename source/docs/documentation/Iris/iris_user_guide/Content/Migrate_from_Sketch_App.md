@@ -18,7 +18,7 @@ Importing a Sketch design into Volt MX Iris involves the following tasks:
 *   [Export a Sketch Design to VoltMX Iris](#export-a-sketch-design-tovoltmx-iris)
 *   [Open an Exported Sketch Project in VoltMX Iris](#open-an-exported-sketch-project-involtmx-iris)
 
-{% include youtube.html id='eN4eIc13wt4' %}
+{% include youtube.html id='CyYC3x0nzAg' %}
 
 Install the Volt MX Iris Plugin for Sketch
 ------------------------------------------------

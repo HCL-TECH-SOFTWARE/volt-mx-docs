@@ -23,24 +23,28 @@ Functions
 
 The voltmx.io.FileList namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[item](javascript:void(0);)
+
+<details close markdown="block"><summary>item</summary>
 
 The item API returns the File object at the specified index in the FileList.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.item(index)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | Index | Index in the FileList. |
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var newDirLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myDirItem";
 
 var myNewDir = new voltmx.io.File(newDirLoc).createDirectory();
@@ -58,18 +62,18 @@ var myFile = filesListTemp.item(1); //Provide index of file
 alert(JSON.stringify(myFile.name));
 {% endhighlight %}
 
-Return Values
+### Return Values
 
   
 | Return Value | Description |
 | --- | --- |
 | File | File object at specified index. Null if there is no File at specified index or if index is not in FileList range. |
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 

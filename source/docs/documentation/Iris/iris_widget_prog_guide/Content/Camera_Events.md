@@ -12,29 +12,32 @@ The Camera Widget has the following event associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
 This event is invoked for every widget when the widget position and dimensions are computed. This event is invoked for all the widgets placed inside flex containers. This event is invoked in the order in which the widgets are added to the widget hierarchy and expect the frame property of the widget is calculated and available for use within this event.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
 This event is used to set the layout properties of child widgets in the relation to self and peer widgets whose layout is not yet performed.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -45,23 +48,26 @@ function doLayoutButton1(){
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onCapture Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onCapture Event</summary>
 
 * * *
 
 The onCapture event invokes a callback when a user takes a photo using the Camera widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onCapture()
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 _camera_\- \[String\]- Applicable for iOS and Android platforms.
 
@@ -99,13 +105,13 @@ The following table contains the constants returned using the _orientation_ para
 | constants. CAMERA\_IMAGE\_ORIENTATION\_RIGHT\_MIRRORED | The image has been rotated by 90 degrees in the counterclockwise direction and then flipped horizontally. |
 | constants. CAMERA\_IMAGE\_ORIENTATION\_UNKNOWN | It was not possible to retrieve the image orientation from the exif data. This constant is applicable only for the Android platform. |
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}/*Sample code to set onCapture event callback for Camera widget in iOS and Android platforms.*/
+{% highlight VoltMx %}/*Sample code to set onCapture event callback for Camera widget in iOS and Android platforms.*/
 
 frmCamera.myCamera.onCapture = onCaptureCallBck;
 
@@ -128,7 +134,7 @@ voltmx.print("The exif version of the image is:" + version);
 voltmx.print("The latitude of the location of the captured image is:" + latitude);
 voltmx.print("The longitude of the location of the captured image is:" + longitude);
 }
-{% endhighlight %}{% highlight voltMx %}/\*Sample code to set onCapture event callback for Camera widget for platforms other than iOS and Android.\*/
+{% endhighlight %}{% highlight VoltMx %}/\*Sample code to set onCapture event callback for Camera widget for platforms other than iOS and Android.\*/
 
 frmCamera.myCamera.onCapture=onCaptureCallBck;
 
@@ -138,14 +144,15 @@ function onCaptureCallBck(camera){
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE.
 *   Android, iOS, Windows, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onCaptureFailed Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onCaptureFailed Event</summary>
 
 * * *
 
@@ -155,17 +162,19 @@ The camera permission alert shows up once in app lifecycle. Upgrading or deletin
 
 For subsequent camera access, onCaptureFailed is called with status as RESOURCE\_ACCESS\_STATUS\_DENIED if the user has selected as Don't Allow for the first time or when camera privacy is turned off under iPhone settings.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onCaptureFailed()
+{% endhighlight %}
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set onCaptureFailed event callback for Camera widget.
+{% highlight VoltMx %}//Sample code to set onCaptureFailed event callback for Camera widget.
 
 frmCamera.myCamera.onCaptureFailed=onCaptureFailedCallBck;
 
@@ -175,24 +184,27 @@ function onCaptureFailedCallBck(camera){
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Not available in the IDE.
 *   iOS and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onFailure Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onFailure Event</summary>
 
 * * *
 
 An event callback is invoked when an error occurs using a camera widget. For example, you set a camera source, but it is not available on the device.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onFailure()
+{% endhighlight %}
 
-Optional Parameters
+<b>Optional Parameters</b>
 
 source \[widgetref\]
 
@@ -217,13 +229,13 @@ Specifies the error code. The options are:
 | constants.CAMERA\_PERMISSION\_DENIED | Desktop Web | When the user denies permission to access the device camera. |
 | constants.CAMERA\_NOT\_SUPPORTED | Desktop Web | When the web browser does not have camera support. |
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set onFailure event callback for Camera widget.
+{% highlight VoltMx %}//Sample code to set onFailure event callback for Camera widget.
 
 frmCamera.myCamera.onFailure=onFailureCallBck;
 
@@ -233,30 +245,33 @@ function onFailureCallBck(camera, errorcode){
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Not available in the IDE
 *   iOS, Android, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onImageSaveFailed Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onImageSaveFailed Event</summary>
 
 * * *
 
 An event callback is invoked when the user has performed some action over permission alert and also when image cannot be saved to photo album or due to data save error.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onImageSaveFailed()
+{% endhighlight %}
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set onImageSaveFailed event callback for Camera widget.
+{% highlight VoltMx %}//Sample code to set onImageSaveFailed event callback for Camera widget.
 
 frmCamera.myCamera.onImageSaveFailed=onImageSaveFailedCallBck;
 
@@ -266,7 +281,7 @@ function onImageSaveFailedCallBck(camera, status){
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Not available in the IDE.
 
@@ -274,17 +289,20 @@ Available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touch is released from the touch surface.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onTouchEnd ()
+{% endhighlight %}
 
-Optional Parameters
+<b>Optional Parameters</b>
 
 source
 
@@ -304,17 +322,17 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This event is invoked asynchronously.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -323,23 +341,26 @@ Example
 Form1.widget1.onTouchEnd = onTouchEndCallback;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchMove Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchMove Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the touch moves on the touch surface continuously until movement ends.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onTouchMove ()
+{% endhighlight %}
 
-Optional Parameters
+<b>Optional Parameters</b>
 
 source
 
@@ -359,17 +380,17 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This event is invoked asynchronously.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -378,23 +399,26 @@ Example
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touches the touch surface.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 onTouchStart ()
+{% endhighlight %}
 
-Optional Parameters
+<b>Optional Parameters</b>
 
 source
 
@@ -414,17 +438,17 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This event is invoked asynchronously.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -434,9 +458,10 @@ Form1.widget1.onTouchStart = onTouchStartCallback;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
+</details>
 

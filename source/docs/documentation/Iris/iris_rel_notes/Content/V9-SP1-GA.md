@@ -14,7 +14,7 @@ In this release, the following features have been introduced to provide an enhan
 *   [Simple Responsive Design](#simple-responsive-design)
 *   [Emulators Support for iOS and Android](#emulators-support-for-ios-and-android)
 *   [Enhanced Theme feature - Support to Rebrand a Project](#enhanced-theme-feature-support-to-rebrand-a-project)
-*   [Rollback to a specific version of  VoltMX Iris](#rollback-to-a-specific-version-of)
+*   [Rollback to a specific version of  Volt MX Iris](#rollback-to-a-specific-version-of)
 *   [Enhanced Upgrade Feature](#enhanced-upgrade-feature)
 *   [Support for Component Versioning](#support-for-component-versioning)
 *   [Mapping Editor Enhancement - Support to Map Breakpoint-specific Data](#mapping-editor-enhancement-support-to-map-breakpoint-specific-data)
@@ -28,7 +28,7 @@ In this release, the following features have been introduced to provide an enhan
     *   [Location Updates Enhancements](#location-updates-enhancements)
     *   [Gradle Entry for the BottomSheet widget](#gradle-entry-for-the-bottomsheet-widget)
     *   [Enable Controller Cloning for Segment Row Template](#enable-controller-cloning-for-segment-row-template)
-*   [VoltMX IQ - Enhanced Language Translation Support](#volt-mx-iq-enhanced-language-translation)
+*   [Volt MX IQ - Enhanced Language Translation Support](#volt-mx-iq-enhanced-language-translation)
 *   [Cookie Management APIs](#cookie-management-apis)
 *   [Secure data input in TextBox and TextArea widgets](#secure-data-input-in-textbox-and-textarea-widgets)
 *   [Accessibility Enhancement - Support for Tab Order](#accessibility-enhancement-support-for-tab-order)
@@ -41,7 +41,7 @@ Simple Responsive Design
 The Simple Responsive Design feature provides a quick and convenient way to create responsive apps for the Web, Mobile, and Tablet channels.  
 Volt MX  Iris has introduced the Responsive Grid layout for the [FlexForm]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/FlexForm_Properties.html#flexResponsive), [FlexContainer]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/FlexContainer_Properties.html#flexResponsive), and [FlexScrollContainer]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/FlexScrollContainer_Properties.html#flexResponsive) widgets to support the Simple Responsive Design feature. A new property, [responsiveConfig]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/FlexContainer_Properties.html#responsiveConfig), has also been introduced for the FlexContainer widget that allows you to set the width of a container and the space between adjacent containers.
 
-For more information on this feature, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/SimpleResponsiveDesign.html).
+For more information on this feature, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Responsive_Design.html).
 
 Emulators Support for iOS and Android
 -------------------------------------
@@ -55,7 +55,7 @@ The Theme feature is enhanced with a new rebrand capability. The **Find and Repl
 
 For more information on this feature, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/FindReplaceSkin.html).
 
-Rollback to a specific version of  VoltMX Iris
+Rollback to a specific version of  Volt MX Iris
 -----------------------------------------------------
 
 Developers can now Rollback to a specific Fix Pack within a Service Pack.

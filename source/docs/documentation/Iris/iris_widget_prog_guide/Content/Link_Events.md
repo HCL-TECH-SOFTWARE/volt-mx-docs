@@ -11,17 +11,19 @@ Event has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onClick Event](javascript:void(0);)
+<details close markdown="block"><summary>onClick Event</summary>
 
 * * *
 
 An event callback that is invoked by the platform when the user performs a click action on the link.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onClick ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 rowIndex
 
@@ -35,13 +37,14 @@ widgetInfo
 
 Optional. Handle to the parent widget instance(segment) that contains the Link widget.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onClick event callback to a Link widget.
+{% highlight VoltMx %}
+//Sample code to set the onClick event callback to a Link widget.
 
 frmLink.myLink.onClick=onClickCallback;
 
@@ -51,29 +54,33 @@ function onClickCallback(link){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onScrollWidgetPosition()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}
+var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -87,36 +94,40 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not Accessible from IDE
 *   Android, iOS, SPA, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[preOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>preOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom javascript function before the _onClick_ callback of the Link is invoked. This is applicable only for Mobile Web channel. The function must exist in a javascript file under project>module>js folder.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 preOnclickJS()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In for the events preOnclickJS and postOnclickJS you will not be able to access application model or APIs, as these functions are executed in browser whereas the remaining JS modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action.
 
 You have to specify the modules to be loaded in browser using import JS tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the preOnclickJS event callback to a Link widget.
+{% highlight VoltMx %}
+//Sample code to set the preOnclickJS event callback to a Link widget.
 
 frmLink.myLink.preOnclickJS=preclickJSCallBack;
 
@@ -125,30 +136,34 @@ function preclickJSCallBack(link) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on Server side Mobile Web (BJS and Advanced) platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[postOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>postOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom javascript function after the _onClick_ callback of the Link is invoked. This is applicable only for Mobile Web channel.The function must exist in a javascript file under project>module>js folder.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 postOnclickJS()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the postOnclickJS event callback to a Link widget.
+{% highlight VoltMx %}
+//Sample code to set the postOnclickJS event callback to a Link widget.
 
 frmLink.myLink.postOnclickJS=postclickJSCallBack;
 
@@ -157,10 +172,11 @@ function postclickJSCallBack(link) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on Server side Mobile Web (Advanced) platform only
 
 * * *
+</details>
 

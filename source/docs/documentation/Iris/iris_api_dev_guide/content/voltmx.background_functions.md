@@ -20,17 +20,18 @@ The voltmx.backgroundtasks namespace contains the following functions.
 
 Returns the task details of already registered background task.
 
-Syntax
+### Syntax
 
 voltmx.backgroundtasks.getTaskDetails()
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}function getbackgroundtask() {
+{% highlight VoltMx %}
+function getbackgroundtask() {
     try {
         var taskdetails = voltmx.backgroundtasks.getTaskDetails();
         alert(taskdetails);
@@ -40,7 +41,7 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 taskdetails \[dictionary\]
 
@@ -55,12 +56,10 @@ Contains the following task details:
 | LastScheduledTime | The time of the last scheduled action. The time is of the device's local time. |
 
  
-
-Exception
-
+### Exception
 1900 - miscellaneous error.
 
-Platform Availability
+### Platform Availability
 
 Available on Windows.
 
@@ -69,34 +68,28 @@ Available on Windows.
 
 Registers a scheduled action with the Operating System.
 
-Syntax
+### Syntax
 
 voltmx.backgroundtasks.startTask(tasksettings, onsuccesscallback, onfailurecallback)
 
-Input Parameters
+### Input Parameters
 
 tasksettings \[dictionary\] - Mandatory
 
 Specifies a task that must be set as a background agent of the application. You can define the task settings using the following arguments:
 
-  
+
 | Parameter | Description |
 | --- | --- |
 | isOneTime | Sets the task should be scheduled once or not. Set to true if you want the task to be triggered only once. Set to false if you want the task to be triggered each time refreshDuration elapses. |
 | refreshDuration | Specifies the number of minutes to wait to schedule the background task. The system schedules the task within 15 minutes after refreshDuration elapses. The refreshDuration argument is considered when the isOneTime argument is set to false. If the refreshDuration is set to less than 15 minutes, an exception is thrown when attempting to register the background task. |
-| onsuccesscallback \[Function\] - Mandatory | The platform calls the callback when an agent is set successfully. You can define your function in the callback that you want to be executed when the setting the agent is successful.
-> function successCallback(){ //code}
+| onsuccesscallback \[Function\] - Mandatory | The platform calls the callback when an agent is set successfully. You can define your function in the callback that you want to be executed when the setting the agent is successful. > function successCallback(){ //code} |
+| onfailurecallback \[Function\] - Mandatory | The platform calls the callback when an agent is failed to set. You can define your function in the callback that you want to be executed when the setting the agent is failure. > function unsuccessfulCallback(){ //code} |
 
- |
-| onfailurecallback \[Function\] - Mandatory | The platform calls the callback when an agent is failed to set. You can define your function in the callback that you want to be executed when the setting the agent is failure.
+### Example
 
-> function unsuccessfulCallback(){ //code}
-
- |
-
-Example
-
-{% highlight voltMx %}function setbackgroundtask() {
+{% highlight VoltMx %}
+function setbackgroundtask() {
     try {
         var taskSettings = {};
         voltmx.backgroundtasks.startTask(taskSettings onsuccesscallback,
@@ -107,15 +100,15 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exception
+### Exception
 
 1900 - miscellaneous error.
 
-Platform Availability
+### Platform Availability
 
 Available on Windows.
 
@@ -124,17 +117,18 @@ Available on Windows.
 
 Unregisters the already registered scheduled action with the Operating System.
 
-Syntax
+### Syntax
 
 voltmx.backgroundtasks.stopTask()
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}function removebackgroundtask() {
+{% highlight VoltMx %}
+function removebackgroundtask() {
     try {
         voltmx.backgroundtasks.stopTask();
         alert(“background task is stopped”);
@@ -144,15 +138,15 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exception
+### Exception
 
 1900 - miscellaneous error.
 
-Platform Availability
+### Platform Availability
 
 Available on Windows.
 

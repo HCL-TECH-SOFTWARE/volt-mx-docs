@@ -15,7 +15,8 @@ Functions
 
 The `voltmx.location` namespace provides the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.location.checkLocationSettings](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.location.checkLocationSettings</summary>
 
 * * *
 
@@ -45,7 +46,7 @@ Using the params parameter, the user can customize the behavior of the API. It i
 
 Example
 
-{% highlight voltMx %}function successcallback1() {
+{% highlight VoltMx %}function successcallback1() {
     alert("All location settings are satisfied. The client can initialize location requests now.");
 }
 
@@ -94,7 +95,8 @@ Available on Android platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.location.clearWatch](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.location.clearWatch</summary> 
 
 * * *
 
@@ -114,12 +116,12 @@ Parameters
 
 Example
 
-{% highlight voltMx %}voltmx.location.clearWatch(watchID);
+{% highlight VoltMx %}voltmx.location.clearWatch(watchID);
 {% endhighlight %}
 
 **MVC**
 
-{% highlight voltMx %}stopWatchingPosition: function() {
+{% highlight VoltMx %}stopWatchingPosition: function() {
     try {
         voltmx.location.clearWatch(this.watchID); // clears/stops watching position of the user which was being monitored using watchPosition API
         alert("Cleared !");
@@ -133,7 +135,7 @@ Example
 
 Free Form
 
-{% highlight voltMx %}function stopWatchingPosition () {
+{% highlight VoltMx %}function stopWatchingPosition () {
   try{
     voltmx.location.clearWatch(watchID); // clears/stops watching position of the user which was being monitored using watchPosition API
     alert("Cleared !");
@@ -159,7 +161,8 @@ Available on all platforms except Desktop Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.location.getCurrentPosition](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.location.getCurrentPosition</summary> 
 
 * * *
 
@@ -229,9 +232,9 @@ The possible values for accuracyMode are: **constants.ACCURACY\_HIGH**: Used to 
 
 Example
 
-{% highlight voltMx %}/******************************************************************
+{% highlight VoltMx %}/******************************************************************
  *	Name   : getCurrentPosition function
- *	Author  : Volt MX
+ *	Author  : VoltMX
  *	Purpose : This function helps to get the current location
  *******************************************************************/
 function getPosition() {
@@ -264,7 +267,7 @@ function errorcallback(positionerror) {
 
 MVC Example
 
-{% highlight voltMx %}currentPositionSuccessCallback: function(position) {
+{% highlight VoltMx %}currentPositionSuccessCallback: function(position) {
     /* 
   //  position object will have the below properties .
          latitude = position.coords.latitude 
@@ -298,7 +301,7 @@ getCurrentPositionOfDevice: function() {
 
 Free form Example
 
-{% highlight voltMx %}function currentPositionSuccessCallback(position) {
+{% highlight VoltMx %}function currentPositionSuccessCallback(position) {
   /* 
 	// position object will have the below properties .
    	latitute = position.coords.latitude
@@ -376,7 +379,8 @@ Available on all platforms except prior to IE8 releases.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.location.watchPosition](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.location.watchPosition</summary> 
 
 * * *
 
@@ -435,7 +439,7 @@ Using the positionoptions parameter, the user can customize the retrieval of the
 
 The possible values for accuracyMode are: **constants.ACCURACY\_HIGH**: Used to request the most accurate locations available. **constants.ACCURACY\_NO\_POWER**: Used to request the best accuracy possible with no additional power consumption. **constants.ACCURACY\_BALANCED\_POWER**: Used to request "block" level accuracy. Block level accuracy is considered to be about 100 meter accuracy. Using a coarse accuracy such as this often consumes less power. **constants.ACCURACY\_LOW\_POWER**: Used to request "city" level accuracy. City level accuracy is considered to be about 10km accuracy. Using a coarse accuracy such as this often consumes less power. > **_Important:_** Ensure that you enable the **Use Google Play Location Services** check box in the **Project Settings** > **Native** > **Android Mobile/Tablet** section. |
 | enableHighAccuracy \[Boolean\] | Provides a hint to the implementation in order to receive the best possible result. |
-| fastestInterval \[Number\] | Sets the fastest interval for location updates in milliseconds. The fastestInterval key controls the rate at which your application will receive location updates, which might be faster than minimumTime in some cases.This happens when other apps fetch location updates and the current app receives them passively to save power. > **_Note:_** This property is only available on the Android platform. The rate at which the app receives the fastest update will not be less than the value specified for the fastestInterval property. The value for the fastestInterval must be more than zero and less than the value of minimumTime (i.e, 0 < fastestInterval <= minimumTime). If you do not set the value for fastestInterval, the value of minimumTime is set, by default. > **_Note:_** Ensure that you have enabled the **Use Google Play Location Services** checkbox in the **Project Settings** > **Native** > **Android** section of Volt MX Iris. |
+| fastestInterval \[Number\] | Sets the fastest interval for location updates in milliseconds. The fastestInterval key controls the rate at which your application will receive location updates, which might be faster than minimumTime in some cases.This happens when other apps fetch location updates and the current app receives them passively to save power. > **_Note:_** This property is only available on the Android platform. The rate at which the app receives the fastest update will not be less than the value specified for the fastestInterval property. The value for the fastestInterval must be more than zero and less than the value of minimumTime (i.e, 0 < fastestInterval <= minimumTime). If you do not set the value for fastestInterval, the value of minimumTime is set, by default. > **_Note:_** Ensure that you have enabled the **Use Google Play Location Services** checkbox in the **Project Settings** > **Native** > **Android** section of VoltMX Iris. |
 | improveBGLocationUpdateFrequency \[Boolean\] | Set the property to `true` to receive location updates with a better frequency in the background. This approach specifically helps when the app goes into Doze mode when it is running in the background. However, there might be a decrease in fetching location updates when the app runs in the foreground with the value of the improveBGLocationUpdateFrequency parameter set to **true**. This is a behavioral issue that occurs as the underlying Android APIs for receiving better foreground and background updates are different. You must de-register from the existing location listener and register again with a value configured for the improveBGLocationUpdateFrequency parameter. Set the value of the parameter to **true** if your app runs in the background, and **false** if your app runs in the foreground. While determining if the app runs in the foreground or background, you must take the following factors into consideration: Determine whether the app is running in the foreground or background by using the **onforeground** and **onbackground** callbacks of the [voltmx.application.setApplicationCallbacks](voltmx.application_functions.html#setappli) API. When you start a foreground service by using the [voltmx.application.startForegroundService](voltmx.application_functions.html#StartForeground) API (or from a third-party library), the OS treats the application as if it runs in the foreground, even when the user moves the app to the background.
 
 > **_Note:_** This property is only available on the Android platform. Ensure that you enable the **Use Google Play Location Services** check box in the **Project Settings** > **Native** > **Android Mobile/Tablet** section.
@@ -460,7 +464,7 @@ Return Values
 
 Example
 
-{% highlight voltMx %}function successcallback1(position) {
+{% highlight VoltMx %}function successcallback1(position) {
     lblTest.text = "working with watchPosition success full call back";
     var geoPosition = "Latitude: " + position.coords.latitude;
     geoPosition = geoPosition + " Longitude: " + position.coords.longitude;
@@ -491,7 +495,7 @@ watchID = voltmx.location.watchPosition(successcallback1, errorcallback1, positi
 
 MVC Example
 
-{% highlight voltMx %}watchID: null,
+{% highlight VoltMx %}watchID: null,
   watchPositionSuccessCallback: function(position) {
     /* 
     // position object will have the below properties .
@@ -528,7 +532,7 @@ MVC Example
 
 Free Form Example
 
-{% highlight voltMx %}watchID = null;
+{% highlight VoltMx %}watchID = null;
 
 function watchPositionSuccessCallback(position) {
     /* 
@@ -605,5 +609,7 @@ Platform Availability
 Available on all platforms except Desktop Web, IE8 and prior to IE8 releases.
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

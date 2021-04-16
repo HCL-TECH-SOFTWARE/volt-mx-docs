@@ -75,7 +75,7 @@ On **User Attributes** home page, Lisa clicks **Add Attributes** to open **Add A
 
 ![](../Resources/Images/scenarios/amazon_10_615x252.png)
 
-For more details about how to add custom user attributes refer, [Defining User Attributes]({{ site.baseurl }}/docs/documentation/Foundry/vms_console_user_guide/Content/Administration/Adding Attributes to Audience.html)
+For more details about how to add custom user attributes refer, [Defining User Attributes]({{ site.baseurl }}/docs/documentation/Foundry/vms_console_user_guide/Content/Administration/Adding_Attributes_to_Audience.html)
 
 Adding Subscribers (Devices and Users) in Engagement Server
 -----------------------------------------------------------

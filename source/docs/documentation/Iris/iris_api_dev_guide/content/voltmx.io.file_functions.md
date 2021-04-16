@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_api_dev_guide"
 ---
-                            
-
 
 voltmx.io.File Namespace
 ======================
@@ -15,9 +13,11 @@ Overview
 
 Your app can create a `File` object to represent files in the device's file system and perform common operations on them. To create a new `File` object , your app calls the `voltmx.io.File` function. Alternatively, it can use the voltmx.io.FileSystem.getFile function to get an instance of a `File` object.
 
+{% highlight VoltMx %}
 var myfile = new voltmx.io.File("myfile.txt");  
 or  
-var myfile = voltmx.io.FileSystem.getFile("myfile.txt")  
+var myfile = voltmx.io.FileSystem.getFile("myfile.txt")
+{% endhighlight %}  
 
   
 | File Properties:Name | Description |
@@ -43,126 +43,142 @@ The voltmx.io.File namespace contains these functions: To use the copyTo, moveTo
 
 If the end-user taps the "Allow" option, platform proceeds to access the underlying OS API. If the end-user taps the "Deny" option, the PermissionError exception is thrown with the 2300 error code, that means permission is denied.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.copyTo](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.io.File.copyTo</summary>
 
 copyTo API copies a file to the given destination path.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.copyTo(String path, String newName)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | Path | path to the destination directory. |
 | newName (optional) | New name of the file/directory. Defaults to current name if unspecified. |
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var copyToLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myDir1";
 var newFile = new voltmx.io.File(origFileLoc).copyTo(copyToLoc, "NewNameForCopy.txt");
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 VoltMX.io.File returns a handle to the File object pointing to the destination file, if successful. If failure, then returns null.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.createDirectory](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.createDirectory</summary>
 
 The createDirectory API creates a directory on the file system represented by this file object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.createDirectory()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var dirLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myDir1";
 var myDir = new voltmx.io.File(dirLoc).createDirectory();
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Boolean – true if the creation of directory is successful. False if directory already exists or could not be created.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.createFile](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.createFile</summary>
 
 The createFile API creates a file on the file system represented by this file object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.createFile()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var fileLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myFileToCopy.txt";
 var myFile = new voltmx.io.File(fileLoc).createFile();
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Boolean – true if the creation of file is successful. False if file already exists or could not be created.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.exists](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.exists</summary>
 
 The exist API checks, if the file or directory exists on the file system represented by this file object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.exists()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var copiedFileLoc = mainLoc + constants.FILE_PATH_SEPARATOR +
+{% highlight VoltMx %}
+var copiedFileLoc = mainLoc + constants.FILE_PATH_SEPARATOR +
     "myDir1" + constants.FILE_PATH_SEPARATOR +
     "NewNameForCopy.txt";
 if (new voltmx.io.File(copiedFileLoc).exists()) {
@@ -172,35 +188,39 @@ if (new voltmx.io.File(copiedFileLoc).exists()) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Boolean – true if the file or directory exists on file system.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.getFilesList](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.getFilesList</summary>
 
 The getFilesList API returns voltmx.io.FileList object representing the files and directories available under this file object directory.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.getFilesList()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var myDirLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myDir416";
 var myDirName = new voltmx.io.File(myDirLoc);
 var createDir = myDirName.createDirectory();
@@ -213,35 +233,39 @@ if (filesList.length === 0) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 voltmx.io.FileList – FileList object or null if this File is not identified as a directory.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.isDirectory](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.isDirectory</summary>
 
 The isDirectory API checks, if this object represents a directory file on the file system.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.isDirectory()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var dirLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myDir765";
 var myDir = new voltmx.io.File(dirLoc);
 try {
@@ -254,35 +278,39 @@ try {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Boolean – true, if this file object represents a directory, false otherwise.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.isFile](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.isFile</summary>
 
 The isFile API checks, if this object represents a typical file on the file system but not a directory.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.isFile()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var myFileLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myFile244.txt";
 var myFileName = new voltmx.io.File(myFileLoc);
 try {
@@ -297,38 +325,42 @@ try {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Boolean – true if this file object represents a file, false otherwise.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.moveTo](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.moveTo</summary>
 
 The moveTo API moves a file to the given destination path.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.moveTo(String path, String newname)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | Path | path to the destination directory. |
 | newName (optional) | New name of the file/directory. Defaults to current name, if unspecified. |
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var dirLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myDir25";
 var myDir = new voltmx.io.File(dirLoc).createDirectory();
 var fileLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myFileToMove25.txt";
@@ -341,35 +373,39 @@ if (newFile !== null) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 VoltMX.io.File – returns a handle to File object pointing to destination file on success. Returns null on failure.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available to iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.read](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.read</summary>
 
 The read API returns the voltmx.types.RawBytes of this file.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.read()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var myFileLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myFile313.txt";
 var myFileName = new voltmx.io.File(myFileLoc);
 try {
@@ -385,15 +421,15 @@ try {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 voltmx.types.RawBytes – rawbytes representing the content of the file.Returns null in case of non existent file.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
@@ -401,24 +437,28 @@ Available for iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.remove](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.remove</summary>
 
 The remove API deletes a file or a directory.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 remove(boolean, deleteRecursive)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | boolean | By default, this is false.True - deletes the folder and all its content recursively.False - if the directory is empty it shall be removed. |
 | deleteRecursive (optional) | Ignored in case of a file. |
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var myFileLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myFileToMove12.txt";
 var myFile = new voltmx.io.File(myFileLoc);
 myFile.createFile();
@@ -430,39 +470,41 @@ if (new voltmx.io.File(myFileLoc).exists()) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.rename](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.rename</summary>
 
 The rename API renames a file or a directory.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.rename(String newname)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | newname | new name for a file or a directory. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var myFileLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myFileToReName7578.txt";
 var myFile = new voltmx.io.File(myFileLoc).createFile();
 var newFile = new voltmx.io.File(myFileLoc).rename("myFileToReName7577");
@@ -473,38 +515,42 @@ if (newFile) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Boolean – If successful, then boolean value is true,. Boolean value is false, if invalid file name or if the destination is a different directory than the current file.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.io.File.write](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.io.File.write</summary>
 
 The write API writes the given content into the file.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.io.File.write(rawbytes/string, append)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | Rawbytes/string | data to write of type text string or voltmx.types.RawBytes |
 | Append (optional) | true to append the data. Default is false, that means overrides the content. |
 
-Example
+### Example
 
-{% highlight voltMx %}var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
+{% highlight VoltMx %}
+var mainLoc = voltmx.io.FileSystem.getDataDirectoryPath();
 var myFileLoc = mainLoc + constants.FILE_PATH_SEPARATOR + "myFile376.txt";
 var myFileName = new voltmx.io.File(myFileLoc).createFile();
 try {
@@ -519,18 +565,19 @@ try {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Boolean – true if success, false otherwise.
 
-Exceptions
+### Exceptions
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, and Windows platforms.
 
 * * *
+</details>
 
 ![](resources/prettify/onload.png)

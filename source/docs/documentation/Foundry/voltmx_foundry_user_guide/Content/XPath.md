@@ -106,8 +106,9 @@ The following example details a sample backend response, and XPath configuration
 *   **The following is a sample Backend Response, in XML, from the Target URL of an integration service.**  
     Sample Target URL link: [http://www.mocky.io/v2/5a9fa4e92e0000630074d133](http://www.mocky.io/v2/5a9fa4e92e0000630074d133)
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here to view sample Backend response  
-    ](javascript:void(0);)
+    
+<details close markdown="block"><summary>Click here to view sample Backend response</summary>  
+    
     
     {% highlight voltMx %} <!-- This is a Sample backend response -->  
       
@@ -198,6 +199,8 @@ The following example details a sample backend response, and XPath configuration
         </book>
     </catalog>
     {% endhighlight %}
+
+</details>
     
 *   **The following table details the XPath for the AND operator and Output Result based on the sample response.**
     

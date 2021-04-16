@@ -12,7 +12,8 @@ The following objects are used with the Map Widget.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[circleConfiguration Object](javascript:void(0);)
+
+<details close markdown="block"><summary>circleConfiguration Object</summary>
 
 * * *
 
@@ -28,99 +29,108 @@ Contains configuration keys for the circle. The configuration keys can be platfo
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[circleData Object](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>circleData Object</summary>
 
 * * *
 
 Contains the location data of a circle.
 
-Members
+### Members
 
-_id_
+**_id_**
 
 A string that defines a unique identifier for the circle. If a circle already exists with the same identifier string, the existing circle is replaced by the new circle.
 
-_centerLocation_
+**_centerLocation_**
 
 An object that specifies the center location for the circle. This member takes the same keys as the locationData of a Map Widget. The center location of the circle is represented by a pin on the map.
 
-_radius_
+**_radius_**
 
 A number that specifies the radius of the circle in meters.
 
-_navigateandZoom_
+**_navigateandZoom_**
 
 A Boolean value that indicates whether the Map Widget should navigate to the circle and zoom the map to fit the bounds of the circle. The default value is true.
 
 Zooming a map to the bounds of a circle is not supported in Android. On Android, the Map Widget only navigates to the circle location and applies the current zoomLevel.
 
-_showCenterPin_
+**_showCenterPin_**
 
 A Boolean value that indicates whether to show the pin image for the circle’s center location. The default is true.
 
-_circleConfig_
+**_circleConfig_**
 
 An object that contains configuration keys for a circle. The configuration keys can be platform specific. For more information, see [circleConfiguration Object](#circcfg).
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[polygonData Object](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>polygonData Object</summary>
 
 * * *
 
 Contains the information necessary to plot a polygon on a map.
 
-Members
+### Members
 
-_id_
+**_id_**
 
 String. Defines a unique identifier for the polygon. If a polygon already exists with the same identifier string, the existing polygon is replaced by new polygon.
 
-locations
+**_locations_**
 
 Array. Specifies the list of all the locations as an array. Each location object accepts "lat" and "lon" keys, and other keys are ignored. The first and last location in the list are connected even if they are not same.
 
-_navigateandZoom_
+**_navigateandZoom_**
 
 Boolean value to indicate whether the map should be navigated to the polygon area and zoom the map to fit the bounds of polygon. If the property is not specified, the default value “true” is assumed.
 
-_polygonConfig_
+**_polygonConfig_**
 
 Specifies an object with predefined configuration keys. The configuration keys can hold platform specific keys as well.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[searchCriteria Object](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>searchCriteria Object</summary>
 
 * * *
 
 A JSON object with a value defining either the source or the destination for the map.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 searchCriteria = {source: {lat:latitude, lon:longitude, address:address} };
+{% endhighlight %}
 
+{% highlight VoltMx %}
 searchCriteria = {destination: {lat:latitude, lon:longitude, address:address } };
+{% endhighlight %}
 
-Parameters
+### Parameters
 
-_latitude_
+**_latitude_**
 
 Specifying the latitude of the source or destination.
 
-_longitude_
+**_longitude_**
 
 Specifying the longitude of the source or destination.
 
-_address_
+**_address_**
 
 Optional. A string specifying the address of the source or destination.
 
-Remarks
+### Remarks
 
 If the searchCriteria object defines a source, the name of the name/value pair is "source." If it defines a destination, the name of the name/value pair is "destination."
 
 A searchCriteria object (a JSON object) is a single name/value pair specifying either the source or the destination. The name of this name/value pair is either "source" or "destination," respectively. In both cases, the value consists of the same two (optionally three) name/value pairs, as shown in the Parameters section.
 
 * * *
+
+</details>
 

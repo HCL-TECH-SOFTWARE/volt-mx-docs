@@ -197,7 +197,7 @@ To configure a XML service, follow these steps:
         *   **Timeout (in ms)** - the duration in milliseconds after which the service call times out. Provide the details in the text box.
         *   **Cache Response** - the duration in seconds within which the service response is fetched from the cache. Select the **Cache Response** check box, and provide the details in the text box.
         *   **Unescape embedded xml in response -** To ignore the MuleSoft response received in the XML value field, select the **Unescape embedded xml in response** check box.
-        *   **Response Encoding -** Select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/studio/Studio_User_Guide/Content/Response_Encoding.html).
+        *   **Response Encoding -** Select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Response_Encoding.html).
     2.  Under the **Pass-through Cookies**, specify a comma separated list of cookie names. When cookies names are present in the incoming client request, these cookies are send to the backend target along with preprocessor request. A sample value looks like - cookie1, cookie2.
         
     
@@ -443,7 +443,7 @@ To configure a SOAP service, follow these steps:
         *   **Timeout (in ms)** - the duration in milliseconds after which the service call times out. Provide the details in the text box.
         *   **Cache Response** - the duration in seconds within which the service response is fetched from the cache. Select the **Cache Response** check box, and provide the details in the text box.
         *   **Unescape embedded xml in response -** To ignore the MuleSoft response received in the XML value field, select the **Unescape embedded xml in response** check box.
-        *   **Response Encoding -** Select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/studio/Studio_User_Guide/Content/Response_Encoding.html).
+        *   **Response Encoding -** Select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Response_Encoding.html).
     2.  Under the **Pass-through Cookies**, specify a comma separated list of cookie names. When cookies names are present in the incoming client request, these cookies are send to the backend target along with preprocessor request. A sample value looks like - cookie1, cookie2.
     
 6.  Click **Request Input** and do the following.
@@ -704,7 +704,7 @@ To configure a JSON service, follow these steps:
         *   **Timeout (in ms)** - the duration in milliseconds after which the service call times out. Provide the details in the text box.
         *   **Cache Response** - the duration in seconds within which the service response is fetched from the cache. Select the **Cache Response** check box, and provide the details in the text box.
         *   **Unescape embedded xml in response -** To ignore the MuleSoft response received in the XML value field, select the **Unescape embedded xml in response** check box.
-        *   **Response Encoding -** Select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/studio/Studio_User_Guide/Content/Response_Encoding.html).
+        *   **Response Encoding -** Select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Response_Encoding.html).
     3.  Under the **Pass-through Cookies**, specify a comma separated list of cookie names. When cookies names are present in the incoming client request, these cookies are send to the backend target along with preprocessor request. A sample value looks like - cookie1, cookie2.
     
 5.  In the **Request Input** tab, do the following:
@@ -1031,7 +1031,7 @@ To configure your Java connector, follow these steps:
         *   **Timeout (in ms)** - the duration in milliseconds after which the service call times out. Provide the details in the text box.
         *   **Cache Response** - the duration in seconds within which the service response is fetched from the cache. Select the **Cache Response** check box, and provide the details in the text box.
         *   **Unescape embedded xml in response -** To ignore the MuleSoft response received in the XML value field, select the **Unescape embedded xml in response** check box.
-        *   **Response Encoding -** Select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/studio/Studio_User_Guide/Content/Response_Encoding.html).
+        *   **Response Encoding -** Select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Response_Encoding.html).
     
 6.  In the **Request Input** > **Body** tab, provide the following details:
     

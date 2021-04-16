@@ -9,7 +9,7 @@ You are here: Deprecated/Unsupported APIs
 Unsupported APIs
 ================
 
-The following list of APIs are not supported from Volt MX Iris V9:
+The following list of APIs are not supported from VoltMX Iris V9:
 
 *   Streaming API
 *   Application API
@@ -41,9 +41,10 @@ Backward Compatibility Support
 
 The APIs in this section are supported only for backward compatibility. This section lists all the deprecated APIs:
 
-Standard Volt MX APIs - Support for the following Generic APIs is provided for backward compatibility:
+Standard VoltMX APIs - Support for the following Generic APIs is provided for backward compatibility:
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.setAppHeaders](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.application.setAppHeaders</summary>
 
 This API allows you to set header at the application level with the given input values.
 
@@ -65,7 +66,8 @@ Platform Availability
 
 Available on all platforms.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.setAppFooters](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.setAppFooters</summary>
 
 This API allows you to set footer at the application level with the given input values.
 
@@ -95,7 +97,8 @@ Platform Availability
 
 Available on all Platforms.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.appReset](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.appReset</summary>
 
 This API is used to reset the application. When this method is called, the data which was loaded during transactionaldataload event of forms is cleared (reset).
 
@@ -119,10 +122,11 @@ Available on all platforms.
 
 Example
 
-{% highlight voltMx %}voltmx.application.appReset(); Resets the application data.
+{% highlight VoltMx %}voltmx.application.appReset(); Resets the application data.
 {% endhighlight %}
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[readfrombase64](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>readfrombase64</summary>
 
 This API provides you the ability to read rawbytes from a base 64 encoded string.
 
@@ -165,3 +169,5 @@ local myrawbytes = readfrombase64(base64String)
 local decryptedstring = crypto.decrypt("aes",aeskey,myrawbytes);
 
 ![](resources/prettify/onload.png)
+
+</details>

@@ -107,7 +107,7 @@ To share the raw bytes returned from the [Image Widget]({{ site.baseurl }}/docs/
 Use Case: Attaching a File to an Email
 --------------------------------------
 
-When an end-user wants to attach a file from your app to an Email, you must invoke the [voltmx.phone.openEmail](voltmx.phone_functions.html#phone.op2) function. When invoking the [voltmx.phone.openEmail](voltmx.phone_functions.html#phone.op2) function from an Android app, the attachment parameter must be raw bytes. You can directly pass the raw bytes received from the [voltmx.camera](voltmx.camera_namespace.html) (only public access mode) and [voltmx.phone.openMediaGallery](voltmx.phone_functions.html#phone.op) APIs as the attachment parameter. Because, the raw bytes received from these sources already contain content URI.
+When an end-user wants to attach a file from your app to an Email, you must invoke the [voltmx.phone.openEmail](voltmx.phone_functions.html#phone.op2) function. When invoking the [voltmx.phone.openEmail](voltmx.phone_functions.html#phone.op2) function from an Android app, the attachment parameter must be raw bytes. You can directly pass the raw bytes received from the [voltmx.camera](voltmx.camera_functions.html) (only public access mode) and [voltmx.phone.openMediaGallery](voltmx.phone_functions.html#phone.op) APIs as the attachment parameter. Because, the raw bytes received from these sources already contain content URI.
 
 To support raw bytes obtained from the following sources as an attachment in the [voltmx.phone.openEmail](voltmx.phone_functions.html#phone.op2) API, you must follow the [Sharing a File in Android with other Apps](#sharing-files-in-android-with-other-apps-in-the-device) procedure.
 

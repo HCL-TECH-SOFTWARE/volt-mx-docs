@@ -11,41 +11,45 @@ The basic properties for MenuContainer widget are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[activeSkin Property](javascript:void(0);)
+
+<details close markdown="block"><summary>activeSkin Property</summary>
 
 * * *
 
 Specifies the skin for a menu item that is currently selected.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 activeSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the activeSkin property of a MenuContainer widget.  
+{% highlight VoltMx %}
+//Sample code to set the activeSkin property of a MenuContainer widget.  
 frmMenuC.myMenuC.activeSkin="mnuactSkin";
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[collapsedImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>collapsedImage Property</summary>
 
 * * *
 
@@ -53,69 +57,74 @@ Available on Desktop Web platform only.
 
 Specifies the image to collapse an extended menu.
 
-Syntax
+### Syntax
 
 collapsedImage
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the collapsedImage property of a MenuContainer widget where collapsedimage.png is available in the resources folder.*/  
+{% highlight VoltMx %}
+/*Sample code to set the collapsedImage property of a MenuContainer widget where collapsedimage.png is available in the resources folder.*/  
 frmMenuC.myMenuC.collapsedImage="collapseimage.png";
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[containerWeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>containerWeight Property</summary>
 
 * * *
 
 Specifies percentage of width to be allocated by its parent widget. The parent widget space is distributed to its child widgets based on this weight factor. All its child widgets should sum up to 100% of weight except when placed in _voltmx.ui.ScrollBox_.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 containerWeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the containerWeight property of a MenuContainer widget.  
+{% highlight VoltMx %}
+//Sample code to set the containerWeight property of a MenuContainer widget.  
 frmMenuC.myMenuC.containerWeight=100;
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 No
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contextMenu Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contextMenu Property</summary>
 
 * * *
 
@@ -142,21 +151,23 @@ A series of steps to be followed to use contextMenu:
 3.  Go to your project and then to desired form and drag-drop a hbox and navigate to Desktop Web properties in Widget Properties window.
 4.  Select the contextmenu template from the dropdown.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 contextMenu
+{% endhighlight %}
 
-Type
+### Type
 
 Array (voltmx.ui.Menuitem)
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining contextMenu template.
+{% highlight VoltMx %}
+//Defining contextMenu template.
 function initializeaddtoabc() {
     menucontainer12068 = new voltmx.ui.MenuContainer({
         "id": "menucontainer12068",
@@ -220,17 +231,18 @@ var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBo
 {% endhighlight %}
 
   
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[data Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>data Property</summary>
 
 * * *
 
@@ -241,7 +253,7 @@ Specifies the menu items that must be displayed in the Menu.
 **metaInfo** is another standard key which can be used to specify some meta information about the row. For example clickable and skin.  
 All write properties of the widget are allowed to be set as a part of the widget data while programming for the menu items.
 
-To add menu and sub menu items to the menu container, follow these steps:
+### To add menu and sub menu items to the menu container, follow these steps:
 
 Before proceeding, ensure that you have already created [menu templates](Menuitem_Templates.html) to be used in the _data_ property.
 
@@ -253,21 +265,23 @@ Before proceeding, ensure that you have already created [menu templates](Menuite
 
 > **_Note:_** When you change a submenu to menu or viceversa, the data that is set will be lost and templateID gets reset to default template.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 data
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the data property of a MenuContainer widget.  
+{% highlight VoltMx %}
+//Sample code to set the data property of a MenuContainer widget.  
 frmMenuC.myMenuC.data = [{
   template: hbox2,
   label2: {
@@ -286,17 +300,18 @@ frmMenuC.myMenuC.data = [{
 }, ];
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[expandedImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>expandedImage Property</summary>
 
 * * *
 
@@ -304,88 +319,96 @@ Available on Desktop Web platform only
 
 Specifies the image to expand a collapsed menu.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 expandedImage
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the expandedImage property of a MenuContainer widget where expandimage.png is an image file in the resources folder.*/  
+{% highlight VoltMx %}
+/*Sample code to set the expandedImage property of a MenuContainer widget where expandimage.png is an image file in the resources folder.*/  
 frmMenuC.myMenuC.expandedImage="expandimage.png";
 {% endhighlight %}
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hoverSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hoverSkin Property</summary>
 
 * * *
 
 Specifies the look and feel of a widget when the cursor hovers on the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 hoverSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the hoverSkin property of a MenuContainer widget.  
+{% highlight VoltMx %}
+//Sample code to set the hoverSkin property of a MenuContainer widget.  
   
 frmMenuC.myMenuC.hoverSkin ="mnuhovSkin";
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 id is a unique identifier of MenuContainer consisting of alpha numeric characters. Every MenuContainer should have a unique id within a Form.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String - \[Mandatory\]
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for a MenuContainer with id: "menu1".
+{% highlight VoltMx %}
+//Defining the properties for a MenuContainer with id: "menu1".
 var mnuBasic = {
     id: "menu1",
     hoverSkin: "mnuhovSkin",
@@ -431,17 +454,18 @@ var menu1 = new voltmx.ui.MenuContainer(mnuBasic, mnuLayout, mnuPSP);
 {% endhighlight %}
 
   
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
@@ -451,21 +475,23 @@ A custom JSObject with the key value pairs that a developer can use to store the
 
 Info property holds any JSObject. Post assigning the JSObject to info property, the JSObject should not be modified.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set info property for a MenuContainer widget.
+{% highlight VoltMx %}
+//Sample code to set info property for a MenuContainer widget.
 
 frmMenuC.myMenuC.info = {
  key: "MenuContainer info"
@@ -475,17 +501,18 @@ frmMenuC.myMenuC.info = {
 voltmx.print("MenuContainer widget info:" + frmMenuC.myMenuC.info);
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 No
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
@@ -497,73 +524,79 @@ If set to _false,_ the widget is not displayed.
 
 If set to _true,_ the widget is displayed.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the isVisible property for a MenuContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the isVisible property for a MenuContainer widget.
 
 frmMenuC.myMenuC.isVisible= true;
 {% endhighlight %}
 
 > **_Note:_** In addition, the visibility of the widget can be controlled using the setVisibility method.
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[menuItemTemplate Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>menuItemTemplate Property</summary>
 
 * * *
 
 Indicates a common template to be used for each menuItem while creating the menu items and filling the data.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 menuItemTemplate
+{% endhighlight %}
 
-Type
+### Type
 
 voltmx.ui.Box - \[Mandatory\]
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the menuItemTemplate property for a MenuContainer widget where hbox2 is the container of the template.*/
+{% highlight VoltMx %}
+/*Sample code to set the menuItemTemplate property for a MenuContainer widget where hbox2 is the container of the template.*/
 
 frmMenuC.myMenuC.menuItemTemplate= hbox2;
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 No
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[orientation Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>orientation Property</summary>
 
 * * *
 
@@ -580,36 +613,39 @@ The available options are:
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 orientation
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the orientation property for a MenuContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the orientation property for a MenuContainer widget.
 
 frmMenuC.myMenuC.orientation=constants.MENUCONTAINER_POSITION_AS_HORIZONTAL;
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[padding Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>padding Property</summary>
 
 * * *
 
@@ -623,36 +659,39 @@ If you want to use the padding values set for a platform across other platforms,
 
 > **_Note:_** If no skin is applied to a Button, then Padding is not supported on iPhone. This is due to iOS Safari browser limitation. If you want the padding to be applied, apply a skin to the button and then apply padding.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 padding
+{% endhighlight %}
 
-Type
+### Type
 
 Array of Numbers
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the padding property for a MenuContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the padding property for a MenuContainer widget.
 
 frmMenuC.myMenuC.padding=[5, 5, 5, 5];
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[paddingInPixel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>paddingInPixel Property</summary>
 
 * * *
 
@@ -668,36 +707,39 @@ If set to _false,_ the padding is applied as set in [padding](#padding) property
 
 > **_Note:_** For backward compatibility on older projects, this property is will be made _true_ for iPhone, iPad, Android and Windows Phone and for other platforms it will be _false_.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 paddingInPixel
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the paddingInPixel property for a MenuContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the paddingInPixel property for a MenuContainer widget.
 
 frmMenuC.myMenuC.paddingInPixel=true;
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -707,7 +749,8 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -730,21 +773,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -769,14 +814,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -786,7 +832,8 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -809,21 +856,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -848,14 +897,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -865,7 +915,8 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -874,7 +925,6 @@ The mirroring widget layout properties should be defined as follows.
 {% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
-
   
 | Properties | Local Flag Value | Widget Flag Value | Action |
 | --- | --- | --- | --- |
@@ -888,21 +938,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -928,14 +980,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedMenuIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedMenuIndex Property</summary>
 
 * * *
 
@@ -948,71 +1001,77 @@ For example, if the selectedMenuItem is:
 *   \[ 0, **2,**4\] indicates 4th menu item, which is the child of 2nd menu item of the 0th menu item in the menu container.  
     
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 selectedMenuIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the selectedMenuIndex property for a MenuContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the selectedMenuIndex property for a MenuContainer widget.
 frmMenuC.myMenuC.selectedMenuIndex=[0];
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 No
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedMenuItem Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedMenuItem Property</summary>
 
 * * *
 
 Returns the selected menu item present at the [selectedMenuIndex](#selected).
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 selectedMenuItem
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Yes - (Read only)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to read the selectedMenuItem property for a MenuContainer widget.  
+{% highlight VoltMx %}
+//Sample code to read the selectedMenuItem property for a MenuContainer widget.  
   
 frmMenuC.myMenuC.selectedMenuIndex=[0];	
 alert("MenuContainer selectedMenuItem::" + frmMenuC.myMenuC.selectedMenuItem); 
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 No
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin Property</summary>
 
 * * *
 
@@ -1020,36 +1079,39 @@ Specifies the skin for a MenuContainer.
 
 For more information on how to create and work with skins, see the Working with Applications section of the Volt MX Iris User Guide.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 skin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to read the skin property for a MenuContainer widget.  
+{% highlight VoltMx %}
+//Sample code to read the skin property for a MenuContainer widget.  
   
 frmMenuC.myMenuC.skin="mnuSkin";
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewType Property</summary>
 
 * * *
 
@@ -1075,37 +1137,40 @@ The following are the available options:
 
 > **_Note:_** MenuContainer first level is always horizontal when the view is set as DROPDOWNVIEW and DROPLINEVIEW.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 viewType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to read the viewType property for a MenuContainer widget.  
+{% highlight VoltMx %}
+//Sample code to read the viewType property for a MenuContainer widget.  
   
 frmMenuC.myMenuC.viewType=constants.MENU_CONTAINER_VIEW_DROPDOWNVIEW;
 {% endhighlight %}
 
   
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetAlignment Property</summary>
 
 * * *
 
@@ -1125,36 +1190,39 @@ The available options are:
 *   WIDGET\_ALIGN\_BOTTOM\_CENTER
 *   WIDGET\_ALIGN\_BOTTOM\_RIGHT
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 widgetAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to read the widgetAlignment property for a MenuContainer widget.  
+{% highlight VoltMx %}
+//Sample code to read the widgetAlignment property for a MenuContainer widget.  
   
 frmMenuC.myMenuC.widgetAlignment=constants.WIDGET_ALIGN_TOP_LEFT;
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetDataMap Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetDataMap Property</summary>
 
 * * *
 
@@ -1162,7 +1230,8 @@ Specifies the mapping information between the widget id's and the keys in the da
 
 > **_Note:_** It is developer responsibility to ensure that widget data map to accommodate all the widget ids required including the widgets referred in dynamic templates.
 
-{% highlight voltMx %}{  
+{% highlight VoltMx %}
+{  
  widgetID1: "dataId1",  
  widgetId2: "dataId2",  
  widgetId3: "dtaId3",  
@@ -1172,32 +1241,34 @@ Specifies the mapping information between the widget id's and the keys in the da
 
 {% endhighlight %}
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 widgetDataMap
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to read the widgetDataMap property for a MenuContainer widget.
+{% highlight VoltMx %}
+//Sample code to read the widgetDataMap property for a MenuContainer widget.
 frmMenuC.myMenuC.widgetDataMap = {
  label2: "label2",
  image2: "image2"
 };
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 No
 
-Platform Availability
+###Platform Availability
 
 Available on Desktop Web platform only.
 

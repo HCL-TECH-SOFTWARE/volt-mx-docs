@@ -9,39 +9,40 @@ voltmx.todayExtension Functions
 
 The voltmx.todayExtension namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.todayExtension.setExtensionsCallbacks Function](javascript:void(0);) 
+<details close markdown="block"><summary>voltmx.todayExtension.setExtensionsCallbacks Function</summary> 
 
 * * *
 
 Sets a Today Extension with callbacks for app extension state changes.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.todayExtension.setExtensionsCallbacks(  
     callbacks);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-callbacks
+**_callbacks_**
 
 Contains an object with key-value pairs where the key specifies the extension state and value as a callback function. The following are the possible extension states.
 
-> | Constant | Description |
-> | --- | --- |
-> | beginRequestWithExtensionContext | The user has selected the action. |
-> | loadView | Loads a view that the controller manages. |
-> | viewDidAppear | A view was just displayed. |
-> | viewWillAppear | A view is about to be displayed. |
-> | viewDidDisappear | A view just removed from the view heirarchy. |
-> | viewWillDisappear | A view is about to be removed from the view hierarchy. |
-> | widgetActiveDisplayModeDidChangeWithMaximumSize | The active display mode has changed. |
-> | widgetPerformUpdate | It is time for the widget to update its state |
-> 
->   
+ | Constant | Description |
+ | --- | --- |
+ | beginRequestWithExtensionContext | The user has selected the action. |
+ | loadView | Loads a view that the controller manages. |
+ | viewDidAppear | A view was just displayed. |
+ | viewWillAppear | A view is about to be displayed. |
+ | viewDidDisappear | A view just removed from the view heirarchy. |
+ | viewWillDisappear | A view is about to be removed from the view hierarchy. |
+ | widgetActiveDisplayModeDidChangeWithMaximumSize | The active display mode has changed. |
+ | widgetPerformUpdate | It is time for the widget to update its state |
 
-Example: loadView
 
-{% highlight voltMx %}
+### Example: loadView
+
+{% highlight VoltMx %}
 function loadView()
 {
     // Native Function API code
@@ -51,9 +52,9 @@ voltmx.todayExtension.setExtensionsCallbacks ({"loadView": loadView});
 
 {% endhighlight %}
 
-Example: viewDidAppear
+### Example: viewDidAppear
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 function viewDidAppear()
 {
     // Native Function API code
@@ -63,9 +64,9 @@ voltmx.todayExtension.setExtensionsCallbacks ({"viewDidAppear": viewDidAppear});
 
 {% endhighlight %}
 
-Example: viewWillAppear
+### Example: viewWillAppear
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 function viewWillAppear()
 {
     // Native Function API code
@@ -75,9 +76,9 @@ voltmx.todayExtension.setExtensionsCallbacks ({"viewWillAppear": viewWillAppear}
 
 {% endhighlight %}
 
-Example: viewDidDisappear
+### Example: viewDidDisappear
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 function viewDidDisappear()
 {
     // Native Function API code
@@ -86,9 +87,9 @@ function viewDidDisappear()
 voltmx.todayExtension.setExtensionsCallbacks ({"viewDidDisappear": viewDidDisappear});
 {% endhighlight %}
 
-Example: viewWillDisappear
+### Example: viewWillDisappear
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 function viewWillDisappear()
 {
     // Native Function API code
@@ -97,9 +98,9 @@ function viewWillDisappear()
 voltmx.todayExtension.setExtensionsCallbacks ({"viewWillDisappear": viewWillDisappear});
 {% endhighlight %}
 
-Example: widgetActiveDisplayModeDidChangeWithMaximumSize
+### Example: widgetActiveDisplayModeDidChangeWithMaximumSize
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 function widgetActiveDisplayModeDidChangeWithMaximumSize(var var displayMode,var maxsize)	
 {
     var preferredContentSize;
@@ -118,9 +119,9 @@ function widgetActiveDisplayModeDidChangeWithMaximumSize(var var displayMode,var
 voltmx.todayExtension.setExtensionsCallbacks ({"widgetActiveDisplayModeDidChangeWithMaximumSize": widgetActiveDisplayModeDidChangeWithMaximumSize});
 {% endhighlight %}
 
-Example: widgetPerformUpdate
+### Example: widgetPerformUpdate
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 function widgetPerformUpdate()
 {
     // Native Function API code
@@ -129,7 +130,7 @@ function widgetPerformUpdate()
 voltmx.todayExtension.setExtensionsCallbacks ({"widgetPerformUpdate": widgetPerformUpdate });
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 

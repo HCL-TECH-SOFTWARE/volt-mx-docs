@@ -12,7 +12,8 @@ A SlidingContainer Widget has the following properties.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
@@ -22,27 +23,29 @@ The bottom property determines the position of the bottom edge of the widget’s
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 bottom
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -50,47 +53,51 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA , and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cacheMode](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cacheMode</summary>
 
 * * *
 
 The property enables or disables the cache underlying the OS UI element when the contentPanel content is changed.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 cacheMode
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read only. The property is a constructor value and cannot be modified dynamically.
 
-Remarks
+### Remarks
 
 If the value is **true**, the cache is enabled. The default value is **false**.
 
-Example
+### Example
 
-{% highlight voltMx %}frmHome.slidingContainer.cacheMode = true;
+{% highlight VoltMx %}
+frmHome.slidingContainer.cacheMode = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
@@ -98,25 +105,27 @@ This property determines the center of a widget measured from the left bounds of
 
 The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 centerX
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -124,14 +133,15 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
@@ -139,25 +149,27 @@ This property determines the center of a widget measured from the top bounds of 
 
 The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 centerY
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
@@ -165,34 +177,37 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[commandPanel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>commandPanel Property</summary>
 
 * * *
 
 The property specifies the commandPanel of the SlidingContainer widget. This property gets or sets the box or flex container that controls the navigation in the contentPanel.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 commandPanel
+{% endhighlight %}
 
-Type
+### Type
 
 Container widget object
 
-Read/Write
+### Read/Write
 
 Read + Write.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the commandPanel property of a SlidingContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the commandPanel property of a SlidingContainer widget.
 frmSlidingC.mySlidingC.commandPanel = getCommandPanel();
 
 function getCommandPanel() {
@@ -273,33 +288,36 @@ frmSlidingC.mySlidingC.contentPanel = getContentPanel("Selected Item:"+ args.sel
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[commandPanelCompactWidth](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>commandPanelCompactWidth</summary>
 
 * * *
 
 The property specifies the size of the commandPanel when it is closed and the display mode is compact type.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 commandPanelCompactWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Double
 
-Read/Write
+### Read/Write
 
 Read only. The property is a constructor value and cannot be modified dynamically.
 
-Example
+### Example
 
-{% highlight voltMx %}function getSlidingContainerWidget() {
+{% highlight VoltMx %}
+function getSlidingContainerWidget() {
     var basic = {
         "height": "100%",
         "id": "slidingContainer",
@@ -323,33 +341,36 @@ Example
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[commandPanelExpandedWidth](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>commandPanelExpandedWidth</summary>
 
 * * *
 
 The property specifies the size of the commandPanel when it is open.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 commandPanelExpandedWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Double
 
-Read/Write
+### Read/Write
 
 Read only. The property is a constructor value and cannot be modified dynamically.
 
-Example
+### Example
 
-{% highlight voltMx %}function getSlidingContainerWidget() {
+{% highlight VoltMx %}
+function getSlidingContainerWidget() {
     var basic = {
         "height": "100%",
         "id": "slidingContainer",
@@ -373,31 +394,33 @@ Example
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[commandPanelPosition Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>commandPanelPosition Property</summary>
 
 * * *
 
 The property gets or sets the command panel position.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 commandPanelPosition
+{% endhighlight %}
 
-Type
+### Type
 
 Integer
 
-Read/Write
+### Read/Write
 
 Read only. The property is a constructor value and cannot be modified dynamically.
 
-Remarks
+### Remarks
 
 The possible values are:
 
@@ -406,9 +429,10 @@ The possible values are:
 
 The default value is SLIDING\_CONTAINER\_COMMandPANELPOSITION\_LEFT.
 
-Example
+### Example
 
-{% highlight voltMx %}function getSlidingContainerWidget() {
+{% highlight VoltMx %}
+function getSlidingContainerWidget() {
     var basic = {
         "height": "100%",
         "id": "slidingContainer",
@@ -432,62 +456,68 @@ Example
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[commandPanelSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>commandPanelSkin Property</summary>
 
 * * *
 
 The property specifies the skin for the commandPanel of the SlidingContainer Widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 commandPanelSkin
+{% endhighlight %}
 
-Type
+### Type
 
 Text
 
-Read/Write
+### Read/Write
 
 Read + Write.
 
-Example
+### Example
 
-{% highlight voltMx %}frmHome.slidingContainer.commandPanelSkin = "SlidingContainerSkin";
+{% highlight VoltMx %}
+frmHome.slidingContainer.commandPanelSkin = "SlidingContainerSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentPanel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentPanel Property</summary>
 
 * * *
 
 The property specifies the contentPanel of the SlidingContainer widget. The property gets or sets a box or flex container that has complex content.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 contentPanel
+{% endhighlight %}
 
-Type
+### Type
 
 Container widget object
 
-Read/Write
+### Read/Write
 
 Read + Write.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the contentPanel property of a SlidingContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the contentPanel property of a SlidingContainer widget.
 frmSlidingC.mySlidingC.contentPanel=getContentPanel("Welcome to Sliding Container!!!");
 
 function getContentPanel(data) {
@@ -533,13 +563,14 @@ function getContentPanel(data) {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -547,19 +578,20 @@ It determines the height of the widget and measured along the y-axis.
 
 The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 height
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the available measurement options:
 
@@ -569,9 +601,10 @@ Following are the available measurement options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the height property for a SlidingContainer widget by using DP, Percentage and Pixels.*/
+{% highlight VoltMx %}
+/*Sample code to set the height property for a SlidingContainer widget by using DP, Percentage and Pixels.*/
 frmSlidingC.mySlidingC.height="50dp";
 
 frmSlidingC.mySlidingC.height="10%";
@@ -580,13 +613,14 @@ frmSlidingC.mySlidingC.height="10px";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Windows10
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[left Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>left Property</summary>
 
 * * *
 
@@ -594,25 +628,27 @@ This property determines the lower left corner edge of the widget and is measure
 
 The left property determines the position of the left edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 left
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
@@ -620,32 +656,34 @@ frmHome.widgetID.left = "10%";
 frmHome.widgetID.left = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[margin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>margin Property</summary>
 
 * * *
 
 This property specifies the space around a widget. You can use this option to define the left, top, right, and bottom distance between the widget and the next element.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 margin
+{% endhighlight %}
 
-Type
+### Type
 
 Array of numbers
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The property is applicable only if the widget is in a flex container.
 
@@ -657,41 +695,44 @@ The following image illustrates a widget with a defined margin:
 
 ![](Resources/Images/Margin.png)
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[marginInPixel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>marginInPixel Property</summary>
 
 * * *
 
 The property specifies whether the margin is applied in percentage or in pixels.
 
-Syntax
-
+## Syntax
+{% highlight VoltMx %}
 marginInPixel
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the value is _true_, the margins are applied in pixels. If the value is _false_, the margins are applied as in the [margin](#margin) property. The default value is _false_The property is applicable only if the widget is in a flex container.
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -699,21 +740,23 @@ This property specifies the maximum height of the widget and is applicable only 
 
 The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 maxHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -721,14 +764,15 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -736,21 +780,23 @@ This property specifies the maximum width of the widget and is applicable only w
 
 The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 maxWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -758,32 +804,34 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[menuDisplayMode Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>menuDisplayMode Property</summary>
 
 * * *
 
 The property gets or sets the display mode of the menu.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 menuDisplayMode
+{% endhighlight %}
 
-Type
+### Type
 
 Integer
 
-Read/Write
+### Read/Write
 
 Read only. The property is a constructor value and cannot be modified dynamically.
 
-Remarks
+### Remarks
 
 The possible values for the property are:
 
@@ -794,9 +842,10 @@ The possible values for the property are:
 
 The default menu display mode is SLIDING\_CONTAINER\_DisplayMode\_CompactOverlay.
 
-Example
+### Example
 
-{% highlight voltMx %}function getSlidingContainerWidget() {
+{% highlight VoltMx %}
+function getSlidingContainerWidget() {
     var basic = {
         "height": "100%",
         "id": "slidingContainer",
@@ -820,100 +869,110 @@ Example
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[menuIconSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>menuIconSkin Property</summary>
 
 * * *
 
 The property specifies the font skins of the menuIcon. This property creates symbols by setting the text of the menuText property.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 menuIconSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write.
 
-Example
+### Example
 
-{% highlight voltMx %}frmHome.slidingContainer.menuIconSkin = "MenuIconSkin";
+{% highlight VoltMx %}
+frmHome.slidingContainer.menuIconSkin = "MenuIconSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[menuSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>menuSkin Property</summary>
 
 * * *
 
 This property specifies the skin of the menu bar for the default hamburger menu.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 menuSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write.
 
-Example
+### Example
 
-{% highlight voltMx %}frmHome.slidingContainer.menuSkin = "MenuSkin";
+{% highlight VoltMx %}
+frmHome.slidingContainer.menuSkin = "MenuSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[menuText Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>menuText Property</summary>
 
 * * *
 
 The property gets or sets the default menu icon text.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 menuText
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write.
 
-Example
+### Example
 
-{% highlight voltMx %}frmHome.slidingContainer.menuText = "Its the Menu Text";
+{% highlight VoltMx %}
+frmHome.slidingContainer.menuText = "Its the Menu Text";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -921,21 +980,23 @@ This property specifies the minimum height of the widget and is applicable only 
 
 The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 minHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -943,14 +1004,15 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -958,21 +1020,23 @@ This property specifies the minimum width of the widget and is applicable only w
 
 The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 minWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -980,43 +1044,47 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[openCommandPanel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>openCommandPanel Property</summary>
 
 * * *
 
 The property opens or closes the command panel.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 openCommandPanel
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write.
 
-Example
+### Example
 
-{% highlight voltMx %}frmHome.slidingContainer.openCommandPanel = true;
+{% highlight VoltMx %}
+frmHome.slidingContainer.openCommandPanel = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -1026,7 +1094,8 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1049,21 +1118,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -1088,14 +1159,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -1105,7 +1177,8 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1128,21 +1201,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -1167,14 +1242,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -1184,7 +1260,8 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1207,21 +1284,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -1247,14 +1326,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+## Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -1264,25 +1344,27 @@ The right property determines the position of the right edge of the widget’s b
 
 The right property is used only if the width property is not provided.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 right
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -1290,34 +1372,37 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[showMenu Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>showMenu Property</summary>
 
 * * *
 
 The property enables or disables the default hamburger menu.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 showMenu
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read only. The property is a constructor value and cannot be modified dynamically.
 
-Example
+### Example
 
-{% highlight voltMx %}function getSlidingContainerWidget() {
+{% highlight VoltMx %}
+function getSlidingContainerWidget() {
     var basic = {
         "height": "100%",
         "id": "slidingContainer",
@@ -1341,42 +1426,46 @@ Example
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[title Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>title Property</summary>
 
 * * *
 
 The property gets or sets the default menu title.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 title
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write.
 
-Example
+### Example
 
-{% highlight voltMx %}frmHome.slidingContainer.title = "TITLE PROPERTY";
+{% highlight VoltMx %}
+frmHome.slidingContainer.title = "TITLE PROPERTY";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
@@ -1384,25 +1473,27 @@ This property determines the top edge of the widget and measured from the top bo
 
 The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 top
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -1410,32 +1501,34 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetAlignment Property</summary>
 
 * * *
 
 Indicates how a widget is to be anchored with respect to its parent. Each of these below options have a horizontal alignment attribute and a vertical alignment attribute. For example, WIDGET\_ALIGN\_TOP\_LEFT specifies the vertical alignment as TOP and horizontal alignment as LEFT.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 widgetAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 Horizontal alignment attributes are only applicable if [hExpand](#hExpand) is _false_. Similarly vertical alignment attributes are only applicable if [vExpand](#vExpand) is _false_.
 
@@ -1453,9 +1546,10 @@ The available options are:
 *   WIDGET\_ALIGN\_BOTTOM\_CENTER
 *   WIDGET\_ALIGN\_BOTTOM\_RIGHT
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the widgetAlignment property for Phone widget.
 /*You need to make a corresponding use of the 
 widgetAlignment property for other applicable widgets.*/
@@ -1463,7 +1557,7 @@ widgetAlignment property for other applicable widgets.*/
 frmPhone.myPhone.widgetAlignment=constants.WIDGET_ALIGN_CENTER;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE
 
@@ -1471,7 +1565,8 @@ Available on all platforms except on Desktop Web platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -1479,19 +1574,20 @@ This property determines the width of the widget and is measured along the x-axi
 
 The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 width
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the options that can be used as units of width:
 
@@ -1501,9 +1597,10 @@ Following are the options that can be used as units of width:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
@@ -1511,14 +1608,15 @@ frmHome.widgetID.width = "10%";
 frmHome.widgetID.width = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
@@ -1526,19 +1624,20 @@ This property specifies the stack order of a widget. A widget with a higher zInd
 
 The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
@@ -1558,24 +1657,28 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 **voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto  
  var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
   "zIndex": voltmx.flex.ZINDEX_AUTO
 });
 
-{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+{% endhighlight %}
+{% highlight VoltMx %}
+//Sample code to set the ZIndex value to Auto
 flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}
+//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web

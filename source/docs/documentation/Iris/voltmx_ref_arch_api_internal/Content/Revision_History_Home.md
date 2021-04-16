@@ -8,8 +8,7 @@ category: "voltmx_ref_arch_api_internal"
 
 Revision History
 ================
-
-  
+ 
 | Date | Document Version | Description of Releases and Updates |
 | --- | --- | --- |
 | 04-06-2020 | 1.0 | Updated for the V9 Release. This update includes the following new and revised features: ControllerActions.js files moved to .gitignore folder to avoid [conflicts](VoltMX_Reference_Architecture_Features.html#NoteV9). |
@@ -19,8 +18,8 @@ Typographical Conventions
 
 The following typographical conventions have been used throughout the document:
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here](javascript:void(0);)
 
+<details close markdown="block"><summary>Click here</summary>
   
 | Conventions | Explanation |
 | --- | --- |
@@ -30,7 +29,7 @@ The following typographical conventions have been used throughout the document:
 | [URL](http://a/) | Active link to a URL. |
 | _Note:_ | Provides helpful hints or additional information. |
 
-  
+</details>
 
 Contact Us
 ----------

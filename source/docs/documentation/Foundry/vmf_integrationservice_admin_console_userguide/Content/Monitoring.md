@@ -265,7 +265,7 @@ To configure email alerts, perform the following actions:
     
     Sample Payload:
     
-    {% highlight voltMx %}{
+    {% highlight VoltMx %}{
       "emailServiceRequest": {
         "emails": {
           "email": {

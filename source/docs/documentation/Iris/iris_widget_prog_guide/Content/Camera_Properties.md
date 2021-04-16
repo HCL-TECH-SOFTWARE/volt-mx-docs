@@ -12,31 +12,34 @@ The properties for Camera widget are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
 Enables you to control accessibility behavior and alternative text for the widget.
 
-For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
+For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the VoltMX IrisUser Guide.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
-> **_Note:_** From Volt MX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the `accessibilityConfig` property. Values provided in the i18n keys take precedence over values provided in `a11yLabel`, `a11yValue`, and `a11yHint` fields.
+> **_Note:_** From VoltMX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the `accessibilityConfig` property. Values provided in the i18n keys take precedence over values provided in `a11yLabel`, `a11yValue`, and `a11yHint` fields.
 
 The accessibilityConfig property is a JavaScript object which can contain the following key-value pairs.
 
@@ -61,11 +64,11 @@ SPA/Desktop Web limitations
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+### Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -76,11 +79,11 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -92,34 +95,37 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessMode Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>accessMode Property</summary>
 
 * * *
 
 Specifies how the captured image must be stored.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 accessMode
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
 Read only in the iOS platform.
 
-Remarks
+### Remarks
 
 The default value for the property is constants.CAMERA\_ACCESS\_MODE\_PUBLIC (except on Windows).
 
@@ -140,14 +146,14 @@ For backward compatibility, the following options are also supported:
 *   CAMERA\_IMAGE\_ACCESS\_MODE\_PRIVATE
 *   CAMERA\_IMAGE\_ACCESS\_MODE\_INMEMORY
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set accessMode property for Camera widget.
+{% highlight VoltMx %}//Sample code to set accessMode property for Camera widget.
 
 frmCamera.myCamera.accessMode=constants.CAMERA_ACCESS_MODE_PRIVATE;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available in the IDE.
 
@@ -158,25 +164,28 @@ Available in the IDE.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>backgroundColor Property</summary>
 
 * * *
 
 Specifies the background color of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 backgroundColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The initial value of backgroundColor has to be specified explicitly. If not, Iris will not deduce the values from the existing skin and this will lead to undefined behavior.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
@@ -187,15 +196,15 @@ Remarks
 *   This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 *   The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColor property.
 
-{% highlight voltMx %}Form1.btn1.backgroundColor = "ea5075";
+{% highlight VoltMx %}Form1.btn1.backgroundColor = "ea5075";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -203,21 +212,24 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundColorMultiStepGradient Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>backgroundColorMultiStepGradient Property</summary>
 
 * * *
 
 Specifies the multi-step gradient color for the background of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 backgroundColorMultiStepGradient
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
@@ -235,7 +247,7 @@ Input Parameters
 *   **colors** \[Array\]: Specifies the colors for the multi-step gradient. Colors is an array of color hex values that indicate the reference color values of the gradient. This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.
 *   **colorStops** \[Array\]: Specifies the color stops for the multi-step gradient. Color Stops are the locations of the reference colors on the gradient, from 0 (the start of the gradient) to 100 (the final value of the gradient). This parameter contains an array of numbers that represent the color stops.
 
-Remarks
+### Remarks
 
 *   The default value of the gradientType key is `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
@@ -246,11 +258,11 @@ Remarks
 *   This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 *   The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColorMultiStepGradient property.
 
-{% highlight voltMx %}Form1.btn1.backgroundColorMultiStepGradient = {
+{% highlight VoltMx %}Form1.btn1.backgroundColorMultiStepGradient = {
     "gradientType": voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM  
     "angle": 45,
     "colors": ["ea5075", "f1fa70", "eefd04"],
@@ -258,7 +270,7 @@ This example uses the button widget, but the principle remains the same for all 
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -266,21 +278,24 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundColorTwoStepGradient Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>backgroundColorTwoStepGradient Property</summary>
 
 * * *
 
 Specifies the two-step gradient color for the background of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 backgroundColorTwoStepGradient
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
@@ -297,7 +312,7 @@ Input Parameters
     *   `voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_GRADIENT`: Constant for the horizontal gradient style.
     *   `voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_SPLIT`: Constant for the horizontal split style.
 
-Remarks
+### Remarks
 
 *   The default value of the style key is `voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT`.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
@@ -308,18 +323,18 @@ Remarks
 *   This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 *   The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColorTwoStepGradient property.
 
-{% highlight voltMx %}Form1.btn1.backgroundColorTwoStepGradient = {  
+{% highlight VoltMx %}Form1.btn1.backgroundColorTwoStepGradient = {  
      "topColor": "ea5075",  
     "bottomColor": "eefd04",  
     "style": voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT  
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -327,38 +342,41 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>backgroundImage Property</summary>
 
 * * *
 
 Sets the image for the background of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 backgroundImage
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 *   The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundImage property.
 
-{% highlight voltMx %}Form1.btn1.backgroundImage = "bgImg.png";
+{% highlight VoltMx %}Form1.btn1.backgroundImage = "bgImg.png";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -366,31 +384,34 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[base64 Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>base64 Property</summary>
 
 * * *
 
 Returns the base64-encoded string of the image raw bytes. If the image source is a URL, and if the image is not downloaded, or if it encounters an error while downloading, _null/nil_ is returned.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 base64
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is a **non-constructor** property. You cannot set the property through a widget constructor. But you can read and write data to the property.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Using base64 property in a form frmOnclick
 function customhandlerbase64(camerawidget){
 	frmOnclick2.img1.base64 = camerawidget.base64;
@@ -398,7 +419,7 @@ function customhandlerbase64(camerawidget){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   Android
@@ -408,25 +429,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[borderColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>borderColor Property</summary>
 
 * * *
 
 Specifies the border color of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 borderColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
@@ -435,14 +459,14 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderColor property.
 
-{% highlight voltMx %}Form1.btn1.borderColor = "ea5075";
+{% highlight VoltMx %}Form1.btn1.borderColor = "ea5075";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -450,21 +474,24 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[borderColorGradient Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>borderColorGradient Property</summary>
 
 * * *
 
 Specifies the multi-step gradient color for the border of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 borderColorGradient
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
@@ -482,7 +509,7 @@ Input Parameters
 *   **colors** \[Array\]: Specifies the colors for the multi-step gradient. Colors is an array of color hex values that indicate the reference color values of the gradient. This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.
 *   **colorStops** \[Array\]: Specifies the color stops for the multi-step gradient. Color Stops are the locations of the reference colors on the gradient, from 0 (the start of the gradient) to 100 (the final value of the gradient). This parameter contains an array of numbers that represent the color stops.
 
-Remarks
+### Remarks
 
 *   The default value of the gradientType key is `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
@@ -492,11 +519,11 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderColorGradient property.
 
-{% highlight voltMx %}Form1.btn1.borderColorGradient = {
+{% highlight VoltMx %}Form1.btn1.borderColorGradient = {
     "gradientType": voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM  
     "angle": 45,
     "colors": ["ea5075", "f1fa70", "eefd04"],
@@ -504,32 +531,35 @@ This example uses the button widget, but the principle remains the same for all 
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[borderStyle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>borderStyle Property</summary>
 
 * * *
 
 Specifies the border style for the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 borderStyle
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property can have the following constant values:
     
@@ -541,53 +571,56 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderStyle property.
 
-{% highlight voltMx %}Form1.btn1.borderStyle = voltmx.skin.BORDER_STYLE_PLAIN;
+{% highlight VoltMx %}Form1.btn1.borderStyle = voltmx.skin.BORDER_STYLE_PLAIN;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[borderWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>borderWidth Property</summary>
 
 * * *
 
 Specifies the width of the border for the widget in pixels.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 borderWidth
+{% endhighlight %}
 
-**Type**
+### Type
 
 Number or JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   The default unit for the value of this property is pixels.
 *   The Desktop Web platform supports both Number and JSON Object (with the top, bottom, right, and left keys) values for the borderWidth parameter. The Android and iOS platforms support only Number values for the borderWidth parameter.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderWidth property.
 
-{% highlight voltMx %} Form1.btn1.borderWidth = 2;
+{% highlight VoltMx %} Form1.btn1.borderWidth = 2;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -597,7 +630,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
@@ -607,27 +641,29 @@ The bottom property determines the position of the bottom edge of the widget’s
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 bottom
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -635,32 +671,35 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA , and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cameraOptions Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cameraOptions Property</summary>
 
 * * *
 
 Specifies the camera options that can be used on a form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 cameraOptions
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The following are the configurable properties:
 
@@ -689,9 +728,9 @@ The following are the configurable properties:
     *   constants.CAMERA\_FOCUS\_MODE\_CONTINUOUS (Default value for video mode)  
         
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set cameraOptions property for Camera widget.
+{% highlight VoltMx %}//Sample code to set cameraOptions property for Camera widget.
 
 frmCamera.myCamera.cameraOptions={
         flashMode: "constants.FLASH_MODE_ON",
@@ -700,7 +739,7 @@ frmCamera.myCamera.cameraOptions={
     };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iPhone
@@ -710,27 +749,30 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[captureOrientation Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>captureOrientation Property</summary>
 
 * * *
 
 Specifies the orientation of the captured image.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 captureOrientation
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
 Read only in the iOS platform.
 
-Remarks
+### Remarks
 
 The default value for the property is CAMERA\_CAPTURE\_ORIENTATION\_DEFAULT
 
@@ -743,14 +785,14 @@ The options are:
 *   CAMERA\_CAPTURE\_ORIENTATION\_LANDSCAPE: On the device the camera is always turned sideways so that the height of the screen becomes the width.
 *   CAMERA\_CAPTURE\_ORIENTATION\_PORTRAIT: On the device the camera is always displayed such that the horizontal sides are shorter than the vertical sides.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set captureOrientation property for Camera widget.
+{% highlight VoltMx %}//Sample code to set captureOrientation property for Camera widget.
 
 frmCamera.myCamera.captureOrientation=constants.CAMERA_CAPTURE_ORIENTATION_LANDSCAPE;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -758,25 +800,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[captureMode Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>captureMode Property</summary>
 
 * * *
 
 Specifies the capture mode of the camera.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 captureMode
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** For Android platform, any changes to this property is ignored when the preview is on.
 
@@ -787,14 +832,14 @@ The options are:
 
 > **_Note:_** In the Android platform, set the app level permissions CAMERA, WRITE\_EXTERNAL\_STORAGE and CAMERA\_RECORD\_AUDIO to record a video.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set captureMode property for Camera widget.
+{% highlight VoltMx %}//Sample code to set captureMode property for Camera widget.
 
 frmCamera.myCamera.captureMode=constants.CAMERA_CAPTURE_MODE_VIDEO;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -803,25 +848,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cameraSource Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cameraSource Property</summary>
 
 * * *
 
 Specifies the source of the camera, either front or rear.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 cameraSource
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The options are:
 
@@ -847,14 +895,14 @@ Custom Camera UI
 
 ![](Resources/Images/customCameraUI_430x450.png)
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set cameraSource property for Camera widget.
+{% highlight VoltMx %}//Sample code to set cameraSource property for Camera widget.
 
 frmCamera.myCamera.cameraSource=constants.CAMERA_SOURCE_FRONT;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -864,7 +912,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
@@ -872,25 +921,27 @@ This property determines the center of a widget measured from the left bounds of
 
 The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 centerX
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -898,14 +949,15 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
@@ -913,25 +965,27 @@ This property determines the center of a widget measured from the top bounds of 
 
 The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 centerY
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
@@ -939,70 +993,76 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[compressionLevel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>compressionLevel Property</summary>
 
 * * *
 
 Specifies the compression level or picture quality with which the captured image must be stored. You can specify the compression level value between 0 (best picture quality) and 100 (low picture quality).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 compressionLevel
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for the property is 0. The property is applicable only when the imageFormat is jpeg.
 
 > **_Note:_** In the Android platform, the compressionLevel property is respected only when the enableOverlay is set to true and the captureMode is set to camera mode. Even if the enableOverlay is set to true and if the captureMode is set as video mode, the compressionLevel property is not respected.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set compressionLevel property for Camera widget.
+{% highlight VoltMx %}//Sample code to set compressionLevel property for Camera widget.
 
 frmCamera.myCamera.compressionLevel=25;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[contentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>contentAlignment Property</summary>
 
 * * *
 
 This property specifies the alignment of the text on the widget with respect to its boundaries.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 contentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read+Write
 
-Remarks
+### Remarks
 
 The default value for the property is _CONTENT\_ALIGN\_CENTER_.
 
@@ -1022,40 +1082,43 @@ Limitations
 
 Desktop Web/ SPA platforms do not support _contentAlignment_ property in Camera widget, ComboBox widget and ListBox widget.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the contentAlignment property of the widgetID Button widget in frmHome Form.*/  
+{% highlight VoltMx %}/*Sample code to set the contentAlignment property of the widgetID Button widget in frmHome Form.*/  
   
 frmHome.widgetID.contentAlignment=constants.CONTENT_ALIGN_TOP_LEFT;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cornerRadius Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cornerRadius Property</summary>
 
 * * *
 
 Specifies the radius of the border for the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 cornerRadius
+{% endhighlight %}
 
-**Type**
+**### Type**
 
 Number or JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The cornerRadius property is only applicable when the borderStyle is voltmx.skin.BORDER\_STYLE\_CUSTOM.
 *   For a Responsive Web app, a corner radius of value zero applies a plain border, and a corner radius value greater than zero applies a rounded border.
@@ -1064,14 +1127,14 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the cornerRadius property.
 
-{% highlight voltMx %} Form1.btn1.cornerRadius = 60;
+{% highlight VoltMx %} Form1.btn1.cornerRadius = 60;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1081,31 +1144,34 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cursorType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cursorType Property</summary>
 
 * * *
 
 In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 cursorType
+{% endhighlight %}
 
-Type
+### Type
 
 String.
 
 You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
-To add the `cursorType` property using Volt MX Iris in a Desktop Web application, follow these steps.
+To add the `cursorType` property using VoltMX Iris in a Desktop Web application, follow these steps.
 
-1.  In Volt MX Iris, open the Desktop Web application. From the **Project** explorer, expand **Responsive Web/ Desktop**\> **Forms** and select the form to which you need to make the changes.
+1.  In VoltMX Iris, open the Desktop Web application. From the **Project** explorer, expand **Responsive Web/ Desktop**\> **Forms** and select the form to which you need to make the changes.
 2.  On the canvas, select the widget for which you want to specify the cursor type. For example, button.
 3.  From the **Properties** panel, navigate to the **Skin** tab > **Hover Skin** tab.  
     You will find that the details of the hover skin is not enabled here.
@@ -1118,9 +1184,9 @@ To add the `cursorType` property using Volt MX Iris in a Desktop Web application
     You can see that the **Cursor Type** property has been added under the **General** section.
 8.  Select a value from the drop-down list to set the **Cursor Type** for the widget.
 
-Example
+### Example
 
-{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %} //This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
   
@@ -1128,41 +1194,44 @@ frmButton.myButton.cursorType = "wait";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[disabledStateSkinProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>disabledStateSkinProperties Property</summary>
 
 * * *
 
 Specifies the skin properties that define the look and feel of the widget, when the widget is disabled or blocked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 disabledStateSkinProperties
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the disabledSkin property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the disabledStateSkinProperties property.
 
-{% highlight voltMx %}Form1.btn1.disabledStateSkinProperties= {  
+{% highlight VoltMx %}Form1.btn1.disabledStateSkinProperties= {  
      background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -1194,7 +1263,7 @@ This example uses the button widget, but the principle remains the same for all 
     }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
@@ -1202,27 +1271,30 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
 The `enable` property is used to control the actionability of the widgets. In a scenario where you want to display a widget but not invoke any action on the widget, configure the `enable` property to false to achieve it.
 
-This is a constructor level property and applicable for all widgets in Volt MX Iris.
+This is a constructor level property and applicable for all widgets in VoltMX Iris.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enable
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
@@ -1230,16 +1302,16 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
   
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
@@ -1247,72 +1319,78 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableOverlay Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableOverlay Property</summary>
 
 * * *
 
 The camera is launched with capability of over-lay a Form UI over the camera view.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableOverlay
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 The default value for the property is false. If set to _true,_ the camera preview is overlaid on the form. If set to _false,_ the camera preview is not overlaid on the form.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set enableOverlay property as true for Camera widget.
+{% highlight VoltMx %}//Sample code to set enableOverlay property as true for Camera widget.
 
 frmCamera.myCamera.enableOverlay=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -1321,25 +1399,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enablePhotoCropFeature Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enablePhotoCropFeature Property</summary>
 
 * * *
 
 Enables you to crop the captured image.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enablePhotoCropFeature
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for the property is false. If set to _true,_ the photo crop feature is enabled. If set to _false,_ the photo crop feature is not enabled.
 
@@ -1347,39 +1428,42 @@ The default value for the property is false. If set to _true,_ the photo crop fe
 
 > **_Note:_** The property is ignored when you set the [enableOverlay](#enableOv) property as _true_.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set enablePhotoCropFeature property as true for Camera widget.
+{% highlight VoltMx %}//Sample code to set enablePhotoCropFeature property as true for Camera widget.
 
 frmCamera.myCamera.enablePhotoCropFeature=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableZoom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableZoom Property</summary>
 
 * * *
 
 Set this property as true to enable pinch to zoom of the camera preview in the overlay mode. The property is supported only when the enableOverlay property is set to true.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 enableZoom
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for the property is false. If set to _true,_ the pinch to zoom of the camera preview is enabled. If set to _false,_ the pinch to zoom of the camera preview is disabled.
 
@@ -1387,14 +1471,14 @@ The default value for the property is false. If set to _true,_ the pinch to zoom
 
 > **_Note:_** In the Android platform, the enableZoom property is not respected when enableOverlay property is set to false.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set enableZoom property as true for Camera widget.
+{% highlight VoltMx %}//Sample code to set enableZoom property as true for Camera widget.
 
 frmCamera.myCamera.enableZoom=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Android
@@ -1402,66 +1486,72 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[focusSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>focusSkin Property</summary>
 
 * * *
 
 Specifies the look and feel of the widget when in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 focusSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the focusSkin property for Camera widget.
+{% highlight VoltMx %}//Sample code to set the focusSkin property for Camera widget.
 
 frmCamera.myCamera.focusSkin="camFSkin";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except server-side Mobile Web and SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[focusStateSkinProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>focusStateSkinProperties Property</summary>
 
 * * *
 
 Specifies the skin properties that define the look and feel of the widget, when the widget is in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 focusStateSkinProperties
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the focusSkin property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the focusStateSkinProperties property.
 
-{% highlight voltMx %} Form1.btn1.focusStateSkinProperties = {  
+{% highlight VoltMx %} Form1.btn1.focusStateSkinProperties = {  
      background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -1493,7 +1583,7 @@ This example uses the button widget, but the principle remains the same for all 
     }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1503,25 +1593,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fontColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fontColor Property</summary>
 
 * * *
 
 Specifies the font color of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 fontColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
@@ -1530,14 +1623,14 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontColor property.
 
-{% highlight voltMx %}Form1.btn1.fontColor = "ea5075";
+{% highlight VoltMx %}Form1.btn1.fontColor = "ea5075";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1545,37 +1638,40 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fontFamily Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fontFamily Property</summary>
 
 * * *
 
 Specifies the font family for the font of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 fontFamily
+{% endhighlight %}
 
-**Type**
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontFamily property.
 
-{% highlight voltMx %} Form1.btn1.fontFamily = "Serif";
+{% highlight VoltMx %} Form1.btn1.fontFamily = "Serif";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1585,37 +1681,40 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fontSize Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fontSize Property</summary>
 
 * * *
 
 Specifies the font size for the widget in percentage (%) units.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 fontSize
+{% endhighlight %}
 
-**Type**
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontSize property.
 
-{% highlight voltMx %} Form1.btn1.fontSize = 150;
+{% highlight VoltMx %} Form1.btn1.fontSize = 150;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1625,25 +1724,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fontStyle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fontStyle Property</summary>
 
 * * *
 
 Specifies the font style for the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 fontStyle
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property can have the following constant values:
     
@@ -1653,39 +1755,42 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontStyle property.
 
-{% highlight voltMx %}Form1.btn1.fontStyle = voltmx.skin.FONT_STYLE_NONE;
+{% highlight VoltMx %}Form1.btn1.fontStyle = voltmx.skin.FONT_STYLE_NONE;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fontWeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>fontWeight Property</summary>
 
 * * *
 
 Specifies the weight for the font of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 fontWeight
+{% endhighlight %}
 
-Type
+### Type
 
 Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property can have the following constant values:
     
@@ -1694,21 +1799,22 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontWeight property.
 
-{% highlight voltMx %}Form1.btn1.fontWeight = voltmx.skin.FONT_WEIGHT_NORMAL;
+{% highlight VoltMx %}Form1.btn1.fontWeight = voltmx.skin.FONT_WEIGHT_NORMAL;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -1716,19 +1822,21 @@ It determines the height of the widget and measured along the y-axis.
 
 The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 height
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the available measurement options:
 
@@ -1738,9 +1846,9 @@ Following are the available measurement options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the height property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the height property for widgets by using DP, Percentage and Pixels.
 frmHome.camera1.height="50dp";
 
 frmHome.camera1. height="10%";
@@ -1748,7 +1856,7 @@ frmHome.camera1. height="10%";
 frmHome.camera1. height="10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -1759,72 +1867,78 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hoverSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hoverSkin Property</summary>
 
 * * *
 
 Specifies the look and feel of a widget when the cursor hovers on the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 hoverSkin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
 Setting the hoverSkin property on an existing widget
 
-{% highlight voltMx %}FormHover.widgetID.hoverSkin="theHoverSkin";
+{% highlight VoltMx %}FormHover.widgetID.hoverSkin="theHoverSkin";
 //the Hover Skin is a hover skin created under Skins tab
 {% endhighlight %}
 
 > **_Note:_** To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy. This is applicable for the Desktop web platform.
 
-{% highlight voltMx %}formid.widgetid.hoverSkin = "skinname";
+{% highlight VoltMx %}formid.widgetid.hoverSkin = "skinname";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hoverStateSkinProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hoverStateSkinProperties Property</summary>
 
 * * *
 
 Specifies the skin properties that define the look and feel of the widget, when the cursor hovers on the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 hoverStateSkinProperties
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the hoverSkin property of the configured skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the hoverStateSkinProperties property.
 
-{% highlight voltMx %} Form1.btn1.hoverStateSkinProperties = {  
+{% highlight VoltMx %} Form1.btn1.hoverStateSkinProperties = {  
      background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -1856,7 +1970,7 @@ This example uses the button widget, but the principle remains the same for all 
     }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
@@ -1864,27 +1978,30 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 id is a unique identifier of the Camera Widget consisting of alphanumeric characters. Every Camera Widget should have a unique id within a Form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String - \[Mandatory\]
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining the properties for a Camera with id:"camera1".
+{% highlight VoltMx %}//Defining the properties for a Camera with id:"camera1".
 var camBasic = {
     id: "camera1",
     skin: "camSkin",
@@ -1911,7 +2028,7 @@ var camera1 = new voltmx.ui.Camera(camBasic, camLayout, camPSP);
 alert("Camera id::" + camera1.id);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Android
@@ -1921,25 +2038,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[imageFormat Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>imageFormat Property</summary>
 
 * * *
 
 Specifies if the image must be stored as a _PNG (Portable Network Graphics)_ or a _JPEG (Joint Photographic Experts Group)_ image.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 imageFormat
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for the property is CAMERA\_IMAGE\_FORMAT\_PNG.
 
@@ -1950,14 +2070,14 @@ The following are the available options:
 
 > **_Note:_** In the Android platform, the imageFormat property is respected only when the enableOverlay is set to true and the captureMode is set to camera. The imageFormat property is not respected when the captureMode is set to video, even if the enableOverlay is set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the imageFormat property for Camera widget.
+{% highlight VoltMx %}//Sample code to set the imageFormat property for Camera widget.
 
 frmCamera.myCamera.imageFormat=constants.CAMERA_IMAGE_FORMAT_PNG;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   iPhone
@@ -1965,31 +2085,34 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key-value pairs that a developer can use to store the context with the widget. The info Property helps you avoid globals in programming.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This is a **non-constructor** property. You cannot set the property through a widget constructor. You can read and write data to the property.
 
 The info property can hold any JSObject. After assigning the JSObject to the info property, you should not modify t. For example,
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var inf = {a: 'hello'};
 widget.info = inf; //works
 widget.info.a = 'hello world'; 
@@ -1997,9 +2120,9 @@ widget.info.a = 'hello world';
 //widget.info.a will have old value as hello.
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set info property for a Camera widget
+{% highlight VoltMx %}//Sample code to set info property for a Camera widget
 
 frmCamera.myCamera.info = {
     key: "camera images"
@@ -2009,54 +2132,58 @@ frmCamera.myCamera.info = {
 voltmx.print("Camera info ::" +frmCamera.myCamera.info);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE.
 *   Available on all platforms except on server-side Mobile Web and SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
 The property controls the visibility of a widget on the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for the property is true. If set to _false,_ the widget is not displayed. If set to _true,_ the widget is displayed.
 
 > **_Note:_** The visibility of the widget can be controlled using the setVisibility method.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the isVisible Property for camera widget.
 /*You need to make a corresponding use of the 
 isVisible Property for other applicable widgets.*/
 frmCamera.myCamera.isVisible=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Android, iOS, Windows, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[left Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>left Property</summary>
 
 * * *
 
@@ -2064,25 +2191,27 @@ This property determines the lower left corner edge of the widget and is measure
 
 The left property determines the position of the left edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 left
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
@@ -2090,14 +2219,15 @@ frmHome.widgetID.left = "10%";
 frmHome.widgetID.left = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -2105,21 +2235,23 @@ This property specifies the maximum height of the widget and is applicable only 
 
 The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -2127,53 +2259,56 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxSideOfTheImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxSideOfTheImage Property</summary>
 
 * * *
 
 Specifies the width of the camera picture/image. The property sets the resolution (width \* height) of the camera picture. For example, if maxSideOfTheImage = 1600, if the device has exact matching resolution (in width ie. 1600\*1200), then 1600 \* 1200 resolution is used to set the camera picture size.
 
-Syntax
+### Syntax
 
-{% highlight voltMx %}maxSideOfTheImage
+{% highlight VoltMx %}
+maxSideOfTheImage
 {% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This is a **non-constructor** property. You cannot set the property through a widget constructor. You can read and write data to the property.
 
 > **_Note:_** In the Android platform, the maxSideOfTheImage property is respected only when the enableOverlay is set to true and the captureMode is set to camera. The maxSideOfTheImage property is not respected when the captureMode is set to video, even if the enableOverlay is set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set maxSideOfTheImage property for a Camera widget
+{% highlight VoltMx %}//Sample code to set maxSideOfTheImage property for a Camera widget
 
 frmCamera.myCamera.maxSideOfTheImage=20;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   Available on all platforms except server-side Mobile Web and SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -2181,21 +2316,23 @@ This property specifies the maximum width of the widget and is applicable only w
 
 The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 maxWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -2203,14 +2340,15 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -2218,21 +2356,23 @@ This property specifies the minimum height of the widget and is applicable only 
 
 The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -2240,14 +2380,15 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -2255,21 +2396,23 @@ This property specifies the minimum width of the widget and is applicable only w
 
 The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 minWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -2277,45 +2420,48 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[nativeUserInterface Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>nativeUserInterface Property</summary>
 
 * * *
 
 Specifies if the camera must have the native interface on camera view (an interface with the default platform controls for camera) or the user interface with custom options.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 nativeUserInterface
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for the property is true. If set to _false_, the user interface with custom options is displayed. If set to _true_, the native interface of the camera is displayed based on the platforms.
 
 > **_Note:_** For iOS devices, avoid the _overlayForm_ option when the _nativeUserInterface_ is set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable nativeUserInterface property for a Camera widget
+{% highlight VoltMx %}//Sample code to enable nativeUserInterface property for a Camera widget
 
 frmCamera.myCamera.nativeUserInterface=true;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -2323,7 +2469,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>opacity Property</summary>
 
 * * *
 
@@ -2331,57 +2478,62 @@ Specifies the opacity of the widget. The value of this property must be in the r
 
 Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 opacity
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This property has more priority compared to the values coming from the configured skin.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
+{% highlight VoltMx %}//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
 
 //Sample code to make the widget opaque by using the opacity property.
 frmHome.widgetID.opacity = 1;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE.
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[overlayConfig Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>overlayConfig Property</summary>
 
 * * *
 
 Specifies the overlay configuration parameters for overlaying a form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 overlayConfig
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The following are the configurable properties applicable to iOS and Android platforms:
 
@@ -2406,9 +2558,9 @@ Following are the configurable properties supported on iOS and Android platforms
 
 > **_Note:_** For the Windows 10 platform, the callback event is executed only when you come back to the calling form by selecting the Back button in the app menu in the Form overlay view.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set overlayConfig property for a Camera widget where frmSample is the overlay form.*/
+{% highlight VoltMx %}/*Sample code to set overlayConfig property for a Camera widget where frmSample is the overlay form.*/
 frmCamera.myCamera.overlayConfig = {
  overlayForm: "frmSample",
  referenceImageToCrop: "refImg.png",
@@ -2418,7 +2570,7 @@ frmCamera.myCamera.overlayConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -2428,100 +2580,109 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Helps you access the parent of the widget. If the widget is not part of the widget hierarchy, the parent property returns null.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 parent
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 > **_Note:_** The property works for all the widgets inside a FlexForm, FlexContainer or FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}function func() {
+{% highlight VoltMx %}function func() {
 
     voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[poster Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>poster Property</summary>
 
 * * *
 
 This property helps you to define an image to be displayed on the Camera widget, when the device camera is not open.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 poster
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set poster property for a Camera widget
+{% highlight VoltMx %}//Sample code to set poster property for a Camera widget
 
 frmCamera.myCamera.poster="cameraicon.png";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pressedStateSkinProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>pressedStateSkinProperties Property</summary>
 
 * * *
 
 Specifies the skin properties that define the look and feel of the widget, when the widget is pressed or clicked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 pressedStateSkinProperties
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the pressedSkin property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the pressedStateSkinProperties property.
 
-{% highlight voltMx %}Form1.btn1.pressedStateSkinProperties = {  
+{% highlight VoltMx %}Form1.btn1.pressedStateSkinProperties = {  
      background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -2553,7 +2714,7 @@ This example uses the button widget, but the principle remains the same for all 
     }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
@@ -2561,33 +2722,36 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[rawBytes Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>rawBytes Property</summary>
 
 * * *
 
 Specifies the rawbytes representing an Image (usually the image captured from the camera) that can be used as a background for the Camera. You cannot assign rawBytes directly to a button widget. The rawBytes has to be assigned to an Image widget or Button widget that has image skin.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 rawBytes
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is a **non-constructor** property. You cannot set the property through a widget constructor. You can read and write data to the property.
 
 > **_Note:_** You can only retain the rawBytes obtained by using the Camera widget once in Android. If you need to reuse the rawBytes captured by the camera, you must assign the rawBytes to a variable in the JS code.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set rawBytes property for a Camera widget
+{% highlight VoltMx %}//Sample code to set rawBytes property for a Camera widget
 
 frmCamera.myCamera.rawBytes="1111";  
   
@@ -2596,14 +2760,15 @@ alert("Camera rawBytes::" + frmCamera.myCamera.rawBytes);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   Android, iOS, Windows, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -2613,7 +2778,7 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2636,21 +2801,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -2675,14 +2842,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -2692,7 +2860,7 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2715,21 +2883,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -2754,14 +2924,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -2771,7 +2942,7 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -2794,21 +2965,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -2834,14 +3007,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -2851,25 +3025,27 @@ The right property determines the position of the right edge of the widget’s b
 
 The right property is used only if the width property is not provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 right
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -2877,46 +3053,49 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scaleFactor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>scaleFactor Property</summary>
 
 * * *
 
 Specifies the ratio by which the captured image is reduced. You can set the scale factor between 10 and 100. If you set the scale factor as 100, no reduction takes place, and the actual image is returned. If you set the value as 10, the image returned is reduced to 10 percent of the actual captured image.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 scaleFactor
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** In the Android platform, the scaleFactor property is respected only when the enableOverlay is set to true and the captureMode is set to camera. The scaleFactor property is not respected when the captureMode is set to video, even if the enableOverlay is set to true.
 
 > **_Note:_** This is a **non-Constructor** property. You cannot set this property through widget constructor. But you can read and write data to it.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set scaleFactor property for a Camera widget
+{% highlight VoltMx %}//Sample code to set scaleFactor property for a Camera widget
 
 frmCamera.myCamera.scaleFactor=25;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Android
@@ -2925,25 +3104,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[shadowColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>shadowColor Property</summary>
 
 * * *
 
 Specifies the color for the shadow of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 shadowColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
@@ -2952,39 +3134,42 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the shadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the shadowColor property.
 
-{% highlight voltMx %}Form1.btn1.shadowColor = "ea5075";
+{% highlight VoltMx %}Form1.btn1.shadowColor = "ea5075";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[shadowOffset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>shadowOffset Property</summary>
 
 * * *
 
 This property specifies the current coordinates of the shadow region in the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 shadowOffset
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The JSON Object contains the X-coordinate and Y-coordinates for the offset in the following format:
     
@@ -2994,56 +3179,59 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the shadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the shadowOffset property.
 
-{% highlight voltMx %}Form1.btn1.shadowOffset= {
+{% highlight VoltMx %}Form1.btn1.shadowOffset= {
     "x": "3",
     "y": "27"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[shadowRadius Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>shadowRadius Property</summary>
 
 * * *
 
 Specifies the radius for the blur value of the shadow.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 shadowRadius
+{% endhighlight %}
 
-**Type**
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The default value of the shadowRadius property for a Responsive Web app is 0.
 *   The default unit for the value of this property is pixels.
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the shadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the shadowRadius property.
 
-{% highlight voltMx %} Form1.btn1.shadowRadius = 6;
+{% highlight VoltMx %} Form1.btn1.shadowRadius = 6;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
@@ -3052,33 +3240,36 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[skin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>skin Property</summary>
 
 * * *
 
 Specifies the look and feel of the camera when it is not in focus.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 skin
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set skin property for a Camera widget
+{% highlight VoltMx %}//Sample code to set skin property for a Camera widget
 
 frmCamera.myCamera.skin="camSkin";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE.
 *   Android
@@ -3087,25 +3278,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[supportedVideoQualityLevels Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>supportedVideoQualityLevels Property</summary>
 
 * * *
 
 The property returns an array of possible quality levels for the given device for the configured camera source. You can set one of the values from the returned array.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 supportedVideoQualityLevels
+{% endhighlight %}
 
-Type
+### Type
 
 Array
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 Below are the video resolutions possible for Android devices. When you query the video resolutions of your device, all the available resolutions are returned in an array.
 
@@ -3130,9 +3324,9 @@ Below are the video resolutions possible for Android devices. When you query the
 
 > **_Note:_** When the enableOverlay property is set to false, only one option is supported that is constants.CAMERA\_VIDEO\_QUALITY\_HIGH.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var camBasic = {
     id: "camera1",
     skin: "camSkin",
@@ -3162,64 +3356,70 @@ var camera1 = new voltmx.ui.Camera(camBasic, camLayout, camPSP);
 alert("Supported Video Quality Levels::" + camera1.supportedVideoQualityLevels);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[text Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>text Property</summary>
 
 * * *
 
 Specifies a general or descriptive text for the Camera Widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 text
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set text property for a Camera widget
+{% highlight VoltMx %}//Sample code to set text property for a Camera widget
 
 frmCamera.myCamera.text="Camera";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms except on server-side Mobile Web and SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textShadowColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textShadowColor Property</summary>
 
 * * *
 
 Specifies the color for the text shadow of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 textShadowColor
+{% endhighlight %}
 
-Type
+### Type
 
 Color constant or Hexadecimal number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
@@ -3228,14 +3428,14 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the textShadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the textShadowColor property.
 
-{% highlight voltMx %}Form1.btn1.textShadowColor = "ea5075";
+{% highlight VoltMx %}Form1.btn1.textShadowColor = "ea5075";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -3243,25 +3443,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textShadowOffset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textShadowOffset Property</summary>
 
 * * *
 
 This property specifies the current coordinates of the text shadow region in the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 textShadowOffset
+{% endhighlight %}
 
-Type
+### Type
 
 JSON Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The JSON Object contains the X-coordinate and Y-coordinates for the offset in the following format:
     
@@ -3271,17 +3474,17 @@ Remarks
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the textShadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the textShadowOffset property.
 
-{% highlight voltMx %}Form1.btn1.textShadowOffset = {
+{% highlight VoltMx %}Form1.btn1.textShadowOffset = {
     "x": "2",
     "y": "24"
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -3289,39 +3492,42 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textShadowRadius Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textShadowRadius Property</summary>
 
 * * *
 
 Specifies the radius for the blur value of the text shadow.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 textShadowRadius
+{% endhighlight %}
 
-**Type**
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The default value of the textShadowRadius property for a Responsive Web app is 0.
 *   The default unit for the value of this property is pixels.
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the textShadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
-Example
+### Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the textShadowRadius property.
 
-{% highlight voltMx %} Form1.btn1.textShadowRadius = 6;
+{% highlight VoltMx %} Form1.btn1.textShadowRadius = 6;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -3331,40 +3537,44 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[toolTip Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>toolTip Property</summary>
 
 * * *
 
 Specifies the information text that appears when the cursor hovers over a widget, without clicking it. The text entered in the toolTip property appears as a small box.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 toolTip
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set toolTip property for a Camera widget
+{% highlight VoltMx %}//Sample code to set toolTip property for a Camera widget
 
 frmCamera.myCamera.toolTip="Click Here";  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
@@ -3372,25 +3582,27 @@ This property determines the top edge of the widget and measured from the top bo
 
 The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 top
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -3398,86 +3610,92 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[videoStabilization Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>videoStabilization Property</summary>
 
 * * *
 
 The property enables you to reduce the shaking of the camera while shooting a video.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 videoStabilization
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value is false.
 
 > **_Note:_** In the Android platform, the videoStabilization property is respected only when the enableOverlay is set to true and the captureMode is set to video. The videoStabilization property is not respected when the captureMode is set to camera, even if the enableOverlay is set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable videoStabilization property for a Camera widget
+{% highlight VoltMx %}//Sample code to enable videoStabilization property for a Camera widget
 
 frmCamera.myCamera.videoStabilization=true;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available only in Android/Android Tablet
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[videoFormat Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>videoFormat Property</summary>
 
 * * *
 
 The property specifies the video format of the captured video.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 videoFormat
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The options are:
 
 *   CAMERA\_VIDEO\_FORMAT\_MP4 (Default)
 *   CAMERA\_VIDEO\_FORMAT\_MOV
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to enable videoFormat property for a Camera widget
+{% highlight VoltMx %}//Sample code to enable videoFormat property for a Camera widget
 
 frmCamera.myCamera.videoFormat=constants.CAMERA_VIDEO_FORMAT_MOV;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -3485,39 +3703,42 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[videoDuration Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>videoDuration Property</summary>
 
 * * *
 
 Use the property to specify the length of the captured video in seconds. Only positive numbers are accepted.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 videoDuration
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** The value is assumed as undefined if you set zero or any other invalid values.
 
 > **_Note:_** In the Android platform, the videoDuration property is respected only when the enableOverlay is set to true and the captureMode is set to video. The videoDuration property is not respected when the captureMode is set to camera, even if the enableOverlay is set to true.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set videoDuration property for a Camera widget
+{% highlight VoltMx %}//Sample code to set videoDuration property for a Camera widget
 
 frmCamera.myCamera.videoDuration=10;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iPhone
@@ -3527,25 +3748,28 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[videoQualityLevel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>videoQualityLevel Property</summary>
 
 * * *
 
 Use the property to specify the quality of the video.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 videoQualityLevel
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** In the Android platform, the videoQualityLevel property is respected only when the enableOverlay is set to true and the captureMode is set to video. The videoQualityLevel property is not respected when the captureMode is set to camera, even if the enableOverlay is set to true.
 
@@ -3579,15 +3803,15 @@ The options for Android platform are:
 | constants.CAMERA\_VIDEO\_QUALITY\_HIGH\_SPEED\_480P | High speed ( >= 100fps) quality level corresponding to the 480p (720 x 480) resolution. |
 | constants.CAMERA\_VIDEO\_QUALITY\_HIGH\_SPEED\_LOW | High speed ( >= 100fps) quality level corresponding to the lowest available resolution. |
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set videoQualityLevel property for a Camera widget
+{% highlight VoltMx %}//Sample code to set videoQualityLevel property for a Camera widget
 
 frmCamera.myCamera.videoQualityLevel=constants.CAMERA_VIDEO_QUALITY_HIGH;  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not available in the IDE
 *   iPhone
@@ -3596,7 +3820,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -3604,19 +3829,21 @@ This property determines the width of the widget and is measured along the x-axi
 
 The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 width
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the options that can be used as units of width:
 
@@ -3626,9 +3853,9 @@ Following are the options that can be used as units of width:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
@@ -3636,40 +3863,43 @@ frmHome.widgetID.width = "10%";
 frmHome.widgetID.width = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
 This property specifies the stack order of a widget. A widget with a higher zIndex is always in front of a widget with a lower zIndex.
 
-The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
+The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the VoltMX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
 > **_Note:_** Modifying the zIndex does not modify the order of the widgets inside the FlexContainer. If zIndex is same for group of overlapping widgets then widget order decides the order of overlapping. The last added widget is displayed on top.
 
-From Volt MX Iris V9 SP2 FP7, developers can configure the Z Index value for a Responsive Web app as **Auto** or **Custom**. When the selected Z Index value is **Auto**, the default Z Index value of 1 is applied. When the selected Z Index value is **Custom**, developers can specify a desired numeric value.
+From VoltMX Iris V9 SP2 FP7, developers can configure the Z Index value for a Responsive Web app as **Auto** or **Custom**. When the selected Z Index value is **Auto**, the default Z Index value of 1 is applied. When the selected Z Index value is **Custom**, developers can specify a desired numeric value.
 
 Prior to the V9 SP2 FP7 release, the default value for the Z Index was **1**. When developers imported any third-party libraries with the Z index set as **Auto**, content overflow was disabled as the value of Auto is less than 1.
 
@@ -3683,24 +3913,24 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 **voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+{% highlight VoltMx %}//Sample code to set the ZIndex value to Auto  
  var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
   "zIndex": voltmx.flex.ZINDEX_AUTO
 });
 
-{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+{% endhighlight %}{% highlight VoltMx %}//Sample code to set the ZIndex value to Auto
 flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web

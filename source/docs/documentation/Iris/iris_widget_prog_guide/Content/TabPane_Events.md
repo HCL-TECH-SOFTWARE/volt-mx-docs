@@ -12,33 +12,37 @@ TabPane has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTabClick Event](javascript:void(0);)
+
+<details close markdown="block"><summary>onTabClick Event</summary>
 
 * * *
 
 Event callback invoked when the tab is clicked. This event is triggered when you expand or collapse any Tab.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTabClick(tabPane,tabIndex)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
-tabpane
+**tabpane**
 
 Reference to the TabPane widget that raised the event.
 
-tabIndex
+**tabIndex**
 
 Specifies the Index number of a tab in the tabPane.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onTabClick event callback to a Link widget.
+{% highlight VoltMx %}
+//Sample code to set the onTabClick event callback to a Link widget.
 
 frmTab.myTab.onTabClick=onTabClickCallback;
 
@@ -49,34 +53,38 @@ function onTabClickCallback(tabpane, tabIndex){
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[postOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>postOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom JavaScript function after the _onTabClick_ callback of the TabPane is invoked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 postOnclickJS
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is applicable only for Mobile Web channel. The function must exist in a JavaScript file under project>module>js folder.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the postOnclickJS event callback to a TabPane widget.
+{% highlight VoltMx %}
+//Sample code to set the postOnclickJS event callback to a TabPane widget.
 
 frmTab.myTab.postOnclickJS=postOnclickCallback;
 
@@ -87,28 +95,31 @@ function postOnclickCallback(tab){
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on Server side Mobile Web (Advanced) platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[preOnclickJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>preOnclickJS Event</summary>
 
 * * *
 
 This event allows the developer to execute custom JavaScript function before the _onTabClick_ callback of the TabPane is invoked.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 preOnclickJS
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This is applicable only for Mobile Web channel. The function must exist in a JavaScript file under project>module>js folder.
 
@@ -118,7 +129,8 @@ You have to specify the modules to be loaded in browser using import JS tab, onl
 
 Example
 
-{% highlight voltMx %}//Sample code to set the preOnclickJS event callback to a TabPane widget.
+{% highlight VoltMx %}
+//Sample code to set the preOnclickJS event callback to a TabPane widget.
 
 frmTab.myTab.preOnclickJS=preOnclickCallback;
 
@@ -129,7 +141,7 @@ function preOnclickCallback(tab){
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   Available on Server side Mobile Web (BJS and Advanced) platform only

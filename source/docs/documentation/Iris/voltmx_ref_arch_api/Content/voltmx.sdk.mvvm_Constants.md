@@ -12,7 +12,8 @@ voltmx.sdk.mvvm Constants
 
 The voltmx.sdk.mvvm namespace provides the following constants.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.sdk.mvvm.OperationType Constants](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.sdk.mvvm.OperationType Constants</summary> 
 
 * * *
 
@@ -25,8 +26,10 @@ Specifies the operation to be performed.
 | voltmx.sdk.mvvm.OperationType.FILTER\_BY\_PRIMARY\_KEY | The operation is filtered by the data object's primary key. |
 | voltmx.sdk.mvvm.OperationType.NO\_FILTER | The operation is not filtered. |
 
-Remarks
+### Remarks
 
 Use these constants to specify data model operations when performing form navigation. For more information, see [voltmx.sdk.mvvm.NavigationObject Object](NavigationObject.html).
 
 * * *
+
+</details>

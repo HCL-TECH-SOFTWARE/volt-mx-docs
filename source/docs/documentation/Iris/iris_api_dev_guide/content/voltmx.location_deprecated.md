@@ -9,40 +9,43 @@ Deprecated Functions
 
 This section lists the deprecated function.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[phone.mylocation](javascript:void(0);)
 
-This API is deprecated from Volt MX Iris 4.0 release onwards. As an alternate, to capture the location details use the [geolocation.getcurrentposition](voltmx.location_functions.html#getCurrentPosition) API.
+<details close markdown="block"><summary>phone.mylocation</summary>
+
+This API is deprecated from Volt MX Iris 4.0 release onwards. As an alternate, to capture the location details use the `[geolocation.getcurrentposition](voltmx.location_functions.html#getCurrentPosition)` API.
 
 This API provides you with the ability to capture the current location of the user based on the _Global Positioning System_ (GPS) and _Location Based Services_ (LBS) capabilities.
 
-Use Case
+### Use Case
 
 You can use this API to:
 
 *   pre-populate your current location details in applications like Flight Search or Hotel Search.
 *   identify outlets like Shopping Mall, Gas Station, ATM, and so on nearest to your current location.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 phone.mylocation();
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 This API does not require any input parameters.
 
-Return Values
+### Return Values
 
-Reference \[userdata\]
+**_Reference \[userdata\]_**
 
 Contains three keys:
 
-cellular ID
+    cellular ID
 
-longitude
+    longitude
 
-latitude
+    latitude
 
-Status \[Number\]
+**_Status \[Number\]_**
 
 Status can be one of the following:
 
@@ -50,7 +53,7 @@ _0_: Success in finding the location
 
 _\-1_: Unable to find the location
 
-Error Codes
+### Error Codes
 
 The following error codes are returned:
 
@@ -65,13 +68,13 @@ The following error codes are returned:
 
   
 
-Implementation Details
+### Implementation Details
 
 To fetch location details on Mobile Web, enable the _Requires GPS_ property of a project and set the _CaptureGPS_ property to _true_. For more information about capturing location details on Mobile Web, see the appendix _GPS Functionality_ in _VoltMX IrisUser Guide_.
 
 This API does not fetch data if it is used in the `appinit` event or on the first call of `form.preshow` API.
 
-Rules and Restrictions
+### Rules and Restrictions
 
 *   On Mobile Web, this API is available on:
     *   iPhone
@@ -79,7 +82,7 @@ Rules and Restrictions
     *   other HTML5 browsers.
 *   You cannot test this API from Windows Phone Mango emulator as with current release of WP7.0 _cellular ID_ cannot be retrieved.
 
-Platform Availability
+### Platform Availability
 
 *   Available on all platforms except IE8 and prior to IE8 releases.
 *   Available on all platforms except prior to IE8 releases.

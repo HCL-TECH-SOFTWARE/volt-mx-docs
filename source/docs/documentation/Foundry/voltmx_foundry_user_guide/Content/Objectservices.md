@@ -79,7 +79,7 @@ To create an Object Service, you must understand the following basic components:
 
 ![](Resources/Images/ObjectsView_355x515.png)
 
-> **_Note:_** To walk-through creating an Object service with Volt MX Foundry, take a look at our hands-on tutorial for [Object Services Overview](https://youtu.be/Sqng6_2-N6E)
+> **_Note:_** To walk-through creating an Object service with Volt MX Foundry, take a look at our hands-on tutorial for [Object Services Overview](https://youtu.be/I82jkllMVP4)
 
 Workflow of Object Services
 ---------------------------

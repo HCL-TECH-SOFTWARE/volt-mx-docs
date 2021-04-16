@@ -71,11 +71,11 @@ The voltmx.application namespace contains the following functions.
 
 The voltmx.application.addApplicationCallbacks API helps you to register multiple callbacks for the same event. This API is available from V8 SP4 onwards.
 
-Syntax
+### Syntax
 
 voltmx.application.addApplicationCallbacks(callbacksMap)
 
-Input Parameters
+### Input Parameters
 
 callbacksMap \[Object\] - Mandatory
 
@@ -94,9 +94,10 @@ Specifies an Object with key as **appstate** and value as the Map Object (key wi
 | onpowersourcechange | State which indicates whether a power source is attached to the user's device. |
 | onnetworkchange | This is specific to Mango. State which occurs when there is a change in the following: **Status**: Indicates the status of the device. The applicable statuses are Connected, Disconnected, Roaming, or Unknown. **Network**: Indicates the available network on the device. The network statuses are Wireless80211, Ethernet, MobileBroadbandGSM, MobileBroadbandCDMA, or None. **Date**: Indicates the date on which the event occurs. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    function functionCallback() {
+{% highlight VoltMx %}
+function functionCallback() {
     voltmx.print alert("====isAppLaunchedForInteraction callback executed====");
 }
 
@@ -109,7 +110,7 @@ var callbacksMapObject = {
 voltmx.application.addApplicationCallbacks(callbacksMapObject);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -124,24 +125,24 @@ Platform Availability
 
 This API adds a specified key and value to the parameter list of the URL of the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.addBMState([formID](#id3), [key](#key), [value](#value))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | formID \[String\] - Mandatory. | Identifier of the form to be bookmarked. |
 | key \[String\] - Mandatory | Key string representing the LHS of the parameter. |
 | value \[String\] - Mandatory | Value string representing the RHS of the key-value combination. The value can not be a nested structure. |
 
- 
+### Example
 
-**Example**
-
-{% highlight voltMx %}addbookmark: function() {
+{% highlight VoltMx %}
+addbookmark: function() {
 
     voltmx.application.addBMState("Form1", "About", "page2");
     alert("A specified key and value are added to the parameter list of the URL");
@@ -149,11 +150,11 @@ Input Parameters
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 Supported for SPA and Desktop Web.
 
@@ -166,11 +167,13 @@ Supported for SPA and Desktop Web.
 
 Using the setGestureRecognizerForAllForms function, you can set a gesture recognizer for all the forms.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setGestureRecognizerForAllForms ([gestureType](#gestureType1), [gestureConfigParams](#gestureConfigParams1),[onGestureClosure](#onGestureClosure1))
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
 **gestureType \[Number\] - Mandatory**
 
@@ -184,12 +187,11 @@ Indicates the type of gesture that must be detected on the widget. Following are
 *   6 - constants.GESTURE\_TYPE\_PINCH
 *   7 - constants.GESTURE\_TYPE\_RIGHTTAP
 
-> **_Note:_**  
-
+> **_Note:_** 
 *   RIGHTTAP is applicable only to Windows 10 platform.
 *   ROTATION is not supported on Android.
 
-**gestureConfigParams \[object\] - Mandatory**
+### gestureConfigParams \[object\] - Mandatory
 
 Specifies a table that has the configuration parameters that are required to setup a gesture recognizer. The configuration parameters vary based on the type of the gesture.
 
@@ -202,11 +204,13 @@ Specifies a table that has the configuration parameters that are required to set
 | ROTATION | fingers \[Number\] - The number of fingers that are required to recognize the gesture. The Default value is 2. continuousEvents \[Boolean\] - indicates if callback must be called continuously for every change beginning from the time the gesture is recognized to the time it ends. |
 | PINCH | fingers \[Number\] - The number of fingers that are required to recognize the gesture. The Default value is 2. continuousEvents \[Boolean\] indicates if callback should be called continuously every change beginning from the time the gesture is recognized to the time it ends. |
 
-**onGestureClosure \[function\] - Mandatory**
+### onGestureClosure \[function\] - Mandatory
 
 Specifies the function that needs to be executed when a gesture is recognized. This function will be raised asynchronously and has the following signature:
 
-> onGestureClosure(widgetRef, gestureInfo, context)
+{% highlight VoltMx %}
+onGestureClosure(widgetRef, gestureInfo, context)
+{% endhighlight %}
 
 | Parameter | Description |
 | --- | --- |
@@ -214,9 +218,7 @@ Specifies the function that needs to be executed when a gesture is recognized. T
 | gestureInfo | Table with information about the gesture. The contents of this table vary based on the gesture type. |
 | context | Table with SegmentedUI row details. |
 
- 
-
-**gestureInfo table has the following key-value pairs:**
+### gestureInfo table has the following key-value pairs:
 
 | Key | Description |
 | --- | --- |
@@ -237,19 +239,18 @@ Specifies the function that needs to be executed when a gesture is recognized. T
 | translationX and translationY \[number\] | Cumulative distance as number. (Applicable only for PAN gesture type) |
 
  
-
-**context table has the following key-value pairs**:
+### context table has the following key-value pairs:
 
 | Key | Description |
 | --- | --- |
 | rowIndex \[number\] | Row index of the segment UI where gesture is recognized. (Applicable to gestures added to segUI rows) |
 | sectionIndex \[number\] | Section index of the segment UI where gesture is recognized. (Applicable to gestures added to segUI rows) |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining a function
+{% highlight VoltMx %}
+//Defining a function
 function formGesture(widgetID, gestureInfo) {
     var y = voltmx.type(gestureInfo); //expected value of y = table
     var z = voltmx.type(gestureInfo.gesturesetUpParams); //expected values of z = table
@@ -324,11 +325,11 @@ function callbackSingleTapGesture() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 String - Reference to the gesture is returned.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Server Side Mobile Web, and Desktop Web.
 
@@ -341,11 +342,13 @@ Available on all platforms except Server Side Mobile Web, and Desktop Web.
 
 This API enables you to add a menu item at a given index in the Charm settings menu.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.addSettingsMenuItemAt ([id](#id3), [index](#index), [menuSettings](#menuSettings2))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -354,11 +357,12 @@ Input Parameters
 | index \[Number\] - Mandatory. | The index at which the menu item must be added. The index value lies between 0 and n-1. If the index is beyond the current length of the Charm menu items then the item is added to the end. |
 | menuSettings \[Hash table\] - Mandatory | The menuSettings hash table comprises the following key-value pairs: **id**: ID of the Charm menu item. **text**: Name of the menu item. **onClick**: onclick event to be executed for the menu item. |
 
-Example
+### Example
 
 To add a menu item at a given index, enter the following:
 
-{% highlight voltMx %}//The below function is the callback function for onClickClosure event of app menu item with id "appmenuitemid3".
+{% highlight VoltMx %}
+//The below function is the callback function for onClickClosure event of app menu item with id "appmenuitemid3".
 function onClickClosure3() {
     //proceed with the logic
 }
@@ -373,11 +377,11 @@ var settingsMenuItem1 = {
 voltmx.application.addSettingsMenuItemAt("accountMenu", 3, settingsMenuItem1);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 Available on Windows only.
 
@@ -392,23 +396,24 @@ In some scenarios apps are launched in the background to perform some long runni
 
 This API is used when you want to run a long running or the asynchronous task in the background of the phone app. When the long running task is completed, you must end the background task using the API voltmx.application.endBackgroundTask.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.beginBackgroundTask(taskID, callback)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | taskID \[String\] - Mandatory | Specifies the unique identifier for the task. |
 | callback \[function\] - Optional | Specifies the callback that gets executed in the background before iOS suspends the app. You can use this callback to save information or clean up resources before your app gets suspended. |
 
  
+### Example
 
-Example
-
-{% highlight voltMx %}function ExpirationHandlercallback(){  
+{% highlight VoltMx %}
+function ExpirationHandlercallback(){  
 //your logic to clear resources or save data.  
 } function jsfunction(userInfo, replyObj){
 
@@ -421,11 +426,11 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 This API returns taskID as a number that is used as an input for voltmx.application.endBackgroundTask API.
 
-Platform Availability
+### Platform Availability
 
 Available on iPhone and iPad.
 
@@ -438,23 +443,25 @@ Available on iPhone and iPad.
 
 Checks and returns the permission status of one or more resources.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.checkPermission(resourceId\[constant/String\], options\[JSObject\])
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
+
 | Parameter | Description |
 | --- | --- |
 | resourceId \[constant/String\] - Mandatory | Specify the ID of the resource or name of the permission (only for Android) for which you want to check the status. You can specify either a String (permission name) or an integer (resourceId) value. The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: "android.permission.READ\_PHONE\_STATE". |
 | options \[JSObject\] - Optional | Specify the additional option to identify the exact resource of which you want to know the status. This is a platform-specific key. For more information, refer to Resource ID. |
 
  
+### Example 1
 
-Example 1
-
-{% highlight voltMx %}var options = {
+{% highlight VoltMx %}
+var options = {
     isAccessModeAlways: true
 };
 var result = voltmx.application.checkPermission(voltmx.os.RESOURCE_LOCATION, options);
@@ -465,9 +472,10 @@ if (result.status = = voltmx.application.PERMISSION_DENIED) {
 }
 {% endhighlight %}
 
-Example 2
+### Example 2
 
-{% highlight voltMx %}< uses - permission  android: name = "android.permission.READ_PHONE_STATE" / >
+{% highlight VoltMx %}
+< uses - permission  android: name = "android.permission.READ_PHONE_STATE" / >
 var result = voltmx.application.checkPermission("android.permission.READ_PHONE_STATE");
 if (result.status = = voltmx.application.PERMISSION_DENIED) {
     voltmx.application.requestPermission();
@@ -476,7 +484,7 @@ if (result.status = = voltmx.application.PERMISSION_DENIED) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 JSObject
 
@@ -489,7 +497,7 @@ A JS Object contains the authorization status of the requested resource. The ret
 
  
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -503,21 +511,23 @@ Platform Availability
 
 This API enables you to create a _Charm settings_ menu for an application.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.applicationcreateSettingsMenu ([id](#id), [menuSettings](#menuSettings))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | id \[String\] - Mandatory | Identifier of the Charm setting menu created. |
 | menuSettings \[Hash table\] - Mandatory | The menuSettings hash table comprises the following key-value pairs:**id**: ID of the Charm menu item.**text**: Name of the menu item. |
 
-Example
+### Example
 
-{% highlight voltMx %}//To create a Charm settings menu, enter the following  
+{% highlight VoltMx %}
+//To create a Charm settings menu, enter the following  
 var settingsMenuItem1 = {
     id: "about",
     text: "About"
@@ -530,17 +540,17 @@ var settingsMenu = [settingsMenuItem1, settingsMenuItem2];
 voltmx.application.createSettingsMenu("mysettingsmenu", settingsMenu);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Special Considerations
+### Special Considerations
 
 If a Charm setting menu is already created with the identifier passed, a new Charm setting menu will be created and the old Charm setting menu will be replaced with the new one. The same holds true for menu items as well.
 
 At least one menu item must be present in the Charm settings menu created. A Charm settings menu with no menu items is invalid.
 
-Platform Availability
+### Platform Availability
 
 Available on Windows only.
 
@@ -553,24 +563,27 @@ Available on Windows only.
 
 This API provides you the ability to dismiss the loading screen displayed earlier. If there is no loading screen, this API has no affect.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.dismissLoadingScreen()
-
-Example
-
-{% highlight voltMx %}                    voltmx.application.dismissLoadingScreen();
 {% endhighlight %}
 
-Input Parameters
+### Example
+
+{% highlight VoltMx %}
+voltmx.application.dismissLoadingScreen();
+{% endhighlight %}
+
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Mobile Web.
 
@@ -583,28 +596,30 @@ Available on all platforms except Mobile Web.
 
 Destroys the target form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.destroyForm(  
     friendlyName);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | friendlyName | A string containing the friendly name of the form to be destroyed. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    voltmx.application.destroyForm("Form1");
+{% highlight VoltMx %}
+voltmx.application.destroyForm("Form1");
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 The function destroys both the target form and its form controller.
 
@@ -617,27 +632,30 @@ The function destroys both the target form and its form controller.
 
 This API enables you to disable a zoomed out view set for an application using the previous API.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.disableZoomedOutView()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    //Disabling zoomout on an application
+{% highlight VoltMx %}
+//Disabling zoomout on an application
 function zoomout() {
     voltmx.application.disableZoomedOutView();
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 Windows
 
@@ -650,20 +668,21 @@ Windows
 
 This API is invoked when you are done with an execution of long running tasks in the background. The return value of the API voltmx.application.beginBackgroundTask is used as the input parameter for this API.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.endBackgroundTask()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | taskID \[Number\] - Mandatory | Specifies the identifier returned by the voltmx.application.beginBackgroundTask API. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    
+{% highlight VoltMx %}
 function ExpirationHandlercallback(){  
     //your logic to clear resources or save data.  
 }  
@@ -675,11 +694,11 @@ function jsfunction(userInfo, replyObj)
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on iPhone and iPad.
 
@@ -692,13 +711,16 @@ Available on iPhone and iPad.
 
 This API terminates the application.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.exit()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    function exit() {
+{% highlight VoltMx %}
+function exit() {
     try {
         voltmx.application.exit();
     } catch (Error) {
@@ -707,15 +729,15 @@ Example
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except for Server side Mobile Web and Desktop Web. SPA supports only iPhone, iPad, and Windows.
 
@@ -730,24 +752,27 @@ This API provides you the ability to exit the library. After exiting the library
 
 For more information on Library mode, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Build_nativeLibrary.html).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.exitLibrary()
-
-Example
-
-{% highlight voltMx %}                    voltmx.application.exitLibrary();
 {% endhighlight %}
 
-Input Parameters
+### Example
+
+{% highlight VoltMx %}
+voltmx.application.exitLibrary();
+{% endhighlight %}
+
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -763,33 +788,34 @@ Platform Availability
 
 * * *
 
- 
-
 This API allows you to read the badge value (if any) attached to the given application icon. If the applications icon does not have any badge value attached to it, this API returns an empty string.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getApplicationBadgeValue()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}gettingBadge: function() {
+{% highlight VoltMx %}
+gettingBadge: function() {
     var badge = voltmx.application.getApplicationBadgeValue();
     alert("The badge value is " + badge);
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 | Return Value | Description |
 | --- | --- |
 | badgeValue \[String\] | Returns the badge value applied to the application icon If the application icon has no badge value attached to it, it returns null/nil. |
 
-Platform Availability
+### Platform Availability
 
 Available only on iPhone and iPad.  
 
@@ -803,13 +829,16 @@ Available only on iPhone and iPad.
 
 This API allows an application on a device to get Push Notifications Settings status. This API takes an object with notification type and callback. Use this API to get the application notification status from device settings.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getApplicationNotificationSettings (callback)
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}function getNotificationSettings() {
+{% highlight VoltMx %}
+function getNotificationSettings() {
  var callbacksObj = {
   notificationType: constants.APPLICATION_UN_NOTIFICATION_TYPE,
   callback: notificationCallBack
@@ -849,11 +878,11 @@ function notificationCallBack(result) {
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 The result Array consists of AuthorizationStatus, NotificatinCenterSetting, AlertSetting, BadgeSetting, LockScreenSetting, SoundSetting, AlertStyle.
 
@@ -869,7 +898,7 @@ The result Array consists of AuthorizationStatus, NotificatinCenterSetting, Aler
 *   NOTIFICATION\_ALERT\_STYLE\_BANNER: Notification alert style set to banner.
 *   NOTIFICATION\_ALERT\_STYLE\_ALERT: Notification alert style set to alert.
 
-Platform Availability
+### Platform Availability
 
 iPad/iPhone
 
@@ -882,39 +911,42 @@ iPad/iPhone
 
 This API enables you to get the application mode.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getApplicationMode()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    function getApplicationMode() {
+{% highlight VoltMx %}
+function getApplicationMode() {
 	voltmx.application.getApplicationMode();	
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
-Integer Constant
+**Integer Constant**
 
 *   1: constants.APPLICATION\_MODE\_NATIVE
 *   2: constants.APPLICATION\_MODE\_HYBRID
 *   3: constants.APPLICATION\_MODE\_WRAPPER  
     
 
-Special Considerations
+### Special Considerations
 
 This API should be called only in preappinit or before the execution of preappinit. If this API is invoked elsewhere in the program, it is invalid and leads to undefined behavior.
 
-Exceptions
+### Exceptions
 
 Error
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -927,13 +959,16 @@ Available on all platforms.
 
 iOS prohibits UI updates when the app is running in the background. Using this API you can check whether the app is running in the background or not to make UI updates. The possible application states are active, inactive, or background.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getApplicationState()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    //Sample code to get the application state  
+{% highlight VoltMx %}
+//Sample code to get the application state  
 function util() {
     var appState = voltmx.application.getApplicationState();
     if (appState = constants.APPLICATION_STATE_BACKGROUND) {
@@ -942,11 +977,11 @@ function util() {
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 This API returns the following constant values:
 
@@ -954,7 +989,7 @@ This API returns the following constant values:
 *   APPLICATION\_STATE\_INACTIVE
 *   APPLICATION\_STATE\_BACKGROUND
 
-Platform Availability
+### Platform Availability
 
 Available on iPhone and iPad.
 
@@ -965,26 +1000,26 @@ Available on iPhone and iPad.
 
 * * *
 
- 
-
 This API enables you to read the badge value (if any) attached to the specified app menu item. If the specified app menu item does not have any badge value attached to it, the API returns an empty string.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getAppMenuBadgeValue([appmenuID](#appMenuId2), [menuItemID](#menuItemId2))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | appMenuId \[String\] - Mandatory | If you are setting the badge for an app menu item that was created dynamically, use the same ID that was used to create the app menu item.If you are setting the badge for an app menu item that was created from the IDE, use the ID available in the generated script file. |
 | menuItemId \[String\] - Mandatory | Identifier of the app menu item from which the badge value is to be read. |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}onClickMenuItem1: function() {
+{% highlight VoltMx %}
+onClickMenuItem1: function() {
     alert("The Badge Value of Accounts App Menu Item is " + voltmx.application.getAppMenuBadgeValue("SampleAppMenu", "appmenuitemid1"));
 
 },
@@ -994,13 +1029,13 @@ onClickMenuItem2: function() {
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 | Return Value | Description |
 | --- | --- |
 | badgeValue \[String\] | Returns the badge value applied to the specified app menu. If the specified app menu has no badge value attached to it, it returns an empty string. |
 
-Platform Availability
+### Platform Availability
 
 Available only on iPhone and iPad.
 
@@ -1013,26 +1048,28 @@ Available only on iPhone and iPad.
 
 This API returns a handle to an [AppWindow object](voltmx.application_appwindow.html). This object allows you to switch between application modes and to query and update properties of the app window.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getAppWindow()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    
+{% highlight VoltMx %}
 var appwindow = voltmx.application.getAppWindow(); 
 alert(appwindow.title);
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 A single handle to an [AppWindow object](voltmx.application_appwindow.html).
 
-Platform Availability
+### Platform Availability
 
 Windows
 
@@ -1045,33 +1082,33 @@ Windows
 
 This API retrieves the list of parameters attached to a URL using the above add, set APIs.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getBMState([formID](#id4))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | formID \[String\] - Mandatory. | Identifier of the form for which the parameters of the URL have to be fetched. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}getbookmark: function() {
+{% highlight VoltMx %}
+getbookmark: function() {
 
     var a = voltmx.application.getBMState("Form1");
     alert(" The list of parameters attached to the URL are " + JSON.stringify(a));
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 A JSON structure representing key-values of various parameters attached to the URL string of the given form.
 
-Platform Availability
+### Platform Availability
 
 Supported for SPA and Desktop Web.
 
@@ -1084,21 +1121,23 @@ Supported for SPA and Desktop Web.
 
 This API returns the current breakpoint value.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getCurrentBreakpoint()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 This API returns the current breakpoint
 
 If window size exceeds the highest of breakpoints list, returns **constants.BREAKPOINT\_MAX\_VALUE**.
 
-Platform Availability
+### Platform Availability
 
 Desktop web
 
@@ -1113,20 +1152,23 @@ This API returns a handle to the current form. The form handle is useful when yo
 
 > **_Note:_** For iOS, voltmx.application.getCurrentForm() returns the form id of current form. This rule does not apply for form used as cameraOverlay.
 
-Use Case
+### Use Case
 
-You can use this API in the following scenarios:
+**You can use this API in the following scenarios:**
 
 1.  When you want to send analytics to the analytic engine.
 2.  When you want to use the handle to the current form in any other function.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getCurrentForm()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    function getCurrentForm() {
+{% highlight VoltMx %}
+function getCurrentForm() {
 	//Get the current form
 	var currentForm = voltmx.application.getCurrentForm();
 	//Alert the current form
@@ -1134,28 +1176,28 @@ Example
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 currentForm - Object
 
 This API returns the current form.
 
-Rules and Restrictions
+### Rules and Restrictions
 
 The following are the guidelines applicable for the API:
 
 *   If you invoke this API in the `preshow` method of the application, it does not have any affect.
 *   If you invoke this API in the `appinit` method of the application, nil is returned.
 
-UI Behavior
+### UI Behavior
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -1168,33 +1210,33 @@ Available on all platforms.
 
 This method returns the unique identifier of the current menu that is set through getCurrentSettingsMenu.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getCurrentSettingsMenu()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//To get the unique identifier a Charm settings menu, enter the following  
+{% highlight VoltMx %}
+//To get the unique identifier a Charm settings menu, enter the following  
 voltmx.application.getCurrentSettingsMenu();
 
 //Alert the Current Charm Settings menu
 alert("Current charm menu id is: " + currCharmMenuId);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
-  
 | Return value | Description |
 | --- | --- |
 | Unique Identifier | Identifier of the Charm setting menu to be set. |
 
- 
-
-Platform Availability
+### Platform Availability
 
 Available on Windows only.
 
@@ -1207,17 +1249,20 @@ Available on Windows only.
 
 This API returns the package name from which the application was installed. Therefore, identifying the market that the application was downloaded from. It is important to know the source of installation of the application for security purposes.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getInstallerSourceInfo()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var devInfo = voltmx.os.deviceInfo();  
+{% highlight VoltMx %}
+var devInfo = voltmx.os.deviceInfo();  
 var installSourceInfoDetails = voltmx.application.getInstallerSourceInfo();  
 if(devInfo.APILevel >= 30){  
   var originatingPackageName = installSourceInfoDetails.originatingPackageName;  
@@ -1232,13 +1277,12 @@ if(devInfo.APILevel >= 30){
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 This API returns a JS Object based on the Target SDK version of the device.
 
 If the device uses TargerSDK versions 30 and above, the API returns the following values:
 
-  
 | Return Value | Description |
 | --- | --- |
 | initiatingPackageName | The name of the package that requested the installation. The parameter returns a blank string if the initiating package name is not available. |
@@ -1247,12 +1291,11 @@ If the device uses TargerSDK versions 30 and above, the API returns the followin
 
 If the device uses TargerSDK versions 29 or earlier, the API returns the following values:
 
-  
 | Return Value | Description |
 | --- | --- |
 | installerPackageName | The name of the package that has installed the application. |
 
-Platform Availability
+### Platform Availability
 
 Android
 
@@ -1265,20 +1308,23 @@ Android
 
 This API returns a handle to the previous form.
 
-Use Case
+### Use Case
 
-You can use this API in the following scenarios:
+**You can use this API in the following scenarios:**
 
 1.  When you want to send analytics to the analytic engine.
 2.  When you want to use the handle to the current form in any other function.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getPreviousForm()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    function getPreviousForm() {
+{% highlight VoltMx %}
+function getPreviousForm() {
     //Get the Previous form
     var previousForm = voltmx.application.getPreviousForm();
     //Alert the Previous form
@@ -1286,32 +1332,30 @@ Example
 }                                                  
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
-  
 | Return Value | Description |
 | --- | --- |
 | previousForm-Object | API returns the previous form handle. |
 
-Rules and Restrictions
+### Rules and Restrictions
 
 The following are the guidelines applicable for the API:
 
 *   If you invoke this API in `preshow` event of the application, you get unpredictable results.
 *   If you invoke this API in the `appinit` method of the application, nil is returned.
-
 *   If you use the Back button on the mobile web browser, this API does not return the handle to the previous form.
 *   If you use this API on the first form of the application it returns null/nil.
 
-UI Behavior
+### UI Behavior
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -1326,13 +1370,16 @@ This API retrieves the previous session parameters in the application life cycle
 
 > **_Important:_** You must use the _voltmx.application.invalidateSession("frmName", sessionParams)_ API before using _voltmx.application.getPreviousSessionParams API._
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getPreviousSessionParams()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    //The following function is for getPreviousSessionParams API
+{% highlight VoltMx %}
+//The following function is for getPreviousSessionParams API
 //You must use the invalidateSession("frmName", sessionParams) API before using getPreviousSessionParams API.
 function invalidateSession() {
     //invalidating the session
@@ -1350,18 +1397,17 @@ function getPreviousSessionParams() {
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
-  
 | Return Value | Description |
 | --- | --- |
 | listOfParams \[Array\] | Returns a table of the previous session parameters that is passed from the invalidateSession API. |
 
-Platform Availability
+### Platform Availability
 
 Available on Mobile Web
 
@@ -1374,11 +1420,13 @@ Available on Mobile Web
 
 You can use this API to retrieve the current device setting. You must pass the setting that you want to query, in the input parameter of this API.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.getSettingValue(setting, args)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _setting\[String\]_\- Mandatory
 
@@ -1386,7 +1434,6 @@ The setting to be queried must be passed in this parameter. Following are the se
 
 *   **Android**: "location", "device\_locale", "time\_zone", and "wifi".
 
-  
 | Settings | Description |
 | --- | --- |
 | location | This key is used to identify the current "location" status of the device. Calling the voltmx.application.getSettingValue API with this key returns a JavaScript object, which has the following key values: gps\_provider (key): This key has value as "true" or "false", which informs that the gps\_provider has been enabled or disabled. network\_provider (key): This key has value as "true" or "false", which informs that the network\_provider has been enabled or disabled. |
@@ -1396,14 +1443,12 @@ The setting to be queried must be passed in this parameter. Following are the se
 
 *   **Windows**: "color"
 
-  
 | Settings | Description |
 | --- | --- |
 | color | This key is used to identify the current system color values. To get the current system color, you must provide the **args** parameter in the voltmx.application.getSettingValue API. Calling the voltmx.application.getSettingValue API with this key returns a hexadecimal string value. |
 
 *   **iOS**: "applicationAppearanceStyle"
 
-  
 | Settings | Description |
 | --- | --- |
 | applicationAppearanceStyle | iOS 13 provides support for dark mode in iOS devices. This key enables you to identify the appearance mode of iOS devices. When the voltmx.application.getSettingValue API is called with this key, any of the following values are returned: voltmx.application.APPEARANCESTYLE\_DARK: The current mode of appearance is dark mode. voltmx.application.APPEARANCESTYLE\_LIGHT:The current mode of appearance is light mode. voltmx.application.APPEARANCESTYLE\_UNKNOWN: The current mode of appearance is unknown. This is applicable from Volt MX IrisV8 SP3 FP 58 and Volt MX IrisV8 SP4 FP 45. > **_Note:_** By default, the dark and light modes are supported for apps that are built on iOS 13 devices. If you want to limit the appearance of your app to a single mode, navigate to: <app\_name>/resources/common/infoplist\_configuration.json. Then, add the `UIUserInterfaceStyle` key with the dark or light value as required. |
@@ -1423,24 +1468,25 @@ This parameter is applicable for Windows, and is an array that should contain an
 *   voltmx.SystemColorType.AccentLight3
 *   voltmx.SystemColorType.Complement
 
-**Example**
+### Example
 
-Example 1:
+**_Example 1:_**
 
-{% highlight voltMx %}                    alert(voltmx.application.getSettingValue("location"));
-
+{% highlight VoltMx %}
+alert(voltmx.application.getSettingValue("location"));
 {% endhighlight %}
 
-Example 2:
+**_Example 2:_**
 
-{% highlight voltMx %}                    var args = [voltmx.SystemColorType.Background];
+{% highlight VoltMx %}
+var args = [voltmx.SystemColorType.Background];
 alert(voltmx.application.getSettingValue("color", args));
-
 {% endhighlight %}
 
-Example 3:
+**_Example 3:_**
 
-{% highlight voltMx %}                    function getAppearenceStyle() {
+{% highlight VoltMx %}
+function getAppearenceStyle() {
  var themeApearenceStyle =
 voltmx.application.getSettingValue("applicationAppearanceStyle");
  switch (themeApearenceStyle) {
@@ -1483,7 +1529,7 @@ voltmx.application.registerOnSettingsChangeCallback(["applicationAppearanceSty
 le"], callback);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   Windows
@@ -1500,27 +1546,26 @@ This API explicitly invalidates a session on Mobile Web.
 
 > **_Important:_** This API is applicable only on Mobile Web platforms
 
-Use Case
+### Use Case
 
 You can use this API for Financial applications where you want to completely invalidate the session on execution of specific functions. For example, logout function. When the user logs out from the application, you can invoke this API to invalidate the current session and initiate a new session before navigating to any other form. In this case, all the session data is cleared.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.invalidateSession([ormName](#formName),[params](#params))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | formName \[Handle to the form\] - Optional | Specifies the form to which the application must navigate after the session is invalidated |
 | params \[Function\] - Optional | Specifies a table of parameters that you want to pass to the new session |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //The following function is for invalidateSession API
 function invalidateSession() {
 	//invalidating the session
@@ -1528,15 +1573,15 @@ function invalidateSession() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 This API navigates to the specified form or remains on the same form if there is no form specified.
 
-Rules and Restrictions
+### Rules and Restrictions
 
 When the current session is invalidated, the Mobile Web framework will start the application lifecycle again. This API invokes _appinit_ and then navigates the user to the startup form or any form that is associated with the logout function.
 
-Platform Availability
+### Platform Availability
 
 Available on Mobile Web.
 
@@ -1551,35 +1596,36 @@ This API checks whether the current application is present in the power white-li
 
 You can request the user to add or remove the app from the power white-list of the device by using the [voltmx.application.launchBatteryOptimizationSettings](#launchBatteryOptimizationSettings) API.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.isIgnoringBatteryOptimizations()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}function isIgnoringBatteryOptimizations() {  
+{% highlight VoltMx %}
+function isIgnoringBatteryOptimizations() {  
 	var retVal = voltmx.application.isIgnoringBatteryOptimizations();  
     voltmx.print(" Is my application ignoring Battery Optimizations "+ retVal);  
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Boolean.
 
- 
-
-Remarks
+### Remarks
 
 The voltmx.application.isIgnoringBatteryOptimizations API is only supported on Android devices with OS API level 23, and later. When this API is invoked on Android devices with OS API level 22 (and earlier), the API always returns the value **true**.
 
 Ensure that you set the value of the `enableBatteryOptimizationAPI` property to **true** in the `androidbuild.properties` file to enable this API.
 
-Platform Availability
+### Platform Availability
 
 Android
 
@@ -1592,20 +1638,23 @@ Android
 
 This API is used to get the status of image settings, which are defined by a particular user, in a web browser.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.isImageTurnedOff(imageCb)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | imageCb | The voltmx.application.isImageTurnedOff API takes the **imageCb** function as an argument, and returns either **true** or **false** based on the browser settings for images. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    function getImageStatus() {
+{% highlight VoltMx %}
+function getImageStatus() {
     voltmx.application.isImageTurnedOff(imageCb);
 }
 
@@ -1621,12 +1670,12 @@ function imageCb(param) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 *   true: If the user disables the display of images from the browser settings, the voltmx.application.isImageTurnedOff API returns true.
 *   false: If the user enables the display of images in the browser, the voltmx.application.isImageTurnedOff API returns false.
 
-Platform Availability
+### Platform Availability
 
 *   Desktop Web
 
@@ -1639,27 +1688,30 @@ Platform Availability
 
 Returns true if the application is in multi-window mode, and the function returns false if the application is in full-screen mode.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.isInMultiWindowMode()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    function checkMultiWindowMode() { 
+{% highlight VoltMx %}
+function checkMultiWindowMode() { 
 var isInMultiWindow = voltmx.application.isInMultiWindowMode(); 
 voltmx.print("Multi Window Mode : " + isInMultiWindow);
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 Boolean value.
 
-Platform Availability
+### Platform Availability
 
 *   Android 7.0 and later
 
@@ -1672,20 +1724,22 @@ Platform Availability
 
 This API is used to get the status of pop-up settings, which are defined by a particular user, in a web browser.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.isPopupBlocked(popupCb)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | popupCb | The voltmx.application.isPopupBlocked API takes the **popupCb** function as an argument, and returns either **true** or **false** based on the browser settings for pop-ups. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    function getPopupStatus() {
+{% highlight VoltMx %}
+function getPopupStatus() {
     voltmx.application.isPopupBlocked(popupCb);
 }
 
@@ -1700,15 +1754,14 @@ function popupCb(param) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
-  
 | Return Value | Description |
 | --- | --- |
 | true | If the user disables the display of pop-ups from the browser settings, the voltmx.application.isPopupBlocked API returns true. |
 | false | If the user enables the display of pop-ups in the browser, the voltmx.application.isPopupBlocked API returns false. |
 
-Platform Availability
+### Platform Availability
 
 *   Desktop Web
 
@@ -1721,25 +1774,26 @@ Platform Availability
 
 Launches the application specified by the input URL.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.launchApp(  
     protocolName,  
     data)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | _protocolName_ | A string that you provide in Volt MX Iristhat specifies the URL scheme . For more information, see [Deep Linking](application_api.html#DeepLinking). |
 | data | A JavaScript object that contains key-value pairs specifying the data that is needed to launch the application. The key-value pairs are defined as whatever is supported by the target app. |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}var protocolName= "VoltMXApp1234567.8";
+{% highlight VoltMx %}
+var protocolName= "VoltMXApp1234567.8";
 var data = { 
     "navigatetoForm": "FrmHome",
     "TexttoShow": "Launched FrmHome by Deeplinking"
@@ -1747,15 +1801,15 @@ var data = {
 voltmx.application.launchApp(protocolName,data);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This function uses deep linking to launch an application. For more information, see [Deep Linking](application_api.html#DeepLinking).
 
-Platform Availability
+### Platform Availability
 
 Available for Windows
 
@@ -1777,26 +1831,25 @@ By using the voltmx.application.launchBatteryOptimizationSettings API, users can
 > **_Note:_** The steps to add an app to the power white-list of a device may vary depending on the device being used.
 
 > **_Note:_**
-
 *   Before you invoke the voltmx.application.launchBatteryOptimizationSettings API, invoke the [voltmx.application.isIgnoringBatteryOptimizations](#isIgnoringBatteryOptimizations) to determine if an application is already ignoring optimizations.
 *   Alternatively, you can also use the [voltmx.application.requestIgnoreBatteryOptimizations](#requestIgnoreBatteryOptimizations) API to request the user to add the app to the power white-list of the device without navigating to the settings page.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.launchBatteryOptimizationSettings(callback)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | callback - Optional | The callback function to be executed when the user navigates back to the application from the settings screen. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}function launchBatteryOptimizationSettings() {  
+{% highlight VoltMx %}
+function launchBatteryOptimizationSettings() {  
 	voltmx.application.launchBatteryOptimizationSettings(settingsCallback);  
 },  
 function settingsCallback()  
@@ -1805,19 +1858,17 @@ function settingsCallback()
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
- 
-
-Remarks
+### Remarks
 
 *   The voltmx.application.launchBatteryOptimizationSettings API is only supported on Android devices with OS API level 23, and later.
 *   Ensure that you set the value of the `enableBatteryOptimizationAPI` property to **true** in the `androidbuild.properties` file to enable this API.
 *   If you invoke the voltmx.application.launchBatteryOptimizationSettings API when the application is running in the background, the settings screen may not launch.
 
-Platform Availability
+### Platform Availability
 
 Android
 
@@ -1838,29 +1889,29 @@ The behavior of the openApplicationSettings API in different platforms:
 *   **iOS**: Opens the application-level settings screen showing the access status of the resource. The end-user can turn on or off the access to the resource from the app. The resourceid parameter is ignored in the iOS platform.
 *   **Android**: Opens the application-level settings screen showing the access status of the resource. The end-user can turn on or off the access to the resource from the app. The resourceid parameter is ignored in the iOS platform.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.openApplicationSettings(resourceId\[const\])
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Function | Description |
 | --- | --- |
 | resourceId \[constant\] - Optional | Specify the resource ID of the resource that you want open its settings. The parameter works only for Windows. For more information, refer to Resource ID. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}voltmx.application.openApplicationSettings(voltmx.os.RESOURCE_CONTACTS);
+{% highlight VoltMx %}
+voltmx.application.openApplicationSettings(voltmx.os.RESOURCE_CONTACTS);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -1875,50 +1926,49 @@ Platform Availability
 
 This API launches the native media player and starts playing the media (audio or video) at the specified URL. The media server provides the appropriate media content depending upon the device (for example, iPhone, etc). This API is not applicable on SPA.
 
-Use Case
+### Use Case
 
 You can use this API when you want to access and use multimedia from an external URL or server.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.openMediaURL([URL](#URL1))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | URL \[String\] - Mandatory | Specifies the URL that points to the audio/video file |
 
-Example
+### Example
 
-{% highlight voltMx %}                    function openMediaURL() {
+{% highlight VoltMx %}
+function openMediaURL() {
     /*Launching the native media player and starts playing the media(audio or video) at the URL:"http://www.boisestatefootball.com/sites/default/files/videos/original/01_-_coach_pete_bio_4.mp4" */
     voltmx.application.openMediaURL("http://www.boisestatefootball.com/sites/default/files/videos/original/01_-_coach_pete_bio_4.mp4");
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Implementation Details
+### Implementation Details
 
 This API assumes that the media is available at the specified URL. The API does not check for the availability of the media at the specified location. The responsibility lies on the developer to ensure that appropriate media is available at the referred URL.
 
 Any errors related to the type of media or the availability of the media are handled by the native media player. The errors are not propagated back to the application.
 
 > **_Note:_** For more information on media formats, see:
-
 *   Android: [http://developer.android.com/guide/appendix/media-formats.html](http://developer.android.com/guide/appendix/media-formats.html)
-    
-    You have to provide an absolute path of the video file in the URL. For example, [http://www.boisestatefootball.com/sites/default/files/videos/original/01_-_coach_pete_bio\_4.mp4](http://www.boisestatefootball.com/sites/default/files/videos/original/01 - coach pete bio_4.mp4)  
-    or the URL should be in 'rtsp' format if it is a YouTube video.
-    
+You have to provide an absolute path of the video file in the URL. For example, [http://www.boisestatefootball.com/sites/default/files/videos/original/01_-_coach_pete_bio\_4.mp4](http://www.boisestatefootball.com/sites/default/files/videos/original/01 - coach pete bio_4.mp4)  
+or the URL should be in 'rtsp' format if it is a YouTube video.
 *   iPhone: [Apple Documentation](http://developer.apple.com/library/ios#documentation/mediaplayer/reference/MPMoviePlayerController_Class/Reference/Reference.html)
 *   Windows: [Supported File Types](http://www.microsoft.com/surface/en-us/support/storage-files-and-folders/which-file-types-are-supported)
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA.
 
@@ -1931,15 +1981,16 @@ Available on all platforms except SPA.
 
 This API opens the specified settings screen.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.openSettings(config);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 **config** - A JSON Object that contains the following keys:
 
-  
 | Key | Description |
 | --- | --- |
 | intentAction \[String\] | A String that specifies the desired settings screen. The intentAction parameter can have the following values: ACTION\_SETTINGS ACTION\_APPLICATION\_DETAILS\_SETTINGS ACTION\_SECURITY\_SETTINGS The default value of this parameter is ACTIONS\_SETTINGS. > **_Note:_** If the intentAction is set as ACTION\_APPLICATION\_DETAILS\_SETTINGS, the API does not return a callback. |
@@ -1947,9 +1998,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}callOpenSettingsAPI : function(){
+{% highlight VoltMx %}
+callOpenSettingsAPI : function(){
 	var config={
 		"intentAction": "ACTION_SECURITY_SETTINGS",
 		"statusCallback": this.myCallback
@@ -1961,11 +2013,11 @@ myCallback : function(info){
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Status Code Constants
+### Status Code Constants
 
 | Constant | Description |
 | --- | --- |
@@ -1974,9 +2026,7 @@ Status Code Constants
 | USER\_RETURNED\_FROM\_SETTINGS | The constant that is returned when the user returns from the launched settings screen. |
 | API\_NOT\_SUPPORTED\_IN\_BACKGROUND | The constant that is returned if the API is invoked when the app is running in the background. |
 
- 
-
-Platform Availability
+### Platform Availability
 
 Available Android platform
 
@@ -1989,35 +2039,37 @@ Available Android platform
 
 This API opens the web page at the specified URL in the native browser of the mobile device.
 
-Use Case
+### Use Case
 
 You can use this API when you want to access an external web page within the application. With this API, you can open a web page without using a browser widget in your application.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.openURL([URL](#URL))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | URL \[String\] - Mandatory | Specifies the URL that points to the external web page |
 
-Example
+### Example
 
-{% highlight voltMx %}                    //The following function is for openURL API
+{% highlight VoltMx %}
+//The following function is for openURL API
   function openURL() {
 	  //Accessing an external web page : http://www.google.com
 	  voltmx.application.openURL("http://www.google.com");
 	}
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Implementation Details
+### Implementation Details
 
 When you use this API, the behavior of the application is as follows on different platforms:
 
@@ -2027,9 +2079,8 @@ When you use this API, the behavior of the application is as follows on differen
 | Android | The application opens the specified URL in the native browser and the application goes into background |
 | SPA | The URL opens in the browser The application redirects the existing browser instance to the new URL |
 
- 
 
-Platform Availability
+### Platform Availability
 
 Available on all Rich Client platforms.
 
@@ -2044,24 +2095,24 @@ Available on all Rich Client platforms.
 
 This API opens the web page at the specified URL in the native browser of the mobile device. The openURLAsync API is the asynchronous counterpart of the [voltmx.application.openURL](#voltmx.app4) API.
 
-Use Case
+### Use Case
 
 You can use this API when you want to asynchronously access an external web page within the application. With this API, you can open a web page without using a Browser widget in your application.
 
-Syntax
+### Syntax
 
 voltmx.application.openURLAsync(CONFIG)
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | CONFIG\[JSObject\] - Mandatory | This is the parent encapsulating object that stores these configuration keys: url and callback. Configuration Keys url\[String\] - Mandatory Specifies the URL that points to the external web page. This is the URL that the user wants to open by using the openURLAsync API. _callback_ \[Function\] - Optional The callback function that is triggered with the Success, Failure, or Unknown responses once the openURLAsync API opens the specified URL. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    var _url = "fb://page/" + FB_PAGE_ID;
+{% highlight VoltMx %}
+var _url = "fb://page/" + FB_PAGE_ID;
 var callbackFunction = function(response) {
     if (response == constants.OPEN_URL_SUCCESS) {
         //openURL return successfull from Native Side
@@ -2078,23 +2129,24 @@ voltmx.application.openURLAsync({
 });
 {% endhighlight %}
 
-Response Type for the Callback Function
+### Response Type for the Callback Function
 
-{% highlight voltMx %}                    constants.OPEN_URL_SUCCESS
+{% highlight VoltMx %}
+constants.OPEN_URL_SUCCESS
 constants.OPEN_URL_FAILURE
 constants.OPEN_URL_UNKNOWN //If the native platform does not provide any callback, this constant will be passed in the callback by default.
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Native Limitations
+### Native Limitations
 
 *   Because of the asynchronous nature of the openURLAsync API, some cross-platform inconsistency may occur.
     
 
-Platform Availability
+### Platform Availability
 
 Available on all Rich Client platforms.
 
@@ -2113,28 +2165,30 @@ Every Volt MX Iris Widget contains the VoiceOver accessibility feature, i.e., a 
 
 Accessibility is directly managed by native iOS, and users don't have the control to set the focus, especially in Browser widgets. As a result, whenever a screen changes, the accessibility control sometimes remains in the previous screen. So, in order to set the focus of accessibility to the new screen, this API is used to notify the operating system that the screen has changed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.postAccessibilityNotification(config);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | config - Mandatory | This is a jsdict. config\[jsdictionary\] accessibilityNotificationName\[const\] - Mandatory Here, the constant (const) specifies the type of notification that the app can send. **constants.ACCESSIBILITY\_SCREENCHANGED\_NOTIFICATION** This is posted by the app when a new view appears that takes up a major portion of the screen. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    voltmx.application.postAccessibilityNotification({
+{% highlight VoltMx %}
+voltmx.application.postAccessibilityNotification({
 accessibilityNotificationName:constants.ACCESSIBILITY_SCREENCHANGED_NOTIFICATION});
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
@@ -2147,35 +2201,34 @@ Platform Availability
 
 This API specifies if the application must timeout after a defined period of inactivity (time difference between the current device time and the last time you clicked on any user interface component) and also specifies the action after the timeout interval.
 
-> **_Important:_**  
-
+> **_Important:_** 
 *   You must enable the forms for idletimeout by setting the property for **enabledForIdleTimeout** as _True_ in the IDE. The _idletimeout_ event is triggered only when the user is on a form that is enabled for idletimeout.
 *   When the idletimeout event is triggered, the user is navigated to the home screen with an alert message.
 *   In BJS devices, to validate registerForIdleTimeout, an event must be triggered once time out is occurred.
 
-Use Case
+### Use Case
 
 You can use this API typically in financial applications when you want to log the user out automatically after a specific period of inactivity. This way, you can ensure that there is no un-authorized access to the application or to the sensitive information like account number, credit card numbers, and so on.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.registerForIdleTimeout([timeoutValue](#timeoutValue), [callback](#callback))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | timeoutValue \[Number\] - Mandatory | The timeout value in minutes. |
 | callback \[Function\] - Mandatory | The function that must be executed after the timeout has occurred. The callback function has the logic to display the current form. The function can be changed during runtime. |
 
- 
-
 > **_Note:_** Current form is the Form that was being displayed on the device screen when the timeout occurred.
 
-Example
+### Example
 
-{% highlight voltMx %}function test() {
+{% highlight VoltMx %}
+function test() {
     //Logic for the callback function registerForIdleTimeout
 }
 
@@ -2184,63 +2237,62 @@ function registerForIdleTimeout() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Implementation Details
+### Implementation Details
 
 The _idletimeout_ event is triggered only once for every call to `registerForIdleTimeout` API and this event is not fired again until the next call to the API. The _idletimeout_ event unregisters itself automatically when the event is fired. When the event unregisters itself, the application can register again for idletimeout.
 
-The following are a few scenarios:
+### The following are a few scenarios:
 
-Scenario 1
+#### Scenario 1
 
 _idletimeout_ event is triggered after the specified time interval, but the user is on a form that is not enabled for idletimeout. In this case, the function associated with the event is executed as soon as the user navigates to the form that is enabled for idletimeout.
 
-> > **_Note:_** In this case, the form that the user is trying to navigate to is never shown as the idletimeout event takes precedence.
+> **_Note:_** In this case, the form that the user is trying to navigate to is never shown as the idletimeout event takes precedence.
 
-Scenario 2
+#### Scenario 2
 
 _idletimeout_ event is triggered and the user is on a form enabled for idletimeout. In this case, the associated function is executed immediately.
 
-Scenario 3
+#### Scenario 3
 
 The application is registered for idle time out and the user tries to register again for idletimeout. In this case, the latter call to the `registerForIdleTimeout` API has no affect and is ignored.
 
-Scenario 4
+#### Scenario 4
 
 The application is registered for idletimeout but none of the forms in the application are enabled for idletimeout. In this case, this API has no affect and the behavior of the application is undefined.
 
 Each underlying platform handles the _idletimeout_ event differently:
 
-iPhone
+**iPhone**
 
 *   When the application is running in the background, no logic is executed. However, the timers keep running and the idletimeout event is triggered in the background. But the function is executed immediately when the application comes to foreground.
     
-    > **_Note:_** When the application comes to foreground, you will suddenly notice the function of the idletimeout event getting executed.
+> **_Note:_** When the application comes to foreground, you will suddenly notice the function of the idletimeout event getting executed.
     
-
-Android
+**Android**
 
 *   When you press the device Back button to go out of the application, the underlying OS destroys the UI activity. In such cases, the idletimeout event is fired only when the application comes to the foreground.
 *   When you navigate out of the application using the device Home button, the underlying OS pauses the UI activity but does not destroy it. In such cases, the idletimeout event is fired immediately in the background.
 
-Mobile Web
+**Mobile Web**
 
 *   In Mobile Web applications, the timer is not active when the application goes into background or sleep mode. When the application comes into foreground, the timer starts running and the `idletimeout` triggers after the specified time interval.
 
-Rules and Restrictions
+### Rules and Restrictions
 
 This API is applicable only when the Form property _Enable Time Out_ is set to _true_. For more information about _Enable Time Out_ property, see _VoltMX IrisWidget User Guide_.
 
-Exceptions
+### Exceptions
 
 An error is thrown if input is invalid or does not follow the expected structure.
 
 102-Invalid input error
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -2253,21 +2305,23 @@ Available on all platforms.
 
 Connects an event handler function to a key press event.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.registerOnKeyPress(  
     values)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | _values_ | A JavaScript object that contains key-value pairs. The keys are strings that specify which key on the keyboard the event handler callback function is connected to. The values for each key in the key-value pairs are event handler callback functions. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    function keyPress(keycode) {
+{% highlight VoltMx %}
+function keyPress(keycode) {
     voltmx.print("DONE!!!" + keycode);
 }
 
@@ -2283,11 +2337,11 @@ function callRegisterOnKeyPress() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 Windows
 
@@ -2300,11 +2354,13 @@ Windows
 
 Customers can use the registerOnSettingsChangeCallback API to listen in Volt MX applications, if any settings have been changed in Native settings applications. Users can pass the list of required settings in the first parameter. In addition, users can pass the callback, which is invoked when any required setting is changed, in the second parameter. The callback is invoked with parameters, which provide information about the setting that was changed and the values of said setting. If users want to stop listening to changes in the settings, they must successfully register and pass null in the second parameter as well as pass the list of settings that they want to stop listening in the first parameter.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.registerOnSettingsChangeCallback(settingsList,callback)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 **settingsList\[JSONObject\]- Mandatory**
 
@@ -2327,7 +2383,6 @@ The callback to be invoked when there is a change in any setting that is passed 
 | advancedEffectsEnabled (key) | This key has "value". It indicates whether the system Transparency Effects setting has been enabled (True/False). |
 | inputLanguage (key) | This key has "value". It informs when the current input language has been changed. |
 
- 
 
 *   Android
 
@@ -2339,9 +2394,10 @@ The callback to be invoked when there is a change in any setting that is passed 
 | time | If the "time" setting changes, the JS object is passed to the callback has the following key value:setting (key): This key has value as "time", which informs that the "time" setting has been changed. |
 | wifi | If the "wifi" setting changes, the JS object passed to the callback has the following key values:setting (key): This key has value as "wifi", which informs that the "wifi" setting has been changed.wifi\_current\_state (key): This key has value as current wifi state value.wifi\_previous\_state (key): This key has value as previous wifi state value.The list of wifi states is as follows:voltmx.settings.WIFI\_DISABLING: Wifi is disabling. Constant Value: 0 voltmx.settings.WIFI\_DISABLED: Wifi is disabled. Constant Value: 1 voltmx.settings.WIFI\_ENABLING: Wifi is enabling. Constant Value: 2 voltmx.settings.WIFI\_ENABLED: Wifi is enabled. Constant Value: 3 voltmx.settings.WIFI\_UNKNOWN: Wifi state is unknown. Constant Value: 4> **_Note:_** If you invoke the registerOnSettingsChangeCallback API with "wifi" setting, the callback is invoked immediately with setting key as "wifi". This occurs because of native behavior. |
 
-Example
+### Example
 
-{% highlight voltMx %}function callback(params) {
+{% highlight VoltMx %}
+function callback(params) {
     switch (params.setting) {
         case "location":
             alert(params.gps_provider);
@@ -2376,7 +2432,7 @@ voltmx.application.registerOnSettingsChangeCallback(["location"], callback);
 voltmx.application.registerOnSettingsChangeCallback(["device_locale", "time_zone"], callback);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   Windows
@@ -2390,11 +2446,13 @@ Platform Availability
 
 The voltmx.application.removeApplicationCallbacks API helps you to clear callback functions associated with the specified appstates. This API is available from V8 SP4 onwards.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.removeApplicationCallbacks(appstatesMap)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 appstatesMap \[Object\] - Mandatory
 
@@ -2413,15 +2471,16 @@ Specifies an Object with key as appstate and value as an array of function IDs f
 | onpowersourcechange | State which indicates whether a power source is attached to the user's device. |
 | onnetworkchange | This is specific to Mango. State which occurs when there is a change in the following: **Status**: Indicates the status of the device. The applicable statuses are Connected, Disconnected, Roaming, or Unknown. **Network**: Indicates the available network on the device. The network statuses are Wireless80211, Ethernet, MobileBroadbandGSM, MobileBroadbandCDMA, or None. **Date**: Indicates the date on which the event occurs. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    var callbacksToBeRemoved = {
+{% highlight VoltMx %}
+var callbacksToBeRemoved = {
     "isAppLaunchedForInteraction": ["functionID1", "functionID2"]
 };
 voltmx.application.removeApplicationCallbacks(callbacksToBeRemoved);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -2436,35 +2495,35 @@ Platform Availability
 
 This API removes a specified key from the parameter list of the URL of the form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.removeBMState([formID,](#id2)[key](#key2))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | formID \[String\] - Mandatory. | Identifier of the form for which the parameters of the URL have to be removed. |
 | key \[String\] - Mandatory | Key string representing the key to be removed. |
 
- 
-
-Example
+### Example
 
 To remove a bookmark for a URL, enter the following:
 
-{% highlight voltMx %}removebookmark: function() {
+{% highlight VoltMx %}
+removebookmark: function() {
     voltmx.application.removeBMState("Form1", "About");
     alert("The About key is removed from the parameter list");
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Supported for SPA and Desktop Web.
 
@@ -2479,19 +2538,20 @@ This method allows you to remove a specified gesture recognizer for all Forms.
 
 **Syntax**
 
+{% highlight VoltMx %}
 voltmx.application.removeGestureRecognizerForAllForms(uniqueIdentifier)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Function | Description |
 | --- | --- |
 | uniqueIdentifier - Mandatory | Reference to the gesture. The reference to the gesture is returned by the setGestureRecognizerForAllForms. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}function callbackClearLongPressGesture() {
+{% highlight VoltMx %}
+function callbackClearLongPressGesture() {
     try {
         voltmx.application.removeGestureRecognizerForAllForms(uniqueidentifier);
     } catch (err) {
@@ -2501,7 +2561,7 @@ Example
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Server Side Mobile Web and Desktop Web.
 
@@ -2514,29 +2574,30 @@ Available on all platforms except Server Side Mobile Web and Desktop Web.
 
 This API enables you to remove and unpin a specified secondary tile which was created earlier.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.removeSecondaryTile([id](#id2))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | id \[String\] - Mandatory | Unique identifier of the secondary tile |
 
- 
 
-**Example**
+### Example
 
-{% highlight voltMx %}voltmx.application.removeSecondaryTile("12345");
+{% highlight VoltMx %}
+voltmx.application.removeSecondaryTile("12345");
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on Windows
 
@@ -2549,24 +2610,27 @@ Available on Windows
 
 Clears the flag that caches forms for SEO.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.removeSeoDataReadyFlag()
-
-Example
-
-{% highlight voltMx %}                    voltmx.application.removeSeoDataReadyFlag();
 {% endhighlight %}
 
-Input Parameters
+### Example
+
+{% highlight VoltMx %}
+voltmx.application.removeSeoDataReadyFlag();
+{% endhighlight %}
+
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 For information on SEO, see voltmx.application.setSeoDataReadyFlag and the Volt MX IrisUser Guide.
 
@@ -2579,34 +2643,33 @@ For information on SEO, see voltmx.application.setSeoDataReadyFlag and the Volt 
 
 This API enables you to removes the specified App Menu item based on the index.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.removeSettingsMenuItemAt ([id](#id4), [index](#index2))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | id \[String\] - Mandatory | Identifier of the Charm setting menu created. |
 | index \[Number\] - Mandatory | The index from which the menu item must be removed. The index value lies between 0 and n-1. |
 
- 
-
-Example
+### Example
 
 To remove a menu item from a given index, enter the following:
 
-{% highlight voltMx %}//Removing a menu item from the index 3.
+{% highlight VoltMx %}
+//Removing a menu item from the index 3.
 voltmx.application.removeSettingsMenuItemAt("charmmenu", 3);
-
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on Windows only.
 
@@ -2624,7 +2687,6 @@ If the user selects the **ALLOW** option, the app is added to the power white-li
 If the user selects the **DENY** option (or taps the back arrow in the dialog box), the app is not added to the power white-list of the device, and the white-list status of the app does not change.
 
 > **_Note:_**
-
 *   Before you invoke the voltmx.application.requestIgnoreBatteryOptimizationsAPI, invoke the [voltmx.application.isIgnoringBatteryOptimizations](#isIgnoringBatteryOptimizations) to determine if an application is already ignoring battery optimizations.
 *   Ensure that you add the REQUEST\_IGNORE\_BATTERY\_OPTIMIZATIONS permission in the Android Manifest file of the project.
 *   Most applications must not use battery optimizations as the platform provides various facilities for applications to operate as expected in different power-saving modes. You must only use this API in specific applications that need to complete control for execution, at the potential expense of the device's battery life. These applications might display the high power usage notification to the users.  
@@ -2641,22 +2703,22 @@ Here are a few real-time use-cases that may need exclusion from power optimizati
 *   Time-sensitive apps such as SMS schedulers.  
     Battery optimization in these apps may result in a failure to send the scheduled messages on time.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.requestIgnoreBatteryOptimizations(callback)
+{% endhighlight %}
 
-Input Parameters
-
-  
+### Input Parameters
+ 
 | Parameter | Description |
 | --- | --- |
 | callback - Optional | The callback function to be invoked when the user selects the ‘ALLOW’ or 'DENY' option in the dialog box. The signature of the callback function is callback(code), where code is a Battery Optimization Response Code.For information on the codes, refer [Battery Optimization Response Codes](#Battery). |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}function requestIgnoreBatteryOptimizations() {  
+{% highlight VoltMx %}
+function requestIgnoreBatteryOptimizations() {  
 	voltmx.application.requestIgnoreBatteryOptimizations(dialogActionCallback);  
 },  
 function dialogActionCallback(code)  
@@ -2672,13 +2734,11 @@ function dialogActionCallback(code)
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
- 
-
-Remarks
+### Remarks
 
 *   The voltmx.application.requestIgnoreBatteryOptimizations API is only supported on Android devices with OS API level 23, and later.
 *   Ensure that you set the value of the `enableBatteryOptimizationAPI` property to **true** in the `androidbuild.properties` file to enable this API.
@@ -2692,9 +2752,8 @@ Battery Optimization Response Codes
 | voltmx.application.IGNORE\_BATTERY\_OPTIMIZATIONS\_ACCEPTED | Indicates that the user has selected **Allow** in the Ignore Battery optimization dialog box. |
 | voltmx.application.IGNORE\_BATTERY\_OPTIMIZATIONS\_REQUEST\_CANCELLED | Indicates that the user has denied the Ignore Battery optimization in the dialog box.This response code may also be sent to the callback when the application is already ignoring battery optimizations. |
 
- 
 
-Platform Availability
+### Platform Availability
 
 Android
 
@@ -2707,26 +2766,25 @@ Android
 
 Sends a request to the end-user to provide the access to specific resource.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.requestPermission(resourceId\[constant/String\], statusCallback\[Function\], options\[JSObject\])
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | resourceId \[constant/String\] - Mandatory | Specifies the ID of the resource or name of the permission (only for Android) that you want to access. You can specify either a String (permission name) or an integer (resourceId) value. The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: "android.permission.READ\_PHONE\_STATE". The available **resourceId** constants are as follows: voltmx.os.RESOURCE\_CAMERA voltmx.os.RESOURCE\_LOCATION voltmx.os.RESOURCE\_PHOTO\_GALERY voltmx.os.RESOURCE\_CONTACTS voltmx.os.RESOURCE\_CALENDAR voltmx.os.RESOURCE\_SIRI (iOS-specific) voltmx.os.RESOURCE\_AUDIO\_RECORD voltmx.os.RESOURCE\_NOTIFICATION (iOS-specific) |
 | statusCallback \[Function\] - Mandatory | A callback function receives the end-user's decision. The statusCallback function receives a JS Object, which contains overall status and permission-specific status that end-user responded on the permission dialog box. function statusCallback(response); Here, **response** is a hash map that contains the authorization status of the requested resource. This argument contains the following key: status \[constant\] Resource status constant that indicates the overall status of the resource authorization. The possible values for **status** are as follows: voltmx.application.PERMISSION\_GRANTED voltmx.application.PERMISSION\_DENIED voltmx.application.PERMISSION\_NEVER\_ASK\_AGAIN |
-| options \[JSObject\] - Optional | 
-> Specifies the additional option to identify the resource for which you want permission. This key is applicable on android only. To obtain the voltmx.application.PERMISSION\_NEVER\_ASK\_AGAIN status, you have to set the `getNeverAskAgainStatus` key to true and pass the key in the options object. If the key is not set, and the user selects either the Deny or Never Ask Again options, then the permission status is considered as VoltMX.application.PERMISSION\_DENIED.var options = { "isVideoCapture": true, "getNeverAskAgainStatus": true }
-
- |
+| options \[JSObject\] - Optional | > Specifies the additional option to identify the resource for which you want permission. This key is applicable on android only. To obtain the voltmx.application.PERMISSION\_NEVER\_ASK\_AGAIN status, you have to set the `getNeverAskAgainStatus` key to true and pass the key in the options object. If the key is not set, and the user selects either the Deny or Never Ask Again options, then the permission status is considered as Volt MX.application.PERMISSION\_DENIED.var options = { "isVideoCapture": true, "getNeverAskAgainStatus": true } |
 | options \[Object\] - For Notifications | This is a mandatory parameter for notifications. {notificationtypes : constants} The available constants are as follows: voltmx.notificationsettings.BADGE voltmx.notificationsettings.SOUND voltmx.notificationsettings.ALERT |
 
-Example 1
+### Example 1
 
-{% highlight voltMx %}//< uses - permission  android: name = "android.permission.READ_PHONE_STATE" >
+{% highlight VoltMx %}
+//< uses - permission  android: name = "android.permission.READ_PHONE_STATE" >
     voltmx.application.requestPermission("android.permission.READ_PHONE_STATE", permissionStatusCallback);
 
 function permissionStatusCallback(response) {
@@ -2738,9 +2796,10 @@ function permissionStatusCallback(response) {
 }
 {% endhighlight %}
 
-Example 2
+### Example 2
 
-{% highlight voltMx %}function requestpermission() {
+{% highlight VoltMx %}
+function requestpermission() {
 
     var options = {
         "isVideoCapture": true,
@@ -2776,14 +2835,14 @@ function permissionStatusCallback(response) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
   
 | Function | Description |
 | --- | --- |
 | JSObject | A JSObject contains the authorization status of the requested resource. The returned JSObject contains the following key: status \[constant\] Resource status constant which indicates the overall status of the resource authorization. For more information, refer to [Permission Status](runtime_permissions.html#permission-status). > **_Note:_** In the Android platform, the status remains PERMISSION\_DENIED if at least one of the permissions associated with the resource is denied by the end-user. |
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -2799,22 +2858,23 @@ Platform Availability
 
 When invoked, this API sends a request for a set of permissions. The status of the request is sent back to the user through a callback.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 VoltMX.application.requestPermissionSet(permissions, callback)  
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | Permissions | Array of qualified android permission strings. |
 | Callback | Function object result will invoke this function. The result is a JSobject where the key is permission string and the value is the permission status. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}function requestpermission() {
+{% highlight VoltMx %}
+function requestpermission() {
 
     voltmx.application.requestPermissionSet(["android.permission.CAMERA", "android.permission.WRITE_CONTACTS"], permissionStatusCallback);
 
@@ -2847,14 +2907,13 @@ function permissionStatusCallback(response) {
 
 }
 
-
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 Android
 
@@ -2867,32 +2926,35 @@ Android
 
 This function requests users to provide a rating and to write a review for an app.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.requestReview()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Example
+### Example
 
-{% highlight voltMx %}  //To request the user for his rating on your app, use the below API 
+{% highlight VoltMx %}
+  //To request the user for his rating on your app, use the below API 
   requestAppReview: function(){
     voltmx.application.requestReview();
   } 
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-IDE/CodeGen Requirements
+### IDE/CodeGen Requirements
 
 None.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -2904,11 +2966,9 @@ The Android error codes are as follows:
 *   **Error code**: 801  
     **Message**: Review Action Not Found  
     This error code is displayed if the requested Play Store or browser is not found.
-    
 *   **Error code**: 802  
     **Message**: Review Error Unknown  
     
-
 * * *
 
 </details>
@@ -2918,32 +2978,33 @@ The Android error codes are as follows:
 
 This API resets the state associated with the URL of a form. It removes all the parameters attached to the form URL
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.resetBMState([formID](#id1))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | formID \[String\] - Mandatory. | Identifier of the form for which the parameters of the URL have to be removed. |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}resetBookmarkState: function() {
+{% highlight VoltMx %}
+resetBookmarkState: function() {
     voltmx.application.resetBMState("Form1");
     alert("The state is removed from the URL");
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Supported for SPA and Desktop Web.
 
@@ -2960,31 +3021,32 @@ For more information on Library mode, click [here]({{ site.baseurl }}/docs/docum
 
 > **_Note:_** Calling this API invokes the onLibraryResult() interface/protocol method, which is passed in the [Native Start API](start_library.html) of Volt MX Iris Library.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.sendLibraryResultToNativeApp(resultData)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | resultData | An object with key-value pair elements with key as String and value as primitive data types (int, float, double, String, and Boolean). |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}var resultData = {
+{% highlight VoltMx %}
+var resultData = {
     status: "success"
 };
 voltmx.application.sendLibraryResultToNativeApp(resultData);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -3002,62 +3064,68 @@ Platform Availability
 
 The `voltmx.application.setApplicationBehaviors` function enables your app to configure its response to various events.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setApplicationBehaviors(  
     Objectbehaviors);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 Objectbehaviors
 
-> A JavaScript object that contains key-value pairs which specify the app's response to various events. The object includes the following key-value pairs.
-> 
->   
-> | Key | Value |
-> | --- | --- |
-> | adherePercentageStrictly | By default, this key is set to `true`. This property is supported on SPA and Desktop Web only. |
-> | backOnEsc | If set to `true`, allows the user to go back to previous form by pressing Escape key. If the user is on the first form, the operation is ignored. Default value is `false`. If you are using the `onDeviceBack` property on the form, the app will override the `backOnEsc` property and gives priority to `onDeviceBack` property. Available on only Windows. |
-> | blurEffectStyleInBackground | A value from the [Blur Effect Constants](constants_namespace.html#BLUREFFECT) that blurs the app's most recent screen when it is in the background. This value is ignored if the value of the `enableSplashScreen` key is `true`. |
-> | breakpoints | Sets the various breakpoints for the form for responsive web design. |
-> | calendarMonthYearSelectionDropdownView | This property is used to set the Calendar widget popup to the new(dropdown) view. If the value of this attribute is true, the Calendar widget will be displayed in the new(dropdown) look. The default value of this key is false. This property is supported on Desktop Web only. > **_Note:_** If an app is developed on V9 SP2 GA, you can’t change the Calendar widget popup to the old view. However, if an app is developed V9 SP1 GA or before and is imported into V9 SP2 GA, the calendar widget popup will be in the old(grid) view, to change it to a new(dropdown) look, you should change the property to true.**Ex**. voltmx.application.setApplicationBehaviors({ “calendarMonthYearSelectionDropdownView” : true }); |
-> | defaultIndicatorColor | Sets the color for the progress indicator. A Hex code or a word can be used to set the color. The words can only be used for two colors (white and grey), and these words are not case sensitive. The `defaultIndicatorColor` key is only supported on Android and Windows. The default color might vary for each platform as it picks from the application's theme, form color or predefined colors. |
-> | dismissSIPinCallbacks | Enables users to dismiss the soft inputs such as keyboard and rotating wheel from the mobile screen. Using the `dismissSIPinCallbacks` key, users can dismiss the soft inputs when a registered callback such as onClick or onDownload is invoked for a corresponding widget. This property is available only on the iOS platform. Following are the possible values of the `dismissSIPinCallbacks` key: DISMISS\_SIP\_IN\_CALLBACKS\_DEFAULT: The native iOS Volt MX IrisFramework determines if a soft input will be dismissed on invoking a registered callback. DISMISS\_SIP\_IN\_CALLBACKS\_YES: A soft input is dismissed after a registered callback is triggered for a widget. DISMISS\_SIP\_IN\_CALLBACKS\_NO: A soft input is not dismissed. Users must close the control such as a keyboard explicitly by clicking on the cancel or done buttons. > **_Note:_** Users can set the `dismissSIPinCallbacks` property multiple times in an application. Example:voltmx.application.setApplicationBehaviors( { "dismissSIPinCallbacks": constants.DISMISS\_SIP\_IN\_CALLBACKS\_NO } ) |
-> | enableLazyLoadForSegment | A Boolean value that, when set to `true`, enables lazy loading for the data of the segment rows. When lazy loading is enabled for a segment, the data in the rows is loaded only when required. Lazy loading improves the performance of a segment as all the data is not loaded simultaneously. > **_Important:_** The lazy loading feature is only available for Segments present in a Responsive Web App that is built in the CSS Library mode (with the **Enable JS Library Mode (Legacy)** option disabled in the Project Settings). If the **Enable JS Library Mode (Legacy)** option is enabled for the app, the lazy loading feature does not work at run-time, and the [loadingPlaceholderImage](#loadingPlaceholderImage) property does not appear. > **_Note:_** From Volt MX Iris V9 ServicePack 3, the default value set for this parameter is **TRUE**. If you want to disable the lazy loading experience for a Segment, set the value of the `enableLazyLoadForSegment` parameter to **FALSE**. As Lazy loading only loads selective segment rows, the row animations and the onRowDisplay event callbacks are only triggered for the segment rows that are loaded. > **_Note:_** Support for this property has been introduced in the Volt MX Iris V9 ServicePack 2 Fixpack 7 release. |
-> | enableNSURLSession | A Boolean value that, when set to `true`, sets all network requirements to be served with NSURLSession. Setting this to `false` restores the current behavior which uses NSURLConnection. |
-> | enableRedrawRegions | A Boolean value that enables redraw regions when set to `true`, or disables them when set to `false`. The default is `true`. Available on only Windows. |
-> | enableSplashScreen | A Boolean value that causes a splash screen to be displayed when the app is in the background when set to `true`, or disables the splash screen when set to `false`. The default is `true`. Available on iOS. |
-> | filterTouchesWhenObscured | Tap jacking is a technique that is used by hackers to steal sensitive data by using a screen overlay mechanism. For example, a hacker can place a textbox over the password textbox in a login page by using the screen overlay mechanism. When an app user enters some data in the password text box, the data is actually entered in the textbox placed by the hacker and relays the information to the hacker. The filterTouchesWhenObscured parameter is a Boolean value that, when set to true, protects the application from Tap jacking security issues. When a screen overlay is present, this property filters the touch propagation to the app screen. The default value of this parameter is `false`. > **_Note:_** This parameter is only available on the Android. Example:voltmx.application.setApplicationBehaviors({ "filterTouchesWhenObscured": true}); |
-> | fontScaleFactor | A Boolean value that sets the scale factor in pre/post app init. When configured, fonts in the app will scale accordingly. Configure this only once in the app life cycle to avoid ambiguous behavior. JavaScrip developers must add the following snippet in pre/post init. Example:  var deviceInfo = voltmx.os.deviceInfo(); if (deviceInfo\["model"\] == "iPhone 6 Plus") { voltmx.application.setApplicationBehaviors( {fontScaleFactor:2.25} ); } else if (deviceInfo\["model"\] == "iPhone 6") { voltmx.application.setApplicationBehaviors( {fontScaleFactor:1.24} ); } else if(deviceInfo\["model"\] == "iPhone 5C") { voltmx.application.setApplicationBehaviors( {fontScaleFactor:0.98} ); } |
-> | hideDefaultLoadingIndicator | A Boolean value that hides the loading indicator when set to `true`, or shows it when set to `false`. |
-> | hideDefaultLoadingIndicator | A Boolean value that, if set to `true`, hides the default loading indicator that appears when a background operation is performed. The `hideDefaultLoadingIndicator` key is available only on Android and it is supported from Volt MX Android plug-in GA 5.0.32 onwards. |
-> | hideStatusBar | A Boolean value that hides the status bar when set to `true`, or shows it when set to `false`. The hideStatusBar property is available only on Windows (8 and later versions) and it is supported in Volt MX Iris GA 5.6.4.11 and in GA 6.0.2.3. |
-> | invokePreshowPostShowEventsOnDeviceBack | A Boolean value that selects whether the pre-show or post-show events are triggered when the user presses the **Back** option on a device. |
-> | isGestureEventsAsync | A Boolean value that specifies that all gesture events are executed asynchronously when your app sets this value to `true`. Otherwise, they are executed synchronously. Available on only Windows. |
-> | isI18nLayoutConfigEnabled | A Boolean value that enables or disables the layout mirroring support for Volt MX Iris Applications. It is a global application-level parameter. This parameter is passed as an input for the voltmx.application.setApplicationBehaviors API, and is available from V8 SP4 onwards. If you assign the isI18nLayoutConfigEnabled key as **false**, the layout mirroring feature of your application is disabled. If you assign the isI18nLayoutConfigEnabled key as **true**, the layout mirroring feature of your application is enabled. Available on Windows, iOS, Android, and SPA. For Windows, if you use the **isI18nLayoutConfigEnabled** key and the **voltmx.application.setApplicationLayout** API together in a single application, the application does not function as expected. |
-> | isLowLevelEventsAsync | A Boolean value that specifies that the  `onTouchStart`, `onTouchMove`, `onTouchEnd` , and `onTouchCancel` events are executed asynchronously when your app sets this value to `true`. Otherwise, they are executed synchronously. Available on only Windows. |
-> | isPopupModel | A Boolean value that specifies whether the pop-up is modal. The value set as the property for a pop-up takes precedence over the value set dynamically. |
-> | isScrollEventsAsync | A Boolean value that, if set to `true`, indicates that scroll events are executed asynchronously. Volt MX Iris recommends that you set this value to `false` and execute the scroll events synchronously. Available on only Windows. |
-> | marginsIncludedInWidgetContainerWeight | A Boolean value that applies the margin calculations when set to `true`. Margins are calculated based on width of the parent box. |
-> | maxHeight | A numeric value that allows your app to set maximum height of the main window. Available only on Windows. |
-> | maxWidth | A numeric value that allows your app to set maximum width of the main window. Available only on Windows. |
-> | minHeight | A numeric value that allows your app to set minimum height of the main window. Available only on Windows. |
-> | minWidth | A numeric value that allows your app to set minimum width of the main window. Available only on Windows. |
-> | popupAsDialog | A Boolean value that, when set to `true`, forces all the pop-ups to be displayed outside the main window. If set to `false`, pop-ups are displayed embedded in main window. The default value is `false`. Available only on Windows. |
-> | prefersHomeIndicatorAutoHidden (available only from iOS 11) | A Boolean value that specifies to auto hide the virtual home indicator that is introduced in iPhoneX bezel less display. This virtual home indicator is used instead of the physical home button. Apple takes care of when to auto hide the virtual home indicator if the value is set to true. The default value is false. **Sample code**: function setHomeInidicatorAutoHidden(){ voltmx.application.setApplicationBehaviors( {"prefersHomeIndicatorAutoHidden" : true} ); } |
-> | restoreformstateondeviceback | A Boolean value that specifies whether the default behavior of form app menu state is retained when the user presses the Back button on the device. |
-> | retainSpaceOnHide | A Boolean value that specifies whether the space allocated for a widget is retained when the widget is made invisible. For more information, see the **[Remarks](#retainSpaceOnHide)** section below. |
-> | saveState | If set to `true`, location and size of the main window will be saved between application session. Default is `false`. If the `setApplicationBehaviour` function is called multiple times, latest settings are considered and all old settings are overridden. Available on only Windows. |
-> | settings | A JavaScript Dictionary object that contains key-value pairs. For more information, see the **[Remarks](#settings)** section below. Available on only Windows. |
-> | skinImageScaleMode | A value from the [Skin Image Scale Mode Constants](constants_namespace.html#SkinImageScaleMode).Available only on Windows. |
-> | skipEscapeHTML | A Boolean value that allows HTML tags in Label widgets when set to `true`, or disallows them when set to `false`. |
-> | useNativeMSG | A Boolean value that, when set to `true`, enables your app to use native multistep gradients that are scaled relative to the size of the widget. Otherwise, set to `false` to disable this behavior. |
+A JavaScript object that contains key-value pairs which specify the app's response to various events. The object includes the following key-value pairs.
 
-Example
+ 
+| Key | Value |
+| --- | --- |
+| adherePercentageStrictly | By default, this key is set to `true`. This property is supported on SPA and Desktop Web only. |
+| backOnEsc | If set to `true`, allows the user to go back to previous form by pressing Escape key. If the user is on the first form, the operation is ignored. Default value is `false`. If you are using the `onDeviceBack` property on the form, the app will override the `backOnEsc` property and gives priority to `onDeviceBack` property. Available on only Windows. |
+| blurEffectStyleInBackground | A value from the [Blur Effect Constants](constants_namespace.html#BLUREFFECT) that blurs the app's most recent screen when it is in the background. This value is ignored if the value of the `enableSplashScreen` key is `true`. |
+| breakpoints | Sets the various breakpoints for the form for responsive web design. |
+| calendarMonthYearSelectionDropdownView | This property is used to set the Calendar widget popup to the new(dropdown) view. If the value of this attribute is true, the Calendar widget will be displayed in the new(dropdown) look. The default value of this key is false. This property is supported on Desktop Web only. > **_Note:_** If an app is developed on V9 SP2 GA, you can’t change the Calendar widget popup to the old view. However, if an app is developed V9 SP1 GA or before and is imported into V9 SP2 GA, the calendar widget popup will be in the old(grid) view, to change it to a new(dropdown) look, you should change the property to true.**Ex**. voltmx.application.setApplicationBehaviors({ “calendarMonthYearSelectionDropdownView” : true }); |
+| defaultIndicatorColor | Sets the color for the progress indicator. A Hex code or a word can be used to set the color. The words can only be used for two colors (white and grey), and these words are not case sensitive. The `defaultIndicatorColor` key is only supported on Android and Windows. The default color might vary for each platform as it picks from the application's theme, form color or predefined colors. |
+| dismissSIPinCallbacks | Enables users to dismiss the soft inputs such as keyboard and rotating wheel from the mobile screen. Using the `dismissSIPinCallbacks` key, users can dismiss the soft inputs when a registered callback such as onClick or onDownload is invoked for a corresponding widget. This property is available only on the iOS platform. Following are the possible values of the `dismissSIPinCallbacks` key: DISMISS\_SIP\_IN\_CALLBACKS\_DEFAULT: The native iOS Volt MX IrisFramework determines if a soft input will be dismissed on invoking a registered callback. DISMISS\_SIP\_IN\_CALLBACKS\_YES: A soft input is dismissed after a registered callback is triggered for a widget. DISMISS\_SIP\_IN\_CALLBACKS\_NO: A soft input is not dismissed. Users must close the control such as a keyboard explicitly by clicking on the cancel or done buttons. > **_Note:_** Users can set the `dismissSIPinCallbacks` property multiple times in an application. Example:voltmx.application.setApplicationBehaviors( { "dismissSIPinCallbacks": constants.DISMISS\_SIP\_IN\_CALLBACKS\_NO } ) |
+| enableLazyLoadForSegment | A Boolean value that, when set to `true`, enables lazy loading for the data of the segment rows. When lazy loading is enabled for a segment, the data in the rows is loaded only when required. Lazy loading improves the performance of a segment as all the data is not loaded simultaneously. > **_Important:_** The lazy loading feature is only available for Segments present in a Responsive Web App that is built in the CSS Library mode (with the **Enable JS Library Mode (Legacy)** option disabled in the Project Settings). If the **Enable JS Library Mode (Legacy)** option is enabled for the app, the lazy loading feature does not work at run-time, and the [loadingPlaceholderImage](#loadingPlaceholderImage) property does not appear. > **_Note:_** From Volt MX Iris V9 ServicePack 3, the default value set for this parameter is **TRUE**. If you want to disable the lazy loading experience for a Segment, set the value of the `enableLazyLoadForSegment` parameter to **FALSE**. As Lazy loading only loads selective segment rows, the row animations and the onRowDisplay event callbacks are only triggered for the segment rows that are loaded. > **_Note:_** Support for this property has been introduced in the Volt MX Iris V9 ServicePack 2 Fixpack 7 release. |
+| enableNSURLSession | A Boolean value that, when set to `true`, sets all network requirements to be served with NSURLSession. Setting this to `false` restores the current behavior which uses NSURLConnection. |
+| enableRedrawRegions | A Boolean value that enables redraw regions when set to `true`, or disables them when set to `false`. The default is `true`. Available on only Windows. |
+| enableSplashScreen | A Boolean value that causes a splash screen to be displayed when the app is in the background when set to `true`, or disables the splash screen when set to `false`. The default is `true`. Available on iOS. |
+| filterTouchesWhenObscured | Tap jacking is a technique that is used by hackers to steal sensitive data by using a screen overlay mechanism. For example, a hacker can place a textbox over the password textbox in a login page by using the screen overlay mechanism. When an app user enters some data in the password text box, the data is actually entered in the textbox placed by the hacker and relays the information to the hacker. The filterTouchesWhenObscured parameter is a Boolean value that, when set to true, protects the application from Tap jacking security issues. When a screen overlay is present, this property filters the touch propagation to the app screen. The default value of this parameter is `false`. > **_Note:_** This parameter is only available on the Android. Example:voltmx.application.setApplicationBehaviors({ "filterTouchesWhenObscured": true}); |
+| fontScaleFactor | A Boolean value that sets the scale factor in pre/post app init. When configured, fonts in the app will scale accordingly. Configure this only once in the app life cycle to avoid ambiguous behavior. JavaScrip developers must add the following snippet in pre/post init. Example:  var deviceInfo = voltmx.os.deviceInfo(); if (deviceInfo\["model"\] == "iPhone 6 Plus") { voltmx.application.setApplicationBehaviors( {fontScaleFactor:2.25} ); } else if (deviceInfo\["model"\] == "iPhone 6") { voltmx.application.setApplicationBehaviors( {fontScaleFactor:1.24} ); } else if(deviceInfo\["model"\] == "iPhone 5C") { voltmx.application.setApplicationBehaviors( {fontScaleFactor:0.98} ); } |
+| hideDefaultLoadingIndicator | A Boolean value that hides the loading indicator when set to `true`, or shows it when set to `false`. |
+| hideDefaultLoadingIndicator | A Boolean value that, if set to `true`, hides the default loading indicator that appears when a background operation is performed. The `hideDefaultLoadingIndicator` key is available only on Android and it is supported from Volt MX Android plug-in GA 5.0.32 onwards. |
+| hideStatusBar | A Boolean value that hides the status bar when set to `true`, or shows it when set to `false`. The hideStatusBar property is available only on Windows (8 and later versions) and it is supported in Volt MX Iris GA 5.6.4.11 and in GA 6.0.2.3. |
+| invokePreshowPostShowEventsOnDeviceBack | A Boolean value that selects whether the pre-show or post-show events are triggered when the user presses the **Back** option on a device. |
+| isGestureEventsAsync | A Boolean value that specifies that all gesture events are executed asynchronously when your app sets this value to `true`. Otherwise, they are executed synchronously. Available on only Windows. |
+| isI18nLayoutConfigEnabled | A Boolean value that enables or disables the layout mirroring support for Volt MX Iris Applications. It is a global application-level parameter. This parameter is passed as an input for the voltmx.application.setApplicationBehaviors API, and is available from V8 SP4 onwards. If you assign the isI18nLayoutConfigEnabled key as **false**, the layout mirroring feature of your application is disabled. If you assign the isI18nLayoutConfigEnabled key as **true**, the layout mirroring feature of your application is enabled. Available on Windows, iOS, Android, and SPA. For Windows, if you use the **isI18nLayoutConfigEnabled** key and the **voltmx.application.setApplicationLayout** API together in a single application, the application does not function as expected. |
+| isLowLevelEventsAsync | A Boolean value that specifies that the  `onTouchStart`, `onTouchMove`, `onTouchEnd` , and `onTouchCancel` events are executed asynchronously when your app sets this value to `true`. Otherwise, they are executed synchronously. Available on only Windows. |
+| isPopupModel | A Boolean value that specifies whether the pop-up is modal. The value set as the property for a pop-up takes precedence over the value set dynamically. |
+| isScrollEventsAsync | A Boolean value that, if set to `true`, indicates that scroll events are executed asynchronously. Volt MX Iris recommends that you set this value to `false` and execute the scroll events synchronously. Available on only Windows. |
+| marginsIncludedInWidgetContainerWeight | A Boolean value that applies the margin calculations when set to `true`. Margins are calculated based on width of the parent box. |
+| maxHeight | A numeric value that allows your app to set maximum height of the main window. Available only on Windows. |
+| maxWidth | A numeric value that allows your app to set maximum width of the main window. Available only on Windows. |
+| minHeight | A numeric value that allows your app to set minimum height of the main window. Available only on Windows. |
+| minWidth | A numeric value that allows your app to set minimum width of the main window. Available only on Windows. |
+| popupAsDialog | A Boolean value that, when set to `true`, forces all the pop-ups to be displayed outside the main window. If set to `false`, pop-ups are displayed embedded in main window. The default value is `false`. Available only on Windows. |
+| prefersHomeIndicatorAutoHidden (available only from iOS 11) | A Boolean value that specifies to auto hide the virtual home indicator that is introduced in iPhoneX bezel less display. This virtual home indicator is used instead of the physical home button. Apple takes care of when to auto hide the virtual home indicator if the value is set to true. The default value is false. **Sample code**: function setHomeInidicatorAutoHidden(){ voltmx.application.setApplicationBehaviors( {"prefersHomeIndicatorAutoHidden" : true} ); } |
+| restoreformstateondeviceback | A Boolean value that specifies whether the default behavior of form app menu state is retained when the user presses the Back button on the device. |
+| retainSpaceOnHide | A Boolean value that specifies whether the space allocated for a widget is retained when the widget is made invisible. For more information, see the **[Remarks](#retainSpaceOnHide)** section below. |
+| saveState | If set to `true`, location and size of the main window will be saved between application session. Default is `false`. If the `setApplicationBehaviour` function is called multiple times, latest settings are considered and all old settings are overridden. Available on only Windows. |
+| settings | A JavaScript Dictionary object that contains key-value pairs. For more information, see the **[Remarks](#settings)** section below. Available on only Windows. |
+| skinImageScaleMode | A value from the [Skin Image Scale Mode Constants](constants_namespace.html#SkinImageScaleMode).Available only on Windows. |
+| skipEscapeHTML | A Boolean value that allows HTML tags in Label widgets when set to `true`, or disallows them when set to `false`. |
+| useNativeMSG | A Boolean value that, when set to `true`, enables your app to use native multistep gradients that are scaled relative to the size of the widget. Otherwise, set to `false` to disable this behavior. |
 
-{% highlight voltMx %}// The application must call the following voltmx.application.setApplicationBehaviours()in Pre Appinit() methods  
+### Example
+
+{% highlight VoltMx %}
+// The application must call the following voltmx.application.setApplicationBehaviours()in Pre Appinit() methods  
 voltmx.application.setApplicationBehaviors({"stopLoadingScreenDismissOnFormNavigation":true})
-{% endhighlight %}{% highlight voltMx %}                    //The application must call voltmx.application.setApplicationBehaviors(appTable) in Post Appinit() methods
+{% endhighlight %}
+
+{% highlight VoltMx %}
+//The application must call voltmx.application.setApplicationBehaviors(appTable) in Post Appinit() methods
 function setApplicationBehaviors() {
     //Controlling the behaviours by setting invokePreshowPostShow
     //EventsOnDeviceBack as true,isPopupModel as true,and retainSpaceOnHide as true.
@@ -3090,11 +3158,11 @@ voltmx.application.setApplicationBehaviors(inputParamTable);
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This function enables you to specify whether:
 
@@ -3108,11 +3176,11 @@ To ensure consistency while porting applications across platforms, the `voltmx.a
 
 > **_Note:_** This function can only be called in the post-appinit event handler.
 
-Parameter Details
+### Parameter Details
 
 The following provides more information about the key-value pairs in the _Objectbehaviors_ parameter.
 
-retainSpaceOnHide
+**retainSpaceOnHide**
 
 This key is applicable to widgets placed in a percentage container.
 
@@ -3120,7 +3188,7 @@ Limitations in Windows channel: When retainSpaceOnHide is true and widget isVisi
 
 Height changes to the max height of the visible child widget.When retainSpaceOnHide property is made False, inconsistency among platforms is observed. If any of the widgets placed inside a container are made invisible, then some platforms will retain the space and some platforms will not retain the space. To overcome this inconsistency or to retain the space in all platforms, retainSpaceOnHide property must be configured to True. The default value of retainSpaceOnHide property is True.
 
-settings
+**settings**
 
 The value for this key is a JavaScript object that contains key-value pairs that are used to scale UI elements from Windows to iOS. These properties allow you set the property values provided in Dp metrics to have the same UI view in both iOS and Windows platforms.
 
@@ -3135,6 +3203,7 @@ Currently, the only supported key is `dpScaleFactor`. The value for the `dpScale
 
 The resulting code for using the `dpScaleFactor` key would resemble the following.
 
+{% highlight VoltMx %}
 function scaleWindowsToiOS()  
 {  
     var scaleData = {};  
@@ -3142,8 +3211,9 @@ function scaleWindowsToiOS()
     scaleData.referenceFontSize = 0.8;  
     voltmx.application.setApplicationBehaviors({“dpScaleFactor”: scaleData});  
 }
+{% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
@@ -3156,23 +3226,24 @@ Available on all platforms
 
 This API allows you to set a badge value to an application icon on the mobile desktop at the top-right corner of the application icon. If you pass an empty string as a parameter, the badge applied on the application icon is removed.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setApplicationBadgeValue([badgeValue](#badgeValue), [tileID](#tileID))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | badgeValue \[String\] - Mandatory | Value of the badge. The value that you specify in the badgeValue parameter appears within the badge. Do not pass any other value except a numerical value. For example, to set a badge value for an appicon, specify the value as "2" instead of 2. If the length of the badge value is greater than 1 the badge is a rounded rectangle. For example, if you specify the value of the badge as 88, the number appears in a rounded rectangular badge. If the length of the badge value is 1, the badge is always a circle. |
 | tileID \[String\] - Optional | The tile ID defined for the secondary tile using the [setSecondaryTile](#setsecon) API. The parameter is applicable only for Windows. |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}settingBadge: function() {
+{% highlight VoltMx %}
+settingBadge: function() {
     this.view.btnBadge.setBadge("0", ""); //Set badge value on  button widget
     voltmx.application.setApplicationBadgeValue("" + 0);
 },
@@ -3187,11 +3258,11 @@ The badge appears as follows when you execute the code given above:
 
 ![](resources/images/badge_for_app_icon_with_large_number.png)
 
-Return Values
+### Return Values
 
 None
 
-UI Behavior
+### UI Behavior
 
 The badge appears with white font on a red background. The shape of the badge varies with its value:
 
@@ -3204,7 +3275,7 @@ The badge appears with white font on a red background. The shape of the badge va
     ![](resources/images/badge_with_multiple_digits.png)![](resources/images/badge_on_appmenu_183x53.png)
     
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Windows
@@ -3221,9 +3292,7 @@ This API captures the callback events for various states of the application whic
 *   _onactive_ - state which indicates that the mobile device is active and application is running
 *   _oninactive_ - state which indicates that the mobile device is inactive and application is running
 *   _onbackground_ - state which indicates that the application is active and running in the background.
-    
     For more information on iOS application behavior on background, click [here](https://developer.apple.com/documentation/uikit/uiapplicationdelegate?language=objc)
-    
 *   _onforeground_ - state which indicates that the application is active and running in the foreground
 *   _onappterminate_ - state which indicates that the application is terminated and not running.
 *   _onkeyboardchange_ - state which indicates whether a keyboard is deployed for an application.
@@ -3237,11 +3306,13 @@ This API captures the callback events for various states of the application whic
 
 > **_Note:_** Android supports only the onbackground, onmultiwindowmodechanged, and onforeground states.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setApplicationCallbacks([callbacks](#callbacks1))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 **callbacks \[Object\] - Mandatory**
 
@@ -3251,16 +3322,14 @@ Specifies an Object with key as appstate and value as the callback function for 
 
 Callbacks specific to Android
 
-  
 | Callback | Description |
 | --- | --- |
 | _onbackground_ | This state which indicates that the application is active and running in the background. |
 | onforeground | This state which indicates that the application is active and running in the foreground. |
-| **onmultiwindowmodechanged** | This callback takes the function object that is called when the application changes from full-screen mode to multi-window mode, and vice-versa. **Syntax**: `voltmx.application.setApplicationCallbacks( {onmultiwindowmodechanged:callbackfunction} );` Parameters:VoltMX platform provides the following two parameters for this callback:boolean: The value is true when the application changes from full-screen mode to multi-window mode, and the value is false if the application changes from multi-window mode to full-screen mode.object: This contains height and width configurations. The object keys are height and width. If native Android does not provide the required configuration, the object remains undefined.**Note**: Native Android provides the config object from Android 8.0 onwards. **Example**:`function onMultiWindowModeChangedCallback(isInMultiWindow, config){ voltmx.print("Is in multi window mode :" + isInMultiWindow);if(config != undefined) { voltmx.print("Config values :height : " + config.height + " : width : " + config.width ); }}` |
+| **onmultiwindowmodechanged** | This callback takes the function object that is called when the application changes from full-screen mode to multi-window mode, and vice-versa. **Syntax**: `voltmx.application.setApplicationCallbacks( {onmultiwindowmodechanged:callbackfunction} );` Parameters:Volt MX platform provides the following two parameters for this callback:boolean: The value is true when the application changes from full-screen mode to multi-window mode, and the value is false if the application changes from multi-window mode to full-screen mode.object: This contains height and width configurations. The object keys are height and width. If native Android does not provide the required configuration, the object remains undefined.**Note**: Native Android provides the config object from Android 8.0 onwards. **Example**:`function onMultiWindowModeChangedCallback(isInMultiWindow, config){ voltmx.print("Is in multi window mode :" + isInMultiWindow);if(config != undefined) { voltmx.print("Config values :height : " + config.height + " : width : " + config.width ); }}` |
 
 Callbacks specific to Windows
 
-  
 | Callback | Description |
 | --- | --- |
 | ondpichange | This state occurs whenever the LogicalDpi property changes because the pixels per inch (PPI) of the display changes. This callback is called with a dictionary as the argument. The required keys are listed below. > **_Note:_** The ondpichange callback is supported in Windows only. |
@@ -3294,7 +3363,6 @@ The callbacks ondpichange, onsizechange, and onvisibleboundschange are called wi
 
 Callbacks specific to iOS
 
-  
 |   |   |
 | --- | --- |
 | onactive | This state occurs when there is an incoming SMS, phone call, or anything else that interrupts the automatic lock of the mobile device. |
@@ -3309,9 +3377,10 @@ This callback accepts the following arguments: **sourceApplication - String – 
 | onactivityrequest | This method is used to handle the handoff activity request that are sent to the application.This callback accepts the following arguments:**activityName** - **\[String\]** This parameter is mandatory. A string that represents the name of the activity.**activityInfo** - **\[Dictionary\]** This parameter is mandatory. A dictionary containing custom user information.This callback method returns a boolean (true/false) value that indicates the request handle status.//Sample code for onactivityrequest callback method. function jsfunction(activityName, activityInfo) {    if (activityName == "continueActivity") {       // use activityInfo dictionary to continue the past activity on the iPhone       return true;      }   return false; }  |
 | onpreactivityrequest | This method is used to ask the receiving application, whether it wants to continue the handed off activity. If this callback method returns true, then the onactivityrequest callback method gets invoked where the receiving app gets a chance to continue the handed off activity.This callback accepts the following arguments:**activityName** - **\[String\]** This parameter is mandatory. A string that represents the name of the activity.If this callback method returns _true_, then the you notify the user that the receiving app wants to continue the activity on the device. If the callback method returns _false_, then iOS notifies the user to continue activity on the device.//Sample code for onpreactivityrequest callback method. function jsfunction(activityName) {    if (activityName == "continueActivity") {             return true;      }    return false; } |
 
-Example
+### Example
 
-{% highlight voltMx %}                    //onactive function 
+{% highlight VoltMx %}
+//onactive function 
 function test() {
     alert("===============Test executed=======");
 }
@@ -3348,7 +3417,10 @@ function setCallBacks() {
     };
     voltmx.application.setApplicationCallbacks(callbacksObj);
 }
-{% endhighlight %}{% highlight voltMx %}                    //onapplicationopenurl
+{% endhighlight %}
+
+{% highlight VoltMx %}
+//onapplicationopenurl
 voltmx.application.setApplicationCallbacks({
     onapplicationopenurl: callbackFunction
 });
@@ -3370,7 +3442,10 @@ function callbackFunction(sourceApplicaion, url, annotation) {
             }
     return flag;
 }
-{% endhighlight %}{% highlight voltMx %}                    //onWatchRequest sample code
+{% endhighlight %}
+
+{% highlight VoltMx %}
+//onWatchRequest sample code
 function jsfunction(requestObject) {
     return <returnValue > ;
 }
@@ -3384,11 +3459,11 @@ voltmx.application.setApplicationCallbacks({
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 An error is thrown if input is invalid or does not follow the expected structure.
 
@@ -3396,7 +3471,7 @@ An error is thrown if input is invalid or does not follow the expected structure
 *   101 - Invalid number of arguments.
 *   102 - Invalid input error
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Desktop Web, SPA, and Mobile Web.
 
@@ -3413,17 +3488,18 @@ This API is used to configure all initialization events such as, preappinit, pos
 
 ![](resources/images/applifecycle_622x493.png)
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setApplicationInitializationEvents([callbacks](#callbacks2))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 callbacks \[Object\] - Mandatory
 
 Is a Hash table which comprises of the following key value pairs:
 
-  
 | Key | Description |
 | --- | --- |
 | **preappinit**\[params\] | This is an existing event that the developer registers in the IDE per application basis. This event consists of any logic that needs to be executed before the initialization of forms, skins, and any other application initialization activities. For e.g loading the i18n resource bundles dynamically etc. |
@@ -3433,11 +3509,11 @@ Is a Hash table which comprises of the following key value pairs:
 | **showstartupform**\[params\] | This is a method invoked by the platform to show the startup form, as indicated in the IDE. > **_Note:_** This event is invoked only when postappinit returns a nil. If appservice returns a form handle, showstartupform is not invoked. |
 | **deeplink**\[params\] | This method is Thinclient/SPA specific and if appservice event is provided, then this event will be ignored. |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}//onactive function 
+{% highlight VoltMx %}
+//onactive function 
 function test() {
     alert("===============Test excuted=======");
 }
@@ -3476,16 +3552,16 @@ function setAppInitializationEvents() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 *   **102** - InvalidInputError: An error is thrown if input is invalid.
 *   **100**\- TypeError: An error is thrown when the type is invalid.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -3498,26 +3574,28 @@ Available on all platforms.
 
 This API specifies if the application must have a layout from "left to right" or "right to left".
 
-UseCase
+### UseCase
 
 To support Arabic kind of languages, all the widgets on a form must be layout from right to left. This API impacts only horizontal layout.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.applicationsetApplicationLayout([layoutDirection](#layoutDirection))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | layoutDirection \[Constant\] - Mandatory | Specifies the layout direction for the content and the widgets of an application. constants.APPLICATION\_LAYOUT\_RIGHT2LEFT constants.APPLICATION\_LAYOUT\_LEFT2RIGHT |
 
-Example
+### Example
 
 If an application supports English and Arabic languages, app developer can invoke below snippet anywhere in appservice or preappinit or postappinit.
 
-{% highlight voltMx %}                    function setApplicationLayoutBasedOnLocale() {
+{% highlight VoltMx %}
+function setApplicationLayoutBasedOnLocale() {
     if (voltmx.i18n.getCurrentLocale() == "en_US") {
         voltmx.application.setApplicationLayout(constants.APPLICATION_LAYOUT_LEFT2RIGHT);
     } else {
@@ -3526,24 +3604,24 @@ If an application supports English and Arabic languages, app developer can invok
 }	
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Implementation Details
+### Implementation Details
 
 There is no direct API available to change the application layout to support both "Left2Right" and "Right2Left" languages. App developers have to spend huge amount of time in redesigning the UI for both locales, setting the margins/paddings and in setting "contentAlignment" for all widgets on all forms. This API is simple solution to change the application layout based on locale.
 
 This API can be called in appservice/preappinit/postappinit after checking the current locale or this should be called after the locale is changed successfully with "setCurrentLocaleAsync()".
 
-Exceptions
+### Exceptions
 
 An error is thrown if input is invalid or does not follow the expected structure.
 
 *   102 - Invalid input error
 *   101 - Insufficient arguments passed
 
-Platform Availability
+### Platform Availability
 
 Available on Windows.
 
@@ -3556,38 +3634,40 @@ Available on Windows.
 
 This API enables you to set the application mode to Native, Hybrid, or Wrapper.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setApplicationMode(Integer constant)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | Integer Constant | 1: constants.APPLICATION\_MODE\_NATIVE 2: constants.APPLICATION\_MODE\_HYBRID 3: constants.APPLICATION\_MODE\_WRAPPER |
 
-Example
+### Example
 
-{% highlight voltMx %}                    function setApplicationMode(){
+{% highlight VoltMx %}
+function setApplicationMode(){
 	voltmx.application.setApplicationMode(APPLICATION_MODE_NATIVE);
 	
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Special Considerations
+### Special Considerations
 
 This API should be called only in preappinit or before the execution of preappinit. If this API is invoked elsewhere in the program, it is invalid and leads to undefined behavior.
 
-Exceptions
+### Exceptions
 
 Error
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -3600,11 +3680,13 @@ Available on all platforms.
 
 The API enables you to set properties at the application level.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setApplicationProperties(key-value pairs)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 **statusBarColor**
 
@@ -3634,11 +3716,11 @@ At the Form level, you can achieve the behavior using the [statusBarHidden]({{ s
 | statusBarHidden Property (Form Level) | 3 |
 | statusBarHidden Parameter (Application Level) | 4 |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}Form.statusBarHidden : true
+{% highlight VoltMx %}
+Form.statusBarHidden : true
 {% endhighlight %}
 
 **statusBarStyle**
@@ -3680,13 +3762,13 @@ You can define any one of the following:
 | IMMERSIVE\_STICKY\_HIDE\_SYSTEM\_BARS | Hides both status and navigation bars, and space occupied by it is not retained. User cannot reset this mode. System bars appears momentarily when user tries to reveal them by swiping downward from the top of the screen or by swiping upward from the bottom of the screen. |
 | IMMERSIVE\_STICKY\_HIDE\_SYSTEM\_BARS\_KEEP\_LAYOUT\_STABLE | Hides both status and navigation bars, and space occupied by it is retained. System bars appears momentarily when user tries to reveal them by swiping downward from the top of the screen or by swiping upward from the bottom of the screen. |
 
- 
 
 > **_Note:_** The systemUIConfig flag is cleared when you move the application to the background and then bring it back to the foreground. So, the status bar/navigation bar is displayed by default when you move the application back to the foreground.
 
-Example
+### Example
 
-{% highlight voltMx %}function setApplicationProperties(){
+{% highlight VoltMx %}
+function setApplicationProperties(){
   voltmx.application.setApplicationProperties({  
     "statusBarColor": "ffff0000",  
     "statusBarForegroundColor": "ff0000",  
@@ -3698,21 +3780,21 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Special Considerations
+### Special Considerations
 
 The setApplicationProperties API is an application-level API and accepts key-value pairs as an input. When you set properties using the API to an application, the properties get applied to all the artifacts available in the application.
 
 The properties can be applied at the application-level and at the form-level as well. When you set the properties to a form (form-level), the properties get applied only to that particular form in the visible region. When a user navigates to another form, the status and navigation bars may change based on the properties set to that form. Otherwise, the status and navigation bar behaves based on the properties set at the application-level. If the properties are set at both form level and application level, the properties set at the form level overrides the property set at the application level. If the properties are not set at the form-level and at the application-level, the device’s default settings are applied to status and navigation bars.
 
-Exceptions
+### Exceptions
 
 Error
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -3727,24 +3809,25 @@ Available on all platforms.
 
 This API allows you to set a badge value to the specified app menu item on the top-right corner of the app menu item. If you pass an empty string as the parameter, the badge value of the app menu item is cleared.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setAppMenuBadgeValue([appmenuID](#appMenuId), [menuItemId](#menuItemId),[badgeValue](#badgeValue2))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | appMenuId \[String\] - Mandatory | If you are setting the badge for an app menu item that was created dynamically, use the same ID that was used to create the app menu item.If you are setting the badge for an app menu item that was created from the IDE, use the ID available in the generated script file. |
 | menuItemId \[String\] - Mandatory | Id of the app menu item to which the badge value to be set. |
 | badgeValue \[String\] - Mandatory | Value of the badge. The value you specify in the badge value appears within the badge. If the length of the badge value is greater than 1 the badge is a rounded rectangle. For example, if you specify the value of the badge as 88, the number appears in a rounded rectangular badge. If the length of the badge value is 1, the badge is always a circle. The maximum number of characters that can be specified in a badge value is 9. If the badge value id beyond 9 only the first 9 characters are displayed. |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}createAppMenu: function() {
+{% highlight VoltMx %}
+createAppMenu: function() {
     var appMenuItem1 = ["appmenuitemid1", "Accounts", "option1.png", this.onClickMenuItem1];
     var appMenuItem2 = ["appmenuitemid2", "Examination", "option2.png", this.onClickMenuItem2];
     var appMenu = [appMenuItem1, appMenuItem2];
@@ -3756,17 +3839,17 @@ Example
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-UI Behavior
+### UI Behavior
 
 The following image depicts how a bade appears on an app menu item:
 
 ![](resources/images/badge_on_appmenu_item.png)
 
-Platform Availability
+### Platform Availability
 
 Available only on iPhone and iPad.
 
@@ -3779,38 +3862,39 @@ Available only on iPhone and iPad.
 
 This API enables you to set the data for an application tile. If the user chooses to pin the application tile, the data set is visible. For more information on pinning a tile, refer [http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx](http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setAppTitle([tileTemplateType](#tileTemplateType), [tileTemplateData](#tileTemplateData))
+{% endhighlight %}
 
 setapptile([tileTemplateType](#tileTemplateType), [tileTemplateData](#tileTemplateData))
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | tileTemplateType \[String\] - Mandatory | tileTemplateType is a string describing which tile template to use. Refer the [tile template catalog](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh761491.aspx) for the list of supported tile templates |
 | tileTemplateData \[Array\] - Optional | tileTemplateData is an array of data for the tile, according to the tileTemplateType being used. The [tile template catalog](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh761491.aspx). contains details of the data required for each tile template. |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}voltmx.application.setAppTile("TileSquareBlock", ["Hello", "World!"] );
+{% highlight VoltMx %}
+voltmx.application.setAppTile("TileSquareBlock", ["Hello", "World!"] );
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-UI Behavior - Windows 10
+### UI Behavior - Windows 10
 
 The title and the display name of the tile will be displayed in white or black depending on the setting in Volt MX Irisand this behavior cannot be changed even if the user sets a different theme or a background image. Unlike Mango, tiles cannot be flipped on Windows 10. The tile can be updated dynamically in Windows 10.
 
 ![](resources/images/live_tile_win8_142x141.png)
 
-Platform Availability
+### Platform Availability
 
 Available on Windows.
 
@@ -3823,23 +3907,24 @@ Available on Windows.
 
 This API sets the bookmark state to the URL. This API accepts the _formID_ and a _json_ structure of key value pairs which will be added to the URL of the page.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setBMState([formID,](#id) [State](#menuSettings))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | formID \[String\] - Mandatory | Identifier of the form to be bookmarked. |
 | state \[JSON Object\] - Mandatory | A JSON object comprising key value pairs. The key value pairs are user defined. You cannot specify this as a nested structure. i.e the value part can not be another JSON object. |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}setState: function() {
+{% highlight VoltMx %}
+setState: function() {
 
     var state = {
         Bookmark: "about",
@@ -3850,11 +3935,11 @@ Example
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Supported for SPA and Desktop Web.
 
@@ -3867,33 +3952,33 @@ Supported for SPA and Desktop Web.
 
 This API is used to set the alignment of the checkBox selection image.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setCheckBoxSelectionImageAlignment([SelectionImageAlignment](#SelectionImageAlignment_))
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | SelectionImageAlignment \[String\] - Mandatory | One of the following string can be provided: constants.CHECKBOX\_SELECTION\_IMAGE\_ALIGNMENT\_LEFT - Image will be aligned to left. constants.CHECKBOX\_SELECTION\_IMAGE\_ALIGNMENT\_RIGHT - Image will be aligned to right. |
 
-**Example**
+### Example
 
-{% highlight voltMx %}                    
-                      
+{% highlight VoltMx %}
 voltmx.application.setCheckBoxSelectionImageAlignment(constants.CHECKBOX_SELECTION_IMAGE_ALIGNMENT_RIGHT);
 {% endhighlight %}
 
-**Return Values**
+### Return Values
 
 None
 
-**Exceptions**
+### Exceptions
 
 If input is invalid, an error is displayed.
 
-**Platform Availability**
+### Platform Availability
 
 Available on iPhone and iPad.
 
@@ -3906,30 +3991,31 @@ Available on iPhone and iPad.
 
 This method uses the unique identifier which represents the Charm settings menu and sets it as current settings menu. There can be only one current settings menu that can be set any time. Calling this method multiple times, replaces the current Charm settings menu.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setCurrentSettingsMenu([id](#id2))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | id \[String\] - Mandatory | Identifier of the Charm setting menu to be set. |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}//To create a Charm settings menu, enter the following  
+{% highlight VoltMx %}
+//To create a Charm settings menu, enter the following  
 voltmx.application.setCurrentSettingsMenu("myMenu");
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on Windows only.
 
@@ -3942,31 +4028,30 @@ Available on Windows only.
 
 Sets the font name and font size of various app menu items in the current app menu.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setCurrentAppMenuFont(fontname,fontsize)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | fontname | A JavaScript string that corresponds to a particular font name. > **_Note:_** If you want to set the system font to the required size, you must pass the fontname as “System,” or “System-Bold,” or “System-Italic.” |
 | fontsize | A float value that corresponds to a specific font size. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}voltmx.application.setCurrentAppMenuFont("System-Italic", 12);
-
+{% highlight VoltMx %}
+voltmx.application.setCurrentAppMenuFont("System-Italic", 12);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
@@ -3979,27 +4064,29 @@ Platform Availability
 
 This API customizes the default paddings applied for a ListBox. Generally, default padding is appended to padding applied through layout configurations of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setDefaultListboxPadding([bool](#bool_))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | bool \[Boolean\] - Mandatory | Indicates if the default padding is set. True - Default padding is applied to ListBox widgets. False - No default padding is applied to ListBox widgets. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    voltmx.application.setDefaultListboxPadding(false);
+{% highlight VoltMx %}
+voltmx.application.setDefaultListboxPadding(false);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -4013,27 +4100,29 @@ Platform Availability
 
 This API customizes the default paddings applied for a Textbox. Generally, default padding is appended to padding applied through layout configurations of the widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setDefaultTextboxPadding([bool](#bool_))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | bool \[Boolean\] - Mandatory | Indicates if the default padding is set. True - Default padding is applied to textbox widgets. False - No default padding is applied to textbox widgets. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    voltmx.application.setDefaultTextboxPadding(false);
+{% highlight VoltMx %}
+voltmx.application.setDefaultTextboxPadding(false);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
@@ -4050,20 +4139,22 @@ For more information about how to build an application in library mode, click [h
 
 > **_Note:_** The voltmx.application.setLibraryHeadlessModeCallback API is only applicable when the app is launched in library mode.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.sendLibraryResultHeadlessModeCallback(callback)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | callback | This parameter registers a function that receives the Native app's data as key-value pairs. The function registered in the callback parameter has the following syntax. function callback(libraryArgs) { } **libraryArgs** This parameter contains a JavaScript object with key-value pairs. This JavaScript object contains the data that is passed from the nNative app to the Volt MX Iris Library based depending on the contract of the Volt MX Iris Library. |
 
-Example
+### Example
 
-{% highlight voltMx %}function callback(libraryArgs)
+{% highlight VoltMx %}
+function callback(libraryArgs)
 {
 if (libraryArgs != null)
 {
@@ -4075,18 +4166,17 @@ voltmx.application.sendLibraryResultToNativeApp(resultData);
 voltmx.application.setLibraryHeadlessModeCallback(callback);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
 **Important Considerations**
 
 *   The sendLibraryResultHeadlessModeCallback API must be set in either the pre-appinit or post-appinit event of the application.
-    
 *   If you invoke this API more than once, the application only considers the callback that was set during the last instance.
     
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
@@ -4100,31 +4190,33 @@ Platform Availability
 
 This API sets the ImageWidget width to minimum or maximum according to available width or image width in absence of reference width. If ImageWidget is smaller than the available width, it is aligned using the widget alignment rules.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setRespectImageSizeForImageWidgetAlignment([bool](#bool_1))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | bool \[Boolean\] - Mandatory | Indicates if the default padding is set. True - Default padding is applied to textbox widgets. False - No default padding is applied to textbox widgets. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    voltmx.application.setRespectImageSizeForImageWidgetAlignment(true);
+{% highlight VoltMx %}
+voltmx.application.setRespectImageSizeForImageWidgetAlignment(true);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Implementation Details
+### Implementation Details
 
 If this API is not used, the Image widget width is always the given width and image is center aligned.
 
-Platform Availability
+### Platform Availability
 
 Available on iPhone and iPad.
 
@@ -4137,15 +4229,18 @@ Available on iPhone and iPad.
 
 This function enables you to create or update data for a secondary tile for an application. For more information about secondary tiles, refer [Secondary tiles](http://msdn.microsoft.com/en-us/library/windows/apps/hh465372.aspx).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setSecondaryTile([id](#id2), [shortname](#title), [displayname](#displayname), [imagename](#imagename))  
+{% endhighlight %}
 
+{% highlight VoltMx %}
 setSecondaryTile([id](#id2), [shortname](#title), [displayname](#displayname), [imagename](#imagename))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | id \[String\] - Mandatory | Unique identifier of the secondary tile. |
@@ -4153,25 +4248,25 @@ Input Parameters
 | displayname\[String\] - Optional | The text specified here is displayed when you hover over the tile. There is no restriction on the display name length or the characters that it can contain. |
 | imagename \[String\] - Optional | Name of the image to be displayed on the tile. |
 
- 
 
-Example
+### Example
 
-{% highlight voltMx %}//Setting a secondary tile for an application with tile id myTile1.
+{% highlight VoltMx %}
+//Setting a secondary tile for an application with tile id myTile1.
 voltmx.application.setSecondaryTile("myTile1", "title text", "display name", "orange.png");
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-UI Behavior - Windows 10
+### UI Behavior - Windows 10
 
 The title and the display name of the tile will be displayed in white or black depending on the setting in Volt MX Irisand this behavior cannot be changed even if the user sets a different theme or a background image. Unlike Mango, tiles cannot be flipped on Windows 10. The tile can be updated dynamically in Windows 10.
 
 ![](resources/images/live_tile_win8_142x141.png)
 
-Platform Availability
+### Platform Availability
 
 Available on Windows.
 
@@ -4184,31 +4279,34 @@ Available on Windows.
 
 Sets a flag indicating that the current form is ready to be cached for search engine optimization.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setSeoDataReadyFlag()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    // This function is added to the form.  
+{% highlight VoltMx %}
+// This function is added to the form.  
 function seoReady() {  
 voltmx.application.setSeoDataReadyFlag();
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 By default, most forms in Volt MX Iris SPA web applications cannot be seen by web search spider robots when they crawl the web to index pages. For example, e Google robot crawls the web at regular intervals searching for web pages to index on servers all over the internet. When it encounters a Volt MX SPA web application, it will likely see only the first form. The content in other forms, which may be of significant value when users search the web, is not indexed.
 
-To make Volt MX SPA web application content visible to search engines so that they can perform optimal searches, you can enable search engine optimization (SEO) for their apps, as described in the Volt MX IrisUser Guide. Calling `setSeoDataReadyFlag` for each form tells the VoltMX's SRO technology to cache the form for SEO.
+To make Volt MX SPA web application content visible to search engines so that they can perform optimal searches, you can enable search engine optimization (SEO) for their apps, as described in the Volt MX IrisUser Guide. Calling `setSeoDataReadyFlag` for each form tells the Volt MX's SRO technology to cache the form for SEO.
 
 You app should only call the `setSeoDataReadyFlag` function after all service call responses are processed, all required data is rendered, and the Volt MX Iris form is ready to be cached. A good time for your app to invoke the `setSeoDataReadyFlag` function is when it is processing the form's `postShow` event.
 
@@ -4225,20 +4323,22 @@ This API is introduced to support the Semantic Zoom feature introduced with Wind
 
 ![](resources/images/semantic_zoom.png)
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.setZoomedOutView([formid](#formid))
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
-  
 | Parameter | Description |
 | --- | --- |
 | formid \[Widget Reference\] - Mandatory | Specifies the id of the form to be displayed when the user zooms out of the application. |
 
-Example
+### Example
 
-{% highlight voltMx %}                    //Zooming out of a an application and displaying a form with an id myForm1 on zoomout
+{% highlight VoltMx %}
+//Zooming out of a an application and displaying a form with an id myForm1 on zoomout
 
 function zoomout()
 {
@@ -4247,11 +4347,11 @@ function zoomout()
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Windows
 
@@ -4264,55 +4364,57 @@ Windows
 
 This API allows you to display a loading screen (following a certain color schema) to the user while another action is in progress. The loading screen can be defined in such a way it can either block the UI or does not block the UI. Typically, the loading screen is a semi-transparent screen over-laid on the current form.
 
-Use Case
+### Use Case
 
 You can use this API to display a loading screen to the end user with a specific skin attached to it in the following scenarios:
 
 *   on invoking a service
 *   on executing a user-defined function that takes some time for execution.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.showLoadingScreen([skin](#skin), [text](#text), [position](#position), [isBlocked](#isBlocked), [showProgressIndicator](#showProgressIndicator), [properties](#properties))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-skin \[skin identifier\] - Mandatory
+**skin \[skin identifier\] - Mandatory**
 
 The skin to be applied to the loading screen. All the skin attributes supported by different platforms are applicable. This is a reference to an existing skin. If it is nil, the native platform skin is applied.
 
-text \[String\] - Mandatory
+**text \[String\] - Mandatory**
 
 The text to be displayed when displaying the loading screen. For example, "Searching flights...". If it is nil, no text is displayed.
 
-position \[String\] - Mandatory
+**position \[String\] - Mandatory**
 
 Indicates the position of the loading screen, whether it should occupy the entire screen or just the center of the screen. The possible values for position are :
 
-> *   constants.LOADING\_SCREEN\_POSITION\_FULL\_SCREEN (default)
-> *   constants.LOADING\_SCREEN\_POSITION\_ONLY\_CENTER.
+*   constants.LOADING\_SCREEN\_POSITION\_FULL\_SCREEN (default)
+*   constants.LOADING\_SCREEN\_POSITION\_ONLY\_CENTER.
 
-> > **_Note:_** Currently only center and fullscreen are supported.
+> **_Note:_** Currently only center and fullscreen are supported.
 
-isBlocked \[Boolean\] - Mandatory
+**isBlocked \[Boolean\] - Mandatory**
 
 Indicates if the UI should be blocked.
 
-> *   true - no click and scroll is allowed on the UI. The Back button on the device also does not work. true is the default value.
-> *   false - click and scroll is allowed(UI is not blocked) and back button of the device also works.
+*   true - no click and scroll is allowed on the UI. The Back button on the device also does not work. true is the default value.
+*   false - click and scroll is allowed(UI is not blocked) and back button of the device also works.
 
 If nothing is specified, default value is used.
 
-showProgressIndicator \[Boolean\] - Mandatory
+**showProgressIndicator \[Boolean\] - Mandatory**
 
 Indicates if the progress indicator should be displayed.
 
-> *   true - displays the progress indicator. true is the default value.
-> *   false - does not display the progress indicator.
+*   true - displays the progress indicator. true is the default value.
+*   false - does not display the progress indicator.
 
 > **_Note:_** The progress indicator is a set of animating images.
 
-properties \[Object\] - Mandatory
+**properties \[Object\] - Mandatory**
 
 Indicates the platform specific properties to be applied to the loading screen.
 
@@ -4326,9 +4428,10 @@ The following are the key-value pairs to be passed in the table for all platform
 
 <table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><th class="TableStyle-Basic-BodyE-Column1-Body1">Key</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><td class="TableStyle-Basic-BodyB-Column1-Body1">progressIndicatorColor (String)</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Color is applied for progress indicator when it is shown. (Optional) <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>All colors with RGBA&nbsp;(Hex code) are supported, but for "white" and "gray" you can pass it as a string value. Color value should be similar to the value provided in the theme.</td></tr></tbody></table>
 
-Example
+### Example
 
-{% highlight voltMx %}                    //Invoking showLoadingScreen on iPhone platform.
+{% highlight VoltMx %}
+//Invoking showLoadingScreen on iPhone platform.
 
 voltmx.application.showLoadingScreen(null, "testf",
     constants.LOADING_SCREEN_POSITION_ONLY_CENTER, false, true, {
@@ -4337,7 +4440,10 @@ voltmx.application.showLoadingScreen(null, "testf",
         progressIndicatorType: constants.PROGRESS_INDICATOR_TYPE_SMALL,
         progressIndicatorColor: "Gray"
     });
-{% endhighlight %}{% highlight voltMx %}                    //Invoking showLoadingScreen on other platform.
+{% endhighlight %}
+
+{% highlight VoltMx %}
+//Invoking showLoadingScreen on other platform.
 
 voltmx.application.showLoadingScreen("loadskin", "LoadingScreen", constants.LOADING\_SCREEN\_POSITION\_ONLY\_CENTER, false, true, {
     enableMenuKey: true,
@@ -4350,11 +4456,11 @@ voltmx.application.showLoadingScreen("loadskin", "LoadingScreen", constants.LOAD
 > **_Note:_** Ensure that you define the Pre Appinit event of the app as follows:  
 `voltmx.application.setApplicationBehaviors({"stopLoadingScreenDismissOnFormNavigation":true})`  
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Mobile Web.
 
@@ -4379,17 +4485,20 @@ Some sample use cases include navigation while driving, tracing the path while r
     Appropriate entries are added to the **AndroidManifest.xml** file depending on the type of the location listener.
 *   Enable the **Use Google Play Location Services** checkbox in the **Project Settings** > **Native** > **Android** section.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.startForegroundService(foregroundServiceType,notificationConfig)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 <table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><td class="TableStyle-Basic-BodyE-Column1-Body1">foregroundServiceType[Constant] - Mandatory</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the type of the foreground service. The available foreground service type constant is voltmx.service.LOCATION.</td></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><td class="TableStyle-Basic-BodyB-Column1-Body1">notificationConfig- Mandatory</td><td class="TableStyle-Basic-BodyA-Column1-Body1">An object with notification properties. Following are the properties: title[String]- Mandatory: Specifies the title of the notification, i18n Strings can be used. body[String]: Specifies the content body of the notification, i18n Strings can be used. autoHideNotificationInForeground: Specifies whether the notification must be hidden when activity comes to the foreground. The property works until the foreground service is stopped. Notification is always shown when the activity goes to background irrespective of this property while service is running. onNotificationClick: An event callback is invoked by the platform when the user performs a click action on the foreground service notification. actions[JSObject[]]: Specifies a list of actions to be shown to the user in the notification. Each action object in the list contains the following keys: actionType [Constant]- Specifies the type of the action, The available actions type constants are voltmx.application.FGSERVICE_ACTION_LAUNCH_ACTIVITY and voltmx.application.FGSERVICE_ACTION_CUSTOM actionText [String]- A text describing the action. i18n Strings can be used. If this is set to null or an empty string, the action is not populated in notification. actionCallback[Function]- An action callback is invoked by the platform when the user performs a click action on the button in notification.</td></tr></tbody></table>
 
-Example
+### Example
 
-{% highlight voltMx %}                    var notificationConfig= {
+{% highlight VoltMx %}
+var notificationConfig= {
 title : "Notification Title",
 body : "Notification Content",
 actions:[ {actionType: voltmx.application.LAUNCH_ACTIVITY,
@@ -4404,11 +4513,11 @@ function activityActionCallback() {
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Android
 
@@ -4427,25 +4536,27 @@ When invoked, this API enables you to stop the foreground service for an applica
     Appropriate entries are added to the **AndroidManifest.xml** file depending on the type of the location listener.
 *   Enable the **Use Google Play Location Services** checkbox in the **Project Settings** > **Native** > **Android** section.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.stopForegroundService(foregroundServiceType)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 <table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><td class="TableStyle-Basic-BodyB-Column1-Body1">foregroundServiceType[Constant] - Mandatory</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the type of the foreground service. The available foreground service type constant is voltmx.service.LOCATION.</td></tr></tbody></table>
 
-Example
+### Example
 
-{% highlight voltMx %}                    voltmx.application.stopForegroundService(voltmx.service.LOCATION);  
-
+{% highlight VoltMx %}
+voltmx.application.stopForegroundService(voltmx.service.LOCATION);  
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Android
 
@@ -4458,35 +4569,38 @@ Android
 
 This API specifies that the application must _not_ timeout after a defined period of inactivity (time difference between the current device time and the last time you clicked on any user interface component). This API unregisters the application from idletimeout.
 
-Use Case
+### Use Case
 
 This API must be used in case you do not want to track the idle time, i.e., do not want to logout even if the application is inactive for a specific time interval.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.unregisterForIdleTimeout()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    function unregisterForIdleTimeout() {
+{% highlight VoltMx %}
+function unregisterForIdleTimeout() {
     voltmx.application.unregisterForIdleTimeout();
     alert("====unRegister======");
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 None
 
-Rules and Restrictions
+### Rules and Restrictions
 
 This API is applicable only when the Form property _Enable Time Out_ is set to _true_. For more information about _Enable Time Out_ property, see _Widget User Guide_.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -4505,17 +4619,20 @@ When invoked, this API enables you to customize and update the existing notifica
     Appropriate entries are added to the **AndroidManifest.xml** file depending on the type of the location listener.
 *   Enable the **Use Google Play Location Services** checkbox in the **Project Settings** > **Native** > **Android** section.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.updateForegroundNotification(\[foregroundServiceType,notificationConfig)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 <table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><td class="TableStyle-Basic-BodyE-Column1-Body1">foregroundServiceType[Constant] - Mandatory</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the type of the foreground service. The available foreground service type constant is voltmx.service.LOCATION.</td></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><td class="TableStyle-Basic-BodyB-Column1-Body1">notificationConfig- Mandatory</td><td class="TableStyle-Basic-BodyA-Column1-Body1">An object with notification properties. Following are the properties: title[String]- Mandatory: Specifies the title of the notification, i18n Strings can be used. body[String]: Specifies the content body of the notification, i18n Strings can be used. autoHideNotificationInForeground: Specifies whether the notification must be hidden when activity comes to the foreground. The property works until the foreground service is stopped. Notification is always shown when the activity goes to background irrespective of this property while service is running. onNotificationClick: An event callback is invoked by the platform when the user performs a click action on the foreground service notification. actions[JSObject[]]: Specifies a list of actions to be shown to the user in the notification. Each action object in the list contains the following keys: actionType [Constant]- Specifies the type of the action, The available actions type constants are voltmx.application.FGSERVICE_ACTION_LAUNCH_ACTIVITY and voltmx.application.FGSERVICE_ACTION_CUSTOM actionText [String]- A text describing the action. i18n Strings can be used. If this is set to null or an empty string, the action is not populated in notification. actionCallback[Function]- An action callback is invoked by the platform when the user performs a click action on the button in notification.</td></tr></tbody></table>
 
 Example
 
-{% highlight voltMx %}                    var notificationConfig= {
+{% highlight VoltMx %}
+var notificationConfig= {
 title : "Location Details",
 content : "Longitude : 17.3850, Latitude:  78.4867",
 actions:[ {actionType: voltmx.application.LAUNCH_ACTIVITY,
@@ -4535,11 +4652,11 @@ function serviceActionCallback() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Android
 
@@ -4552,32 +4669,35 @@ Android
 
 This API enables you to zoom in on an application programmatically. If the application is already zoomed in, this API has no effect.
 
-UseCase
+### UseCase
 
 Suppose your application is in a zoomed out state where the contacts associated with that letter is displayed. You can use this API to view all the contacts alphabeticallyand present the data using the letters of the alphabet.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.zoomIn()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}                    //Enabling zoomin on an application
+{% highlight VoltMx %}
+//Enabling zoomin on an application
 
 function zoomIn(){
     voltmx.application.zoomIn();
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Windows
 

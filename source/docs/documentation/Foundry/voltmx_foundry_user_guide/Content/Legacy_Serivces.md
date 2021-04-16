@@ -22,7 +22,8 @@ Read the following limitations for legacy services before migrating your apps to
 
 ### Limitations - SAP JCo Connector
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details](javascript:void(0);)
+
+<details close markdown="block"><summary>Click here for more details</summary>
 
 *   Due to limitations of the SAP JCo connector, Volt MX Foundry does not support middleware and services together to connect to same or different SAP systems on WebLogic, JBoss, and WebSphere. SAP JCo connector can be enabled either on middleware or services.
 *   When an app that contains an SAP JCo service is migrated, the **Service Type** field is filled in **SAP JCO Legacy** in the [integration](Services.html#integration) tab of the Volt MX Foundry Console, shown below:
@@ -48,10 +49,12 @@ Read the following limitations for legacy services before migrating your apps to
     
 *   When an app that contains an Orchestration service referenced by legacy services is migrated, you can only view operations of the Orchestration service in Volt MX Foundry. You cannot edit the Orchestration service.
     
+</details>
 
 ### Limitations - Scraper Connector
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details](javascript:void(0);)
+
+<details close markdown="block"><summary>Click here for more details</summary>
 
 *   For each scraper service, there should be a corresponding dsl file.
     
@@ -88,7 +91,8 @@ Read the following limitations for legacy services before migrating your apps to
     #### Scraper services with a custom classname
     
     As custom classnames are no longer supported for scraper services, you must modify the custom classname to `com.voltmx.scrapper.gc.ScrapperJavaService`.
-    
+
+</details>    
 
 How to Enable SAP JCo Configurations on Standalone JBoss Server
 ---------------------------------------------------------------

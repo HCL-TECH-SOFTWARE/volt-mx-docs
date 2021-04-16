@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_api_dev_guide"
 ---
-                            
-
 
 image Object
 ============
@@ -15,42 +13,42 @@ Methods
 
 The image Object contains the following methods.
 
-
 <details close markdown="block"><summary>compress Method</summary> 
 
 * * *
 
 Compresses an image by the specified compression ratio.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 <<imageObject>>.compress(compressionRatio)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | compressionRatio | A floating point value that specifies the amount of compression to use. |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}var imgObj = voltmx.image.createImage(rawBytes);
+{% highlight VoltMx %}
+var imgObj = voltmx.image.createImage(rawBytes);
 imgObj.compress(0.8);
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This method compresses the Image object's bitmap using the JPEG compression algorithm. The floating point value in the _compressionRatio_ parameter must be in the range of 0.0<=_compressionRatio_<=1.0. If _compressionRatio_ is 0.0, this method uses the minimum amount of compression. A value of 1.0 specifies the maximum amount of compression. Values outside the allowed range will be clamped to the nearest valid value. The compression data size that this method produces will vary depending on the hardware platform.
 
-Availability
+### Availability
 
 Available on iOS and Android.
 
@@ -61,38 +59,39 @@ Available on iOS and Android.
 
 This method crops the bitmap contained by the Image object to the size of the input rectangle.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 cropToRect(  
     array)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
 | --- | --- |
 | array | An array of integers specifying the cropping rectangle in the order (x,y,width,height). |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}var imgObj = voltmx.image.createImage(rawBytes);
+{% highlight VoltMx %}
+var imgObj = voltmx.image.createImage(rawBytes);
 imgObj.cropToRect([0, 0, 720, 720]);
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This method crops the current Image object's bitmap to the size of the rectangle specified in the _array_ parameter, altering the bitmap in the process.
 
 If there is no intersection between the Image object's bitmap and the rectangle in the _array_ parameter, then no cropping is performed.
 
-Availability
+### Availability
 
 Available on iOS and Android.
 
@@ -105,12 +104,14 @@ Available on iOS and Android.
 
 Searches for and retrieves and image in the device's gallery of pictures.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 findImageInGallery(  
     config)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -119,9 +120,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}var imgObj = voltmx.image.createImage("src.png");
+{% highlight VoltMx %}
+var imgObj = voltmx.image.createImage("src.png");
 imgObj.writeToGallery();
 
 var uniqueImgIdentifier;
@@ -137,11 +139,11 @@ config = {
 var rawBytesObj = findImageInGallery(config);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns an object of type voltmx.types.RawBytes that contains the RawBytes image data if the file exists, or `null` if the file is not found.
 
-Exceptions
+### Exceptions
 
 | Value | Description |
 | --- | --- |
@@ -156,12 +158,14 @@ Exceptions
 
 Retrieves the image height as an integer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 getImageAsRawBytes(  
     encodingFormat)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -170,9 +174,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}var imgobj = voltmx.image.createimage(rawbytes);
+{% highlight VoltMx %}
+var imgobj = voltmx.image.createimage(rawbytes);
 var imgobj = voltmx.image.createimage(form1.camera1.rawbytes);
 imgobj.writetomediagallery();
 var uniqueimgidentifier;
@@ -188,11 +193,11 @@ var rawbytesobj = voltmx.image.findimageingallery(config);
 form1.img1.rawbytes = rawbytesobj;
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 The Image object's bitmap in RawBytes format if an image format is specified. If not, this method returns the RawBytes data in a platform-specific formats.
 
-Availability
+### Availability
 
 Available on iOS and Android.
 
@@ -203,27 +208,30 @@ Available on iOS and Android.
 
 Retrieves the image height as an integer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 getImageHeight();
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}var imgObj = voltmx.image.createImage(rawBytes);
+{% highlight VoltMx %}
+var imgObj = voltmx.image.createImage(rawBytes);
 var imgHeight = imgObj.getImageHeight();
 voltmx.print("Image height is:" + imgHeight);
 form1.img1.rawbytes = rawbytesobj;
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 An integer that specifies the height of the Image.
 
-Availability
+### Availability
 
 Available on iOS and Android.
 
@@ -234,26 +242,29 @@ Available on iOS and Android.
 
 Retrieves the image width as an integer.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 getImageWidth();
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}var imgObj = voltmx.image.createImage(rawBytes);  
+{% highlight VoltMx %}
+var imgObj = voltmx.image.createImage(rawBytes);  
 var imgWidth = imgObj.getImageWidth();  
 voltmx.print("Image width is:" + imgWidth);
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 An integer that specifies the object of the Image.
 
-Availability
+### Availability
 
 Available on iOS and Android.
 
@@ -264,26 +275,29 @@ Available on iOS and Android.
 
 Removes the internal image from the image object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 <<imageObject>>.releaseImage()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}var imgObj = voltmx.image.createImage(rawB);
+{% highlight VoltMx %}
+var imgObj = voltmx.image.createImage(rawB);
 imgObj.releaseImage();
 
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None.
 
-Availability
+### Availability
 
 Available on iOS.
 
@@ -294,11 +308,13 @@ Available on iOS.
 
 Rotates an imageObject either in a clockwise or counter-clockwise manner, depending on the specified rotation degree. In addition, you can use this API on Windows platform to crop the edges of the rotated image based on the provided cropImage value.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 <<imageObject>>.rotate(degree, cropImage)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -308,9 +324,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}//Rotate image without crop filter applied  
+{% highlight VoltMx %}
+//Rotate image without crop filter applied  
 var imageObject = voltmx.image.createImage("Image.png");  
 imageObject.rotate(45);  
   
@@ -319,20 +336,20 @@ var imageObject = voltmx.image.createImage("Image.png");
 imageObject.rotate(45, true);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 *   The rotate API does not return a new rotated image, instead it rotates the received image.
     
 
-Limitations
+### Limitations
 
 *   The cropImage parameter is applicable only for the Windows platform.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -345,11 +362,13 @@ Platform Availability
 
 Scales the bitmap in the current Image object to a larger or smaller size.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 scale(scaleFactor)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -358,24 +377,25 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}var imgObj = voltmx.image.createImage(rawB);
+{% highlight VoltMx %}
+var imgObj = voltmx.image.createImage(rawB);
 imgObj.scale(0.4);
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 The floating point number in the _scaleFactor_ parameter cannot be less than zero. If it is in the range 0.0<=_scaleFactor_<1.0, the bitmap size will be reduced. Depending on the hardware and the size of the bitmap, distortion or blurring of the image can occur when it is reduced. If _scaleFactor_ equals 1, this method does nothing.
 
 When your app sets _scaleFactor_ to a value greater than 1.0, the size of the bitmap increases. Values greater than 2.0 may result into memory warnings on some platforms. The resultant image quality may differ on platforms due to interpolation algorithms used.
 
-Availability
+### Availability
 
 Available on iOS and Android.
 
@@ -386,12 +406,14 @@ Available on iOS and Android.
 
 Writes an image to device's media gallery.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 writeToMediaGallery(  
     config)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 _config_
 
@@ -410,9 +432,10 @@ Optional. A dictionary with configurable properties. If you do not specify the c
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}var config =
+{% highlight VoltMx %}
+var config =
 
 {
     albumName: "MyAlbum",
@@ -425,11 +448,11 @@ var img = voltmx.image.createImage(imgName);
 img.writeToMediaGallery(config);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 You can make use of the `writeToImageGallery` function when end user wants to save an image from your app to device's gallery. The image gets saved to media gallery based on the properties you pass in the `config` parameter. If you do not pass the `config` parameter to the function, the image gets saved to the device's public location.
 
@@ -437,22 +460,24 @@ On iOS, there is no loss of image quality when you call the `writeToImageGallery
 
 Your app may require runtime permissions to access the device's media gallery. For more information on checking, requesting, and obtaining runtime permissions, please see [Runtime Permissions API](runtime_permissions.html).
 
-Limitations
+### Limitations
 
-iOS
+### iOS
 
 To use the `writeToImageGallery` function for the iOS platform, open the the app's Info.plist and define the key NSPhotoLibraryUsageDescription. Add reason for accessing the media gallery as a string value to the key. Otherwise, the app crashes.
 
-Android
+### Android
 
 The directory path of the primary external storage is dependent on the device. When your app calls the `writeToImageGallery` function , the function accesses the device's external storage to save the image. Generally, the external storage is an SD card inserted into the device that can store relatively large amount of data. There is also the possibility that the devices uses built-in storage that is distinct from the protected internal storage. The `writeToImageGallery` function uses the directory path of the external storage provided by the device's OS for saving images.
 
-Platform Availability
+### Platform Availability
 
 Android
 
 iOS 8 and later versions
 
 Windows
+
+</details>
 
 ![](resources/prettify/onload.png)

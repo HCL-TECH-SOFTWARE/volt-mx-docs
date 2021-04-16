@@ -12,39 +12,41 @@ TemplateController Events
 
 The TemplateController object supports the following events.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onCreateView Event](javascript:void(0);) 
+<details close markdown="block"><summary>onCreateView Event</summary> 
 
 * * *
 
 Called when the controller is ready to create the view.
 
-Syntax
+### Syntax
 
 onCreateView();
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 Returns either the file name of the template to use as the view or an instance of the template.
 
-Remarks
+### Remarks
 
 Use this method to dynamically select which view to use for the controller when your app has more than one view for a controller. For more information, see [Sharing Controllers Between Forms](A_Deeper_Look_at_VoltMX_Reference_Architecture.html#share-controllers-between-forms).
 
-Example 1
+### Example 1
 
-{% highlight voltMx %}onCreateView : function ()
+{% highlight VoltMx %}
+onCreateView : function ()
 {
     return "ViewFileName.js");
 }				
 {% endhighlight %}
 
-Example 2
+### Example 2
 
-{% highlight voltMx %}onCreateView : function ()
+{% highlight VoltMx %}
+onCreateView : function ()
 {
     // Create an instance of the view to return or 
     // retrieve the instance from somewhere in your 
@@ -56,31 +58,33 @@ Example 2
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDestroy Event](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>onDestroy Event</summary> 
 
 * * *
 
 Triggered just before a template is destroyed.
 
-Syntax
+### Syntax
 
 onDestroy();
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 Use this event callback handler function to perform cleanup tasks when a template is about to be destroyed.
 
-Example
+### Example
 
-{% highlight voltMx %}onDestroy : function ()
+{% highlight VoltMx %}
+onDestroy : function ()
 {
     this.context = null;
     this.model = null;
@@ -89,31 +93,33 @@ Example
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onViewCreated](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>onViewCreated</summary> 
 
 * * *
 
 Triggered when the view is created.
 
-Syntax
+### Syntax
 
 onViewCreated();
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This method is automatically invoked just after the onCreateView event has finished and the template's view has been created. Developers can use this method to configure the template.
 
-Example
+### Example
 
-{% highlight voltMx %}onViewCreated: function ()
+{% highlight VoltMx %}
+onViewCreated: function ()
 {
     this.view.addGestureRecognizer(
         constants.GESTURE_TYPE_SWIPE, 
@@ -127,3 +133,4 @@ Example
 {% endhighlight %}
 
 * * *
+</details>

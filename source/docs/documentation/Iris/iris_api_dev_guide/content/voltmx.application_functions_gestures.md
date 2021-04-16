@@ -10,19 +10,22 @@ Functions
 
 The Gesture API contains the following functions, which are part of the [voltmx.application Namespace](voltmx.application_functions.html).
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.addGestureRecognizerForAllForms](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.application.addGestureRecognizerForAllForms</summary>
 
 * * *
 
 Using the addGestureRecognizerForAllForms function, you can set a gesture recognizer for all the forms.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.addGestureRecognizerForAllForms ([gestureType](#gestureType1), [gestureConfigParams](#gestureConfigParams1),[onGestureClosure](#onGestureClosure1))
+{% endhighlight %}
 
-**Input Parameters**
+### Input Parameters
 
-**gestureType \[Number\] - Mandatory**
+#### gestureType \[Number\] - Mandatory
 
 Indicates the type of gesture that must be detected on the widget. Following are the possible gestureType values:
 
@@ -35,11 +38,10 @@ Indicates the type of gesture that must be detected on the widget. Following are
 *   7 - constants.GESTURE\_TYPE\_RIGHTTAP
 
 > **_Note:_**  
-
 *   RIGHTTAP is applicable only to Windows 10 platform.
 *   ROTATION is not supported on Android.
 
-**gestureConfigParams \[object\] - Mandatory**
+### gestureConfigParams \[object\] - Mandatory
 
 Specifies a table that has the configuration parameters that are required to setup a gesture recognizer. The configuration parameters vary based on the type of the gesture.
 
@@ -52,11 +54,13 @@ Specifies a table that has the configuration parameters that are required to set
 | ROTATION | fingers \[Number\] - The number of fingers that are required to recognize the gesture. The Default value is 2. continuousEvents \[Boolean\] - indicates if callback must be called continuously for every change beginning from the time the gesture is recognized to the time it ends. |
 | PINCH | fingers \[Number\] - The number of fingers that are required to recognize the gesture. The Default value is 2. continuousEvents \[Boolean\] indicates if callback should be called continuously every change beginning from the time the gesture is recognized to the time it ends. |
 
-**onGestureClosure \[function\] - Mandatory**
+### onGestureClosure \[function\] - Mandatory
 
 Specifies the function that needs to be executed when a gesture is recognized. This function will be raised asynchronously and has the following signature:
 
-> onGestureClosure(widgetRef, gestureInfo, context)
+{% highlight VoltMx %}
+onGestureClosure(widgetRef, gestureInfo, context)
+{% endhighlight %}
 
 | Parameter | Description |
 | --- | --- |
@@ -66,7 +70,7 @@ Specifies the function that needs to be executed when a gesture is recognized. T
 
  
 
-**gestureInfo table has the following key-value pairs:**
+### gestureInfo table has the following key-value pairs:
 
 | Key | Description |
 | --- | --- |
@@ -88,7 +92,7 @@ Specifies the function that needs to be executed when a gesture is recognized. T
 
  
 
-**context table has the following key-value pairs**:
+### context table has the following key-value pairs:
 
 | Key | Description |
 | --- | --- |
@@ -97,9 +101,10 @@ Specifies the function that needs to be executed when a gesture is recognized. T
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining a function
+{% highlight VoltMx %}
+//Defining a function
 function formGesture(widgetID, gestureInfo) {
     var y = voltmx.type(gestureInfo); //expected value of y = table
     var z = voltmx.type(gestureInfo.gesturesetUpParams); //expected values of z = table
@@ -174,27 +179,30 @@ function callbackSingleTapGesture() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 String - Reference to the gesture is returned.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Server Side Mobile Web and Desktop Web.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.removeGestureRecognizerForAllForms](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.removeGestureRecognizerForAllForms</summary>
 
 * * *
 
 This method allows you to remove a specified gesture recognizer for all Forms.
 
-**Syntax**
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.application.removeGestureRecognizerForAllForms(uniqueIdentifier)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -202,9 +210,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}function callbackClearLongPressGesture() {
+{% highlight VoltMx %}
+function callbackClearLongPressGesture() {
     try {
         voltmx.application.removeGestureRecognizerForAllForms(uniqueidentifier);
     } catch (err) {
@@ -214,10 +223,11 @@ Example
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Server Side Mobile Web and Desktop Web.
 
 * * *
+</details>
 
 ![](resources/prettify/onload.png)

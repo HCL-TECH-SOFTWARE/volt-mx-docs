@@ -9,44 +9,51 @@ Properties
 
 The HttpRequest object contains the following properties.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundTransfer Property](javascript:void(0);) 
+
+<details close markdown="block"><summary>backgroundTransfer Property</summary> 
 
 * * *
 
 Enables HTTP request calls in the background.  
 This property is only available on the iOS platform.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 httpClient.backgroundTransfer
+{% endhighlight %}
 
-Type
+
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 The default value for the backgroundTransfer property is **false**.
 
-> **_Note:_** The iOS platform internally retries to keep the request connected until it reaches the timeoutIntervalForResource value, which may cause duplicate transactions to occur on the system. Hence, HCL recommends that you use the backgroundTransfer property only for GET calls.
+>**_Note:_** The iOS platform internally retries to keep the request connected until it reaches the timeoutIntervalForResource value, which may cause duplicate transactions to occur on the system. Hence, HCL recommends that you use the backgroundTransfer property only for GET calls.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[integrityStatus Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>integrityStatus Property</summary> 
 
 * * *
 
 Contains the status of the integrity check, if integrity checking is enabled.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 integrityStatus
+{% endhighlight %}
 
-Type
+### Type
 
 Constant. Can be one of the following values.  
 
@@ -56,35 +63,38 @@ Constant. Can be one of the following values.
 | constants.HTTP\_INTEGRITY\_CHECK\_NOT\_DONE | The response has not yet been received, or integrity checking is not enabled, so the `integrityStatus` property has not yet been populated. |
 | constants.HTTP\_INTEGRITY\_CHECK\_SUCCESSFUL | The integrity check was successful. |
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 If the `validateResp` argument in the `propertiesTable` parameter of the [voltmx.net.setIntegrtityCheck](voltmx.net_functions.html#setIntegrtityCheck) function is set to `true`, then integrity checking is performed on the HTTP responses that your client app exchanges with the server app. For more information on integrity checking, please see [HTTP Integrity Checking](networkapi_httpintegritychecking.html#http-integrity-checking).
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[readyState Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>readyState Property</summary> 
 
 * * *
 
 Holds the current status of the HttpRequest object
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 readyState
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 The possible values of the readyState property are as follows.
 
@@ -92,25 +102,28 @@ The possible values of the readyState property are as follows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[response Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>response Property</summary> 
 
 * * *
 
 Contains the HTTP response.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 httpRequest.response
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 After the response has been received, this property contains the response body. The type of the value depends on the value of the _responseType_ property.
 
@@ -128,25 +141,28 @@ In the case where an exception is thrown, this property contains empty string.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[responseType Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>responseType Property</summary> 
 
 * * *
 
 Contains the type of the HTTP response.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 httpRequest.responseType
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 Holds the response type when the response arrives. By default, it is empty string until the response is received. The possible values are:
 
@@ -159,73 +175,82 @@ Holds the response type when the response arrives. By default, it is empty strin
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[status Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>status Property</summary> 
 
 * * *
 
 Holds the HTTP status code.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 httpRequest.status
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 Contains the HTTP status code, which is 0 if the status of the request is not sent; that is, the **send** function is still not invoked on this object.
 
 * * *
 
- [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);) [statusText Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>statusText Property</summary>
 
 * * *
 
 Holds a text message describing the status of the HTTP request.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 httpRequest.statusText
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 Contains the HTTP reason phrase of the status line, which is an empty string, if the status of the request is not sent; that is, the **send** function is still not invoked on this object. The reason phrase for a given status code is based on the http specification (RFC 2616). However, these phrases are only recommendations and may vary with other equivalent phrases by individual platform implementations.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[timeout Property](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>timeout Property</summary> 
 
 * * *
 
 Controls the HTTP request timeout value.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 httpRequest.timeout
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The time in milliseconds a request can take before being terminated. By default, the value is zero, which means that there is no timeout set, or that the timeout is set to infinite. This timeout represents the connection timeout and the response timeout from the server.
 
@@ -234,3 +259,4 @@ The time in milliseconds a request can take before being terminated. By default,
 * * *
 
 ![](resources/prettify/onload.png)
+</details>

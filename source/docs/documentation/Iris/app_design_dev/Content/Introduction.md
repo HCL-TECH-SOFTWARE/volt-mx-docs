@@ -4,7 +4,7 @@ category: "app_design_dev"
 ---
                            
 
-Volt MX  Application Design and Development Guidelines: Preface
+Volt MX Application Design and Development Guidelines: Preface
 
 Preface
 =======
@@ -28,8 +28,7 @@ Following are the formatting conventions used throughout the document:
 
 
 <details close markdown="block"><summary>Click here</summary>
-
-  
+    
 | Conventions | Explanation |
 | --- | --- |
 | Monospace | User input text, system prompts, and responses File path Commands Program code File names |
@@ -38,6 +37,7 @@ Following are the formatting conventions used throughout the document:
 | [URL](http://a/) | Active link to a URL. |
 | _Note_ | Provides helpful hints or additional information. |
 | _Important_ | Highlights actions or information that might cause problems to systems or data. |
+
 </details>
 
 Contact Us
@@ -45,4 +45,4 @@ Contact Us
 
 We welcome your feedback on our documentation. Write to us at [techpubs@voltmx.com](mailto:techpubs@voltmx.com?subject=Documentation Feedback)
 
-For technical questions, suggestions, comments, or to report problems on VoltMX's product line, contact [support@voltmx.com](mailto:prodsupport@voltmx.com)
+For technical questions, suggestions, comments, or to report problems on Volt MX's product line, contact [support@voltmx.com](mailto:prodsupport@voltmx.com)

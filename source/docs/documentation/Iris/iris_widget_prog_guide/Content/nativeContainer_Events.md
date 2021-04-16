@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                              
-
 
 NativeContainer Events
 ======================
@@ -16,25 +14,27 @@ The NativeContainer Widget has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onCleanup Event](javascript:void(0);)
+<details close markdown="block"><summary>onCleanup Event</summary>
 
 * * *
 
 Using the onCleanup event, you can clear the views/widgets created using the onCreated event, when the form is being hidden (that is, when the form transition happens from one form to another).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onCleanup ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 NativeContainer View to which children are added.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 You are supposed to clear/clean up all the native widgets/views created in the callback. If not cleaned up properly, all views/widgets will reside in memory resulting into memory and performance consequences.
 
@@ -42,9 +42,10 @@ If required, you can re-create the widgets in the onCreated callback.
 
 The value of the native layout view becomes null when the onCleanup event is executed.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onCleanup event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onCleanup event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onCleanup=nativeCleanUp;
 function nativeCleanUp(eventobject){
@@ -52,7 +53,7 @@ function nativeCleanUp(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -60,33 +61,37 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onCreated Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onCreated Event</summary>
 
 * * *
 
 The onCreated callback event helps you create and add native widgets/views to the NativeContainer Widget, which is passed as a parameter to the callback.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onCreated ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 NativeContainer View to which children can be added.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The widgets added to the NativeContainer are shown on the screen as children elements to the NativeContainer along with other Volt MX Iris widgets placed in the form. The callback event will be called after the pre-show, when the actual form is about to show.
 
 Only native views/widgets should be added to the native layout view. You should not add any Volt MX Iris widgets to the NativeContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onCreated event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onCreated event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onCreated=createdCallbackCheck;
 function createdCallbackCheck(eventobject){
@@ -94,7 +99,7 @@ function createdCallbackCheck(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -102,27 +107,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDidMoveToParentViewController Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDidMoveToParentViewController Event</summary>
 
 * * *
 
 The callback event is invoked after the view controller is added or removed from the view controller container.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onDidMoveToParentViewController ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onDidMoveToParentViewController event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onDidMoveToParentViewController event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onDidMoveToParentViewController=moveParentView;
 function moveParentView(eventobject){
@@ -130,34 +139,38 @@ function moveParentView(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onLayoutSubviews Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onLayoutSubviews Event</summary>
 
 * * *
 
 Using the callback, you can lay out all subviews.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onLayoutSubviews ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onLayoutSubviews event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onLayoutSubviews event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onLayoutSubviews=layoutSubviewsCallback;
 function layoutSubviewsCallback(eventobject){
@@ -165,7 +178,7 @@ function layoutSubviewsCallback(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -173,17 +186,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onOrientationChange Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onOrientationChange Event</summary>
 
 * * *
 
 The event allows you to change the orientation of the form from portrait to landscape and vice versa.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onOrientationChange ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 Constants.DEVICE\_ORIENTATION\_PORTRAIT
 
@@ -193,13 +209,14 @@ Constants.DEVICE\_ORIENTATION\_LandSCAPE
 
 On the device the form is always turned sideways so that the height of the screen becomes the width.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onOrientationChange event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onOrientationChange event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onOrientationChange=orientationChangeCallback;
 function orientationChangeCallback(eventobject){
@@ -207,7 +224,7 @@ function orientationChangeCallback(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
@@ -215,27 +232,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onViewDidAppear Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onViewDidAppear Event</summary>
 
 * * *
 
 The callback event is invoked when the native layout view appears.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onViewDidAppear ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onViewDidAppear event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onViewDidAppear event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onViewDidAppear=viewDidAppearCallback;
 function viewDidAppearCallback(eventobject){
@@ -243,34 +264,38 @@ function viewDidAppearCallback(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onViewDidDisappear Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onViewDidDisappear Event</summary>
 
 * * *
 
 The callback event is invoked when the native layout view disappears.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onViewDidDisappear ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onViewDidDisappear event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onViewDidDisappear event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onViewDidDisappear=viewDidDisappearCallback;
 function viewDidDisappearCallback(eventobject){
@@ -278,34 +303,38 @@ function viewDidDisappearCallback(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onViewDidLoad Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onViewDidLoad Event</summary>
 
 * * *
 
 The callback event is invoked after the view is loaded.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onViewDidLoad ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onViewDidLoad event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onViewDidLoad event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onViewDidLoad=viewDidLoadCallback;
 function viewDidLoadCallback(eventobject){
@@ -313,34 +342,38 @@ function viewDidLoadCallback(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onViewWillAppear Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onViewWillAppear Event</summary>
 
 * * *
 
 The callback event is invoked when the native layout view is about to appear on the screen.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onViewWillAppear ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onViewWillAppear event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onViewWillAppear event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onViewWillAppear=viewWillAppearCallback;
 function viewWillAppearCallback(eventobject){
@@ -348,34 +381,38 @@ function viewWillAppearCallback(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onViewWillDisppear Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onViewWillDisppear Event</summary>
 
 * * *
 
 The callback is invoked when the actual view is about to disappear.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onViewWillDisppear ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onViewWillDisappear event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onViewWillDisappear event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onViewWillDisappear=viewWillDisappearCallback;
 function viewWillDisappearCallback(eventobject){
@@ -383,34 +420,38 @@ function viewWillDisappearCallback(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onWillMoveToParentViewController Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onWillMoveToParentViewController Event</summary>
 
 * * *
 
 The callback event is invoked just before the view controller is added or removed from the view controller container.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onWillMoveToParentViewController ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the onWillMoveToParentViewController event callback to a NativeContainer widget.
+{% highlight VoltMx %}
+//Sample code to set the onWillMoveToParentViewController event callback to a NativeContainer widget.
 
 frmNativeC.myNativeC.onWillMoveToParentViewController=moveParentView;
 function moveParentView(eventobject){
@@ -418,10 +459,11 @@ function moveParentView(eventobject){
  }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS
 
 * * *
+</details>
 

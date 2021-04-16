@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                                
-
 
 ARRenderer Methods
 ==================
@@ -12,7 +10,7 @@ ARRenderer widget has the following methods associated with it.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[add Method](javascript:void(0);)
+<details close markdown="block"><summary>add Method</summary>
 
 * * *
 
@@ -20,11 +18,13 @@ This method is used to add the model of an object to the area scanned using the 
 
 For example, in a designing application, using this method you can add a decor item to a room to check its compatibility.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 add(\[{id, name, modelConfig}\])
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 This method accepts an array of JS objects with the following key-value pairs:
 
@@ -50,13 +50,14 @@ The following table lists the key-value pairs that can be provided in modelConfi
 | modelLocationType | voltmx.ar.MODEL\_LOCATION\_TYPE\_BUNDLE | Constant | This parameter can be used to specify how to add the model in an application. You can either add the model as part of the application bundle or as part of the application's file system. This parameter is specific to Android. It can accept any of the following constants. voltmx.ar.MODEL\_LOCATION\_TYPE\_BUNDLE voltmx.ar.MODEL\_LOCATION\_TYPE\_FILESYSTEM |
 | callback |   | JS function | This parameter specifies the JS function that is invoked when the model/ object has been added successfully or unsuccessfully to the scene.The JS function contains an eventobject with the following parameters: _status_: This argument can have any of the following constants:voltmx.ar.MODEL\_ADDITION\_SUCCESSvoltmx.ar.MODEL\_ADDITION\_FAILURE _message_: This argument contains the String value that is displayed when the model was not successfully added to the scene. |
 
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to add an object to the scene using myaRRenderer ARRenderer widget.  
+{% highlight VoltMx %}
+//Sample code to add an object to the scene using myaRRenderer ARRenderer widget.  
   
 addObjectToScreen: function() {
     try {
@@ -95,23 +96,26 @@ addCallBack: function(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>addGestureRecognizer Method</summary>
 
 * * *
 
 This API allows you to set a gesture recognizer for a specified gesture for a specified widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _gestureType_
 
@@ -141,11 +145,11 @@ This function will be raised asynchronously
 
 See Remarks for the syntax of this function.
 
-Return Values
+### Return Values
 
 String - Reference to the gesture is returned.
 
-Remarks
+### Remarks
 
 The values for the _gestureType_parameter are:
 
@@ -169,53 +173,53 @@ The parameter specifies a table that has the required configuration parameters t
 
 This parameter supports the following key-value pairs:
 
-Gesture Type:TAP
+### Gesture Type:TAP
 
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[Number\] - specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
 
-For example:  
+### For example:  
 
 {fingers:1,taps:1}
 
-Gesture Type:SWIPE
+### Gesture Type:SWIPE
 
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 
-For example:
+### For example:
 
 {fingers: 1}
 
-Gesture Type:LONGPRESS
+### Gesture Type:LONGPRESS
 
 *   pressDuration \[Number\] - specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if pressDuration is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This is not applicable to Windows.
 
-For example:
+### For example:
 
 {pressDuration=1}.
 
-Gesture Type: PAN
+### Gesture Type: PAN
 
 *   fingers \[number\] specifies the minimum number of fingers needed to recognize this gesture. Default value is 1.
 *   continuousEvents \[Boolean\] indicates if callback should be called continuously for every change beginning from the time the gesture is recognized to the time it ends.
 
-Gesture Type: ROTATION
+### Gesture Type: ROTATION
 
 *   Rotation gesture involves only two fingers.
 *   continuousEvents \[Boolean\] indicates if callback must be called continuously for every change beginning from the time the gesture is recognized to the time it ends.
 
-Gesture Type:PINCH
+### Gesture Type:PINCH
 
 *   Pinch gesture invloves two fingures.
 *   continuousEvents \[Boolean\] indicates if callback should be called continuously every change beginning from the time the gesture is recognized to the time it ends.
 
-The syntax for the _onGestureClosure_callback function are:
+### The syntax for the _onGestureClosure_callback function are:
 
 \[function\] - Mandatory
 
 Specifies the function that needs to be executed when a gesture is recognized.
 
-This function will be raised asynchronously and has the following Syntax:
+### This function will be raised asynchronously and has the following Syntax:
 
 onGestureClosure(widgetRef, gestureInfo, context)
 
@@ -261,7 +265,7 @@ If you swipe a larger form, the default behavior is to scroll up and down depend
 
 If you swipe a Segmented UI with huge number of rows, the default behavior is to scroll the Segmented UI. If you define a SWIPE gesture on such segments, the gesture closure gets executed in addition to scrolling the form.
 
-Gestures can be added only for the following widgets:
+### Gestures can be added only for the following widgets:
 
 *   Flex Container
     
@@ -273,9 +277,10 @@ In the android platform, the top and bottom gestures work only when the scrollin
 *   RIGHTTAP applicable only to Windows 10
 *   ROTATION is not supported on android.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
+{% highlight VoltMx %} 
+//Sample code to add Gestures to the frmGestures FlexForm.
 //Code to add DOUBLE TAP gesture to the frmGestures, FlexForm.
 var doubletp = {
  fingers: 1,
@@ -307,7 +312,7 @@ function onGestureFunction(commonWidget, gestureInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows
 
@@ -315,46 +320,53 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clearExperience Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>clearExperience Method</summary>
 
 * * *
 
 This method is used to delete the saved AR session.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 clearExperience(id)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _id_ \[String\]-Mandatory
 
 The unique identifier created internally to save and identify the AR session.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to invoke the clearExperience method using the arWidget ARRenderer widget.*/  
+{% highlight VoltMx %}
+/*Sample code to invoke the clearExperience method using the arWidget ARRenderer widget.*/  
   
 frmARRender.arWidget.clearExperience("saveIdentifier");
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 13 or later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointFromWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointFromWidget Method</summary>
 
 * * *
 
 This method allows you to convert the coordinate system from a widget to a point (receiver's coordinate system).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 convertPointFromWidget(point, fromWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -368,31 +380,35 @@ _fromWidget_
 
 This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from the widget to a point (receiver's coordinate system).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.convertPointFromWidget({
+{% highlight VoltMx %}
+Form1.widget1.convertPointFromWidget({
     x: "10dp",
     y: "20dp"
 }, widget2);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointToWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointToWidget Method</summary>
 
 * * *
 
 Using the convertPointToWidget method, you can modify the co-ordinate system. You can convert the receiver's co-ordinate system from a **point** to a **Widget**.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 convertPointToWidget(point, toWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -402,21 +418,23 @@ _toWidget_
 
 \[widgetref\] - Mandatory. This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from a point to a widget.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget2.convertPointToWidget({
+{% highlight VoltMx %}
+Form1.widget2.convertPointToWidget({
     x: "20dp",
     y: "30dp"
 }, widget1);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[hostCloudAnchor Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>hostCloudAnchor Method</summary>
 
 * * *
 
@@ -424,11 +442,13 @@ This method is used to add or save the model of the object and host the anchor p
 
 To use this property, you must set the [enableCloudAnchors](ARRenderer_Properties.html#enableCloudAnchors) Property to true.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 hostCloudAnchor(\[{id, name,onHostedCallback,addModelAfterHosting, modelConfig}\])
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 This method accepts an array of JS objects with the following key-value pairs:
 
@@ -453,9 +473,9 @@ This attribute specifies the JS function that is invoked when the hosting proces
 
 _modelConfig_ \[JSObject\]-Optional
 
-This attribute represents the object that needs to be added to the scene.
+### This attribute represents the object that needs to be added to the scene.
 
-The following table lists the key-value pairs that can be provided in `modelConfig` attribute.
+### The following table lists the key-value pairs that can be provided in `modelConfig` attribute.
 
   
 | Key name | Default Value | Type of the Value | Description |
@@ -466,7 +486,7 @@ The following table lists the key-value pairs that can be provided in `modelConf
 | modelLocationType | voltmx.ar.MODEL\_LOCATION\_TYPE\_BUNDLE | Constant | This parameter can be used to specify how to add the model in an application. You can either add the model as part of the application bundle or as part of the application's file system. This parameter is specific to Android. It can accept any of the following constants. voltmx.ar.MODEL\_LOCATION\_TYPE\_BUNDLE voltmx.ar.MODEL\_LOCATION\_TYPE\_FILESYSTEM |
 | callback |   | JS function | This parameter specifies the JS function that is invoked when the model/ object has been added successfully or unsuccessfully to the scene.The JS function contains an eventobject with the following parameters: _status_: This argument can have any of the following constants:voltmx.ar.MODEL\_ADDITION\_SUCCESSvoltmx.ar.MODEL\_ADDITION\_FAILURE _message_: This argument contains the String value that is displayed when the model was not successfully added to the scene. |
 
-Return Values
+### Return Values
 
 None
 
@@ -475,9 +495,10 @@ None
 *   It takes 5-20 seconds to the trigger the hosting of the anchor points.
 *   To trigger the host anchor, the device’s rear camera must be mapped to the environment in and around the center of interest from different viewing angles and positions within 30 seconds.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke hostCloudAnchor method using myaRRenderer ARRenderer widget.
+{% highlight VoltMx %}
+//Sample code to invoke hostCloudAnchor method using myaRRenderer ARRenderer widget.
 
 hostCloudAnchor: function() {
     try {
@@ -525,7 +546,7 @@ onHostedCallback: function(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
@@ -533,17 +554,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[loadExperience Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>loadExperience Method</summary>
 
 * * *
 
 This method is used to retrieve the AR world mapping data from the local device storage.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 loadExperience(id,completioncallback,modelQueryCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
   
 | Key name | Default Value | Type of the Value | Description |
@@ -552,13 +576,14 @@ Parameters
 | completioncallback |   | JS function | This parameter specifies the JS function that is invoked when the AR session is successfully recorded.This callback receives an eventobject with the following parameters: _status_: This argument can have any of the following constants:voltmx.ar.STATUS\_ERRORvoltmx.ar.STATUS\_SUCCESS _message_: This argument contains the String value that is displayed to describe the API call result. |
 | modelQueryCallback |   | JS function | This callback is triggered many times with the parameter modelID. The expected return value would be an appropriate model object corresponding to the passed model ID. |
 
-Remarks
+### Remarks
 
 Whenever the AR session is loaded, the model objects does not appear immediately. This is because when the user moves the ARRenderer widget, the widget takes some time to map the current surrounding with the saved surrounding.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke the modelQueryCallBack function to provide the input model and generate modelObject using the AR widget 
+{% highlight VoltMx %}
+//Sample code to invoke the modelQueryCallBack function to provide the input model and generate modelObject using the AR widget 
 
 function modelQueryCallback(modelID) {
     voltmx.print("load experience " + modelID);
@@ -604,23 +629,26 @@ function completion(response) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 13 or later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[remove Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>remove Method</summary>
 
 * * *
 
 This method is used to delete the model/object that has been added to the scene using the [add](#add) method.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 remove(\["id"\])
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 This method accepts an array of the following parameters.
 
@@ -628,40 +656,45 @@ _id_ \[String\]-Mandatory
 
 This parameter contains the unique identifier of the model that must be removed from the scene.  
 
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to remove the object added to a scene using myaRRenderer ARRenderer widget.  
+{% highlight VoltMx %}
+//Sample code to remove the object added to a scene using myaRRenderer ARRenderer widget.  
   
 myarRenderer.remove(["id1"]);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeFromParent Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeFromParent Method</summary>
 
 * * *
 
 This method allows you to remove a child widget from a parent widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 removeFromParent()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the removeFromParent Method for a Calendar widget.
 //You need to make a corresponding call of the removeFromParent method for other applicable widgets.
 
@@ -669,36 +702,40 @@ Form1.calendar.removeFromParent();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android , Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to remove the specified gesture recognizer for the specified widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 removeGestureRecognizer(gestureHandle)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 gestureHandle - Mandatory
 
 Specifies the handle to the gesture returned by addGestureRecognizer call.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
+{% highlight VoltMx %} 
+//Sample code to remove Double tap gesture from frmGestures FlexForm.  
 frmGestures.removeGestureRecognizer(doubletp);  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available on all platforms except Desktop Web and Android.
 
@@ -706,7 +743,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[resolveCloudAnchor Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>resolveCloudAnchor Method</summary>
 
 * * *
 
@@ -714,11 +752,13 @@ This method is used to retrieve the anchor points of the model from the Cloud. T
 
 To use this method, you must set the [enableCloudAnchor](ARRenderer_Properties.html#enableCloudAnchors) Property to true.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 resolveCloudAnchor(\[{id, name,cloudAnchorID,onResolvedCallback, modelConfig}\])
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 This method accepts an array of JS objects with the following key-value pairs:
 
@@ -748,9 +788,9 @@ This attribute specifies the JS function that is invoked while retrieving the m
 
 _modelConfig_ \[JSObject\]-Optional
 
-This attribute represents the object that needs to be added to the scene.
+### This attribute represents the object that needs to be added to the scene.
 
-The following table lists the key-value pairs that can be provided in modelConfig attribute.
+### The following table lists the key-value pairs that can be provided in modelConfig attribute.
 
   
 | Key name | Default Value | Type of the Value | Description |
@@ -759,14 +799,15 @@ The following table lists the key-value pairs that can be provided in modelConfi
 | modelLocationType | voltmx.ar.MODEL\_LOCATION\_TYPE\_BUNDLE | Constant | This parameter can be used to specify how to add the model in an application. You can either add the model as part of the application bundle or as part of the application's file system. This parameter is specific to Android. It can accept any of the following constants. voltmx.ar.MODEL\_LOCATION\_TYPE\_BUNDLE voltmx.ar.MODEL\_LOCATION\_TYPE\_FILESYSTEM |
 | callback |   | JS function | This parameter specifies the JS function that is invoked when the model/ object has been added successfully or unsuccessfully to the scene.The JS function contains an eventobject with the following parameters: _status_: This argument can have any of the following constants:voltmx.ar.MODEL\_ADDITION\_SUCCESSvoltmx.ar.MODEL\_ADDITION\_FAILURE _message_: This argument contains the String value that is displayed when the model was not successfully added to the scene. |
 
-Remarks
+### Remarks
 
 *   The resolving operation is performed continuously in the background until the anchor is resolved.
 *   To cancel the resolving operation, you must use the [remove](#remove) method.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to add a resolveCloudAnchor method using myaRRenderer ARRenderer widget.
+{% highlight VoltMx %}
+//Sample code to add a resolveCloudAnchor method using myaRRenderer ARRenderer widget.
 
 resolveCloudAnchor: function() {
     try {
@@ -811,17 +852,18 @@ onResolvedCallback: function(eventobject) {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[saveExperience Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>saveExperience Method</summary>
 
 * * *
 
-This method is used to save the mapping data object (AR world) in the device local storage.
+### This method is used to save the mapping data object (AR world) in the device local storage.
 
 When you save the AR world map, a file is created in the device storage with the default name “saveIdentifier”. All the mapping data of the surroundings is stored in this file inside the device storage.
 
@@ -829,11 +871,13 @@ You must enable the [cansaveExperienceCallback](ARRenderer_Properties.html#canSa
 
 The [cansaveExperienceCallback](ARRenderer_Properties.html#canSaveExperienceCallback) property must pass true to save the AR session successfully.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 saveExperience(id,callback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
   
 | Key name | Default Value | Type of the Value | Description |
@@ -841,13 +885,14 @@ Parameters
 | ID |   | String | The uniqueID is created internally to save and identify the AR session. |
 | callback |   | JS function | This parameter specifies the JS function that is invoked when the AR session is successfully recorded. This callback receives an event object with the following parameters: _status_: This argument can have any of the following constants:voltmx.ar.STATUS\_ERRORvoltmx.ar.STATUS\_SUCCESS _message_: This argument contains the String value that is displayed to describe the API result. |
 
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke the saveExperience method using the AR widget 
+{% highlight VoltMx %}
+//Sample code to invoke the saveExperience method using the AR widget 
 
 aRRenderWidget.saveExperience("saveIdentifier", function(response) {
     voltmx.print("save experience completion block");
@@ -856,23 +901,26 @@ aRRenderWidget.saveExperience("saveIdentifier", function(response) {
 });
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 13 or later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[startARImageDetection Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>startARImageDetection Method</summary>
 
 * * *
 
 This method is used to detect the image from the real world and displays an overlay image or video.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 startARImageDetection(config,callback)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 `callback`\[JS function\]- Mandatory
 
@@ -887,7 +935,7 @@ This parameter specifies the JS function that is invoked which returns API resul
 
 `config`\[array of JSON Objects\]- Mandatory
 
-Each JSON object contains the following key-value pairs.
+### Each JSON object contains the following key-value pairs.
 
   
 | Key name | Default Value | Type of the Value | Description |
@@ -902,13 +950,14 @@ Each JSON object contains the following key-value pairs.
 | type |   | String | This parameter specifies the type of overlay configuration. The string function contains the type of overlay which are supported. The following are the supported overlay types: o voltmx.ar.OVERLAY\_IMAGE voltmx.ar.OVERLAY\_VIDEO |
 | src |   | String | This attribute specifies the name of the overlay image or video. Ensure that you place the images/videos in the raw inside the workspace. For example resources/mobile/common/raw |
 
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to add the startARImageDetection method to add the ARRenderer widget.  
+{% highlight VoltMx %}
+//Sample code to add the startARImageDetection method to add the ARRenderer widget.  
 var detection_src1 = "imagedetection_src_hcl.jpg";
 var overlay_src1 = "imagedetection_image_overlay.jpg";
 var overlay_type1 = "image";
@@ -946,13 +995,14 @@ myARRenderer.startARImageDetection(config, resultCallBack);
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[startRendering Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>startRendering Method</summary>
 
 * * *
 
@@ -962,23 +1012,24 @@ This method will start processing the camera data and identifies the anchor poin
 
 To use this method, your app must have [runtime permission]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/runtime_permissions.html) from the end-user to open the device camera. If you call any API without obtaining the permission, platforms automatically pops up a system permission dialog box with "Allow" and "Deny" options, asking the end-user to grant permission to use the device's camera.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 startRendering()
+{% endhighlight %}
 
 startRendering(sceneConfig, \[{id, name, modelConfig, callback}\])
 
-Parameters
+### Parameters
 
-  
-
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to invoke startRendering Method using myaRRenderer ARRenderer widget without any arguments.*/  
+{% highlight VoltMx %}
+/*Sample code to invoke startRendering Method using myaRRenderer ARRenderer widget without any arguments.*/  
   
 myaRRenderer.startRendering();  
   
@@ -987,77 +1038,88 @@ myaRRenderer.startRendering();
 myaRRenderer.startRendering(sceneConfig:"sceneConfig1", [{id:"id1", name:"name1", modelConfig:"modelConfig1",  callback:"jsfunction1"}]);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[stopARImageDetection Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>stopARImageDetection Method</summary>
 
 * * *
 
 This method stops AR image detection and rendering. It also clears all the anchors added and parameters given in the startARImageDetection.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 myaRRenderer.stopARImageDetection();
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke stopARImageDetection Method using myaRRenderer ARRenderer widget.  
+{% highlight VoltMx %}
+//Sample code to invoke stopARImageDetection Method using myaRRenderer ARRenderer widget.  
   
 myaRRenderer.stopARImageDetection();
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[stopRendering Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>stopRendering Method</summary>
 
 * * *
 
 This method is used to stop the Augmented Reality session using the ARRenderer widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 stopRendering()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None  
 
-Return Values
+### Return Values
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke stopRendering Method using myaRRenderer ARRenderer widget.  
+{% highlight VoltMx %}
+//Sample code to invoke stopRendering Method using myaRRenderer ARRenderer widget.  
   
 myaRRenderer.stopRendering();
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS and Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setEnabled Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setEnabled Method</summary>
 
 * * *
 
 This method specifies the widget that must be enabled or disabled.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setEnabled(enabled)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _enabled_
 
@@ -1067,34 +1129,36 @@ true -Indicates widget is enabled.
 
 false - Indicates widget is disabled.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 Browser widget does not support this method in SPA.
 
 This method is not applicable in Map widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setEnabled Method for button widget.
 //You need to make a corresponding call of the setEnabled method for other applicable widgets.
 
 form1.myButton.setEnabled(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setFocus Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setFocus Method</summary>
 
 * * *
 
@@ -1102,11 +1166,13 @@ This method specifies the widget on which there must be focus.
 
 **Default :** true
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setFocus(focus)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _focus_ \[Boolean\]- Mandatory
 
@@ -1114,36 +1180,38 @@ true -Indicates focus is set on a widget.
 
 false - Indicates focus is not set on a widget.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 You should not call this method in **preShow** of a form as it is not respected by all platforms. In android platform, this method is not respected in **preShow** of a form. You can give focus to a particular widget only after it is rendered on the screen, hence it should be called in postShow of a form.
 
 This method is not applicable in Form widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setFocus Method for button widget.
 //You need to make a corresponding call of the setFocus method for other applicable widgets.
 
 form1.myButton.setFocus(true);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setVisibility Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setVisibility Method</summary>
 
 * * *
 
@@ -1151,11 +1219,13 @@ Use this method to set the visibility of the widget.
 
 **Default :** true
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 setVisibility(visible)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _visible_
 
@@ -1207,15 +1277,15 @@ It is a JS dictionary containing the events invoked by the platform during the a
 *   **animStarted**: Invoked at the beginning of the animation without any parameters. Following is the Syntax of the event: function animStarted()
 *   **animEnded**: Invoked at the end of the animation without any parameters. Following is the Syntax of the event: function animEnded()
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is not applicable on Form, Popup, and Alert. It is also not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so by using [Segment](Segment_Methods.html#segmentedui-methods) methods.
 
@@ -1223,9 +1293,10 @@ Passing an invalid type other than the above events lead to run time exceptions/
 
 This method is not supported on the widgets FlexForm, FlexContainer, and FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to invoke the setVisibility Method for a button widget with animation.
 //You need to make a corresponding call of the setVisibility method for other applicable widgets.
 
@@ -1244,9 +1315,10 @@ form1.myButton.setVisibility(
 form1.myButton.setVisibility(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
+</details>
 

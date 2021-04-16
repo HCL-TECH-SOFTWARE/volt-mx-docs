@@ -3,12 +3,10 @@ layout: "documentation"
 category: "iris_wearables_dev_guide"
 ---
                            
-
-
 voltmx.wearable Namespace Constants
 =================================
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Callback Result Constants](javascript:void(0);) 
+<details close markdown="block"><summary>Callback Result Constants</summary> 
 
 * * *
 
@@ -32,14 +30,13 @@ Your app receives the following values in the parameters of callback functions t
 | voltmx.wearable.RESULT\_ERROR\_UNKNOWN | An unknown error has occurred. |
 | voltmx.wearable.RESULT\_SUCCESS | The operation completed successfully. |
 
-  
-
-Remarks
+### Remarks
 
 These constants are status codes that your app receives in the parameters of callback functions. The callback functions are passed to API functions in the `voltmx.wearable` namespaace. When the API function completes or encounters an error, the callback function is automatically invoked and passed a value From the Callback Result Constants.
 
-Platform Availability
+### Platform Availability
 
 Android Wear 2.0 or later
 
 * * *
+</details>

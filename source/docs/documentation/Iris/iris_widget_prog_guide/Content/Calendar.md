@@ -26,7 +26,7 @@ From Volt MX Iris V9 SP2, the Calendar widget is enhanced with a new look in Iri
 
 **Enabling a Range of Dates:** Enable a range of dates by just setting the start date and end date. For example, in a travel application, you can use this feature to display the duration of your stay while booking a hotel.
 
-Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Iris_User_Guide.html).
+Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 For general information on this widget see the []({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Button.html)[Calendar]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Calendar.html?Highlight=gridcalendar) topic in the Volt MX Iris User Guide.
 

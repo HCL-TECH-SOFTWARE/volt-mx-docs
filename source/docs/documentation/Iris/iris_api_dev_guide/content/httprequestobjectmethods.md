@@ -9,31 +9,34 @@ Methods
 
 The HttpRequest object supports the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[abort Method](javascript:void(0);)
+
+<details close markdown="block"><summary>abort Method</summary>
 
 * * *
 
 This cancels the network operation . If the abort is successful in canceling the send request, the readyState is set to UNSENT. Otherwise, the readyState is set to Done.
 
-Syntax
+<b>Syntax</b>
 
-httpRequestObject.abort()
+{% highlight VoltMx %}
+httpRequestObject.abort();
+{% endhighlight %}
 
-Parameters
-
-None.
-
-Return Values
+<b>Parameters</b>
 
 None.
 
-Platform Availability
+<b>Return Values</b>
+
+None.
+
+<b>Platform Availability</b>
 
 Available on all platforms except Windows and SPA.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var request = new voltmx.net.httpRequest();
+{% highlight VoltMx %}var request = new voltmx.net.httpRequest();
 ...
 request.abort();
 
@@ -42,87 +45,97 @@ request.abort();
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getAllResponseHeaders Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getAllResponseHeaders Method</summary>
 
 * * *
 
 This API returns all headers using the response for a given header, except the fields with names Set-Cookie or Set-Cookie2.
 
-Syntax
+<b>Syntax</b>
 
-httpRequestObject.getAllResponseHeaders()
+{% highlight VoltMx %}
+httpRequestObject.getAllResponseHeaders();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 Returns an object containing the header field name and the value map object.
 
 If the readyState is UNSENT, OPENED, or any of the failure case, null is returned.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Windows and SPA.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var request = new voltmx.net.HttpRequest();
+{% highlight VoltMx %}var request = new voltmx.net.HttpRequest();
 print(request.getAllResponseHeaders());
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getResponseHeader Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getResponseHeader Method</summary>
 
 * * *
 
 This API returns the header field value using the response for a given header, unless the header field name is Set-Cookie or Set-Cookie2.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 httpRequestObject.getResponseHeader(  
-    headerfield)
+    headerfield);
+{% endhighlight %}
 
-Parameters
+
+<b>Parameters</b>
 
 headerfield
 
 A string that contains the name of the header field.
 
-Return Values
+<b>Return Values</b>
 
 Returns a string containing the header field value. If the readyState is UNSENT, OPENED, or any of a failure case, null is returned.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Windows and SPA.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var request = new voltmx.net.HttpRequest();
+{% highlight VoltMx %}var request = new voltmx.net.HttpRequest();
 request.getResponseHeader("Date");
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[open Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>open Method</summary>
 
 * * *
 
 This method initializes the _http request_ object with a request method type (GET or POST) and the url. If this method is invoked after send(), it should terminate the current send() request.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 httpRequestObject.open(  
     requestMethod,  
     url,  
     async,  
     username,  
-    password)
+    password);
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 requestMethod
 
@@ -150,21 +163,21 @@ password
 
 An optional string that is used to pass the user password for basic authentication.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Exceptions
+<b>Exceptions</b>
 
-SyntaxError - if the requestMethod is not valid or url cannot be resolved.
+Syntax Error - if the requestMethod is not valid or url cannot be resolved.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Windows and SPA.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var request = new voltmx.net.HttpRequest();
 request.open(
 	constants.HTTP_METHOD_GET, 
@@ -173,17 +186,22 @@ request.open(
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[send Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>send Method</summary>
 
 * * *
 
 This methods initiates a request.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 httpRequestObject.send([data](#data))
+{% endhighlight %}
 
-Parameters
+
+
+<b>Parameters</b>
 
 data
 
@@ -197,23 +215,23 @@ The data parameter is ignored if the request type is GET or HEAD.
 
 > **_Note:_** send() handles the redirection headers automatically, that is http status codes 301, 302, 303, or 307.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Exceptions
+<b>Exceptions</b>
 
 InvalidStateError - if this method is called before an open() API call and or after the send() API is called more than once.
 
 Network or DNA errors generate an http status code such as 410 and raise the HEADERS\_RECEIVED state change event.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Windows and SPA.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var request = new voltmx.net.HttpRequest();
 ...
 request.send(); 
@@ -222,17 +240,20 @@ request.send();
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setRequestHeader Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setRequestHeader Method</summary>
 
 * * *
 
 This appends a header to the list of _http request headers_.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 httpRequestObject.setRequestHeader([header](#header), [value](#value))
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 header \[string\]- Mandatory
 
@@ -242,27 +263,27 @@ value \[string\] - Mandatory
 
 The value of the header.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Exceptions
+<b>Exceptions</b>
 
 InvalidStateError - if this method is called before the open() API call and or after the send() API call.
 
 > **_Note:_** If this method is called twice on a header, then the values are appended by comma with a space delimiter.
 
-Remarks
+<b>Remarks</b>
 
 You must sanitize the data such as user input or http response before setting them as http header values. If the data is not sanitized it can lead to various types of header manipulation attacks such as an HTTP response splitting attack, cross-site scripting, browser hijacking, cookie manipulation, and cross-user defacement.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Windows and SPA.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var request = new voltmx.net.HttpRequest();
 ...
 request.setRequestHeader("From","abc.xyz@voltmx.com");
@@ -270,5 +291,7 @@ request.setRequestHeader("From","abc.xyz@voltmx.com");
 {% endhighlight %}
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

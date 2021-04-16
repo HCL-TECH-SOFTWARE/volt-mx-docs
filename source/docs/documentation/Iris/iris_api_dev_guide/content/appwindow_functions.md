@@ -9,66 +9,74 @@ Methods
 
 The AppWindow object contains the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enterFullScreenMode Method](javascript:void(0);)
+
+<details close markdown="block"><summary>enterFullScreenMode Method</summary>
 
 * * *
 
 This method provides a programmatic way to change the application to full screen mode. This method may not work in some cases.
 
-Syntax
+<b>Syntax</b>
 
-appWindow.enterFullScreenMode()
+{% highlight VoltMx %} appWindow.enterFullScreenMode();
 
-Input Parameters
+{% endhighlight %}
+
+<b>Input Parameters</b>
 
 None
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 This method does not have an effect in tablet mode.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Windows 10.
 
 Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var appwindow = voltmx.application.getAppWindow(); 
 appwindow.enterFullScreenMode(); 	
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[exitFullScreenMode Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>exitFullScreenMode Method</summary>
 
 * * *
 
 This method provides a programmatic way to change the application to the normal resizeable view in desktop mode. This method does not have any effect in Tablet mode.
 
-Syntax
+<b>Syntax</b>
 
-appwindow.exitFullScreenMode()
+{% highlight VoltMx %}
 
-Input Parameters
+appwindow.exitFullScreenMode ();
+
+{% endhighlight %}
+
+<b>Input Parameters</b>
 
 None
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Windows 10.
 
 Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var appwindow = voltmx.application.getAppWindow(); 
 appwindow.exitFullScreenMode(); 
 
@@ -76,49 +84,53 @@ appwindow.exitFullScreenMode();
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[navigateBack Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>navigateBack Method</summary>
 
 * * *
 
 This method provides a programmatic way to navigate back to a previously visited form. This method should not be called in form and application life cycle events.
 
-Syntax
+<b> Syntax </b>
 
-appWindow.navigateBack()
+{% highlight VoltMx %} appWindow.navigateBack (); {% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Windows 10.
 
 Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var appwindow = voltmx.application.getAppWindow(); 
 appwindow.navigateBack(); 	
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[resizeView Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>resizeView Method</summary>
 
 * * *
 
 This method attempts to set the app window to the specified size.
 
-Syntax
+<b>Syntax</b>
 
-appWindow.resizeView(  
-    windowprops)
+{% highlight VoltMx %} appWindow.resizeView(  
+    windowprops);
 
-Input Parameters
+{% endhighlight %}
+
+<b>Input Parameters</b>
 
 windowprops
 
@@ -127,39 +139,40 @@ Specifies the size of the app window.This parameter is a JSObject with the follo
 *   height - \[double\] The minimum height of the window.
 *   width - \[double\] The minimum width of the window.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 The method may not work in all cases.This method does not have an effect in tablet mode.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Windows 10.
 
 Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var appwindow = voltmx.application.getAppWindow(); 
 appwindow.resizeView({'height' : 500, 'width' : 500}); 	
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setPreferredMinSize Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setPreferredMinSize Method</summary>
 
 * * *
 
 This method sets the smallest size allowed for the app window.
 
-Syntax
+<b>Syntax</b>
 
-appWindow.setPreferredMinSize(  
-    windowprops)
+{% highlight VoltMx %} appWindow.setPreferredMinSize (  
+    windowprops); {% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 windowprops
 
@@ -168,25 +181,27 @@ Specifies the smallest size allowed for the app window, or null if no minimum si
 *   height - \[double\] The minimum height of the window.
 *   width - \[double\] The minimum width of the window.
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Remarks
+<b>Remarks</b>
 
 This method does not have an effect in tablet mode.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Windows 10.
 
 Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 var appwindow = voltmx.application.getAppWindow(); 
 appwindow.setPreferredMinSize({'height' : 100, 'width' : 200}); 	
 {% endhighlight %}
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

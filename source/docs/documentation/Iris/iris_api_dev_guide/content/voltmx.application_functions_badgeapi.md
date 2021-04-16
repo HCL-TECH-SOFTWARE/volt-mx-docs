@@ -10,7 +10,8 @@ Functions
 
 The Badge API contains the following functions, which are part of the [voltmx.application Namespace](voltmx.application_functions.html).
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.getApplicationBadgeValue](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.application.getApplicationBadgeValue</summary>
 
 * * *
 
@@ -28,7 +29,7 @@ None
 
 Example
 
-{% highlight voltMx %}gettingBadge: function() {
+{% highlight VoltMx %}gettingBadge: function() {
     var badge = voltmx.application.getApplicationBadgeValue();
     alert("The badge value is " + badge);
 },
@@ -46,7 +47,8 @@ Available only on iPhone and iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.getAppMenuBadgeValue](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.getAppMenuBadgeValue</summary>
 
 * * *
 
@@ -69,7 +71,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}onClickMenuItem1: function() {
+{% highlight VoltMx %}onClickMenuItem1: function() {
     alert("The Badge Value of Accounts App Menu Item is " + voltmx.application.getAppMenuBadgeValue("SampleAppMenu", "appmenuitemid1"));
 
 },
@@ -91,7 +93,8 @@ Available only on iPhone and iPad.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.setApplicationBadgeValue](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.setApplicationBadgeValue</summary>
 
 * * *
 
@@ -113,7 +116,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}settingBadge: function() {
+{% highlight VoltMx %}settingBadge: function() {
     this.view.btnBadge.setBadge("0", ""); //Set badge value on  button widget
     voltmx.application.setApplicationBadgeValue("" + 0);
 },
@@ -152,7 +155,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.application.setAppMenuBadgeValue](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.application.setAppMenuBadgeValue</summary>
 
 * * *
 
@@ -175,7 +179,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}createAppMenu: function() {
+{% highlight VoltMx %}createAppMenu: function() {
     var appMenuItem1 = ["appmenuitemid1", "Accounts", "option1.png", this.onClickMenuItem1];
     var appMenuItem2 = ["appmenuitemid2", "Examination", "option2.png", this.onClickMenuItem2];
     var appMenu = [appMenuItem1, appMenuItem2];
@@ -203,4 +207,8 @@ Available only on iPhone and iPad.
 
 * * *
 
+</details>
+
 ![](resources/prettify/onload.png)
+
+

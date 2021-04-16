@@ -25,28 +25,28 @@ The Map Styling API enables you to load custom map styles in JSON format by usin
 Functions
 ---------
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[LoadRawResourceStyle](javascript:void(0);)
+
+<details close markdown="block"><summary>LoadRawResourceStyle</summary>
 
 * * *
 
-**Syntax**
+### Syntax
 
-{% highlight voltMx %}mapObject.loadRawResourceStyle(rawJsonFile,stylingCallback)
+{% highlight VoltMx %}
+mapObject.loadRawResourceStyle(rawJsonFile,stylingCallback)
 {% endhighlight %}
 
-**Input Parameters**
-
+### Input Parameters
   
 | Parameter | Description |
 | --- | --- |
 | rawJsonFile | Name of the file added in the raw folder of native Android. |
 | stylingCallback | Callback to be invoked. |
 
-  
+### Example
 
-**Example**
-
-{% highlight voltMx %}var mapObject = new voltmx.ui.Map({}, {}, {});
+{% highlight VoltMx %}
+var mapObject = new voltmx.ui.Map({}, {}, {});
 mapObject.loadRawResourceStyle("style", stylingCallback);
 
 function stylingCallback(booleanFlag, resource) {
@@ -60,27 +60,26 @@ function stylingCallback(booleanFlag, resource) {
 
 > **_Note:_** This API returns true if the style is successfully parsed, and false if any problems are detected with MapStyleOptions. Such problems include unparsable styling JSON, unrecognized feature type, unrecognized element type or invalid styler keys, or the provided resource file is not found. If the return value is false, the current style is left unchanged.
 
-**Return Values**
+### Return Values
 
 | Return Value | Description |
 | --- | --- |
 | Boolean | true/false. Indicates whether the styling is successful or not. |
 | String | Name of the resource file (JSON) passed to the API. |
 
- 
-
-**Clearing the Custom Styling**
+### Clearing the Custom Styling
 
 Provide the resource file as null to clear the applied custom styling.
 
-{% highlight voltMx %}mapObject.loadRawResourceStyle(null,stylingCallback);
+{% highlight VoltMx %}
+mapObject.loadRawResourceStyle(null,stylingCallback);
 {% endhighlight %}
 
-**IDE/CodeGen requirements**
+### IDE/CodeGen requirements
 
 None.
 
-**Platform Availability**
+### Platform Availability
 
 Android.
 

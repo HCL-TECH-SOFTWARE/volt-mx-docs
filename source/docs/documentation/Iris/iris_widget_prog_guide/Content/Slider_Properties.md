@@ -12,7 +12,8 @@ The properties for the Slider widget are as follows:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
@@ -20,19 +21,21 @@ Enables you to control accessibility behavior and alternative text for the widge
 
 For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Object
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
@@ -61,11 +64,11 @@ SPA/Desktop Web limitations
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+<b>Example 1</b> 
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -76,11 +79,11 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+<b>Example 2</b> 
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -92,52 +95,56 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>anchorPoint Property</summary>
 
 * * *
 
 Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 anchorPoint
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The value for this property is a JavaScript dictionary object with the keys "x" and "y". The values for the "x" and "y" keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}Form1.widget1.anchorPoint = {
+{% highlight VoltMx %}Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
 };
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
@@ -147,27 +154,29 @@ The bottom property determines the position of the bottom edge of the widget’s
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 bottom
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
-If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
+If the layout Type is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -175,14 +184,15 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA , and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
@@ -190,25 +200,27 @@ This property determines the center of a widget measured from the left bounds of
 
 The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 centerX
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -216,14 +228,15 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
@@ -231,25 +244,27 @@ This property determines the center of a widget measured from the top bounds of 
 
 The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 centerY
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
@@ -257,34 +272,37 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cursorType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cursorType Property</summary>
 
 * * *
 
 In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 cursorType
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String.
 
 You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 To add the `cursorType` property using Volt MX Iris in a Desktop Web application, follow these steps.
 
@@ -301,9 +319,9 @@ To add the `cursorType` property using Volt MX Iris in a Desktop Web application
     You can see that the **Cursor Type** property has been added under the **General** section.
 8.  Select a value from the drop-down list to set the **Cursor Type** for the widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %} //This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
   
@@ -311,14 +329,15 @@ frmButton.myButton.cursorType = "wait";
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enable Property</summary>
 
 * * *
 
@@ -326,19 +345,21 @@ The `enable` property is used to control the actionability of the widgets. In a 
 
 This is a constructor level property and applicable for all widgets in Volt MX Iris.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 enable
+{% endhighlight %} 
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value of this property is true.
 
@@ -346,16 +367,16 @@ When `enable` property is configured to true, the action associated with a widge
 
 When `enable` property is configured to false, the action associated with a widget cannot be invoked by the user in the application.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
   
 frmButton.myBtn.enable= true;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android, iOS, Windows, SPA, and Desktop web
 
@@ -363,90 +384,99 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableCache Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableCache Property</summary>
 
 * * *
 
 The property enables you to improve the performance of Positional Dimension Animations.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 enableCache
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is true.
 
 > **_Note:_** When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% highlight VoltMx %}Form1.widgetID.enableCache = true;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE.
 *   Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enableThumbTintColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>enableThumbTintColor Property</summary>
 
 * * *
 
 This property enables you to configure thumbTintColor property.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 enableThumbTintColor
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the enableThumbTintColor property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the enableThumbTintColor property of a Slider widget.
 
 frmSlider.mySlider.enableThumbTintColor=true;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[focusThumbImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>focusThumbImage Property</summary>
 
 * * *
 
 Specifies the image to indicate that there is focus on the thumb.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 focusThumbImage
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String / image Object
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 You can create an image Object by using voltmx.image Namespace functions.
 
@@ -454,31 +484,32 @@ You can select the image from the resources folder.
 
 If you specify a focus thumb image, you must also ensure that you have specified an image for the thumb image property.
 
-Example
+<b>Example</b>
 
 Using a string to assign a local resource for focusThumbImage.
 
-{% highlight voltMx %}/*Sample code to set the focusThumbImage property of a Slider widget where fThumb.png is an image file in the resources folder.*/
+{% highlight VoltMx %}/*Sample code to set the focusThumbImage property of a Slider widget where fThumb.png is an image file in the resources folder.*/
 frmSlider.mySlider.focusThumbImage="fThumb.png";
 
 {% endhighlight %}
 
 Using an image object (voltmx.image) to assign an image to focusThumbImage:
 
-{% highlight voltMx %}/*Sample code to set the focusThumbImage property of a Slider widget where local.png is an image file in the resources folder.*/
+{% highlight VoltMx %}/*Sample code to set the focusThumbImage property of a Slider widget where local.png is an image file in the resources folder.*/
 var imgObjRef = voltmx.image.createImage("local.png");
 frmSlider.mySlider.focusThumbImage=imgObjRef;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -486,19 +517,21 @@ It determines the height of the widget and measured along the y-axis.
 
 The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 height
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number, String, and Constant
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 Following are the available measurement options:
 
@@ -508,9 +541,9 @@ Following are the available measurement options:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}/*Sample code to set the height property for a Slider widget by using DP, Percentage and Pixels.*/
+{% highlight VoltMx %}/*Sample code to set the height property for a Slider widget by using DP, Percentage and Pixels.*/
 frmSlider.mySlider.height="50dp";
 
 frmSlider.mySlider.height="10%";
@@ -519,34 +552,37 @@ frmSlider.mySlider.height="10px";
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, Desktop Web, SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 A unique identifier of Slider consisting of alpha numeric characters. Every Slider should have a unique id within a Form.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read only
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Defining the properties for Slider with the id:"slider".
+{% highlight VoltMx %}//Defining the properties for Slider with the id:"slider".
 var sliderBasic = {
     id: "slider",
     info: {
@@ -579,32 +615,35 @@ var slider = new voltmx.ui.Slider(sliderBasic, sliderLayout, sliderPSP);
 alert("Slider id is ::" + slider.id);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This will help in avoiding the globals to most part of the programming.
 
@@ -612,7 +651,7 @@ This is a **non-Constructor** property. You cannot set this property through wid
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}var inf = {
+{% highlight VoltMx %}var inf = {
     a: "hello"
 };
 widget.info = inf; //works
@@ -621,9 +660,9 @@ widget.info.a = "hello world";
 widget.info.a will have old value as hello.*/
 {% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the info property for a Slider widget.
+{% highlight VoltMx %}//Sample code to set the info property for a Slider widget.
 frmSlider.mySlider.info={
     key: "SLIDER"
 };
@@ -632,54 +671,58 @@ alert("Slider widget info is ::" +frmSlider.mySlider.info);
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
 This property controls the visibility of a widget on the form.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is true.
 
 *   If set to _false,_ the widget is not displayed.
 *   If set to _true,_ the widget is displayed.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the isVisible property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the isVisible property of a Slider widget.
 frmSlider.mySlider.isVisible=true;
 {% endhighlight %}
 
 > **_Note:_** You can set the visibility of a widget dynamically from code using the setVisibility method.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[left Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>left Property</summary>
 
 * * *
 
@@ -687,25 +730,27 @@ This property determines the lower left corner edge of the widget and is measure
 
 The left property determines the position of the left edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 left
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
@@ -713,32 +758,35 @@ frmHome.widgetID.left = "10%";
 frmHome.widgetID.left = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[leftSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>leftSkin Property</summary>
 
 * * *
 
 Skin to be applied to the background of the slider on left side of the thumb image.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 leftSkin
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 Specifies the skin to be applied to the selected part of the seekbar (skin is applied to the left side of the thumb icon).
 
@@ -754,38 +802,41 @@ The following image illustrates a Slider with the skins applied:
 
 ![](Resources/Images/Sliderskin.png)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the leftSkin property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the leftSkin property of a Slider widget.
 frmSlider.mySlider.leftSkin="lSkin";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[max Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>max Property</summary>
 
 * * *
 
 Specifies the maximum value on the slider that you can select. It accepts a non-decimal value.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 max
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number (_non-decimal value_)
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The maximum value is not displayed on the Slider. To display the maximum value, you must specify the maxLabel (not supported on iPhone).
 
@@ -795,20 +846,21 @@ If you want to set a different maximum value, you can set any Number (the Number
 
 The maximum value must be greater than the minimum value.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the max property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the max property of a Slider widget.
 frmSlider.mySlider.max=100;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -816,21 +868,23 @@ This property specifies the maximum height of the widget and is applicable only 
 
 The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 maxHeight
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -838,28 +892,31 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxLabel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxLabel Property</summary>
 
 * * *
 
 Specifies the text or number to be displayed for the maximum value of the slider.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 maxLabel
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Remarks
+<b>Remarks</b>
 
 This text is displayed just below the slider on the right.
 
@@ -869,33 +926,36 @@ The following image illustrates a Slider with the text "Maximum Value" in the ma
 
 ![](Resources/Images/Slidermaxws.png)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the maxLabel property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the maxLabel property of a Slider widget.
 frmSlider.mySlider.maxLabel="100";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxLabelSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxLabelSkin Property</summary>
 
 * * *
 
 Specifies the skin (font color or style) for the [_maxLabel_](#max) property of the slider.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 maxLabelSkin
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is null/nil (No skin is applied to the maxLabel)
 
@@ -905,59 +965,63 @@ The following image illustrates the Max Label with a defined skin:
 
 ![](Resources/Images/Slidermaxwithskin.png)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the maxLabelSkin property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the maxLabelSkin property of a Slider widget.
 frmSlider.mySlider.maxLabelSkin = {
  color: "FF224400"
 };
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxValueImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxValueImage Property</summary>
 
 * * *
 
 Specifies the image for the maximum value of the slider.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 maxValueImage
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String \\ Image object
 
-Example
+<b>Example</b>
 
 Using a string to assign a local resource to maxValueImage:
 
-{% highlight voltMx %}/*Sample code to set the maxValueImage property of a Slider widget where maxImg.png is an image file in the resources folder.*/
+{% highlight VoltMx %}/*Sample code to set the maxValueImage property of a Slider widget where maxImg.png is an image file in the resources folder.*/
 frmSlider.mySlider.maxValueImage= "maxImg.png";
 {% endhighlight %}
 
 Using an image object to assign an image to maxValueImage:
 
-{% highlight voltMx %}/*Sample code to set the maxValueImage property of a Slider widget where local.png is an image file in the resources folder.*/  
+{% highlight VoltMx %}/*Sample code to set the maxValueImage property of a Slider widget where local.png is an image file in the resources folder.*/  
   
 var imgObjRef = voltmx.image.createImage("local.png");  
 frmSlider.mySlider.maxValueImage= imgObjRef;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -965,21 +1029,23 @@ This property specifies the maximum width of the widget and is applicable only w
 
 The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 maxWidth
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -987,32 +1053,35 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[min Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>min Property</summary>
 
 * * *
 
 Specifies the minimum value on the slider that you can select. It accepts a non-decimal value.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 min
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number (_non-decimal value_)
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The minimum value is not displayed on the Slider. To display the minimum value, you must specify the minLabel (not supported on iPhone).
 
@@ -1022,21 +1091,22 @@ If you want to set a different minimum value, you can set any Number (the Number
 
 The minimum value must be less than the maximum value.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the min property of a Slider widget.  
+{% highlight VoltMx %}//Sample code to set the min property of a Slider widget.  
   
 frmSlider.mySlider.min=0;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -1044,21 +1114,23 @@ This property specifies the minimum height of the widget and is applicable only 
 
 The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 minHeight
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -1066,28 +1138,31 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minLabel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minLabel Property</summary>
 
 * * *
 
 Specifies the text or number to be displayed for the minimum value of the slider. This text is displayed just below the slider on the left.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 minLabel
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is null/nil (No label is displayed)
 
@@ -1095,35 +1170,38 @@ The following image illustrates a Slider with the text "Minimum Value" in the mi
 
 ![](Resources/Images/Sliderminws.png)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the minLabel property of a Slider widget.  
+{% highlight VoltMx %}//Sample code to set the minLabel property of a Slider widget.  
   
 frmSlider.mySlider.minLabel="0";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minLabelSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minLabelSkin Property</summary>
 
 * * *
 
 Specifies the skin for the [_minLabel_](#min) property of the slider.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 minLabelSkin
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is null/nil (No skin is applied to the minLabel).
 
@@ -1133,59 +1211,63 @@ The following image illustrates the minLabel with a defined skin:
 
 ![](Resources/Images/Sliderminwithskin.png)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the minLabelSkin property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the minLabelSkin property of a Slider widget.
 frmSlider.mySlider.minLabelSkin = {
  color: "FF224400"
 };
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minValueImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minValueImage Property</summary>
 
 * * *
 
 Specifies the image for the minimum value of the slider.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 minValueImage
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String / Image object
 
-Example
+<b>Example</b>
 
 Using a string to assign a local image resource to minValueImage;
 
-{% highlight voltMx %}/*Sample code to set the minValueImage property of a Slider widget where minImg.png is an image file in the resources folder.*/
+{% highlight VoltMx %}/*Sample code to set the minValueImage property of a Slider widget where minImg.png is an image file in the resources folder.*/
 frmSlider.mySlider.minValueImage= "minImg.png"; 
 {% endhighlight %}
 
 Using an image object (voltmx.image) to assign a image to minValueImage;
 
-{% highlight voltMx %}/*Sample code to set the minValueImage property of a Slider widget where local.png is an image file in the resources folder.*/  
+{% highlight VoltMx %}/*Sample code to set the minValueImage property of a Slider widget where local.png is an image file in the resources folder.*/  
 var imgObjRef = voltmx.image.createImage("local.png");
 frmSlider.mySlider.minValueImage= imgObjRef;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -1193,21 +1275,23 @@ This property specifies the minimum width of the widget and is applicable only w
 
 The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 minWidth
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read only
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -1215,14 +1299,15 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>opacity Property</summary>
 
 * * *
 
@@ -1230,57 +1315,62 @@ Specifies the opacity of the widget. The value of this property must be in the r
 
 Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 opacity
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** This property has more priority compared to the values coming from the configured skin.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
+{% highlight VoltMx %}//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
 
 //Sample code to make the widget opaque by using the opacity property.
 frmHome.widgetID.opacity = 1;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Not available in the IDE.
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[orientation Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>orientation Property</summary>
 
 * * *
 
 Specifies the orientation of the slider widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 orientation
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read only
 
-Remarks
+<b>Remarks</b>
 
 You can select the orientation as _horizontal_ or _vertical_.
 
@@ -1293,22 +1383,23 @@ The available options are:
 
 To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the orientation property of a Slider widget.  
+{% highlight VoltMx %}//Sample code to set the orientation property of a Slider widget.  
   
 frmSlider.mySlider.orientation= constants.SLIDER_HORIZONTAL_ORIENTATION;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[padding Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>padding Property</summary>
 
 * * *
 
@@ -1321,11 +1412,14 @@ The following image illustrates a widget with a defined padding:
 
 ![](Resources/Images/Padding.png)
 
-Syntax
+<b>Syntax</b>
 
+
+{% highlight VoltMx %}
 padding
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Array of numbers
 
@@ -1338,38 +1432,41 @@ Limitations
 *   Desktop Web/ SPA platforms do not support _padding_ property in Image widget, Slider widget and Switch widget.
 *   If no skin is applied to a Button, then Padding is not supported on iPhone. This is due to iOS Safari browser limitation. If you want the padding to be applied, apply a skin to the button and then apply padding
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the padding property for widgetID Button widget in frmHome Form.
+{% highlight VoltMx %}//Sample code to set the padding property for widgetID Button widget in frmHome Form.
 frmHome.widgetID.padding= [2,2,2,2];
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Android, iOS, Desktop Web and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[paddingInPixel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>paddingInPixel Property</summary>
 
 * * *
 
 This property specifies whether the padding property is to be applied in pixels or in percentage.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 paddingInPixel
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Read Only
 
-Remarks
+<b>Remarks</b>
 
 The default value of this property is _false_.
 
@@ -1381,54 +1478,58 @@ Limitations
 
 Desktop Web/ SPA platforms do not support _paddingInPixel_ property in Image widget, Slider widget and Switch widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to read paddingInPixel property for widgetID Button widget in frmHome form.
+{% highlight VoltMx %}//Sample code to read paddingInPixel property for widgetID Button widget in frmHome form.
 
 voltmx.print("PaddingInPixel property value is:"+fromHome.widgetID.paddingInPixel);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Desktop Web and SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Helps you access the parent of the widget. If the widget is not part of the widget hierarchy, the parent property returns null.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 parent
+{% endhighlight %}
 
-Read/Write
+<b>Read/Write</b>
 
 Read only
 
-Remarks
+<b>Remarks</b>
 
 > **_Note:_** The property works for all the widgets inside a FlexForm, FlexContainer or FlexScrollContainer.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}function func() {
+{% highlight VoltMx %}function func() {
 
     voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Not available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -1438,7 +1539,7 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1461,21 +1562,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No (only during widget-construction time)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -1500,14 +1603,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -1517,7 +1621,7 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1540,21 +1644,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 retainFlexPositionProperties
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No (only during widget-construction time)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -1579,14 +1685,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -1596,7 +1703,7 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -1619,21 +1726,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No (only during widget-construction time)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -1659,14 +1768,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -1676,25 +1786,27 @@ The right property determines the position of the right edge of the widget’s b
 
 The right property is used only if the width property is not provided.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 right
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -1702,32 +1814,35 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[rightSkin Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>rightSkin Property</summary>
 
 * * *
 
 Skin to be applied to the background of the slider on right side of the thumb image.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 rightSkin
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 Specifies the skin to be applied to the progress part of the seekbar (skin is applied to the right side of the thumb icon).
 
@@ -1743,40 +1858,43 @@ The following image illustrates a Slider with the skins applied:
 
 ![](Resources/Images/Sliderskin.png)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the rightSkin property of a Slider widget.  
+{% highlight VoltMx %}//Sample code to set the rightSkin property of a Slider widget.  
   
 frmSlider.mySlider.rightSkin="rSkin";
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[selectedValue Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>selectedValue Property</summary>
 
 * * *
 
 Specifies the value that must be displayed as selected when rendered.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 selectedValue
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If you specify the default selected value, the thumb shows the specified value as the selected value when rendered.
 
@@ -1796,40 +1914,43 @@ If you specify a default value which is lesser than the minimum value, the minim
 
 If you specify a default value which is greater than the maximum value, the maximum value is taken as the default value.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the selectedValue property of a Slider widget.  
+{% highlight VoltMx %}//Sample code to set the selectedValue property of a Slider widget.  
   
 frmSlider.mySlider.selectedValue=50;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[step Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>step Property</summary>
 
 * * *
 
 Specifies the value by which the slider is increased or decreased between the allowed slider values.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 step
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number (_non-decimal value_)
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 It accepts a non-decimal value.
 
@@ -1841,36 +1962,39 @@ For example, if you set the minimum value to 40 and the maximum value to 45, the
 
 If you specify a value which is not in between the difference of the maximum and minimum values of the slider, the step increment value is reset to 1.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the step property of a Slider widget.  
+{% highlight VoltMx %}//Sample code to set the step property of a Slider widget.  
   
 frmSlider.mySlider.step=1;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[thickness Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>thickness Property</summary>
 
 * * *
 
 Specifies the thickness of the seekbar.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 thickness
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Remarks
+<b>Remarks</b>
 
 You can specify a thickness between 1 and 25.
 
@@ -1878,22 +2002,23 @@ If you do not specify the thickness (the thickness field is blank), the device s
 
 On Android platform, the _thickness_ property is applicable only if a leftSkin or rightSkin is applied. If you do not specify a left or a right skin, Android specific seekbar thickness is assigned.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the thickness property of a Slider widget.  
+{% highlight VoltMx %}//Sample code to set the thickness property of a Slider widget.  
   
 frmSlider.mySlider.thickness=3;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[thumbHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>thumbHeight Property</summary>
 
 * * *
 
@@ -1901,11 +2026,13 @@ Specifies the height of the control on the slide of the Slider Widget.
 
 > **_Note:_** `thumbHeight` property is available in Desktop Web platform only while using CSS 3.0 library. It is not available in legacy libraries.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 thumbHeight
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
@@ -1913,43 +2040,46 @@ In Windows platform, the default value of `thumbHeight` property is 24.
 
 In Desktop Web platform, the default value of `thumbHeight` property is 21.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the thumbHeight property of a Slider widget.  
+{% highlight VoltMx %}//Sample code to set the thumbHeight property of a Slider widget.  
   
 frmSlider.mySlider.thumbHeight=20;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Windows, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[thumbImage Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>thumbImage Property</summary>
 
 * * *
 
 Specifies the image to indicate the control on the slide.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 thumbImage
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String / image Object
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 When both the thumbImage and [thumbTintColor](#thumbTin) are configured, the property thumbTintColor takes precedence over thumbImage.
 
@@ -1961,23 +2091,23 @@ The following image illustrates a Slider with a thumb image:
 
 ![](Resources/Images/SliderFocus.png)
 
-Example
+<b>Example</b>
 
 Using a string to assign a local resource to to the thumbImage:
 
-{% highlight voltMx %}/*Sample code to set the thumbImage property of a Slider widget where thumb.png is an image file in the resources folder.*/
+{% highlight VoltMx %}/*Sample code to set the thumbImage property of a Slider widget where thumb.png is an image file in the resources folder.*/
 frmSlider.mySlider.thumbImage= "thumb.png"; 
 {% endhighlight %}
 
 Using an image object (voltmx.image) to assign an image to thumbImage :
 
-{% highlight voltMx %}/*Sample code to set the thumbImage property of a Slider widget where local.png is an image file in the resources folder.*/
+{% highlight VoltMx %}/*Sample code to set the thumbImage property of a Slider widget where local.png is an image file in the resources folder.*/
 var imgObjRef = voltmx.image.createImage("local.png");
 frmSlider.mySlider.thumbImage= imgObjRef;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available in the IDE
 
@@ -1985,78 +2115,85 @@ Available in the IDE
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)thumbOffset Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>thumbOffset Property</summary>
 
 * * *
 
 If the image on the control of the slide is a valid drawable (not null), by default, half of its width is used as the new thumb offset.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 thumbOffset
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Write only
 
-Remarks
+<b>Remarks</b>
 
 If the thumb image drawable is symmetric, thumb offset is set such that the thumb image hangs halfway off either edge of the slider widget. To avoid half hanging of the thumb image, set the thumbOffset value to zero.
 
 ![](Resources/Images/sliderthumboffset.png)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the thumbOffset property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the thumbOffset property of a Slider widget.
 frmSlider.mySlider.thumbOffset=0;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on Android Tablet platforms only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[thumbTintColor Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>thumbTintColor Property</summary>
 
 * * *
 
 Specifies the color for control on the slide.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 thumbTintColor
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 When both the [thumbImage](#thumbImage) and thumbTintColor are configured, the property thumbTintColor takes precedence over thumbImage.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the thumbTintColor property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the thumbTintColor property of a Slider widget.
 frmSlider.mySlider.thumbTintColor="00FF000";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[thumbWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>thumbWidth Property</summary>
 
 * * *
 
@@ -2064,11 +2201,13 @@ Specifies the width of the control on the slide for the Slider Widget.
 
 > **_Note:_** `thumbWidth` property is available in Desktop Web platform only while using CSS 3.0 library. It is not available in legacy libraries.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 thumbWidth
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
@@ -2076,23 +2215,24 @@ In Windows platform, the default value of this property is 12.
 
 In Desktop Web platform, the default value of this property is 20.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the thumbWidth property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the thumbWidth property of a Slider widget.
 frmSlider.mySlider.thumbWidth=20;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Windows and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
@@ -2100,25 +2240,27 @@ This property determines the top edge of the widget and measured from the top bo
 
 The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 top
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -2126,40 +2268,43 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transform Property</summary>
 
 * * *
 
 Contains an animation transformation that can be used to animate the widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 transform
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi) function.
 
-Example
+<b>Example</b>
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}//Animation sample
+{% highlight VoltMx %}//Animation sample
 var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
@@ -2167,33 +2312,36 @@ newTransform.translate3D(223, 12, 56);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[viewType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>viewType Property</summary>
 
 * * *
 
 Specifies the view type of the Slider widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 viewType
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
 > **_Note:_** In Windows this property is a constant.
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is SLIDER\_VIEW\_TYPE\_DEFAULT.
 
@@ -2211,9 +2359,9 @@ Following are the available options platforms:
   
 ![](Resources/Images/Win8Slider.png)
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the viewType property of a Slider widget.
+{% highlight VoltMx %}//Sample code to set the viewType property of a Slider widget.
 frmSlider.mySlider.viewType=constants.SLIDER_VIEW_TYPE_DEFAULT;  
   
 //Sample code to set the viewType property of a Slider widget in Windows 10.  
@@ -2222,7 +2370,7 @@ frmSlider.mySlider.viewType=constants.SLIDER_VIEW_TYPE_WIN10STYLE;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available only on Desktop Web platform
@@ -2230,21 +2378,24 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetSwipeMove Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetSwipeMove Property</summary>
 
 * * *
 
 This property is used to enable and configure left or right swipe actions for a widget. The widgetSwipeMove Property can be used for all widgets . The most common use case is for implementing swipe action for individual rows in Segment.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 widgetSwipeMove
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
@@ -2256,7 +2407,7 @@ The following table consists of the parameters of the _callback_ parameter:
 
 <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 111px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 93px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter consists of the widget handle or ID of the widget on which the swipe action has been performed.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">context</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is applicable only for widgets inside the Segment with row templates. Each context parameter consists of <i>rowIndex</i>, <i>sectionIndex</i> and <i>widgetref</i></td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">rowIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the row index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">sectionIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the section index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetref</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This parameter stores the handle of the Segment containing the swiped widget.</td></tr></tbody></table>
 
-Remarks
+<b>Remarks</b>
 
 *   For a Segment, the **widgetSwipeMove** Property is configured while setting the data of the Segment.
 
@@ -2271,11 +2422,11 @@ Limitations
 *   If the widgetSwipeMove property is configured on a top level Flex container of a segment template, the onRowClick event will not be triggered. - Applicable on iOS, Android, and SPA.
 *   Android limitation: On Android devices, when the user lifts their finger, the transition occurs immediately.
 
-Example
+<b>Example</b>
 
 Following is a code snippet for a mail app. Here we have used a Segment for listing the mail and the _widgetSwipeMove_ Property has been configured for the _SwipeFlex_ FlexContainer.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.  
+{% highlight VoltMx %}//This is a generic property that is applicable for various widgets.  
 //Here, we have shown how to use the widetSwipeMove property for Button widget.
 /*You need to make a corresponding use of the 
 widgetSwipeMove property for other applicable widgets.*/  
@@ -2311,13 +2462,14 @@ this.view.myButton.widgetSwipeMove=swipeMoveConfig;
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android, iOS, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -2325,19 +2477,21 @@ This property determines the width of the widget and is measured along the x-axi
 
 The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 width
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number, String, and Constant
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 Following are the options that can be used as units of width:
 
@@ -2347,9 +2501,9 @@ Following are the options that can be used as units of width:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
@@ -2357,14 +2511,15 @@ frmHome.widgetID.width = "10%";
 frmHome.widgetID.width = "10px";
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 * * *
 
@@ -2372,19 +2527,21 @@ This property specifies the stack order of a widget. A widget with a higher zInd
 
 The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Remarks
+<b>Remarks</b>
 
 The default value for this property is 1.
 
@@ -2404,27 +2561,30 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 **voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+{% highlight VoltMx %}//Sample code to set the ZIndex value to Auto  
  var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
   "zIndex": voltmx.flex.ZINDEX_AUTO
 });
 
-{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+{% endhighlight %}{% highlight VoltMx %}//Sample code to set the ZIndex value to Auto
 flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
 
 {% endhighlight %}
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
 
 * * *
+
+</details>
+
 

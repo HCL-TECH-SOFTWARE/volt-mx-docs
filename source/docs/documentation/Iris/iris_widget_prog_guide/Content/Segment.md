@@ -25,7 +25,7 @@ You can use the Segment widget to display data from services, group services tog
 
 **Row Click events**: Assign a variety of actions to Segment widgets, which are performed when users click on a Segment row. Actions such as animations, form navigation, and more, can be applied to any row in a Segment. For example, if you have a Segment that contains the list of all employees in an organization, you can click on any row to move to another form where the details of the specific employee are displayed.
 
-Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/homepage.html).
+Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 For general information on the SegmentedUI widget, refer the [Segment2]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Segment2.html) topic in the Volt MX Iris User Guide.
 
@@ -56,10 +56,10 @@ The SegmentedUI widget capabilities can be broadly categorized into the followin
   
 | Methods | Description |
 | --- | --- |
-| [registerForPeekandPop](Segment_Methods_new.html) | Registers a widget to enable 3D Touch peek and pop gestures. |
-| [setOnPeek](Segment_Methods_new.html#setOnPek) | Sets and overrides the existing onPeekCallback for the widget. |
-| [setOnPop](Segment_Methods_new.html#setOnPop) | Overrides the existing onPopCallback for the widget. |
-| [unregisterForPeekandPop](Segment_Methods_new.html#unregist) | Unregisters a widget from 3D Touch peek and pop gestures. |
+| [registerForPeekandPop](Segment_Methods.html) | Registers a widget to enable 3D Touch peek and pop gestures. |
+| [setOnPeek](Segment_Methods.html#setOnPek) | Sets and overrides the existing onPeekCallback for the widget. |
+| [setOnPop](Segment_Methods.html#setOnPop) | Overrides the existing onPopCallback for the widget. |
+| [unregisterForPeekandPop](Segment_Methods.html#unregist) | Unregisters a widget from 3D Touch peek and pop gestures. |
 
 #### Animations
 
@@ -402,7 +402,7 @@ The following are the important considerations for the segment widget:
     
     > **_Note:_** If you try scrolling too fast, you may experience jerky scrolling. If the rows contain images, they may take time to load based on the image file size.
     
-*   You can dynamically change the skin of the widgets in the segment using the [Segment Alternate Methods](Segment_Methods_new.html#top).
+*   You can dynamically change the skin of the widgets in the segment using the [Segment Alternate Methods](Segment_Methods.html#top).
 *   A SegmentedUI cannot be placed directly in a ScrollBox. It can be placed in a ScrollBox with orientation as Vertical and only then you can place a SegmentedUI on a ScrollBox.
 *   The height of the segmentedUI is determined by the content of the widget. If you set the **screenLevelWidget** as _true_, then the height of the segmentedUI widget is the form height excluding headers and footers.
     

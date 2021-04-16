@@ -8,7 +8,8 @@ category: "iris_api_dev_guide"
 
 The voltmx.map namespace defines the following constants.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Map Provider Constants](javascript:void(0);)
+
+<details close markdown="block"><summary>Map Provider Constants</summary>
 
 * * *
 
@@ -21,7 +22,8 @@ The Map Provider Constants enable your app to select which map provider to use.
 
   
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Map View Mode Constants](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Map View Mode Constants</summary>
 
 * * *
 
@@ -36,7 +38,8 @@ Use the Map View Mode Constants to configure which map view your app selects.
 
   
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Map Widget Error Codes](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Map Widget Error Codes</summary>
 
 * * *
 
@@ -52,7 +55,8 @@ The following table lists the error codes that the Map widget generates.
 
   
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Pin Image Anchor Constants](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Pin Image Anchor Constants</summary>
 
 * * *
 
@@ -74,7 +78,8 @@ The Pin Image Anchor Constants define the positions that your app can anchor a p
 
   
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Pin Image Type Constants](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Pin Image Type Constants</summary>
 
 * * *
 
@@ -87,7 +92,8 @@ These constants define the types of images that can be used with maps.
 | voltmx.map.PIN\_IMG\_SRC\_TYPE\_IMAGE | Indicates that the pin image is of type Image object |
 | voltmx.map.PIN\_IMG\_SRC\_TYPE\_RESOURCES | Indicates that the pin image is available in bundled resources. |
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Shape Type Constants](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Shape Type Constants</summary>
 
 * * *
 
@@ -98,5 +104,7 @@ The following constants identify the shapes that can be drawn on maps.
 | voltmx.map.SHAPE\_TYPE\_POLYGON | The shape is a polygon. |
 | voltmx.map.SHAPE\_TYPE\_POLYLINE | The shape is a polyline. |
 | voltmx.map.SHAPE\_TYPE\_CIRCLE | The shape is a circle. |
+
+</details>
 
 ![](resources/prettify/onload.png)

@@ -9,15 +9,15 @@ Methods
 
 The FormData object supports the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[append](javascript:void(0);)
+<details close markdown="block"><summary>append</summary>
 
 This API appends the specified entry to the collection of the FormData object.
 
-Syntax
+### Syntax
 
 <<formobject>>.append([name](#Name), [value](#Value))
 
-Parameters
+### Parameters
 
 name \[string\] - Mandatory
 
@@ -27,17 +27,18 @@ value \[string or rawbytes\] - Mandatory
 
 The value of the entry to be added to the collection.
 
-Return Values
+### Return Values
 
 None
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Windows and SPA.
 
-Example
+### Example
 
-{% highlight voltMx %}// Example for value as string  
+{% highlight VoltMx %}
+// Example for value as string  
 function uploadFile1()
 {
 	try{
@@ -71,9 +72,10 @@ frmData.append(f1.name, f1.read());
 
 {% endhighlight %}
 
-Consolidated Working Example
+### Consolidated Working Example
 
-{% highlight voltMx %}var glob_req;
+{% highlight VoltMx %}
+var glob_req;
 function notimeoutset()
 {
       var request = new voltmx.net.HttpRequest();

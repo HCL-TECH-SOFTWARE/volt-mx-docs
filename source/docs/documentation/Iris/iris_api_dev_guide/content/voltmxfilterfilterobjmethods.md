@@ -15,28 +15,28 @@ Methods
 
 The filter object contains the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[applyFilter Method](javascript:void(0);) 
+<details close markdown="block"><summary>applyFilter Method</summary> 
 
 * * *
 
 This method applies a filter to an Image object.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 filter.applyFilter(  
     dictionary)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | dictionary | A dictionary of attributes that contains the name of the filter and the filter's supporting data. |
 
- 
-
-Example
-
-{% highlight voltMx %}//By using the below function, you can add a cartoon filter over your image.
+### Example
+{% highlight VoltMx %}
+//By using the below function, you can add a cartoon filter over your image.
   createFilterForiOS: function(){
  
   var imgBright =  voltmx.image.createImage(this.imageBytes);
@@ -52,11 +52,11 @@ Example
   }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 For information about the available filters and their required supporting data, please see the [constants](voltmxfilterconstants.html) in the [voltmx.filter namespace](voltmxfilternamespace.html).
 
@@ -71,56 +71,64 @@ The following filters change the dimensions of the Image object.
 *   CircularWrap
 *   AffineTransform
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clearFilterData Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>clearFilterData Method</summary> 
 
 * * *
 
 Clears all of the data stored in a filter.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 filter.clearFilterData()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}var filterObj = voltmx.filter.createFilter();
+{% highlight voltMx %}
+var filterObj = voltmx.filter.createFilter();
 filterObj.clearFilterData();
 
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getOutputImage Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getOutputImage Method</summary>
 
 * * *
 
 Gets the image that results from applying the filter.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 filter.getOutputImage()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %} var imgBright =  voltmx.image.createImage(this.imageBytes);
+{% highlight voltMx %}
+var imgBright =  voltmx.image.createImage(this.imageBytes);
   var filterobj =  voltmx.filter.createFilter();
   var filterData = {
     "filterName": voltmx.filter.COMIC_EFFECT,
@@ -131,22 +139,23 @@ Example
   
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 The image that results from applying the filter.
 
-Remarks
+### Remarks
 
 IF the output image is not yet available, this method throws an exception.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
+</details>
 ![](resources/prettify/onload.png)

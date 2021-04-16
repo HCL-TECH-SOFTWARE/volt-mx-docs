@@ -12,17 +12,19 @@ The Browser widget is associated with the following methods:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addGestureRecognizer Method](javascript:void(0);)
+
+<details close markdown="block"><summary>addGestureRecognizer Method</summary>
 
 * * *
 
 This API allows you to set a gesture recognizer for a specified gesture for a specified widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _gestureType_
 
@@ -52,11 +54,11 @@ This function will be raised asynchronously
 
 See Remarks for the syntax of this function.
 
-Return Values
+### Return Values
 
 String - Reference to the gesture is returned.
 
-Remarks
+### Remarks
 
 The values for the _gestureType_parameter are:
 
@@ -85,7 +87,7 @@ Gesture Type:TAP
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[Number\] - specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
 
-For example:  
+### For example:  
 
 {fingers:1,taps:1}
 
@@ -93,7 +95,7 @@ Gesture Type:SWIPE
 
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 
-For example:
+### For example:
 
 {fingers: 1}
 
@@ -101,7 +103,7 @@ Gesture Type:LONGPRESS
 
 *   pressDuration \[Number\] - specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if pressDuration is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This is not applicable to Windows.
 
-For example:
+### For example:
 
 {pressDuration=1}.
 
@@ -126,7 +128,7 @@ The syntax for the _onGestureClosure_callback function are:
 
 Specifies the function that needs to be executed when a gesture is recognized.
 
-This function will be raised asynchronously and has the following Syntax:
+### This function will be raised asynchronously and has the following Syntax:
 
 onGestureClosure(widgetRef, gestureInfo, context)
 
@@ -134,7 +136,7 @@ onGestureClosure(widgetRef, gestureInfo, context)
 *   gestureInfo - Table with information about the gesture. The contents of this table vary based on the gesture type.
 *   context - Table with SegmentedUI row details.
 
-gestureInfo table has the following key-value pairs:
+### gestureInfo table has the following key-value pairs:
 
 *   gestureType \[number\] – indicates the gesture type; 1 for TAP, 2 for SWIPE, and 3 for LONGPRESS,4 for PAN, 5 for ROTATION, 6 for PINCH and 7 for RIGHTTAP
 *   gesturesetUpParams \[object\] – specifies the set up parameters passed while adding the gesture recognizer
@@ -159,7 +161,7 @@ gestureInfo table has the following key-value pairs:
 *   2 - constants.TOUCHTYPE\_MOUSE
 *   translationX and translationY \[number\] : cumulative distance as number. (Applicable only for PAN gesture type)
 
-context table has the following key-value pairs:
+### context table has the following key-value pairs:
 
 *   rowIndex \[number\] : row index of the segui where gesture was recognised. (Applicable to gestures added to segUI rows)
 *   sectionIndex \[number\] : section index of the segui where gesture was recognised. (Applicable to gestures added to segUI rows)
@@ -172,7 +174,7 @@ If you swipe a larger form, the default behavior is to scroll up and down depend
 
 If you swipe a Segmented UI with huge number of rows, the default behavior is to scroll the Segmented UI. If you define a SWIPE gesture on such segments, the gesture closure gets executed in addition to scrolling the form.
 
-Gestures can be added only for the following widgets:
+### Gestures can be added only for the following widgets:
 
 *   Flex Container
     
@@ -184,9 +186,10 @@ In the android platform, the top and bottom gestures work only when the scrollin
 *   RIGHTTAP applicable only to Windows 10
 *   ROTATION is not supported on android.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
+{% highlight VoltMx %}
+//Sample code to add Gestures to the frmGestures FlexForm.
 //Code to add DOUBLE TAP gesture to the frmGestures, FlexForm.
 var doubletp = {
  fingers: 1,
@@ -218,27 +221,29 @@ function onGestureFunction(commonWidget, gestureInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[animate Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>animate Method</summary>
 
 * * *
 
 Applies an animation to the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 animate (animationObj, animateConfig, animationCallbacks)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _animationObj_
 
-An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#createAn) function.
+An `animation` object created using [voltmx.ui.createAnimation]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#createAn?TocPath=References|voltmx.ui_Namespace|Functions|_____5) function.
 
 _animationConfig_
 
@@ -253,11 +258,11 @@ A JavaScript dictionary that contains key-value pairs. The following keys are su
 | animationEnd | A JavaScript function that is invoked with the animation ends. For more information, see the **Remarks** section below. |
 | animationStart | A JavaScript function that is invoked with the animation starts. For more information, see the **Remarks** section below. |
 
-Return Values
+### Return Values
 
 Returns a platform-specific handle to the animation. This handle currently not used, but is returned for possible future requirements use.
 
-Remarks
+### Remarks
 
 The callback for the `animationStart` key in the JavaScript object passed in this method's _animationCallbacks_ parameter has the following signature.
 
@@ -279,9 +284,10 @@ The `animate` method throws an Invalid Animation Definition Exception if animati
 
 If the widget is not part of the currently visible view hierarchy, calling this method does nothing. Because this method is asynchronous and immediately returns, it does not wait for the animation to start or complete.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code of animation
+{% highlight VoltMx %}
+//Sample code of animation
 function AnimateBoth() {
     var getFuncName = frm1.listbox18.selectedKey;
     if (getFuncName == "BothLT") {
@@ -294,23 +300,25 @@ function AnimateBoth() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[canGoBack Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>canGoBack Method</summary>
 
 * * *
 
 This method specifies whether the browser can navigate back into history.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 canGoBack()
+{% endhighlight %}
 
-Return Values
+### Return Values
 
 status
 
@@ -318,34 +326,38 @@ True - if the browser cache is not empty.
 
 False - if the browser cache is empty.
 
-Remarks
+### Remarks
 
 If the browser cache is empty then this method returns _false_ and the [goBack](#goBack) method has no effect.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke canGoBack method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke canGoBack method for a Browser widget.
 var canGoBck = frmBrowser.myBrowser.canGoBack();
 alert("canGoBack?::" + canGoBck);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[canGoForward Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>canGoForward Method</summary>
 
 * * *
 
 This method specifies whether the browser can navigate forward into history.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 canGoForward()
+{% endhighlight %}
 
-Return Values
+
+### Return Values
 
 status
 
@@ -353,24 +365,26 @@ True - if the browser cache is not empty.
 
 False - if the browser cache is empty.
 
-Remarks
+### Remarks
 
 If the browser cache is empty then this method returns _false_ and [goForward](#goForwar) method has no effect.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke canGoForward method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke canGoForward method for a Browser widget.
 var canGoFwd = frmBrowser.myBrowser.canGoForward();
 alert("canGoForward?::" + canGoFwd);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clearCookies Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>clearCookies Method</summary>
 
 * * *
 
@@ -379,11 +393,12 @@ To sync the cookies in the WKHTTPCookieStore with the parent app, you must use t
 
 The _clearCookies_ method is an asynchronous method that helps you to delete the cookies from the cookie storage area of the parent app.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 clearCookies(deleteCookieCallback,cookiesToDelete)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 `cookiesToDelete`: This parameter is used to input the name of the cookies that is to be deleted from the cookie storage of the parent app. This means that you must provide the key, Name to identify the cookies to be deleted from the storage.
 
@@ -394,16 +409,18 @@ Input Parameters
 
 Here is an example of the cookie object.  
 
-{% highlight voltMx %}{
+{% highlight VoltMx %}
+{
         "Name": "appName",
         "Value": "App01",
         "Domain": "app.example.com"
 }
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke the clearCookies method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke the clearCookies method for a Browser widget.
 
 var listOfCookies = [{
  "Name": "appName"
@@ -416,36 +433,39 @@ function clearCookiesCallback(wdg, cookieObject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 11 and onwards
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clearHistory Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>clearHistory Method</summary>
 
 * * *
 
 This method clears the page history of the specified Browser.
 
-Syntax
+### Syntax
 
 clearHistory()
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke clearHistory method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke clearHistory method for a Browser widget.
 frmBrowser.myBrowser.clearHistory ();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA and iPhone
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clone Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>clone Method</summary>
 
 * * *
 
@@ -457,38 +477,43 @@ For example, if the widget ID is "fc1" and the widget ID passed to clone API is 
 
 Exceptions are not displayed if widget ID parameter is not unique. Instead when the cloned copy is added to the same form as of original container then it may lead to unexpected behaviors. So it is your responsibility to provide unique widget ID.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 clone()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 widgetId \[String\]
 
 Optional. Reference of the name of the widget.
 
-Return Values
+### Return Values
 
 Cloned copy of the widget.
 
-Exceptions
+### Exceptions
 
 None
 
-Remarks
+### Remarks
 
 *   This method is not supported on SegmentedUI2 widget.
 *   Gestures for the FlexContainer are not cloned. You have to reapply the gestures on the cloned object.
 *   In Android platform, cloned Map widget will not work if prefix is not passed as parameter to the API.
 
-*   To apply focusSkin for dynamically created widgets or cloned widgets, assign focusSkin dynamically after adding the widget to the form hierarchy. This is applicable for SPA and Desktop web platforms.{% highlight voltMx %}formid.widgetid.focusSkin = "skinname";
-    {% endhighlight %}
-*   To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy. This is applicable for the Desktop web platform.{% highlight voltMx %}formid.widgetid.hoverSkin = "skinname";
+*   To apply focusSkin for dynamically created widgets or cloned widgets, assign focusSkin dynamically after adding the widget to the form hierarchy. This is applicable for SPA and Desktop web platforms.
+  {% highlight VoltMx %}
+  formid.widgetid.focusSkin = "skinname";
+  {% endhighlight %}
+*   To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy. This is applicable for the Desktop web platform.
+    {% highlight VoltMx %}
+    formid.widgetid.hoverSkin = "skinname";
     {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the clone Method for a FlexContainer widget.
 //You need to make a corresponding call of the clone method for other applicable widgets.  
@@ -500,23 +525,25 @@ var myLabel=frmFlex.lbl1.clone();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointFromWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointFromWidget Method</summary>
 
 * * *
 
 This method allows you to convert the coordinate system from a widget to a point (receiver's coordinate system).
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 convertPointFromWidget(point, fromWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -530,9 +557,10 @@ _fromWidget_
 
 This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from the widget to a point (receiver's coordinate system).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.convertPointFromWidget({
+{% highlight VoltMx %}
+Form1.widget1.convertPointFromWidget({
     x: "10dp",
     y: "20dp"
 }, widget2);
@@ -544,17 +572,19 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[convertPointToWidget Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>convertPointToWidget Method</summary>
 
 * * *
 
 Using the convertPointToWidget method, you can modify the co-ordinate system. You can convert the receiver's co-ordinate system from a **point** to a **Widget**.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 convertPointToWidget(point, toWidget)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _point_
 
@@ -564,41 +594,44 @@ _toWidget_
 
 \[widgetref\] - Mandatory. This parameter is the handle to the widget instance. Based on this parameter, the coordinate system is converted from a point to a widget.
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget2.convertPointToWidget({
+{% highlight VoltMx %}
+Form1.widget2.convertPointToWidget({
     x: "20dp",
     y: "30dp"
 }, widget1);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[evaluateJavaScript Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>evaluateJavaScript Method</summary>
 
 * * *
 
 This method accepts a JavaScript snippet in the form of a string.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 evaluateJavaScript(snippet)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 snippet
 
 The contents of the JavaScript code.
 
-Return Values
+### Return Values
 
 Returns the output or generates VoltMXError.
 
-Following are platform-specific return values in various scenarios:
+### Following are platform-specific return values in various scenarios:
 
   
 | Scenario | Android | iOS | Windows | SPA |
@@ -608,13 +641,13 @@ Following are platform-specific return values in various scenarios:
 | If return type is string | Works fine | Works fine | Works fine | Null |
 | If return type is non-string | Works fine | Works fine | Null | Null |
 
-Remarks
+### Remarks
 
 This method evaluates the snippet and returns the result as a string.
 
 This method returns null in case the result of the evaluation string is empty. When multiple functions are called in the JavaScript snippet, the returns of this method are based on the native platform behavior.
 
-Following are the platform limitations:
+### Following are the platform limitations:
 
 SPA
 
@@ -638,7 +671,9 @@ Windows
 *   If return is used (outside and defined function) in the JavaScript snippet to be evaluated, then evaluateJavaScript throws VoltMXError.
     *   VoltMXError code = 106
     *   error message = Unknown Error
-*   On Windows Tablet platform, alerts in the JavaScript snippet and functions will display. For example:{% highlight voltMx %}//Example1 throws error and returns null.
+*   On Windows Tablet platform, alerts in the JavaScript snippet and functions will display. For example:
+    {% highlight VoltMx %}
+    //Example1 throws error and returns null.
     webWidget1.evaluateJavaScript ("return document.title");
     
     //Example2 returns the document.title of the web page loaded.
@@ -657,7 +692,9 @@ iOS
     *   If the JavaScript string specified is more than 10MB.
     
     *   If the JavaScript is taking more than 10 seconds to execute.
-*   If return is used (outside and defined function) in the JavaScript snippet to be evaluated, then this method it returns null and does not throw any error.{% highlight voltMx %}//Example1 returns null.
+*   If return is used (outside and defined function) in the JavaScript snippet to be evaluated, then this method it returns null and does not throw any error.
+    {% highlight VoltMx %}
+    /Example1 returns null.
     webWidget1.evaluateJavaScript("return document.title");
     
     //Example2 returns the document.title of the web page loaded.
@@ -696,21 +733,23 @@ Android
 
 *   There is a security risk for using this method in versions earlier than 4.2 devices for all targets, and 4.2 and 4.3 devices with target less than 17. This method is disabled in those versions. For more information, refer to [http://developer.Android.com/reference/Android/webkit/WebView.html#addJavascriptinterface(java.land.Object,java.land.String)](http://developer.android.com/reference/android/webkit/WebView.html#addJavascriptinterface(java.land.Object,java.land.String)).  
     To enable this method,  set the "enableJsInterface" property for the browser widget.   
-    If you are creating the widget through IDE, you should set this property in preShow of the Form.{% highlight voltMx %}
+    If you are creating the widget through IDE, you should set this property in preShow of the Form.
+    {% highlight VoltMx %}
     //Example1
     webWidget1.enableJsInterface = true;
     {% endhighlight %}
     
     If you are creating the widget dynamically, you should set this property immediately after the constructor.
     
-    {% highlight voltMx %}
+    {% highlight VoltMx %}
     //Example2
     var webWidget1 = new voltmx.ui.Browser();
     webWidget1.enableJsInterface = true;
     {% endhighlight %}
 *   Due to technical limitations in the devices with OS versions earlier than 4.4 , this method waits for 3,500 milliseconds for the result and returns null if the execution exceeds that time.
 *   This method must be invoked on the webView instance only after it is loaded with the given URL or the HTML string. Use the events onSuccess or onFailure on the webView to check if the URL is loaded.
-*   This method returns null if there are any JavaScript evaluation errors and run-time exceptions. To handle run-time exceptions you must keep the script in try catch block and return the error string from catch so that this method returns the error string. For example:{% highlight voltMx %}
+*   This method returns null if there are any JavaScript evaluation errors and run-time exceptions. To handle run-time exceptions you must keep the script in try catch block and return the error string from catch so that this method returns the error string. For example:
+    {% highlight VoltMx %}
     var result = webWidget1.evaluateJavaScript("function() {try {//Write your JS code here} catch (err) {return 'ERROR';}}");
     if (result == "ERROR") {
      voltmx.print("Unknown Error");
@@ -719,7 +758,9 @@ Android
     }
     {% endhighlight %}
 
-*   If  return is used (outside and defined function) in the JavaScript snippet to be evaluated, then this method returns null and does not throw any error.{% highlight voltMx %}//Example1 returns null.
+*   If  return is used (outside and defined function) in the JavaScript snippet to be evaluated, then this method returns null and does not throw any error.
+    {% highlight VoltMx %}
+    //Example1 returns null.
     webWidget1.evaluateJavaScript("return document.title");
     
     //Example2 returns the document.title of the web page loaded.
@@ -728,7 +769,9 @@ Android
     //Example3 If the script loaded in the webWidget1 is a var a = "100"; then calling-
     webWidget1.evaluateJavaScript("a"); //It returns "100"
     webWidget1.evaluateJavaScript("return a"); //returns null.
-    {% endhighlight %}{% highlight voltMx %}//Example1 returns null.
+    {% endhighlight %}
+    {% highlight VoltMx %}
+    //Example1 returns null.
     webWidget1.evaluateJavaScript("return document.title");
     
     //Example2 returns the document.title of the web page loaded.
@@ -739,9 +782,10 @@ Android
     webWidget1.evaluateJavaScript("return a"); //returns null.
     {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Example1 
+{% highlight VoltMx %}
+//Example1 
 var result = webWidget1.evaluateJavaScript("JSON.stringify(eval(2+3))");
 voltmx.print("Result:" + result);
 
@@ -764,51 +808,53 @@ try {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on iOS, Android, Windows, SPA platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[evaluateJavaScriptAsync Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>evaluateJavaScriptAsync Method</summary>
 
 * * *
 
 This method accepts a JavaScript snippet and a callback function as inputs.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 evaluateJavaScriptAsync(snippet,callback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 snippet
 
 The contents of the JavaScript code.
 
-callback
+### callback
 
 function (result, voltmxError ){
 
 };
 
-The contents of the voltmxError are:
+### The contents of the voltmxError are:
 
 > *   errorCode
 > *   name
 > *   message
 
-Return Values
+### Return Values
 
 Returns the output or generates VoltMXError.
 
-Remarks
+### Remarks
 
 This method evaluates the snippet and invokes the callback with the result.
 
 On Android platform, this method accepts a JavaScript snippet in the form of string, and a callback function as inputs and evaluates the snippet and calls the callback with the result and error as null.
 
-Following are the platform limitations:
+### Following are the platform limitations:
 
 Windows
 
@@ -818,7 +864,9 @@ Windows
     
     *   error message = Unknown Error
 *   If the evaluation returns a non-string type, this method returns null.
-*   On Windows Tablet platform, alerts in the JavaScript snippet and functions are not displayed. For example:{% highlight voltMx %}//Example1 throws error and returns null and populate the error object with the appropriate
+*   On Windows Tablet platform, alerts in the JavaScript snippet and functions are not displayed. For example:
+    {% highlight VoltMx %}
+    //Example1 throws error and returns null and populate the error object with the appropriate
     
     //Error (106, "Unknown Error").
     webWidget1.evaluateJavaScriptAsync("return document.title");
@@ -850,72 +898,77 @@ Android
 *   Due to technical limitations in devices with OS earlier than 4.4, this method waits for 3,500 milliseconds for the result and returns null if the execution exceeds that time.
 *   This method returns null if there are any JavaScript evaluation errors and run-time exceptions. To handle run-time exceptions, you must keep the script in a try catch block and return the error string from catch so that this method returns the error string.
 
-Example
+### Example
 
-{% highlight voltMx %}//Example1
+{% highlight VoltMx %}
+//Example1
 webWidget1.evaluateJavaScriptAsync("eval(2+3)",
     function(result, error) {
         voltmx.print("Result:" + result);
     });
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on iOS, Android, and Windows platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getHTMLFilesInWebFolder Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>getHTMLFilesInWebFolder Method</summary> 
 
 * * *
 
 Retrieves a list of the HTML files of the specified type.
 
-Syntax
+### Syntax
 
 getHTMLFilesInWebFolder(RESTYPE)
 
-Parameters
+### Parameters
 
 _RESTYPE_
 
 The resource type of the files to be returned.
 
-Return Values
+### Return Values
 
 Returns a list of files that match the resource type specified in the _RESTYPE_ parameter.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getBadge Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getBadge Method</summary>
 
 * * *
 
 This API enables you to read the badge value (if any) attached to the specified widget. If the specified widget does not have a badge attached to it, it returns an empty string.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 getBadge()
+{% endhighlight %}
 
-Optional Parameter
+### Optional Parameter
 
 uniqueIdentifier
 
 Unique identifier of a widget which is a handle to the widget.
 
-Return Values
+### Return Values
 
 Returns a string containing the badge value applied to the specified widget. If the specified widget has no badge value attached to it, it returns an empty string.
 
-Remarks
+### Remarks
 
 When a badge is removed, the widgets are re-formatted to accommodate the cleared badge values.
 
 On the iOS platform, this method is applicable on Label, Button, Image, TextBox, and TextArea widgets only.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the getBadge Method for button widget.
 //You need to make a corresponding call of the getBadge method for other applicable widgets.
 function getBadge() {
@@ -928,13 +981,14 @@ function getBadge() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getCookies Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>getCookies Method</summary>
 
 * * *
 
@@ -943,18 +997,20 @@ To sync the cookies in the WKHTTPCookieStore with the parent app, you must use t
 
 The _getCookies_ method is an asynchronous method that helps you to retrieve the cookies from the WKHTTPCookieStore to the parent app. The cookies will be available as an argument in the callback.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 getCookies(callback)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 `callback`: This parameter registers the function that is invoked when the cookie is being retrieved from the WKHTTPCookieStore. This function has the following two arguments.
 
 *   `wdg`: This argument has the handle of with the Browser widget instance that invokes the _getCookies_ method.
 *   `cookiesData`: This argument has the list of all the cookies that is present in the WKHTTPCookieStore. Each cookie will be in the form of a dictionary with the values: Version, Name, Value, ExpiresDate, Domain and Path.  
     Here is an example of a cookie.  
-    {% highlight voltMx %}{
+    {% highlight VoltMx %}
+    {
      "Version": 1,
      "Name": "user_id2",
      "Value": "ZD0265",
@@ -964,9 +1020,10 @@ Input Parameters
     }
     {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke the getCookies method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke the getCookies method for a Browser widget.
 frmBrowser.myBrowser.getCookies(getCookiesInfo);
 
 function getCookiesInfo(wdg, cookiesdata)
@@ -975,23 +1032,25 @@ function getCookiesInfo(wdg, cookiesdata)
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 11 onwards.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[goBack Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>goBack Method</summary>
 
 * * *
 
 This method provides you with the ability to navigate one step back in the browser history.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 goBack()
+{% endhighlight %}
 
-Remarks
+### Remarks
 
 If the history stack is empty then this method has no effect.
 
@@ -1004,14 +1063,15 @@ This method can be used only when [canGoBack](#canGoBac) returns _true_.
 *   If two Browser widgets are present on a form, and the `goBack` API is used on a Browser widget (for example, Browser B), the user will be navigated to the previous web page in the other Browser widget (for example, Browser A). This behavior is observed only when the other Browser widget (Browser B) has no navigation history yet.
     
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke goBack method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke goBack method for a Browser widget.
 frmBrowser.myBrowser.goBack();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1021,17 +1081,19 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[goForward Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>goForward Method</summary>
 
 * * *
 
 This method provides you with the ability to navigate one step forward in the browser history.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 goForward()
+{% endhighlight %}
 
-Remarks
+### Remarks
 
 If there are no visited links in the history stack, then this method has no effect.
 
@@ -1044,14 +1106,15 @@ This method can be used only when [canGoForward](#canGoFor) returns _true_.
 *   If two Browser widgets are present on a form, and the `goForward` API is used on a Browser widget (for example, Browser B), the user will be navigated to the next web page in the other Browser widget (for example, Browser A). This behavior is observed only when the other Browser widget (Browser B) has no navigation history yet.
     
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke goForward method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke goForward method for a Browser widget.
 frmBrowser.myBrowser.goForward();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1061,106 +1124,117 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isCordovaAppsEnabled Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>isCordovaAppsEnabled Method</summary> 
 
 * * *
 
 Retrieves a Boolean value that indicates whether Apache Cordova apps are enabled.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 isCordovaAppsEnabled()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 Returns `true` if Cordova apps are enabled, or `false` if not.  
 
 **Example**
 
-{% highlight voltMx %}//Sample code to invoke isCordovaAppsEnabled method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke isCordovaAppsEnabled method for a Browser widget.
 var status= frmBrowser.myBrowser.isCordovaAppsEnabled();
 alert("Is Cordova Apps Enabled in the Browser widget?::" + status);
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isHtmlPreviewEnabled Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>isHtmlPreviewEnabled Method</summary> 
 
 * * *
 
 Retrieves a Boolean value that indicates whether your app can open an HTML preview.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 isHtmlPreviewEnabled()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 Returns `true` if the app can open an HTML preview and HTML code with a single click, or `false` if not.
 
-Remarks
+### Remarks
 
 If this method returns `true`, the app can open both an HTML preview and the corresponding HTML code with a single click. If it returns `false`, a single click only opens the HTML code.  
 
 **Example**
 
-{% highlight voltMx %}//Sample code to invoke isHtmlPreviewEnabled method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke isHtmlPreviewEnabled method for a Browser widget.
 var status= frmBrowser.myBrowser.isHtmlPreviewEnabled();
 alert("Is HTML Preview Enabled in the Browser widget?::" + status);
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isWebAppDevelopmentEnabled Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>isWebAppDevelopmentEnabled Method</summary> 
 
 * * *
 
 Retrieves a Boolean value indicating whether web app development is enabled in the app.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 isWebAppDevelopmentEnabled()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 Returns `true` if web app development is enabled, or `false` if not.
 
-Remarks
+### Remarks
 
 Your app can use this value to enable or disable features depending on whether or not web app development is enabled.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke isWebAppDevelopmentEnabled method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke isWebAppDevelopmentEnabled method for a Browser widget.
 var status= frmBrowser.myBrowser.isWebAppDevelopmentEnabled();
 alert("Is Web App Development Enabled in the Browser widget?::" + status);
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[loadData Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>loadData Method</summary>
 
 * * *
 
 This method enables you to load the data into the Browser with the provided configuration.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 loadData(data,dataConfig)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 data
 
@@ -1179,7 +1253,8 @@ A configuration dictionary for the specified data. Following are the options:
 On Android, you can use baseURL to access the application local web files (js/css). You can use baseURL to refer files stored in <project> -> web -> localfiles -> <user folder structure>  
 As shown in the following example, JavaScript files (.js files) are stored in <project> -> web -> localfiles -> js folder. With respect to the example in src attribute of <script> tag, you must provide the relative path (for example, js/ExampleJS1.js) and the base URL in the baseURL key of dataConfig object as "file:///android\_asset/web/localfiles/".
 
-{% highlight voltMx %}var.htmlString = ".html><head><title>Hello World Example</title>"
+{% highlight VoltMx %}
+var.htmlString = ".html><head><title>Hello World Example</title>"
 <script type= "text/javascript\" src=\"js/ExampleJS1.js\"></script>"
 <script type="text/javascript \" src=\"js/index.js\"></script>"
 <body><h1>Hello World !! </h1></body><.html>";
@@ -1191,7 +1266,7 @@ var dataConfig ={"mimeType":"text.html","baseURL":"file:///android_asset/web/loc
 frmHome.brwWidget.loadData.htmlString,dataConfig);
 {% endhighlight %}
 
-Exceptions
+### Exceptions
 
   
 |   ERROR CODE | Description |
@@ -1199,7 +1274,7 @@ Exceptions
 | 100 | Invalid type of parameters |
 | 101 | Invalid number of arguments |
 
-Remarks
+### Remarks
 
 Following are the guidelines and limitations of this method:
 
@@ -1215,9 +1290,10 @@ Following are the guidelines and limitations of this method:
 
 > **_Note:_** The document formats Excel, PowerPoint, and Word must be saved using Microsoft Office 97 or later versions.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke loadData method in a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke loadData method in a Browser widget.
 var pdfFile = voltmx.io.File(path/to/pdf/file);
 
 var data = pdfFile.read();
@@ -1229,23 +1305,25 @@ var config = {
 browserWidget.loadData(data,config);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[registerForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>registerForPeekandPop Method</summary>
 
 * * *
 
 This method registers a widget to enable 3D Touch peek and pop gestures.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 registerForPeekandPop(onPeekCallback, onPopCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPeekCallback
 
@@ -1265,9 +1343,10 @@ Callback Return Values
 
   A PreviewInfoTable. See the Remarks section for a description of this table.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget) {
+{% highlight VoltMx %}
+function onPeekCallback(widget) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -1303,15 +1382,16 @@ Callback Remarks
 
 Use this callback to set the content for pop. The form handle returned by this callback is used for pop content. In general, the form that is used for preview is used for pop content also. If the pop callback is not implemented, peek disappears and the app returns to its previous state.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}
+function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Remarks
+### Remarks
 
 A PreviewInfoTable has the following format.
 
@@ -1337,43 +1417,47 @@ Example: \[“0dp”, “0dp”, “200dp”, “300dp”\], \[“10%”, “10%
 
 Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “240px”\]
 
-Example of a PreviewInfoTable:
+### Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}
+var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[reload Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>reload Method</summary>
 
 * * *
 
 This method provides you with the ability to reload the current web page.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 reload()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke reload method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke reload method for a Browser widget.
 frmBrowser.myBrowser.reload();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1383,23 +1467,26 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeFromParent Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeFromParent Method</summary>
 
 * * *
 
 This method allows you to remove a child widget from a parent widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeFromParent()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the removeFromParent Method for a Calendar widget.
 //You need to make a corresponding call of the removeFromParent method for other applicable widgets.
 
@@ -1407,36 +1494,39 @@ Form1.calendar.removeFromParent();
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android , Windows, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[removeGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>removeGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to remove the specified gesture recognizer for the specified widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 removeGestureRecognizer(gestureHandle)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 gestureHandle - Mandatory
 
 Specifies the handle to the gesture returned by addGestureRecognizer call.
 
-Example
+### Example
 
-{% highlight voltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
+{% highlight VoltMx %}
+//Sample code to remove Double tap gesture from frmGestures FlexForm.  
 frmGestures.removeGestureRecognizer(doubletp);  
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available on all platforms except Desktop Web and Android.
 
@@ -1444,17 +1534,19 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setBadge Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setBadge Method</summary>
 
 * * *
 
 This method enables you to set the badge value to the given widget at the upper, right corner of the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setBadge(badgeText)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 badgeText \[String\] - Mandatory
 
@@ -1464,15 +1556,15 @@ skin \[String\] - Optional
 
 The parameter specifies the background color for the badge. The default color is red.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 The color for the badge can be defined using a skin. The default color for the badge is red with white lettering.
 
@@ -1494,9 +1586,10 @@ For iOS platform, this method is applicable on Box, Label, and Image widgets onl
 
 For Android platform, this method is applicable on Button and Image widgets only.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setBadge Method for button widget.
 //You need to make a corresponding call of the setBadge method for other applicable widgets.
 function setBadge() {
@@ -1508,7 +1601,7 @@ placed on a form frm1, use the following code: */
 form.lbl1.setBadge("4", "badgeSkin");
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
@@ -1516,7 +1609,8 @@ For more information about the badge APIs refer the _API Reference Document_.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setCookies Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setCookies Method</summary>
 
 * * *
 
@@ -1525,16 +1619,18 @@ To sync the cookies in the WKHTTPCookieStore with the parent app, you must use t
 
 The _setCookies_ method is an asynchronous method that helps you to set the cookies to the WKHTTPCookieStore from the parent app. The cookies will be available as an argument in the callback.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setCookies(callback, cookiesData)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 `cookiesData`: This argument has the list of all the cookies that is present in the WKHTTPCookieStore. Each cookie will be in the form of a dictionary with the values: Version, Name, Value, ExpiresDate, Domain and Path.  
 Here is an example of a cookie.  
 
-{% highlight voltMx %}{
+{% highlight VoltMx %}
+{
  "Version": 1,
  "Name": "user_id2",
  "Value": "ZD0265",
@@ -1549,14 +1645,15 @@ Here is an example of a cookie.
 *   `wdg`: This argument has the handle of with the Browser widget instance that invokes the _setCookies_ method.
 *   `cookieObject`: This argument has the handle of the object for which the _setCookies_ method is invoked.
 
-Remarks
+### Remarks
 
 *   If the cookie storage of the parent app already has a cookie with the same name, domain and path, the setCookie method will replace the existing cookie with the new one.
 *   If the cookie to be stored in the cookie storage is new, ensure that you at least provide values of the following keys: Path, Name, Value and Domain. Also, all the valid key names must start with capital letters.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to invoke the setCookies method for a Browser widget.
+{% highlight VoltMx %}
+//Sample code to invoke the setCookies method for a Browser widget.
 
 var lisOfCookies = [{
  "Name": "appName",
@@ -1571,19 +1668,20 @@ function setCookiesCallback(wdg, cookieObject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 iOS 11 and onwards
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setEnabled Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setEnabled Method</summary>
 
 * * *
 
 This method specifies the widget that must be enabled or disabled.
 
-Syntax
+### Syntax
 
 setEnabled(enabled)
 
@@ -1597,36 +1695,38 @@ true -Indicates widget is enabled.
 
 false - Indicates widget is disabled.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 Browser widget does not support this method in SPA.
 
 This method is not applicable in Map widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setEnabled Method for button widget.
 //You need to make a corresponding call of the setEnabled method for other applicable widgets.
 
 form1.myButton.setEnabled(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setFocus Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setFocus Method</summary>
 
 * * *
 
@@ -1634,11 +1734,11 @@ This method specifies the widget on which there must be focus.
 
 **Default :** true
 
-Syntax
+### Syntax
 
 setFocus(focus)
 
-Parameters
+### Parameters
 
 _focus_ \[Boolean\]- Mandatory
 
@@ -1646,30 +1746,31 @@ true -Indicates focus is set on a widget.
 
 false - Indicates focus is not set on a widget.
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 You should not call this method in **preShow** of a form as it is not respected by all platforms. In android platform, this method is not respected in **preShow** of a form. You can give focus to a particular widget only after it is rendered on the screen, hence it should be called in postShow of a form.
 
 This method is not applicable in Form widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setFocus Method for button widget.
 //You need to make a corresponding call of the setFocus method for other applicable widgets.
 
 form1.myButton.setFocus(true);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
@@ -1677,17 +1778,19 @@ Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setGestureRecognizer Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setGestureRecognizer Method</summary>
 
 * * *
 
 This method allows you to set a gesture recognizer for a specified gesture for a specified widget. You can set a Gesture recognizer only for a FlexForm, a FlexContainer, and a FlexScrollContainer. The setGestureRecognizer method is deprecated and should not be used in new software. However, Swipe Distance and Swipe Velocity parameters are not deprecated. So if you want to use the Swipe Distance and Swipe velocity parameters, use the setGestureRecognizer method. To use all other parameters, you must use the addGestureRecognizer method.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setGestureRecognizer (gestureType,setupParams,gestureHandler)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _gestureType_
 
@@ -1716,7 +1819,7 @@ onGesturefunction(widgetRef,gestureInfo)
 *   _widgetRef_ - This parameter specifies the handle to the widget on which the gesture was recognized.
 *   _gestureInfo_ - This parameter specifies an array that provides information about the gesture. The contents of this array vary based on the gesture type.
 
-Volt MX  Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
+Volt MX Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
 
 *   _gestureType_ \[number\] - indicates the gesture type; **1** for TAP, **2** for SWIPE, and **3** for LONGPRESS.
 *   _gesturesetUpParams_ \[object\] - this array is the set up parameters passed while adding the gesture recognizer.
@@ -1728,15 +1831,15 @@ Volt MX  Iris populates the details in the _gestureInfo_ array. This array has t
 *   _widgetWidth_ \[number\] - specifies the width of the widget (in pixels). This parameter is applicable only on iPhone.
 *   _widgetHeight_ \[number\] - specifies the height of the widget (in pixels). This parameter is applicable only on iPhone.
 
-Return Values
+### Return Values
 
 String - Reference(uniqueidentifier) to the gesture is returned.
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is applicable on Form, Box, and ScrollBox widgets only.
 
@@ -1749,7 +1852,7 @@ Gesture Type:TAP
 *   fingers \[number\] - This parameter specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[number\] - This parameter specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
 
-For example:
+### For example:
 
 {fingers:1,taps:1}
 
@@ -1759,7 +1862,7 @@ Gesture Type:SWIPE
 *   swipedistance \[number\] - This parameter specifies the distance between the pixel from where the swipe started to the pixel where the swipe stopped (finger is moved up or removed). The default value is 50 pixels. This parameter is applicable only on android. This parameter is applicable only if the gesture type is SWIPE.
 *   swipevelocity \[number\] - This parameter specifies the velocity of the swipe measured in pixels per second. The default value is 75. This parameter is applicable only on android. This parameter is applicable only if the gesture type is SWIPE.
 
-For example:
+### For example:
 
 {fingers:1,swipedistance:50,swipevelocity:75}
 
@@ -1767,7 +1870,7 @@ Gesture Type:LONGPRESS
 
 *   pressDuration \[number\] - This parameter specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if the _pressDuration_ is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This parameter is not customizable on android platform. The default value on android platform is 500 ms. Any value you pass to this parameter is ignored and the default value is used.
 
-For example:
+### For example:
 
 {pressDuration:1}
 
@@ -1780,7 +1883,7 @@ onGesturefunction(widgetRef,gestureInfo)
 *   _widgetRef_ - This parameter specifies the handle to the widget on which the gesture was recognized.
 *   _gestureInfo_ - This parameter specifies an array that provides information about the gesture. The contents of this array vary based on the gesture type.
 
-Volt MX  Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
+Volt MX Iris populates the details in the _gestureInfo_ array. This array has the following key-value pairs:
 
 *   _gestureType_ \[number\] - indicates the gesture type; **1** for TAP, **2** for SWIPE, and **3** for LONGPRESS.
 *   _gesturesetUpParams_ \[object\] - this array is the set up parameters passed while adding the gesture recognizer.
@@ -1792,9 +1895,10 @@ Volt MX  Iris populates the details in the _gestureInfo_ array. This array has t
 *   _widgetWidth_ \[number\] - specifies the width of the widget (in pixels). This parameter is applicable only on iPhone.
 *   _widgetHeight_ \[number\] - specifies the height of the widget (in pixels). This parameter is applicable only on iPhone.
 
-Example
+### Example
 
-{% highlight voltMx %}//The below function will get invoked  when a gesture is recognized. 
+{% highlight VoltMx %}
+//The below function will get invoked  when a gesture is recognized. 
 function myTap(myWidget, gestureInfo) {
     alert(" Tap Gesture detected");
     alert("gestureType :" + gestureInfo.gestureType);
@@ -1812,23 +1916,25 @@ var setupTblTap = {
 var tapGesture = frm1.hbx1.setGgestureRecognizer(1, setupTblTap, myTap);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPeek Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPeek Method</summary>
 
 * * *
 
 This method sets and overrides the existing onPeekCallback for the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setOnPeek(onPeekCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPeekCallback
 
@@ -1848,9 +1954,10 @@ Callback Return Values
 
 PreviewInfoTable. See the Remarks section for a description of this table.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPeekCallback(widget, contextInfo) {
+{% highlight VoltMx %}
+function onPeekCallback(widget, contextInfo) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": [0, 0, 200, 200],
@@ -1860,11 +1967,11 @@ Callback Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 A PreviewInfoTable has the following format.
 
@@ -1890,18 +1997,20 @@ Example: \[“0dp”, “0dp”, “200dp”, “300dp”\], \[“10%”, “10%
 
 Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “240px”\]
 
-Example of a PreviewInfoTable:
+### Example of a PreviewInfoTable:
 
-{% highlight voltMx %}var previewInfoTable = {
+{% highlight VoltMx %}
+var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": [0, 0, 200, 200],
     "contentSize": [320, 480]
 };
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}function settingPeek() {
+{% highlight VoltMx %}
+function settingPeek() {
     Form1.setOnPeek(onMyPeekcallback);
 }
 
@@ -1920,23 +2029,25 @@ function onMyPeekcallback(widgetref, contextInfo) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setOnPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setOnPop Method</summary>
 
 * * *
 
 This method overrides the existing onPopCallback for the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setOnPop(onPopCallback)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 onPopCallback
 
@@ -1956,29 +2067,31 @@ _peekForm_
 
  A form reference that is displayed as preview/peek.
 
-Callback Return Values
+### Callback Return Values
 
  A form reference.
 
-Callback Remarks
+### Callback Remarks
 
  Use this callback to set the content for pop. The form handle returned by this callback is used for pop content. In general, the form that is used for preview is used for pop content also. If the pop callback is not implemented, peek disappears and the app returns to its previous state.
 
-Callback Example
+### Callback Example
 
-{% highlight voltMx %}function onPopCallback(widget, peekForm) {
+{% highlight VoltMx %}
+function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Example
+### Example
 
-{% highlight voltMx %}function settingPop() {
+{% highlight VoltMx %}
+function settingPop() {
     Form1.setOnPop(myonPopcallback);
 }
 
@@ -1988,23 +2101,25 @@ function myonPopcallback(widgetref, peekForm) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS 9.0 and later
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setResponse Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setResponse Method</summary>
 
 * * *
 
 Sets credentials that should be sent to the browser widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setResponse (eventType,data)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _eventType_ \[Integer\]- Mandatory
 
@@ -2014,11 +2129,11 @@ _data_\[map\]- Mandatory
 
 The map contains credentials passed to the browser widget. See the Remarks section for more information.
 
-Return Values
+### Return Values
 
 None
 
-Remarks
+### Remarks
 
 If eventType is constants.WEBWIDGET\_RECEIVE\_TYPE\_HTTP\_AUTH’, the data object should consist of following sub parameters as key value pairs:
 
@@ -2032,23 +2147,25 @@ If password is given as empty string or is incorrect, the onReceive event is sen
 
 For all other values it will display error page with status code 401.
 
-Platform Availability
+### Platform Availability
 
 Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setSafeBrowsingResponse Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setSafeBrowsingResponse Method</summary>
 
 * * *
 
 This method is used to set an action for a Browser widget, when the _onSafeBrowsingHit_ event is triggered.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setSafeBrowsingResponse(requestUrl, response, allowReporting)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 *   **requestUrl** \[String\]: This parameter specifies the URL for which the [onSafeBrowsingHit](Browser_Events.html#onSafeBrowsingHit) event gets triggered. This is a mandatory attribute.
 *   **allowReporting**\[Boolean\]: This flag depends on the value of the _response_ attribute. This is a mandatory attribute.
@@ -2057,23 +2174,25 @@ Input Parameters
     *   _constants.BROWSER\_SET\_SAFEBROWSING\_RESPONSE\_PROCEED_: When you use this constant, the Browser widget acts as if you have clicked the **visit this unsafe site** button. If you set the _allowReporting_ flag as true, Safe Browsing reporting is enabled.
     *   _constants.BROWSER\_SET\_SAFEBROWSING\_RESPONSE\_BACKTOSAFETY_: When you use this constant, the Browser widget acts as if you have clicked the **Back to Safety** button. If you set the _allowReporting_ flag as true, Safe Browsing reporting is enabled.
 
-Remarks
+### Remarks
 
 *   [onSafeBrowsingHit](Browser_Events.html#onSafeBrowsingHit) event callback and the _setSafeBrowsingResponse_ Method are used together to create a custom interstitial page when the Browser widget loads a flagged URL.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to invoke setSafeBrowsingResponse method in Browser widget, when requestUrl triggers onSafeBrowsingHit event.*/
+{% highlight VoltMx %}
+/*Sample code to invoke setSafeBrowsingResponse method in Browser widget, when requestUrl triggers onSafeBrowsingHit event.*/
 frm1.browserID.setSafeBrowsingResponse(requestUrl, constants.BROWSER_SET_SAFEBROWSING_RESPONSE_SHOW_DEFAULT_INTERSTITIAL, true);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android(API Level 27 and later)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setVisibility Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>setVisibility Method</summary>
 
 * * *
 
@@ -2081,11 +2200,12 @@ Use this method to set the visibility of the widget.
 
 **Default :** true
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 setVisibility(visible)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _visible_
 
@@ -2137,15 +2257,15 @@ It is a JS dictionary containing the events invoked by the platform during the a
 *   **animStarted**: Invoked at the beginning of the animation without any parameters. Following is the Syntax of the event: function animStarted()
 *   **animEnded**: Invoked at the end of the animation without any parameters. Following is the Syntax of the event: function animEnded()
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 Error
 
-Remarks
+### Remarks
 
 This method is not applicable on Form, Popup, and Alert. It is also not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so by using [Segment](Segment_Methods.html#segmentedui-methods) methods.
 
@@ -2153,9 +2273,10 @@ Passing an invalid type other than the above events lead to run time exceptions/
 
 This method is not supported on the widgets FlexForm, FlexContainer, and FlexScrollContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to invoke the setVisibility Method for a button widget with animation.
 //You need to make a corresponding call of the setVisibility method for other applicable widgets.
 
@@ -2174,36 +2295,39 @@ form1.myButton.setVisibility(
 form1.myButton.setVisibility(false);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[unregisterForPeekandPop Method](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>unregisterForPeekandPop Method</summary>
 
 * * *
 
 This method unregisters a widget from 3D Touch peek and pop gestures.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 unregisterForPeekandPop()
-
-Parameters
-
-None.
-
-Return Values
-
-None.
-
-Example
-
-{% highlight voltMx %}Form1.unregisterForPeekAndPop();
 {% endhighlight %}
 
-Platform Availability
+### Parameters
+
+None.
+
+### Return Values
+
+None.
+
+### Example
+
+{% highlight VoltMx %}
+Form1.unregisterForPeekAndPop();
+{% endhighlight %}
+
+### Platform Availability
 
 *   iOS 9.0 and later
 

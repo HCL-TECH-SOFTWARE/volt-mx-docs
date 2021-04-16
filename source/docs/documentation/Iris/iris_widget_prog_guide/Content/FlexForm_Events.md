@@ -2,8 +2,6 @@
 layout: "documentation"
 category: "iris_widget_prog_guide"
 ---
-                               
-
 
 FlexForm Events
 ===============
@@ -12,23 +10,26 @@ The FlexForm widget has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addWidgets Event](javascript:void(0);)
+<details close markdown="block"><summary>addWidgets Event</summary>
 
 * * *
 
 An event callback invoked by the platform when the form is accessed for first time after its construction. This function gets executed only once on in lifetime of the form. If a destroyed form is accessed, the form is re-initialized and this callback is once again invoked. Forms can be destroyed using destroy method.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 addWidgets()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the addWidgets event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the addWidgets event for a FlexForm.
 
 myForm.addWidgets=addWidgetsCallback;
 
@@ -37,7 +38,7 @@ function addWidgetsCallback() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -46,29 +47,33 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
 This event is invoked for every widget when the widget position and dimensions are computed. This event is invoked for all the widgets placed inside flex containers. This event is invoked in the order in which the widgets are added to the widget hierarchy and expect the frame property of the widget is calculated and available for use within this event.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is used to set the layout properties of child widgets in the relation to self and peer widgets whose layout is not yet performed.
 
 > **_Note:_** The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}
+//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -79,7 +84,7 @@ function doLayoutButton1(){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -88,7 +93,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[init Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>init Event</summary>
 
 * * *
 
@@ -96,24 +102,27 @@ This event gets called only once in form life cycle that is when the form is rea
 
 When form is destroyed and reused again, _init_ gets called as a part of form lifecycle.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 init()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}testfrm.init = initCallback;
+{% highlight VoltMx %}
+testfrm.init = initCallback;
 
 function initCallback(eventObj) {
     voltmx.print("in the init" + eventObj);
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -122,27 +131,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onActionBarBack Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onActionBarBack Event</summary>
 
 * * *
 
 An event callback that is invoked by the platform when the back button is pressed on an action bar. The back button exists on the left side of the action bar with UP caret symbol. It is enabled only when onActionBarBack callback is registered on form and showActionBarIcon is set to _true_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onActionBarBack()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This event is displayed in the widget properties list only when you select SDK versions 3.0 and above in the Application Properties > Native > Android > SDK Versions section.
 
-Example
+### Example
 
-{% highlight voltMx %}function appBarBackcallback() {
+{% highlight VoltMx %}
+function appBarBackcallback() {
     alert("In the App bar back callback");
 }
 
@@ -152,27 +165,30 @@ function test1() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available on Android/Android tablet only.
+    Available on Android/Android tablet only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onBreakpointChange Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onBreakpointChange Event</summary>
 
 * * *
 
 This event is triggered, when the width of the browser running the Responsive Web App is increased or decreased.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onBreakpointChange()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Return Value
+### Return Value
 
 _Boolean_
 
@@ -188,13 +204,14 @@ _breakpoint_\[Number\]
 
 This parameter specifies the current breakpoint value. When the window size exceeds the highest breakpoint, this parameter returns the constant: **constants.BREAKPOINT\_MAX\_VALUE**.
 
-Remarks
+### Remarks
 
 From Iris V9 release, onBreakpointChange event is triggered while using responsive web components also.
 
-Example
+### Example
 
-{% highlight voltMx %}function breakpoint_callback (myFormHandle, breakpoint) {
+{% highlight VoltMx %}
+function breakpoint_callback (myFormHandle, breakpoint) {
     voltmx.print("breakpoint changed");
 }  
 function myForm_preshow() {
@@ -203,30 +220,34 @@ function myForm_preshow() {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDecelerationStarted Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDecelerationStarted Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user stops scrolling but the content still moves before the content actually stops.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onDecelerationStarted()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onDecelerationStarted event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onDecelerationStarted event for a FlexForm.
 
 myForm.onDecelerationStarted=onDecelerationStartedCallback;
 
@@ -235,33 +256,37 @@ function onDecelerationStartedCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-This property is available on iOS platform.
+    This property is available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDestroy Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDestroy Event</summary>
 
 * * *
 
 Specifies an event which is triggered before the FlexForm is destroyed.
 
-For more information see _Event Editor_ in the _VoltMX Iris User Guide_.
+For more information see _Event Editor_ in the _Volt MX Iris User Guide_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onDestroy()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
 > **_Note:_** While using the **this** keyword (for example, this.view) in onDestroy event (as a FormController event) to point to the current controller, you must ensure that the function is not a **fat arrow** function. Because in fat arrow function declarations, the **this** pointer is taken from the parent scope and might not point to the current FormController. For more information on this limitation, click [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onDestroy event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onDestroy event for a FlexForm.
 
 myForm.onDestroy=onDestroyCallback;
 
@@ -270,7 +295,7 @@ function onDestroyCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -279,25 +304,29 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDeviceBack Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDeviceBack Event</summary>
 
 * * *
 
 Specifies an event which is triggered when the user uses the back button on the device.
 
-For more information see _Event Editor_ in the _VoltMX Iris User Guide_.
+For more information see _Event Editor_ in the _Volt MX Iris User Guide_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onDeviceBack()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onDeviceBack event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onDeviceBack event for a FlexForm.
 
 myForm.onDeviceBack=onDeviceBackCallback;
 
@@ -306,32 +335,36 @@ function onDeviceBackCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDeviceMenu Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDeviceMenu Event</summary>
 
 * * *
 
 Specifies an event which is triggered when the user access the device menu.
 
-For more information see _Event Editor_ in the _VoltMX Iris User Guide_.
+For more information see _Event Editor_ in the _Volt MX Iris User Guide_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onDeviceMenu()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onDeviceMenu event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onDeviceMenu event for a FlexForm.
 
 myForm.onDeviceMenu=onDeviceMenuCallback;
 
@@ -340,37 +373,39 @@ function onDeviceMenuCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available on Android/Android Tablet.
+    Available on Android/Android Tablet.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDrawerSlide Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDrawerSlide Event</summary>
 
 * * *
 
 This event is sent when the position of a NavigationDrawer changes.
 
-Signature:
+### Signature:
 
 onDrawerSlideCallback(slideOffset)
 
-Parameters
+### Parameters
 
 _slideOffset_
 
 A Double value indicating the new offset of this drawer within its range, from 0-1.
 
-Remarks
+### Remarks
 
 This event supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer). It is not sent unless the FlexForm has been created from a template that supports the NavigationDrawer. The NavigationDrawer is based on the [Android native Navigation drawer](https://material.io/guidelines/patterns/navigation-drawer.html#). It is only supported on Android.
 
 The FlexForm's [navigationDrawerListeners](FlexForm_Properties.html#navigationDrawerListeners) property is used to map the handler to this event.
 
-Example
+### Example
 
-{% highlight voltMx %}// create callback function for onDrawerSlide
+{% highlight VoltMx %}
+// create callback function for onDrawerSlide
 function onDrawerSlideCallback(slideOffset) {
     //handler code here
 }
@@ -381,37 +416,39 @@ formObject.navigationDrawerListeners = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDrawerOpened Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDrawerOpened Event</summary>
 
 * * *
 
 Called when a Navigation Drawer has finished opening. The drawer is interactive at this point.
 
-Signature:
+### Signature:
 
 onDrawerOpenedCallback()
 
-Parameters
+### Parameters
 
 None
 
-Remarks
+### Remarks
 
 This event supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer). It is not sent unless the FlexForm has been created from a template that supports the NavigationDrawer. The NavigationDrawer is based on the [Android native Navigation drawer](https://material.io/guidelines/patterns/navigation-drawer.html#). It is only supported on Android.
 
 The FlexForm's [navigationDrawerListeners](FlexForm_Properties.html#navigationDrawerListeners) property is used to map the handler to this event.
 
-Example
+### Example
 
-{% highlight voltMx %}// create callback function for onDrawerOpened 
+{% highlight VoltMx %}
+// create callback function for onDrawerOpened 
 function onDrawerOpenedCallback() {
     //handler code here
 }
@@ -422,37 +459,39 @@ formObject.navigationDrawerListeners = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDrawerClosed Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDrawerClosed Event</summary>
 
 * * *
 
 Called when a Navigation Drawer has finished closing.
 
-Signature:
+### Signature:
 
 onDrawerClosedCallback()
 
-Parameters
+### Parameters
 
 None
 
-Remarks
+### Remarks
 
 This event supports the [NavigationDrawer](FlexForm.html#using-the-navigation-drawer). It is not sent unless the FlexForm has been created from a template that supports the NavigationDrawer. The NavigationDrawer is based on the [Android native Navigation drawer](https://material.io/guidelines/patterns/navigation-drawer.html#). It is only supported on Android.
 
 The FlexForm's [navigationDrawerListeners](FlexForm_Properties.html#navigationDrawerListeners) property is used to map the handler to this event.
 
-Example
+### Example
 
-{% highlight voltMx %}// create callback function for onDrawerClosed
+{% highlight VoltMx %}
+// create callback function for onDrawerClosed
 function onDrawerClosedCallback() {
     //handler code here
 }
@@ -463,31 +502,32 @@ formObject.navigationDrawerListeners = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDrawerStateChanged Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDrawerStateChanged Event</summary>
 
 * * *
 
 Called when the NavigationDrawer motion state changes.
 
-Signature:
+### Signature:
 
 onDrawerStateChangedCallback(state)
 
-Parameters
+### Parameters
 
 _state_
 
 A constant that identifies the current drawer state. See remarks for details.
 
-Remarks
+### Remarks
 
 Constant values for drawer state:
 
@@ -499,9 +539,10 @@ This event supports the [NavigationDrawer](FlexForm.html#using-the-navigation-dr
 
 The FlexForm's [navigationDrawerListeners](FlexForm_Properties.html#navigationDrawerListeners) property is used to map the handler to this event.
 
-Example
+### Example
 
-{% highlight voltMx %}// create callback function for onDrawerStateChanged
+{% highlight VoltMx %}
+// create callback function for onDrawerStateChanged
 function onDrawerStateChangedCallback(state) {
     //handler code here
 }
@@ -512,29 +553,32 @@ formObject.navigationDrawerListeners = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE.
+### Available in the IDE.
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onHide Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onHide Event</summary>
 
 * * *
 
 Specifies an _Event_ which is triggered when a form goes completely out of view.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onHide()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is triggered in the following scenarios:
 
@@ -546,9 +590,10 @@ This event is _not_ triggered in the following scenarios:
 *   The form is partially or completely covered by the Popup.
 *   The form is partially or completely covered by the Application Menu.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onHide event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onHide event for a FlexForm.
 
 myForm.onHide=onHideCallback;
 
@@ -557,7 +602,7 @@ function onHideCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -566,27 +611,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onKeyboardDidHide Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onKeyboardDidHide Event</summary>
 
 * * *
 
 This is an event callback that is invoked by iOS when the keyboard has been hidden.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onKeyboardDidHide()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Don't change the contentOffset on the form by calculating the size of the keyboard when keyboard appears or is hidden.
 
-Example
+### Example
 
-{% highlight voltMx %}var form = new voltmx.ui.Form2();
+{% highlight VoltMx %}
+var form = new voltmx.ui.Form2();
 
 form.onKeyboardDidHide = keyboardCallbacksDidHide;
 
@@ -597,36 +646,40 @@ function keyboardCallbacksDidHide(wdgRef, keyboardData) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE
+    Available in the IDE
 
 *   iOS  
     
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onKeyboardDidShow Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onKeyboardDidShow Event</summary>
 
 * * *
 
 This is an event callback that is invoked by iOS when the keyboard has just been shown.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onKeyboardDidShow()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Don't change the contentOffset on the form by calculating the size of the keyboard when keyboard appears or is hidden.
 
-Example
+### Example
 
-{% highlight voltMx %}var form = new voltmx.ui.Form2();
+{% highlight VoltMx %}
+var form = new voltmx.ui.Form2();
 form.onKeyboardDidShow = keyboardCallbacksDidShow;
 
 function keyboardCallbacksDidShow(wdgRef, keyboardData) {
@@ -636,36 +689,40 @@ function keyboardCallbacksDidShow(wdgRef, keyboardData) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE
+### Available in the IDE
 
 *   iOS  
     
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onKeyboardWillHide Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onKeyboardWillHide Event</summary>
 
 * * *
 
 This is an event callback that is invoked by iOS when the keyboard is about to be hidden.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onKeyboardWillHide()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Don't change the contentOffset on the form by calculating the size of the keyboard when keyboard appears or is hidden.
 
-Example
+### Example
 
-{% highlight voltMx %}var form = new voltmx.ui.Form2();
+{% highlight VoltMx %}
+var form = new voltmx.ui.Form2();
 
 form.onKeyboardWillHide = keyboardCallbacksWillHide;
 
@@ -676,36 +733,40 @@ function keyboardCallbacksWillHide(wdgRef, keyboardData) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE
+### Available in the IDE
 
 *   iOS  
     
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onKeyboardWillShow Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onKeyboardWillShow Event</summary>
 
 * * *
 
 This is an event callback that is invoked by iOS when the keyboard is about to be shown.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onKeyboardWillShow()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Don't change the contentOffset on the form by calculating the size of the keyboard when keyboard appears or is hidden.
 
-Example
+### Example
 
-{% highlight voltMx %}var form = new voltmx.ui.Form2();
+{% highlight VoltMx %}
+var form = new voltmx.ui.Form2();
 form.onKeyboardWillShow = keyboardCallbacksWillShow;
 
 function keyboardCallbacksWillShow(wdgRef, keyboardData) {
@@ -715,36 +776,40 @@ function keyboardCallbacksWillShow(wdgRef, keyboardData) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available in the IDE
+### Available in the IDE
 
 *   iOS  
     
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onLoadJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onLoadJS Event</summary>
 
 * * *
 
-Specifies the name of function to be executed when a form is loaded. The function must exist in the _javascript_ folder. For more information on defining the onLoadJS event, refer to _VoltMX Iris User Guide_.
+Specifies the name of function to be executed when a form is loaded. The function must exist in the _javascript_ folder. For more information on defining the onLoadJS event, refer to _Volt MX Iris User Guide_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onLoadJS()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onLoadJS event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onLoadJS event for a FlexForm.
 
 myForm.onLoadJS=onLoadJSCallback;
 
@@ -753,23 +818,24 @@ function onLoadJSCallback(form) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available on Server side Mobile Web (BJS and Advanced) platform.
-
-* * *
-
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onLocaleChanged Event](javascript:void(0);)
+    Available on Server side Mobile Web (BJS and Advanced) platform.
 
 * * *
 
-An event callback invoked by the platform when the locale changes. This callback is executed for the current form:
+</details>
+<details close markdown="block"><summary>onLocaleChanged Event</summary>
+
+* * *
+
+### An event callback invoked by the platform when the locale changes. This callback is executed for the current form:
 
 *   After setCurrentLocaleAsync() callback is successfully executed.
 *   When navigating to a form, just before preshow of the target form if locale is changed.
 *   Synchronously after addWidgets() -> init() when trying to access widgets of an uninitialized form.
 
-This callback is executed for popups:
+### This callback is executed for popups:
 
 *   For all visible popups after setCurrentLocaleAsync() callback is successfully executed.
 *   When opening a popup just before init() of the target popup only if locale is changed.
@@ -779,23 +845,26 @@ This callback is executed for popups:
 
 > **_Note:_** Get the current locale by calling getCurrentLocale().
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onLocaleChanged()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 widget \[widgetref\] - Mandatory
 
 Handle to the form/popup widget instance.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onLocaleChanged event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onLocaleChanged event for a FlexForm.
 myForm.onLocaleChanged = onLocaleChangedCallBack;
 
 function onLocaleChangedCallBack(formRef) {
@@ -809,45 +878,49 @@ function onLocaleChangedCallBack(formRef) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available on all platforms
-
-* * *
-
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onMapping Event](javascript:void(0);)
+### Available on all platforms
 
 * * *
 
-Volt MX  Iris creates this event when you drag and drop a service operation on either a FlexForm, FlexContainer, or FlexScrollContainer. You can define actions for this event by using [Action Editor]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/working_with_Action_Editor.html).
+</details>
+<details close markdown="block"><summary>onMapping Event</summary>
 
-Read/Write
+* * *
+
+Volt MX Iris creates this event when you drag and drop a service operation on either a FlexForm, FlexContainer, or FlexScrollContainer. You can define actions for this event by using [Action Editor]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/working_with_Action_Editor.html).
+
+### Read/Write
 
 You can neither read nor write the onMapping Event through code.
 
-Remarks
+### Remarks
 
 The actions defined in this event are triggered after the actions specified in the [preShow](#preShow) Event are executed. The actions for the preShow Event are executed first, and then the actions for the onMapping Event are executed.
 
 > **_Note:_** When you define the preShow Event dynamically, the onMapping Event will be overridden.
 
-Platform Availability
+### Platform Availability
 
-Available on all platforms
+    Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onNavigate Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onNavigate Event</summary>
 
 * * *
 
 This event is invoked when you navigate from one form to another. This is a [Form Controller event]({{ site.baseurl }}/docs/documentation/Iris/voltmx_ref_arch_api/Content/FormController_Events.html#onNavigate) and is used only in [Reference Architecture]({{ site.baseurl }}/docs/documentation/Iris/voltmx_ref_arch_api/Content/VoltMX_Reference_Architecture_Guide.html)\- based projects.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onNavigate(context, isBackNavigation)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _context \[Object\]_
 
@@ -857,26 +930,27 @@ _isBackNavigation \[Boolean\]_
 
 This parameter determines whether you have clicked the back button or not. It has the value as _true_ when you click the back button and _false_ when you do not click the back button.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 To navigate from one form to another, you must create a [Navigation]({{ site.baseurl }}/docs/documentation/Iris/voltmx_ref_arch_api/Content/Navigation_Object.html) Object. This object navigates to the destination form's controller. The form's controller in turn displays the view of the form.
 
 > **_Note:_** 1\. If you provide the onNavigate event through the Action Editor and the Form Controller, then the code in the Form Controller overrides the actions for onNavigate event given in the Action Editor.  
 2\. While using the **this** keyword (for example, this.view) in onNavigate event (FormController event) to point to the current controller, you must ensure that the function is not a **fat arrow** function. Because in fat arrow function declarations, the **this** pointer is taken from the parent scope and might not point to the current FormController. For more information on this limitation, click [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).  
 
-This event is useful in the following scenarios:
+### This event is useful in the following scenarios:
 
 *   To provide data that the destination form requires after the navigation.
 *   To prepare data that the destination form requires after the navigation.
 *   To pause the navigation if any asynchronous calls are in progress.
 
-Example
+### Example
 
-{% highlight voltMx %}define({
+{% highlight VoltMx %}
+define({
 
     onNavigate: function(context, isBackNavigation) {
         this.context = context;
@@ -891,31 +965,35 @@ Example
 });
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available on all platforms
+    Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onOrientationChange Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onOrientationChange Event</summary>
 
 * * *
 
 Specifies an _Event_ which is triggered when there is a change in orientation of the form from portrait to landscape or vice versa.
 
-For more information about defining an action sequence for this event, see _Event Editor_ in the _VoltMX Iris User Guide_.
+For more information about defining an action sequence for this event, see _Event Editor_ in the _Volt MX Iris User Guide_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onOrientationChange()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onOrientationChange event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onOrientationChange event for a FlexForm.
 myForm.onOrientationChange=onOrientationChangeCallBack;
 
 function onOrientationChangeCallBack(eventobject) {
@@ -923,7 +1001,7 @@ function onOrientationChangeCallBack(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -932,27 +1010,30 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onResize Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onResize Event</summary>
 
 * * *
 
 onResize event defines a callback that is executed when there is a change in the width of the browser. This event is valid from Volt MX Iris V8 to V8 SP2. Use the [onBreakpointChange](#onBr) event for the same functionality in later versions of Iris.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onResize()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Return Value
+### Return Value
 
 Boolean
 
 The default value is true. If the return value is not defined, the return value is surmised to be true.
 
-Parameters
+### Parameters
 
 _formModel_
 
@@ -962,9 +1043,10 @@ _width_\[Number\]
 
 This parameter specifies the current width of the browser body tag.
 
-Example
+### Example
 
-{% highlight voltMx %}function resize_callback (myFormHandle, width) {
+{% highlight VoltMx %}
+function resize_callback (myFormHandle, width) {
     voltmx.print("breakpoint changed");
 }  
 function myForm_preshow() {
@@ -973,35 +1055,39 @@ function myForm_preshow() {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the scrolling is ended. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onScrollEnd ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
 Handle to the widget reference on which the scrolling is ended.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onScrollEnd event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onScrollEnd event for a FlexForm.
 myForm.onScrollEnd=onScrollEndCallBack;
 
 function onScrollEndCallBack(eventobject) {
@@ -1009,7 +1095,7 @@ function onScrollEndCallBack(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1018,29 +1104,33 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrolling Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrolling Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the scrolling is in progress. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onScrolling ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
 Optional. Handle to the widget reference on which the scrolling is in progress.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onScrolling event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onScrolling event for a FlexForm.
 myForm.onScrolling=onScrollingCallBack;
 
 function onScrollingCallBack(eventobject) {
@@ -1048,7 +1138,7 @@ function onScrollingCallBack(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1057,29 +1147,33 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user starts scrolling the content. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onScrollStart()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
 Optional. Handle to the widget reference on which the scrolling has started.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onScrollStart event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onScrollStart event for a FlexForm.
 myForm.onScrollStart=onScrollStartCallBack;
 
 function onScrollStartCallBack(eventobject) {
@@ -1087,7 +1181,7 @@ function onScrollStartCallBack(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1096,29 +1190,33 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollTouchReleased Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollTouchReleased Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touch is released from the touch surface. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onScrollTouchReleased ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
 Optional. Handle to the widget reference on which the user touch is released from the display.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onScrollTouchReleased event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onScrollTouchReleased event for a FlexForm.
 myForm.onScrollTouchReleased=onScrollTouchReleasedCallBack;
 
 function onScrollTouchReleasedCallBack(eventobject) {
@@ -1126,30 +1224,34 @@ function onScrollTouchReleasedCallBack(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onScrollWidgetPosition()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}
+var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -1163,28 +1265,31 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not Accessible from IDE
 *   Android, iOS, SPA, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSizeChanged Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onSizeChanged Event</summary>
 
 * * *
 
 Specifies the event that is triggered when the app window is resized. This allows app developers to redesign the UI depending on the size of the current form.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onSizeChanged()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Parameters
+### Parameters
 
 The callback function for this event is called with a dictionary as an argument with the following keys.
 
@@ -1238,9 +1343,10 @@ constants.VIEW\_STATE\_SNAPPED
 
 constants.VIEW\_STATE\_FULLSCREEN\_PORTRAIT
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onSizeChanged event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onSizeChanged event for a FlexForm.
 myForm.onSizeChanged = onFormSizeChange1;
 
 function onFormSizeChange1(formInstance1, windowConfig) {
@@ -1253,23 +1359,26 @@ Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
-Available on Windows only.
+    Available on Windows only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touch is released from the touch surface. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchEnd ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
@@ -1289,13 +1398,14 @@ Optional. On devices that support 3D Touch, specifies a key-value pair where th
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onTouchEnd event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onTouchEnd event for a FlexForm.
 myForm.onTouchEnd=onTouchEndCallback;  
   
 function onTouchEndCallback(eventobject, x, y) {
@@ -1303,9 +1413,10 @@ function onTouchEndCallback(eventobject, x, y) {
 }
 {% endhighlight %}
 
-Example using contextInfo
+### Example using contextInfo
 
-{% highlight voltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchEndCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -1315,7 +1426,7 @@ Form1.onTouchEnd=onTouchEndCallback;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1324,17 +1435,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchMove Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchMove Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the touch moves on the touch surface continuously until the movement ends. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchMove ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
@@ -1354,13 +1468,14 @@ Optional. On devices that support 3D Touch, specifies a key-value pair where th
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onTouchMove event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onTouchMove event for a FlexForm.
 myForm.onTouchMove=onTouchMoveCallback;  
   
 function onTouchMoveCallback(eventobject, x, y) {
@@ -1368,9 +1483,10 @@ function onTouchMoveCallback(eventobject, x, y) {
 }
 {% endhighlight %}
 
-Example using contextInfo
+### Example using contextInfo
 
-{% highlight voltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchMoveCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -1380,7 +1496,7 @@ Form1.onTouchMove=onTouchMoveCallback;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1389,17 +1505,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touches the touch surface. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchStart ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
@@ -1419,13 +1538,14 @@ Optional. On devices that support 3D Touch, specifies a key-value pair where th
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onTouchStart event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onTouchStart event for a FlexForm.
 myForm.onTouchStart=onTouchStartCallback;  
   
 function onTouchStartCallback(eventobject, x, y) {
@@ -1433,7 +1553,7 @@ function onTouchStartCallback(eventobject, x, y) {
 }
 {% endhighlight %}
 
-Example using contextInfo
+### Example using contextInfo
 
 {% highlight voltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
     if (contextInfo) {
@@ -1445,7 +1565,7 @@ Form1.onTouchStart=onTouchStartCallback;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1454,31 +1574,35 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onZoomEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onZoomEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the zooming has ended. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onZoomEnd ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
 Optional. Handle to the widget reference on which the zooming has ended.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 For example, If you have a form with a flexScrollContainer and an image widget inside flexScrollContainer, when you pinch the screen on flexScrollContainer it will call the function configured using widgetToZoom event. If the function returns image, the image will be zoomed.
 
-{% highlight voltMx %}function onZoomingCalBck(flexScrollContainer) {
+{% highlight VoltMx %}
+function onZoomingCalBck(flexScrollContainer) {
     //Write your logic here.
 }
 
@@ -1507,9 +1631,10 @@ flexScrollContainer.onZoomEnd = onZoomEndCalBck;
 
 > **_Note:_** This event callback is invoked only when zooming is initiated by user interaction.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onZoomEnd event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onZoomEnd event for a FlexForm.
 myForm.onZoomEnd=onZoomEndCallback;  
   
 function onZoomEndCallback(eventobject, widget) {
@@ -1517,37 +1642,41 @@ function onZoomEndCallback(eventobject, widget) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available on iOS platform.
+    Available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onZooming Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onZooming Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the container is zooming. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onZooming ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
 Optional. Handle to the widget reference on which the zooming has started.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 For example, If you have a form with a flexScrollContainer and an image widget inside flexScrollContainer, when you pinch the screen on flexScrollContainer it will call the function configured using widgetToZoom event. If the function returns image, the image will be zoomed.
 
-{% highlight voltMx %}function onZoomingCalBck(flexScrollContainer) {
+{% highlight VoltMx %}
+function onZoomingCalBck(flexScrollContainer) {
     //Write your logic here.
 }
 
@@ -1576,9 +1705,10 @@ flexScrollContainer.onZoomEnd = onZoomEndCalBck;
 
 > **_Note:_** This event callback is invoked only when zooming is initiated by user interaction.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onZooming event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onZooming event for a FlexForm.
 myForm.onZooming=onZoomingCallback;  
   
 function onZoomingCallback(eventobject, widget) {
@@ -1586,23 +1716,26 @@ function onZoomingCallback(eventobject, widget) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available on iOS platform.
+    Available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onZoomStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onZoomStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the container is about to zoom. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onZoomStart ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
@@ -1612,15 +1745,16 @@ widget \[widgetref\]
 
 Optional. Specifies the widget that actually zooms.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 For example, If you have a form with a flexScrollContainer and an image widget inside flexScrollContainer, when you pinch the screen on flexScrollContainer it will call the function configured using widgetToZoom event. If the function returns image, the image will be zoomed.
 
-{% highlight voltMx %}function onZoomingCalBck(flexScrollContainer) {
+{% highlight VoltMx %}
+function onZoomingCalBck(flexScrollContainer) {
     //Write your logic here.
 }
 
@@ -1649,9 +1783,10 @@ flexScrollContainer.onZoomEnd = onZoomEndCalBck;
 
 > **_Note:_** This event callback is invoked only when zooming is initiated by user interaction.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the onZoomStart event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the onZoomStart event for a FlexForm.
 myForm.onZoomStart=onZoomStartCallback;  
   
 function onZoomStartCallback(eventobject, widget) {
@@ -1659,35 +1794,39 @@ function onZoomStartCallback(eventobject, widget) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available on iOS platform.
+    Available on iOS platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[postShow Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>postShow Event</summary>
 
 * * *
 
 _postShow_ is invoked after a form is displayed. Gets called even on device back or while navigating back to the form through title bar navigation items.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 postShow
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In case of preShow and postShow will not get executed when navigate using the browser "back". In preShow and postShow of the startup form, Alerts should be avoided. If any alerts are present in the events of the form, the last alert gets executed and form will never render.
 
 > **_Note:_** If there are any network calls in postshow, you cannot perform any operation on the form and a busy indication is displayed until the postshow execution is complete.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the postShow event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the postShow event for a FlexForm.
 myForm.postShow=postShowCallback;  
   
 function postShowCallback(eventobject) {
@@ -1695,7 +1834,7 @@ function postShowCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1704,27 +1843,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[preShow Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>preShow Event</summary>
 
 * * *
 
 _preShow_ is executed every time a form is to be displayed. This event is called even on device back or while navigating back to the form through title bar navigation items.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 preShow
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 In case of preShow and postShow will not get executed when navigate using the browser "back".
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the preShow event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the preShow event for a FlexForm.
 myForm.preShow=preShowCallback;  
   
 function preShowCallback(eventobject) {
@@ -1732,7 +1875,7 @@ function preShowCallback(eventobject) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -1741,27 +1884,31 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[unLoadJS Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>unLoadJS Event</summary>
 
 * * *
 
-Specifies the name of function to be executed when a form is unloaded. The function must exist in a _javascript_ file. For more information on defining the unLoadJS event, refer to _VoltMX Iris User Guide_.
+Specifies the name of function to be executed when a form is unloaded. The function must exist in a _javascript_ file. For more information on defining the unLoadJS event, refer to _Volt MX Iris User Guide_.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 unLoadJS()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the unLoadJS event for a FlexForm.
+{% highlight VoltMx %}
+//Sample code to set a callback to the unLoadJS event for a FlexForm.
 myForm.unLoadJS=unLoadJSCallback;  
   
 function unLoadJSCallback(form) {
@@ -1769,39 +1916,43 @@ function unLoadJSCallback(form) {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
-Available on Server side Mobile Web (Advanced) platform.
+    Available on Server side Mobile Web (Advanced) platform.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[widgetToZoom Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>widgetToZoom Event</summary>
 
 * * *
 
 An event callback is invoked by the platform to return one of the child widgets of source to zoom. The returning source itself may not result in zooming the entire source. The container will not zoom, if a null value is returned. This event is invoked asynchronously.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 widgetToZoom ()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 source \[widgetref\]
 
 Handle to the widget reference on which the zooming has started.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 For example, If you have a form with a flexScrollContainer and an image widget inside flexScrollContainer, when you pinch the screen on flexScrollContainer it will call the function configured using widgetToZoom event. If the function returns image, the image will be zoomed.
 
-Example
+### Example
 
-{% highlight voltMx %}function onWidgetToZoomCalBck(flexScrollContainer) {
+{% highlight VoltMx %}
+function onWidgetToZoomCalBck(flexScrollContainer) {
     //Write your logic here
     return flexScrollContainer.image;
 }
@@ -1811,9 +1962,10 @@ flexScrollContainer.widgetToZoom = onWidgetToZoomCalBck;
 
 > **_Note:_** This event callback is invoked only when zooming is initiated by user interaction.
 
-Platform Availability
+### Platform Availability
 
-Available on iOS platform.
+    Available on iOS platform.
 
 * * *
+</details>
 

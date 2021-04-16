@@ -12,31 +12,33 @@ The properties of the Alert widget are:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[accessibilityConfig Property](javascript:void(0);)
+
+<details close markdown="block"><summary>accessibilityConfig Property</summary>
 
 * * *
 
 Enables you to control accessibility behavior and alternative text for the widget.
 
-For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
+For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the VoltMX IrisUser Guide.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 accessibilityConfig
+{% endhighlight %}
 
-Type
+### Type
 
 Object
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 *   The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
-> **_Note:_** From Volt MX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the `accessibilityConfig` property. Values provided in the i18n keys take precedence over values provided in `a11yLabel`, `a11yValue`, and `a11yHint` fields.
+> **_Note:_** From VoltMX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the `accessibilityConfig` property. Values provided in the i18n keys take precedence over values provided in `a11yLabel`, `a11yValue`, and `a11yHint` fields.
 
 The accessibilityConfig property is a JavaScript object which can contain the following key-value pairs.
 
@@ -50,22 +52,23 @@ The accessibilityConfig property is a JavaScript object which can contain the fo
 | a11yHidden | Boolean | This is an optional parameter. Specifies if the widget should be ignored by assistive technology. The default option is set to _false_. This option is supported on iOS 5.0 and above, Android 4.1 and above, and SPA | For all widgets, this parameter maps to the `aria-hidden` property of ARIA in HTML. |
 | a11yARIA | Object | This is an optional parameter. For each widget, the key and value provided in this object are added as the attribute and value of the HTML tags respectively. Any values provided for attributes such as `aria-labelledby` and `aria-describedby` using this attribute, takes precedence over values given in `a11yLabel` and `a11yHint` fields. When a widget is provided with the following key value pair or attribute using the a11yARIA object, the tabIndex of the widget is automatically appended as zero.`{"role": "main"}``aria-label` | This parameter is only available on the Desktop Web platform. |
 
-Android limitations
+### Android limitations
 
 *   If the results of the concatenation of a11y fields result in an empty string, then `accessibilityConfig` is ignored and the text that is on widget is read out.
 *   The soft keypad does not gain accessibility focus during the right/left swipe gesture when the keypad appears.
 
-SPA/Desktop Web limitations
+### SPA/Desktop Web limitations
 
 *   When `accessibilityConfig` property is configured for any widget, the `tabIndex` attribute is added automatically to the `accessibilityConfig` property.
 *   The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.
 *   Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.
 
-Example 1
+### Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
 
@@ -76,11 +79,12 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Example 2
+### Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+{% highlight VoltMx %}
+/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
 
 Form1.myButton.accessibilityConfig = {
     "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
@@ -92,42 +96,45 @@ Form1.myButton.accessibilityConfig = {
 };
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS, Android, SPA, and Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[alertIcon Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>alertIcon Property</summary>
 
 * * *
 
 Specifies the Icon to be displayed to visually indicate the type of alert.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 alertIcon
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 No
 
-Remarks
+### Remarks
 
 In Android platform, the alert icon can be either a string specifying a local resource, or an image object created using the API: voltmx.image.
 
 In iOS platform, you can provide the alert icon only as a string. iOS platform does not support the use of the image object.
 
-Examples
+### Examples
 
 Using a local resource for the alert icon:
 
-{% highlight voltMx %}//Creating the alert with the alertIcon:"icon.png"
+{% highlight VoltMx %}
+//Creating the alert with the alertIcon:"icon.png"
 var alertBasic = {
     message: "Sample Alert",
     alertIcon: "icon.png"
@@ -140,7 +147,8 @@ var alert = voltmx.ui.Alert(alertBasic, alertPSP);
 
 Using an image object:
 
-{% highlight voltMx %}//Creating the alert with an image object
+{% highlight VoltMx %}
+//Creating the alert with an image object
 imgObjRef = voltmx.image.createImage("local.png");
 pspConfig = {};
 var alert = voltmx.ui.Alert({
@@ -154,7 +162,7 @@ var alert = voltmx.ui.Alert({
 }, pspConfig);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in the IDE
 *   iOS (does not support the image object)
@@ -163,27 +171,30 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[alertTitle Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>alertTitle Property</summary>
 
 * * *
 
 Specifies the Title of the alert.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 alertTitle
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Accessible from Code
+### Accessible from Code
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}//Creating the alert with the alertTitle:"Confirmation"
+{% highlight VoltMx %}
+//Creating the alert with the alertTitle:"Confirmation"
 var alertBasic = {
     message: "Sample Alert",
     alertTitle: "Confirmation"
@@ -194,17 +205,18 @@ var alertPSP = {};
 var alert = voltmx.ui.Alert(alertBasic, alertPSP);
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[alertType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>alertType Property</summary>
 
 * * *
 
@@ -220,21 +232,23 @@ Use the below constants to display alert type using constructor:
 *   ALERT\_TYPE\_ERROR
 *   ALERT\_TYPE\_INFO (Default)
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 alertType
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Accessible from Code
+### Accessible from Code
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}//Creating the alert with the alertType:constants.ALERT_TYPE_CONFIRMATION
+{% highlight VoltMx %}
+//Creating the alert with the alertType:constants.ALERT_TYPE_CONFIRMATION
 var alertBasic = {
     message: "Sample Alert",
     alertType: constants.ALERT_TYPE_CONFIRMATION
@@ -245,41 +259,43 @@ var alertPSP = {};
 var alert = voltmx.ui.Alert(alertBasic, alertPSP);
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[cursorType Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>cursorType Property</summary>
 
 * * *
 
 In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 cursorType
+{% endhighlight %}
 
-Type
+### Type
 
 String.
 
 You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
-To add the `cursorType` property using Volt MX Iris in a Desktop Web application, follow these steps.
+To add the `cursorType` property using VoltMX Iris in a Desktop Web application, follow these steps.
 
-1.  In Volt MX Iris, open the Desktop Web application. From the **Project** explorer, expand **Responsive Web/ Desktop**\> **Forms** and select the form to which you need to make the changes.
+1.  In VoltMX Iris, open the Desktop Web application. From the **Project** explorer, expand **Responsive Web/ Desktop**\> **Forms** and select the form to which you need to make the changes.
 2.  On the canvas, select the widget for which you want to specify the cursor type. For example, button.
 3.  From the **Properties** panel, navigate to the **Skin** tab > **Hover Skin** tab.  
     You will find that the details of the hover skin is not enabled here.
@@ -292,9 +308,10 @@ To add the `cursorType` property using Volt MX Iris in a Desktop Web application
     You can see that the **Cursor Type** property has been added under the **General** section.
 8.  Select a value from the drop-down list to set the **Cursor Type** for the widget.
 
-Example
+### Example
 
-{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
+{% highlight VoltMx %}
+//This is a generic property and is applicable for many widgets.  
   
 /*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
   
@@ -302,34 +319,37 @@ frmButton.myButton.cursorType = "wait";
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Desktop Web
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[message Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>message Property</summary>
 
 * * *
 
 Specifies the message description of the alert to be displayed.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 message
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Accessible from Code
+### Accessible from Code
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}//Creating the alert with the message:"Sample Alert"
+{% highlight VoltMx %}
+//Creating the alert with the message:"Sample Alert"
 var alertBasic = {
     message: "Sample Alert"
 };
@@ -339,37 +359,40 @@ var alertPSP = {};
 var alert = voltmx.ui.Alert(alertBasic, alertPSP);
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[noLabel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>noLabel Property</summary>
 
 * * *
 
 Specifies the descriptive Text for the "**No**" label.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 noLabel
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Accessible from Code
+### Accessible from Code
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}//Creating the alert with the noLabel:"No"
+{% highlight VoltMx %}
+//Creating the alert with the noLabel:"No"
 var alertBasic = {
     message: "Sample Alert",
     alertType: constants.ALERT_TYPE_CONFIRMATION,
@@ -380,17 +403,16 @@ var alertPSP = {};
 
 {% endhighlight %}
 
-Accessible from IDE
-
+### Accessible from IDE
 Yes
 
-Platform Availability
-
+### Platform Availability
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainContentAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainContentAlignment Property</summary>
 
 * * *
 
@@ -400,7 +422,8 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -423,21 +446,23 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainContentAlignment
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.*/
@@ -462,14 +487,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlexPositionProperties Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlexPositionProperties Property</summary>
 
 * * *
 
@@ -479,7 +505,8 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -502,21 +529,22 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainFlexPositionProperties
-
-Type
+{% endhighlight %}
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.*/
@@ -541,14 +569,15 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[retainFlowHorizontalAlignment Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>retainFlowHorizontalAlignment Property</summary>
 
 * * *
 
@@ -558,7 +587,8 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight VoltMx %}
+function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig[defaultLocale]
     ["mirrorFlexPositionalProperties"] == true &&
@@ -581,21 +611,22 @@ The following table illustrates how widgets consider Local flag and Widget flag 
 | Mirror/retain FlexPositionProperties | not specified | false | Use the Design/Model-specific default layout. |
 | Mirror/retain FlexPositionProperties | not specified | not specified | Use the Design/Model-specific default layout. |
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 retainFlowHorizontalAlignment
-
-Type
+{% endhighlight %}
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 No (only during widget-construction time)
 
-Example
+### Example
 
-{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
+{% highlight VoltMx %}
+//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. */
@@ -621,28 +652,29 @@ var btn = new voltmx.ui.Button({
 }, {});
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   Windows, iOS, Android, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[textOverflow Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>textOverflow Property</summary>
 
 * * *
 
 Specifies whether text wrapping is enabled below the image when the text message is more than image height.
 
-Syntax
+### Syntax
 
 textOverflow
 
-Type
+### Type
 
 boolean
 
-Remarks
+### Remarks
 
 If this value is true, text wrapping is enabled. The default value is false.
 
@@ -654,9 +686,9 @@ Alert with text wrapping disabled.
 
 Alert with text wrapping enabled.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
   //Creating the alert with the textOverflow:true
 
 var basicProperties = {
@@ -668,33 +700,36 @@ var platformSpecificProperties = {};
 var alert = voltmx.ui.Alert(basicProperties, platformSpecificProperties);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[yesLabel Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>yesLabel Property</summary>
 
 * * *
 
 Specifies the descriptive Text for the "**Yes**" label.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 yesLabel
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Accessible from Code
+### Accessible from Code
 
 No
 
-Example
+### Example
 
-{% highlight voltMx %}//Creating the alert with the yesLabel:"Yes"
+{% highlight VoltMx %}
+//Creating the alert with the yesLabel:"Yes"
 var alertBasic = {
     message: "Sample Alert",
     yesLabel: "Yes"
@@ -705,11 +740,11 @@ var alertPSP = {};
 var alert = voltmx.ui.Alert(alertBasic, alertPSP);
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 

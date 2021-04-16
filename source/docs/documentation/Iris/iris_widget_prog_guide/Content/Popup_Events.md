@@ -20,23 +20,26 @@ Popup has the following events associated with it:
 *   [onLoadJS](#onLoadJS)
 *   [unLoadJS](#unLoadJS)
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addWidgets](javascript:void(0);)
+
+<details close markdown="block"><summary>addWidgets</summary>
 
 * * *
 
 An event callback invoked by the platform when show method of popup is called for first time after its construction. This is called only once in a lifetime of the popup between creation and destruction. This method is also called when destroyed popup is shown again. Popups can be destroyed using destroy method.
 
-Syntax
+### Synax 
 
+{% highlight VoltMx %}
 addWidgets()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Write only
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Defining properties for a Popup with addWidgets:addWidgetsCallBck
 var popBasic ={id:"popUp", title:"PopUP",skin:"popSkin", headers:[box1,box2], footers:[box3,box4], isModal:true, transparencyBehindThePopup:100, **addWidgets:addWidgetsCallBck**};
 
@@ -48,13 +51,14 @@ var popPSP ={};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[init](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>init</summary>
 
 * * *
 
@@ -62,17 +66,19 @@ This event gets called only once in popup life cycle that is when the popup is r
 
 When popup is destroyed and reused again, init gets called as a part of popup lifecycle.
 
-Syntax
+### Synax 
 
+{% highlight VoltMx %}
 init()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //The below function is the callback function for init event.
 function initCallBck(popup)
 {
@@ -90,27 +96,30 @@ var popPSP ={};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onHide](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onHide</summary>
 
 * * *
 
 Specifies an _Event_ which is triggered when a popup goes out of view.
 
-Syntax
+### Synax 
 
+{% highlight VoltMx %}
 onHide()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is triggered in the following scenarios:
 
@@ -122,9 +131,9 @@ This event is _not_ triggered in the following scenarios:
 *   The form is partially or completely covered by the Popup.
 *   The form is partially or completely covered by the Application Menu.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 function onHideCallBck(popup)
 {
 	//Write your logic here
@@ -141,13 +150,14 @@ var popPSP ={};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDeviceBack](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDeviceBack</summary>
 
 * * *
 
@@ -155,17 +165,19 @@ Specifies an event which is triggered when the user uses the back button on the 
 
 For more information see _Event Editor_ in _the Volt MX Iris User Guide_.
 
-Synax
+### Synax 
 
+{% highlight VoltMx %}
 onDeviceBack(popupref)
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //The below function is the callback function for onDeviceBack event.
 function onDeviceBackCallBck(popup)
 {
@@ -183,14 +195,15 @@ var popPSP ={**onDeviceBack:onDeviceBackCallBck**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   BlackBerry
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onDestroy](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onDestroy</summary>
 
 * * *
 
@@ -198,19 +211,20 @@ Specifies an event which is triggered when the popup is destroyed.
 
 For more information see _Event Editor_ in _the Iris User Guide_.
 
-Signature
+### Signature
 
 JavaScript: onDestroy
 
 **Lua:** ondestroy
 
-Read / Write
+### Read / Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}//The below function is the callback function for onDestroy event.
+{% highlight VoltMx %}
+//The below function is the callback function for onDestroy event.
 function onDestroyCallBck(popup)
 {
 	//Write your logic here
@@ -227,29 +241,32 @@ var popPSP ={**onDestroy:onDestroyCallBck**};
 var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 This property is available on iPhone/iPad only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onLoadJS](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onLoadJS</summary>
 
 * * *
 
 Specifies the name of function to be executed when a popup is loaded. The function must exist in a JavaScript file under project>module>js folder.
 
-Syntax
+### Synax 
 
+{% highlight VoltMx %}
 onLoadJS
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //The below function is the callback function for onLoadJS event
 function onLoadJSCallBck(popup)
 {
@@ -270,7 +287,7 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 alert("popUp onLoadJS::"+popUp.onLoadJS);
 {% endhighlight %}
 
-Availability
+### Availability
 
 Available in the IDE
 
@@ -278,23 +295,26 @@ Available on Server side Mobile Web (BJS and Advanced) platform
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[unLoadJS](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>unLoadJS</summary>
 
 * * *
 
 Specifies the name of function to be executed when a popup is unloaded. The function must exist in a JavaScript file under project>module>js folder.
 
-Syntax
+### Synax 
 
+{% highlight VoltMx %}
 unLoadJS
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //The below function is the callback function for unLoadJS event
 function unLoadJSCallBck(popup)
 {
@@ -315,11 +335,14 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 alert("popUp unLoadJS::"+popUp.unLoadJS);
 {% endhighlight %}
 
-Availability
+### Availability
 
 Available in the IDE
 
 Available on Server side Mobile Web (Advanced) platform
 
 * * *
+
+</details>
+
 

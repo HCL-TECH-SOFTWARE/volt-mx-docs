@@ -44,7 +44,8 @@ Formatting Conventions in This Guide
 
 The following formatting conventions are used throughout the document:
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here](javascript:void(0);)
+
+<details close markdown="block"><summary>Click here</summary>
 
   
 | Convention | Explanation |
@@ -56,6 +57,7 @@ The following formatting conventions are used throughout the document:
 | > **_Note:_**   | Provides helpful hints or additional information |
 | > **_Important:_**   | Highlights actions or information that might cause problems to systems or data |
 
+</details>
 We welcome your feedback on our documentation. Email us at [techpubs@voltmx.com](mailto:techpubs@voltmx.com?subject=Documentation Feedback).
 
 For technical questions, suggestions and comments, or to report problems on VoltMX's product line, contact [productsupport@voltmx.com](mailto:productsupport@voltmx.com).

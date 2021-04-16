@@ -24,8 +24,9 @@ To install Volt MX Foundry Console on Tomcat using the installer, follow these s
 
 1.  Execute the following command to switch to the user that you created.  
     
-
-\# su - username  
+{% highlight VoltMx %}
+\# su - username
+{% endhighlight %}
 
 3.  Press **Enter**. The system prompt you to enter the password.
 4.  Enter the password, and press **Enter**.
@@ -89,7 +90,7 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
 1.  Press **Enter**. The Software _License Agreement_  details appear.
     
-    {% highlight voltMx %}\===============================================================================
+    {% highlight VoltMx %}\===============================================================================
     License Agreement
     -----------------
     
@@ -658,7 +659,8 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
                 
                 *   For **Microsoft Azure (MSSQL)**, If you want to install Volt MX Foundry V8 on Tomcat with Microsoft Azure SQL, you must edit the `authService.xml` file from the existing Tomcat with Microsoft SQL Server install location. For more details, refer the following section on how to configure identity to work on Microsoft Azure SQL.
                     
-                    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here](javascript:void(0);)
+                    
+<details close markdown="block"><summary>Click here</summary>
                     
                     Configure Identity on Tomcat with Microsoft Azure SQL Server
                     
@@ -666,7 +668,9 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
                     
                     1.  Open the `authService.xml` file from the existing Tomcat with MSSQL install location.  
                         Sample Location for authService.xml from Tomcat with MSSQL install folder, `<LocalDrive>\VoltMXFoundryInstallerV8\tomcat\conf\Catalina\localhost\authService.xml`
-                    2.  Modify the following the `authService.xml` file:{% highlight voltMx %}<?xml version="1.0" encoding="utf-8" ?>
+		    2.  Modify the following the `authService.xml` file:
+			{% highlight VoltMx %}
+    			 <?xml version="1.0" encoding="utf-8" ?>
                         <!-- The contents of this file will be loaded for each web application -->
                         <Context>
                         
@@ -678,6 +682,7 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
                         		
                         </Context>
                         {% endhighlight %}
+</details>
                     
     *   In the _Database Choice_ if you select 5, the _MariaDB Database Details_ appear.
         

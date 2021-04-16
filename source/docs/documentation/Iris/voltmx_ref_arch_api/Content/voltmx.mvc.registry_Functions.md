@@ -12,24 +12,25 @@ voltmx.mvc.registry Functions
 
 The voltmx.mvc.registry namespace contains the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.mvc.registry.add Function](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.mvc.registry.add Function</summary> 
 
 * * *
 
 Enables you to add a new form name, along with its controller, extension controller, and friendly name, to the registry.
 
-Syntax 1
+### Syntax 1
 
 voltmx.mvc.registry.add(“friendlyName”, “formId”);  
 voltmx.mvc.registry.add(“friendlyName”, “formId”, “formController”);  
 voltmx.mvc.registry.add(“friendlyName”, “formId”, {“controllerName” : “formController” , “controllerType” : <controllerType>});  
 voltmx.mvc.registry.add(“friendlyName”, “formId”, “formController”, “formExtController”);
 
-Syntax 2
+### Syntax 2
 
 voltmx.mvc.registry.add( "friendlyName", "formId", {"controllerName" : "", "controllerExtName" : "", "controllerType" : ""});  
 
-Parameters
+### Parameters
 
 _friendlyName_ \[string\] \[Mandatory\]
 
@@ -57,20 +58,21 @@ _controllerType_ \[string\] \[Optional\]
 
 For data-driven forms, this parameter is **voltmx.mvc.ModelFormController**. You can inherit your own controller from **voltmx.mvc.FormController** and provide the name here.
 
-Return Values
+### Return Values
 
 Returns `true` if the form name is successfully added to the registry, otherwise it returns `false`.
 
 Returns false if the same friendly name has already been registered.
 
-Remarks
+### Remarks
 
 *   If the _friendlyName_ or the _formName_ parameter (or both) is an empty string, `null`, or undefined, this function does nothing.
 *   If the _formController_ parameter is `null`, undefined, not provided, or is an empty string, the string in the _formId_ parameter is suffixed with the string "Controller." For example, if _formId_contains the string "form1" and the _formController_ parameter is not provided, then "form1Controller" will used as the name of the form controller file.
 
-Example
+### Example
 
-{% highlight voltMx %}voltmx.mvc.registry.add(
+{% highlight VoltMx %}
+voltmx.mvc.registry.add(
 "friendlyName", 
 "formId", 
 {"controllerName" : "", "controllerExtName" : "", "controllerType" : ""});
@@ -78,86 +80,93 @@ Example
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.mvc.registry.getViewName](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.mvc.registry.getViewName</summary> 
 
 * * *
 
 Retrieves the form or template name from the registered friendly name.
 
-Syntax
+### Syntax
 
 voltmx.mvc.registry.getViewName(  
     friendlyName);
 
-Parameters
+### Parameters
 
 friendlyName
 
 The friendly name of the form to retrieve the name from.
 
-Return Values
+### Return Values
 
 Returns a string containing the form name if the friendly name is found in the registry, or `null` if it is not found.
 
-Example
+### Example
 
-{% highlight voltMx %}formName = voltmx.mvc.registry.getViewName("Form1");
+{% highlight VoltMx %}
+formName = voltmx.mvc.registry.getViewName("Form1");
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.mvc.registry.getControllerName](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.mvc.registry.getControllerName</summary> 
 
 * * *
 
 Retrieves the controller name from the registered friendly name.
 
-Syntax
+### Syntax
 
 voltmx.mvc.registry.getControllerName(  
     friendlyName);
 
-Parameters
+### Parameters
 
 friendlyName
 
 The friendly name of the form to retrieve the name from.
 
-Return Values
+### Return Values
 
 Returns a string containing the controller name if the friendly name is registered and the controller name is found. Returns a string containing "<viewName>.Controller" if the friendly name is registered and the controller name is not found. Returns `null` if the friendly name is not registered.
 
-Example
+### Example
 
-{% highlight voltMx %}voltmx.mvc.registry.getControllerName("FriendlyName");
+{% highlight VoltMx %}
+voltmx.mvc.registry.getControllerName("FriendlyName");
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.mvc.registry.remove](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.mvc.registry.remove</summary> 
 
 * * *
 
 Removes the name of a form controller from the registry.
 
-Syntax
+### Syntax
 
 voltmx.mvc.registry.remove(  
     friendlyName);
 
-Parameters
+### Parameters
 
 friendlyName
 
 The friendly name of the form whose controller is to be removed.
 
-Return Values
+### Return Values
 
 None.
 
-Example
+### Example
 
-{% highlight voltMx %}voltmx.mvc.registry.remove(FriendlyName");
+{% highlight VoltMx %}
+voltmx.mvc.registry.remove(FriendlyName");
 {% endhighlight %}
 
 * * *
+</details>

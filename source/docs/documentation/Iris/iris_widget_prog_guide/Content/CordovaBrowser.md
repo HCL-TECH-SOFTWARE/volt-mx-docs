@@ -30,7 +30,7 @@ If the Cordova global version is 10.0 or higher, you must not add the _cordova-p
 If the Cordova global version is less than 10.0, you can add the _cordova-plugin-wkwebview-engine_ plugin. However, you cannot submit your application to the App Store as the previous versions of Cordova contains UIWebView.  
 Hence Volt MX Iris recommends you to use global version 10.0 or higher while using Cordova.
 
-Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Iris_User_Guide.html).
+Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 For general information on the CordovaBrowser widget see the []({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Button.html)[CordovaBrowser]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/CordovaBrowser.html) topic in the Volt MX Iris User Guide.
 

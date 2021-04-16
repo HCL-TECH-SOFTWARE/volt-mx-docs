@@ -12,50 +12,54 @@ The properties of ReactNativeContainer widget are as follows.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint Property](javascript:void(0);) 
+
+<details close markdown="block"><summary>anchorPoint Property</summary> 
 
 * * *
 
 Specifies the anchor point of the widget-bounds rectangle by using the ReactNativeContainer widget's coordinate space.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 anchorPoint
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The value for this property is a JavaScript dictionary object with the keys **x** and **y**. The values for the x and y keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the ReactNativeContainer widget to rotate around its center.
 
 The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
 
-Example
+### Example
 
-{% highlight voltMx %}Form1.widget1.anchorPoint = {
+{% highlight VoltMx %}
+Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
 };
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[bottom Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>bottom Property</summary>
 
 * * *
 
@@ -65,27 +69,28 @@ The bottom property determines the position of the bottom edge of the ReactNativ
 
 The bottom property is used only if the Height property is not provided.
 
-Syntax
+### Syntax
 
 bottom
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The property determines the bottom edge of the ReactNativeContainer widget and is measured from the bottom bounds of the parent container.
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top-edge of the bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
@@ -93,18 +98,19 @@ frmHome.widgetID.bottom = "10%";
 frmHome.widgetID.bottom = "10px";
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerX Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerX Property</summary>
 
 * * *
 
@@ -112,25 +118,27 @@ This property determines the center of a ReactNativeContainer widget measured fr
 
 The centerX property determines the horizontal center of the ReactNativeContainer widget’s bounding box. The value may be set by using DP (Device Independent Pixels), Percentage, or Pixels. In free-form layout, the distance is measured from the left-edge of the parent container. In flow-vertical layout, the distance is measured from the left-edge of the parent container. In flow-horizontal layout, the distance is measured from the right-edge of the previous sibling widget in the hierarchy.
 
-Syntax
+### Syntax
 
 centerX
 
-Type
-
+### Type
+{% highlight VoltMx %}
 String
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from the right-edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
@@ -138,18 +146,19 @@ frmHome.widgetID.centerX = "10%";
 frmHome.widgetID.centerX = "10px";
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[centerY Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>centerY Property</summary>
 
 * * *
 
@@ -157,25 +166,27 @@ This property determines the center of a ReactNativeContainer widget measured fr
 
 The centerY Property determines the vertical center of the widget’s bounding box. The value may be set by using DP (Device Independent Pixels), Percentage, or Pixels. In free-form layout, the distance is measured from the top-edge of the parent container. In flow-horizontal layout, the distance is measured from the top-edge of the parent container. In flow-vertical layout, the distance is measured from the bottom-edge of the previous sibling widget in the hierarchy.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 centerY
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom-edge of the top sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
@@ -183,18 +194,19 @@ frmHome.widgetID.centerY = "10%";
 frmHome.widgetID.centerY = "10px";
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[height Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>height Property</summary>
 
 * * *
 
@@ -202,19 +214,20 @@ This property determines the height of the widget, and is measured along the y-a
 
 The height property determines the height of the ReactNativeContainer widget’s bounding box. The value may be set by using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to Preferred.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 height
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The available measurement options are as follows:
 
@@ -224,9 +237,10 @@ The available measurement options are as follows:
 *   default: Specifies the default value of the widget.
 *   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses the preferred height of the ReactNativeContainer widget as height and the preferred size of the ReactNativeContainer widget is determined by the widget, and may vary between platforms.
 
-Example
+### Example
 
-{% highlight voltMx %}/*Sample code to set the height property for ReactNativeContainer widget by using DP, Percentage and Pixels.*/  
+{% highlight VoltMx %}
+/*Sample code to set the height property for ReactNativeContainer widget by using DP, Percentage and Pixels.*/  
   
 frmHome.reactnativecontainer1.height = "50dp";
   
@@ -236,38 +250,41 @@ frmHome.reactnativecontainer1.height = "10px";
 
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[id Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>id Property</summary>
 
 * * *
 
 id is a unique identifier of ReactNativeContainer consisting of alpha-numeric characters. Every ReactNativeContainer should have a unique id within an application.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 id
+{% endhighlight %}
 
-Type
+### Type
 
 String - \[Mandatory\]
 
-Read/Write
+### Read/Write
 
 Read-only
 
-Example
+### Example
 
-{% highlight voltMx %}//Defining properties for ReactNativeContainer widget on a FlexForm
+{% highlight VoltMx %}
+//Defining properties for ReactNativeContainer widget on a FlexForm
 function addWidgetstestfrm() {
     var reactnativecontainer1 = new voltmx.ui.ReactNativeContainer({
         "id": "reactnativecontainer1",
@@ -317,38 +334,41 @@ Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[info Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>info Property</summary>
 
 * * *
 
 A custom JSObject with the key value pairs that a developer can use to store the context with the widget. This will help in avoiding the globals to most part of the programming.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 info
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 > **_Note:_** This is a **non-Constructor** property. You cannot set this property through widget constructor. But you can read and write data to it.
 
 The info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}var inf = {
+{% highlight VoltMx %}
+var inf = {
     a: "hello"
 };
 widget.info = inf; //works
@@ -357,9 +377,10 @@ widget.info.a = "hello world";
 //widget.info.a will have old value as hello.
 {% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the info property of a ReactNativeContainer widget.  
+{% highlight VoltMx %}
+//Sample code to set the info property of a ReactNativeContainer widget.  
   
 frmRNativeC.myRNativeC.info={
    key: "ReactNativeContainerName"
@@ -369,58 +390,62 @@ alert("ReactNativeContainer widget info is ::" +frmRNativeC.myRNativeC.info);
 
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 No
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[isVisible Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>isVisible Property</summary>
 
 * * *
 
 This property controls the visibility of a widget on the ReactNativeContainer.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 isVisible
+{% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value of this property is true.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the isVisible property of a ReactNativeContainer widget.  
+{% highlight VoltMx %}
+//Sample code to set the isVisible property of a ReactNativeContainer widget.  
   
 frmRNativeC.myRNativeC.isVisible=true;
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[left Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>left Property</summary>
 
 * * *
 
@@ -428,25 +453,27 @@ This property determines the lower left corner edge of the ReactNativeContainer 
 
 The left property determines the position of the left edge of the ReactNativeContainer widget’s bounding box. The value may be set by using DP (Device Independent Pixels), Percentage, or Pixels. In free-form layout, the distance is measured from the left-edge of the parent container. In flow-vertical layout, the distance is measured from the left-edge of the parent container. In flow-horizontal layout, the distance is measured from the right-edge of the previous sibling widget in the hierarchy.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 left
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
@@ -454,18 +481,19 @@ frmHome.widgetID.left = "10%";
 frmHome.widgetID.left = "10px";
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
 
@@ -473,21 +501,23 @@ This property specifies the maximum height of the ReactNativeContainer widget an
 
 The maxHeight property determines the maximum height of the ReactNativeContainer widget’s bounding box. The value may be set by using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or autogrow height, if the maxHeight is less than the derived content height of the ReactNativeContainer widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 maxHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
@@ -495,14 +525,15 @@ frmHome.widgetID.maxHeight = "10%";
 frmHome.widgetID.maxHeight = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   iOS, Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[maxWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>maxWidth Property</summary>
 
 * * *
 
@@ -510,21 +541,23 @@ This property specifies the maximum width of the ReactNativeContainer widget and
 
 The Width property determines the maximum width of the ReactNativeContainer widget’s bounding box. The value may be set by using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or autogrow” width, if the maxWidth is less than the derived content width of the ReactNativeContainer widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 maxWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
@@ -532,18 +565,19 @@ frmHome.widgetID.maxWidth = "10%";
 frmHome.widgetID.maxWidth = "10px";
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minHeight Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minHeight Property</summary>
 
 * * *
 
@@ -551,21 +585,23 @@ This property specifies the minimum height of the ReactNativeContainer widget an
 
 The minHeight property determines the minimum height of the ReactNativeContainer widget’s bounding box. The value may be set by using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or autogrow height, if the minHeight is larger than the derived content height of the ReactNativeContainer widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 minHeight
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
@@ -573,18 +609,19 @@ frmHome.widgetID.minHeight = "10%";
 frmHome.widgetID.minHeight = "10px";
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[minWidth Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>minWidth Property</summary>
 
 * * *
 
@@ -592,21 +629,23 @@ This property specifies the minimum width of the ReactNativeContainer widget and
 
 The minWidth property determines the minimum width of the ReactNativeContainer widget’s bounding box. The value may be set by using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or autogrow width, if the minWidth is larger than the derived content width of the widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 minWidth
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read-only
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
@@ -614,14 +653,15 @@ frmHome.widgetID.minWidth = "10%";
 frmHome.widgetID.minWidth = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   iOS, Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)nativeModulePackages Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>nativeModulePackages Property</summary>
 
 * * *
 
@@ -631,70 +671,76 @@ If the embedded React Native app contains Native modules, then those modules are
 
 > **_Note:_** You must specify fully qualified names of the class (for example, **com.package.class**).
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 nativeModulePackages
+{% endhighlight %}
 
-Type
+### Type
 
 JSArray of Strings
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Config Bucket
+### Config Bucket
 
 pspConfig
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the nativeModulePackages property for ReactNativeContainer widget.  
+{% highlight VoltMx %}
+//Sample code to set the nativeModulePackages property for ReactNativeContainer widget.  
   
 frmHome.reactnativecontainer1.nativeModulePackages=["com.org.class1", "com.org.class2", "a.b.c.one"];
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[parent Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>parent Property</summary>
 
 * * *
 
 Helps you access the parent of the ReactNativeContainer widget. If the ReactNativeContainer widget is not part of the widget hierarchy, the parent property returns null.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 parent
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read only
 
-Remarks
+### Remarks
 
 > **_Note:_** The property works for the ReactNativeContainer widget whether it is placed inside a FlexContainer, a Form, or an HBox.
 
-Example
+### Example
 
-{% highlight voltMx %}function func() {
+{% highlight VoltMx %}
+function func() {
 
     voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not Available in IDE
 *   iOS, Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)reactNativeAppID Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>reactNativeAppID Property</summary>
 
 * * *
 
@@ -702,25 +748,27 @@ The app name of the React Native project, which is mentioned in the app.json fil
 
 > **_Note:_** If the React Native Container is already displayed, then setting the new _reactNativeAppID_ property will not reflect the changes immediately; it is reflected when the container is shown again.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 reactNativeAppID
+{% endhighlight %}
 
 Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Config Bucket
+### Config Bucket
 
 basicConfig
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the reactNativeAppID property for ReactNativeContainer widget.  
+{% highlight VoltMx %}
+//Sample code to set the reactNativeAppID property for ReactNativeContainer widget.  
   
 frmHome.reactnativecontainer1.reactNativeAppID="reactNativeSampleApp";
 {% endhighlight %}
@@ -732,7 +780,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[right Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>right Property</summary>
 
 * * *
 
@@ -742,25 +791,27 @@ The right property determines the position of the right edge of the ReactNativeC
 
 The right property is used only if the width property is not provided.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 right
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from the left-edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
@@ -768,14 +819,15 @@ frmHome.widgetID.right = "10%";
 frmHome.widgetID.right = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   iOS, Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[top Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>top Property</summary>
 
 * * *
 
@@ -783,25 +835,27 @@ This property determines the top-edge of the ReactNativeContainer widget and mea
 
 The top property determines the position of the top edge of the ReactNativeContainer widget’s bounding box. The value may be set by using DP (Device Independent Pixels), Percentage, or Pixels. In free-form layout, the distance is measured from the top-edge of the parent container. In flow-vertical layout, the distance is measured from the bottom-edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left-edge of the parent container.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 top
+{% endhighlight %}
 
-Type
+### Type
 
 String
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom-edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
@@ -809,40 +863,43 @@ frmHome.widgetID.top = "10%";
 frmHome.widgetID.top = "10px";
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   iOS, Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>transform Property</summary>
 
 * * *
 
 Contains an animation transformation that can be used to animate the ReactNativeContainer widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 transform
+{% endhighlight %}
 
-Type
+### Type
 
 JSObject
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the ReactNativeContainer widget's anchor point. The transformation contained in this property must be created by using the [voltmx.ui.makeAffineTransform]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi) function.
 
-Example
+### Example
 
 This example uses a Button widget, but the principle remains the same for the ReactNativeContainer widget.
 
-{% highlight voltMx %}//Animation sample
+{% highlight VoltMx %}
+//Animation sample
 var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
@@ -850,14 +907,15 @@ newTransform.translate3D(223, 12, 56);
 widget.transform = newTransform;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   iOS, Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[width Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>width Property</summary>
 
 * * *
 
@@ -865,19 +923,20 @@ This property determines the width of the ReactNativeContainer widget and is mea
 
 The width property determines the width of the ReactNativeContainer widget’s bounding box. The value may be set by using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to Preferred.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 width
+{% endhighlight %}
 
-Type
+### Type
 
 Number, String, and Constant
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 Following are the options that can be used as units of width:
 
@@ -889,7 +948,8 @@ Following are the options that can be used as units of width:
 
 Example
 
-{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight VoltMx %}
+//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
@@ -897,48 +957,51 @@ frmHome.widgetID.width = "10%";
 frmHome.widgetID.width = "10px";
 {% endhighlight %}
 
-Available in the IDE
+### Available in the IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   iOS, Android
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[zIndex Property](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>zIndex Property</summary>
 
 This property specifies the stack order of the ReactNativeContainer widget. A ReactNativeContainer with a higher zIndex is always in front of a widget with a lower ReactNativeContainer.
 
 The zIndex property is used to set the stack, or layer order of a ReactNativeContainer widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the Volt MX Iris hierarchy, inside of a flexContainer or form. zIndex accepts both negative and positive values.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 zIndex
+{% endhighlight %}
 
-Type
+### Type
 
 Number
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 The default value for this property is 1.
 
 > **_Note:_** Modifying the zIndex does not modify the order of the widgets inside the ReactNativeContainer. If zIndex is same for group of overlapping widgets then the widget order decides the order of overlapping. The last added widget is displayed on top.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+{% highlight VoltMx %}
+//Sample code to set the zIndex property for widgets.  
 frmHome.widgetID.zIndex = 300;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Available in IDE
 *   iOS, Android

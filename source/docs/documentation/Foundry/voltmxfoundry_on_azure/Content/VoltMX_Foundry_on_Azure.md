@@ -236,69 +236,68 @@ You need to provide the following parameters during Installation:
     You must have an Azure account with the permissions of a **Global Administrator** and the role of a **User**. Without these privileges, it is not possible to create the AKS clusters (or other resources).  
     The following section describes fetching **Azure Subscription ID**, generating **Azure Service Principal ID Name**, **Azure Service Principal ID Secret**, **Service Principal Object ID**, and **Tenant ID**.
 <br>
-    i. **Steps to get the Subscription ID**
-    
-       *   Navigate to [http://portal.azure.com/](http://portal.azure.com/).
-       *   Navigate to Browse.
-       *   In the search box, begin to type subscription.
-       *   Select Subscriptions from the search results.  
-           ![](Resources/Images/ASP_1_459x653.png)
-        
-       Find the appropriate subscription to check your Azure subscription GUID.  
-        ![](Resources/Images/ASP_2_463x131.png)
+i. **Steps to get the Subscription ID**
+
+*   Navigate to [http://portal.azure.com/](http://portal.azure.com/).
+*   Navigate to Browse.
+*   In the search box, begin to type subscription.
+*   Select Subscriptions from the search results.<br/>
+![](Resources/Images/ASP_1_459x653.png)
+
+Find the appropriate subscription to check your Azure subscription GUID.<br/>
+![](Resources/Images/ASP_2_463x131.png)
 
 
-    ii. **Step to generate Azure Service Principal with Contributor role at subscription level**
-        
-       Login to Azure Portal and click on **Cloud Shell** as shown:
-        
-       ![](Resources/Images/Execute_1_542x106.png)
-        
-       1.  Execute:  
-            {% highlight voltMx %}
-            $ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<subscription_id>"
-            {% endhighlight %}  
-            ![](Resources/Images/Execute_3_478x135.png)
-        
-       After executing the above command, a json response will be displayed on the command prompt.
-        
-       {% highlight voltMx %}{  
-        "appId": "APP_ID",  
-        "displayName": "ServicePrincipalName",  
-        "name": "http://ServicePrincipalName",  
-        "password": ...,  
-        "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"  
-        }  
-        
-       {% endhighlight %}
-        
-       In the properties file of the **conf** directory:
-        
-        *   SERVICE\_PRINCIPAL\_CLIENT\_ID is the value of the appId.
-        *   SERVICE\_PRINCIPAL\_CLIENT\_SECRET is the value of the password.
-        
-        > **_Note:_** The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\_SECRET should not contain any quotation marks. For example:
-        
-        *   SERVICE\_PRINCIPAL\_CLIENT\_ID = a5afa829-525c-436c-ca4f-f442027cfd2e
-        *   SERVICE\_PRINCIPAL\_CLIENT\_SECRET = cx4q44eq-fq7a-450v-zf41-4049183d1eb8
+ii. **Step to generate Azure Service Principal with Contributor role at subscription level**
 
-    iii. **Steps to generate the Service Principal Object ID**
+Login to Azure Portal and click on **Cloud Shell** as shown:<br/>
+
+![](Resources/Images/Execute_1_542x106.png)
+
+1.  Execute:  
+    {% highlight voltMx %}
+    $ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<subscription_id>"
+    {% endhighlight %}<br/>
+![](Resources/Images/Execute_3_478x135.png)
+
+After executing the above command, a json response will be displayed on the command prompt.
+
+{% highlight voltMx %}
+{  
+"appId": "APP_ID",  
+"displayName": "ServicePrincipalName",  
+"name": "http://ServicePrincipalName",  
+"password": ...,  
+"tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"  
+}  
+
+{% endhighlight %}
+
+In the properties file of the **conf** directory:
+
+*   SERVICE\_PRINCIPAL\_CLIENT\_ID is the value of the appId.
+*   SERVICE\_PRINCIPAL\_CLIENT\_SECRET is the value of the password.
+
+> **_Note:_** The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\_SECRET should not contain any quotation marks. For example:
+
+*   SERVICE\_PRINCIPAL\_CLIENT\_ID = a5afa829-525c-436c-ca4f-f442027cfd2e
+*   SERVICE\_PRINCIPAL\_CLIENT\_SECRET = cx4q44eq-fq7a-450v-zf41-4049183d1eb8
+
+iii. **Steps to generate the Service Principal Object ID**
+
+Login to Azure Portal and click on **Power Shell**.
+
+1.  Execute:  
+    {% highlight voltMx %}
+    $(Get-AzureADServicePrincipal -Filter "AppId eq ‘<Service_principle_client_ID>’").ObjectId
+    {% endhighlight %}<br/>
+![](Resources/Images/objectid.PNG)
         
-       Login to Azure Portal and click on **Power Shell**.
-        
-       1.  Execute:  
-            {% highlight voltMx %}$(Get-AzureADServicePrincipal -Filter "AppId eq ‘<Service_principle_client_ID>’").ObjectId
-            
-             {% endhighlight %}
-            
-           ![](Resources/Images/objectid.PNG)
-             
-    iv. **Steps to know your Tenant ID**
-        
-       1.  Go to Portal.azure.com > Azure Active Directory.
-       2.  In the Overview section you can find the Tenant ID.
-        
-       ![](Resources/Images/tenant_id.png)
+iv. **Steps to know your Tenant ID**
+
+1.  Go to Portal.azure.com > Azure Active Directory.
+2.  In the Overview section you can find the Tenant ID.<br/>
+![](Resources/Images/tenant_id.png)
 
 </details>
 
@@ -381,12 +380,12 @@ Azure Content Delivery Network (CDN) offers a global solution for developers to 
 
 1.  Set the value of `AZURE_CDN_ENABLED` to **true** in the properties file (trail.properties /enterprise.properties).
     
-    ![](Resources/Images/ClamAV/CDN1.png)
+![](Resources/Images/ClamAV/CDN1.png)
     
 2.  Set the CDN Endpoint:
     *   FOR SSL ENABLED CLOUD (`IS_SSL_ENABLED = true`), after creating the CDN endpoint, map the CDN endpoint to a custom domain name.
         
-        ![](Resources/Images/ClamAV/CDN2.png)
+![](Resources/Images/ClamAV/CDN2.png)
         
     *   FOR SSL DISABLED CLOUD (IS\_SSL\_ENABLED = false), no mapping of server domain name is required.
         
@@ -397,51 +396,51 @@ Once you create the CDN profile and endpoint, follow these steps to manually con
 
 1.  Open the Azure portal ([portal.azure.com](http://portal.azure.com/)) and login using your Microsoft account credentials.
     
-    ![](Resources/Images/ClamAV/CDN3_600x317.png)
+![](Resources/Images/ClamAV/CDN3_600x317.png)
     
 2.  Select **Resource groups** from the left navigation pane.
     
-    ![](Resources/Images/ClamAV/CDN4_597x272.png)
+![](Resources/Images/ClamAV/CDN4_597x272.png)
     
     All existing resource groups appear.  
     Select the resource group in which the AKS Cluster is created.
     
-    ![](Resources/Images/ClamAV/CDN5_600x274.png)
+![](Resources/Images/ClamAV/CDN5_600x274.png)
     
 3.  If the cloud is SSL enabled, open **CDN Endpoint** from the list of resources in the Azure Resource Group.
     
-    ![](Resources/Images/ClamAV/CDN6_596x250.png)
+![](Resources/Images/ClamAV/CDN6_596x250.png)
     
 4.  Click **Custom Domain**.The Custom Domain page appears.
     
-    ![](Resources/Images/ClamAV/CDN7_601x252.png)
+![](Resources/Images/ClamAV/CDN7_601x252.png)
     
 5.  Select ON to enable HTTPS for custom domain.
     
-    ![](Resources/Images/ClamAV/CDN8.png)
+![](Resources/Images/ClamAV/CDN8.png)
     
 </details>
 
 ### Configuring Caching Rules
 
 1.  Go to **CDN profile** from the list of resources available in the Azure Resource Group (having the created AKS cluster).  
-    ![](Resources/Images/ClamAV/CDN9.png)
+![](Resources/Images/ClamAV/CDN9.png)
 2.  Click **Manage** from the top navigation bar.
     
-    ![](Resources/Images/ClamAV/CDN10_599x251.png)
+![](Resources/Images/ClamAV/CDN10_599x251.png)
     
 3.  Configure all the rules in the **CDN Manage Console**.
     
-    ![](Resources/Images/ClamAV/CDN11_599x270.png)
+![](Resources/Images/ClamAV/CDN11_599x270.png)
     
 4.  From the **HTTP Large** list, select `cache settings -> query string caching` .  
-    ![](Resources/Images/ClamAV/CDN12_599x251.png)
+![](Resources/Images/ClamAV/CDN12_599x251.png)
 5.  Select **no-cache** as the **query string caching** and click **Update**.  
-    ![](Resources/Images/ClamAV/CDN13.png)
+![](Resources/Images/ClamAV/CDN13.png)
 6.  From the **HTTP Large** list, select **Rules Engine**.  
-    ![](Resources/Images/ClamAV/CDN14_591x112.png)
+![](Resources/Images/ClamAV/CDN14_591x112.png)
 7.  Configure all the required rules.  
-    ![](Resources/Images/ClamAV/CDN15.png)
+![](Resources/Images/ClamAV/CDN15.png)
     *   Rule 1  
         ![](Resources/Images/ClamAV/rule1.png)
     *   Rule 2  

@@ -15,7 +15,8 @@ Functions
 
 The voltmx.worker namespace provides the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.worker.hasWorkerThreadSupport](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.worker.hasWorkerThreadSupport</summary> 
 
 * * *
 
@@ -23,17 +24,20 @@ This API is used during runtime only in parent scope to determine whether the cu
 
 This API is most useful in case of SPA and Desktop Web platforms where runtime query can be made to determine whether a browser environment supports Worker Threads or not.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.worker.hasWorkerThreadSupport()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None
 
-Example
+### Example
 
-{% highlight voltMx %}var hasWorkerSupport = voltmx.worker.hasWorkerThreadSupport();
+{% highlight VoltMx %}
+var hasWorkerSupport = voltmx.worker.hasWorkerThreadSupport();
 if (hasWorkerSupport) {
     var worker = new voltmx.worker.WorkerThread("worker1.js");
 
@@ -43,29 +47,32 @@ if (hasWorkerSupport) {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
   
 | Return Value | Description |
 | --- | --- |
 | Boolean | _true_: When worker thread support is present. _false_: When worker thread support is not present. |
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see [Scope](worker_apis.html#scope).
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.worker.WorkerThread](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>voltmx.worker.WorkerThread</summary> 
 
 * * *
 
 The voltmx.worker.WorkerThread function creates a WorkerThread object and returns a handle to it. The worker object represents a worker thread.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.worker.WorkerThread(  
     workerjs);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -74,9 +81,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}try {
+{% highlight VoltMx %}
+try {
 
     var worker = new voltmx.worker.WorkerThread("worker1.js");
 
@@ -93,11 +101,11 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 Returns a `WorkerThread` object.
 
-Exceptions
+### Exceptions
 
 | Error Code | Name | Message | Reason |
 | --- | --- | --- | --- |
@@ -115,8 +123,10 @@ Exceptions
     
 *   If multiple arguments are provided separated by a comma, the first argument is considered as the `workerjs` filename or module name and rest all are ignored.
 
-Platform Availability
+### Platform Availability
 
 Available for iOS, Android, Windows, SPA, and Desktop Web.
+
+</details>
 
 ![](resources/prettify/onload.png)

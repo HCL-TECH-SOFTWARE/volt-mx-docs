@@ -43,15 +43,18 @@ Prerequisites
 *   Download the `patchinstaller(binary)` and `hotfix archives` from [http://community.hclvoltmx.com/downloads/manual/](http://community.hclvoltmx.com/downloads/manual/) with your credentials.
 *   Ensure that  `VoltMXFoundryPatchInstaller.exe`  file has execute permission.
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details on How to download patch installer and hotfix archives:](javascript:void(0);)
     
-    To download Volt MX Foundry Patch Installer and hotfixes, follow these steps:
+<details close markdown="block"><summary>Click here for more details on How to download patch installer and hotfix archives:</summary>
     
-    1.   Log in to [](http://developer.voltmx.com/VoltMXReleases)[http://community.hclvoltmx.com/downloads/manual/](http://community.hclvoltmx.com/downloads/manual/). You can obtain a user name and password from your sales representative or partner.
-    2.  Navigate to the **VoltMX Foundry** section.
-    3.  From the **VoltMX Foundry Patch Installer**, select the specific release from the **Version** drop-down list and then click on the specific release related files you want to download based on your platform (Windows or Linux).  
-        For example, if you want to download `VoltMX Foundry Patch Installer 8.0 GA`, select the `8.0 GA` version from the drop-down list, and then click the **Installer\_Windows** link.
-    4.  For the required hotfix components, select the specific release from the **Version** drop-down list and then click **Download**. The following is a sample screen.
+To download Volt MX Foundry Patch Installer and hotfixes, follow these steps:
+
+1.   Log in to [](http://developer.voltmx.com/VoltMXReleases)[http://community.hclvoltmx.com/downloads/manual/](http://community.hclvoltmx.com/downloads/manual/). You can obtain a user name and password from your sales representative or partner.
+2.  Navigate to the **Volt MX Foundry** section.
+3.  From the **Volt MX Foundry Patch Installer**, select the specific release from the **Version** drop-down list and then click on the specific release related files you want to download based on your platform (Windows or Linux).  
+    For example, if you want to download `Volt MX Foundry Patch Installer 8.0 GA`, select the `8.0 GA` version from the drop-down list, and then click the **Installer\_Windows** link.
+4.  For the required hotfix components, select the specific release from the **Version** drop-down list and then click **Download**. The following is a sample screen.
+
+</details>
     
 *   For GA version 8.3 - Patch installers (8.3.1), using Tomcat and Oracle, you must ensure that the following additional files are added into the component zip folder.
     

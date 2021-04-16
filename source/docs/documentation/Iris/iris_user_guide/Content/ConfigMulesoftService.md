@@ -179,7 +179,7 @@ To configure operations for a MuleSoft service, do the following:
         *   **Timeout (in ms)** - the duration in milliseconds after which the service call times out. Provide the details in the text box.
         *   **Cachable(sec)** - the duration in seconds within which the service response is fetched from the cache. Select the **Cachable(in sec)** check box and provide the details in the text box.
         *   **Unescape embedded xml in response -** To ignore the MuleSoft response received in the XML value field, select the Decode Response Body response check box.
-        *   **Response Encoding -** select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/studio/Studio_User_Guide/Content/Response_Encoding.html).
+        *   **Response Encoding -** select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Response_Encoding.html).
 4.  In the **Request Input** tab, do the following:  
       
     Integration services accept only `form-url-encoded` inputs for all input parameters provided in service input parameters (request input).  

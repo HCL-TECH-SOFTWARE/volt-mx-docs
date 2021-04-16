@@ -20,35 +20,22 @@ To configure RAML service in the **[Integration Service Definition](ConfigureInt
 1.  In the **Name** field, provide a unique name for your service.
 2.  From the **Service Type** list, select **RAML**.
 3.  Provide the following details to create the RAML service:  
-    
 
-  
-| Field | Property |
+      | Field | Property |
 | --- | --- |
 | Connection Parameters | Click **Upload** and select a RAML file from your local machine. The system adds your main RAML file to the console. The system displays the added RAML file's name under the **Connection Parameters** section. |
 | Authentication | Select an identity provider from the list to link your service. |
-| Web Service Authentication | 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select one of the following modes:](javascript:void(0);)
+| Web Service Authentication | **Select one of the following modes:** <br><br>**None**: Select the option if you do not want to provide any authentication for the service.<br><br>**Basic**: Provide User ID and Password if the external Web service requires form or basic authentication.<br><br>**NTLM**: Your service follows the NT LAN Manager authentication process. You are required to provide the User ID, Password, NTLM Host and NTLM Domain. |
 
-**None**: Select the option if you do not want to provide any authentication for the service. **Basic**: Provide User ID and Password if the external Web service requires form or basic authentication. **NTLM**: Your service follows the NT LAN Manager authentication process. You are required to provide the User ID, Password, NTLM Host and NTLM Domain.
+**For additional configuration of your service definition, provide the following details in the Advanced section:**
 
+  | Fields | Description |
+| --- | --- |
+| Custom Code | Custom Code enables you to specify dependent JAR. To specify dependent JAR, select the JAR containing preprocessor or postprocessor libraries from the drop-down list, or click **Upload New** to browse the JAR file from your local system. This step allows you to further filter the data sent to the back end.> **_Important:_** Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration.For example, if the JDK version on the machine where Volt MX Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appear when a service is used from a device. |
+| Throttling | API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response. <br><br>**To specify throttling in Volt MX Foundry Console, follow these steps:**<br><br>In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your Volt MX Foundry console in terms of Total Rate Limit.<br><br>In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.<br><br>**To override throttling in App Services Console, refer to** [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). > **_Note:_** Enable API throttling in a clustered environment by configuring the VOLTMX\_SERVER\_NUMBER\_OF\_NODES property in the **server\_configuration** table available in Admin database. This property indicates the number of nodes configured in the cluster. The default value is 1. |
 
-
- |
-
-5.  [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)For additional configuration of your service definition, provide the following details in the **Advanced** section:](javascript:void(0);)
-    
-      
-    | Field | Description |
-    | --- | --- |
-    | Custom Code | Custom Code enables you to specify dependent JAR. To specify dependent JAR, select the JAR containing preprocessor or postprocessor libraries from the drop-down list, or click **Upload New** to browse the JAR file from your local system. This step allows you to further filter the data sent to the back end.> **_Important:_** Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration.For example, if the JDK version on the machine where Volt MX Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appear when a service is used from a device. |
-    | Throttling | API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response. **To specify throttling in Volt MX Foundry Console, follow these steps:**
-    In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your Volt MX Foundry console in terms of Total Rate Limit. In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.
-    
-    **To override throttling in App Services Console, refer to** [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). > **_Note:_** Enable API throttling in a clustered environment by configuring the VOLTMX\_SERVER\_NUMBER\_OF\_NODES property in the **server\_configuration** table available in Admin database. This property indicates the number of nodes configured in the cluster. The default value is 1. |
-    
-    > **_Note:_** All options in the Advanced section are optional.
-    
+  > **_Note:_** All options in the Advanced section are optional.
+  
 6.  In the **Description** field, provide a suitable description for the service.
 7.  To enable the proxy, select the **Use proxy from settings** check box. By default, the check box is cleared. The Use proxy from settings check box dims when no proxy is configured under the **[Settings > Proxy](Settings.html#proxy)**.
     
@@ -74,27 +61,14 @@ The **Operations List** tab appears only after the service definition is saved.
 3.  Click **ADD OPERATION**. The system adds your operation to the Operations List page.
 4.  To configure an operation, click on the required service under **Operations List** and provide the following details:  
     
-
-  
-| Field | Description |
+      | Field | Description |
 | --- | --- |
 | Name | It is prepopulated with the operation name. You can change the name if required. |
-| Operation Security Level | It specifies how a client must authenticate to invoke this operation.
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select one of the following security operations in the **Operation Security Level** field.](javascript:void(0);) 
+| Operation Security Level | It specifies how a client must authenticate to invoke this operation.<br><br>**Select one of the following security operations in the **Operation Security Level field.**<br><br>**Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.<br><br> **Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. <br><br>**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible. <br><br>**Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment. |
 
-**Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app. **Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. **Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible. **Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.
-
-
-
-
-
- |
-
+7. **For additional configurations of request (or) response operations, provide the following details in the Advanced section:**
   
-7.  [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)For additional configurations of request (or) response operations, provide the following details in the **Advanced** section:](javascript:void(0);)
-    
-      
-    | Field | Description |
+      | Field | Description |
     | --- | --- |
     | Custom Code Invocation - Preprocessor and Postprocessor (for Java and JavaScript) | You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to [Preprocessor and Postprocessor](Java_Preprocessor_Postprocessor_.html). |
     | Properties | [Additional configuration properties (timeout, cachable, unescape embedded xml in response, response encoding, number of connection retries](Java_Preprocessor_Postprocessor_.html#timeout_cachable) allows you to configure service call time out cache response |
@@ -109,21 +83,14 @@ The **Operations List** tab appears only after the service definition is saved.
 1.  In the **Request Input** tab, provide the following details:
     
     > **_Note:_** Input and Output must be defined in the RAML file only.
-    
-    | Field | Description |
+
+      | Field | Description |
     | --- | --- |
     | Name | It Contains a Unique Identifier. Change the name if required. |
     | Test Value | Enter a value. A test value is used for testing the service. |
     | Default Value | Enter the value, if required. The default value will be used if the test value is empty. |
     | Scope | Select Request or Session. It is set to **Request** by default.**Request** indicates that the value must be retrieved from the HTTP request received from the mobile device.**Session** indicates that the value must be retrieved from the HTTP session stored on Volt MX Foundry. |
-    | Data Type | 
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select one of the following data types.](javascript:void(0);)
-    
-    **String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit.**Date** - Date formatIf data type is string, then the options in the Format Type are Currency, Number and Date.If the data type is number, then the options in the Format Type are Currency and Date. If the data type is boolean, then the options in the Format Type and Format Value text box are disabled. > **_Note:_** Currently the date data type is not supported.**Boolean** - A value that can be true or false.**Number** - An integer or a floating number.
-    
-    
-    
-     |
+    | Data Type | <br><br>**String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit.<br><br>**Date** - Date formatIf data type is string, then the options in the Format Type are Currency, Number and Date.If the data type is number, then the options in the Format Type are Currency and Date. If the data type is boolean, then the options in the Format Type and Format Value text box are disabled. <br><br>**_Note:_** Currently the date data type is not supported.**Boolean** - A value that can be true or false.**Number** - An integer or a floating number. |
     | Record ID | Enter an ID. |
     | Description | Provide a suitable description. |
     

@@ -10,19 +10,23 @@ record Methods
 
 The `record`object supports the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[startRecording](javascript:void(0);) 
+
+<details close markdown="block"><summary>startRecording</summary> 
 
 * * *
 
 Starts recording audio.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 startRecording();
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}function errorcallback(errorMessage) {
+{% highlight VoltMx %}
+function errorcallback(errorMessage) {
     var errorMesg = "Reason for the failure is: " + errorMessage;
     alert(errorMesg);
 }
@@ -40,33 +44,37 @@ var recordObj = voltmx.media.record(fileobj, config);
 recordObj.startRecording();
 {% endhighlight %}
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 Windows10, Android, iOS
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[stopRecording](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>stopRecording</summary> 
 
 * * *
 
 Stops the current recording.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 stopRecording();
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}function errorcallback(errorMessage) {
+{% highlight VoltMx %}
+function errorcallback(errorMessage) {
     var errorMesg = "Reason for the failure is: " + errorMessage;
     alert(errorMesg);
 }
@@ -88,22 +96,24 @@ recordObj.startRecording();
 recordObj.stopRecording();
 {% endhighlight %}
 
-Parameters
+### Parameters
 
 None.
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 This method has no effect if recording is not in progress.
 
-Platform Availability
+### Platform Availability
 
 Windows10, Android, iOS
 
 * * *
+
+</details>
 
 ![](resources/prettify/onload.png)

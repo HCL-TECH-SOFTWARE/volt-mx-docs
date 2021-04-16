@@ -19,32 +19,34 @@ Properties
 
 The voltmx.notificationContentExtension Namespace contains the following properties.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.notificationContentExtension .view](javascript:void(0);) 
+
+<details close markdown="block"><summary>voltmx.notificationContentExtension .view</summary> 
 
 * * *
 
 Holds the current extension view.
 
-Syntax
+### Syntax
 
 voltmx.notificationContentExtension.view;
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code  
+{% highlight VoltMx %}
+//Sample code  
 var myView = voltmx.notificationContentExtension.view;
 myView.addSubView(button);
 {% endhighlight %}
 
-Type
+### Type
 
 UIView
 
-Read/Write
+### Read/Write
 
 Read only.
 
-Platform Availability
+### Platform Availability
 
 iOS.
 
@@ -53,39 +55,39 @@ Functions
 
 The voltmx.notificationContentExtension Namespace provides the following function.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.notificationContentExtension.setExtensionsCallbacks](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.notificationContentExtension.setExtensionsCallbacks</summary>
 
 * * *
 
 Sets a notification content extension with various states as callback events.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 voltmx.notificationContentExtension.setExtensionsCallbacks(  
     callbacks);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
-callbacks
+_callbacks_
 
 Contains an object with key-value pairs where the key specifies the extension state and the value is a callback function. The following are the possible keys.
 
-> | Key | Description |
-> | --- | --- |
-> | didReceiveNotification | The app received a notification. |
-> | didReceiveNotificationResponse | The user tapped one of the notification's actions. |
-> | loadView | Loads a view that the controller manages. |
-> | viewDidAppear | A view was just displayed. |
-> | viewDidDisappear | A view just removed from the view hierarchy. |
-> | viewDidLoad | The controller has loaded its view hierarchy into memory. |
-> | viewWillAppear | A view is about to be displayed. |
-> | viewWillDisappear | A view is about to be removed from the view hierarchy. |
-> 
->   
+| Key | Description |
+| --- | --- |
+| didReceiveNotification | The app received a notification. |
+| didReceiveNotificationResponse | The user tapped one of the notification's actions. |
+| loadView | Loads a view that the controller manages. |
+| viewDidAppear | A view was just displayed. |
+| viewDidDisappear | A view just removed from the view hierarchy. |
+| viewDidLoad | The controller has loaded its view hierarchy into memory. |
+| viewWillAppear | A view is about to be displayed. |
+| viewWillDisappear | A view is about to be removed from the view hierarchy. |
 
 Example: didReceiveNotification
 
-{% highlight voltMx %}function didReceiveNotification() {
+{% highlight VoltMx %}function didReceiveNotification() {
     // Native Function API code
 }
 
@@ -97,7 +99,7 @@ voltmx.notificationContentExtension.setExtensionsCallbacks({
 
 Example: didReceiveNotificationResponse
 
-{% highlight voltMx %}function didReceiveNotificationResponse() {
+{% highlight VoltMx %}function didReceiveNotificationResponse() {
     // Native Function API code
 }
 
@@ -108,7 +110,7 @@ voltmx.notificationContentExtension.setExtensionsCallbacks({
 
 Example: loadView
 
-{% highlight voltMx %}function loadView() {
+{% highlight VoltMx %}function loadView() {
     // Native Function API code
 }
 
@@ -119,7 +121,7 @@ voltmx.notificationContentExtension.setExtensionsCallbacks({
 
 Example: viewDidAppear
 
-{% highlight voltMx %}function viewDidAppear() {
+{% highlight VoltMx %}function viewDidAppear() {
     // Native Function API code
 }
 
@@ -128,9 +130,9 @@ voltmx.notificationContentExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example : **viewDidLoad**
+Example : viewDidLoad
 
-{% highlight voltMx %}function viewDidLoad() {
+{% highlight VoltMx %}function viewDidLoad() {
     // Native Function API code
 }
 
@@ -142,7 +144,7 @@ voltmx.notificationContentExtension.setExtensionsCallbacks({
 
 Example: viewWillAppear
 
-{% highlight voltMx %}function viewWillAppear() {
+{% highlight VoltMx %}function viewWillAppear() {
     // Native Function API code
 }
 
@@ -153,7 +155,7 @@ voltmx.notificationContentExtension.setExtensionsCallbacks({
 
 Example: viewDidDisappear
 
-{% highlight voltMx %}function viewDidDisappear() {
+{% highlight VoltMx %}function viewDidDisappear() {
     // Native Function API code
 }
 
@@ -164,7 +166,7 @@ voltmx.notificationContentExtension.setExtensionsCallbacks({
 
 Example: viewWillDisappear
 
-{% highlight voltMx %}function viewWillDisappear() {
+{% highlight VoltMx %}function viewWillDisappear() {
     // Native Function API code
 }
 
@@ -173,12 +175,13 @@ voltmx.notificationContentExtension.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 iOS.
 
 ![](resources/prettify/onload.png)
+</details>

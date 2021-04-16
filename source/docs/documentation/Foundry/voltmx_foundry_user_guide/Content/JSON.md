@@ -24,18 +24,19 @@ Notations
 *   JSON Object is a key value pair. The key is a String and value can be a String, number(int, float,double), JSON Object or JSON Array.
 *   JSON string will not contain attributes.
 *   JSON path does not provide Axes like Xpath.
-*   For JSON Path, if a JSON backend contains a collection, the **parameters set** should be same for all the records in the collection. For example, if the collection has parameters: `name` and `type`, these parameters should be repeated in the backend response, shown in the following sample code:{% highlight voltMx %} // Sample code from a response:  
-      
-    {"GlossDef":{"para":"A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso":[{"name":"test","type":"XML"},{"name":"tester","type":"HTML"}]}} 
-    {% endhighlight %}
+*   For JSON Path, if a JSON backend contains a collection, the **parameters set** should be same for all the records in the collection. For example, if the collection has parameters: `name` and `type`, these parameters should be repeated in the backend response, shown in the following sample code:
+{% highlight VoltMx %}
+// Sample code from a response:  
+{"GlossDef":{"para":"A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso":[{"name":"test","type":"XML"},{"name":"tester","type":"HTML"}]}} 
+{% endhighlight %}
 *   For XPath, if a JSON backend contains a collection, the fetch `only a parameter from the record`, the XPath should be in `<record>/<collection>[*]/<parameter>`, which includes an `[*]`.
     
     For example, in the previous sample code, if you want to fetch `name` from the `GlossSeeAlso`, the sample XPath should be as follows:
     
-    {% highlight voltMx %} // Sample code to fetch only the **name** parameter from a record, XPath:  
-      
-    /GlossDef/GlossSeeAlso[*]/name
-    {% endhighlight %}
+{% highlight VoltMx %} 
+// Sample code to fetch only the **name** parameter from a record, XPath:       
+/GlossDef/GlossSeeAlso[*]/name
+{% endhighlight %}
 
 ##### Selecting Elements
 
@@ -98,17 +99,11 @@ To configure a JSON service in [Integration service definition](ConfigureIntegra
     | Path Expression | You can choose between JSON Path or XPath expressions to process and transform the data from the backend response.> **_Note:_** JSON Path is the recommended option for a JSON service. (Requires Volt MX Foundry runtime version 8 with Service Pack 3 or higher)> **_Note:_** To walk-through creating automated response parameters for a JSON service by using the Tree view with Volt MX Foundry, take a look at our hands-on tutorial for [UI to view and create a Service Response](https://youtu.be/fDJXoEnxgcQ). |
     | Version | Specify the version number for the service. |
     | Base URL | Type the URL. |
-    | Web Service Authentication | 
+    | Identity Service for Backend Token | Select the Identity service associated with your app if this service needs backend token like access\_token from that Identity service to access the backend server. |
     
 <details close markdown="block"><summary>Select one of the following modes:</summary>
     
-    **None**: Select this option if you do not want to provide any authentication for the service.**Basic**: Provide User ID and Password if the external Web service requires a form or basic authentication.**NTLM**: Your service follows the NT LAN Manager authentication process. You are required to provide the User ID, Password, NTLM Host, and NTLM Domain.
-    
-    
-    
-     |
-    | Identity Service for Backend Token | Select the Identity service associated with your app if this service needs backend token like access\_token from that Identity service to access the backend server. |
-    
+    **None**: Select this option if you do not want to provide any authentication for the service.**Basic**: Provide User ID and Password if the external Web service requires a form or basic authentication.**NTLM**: Your service follows the NT LAN Manager authentication process. You are required to provide the User ID, Password, NTLM Host, and NTLM Domain.    
 </details>
 4. <details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the **Advanced** section.</summary> 
     
@@ -117,9 +112,7 @@ To configure a JSON service in [Integration service definition](ConfigureIntegra
     | --- | --- |
     | Specify JAR | To specify a JAR associated to the service, select one from the **Select Existing JAR** drop-down menu or click **Upload New** to add a new JAR file. Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration.You can download the uploaded jars to your local system. |
     | API Throttling | If you want to use **API throttling** in Volt MX Foundry Console, to limit the number of request calls within a minute. do the following:
-    In the **Total Rate Limit** text box, enter a required value. This will limit the total number of requests processed by this API.In the **Rate Limit Per IP** field, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.
-    
-    To override throttling from Volt MX Foundry App Services Console, refer to [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). |
+    In the **Total Rate Limit** text box, enter a required value. This will limit the total number of requests processed by this API.In the **Rate Limit Per IP** field, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit. To override throttling from Volt MX Foundry App Services Console, refer to [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). |
     | URL Provider Class | Enter the qualified name of the URL Provider Class. For more information, refer [URL Provider Support for XML, JSON, SOAP, and API Proxy](URL_Provider_Support_for_XML__JSON__SOAP_and_API_Proxy.html). |
     
     > **_Note:_** All options in the Advanced section are optional.
@@ -143,35 +136,26 @@ The **Operation List** tab appears when you click **Add Operation** in the **Ser
     
 <details close markdown="block"><summary>Click to View image</summary>
     
-    ![](Resources/Images/MuleSoftAddOps_549x351.png)
+![](Resources/Images/MuleSoftAddOps_549x351.png)
     
-    > **_Note:_** To use an existing integration service, refer to [How to Use an Existing Integration Service](Manage_Existing_Integration_Services_1.html#how-to-use-an-existing-integration-service).
+> **_Note:_** To use an existing integration service, refer to [How to Use an Existing Integration Service](Manage_Existing_Integration_Services_1.html#how-to-use-an-existing-integration-service).
 </details>
     
 2.  Click **Add Operation**. The selected operations appears under **Configured Operations** list.
 3.  Provide the following details to create an operation.
     
-    | Field | Description |
-    | --- | --- |
-    | Name | The operation name appears in the Name field. You can modify the name, if required. |
-    | Operation Security Level | It specifies how a client must authenticate to invoke this operation.
-    
-<details close markdown="block"><summary>Select one of the following security operations in the **Operation Security Level** field.</summary>
-    
-    **Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.**Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.**Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.
-    
-    > **_Note:_** The field is set to Authenticated App User, by default. |
-    | Target URL | The **Target URL** field is pre-populated with the URL. You can add the suffix, if required.http://baseurl.com/suffixFor Example, to the base URL, you can add suffix such as `/latest`  or `/sports` to get latest news or sports news:``http://feeds.foxnews.com/foxnews`/latest` ````http://feeds.foxnews.com/foxnews`/sports` `` |
-    
-</details>
+| Field | Description |
+| --- | --- |
+| Name | The operation name appears in the Name field. You can modify the name, if required. |
+| Operation Security Level | It specifies how a client must authenticate to invoke this operation.    
+**Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.**Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.**Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment. **_Note:_** The field is set to Authenticated App User, by default. |
+| Target URL | The **Target URL** field is pre-populated with the URL. You can add the suffix, if required.http://baseurl.com/suffixFor Example, to the base URL, you can add suffix such as `/latest`  or `/sports` to get latest news or sports news:``http://feeds.foxnews.com/foxnews`/latest` ````http://feeds.foxnews.com/foxnews`/sports` `` |
+
 
 4. <details close markdown="block"><summary> response operations, provide the following details in the Advanced section.</summary>
+    <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 174px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Custom Code Invocation</td><td class="TableStyle-Basic-BodyD-Column1-Body1">You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to <a href="Java_Preprocessor_Postprocessor_.html" target="_blank">Preprocessor and Postprocessor</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Additional Configuration Properties</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Additional Configuration Properties allows you to configure service call time out cache response. For information on different types of configuration properties, refer <a href="{{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Java_Preprocessor_Postprocessor_.html#timeout_cachable" target="_blank">Properties</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Pass-through Cookies</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Pass-through Cookies allows you send cookies present in the incoming client request to the backend target request. For detailed information, refer <a href="{{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Java_Preprocessor_Postprocessor_.html#EnterpriseCookies" target="_blank">Pass-through Cookies</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Front-end API</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Front-end API allows you map your endpoint (or) backend URL of an operation to a front-end URL. For detailed information, refer Custom <a href="{{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/FrontEndAPI.html" target="_blank">Front-end URL</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Stub Backend Response</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Stub Backend Response allows you enable a stub back-end service. To enable Stub Backend Response, refer <a href="Stub.html#How" target="_blank">How to Enable Stub Back-end Response</a>.For more details on Stub back-end response, refer to <a href="Stub.html" target="_blank">How to Develop Apps based on a Stubbed Service</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Server Events</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer <a href="ServerEvents.html">Server Events</a>.</td></tr></tbody></table></details>
     
-    <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 174px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Custom Code Invocation</td><td class="TableStyle-Basic-BodyD-Column1-Body1">You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to <a href="Java_Preprocessor_Postprocessor_.html" target="_blank">Preprocessor and Postprocessor</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Additional Configuration Properties</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Additional Configuration Properties allows you to configure service call time out cache response. For information on different types of configuration properties, refer <a href="{{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Java_Preprocessor_Postprocessor_.html#timeout_cachable" target="_blank">Properties</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Pass-through Cookies</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Pass-through Cookies allows you send cookies present in the incoming client request to the backend target request. For detailed information, refer <a href="{{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Java_Preprocessor_Postprocessor_.html#EnterpriseCookies" target="_blank">Pass-through Cookies</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Front-end API</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Front-end API allows you map your endpoint (or) backend URL of an operation to a front-end URL. For detailed information, refer Custom <a href="{{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/FrontEndAPI.html" target="_blank">Front-end URL</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Stub Backend Response</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Stub Backend Response allows you enable a stub back-end service. To enable Stub Backend Response, refer <a href="Stub.html#How" target="_blank">How to Enable Stub Back-end Response</a>.For more details on Stub back-end response, refer to <a href="Stub.html" target="_blank">How to Develop Apps based on a Stubbed Service</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Server Events</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer <a href="ServerEvents.html">Server Events</a>.</td></tr></tbody></table>
-
-</details>
-    
-    > **_Note:_** All options in the **Advanced** section for operations are optional.
+> **_Note:_** All options in the **Advanced** section for operations are optional.
     
     
 5.  Enter the **Description** for the operation.
@@ -192,21 +176,14 @@ You can perform the following actions in **Request Input** tab:
         
     2.  To configure parameters in the clients body, do the following:
         
-        | Field | Description |
-        | --- | --- |
-        | Name | Enter the name for the request input parameter. |
-        | Value | Three different options are available in Volt MX Foundry under **VALUE** during configuration of any operation. When you start editing this field, dependent identity services are auto populated. These options primarily determine the source of the value of the header**.**
-
-<details close markdown="block"><summary>Select request or session or Identity.</summary>
-        
-        **Request**: If this option is selected, the Integration Server picks the value pairs from the client's request during run time and forwards the same to the back-end.User has the option to configure the default value. This default value is taken if the request does not have the header.**Session**: If this option is selected, the value of header is picked from session context based on the user configuration.**Identity**: If this option is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html).
-</details>
-        
-        > **_Note:_** The field is set to **Request**, by default. |
-        | TEST VALUE | Enter a value. A test value is used for testing the service. |
-        | DEFAULT VALUE | Enter the value, if required. The default value will be used if the test value is empty. |
-        | Scope | Select request or session. This field is set to **Request**, by default. |
-        | Encode | Select the checkbox to enable an input parameter to be encoded. For example, the name New York Times would be encoded as _New_York_Times_  when the encoding is set to True. The encoding must also adhere the HTML URL encoding standards. |
+| Field | Description |
+| --- | --- |
+| Name | Enter the name for the request input parameter. |
+| Value | Three different options are available in Volt MX Foundry under **VALUE** during configuration of any operation. When you start editing this field, dependent identity services are auto populated. These options primarily determine the source of the value of the header**.** **Request**: If this option is selected, the Integration Server picks the value pairs from the client's request during run time and forwards the same to the back-end.User has the option to configure the default value. This default value is taken if the request does not have the header.**Session**: If this option is selected, the value of header is picked from session context based on the user configuration.**Identity**: If this option is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html). **_Note:_** The field is set to **Request**, by default. |
+| TEST VALUE | Enter a value. A test value is used for testing the service. |
+| DEFAULT VALUE | Enter the value, if required. The default value will be used if the test value is empty. |
+| Scope | Select request or session. This field is set to **Request**, by default. |
+| Encode | Select the checkbox to enable an input parameter to be encoded. For example, the name New York Times would be encoded as _New_York_Times_  when the encoding is set to True. The encoding must also adhere the HTML URL encoding standards. |
         
 5.  Click the **Header** tab to provide the following custom headers for an operation.
     
@@ -219,20 +196,13 @@ You can perform the following actions in **Request Input** tab:
     1.  To forward headers of the client's request to backend as it is, select the **Enable pass-through input header** check box. For more details on API Proxy service, refer to [How to Enable Pass-through Proxy for Operations](API_Proxy_Adapter.html#how-to-enable-pass-through-proxy-for-operations).
     2.  To configure parameters in the client's header, do the following:
         
-        | Field | Description |
-        | --- | --- |
-        | Name | Provide custom HTTP headers required by the external source. |
-        | Value | Three different options are available in Volt MX Foundry under **VALUE** during configuration of any operation. When you start editing this field, dependent identity services are auto populated. These options primarily determine the source of the value of the header**.**
-
-<details close markdown="block"><summary>Select Request or Session or Identity.</summary>
-        
-        **Request**: If this option is selected, the Integration Server picks the value pairs from the client's request during run time and forwards the same to the back-end.User has the option to configure the default value. This default value is taken if the request does not have the header.**Session**: If this option is selected, the value of header is picked from session context based on the user configuration.**Identity**: If this is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html).
-</details>
-        
-        > **_Note:_** The field is set to **Request**, by default.> **_Note:_** If the header value is scoped as a **Request** (or) **Session** and the same header is accessed under the **Expression** header value, then the expression must be represented as $request.header (or) $session.header.**Example**: If a header 1 value is a request and header 2 value is an expression, then the value of the expression must be $Request.header1.![](Resources/Images/Integration_requestandsessionheader.png) |
-        | TEST VALUE | Enter a value. A test value is used for testing the service. |
-        | DEFAULT VALUE | Change the syntax, if required. The default value will be used if the test value is empty. |
-        | Description | Enter a proper description. |
+| Field | Description |
+| --- | --- |
+| Name | Provide custom HTTP headers required by the external source. |
+| Value | Three different options are available in Volt MX Foundry under **VALUE** during configuration of any operation. When you start editing this field, dependent identity services are auto populated. These options primarily determine the source of the value of the header**.** **Request**: If this option is selected, the Integration Server picks the value pairs from the client's request during run time and forwards the same to the back-end.User has the option to configure the default value. This default value is taken if the request does not have the header.**Session**: If this option is selected, the value of header is picked from session context based on the user configuration.**Identity**: If this is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html). **_Note:_** The field is set to **Request**, by default.> **_Note:_** If the header value is scoped as a **Request** (or) **Session** and the same header is accessed under the **Expression** header value, then the expression must be represented as $request.header (or) $session.header.**Example**: If a header 1 value is a request and header 2 value is an expression, then the value of the expression must be $Request.header1.![](Resources/Images/Integration_requestandsessionheader.png) |
+| TEST VALUE | Enter a value. A test value is used for testing the service. |
+| DEFAULT VALUE | Change the syntax, if required. The default value will be used if the test value is empty. |
+| Description | Enter a proper description. |
         
 6.  You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages are displayed in the service execution for better debugging. You can refer to [Test a Service Operation](Test_a_Service_Operation.html) for the steps to test a service.
 

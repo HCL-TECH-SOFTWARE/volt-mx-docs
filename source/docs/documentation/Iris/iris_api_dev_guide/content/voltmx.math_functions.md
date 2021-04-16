@@ -15,84 +15,89 @@ Functions
 
 The math namespace provides the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[math.floor](javascript:void(0);)
+
+<details close markdown="block"><summary>math.floor</summary>
 
 This API converts a float value to an integer. The converted integer value is always the integer part of the specified float number (number before the decimal).
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 Math.floor()
+{% endhighlight %}
+### Return Values
 
-Return Values
-
-  
 | Return Value | Description |
 | --- | --- |
 | integer \[Number\] | The return value is an integer |
 
-Example
+### Example
 
-{% highlight voltMx %}onclickfloor: function(){
+{% highlight VoltMx %}
+onclickfloor: function(){
   var a= this.view.tbxOperations.text;
   var b= Math.floor(a);
   alert("The converted value is " +b );
 },
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[math.max](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>math.max</summary>
 
 This API returns the maximum value among the arguments.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 Math.max(x,y)
+{% endhighlight %}
 
-Return Values
-
+### Return Values
   
 | Return Value | Description |
 | --- | --- |
 | Maximum Value \[Number\] | The return value is the maximum value among all the arguments |
 
-Example
+### Example
 
-{% highlight voltMx %}onclickfloor: function(){
+{% highlight VoltMx %}
+onclickfloor: function(){
   var a= this.view.tbxOperations.text;
   var b= Math.floor(a);
   alert("The converted value is " +b );
 },
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[math.min](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>math.min</summary>
 
 This API returns the minimum value among the arguments.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 Math.min(x,y,x,...n)
+{% endhighlight %}
 
-Return Values
+### Return Values
 
-  
 | Return Value | Description |
 | --- | --- |
 | Minimum Value \[Number\] | The return value is the minimum value among all the arguments |
 
-Example
+### Example
 
-{% highlight voltMx %} onclickmin: function(){
+{% highlight VoltMx %} 
+onclickmin: function(){
     var a=this.view.tbxNumber1.text;
     var b=this.view.tbxNumber2.text;
     var c=Math.min(a,b);
@@ -100,146 +105,153 @@ Example
   },
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[math.pi](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>math.pi</summary>
 
 This API returns the value of pi.
 
 > **_Note:_** _math.pi_ is not a function, but a property in math namespace.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %} 
 Math.PI
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
-  
 | Return Value | Description |
 | --- | --- |
 | value of pi \[Number\] | Value of pi is returned |
 
-Example
+### Example
 
-{% highlight voltMx %}onclickpi: function(){
+{% highlight VoltMx %}
+onclickpi: function(){
   var pi= Math.PI;  
   alert("The pi value is " +pi );
 },
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[math.pow](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>math.pow</summary>
 
 This API raises the first parameter to the power of the second parameter and returns the result.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 Math.pow(x,y)
+{% endhighlight %}
 
-Return Values
+### Return Values
 
-  
 | Return Value | Description |
 | --- | --- |
 | xy | Raises the first parameter to the power of the second parameter |
 
-Implementation Details
+### Implementation Details
 
 It is advisable to use the expression x^y as it is much faster when compared to this API.
 
-Example
+### Example
 
-{% highlight voltMx %} onclickpow: function(){
+{% highlight VoltMx %} 
+onclickpow: function(){
   var a= this.view.tbxOperations.text;
   var b= Math.pow(a,2);  
   alert("The Squared value is " +b );
     },
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[math.random](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>math.random</summary>
 
 This API generates pseudo-random numbers which are uniformly distributed. This API generates a real number between 0 and 1.
 
-Syntax
+### Syntax
 
 Math.random()
 
-Return Values
+### Return Values
 
   
 | Return Value | Description |
 | --- | --- |
 | pseudo-random number \[Number\] | A pseudo-random number between the value 0 and 1 is generated |
 
-Example
+### Example
 
-{% highlight voltMx %}onclickRandom: function(){
+{% highlight VoltMx %}
+onclickRandom: function(){
     var random= Math.random();
     alert("The random number is " +random);
   }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[math.sqrt](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>math.sqrt</summary>
 
 This API returns the square root of the given number.
 
-Syntax
+### Syntax
 
 Math.sqrt()
 
-Return Values
+### Return Values
 
-  
 | Return Value | Description |
 | --- | --- |
 | square root \[Number\] | The square root of the number is returned |
 | nan (not a number) | This value is returned when the input parameter is a negative number |
 
- 
+### Example
 
-Example
-
-{% highlight voltMx %}onclicksqrt: function(){
+{% highlight VoltMx %}
+onclicksqrt: function(){
   var a= this.view.tbxOperations.text;
   var b= Math.sqrt(a);  
   alert("The square root value is " +b );
 },
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Common Example](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>Common Example</summary>
 
-{% highlight voltMx %}var ans = Math.max(10, 20);
+{% highlight VoltMx %}
+var ans = Math.max(10, 20);
 var sqrt_num = Math.sqrt(4);
 var round_off = Math.floor(2.3);
 voltmx.print(Math.PI);
@@ -249,5 +261,5 @@ voltmx.print(Math.min(10, 20));
 {% endhighlight %}
 
 * * *
-
+</details>
 ![](resources/prettify/onload.png)

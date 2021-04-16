@@ -12,7 +12,8 @@ The Video widget has the following event associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
@@ -28,7 +29,7 @@ This event is invoked in the order in which the widgets are added to the widget 
 
 Syntax
 
-doLayout()
+{% highlight VoltMx %}doLayout ();{% endhighlight %}
 
 Read/Write
 
@@ -36,7 +37,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -56,7 +57,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onCompletion Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onCompletion Event</summary>
 
 * * *
 
@@ -64,7 +66,11 @@ The onCompletion callback is invoked when playback is completed.
 
 Syntax
 
-onCompletion()
+{% highlight VoltMx %}
+
+onCompletion ();
+
+{% endhighlight %}
 
 Return Value
 
@@ -74,7 +80,7 @@ Optional. Returns the current Video Widget reference in the onCompletion callbac
 
 Example
 
-{% highlight voltMx %}//Sample code to set onCompletion event callback of a Video widget.
+{% highlight VoltMx %}//Sample code to set onCompletion event callback of a Video widget.
 
 frmVideo.myVideo.onCompletion=onCompletionCallback;
 function onCompletionCallback(){      
@@ -89,7 +95,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onError Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onError Event</summary>
 
 * * *
 
@@ -97,7 +104,7 @@ The onError callback is invoked when an error occurred in setup or playback.
 
 Syntax
 
-onError()
+{% highlight VoltMx %}onError();{% endhighlight %}
 
 Return Value
 
@@ -107,7 +114,7 @@ Optional. Returns the current Video Widget reference in the onError callback han
 
 Example
 
-{% highlight voltMx %}//Sample code to set onError event callback of a Video widget.
+{% highlight VoltMx %}//Sample code to set onError event callback of a Video widget.
 
 frmVideo.myVideo.onError=onErrorCallback;
 function onErrorCallback(){        
@@ -122,7 +129,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onPrepared Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onPrepared Event</summary>
 
 * * *
 
@@ -130,7 +138,9 @@ The onPrepared callback is invoked when the media file is loaded and ready to pl
 
 Syntax
 
-onPrepared()
+{% highlight VoltMx %} onPrepared ();
+
+{% endhighlight %}
 
 Parameters
 
@@ -140,7 +150,7 @@ Optional. Returns the current Video Widget reference in the onPrepared callback 
 
 Example
 
-{% highlight voltMx %}//Sample code to set onPrepared event callback of a Video widget.
+{% highlight VoltMx %}//Sample code to set onPrepared event callback of a Video widget.
 
 frmVideo.myVideo.onPrepared=onPreparedCallback;
 function onPreparedCallback(){        
@@ -155,7 +165,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
@@ -163,7 +174,13 @@ This event callback is invoked by the platform when the widget location position
 
 Syntax
 
-onScrollWidgetPosition()
+{% highlight VoltMx %}
+
+
+onScrollWidgetPosition ();
+
+
+{% endhighlight %}
 
 Read/Write
 
@@ -171,7 +188,7 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 

@@ -9,43 +9,48 @@ voltmx.vocabulary Functions
 
 The voltmx.vocabulary namespace provides the following functions.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.vocabulary.removeAllVocabularyStrings](javascript:void(0);) 
+<details close markdown="block"><summary>voltmx.vocabulary.removeAllVocabularyStrings</summary>
 
 * * *
 
 Removes all vocabulary words associated with the app.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.vocabulary.removeAllVocabularyStrings()
+{% endhighlight %}
 
-Parameters
-
-None.
-
-Return Values
+### Parameters
 
 None.
 
-##### Platform Availability
+### Return Values
+
+None.
+
+### Platform Availability
 
 iOS only.
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.vocabulary.setVocabularyStrings Function](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.vocabulary.setVocabularyStrings Function</summary>
 
 * * *
 
 Registers vocabulary words for an app.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.vocabulary.setVocabularyStrings(  
     vocabulary,  
     vocabularyType)
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 _vocabulary_
 
@@ -64,14 +69,15 @@ A constant that specifies designated purpose for the strings in the vocabulary p
 | VocabularyStringTypePhotoTag | The vocabulary word is a tag that is applied to photos. |
 | VocabularyStringTypeWorkoutActivityName | The vocabulary word is the name of a workout activity. |
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 iOS only.
 
 * * *
 
 ![](resources/prettify/onload.png)
+</details>

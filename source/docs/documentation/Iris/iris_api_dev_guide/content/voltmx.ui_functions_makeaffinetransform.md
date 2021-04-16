@@ -17,13 +17,16 @@ The details of the voltmx.ui.makeAffineTransform function, which is part of the 
 
 Creates a transformation object that can be used in an animation definition.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.ui.makeAffineTransform()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}/******************************************************************
+{% highlight VoltMx %}
+/******************************************************************
  *	Name    : createAnimation
  *	Author  : Volt MX
  *	Purpose : To call makeAffineTransform API and createAnimation API on widgets.
@@ -57,11 +60,11 @@ function animation() {
 }
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Vales
+### Return Vales
 
 An object that can be used to specify a transformation.
 

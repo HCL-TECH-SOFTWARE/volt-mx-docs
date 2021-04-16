@@ -9,10 +9,9 @@ category: "custom_metrics_and_reports"
 Standard Metrics V8.0
 =====================
 
-Fields
+**Fields**
 
-*   
-<details close markdown="block"><summary>Sessions</summary>
+*   <details close markdown="block"><summary>Sessions</summary>
     
     1.  Session Environment guid - GUID of the environment.
     2.  Session Application Name - Name of the application.
@@ -43,9 +42,9 @@ Fields
     27.  Session Application Version - Version of the application.
     28.  Session Session Category - Type of session whether interactive or non - interactive.
     
+    </details>
 
-*   </details>
-<details close markdown="block"><summary>Requests</summary>
+*   <details close markdown="block"><summary>Requests</summary>
     
     1.  Request Environment guid - GUID of the environment.
     2.  Request Application Name - Name of the application.
@@ -87,9 +86,9 @@ Fields
     38.  Request Sync Mode - Sync Mode of the application. The values include Online and Offline.
     39.  Request Session Category - Type of session whether interactive or non - interactive.
     
+    </details>
 
-*   </details>
-<details close markdown="block"><summary>Events</summary>
+*   <details close markdown="block"><summary>Events</summary>
     
     1.  Events Environment guid - GUID of the environment.
     2.  Event Application Name - Name of the application.
@@ -125,9 +124,9 @@ Fields
     32.  Event TimeStamp\_UTC - Timestamp of request in UTC.
     33.  Event Network Type - Mobile Network vs WiFi (networktype) - indicates the type of network during the time of the crash. Valid values are `mobilenetwork` and `WiFi`.
     
+    </details>
 
-*   </details>
-<details close markdown="block"><summary>Subrequests</summary>
+*   <details close markdown="block"><summary>Subrequests</summary>
     
     1.  Subrequest Environment guid - GUID of the environment.
     2.  Subrequest Application Name - Name of the application.
@@ -171,9 +170,9 @@ Fields
     40.  Subrequest Sync Mode - Sync mode of the application. The values include Online and Offline.
     41.  Subrequest Session Category - Type of session whether interactive or non - interactive.
     
+    </details>
 
-*   </details>
-<details close markdown="block"><summary>Direct API Requests</summary>
+*   <details close markdown="block"><summary>Direct API Requests</summary>
     
     1.  API\_Request Environment guid - GUID of the environment.
     2.  API\_Request Application Name - Name of the application.
@@ -208,8 +207,9 @@ Fields
     31.  API\_Request Sync Mode - Sync mode of the application. The values include Online and Offline.
     32.  API\_Request Session Category - Type of session whether interactive or non - interactive.
     
-*   </details>
-<details close markdown="block"><summary>Direct API Subrequests</summary>
+    </details>
+
+*   <details close markdown="block"><summary>Direct API Subrequests</summary>
     
     1.  API\_SubRequest Environment guid - GUID of the environment.
     2.  API\_SubRequest Application Name - Name of the application.
@@ -246,20 +246,20 @@ Fields
     33.  API\_SubRequest Sync Mode - Sync mode of the application. The values include Online and Offline.
     34.  API\_SubRequest Session Category - Type of session whether interactive or non - interactive.
     
+    </details>
 
-Measures
+**Measures**
 
-*   </details>
-<details close markdown="block"><summary>Sessions</summary>
+*   <details close markdown="block"><summary>Sessions</summary>
     
     1.  Session HTTP Response Code
     2.  Session Response Status Code
     3.  Session Session Key
     4.  Session Total Duration
     
+    </details>
 
-*   </details>
-<details close markdown="block"><summary>Requests</summary>
+*   <details close markdown="block"><summary>Requests</summary>
     
     1.  Request HTTP Response Code – HTTP code of the service response obtained by the device.
     2.  Request Response Status Code – Output status of the service response from the Volt MX Foundry server.
@@ -283,9 +283,9 @@ Measures
     20.  Request Custom-Conflict Duration - Time taken to execute built-in interceptor logic for conflicts in milliseconds.
     21.  Request Conflict Count - Number of conflicts occurred during a sync service call.
     
+    </details>
 
-*   </details>
-<details close markdown="block"><summary>Events</summary>
+*   <details close markdown="block"><summary>Events</summary>
     
     1.  Event Error Line – Line number in application code file where the error occurred. Applicable for event types error/exception.
     2.  Event HTTP Response Code – HTTP code of the service response obtained by the device.
@@ -303,9 +303,9 @@ Measures
     14.  Event Load Duration - The amount of time taken in milliseconds for an app to load.
     15.  Event Fore Duration - The amount of time in milliseconds spent by an app in the foreground.
     
+    </details>
 
-*   </details>
-<details close markdown="block"><summary>Subrequests</summary>
+*   <details close markdown="block"><summary>Subrequests</summary>
     
     1.  Subrequest HTTP Response Code – HTTP code of the service response obtained by the device.
     2.  Subrequest Response Status Code – Output status of the service response from the Volt MX Foundry server.
@@ -328,9 +328,9 @@ Measures
     19.  Subrequest Custom-Conflict Duration - Time taken to execute built-in interceptor logic for conflicts in milliseconds.
     20.  Subrequest Conflict Count - Number of conflicts occurred during a sync service call.
     
+    </details>
 
-*   </details>
-<details close markdown="block"><summary>Direct API Requests</summary>
+*   <details close markdown="block"><summary>Direct API Requests</summary>
     
     1.  API\_Request HTTP Response Code – HTTP code of the service response obtained by the device.
     2.  API\_Request Response Status Code – Output status of the service response from the Volt MX Foundry server.
@@ -352,8 +352,9 @@ Measures
     18.  API\_Request Custom-Conflict Duration - Time taken to execute built-in interceptor logic for conflicts in milliseconds.
     19.  API\_Request Conflict Count - Number of conflicts occurred during a sync service call.
     
-*   </details>
-<details close markdown="block"><summary>Direct API Subrequests</summary>
+    </details>
+
+*   <details close markdown="block"><summary>Direct API Subrequests</summary>
     
     1.  API\_SubRequest HTTP Response Code – HTTP code of the service response obtained by the device.
     2.  API\_SubRequest Response Status Code – Output status of the service response from the Volt MX Foundry server.
@@ -375,6 +376,7 @@ Measures
     18.  API\_SubRequest Custom-Conflict Duration - Time taken to execute built-in interceptor logic for conflicts in milliseconds.
     19.  API\_SubRequest Conflict Count - Number of conflicts occurred during a sync service call.
     
+    </details>
 
 > **Note:**  
 *   Not all fields will have values for all scenarios. For example, SD card is not relevant for iOS and those fields will be empty for iOS. Similarly, if some information is not obtained from a device during an error or crash, the same will reflect in the report.  

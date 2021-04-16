@@ -12,7 +12,7 @@ Walk-through of Volt MX Enterprise App Store (EAS) Source Application
 EAS App Implementation
 ----------------------
 
-Volt MX  Enterprise App Store (EAS) is a simplified app distribution service that enables an enterprise to securely and easily distribute and manage apps to the users. All features of Volt MX EAS are available on Cloud and On-Premises. For more information on EAS, refer to [VoltMX Enterprise App Store (EAS) Service for Digital App Distribution](EnterpriseAppStore.html).
+Volt MX Enterprise App Store (EAS) is a simplified app distribution service that enables an enterprise to securely and easily distribute and manage apps to the users. All features of Volt MX EAS are available on Cloud and On-Premises. For more information on EAS, refer to [VoltMX Enterprise App Store (EAS) Service for Digital App Distribution](EnterpriseAppStore.html).
 
 From Volt MX AppPlatform V8 SP4 JuneFP onwards, Volt MX allows you to access the complete EAS App assets including the front-end project details and the back-end app. You can download the EAS App assets from the [VoltMX Marketplace](https://marketplace.kony.com/). These assets contain the source code of the Enterprise App Store, which is available for you to edit as per your requirement. You may choose to re-brand the app, or add specific forms to best suit your requirements.
 
@@ -27,7 +27,7 @@ For example, you can brand some of the following use cases:
 App Architecture under Volt MX Reference Architecture
 -----------------------------------------------------
 
-*   **VoltMX Reference Architecture**: Volt MX EAS App is built on the Volt MX Reference Architecture. Volt MX Reference Architecture encapsulates your app's code into VoltMX's implementation of the Model View Controller (MVC) software architecture. Under Volt MX Reference Architecture, the code for your app has a clear division between the domain objects that model the app's functional domain and the presentation objects that represent what the user sees on the screen. Therefore, domain objects work independently of the presentation objects and can support multiple presentations, even simultaneously. Both domain objects and presentation objects are encapsulated into specific modules that Volt MX Reference Architecture generates automatically for you from the user interface that you create in Volt MX Reference Architecture Iris. For more information on Volt MX Reference Architecture Reference Architecture, refer to [A Deeper Look at Volt MX Reference Architecture Reference Architecture]({{ site.baseurl }}/docs/documentation/Iris/voltmx_ref_arch_api/Content/MVVM_Overviews_DeeperLook.html).
+*   **Volt MX Reference Architecture**: Volt MX EAS App is built on the Volt MX Reference Architecture. Volt MX Reference Architecture encapsulates your app's code into Volt MX's implementation of the Model View Controller (MVC) software architecture. Under Volt MX Reference Architecture, the code for your app has a clear division between the domain objects that model the app's functional domain and the presentation objects that represent what the user sees on the screen. Therefore, domain objects work independently of the presentation objects and can support multiple presentations, even simultaneously. Both domain objects and presentation objects are encapsulated into specific modules that Volt MX Reference Architecture generates automatically for you from the user interface that you create in Volt MX Reference Architecture Iris. For more information on Volt MX Reference Architecture Reference Architecture, refer to [A Deeper Look at Volt MX Reference Architecture Reference Architecture]({{ site.baseurl }}/docs/documentation/Iris/voltmx_ref_arch_api/Content/MVVM_Overviews_DeeperLook.html).
 *   Extensibility and Customization: While Volt MX Reference Architecture EAS provide optimal functionality out of the box, HCL understands that each enterprise has unique requirements. The solutions can be easily extended to support business-specific applications and requirements by leveraging the power of the Volt MX platform. This allows customers to add their own functionality via third-party solutions or their own built-in modules on the Volt MX AppPlatform. For more information on Extensibility and Customization, refer to [Extensibility](https://voltmxsolutions.atlassian.net/wiki/spaces/ARBD/pages/271811283/Extension+Points#ExtensionPoints-commanpatternBusinessExtensionsusingCommandPattern).
     
     Volt MX EAS is built by using the industry-leading Volt MX Iris and Volt MX Foundry tools, which allow enterprises to customize and extend the following:
@@ -50,9 +50,10 @@ Prerequisites to Configure EAS Source App in Iris
 Before you start using the source of the EAS App, ensure you have access to the following:
 
 *   Access to a Volt MX Cloud account. If you do not have a cloud account, you can register for it at [VoltMX Cloud Registration](https://manage.hclvoltmx.com/registration).
-*   Access to a Volt MX Cloud Build Environment, Volt MX Iris Starter, and access to Foundry App Server for publishing apps to EAS.
-    
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for](javascript:void(0);)**EAS and Platform Versions Compatibility Chart**  
+*   Access to a Volt MX Cloud Build Environment, Volt MX Iris Starter, and access to Foundry App Server for publishing apps to EAS. 
+
+    <details close markdown="block"><summary>Click here for</summary> 
+    **EAS and Platform Versions Compatibility Chart**  
     
     The following table details the supported versions of EAS source and Platform.
     
@@ -60,62 +61,59 @@ Before you start using the source of the EAS App, ensure you have access to the 
     
     | EAS Source App version || **Platform Supported Version** |||
     | --- | --- | --- | --- | --- |
-    | Client App (Store.zip) | Server App (VoltMX App Store.zip) | Foundry |   Iris | Middleware |
+    | Client App (Store.zip) | Server App (Volt MX App Store.zip) | Foundry |   Iris | Middleware |
     | --- | --- | --- | --- | --- |
     | 1.0.0
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
+    
+    <details close markdown="block"><summary>Features</summary>
     
     Initial Release
-    
-    
-    
-     | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
+
+    | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
     | 1.1.0
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
+    </details>
+    <details close markdown="block"><summary>Features</summary>
     
     Support for Web apps
-    
-    
-    
-     | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
+
+    | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
     | 2.0.0
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
+    </details>
+    <details close markdown="block"><summary>Features</summary>
     
     Support for Android 10Support for iOS 13Push Notifications
-    
-    
-    
-     | 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
+
+    | 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
     | 2.0.1
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
+    </details>
+    <details close markdown="block"><summary>Features</summary>
     
     Bug fixes
-    
-    
-    
-     | 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
+
+    | 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
     | 3.0.1
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
+    </details>
+    <details close markdown="block"><summary>Features</summary>
     
     Support for Desktop ViewHelp section in iOS Native Apps
-    
-    
-    
-     | 3.0.1 | NA | V9 GA | 8.4.3.10 |
+
+    | 3.0.1 | NA | V9 GA | 8.4.3.10 |
     | 3.1.0
     
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Features](javascript:void(0);)
+    </details>
+    <details close markdown="block"><summary>Features</summary>
     
     Support for Upgrade Policy
     
-    
-    
-     | 3.1.0 | NA | V9 SP1 | V9 SP1 |
+    | 3.1.0 | NA | V9 SP1 | V9 SP1 |
     | **SP**: Service Pack**FP**: Fix Pack |||||
+
+    </details>
+    </details>
     
 *   Configure the various Project Settings.
     *   Go to **Project** > **Settings** and configure the build settings for each Native platform. For more information on **Project Settings**, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Project_Properties_In_Iris_Starter.html#top).
@@ -135,7 +133,7 @@ The EAS App assets are divided as follows:
   
 | Store.zip | Volt MX App Store.zip |
 | --- | --- |
-| `store.zip` is the Iris project created for EAS based on Volt MX Reference Architecture. The Store project contains the client app/front-end app details of the EAS App. It contains the details of the project layout, modules and forms, and the client-side code of the front-end app. The **Store** project is associated with the **VoltMX App Store** App for the linked services. | **`` `voltmx_app_store.zip` ``** is the Server app containing the services linked to the EAS App. |
+| `store.zip` is the Iris project created for EAS based on Volt MX Reference Architecture. The Store project contains the client app/front-end app details of the EAS App. It contains the details of the project layout, modules and forms, and the client-side code of the front-end app. The **Store** project is associated with the **Volt MX App Store** App for the linked services. | **`` `voltmx_app_store.zip` ``** is the Server app containing the services linked to the EAS App. |
 
 ### Downloading Front-end Project for EAS App for Volt MX Iris
 
@@ -146,9 +144,9 @@ For Cloud, the Store app is bundled with the front-end and Server apps.
 1.  Go to [VoltMX Marketplace](https://marketplace.kony.com/items/store-0).
 2.  Click **Download**. The `store.zip` file gets downloaded to your local system. For more details on EAS versions, refer to [EAS and Platform Versions Compatibility Chart](#VersionsEASPlatforms).
 
-### Downloading Server App (VoltMX App Store) for Volt MX Foundry
+### Downloading Server App (Volt MX App Store) for Volt MX Foundry
 
-The **VoltMX App Store** is the Server app (VoltMX Foundry), which contains services linked to EAS. You can download the source app (VoltMX App Store) from Marketplace.
+The **Volt MX App Store** is the Server app (Volt MX Foundry), which contains services linked to EAS. You can download the source app (Volt MX App Store) from Marketplace.
 
 1.  Go to [VoltMX Marketplace](https://marketplace.kony.com/items/voltmx-app-store).
 2.  Click **Download**. The `voltmx_app_store.zip` file gets downloaded to your local system. For more details on EAS versions, refer to [EAS and Platform Versions Compatibility Chart](#VersionsEASPlatforms).
@@ -179,7 +177,7 @@ In case you want to import a different version of the app, you can re-import it 
 
 1.  Log in to Volt MX Foundry.
 2.  In the **Apps** > **Foundry App**, click **IMPORT**, and drag and drop or browse for the **`voltmx_app_store_v1.0.zip`** file to upload.
-3.  In the **Open** dialog, select the **VoltMX App Store** app that you downloaded.
+3.  In the **Open** dialog, select the **Volt MX App Store** app that you downloaded.
     
     > **_Important:_** Ensure the Volt MX App Store App must be published to Server before you build and publish the EAS App in Iris.
     
@@ -196,7 +194,7 @@ To publish your app to Volt MX Foundry, your Volt MX Iris client app must be ass
     
     ![](Resources/Images/FoundryExistingApp.png)
     
-4.  In the Volt MX Foundry Applications, search for **VoltMX App Store**, and then click **ASSOCIATE**.
+4.  In the Volt MX Foundry Applications, search for **Volt MX App Store**, and then click **ASSOCIATE**.
     
     The Volt MX App Store app is associated with the Store project.
     
@@ -210,7 +208,7 @@ Source of EAS App
 
 #### The Layout of the Front-End App
 
-Volt MX  EAS Source app is supported for Native channels: iOS and Android.
+Volt MX EAS Source app is supported for Native channels: iOS and Android.
 
   
 | Elements in the Store Project | Project Structure UI in Iris |
@@ -281,7 +279,7 @@ Volt MX  EAS Source app is supported for Native channels: iOS and Android.
 
 ### Source Details of EAS Back-End App - Volt MX App Store App
 
-The **VoltMX App Store** is the Server app (VoltMX Foundry), which contains the following services linked to EAS.
+The **Volt MX App Store** is the Server app (Volt MX Foundry), which contains the following services linked to EAS.
 
 *   Identity Services: By default, the AppStoreUserRepository Identity Service of User Repository type is configured to authenticate EAS. You can configure another service type, if required.
 *   Objects Services: By default, the EASDownloadBinaryService Object Service of File Store type is configured to store binaries of all the published apps. You cannot modify this service.
@@ -295,7 +293,7 @@ Branding Enterprise App Store to your Requirements
 
 You can use the source app of the EAS to brand it to suit according to your business requirements.
 
-Volt MX  allows developers to access complete suite of the EAS App source. You can view details of the source code of the app, structure, layout, forms, and functionality, and linked services, and can customize the brand according to business requirements as well.
+Volt MX allows developers to access complete suite of the EAS App source. You can view details of the source code of the app, structure, layout, forms, and functionality, and linked services, and can customize the brand according to business requirements as well.
 
 For example, you can brand an app for the following business requirements:
 
@@ -340,25 +338,26 @@ If you choose to add new image to splash screen, the new image name must be
     4.  In the **Splash Image** dialog box, select the new file.
 6.  Go to **Forms** > **AuthModules** > **frmSplashScreen**, double-click the **Splash Screen** and select the new image file.
 
-> **_Important:_** All images must be maintained with the default set scaling.
+> **_Important:_** All images must be maintained with the default set scaling. 
 
 #### Changing the EAS Package Name
 
 If you want to build the EAS app with a custom **Package Name** and **Bundle Identifier**, you must configure the native settings in the Store project that you imported to Iris.
 
-*   iOS
+*   **iOS**
     1.  Ensure that you imported the Store.zip app into Iris project.
     2.  In Iris, open **Project Settings**.
     3.  Open **Project Settings**, click **Native**.
         
-        ![](Resources/Images/EAS-iOS-PackageName_541x330.png)
+    ![](Resources/Images/EAS-iOS-PackageName_541x330.png)
         
     4.  Click **iPhone/iPad** > **iOS Build Settings** > **Bundle Identifier**, change the package name.
         
         > **_Important:_** The **Bundle Identifier** must match with the iOS Certificates that you configured in the Store project. For more details, refer to [Platform specific prerequisites]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/EAS.html#Build).
         
     5.  Click **Done**.
-*   Android
+
+*   **Android**
     1.  Ensure that you imported the Store.zip app into Iris project.
     2.  In Iris, open **Project Settings**.
     3.  In the **Project Settings** dialog, click the **Native**.
@@ -368,7 +367,7 @@ If you want to build the EAS app with a custom **Package Name** and **Bundle Ide
         3.  Under the `Child tag entries under <application> tag` text box, specify the same package name value for `android:authorities="<package_name>"`.
     5.  Click **Done**.
         
-        ![](Resources/Images/EAS-Anroid-PackageName_587x677.png)
+    ![](Resources/Images/EAS-Anroid-PackageName_587x677.png)
         
 
 ### Adding Contact Us Form and Support Details
@@ -377,7 +376,7 @@ You can add new forms to your EAS App as per your business requirements.
 
 For example, to add the **Contact Us** form to your EAS App and provide a link to the new form within the **StoreModule > fromStore** form. The following steps details how to add a **Contact Us** form, provide contact details, and links to the form for a Mobile channel. In this example, you will be using the sample component: **privacypreferences**, which contains ready-to-use text placeholder and action buttons to navigate between forms.
 
-> **_Important:_** While modifying the source app, ensure that you follow [VoltMX Reference Architecture and Extensibility Guidelines]({{ site.baseurl }}/docs/documentation/Iris/voltmx_ref_arch_api/Content/MVVM_Overviews_DeeperLook.html) lines to support product upgrades.
+> **_Important:_** While modifying the source app, ensure that you follow [VoltMX Reference Architecture and Extensibility Guidelines]({{ site.baseurl }}/docs/documentation/Iris/voltmx_ref_arch_api/Content/MVVM_Overviews_DeeperLook.html) lines to support product upgrades. 
 
 *   Add new form to the project as follows:
     1.  In **Iris**, open the **Store** project, and ensure you are in the **DESIGN** mode.
@@ -404,7 +403,7 @@ The `frmSplashScreen` form connects to the Server and fetches the login details 
 
 ### Source Details of EAS Back-End App - Volt MX App Store App
 
-The **VoltMX App Store** is the Server app (VoltMX Foundry), which contains the following services linked to EAS. Identity Services: By default, the AppStoreUserRepository Identity Service of User Repository type is configured to authenticate EAS. You can configure another service type, if required. Objects Services: By default, the EASDownloadBinaryService Object Service of File Store type is configured to store binaries of all the published apps. You cannot modify this service.By default, the EASMetaServices Object Service of Store type is configured to store the metadata of all the published apps. You cannot modify this service. Contains uploaded app binaries to publish them to EAS. Contains environments for Server and Volt MX App Server (EAS).
+The **Volt MX App Store** is the Server app (Volt MX Foundry), which contains the following services linked to EAS. Identity Services: By default, the AppStoreUserRepository Identity Service of User Repository type is configured to authenticate EAS. You can configure another service type, if required. Objects Services: By default, the EASDownloadBinaryService Object Service of File Store type is configured to store binaries of all the published apps. You cannot modify this service.By default, the EASMetaServices Object Service of Store type is configured to store the metadata of all the published apps. You cannot modify this service. Contains uploaded app binaries to publish them to EAS. Contains environments for Server and Volt MX App Server (EAS).
 
 Branding Enterprise App Store to your Requirements
 --------------------------------------------------
@@ -490,7 +489,7 @@ Download the **Privacy Preferences (GDPR)** component from Marketplace. To do so
 
 ### Source Details of EAS Back-End App - Volt MX App Store App
 
-The **VoltMX App Store** is the Server app (VoltMX Foundry), which contains the following services linked to EAS.
+The **Volt MX App Store** is the Server app (Volt MX Foundry), which contains the following services linked to EAS.
 
 *   Identity Services: By default, the AppStoreUserRepository Identity Service of User Repository type is configured to authenticate EAS. You can configure another service type, if required.
 *   Objects Services: By default, the EASDownloadBinaryService Object Service of File Store type is configured to store binaries of all the published apps. You cannot modify this service.
@@ -504,7 +503,7 @@ Branding Enterprise App Store to your Requirements
 
 You can use the source app of the EAS to brand it to suit according to your business requirements.
 
-Volt MX  allows developers to access complete suite of the EAS App source. You can view details of the source code of the app, structure, layout, forms, and functionality, and linked services, and can customize the brand according to business requirements as well.
+Volt MX allows developers to access complete suite of the EAS App source. You can view details of the source code of the app, structure, layout, forms, and functionality, and linked services, and can customize the brand according to business requirements as well.
 
 For example, you can brand an app for the following business requirements:
 
@@ -649,11 +648,11 @@ For example, to add the **Contact Us** form to your EAS App and provide a link t
 
 #### Configuring Identity Services for EAS Authentication
 
-You can configure new Identity Services and Object Services for EAS in the **VoltMX App Store** App. After you configure the new services, you must map the new services in the project and update the source code of the Store project.
+You can configure new Identity Services and Object Services for EAS in the **Volt MX App Store** App. After you configure the new services, you must map the new services in the project and update the source code of the Store project.
 
 #### Configuring Properties for Client Binaries
 
-For information on how to configure basic properties such as the description of a client binary file, the icon of a binary, and the related screenshots of a binary file. refer to [Configuring Properties for Client Binaries in Volt MX Foundry]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/EnterpriseAppStore.html#configuring-properties-for-client-binaries).
+For information on how to configure basic properties such as the description of a client binary file, the icon of a binary, and the related screenshots of a binary file. refer to [Configuring Properties for Client Binaries in VoltMX Foundry]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/EnterpriseAppStore.html#configuring-properties-for-client-binaries).
 
 Publishing EAS App
 ------------------

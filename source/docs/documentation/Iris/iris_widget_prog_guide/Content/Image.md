@@ -24,7 +24,7 @@ Following are the key concepts in Image widget:
 *   **Base 64:** When you get base 64 strings from the backend, the image widget is used to display it as an image in an application. For example, in the following employee list screen, the employee images are displayed using the base 64 strings from the backend.
     
 
-Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Iris_User_Guide.html).
+Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 For general information on the Image2 widget see the []({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Button.html)[Image2]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Image2.html) topic in the Volt MX Iris User Guide.
 

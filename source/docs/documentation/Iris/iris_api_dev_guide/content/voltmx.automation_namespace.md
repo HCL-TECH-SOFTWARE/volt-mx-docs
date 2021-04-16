@@ -21,20 +21,22 @@ Widget ID from root element (form, and master, etc.). Comma-separated strings fr
 
 > **_Note:_** Whenever a Segment row is a part of Widget path, it refers to the top level flex. This flex ID should not be provided in the subsequent path.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 <widgetpath> \[array of strings\];
+{% endhighlight %}
 
-Mandatory/Optional
+<b>Mandatory/Optional</b>
 
 Mandatory
 
-Examples
+<b>Example</b>
 
 *   Each string denotes the widget ID in the hierarchy.
     
 
-{% highlight voltMx %}voltmx.automation.button.click(["frmHomeLogin", "btnLogin"]);
+{% highlight VoltMx %}voltmx.automation.button.click(["frmHomeLogin", "btnLogin"]);
 
 //Here, ["frmHomeLogin","btnLogin"]is the widget path.
 
@@ -43,21 +45,21 @@ Examples
 *   The widget path string can consist of an array indexer for SegmentedUI widget to denote the corresponding row.
     
 
-{% highlight voltMx %}voltmx.automation.button.click(["frmHomeLogin", "segUi1[0,2]", "btnLogin"]);
+{% highlight VoltMx %}voltmx.automation.button.click(["frmHomeLogin", "segUi1[0,2]", "btnLogin"]);
 voltmx.automation.button.click(["frmHomeLogin", "segUi1[2]", "btnLogin"]);
 {% endhighlight %}
 
 *   The widget path string can be a date for a Calendar cell template.
 
-{% highlight voltMx %}voltmx.automation.button.click(["frmHomeLogin", "calendar11[05,05,2016]", "btnLogin"]);
+{% highlight VoltMx %}voltmx.automation.button.click(["frmHomeLogin", "calendar11[05,05,2016]", "btnLogin"]);
 {% endhighlight %}
 
 *   The widget path string can be the friendly name of a form.
 
-{% highlight voltMx %}voltmx.automation.button.click(["Login Page", "userwidget1", "btnLogin"]);
+{% highlight VoltMx %}voltmx.automation.button.click(["Login Page", "userwidget1", "btnLogin"]);
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -73,11 +75,13 @@ The voltmx.automation Namespace comprises of the following Widget APIs.
 
 Clicks the provided button, if visible, for the Alert. If multiple alerts are simultaneously shown, this API clicks the most recent alert displayed on the screen.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.automation.alert.click(<buttonIndex>);  
+{% highlight VoltMx %}
+voltmx.automation.alert.click(<buttonIndex>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -86,26 +90,26 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.alert.click(0);
+{% highlight VoltMx %}voltmx.automation.alert.click(0);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
 *   Windows
 
-Remarks
+<b>Remarks</b>
 
 While using Jasmine Test Automation on the Adaptive Web or Responsive Web platforms, you can use the [spyon](https://jasmine.github.io/api/3.1/global.html#spyOn) API that is provided by Jasmine to gain more control over the alerts.
 
-For example, you can use the `var spy = spyOn(window, '<method>').and.returnValue(<value>);` code snippet to always return the value that you specify.
+For Example, you can use the `var spy = spyOn(window, '<method>').and.returnValue(<value>);` code snippet to always return the value that you specify.
 
 The value of <method> and <value >depend on the [type of alert](voltmx.ui_functions_alert.html#alertType).  
 
@@ -113,9 +117,9 @@ The value of <method> and <value >depend on the [type of alert](voltmx.ui_functi
     
 *   For **confirmation** alerts, replace `<method>` with `confirm`, and replace the `<value>` parameter with either `true` or `false`.
 
-Example
+<b>Example</b>
 
-> {% highlight voltMx %}if("testcase", async
+> {% highlight VoltMx %}if("testcase", async
 >     function() {
 >         var spy = spyOn(window, 'confirm').and.returnValue(true);
 >         voltmx.automation.button.click(["Form", "btn"]);
@@ -132,11 +136,13 @@ Example
 
 Triggers the Box click event on the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.box.click (<widgetpath>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -145,16 +151,16 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.box.click(["frmHomeLogin","boxId"]);
+{% highlight VoltMx %}voltmx.automation.box.click(["frmHomeLogin","boxId"]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -170,11 +176,13 @@ Platform Availability
 
 Triggers the Button click event on the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.button.click (<widgetpath>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -183,19 +191,19 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 voltmx.automation.button.click(["frmHomeLogin","btnLogin"]);
 voltmx.automation.button.click(["frmHomeLogin","segUi1[0,2]", "btnLogin"]);
 voltmx.automation.button.click(["frmHomeLogin","segUi1[2]", "btnLogin"]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -213,11 +221,13 @@ Triggers the Calendar click event on the specified widget, if it is visible and 
 
 > **_Note:_** Supported view type is pop-up grid
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.calendar.selectDate (<widgetpath>, <newDate>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -227,19 +237,19 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 voltmx.automation.calendar.selectDate(["frmHomeLogin","calenderId"], [12,15,2017]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
 > **_Note:_** Automation is supported only for the Calendar default view.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -255,11 +265,13 @@ Platform Availability
 
 Triggers the CheckBoxGroup click event on the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.checkboxgroup.click (<widgetpath>, <chkBoxKey>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -269,17 +281,17 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 voltmx.automation.checkboxgroup.click(["frmHomeLogin","checkboxgroupId"], "checkBoxKey");
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -295,11 +307,14 @@ Platform Availability
 
 Triggers the FlexContainer click event on the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.flexcontainer.click (<widgetpath>);
+{% endhighlight %}
 
-Input Parameters
+
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -308,16 +323,16 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.flexcontainer.click(["frmHomeLogin","flexContainerId"]);
+{% highlight VoltMx %}voltmx.automation.flexcontainer.click(["frmHomeLogin","flexContainerId"]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -333,11 +348,13 @@ Platform Availability
 
 Triggers the ListBox click event on the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.listbox.selectItem(<widgetpath>, <key>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -347,18 +364,18 @@ Input Parameters
 
  
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 voltmx.automation.listbox.selectItem(["frmHomeLogin","listbox"], "key1");
 
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -374,11 +391,13 @@ Platform Availability
 
 Triggers the RadioButtonGroup click event on the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.radiobuttongroup.click(<widgetpath>, <key>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -388,16 +407,16 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.radiobuttongroup.click(["frmHomeLogin","rdBtnId"], "rdBtnkey");
+{% highlight VoltMx %}voltmx.automation.radiobuttongroup.click(["frmHomeLogin","rdBtnId"], "rdBtnkey");
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -413,11 +432,13 @@ Platform Availability
 
 Triggers the SegmentedUI click event on the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.segmentedui.click(<widgetpath>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -426,18 +447,18 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.segmentedui.click(["frmHomeLogin","segmentedUIId[0,2]"]);
+{% highlight VoltMx %}voltmx.automation.segmentedui.click(["frmHomeLogin","segmentedUIId[0,2]"]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
 > **_Note:_** Automation is supported only for the Segment table view.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -453,30 +474,32 @@ Platform Availability
 
 Triggers the onPull event on the SegmentedUI, if it is set.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.segmentedui.pull(<widgetpath>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
 | --- | --- |
 | widgetpath \[array of strings\] \[Mandatory\] | Widget ID from root element (form, and master, etc.). Comma-separated strings from root to widget represented in an array. |
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.segmentedui.pull(["frmHomeLogin","segmentedUIId"]);
+{% highlight VoltMx %}voltmx.automation.segmentedui.pull(["frmHomeLogin","segmentedUIId"]);
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
 > **_Note:_** Automation is supported only for the Segment table view.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -491,29 +514,31 @@ Platform Availability
 
 Triggers the onPush event on the SegmentedUI, if it is set.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.segmentedui.push(<widgetpath>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
 | --- | --- |
 | widgetpath \[array of strings\] \[Mandatory\] | Widget ID from root element (form, and master, etc.). Comma-separated strings from root to widget represented in an array. |
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.segmentedui.push(["frmHomeLogin"," segmentedUIId "]);
+{% highlight VoltMx %}voltmx.automation.segmentedui.push(["frmHomeLogin"," segmentedUIId "]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
 > **_Note:_** Automation is supported only for the Segment table view.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -528,11 +553,13 @@ Platform Availability
 
 Triggers the segment to scroll to the row specified by the index of the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.segmentedui.scrollToRow(<widgetpath>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -541,14 +568,14 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.segmentedui.scrollToRow(["frmHomeLogin"," segmentedUIId[12]"]);
+{% highlight VoltMx %}voltmx.automation.segmentedui.scrollToRow(["frmHomeLogin"," segmentedUIId[12]"]);
 voltmx.automation.segmentedui.scrollToRow(["frmHomeLogin"," segmentedUIId[1,3]"]);
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
@@ -558,7 +585,7 @@ Remarks
 
 The voltmx.automation.segmentedui.scrollToRow API does not work on the section header of the Segment.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -574,11 +601,13 @@ Platform Availability
 
 Scrolls to ensure that the widget appears in view. It is an awaitable API.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.scrollToWidget(<widgetpath>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -587,19 +616,19 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}await voltmx.automation.scrollToWidget(["frmHomeLogin","btnLogin"]);
+{% highlight VoltMx %}await voltmx.automation.scrollToWidget(["frmHomeLogin","btnLogin"]);
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
 > **_Note:_** If segment is a part of widgetpath, then it scrolls only to the segment.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -615,11 +644,13 @@ Platform Availability
 
 Triggers the Slider slide event on the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.slider.slide(<widgetpath>, <newValue>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -629,16 +660,16 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.slider.slide(["frmHomeLogin","sliderId"], 25);
+{% highlight VoltMx %}voltmx.automation.slider.slide(["frmHomeLogin","sliderId"], 25);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -654,27 +685,29 @@ Platform Availability
 
 Toggles the Switch between ON/OFF on the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.switch.toggle(<widgetpath>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
 | --- | --- |
 | widgetpath \[array of strings\] \[Mandatory\] | Widget ID from root element (form, and master, etc.). Comma-separated strings from root to widget represented in an array. |
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.switch.toggle(["frmHomeLogin","switchId"]);
+{% highlight VoltMx %}voltmx.automation.switch.toggle(["frmHomeLogin","switchId"]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -690,11 +723,13 @@ Platform Availability
 
 Clicks the tab with the specified tabID on the TabPane widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.tabpane.click(<widgetpath>, <tabID>);
+{% endhighlight %}
 
-Input Parameter
+<b>Input Parameter</b>
 
   
 | Parameter | Description |
@@ -704,18 +739,18 @@ Input Parameter
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.tabpane.click(["frmHomeLogin","tabpaneId"], ”tabId”);
+{% highlight VoltMx %}voltmx.automation.tabpane.click(["frmHomeLogin","tabpaneId"], ”tabId”);
 {% endhighlight %}
 
 > **_Note:_** Automation is supported only for the TabPane default view.
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -731,11 +766,13 @@ Platform Availability
 
 Enters the specified text into the TextBox, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.textbox.enterText(<widgetpath>, <newText>, <Array of objects with options to raise an event>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -746,9 +783,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.textbox.enterText(["frmHomeLogin","textbox"], “sampleText”, [{ modifierCapsLock: true,
+{% highlight VoltMx %}voltmx.automation.textbox.enterText(["frmHomeLogin","textbox"], “sampleText”, [{ modifierCapsLock: true,
         key: 'A'
     }, {
         modifierCapsLock: true,
@@ -772,11 +809,11 @@ Example
 ]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -793,11 +830,13 @@ Platform Availability
 
 Enters the specified text into the TextArea, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.textarea.enterText(<widgetpath>, <newText>, <Array of objects with options to raise an event>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -808,9 +847,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.textarea.enterText(["frmHomeLogin","textAreaId"], "sample", [{
+{% highlight VoltMx %}voltmx.automation.textarea.enterText(["frmHomeLogin","textAreaId"], "sample", [{
         modifierCapsLock: true,
         key: 'A'
     }, {
@@ -835,11 +874,11 @@ Example
 ]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -861,11 +900,13 @@ The voltmx.automation Namespace comprises of the following Low-level Touch and G
 
 Triggers the touch event on the specified widget, if it is visible and enabled.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.widget.touch(<widgetpath>, <startPoint>, <movePoints>, <endpoint>, <Object with options for raising an event>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -878,9 +919,9 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.widget.touch(["Home Page", "appMenuOption2"], [1, 1], [
+{% highlight VoltMx %}voltmx.automation.widget.touch(["Home Page", "appMenuOption2"], [1, 1], [
     [30, 1],
     [50, 1],
     [60, 1],
@@ -890,11 +931,11 @@ Example
   );
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -916,26 +957,28 @@ The voltmx.automation Namespace comprises of the following miscellaneous Automat
 
 Returns the name of the current Form.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.getCurrentForm();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.getCurrentForm();
+{% highlight VoltMx %}voltmx.automation.getCurrentForm();
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 String - Returns the Form ID of the current Form.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -951,11 +994,13 @@ Platform Availability
 
 Retrieves the paths of the child widgets of the container widget, based on the filters applied.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.getWidgetsByFilter(ContainerWidgetPath, Filters, SearchableWidgets);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -966,9 +1011,9 @@ Input Parameters
 
  
 
-Example 1
+<b>Example</b> 1
 
-{% highlight voltMx %}widgetList= voltmx.automation.getWidgetsByFilter(
+{% highlight VoltMx %}widgetList= voltmx.automation.getWidgetsByFilter(
   [“form1”],
   [
     {
@@ -984,9 +1029,9 @@ Example 1
 voltmx.automation.button.click(widgetList[0]);
 {% endhighlight %}
 
-Example 2
+<b>Example</b> 2
 
-{% highlight voltMx %}widgetList= voltmx.automation.getWidgetsByFilter(
+{% highlight VoltMx %}widgetList= voltmx.automation.getWidgetsByFilter(
   [“form1”, “flex1”],
   [
     {
@@ -1016,13 +1061,13 @@ Example 2
 voltmx.automation.waitFor(widgetList[0]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 Array of widget paths (in an array format) that satisfy the search criteria.
 
-For example, `[ [“Form1”, “bnt1”], [“Form2”, “btn2”] ]`
+For Example, `[ [“Form1”, “bnt1”], [“Form2”, “btn2”] ]`
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -1038,22 +1083,24 @@ Platform Availability
 
 Returns the status of visibility of the loading screen.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.playback.isLoadingScreenVisible();
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}await voltmx.automation.playback.isLoadingScreenVisible();
+{% highlight VoltMx %}await voltmx.automation.playback.isLoadingScreenVisible();
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 Boolean
 
@@ -1061,7 +1108,7 @@ Returns true if the loading screen is visible on the screen.
 
 Returns false if the loading screen is not visible on the screen.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -1076,11 +1123,13 @@ Platform Availability
 
 Introduces a delay time in the playback as specified. It is an awaitable API.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.playback.wait(<delayTime>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -1089,16 +1138,16 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}await voltmx.automation.playback.wait(2000);
+{% highlight VoltMx %}await voltmx.automation.playback.wait(2000);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -1114,11 +1163,13 @@ Platform Availability
 
 Waits for the widget to load completely. It is an awaitable API.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.playback.waitFor(<widgetpath> , <timeout in ms>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -1128,12 +1179,12 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}await voltmx.automation.playback.waitFor(["Home Page", "amountSpentLabel"]);
+{% highlight VoltMx %}await voltmx.automation.playback.waitFor(["Home Page", "amountSpentLabel"]);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 Boolean
 
@@ -1141,7 +1192,7 @@ Returns true if the widget is found within the timeout period.
 
 Returns false if the wdget is not found within the timeout period.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -1157,11 +1208,13 @@ Platform Availability
 
 Waits for the loading screen to be dismissed or disappear. It is an awaitable API.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.playback.waitForLoadingScreenToBeDismissed(<timeout in ms>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameters | Description |
@@ -1170,12 +1223,12 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}await voltmx.automation.playback.waitForLoadingScreenToBeDismissed("amountSpentLabel");
+{% highlight VoltMx %}await voltmx.automation.playback.waitForLoadingScreenToBeDismissed("amountSpentLabel");
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 Boolean
 
@@ -1183,7 +1236,7 @@ Returns true if there is no loading screen or the loading screen has disappeared
 
 Returns false if the loading screen is visible on the screen.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -1196,13 +1249,15 @@ Platform Availability
 
 * * *
 
-Returns the particular VoltMX-defined property on the specified widget.
+Returns the particular Volt MX-defined property on the specified widget.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.widget.getWidgetProperty(<widgetpath>, <propertyName>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -1212,16 +1267,16 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}var labelText = voltmx.automation.widget.getWidgetProperty (["Home Page", "amountSpentLabel"], "text");
+{% highlight VoltMx %}var labelText = voltmx.automation.widget.getWidgetProperty (["Home Page", "amountSpentLabel"], "text");
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 The value of the property specified for the widget
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -1237,24 +1292,26 @@ Platform Availability
 
 Invokes the back action of the device. It is an awaitable API.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.device.deviceBack();
-
-Input Parameters
-
-None
-
-Example
-
-{% highlight voltMx %}await voltmx.automation.device.deviceBack();
 {% endhighlight %}
 
-Return Values
+<b>Input Parameters</b>
 
 None
 
-Platform Availability
+<b>Example</b>
+
+{% highlight VoltMx %}await voltmx.automation.device.deviceBack();
+{% endhighlight %}
+
+<b>Return Values</b>
+
+None
+
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -1270,11 +1327,13 @@ Platform Availability
 
 The api takes a screenshot of the widget passed. If the widget does not pass, the screenshot captures the entire screen.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 voltmx.automation.capture(<widgetpath>);
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -1283,18 +1342,18 @@ Input Parameters
 
  
 
-Examples
+<b>Example</b>
 
-{% highlight voltMx %}voltmx.automation.capture(["frmHomeLogin","btnLogin"]);
+{% highlight VoltMx %}voltmx.automation.capture(["frmHomeLogin","btnLogin"]);
 voltmx.automation.capture();
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   iOS
@@ -1306,7 +1365,7 @@ Platform Availability
 Existing Volt MX Iris APIs
 --------------------------------
 
-You can use the following existing Volt MX Iris APIs for Automation. The respective syntax and usage remain the same.
+You can use the following existing Volt MX Iris APIs for Automation. The respective Syntax and usage remain the same.
 
 *   [voltmx.print](voltmx_functions.html#print)
     

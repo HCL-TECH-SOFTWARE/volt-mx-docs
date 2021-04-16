@@ -12,23 +12,24 @@ The FlexContainer widget has the following events associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addWidgets Event](javascript:void(0);)
+
+<details close markdown="block"><summary>addWidgets Event</summary>
 
 * * *
 
 An event callback invoked by the platform when the FlexContianer or FlexScrollContianer widget is accessed for the first time after its construction. This event gets executed only once on in the lifetime of the FlexContianer or FlexScrollContainer. If a destroyed FlexContianer or FlexScrollContainer is accessed, the FlexContianer or FlexScrollContainer is re-initialized and this event is invoked.
 
-Syntax
+### Syntax
 
 addWidgets()
 
-Read/Write
+### Read/Write
 
 No. It is a constructor only property.
 
-Remarks
+### Remarks
 
-> **_Note:_** This event is applicable when the FlexContainer is created using the masters feature of Volt MX Iris.
+> **_Note:_** This event is applicable when the FlexContainer is created using the masters feature of VoltMX Iris.
 
 If the FlexForm is not initialized then,
 
@@ -42,9 +43,10 @@ If the FlexForm is initialized and the FlexContainer or FlexScrollContainer is a
 *   In SPA platform, addWidgets event is invoked even if any API on FlexContainer or FlexScrollContainer is invoked.
 *   In Android, iOS, and Windows platforms, the event addWidgets is invoked only if any property on FlexContainer or FlexScrollContainer is invoked.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set a callback to the addWidgets event for a FlexContainer widget.
+{% highlight VoltMx %}
+//Sample code to set a callback to the addWidgets event for a FlexContainer widget.
 
 myForm.myFlex.addWidgets=addWidgetsCallback;
 
@@ -53,7 +55,7 @@ function addWidgetsCallback() {
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -62,21 +64,24 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[doLayout Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>doLayout Event</summary>
 
 * * *
 
 This event is invoked for every widget when the widget position and dimensions are computed. This event is invoked for all the widgets placed inside flex containers. This event is invoked in the order in which the widgets are added to the widget hierarchy and expect the frame property of the widget is calculated and available for use within this event.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 doLayout()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is used to set the layout properties of child widgets in the relation to self and peer widgets whose layout is not yet performed.
 
@@ -84,9 +89,10 @@ The frame values will be available correctly only in the doLayout callback. Usag
 
 > **_Note:_** The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
+{% highlight VoltMx %}
+//Sample code to set doLayout event callback to a button widget.
 /*This code changes the top property of button2 and makes it appear below button1.*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -97,7 +103,7 @@ function doLayoutButton1(){
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -106,23 +112,25 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[init Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>init Event</summary>
 
 * * *
 
 This event is invoked only once in widgets life cycle that is when the FlexContainer or FlexScrollContainer is ready with its widget hierarchy. This event is invoked after [addwidgets](#masterda) method is invoked.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 init
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 No. It is a constructor only property.
 
-Remarks
+### Remarks
 
-> **_Note:_** This event is applicable when the FlexContainer is created using the masters feature of Volt MX Iris.
+> **_Note:_** This event is applicable when the FlexContainer is created using the masters feature of VoltMX Iris.
 
 If the FlexForm is not initialized then,
 
@@ -136,9 +144,9 @@ If the FlexForm is initialized and the FlexContainer or FlexScrollContainer is a
 *   In SPA platform, init event is invoked even if any API on FlexContainer or FlexScrollContainer is invoked.
 *   In Android, iOS, and Windows platforms, the event init is invoked only if any property on FlexContainer or FlexScrollContainer is invoked.
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //Sample code
 var flexContainer = new voltmx.ui.FlexContainer({
 	"id": "flexContainer2142450206171182",
@@ -160,7 +168,7 @@ function initCallback() {
 } 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -169,17 +177,20 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onClick Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onClick Event</summary>
 
 * * *
 
 A callback event is invoked by the platform when the user performs a click action on the FlexContainer widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onClick()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 widget \[widgetref\]
 
@@ -203,7 +214,7 @@ Optional. This parameter is applicable only when the FlexContainer is placed in 
 
 > **_Note:_** The behavior of this event is undefined when **onClick** and a **single tab gesture** are defined for a FlexContainer.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
@@ -211,9 +222,10 @@ Remarks
 
 If the onClick event is not defined for the FlexContainer Widget, the FocusSkin is not shown when user performs click action on the FlexContainer.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to set callback to onClick event for a FlexContainer widget.
+{% highlight VoltMx %}
+//Sample code to set callback to onClick event for a FlexContainer widget.
 
 myForm.myFlex.onClick=flexClickExample;
 
@@ -229,7 +241,7 @@ function flexClickExample(eventobject, context) {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
@@ -238,7 +250,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onHover Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onHover Event</summary>
 
 * * *
 
@@ -250,12 +263,14 @@ An event callback is invoked by the platform based on the below actions:
 
 > **_Note:_** When the event callback is invoked, corresponding widget state is not updated as selected/unselected.
 
-Important Considerations
+### Important Considerations
 
 Below are the points to be considered while using onHover event.
 
-*   To remove onHover event on a widget, set it to null.{% highlight voltMx %}widget.onHover = null;
-    {% endhighlight %}
+*   To remove onHover event on a widget, set it to null.
+{% highlight VoltMx %}
+widget.onHover = null;
+{% endhighlight %}
 *   Data / computing intense operations should not be performed in onHover callback.
 *   Avoid network calls in onHover event as it affects the performance.
 *   Use this event to update the skin.
@@ -268,11 +283,13 @@ Below are the points to be considered while using onHover event.
     *   When mouse moves out of the child widget area, then MOUSE\_LEAVE event gets fired on child widget and MOUSE\_MOVE event gets fired on the parent widget.
     *   When mouse moves out of the parent widget, then MOUSE\_LEAVE event gets fired on the parent widget.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onHover()
+{% endhighlight %}
 
-Parameters
+### Parameters
 
 widget
 
@@ -282,59 +299,59 @@ context
 
 Optional. Specifies the JSObject with the following key values.
 
-> eventType
-> 
-> Following are the options available:
-> 
-> > constants.ONHOVER\_MOUSE\_ENTER - When the mouse enters into the widget region.
-> > 
-> > constants.ONHOVER\_MOUSE\_MOVE - When the mouse move within the widget region.
-> > 
-> > constants.ONHOVER\_MOUSE\_LEAVE - When the mouse leaves from the widget region.
-> 
-> > sectionIndex
-> > 
-> > Optional. Specifies the index of the section where the current focused row belongs. It is applicable only if parent is segmentedUI.
-> > 
-> > rowIndex
-> > 
-> > Optional. Specifies the index of the current focused row relative to its section. It is applicable only if parent is SegmentedUI or DataGrid.
-> > 
-> > columnIndex
-> > 
-> > Optional. Specifies the index of the cell in DataGrid where the mouse exists. It is applicable only if parent is DataGrid.
-> > 
-> > selectionState
-> > 
-> > Optional. Specifies the selection state when the widget is placed inside a segmentedUI and its selectionBehavior property is set as SEGUI\_MULTI\_BEHAVIOR or SEGUI\_SINGLE\_SELECT\_BEHAVIOR to indicate the current focused rows checked or unchecked state.
-> > 
-> > index
-> > 
-> > Optional. Specifies the index of the current focused image in ImageGallery or HorizontalImageStrip widgets. It is applicable only for ImageGallery or HorizontalImageStrip widgets.
-> > 
-> > key
-> > 
-> > Optional. Specifies the key of the element in a CheckBoxGroup or RadioButton widgets.
-> > 
-> > pageX
-> > 
-> > Specifies the horizontal coordinate of the onHover event relative to the whole document.
-> > 
-> > pageY
-> > 
-> > Specifies the vertical coordinate of the onHover event relative to the whole document.
-> > 
-> > screenX
-> > 
-> > Specifies the horizontal coordinate of the onHover event relative to the screen width.
-> > 
-> > screenY
-> > 
-> > Specifies the vertical coordinate of the onHover event relative to the screen height.
+ eventType
+ 
+ Following are the options available:
+ 
+    constants.ONHOVER\_MOUSE\_ENTER - When the mouse enters into the widget region.
+    
+    constants.ONHOVER\_MOUSE\_MOVE - When the mouse move within the widget region.
+    
+    constants.ONHOVER\_MOUSE\_LEAVE - When the mouse leaves from the widget region.
+     sectionIndex
+    
+    Optional. Specifies the index of the section where the current focused row belongs. It is applicable only if parent is segmentedUI.
+    
+    rowIndex
+    
+    Optional. Specifies the index of the current focused row relative to its section. It is applicable only if parent is SegmentedUI or DataGrid.
+    
+    columnIndex
+    
+    Optional. Specifies the index of the cell in DataGrid where the mouse exists. It is applicable only if parent is DataGrid.
+    
+    selectionState
+    
+    Optional. Specifies the selection state when the widget is placed inside a segmentedUI and its selectionBehavior property is set as SEGUI\_MULTI\_BEHAVIOR or SEGUI\_SINGLE\_SELECT\_BEHAVIOR to indicate the current focused rows checked or unchecked state.
+    
+    index
+    
+    Optional. Specifies the index of the current focused image in ImageGallery or HorizontalImageStrip widgets. It is applicable only for ImageGallery or HorizontalImageStrip widgets.
+    
+    key
+    
+    Optional. Specifies the key of the element in a CheckBoxGroup or RadioButton widgets.
+    
+    pageX
+    
+    Specifies the horizontal coordinate of the onHover event relative to the whole document.
+    
+    pageY
+    
+    Specifies the vertical coordinate of the onHover event relative to the whole document.
+    
+    screenX
+    
+    Specifies the horizontal coordinate of the onHover event relative to the screen width.
+    
+    screenY
+    
+    Specifies the vertical coordinate of the onHover event relative to the screen height.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to use onHover eventfunction 
+{% highlight VoltMx %}
+//Sample code to use onHover eventfunction 
 function onHoverEventCallback(widget, context) {
  voltmx.print("button hover event executed" + context.eventType);
  if (context.eventType == constants.ONHOVER_MOUSE_ENTER) {
@@ -358,29 +375,32 @@ function removeHoverEvent() {
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Desktop Web platform only
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onScrollWidgetPosition Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 onScrollWidgetPosition()
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Example
+### Example
 
-{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight VoltMx %}
+var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -394,24 +414,26 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   Not Accessible from IDE
 *   Android, iOS, SPA, and Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchEnd Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchEnd Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touch is released from the touch surface.
 
-Syntax
-
+### Syntax
+{% highlight VoltMx %}
 onTouchEnd ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -431,17 +453,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchEndCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -450,23 +473,26 @@ Example
 Form1.widget1.onTouchEnd = onTouchEndCallback;
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchMove Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchMove Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the touch moves on the touch surface continuously until movement ends.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onTouchMove ()
+{% endhighlight %}
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -486,17 +512,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchMoveCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -505,23 +532,24 @@ Example
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onTouchStart Event](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>onTouchStart Event</summary>
 
 * * *
 
 An event callback is invoked by the platform when the user touches the touch surface.
 
-Syntax
+### Syntax
 
 onTouchStart ()
 
-Optional Parameters
+### Optional Parameters
 
 source
 
@@ -541,17 +569,18 @@ On devices that support 3D Touch, specifies a key-value pair where the value sp
 
 > **_Note:_** 3D Touch is available only on iOS 9.0 and later.
 
-Read/Write
+### Read/Write
 
 Read + Write
 
-Remarks
+### Remarks
 
 This event is invoked asynchronously.
 
-Example
+### Example
 
-{% highlight voltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
+{% highlight VoltMx %}
+function onTouchStartCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo[“force”];
         voltmx.print(“value of force is” + force)
@@ -561,7 +590,7 @@ Form1.widget1.onTouchStart = onTouchStartCallback;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 

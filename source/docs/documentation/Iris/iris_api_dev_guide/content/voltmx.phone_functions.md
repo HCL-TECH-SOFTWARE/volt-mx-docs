@@ -3,8 +3,6 @@ layout: "documentation"
 category: "iris_api_dev_guide"
 ---
                             
-
-
 voltmx.phone Namespace
 ====================
 
@@ -15,22 +13,25 @@ Functions
 
 The `voltmx.phone` namespace contains the following functions:
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.addCalendarEvent](javascript:void(0);)
+
+<details close markdown="block"><summary>voltmx.phone.addCalendarEvent</summary>
 
 * * *
 
 Adds a new event to the device calendar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.addCalendarEvent(  
     eventDetails);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 _eventDetails_
 
-A JavaScript object that contains the following key-value pairs.
+### A JavaScript object that contains the following key-value pairs.
 
 | Key | Value |
 | --- | --- |
@@ -75,9 +76,10 @@ To create a bi-weekly event, configure ‘repeat’ as constants.CALENDAREVENT\_
 
 The following example shows how to add quarterly repeat event.
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code to add the Input Parameter **Interval** in the add calendar event to the device   
+{% highlight VoltMx %}
+//Sample code to add the Input Parameter **Interval** in the add calendar event to the device   
 addCalendarEvent argument  
  var eventobj = {  
 summary: "Event started",  
@@ -92,7 +94,10 @@ access: "public",
 }  
 };  
 voltmx.phone.addCalendarEvent(eventobj);
-{% endhighlight %}{% highlight voltMx %}function addCalendarEvent() {
+{% endhighlight %}
+
+{% highlight VoltMx %}
+function addCalendarEvent() {
     try {
         alert("calendar event is about to start");
         var evtobj = {
@@ -114,7 +119,10 @@ voltmx.phone.addCalendarEvent(eventobj);
     }
 
 }
-{% endhighlight %}{% highlight voltMx %}// To add the calendar event to the device using 'voltmx.phone.addCalendarEvent' APICalendarAddEvent: function(eventObj) {
+{% endhighlight %}
+
+{% highlight VoltMx %}
+// To add the calendar event to the device using 'voltmx.phone.addCalendarEvent' APICalendarAddEvent: function(eventObj) {
     try {
 
         var today = new Date();
@@ -165,11 +173,11 @@ voltmx.phone.addCalendarEvent(eventobj);
 
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 This function throws the following phone exceptions.
 
@@ -192,7 +200,7 @@ This function also throws the following general exceptions.
 | 105 | Index out of range. |
 | 106 | Unknown error |
 
-Remarks
+### Remarks
 
 You can view a video on using the Calendar [here](https://youtu.be/iUaf-WkpGXA).
 
@@ -202,7 +210,7 @@ When your app calls this function on Android, it must have both the READ\_CALEND
 
 The time zone of events that your app adds is the same as the device's current time zone.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android version 4.0 and later
@@ -210,7 +218,8 @@ Platform Availability
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)voltmx.phone.cancelVibration](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.phone.cancelVibration</summary>
 
 * * *
 
@@ -219,24 +228,27 @@ This API stops the ongoing vibration pattern on a device. This API is available 
 > **_Important:_** For Android, you must define the VIBRATE permission under Manifest Properties.  
 **<uses-permission android:name="android.permission.VIBRATE" />**
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.cancelVibration()
-
-Input Parameters
-
-None.
-
-Example
-
-{% highlight voltMx %}voltmx.phone.cancelVibration();
 {% endhighlight %}
 
-Return Values
+### Input Parameters
 
 None.
 
-Limitations/Requirements
+### Example
+
+{% highlight VoltMx %}
+voltmx.phone.cancelVibration();
+{% endhighlight %}
+
+### Return Values
+
+None.
+
+### Limitations/Requirements
 
 *   Windows
     *   The device must have vibration hardware.
@@ -246,33 +258,36 @@ Limitations/Requirements
     *   API contract must be: Windows.Foundation.UniversalApiContract (introduced v4) or later.
         
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   Windows
 
 * * *
-
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)voltmx.phone.clearSMSListeners](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.phone.clearSMSListeners</summary>
 
 * * *
 
 When invoked, this API clears the broadcast receiver and the existing listeners that are registered to retrieve the one-time password (OTP) from the SMS message received.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.clearSMSListeners()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 <table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Description</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">SMSListenerType [Constant] - Optional</td><td class="TableStyle-Basic-BodyA-Column1-Body1">The SMSListenerType value can be any of the following: voltmx.phone.SMS_WITH_USER_CONSENT voltmx.phone.SMS_WITHOUT_USER_CONSENT Depending on the parameter value, a specific listener type is cleared. If no type is specified, both type of listeners(if any) are cleared.</td></tr></tbody></table>
 
 > **_Note:_** Ensure that you create an androidbuild.properties file in the project folder of your Volt MX Irisworkspace, and add the following key: `addSMSRetrieverSupport = UI`.  
 You can set the key to `UI` or `Non-UI` to fetch the required Gradle entries. To know more about adding Android properties to the androidbuild.properties file, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Native_App_Properties.html#add-android-properties-to-androidbuild-properties-file).  
 
-Example
+### Example
 
-{% highlight voltMx %}clearAll: function() {
+{% highlight VoltMx %}
+clearAll: function() {
 try {
 voltmx.phone.clearSMSListeners();
 } catch (err) {
@@ -281,21 +296,22 @@ alert("Error:: " + err);
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Exceptions
+### Exceptions
 
 *   101 - Invalid type of arguments to the voltmx.phone.clearSMSListeners API
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)voltmx.phone.generateAppHashKey](javascript:void(0);) 
+<details close markdown="block"><summary>voltmx.phone.generateAppHashKey</summary>
 
 * * *
 
@@ -305,36 +321,40 @@ For an app to receive the message callback, the hash key has to be correct.
 
 > **_Note:_** This API must be invoked only if type of SMS listener triggered is voltmx.phone.SMS\_WITHOUT\_USER\_CONSENT
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.generateAppHashKey()
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
 > **_Note:_** Ensure that you create an androidbuild.properties file in the project folder of your Volt MX Irisworkspace, and add the following key: `addSMSRetrieverSupport = UI`.  
 You can set the key to `UI` or `Non-UI` to fetch the required Gradle entries. To know more about adding Android properties to the androidbuild.properties file, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Native_App_Properties.html#add-android-properties-to-androidbuild-properties-file).  
 
-Example
+### Example
 
-{% highlight voltMx %}generateAppHashKey: function() {
+{% highlight VoltMx %}
+generateAppHashKey: function() {
     var key = voltmx.phone.generateAppHashKey();
     voltmx.print("AppHashkey: " + key);
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 <table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Return Value</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Description</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">appHashKey[ String ]</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Returns a hash key that has to be appended to the SMS message by server.</td></tr></tbody></table>
 
-Platform Availability
+### Platform Availability
 
 *   Android
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.dial](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.dial</summary>
 
 * * *
 
@@ -342,12 +362,14 @@ Enables your app to call the specified telephone number.
 
 You can use this API to make calls to other numbers without leaving the application.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.dial(  
     number);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -355,46 +377,50 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}dial: function() {
+{% highlight voltMx %}
+dial: function() {
     var number = this.view.tbxDial.text;
     voltmx.phone.dial(number);
 },
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 2101 - Insufficient Permissions
 
-Remarks
+### Remarks
 
 When you make a call to the specified number using this API, the underlying OS is used to make the call. The call charges as imposed by the service provider are applicable.
 
 On the iPhone simulator, this function is a dummy call. You need to test this function on an actual iPhone device.
 
-Platform Availability
+### Platform Availability
 
 Not supported on Windows, iPad, Android Tablets, Desktop Web, and Mobile Web platforms. You can use the phone widget to achieve the same functionality on Mobile Web.
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.findCalendarEvents](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.findCalendarEvents</summary>
 
 * * *
 
 This function finds an event in the device's calendar.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.findCalendarEvents(  
     evtobj);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -402,9 +428,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}var evtobj = {
+{% highlight VoltMx %}
+var evtobj = {
     type: "starting",
     start: this.startTime,
     finish: this.finishTime
@@ -412,7 +439,7 @@ Example
 var events = voltmx.phone.findCalendarEvents(evtobj);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 If no matching event is found, this function returns null. If matching events are found, this function returns an array of JavaScript objects containing the matching events. Each JavaScript object contains the following key-value pairs.
 
@@ -425,7 +452,7 @@ If no matching event is found, this function returns null. If matching events ar
 | note | A string that contains the long description of the event. |
 | access | A string that indicated the privacy setting for the event. The values can be `public`, `private`, or `confidential` |
 
-Exceptions
+### Exceptions
 
 This function throws the following phone exceptions.
 
@@ -448,7 +475,7 @@ This function also throws the following general exceptions.
 | 105 | Index out of range. |
 | 106 | Unknown error |
 
-Remarks
+### Remarks
 
 The search criteria in the type key in the _evtobj_ parameter can be any of the following values.
 
@@ -464,25 +491,28 @@ This function is supported on Android 4.0 version and above (that is, Android AP
 
 This function searches only those events that are added by the application.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android 4.0 or later
 *   Windows
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.getRemoveEventOptions](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.getRemoveEventOptions</summary>
 
 * * *
 
 This API returns an array of constants that indicates possible actions for removing a particular event depending on the native support on the device. One of the values that this API returns must be passed as [removeOption](#removeOption) for [voltmx.phone.removeCalendarEvent API](#removeCalenderEvent).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.getRemoveEventOptions([eventHandle](#eventHandle1))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -490,12 +520,13 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}var removeOptions = voltmx.phone.getRemoveEventOptions(eventHandle);
+{% highlight VoltMx %}
+var removeOptions = voltmx.phone.getRemoveEventOptions(eventHandle);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 An array with possible constant values depending on native support in devices. The possible constants that will be returned as part of the array are as follows:
 
@@ -508,15 +539,16 @@ An array with possible constant values depending on native support in devices. T
 
 > **_Note:_** Depending on the OS configuration of certain Android devices, any of these two values may not be applicable. So before passing any of these two values in the API, you must verify if the Android device supports the required value.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 *   Windows
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.hasVibratorSupport](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.hasVibratorSupport</summary>
 
 * * *
 
@@ -525,24 +557,27 @@ This API returns whether vibrator is supported on a device. This API is availabl
 > **_Important:_** For Android, you must define the VIBRATE permission under Manifest Properties.  
 **<uses-permission android:name="android.permission.VIBRATE" />**
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.hasVibratorSupport()
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}hasVibratorSupport: function() {
+{% highlight VoltMx %}
+hasVibratorSupport: function() {
     if (voltmx.phone.hasVibratorSupport() === true) {
         alert("The device contains a Vibration motor");
     }
 },
 {% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 None.
 
-Return Values
+### Return Values
 
 Boolean is the return value.
 
@@ -553,7 +588,7 @@ Boolean is the return value.
 
  
 
-Limitations/Requirements
+### Limitations/Requirements
 
 *   Windows
     *   The device must have vibration hardware.
@@ -563,24 +598,27 @@ Limitations/Requirements
     *   API contract must be: Windows.Foundation.UniversalApiContract (introduced v4) or later.
         
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   Windows
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.openEmail](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.openEmail</summary>
 
 * * *
 
 This API allows the application to launch the native email client with predefined email addresses, subject, body, and attachments.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.openEmail**([torecipients,](#torecipients)[ccrecipients](#ccrecipients), [bccrecipients](#bccrecipients), [subject](#subject), [messagebody](#messagebody), [ismessagebod.html](#ismessagebod.html), [attachments](#attachments), [viewMode](#viewMode)**, **[filterEmailAppsOnly](#filterEmailAppsOnly))**
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
   
 | Parameter | Description |
@@ -634,18 +672,19 @@ attachments \[Array of Objects\] - Optional
 viewMode \[Integer\] - Optional | Defines the possible view preferences for an email client window. This is a Windows-specific parameter. The values of viewMode are as follows: 0 - Default valueDefaults to half, which means, the window uses 50% (half) of the available horizontal screen pixels. 1 - UseLess The window uses less than 50% of the available horizontal screen pixels. 2 - UseHalf The window uses 50% (half) of the available horizontal screen pixels. 3 - UseMore The window uses more than 50% of the available horizontal screen pixels. 4 - UseMinimum The window uses the minimum horizontal pixel width (either 320 or 500 pixels) specified in the app's manifest file. 5 - UseNone The window uses no visible component. If you pass any value other than an integer, the "openEmail : mode must be integer" error message is displayed. > **_Note:_** viewMode is specific only to Windows and is ignored for all other platforms. For all other devices, the viewMode parameter falls back to its default behavior. |
 | filterEmailAppsOnly \[Boolean\] - Optional | Set this parameter to true to filter and list only email applications, which are shown in the Chooser dialog box. By default, the value of this parameter is false. If you do not want to use this parameter, you can pass a null value. > **_Note:_** This property is only available on the Android platform. On Android 11 (Target SDK version 30, or later) devices, if you want to view a filtered list of email applications, add the following entry in the **Project Settings** > **Native** > **Android Mobile/Tablet** > **Child tag entries under <manifest> tag** field:<queries> <intent> <action android:name="android.intent.action.SENDTO" /> <data android:scheme="mailto"/> </intent> </queries> |
 
-Example
+### Example
 
-{% highlight voltMx %}emailSend: function() {
+{% highlight VoltMx %}
+emailSend: function() {
     voltmx.phone.openEmail(["kitchensinkapp@voltmx.com"], [""], [""], "Feedback on KitchenSink Application 1.1", "", false, []);
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 PhoneError
 
@@ -656,7 +695,7 @@ The following error codes are defined for Phone APIs
 *   2102 - Cannot open mail, mail not configured
 *   2103 - Cannot open media gallery
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Server Side Mobile Web, SPA, and Desktop Web.
 
@@ -665,8 +704,9 @@ For these platforms you can launch the native email client by using Richtext wid
 _<a href="mailto:email@voltmx.com?subject=Foo&body=Bar">Email Me</a>_
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.openMediaGallery](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.openMediaGallery</summary>
 
 * * *
 
@@ -678,11 +718,13 @@ For iPad, openMediaGallery will show the Photos/Videos in the native popover. Th
 
 You can view a video on using iPad Popover [here](https://youtu.be/4EKgCANM1TI).
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.openMediaGallery([onselectioncallback](#onselectioncallback), [querycontext,](#querycontext) [PSP](#PSP))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -690,20 +732,21 @@ Input Parameters
 | querycontext \[Table\] - Optional | Query context is an Object that can be populated with key-value pairs for fine tuning the media items for display (currently only one key **"mimetype"** supported to query the gallery items ). The possible values of the mimetype key can be **image/\*, video/\*, audio/\***. rawbytes.getRawbytesType () This API returns the type of rawbytes that are obtained from onSelectionCallback of openMediaGallery. Rawbytes can be of different types such as image, audio, video, file, bytes, and livePhoto. This API is available from V8 SP3 onwards. var rawbytesType = rawbytes.getRawbytesType(); To check the obtained rawbyte type, the following constants can be used: constants. RAWBYTES \_IMAGE: rawbytes related to image constants. RAWBYTES \_VIDEO: rawbytes related to video constants. RAWBYTES \_AUDIO: rawbytes related to audio constants. RAWBYTES \_FILE: rawbytes related to files constants. RAWBYTES \_BYTES: rawbytes related to bytes constants. RAWBYTES \_LIVEPHOTO: rawbytes related to livePhoto if(rawbytes.getRawbytesType() == constants. RAWBYTES\_LIVEPHOTO) { // app logic } livePhotoResources - Rawbytes Property Returns both image and file paths, using this property you can get the both image and video paths. This property returns a json containing both video and image paths, and is available from V8 SP3 onwards. It contains the following keys: imageURL: path of stored image related to livePhoto. videoURL: path of stored video related to livePhoto. var livePhotoResources = Rawbytes.livePhotoResources;//Example for creating Live photos using FFIFunction onSelectionCallback(){ if (rawbytes !== null) { if (rawbytes.getRawbytesType() == constants.RAWBYTES\_LIVEPHOTO) { globalArrOFURLS = rawbytes.livePhotoResources; alert(globalArrOFURLS); var livePhotosFFIObject = new PHVFFI.livePhotosFFI(); //Invokes method 'createLivePhoto' on the object livePhotosFFIObject.createLivePhoto(globalArrOFURLS); } frmHome.imgOne.rawBytes = rawbytes; } else if (permStatus == voltmx.application.PERMISSION\_DENIED) { alert("PERMISSION\_DENIED"); } } } var returnStatus = voltmx.phone.openMediaGallery(onSelectionCallback, querycontext); |
 | PSP \[Table\] - Optional | The PSP parameter is a dictionary with the following properties. _widgetref \[Widget Reference\]_: Applicable only on iPad. The widget to which the pop-up will be anchored to. For example, _formname.widgetname_. _compressionlevel_: Compression level is a float value. Specify 0.0 for most compressed images and 1.0 for least compressed images. |
 
-Example
+### Example
 
-{% highlight voltMx %}openMediaGalleryForEmail: function() {
+{% highlight VoltMx %}
+openMediaGalleryForEmail: function() {
     voltmx.phone.openMediaGallery(this.openMediaGallaeryCallBck, {
         mimetype: "image/*"
     });
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 PhoneError
 
@@ -714,23 +757,26 @@ The following error codes are defined for Phone APIs
 *   2102 - Cannot open mail, mail not configured
 *   2103 - Cannot open media gallery
 
-Platform Availability
+### Platform Availability
 
 Supported on all platforms except Mobile Web, SPA, and Desktop Web.
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)voltmx.phone.performHapticFeedback](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.performHapticFeedback</summary>
 
 * * *
 
 This API provides various haptic feedback to users, and is available from V8 SP3 onwards.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.performHapticFeedback(hapticFeedbackValue)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 hapticFeedbackValue \[constant\] – Mandatory
 
@@ -740,18 +786,19 @@ Indicates the type of haptic feedback. Its possible values are as follows:
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}hapticFeedback: function(){
+{% highlight VoltMx %}
+hapticFeedback: function(){
   voltmx.phone.performHapticFeedback(5);
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Remarks
+### Remarks
 
 *   iOS
     *   The Haptic Feedback feature is available on iPhone 7 devices and later. These devices have Taptic Engine hardware and users can enable/disable Haptics from Device Settings-> Sounds & Haptics-> System Haptics.
@@ -760,13 +807,14 @@ Remarks
     *   Users can enable the Vibrate on touch feature from Settings-> Sound & notification-> Other sounds.
         
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.removeCalendarEvent](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.removeCalendarEvent</summary>
 
 * * *
 
@@ -774,11 +822,13 @@ This API either deletes a single event or a series of repeat events starting fro
 
 > **_Note:_** To delete an event, you must first search for the event by using the [findCalendarEvents API](#findCalendarEvents) and delete the event.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.removeCalendarEvent([eventHandle](#eventHandle), [removeOption](#removeOption))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -787,9 +837,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}//To remove the calendar event from the device using 'voltmx.phone.removeCalendarEvent' API
+{% highlight VoltMx %}
+//To remove the calendar event from the device using 'voltmx.phone.removeCalendarEvent' API
 
 CalendarRemoveEvent: function() {
     if (this.startTime === "undefined" || this.startTime === undefined) {
@@ -806,16 +857,19 @@ CalendarRemoveEvent: function() {
     voltmx.phone.removeCalendarEvent(events[0]);
     alert("Calendar event is removed. Please open device calendar to observe this");
 }
-{% endhighlight %}{% highlight voltMx %}voltmx.phone.removeCalendarEvent(events\[1\],constants.CALENDAREVENT\_REMOVE\_THIS);  
+{% endhighlight %}
+
+{% highlight VoltMx %}
+voltmx.phone.removeCalendarEvent(events\[1\],constants.CALENDAREVENT\_REMOVE\_THIS);  
 voltmx.phone.removeCalendarEvent(events\[1\],constants.CALENDAREVENT\_REMOVE\_THIS\_AND\_FUTURE);  
 voltmx.phone.removeCalendarEvent(events\[1\]); //If it is non-recurring, the current event is deleted; however, if it is a recurring event, the event as well as future events will be deleted.
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Exceptions
+### Exceptions
 
 PhoneError
 
@@ -826,7 +880,7 @@ The following error codes are defined for Phone APIs
 *   2102 - Cannot open mail, mail not configured
 *   2103 - Cannot open media gallery
 
-Error
+### Error
 
 *   100 – invalid type of parameters
 *   101 – invalid number of arguments
@@ -836,31 +890,34 @@ Error
 *   105 – index out of range.
 *   106 – unknown error.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 *   Windows
 
-Remarks
+### Remarks
 
 *   READ\_CALENDAR and WRITE\_CALENDAR permissions are needed for this API.
 *   This API is supported for Android 4.0 version and above (that is, Android API level later to 13). Invocation on Android version less than 4.0 ( that is, Android API level earlier to 14) will be ignored.
 *   If this API removes last calendar event added to local calendar, then the local calendar account will be deleted.
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.retrieveSMS](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.retrieveSMS</summary>
 
 * * *
 
 When invoked, this API reads an SMS message received from the server. The API then retrieves the one-time password (OTP) from the message if it matches with the config provided.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.retrieveSMS(callback, SMSConfig);
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 **SMSConfig \[Object\] - Optional**
 
@@ -909,9 +966,10 @@ The following codes are applicable only after voltmx.phone.SMS\_LISTENER\_REGIST
 > **_Note:_** Ensure that you create an androidbuild.properties file in the project folder of your Volt MX Irisworkspace, and add the following key: `addSMSRetrieverSupport = UI`.  
 You can set the key to `UI` or `Non-UI` to fetch the required Gradle entries. To know more about adding Android properties to the androidbuild.properties file, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Native_App_Properties.html#add-android-properties-to-androidbuild-properties-file).  
 
-Example
+### Example
 
-{% highlight voltMx %}retrieveOTPFromSMS: function() {
+{% highlight VoltMx %}
+retrieveOTPFromSMS: function() {
 
 
     SMSConfig = {}
@@ -944,7 +1002,7 @@ Example
     }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
@@ -964,13 +1022,14 @@ Error Codes:
 *   101 - Invalid type of arguments to API voltmx.phone.retrieveSMS()
     
 
-Platform Availability
+### Platform Availability
 
 Android
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.sendSMS](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.sendSMS</summary>
 
 * * *
 
@@ -982,11 +1041,13 @@ This API provides access to the Messaging service of the underlying platform. Yo
 
 You can use this API to send messages to other numbers without leaving the application.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.sendSMS([phonenumber](#phonenumber), [text](#text))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -995,9 +1056,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}sendSMS: function() {
+{% highlight VoltMx %}
+sendSMS: function() {
     if (voltmx.os.deviceInfo().model == "iPhone Simulator") {
         alert("Works only on device");
     } else {
@@ -1008,11 +1070,11 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None
 
-Exceptions
+### Exceptions
 
 PhoneError
 
@@ -1021,19 +1083,20 @@ The following error codes are defined for Phone APIs
 *   2100 - Unable to send the Message.
 *   2101 - Insufficient Permissions.
 
-Remarks
+### Remarks
 
 When you send messages using this API, the messaging application of the underlying platform is used to send the message with the number and text you specified i.e., the phone number and the message are pre-populated in the messaging application.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except Desktop Web,SPA, Mobile Web, Android Tablets, iPad.
 
 > **_Note:_** This API allows you to send only text messages. It does not support multimedia messages.
 
 * * *
+</details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.phone.startVibration](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.phone.startVibration</summary>
 
 * * *
 
@@ -1042,11 +1105,13 @@ This API starts the vibration feature on a device, provided that device supports
 > **_Important:_** For Android, you must define the VIBRATE permission under Manifest Properties.  
 **<uses-permission android:name = "android.permission.VIBRATE" />**
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.phone.startVibration (vibrationConfig, repeat)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -1055,9 +1120,10 @@ Input Parameters
 
  
 
-Example
+### Example
 
-{% highlight voltMx %}//Device will vibrate for 100 milliseconds.
+{% highlight VoltMx %}
+//Device will vibrate for 100 milliseconds.
   
 startVibration: function()
   {
@@ -1076,11 +1142,11 @@ startVibration: function()
   }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Behavior, Requirements, and Limitations
+### Behavior, Requirements, and Limitations
 
 *   iOS
     
@@ -1095,16 +1161,17 @@ Behavior, Requirements, and Limitations
     *   API contract must be: Windows.Foundation.UniversalApiContract (introduced v4) or later.
         
 
-Remarks
+### Remarks
 
 *   You can call this API with or without arguments for Android and Windows. If the arguments are not specified, the device vibrates for 100 milliseconds to align with the behavior for iOS.
 
-Platform Availability
+### Platform Availability
 
 *   Android
 *   iOS
 *   Windows
 
 * * *
+</details>
 
 ![](resources/prettify/onload.png)

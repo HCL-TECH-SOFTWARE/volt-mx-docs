@@ -11,23 +11,26 @@ ObjectSelector3D has the following event associated with it:
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[onSelectionDone Event](javascript:void(0);)
+
+<details close markdown="block"><summary>onSelectionDone Event</summary>
 
 * * *
 
 An event callback that is invoked by the platform when an Image is selected in ObjectSelector3D .
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 onSelectionDone
+{% endhighlight %}
 
-Read/Write
+### Read/Write
 
 Yes - (Read and Write)
 
-Example
+### Example
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 //The below function is the callback function for onSelectionDoneCalBck event
 function onSelectionDoneCalBck(objThreeD)
 {
@@ -55,11 +58,11 @@ var objLayout = {widgetAlignment:constants.WIDGET_ALIGN_CENTER,
 var objThreeD =new voltmx.ui.ObjectSelector3D(objBasic, objLayout,{}) ;
 {% endhighlight %}
 
-Accessible from IDE
+### Accessible from IDE
 
 Yes
 
-Platform Availability
+### Platform Availability
 
 Available on Windows Phone platform only.
 

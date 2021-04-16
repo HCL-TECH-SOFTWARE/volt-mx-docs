@@ -10,38 +10,43 @@ Properties
 
 The `ActionItem` object provides the following properties.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[enable](javascript:void(0);) 
+
+<details close markdown="block"><summary>enable</summary> 
 
 * * *
 
 Enables or disables the `ActionItem` object.
 
-Syntax
+### Syntax
 
+{% highlight voltMx %}
 enable
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}// Disable an action item.
+{% highlight voltMx %}
+// Disable an action item.
 myActionItem.enable = false;
 {% endhighlight %}
 
-Type
+### Type
 
 Boolean
 
-Read/Write
+### Read/Write
 
 Read+Write
 
-Remarks
+### Remarks
 
 Set this property to `true` to enable the `ActionItem` object. To disable it, set this property to `false`.
 
 Platform Availability
 
-iOS
+### iOS
 
 * * *
 
 ![](resources/prettify/onload.png)
+</details>

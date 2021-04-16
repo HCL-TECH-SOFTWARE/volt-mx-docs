@@ -12,7 +12,8 @@ FormController Methods
 
 The FormController object contains the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getCurrentForm Method](javascript:void(0);) 
+
+<details close markdown="block"><summary>getCurrentForm Method</summary> 
 
 * * *
 
@@ -37,7 +38,8 @@ Example
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getCurrentFormFriendlyName Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>getCurrentFormFriendlyName Method</summary> 
 
 * * *
 
@@ -62,7 +64,8 @@ Example
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getPreviousForm Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>getPreviousForm Method</summary> 
 
 * * *
 
@@ -87,7 +90,8 @@ Example
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getPreviousFormFriendlyName Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>getPreviousFormFriendlyName Method</summary> 
 
 * * *
 
@@ -112,7 +116,8 @@ Example
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pauseNavigation Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>pauseNavigation Method</summary> 
 
 * * *
 
@@ -153,7 +158,8 @@ callback1: function(result)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[resumeNavigation Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>resumeNavigation Method</summary> 
 
 * * *
 

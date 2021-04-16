@@ -13,21 +13,23 @@ The voltmx.contact namspace, which is a part of the Phone API, provides the foll
 voltmx.contact Functions
 ----------------------
 
-The `voltmx.contact` namespace contains the following functions:
+The **voltmx.contact** namespace contains the following functions:
 
 > **_Note:_** The runtime permissions are applicable only in the iOS and Android platforms.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.contact.add](javascript:void(0);)
+<details close markdown="block"><summary>voltmx.contact.add</summary>
 
 * * *
 
 This API adds a contact to the address book of the mobile device.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.contact.add([contactDetails](#contactDetails))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 contactDetails \[Table\] - Mandatory
 
@@ -39,15 +41,16 @@ A table that has the following key-value pairs.
 | --- | --- |
 | firstname | specifies the first name of the contact |
 | lastname | specifies the last name of the contact |
-| phone | array of arrays containing _Label_ and _number_> **_Note:_** The phone number can contain a + (for country code), - (hyphen) (to separate country code, STD code, and the number), and space ((to separate country code, STD code, and the number). No other characters are allowed within a phone number.For example, +919999999999, +91 99999 99999, or +91-99999-99999. |
+| phone | array of arrays containing _Label_ and _number_
+    > **_Note:_** The phone number can contain a + (for country code), - (hyphen) (to separate country code, STD code, and the number), and space ((to separate country code, STD code, and the number). No other characters are allowed within a phone number.For example, +919999999999, +91 99999 99999, or +91-99999-99999. |
 | email | array of arrays containing _Label_ and _emailID_ |
 | postal | array of arrays containing _Label_ and address in a table with defined keys |
 | company | array of arrays containing _Label_ followed by table with company name and title keys |
 | website | array of arrays containing _url_ and _type_. _type_ is not applicable for Windows platform. So any _type_ value that may be provided for Windows is ignored. The possible types for the website key are as follows.Android: home, homepage, work, and othersiOS: home, homepage, work, ftp, blog, profile, and othersWindows: Not supported |
 
-Example (For website key)
+**Example (For website key)**
 
-{% highlight voltMx %}{
+{% highlight VoltMx %}{
     "website": [{
         "url": "www.google.com",
         "type": "homepage"
@@ -64,7 +67,7 @@ Example (For website key)
         "url": "www.facebook.com",
         "type": "profile"
     }]
-} 
+}
 {% endhighlight %}
 
 > **_Note:_** firstname and phone fields are mandatory with at least one phone number in phone field
@@ -75,9 +78,10 @@ The following are the Labels for different fields in the table:
 
  
 
-Example
+**Example**
 
-{% highlight voltMx %}//Contact Details.
+{% highlight VoltMx %}
+//Contact Details.
 var mycontact = {
     firstname: "John",
     lastname: "Steve",
@@ -113,7 +117,7 @@ voltmx.contact.add(mycontact);
 this.view.lblDevContact.text = "Contact is added with firstname = 'John' and lastname = 'Steve' . Please Check the device contacts.";
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 The following are the return values for this API:
 
@@ -122,13 +126,12 @@ The following are the return values for this API:
 | Reference \[Table\] | Table containing the information related to the newly created contact is returned. |
 | nil | If the contact was not created. |
 
- 
 
-Error Codes
+### Error Codes
 
 If any of the field is not stored, the field is ignored. If no field is stored, an error is raised.
 
-Implementation Details
+### Implementation Details
 
 The following are the implementation details:
 
@@ -136,7 +139,7 @@ The following are the implementation details:
 *   Other fields with empty string or nil or invalid data type assignment are ignored.
 *   id field is _read only_ property and must not be modified by the application.
 
-API Usage
+### API Usage
 
 When you use this API with Android emulator that uses Android SDK 2.0 and above, you will be prompted to create an account to add contacts.
 
@@ -148,15 +151,16 @@ Ensure that the following permissions are set for Android:
 *   WRITE\_CONTACTS
 *   GET\_ACCOUNTS.
 
-You can set these permissions for Android under **Manifest Properties** in **Project Properties -> Native App -> Android**. For more information about Android Manifest permissions, see _VoltMX IrisUser Guide_.
+You can set these permissions for Android under **Manifest Properties** in **Project Properties -> Native App -> Android**. For more information about Android Manifest permissions, see _Volt MX IrisUser Guide_.
 
-Platform Availability
+### Platform Availability
 
 *   iOS
 *   Android
 *   Windows
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.contact.details](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.contact.details</summary>
 
 * * *
 
@@ -166,11 +170,13 @@ The API is introduced to improve the performance and for effective utilization o
 
 When you to accommodate the contact details in one call to _contact.find_ API, the memory is not sufficient when the contacts are numerous. This results in an out of memory issue and results in performance issues in many applications.
 
-**Syntax**
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.contact.details([ReferenceTable](#ReferenceTable1))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -178,9 +184,10 @@ Input Parameters
 
  
 
-Example
+**Example**
 
-{% highlight voltMx %}//Use the below function to retrieve the contact details.
+{% highlight VoltMx %}
+//Use the below function to retrieve the contact details.
 getDetails: function() {
     //Finding the contact whose details are to be retrieved.
     var findContacts = voltmx.contact.find("John");
@@ -195,7 +202,7 @@ getDetails: function() {
 }
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 | Return Value | Description |
 | --- | --- |
@@ -204,9 +211,10 @@ Return Values
 
  
 
-Example of the reference table returned:
+**Example of the reference table returned:**
 
-{% highlight voltMx %}{
+{% highlight VoltMx %}
+{
  firstname = "John", middleName = "Cena"
 lastname = "Xyz",
 
@@ -216,8 +224,7 @@ phone = {
         name = "mobile", number = "99999999999"
     },
 
-
-    ////array of arrays containing "Label" and "emailid"
+   ////array of arrays containing "Label" and "emailid"
     {
         name = "home", number = "99999999999"
     }, {
@@ -256,21 +263,24 @@ photorawbytes = rawbytes
 }
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA, Desktop Web, Mobile Web.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.contact.find](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.contact.find</summary>
 
 * * *
 
 This API parses through the address book of the mobile device and looks for contacts that match the input string.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.contact.find([firstName](#firstName), [needdetails](#needdetails), [filterKeys](#filterKeys))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
@@ -278,13 +288,14 @@ Input Parameters
 | needdetails \[Boolean\] - Optional | When the _needdetails_ parameter is not passed, the default value is true. When _needdetails_ is set to true, this API returns the complete details of the contact. If _needdetails_ is false, _contact.find_ returns a list of contacts with a new field called _displayname_ in the existing contact structure. All other fields of contact structure are not populated. _displayname_ is a combination of firstname, middlename, and lastname. |
 | _filterKeys \[Array of strings\] - Optional_ | You can use the filterKeys parameter to filter your search by passing any of the available keys of this parameter. If filterKeys is specified and needDetails is false, only the display name is returned. The available filter keys are as follows: "firstname", "lastname", "phone", "postal", "email", "company", "photorawbytes", "displayname", and "id". The following platform-specific keys are available for the filterKeys parameter: For Windows and Android: "middlename" For Windows: "nickname" and "title" |
 
-Example
+**Example**
 
-{% highlight voltMx %}//Finding the contact whose details are to be retrieved.
+{% highlight VoltMx %}
+//Finding the contact whose details are to be retrieved.
 var findContacts = voltmx.contact.find("John");
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 | Return Value | Description |
 | --- | --- |
@@ -293,39 +304,41 @@ Return Values
 
  
 
-Implementation Details
+### Implementation Details
 
 This API searches and matches only the contacts that have the firstname as the specified input string.
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA, Desktop Web, Mobile Web.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.contact.remove](javascript:void(0);)
+</details>
+<details close markdown="block"><summary>voltmx.contact.remove</summary>
 
 * * *
 
 This API deletes the contact (s) that was returned by the _contact.find_ operation.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.contact.remove([ReferenceTable](#ReferenceTable))
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 | Parameter | Description |
 | --- | --- |
 | ReferenceTable - Mandatory | Specifies the reference table returned by the contact.find API |
 
- 
+**Example**
 
-Example
-
-{% highlight voltMx %}var array = voltmx.contact.find('John', false);
+{% highlight VoltMx %}
+var array = voltmx.contact.find('John', false);
 voltmx.contact.remove(array);
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 | Return Value | Description |
 | --- | --- |
@@ -334,8 +347,9 @@ Return Values
 
  
 
-Platform Availability
+### Platform Availability
 
 Available on all platforms except SPA, Desktop Web, Mobile Web.
 
 ![](resources/prettify/onload.png)
+</details>

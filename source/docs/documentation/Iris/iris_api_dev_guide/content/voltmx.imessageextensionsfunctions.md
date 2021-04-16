@@ -28,29 +28,33 @@ The voltmx.iMessageExtensions Namespace provides the following properties.
 
 Holds the current extension view.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.shareExtensions.view
+{% endhighlight %}
 
-Example
+### Example
 
-{% highlight voltMx %}//Sample code  
+{% highlight VoltMx %}//Sample code  
 var myView = voltmx.iMessageExtensions.view;
 myView.addSubView(button);
 {% endhighlight %}
 
-Type
+### Type
 
 UIView
 
-Read/Write
+### Read/Write
 
 Read only.
 
-Platform Availability
+### Platform Availability
 
 iOS.
+
 </details>
+
 Functions
 ---------
 
@@ -63,11 +67,13 @@ The voltmx.iMessageExtensions namespace provides the following function.
 
 Sets an iMessage extension functionality with various states as callback events.
 
-Syntax
+### Syntax
 
+{% highlight VoltMx %}
 voltmx.iMessageExtensions.setExtensionsCallbacks(callbacks)
+{% endhighlight %}
 
-Input Parameters
+### Input Parameters
 
 callbacks
 
@@ -91,9 +97,10 @@ Contains an object with key-value pairs where the key specifies the extension st
 > 
 >   
 
-Example: didBecomeActiveWithConversation
+### Example: didBecomeActiveWithConversation
 
-{% highlight voltMx %}function didBecomeActiveWithConversation() {
+{% highlight VoltMx %}
+function didBecomeActiveWithConversation() {
     // Native Function API code
 }
 
@@ -102,9 +109,10 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: didCancelSendingMessageConversation
+### Example: didCancelSendingMessageConversation
 
-{% highlight voltMx %}function didCancelSendingMessageConversation() {
+{% highlight VoltMx %}
+function didCancelSendingMessageConversation() {
     // Native Function API code
 }
 
@@ -113,9 +121,10 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: didReceiveMessageCconversation
+### Example: didReceiveMessageCconversation
 
-{% highlight voltMx %}function didReceiveMessageConversation() {
+{% highlight VoltMx %}
+function didReceiveMessageConversation() {
     // Native Function API code
 }
 
@@ -125,9 +134,9 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 
 {% endhighlight %}
 
-Example: didStartSendingMessageConversation
+### Example: didStartSendingMessageConversation
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 function didStartSendingMessageConversation() {
     // Native Function API code
 }
@@ -137,9 +146,10 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: didTransitionToPresentationStyle
+### Example: didTransitionToPresentationStyle
 
-{% highlight voltMx %}function didTransitionToPresentationStyle() {
+{% highlight VoltMx %}
+function didTransitionToPresentationStyle() {
     // Native Function API code
 }
 
@@ -149,9 +159,10 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 
 {% endhighlight %}
 
-Example: loadView
+### Example: loadView
 
-{% highlight voltMx %}function loadView() {
+{% highlight VoltMx %}
+function loadView() {
     // Native Function API code
 }
 
@@ -160,9 +171,10 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewDidAppear
+### Example: viewDidAppear
 
-{% highlight voltMx %}function viewDidAppear() {
+{% highlight VoltMx %}
+function viewDidAppear() {
     // Native Function API code
 }
 
@@ -171,9 +183,10 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewWillAppear
+### Example: viewWillAppear
 
-{% highlight voltMx %}function viewWillAppear() {
+{% highlight VoltMx %}
+function viewWillAppear() {
     // Native Function API code
 }
 
@@ -183,9 +196,10 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 
 {% endhighlight %}
 
-Example: viewDidDisappear
+### Example: viewDidDisappear
 
-{% highlight voltMx %}function viewDidDisappear() {
+{% highlight VoltMx %}
+function viewDidDisappear() {
     // Native Function API code
 }
 
@@ -194,9 +208,10 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: viewWillDisappear
+### Example: viewWillDisappear
 
-{% highlight voltMx %}function viewWillDisappear() {
+{% highlight VoltMx %}
+function viewWillDisappear() {
     // Native Function API code
 }
 
@@ -205,16 +220,18 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Example: willResignActiveWithConversation
+### Example: willResignActiveWithConversation
 
-{% highlight voltMx %}
+{% highlight VoltMx %}
 function willResignActiveWithConversation()
 {
     // Native Function API code
 }
 
 voltmx.iMessageExtensions.setExtensionsCallbacks ({"willResignActiveWithConversation": willResignActiveWithConversation});
-{% endhighlight %}{% highlight voltMx %}function willResignActiveWithConversation() {
+{% endhighlight %}
+{% highlight VoltMx %}
+function willResignActiveWithConversation() {
     // Native Function API code
 }
 
@@ -224,9 +241,10 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 
 {% endhighlight %}
 
-Example: willTransitionToPresentationStyle
+### Example: willTransitionToPresentationStyle
 
-{% highlight voltMx %}function willTransitionToPresentationStyle() {
+{% highlight VoltMx %}
+function willTransitionToPresentationStyle() {
     // Native Function API code
 }
 
@@ -235,13 +253,14 @@ voltmx.iMessageExtensions.setExtensionsCallbacks({
 });
 {% endhighlight %}
 
-Return Values
+### Return Values
 
 None.
 
-Platform Availability
+### Platform Availability
 
 iOS.only
 
-![](resources/prettify/onload.png)
 </details>
+
+![](resources/prettify/onload.png)

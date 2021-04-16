@@ -26,7 +26,8 @@ For installing Volt MX Foundry Database for Oracle, complete the following steps
 > **_Important:_**  Ensure that a dedicated database user must not be an application user for installation of database. A dedicated user gets logged into audit logs.  
 After granting privileges, disconnect existing session, and use new session in order to get the new privileges loaded to the user.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details on Oracle tablespaces and connection details:](javascript:void(0);)
+
+<details close markdown="block"><summary>Click here for more details on Oracle tablespaces and connection details:</summary>
 
 *   Unicode support needs to be enabled in Database. This is possible only while creating a database needed for Volt MX Foundry with a Unicode character set with the properties for Database character set as `AL32UTF8` and National character set as `AL16UTF16`.
 
@@ -40,20 +41,25 @@ After granting privileges, disconnect existing session, and use new session in o
         
 *   Using an SQLPlus or another Database client, connect to you Oracle database as Sysdba.  
     Replace the <DATA\_FILE\_PATH> with actual data file path on the Oracle database server.  
-    {% highlight voltMx %}CREATE TABLESPACE MF_DATA DATAFILE '<DATA_FILE_PATH>/MF_DATA_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
+    {% highlight VoltMx %}
+    CREATE TABLESPACE MF_DATA DATAFILE '<DATA_FILE_PATH>/MF_DATA_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
     CREATE TABLESPACE MF_INDEX DATAFILE '<DATA_FILE_PATH>/MF_INDEX_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
     CREATE TABLESPACE MF_LOB_DATA DATAFILE '<DATA_FILE_PATH>/MF_LOB_DATA_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
     
     {% endhighlight %}
 *   Create a dedicated database user with default tablespaces (MF\_DATA) and grant quota to two other tablespaces (MF\_INDEX and MF\_LOB\_DATA tablespaces).
-    *   To create a user based on your Oracle 11g or 12c without PDB, which will be used in the JDBC.{% highlight voltMx %}CREATE USER <install-user> IDENTIFIED BY <password> DEFAULT TABLESPACE MF_DATA TEMPORARY TABLESPACE TEM PROFILE DEFAULT;
+    *   To create a user based on your Oracle 11g or 12c without PDB, which will be used in the JDBC.
+        {% highlight VoltMx %}
+        CREATE USER <install-user> IDENTIFIED BY <password> DEFAULT TABLESPACE MF_DATA TEMPORARY TABLESPACE TEM PROFILE DEFAULT;
         GRANT DBA TO <install-user>;
         ALTER USER <install-user> QUOTA UNLIMITED ON MF_DATA;
         ALTER USER <install-user> QUOTA UNLIMITED ON MF_INDEX;
         ALTER USER <install-user> QUOTA UNLIMITED ON MF_LOB_DATA;
         
         {% endhighlight %}
-    *   To create a dedicated database user based on your Oracle 12c with PDB, then create a `dedicated database local user` inside PDB, which will be used in the Java Database Connectivity (JDBC) authentication.{% highlight voltMx %}Alter session set container = PDB<MF_DB> ;
+*   To create a dedicated database user based on your Oracle 12c with PDB, then create a `dedicated database local user` inside PDB, which will be used in the Java Database Connectivity (JDBC) authentication.
+        {% highlight VoltMx %}
+        Alter session set container = PDB<MF_DB> ;
         CREATE USER <dedicated-database-local-user> IDENTIFIED BY <password> DEFAULT TABLESPACE MF_DATA TEMPORARY TABLESPACE TEMP PROFILE DEFAULT  CONTAINER=CURRENT;
         GRANT DBA TO <install-local-user> CONTAINER=CURRENT;
         ALTER USER <install-local-user> QUOTA UNLIMITED ON MF_DATA CONTAINER=CURRENT;
@@ -61,19 +67,19 @@ After granting privileges, disconnect existing session, and use new session in o
         ALTER USER <install-local-user> QUOTA UNLIMITED ON MF_LOB_DATA CONTAINER=CURRENT;
         
         {% endhighlight %}
-
-*   If you are using Volt MX Foundry installer to setup Volt MX Foundry database, then please choose the below options based on your Oracle database version.
-    
-    *   If Oracle database is created with PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as `pdborcl` or `pdbmfdb`{% highlight voltMx %}jdbc:oracle:thin:@<Database_Host_IP>:1521/pdbmfdb 
+*   If you are using VoltMX Foundry installer to setup VoltMX Foundry database, then please choose the below options based on your Oracle database version.
+    *   If Oracle database is created with PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as `pdborcl` or `pdbmfdb`
+        {% highlight VoltMx %}
+        jdbc:oracle:thin:@<Database_Host_IP>:1521/pdbmfdb 
         {% endhighlight %}
-        
-        For example: jdbc:oracle:thin:@192.168.1.2:1521/pdbmfdb
-        
-    
-    *   But if your database is 11g or 12c without PDB, then you can use `ORACLE_SID` in the JDBC URL such as  `orcl`  or  `mfdb`.{% highlight voltMx %}jdbc:oracle:thin:@<Database_Host_IP>:1521:mfdb
+For example: jdbc:oracle:thin:@192.168.1.2:1521/pdbmfdb
+*   But if your database is 11g or 12c without PDB, then you can use `ORACLE_SID` in the JDBC URL such as  `orcl`  or  `mfdb`.
+        {% highlight VoltMx %}
+        jdbc:oracle:thin:@<Database_Host_IP>:1521:mfdb
         {% endhighlight %}
         
         For example: jdbc:oracle:thin:@192.168.1.2:1521:mfdb
+</details>
         
 
 Prerequisites for Volt MX Foundry with SQL Server
@@ -99,7 +105,7 @@ Applicable for Engagement Services
 ----------------------------------
 
 1.  Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the `my.cnf` or `my.ini` with the following parameters:
-    
+    {% highlight VoltMx %}
     \[client\]  
     default-character-set = utf8  
     \[mysql\]  
@@ -108,9 +114,9 @@ Applicable for Engagement Services
     character-set-client-handshake = FALSE  
     collation\_server='utf8\_unicode\_ci'  
     character\_set\_server='utf8'  
-    
+    {% endhighlight %}     
 2.  Next, restart the MySQL service and run the following query to verify the details:
-    
+    {% highlight VoltMx %}
     mysql> show variables like '%coll%';  
     +----------------------+-----------------+  
     | Variable\_name | Value |  
@@ -133,7 +139,7 @@ Applicable for Engagement Services
     | character\_set\_system | utf8 |  
     | character\_sets\_dir | /usr/share/mysql/charsets/ |  
     +--------------------------+----------------------------+
-    
+    {% endhighlight %}
 
 ### Applicable for Identity Services
 

@@ -12,133 +12,148 @@ FormController Methods
 
 The FormController object contains the following methods.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getCurrentForm Method](javascript:void(0);) 
+
+<details close markdown="block"><summary>getCurrentForm Method</summary> 
 
 * * *
 
 Retrieves the name of the current form.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 getCurrentForm();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 Returns a string containing the name of the current form.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}ver currentForm = this.getCurrentForm();
+{% highlight VoltMx %}ver currentForm = this.getCurrentForm();
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getCurrentFormFriendlyName Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>getCurrentFormFriendlyName Method</summary> 
 
 * * *
 
 Retrieves the friendly name of the current form.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 getCurrentFormFriendlyName();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 Returns a string containing the friendly name of the current form.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}ver currentFormFriendlyName= this.getCurrentFormFriendlyName();
+{% highlight VoltMx %}ver currentFormFriendlyName= this.getCurrentFormFriendlyName();
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getPreviousForm Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>getPreviousForm Method</summary> 
 
 * * *
 
 Retrieves the name of the previous visible form.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 getPreviousForm();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 Returns a string containing the name of the previous visible form, or `null` if there is no previous visible form.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}ver previousForm = this.getPreviousForm();
+{% highlight VoltMx %}ver previousForm = this.getPreviousForm();
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[getPreviousFormFriendlyName Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>getPreviousFormFriendlyName Method</summary> 
 
 * * *
 
 Retrieves the friendly name of the previous visible form.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 getPreviousFormFriendlyName();
+{% endhighlight %}
 
-Parameters
+<b>Parameters</b>
 
 None.
 
-Return Values
+<b>Return Values</b>
 
 Returns a string containing the friendly name of the previous visible form, or `null` if there is no previous visible form.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}ver previousFormFriendlyName = this.getPreviousFormFriendlyName();
+{% highlight VoltMx %}ver previousFormFriendlyName = this.getPreviousFormFriendlyName();
 {% endhighlight %}
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[pauseNavigation Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>pauseNavigation Method</summary> 
 
 * * *
 
 Pauses when navigating from one form to another.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 pauseNavigation();
+{% endhighlight %}
 
-Parameters
-
-None.
-
-Return Values
+<b>Parameters</b>
 
 None.
 
-Remarks
+<b>Return Values</b>
+
+None.
+
+<b>Remarks</b>
 
 Your app calls this method to pause when navigating from form to form and wait for tasks that need to be completed before the new form is shown. The only time your app can call this function is in the [onNavigate](FormController_Events.html#onNavigate) event callback handler function, which you must provide. If your app calls it anywhere else, it does nothing.
 
 To resume navigation, your app must call the [resumeNavigation](#resumeNavigation) method.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}onNavigate : function(context, isBackNavigation)
+{% highlight VoltMx %}onNavigate : function(context, isBackNavigation)
 {
     this.context = context;
     this.pauseNavigation();
@@ -153,33 +168,36 @@ callback1: function(result)
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[resumeNavigation Method](javascript:void(0);) 
+</details>
+<details close markdown="block"><summary>resumeNavigation Method</summary> 
 
 * * *
 
 Resumes the process of navigating from form to form.
 
-Syntax
+<b>Syntax</b>
 
+{% highlight VoltMx %}
 resumeNavigation();
+{% endhighlight %}
 
-Parameters
-
-None.
-
-Return Values
+<b>Parameters</b>
 
 None.
 
-Remarks
+<b>Return Values</b>
+
+None.
+
+<b>Remarks</b>
 
 When your app is navigating from form to form, it can pause the process of navigation by calling the [pauseNavigation](#pauseNavigation) method. After navigation has been paused, your app must call the `resumeNavigation` method to continue the navigation process and display the target form. If `pauseNavigation` has not been called, this method does nothing.
 
 > **_Important:_** Failing to call `resumeNavigation` after your app has called `pauseNavigation` may result in your app locking up.
 
-Example
+<b>Example</b>
 
-{% highlight voltMx %}onNavigate : function(context, isBackNavigation)
+{% highlight VoltMx %}onNavigate : function(context, isBackNavigation)
 {
     this.context = context;
     this.pauseNavigation();
@@ -193,3 +211,5 @@ callback1: function(result)
 {% endhighlight %}
 
 * * *
+
+</details>

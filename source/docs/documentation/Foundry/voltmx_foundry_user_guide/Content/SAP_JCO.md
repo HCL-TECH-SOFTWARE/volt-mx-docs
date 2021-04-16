@@ -9,7 +9,7 @@ User Guide: [Integration](Services.html#integration) \> [Configure the Integrati
 SAP JCo Adapter
 ---------------
 
-Volt MX  Foundry allows you to connect and access the BAPI functions inside an ABAP SAP backend via SAP JCo Adapter that was built using sapjco java client. Using SAP JCo adapter, you can explore the BAPI functions inside Business Object Repositories (BOR) and Remote Function Call (RFC) and add them as Volt MX Foundry operations in the console. When a BAPI function is added as an operation, its corresponding import params and export params are auto-generated as request input params and response output params.
+Volt MX Foundry allows you to connect and access the BAPI functions inside an ABAP SAP backend via SAP JCo Adapter that was built using sapjco java client. Using SAP JCo adapter, you can explore the BAPI functions inside Business Object Repositories (BOR) and Remote Function Call (RFC) and add them as Volt MX Foundry operations in the console. When a BAPI function is added as an operation, its corresponding import params and export params are auto-generated as request input params and response output params.
 
 You must load the required **Business Application Programming Interface** (BAPI) functions to define a SAP service. The BAPI files contain the SAP methods and functions. These methods have the logic defined for a service. A BAPI is a function module as it can be invoked from remote programs such as standalone Java programs, web interfaces, and so on.
 
@@ -46,13 +46,32 @@ To use NON-SSO login, the Login Type must be set to NON-SSO in connection proper
     
     | Fields | Description |
     | --- | --- |
-    | Connection Parameters | 
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Fill in the details for the following fields.](javascript:void(0);)
+    | Connection Parameters | --- |
+    | Authentication | Use existing Identity Provider. Select SAP JCO Identity provider from the list. |
     
-    **Server Name** -Enter a unique server name to assign for an SAP connection.**SAP application server host** - Enter the application server IP address.**SAP system number** - Enter the SAP system number.**SAP client**\- The SAP Client ID. The default is based on the SAP server configuration.Logon Language - SAP Backend logon language.**Login Type** - Volt MX Foundry captures log in details for SAP ABAP Server. You can select SSO or non-SSO login. For SSO Login, you must provide portal hostname and port. Volt MX Foundry generates properties files with SSO details. In **Login Type**, select an option from the list.**Non-SSO Login**\- To use normal sign on feature, select **Non-SSO Login** and provide user name and password to connect to the server.**SSO Login** - To use single sign-on feature, select **SSO Login**.**Logon user** - Enter the user name for the server log on.**Logon password** - Enter the password for the server log on.For **SSO-LOGIN**, you must provide the following details:**Portal Host** - Enter the SAP portal server IP address.**Portal Port** - Enter the SAP portal server port address**SAP Router String** - Enter the address of the SAP router that is used to connect to a provider system.**Advanced Properties** - Specify a JSON variable with SAP Client Properties and corresponding values. For example, to set the pool capacity value, specify the JSON as { 'jco.destination.pool\_capacity': <pool capacity> }.
-    
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Following are few SAP client properties.](javascript:void(0);)
-    
+    <details close markdown="block"><summary>Fill in the details for the following fields.</summary>
+        
+    * **Server Name** -Enter a unique server name to assign for an SAP connection.
+    *   **SAP application server host** - Enter the application server IP address.
+    *   **SAP system number** - Enter the SAP system number.
+    *   **SAP client**\- The SAP Client ID. The default is based on the SAP server configuration.Logon Language - SAP Backend logon language.
+    *   **Login Type** - Volt MX Foundry captures log in details for SAP ABAP Server. You can select SSO or non-SSO login. For SSO Login, you must provide portal hostname and port. Volt MX Foundry generates properties files with SSO details. 
+        *   In **Login Type**, select an option from the list.
+            **Non-SSO Login**\- To use normal sign on feature, select **Non-SSO Login** and provide user name and password to connect to the server.
+            **SSO Login** - To use single sign-on feature, select **SSO Login**.
+    *   **Logon user** - Enter the user name for the server log on.
+    *   **Logon password** - Enter the password for the server log on.
+    For **SSO-LOGIN**, you must provide the following details:
+        **Portal Host** - Enter the SAP portal server IP address.
+        **Portal Port** - Enter the SAP portal server port address
+    *   **SAP Router String** - Enter the address of the SAP router that is used to connect to a provider system.
+    *   **Advanced Properties** - Specify a JSON variable with SAP Client Properties and corresponding values. For example, to set the pool capacity value, specify the JSON as { 'jco.destination.pool\_capacity': <pool capacity> }.
+    *   **Test Connection**: Select the **Environment** from the list and click **Test Connection** to validate the user data.
+        
+    </details>
+
+    <details close markdown="block"><summary>Following are few SAP client properties.</summary>
+        
     | SAP Property | Description |
     | --- | --- |
     | jco.client.client | SAP client |
@@ -105,33 +124,22 @@ To use NON-SSO login, the Login Type must be set to NON-SSO in connection proper
     | jco.destination.repository.snc\_mode | Optional: If SNC is used for this destination, it is possible to turn it off for repository connections, if this property is set to 0. Defaults to the value of jco.client.snc\_mode |
     | jco.destination.one\_roundtrip\_repository | 1 force usage of RFC\_METADTA\_GET in SAP Server, 0 deactivate it. If not set the destination will initially be a remote call to check if RFC\_METADATA\_GET is available. |
     
-    *   **Test Connection**: Select the **Environment** from the list and click **Test Connection** to validate the user data.
-    
-    
-    
-     |
-    | Authentication | Use existing Identity Provider. Select **SAP JCO** Identity provider from the list. |
-    
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)For additional configuration of your service definition, provide the following details in the **Advanced** section.](javascript:void(0);) 
+    </details>
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)For additional configuration of your service definition, provide the following details in the **Advanced** section.](javascript:void(0);) 
-
-*   [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)For additional configuration of your service definition, provide the following details in the **Advanced** section.](javascript:void(0);) 
-    
+*   <details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the Advanced section.</summary> 
       
     | Field | Description |
     | --- | --- |
-    | Custom Code | Custom Code enables you to specify dependent JAR. To specify a dependent JAR, select the JAR containing preprocessor or postprocessor libraries from the list, or click **Upload New** to select the JAR file from your local system. This step allows you to further filter the data sent to the backend.> **_Important:_** Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration.For example, if the JDK version on the machine where Volt MX Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appears when a service is invoked from a device. |
-    | API Throttling | If you want to use **API throttling** in Volt MX Foundry Console to limit the number of request calls within a minute, do the following:
-    In the **Total Rate Limit** text box, enter a value. This will limit the total number of requests processed by this API.In the **Rate Limit Per IP** field, enter a value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.
+    | Custom Code | Custom Code enables you to specify dependent JAR. To specify a dependent JAR, select the JAR containing preprocessor or postprocessor libraries from the list, or click **Upload New** to select the JAR file from your local system. This step allows you to further filter the data sent to the backend.> **_Important:_** Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration. For example, if the JDK version on the machine where Volt MX Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appears when a service is invoked from a device. |
+    | API Throttling | If you want to use **API throttling** in Volt MX Foundry Console to limit the number of request calls within a minute, do the following: *  In the **Total Rate Limit** text box, enter a value. This will limit the total number of requests processed by this API. *  In the **Rate Limit Per IP** field, enter a value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit. *  To override throttling from Volt MX Foundry App Services Console, refer to [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration). > **_Note:_** In case of On-premises, the number of nodes in a cluster environment is set by configuring the VOLTMX\_SERVER\_NUMBER\_OF\_NODES property in Admin Console. This property indicates the number of nodes configured in the cluster. The default value is 1. Refer to [The Runtime Configuration tab on the Settings screen of App Services]({{ site.baseurl }}/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html). The total throttling limit set in Volt MX Foundry Console is divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node. This is applicable for Cloud and On-premises. |
     
-    To override throttling from Volt MX Foundry App Services Console, refer to [Override API Throttling Configuration](API_Throttling_Override.html#override-api-throttling-configuration).> **_Note:_** In case of On-premises, the number of nodes in a cluster environment is set by configuring the VOLTMX\_SERVER\_NUMBER\_OF\_NODES property in Admin Console. This property indicates the number of nodes configured in the cluster. The default value is 1. Refer to [The Runtime Configuration tab on the Settings screen of App Services]({{ site.baseurl }}/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html). The total throttling limit set in Volt MX Foundry Console is divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node. This is applicable for Cloud and On-premises. |
-    
+    </details>
 
-> **_Note:_** Additional configurations in the advanced section are optional.
+    > **_Note:_** Additional configurations in the advanced section are optional.
 
 *   In the **Description** field, provide a suitable description for the service.
 *   Click **Save** to save your service definition.
+
 
 ### Create Operations for SAP JCO
 
@@ -152,35 +160,33 @@ The **Operations List** tab appears only after the service definition is saved.
 2.  Expand an operation and select the required check boxes.
 3.  Click **ADD OPERATION**. The system adds your operation to the **Operations List** tab.
     
-4.  To configure an operation, click on a service under **Operations List** and provide the following details:  
+4.  To configure an operation, click on a service under **Operations List** and provide the following details:
     
+    | Field | Description |
+    | --- | --- |
+    | Name | It is pre-populated with the operation name. You can change the name if required. |
+    | Operation Security Level | It specifies how a client must authenticate to invoke this operation. |
 
-  
-| Field | Description |
-| --- | --- |
-| Name | It is pre-populated with the operation name. You can change the name if required. |
-| Operation Security Level | It specifies how a client must authenticate to invoke this operation.
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select one of the following security operations in the **Operation Security Level** field.](javascript:void(0);) 
+    <details close markdown="block"><summary>Select one of the following security operations in the Operation Security Level field.</summary> 
 
-**Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app. **Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. **Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible. **Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.
-
-
-
-
-
- |
-
-  
-7.  [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)For additional configurations of request (or) response operations, provide the following details in the **Advanced** section:](javascript:void(0);)
+    *  **Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app
+    *  **Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. 
+    *  **Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible. 
+    *  **Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.
     
-      
+    </details>
+    
+5.  <details close markdown="block"><summary>For additional configurations of request (or) response operations, provide the following details in the Advanced section:</summary> 
+  
     | Field | Description |
     | --- | --- |
     | Custom Code Invocation - Preprocessor and Postprocessor (for Java and JavaScript) | You can add pre and post processing logic to modify the request inputs of service. When you test, the service details of various stages in the service execution are displayed for better debugging. For more details, refer to [Preprocessor and Postprocessor](Java_Preprocessor_Postprocessor_.html). |
     | Properties | You can configure the [additional properties (timeout, cachable, unescape embedded xml in response, response encoding, number of connection retries)](Java_Preprocessor_Postprocessor_.html#timeout_cachable) for service call time out cache response. |
     | Front End API | You can map your endpoint/back-end URL of an operation to a [front-end URL](FrontEndAPI.html). |
     | Server Events | Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer [Server Events](ServerEvents.html). |
-    
+
+    </details>
+
     > **_Note:_** Additional configurations in the advanced section are optional.
     
 
@@ -207,26 +213,39 @@ You can perform the following actions in Request Input tab:
         | Field | Description |
         | --- | --- |
         | Name | It contains a unique identifier. Change the name if required. |
-        | Value | Volt MX Foundry provides four options while configuring an operation. Dependent identity services are auto populated when you edit this field, These options primarily determine the source of the header value **.**
-        [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Select an option from the following options.](javascript:void(0);)
-        
-        If you select **Request**, the Integration Server picks the value pairs from the client's request during run time and forwards the same to the back-end.If you select **Session**, the value of the header is picked from the session context. You cannot edit the Default value and test value. **Constant** is used to configure the value that is picked and sent to back end by the Integration Server during the run-time.If **Identity** is selected, you can filter the request parameters based on the response from the identity provider. For more details on configuring the identity filters, refer [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html).
-        
-        > **_Note:_** The field is set to **Request**, by default. |
+        | Value | Volt MX Foundry provides four options while configuring an operation. Dependent identity services are auto populated when you edit this field, These options primarily determine the source of the header value. > **_Note:_** The field is set to Request, by default. |
         | Test Value | A test value is used for testing the service. Enter a value. |
         | Default Value | The default value is used if the test value is empty. Enter a value, if required. |
-        | DATA TYPE | 
-        
-        [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select one of the following data types.](javascript:void(0);)
-        
-        **String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit.**Date** - Date formatIf data type is string, the options in the format type are Currency, Number, and Date.If the data type is number, the options in the format type are Currency and Date. If the data type is boolean, the options in the format type and format value text box are disabled. > **_Note:_** Currently the data type date is not supported.**Boolean** - A value that can be true or false.**Number** - An integer or a floating number.
-        
-        
-        
-         |
+        | DATA TYPE | --- |
         | COLLECTION ID | Collection is a group of data, also referred as data set. Enter a collection ID. |
         | RECORD ID | Enter an ID. |
         | DESCRIPTION | Provide a suitable description. |
+
+        <details close markdown="block"><summary>Select an option from the following options.</summary>
+        
+        *  If you select **Request**, the Integration Server picks the value pairs from the client's request during run time and forwards the same to the back-end.
+        *  If you select **Session**, the value of the header is picked from the session context. You cannot edit the Default value and test value.
+        *  **Constant** is used to configure the value that is picked and sent to back end by the Integration Server during the run-time.
+        *  If **Identity** is selected, you can filter the request parameters based on the response from the identity provider. For more details on configuring the identity filters, refer [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html).
+
+        </details>
+
+
+        <details close markdown="block"><summary>Select one of the following data types.</summary>
+        
+        *  **String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit.
+        *  **Date** - Date format
+            * 1. If data type is string, the options in the format type are Currency, Number, and Date.
+            * 2. If the data type is number, the options in the format type are Currency and Date. 
+            * 3. If the data type is boolean, the options in the format type and format value text box are disabled
+
+            > **_Note:_** Currently the data type date is not supported.
+
+        *  **Boolean** - A value that can be true or false.
+        *  **Number** - An integer or a floating number.
+        
+        </details>
+
         
 5.  Click **Header** tab to provide the custom headers.
     
@@ -239,16 +258,20 @@ You can perform the following actions in Request Input tab:
         | Field | Description |
         | --- | --- |
         | Name | Provide custom HTTP headers required by the external source. |
-        | Value | Volt MX Foundry provides four options while configuring an operation. Dependent identity services are auto populated when you edit this field, These options primarily determine the source of the header value **.**
-        [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Select an option from the following options.](javascript:void(0);)
-        
-        If you select **Request**, the Integration Server picks the value pairs from the client's request during run time and forwards the same to the back-end.If you select **Session**, the value of the header is picked from the session context. You cannot edit the Default value and test value. **Constant** is used to configure the value that is picked and sent to back end by the Integration Server during the run-time.If **Identity** is selected, you can filter the request parameters based on the response from the identity provider. For more details on configuring the identity filters, refer [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html).
-        
-        > **_Note:_** The field is set to **Request**, by default. |
+        | Value | Volt MX Foundry provides four options while configuring an operation. Dependent identity services are auto populated when you edit this field, These options primarily determine the source of the header value. > **_Note:_** The field is set to **Request**, by default. |
         | TEST VALUE | A test value is used for testing the service. Enter a value. |
         | DEFAULT VALUE | The default value will be used if the test value is empty. Change the syntax, if required. |
         | SCOPE | Select request or session. The field is set to **Request**, by default. |
         | Description | Enter the **Description** for the request input. |
+
+        <details close markdown="block"><summary>Select an option from the following options.</summary>
+        
+        *  If you select **Request**, the Integration Server picks the value pairs from the client's request during run time and forwards the same to the back-end.
+        *  If you select **Session**, the value of the header is picked from the session context. You cannot edit the Default value and test value.
+        *  **Constant** is used to configure the value that is picked and sent to back end by the Integration Server during the run-time.
+        *  If **Identity** is selected, you can filter the request parameters based on the response from the identity provider. For more details on configuring the identity filters, refer [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html).
+        
+        </details>
         
 6.  To validate the details, select the environment from the list and click **Save and Fetch Response**. Refer [Test a Service Operation](Test_a_Service_Operation.html) for the steps to test a service. The result of the operation appears.
     
@@ -268,15 +291,15 @@ In the **Response Output** tab, configure the fields of the table for displaying
     > **_Note:_** If you define parameters inside a record as a session, the session scope will not get reflected for the parameters.
     
 2.  To validate the details, click **Test**. Refer [Test a Service Operation](Test_a_Service_Operation.html) for the steps to test a service. The result of the operation appears.
+
 3.  Click **SAVE OPERATION**.
     
     > **_Note:_** You can view the service in the Data Panel feature of Volt MX Iris. By using the Data Panel, you can link back-end data services to your application UI elements seamlessly with low-code to no code. For more information on Data Panel, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/DataPanel.html#top).
-    
 
 > **_Note:_** To use SAP JCO adapter in On-Premises environment, the following artefacts must be placed in the application server -  
-  
 \- sapjco3.jar  
 \- sapjco.dll (if Volt MX Foundry instance is on Windows) or libso.so (if Volt MX Foundry instance is on Linux machine).  
 \- SapJCoDestinationProvider.jar  
-  
 sapjco3.jar and sapjco.dll/libso.so artefacts must be downloaded from SAP site.
+
+

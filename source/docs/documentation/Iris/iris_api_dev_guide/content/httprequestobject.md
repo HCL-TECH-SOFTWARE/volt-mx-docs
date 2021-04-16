@@ -18,7 +18,7 @@ Uploading a File
 
 The HttpRequest API enables you to upload any file to a remote server through the POST method by passing raw bytes of the file. The [voltmx.io.FileSystem.getFile](voltmx.io.file_functions.html#getFilesList) API helps you get the raw bytes of the file you want to upload.
 
-> **_Note:_** Before uploading a file, you must select the **Enable File Upload** check box from the **Application Properties > Native > Android** tab. For more information, refer [Native App Properties for Android]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/content/Native_App_Properties.html).
+> **_Note:_** Before uploading a file, you must select the **Enable File Upload** check box from the **Application Properties > Native > Android** tab. For more information, refer [Native App Properties for Android]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Native_App_Properties.html).
 
 To upload a file, set the Content-Type parameter as "multipart/formdata" header request. For example:
 

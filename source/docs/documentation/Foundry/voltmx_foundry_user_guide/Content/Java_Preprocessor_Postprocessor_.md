@@ -27,13 +27,11 @@ The step allows you to further filter the data received from a service call.
     *   Under **Preprocessor**, configure one of the following:
         *   For **Java**, you can configure multiple Preprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple preprocessors in the uploaded JAR file in the service definition, you can select the available one or other preprocessors. You can arrange the selected pre-processors to be executed in the desired order during the operation call.
             
-            [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Use Case  
-            ](javascript:void(0);)
-            
-              
-            When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.  
-              
-            
+            <details close markdown="block"><summary>Use Case </summary>
+                When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.  
+            </details>  
+
+
             Select **Java**, and from the **Class** list, select a preprocessor class. You can select one or more classes.  
             This step enables a developer to include any business logic on the data before sending the response to a mobile device.  
             ![](Resources/Images/multiplePreprocessor_426x328.png)
@@ -59,12 +57,11 @@ The step allows you to further filter the data received from a service call.
         
         *   For **Java**, you can configure multiple Postprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple post-processors in the uploaded JAR file in the service definition, you can select the available one or other post-processors. You can arrange the selected post-processors to be executed in the desired order during the operation call.  
             
-            [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Use Case  
-            ](javascript:void(0);)
-            
-            When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.  
-            
-              
+            <details close markdown="block"><summary>Use Case </summary>
+                When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.  
+            </details> 
+
+
             Select **Java**, and from the **Class** list, select a postprocessor class. You can select one or more classes.  
             This step enables a developer to include any business logic on the data before sending the response to a mobile device.**  
             ![](Resources/Images/multiplePostprocessor_346x317.png)  
@@ -105,7 +102,8 @@ The service config and input map are being sent to the onException Implementatio
 
 For example:
 
-{% highlight voltMx %} @OnException
+{% highlight VoltMx %} 
+  @OnException
   public Result executeWithAnnotation(@VoltMXContext Result result,
       @VoltMXContext DataControllerRequest request, @VoltMXContext     DataControllerResponse response,
       @VoltMXContext(parameterName = ContextParams.INPUT) Map<String, Object> inputMap,

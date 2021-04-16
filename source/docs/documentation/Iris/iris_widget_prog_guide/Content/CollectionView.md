@@ -19,7 +19,7 @@ Following are the real-time use cases of CollectionView widget:
 *   **Data Handling:** Displays data from various services in your application by using CollectionView widgets. For example, if you have a service that contains the data of various luxury cars, its images, and prices, you can display it in your application using CollectionView widget.
 *   **Define Templates**: Create templates to define reusable structure for CollectionView widgets. Templates help you to attain a consistent look-and-feel for the rows and sections of a CollectionView widget.
 
-Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Iris_User_Guide.html).
+Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see [Designing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Part_II_CreatingAnApplication.html) in the [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
 For a more hands-on approach on how you can implement CollectionView widget, import and preview the **File Gallery** sample app by using Volt MX Iris.
 

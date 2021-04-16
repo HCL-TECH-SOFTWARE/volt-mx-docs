@@ -636,7 +636,10 @@ while getopts "hryliusbcdv" OPTION; do
                         ;;
                 y)
                         echo "Getting Youtube link count..."
-                        `grep -Eor "(http|https)://(www.youtube)[a-zA-Z0-9./?=_%:-]*" * | awk -F ":" '{print $NR}' > YoutubeLinks`
+                        getLinksAndValidate
+                        cat ClickableLinks| grep youtube > YoutubeLinks
+                        rm ClickableLinks
+                        rm ClickableReferences
                         exit 0
                         ;;
         esac
