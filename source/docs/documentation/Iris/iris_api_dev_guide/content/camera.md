@@ -11,7 +11,7 @@ Camera API
 
 When you capture an image using the Camera widget, the device's camera captures the rawbytes of the image. The Camera API provides a function to delete rawbytes for the image.
 
-{% include youtube.html id='NZESiwLuc5Q' %}
+{% include youtube.html id='kuxfDoL7s_Q' %}
 
 The Camera API uses `voltmx.camera Namespace` and the following API elements.
 
