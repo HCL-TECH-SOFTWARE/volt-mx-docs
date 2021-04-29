@@ -737,7 +737,7 @@ Available on all platforms except Mobile Web.
 
 This API returns whether Orientation is supported on a device.
 
-You can view a video on using Display Orientation [here](https://youtu.be/C3yMLbV1TQA).
+You can view a video on using Display Orientation [here](https://youtu.be/eS-T-QV273g).
 
 <b>Syntax</b>
 
