@@ -26,9 +26,8 @@ After you [create an application](Adding_Applications.html), in the app configur
 
 ![](Resources/Images/ManageClientBinaries.png)
 
-Managing Client App Assets involves four steps:
+Managing Client App Assets involves three steps:
 
 1.  [Uploading Client Binaries to Volt MX Foundry](Upload_Client_Binaries.html#Uploadin)
 2.  [Publishing Client Binaries from Volt MX Foundry](Publishing_Client_Binaries.html#publishing-client-binaries-from-foundry)
-3.  [Publishing Native Client Binaries from Volt MX Management Console to Devices](Publishing_Binaries_EMM.html#publishing-native-client-binaries-from-management-to-devices)
-4.  [Upgrading Native Client Binaries](Upgrade_Client_Binaries.html)
+3.  [Upgrading Native Client Binaries](Upgrade_Client_Binaries.html)
