@@ -37,6 +37,4 @@ The following native client binary file formats are supported for platforms.
     To delete the uploaded binary file, click the **Delete** button. In the **Delete Client Binary** dialog, click **DELETE** to confirm the deletion.
     
 
-*   After you upload native client binaries in Volt MX Foundry Console, you can publish these binaries to an EAS Environment. For more details, refer to [Publishing Native Client Binaries from Volt MX Foundry to Volt MX EAS](EnterpriseAppStore.html#publishing-apps-to-eas-app-server).
-
-*   After you upload native client binaries in Volt MX Foundry Console, you can publish these binaries to an EMM Environment. For more details, refer to [Publishing Native Client Binaries from Volt MX Foundry to EMM Environment](Publish_Native_Client.html#Publishi).
+After you upload native client binaries in Volt MX Foundry Console, you can publish these binaries to an EAS Environment. For more details, refer to [Publishing Native Client Binaries from Volt MX Foundry to Volt MX EAS](EnterpriseAppStore.html#publishing-apps-to-eas-app-server).
