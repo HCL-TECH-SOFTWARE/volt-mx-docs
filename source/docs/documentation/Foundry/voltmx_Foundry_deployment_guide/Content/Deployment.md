@@ -156,7 +156,6 @@ Database Growth Sizing
 | Database Component | Data growth Size (GB) per year | Planned Data Growth per year (%) | Estimated Data size for 5 years In GB | Data growth criteria |
 | --- | --- | --- | --- | --- |
 | VMS-Engagement | 515 | 5 | 2846 | 0.1 million pushes per day 3000 - devices, |
-| EMM | 300 | 5 | 1658 | 1500 IMEI, 1500 - users, 70000 apps, 1 crore request per month |
 | Sync | 7 | 5 | 38 | 10000 sessions per day |
 | Metrics (Without Events) | 288 | 0 | 1440 | 1 Million Application Sessions, 10Million Service Calls, 2 Million Custom Metrics per month |
 | Metrics (With Events+geography) | 1980 | 0 | 9900 | 1 Million Application Sessions, 10Million Service Calls, 2 Million Custom Metrics, 50 M Application Events, Geolocation database per month |

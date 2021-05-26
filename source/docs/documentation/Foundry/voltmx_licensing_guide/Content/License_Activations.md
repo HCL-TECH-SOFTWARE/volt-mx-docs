@@ -13,7 +13,6 @@ This part of the Volt MX Licensing Guide provides you with the information you n
 
 *   [VoltMX Iris Enterprise](VoltMXOne_Studio_IDE.html)
 *   [VoltMX Foundry](License_Activation_through_VoltMX_Server_7.2.html)
-*   [VoltMX EMM](VoltMXOne_EMM_Installer.html)
 
 [Open topic with navigation](../Content/License_Activations.html)
 
