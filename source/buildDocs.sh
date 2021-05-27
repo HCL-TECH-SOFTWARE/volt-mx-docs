@@ -3,7 +3,7 @@
 
 pwrd=`pwd`
 #Perform build
-bundle exec jekyll build
+bundle exec jekyll build $1
 
 cd _site/assets/js
 
