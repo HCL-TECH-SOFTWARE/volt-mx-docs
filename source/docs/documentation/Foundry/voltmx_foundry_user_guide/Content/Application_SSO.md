@@ -476,7 +476,7 @@ To enable SSO for Iris version V8 SP3 or previous versions, do the following:
 Build Apps for Distribution
 ---------------------------
 
-After the apps are built, they can be pushed to the [EMM enterprise store]({{ site.baseurl }}/docs/documentation/management/voltmxemm/Content/VoltMX_Management_User_Guide.html#Device_Agent.html) / any public app store. Users can select the required apps (BankApp and TradeApp) to download and install on their device.
+After the apps are built, they can be pushed to the Enterprise app store (EAS) / any public app store. Users can select the required apps (BankApp and TradeApp) to download and install on their device.
 
 > **_Note:_** Ensure the new version of the apps are consumed by the end user specifically in scenarios where Volt MX Foundry apps were unpublished and then republished.
 

@@ -247,22 +247,6 @@ Issues Publishing an Application Using Volt MX Foundry Console
 
 *   **Issue**
     
-    If EMM is installed on Tomcat and Apache Server, and Volt MX Foundry installed on WebSphere 8.5.5.5 or 8.5.5.6, and when you attempt to add EMM in the **Environments** tab in Volt MX Foundry Console, the system throws the error into `accounts.log` and will display following stack-trace. This happens because some older versions of some of the IBM libraries were not able to handle `Diffie Hellman with 2048 bit key`.
-    
-    {% highlight voltMx %} javax.net.ssl.SSLException   
-      
-    java.lang.ArrayIndexOutOfBoundsException: Array index out of range: 64
-    {% endhighlight %}
-    
-    **Workaround**
-    
-    To fix the issue, update to the newer versions of `ibmjsseprovider2.jar` and `ibmjceprovider.jar`.
-    
-    For more details, refer to IBM updates to these libraries as noted in the **Problem Conclusion** section at [http://www-01.ibm.com/support/docview.wss?uid=swg1IV74069](http://www-01.ibm.com/support/docview.wss?uid=swg1IV74069)
-    
-
-*   **Issue**
-    
     Unable to read metadata from an integration service (for example, SOAP) that is protected by an SSL certificate.
     
     **Workaround**
