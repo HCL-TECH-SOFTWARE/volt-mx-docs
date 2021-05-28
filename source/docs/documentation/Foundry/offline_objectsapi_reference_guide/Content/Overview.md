@@ -8,7 +8,7 @@ category: "offline_objectsapi_reference_guide"
 Preface
 =======
 
-Volt MX  EMM JS-SDK allows developers to build native apps for multiple platforms using Volt MX Studio. Volt MX EMM JS-SDK APIs currently support both Android and iOS. App developers can use these APIs to create custom experiences for different sets of app users, thereby increasing control and security for these apps.
+The Volt MX Offline Object SDK allows developers to build native apps for multiple platforms using Volt MX Studio. Volt MX Offline Objects SDK APIs currently support both Android and iOS. App developers can use these APIs to create custom experiences for different sets of app users, thereby increasing control and security for these apps.
 
 Intended Audience
 -----------------
