@@ -407,23 +407,28 @@ In setting up a cluster a minimum of one master can be configured. To improve fa
 ![](Resources/Images/home1.PNG)
 
 6.  To join other nodes as master/worker, copy the setup-node.zip file which is available in the Foundry Container artifact folder(VoltMXFoundryContainerOnPrem-9.0.0.0\_GA) into the node to join as the master/worker and then perform the following steps.
-    1.  Extract the `setup-nodes.zip` file.{% highlight voltMx %}sudo unzip setup-node.zip -d setup-node
-        {% endhighlight %}
-    2.  Navigate to the `setup-nodes` folder.{% highlight voltMx %}cd setup-node
-        {% endhighlight %}
+    1.  Extract the `setup-nodes.zip` file.
+	
+		```sudo unzip setup-node.zip -d setup-node```
+
+    2.  Navigate to the `setup-nodes` folder.
+	
+		```cd setup-node```
+    
     3.  Execute the following command.
         
         For Master:
         
-        {% highlight voltMx %}sudo ./setup-node.sh control-plane
-        {% endhighlight %}
+        ```sudo ./setup-node.sh control-plane```
         
         For Worker:
         
-        {% highlight voltMx %}sudo ./setup-node.sh
-        {% endhighlight %}
-7.  After the cluster setup is done to get the list of nodes in cluster, use below command{% highlight voltMx %}kubectl get nodes
-    {% endhighlight %}
+        ```sudo ./setup-node.sh```
+		
+7.  After the cluster setup is done to get the list of nodes in cluster, use below command.
+
+
+    ```kubectl get nodes```
     
     ![](Resources/Images/nodes.PNG)
     
@@ -449,8 +454,9 @@ After joining masters and worker nodes, you must press enter in the master node 
     
     ![](Resources/Images/healthcheck.PNG)
     
-5.  Run the following command to check status of pods.{% highlight voltMx %}sudo kubectl get pods
-    {% endhighlight %}  
+5.  Run the following command to check status of pods.
+
+	```sudo kubectl get pods```
     
     ![](Resources/Images/podslist.PNG)
     

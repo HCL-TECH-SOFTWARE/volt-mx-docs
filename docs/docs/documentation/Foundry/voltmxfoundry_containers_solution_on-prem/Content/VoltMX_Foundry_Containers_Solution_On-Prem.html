@@ -33,7 +33,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Volt MX" />
 <script type="application/ld+json">
-{"url":"https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_containers_solution_on-prem/Content/VoltMX_Foundry_Containers_Solution_On-Prem.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hcl-tech-software.github.io/volt-mx-docs/Volt_Mx_logo.png"}},"@type":"WebPage","description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","headline":"Volt MX","@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hcl-tech-software.github.io/volt-mx-docs/Volt_Mx_logo.png"}},"@type":"WebPage","url":"https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_containers_solution_on-prem/Content/VoltMX_Foundry_Containers_Solution_On-Prem.html","headline":"Volt MX","description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -966,40 +966,37 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
 <ol>
   <li>To join other nodes as master/worker, copy the setup-node.zip file which is available in the Foundry Container artifact folder(VoltMXFoundryContainerOnPrem-9.0.0.0_GA) into the node to join as the master/worker and then perform the following steps.
     <ol>
-      <li>Extract the <code class="language-plaintext highlighter-rouge">setup-nodes.zip</code> file.</li>
+      <li>
+        <p>Extract the <code class="language-plaintext highlighter-rouge">setup-nodes.zip</code> file.</p>
+
+        <p><code class="language-plaintext highlighter-rouge">sudo unzip setup-node.zip -d setup-node</code></p>
+      </li>
+      <li>
+        <p>Navigate to the <code class="language-plaintext highlighter-rouge">setup-nodes</code> folder.</p>
+
+        <p><code class="language-plaintext highlighter-rouge">cd setup-node</code></p>
+      </li>
+      <li>
+        <p>Execute the following command.</p>
+
+        <p>For Master:</p>
+
+        <p><code class="language-plaintext highlighter-rouge">sudo ./setup-node.sh control-plane</code></p>
+
+        <p>For Worker:</p>
+
+        <p><code class="language-plaintext highlighter-rouge">sudo ./setup-node.sh</code></p>
+      </li>
     </ol>
   </li>
+  <li>
+    <p>After the cluster setup is done to get the list of nodes in cluster, use below command.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">kubectl get nodes</code></p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_containers_solution_on-prem/Content/Resources/Images/nodes.PNG" alt="" /></p>
+  </li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo unzip setup-node.zip -d setup-node
-        </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.  Navigate to the `setup-nodes` folder.
-</code></pre></div></div>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">cd setup-node
-        </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.  Execute the following command.
-    
-    For Master:
-</code></pre></div></div>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo ./setup-node.sh control-plane
-        </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    For Worker:
-</code></pre></div></div>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo ./setup-node.sh
-        </code></pre></figure>
-
-<ol>
-  <li>After the cluster setup is done to get the list of nodes in cluster, use below command</li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">kubectl get nodes
-    </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![](/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_containers_solution_on-prem/Content/Resources/Images/nodes.PNG)
-</code></pre></div></div>
       <h2 id="resuming-installation-in-master-node">
         
         
@@ -1034,13 +1031,12 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
   </li>
   <li>
     <p>Run the following command to check status of pods.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo kubectl get pods</code></p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_containers_solution_on-prem/Content/Resources/Images/podslist.PNG" alt="" /></p>
   </li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo kubectl get pods
-    </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![](/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_containers_solution_on-prem/Content/Resources/Images/podslist.PNG)
-</code></pre></div></div>
       <h2 id="known-issues-and-limitations">
         
         
