@@ -450,7 +450,7 @@ After joining masters and worker nodes, you must press enter in the master node 
     ![](Resources/Images/healthcheck.PNG)
     
 5.  Run the following command to check status of pods.{% highlight voltMx %}sudo kubectl get pods
-    {% endhighlight %}
+    {% endhighlight %}  
     
     ![](Resources/Images/podslist.PNG)
     
