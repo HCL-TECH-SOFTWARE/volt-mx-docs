@@ -26,13 +26,12 @@ To install Volt MX Foundry Console using the installer, follow these steps:
 
 1.  Execute the following command to switch to the user that you created.  
     
-
-\# su - username  
+    \# su - username  
 
 3.  Press **Enter**. You will be prompted to enter the password.
 4.  Enter the password, and press **Enter**.
-5.  Unzip the downloaded zip file, and go to the folder _**VoltMXFoundry\_Installer\_Linux**_.
-6.  Start the **./VoltMXFoundryConsoleInstaller-6.0.1.GA.bin** file by executing the following command:
+5.  Unzip the downloaded zip file, and go to the folder _**VoltMXFoundry\\_Installer\\_Linux**_.
+6.  Start the installation by executing **./VoltMXFoundryConsoleInstaller-6.0.1.GA.bin**. Below is  the output from the installation process.
 
 Preparing to install...  
 Extracting the JRE from the installer archive...  
@@ -80,86 +79,6 @@ PRESS <ENTER> TO CONTINUE:
     
 9.  To continue the installation, type 1. Or type 2 to abort and perform prerequisites. The _License Agreement_ option appears.
     
-    \========================================================================  
-    License Agreement  
-    \-----------------  
-    Installation and Use of Volt MX Foundry Console Requires Acceptance of the Following License Agreement:  
-      
-    VOLTMX, INC.  
-    SOFTWARE LICENSE AGREEMENT  
-      
-    THE TERMS AND CONDITIONS CONTAINED HEREIN CONSTITUTE A LEGAL AGREEMENT.  
-      
-    THIS AGREEMENT ("AGREEMENT") CONTAINS THE ENTIRE AGREEMENT BETWEEN YOU ("LICENSEE") AND VOLTMX, INC. ("VOLTMX") WITH RESPECT TO THE TERMS AND CONDITIONS DESCRIBED HEREIN. READ THIS AGREEMENT CAREFULLY BEFORE YOU CLICK THE "I ACCEPT" BUTTON BELOW. BY CLICKING ON THE "I ACCEPT" BUTTON, YOU ACKNOWLEDGE THAT (1) YOU ARE AUTHORIZED TO ENTER THIS AGREEMENT FOR AND ON BEHALF OF YOUR COMPANY, AND ARE DOING SO, AND (2) YOU HAVE READ AND UNDERSTAND AND AGREE THAT YOU AND THE COMPANY SHALL BE BOUND BY THESE TERMS AND CONDITIONS AND ALL MODIFICATIONS AND ADDITIONS PROVIDED FOR. IF YOU DO NOT AGREE WITH THESE TERMS AND CONDITIONS, CLICK ON THE "I DO NOT ACCEPT" BUTTON BELOW AND INSTALLATION WILL TERMINATE.  
-      
-    Software products included with this product that are not Volt MX products are licensed to you by the software provider. Please refer to the license contained in the provider's product for the terms of use before using such products.  
-      
-    1\. License Grant. Volt MX grants you a limited, non-exclusive, non-transferable license to use, for developmental purposes only, the Volt MX software program(s),  
-      
-    PRESS <ENTER> TO CONTINUE:  
-      
-    known as the VoltMXTM Platform (the "Software") and related product documentation at no charge subject to the terms and restrictions set forth in this License Agreement. You are not permitted to use the Software in any manner not expressly authorized by this License. You acknowledge and agree that ownership of the Software and all subsequent copies thereof regardless of the form or media are held by Volt MX. The terms of this License will govern any Software upgrades provided by Volt MX that replace and/or supplement the original Software, unless such upgrade is accompanied by a separate license in which case the terms of that license will govern.  
-      
-    2\. Term of Agreement. Your license is effective until terminated by Volt MX. The License will terminate automatically if you fail to comply with any of the limitations or other requirements described herein. At termination you shall cease all use of the Software and destroy all copies, full or partial of the Software.  
-      
-    3\. Ownership Rights. The Software and related documentation are protected by United States copyright laws and international treaties. Volt MX, third party component providers and open source component providers own and retain all right, title and interest in and to the Software and related documentation, including all copyrights, patents, trade secret rights, trademarks and other intellectual property rights therein. Your possession, installation, or use of  
-      
-    PRESS <ENTER> TO CONTINUE:  
-      
-    the Software and related documentation does not transfer to you any title to the intellectual property in the Software and the related documentation, and you will not acquire any rights to the Software and product documentation, except the limited right to use it as expressly set forth in this Agreement.  
-      
-    4\. Use of Name and Trademarks. You shall not use the name, trade names or trademarks of Volt MX or any of its affiliates in any advertising, promotional literature or any other material, whether in written, electronic or other form, distributed to any third party, except in the form provided by Volt MX, and then solely for purposes of identifying Volt MX software.  
-      
-    5\. Restrictions.  
-      
-    (A) Except as provided in this Agreement, you may not rent, lease, lend, redistribute or sublicense the Software. You may not copy the Software except to make archival or backup copies, provided that the backup copy must include all copyright or other proprietary notices contained on the original. You may not copy the related product documentation. You may not modify, reverse engineer, decompile, or disassemble the Software, except to the extent the foregoing restriction is expressly prohibited by applicable law. The Software is not intended for use in the operation of nuclear facilities, aircraft navigation or communication systems, air traffic control systems, life support  
-      
-    PRESS <ENTER> TO CONTINUE:  
-      
-    machines or other equipment in which the failure of the Software could lead to death, personal injury or severe physical or environmental damage.  
-      
-    (B) Certain components of the Software are provided under various Open Source licenses that have been made available to Volt MX. You may modify or replace only these Open-Sourced Components; provided that (i) the resultant Software is used in place of the unmodified Software, on a single computer; and (ii) you otherwise comply with the terms of this License and any applicable licensing terms governing use of the Open-Sourced Components. Volt MX is not obligated to provide any maintenance, technical or other support for the resultant Software.  
-      
-    6\. Exclusion of Warranties. THE SOFTWARE IS PROVIDED TO LICENSEE "AS IS", AND ANY USE BY LICENSEE OF THE SOFTWARE WILL BE AT LICENSEE'S SOLE RISK. VOLTMX MAKES NO WARRANTIES RELATING TO THE SOFTWARE AND EXPRESSLY DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THOSE OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. SOME STATES AND JURISDICTIONS DO NOT ALLOW LIMITATIONS ON IMPLIED WARRANTIES, SO THE ABOVE JURISDICTION MAY NOT APPLY TO YOU. The foregoing provisions shall be enforceable to the maximum extent permitted by applicable law.  
-      
-    7\. Limitation of Liability. TO THE EXTENT NOT PROHIBITED BY LAW, IN NO EVENT SHALL VOLTMX BE LIABLE FOR PERSONAL INJURY, OR ANY INCIDENTAL, SPECIAL, INDIRECT  
-      
-    PRESS <ENTER> TO CONTINUE:  
-      
-    OR CONSEQUENTIAL DAMAGES WHATSOEVER, INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF PROFITS, LOSS OF DATA, BUSINESS INTERRUPTON OR ANY OTHER COMMERCIAL DAMAGES OR LOSSES, ARISING OUT OF OR RELATED TO YOUR USE OR INABILITY TO USE THE VOLTMX SOFTWARE, HOWEVER CAUSED, REGARDLESS OF THE THEORY OF LIABILTY (CONTRACT, TORT OR OTHERWISE) AND EVEN IF VOLTMX HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. SOME JUSISDICTIONS DO NOT ALLOW THE LIMITATION OF LIABILITY FOR PERSONAL INJURY, OR FOR INCIDENTIAL OR CONSEQUENTIAL DAMAGES, SO THIS LIMITATION MAY NOT APPLY TO YOU. In no event shall VoltMX's total liability to you for all damages (other than as may be required by applicable law in cases involving personal injury) exceed the amount of fifty dollars ($50.00). The foregoing limitations will apply even if the above stated remedy fails of its essential purpose.  
-      
-    8\. Export Law Assurances. You may not use or otherwise export or re-export the Software except as authorized by United States law and the laws of the jurisdiction in which the Software was obtained. In particular, but without limitation, the Software may not be exported or re-exported (a) into (or to a national or resident of) any U.S. embargoed countries (currently Cuba, Iran, Iraq, Libya, North Korea, Sudan, and Syria) or (b) to anyone on the U.S. Treasury Department's list of Specially Designated Nationals or the U.S. Department of Commerce Denied Person's List or Entity List. By using the Software, you represent and warrant that you are not located in, under control  
-      
-    PRESS <ENTER> TO CONTINUE:  
-      
-    of, or a national or resident of any such country or on any such list.  
-      
-    9\. United States Government. The Software and related explanatory written materials are "Commercial Items" as that term is defined at 48 C.F.R. ï¿½2.101, consisting of "Commercial Computer Software" and "Commercial Computer Software Documentation", as such terms are used in 48 C.F.R. ï¿½12.212 or 48 C.F.R. ï¿½227. 7202, as applicable. Consistent with 48 C.F.R. ï¿½12.212 or 48 C.F.R. ï¿½227. 7202-1 through 227.7202-4, as applicable, the Commercial Computer Software and Commercial Computer Software Documentation are being licensed to U.S. Government end users (a) only as Commercial Items and (b) with only those rights as are granted to all other end users pursuant to the terms and conditions herein.  
-      
-    10\. Governing Law. This Agreement is governed by the law of the State of Florida, U.S.A., without reference to conflict of laws principles. The application of the United Nations Convention of Contracts for the International Sale of Goods is expressly excluded.  
-      
-    11\. Assignment/Transfers. The parties may not assign or transfer this Agreement, in whole or in part, without the other Party's prior written consent. Any attempted assignment or transfer in violation of this Section will be null and void.  
-      
-    PRESS <ENTER> TO CONTINUE:  
-      
-    12\. Third Party Acknowledgements.  
-      
-    (A) Aspects of the Software utilize or include third party software and other copyrighted material. Acknowledgements, licensing terms and disclaimers for such material are available when accessing the Software on the Volt MX website, and your use of such material is governed by their respective terms.  
-      
-    (B) The Software includes certain software provided under various Open Source licenses. You may obtain complete machine-readable copies of the source code and licenses for the Open Source software at the Volt MX Open Source website (http://VoltMX.com/oslicenses). Open Source Software is distributed WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
-      
-    13\. Severability. If any provision of this Agreement is held invalid, illegal or unenforceable, the validity, legality and enforceability of any of the remaining provisions of this Agreement shall not in any way be affected or impaired.  
-      
-    14\. Entire Agreement. This Agreement is the entire agreement between you and Volt MX concerning the Software and all related documentation and supersedes any  
-      
-    PRESS <ENTER> TO CONTINUE:  
-      
-    other prior or contemporaneous agreements or communications with respect to the Software and related documentation, whether written or oral. This Agreement may not be modified except by a written addendum issued by a duly authorized representative of Volt MX. No provision hereof shall be deemed waived unless such waiver shall be in writing and signed by Volt MX or a duly authorized representative of Volt MX.  
-      
-    Should you have any questions concerning this Agreement, or if you desire to contact Volt MX for any reason, please write to Volt MX, Inc., 7380 West Sand Lake Road, Suite 390, Orlando FL 32819, Attention: Legal Services.  
-      
-    DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): Y
-    
 10.  Press **Y** to accept the agreement.The _Install Components_ option appears.
     
     \=======================================================================  
@@ -176,6 +95,7 @@ PRESS <ENTER> TO CONTINUE:
     *   **All Components** - To install all components, select 1. The system will display both the [VoltMX Identity Service Database Details](#All_Components_VoltMX_Identity_Service) and **[VoltMX Foundry Console Database Details](#AllComponents_VoltMX_Foundry_Console)**.
     *   **VoltMX Identity Service** - To install Volt MX Identity Service, select 2. The system will display the [VoltMX Identity Service Database Details](#All_Components_VoltMX_Identity_Service) only.
     *   **VoltMX Foundry Console**\- To install Volt MX Foundry Console, select 3. The system will display the **[VoltMX Foundry Console Database Details](#AllComponents_VoltMX_Foundry_Console)** only.
+
 11.  Press **Enter** to continue the installation. The _Install Folder_ option appears.
     
     \=======================================================================  
