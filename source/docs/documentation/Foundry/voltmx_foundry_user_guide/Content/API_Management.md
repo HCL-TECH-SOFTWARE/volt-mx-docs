@@ -27,7 +27,7 @@ To create services through the APIs page, follow these steps:
     | --- | --- |
     | NAME | Displays the Name of the service. |
     | URL | Displays the URL of the service.<br> **_Note:_** The URL column is displayed only for identity service. |
-    | ENDPOINT TEYnPdEp / SERVICE TYPE | Displays the type of the service. The TYPE column is displayed only for identity service.<br> **_Note:_**  The SERVICE TYPE column is displayed only for integration service. |
+    | ENDPOINT TYPE / SERVICE TYPE | Displays the type of the service. The TYPE column is displayed only for identity service.<br> **_Note:_**  The SERVICE TYPE column is displayed only for integration service. |
     | ASSOCIATED APPS | Displays the **View** hyperlink. When you click the **View** link, the system displays the **Associated Apps** page. The **Associated Apps** page displays the number of apps associated with a particular service. For more details, refer to **[Associated Apps](#how-to-view-associated-apps-in-apis)** |
     | MODIFIED BY | Displays the name of the user. |
     | MODIFIED ON | Displays the date and time of the modified service. |
