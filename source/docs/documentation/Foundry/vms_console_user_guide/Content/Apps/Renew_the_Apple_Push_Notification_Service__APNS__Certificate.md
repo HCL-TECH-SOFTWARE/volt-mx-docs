@@ -48,36 +48,36 @@ The Apple Push Certificate cannot be renewed. You need to create a new push cert
     
     ![](../Resources/Images/Overview/Apps/APNSrenewcert/image013_573x276.png)
     
-10.  Click **Download** to install and backup.
+1.  Click **Download** to install and backup.
     
     ![](../Resources/Images/Overview/Apps/APNSrenewcert/image014_578x278.png)
     
-11.  Check your local **Download** folder for .cer file.
+1.  Check your local **Download** folder for .cer file.
     
     ![](../Resources/Images/Overview/Apps/APNSrenewcert/image015_577x279.png)
     
-12.  Click **Add** to add the certificate to Keychain.
+1.  Click **Add** to add the certificate to Keychain.
     
     ![](../Resources/Images/Overview/Apps/APNSrenewcert/image016_579x283.png)
     
-13.  Under Keychain, select the file and right click to **Export.**
+1.  Under Keychain, select the file and right click to **Export.**
     
     ![](../Resources/Images/Overview/Apps/APNSrenewcert/image017_578x280.png)
     
-14.  Click Save to save the exported file in .`p12` format.
+1.  Click Save to save the exported file in .`p12` format.
     
     ![](../Resources/Images/Overview/Apps/APNSrenewcert/image018_580x282.png)
     
-15.  Encrypt the exported item by providing a Password. Click **OK**
+1.  Encrypt the exported item by providing a Password. Click **OK**
     
-    .![](../Resources/Images/Overview/Apps/APNSrenewcert/image019_579x283.png)
+    ![](../Resources/Images/Overview/Apps/APNSrenewcert/image019_579x283.png)
     
-16.  Enter local machine password to allow export from Keychain. Click **Allow**.
+1.  Enter local machine password to allow export from Keychain. Click **Allow**.
     
     ![](../Resources/Images/Overview/Apps/APNSrenewcert/image020_578x277.png)
     
-17.  Check your local machine for the generated CSR.
+1.  Check your local machine for the generated CSR.
     
     ![](../Resources/Images/Overview/Apps/APNSrenewcert/image021_577x289.png)
     
-18.  Browse the certificate `(.p12)` and provide a Certificate Password in the Volt MX Engagement Services Application Console. Click **Save.**
+1.  Browse the certificate `(.p12)` and provide a Certificate Password in the Volt MX Engagement Services Application Console. Click **Save.**
