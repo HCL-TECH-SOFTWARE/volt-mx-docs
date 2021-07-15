@@ -3,7 +3,7 @@ layout: "documentation"
 category: "iris_starter_install_win"
 ---
                                      
-
+<!--
 [](#)
 
 *   [Prerequisites](Prerequisites.html#prerequisites)
@@ -23,7 +23,7 @@ category: "iris_starter_install_win"
 [](#)
 
 *   All Files
-
+-->
 You are here: [Prerequisites](#prerequisites) > System Requirements
 
 Volt MX  Iris V9 Windows Install Guide
@@ -62,6 +62,7 @@ This section helps you to understand the system requirements and necessary softw
 | Internal Storage | 24 GB |
 | Network | Ethernet Port |
 
+<!--
 Download Volt MX Iris
 ---------------------------
 
@@ -169,9 +170,10 @@ To create a Volt MX account after receiving an invitation, follow these steps:
         [![](Resources/Images/download_site_thumb_0_288.png)](Resources/Images/download_site.png)
         
         The installer is downloaded to your computer.
-
+-->
 You can view the [Preface](Revision History.html) and [Revision History](homepage.html)
 
+<!--
 *   [Prerequisites](#prerequisites)
     *   [System Requirements](#system-requirements)
     *   [Download Volt MX Iris](#download)
@@ -181,3 +183,5 @@ You can view the [Preface](Revision History.html) and [Revision History](homepag
     *   [Launching Volt MX Iris](Launching VoltMX Iris.html#launching)
 *   [Update Volt MX Iris](Upgrade.html)
 *   [FAQs](StudioInstallation_FAQs.html#appendix-frequently-asked-questions-faqs)
+
+-->
