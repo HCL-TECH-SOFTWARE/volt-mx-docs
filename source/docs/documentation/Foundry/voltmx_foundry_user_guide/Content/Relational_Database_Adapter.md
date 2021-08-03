@@ -238,17 +238,38 @@ Integration services accept only `form-url-encoded` inputs for all input paramet
     ![](Resources/Images/RDBMSReadResponseParam.png)
     
 
-1.  To configure the Response Output operation, provide the following details .
+1.  To configure the Response Output operation, provide the following details. 
     
-      
-    | Field | Description |
-    | --- | --- |
-    | Name | The **Name** field in the Response Output tab is pre-populated with database columns |
-    | Scope | Select request or session. This field is set to **Request**, by default. > **_Note:_** If you define parameters inside a record as the session, the session scope will not get reflected for the parameters. |
-    | DATA TYPE | The default datatype for the selected column is loaded under **DATATYPE** field. |
-    | Description | Enter the description for response output. |
+    <table>
+    <tr>
+    <th>Field</th>
+    <th>Description</th>
+    </tr>
+    <tr>
+    <td>Name</td>
+    <td><p>The <strong>Name</strong> field in the Response Output tab is pre-populated with database columns</p></td>
+    </tr>
+    <tr>
+    <td>Scope</td>
+    <td><p>Select request or session. This field is set to <strong>Request</strong>, by default.</p> 
+    <p><blockquote><em>Note:</em> If you define parameters inside a record as the session, the session scope will not get reflected for the parameters.</blockquote></p>
+    </td>
+    </tr>
+    <tr>
+    <td>DATA TYPE</td>
+    <td><p>The default datatype for the selected column is loaded under <strong>DATATYPE</strong> field.</p>
+    <p><blockquote><em>Note:</em> The foundry response will return it as string when the data type is number.</blockquote></p>
+    </td>
+    </tr>
+    <tr>
+    <td>Description</td>
+    <td><p>Enter the description for response output.</p></td>
+    </tr>
+    </table>
+
     
-2.  To validate the details, click **Test**. For more information, refer [Test a Service Operation](Test_a_Service_Operation.html). The result of the operation appears.
+2.  To validate the details, click **Test**. For more information, refer [Test a Service Operation](Test_a_Service_Operation.html). The result of the operation appears.  
+
 3.  Click **SAVE OPERATION** to save the changes in the read operation.
     
     > **_Note:_** You can view the service in the Data Panel feature of Volt MX Iris. By using the Data Panel, you can link back-end data services to your application UI elements seamlessly with low-code to no code. For more information on Data Panel, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/DataPanel.html#top).
