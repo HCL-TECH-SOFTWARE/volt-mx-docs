@@ -8,6 +8,8 @@ category: "iris_user_guide"
 Build a Windows 10 Application
 ==============================
 
+> **_Note:_** Volt MX 9.2 does not support the building of Windows native applications.
+
 The process of developing and deploying a Volt MX Iris app for the Windows 10 platform consists of three phases:
 
 1.  Develop and build the application in Volt MX Iris.

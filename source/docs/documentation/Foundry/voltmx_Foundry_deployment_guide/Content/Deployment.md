@@ -43,7 +43,7 @@ Software Requirements
 
 The following are the underlying software requirements for Volt MX Foundry on-premises.
 
-For a complete list operating systems, app servers, databases, and Java Runtime Environment supported by Volt MX Foundry , refer to [Software Requirements by Volt MX Foundry]({{ site.baseurl }}/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV8SP1.html).
+For a complete list operating systems, app servers, databases, and Java Runtime Environment supported by Volt MX Foundry , refer to [Software Requirements by Volt MX Foundry]({{ site.baseurl }}/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9SP1.html).
 
   
 | Requirement | Supported |
@@ -110,7 +110,7 @@ A company requires Volt MX Foundry Integration to handle 1.25 million sessions/y
 | Physical Computer/VM – 5 core & 12 GB RAM | Console, Identity, Integration, Engagement and Sync |
 | Physical Computer/VM – 4 core & 10 GB RAM | Integration, Identity, Engagement and Sync |
 | Physical Computer/VM – 2 core & 4-5 GB RAM | Sync or Engagement or Integration and Identity |
-| Physical Computer/VM – 4 core & 16 GB RAM (applicable for Database) | Database components of the Volt MX Foundry: <br><br>Console (accounts and workspace) <br><br>Identity (authglobaldb and authconfig) <br><br>Integration (voltmxadmin, devicedb, voltmxreports (Metrics)) <br><br>Engagement <br><br>Sync |
+| Physical Computer/VM – 4 core & 16 GB RAM (applicable for Database) | Database components of the Volt MX Foundry: <br><br>&nbsp;&nbsp;&nbsp;&nbsp;• Console (accounts and workspace) <br><br>&nbsp;&nbsp;&nbsp;&nbsp;• Identity (authglobaldb and authconfig) <br><br>&nbsp;&nbsp;&nbsp;&nbsp;• Integration (voltmxadmin, devicedb, voltmxreports (Metrics)) <br><br>&nbsp;&nbsp;&nbsp;&nbsp;• Engagement <br><br>&nbsp;&nbsp;&nbsp;&nbsp;• Sync<br> |
 
 > **_Note:_** The Hardware includes the RAM required for Operating System.
 

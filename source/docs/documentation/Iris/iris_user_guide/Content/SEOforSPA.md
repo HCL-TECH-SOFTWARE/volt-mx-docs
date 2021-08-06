@@ -52,13 +52,20 @@ The properties that can be defined in the SEO configuration file are as follows:
 
 The following is an example of an SEO Configuration file.
 
-{% highlight voltMx %}{
+<!-- {% highlight voltMx %}{
     "channel": "mobile",
     "baseurl": "localhost",
     "port": "8888"
 }
 
-{% endhighlight %}
+{% endhighlight %} -->
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    "channel": "mobile",
+    "baseurl": "localhost",
+    "port": "8888"
+}</code></pre></figure>
+
 
 Create Sitemap xml
 ------------------
@@ -73,9 +80,13 @@ You specify the location of the sitemap file in the project settings, as describ
 
 The following is an example of a sitemap file.
 
-{% highlight voltMx %}< urlset xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9" > < url >             < loc > http: //localhost:8888/test/p?title=Home</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url>                 <url>           <loc>http://localhost:8888/test/p?title=products</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url>                <url>           <loc>http://localhost:8888/test/p?title=categories</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url>                 <url>           <loc>http://localhost:8888/test/p?title=list</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url></urlset>
+<!-- {% highlight voltMx %}< urlset xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9" > < url >             < loc > http: //localhost:8888/test/p?title=Home</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url>                 <url>           <loc>http://localhost:8888/test/p?title=products</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url>                <url>           <loc>http://localhost:8888/test/p?title=categories</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url>                 <url>           <loc>http://localhost:8888/test/p?title=list</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url></urlset>
 
-{% endhighlight %}
+{% endhighlight %} -->
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">  
+< urlset xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9" > < url >             < loc > http: //localhost:8888/test/p?title=Home< /loc>           < changefreq>daily< /changefreq>           < priority>1.0< /priority>        < /url>                 < url>           < loc>http://localhost:8888/test/p?title=products< /loc>           < changefreq>daily< /changefreq>           < priority>1.0< /priority>        < /url>                < url>           < loc>http://localhost:8888/test/p?title=categories< /loc>           < changefreq>daily< /changefreq>           < priority>1.0< /priority>        < /url>                 < url>           < loc>http://localhost:8888/test/p?title=list< /loc>           < changefreq>daily< /changefreq>           < priority>1.0< /priority>        < /url>< /urlset>
+</code></pre></figure>
 
 Create SEO Functions
 --------------------
@@ -88,7 +99,7 @@ You call the initialization function at the Channel level as an App Service, and
 
 The following is an example of a JavaScript file containing these two functions.
 
-{% highlight voltMx %}function initDeeplinkforSEO(eventObj) {
+<!-- {% highlight voltMx %}function initDeeplinkforSEO(eventObj) {
     var param = eventObj.launchparams; 
     if (param.title == "home")     return frmHome;
     if (param.title == "products")     return frm01;
@@ -98,7 +109,18 @@ The following is an example of a JavaScript file containing these two functions.
 
 function seoReady() {    //call this method after all service calls are completed   return voltmx.application.setSEOdataReadyFlag;}
 
-{% endhighlight %}
+{% endhighlight %} -->
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function initDeeplinkforSEO(eventObj) {
+    var param = eventObj.launchparams; 
+    if (param.title == "home")     return frmHome;
+    if (param.title == "products")     return frm01;
+    if (param.title == "categories")     return frm02;
+    if (param.title == "list")     return frm03;
+}
+
+function seoReady() {    //call this method after all service calls are completed   return voltmx.application.setSEOdataReadyFlag;}</code></pre></figure>
+
 
 Call the Search Initialization as an App Service
 ------------------------------------------------

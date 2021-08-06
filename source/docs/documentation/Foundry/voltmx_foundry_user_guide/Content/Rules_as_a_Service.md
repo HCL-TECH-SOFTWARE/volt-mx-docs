@@ -11,7 +11,7 @@ Rules as a Service
 
 Volt MX Foundry provides the ability to write business rules in a simplified text form by using the Rules-as-a-Service feature. The Rules service makes defining business logic closer to human language and is built using [MVEL](http://mvel.documentnode.com/ "MVEL is an expression language based on Java-syntax, with some marked differences specific to MVEL.  Unlike Java however, MVEL is dynamically typed (with optional typing), meaning type qualification is not required in the source. "). Instead of embedding rules within Foundry integration services, with Rules as a first-class service, the business logic and conditions are externalized and can be managed separately. For example, let’s say in a Banking app there could be certain business rules defined to control whether a customer is eligible for a loan. However, these business rules for loan eligibility (like credit score and income level) might vary from time to time based on market conditions, bank’s promotional offers, and regulatory changes. In such cases, Foundry Rules-as-a-Service provides the ideal design to abstract these business rules from other application logic and manage them separately. This also provides Rules-as-a-Service all the capability of any Foundry service including versioning, export, import across Foundry apps, API management.
 
-You can use the **Rules** service tab to define and store your business logic as a set of rules. A collection of rules defined in a Rules service are stored in a Ruleset. For example, a Loan Ruleset can have multiple rules such as Home Loan Rule, Education Loan Rule, Vehicle Loan Rule and so on. Similar to how any Foundry service operation can be protected by Operation security levels, rules in a Ruleset can also be protected by Rule Security Level. These are: [Authenticated App Users, Anonymous App Users, Public, and Private.\- Authenticated App Users restricts access to clients who have successfully authenticated using an Identity Service associated with the app. - Anonymous App Users allows access from trusted clients that have the required App Key and App Secret. - Authentication via an Identity Service is not required.Public (All Users) allows any client to invoke this rule without any authentication. This setting provides no security for invoking this rule and should be avoided if possible. - Private (Internal Server only) blocks access to this rule from any external client. It allows invocations only from within the same runtime environment either from an Orchestration/Object Service, or from custom code.](javascript:void(0);)
+You can use the **Rules** service tab to define and store your business logic as a set of rules. A collection of rules defined in a Rules service are stored in a Ruleset. For example, a Loan Ruleset can have multiple rules such as Home Loan Rule, Education Loan Rule, Vehicle Loan Rule and so on. Similar to how any Foundry service operation can be protected by Operation security levels, rules in a Ruleset can also be protected by Rule Security Level. These are: [Authenticated App Users, Anonymous App Users, Public, and Private.](## "Authenticated App Users restricts access to clients who have successfully authenticated using an Identity Service associated with the app. - Anonymous App Users allows access from trusted clients that have the required App Key and App Secret. - Authentication via an Identity Service is not required.Public (All Users) allows any client to invoke this rule without any authentication. This setting provides no security for invoking this rule and should be avoided if possible. - Private (Internal Server only) blocks access to this rule from any external client. It allows invocations only from within the same runtime environment either from an Orchestration/Object Service, or from custom code. ")
 
 **How Rules as Service Works**
 
@@ -31,25 +31,132 @@ A bank app with a set of rules defined as a Rules service in a Foundry app is pu
 
 The following table details client requests and Foundry Server responses executed based on a sample rule.
 
-  
-| Step 1  Client App A user sends requests with Input Params to the **published Foundry app** as follows: | Step 2 **Foundry App** with Rules Service published to **Volt MX App Server** ||
-| --- | --- | --- |
-| a. Volt MX App Server executes the logic defined in the Rules service | b. Volt MX App Server sends the Response to the client app |
-| --- | --- |
-| creditRating = 300 or 669 creditLengthInYears = 5 | **Sample rule** name: "Credit Rating between 300 and 669, credit length less than 5 " description: "Credit Rating between 300 and 669, credit length less than 5 " condition: "creditRating >= 300 && creditRating <= 669 && creditLengthInYears <= 5" actions: - "results.addParam(\\"status\\", \\"Reject\\")"---name: "Credit Rating between 300 and 669, credit greater than 5 " description: "Credit Rating between 300 and 669, credit greater than 5 " condition: "creditRating >= 300 && creditRating <= 669 && creditLengthInYears > 5 " actions: - "results.addParam(\\"status\\", \\"Review\\")"---name: "Credit Rating between 670 and 750, credit length less than 5 " description: "Credit Rating between 670 and 750, credit length less than 5 " condition: "creditRating >= 670 && creditRating < 750 && creditLengthInYears <= 5 " actions: - "results.addParam(\\"status\\", \\"Approve\\")" - "results.addParam(\\"interestRate\\", \\"10\\")"---name: "Credit Rating greater than 750, credit greater than 5 " description: "Credit Rating greater than 750, credit greater than 5 "condition: creditRating >= 750 && creditLengthInYears > 5actions:- "results.addParam(\\"status\\", \\"Approve\\")"- "results.addParam(\\"interestRate\\", \\"5\\")" | {"opstatus":0,"status" : "Reject"} |
-| creditRating = 300 or 669 creditLengthInYears = 6 |^^| {"opstatus":0,"status" : "Review"} |
-| creditRating = 670 or 740 creditLengthInYears = 5 or 6 |^^| {"interestRate": "10""opstatus":0,"status" : "Approve"} |
-| creditRating = 750 or 880 creditLengthInYears = 5 or 6 |^^| {"interestRate": "5""opstatus":0,"status" : "Approve"} |
+<table>
+<tr>
+<th rowspan=2>Step 1 <br><br>Client App <br><br>A user sends requests with Input Params to the published Foundry app as follows: </th>
+<th colspan=2>Step 2 <br><br> Foundry App with Rules Service published to Volt MX App Server</th>
+</tr>
+<tr>
+<td>a. Volt MX App Server executes the logic defined<br> in the Rules service</td>
+<td>b. Volt MX App Server<br> sends the Response to the client app</td>
+</tr>
+<tr>
+<td><li>creditRating = 300 or 669</li><li>creditLengthInYears = 5</li></td>
+<td>Sample rule <br><br>
+    <code>name: "Credit Rating between 300 and 669, 
+    credit length less than 5 "
+    description: "Credit Rating between 300 and 
+    669, credit length less than 5 "
+    condition: "creditRating >= 300 && 
+    creditRating <= 669 && creditLengthInYears 
+    <= 5"
+    actions:
+    - "results.addParam(\"status\", \"Reject\")"</code>
+</td>
+<td>
+    <code>
+    {
+    "opstatus":0,"status" : "Reject"
+    }
+    </code>
+</td>
+</tr>
+<tr>
+<td><li>creditRating = 300 or 669</li><li>creditLengthInYears = 6</li></td>
+<td>Sample rule <br><br>
+    <code>name: "Credit Rating between 300 and 669,
+    credit greater than 5 "
+    description: "Credit Rating between 300 and 
+    669, credit greater than 5"
+    condition: "creditRating >= 300 && 
+    creditRating <= 669 && creditLengthInYears > 
+    5 "
+    actions:
+    - "results.addParam(\"status\", \"Review\")"</code>
+</td>
+<td>
+    <code>
+    {
+    "opstatus":0,"status" : "Review"
+    }
+    </code>
+</td>
+</tr>
+<tr>
+<td><li>creditRating = 670 or 740</li><li>creditLengthInYears = 5 or 6</li></td>
+<td>Sample rule <br><br>
+    <code>name: "Credit Rating between 670 and 750, 
+    credit length less than 5 "
+    description: "Credit Rating between 670 and 
+    750, credit length less than 5 "
+    condition: "creditRating >= 670 && 
+    creditRating < 750 && creditLengthInYears <= 
+    5 "
+    actions:
+    - "results.addParam(\"status\", \"Approve\")"
+    - "results.addParam(\"interestRate\", \"10\")"</code>
+</td>
+<td>
+<code>
+    {
+    "interestRate": "10"
+    "opstatus":0,"status" : "Approve"
+    }
+</code>
+</td>
+</tr>
+<tr>
+<td><li>creditRating = 750 or 880</li><li>creditLengthInYears = 5 or 6</li></td>
+<td>Sample rule <br><br>
+    <code>name: "Credit Rating greater than 750, 
+    credit greater than 5 "
+    description: "Credit Rating greater than 
+    750, credit greater than 5 "
+    condition: creditRating >= 750 && 
+    creditLengthInYears > 5
+    actions:
+    - "results.addParam(\"status\", \"Approve\")"
+    - "results.addParam(\"interestRate\", \"5\")"</code>
+</td>
+<td>
+    <code>
+    {
+    "interestRate": "5"
+    "opstatus":0,"status" : "Approve"
+    }
+    </code>
+</td>
+</tr>
+</table>
+
 
 **What is the Structure of Rules**: Rules have a structure in the form of statements, as shown in the following table:
 
-| Sample Rules Structure |
-| --- |
-| name: "<Name of the rule>" description: "<Description of the rule>" priority: <Priority of the rule> condition: "<Condition to evaluate>" actions: - "<Set of actions to execute>" |
-| Description of Rules Structure |
-| **Name:** A unique name of the rule. This is a mandatory field. **Description:** A description for the rule. **Priority**: An integer value that represents the order to execute the rule. The bigger the value, the higher the priority. **Condition**: An expression that is evaluated by the Rules engine. When the condition evaluates to True, the engine executes a set of actions. This is a mandatory field. For example, `response != null` can be used to check whether the back-end response is empty. **Action**: A set of statements that are executed when the condition evaluates to True. This is a mandatory field. For example, `statusCode = 200` sets status code to 200. |
+<table>
+<tr>
+    <th>Sample Rules Structure</th>
+</tr>
+<tr>
+<td><input type="button" id="button" class="btn" style="float: right;" value="Copy" onclick="var codeSnippet = this.parentNode.textContent; copyFunction(codeSnippet, this);"><code class="codefirst">name: "< Name of the rule >" <br>description: "< Description of the rule >" <br> priority: < " Priority of the rule " > <br>condition: "< Condition to evaluate >" <br> actions:<br> - "< Set of actions to execute >" </code></td>
+</tr>
+<tr align="center"><td>Description of Rules Structure</td></tr>
+<tr>
+<td>
+<ul>
+<li><strong>Name</strong>: A unique name of the rule. This is a mandatory field.</li>
+<li><strong>Description</strong>: A description for the rule.</li>
+<li><strong>Priority</strong>: An integer value that represents the order to execute the rule. The bigger the value, the higher the priority.</li>
+<li><strong>Condition</strong>: An expression that is evaluated by the Rules engine. When the condition evaluates to True, the engine executes a set of actions.This is a mandatory field.<br>
+For example, <code>response != null</code> can be used to check whether the back-end response is empty.</li>
+<li><strong>Action</strong>: A set of statements that are executed when the condition evaluates to True. This is a mandatory field.<br>
+For example, <code>statusCode = 200</code> sets status code to 200.</li>
+</ul>
+</td>
+</tr>
+</table>
 
-### _How to Create a Rules Service_
+
+### How to Create a Rules Service
 
 To go to the **Rules** service tab from the Volt MX Foundry Console dashboard, click **Add New** or select any existing Volt MX Foundry app, and click the **Rules** tab. The Rules tab landing page appears. Creating a rules service involves two stages, a ruleset and rules. Rules defined in a Rules service are stored in a rules-set. A Ruleset is a collection of rules.
 

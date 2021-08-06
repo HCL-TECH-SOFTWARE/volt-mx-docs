@@ -61,8 +61,10 @@ The Animation API contains the following Namespaces and API elements:
 
 **Animation Configuration Object:** The animation configuration object has various key-value pairs that determine properties of the animation. You can set the animation [delay](animationconfiguration_object.html#delay), [duration](animationconfiguration_object.html#duration), [direction](animationconfiguration_object.html#directio), [iterationCount](animationconfiguration_object.html#iteratio), and the [fillMode](animationconfiguration_object.html#fillMode) properties that determine the state of the widget at the end of the animation.
 
+<!--
 To view the functionality of the Animation API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.
 
 [![](resources/images/download_button_10_230x35.png)](https://github.com/kony/Animations_FeatureApp)
 
 ![](resources/prettify/onload.png)
+-->

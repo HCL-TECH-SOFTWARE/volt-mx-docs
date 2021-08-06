@@ -229,10 +229,10 @@ You need to provide the following parameters during Installation:
 | **INTEGRATION\_AKS\_NODE\_COUNT** | The minimum number of nodes to be created in the Integration AKS agent/node pool. | 2 |
 | **INTEGRATION\_AKS\_MAX\_NODE\_COUNT** | The maximum number of nodes to be created in the Integration AKS agent/node pool. | 6 |
 
+<a name="userProperties"></a>    
+<details close markdown="block"><summary>Click here to view details of the User Defined Properties <strong>(Azure Subscription ID, Azure Service Principal ID Name, Azure Service Principal ID Secret, Service Principal Object ID, and Tenant ID)</strong></summary>
 
-<details close markdown="block"><summary>Click here to view details of the User Defined Properties</summary>
-
-* **Azure Subscription ID**, **Azure Service Principal ID Name**, **Azure Service Principal ID Secret**, **Service Principal Object ID**, and **Tenant ID** - Azure Subscription ID is a GUID that uniquely identifies your subscription to use Azure services. The Application needs the Service Principal to access or configure resources through the Azure Resource Manager (ARM) in the Azure Stack.  
+**Azure Subscription ID** is a GUID that uniquely identifies your subscription to use Azure services. The Application needs the Service Principal to access or configure resources through the Azure Resource Manager (ARM) in the Azure Stack.  
     You must have an Azure account with the permissions of a **Global Administrator** and the role of a **User**. Without these privileges, it is not possible to create the AKS clusters (or other resources).  
     The following section describes fetching **Azure Subscription ID**, generating **Azure Service Principal ID Name**, **Azure Service Principal ID Secret**, **Service Principal Object ID**, and **Tenant ID**.
 <br>
@@ -292,7 +292,8 @@ Login to Azure Portal and click on **Power Shell**.
     $(Get-AzureADServicePrincipal -Filter "AppId eq ‘<Service_principle_client_ID>’").ObjectId
     {% endhighlight %}<br/>
 ![](Resources/Images/objectid.PNG)
-        
+
+    
 iv. **Steps to know your Tenant ID**
 
 1.  Go to Portal.azure.com > Azure Active Directory.

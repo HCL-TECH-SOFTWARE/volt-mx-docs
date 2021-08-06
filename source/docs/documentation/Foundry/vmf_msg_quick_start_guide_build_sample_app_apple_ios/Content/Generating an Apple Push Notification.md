@@ -31,9 +31,10 @@ The first step to generate an Apple Push Notification Service (APNS) certificate
     *   **User Email Address**: Enter your email address.
     *   **Common Name**: Enter the common name.
     *   **Request is**: Select the option as **Saved to disk**.
-        
-        ![](Resources/Images/image 6_555x400.png)
-        
+
+
+    ![](Resources/Images/image 6_555x400.png)
+    
 4.  Click **Continue** to proceed. The **Save As** dialog box appears.
 5.  **Save As** dialog box: Change the file name extension in the **Save As** field to .`CSR` and click **Save**.
     

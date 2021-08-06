@@ -69,14 +69,13 @@ To hide app groups from the project at the channel level, follow these steps:
     The **App Group Configuration** dialog box appears.
 3.  Select the **Hide in Project** check box for the Application Groups that you want to hide.
 
-> **_Note:_**
+> **_Note:_**  
+> *   The **App Group Configuration** dialog box displays a list of all the available app groups in the project.
+> *   For nested app groups, if you hide the parent app group, the child app groups are also hidden from the project.
+> *   Clear the **Hide in Project** check box to show the application groups in the project.
+> *   To hide all available app groups, select the **Hide in Project** check box in the header of the **App Group Configuration** dialog box. To show all available app groups, clear the **Hide in Project** check box in the header of the **App Group Configuration** dialog box.
 
-*   The **App Group Configuration** dialog box displays a list of all the available app groups in the project.
-*   For nested app groups, if you hide the parent app group, the child app groups are also hidden from the project.
-*   Clear the ****Hide in Project**** check box to show the application groups in the project.
-*   To hide all available app groups, select the **Hide in Project** check box in the header of the **App Group Configuration** dialog box. To show all available app groups, clear the **Hide in Project** check box in the header of the **App Group Configuration** dialog box.
-
-5.  Click **Save**.  
+4.  Click **Save**.  
     The selected Application Groups are hidden from the Project Explorer and the Storyboard view.
 
 Alternatively, you can perform the following actions to hide application groups in the project at the app group level:
@@ -98,12 +97,11 @@ To exclude app groups from the build process at the channel level, follow these 
 3.  Select the **Exclude from Build** check box for the application groups that you want to exclude from the build process.
 
 > **_Note:_**
+> *   The **App Group Configuration** dialog box displays a list of all the available app groups in the project.
+> *   For nested app groups, if you exclude the parent app group, the child app groups are also excluded from the build process.
+> *   To exclude all available app groups, select the **Exclude from Build** check box in the header of the **App Group Configuration** dialog box.
 
-*   The **App Group Configuration** dialog box displays a list of all the available app groups in the project.
-*   For nested app groups, if you exclude the parent app group, the child app groups are also excluded from the build process.
-*   To exclude all available app groups, select the **Exclude from Build** check box in the header of the **App Group Configuration** dialog box.
-
-5.  Click **Save**.  
+4.  Click **Save**.  
     The selected application groups are excluded from the build process.
 
 > **_Note:_** If you want to include app groups that were previously excluded from the build process, clear the ******Exclude from Build****** check box. To include all available app groups, clear the **Exclude from Build** check box in the header of the **App Group Configuration** dialog box.

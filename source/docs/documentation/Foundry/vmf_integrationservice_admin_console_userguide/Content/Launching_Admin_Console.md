@@ -32,7 +32,7 @@ If you have the App Services server configured in **VoltMX Foundry Console** und
 
 **To access App Services directly from the URL, follow these steps:**
 
-1.  Enter the URL  http://<hostname>:<port>/admin in the web browser and press **Enter**.
+1.  Enter the URL  http://\<hostname>:\<port>/admin in the web browser and press **Enter**.
     
     For example, http://10.10.1.105:9090/admin
     

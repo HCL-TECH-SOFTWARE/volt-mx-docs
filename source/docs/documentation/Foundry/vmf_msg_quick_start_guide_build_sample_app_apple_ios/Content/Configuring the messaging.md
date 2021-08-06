@@ -60,18 +60,18 @@ The section explains how to provision the Engagement demo application using the 
         
         The application mode indicates the current status of the project. Push certificates are changed depending on the choice of application mode, and each mode requires a separate certificate.
         
-    2.  **Production Mode**: When selected, real time certificates and associated password details are used to send push notifications. Binary (.ipa) files are directly installed on the devices that need production certificate.
-    3.  **Development Mode**: When selected, you can send push message notifications using Apple’s demo server.
-    4.  **Upload iPhone Push Certificate**: Click the **Browse** button to upload the certificate for iPhone.
-    5.  **Certificate Password**: Enter the password for iPhone.
-    6.  **Upload iPad Push Certificate**: By default, the No option is set to active. Select the Yes option, if you want to upload the certificate for iPad.
+     2.  **Production Mode**: When selected, real time certificates and associated password details are used to send push notifications. Binary (.ipa) files are directly installed on the devices that need production certificate.
+     3.  **Development Mode**: When selected, you can send push message notifications using Apple’s demo server.
+     4.  **Upload iPhone Push Certificate**: Click the **Browse** button to upload the certificate for iPhone.
+     5.  **Certificate Password**: Enter the password for iPhone.
+     6.  **Upload iPad Push Certificate**: By default, the No option is set to active. Select the Yes option, if you want to upload the certificate for iPad.
 12.  Click **Save.**
     
-    ![](Resources/Images/add_New_App_Settings_535x379.png)  
+     ![](Resources/Images/add_New_App_Settings_535x379.png)  
       
-    Select the same application mode that you have selected while creating the **APNS** certificate type.  
+     Select the same application mode that you have selected while creating the **APNS** certificate type.  
     
 13.  On **Apps** screen, click the drop-down list and select the **Publish** option to publish the application. The application now can send notifications.
     
-    The following screen displays the **TestApp** as an example.  
-    ![](Resources/Images/apps_testapps_570x259.png)
+     The following screen displays the **TestApp** as an example.  
+     ![](Resources/Images/apps_testapps_570x259.png)

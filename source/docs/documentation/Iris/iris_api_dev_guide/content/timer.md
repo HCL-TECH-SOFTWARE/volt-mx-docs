@@ -26,6 +26,6 @@ Schedule the execution of functions using the [voltmx.timer.schedule](voltmx.tim
 
 To view the functionality of the Timer API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.  
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/tree/master/TimerAPI)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/TimerAPI)
 
 ![](resources/prettify/onload.png)

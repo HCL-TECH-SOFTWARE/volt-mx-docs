@@ -46,8 +46,10 @@ In this section, we will take you thru the steps to download and install the and
     *   Sender Id: This id is generated when you create the GCM/FCM key with Google so that you can configure your application in the Engagement server. As you may recall, this was also discussed in the earlier course.
     *   It is important that the sender ID used with the application is the same as the one associated with the GCM key that was used to configure the application in the Engagement server.
     *   Click **Done** after all the details were successfully entered. This will navigate you to the user creation screen.
+
         
-        ![](Resources/Images/figure18_308x535.png)
+    ![](Resources/Images/figure18_308x535.png)
+         
         
 6.  The User creation screen is shown below, where you need to enter the first name, last name, phone number, email, country and state (if country is US only) information.
 7.  Click **Done** after all the information is entered. This action will create a user in the Engagement server.
@@ -90,35 +92,25 @@ This section will walk you through the steps needed to receive the notifications
     
 5.  If you run the application or enter a geo-location that you are monitoring, then you will also get the notification as shown below. The notification below is coming from the **TestWithCustomBusinessLogic** geoboundary that was set up in the previous chapter. As you may recall this boundary could have been set up with client logic such as
     
-    `var startTime = res.metaData["StoreOpenTime"].split(' ');`
+    {% highlight voltMx %}
+    var startTime = res.metaData["StoreOpenTime"].split(' ');
+    var closeTime = res.metaData["StoreCloseTime"].split(' ');
+    var startDate = new Date();
+    startDate.setHours(startTime[0]);
+    startDate.setMinutes(startTime[1]);
+    startDate.setSeconds(startTime[2]);
+    var closeDate = new Date();
+    closeDate.setHours(closeTime[0]);
+    closeDate.setMinutes(closeTime[1]);
+    closeDate.setSeconds(closeTime[2]);
+    var currentDate = new Date
+    if((currentDate <= closeDate && currentDate >= startDate)) alert("Welcome to the Store. Please avail 10% coupon on all items");
+    else alert("Store is currently closed. Will reopen at " + startTime);
+    {% endhighlight %}
     
-    `var closeTime = res.metaData["StoreCloseTime"].split(' ');`
+In this example, the app runs at the time the store was open, so the following notification is displayed.
     
-    `var startDate = new Date();`
-    
-    `startDate.setHours(startTime[0]);`
-    
-    `startDate.setMinutes(startTime[1]);`
-    
-    `startDate.setSeconds(startTime[2]);`
-    
-    `var closeDate = new Date();`
-    
-    `closeDate.setHours(closeTime[0]);`
-    
-    `closeDate.setMinutes(closeTime[1]);`
-    
-    `closeDate.setSeconds(closeTime[2]);`
-    
-    `var currentDate = new Date`
-    
-    `if((currentDate <= closeDate && currentDate >= startDate)) alert("Welcome to the Store. Please avail 10% coupon on all items");`
-    
-    `else alert("Store is currently closed. Will reopen at " + startTime);`
-    
-    In this example, the app runs at the time the store was open, so the following notification is displayed.
-    
-    ![](Resources/Images/figure26.png)
+![](Resources/Images/figure26.png)
     
 6.  Similarly, when the application is put in the background and if you enter the geoboundary that was titled **TestWithLocalClientNotification**, you will also receive a local notification as shown below.
     

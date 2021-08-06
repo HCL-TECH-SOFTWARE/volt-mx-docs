@@ -216,24 +216,30 @@ Here is an example of the cacheMechanism function in a Service Worker Helper fil
 
 ### Custom Service Worker
 
-Follow these steps to include the Service Worker in your application.
+<p>Follow these steps to include the Service Worker in your application.</p>
+<ol>
+<li>Create a new JS file and name it as per your requirement (say serviceWorker.js). Add the following line as the first line of the script.</li>
+<p></p>
 
-1.  Create a new JS file and name it as per your requirement (say serviceWorker.js). Add the following line as the first line of the script.  
-    {% highlight voltMx %}importScripts(‘./nocache/sw-ext.js’)
-    {% endhighlight %}
-    
-    This script imports the **sw-ext.js** file into the service worker. sw-ext.js file has the configurations for push notification registration, some default values for cache, etc.
-    
-    > **_Note:_** When you incorporate your own Service Worker in your application, the default Service Worker file created by the platform is replaced with your file. You must provide the scripts for all the lifecycle events of the service worker. For more information about creating your Service Worker JS file, click [here](https://developers.google.com/web/fundamentals/primers/service-workers).
-    
-2.   From the left navigation bar, click **Project Settings**.
-3.  In the **Project Settings** window, from the left menu, select **Responsive Web**.
-4.  Under the **Progressive Web App** section, select the option **Service Worker Helper**. Ensure **Enable PWA** is selected in the **Progressive Web App** section.
-5.  Under the text **Service Worker file**, provide the location of the Service Worker file.  
-      
-    ![](Resources/Images/serviceworkerfile_404x247.png)
-6.  Click **Done**.
-7.  Build and publish the application in release mode to view the changes. For more information on how to build and publish your application in release mode, click [here](WebPublish.html#publishing-a-web-app-in).  
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">importScripts(‘./nocache/sw-ext.js’)  
+</code></pre></figure>
+
+<p></p>
+<p>This script imports the <strong>sw-ext.js</strong> file into the service worker. sw-ext.js file has the configurations for push notification registration, some default values for cache, etc.</p>
+<blockquote>
+<em>Note</em>: When you incorporate your own Service Worker in your application, the default Service Worker file created by the platform is replaced with your file. You must provide the scripts for all the lifecycle events of the service worker. For more information about creating your Service Worker JS file, click <a href="https://developers.google.com/web/fundamentals/primers/service-workers">here</a>.
+</blockquote>
+<li>From the left navigation bar, click <strong>Project Settings.</strong></li>
+<li>In the <strong>Project Settings</strong> window, from the left menu, select <strong>Responsive Web.</strong></li>
+<li>Under the <strong>Progressive Web App</strong> section, select the option <strong>Service Worker Helper.</strong> Ensure <strong>Enable PWA</strong> is selected in the <strong>Progressive Web App</strong> section.</li>
+<li>Under the text <strong>Service Worker file,</strong> provide the location of the Service Worker file.</li>
+<p></p>
+
+<img src="Resources/Images/serviceworkerfile_404x247.png">
+
+<li>Click <strong>Done.</strong></li>
+<li>Build and publish the application in release mode to view the changes. For more information on how to build and publish your application in release mode, click <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/WebPublish.html#publishing-a-web-app-in">here</a>.</li>
+</ol>
     
 
 Progressive Web Apps - FAQs

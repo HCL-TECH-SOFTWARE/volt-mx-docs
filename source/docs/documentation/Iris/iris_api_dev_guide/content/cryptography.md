@@ -67,11 +67,11 @@ The following table describes the supported padding for different cipher algorit
 | Algorithm | Platform | Possible Padding |
 | --- | --- | --- |
 | AES/TripleDES | iPhone | pkcs7(default) |
-|^^| Android/Android Tablet | none,pkcs1,pkcs5(default) |
-|^^| SPA | ISO10126, ISO97971, zeropaddding, nopadding, pkcs7 |
+|| Android/Android Tablet | none,pkcs1,pkcs5(default) |
+|| SPA | ISO10126, ISO97971, zeropaddding, nopadding, pkcs7 |
 | RSA | iPhone | none,pkcs1(default) |
-|^^| Android/Android Tablet | none,pkcs5,pkcs1(default) |
-|^^| Windows | pkcs1 |
+|| Android/Android Tablet | none,pkcs5,pkcs1(default) |
+|| Windows | pkcs1 |
 
   
 
@@ -94,10 +94,10 @@ The following table describes the supported modes for various ciphers.
 > | Algorithm | Platform | Possible Modes |
 > | --- | --- | --- |
 > | AES/TripleDES | iPhone | ecb,cbc(default) |
-> |^^| Android | ecb,cbc(default) |
-> |^^| SPA | ecb, cfb, ofb, cbc, ctr |
+> || Android | ecb,cbc(default) |
+> || SPA | ecb, cfb, ofb, cbc, ctr |
 > | RSA | iPhone | ecb(default) |
-> |^^| Android/Android Tablet | ecb(default) |
+> || Android/Android Tablet | ecb(default) |
 
 ### Initialization Vectors
 
@@ -117,7 +117,7 @@ For symmetric encryption and decryption, your app can use the following algorith
 | Algorithm | Supported Key Strengths (in bits) | Description |
 | --- | --- | --- |
 | _aes_ | 128, 192, and 256 | Advanced Encryption Standard (AES). |
-| _tripledes_ | Triple Data Encryption Standard | Triple Data Encryption Standard. This algorithm uses two keys for encryption and one key for decryption. The algorithm works as follows:`encryptedtext = EK3(DK2(EK1(text to be encrypted)))`The text is encrypted with _key1_, decrypted with _key2_, and then again encrypted with _key3_. Decryption is the reverse:`decryptedtext = DK3(EK2(DK1(text to be decrypted)))`_tripledes_ applies the DES cipher algorithm three times to each data block.The following are the three different combinations of using this algorithm:**Option 1**: K1, K2, and K3 are different (all three keys are independent)**Option 2**: K1 and K2 are different; K3=K1 (two keys are independent)**Option 3**: K1=K2=K3 (all three keys are identical)> **_Note:_** Volt MX Iris recommends using _Option 1_ as it is more secure than the other two options. |
+| _tripledes_ | Triple Data Encryption Standard | Triple Data Encryption Standard. This algorithm uses two keys for encryption and one key for decryption. The algorithm works as follows:<br><br>`encryptedtext = EK3(DK2(EK1(text to be encrypted)))`<br><br>The text is encrypted with _key1_, decrypted with _key2_, and then again encrypted with _key3_. Decryption is the reverse:<br><br>`decryptedtext = DK3(EK2(DK1(text to be decrypted)))`<br><br>_tripledes_ applies the DES cipher algorithm three times to each data block.<br><br>The following are the three different combinations of using this algorithm:<br><br>&nbsp;&nbsp;&nbsp;&nbsp;• **Option 1**: K1, K2, and K3 are different (all three keys are independent)<br>&nbsp;&nbsp;&nbsp;&nbsp;• **Option 2**: K1 and K2 are different; K3=K1 (two keys are independent)<br>&nbsp;&nbsp;&nbsp;&nbsp;• **Option 3**: K1=K2=K3 (all three keys are identical)<br><br>**_Note:_** Volt MX Iris recommends using _Option 1_ as it is more secure than the other two options. |
 
 ### Asymmetric Algorithms
 
@@ -129,6 +129,6 @@ SPA does not support the RSA algorithm.
 
 To view the functionality of the Cryptography API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.  
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/tree/master/CryptographyAPI)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/CryptographyAPI)
 
 ![](resources/prettify/onload.png)

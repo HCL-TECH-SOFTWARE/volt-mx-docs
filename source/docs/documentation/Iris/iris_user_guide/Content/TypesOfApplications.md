@@ -21,13 +21,12 @@ The characteristics of each of the application types are summed up in the follow
  
 
   
-| **Characteristics** | **Application Type** ||||
+|**Characteristics** ||  **Application Type** |||
 | --- | --- | --- | --- | --- |
-| **Native** | **Hybrid** | **SPA** | **Desktop Web** |
-| --- | --- | --- | --- |
-| Is available as a natively deployable package (.app , .apk, .bar, .xap, and .ipa) | Yes | Yes | No | No |
+|| **Native** | **Hybrid**  | **SPA** | **Desktop Web** |
+| Is available as a natively deployable package (.app , .apk, .bar, .xap, and .ipa) | Yes | Yes | No | No |   
 | Uses the native widgets, such as the title bar, application menu, ListView, TableView, Search bar, and so on. | Yes | No | No | No |
-| Has access to native device functions like GPS, Camera, Contacts, Accelerometer, Encryption libraries (and thousands of other native SDK functions) | **Yes** | **[YesNative SDK functions are accessed using JavaScript bindings.](javascript:void(0);)[1Native SDK functions are accessed using JavaScript bindings.](javascript:void(0);)** | [YesOnly the APIs exposed and implemented as part of the HTML5 specification.](javascript:void(0);)[2Only the APIs exposed and implemented as part of the HTML5 specification.](javascript:void(0);) | [YesOnly GPS is supported.](javascript:void(0);)[3Only GPS is supported.](javascript:void(0);) |
-| Can be distributed through the app stores (Apple App Store, Google Play, and Windows Phone App Marketplace) | **Yes** | **Yes** | No | No |
-| UI elements (forms, images, and internationalization content) are packaged along with the application | Yes | **Yes** | No | No |
-| Server access only for downloading data | Yes | **Yes** | **[YesAfter the first page is downloaded, the application accesses the server only to fetch business data.](javascript:void(0);)[4After the first page is downloaded, the application accesses the server only to fetch business data.](javascript:void(0);)** |   |
+| Has access to native device functions like GPS, Camera, Contacts, Accelerometer, Encryption libraries (and thousands of other native SDK functions) | Yes | [Yes]( "Native SDK functions are accessed using JavaScript bindings." ) | [Yes]( "Only the APIs exposed and implemented as part of the HTML5 specification." ) | [Yes]( "Only GPS is supported." ) |
+| Can be distributed through the app stores (Apple App Store, Google Play, and Windows Phone App Marketplace) | Yes | Yes | No | No |
+| UI elements (forms, images, and internationalization content) are packaged along with the application | Yes | Yes | No | No |
+| Server access only for downloading data | Yes | Yes | [Yes]( "After the first page is downloaded, the application accesses the server only to fetch business data." ) |  |

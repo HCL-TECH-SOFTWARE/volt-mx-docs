@@ -8,6 +8,8 @@ category: "iris_user_guide"
 Build Native Local on Volt MX Iris
 ========================================
 
+> **_Note:_** Volt MX 9.2 does not support the building of Windows native applications. Please disregard all references to Windows in this topic.
+
 Overview
 --------
 
@@ -90,15 +92,13 @@ You can generate native apps even for the Universal channel by selecting a platf
 
 To understand any build failures, you can go through the log file. To understand Run and Publish actions related to this type of Build, refer [Post Successful Build](#post-successful-build).
 
-![](Resources/Images/GenNativeLoc_371x467.png)
+<img src="Resources/Images/GenNativeLoc_371x467.png" alt="" style="width: 85%">
 
 ### Publish to my App Store
 
 The Publish to my App Store action generates native app binaries and publishes the application to your Enterprise App Store. After a successful publish, a confirmation window appears, which shares a link to view the Enterprise app store on your device.
 
 To publish an app to the Enterprise App Store, logging in to your Volt MX Account is mandatory.
-
-![](Resources/Images/LocalBuild_EASPub_345x431.png)
 
 > **_Note:_** You cannot build apps for the universal channel using this option.
 
@@ -117,7 +117,7 @@ If you connect your device to the system after selecting the post build action, 
 
 Use the **Clear History** option to clear out old entries of devices that are not connected to the system.
 
-![](Resources/Images/LocalBuild_RunOnDev_361x455.png)
+<img src="Resources/Images/LocalBuild_RunOnDev_361x455.png" alt="" style="width:85%">
 
 Once this action is completed, by default Android devices launch the app. Whereas, for iOS devices you need to explicitly launch the app by tapping on the app icon.
 
@@ -138,6 +138,8 @@ To build an application, follow these steps:
 *   **Protected Mode** \- Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.  
     If you choose to build an application in **Protected mode**, then setting the public and private keys is mandatory. To do so, go to **Project Settings** > **Protected Mode**. For more details on how to generate public and private keys, click [here](ApplicationSecurity.html#rsa-key-pair-generation-encryption-and-usage).
 *   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
+
+7. If you do not use the deprecated SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check **Strict Mode**. If you use any of those algorithms, leave **Strict Mode** unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
 
 8.  Click **Build**. The build generation begins.
 
@@ -162,3 +164,4 @@ Once the build is completed, the details of the generated binaries are provided 
 *   Click **View Logs** to view the build related logs.
 
 > **_Note:_** When an application is built for the Windows platform, the Publish and Run options are inactive.
+

@@ -57,7 +57,7 @@ If you use the live preview feature to view your app, follow these steps to crea
 4.  Click **Save and Run**.  
     The app launches on the device. The **Iris Preview** window appears.
 5.  In Iris, from the **Project** Explorer, go to **Test Resources** > **Jasmine**.
-6.  Expand the required <channel>, right-click on **Test Cases** or any of the sub folders and select **Create a Test Case**.  
+6.  Expand the required < channel >, right-click on **Test Cases** or any of the sub folders and select **Create a Test Case**.  
     The **Test Case Recorder** window appears.  
       
     ![](Resources/Images/TestCaseRecorder_688x361.png)  
@@ -108,7 +108,7 @@ In this case, follow these steps to create a test case:
     Once the build is completed, the app is launched on the device.
     
 6.  In Iris, from the **Project** Explorer, go to **Test Resources** > **Jasmine**.
-7.  Expand the required <channel>, right-click on **Test Cases** or any of the sub folders and select **Create a Test Case**.  
+7.  Expand the required < channel >, right-click on **Test Cases** or any of the sub folders and select **Create a Test Case**.  
     The **Test Case Recorder** window appears.  
       
     ![](Resources/Images/TestCaseRecorder_688x361.png)  
@@ -149,7 +149,7 @@ Using the Test Recorder, you can edit a test case while creating the test case o
 
 **To edit a recorded test case, follow these steps:**
 
-1.  From the Project explorer, navigate to **Test Resources** > **Jasmine** > **<channel>** > **Test Cases**.
+1.  From the Project explorer, navigate to **Test Resources** > **Jasmine** > **< channel >** > **Test Cases**.
 2.  Right-click a test case and click **Open in Test Recorder**.  
     The **Test Case Recorder** window appears.  
     
@@ -272,7 +272,7 @@ Further to the ability to change the test case using the Test Case Recorder wind
 
 **To edit a test case manually, follow these steps:**
 
-1.  In Iris, from the **Project** explorer, navigate to **Test Resources** > **Jasmine** > **<channel>** > **Test Cases**.
+1.  In Iris, from the **Project** explorer, navigate to **Test Resources** > **Jasmine** > **< channel >** > **Test Cases**.
 2.  Right-click the test case that you want to edit manually.
 3.  Select **Edit Test Case**.  
     The corresponding JavaScript file opens in the Iris canvas.  
@@ -322,7 +322,7 @@ The following topics describe how you can create and run a test suite.
     By using the **up** and **down** icons, you can change the sequence to the order in which you want the test cases to run.  
     If you want to remove a test case from the test suite, select the test case and click the **delete** icon.
 6.  Type a name in the **Suite Name** box and click **Create**.  
-    A new <testSuite.js> file is created in the **Test Suites** folder.
+    A new < testSuite.js > file is created in the **Test Suites** folder.
 
 You have successfully created a test suite. To edit the test suite, navigate to the Project explorer, right-click on the test suite and select **Edit Test Suite**. Once the modifications are done, click **Save**.  
 
@@ -333,8 +333,8 @@ After creating a test suite, run the test suite to play the all the test cases a
 **Follow these steps to run a test suite:**
 
 1.  From the Project explorer, navigate to **Test Resources** > **Jasmine**.
-2.  Expand any <channel> and go to **Test Suites**.
-3.  Select a <testSuite.js> file.
+2.  Expand any < channel > and go to **Test Suites**.
+3.  Select a < testSuite.js > file.
 4.  Right-click on the file and select **Run**.  
     The **VoltMX Iris Test Suite Runner** window appears.  
       
@@ -380,7 +380,7 @@ You can create a new test plan from the Project explorer. Once a test pan is cre
     By using the **up** and **down** arrow icons, you can change the sequence to the order in which you want the test suites to run.  
     If you want to remove a test suite from the test plan, select the test suite and click the **delete** icon.
 6.  Type a name in the **Plan Name** box and click **Create**.  
-    The <PlanName.js> file is created in the **Test Plans** folder.
+    The < PlanName.js > file is created in the **Test Plans** folder.
 7.  If you want to edit the test plan that you have created, right-click on the file and select **Edit Test Plan**.  
     Click **Save** after the modifications are made.
 
@@ -419,7 +419,7 @@ While testing an application, you can create multiple test plans, but you can ru
 
 Follow these steps to execute a test plan:
 
-1.  From the Project Explorer, navigate to **Test Resources** > **Jasmine**\> **<Channel>** > **Test Plans**
+1.  From the Project Explorer, navigate to **Test Resources** > **Jasmine**\> **< Channel >** > **Test Plans**
 2.  From the **Test Plans** folder, open the `TestPlan.js` file.
 3.  In the `TestPlan.js` file, modify the default code in the following format.  
     {% highlight voltMx %}require([<Test Plans/ file>]);// Write the name of a test plan that you want to execute. 
@@ -433,7 +433,7 @@ By modifying the testPlan.js file, you can also run a group of test suites, with
 
 Follow these steps to invoke the require function for selected test suites:
 
-1.  From the Project Explorer, navigate to **Test Resources** > **Jasmine**\> **<Channel>** > **Test Plans**
+1.  From the Project Explorer, navigate to **Test Resources** > **Jasmine**\> **< Channel >** > **Test Plans**
 2.  From the **Test Plans** folder, open the `TestPlan.js` file.
     
 3.  In the `TestPlan.js` file, modify the default code in the following format.{% highlight voltMx %}// Consider a test plan with three test suites: test suite1, test suite2, and test suite3  
@@ -536,8 +536,8 @@ To create a new test case from the **Dashboard** window, follow these steps:
     
 11.  To play the recorded script, re-launch the app and click **Play**.
     
-    The recorded script plays in the **Iris Preview** window.  
-    You can view the result of the test case in the **Console** tab.
+    The recorded script plays in the Iris Preview window.  
+    You can view the result of the test case in the Console tab.
     
 
 Deploy the Test Resources

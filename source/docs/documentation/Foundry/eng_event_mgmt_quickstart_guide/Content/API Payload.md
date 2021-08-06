@@ -65,15 +65,15 @@ To view the API payload, follow these steps:
     
     The table below displays the input parameters used in the event payload:
     
-    | Input Parameter | Type | Description |
-    | --- | --- | --- |
-    | Event ID | long | The unique id assigned to an event |
-    | ksid | long | Volt MX Subscription Identification number of the application |
-    | ufid | string | The User Friendly Identifier or UFID is used when you subscribe to Volt MX Foundry Engagement Services. Based on your requirement, you can provide an UFID. It is alphanumeric, for example xxx@voltmx.com or 2890XZCY. It can be used to map devices to the user using the value as a reconciliation key |
-    | deviceId | long | A device identification, or deviceId, is a distinctive number associated with a device |
-    | Event Message | string | The event message in the text format |
-    | Event Name | string | The unique name assigned to an event |
-    | Event Name Value Pair | string | The unique name value pair assigned to an event. |
+| Input Parameter | Type | Description |
+| --- | --- | --- |
+| Event ID | long | The unique id assigned to an event |
+| ksid | long | Volt MX Subscription Identification number of the application |
+| ufid | string | The User Friendly Identifier or UFID is used when you subscribe to Volt MX Foundry Engagement Services. Based on your requirement, you can provide an UFID. It is alphanumeric, for example xxx@voltmx.com or 2890XZCY. It can be used to map devices to the user using the value as a reconciliation key |
+| deviceId | long | A device identification, or deviceId, is a distinctive number associated with a device |
+| Event Message | string | The event message in the text format |
+| Event Name | string | The unique name assigned to an event |
+| Event Name Value Pair | string | The unique name value pair assigned to an event. |
     
 4.  Click the **X** icon to close the window. The system displays the **View Event** screen.
     

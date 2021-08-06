@@ -365,6 +365,8 @@ Remarks
 
 This API takes up to three arguments. When invoked, the API returns and asynchronously attempts to obtain the current location of the device. The app on which this API is used must contain [runtime permission](runtime_permissions.html) from the end-user to obtain the current location of the device. If the API is invoked without obtaining the permission, device native platforms automatically display a system permission dialog box with **Allow** and **Deny** options. The end-user can grant permission to get the current location.
 
+>**_Note:_** When you test your application with Live Preview, the system permission dialog appears as expected. However, for published SPA and Desktop Web applications, the dialog box appears only when the application URL uses the https protocol. If the URL uses http, the dialog box does not appear, and location APIs will not work.
+
 In Android apps that use Target SDK version 29 (and later), and the **requireBackgroundAccess** property is enabled, you must manually add the `ACCESS_BACKGROUND_LOCATION` permission in the Android Manifest file to get location updates in the background.
 
 If the end-user taps the **Allow** option, the attempt is successful, the successCallback is invoked (i.e. the handleEvent operation must be called on the callback object) with a new Position object, reflecting the current location of the device. If the attempt fails, the errorCallback is invoked with a new PositionError object, reflecting the reason for the failure. This is applicable only for Android and iOS platforms.

@@ -41,7 +41,7 @@ For Android, make sure that the WRITE\_EXTERNAL\_STORAGE permission is defined u
 
 To view the functionality of the Runtime Permission API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.  
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/tree/master/RuntimePermissionAPI)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/RuntimePermissionAPI)
 
 Permission Model in different platforms
 ---------------------------------------

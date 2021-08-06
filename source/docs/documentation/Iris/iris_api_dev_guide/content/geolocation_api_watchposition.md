@@ -53,6 +53,6 @@ To get the current position of the device, use the **[voltmx.location.getCurrent
 
 To view the functionality of the GeoLocation API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.
 
-[![](resources/images/download_button_08__002__234x35.png)](https://docs.kony.com/konylibrary/visualizer/zip/sampleapps/LocationApp.zip)
+[![](resources/images/download_button_08__002__234x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/GeoLocationAPI)
 
 ![](resources/prettify/onload.png)

@@ -59,6 +59,6 @@ Further, you can record audio files using the record object. To start recording 
 
 To view the functionality of the Media API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.  
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/tree/master/Media API)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/Media%20API)
 
  ![](resources/prettify/onload.png)

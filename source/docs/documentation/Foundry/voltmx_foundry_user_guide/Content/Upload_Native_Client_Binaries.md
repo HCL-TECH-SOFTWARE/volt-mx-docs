@@ -9,12 +9,13 @@ User Guide: [Manage Client App Assets](Manage_Client_App_Assets.html) > [Uploadi
 Uploading Native Client Binaries to Volt MX Foundry
 --------------------------------------------------
 
+> **_Note:_** Volt MX 9.2 does not support the building of Windows native applications. Please disregard all references to Windows in this topic.
+
 To upload native client binaries to Volt MX Foundry, follow these steps:
 
 1.  In Volt MX Foundry Console, in the **Applications** page, click **Custom Apps** > **ADD NEW** to create an app. For more details, refer to [How to Add Applications](Adding_Applications.html).
 2.  In the app configuration page, click the **Manage Client App Assets** tab.
 3.  For uploading native client binaries, click the required tabs for platforms such as iOS, Android, and Windows. By default, **iOS** tab is selected.
-
 1.  Click **UPLOAD** for each the device type you want upload binaries.
 2.  In the Upload dialog, drag the binary file or click **Browse** to locate the binary file.
 

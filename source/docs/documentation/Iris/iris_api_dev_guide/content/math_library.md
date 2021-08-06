@@ -39,6 +39,6 @@ Find the largest and the smallest numbers from a given set of numbers, by using 
 
 To view the functionality of the Math API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.  
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/tree/master/MathAPI)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/MathAPI)
 
 ![](resources/prettify/onload.png)

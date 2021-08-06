@@ -61,18 +61,7 @@ To add an Integration Service Environment when the proxy is set at an App Server
 
 ### Network Settings Licensing
 
-The on-premises server should allow outbound requests to [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/) and allow inbound requests from our License servers (IPs, mentioned at the end, can be whitelisted in a customer’s firewall).
+If the on-premises Foundry server has outbound access to the HCL Cloud License Server, please use the Cloud License Server. Otherwise, set up the HCL Common Local License Server in your own network. You can use your HCL Software ID to download the installer for the HCL Common Local License Server from the HCL License and Download Portal ([https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/](https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/)), along with set-up instructions for [Linux](https://support.hcltechsw.com/csm?sys_kb_id=83893782db5cf410cc426275ca961958&id=kb_article_view&sysparm_rank=4&sysparm_tsqueryId=0ead29fb1b68b810a67e9759bc4bcb41) and [Windows](https://support.hcltechsw.com/csm?sys_kb_id=5a0832b6db98b050cc426275ca961958&id=kb_article_view&sysparm_rank=14&sysparm_tsqueryId=2a7531f71be8b810a67e9759bc4bcb9e).
 
-An on-premises Foundry 'development' or 'non-production' license can be activated without making the on-premises Identity URL available to our License servers. However, a 'production' license requires the Identity URL to be available to our License servers at the time of activation and thereafter as the license is validated on a weekly frequency. Each time that a production license is validated, the license validity is good for 30 days from the last successful validation. The Identity URL is expected to remain available to our License server for the entirety of their licensing term.
+If you use the local license server, the Foundry server must have access to that license server. In a production environment, you should sync your license server with the HCL Software Flexnet Operations site at least monthly.
 
-The Foundry Identity account tenant must be accessible on the internet. The Cloud license activation screen displays the Identity tenant configured in on-premise console. (For example, https:foundry.mycompany.com/authService)
-
-Cloud license activation flow appends “/accounts” to the Identity URL . (For example, https:foundry.mycompany.com/authService**/accounts**). The URL must be accessible on the public internet for license activation to work. The response of the URL should be “Welcome to Test Auth Service”.
-
-Communication from HCL' License servers will originate from the following IP addresses, which can be whitelisted in an organization's firewall configuration:
-
-*   54.208.192.84
-*   54.208.192.248
-
-*   [Database Prerequisites](DB_PRe-reqs.html)
-*   [Application Servers Prerequisites](AppServ_Prerequisites.html)

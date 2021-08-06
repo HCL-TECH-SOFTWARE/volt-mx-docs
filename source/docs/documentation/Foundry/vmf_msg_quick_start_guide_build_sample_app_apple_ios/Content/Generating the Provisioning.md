@@ -48,22 +48,22 @@ A provisioning profile is needed to identify the devices on which the developed 
 9.  Click **Continue**.
 10.  The **Select devices** page appears. Select the device on which you need to install the application.
     
-    ![](Resources/Images/seldevice_596x527.png)
+     ![](Resources/Images/seldevice_596x527.png)
     
 11.  Click **Continue.**
     
-    The **Name this profile and generate** page appears.
+     The **Name this profile and generate** page appears.
     
 12.  **Profile Name**: Enter the profile name and click **Continue** to create the provisioning profile for the selected certificate and the device.
     
-    ![](Resources/Images/namethepro_601x524.png)
+      ![](Resources/Images/namethepro_601x524.png)
     
-    The **Your provisioning profile is ready** page appears.
+     The **Your provisioning profile is ready** page appears.
     
 13.  Click **Download** to download the profile.
     
-    ![](Resources/Images/youprprread_594x515.png)
+     ![](Resources/Images/youprprread_594x515.png)
     
 14.  Click **Done**. The system displays the newly added provisioning profile in the list-view.
     
-    ![](Resources/Images/prostep11_594x136.png)
+     ![](Resources/Images/prostep11_594x136.png)

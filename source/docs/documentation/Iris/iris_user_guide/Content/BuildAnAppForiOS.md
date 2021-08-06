@@ -22,6 +22,8 @@ This topic covers the following topics:
 
 [Automatically Modify info.plist with Custom Key Value Pairs](#automatically-modify-info-plist-with-custom-key-value-pairs)
 
+[Using Application Reference Counting](#using-application-reference-counting)
+
 [Automatically Add Required System Frameworks to the XCode Project](#automatically-add-required-system-frameworks-to-the-xcode-project)
 
 [Build an App](#build-an-app)
@@ -51,6 +53,17 @@ To automatically modify info.plist with custom key value pairs, do the following
 4.  In Volt MX Iris, build the app.
 
 The json file is incorporated into the kar file. When the kar file is extracted, iOS incorporates the key value pairs in the json fie into `info.plist`.
+
+### Using Application Reference Counting
+
+Automatic Reference Counting (ARC) implements automatic memory management for Objective-C objects and blocks, freeing the programmer from the need to explicitly insert retains and releases.
+
+By default, all Volt MX frameworks are built with ARC. However, in final application projects, ARC is disabled, to ensure that existing non-ARC FFI's work without breaking. If your application does not use FFI's, or if all the used FFI's are ARC-compatible, enable ARC in the final Application by adding the following to `<WorkspaceName>\<ProjectName>\resources\common\infoplist_configuration.json`.
+
+{% highlight voltMx %}"BuildSettings" :
+    {
+        "enableARC" : true
+    }{% endhighlight %}
 
 ### Automatically Add Required System Frameworks to the XCode Project
 

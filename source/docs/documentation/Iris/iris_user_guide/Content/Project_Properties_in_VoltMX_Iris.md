@@ -8,6 +8,8 @@ category: "iris_user_guide"
 Project Settings in Volt MX Iris
 ======================================
 
+> **_Note:_** Volt MX 9.2 does not support the building of Windows native applications. Please disregard all references to Windows in this topic.
+
 The project settings in Volt MX Iris are categorized into the following broad sections:
 
 *   [Application](#application-settings)
@@ -156,7 +158,6 @@ For information on more configurations, refer [Native App Properties for Android
 ### Windows
 
 Using Windows Settings, you can configure General Application UI Settings and Capabilities for a Windows app.
-
 
 <details close markdown="block"><summary>Click to view the image</summary>
 

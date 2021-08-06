@@ -27,6 +27,6 @@ To know the current settings of the application, use the [voltmx.application.set
 
 To view the functionality of the Application Settings API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.  
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/tree/master/ApplicationSettingsAPI)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/ApplicationSettingsAPI)
 
 ![](resources/prettify/onload.png)

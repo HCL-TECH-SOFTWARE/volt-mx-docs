@@ -8,6 +8,8 @@ category: "iris_user_guide"
 Populate Screens with Widgets
 =============================
 
+> **_Note:_** Volt MX 9.2 does not support the building of Windows native applications. Please disregard all references to Windows in this topic.
+
 Widgets are the building blocks of a screen (form) in a digital application, and each one has a specific purpose, such as user interaction or animation. Volt MX Iris provides you with built-in widgets that help you achieve your required functionality. You can configure every widget based on your needs.
 
 This topic covers widgets for the Mobile, Tablet, and Desktop channels. For information regarding Watch widgets, see [Add Watch Widgets](AddAppleWatchWidgets.html).

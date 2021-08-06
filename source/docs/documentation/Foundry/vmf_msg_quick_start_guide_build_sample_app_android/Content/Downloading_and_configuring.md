@@ -60,6 +60,6 @@ To download and configure the Engagement demo client application, follow these s
     
 10.  **SDK Versions**: Choose **Target** and **Maximum** from the drop-down list for which the binary needs to be generated.
     
-    ![](Resources/Images/03000012_588x456.png)
+     ![](Resources/Images/03000012_588x456.png)
     
-    ![](Resources/Images/ProjectSettings.PNG)
+     ![](Resources/Images/ProjectSettings.PNG)

@@ -33,7 +33,8 @@ voltmx.crypto.asymmetricEncrypt(alias, inputstring, propertiesTable)
 | --- | --- |
 | alias \[String\] - Mandatory | You can generate the value of the alias parameter by using [generateAsymmetricKeyPair API.](#generateAsymmetricKeyPair) |
 | inputstring\[String/ RawBytes\] - Mandatory | The input text to be encrypted. > **_Note:_** RawBytes are only accepted on the Android platform. The content type of the RawBytes must be `voltmx.types.RawBytes.CONTENT_TYPE_CHAR_ARRAY` or `voltmx.types.RawBytes.CONTENT_TYPE_BYTE_ARRAY`. |
-| propertiesTable \[Object\] - Mandatory | The applicable values for this parameter are as follows: **transformation** (String): The cipher transformation to be used. Possible transformation values are as follows:For iOSRSA:rawRSA:PKCS1RSA:OAEP:SHA1RSA:OAEP:SHA224RSA:OAEP:SHA256RSA:OAEP:SHA384RSA:OAEP:SHA512RSA:OAEP:SHA1:AESGCMRSA:OAEP:SHA224:AESGCMRSA:OAEP:SHA256:AESGCMRSA:OAEP:SHA384:AESGCMRSA:OAEP:SHA512:AESGCMFor Android and Windows"RSA/ECB/PKCS1Padding""RSA/ECB/OAEPWithSHA-1AndMGF1Padding""RSA/ECB/OAEPWithSHA-224AndMGF1Padding""RSA/ECB/OAEPWithSHA-256AndMGF1Padding""RSA/ECB/OAEPWithSHA-384AndMGF1Padding""RSA/ECB/OAEPWithSHA-512AndMGF1Padding""RSA/ECB/OAEPPadding""RSA/NONE/NoPadding""RSA/NONE/PKCS1Padding""RSA/NONE/OAEPWithSHA-1AndMGF1Padding""RSA/NONE/OAEPWithSHA-224AndMGF1Padding""RSA/NONE/OAEPWithSHA-256AndMGF1Padding""RSA/NONE/OAEPWithSHA-384AndMGF1Padding""RSA/NONE/OAEPWithSHA-512AndMGF1Padding""RSA/NONE/OAEPPadding" |
+| propertiesTable \[Object\] - Mandatory | The applicable values for this parameter are as follows: **transformation** (String): The cipher transformation to be used. Possible transformation values are as follows:For iOS
+RSA:rawRSA:PKCS1RSA:OAEP:SHA1RSA:OAEP:SHA224RSA:OAEP:SHA256RSA:OAEP:SHA384RSA:OAEP:SHA512RSA:OAEP:SHA1:AESGCMRSA:OAEP:SHA224:AESGCMRSA:OAEP:SHA256:AESGCMRSA:OAEP:SHA384:AESGCMRSA:OAEP:SHA512:AESGCMFor Android and Windows"RSA/ECB/PKCS1Padding""RSA/ECB/OAEPWithSHA-1AndMGF1Padding""RSA/ECB/OAEPWithSHA-224AndMGF1Padding""RSA/ECB/OAEPWithSHA-256AndMGF1Padding""RSA/ECB/OAEPWithSHA-384AndMGF1Padding""RSA/ECB/OAEPWithSHA-512AndMGF1Padding""RSA/ECB/OAEPPadding""RSA/NONE/NoPadding""RSA/NONE/PKCS1Padding""RSA/NONE/OAEPWithSHA-1AndMGF1Padding""RSA/NONE/OAEPWithSHA-224AndMGF1Padding""RSA/NONE/OAEPWithSHA-256AndMGF1Padding""RSA/NONE/OAEPWithSHA-384AndMGF1Padding""RSA/NONE/OAEPWithSHA-512AndMGF1Padding""RSA/NONE/OAEPPadding" |
 
 ### Example
 
@@ -64,22 +65,16 @@ rawbytes \[Object\] - The rawbytes for the encrypted version of the input text.
 
 ### Limitations
 
-*   RSA can only encrypt data to a maximum amount of your keysize (256 bytes) – padding)/header data.
-*   keytype is not considered for Android.
-    
-*   transformation is not considered for Windows.
-    
-*   This API throws exceptions.
-    
-*   This API does not work on Android devices with API level earlier than 18.
-    
-*   On Android devices with API level 18 to 22 (both inclusive), only PKCS1Padding is supported ("RSA/ECB/PKCS1Padding" works on all devices with API level 18 and later).
-    
-*   Both PKCS1Padding and OAEPPadding are supported on Android devices with API level 23 and later.
-    
-*   OAEPPadding transformations are not supported on all Android devices, as there is no documentation from Android for this limitation.
-    
-*   For iOS, this API works on devices with iOS 10 or later.
+* If you build a Web or Native App with strict mode enabled, the SHA1, MD2, MD4, and MD5 hashing algorithms are not supported. If you use any of those algorithms in strict mode, you will receive an "Unsupported algorithm" error message.
+* RSA can only encrypt data to a maximum amount of your keysize (256 bytes) – padding)/header data.
+* keytype is not considered for Android.
+* transformation is not considered for Windows.
+* This API throws exceptions.
+* This API does not work on Android devices with API level earlier than 18.
+* On Android devices with API level 18 to 22 (both inclusive), only PKCS1Padding is supported ("RSA/ECB/PKCS1Padding" works on all devices with API level 18 and later).
+* Both PKCS1Padding and OAEPPadding are supported on Android devices with API level 23 and later.
+* OAEPPadding transformations are not supported on all Android devices, as there is no documentation from Android for this limitation.
+* For iOS, this API works on devices with iOS 10 or later.
 
 ### Platform Availability
 
@@ -135,6 +130,7 @@ Returns the decrypted/cipher text.
 
 ### Limitations
 
+* If you build a Web or Native App with strict mode enabled, the SHA1, MD2, MD4, and MD5 hashing algorithms are not supported. If you use any of those algorithms in strict mode, you will receive an "Unsupported algorithm" error message.
 *   transformation is not considered for Windows.
 *   keytype is not considered for Android
 *   This API does not work on Android devices with API level earlier than 18.
@@ -231,7 +227,7 @@ The `voltmx.crypto.createHash` function encrypts data by creating a hash of it. 
 | md4 | Message-Digest Algorithm 4 (MD4). |
 | md5 | Message-Digest Algorithm 5 (MD5). |
 
-  
+> **_Note:_** If you build a Web or Native App with strict mode enabled, the SHA1, MD2, MD4, and MD5 hashing algorithms are not supported. If you use any of those algorithms in strict mode, you will receive an "Unsupported algorithm" error message.
 
 > **_Note:_** md5, sha1, sha256, sha384, and sha512 are supported for Windows.
 
@@ -313,8 +309,6 @@ This function throws the following exceptions.
 
 The following table lists algorithms supported for each platform.
 
-> **_Note:_** From Volt MX IrisV8 release, the MD5 support is done through Java and not through the Bundle OpenSSL Library.
-
 >   
 > | Platform Name | Supported Algorithms |
 > | --- | --- |
@@ -322,7 +316,9 @@ The following table lists algorithms supported for each platform.
 > | Android OpenSSL Implementation (Bundle OpenSSL Library option is selected in Volt MX Iris) | MD5, SHA1, SHA224, SHA256, SHA384, SHA512 |
 > | iOS | MD5,SHA1,SHA224,SHA256,SHA384,SHA512 |
 
-  
+> **_Note:_** If you build a Web or Native App with strict mode enabled, the SHA1, MD2, MD4, and MD5 hashing algorithms are not supported. If you use any of those algorithms in strict mode, you will receive an "Unsupported algorithm" error message.
+
+> **_Note:_** From Volt MX IrisV8 release, the MD5 support is done through Java and not through the Bundle OpenSSL Library.
 
 On Android, the _Bundle OpenSSL Library_ option is available in the **Application Properties > Native > Android** section. If this option is selected, OpenSSL library is bundled along with the application and use by this function. If the _Bundle OpenSSL Library_ option is not selected in Volt MX Iris, the default Java implementation offered by the underlying native Android platform is used.
 
@@ -393,7 +389,9 @@ The following table shows the error codes for the exceptions that this function 
 
 ### Remarks
 
-> **_Note:_** voltmx.crypto.createPBKDF2Key API does not support md5 algorithm from Volt MX IrisV8 release.
+voltmx.crypto.createPBKDF2Key API does not support md5 algorithm from Volt MX IrisV8 release.
+
+If you build a Web or Native App with strict mode enabled, the SHA1, MD2, MD4, and MD5 hashing algorithms are not supported. If you use any of those algorithms in strict mode, you will receive an "Unsupported algorithm" error message.
 
 The Password-Based Key Derivation Function 2 (PBKDF2) is a key derivation function that generates encryption keys of different lengths to protect passwords.
 
@@ -747,6 +745,7 @@ Status of the key value generation.
 
 ### Limitations
 
+* If you build a Web or Native App with strict mode enabled, the SHA1, MD2, MD4, and MD5 hashing algorithms are not supported. If you use any of those algorithms in strict mode, you will receive an "Unsupported algorithm" error message.
 *   For iOS
     *   publicexponent, padding, digest, and mode are not considered for key generation.
     *   This API is supported on devices with iOS 10.0 or later.
@@ -898,6 +897,10 @@ The recommended key strengths are as follows for this API:
 ### Platform Availability
 
 Available on all platforms except J2ME.
+
+### Limitations
+
+* If you build a Web or Native App with strict mode enabled, the SHA1, MD2, MD4, and MD5 hashing algorithms are not supported. If you use any of those algorithms in strict mode, you will receive an "Unsupported algorithm" error message.
 
 * * *
 

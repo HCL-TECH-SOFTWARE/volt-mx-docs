@@ -59,20 +59,20 @@ To configure the Engagement demo application follow these steps:
 10.  Click the **Android** tab to display the Android screen.
 11.  **FCM Authorization Key**: Enter the **FCM Authorization Key** to install and run the Engagement demo application on Android devices. For more details about how to create the FCM Authorization Key, refer to, [Engagement Guide to build sample app for Android]({{ site.baseurl }}/docs/documentation/Foundry/vmf_msg_quick_start_guide_build_sample_app_android/Content/Introduction.html).
     
-    When the GCM/FCM  key is created, a project ID also is created for the project name. The project ID and the secret key ( GCM/FCM key) are used to configure Engagement server and to run the client application.
+     When the GCM/FCM  key is created, a project ID also is created for the project name. The project ID and the secret key ( GCM/FCM key) are used to configure Engagement server and to run the client application.
     
-    ![](Resources/Images/image008.png)
+     ![](Resources/Images/image008.png)
     
 12.  If the entered **FCM key** is correct, the system displays the confirmation message that the cloud connection is successful. Click **Ok** to continue.
 13.  Click **Save** to save the application.
     
-    The application appears on the **Apps** home page. In the example below, the newly added app is **TestApp**. The current status of the application is unpublished. You need to publish the app to receive push notifications.
+     The application appears on the **Apps** home page. In the example below, the newly added app is **TestApp**. The current status of the application is unpublished. You need to publish the app to receive push notifications.
     
-    ![](Resources/Images/image009_642x206.png)
+      ![](Resources/Images/image009_642x206.png)
     
 14.  On **AppForAll2**, in the upper-right corner, click the drop-down list and choose the **Publish** option to publish the application.
 15.  The system displays the **Publish Application** dialog, asking if you want to publish the app. Click **Yes** to continue.
     
-    ![](Resources/Images/image011_349x85.png)
+     ![](Resources/Images/image011_349x85.png)
     
-    The current status of the app changes to published.
+     The current status of the app changes to published.

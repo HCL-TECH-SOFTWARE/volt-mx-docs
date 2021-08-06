@@ -29,11 +29,12 @@ To configure your Mock Data Adapter, provide the following details:
 3.  For additional configuration of your service definition, provide the following details in the **Advanced** section:
     
       
-    | Field | Description |
-    | Custom Code | Custom Code enables you to specify dependent JAR. To specify dependent JAR, select the JAR containing preprocessor or postprocessor libraries from the drop-down list, or click **Upload New** to browse the JAR file from your local system. This step allows you to further filter the data sent to the back end. > **_Important:_** Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration.For example, if the JDK version on the machine where Volt MX Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appear when a service is used from a device. You can download the uploaded jars to your local system. |
-| Throttling | API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response. **To specify throttling in Volt MX Foundry Console, follow these steps:** In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your Volt MX Foundry console in terms of Total Rate Limit. In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.**To override throttling in App Services Console, refer to** [Override API Throttling   Configuration](API_Throttling_Override.html#OverrideAPIThrottling). |
+| Field | Description |
+| --- | --- |
+| Custom Code | Custom Code enables you to specify dependent JAR.<br> To specify dependent JAR, select the JAR containing preprocessor or postprocessor libraries from the drop-down list, or click **Upload New** to browse the JAR file from your local system. This step allows you to further filter the data sent to the back end.<br><br>**_Important:_** Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration.<br><br>For example, if the JDK version on the machine where Volt MX Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appear when a service is used from a device.<br><br> You can download the uploaded jars to your local system. |
+| Throttling | API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response.<br><br> 1. **To specify throttling in Volt MX Foundry Console, follow these steps:<br><br> i.** In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your Volt MX Foundry console in terms of Total Rate Limit.<br><br> ii. In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.<br><br>2. **To override throttling in App Services Console, refer to** [Override API Throttling   Configuration](API_Throttling_Override.html#OverrideAPIThrottling). |
     
-    > **_Note:_** All options in the Advanced section are optional.
+> **_Note:_** All options in the Advanced section are optional.
     
 4.  In the **Description** field, provide a suitable description for the service.
     
@@ -70,7 +71,7 @@ The **Operations List** tab appears only after the service definition is saved.
 | Field | Description |
 | --- | --- |
 | Name | It is prepopulated with the operation name. You can change the name if required. |
-| Operation Security Level | It specifies how a client must authenticate to invoke this operation.<br><br>**Select one of the following security operations in the **Operation Security Level** field.<br><br>**Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app. <br><br>**Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. <br><br>**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible. **Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.|
+| Operation Security Level | It specifies how a client must authenticate to invoke this operation.<br><br>**Select one of the following security operations in the Operation Security Level field.<br><br>i. Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app. <br><br>**ii. Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. <br><br>**iii. Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.<br><br>**iv. Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.|
 
 5.  Configure your Mock data template in the **Mock Data JSON Template** text field. By default this field is enabled with a sample mock response template.
     
@@ -107,15 +108,14 @@ Integration services accept only `form-url-encoded` inputs for all the input par
     3.  Configure parameters in the client's body, do the following:
         
         | Field | Description |
-        | --- | --- |
-        | Name | It Contains a Unique Identifier. Change the name if required. |
-        | Value | Select Request or Session. It is set to **Request** by default.
-        **Request** indicates that the value must be retrieved from the HTTP request received from the mobile device.**Session** indicates that the value must be retrieved from the HTTP session stored on Volt MX Foundry.**Identity**: If this is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html).|
-        | TEST VALUE | Enter a value. A test value is used for testing the service. |
-        | DEFAULT VALUE | Enter the value, if required. The default value will be used if the test value is empty. |
-        | Datatype |Select one of the following data types.**String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit.**Boolean** - A value that can be true or false.**Number** - An integer or a floating number.**Collection** - A group of data, also referred as data set.|
-        | Encode | Select the check box to enable encoding of an input parameter. For example, the name New York Times would be encoded as _New_York_Times_ when the encoding is set to True. The encoding must also adhere to the HTML URL encoding standards. |
-        | Description | Provide a suitable description. |
+        |  ---  |  ---  |
+        | Name   | It Contains a Unique Identifier. Change the name if required. |
+        | Value  | Select Request or Session. It is set to **Request** by default.<br><br>i. **Request** indicates that the value must be retrieved from the HTTP request received from the mobile device.<br><br>**ii. Session** indicates that the value must be retrieved from the HTTP session stored on Volt MX Foundry.<br><br>**iii. Identity** If this is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.html).| 
+        | TEST VALUE  | Enter a value. A test value is used for testing the service. |
+        | DEFAULT VALUE  | Enter the value, if required. The default value will be used if the test value is empty. |
+        | Datatype  |Select one of the following data types.<br><br>i. **String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit.<br><br>ii. **Boolean** - A value that can be true or false.**Number** - An integer or a floating number.<br><br>iii. **Collection** - A group of data, also referred as data set.|
+        | Encode  | Select the check box to enable encoding of an input parameter. For example, the name New York Times would be encoded as _New_York_Times_ when the encoding is set to True. The encoding must also adhere to the HTML URL encoding standards. |
+        | Description  | Provide a suitable description. |
         
 
 1.  In the **Request Input > Header** tab, do the following:

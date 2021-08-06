@@ -9,6 +9,8 @@ You are here: Important Considerations for Windows Phone
 Important Considerations for Windows Phone
 ==========================================
 
+> **_Note:_** Volt MX 9.2 does not support the building of Windows native applications. Please disregard all references to Windows in this topic.
+
 Install the app on Windows 8.1 or later. Next, launch the app and register it with Windows cloud and the Engagement services server.
 
 When an application is running:

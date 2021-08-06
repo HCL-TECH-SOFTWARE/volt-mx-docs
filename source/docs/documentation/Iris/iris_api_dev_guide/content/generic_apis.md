@@ -68,6 +68,6 @@ Add a record in a table using the [voltmx.nosql.addRecords](voltmx_functions.htm
 
 To view the functionality of the Standard Volt MX Iris API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.  
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/tree/master/StandardVoltMXAPI)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/StandardKonyAPI)
 
 ![](resources/prettify/onload.png)

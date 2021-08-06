@@ -4,13 +4,13 @@ category: "voltmx_foundry_release_notes"
 ---
                      
 
-Volt MX  Foundry
-
-Release Notes
+Volt MX  Foundry Release Notes
+================================
 
 This document contains content related to new features, enhancements, known issues, and limitations.
 
 Revision History
+----------------
 
   
 | **Date** | **Document Version** | **Description of Releases and Updates** |
@@ -32,7 +32,7 @@ Revision History
 | 04/20/2020 | 1.1 | Document published for [VoltMX Foundry V9.0.0.1 on MS Azure](Azure9.0.0.1GA.html) release. |
 | 04/06/2020 | 1.0 | Document published for [V9 GA](V9_Main.html) release. |
 
-Getting Started Options
+### Getting Started Options
 
 *   [Foundry User Guide]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Introduction.html): Helps you understand a basic set of back-end services in Volt MX Foundry. Explains about Console, Identity, Integration Services, API Developer Portal, and Engagement Services.
 *   [Installer Guide Windows]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Introduction.html): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, API Developer Portal, and Engagement Services on Windows using an installer program.

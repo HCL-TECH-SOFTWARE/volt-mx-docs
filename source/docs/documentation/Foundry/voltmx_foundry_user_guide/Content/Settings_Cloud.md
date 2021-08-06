@@ -232,33 +232,38 @@ To apply filters and view specific user activities of an account, follow these s
     
     *   **Object Type**: From the drop-down list, select the options for which you want to view the audit logs.  
         
-        [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)The drop-down list contains the following options:](javascript:void(0);)
+        <details close markdown="block"><summary>The drop-down list contains the following options:</summary>
         
         *   Apps
             
         *   Services
-            
+
         *   Users
+            
+        </details>
+        
             
         
     *   **Action**: From the drop-down list, select the options for which you want to view the audit logs.  
         
-        [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)The drop-down list contains the following options:](javascript:void(0);)
+        <details close markdown="block"><summary>The drop-down list contains the following options:
+        </summary>
         
         *   Create
-            
+
         *   Modify
+
         *   Delete
-        *   Publish
-            
-        *   Unpublish
-            
+        
+        *   Publish            
+                            
+        </details> 
         
     *   **Object Name**: Enter the name of the object, such as the app name, service name or the email ID of the user.
     *   **Modified By**: Enter the email ID of the user that performed the actions.
     *   **Modified On**: From the drop-down list, select the date range for which you want to view the activities.  
         
-        [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)The drop-down list contains the following options:](javascript:void(0);)
+        <details close markdown="block"><summary>The drop-down list contains the following options:</summary>
         
         *   Today
             
@@ -272,11 +277,11 @@ To apply filters and view specific user activities of an account, follow these s
             
         *   Last Month
             
-        *   Custom Range
-            
-            For the **Custom Range** option, select the start date and the end date from the date range picker.
-            
-        
+        *   Custom Range 
+
+            For the **Custom Range** option, select the start date and the end date from the date range pick.
+
+           </details>
 3.  Click Apply to display the logs based on the filters.
 
 To download the audit logs, click the **Download log** button and select the required option, such as PDF and Excel.

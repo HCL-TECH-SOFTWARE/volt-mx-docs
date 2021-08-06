@@ -7,14 +7,5 @@ category: "voltmx_licensing_guide"
 License Deactivation
 ====================
 
-License will be deactivated based on the expiry date.
+Your license is deactivated on the expiration date. When the expiration date is 30 or fewer days away, a notification dialog box appears above the console on each launch.
 
-[Open topic with navigation](../Content/License_Deactivation.html)
-
-Comments
-
-[Reply](#)
-
- 
-
-</div> <input class="comment-submit" type="button" value="Submit" > </div> </div> </body> <.html></x-turndown>

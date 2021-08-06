@@ -103,7 +103,7 @@ You can export the data displayed into CSV format. To export the data, perform t
     
 > **_Note:_** The exported CSV has `|(pipe)` as a delimiter.
     
-    ![](Resources/Images/CSV_format.png)
+![](Resources/Images/CSV_format.png)
     
 > **_Note:_** From V9 Service Pack 1, two new columns to represent 90th percentile (P90) and 95th percentile (P95) are added.
     
@@ -243,15 +243,18 @@ To enable notifications at different levels, perform the following actions.
     
 <details close markdown="block"><summary>Click here to view sample email alert for Critical and Warning threshold.</summary>
     
-    **Sample email alert for Critical Threshold**
+**Sample email alert for Critical Threshold**
     
-    ![](Resources/Images/Threshold/Sample_Critical_539x463.png)
+![](Resources/Images/Threshold/Sample_Critical_539x463.png)
     
-    **Sample email alert for Warning threshold**
-    
-    ![](Resources/Images/Threshold/Sample_Warning_531x455.png)
+**Sample email alert for Warning threshold** 
+
+![](Resources/Images/Threshold/Sample_Warning_531x455.png)
+
     
 </details>
+
+
 
 ### Configuring Email Alerts (On-Premises)
 

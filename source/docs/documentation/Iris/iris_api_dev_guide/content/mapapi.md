@@ -32,24 +32,222 @@ The route searching capabilities of underlying platforms varies as each platform
 
 Here are the list of request parameters available for all platforms.
 
-| Parameter | Description | Android | iOS |
-| --- | --- | --- | --- |
-| origin \[JSObject\] \[Mandatory\] \[All\] | Source address or latitude/ longitude values for which you want to get the route details. If both lat/lon and address are mentioned, the lat/lon values are considered. Address is supported only in Android & iOS.Ex: searchCriteria = {origin : {lat:17.499467, lon: 78.386760, address= "9225 Bee Cave Rd, Austin, TX 78746"} }; | Y | Y |
-| destination \[JSObject\] \[Mandatory\] \[All\] | Destination address or latitude/ longitude values for which you want to get the route details. If both lat/lon and address are mentioned, the lat/lon values are considered. Address is supported only in Android. Ex: searchCriteria = { destination : {lat:17.499467, lon: 78.386760, address= "9225 Bee Cave Rd, Austin, TX 78746"} }; | Y | Y |
-| transportMode \[String\] \[Optional\] \[All\] | Mode of the transport used to calculate the directions. Here are the list of supported modes by platform. Driving – Applies to Android, iOS, and Windows Walking – Applies to Android, iOS, and Windows Bicycling – Applies to Android only Transit – applies to Android only If transportMode is not specified, underlying platforms assumes the default values. Here are the default values assumed by each platform in the absense of mode key.iOS: AnyAndroid: DrivingWindows: DrivingIf an unsupported mode is received, platforms fallback on default mode. | Y | Y |
-| directionServiceUrl \[String\] \[Mandatory\] \[Android\] | URL that the Android platform uses to fetch direction details from Google Direction API service. Google offers two URLs (secure/ non-secure) for the direction service. You can use any one of them as required. Google Direction Service URLs: "https://maps.googleapis.com/maps/api/directions/json" > **_Note:_** If the application is using SSL pinning (Allow Self Signed certificates – Only Bundled), the application must obtain the certificate for the URL and bundle along with the other pinned certificates. You must be cautious about the validity of the bundled certificate as Google certificates have a limited validity period. This requirement is not applicable from Iris V8 SP4 onwards. | Y | N |
-| waypoints \[Array\] \[Optional\] \[Android, Win\] | Specifies an array of waypoints. A waypoint is specified as either a latitude/ longitude coordinate or as an address. Number of legs returned in resultant routes depends on the number of waypoints specified. If no waypoint is specified, single leg is returned covering the entire route. Since this property is not supported for iOS, search results always contains single leg for each route for iOS. For example, searchCriteria = {… waypoints:\[{lat:17.495106, lon:78.324235}, {lat:17.495024, lon:78.345263}\] …}; > **_Note:_** Google Map restriction for Android allows up to 8 waypoints for Google Map free API and 23 waypoints for Google Map for Work in each request. Waypoints are not available for transit directions.> **_Note:_** iOS core OS does not have direct support for waypoints. To support, Volt MX iOS platform need to make multiple MapKit API calls internally. | Y | N |
-| alternatives \[Boolean\] \[Optional\] \[All\] | Boolean flag to indicate whether to search for alternative routes or not. If true, search results may contain more than one route. Searching for alternative routes may increase the response time. For example, searchCriteria = {… alternatives:true …} | Y | Y |
-| avoid \[Array\] \[Optional\] \[Android,Win\] | Indicates that the calculated route(s) should avoid certain features.tolls, highways, ferries - avoided in iOS and Windows.tunnels, dirtroad, motorrail - avoided in Windows, but not in Android.Indoor is avoided in Android, but not in Windows. | Y | N |
-| departureTime \[Number\] \[Optional\] \[Android, iOS\] | Desired time of departure in seconds which is calculated since January 1, 1970 UTC. This property is applicable for Android when transportMode is transit.For example, searchCriteria = {… departureTime : …}> **_Note:_** Both departureTime and arrivalTime should not present search criteria for Android. | Y | Y |
-| arrivalTime \[Number\] \[Optional\] \[Android, iOS\] | Desired time of arrival in seconds which is calculated since January 1, 1970 UTC. This property is applicable for Android when transportMode is transit.For example, searchCriteria = {… arrivalTime : …}> **_Note:_** Both departureTime and arrivalTime should not present search criteria for Android. | Y | Y |
-| language \[String\] \[Optional\] \[Android\] | Specifies the language in which you want to return results. If the language is not set, the service will attempt to use the native language of the domain from which the request is sent. A list of latest supported language codes can be found [here](https://developers.google.com/maps/faq#languagesupport). For example, searchCriteria = {… language = “fr” …} | Y | N |
-| region \[String\] \[Optional\] \[Android\] | Specify ccTLD country code to get the search results biased to the specified region. For more info about region specifications refer [here](https://developers.google.com/maps/documentation/directions/intro#RegionBiasing). For example, searchCriteria = {… region : “es” …} | Y | N |
-| transitMode \[Array\] \[Optional\] \[Android\] | Specifies one or more preferred modes of transit. This parameter may only be specified for transit directions, and only if the request includes an API key or a Google Maps API for Work client ID. The parameter supports the following arguments:bus: indicates that the calculated route should prefer travel by bus.Subway: indicates that the calculated route should prefer travel by subway.train: indicates that the calculated route should prefer travel by train.tram: indicates that the calculated route should prefer travel by tram and light rail.rail: indicates that the calculated route should prefer travel by train, tram, light rail, and subway. This is equivalent to transit\_mode=train|tram|subway.Ex : searchCriteria = {… transitMode : \[“bus”,”tram”\] …}; | Y | N |
-| transitRoutingPreference \[Array\] \[Optional\]\[Android\] | Specifies preferences for transit routes. This parameter may only be specified for transit directions, and only if the request includes an API key or a Google Maps API for Work client ID. The parameter supports the following arguments: less\_walking: indicates that the calculated route should prefer limited amounts of walking.fewer\_transfers : indicates that the calculated route should prefer a limited number of transfers.routeOptimization \[String\] \[Optional\] \[Windows\] : Route optimization criteria. Here are the supported values. | Y | N |
-| apiKey \[String\] \[Optional\] \[Android\] | Google Maps V2 api key that the Google Direction API uses to determine your usage quota and rate limits. If you do not have a key, you can obtain one [here](https://developers.google.com/maps/documentation/directions/get-api-key). | Y | N |
-| clientID \[String\] \[Optional\] \[Android\] | Use clientID to access the special features of the Google Maps API for Work along with the signature property. More details about acquiring and using clientID can be found [here](https://developers.google.com/maps/documentation/business/webservices/auth).> **_Note:_** You must mention the apiKey or \[clientID + signature\], otherwise, the request will fail. apiKey and clientID are mutually exclusive and using both in the same request causes the route search to fail. | Y | N |
-| signature \[String\] \[Optional\] \[Android\] | Use signature to access the special features of the Google Maps API for Work along with clientID property. More details about acquiring and using signature can be found [here](https://developers.google.com/maps/documentation/business/webservices/auth). | Y | N |
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Android</th>
+<th>iOS</th>
+</tr>
+<tr>
+<td>origin [JSObject] [Mandatory] [All]</td>
+<td>
+<p></p>
+<p>Source address or latitude/ longitude values for which you want to get the route details. If both lat/lon and address are mentioned, the lat/lon values are considered. Address is supported only in Android & iOS.</p> <p>Ex: searchCriteria = {origin : {lat:17.499467, lon: 78.386760, address= "9225 Bee Cave Rd, Austin, TX 78746"} };</p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>destination [JSObject] [Mandatory] [All]</td>
+<td>
+<p></p>
+<p>Destination address or latitude/ longitude values for which you want to get the route details. If both lat/lon and address are mentioned, the lat/lon values are considered. Address is supported only in Android.</p>
+<p>Ex: searchCriteria = { destination : {lat:17.499467, lon: 78.386760, address= "9225 Bee Cave Rd, Austin, TX 78746"} };</p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>transportMode [String] [Optional] [All]</td>
+<td>
+<p></p>
+<p>Mode of the transport used to calculate the directions. Here are the list of supported modes by platform.</p>
+<ul>
+<li>Driving – Applies to Android, iOS, and Windows</li>
+<li>Walking – Applies to Android, iOS, and Windows</li>
+<li>Bicycling – Applies to Android only</li>
+<li>Transit – applies to Android only</li>
+</ul>
+<p>If transportMode is not specified, underlying platforms assumes the default values. Here are the default values assumed by each platform in the absense of mode key.</p>
+<ul>
+<li>iOS: Any</li>
+<li>Android: Driving</li>
+<li>Windows: Driving</li>
+</ul>
+<p>If an unsupported mode is received, platforms fallback on default mode.</p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>directionServiceUrl [String] [Mandatory] [Android]</td>
+<td>
+<p></p>
+<p>URL that the Android platform uses to fetch direction details from Google Direction API service. Google offers two URLs (secure/ non-secure) for the direction service. You can use any one of them as required.</p>
+<p>Google Direction Service URLs: "https://maps.googleapis.com/maps/api/directions/json"</p>
+<p><blockquote><em>Note:</em> If the application is using SSL pinning (Allow Self Signed certificates – Only Bundled), the application must obtain the certificate for the URL and bundle along with the other pinned certificates. You must be cautious about the validity of the bundled certificate as Google certificates have a limited validity period. This requirement is not applicable from Visualizer V8 SP4 onwards.</blockquote></p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+<tr>
+<td>waypoints [Array] [Optional] [Android, Win]</td>
+<td>
+<p></p>
+<p>Specifies an array of waypoints. A waypoint is specified as either a latitude/ longitude coordinate or as an address. Number of legs returned in resultant routes depends on the number of waypoints specified. If no waypoint is specified, single leg is returned covering the entire route. Since this property is not supported for iOS, search results always contains single leg for each route for iOS.</p>
+<p>For example, searchCriteria = {… waypoints:[{lat:17.495106, lon:78.324235}, {lat:17.495024, lon:78.345263}] …};</p>
+<p><blockquote><em>Note:</em> Google Map restriction for Android allows up to 8 waypoints for Google Map free API and 23 waypoints for Google Map for Work in each request. Waypoints are not available for transit directions.</blockquote></p>
+<p><blockquote><em>Note:</em> iOS core OS does not have direct support for waypoints. To support, Volt MX iOS platform need to make multiple MapKit API calls internally.</blockquote></p>
+<p></p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+<tr>
+<td>alternatives [Boolean] [Optional] [All]</td>
+<td>
+<p></p>
+<p>Boolean flag to indicate whether to search for alternative routes or not. If true, search results may contain more than one route. Searching for alternative routes may increase the response time.</p>
+<p>For example, searchCriteria = {… alternatives:true …}</p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>avoid [Array] [Optional] [Android,Win]</td>
+<td>
+<p></p>
+<p>Indicates that the calculated route(s) should avoid certain features.</p>
+<ul>
+<li>tolls, highways, ferries - avoided in iOS and Windows.</li>
+<li>tunnels, dirtroad, motorrail - avoided in Windows, but not in Android.</li>
+<li>Indoor is avoided in Android, but not in Windows.</li>
+</ul>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+<tr>
+<td>departureTime [Number] [Optional] [Android, iOS]</td>
+<td>
+<p></p>
+<p>Desired time of departure in seconds which is calculated since January 1, 1970 UTC. This property is applicable for Android when transportMode is transit.</p>
+<p>For example, searchCriteria = {… departureTime : …}</p>
+<p><blockquote><em>Note:</em> Both departureTime and arrivalTime should not present search criteria for Android.</blockquote></p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>arrivalTime [Number] [Optional] [Android, iOS]</td>
+<td>
+<p></p>
+<p>Desired time of arrival in seconds which is calculated since January 1, 1970 UTC. This property is applicable for Android when transportMode is transit.</p>
+<p>For example, searchCriteria = {… arrivalTime : …}</p>
+<p><blockquote><em>Note:</em> Both departureTime and arrivalTime should not present search criteria for Android.</blockquote></p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>language [String] [Optional] [Android]</td>
+<td>
+<p></p>
+<p>Specifies the language in which you want to return results. If the language is not set, the service will attempt to use the native language of the domain from which the request is sent. A list of latest supported language codes can be found <a href="https://developers.google.com/maps/faq#languagesupport">here</a>.</p>
+<p>For example, searchCriteria = {… language = “fr” …}</p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+<tr>
+<td>region [String] [Optional] [Android]</td>
+<td>
+<p></p>
+<p>Specify ccTLD country code to get the search results biased to the specified region. For more info about region specifications refer <a href="https://developers.google.com/maps/documentation/directions/overview#RegionBiasing">here</a>.</p>
+<p>For example, searchCriteria = {… region : “es” …}</p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+<tr>
+<td>transitMode [Array] [Optional] [Android]</td>
+<td>
+<p></p>
+<p>Specifies one or more preferred modes of transit. This parameter may only be specified for transit directions, and only if the request includes an API key or a Google Maps API for Work client ID. The parameter supports the following arguments:</p>
+<ul>
+<li>bus: indicates that the calculated route should prefer travel by bus.</li>
+<li>Subway: indicates that the calculated route should prefer travel by subway.</li>
+<li>train: indicates that the calculated route should prefer travel by train.</li>
+<li>tram: indicates that the calculated route should prefer travel by tram and light rail.</li>
+<li>rail: indicates that the calculated route should prefer travel by train, tram, light rail, and subway. This is equivalent to transit_mode=train|tram|subway.</li>
+</ul>
+<p>Ex : searchCriteria = {… transitMode : [“bus”,”tram”] …};</p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+<tr>
+<td>transitRoutingPreference [Array] [Optional][Android]</td>
+<td>
+<p></p>
+<p>Specifies preferences for transit routes. This parameter may only be specified for transit directions, and only if the request includes an API key or a Google Maps API for Work client ID.</p>
+<p>The parameter supports the following arguments:</p>
+<ul>
+<li>less_walking: indicates that the calculated route should prefer limited amounts of walking.</li>
+<li>fewer_transfers : indicates that the calculated route should prefer a limited number of transfers.</li>
+<li>routeOptimization [String] [Optional] [Windows] : Route optimization criteria. Here are the supported values.</li>
+</ul>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+<tr>
+<td>apiKey [String] [Optional] [Android]</td>
+<td>
+<p></p>
+<p>Google Maps V2 api key that the Google Direction API uses to determine your usage quota and rate limits. If you do not have a key, you can obtain one <a href="https://developers.google.com/maps/documentation/directions/get-api-key">here</a>.</p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+<tr>
+<td>clientID [String] [Optional] [Android]</td>
+<td>
+<p></p>
+<p>Use clientID to access the special features of the Google Maps API for Work along with the signature property. More details about acquiring and using clientID can be found <a href="https://developers.google.com/maps/documentation/directions/get-api-key#client-id">here</a>.</p>
+<p><blockquote><em>Note:</em> You must mention the apiKey or [clientID + signature], otherwise, the request will fail. apiKey and clientID are mutually exclusive and using both in the same request causes the route search to fail.</blockquote></p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+<tr>
+<td>signature [String] [Optional] [Android]</td>
+<td>
+<p></p>
+<p>Use signature to access the special features of the Google Maps API for Work along with clientID property. More details about acquiring and using signature can be found <a href="https://developers.google.com/maps/documentation/directions/get-api-key#client-id">here</a>.</p>
+<p></p>
+</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+</table>
 
  
 
@@ -165,6 +363,6 @@ iOS does not support directions in all countries. For a list of countries where
 
 To view the functionality of the Map API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/tree/master/MapAPI)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/MapAPI)
 
 ![](resources/prettify/onload.png)

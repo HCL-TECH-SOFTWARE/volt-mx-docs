@@ -35,25 +35,33 @@ To add a segment, follow these steps:
     
 3.  The **Define Conditions** list view contains the following fields:
     *   **Conditions**: Click **Add** to add a new condition row. A new condition is added with a number under the **Conditions** column in the grid, such as **Condition 2**.  
+
+
         ![](Resources/Images/conditions_705x149.png)  
-        The condition numbers are references to the user attributes associated with that condition. For example, **Condition 1** refers to the **First Name** user attribute. The numbered conditions can be used to define different combinations for a segment.
+        
+
+    The condition numbers are references to the user attributes associated with that condition. For example, **Condition 1** refers to the **First Name** user attribute. The numbered conditions can be used to define different combinations for a segment.
+
     *   **Attributes**: Under the **Attributes** column, select the attribute from the drop-down list. You can select any user attributes as required. For example, First Name, Last Name, Email, Country, State, Location, Beacon, and any dynamic user attribute.
+
+       
+    ![](Resources/Images/attributes.png)
+
+       
+    For more information on **User Attribute** types, refer to [Adding User Attributes]({{ site.baseurl }}/docs/documentation/Foundry/vms_console_user_guide/Content/Administration/Adding_Attributes_to_Audience.html).
+          
         
-        ![](Resources/Images/attributes.png)
+    ### Beacons
         
-        For more information on **User Attribute** types, refer to [Adding User Attributes]({{ site.baseurl }}/docs/documentation/Foundry/vms_console_user_guide/Content/Administration/Adding_Attributes_to_Audience.html).
+     For the user attribute as **Beacon**, select the beacon from the drop-down list under the **Value** column.
         
-        ### Beacons
+    ![](Resources/Images/attributebeacon_680x106.png)
         
-        For the user attribute as **Beacon**, select the beacon from the drop-down list under the **Value** column.
-        
-        ![](Resources/Images/attributebeacon_680x106.png)
-        
-        ### Geofence
+    ### Geofence
         
     *   For the user attribute as **Location**, select the location from the drop-down list under the **Value** column. For more information on how to add geolocations and beacons, refer to [Engagement > Geofence.]({{ site.baseurl }}/docs/documentation/Foundry/vms_console_user_guide/Content/Geolocation/Geo_Location.html)
         
-        ![](Resources/Images/attributelocation.png)
+      ![](Resources/Images/attributelocation.png)
         
     *   **Operator**: Under the **Operators** column, select the required operator from the drop-down list. You can compare a user attribute with a value by using a specified operator such as **Contains**, **Equal**, or **NotEqual**. The following table describes operators that you can use to define a segment.
         
@@ -98,9 +106,10 @@ To add a segment, follow these steps:
     If conditional logic is not used correctly, the system displays the error message that the segment criterion is invalid. The system displays a confirmation message if the logic is correct. The message states that the validation is successful. 
 10.  Click **OK** to continue.
     
-    The system displays the **Add Segment** screen. The number of added users appears under the **Users** column.
+     The system displays the **Add Segment** screen. The number of added users appears under the **Users** column.
     
-    ![](Resources/Images/defineadvanceconditions.png)
+     ![](Resources/Images/defineadvanceconditions.png)
+     
 11.  Click the **Cancel** button to exit from the window without saving any information.   
     The system displays the **Segments** home page.
 12.  Click the **Save** button.  

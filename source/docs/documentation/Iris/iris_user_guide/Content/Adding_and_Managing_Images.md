@@ -244,12 +244,9 @@ Following are some particulars for managing Android image folders: 
     *   **drawable-<orientation>** when you have resources specific to orientation only. Possible values for orientation are land and port. For example, if you want to add a resource for landscape orientation, then create a drawable-land folder and place the resource in drawable-land folder.
     *   **drawable-<screen-pixel-density>** when you have resources specific to resolution or screen-pixel-density only. Possible values for screen-pixel-density are ldpi, mdpi, hdpi, xhdpi, and nodpi. For example, if you want to add a resource for hdpi pixel density, then create a drawable-hdpi folder and place the resource in drawable-hdpi folder.
 
-> **_Note:_**
-
-To copy the contents into the generated native android root project, create a new folder with the name **RootFolderContents** in the following locations based on the build channel:
-
-*   For mobile devices: <workspace>/<app>/resources/mobile/native/android/
-*   For tablet devices: <workspace>/<app>/resources/tablet/native/androidtab/
+> **_Note:_** To copy the contents into the generated native android root project, create a new folder with the name **RootFolderContents** in the following locations based on the build channel:
+* For mobile devices: <workspace>/<app>/resources/mobile/native/android/
+* For tablet devices: <workspace>/<app>/resources/tablet/native/androidtab/
 
 If you have resources specific to a combination of the above folder, you must follow precedence rules and name the folders appropriately. The precedence rules are as follows:
 

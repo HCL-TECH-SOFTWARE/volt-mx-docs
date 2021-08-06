@@ -46,17 +46,94 @@ Following are the formatting conventions used throughout the document:
 
 
 <details close markdown="block"><summary>Click here</summary>
+    
+<table>
+<tr>
+<th>Conventions</th>
+<th>Explanation</th>    
+</tr>
+<tr>
+<td>
+<tt>Monospace</tt>
+</td>
+<td>
+<ul>
+<li>User input text, system prompts, and responses</li>
+<li>File path</li>
+<li>Commands</li>
+<li>Program code</li>
+<li>File names</li>
+</ul>
+</td>
+</tr>
 
-  
-| Conventions | Explanation |
-| --- | --- |
-| Monospace | User input text, system prompts, and responses File path Commands Program code File names |
-| _Italic_ | Emphasis Names of books and documents New terminology |
-| **Bold** | Windows Menus Buttons Icons Fields Tabs Folders |
-| [URL](http://a/) | Active link to a URL. |
-| _Note_ | Provides helpful hints or additional information. |
-| _Important_ | Highlights actions or information that might cause problems to systems or data. |
+<tr>
+<td>
+<em>Italic</em>
+</td>
+<td>
+<ul>
+<li>Emphasis</li>
+<li>Names of books and documents</li>
+<li>New terminology</li>
+</ul>
+</td>
+</tr>
+
+<tr>
+<td>
+<strong>Bold</strong>
+</td>
+<td>
+<ul>
+<li>Windows</li>
+<li>Menus</li>
+<li>Buttons</li>
+<li>Icons</li>
+<li>Fields</li>
+<li>Tabs</li>
+<li>Folders</li>
+</ul>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="">URL</a>
+</td>
+<td>
+<p></p>
+<p>Active link to a URL.</p>
+<p></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<blockquote><em>Note</em></blockquote>
+</td>
+<td>
+<p></p>
+<p>Provides helpful hints or additional information.</p>
+<p></p>
+</td>
+</tr>
+
+<tr>
+<td style="color:red;">
+<strong><em>Important</em></strong>
+</td>
+<td>
+<p></p>
+<p>Highlights actions or information that might cause problems to systems or data.</p>
+<p></p>
+</td>
+</tr>
+</table>
+    
 </details>
+
+
 Contact Us
 ----------
 

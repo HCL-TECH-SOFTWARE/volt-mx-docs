@@ -55,26 +55,26 @@ To configure the Engagement demo application follow these steps:
     *   **GCM/FCM Authorization Key**: Enter the **GCM/FCM** authorization key. The **GCM/FCM** key is required to send push notifications to apps.
 11.  Click **Test Connectivity with Cloud** to verify the entered key.
     
-    ![](Resources/Images/image063_584x421.png)
+     ![](Resources/Images/image063_584x421.png)
     
 12.  If the entered GCM/FCM key is correct, the system displays the confirmation message that the cloud connection is successful. Click **Ok** to continue.
 13.  Click **Save** to save the application.
     
-    The application appears on the Apps home page. In the example below, the newly added app is **TestApp**. The current status of the application is unpublished. You need to publish the app to receive push notifications.
+     The application appears on the Apps home page. In the example below, the newly added app is **TestApp**. The current status of the application is unpublished. You need to publish the app to receive push notifications.
     
-    ![](Resources/Images/image069_582x311.png)
+     ![](Resources/Images/image069_582x311.png)
     
 14.  On TestApp, in the upper-right corner, click the drop-down list and choose the **Publish** option to publish the application.
     
-    ![](Resources/Images/image072_579x289.gif)
+     ![](Resources/Images/image072_579x289.gif)
     
 15.  The system displays the **Publish Application** dialog box asking, if you want to publish the application. Click **Yes** to continue.
     
-    ![](Resources/Images/image073_580x142.png)
+     ![](Resources/Images/image073_580x142.png)
     
-    The current status of the app changes to published.
+     The current status of the app changes to published.
     
-    ![](Resources/Images/image075_581x312.png)
+     ![](Resources/Images/image075_581x312.png)
     
 
   

@@ -102,7 +102,7 @@ Here are the guidelines:
 
 **Mobile**:
 
-<WorkSpace>\\<App>\\resources\\mobile\\common\\raw
+\<WorkSpace\>\\\<App\>\\resources\\mobile\\common\\raw
 
 **Tablet**:
 

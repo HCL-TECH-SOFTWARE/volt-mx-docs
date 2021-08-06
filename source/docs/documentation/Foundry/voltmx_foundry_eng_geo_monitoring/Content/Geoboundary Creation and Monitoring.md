@@ -92,32 +92,36 @@ You have already reviewed the setup of the geoboundaries in the Engagement serve
     *   Enter the location name as `TestWithCustomBusinessLogi`c.
     *   Enter the description as needed.
     *   Choose the **Custom Business Logic** as the client action. The system displays a text area where the java script that need to be executed on the client application is entered.  
-        You can just enter an alert or a more complex code as shown below. So when this geoboundary is monitored by a client application, the application can execute this code on the client and display the notification. Enter **OrlandoLocation** as the tag value.
+    You can just enter an alert or a more complex code as shown below. So when this geoboundary is monitored by a client application, the application can execute this code on the client and display the notification. Enter **OrlandoLocation** as the tag value.
     *   Click **Save** to save the geoboundary.
+
         
-        ![](Resources/Images/figure11_556x351.png)
+    ![](Resources/Images/figure11_556x351.png)
         
     
     Although a simple alert message can be used for your testing, more complex functionality with JavaScript can be configured for a geoboundary with the **Custom Business Logic** as client action. The code below reads metadata of a geoboundary like **StoreOpenTime** and **StoreCloseTime**. The below code provides a welcome message with a coupon, if the customer comes after the store is open else shows the time when the store will open.
-    
-    *   `var startTime = res.metaData["startTime"].split(' ');`
-    *   `var closeTime = res.metaData["closeTime"].split(' ');`
-    *   `var startDate = new Date();`
-    *   `startDate.setHours(startTime[0]);`
-    *   `startDate.setMinutes(startTime[1]);`
-    *   `startDate.setSeconds(startTime[2]);`
-    *   `var closeDate = new Date();`
-    *   `closeDate.setHours(closeTime[0]);`
-    *   `closeDate.setMinutes(closeTime[1]);`
-    *   `closeDate.setSeconds(closeTime[2]);`
-    *   `var currentDate = new Date();`
-    *   `if((currentDate <= closeDate && currentDate >= startDate)) alert("Welcome to the Store. Please avail 10% coupon on all items");`
+
+    {% highlight voltMx %}
+    var startTime = res.metaData["startTime"].split(' ');
+    var closeTime = res.metaData["closeTime"].split(' ');
+    var startDate = new Date();
+    startDate.setHours(startTime[0]);
+    startDate.setMinutes(startTime[1]);
+    startDate.setSeconds(startTime[2]);
+    var closeDate = new Date();
+    closeDate.setHours(closeTime[0]);
+    closeDate.setMinutes(closeTime[1]);
+    closeDate.setSeconds(closeTime[2]);
+    var currentDate = new Date();
+    if((currentDate <= closeDate && currentDate >= startDate)) alert("Welcome to the Store. Please avail 10% coupon on all items");
         
-        else
+    else
         
-    *   `alert("Store is currently closed. Will reopen at " + startTime);`
+    alert("Store is currently closed. Will reopen at " + startTime);
+    {% endhighlight %}
+
     
-    That’s it! You have created and saved three geoboundaries with different client actions.
+That’s it! You have created and saved three geoboundaries with different client actions.
     
 
 Geoboundary Monitoring Flow
@@ -139,11 +143,16 @@ This section discusses the flow and the steps involved in monitoring the geoboun
     
     ![](Resources/Images/figure13_597x708.png)
     
-    1.  The framework that is monitoring the geoboundaries will inform the SDK via the call back function that a particular geoboundary has entered or exited.
-    2.  The SDK will check the client action associated with the geoboundary that has entered or exited.
-        *   If the client action is to show the local notification, the SDK will work with the framework to display the local notification on the device.
-        *   If the client action is to notify the Engagement server, the SDK will update the device location. If there is a location based campaign in the Engagement server, then a notification will be sent by the Engagement server to the device if the applications were to qualify.
-        *   If the client action is to execute custom client logic then the SDK will communicate with the framework to execute the client logic of the application on the device.
+1.  The framework that is monitoring the geoboundaries will inform the SDK via the call back function that a particular geoboundary has entered or exited.
+
+2.  The SDK will check the client action associated with the geoboundary that has entered or exited.
+
+    *   If the client action is to show the local notification, the SDK will work with the framework to display the local notification on the device.
+
+    *   If the client action is to notify the Engagement server, the SDK will update the device location. If there is a location based campaign in the Engagement server, then a notification will be sent by the Engagement server to the device if the applications were to qualify.
+
+    *   If the client action is to execute custom client logic then the SDK will communicate with the framework to execute the client logic of the application on the device.
+        
 3.  The SDK will also recognize when the device/application crosses the refresh boundary and at that time will retrieve the new list of geoboundaries.
 4.  When the device has crossed the refresh boundary, a set of geoboundaries are retrieved and passed to the framework to monitor.
 

@@ -49,8 +49,10 @@ Usage Guidelines
     }`
 4.  You can refer [Google Test and Deploy](https://developers.google.com/pay/api/test-and-deploy) for more information on testing and deployment.
 
+<!--
 For a more hands-on approach on the respective features of various Payments APIs, import and preview the **VoltMX Payments Feature** sample app by using Volt MX Iris.
 
 [![](resources/images/download_button_10_230x35.png)](https://github.com/kony/PaymentsApp-SP3-Enhancements)
 
 ![](resources/prettify/onload.png)
+-->

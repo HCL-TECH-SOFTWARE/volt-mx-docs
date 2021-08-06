@@ -39,17 +39,20 @@ To use NON-SSO login, the Login Type must be set to NON-SSO in connection proper
 
 **To configure your SAP JCO Service in the [](Configure the Service.html)[Integration Service Definition](Configure the Service.html#IntegrationSDpage) tab, follow these steps:**
 
-*   In the **Service Name** field, enter a unique name for your service.
-*   From the **Service Type** list, select **SAP JCO**.  
+1.   In the **Service Name** field, enter a unique name for your service.
+2.   From the **Service Type** list, select **SAP JCO**.  
     By default, XML is selected. If you select **SAP JCO**, the **Connection Parameters** section appears.
-*   Provide the following details to create a SAP JCO Service:
+3.  Provide the following details to create a SAP JCO Service:  
+   
     
     | Fields | Description |
     | --- | --- |
-    | Connection Parameters | --- |
+    | Connection Parameters | [Connection Parameters field description](#connection-parameters-field-description) |
     | Authentication | Use existing Identity Provider. Select SAP JCO Identity provider from the list. |
     
-    <details close markdown="block"><summary>Fill in the details for the following fields.</summary>
+    #### Connection Parameters field description
+    
+    <details close markdown="block"><summary>Fill in the details for the following Connection parameter fields.</summary>
         
     * **Server Name** -Enter a unique server name to assign for an SAP connection.
     *   **SAP application server host** - Enter the application server IP address.
@@ -65,10 +68,16 @@ To use NON-SSO login, the Login Type must be set to NON-SSO in connection proper
         **Portal Host** - Enter the SAP portal server IP address.
         **Portal Port** - Enter the SAP portal server port address
     *   **SAP Router String** - Enter the address of the SAP router that is used to connect to a provider system.
-    *   **Advanced Properties** - Specify a JSON variable with SAP Client Properties and corresponding values. For example, to set the pool capacity value, specify the JSON as { 'jco.destination.pool\_capacity': <pool capacity> }.
+    *   **Advanced Properties** - Specify a JSON variable with SAP Client Properties and corresponding values. For example, to set the pool capacity value, specify the JSON as { 'jco.destination.pool\_capacity': <pool capacity> }. 
+    
+    [SAP client properties](#sap-client-properties) 
+
     *   **Test Connection**: Select the **Environment** from the list and click **Test Connection** to validate the user data.
         
     </details>
+    
+
+    #### SAP client properties
 
     <details close markdown="block"><summary>Following are few SAP client properties.</summary>
         
@@ -126,7 +135,7 @@ To use NON-SSO login, the Login Type must be set to NON-SSO in connection proper
     
     </details>
 
-*   <details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the Advanced section.</summary> 
+     <details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the Advanced section.</summary> 
       
     | Field | Description |
     | --- | --- |
@@ -137,8 +146,8 @@ To use NON-SSO login, the Login Type must be set to NON-SSO in connection proper
 
     > **_Note:_** Additional configurations in the advanced section are optional.
 
-*   In the **Description** field, provide a suitable description for the service.
-*   Click **Save** to save your service definition.
+3.   In the **Description** field, provide a suitable description for the service.
+4.   Click **Save** to save your service definition.
 
 
 ### Create Operations for SAP JCO

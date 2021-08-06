@@ -1331,6 +1331,48 @@ frmHome.widgetID.left = "10px";
 * * *
 
 </details>
+<details close markdown="block"><summary>limitsNavigationsToAppBoundDomains Property</summary>
+
+* * *
+
+The iOS App-Bound Domains feature limits the tracking risk of in-app browsing, by restricting domain access by the app to those you specify. To use the feature, you add the WKAppBoundDomains key to `<projectDirectory>/resources/common/infoplist_configuration.json`and supply an array of domain name strings as the value. Here is a sample infoplist_configuration.json file entry to set app bound domains.
+```
+{ 
+   "WKAppBoundDomains" : ["https://www.ExampleDomainl.com", "https://www.ExampleDomain2.com", "https://www.ExampleDomain3.com"]
+}
+``` 
+
+By default, Browser widgets with Browser Type = WKWebView can use JavaScript injection, custom style sheets, cookie manipulation, and message handlers. However, once you add "WKAppBoundDomains" to infoplist_configuration.json, all WKWebView Browser instances in the app lose these capabilities. To restore access to these APIs, set limitsNavigationsToAppBoundDomains to true in the Browser widget configuration.
+
+> **_Note:_**  You can also access the limitsNavigationsToAppBoundDomains property through code as part of the pspConfig Object. However, you can only enable (or add) this property when you create the Browser widget instance. You cannot change the value of this property after the Browser widget is initialized. 
+
+### Syntax
+
+limitsNavigationsToAppBoundDomains 
+
+### Type
+
+Boolean
+
+### Read/Write
+
+Read Only
+
+### Remarks
+
+The default value of this property is false. 
+
+### Example
+
+```limitsNavigationsToAppBoundDomains = true;```
+
+### Platform Availability
+
+*   iOS 14 and later versions
+
+* * *
+
+</details>
 <details close markdown="block"><summary>maxHeight Property</summary>
 
 * * *
@@ -2743,7 +2785,7 @@ frmBrowser.myBrowser.zoomDensity=0;
 
 {% endhighlight %}
 
-Platform Availability
+### Platform Availability
 
 Available on Android
 

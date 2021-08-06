@@ -67,11 +67,11 @@ The section explains how to configure email and SMS service providers using the 
         
 10.  Click the **SMS Configuration** tab. Choose **Twilio** as the SMS service provider.
     
-    You need to sign up with **Twilio** for a free trial or a paid account so that the **Account SID**, **Auth Token**, **Account Name**, and the **Host URL** are provided. The **SMS Configuration** screen can vary based on the SMS service provider chosen. The screen below assumes that **Twilio** is chosen as the service provider.
+     You need to sign up with **Twilio** for a free trial or a paid account so that the **Account SID**, **Auth Token**, **Account Name**, and the **Host URL** are provided. The **SMS Configuration** screen can vary based on the SMS service provider chosen. The screen below assumes that **Twilio** is chosen as the service provider.
     
-    ![](Resources/Images/image083_577x443.png)
+     ![](Resources/Images/image083_577x443.png)
     
-    *   For TWILIO, enter details for the following fields:
+     *   For TWILIO, enter details for the following fields:
         1.  **Account SID**: TWILIO provides you a unique Account SID for your account. Enter the Account SID in the Account SID field.
         2.  **Auth Token**: TWILIO provides you a unique Auth Token for your account. Enter the Auth Token in the Auth Token field.
         3.  **From**: Enter the phone number or client identifier that initiated the call. Phone numbers are formatted with a + sign and a country code, such as +16175551212. The client identifiers begin with the client URL scheme. For example, for a call from a client named xxxx, the From parameter is `client:xxxx`.
@@ -82,6 +82,6 @@ The section explains how to configure email and SMS service providers using the 
         8.  Click **Test Connection** to check if the connectivity is successful. The system displays the notification that connection is successful. Click **OK** to continue.
 
   
-| Rev. | Author | Edits |
-| --- | --- | --- |
-| 7.3.2 | AU | AU |
+        | Rev. | Author | Edits |
+        | --- | --- | --- |
+        | 7.3.2 | AU | AU |

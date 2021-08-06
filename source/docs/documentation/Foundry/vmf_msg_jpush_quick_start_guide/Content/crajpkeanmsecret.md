@@ -68,10 +68,10 @@ To create a JPush key, follow these steps:
     The **Create an application** page appears.
     
 10.  Enter details for the following fields:
-    *   **Application Information**:
+       **Application Information**:
         *   **Application Name**: Enter a name of the application.
         *   **Application Icon**: To provide an icon for the application, click the **Select the File** button to browse the icon from its location. The selected icon name appears next to the **Select the File** button.
-    *   **Android**:
+      **Android**:
         
         *   **Application Name**: Enter the application package name such as `com.example.BankingApp.`
         
@@ -81,14 +81,14 @@ To create a JPush key, follow these steps:
         
 11.  Click the **Create my app** button to continue.
     
-    The **Application Details** page appears. The **Application Details** page displays the **Appkey** and the **Master Secret**.
+      The **Application Details** page appears. The **Application Details** page displays the **Appkey** and the **Master Secret**.
     
-    ![](Resources/Images/NewJPush/image6_606x543.png)
+     ![](Resources/Images/NewJPush/image6_606x543.png)
     
 12.  Record the **Appkey** and the **Master Secret** for your reference.
 13.  To view the **Master Secret**, click the **Master Secret** button.
     
-    ![](Resources/Images/NewJPush/image7.png)
+     ![](Resources/Images/NewJPush/image7.png)
     
 14.  If you need to modify the app, click the **Modify the application** button to continue.
 15.  The **Apply settings** page appears.
@@ -97,8 +97,8 @@ To create a JPush key, follow these steps:
 16.  Update the application, if required. You can change the app name and the application icon.
 17.  Click **Save** to update the application details.
     
-    ![](Resources/Images/NewJPush/image8_593x512.png)
+     ![](Resources/Images/NewJPush/image8_593x512.png)
     
 18.  Click the drop-down list at the upper-left corner of the page to view all the applications.
     
-    ![](Resources/Images/NewJPush/image9_600x348.png)
+     ![](Resources/Images/NewJPush/image9_600x348.png)

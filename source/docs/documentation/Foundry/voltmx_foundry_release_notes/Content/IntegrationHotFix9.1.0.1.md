@@ -15,7 +15,7 @@ Fixed Issues
 *   Fixed an issue where the loading of MVL initialization property by moving it to the startup of the runtime.  
     
 
-Upgrade Instructions:
+### Upgrade Instructions:
 
 *   **For Cloud**: Raise a cloud upgrade request.
 *   **For On-Premises**:  
@@ -31,9 +31,9 @@ Upgrade Instructions:
     4.  Update the middleware plugins in Iris.
     5.  Restart the server.
 *   **For Azure**
-    *   Download and use the 9.1.0.2 docker image instance. You must raise a request to upgrade to this version.
+    *   Download and use the 9.1.0.2 docker image instance. You must raise a request to upgrade to this version.  
 
-Upgrade Instructions for SDK fix:
+### Upgrade Instructions for SDK fix:
 
 *   Download and use the SDK plug-in version **V9 ServicePack1 Fixpack 5** for this fix.
 

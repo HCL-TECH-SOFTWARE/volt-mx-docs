@@ -19,12 +19,13 @@ Sharing data between parent thread and worker threads is done through message pa
 
 The current specification is inspired from and based on HTML5 Web Worker threads standard, that use _Message Passing_ model or mechanism for communication between threads.
 
-   
+<blockquote><em>Note:</em> To use AWS in workerthreads, you must follow these steps.
+<ol>
+<li>Copy all AWS related files from <b>&lt;workspace&gt;</b>/<b>&lt;appname&gt;</b>/<b>cloudsdks</b> folder into the <b>&lt;workspace&gt;</b>/<b>&lt;appname&gt;</b>/<b>workerthreads</b> folder of the project. This is because while importing the AWS files using Iris, the Volt MX HttpRequest and DOMParser related code are added to the AWS files. These modified files are then saved in the <b>cloudsdks</b> folder by Iris.</li>
+<li>After the files have been copied, use the <code>require(&lt;aws files&gt;)</code>code in the workerthread.js file to import all the AWS files into worker threads context.<br/>AWS objects must be created in the worker thread. Any object created in the regular thread will not work in the worker thread.</li>
+</ol>
+</blockquote>   
 
-> **_Note:_** To use AWS in workerthreads, you must follow these steps.  
-1\. Copy all AWS related files from **<workspace>/<appname>/cloudsdks** folder into the **<workspace>/<appname>/workerthreads** folder of the project. This is because while importing the AWS files using Iris, the Volt MX HttpRequest and DOMParser related code are added to the AWS files. These modified files are then saved in the **cloudsdks** folder by Iris.  
-2\. After the files have been copied, use the `require(<aws files>)`code in the `workerthread.js` file to import all the AWS files into worker threads context.  
-AWS objects must be created in the worker thread. Any object created in the regular thread will not work in the worker thread.
 
 The Worker Thread API contains the following API Elements:
 
@@ -49,28 +50,32 @@ Scope
 -----
 
 1.  Volt MX Iris platform version >= 5.6.2.
+
 2.  Support for JavaScript.
+
 3.  Supported mobile Platforms:
-    1.  iOS
-    2.  Android
-    3.  SPA: Supported List of browsers starting from versions.
-4.  Supported List of Browsers
 
-**SPA**
+    a.  iOS
 
-| iOS | Android Native | Android Chrome | Windows |
-| --- | --- | --- | --- |
-| 5.0-5.1 | 4.4 | 33.0 | 10 |
+    b.  Android
 
-**DesktopWeb**
+    c.  SPA: Supported List of browsers starting from versions.
 
-| IE | Firefox | Chrome | Safari |
-| --- | --- | --- | --- |
-| 10.0 | 4.0 | 20 | 5.0 |
+4.  Supported List of Browsers  
 
- 
+    **SPA**
 
-9.  Windows
+    | iOS | Android Native | Android Chrome | Windows |
+    | --- | --- | --- | --- |
+    | 5.0-5.1 | 4.4 | 33.0 | 10 |
+
+    **DesktopWeb**
+
+    | IE | Firefox | Chrome | Safari |
+    | --- | --- | --- | --- |
+    | 10.0 | 4.0 | 20 | 5.0 |  
+    
+5.  Supported List of Browsers 
     
 
 Introduction to Constructor - WorkerThread()
@@ -86,29 +91,30 @@ Introduction to Constructor - WorkerThread()
 
 The scenarios of using _WorkerThread()_ constructor are as follows:
 
-*   The _WorkerThread()_ constructor creates a new worker thread and returns a handle to the new worker thread, which can be used by the parent thread for any further communication with the worker thread.
+*   The _WorkerThread()_ constructor creates a new worker thread and returns a handle to the new worker thread, which can be used by the parent thread for any further communication with the worker thread.<br/>
+Creating a worker thread requires a JavaScript file name or a functional module name. The _WorkerThread()_ constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned:
     
-    Creating a worker thread requires a JavaScript file name or a functional module name. The _WorkerThread()_ constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned:
-    
-    > var worker = new voltmx.worker.WorkerThread('helper.js');
-    > 
-    > var worker = new voltmx.worker.WorkerThread('functionModuleName');
+    <pre><code style="display:block;background-color:#eee;">
+    var worker = new voltmx.worker.WorkerThread('helper.js');
+    var worker = new voltmx.worker.WorkerThread('functionModuleName');
+    </code></pre>
+
     
 *   A _message_ event handler can be registered with the worker by parent thread to receive messages from the worker thread.
     
-    > worker.addEventListener("message", function (event) { ... });
+    <code> worker.addEventListener("message", function (event) { ... }); </code>
     
 *   To send data from parent to a worker, _postMessage()_ method can be used from parent.
     
-    > worker.postMessage({ operation: 'find-edges', input: 'buffer', threshold: 0.6 } );
+    <code> worker.postMessage({ operation: 'find-edges', input: 'buffer', threshold: 0.6 } );</code>
     
 *   To send messages back from worker thread to parent thread scope, _postMessage()_ can be used.
     
-    > postMessage({'msg':'Data'});
+    <code> postMessage({'msg':'Data'});</code>
     
 *   To receive a messages inside the worker thread from parent thread, the _message_ event handler can be registered using _addEventListener()_ inside worker thread.
     
-    > self.addEventListener( "message", function (event) { ... });
+    <code> self.addEventListener( "message", function (event) { ... });</code>
     
 
 ### Worker Thread Life Cycle
@@ -477,24 +483,163 @@ Global resources in the App context will not be available in the worker thread c
 
 Every worker has its own context of execution, which is not shared between the parent and its worker. As a result the global variables in parent scope are not available in worker scope and vice versa.
 
-<table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"><col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Not Supported APIs</th><td class="TableStyle-Basic-BodyD-Column1-Body1">VoltMX UI APIs and UI object handlesApp Global variables</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyB-Column1-Body1">Supported APIs and Platform</th><td class="TableStyle-Basic-BodyA-Column1-Body1"><table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"><col class="TableStyle-Basic-Column-Column1"><col class="TableStyle-Basic-Column-Column1"><col class="TableStyle-Basic-Column-Column1"><col class="TableStyle-Basic-Column-Column1"><col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">String API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyE-Column1-Body1">SPA</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Desktop Web</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Math API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyE-Column1-Body1">SPA</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Desktop Web</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Table API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyE-Column1-Body1">SPA</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Desktop Web</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Standard Volt MX API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyD-Column1-Body1" colspan="2">Limited Availability* For SPA and Desktop Web, the following APIs are supported:voltmx.convertToBase64voltmx.convertToRawBytesvoltmx.typevoltmx.props.getPropertyvoltmx.print() is not supported in Safari.VoltMX.print() is supported in Mozilla from version 29.0.</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Network API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyD-Column1-Body1" colspan="2">For SPA&nbsp;and DesktopWeb:&nbsp;Limited Availability The following API will not be available in SPA &amp; Desktop Web. voltmx.net.setNetworkCallbacks</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1" rowspan="2">Offline Data Access API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">Local Storage</td><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyD-Column1-Body1">&nbsp;</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Web SQL</td><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyD-Column1-Body1">SPA&nbsp;and DesktopWeb</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Operating System API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyD-Column1-Body1" colspan="2">* For SPA and Desktop Web, the following APIs are NOT supported:voltmx.os.addHiddenField voltmx.os.readHiddenFieldvoltmx.os.startSecureTransactionvoltmx.os.endSecureTransactionvoltmx.os.getAppContextvoltmx.os.hasAccelerometerSupportvoltmx.os.deviceInfovoltmx.os.deviceInfo().httpheadersvoltmx.os.addMetaTagvoltmx.os.removeMetaTagvoltmx.os.removeAllMetaTagsvoltmx.os.hasGPSSupportvoltmx.os.hasCameraSupportvoltmx.os.hasTouchSupportvoltmx.os.hasOrientationSupport voltmx.os.getDeviceCurrentOrientationvoltmx.os.print</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyB-Column1-Body1">Cryptography API</th><td class="TableStyle-Basic-BodyB-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyA-Column1-Body1" colspan="2">* For SPA and Desktop Web, the following APIs are NOT supported:voltmx.crypto.saveKeyvoltmx.crypto.deleteKeyvoltmx.crypto.readKey</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td></tr></tbody></table></td></tr></tbody></table>
+<table border="1">
+<tr>
+<th>Not Supported APIs</th>
+<td>
+<ul>
+<li>VoltMX UI APIs and UI object handles</li>
+<li>App Global variables</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Supported APIs and Platform</th>
+<td>
+<table border="1">
+<tr>
+<th>String API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td>SPA</td>
+<td>Desktop Web</td>
+</tr>
+<tr>
+<th>Math API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td>SPA</td>
+<td>Desktop Web</td>
+</tr>
+<tr>
+<th>Table API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td>SPA</td>
+<td>Desktop Web</td>
+</tr>
+<tr>
+<th>Standard Volt MX API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td colspan=2>
+<p></p>
+<p>Limited Availability</p>
+<p> For SPA and Desktop Web, the following APIs are supported:</p>
+<ul>
+<li>voltmx.convertToBase64</li>
+<li>voltmx.convertToRawBytes</li>
+<li>voltmx.type</li>
+<li>voltmx.props.getProperty</li>
+<li>voltmx.print() is not supported in Safari</li>
+<li>voltmx.print() is supported in Mozilla from version 29.0.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Network API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td colspan=2>
+<p></p>
+<p>For SPA and DesktopWeb: </p>
+<p>Limited Availability</p>
+<ul>
+<li>The following API will not be available in SPA & Desktop Web: voltmx.net.setNetworkCallbacks</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th rowspan=2>Offline Data Access API</th>
+<td>Local Storage</td>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+</tr>
+<tr>
+<td>Web SQL</td>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td>SPA and DesktopWeb</td>
+</tr>
+<tr>
+<th>Operating System API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td colspan=2>
+<p></p>
+<p> For SPA and Desktop Web, the following APIs are NOT supported:</p>
+<ul>
+<li>voltmx.os.addHiddenField</li>
+<li>voltmx.os.readHiddenField</li>
+<li>voltmx.os.startSecureTransaction</li>
+<li>voltmx.os.endSecureTransaction</li>
+<li>voltmx.os.getAppContext</li>
+<li>voltmx.os.hasAccelerometerSupport</li>
+<li>voltmx.os.deviceInfo</li>
+<li>voltmx.os.deviceInfo().httpheaders</li>
+<li>voltmx.os.addMetaTag</li>
+<li>voltmx.os.removeMetaTag</li>
+<li>voltmx.os.removeAllMetaTags</li>
+<li>voltmx.os.hasGPSSupport</li>
+<li>voltmx.os.hasCameraSupport</li>
+<li>voltmx.os.hasTouchSupport</li>
+<li>voltmx.os.hasOrientationSupport</li>
+<li>voltmx.os.getDeviceCurrentOrientation</li>
+<li>voltmx.os.print</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Cryptography API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td colspan=2>
+<p></p>
+<p>For SPA and Desktop Web, the following APIs are NOT supported:</p>
+<ul>
+<li>voltmx.crypto.saveKey</li>
+<li>voltmx.crypto.deleteKey</li>
+<li>voltmx.crypto.readKey</li>
+</ul>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
 
 ### FFI and Custom Widgets
 
 With and without Functional Module in Worker context:
 
-### FFI and Custom Widgets
+<table>
+<tr>
+<th></th>
+<th>iOS</th>
+<th>Android</th>
+<th>Windows</th>
+<th>SPA</th>
+</tr>
+<tr>
+<th>FFI</th>
+<td colspan=4>Platform will load modules by default</td>
+</tr>
+<tr>
+<th>Custom Widgets</th>
+<td colspan=4>No need to load Custom Widgets in worker scope.</td>
+</tr>
+</table>
 
-With and without Functional Module in Worker context:
-
-### FFI and Custom Widgets
-
-With and without Functional Module in Worker context:
-
-|   | iOS | Android | Windows | SPA |
-| --- | --- | --- | --- | --- |
-| FFI | Platform will load modules by default ||||
-| Custom Widgets | No need to load Custom Widgets in worker scope. ||||
 
 ### Guidelines and Limitations
 
@@ -516,7 +661,7 @@ The following guidelines are recommended before using worker thread:
 
 > **_Note:_** For SPA and Desktop Web, nested workers are not supported in Google Chrome.
 
-terminate API
+**terminate API**
 
 As the worker threading model is mapped to underlying native threading models in native platforms, there can be some deviations from what specification says, this is due to technical limitations in the underlying platforms which include:
 
@@ -524,7 +669,7 @@ As the worker threading model is mapped to underlying native threading models in
 2.  If terminate() is invoked in Parent thread on worker, and if there are pending tasks waiting in the message queues for this worker to perform, some platforms might discard all the pending tasks without accepting them for execution and terminate, and on some platform all the pending tasks are executed to completion and then the worker terminates.
 3.  It is to be noted that to achieve cross platform consistency, it is always advised that terminate() be invoked on the worker once all the tasks in message queues are completed.
 
-close API
+**close API**
 
 1.  As the worker threading model is mapped to underlying native threading models in native platforms, there can be some deviations from what specification says, this is due to technical limitations in the underlying platforms which include:
 2.  When close() is invoked in worker scope, and if worker is currently executing a large task, it might not immediately terminate, it will continue to execute the task to completion and then terminate.
@@ -550,3 +695,4 @@ Following are some worker life cycle notes: 
 * * *
 
 ![](resources/prettify/onload.png)
+

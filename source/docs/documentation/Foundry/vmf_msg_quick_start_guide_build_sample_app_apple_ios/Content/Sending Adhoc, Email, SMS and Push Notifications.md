@@ -221,7 +221,7 @@ The **Email Message** feature allows you to configure and send email messages ba
 11.  Select the **Start Date and Time** and **Expiry Date and Time**.
 12.  Click **Schedule Notification** for the message delivery to be scheduled for later.
     
-    ![](Resources/Images/emaillateroption_571x313.png)
+     ![](Resources/Images/emaillateroption_571x313.png)
     
 
 ### Sending Adhoc Email Notifications to Segments

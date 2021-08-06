@@ -65,6 +65,6 @@ The following error codes have been identified for Android:
 
 To view the functionality of the Request App Review API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.  
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/tree/master/RequestAppRewiewAPI)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/RequestAppRewiewAPI)
 
 ![](resources/prettify/onload.png)

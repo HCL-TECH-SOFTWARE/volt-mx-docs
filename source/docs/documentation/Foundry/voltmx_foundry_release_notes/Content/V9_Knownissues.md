@@ -57,101 +57,81 @@ Console
 Installer
 ---------
 
-*   **Issue**
-    
-    On certain system display resolutions, the Windows Installer UI may get distorted and you may face difficulties in proceeding with the installation.
-    
-    **Workaround**
-    
-    You must lower the scaling factor and/or resolution of your system and restart the installer.
-    
-
-*   **Issue**
-    
-    Upgrade from 8.2.1.3 GA to V9.x gets reverted.
-    
-    Workaround
-    
-    Before the upgrade, execute the following SQL statement from admin database
-    
-    For **MySQL**  
-    \------------ delete from <admindb>.schema\_version where script = 'V62.1\_\_voltmxadmin-mysql-8.2.0.0.sql';  
-      
-    For **SQLServer**  
-    \--------------- delete from <admindb>.schema\_version where script = 'V62.1\_\_voltmxadmin-sqlserver-8.2.0.0.sql';  
-      
-    For **Oracle** ---------- delete from <admindb>.schema\_version where script = 'V62.1\_\_voltmxadmin-oracle-8.2.0.0.sql';  
-    
-
-*   **Issue**: While upgrading from Foundry 7.3 to Volt MX Foundry V9 and then upgrading to a version after V9, the upgrade fails due to the following error:"java.sql.SQLSyntaxErrorException: Table 'prefixidglobaldbsuffix.schema\_version' doesn't exist".
-    
-    **Workaround**
-    
-    To avoid this issue, perform the following step:
-    
-    *   Delete the idglobaldb schema before upgrading to the version later than V9.
-
-*   **Issue**: When you setup Volt MX Foundry (On-Premises) on WebSphere Liberty Profile using the Command Line Installer (CLI) the publish of the Storage application fails. The failure occurs when you enter the database type input in upper or mixed casing. The storage database type is a case-sensitive field which accepts only lowercase inputs. For example: oracle, mysql, mssql and mariadb.
-    
-    **Workaround**
-    
-    Change the database name in the following sets of schemas and tables:
-    
-    *   **Schema**: ADMINDB
-        
-        **Table**: SERVER\_CONFIGURATION
-        
-        **Field / value**: storage\_database\_type = oracle / mysql / mssql / mariadb
-        
-    *   **Schema**: ACCOUNTS
-        
-        **Table**: FEATURES
-        
-        **Field / value**: {"storagedatabasetype":"oracle / mysql / mssql / mariadb","serverdatabasetype":"oracle / mysql / mssql / mariadb"}
-        
-
-*   **Issue**: The publishing of a Storage application fails on an environment that uses the SQLServer with Windows authentication.
-    
-    **Workaround**
-    
-    In the `server_configuration` table of the Integration database(admindb) insert the key `VOLTMX_SERVER_IS_WINDOWS_AUTHENTICATION_ENABLED` with value set to **true**. Restart the application server.
-    
-
-*   **Issue**: On a Volt MX Foundry environment installed on Apache Tomcat the attempt to publish a web application fails with a 403 error.
-    
-    This error occurs due to the increased strictness of the ordering of tags within the `tomcat-users.xml` file that comes with the Installer bundled Tomcat v9.0.33.
-    
-    **Workaround**
-    
-    Update the `tomcat-users.xml` file located at <TOMCAT\_HOME>/conf/ and ensure all the **<role>** tags precede the all the **<user>** tags.
-    
-    Example configuration:
-    
-    ![](Resources/Images/tomcaterror.png)
-    
-
-*   **Issue**: While upgrading Identity from Foundry 7.0/7.1 to Volt MX Foundry V9.x with the selected database as MSSQL, the upgrade fails due to the following errors that occur due to the Flyway tool version upgraded from 3.x to 4.x:
-    
-    *   Failed to DROP INDEX "<auth\_schema>"."schema\_version\_ir\_idx"
-    *   Failed to DROP INDEX "<auth\_schema>"."schema\_version\_vr\_idx"
-    
-    **Workaround**
-    
-    To avoid this issue, perform the following steps:
-    
-    Remove the version\_rank column from the schema\_version table in the authglobaldb by following queries before the upgrade.
-    
-    {% highlight voltMx %}DROP INDEX schema_version_ir_idx ON dbo.schema_version
-    GO
-    DROP INDEX schema_version_vr_idx ON dbo.schema_version
-    GO
-    ALTER TABLE dbo.schema_version DROP CONSTRAINT schema_version_pk
-    GO
-    ALTER TABLE dbo.schema_version DROP COLUMN version_rank
-    GO
-    ALTER TABLE dbo.schema_version ADD CONSTRAINT schema_version_pk PRIMARY KEY CLUSTERED (installed_rank)
-    GO
-    ALTER TABLE dbo.schema_version ALTER COLUMN version nvarchar(50) NULL
-    GO
-    
-    {% endhighlight %}
+<ul>
+<li>
+<p><b>Issue:</b> On certain system display resolutions, the Windows Installer UI may get distorted and you may face difficulties in proceeding with the installation.</p>
+<br/>
+<p><b>Workaround:</b> You must lower the scaling factor and/or resolution of your system and restart the installer.</p>
+<br/>
+</li>
+<li>
+<p><b>Issue:</b> Upgrade from 8.2.1.3 GA to V9.x gets reverted.</p>
+<br/>
+<p><b>Workaround:</b> Before the upgrade, execute the following SQL statement from admin database</p>
+<br/>
+<p>For <b>MySQL</b></p>
+<p>———— delete from &lt; admindb&gt;.schema_version where script = ‘V62.1__voltmxadmin-mysql-8.2.0.0.sql’;</p>
+<br/>
+<p>For <b>SQLServer</b></p>
+<p>———— delete from &lt; admindb&gt;.schema_version where script = ‘V62.1__voltmxadmin-sqlserver-8.2.0.0.sql’;</p>
+<br/>
+<p>For <b>Oracle</b></p>
+<p>———— delete from &lt; admindb&gt;.schema_version where script = ‘V62.1__voltmxadmin-oracle-8.2.0.0.sql’;</p>
+<br/>
+</li>
+<li>
+<p><b>Issue:</b> While upgrading from Foundry 7.3 to Volt MX Foundry V9 and then upgrading to a version after V9, the upgrade fails due to the following error:”java.sql.SQLSyntaxErrorException: Table ‘prefixidglobaldbsuffix.schema_version’ doesn’t exist”.</p>
+<br/>
+<p><b>Workaround:</b> To avoid this issue, perform the following step:</p>
+<ul>
+<li>Delete the idglobaldb schema before upgrading to the version later than V9.</li>
+</ul>
+</li>
+<li>
+<p><b>Issue:</b> When you setup Volt MX Foundry (On-Premises) on WebSphere Liberty Profile using the Command Line Installer (CLI) the publish of the Storage application fails. The failure occurs when you enter the database type input in upper or mixed casing. The storage database type is a case-sensitive field which accepts only lowercase inputs. For example: oracle, mysql, mssql and mariadb.</p>
+<br/>
+<p><b>Workaround:</b> Change the database name in the following sets of schemas and tables:</p>
+<ul>
+<li><b>Schema:</b> ADMINDB <b>Table</b>: SERVER_CONFIGURATION <b>Field / value</b>: storage_database_type = oracle / mysql / mssql / mariadb</li>
+<li><b>Schema:</b> ACCOUNTS <b>Table</b>: FEATURES <b>Field / value</b>: {“storagedatabasetype”:”oracle / mysql / mssql / mariadb”,”serverdatabasetype”:”oracle / mysql / mssql / mariadb”}</li>
+</ul>
+</li>
+<li>
+<p><b>Issue:</b> The publishing of a Storage application fails on an environment that uses the SQLServer with Windows authentication.</p>
+<br/>
+<p><b>Workaround:</b> In the <code>server_configuration</code> table of the Integration database(admindb) insert the key <code>VOLTMX_SERVER_IS_WINDOWS_AUTHENTICATION_ENABLED</code> with value set to <b>true</b>. Restart the application server.</p>
+<br/>
+</li>
+<li>
+<p><b>Issue:</b> On a Volt MX Foundry environment installed on Apache Tomcat the attempt to publish a web application fails with a 403 error. This error occurs due to the increased strictness of the ordering of tags within the <code>tomcat-users.xml</code> file that comes with the Installer bundled Tomcat v9.0.33. </p>
+<br/>
+<p><b>Workaround:</b> Update the tomcat-users.xml file located at <em>&lt;TOMCAT_HOME&gt;</em>&#47;conf&#47;and ensure all the <b>&lt;role&gt;</b> tags precede the all the <b>&lt;user&gt;</b> tags.</p>
+<p>Example configuration:</p>
+<img src="Resources/Images/tomcaterror.png"/>
+<br/>
+</li>
+<li>
+<p><b>Issue:</b> While upgrading Identity from Foundry 7.0/7.1 to Volt MX Foundry V9.x with the selected database as MSSQL, the upgrade fails due to the following errors that occur due to the Flyway tool version upgraded from 3.x to 4.x:</p>
+<ul>
+<li>Failed to DROP INDEX “”.”schema_version_ir_idx”</li>
+<li>Failed to DROP INDEX “”.”schema_version_vr_idx”</li>
+</ul>
+<p><b>Workaround:</b> To avoid this issue, perform the following steps:</p>
+<p>Remove the version_rank column from the schema_version table in the authglobaldb by following queries before the upgrade.</p>
+<figure class="highlight">
+<pre><code class="language-voltmx" data-lang="voltmx">DROP INDEX schema_version_ir_idx ON dbo.schema_version
+GO
+DROP INDEX schema_version_vr_idx ON dbo.schema_version
+GO
+ALTER TABLE dbo.schema_version DROP CONSTRAINT schema_version_pk
+GO
+ALTER TABLE dbo.schema_version DROP COLUMN version_rank
+GO
+ALTER TABLE dbo.schema_version ADD CONSTRAINT schema_version_pk PRIMARY KEY CLUSTERED (installed_rank)
+GO
+ALTER TABLE dbo.schema_version ALTER COLUMN version nvarchar(50) NULL
+GO  
+</code></pre>
+</figure>
+</li>
+</ul>

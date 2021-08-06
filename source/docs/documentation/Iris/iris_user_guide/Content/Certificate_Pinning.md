@@ -8,6 +8,8 @@ category: "iris_user_guide"
 Certificate Pinning
 ===================
 
+> **_Note:_** Volt MX 9.2 does not support the building of Windows native applications. Please disregard all references to Windows in this topic.
+
 To check trust for communication between an app and a server, server certificates are bundled with the application. Pinning is a process of associating a host with their expected certificate or public key. Once a certificate or public key is known or seen for a host, the certificate or public key is associated or pinned to the host.
 
 Pinning makes use of knowledge of the pre-existing relationship between the user and an organization or service to make the security-related decisions better. As the information is already on the server or service, you do not need to rely on generalized mechanisms meant to solve the key distribution problem. You do not need to turn to DNS for name/address mappings or CAs for bindings and status.
@@ -28,7 +30,7 @@ To get the certificate that is to be pinned, follow any of these two procedures 
 
 Follow these steps to use the VoltMXSSLPinningTool.jar file:
 
-1.  Download the zipped [VoltMXSSLPinningTool.jar](http://docs.voltmx.com/voltmxlibrary/iris/zip/user_guide/VoltMXSSLPinningTool.zip) file to your local system, and then unzip it.
+1.  Download the zipped [VoltMXSSLPinningTool.jar](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/blob/master/VoltMXSSLPinningTool.zip) file to your local system, and then unzip it.
 
 > **_Note:_** You must run the VoltMXSSLPinningTool.jar file with Java 8 or later.
 
@@ -80,9 +82,9 @@ Follow these steps to enable Certificate Pinning in iOS:
     1.  Navigate to the application resources folder and create a **certs** folder in it.
     2.  **certs** folder need to be created in the following path:
         
-        1.  <workspace>/<app>/resources/mobile/native/iphone/
+        1.  \<workspace>/\<app>/resources/mobile/native/iphone/
             
-        2.  <workspace>/<app>/resources/tablet/native/ipad/
+        2.  \<workspace>/\<app>/resources/tablet/native/ipad/
             
     3.  Place server certificates inside the **certs** folder.
 2.  Configure SSL Pinning.
@@ -95,9 +97,9 @@ Follow these steps to enable Certificate Pinning in Android:
 
 1.  Navigate to the application resources folder.
 2.  Copy the server certificate to the certs folder as shown. Create the folder hierarchy, if required.
-    *   For mobile - <workspace>/<app>/resources/mobile/native/android/assets/certs/
+    *   For mobile - \<workspace>/\<app>/resources/mobile/native/android/assets/certs/
         
-    *   For tablet - <workspace>/<app>/resources/tablet/native/androidtab/assets/certs/
+    *   For tablet - \<workspace>/\<app>/resources/tablet/native/androidtab/assets/certs/
         
 3.  In Volt MX Studio, right-click your application and go to **Properties > Native > Android**.
 4.  From the **Network Trust Config** (or) **Allow Self Signed/Untrusted Certificates** drop-down list, select **Allow Pinned**.
@@ -105,13 +107,13 @@ Follow these steps to enable Certificate Pinning in Android:
 
 Enable Certificate Pinning in Windows
 -------------------------------------
-
+ 
 Follow these steps to enable Certificate Pinning in Windows:
 
 1.  Navigate to the application resources folder.
 2.  Copy the server certificate to the certs folder as shown. Create the folder hierarchy, if required.
-    *   For mobile - <workspace>/<app>/resources/mobile/native/winphone8/assets/certs/
-    *   For tablet - <workspace>/<app>/resources/tablet/native/windows8/assets/certs/
+    *   For mobile - \<workspace>/\<app>/resources/mobile/native/winphone8/assets/certs/
+    *   For tablet - \<workspace>/\<app>/resources/tablet/native/windows8/assets/certs/
 3.  For the mobile channel in Volt MX Studio, right-click your application and go to **Properties > Native > Windows Phone > Common**.
 4.  For tablet channel in Volt MX Studio, right-click your application and go to **Properties > Native > Windows Tablet > Application UI**.
 5.  From the **Network Trust Config** (or) **Allow Self Signed/Untrusted Certificates** drop-down list, select **Allow Bundled**.

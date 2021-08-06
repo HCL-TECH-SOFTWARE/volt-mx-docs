@@ -72,15 +72,13 @@ The Build and Publish Web app option also publishes the Volt MX Foundry app to t
 
 To publish an app to the Volt MX Cloud, logging in to your Volt MX Account is mandatory.
 
-![](Resources/Images/publishWebApp_389x413.png)
+<img src="Resources/Images/publishWebApp_389x413.png" alt="" style="width:85%">
 
 ### Publish to my App Store
 
 The Publish to my App Store action generates the web app archive and publishes the application to your Enterprise App Store. After a successful publish, a confirmation window appears, which shares a link to view the Enterprise app store on your device.
 
 To publish an app to the Enterprise App Store, logging in to your Volt MX Account is mandatory.
-
-![](Resources/Images/PublishEAS_391x412.png)
 
 For more information on Publish to my App Store, click [here](EAS.html#publish-apps-to-the-enterprise-app-store).
 
@@ -89,8 +87,6 @@ For more information on Publish to my App Store, click [here](EAS.html#publish-a
 The Generate Web App action generates the archives for your Web application and saves it on your file system. The Iris project does not have to be linked to Volt MX Foundry to complete this action.
 
 Once the build is complete, the generated web archives will appear in your project's Volt MX Iris workspace > binaries folder. You can then upload and publish the app on Volt MX Foundry.
-
-![](Resources/Images/GenerateWebApp_391x419.png)
 
 Alternatively, once the build is complete, you will get notified by an email from "VoltMX Iris – Build Service", with download links for all these binaries.
 
@@ -101,24 +97,25 @@ Before you publish a web app, ensure that you have a project in which you have a
 
 **To publish a Web app, follow these steps**:
 
-1.  Open the Volt MX Iris project in which you have designed a web app.  
-    
-2.  Sign in to your Volt MX Cloud account.  
-    
-3.  Link your Iris Project to a Volt MX Foundry app. You can link your Project to a new or an existing Foundry app.
-4.  On the **Data & Services** panel, click the hamburger menu near the **Refresh** button.
-5.  Click either **Create New App** or **Link to Existing App**. The Volt MX Foundry console appears.
-6.  If you have not already, sign in to your Volt MX Foundry account by using your cloud credentials.
-7.  If you choose:
-    1.  **Create New App**, a new Foundry app with the same name as the Iris Project is created.
-    2.  **Link to Existing App**, a list of existing apps from your Volt MX Foundry account are displayed.
-8.  To select the Volt MX Foundry app that you want to associate your Volt MX Iris app with, click **Associate** beside the App Name.  
-    ![](Resources/Images/AssociateFoundryApp_638x384.png)  
-    The app you chose/created is successfully linked to your Iris Project.
+1. Open the Volt MX Iris project in which you have designed a web app.  
+2. Sign in to your Volt MX Cloud account.  
+3. Link your Iris Project to a Volt MX Foundry app. You can link your Project to a new or an existing Foundry app.
+4. On the **Data & Services** panel, click the hamburger menu near the **Refresh** button.
+5. Click either **Create New App** or **Link to Existing App**. The Volt MX Foundry console appears.
+6. If you have not already, sign in to your Volt MX Foundry account by using your cloud credentials.
+7. If you choose:
+  * **Create New App**, a new Foundry app with the same name as the Iris Project is created.
+  * **Link to Existing App**, a list of existing apps from your Volt MX Foundry account are displayed.
+8. To select the Volt MX Foundry app that you want to associate your Volt MX Iris app with, click **Associate** beside the App Name.
+
+   ![](Resources/Images/AssociateFoundryApp_638x384.png)  
+   The app you chose/created is successfully linked to your Iris Project.
+
 9.  Close the Volt MX Foundry window and return to Volt MX Iris by clicking on the Iris icon on the left navigation pane.
 10.  From the main menu of Volt MX Iris, select **Build** > **Build and Publish Web**.  
     The Build and Publish Web window appears.  
-    ![](Resources/Images/publishWebApp_350x372.png)  
+
+<img src="Resources/Images/publishWebApp_389x413.png" alt="" style="width: 85%">
     
 11.  Select the required Platforms and Channels for which you want to build and publish your web app.
 12.  From the **Post Build Action** drop-down menu, select the desired **Post Build Action**. For more details about the Post Build Action, click [here](#post-build-actions).
@@ -131,6 +128,9 @@ Before you publish a web app, ensure that you have a project in which you have a
 *   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
 
 15.  You can choose to change the cloud environment on which your app will be published. To do so click on **Change** beside the **Environment** option.
+
+7. If you do not use the deprecated SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check **Strict Mode**. If you use any of those algorithms, leave **Strict Mode** unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
+
 16.  Once all the required settings are ready, click **Build**.  
     The progress of the Web App Publish is displayed in the Build tab of Iris.  
     Once the publish process is complete, a Web App URL appears on the Build tab.

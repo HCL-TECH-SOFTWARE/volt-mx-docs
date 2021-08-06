@@ -43,6 +43,6 @@ In addition, each widget supports the following methods for working with badges.
 
 To view the functionality of the Badge API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.  
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/tree/master/BadgeAPI)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/BadgeAPI)
 
 ![](resources/prettify/onload.png)

@@ -1,8 +1,8 @@
+---
 layout: "documentation"
 category: "iris_api_dev_guide"
 ---
                             
-
 
 voltmx.os Namespace
 =================
@@ -489,50 +489,7 @@ The battery state indicates whether it is charging, discharging, and so forth.
 
 * * *
 
-This API returns the unique ID of a device: IMEI for GSM phones and MEID or ESN for CDMA phones from Telephony Manager, based on the slot index that you provide. This API works when used on devices that have an operating system of API Level 23 Marshmallow or later, and when the application targets an API Level of 23 or later.
-
-As this API requires the READ\_PHONE\_STATE permission, the getDeviceId API returns the device ID from Telephony Manager after properly handling permissions and prompts the permission dialog to acquire the Android permission. If you deny the READ\_PHONE\_STATE permission, a Permission error is displayed.
-
-You must set the READ\_PHONE\_STATE permission in the Android Manifest file to retrieve the device ID.
-
-> **_Note:_** In Android, the property returns null when used on devices running OS API Level 29 (Android-Q) and above without showing any permission dialog.  
-  
-Starting in Android Q, apps must have the READ\_PRIVILEGED\_PHONE\_STATE privileged permission (which cannot be granted to a regular app) to access the device's non-resettable identifiers, which include both IMEI and serial number. For more information, see [Android Documentation](https://developer.android.com/preview/privacy/data-identifiers#device-ids).
-
-<b>Syntax</b>
-
-{% highlight VoltMx %}
-voltmx.os.getDeviceId(int slot);
-{% endhighlight %}
-
-Input Parameters
-
-Slot Index as an integer value.
-
-Example
-
-{% highlight VoltMx %}function getMyDeviceIDFunc() {
-    var devId = voltmx.os.getDeviceId(0); // param is sim slot
-    voltmx.print("The device ID of the first SIM slot is: " + devId);
-}
-{% endhighlight %}
-
-Return Type
-
-String
-
-Unsupported Cases
-
-*   If your application is running on a device with an operating system earlier than API level 23, the API returns "Null."
-    
-*   Invalid slot indexes that are not supported by a device are ignored and the API returns "Null."
-    
-*   The API returns "Null" on some devices, such as tablets, where Telephony Manager is not available.
-    
-
-Platform Availability
-
-*   Android
+This API is deprecated. It always returns null.
 
 * * *
 

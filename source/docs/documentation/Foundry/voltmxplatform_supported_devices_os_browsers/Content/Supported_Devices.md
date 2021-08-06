@@ -9,6 +9,8 @@ Volt MX  Iris Suppported Devices, OSes, and Browsers Guide: iOS Platform
 Supported Devices by Volt MX AppPlatform
 ========================================
 
+> **_Note:_** Volt MX 9.2 does not support the building of Windows native applications. Please disregard all references to Windows in this topic.
+
 The following sections provide a list of devices supported by Volt MX Iris for native apps.
 
 *   [iOS Platform](#ios-platform)

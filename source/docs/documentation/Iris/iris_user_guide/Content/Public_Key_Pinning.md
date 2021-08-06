@@ -145,7 +145,7 @@ To generate the SPKI Pin Hash from the certificate, follow one of these procedur
 
 Follow these steps to use the VoltMXSSLPinningTool.jar file and generate SPKI hashes:
 
-1.  Download the zipped [VoltMXSSLPinningTool Jar file](http://docs.voltmx.com/voltmxlibrary/iris/zip/user_guide/VoltMXSSLPinningTool.zip) to your local system, and then unzip it.
+1.  Download the zipped [VoltMXSSLPinningTool Jar file](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/blob/master/VoltMXSSLPinningTool.zip) to your local system, and then unzip it.
 
 > **_Note:_** You must run the VoltMXSSLPinningTool.jar file with Java 8 or later.
 
@@ -214,8 +214,8 @@ If you want to add support for the Network Security Configuration feature to you
     
 3.  Add the **network\_security\_config.xml** file in the following path, as appropriate:
     
-    *   For mobile: <irisproject>/<app>/resources/mobile/native/android/xml/network\_security\_config.xml
-    *   For tablet: <irisproject>/<app>/resources/tablet/native/android/xml/network\_security\_config.xml
+    *   For mobile: \<voltmxproject>/\<app>/resources/mobile/native/android/xml/network_security_config.xml
+    *   For tablet: \<voltmxproject>/\<app>/resources/tablet/native/android/xml/network_security_config.xml
 
 Volt MX  Public Key Pinning vs. Android Network Security Configuration
 ------------------------------------------------------------------

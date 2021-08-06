@@ -108,7 +108,7 @@ The following steps explain how to configure and execute a test campaign using t
     *   **Message Title**: Enter an appropriate title to the push message.
     *   **Enable Rich Push**: Select the check box if you want to associate the rich push. To customize your text, you can use the **Rich Text Editor** tool available at the top of the**Rich Content** box.
         
-        ![](Resources/Images/standardpush_575x313.png)
+    ![](Resources/Images/standardpush_575x313.png)
         
     
     You can also use the push message template to compose a push message.

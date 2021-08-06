@@ -2,79 +2,72 @@
 layout: "documentation"
 category: "voltmx_licensing_guide"
 ---
-                            
-
-
+              
 Volt MX  Foundry
------------
-
-Volt MX  Foundry needs licenses for the following components:
-
-*   Volt MX Foundry Integration
-*   Volt MX Foundry Engagement Services
-*   Volt MX Foundry Sync
-
-Based on type of installation, following licenses will be provided:
-
-*   Production License \[for the production instance\]
-*   Non-Production License \[for UAT environments\]
-*   Development License \[for single machine instance\]
-
-> **_Note:_** The license will be deactivated based on the expiry date.
-
-### Prerequisites
+================
+            
+Prerequisites
+-------------
 
 The following are the prerequisites for activating a Volt MX Foundry license.
 
-*   Volt MX Cloud Account.
-*   A valid Volt MX Foundry license issued by the Volt MX Licensing Team.
+- HCL Software Account
+- Valid VoltMX Foundry license issued by the HCL Software licensing team
 
-### Activating Volt MX Foundry License
+Acquiring your license
+----------------------
+See [What is the HCL License & Delivery Portal (FlexNet Portal)?](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0073344) for information on how to acquire your Volt MX
+Foundry license through the HCL License & Delivery Portal.
 
-#### Activating License for The First Time
+Activating a license for the first time
+---------------------------------------
 
-**To activate the Volt MX Foundry license, follow these steps:**
+- Download VoltMX Foundry from the HCL License & Delivery Portal.
+- Open the VoltMX Foundry console, enter your credentials, and click **SIGN IN**.
+<img src="Resources/Images/foundry_sign_in.png" alt="Foundry sign in" width="75%"/>
+- In your VoltMX Foundry console, click **ACTIVATE NOW** at the top of the screen.
+<img src="Resources/Images/foundry_home_default_license.png" alt="Foundry sign in" width="90%"/>
+- You are redirected to the Licensing tab, which shows that the license has not been activated yet. Click **ACTIVATE LICENSE NOW**.
+- The license configurator dialog appears. Input the license information provided by the HCL Software licensing team. 
+    - By default, **URL** shows the HCL License & Delivery Portal address.
+    - Specify the **Server ID** provided by the HCL Software licensing team. See [What is the HCL License & Delivery Portal (FlexNet Portal)?](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0073344).
+    - Specify the administrator **Password** you set for your device in the HCL License & Delivery Portal. See [What is the HCL License & Delivery Portal (FlexNet Portal)?](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0073344).
 
-1.  Download Volt MX Foundry from the [DeveloperPortal](http://community.hclvoltmx.com/downloads) and install it.
-2.  Go to **VoltMX Foundry Console URL**. The **Sign in to Volt MX Foundry** page appears.
-    
-    ![](Resources/Images/log-inv8_576x342.png)
-    
-    > **_Note:_** To activate the license, your account must have minimum one valid license.
-    
-3.  Enter your credentials and click on **Sign in**. After your credentials are validated, you will be directed to the dashboard of your Foundry console.
-    
-    ![](Resources/Images/ActivateNow_576x100.png)
-    
-4.  A license notification is displayed on top of the console, click on **ACTIVATE NOW**. The **Licensing** section appears.
-    
-    ![](Resources/Images/Lic_575x270.png)
-    
-5.  Click **ACTIVATE LICENSE NOW** button. A confirmation dialog appears.
-    
-    ![](Resources/Images/Act_Continue_529x72.png)
-    
-6.  Click **Continue**. You will be redirected to Volt MX Cloud account Sign-in page.
-7.  Enter your Volt MX account credentials and click on **Sign in**. After your credentials are validated, you will be redirected to **Licensing Activation** page.
-    
-    ![](Resources/Images/DisplayLicenses_577x268.png)
-    
-8.  From **ACCOUNT NAME** list, select an account name. Based on the license validity, a message is displayed under **On-Premise Product license**.
-    
-    *   If the account does not have a valid license, you cannot proceed further. Please contact Volt MX Support.
-    
-    ![](Resources/Images/OnRedirectionConsole.png)
-    
-    *   If the account has a valid license, click on **Activate** button. The license will be activated and you will be redirected to the **Licensing** section of your Volt MX Foundry console. The page displays all the license related information.
+<img src="Resources/Images/license_settings_error.png" alt="license settings error message" width="85%"/>
 
-> **_Note:_** Volt MX blocks your Volt MX Foundry Console if you do not activate the license within 60 days from the day of installation. Initially, Volt MX creates a default license which is valid for 30 days and provides an additional grace period of 30 days before blocking the console.
+- After saving the license configuration, wait a few seconds for the license to activate.
+  **Note:** Here are some errors you might see if you specify the wrong information.
+> - **Invalid license URL** might be caused by invalid **URL** or **Server ID**.
+> - **Invalid license credentials** is caused by an incorrect **Password**.
+> - **License features has expired** is caused by an expired **Server ID**.
+- When activation is complete, you are redirected to the dashboard of your VoltMX Foundry console. You can check your license information on the Licensing tab in Settings.
+<img src="Resources/Images/license_details.png" alt="license details" width="90%">
 
-[Open topic with navigation](../Content/License_Activation_through_VoltMX_Server_7.2.html)
+Activating a license on a private network
+-----------------------------------------
+If you are running Volt MX Foundry on a private network, the license activation process fails, because your machine cannot connect to the
+cloud-based Volt MX License Server. 
 
-Comments
+If you do not have access to the server, you can use your HCL Software ID to download the installer for the HCL Common Local License Server from the HCL License and Download Portal ([https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/](https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/)), along with set-up instructions for [Linux](https://support.hcltechsw.com/csm?sys_kb_id=83893782db5cf410cc426275ca961958&id=kb_article_view&sysparm_rank=4&sysparm_tsqueryId=0ead29fb1b68b810a67e9759bc4bcb41) and [Windows](https://support.hcltechsw.com/csm?sys_kb_id=5a0832b6db98b050cc426275ca961958&id=kb_article_view&sysparm_rank=14&sysparm_tsqueryId=2a7531f71be8b810a67e9759bc4bcb9e). Use the Local License Server **URL** in the license configurator dialog and sync the license information with the HCL Software Flexnet Operations site at a later point.
 
-[Reply](#)
+**Note:** The license configurator dialog that notifies you of the license activation failure contains a link to the offline license activation documentation.
 
- 
+<img src="Resources/Images/offline_error_message.png" alt="activation error message" width="85%"/>
 
-</div> <input class="comment-submit" type="button" value="Submit" > </div> </div> </body> <.html></x-turndown>
+**Note:** After setting up your own Local License Server, make sure that your domain certificate is imported to your local server machine and in the Foundry installation java folder.
+
+<img src="Resources/Images/lls_configuration.png" alt="local license server configuration" width="85%"/>
+
+Change the URL based on your Local License Server domain. For the Server ID, the Local License Server assumes the active/selected host and only accepts the (~) character.
+
+**Note:** Valid SSLCertificate from a Certificate Authority (CA) or Self Signed certificate is required. http connections are not supported.
+
+When your Foundry server is online, an administrator can sync the license with the HCL Software FlexNet Operations site using sync tool or REST API. Please see the HCL Common Local License README file for detailed instructions.
+
+Activating license on disabled console
+--------------------------------------
+If your trial license has been expired 30 days or more, the Foundry console blocks you from accessing the application and displays the license expired page. Click **ACTIVATE LICENSE NOW**.
+
+<img src="Resources/Images/90_days_default_license_page.png" alt="expired trial license error message" width="85%"/>
+
+As with normal license activation, the license configurator dialog prompts you to supply the correct license configuration. Upon saving the configuration, wait a few seconds for the license to activate. You are then redirected to the console dashboard and the console is now enabled.

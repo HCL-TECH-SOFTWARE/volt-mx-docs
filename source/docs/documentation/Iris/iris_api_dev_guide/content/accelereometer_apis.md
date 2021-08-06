@@ -42,7 +42,7 @@ When you use the Acceleometer API, any changes in gestures are registered by inv
 
 To view the functionality of the Accelerometer API in action, download the sample application from the link below. Once the application is downloaded, build and preview the application using the Volt MX App.
 
-[![](resources/images/download_button_08__002__236x35.png)](https://github.com/KonyDocs/Sampleapps/blob/master/AccelerometerAPI/AccelerometerAPI.zip)
+[![](resources/images/download_button_08__002__236x35.png)](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/AccelerometerAPI)
 
   
 ![](resources/prettify/onload.png)

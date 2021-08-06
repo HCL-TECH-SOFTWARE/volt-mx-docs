@@ -40,12 +40,3 @@ To request for re-issue of the Volt MX Iris Enterprise License, follow these ste
 1.  Fill the [](Customer_Information_Form.html#appendix-customer-information-form)[Customer Information Form](Customer_Information_Form.html#Customer_Information_Form) and send a license re-issue request to your sales representative or account manager. After the request is processed and validated by the Volt MX licensing team, the license is re-issued to your Volt MX Cloud account.
 2.  After you receive the license, you need to activate the product by using your license. You can activate the product through [VoltMX Iris Enterprise.](VoltMXOne_Studio_IDE.html#activating-volt-mx-iris-enterprise-license)
 
-[Open topic with navigation](../Content/VoltMXOne_Studio_License.html)
-
-Comments
-
-[Reply](#)
-
- 
-
-</div> <input class="comment-submit" type="button" value="Submit" > </div> </div> </body> <.html></x-turndown>
