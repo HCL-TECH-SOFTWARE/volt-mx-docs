@@ -86,69 +86,45 @@ The following table shows how many common datatype names from more traditional S
 Column Affinity Behavior Example
 --------------------------------
 
+<pre><code style="display:block;background-color:#eee;">
 CREATE TABLE t1(
-
 t TEXT, -- text affinity by rule 3
-
 nu NUMERIC, -- numeric affinity by rule 6
-
 i INTEGER, -- integer affinity by rule 2
-
 r REAL, -- real affinity by rule 5
-
 no BLOB -- no affinity by rule 1,4
-
 );
 
-\-- Values stored as TEXT, INTEGER, INTEGER, REAL, TEXT.
-
+-- Values stored as TEXT, INTEGER, INTEGER, REAL, TEXT.
 INSERT INTO t1 VALUES('500.0', '500.0', '500.0', '500.0', '500.0');
-
 SELECT typeof(t), typeof(nu), typeof(i), typeof(r), typeof(no) FROM t1;
-
 4
-
 text|integer|integer|real|text
 
-\-- Values stored as TEXT, INTEGER, INTEGER, REAL, REAL.
-
+-- Values stored as TEXT, INTEGER, INTEGER, REAL, REAL.
 DELETE FROM t1;
-
 INSERT INTO t1 VALUES(500.0, 500.0, 500.0, 500.0, 500.0);
-
 SELECT typeof(t), typeof(nu), typeof(i), typeof(r), typeof(no) FROM t1;
-
 text|integer|integer|real|real
 
-\-- Values stored as TEXT, INTEGER, INTEGER, REAL, INTEGER.
-
+-- Values stored as TEXT, INTEGER, INTEGER, REAL, INTEGER.
 DELETE FROM t1;
-
 INSERT INTO t1 VALUES(500, 500, 500, 500, 500);
-
 SELECT typeof(t), typeof(nu), typeof(i), typeof(r), typeof(no) FROM t1;
-
 text|integer|integer|real|integer
 
-\-- BLOBs are always stored as BLOBs regardless of column affinity.
-
+-- BLOBs are always stored as BLOBs regardless of column affinity.
 DELETE FROM t1;
-
 INSERT INTO t1 VALUES(x'0500', x'0500', x'0500', x'0500', x'0500');
-
 SELECT typeof(t), typeof(nu), typeof(i), typeof(r), typeof(no) FROM t1;
-
 blob|blob|blob|blob|blob
 
-\-- NULLs are also unaffected by affinity
-
+-- NULLs are also unaffected by affinity
 DELETE FROM t1;
-
 INSERT INTO t1 VALUES(NULL,NULL,NULL,NULL,NULL);
-
 SELECT typeof(t), typeof(nu), typeof(i), typeof(r), typeof(no) FROM t1;
-
 null|null|null|null|null
+</code></pre>
 
 > **_Note:_** Columns of type INTEGER PRIMARY KEY may only hold a 64-bit signed integer. An error will result if you try to put anything other than an integer into an INTEGER PRIMARY KEY column.
 

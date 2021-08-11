@@ -58,17 +58,40 @@ It is advisable to use Background Transfers supported by [`voltmx.net.HttpReques
 Background Fetch and Background Transfers APIs
 ----------------------------------------------
 
-  
-| Background Fetch APIs | Background Transfer APIs |
-| --- | --- |
-| Following are the APIs for Background Jobs: 
-[voltmx.backgroundjob.registerBackgroundFetch](#volt-mx-backgroundjob-registerbackgroundfetch) [voltmx.backgroundjob.setBackgroundFetchCompletionStatus](#volt-mx-backgroundjob-setbackgroundfetchcompletionstatus) [voltmx.backgroundjob.setBackgroundFetchInterval](#volt-mx-backgroundjob-setbackgroundfetchinterval)
+<table>
+<tr>
+<th>Background Fetch APIs</th>
+<th>Background Transfer APIs</th>
+</tr>
+<tr>
+<td>
+<p></p>
+<p>Following are the APIs for Background Jobs: </p>
+<ol>
+<li>
+<a href="#voltmxbackgroundjobregisterbackgroundfetch">voltmx.backgroundjob.registerBackgroundFetch</a>
+</li>
+<li>
+<a href="#voltmxbackgroundjobsetbackgroundfetchcompletionstatus">voltmx.backgroundjob.setBackgroundFetchCompletionStatus</a>
+</li>
+<li>
+<a href="#voltmxbackgroundjobsetbackgroundfetchinterval">voltmx.backgroundjob.setBackgroundFetchInterval</a>
+</li>
+</ol>
+</td>
+<td>
+<p></p>
+<p>Following are the Background Transfer APIs: </p>
+<ol>
+<li><a href="voltmx.net_functions.html#HttpReq">voltmx.net.HttpRequest</a></li>
+<li><a href="background_transfer.html#suspend">suspend</a></li>
+<li><a href="background_transfer.html#resume">resume</a></li>
+<li><a href="background_transfer.html#gettaskstate">getTaskState</a></li>
+</ol>
+</td>
+</tr>
+</table>
 
- | Following are the Background Transfer APIs : 
-
-[voltmx.net.HttpRequest](voltmx.net_functions.html#HttpRequ) [suspend](background_transfer.html#suspend) [resume](background_transfer.html#resume) [getTaskState](background_transfer.html#gettaskstate)
-
- |
 
 Supported Versions and Platforms
 --------------------------------
@@ -92,52 +115,54 @@ registerBackgroundFetch can be used to register a background fetch job. A JavaSc
 
 ### Input Parameters
 
-backgroundCallBack \[Function\] - Mandatory
+  **backgroundCallBack \[Function\] - Mandatory**
 
-This callback is to be executed when the system invokes the app for a fetch job when the app is in background.
+  This callback is to be executed when the system invokes the app for a fetch job when the app is in background.
 
-fetchInterval \[Number\] / \[Constant\] - Optional
+  **fetchInterval \[Number\] / \[Constant\] - Optional**
 
-Indicates the minimum time interval in seconds which must elapse before system can invoke the app for next fetch job .This is an optional parameter and value that is specified is only indicative and might not have any real effects on the scheduling frequency, as system decides the actual interval.
+  Indicates the minimum time interval in seconds which must elapse before system can invoke the app for next fetch job .This is an optional parameter and value that is specified is only indicative and might not have any real effects on the scheduling frequency, as system decides the actual interval.
 
-Possible values are:
+  Possible values are:
 
-1\. constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_MINIMUM
+  1. constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_MINIMUM
 
-\* This is the default value. System decides the fetch interval depending on the usage prediction for the app.
+     \* This is the default value. System decides the fetch interval depending on the usage prediction for the app.
 
-2\. constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_NEVER
+  2. constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_NEVER
 
-Disable background task. Set the time interval to constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_NEVER so that the job is no longer scheduled for running.
+     Disable background task. Set the time interval to constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_NEVER so that the job is no longer scheduled for running.
 
-3\. Time in seconds. (Negative values are not accepted).
+  3. Time in seconds. (Negative values are not accepted).
 
 ### Return Values
 
-<N.A> or “NONE".
+\<N.A\> or “NONE".
 
 ### Exceptions and Error Handling
 
-1.  If no arguments or less number of arguments than the mandatory number of arguments are provided, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
+  1. If no arguments or less number of arguments than the mandatory number of arguments are provided, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
 
-errorCode: 4001.  
-name: "BackgroundJobError".  
-message: "registerBackgroundFetch: MissingMandatoryParameters."
+      <pre><code style="display:block;background-color:#eee;">errorCode: 4001.
+     name: "BackgroundJobError".    
+     message:"registerBackgroundFetch: MissingMandatoryParameters."</code></pre>
 
-3.  If arguments type does not match the allowed type, it raises an exception and throws a _VoltMXError_ JavaScript Object with the following attributes:
 
-errorCode: 4002.  
-name: "BackgroundJobError".  
-message: "registerBackgroundFetch: InvalidParameters."
 
-### Platform Availability
+  2. If arguments type does not match the allowed type, it raises an exception and throws a _VoltMXError_ JavaScript Object with the following attributes:
+  
+      <pre><code style="display:block;background-color:#eee;">errorCode: 4002.
+     name: "BackgroundJobError".    
+     message:"registerBackgroundFetch: MissingMandatoryParameters."</code></pre>
 
-Available in iOS Platform.
+### Platform Availability  
 
-### JavaScript Example
+Available in iOS Platform.  
 
-{% highlight voltMx %}function backgroundFetchCallBack() {
 
+### JavaScript Example  
+
+<pre><code style="display:block;background-color:#eee;">function backgroundFetchCallBack() {
 
 //fetch handler invoked whenever the system invokes the App for a fetch job 
 // do something here
@@ -156,27 +181,28 @@ var completionStatus = constants.BACKGROUND_TASK_STATUS_NEW_DATA;
 
 };
 
+//Fetch interval
+//1. constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM
+//2. constants.BACKGROUND_TASK_FETCH_INTERVAL_NEVER
+//3. Time in seconds. (Negative values are not accepted).
 
-	//Fetch interval
-	//1. constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM
-    //2. constants.BACKGROUND_TASK_FETCH_INTERVAL_NEVER
-    //3. Time in seconds. (Negative values are not accepted).
+var fetchInterval = constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM;
 
-    var fetchInterval = constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM;
+//register background fetch job
+voltmx.backgroundjob.registerBackgroundFetch(backgroundFecthCallBack, fetchInterval);
+</code></pre>
 
-	//register background fetch job
-    voltmx.backgroundjob.registerBackgroundFetch(backgroundFecthCallBack, fetchInterval);
-
-{% endhighlight %}
-
+  
+  
 voltmx.backgroundjob.setBackgroundFetchCompletionStatus
 -----------------------------------------------------
 
-One must call this method in the end of `backgroundCallBack` passing a result that indicates whether content was available or not. This method intimates the system of the completion status of the background fetch job that has been scheduled.
+One must call this method in the end of `backgroundCallBack` passing a result that indicates whether content was available or not. This method intimates the system of the completion status of the background fetch job that has been scheduled.  
 
-Executing this call tells the system that it can move the app back to the suspended state and evaluate its power usage. Apps that download small amounts of content quickly and accurately display when they have content to download are more likely to receive execution time in the future than apps that take longer to download their content
+Executing this call tells the system that it can move the app back to the suspended state and evaluate its power usage. Apps that download small amounts of content quickly and accurately display when they have content to download are more likely to receive execution time in the future than apps that take longer to download their content.  
 
-Failure to call this method results in undefined behavior and could cause the app to be terminated by the system. If an error arises during invoking this API, default value: `constants.BACKGROUND_TASK_STATUS_FAILED` will be set.
+Failure to call this method results in undefined behavior and could cause the app to be terminated by the system. If an error arises during invoking this API, default value: `constants.BACKGROUND_TASK_STATUS_FAILED` will be set.  
+
 
 ### Signature
 
@@ -184,50 +210,59 @@ JavaScript: voltmx.backgroundjob.setBackgroundFetchCompletionStatus([completion
 
 ### Input Parameters
 
-completionStatus \[constant\] - Mandatory
+  **completionStatus \[constant\] - Mandatory**  
 
-This is a mandatory parameter. Possible values are as follows
+  This is a mandatory parameter. Possible values are as follows  
 
-1.  **constants.BACKGROUND\_TASK\_STATUS\_NEW\_DATA**
+  1. **constants.BACKGROUND\_TASK\_STATUS\_NEW\_DATA**
 
-This tells the system that the fetch was successful and internally, the system then updates the apps UI (if the fetch resulted in UI change) in the background. This new UI is presented to the user once the app is brought to fore ground. The snapshot of the new UI is also presented when the user tries to switch apps using the App switcher.
+      This tells the system that the fetch was successful and internally, the system then updates the apps UI (if the fetch resulted in UI change) in the background. This new UI is presented to the user once the app is brought to fore ground. The snapshot of the new UI is also presented when the user tries to switch apps using the App switcher.
 
 3.  **constants.BACKGROUND\_TASK\_STATUS\_FAILED**
 
-This tells the system that the fetch was unsuccessful. UI is not updated and the task will be run later based on the available system resources.
+      This tells the system that the fetch was unsuccessful. UI is not updated and the task will be run later based on the available system resources.
 
 5.  **constants.BACKGROUND\_TASK\_STATUS\_NO\_NEW\_DATA**
 
-This intimates the system the fetch did not result in any new data, UI is not updated and the job is run after any point later in time but not before fetchInterval.
+     This intimates the system the fetch did not result in any new data, UI is not updated and the job is run after any point later in time but not before fetchInterval.  
+
 
 ### Return Values
 
-<N.A> or “NONE".
+\<N.A\> or “NONE".  
 
-### Exceptions
 
-1.  If no arguments or less number of arguments than the mandatory number of arguments are provided, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
-{% highlight voltMx %}errorCode: 4001.   
-name: "BackgroundJobError".   
-message: "setBackgroundFetchCompletionStatus: MissingMandatoryParameters."
-{% endhighlight %}3.  If arguments type does not match the allowed type, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
-{% highlight voltMx %}errorCode: 4002.   
-name: "BackgroundJobError".   
-message: "setBackgroundFetchCompletionStatus: InvalidParameters."
-{% endhighlight %}5.  If an error arises during invoking of this API, default value: constants.BACKGROUND\_TASK\_STATUS\_FAILED will be set.
+### Exceptions  
 
-### Platform Availability
 
-Available in iOS Platform.
+ 1. If no arguments or less number of arguments than the mandatory number of arguments are provided, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
 
-### JavaScript Example
+      <pre><code style="display:block;background-color:#eee;">errorCode: 4001.
+    name: "BackgroundJobError".    
+    message:"setBackgroundFetchCompletionStatus: MissingMandatoryParameters."</code></pre>
 
-{% highlight voltMx %}function backgroundFecthCallBack() {
 
+ 2. If arguments type does not match the allowed type, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:  
+
+      <pre><code style="display:block;background-color:#eee;">errorCode: 4002.
+    name: "BackgroundJobError".    
+    message:"setBackgroundFetchCompletionStatus: InvalidParameters."</code></pre>
+       
+ 
+ 3. If an error arises during invoking of this API, default value: constants.BACKGROUND\_TASK\_STATUS\_FAILED will be set.  
+
+
+### Platform Availability  
+
+Available in iOS Platform.  
+
+
+### JavaScript Example  
+
+<pre><code style="display:block;background-color:#eee;">function backgroundFecthCallBack() {
 
 //fetch handler invoked whenever the system invokes the App for a fetch job 
 // do something here
-
 
 // in the end of the handler setBackgroundFetchCompletionStatus() need
 // to be called mandatorily other wise system might termitane the app. 
@@ -239,80 +274,80 @@ Available in iOS Platform.
 
 var completionStatus = constants.BACKGROUND_TASK_STATUS_NEW_DATA;
         voltmx.backgroundjob.setBackgroundFetchCompletionStatus(completionStatus);
-
 };
 
+//Fetch interval
+//1. constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM
+//2. constants.BACKGROUND_TASK_FETCH_INTERVAL_NEVER
+//3. Time in seconds. (Negative values are not accepted).
 
-	//Fetch interval
-	//1. constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM
-    //2. constants.BACKGROUND_TASK_FETCH_INTERVAL_NEVER
-    //3. Time in seconds. (Negative values are not accepted).
+var fetchInterval = constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM;
 
-    var fetchInterval = constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM;
+//register background fetch job
+voltmx.backgroundjob.registerBackgroundFetch(backgroundFecthCallBack, fetchInterval);
+</code></pre>
 
-	//register background fetch job
-    voltmx.backgroundjob.registerBackgroundFetch(backgroundFecthCallBack, fetchInterval);
 
-{% endhighlight %}
 
 voltmx.backgroundjob.setBackgroundFetchInterval
 ---------------------------------------------
 
-This method sets the fetch interval for the background fetch job scheduled.
+This method sets the fetch interval for the background fetch job scheduled.  
 
-### Signature
 
-JavaScript: voltmx.backgroundjob.setBackgroundFetchInterval([fetchInterval](#fetchInterval))
+### Signature  
 
-### Input Parameters
+**JavaScript: voltmx.backgroundjob.setBackgroundFetchInterval([fetchInterval](#fetchInterval))**  
 
-fetchInterval \[Number\]/\[Constant\] - Mandatory
 
-Indicative minimum time interval in seconds that should elapse before system can invoke the app for next fetch job. This is only indicative and may not have any real effects on the scheduling frequency, as system decides the actual interval.
+### Input Parameters  
 
-Possible values are: 
+  fetchInterval \[Number\]/\[Constant\] - Mandatory  
 
-1.  **constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_MINIMUM**
+  Indicative minimum time interval in seconds that should elapse before system can invoke the app for next fetch job. This is only indicative and may not have any real effects on the scheduling frequency, as system decides the actual interval.
 
-This is the default value. System decides the fetch interval depending on the usage prediction for the app.
+  Possible values are: 
 
-3.  **constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_NEVER**
+  1. **constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_MINIMUM**  
+  
+     This is the default value. System decides the fetch interval depending on the usage prediction for the app.
 
-Disable background task. Set the time interval to constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_NEVER so that the job is no longer scheduled for running.
+  3. **constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_NEVER**
+
+     Disable background task. Set the time interval to constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_NEVER so that the job is no longer scheduled for running.
 
 5.  Time in seconds. (Negative values are not accepted).
 
 ### Return Values
 
-<N.A> or “NONE".
+\<N.A\> or “NONE".  
 
-### Exceptions
+### Exceptions  
 
 1.  If no arguments or less number of arguments than the mandatory number of arguments are provided, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
-{% highlight voltMx %}errorCode: 4001.   
-name: "BackgroundJobError".   
-message: "setBackgroundFetchInterval: MissingMandatoryParameters."
-{% endhighlight %}3.  If arguments type does not match the allowed type, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
-{% highlight voltMx %}errorCode: 4002.   
-name: "BackgroundJobError".   
-message: "setBackgroundFetchInterval: InvalidParameters."
-{% endhighlight %}
 
-### Platform Availability
+      <pre><code style="display:block;background-color:#eee;">errorCode: 4001.
+    name: "BackgroundJobError".    
+    message:"setBackgroundFetchInterval: MissingMandatoryParameters."</code></pre>
 
-Available in iOS Platform.
+2. If arguments type does not match the allowed type, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
 
-### JavaScript Example
+      <pre><code style="display:block;background-color:#eee;">errorCode: 4002.
+   name: "BackgroundJobError".    
+   message:"setBackgroundFetchInterval: InvalidParameters."</code></pre>
 
-{% highlight voltMx %}//Fetch interval 
-	//1. constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM
-    //2. constants.BACKGROUND_TASK_FETCH_INTERVAL_NEVER
-    //3. Time in seconds. (Negative values are not accepted).
 
-    var fetchInterval = constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM;
-	
-	voltmx.backgroundjob.setBackgroundFetchInterval(fetchInterval);
+### Platform Availability  
 
-{% endhighlight %}
+Available in iOS Platform.  
 
-![](resources/prettify/onload.png)
+### JavaScript Example  
+
+<pre><code style="display:block;background-color:#eee;">//Fetch interval 
+//1. constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM
+//2. constants.BACKGROUND_TASK_FETCH_INTERVAL_NEVER
+//3. Time in seconds. (Negative values are not accepted).
+
+var fetchInterval = constants.BACKGROUND_TASK_FETCH_INTERVAL_MINIMUM;
+
+voltmx.backgroundjob.setBackgroundFetchInterval(fetchInterval);</code></pre>

@@ -10,6 +10,7 @@ Build an Android Application
 
 Once you have created and configured an app’s assets, resources, and services, you compile and link them by building your app.
 
+**_Note:_** Android Native application builds can fail on MacOS because of permission issues with older versions of the Android SDK. To avoid this problem, run `sudo spctl --master-disable`. You can also go to Security & Privacy and add your terminal app or IDE to the list of apps in the Developer Tools section of the Privacy tab. On the General tab, under **Allow apps downloaded from**, click **Anywhere**. 
 To build an app with new or different settings, do the following:
 
 1.  On the **Build** menu, click **Build and Publish Native**.

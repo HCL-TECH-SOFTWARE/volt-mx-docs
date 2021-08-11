@@ -59,7 +59,7 @@ function initNav() {
 
 function initSearch() {
   var request = new XMLHttpRequest();
-  request.open('GET', `/VoltMxDocOpnSrc/assets/js/search-data.json`, true);
+  request.open('GET', `/pages/phoenix-temenos/VoltMxDocOpnSrc/assets/js/search-data.json`, true);
   
 
   request.onload = function(){
@@ -69,7 +69,7 @@ function initSearch() {
 
 
         var request1 = new XMLHttpRequest();
-        request1.open('GET', `/VoltMxDocOpnSrc/assets/js/search-index.json`, true);
+        request1.open('GET', `/pages/phoenix-temenos/VoltMxDocOpnSrc/assets/js/search-index.json`, true);
 
         request1.onload = function(){
           if (request1.status >= 200 && request1.status < 400) {

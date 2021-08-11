@@ -97,37 +97,27 @@ Service Workers
 
 When Progressive Web is enabled, the application is not expected to specifically make any changes for the Service workers to be registered and enabled. The web framework within Iris inherently helps your application create and register a service worker. The service worker is created using the default caching mechanism.
 
-Progressive Web Apps - Videos
------------------------------
-
-This section contains a series of videos that explain how to create Progressive Web Apps using Volt MX Iris.
-
-### Video One
-
-This is the first of the Progressive Web App tutorial series. Here, we walk you through the steps to build a basic web application by making use of Iris's low-code capabilities.
-
-{% include youtube.html id='0oAWEiZISDU' %}
-
-### Video Two
-
-In this second tutorial of the PWA series, we walk you through the steps to enhance the web app created in our first video. We will add the search capability, better responsive layout, and improved aesthetics.
-
-{% include youtube.html id='tuAYg84T17s' %}
-
-### Video Three
-
-In this third video tutorial of the PWA series, we will take the app that we built in our previous videos and add PWA capabilities.
-
-{% include youtube.html id='HQeAt508bkU' %}
-
-Progressive Web Apps-Caching
-----------------------------
-
-Caching or offline storage is a method that an application uses to store assets or data in the internal memory of a device temporarily. In Progressive Web applications, this mechanism helps the user to access assets or data from a URL, even when the internet connection is slow.
-
-From Iris V9 onwards, you can include custom caching categories in a Progressive Web application.
-
-There are two ways to implement caching in a progressive web app using Volt MX Iris.
+<h2>Progressive Web Apps - Videos</h2>
+<p></p>
+<p>This section contains a series of videos that explain how to create Progressive Web Apps using Volt MX Iris.</p>
+<h3 data-mc-conditions="">Video One</h3>
+<p>This is the first of the Progressive Web App tutorial series. Here, we walk you through the steps to build a basic web application by making use of Iris’s low-code capabilities.</p>
+<p data-mc-conditions="Default.HTML5 Only"><iframe width="560" height="315" src="https://www.youtube.com/embed/0oAWEiZISDU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1"></iframe>
+</p>
+<h3 data-mc-conditions="">Video Two</h3>
+<p>In this second tutorial of the PWA series, we walk you through the steps to enhance the web app created in our first video. We will add the search capability, better responsive layout, and improved aesthetics.</p>
+<p data-mc-conditions="Default.HTML5 Only"><iframe width="560" height="315" src="https://www.youtube.com/embed/tuAYg84T17s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1"></iframe>
+</p>
+<h3 data-mc-conditions="">Video Three</h3>
+<p>In this third video tutorial of the PWA series, we will take the app that we built in our previous videos and add PWA capabilities.</p>
+<p data-mc-conditions="Default.HTML5 Only"><iframe width="560" height="315" src="https://www.youtube.com/embed/HQeAt508bkU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1"></iframe>
+</p>
+<h2 data-mc-conditions=""><a name="Progress"></a>Progressive Web Apps-Caching</h2>
+<p>Caching or offline storage is a method that an application uses to store assets or data in the internal memory of a device temporarily. In Progressive Web applications, this mechanism helps the user to access assets or data from a URL, even when the internet connection is slow.</p>
+<p></p>
+<p>From Iris V9 onwards, you can include custom caching categories in a Progressive Web application.</p>
+<p></p>
+<p>There are two ways to implement caching in a progressive web app using Volt MX Iris.</p>
 
 *   [cachingMechanism function in Service Worker Helper file](#cachingmechanism-function-in-service-worker-helper-file)
 *   [Custom Service Worker file](#custom-service-worker)

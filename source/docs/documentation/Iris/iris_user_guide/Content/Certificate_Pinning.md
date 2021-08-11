@@ -30,7 +30,7 @@ To get the certificate that is to be pinned, follow any of these two procedures 
 
 Follow these steps to use the VoltMXSSLPinningTool.jar file:
 
-1.  Download the zipped [VoltMXSSLPinningTool.jar](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/blob/master/VoltMXSSLPinningTool.zip) file to your local system, and then unzip it.
+1.  Download the zipped [VoltMXSSLPinningTool.jar](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/VoltMXSSLPinningTool.zip) file to your local system, and then unzip it.
 
 > **_Note:_** You must run the VoltMXSSLPinningTool.jar file with Java 8 or later.
 

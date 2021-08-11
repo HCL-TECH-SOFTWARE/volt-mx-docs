@@ -145,7 +145,7 @@ To generate the SPKI Pin Hash from the certificate, follow one of these procedur
 
 Follow these steps to use the VoltMXSSLPinningTool.jar file and generate SPKI hashes:
 
-1.  Download the zipped [VoltMXSSLPinningTool Jar file](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/blob/master/VoltMXSSLPinningTool.zip) to your local system, and then unzip it.
+1.  Download the zipped [VoltMXSSLPinningTool Jar file](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/VoltMXSSLPinningTool.zip) to your local system, and then unzip it.
 
 > **_Note:_** You must run the VoltMXSSLPinningTool.jar file with Java 8 or later.
 

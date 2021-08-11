@@ -75,7 +75,7 @@ Scope
     | --- | --- | --- | --- |
     | 10.0 | 4.0 | 20 | 5.0 |  
     
-5.  Supported List of Browsers 
+5.  Windows 
     
 
 Introduction to Constructor - WorkerThread()
