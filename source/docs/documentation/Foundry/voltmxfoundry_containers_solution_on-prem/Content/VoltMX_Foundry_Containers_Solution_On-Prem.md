@@ -456,7 +456,7 @@ After joining masters and worker nodes, you must press enter in the master node 
     
 5.  Run the following command to check status of pods.
 
-	```sudo kubectl get pods```
+    ```sudo kubectl get pods```
     
     ![](Resources/Images/podslist.PNG)
     
