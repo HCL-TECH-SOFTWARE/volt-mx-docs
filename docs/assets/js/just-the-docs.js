@@ -59,7 +59,11 @@ function initNav() {
 
 function initSearch() {
   var request = new XMLHttpRequest();
+<<<<<<< HEAD
   request.open('GET', `https://opensource.hcltechsw.com/volt-mx-docs/assets/js/search-data.json`, true);
+=======
+  request.open('GET', `/VoltMxDocOpnSrc/assets/js/search-data.json`, true);
+>>>>>>> 6743bbbac (Merge pull request #1 from phoenix-temenos/feature/HPHX-9_2_changes_V)
   
 
   request.onload = function(){
@@ -69,7 +73,11 @@ function initSearch() {
 
 
         var request1 = new XMLHttpRequest();
+<<<<<<< HEAD
         request1.open('GET', 'https://opensource.hcltechsw.com/volt-mx-docs/assets/js/search-index.json', true);
+=======
+        request1.open('GET', `/VoltMxDocOpnSrc/assets/js/search-index.json`, true);
+>>>>>>> 6743bbbac (Merge pull request #1 from phoenix-temenos/feature/HPHX-9_2_changes_V)
 
         request1.onload = function(){
           if (request1.status >= 200 && request1.status < 400) {
