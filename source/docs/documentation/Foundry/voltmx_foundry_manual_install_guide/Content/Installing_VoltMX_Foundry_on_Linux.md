@@ -95,6 +95,7 @@ PRESS <ENTER> TO CONTINUE:
     *   **All Components** - To install all components, select 1. The system will display both the [VoltMX Identity Service Database Details](#All_Components_VoltMX_Identity_Service) and **[VoltMX Foundry Console Database Details](#AllComponents_VoltMX_Foundry_Console)**.
     *   **VoltMX Identity Service** - To install Volt MX Identity Service, select 2. The system will display the [VoltMX Identity Service Database Details](#All_Components_VoltMX_Identity_Service) only.
     *   **VoltMX Foundry Console**\- To install Volt MX Foundry Console, select 3. The system will display the **[VoltMX Foundry Console Database Details](#AllComponents_VoltMX_Foundry_Console)** only.
+
 11.  Press **Enter** to continue the installation. The _Install Folder_ option appears.
     
     \=======================================================================  

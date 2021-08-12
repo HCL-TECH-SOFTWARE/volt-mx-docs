@@ -170,7 +170,6 @@ To create a Volt MX account after receiving an invitation, follow these steps:
         
         The installer is downloaded to your computer.
 
-
 You can view the [Preface](Revision History.html) and [Revision History](homepage.html)
 
 <!--
