@@ -62,7 +62,6 @@ This section helps you to understand the system requirements and necessary softw
 | Internal Storage | 24 GB |
 | Network | Ethernet Port |
 
-
 Download Volt MX Iris
 ---------------------------
 
@@ -170,7 +169,7 @@ To create a Volt MX account after receiving an invitation, follow these steps:
         [![](Resources/Images/download_site_thumb_0_288.png)](Resources/Images/download_site.png)
         
         The installer is downloaded to your computer.
--->
+
 You can view the [Preface](Revision History.html) and [Revision History](homepage.html)
 
 <!--
