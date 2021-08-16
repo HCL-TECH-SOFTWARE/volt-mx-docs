@@ -1,1 +1,0 @@
-bundle exec jekyll build serve  --baseurl "/pages/phoenix-temenos/VoltMxDocOpnSrc"

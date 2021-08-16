@@ -8,8 +8,8 @@ bundle exec jekyll build $1
 cd _site/assets/js
 
 #Update the host url 
-sed -i 's/hcl-tech-software\.github\.io/opensource\.hcltechsw\.com/g' search-data.json
-sed -i 's/hcl-tech-software\.github\.io/opensource\.hcltechsw\.com/g' just-the-docs.js
+sed -i '' 's/hcl-tech-software\.github\.io/opensource\.hcltechsw\.com/g' search-data.json
+sed -i '' 's/hcl-tech-software\.github\.io/opensource\.hcltechsw\.com/g' just-the-docs.js
 
 #Generate search index file
 cp search-data.json ../../../docRebrandScripts/searchIdxGeneration/
