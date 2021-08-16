@@ -129,7 +129,7 @@ Before you publish a web app, ensure that you have a project in which you have a
 
 15.  You can choose to change the cloud environment on which your app will be published. To do so click on **Change** beside the **Environment** option.
 
-7. If you do not use the deprecated SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check **Strict Mode**. If you use any of those algorithms, leave **Strict Mode** unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
+7. If you do not want to use the SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check **Strict Mode**. If you do use any of those algorithms, leave **Strict Mode** unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
 
 16.  Once all the required settings are ready, click **Build**.  
     The progress of the Web App Publish is displayed in the Build tab of Iris.  
