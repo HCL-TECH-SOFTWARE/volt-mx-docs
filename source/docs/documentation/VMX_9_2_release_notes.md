@@ -10,42 +10,50 @@ Release notes
 
 This page lists changes, known issues, and new features in HCL Volt MX 9.2. For release notes about earlier versions, including Temenos products, see [Iris Release Notes](Iris/iris_rel_notes/Content/VoltMX_Iris_Release_Notes.html) and [Volt MX Foundry Release Notes](Foundry/voltmx_foundry_release_notes/Content/VoltMX_Foundry_Release_Notes.html)
 
-- Volt MX 9.2 does not support the building of Windows native applications. (HPHX-5452)
+Known issues
+-------------
 
-- voltmx.location.getCurrentPosition fails in Desktop Web Applications. When you test your application with Live Preview, the system permission dialog appears as expected. However, for published SPA and Desktop Web applications, the dialog box appears only when the application URL uses the https protocol. If the URL uses http, the dialog box does not appear, and location APIs will not work. (HPHX-4740)
-For more information, see [voltmx.location Namespace](Iris/iris_api_dev_guide/content/voltmx.location_functions.html#functions).
-
-- kony.os.deviceInfo().deviceID, kony.os.deviceInfo().SERIAL_NO, kony.os.deviceInfo().Android_id, and kony.os.deviceInfo().uid are deprecated and return null, and kony.os.getDeviceId(int slot)values have changed. (HPHX-3328)
-For more information, see [DeviceInfo Object](Iris/iris_api_dev_guide/content/voltmx.os_objects_deviceinfo.html) and [voltmx.os Namespace ](Iris/iris_api_dev_guide/content/voltmx.os_functions.html#getDeviceId).
-
-- Android Native application builds can fail on MacOS because of permission issues with older versions of the Android SDK. To avoid this problem, run "sudo spctl --master-disable". You can also go to Security & Privacy and add your terminal app or IDE to the list of apps in the Developer Tools section of the Privacy tab. On the General tab, under "Allow apps downloaded from", click "Anywhere". (HPHX-4876)
-For more information, see [Build an Android Application](Iris/iris_user_guide/Content/BuildAnAppForAndroid.html).
-
-- By default, all Volt MX frameworks are built with Application Reference Counting (ARC). However, in final application projects, ARC is disabled, to ensure that existing non-ARC FFI’s work without breaking. If your application does not use FFI’s, or if all the used FFI’s are ARC-compatible, enable ARC in the final Application by editing <WorkspaceName>\<ProjectName>\resources\common\infoplist_configuration.json. (HPHX-3799)
-For more information, see [Build an iOS Application ](Iris/iris_user_guide/Content/BuildAnAppForiOS.html#using-application-reference-counting).
-
-- PhotoShop plugin https://jira01.hclpnp.com/browse/HPHX-5220 (this might not be resolved till Q3, but maybe we should documented as a known issue? detail from Mandeep Alluru)
+- Volt MX 9.2 does not support the building of Windows native applications. 
+- voltmx.location.getCurrentPosition fails in Desktop Web Applications. When you test your application with Live Preview, the system permission dialog appears as expected. However, for published SPA and Desktop Web applications, the dialog box appears only when the application URL uses the https protocol. If the URL uses http, the dialog box does not appear, and location APIs will not work. For more information, see [voltmx.location Namespace](Iris/iris_api_dev_guide/content/voltmx.location_functions.html#functions).
+- Android Native application builds can fail on MacOS because of permission issues with older versions of the Android SDK. To avoid this problem, run "sudo spctl --master-disable". You can also go to Security & Privacy and add your terminal app or IDE to the list of apps in the Developer Tools section of the Privacy tab. On the General tab, under "Allow apps downloaded from", click "Anywhere". For more information, see [Build an Android Application](Iris/iris_user_guide/Content/BuildAnAppForAndroid.html).
+- The Photoshop plugin for Iris is not included in this release.
+- IQ functionality is not surfaced to the end user from Iris.
  
-- Volt MX Legacy Sync has been deprecated. You cannot create a new Legacy Sync-based client application. However, existing Legacy Sync-based apps will continue to work. New applications that need offline and sync capabilities must use the Offline Objects feature. (HPHX-5611)
-For more information, see [Using Volt MX Legacy Sync with Foundry ](Foundry/voltmx_legacy_sync_with_foundry/Content/legacy_sync_with_foundry.html).
 
-- Volt MX License Server is the preferred method for activating licenses. If you do not have access to the server, you can use your HCL Software ID to download the installer for the HCL Common Local License Server from the HCL License and Download Portal. Instructions for activating a license on a private network have been updated. 
+Changes
+-------
 
-You must have valid Flexnet server credentials to activate your license. If you are upgrading from a Temenos Fabric server to a Foundry server, your existing, activated Temenos license will be removed, and you must acquire a fresh license through the Flexnet server. (HPHX-3225, HPHX-1440) 
-
-For more information, see [Volt MX Foundry](Foundry/voltmx_licensing_guide/Content/License_Activation_through_VoltMX_Server_7.2.html).
-
+- voltmx.os.deviceInfo().SERIAL_NO, voltmx.os.deviceInfo().ANDROID_ID, and voltmx.os.deviceInfo().uid are deprecated and return null, and kony.os.getDeviceId(int slot) values have changed. For more information, see [DeviceInfo Object](Iris/iris_api_dev_guide/content/voltmx.os_objects_deviceinfo.html) and [voltmx.os Namespace ](Iris/iris_api_dev_guide/content/voltmx.os_functions.html#getDeviceId).
+- We have clarified the documentation of the Browser widget "limitsNavigationsToAppBoundDomains" property. For more information, see [Browser Properties ](Iris/iris_widget_prog_guide/Content/Browser_Properties.html).
+- Do not use voltmx.os.deviceInfo().deviceID or volt.mx.deviceInfo().customdeviceid. Due to privacy issues, the MAC address is not used to identify the device. Instead of using the MAC address, use volt.mx.deviceInfo().identifierForVendor. For more information, see [DeviceInfo Object](Iris/iris_api_dev_guide/content/voltmx.os_objects_deviceinfo.html)  
+- By default, all Volt MX frameworks are built with Application Reference Counting (ARC). However, in final application projects, ARC is disabled, to ensure that existing non-ARC FFI’s work without breaking. If your application does not use FFI’s, or if all the used FFI’s are ARC-compatible, enable ARC in the final Application by editing <WorkspaceName>\<ProjectName>\resources\common\infoplist_configuration.json. For more information, see [Build an iOS Application ](Iris/iris_user_guide/Content/BuildAnAppForiOS.html#using-application-reference-counting).
+- Volt MX Legacy Sync has been deprecated. The last version of Legacy Sync server was 8.3. You cannot create a new Legacy Sync-based client application. New applications that need offline and sync capabilities must use the Offline Objects feature. For more information, see [Using Volt MX Legacy Sync with Foundry ](Foundry/voltmx_legacy_sync_with_foundry/Content/legacy_sync_with_foundry.html).
+- HCL Cloud License Server is the preferred method for activating licenses. If your Foundry server does not have access to the Cloud License Server, you can use your HCL Software ID to download the installer for the HCL Common Local License Server from the HCL License and Download Portal. Instructions for activating a license on a private network have been updated. You must have valid HCL Flexnet server credentials to activate your license. If you are upgrading from a Temenos Fabric server to a Foundry server, your existing, activated Temenos license will be removed, and you must acquire a fresh license through the HCL Flexnet server. For more information, see [Volt MX Foundry](Foundry/voltmx_licensing_guide/Content/License_Activation_through_VoltMX_Server_7.2.html).
 - Iris SDK log files generated by the Volt MX Logger are now named VoltmxLogger_<dateTime>.log 
+- If you do not want to use the SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check Strict Mode. If you do use any of those algorithms, leave Strict Mode unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
+- For Foundry Installer On-Premise, we have upgraded JBoss from 7.2 to 7.3 and Tomcat from 9.0.33 to 9.0.45. For Foundry Container On-Premise we have upgraded Tomcat from 9.0.33 to 9.0.45.
 
-- The SHA1, MD2, MD4, and MD5 hashing algorithms are deprecated. If you do not use them in your application, check Strict Mode. If you do use any of those algorithms, leave Strict Mode unchecked. Otherwise, you will receive an "Unsupported algorithm" error message. (HPHX-864)
+Resolved issues brought over from Temenos 
+-----------------------------------------
 
-- We have clarified the documentation of the Browser widget "limitsNavigationsToAppBoundDomains" property. (HPHX-2152) For more information, see [Browser Properties ](Iris/iris_widget_prog_guide/Content/Browser_Properties.html).
+- An issue has been resolved that prevented Iris from being restarted if you quit the Iris via the MacBook command bar > Iris icon -> right click -> Quit. There are no longer subprocesses left running in the background to interfere with an Iris restart.
+- A problem in Iris that caused intermittent hanging on the splash screen has been resolved.
+- The USE_DSA_AS_DEFAULT_FOR_TOKEN_SIGNING -D parameter has been removed. RSA is set to default.
+- Foundry console login token expiration can be configurable.
+- Logging in to an application with OAuth 2.0 caused the error, "AADSTS501491: Invalid size of Code_Challange parameter". This problem has been resolved.
+- Switch to Secure Object Archiving APIs.
+- We have resolved a file corruption problem when downloading a file from S3 backend via the file storage adapter.
+- In an app that contains a Segment widget, when the user invokes the setData or setDataAt method on a segment row, the data does not load properly and causes the segment to flicker. The issue has been resolved.
+- In some cases, voltmx.application.setAppHeaders caused an "undefined function" error. This problem has been resolved.
 
-- Product names, API namespaces, and other terms have changed.
+Naming changes
+--------------
 
-  - Replace any references to Kony headers in Fabric (now Foundry) services, pre/post-processor, or custom code with Voltmx headers. (Replace "X-Kony-" with "X-Voltmx-".)
-  - Recompile apps that use the native function SDK APIs for iOS, Android, and Windows to use the new SDK with updated Voltmx headers.
-  - If the app is using pre/post compile tasks and if those are using “kony” namespaced js files, they should be updated with “voltmx” namespaced js files.
+Product names, API namespaces, and other terms have changed.
+
+- Replace any references to Kony headers in Fabric (now Foundry) services, pre/post-processor, or custom code with Voltmx headers. (Replace "X-Kony-" with "X-Voltmx-".)
+- Recompile apps that use the native function SDK APIs for iOS, Android, and Windows to use the new SDK with updated Voltmx headers.
+- If the app is using pre/post compile tasks and if those are using “kony” namespaced js files, they should be updated with “voltmx” namespaced js files.
 
 Refer to the following table for details.
 
@@ -176,10 +184,6 @@ This table shows new Volt MX terms versus old Temenos terms.
   </thead>
   <tbody>
     <tr>
-      <td>vfcli.jar</td>
-      <td>mfcli.jar</td>
-    </tr>
-    <tr>
       <td>iris</td>
       <td>viz</td>
     </tr>
@@ -189,5 +193,7 @@ This table shows new Volt MX terms versus old Temenos terms.
     </tr>
   </tbody>
 </table>
+
+
 
 
