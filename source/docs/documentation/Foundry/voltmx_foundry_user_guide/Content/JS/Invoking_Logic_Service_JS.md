@@ -10,7 +10,7 @@ Invoking a Logic Service
 
 ===========================
 
-The **getLogicService** API creates an instance of logic service that is configured in the Volt MX Foundry portal. `logicClient = HCLFoundry.getLogicService(serviceName)`
+The **getLogicService** API creates an instance of logic service that is configured in the Volt MX Foundry portal. `logicClient = VMXFoundry.getLogicService(serviceName)`
 
 The **invokeOperation** API invokes the backend operation using the object of logic service. The invoke operation function is as follows:
 

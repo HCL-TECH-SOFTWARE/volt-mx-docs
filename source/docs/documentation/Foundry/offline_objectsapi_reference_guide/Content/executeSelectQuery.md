@@ -3,9 +3,9 @@ layout: "documentation"
 category: "offline_objectsapi_reference_guide"
 ---
 
-Volt MX  Foundry console User Guide: [Application-level APIs](Application_Level_APIs.html) > HCLFoundry.OfflineObjects.executeSelectQuery
+Volt MX  Foundry console User Guide: [Application-level APIs](Application_Level_APIs.html) > VMXFoundry.OfflineObjects.executeSelectQuery
 
-HCLFoundry.OfflineObjects.executeSelectQuery
+VMXFoundry.OfflineObjects.executeSelectQuery
 =================================================
 
 The application-level API, **executeSelectQuery** allows the user to execute any select query on device database. The API executes the query provided as an argument on the device database and returns the response in successCallback.
@@ -25,7 +25,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.executeSelectQuery(query, successCallback, failureCallback)
+{% highlight voltMx %}VMXFoundry.OfflineObjects.executeSelectQuery(query, successCallback, failureCallback)
 {% endhighlight %}
 
 ### Parameters
@@ -51,7 +51,7 @@ function failureCallback(error) {
     voltmx.print("executeSelectQuery failed with error:" + error.code);
 }
 var query = "Select * from Employee where EmployeeID=5";
-HCLFoundry.OfflineObjects.executeSelectQuery(query, successCallback, failureCallback);
+VMXFoundry.OfflineObjects.executeSelectQuery(query, successCallback, failureCallback);
 {% endhighlight %}
 
 Android (Java)

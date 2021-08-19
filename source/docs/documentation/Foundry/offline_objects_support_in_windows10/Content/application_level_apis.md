@@ -9,14 +9,14 @@ Application Level APIs
 
 The application level API facilitates in set up and initialize the Offline Objects client-side environment, drop or reset the client state (database).
 
-HCLFoundry.OfflineObjects.setup
+VMXFoundry.OfflineObjects.setup
 ------------------------------------
 
-Offline Objects setup function initializes the creation of device database and sync environment. Once the setup is successful, the database structure is created on the device. The device database does not have any data. Every app launch must call setup before using any other offline objects API, subsequent **HCLFoundry.OfflineObjects.setup** call initializes the sync environment.
+Offline Objects setup function initializes the creation of device database and sync environment. Once the setup is successful, the database structure is created on the device. The device database does not have any data. Every app launch must call setup before using any other offline objects API, subsequent **VMXFoundry.OfflineObjects.setup** call initializes the sync environment.
 
 ### Syntax
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.setup(options, successCallback, failureCallback)
+{% highlight voltMx %}VMXFoundry.OfflineObjects.setup(options, successCallback, failureCallback)
 {% endhighlight %}
 
 ### Input Parameters
@@ -33,17 +33,17 @@ function failureCallback(error){
 }
 //Encrypt the device database using a passphrase
 var options = {"deviceDbEncryptionKey" : "myencryptionpa$$phrase1"};
-HCLFoundry.OfflineObjects.setup(options, successCallback, failureCallback);
+VMXFoundry.OfflineObjects.setup(options, successCallback, failureCallback);
 {% endhighlight %}
 
-HCLFoundry.OfflineObjects.drop
+VMXFoundry.OfflineObjects.drop
 -----------------------------------
 
 The function deletes the database schema along with all its data. Success or failure is reported through callbacks provided to the drop API.
 
 ### Syntax
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.drop(options, successCallback, failureCallback)
+{% highlight voltMx %}VMXFoundry.OfflineObjects.drop(options, successCallback, failureCallback)
 {% endhighlight %}
 
 ### Input Parameters
@@ -65,17 +65,17 @@ function failureCallback(error){
 }
 //Encrypt the device database using a passphrase
 var options = {"deviceDbEncryptionKey" : "myencryptionpa$$phrase1"};
-HCLFoundry.OfflineObjects.drop(options, successCallback, failureCallback);
+VMXFoundry.OfflineObjects.drop(options, successCallback, failureCallback);
 {% endhighlight %}
 
-HCLFoundry.OfflineObjects.reset
+VMXFoundry.OfflineObjects.reset
 ------------------------------------
 
 Offline objects reset function resets the device database to the initial stage of the sync environment. Once the reset is successful, all the data is removed from the database but the database table structure is preserved.
 
 ### Syntax
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.reset(options, successCallback, failureCallback)
+{% highlight voltMx %}VMXFoundry.OfflineObjects.reset(options, successCallback, failureCallback)
 {% endhighlight %}
 
 ### Input Parameters
@@ -97,17 +97,17 @@ function failureCallback(error){
 } 
 //Decrypt and re encrypt the device database
 var options={"deviceDBEncryptionKey":"myencryptionpa$$phrase1"};
-HCLFoundry.OfflineObjects.reset(options,successCallback, failureCallback);
+VMXFoundry.OfflineObjects.reset(options,successCallback, failureCallback);
 {% endhighlight %}
 
-HCLFoundry.OfflineObjects.rollback
+VMXFoundry.OfflineObjects.rollback
 ---------------------------------------
 
 Offline objects rollback function rolls back all the changes of the application in the device local database to its previous sync state.
 
 ### Syntax
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.rollback(successCallback, failureCallback)
+{% highlight voltMx %}VMXFoundry.OfflineObjects.rollback(successCallback, failureCallback)
 {% endhighlight %}
 
 ### Input Parameters
@@ -122,5 +122,5 @@ Offline objects rollback function rolls back all the changes of the application 
 function failureCallback(error){
     voltmx.print("Application rollback failed with error:" + error.code);
 }
-HCLFoundry.OfflineObjects.rollback(successCallback, failureCallback);
+VMXFoundry.OfflineObjects.rollback(successCallback, failureCallback);
 {% endhighlight %}

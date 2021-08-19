@@ -13,7 +13,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-HCLFoundry.OfflineObjects.startSync(options, successCallback, failureCallback, progressCallback)
+VMXFoundry.OfflineObjects.startSync(options, successCallback, failureCallback, progressCallback)
 
 ### Parameters
 
@@ -57,7 +57,7 @@ options.syncMode = “parallel”;
 
 options.objectServicesOptions = {" Organization" : organizationOptions};
 
-HCLFoundry.OfflineObjects.startSync(options, onSuccess, onFailure, onProgress);
+VMXFoundry.OfflineObjects.startSync(options, onSuccess, onFailure, onProgress);
 
 function onSuccess(response){
 

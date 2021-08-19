@@ -5,10 +5,10 @@ category: "offline_objectsapi_reference_guide"
                                
 
 
-HCLFoundry.OfflineObjects.startSync
+VMXFoundry.OfflineObjects.startSync
 ========================================
 
-The **HCLFoundry.OfflineObjects.startSync** API performs sync on all the object services published in the Volt MX Foundry application.
+The **VMXFoundry.OfflineObjects.startSync** API performs sync on all the object services published in the Volt MX Foundry application.
 
 > **Note:**  
 *   If sync is performed in an upload cache enabled scenario, cached requests that are timed out in the previous upload session are uploaded before the latest changes.  
@@ -23,7 +23,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.startSync(options, successCallback, failureCallback, progressCallback)
+{% highlight voltMx %}VMXFoundry.OfflineObjects.startSync(options, successCallback, failureCallback, progressCallback)
 {% endhighlight %}
 
 ### Input Parameters
@@ -75,7 +75,7 @@ options.objectServicesOptions = {
     " Organization": organizationOptions
 };
 
-HCLFoundry.OfflineObjects.startSync(options, onSuccess, onFailure, onProgress);
+VMXFoundry.OfflineObjects.startSync(options, onSuccess, onFailure, onProgress);
 
 function onSuccess(response) {
     voltmx.print("Application Sync success: " + JSON.stringify(response.successResponse));

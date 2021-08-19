@@ -70,7 +70,7 @@ To enable SSO on the client application for **login call**, add the following co
 
 {% highlight voltMx %}//Sample code to authenticate to Volt MX Foundry client 
 var serviceName = "identity_service_name";
-var identitySvc = HCLFoundry.getIdentityService(serviceName);
+var identitySvc = VMXFoundry.getIdentityService(serviceName);
 
 var options = {};
 var loginOptions = {};
