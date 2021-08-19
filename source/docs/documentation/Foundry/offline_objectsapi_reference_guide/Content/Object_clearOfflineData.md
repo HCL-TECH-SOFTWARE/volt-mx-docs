@@ -22,7 +22,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLObj.clearOfflineData(options, successCallback, failureCallback)
+{% highlight voltMx %}VMXObj.clearOfflineData(options, successCallback, failureCallback)
 {% endhighlight %}
 
 ### Parameters

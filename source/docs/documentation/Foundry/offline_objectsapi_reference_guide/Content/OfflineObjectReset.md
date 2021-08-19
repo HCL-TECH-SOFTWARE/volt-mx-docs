@@ -5,7 +5,7 @@ category: "offline_objectsapi_reference_guide"
                                
 
 
-HCLFoundry.OfflineObjects.reset
+VMXFoundry.OfflineObjects.reset
 ====================================
 
 Offline objects reset function resets device database to the initial stage of the sync environment. Once the reset is successful, all data is removed from the database but the database table structure is preserved.
@@ -17,7 +17,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.reset(options, successCallback, failureCallback)
+{% highlight voltMx %}VMXFoundry.OfflineObjects.reset(options, successCallback, failureCallback)
 {% endhighlight %}
 
 ### Input Parameters
@@ -55,7 +55,7 @@ function failureCallback(error) {
 //Decrypt and re encrypt the device database
 Var options = {
     "deviceDbENcryptionKey": "myencryptionpa$$phrase1"};
-HCLFoundry.OfflineObjects.reset(options,successCallback, failureCallback);
+VMXFoundry.OfflineObjects.reset(options,successCallback, failureCallback);
 
 {% endhighlight %}
 

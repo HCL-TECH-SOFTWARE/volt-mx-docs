@@ -44,7 +44,7 @@ To configure Offline Objects in Volt MX Iris, follow these steps.
     }
     
     function setupSync() {
-        HCLFoundry.OfflineObjects.setup(options, onSetupSuccess, onSetupFailed);
+        VMXFoundry.OfflineObjects.setup(options, onSetupSuccess, onSetupFailed);
     }  
     
     {% endhighlight %}

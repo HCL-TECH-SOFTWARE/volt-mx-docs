@@ -36,7 +36,7 @@ Make sure that you subscribe to the topics by using this API when an app is laun
 
 ### Syntax
 
-{% highlight voltMx %}HCLFoundry.subscribeServerEvents(topicsToSubscribe, subscribeOptions);
+{% highlight voltMx %}VMXFoundry.subscribeServerEvents(topicsToSubscribe, subscribeOptions);
 {% endhighlight %}
 
 ### Parameters
@@ -67,7 +67,7 @@ subscribeOptions = {
 
 };
 
-HCLFoundry.subscribeServerEvents(eventsToSubscribe, subscribeOptions);
+VMXFoundry.subscribeServerEvents(eventsToSubscribe, subscribeOptions);
 {% endhighlight %}
 
 unsubscribeServerEvents API
@@ -79,7 +79,7 @@ The **unsubscribeServerEvents** API is used to unsubscribe the ServerEvents' mes
 
 ### Syntax
 
-{% highlight voltMx %}HCLFoundry.unsubscribeServerEvents(topicsToUnsubscribe, unsubscribeOptions);
+{% highlight voltMx %}VMXFoundry.unsubscribeServerEvents(topicsToUnsubscribe, unsubscribeOptions);
 {% endhighlight %}
 
 ### Parameters
@@ -106,7 +106,7 @@ unsubscribeOptions = {
 
 };
 
-HCLFoundry.unSubscribeServerEvents(eventsToUnsubscribe, unsubscribeOptions);
+VMXFoundry.unSubscribeServerEvents(eventsToUnsubscribe, unsubscribeOptions);
 {% endhighlight %}
 
 publishServerEvents API
@@ -116,7 +116,7 @@ The publishServerEvents API publishes events to server from the client SDK API.
 
 ### Syntax
 
-{% highlight voltMx %}HCLFoundry.publishServerEvents(eventsToPublish);
+{% highlight voltMx %}VMXFoundry.publishServerEvents(eventsToPublish);
 {% endhighlight %}
 
 ### Parameters
@@ -140,7 +140,7 @@ The publishServerEvents API publishes events to server from the client SDK API.
 
 }];  
   
-HCLFoundry.publishServerEvents(eventsToPublish);
+VMXFoundry.publishServerEvents(eventsToPublish);
 {% endhighlight %}
 
 Frequently Asked Questions

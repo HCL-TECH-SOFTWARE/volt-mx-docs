@@ -5,10 +5,10 @@ category: "offline_objectsapi_reference_guide"
                                
 
 
-HCLFoundry.OfflineObjects.setup
+VMXFoundry.OfflineObjects.setup
 ====================================
 
-Offline Objects setup function initializes the creation of device database and sync environment. After the setup is successful, the database structure is created without any data in the device database. After the client database is created, subsequent calls to HCLFoundry.OfflineObjects setup initializes the sync environment.
+Offline Objects setup function initializes the creation of device database and sync environment. After the setup is successful, the database structure is created without any data in the device database. After the client database is created, subsequent calls to VMXFoundry.OfflineObjects setup initializes the sync environment.
 
 Before performing any offline operation other than drop or reset, invoke either **setup()** or **incrementalSetup()** API.
 
@@ -19,7 +19,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.setup(options, successCallback, failureCallback)
+{% highlight voltMx %}VMXFoundry.OfflineObjects.setup(options, successCallback, failureCallback)
 {% endhighlight %}
 
 ### Input Parameters
@@ -56,7 +56,7 @@ function failureCallback(error) {
 var options = {
     "deviceDbEncryptionKey": "myencryptionpa$$phrase1"
 };
-HCLFoundry.OfflineObjects.setup(options, successCallback, failureCallback);
+VMXFoundry.OfflineObjects.setup(options, successCallback, failureCallback);
 {% endhighlight %}
 
 Android (Java)

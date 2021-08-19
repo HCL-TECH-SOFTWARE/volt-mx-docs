@@ -5,7 +5,7 @@ category: "offline_objectsapi_reference_guide"
                                
 
 
-HCLFoundry.OfflineObjects.drop
+VMXFoundry.OfflineObjects.drop
 ===================================
 
 Offline Objects drop function deletes the database schema along with all its data. Success or failure is reported through callbacks provided to the drop API.
@@ -15,7 +15,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.drop(options, successCallback, failureCallback) 
+{% highlight voltMx %}VMXFoundry.OfflineObjects.drop(options, successCallback, failureCallback) 
 {% endhighlight %}
 
 ### Parameters
@@ -47,7 +47,7 @@ var options = {
     "deviceDbEncryptionKey": "myencryptionpa$$phrase1"
 };
 
-HCLFoundry.OfflineObjects.drop(options, successCallback, failureCallback);
+VMXFoundry.OfflineObjects.drop(options, successCallback, failureCallback);
 
 {% endhighlight %}
 
