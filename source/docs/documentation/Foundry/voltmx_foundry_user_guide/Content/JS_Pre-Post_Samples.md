@@ -121,7 +121,7 @@ PostProcessor
       
     function fun5() {
         logger.debug('Tesing Adding a new Output Parameter');
-        var newOutputParam = new com.hcl.middleware.dataobject.Param();
+        var newOutputParam = new com.hcl.voltmx.middleware.dataobject.Param();
         newOutputParam.setName('outputParamName');
         newOutputParam.setValue('outputParamValue');
         result.setParam(newOutputParam);
@@ -153,18 +153,18 @@ PostProcessor
 *   **To add Datasets to result:**{% highlight voltMx %} // Sample JavaScript Code to add a dataset to result for postprocessor   
       
     function fun8() {
-        var varDataSet = new com.hcl.middleware.dataobject.Dataset();
-        var varRecord = new com.hcl.middleware.dataobject.Record();
-        var varParam = new com.hcl.middleware.dataobject.Param();
+        var varDataSet = new com.hcl.voltmx.middleware.dataobject.Dataset();
+        var varRecord = new com.hcl.voltmx.middleware.dataobject.Record();
+        var varParam = new com.hcl.voltmx.middleware.dataobject.Param();
           
         varParam.setName('ParamName');
         varParam.setValue('ParamValue');
         varRecord.setParam(varParam);
         varDataSet.setRecord(varRecord);
         varDataSet.setId('DataResponse');
-        var varDataSet1 = new com.hcl.middleware.dataobject.Dataset();
-        var varRecord1 = new com.hcl.middleware.dataobject.Record();
-        var varParam1 = new com.hcl.middleware.dataobject.Param();
+        var varDataSet1 = new com.hcl.voltmx.middleware.dataobject.Dataset();
+        var varRecord1 = new com.hcl.voltmx.middleware.dataobject.Record();
+        var varParam1 = new com.hcl.voltmx.middleware.dataobject.Param();
         varParam1.setName('ParamName1');
         varParam1.setValue('ParamValue1');
         varRecord1.setParam(varParam1);
@@ -181,7 +181,7 @@ PostProcessor
 *   **A function which uses most of the response APIs:**{% highlight voltMx %} // Sample JavaScript Code for postprocessor   
       
     function fun8() {
-        var newOutputParam = new com.hcl.middleware.dataobject.Param();
+        var newOutputParam = new com.hcl.voltmx.middleware.dataobject.Param();
         newOutputParam.setName('outputParamName');
         newOutputParam.setValue('outputParamValue');
         result.setParam(newOutputParam);

@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Create a Java Service
 ---------------------
 
-A service that uses a custom Java connector is called a Java service. The Java connector is a custom Java Class that implements the **com.hcl.middleware.common.JavaService** interface or **com.hcl.middleware.common.JavaService2** interface. It is recommended that you use JavaService2 as you can get an access to `DataControllerRequest` and `DataControllerResponse` objects.
+A service that uses a custom Java connector is called a Java service. The Java connector is a custom Java Class that implements the **com.hcl.voltmx.middleware.common.JavaService** interface or **com.hcl.voltmx.middleware.common.JavaService2** interface. It is recommended that you use JavaService2 as you can get an access to `DataControllerRequest` and `DataControllerResponse` objects.
 
 You must load the required JAR files to define a Java service. JAR files contain Java classes. The Java classes contain Java methods. These methods have the logic defined that is required for a service. Java services are mostly used in conjunction with Webconnector Services.
 
@@ -32,7 +32,7 @@ In this topic, you will learn about:
 
 ### Creating a Java Service
 
-With Java service, you can interact with your software application that does not support RESTful APIs. A service that uses a custom Java connector is a Java service. The Java connector is a custom Java class that implements the `com.hcl.middleware.common.JavaService` interface.
+With Java service, you can interact with your software application that does not support RESTful APIs. A service that uses a custom Java connector is a Java service. The Java connector is a custom Java class that implements the `com.hcl.voltmx.middleware.common.JavaService` interface.
 
 Adding a Java service involves the following steps:
 

@@ -12,7 +12,7 @@ A preprocessor is a component that is invoked before passing the data to the ext
 
 A postprocessor is a component invoked after the data is received from the external data source but before that data is returned to the mobile device. This enables the developer to include any business logic on the data before sending the response to the mobile device.
 
-The logic, in both cases, may include formatting the data elements, removing them, or logging them (for diagnostics purposes). As custom Java classes, preprocessor and postprocessor implement the `com.hcl.middleware.common.DataPreProcessor` and `com.hcl.middleware.common.DataPostProcessor` Java interfaces respectively. You need to implement and load these libraries before using them.
+The logic, in both cases, may include formatting the data elements, removing them, or logging them (for diagnostics purposes). As custom Java classes, preprocessor and postprocessor implement the `com.hcl.voltmx.middleware.common.DataPreProcessor` and `com.hcl.voltmx.middleware.common.DataPostProcessor` Java interfaces respectively. You need to implement and load these libraries before using them.
 
 > **_Important:_** The preprocessor or postprocessor name must start with `com.voltmx` or `com.hcl`.
 
@@ -45,10 +45,10 @@ The following is a sample preprocessor file.
 
 {% highlight voltMx %}import java.util.HashMap;
 import org.apache.log4j.Logger;
-import com.hcl.middleware.common.DataPreProcessor;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.dataobject.Result;
-import com.hcl.middleware.session.Session;
+import com.hcl.voltmx.middleware.common.DataPreProcessor;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.session.Session;
 public class TestPreProcessor implements DataPreProcessor {
         ...public boolean execute(HashMap hm, DataControllerRequest dcRequest, Result result) throws Exception
         ... {
@@ -68,10 +68,10 @@ The following is a sample postprocessor file.
 
 {% highlight voltMx %}import java.util.ArrayList;
 import org.apache.log4j.Logger;
-import com.hcl.middleware.common.DataPostProcessor;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.dataobject.Param;
-import com.hcl.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.common.DataPostProcessor;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.dataobject.Param;
+import com.hcl.voltmx.middleware.dataobject.Result;
 public class TestPostProcessor implements DataPostProcessor {
         ...public Object execute(Result results, DataControllerRequest dcRequest)
         ... {

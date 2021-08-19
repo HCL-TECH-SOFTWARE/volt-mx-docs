@@ -21,10 +21,10 @@ In the given example, if a record exists with the name **John**, then the code 
 {% highlight voltMx %}package com.customcode.conflict;
 
 import com.google.gson.JsonObject;
-import com.hcl.middleware.common.ActionType;
-import com.hcl.middleware.customconflict.ConflictContext;
-import com.hcl.middleware.customconflict.ConflictResolutionResult;
-import com.hcl.middleware.customconflict.CustomConflictResolver;
+import com.hcl.voltmx.middleware.common.ActionType;
+import com.hcl.voltmx.middleware.customconflict.ConflictContext;
+import com.hcl.voltmx.middleware.customconflict.ConflictResolutionResult;
+import com.hcl.voltmx.middleware.customconflict.CustomConflictResolver;
 
 /**
  * This class represents sample custom conflict implementation
@@ -54,10 +54,10 @@ The sample custom conflict implementation provides the conflict resolution for c
 {% highlight voltMx %}package com.customcode.conflict;
 
 import com.google.gson.JsonObject;
-import com.hcl.middleware.common.ActionType;
-import com.hcl.middleware.customconflict.ConflictContext;
-import com.hcl.middleware.customconflict.ConflictResolutionResult;
-import com.hcl.middleware.customconflict.CustomConflictResolver;
+import com.hcl.voltmx.middleware.common.ActionType;
+import com.hcl.voltmx.middleware.customconflict.ConflictContext;
+import com.hcl.voltmx.middleware.customconflict.ConflictResolutionResult;
+import com.hcl.voltmx.middleware.customconflict.CustomConflictResolver;
 
 /**
  * This class represents sample custom conflict implementation
@@ -103,10 +103,10 @@ An **Update** conflict occurs when the client performs an **Update** actio
 {% highlight voltMx %}package com.customcode.conflict;
 
 import com.google.gson.JsonObject;
-import com.hcl.middleware.common.ActionType;
-import com.hcl.middleware.customconflict.ConflictContext;
-import com.hcl.middleware.customconflict.ConflictResolutionResult;
-import com.hcl.middleware.customconflict.CustomConflictResolver;
+import com.hcl.voltmx.middleware.common.ActionType;
+import com.hcl.voltmx.middleware.customconflict.ConflictContext;
+import com.hcl.voltmx.middleware.customconflict.ConflictResolutionResult;
+import com.hcl.voltmx.middleware.customconflict.CustomConflictResolver;
 
 /**
  * This class represents sample custom conflict implementation
@@ -137,10 +137,10 @@ The sample custom conflict implementation provides the conflict resolution for c
 {% highlight voltMx %}package com.customcode.conflict;
 
 import com.google.gson.JsonObject;
-import com.hcl.middleware.common.ActionType;
-import com.hcl.middleware.customconflict.ConflictContext;
-import com.hcl.middleware.customconflict.ConflictResolutionResult;
-import com.hcl.middleware.customconflict.CustomConflictResolver;
+import com.hcl.voltmx.middleware.common.ActionType;
+import com.hcl.voltmx.middleware.customconflict.ConflictContext;
+import com.hcl.voltmx.middleware.customconflict.ConflictResolutionResult;
+import com.hcl.voltmx.middleware.customconflict.CustomConflictResolver;
 
 /**
  * This class represents sample custom conflict implementation

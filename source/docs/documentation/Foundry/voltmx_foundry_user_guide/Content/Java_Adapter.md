@@ -9,7 +9,7 @@ User Guide: [Integration](Services.html#integration) \> [Configure the Integrati
 Java Adapter
 ------------
 
-With Java service, you can interact with your software application that does not support restful APIs. A service that uses a custom Java adapter is a Java service. The Java adapter is a custom Java class and you can create a Java adapter either by implementing `com.hcl.middleware.common.JavaService` interface or `com.hcl.middleware.common.JavaService2` interface. Volt MX recommends to use JavaService2 as you can get an access to `DataControllerRequest` and `DataControllerResponse` objects.
+With Java service, you can interact with your software application that does not support restful APIs. A service that uses a custom Java adapter is a Java service. The Java adapter is a custom Java class and you can create a Java adapter either by implementing `com.hcl.voltmx.middleware.common.JavaService` interface or `com.hcl.voltmx.middleware.common.JavaService2` interface. Volt MX recommends to use JavaService2 as you can get an access to `DataControllerRequest` and `DataControllerResponse` objects.
 
 You must load the required JAR files to define a Java service. The JAR files contain the Java classes. The Java classes contain the Java methods. These methods have the logic defined that is required for a service. Java services are mostly used with Webconnector Services.
 
@@ -22,7 +22,7 @@ You must load the required JAR files to define a Java service. The JAR files con
 
 <details close markdown="block"><summary>Click here for more details</summary>
 
-The data structure of the Volt MX Result object `(com.hcl.middleware.datamapping.Result)` shows that all the data is converted, but the complete data in the Volt MX Result object in not exposed as expected. You get a part of the data in Volt MX Foundry because only a few unnamed records are converted into an object instead of an array.
+The data structure of the Volt MX Result object `(com.hcl.voltmx.middleware.datamapping.Result)` shows that all the data is converted, but the complete data in the Volt MX Result object in not exposed as expected. You get a part of the data in Volt MX Foundry because only a few unnamed records are converted into an object instead of an array.
 
 The use of JSON Arrays is particularly important for the mapping of data in user interface segments that require arrays as data input.
 
@@ -76,12 +76,12 @@ Dataset [id=booking, index=-1,
 
 **To write a Java class for a Java adapter, follow these steps:**
 
-1.  Create a Java adapter either by implementing the `com.hcl.middleware.common.JavaService` interface or `com.hcl.middleware.common.JavaService2` interface.
-2.  When you implement `com.hcl.middleware.common.JavaService`, you have to implement the following `invoke()` method with the signature:
+1.  Create a Java adapter either by implementing the `com.hcl.voltmx.middleware.common.JavaService` interface or `com.hcl.voltmx.middleware.common.JavaService2` interface.
+2.  When you implement `com.hcl.voltmx.middleware.common.JavaService`, you have to implement the following `invoke()` method with the signature:
 ```
     public Object invoke(String paramString, Object[] paramArrayOfObject) throws Exception; 
 ```
-3.  When you implement `com.hcl.middleware.common.JavaService2`, you have to implement the following `invoke()` method with the signature:{% highlight voltMx %} public Object invoke(String methodID, Object[] objectArray, DataControllerRequest request, DataControllerResponse response) throws Exception;
+3.  When you implement `com.hcl.voltmx.middleware.common.JavaService2`, you have to implement the following `invoke()` method with the signature:{% highlight voltMx %} public Object invoke(String methodID, Object[] objectArray, DataControllerRequest request, DataControllerResponse response) throws Exception;
     {% endhighlight %}
 
 ### Middleware API to get Output parameters in a Java Service
