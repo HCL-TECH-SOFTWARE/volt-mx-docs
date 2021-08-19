@@ -14,7 +14,7 @@ EAS App Implementation
 
 Volt MX Enterprise App Store (EAS) is a simplified app distribution service that enables an enterprise to securely and easily distribute and manage apps to the users. All features of Volt MX EAS are available on Cloud and On-Premises. For more information on EAS, refer to [VoltMX Enterprise App Store (EAS) Service for Digital App Distribution](EnterpriseAppStore.html).
 
-From Volt MX AppPlatform V8 SP4 JuneFP onwards, Volt MX allows you to access the complete EAS App assets including the front-end project details and the back-end app. You can download the EAS App assets from the [VoltMX Marketplace](https://marketplace.kony.com/). These assets contain the source code of the Enterprise App Store, which is available for you to edit as per your requirement. You may choose to re-brand the app, or add specific forms to best suit your requirements.
+From Volt MX AppPlatform V8 SP4 JuneFP onwards, Volt MX allows you to access the complete EAS App assets including the front-end project details and the back-end app. You can download the EAS App assets from the [VoltMX Marketplace](https://marketplace.hclvoltmx.com /). These assets contain the source code of the Enterprise App Store, which is available for you to edit as per your requirement. You may choose to re-brand the app, or add specific forms to best suit your requirements.
 
 For example, you can brand some of the following use cases:
 
@@ -137,18 +137,18 @@ The EAS App assets are divided as follows:
 
 ### Downloading Front-end Project for EAS App for Volt MX Iris
 
-**Store** is the front-end project of the EAS created based on the Volt MX Reference Architecture. You can download the EAS App assets from [VoltMX Marketplace](https://marketplace.kony.com/). The store.zip app contains details such as forms for supported channels, splash screen, client-side code, and modules and forms of EAS.
+**Store** is the front-end project of the EAS created based on the Volt MX Reference Architecture. You can download the EAS App assets from [VoltMX Marketplace](https://marketplace.hclvoltmx.com /). The store.zip app contains details such as forms for supported channels, splash screen, client-side code, and modules and forms of EAS.
 
 For Cloud, the Store app is bundled with the front-end and Server apps.
 
-1.  Go to [VoltMX Marketplace](https://marketplace.kony.com/items/store-0).
+1.  Go to [VoltMX Marketplace](https://marketplace.hclvoltmx.com /items/store-0).
 2.  Click **Download**. The `store.zip` file gets downloaded to your local system. For more details on EAS versions, refer to [EAS and Platform Versions Compatibility Chart](#VersionsEASPlatforms).
 
 ### Downloading Server App (Volt MX App Store) for Volt MX Foundry
 
 The **Volt MX App Store** is the Server app (Volt MX Foundry), which contains services linked to EAS. You can download the source app (Volt MX App Store) from Marketplace.
 
-1.  Go to [VoltMX Marketplace](https://marketplace.kony.com/items/voltmx-app-store).
+1.  Go to [VoltMX Marketplace](https://marketplace.hclvoltmx.com /items/voltmx-app-store).
 2.  Click **Download**. The `voltmx_app_store.zip` file gets downloaded to your local system. For more details on EAS versions, refer to [EAS and Platform Versions Compatibility Chart](#VersionsEASPlatforms).
     
 
@@ -173,7 +173,7 @@ You can view the layout of the front-end app and the source code by importing th
 
 The Volt MX App Store app is available in your account in Volt MX Foundry by default. The app should be existing always in your account for EAS to work. The Volt MX App Store app is configured with the required services to be used in an app for EAS, for example, Identity Services.
 
-In case you want to import a different version of the app, you can re-import it from [VoltMX Marketplace](https://marketplace.kony.com/).
+In case you want to import a different version of the app, you can re-import it from [VoltMX Marketplace](https://marketplace.hclvoltmx.com /).
 
 1.  Log in to Volt MX Foundry.
 2.  In the **Apps** > **Foundry App**, click **IMPORT**, and drag and drop or browse for the **`voltmx_app_store_v1.0.zip`** file to upload.
