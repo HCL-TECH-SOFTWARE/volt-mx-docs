@@ -5,19 +5,19 @@ has_children: false
 order: 11
 ---
 
-### [Employee Directory](https://marketplace.kony.com/items/events)
+### [Employee Directory](https://marketplace.hclvoltmx.com /items/events)
 Employee Directory is a fully-functional sample application that helps you search, discover, and know more about the employees in your organization.
 
-### [Lead Management](https://marketplace.kony.com/items/lead-management)
+### [Lead Management](https://marketplace.hclvoltmx.com /items/lead-management)
 Using the Lead Management app, you can leverage Google Sheets components to store and analyze data in a format specific to your app on a tablet or a mobile device. You can create a customized application within 15 minutes.
 
-### [News and Weather](https://marketplace.kony.com/items/news-and-weather)
+### [News and Weather](https://marketplace.hclvoltmx.com /items/news-and-weather)
 The News and Weather omnichannel app enables a user to browse through news headlines with different categories. Further, the app lets the user glance through local weather conditions.
 
-### [Events](https://marketplace.kony.com/items/events)
+### [Events](https://marketplace.hclvoltmx.com /items/events)
 Events app provides you with an option to browse through and register for upcoming events in your organization. The responsive web version of the app is a Progressive Web App (PWA) and has a 100% PWA score on Google's Lighthouse tool.
 
-### [Work Order Management](https://marketplace.kony.com/items/work-order-management)
+### [Work Order Management](https://marketplace.hclvoltmx.com /items/work-order-management)
 The work order application highlights developing omnichannel apps that use both the desktop web and mobile channels to create and manage work orders. You can also view the reports of completed work-orders.
 
 ### [Sample Apps](https://support.hcltechsw.com/csm?sys_kb_id=275b69d61b239054a2f48661cd4bcbc2&id=kb_article_view&sysparm_rank=3&sysparm_tsqueryId=bb4283881b17e41ca2f48661cd4bcb2e)
