@@ -98,13 +98,13 @@ If the name of the keys in the imported file matches with the existing names, yo
 Add the following code to the existing code to access the configured properties from Java PostProcessor:
 
 {% highlight voltMx %}package com.custom.preprocessor;
-import com.hcl.middleware.common.DataPostProcessor2;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Param;
-import com.hcl.middleware.dataobject.Result;
-import com.hcl.middleware.api.ConfigurableParametersHelper;
-import com.hcl.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.common.DataPostProcessor2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Param;
+import com.hcl.voltmx.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.api.ConfigurableParametersHelper;
+import com.hcl.voltmx.middleware.api.ServicesManager;
 import java.util.Map;
 public class ServerConfigParamsPostProcessor
 implements DataPostProcessor2 
@@ -136,14 +136,14 @@ Add the following code to the existing code to access the configured properties 
 
 {% highlight voltMx %}package com.custom.preprocessor;
 
-import com.hcl.middleware.common.DataPreProcessor2;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Param;
-import com.hcl.middleware.dataobject.Record;
-import com.hcl.middleware.dataobject.Result;
-import com.hcl.middleware.api.ConfigurableParametersHelper;
-import com.hcl.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.common.DataPreProcessor2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Param;
+import com.hcl.voltmx.middleware.dataobject.Record;
+import com.hcl.voltmx.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.api.ConfigurableParametersHelper;
+import com.hcl.voltmx.middleware.api.ServicesManager;
 import java.util.HashMap;
 
 import java.util.Map;
@@ -179,8 +179,8 @@ Add the following code to the existing code to access the configured properties 
 var serverProp = paramHelper.getServerProperty('encryption');
 var clientProp = paramHelper.getClientAppProperty('MAX_EVENTS_SIZE');
 
-var serverParam = new com.hcl.middleware.dataobject.Param('encryption', serverProp);
-var clientParam = new com.hcl.middleware.dataobject.Param('MAX_EVENTS_SIZE', clientProp);
+var serverParam = new com.hcl.voltmx.middleware.dataobject.Param('encryption', serverProp);
+var clientParam = new com.hcl.voltmx.middleware.dataobject.Param('MAX_EVENTS_SIZE', clientProp);
 result.addParam(serverParam);
 result.addParam(clientParam);
 
@@ -192,7 +192,7 @@ var serverPropertyKeyset = allServerProps.keySet().toArray();
 for(var index=0; index<serverPropertyKeyset.length>; index++)
 {
 	var serverPropFromMap = allServerProps.get(serverPropertyKeyset[index]);
-	var serverParamFromMap = new com.hcl.middleware.dataobject.Param(serverPropertyKeyset[index], 
+	var serverParamFromMap = new com.hcl.voltmx.middleware.dataobject.Param(serverPropertyKeyset[index], 
 	serverPropFromMap);
 	result.addParam(serverParamFromMap);
 }
@@ -200,7 +200,7 @@ var clientPropertyKeyset = allClientProps.keySet().toArray();
 for(index=0; index<clientPropertyKeyset.length>; index++)
 {
 	var clientPropFromMap = allClientProps.get(clientPropertyKeyset[index]);
-	var clientParamFromMap = new com.hcl.middleware.dataobject.Param(clientPropertyKeyset[index], 
+	var clientParamFromMap = new com.hcl.voltmx.middleware.dataobject.Param(clientPropertyKeyset[index], 
 	clientPropFromMap);
 	result.addParam(clientParamFromMap);
 }
