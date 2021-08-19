@@ -22,12 +22,12 @@ To invoke an object service from custom code, you must first instantiate the Ser
 
 Below is the sample code to instantiate ServicesManager in Object Services Pre and Post Processors
 
-{% highlight voltMx %}import com.hcl.middleware.api.ServicesManager;
-import com.hcl.middleware.api.processor.FoundryRequestChain;
-import com.hcl.middleware.api.processor.manager.FoundryRequestManager;
-import com.hcl.middleware.api.processor.manager.FoundryResponseManager;
-import com.hcl.middleware.common.objectservice.ObjectServicePostProcessor;
-import com.hcl.middleware.common.objectservice.ObjectServicePreProcessor;
+{% highlight voltMx %}import com.hcl.voltmx.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.api.processor.FoundryRequestChain;
+import com.hcl.voltmx.middleware.api.processor.manager.FoundryRequestManager;
+import com.hcl.voltmx.middleware.api.processor.manager.FoundryResponseManager;
+import com.hcl.voltmx.middleware.common.objectservice.ObjectServicePostProcessor;
+import com.hcl.voltmx.middleware.common.objectservice.ObjectServicePreProcessor;
 
 public class ObjectPREPOST implements ObjectServicePreProcessor, ObjectServicePostProcessor {
   // Getting ServicesManager object from the PRE processor of the
@@ -53,12 +53,12 @@ Below is the sample code to instantiate ServicesManager in Integration/Orchestra
 
 {% highlight voltMx %}
 import java.util.HashMap;
-import com.hcl.middleware.api.ServicesManager;
-import com.hcl.middleware.common.DataPostProcessor2;
-import com.hcl.middleware.common.DataPreProcessor2;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.common.DataPostProcessor2;
+import com.hcl.voltmx.middleware.common.DataPreProcessor2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Result;
 
 public class IntegrationPREPOST implements DataPreProcessor2, DataPostProcessor2 {
   // Getting ServicesManager object from the PRE processor of the
@@ -93,10 +93,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import com.hcl.middleware.api.ServicesManager;
-import com.hcl.middleware.api.ServicesManagerHelper;
-import com.hcl.middleware.exceptions.MiddlewareException;
-import com.hcl.middleware.servlet.filters.IntegrationCustomFilter;
+import com.hcl.voltmx.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.api.ServicesManagerHelper;
+import com.hcl.voltmx.middleware.exceptions.MiddlewareException;
+import com.hcl.voltmx.middleware.servlet.filters.IntegrationCustomFilter;
 
 @IntegrationCustomFilter(filterOrder = 400, filterName = "CustomFilter", urlPatterns = {
     "/urlPatterns"})
@@ -209,17 +209,17 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
-import com.hcl.middleware.api.ObjectServiceInvoker;
-import com.hcl.middleware.api.ObjectServiceInvokerBuilder;
-import com.hcl.middleware.api.OperationData;
-import com.hcl.middleware.api.ServicesManager;
-import com.hcl.middleware.common.DataPostProcessor2;
-import com.hcl.middleware.common.DataPreProcessor2;
-import com.hcl.middleware.common.JavaService2;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Result;
-import com.hcl.middleware.exceptions.MiddlewareException;
+import com.hcl.voltmx.middleware.api.ObjectServiceInvoker;
+import com.hcl.voltmx.middleware.api.ObjectServiceInvokerBuilder;
+import com.hcl.voltmx.middleware.api.OperationData;
+import com.hcl.voltmx.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.common.DataPostProcessor2;
+import com.hcl.voltmx.middleware.common.DataPreProcessor2;
+import com.hcl.voltmx.middleware.common.JavaService2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.exceptions.MiddlewareException;
 
 public class IntegrationPrePostProcessorWithJavaService
     implements DataPreProcessor2, DataPostProcessor2, JavaService2 {
@@ -297,17 +297,17 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
-import com.hcl.middleware.api.ObjectServiceInvoker;
-import com.hcl.middleware.api.ObjectServiceInvokerBuilder;
-import com.hcl.middleware.api.OperationData;
-import com.hcl.middleware.api.ServicesManager;
-import com.hcl.middleware.common.DataPostProcessor2;
-import com.hcl.middleware.common.DataPreProcessor2;
-import com.hcl.middleware.common.JavaService2;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Result;
-import com.hcl.middleware.exceptions.MiddlewareException;
+import com.hcl.voltmx.middleware.api.ObjectServiceInvoker;
+import com.hcl.voltmx.middleware.api.ObjectServiceInvokerBuilder;
+import com.hcl.voltmx.middleware.api.OperationData;
+import com.hcl.voltmx.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.common.DataPostProcessor2;
+import com.hcl.voltmx.middleware.common.DataPreProcessor2;
+import com.hcl.voltmx.middleware.common.JavaService2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.exceptions.MiddlewareException;
 
 public class IntegrationPrePostProcessorWithJavaService
     implements DataPreProcessor2, DataPostProcessor2, JavaService2 {
@@ -367,17 +367,17 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
-import com.hcl.middleware.api.ObjectServiceInvoker;
-import com.hcl.middleware.api.ObjectServiceInvokerBuilder;
-import com.hcl.middleware.api.OperationData;
-import com.hcl.middleware.api.ServicesManager;
-import com.hcl.middleware.common.DataPostProcessor2;
-import com.hcl.middleware.common.DataPreProcessor2;
-import com.hcl.middleware.common.JavaService2;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Result;
-import com.hcl.middleware.exceptions.MiddlewareException;
+import com.hcl.voltmx.middleware.api.ObjectServiceInvoker;
+import com.hcl.voltmx.middleware.api.ObjectServiceInvokerBuilder;
+import com.hcl.voltmx.middleware.api.OperationData;
+import com.hcl.voltmx.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.common.DataPostProcessor2;
+import com.hcl.voltmx.middleware.common.DataPreProcessor2;
+import com.hcl.voltmx.middleware.common.JavaService2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.exceptions.MiddlewareException;
 
 public class IntegrationPrePostProcessorWithJavaService
     implements DataPostProcessor2, JavaService2 {
@@ -421,17 +421,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
-import com.hcl.middleware.api.ObjectServiceInvoker;
-import com.hcl.middleware.api.ObjectServiceInvokerBuilder;
-import com.hcl.middleware.api.OperationData;
-import com.hcl.middleware.api.ServicesManager;
-import com.hcl.middleware.api.processor.FoundryRequestChain;
-import com.hcl.middleware.api.processor.manager.FoundryRequestManager;
-import com.hcl.middleware.api.processor.manager.FoundryResponseManager;
-import com.hcl.middleware.common.objectservice.ObjectServicePostProcessor;
-import com.hcl.middleware.common.objectservice.ObjectServicePreProcessor;
-import com.hcl.middleware.dataobject.Result;
-import com.hcl.middleware.exceptions.MiddlewareException;
+import com.hcl.voltmx.middleware.api.ObjectServiceInvoker;
+import com.hcl.voltmx.middleware.api.ObjectServiceInvokerBuilder;
+import com.hcl.voltmx.middleware.api.OperationData;
+import com.hcl.voltmx.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.api.processor.FoundryRequestChain;
+import com.hcl.voltmx.middleware.api.processor.manager.FoundryRequestManager;
+import com.hcl.voltmx.middleware.api.processor.manager.FoundryResponseManager;
+import com.hcl.voltmx.middleware.common.objectservice.ObjectServicePostProcessor;
+import com.hcl.voltmx.middleware.common.objectservice.ObjectServicePreProcessor;
+import com.hcl.voltmx.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.exceptions.MiddlewareException;
 
 public class ObjectServicePrePost implements ObjectServicePreProcessor, ObjectServicePostProcessor {
 
@@ -516,13 +516,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
-import com.hcl.middleware.api.ObjectServiceInvoker;
-import com.hcl.middleware.api.ObjectServiceInvokerBuilder;
-import com.hcl.middleware.api.OperationData;
-import com.hcl.middleware.api.ServicesManager;
-import com.hcl.middleware.api.ServicesManagerHelper;
-import com.hcl.middleware.exceptions.MiddlewareException;
-import com.hcl.middleware.servlet.filters.IntegrationCustomFilter;
+import com.hcl.voltmx.middleware.api.ObjectServiceInvoker;
+import com.hcl.voltmx.middleware.api.ObjectServiceInvokerBuilder;
+import com.hcl.voltmx.middleware.api.OperationData;
+import com.hcl.voltmx.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.api.ServicesManagerHelper;
+import com.hcl.voltmx.middleware.exceptions.MiddlewareException;
+import com.hcl.voltmx.middleware.servlet.filters.IntegrationCustomFilter;
 
 @IntegrationCustomFilter(filterOrder = 400, filterName = "CustomFilter", urlPatterns = {
     "/JavaServiceInvoke/ExecuteStorageServiceWithSM000"})

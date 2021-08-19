@@ -33,16 +33,16 @@ To implement metrics in Volt MX Server, follow these steps:
     
     Preprocessor
     
-    {% highlight voltMx %}package com.hcl.middleware.connectors.logservice;
+    {% highlight voltMx %}package com.hcl.voltmx.middleware.connectors.logservice;
     
     import java.util.Date;
     import java.util.HashMap;
     
-    import com.hcl.middleware.common.DataPreProcessor;
-    import com.hcl.middleware.controller.DataControllerRequest;
-    import com.hcl.middleware.dataobject.Result;
-    import com.hcl.middleware.metrics.VoltMXCustomMetrics;
-    import com.hcl.middleware.metrics.VoltMXCustomMetricsDataSet;
+    import com.hcl.voltmx.middleware.common.DataPreProcessor;
+    import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+    import com.hcl.voltmx.middleware.dataobject.Result;
+    import com.hcl.voltmx.middleware.metrics.VoltMXCustomMetrics;
+    import com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet;
     
     public class CustomMetricsPreProcessor1 implements DataPreProcessor
     {
@@ -83,16 +83,16 @@ To implement metrics in Volt MX Server, follow these steps:
     
     Postprocessor
     
-    {% highlight voltMx %}package com.hcl.middleware.connectors.logservice;
+    {% highlight voltMx %}package com.hcl.voltmx.middleware.connectors.logservice;
     
     import java.util.List;
     import org.apache.log4j.Logger;
     
-    import com.hcl.middleware.common.DataPostProcessor;
-    import com.hcl.middleware.controller.DataControllerRequest;
-    import com.hcl.middleware.dataobject.Result;
-    import com.hcl.middleware.metrics.VoltMXCustomMetrics;
-    import com.hcl.middleware.metrics.VoltMXCustomMetricsDataSet;
+    import com.hcl.voltmx.middleware.common.DataPostProcessor;
+    import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+    import com.hcl.voltmx.middleware.dataobject.Result;
+    import com.hcl.voltmx.middleware.metrics.VoltMXCustomMetrics;
+    import com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet;
     
     public class CloudPostProcessor implements DataPostProcessor
     {
@@ -156,11 +156,11 @@ To implement metrics in Volt MX Server, follow these steps:
     import java.text.SimpleDateFormat;
     import java.util.Date;
     
-    import com.hcl.middleware.common.JavaService2;
-    import com.hcl.middleware.controller.DataControllerRequest;
-    import com.hcl.middleware.controller.DataControllerResponse;
-    import com.hcl.middleware.dataobject.Result;
-    import com.hcl.middleware.metrics.VoltMXCustomMetricsDataSet;
+    import com.hcl.voltmx.middleware.common.JavaService2;
+    import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+    import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+    import com.hcl.voltmx.middleware.dataobject.Result;
+    import com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet;
     
     public class CustomMetricsJavaService implements JavaService2 {
     

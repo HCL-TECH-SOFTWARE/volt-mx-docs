@@ -154,7 +154,7 @@ Log Locations for Volt MX Foundry
       
     java.lang.NullPointerException  
       
-    at com.hcl.middleware.connectors.dataadapter.DataAdapterConnector  
+    at com.hcl.voltmx.middleware.connectors.dataadapter.DataAdapterConnector  
     .prepareMapDataControllerRequest(DataAdapterConnector.java:259)  
       
     at …
