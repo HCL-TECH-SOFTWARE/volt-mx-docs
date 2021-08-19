@@ -138,8 +138,8 @@ Since the RDMS adapter supports OData, it supports the $filter parameter but doe
             }
            var batchId = Number(total)+ Number(count);
             if(count >= size){                   
-                result.addParam(new com.hcl.middleware.dataobject.Param("nextBatchId", Number(batchId)));
-                result.addParam(new com.hcl.middleware.dataobject.Param("hasMoreRecords",true));                            
+                result.addParam(new com.hcl.voltmx.middleware.dataobject.Param("nextBatchId", Number(batchId)));
+                result.addParam(new com.hcl.voltmx.middleware.dataobject.Param("hasMoreRecords",true));                            
             }
            
         }   

@@ -234,7 +234,7 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | Error 8008 ||
 | --- | --- |
 | **MESSAGE** | Invalid Result object returned on method invocation. |
-| **DESCRIPTION** | The object returned after invoking the pre / post processor or the Java service does not cast to com.hcl.middleware.dataobject.Result object. |
+| **DESCRIPTION** | The object returned after invoking the pre / post processor or the Java service does not cast to com.hcl.voltmx.middleware.dataobject.Result object. |
 | **SEVERITY** | HIGH |
 | **REPRODUCE THE ERROR** | Modify the processor such that it does not return valid Result object. |
 | **RESOLUTION** | Ensure if `proper application.jar` is present and is returning proper object. Also, check if there is no class conflict in the logs. |
@@ -264,7 +264,7 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | Error 8011 ||
 | --- | --- |
 | **MESSAGE** | Invalid Result object returned on method invocation. |
-| **DESCRIPTION** | The object returned after invoking the Scraper service does not cast to com.hcl.middleware.dataobject.Result object. |
+| **DESCRIPTION** | The object returned after invoking the Scraper service does not cast to com.hcl.voltmx.middleware.dataobject.Result object. |
 | **SEVERITY** | HIGH |
 | **REPRODUCE THE ERROR** | Modify the Scraper code such that it does not return valid Result object. |
 | **RESOLUTION** | Ensure if proper `scraper.jar` is present and returns proper object. Also, check if there is no class conflict in the logs. |

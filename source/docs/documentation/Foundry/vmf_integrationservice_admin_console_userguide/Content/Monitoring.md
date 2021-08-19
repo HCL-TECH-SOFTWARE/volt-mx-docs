@@ -321,8 +321,8 @@ To configure email alerts, perform the following actions:
     import org.json.simple.JSONObject;
     import org.json.simple.parser.JSONParser;
     
-    import com.hcl.middleware.api.ServicesManagerHelper;
-    import com.hcl.middleware.servlet.IntegrationCustomServlet;
+    import com.hcl.voltmx.middleware.api.ServicesManagerHelper;
+    import com.hcl.voltmx.middleware.servlet.IntegrationCustomServlet;
     
     @IntegrationCustomServlet(urlPatterns = {
         "sendmail"

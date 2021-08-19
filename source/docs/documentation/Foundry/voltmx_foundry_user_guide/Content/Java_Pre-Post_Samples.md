@@ -24,11 +24,11 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 
 import org.apache.log4j.Logger;
 
-import com.hcl.middleware.common.DataPreProcessor;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Result;
-import com.hcl.middleware.session.Session;
+import com.hcl.voltmx.middleware.common.DataPreProcessor;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.session.Session;
 
 public class sampleDataPreProcessor implements DataPreProcessor {
 
@@ -51,10 +51,10 @@ The following is a sample DataPreProcessor2 file:
 import java.util.HashMap;
 import java.util.Map;
 
-import com.hcl.middleware.common.DataPreProcessor2;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.common.DataPreProcessor2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Result;
 
 public class DigitePreProcessor implements DataPreProcessor2 {
 
@@ -89,11 +89,11 @@ public class DigitePreProcessor implements DataPreProcessor2 {
 
 The following is a sample DataPostProcessor file:
 
-{% highlight voltMx %} import com.hcl.middleware.common.DataPostProcessor;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Param;
-import com.hcl.middleware.dataobject.Result;
+{% highlight voltMx %} import com.hcl.voltmx.middleware.common.DataPostProcessor;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Param;
+import com.hcl.voltmx.middleware.dataobject.Result;
 
 public class sampleDataPostProcessor implements DataPostProcessor {
 
@@ -119,10 +119,10 @@ The following is a sample DataPostProcessor2 file:
 import java.util.HashMap;
 import java.util.Map;
 
-import com.hcl.middleware.common.DataPostProcessor2;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Result;
+import com.hcl.voltmx.middleware.common.DataPostProcessor2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Result;
 
 public class JSONPostProcessor implements DataPostProcessor2 {
     @Override

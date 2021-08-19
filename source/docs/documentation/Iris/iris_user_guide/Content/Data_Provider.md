@@ -18,10 +18,10 @@ The following is a sample DataProvider file.
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.hcl.middleware.common.DataProvider;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.exceptions.ConnectorException;
+import com.hcl.voltmx.middleware.common.DataProvider;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.exceptions.ConnectorException;
 public class SampleDataProvider implements DataProvider {@
     Override
     public void execute(String arg0, DataControllerRequest arg1,

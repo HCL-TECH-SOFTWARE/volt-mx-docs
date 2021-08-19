@@ -79,7 +79,7 @@ import javax.servlet.ServletContextListener;
  
 import org.apache.log4j.Logger;
  
-import com.hcl.middleware.servlet.listeners.IntegrationServletContextListener;
+import com.hcl.voltmx.middleware.servlet.listeners.IntegrationServletContextListener;
  
 @IntegrationServletContextListener
 public class MWServletContextListener implements ServletContextListener {
