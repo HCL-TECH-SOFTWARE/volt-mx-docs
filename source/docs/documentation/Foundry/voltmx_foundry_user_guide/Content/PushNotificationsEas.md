@@ -25,7 +25,7 @@ Sending Push Notification to EAS is supported for the following channels and pla
 *   **Android**\- Phones and Tablets
 *   **Web** - Android Web
 
-> **_Note:_** Support for push notifications is available in Volt MX Enterprise App Store version 2.0.0, or later. For more information on this refer to [VoltMX App Store on Marketplace](https://marketplace.kony.com/items/voltmx-app-store).
+> **_Note:_** Support for push notifications is available in Volt MX Enterprise App Store version 2.0.0, or later. For more information on this refer to [VoltMX App Store on Marketplace](https://marketplace.hclvoltmx.com /items/voltmx-app-store).
 
 Configuring a Push Notification
 -------------------------------

@@ -39,6 +39,6 @@ Once the build is completed in Release mode, you must publish the app to your [F
 
 For a more hands-on approach on the Progressive Web Apps feature provided by Volt MX Iris AppPlatform, import and preview the Events, Employee Directory, and Resort Feature sample apps by using Volt MX Iris.
 
-*   **Events app**: [![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.kony.com/items/events)
-*   **Employee Directory app**: [![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.kony.com/items/employee-directory-1)
-*   **Resort Feature app**: [![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.kony.com/items/resort-feature-app)
+*   **Events app**: [![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com /items/events)
+*   **Employee Directory app**: [![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com /items/employee-directory-1)
+*   **Resort Feature app**: [![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com /items/resort-feature-app)

@@ -502,4 +502,4 @@ The following security enhancements have been made in the V9 Service Pack 2 rele
 
 In the V9 Service Pack 2 release, a new component has been added to HCL Forge that can be used to integrate vector animations in Volt MX apps. This component simplifies the integration with Lottie and provides the necessary tooling that enhances the user experience of integrating vector animations into apps.
 
-For more information about this feature, click [here](https://marketplace.kony.com/items/lottieanimator).
+For more information about this feature, click [here](https://marketplace.hclvoltmx.com /items/lottieanimator).
