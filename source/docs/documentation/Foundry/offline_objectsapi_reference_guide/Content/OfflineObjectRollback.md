@@ -5,7 +5,7 @@ category: "offline_objectsapi_reference_guide"
                                
 
 
-HCLFoundry.OfflineObjects.rollback
+VMXFoundry.OfflineObjects.rollback
 =======================================
 
 Offline Objects rollback function rolls back all changes of the application in the device local database to its previous sync state.
@@ -19,7 +19,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.rollback(successCallback, failureCallback)
+{% highlight voltMx %}VMXFoundry.OfflineObjects.rollback(successCallback, failureCallback)
 {% endhighlight %}
 
 ### Input Parameters
@@ -40,7 +40,7 @@ void
 function failureCallback(error) {
     voltmx.print("Application rollback failed with error:" + error.code);
 }
-HCLFoundry.OfflineObjects.rollback(successCallback, failureCallback);
+VMXFoundry.OfflineObjects.rollback(successCallback, failureCallback);
 
 
 {% endhighlight %}

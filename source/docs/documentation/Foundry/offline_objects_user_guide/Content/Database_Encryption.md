@@ -31,7 +31,7 @@ function failureCallback(error) {
 var options = {
     "deviceDbEncryptionKey": "myencryptionpa$$phrase1"
 };
-HCLFoundry.OfflineObjects.setup(options, successCallback, failureCallback);
+VMXFoundry.OfflineObjects.setup(options, successCallback, failureCallback);
 {% endhighlight %}
 
 > **_Note:_** For web channels, IndexedDB is used as local database and encryption capability is not supported for the same.

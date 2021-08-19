@@ -62,7 +62,7 @@ The Iris apps (client apps) use the following code to call this service. Here, t
 
 {% highlight voltMx %} // login call
 function bankapp_login2() {
-    var voltmxIdent = HCLFoundry.getIdentityService("userstore");
+    var voltmxIdent = VMXFoundry.getIdentityService("userstore");
     var options = {};
     options.userid = < userid textfield > .text;
     options.password = < password textfield > .text;
@@ -75,7 +75,7 @@ function bankapp_login2() {
 }   
 // logout call
 function bankapp_logout() {
-    var voltmxIdent = HCLFoundry.getIdentityService("userstore");
+    var voltmxIdent = VMXFoundry.getIdentityService("userstore");
     var options = {};
     voltmxIdent.logout(function(response) {
             voltmx.print("Success in mobilefoundry logout");
@@ -102,7 +102,7 @@ The TradeApp uses the following code as it uses **Open LDAP** identity service. 
 
 {% highlight voltMx %} // login call
 function tradeapp_login2() {
-    var voltmxIdent = HCLFoundry.getIdentityService("openldap");
+    var voltmxIdent = VMXFoundry.getIdentityService("openldap");
     var options = {};
     options.userid = < userid textfield > .text;
     options.password = < password textfield > .text;
@@ -117,7 +117,7 @@ function tradeapp_login2() {
 
 // logout call
 function tradeapp_logout() {
-    var voltmxIdent = HCLFoundry.getIdentityService("openldap");
+    var voltmxIdent = VMXFoundry.getIdentityService("openldap");
     var options = {};
     voltmxIdent.logout(function(response) {
             voltmx.print("Success in mobilefoundry logout");
@@ -231,7 +231,7 @@ SSO options property in the login call of the identity service requires to pass 
 > **_Note:_** In scenario 1, both apps will use the first function below to connect to the Volt MX Foundry backend app identity service. In scenario 2, the trade app uses the second function.
 
 {% highlight voltMx %} function bankapp_login2() {
-    var voltmxIdent = HCLFoundry.getIdentityService("userstore");
+    var voltmxIdent = VMXFoundry.getIdentityService("userstore");
     var options = {};
     var loginOption = {};
     loginOption.isSSOEnabled = true;
@@ -247,7 +247,7 @@ SSO options property in the login call of the identity service requires to pass 
         });
 }
 {% endhighlight %}{% highlight voltMx %} function tradeapp\_login2() {
-    var voltmxIdent = HCLFoundry.getIdentityService("openldap");
+    var voltmxIdent = VMXFoundry.getIdentityService("openldap");
     var options = {};
     var loginOption = {};
     loginOption.isSSOEnabled = true;
@@ -274,7 +274,7 @@ Set the property to **True** to log out of all the SSO logins/apps. Otherwise, s
 
 {% highlight voltMx %} //logout call bank app
 function bankapp_logout() {
-    var voltmxIdent = HCLFoundry.getIdentityService("userstore");
+    var voltmxIdent = VMXFoundry.getIdentityService("userstore");
     var options = {};
     options.slo = true;
     voltmxIdent.logout(function(response) {
@@ -286,7 +286,7 @@ function bankapp_logout() {
 }
 //logout call Trade app
 function tradeapp_logout() {
-    var voltmxIdent = HCLFoundry.getIdentityService("openldap");
+    var voltmxIdent = VMXFoundry.getIdentityService("openldap");
     var options = {};
     options.slo = true;
     voltmxIdent.logout(function(response) {
@@ -308,7 +308,7 @@ Sample code to handle the error:
 
 {% highlight voltMx %} function init_BankApp_loginpage() {
     //voltmx.sdk.getCurrentInstance().getIdentityService("userstore");
-    var voltmxIdent = HCLFoundry.getIdentityService("userstore");
+    var voltmxIdent = VMXFoundry.getIdentityService("userstore");
     var options = {};
     var loginOption = {};
     loginOption.isSSOEnabled = true;
@@ -333,7 +333,7 @@ Sample code to handle the error:
 }
 {% endhighlight %}{% highlight voltMx %} function init\_TradeApp\_loginpage() {
     //voltmx.sdk.getCurrentInstance().getIdentityService("openldap");
-    var voltmxIdent = HCLFoundry.getIdentityService("openldap");
+    var voltmxIdent = VMXFoundry.getIdentityService("openldap");
     var options = {};
     var loginOption = {};
     loginOption.isSSOEnabled = true;

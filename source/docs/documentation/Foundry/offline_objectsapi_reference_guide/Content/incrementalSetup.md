@@ -3,9 +3,9 @@ layout: "documentation"
 category: "offline_objectsapi_reference_guide"
 ---
 
-Volt MX  Foundry console User Guide: [Application-level APIs](Application_Level_APIs.html) > HCLFoundry.OfflineObjects.incrementalSetup
+Volt MX  Foundry console User Guide: [Application-level APIs](Application_Level_APIs.html) > VMXFoundry.OfflineObjects.incrementalSetup
 
-HCLFoundry.OfflineObjects.incrementalSetup
+VMXFoundry.OfflineObjects.incrementalSetup
 ===============================================
 
 The Offline Objects **incrementalSetup** API allows the client application to consume the latest changes made to Volt MX Foundry app’s object services schema after a particular timestamp, without breaking the existing functionality. Similar to setup API, **incrementalSetup** API is also an application-level API with same method arguments.
@@ -35,7 +35,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLFoundry.OfflineObjects.incrementalSetup(options, onSuccess, onFailure)
+{% highlight voltMx %}VMXFoundry.OfflineObjects.incrementalSetup(options, onSuccess, onFailure)
 {% endhighlight %}
 
 ### Parameters
