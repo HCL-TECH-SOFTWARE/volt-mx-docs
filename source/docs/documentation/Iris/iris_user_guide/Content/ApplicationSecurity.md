@@ -76,8 +76,8 @@ Prerequisites
 For OpenSSL command to work, for the Windows environment, you can use a couple of different third-party tools, such as Git Bash, which is available [here](https://git-scm.com/download/win), and Cygwin, which is available [here](https://cygwin.com/install.html).
 
 To generate, encrypt, and use the RSA key pair, follow these steps: 
-
-1.  Open a terminal (Git Bash or Cygwin terminal in Windows ) and type **openssl**.
+   
+1. Open a terminal (Git Bash or Cygwin terminal in Windows ) and type **openssl**. 
 2.  Generate RSA public/private key pair using OpenSSL.
     
     a.  Generate a 2048-bit RSA key using this command.  
@@ -95,30 +95,27 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
     d.  To use private keys use the following commands.
         
         i.  `less private_key.pem` to verify that it starts with a `-----BEGIN RSA PRIVATE KEY-----`.
-        
+
         ii.  `less public_key.pem` to verify that it starts with a `-----BEGIN PUBLIC KEY——`.
 3.  Send your public key and Volt MX Iris version to [ voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). This step is applicable for Android, iOS platforms, and responsive Web/SPA platform. 
     
-
-> **_Important:_** Public key must not be shared with anyone except Volt MX.
-
+    > **_Important:_** Public key must not be shared with anyone except Volt MX.
 4. For Android and iOS platforms, VoltMX's security team validates the details and encrypts your public key.  
     For the Responsive Web/SPA platform, VoltMX's security team validates the information and shares the unique **clientID** and **clientSecret** through email. You must then use these details to [create a postbuild task](BuildAnSPAApplication.html#securing-your-web-applications).
 5. VoltMX's security team then returns the encrypted public key to you through email.
     1.  For iOS, Volt MX provides a set of `fin` keys along with the public key to protect iOS applications.
 
-> **_Note:_** Starting with Volt MX Iris V8 SP3, `fin` keys are not applicable. Volt MX will not provide the `fin` keys folder if your Iris version is V8 SP3 or later.
+    > **_Note:_** Starting with Volt MX Iris V8 SP3, `fin` keys are not applicable. Volt MX will not provide the `fin` keys folder if your Iris version is V8 SP3 or later.
 
-> **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to [voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). If a key compromise occurs for the Responsive Web/SPA platform, generate a new set of keys and send the public key via a Volt MX customer service ticket.
-
-6.  Navigate to your Volt MX Iris workspace and create a **\_\_encryptionkeys** folder.
-7.  Place the following keys received from Volt MX in **\_\_encryptionkeys** folder.
+    > **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to [voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). If a key compromise occurs for the Responsive Web/SPA platform, generate a new set of keys and send the public key via a Volt MX customer service ticket.
+6. Navigate to your Volt MX Iris workspace and create a **\_\_encryptionkeys** folder.
+7. Place the following keys received from Volt MX in **\_\_encryptionkeys** folder.
     
     a.  Your private key. The private key must be named as `private_key.pem`.
     
     b.  Encrypted public keys provided by Volt MX Iris.
         
-        > **_Note:_** Starting with Volt MX Iris V8 SP3, `fin` keys are not applicable. Once you have updated your Iris version to V8 SP3 or later, you can delete the `fin` keys folder from your **\_\_encryptionkeys** folder.
+    > **_Note:_** Starting with Volt MX Iris V8 SP3, `fin` keys are not applicable. Once you have updated your Iris version to V8 SP3 or later, you can delete the `fin` keys folder from your **\_\_encryptionkeys** folder.
         
     c. For iOS, the `fin` keys provided by Volt MX Iris. These keys are provided to protect iOS applications. `fin` keys are applicable until the Volt MX Iris V8 SP2 version.
     
