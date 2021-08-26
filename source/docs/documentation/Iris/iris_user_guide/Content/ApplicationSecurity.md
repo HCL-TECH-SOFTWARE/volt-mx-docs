@@ -97,7 +97,7 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
         i.  `less private_key.pem` to verify that it starts with a `-----BEGIN RSA PRIVATE KEY-----`.
 
         ii.  `less public_key.pem` to verify that it starts with a `-----BEGIN PUBLIC KEY——`.
-3.  Send your public key and Volt MX Iris version to [ voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). This step is applicable for Android and iOS platforms.  
+3.  Send your public key and Volt MX Iris version to [ voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). This step is applicable for Android, iOS platforms, and responsive Web/SPA platform. 
     
     > **_Important:_** Public key must not be shared with anyone except Volt MX.
 4. For Android and iOS platforms, VoltMX's security team validates the details and encrypts your public key.  
