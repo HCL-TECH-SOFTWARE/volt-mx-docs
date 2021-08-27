@@ -159,11 +159,11 @@ An online shopping website can use server events feature to send the order statu
 
 ### Custom Code to trigger an Event
 
-{% highlight voltMx %}import com.hcl.middleware.api.events.EventData;
-import com.hcl.middleware.common.DataPostProcessor2;
-import com.hcl.middleware.controller.DataControllerRequest;
-import com.hcl.middleware.controller.DataControllerResponse;
-import com.hcl.middleware.dataobject.Result;
+{% highlight voltMx %}import com.hcl.voltmx.middleware.api.events.EventData;
+import com.hcl.voltmx.middleware.common.DataPostProcessor2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Result;
  
 public class PostProcessorToTriggerEvents implements DataPostProcessor2 {
  
@@ -192,9 +192,9 @@ public class PostProcessorToTriggerEvents implements DataPostProcessor2 {
 
 {% highlight voltMx %}import java.util.Map;
  
-import com.hcl.middleware.api.events.EventData;
-import com.hcl.middleware.api.events.EventSubscriber;
-import com.hcl.middleware.api.events.IntegrationEventSubscriber;
+import com.hcl.voltmx.middleware.api.events.EventData;
+import com.hcl.voltmx.middleware.api.events.EventSubscriber;
+import com.hcl.voltmx.middleware.api.events.IntegrationEventSubscriber;
  
 @IntegrationEventSubscriber(topics = {"apps/order/success"})
 public class OrderSuccessEvent implements EventSubscriber {
@@ -221,9 +221,9 @@ Event on failed order
 
 {% highlight voltMx %}import java.util.Map;
  
-import com.hcl.middleware.api.events.EventData;
-import com.hcl.middleware.api.events.EventSubscriber;
-import com.hcl.middleware.api.events.IntegrationEventSubscriber;
+import com.hcl.voltmx.middleware.api.events.EventData;
+import com.hcl.voltmx.middleware.api.events.EventSubscriber;
+import com.hcl.voltmx.middleware.api.events.IntegrationEventSubscriber;
  
 @IntegrationEventSubscriber(topics = {"apps/order/fail"})
 public class OrderFailedEvent implements EventSubscriber {

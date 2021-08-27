@@ -676,9 +676,9 @@ To add OWASP Secure Headers to Middleware Services, follow these steps.
     
     import org.apache.log4j.Logger;
     
-    import com.hcl.middleware.common.DCFilter;
-    import com.hcl.middleware.common.MWConstants;
-    import com.hcl.middleware.servlet.filters.IntegrationCustomFilter;
+    import com.hcl.voltmx.middleware.common.DCFilter;
+    import com.hcl.voltmx.middleware.common.MWConstants;
+    import com.hcl.voltmx.middleware.servlet.filters.IntegrationCustomFilter;
     
     
     @IntegrationCustomFilter(filterOrder = 101, urlPatterns = MWConstants.ANY)
@@ -801,7 +801,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.hcl.middleware.common.KHttpServletResponseWrapper;
+import com.hcl.voltmx.middleware.common.KHttpServletResponseWrapper;
 
 public class CacheHeaderResponseWrapper extends KHttpServletResponseWrapper {
     private static final Logger LOGGER = LogManager.getLogger(CacheHeaderResponseWrapper.class);
@@ -885,8 +885,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.hcl.middleware.common.MWConstants;
-import com.hcl.middleware.servlet.filters.IntegrationCustomFilter;
+import com.hcl.voltmx.middleware.common.MWConstants;
+import com.hcl.voltmx.middleware.servlet.filters.IntegrationCustomFilter;
 
 @IntegrationCustomFilter(filterOrder = 2, urlPatterns = MWConstants.ANY)
 public class CacheHeaderFilter implements Filter {

@@ -840,7 +840,7 @@ To add a service definition, follow these steps:
 How to Configure a Java Connector
 ---------------------------------
 
-With Java service, you can interact with your software application that does not support restful APIs. A service that uses a custom Java connector is a Java service. The Java connector is a custom Java class and you can create a Java connector either by implementing `com.hcl.middleware.common.JavaService` interface or `com.hcl.middleware.common.JavaService2` interface. Volt MX recommends to use JavaService2 as you can get an access to `DataControllerRequest` and `DataControllerResponse` objects.
+With Java service, you can interact with your software application that does not support restful APIs. A service that uses a custom Java connector is a Java service. The Java connector is a custom Java class and you can create a Java connector either by implementing `com.hcl.voltmx.middleware.common.JavaService` interface or `com.hcl.voltmx.middleware.common.JavaService2` interface. Volt MX recommends to use JavaService2 as you can get an access to `DataControllerRequest` and `DataControllerResponse` objects.
 
 You must load the required JAR files to define a Java service. The JAR files contain the Java classes. The Java classes contain the Java methods. These methods have the logic defined that is required for a service. Java services are mostly used with Webconnector Services.
 
@@ -850,7 +850,7 @@ The `middleware-system.jar` helps you to develop a Java connector. You can downl
 
 Click here for more details
 
-The data structure of the Volt MX Result object `(com.hcl.middleware.datamapping.Result)` shows that all the data is converted, but the complete data in the Volt MX Result object in not exposed as expected. You get a part of the data in Volt MX Foundry because only a few unnamed records are converted into an object instead of an array.
+The data structure of the Volt MX Result object `(com.hcl.voltmx.middleware.datamapping.Result)` shows that all the data is converted, but the complete data in the Volt MX Result object in not exposed as expected. You get a part of the data in Volt MX Foundry because only a few unnamed records are converted into an object instead of an array.
 
 The use of JSON Arrays is particularly important for the mapping of data in user interface segments that require arrays as data input.
 
@@ -904,10 +904,10 @@ Dataset [id=booking, index=-1,
 
 To write a Java class for a Java connector, follow these steps:
 
-1.  Create a Java connector either by implementing the `com.hcl.middleware.common.JavaService` interface or `com.hcl.middleware.common.JavaService2` interface.
-2.  When you implement `com.hcl.middleware.common.JavaService`, you have to implement the following `invoke()` method with the signature:{% highlight voltMx %} public Object invoke(String paramString, Object[] paramArrayOfObject) throws Exception;
+1.  Create a Java connector either by implementing the `com.hcl.voltmx.middleware.common.JavaService` interface or `com.hcl.voltmx.middleware.common.JavaService2` interface.
+2.  When you implement `com.hcl.voltmx.middleware.common.JavaService`, you have to implement the following `invoke()` method with the signature:{% highlight voltMx %} public Object invoke(String paramString, Object[] paramArrayOfObject) throws Exception;
     {% endhighlight %}
-3.  When you implement `com.hcl.middleware.common.JavaService2`, you have to implement the following `invoke()` method with the signature:{% highlight voltMx %} public Object invoke(String methodID, Object[] objectArray, DataControllerRequest request, DataControllerResponse response) throws Exception;
+3.  When you implement `com.hcl.voltmx.middleware.common.JavaService2`, you have to implement the following `invoke()` method with the signature:{% highlight voltMx %} public Object invoke(String methodID, Object[] objectArray, DataControllerRequest request, DataControllerResponse response) throws Exception;
     {% endhighlight %}
 
 Adding a Java service involves the following steps:
