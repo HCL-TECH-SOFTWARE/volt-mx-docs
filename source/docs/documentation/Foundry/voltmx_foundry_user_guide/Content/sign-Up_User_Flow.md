@@ -81,7 +81,7 @@ identitySvc.register(registerParams, function(response) {
 
 To enable the sign-up feature by configuring the User Store Adapter, follow these steps.
 
-1.  Import the User Store Adapter from [VoltMX Marketplace](https://marketplace.kony.com/) to your Volt MX Foundry Console.
+1.  Import the User Store Adapter from [VoltMX Marketplace](https://marketplace.hclvoltmx.com /) to your Volt MX Foundry Console.
     
     For more information on how to import an adapter from Marketplace, click [here]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/CustomDataConfig.html#importing).
     
