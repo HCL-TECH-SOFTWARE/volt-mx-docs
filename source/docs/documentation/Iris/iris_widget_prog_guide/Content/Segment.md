@@ -30,7 +30,7 @@ Widgets are normally added to your application using Volt MX Iris, but can also 
 For general information on the SegmentedUI widget, refer the [Segment2]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Segment2.html) topic in the Volt MX Iris User Guide.
 
 > **_Note:_** For a more hands-on approach on the functionality of Segment widget, import and preview the **Segment Widget Feature** sample app by using Volt MX Iris.  
-[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com /items/segment-widget-feature-app)
+[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.kony.com/items/segment-widget-feature-app)
 
 {% include youtube.html id='v2kut_GA82c' %}
 
