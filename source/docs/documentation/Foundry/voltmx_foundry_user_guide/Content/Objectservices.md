@@ -25,7 +25,7 @@ The Object Services feature enables you to control your API calls and data in a 
 
 Object Services, as the name suggests, allows you to create and operate on an object for referencing your data. It helps you interact with your back-end data by using the Object data model you mentioned earlier. This feature makes it possible for you to develop applications in a faster and more intuitive manner.
 
-> **_Note:_** For more hands-on approach on how to use Object Services, import and preview the [Employee Directory](https://marketplace.hclvoltmx.com /items/employee-directory-1) app on to your Volt MX Iris.
+> **_Note:_** For more hands-on approach on how to use Object Services, import and preview the [Employee Directory](https://marketplace.kony.com/items/employee-directory-1) app on to your Volt MX Iris.
 
 How do Objects work?
 --------------------
