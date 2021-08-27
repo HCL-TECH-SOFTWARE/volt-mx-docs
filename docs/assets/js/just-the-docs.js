@@ -428,7 +428,7 @@ jtd.getTheme = function() {
 
 jtd.setTheme = function(theme) {
   var cssFile = document.querySelector('[rel="stylesheet"]');
-  cssFile.setAttribute('href', 'https://hcl-tech-software.github.io/volt-mx-docs/assets/css/just-the-docs-' + theme + '.css');
+  cssFile.setAttribute('href', 'https://opensource.hcltechsw.com/volt-mx-docs/assets/css/just-the-docs-' + theme + '.css');
 }
 
 // Document ready

@@ -79,48 +79,43 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
 
 1.  Open a terminal (Git Bash or Cygwin terminal in Windows ) and type **openssl**.
 2.  Generate RSA public/private key pair using OpenSSL.
-    
-    a.  Generate a 2048-bit RSA key using this command.  
+    1.  Generate a 2048-bit RSA key using this command.  
         
     
     openssl genrsa -out private\_key.pem 2048
     
-    b.  Extract public key from RSA key pair using this command.
+    3.  Extract public key from RSA key pair using this command.
         
         openssl rsa -pubout -in private\_key.pem -out public\_key.pem
         
-    c.  View the private key using this command.  
+    4.  View the private key using this command.  
         `openssl rsa -text -in private_key.pem`
-    
-    d.  To use private keys use the following commands.
-        
-        i.  `less private_key.pem` to verify that it starts with a `-----BEGIN RSA PRIVATE KEY-----`.
-        
-        ii.  `less public_key.pem` to verify that it starts with a `-----BEGIN PUBLIC KEY——`.
-3.  Send your public key and Volt MX Iris version to [ voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). This step is applicable for Android, iOS platforms, and responsive Web/SPA platform. 
-    
+    5.  To use private keys use the following commands.
+        1.  `less private_key.pem` to verify that it starts with a `-----BEGIN RSA PRIVATE KEY-----`.
+        2.  `less public_key.pem` to verify that it starts with a `-----BEGIN PUBLIC KEY——`.
+3.  Send your public key and Volt MX Iris version to [licensing@voltmx.com](mailto:licensing@voltmx.com?subject=Keys). This step is applicable for Android and iOS platforms.  
+    For the Responsive Web/SPA platform, you must raise a Volt MX customer service ticket and provide your public key and Volt MX Iris version details in the ticket.
 
 > **_Important:_** Public key must not be shared with anyone except Volt MX.
 
-4. For Android and iOS platforms, VoltMX's security team validates the details and encrypts your public key.  
-    For the Responsive Web/SPA platform, VoltMX's security team validates the information and shares the unique **clientID** and **clientSecret** through email. You must then use these details to [create a postbuild task](BuildAnSPAApplication.html#securing-your-web-applications).
-5. VoltMX's security team then returns the encrypted public key to you through email.
+2.  For Android and iOS platforms, VoltMX's security team validates the details and encrypts your public key.  
+    For the Responsive Web/SPA platform, VoltMX's security team validates the information and shares the unique **clientID** and **clientSecret** in the same customer service ticket that you had raised. You must then use these details to [create a postbuild task](BuildAnSPAApplication.html#securing-your-web-applications).
+3.  VoltMX's security team then returns the encrypted public key to you through email.
     1.  For iOS, Volt MX provides a set of `fin` keys along with the public key to protect iOS applications.
 
 > **_Note:_** Starting with Volt MX Iris V8 SP3, `fin` keys are not applicable. Volt MX will not provide the `fin` keys folder if your Iris version is V8 SP3 or later.
 
-> **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to [voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). If a key compromise occurs for the Responsive Web/SPA platform, generate a new set of keys and send the public key via a Volt MX customer service ticket.
+> **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android and iOS platforms, generate a new set of keys and send the public key to [licensing@voltmx.com](mailto:licensing@voltmx.com?subject=Keys). If a key compromise occurs for the Responsive Web/SPA platform, generate a new set of keys and send the public key via a Volt MX customer service ticket.
 
 6.  Navigate to your Volt MX Iris workspace and create a **\_\_encryptionkeys** folder.
 7.  Place the following keys received from Volt MX in **\_\_encryptionkeys** folder.
     
-    a.  Your private key. The private key must be named as `private_key.pem`.
-    
-    b.  Encrypted public keys provided by Volt MX Iris.
+    1.  Your private key. The private key must be named as `private_key.pem`.
+    2.  Encrypted public keys provided by Volt MX Iris.
         
         > **_Note:_** Starting with Volt MX Iris V8 SP3, `fin` keys are not applicable. Once you have updated your Iris version to V8 SP3 or later, you can delete the `fin` keys folder from your **\_\_encryptionkeys** folder.
         
-    c. For iOS, the `fin` keys provided by Volt MX Iris. These keys are provided to protect iOS applications. `fin` keys are applicable until the Volt MX Iris V8 SP2 version.
+    3.  For iOS, the `fin` keys provided by Volt MX Iris. These keys are provided to protect iOS applications. `fin` keys are applicable until the Volt MX Iris V8 SP2 version.
     
     ![](Resources/Images/FinKeys1_696x388.png)
     
