@@ -11,8 +11,7 @@ Apps
 You use mobile applications to manage different tasks for your business or organization and can download any desired app from any online app store, such as Apple App Store, and Windows Phone Store. The section explains in details about how to create, modify and configure apps and enable push notifications to apps.
 
 > **_Important:_** To access **Engagement** services console to create, edit or delete an app, you must have the following permission to access the **Apps** screen and perform different tasks based on the role.  
-  
-    - ROLE\_APPLICATIONS\_ALL
+-ROLE\_APPLICATIONS\_ALL
 
 From the **Overview** section, click **Apps** from the left panel. The **Apps** home page appears.
 
@@ -22,39 +21,58 @@ The **Apps** home page displays the following details:
 
 *   **Add New App** button: The button helps you add new applications to the list.
 *   **Search** field: Click in the **Search** field to view options to search an app. You can search apps based on the following criteria:
+
     *   **App**: Enter the name of the desired app in the **Search** field and click **Enter.**
+
+
         
         ![](../Resources/Images/Overview/Apps/searchapp.png)
+
         
         The app appears on the home page.
+
         
         ![](../Resources/Images/Overview/Apps/searchanapp_560x264.png)
+
         
         If the specified app is not available in the app list, the system displays the message that no application is found.
+
         
     *   **By**: Enter the name of the app's creator in the **Search** field.
+
         
         ![](../Resources/Images/Overview/Apps/searchby.png)
+
         
         The app appears on the home page.
+
         
         ![](../Resources/Images/Overview/Apps/appby_557x133.png)
         
+        
     *   **Platform**: Enter the required platform name in the **Search** field to view apps based on a specific platform.
+
         
         ![](../Resources/Images/Overview/Apps/searchplatform1.png)
+
         
         A list of apps with the specified platform name appear on the home page.
+
         
         ![](../Resources/Images/Overview/Apps/appplat_559x129.png)
+
         
     *   **Status**: Enter the status as **Published** or **Unpublished** in the **Search** field.
+
         
         ![](../Resources/Images/Overview/Apps/searchstatus.png)
+
         
         Based on the entered status, the required apps appear on the home page.
+
         
         ![](../Resources/Images/Overview/Apps/searchanappstatus_557x265.png)
+
         
         > **_Note:_** To clear your search result, click in the **Search** field to view the **Apps** home page.
         

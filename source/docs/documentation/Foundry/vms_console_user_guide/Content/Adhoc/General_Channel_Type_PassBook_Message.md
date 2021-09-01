@@ -59,30 +59,42 @@ To add a Passbook message for users, follow these steps:
     The Users list view includes the Name, Email and Mobile columns. There is a search field to search users.
     
     *   **Search** field: Click in the search field to view available options to search for a user. You can search users based on the following search criteria:
+
         
-        *   **Name**: Enter the required name in the search field and click **Enter**.
+    *   **Name**: Enter the required name in the search field and click **Enter**.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/searchname.png)
+        ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/searchname.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+        The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/resultname_514x102.png)
+        ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/resultname_514x102.png)
+
             
         *   **Email:** Enter the email ID of the required user in the search field and click **Enter**.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/searchemail.png)
+        ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/searchemail.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+        The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/resultemail_518x106.png)
+        ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/resultemail_518x106.png)
+
             
         *   **Mobile Number**: Enter the mobile number of the required user.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/searchmobno.png)
+        ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/searchmobno.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+        The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/resultmobile_520x104.png)
+        ![](../Resources/Images/Engagement/Adhoc/Passbook_Message/resultmobile_520x104.png)
             
         
         The Users list view displays the following details:

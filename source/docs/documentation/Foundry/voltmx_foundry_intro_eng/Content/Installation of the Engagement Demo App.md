@@ -43,22 +43,26 @@ In this section, we will take you thru the steps to download and install the And
     *   **Sender Id**: This id is generated when you create the `GCM/FCM key` with Google so that you can core your application in the Engagement Server. As you recall, this was also discussed in the lesson two.
         
         It is important that the `sender id` used with the application is the same as the one associated with the GCM key. The sender id was used to configure the application in Engagement Server.
+
         
         ![](Resources/Images/aoo3.png)
+
         
 7.  Click **Done** after all the details are successfully entered. This will navigate you to the **User** creation screen.
 8.  You need to enter the first name, last name, phone number, email, country and state (if country is US only) information in the **User** creation screen.
+
     
     ![](Resources/Images/app5.png)
+
     
 9.  Click **Done** after all the information is entered. This will create the user in the Engagement Server.
 10.  You will see the screen as below once the user has been created successfully. Click **Ok** and **Done** again to navigate to the next screen of the application.
     
-    ![](Resources/Images/app6.png)
+![](Resources/Images/app6.png)
     
 11.  In the next screen, you will see that you are already subscribed to receive push notifications. Select **SMS** and **E-Mail** options and click **Done**. This will update your preferences to receive all the notifications types and navigates you to the next screen.
     
-    ![](Resources/Images/app7.png)
+![](Resources/Images/app7.png)
     
 
 Sending Push, Email, and SMS Notifications
@@ -105,7 +109,7 @@ We have installed the application, created a subscription, and updated the confi
     
 10.  Next, you will also see on your device screen that the message is successfully delivered.
     
-    ![](Resources/Images/app8.png)
+![](Resources/Images/app8.png)
     
 
 That’s it! Congratulations on your successful install of the Engagement application and receiving your first push message.

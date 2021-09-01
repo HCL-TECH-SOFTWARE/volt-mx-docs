@@ -28,8 +28,7 @@ To log into Volt MX Foundry Engagement Services, follow these steps:
 5.  Enter the password in the **Password** field.
 6.  Click the **Sign in** button. The **Dashboard** page appears as the landing page in the console.
     
-    > **_Note:_** After successful installation of Volt MX Foundry Engagement Services, the default user with the Username _admin_ and the Password as admin are created automatically.  
-      
+    > **_Note:_** After successful installation of Volt MX Foundry Engagement Services, the default user with the Username _admin_ and the Password as admin are created automatically.    
     **admin** is the default Administrator with permissions to perform all functionalities of Volt MX Foundry Engagement Services.
     
 

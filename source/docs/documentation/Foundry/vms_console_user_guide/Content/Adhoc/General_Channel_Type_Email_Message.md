@@ -50,40 +50,53 @@ To add an email message, follow these steps:
     The Users list view includes the Name, Email and Mobile columns. There is a search field to search users.
     
     *   **Search** field: Click in the search field to view available options to search for a user. You can search users based on the following search criteria:
-        *   **Name**: Enter the name in the search field and click **Enter**.
+    *   **Name**: Enter the name in the search field and click **Enter**.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchname.png)
+        ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchname.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+        The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Email_Message/emailnamesearfchresult_505x103.png)
+        ![](../Resources/Images/Engagement/Adhoc/Email_Message/emailnamesearfchresult_505x103.png)
+
             
         *   **Email**: Enter the email ID in the search field and click **Enter**.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchemail.png)
+        ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchemail.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+        The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Email_Message/emailsearchresult_499x102.png)
+        ![](../Resources/Images/Engagement/Adhoc/Email_Message/emailsearchresult_499x102.png)
+
             
         *   **Mobile Number**: Enter the mobile number in the search field and click **Enter**
+
             
-            ![](../Resources/Images/Engagement/Adhoc/SMS_Message/searchmobileno.png)
+        ![](../Resources/Images/Engagement/Adhoc/SMS_Message/searchmobileno.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+        The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchmobilenoresult_505x103.png)
+        ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchmobilenoresult_505x103.png)
+
             
-            > **_Note:_** If no user is added to the console, then user information page displays the following message: 'No user found'.
+        > **_Note:_** If no user is added to the console, then user information page displays the following message: 'No user found'.
             
-            The Users list view displays the following details:
+        The Users list view displays the following details:
             
-            | Users Element | Description |
-            | --- | --- |
-            | Name | The name column displays names of the added users. The Name column contains a combination of the First Name and the Last Name of added users. |
-            | Email | The email column displays the emails of the added users. |
-            | Mobile | The mobile column displays the mobile numbers of the added users. |
-            | Display controls: | By default, only 20 users are displayed in the list view. You can view more screens by navigating through the forward arrow icon. You can navigate back through the backward arrow icon. |
+        | Users Element | Description |
+        | --- | --- |
+        | Name | The name column displays names of the added users. The Name column contains a combination of the First Name and the Last Name of added users. |
+        | Email | The email column displays the emails of the added users. |
+        | Mobile | The mobile column displays the mobile numbers of the added users. |
+        | Display controls: | By default, only 20 users are displayed in the list view. You can view more screens by navigating through the forward arrow icon. You can navigate back through the backward arrow icon. |
+        
             
 7.  **Addressing an Email:** When you send an email, you have three field choices: To, cc, and bcc. Here is how to use each field:
     
