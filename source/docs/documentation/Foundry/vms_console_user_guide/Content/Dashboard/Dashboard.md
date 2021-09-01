@@ -13,8 +13,7 @@ The **Dashboard** is the default page that an admin views after signing into Vol
 ![](../Resources/Images/Overview/Dashboard/dashbhomscr_745x520.png)
 
 > **_Important:_** As a user, you must have the following permission to access the **Dashboard** screen and perform different tasks based on the role.  
-  
-    - ROLE\_DASHBOARD\_ALL
+-ROLE\_DASHBOARD\_ALL
 
 The **Dashboard** home page includes the following sections:
 
@@ -125,21 +124,30 @@ Based on your requirements, you can view reports with the following options avai
     | Print | Allows you to print the report.To print the report, click the **Print chart**. The system displays the **Windows Print** dialog box. Select your printer and click the **OK** button. |
     
 *   To remove a legend from the chart, click the legend's icon available below the chart. The respective legend disappears, and you can view only the required data in the chart. For example, if you click the **User** legend icon in the **Daily Subscribers** chart.
+
     
     ![](../Resources/Images/Overview/Dashboard/dailysubscribers_device.png)
+
+
     
     The **User** legend disappears and you can only view the devices in the **Daily Subscribers** chart.
+
     
     ![](../Resources/Images/Overview/Dashboard/dailysubscribers.png)
+
     
 *   **All Dates**: Use the option to view Volt MX Engagement Services statistics for a certain period. To view data for a period, follow these steps:
     1.  Click in the **All Dates** field to open the calendar. The calendar appears.
+
         
         ![](../Resources/Images/Overview/Dashboard/usagecalender1.png)
+
         
     2.  To specify the period, select the **From** date from the left calendar. Select the **To** date from the right calendar.
+
         
         ![](../Resources/Images/Overview/Dashboard/usagecalender2_560x393.png)
+
         
         The selected period is highlighted in the calendars.
         

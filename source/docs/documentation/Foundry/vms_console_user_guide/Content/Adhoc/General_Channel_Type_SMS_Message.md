@@ -55,35 +55,48 @@ To add a SMS message to users, follow these steps:
     > **_Note:_** If no user is added to the console, then the user screen displays the following message: 'No Users Found '.
     
     The Users list view includes the Name, Email and Mobile columns. There is a search field to search users.
+
     
     ![](../Resources/Images/Engagement/Adhoc/SMS_Message/smsusers_586x411.png)
+    
     
 7.  The user list view contains the following details:
     *   **Search** field: Click in the search field to view available options to search for a user. You can search users based on the following search criteria:
         
         *   **Name**: Enter the required name in the search field and click **Enter**.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/SMS_Message/searchname.png)
+        ![](../Resources/Images/Engagement/Adhoc/SMS_Message/searchname.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+        The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/SMS_Message/resultname_516x95.png)
+        ![](../Resources/Images/Engagement/Adhoc/SMS_Message/resultname_516x95.png)
+
             
         *   **Email**: Enter the email ID of the required user in the search field and click **Enter**.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/SMS_Message/searchemail.png)
+        ![](../Resources/Images/Engagement/Adhoc/SMS_Message/searchemail.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+        The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/SMS_Message/resultemail_517x106.png)
+        ![](../Resources/Images/Engagement/Adhoc/SMS_Message/resultemail_517x106.png)
+
             
         *   **Mobile Number**: Enter the mobile number of the required user in the search field and click **Enter**.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/SMS_Message/searchmobileno.png)
+        ![](../Resources/Images/Engagement/Adhoc/SMS_Message/searchmobileno.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+        The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/SMS_Message/resultmobilenumber_516x103.png)
+        ![](../Resources/Images/Engagement/Adhoc/SMS_Message/resultmobilenumber_516x103.png)
             
         
         The Users list view displays the following details:
