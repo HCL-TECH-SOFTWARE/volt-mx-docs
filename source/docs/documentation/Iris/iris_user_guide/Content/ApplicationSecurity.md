@@ -5,7 +5,7 @@ category: "iris_user_guide"
                           
 
 
-Apply Application Security
+Apply Application Security - test2
 ==========================
 
 Volt MX  Iris protects all applications using methods like design time security, critical business logic security, and on-device encryption. All the applications developed through Volt MX Iris are compliant with Payment Card Industry Data Security Standard (PCI DSS), HIPAA/HITECH, SOC2 Type II, ISO 270001:2013, and address OWASP top 10 mobile vulnerabilities, support Single Sign-On (SSO), and Multi-Factor Authentication (MFA), Federal Information Processing System (FIPS) 140-2. Standards followed by Volt MX Iris adhere to Microsoft Security Development Lifecycle (SDLC) for product development, Open Web Application Security Project (OWASP) for secure coding and testing, Web Application Security Consortium (WASC) guidelines for threat modeling, coding, and testing, and follow Application Security Verification Standard (ASVS) for testing security controls.
