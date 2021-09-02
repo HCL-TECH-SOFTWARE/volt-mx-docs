@@ -42,10 +42,10 @@ In this section, we will take you thru the steps to download and install the And
     *   **Application Id**: An application id uniquely identifies an application in the Engagement Server. As you may recall, the ID was created when you created your application in lesson two of this track.
     *   **Sender Id**: This id is generated when you create the `GCM/FCM key` with Google so that you can core your application in the Engagement Server. As you recall, this was also discussed in the lesson two.
         
-        It is important that the `sender id` used with the application is the same as the one associated with the GCM key. The sender id was used to configure the application in Engagement Server.
+    It is important that the `sender id` used with the application is the same as the one associated with the GCM key. The sender id was used to configure the application in Engagement Server.
 
         
-        ![](Resources/Images/aoo3.png)
+    ![](Resources/Images/aoo3.png)
 
         
 7.  Click **Done** after all the details are successfully entered. This will navigate you to the **User** creation screen.
