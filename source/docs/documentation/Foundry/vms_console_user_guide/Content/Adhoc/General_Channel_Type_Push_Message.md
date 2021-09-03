@@ -64,112 +64,112 @@ To configure a push message follow these steps:
     *   **Search** field: Click in the search field to view available options to search for a subscriber. You can search subscribers based on the following search criteria.
 
         
-        *   **User Name**: Enter the user name in the search field and click Enter.
+    *   **User Name**: Enter the user name in the search field and click Enter.
 
 
             
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchusername.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchusername.png)
 
             
-        The subscriber appears on the home page. To view the select users’ page, clear the search field and click Enter.
+    The subscriber appears on the home page. To view the select users’ page, clear the search field and click Enter.
 
             
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searuserresul_516x152.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searuserresul_516x152.png)
 
             
-        *   **Email:** Enter the email in the search field and click Enter.
+    *   **Email:** Enter the email in the search field and click Enter.
 
             
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchemail.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchemail.png)
 
             
-        The subscriber appears on the home page. To view the select users’ page, clear the search field and click Enter.
+    The subscriber appears on the home page. To view the select users’ page, clear the search field and click Enter.
 
             
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searesemail_494x152.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searesemail_494x152.png)
 
             
-        *   **Mobile**: Enter the mobile number in the search field and click Enter.
+    *   **Mobile**: Enter the mobile number in the search field and click Enter.
 
             
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchmobile.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchmobile.png)
 
             
-        The subscriber appears on the home page.To view the select users’ page, clear the search field and click Enter.
+    The subscriber appears on the home page.To view the select users’ page, clear the search field and click Enter.
 
             
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchmobresu_494x157.png)
-
-
-            
-        *   **Device Name**: Enter the device name in the search field and click Enter.
-
-            
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchdevinam.png)
-
-            
-        The subscriber appears on the home page. To view the select users’ page, clear the search field and click Enter.
-
-            
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searcdevidresul_518x133_492x97.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchmobresu_494x157.png)
 
 
             
-        *   **Device ID**: Enter the device ID in the search field and click Enter.
+    *   **Device Name**: Enter the device name in the search field and click Enter.
 
             
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchdeviceid.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchdevinam.png)
 
             
-        The subscriber appears on the home page. To view the select users’ page, clear the search field and click Enter.
+    The subscriber appears on the home page. To view the select users’ page, clear the search field and click Enter.
 
             
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searcdevidresul_496x98.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searcdevidresul_518x133_492x97.png)
+
 
             
-        *   **KSID**: Enter the KSID in the search field and click Enter.
+    *   **Device ID**: Enter the device ID in the search field and click Enter.
 
             
-            ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchksid.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchdeviceid.png)
 
             
-            The subscriber appears on the home page. To view the select users’ page, clear the search field and click Enter.
+    The subscriber appears on the home page. To view the select users’ page, clear the search field and click Enter.
 
             
-            ![](../Resources/Images/Engagement/Adhoc/Push_Message/seaksidresul_498x98.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searcdevidresul_496x98.png)
 
             
-        *   **Platform**: Enter the platform name in the search field and click Enter.
+    *   **KSID**: Enter the KSID in the search field and click Enter.
 
             
-            ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchplatform.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchksid.png)
 
             
-            The subscriber appears on the home page.To view the select users’ page, clear the search field and click Enter.
+    The subscriber appears on the home page. To view the select users’ page, clear the search field and click Enter.
 
             
-            ![](../Resources/Images/Engagement/Adhoc/Push_Message/searcplatfomresul_501x99.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/seaksidresul_498x98.png)
 
             
-        *   **UFID**: Enter the ufid in the search field and click Enter.
+    *   **Platform**: Enter the platform name in the search field and click Enter.
 
             
-            ![](../Resources/Images/Engagement/Adhoc/Push_Message/searufid.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searchplatform.png)
 
             
-        The subscriber appears on the home page.To view the select users’ page, clear the search field and click Enter.
+    The subscriber appears on the home page.To view the select users’ page, clear the search field and click Enter.
 
             
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/searesufid_511x162.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searcplatfomresul_501x99.png)
 
             
-        *   **Searching without Labelling with Multiple Parameters**: Enter the required parameters with a space in the search field. For example, the following image displays search result for two users based on entered parameters.  
+    *   **UFID**: Enter the ufid in the search field and click Enter.
+
+            
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searufid.png)
+
+            
+    The subscriber appears on the home page.To view the select users’ page, clear the search field and click Enter.
+
+            
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/searesufid_511x162.png)
+
+            
+    *   **Searching without Labelling with Multiple Parameters**: Enter the required parameters with a space in the search field. For example, the following image displays search result for two users based on entered parameters.  
         
             
-        ![](../Resources/Images/Engagement/Adhoc/Push_Message/withoutlabel_501x122.png)
+    ![](../Resources/Images/Engagement/Adhoc/Push_Message/withoutlabel_501x122.png)
             
         
-        The User Information list view displays the following details:
+    The User Information list view displays the following details:
         
 | Subscribers Element | Description |
 | --- | --- |
