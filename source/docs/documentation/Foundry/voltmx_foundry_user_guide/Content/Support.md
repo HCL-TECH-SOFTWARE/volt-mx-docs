@@ -16,7 +16,7 @@ The **Support** page displays links to the latest tutorials and articles and Dev
 The following are the Developer resources from Base Camp Library:
 
 *   [Forum](https://basecamp.voltmx.com/s/) - Ask questions, get answers.
-*   [Marketplace](https://marketplace.hclvoltmx.com /#/) - Free! Yes, we said free components to pop into your apps.
+*   [Marketplace](https://marketplace.hclvoltmx.com/#/) - Free! Yes, we said free components to pop into your apps.
 *   [Events](https://basecamp.voltmx.com/s/events) - Geek out with us during our monthly Tech Talks and Webinars.
 *   [Ideation](https://basecamp.voltmx.com/s/ideation?page=1) - Search for, vote on, and create Ideas (feature requests) for HCL products.
 *   [Training](https://basecamp.voltmx.com/s/Skills) - Up your game by becoming a HCL Certified Designer for free.

@@ -131,7 +131,7 @@ This section contains the following topics:
 
 Create a component and leverage sample services from the Data & Services panel. You can bundle these services to the required widgets of a component. You can directly drag and drop services into a component and customize it according to your requirement.
 
-In this scenario, we will xthe [List-Details (Employee)](https://marketplace.hclvoltmx.com /items/list-details-employee) component from [HCL Forge](https://marketplace.hclvoltmx.com /) and add services to the widgets of the component. You can add parameters (for example, **Name**) to specific widgets (for example, **empname** Label) of the component. This component contains the following two screens:
+In this scenario, we will xthe [List-Details (Employee)](https://marketplace.hclvoltmx.com/items/list-details-employee) component from [HCL Forge](https://marketplace.hclvoltmx.com/) and add services to the widgets of the component. You can add parameters (for example, **Name**) to specific widgets (for example, **empname** Label) of the component. This component contains the following two screens:
 
 *   **Employee List**  
     ![](Resources/Images/List-Detail_Canvas_169x307.png)
@@ -140,8 +140,8 @@ In this scenario, we will xthe [List-Details (Employee)](https://marketplace.hcl
 
 **To import the List-Details (Employee) component and add services to the component, follow these steps**:
 
-1.  In Volt MX Iris, create a new **Sample App** project , and then import the [List-Details (Employee)](https://marketplace.hclvoltmx.com /items/list-details-employee) component from [HCL Forge](https://marketplace.hclvoltmx.com /) .  
-    The landing page of the [List-Details (Employee)](https://marketplace.hclvoltmx.com /items/list-details-employee) component is displayed on the Project Canvas and its associated widgets are displayed in the Project Explorer.
+1.  In Volt MX Iris, create a new **Sample App** project , and then import the [List-Details (Employee)](https://marketplace.hclvoltmx.com/items/list-details-employee) component from [HCL Forge](https://marketplace.hclvoltmx.com/) .  
+    The landing page of the [List-Details (Employee)](https://marketplace.hclvoltmx.com/items/list-details-employee) component is displayed on the Project Canvas and its associated widgets are displayed in the Project Explorer.
 
 1.  To add services to the Employee List screen, follow these steps:
     1.  In the Project Explorer, go to **Mobile** > **Forms**, and then click **frmList**. The list screen is displayed on the Project Canvas.

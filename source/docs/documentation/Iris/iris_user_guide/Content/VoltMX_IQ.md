@@ -93,7 +93,7 @@ Volt MX  IQ can perform the following tasks:
 
 The Volt MX IQ Design Suggestions feature assists you to develop applications faster. Volt MX IQ predicts the UI of your form and recommends relevant designs. These predictions can help you to reuse existing components and designs, without having to create them from scratch.
 
-For instance, if you design a form with two TextBox widgets, and one Button widget, Volt MX IQ predicts that you could be creating a Login form and recommends designs such as the [Login](https://marketplace.hclvoltmx.com /items/login-advanced?search=login) component from [HCL Forge](https://marketplace.hclvoltmx.com /) .
+For instance, if you design a form with two TextBox widgets, and one Button widget, Volt MX IQ predicts that you could be creating a Login form and recommends designs such as the [Login](https://marketplace.hclvoltmx.com/items/login-advanced?search=login) component from [HCL Forge](https://marketplace.hclvoltmx.com/) .
 
 Furthermore, Volt MX IQ can detect duplicate designs in your project. To fetch the duplicates of a design, type a command, such as “identify duplicates”, in the Volt MX IQ chat window and press Enter. A list of duplicate design groups is displayed in the Volt MX IQ Design Suggestions window. You can then view each duplicate design and copy it to a form.
 
