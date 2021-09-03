@@ -22,61 +22,60 @@ The **Apps** home page displays the following details:
 *   **Add New App** button: The button helps you add new applications to the list.
 *   **Search** field: Click in the **Search** field to view options to search an app. You can search apps based on the following criteria:
 
-    *   **App**: Enter the name of the desired app in the **Search** field and click **Enter.**
+*   **App**: Enter the name of the desired app in the **Search** field and click **Enter.**
 
-
-        
-        ![](../Resources/Images/Overview/Apps/searchapp.png)
-
-        
-        The app appears on the home page.
+       
+![](../Resources/Images/Overview/Apps/searchapp.png)
 
         
-        ![](../Resources/Images/Overview/Apps/searchanapp_560x264.png)
+The app appears on the home page.
 
         
-        If the specified app is not available in the app list, the system displays the message that no application is found.
+![](../Resources/Images/Overview/Apps/searchanapp_560x264.png)
 
         
-    *   **By**: Enter the name of the app's creator in the **Search** field.
+If the specified app is not available in the app list, the system displays the message that no application is found.
 
         
-        ![](../Resources/Images/Overview/Apps/searchby.png)
+*   **By**: Enter the name of the app's creator in the **Search** field.
 
         
-        The app appears on the home page.
+![](../Resources/Images/Overview/Apps/searchby.png)
 
         
-        ![](../Resources/Images/Overview/Apps/appby_557x133.png)
-        
-        
-    *   **Platform**: Enter the required platform name in the **Search** field to view apps based on a specific platform.
+The app appears on the home page.
 
         
-        ![](../Resources/Images/Overview/Apps/searchplatform1.png)
+![](../Resources/Images/Overview/Apps/appby_557x133.png)
+        
+        
+*   **Platform**: Enter the required platform name in the **Search** field to view apps based on a specific platform.
 
         
-        A list of apps with the specified platform name appear on the home page.
+![](../Resources/Images/Overview/Apps/searchplatform1.png)
 
         
-        ![](../Resources/Images/Overview/Apps/appplat_559x129.png)
+A list of apps with the specified platform name appear on the home page.
 
         
-    *   **Status**: Enter the status as **Published** or **Unpublished** in the **Search** field.
+![](../Resources/Images/Overview/Apps/appplat_559x129.png)
 
         
-        ![](../Resources/Images/Overview/Apps/searchstatus.png)
+*   **Status**: Enter the status as **Published** or **Unpublished** in the **Search** field.
 
         
-        Based on the entered status, the required apps appear on the home page.
+![](../Resources/Images/Overview/Apps/searchstatus.png)
 
         
-        ![](../Resources/Images/Overview/Apps/searchanappstatus_557x265.png)
+Based on the entered status, the required apps appear on the home page.
 
         
-        > **_Note:_** To clear your search result, click in the **Search** field to view the **Apps** home page.
+![](../Resources/Images/Overview/Apps/searchanappstatus_557x265.png)
+
         
-        > **_Note:_** If no application is added into the console, the **Apps** screen displays the following message: **No Applications Found**.
+> **_Note:_** To clear your search result, click in the **Search** field to view the **Apps** home page.
+        
+> **_Note:_** If no application is added into the console, the **Apps** screen displays the following message: **No Applications Found**.
         
 
 Each app on home page displays the following details:

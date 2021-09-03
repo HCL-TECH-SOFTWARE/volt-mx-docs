@@ -26,97 +26,97 @@ The red error icon indicates that the provider status is inactive and cannot rec
 The **Devices** page displays the following details:
 
 *   **Search**: Click in the **Search** field to view the available options to search a device. You can search devices based on the following search criteria:
-    *   **Device Name**: Enter the name of the desired device in the Search field and click **Enter**.
+*   **Device Name**: Enter the name of the desired device in the Search field and click **Enter**.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searchname.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searchname.png)
 
         
-        The required device appears in the list view.
+The required device appears in the list view.
 
         
-        > **_Note:_** A text string such as **Android Device, Windows Device**, **Web Device** or **Apple Device** is displayed in the **Device Name** column when the device name is not set for all the platforms respectively.
+> **_Note:_** A text string such as **Android Device, Windows Device**, **Web Device** or **Apple Device** is displayed in the **Device Name** column when the device name is not set for all the platforms respectively.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searesdename.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searesdename.png)
 
         
-    *   **Device ID**: Enter the device ID of the required device in the Search field and click **Enter**.
+*   **Device ID**: Enter the device ID of the required device in the Search field and click **Enter**.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searchdeviceid.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searchdeviceid.png)
 
         
-        The required device appears in the list view.
+The required device appears in the list view.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searesdevid_650x160.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searesdevid_650x160.png)
 
         
-    *   **KSID**: Enter the Volt MX Subscription Identification Serial Number (KSID) in the Search field and click **Enter**.
+*   **KSID**: Enter the Volt MX Subscription Identification Serial Number (KSID) in the Search field and click **Enter**.
      
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searchksid.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searchksid.png)
 
         
-        The required device appears in the list view.
+The required device appears in the list view.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searesksid_554x123.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searesksid_554x123.png)
 
         
-    *   **Token**: Enter the device **Token** in the search field and click **Enter**.
+*   **Token**: Enter the device **Token** in the search field and click **Enter**.
      
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searchtoken.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searchtoken.png)
 
         
-        The required device appears in the list view.
+The required device appears in the list view.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searestoken_561x126.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searestoken_561x126.png)
 
         
-    *   **Platform**: Enter the platform name in the Search field and click **Enter**.
+*   **Platform**: Enter the platform name in the Search field and click **Enter**.
      
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searchplatform1.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searchplatform1.png)
 
         
-        The required device appears in the list view.
+The required device appears in the list view.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searesplatform_554x199.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searesplatform_554x199.png)
 
         
-    *   **Application**: Enter the application name in the **Search** field and click **Enter**.
+*   **Application**: Enter the application name in the **Search** field and click **Enter**.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searchplatform.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searchplatform.png)
 
         
-        The required device appears in the list view.
+The required device appears in the list view.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searesapp_559x207.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searesapp_559x207.png)
 
         
-    *   **UFID**: Enter the **User Friendly Identifier** (UFID) in the Search field and click **Enter**.
+*   **UFID**: Enter the **User Friendly Identifier** (UFID) in the Search field and click **Enter**.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searchufid.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searchufid.png)
 
         
-        The required device appears in the list view.
+The required device appears in the list view.
 
         
-        ![](../Resources/Images/Overview/Subscribers/Devices/searesufid_547x121.png)
+![](../Resources/Images/Overview/Subscribers/Devices/searesufid_547x121.png)
 
         
-        > **_Note:_** To clear your search result, click in the **Search** field to view the **Devices** home page.
+> **_Note:_** To clear your search result, click in the **Search** field to view the **Devices** home page.
 
         
-    *   **Searching without Labelling with Multiple Parameters**: Enter the required parameters with a space in the search field. Based on entered parameters, the system displays the search result in the list view.
+*   **Searching without Labelling with Multiple Parameters**: Enter the required parameters with a space in the search field. Based on entered parameters, the system displays the search result in the list view.
 
 *   **All Dates:** To know more about the **All Dates** option, see [All Dates](../Dashboard/Dashboard.html#All_Dates)
 *   **Devices List View**: The **Devices** list view displays the following details:
