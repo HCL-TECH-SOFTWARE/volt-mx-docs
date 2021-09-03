@@ -107,7 +107,7 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
 
     > **_Note:_** Starting with Volt MX Iris V8 SP3, `fin` keys are not applicable. Volt MX will not provide the `fin` keys folder if your Iris version is V8 SP3 or later.
 
-    > **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to [voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). If a key compromise occurs for the Responsive Web/SPA platform, generate a new set of keys and send the public key via a Volt MX customer service ticket.
+    > **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to [voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). 
 6. Navigate to your Volt MX Iris workspace and create a **\_\_encryptionkeys** folder.
 7. Place the following keys received from Volt MX in **\_\_encryptionkeys** folder.
     
