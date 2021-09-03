@@ -43,7 +43,7 @@ If the user denies permission for background location access, but the app requir
 
 > **_Important:_** If the User denies background location access, the application will either crash or restart. This is a known issue on the Android Platform.
 
-The GeoLocation APIs are modeled after W3C GeoLocation specification. For a more hands-on approach on the functionality of the various Geolocation APIs provided by Volt MX, import and preview the [Geolocation Feature app](https://marketplace.hclvoltmx.com /items/geolocation-feature-app) by using Volt MX Iris.
+The GeoLocation APIs are modeled after W3C GeoLocation specification. For a more hands-on approach on the functionality of the various Geolocation APIs provided by Volt MX, import and preview the [Geolocation Feature app](https://marketplace.hclvoltmx.com/items/geolocation-feature-app) by using Volt MX Iris.
 
 {% include youtube.html id='XEdOHCBBMVw' %}
 
