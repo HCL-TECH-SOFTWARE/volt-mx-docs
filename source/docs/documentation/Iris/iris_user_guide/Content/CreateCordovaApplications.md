@@ -154,9 +154,7 @@ To manually customize your Cordova-generated Android project, follow these steps
 
 1.  You must build your Volt MX Iris project at least once to get a temporary **cordova** folder, where the actual Cordova project is copied and built.
 2.  After the Volt MX Iris project is built once (which may fail due to unresolved `android.support` references or due to some other build conflicts), you must copy all the contents in the `<voltmxproject>\cordovatemp\platforms\android` folder to the `<voltmxproject>/cordovaprebuilt` folder.  
-    The Cordova project (which is,**`<voltmxproject>/cordovaprebuilt`**) is now available for customization.  
-    
-
+    The Cordova project (which is,**`<voltmxproject>/cordovaprebuilt`**) is now available for customization.   
 > **_Note:_** If you face any `android.support` to `androidx`conflicts, you can manually change those references. Alternatively, with Android Studio 3.2 and later, you can migrate an existing project to AndroidX by selecting **Refactor** > **Migrate to AndroidX** from the menu bar. This action converts all `android.support` references to `androidx`.
 
 3.  To pick the customization from the new Cordova project, you must specify the value of the `cordovabuildmode` property as `incremental` in the `androidbuild.properties` file, which is located at: **`<voltmxproject>/androidbuild.properties`**.
