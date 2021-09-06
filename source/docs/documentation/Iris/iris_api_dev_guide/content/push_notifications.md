@@ -20,7 +20,7 @@ Each push notification includes a payload In iOS 8 and later, the maximum size a
 
 When you run your app on a device with Android OS 8.0 or above, Volt MX uses default channels that are mentioned in the pushconfig.xml file.
 
-For a more hands-on approach in the understanding and implementation of Push Notifications API, you can import and preview the [Events](https://marketplace.hclvoltmx.com /items/events) app by using Volt MX Iris.
+For a more hands-on approach in the understanding and implementation of Push Notifications API, you can import and preview the [Events](https://marketplace.kony.com/items/events) app by using Volt MX Iris.
 
 How it Works
 ------------
