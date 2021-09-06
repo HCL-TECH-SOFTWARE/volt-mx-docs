@@ -7,8 +7,7 @@ category: "voltmx_foundry_manual_install_guide"
 Post-Installation Tasks
 =======================
 
-Configuring Secure Sockets Layer (SSL) Certificate
---------------------------------------------------
+<h2 id="configuring-secure-sockets-layer-ssl-certificate">Configuring Secure Sockets Layer (SSL) Certificate</h2>
 
 You can troubleshoot trusted certification issues.
 
@@ -19,26 +18,24 @@ After installing Volt MX Foundry on HTTPS, import your SSL certificate (for exam
   
 If your SSL certificate is not configured, the system displays an error - "peer not authenticated."
 
-To enable communication between Volt MX Foundry Console and other products such as Volt MX Foundry Integration, and Volt MX Foundry Engagement Services, follow these steps:
+**To enable communication between Volt MX Foundry Console and other products such as Volt MX Foundry Integration, and Volt MX Foundry Engagement Services, follow these steps:**
 
 *   import each product's certificate (VoltMX Foundry Integration, and Volt MX Foundry Engagement Services) into the Volt MX Foundry console (for example, `<INSTALL_DIR>/jre/lib/security/cacerts`).
 *   import console cert into the product boxes cacerts such as Volt MX Foundry Integration, Volt MX Foundry Engagement Services, and Volt MX Foundry Management.
 
-### How to Add an Installer Generated Self-Signed SSL Certificate to Cacerts  
 
-To add an installer generated self-signed SSL certificate to cacerts, follow these steps:
+<h3 id="how-to-add-an-installer-generated-self-signed-ssl-certificate-to-cacerts">How to Add an Installer Generated Self-Signed SSL Certificate to Cacerts</h3>
+<p>To add an installer generated self-signed SSL certificate to cacerts, follow these steps:</p>
+<ol>
+  <li>From your Volt MX Foundry installed system, open the Linux terminal, and run the following command to generate an <code>intermediate.crt</code> file from the keystore:
+    <pre><code style="display:block;background-color:#eee;">&lt;USERINSTALLDIR&gt;/jre/bin/keytool -export -alias "&lt;HOST_URL_SSL_CONF&gt;" -file &lt;USERINSTALLDIR&gt;/intermediate.crt -keystore &lt;USERINSTALLDIR&gt;/keystore.jks -storepass &lt;Passsword_of_keystore&gt;</code></pre>
+    <p>Based on the hostname and keystore password provided at the <a href="Installing_VoltMX_Foundry_on_Linux.html#SSL_Hostname">SSL Certificate window</a>, the preceding command exports the required certificate from the source keystore with the given name - for example, <code>intermediate.crt</code>.</p>
+  </li>
+  <li>Run the following command to import the <code>intermediate.crt</code> certificate file into your Volt MX Foundry Installer’s JRE trusted certificate authority (CA) certificates file:
+    <pre><code style="display:block;background-color:#eee;">&lt;USERINSTALLDIR&gt;/jre/bin/keytool -import -noprompt -trustcacerts -alias "&lt;HOST_URL_SSL_CONF&gt;" -file &lt;USERINSTALLDIR&gt;/intermediate.crt -keystore &lt;USERINSTALLDIR&gt;/jre/lib/security/cacerts -storepass changeit</code></pre>
+  </li>
+</ol>
 
-1.  From your Volt MX Foundry installed system, open the Linux terminal, and run the following command to generate an `intermediate.crt` file from the keystore:
-    ```
-    <USERINSTALLDIR\>/jre/bin/keytool -export -alias "<HOST_URL_SSL_CONF>" -file <USERINSTALLDIR>/intermediate.crt -keystore <USERINSTALLDIR>/keystore.jks -storepass <Passsword_of_keystore>
-    ```
-    
-    Based on the hostname and keystore password provided at the [SSL Certificate window](Installing_VoltMX_Foundry_on_Linux.html#SSL_Hostname), the preceding command exports the required certificate from the source keystore with the given name - for example, `intermediate.crt`.
-    
-2.  Run the following command to import the `intermediate.crt` certificate file into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file:
-    ```
-    <USERINSTALLDIR>/jre/bin/keytool -import -noprompt -trustcacerts -alias "<HOST\_URL\_SSL\_CONF>" -file <USERINSTALLDIR>/intermediate.crt -keystore <USERINSTALLDIR>/jre/lib/security/cacerts -storepass changeit  
-    ```
 
 ### How to Add an Existing SSL Certificate to Cacerts
 
@@ -115,14 +112,14 @@ Log Locations for Volt MX Foundry
 *   Log Locations for Multinode Installation: [Logs\_for\_Multi-Node\_Installation]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Logs_for_Multi-Node_Installation.html)
 *   **Logging Format**:
     
-    To store more and more information in the logs, Volt MX Foundry uses custom logging format. The format is:
-    
+    To store more and more information in the logs, Volt MX Foundry uses custom logging format. The format is:  
+
     `[<service-name>][%5p][%d{dd MMM yyyy HH:mm:ss,SSS}]:%x:[%t]:[%c:%M:%L]:%m%n`
     
-    Here is what each parameter in the above format means:
-    
-    `<service-name>` - This parameter is the name of the service as mentioned below:
-    
+    Here is what each parameter in the above format means:  
+
+    `<service-name>` - This parameter is the name of the service as mentioned below:  
+
     *   Accounts: `console.accounts`
     *   Console: `console.portal`
     *   Workspace: `console.workspace`
@@ -148,20 +145,19 @@ Log Locations for Volt MX Foundry
     <br>
     `%n` - the platform dependent line separator character or characters.
     <br>
-    For example, a typical logging request could look like this:
-    ```
-    \[app.services\]\[ERROR\]\[09 Feb 2016 18:48:55,863\]:\[ 016575f0-7342-4c32-9ceb-726569003277\]:\[http-bio-8080-exec-23\]:\[com.voltmx.console.service.testtool.ServiceTestController:executeTestService:143\]:error occurred while testing service.  
-      
-    java.lang.NullPointerException  
-      
-    at com.hcl.voltmx.middleware.connectors.dataadapter.DataAdapterConnector  
-    .prepareMapDataControllerRequest(DataAdapterConnector.java:259)  
-      
-    at …
-    ```
+    For example, a typical logging request could look like this:  
 
-How to Configure Memcache for Integration Services
---------------------------------------------------
+    <pre><code style="display:block;background-color:#eee;">[app.services][ERROR][09 Feb 2016 18:48:55,863]:[ 016575f0-7342-4c32-9ceb-726569003277]:[http-bio-8080-exec-23]:[com.voltmx.console.service.testtool.ServiceTestController:executeTestService:143]:error occurred while testing service.
+    
+    java.lang.NullPointerException
+
+    at com.hcl.middleware.connectors.dataadapter.DataAdapterConnector
+    .prepareMapDataControllerRequest(DataAdapterConnector.java:259)
+
+    at …</code></pre>
+
+
+<h2 id="how-to-configure-memcache-for-integration-services">How to Configure Memcache for Integration Services</h2>
 
 *   For VoltMXFoundry version 7.3 or above, you can configure the memcache from Admin console.
     
@@ -169,8 +165,10 @@ How to Configure Memcache for Integration Services
     
     1.  Open Admin console (http/https://<server-host>:<server-port>/admin).
     2.  In the left pane, go to the **Settings** tab.
+    <br/>
         
-        ![](Resources/Images/HC1_530x266.png)
+        ![](Resources/Images/HC1_530x266.png)  
+    <br/>
         
     3.  Under the **Runtime Configuration** tab, expand the **Memcache Configuration** key.
     4.  In the **Memcache Cluster** field, provide your memcache **hostname/IP** and **port** details separated with a colon. For example, <hostname/IP>:<Port>
