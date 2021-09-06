@@ -19,8 +19,8 @@ To access Volt MX Foundry, follow these steps:
 1.  [How to Get Started With Volt MX Foundry Console](#how-to-get-started-with-foundry-console)
 2.  [How to Log In to Volt MX Foundry Console](#how-to-log-in-to-foundry-console)
 
-How to Get Started With Volt MX Foundry Console
-----------------------------------------------
+
+<h2 id="how-to-get-started-with-foundry-console"> How to Get Started With Volt MX Foundry Console</h2>
 
 > **_Note:_** If you have installed Console and Identity Service along with one or more Volt MX Foundry components such as **Integration**, **Engagement** and **Sync** services on **Tomcat** or **JBoss** on a **single node**, you can directly log in to Volt MX Foundry Console as you have already created your super administrator account.  
   
@@ -57,8 +57,7 @@ To launch Volt MX Foundry Console, follow these steps:
     *   Display the **Sign in to your Volt MX Account** page.  
         
 
-How to Log In to Volt MX Foundry Console
----------------------------------------
+<h2 id="how-to-log-in-to-foundry-console">How to Log In to Volt MX Foundry Console</h2>
 
 If you have configured identity services and created your administrator account (VoltMX Foundry superuser account), you can log in to the Volt MX Foundry console. A superuser will have owner permissions by default.
 
@@ -108,23 +107,25 @@ If you have configured identity services and created your administrator account 
         Refer to [Custom metrics and reports]({{ site.baseurl }}/docs/documentation/Foundry/custom_metrics_and_reports/Content/Custom_Metrics_and_Reports_Guide.html)
     *   For more information on **Settings**, refer to [Settings](Settings.html#settings-on-premises).
 
-How to View Your Login History
-------------------------------
 
-You can view the history of your logins to Volt MX Foundry. The history includes both successful and unsuccessful login attempts. The account options menu shows your last successful login. You can access your login activity log by clicking the last successful login in the user account drop-down menu.
-
-To view the history of logins for your Volt MX Foundry account, do the following:
-
-1.  Click the user account options menu.
-
-The menu displays the history of your last successful login.
-
-![](Resources/Images/LastLoginHistory.png)
-
-4.  Click **Last successful login**.
-
-The login activity profile for your account appears. You can search the login activities by stipulating a regular expression or an exact match.
-
-You can also access your login activity log by clicking **Profile** in the user account drop-down menu, and then clicking **Activity Log**.
-
-![](Resources/Images/LoginActivityLog_656x366.png)
+<h2>How to View Your Login History</h2>
+<p></p>
+<p>You can view the history of your logins to Volt MX Foundry. The history includes both successful and unsuccessful login attempts. The account options menu shows your last successful login. You can access your login activity log by clicking the last successful login in the user account drop-down menu.</p>
+<p>To view the history of logins for your Volt MX Foundry account, do the following:</p>
+<ol>
+  <li>Click the user account options menu.
+    <p></p>
+        <p>The menu displays the history of your last successful login.</p>
+    <p>
+      <img src="Resources/Images/LastLoginHistory.png">
+    </p>
+  </li>
+  <li>Click <strong>Last successful login</strong>.
+     <p></p>
+        <p>The login activity profile for your account appears. You can search the login activities by stipulating a regular expression or an exact match.</p>
+            <p>You can also access your login activity log by clicking <strong>Profile</strong> in the user account drop-down menu, and then clicking <strong>Activity Log.</strong></p>
+    <p>
+      <img src="Resources/Images/LoginActivityLog_656x366.png">
+    </p>
+  </li>
+</ol>
