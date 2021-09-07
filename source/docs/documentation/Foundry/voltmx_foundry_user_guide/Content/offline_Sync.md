@@ -31,7 +31,7 @@ For more information on Offline objects, refer to the following:
 *   [Offline Objects API Reference Guide]({{ site.baseurl }}/docs/documentation/Foundry/offline_objectsapi_reference_guide/Content/Offline_Objects_API_Reference.html)
 *   [Webinar Recording on Offline Objects](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083698)
 *   [Video tutorial on Offline Objects](https://youtu.be/mw_OhdC3JxE)
-*   [Sample App - Offline Enabled WorkOrder in Marketplace](https://marketplace.hclvoltmx.com /items/work-order-management-offline-enabled)
+*   [Sample App - Offline Enabled WorkOrder in Marketplace](https://marketplace.hclvoltmx.com/items/work-order-management-offline-enabled)
 *   [Offline Objects Windows 10 Support](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083640)
 *   [Offline Objects in Progressive Web App](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083686)
 *   [Offline Object Support for Mobile and Desktop Web Apps](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083617)
