@@ -80,7 +80,7 @@ For general information on the Camera widget see the [Camera]({{ site.baseurl }}
 
 For a more hands-on approach on the functionality of Camera widget, import and preview the **Camera Feature** sample app by using Volt MX Iris.
 
-[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com /items/camera-feature-app)
+[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com/items/camera-feature-app)
 
 The Camera widget capabilities can be broadly categorized into the following:
 

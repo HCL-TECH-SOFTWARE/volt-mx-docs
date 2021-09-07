@@ -27,7 +27,7 @@ Widgets are normally added to your application using Volt MX Iris, but can also 
 For general information on the Browser widget see the []({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Button.html)[Browser]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Browser.html) topic in the Volt MX Iris User Guide.
 
 > **_Note:_** For a more hands-on approach on the functionality of Browser widget, import and preview the **Browser Feature** sample app by using Volt MX Iris.  
-[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com /items/browser-feature-app)
+[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com/items/browser-feature-app)
 
 The Browser widget capabilities can be broadly categorized into the following:
 

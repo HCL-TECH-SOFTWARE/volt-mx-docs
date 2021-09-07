@@ -11,7 +11,7 @@ Downloading and Configuring Volt MX Foundry Engagement Demo Client Application o
 
 The section explains how to download Volt MX Foundry Engagement demo application from location below and configure the demo client application to receive email, push and SMS notifications.
 
-1.  Click [Engagement demo application](https://marketplace.hclvoltmx.com /items/voltmx-foundry-messaging-demo-application) where the application is located. Log in with your cloud credentials to download and launch the application.
+1.  Click [Engagement demo application](https://marketplace.hclvoltmx.com/items/voltmx-foundry-messaging-demo-application) where the application is located. Log in with your cloud credentials to download and launch the application.
 2.  Launch the **Engagement demo app** that was installed earlier on the Android device.
 3.  The first screen of the application prompts the user to accept push notifications. Click **Ok** to receive push notifications.
     
