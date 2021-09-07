@@ -35,7 +35,7 @@ To understand the functionality of **Groups** feature, let us take an example of
 
 ### How to Use Groups in Apps (Based on Sample App - EmployeeDirectory)
 
-1.  Import the [EmployeeDirectory](https://marketplace.kony.com/items/employee-directory-1) app into your project in Volt MX Iris.
+1.  Import the [EmployeeDirectory](https://marketplace.hclvoltmx.com/items/employee-directory-1) app into your project in Volt MX Iris.
 2.  Navigate to app to the Volt MX Foundry services by using the Data panel.
     
     By default, Volt MX User Repository (Userstore) identity service is linked to the app.

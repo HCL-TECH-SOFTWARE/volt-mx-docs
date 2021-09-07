@@ -23,7 +23,7 @@ Widgets are normally added to your application using Volt MX Iris, but can also 
 
 For a more hands-on approach on how you can implement CollectionView widget, import and preview the **File Gallery** sample app by using Volt MX Iris.
 
-[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.kony.com/items/file-gallery-sample-app)
+[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com/items/file-gallery-sample-app)
 
 The CollectionView widget capabilities can be broadly categorized into the following:
 
