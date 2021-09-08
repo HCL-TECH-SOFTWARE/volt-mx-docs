@@ -11,7 +11,7 @@ Post-Installation Tasks
 
 You can troubleshoot trusted certification issues.
 
-> **_Important:_** Apple's App Transport Security (ATS) mandates HTTPS for all communication and requires the use of TLS v1.2 or higher for all SSL certificates and load balancers.  
+> **_Important:_** Apple's App Transport Security (ATS) mandates HTTPS for all communication and requires the use of TLS v1.2 or higher for all SSL certificates and load balancers. <br/> <br/>
 For Apple apps to work properly and adhere to App Store guidelines, you must enable your Volt MX Foundry on-premises instance with SSL and configure your network infrastructure to use TLS version 1.2 or higher. For more information, please refer to the following: [HCL Basecamp article on ATS Compliance](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083519).
 
 After installing Volt MX Foundry on HTTPS, import your SSL certificate (for example, `domain.subdomain.crt`) into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file - for example, `<INSTALL_DIR>/jre/lib/security/cacerts`  
@@ -47,12 +47,12 @@ Use the following steps to import your existing certificate to cacerts with the 
 
 1.  From your Volt MX Foundry installed system, open the Linux terminal, and run the following command to add an `intermediate.crt` file from the keystore:
     ```
-    <USERINSTALLDIR>/jre/bin/keytool -export -alias "<yourcertificate\_domain>" -file <USERINSTALLDIR>/intermediate.crt -keystore <keystore\_location>-storepass <Passsword\_of\_keystore>
+    <USERINSTALLDIR>/jre/bin/keytool -export -alias "<yourcertificate_domain>" -file <USERINSTALLDIR>/intermediate.crt -keystore <keystore_location>-storepass <Passsword_of_keystore>
     ```
 
 2.  Run the below command to import the `intermediate.crt` certificate file into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file:
     ```
-    <USERINSTALLDIR>/jre/bin/keytool -import -noprompt -trustcacerts -alias "<yourcertificate\_domain>" -file <USERINSTALLDIR>/intermediate.crt -keystore <USERINSTALLDIR>/jre/lib/security/cacerts -storepass changeit
+    <USERINSTALLDIR>/jre/bin/keytool -import -noprompt -trustcacerts -alias "<yourcertificate_domain>" -file <USERINSTALLDIR>/intermediate.crt -keystore <USERINSTALLDIR>/jre/lib/security/cacerts -storepass changeit
     ```
 
 JDK Version Compatibility
@@ -78,9 +78,9 @@ Ensure that you make necessary changes in the `middleware.properties` file befor
 To configure JDK version in middleware, follow these steps:
 
 1.  In your middleware server installation folder, open the  `middleware.properties` file located at the below path:
-    *   for JBoss:`       
-        <installer folder>\middleware_home\middleware\middleware-bootconfig  
-        `
+    *   for JBoss:<code>       
+        &lt;installer folder&gt;\middleware_home\middleware\middleware-bootconfig  
+        </code>
     *   for Tomcat: `<installer folder>\middleware_home\middleware\middleware-bootconfig`
 
 2.  In the `middleware.properties` file, do the following changes:
@@ -163,7 +163,7 @@ Log Locations for Volt MX Foundry
     
     To configure memcache in Foundry 7.3 or above versions, follow these steps:
     
-    1.  Open Admin console (http/https://<server-host>:<server-port>/admin).
+    1.  Open Admin console (http/https://&lt;server-host&gt;:&lt;server-port&gt;/admin).
     2.  In the left pane, go to the **Settings** tab.
     <br/>
         
@@ -174,7 +174,8 @@ Log Locations for Volt MX Foundry
     4.  In the **Memcache Cluster** field, provide your memcache **hostname/IP** and **port** details separated with a colon. For example, <hostname/IP>:<Port>
     5.  Save the changes.
 
-*   For below Foundry 7.3, you can configure the memcache using queries on **voltmxadmindb**.
+*   For below Foundry 7.3, you can configure the memcache using queries on **voltmxadmindb**.  
+
     
     To configure memcache in below Foundry 7.3, follow these steps:
     
@@ -189,8 +190,7 @@ Log Locations for Volt MX Foundry
         **Verification:** To verify whether the memcache configuration is successfully done, go to the **Health Check** page and look for **Access to Cache** entry.
         
         > **_Note:_** It may take up to 5 minutes for the healthcheck to reflect the cache status. If you are still unable to find the particular entry in the **Health Check** page, try clearing the healthcheck cache using the following URL:  
-          
-        https://<server-host>:<server-port>/admin/healthcheck?output=json
+        https://&lt;server-host&gt;:&lt;server-port&gt;/admin/healthcheck?output=json
         
         ![](Resources/Images/HC2_499x293.png)
         
@@ -250,8 +250,8 @@ The Module.xml can be located at:
     *   **sapjco3.jar**
     *   **SapJCoDestinationProvider.jar**
 2.  Navigate to `<USER_INSTALL_DIR>/jboss/modules/org/sapjco/main/`
-    *   In `module.xml`, under the **<resources>** tag add `<resource-root path="sapjco3.jar"/>`.
-    *   In `standalone-full.xml`, under the **<global-modules>** tag add `<module name="org.sapjco" slot="main"/>`.
+    *   In `module.xml`, under the **\<resources\>** tag add `<resource-root path="sapjco3.jar"/>`.
+    *   In `standalone-full.xml`, under the **\<global-modules\>** tag add <code>&lt;module name="org.sapjco" slot="main"/&gt;</code>.
 
 #### JBoss - Standalone(Pre-configured)/Domain mode
 
@@ -259,7 +259,7 @@ The Module.xml can be located at:
     *   **sapjco3.jar**
     *   **SapJCoDestinationProvider.jar**
 2.  Navigate to `<JBOSS_DIR>/modules/org/sapjco/main`.
-    *   In `module.xml`, under the **<resources>** tag add `<resource-root path="sapjco3.jar"/>`.
+    *   In `module.xml`, under the **\<resources\>** tag add <code>&lt;resource-root path="sapjco3.jar"/&gt;</code>.
     *   In `standalone.xml` or `domain.xml`, in the subsystem add `<subsystem xmlns="urn:jboss:domain:ee:4.0">`. Add the following tag:
 {% highlight voltMx %}<global-modules>  
 <module name="org.sapjco" slot="main"/>  
@@ -278,5 +278,4 @@ How to change Hostname and Port
 In the `<USER_INSTALL_DIR>/scripts` a `<DB_TYPE>_changeHostDetails_script.sql` file is generated which consists of the SQL queries to be executed when the user wants to change the hostname and port on which Volt MX Foundry is running.
 
 1.  Execute the query to create procedure.
-2.  Call the procedure with the existing values, as follows:{% highlight voltMx %}call DYN_UPDATE3 ( AUTHCONFIGDB, ACCOUNTSDB, WORKSPACESGLOBALDB, ADMINDB, VMSDB, OLD_HOST, NEW_HOST, OLD_PORT, NEW_PORT );
-    {% endhighlight %}
+2.  Call the procedure with the existing values, as follows:{% highlight voltMx %}call DYN_UPDATE3 ( AUTHCONFIGDB, ACCOUNTSDB, WORKSPACESGLOBALDB, ADMINDB, VMSDB, OLD_HOST, NEW_HOST, OLD_PORT, NEW_PORT );{% endhighlight %}
