@@ -14,7 +14,9 @@ A device subscription relates in the scope of a specific application. An applica
 -ROLE\_ DEVICES\_ALL
 
 
-![](../Resources/Images/Overview/Subscribers/subscribershomepage.png)
+![](../Resources/Images/Overview/Subscribers/
+subscribershomepage.png)
+
 
 
 > **_Important:_**  
