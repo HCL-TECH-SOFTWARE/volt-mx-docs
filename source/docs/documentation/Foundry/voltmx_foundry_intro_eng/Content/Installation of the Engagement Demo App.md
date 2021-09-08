@@ -36,7 +36,6 @@ In this section, we will take you thru the steps to download and install the And
     
     ![](Resources/Images/app2.png)
     
-    
 6.  The next screen will prompt you to enter your provisioned Volt MX Engagement Server URL, application id, and sender id. Additional details pertaining to each fields are as follows:
     *   **URL**: The URL of the Engagement Server provisioned for you when you signed up for Volt MX Foundry. For example: https://mobilefoundrydemo.messaging.voltmxcloud.com
         
@@ -47,8 +46,7 @@ In this section, we will take you thru the steps to download and install the And
 
         
     ![](Resources/Images/aoo3.png)
-
-        
+  
 7.  Click **Done** after all the details are successfully entered. This will navigate you to the **User** creation screen.
 8.  You need to enter the first name, last name, phone number, email, country and state (if country is US only) information in the **User** creation screen.
 
