@@ -75,6 +75,7 @@ delete from &lt;admindb&gt;.schema_version where script = 'V62.1__voltmxadmin-or
 </li>
 <li>
 <p><b>Issue</b>: After entering Database details the DB connection fails with the following error:</p> 
+<br/>
 <p><img src="Resources/Images/error_troubleshooting.png"/></p><br/>
 <p></p>
 <p><b>Workaround</b>: The password used for the Database must not contain exclamation marks (!).</p> 
@@ -174,9 +175,9 @@ If you are installing Volt MX Foundry on Tomcat on HTTP and wants to route reque
 proxyName="<ProxyHost>" proxyPort="<ProxyPort>" scheme="https" secure="true"
 
 **Example**:
-```
-<Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/>
-```
+
+<pre><code style="display:block;background-clor:#eee;">&lt;Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/&gt;</pre></code>
+
 
 How to Change Log Levels
 ------------------------
