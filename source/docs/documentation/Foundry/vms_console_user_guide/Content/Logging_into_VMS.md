@@ -20,6 +20,7 @@ To log into Volt MX Foundry Engagement Services, follow these steps:
     
     Example: http://localhost:8080/vpns
     
+    
 3.  Press the **Enter** key. The Volt MX Foundry Engagement Services Login screen appears.
     
     ![](Resources/Images/Overview/loginscreen.PNG)
