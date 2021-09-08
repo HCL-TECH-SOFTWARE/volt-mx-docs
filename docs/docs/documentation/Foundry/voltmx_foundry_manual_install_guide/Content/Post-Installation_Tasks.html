@@ -33,7 +33,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Post-Installation Tasks" />
 <script type="application/ld+json">
-{"description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://github01.hclpnp.com/pages/phoenix-temenos/VoltMxDocOpnSrc/Volt_Mx_logo.png"}},"url":"https://github01.hclpnp.com/pages/phoenix-temenos/VoltMxDocOpnSrc/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Post-Installation_Tasks.html","headline":"Post-Installation Tasks","@type":"WebPage","@context":"https://schema.org"}</script>
+{"description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://github01.hclpnp.com/pages/phoenix-temenos/VoltMxDocOpnSrc/Volt_Mx_logo.png"}},"headline":"Post-Installation Tasks","url":"https://github01.hclpnp.com/pages/phoenix-temenos/VoltMxDocOpnSrc/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Post-Installation_Tasks.html","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -245,7 +245,7 @@
 <p>You can troubleshoot trusted certification issues.</p>
 
 <blockquote>
-  <p><strong><em>Important:</em></strong> Apple’s App Transport Security (ATS) mandates HTTPS for all communication and requires the use of TLS v1.2 or higher for all SSL certificates and load balancers.<br />
+  <p><strong><em>Important:</em></strong> Apple’s App Transport Security (ATS) mandates HTTPS for all communication and requires the use of TLS v1.2 or higher for all SSL certificates and load balancers. <br /> <br />
 For Apple apps to work properly and adhere to App Store guidelines, you must enable your Volt MX Foundry on-premises instance with SSL and configure your network infrastructure to use TLS version 1.2 or higher. For more information, please refer to the following: <a href="https://support.hcltechsw.com/csm?id=kb_article&amp;sysparm_article=KB0083519">HCL Basecamp article on ATS Compliance</a>.</p>
 </blockquote>
 
@@ -294,11 +294,11 @@ For Apple apps to work properly and adhere to App Store guidelines, you must ena
 
 <ol>
   <li>From your Volt MX Foundry installed system, open the Linux terminal, and run the following command to add an <code class="language-plaintext highlighter-rouge">intermediate.crt</code> file from the keystore:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;USERINSTALLDIR&gt;/jre/bin/keytool -export -alias "&lt;yourcertificate\_domain&gt;" -file &lt;USERINSTALLDIR&gt;/intermediate.crt -keystore &lt;keystore\_location&gt;-storepass &lt;Passsword\_of\_keystore&gt;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;USERINSTALLDIR&gt;/jre/bin/keytool -export -alias "&lt;yourcertificate_domain&gt;" -file &lt;USERINSTALLDIR&gt;/intermediate.crt -keystore &lt;keystore_location&gt;-storepass &lt;Passsword_of_keystore&gt;
 </code></pre></div>    </div>
   </li>
   <li>Run the below command to import the <code class="language-plaintext highlighter-rouge">intermediate.crt</code> certificate file into your Volt MX Foundry Installer’s JRE trusted certificate authority (CA) certificates file:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;USERINSTALLDIR&gt;/jre/bin/keytool -import -noprompt -trustcacerts -alias "&lt;yourcertificate\_domain&gt;" -file &lt;USERINSTALLDIR&gt;/intermediate.crt -keystore &lt;USERINSTALLDIR&gt;/jre/lib/security/cacerts -storepass changeit
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;USERINSTALLDIR&gt;/jre/bin/keytool -import -noprompt -trustcacerts -alias "&lt;yourcertificate_domain&gt;" -file &lt;USERINSTALLDIR&gt;/intermediate.crt -keystore &lt;USERINSTALLDIR&gt;/jre/lib/security/cacerts -storepass changeit
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -347,11 +347,9 @@ For Apple apps to work properly and adhere to App Store guidelines, you must ena
 <ol>
   <li>In your middleware server installation folder, open the  <code class="language-plaintext highlighter-rouge">middleware.properties</code> file located at the below path:
     <ul>
-      <li>for JBoss:`
-        <installer folder="">\middleware_home\middleware\middleware-bootconfig  
-`
-</installer>
-      </li>
+      <li>for JBoss:<code>       
+&lt;installer folder&gt;\middleware_home\middleware\middleware-bootconfig  
+</code></li>
       <li>for Tomcat: <code class="language-plaintext highlighter-rouge">&lt;installer folder&gt;\middleware_home\middleware\middleware-bootconfig</code></li>
     </ul>
   </li>
@@ -466,7 +464,7 @@ at …</code></pre>
     <p>To configure memcache in Foundry 7.3 or above versions, follow these steps:</p>
 
     <ol>
-      <li>Open Admin console (http/https://<server-host>:<server-port>/admin).</server-port></server-host></li>
+      <li>Open Admin console (http/https://&lt;server-host&gt;:&lt;server-port&gt;/admin).</li>
       <li>
         <p>In the left pane, go to the <strong>Settings</strong> tab.
 <br /></p>
@@ -495,10 +493,9 @@ at …</code></pre>
         <p><strong>Verification:</strong> To verify whether the memcache configuration is successfully done, go to the <strong>Health Check</strong> page and look for <strong>Access to Cache</strong> entry.</p>
 
         <blockquote>
-          <p><strong><em>Note:</em></strong> It may take up to 5 minutes for the healthcheck to reflect the cache status. If you are still unable to find the particular entry in the <strong>Health Check</strong> page, try clearing the healthcheck cache using the following URL:</p>
+          <p><strong><em>Note:</em></strong> It may take up to 5 minutes for the healthcheck to reflect the cache status. If you are still unable to find the particular entry in the <strong>Health Check</strong> page, try clearing the healthcheck cache using the following URL:<br />
+https://&lt;server-host&gt;:&lt;server-port&gt;/admin/healthcheck?output=json</p>
         </blockquote>
-
-        <p>https://<server-host>:<server-port>/admin/healthcheck?output=json</server-port></server-host></p>
 
         <p><img src="/pages/phoenix-temenos/VoltMxDocOpnSrc/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Resources/Images/HC2_499x293.png" alt="" /></p>
       </li>
@@ -610,8 +607,8 @@ at …</code></pre>
   </li>
   <li>Navigate to <code class="language-plaintext highlighter-rouge">&lt;USER_INSTALL_DIR&gt;/jboss/modules/org/sapjco/main/</code>
     <ul>
-      <li>In <code class="language-plaintext highlighter-rouge">module.xml</code>, under the **<resources>** tag add `<resource-root path="sapjco3.jar"></resource-root>`.</resources></li>
-      <li>In <code class="language-plaintext highlighter-rouge">standalone-full.xml</code>, under the **<global-modules>** tag add `<module name="org.sapjco" slot="main"></module>`.</global-modules></li>
+      <li>In <code class="language-plaintext highlighter-rouge">module.xml</code>, under the <strong>&lt;resources&gt;</strong> tag add <code class="language-plaintext highlighter-rouge">&lt;resource-root path="sapjco3.jar"/&gt;</code>.</li>
+      <li>In <code class="language-plaintext highlighter-rouge">standalone-full.xml</code>, under the <strong>&lt;global-modules&gt;</strong> tag add <code>&lt;module name="org.sapjco" slot="main"/&gt;</code>.</li>
     </ul>
   </li>
 </ol>
@@ -633,7 +630,7 @@ at …</code></pre>
   </li>
   <li>Navigate to <code class="language-plaintext highlighter-rouge">&lt;JBOSS_DIR&gt;/modules/org/sapjco/main</code>.
     <ul>
-      <li>In <code class="language-plaintext highlighter-rouge">module.xml</code>, under the **<resources>** tag add `<resource-root path="sapjco3.jar"></resource-root>`.</resources></li>
+      <li>In <code class="language-plaintext highlighter-rouge">module.xml</code>, under the <strong>&lt;resources&gt;</strong> tag add <code>&lt;resource-root path="sapjco3.jar"/&gt;</code>.</li>
       <li>In <code class="language-plaintext highlighter-rouge">standalone.xml</code> or <code class="language-plaintext highlighter-rouge">domain.xml</code>, in the subsystem add <code class="language-plaintext highlighter-rouge">&lt;subsystem xmlns="urn:jboss:domain:ee:4.0"&gt;</code>. Add the following tag:</li>
     </ul>
   </li>
@@ -670,8 +667,7 @@ at …</code></pre>
   <li>Execute the query to create procedure.</li>
   <li>Call the procedure with the existing values, as follows:</li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">call DYN_UPDATE3 ( AUTHCONFIGDB, ACCOUNTSDB, WORKSPACESGLOBALDB, ADMINDB, VMSDB, OLD_HOST, NEW_HOST, OLD_PORT, NEW_PORT );
-    </code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">call DYN_UPDATE3 ( AUTHCONFIGDB, ACCOUNTSDB, WORKSPACESGLOBALDB, ADMINDB, VMSDB, OLD_HOST, NEW_HOST, OLD_PORT, NEW_PORT );</code></pre></figure>
 
         
 
