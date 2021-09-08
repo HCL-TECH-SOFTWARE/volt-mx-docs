@@ -14,10 +14,7 @@ A device subscription relates in the scope of a specific application. An applica
 -ROLE\_ DEVICES\_ALL
 
 
-![](../Resources/Images/Overview/Subscribers/
-subscribershomepage.png)
-
-
+![](../Resources/Images/Overview/Subscribers/subscribershomepage.png)
 
 > **_Important:_**  
 The green subscriber icon indicates that a device is active to that application, and can receive push notifications.  
