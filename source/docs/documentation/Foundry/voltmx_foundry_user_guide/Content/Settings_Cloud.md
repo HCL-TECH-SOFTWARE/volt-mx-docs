@@ -40,6 +40,7 @@ An environment can have 3 types of access permissions to users.
 
 > **_Note:_** By default, all users have access to Foundry Console to create apps.
 
+
 The following table details you about the features with access level permissions of an environment:
 
   
