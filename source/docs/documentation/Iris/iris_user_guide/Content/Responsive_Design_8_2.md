@@ -34,7 +34,7 @@ From Volt MX Iris V8 SP2, the existing Responsive Web Design feature has been en
 
 For a more hands-on approach on the Responsive Web Design feature provided by Volt MX Iris AppPlatform, import and preview the **Resort Feature** sample app by using Volt MX Iris.
 
-[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.kony.com/items/resort-feature-app)
+[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com/items/resort-feature-app)
 
 The Responsive Web design feature is currently available only for the Desktop Web platform.
 

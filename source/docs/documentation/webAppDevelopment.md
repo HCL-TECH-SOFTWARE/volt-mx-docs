@@ -53,11 +53,11 @@ Customize the look and feel of certain widgets in an SPA app by adding your own 
 ### [Web Preview](Iris/iris_user_guide/Content/LivePreview.html)
 Learn how the Live Preview feature helps you achieve a seamless in-app preview experience within Volt MX Iris. Live Preview reduces the build and preview time of an adaptive web app. It enables you to view your app as it appears on various devices without having to view the app on those devices.
 
-### [Events](https://marketplace.kony.com/items/events)
+### [Events](https://marketplace.hclvoltmx.com/items/events)
 For a more hands-on approach on how to implement Engagement Services and Orchestration Services, import and preview the Events Progressive Web app in Volt MX Iris. This app provides users the option to browse through and register for upcoming events in an organization.
 
-### [Employee Directory](https://marketplace.kony.com/items/employee-directory-1)
+### [Employee Directory](https://marketplace.hclvoltmx.com/items/employee-directory-1)
 For a more hands-on approach on how to use Volt MX User Repository and Object Services, import and preview the Employee Directory Progressive Web app in Volt MX Iris. This app allows you to search, discover, and know more about your co-workers.
 
-### [Resort Feature App](https://marketplace.kony.com/items/resort-feature-app)
+### [Resort Feature App](https://marketplace.hclvoltmx.com/items/resort-feature-app)
 For a more hands-on approach on the Responsive Web Design and Progressive Web App features, import and preview the Resort feature app in Volt MX Iris. This sample app is a Responsive Web app for a resort with the major functionality of organizing corporate events.
