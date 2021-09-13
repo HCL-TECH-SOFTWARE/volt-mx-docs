@@ -306,7 +306,7 @@
 
 <ol>
   <li>By <a href="#modifying-pushconfig-xml-file">modifying pushconfig.xml file</a> - Used for modifying only a defined set of options.</li>
-  <li>By <a href="#modifying-voltmxgcmbroadcastreceiver-class">modifying VoltMXGCMBroadcastReceiver class</a> - Used for modifying the way messages appear and other advance options.</li>
+  <li>By <a href="#modifying-konygcmbroadcastreceiver-class">modifying KonyGCMBroadcastReceiver class</a> - Used for modifying the way messages appear and other advance options.</li>
 </ol>
       <h3 id="modifying-pushconfigxml-file">
         
@@ -440,18 +440,18 @@
     </tr>
   </tbody>
 </table>
-      <h3 id="modifying-voltmxgcmbroadcastreceiver-class">
+      <h3 id="modifying-konygcmbroadcastreceiver-class">
         
         
-          <a href="#modifying-voltmxgcmbroadcastreceiver-class" class="anchor-heading" aria-labelledby="modifying-voltmxgcmbroadcastreceiver-class"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Modifying VoltMXGCMBroadcastReceiver Class
+          <a href="#modifying-konygcmbroadcastreceiver-class" class="anchor-heading" aria-labelledby="modifying-konygcmbroadcastreceiver-class"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Modifying KonyGCMBroadcastReceiver Class
         
         
       </h3>
     
 
-<p>If you need to customize GCM apart from what is provided in the <code class="language-plaintext highlighter-rouge">pushconfig.xml</code> file, you can replace the platform default GCM broadcast receiver with the custom GCM broadcast receiver. The custom GCM receiver inherits from the default Volt MX GCM broadcast receiver <em>VoltMXGCMBroadcastReceiver</em> class that is available in <code class="language-plaintext highlighter-rouge">voltmxwidgets.jar</code>. Provide a fully qualified class name in Volt MX Iris by going to <code class="language-plaintext highlighter-rouge">Properties-&gt;NativeApp-&gt;Android-&gt;Push Notification</code>.</p>
+<p>If you need to customize GCM apart from what is provided in the <code class="language-plaintext highlighter-rouge">pushconfig.xml</code> file, you can replace the platform default GCM broadcast receiver with the custom GCM broadcast receiver. The custom GCM receiver inherits from the default Volt MX GCM broadcast receiver <em>KonyGCMBroadcastReceiver</em> class that is available in <code class="language-plaintext highlighter-rouge">voltmxwidgets.jar</code>. Provide a fully qualified class name in Volt MX Iris by going to <code class="language-plaintext highlighter-rouge">Properties-&gt;NativeApp-&gt;Android-&gt;Push Notification</code>.</p>
 
-<p>Customizing the VoltMXGCMBroadcastReceiver class allows you to:</p>
+<p>Customizing the KonyGCMBroadcastReceiver class allows you to:</p>
 
 <ul>
   <li>Create a multiline notification in the status bar.</li>
@@ -462,7 +462,7 @@
 <p>Here is the API for the default GCM broadcast receiver along with comments:</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">**package com.hcl.gcm;
-public class VoltMXGCMBroadcastReceiver extends BroadcastReceiver {**
+public class KonyGCMBroadcastReceiver extends BroadcastReceiver {**
     /* 
 This method is called for any event occurs related to GCM like arrival of new registration id or new GCM message. Apps can override this method to bypass the default implementation. 
 The default behavior of this method is as follows:
@@ -570,9 +570,9 @@ This is needed if you want to display each new push message as separate notifica
 <p>You can use the following sample code and tweak as required:</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">**package com.voltmx.push.custom;
-import com.hcl.gcm.VoltMXGCMBroadcastReceiver;
+import com.konylabs.gcm.KonyGCMBroadcastReceiver;
 
-public class CustomPushNotificationReceiver extends VoltMXGCMBroadcastReceiver{**
+public class CustomPushNotificationReceiver extends KonyGCMBroadcastReceiver{**
 
       //This method is called for new push message arrival when app is not running in
       // foreground.
