@@ -35,7 +35,7 @@ Volt MX  Application Design and Development Guidelines: [Application Design Guid
     
 
 *   Ensure that you pass Activity Context Object as the first parameter to the method. A few Android native APIs require access to the _Activity_ class present in the `voltmxwidgets.jar` file. Make sure that this JAR file is located at `<workspace>\temp\<appName>\build\luaandroid\dist\<appName>\libs\` folder.
-*   Use the static method `com.hcl.VoltMXMain.getActContext()` to access the current _Activity_ class.
+*   Use the static method `com.konylabs.android.KonyMain.getActContext()` to access the current _Activity_ class.
     
       
     ![](Resources/Images/Method_mapping.png)

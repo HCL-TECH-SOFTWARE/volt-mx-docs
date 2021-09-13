@@ -14,7 +14,7 @@ An Android toast is a simple pop-up ui element that takes up a small amount of s
 You can use the Native Function API for Android to display toasts on Android devices. The following code snippet shows how this is done using `java.import` to access the **android.widget.Toast** API.
 
 {% highlight voltMx %}var Toast = java.import("android.widget.Toast");
-var VoltMXMain = java.import("com.hcl.android.VoltMXMain");  
+var VoltMXMain = java.import("com.konylabs.android.KonyMain");  
 var context = VoltMXMain.getActivityContext();
 var myToast = Toast.makeText(context, "Hello World", Toast.LENGTH_SHORT)
 myToast.show();
