@@ -462,7 +462,7 @@ To enable HeadlessLauncherActivity, add the following entry in the [androidbuild
 You can customize the HeadlessLauncherActivity to add additional functionality. To create and use a custom HeadlessLauncherActivity, follow these steps:
 
 1.  Add the `useCustomHeadlessLauncherActivity = true` entry in the androidbuild.properties file.
-2.  Create and bundle a `.jar` or `.aar` file that contains the custom implementation and extends the VoltMXHeadlessLauncherActivity class. For example, `CustomHeadlessLauncherActivity extends com.hcl.android.VoltMXHeadlessLauncherActivity`.
+2.  Create and bundle a `.jar` or `.aar` file that contains the custom implementation and extends the VoltMXHeadlessLauncherActivity class. For example, `CustomHeadlessLauncherActivity extends com.konylabs.android.VoltMXHeadlessLauncherActivity`.
     
     Place the file in the following location:
     
@@ -491,7 +491,7 @@ You can customize the auto-generated Main activity to add additional functionali
 
 > **_Note:_** These steps can be followed independent of the usage of the `useCustomHeadlessLauncherActivity` and the `useHeadlessLauncherActivity` properties.
 
-1.  Create and bundle a `.jar` or `.aar` file that contains the custom Activity class implementation and extends the VoltMXMain class. For example, `CustomMainActivity extends com.hcl.android.VoltMXMain`.  
+1.  Create and bundle a `.jar` or `.aar` file that contains the custom Activity class implementation and extends the VoltMXMain class. For example, `CustomMainActivity extends com.konylabs.android.KonyMain`.  
     
     Place the file in the following location:
     
@@ -502,7 +502,7 @@ You can customize the auto-generated Main activity to add additional functionali
     
     For example:
     
-    {% highlight voltMx %}CustomMainActivity extends com.hcl.android.VoltMXMain{  
+    {% highlight voltMx %}CustomMainActivity extends com.konylabs.android.KonyMain{  
     public void onCreate(Bundle savedInstanceState) {  
     super.onCreate(Bundle savedInstanceState);  
     //Your custom functionality  

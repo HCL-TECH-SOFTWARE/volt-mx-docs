@@ -201,7 +201,7 @@ Below section captures sample code for various examples
 **Scenario 1** - We have an Object Service named “RetailBanking“ with an Object “Account“. We need to invoke GET operation of “Account“ from Post processor of Integration /Orchestration/JavaServices
 
 {% highlight voltMx %}
-package com.hcl.javaService.test;
+package com.hcl.voltmx.javaService.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -289,7 +289,7 @@ public class IntegrationPrePostProcessorWithJavaService
 > **_Note:_** Payload is applicable only in case of “create”, “update” and “delete” operation.
 
 {% highlight voltMx %}
-package com.hcl.javaService.test;
+package com.hcl.voltmx.javaService.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -359,7 +359,7 @@ public class IntegrationPrePostProcessorWithJavaService
 **Scenarios 3** - Let us assume that we have a Storage Service named “RetailBanking“ with an Object “Account“ (with column “id“ and “name“) and operations are “get/delete“ and invoke the services with oDataParam from Integration/Orchestration/JavaServices/ObjectService,
 
 {% highlight voltMx %}
-package com.hcl.javaService.test;
+package com.hcl.voltmx.javaService.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -413,7 +413,7 @@ public class IntegrationPrePostProcessorWithJavaService
 **Scenario 4** - Invoking Object Services using ServicesManager from the Object service PRE/POST processor. This is similar to the above code samples only difference here is to get ServicesManager instance with the help of FoundryRequestManager and mandatory parameters i.e. HttpServletRequest and HttpServletResponse will be changed.
 
 {% highlight voltMx %}
-package com.hcl.javaService.test;
+package com.hcl.voltmx.javaService.test;
 
 import java.util.Map;
 
@@ -501,7 +501,7 @@ public class ObjectServicePrePost implements ObjectServicePreProcessor, ObjectSe
 **Scenario 5** - Invoke Object Services using ServicesManager from the CustomFilter This is similar to the above code only difference here is that getting ServicesManager instances with the help of ServicesManagerHelper.
 
 {% highlight voltMx %}
-package com.hcl.custom;
+package com.hcl.voltmx.custom;
 
 import java.io.IOException;
 import java.util.Map;

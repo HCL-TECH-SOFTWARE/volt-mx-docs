@@ -315,7 +315,7 @@ For more information on Threading APIs, [click here](#introduction).
 
 The following is a sample code to get the Android activity context:
 
-{% highlight voltMx %}var VoltMXMain = java.import("com.hcl.android.VoltMXMain");  
+{% highlight voltMx %}var VoltMXMain = java.import("com.konylabs.android.KonyMain");  
 var Intent = java.import("android.content.Intent");  
 var IntentFilter = java.import("android.content.IntentFilter");        
 var BatteryManager = java.import("android.os.BatteryManager");    
@@ -387,7 +387,7 @@ NFI implementation of listening o LifeCycle Events:
 
 {% highlight voltMx %}var cls = java.newClass("MyVoltMXActivityLifeCycleListener", 
   
-"com.hcl.ffi.VoltMXActivityLifeCycleListener", [], {  
+"com.konylabs.ffi.KonyActivityLifeCycleListener", [], {  
     onCreate: function() {  
         voltmx.print("onCreate");  
     },  
@@ -415,7 +415,7 @@ NFI implementation of listening o LifeCycle Events:
 });  
 //Registering listener  
 listener = new cls();  
-VoltMXMain = java.import("com.hcl.android.VoltMXMain");  
+VoltMXMain = java.import("com.konylabs.android.KonyMain");  
 VoltMXMain.addActivityLifeCycleListener(listener);  
 //Unregistering listener when not needed  
 voltmx.application.registerLifteCycleListener();
