@@ -12,7 +12,7 @@ From Volt MX Iris V9 SP1, the following RawBytes class methods have been introdu
 
 Package
 
-com.hcl.api.io
+com.konylabs.api.io
 
 Class
 
@@ -118,7 +118,7 @@ function encryptSensitiveContentWithPasswordFromFFI() {
     NativeClass.processSensitiveText(encryptionText);  
 }  
 // FFI code  
-import com.hcl.api.io.RawBytes  
+import com.konylabs.api.io.RawBytes  
 public class NativeClass {  
     public static Object getRawBytesObject() {  
         char[] sensitiveText = {  

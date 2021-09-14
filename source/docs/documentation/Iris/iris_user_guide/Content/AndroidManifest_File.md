@@ -129,7 +129,7 @@ android: versionName = "1.0.0" >
 //Application attributes are added here  
 
 < application
-android: name = "com.hcl.android.VoltMXApplication"
+android: name = "com.konylabs.android.KonyApplication"
 android: icon = "@drawable/Sample_icon"
 android: label = "@string/app_name"
 tools: remove = "supportsRtl"
