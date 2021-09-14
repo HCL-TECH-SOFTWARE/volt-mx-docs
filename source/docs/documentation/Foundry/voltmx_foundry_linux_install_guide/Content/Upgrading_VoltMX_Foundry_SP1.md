@@ -32,9 +32,8 @@ Prerequisites
 To upgrade Volt MX Foundry Console using the installer, follow these steps:
 
 1.  Execute the following command to switch to the user that you created.  
-    
-
-    OK     
+\# su - username
+       
 
 2.  Press **Enter**. The system prompts you to enter the password.
 3.  Enter the password, and press **Enter**.
@@ -80,29 +79,27 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
       
     Database Name Suffix (Default: ):
 
-    ```
     
-    *   Database Name Prefix: Enter the `prefix` of an existing Volt MX Foundry database - for example, Volt MX.
-    *   Database Name Suffix: Enter the `suffix` of an existing Volt MX Foundry database- for example, 1.
+    
+        *     Database Name Prefix: Enter the `prefix` of an existing Volt MX Foundry database - for example, Volt MX.
 
-    
-    
-10.  Press **Enter**. The Warning message appears.
+        *     Database Name Suffix: Enter the `suffix` of an existing Volt MX Foundry database- for example, 1.   
+        Press **Enter**. The Warning message appears.
      
-         ===============================================================================  
-         Warning - Database already exists  
-         ---------------------------------  
+        \=========================================== 
+        Warning - Database already exists  
+        \---------------------------------  
       
-         One or more databases already exist. Do you want to use existing databases? If yes, then the schema may be upgraded.  
+            One or more databases already exist. Do you want to use existing databases? If yes, then the schema may be upgraded.  
       
-         \->1- No, Go back  
-         2- Yes, Use existing  
+            \->1- No, Go back  
+            2- Yes, Use existing  
       
-         ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT: 2 
+            ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT: 2 
 
          
     
-11.  Press **2** to accept use existing database.
+10.  Press **2** to accept use existing database.
      The Warning message appears.
      
 
@@ -119,7 +116,7 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
 
         
     
-12.  Press **2** to update the encryption keys and
+11.  Press **2** to update the encryption keys and
          other required data from your existing Volt MX
          Foundry Instance.
 
@@ -153,13 +150,13 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
     
        Restart or redeploy the war components after you update the keys.
     
-13. Press **Enter**. Skip the _Administrator /Account
+12. Press **Enter**. Skip the _Administrator /Account
     Configuration_ details.      
     While installing Volt MX Foundry using an existing database, you must not configure your super administrator account again.  
     
     > **_Note:_** You can directly log in to Volt MX Foundry Console using the existing credentials after a successful upgrade.  
     
-14. If you do not skip configuring the _Administrator
+13. If you do not skip configuring the _Administrator
     /Account Configuration_ details, the following screen appears.
     
          ===============================================================================  
@@ -176,7 +173,7 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
       
          Email (Default: ):  
     
-15.  Provide the location of the existing Foundry
+14.  Provide the location of the existing Foundry
      component that you wish to upgrade to this
      version and press **Enter**. The
      _Pre-Installation Summary_ details appear.
@@ -216,7 +213,7 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
       
          PRESS <ENTER> TO CONTINUE:
     
-16. Press **Enter**. The _Installation Complete_
+15. Press **Enter**. The _Installation Complete_
     details appear.
     
          ========================================================================  
@@ -237,10 +234,10 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
           PRESS <ENTER> TO EXIT THE INSTALLER: \
           [user1@cnt6-01c downloads\]$
     
-17. Press **Enter** to complete the installation.
+16. Press **Enter** to complete the installation.
          After the installation is completed, the
          installer creates logs in the install folder.
     
        > **_Important:_** When you are using a third party tool (for example, PuTTY) for installing Volt MX Foundry remotely, if any network connection issues occur at the end of the installation, the installer stops the installation and the installation log is not created.
     
-18. You can now access Volt MX Foundry Console by using the URLs. For more details, refer to [Accessing Volt MX Foundry Console - On-premises]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html).
+17. You can now access Volt MX Foundry Console by using the URLs. For more details, refer to [Accessing Volt MX Foundry Console - On-premises]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html).
