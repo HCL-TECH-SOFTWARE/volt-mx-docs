@@ -345,7 +345,7 @@ The following code snippet is an example that implements NFIs to access an app w
 
 {% highlight voltMx %}openExternalApp: function(packageName) {
     try {
-        var VoltMXMain = java.import("com.hcl.android.VoltMXMain");
+        var VoltMXMain = java.import("com.konylabs.android.KonyMain");
         var context = VoltMXMain.getAppContext();
         var pm = VoltMXMain.getAppContext().getPackageManager();
         var intent = pm.getLaunchIntentForPackage(packageName);
