@@ -58,8 +58,7 @@ Different types of Workflow Nodes/Tasks are as follows:
   
 | Nodes/Tasks | Supported Workflow Types ||
 | --- | --- | --- |
-| Object | Event |
-| --- | --- |
+|| Object | Event |
 | **[Start](#start-event)** – It is an event that represents where the workflow starts. The Start event has one outgoing flow. | ![](Resources/Images/tickY_28x28.jpg) | ![](Resources/Images/tickN_28x28.jpg) |
 | [**User Task**](#user-task) – It is used to represent that a user action is required in a Workflow. For example: Submitting a loan application, manager approving expense. | ![](Resources/Images/tickY_28x28.jpg) | ![](Resources/Images/tickN_28x28.jpg) |
 | **[Signal Start](#signal-start) -** Start Signal node is used to start a workflow based on listening to an Event on Foundry bus. | ![](Resources/Images/tickN_28x28.jpg) | ![](Resources/Images/tickY_28x28.jpg) |
