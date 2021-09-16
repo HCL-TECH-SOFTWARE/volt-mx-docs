@@ -150,7 +150,7 @@ While integrating your Cordova-generated Android project, certain gradle depende
 
 You can bundle this customized Cordova project by specifying the `cordovabuildmode` property as `incremental` in the [`androidbuild.properties` file](Native_App_Properties.html#add-android-properties-to-androidbuild-properties-file). For more information about the `cordovabuildmode` property, click [here](Native_App_Properties.html#bundle-a-customized-cordova-generated-android-project).
 
-To manually customize your Cordova-generated Android project, follow these steps:
+To manually customize your Cordova-generated Android project, follow these steps: 
 
 1.  You must build your Volt MX Iris project at least once to get a temporary **cordova** folder, where the actual Cordova project is copied and built.
 2.  After the Volt MX Iris project is built once (which may fail due to unresolved `android.support` references or due to some other build conflicts), you must copy all the contents in the `<voltmxproject>\cordovatemp\platforms\android` folder to the `<voltmxproject>/cordovaprebuilt` folder.  
