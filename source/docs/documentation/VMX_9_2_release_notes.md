@@ -1,199 +1,47 @@
 ---
-title: Release Notes 
+title: Volt MX Release Notes 
 layout: documentation
 has_children: false
 order: 1
 ---
 
-Release notes
-=============
+Volt MX Release Notes
+=====================
 
-This page lists changes, known issues, and new features in HCL Volt MX 9.2. For release notes about earlier versions, including Temenos products, see [Iris Release Notes](Iris/iris_rel_notes/Content/VoltMX_Iris_Release_Notes.html) and [Volt MX Foundry Release Notes](Foundry/voltmx_foundry_release_notes/Content/VoltMX_Foundry_Release_Notes.html)
+The following tables contain links to topics about new features, enhancements, known issues, and limitations in HCL Volt MX.
 
-Known issues
--------------
+Volt MX Iris
+------------
+  
+| **Date** | **Document Version** | **Description of Modifications/Release** |
+| --- | --- | --- |
+| 08/18/2021 | 1.5 | Document updated for [V9.2](Iris/iris_rel_notes/Content/V92.html).
+| 02/10/2021 | 1.4 | Document updated for the [V9 Service Pack 2 Fixpack 7](V9SP2FP7.html#new-features-and-enhancements-in-v9-sp2-fixpack-7) release. |
+| 12/21/2020 | 1.3 | Document updated for the V9 Service Pack 2 release with [New Features](V9SP2.html#new-features-and-enhancements-in-v9-service-pack-2) and [Known Issues](V9SP2_Known_Issues.html#top). |
+| 10/28/2020 | 1.2 | Document updated for the release with [V9 SP1 FP 10](V9SP1.html#v9sp1-fixpack-10-features) release. |
+| 08/24/2020 | 1.1 | Document updated for the V9 Service Pack 1 release with [New Features](V9SP1.html#new-features-and-enhancements-in-v9-service-pack-1) and [Known Issues](V9-SP1_Known_Issues.html#top). |
+| 04/06/2020 | 1.0 | Document updated for the V9 release with [New Features](V9.html#new-features-and-enhancements-in-v9) and [Known Issues](V9_Known_Issues.html#limitations-and-known-issues-in-v9). |
 
-- Volt MX 9.2 does not support the building of Windows native applications. 
-- voltmx.location.getCurrentPosition fails in Desktop Web Applications. When you test your application with Live Preview, the system permission dialog appears as expected. However, for published SPA and Desktop Web applications, the dialog box appears only when the application URL uses the https protocol. If the URL uses http, the dialog box does not appear, and location APIs will not work. For more information, see [voltmx.location Namespace](Iris/iris_api_dev_guide/content/voltmx.location_functions.html#functions).
-- Android Native application builds can fail on MacOS because of permission issues with older versions of the Android SDK. To avoid this problem, run "sudo spctl --master-disable". You can also go to Security & Privacy and add your terminal app or IDE to the list of apps in the Developer Tools section of the Privacy tab. On the General tab, under "Allow apps downloaded from", click "Anywhere". For more information, see [Build an Android Application](Iris/iris_user_guide/Content/BuildAnAppForAndroid.html).
-- The Photoshop plugin for Iris is not included in this release.
-- IQ functionality is not surfaced to the end user from Iris.
- 
+Volt MX Foundry
+---------------
 
-Changes
--------
-
-- voltmx.os.deviceInfo().SERIAL_NO, voltmx.os.deviceInfo().ANDROID_ID, and voltmx.os.deviceInfo().uid are deprecated and return null, and kony.os.getDeviceId(int slot) values have changed. For more information, see [DeviceInfo Object](Iris/iris_api_dev_guide/content/voltmx.os_objects_deviceinfo.html) and [voltmx.os Namespace ](Iris/iris_api_dev_guide/content/voltmx.os_functions.html#getDeviceId).
-- We have clarified the documentation of the Browser widget "limitsNavigationsToAppBoundDomains" property. For more information, see [Browser Properties ](Iris/iris_widget_prog_guide/Content/Browser_Properties.html).
-- Do not use voltmx.os.deviceInfo().deviceID or volt.mx.deviceInfo().customdeviceid. Due to privacy issues, the MAC address is not used to identify the device. Instead of using the MAC address, use volt.mx.deviceInfo().identifierForVendor. For more information, see [DeviceInfo Object](Iris/iris_api_dev_guide/content/voltmx.os_objects_deviceinfo.html)  
-- By default, all Volt MX frameworks are built with Application Reference Counting (ARC). However, in final application projects, ARC is disabled, to ensure that existing non-ARC FFI’s work without breaking. If your application does not use FFI’s, or if all the used FFI’s are ARC-compatible, enable ARC in the final Application by editing <WorkspaceName>\<ProjectName>\resources\common\infoplist_configuration.json. For more information, see [Build an iOS Application ](Iris/iris_user_guide/Content/BuildAnAppForiOS.html#using-application-reference-counting).
-- Volt MX Legacy Sync has been deprecated. The last version of Legacy Sync server was 8.3. You cannot create a new Legacy Sync-based client application. New applications that need offline and sync capabilities must use the Offline Objects feature. For more information, see [Using Volt MX Legacy Sync with Foundry ](Foundry/voltmx_legacy_sync_with_foundry/Content/legacy_sync_with_foundry.html).
-- HCL Cloud License Server is the preferred method for activating licenses. If your Foundry server does not have access to the Cloud License Server, you can use your HCL Software ID to download the installer for the HCL Common Local License Server from the HCL License and Download Portal. Instructions for activating a license on a private network have been updated. You must have valid HCL Flexnet server credentials to activate your license. If you are upgrading from a Temenos Fabric server to a Foundry server, your existing, activated Temenos license will be removed, and you must acquire a fresh license through the HCL Flexnet server. For more information, see [Volt MX Foundry](Foundry/voltmx_licensing_guide/Content/License_Activation_through_VoltMX_Server_7.2.html).
-- Iris SDK log files generated by the Volt MX Logger are now named VoltmxLogger_<dateTime>.log 
-- If you do not want to use the SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check Strict Mode. If you do use any of those algorithms, leave Strict Mode unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
-- For Foundry Installer On-Premise, we have upgraded JBoss from 7.2 to 7.3 and Tomcat from 9.0.33 to 9.0.45. For Foundry Container On-Premise we have upgraded Tomcat from 9.0.33 to 9.0.45.
-
-Resolved issues brought over from Temenos 
------------------------------------------
-
-- An issue has been resolved that prevented Iris from being restarted if you quit the Iris via the MacBook command bar > Iris icon -> right click -> Quit. There are no longer subprocesses left running in the background to interfere with an Iris restart.
-- A problem in Iris that caused intermittent hanging on the splash screen has been resolved.
-- The USE_DSA_AS_DEFAULT_FOR_TOKEN_SIGNING -D parameter has been removed. RSA is set to default.
-- Foundry console login token expiration can be configurable.
-- Logging in to an application with OAuth 2.0 caused the error, "AADSTS501491: Invalid size of Code_Challange parameter". This problem has been resolved.
-- Switch to Secure Object Archiving APIs.
-- We have resolved a file corruption problem when downloading a file from S3 backend via the file storage adapter.
-- In an app that contains a Segment widget, when the user invokes the setData or setDataAt method on a segment row, the data does not load properly and causes the segment to flicker. The issue has been resolved.
-- In some cases, voltmx.application.setAppHeaders caused an "undefined function" error. This problem has been resolved.
-
-Naming changes
---------------
-
-Product names, API namespaces, and other terms have changed.
-
-- Replace any references to Kony headers in Fabric (now Foundry) services, pre/post-processor, or custom code with Voltmx headers. (Replace "X-Kony-" with "X-Voltmx-".)
-- Recompile apps that use the native function SDK APIs for iOS, Android, and Windows to use the new SDK with updated Voltmx headers.
-- If the app is using pre/post compile tasks and if those are using “kony” namespaced js files, they should be updated with “voltmx” namespaced js files.
-
-Refer to the following table for details.
-
-**Product names**
-
-<table>
-  <thead>
-    <tr>
-      <th>New Terms (Volt MX)</th>
-      <th>Old Terms (Temenos)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Volt MX</td>
-      <td>Quantum</td>
-    </tr>
-    <tr>
-      <td>Iris</td>
-      <td>Visualizer</td>
-    </tr>
-    <tr>
-      <td>Foundry</td>
-      <td>Mobile Fabric</td>
-    </tr>
-    <tr>
-      <td>Foundry</td>
-      <td>Fabric</td>
-    </tr>
-    <tr>
-      <td>Flare</td>
-      <td>Nitro</td>
-    </tr>
-  </tbody>
-</table>
-
-**API namespaces**
-
-This table shows the new Volt MX APIs namespaces versus the old Temenos APIs namespaces, along with examples. The new namespaces are used throughout this documentation; however, if you use a Temenos branded version older than 9.2, you must keep using the old Temenos namespaces.
-
-<table>
-  <thead>
-    <tr>
-      <th>New Namespace (Volt MX)</th>
-      <th>Old Namespace (Temenos)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>voltmx</td>
-      <td>kony</td>
-    </tr>
-    <tr>
-      <td>com.hcl.voltmx</td>
-      <td>com.konylabs</td>
-    </tr>
-    <tr>
-      <td>com.hcl.voltmx</td>
-      <td>com.kony</td>
-    </tr>
-    <tr>
-      <td>com.voltmx \*</td>
-      <td>com.kony</td>
-    </tr>
-    <tr>
-      <td>VMXMetricsService</td>
-      <td>KNYMetricsService</td>
-    </tr>
-    <tr>
-      <td>VMXFoundry</td>
-      <td>KNYMobileFabric</td>
-    </tr>
-    <tr>
-      <td>voltmx.sdk.VMXObjSvc</td>
-      <td>kony.sdk.KNYObjSvc</td>
-    </tr>
-    <tr>
-      <td>voltmx.sdk.VMXObj</td>
-      <td>kony.sdk.KNYObj</td>
-    </tr>
-    <tr>
-      <td>VoltMXApp</td>
-      <td>KonyApp</td>
-    </tr>
-    <tr>
-      <td>VoltMXUtil</td>
-      <td>KonyUtil</td>
-    </tr>
-    <tr>
-      <td>Examples</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>voltmx.ui.Alert</td>
-      <td>kony.ui.Alert</td>
-    </tr>
-    <tr>
-      <td>voltmx.os.deviceInfo</td>
-      <td>kony.os.deviceInfo</td>
-    </tr>
-    <tr>
-      <td>com.hcl.voltmx.middleware.api</td>
-      <td>com.konylabs.middleware.api</td>
-    </tr>
-    <tr>
-      <td>com.hcl.voltmx.middleware.dataobject</td>
-      <td>com.konylabs.middleware.dataobject</td>
-    </tr>
-    <tr>
-      <td>VMXFoundry.OfflineObjects.drop</td>
-      <td>KNYMobileFabric.OfflineObjects.drop</td>
-    </tr>
-  </tbody>
-</table>
-
-\* Beacon API. Requires rebuilding/conversion to NFI
-
-**Other**
-
-This table shows new Volt MX terms versus old Temenos terms.
-
-<table>
-  <thead>
-    <tr>
-      <th>New Terms (Volt MX)</th>
-      <th>Old Terms (Temenos)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>iris</td>
-      <td>viz</td>
-    </tr>
-    <tr>
-      <td>Iris</td>
-      <td>Viz</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
+| **Date** | **Document Version** | **Description of Releases and Updates** |
+| --- | --- | --- |
+| 08/18/2021 | 3.2 | Document published for [VoltMX Foundry V9.2](Foundry/volt_mx_foundry_release_notes/Content/V92.html). |
+| 02/03/2021 | 3.1 | Document published for [VoltMX Foundry Fix Pack V9.2.1](V9.2.1_New_Features.html). |
+| 12/22/2020 | 3.0 | Document published for the following releases: [](IdentityHotFix9.1.0.3.html)<br><br>[VoltMX Foundry V9 Service Pack 2](V9SP2_Main.html) <br><br>[VoltMX Foundry V9.2.0.0 on Microsoft Azure](Azure9.2.0.0GA.html) |
+| 12/18/2020 | 2.6 | Document published for [VoltMX Foundry Identity Service Hotfix V9.1.0.4](IntegrationHotFix9.1.0.4.html). |
+| 10/17/2020 | 2.5 | Document published for [VoltMX Foundry Identity Service Hotfix V9.1.0.3](IdentityHotFix9.1.0.3.html). |
+| 11/10/2020 | 2.4 | Document published for [VoltMX Foundry Integration Service Hotfix V9.0.1.1](IntegrationHotFix9.0.1.1.html). |
+| 11/09/2020 | 2.3 | Document published for the following releases: <br><br>[VoltMX Foundry Integration Service Hotfix V9.1.0.3](IntegrationHotFix9.1.0.3.html) <br><br>[VoltMX Foundry Integration Service Hotfix V9.0.0.6](IntegrationHotFix9.0.0.6.html) |
+| 10/23/2020 | 2.2 | Document published for [VoltMX Foundry Installer Hotfix 9.1.0.3 (On-Premises)](InstallerHotFix9.1.0.3.html). |
+| 09/22/2020 | 2.1 | Document published for [](V9SP1_Main.html)[VoltMX Foundry Integration Service Hotfix V9.1.0.1](IntegrationHotFix9.1.0.1.html). |
+| 08/24/2020 | 2.0 | Document published for [VoltMX Foundry V9 Service Pack 1](V9SP1_Main.html). |
+| 07/13/2020 | 1.6 | Document published for [VoltMX Foundry Installer Fix Pack 9.0.1](V9.0.1_New_Features.html). |
+| 06/22/2020 | 1.5 | Document published for [VoltMX Foundry Integration Service Hotfix V9.0.0.5](IntegrationHotFix9.0.0.5.html). |
+| 05/21/2020 | 1.4 | Document published for [VoltMX Foundry Installer Hotfix 9.0.0.2 (On-Premises)](InstallerHotFix9.0.0.2.html). |
+| 05/07/2020 | 1.3 | Document published for [VoltMX Foundry Integration Service Hotfic V9.0.0.4](IntegrationHotFix9.0.0.4.html). |
+| 04/27/2020 | 1.2 | Document published to append [VoltMX Foundry V9 Known Issues on Console](V9_Knownissues.html#console). |
+| 04/20/2020 | 1.1 | Document published for [VoltMX Foundry V9.0.0.1 on MS Azure](Azure9.0.0.1GA.html) release. |
+| 04/06/2020 | 1.0 | Document published for [V9 GA](V9_Main.html) release. |
 

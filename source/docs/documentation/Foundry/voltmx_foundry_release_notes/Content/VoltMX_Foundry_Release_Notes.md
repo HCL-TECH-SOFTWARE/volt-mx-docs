@@ -4,17 +4,18 @@ category: "voltmx_foundry_release_notes"
 ---
                      
 
-Volt MX  Foundry Release Notes
-================================
+Volt MX Foundry Release Notes
+=============================
 
 This document contains content related to new features, enhancements, known issues, and limitations.
 
 Revision History
 ----------------
 
-  
+ 
 | **Date** | **Document Version** | **Description of Releases and Updates** |
 | --- | --- | --- |
+| 08/18/2021 | 3.2 | Document published for [VoltMX Foundry V9.2](V92.html). |
 | 02/03/2021 | 3.1 | Document published for [VoltMX Foundry Fix Pack V9.2.1](V9.2.1_New_Features.html). |
 | 12/22/2020 | 3.0 | Document published for the following releases: [](IdentityHotFix9.1.0.3.html)<br><br>[VoltMX Foundry V9 Service Pack 2](V9SP2_Main.html) <br><br>[VoltMX Foundry V9.2.0.0 on Microsoft Azure](Azure9.2.0.0GA.html) |
 | 12/18/2020 | 2.6 | Document published for [VoltMX Foundry Identity Service Hotfix V9.1.0.4](IntegrationHotFix9.1.0.4.html). |
