@@ -264,7 +264,7 @@ To enable the **registerGeoBoundaries** API for the Android platform perform the
 **Use Google Play Location Services**
 
 8.  In the **Manifest Properties** section, select Tags. Add the following to the **Child tag entries <application>** tag:
-<service android:name="com.hcl.api.location.VoltMXGeoTransitionsIntentService"/>
+<service android:name="com.konylabs.api.location.KonyGeoTransitionsIntentService"/>
 
 The page will look like the following example.
 
@@ -363,7 +363,7 @@ updateGeoLocation= function (latitude, longitude, locationName, successCallback,
 
 There are additional settings that must be enabled for this API to work correctly. > **_Note:_** Exceptions are thrown if location is switched off on the device, or user does not allow permission to retrieve location, or the SDK is not able to retrieve the current location on the device. For more information on SDKs for Messaging Service docs, refer to [VoltMX Iris API Developers' Guide > Notifications > Push Notifications]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/push_notifications.html) **Android** To enable the **registerGeoBoundaries** API for the Android platform perform the following steps in Volt MX Iris.
 
-On the File menu, click **Settings** to open the Project Settings dialog box. Click the **Native** tab. Click the **Android** sub-tab. In **Push Notifications** section, select either **GCM** or **FCM** for the engagement APIs to work. Enable the following items: **Enable Local Notifications** **Use Google Play Location Services** In the **Manifest Properties** section, select Tags. Add the following to the **Child tag entries <application>** tag: <service android:name="com.hcl.api.location.VoltMXGeoTransitionsIntentService"/>
+On the File menu, click **Settings** to open the Project Settings dialog box. Click the **Native** tab. Click the **Android** sub-tab. In **Push Notifications** section, select either **GCM** or **FCM** for the engagement APIs to work. Enable the following items: **Enable Local Notifications** **Use Google Play Location Services** In the **Manifest Properties** section, select Tags. Add the following to the **Child tag entries <application>** tag: <service android:namecom.konylabs.api.location.KonyGeoTransitionsIntentService"/>
 
 The page will look like the following example. ![](../Resources/Images/Android_GeoBoundaries_Settings_714x433.jpg) **iOS** To enable the **registerGeoBoundaries** API for the iOS platform, add the following keys to the info.plist file. "NSLocationAlwaysUsageDescription":"<ThisMessageWillBeDisplayedToUser>" "UIBackgroundModes":\["location"\] For information about how to access and edit the info.plist file, refer to [Build an App for iOS]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
@@ -410,7 +410,7 @@ To enable the **registerGeoBoundaries** API for the Android platform perform the
 **Use Google Play Location Services**
 
 8.  In the **Manifest Properties** section, select Tags. Add the following to the **Child tag entries <application>** tag:
-<service android:name="com.hcl.api.location.VoltMXGeoTransitionsIntentService"/>
+<service android:name="com.konylabs.api.location.KonyGeoTransitionsIntentService"/>
 
 The page will look like the following example.
 

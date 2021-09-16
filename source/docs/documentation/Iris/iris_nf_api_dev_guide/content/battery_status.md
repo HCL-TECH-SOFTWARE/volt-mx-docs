@@ -91,7 +91,7 @@ Most of the following code is simply plumbing to allow your JavaScript code to p
 
 {% highlight voltMx %}            function getBatteryStatusForAndroid(){
     var BatteryStatus ={};
-    var VoltMXMain = java.import("com.hcl.android.VoltMXMain");
+    var VoltMXMain = java.import("com.konylabs.android.KonyMain");
 	var Intent = java.import("android.content.Intent");
 	var IntentFilter = java.import("android.content.IntentFilter");    
 	var BatteryManager = java.import("android.os.BatteryManager");  

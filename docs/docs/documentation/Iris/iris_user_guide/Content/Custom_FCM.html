@@ -234,7 +234,7 @@
       </h1>
     
 
-<p>Volt MX  Iris for Android development allows you to customize the native Google Firebase Cloud Messaging (FCM) service and push message status notification to meet your application requirement. Otherwise, the default settings of Volt MX Iris take effect.</p>
+<p>Volt MX Iris for Android development allows you to customize the native Google Firebase Cloud Messaging (FCM) service and push message status notification to meet your application requirement. Otherwise, the default settings of Volt MX Iris take effect.</p>
       <h2 id="integrate-fcm">
         
         
@@ -300,7 +300,7 @@
 
 <ol>
   <li>By <a href="#modify-the-pushconfig-xml-file">modifying pushconfig.xml file</a> - Used for modifying only a defined set of options.</li>
-  <li>By <a href="#customize-voltmxfcmservice"></a><a href="#Modifyin2">customizing VoltMXFCMService class</a>-Used for modifying the way messages appear and other advance options.</li>
+  <li>By <a href="#customize-konyfcmservice"></a><a href="#Modifyin2">customizing KonyFCMService class</a>-Used for modifying the way messages appear and other advance options.</li>
 </ol>
       <h2 id="modify-the-pushconfigxml-file">
         
@@ -445,18 +445,18 @@
     </tr>
   </tbody>
 </table>
-      <h2 id="customize-voltmxfcmservice">
+      <h2 id="customize-konyfcmservice">
         
         
-          <a href="#customize-voltmxfcmservice" class="anchor-heading" aria-labelledby="customize-voltmxfcmservice"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Customize VoltMXFCMService
+          <a href="#customize-konyfcmservice" class="anchor-heading" aria-labelledby="customize-konyfcmservice"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Customize KonyFCMService
         
         
       </h2>
     
 
-<p>If you need to customize FCM apart from what is provided in the <code class="language-plaintext highlighter-rouge">pushconfig.xml</code> file, you can replace the platform default FCM broadcast receiver with the custom FCM Service. The custom FCM service inherits from the default Volt MX FCM Service receiver <em>VoltMXFCMService</em> class that is available in <code class="language-plaintext highlighter-rouge">voltmx-push-notifications-apis.jar</code>. Provide a fully qualified class name in Volt MX Iris by going to <code class="language-plaintext highlighter-rouge">Properties-&gt;NativeApp-&gt;Android-&gt;Push Notification</code>.</p>
+<p>If you need to customize FCM apart from what is provided in the <code class="language-plaintext highlighter-rouge">pushconfig.xml</code> file, you can replace the platform default FCM broadcast receiver with the custom FCM Service. The custom FCM service inherits from the default Volt MX FCM Service receiver <em>KonyFCMService</em> class that is available in <code class="language-plaintext highlighter-rouge">voltmx-push-notifications-apis.jar</code>. Provide a fully qualified class name in Volt MX Iris by going to <code class="language-plaintext highlighter-rouge">Properties-&gt;NativeApp-&gt;Android-&gt;Push Notification</code>.</p>
 
-<p>Customizing the VoltMXFCMService class allows you to:</p>
+<p>Customizing the KonyFCMService class allows you to:</p>
 
 <ul>
   <li>Create a multi-line notification in the status bar.</li>
@@ -466,12 +466,12 @@
 
 <p>Here is an example of a custom FCM Service:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">Custom VoltMXFCMService
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">Custom KonyFCMService
 
 package com.voltmx.push.custom;
 
-import com.hcl.fcm.VoltMXFCMService;
-public class CustomVoltMXFCMService extends VoltMXFCMService {
+import com.konylabs.fcm.KonyFCMService;
+public class CustomKonyFCMService extends KonyFCMService {
 
     //This method is called for new push message arrival when app is not running in   
     // foreground. (Note: this will not be called is if GCM v3.0 payload is enabled)

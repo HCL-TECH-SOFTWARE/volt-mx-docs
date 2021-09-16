@@ -50,7 +50,7 @@ The following table describes the icon names used in this topic:
 You can modify or customize GCM in two ways:
 
 1.  By [modifying pushconfig.xml file](#modifying-pushconfig-xml-file) - Used for modifying only a defined set of options.
-2.  By [modifying VoltMXGCMBroadcastReceiver class](#modifying-voltmxgcmbroadcastreceiver-class) - Used for modifying the way messages appear and other advance options.
+2.  By [modifying KonyGCMBroadcastReceiver class](#modifying-konygcmbroadcastreceiver-class) - Used for modifying the way messages appear and other advance options.
 
 ### Modifying pushconfig.xml File
 
@@ -87,11 +87,11 @@ The table below shows a list of key value pairs, each with a brief description.
 | notify\_push\_msg\_lights | true | Enable or disable lights for push message notification. |
 | notify\_push\_msg\_clear | true | Indicates that the user must take action to clear the push message notification. Setting the value to _false_ clears the push message notification without user intervention. |
 
-### Modifying VoltMXGCMBroadcastReceiver Class
+### Modifying KonyGCMBroadcastReceiver Class
 
-If you need to customize GCM apart from what is provided in the `pushconfig.xml` file, you can replace the platform default GCM broadcast receiver with the custom GCM broadcast receiver. The custom GCM receiver inherits from the default Volt MX GCM broadcast receiver _VoltMXGCMBroadcastReceiver_ class that is available in `voltmxwidgets.jar`. Provide a fully qualified class name in Volt MX Iris by going to `Properties->NativeApp->Android->Push Notification`.
+If you need to customize GCM apart from what is provided in the `pushconfig.xml` file, you can replace the platform default GCM broadcast receiver with the custom GCM broadcast receiver. The custom GCM receiver inherits from the default Volt MX GCM broadcast receiver _KonyGCMBroadcastReceiver_ class that is available in `voltmxwidgets.jar`. Provide a fully qualified class name in Volt MX Iris by going to `Properties->NativeApp->Android->Push Notification`.
 
-Customizing the VoltMXGCMBroadcastReceiver class allows you to:
+Customizing the KonyGCMBroadcastReceiver class allows you to:
 
 *   Create a multiline notification in the status bar.
 *   Know the arrival of a push message immediately even when the application is in the background.
@@ -100,7 +100,7 @@ Customizing the VoltMXGCMBroadcastReceiver class allows you to:
 Here is the API for the default GCM broadcast receiver along with comments:
 
 {% highlight voltMx %}**package com.hcl.gcm;
-public class VoltMXGCMBroadcastReceiver extends BroadcastReceiver {**
+public class KonyGCMBroadcastReceiver extends BroadcastReceiver {**
     /* 
 This method is called for any event occurs related to GCM like arrival of new registration id or new GCM message. Apps can override this method to bypass the default implementation. 
 The default behavior of this method is as follows:
@@ -203,9 +203,9 @@ Notification in expanded mode (big view mode):
 You can use the following sample code and tweak as required:
 
 {% highlight voltMx %}**package com.voltmx.push.custom;
-import com.hcl.gcm.VoltMXGCMBroadcastReceiver;
+import com.konylabs.gcm.KonyGCMBroadcastReceiver;
 
-public class CustomPushNotificationReceiver extends VoltMXGCMBroadcastReceiver{**
+public class CustomPushNotificationReceiver extends KonyGCMBroadcastReceiver{**
 
       //This method is called for new push message arrival when app is not running in
       // foreground.
