@@ -45,13 +45,11 @@ This section helps you to understand the system requirements and necessary softw
 
 #### Software Requirements
 
-  
 | Operating System | Software Requirements |
 | --- | --- |
 | Windows 10, Windows 8.1 Update. Supports 64-bit Operating Systems | Installer File (Mandatory) |
 
 #### Hardware Requirements
-
   
 | Component | Requirement |
 | --- | --- |
@@ -61,12 +59,11 @@ This section helps you to understand the system requirements and necessary softw
 | Network | Ethernet Port |
 
 ## Downloading Volt MX Iris
-----------------------------
 
 The following sections explain how to download Volt MX Iris:
 
 *   [As a trial user](#downloading-a-trial-version)
-*   [As a customer](#downloading-with-an-account)
+*   [As a customer](#downloading-a-copy-you-have-purchased)
 
 ### Downloading a trial version
 
@@ -111,7 +108,7 @@ To download Volt MX Iris, follow these steps:
 ## What to do next
 
 * [Run the Volt MX Iris installer and configure Iris](Installing VoltMX Iris.html#installing)
-* [Activate your license] (https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_licensing_guide/Content/Homepage.html)
+* [Activate your license](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_licensing_guide/Content/Homepage.html)
 
 <!--
 *   [Prerequisites](#prerequisites)
