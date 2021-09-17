@@ -98,9 +98,15 @@ The following is the list of Docker images used in the VoltMX Foundry Single Co
 *   Database (Contains database migration scripts)
 
 Images are pushed into the Volt MX Foundry Docker Hub registry:  
-[https://hub.docker.com/u/voltmxfoundry](https://hub.docker.com/u/voltmxfoundry)
+[https://hclcr.io/voltmx](https://hclcr.io/voltmx)
+
+To pull the images, use the below command.
+
+For example:  
+`docker pull hclcr.io/voltmx/voltmx-foundry-console:9.2.0.0_GA`
 
 Volt MX  Foundry Single Container Solution downloadable bundle contains the following directories and files.
+
 
 *   **install-foundry.sh** - Installation script
 *   **install-actions.sh** - Installation actions script
