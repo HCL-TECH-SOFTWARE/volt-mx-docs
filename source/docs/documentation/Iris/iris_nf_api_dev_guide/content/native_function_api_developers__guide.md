@@ -21,7 +21,7 @@ Revision History
 
 Getting Started Options
 
-*   [Release Notes]({{ site.baseurl }}/docs/documentation/Iris/iris_rel_notes/Content/VoltMX_Iris_Release_Notes.html)
+*   [Release Notes]({{ site.baseurl }}/docs/documentation/VMX_release_notes.html)
 *   [Introduction](native_function.html)
 *   [Native Function APIs for IOS](native_function_apis_for_ios.html)
 *   [Native Function APIs for Android](native_function_apis_for_android.html)

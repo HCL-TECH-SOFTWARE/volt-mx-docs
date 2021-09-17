@@ -6,7 +6,7 @@ category: "iris_rel_notes"
 
 **Table of Contents**
 
-<table style="width: 100%;" cellspacing="0" cellpadding="0" class="GenTOCTable1"><colgroup><col style="width: 0pt;"> <col> <col style="width: 10pt;"></colgroup><tbody><tr><td class="mcReset"></td><td class="GenTOCText1"><a class="GenTOCText1" href="../VoltMX_Iris_Release_Notes.html">Home</a></td><td class="GenTOCPageText1"><madcap:xref style="mc-format: '{page}';" class="TOCPageNumber" data-mc-xref-target=""></madcap:xref></td></tr></tbody></table>
+<table style="width: 100%;" cellspacing="0" cellpadding="0" class="GenTOCTable1"><colgroup><col style="width: 0pt;"> <col> <col style="width: 10pt;"></colgroup><tbody><tr><td class="mcReset"></td><td class="GenTOCText1"><a class="GenTOCText1" href="../VMX_release_notes.html">Home</a></td><td class="GenTOCPageText1"><madcap:xref style="mc-format: '{page}';" class="TOCPageNumber" data-mc-xref-target=""></madcap:xref></td></tr></tbody></table>
 
 <table style="width: 100%;" cellspacing="0" cellpadding="0" class="GenTOCTable1"><colgroup><col style="width: 0pt;"> <col> <col style="width: 10pt;"></colgroup><tbody><tr><td class="mcReset"></td><td class="GenTOCText1"><a class="GenTOCText1" href="../ProductCompatibilityChart.html">Product Compatibility Chart</a></td><td class="GenTOCPageText1"><madcap:xref style="mc-format: '{page}';" class="TOCPageNumber" data-mc-xref-target=""></madcap:xref></td></tr></tbody></table>
 

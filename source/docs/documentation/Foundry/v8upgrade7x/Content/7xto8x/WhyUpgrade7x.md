@@ -26,7 +26,7 @@ The following table details the pre-release overview of Volt MX Iris and Volt MX
 
 The release overview features listed in the following table are from the release version 2.5 (August 2015) to release version V8 (April 2017).
 
-For more information on Volt MX Iris features, refer [VoltMX Iris Release Notes]({{ site.baseurl }}/docs/documentation/Iris/iris_rel_notes/Content/VoltMX_Iris_Release_Notes.html).
+For more information on Volt MX Iris features, refer [Volt MX Release Notes]({{ site.baseurl }}/docs/documentation/VMX_release_notes.html).
 
 | Iris V8 |
 | --- |
