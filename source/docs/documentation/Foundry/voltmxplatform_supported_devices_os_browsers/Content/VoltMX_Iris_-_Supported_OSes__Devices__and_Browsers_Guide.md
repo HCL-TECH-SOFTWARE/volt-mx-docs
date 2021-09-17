@@ -21,7 +21,7 @@ Revision History
 
 Getting Started Options
 
-*   [Release Notes]({{ site.baseurl }}/docs/documentation/Iris/iris_rel_notes/Content/VoltMX_Iris_Release_Notes.html): Provides release details and information on the new features, known issues, and limitations.
+*   [Release Notes]({{ site.baseurl }}/docs/documentation/VMX_release_notes.html): Provides release details and information on the new features, known issues, and limitations.
 *   [VoltMX Iris Install Guide - Windows]({{ site.baseurl }}/docs/documentation/Iris/iris_starter_install_win/Content/Prerequisites.html): Applicable to on-premises. Explains how to install Volt MX Iris on Windows using an installer program.
 *   [VoltMX Iris Install Guide - Mac]({{ site.baseurl }}/docs/documentation/Iris/iris_starter_install_mac/Content/Prerequisites.html): Applicable to on-premises. Explains how to install Volt MX Iris on Mac using an installer program.
 *   [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html): Provides information on the features and the procedures to design great looking apps.
