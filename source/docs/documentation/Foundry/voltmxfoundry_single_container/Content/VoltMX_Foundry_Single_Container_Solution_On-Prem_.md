@@ -107,6 +107,7 @@ For example:
 
 Volt MX  Foundry Single Container Solution downloadable bundle contains the following directories and files.
 
+
 *   **install-foundry.sh** - Installation script
 *   **install-actions.sh** - Installation actions script
 *   **templates** - Directory containing the config template files
