@@ -12,10 +12,10 @@ order: 1
 ### [AppPlatform](Iris/app_platform/Content/AppPlatform_Overview.html)
  Learn about HCL Volt MX products, sub-products and their features. Further, learn how these products interact to provide developers with a comprehensive solution to develop omni-channel digital apps.
 
-### [Iris Release Notes](Iris/iris_rel_notes/Content/VoltMX_Iris_Release_Notes.html)
+### [Iris Release Notes](VMX_release_notes.html)
 Find out about the new features, limitations, and known issues for every major Volt MX Iris release.
 
-### [Iris Fix Pack Release Notes](Iris/iris_rel_notes/Content/VoltMX_Iris_Release_Notes.html)
+### [Iris Fix Pack Release Notes](VMX_release_notes.html)
 Identify the enhancements, bug fixes, and other product updates as part of each Volt MX Iris Fix Pack release.
 
 ### [Supported Platforms & Channels](Foundry/voltmxplatform_supported_devices_os_browsers/Content/Introduction.html)
