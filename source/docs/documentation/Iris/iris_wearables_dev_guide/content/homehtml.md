@@ -19,5 +19,5 @@ Revision History
 
 Getting Started Options
 
-*   [Release Notes]({{ site.baseurl }}/docs/documentation/Iris/iris_rel_notes/Content/VoltMX_Iris_Release_Notes.html)
+*   [Release Notes]({{ site.baseurl }}/docs/documentation/VMX_Release_Notes.html)
 *   [Wearables](wearable.html)
