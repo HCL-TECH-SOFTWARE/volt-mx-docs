@@ -56,7 +56,8 @@ In Volt MX Iris, [_Protected Mode_ option](#configure-project-settings-in) enabl
 In this section, you will learn about: 
 
 1.  [Protection Mechanisms Provided by Volt MX Iris](#protection-mechanisms-provided-by-volt-mx-iris)
-2.  [RSA Key Pair Generation, Encryption, and Usage](#rsakey-pair-generation-encryption-and-usage)
+2.  [RSA Key Pair Generation, Encryption, and Usage](#rsa-key-pair-generation-encryption-and-usage)
+3.  [RSA Key Pair Generation, Encryption, and Usage]
 
 ### Protection Mechanisms Provided by Volt MX Iris
 
@@ -382,9 +383,9 @@ To modify the default error message for Android, do the following:
 2.  Modify the Custom Root Detection Message as per your requirement
 3.  Copy the file in the following folders as required
     
-    For mobile - **<WorkSpace>\\<Application>\\resources\\mobile\\native\\android\\values**
+    For mobile - **`<WorkSpace>\<Application>\resources\mobile\native\android\values`**
     
-    For tablet - **<WorkSpace>\\<Application>\\resources\\tablet\\native\\androidtab\\values**
+    For tablet - **`<WorkSpace>\<Application>\resources\tablet\native\androidtab\values`**
     
 
 ### iOS
