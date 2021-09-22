@@ -49,11 +49,7 @@ The **setBatchSize** API allows a developer to specify the batch size to be set 
 HCLMetricsService.setBatchSize(20);
 {% endhighlight %}
 
-> **_Note:_** App events (CMS or Crash reports) will be pushed to Volt MX Reports only when the events reach the batch\_size (buffer limit).  
-Default batch\_size is 50. This can be overridden using the setBatchSize(batchSize) API.  
-To push the events to Volt MX Reports irrespective of the batch\_size, the **flushEvents()** API can be used. Use the **flushEvents()** API or the appropriate batch\_size to report the events or crash data more frequently to Volt MX Reports according the requirement.  
-  
-For more information on error reports for the **setBatchSize(batchSize)** API and **flushEvents** API, refer to [Analytics Standard Report > Events and User Journey Reports > Application Error Details]({{ site.baseurl }}/docs/documentation/Foundry/standard_metrics_reports_guide/Content/VoltMX_Analytics_-_Standard_Reports/Events_and_User_journey_reports.html#application-error-detail).
+> **_Note:_** App events (CMS or Crash reports) will be pushed to Volt MX Reports only when the events reach the batch\_size (buffer limit).Default batch\_size is 50. This can be overridden using the setBatchSize(batchSize) API.<br><br>To push the events to Volt MX Reports irrespective of the batch\_size, the **flushEvents()** API can be used. Use the **flushEvents()** API or the appropriate batch\_size to report the events or crash data more frequently to Volt MX Reports according the requirement.<br><br>For more information on error reports for the **setBatchSize(batchSize)** API and **flushEvents** API, refer to [Analytics Standard Report > Events and User Journey Reports > Application Error Details]({{ site.baseurl }}/docs/documentation/Foundry/standard_metrics_reports_guide/Content/VoltMX_Analytics_-_Standard_Reports/Events_and_User_journey_reports.html#application-error-detail).
 
 ### setUserID
 
@@ -119,9 +115,9 @@ The **setEventTracking** API sets the event types to be tracked.
 *   For example, while exiting critical flow, the following is a sample code:{% highlight voltMx %}HCLMetricsService.setEventTracking(["FormEntry", "Error", "Crash"]);
     {% endhighlight %}
     
-    > **_Note:_** The events set by using the setEventTracking API override any setting set from the application Project Settings at build time. So, you must set critical events like Error and Crash while using the API.
+> **_Note:_** The events set by using the setEventTracking API override any setting set from the application Project Settings at build time. So, you must set critical events like Error and Crash while using the API.
     
-    > **_Note:_** Supported values for setEventTracking are\["FormEntry","FormExit","Touch","ServiceRequest","ServiceResponse","Gesture","Orientation","Error","Crash"\]
+> **_Note:_** Supported values for setEventTracking are\["FormEntry","FormExit","Touch","ServiceRequest","ServiceResponse","Gesture","Orientation","Error","Crash"\]
     
 
 ### getEventTracking
