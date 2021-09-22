@@ -51,27 +51,7 @@ To initialize the Volt MX JS Client SDK, link your Volt MX Foundry Application w
 
 After you link your Foundry application with Iris, the Volt MX Foundry SDK is initialized automatically when the app starts.
 
-> **Note:**  
-  
-*   The initialized SDK is available for use within the application with the variable name **HCLFoundry**.  
-*   If the operating system launches an application in the background, the session registers as a Non-Interactive session.  
-      
-    For example,  
-      
-  
-*   On Push Notifications  
-     
-*   Content Provider Calls  
-      
-*   Registering for Geo-location Updates.  
-      
-  
-*   If the application launches for interaction, the session registers as an Interactive session.  
-      
-    For example,  
-      
-    *   When a user launches the application.  
-    *   When another app or component launches the application.  
+> **Note:** <br><br>1. The initialized SDK is available for use within the application with the variable name **HCLFoundry**.<br><br>2. If the operating system launches an application in the background, the session registers as a Non-Interactive session.<br><br>**For example,**<br><br>i> On Push Notifications<br><br>ii> Content Provider Calls<br><br>iii> Registering for Geo-location Updates.<br><br>3. If the application launches for interaction, the session registers as an Interactive session.<br><br>**For example,**<br><br>i> When a user launches the application.<br><br>ii> When another app or component launches the application.  
     
 > **_Note:_** When the Iris app is linked with the Foundry app, it fetches the service doc and bundles it with the application. When the Foundry app is re-published and a call is make to the Identity Server, the SDK detects the changes. It replaces the bundled service doc with the new service doc.  
 These changes are applied in the next application launch as follows:  

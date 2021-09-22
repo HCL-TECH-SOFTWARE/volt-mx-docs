@@ -24,11 +24,11 @@ var headers = {
     "custom-header-key1": "custom-header-value1"
 }; //If there are no headers,pass null
 // options is an optional parameter that helps in configuring the network layer. 
-// To configure for a thin layer, use **xmlHttpRequestOptions** instead of **httpRequestOptions**.  
-// Values for **timeoutIntervalForRequest** and **timeoutIntervalForResource** are in seconds.
+// To configure for a thin layer, use xmlHttpRequestOptions instead of httpRequestOptions.  
+// Values for timeoutIntervalForRequest and timeoutIntervalForResource are in seconds.
 // If the request is failing because the network is unreliable, you can provide the following values:
-// **timeoutIntervalForRequest**: This is the time taken by the client to receive headers. This is in seconds.
-// **timeoutIntervalForResource**: The timeout for each chunk download. This is in seconds.
+// timeoutIntervalForRequest: This is the time taken by the client to receive headers. This is in seconds.
+// timeoutIntervalForResource: The timeout for each chunk download. This is in seconds.
 var options = {
     "httpRequestOptions": {
         "timeoutIntervalForRequest": 60,
@@ -49,8 +49,8 @@ integrationSvc.invokeOperation(operationName, headers, params, function(response
 | httpRequestOptions | Datatype | Comments |
 | --- | --- | --- |
 | timeoutIntervalForRequest | int | This is a time out value for the HTTP connection. This can also be referred as connection time out value in seconds. |
-| timeoutIntervalForResource | int | This is used to give a maximum time in seconds for which the network resource should be kept alive on iOS device. This is only applicable for _background network_ calls and default value is 1 week (7 days) unless specified in options. |
-| enableBackgroundTransfer | boolean (true/false) | Enables HTTP request calls in background in iOS. > **_Note:_** This may lead to duplicate transactions in the system, should only be used for GET calls. iOS internally retries the request to keep the connection alive till it reaches timeoutIntervalForResource value, which may create duplicate transactions in back end. |
+| timeoutIntervalForResource | int | This is used to give a maximum time in seconds for which the network resource should be kept alive on iOS device. This is only applicable for _background network_ calls and default value is 1 week (7 days) unless specified in option. |
+| enableBackgroundTransfer | boolean (true/false) | Enables HTTP request calls in background in iOS.<br><br> **_Note:_** This may lead to duplicate transactions in the system, should only be used for GET calls. iOS internally retries the request to keep the connection alive till it reaches timeoutIntervalForResource value, which may create duplicate transactions in back end. |
 
   
 | xmlHttpRequestOptions | Datatype | Comments |
