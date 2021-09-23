@@ -44,7 +44,7 @@ The folder path where you store a SQLite database in a Volt MX Iris project vari
 `\<WorkspaceName>\<ProjectName>\resources\tablet\common\raw`
 
 **Android Mobile**  
-`<WorkspaceName>\<ProjectName>\resources\\mobile\\native\\android\\raw`
+`<WorkspaceName>\<ProjectName>\resources\\mobile\native\android\raw`
 
 **Android Tablet**  
 `<WorkspaceName>\<ProjectName>\resources\tablet\native\androidtab\raw`
