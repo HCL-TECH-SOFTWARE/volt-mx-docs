@@ -5,8 +5,8 @@ category: "voltmx_foundry_user_guide"
                               
 
 .NET (Visual Studio) SDK
-========================
-
+========================   
+ 
 This section describes how to download the .NET (Visual Studio) SDK files and initialize the .NET client.
 
 *   [Prerequisites](Prerequisites_windows.html)
