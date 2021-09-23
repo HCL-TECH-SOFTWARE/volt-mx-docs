@@ -19,6 +19,7 @@ This section describes how to download the .NET (Visual Studio) SDK files and i
 
 
 <details close markdown="block"><summary>API Reference</summary>
-    
-    To view the API Reference for Plain Windows, click [VoltMX Windows docset](http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_docsets/windows/Help/SDK1.0.html/index.html).
+
+  To view the API Reference for Plain Windows, click [VoltMX Windows docset](http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_docsets/windows/Help/SDK1.0.html/index.html).
+
 </details>
