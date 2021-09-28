@@ -20,6 +20,8 @@ Volt MX  Iris Enterprise Edition version V9 supports the following operating sys
 | Google Android Wear | Minimum version 25 (Wear 2.0) |
 | Windows | Windows 10  Desktop/Tablet Windows 10 Mobile Windows Desktop (also known as Windows Classic or Windows Legacy) |
 
+**_Note:_** Volt MX 9.2 does not support the building of Windows native applications.
+
 ### Known Issues
 
 Following are the known issues in the **VoltMX Iris V9SP2** release.
