@@ -279,8 +279,7 @@ To enable the **registerGeoBoundaries** API for the iOS platform, add the follo
 
 For information about how to access and edit the info.plist file, refer to [Build an App for iOS]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
-> **_Important:_**<br><br>i> 
-Include the `NSLocationWhenInUseUsageDescription` and `NSLocationAlwaysAndWhenInUseUsageDescription` keys in your app's `Info.plist` file.<br><br>ii> If the deployment target is iOS10 or below, the `NSLocationAlwaysUsageDescription` key is required. If those keys are not present, authorization requests fail immediately.
+> **_Important:_**<br><br>i.    Include the `NSLocationWhenInUseUsageDescription` and `NSLocationAlwaysAndWhenInUseUsageDescription` keys in your app's `Info.plist` file.<br/>ii.    If the deployment target is iOS10 or below, the `NSLocationAlwaysUsageDescription` key is required. If those keys are not present, authorization requests fail immediately.
 
 To obtain the geolocation callbacks, run the following code in the **preappinit** of your application.
 
