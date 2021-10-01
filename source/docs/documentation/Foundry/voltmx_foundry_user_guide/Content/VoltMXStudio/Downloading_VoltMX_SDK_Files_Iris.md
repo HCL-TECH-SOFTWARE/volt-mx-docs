@@ -13,4 +13,4 @@ The Volt MX SDK is now included as part of the Volt MX development tools and the
 
 If you need to install the Volt MX development tools, please download the updates from Volt MX downloads site.
 
-![](../Resources/Images/OnPrem/VoltMXJS-SDKs.png)
+<a href="../Resources/Images/OnPrem/VoltMXJS-SDKs.png" target="_blank"><img src="../Resources/Images/OnPrem/VoltMXJS-SDKs.png"></a>
