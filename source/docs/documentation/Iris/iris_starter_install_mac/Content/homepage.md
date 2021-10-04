@@ -38,7 +38,7 @@ Revision History
 
 Getting Started Options
 
-*   [Iris Release Notes]({{ site.baseurl }}/docs/documentation/Iris/iris_rel_notes/Content/VoltMX_Iris_Release_Notes.html)
+*   [Iris Release Notes]({{ site.baseurl }}/docs/documentation/VMX_Release_Notes.html)
 *   [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html)
 *   [Iris Windows Installation Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_starter_install_win/Content/Prerequisites.html)
 *   [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Overview.html)
