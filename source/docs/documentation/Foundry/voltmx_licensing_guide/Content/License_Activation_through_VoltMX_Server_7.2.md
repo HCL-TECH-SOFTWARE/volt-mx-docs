@@ -29,7 +29,10 @@ Activating a license for the first time
 <img src="Resources/Images/foundry_home_default_license.png" alt="Foundry sign in" width="90%"/>
 - You are redirected to the Licensing tab, which shows that the license has not been activated yet. Click **ACTIVATE LICENSE NOW**.
 - The license configurator dialog appears. Input the license information provided by the HCL Software licensing team. 
-    - By default, **URL** shows the HCL License & Delivery Portal address.
+    - By default, **URL** shows the HCL License & Delivery Portal address.  
+
+      **License URL:** https://hclsoftware.compliance.flexnetoperations.com/GlobalLicensingService/api/1.0/instances
+
     - Specify the **Server ID** provided by the HCL Software licensing team. See [What is the HCL License & Delivery Portal (FlexNet Portal)?](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0073344).
     - Specify the administrator **Password** you set for your device in the HCL License & Delivery Portal. See [What is the HCL License & Delivery Portal (FlexNet Portal)?](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0073344).
 
