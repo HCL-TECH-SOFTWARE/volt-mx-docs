@@ -26,7 +26,7 @@ To create a database for Identity Services, follow these steps:
     
     The following is a sample query for creating a database in MySQL:
     
-    `CREATE DATABASE \`<DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;`
+    `CREATE DATABASE `<DBNAME>` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;`
     
     The following details are required for Flyway configuration:
     
@@ -54,13 +54,14 @@ To create a database for Identity Services, follow these steps:
     
    | Path for SQL files in the VoltMXFoundry\_Plugins folder | Database | Component |
    | --- | --- | --- |
-   | \\VoltMXFoundry\_Plugins\\scripts\\javamigrations-auth\\com\\voltmx\\auth\\migrations\\mysql | MySQL | Identity |
-   | \\VoltMXFoundry\_Plugins\\scripts\\javamigrations-auth\\com\\voltmx\\auth\\migrations\\oracle | Oracle |
-   | \\VoltMXFoundry\_Plugins\\scripts\\javamigrations-auth\\com\\voltmx\\auth\\migrations\\sqlserver | SQL Server |
+   | \VoltMXFoundry_Plugins\scripts\javamigrations-auth\com\voltmx\auth\migrations\mysql | MySQL | Identity |
+   | \VoltMXFoundry_Plugins\scripts\javamigrations-auth\com\voltmx\auth\migrations\oracle | Oracle |
+   | \VoltMXFoundry_Plugins\scripts\javamigrations-auth\com\voltmx\auth\migrations\sqlserver | SQL Server |
         
 2.  Execute all SQL scripts by using the steps provided at [Configuring Flyway Command-line Tool](FlywayNew.html).
     
-    Click here to view the [Identity schema diagram](http://docs.voltmx.com/8_x_PDFs/MFSchema_Diagrams/identity.png)
+    Click here to view the [Identity schema diagram](Resources/Images/identity.png)
+
     
 
 Since the structure of flyway has changed from Flyway 3.2.1 to Flyway 4.0.3 in Volt MX Foundry installer, execute the following statements to make the `schema_version` table compatible with Flyway 4.0.3.
