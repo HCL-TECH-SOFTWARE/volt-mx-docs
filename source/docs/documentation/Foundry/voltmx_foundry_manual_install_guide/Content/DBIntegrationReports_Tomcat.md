@@ -28,7 +28,7 @@ To create a database for Reports, follow these steps:
     The following details are required for Flyway configuration:
     
     *   Schema name for reports: `reportsdb`
-    *   Placeholders for Reports:{% highlight voltMx %}\# For Reports (reportsdb), replace the following placeholders in SQL migrations for your database
+    *   Placeholders for Reports:{% highlight voltMx %}# For Reports (reportsdb), replace the following placeholders in SQL migrations for your database
         flyway.placeholders.VOLTMX_METRICS_LOGGER_JNDI=java:comp/env/jdbc/voltmxreports
         flyway.placeholders.VOLTMX_METRICS_LOG_LEVEL=INFO
         flyway.placeholders.VOLTMX_METRICS_LOG_OPTION=logfile
@@ -36,29 +36,29 @@ To create a database for Reports, follow these steps:
         {% endhighlight %}
     *   Tablespace Placeholders for Oracle:
         
-        | Product Name | Tablespace Placeholders for Oracle |
-        | --- | --- |
-        | Reports / Metrics | METRICS\_DATA\_TABLESPACE, METRICS\_INDEX\_TABLESPACE, METRICS\_LOB\_TABLESPACE |
+| Product Name | Tablespace Placeholders for Oracle |
+| --- | --- |
+| Reports / Metrics | METRICS\_DATA\_TABLESPACE, METRICS\_INDEX\_TABLESPACE, METRICS\_LOB\_TABLESPACE |
         
-    *   SQL files paths for Reports in VoltMXFoundry\_Plugins folder:
+*   SQL files paths for Reports in VoltMXFoundry\_Plugins folder:
         
         
 <details close markdown="block"><summary>Click here for more details</summary>
         
-        | Path for SQL files in the VoltMXFoundry\_Plugins folder | Database | Component |
-        | --- | --- | --- |
-        | \\VoltMXFoundry\_Plugins\\middleware\\reportsdb\_mysql | MySQL | ReportsDB   |
-        | \\VoltMXFoundry\_Plugins\\middleware\\reportsdb\_oracle | Oracle |
-        | \\VoltMXFoundry\_Plugins\\middleware\\reportsdb\_mssql | SQL Server |
+| Path for SQL files in the VoltMXFoundry\_Plugins folder | Database | Component |
+| --- | --- | --- |
+| \\VoltMXFoundry\_Plugins\\middleware\\reportsdb\_mysql | MySQL | ReportsDB   |
+| \\VoltMXFoundry\_Plugins\\middleware\\reportsdb\_oracle | Oracle |
+| \\VoltMXFoundry\_Plugins\\middleware\\reportsdb\_mssql | SQL Server |
 </details>       
 2.  Execute all SQL scripts by using the steps provided at [Configuring Flyway Command-line Tool](FlywayNew.html).
     
-    Click here to view the [ReportsDB (Metrics) schema diagram](http://docs.voltmx.com/8_x_PDFs/MFSchema_Diagrams/metrics.png)
+Click here to view the [ReportsDB (Metrics) schema diagram](http://docs.voltmx.com/8_x_PDFs/MFSchema_Diagrams/metrics.png)
     
 
 Since the structure of flyway has changed from Flyway 3.2.1 to Flyway 4.0.3 in Volt MX Foundry installer, execute the following statements to make the `schema_version` table compatible with Flyway 4.0.3.
 
-**Oracle:**  
+>**Oracle:**  
 drop index "schema\_version\_ir\_idx";  
 drop index "schema\_version\_vr\_idx";  
 ALTER TABLE "schema\_version" DROP constraint "schema\_version\_pk" drop index;  
@@ -66,7 +66,7 @@ ALTER TABLE "schema\_version" DROP COLUMN "version\_rank";
 ALTER TABLE "schema\_version" modify("version" null);  
 ALTER TABLE "schema\_version" add constraint "schema\_version\_pk" primary key("installed\_rank");  
   
-**MySQL:**  
+>**MySQL:**  
 ALTER TABLE schema\_version DROP INDEX schema\_version\_vr\_idx;  
 ALTER TABLE schema\_version DROP INDEX schema\_version\_ir\_idx;  
 ALTER TABLE schema\_version DROP PRIMARY KEY;  
@@ -75,7 +75,7 @@ ALTER TABLE schema\_version CHANGE version version VARCHAR(50);
 ALTER TABLE schema\_version ADD PRIMARY KEY (installed\_rank);  
   
   
-**SQL Server:**  
+>**SQL Server:**  
 DROP INDEX schema\_version\_ir\_idx ON dbo.schema\_version  
 GO  
 DROP INDEX schema\_version\_vr\_idx ON dbo.schema\_version  
