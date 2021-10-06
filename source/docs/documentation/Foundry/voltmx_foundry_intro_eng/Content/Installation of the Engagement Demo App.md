@@ -34,7 +34,8 @@ In this section, we will take you thru the steps to download and install the And
     
 5.  The next screen will display a native notification that will also request you to accept push notifications. Click **Ok**.
     
-    ![](Resources/Images/app2.png)
+![](Resources/Images/app2.png)
+
     
 6.  The next screen will prompt you to enter your provisioned Volt MX Engagement Server URL, application id, and sender id. Additional details pertaining to each fields are as follows:
     *   **URL**: The URL of the Engagement Server provisioned for you when you signed up for Volt MX Foundry. For example: https://mobilefoundrydemo.messaging.voltmxcloud.com
@@ -45,13 +46,14 @@ In this section, we will take you thru the steps to download and install the And
     It is important that the `sender id` used with the application is the same as the one associated with the GCM key. The sender id was used to configure the application in Engagement Server.
 
         
-    ![](Resources/Images/aoo3.png)
+![](Resources/Images/aoo3.png) 
+
   
 7.  Click **Done** after all the details are successfully entered. This will navigate you to the **User** creation screen.
 8.  You need to enter the first name, last name, phone number, email, country and state (if country is US only) information in the **User** creation screen.
 
     
-    ![](Resources/Images/app5.png)
+![](Resources/Images/app5.png)    
 
     
 9.  Click **Done** after all the information is entered. This will create the user in the Engagement Server.
@@ -108,6 +110,7 @@ We have installed the application, created a subscription, and updated the confi
     
 10.  Next, you will also see on your device screen that the message is successfully delivered.
     
+
 ![](Resources/Images/app8.png)
     
 
@@ -122,11 +125,12 @@ As you may recall, from the earlier section of this track, you will need to sign
 
 1.  Login to Volt MX Engagement Services console of the Volt MX Foundry. Once the log in is successful, you will see the screen as below. Click **Adhoc** under the **Engagement** section from the left pane.
     
-    ![](Resources/Images/dashboard4_595x258.png)
+![](Resources/Images/dashboard4_595x258.png)
+
     
 2.  In the **Adhoc** section, select the **SMS Message** channel. Click **Next –Select Users** to navigate to the next screen.
     
-    ![](Resources/Images/adhoc6_452x231.png)
+![](Resources/Images/adhoc6_452x231.png) 
     
 3.  Select the user to whom the SMS message needs to be sent. Click **Next – Define Message** to navigate to the next screen.
     
