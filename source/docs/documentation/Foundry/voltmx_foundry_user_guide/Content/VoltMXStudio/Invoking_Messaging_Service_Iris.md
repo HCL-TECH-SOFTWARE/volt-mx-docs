@@ -246,7 +246,7 @@ Suppose that the radius parameter was specified as 5 miles when the user launche
 
 There are additional settings that must be enabled for this API to work correctly.
 
-> **_Note:_** Exceptions are thrown if location is switched off on the device, or user does not allow permission to retrieve location, or the SDK is not able to retrieve the current location on the device. For more information on SDKs for Messaging Service docs, refer to [VoltMX Iris API Developers' Guide > Notifications > Push Notifications]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/push_notifications.html)
+> **_Note:_** Exceptions are thrown if location is switched off on the device, or user does not allow permission to retrieve location, or the SDK is not able to retrieve the current location on the device.<br><br> For more information on SDKs for Messaging Service docs, refer to [VoltMX Iris API Developers' Guide > Notifications > Push Notifications]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/push_notifications.html)
 
 **Android**
 
@@ -263,7 +263,7 @@ To enable the **registerGeoBoundaries** API for the Android platform perform the
 
 **Use Google Play Location Services**
 
-8.  In the **Manifest Properties** section, select Tags. Add the following to the **Child tag entries <application>** tag:
+8.  In the **Manifest Properties** section, select Tags. Add the following to the Child tag entries < application > tag:
 <service android:name="com.konylabs.api.location.KonyGeoTransitionsIntentService"/>
 
 The page will look like the following example.
@@ -279,10 +279,7 @@ To enable the **registerGeoBoundaries** API for the iOS platform, add the follo
 
 For information about how to access and edit the info.plist file, refer to [Build an App for iOS]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
 
-> **_Important:_**
-
-*   Include the `NSLocationWhenInUseUsageDescription` and `NSLocationAlwaysAndWhenInUseUsageDescription` keys in your app's `Info.plist` file.
-*   If the deployment target is iOS10 or below, the `NSLocationAlwaysUsageDescription` key is required. If those keys are not present, authorization requests fail immediately.
+> **_Important:_**<br><br>i.    Include the `NSLocationWhenInUseUsageDescription` and `NSLocationAlwaysAndWhenInUseUsageDescription` keys in your app's `Info.plist` file.<br/>ii.    If the deployment target is iOS10 or below, the `NSLocationAlwaysUsageDescription` key is required. If those keys are not present, authorization requests fail immediately.
 
 To obtain the geolocation callbacks, run the following code in the **preappinit** of your application.
 
@@ -318,10 +315,10 @@ The Capabilities page will look like the following example.
 
 The following example shows how to register geoboundaries.
 
-{% highlight voltMx %}// Get an instance of SDK
-var client = voltmx.sdk.getCurrentInstance();
-var messagingSvc = client.getMessagingService();
-messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) {
+        {% highlight voltMx %}// Get an instance of SDK
+        var client = voltmx.sdk.getCurrentInstance();
+        var messagingSvc = client.getMessagingService();
+        messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) {
         voltmx.print("Register Successful");
         var options = {};
         options.radius = "radius"; //radius in miles            
@@ -342,157 +339,11 @@ messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) 
         }
         messagingSvc.registerGeoBoundaries(options, successCallback, failureCallback); //if ksid is already available, register is not required.           
         // If either location is switched off or the SDK is not able to retrieve current location, exceptions are thrown.      
-    },
-    function(error) {
+        },
+        function(error) {
         voltmx.print("Register Failure" + JSON.stringify(error));
-    });
-{% endhighlight %}
-
-Update GeoLocation
-------------------
-
-**updateGeoLocation** API updates the geoLocation for the messaging service.
-
-### Syntax
-
-updateGeoLocation= function (latitude, longitude, locationName, successCallback, failureCallback, options)
-
-### Parameters
-
-### Additional Settings
-
-There are additional settings that must be enabled for this API to work correctly. > **_Note:_** Exceptions are thrown if location is switched off on the device, or user does not allow permission to retrieve location, or the SDK is not able to retrieve the current location on the device. For more information on SDKs for Messaging Service docs, refer to [VoltMX Iris API Developers' Guide > Notifications > Push Notifications]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/push_notifications.html) **Android** To enable the **registerGeoBoundaries** API for the Android platform perform the following steps in Volt MX Iris.
-
-On the File menu, click **Settings** to open the Project Settings dialog box. Click the **Native** tab. Click the **Android** sub-tab. In **Push Notifications** section, select either **GCM** or **FCM** for the engagement APIs to work. Enable the following items: **Enable Local Notifications** **Use Google Play Location Services** In the **Manifest Properties** section, select Tags. Add the following to the **Child tag entries <application>** tag: <service android:namecom.konylabs.api.location.KonyGeoTransitionsIntentService"/>
-
-The page will look like the following example. ![](../Resources/Images/Android_GeoBoundaries_Settings_714x433.jpg) **iOS** To enable the **registerGeoBoundaries** API for the iOS platform, add the following keys to the info.plist file. "NSLocationAlwaysUsageDescription":"<ThisMessageWillBeDisplayedToUser>" "UIBackgroundModes":\["location"\] For information about how to access and edit the info.plist file, refer to [Build an App for iOS]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
-
-> **_Important:_** Include the `NSLocationWhenInUseUsageDescription` and `NSLocationAlwaysAndWhenInUseUsageDescription` keys in your app's `Info.plist` file. If the deployment target is iOS10 or below, the `NSLocationAlwaysUsageDescription` key is required. If those keys are not present, authorization requests fail immediately.
-
-To obtain the geolocation callbacks, run the following code in the **preappinit** of your application.var msgObj = voltmx.sdk.getCurrentInstance().getMessagingService(); var cback = msgObj.manageGeoBoundariesCallback; voltmx.location.setGeofencesCallback(cback); > **_Important:_** Before building the application, link your Foundry application to your Iris project. **Windows** To enable the **registerGeoBoundaries** API for the Windows platform perform the following steps in Volt MX Iris.
-
-On the **File** menu, click **Settings** to open the Project Settings dialog box. Click the **Native** tab. Click the **Windows Phone** tab. Click the **Windows 10 Mobile** tab. Click the **Capabilities** tab. Move the following permissions to "true":
-
-> internetClient internetClientService location
-
-The Capabilities page will look like the following example. ![](../Resources/Images/Windows_GeoBoundaries_Settings_688x420.jpg) **Example** The following example shows how to register geoboundaries.// Get an instance of SDK var client = voltmx.sdk.getCurrentInstance(); var messagingSvc = client.getMessagingService(); messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) { voltmx.print("Register Successful"); var options = {}; options.radius = "radius"; //radius in miles options.pageSize = "pageSize"; options.authToken = "Authorization\_Token"; options.tags = "Array of tags"; //TODO options.customLogicCallback = function(data) { // data is geoBoundary Data received from Volt MX Messaging Service //custom logic implementation }; function successCallback(response) { //Registered Successfully. } function failureCallback(error) { //Registration failure. } messagingSvc.registerGeoBoundaries(options, successCallback, failureCallback); //if ksid is already available, register is not required. // If either location is switched off or the SDK is not able to retrieve current location, exceptions are thrown. }, function(error) { voltmx.print("Register Failure" + JSON.stringify(error)); });
-
-Update GeoLocation
-------------------
-
-**updateGeoLocation** API updates the geoLocation for the messaging service.
-
-### Syntax
-
-updateGeoLocation= function (latitude, longitude, locationName, successCallback, failureCallback, options)
-
-### Parameters
-
-### Additional Settings
-
-There are additional settings that must be enabled for this API to work correctly.
-
-> **_Note:_** Exceptions are thrown if location is switched off on the device, or user does not allow permission to retrieve location, or the SDK is not able to retrieve the current location on the device. For more information on SDKs for Messaging Service docs, refer to [VoltMX Iris API Developers' Guide > Notifications > Push Notifications]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/push_notifications.html)
-
-**Android**
-
-To enable the **registerGeoBoundaries** API for the Android platform perform the following steps in Volt MX Iris.
-
-1.  On the File menu, click **Settings** to open the Project Settings dialog box.
-2.  Click the **Native** tab.
-3.  Click the **Android** sub-tab.
-4.  In **Push Notifications** section, select either **GCM** or **FCM** for the engagement APIs to work.
-    
-5.  Enable the following items:
-
-**Enable Local Notifications**
-
-**Use Google Play Location Services**
-
-8.  In the **Manifest Properties** section, select Tags. Add the following to the **Child tag entries <application>** tag:
-<service android:name="com.konylabs.api.location.KonyGeoTransitionsIntentService"/>
-
-The page will look like the following example.
-
-![](../Resources/Images/Android_GeoBoundaries_Settings_714x433.jpg)
-
-**iOS**
-
-To enable the **registerGeoBoundaries** API for the iOS platform, add the following keys to the info.plist file.
-
-*   "NSLocationAlwaysUsageDescription":"<ThisMessageWillBeDisplayedToUser>"
-*   "UIBackgroundModes":\["location"\]
-
-For information about how to access and edit the info.plist file, refer to [Build an App for iOS]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).
-
-> **_Important:_**
-
-*   Include the `NSLocationWhenInUseUsageDescription` and `NSLocationAlwaysAndWhenInUseUsageDescription` keys in your app's `Info.plist` file.
-*   If the deployment target is iOS10 or below, the `NSLocationAlwaysUsageDescription` key is required. If those keys are not present, authorization requests fail immediately.
-
-To obtain the geolocation callbacks, run the following code in the **preappinit** of your application.
-
-{% highlight voltMx %}var msgObj = voltmx.sdk.getCurrentInstance().getMessagingService();
-var cback = msgObj.manageGeoBoundariesCallback;
-voltmx.location.setGeofencesCallback(cback);
-{% endhighlight %}
-
-> **_Important:_** Before building the application, link your Foundry application to your Iris project.
-
-**Windows**
-
-To enable the **registerGeoBoundaries** API for the Windows platform perform the following steps in Volt MX Iris.
-
-1.  On the **File** menu, click **Settings** to open the Project Settings dialog box.
-2.  Click the **Native** tab.
-3.  Click the **Windows Phone** tab.
-4.  Click the **Windows 10 Mobile** tab.
-5.  Click the **Capabilities** tab.
-6.  Move the following permissions to "true":
-
-> internetClient
-> 
-> internetClientService
-> 
-> location
-
-The Capabilities page will look like the following example.
-
-![](../Resources/Images/Windows_GeoBoundaries_Settings_688x420.jpg)
-
-**Example**
-
-The following example shows how to register geoboundaries.
-
-{% highlight voltMx %}// Get an instance of SDK
-var client = voltmx.sdk.getCurrentInstance();
-var messagingSvc = client.getMessagingService();
-messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) {
-        voltmx.print("Register Successful");
-        var options = {};
-        options.radius = "radius"; //radius in miles            
-        options.pageSize = "pageSize";
-        options.authToken = "Authorization_Token";
-        options.tags = "Array of tags"; //TODO          
-        options.customLogicCallback = function(data) {
-            // data is geoBoundary Data received from Volt MX Messaging Service                 
-            //custom logic implementation           
-        };
-
-        function successCallback(response) {
-            //Registered Successfully.           
-        }
-
-        function failureCallback(error) {
-            //Registration failure.         
-        }
-        messagingSvc.registerGeoBoundaries(options, successCallback, failureCallback); //if ksid is already available, register is not required.           
-        // If either location is switched off or the SDK is not able to retrieve current location, exceptions are thrown.      
-    },
-    function(error) {
-        voltmx.print("Register Failure" + JSON.stringify(error));
-    });
-{% endhighlight %}
+        });
+        {% endhighlight %}
 
 Update GeoLocation
 ------------------
@@ -522,7 +373,7 @@ updateGeoLocation= function (latitude, longitude, locationName, successCallback,
 | --- | --- | --- | --- |
 | authToken | String | Authorization token configured in messaging service console. | Optional |
 
-Example
+**Example**
 
 {% highlight voltMx %}//Get an instance of SDK.
 var client = voltmx.sdk.getCurrentInstance();
