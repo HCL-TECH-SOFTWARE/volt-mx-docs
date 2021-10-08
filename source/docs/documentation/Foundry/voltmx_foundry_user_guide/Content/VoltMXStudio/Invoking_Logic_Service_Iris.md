@@ -8,7 +8,6 @@ User Guide: [SDKs](../Foundry_SDKs.html) > [VoltMX Iris SDK](Installing_VoltMXJS
 
 Invoking a Logic Service  
 
-===========================
 
 The getLogicService API creates an instance of logic service that is configured in the Volt MX Foundry portal. `logicClient = VMXFoundry.getLogicService(serviceName)`
 
