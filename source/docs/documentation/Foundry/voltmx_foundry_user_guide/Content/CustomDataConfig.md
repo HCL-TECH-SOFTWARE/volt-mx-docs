@@ -85,7 +85,7 @@ To create a Custom Data Adapter, follow these steps:
 
 Let us take a Swagger based example for a Custom Data Adapter that connects to the [Swagger PetStore](http://petstore.swagger.io/) from Volt MX Foundry.
 
-You can use a [sample Swagger JSON](http://docs.voltmx.com/8_x_PDFs/DataAdapter-sampleApps/PetStoreJSON.zip) for this example.
+You can use a [sample Swagger JSON](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/PetStoreJSON.zip) for this example.
 
 Follow the given steps to add the Swagger PetStore Custom Data Adapter.
 
