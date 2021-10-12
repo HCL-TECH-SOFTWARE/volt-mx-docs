@@ -10,17 +10,17 @@ Generate IPA for a Native iOS Application
 
 In addition to creating iPhone and iPad applications directly from source code, you can use Volt MX Iris to build an iPhone or iPad application and deploy it to a Mac automatically. You need a dedicated Mac to enable creation of iPhone and iPad application binaries.
 
-> **_Important:_** Currently, Volt MX Iris supports Xcode 9.0 and later.
+> **_Important:_** Currently, Volt MX Iris supports XCode 12.5 and XCode 13.
 
 Prerequisites
 -------------
 
 Before you begin, ensure that the following conditions are met:
 
-*   Xcode and command line tools are installed on the Mac.
-*   Xcode path is set to `/Applications/Xcode.app/Contents/Developer/`.
+*   XCode and command line tools are installed on the Mac.
+*   XCode path is set to `/Applications/Xcode.app/Contents/Developer/`.
     
-    To check the Xcode path or modify the path: 
+    To check the XCode path or modify the path: 
     
     1.  Open the **Terminal**.
         
@@ -53,11 +53,11 @@ To configure Volt MX Iris to build an iOS native application on a local machine,
         *   **ad-hoc**: Signs and packages the application for ad-hoc distribution outside the iOS App Store.
         *   **enterprise**: Signs and packages the application for enterprise distribution outside the iOS App Store.
         
-        An archive file is always generated initially using development code signing. Xcode then automatically generates the required development provisioning profiles. For development code signing, you must have a valid development certificate installed in your keychain.
+        An archive file is always generated initially using development code signing. XCode then automatically generates the required development provisioning profiles. For development code signing, you must have a valid development certificate installed in your keychain.
         
-        When exporting the archive to an IPA using the _development_ option, Xcode reuses the development certificate and provisioning profile that are used for archive code signing. It is unnecessary to create profiles from the development center and install them on your system.
+        When exporting the archive to an IPA using the _development_ option, XCode reuses the development certificate and provisioning profile that are used for archive code signing. It is unnecessary to create profiles from the development center and install them on your system.
         
-        For _app-store_, _ad-hoc_, and _enterprise_ options, make sure that you have a valid developer certificate, distribution certificate, and distribution profile installed on your system. Xcode will not automatically generate these distribution profiles.
+        For _app-store_, _ad-hoc_, and _enterprise_ options, make sure that you have a valid developer certificate, distribution certificate, and distribution profile installed on your system. XCode will not automatically generate these distribution profiles.
         
     *   **Development Team**: Your 10-digit development team identifier obtained from Apple. The Team ID can be found in the Membership Details of your Apple Developer account.  
           
