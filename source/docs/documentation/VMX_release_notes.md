@@ -15,6 +15,7 @@ Volt MX Iris
   
 | **Date** | **Document Version** | **Description of Modifications/Release** |
 | --- | --- | --- |
+| 10/13/2021 | 1.6 | Document updated for [V9 SP2 FP 4](Iris/iris_rel_notes/Content/V9SP2FP4.html) |
 | 08/18/2021 | 1.5 | Document updated for [V9.2](Iris/iris_rel_notes/Content/V92.html).
 | 02/10/2021 | 1.4 | Document updated for the [V9 Service Pack 2 Fixpack 7](V9SP2FP7.html#new-features-and-enhancements-in-v9-sp2-fixpack-7) release. |
 | 12/21/2020 | 1.3 | Document updated for the V9 Service Pack 2 release with [New Features](V9SP2.html#new-features-and-enhancements-in-v9-service-pack-2) and [Known Issues](V9SP2_Known_Issues.html#top). |
