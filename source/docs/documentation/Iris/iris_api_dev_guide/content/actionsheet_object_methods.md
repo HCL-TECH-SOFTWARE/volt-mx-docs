@@ -13,30 +13,27 @@ The ActionSheet object implements Apple's Action Sheets for iOS apps. They are n
 Methods
 -------
 
-The `ActionSheet` object contains the following methods.
-
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addAction](javascript:void(0);) 
-
-* * *
-
-Adds an `ActionItem` object to the `ActionSheet` object.
-
-Syntax
-
-addAction(  
-    actionItem1)
-
-Input Parameters
-
-| Parameter | Description |
-| --- | --- |
-| actionItem1 | An `ActionItem` object to add to the Action Sheet. |
-
- 
-
-Example
-
-{% highlight voltMx %}//Creating the Action Item Object
+<p>The <code>ActionSheet</code> object contains the following methods.</p>
+<details close markdown="block"><summary>addAction</summary>
+<hr>
+<p>Adds an <code>ActionItem</code> object to the <code>ActionSheet</code> object.</p>
+<p><b>Syntax</b></p>
+<pre><code style="margin-left:40px;display:block;background-color:#eee;">addAction(
+    actionItem1)</code></pre>
+<br/>
+<p><b>Input Parameters</b></p>
+<table style="margin-left:40px;">
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>actionItem1</td>
+<td>An <code>ActionItem</code> object to add to the Action Sheet.</td>
+</tr>
+</table>
+<p><b>Example</b></p>
+<pre><code style="margin-left:40px;display:block;background-color:#eee;">//Creating the Action Item Object
 setActionSheet: function() {
     var actionItem = new voltmx.ui.ActionItem({
         "title": "Open Basecamp",
@@ -47,116 +44,88 @@ setActionSheet: function() {
     });
     //Adding action to the Action Sheet object    
     actionSheetObject.addAction(actionItem);
-}
-{% endhighlight %}
+}</code></pre>
+<br/>
+<p><b>Return Values</b></p>
+<p style="margin-left:20px;">None</p>
+<p><b>Platform Availability</b></p>
+<p style="margin-left:20px;">iOS only</p>
+<hr>
+</details>
 
-Return Values
-
-None.
-
-Platform Availability
-
-iOS only
-
-* * *
-
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[Dismiss](javascript:void(0);) 
-
-* * *
-
-Dismisses the Action Sheet on the display.
-
-Syntax
-
-dismiss()
-
-Input Parameters
-
-None.
-
-Example
-
-{% highlight voltMx %}actionSheetObject.dismiss();
-{% endhighlight %}
-
-Return Values
-
-None.
-
-Platform Availability
-
-iOS only
-
-* * *
-
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setAnchorConfiguration](javascript:void(0);) 
-
-* * *
-
-Sets the anchor configuration information on iPads.
-
-Syntax
-
-setAnchorConfiguration(  
-    configParams)
-
-Input Parameters
-
-| Parameter | Description |
-| --- | --- |
-| configParams | A JavaScript object containing key-value pairs that specify the anchor configuration parameters for the Action Sheet. The following keys are required. <br><br>`direction`: A constant from the [Action Sheet Anchor Direction Constants](constants_namespace.html#ActionSheetAnchorDirection) that specifies the side of the widget that the Action Sheet attaches to. <br><br>`widget`: The widget that the Action Sheet attaches to. |
-
- 
-
-Example
-
-{% highlight voltMx %}var configInfo = {
+<details close markdown="block"><summary>Dismiss</summary>
+<hr>
+<p>Dismisses the Action Sheet on the display.</p>
+<p><b>Syntax</b></p>
+<pre><code style="margin-left:40px;display:block;background-color:#eee;">dismiss()</code></pre>
+<br/>
+<p><b>Input Parameters</b></p>
+<p style="margin-left:20px;">None</p>
+<p><b>Example</b></p>
+<pre><code style="margin-left:20px;display:block;background-color:#eee;">actionSheetObject.dismiss();</code></pre>
+<br/>
+<p><b>Return Values</b></p>
+<p style="margin-left:20px;">None</p>
+<p><b>Platform Availability</b></p>
+<p style="margin-left:20px;">iOS only</p>
+<hr>  
+</details>
+<details close markdown="block"><summary>setAnchorConfiguration</summary>
+<hr>
+<p>Sets the anchor configuration information on iPads.</p>
+<p><b>Syntax</b></p>
+<pre><code style="margin-left:40px;display:block;background-color:#eee;">setAnchorConfiguration(
+    configParams)</code></pre>
+<br/>
+<p><b>Input Parameters</b></p>
+<table style="margin-left:40px;">
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>configParams</td>
+<td>
+<p>A JavaScript object containing key-value pairs that specify the anchor configuration parameters for the Action Sheet. The following keys are required.</p>
+<p>
+<ul>
+<li><code>direction:</code> A constant from the <a href="constants_namespace.html#constants-by-functional-area">Action Sheet Anchor Direction Constants</a> that specifies the side of the widget that the Action Sheet attaches to.</li>
+<li><code>widget:</code> The widget that the Action Sheet attaches to.</li>
+</ul>
+</p>
+</td>
+</tr>
+</table>
+<p><b>Example</b></p>
+<pre><code style="margin-left:40px;display:block;background-color:#eee;">var configInfo = {
     "direction": constants.ANCHOR_DIRECTION_LEFT,
     "widget": frmWidgetName
 };
-myActionSheet.setAnchorConfiguration(configInfo);
-{% endhighlight %}
+myActionSheet.setAnchorConfiguration(configInfo);</code></pre>
+<br/>
+<p><b>Return Values</b></p>
+<p style="margin-left:20px;">None</p>
+<p><b>Remarks</b></p>
+<p style="margin-left:20px;">This method is only used on the iPad</p>
+<p><b>Platform Availability</b></p>
+<p style="margin-left:20px;">iPad only</p>
+<hr>  
+</details>
 
-Return Values
-
-None.
-
-Remarks
-
-This method is only used on the iPad.
-
-Platform Availability
-
-iPad only
-
-* * *
-
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[show](javascript:void(0);) 
-
-* * *
-
-Shows the Action Sheet on the display.
-
-Syntax
-
-show();
-
-Example
-
-{% highlight voltMx %}actionSheetObject.show();
-{% endhighlight %}
-
-Input Parameters
-
-None.
-
-Return Values
-
-None.
-
-Platform Availability
-
-iOS only
-
-* * *
-
+<details close markdown="block"><summary>show</summary>
+<hr>
+<p>Shows the Action Sheet on the display.</p>
+<p><b>Syntax</b></p>
+<pre><code style="margin-left:40px;display:block;background-color:#eee;">show();</code></pre>
+<br/>
+<p><b>Example</b></p>
+<pre><code style="margin-left:40px;display:block;background-color:#eee;">actionSheetObject.show();</code></pre>
+<br/>
+<p><b>Input Parameters</b></p>
+<p style="margin-left:20px;">None</p>
+<p><b>Return Values</b></p>
+<p style="margin-left:20px;">None</p>
+<p><b>Platform Availability</b></p>
+<p style="margin-left:20px;">iOS only</p>
+<hr>  
+</details>
