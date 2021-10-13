@@ -46,7 +46,7 @@ To achieve greater security, you can configure the server not to use weak cipher
 
 Make use of [Qualys SSL Server Test](https://www.ssllabs.com/ssltest/) to analyze the server SSL configurations.
 
-#### How to Disable Weak Ciphers in Tomcat
+### How to Disable Weak Ciphers in Tomcat
 
 To disable weak ciphers, modify the SSL Connector container attribute inside the `server.xml` with the required https `connector` tag details. The `server.xml` is located in the `<Install_Drive>\tomcat\conf` folder.
 
@@ -62,7 +62,7 @@ Here is a sample modified https `connector` tag:
 
 > **_Note:_** Upgrade the SSL Cipher list to the latest available versions.
 
-#### How to Disable Weak Ciphers in JBoss
+### How to Disable Weak Ciphers in JBoss
 
 To disable weak ciphers, replace the `https-listener` under JBoss `subsystem/undertow`, for example, `<subsystem xmlns="urn:jboss:domain:undertow:3.1">`
 
@@ -182,8 +182,8 @@ As per NIST, it is recommended to use at least 10,000 iterations. If the user wa
 ![](Resources/Images/Performance_Graph.png)
 
 ### Example to set property ''PBKDF2\_ITERATIONS"
-```
-Request:  
+
+{% highlight voltMx %}Request:  
 POST authservice/api/v1/setup/tenants/<tenant-id>/properties  
 Headers:  
 Authorization: <auth-token>  
@@ -191,7 +191,8 @@ Content-Type: application/x-www-form-urlencoded
 Payload:  
 name = PBKDF2_ITERATIONS  
 value = 10000
-```
+{% endhighlight %}
+
 ### Sample request
 
 {% highlight voltMx %}POST /authService/100000002/api/v1/setup/tenants/100000002/properties HTTP/1.1  
@@ -237,8 +238,7 @@ The default password policy is password must contain at least 8 characters, at m
 
 An owner of the account can change the password policy by changing “password\_regex” property.
 
-```
-Request:  
+{% highlight voltMx %}Request:  
 POST authservice/api/v1/setup/tenants/<tenant-id>/properties  
 Headers:  
 Authorization: <auth-token>  
@@ -246,7 +246,8 @@ Content-Type: application/x-www-form-urlencoded
 Payload:  
 name = password_regex  
 value = ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*(_|[^\\w])).{8,20}$
-```
+{% endhighlight %}
+
 ### Sample Request
 
 {% highlight voltMx %}POST /authService/100000002/api/v1/setup/tenants/100000002/properties HTTP/1.1  
@@ -332,7 +333,7 @@ For example, the Apache Tomcat server version is disclosed, as shown in the foll
 
 For security reasons, you must disable the server information disclosure for Tomcat application server.
 
-To prevent disclosure of the Tomcat Application Server version, follow these steps:
+### To prevent disclosure of the Tomcat Application Server version, follow these steps:
 
 1.  Open the Tomcat Server > `server.xml` file.
 2.  Add the following:{% highlight voltMx %}<Valve className="org.apache.catalina.valves.ErrorReportValve"
@@ -359,12 +360,12 @@ Alternatively, you can also use the following API to add the property in the waa
 {% highlight voltMx %}POST <Waas_Base_URL>/api/v1/setup/properties
 {% endhighlight %}
 
-Headers:
+### Headers:
 
 *   X-VoltMX-Authorization = <Claims token value>
 *   Content-Type = application/x-www-form-urlencoded
 
-Form Data parameters:
+### Form Data parameters:
 
 *   name = DISABLE\_CONCURRENT\_SESSIONS
 *   value = true
@@ -410,12 +411,12 @@ Invoke the following API to enable User Blocking on multiple failed login attemp
 {% highlight voltMx %}POST <authUrl>/api/v1/setup/tenants/__global/properties
 {% endhighlight %}
 
-Headers:
+### Headers:
 
 *   Content-Type: application/json
 *   X-VoltMX-Authorization: <authToken>
 
-Request body:
+### Request body:
 
 {% highlight voltMx %}{
    "name":"MAX_LOGON_FAILED_ATTEMPTS",
@@ -433,13 +434,13 @@ Use the following API to set the blocking threshold
 {% highlight voltMx %}POST <authUrl>/api/v1/setup/tenants/__global/properties
 {% endhighlight %}
 
-Headers:
+### Headers:
 
 Content-Type: application/json
 
 X-VoltMX-Authorization: <authToken>
 
-Request body:
+### Request body:
 
 {% highlight voltMx %}{
    "name":"LOGON_BLOCKING_THRESHOLD_MINUTES",
@@ -493,7 +494,7 @@ type="org.apache.catalina.UserDatabase"/>
 Secure your Cookies (Secure and HttpOnly flags)
 -----------------------------------------------
 
-For Tomcat/WebLogic as Web Server
+### For Tomcat/WebLogic as Web Server
 
 Cookies let websites store data directly on the web browser of a user. Websites primarily use cookies to identify the user session based on their browsing. Cookies contain sensitive data that must be protected.
 
@@ -526,7 +527,7 @@ Add the following code in the **weblogic.xml** file:
 
 You can use developer tools to verify the changes.
 
-For JBoss as the Web Server, do the following.
+### For JBoss as the Web Server, do the following.
 
 To enable `secure/Http-only` for all deployed applications, you can add a session-cookie config to your undertow subsystem's `servlet-container` section (`domain.xml` file or `standalone-xxx.xml` file). For example, a session-cookie config is as follows:
 
@@ -539,7 +540,7 @@ To enable `secure/Http-only` for all deployed applications, you can add a sessio
  </servlet-container>
 {% endhighlight %}
 
-For WebSphere as the Web Server, follow these steps.
+### For WebSphere as the Web Server, follow these steps.
 
 1.  Sign in to [VoltMX Foundry Console](https://manage.hclvoltmx.com/).
 2.  Select Environments from the left navigation pane.
@@ -601,7 +602,7 @@ The HTTP headers should include the following headers and their respective value
 
 Also, if there no overriding concerns, enable the security settings.
 
-To set the response header for Volt MX Foundry version V8 SP3 or higher versions, follow these steps.
+### To set the response header for Volt MX Foundry version V8 SP3 or higher versions, follow these steps.
 
 *   To overcome these security issues in Volt MX SPA and Desktop Web applications, add custom filter and filter mapping entry in the **web.xml** file.
 *   For example:
@@ -632,9 +633,9 @@ To set the response header for Volt MX Foundry version V8 SP3 or higher versions
 
 > **_Note:_** Usage of the custom filter is the responsibility of the application developer.
 
-Setting the response header for Volt MX Foundry version V8 SP3 or ealier versions.
+### Setting the response header for Volt MX Foundry version V8 SP3 or ealier versions.
 
-To add OWASP Secure Headers to WebApp Static Files, follow these steps.
+### To add OWASP Secure Headers to WebApp Static Files, follow these steps.
 
 1.  Sign in to [VoltMX Foundry Console](https://manage.hclvoltmx.com/).
 2.  Select Environments from the left navigation pane.
@@ -660,7 +661,7 @@ To add OWASP Secure Headers to WebApp Static Files, follow these steps.
 ![](Resources/Images/OWASP_Header_596x279.png)
     
 
-To add OWASP Secure Headers to Middleware Services, follow these steps.
+### To add OWASP Secure Headers to Middleware Services, follow these steps.
 
 1.  Write a custom filter that adds the response headers to the response.
 2.  Add the following custom filter to preprocessor and postprocessor jar, and publish the app.{% highlight voltMx %}import java.io.IOException;
@@ -709,9 +710,9 @@ To add OWASP Secure Headers to Middleware Services, follow these steps.
     }
     {% endhighlight %}
 
-Setting the response header for Volt MX Foundry version V8 SP4 or later versions.
+### Setting the response header for Volt MX Foundry version V8 SP4 or later versions.
 
-To add the OWASP Secure Header to WebApp Static Files, follow these steps.
+### To add the OWASP Secure Header to WebApp Static Files, follow these steps.
 
 1.  Sign in to [VoltMX Foundry Console](https://manage.hclvoltmx.com/).
 2.  Select Environments from the left navigation pane.
@@ -737,7 +738,7 @@ To add the OWASP Secure Header to WebApp Static Files, follow these steps.
 ![](Resources/Images/OWASP_Header.png)
     
 
-To add OWASP Secure Headers to Middleware Service, follow these steps.
+### To add OWASP Secure Headers to Middleware Service, follow these steps.
 
 1.  Sign in to [VoltMX Foundry Console](https://manage.hclvoltmx.com/).
 2.  Select Environments from the left navigation pane.
@@ -780,7 +781,7 @@ To avoid storage of sensitive data in cache, applications must contain **caching
 *   **Cache-control**: no-store
 *   **Pragma**: no-cache
 
-To set the header for Volt MX Foundry version V8 SP3 or earlier versions, do the following:
+### To set the header for Volt MX Foundry version V8 SP3 or earlier versions, do the following:
 
 Use custom filters to add cache-control as a response-header
 
@@ -789,7 +790,7 @@ Use custom filters to add cache-control as a response-header
 
 The following code is an example for a custom filter.
 
-{% highlight voltMx %} **CacheHeaderResponseWrapper.java**  
+{% highlight voltMx %} CacheHeaderResponseWrapper.java
 package com.voltmx.custom.filters;
 
 import java.io.IOException;
@@ -869,7 +870,7 @@ public class CacheHeaderResponseWrapper extends KHttpServletResponseWrapper {
 
 }
 
- **`CacheHeaderFilter.java`**  
+CacheHeaderFilter.java
 package com.voltmx.custom.filters;
 
 import java.io.IOException;
@@ -915,9 +916,9 @@ public class CacheHeaderFilter implements Filter {
 
 For more information about how to implement a custom filter, refer to [Custom User Filter Guide](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083514).
 
-Setting the header for Volt MX Foundry version V8 SP4 Hotfix version or later versions.
+**Setting the header for Volt MX Foundry version V8 SP4 Hotfix version or later versions.**
 
-To add response headers to middleware services, follow these steps.
+**To add response headers to middleware services, follow these steps.**
 
 1.  Sign in to [VoltMX Foundry Console](https://manage.hclvoltmx.com/).
 2.  Select Environments from the left navigation pane.

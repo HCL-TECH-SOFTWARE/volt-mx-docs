@@ -11,7 +11,7 @@ Downloading Volt MX Cordova SDK Files
 
 To download Volt MX Cordova SDK, follow these steps:
 
-1.  In the Volt MX Foundry console, navigate to **Apps** > ****SDKs****, and click **Cordova (PhoneGap)**. The system prompts you to save the zip file in your local system.
+1.  In the Volt MX Foundry console, navigate to **Apps** > **SDKs**, and click Cordova (PhoneGap). The system prompts you to save the zip file in your local system.
     
     ![](../Resources/Images/OnPrem/sdks_593x152.png)
     
