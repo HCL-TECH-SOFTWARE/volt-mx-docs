@@ -428,15 +428,15 @@
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    
     frontend proxy_front
     
-    bind *:80
+    bind * : 80
     
-    bind *:443 ssl crt /root/hclnet.pem   
-    _# By default all requests(Integration/Identity) will be forwarded to the nodes' backend_
+    bind * : 443 ssl crt /root/hclnet.pem   
+    #By default all requests(Integration/Identity) will be forwarded to the nodes' backend
     
     Certificate provided for ssl termination
     
     redirect scheme https if !{ ssl_fc }  
-    _# Redirects to HTTPS if the user comes via HTTP_
+    #Redirects to HTTPS if the user comes via HTTP
     
     mode http 
     
@@ -447,7 +447,7 @@
     acl url_mfconsole path_beg /workspace
     
     use_backend console if url_mfconsole  
-    # Any request on any of the VoltMX Foundry Console Component contexts will be redirected to the backend of the console
+    #Any request on any of the VoltMX Foundry Console Component contexts will be redirected to the backend of the console
     
     default_backend nodes
     
@@ -456,7 +456,7 @@
     mode http
     
     option forwardfor  
-    \# Insert the X-Forwarded-For header. HAProxy will stamp this header with the IP of the source client_
+    #Insert the X-Forwarded-For header. HAProxy will stamp this header with the IP of the source client
     
     http-request set-header X-Forwarded-Port %[dst_port]
     
@@ -574,13 +574,13 @@
   <li><strong>Application Server Configuration</strong>: Configure JBoss 7.2</li>
   <li><strong>Database Setup</strong>: MySQL 5.7 is installed on a node with CentOS 6.</li>
 </ul>
-      <h4 id="integration-of-apachemod_cluster-with-jboss">
+      <h3 id="integration-of-apachemod_cluster-with-jboss">
         
         
           <a href="#integration-of-apachemod_cluster-with-jboss" class="anchor-heading" aria-labelledby="integration-of-apachemod_cluster-with-jboss"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Integration of Apache/Mod_Cluster with JBoss
         
         
-      </h4>
+      </h3>
     
 
 <p>A sample configuration of <strong>Apache 2.4 with mod_cluster</strong> module used with JBoss is shown below. Changes have to be made to the JBoss master node to integrate the mod_cluster load balancer.</p>
