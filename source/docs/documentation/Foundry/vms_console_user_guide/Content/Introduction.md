@@ -95,11 +95,34 @@ The workflow below describes different ways of sending push notifications by usi
 
 The table below details the differences between general messages and campaign messages.
 
-  
-| General Messages | Campaign messages |
-| --- | --- |
-| i> Can define subscribers or segments as message targets <br><br> ii> Provides the capabilities to configure start and expiry dates. | i>  Can associate messages to campaign, which in turn will use segments (you can use either old template message or add new message).<br><br>ii>  Provide the capabilities of templates and personalized attributes when authoring messages.<br><br> iii> Provides the capabilities of configuring additional settings such as campaign start/ end dates and campaign time zone. |
-|All the parameters set in the **General** tab (**Settings** \> **Configuration**\> **General** \> **Basic** section) are applicable across all types of messages. It can be a message, campaign or an event message.||
+<table>
+<tr>
+<th>General Messages</th>
+<th>Campaign messages</th>
+</tr>
+<tr>
+<td>
+<ul>
+<li>Can define subscribers or segments as message targets.</li>
+<li>Provides the capabilities to configure start and expiry dates.</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>Can associate messages to campaign, which in turn will use segments (you can use either old template message or add new message).</li>
+<li>Provide the capabilities of templates and personalized attributes when authoring messages.</li>
+<li>Provides the capabilities of configuring additional settings such as campaign start/ end dates and campaign time zone.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p>All the parameters set in the <b>General</b> tab <b>(Settings > Configuration> General > Basic</b> section) are applicable across all types of messages. It can be a message, campaign or an event message.</p>
+</td>
+<td>
+</td>
+</tr>
+</table>
 
 What are Push Notifications
 ---------------------------
