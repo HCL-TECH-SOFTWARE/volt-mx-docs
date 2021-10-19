@@ -98,7 +98,7 @@ The table below details the differences between general messages and campaign me
 <table>
 <tr>
 <th>General Messages</th>
-<th>Campaign messages</th>
+<th>Campaign Messages</th>
 </tr>
 <tr>
 <td>
