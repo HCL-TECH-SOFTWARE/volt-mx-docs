@@ -39,7 +39,7 @@ setActionSheet: function() {
         "title": "Open Basecamp",
         "style": constants.ACTION_STYLE_DEFAULT,
         "action": function() {
-            voltmx.application.openURL("https://basecamp.voltmx.com/s/");
+            voltmx.application.openURL("https://support.hcltechsw.com/community?id=community_forum&sys_id=1cdf6e1a1bf31898beab64e6ec4bcbae");
         }
     });
     //Adding action to the Action Sheet object    
