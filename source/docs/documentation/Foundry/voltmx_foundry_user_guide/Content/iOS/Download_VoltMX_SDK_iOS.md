@@ -4,6 +4,7 @@ category: "voltmx_foundry_user_guide"
 ---
                              
 
+
 User Guide: [SDKs](../Foundry_SDKs.html) > [iOS SDK](Installing.html) > Downloading Volt MX iOS SDK
 
 Downloading Volt MX iOS SDK Files
@@ -11,7 +12,7 @@ Downloading Volt MX iOS SDK Files
 
 To download Volt MX iOS SDK, follow these steps:
 
-1.  In Volt MX Foundry console, navigate to **Apps** > **SDKs**, and click **iOS**. The system prompts you to save the zip file in your local system.
+1.  In Volt MX Foundry console, navigate to **Apps** > **SDKs**, and click **iOS**. The system prompts you to save the zip file in your local system. 
     
     ![](../Resources/Images/iOS/SDK1_577x221.png)
     
