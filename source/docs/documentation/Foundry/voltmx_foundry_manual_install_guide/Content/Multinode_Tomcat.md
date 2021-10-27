@@ -11,7 +11,7 @@ In case of Tomcat multinode, configure the additional settings in each of the To
 
 To install Volt MX Foundry Console on Tomcat multinode, follow these steps:
 
-> **_Important:_**  Install Volt MX Foundry Console in different boxes pointing to same database before configuring the **VoltMX Foundry Get started!** page. For more details, refer to [Hot to Get started with Volt MX Foundry Console]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html).
+> **_Important:_**  Install Volt MX Foundry Console in different boxes pointing to same database before configuring the **VoltMX Foundry Get started!** page. For more details, refer to [How to Get started with Volt MX Foundry Console]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html).
 
 1.  Install standalone Volt MX Foundry on multiple nodes with Tomcat pointing to the same database.
 2.  In the `accounts.properties` file, configure the `WAAS_BASE_URL`  with the load balancer URL for all the nodes.
