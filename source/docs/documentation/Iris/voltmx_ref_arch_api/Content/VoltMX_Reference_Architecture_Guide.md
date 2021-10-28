@@ -8,7 +8,7 @@ category: "voltmx_ref_arch_api"
 
 Volt MX  Iris
 
-Reference Architecture API Programmers' Guide
+Reference Architecture API Programmers' Guide:
 
 Volt MX  Reference Architecture is an integrated set of development tools that enables you to build model-based apps and increase your code reuse. This architectural pattern lets designers, front-end app developers, and back-end service developers to work in parallel on the same app.
 
