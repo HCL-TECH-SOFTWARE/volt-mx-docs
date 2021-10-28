@@ -3,7 +3,6 @@ layout: "documentation"
 category: "voltmx_foundry_user_guide"
 ---
                              
-
 Configuring the Framework
 =========================
 
