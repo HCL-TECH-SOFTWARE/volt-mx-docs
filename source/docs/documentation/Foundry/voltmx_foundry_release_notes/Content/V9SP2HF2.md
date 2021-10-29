@@ -14,13 +14,11 @@ In this release, the following issues have been fixed.
 * Making the downloads URL environment-specific (dev, sit, qa, demo, prod, etc.).
 * Updated support page URLs, logo in Foundry console.
 * Prod workspace developer portal: ClientSDK download links working in On-Prem but not in cloud.
-* Change Temenos SDK names to HCLVoltFoundry SDK.
-* Changed Temenose URL https://manage.temenos-cloud.com to https://manage.hclvoltmx.com in mfcli.jar help text.
 * Developer portal: Making Iris download link environment-specific.
 * Cloud Build in Iris fails on Demo cloud.
 * Environment details page in Foundry mentions Temenos.
 * Orchestration more info hyperlink is not working in admin console.
-* Values are not populating in KMS Dashboard (Graphs and Charts).
+* Values are not populating in Engagement Server Dashboard (Graphs and Charts).
 * Fetch service is failing for a java service when the jar is compiled against Java 10/11.
 * Workflow context doesn't show values without scrolling to not visible regions.
 * FoundryContainer: Docker hub account is not updated for singlecontainer installation script due to issue in Jenkins build.
