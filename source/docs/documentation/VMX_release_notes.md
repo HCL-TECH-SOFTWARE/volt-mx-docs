@@ -15,6 +15,7 @@ Volt MX Iris
   
 | **Date** | **Document Version** | **Description of Modifications/Release** |
 | --- | --- | --- |
+| 10/29/2021 | 1.7 | Document updated for [V9 SP2 FP 5](Iris/iris_rel_notes/Content/V9SP2FP5.html) |
 | 10/13/2021 | 1.6 | Document updated for [V9 SP2 FP 4](Iris/iris_rel_notes/Content/V9SP2FP4.html) |
 | 08/18/2021 | 1.5 | Document updated for [V9.2](Iris/iris_rel_notes/Content/V92.html).
 | 12/21/2020 | 1.3 | Document updated for the V9 Service Pack 2 release with [New Features](Iris/iris_rel_notes/Content/V9SP2.html#new-features-and-enhancements-in-v9-service-pack-2) and [Known Issues](Iris/iris_rel_notes/Content/V9SP2_Known_Issues.html#top). |
@@ -27,6 +28,7 @@ Volt MX Foundry
 
 | **Date** | **Document Version** | **Description of Releases and Updates** |
 | --- | --- | --- |
+| 10/29/2021 | 3.3 | Document published for [VoltMX Foundry V9 SP2 HF2](Foundry/voltmx_foundry_release_notes/Content/V9SP2HF2.html). |
 | 08/18/2021 | 3.2 | Document published for [VoltMX Foundry V9.2](Foundry/voltmx_foundry_release_notes/Content/V92.html). |
 | 02/03/2021 | 3.1 | Document published for [VoltMX Foundry Fix Pack V9.2.1](Foundry/voltmx_foundry_release_notes/Content/V9.2.1_New_Features.html). |
 | 12/22/2020 | 3.0 | Document published for the following releases: <br/><br/>[Volt MX Foundry Identity Hotfix 9.1.0.3](Foundry/voltmx_foundry_release_notes/Content/IdentityHotFix9.1.0.3.html)<br><br>[VoltMX Foundry V9 Service Pack 2](Foundry/voltmx_foundry_release_notes/Content/V9SP2_Main.html) <br><br>[VoltMX Foundry V9.2.0.0 on Microsoft Azure](Foundry/voltmx_foundry_release_notes/Content/Azure9.2.0.0GA.html) |
