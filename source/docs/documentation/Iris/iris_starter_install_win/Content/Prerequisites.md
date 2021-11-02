@@ -67,9 +67,6 @@ The following sections explain how to download Volt MX Iris:
 
 ### Downloading a trial version
 
-Coming soon!
-
-<!--
 Before downloading the Iris trial version, you must create a Volt MX account. You can go to the Volt MX website and create a new account, or respond to an email invitation from an existing VoltMX user. To create your account, follow these steps:
 
 1. If you received an invitation email, click **Accept Invitation**. Otherwise, go to [https://manage.demo-hclvoltmx.com/registration](https://manage.demo-hclvoltmx.com/registration).  
@@ -81,17 +78,17 @@ Before downloading the Iris trial version, you must create a Volt MX account. Yo
 4. On the activation page, provide the required details and click **Activate My Account**.
     
 Your account is activated, and the Volt MX Foundry Console appears. The Iris installer should start downloading automatically. If not, or if you want to download the installer later, follow these steps:
-    
-**Note:** You must have administrative rights on your computer to install Volt MX Iris.
-    
-    1.  Go to [community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads).
-	
-    2.  Type your email address and password, and then click **Sign In**. The downloads page appears.
-	
-    3. Under **VoltMX Iris**, click the **Download** button for Installer\_Windows.
+        
+  1. Go to [community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads).
 
-    The installer is downloaded to your computer.
--->
+  2. Type your email address and password, and then click **Sign In**. The downloads page appears.
+
+3. Under **VoltMX Iris**, click the **Download** button for Installer\_Windows.
+
+  The installer is downloaded to your computer.
+
+**Note:** You must have administrative rights on your computer to install Volt MX Iris.
+
 
 ### Downloading a copy you have purchased
 
