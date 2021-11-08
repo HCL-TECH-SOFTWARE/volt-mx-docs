@@ -64,27 +64,35 @@ Download Volt MX Iris
 
 The following section explains the procedure to download Volt MX Iris:
 
-*   [Without a VoltMXAccount](#downloading-without-a-account)
-*   [With a VoltMXAccount](#downloading-with-a-account)
+*   [As a trial user](#downloading--a-trial-version)
+*   [As a customer](#downloading-with-a-account)
 
-### Downloading without a VoltMXaccount
+### Downloading a trial version
 
-1.  Go to [http://www.voltmx.com/products/iris](http://www.voltmx.com/products/iris).  
-    The Volt MX Iris page appears
-2.  Click **Free forever** or **Download for free**.
+Before downloading the Iris trial version, you must create a Volt MX account. You can go to the Volt MX website and create a new account, or respond to an email invitation from an existing Volt MX user. To create your account, follow these steps:
+
+1. If you received an invitation email, click **Accept Invitation**. Otherwise, go to [https://manage.demo-hclvoltmx.com/registration](https://manage.demo-hclvoltmx.com/registration).  
+
+2. On the **Registration** page, provide the required details and click **Start Free Trial**.
+
+3. When you receive your registration confirmation email, respond by clicking **Activate Account**.
+  
+4. On the activation page, name your new account and pick a cloud location. Provide the other required details and click **Activate My Account**.
     
-    [![](Resources/Images/voltmxiris_thumb_288_96.png)](Resources/Images/voltmxiris.png)
-    
-3.  Enter a valid email address, and click **Download now**.
-    
-    [![](Resources/Images/email_add_thumb_288_96.png)](Resources/Images/email_add.png)
-    
-    The Volt MX Iris download page appears
-    
-4.  Click **Download Volt MX Iris for Mac**.
-    
-    [![](Resources/Images/download_links_thumb_288_96.png)](Resources/Images/download_links.png)
-    
+Your account is activated. The Iris installer should start downloading automatically. If not, or if you want to download the installer later, follow these steps:
+        
+  1. Go to [community.demo-hclvoltmx.com/downloads](http://community.demo-hclvoltmx.com/downloads).
+
+  2. Type your email address and password, and then click **Sign In**. The downloads page appears.
+
+3. Under **HCL Volt Iris**, click **Installer\_Apple**.
+
+  The installer is downloaded to your computer.
+
+**Note:** You must have administrative rights on your computer to install Volt MX Iris.
+
+**Note:** When you activate your account, you receive an email with a link to the Foundry console. After you have installed Iris, visit [https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094403](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094403) for important information about configuring Iris and Foundry to work together.
+
 
 #### Setup VoltMXAccount
 
@@ -151,7 +159,7 @@ To create a Volt MX account after receiving an invitation, follow these steps:
     
     ### Downloading with a Volt MX Account
     
-    To download Volt MX Irison your Mac computer, follow these steps:
+    To download Volt MX Iris on your Mac computer, follow these steps:
     
     1.  Visit [community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads).
     2.  Type your Volt MX account login credentials, and click **Sign in**.
