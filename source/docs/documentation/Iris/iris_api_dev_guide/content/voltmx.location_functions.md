@@ -237,6 +237,7 @@ function getPosition() {
     var positionoptions = {
         timeout: 15000
     }; // 15 secs 
+    positionoptions.enableHighAccuracy = true;
     voltmx.location.getCurrentPosition(successcallback, errorcallback, positionoptions);
 }
 
@@ -368,15 +369,14 @@ In Android apps that use Target SDK version 29 (and later), and the **requireBac
 For Android Channel apps, the following permissions are required.
 
 - ACCESS_FINE_LOCATION
-
 - ACCESS_COARSE_LOCATION
 
-In Project settings -> Native -> Android Mobile/Tablet, make these two changes.
+In Project settings -> Native -> Android Mobile/Tablet, make these two changes:
 
 - Check "Use Google Play Location Services".
 - Add the permission tag under manifest tag <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
-For more details on these permissions, see https://developer.android.com/training/location/permissions.
+For more details on these permissions, see [https://developer.android.com/training/location/permissions](https://developer.android.com/training/location/permissions).
 
 If the end-user taps the **Allow** option, the attempt is successful, the successCallback is invoked (i.e. the handleEvent operation must be called on the callback object) with a new Position object, reflecting the current location of the device. If the attempt fails, the errorCallback is invoked with a new PositionError object, reflecting the reason for the failure. This is applicable only for Android and iOS platforms.
 
