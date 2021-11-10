@@ -36,7 +36,6 @@ Parameters
 
 Using the params parameter, the user can customize the behavior of the API. It is an object that has the following key-value pairs:
 
-  
 | key | Description |
 | --- | --- |
 | accuracyMode \[Number\] - Optional | Specifies the accuracy and power requirements to be met while fetching location updates. The default value for accuracyMode is constants.ACCURACY\_HIGH. The possible values for accuracyMode are: **constants.ACCURACY\_HIGH**: Used to request the most accurate locations available. **constants.ACCURACY\_NO\_POWER**: Used to request the best accuracy possible with no additional power consumption. **constants.ACCURACY\_BALANCED\_POWER**: Used to request "block" level accuracy. Block level accuracy is considered to be about 100 meter accuracy. Using a coarse accuracy such as this often consumes less power. **constants.ACCURACY\_LOW\_POWER**: Used to request "city" level accuracy. City level accuracy is considered to be about 10km accuracy. Using a coarse accuracy such as this often consumes less power. |
@@ -216,10 +215,16 @@ Using the positionoptions parameter, the user can customize the retrieval of the
   
 | key | Description |
 | --- | --- |
-| accuracyMode \[Number\] | Specifies the accuracy and power requirements to be met while fetching the device location. The default value for accuracyMode is constants.ACCURACY\_BALANCED\_POWER.
-> **_Note:_** This property is only available on the Android platform. Ensure that you set the value of the [enableHighAccuracy](#enableHighAccuracy) property to **false**.
+| accuracyMode \[Number\] | Specifies the accuracy and power requirements to be met while fetching the device location. The default value for accuracyMode is constants.ACCURACY\_BALANCED\_POWER. **_Note:_** This property is only available on the Android platform. Ensure that you set the value of the [enableHighAccuracy](#enableHighAccuracy) property to **false**.
 
 The possible values for accuracyMode are: **constants.ACCURACY\_HIGH**: Used to request the most accurate locations available. **constants.ACCURACY\_NO\_POWER**: Used to request the best accuracy possible with no additional power consumption. **constants.ACCURACY\_BALANCED\_POWER**: Used to request "block" level accuracy. Block level accuracy is considered to be about 100 meter accuracy. Using a coarse accuracy such as this often consumes less power. **constants.ACCURACY\_LOW\_POWER**: Used to request "city" level accuracy. City level accuracy is considered to be about 10km accuracy. Using a coarse accuracy such as this often consumes less power. > **_Important:_** Ensure that you enable the **Use Google Play Location Services** check box in the **Project Settings** > **Native** > **Android Mobile/Tablet** section. |
+| getActiveLocation | Set to `true` to get the current location fix on the device. When you use this property, active location computation is caused in the device. This property returns a single fresh location if the device location can be determined within a reasonable time period (tens of seconds). If the device location is not determined within a reasonable time period, the property returns a Null value.
+
+This property may return locations that are a few seconds old, but does not return much older locations. Therefore, this property is suitable for foreground apps that require a single fresh current location.
+
+If you invoke the API (with the getActiveLocation parameter set to true) when the app runs in the background, the API call is throttled under the background location limits. Therefore, the API call may often return Null locations (values) for apps that run in the background. 
+**_Important:_** Ensure that you enable the Use Google Play Location Services check box in the Project Settings > Native > Android Mobile/Tablet section.
+**_Note:_** This property is only available on the Android platform. |
 | enableHighAccuracy \[Boolean\] | Provides a hint to the implementation in order to receive the best possible result. |
 | maximumAge \[Number\] | Indicates the application to accept a cached position whose age is no greater than the specified time in milliseconds. |
 | minimumTime \[Number\] | Indicates the desired interval for active location updates in milliseconds. > **_Note:_** This property is only available on the Android platform. |
@@ -369,6 +374,19 @@ This API takes up to three arguments. When invoked, the API returns and asynchro
 
 In Android apps that use Target SDK version 29 (and later), and the **requireBackgroundAccess** property is enabled, you must manually add the `ACCESS_BACKGROUND_LOCATION` permission in the Android Manifest file to get location updates in the background.
 
+For Android Channel apps, the following permissions are required.
+
+- ACCESS_FINE_LOCATION
+
+- ACCESS_COARSE_LOCATION
+
+In Project settings -> Native -> Android Mobile/Tablet, make these two changes.
+
+- Check "Use Google Play Location Services".
+- Add the permission tag under manifest tag <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+For more details on these permissions, see https://developer.android.com/training/location/permissions.
+
 If the end-user taps the **Allow** option, the attempt is successful, the successCallback is invoked (i.e. the handleEvent operation must be called on the callback object) with a new Position object, reflecting the current location of the device. If the attempt fails, the errorCallback is invoked with a new PositionError object, reflecting the reason for the failure. This is applicable only for Android and iOS platforms.
 
 If the end-user taps the **Deny** option, the **errorcallback** is invoked with the **PERMISSON\_DENIED** error code and error message.
@@ -437,8 +455,7 @@ Using the positionoptions parameter, the user can customize the retrieval of the
 | key | Description |
 | --- | --- |
 | accuracyMode \[Number\] | Specifies the accuracy and power requirements to be met while fetching location updates. The default value for accuracyMode is constants.ACCURACY\_BALANCED\_POWER.
-> **_Note:_** This property is only available on the Android platform. Ensure that you set the value of the [enableHighAccuracy](#enableHighAccuracy1) property to **false**.
-
+**_Note:_** This property is only available on the Android platform. Ensure that you set the value of the [enableHighAccuracy](#enableHighAccuracy1) property to **false**.
 The possible values for accuracyMode are: **constants.ACCURACY\_HIGH**: Used to request the most accurate locations available. **constants.ACCURACY\_NO\_POWER**: Used to request the best accuracy possible with no additional power consumption. **constants.ACCURACY\_BALANCED\_POWER**: Used to request "block" level accuracy. Block level accuracy is considered to be about 100 meter accuracy. Using a coarse accuracy such as this often consumes less power. **constants.ACCURACY\_LOW\_POWER**: Used to request "city" level accuracy. City level accuracy is considered to be about 10km accuracy. Using a coarse accuracy such as this often consumes less power. > **_Important:_** Ensure that you enable the **Use Google Play Location Services** check box in the **Project Settings** > **Native** > **Android Mobile/Tablet** section. |
 | enableHighAccuracy \[Boolean\] | Provides a hint to the implementation in order to receive the best possible result. |
 | fastestInterval \[Number\] | Sets the fastest interval for location updates in milliseconds. The fastestInterval key controls the rate at which your application will receive location updates, which might be faster than minimumTime in some cases.This happens when other apps fetch location updates and the current app receives them passively to save power. > **_Note:_** This property is only available on the Android platform. The rate at which the app receives the fastest update will not be less than the value specified for the fastestInterval property. The value for the fastestInterval must be more than zero and less than the value of minimumTime (i.e, 0 < fastestInterval <= minimumTime). If you do not set the value for fastestInterval, the value of minimumTime is set, by default. > **_Note:_** Ensure that you have enabled the **Use Google Play Location Services** checkbox in the **Project Settings** > **Native** > **Android** section of VoltMX Iris. |
