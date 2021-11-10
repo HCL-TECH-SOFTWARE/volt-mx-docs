@@ -215,8 +215,9 @@ Using the positionoptions parameter, the user can customize the retrieval of the
   
 | key | Description |
 | --- | --- |
-| accuracyMode \[Number\] | Specifies the accuracy and power requirements to be met while fetching the device location. The default value for accuracyMode is constants.ACCURACY\_BALANCED\_POWER. **_Note:_** This property is only available on the Android platform. Ensure that you set the value of the [enableHighAccuracy](#enableHighAccuracy) property to **false**.
+| accuracyMode \[Number\] | Specifies the accuracy and power requirements to be met while fetching the device location. The default value for accuracyMode is constants.ACCURACY\_BALANCED\_POWER. 
 
+**_Note:_** This property is only available on the Android platform. Ensure that you set the value of the [enableHighAccuracy](#enableHighAccuracy) property to **false**. |
 The possible values for accuracyMode are: **constants.ACCURACY\_HIGH**: Used to request the most accurate locations available. **constants.ACCURACY\_NO\_POWER**: Used to request the best accuracy possible with no additional power consumption. **constants.ACCURACY\_BALANCED\_POWER**: Used to request "block" level accuracy. Block level accuracy is considered to be about 100 meter accuracy. Using a coarse accuracy such as this often consumes less power. **constants.ACCURACY\_LOW\_POWER**: Used to request "city" level accuracy. City level accuracy is considered to be about 10km accuracy. Using a coarse accuracy such as this often consumes less power. > **_Important:_** Ensure that you enable the **Use Google Play Location Services** check box in the **Project Settings** > **Native** > **Android Mobile/Tablet** section. |
 | getActiveLocation | Set to `true` to get the current location fix on the device. When you use this property, active location computation is caused in the device. This property returns a single fresh location if the device location can be determined within a reasonable time period (tens of seconds). If the device location is not determined within a reasonable time period, the property returns a Null value.
 
