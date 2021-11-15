@@ -428,7 +428,7 @@ jtd.getTheme = function() {
 
 jtd.setTheme = function(theme) {
   var cssFile = document.querySelector('[rel="stylesheet"]');
-  cssFile.setAttribute('href', 'https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/assets/css/just-the-docs-' + theme + '.css');
+  cssFile.setAttribute('href', 'http://localhost:4000/pages/phoenix-temenos/volt-mx-doc-opnsrc/assets/css/just-the-docs-' + theme + '.css');
 }
 
 // Document ready
