@@ -64,7 +64,7 @@ Note: For detailed information about fixes and known issues in 	Volt MX, see the
 #### Foundry Enhancements
 
 Identity
-- Added support for Login Failure Tracking in the Custom Identity Service. This is an optional setting that can be used to add preventive measures and provide additional security against malicious traffic. For more information, refer to Quantum Custom Identity Service.
+- Added support for Login Failure Tracking in the Custom Identity Service. This is an optional setting that can be used to add preventive measures and provide additional security against malicious traffic. For more information, refer to Volt MX Custom Identity Service.
 
 Installer
 - Support for CORS has been added to the apps.war file.
