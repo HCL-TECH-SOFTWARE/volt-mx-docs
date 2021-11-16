@@ -71,7 +71,6 @@ Installer
 - Enabled UTF-8 support for Foundry Object Services.
 - Removed the dependency of the MobileFabricException class from the transaction API.
 - Added support for Oracle CLOB and NCLOB data types.
-- Support for the WebLogic 14c Application Server has been added to the HCL Foundry Installer.
 
 Integration Services
 - Support to remove the environment name from pre-signed URL generation has been added to cloud fsa.
