@@ -37,10 +37,12 @@ Configure Volt MX Foundry Engagement Services to send 2-way SMS to an applicatio
 
 ### [Demo Application](Foundry/vms_demo_app_quick_start_guide/Content/Introduction.html)
 Develop an Android app with Volt MX Foundry Engagement Services.
+
 <!--
 ### [Build a Sample Android App](Foundry/vmf_msg_quick_start_guide_build_sample_app_android/Content/Introduction.html)
 Configure, build and run a Volt MX Foundry Engagement Services demo application on an Android device using Volt MX Iris.
 -->
+
 ### [Build a Sample iOS App](Foundry/vmf_msg_quick_start_guide_build_sample_app_apple_ios/Content/Introduction.html)
 Configure, build and run a Volt MX Foundry Engagement Services demo application on an iOS device using Volt MX Iris.
 
