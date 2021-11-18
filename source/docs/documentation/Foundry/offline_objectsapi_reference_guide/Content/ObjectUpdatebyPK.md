@@ -17,7 +17,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObj>.updateByPK(record, options, successCallback, failureCallback)
+{% highlight voltMx %}<VMXObj>.updateByPK(record, options, successCallback, failureCallback)
 
 {% endhighlight %}
 
@@ -52,7 +52,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}var category = new voltmx.sdk.HCLObj("CATEGORY");
+{% highlight voltMx %}var category = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var record = {};
 var primaryKeys = {};
@@ -73,21 +73,21 @@ category.updateByPK(record, options, successCallback, errorCallback)
 var options = {
     "trackIntermediateUpdates": false
 };
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");
-HCLObject.updateByPK(record, options, onSuccessCallback, onFailureCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.updateByPK(record, options, onSuccessCallback, onFailureCallback);
 
 //Disable change tracking - trackChanges
 var options = {
     "trackChanges": false
 };
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");
-HCLObject.updateByPK(record, options, onSuccessCallback, onFailureCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.updateByPK(record, options, onSuccessCallback, onFailureCallback);
 
 //Mark for Upload
 var options = {
     "markForUpload": false
 };
-HCLObject.updateByPK(record, options, onSuccessCallback, onFailureCallback);
+VMXObject.updateByPK(record, options, onSuccessCallback, onFailureCallback);
 {% endhighlight %}
 
 Android (Java)
@@ -95,7 +95,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj>.updateByPK(HashMap<String, Object> record,
+{% highlight voltMx %}void <VMXObj>.updateByPK(HashMap<String, Object> record,
                       HashMap<String, Object> options,
                 final HCLCallback callback) throws Exception 
 
@@ -115,7 +115,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}HCLObj category = new HCLObj("CATEGORY");
+{% highlight voltMx %}VMXObj category = new VMXObj("CATEGORY");
 
 //Update record with a primary key
 HashMap < String, Object > record = new HashMap < String, Object > ();
@@ -207,7 +207,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj>.updateByPK:(NSDictionary<NSString *, id> *)record
+{% highlight voltMx %}void <VMXObj>.updateByPK:(NSDictionary<NSString *, id> *)record
              options:(NSDictionary <NSString *, id> *)options
            onSuccess:(HCLSuccessCompletionHandler)onSuccess
            onFailure:(HCLFailureCompletionHandler)onFailure 
@@ -229,8 +229,8 @@ void
 ### Examples
 
 {% highlight voltMx %}//Example 1: Update record with a primary key 
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & ;error
 ];
 NSMutableDictionary * recordToUpdate = [NSMutableDictionary new];
@@ -253,8 +253,8 @@ options[@"primaryKeys"] = primaryKeys;
 NS
 
 //Update record with composite primary key
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & ;error
 ];
 NSMutableDictionary * recordToUpdate = [NSMutableDictionary new];

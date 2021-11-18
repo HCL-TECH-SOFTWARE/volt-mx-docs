@@ -43,7 +43,7 @@ function onFailure(error) {
 }
 
 //Sample to delete a record using PK
-var categories = new voltmx.sdk.HCLObj("CATEGORY");
+var categories = new voltmx.sdk.VMXObj("CATEGORY");
 var primaryKeys = {};
 primaryKeys["CATEGORY_ID"] = "1234";
 var options = {};
@@ -53,7 +53,7 @@ categories.deleteByPK(options, onSuccess, onFailure);
 
 
 //Sample to delete a record using composite primary key
-var categories = new voltmx.sdk.HCLObj("CATEGORY");
+var categories = new voltmx.sdk.VMXObj("CATEGORY");
 var primaryKeys = {};
 primaryKeys["CATEGORY_KEY1"] = "1234";
 primaryKeys["CATEGORY_KEY2"] = "23";
@@ -65,14 +65,14 @@ categories.deleteByPK(options, onSuccess, onFailure);
 var options = {
     "trackChanges": false
 };
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");
-HCLObject.deleteByPK(options, onSuccess, onFailure);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.deleteByPK(options, onSuccess, onFailure);
 
 //Mark for Upload
 var options = {
     "markForUpload": false
 };
-HCLObject.deleteByPK(options, onSuccess, onFailure);  
+VMXObject.deleteByPK(options, onSuccess, onFailure);  
 
 {% endhighlight %}
 
@@ -98,7 +98,7 @@ void
 
 ### Examples
 
-{% highlight voltMx %}HCLObj category = new HCLObj("CATEGORY");
+{% highlight voltMx %}VMXObj category = new VMXObj("CATEGORY");
 HashMap < String, Object > options = new HashMap < > ();
 HashMap < String, Object > primaryKeys = new HashMap < > ();
 primaryKeys.put("CATEGORY_ID", "123");
@@ -168,8 +168,8 @@ void
 ### Example
 
 {% highlight voltMx %}NSError * error;
-HCLObj * _categoryObject = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categoryObject = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & ;error
 ];
 

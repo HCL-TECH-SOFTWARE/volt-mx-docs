@@ -18,7 +18,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObjSvc>.rollback(successCallback, failureCallback)
+{% highlight voltMx %}<VMXObjSvc>.rollback(successCallback, failureCallback)
 {% endhighlight %}
 
 ### Parameters
@@ -31,7 +31,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}var orgObjectService = new voltmx.sdk.HCLObjSvc("Organization");
+{% highlight voltMx %}var orgObjectService = new voltmx.sdk.VMXObjSvc("Organization");
 
 function successCallback(result) {
     //result contains boolean true
@@ -52,7 +52,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObjSvc>.rollback(final HCLCallback callback)
+{% highlight voltMx %}void <VMXObjSvc>.rollback(final HCLCallback callback)
 {% endhighlight %}
 
 ### Parameters
@@ -65,7 +65,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}HCLObjSvc orgObjectService = new HCLObjSvc("Organization");
+{% highlight voltMx %}VMXObjSvc orgObjectService = new VMXObjSvc("Organization");
 
 try {
     orgObjectService.rollback(new HCLCallback() {
@@ -91,7 +91,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObjSvc>   
+{% highlight voltMx %}void <VMXObjSvc>   
 rollback:(HCLSuccessCompletionHandler)onSuccess       
 onFailure:(HCLFailureCompletionHandler)onFailure
 {% endhighlight %}
@@ -106,8 +106,8 @@ void
 
 ### Example
 
-{% highlight voltMx %}HCLObjSvc * orgObjectService = [
-    [HCLObjSvc alloc] initWithName: @"Organization"
+{% highlight voltMx %}VMXObjSvc * orgObjectService = [
+    [VMXObjSvc alloc] initWithName: @"Organization"
     error: & ;error
 ];
 

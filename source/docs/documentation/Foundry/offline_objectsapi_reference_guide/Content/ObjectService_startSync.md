@@ -18,7 +18,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLObjSvc.startSync(syncOptions, successCallback, failureCallback, progressCallback)
+{% highlight voltMx %}VMXObjSvc.startSync(syncOptions, successCallback, failureCallback, progressCallback)
 {% endhighlight %}
 
 ### Parameters
@@ -86,7 +86,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObjSvc>.startSync(final HashMap<String, Object> syncOptions, final HCLCallback syncCallback, final HCLProgressCallback progressCallback) throws Exception
+{% highlight voltMx %}void <VMXObjSvc>.startSync(final HashMap<String, Object> syncOptions, final HCLCallback syncCallback, final HCLProgressCallback progressCallback) throws Exception
 
 {% endhighlight %}
 
@@ -105,9 +105,9 @@ void
 ### Example
 
 {% highlight voltMx %}try {
-    //Create an instance of HCLObjSvc 
-    KHCLObjSvc syncObject = new
-    HCLObjSvc("Organization");
+    //Create an instance of VMXObjSvc 
+    KVMXObjSvc syncObject = new
+    VMXObjSvc("Organization");
 
     HashMap < String, Object > syncOptions = new HashMap < String, Object > ();
 
@@ -166,7 +166,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObjSvc> startSync:(NSDictionary <NSString *, id> *)syncOptions
+{% highlight voltMx %}void <VMXObjSvc> startSync:(NSDictionary <NSString *, id> *)syncOptions
       onSuccess:(HCLSuccessCompletionHandler)onSuccess
       onFailure:(HCLFailureCompletionHandler)onFailure
       onProgress:(HCLProgressCompletionHandler)onProgress;
@@ -189,8 +189,8 @@ void
 
 > {% highlight voltMx %}NSError * error;
 > 
-> HCLObjSvc * syncObject = [
->     [HCLObjSvc alloc] initWithName: @"Organization"
+> VMXObjSvc * syncObject = [
+>     [VMXObjSvc alloc] initWithName: @"Organization"
 >     error: & error
 > ];
 > 
