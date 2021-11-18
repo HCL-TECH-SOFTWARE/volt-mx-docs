@@ -18,7 +18,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLObjSvc.cancelSync(Options, onSuccess, onFailure)
+{% highlight voltMx %}VMXObjSvc.cancelSync(Options, onSuccess, onFailure)
 {% endhighlight %}
 
 ### Parameters
@@ -36,7 +36,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}var syncObjectSvc = new voltmx.sdk.HCLObjSvc("Organization");
+{% highlight voltMx %}var syncObjectSvc = new voltmx.sdk.VMXObjSvc("Organization");
 
 // define Sync options
 var syncOptions = {};
@@ -88,7 +88,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}HCLObjSvc syncObjectSvc = new HCLObjSvc("Organization");
+{% highlight voltMx %}VMXObjSvc syncObjectSvc = new VMXObjSvc("Organization");
 
 // Define Sync options
 HashMap < String, Object > syncOptions = new HashMap < String, Object > ();
@@ -156,8 +156,8 @@ void
 ### Example
 
 {% highlight voltMx %}NSError * error;
-HCLObjSvc * syncObjectSvc = [
-    [HCLObjSvc alloc] initWithName: @"Organization"
+VMXObjSvc * syncObjectSvc = [
+    [VMXObjSvc alloc] initWithName: @"Organization"
     error: & error
 ];
 

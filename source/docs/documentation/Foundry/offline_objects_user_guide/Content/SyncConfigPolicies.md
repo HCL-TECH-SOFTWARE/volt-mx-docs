@@ -30,7 +30,7 @@ Sample Code
    //Update Progressbar.
 }try {
 	//Create an offline object which needs to be synced.
-    var syncObject = = new voltmx.sdk.HCLObj("Employee");
+    var syncObject = = new voltmx.sdk.VMXObj("Employee");
 
     //Set syncType to perform a sync session.
     var syncOptions = {"syncType" : "uploadOnly"};

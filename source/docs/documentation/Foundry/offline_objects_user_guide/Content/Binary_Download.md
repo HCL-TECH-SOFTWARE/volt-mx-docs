@@ -21,7 +21,7 @@ Sample Codes
 
 {% highlight voltMx %}//Sample code for getBinaryStatus  
   
-var mediaObject = new voltmx.sdk.HCLObj("Media");
+var mediaObject = new voltmx.sdk.VMXObj("Media");
 var options = {
     "download": {
         "columnName": "image",
@@ -46,7 +46,7 @@ function onFailure(error) {
 }
 {% endhighlight %}{% highlight voltMx %}//Sample code for getBinary  
   
-var media = new voltmx.sdk.HCLObj("media");
+var media = new voltmx.sdk.VMXObj("media");
 var options = {};
 options.primaryKeys = {
     "id": "2"

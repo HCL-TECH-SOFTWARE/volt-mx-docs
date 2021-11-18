@@ -13,7 +13,7 @@ For example, you can choose to delete certain records that are not needed from t
 Sample Code
 
 {% highlight voltMx %}//------- delete all records -------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 
 function successCallback(response) {
     //response holds value true
@@ -25,7 +25,7 @@ function errorCallback(error) {
 category.delete(null, successCallback, errorCallback);
 
 //--------delete a record using composite primary key --------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var primaryKeys = {};
 primaryKeys["CATEGORY_KEY1"] = "1234";
@@ -42,7 +42,7 @@ function errorCallback(error) {
 category.delete(options, successCallback, errorCallback);
 
 //------- delete by whereCondition-------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var whereClause = {};
 whereClause["Category_PN"] = 7;
 var options = {};
@@ -58,7 +58,7 @@ function errorCallback(error) {
 category.delete(options, successCallback, errorCallback);
 
 //------- delete by whereConditionAsAString -------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var whereClause = "Category_PN = '7'";
 options["whereConditionAsAString"] = whereClause;
@@ -76,13 +76,13 @@ category.delete(options, successCallback, errorCallback);
 var options = {
     "trackChanges": false
 };
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");
-HCLObject.delete(options, successCallback, failureCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.delete(options, successCallback, failureCallback);
 
 //------- delete using markForUpload flag --------- 
 var options = {
     "markForUpload": false
 };
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");
-HCLObject.delete(options, successCallback, failureCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.delete(options, successCallback, failureCallback);
 {% endhighlight %}
