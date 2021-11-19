@@ -18,7 +18,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObj>.update(record, options, successCallback, failureCallback)
+{% highlight voltMx %}<VMXObj>.update(record, options, successCallback, failureCallback)
 
 {% endhighlight %}
 
@@ -45,7 +45,7 @@ void
 ### Example
 
 {% highlight voltMx %}**//------- update all records -------**
-var category = new voltmx.sdk.HCLObj("CATEGORY"); 
+var category = new voltmx.sdk.VMXObj("CATEGORY"); 
 var record = {}; 
 record["CATEGORY_DES"] = "Update existing record";   
 function successCallback(response) 
@@ -59,7 +59,7 @@ function errorCallback(error)
 category.update(record, null, successCallback, errorCallback);  
   
 **//--------update a record using primary key--------**
-var category = new voltmx.sdk.HCLObj("CATEGORY"); 
+var category = new voltmx.sdk.VMXObj("CATEGORY"); 
 var options = {}; 
 var record = {}; 
 var primaryKeys = {}; 
@@ -77,7 +77,7 @@ function errorCallback(error)
 category.update(record, options, successCallback, errorCallback);  
   
 **//------- update by whereCondition-------**
-var category = new voltmx.sdk.HCLObj("CATEGORY"); 
+var category = new voltmx.sdk.VMXObj("CATEGORY"); 
 var options = {}; 
 var record = {}; 
 var whereClause = {};
@@ -95,7 +95,7 @@ function errorCallback(error)
 category.update(record, options, successCallback, errorCallback);  
   
 **//------- update by whereConditionAsAString -------**
-var category = new voltmx.sdk.HCLObj("CATEGORY"); 
+var category = new voltmx.sdk.VMXObj("CATEGORY"); 
 var options = {}; 
 var record = {}; 
 var whereClause = "Category_PN = '7'";
@@ -113,18 +113,18 @@ category.update(record, options, successCallback, errorCallback);
   
 **//------- update using Disable change tracking flag - trackIntermediateUpdates ---------**
 var options = {"trackIntermediateUpdates": false};
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");   
-HCLObject.update(record, options, successCallback, errorCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");   
+VMXObject.update(record, options, successCallback, errorCallback);
   
 **//------- update using Disable change tracking flag – trackChanges ---------**
 var options={"trackChanges": false};   
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");   
-HCLObject.update(record, options, successCallback, errorCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");   
+VMXObject.update(record, options, successCallback, errorCallback);
   
 **//------- update using markForUpload flag ---------** 
 var options={"markForUpload": false};   
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");  
-HCLObject.update(record, options, successCallback, errorCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");  
+VMXObject.update(record, options, successCallback, errorCallback);
 
 {% endhighlight %}
 
@@ -133,7 +133,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj>.update(HashMap<String, Object> record,
+{% highlight voltMx %}void <VMXObj>.update(HashMap<String, Object> record,
                       HashMap<String, Object> options,
                 final HCLCallback callback) throws Exception 
 
@@ -154,7 +154,7 @@ void
 ### Example
 
 {% highlight voltMx %}//Update record with a primary key 
-HCLObj category = new HCLObj("CATEGORY"); 
+VMXObj category = new VMXObj("CATEGORY"); 
 HashMap<String, Object> record = new HashMap<String, Object>(); 
 record.put("CATEGORY_PN", "7"); 
 record.put("CATEGORY_DES", "new updated description");
@@ -214,7 +214,7 @@ catch (Exception e)
 }
 
 //Update record using whereCondition 
-HCLObj category = new HCLObj("CATEGORY"); 
+VMXObj category = new VMXObj("CATEGORY"); 
 HashMap<String, Object> record = new HashMap<String, Object>(); 
 record.put("CATEGORY_PN", "7"); 
 record.put("CATEGORY_DES", "new updated description");
@@ -244,7 +244,7 @@ catch(Exception e)
 }
 
 //Update record using whereConditionAsAString 
-HCLObj category = new HCLObj("CATEGORY"); 
+VMXObj category = new VMXObj("CATEGORY"); 
 HashMap<String, Object> record = new HashMap<String, Object>(); 
 record.put("CATEGORY_PN", "7"); 
 record.put("CATEGORY_DES", "new updated description");
@@ -312,7 +312,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj>.update:(NSDictionary<NSString *, id> *)record
+{% highlight voltMx %}void <VMXObj>.update:(NSDictionary<NSString *, id> *)record
              options:(NSDictionary<NSString *, id> *)options
            onSuccess:(HCLSuccessCompletionHandler)onSuccess
            onFailure:(HCLFailureCompletionHandler)onFailure 
@@ -334,7 +334,7 @@ void
 ### Examples
 
 {% highlight voltMx %}**// Update record with a primary key** 
-HCLObj *_categories = [[HCLObj alloc] initWithName:@"CATEGORY" error:&error];
+VMXObj *_categories = [[VMXObj alloc] initWithName:@"CATEGORY" error:&error];
 NSMutableDictionary *recordToUpdate = [NSMutableDictionary new];   
 recordToUpdate[@"CATEGORY_DES"] = @"updated description"; 
 recordToUpdate[@"CATEGORY_PN"] = @"3";
@@ -357,7 +357,7 @@ NSLog(@"Update record failed with error %@",
 ];
   
 **// Update record with composite primary key** 
-HCLObj *_categories = [[HCLObj alloc] initWithName:@"CATEGORY" error:&error];   
+VMXObj *_categories = [[VMXObj alloc] initWithName:@"CATEGORY" error:&error];   
 NSMutableDictionary *recordToUpdate = [NSMutableDictionary new];   
 recordToUpdate[@"CATEGORY_DES"] = @"updated description"; 
 recordToUpdate[@"CATEGORY_PN"] = @"3"; 
@@ -381,7 +381,7 @@ NSLog(@"Update record failed with error %@",
 ];  
   
 **// Update record using whereCondition**
-HCLObj *_categories = [[HCLObj alloc] initWithName:@"CATEGORY" error:&error];
+VMXObj *_categories = [[VMXObj alloc] initWithName:@"CATEGORY" error:&error];
 NSMutableDictionary *recordToUpdate = [NSMutableDictionary new];   
 recordToUpdate[@"CATEGORY_DES"] = @"updated description"; 
 recordToUpdate[@"CATEGORY_PN"] = @"3";
@@ -404,7 +404,7 @@ NSLog(@"Update record failed with error %@",
 ];
   
 **// Update record using whereConditionAsAString**
-HCLObj *_categories = [[HCLObj alloc] initWithName:@"CATEGORY" error:&error];
+VMXObj *_categories = [[VMXObj alloc] initWithName:@"CATEGORY" error:&error];
 NSMutableDictionary *recordToUpdate = [NSMutableDictionary new];   
 recordToUpdate[@"CATEGORY_DES"] = @"updated description"; 
 recordToUpdate[@"CATEGORY_PN"] = @"3";

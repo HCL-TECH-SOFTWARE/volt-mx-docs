@@ -89,8 +89,8 @@ Alphabetical Listing of All Constants
 | constants.TOAST\_POS\_TOP\_LEFT | [Toast Position Constants](#ToastPosition) |
 | constants.TOAST\_POS\_TOP\_RIGHT | [Toast Position Constants](#ToastPosition) |
 
-Constants by Functional Area
-----------------------------
+
+<h2 id="constants-by-functional-area">Constants by Functional Area</h2>
 
 The `constants` namespace provides groups of constants that are used by the rest of the Volt MX Iris API framework. The following constants are available, grouped by functional area.
 

@@ -9,7 +9,23 @@ User Guide: Tutorials
 Tutorials
 =========
 
-Through the following tutorial, you can review the steps of setting up Volt MX Foundry, configure a Salesforce account, configure Volt MX Foundry for your application, and build applications using Volt MX Foundry.
+Through the following tutorial, you can review the steps of setting up Volt MX Foundry, configuring Volt MX Foundry for your application, and building applications using Volt MX Foundry.
 
-*   [VoltMX Foundry How To Tutorial]({{ site.baseurl }}/docs/documentation/tutorials/Mobilefoundry/Default.html)
-*   [VoltMX Foundry How To Tutorial]({{ site.baseurl }}/docs/documentation/tutorials/Mobilefoundry/Default.html)
+*   [VoltMX Foundry How To Tutorial]({{ site.baseurl }}/docs/tutorials/voltmxFoundryOverview.html)  
+ 
+
+<hr style="margin-top:400px;">
+<h3>Related Links</h3>
+<ul>
+<li>
+<a href="../../../../Iris/iris_user_guide/Content/Sfdc_service.html">Configure a Salesforce Service</a>
+</li>
+</ul>
+
+
+
+
+
+
+
+

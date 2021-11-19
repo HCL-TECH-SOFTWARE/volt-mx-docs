@@ -55,6 +55,7 @@ The **Subscribers** option has the details of users and devices that are associa
 
 ![](Resources/Images/subscribers_630x263.png)
 
+
 #### Users
 
 The **Users** option displays the details of all the users that are added in the Engagement Server. You can see user information along with the devices that are associated with the user on the screen. This screen allows you to add a new user to the Engagement Server or import users from an external file.

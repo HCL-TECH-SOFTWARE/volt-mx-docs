@@ -3,7 +3,6 @@ layout: "documentation"
 category: "voltmx_foundry_user_guide"
 ---
                              
-
 Configuring the Framework
 =========================
 
@@ -107,7 +106,7 @@ To configure binaries, follow these steps:
         
         > **_Note:_** This step should be the final step under the Build Phase.  
           
-        ![](../Resources/Images/iOS/script_497x653.png)  
+        >![](../Resources/Images/iOS/script_497x653.png)  
         
 8.  Add dependent libraries to your project, shown below:
     

@@ -15,7 +15,7 @@ Volt MX  Iris (JavaScrpit)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObj>.get(options, successCallback, failureCallback)
+{% highlight voltMx %}<VMXObj>.get(options, successCallback, failureCallback)
 
 {% endhighlight %}
 
@@ -41,7 +41,7 @@ function onGetAllSuccess(records) {
 function onGetAllFail(error) {
     voltmx.print("unable to retrieve records from db" + error.code)
 }
-var categories = new voltmx.sdk.HCLObj("CATEGORY");
+var categories = new voltmx.sdk.VMXObj("CATEGORY");
 //all records of object CATEGORY are returned as an argument to success callback.
 categories.get(null, onGetAllSuccess, onGetAllFail)
 
@@ -54,7 +54,7 @@ function onGetAllSuccess(records) {
 function onGetAllFail(error) {
     voltmx.print("unable to retrieve records from db" + error.code)
 }
-var categories = new voltmx.sdk.HCLObj("CATEGORY");
+var categories = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var orderByMap = [];
 orderByMap.push({
@@ -79,7 +79,7 @@ function onGetAllFail(error) {
     voltmx.print("unable to retrieve records from db" + error.code)
 }
 
-var categories = new voltmx.sdk.HCLObj("CATEGORY");
+var categories = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 //Primary keys or a where clause can be used
 var primaryKeys["CategoryID"] = "2233";
@@ -98,7 +98,7 @@ function onGetAllSuccess(records) {
 function onGetAllFail(error) {
     voltmx.print("unable to retrieve records from db" + error.code)
 }
-var categories = new voltmx.sdk.HCLObj("CATEGORY");
+var categories = new voltmx.sdk.VMXObj("CATEGORY");
 var whereClause = "Category_PN = '7'";
 
 var options = {};
@@ -118,7 +118,7 @@ Function onGetFailure(error) {
     VoltMX.print("unable to retrieve records from database" + error.code);
 }
 
-var categories = new voltmx.sdk.HCLObj("CATEGORY");
+var categories = new voltmx.sdk.VMXObj("CATEGORY");
 
 var options = {};
 var projectionColumnsList = [];
@@ -141,7 +141,7 @@ Function onGetFailure(error) {
     VoltMX.print("unable to retrieve records from database" + error.code);
 }
 
-var categories = new voltmx.sdk.HCLObj("CATEGORY");
+var categories = new voltmx.sdk.VMXObj("CATEGORY");
 
 var options = {};
 options["distinct"] = true;
@@ -158,7 +158,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj>.get(HashMap<String, Object> options, final HCLCallback callback) throws Exception
+{% highlight voltMx %}void <VMXObj>.get(HashMap<String, Object> options, final HCLCallback callback) throws Exception
 
 {% endhighlight %}
 
@@ -176,7 +176,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}HCLObj category = new HCLObj("CATEGORY");    
+{% highlight voltMx %}VMXObj category = new VMXObj("CATEGORY");    
  
  
  //----- Example : Get all  --------
@@ -301,7 +301,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj> get:(NSDictionary <NSString *, id> *)options
+{% highlight voltMx %}void <VMXObj> get:(NSDictionary <NSString *, id> *)options
                onSuccess:(HCLSuccessCompletionHandler)onSuccess
                onFailure:(HCLFailureCompletionHandler)onFailure
 
@@ -326,8 +326,8 @@ void
   //----- Example : Get all  --------
 
 NSError * error;
-HCLObj * _categoryObject = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categoryObject = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 //Success handler
@@ -347,8 +347,8 @@ HCLFailureCompletionHandler onError = ^ (id error) {
 //------- Example : getall with orderBy clause --------
 
 NSError * error;
-HCLObj * _categoryObject = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categoryObject = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSArray * orderByClause = @ [@{
@@ -374,8 +374,8 @@ HCLFailureCompletionHandler onError = ^ (id error) {
 //------ Example : get by PK  --------
 
 NSError * error;
-HCLObj * _categoryObject = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categoryObject = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSDictionary * primaryKeys = @ {@
@@ -400,8 +400,8 @@ HCLFailureCompletionHandler onError = ^ (id error) {
 //---- Example : get by where clause --------
 
 NSError * error;
-HCLObj * _categoryObject = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categoryObject = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSString * whereClause = "CATEGORY_ID = '2233'";
@@ -424,8 +424,8 @@ HCLFailureCompletionHandler onError = ^ (id error) {
 //------ Example: get for distinct -------
 
 NSError * error;
-HCLObj * _categoryObject = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categoryObject = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSMutableDictionary * options = [

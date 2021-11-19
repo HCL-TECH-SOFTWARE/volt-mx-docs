@@ -61,4 +61,4 @@ To create a database for **Workspace Services**, follow these steps:
     
     set `flyway.validateOnMigrate=false`
     
-    Click here to view the [Workspace schema diagram](http://docs.voltmx.com/8_x_PDFs/MFSchema_Diagrams/workspace.png)
+    Click here to view the [Workspace schema diagram](Resources/Images/workspace.png)

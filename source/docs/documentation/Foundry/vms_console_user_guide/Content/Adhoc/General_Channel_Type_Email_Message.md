@@ -50,40 +50,54 @@ To add an email message, follow these steps:
     The Users list view includes the Name, Email and Mobile columns. There is a search field to search users.
     
     *   **Search** field: Click in the search field to view available options to search for a user. You can search users based on the following search criteria:
-        *   **Name**: Enter the name in the search field and click **Enter**.
+
+    *   **Name**: Enter the name in the search field and click **Enter**.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchname.png)
+    ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchname.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+    The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Email_Message/emailnamesearfchresult_505x103.png)
+    ![](../Resources/Images/Engagement/Adhoc/Email_Message/emailnamesearfchresult_505x103.png)
+
             
-        *   **Email**: Enter the email ID in the search field and click **Enter**.
+    *   **Email**: Enter the email ID in the search field and click **Enter**.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchemail.png)
+    ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchemail.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+    The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Email_Message/emailsearchresult_499x102.png)
+    ![](../Resources/Images/Engagement/Adhoc/Email_Message/emailsearchresult_499x102.png)
+
             
-        *   **Mobile Number**: Enter the mobile number in the search field and click **Enter**
+    *   **Mobile Number**: Enter the mobile number in the search field and click **Enter**
+
             
-            ![](../Resources/Images/Engagement/Adhoc/SMS_Message/searchmobileno.png)
+    ![](../Resources/Images/Engagement/Adhoc/SMS_Message/searchmobileno.png)
+
             
-            The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+    The users appears on the home page. To view the select users’ page, clear the search field and click Enter.
+
             
-            ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchmobilenoresult_505x103.png)
+    ![](../Resources/Images/Engagement/Adhoc/Email_Message/searchmobilenoresult_505x103.png)
+
             
-            > **_Note:_** If no user is added to the console, then user information page displays the following message: 'No user found'.
+    > **_Note:_** If no user is added to the console, then user information page displays the following message: 'No user found'.
             
-            The Users list view displays the following details:
+    The Users list view displays the following details:
             
-            | Users Element | Description |
-            | --- | --- |
-            | Name | The name column displays names of the added users. The Name column contains a combination of the First Name and the Last Name of added users. |
-            | Email | The email column displays the emails of the added users. |
-            | Mobile | The mobile column displays the mobile numbers of the added users. |
-            | Display controls: | By default, only 20 users are displayed in the list view. You can view more screens by navigating through the forward arrow icon. You can navigate back through the backward arrow icon. |
+    | Users Element | Description |
+    | --- | --- |
+    | Name | The name column displays names of the added users. The Name column contains a combination of the First Name and the Last Name of added users. |
+    | Email | The email column displays the emails of the added users. |
+    | Mobile | The mobile column displays the mobile numbers of the added users. |
+    | Display controls: | By default, only 20 users are displayed in the list view. You can view more screens by navigating through the forward arrow icon. You can navigate back through the backward arrow icon. |
+        
             
 7.  **Addressing an Email:** When you send an email, you have three field choices: To, cc, and bcc. Here is how to use each field:
     
@@ -150,17 +164,18 @@ To add an email message, follow these steps:
     
 17. To compose a new email message, follow these steps:
     1.  **Email Subject**: Enter an appropriate subject for the email.
+
     2.  **Personalization Attributes**: Select the attributes from the Personalization Attributes drop-down list to customize the email. The Personalization Attributes lists all the system defined attributes along with the other attributes that you define in the Add Attributes.
         
-        ![](../Resources/Images/Engagement/Adhoc/Email_Message/personalizationattributes_539x273.png)
+    ![](../Resources/Images/Engagement/Adhoc/Email_Message/personalizationattributes_539x273.png)
         
-        The selected personalization attributes appears in the message text area.The system inserts the selected attributes at the cursor position in the compose message text area. You can insert any attribute anywhere in the text message as required for your email message.
+    The selected personalization attributes appears in the message text area.The system inserts the selected attributes at the cursor position in the compose message text area. You can insert any attribute anywhere in the text message as required for your email message.
         
-        ![](../Resources/Images/Engagement/Adhoc/Email_Message/composeemail_542x205.png)
+     ![](../Resources/Images/Engagement/Adhoc/Email_Message/composeemail_542x205.png)
         
     3.  **Message**: To customize your text, you can use the Rich Text Editor tool bar available at the top of Rich Content box.
         
-        ![](../Resources/Images/Engagement/Adhoc/Email_Message/composenewemail_549x295.png)
+    ![](../Resources/Images/Engagement/Adhoc/Email_Message/composenewemail_549x295.png)
         
 18. Click **Send** to continue.
 19. The system displays the confirmation message that message queued with a request ID for reference. You can use this request ID to view the current status of the email message under Settings > Status > Email Queue.

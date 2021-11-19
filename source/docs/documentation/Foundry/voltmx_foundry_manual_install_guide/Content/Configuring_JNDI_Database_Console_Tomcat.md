@@ -28,13 +28,13 @@ For MySQL
     
     The following table details field names to be configured for data source:
     
-    | Field Name | Value |
-    | --- | --- |
-    | <DB\_Driver> | Database specific driver,<br>**MySQL**: `com.mysql.jdbc.Driver <br>`**ORACLE**: `oracle.jdbc.driver.OracleDriver <br>`**MSSQL**: `com.microsoft.sqlserver.jdbc.SQLServerDriver` |
-    | <JNDI\_NAME> | jdbc/voltmxaccounts <br>jdbc/voltmxreports |
-    | `<PWD>` | Database password |
-    | `<DB_connection_String>` | Database connection string for the accounts and reports db<br>**MySQL**: `jdbc:mysql://hostname:port/databaseName?autoReconnect=true&amp;useSSL=false<br>`**ORACLE**: `jdbc:oracle:thin:@hostname:port Number:databaseName<br>`**MSSQL**: `jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME` |
-    | `<USER_NAME>` | Database username. For example, root |
+| Field Name | Value |
+| --- | --- |
+| <DB\_Driver> | Database specific driver,<br>i.    MySQL: `com.mysql.jdbc.Driver`<br>ii.    ORACLE: `oracle.jdbc.driver.OracleDriver`<br>iii.    MSSQL: `com.microsoft.sqlserver.jdbc.SQLServerDriver` |
+| <JNDI\_NAME> | i.    jdbc/voltmxaccounts <br>ii.    jdbc/voltmxreports |
+| `<PWD>` | Database password |
+| `<DB_connection_String>` | Database connection string for the accounts and reports db<br>i.    MySQL: `jdbc:mysql://hostname:port/databaseName?autoReconnect=true&amp;useSSL=false`<br>ii.    ORACLE: `jdbc:oracle:thin:@hostname:port Number:databaseName`<br>iii.    MSSQL: `jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME` |
+| `<USER_NAME>` | Database username. For example, root |
     
 4.  Save the `accounts.xml` file.
 
@@ -53,12 +53,12 @@ For MySQL
     
     The following table details field names to be configured for data source:
     
-    | Field Name | Value |
-    | --- | --- |
-    | <DB\_Driver> | Database specific driver,<br>**MySQL**: `com.mysql.jdbc.Driver <br>`**ORACLE**: `oracle.jdbc.driver.OracleDriver <br>`**MSSQL**: `com.microsoft.sqlserver.jdbc.SQLServerDriver` |
-    | <JNDI\_NAME> | jdbc/**waasglobaldb** <br>jdbc/**workspacesglobaldb** |
-    | `<PWD>` | Database password |
-    | `<DB_connection_String>` | Database connection string, <br>**MySQL**:  `jdbc:mysql://hostname:port/databaseName?autoReconnect=true&amp;useSSL=false` <br>**ORACLE**: `jdbc:oracle:thin:@hostname:port Number:databaseName`<br>**MSSQL**: `jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME` |
-    | `<USER_NAME>` | Database username. For example, root |
+| Field Name | Value |
+| --- | --- |
+| <DB\_Driver> | Database specific driver,<br>i.    MySQL: `com.mysql.jdbc.Driver` <br>ii.    ORACLE: `oracle.jdbc.driver.OracleDriver`<br>iii.    MSSQL: `com.microsoft.sqlserver.jdbc.SQLServerDriver` |
+| <JNDI\_NAME> | i.    jdbc/**waasglobaldb** <br>ii.    jdbc/**workspacesglobaldb** |
+| `<PWD>` | Database password |
+| `<DB_connection_String>` | Database connection string, <br>i.    MySQL:  `jdbc:mysql://hostname:port/databaseName?autoReconnect=true&amp;useSSL=false` <br>ii.    ORACLE: `jdbc:oracle:thin:@hostname:port Number:databaseName`<br>iii.    MSSQL: `jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME` |
+| `<USER_NAME>` | Database username. For example, root |
     
 4.  Save the `workspace.xml` file.

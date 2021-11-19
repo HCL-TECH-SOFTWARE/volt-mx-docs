@@ -13,7 +13,7 @@ Before you install Volt MX Foundry, you must perform the following pre-installat
 *   Windows Server 2012 R2 is recommended if you are installing on Windows environment.
 *   To use your existing SSL certificate, map the SSL certificate to the domain name you want to use.
 *   To install in domain mode, the JBoss cluster should be pre-configured.
-*   MySQL 5.6/5.7, Oracle 12c (12.1.0), MS SQL Server 2012/2014/2016, or IBM DB2 9.7/10.1/10.5 database should be accessible.
+*   MySQL 5.6/5.7, Oracle 12c (12.1.0), MS SQL Server 2014/2016/2017, or IBM DB2 9.7/10.1/10.5 database should be accessible.
 
 Before you install Volt MX Foundry, you must perform the following pre-installation tasks:
 

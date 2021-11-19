@@ -26,7 +26,7 @@ CI Build allows the user to build and publish an app from the command line witho
     *   Node Version 13.10.1 (or later) for Volt MX Iris V9 SP1.
     *   Node Version 11.14.0 (or later) for Volt MX Iris V9.
 3.  Download and extract the zip file from the location:download.voltmx.com/iris\_enterprise/citools/<fix pack/service pack version>/iris-ci-tool-<fix pack/service pack version>.zip into the project location.  
-    For example, For V8 SP3 the URL is [http://download.voltmx.com/iris\_enterprise/citools/8.3.0/iris-ci-tool-8.3.0.zip](http://download.voltmx.com/iris_enterprise/citools/8.0.8/iris-ci-tool-8.0.8.zip)
+    For example, for V9 SP2 FP37 the URL is [https://download.hclvoltmx.com/visualizer_enterprise/citools/9.2.37/visualizer-ci-tool-9.2.37.zip](https://download.hclvoltmx.com/visualizer_enterprise/citools/9.2.37/visualizer-ci-tool-9.2.37.zip)
 4.  Copy plugindownload.js, package.json and build.js files from iris-ci-tool<fix pack/service pack version> folder.
 5.  Open the command prompt in the project location and perform the npm install.
 6.  Update plugin.dir and javaloc properties in HeadlessBuild.properties file.

@@ -6,6 +6,7 @@ category: "vms_console_user_guide"
 
 You are here: How Volt MX Foundry Engagement Services Works
 
+
 Introduction
 ============
 
@@ -95,11 +96,34 @@ The workflow below describes different ways of sending push notifications by usi
 
 The table below details the differences between general messages and campaign messages.
 
-  
-| General Messages | Campaign messages |
-| --- | --- |
-| Can define subscribers or segments as message targets Provides the capabilities to configure start and expiry dates. | Can associate messages to campaign, which in turn will use segments (you can use either old template message or add new message). Provide the capabilities of templates and personalized attributes when authoring messages. Provides the capabilities of configuring additional settings such as campaign start/ end dates and campaign time zone. |
-| All the parameters set in the **General** tab (**Settings** \> **Configuration**\> **General** \> **Basic** section) are applicable across all types of messages. It can be a message, campaign or an event message. ||
+<table>
+<tr>
+<th>General Messages</th>
+<th>Campaign Messages</th>
+</tr>
+<tr>
+<td>
+<ul>
+<li>Can define subscribers or segments as message targets.</li>
+<li>Provides the capabilities to configure start and expiry dates.</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>Can associate messages to campaign, which in turn will use segments (you can use either old template message or add new message).</li>
+<li>Provide the capabilities of templates and personalized attributes when authoring messages.</li>
+<li>Provides the capabilities of configuring additional settings such as campaign start/ end dates and campaign time zone.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p>All the parameters set in the <b>General</b> tab <b>(Settings > Configuration> General > Basic</b> section) are applicable across all types of messages. It can be a message, campaign or an event message.</p>
+</td>
+<td>
+</td>
+</tr>
+</table>
 
 What are Push Notifications
 ---------------------------
@@ -142,8 +166,7 @@ A user is a member whose data exists in the Engagement server and can be associa
 
 When an application user subscribes to push notifications, one of the unique fields of the subscriber is considered as the reconciliation key, for example, Ufid of the subscriber is considered as reconciliation key to map a user with a subscription. Ufid will be sent with the subscription, subscription request or while subscribing with Volt MX Foundry Engagement Services. Ufid is used to validate common details between users and subscribers. Once the subscription is valid, push notification services are enabled for subscribed applications.
 
-> **_Important:_** You can also configure any field of a user as a new reconciliation key only, but the new field is enabled as a mandatory field.  
-  
+> **_Important:_** You can also configure any field of a user as a new reconciliation key only, but the new field is enabled as a mandatory field.   
 Volt MX  Foundry Engagement Services allows you to configure only one reconciliation key. If you configured a new reconciliation key, the system replaces the old key, for example: _email_  with the new reconciliation key.  
 By default, Volt MX Foundry Engagement Services uses email as the Reconciliation key  
 

@@ -28,7 +28,7 @@ function progressCallback(object) {
 }
 
 try {
-    var syncObject = new voltmx.sdk.HCLObj("Employee");
+    var syncObject = new voltmx.sdk.VMXObj("Employee");
     var syncOptions = {};
 
     //Set filters to be applied during download on object.
