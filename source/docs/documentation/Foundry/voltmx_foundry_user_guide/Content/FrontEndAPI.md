@@ -16,8 +16,7 @@ For example:
 
 *   The following is a sample back-end URL of an operation to send a request:{% highlight voltMx %} BaseURL/Services/<Integration_Service_Name>/<Operation_Name>
     {% endhighlight %}
-    
-       For example,{% highlight voltMx %} http://news.google.com/Services/<Integration_Service_Name>/<Operation_Name>
+    *   For example,{% highlight voltMx %} http://news.google.com/Services/<Integration_Service_Name>/<Operation_Name>
         {% endhighlight %}
 *   The following is a sample **front end URL** of an operation to send a request:{% highlight voltMx %} /Services/<Integration_Service_Name>/<Operation_Path>
     {% endhighlight %}

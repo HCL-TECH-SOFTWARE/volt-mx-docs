@@ -20,7 +20,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}HCLObjSvc.clearOfflineData(options, successCallback, failureCallback)
+{% highlight voltMx %}VMXObjSvc.clearOfflineData(options, successCallback, failureCallback)
 {% endhighlight %}
 
 ### Parameters
@@ -39,7 +39,7 @@ void
 ### Example
 
 {% highlight voltMx %}try {
-    var orgObjectService = new voltmx.sdk.HCLObjSvc("Organization");
+    var orgObjectService = new voltmx.sdk.VMXObjSvc("Organization");
     var options = {};
     orgObjectService.clearOfflineData(options, onSuccess, onFailure);
 
@@ -60,7 +60,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObjSvc>.clearOfflineData(final HashMap<String, Object> options, final HCLCallback callback)
+{% highlight voltMx %}void <VMXObjSvc>.clearOfflineData(final HashMap<String, Object> options, final HCLCallback callback)
 {% endhighlight %}
 
 ### Parameters
@@ -78,7 +78,7 @@ void
 ### Example
 
 {% highlight voltMx %}try {
-    HCLObjSvc orgObjectService = newHCLObjSvc("Organization");
+    VMXObjSvc orgObjectService = newVMXObjSvc("Organization");
     orgObjectService.clearOfflineData(null, newHCLCallback() {
         @Override
         public void onSuccess(Object object) {
@@ -102,7 +102,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}(void)[<HCLObjSvc> clearOfflineData:(NSDictionary *)options
+{% highlight voltMx %}(void)[<VMXObjSvc> clearOfflineData:(NSDictionary *)options
 			 onSuccess:(HCLSuccessCompletionHandler)onSuccess
 			 onFailure:(HCLFailureCompletionHandler)onFailure]
 
@@ -125,8 +125,8 @@ void
 
 {% highlight voltMx %}OfflineObjectsError * error = nil;
 NSDictionary * options = @ {};
-HCLObjSvc * orgObjectService = [
-    [HCLObjSvc alloc] initWithName: @"Organization"
+VMXObjSvc * orgObjectService = [
+    [VMXObjSvc alloc] initWithName: @"Organization"
     error: & error
 ];
 [orgObjectService clearOfflineData: options

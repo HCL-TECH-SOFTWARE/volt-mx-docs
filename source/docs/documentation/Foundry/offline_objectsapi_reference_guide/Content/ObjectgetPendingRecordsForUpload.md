@@ -38,7 +38,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}var category = new voltmx.sdk.HCLObj("CATEGORY");
+{% highlight voltMx %}var category = new voltmx.sdk.VMXObj("CATEGORY");
 
 function successCallback(response) {
     //response holds the list of records which are yet to be uploaded.
@@ -76,7 +76,7 @@ void
 
 {% highlight voltMx %}HashMap < String, Object > options = new HashMap < String, Object > ();
 try {
-    HCLObj category = new HCLObj("CATEGORY");
+    VMXObj category = new VMXObj("CATEGORY");
     category.getPendingRecordsForUpload(options, new HCLCallback() {
         @Override
         public void onSuccess(Object object) {
@@ -123,8 +123,8 @@ void
 ### Example
 
 {% highlight voltMx %}NSError * error;
-HCLObj * category = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * category = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 
@@ -141,7 +141,7 @@ if (!error) {
         }
     ];
 } else {
-    NSLog(@"HCLObj couldn’t be
+    NSLog(@"VMXObj couldn’t be
 	initialized with error %@", [error.userInfo localizedDescription]);
 }
 {% endhighlight %}

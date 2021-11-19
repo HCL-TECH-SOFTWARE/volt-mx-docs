@@ -34,7 +34,7 @@ The following examples demonstrate the filter usage in the sync API.
  }
 
  try {
-    var employeeObject = = new voltmx.sdk.HCLObj("Employee");
+    var employeeObject = = new voltmx.sdk.VMXObj("Employee");
 
     //Set filter to download employee records by the first name
     var syncOptions = {"filter" : "FirstName eq 'Berta'"};
@@ -49,7 +49,7 @@ The following examples demonstrate the filter usage in the sync API.
 ### Android
 
 {% highlight voltMx %}try {
-   private HCLObjSync employeeObject = new HCLObj("Employee");
+   private VMXObjSync employeeObject = new VMXObj("Employee");
 
    //Set filter to download employee records by the first name
    HashMap<String, Object> syncOptions = new HashMap<String, Object>();
@@ -75,7 +75,7 @@ The following examples demonstrate the filter usage in the sync API.
 ### iOS
 
 {% highlight voltMx %}  NSError *error;
-  HCLObj *employeeObject = [[HCLObj alloc] initWithName:@"Employee" error:&error];
+  VMXObj *employeeObject = [[VMXObj alloc] initWithName:@"Employee" error:&error];
 
   if(error) {
       NSLog(@"Object creation failed!");
@@ -117,7 +117,7 @@ The following examples demonstrate applying filters for multiple objects during 
   }
 
   try {
-      var orgObjectService = new voltmx.sdk.HCLObjSvc("Organization");
+      var orgObjectService = new voltmx.sdk.VMXObjSvc("Organization");
 
       //Set specific filters on different entities of the object service
       var filterObject = {"Employee" : "FirstName eq 'Berta'", 
@@ -136,7 +136,7 @@ The following examples demonstrate applying filters for multiple objects during 
 ### Android
 
 {% highlight voltMx %}  try {
-      private HCLObjSvc orgObjectService = new HCLObjSvc("Organization");
+      private VMXObjSvc orgObjectService = new VMXObjSvc("Organization");
 
       //Set specific filters on different entities of the object service
       HashMap<String, Object> filterObject = new HashMap<String, Object>();
@@ -168,7 +168,7 @@ The following examples demonstrate applying filters for multiple objects during 
 ### iOS
 
 {% highlight voltMx %}   NSError *error;
-  HCLObjSvc *orgObjectService = [[HCLObjSvc alloc] initWithName:@"Organization" error:&error];
+  VMXObjSvc *orgObjectService = [[VMXObjSvc alloc] initWithName:@"Organization" error:&error];
 
   if(error) {
       NSLog(@"Object service creation failed!");

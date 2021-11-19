@@ -165,7 +165,7 @@ You need to have an Object service with required fields enabled with meta-data i
             } 
             
             {% endhighlight %}
-        2.  Register fields in objects with the Data Pre and Post Processors for the client app.
+        2.  Register fields in objects with the[**Data Pre and Post Processors**](#API%C2%A0sign) for the client app.
             
             After you register callbacks as pre and post processors for objects, the specified callbacks are automatically invoked for every CRUD operations on that object, as shown in the following sample code snippet.
             

@@ -33,7 +33,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="FAQs and Troubleshooting" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hcl-tech-software.github.io/volt-mx-docs/Volt_Mx_logo.png"}},"url":"https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Troubleshooting.html","@type":"WebPage","headline":"FAQs and Troubleshooting","description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","@context":"https://schema.org"}</script>
+{"url":"https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Troubleshooting.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hcl-tech-software.github.io/volt-mx-docs/Volt_Mx_logo.png"}},"@type":"WebPage","description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","headline":"FAQs and Troubleshooting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -234,153 +234,100 @@
       </h1>
     
 
-<p>This section lists the troubleshooting tips to resolve problems that you may encounter during installation, and post installation.</p>
+<ul type="disc">
+<li>
+<p><b>Issue</b>: When you setup Volt MX Foundry (On-Premises) on WebSphere Liberty Profile using the Command Line Installer (CLI) the Storage DB feature fails. The failure occurs because the storage database type is a case-sensitive field which accepts only lowercase inputs. For example: oracle, mysql, mssql and mariadb. Whereas the CLI sets the database name in uppercase.</p> 
+<br />
+<p><b>Workaround</b>: Change the database name in the following sets of schemas and tables:</p>
+<ul type="circle">
+<li>
+<p><b>Schema</b>: ADMINDB</p><br />
+<p><b>Table</b>: SERVER_CONFIGURATION</p><br />
+<p><b>Field / value</b>: storage_database_type = oracle / mysql / mssql / mariadb</p><br />
+</li>      
+<li>
+<p><b>Schema</b>: ACCOUNTS</p><br />
+<p><b>Table</b>: FEATURES</p><br />
+<p><b>Field / value</b>: {"storagedatabasetype":"oracle / mysql / mssql / mariadb","serverdatabasetype":"oracle / mysql / mssql / mariadb"}</p><br />
+</li>
+</ul>
+</li>
+<li>
+<p><b>Issue</b>: The upgrade installation is rolling back with Validate failed from 8.2.1.3</p> 
+<br />
+<p><b>Workaround</b>: Before Upgrade, execute below SQL statement from admin database</p>
+<pre><code style="display:block;background-clor:#eee;"><u>For <b>MySQL</b></u>
+delete from &lt;admindb&gt;.schema_version where script = 'V62.1__voltmxadmin-mysql-8.2.0.0.sql';
 
-<ul>
-  <li>
-    <p><strong>Issue</strong>: When you setup Volt MX Foundry (On-Premises) on WebSphere Liberty Profile using the Command Line Installer (CLI) the Storage DB feature fails. The failure occurs because the storage database type is a case-sensitive field which accepts only lowercase inputs. For example: oracle, mysql, mssql and mariadb. Whereas the CLI sets the database name in uppercase.</p>
+<u>For <b>SQLServer</b></u>
+delete from &lt;admindb&gt;.schema_version where script = 'V62.1__voltmxadmin-sqlserver-8.2.0.0.sql';
 
-    <p><strong>Workaround</strong></p>
-
-    <p>Change the database name in the following sets of schemas and tables:</p>
-
-    <ul>
-      <li>
-        <p><strong>Schema</strong>: ADMINDB
- <br /> 
- <strong>Table</strong>: SERVER_CONFIGURATION
- <br /> 
-<strong>Field / value</strong>: storage_database_type = oracle / mysql / mssql / mariadb</p>
-      </li>
-      <li>
-        <p><strong>Schema</strong>: ACCOUNTS
-<br /> 
-<strong>Table</strong>: FEATURES
-<br /> 
-<strong>Field / value</strong>: {“storagedatabasetype”:”oracle / mysql / mssql / mariadb”,”serverdatabasetype”:”oracle / mysql / mssql / mariadb”}</p>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p><strong>Issue</strong>
+<u>For <b>Oracle</b></u>
+delete from &lt;admindb&gt;.schema_version where script = 'V62.1__voltmxadmin-oracle-8.2.0.0.sql';</code></pre>
+</li>
+<li>
+<p><b>Issue</b>: If you upgrade the integration service or install on new server using the existing database but with a different server details like fully qualified URL port, and when you publish an app, the app publish fails.</p> 
 <br />
-The upgrade installation is rolling back with Validate failed from 8.2.1.3
+<p><b>Workaround</b>: You must update management server details in the <code>server_configuration</code> table in admin database.</p>
+</li>
+<li>
+<p><b>Issue</b>: If your service provider's certificate is not configured, the system displays an error - "peer not authenticated."</p>
 <br />
-Workaround
+<p><b>Workaround</b>: For trusted certification issues, refer to <a href="Post-Installation_Tasks.html#configuring-secure-sockets-layer-ssl-certificate">Service Provider's Certificate Issues.</a></p>
+</li>     
+<li>
+<p><b>Issue</b>: During design time of your app, the system throws errors due to several reasons.</p> 
+<p>For example:</p>
+<pre><code style="display:block;background-clor:#eee;">Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: The size of BLOB/TEXT data inserted in one transaction is greater than 10% of redo log size. Increase the redo log size using innodb_log_file_size.
+</code></pre>
+<p></p>
+<p><b>Workaround</b>: Increase the innodb_log_file_size. For more details, refer to <a href="Database_Prerequsites.html#increase-innodb_log_file_size-in-myini-file-for-engagement-services">Increase innodb_log_file_size in the my.ini file.</a></p>
+</li>
+<li>
+<p><b>Issue</b>: When customer wants to install Volt MX Foundry with Oracle as database type, the system throws the error: <code>Invalid Data Type SDO_GEOMENTRY</code></p> 
 <br />
-Before Upgrade, execute below SQL statement from admin database</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For **MySQL**  
-------------  
-delete from &lt;admindb&gt;.schema\_version where script = 'V62.1\_\_voltmxadmin-mysql-8.2.0.0.sql';  
-      
-For **SQLServer**  
----------------  
-delete from &lt;admindb&gt;.schema\_version where script = 'V62.1\_\_voltmxadmin-sqlserver-8.2.0.0.sql';  
-      
-For **Oracle**  
-----------  
-delete from &lt;admindb&gt;.schema\_version where script = 'V62.1\_\_voltmxadmin-oracle-8.2.0.0.sql';  
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p><strong>Issue</strong>
+<p><b>Workaround</b>: Install Oracle locator, which is required for Volt MX Foundry installation. For more details, refer to <a href="Pre-installation_Tasks_JBoss.html#create-locator-component-for-oracle-database">Pre-installation Tasks &gt; Create Locator Component for Oracle Database</a></p>
+</li>
+<li>
+<p><b>Issue</b>: Admin health-check fails as access to reporting and storage Database is failing on JBoss with MariaDB.</p>
 <br />
-If you upgrade the integration service or install on new server using the existing database but with a different server details like fully qualified URL port, and when you publish an app, the app publish fails.
+<p><b>Workaround</b>: </p> 
+<ol>
+<li>Add the MySQL Connector jar in the  <code>admin.war/WEB-INF/lib</code> folder.</li>
+<li>Add the MySQL Connector jar in the <code>services.war</code> for the Runtime RDBMS and storage services to work.</li>
+</ol>
+<blockquote>
+<em><b>Note: </b></em>This is applicable for JBoss multi-node and pre-configured JBoss, but not for the bundled JBoss.
+</blockquote>
+</li>
+<li>
+<p><b>Issue</b>: After entering Database details the DB connection fails with the following error:</p> 
 <br />
-Workaround
-<br />
-You must update management server details in the <code class="language-plaintext highlighter-rouge">server_configuration</code> table in admin database.</p>
-  </li>
-  <li>
-    <p><strong>Issue</strong>
-<br />
-If your service provider’s certificate is not configured, the system displays an error - “peer not authenticated.”
-<br />
-Workaround
-<br />
-For trusted certification issues, refer to <a href="Post-Installation_Tasks.html#Service_Provider's_Certificate_Issues">Service Provider’s Certificate Issues</a>.</p>
-  </li>
-  <li>
-    <p>Issue - During design time of your app, the system throws errors due to several reasons.
-<br />
-For example:
-<br />
-Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: The size of BLOB/TEXT data inserted in one transaction is greater than 10% of redo log size. Increase the redo log size using innodb_log_file_size.
-<br />
-Workaround
-<br />
-Increase the innodb_log_file_size. For more details, refer to <a href="Database_Prerequsites.html#increase-innodb-log-file-size-in-my-ini-file-for-engagement-services">Increase innodb_log_file_size in the my.ini file.</a></p>
-  </li>
-  <li>
-    <p><strong>Issue</strong>
-<br />
-When customer wants to install Volt MX Foundry with Oracle as database type, the system throws the error: <code class="language-plaintext highlighter-rouge">Invalid Data Type SDO_GEOMENTRY</code>
-<br />
-Workaround
-<br />
-Install Oracle locator, which is required for Volt MX Foundry installation. For more details, refer to <a href="Pre-installation_Tasks_JBoss.html#create-locator-component-for-oracle-database">Pre-installation Tasks &gt; Create Locator Component for Oracle Database</a></p>
-  </li>
-  <li><strong>Issue</strong>
-<br />
-Admin health-check fails as access to reporting and storage Database is failing on JBoss with MariaDB.
-<br />
-Workaround
-<br />
-    <ol>
-      <li>Add the MySQL Connector jar in the  <code class="language-plaintext highlighter-rouge">admin.war/WEB-INF/lib</code> folder.</li>
-      <li>Add the MySQL Connector jar in the <code class="language-plaintext highlighter-rouge">services.war</code> for the Runtime RDBMS and storage services to work.</li>
-    </ol>
-
-    <blockquote>
-      <p><strong><em>Note:</em></strong> This is applicable for JBoss multi-node and pre-configured JBoss, but not for the bundled JBoss.</p>
-    </blockquote>
-  </li>
-  <li>
-    <p><strong>Issue</strong>
-<br />
-After entering Database details the DB connection fails with the following error:
-<br />
-<img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Resources/Images/error_troubleshooting.png" alt="" />
-<br />
-Workaround
-<br />
-The password used for the Database must not contain exclamation marks (!).
-<br /></p>
-  </li>
-  <li>
-    <p><strong>Issue</strong>
-<br />
-On Oracle Database, the following error occurs while upgrading the Volt MX Foundry Installer to version 8.2 or above from earlier versions:
-<br />
-<code class="language-plaintext highlighter-rouge">Invalid Column Type 16</code>
-<br />
-Workaround
-<br />
-Update the <code class="language-plaintext highlighter-rouge">authService.properties</code> with <strong>Oracle10gDialect</strong> as follows:</p>
-
-    <p><code class="language-plaintext highlighter-rouge">hibernate.dialect=org.hibernate.dialect.Oracle10gDialect</code></p>
-  </li>
-  <li><strong>Issue</strong>
-<br />
-If you are using any lower versions of MySQL 5.7 such as v5.7.12 or lower during installation, you may encounter an error due to which the installation rolls back. This error occurs due to a bug in the MySQL database.
-<br />
-For more information, refer <a href="https://bugs.mysql.com/bug.php?id=79286">MySQL Bugs</a>
-<br />
-Following are the error details:
-<br />
-    <ul>
-      <li><strong>Error</strong>: Migration V810_27_01__DeleteDuplicateAcsUserIdProviderGuidRowsAddUniqueConstraint.sql failed</li>
-      <li><strong>SQL State</strong>: HY000</li>
-      <li><strong>Error Code</strong>: 1093</li>
-      <li><strong>Error Message</strong>: You can’t specify target table ‘users’ for update in FROM clause</li>
-      <li><strong>Location</strong>: <Location where="" the="" installation="" is="" done="">
-<br />
-Workaround
-<br />
-To resolve this issue, refer [Prerequisites for Volt MX Foundry with MySQL- Applicable for Identity Services](Database_Prerequsites.html#applicable-for-identity-services).</Location></li>
-    </ul>
-  </li>
+<p><img src="Resources/Images/error_troubleshooting.png" /></p><br />
+<p></p>
+<p><b>Workaround</b>: The password used for the Database must not contain exclamation marks (!).</p> 
+</li>    
+<li>
+<p><b>Issue</b>: On Oracle Database, the following error occurs while upgrading the Volt MX Foundry Installer to version 8.2 or above from earlier versions:</p> 
+<pre><code style="display:block;background-clor:#eee;">Invalid Column Type 16</code></pre>
+<p></p>
+<p><b>Workaround</b>: Update the <code>authService.properties</code> with Oracle10gDialect as follows:</p> 
+<pre><code style="display:block;background-clor:#eee;">hibernate.dialect=org.hibernate.dialect.Oracle10gDialect</code></pre>
+</li>   
+<li>
+<p><b>Issue</b>: If you are using any lower versions of MySQL 5.7 such as v5.7.12 or lower during installation, you may encounter an error due to which the installation rolls back. This error occurs due to a bug in the MySQL database.</p> 
+<p>For more information, refer <a href="https://bugs.mysql.com/bug.php?id=79286">MySQL Bugs</a></p>
+<p>Following are the error details:</p>
+<ul type="disc">
+<li><b>Error</b>: Migration V810_27_01__DeleteDuplicateAcsUserIdProviderGuidRowsAddUniqueConstraint.sql failed</li>
+<li><b>SQL State</b>: HY000</li>
+<li><b>Error Code</b>: 1093</li>
+<li><b>Error Message</b>: You can't specify target table 'users' for update in FROM clause</li>
+<li><b>Location</b>: &lt;Location where the installation is done&gt;</li>
+</ul>
+<p></p>
+<p><b>Workaround</b>: To resolve this issue, refer <a href="Database_Prerequsites.html#applicable-for-identity-services">Prerequisites for Volt MX Foundry with MySQL- Applicable for Identity Services.</a></p> 
+</li>
 </ul>
       <h2 id="hostnameport-changes-for-tomcat-application-server">
         
@@ -435,51 +382,37 @@ To resolve this issue, refer [Prerequisites for Volt MX Foundry with MySQL- Appl
         
       </h2>
     
-
 <p>If you want to access everything via a proxy URL, including Volt MX Foundry Console (for example, design time for your app developers) and authService, and integration services (for example, runtime from users using your apps), follow these steps:</p>
-
 <ol>
-  <li>Install Volt MX Foundry with internal details like your internal IP and HTTP port.</li>
-  <li>After installation, stop Volt MX Foundry Console (without configuring authservice details) and update the below properties files:
-    <ol>
-      <li>
-        <p>In the  <code class="language-plaintext highlighter-rouge">accounts.war/WEB-INF/classes</code>  folder, open the <code class="language-plaintext highlighter-rouge">accounts.properties</code>  file and update the below properties with a public URL instead of the private URL. By default, the private URL is set during installation:</p>
-
-        <p><code class="language-plaintext highlighter-rouge">WAAS_BASE_URL=&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/workspace</code></p>
-
-        <p>Examples of proxy URLs:</p>
-
-        <ul>
-          <li><code class="language-plaintext highlighter-rouge">WAAS_BASE_URL=http://test.voltmx.com/workspace</code></li>
-          <li><code class="language-plaintext highlighter-rouge">WAAS_BASE_URL=https://test.voltmx.com:8443/workspace</code></li>
-          <li><code class="language-plaintext highlighter-rouge">WAAS_BASE_URL=http://test.voltmx.com:8080/workspace</code></li>
-        </ul>
-      </li>
-      <li>
-        <p>Following are the changes to be made in the war for each App Server:</p>
-        <ul>
-          <li><strong>Tomcat</strong>: In <code class="language-plaintext highlighter-rouge">mfconsole.war/WEB-INF/classes</code>, open the <code class="language-plaintext highlighter-rouge">config.properties</code> file, and update the <code class="language-plaintext highlighter-rouge">`VOLTMX_ACCOUNT_API_BASE_URL=&amp;lt;PUBLIC_URL_OF_YOUR_APACHE&amp;gt;/accounts/api/v1_0/`</code>property with a public URL instead of the private URL that was generated during installation.</li>
-          <li><strong>JBoss</strong> <strong>-</strong> <strong>Standalone (Bundled JBoss)</strong>: In <code class="language-plaintext highlighter-rouge">`Standalone/deployments/mfconsole.war`</code>, open the <code class="language-plaintext highlighter-rouge">config.properties</code> file, and update the <code class="language-plaintext highlighter-rouge">VOLTMX_ACCOUNT_API_BASE_URL=&amp;lt;PUBLIC_URL_OF_YOUR_APACHE&amp;gt;/accounts/api/v1_0/</code> property with a public URL instead of the private URL that was generated during installation.</li>
-          <li><strong>JBoss - Pre-configured and Domain mode</strong>: Take a backup of the existing war. Undeploy <code class="language-plaintext highlighter-rouge">mfconsole.war</code>. In <code class="language-plaintext highlighter-rouge">mfconsole.war/WEB-INF/classes</code>, open the <code class="language-plaintext highlighter-rouge">config.properties</code> file, update the <code class="language-plaintext highlighter-rouge">VOLTMX_ACCOUNT_API_BASE_URL=&amp;lt;PUBLIC_URL_OF_YOUR_APACHE&amp;gt;/accounts/api/v1_0/</code> property with a public URL instead of the private URL that was generated during installation, and re-deploy the war file.</li>
-        </ul>
-      </li>
-    </ol>
-  </li>
-  <li>Start Volt MX Foundry Console.</li>
-  <li>Launch your Volt MX Foundry Console in the browser by using <code class="language-plaintext highlighter-rouge">&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/mfconsole</code>. The auth setup page appears.</li>
-  <li>Enter the auth URL with public URL like <code class="language-plaintext highlighter-rouge">&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/authService</code>. If you provide an internal IP here, appconfig will show internal IPs.</li>
-  <li>
-    <p>Also after log in to Volt MX Foundry Console, while registering server, provide the <code class="language-plaintext highlighter-rouge">PUBLIC_URL</code> to register integration server. Now all the URLs will have the public hostnames.</p>
-
-    <p>If you want to give public access only to runtime services like authservice and integration services you can skip step 2 and step 3 from the above procedure. This will make sure service document will have all public URLs.</p>
-
-    <blockquote>
-      <p><strong><em>Note:</em></strong> Proxy configuration should have preserver host directive for Volt MX Foundry to work correctly after start up.</p>
-    </blockquote>
-
-    <p>For example, in case of apache proxy, use <code class="language-plaintext highlighter-rouge">`ProxyPreserveHost On`  
-</code>and in case of NGINX, use <code class="language-plaintext highlighter-rouge">`proxy_set_header Host $host;`</code>(For more information, refer <a href="https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy#passing-request-headers">Passing request headers</a>)</p>
-  </li>
+<li>Install Volt MX Foundry with internal details like your internal IP and HTTP port.</li>
+<li>After installation, stop Volt MX Foundry Console (without configuring authservice details) and update the below properties files:
+<ol type="a">
+<li>In the <code>accounts.war/WEB-INF/classes</code>  folder, open the <code>accounts.properties</code>  file and update the below properties with a public URL instead of the private URL. By default, the private URL is set during installation:
+<p><code>WAAS_BASE_URL=&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/workspace</code></p>
+<p>Examples of proxy URLs:</p>
+<ol>
+<li><code>WAAS_BASE_URL=http://test.voltmx.com/workspace</code></li>
+<li><code>WAAS_BASE_URL=https://test.voltmx.com:8443/workspace</code></li>
+<li><code>WAAS_BASE_URL=http://test.voltmx.com:8080/workspace</code></li>
+</ol>
+</li>
+<li>Following are the changes to be made in the war for each App Server:
+<ol>
+<li><b>Tomcat</b>: In <code>mfconsole.war/WEB-INF/classes</code>, open the <code>config.properties</code> file, and update the <code>VOLTMX_ACCOUNT_API_BASE_URL= &lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/accounts/api/v1_0/</code>property with a public URL instead of the private URL that was generated during installation.</li>
+<li><b>JBoss - Standalone (Bundled JBoss)</b>: In <code>Standalone/deployments/mfconsole.war</code>, open the config.properties file, and update the <code>VOLTMX_ACCOUNT_API_BASE_URL=&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/accounts/api/v1_0/</code> property with a public URL instead of the private URL that was generated during installation.</li>
+<li><b>JBoss - Pre-configured and Domain mode</b>: Take a backup of the existing war. Undeploy <code>mfconsole.war</code>. In <code>mfconsole.war/WEB-INF/classes</code>, open the <code>config.properties</code> file, update the <code>VOLTMX_ACCOUNT_API_BASE_URL=&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/accounts/api/v1_0/</code> property with a public URL instead of the private URL that was generated during installation, and re-deploy the war file.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Start Volt MX Foundry Console.</li>  
+<li>Launch your Volt MX Foundry Console in the browser by using <code>&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/mfconsole</code>. The auth setup page appears.</li>
+<li>Enter the auth URL with public URL like <code>&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/authService</code>. If you provide an internal IP here, appconfig will show internal IPs.</li>
+<li>Also after log in to Volt MX Foundry Console, while registering server, provide the <code>PUBLIC_URL</code> to register integration server. Now all the URLs will have the public hostnames.
+<p>If you want to give public access only to runtime services like authservice and integration services you can skip step 2 and step 3 from the above procedure. This will make sure service document will have all public URLs</p>
+<blockquote><em><b>Note</b></em>: Proxy configuration should have preserver host directive for Volt MX Foundry to work correctly after start up.<br /><br />
+For example, in case of apache proxy, use <code>ProxyPreserveHost On</code> and in case of NGINX, use <code>proxy_set_header Host $host;</code>(For more information, refer <a href="https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy#passing-request-headers">Passing request headers</a>)</blockquote>
+</li>
 </ol>
       <h2 id="how-to-configure-frontend-https-to-tomcat-http-redirection">
         
@@ -495,8 +428,8 @@ To resolve this issue, refer [Prerequisites for Volt MX Foundry with MySQL- Appl
 <p>proxyName=”<ProxyHost>" proxyPort="<ProxyPort>" scheme="https" secure="true"</ProxyPort></ProxyHost></p>
 
 <p><strong>Example</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/&gt;
-</code></pre></div></div>
+
+<pre><code style="display:block;background-clor:#eee;">&lt;Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/&gt;</code></pre>
       <h2 id="how-to-change-log-levels">
         
         
@@ -508,7 +441,7 @@ To resolve this issue, refer [Prerequisites for Volt MX Foundry with MySQL- Appl
 
 <p>Refer to <a href="Change_Log_Levels.html">How to Change Log Levels</a>.</p>
 
-<p>Also, refer to <a href="http://community.hclvoltmx.com/blogs/mobilefoundry/accessing-logs-volt-mx-mobilefoundry-premise-install">Accessing Logs in Volt MX Foundry On-Premise Install</a>.</p>
+<p>Also, refer to <a href="https://support.hcltechsw.com/csm?sys_kb_id=bb2c354e1bd3ac98534c4159cc4bcb43&amp;id=kb_article_view&amp;sysparm_rank=4&amp;sysparm_tsqueryId=cc87f66f1b52f010a2f48661cd4bcb3f">Accessing Logs in Volt MX Foundry On-Premise Install</a>.</p>
 
         
 
@@ -1768,7 +1701,7 @@ To resolve this issue, refer [Prerequisites for Volt MX Foundry with MySQL- Appl
 
   
  </li>
-  <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Post-Installation_Tasks.html#how-to-turn-off-the-send-usage-data-anonymously-feature" class="nav-list-link">How to Configure Memcache for Integration Services</a>
+  <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Post-Installation_Tasks.html#how-to-configure-memcache-for-integration-services" class="nav-list-link">How to Configure Memcache for Integration Services</a>
 
   
  </li>

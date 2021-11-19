@@ -28,11 +28,9 @@ To configure properties for Engagement Services (VPNS), make changes in the conf
 File location: `/home/core/vpns-config/ConfigResource.properties`
 
 > **_Important:_** IBM WebSphere Application Server:  
-  
 Enable the following properties:  
 `apple.notification.keymanager.algorithm=ibmX509`  
-`apple.notification.trustmanager.algorithm=ibmPKIX`  
-  
+`apple.notification.trustmanager.algorithm=ibmPKIX`<br><br>
 Disable the following properties:  
 `apple.notification.keymanager.algorithm=sunx509  
 ``apple.notification.trustmanager.algorithm=sunx509`

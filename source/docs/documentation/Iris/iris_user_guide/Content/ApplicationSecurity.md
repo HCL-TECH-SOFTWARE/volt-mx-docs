@@ -51,7 +51,7 @@ In case of Android and iOS platforms, if there is a MitM attach, the HttpRequest
 Protect the Application Binaries
 --------------------------------
 
-In Volt MX Iris, [_Protected Mode_ option](#configure-project-settings-in) enables several security features that secure the binary at build time by including multiple self-protection security mechanisms. To use the option, enable the **Protected Mode** check box in the **Project Settings** dialog. If an application attack is observed, the security mechanism exits the application.
+In Volt MX Iris, [_Protected Mode_ option](#configure-project-settings-in-volt-mx-iris) enables several security features that secure the binary at build time by including multiple self-protection security mechanisms. To use the option, enable the **Protected Mode** check box in the **Project Settings** dialog. If an application attack is observed, the security mechanism exits the application.
 
 In this section, you will learn about: 
 
@@ -69,7 +69,7 @@ Volt MX  provides the following application and code-level mechanisms to protect
     *   **Anti-debugging** - Prevents debugging of a production application to prevent attackers from analyzing the application at runtime.
 2.  **Protecting Cryptographic Keys using White Box Cryptography (WBC)** - Cryptographic keys are critical to securing systems such as applications and communications, and therefore must be protected at all times. Volt MX provides powerful secure cryptographic capability beyond the native operating system’s capabilities. VoltMX's encryption and decryption uses a secure process known as White Box Cryptography to perform encryption and decryption while keeping the keys safe. The keys are never present in static form or in memory at runtime. WBC is a secure implementation of cryptographic algorithms in a system that employs cryptographic algorithm and keys. Strong algorithms are used for encryption and decryption, insecure, and deprecated algorithms are not used.
 
-### RSA Key Pair Generation, Encryption, and Usage
+### RSA Key Pair Generation, Encryption and Usage
 
 Prerequisites
 
@@ -382,9 +382,9 @@ To modify the default error message for Android, do the following:
 2.  Modify the Custom Root Detection Message as per your requirement
 3.  Copy the file in the following folders as required
     
-    For mobile - **<WorkSpace>\\<Application>\\resources\\mobile\\native\\android\\values**
+    For mobile - **`<WorkSpace>\<Application>\resources\mobile\native\android\values`**
     
-    For tablet - **<WorkSpace>\\<Application>\\resources\\tablet\\native\\androidtab\\values**
+    For tablet - **`<WorkSpace>\<Application>\resources\tablet\native\androidtab\values`**
     
 
 ### iOS

@@ -19,7 +19,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObj>.delete(options, onSuccessCallback, onFailureCallback)
+{% highlight voltMx %}<VMXObj>.delete(options, onSuccessCallback, onFailureCallback)
 
 {% endhighlight %}
 
@@ -38,7 +38,7 @@ void
 ### Example
 
 {% highlight voltMx %}//------- delete all records -------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 
 function successCallback(response) {
     //response holds value true
@@ -50,7 +50,7 @@ function errorCallback(error) {
 category.delete(null, successCallback, errorCallback);
 
 //--------delete a record using composite primary key --------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var primaryKeys = {};
 primaryKeys["CATEGORY_KEY1"] = "1234";
@@ -67,7 +67,7 @@ function errorCallback(error) {
 category.delete(options, successCallback, errorCallback);
 
 //------- delete by whereCondition-------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var whereClause = {};
 whereClause["Category_PN"] = 7;
 var options = {};
@@ -83,7 +83,7 @@ function errorCallback(error) {
 category.delete(options, successCallback, errorCallback);
 
 //------- delete by whereConditionAsAString -------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var whereClause = "Category_PN = '7'";
 options["whereConditionAsAString"] = whereClause;
@@ -101,15 +101,15 @@ category.delete(options, successCallback, errorCallback);
 var options = {
     "trackChanges": false
 };
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");
-HCLObject.delete(options, successCallback, failureCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.delete(options, successCallback, failureCallback);
 
 //------- delete using markForUpload flag --------- 
 var options = {
     "markForUpload": false
 };
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");
-HCLObject.delete(options, successCallback, failureCallback);  
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.delete(options, successCallback, failureCallback);  
 
 {% endhighlight %}
 
@@ -118,7 +118,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj>.delete(HashMap<String, Object> options, final HCLCallback syncCallback) throws Exception
+{% highlight voltMx %}void <VMXObj>.delete(HashMap<String, Object> options, final HCLCallback syncCallback) throws Exception
 
 {% endhighlight %}
 
@@ -137,7 +137,7 @@ void
 ### Example
 
 {% highlight voltMx %}//Delete record with a primary key 
-HCLObj category = new HCLObj("CATEGORY");
+VMXObj category = new VMXObj("CATEGORY");
 HashMap < String, Object > primaryKeys = new HashMap < > ();
 primaryKeys.put("CATEGORY_ID", "123");
 HashMap < String, Object > options = new HashMap < > ();
@@ -181,7 +181,7 @@ try {
 }
 
 //Delete record using whereCondition 
-HCLObj category = new HCLObj("CATEGORY");
+VMXObj category = new VMXObj("CATEGORY");
 HashMap < String, Object > whereClause = new HashMap < > ();
 whereClause.put("CATEGORY_ID", "123");
 HashMap < String, Object > options = new HashMap < > ();
@@ -203,7 +203,7 @@ try {
 }
 
 //Delete record using whereConditionAsAString 
-HCLObj category = new HCLObj("CATEGORY");
+VMXObj category = new VMXObj("CATEGORY");
 String whereClause = "CATEGORY_ID = '123'";
 HashMap < String, Object > options = new HashMap < > ();
 options.put("whereConditionAsAString", whereClause);
@@ -272,8 +272,8 @@ void
 ### Examples
 
 {% highlight voltMx %}// Delete record with a primary key 
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSMutableDictionary * options = [NSMutableDictionary new];
@@ -291,8 +291,8 @@ options[@"primaryKeys"] = primaryKeys;
 ];
 
 // Delete record with composite primary key 
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSMutableDictionary * recordToUpdate =
@@ -312,8 +312,8 @@ options[@"primaryKeys"] = primaryKeys;
 ];
 
 // Delete record using whereCondition
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSMutableDictionary * options = [NSMutableDictionary new];
@@ -331,8 +331,8 @@ options[@"whereCondition"] = whereClause;
 ];
 
 // Delete record using whereConditionAsAString
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSMutableDictionary * options = [NSMutableDictionary new];

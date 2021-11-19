@@ -7,18 +7,15 @@ category: "voltmx_foundry_release_notes"
 Download Links
 ==============
 
-To download any of VoltMX's products, visit [community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads).
-
-Foundry Installer
-----------------------
-
-*   Volt MX Foundry Installer for Linux environment: [](http://download.voltmx.com/installer/mobilefoundry/beta-70/latest/VoltMXFoundrySetup.tar.gz)[http://community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads)
-*   Volt MX Foundry Installer for Windows environment: [](http://download.voltmx.com/installer/mobilefoundry/beta-70/latest/VoltMXFoundrySetup.zip)[http://community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads)
-*   Volt MX Foundry Artifacts: [http://community.hclvoltmx.com/downloads/manual](http://community.hclvoltmx.com/downloads/manual)
-    
-    Download VoltMXFoundry installers from [http://community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads) and extract the file. To download Volt MX Foundry installer from the community portal, follow these steps:
-    
-    1.  Log in to [http://community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads). You can obtain a user name and password from your sales representative or partner.
-    2.  Click the **VoltMX Foundry** tab.
-    3.  Select the specific release from the **VoltMX Foundry Installer (Consolidated Installer for all features)** drop-down list, and click on the specific release-related files you want to download. For example, if you want to download **VoltMX Foundry 7.3.0 GA** installer, click the **VoltMX v7.3** version from the drop-down list.
-    4.  Click the **Download** button. The installer starts downloading to your local system.
+<p>Volt Foundry can be downloaded for Linux or Windows from</p>
+<ul>
+<li>On-prem customers can download Volt Foundry from the <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/startPage.do">HCL License and Download Portal</a>.</li>
+<ul>
+    <li>Select <b>Downloads</b> in the top navigation bar after login, select <b>List Downloads</b> and choose <b>HCL Volt MX.</b></li>
+    <li>Select <b>HCL Volt Foundry v9.2.x</b> and choose appropriate installer</li>
+    <img src="../Resources/Images/Foundry_Download.png">
+</ul>
+</ul>
+<ul>
+<li>There is no installation required for cloud and trial users. Volt Foundry can be accessed through the Cloud environment that you have been given access to. Links to Volt Foundry can be found in your registration emails.</li>
+</ul>

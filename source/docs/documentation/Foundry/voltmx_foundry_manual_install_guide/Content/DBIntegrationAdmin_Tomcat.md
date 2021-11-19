@@ -72,22 +72,22 @@ To create a database for **Admin**, follow these steps:
 
 | No. | Property name | Place holder |
 | ---| --- | --- |
-         | 1 | richclient.deploy | ${VOLTMX\_SERVER\_RICH\_CLIENT\_DEPLOY} Example value, `lib/apps` (Directory where the rich client binaries will be downloaded. Used by admin module) |
-         | 2 | memcache.cluster | ${VOLTMX\_SERVER\_MEMCACHE\_CLUSTER}Example value, `10.10.10.10:21201` (<ip>:<port> where memcache cluster is running)  **_Note:_** If the installation is being done without memcache, leave this value empty. |
-         | 3 | memcache.no.of.clients | ${VOLTMX\_SERVER\_MEMCACHED\_COUNT}Example value, `1`  **_Note:_** If the installation is being done without memcache, leave this value empty. |
-         | 4 | cacheid.transport | ${VOLTMX\_SERVER\_CACHEID\_TRANSPORT}Example value, `Null`(Specify the transfer mode through below property. Valid values are PARAM\_ONLY, COOKIE\_ONLY, EITHER (Default) or null if memcache is not used) |
-         | 5 | ssl.trustStore | ${VOLTMX\_SERVER\_TRUSTSTORE\_LOCATION}Example value, `$JAVA_HOME/jre/lib/security/cacerts`(cacerts Location) |
-         | 6 | ssl.keyStore | ${VOLTMX\_SERVER\_KEYSTORE\_LOCATION}Example value, `$JAVA_HOME/jre/lib/security/cacerts`(cacerts Location) |
-         | 7 | ssl.trustStorePassword | ${VOLTMX\_SERVER\_TRUSTSTORE\_PASSWORD}Example value, `changeit` |
-         | 8 | ssl.keyStorePassword | ${VOLTMX\_SERVER\_TRUSTSTORE\_PASSWORDExample value, `changeit` |
-         | 9 | metrics.initialContextFactoryName | ${VOLTMX\_SERVER\_JMS\_INITIAL\_CONTEXT\_FACTORY}Example value,for WebLogic: `weblogic.jndi.WLInitialContextFactory`for WebSphere: `com.ibm.websphere.naming.WsnInitialContextFactory`for Tomcat: `org.apache.activemq.jndi.ActiveMQInitialContextFactory`if jboss\_jms is used: `org.jboss.naming.remote.client.InitialContextFactory`if activemq is used: `org.apache.activemq.jndi.ActiveMQInitialContextFactory` |
-         | 10 | metrics.providerURL | ${VOLTMX\_SERVER\_JMS\_PROVIDER\_URL}Example value,For WebLogic: `t3://<ip>:<port>`For WebSphere: `iiop://<ip>:<port>`For Tomcat:  `tcp://$HOST_IP$:$USER_INPUT_JMS_PORT$?jms.useAsyncSend=TRUE`For JBoss: `http-remoting://<Hostname/Host IP>:<HTTP Port>` |
-         | 11 | metrics.securityPrincipalName | ${VOLTMX\_SERVER\_JMS\_USER\_NAME}Example value, `Weblogic`(weblogic admin username) |
-         | 12 | metrics.securityCredentials | ${VOLTMX\_SERVER\_JMS\_USER\_PASSWORD}Example value, `Weblogic123`(weblogic admin password) |
-         | 13 | metrics.userName | ${VOLTMX\_SERVER\_JMS\_USER\_NAME}Example value, `Weblogic`(weblogic admin username) |
-         | 14 | metrics.password | ${VOLTMX\_SERVER\_JMS\_USER\_PASSWORD}Example value, `Weblogic123`(weblogic admin password) |
-         | 15 | SERVER\_LOG\_LOCATION | ${VOLTMX\_SERVER\_LOG\_LOCATION}Example value, `C:/voltmxmflogs/`(Log location for middleware log) |
-         | 16 | SERVER\_LOGGER\_JNDI\_NAME | ${VOLTMX\_SERVER\_LOGGER\_JNDI\_NAME}Example value,`java:comp/env/jdbc/voltmxadmindb` |
+| 1 | richclient.deploy | ${VOLTMX\_SERVER\_RICH\_CLIENT\_DEPLOY}<br><br> Example value, `lib/apps` (Directory where the rich client binaries will be downloaded. Used by admin module) |
+| 2 | memcache.cluster | ${VOLTMX\_SERVER\_MEMCACHE\_CLUSTER}<br><br>Example value, `10.10.10.10:21201` ( where memcache cluster is running)<br><br>  **_Note:_** If the installation is being done without memcache, leave this value empty. |
+| 3 | memcache.no.of.clients | ${VOLTMX\_SERVER\_MEMCACHED\_COUNT}<br><br>Example value, `1`<br><br>  **_Note:_** If the installation is being done without memcache, leave this value empty. |
+| 4 | cacheid.transport | ${VOLTMX\_SERVER\_CACHEID\_TRANSPORT}<br><br>Example value, `Null`<br><br>(Specify the transfer mode through below property. Valid values are PARAM\_ONLY, COOKIE\_ONLY, EITHER (Default) or null if memcache is not used) |
+| 5 | ssl.trustStore | ${VOLTMX\_SERVER\_TRUSTSTORE\_LOCATION}<br><br>Example value, `$JAVA_HOME/jre/lib/security/cacerts`<br><br>(cacerts Location) |
+| 6 | ssl.keyStore | ${VOLTMX\_SERVER\_KEYSTORE\_LOCATION}<br><br>Example value, `$JAVA_HOME/jre/lib/security/cacerts`<br><br>(cacerts Location) |
+| 7 | ssl.trustStorePassword | ${VOLTMX\_SERVER\_TRUSTSTORE\_PASSWORD}<br><br>Example value, `changeit` |
+| 8 | ssl.keyStorePassword | ${VOLTMX\_SERVER\_TRUSTSTORE\_PASSWORD<br><br>Example value, `changeit` |
+| 9 | metrics.initialContextFactoryName | ${VOLTMX\_SERVER\_JMS\_INITIAL\_CONTEXT\_FACTORY}<br><br>Example value,<br><br>i.    for WebLogic: `weblogic.jndi.WLInitialContextFactory`<br>ii.    for WebSphere: `com.ibm.websphere.naming.WsnInitialContextFactory`<br>iii.    for Tomcat: `org.apache.activemq.jndi.ActiveMQInitialContextFactory`<br>iv.    if jboss\_jms is used: `org.jboss.naming.remote.client.InitialContextFactory`<br>v.    if activemq is used: `org.apache.activemq.jndi.ActiveMQInitialContextFactory` |
+| 10 | metrics.providerURL | ${VOLTMX\_SERVER\_JMS\_PROVIDER\_URL}<br><br>Example value,<br><br>For WebLogic: `t3://<ip>:<port>`<br>For WebSphere: `iiop://<ip>:<port>`<br>For Tomcat:  `tcp://$HOST_IP$:$USER_INPUT_JMS_PORT$?jms.useAsyncSend=TRUE`<br>For JBoss: `http-remoting://<Hostname/Host IP>:<HTTP Port>` |
+| 11 | metrics.securityPrincipalName | ${VOLTMX\_SERVER\_JMS\_USER\_NAME},<br><br>Example value, `Weblogic`<br><br>(weblogic admin username) |
+| 12 | metrics.securityCredentials | ${VOLTMX\_SERVER\_JMS\_USER\_PASSWORD}<br><br>Example value, `Weblogic123`<br><br>(weblogic admin password) |
+| 13 | metrics.userName | ${VOLTMX\_SERVER\_JMS\_USER\_NAME}<br><br>Example value, `Weblogic`<br><br>(weblogic admin username) |
+| 14 | metrics.password | ${VOLTMX\_SERVER\_JMS\_USER\_PASSWORD}<br><br>Example value, `Weblogic123`<br><br>(weblogic admin password) |
+| 15 | SERVER\_LOG\_LOCATION | ${VOLTMX\_SERVER\_LOG\_LOCATION}<br><br>Example value, `C:/voltmxmflogs/`<br><br>(Log location for middleware log) |
+| 16 | SERVER\_LOGGER\_JNDI\_NAME | ${VOLTMX\_SERVER\_LOGGER\_JNDI\_NAME}<br><br>Example value,`java:comp/env/jdbc/voltmxadmindb` |
         
   *   Tablespace Placeholders for **Oracle**:
         

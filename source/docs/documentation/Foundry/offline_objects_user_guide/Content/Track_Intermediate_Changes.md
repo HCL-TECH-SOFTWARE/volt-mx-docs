@@ -15,7 +15,7 @@ To upload the intermediate changes to the server, set the **trackIntermediateCha
 Sample Code
 
 {% highlight voltMx %}//------- update all records -------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var record = {};
 record["CATEGORY_DES"] = "Update existing record";
 
@@ -29,7 +29,7 @@ function errorCallback(error) {
 category.update(record, null, successCallback, errorCallback);
 
 //--------update a record using primary key--------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var record = {};
 var primaryKeys = {};
@@ -47,7 +47,7 @@ function errorCallback(error) {
 category.update(record, options, successCallback, errorCallback);
 
 //------- update by whereCondition-------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var record = {};
 var whereClause = {};
@@ -65,7 +65,7 @@ function errorCallback(error) {
 category.update(record, options, successCallback, errorCallback);
 
 //------- update by whereConditionAsAString -------
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var record = {};
 var whereClause = "Category_PN = '7'";
@@ -85,20 +85,20 @@ category.update(record, options, successCallback, errorCallback);
 var options = {
     "trackIntermediateUpdates": false
 };
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");
-HCLObject.update(record, options, successCallback, errorCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.update(record, options, successCallback, errorCallback);
 
 //------- update using Disable change tracking flag – trackChanges ---------
 var options = {
     "trackChanges": false
 };
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");
-HCLObject.update(record, options, successCallback, errorCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.update(record, options, successCallback, errorCallback);
 
 //------- update using markForUpload flag --------- 
 var options = {
     "markForUpload": false
 };
-var HCLObject = new voltmx.sdk.HCLObj("CATEGORY");
-HCLObject.update(record, options, successCallback, errorCallback);
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.update(record, options, successCallback, errorCallback);
 {% endhighlight %}

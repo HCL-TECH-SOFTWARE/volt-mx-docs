@@ -16,7 +16,7 @@ For example, consider that you have initiated a download of 100 records with a b
 *   The ability to cancel an in-progress sync session is supported in Android and iOS platforms.  
 *   You cannot resume a canceled sync session. It is considered as either terminated or failed.  
 
-{% highlight voltMx %}var syncObject = new voltmx.sdk.HCLObj("Managers");
+{% highlight voltMx %}var syncObject = new voltmx.sdk.VMXObj("Managers");
 
 // Define Sync options
 var syncOptions = {};

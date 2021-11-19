@@ -18,7 +18,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObj>.getBinary (options, fileDownloadStartedCallback, chunkDownloadCompletedCallback, streamDownloadCompletedCallback, fileDownloadCompletedCallback, downloadFailureCallback)
+{% highlight voltMx %}<VMXObj>.getBinary (options, fileDownloadStartedCallback, chunkDownloadCompletedCallback, streamDownloadCompletedCallback, fileDownloadCompletedCallback, downloadFailureCallback)
 
 {% endhighlight %}
 
@@ -43,7 +43,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}var media = new voltmx.sdk.HCLObj("media");
+{% highlight voltMx %}var media = new voltmx.sdk.VMXObj("media");
 var options = {};
 options.primaryKeys = {
     "id": "2"
@@ -106,7 +106,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}HCLObj media = new HCLObj("media");
+{% highlight voltMx %}VMXObj media = new VMXObj("media");
 HashMap < String, Object > options = new HashMap < String, Object > ();
 HashMap < String, Object > primaryKeys = new HashMap < > ();
 primaryKeys.put("id", 2);
@@ -147,7 +147,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj>.getBinary:(NSDictionary <NSString *,id>*)options
+{% highlight voltMx %}void <VMXObj>.getBinary:(NSDictionary <NSString *,id>*)options
 	 downloadStartedHandler:(HCLFileDownloadStartedCompletionBlock)fileDownloadStartedCompletionBlock
 	 chunkDownloadCompletedHandler:(HCLChunkDownloadCompletedCompletionBlock)chunkDownloadCompletedCompletionBlock
 	 streamDownloadCompletedHandler:(HCLStreamDownloadCompletedCompletionBlock)streamDownloadCompletionBlock
@@ -177,8 +177,8 @@ void
 
 ### Examples
 
-{% highlight voltMx %}HCLObj * _media = [
-    [HCLObj alloc] initWithName: @"media"
+{% highlight voltMx %}VMXObj * _media = [
+    [VMXObj alloc] initWithName: @"media"
     error: & ;error
 ];
 NSMutableDictionary < NSString * , id > * options = [

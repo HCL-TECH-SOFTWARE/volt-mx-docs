@@ -20,7 +20,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObj>.getBinaryStatus(options,successCallback,failureCallback)
+{% highlight voltMx %}<VMXObj>.getBinaryStatus(options,successCallback,failureCallback)
 
 {% endhighlight %}
 
@@ -46,7 +46,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}var mediaObject = new voltmx.sdk.HCLObj("Media");
+{% highlight voltMx %}var mediaObject = new voltmx.sdk.VMXObj("Media");
 var options = {
     "download": {
         "columnName": "image",

@@ -37,21 +37,21 @@ void
 
 ### Example
 
-{% highlight voltMx %}var category = new voltmx.sdk.HCLObj("CATEGORY");
+{% highlight voltMx %}var category = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var primaryKeys["CategoryID"] = "1";
 options["primaryKeys"] = primaryKeys;
 //mark the deferred record for upload with primary key 1
 category.markForUpload(options, successCallback, failureCallback);
 
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var whereClause = "Category_PN = '7'";
 var options = {};
 options["whereConditionAsAString"] = whereClause;
 //mark the deferred records for upload satisfying whereClause
 category.markForUpload(options, successCallback, failureCallback);
 
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 var whereCondition = {};
 whereCondition["CategoryID"] = "10";
 var options = {};
@@ -59,7 +59,7 @@ options["whereCondition"] = whereCondition;
 //mark the deferred records for upload satisfying whereCondition
 category.markForUpload(options, successCallback, failureCallback);
 
-var category = new voltmx.sdk.HCLObj("CATEGORY");
+var category = new voltmx.sdk.VMXObj("CATEGORY");
 //mark all the deferred records in the object for upload
 category.markForUpload(null, successCallback, failureCallback);
 
@@ -79,7 +79,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObj>.markForUpload(final HashMap<String, Object> options, final HCLCallback callback)
+{% highlight voltMx %}<VMXObj>.markForUpload(final HashMap<String, Object> options, final HCLCallback callback)
 {% endhighlight %}
 
 ### Parameters
@@ -96,7 +96,7 @@ void
 
 ### Examples
 
-{% highlight voltMx %}HCLObj category = new HCLObj("CATEGORY");
+{% highlight voltMx %}VMXObj category = new VMXObj("CATEGORY");
 HashMap < String, Object > options = new HashMap < String, Object > ();
 HashMap < String, Object > primaryKeys = new HashMap < String, Object > ();
 primaryKeys.put("CATEGORY_ID", "1");
@@ -115,7 +115,7 @@ category.markForUpload(options, new HCLCallback() {
         }
     }
 
-    HCLObj category = new HCLObj("CATEGORY"); HashMap < String, Object > options = new HashMap < String, Object > (); String whereCondition = "CATEGORY_ID = '1'"; options.put("whereConditionAsAString", whereCondition);
+    VMXObj category = new VMXObj("CATEGORY"); HashMap < String, Object > options = new HashMap < String, Object > (); String whereCondition = "CATEGORY_ID = '1'"; options.put("whereConditionAsAString", whereCondition);
     //mark the deferred records for upload satisfying whereClause
     category.markForUpload(options, new HCLCallback() {
             @Override
@@ -129,7 +129,7 @@ category.markForUpload(options, new HCLCallback() {
             }
         }
 
-        HCLObj category = new HCLObj("CATEGORY"); HashMap < String, Object > options = new HashMap < String, Object > (); HashMap < String, Object > whereCondition = new HashMap < String, Object > (); whereCondition.put("CATEGORY_ID", "1"); options.put("whereCondition", whereCondition);
+        VMXObj category = new VMXObj("CATEGORY"); HashMap < String, Object > options = new HashMap < String, Object > (); HashMap < String, Object > whereCondition = new HashMap < String, Object > (); whereCondition.put("CATEGORY_ID", "1"); options.put("whereCondition", whereCondition);
         //mark the deferred records for upload satisfying whereConditon
         category.markForUpload(options, new HCLCallback() {
                 @Override
@@ -143,7 +143,7 @@ category.markForUpload(options, new HCLCallback() {
                 }
             }
 
-            HCLObj category = new HCLObj("CATEGORY");
+            VMXObj category = new VMXObj("CATEGORY");
             //mark all the deferred records in the object for upload
             category.markForUpload(null, new HCLCallback() {
                     @Override
@@ -163,7 +163,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj> markForUpload:(NSDictionary <NSString *, id> *)options 
+{% highlight voltMx %}void <VMXObj> markForUpload:(NSDictionary <NSString *, id> *)options 
                onSuccess:(HCLSuccessCompletionHandler)onSuccess 
                onFailure:(HCLFailureCompletionHandler)onFailure
 {% endhighlight %}
@@ -183,8 +183,8 @@ void
 ### Example
 
 {% highlight voltMx %}NSError error = nil;
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSDictionary * primaryKeys = @ {@
@@ -207,8 +207,8 @@ NSDictionary * options = @ {
 ];
 
 NSError error = nil;
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSDictionary * options = @ {@
@@ -228,8 +228,8 @@ NSDictionary * options = @ {@
 ];
 
 NSError error = nil;
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSDictionary * whereCondition = @ {@
@@ -253,8 +253,8 @@ NSDictionary * options = @ {@
 
 
 NSError error = nil;
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 //mark all the deferred records in the object for upload
@@ -289,7 +289,7 @@ The API returns all the deferred records primary keys for a particular object.
 
 #### Example
 
-{% highlight voltMx %}var category = new voltmx.sdk.HCLObj("CATEGORY");
+{% highlight voltMx %}var category = new voltmx.sdk.VMXObj("CATEGORY");
 category.getUploadDeferredRecordKeys(successCallback, failureCallback);
 
 function successCallback(result) {
@@ -307,12 +307,12 @@ function failureCallback(error) {
 
 #### Signature
 
-{% highlight voltMx %}void <HCLObj>. getUploadDeferredRecordKeys (final HCLCallback callback)
+{% highlight voltMx %}void <VMXObj>. getUploadDeferredRecordKeys (final HCLCallback callback)
 {% endhighlight %}
 
 #### Example
 
-{% highlight voltMx %}HCLObj category = new HCLObj("CATEGORY");
+{% highlight voltMx %}VMXObj category = new VMXObj("CATEGORY");
 category.getUploadDeferredRecordKeys(new HCLCallback() {
         @Override
         public void onSuccess(Object result) {
@@ -338,7 +338,7 @@ category.getUploadDeferredRecordKeys(new HCLCallback() {
 
 #### Signature
 
-{% highlight voltMx %}<void> [<HCLObj> getUploadDeferredRecordKeys: (HCLSuccessCompletionHandler) onSuccess
+{% highlight voltMx %}<void> [<VMXObj> getUploadDeferredRecordKeys: (HCLSuccessCompletionHandler) onSuccess
 		 onFailure: (HCLFailureCompletionHandler) onFailure]
 
 {% endhighlight %}
@@ -346,8 +346,8 @@ category.getUploadDeferredRecordKeys(new HCLCallback() {
 #### Example
 
 {% highlight voltMx %}NSError error = nil;
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 

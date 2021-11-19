@@ -22,7 +22,7 @@ Using REST APIs may not be ideal in some cases.  For example, a developer uses 
 
 ### Download Links
 
-Volt MX  Foundry Command Line Utility can be downloaded from [VoltMX download center](http://community.hclvoltmx.com/downloads).
+Volt MX  Foundry Command Line Utility can be downloaded from [VoltMX download center](https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/startPage).
 
 ### Examples
 
