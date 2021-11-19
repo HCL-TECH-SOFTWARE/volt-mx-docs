@@ -7,14 +7,14 @@ category: "offline_objectsapi_reference_guide"
 \<objectService\>.getSdkObjectByName
 ==================================
 
-The **\<objectService\>.getSdkObjectByName** API returns an instance of HCLObj if the given object name is valid and belongs to the owning object service.
+The **\<objectService\>.getSdkObjectByName** API returns an instance of VMXObj if the given object name is valid and belongs to the owning object service.
 
 Volt MX  Iris (JavaScript)
 -------------------------------
 
 ### Signature
 
-{% highlight voltMx %}HCLObjSvc.getSdkObjectByName(CATEGORY)
+{% highlight voltMx %}VMXObjSvc.getSdkObjectByName(CATEGORY)
 {% endhighlight %}
 
 ### Parameters
@@ -26,12 +26,12 @@ Volt MX  Iris (JavaScript)
 
 ### Return Type
 
-An instance of HCLObj or undefined if object creation fails due to invalid name and so on.
+An instance of VMXObj or undefined if object creation fails due to invalid name and so on.
 
 ### Example
 
 {% highlight voltMx %}try {
-    var orgObjSvc = new voltmx.sdk.HCLObjSvc("Organization");
+    var orgObjSvc = new voltmx.sdk.VMXObjSvc("Organization");
     var empObj = orgObjSvc.getSdkObjectByName("Employee");
 } catch (err) {
     //Handles Exception.
@@ -43,7 +43,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}HCLObj <HCLObjSvc>.getSdkObjectByName(String objectName) throws Exception
+{% highlight voltMx %}VMXObj <VMXObjSvc>.getSdkObjectByName(String objectName) throws Exception
 {% endhighlight %}
 
 ### Parameters
@@ -55,13 +55,13 @@ Android (Java)
 
 ### Return Type
 
-An instance of HCLObj or Exception in case of error.
+An instance of VMXObj or Exception in case of error.
 
 ### Example
 
 {% highlight voltMx %}try {
-    HCLObjSvc orgObjSvc = new HCLObjSvc("Organization");
-    HCLObj empObj = orgObjSvc.getSdkObjectByName("Employee");
+    VMXObjSvc orgObjSvc = new VMXObjSvc("Organization");
+    VMXObj empObj = orgObjSvc.getSdkObjectByName("Employee");
 } catch (Exception e) {
     Log.d("ObjectServiceSync", "ObjectService sync failed with error:" + e.getMessage());
 }
@@ -72,7 +72,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}(HCLObj *) <HCLObjSvc> getSdkObjectByName:(NSString *)objectName withError:(NSError *)error;
+{% highlight voltMx %}(VMXObj *) <VMXObjSvc> getSdkObjectByName:(NSString *)objectName withError:(NSError *)error;
 
 {% endhighlight %}
 
@@ -86,17 +86,17 @@ iOS (Objective C)
 
 ### Return Type
 
-An instance of HCLObj or nil in case of error.
+An instance of VMXObj or nil in case of error.
 
 ### Example
 
 {% highlight voltMx %}NSError * error;
-HCLObjSvc * orgObjSvc = [
-    [HCLObjSvc alloc] initWithName: @"Organization"
+VMXObjSvc * orgObjSvc = [
+    [VMXObjSvc alloc] initWithName: @"Organization"
     error: & error
 ];
 If(! * error) {
-    HCLObj * empObj = [orgObjSvc getSdkObjectByName: @"Employee"
+    VMXObj * empObj = [orgObjSvc getSdkObjectByName: @"Employee"
         withError: & error
     ];
 }

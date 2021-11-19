@@ -266,7 +266,7 @@
     </ul>
   </li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">\# For Reports (reportsdb), replace the following placeholders in SQL migrations for your database
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"># For Reports (reportsdb), replace the following placeholders in SQL migrations for your database
         flyway.placeholders.VOLTMX_METRICS_LOGGER_JNDI=java:comp/env/jdbc/voltmxreports
         flyway.placeholders.VOLTMX_METRICS_LOG_LEVEL=INFO
         flyway.placeholders.VOLTMX_METRICS_LOG_OPTION=logfile
@@ -274,51 +274,66 @@
         </code></pre></figure>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*   Tablespace Placeholders for Oracle:
-    
-    | Product Name | Tablespace Placeholders for Oracle |
-    | --- | --- |
-    | Reports / Metrics | METRICS\_DATA\_TABLESPACE, METRICS\_INDEX\_TABLESPACE, METRICS\_LOB\_TABLESPACE |
-    
-*   SQL files paths for Reports in VoltMXFoundry\_Plugins folder:
 </code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Tablespace Placeholders for Oracle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Reports / Metrics</td>
+      <td>METRICS_DATA_TABLESPACE, METRICS_INDEX_TABLESPACE, METRICS_LOB_TABLESPACE</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>SQL files paths for Reports in VoltMXFoundry_Plugins folder:</li>
+</ul>
 
 <details close="">
   <summary>Click here for more details</summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    | Path for SQL files in the VoltMXFoundry\_Plugins folder | Database | Component |
-    | --- | --- | --- |
-    | \\VoltMXFoundry\_Plugins\\middleware\\reportsdb\_mysql | MySQL | ReportsDB   |
-    | \\VoltMXFoundry\_Plugins\\middleware\\reportsdb\_oracle | Oracle |
-    | \\VoltMXFoundry\_Plugins\\middleware\\reportsdb\_mssql | SQL Server |
-</code></pre></div>  </div>
+  <p>| Path for SQL files in the VoltMXFoundry_Plugins folder | Database | Component |
+| — | — | — |
+| \VoltMXFoundry_Plugins\middleware\reportsdb_mysql | MySQL | ReportsDB   |
+| \VoltMXFoundry_Plugins\middleware\reportsdb_oracle | Oracle |
+| \VoltMXFoundry_Plugins\middleware\reportsdb_mssql | SQL Server |</p>
 </details>
 <ol>
-  <li>
-    <p>Execute all SQL scripts by using the steps provided at <a href="FlywayNew.html">Configuring Flyway Command-line Tool</a>.</p>
-
-    <p>Click here to view the <a href="http://docs.voltmx.com/8_x_PDFs/MFSchema_Diagrams/metrics.png">ReportsDB (Metrics) schema diagram</a></p>
-  </li>
+  <li>Execute all SQL scripts by using the steps provided at <a href="FlywayNew.html">Configuring Flyway Command-line Tool</a>.</li>
 </ol>
+
+<p>Click here to view the <a href="http://docs.voltmx.com/8_x_PDFs/MFSchema_Diagrams/metrics.png">ReportsDB (Metrics) schema diagram</a></p>
 
 <p>Since the structure of flyway has changed from Flyway 3.2.1 to Flyway 4.0.3 in Volt MX Foundry installer, execute the following statements to make the <code class="language-plaintext highlighter-rouge">schema_version</code> table compatible with Flyway 4.0.3.</p>
 
-<p><strong>Oracle:</strong><br />
+<blockquote>
+  <p><strong>Oracle:</strong><br />
 drop index “schema_version_ir_idx”;<br />
 drop index “schema_version_vr_idx”;<br />
 ALTER TABLE “schema_version” DROP constraint “schema_version_pk” drop index;<br />
 ALTER TABLE “schema_version” DROP COLUMN “version_rank”;<br />
 ALTER TABLE “schema_version” modify(“version” null);<br />
 ALTER TABLE “schema_version” add constraint “schema_version_pk” primary key(“installed_rank”);</p>
+</blockquote>
 
-<p><strong>MySQL:</strong><br />
+<blockquote>
+  <p><strong>MySQL:</strong><br />
 ALTER TABLE schema_version DROP INDEX schema_version_vr_idx;<br />
 ALTER TABLE schema_version DROP INDEX schema_version_ir_idx;<br />
 ALTER TABLE schema_version DROP PRIMARY KEY;<br />
 ALTER TABLE schema_version DROP COLUMN version_rank;<br />
 ALTER TABLE schema_version CHANGE version version VARCHAR(50);<br />
 ALTER TABLE schema_version ADD PRIMARY KEY (installed_rank);</p>
+</blockquote>
 
-<p><strong>SQL Server:</strong><br />
+<blockquote>
+  <p><strong>SQL Server:</strong><br />
 DROP INDEX schema_version_ir_idx ON dbo.schema_version<br />
 GO<br />
 DROP INDEX schema_version_vr_idx ON dbo.schema_version<br />
@@ -331,6 +346,7 @@ ALTER TABLE dbo.schema_version ADD CONSTRAINT schema_version_pk PRIMARY KEY CLUS
 GO<br />
 ALTER TABLE dbo.schema_version ALTER COLUMN version nvarchar(50) NULL<br />
 GO</p>
+</blockquote>
 
         
 
@@ -1590,7 +1606,7 @@ GO</p>
 
   
  </li>
-  <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Post-Installation_Tasks.html#how-to-turn-off-the-send-usage-data-anonymously-feature" class="nav-list-link">How to Configure Memcache for Integration Services</a>
+  <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Post-Installation_Tasks.html#how-to-configure-memcache-for-integration-services" class="nav-list-link">How to Configure Memcache for Integration Services</a>
 
   
  </li>

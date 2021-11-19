@@ -38,19 +38,19 @@ The folder path where you store a SQLite database in a Volt MX Iris project vari
 > **_Note:_** Files in the platform-specific folders whose file names are identical to files in the Common folder take precedence and override the Common folder versions of those files.
 
 **Common (located under the Mobile channel)**  
-<WorkspaceName>\\<ProjectName>\\resources\\mobile\\common\\raw
+`<WorkspaceName>\<ProjectName>\resources\mobile\common\raw`
 
 **Common (located under the Tablet channel)**  
-<WorkspaceName>\\<ProjectName>\\resources\\tablet\\common\\raw
+`\<WorkspaceName>\<ProjectName>\resources\tablet\common\raw`
 
 **Android Mobile**  
-<WorkspaceName>\\<ProjectName>\\resources\\mobile\\native\\android\\raw
+`<WorkspaceName>\<ProjectName>\resources\mobile\native\android\raw`
 
 **Android Tablet**  
-<WorkspaceName>\\<ProjectName>\\resources\\tablet\\native\\androidtab\\raw
+`<WorkspaceName>\<ProjectName>\resources\tablet\native\androidtab\raw`
 
 **iOS Mobile**  
-<WorkspaceName>\\<ProjectName>\\resources\\mobile\\native\\iphone\\raw
+`<WorkspaceName>\<ProjectName>\resources\mobile\native\iphone\raw`
 
 **iOS Tablet**  
-<WorkspaceName>\\<ProjectName>\\resources\\tablet\\native\\ipad\\raw
+`<WorkspaceName>\<ProjectName>\resources\tablet\native\ipad\raw`

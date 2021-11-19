@@ -17,7 +17,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObj>.rollback(primaryKeyValueMap, successCallback, failureCallback)
+{% highlight voltMx %}<VMXObj>.rollback(primaryKeyValueMap, successCallback, failureCallback)
 
 {% endhighlight %}
 
@@ -39,7 +39,7 @@ function failureCallback(error) {
     voltmx.print("Object rollback failed: " + error.code);
 }
 
-var categories = new voltmx.sdk.HCLObj("CATEGORY");
+var categories = new voltmx.sdk.VMXObj("CATEGORY");
 var primaryKeyValueMap = {};
 primaryKeyValueMap["CATEGORY_ID"] = 123;
 
@@ -56,7 +56,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObj>.rollback(final HashMap<String, Object> primaryKeyValueMap, final HCLCallback callback)
+{% highlight voltMx %}<VMXObj>.rollback(final HashMap<String, Object> primaryKeyValueMap, final HCLCallback callback)
 
 {% endhighlight %}
 
@@ -70,7 +70,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}HCLObj category = new HCLObj("CATEGORY");
+{% highlight voltMx %}VMXObj category = new VMXObj("CATEGORY");
 
 //Rollback entire object
 category.rollback(null, new HCLCallback() {
@@ -109,7 +109,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj> rollback:(NSDictionary <NSString *, id> *)primaryKeyValueMap 
+{% highlight voltMx %}void <VMXObj> rollback:(NSDictionary <NSString *, id> *)primaryKeyValueMap 
                     onSuccess:(HCLSuccessCompletionHandler)onSuccess 
                     onFailure:(HCLFailureCompletionHandler)onFailure
 
@@ -126,8 +126,8 @@ void
 ### Examples
 
 {% highlight voltMx %}NSError * error = nil;
-HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 

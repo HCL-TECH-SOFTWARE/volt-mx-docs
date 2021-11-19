@@ -36,7 +36,7 @@ Each use-case scenario includes links to respective sections in the user guide t
     | --- | --- | --- |
     | Overview | Apps | Adding Applications in Engagement server |
     | Engagement | Segments | Adding Segments |
-    | Engagement | Campaigns | Adding Campaigns:Includes three campaign statuses : Start, Pause and Resume |
+    | Engagement | Campaigns | Adding Campaigns:<br>Includes three campaign statuses : Start, Pause and Resume |
     | Settings | Configuration | Adding Campaign Types |
     | Settings | Templates | Adding Templates (push, SMS, email and pass) |
     
@@ -60,7 +60,7 @@ Each use-case scenario includes links to respective sections in the user guide t
 | --- | --- | --- |
 | Overview | Apps | Adding Applications in Engagement server |
 | Overview | Subscribers | Adding Subscribers |
-| Engagement | Location | \- Adding Geolocations in Engagement Server- Fetching Nearest McDonalds Locations   |
+| Engagement | Location | \- Adding Geolocations in Engagement Server<br> - Fetching Nearest McDonalds Locations   |
 
 [Use Case Scenario >5](Beacons_scenario_one.html): A user receives best offers after entering a shopping mall. The use-case scenario includes the following Engagement Services modules to accomplish the task:
 
@@ -71,5 +71,5 @@ Each use-case scenario includes links to respective sections in the user guide t
 | Overview | Apps | Adding applications in the Engagement server |
 | Overview | Subscribers | Adding Subscribers |
 | Engagement | Segments | Adding Segments |
-| Engagement | Location | \- Adding beacons in the Engagement server- Connecting beacons with apps |
+| Engagement | Location | \- Adding beacons in the Engagement server<br>- Connecting beacons with apps |
 | Engagement | Campaigns | Adding Campaigns |

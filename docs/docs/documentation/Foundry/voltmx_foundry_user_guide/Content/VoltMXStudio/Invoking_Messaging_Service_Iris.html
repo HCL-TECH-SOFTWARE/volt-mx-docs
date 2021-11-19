@@ -851,7 +851,7 @@ The Geofence service does not continuously query for location, so expect some la
 <p>There are additional settings that must be enabled for this API to work correctly.</p>
 
 <blockquote>
-  <p><strong><em>Note:</em></strong> Exceptions are thrown if location is switched off on the device, or user does not allow permission to retrieve location, or the SDK is not able to retrieve the current location on the device. For more information on SDKs for Messaging Service docs, refer to <a href="/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/push_notifications.html">VoltMX Iris API Developers’ Guide &gt; Notifications &gt; Push Notifications</a></p>
+  <p><strong><em>Note:</em></strong> Exceptions are thrown if location is switched off on the device, or user does not allow permission to retrieve location, or the SDK is not able to retrieve the current location on the device.<br /><br /> For more information on SDKs for Messaging Service docs, refer to <a href="/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/push_notifications.html">VoltMX Iris API Developers’ Guide &gt; Notifications &gt; Push Notifications</a></p>
 </blockquote>
 
 <p><strong>Android</strong></p>
@@ -873,7 +873,7 @@ The Geofence service does not continuously query for location, so expect some la
 <p><strong>Use Google Play Location Services</strong></p>
 
 <ol>
-  <li>In the <strong>Manifest Properties</strong> section, select Tags. Add the following to the **Child tag entries <application>** tag:</application></li>
+  <li>In the <strong>Manifest Properties</strong> section, select Tags. Add the following to the Child tag entries &lt; application &gt; tag:</li>
 </ol>
 <service android:name="com.konylabs.api.location.KonyGeoTransitionsIntentService" />
 
@@ -893,13 +893,8 @@ The Geofence service does not continuously query for location, so expect some la
 <p>For information about how to access and edit the info.plist file, refer to <a href="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Introduction.html">Build an App for iOS</a>.</p>
 
 <blockquote>
-  <p><strong><em>Important:</em></strong></p>
+  <p><strong><em>Important:</em></strong><br /><br />i.    Include the <code class="language-plaintext highlighter-rouge">NSLocationWhenInUseUsageDescription</code> and <code class="language-plaintext highlighter-rouge">NSLocationAlwaysAndWhenInUseUsageDescription</code> keys in your app’s <code class="language-plaintext highlighter-rouge">Info.plist</code> file.<br />ii.    If the deployment target is iOS10 or below, the <code class="language-plaintext highlighter-rouge">NSLocationAlwaysUsageDescription</code> key is required. If those keys are not present, authorization requests fail immediately.</p>
 </blockquote>
-
-<ul>
-  <li>Include the <code class="language-plaintext highlighter-rouge">NSLocationWhenInUseUsageDescription</code> and <code class="language-plaintext highlighter-rouge">NSLocationAlwaysAndWhenInUseUsageDescription</code> keys in your app’s <code class="language-plaintext highlighter-rouge">Info.plist</code> file.</li>
-  <li>If the deployment target is iOS10 or below, the <code class="language-plaintext highlighter-rouge">NSLocationAlwaysUsageDescription</code> key is required. If those keys are not present, authorization requests fail immediately.</li>
-</ul>
 
 <p>To obtain the geolocation callbacks, run the following code in the <strong>preappinit</strong> of your application.</p>
 
@@ -941,9 +936,9 @@ voltmx.location.setGeofencesCallback(cback);</code></pre></figure>
 <p>The following example shows how to register geoboundaries.</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">// Get an instance of SDK
-var client = voltmx.sdk.getCurrentInstance();
-var messagingSvc = client.getMessagingService();
-messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) {
+        var client = voltmx.sdk.getCurrentInstance();
+        var messagingSvc = client.getMessagingService();
+        messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) {
         voltmx.print("Register Successful");
         var options = {};
         options.radius = "radius"; //radius in miles            
@@ -964,10 +959,11 @@ messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) 
         }
         messagingSvc.registerGeoBoundaries(options, successCallback, failureCallback); //if ksid is already available, register is not required.           
         // If either location is switched off or the SDK is not able to retrieve current location, exceptions are thrown.      
-    },
-    function(error) {
+        },
+        function(error) {
         voltmx.print("Register Failure" + JSON.stringify(error));
-    });</code></pre></figure>
+        });
+        </code></pre></figure>
       <h2 id="update-geolocation">
         
         
@@ -992,219 +988,6 @@ messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) 
         
         
           <a href="#parameters-5" class="anchor-heading" aria-labelledby="parameters-5"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Parameters
-        
-        
-      </h3>
-    
-      <h3 id="additional-settings-1">
-        
-        
-          <a href="#additional-settings-1" class="anchor-heading" aria-labelledby="additional-settings-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Additional Settings
-        
-        
-      </h3>
-    
-
-<p>There are additional settings that must be enabled for this API to work correctly. &gt; <strong><em>Note:</em></strong> Exceptions are thrown if location is switched off on the device, or user does not allow permission to retrieve location, or the SDK is not able to retrieve the current location on the device. For more information on SDKs for Messaging Service docs, refer to <a href="/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/push_notifications.html">VoltMX Iris API Developers’ Guide &gt; Notifications &gt; Push Notifications</a> <strong>Android</strong> To enable the <strong>registerGeoBoundaries</strong> API for the Android platform perform the following steps in Volt MX Iris.</p>
-
-<p>On the File menu, click <strong>Settings</strong> to open the Project Settings dialog box. Click the <strong>Native</strong> tab. Click the <strong>Android</strong> sub-tab. In <strong>Push Notifications</strong> section, select either <strong>GCM</strong> or <strong>FCM</strong> for the engagement APIs to work. Enable the following items: <strong>Enable Local Notifications</strong> <strong>Use Google Play Location Services</strong> In the <strong>Manifest Properties</strong> section, select Tags. Add the following to the **Child tag entries <application>** tag: &lt;service android:namecom.konylabs.api.location.KonyGeoTransitionsIntentService"/&gt;</application></p>
-
-<p>The page will look like the following example. <img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/Android_GeoBoundaries_Settings_714x433.jpg" alt="" /> <strong>iOS</strong> To enable the <strong>registerGeoBoundaries</strong> API for the iOS platform, add the following keys to the info.plist file. “NSLocationAlwaysUsageDescription”:”<ThisMessageWillBeDisplayedToUser>" "UIBackgroundModes":\["location"\] For information about how to access and edit the info.plist file, refer to [Build an App for iOS](/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Introduction.html).</ThisMessageWillBeDisplayedToUser></p>
-
-<blockquote>
-  <p><strong><em>Important:</em></strong> Include the <code class="language-plaintext highlighter-rouge">NSLocationWhenInUseUsageDescription</code> and <code class="language-plaintext highlighter-rouge">NSLocationAlwaysAndWhenInUseUsageDescription</code> keys in your app’s <code class="language-plaintext highlighter-rouge">Info.plist</code> file. If the deployment target is iOS10 or below, the <code class="language-plaintext highlighter-rouge">NSLocationAlwaysUsageDescription</code> key is required. If those keys are not present, authorization requests fail immediately.</p>
-</blockquote>
-
-<p>To obtain the geolocation callbacks, run the following code in the <strong>preappinit</strong> of your application.var msgObj = voltmx.sdk.getCurrentInstance().getMessagingService(); var cback = msgObj.manageGeoBoundariesCallback; voltmx.location.setGeofencesCallback(cback); &gt; <strong><em>Important:</em></strong> Before building the application, link your Foundry application to your Iris project. <strong>Windows</strong> To enable the <strong>registerGeoBoundaries</strong> API for the Windows platform perform the following steps in Volt MX Iris.</p>
-
-<p>On the <strong>File</strong> menu, click <strong>Settings</strong> to open the Project Settings dialog box. Click the <strong>Native</strong> tab. Click the <strong>Windows Phone</strong> tab. Click the <strong>Windows 10 Mobile</strong> tab. Click the <strong>Capabilities</strong> tab. Move the following permissions to “true”:</p>
-
-<blockquote>
-  <p>internetClient internetClientService location</p>
-</blockquote>
-
-<p>The Capabilities page will look like the following example. <img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/Windows_GeoBoundaries_Settings_688x420.jpg" alt="" /> <strong>Example</strong> The following example shows how to register geoboundaries.// Get an instance of SDK var client = voltmx.sdk.getCurrentInstance(); var messagingSvc = client.getMessagingService(); messagingSvc.register(“osType”, “deviceId”, “regID”, “UFID”, function(response) { voltmx.print(“Register Successful”); var options = {}; options.radius = “radius”; //radius in miles options.pageSize = “pageSize”; options.authToken = “Authorization_Token”; options.tags = “Array of tags”; //TODO options.customLogicCallback = function(data) { // data is geoBoundary Data received from Volt MX Messaging Service //custom logic implementation }; function successCallback(response) { //Registered Successfully. } function failureCallback(error) { //Registration failure. } messagingSvc.registerGeoBoundaries(options, successCallback, failureCallback); //if ksid is already available, register is not required. // If either location is switched off or the SDK is not able to retrieve current location, exceptions are thrown. }, function(error) { voltmx.print(“Register Failure” + JSON.stringify(error)); });</p>
-      <h2 id="update-geolocation-1">
-        
-        
-          <a href="#update-geolocation-1" class="anchor-heading" aria-labelledby="update-geolocation-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Update GeoLocation
-        
-        
-      </h2>
-    
-
-<p><strong>updateGeoLocation</strong> API updates the geoLocation for the messaging service.</p>
-      <h3 id="syntax-6">
-        
-        
-          <a href="#syntax-6" class="anchor-heading" aria-labelledby="syntax-6"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Syntax
-        
-        
-      </h3>
-    
-
-<p>updateGeoLocation= function (latitude, longitude, locationName, successCallback, failureCallback, options)</p>
-      <h3 id="parameters-6">
-        
-        
-          <a href="#parameters-6" class="anchor-heading" aria-labelledby="parameters-6"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Parameters
-        
-        
-      </h3>
-    
-      <h3 id="additional-settings-2">
-        
-        
-          <a href="#additional-settings-2" class="anchor-heading" aria-labelledby="additional-settings-2"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Additional Settings
-        
-        
-      </h3>
-    
-
-<p>There are additional settings that must be enabled for this API to work correctly.</p>
-
-<blockquote>
-  <p><strong><em>Note:</em></strong> Exceptions are thrown if location is switched off on the device, or user does not allow permission to retrieve location, or the SDK is not able to retrieve the current location on the device. For more information on SDKs for Messaging Service docs, refer to <a href="/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/push_notifications.html">VoltMX Iris API Developers’ Guide &gt; Notifications &gt; Push Notifications</a></p>
-</blockquote>
-
-<p><strong>Android</strong></p>
-
-<p>To enable the <strong>registerGeoBoundaries</strong> API for the Android platform perform the following steps in Volt MX Iris.</p>
-
-<ol>
-  <li>On the File menu, click <strong>Settings</strong> to open the Project Settings dialog box.</li>
-  <li>Click the <strong>Native</strong> tab.</li>
-  <li>Click the <strong>Android</strong> sub-tab.</li>
-  <li>
-    <p>In <strong>Push Notifications</strong> section, select either <strong>GCM</strong> or <strong>FCM</strong> for the engagement APIs to work.</p>
-  </li>
-  <li>Enable the following items:</li>
-</ol>
-
-<p><strong>Enable Local Notifications</strong></p>
-
-<p><strong>Use Google Play Location Services</strong></p>
-
-<ol>
-  <li>In the <strong>Manifest Properties</strong> section, select Tags. Add the following to the **Child tag entries <application>** tag:</application></li>
-</ol>
-<service android:name="com.konylabs.api.location.KonyGeoTransitionsIntentService" />
-
-<p>The page will look like the following example.</p>
-
-<p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/Android_GeoBoundaries_Settings_714x433.jpg" alt="" /></p>
-
-<p><strong>iOS</strong></p>
-
-<p>To enable the <strong>registerGeoBoundaries</strong> API for the iOS platform, add the following keys to the info.plist file.</p>
-
-<ul>
-  <li>“NSLocationAlwaysUsageDescription”:”<ThisMessageWillBeDisplayedToUser>"</ThisMessageWillBeDisplayedToUser></li>
-  <li>“UIBackgroundModes”:[“location”]</li>
-</ul>
-
-<p>For information about how to access and edit the info.plist file, refer to <a href="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Introduction.html">Build an App for iOS</a>.</p>
-
-<blockquote>
-  <p><strong><em>Important:</em></strong></p>
-</blockquote>
-
-<ul>
-  <li>Include the <code class="language-plaintext highlighter-rouge">NSLocationWhenInUseUsageDescription</code> and <code class="language-plaintext highlighter-rouge">NSLocationAlwaysAndWhenInUseUsageDescription</code> keys in your app’s <code class="language-plaintext highlighter-rouge">Info.plist</code> file.</li>
-  <li>If the deployment target is iOS10 or below, the <code class="language-plaintext highlighter-rouge">NSLocationAlwaysUsageDescription</code> key is required. If those keys are not present, authorization requests fail immediately.</li>
-</ul>
-
-<p>To obtain the geolocation callbacks, run the following code in the <strong>preappinit</strong> of your application.</p>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">var msgObj = voltmx.sdk.getCurrentInstance().getMessagingService();
-var cback = msgObj.manageGeoBoundariesCallback;
-voltmx.location.setGeofencesCallback(cback);</code></pre></figure>
-
-<blockquote>
-  <p><strong><em>Important:</em></strong> Before building the application, link your Foundry application to your Iris project.</p>
-</blockquote>
-
-<p><strong>Windows</strong></p>
-
-<p>To enable the <strong>registerGeoBoundaries</strong> API for the Windows platform perform the following steps in Volt MX Iris.</p>
-
-<ol>
-  <li>On the <strong>File</strong> menu, click <strong>Settings</strong> to open the Project Settings dialog box.</li>
-  <li>Click the <strong>Native</strong> tab.</li>
-  <li>Click the <strong>Windows Phone</strong> tab.</li>
-  <li>Click the <strong>Windows 10 Mobile</strong> tab.</li>
-  <li>Click the <strong>Capabilities</strong> tab.</li>
-  <li>Move the following permissions to “true”:</li>
-</ol>
-
-<blockquote>
-  <p>internetClient</p>
-
-  <p>internetClientService</p>
-
-  <p>location</p>
-</blockquote>
-
-<p>The Capabilities page will look like the following example.</p>
-
-<p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/Windows_GeoBoundaries_Settings_688x420.jpg" alt="" /></p>
-
-<p><strong>Example</strong></p>
-
-<p>The following example shows how to register geoboundaries.</p>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">// Get an instance of SDK
-var client = voltmx.sdk.getCurrentInstance();
-var messagingSvc = client.getMessagingService();
-messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) {
-        voltmx.print("Register Successful");
-        var options = {};
-        options.radius = "radius"; //radius in miles            
-        options.pageSize = "pageSize";
-        options.authToken = "Authorization_Token";
-        options.tags = "Array of tags"; //TODO          
-        options.customLogicCallback = function(data) {
-            // data is geoBoundary Data received from Volt MX Messaging Service                 
-            //custom logic implementation           
-        };
-
-        function successCallback(response) {
-            //Registered Successfully.           
-        }
-
-        function failureCallback(error) {
-            //Registration failure.         
-        }
-        messagingSvc.registerGeoBoundaries(options, successCallback, failureCallback); //if ksid is already available, register is not required.           
-        // If either location is switched off or the SDK is not able to retrieve current location, exceptions are thrown.      
-    },
-    function(error) {
-        voltmx.print("Register Failure" + JSON.stringify(error));
-    });</code></pre></figure>
-      <h2 id="update-geolocation-2">
-        
-        
-          <a href="#update-geolocation-2" class="anchor-heading" aria-labelledby="update-geolocation-2"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Update GeoLocation
-        
-        
-      </h2>
-    
-
-<p><strong>updateGeoLocation</strong> API updates the geoLocation for the messaging service.</p>
-      <h3 id="syntax-7">
-        
-        
-          <a href="#syntax-7" class="anchor-heading" aria-labelledby="syntax-7"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Syntax
-        
-        
-      </h3>
-    
-
-<p>updateGeoLocation= function (latitude, longitude, locationName, successCallback, failureCallback, options)</p>
-      <h3 id="parameters-7">
-        
-        
-          <a href="#parameters-7" class="anchor-heading" aria-labelledby="parameters-7"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Parameters
         
         
       </h3>
@@ -1286,7 +1069,7 @@ messagingSvc.register("osType", "deviceId", "regID", "UFID", function(response) 
   </tbody>
 </table>
 
-<p>Example</p>
+<p><strong>Example</strong></p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">//Get an instance of SDK.
 var client = voltmx.sdk.getCurrentInstance();
@@ -1312,20 +1095,20 @@ messagingSvc.updateGeoLocation(latitude, longitude, locationName, function(respo
     
 
 <p>The <strong>updateGeoLocationWithAuthToken</strong> API updates the geoLocation with the Auth Token for the messaging service.</p>
-      <h3 id="syntax-8">
+      <h3 id="syntax-6">
         
         
-          <a href="#syntax-8" class="anchor-heading" aria-labelledby="syntax-8"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
+          <a href="#syntax-6" class="anchor-heading" aria-labelledby="syntax-6"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
         
         
       </h3>
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">updateGeoLocationWithAuthToken= function(latitude, longitude, locationName, authToken, successCallback, failureCallback)</code></pre></figure>
-      <h3 id="parameters-8">
+      <h3 id="parameters-6">
         
         
-          <a href="#parameters-8" class="anchor-heading" aria-labelledby="parameters-8"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
+          <a href="#parameters-6" class="anchor-heading" aria-labelledby="parameters-6"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
         
         
       </h3>
@@ -1411,20 +1194,20 @@ messagingSvc.updateGeoLocationWithAuthToken(latitude, longitude, locationName, a
     
 
 <p>The <strong>fetchAllMessages</strong> API fetches all messages with/without the Auth Token.</p>
-      <h3 id="syntax-9">
+      <h3 id="syntax-7">
         
         
-          <a href="#syntax-9" class="anchor-heading" aria-labelledby="syntax-9"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
+          <a href="#syntax-7" class="anchor-heading" aria-labelledby="syntax-7"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
         
         
       </h3>
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> fetchAllMessages = function(startIndex, pageSize, successCallback, failureCallback, options)</code></pre></figure>
-      <h3 id="parameters-9">
+      <h3 id="parameters-7">
         
         
-          <a href="#parameters-9" class="anchor-heading" aria-labelledby="parameters-9"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
+          <a href="#parameters-7" class="anchor-heading" aria-labelledby="parameters-7"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
         
         
       </h3>
@@ -1530,20 +1313,20 @@ messagingSvc.fetchAllMessages(startIndex, pageSize, function(response) {
     
 
 <p>The <strong>markMessageRead</strong> API marks a message as read with/without the Auth Token.</p>
-      <h3 id="syntax-10">
+      <h3 id="syntax-8">
         
         
-          <a href="#syntax-10" class="anchor-heading" aria-labelledby="syntax-10"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
+          <a href="#syntax-8" class="anchor-heading" aria-labelledby="syntax-8"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
         
         
       </h3>
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">markMessageRead = function(fetchId, successCallback, failureCallback, options)</code></pre></figure>
-      <h3 id="parameters-10">
+      <h3 id="parameters-8">
         
         
-          <a href="#parameters-10" class="anchor-heading" aria-labelledby="parameters-10"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
+          <a href="#parameters-8" class="anchor-heading" aria-labelledby="parameters-8"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
         
         
       </h3>
@@ -1642,20 +1425,20 @@ messagingSvc.markMessageRead(fetchID, function(response) {
     
 
 <p>The <strong>fetchMessageContent</strong> API fetches a message with/without the Auth Token.</p>
-      <h3 id="syntax-11">
+      <h3 id="syntax-9">
         
         
-          <a href="#syntax-11" class="anchor-heading" aria-labelledby="syntax-11"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
+          <a href="#syntax-9" class="anchor-heading" aria-labelledby="syntax-9"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
         
         
       </h3>
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> fetchMessageContent = function(fetchId, successCallback, failureCallback, options)</code></pre></figure>
-      <h3 id="parameters-11">
+      <h3 id="parameters-9">
         
         
-          <a href="#parameters-11" class="anchor-heading" aria-labelledby="parameters-11"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
+          <a href="#parameters-9" class="anchor-heading" aria-labelledby="parameters-9"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
         
         
       </h3>
@@ -1754,20 +1537,20 @@ messagingSvc.fetchMessageContent(fetchID, function(response) {
     
 
 <p>The <strong>Subscribe Audience (Create or Update)</strong> API creates a new audience. This API also updates the parameter details of an audience member.</p>
-      <h3 id="syntax-12">
+      <h3 id="syntax-10">
         
         
-          <a href="#syntax-12" class="anchor-heading" aria-labelledby="syntax-12"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
+          <a href="#syntax-10" class="anchor-heading" aria-labelledby="syntax-10"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
         
         
       </h3>
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">subscribeAudience  =  function (firstName, lastName, emailId, mobileNumber, country, state, successCallback, failureCallback, options)</code></pre></figure>
-      <h3 id="parameters-12">
+      <h3 id="parameters-10">
         
         
-          <a href="#parameters-12" class="anchor-heading" aria-labelledby="parameters-12"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
+          <a href="#parameters-10" class="anchor-heading" aria-labelledby="parameters-10"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
         
         
       </h3>
@@ -1932,20 +1715,20 @@ messagingSvc.subscribeAudience("FirstName", "LastName", "EmailID", "MobileNumber
     
 
 <p>The <strong>Get Subscribed Audience Details</strong> API returns the details of the Audience.</p>
-      <h3 id="syntax-13">
+      <h3 id="syntax-11">
         
         
-          <a href="#syntax-13" class="anchor-heading" aria-labelledby="syntax-13"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
+          <a href="#syntax-11" class="anchor-heading" aria-labelledby="syntax-11"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
         
         
       </h3>
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">getSubscribedAudienceDetails  = function(successCallback, failureCallback)</code></pre></figure>
-      <h3 id="parameters-13">
+      <h3 id="parameters-11">
         
         
-          <a href="#parameters-13" class="anchor-heading" aria-labelledby="parameters-13"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
+          <a href="#parameters-11" class="anchor-heading" aria-labelledby="parameters-11"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
         
         
       </h3>
@@ -2089,10 +1872,10 @@ messagingSvc.getSubscribedAudienceDetails(function(response) {
     
 
 <p>The <strong>Unsubscribe Audience or Delete Audience</strong> API deletes an Audience from Engagement server.</p>
-      <h3 id="syntax-14">
+      <h3 id="syntax-12">
         
         
-          <a href="#syntax-14" class="anchor-heading" aria-labelledby="syntax-14"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
+          <a href="#syntax-12" class="anchor-heading" aria-labelledby="syntax-12"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
         
         
       </h3>
@@ -2157,20 +1940,20 @@ messagingSvc.unSubscribeAudience(function(response) {
     
 
 <p>The <strong>Update List of Beacons for a Device</strong> API updates the list of beacons for a device.</p>
-      <h3 id="syntax-15">
+      <h3 id="syntax-13">
         
         
-          <a href="#syntax-15" class="anchor-heading" aria-labelledby="syntax-15"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
+          <a href="#syntax-13" class="anchor-heading" aria-labelledby="syntax-13"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
         
         
       </h3>
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">updateListOfBeacons = function(uuId, major, minor, successCallback, failureCallback, options)</code></pre></figure>
-      <h3 id="parameters-14">
+      <h3 id="parameters-12">
         
         
-          <a href="#parameters-14" class="anchor-heading" aria-labelledby="parameters-14"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
+          <a href="#parameters-12" class="anchor-heading" aria-labelledby="parameters-12"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
         
         
       </h3>
@@ -2321,20 +2104,20 @@ messagingSvc.updateListOfBeacons("uuid", "major", "minor", function(response) {
 <p>The <strong>Get Rich Content</strong> API fetches rich content from the Volt MX Foundry Engagement server.</p>
 
 <p>The Get Rich Content API requires the <strong>pushId</strong> to retrieve the data. The pushId is fetched from the response of the push notification.</p>
-      <h3 id="syntax-16">
+      <h3 id="syntax-14">
         
         
-          <a href="#syntax-16" class="anchor-heading" aria-labelledby="syntax-16"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
+          <a href="#syntax-14" class="anchor-heading" aria-labelledby="syntax-14"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Syntax</strong>
         
         
       </h3>
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">getRichPushContent = function(pushId, successCallback, failureCallback){</code></pre></figure>
-      <h3 id="parameters-15">
+      <h3 id="parameters-13">
         
         
-          <a href="#parameters-15" class="anchor-heading" aria-labelledby="parameters-15"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
+          <a href="#parameters-13" class="anchor-heading" aria-labelledby="parameters-13"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Parameters</strong>
         
         
       </h3>

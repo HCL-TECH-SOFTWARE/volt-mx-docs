@@ -17,7 +17,7 @@ Volt MX  Iris (JavaScript)
 
 ### Signature
 
-{% highlight voltMx %}<HCLObj>.startSync(syncOptions, successCallback, failureCallback, progressCallback)
+{% highlight voltMx %}<VMXObj>.startSync(syncOptions, successCallback, failureCallback, progressCallback)
 {% endhighlight %}
 
 ### Parameters
@@ -47,7 +47,7 @@ function progressCallback(object) {
 }
 
 try {
-    var syncObject = new voltmx.sdk.HCLObj("Employee");
+    var syncObject = new voltmx.sdk.VMXObj("Employee");
     var syncOptions = {};
 
     //Set filters to be applied during download on object.
@@ -81,7 +81,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj>.startSync(final HashMap<String, Object> syncOptions, final HCLCallback syncCallback, final HCLProgressCallback progressCallback) throws Exception
+{% highlight voltMx %}void <VMXObj>.startSync(final HashMap<String, Object> syncOptions, final HCLCallback syncCallback, final HCLProgressCallback progressCallback) throws Exception
 
 {% endhighlight %}
 
@@ -100,8 +100,8 @@ void
 ### Example
 
 {% highlight voltMx %}try {
-    //Create HCLObj object for object which needs to be synced.
-    HCLObj syncObject = new HCLObj("Employee");
+    //Create VMXObj object for object which needs to be synced.
+    VMXObj syncObject = new VMXObj("Employee");
 
     HashMap < String, Object > syncOptions = new HashMap < String,
     Object > ();
@@ -155,7 +155,7 @@ iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj> startSync:(NSDictionary <NSString *, id> *)syncOptions
+{% highlight voltMx %}void <VMXObj> startSync:(NSDictionary <NSString *, id> *)syncOptions
        onSuccess:(HCLSuccessCompletionHandler)onSuccess
        onFailure:(HCLFailureCompletionHandler)onFailure
       onProgress:(HCLProgressCompletionHandler)onProgress;
@@ -178,8 +178,8 @@ void
 
 {% highlight voltMx %}NSError * error;
 
-HCLObj * syncObject = [
-    [HCLObj alloc] initWithName: @"Employee"
+VMXObj * syncObject = [
+    [VMXObj alloc] initWithName: @"Employee"
     error: & error
 ];
 

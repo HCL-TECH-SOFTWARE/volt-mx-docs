@@ -37,10 +37,10 @@ For MySQL
     
     | Field Name | Value |
     | --- | --- |
-    | \<DB\_Driver\> | Database specific driver,<br>**MySQL**: `com.mysql.jdbc.Driver`<br>**ORACLE**: `oracle.jdbc.driver.OracleDriver`<br>**MSSQL**: `com.microsoft.sqlserver.jdbc.SQLServerDriver` |
-    | \<JNDI\_NAME\> | JNDI string.jdbc/voltmxadmindb<br>jdbc/KDCDB |
+    | \<DB\_Driver\> | Database specific driver,<br><br>i.    **MySQL**: `com.mysql.jdbc.Driver`<br>ii.    **ORACLE**: `oracle.jdbc.driver.OracleDriver`<br>iii.    **MSSQL**: `com.microsoft.sqlserver.jdbc.SQLServerDriver` |
+    | \<JNDI\_NAME\> | i.    JNDI string.jdbc/voltmxadmindb<br>ii.    jdbc/KDCDB |
     | \<PWD\> | Database password |
-    | \<DB\_connection\_String\> | Database connection string, <br>**MySQL**: `jdbc:mysql://localhost:3306/databaseName?autoReconnect=true&useSSL=false`<br>**ORACLE**: `jdbc:oracle:thin:@hostname:port Number:databaseName`<br>**MSSQL**: `jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME` |
+    | \<DB\_connection\_String\> | Database connection string, <br><br>i.    **MySQL**: `jdbc:mysql://localhost:3306/databaseName?autoReconnect=true&useSSL=false`<br>ii.    **ORACLE**: `jdbc:oracle:thin:@hostname:port Number:databaseName`<br>iii.    **MSSQL**: `jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME` |
     | \<USER\_NAME\> | Database username. For example, root |
     
     *   The following JNDI configuration template is for **VoltMX Integration Service** component:
@@ -58,10 +58,10 @@ For MySQL
     
     | Field Name | Value |
     | --- | --- |
-    | \<DB\_Driver\> | Database specific driver,<br>**MySQL**: `com.mysql.jdbc.Driver`<br>**ORACLE**: `oracle.jdbc.driver.OracleDriver`<br>**MSSQL**: `com.microsoft.sqlserver.jdbc.SQLServerDriver` |
-    | \<JNDI\_NAME\> | jdbc/voltmxreports. |
+    | \<DB\_Driver\> | Database specific driver,<br><br>i.    **MySQL**: `com.mysql.jdbc.Driver`<br>ii.    **ORACLE**: `oracle.jdbc.driver.OracleDriver`<br>iii.    **MSSQL**: `com.microsoft.sqlserver.jdbc.SQLServerDriver` |
+    | \<JNDI\_NAME\> | i.    jdbc/voltmxreports. |
     | \<PWD\> | Database password |
-    | \<DB\_connection\_String\> | Database connection string, <br>**MySQL**: `jdbc:mysql://hostname/databaseName`<br>**ORACLE**: `jdbc:oracle:thin:@hostname:port Number:databaseName`<br>**MSSQL**: `jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME` |
+    | \<DB\_connection\_String\> | Database connection string, <br><br>i.    **MySQL**: `jdbc:mysql://hostname/databaseName`<br>ii.    **ORACLE**: `jdbc:oracle:thin:@hostname:port Number:databaseName`<br>iii.    **MSSQL**: `jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME` |
     | \<USER\_NAME\> | Database username. For example, root |
     
     *   The following JNDI configuration template is for **VoltMX Integration Service** (reportsdb) component:

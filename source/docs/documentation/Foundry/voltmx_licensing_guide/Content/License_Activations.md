@@ -11,7 +11,7 @@ The license activations are executed by Volt MX License Server which is hosted o
 
 This part of the Volt MX Licensing Guide provides you with the information you need to activate license for Volt MX products, and is divided into the following sections. Click a section’s link to view its contents.
 
-*   [VoltMX Iris Enterprise](VoltMXOne_Studio_IDE.html)
+
 *   [VoltMX Foundry](License_Activation_through_VoltMX_Server_7.2.html)
 
 

@@ -29,12 +29,12 @@ For MySQL
     
     The following table details field names to be configured for data source:
     
-    | Field Name | Value |
-    | --- | --- |
-    | <DB\_Driver> | Database specific driver,<br>**MySQL**: `com.mysql.jdbc.Driver `<br>**ORACLE**: `oracle.jdbc.driver.OracleDriver `<br>**MSSQL**: `com.microsoft.sqlserver.jdbc.SQLServerDriver` |
-    | <JNDI\_NAME> | jdbc/authglobaldb <br> jdbc/authconfig |
-    | `<PWD>` | Database password |
-    | `<DB_connection_String>` | Database connection string,<br> **MySQL**: `jdbc:mysql://hostname:port/databaseName?autoReconnect=true&amp;useSSL=false `<br>**ORACLE**: `jdbc:oracle:thin:@hostname:port Number:databaseName `<br>**MSSQL**: `jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME` |
-    | `<USER_NAME>` | Database username. For example, root |
+| Field Name | Value |
+| --- | --- |
+| <DB\_Driver> | Database specific driver,<br><br>i.    **MySQL**: `com.mysql.jdbc.Driver `<br>ii.    **ORACLE**: `oracle.jdbc.driver.OracleDriver `<br>iii.    **MSSQL**: `com.microsoft.sqlserver.jdbc.SQLServerDriver` |
+| <JNDI\_NAME> | i.    jdbc/authglobaldb <br>ii.    jdbc/authconfig |
+| `<PWD>` | Database password |
+| `<DB_connection_String>` | Database connection string,<br><br>i.    **MySQL**: `jdbc:mysql://hostname:port/databaseName?autoReconnect=true&amp;useSSL=false `<br>ii.    **ORACLE**: `jdbc:oracle:thin:@hostname:port Number:databaseName `<br>iii.    **MSSQL**: `jdbc:sqlserver://DBHOSTIP[\DBINSTANCENAME]:PORT;databasename=DBNAME` |
+| `<USER_NAME>` | Database username. For example, root |
     
 4.  Save the `authService.xml` file.

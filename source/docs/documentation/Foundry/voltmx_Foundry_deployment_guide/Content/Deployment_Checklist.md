@@ -124,15 +124,15 @@ The Volt MX Foundry Installer includes a pre-configured Tomcat Application serve
     
     frontend proxy_front
     
-    bind *:80
+    bind * : 80
     
-    bind *:443 ssl crt /root/hclnet.pem   
-    _# By default all requests(Integration/Identity) will be forwarded to the nodes' backend_
+    bind * : 443 ssl crt /root/hclnet.pem   
+    #By default all requests(Integration/Identity) will be forwarded to the nodes' backend
     
     Certificate provided for ssl termination
     
     redirect scheme https if !{ ssl_fc }  
-    _# Redirects to HTTPS if the user comes via HTTP_
+    #Redirects to HTTPS if the user comes via HTTP
     
     mode http 
     
@@ -143,7 +143,7 @@ The Volt MX Foundry Installer includes a pre-configured Tomcat Application serve
     acl url_mfconsole path_beg /workspace
     
     use_backend console if url_mfconsole  
-    # Any request on any of the VoltMX Foundry Console Component contexts will be redirected to the backend of the console
+    #Any request on any of the VoltMX Foundry Console Component contexts will be redirected to the backend of the console
     
     default_backend nodes
     
@@ -152,7 +152,7 @@ The Volt MX Foundry Installer includes a pre-configured Tomcat Application serve
     mode http
     
     option forwardfor  
-    \# Insert the X-Forwarded-For header. HAProxy will stamp this header with the IP of the source client_
+    #Insert the X-Forwarded-For header. HAProxy will stamp this header with the IP of the source client
     
     http-request set-header X-Forwarded-Port %[dst_port]
     
@@ -222,7 +222,7 @@ The Volt MX Foundry Installer needs to be configured on JBoss Application server
 *   **Application Server Configuration**: Configure JBoss 7.2
 *   **Database Setup**: MySQL 5.7 is installed on a node with CentOS 6.
 
-#### Integration of Apache/Mod\_Cluster with JBoss
+### Integration of Apache/Mod\_Cluster with JBoss
 
 A sample configuration of **Apache 2.4 with mod\_cluster** module used with JBoss is shown below. Changes have to be made to the JBoss master node to integrate the mod\_cluster load balancer.
 

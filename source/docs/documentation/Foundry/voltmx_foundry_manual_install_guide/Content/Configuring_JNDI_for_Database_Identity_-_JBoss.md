@@ -18,21 +18,24 @@ To configure JNDI for MySQL, follow these steps:
 2.  Copy and paste the `mysql-connector-java-8.0.12.jar`  file under `$JBOSS_HOME/modules/com/mysql/main/`
 3.  Create the `module.xml` file under `$JBOSS_HOME/modules/com/mysql/main/` with the following code:
     
-    If you are using MySQL, the module.xml is as follows:
-    
-    <module xmlns="urn:jboss:module:1.1" name="com.mysql">  
-     <properties>  
-     <property name="jboss.api" value="unsupported"/>      </properties>  
-    <resources>  
-    <resource-root path="<specify your MySQL Connector jar path>"/>  
-    </resources>  
-    <dependencies>  
-    <module name="javax.api"/>  
-    <module name="javax.transaction.api"/>  
-    <module name="javax.servlet.api" optional="true"/> </dependencies>  
-    </module>
-    
+If you are using MySQL, the module.xml is as follows:
 
+{% highlight voltMx %}
+<module xmlns="urn:jboss:module:1.1" name="com.mysql">
+<properties>
+<property name="jboss.api" value="unsupported"/>      
+</properties>
+<resources>
+<resource-root path="<specify your MySQL Connector jar path>">
+</resources>
+<dependencies>
+<module name="javax.api"/>
+<module name="javax.transaction.api"/>
+<module name="javax.servlet.api" optional="true"/> 
+</dependencies>
+</module>
+{% endhighlight %}
+       
 ### Data Source for Single Node and Multinode
 
 *   **Single node**: Configure the `standalone.xml` located under `$JBOSS_HOME/standalone/configuration/`.

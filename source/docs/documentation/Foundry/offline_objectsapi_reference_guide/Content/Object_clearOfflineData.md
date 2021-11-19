@@ -50,7 +50,7 @@ void
 Sample code to clear an object
 
 {% highlight voltMx %}try {
-    var orgObject = new voltmx.sdk.HCLObj("CATEGORY");
+    var orgObject = new voltmx.sdk.VMXObj("CATEGORY");
     var options = {};
     orgObject.clearOfflineData(options, onSuccess, onFailure);
 
@@ -68,7 +68,7 @@ Sample code to clear an object
 
 Sample code to clear a record with a primary key
 
-{% highlight voltMx %}var category = new voltmx.sdk.HCLObj("CATEGORY");
+{% highlight voltMx %}var category = new voltmx.sdk.VMXObj("CATEGORY");
 var options = {};
 var primaryKeys = {};
 primaryKeys["category _key"] = "1234";
@@ -89,7 +89,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <HCLObj>.clearOfflineData(final HashMap<String, Object> options, final HCLCallback callback)
+{% highlight voltMx %}void <VMXObj>.clearOfflineData(final HashMap<String, Object> options, final HCLCallback callback)
 {% endhighlight %}
 
 ### Parameters
@@ -117,7 +117,7 @@ void
 Sample code to clear an object
 
 {% highlight voltMx %}try {
-    HCLObj orgObject = new HCLObj("CATEGORY");
+    VMXObj orgObject = new VMXObj("CATEGORY");
     orgObject.clearOfflineData(null, newHCLCallback() {
         @Override
         public void onSuccess(Object object) {
@@ -137,7 +137,7 @@ Sample code to clear an object
 Sample code to clear a record with a primary key
 
 {% highlight voltMx %}// Clear record with a primary key 
-HCLObj category = new HCLObj("CATEGORY");
+VMXObj category = new VMXObj("CATEGORY");
 HashMap < String, Object > options = new HashMap < > ();
 HashMap < String, Object > primaryKeys = new HashMap < > ();
 primaryKeys.put("CATEGORY_ID", "123");
@@ -201,8 +201,8 @@ Sample code to clear an object
 
 {% highlight voltMx %}OfflineObjectsError * error = nil;
 NSDictionary * options = @ {};
-HCLObj * orgObject = [
-    [HCLObj alloc] initWithName: @"category "
+VMXObj * orgObject = [
+    [VMXObj alloc] initWithName: @"category "
     error: & error
 ];
 [orgObject clearOfflineData: options
@@ -220,8 +220,8 @@ HCLObj * orgObject = [
 
 Sample code to clear a record with a primary key
 
-{% highlight voltMx %}HCLObj * _categories = [
-    [HCLObj alloc] initWithName: @"CATEGORY"
+{% highlight voltMx %}VMXObj * _categories = [
+    [VMXObj alloc] initWithName: @"CATEGORY"
     error: & error
 ];
 NSMutableDictionary * options = [NSMutableDictionary new];

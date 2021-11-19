@@ -178,7 +178,7 @@ Prerequisites for Volt MX Foundry with MySQL
     +--------------------------+----------------------------+
     
 
-### Applicable for Identity Services
+<h3 id="applicable-for-identity-services">Applicable for Identity Services</h3>
 
 If you are using any lower versions of MySQL 5.7 such as v5.7.12 or lower during installation, you may encounter an error due to which the installation rolls back. This error occurs due to a bug in the MySQL database.
 
@@ -202,8 +202,8 @@ To resolve this error, run the following commands in the MySQL Server:
 
 `SET GLOBAL optimizer_switch = 'derived_merge=on';`
 
-Increase innodb\_log\_file\_size in my.ini file (For Engagement Services)
--------------------------------------------------------------------------
+<h2 id="increase-innodb_log_file_size-in-myini-file-for-engagement-services">Increase innodb_log_file_size in my.ini file (For Engagement Services)</h2>
+
 
 > **_Note:_**  If the size of your application is more than the variable size of server database, an error occurs. Ensure the variable `max_allowed_packet_size` is set to a higher value than the application size.  
   

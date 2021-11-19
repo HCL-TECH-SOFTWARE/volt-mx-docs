@@ -54,63 +54,186 @@ The createFilePersistor() API is used to create the configuration for the file p
 
 > **_Note:_** In Iris Android, if you want activate file persistor and view the logs in the file, you need to add WRITE\_EXTERNAL\_STORAGE under **Permissions** tab.
 
-<table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 184px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Signature</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">JavaScript</span>: <span style="font-family: monospace;">createFilePersistor</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Parameters</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">N/A</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Return Type</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">The API return a <span style="font-family: monospace;">fileConfig</span> object. The below properties have been exposed on the file persistor. <span style="font-family: monospace;"><a href="#maxFileSize" target="_self" class="selected">maxFileSize</a></span> <span style="font-family: monospace;"><a href="#maxNumberOfLogFiles" target="_self" class="selected">maxNumberOfLogFiles</a></span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>JavaScript Example</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">var persistor1 = new voltmx.logger.createFilePersistor();</span> <span style="font-family: monospace;">persistor1.maxFileSize = 100;</span> <span style="font-family: monospace;">persistor1.maxNumberOfLogFiles = 15;</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>Platform Availability</b></td><td class="TableStyle-Basic-BodyA-Column1-Body1">Available on IDE, Android, iOS, and Windows 10</td></tr></tbody></table>
 
-#### maxFileSize
+<table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0">
+<colgroup>
+<col class="TableStyle-Basic-Column-Column1" style="width: 184px;">
+<col class="TableStyle-Basic-Column-Column1">
+</colgroup>
+<tbody>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1">
+<b>Signature</b>
+</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">
+<span style="font-family: monospace;">JavaScript</span>: 
+<span style="font-family: monospace;">createFilePersistor</span>
+</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1">
+<b>Parameters</b>
+</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">N/A</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1">
+<b>Return Type</b>
+</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">The API return a 
+<span style="font-family: monospace;">fileConfig</span> object. The below properties have been exposed on the file persistor. 
+<ul>
+<li>
+<span style="font-family: monospace;">
+<a href="#maxfilesize" target="_self" class="selected">maxFileSize</a>
+</span>
+</li>
+<li>
+<span style="font-family: monospace;">
+<a href="#maxnumberoflogfiles" target="_self" class="selected">maxNumberOfLogFiles</a>
+</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1">
+<b>JavaScript Example</b>
+</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">
+<span style="font-family: monospace;">var persistor1 = new voltmx.logger.createFilePersistor();</span>
+<span style="font-family: monospace;">persistor1.maxFileSize = 100;</span>
+<span style="font-family: monospace;">persistor1.maxNumberOfLogFiles = 15;</span>
+</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyB-Column1-Body1">
+<b>Platform Availability</b>
+</td>
+<td class="TableStyle-Basic-BodyA-Column1-Body1">Available on IDE, Android, iOS, and Windows 10</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4 id="maxfilesize"><code style="background-color:transparent;border:none;outline:none;resize:none;">maxFileSize</code></h4>
 
 The maxFileSize API is used to define the maximum size of the files created in bytes.
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 168px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Syntax</td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">maxFileSize</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Type</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Number</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Possible Values</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Positive Integer</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Default Value</td><td class="TableStyle-Basic-BodyD-Column1-Body1">10000</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Read or Write</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Only Write</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">JavaScript Example</td><td class="TableStyle-Basic-BodyA-Column1-Body1"><span style="font-family: monospace;">var persistor1 = new voltmx.logger.createFilePersistor(); </span><span style="font-family: monospace;">persistor1.maxFileSize = 10000;</span></td></tr></tbody></table>
 
-#### maxNumberOfLogFiles
+<h4 id="maxnumberoflogfiles"><code style="background-color:transparent;border:none;outline:none;resize:none;">maxNumberOfLogFiles</code></h4>
 
 To define the maxNumberOfLogFiles the app can have at a maximum during any instant. The filePersistor is a rolling file appender i.e. the data of latest configured files is preserved.
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 200px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Syntax</td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">maxNumberOfLogFiles</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Type</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Number</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Possible Values</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Non-zero, Positive Integer</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Default Value</td><td class="TableStyle-Basic-BodyD-Column1-Body1">10</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Read or Write</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Only Write</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">JavaScript Example</td><td class="TableStyle-Basic-BodyA-Column1-Body1"><span style="font-family: monospace;">var persistor1 = new voltmx.logger.createFilePersistor(); persistor1.maxNumberOfLogFiles = 20;</span></td></tr></tbody></table>
 
-### createLoggerConfig()
 
-CreateLoggerConfig() is used to create the configuration object for the logger. This object is used in the [createNewLogger()](#createnewlogger-api) API. The object has various properties exposed to define our configuration. To apply the configuration, you need to use [setConfig()](#api) API . When you pass the object through createNewLogger() API , configuration object is immediately applied .
+<h3 id="createloggerconfig">createLoggerConfig()</h3> 
 
-<table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 195px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Signature</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><b>Javascript</b>: <span style="font-family: monospace;">createLoggerConfig</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Parameters</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">N/A</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Return Type</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">The API returns a <span style="font-family: monospace;">loggerConfig</span> Object. All the properties are static and affect all the logger instances. The below properties have been exposed. <a href="#bytesLimit" target="_self" class="selected">bytesLimit</a> <a href="#statementsLimit" target="_self" class="selected">statementsLimit</a> <a href="#timeFormat" target="_self" class="selected">timeFormat</a> <a href="#timeZone" target="_self" class="selected">timeZone</a> <a href="#overrideConfig" target="_self" class="selected">overrideConfig</a> <a href="#logLevel" target="_self" class="selected">logLevel</a> <a href="#addPersistor" target="_self" class="selected">addPersistor</a></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>JavaScript Example</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><b>Example 1</b>: <span style="font-family: monospace;">var loggerConfig = new voltmx.logger.createLoggerConfig();</span> <b>Example 2</b>:<span style="font-family: monospace;">var loggerConfig = new voltmx.logger.createLoggerConfig();</span><span style="font-family: monospace;">loggerConfig.bytesLimit = 10000;</span><span style="font-family: monospace;">loggerConfig.statementsLimit = 10;</span><span style="font-family: monospace;">loggerConfig.timeFormat = "dd-MM-yyyy HH.mm.ss.SSS";</span><span style="font-family: monospace;">loggerConfig.timeZone = "UTC";</span><span style="font-family: monospace;">loggerConfig.overrideConfig = true;</span><span style="font-family: monospace;">loggerConfig.logLevel= voltmx.logger.logLevel.INFO.value;</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>Platform Availability</b></td><td class="TableStyle-Basic-BodyA-Column1-Body1">IDE, Android, iOS, and Windows 10</td></tr></tbody></table>
+CreateLoggerConfig() is used to create the configuration object for the logger. This object is used in the [createNewLogger()](#createnewlogger-api) API. The object has various properties exposed to define our configuration. To apply the configuration, you need to use [setConfig()](#setconfig-api) API . When you pass the object through createNewLogger() API , configuration object is immediately applied .
 
-#### bytesLimit
+<table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0">
+<colgroup>
+<col class="TableStyle-Basic-Column-Column1" style="width: 195px;">
+<col class="TableStyle-Basic-Column-Column1">
+</colgroup>
+<tbody>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1">
+<b>Signature</b>
+</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">
+<b>Javascript</b>: 
+<span style="font-family: monospace;">createLoggerConfig</span>
+</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1">
+<b>Parameters</b>
+</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">N/A</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1">
+<b>Return Type</b>
+</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">The API returns a 
+<span style="font-family: monospace;">loggerConfig</span> Object. All the properties are static and affect all the logger instances. The below properties have been exposed. 
+<ul>
+<li><a href="#byteslimit" target="_self" class="selected">bytesLimit</a></li>
+<li><a href="#statementslimit" target="_self" class="selected">statementsLimit</a></li>
+<li><a href="#timeformat" target="_self" class="selected">timeFormat</a></li>  
+<li><a href="#timezone" target="_self" class="selected">timeZone</a></li>
+<li><a href="#overrideconfig" target="_self" class="selected">overrideConfig</a></li>
+<li><a href="#loglevel" target="_self" class="selected">logLevel</a></li>
+<li><a href="#addpersistor" target="_self" class="selected">addPersistor</a></li>
+</ul>
+</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1">
+<b>JavaScript Example</b>
+</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">
+<b>Example 1</b>: 
+<span style="font-family: monospace;">var loggerConfig = new voltmx.logger.createLoggerConfig();</span>
+<b>Example 2</b>:
+<span style="font-family: monospace;">var loggerConfig = new voltmx.logger.createLoggerConfig();</span>
+<span style="font-family: monospace;">loggerConfig.bytesLimit = 10000;</span>
+<span style="font-family: monospace;">loggerConfig.statementsLimit = 10;</span>
+<span style="font-family: monospace;">loggerConfig.timeFormat = "dd-MM-yyyy HH.mm.ss.SSS";</span>
+<span style="font-family: monospace;">loggerConfig.timeZone = "UTC";</span>
+<span style="font-family: monospace;">loggerConfig.overrideConfig = true;</span>
+<span style="font-family: monospace;">loggerConfig.logLevel= voltmx.logger.logLevel.INFO.value;</span>
+</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyB-Column1-Body1">
+<b>Platform Availability</b>
+</td>
+<td class="TableStyle-Basic-BodyA-Column1-Body1">IDE, Android, iOS, and Windows 10</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="byteslimit"><code style="background-color:transparent;border:none;outline:none;resize:none;">bytesLimit</code></h4>
 
 The console logs will be printed as soon as the logging methods are invoked. It is performance intensive to persist the logs one by one on the file. The bytesLimit can be used to accumulate the logs until the bytesLimit is reached and then flushed onto the file.
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 170px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Syntax</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">bytesLimit</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Type</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Number</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Possible Values</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Any positive integer</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Default Value</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">10000</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Read or Write</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Only Write</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>JavaScript Example</b></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><span style="font-family: monospace;">var loggerConfig = new voltmx.logger.createLoggerConfig(); loggerConfig.bytesLimit = 20000;</span></td></tr></tbody></table>
 
-#### statementsLimit
+<h4 id="statementslimit"><code style="background-color:transparent;border:none;outline:none;resize:none;">statementsLimit</code></h4>
 
 The console logs will be printed as soon as the logging methods are invoked. It is performance intensive to persist the logs one by one on the file. The statementsLimit can be used to accumulate the logs until the specified number of statements are reached and then flushed onto the file.
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 154px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Syntax</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">statementsLimit</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Type</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Number</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Possible Values</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Any non-negative integer</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Default Value</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">20</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Read or Write</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Only Write</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>JavaScript Example</b></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><span style="font-family: monospace;">var loggerConfig = new voltmx.logger.createLoggerConfig(); loggerConfig.statementsLimit = 30;</span></td></tr></tbody></table>
 
-#### timeFormat
+<h4 id="timeformat"><code style="background-color:transparent;border:none;outline:none;resize:none;">timeFormat</code></h4>
 
 Each log is printed in a specified format. The format includes the timestamp. This property is used to specify the syntax of the timeFormat.
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 185px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Syntax</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">timeFormat</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Type</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">String</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Possible Values</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Any valid time format pattern</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Default Value</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">"dd-mm-yyyy HH.mm.ss.SSS"</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Read or Write</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Only Write</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>JavaScript Example</b></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><span style="font-family: monospace;">var loggerConfig = new voltmx.logger.createLoggerConfig(); loggerConfig.timeFormat = "dd-MM-yyyy HH.mm.ss.SSS";</span></td></tr></tbody></table>
 
-#### timeZone
+<h4 id="timezone"><code style="background-color:transparent;border:none;outline:none;resize:none;">timeZone</code></h4>
 
 Each log is printed in a specified format. The format includes the timestamp. This property is used to specify the syntax of the timeZone.
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 187px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Syntax</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">timeZone</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Type</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">String</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Possible Values</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">UTC, LocalTime</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Default Value</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">UTC</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Read or Write</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Only Write</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>JavaScript Example</b></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><span style="font-family: monospace;">var loggerConfig = new voltmx.logger.createLoggerConfig(); loggerConfig.timeZone = "UTC";</span></td></tr></tbody></table>
 
-#### overrideConfig
+<h4 id="overrideconfig"><code style="background-color:transparent;border:none;outline:none;resize:none;">overrideConfig</code></h4>
 
 All the properties are exposed by loggerConfig. Changing the property and using setConfig() API will affect all the logger instances created. overrideConfig is used to specify if the configuration should override the existing configuration.
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 186px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Syntax</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">overrideConfig</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Type</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Bool</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Possible Values</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">True or False</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Default Value</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">True</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Read or Write</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Only Write</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>JavaScript Example</b></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><span style="font-family: monospace;">var loggerConfig = new voltmx.logger.createLoggerConfig(); loggerConfig.overrideConfig = false;</span></td></tr></tbody></table>
 
-#### logLevel
+<h4 id="loglevel"><code style="background-color:transparent;border:none;outline:none;resize:none;">logLevel</code></h4>
 
 The logLevel property works similar to currentLogLevel property. There are six log levels in the logLevel property.
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 181px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Syntax</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">logLevel</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Possible Values</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">voltmx.logger.logLevel.ALL </span><span style="font-family: monospace;">voltmx.logger.logLevel.NONE </span><span style="font-family: monospace;">voltmx.logger.logLevel.TRACE </span><span style="font-family: monospace;">voltmx.logger.logLevel.DEBUG </span><span style="font-family: monospace;">voltmx.logger.logLevel.INFO </span><span style="font-family: monospace;">voltmx.logger.logLevel.WARN </span><span style="font-family: monospace;">voltmx.logger.logLevel.ERROR </span><span style="font-family: monospace;">voltmx.logger.logLevel.FATAL</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Default Value</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">voltmx.logger.logLevel.NONE</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Read or Write</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Only Write</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>JavaScript Example</b></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><span style="font-family: monospace;">var loggerConfig = new voltmx.logger.createLoggerConfig(); loggerConfig.logLevel = voltmx.logger.logLevel.INFO.value;</span></td></tr></tbody></table>
 
-#### addPersistor
+<h4 id="addpersistor"><code style="background-color:transparent;border:none;outline:none;resize:none;">addPersistor</code></h4>
 
 The property can be used to add file persistor through loggerConfig object.
 
@@ -118,7 +241,7 @@ The property can be used to add file persistor through loggerConfig object.
 
 ### createNewLogger() API
 
-<table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 183px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Signature</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">createNewLogger</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Parameters</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">This API takes three parameters: LoggerName, LoggerConfig<b>loggerName</b>: The <span style="font-family: monospace;">loggerName</span> is a string used to identify the instance of the <span style="font-family: monospace;">loggerObject</span>. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This is a mandatory value. <b>loggerConfiguration</b>: The <span style="font-family: monospace;">loggerConfiguration</span> is the configuration object. For more information, refer <span style="font-family: monospace;"><a href="#createLo" target="_self" class="selected">createLoggerConfig()</a></span>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Return Type</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Returns a logger object on which various functions such as <span style="font-family: monospace;">trace()</span>, <span style="font-family: monospace;">debug()</span>, <span style="font-family: monospace;">info()</span>, <span style="font-family: monospace;">warn()</span>, <span style="font-family: monospace;">error()</span> and <span style="font-family: monospace;">fatal()</span> APIs are exposed.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>JavaScript Example</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">var lConfig = new voltmx.logger.createLoggerConfig(); var loggerObj = new voltmx.logger.createNewLogger("AndroidLoggerDemo", lConfig);</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>Platform Availability</b></td><td class="TableStyle-Basic-BodyA-Column1-Body1">IDE, Android, iOS, and Windows 10</td></tr></tbody></table>
+<table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 183px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Signature</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">createNewLogger</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Parameters</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">This API takes three parameters: LoggerName, LoggerConfig<b>loggerName</b>: The <span style="font-family: monospace;">loggerName</span> is a string used to identify the instance of the <span style="font-family: monospace;">loggerObject</span>. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This is a mandatory value. <b>loggerConfiguration</b>: The <span style="font-family: monospace;">loggerConfiguration</span> is the configuration object. For more information, refer <span style="font-family: monospace;"><a href="#createloggerconfig" target="_self" class="selected">createLoggerConfig()</a></span>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Return Type</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Returns a logger object on which various functions such as <span style="font-family: monospace;">trace()</span>, <span style="font-family: monospace;">debug()</span>, <span style="font-family: monospace;">info()</span>, <span style="font-family: monospace;">warn()</span>, <span style="font-family: monospace;">error()</span> and <span style="font-family: monospace;">fatal()</span> APIs are exposed.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>JavaScript Example</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><span style="font-family: monospace;">var lConfig = new voltmx.logger.createLoggerConfig(); var loggerObj = new voltmx.logger.createNewLogger("AndroidLoggerDemo", lConfig);</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>Platform Availability</b></td><td class="TableStyle-Basic-BodyA-Column1-Body1">IDE, Android, iOS, and Windows 10</td></tr></tbody></table>
 
 #### activatePersistors()
 

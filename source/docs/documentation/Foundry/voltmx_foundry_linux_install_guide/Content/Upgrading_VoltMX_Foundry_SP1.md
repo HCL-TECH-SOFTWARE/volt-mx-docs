@@ -19,7 +19,7 @@ This section explains upgrading Volt MX Foundry Components through the installer
 *   For bundled Tomcat and Standalone JBoss, stop the running app server, start a fresh installation, and ensure that you provide the same Hostname, Ports, and Database schema prefix and suffix as the previous installation.
 *   For remote servers such as Pre-Configured JBoss, Multi-Node JBoss, or WebLogic, perform a cleanup of the app server artifacts, start a fresh installation, and ensure that you provide the same Hostname, Ports, and Database schema prefix and suffix as the previous installation. HCL recommends performing the cleanup of the app server by using the Management Console.
 
-The < Install Location>  directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to HCL when reporting an issue.
+The **<Install Location>** directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to HCL when reporting an issue.
 
 Prerequisites
 =============
@@ -32,6 +32,7 @@ Prerequisites
 To upgrade Volt MX Foundry Console using the installer, follow these steps:
 
 1.  Execute the following command to switch to the user that you created.  
+
 \# su - username
        
 
@@ -47,37 +48,37 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
     For more details on how to install Volt MX Foundry components on an application server with a database, refer [Installation Modes - Volt MX Foundry](Installing_Modes.html)
     
 7.  From the **Please select the database provider of your choice**, choose one of the databases to display database details and fill the details.
-    ```
-    ========================================================================  
-    Database Choice  
-    -----------------------------------------  
-    Please select the database of your choice.  
-      
-    \->1- MySQL  
-       2- Oracle  
-       3- SQL Server  
-       4- MariaDB  
-      
-    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:: 
 
-    ``` 
+        \========================================================================  
+        Database Choice  
+        \-----------------------------------------  
+        Please select the database of your choice.  
+        
+        \->1- MySQL  
+           2- Oracle  
+           3- SQL Server  
+           4- MariaDB  
+        
+        ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:: 
+
+
     
 8.  Enter the database server details such as hostname, port, user, and password.
 9.  Press **Enter**. The installation prompts for Database name prefix and suffix details as follows:
-    ```
-    ===============================================================================  
-    Database name prefix and suffix  
-    -------------------------------  
-      
-    Please enter database name prefix and suffix.  
-      
-    If prefix is Volt MX and suffix is 1 then database names will be VoltMXXXXXX1.  
-      
-    Please provide existing Prefix and Suffix if you intend to upgrade to the new Volt MX Foundry Database  
-      
-    Database Name Prefix (Default: ):  
-      
-    Database Name Suffix (Default: ):
+    
+        \===============================================================================  
+        Database name prefix and suffix  
+        \-------------------------------  
+        
+        Please enter database name prefix and suffix.  
+        
+        If prefix is Volt MX and suffix is 1 then database names will be VoltMXXXXXX1.  
+        
+        Please provide existing Prefix and Suffix if you intend to upgrade to the new Volt MX Foundry Database  
+        
+        Database Name Prefix (Default: ):  
+        
+        Database Name Suffix (Default: ):
 
     
     
@@ -129,9 +130,9 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
          Previous Installation Directory (Default: /root):  
       
       
-         ===============================================================================  
+         \===============================================================================  
          Volt MX Foundry server startup details  
-         ----------------------------------  
+         \----------------------------------  
       
          Do you want to start the Volt MX Foundry server after successful installation of Volt MX Foundry  
       
@@ -139,7 +140,7 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
          2- No 
 
          ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS
-         <ENTER>TO ACCEPT THE DEFAULT::
+         <ENTER> TO ACCEPT THE DEFAULT::
          
     
      If you choose to skip providing the keys, go to your upgraded Volt MX Foundry install location and paste the following details that you copied from the previous Foundry install folder:
@@ -159,9 +160,9 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
 13. If you do not skip configuring the _Administrator
     /Account Configuration_ details, the following screen appears.
     
-         ===============================================================================  
+         \===============================================================================  
          Administrator/Account Configuration  
-         -------------------------------  
+         \-------------------------------  
       
          Please configure your Administrator Account. We require your First Name, Last Name, Email Address and Password. We use your email address as a login name and we do not use it to send unsolicited emails.  
       
@@ -180,9 +181,9 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
     
      > **_Note:_**  The existing schemas and upgraded for the new instance. The databases for the selected components are created based on the prefix and suffix that you provided.
     
-         ===============================================================================  
+         \===============================================================================  
          Pre-Installation Summary  
-         ------------------------  
+         \------------------------  
          Please review the following before continuing:  
       
          Install Type:  
@@ -216,9 +217,9 @@ To upgrade Volt MX Foundry Console using the installer, follow these steps:
 15. Press **Enter**. The _Installation Complete_
     details appear.
     
-         ========================================================================  
+         \========================================================================  
          Installation Complete  
-         -----------------------------------------  
+         \-----------------------------------------  
       
          Congratulations. Volt MX Foundry has been
          successfully installed to:  

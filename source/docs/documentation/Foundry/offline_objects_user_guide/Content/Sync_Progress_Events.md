@@ -38,7 +38,7 @@ The following examples demonstrate subscribing to the sync progress events and t
  
  try {
     //Create an offline object which needs to be synced.
-     var syncObject = = new voltmx.sdk.HCLObj("Employee");
+     var syncObject = = new voltmx.sdk.VMXObj("Employee");
  
      //Set GetSyncStats to receive sync stats on sync success.
      var syncOptions = {"GetSyncStats" : "true"};
@@ -56,7 +56,7 @@ The following examples demonstrate subscribing to the sync progress events and t
 
 {% highlight voltMx %}try {
   //Create an offline object which needs to be synced.
-  private HCLObj syncObject = new HCLObj("Employee");
+  private VMXObj syncObject = new VMXObj("Employee");
  
   //Set GetSyncStats to receive sync stats on sync success.
   HashMap<String, Object> syncOptions = new HashMap<String, Object>();
@@ -90,7 +90,7 @@ The following examples demonstrate subscribing to the sync progress events and t
 ### iOS
 
 {% highlight voltMx %}NSError *error;
- HCLObj *syncObject = [[HCLObj alloc] initWithName:@"Employee" 
+ VMXObj *syncObject = [[VMXObj alloc] initWithName:@"Employee" 
                                                            error:&error];
  
  if(error) {

@@ -99,7 +99,7 @@ Volt MX’s capabilities extend to providing Identity Services, Integration Serv
 
 Volt MX AppViewer
 -------------
-Use App Viewer to view the front-end prototype of a project on a device and run any action attached to a form, pop-up, or widget such as navigating from one form to other, applying a skin to a widget, and opening a pop-up window. As you make changes to your project and incrementally build and publish those changes using the App Viewer command, you can see those changes reflected in a local preview of the app on the device.
+Use App Viewer to view the front-end prototype of a project on a device and run any action attached to a form, pop-up, or widget such as navigating from one form to other, applying a skin to a widget, and opening a pop-up window. As you make changes to your project and incrementally build and publish those changes using the App Viewer command, you can see those changes reflected in a local preview of the app on the device. Explore more about AppViewer [here](../../..//Iris/iris_app_viewer/Content/FunctionalPreviewEnterprise.html#preview-an-app-on-the-cloud).
 {: .left-float}
 ![Volt MX Foundry](../Resources/Images/appviewer.png){: .right-float-img}	
 
@@ -120,6 +120,6 @@ DevOps Services - AppFactory
 
 Volt MX Marketplace
 -------------
-It is a repository of ready-to-use Apps, Micro Apps, Components, and Data Adapters. Apps, Micro Apps, and Components are developed using widgets and APIs in Iris. Data adapters are developed using services in Volt MX Foundry. Explore more about components and data adapters here.
+It is a repository of ready-to-use Apps, Micro Apps, Components, and Data Adapters. Apps, Micro Apps, and Components are developed using widgets and APIs in Iris. Data adapters are developed using services in Volt MX Foundry. Explore more about components and data adapters [here](../../../Foundry/voltmx_foundry_user_guide/Content/CustomDataConfig.html). Explore more about Volt MX Marketplace [here](https://marketplace.hclvoltmx.com/).
 {: .left-float}
 ![Volt MX Foundry](../Resources/Images/Marketplace.png){: .right-float-img}

@@ -103,9 +103,10 @@ Uncomment and modify following parameters in `conf/flyway.conf` file under flywa
     Uncomment and set flyway.locations=<sql script folder> in `conf/flyway.conf` file.
     
 3.  From the command line, use the following command:{% highlight voltMx %}C:\>flyway migrate -placeholders.VMS_DATA_TABLESPACE="USERS" -placeholders.VMS_INDEX_TABLESPACE="USERS" -placeholders.VMS_LOB_TABLESPACE="USERS"
-    {% endhighlight %}
+{% endhighlight %}
+
     
-    ![](../Resources/Images/Oracle1.png)
+![](../Resources/Images/Oracle1.png)
     
 
 ### Manual Process to configure the VMS Reports Job

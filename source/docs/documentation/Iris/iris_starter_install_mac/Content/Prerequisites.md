@@ -64,104 +64,45 @@ Download Volt MX Iris
 
 The following section explains the procedure to download Volt MX Iris:
 
-*   [Without a VoltMXAccount](#downloading-without-a-account)
-*   [With a VoltMXAccount](#downloading-with-a-account)
+*   [As a trial user](#downloading-a-trial-version)
+*   [As a customer](#downloading-with-a-volt-mx-account)
 
-### Downloading without a VoltMXaccount
+### Downloading a trial version
 
-1.  Go to [http://www.voltmx.com/products/iris](http://www.voltmx.com/products/iris).  
-    The Volt MX Iris page appears
-2.  Click **Free forever** or **Download for free**.
-    
-    [![](Resources/Images/voltmxiris_thumb_288_96.png)](Resources/Images/voltmxiris.png)
-    
-3.  Enter a valid email address, and click **Download now**.
-    
-    [![](Resources/Images/email_add_thumb_288_96.png)](Resources/Images/email_add.png)
-    
-    The Volt MX Iris download page appears
-    
-4.  Click **Download Volt MX Iris for Mac**.
-    
-    [![](Resources/Images/download_links_thumb_288_96.png)](Resources/Images/download_links.png)
-    
+Before downloading the Iris trial version, you must create a Volt MX account. You can go to the Volt MX website and create a new account, or respond to an email invitation from an existing Volt MX user. To create your account, follow these steps:
 
-#### Setup VoltMXAccount
+1. If you received an invitation email, click **Accept Invitation**. Otherwise, go to [https://manage.demo-hclvoltmx.com/registration](https://manage.demo-hclvoltmx.com/registration).  
 
-Before using Volt MX Iris, you must set up an account with Volt MX. There are two ways of creating a Volt MX account.
+2. On the **Registration** page, provide the required details and click **Start Free Trial**.
 
-*   [Self-Registration](#self-registration): Visit the VoltMXwebsite and create a new account.
-*   [Receive an Invitation](#receive-an-invitation): Receive an invitation to register with from an existing Volt MX Irisaccount user.
-
-##### Self-Registration
-
-To self-register, follow these steps:
-
-1.  Go to [http://community.hclvoltmx.com](http://community.hclvoltmx.com/).  
-    The Community page appears.
-2.  Click **Log In**.  
-    The Login page appears.
+3. When you receive your registration confirmation email, respond by clicking **Activate Account**.
+  
+4. On the activation page, name your new account and pick a cloud location. Provide the other required details and click **Activate My Account**.
     
-    [![](Resources/Images/clck_login_thumb_192_96.png)](Resources/Images/clck_login.png)
-    
-3.  Click **Create a free account**.
-    
-    [![](Resources/Images/login_thumb_288_96.png)](Resources/Images/login.png)
-    
-    The **Create your VoltMXCloud Account** page appears.
-    
-4.  Provide the required details, and then click **Create your account**.
-    
-    [![](Resources/Images/create_new_thumb_192_192.png)](Resources/Images/create_new.png)
-    
-    A message appears confirming that your request for registration is accepted.
-    
-    [![](Resources/Images/success_thumb_192_192.png)](Resources/Images/success.png)
-    
-5.  You will receive an email from the **VoltMXAccounts** with an activation link. Click **Activate My Volt MX Account**.
-    
-    [![](Resources/Images/activation_mail_thumb_288_96.png)](Resources/Images/activation_mail.png)
-    
-    The **Activate Your Account** page appears.
-    
-    [![](Resources/Images/account_details_thumb_96_192.png)](Resources/Images/account_details.png)
-    
-6.  Provide the required details, and then click **Create Account**.
-    
-    Your account is activated, and the dashboard of Volt MX Cloud appears.
-    
-
-##### Receive an invitation
-
-The owner of a Volt MX cloud account sends an invite to provide you with access to the cloud. You will receive an email with a Volt MX account registration link.
-
-To create a Volt MX account after receiving an invitation, follow these steps:
-
-1.  In the invitation mail, click **Accept Invitation**.
-    
-    [![](Resources/Images/accept invite_thumb_96_192.png)](Resources/Images/accept invite.png)
-    
-    The **Accept Invitation** page appears.
-    
-2.  Provide the required details, and then click **Accept invitation**.
-    
-    [![](Resources/Images/accept Invitation_thumb_96_192.png)](Resources/Images/accept Invitation.png)
-    
-    Your account is activated, and the dashboard of Volt MX Cloud appears.
-    
-    ### Downloading with a Volt MX Account
-    
-    To download Volt MX Irison your Mac computer, follow these steps:
-    
-    1.  Visit [community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads).
-    2.  Type your Volt MX account login credentials, and click **Sign in**.
+Your account is activated. The Iris installer should start downloading automatically. If not, or if you want to download the installer later, follow these steps:
         
-        The **Manage Cloud** page appears.
-        
-    3.  Under Volt MX, Click the **Download** button for Mac. The installer is downloaded as a zip file to your computer.
-        
-        [![](Resources/Images/download_site_thumb_192_96.png)](Resources/Images/download_site.png)
-        
+  1. Go to [community.demo-hclvoltmx.com/downloads](http://community.demo-hclvoltmx.com/downloads).
+
+  2. Type your email address and password, and then click **Sign In**. The downloads page appears.
+
+3. Under **HCL Volt Iris**, click **Installer\_Apple**.
+
+  The installer is downloaded to your computer.
+
+**Note:** You must have administrative rights on your computer to install Volt MX Iris.
+
+**Note:** When you activate your account, you receive an email with a link to the Foundry console. After you have installed Iris, visit [https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094403](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094403) for important information about configuring Iris and Foundry to work together.
+
+### Downloading with a Volt MX Account
+
+To download Volt MX Iris on your Mac computer, follow these steps:
+
+1. Visit [community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads).
+2. Type your Volt MX account login credentials, and click **Sign in**. The **Manage Cloud** page appears.
+3. Under Volt MX, Click the **Download** button for Mac. The installer is downloaded as a zip file to your computer.
+
+[![](Resources/Images/download_site_thumb_192_96.png)](Resources/Images/download_site.png)
+
 
 You can view the [Preface](Preface.html) and [Revision History](homepage.html) here.
 
