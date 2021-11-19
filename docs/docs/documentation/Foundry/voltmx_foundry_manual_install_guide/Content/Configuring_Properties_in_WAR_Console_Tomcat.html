@@ -33,7 +33,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Configure Properties Files in WAR Files - Tomcat" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hcl-tech-software.github.io/volt-mx-docs/Volt_Mx_logo.png"}},"url":"https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Configuring_Properties_in_WAR_Console_Tomcat.html","@type":"WebPage","headline":"Configure Properties Files in WAR Files - Tomcat","description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","@context":"https://schema.org"}</script>
+{"url":"https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Configuring_Properties_in_WAR_Console_Tomcat.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hcl-tech-software.github.io/volt-mx-docs/Volt_Mx_logo.png"}},"@type":"WebPage","description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","headline":"Configure Properties Files in WAR Files - Tomcat","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -256,24 +256,24 @@
 </ol>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">#This properties file is NOT meant for individual developer changes,  
-# if you need to overwrite any of the following, please use -DPARAMS locally on your PC!!  
+#if you need to overwrite any of the following, please use -DPARAMS locally on your PC!!  
       
-ACCOUNTS_DB_JNDI_NAME=&lt;ACCOUNTS_JNDI_NAME&gt; # For example, jdbc/voltmxaccounts  
-REPORTS_DB_JNDI_NAME=&lt;REPORTS_JNDI_NAME&gt;   # For example, jdbc/voltmxreports  
+ACCOUNTS_DB_JNDI_NAME=`&lt;ACCOUNTS_JNDI_NAME&gt;` # For example, jdbc/voltmxaccounts  
+REPORTS_DB_JNDI_NAME=`&lt;REPORTS_JNDI_NAME&gt;` # For example, jdbc/voltmxreports  
       
 ACCOUNTS_DB_SQL_DIALECT= &lt;DB Dialect&gt;  
-# Dialect string for MySQL org.hibernate.dialect.MySQLDialect 
+`# Dialect string for MySQL org.hibernate.dialect.MySQLDialect` 
       
-# Dialect string for Oracle org.hibernate.dialect.Oracle9Dialect  
-# Dialect string for SQL Server org.hibernate.dialect.SQLServerDialect  
+`# Dialect string for Oracle org.hibernate.dialect.Oracle9Dialect`  
+`# Dialect string for SQL Server org.hibernate.dialect.SQLServerDialect`  
       
-ORACLE_SID=&lt;Oracle ServiceID/ServiceName&gt; TXN_ISOLATION_LEVEL=2  
+`ORACLE_SID=&lt;Oracle ServiceID/ServiceName&gt; TXN_ISOLATION_LEVEL=2`  
       
 ACCOUNTS_DB_CONNECTION_ISOLATION_LEVEL=2  
 ACCOUNTS_DB_SQL_SHOW=false  
 ACCOUNTS_DB_SQL_USE_SCROLLABLE_RESULTSET=true  
-ACCOUNTS_ENCRYPTION_KEY=&lt;ANY_RANDOM_GUID like "8bf8cae5-d25e-497c-93b8-72300eab45d1"&gt;  
-VOLTMX_INTEGRATION_SERVICE_PORT=&lt;Integration service port&gt;</code></pre></figure>
+ACCOUNTS_ENCRYPTION_KEY=`&lt;ANY_RANDOM_GUID like "8bf8cae5-d25e-497c-93b8-72300eab45d1"&gt;`  
+VOLTMX_INTEGRATION_SERVICE_PORT=`&lt;Integration service port&gt;`</code></pre></figure>
 
 <ol>
   <li>
@@ -303,14 +303,13 @@ VOLTMX_INTEGRATION_SERVICE_PORT=&lt;Integration service port&gt;</code></pre></f
   <li>In the <code class="language-plaintext highlighter-rouge">mfconsole.war/</code><code class="language-plaintext highlighter-rouge">WEB-INF/classes</code>, open the <code class="language-plaintext highlighter-rouge">config.properties</code> file, and then edit the following parameters.</li>
 </ol>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    VOLTMX_ACCOUNT_API_BASE_URL=&lt;PUBLIC_URL&gt;/accounts/api/v1_0/  
-    LOG_LEVEL=INFO  
-    LOG_OPTION=logfile  
-    LOG_LOCATION=&lt;USER_INSTALL_DIR&gt;/logs  
-    WAAS_ENCRYPTION_KEY=&lt;Any random GUID like 3bcf2351-a3e5-44b3-ac06-ff1bd5f738cd&gt;  
-    UI_ACCOUNTS_URLS=false  
-    FoundryVersion=&lt;Version of Volt MX Foundry&gt;
-    </code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VOLTMX_ACCOUNT_API_BASE_URL=`&lt;PUBLIC_URL&gt;`/accounts/api/v1_0/  
+LOG_LEVEL=INFO  
+LOG_OPTION=logfile  
+LOG_LOCATION=`&lt;USER_INSTALL_DIR&gt;`/logs  
+WAAS_ENCRYPTION_KEY=`&lt;Any random GUID like 3bcf2351-a3e5-44b3-ac06-ff1bd5f738cd&gt;`  
+UI_ACCOUNTS_URLS=false  
+FoundryVersion=`&lt;Version of Volt MX Foundry&gt;`</code></pre></figure>
       <h2 id="workspaceservicewar">
         
         
@@ -327,29 +326,28 @@ VOLTMX_INTEGRATION_SERVICE_PORT=&lt;Integration service port&gt;</code></pre></f
   <li>In the  <code class="language-plaintext highlighter-rouge">workspace.war/</code><code class="language-plaintext highlighter-rouge">WEB-INF/classes</code>, open the <code class="language-plaintext highlighter-rouge">workspaceService.properties</code> file, and then edit the following parameters.</li>
 </ol>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">          RDS_DB_TYPE=&lt;Database Type&gt;  
-          WORKSPACESDB_NAME=&lt;Workspace Service Database Name&gt;  
-          WAASGLOBALDB_NAME=&lt;Workspace Service Database Name&gt;  
-          RDS_HOSTNAME=&lt;Dataserver IP/Hostname&gt;  
-          RDS_PORT=&lt;Database port&gt;  
-          MAX_ACTIVE_DBC=25  
-          APPSERVER_TYPE=&lt;Application Server Type&gt;  
-          WAAS_ENCRYPTION_KEY=&lt;ANY_RANDOM_GUID like "3bcf2351-a3e5-44b3-ac06-ff1bd5f738cd"&gt;  
-          hibernate.dialect=&lt;DB Dialect&gt;  
-       # Dialect string for MySQL **org.hibernate.dialect.MySQLDialect**  
-       # Dialect string for Oracle **org.hibernate.dialect.Oracle9Dialect**  
-       # Dialect string for SQL Server **org.hibernate.dialect.SQLServerDialect**
-       # Dialect string for DB2 **org.hibernate.dialect.DB2Dialect**  
-       ORACLE_SID=&lt;Oracle ServiceID/ServiceName&gt; TXN_ISOLATION_LEVEL=2  
-     </code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">       RDS_DB_TYPE=`&lt;Database Type&gt;`  
+       WORKSPACESDB_NAME=`&lt;Workspace Service Database Name&gt;`  
+       WAASGLOBALDB_NAME=`&lt;Workspace Service Database Name&gt;`  
+       RDS_HOSTNAME=`&lt;Dataserver IP/Hostname&gt;`  
+       RDS_PORT=`&lt;Database port&gt;`  
+       MAX_ACTIVE_DBC=25  
+       APPSERVER_TYPE=`&lt;Application Server Type&gt;`  
+       WAAS_ENCRYPTION_KEY=`&lt;ANY_RANDOM_GUID like "3bcf2351-a3e5-44b3-ac06-ff1bd5f738cd"&gt;`&lt;br&gt; hibernate.dialect=`&lt;DB Dialect&gt;`  
+       `# Dialect string for MySQL org.hibernate.dialect.MySQLDialect`  
+       `# Dialect string for Oracle org.hibernate.dialect.Oracle9Dialect`&lt;br&gt; 
+       `# Dialect string for SQL Server org.hibernate.dialect.SQLServerDialect`&lt;br&gt;
+       `#Dialect string for DB2 org.hibernate.dialect.DB2Dialect`  
+       `ORACLE_SID=&lt;Oracle ServiceID/ServiceName&gt; TXN_ISOLATION_LEVEL=2`  
+       </code></pre></figure>
 
 <ol>
   <li>
     <p>In the <code class="language-plaintext highlighter-rouge">workspaceService.properties</code> file, configure the following properties with proper values, shown below:</p>
 
     <ul>
-      <li>RDS_DB_TYPE=<Database Type="">. For example, RDS\_DB\_TYPE=MySQL, MSSQL, ORACLE, or MariaDB.</Database></li>
-      <li>APPSERVER_TYPE=<Application server="" type="">. For example, APPSERVER\_TYPE=`TOMCAT`</Application></li>
+      <li>RDS_DB_TYPE=<Database Type="">. For example, RDS_DB_TYPE=MySQL, MSSQL, ORACLE, or MariaDB.</Database></li>
+      <li>APPSERVER_TYPE=<Application server="" type="">. For example, APPSERVER_TYPE=`TOMCAT`</Application></li>
     </ul>
 
     <blockquote>
@@ -383,10 +381,10 @@ For example:<br />
   <li>In the <code class="language-plaintext highlighter-rouge">apiportal.war/</code><code class="language-plaintext highlighter-rouge">WEB-INF/classes</code>, open the <code class="language-plaintext highlighter-rouge">config.properties</code> file, and then edit the following parameters.</li>
 </ol>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    VOLTMX_ACCOUNT_API_BASE_URL=&lt;PUBLIC_URL&gt;/accounts/api/v1_0/
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    VOLTMX_ACCOUNT_API_BASE_URL=`&lt;PUBLIC_URL&gt;`/accounts/api/v1_0/
     LOG_LEVEL=INFO
     LOG_OPTION=logfile
-    LOG_LOCATION=&lt;USER_INSTALL_DIR&gt;/logs/apiportal  
+    LOG_LOCATION=`&lt;USER_INSTALL_DIR&gt;`/logs/apiportal  
     VOLTMX_DEVELOPER_PORTAL_BASE_URL= &lt;PUBLIC_URL&gt;/apiportal</code></pre></figure>
 
         
@@ -1647,7 +1645,7 @@ For example:<br />
 
   
  </li>
-  <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Post-Installation_Tasks.html#how-to-turn-off-the-send-usage-data-anonymously-feature" class="nav-list-link">How to Configure Memcache for Integration Services</a>
+  <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Post-Installation_Tasks.html#how-to-configure-memcache-for-integration-services" class="nav-list-link">How to Configure Memcache for Integration Services</a>
 
   
  </li>
