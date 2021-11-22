@@ -6,92 +6,68 @@ category: "voltmx_foundry_user_guide"
 
 User Guide: Create a Volt MX Foundry Account
 
-Accessing Volt MX Foundry Console - Cloud
+Accessing Volt Foundry Console - Cloud
 ========================================
 
-Before you use various Volt MX Foundry services, you must register with Volt MX.
+Before you use various Volt Foundry services, you must register with Volt MX.
 
-To access Volt MX Foundry, follow these steps:
+To access Volt Foundry, follow these steps:
 
-1.  [Create a Volt MX Foundry Account](#create-a-foundry-account)
-2.  [Access Volt MX Foundry Portal](#access-foundry-portal)
+1.  [Create a Volt Foundry Account](#create-a-volt-mx-foundry-account)
+2.  [Access Volt Foundry Portal](#access-foundry-portal)
 
-Create a Volt MX Foundry Account
+Create a Volt Foundry Account
 -------------------------------
 
-If you do not have a Volt MX account, follow these steps to create a Volt MX Foundry account:
+If you do not have a Volt MX account, follow these steps to create a Volt Foundry account:
 
-1.  Go to [HCL VoltMX](https://www.hcl.com/products/voltmx/), and then click **START FOR FREE** button.
+1.  Go to [HCL Volt MX](https://www.hcltechsw.com/volt-mx), and click **START FOR FREE**.
     
-    [![](Resources/Images/FoundryAccount1_thumb_0_0.png)](Resources/Images/FoundryAccount1.png)
-    
-    The **Let’s get your app dev experience started!** page is displayed.
-    
-    ![](Resources/Images/FoundryAccount2_641x423.png)
-    
-2.  Provide the required details.
-3.  Click **Create Account**.
-4.  An email is sent to your registered email ID an activation link. Click the link, or copy the link on the browser. The **Activate Your Account** page appears.
-    
-    ![](Resources/Images/FoundryAccount3_550x433.png)
-    
-5.  Complete the required details in the activation page to create a Volt MX Foundry cloud account.
-6.  Click **Activate Account**.
-    
-    Welcome to the Volt MX Cloud! page appears.
-    
-    ![](Resources/Images/FoundryAccount4_776x462.png)
-    
-7.  Click **Get Started**.
-8.  Enter details in the **Sign in to your Account** page.
-9.  Click **SIGN IN**.
+2. On the Registration page, provide the required details and click **Start Free Trial**.
 
-If you have a Volt MX Account, follow these steps for creating a Volt MX Foundry cloud account:
+3. When you receive your registration confirmation email, respond by clicking **Activate Account**.
 
-1.  Go to [HCL VoltMX](https://www.hcl.com/products/voltmx/), and then click **Start for free** from the top menu.
+4. On the activation page, name your new account and pick a cloud location. Provide the other required details and click **Activate My Account**.
+
+5. On the next page, click **Log in to Volt Foundry**.
+
+6. Enter your Volt Foundry \[MKS: Volt MX? Is that the same thing?\] credentials on the **Sign in to your Account** page.
+
+7. Click **SIGN IN**.
+
+If you have a Volt MX Account, follow these steps \[for creating a Volt MX Foundry cloud account MKS: Is this right? Is the user creating a Foundry account, or just logging into the Foundry Console?\]:
+
+1.  Go to [HCL Volt MX](https://www.hcltechsw.com/volt-mx), and click **START FOR FREE**.
     
-    ![](Resources/Images/FoundryAccount1.png)
-    
-    The **Let's get your app dev experience started!** page is displayed.
-    
-    ![](Resources/Images/FoundryAccount2.1_636x428.png)
-    
-2.  Click on **Already registered? Log in.**
-3.  Enter details in the **Sign in to your Account** page.
-4.  Click **SIGN IN**.
+2.  On the registration page, click **Log in here.**
+
+3.  Enter your Volt Foundry credentials and click **SIGN IN**.
 
 Access Volt MX Foundry Portal
 ----------------------------
 
 To access your cloud account, follow these steps:
 
-1.  Go to [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/).
-2.  Provide your Volt MX account login credentials, and then click **Sign in**.
-3.  After validating your credentials, you are directed to your Volt MX Foundry account (VoltMX Cloud).
-    
-    ![](Resources/Images/ConsoleUI_601x294.png)
-    
-    From Volt MX Foundry Console, you can navigate to the following:
-    
-    *   **Apps**: For more information on **Applications**, refer to [Adding Applications](Adding_Applications.html).
-        *   The **Iris Previews** page lists the test live previews that you performed in a particular Cloud account. Volt MX Iris supports the **Run Live Preview** option that you can use to preview a prototype of your Iris application.  
-            For more information on How to user Live Preview in Volt MX Iris, refer [Live Preview]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/LivePreview.html)
-            
-        *   The **Iris Projects** page lists the projects that you published to a particular Cloud. The Project tab in Volt MX Iris contains the **Export > Cloud Project** option.  
-            For more information on How to share a project on the Cloud, refer [Publish your project to the cloud]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/ShareProjectOnTheCloud.html)  
-            
-    *   [API Management](API_Management.html): Configure and manage (create, edit, and delete) app services (identity, integration, and orchestration) without linking or configuring them within an app.
-    *   [Developer Portal](VoltMXDevPortal.html): Allows you to create a Portal for exposing APIs created using Volt MX Foundry. Developers from internal and external partner teams can access the portal created to explore and test the APIs.
-    *   **Clouds (Environments)**: For more information on Cloud/Environments (VoltMX Cloud), refer to [Environments - Volt MX Cloud](Environments-Cloud.html).
-    *   **Reports**: For more information on **Reports**, refer to [Custom metrics and reports]({{ site.baseurl }}/docs/documentation/Foundry/custom_metrics_and_reports/Content/Custom_Metrics_and_Reports_Guide.html).
-    *   **Settings**: Allows you to invite users associated with account roles such as admin, billing, and member.
-    *   **Support**: Displays links to the latest tutorials and articles and Developer resources from Base Camp Library. [Click here for more information](Support.html).
-    
-    > **_Note:_** The release version of a console is displayed at the bottom left corner in the console menu pane. The release version is in the following format:  
-    `<Major_version> <servicepack> <hotfix> <DEV/QA>`  
-    For example: `V8 SP1 HF4 DEV`
-    
+1.  Go to [https://manage.demo-hclvoltmx.com](https://manage.demo-hclvoltmx.com).
+2.  Enter your Volt Foundry credentials and click **SIGN IN**.
 
+You are directed to your Volt MX Foundry account (VoltMX Cloud).
+    
+From the Volt Foundry Console, you can use the lefthand navigation pane to access the following:
+    
+* **Apps**:
+  * The **Foundry Apps** tab lists existing apps. For more information on **Applications**, refer to [Adding Applications](Adding_Applications.html).
+  * The **Iris Previews** page lists the test live previews that you performed in a particular Cloud account. Volt Iris supports the **Run Live Preview** option that you can use to preview a prototype of your Iris application.  
+  For more information on How to user Live Preview in Volt MX Iris, see [Live Preview]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/LivePreview.html)
+  * The **Iris Projects** page lists the projects that you published to a particular Cloud. The Project tab in Volt Iris contains the **Export > Cloud Project** option.  
+  For more information on How to share a project on the Cloud, see [Publish your project to the cloud]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/ShareProjectOnTheCloud.html)  
+* [API Management](API_Management.html): Configure and manage (create, edit, and delete) app services (identity, integration, and orchestration) without linking or configuring them within an app.
+* [Developer Portal](VoltMXDevPortal.html): Allows you to create a Portal for exposing APIs created using Volt Foundry. Developers from internal and external partner teams can access the portal created to explore and test the APIs.
+* **Clouds (Environments)**: For more information on Cloud/Environments (VoltMX Cloud), refer to [Environments - Volt Cloud](Environments-Cloud.html).
+* **Reports**: For more information on **Reports**, refer to [Custom metrics and reports]({{ site.baseurl }}/docs/documentation/Foundry/custom_metrics_and_reports/Content/Custom_Metrics_and_Reports_Guide.html).
+* **Settings**: Allows you to invite users associated with account roles such as admin, billing, and member.
+* **Support**: Displays links to the latest tutorials and articles and Developer resources from Base Camp Library. [Click here for more information](Support.html).
+    
 Accessing Volt MX Foundry Standard
 ---------------------------------
 
