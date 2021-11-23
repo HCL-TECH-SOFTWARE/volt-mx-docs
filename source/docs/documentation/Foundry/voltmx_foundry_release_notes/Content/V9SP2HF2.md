@@ -4,14 +4,22 @@ category: "voltmx_foundry_release_notes"
 ---
                          
 
-Resolved Issues in V9 SP2 Hotfix 2
-==================================
+Volt Foundry V9 SP2 HF2	
+=======================
+
+In this release, the following features have been either introduced or enhanced to provide a better Volt MX Foundry experience.
+
+* Added support for locking Fabric apps in Fabric Console.<br/>  A new feature has been added to lock services in a Fabric app. Locking enables partners to deliver pre-build apps, which can be extended by their customers, while still providing the partners the ability to upgrade the pre-build solutions to latest versions of pre-build apps.
+* Added support for defining multiple mappings for a verb in object services.
+  
+Resolved Issues 
+---------------
 
 In this release, the following issues have been fixed.
 
 * Updating events URL(new URL) and correcting "Join us on Volt MX Community" for cloud on support page.
-* Making Marketplace URL environment-specific (dev, sit, qa, prod, demo, etc.) in support page.
-* Making the downloads URL environment-specific (dev, sit, qa, demo, prod, etc.).
+* Making Marketplace URL environment-specific in support page.
+* Making the downloads URL environment-specific.
 * Updated support page URLs, logo in Foundry console.
 * Prod workspace developer portal: ClientSDK download links working in On-Prem but not in cloud.
 * Developer portal: Making Iris download link environment-specific.
