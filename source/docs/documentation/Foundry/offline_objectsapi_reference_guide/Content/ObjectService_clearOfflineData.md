@@ -60,7 +60,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <VMXObjSvc>.clearOfflineData(final HashMap<String, Object> options, final HCLCallback callback)
+{% highlight voltMx %}void <VMXObjSvc>.clearOfflineData(final HashMap<String, Object> options, final VMXCallback callback)
 {% endhighlight %}
 
 ### Parameters
@@ -69,7 +69,7 @@ Android (Java)
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | options | HashMap<String, Object> | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or new HashMap<String, Object>(). | Yes |
-| Callback | HCLCallback | Application implements **onSuccess** and **onFailure** methods of **HCLCallback** interface. | Yes |
+| Callback | VMXCallback | Application implements **onSuccess** and **onFailure** methods of **VMXCallback** interface. | Yes |
 
 ### Return Type
 
@@ -79,7 +79,7 @@ void
 
 {% highlight voltMx %}try {
     VMXObjSvc orgObjectService = newVMXObjSvc("Organization");
-    orgObjectService.clearOfflineData(null, newHCLCallback() {
+    orgObjectService.clearOfflineData(null, newVMXCallback() {
         @Override
         public void onSuccess(Object object) {
             Log.d("ObjectServiceSync", "Cleared offline data for Object 
@@ -103,8 +103,8 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}(void)[<VMXObjSvc> clearOfflineData:(NSDictionary *)options
-			 onSuccess:(HCLSuccessCompletionHandler)onSuccess
-			 onFailure:(HCLFailureCompletionHandler)onFailure]
+			 onSuccess:(VMXSuccessCompletionHandler)onSuccess
+			 onFailure:(VMXFailureCompletionHandler)onFailure]
 
 {% endhighlight %}
 
@@ -114,8 +114,8 @@ iOS (Objective C)
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | options | NSDictionary | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or @{ }. | Yes |
-| onSuccess | HCLSuccessCompletionHandler | The method is invoked after successfully clearing the offline data of the object service, | Yes |
-| onFailure | HCLFailureCompletionHandler | The method is invoked on failure while clearing the offline data of the object service. | Yes |
+| onSuccess | VMXSuccessCompletionHandler | The method is invoked after successfully clearing the offline data of the object service, | Yes |
+| onFailure | VMXFailureCompletionHandler | The method is invoked on failure while clearing the offline data of the object service. | Yes |
 
 ### Return Type
 

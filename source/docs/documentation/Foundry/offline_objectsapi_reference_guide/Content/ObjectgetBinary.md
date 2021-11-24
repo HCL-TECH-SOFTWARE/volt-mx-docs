@@ -82,12 +82,12 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void getBinary(final Map<String, Object> options, final HCLBinaryDownloadCallback hclBinaryDownloadCallback)
+{% highlight voltMx %}void getBinary(final Map<String, Object> options, final VMXBinaryDownloadCallback vmxBinaryDownloadCallback)
 {% endhighlight %}
 
 ### Parameters
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 307px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">A dictionary containing binaryColumnName, forceDownload, chunkSize, and primaryKeys.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">hclBinaryDownloadCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLBinaryDownloadCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application implements <b>onFileDownloadStarted</b>, <b>onStreamDownloadCompleted</b>, <b>onChunkDownloadCompleted</b>, <b>onFileDownloadCompleted</b>, <b>onDownloadFailure</b> methods of HCLBinaryDownloadCallback interface.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 307px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">A dictionary containing binaryColumnName, forceDownload, chunkSize, and primaryKeys.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">vmxBinaryDownloadCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXBinaryDownloadCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application implements <b>onFileDownloadStarted</b>, <b>onStreamDownloadCompleted</b>, <b>onChunkDownloadCompleted</b>, <b>onFileDownloadCompleted</b>, <b>onDownloadFailure</b> methods of VMXBinaryDownloadCallback interface.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 ### Sync Options
 
@@ -114,7 +114,7 @@ options.put(KSPublicConstants.PRIMARY_KEYS, primaryKeys);
 options.put(KSPublicConstants.BINARY_COLUMN_NAME, "picture");
 options.put(KSPublicConstants.BINARY_FORCE_DOWNLOAD, false);
 options.put(BinaryDataManagerConstants.FILE_ID, "pic1");
-syncObject.getBinary(options, new HCLBinaryDownloadCallback() {
+syncObject.getBinary(options, new VMXBinaryDownloadCallback() {
     @Override
     public void onFileDownloadStarted(Object object) {
         Log.d("getBinary", "File download started");
@@ -148,17 +148,17 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}void <VMXObj>.getBinary:(NSDictionary <NSString *,id>*)options
-	 downloadStartedHandler:(HCLFileDownloadStartedCompletionBlock)fileDownloadStartedCompletionBlock
-	 chunkDownloadCompletedHandler:(HCLChunkDownloadCompletedCompletionBlock)chunkDownloadCompletedCompletionBlock
-	 streamDownloadCompletedHandler:(HCLStreamDownloadCompletedCompletionBlock)streamDownloadCompletionBlock
-	 fileDownloadCompletedHandler:(HCLFileDownloadCompletedCompletionBlock)fileDownloadCompletedCompletionBlock
-	 downloadFailureHandler:(HCLDownloadFailureCompletionBlock)downloadFailureCompletionBlock)
+	 downloadStartedHandler:(VMXFileDownloadStartedCompletionBlock)fileDownloadStartedCompletionBlock
+	 chunkDownloadCompletedHandler:(VMXChunkDownloadCompletedCompletionBlock)chunkDownloadCompletedCompletionBlock
+	 streamDownloadCompletedHandler:(VMXStreamDownloadCompletedCompletionBlock)streamDownloadCompletionBlock
+	 fileDownloadCompletedHandler:(VMXFileDownloadCompletedCompletionBlock)fileDownloadCompletedCompletionBlock
+	 downloadFailureHandler:(VMXDownloadFailureCompletionBlock)downloadFailureCompletionBlock)
 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 239px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 323px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 202px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">A dictionary containing binaryColumnName, forceDownload, chunkSize, and primaryKeys.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">fileDownloadStartedHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLFileDownloadStartedCompletionBlock</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked when the download has started. Response object includes fileId.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">chunkDownloadCompletedHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLChunkDownloadCompletedCompletionBlock</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Not supported in the current version.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">streamDownloadCompletedHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLStreamDownloadCompletedCompletionBlock</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Not supported in the current version</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">fileDownloadCompletedHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLFileDownloadCompletedCompletionBlock</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked when the file is downloaded successfully. Response Object includes fileId and filePath.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">downloadFailureHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLDownloadFailureCompletionBlock</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked when the file download fails with the cause of failure. Response object will have the exception for failure.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 239px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 323px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 202px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">A dictionary containing binaryColumnName, forceDownload, chunkSize, and primaryKeys.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">fileDownloadStartedHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXFileDownloadStartedCompletionBlock</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked when the download has started. Response object includes fileId.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">chunkDownloadCompletedHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXChunkDownloadCompletedCompletionBlock</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Not supported in the current version.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">streamDownloadCompletedHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXStreamDownloadCompletedCompletionBlock</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Not supported in the current version</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">fileDownloadCompletedHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXFileDownloadCompletedCompletionBlock</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked when the file is downloaded successfully. Response Object includes fileId and filePath.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">downloadFailureHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXDownloadFailureCompletionBlock</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked when the file download fails with the cause of failure. Response object will have the exception for failure.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 ### Sync Options
 
@@ -189,10 +189,10 @@ NSMutableDictionary < NSString * , id > * primaryKeys = [
 ];
 
 primaryKeys[@"id"] = @"2";
-options[HCLCONSTANTS_CRUD_OPTION_PRIMARY_KEYS] = primaryKeys;
-options[HCLCONSTANTS_BINARY_COLUMN_NAME] = @"picture";
-options[HCLCONSTANTS_BINARY_FORCE_DOWNLOAD] = @NO;
-options[HCLCONSTANTS_BINARY_FILEID] = @"pic1";
+options[VMXCONSTANTS_CRUD_OPTION_PRIMARY_KEYS] = primaryKeys;
+options[VMXCONSTANTS_BINARY_COLUMN_NAME] = @"picture";
+options[VMXCONSTANTS_BINARY_FORCE_DOWNLOAD] = @NO;
+options[VMXCONSTANTS_BINARY_FILEID] = @"pic1";
 NSMutableArray < NSString * > * filePaths = [NSMutableArray new];
 
 [media getBinary: options downloadStartedHandler: ^ (id object) {
@@ -208,7 +208,7 @@ NSMutableArray < NSString * > * filePaths = [NSMutableArray new];
         NSLog(@"Download completed successfully");
     }
     downloadFailureHandler: ^ (id object) {
-        id error = [object valueForKey: HCLCONSTANTS_SYNC_ERRORS];
+        id error = [object valueForKey: VMXCONSTANTS_SYNC_ERRORS];
         NSLog(@"Update failed with error: %@", [error value]);
     }
 ];

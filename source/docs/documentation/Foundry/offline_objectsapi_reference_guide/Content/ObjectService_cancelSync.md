@@ -71,7 +71,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}public void cancelSync(HashMap<String, Object> options, final HCLCallback syncCancellationCallback)
+{% highlight voltMx %}public void cancelSync(HashMap<String, Object> options, final VMXCallback syncCancellationCallback)
 {% endhighlight %}
 
 ### Parameters
@@ -80,7 +80,7 @@ Android (Java)
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | options | HashMap<String, Object> | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or new HashMap<String, Object>(). | Yes |
-| syncCancellationCallback | HCLCallback | Application implements **onSuccess** and **onFailure** methods of **HCLCallback** interface. | Yes |
+| syncCancellationCallback | VMXCallback | Application implements **onSuccess** and **onFailure** methods of **VMXCallback** interface. | Yes |
 
 ### Return Type
 
@@ -99,7 +99,7 @@ syncOptions.put("getSyncStats"
 
 // Start Sync asynchronously
 syncObjectSvc.startSync(syncOptions,
-    new HCLCallback() {
+    new VMXCallback() {
         @Override
         public void onSuccess(Object object) {
             Log.d("ObjectServiceSync", "ObjectService sync successful");
@@ -110,7 +110,7 @@ syncObjectSvc.startSync(syncOptions,
             Log.e("ObjectServiceSync", "ObjectService sync failed with error: " + error);
         }
     },
-    new HCLProgressCallback() {
+    new VMXProgressCallback() {
         @Override
         public void onProgress(Object object) {
             Log.d("ObjectServiceSync", "ObjectService sync progress event received");
@@ -121,7 +121,7 @@ syncObjectSvc.startSync(syncOptions,
 // Now attempt to Cancel Sync
 // passing an empty HashMap for options parameter
 syncObjectSvc.cancelSync(new HashMap < String, Object > (),
-    new HCLCallback() {
+    new VMXCallback() {
         @Override
         public void onSuccess(Object object) {
             Log.d("ObjectServiceSync Cancellation", "ObjectService sync cancellation successful");
@@ -140,14 +140,14 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}(void)cancelSync:(NSDictionary *)options
-              onSuccess:(HCLSuccessCompletionHandler)onSuccess
-              onFailure:(HCLFailureCompletionHandler)onFailure
+              onSuccess:(VMXSuccessCompletionHandler)onSuccess
+              onFailure:(VMXFailureCompletionHandler)onFailure
 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 210px;"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The method called after a successful cancellation.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The method called after the cancellation fails.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 210px;"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The method called after a successful cancellation.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The method called after the cancellation fails.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 ### Return Type
 

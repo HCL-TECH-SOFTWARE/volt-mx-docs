@@ -57,7 +57,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <object>.getPendingRecordsForUpload(HashMap<String, Object> options, final HCLCallback syncCallback) throws Exception
+{% highlight voltMx %}void <object>.getPendingRecordsForUpload(HashMap<String, Object> options, final VMXCallback syncCallback) throws Exception
 {% endhighlight %}
 
 ### Parameters
@@ -66,7 +66,7 @@ Android (Java)
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | options | HashMap <String, Object> | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or { }. | Yes |
-| syncCallback | HCLCallback | The function is invoked when the pending records for upload are successfully fetched or on an error. | Yes |
+| syncCallback | VMXCallback | The function is invoked when the pending records for upload are successfully fetched or on an error. | Yes |
 
 ### Return Type
 
@@ -77,7 +77,7 @@ void
 {% highlight voltMx %}HashMap < String, Object > options = new HashMap < String, Object > ();
 try {
     VMXObj category = new VMXObj("CATEGORY");
-    category.getPendingRecordsForUpload(options, new HCLCallback() {
+    category.getPendingRecordsForUpload(options, new VMXCallback() {
         @Override
         public void onSuccess(Object object) {
             Log.d("Pending records for upload", "Records are fetched
@@ -103,8 +103,8 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}void <object> getPendingRecordsForUpload:(NSDictionary <NSString *, id> *)options 
-		onSuccess:(HCLSuccessCompletionHandler)onSuccess 
-		onFailure:(HCLFailureCompletionHandler)onFailure
+		onSuccess:(VMXSuccessCompletionHandler)onSuccess 
+		onFailure:(VMXFailureCompletionHandler)onFailure
 {% endhighlight %}
 
 ### Parameters
@@ -113,8 +113,8 @@ iOS (Objective C)
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | options | NSDictionary<NSString \*, id> | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or { }. | Yes |
-| onSuccess | HCLSuccessCompletionHandler | The function is invoked when the pending records for upload are successfully fetched. | Yes |
-| onFailure | HCLFailureCompletionHandler | The function is invoked when the pending records for upload are not successfully fetched. | Yes |
+| onSuccess | VMXSuccessCompletionHandler | The function is invoked when the pending records for upload are successfully fetched. | Yes |
+| onFailure | VMXFailureCompletionHandler | The function is invoked when the pending records for upload are not successfully fetched. | Yes |
 
 ### Return Type
 

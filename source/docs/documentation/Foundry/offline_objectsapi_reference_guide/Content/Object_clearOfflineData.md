@@ -89,7 +89,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <VMXObj>.clearOfflineData(final HashMap<String, Object> options, final HCLCallback callback)
+{% highlight voltMx %}void <VMXObj>.clearOfflineData(final HashMap<String, Object> options, final VMXCallback callback)
 {% endhighlight %}
 
 ### Parameters
@@ -118,7 +118,7 @@ Sample code to clear an object
 
 {% highlight voltMx %}try {
     VMXObj orgObject = new VMXObj("CATEGORY");
-    orgObject.clearOfflineData(null, newHCLCallback() {
+    orgObject.clearOfflineData(null, newVMXCallback() {
         @Override
         public void onSuccess(Object object) {
             Log.d("ObjectSync", "Cleared offline data for Object .");
@@ -144,7 +144,7 @@ primaryKeys.put("CATEGORY_ID", "123");
 options.put("primaryKeys", primaryKeys);
 
 try
-category.clearOfflineData(options, new HCLCallback() {
+category.clearOfflineData(options, new VMXCallback() {
     @Override
     public void onSuccess(Object object) {
         Log.d("Clear Object", "Record cleared for the category");
@@ -171,8 +171,8 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}void <object>.clearOfflineData:(NSDictionary <NSString *, id> *)options	
-onSuccess:(HCLSuccessCompletionHandler)onSuccess
-onFailure:(HCLFailureCompletionHandler)onFailure
+onSuccess:(VMXSuccessCompletionHandler)onSuccess
+onFailure:(VMXFailureCompletionHandler)onFailure
 {% endhighlight %}
 
 ### Parameters
@@ -181,8 +181,8 @@ onFailure:(HCLFailureCompletionHandler)onFailure
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | options | NSDictionary | It is a dictionary. It contains a key called **primaryKeys** that contains the column name and the value. In case of a composite primary key, the dictionary contains multiple key-value pairs to clear a record. Otherwise, **{}** or **null** is passed as a value to clear all the records. | Yes |
-| onSuccess | HCLSuccessCompletionHandler | The onSuccess function is invoked on successful deletion of records. | Yes |
-| onFailure | HCLFailureCompletionHandler | The onFailure function is invoked on an error with the cause of failure as an argument. | Yes |
+| onSuccess | VMXSuccessCompletionHandler | The onSuccess function is invoked on successful deletion of records. | Yes |
+| onFailure | VMXFailureCompletionHandler | The onFailure function is invoked on an error with the cause of failure as an argument. | Yes |
 
 **Options**:
 

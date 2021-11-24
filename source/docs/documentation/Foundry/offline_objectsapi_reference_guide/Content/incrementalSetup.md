@@ -79,7 +79,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <OfflineObjects>.incrementalSetup(final HashMap<String, Object> options, final HCLCallback syncCallback)
+{% highlight voltMx %}void <OfflineObjects>.incrementalSetup(final HashMap<String, Object> options, final VMXCallback syncCallback)
 {% endhighlight %}
 
 ### Parameters
@@ -88,7 +88,7 @@ Android (Java)
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | options | Hashmap<String, Object> | Options based on which incrementalSetup is performed. | Yes |
-| syncCallback | HCLCallback | Takes onSuccess and onFailure methods. | Yes |
+| syncCallback | VMXCallback | Takes onSuccess and onFailure methods. | Yes |
 
 #### incrementalSetup Options
 
@@ -132,8 +132,8 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}(void) < OfflineObjects > .incrementalSetup: (NSDictionary < NSString * , id > * ) options
-onSuccess: (HCLSuccessCompletionHandler) onSuccess
-onFailure: (HCLFailureCompletionHandler) onFailure
+onSuccess: (VMXSuccessCompletionHandler) onSuccess
+onFailure: (VMXFailureCompletionHandler) onFailure
 {% endhighlight %}
 
 ### Parameters
@@ -142,8 +142,8 @@ onFailure: (HCLFailureCompletionHandler) onFailure
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | options | NSDictionary | Options based on which incrementalSetup is performed. | Yes |
-| onSuccess | HCLSuccessCompletionHandler | The function is invoked on successful incremental setup. | Yes |
-| onFailure | HCLFailureCompletionHandler | The function is invoked on unsuccessful incremental setup. | Yes |
+| onSuccess | VMXSuccessCompletionHandler | The function is invoked on successful incremental setup. | Yes |
+| onFailure | VMXFailureCompletionHandler | The function is invoked on unsuccessful incremental setup. | Yes |
 
 #### incrementalSetup Options
 
@@ -156,14 +156,14 @@ onFailure: (HCLFailureCompletionHandler) onFailure
 ### Example
 
 {% highlight voltMx %}NSError * error;
-HCLClient * client = [HCLClient sharedClient];
-HCLApplicationSync * applicationSync = [client getOfflineObjects];
+VMXClient * client = [VMXClient sharedClient];
+VMXApplicationSync * applicationSync = [client getOfflineObjects];
 
-HCLSuccessCompletionHandler onSuccess = ^ void(id object) {
+VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
     NSLog(@"incremental Setup successful");
 };
 
-HCLFailureCompletionHandler onFailure = ^ void(id object) {
+VMXFailureCompletionHandler onFailure = ^ void(id object) {
     NSLog(@"incremental Setup failed");
 };
 

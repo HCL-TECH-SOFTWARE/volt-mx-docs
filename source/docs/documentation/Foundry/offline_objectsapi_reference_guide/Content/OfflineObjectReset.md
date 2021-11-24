@@ -64,13 +64,13 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <OfflineObjects>.reset(final HashMap<String, object>options, final HCLCallback callback)
+{% highlight voltMx %}void <OfflineObjects>.reset(final HashMap<String, object>options, final VMXCallback callback)
 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 150px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 223px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 270px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Type</b></td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: normal;">HashMap&lt;String, object&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">Reset options such as device database, encryption passphrase and so on.</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: normal;">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">callback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application implements onSuccess and onFailure methods of HCLCallback interface.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 150px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 223px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 270px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Type</b></td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: normal;">HashMap&lt;String, object&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">Reset options such as device database, encryption passphrase and so on.</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: normal;">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">callback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application implements onSuccess and onFailure methods of VMXCallback interface.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 #### Reset Options
 
@@ -96,7 +96,7 @@ IVoltMXApplicationSync appSync = sdk.getOfflineObjects();
 //Decrypt and re-encrypt the device database
 HashMap < String, object > options = new HashMap < String, object > ();
 options.put("deviceDbEncryptionKey", "myencryptionpa$$phrase1");
-appSync.reset(options, new HCLCallback() {
+appSync.reset(options, new VMXCallback() {
     @Override
     public void onSuccess(Object object) {
         Log.d("Application Reset", "Application reset successful");
@@ -119,14 +119,14 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}void <OfflineObjects> reset: (NSDictionary *)options  
-onSuccess:(HCLSuccessCompletionHandler)onSuccess    
-onFailure:(HCLFailureCompletionHandler)onFailure
+onSuccess:(VMXSuccessCompletionHandler)onSuccess    
+onFailure:(VMXFailureCompletionHandler)onFailure
 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 134px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 222px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 279px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 103px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: normal;">NSDictionary&lt;NSString*,id&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">Reset options such as device database, encryption passphrase and so on.</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: normal;">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function invoked on successful reset.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked on reset failure with the cause of failure as an argument.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 134px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 222px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 279px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 103px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: normal;">NSDictionary&lt;NSString*,id&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">Reset options such as device database, encryption passphrase and so on.</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: normal;">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function invoked on successful reset.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked on reset failure with the cause of failure as an argument.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 #### Reset Options
 
@@ -146,7 +146,7 @@ void
 
 ### Example
 
-{% highlight voltMx %}HCLClient * sdk = [HCLClient sharedClient];
+{% highlight voltMx %}VMXClient * sdk = [VMXClient sharedClient];
 
 OfflineObjects * applicationSync = [sdk getOfflineObjects];
 
@@ -156,11 +156,11 @@ NSMutableDictionary < NSString * , id > * options = [NSMutableDictionary new];
     forKey: @"deviceDbEncryptionKey"
 ];
 
-HCLSuccessCompletionHandler onSuccess = ^ void(id object) {
+VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
     NSLog(@"Application reset successful");
 };
 
-HCLFailureCompletionHandler onFailure = ^ void(id object) {
+VMXFailureCompletionHandler onFailure = ^ void(id object) {
     NSLog(@"Application reset failed");
 };
 

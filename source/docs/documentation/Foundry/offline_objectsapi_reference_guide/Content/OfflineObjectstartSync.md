@@ -95,12 +95,12 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <OfflineObjects>.startSync(final HashMap<String, Object> options, final HCLCallback syncCallback, final HCLProgressCallback voltmxSyncProgressCallback) 
+{% highlight voltMx %}void <OfflineObjects>.startSync(final HashMap<String, Object> options, final VMXCallback syncCallback, final VMXProgressCallback voltmxSyncProgressCallback) 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 62px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 270px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Type</b></td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: normal;">HashMap&lt;String, Object&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">The user can provide options to customize sync behavior. For <b>example</b>, syncMode and objectServicesOptions. For supported options, refer <a href="ObjectService_startSync.html#Sync">Sync Options</a>.</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: normal;">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">syncCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The application implements onSuccess and onFailure methods of HCLCallback interface.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">voltmxSyncProgressCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLProgressCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application implements onProgress method of HCLProgressCallback interface if progress callback is supplied.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 62px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 270px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>Type</b></td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: normal;">HashMap&lt;String, Object&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">The user can provide options to customize sync behavior. For <b>example</b>, syncMode and objectServicesOptions. For supported options, refer <a href="ObjectService_startSync.html#Sync">Sync Options</a>.</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: normal;">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">syncCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The application implements onSuccess and onFailure methods of VMXCallback interface.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">voltmxSyncProgressCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXProgressCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application implements onProgress method of VMXProgressCallback interface if progress callback is supplied.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 #### Sync Options
 
@@ -147,7 +147,7 @@ void
     objectServicesOptions.put("Organization", organizationOptions);
     options.put("objectServicesOptions", objectServicesOptions);
 
-    appSync.startSync(options, new HCLCallback() {
+    appSync.startSync(options, new VMXCallback() {
             @Override
             public void onSuccess(Object object) {
                 HashMap < String, Object > result = (HashMap < String, Object > ) object;
@@ -160,7 +160,7 @@ void
 	    failed with error: " + e.getMessage());
             }
         },
-        new HCLProgressCallback() {
+        new VMXProgressCallback() {
             @Override
             public void onProgress(Object object) {
                 Log.d("ObjectServiceSync", "ObjectService sync progress event received");
@@ -177,9 +177,9 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}(void) <OfflineObjects>startSync:(NSDictionary<NSString *, id> *)options
-        onSuccess:(HCLSuccessCompletionHandler)onSuccess
-        onFailure:(HCLFailureCompletionHandler)onFailure
-       onProgress:(HCLProgressCompletionHandler)onProgress;
+        onSuccess:(VMXSuccessCompletionHandler)onSuccess
+        onFailure:(VMXFailureCompletionHandler)onFailure
+       onProgress:(VMXProgressCompletionHandler)onProgress;
 
 {% endhighlight %}
 
@@ -189,9 +189,9 @@ iOS (Objective C)
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | options | NSDictionary<NSString\*, id>\* | The user can provide options to customize sync behavior. For **example**, syncMode and objectServicesOptions. Refer [Sync Options](ObjectService_startSync.html#sync-options) for supported options. | Yes |
-| onSuccess | HCLSuccessCompletionHandler | The function is invoked on successful sync. | Yes |
-| onFailure | HCLFailureCompletionHandler | The function is invoked on sync failure. | Yes |
-| onProgress | HCLProgressCompletionHandler | The function is invoked on sync progress events. | Yes |
+| onSuccess | VMXSuccessCompletionHandler | The function is invoked on successful sync. | Yes |
+| onFailure | VMXFailureCompletionHandler | The function is invoked on sync failure. | Yes |
+| onProgress | VMXProgressCompletionHandler | The function is invoked on sync progress events. | Yes |
 
 #### Sync Options
 
@@ -222,16 +222,16 @@ void
 ### Example
 
 {% highlight voltMx %}NSError * error;
-HCLClient * sdk = [HCLClient sharedClient];
+VMXClient * sdk = [VMXClient sharedClient];
 OfflineObjects * applicationSync = [sdk getOfflineObjects];
 
-HCLSuccessCompletionHandler onSuccess = ^ void(id object) {
+VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
     //Operation to be performed on successful sync.
 };
-HCLFailureCompletionHandler onFailure = ^ void(id object) {
+VMXFailureCompletionHandler onFailure = ^ void(id object) {
     //Operation to be performed on sync failure.
 };
-HCLProgressCompletionHandler onProgress = ^ void(id object) {
+VMXProgressCompletionHandler onProgress = ^ void(id object) {
     //Operation to be performed on sync progress.
 };
 NSDictionary * uploadRequestQueryParams = @ {@

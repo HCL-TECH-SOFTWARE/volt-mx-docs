@@ -82,11 +82,11 @@ Android (Java)
 
 ### Signature
 
-void <OfflineObjects\>.startSync(final HashMap<String, Object> options, final HCLCallback syncCallback, final HCLProgressCallback voltmxSyncProgressCallback)
+void <OfflineObjects\>.startSync(final HashMap<String, Object> options, final VMXCallback syncCallback, final VMXProgressCallback voltmxSyncProgressCallback)
 
 ### Parameters
 
-<table class="table_1"><colgroup><col style="width: 122pt;"> <col style="width: 115pt;"> <col style="width: 177pt;"> <col style="width: 53pt;"></colgroup><tbody><tr><td class="td_1">Parameter</td><td class="td_2">Type</td><td class="td_2">Description</td><td class="td_2">Required</td></tr><tr><td class="td_3"><span class="span_3">o</span><span class="span_3">ptions</span></td><td class="td_4">HashMap&lt;String, Object&gt;</td><td class="td_4"><span class="span_3">The user can provide two keys.</span> <span class="span_3">One is “syncMode” and other is “objectServiceOptions”.</span> Refer sync options for supported options.</td><td class="td_4">Yes</td></tr><tr><td class="td_3">syncCallback</td><td class="td_4">HCLCallback</td><td class="td_4"><span class="span_3">Application implements&nbsp;</span><span class="span_7">onSuccess</span><span class="span_3">&nbsp;and&nbsp;</span><span class="span_7">onFailure</span> <span class="span_3">methods</span> <span class="span_3">of&nbsp;</span><span class="span_7">HCLCallback</span> <span class="span_3">interface.</span></td><td class="td_4">Yes</td></tr><tr><td class="td_3"><span class="span_3">voltmxSyncP</span><span class="span_3">rogressCallback</span></td><td class="td_4">HCLProgressCallback</td><td class="td_4"><span class="span_3">Application implements&nbsp;</span><span class="span_7">onProgress</span><span class="span_3">&nbsp;method of&nbsp;</span><span class="span_7">HCLProgressCallback</span> <span class="span_3">interface if progress callback is supplied.</span></td><td class="td_4">No</td></tr></tbody></table>
+<table class="table_1"><colgroup><col style="width: 122pt;"> <col style="width: 115pt;"> <col style="width: 177pt;"> <col style="width: 53pt;"></colgroup><tbody><tr><td class="td_1">Parameter</td><td class="td_2">Type</td><td class="td_2">Description</td><td class="td_2">Required</td></tr><tr><td class="td_3"><span class="span_3">o</span><span class="span_3">ptions</span></td><td class="td_4">HashMap&lt;String, Object&gt;</td><td class="td_4"><span class="span_3">The user can provide two keys.</span> <span class="span_3">One is “syncMode” and other is “objectServiceOptions”.</span> Refer sync options for supported options.</td><td class="td_4">Yes</td></tr><tr><td class="td_3">syncCallback</td><td class="td_4">VMXCallback</td><td class="td_4"><span class="span_3">Application implements&nbsp;</span><span class="span_7">onSuccess</span><span class="span_3">&nbsp;and&nbsp;</span><span class="span_7">onFailure</span> <span class="span_3">methods</span> <span class="span_3">of&nbsp;</span><span class="span_7">VMXCallback</span> <span class="span_3">interface.</span></td><td class="td_4">Yes</td></tr><tr><td class="td_3"><span class="span_3">voltmxSyncP</span><span class="span_3">rogressCallback</span></td><td class="td_4">VMXProgressCallback</td><td class="td_4"><span class="span_3">Application implements&nbsp;</span><span class="span_7">onProgress</span><span class="span_3">&nbsp;method of&nbsp;</span><span class="span_7">VMXProgressCallback</span> <span class="span_3">interface if progress callback is supplied.</span></td><td class="td_4">No</td></tr></tbody></table>
 
 #### options
 
@@ -136,7 +136,7 @@ objectServicesOptions.put(“Organization”, organizationOptions);
 
 appSync.startSync(organizationOptions,
 
-    new HCLCallback() {
+    new VMXCallback() {
 
         @Override
 
@@ -166,7 +166,7 @@ OfflineObjectsException e=(OfflineObjectsException)error;
 
     },
 
-    new HCLProgressCallback() {
+    new VMXProgressCallback() {
 
    @Override
 
@@ -193,15 +193,15 @@ iOS (Objective C)
 
 (void) <OfflineObjects\>startSync:(NSDictionary<NSString \*, id> \*)options
 
-        onSuccess:(HCLSuccessCompletionHandler)onSuccess
+        onSuccess:(VMXSuccessCompletionHandler)onSuccess
 
-        onFailure:(HCLFailureCompletionHandler)onFailure
+        onFailure:(VMXFailureCompletionHandler)onFailure
 
- onProgress:(HCLProgressCompletionHandler)onProgress;
+ onProgress:(VMXProgressCompletionHandler)onProgress;
 
 ### Parameters
 
-<table class="table_1"><colgroup><col style="width: 88pt;"> <col style="width: 167pt;"> <col style="width: 130pt;"> <col style="width: 83pt;"></colgroup><tbody><tr><td class="td_1">Parameter</td><td class="td_2">Type</td><td class="td_2">Description</td><td class="td_2">Required</td></tr><tr><td class="td_3">options</td><td class="td_4">NSDictionary&lt;NSString *, id&gt; *</td><td class="td_4">The user can provide two keys. One is “syncMode” and other is “objectServiceOptions”. &nbsp;</td><td class="td_4">Yes</td></tr><tr><td class="td_3">onSuccess</td><td class="td_4">HCLSuccessCompletionHandler</td><td class="td_4">The method called after a successful sync.</td><td class="td_4">Yes</td></tr><tr><td class="td_3">onFailure</td><td class="td_4">HCLFailureCompletionHandler</td><td class="td_4">The method called on sync failure.</td><td class="td_4">Yes</td></tr><tr><td class="td_3">onProgress</td><td class="td_4">HCLProgress CompletionHandler</td><td class="td_4">The method called on sync progress events.</td><td class="td_4">No</td></tr></tbody></table>
+<table class="table_1"><colgroup><col style="width: 88pt;"> <col style="width: 167pt;"> <col style="width: 130pt;"> <col style="width: 83pt;"></colgroup><tbody><tr><td class="td_1">Parameter</td><td class="td_2">Type</td><td class="td_2">Description</td><td class="td_2">Required</td></tr><tr><td class="td_3">options</td><td class="td_4">NSDictionary&lt;NSString *, id&gt; *</td><td class="td_4">The user can provide two keys. One is “syncMode” and other is “objectServiceOptions”. &nbsp;</td><td class="td_4">Yes</td></tr><tr><td class="td_3">onSuccess</td><td class="td_4">VMXSuccessCompletionHandler</td><td class="td_4">The method called after a successful sync.</td><td class="td_4">Yes</td></tr><tr><td class="td_3">onFailure</td><td class="td_4">VMXFailureCompletionHandler</td><td class="td_4">The method called on sync failure.</td><td class="td_4">Yes</td></tr><tr><td class="td_3">onProgress</td><td class="td_4">VMXProgress CompletionHandler</td><td class="td_4">The method called on sync progress events.</td><td class="td_4">No</td></tr></tbody></table>
 
 #### syncOptions
 
@@ -223,22 +223,22 @@ void
 
 NSError \*error;
 
-HCLClient \*sdk= \[HCLClient sharedClient\];  
+VMXClient \*sdk= \[VMXClient sharedClient\];  
 OfflineObjects \*applicationSync = \[sdk getOfflineObjects\];
 
-HCLSuccessCompletionHandler onSuccess = ^void(id object){
+VMXSuccessCompletionHandler onSuccess = ^void(id object){
 
      //Operation to be performed on successful sync.
 
 };
 
-HCLFailureCompletionHandler onFailure = ^void(id object){
+VMXFailureCompletionHandler onFailure = ^void(id object){
 
 //Operation to be performed on sync failure.
 
 };
 
-HCLProgressCompletionHandler onProgress = ^void(id object){
+VMXProgressCompletionHandler onProgress = ^void(id object){
 
         //Operation to be performed on sync progress.
 

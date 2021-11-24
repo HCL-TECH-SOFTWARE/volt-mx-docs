@@ -59,7 +59,7 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <OfflineObjects>.executeSelectQuery(String query, final HCLCallback callback)
+{% highlight voltMx %}void <OfflineObjects>.executeSelectQuery(String query, final VMXCallback callback)
 {% endhighlight %}
 
 ### Parameters
@@ -68,7 +68,7 @@ Android (Java)
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | query | String | Select query to be executed on device DB. | Yes |
-| callback | HCLCallback | The application must implement **onSuccess** and **onFailure** methods of HCLCallback interface. | Yes |
+| callback | VMXCallback | The application must implement **onSuccess** and **onFailure** methods of VMXCallback interface. | Yes |
 
 ### Return Type
 
@@ -79,7 +79,7 @@ void
 {% highlight voltMx %}VoltMXClient sdk = new VoltMXClient();
 IVoltMXApplicationSync appSync = sdk.getOfflineObjects();
 String query = "Select * from Employee where EmployeeID=5";
-appSync.executeSelectQuery(query, new HCLCallback() {
+appSync.executeSelectQuery(query, new VMXCallback() {
     @Override
     public void onSuccess(Object object) {
         //response contains records returned from device db for query executed.
@@ -98,8 +98,8 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}(void) <OfflineObjects>.executeSelectQuery:(NSString *)query
-			onSuccess:(HCLSuccessCompletionHandler)onSuccess
-			onFailure:(HCLFailureCompletionHandler)onFailure
+			onSuccess:(VMXSuccessCompletionHandler)onSuccess
+			onFailure:(VMXFailureCompletionHandler)onFailure
 {% endhighlight %}
 
 ### Parameters
@@ -108,8 +108,8 @@ iOS (Objective C)
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
 | query | NSString\* | Select the query to be executed on device DB. | Yes |
-| onSuccess | HCLSuccessCompletionHandler | The function is invoked on successful query execution. | Yes |
-| onFailure | HCLFailureCompletionHandler | The function is invoked on failure. | Yes |
+| onSuccess | VMXSuccessCompletionHandler | The function is invoked on successful query execution. | Yes |
+| onFailure | VMXFailureCompletionHandler | The function is invoked on failure. | Yes |
 
 ### Return Type
 
@@ -117,14 +117,14 @@ void
 
 ### Example
 
-{% highlight voltMx %}HCLClient * sdk = [HCLClient sharedClient];
+{% highlight voltMx %}VMXClient * sdk = [VMXClient sharedClient];
 OfflineObjects * applicationSync = [sdk getOfflineObjects];
 NSString * query = @"Select * from Employee where EmployeeID=5"
-HCLSuccessCompletionHandler onSuccess = ^ void(id object) {
+VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
     NSLog(@"executeSelectQuery successful");
 };
 
-HCLFailureCompletionHandler onFailure = ^ void(id object) {
+VMXFailureCompletionHandler onFailure = ^ void(id object) {
     NSLog(@"executeSelectQuery failed");
 };
 [applicationSync executeSelectQuery: query
