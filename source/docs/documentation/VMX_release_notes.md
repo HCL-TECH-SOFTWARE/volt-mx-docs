@@ -43,14 +43,15 @@ Note: For detailed information about fixes and known issues in 	Volt MX, see the
 
 - Support for the voltmx.application.setAppHeaders and voltmx.application.setAppFooters APIs has been deprecated from all the platforms on Iris.
 
-#### Earlier Iris changes
+#### Earlier Iris releases
 
 | **Date** | **Description of Modifications/Release** |
 | --- | --- |
 | 10/29/2021 | Document updated for [V9 SP2 FP 5](Iris/iris_rel_notes/Content/V9SP2FP5.html) |
 | 10/13/2021 | Document updated for [V9 SP2 FP 4](Iris/iris_rel_notes/Content/V9SP2FP4.html) |
-| 08/18/2021 | Document updated for [V9.2](Iris/iris_rel_notes/Content/V92.html).
+| 08/18/2021 | Document updated for [V9.2](Iris/iris_rel_notes/Content/V92.html). |
 | 12/21/2020 | Document updated for the V9 Service Pack 2 release with [New Features](Iris/iris_rel_notes/Content/V9SP2.html#new-features-and-enhancements-in-v9-service-pack-2) and [Known Issues](Iris/iris_rel_notes/Content/V9SP2_Known_Issues.html#top). |
+
 <!--
 | 10/28/2020 | 1.2 | Document updated for the release with [V9 SP1 FP 10](Iris/iris_rel_notes/Content/V9SP1.html#v9sp1-fixpack-10-features) release. |
 | 08/24/2020 | 1.1 | Document updated for the V9 Service Pack 1 release with [New Features](Iris/iris_rel_notes/Content/V9SP1.html#new-features-and-enhancements-in-v9-service-pack-1) and [Known Issues](Iris/iris_rel_notes/Content/V9-SP1_Known_Issues.html#top). |
@@ -85,13 +86,14 @@ Integration Services
 Single Container Solution
 - Support for https has been added to the Single Container Solution for HCL Foundry.
 
-#### Earlier Foundry changes
+#### Earlier Foundry releases
 
 | **Date** | **Description of Releases and Updates** |
 | --- | --- |
-| 10/29/2021 | Document published for [VoltMX Foundry V9 SP2 HF2](Foundry/voltmx_foundry_release_notes/Content/V9SP2HF2.html). |
-| 02/03/2021 | Document published for [VoltMX Foundry Fix Pack V9.2.1](Foundry/voltmx_foundry_release_notes/Content/V9.2.1_New_Features.html). |
-| 08/18/2021 | Document published for [VoltMX Foundry V9.2](Foundry/voltmx_foundry_release_notes/Content/V92.html). |
+| 10/29/2021 | Document published for [Volt Foundry V9 SP2 HF2](Foundry/voltmx_foundry_release_notes/Content/V9SP2HF2.html). |
+| 02/03/2021 | Document published for [Volt Foundry Fix Pack V9.2.1](Foundry/voltmx_foundry_release_notes/Content/V9.2.1_New_Features.html). |
+| 08/18/2021 | Document published for [Volt Foundry V9.2](Foundry/voltmx_foundry_release_notes/Content/V92.html). |
+
 <!--| 12/18/2020 | 2.6 | Document published for [VoltMX Foundry Identity Service Hotfix V9.1.0.4](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.1.0.4.html). |
 | 10/17/2020 | 2.5 | Document published for [VoltMX Foundry Identity Service Hotfix V9.1.0.3](Foundry/voltmx_foundry_release_notes/Content/IdentityHotFix9.1.0.3.html). |
 | 11/10/2020 | 2.4 | Document published for [VoltMX Foundry Integration Service Hotfix V9.0.1.1](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.0.1.1.html). |

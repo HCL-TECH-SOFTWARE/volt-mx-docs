@@ -4,6 +4,16 @@ category: "voltmx_foundry_release_notes"
 ---
                      
 
+<head>
+    <script type="text/javascript">
+        window.location.replace('https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/VMX_release_notes.html#volt-foundry')
+    </script>
+</head>
+
+<body>
+</body>
+
+<!--
 Volt MX Foundry Release Notes
 =============================
 
@@ -39,3 +49,4 @@ Revision History
 *   [Installer Guide Windows]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Introduction.html): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, API Developer Portal, and Engagement Services on Windows using an installer program.
 *   [Installer Guide Linux]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_linux_install_guide/Content/Introduction.html): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, API Developer Portal, and Engagement Services on Linux using an installer program.
 *   [Manual Install Guide]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Introduction.html): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, API Developer Portal, and Engagement Services manually for secured environments and Tomcat multi-node installation.
+-->

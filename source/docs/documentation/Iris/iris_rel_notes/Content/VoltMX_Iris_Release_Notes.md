@@ -4,6 +4,16 @@ category: "iris_rel_notes"
 ---
                    
 
+<head>
+    <script type="text/javascript">
+        window.location.replace('https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/VMX_release_notes.html#volt-iris')
+    </script>
+</head>
+
+<body>
+</body>
+
+<!--
 Volt MX Iris Release Notes
 ==========================
 
@@ -31,3 +41,4 @@ Iris Installation Guides ([Mac]({{ site.baseurl }}/docs/documentation/Iris/iris_
 [API Developer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html)
 
 [Widget Programmer's Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Overview.html)
+-->
